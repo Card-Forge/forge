@@ -14,7 +14,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Archangel of Tithes|ORI
 1 Argothian Enchantress|EMA
 1 Argothian Wurm|USG
-1 Arid Mesa|EXP
+1 Arid Mesa|MM3
 1 Ashcloud Phoenix|KTK
 1 Ashnod's Altar|EMA
 1 Aspect of Hydra|BNG
@@ -29,7 +29,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Badlands|VMA
 1 Baleful Strix|EMA
 1 Barren Moor|VMA
-1 Basilisk Collar|WWK
+1 Basilisk Collar|MM3
 1 Bayou|VMA
 1 Beast Within|NPH
 1 Beastmaster Ascension|ZEN
@@ -48,7 +48,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Bloodsoaked Champion|KTK
 1 Bloodstained Mire|EXP
 1 Bloodthrone Vampire|MM2
-1 Bone Splinters|BFZ
+1 Bone Splinters|MM3
 1 Bonesplitter|MMA
 1 Boon Satyr|THS
 1 Boros Garrison|MM2
@@ -64,7 +64,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Cabal Coffers|TOR
 1 Cabal Interrogator|SCG
 1 Caldera Hellion|ALA
-1 Call of the Herd|TSB
+1 Call of the Herd|MM3
 1 Caller of the Claw|LGN
 1 Carrion Feeder|EMA
 1 Cathodion|MM2
@@ -115,7 +115,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Divert|ODY
 1 Docent of Perfection|EMN
 1 Doubling Season|MMA
-1 Dragon Fodder|ORI
+1 Dragon Fodder|MM3
 1 Dragonmaster Outcast|BFZ
 1 Dreamstone Hedron|ROE
 1 Dryad Militant|RTR
@@ -129,7 +129,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Emrakul, the Promised End|EMN
 1 Enlightened Tutor|EMA
 1 Entomb|EMA
-1 Entomber Exarch|NPH
+1 Entomber Exarch|MM3
 1 Epic Confrontation|DTK
 1 Epochrasite|MMA
 1 Equilibrium|7ED
@@ -137,7 +137,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Eternal Witness|MMA
 1 Ethereal Armor|RTR
 1 Evangelize|TSP
-1 Evolving Wilds|BFZ
+1 Evolving Wilds|AKH
 1 Executioner's Capsule|MMA
 1 Experiment One|GTC
 1 Faceless Butcher|TSB
@@ -158,12 +158,12 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Flash of Insight|JUD
 1 Flesh Carver
 1 Fleshbag Marauder|ORI
-1 Flickerwisp|MMA
+1 Flickerwisp|MM3
 1 Flooded Strand|EXP
 1 Force Spike|7ED
 1 Force of Will|EMA
 1 Frost Walker|FRF
-1 Gaea's Anthem|PLC
+1 Gaea's Anthem|MM3
 1 Garruk Relentless|ISD
 1 Garruk Wildspeaker|M11
 1 Gauntlet of Might|2ED
@@ -177,7 +177,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Gilded Lotus|M13
 1 Gisela, the Broken Blade|EMN
 1 Glen Elendra Archmage|MMA
-1 Goblin Assault|ALA
+1 Goblin Assault|MM3
 1 Goblin Bombardment|TPR
 1 Goblin Dark-Dwellers|OGW
 1 Goblin Sharpshooter|ONS
@@ -195,7 +195,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Grim Flayer|EMN
 1 Grim Haruspex|KTK
 1 Grim Lavamancer|M12
-1 Griselbrand|AVR
+1 Griselbrand|MM3
 1 Gryff's Boon|SOI
 1 Halcyon Glaze|RAV
 1 Hall of Triumph|JOU
@@ -249,14 +249,14 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Lightning Bolt|MM2
 1 Lightning Crafter|MOR
 1 Lignify|LRW
-1 Liliana of the Veil|ISD
+1 Liliana of the Veil|MM3
 1 Liliana, Heretical Healer|ORI
 1 Liliana, the Last Hope|EMN
 1 Looter il-Kor|TSP
 1 Loyal Retainers|PTK
 1 Lumbering Falls|BFZ
 1 Luminarch Ascension|ZEN
-1 Magma Jet|THS
+1 Magma Jet|MM3
 1 Magus of the Tabernacle|PLC
 1 Mana Confluence|EXP
 1 Mana Tithe|PLC
@@ -264,7 +264,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Mangara of Corondor|TSP
 1 March of Souls|PLS
 1 Mark of Eviction|RAV
-1 Marsh Flats|EXP
+1 Marsh Flats|MM3
 1 Martyr of Frost|CSP
 1 Martyr of Sands|CSP
 1 Mass Polymorph|M11
@@ -282,7 +282,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Miraculous Recovery|VIS
 1 Misdirection|CNS
 1 Mishra's Factory|EMA
-1 Misty Rainforest|EXP
+1 Misty Rainforest|MM3
 1 Mogg Fanatic|EMA
 1 Mogg War Marshal|EMA
 1 Molten Birth|M14
@@ -331,7 +331,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Patron Wizard|ODY
 1 Peace of Mind|EMN
 1 Phantasmal Bear|M12
-1 Phantasmal Image|M12
+1 Phantasmal Image|MM3
 1 Phyrexian Revoker|M15
 1 Phyrexian Totem|TSP
 1 Pia and Kiran Nalaar|ORI
@@ -356,7 +356,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Quicksilver Amulet|M12
 1 Raging Ravine|WWK
 1 Rakdos Keyrune|RTR
-1 Rakdos Signet|DIS
+1 Rakdos Signet|MM3
 1 Rakdos's Return|RTR
 1 Rancor|EMA
 1 Raven's Crime|MMA
@@ -369,7 +369,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Relentless Dead|SOI
 1 Remand|MM2
 1 Replenish|UDS
-1 Restoration Angel|AVR
+1 Restoration Angel|MM3
 1 Resurrection|TSB
 1 Reveillark|MMA
 1 Rhys the Redeemed|SHM
@@ -385,8 +385,8 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Saproling Burst|VMA
 1 Sarkhan, the Dragonspeaker|KTK
 1 Savannah|VMA
-1 Scalding Tarn|EXP
-1 Scavenging Ooze|M14
+1 Scalding Tarn|MM3
+1 Scavenging Ooze|MM3
 1 Scepter of Dominance|CFX
 1 Scourge of Nel Toth
 1 Scrap Mastery
@@ -396,7 +396,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Serene Steward|BFZ
 1 Serra Ascendant|M11
 1 Setessan Tactics|JOU
-1 Sever the Bloodline|ISD
+1 Sever the Bloodline|MM3
 1 Sewer Nemesis
 1 Shadowmage Infiltrator|MM2
 1 Shambling Vent|BFZ
@@ -415,15 +415,15 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Smokestack|VMA
 1 Snakeform|EVE
 1 Snap|ULG
-1 Snapcaster Mage|ISD
+1 Snapcaster Mage|MM3
 1 Sneak Attack|EMA
 1 Solemn Simulacrum|M12
 1 Solitary Confinement|JUD
 1 Song of the Dryads
-1 Soul Warden|M10
+1 Soul Warden|MM3
 1 Soulfire Grand Master|FRF
 1 Sparksmith|ONS
-1 Spell Pierce|ZEN
+1 Spell Pierce|MM3
 1 Spellstutter Sprite|MMA
 1 Sphere of Safety|RTR
 1 Spikeshot Elder|MM2
@@ -456,7 +456,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Taiga|VMA
 1 Talisman of Indulgence|MRD
 1 Tangle Wire|NMS
-1 Tarmogoyf|MM2
+1 Tarmogoyf|MM3
 1 Tasigur, the Golden Fang|FRF
 1 Tectonic Edge|EXP
 1 Temple Garden|EXP
@@ -472,7 +472,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Thwart|MMQ
 1 Tidebinder Mage|M14
 1 Tombstone Stairwell|MIR
-1 Tormenting Voice|SOI
+1 Tormenting Voice|AKH
 1 Trading Post|M14
 1 Tranquil Thicket|VMA
 1 Trash for Treasure|MRD
@@ -488,12 +488,12 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Ugin, the Spirit Dragon|FRF
 1 Ulamog, the Ceaseless Hunger|BFZ
 1 Ulamog, the Infinite Gyre|MM2
-1 Ulvenwald Tracker|AVR
-1 Unburial Rites|ISD
+1 Ulvenwald Tracker|MM3
+1 Unburial Rites|MM3
 1 Undercity Informer|GTC
 1 Underground Sea|VMA
 1 Unexpectedly Absent|EMA
-1 Unflinching Courage|DGM
+1 Unflinching Courage|MM3
 1 Urborg, Tomb of Yawgmoth|M15
 1 Vampiric Tutor|EMA
 1 Vapor Snag|MM2
@@ -501,13 +501,13 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Vedalken Mastermind|10E
 1 Vendilion Clique|MM2
 1 Vengevine|ROE
-1 Venser, Shaper Savant|FUT
-1 Verdant Catacombs|EXP
+1 Venser, Shaper Savant|MM3
+1 Verdant Catacombs|MM3
 1 Vessel of Nascency|SOI
 1 Viridian Zealot|DST
 1 Visara the Dreadful|EMA
 1 Viscera Seer|M11
-1 Vithian Stinger|ALA
+1 Vithian Stinger|MM3
 1 Voidmage Prodigy|TSB
 1 Volcanic Island|VMA
 1 Volrath's Stronghold|TPR
@@ -530,7 +530,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Wind Zendikon|WWK
 1 Windborn Muse|10E
 1 Windswept Heath|EXP
-1 Wingcrafter|AVR
+1 Wingcrafter|MM3
 1 Wolfbitten Captive|DKA
 1 Wolfir Silverheart|AVR
 1 Wooded Foothills|EXP

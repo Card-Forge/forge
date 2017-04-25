@@ -14,23 +14,23 @@ Name=MTGO Cube March 2014
 1 Akroma's Vengeance|ONS
 1 All Is Dust|MM2
 1 Ancestral Vision|TSP
-1 Ancient Grudge|ISD
+1 Ancient Grudge|MM3
 1 Ancient Tomb|EXP
 1 Angel of Serenity|RTR
 1 Animate Dead|EMA
 1 Arbor Elf|M13
 1 Arc Trail|SOM
-1 Arcane Sanctum|ALA
+1 Arcane Sanctum|MM3
 1 Archangel of Thune|M14
-1 Arid Mesa|EXP
+1 Arid Mesa|MM3
 1 Armageddon|VMA
 1 Ash Zealot|RTR
 1 Attrition|UDS
-1 Augur of Bolas|M13
+1 Augur of Bolas|MM3
 1 Aurelia's Fury|GTC
-1 Avacyn's Pilgrim|ISD
+1 Avacyn's Pilgrim|MM3
 1 Avalanche Riders|TSB
-1 Aven Mindcensor|FUT
+1 Aven Mindcensor|AKH
 1 Avenger of Zendikar|WWK
 1 Awakening Zone|ROE
 1 Azorius Chancery|MM2
@@ -53,7 +53,7 @@ Name=MTGO Cube March 2014
 1 Birthing Pod|NPH
 1 Bitterblossom|MM2
 1 Black Sun's Zenith|MBS
-1 Blade Splicer|NPH
+1 Blade Splicer|MM3
 1 Blastoderm|VMA
 1 Blightning|ALA
 1 Blistering Firecat|ONS
@@ -68,7 +68,7 @@ Name=MTGO Cube March 2014
 1 Bogardan Hellkite|M10
 1 Bone Shredder|ULG
 1 Bonesplitter|MMA
-1 Bonfire of the Damned|AVR
+1 Bonfire of the Damned|MM3
 1 Boon Satyr|THS
 1 Borderland Ranger|AVR
 1 Boreal Druid|CSP
@@ -80,13 +80,13 @@ Name=MTGO Cube March 2014
 1 Brimaz, King of Oreskos|BNG
 1 Brimstone Volley|CNS
 1 Brooding Saurian|CSP
-1 Broodmate Dragon|ALA
+1 Broodmate Dragon|MM3
 1 Brushland|10E
 1 Buried Alive|ODY
 1 Burning of Xinye|VMA
 1 Burst Lightning|MM2
 1 Calciderm|EMA
-1 Call of the Herd|TSB
+1 Call of the Herd|MM3
 1 Capsize|TPR
 1 Carnophage|TPR
 1 Cascade Bluffs|EXP
@@ -109,7 +109,7 @@ Name=MTGO Cube March 2014
 1 Clifftop Retreat|ISD
 1 Cloudgoat Ranger|MMA
 1 Coalition Relic|FUT
-1 Compulsive Research|CNS
+1 Compulsive Research|MM3
 1 Condemn|M11
 1 Condescend|5DN
 1 Consecrated Sphinx|MBS
@@ -122,13 +122,13 @@ Name=MTGO Cube March 2014
 1 Court Hussar|DIS
 1 Creeping Tar Pit|WWK
 1 Crucible of Worlds|10E
-1 Crumbling Necropolis|ALA
+1 Crumbling Necropolis|MM3
 1 Cryptic Command|MM2
 1 Cultivate|M11
 1 Cunning Sparkmage|WWK
 1 Cursecatcher|SHM
 1 Cursed Scroll|TPR
-1 Damnation|PLC
+1 Damnation|MM3
 1 Dark Confidant|MM2
 1 Dark Ritual|TPR
 1 Daxos of Meletis|THS
@@ -155,7 +155,7 @@ Name=MTGO Cube March 2014
 1 Dismember|MM2
 1 Dismiss|TPR
 1 Dissipate|M15
-1 Domri Rade|GTC
+1 Domri Rade|MM3
 1 Doom Blade|M14
 1 Dragonskull Summit|M13
 1 Dreadbore|RTR
@@ -183,11 +183,11 @@ Name=MTGO Cube March 2014
 1 Engineered Explosives|MMA
 1 Enlightened Tutor|EMA
 1 Entomb|EMA
-1 Entreat the Angels|AVR
+1 Entreat the Angels|MM3
 1 Epochrasite|MMA
 1 Erebos, God of the Dead|THS
 1 Esper Charm|ALA
-1 Essence Scatter|M14
+1 Essence Scatter|AKH
 1 Etched Oracle|MM2
 1 Eternal Witness|MMA
 1 Eureka|VMA
@@ -196,12 +196,12 @@ Name=MTGO Cube March 2014
 1 Exhume|USG
 1 Experiment One|GTC
 1 Exploration|CNS
-1 Explore|WWK
+1 Explore|MM3
 1 Fact or Fiction|EMA
 1 Faerie Conclave|10E
 1 Faithless Looting|EMA
 1 Faith's Fetters|EMA
-1 Falkenrath Aristocrat|DKA
+1 Falkenrath Aristocrat|MM3
 1 Farseek|M13
 1 Fathom Seer|TSP
 1 Fauna Shaman|M11
@@ -219,7 +219,7 @@ Name=MTGO Cube March 2014
 1 Flametongue Kavu|VMA
 1 Flashfreeze|MM2
 1 Fleecemane Lion|THS
-1 Flickerwisp|MMA
+1 Flickerwisp|MM3
 1 Flinthoof Boar|EMA
 1 Flood Plain|VMA
 1 Flooded Grove|EXP
@@ -248,13 +248,13 @@ Name=MTGO Cube March 2014
 1 Ghitu Encampment|10E
 1 Gideon Jura|M12
 1 Gideon, Champion of Justice|GTC
-1 Gifts Ungiven|MMA
+1 Gifts Ungiven|MM3
 1 Gilded Lotus|M13
 1 Glacial Fortress|M13
 1 Glen Elendra Archmage|MMA
 1 Go for the Throat|MBS
 1 Goblin Cadets|USG
-1 Goblin Guide|ZEN
+1 Goblin Guide|MM3
 1 Goblin Ruinblaster|ZEN
 1 Goblin Welder|ULG
 1 Godless Shrine|EXP
@@ -270,7 +270,7 @@ Name=MTGO Cube March 2014
 1 Green Sun's Zenith|EMA
 1 Grim Lavamancer|M12
 1 Grim Monolith|ULG
-1 Griselbrand|AVR
+1 Griselbrand|MM3
 1 Gruul Turf|MM2
 1 Guul Draz Assassin|ROE
 1 Halimar Depths|WWK
@@ -278,11 +278,11 @@ Name=MTGO Cube March 2014
 1 Hallowed Fountain|EXP
 1 Hand of Cruelty|SOK
 1 Hand of Honor|SOK
-1 Harmonize|EMA
+1 Harmonize|MM3
 1 Headhunter|ONS
 1 Heartbeat of Spring|CHK
 1 Heliod, God of the Sun|THS
-1 Hellrider|DKA
+1 Hellrider|MM3
 1 Hell's Thunder|ALA
 1 Hellspark Elemental|CFX
 1 Herald of Torment|BNG
@@ -301,14 +301,14 @@ Name=MTGO Cube March 2014
 1 Impulse|VIS
 1 Indrik Stomphowler|DIS
 1 Inferno Titan|M12
-1 Ink-Eyes, Servant of Oni
-1 Inquisition of Kozilek|ROE
+1 Ink-Eyes, Servant of Oni|BOK
+1 Inquisition of Kozilek|MM3
 1 Into the Roil|ZEN
 1 Iona, Shield of Emeria|MM2
 1 Isamaru, Hound of Konda|CHK
 1 Isolated Chapel|ISD
 1 Izzet Boilerworks|MM2
-1 Izzet Charm|RTR
+1 Izzet Charm|MM3
 1 Jace Beleren|M11
 1 Jace, Architect of Thought|RTR
 1 Jace, the Mind Sculptor|VMA
@@ -316,7 +316,7 @@ Name=MTGO Cube March 2014
 1 Joraga Treespeaker|ROE
 1 Jotun Grunt|CSP
 1 Journey to Nowhere|ZEN
-1 Jungle Shrine|ALA
+1 Jungle Shrine|MM3
 1 Jushi Apprentice|CHK
 1 Kami of Ancient Law|MM2
 1 Karakas|EMA
@@ -346,11 +346,11 @@ Name=MTGO Cube March 2014
 1 Lightning Bolt|MM2
 1 Lightning Helix|MMA
 1 Lightning Mauler|AVR
-1 Liliana of the Veil|ISD
+1 Liliana of the Veil|MM3
 1 Liliana Vess|M15
 1 Liliana's Reaver|M14
-1 Lingering Souls|DKA
-1 Linvala, Keeper of Silence|ROE
+1 Lingering Souls|MM3
+1 Linvala, Keeper of Silence|MM3
 1 Lion's Eye Diamond|MIR
 1 Living Death|TPR
 1 Llanowar Elves|EMA
@@ -361,7 +361,7 @@ Name=MTGO Cube March 2014
 1 Lotus Bloom|MMA
 1 Lotus Cobra|ZEN
 1 Maelstrom Pulse|MMA
-1 Magma Jet|THS
+1 Magma Jet|MM3
 1 Magus of the Moon|FUT
 1 Makeshift Mannequin|LRW
 1 Mana Leak|MM2
@@ -369,7 +369,7 @@ Name=MTGO Cube March 2014
 1 Man-o'-War|VIS
 1 Manriki-Gusari|SOK
 1 Mark of Mutiny|M13
-1 Marsh Flats|EXP
+1 Marsh Flats|MM3
 1 Martial Coup|CFX
 1 Master of the Wild Hunt|M10
 1 Master of Waves|THS
@@ -387,13 +387,13 @@ Name=MTGO Cube March 2014
 1 Miscalculation|ULG
 1 Misdirection|CNS
 1 Mishra's Factory|EMA
-1 Misty Rainforest|EXP
-1 Mizzium Mortars|RTR
+1 Misty Rainforest|MM3
+1 Mizzium Mortars|MM3
 1 Mogg War Marshal|EMA
 1 Mold Shambler|ZEN
-1 Molten Rain|MRD
+1 Molten Rain|MM3
 1 Molten-Tail Masticore|SOM
-1 Momentary Blink|TSP
+1 Momentary Blink|MM3
 1 Moment's Peace|ODY
 1 Mother of Runes|EMA
 1 Mountain Valley|VMA
@@ -445,13 +445,13 @@ Name=MTGO Cube March 2014
 1 Palinchron|VMA
 1 Palladium Myr|SOM
 1 Parallax Wave|VMA
-1 Path to Exile|MMA
+1 Path to Exile|MM3
 1 Pattern of Rebirth|UDS
 1 Pentad Prism|5DN
 1 Pernicious Deed|CNS
 1 Persecute|9ED
 1 Phantasmal Bear|M12
-1 Phantasmal Image|M12
+1 Phantasmal Image|MM3
 1 Phyrexian Arena|9ED
 1 Phyrexian Metamorph|NPH
 1 Phyrexian Obliterator|NPH
@@ -471,17 +471,17 @@ Name=MTGO Cube March 2014
 1 Preordain|M11
 1 Price of Progress|EMA
 1 Priest of Urabrask|NPH
-1 Primal Command|LRW
+1 Primal Command|MM3
 1 Primeval Titan|MM2
 1 Pristine Angel|CNS
 1 Pristine Talisman|NPH
 1 Progenitus|MMA
 1 Prophetic Bolt|VMA
 1 Purphoros, God of the Forge|THS
-1 Putrefy|DGM
+1 Putrefy|MM3
 1 Putrid Imp|VMA
 1 Putrid Leech|ARB
-1 Pyroclasm|M11
+1 Pyroclasm|MM3
 1 Qasali Pridemage|ARB
 1 Raging Ravine|WWK
 1 Rakdos Cackler|RTR
@@ -489,7 +489,7 @@ Name=MTGO Cube March 2014
 1 Ral Zarek|DGM
 1 Rampant Growth|MM2
 1 Rancor|EMA
-1 Ranger of Eos|ALA
+1 Ranger of Eos|MM3
 1 Ratchet Bomb|M14
 1 Ravages of War|PTK
 1 Ravenous Baboons|EXO
@@ -503,7 +503,7 @@ Name=MTGO Cube March 2014
 1 Remand|MM2
 1 Repeal|MM2
 1 Restock|M15
-1 Restoration Angel|AVR
+1 Restoration Angel|MM3
 1 Reveillark|MMA
 1 Rift Bolt|MMA
 1 Riftwing Cloudskate|MMA
@@ -519,24 +519,24 @@ Name=MTGO Cube March 2014
 1 Sakashima's Student
 1 Sakura-Tribe Elder|CNS
 1 Sarcomancy|TPR
-1 Savage Lands|ALA
+1 Savage Lands|MM3
 1 Savannah Lions|9ED
 1 Savannah|VMA
-1 Scalding Tarn|EXP
-1 Scavenging Ooze|M14
+1 Scalding Tarn|MM3
+1 Scavenging Ooze|MM3
 1 Scroll Rack|TMP
 1 Scrubland|VMA
-1 Sea Gate Oracle|ROE
+1 Sea Gate Oracle|MM3
 1 Seal of Cleansing|EMA
 1 Search for Tomorrow|MMA
 1 Searing Blaze|WWK
 1 Searing Blood|BNG
-1 Seaside Citadel|ALA
+1 Seaside Citadel|MM3
 1 Seething Song|9ED
 1 Selesnya Sanctuary|MM2
 1 Sensei's Divining Top|EMA
 1 Serendib Efreet|EMA
-1 Serum Visions|5DN
+1 Serum Visions|MM3
 1 Shadowmage Infiltrator|MM2
 1 Shardless Agent|EMA
 1 Shivan Reef|ORI
@@ -550,7 +550,7 @@ Name=MTGO Cube March 2014
 1 Silver Knight|SCG
 1 Silverblade Paladin|AVR
 1 Simic Growth Chamber|MM2
-1 Simic Sky Swallower|DIS
+1 Simic Sky Swallower|MM3
 1 Sinkhole|EMA
 1 Skeletal Scrying|CNS
 1 Skinrender|SOM
@@ -561,7 +561,7 @@ Name=MTGO Cube March 2014
 1 Smash to Smithereens|ORI
 1 Smokestack|VMA
 1 Smother|WWK
-1 Snapcaster Mage|ISD
+1 Snapcaster Mage|MM3
 1 Sneak Attack|EMA
 1 Snuff Out|MMQ
 1 Soldier of the Pantheon|THS
@@ -571,10 +571,10 @@ Name=MTGO Cube March 2014
 1 Sower of Temptation|LRW
 1 Spear of Heliod|THS
 1 Spectral Procession|MM2
-1 Spell Pierce|ZEN
+1 Spell Pierce|MM3
 1 Spellskite|MM2
 1 Sphere of the Suns|MM2
-1 Sphinx's Revelation|RTR
+1 Sphinx's Revelation|MM3
 1 Spikeshot Elder|MM2
 1 Spinning Darkness|WTH
 1 Spreading Seas|ZEN
@@ -613,7 +613,7 @@ Name=MTGO Cube March 2014
 1 Talrand, Sky Summoner|M13
 1 Tamiyo, the Moon Sage|AVR
 1 Tangle Wire|NMS
-1 Tarmogoyf|MM2
+1 Tarmogoyf|MM3
 1 Taurean Mauler|MOR
 1 Tectonic Edge|EXP
 1 Teetering Peaks|ZEN
@@ -622,17 +622,17 @@ Name=MTGO Cube March 2014
 1 Tendrils of Agony|VMA
 1 Tendrils of Corruption|M10
 1 Terastodon|CNS
-1 Terminate|ARB
-1 Terminus|AVR
+1 Terminate|MM3
+1 Terminus|MM3
 1 Thalia, Guardian of Thraben|DKA
 1 Thassa, God of the Sea|THS
 1 Thawing Glaciers|VMA
 1 Thelonite Hermit|TSP
 1 Thieving Magpie|10E
 1 Thirst for Knowledge|MMA
-1 Thornscape Battlemage|TSB
+1 Thornscape Battlemage|MM3
 1 Thoughtseize|THS
-1 Thragtusk|M13
+1 Thragtusk|MM3
 1 Thran Dynamo|UDS
 1 Thrun, the Last Troll|MBS
 1 Thunderblust|MM2
@@ -658,9 +658,9 @@ Name=MTGO Cube March 2014
 1 Twilight Mire|EXP
 1 Ulamog, the Infinite Gyre|MM2
 1 Ultimate Price|DTK
-1 Ulvenwald Tracker|AVR
+1 Ulvenwald Tracker|MM3
 1 Umezawa's Jitte|BOK
-1 Unburial Rites|ISD
+1 Unburial Rites|MM3
 1 Underground River|10E
 1 Underground Sea|VMA
 1 Undermine|INV
@@ -669,18 +669,18 @@ Name=MTGO Cube March 2014
 1 Urborg, Tomb of Yawgmoth|M15
 1 Vampire Hexmage|CNS
 1 Vampire Lacerator|MM2
-1 Vampire Nighthawk|M13
+1 Vampire Nighthawk|MM3
 1 Vampiric Tutor|EMA
 1 Vedalken Shackles|MMA
 1 Vendilion Clique|MM2
 1 Vengevine|ROE
-1 Venser, Shaper Savant|FUT
-1 Verdant Catacombs|EXP
+1 Venser, Shaper Savant|MM3
+1 Verdant Catacombs|MM3
 1 Vesuvan Shapeshifter|TSP
 1 Vindicate|EMA
 1 Vines of Vastwood|MM2
 1 Visara the Dreadful|EMA
-1 Voice of Resurgence|DGM
+1 Voice of Resurgence|MM3
 1 Voidmage Prodigy|TSB
 1 Volcanic Fallout|CNS
 1 Volcanic Island|VMA
@@ -709,7 +709,7 @@ Name=MTGO Cube March 2014
 1 Wooded Foothills|EXP
 1 Woodfall Primus|MMA
 1 Woodland Cemetery|ISD
-1 Woolly Thoctar|ALA
+1 Woolly Thoctar|MM3
 1 Worn Powerstone|EMA
 1 Wrath of God|EMA
 1 Wrench Mind|MRD
@@ -719,5 +719,5 @@ Name=MTGO Cube March 2014
 1 Yavimaya Elder|VMA
 1 Yawgmoth's Will|USG
 1 Yosei, the Morning Star|MMA
-1 Zealous Conscripts|AVR
+1 Zealous Conscripts|MM3
 1 Zo-Zu the Punisher|CHK

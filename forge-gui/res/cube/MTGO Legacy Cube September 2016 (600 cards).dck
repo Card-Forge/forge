@@ -3,7 +3,7 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 [main]
 1 Abbot of Keral Keep|ORI
 1 Abhorrent Overlord|THS
-1 Abrupt Decay|RTR
+1 Abrupt Decay|MM3
 1 Abyssal Persecutor|WWK
 1 Accorder Paladin|MBS
 1 Acidic Slime|M13
@@ -21,15 +21,15 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Arbor Elf|M13
 1 Arc Trail|SOM
 1 Archangel Avacyn|SOI
-1 Arid Mesa|EXP
+1 Arid Mesa|MM3
 1 Armageddon|VMA
 1 Ashenmoor Gouger|MM2
 1 Ashiok, Nightmare Weaver|THS
 1 Assemble the Legion|GTC
 1 Asylum Visitor|SOI
 1 Attrition|UDS
-1 Augur of Bolas|M13
-1 Avacyn's Pilgrim|ISD
+1 Augur of Bolas|MM3
+1 Avacyn's Pilgrim|MM3
 1 Avalanche Riders|TSB
 1 Avenger of Zendikar|WWK
 1 Badlands|VMA
@@ -46,7 +46,7 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Birds of Paradise|M12
 1 Birthing Pod|NPH
 1 Bitterblossom|MM2
-1 Blade Splicer|NPH
+1 Blade Splicer|MM3
 1 Blood Artist|EMA
 1 Blood Crypt|EXP
 1 Bloodbraid Elf|EMA
@@ -56,9 +56,9 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Bogardan Hellkite|M10
 1 Bone Shredder|ULG
 1 Bonesplitter|MMA
-1 Bonfire of the Damned|AVR
+1 Bonfire of the Damned|MM3
 1 Boros Charm|GTC
-1 Boros Reckoner|GTC
+1 Boros Reckoner|MM3
 1 Brainstorm|EMA
 1 Breeding Pool|EXP
 1 Brimaz, King of Oreskos|BNG
@@ -88,7 +88,7 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Collective Brutality|EMN
 1 Collective Defiance|EMN
 1 Collective Effort|EMN
-1 Compulsive Research|CNS
+1 Compulsive Research|MM3
 1 Condemn|M11
 1 Consecrated Sphinx|MBS
 1 Control Magic|EMA
@@ -97,15 +97,15 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Counterspell|EMA
 1 Courser of Kruphix|BNG
 1 Crater's Claws|KTK
-1 Craterhoof Behemoth|AVR
+1 Craterhoof Behemoth|MM3
 1 Creeping Tar Pit|WWK
 1 Crux of Fate|FRF
 1 Cryptic Command|MM2
 1 Cultivate|M11
 1 Cunning Sparkmage|WWK
 1 Cursed Scroll|TPR
-1 Cyclonic Rift|RTR
-1 Damnation|PLC
+1 Cyclonic Rift|MM3
+1 Damnation|MM3
 1 Dark Confidant|MM2
 1 Dark Petition|ORI
 1 Dark Ritual|TPR
@@ -118,7 +118,7 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Delver of Secrets|ISD
 1 Den Protector|DTK
 1 Deranged Hermit|VMA
-1 Desecration Demon|RTR
+1 Desecration Demon|MM3
 1 Devil's Play|ISD
 1 Devoted Druid|SHM
 1 Dictate of Heliod|JOU
@@ -129,9 +129,9 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Dissipate|M15
 1 Dissolve|THS
 1 Distended Mindbender|EMN
-1 Domri Rade|GTC
+1 Domri Rade|MM3
 1 Doom Blade|M14
-1 Dragon Fodder|ORI
+1 Dragon Fodder|MM3
 1 Dragonlord Atarka|DTK
 1 Dragonlord Dromoka|DTK
 1 Dragonlord Ojutai|DTK
@@ -162,18 +162,18 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Emeria Angel|ZEN
 1 Emrakul, the Promised End|EMN
 1 Entomb|EMA
-1 Entreat the Angels|AVR
+1 Entreat the Angels|MM3
 1 Erebos, God of the Dead|THS
 1 Eternal Witness|MMA
 1 Ever After|SOI
 1 Evolutionary Leap|ORI
 1 Exclude|INV
 1 Exhume|USG
-1 Explore|WWK
+1 Explore|MM3
 1 Exquisite Firecraft|ORI
 1 Fact or Fiction|EMA
 1 Faith's Fetters|EMA
-1 Falkenrath Aristocrat|DKA
+1 Falkenrath Aristocrat|MM3
 1 Falkenrath Gorger|SOI
 1 Far // Away|DGM
 1 Farseek|M13
@@ -187,7 +187,7 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Flame Slash|ROE
 1 Flametongue Kavu|VMA
 1 Flamewake Phoenix|FRF
-1 Flickerwisp|MMA
+1 Flickerwisp|MM3
 1 Flooded Strand|EXP
 1 Forbid|TPR
 1 Force of Will|EMA
@@ -210,7 +210,7 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Geralf's Messenger|DKA
 1 Gideon, Ally of Zendikar|BFZ
 1 Gideon Jura|M12
-1 Gifts Ungiven|MMA
+1 Gifts Ungiven|MM3
 1 Gilded Lotus|M13
 1 Gilt-Leaf Winnower|ORI
 1 Gisela, the Broken Blade|EMN
@@ -222,7 +222,7 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Goblin Bombardment|TPR
 1 Goblin Bushwhacker|ZEN
 1 Goblin Dark-Dwellers|OGW
-1 Goblin Guide|ZEN
+1 Goblin Guide|MM3
 1 Goblin Rabblemaster|M15
 1 Godless Shrine|EXP
 1 Gore-House Chainwalker|RTR
@@ -234,15 +234,15 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Green Sun's Zenith|EMA
 1 Greenwarden of Murasa|BFZ
 1 Grim Lavamancer|M12
-1 Griselbrand|AVR
+1 Griselbrand|MM3
 1 Hallowed Fountain|EXP
 1 Hallowed Spiritkeeper
 1 Hangarback Walker|ORI
 1 Hanweir Battlements|EMN
 1 Hanweir Garrison|EMN
 1 Harbinger of the Tides|ORI
-1 Harmonize|EMA
-1 Hellrider|DKA
+1 Harmonize|MM3
+1 Hellrider|MM3
 1 Hero of Bladehold|MBS
 1 Hero's Downfall|THS
 1 Hidden Dragonslayer|DTK
@@ -261,13 +261,13 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Incinerate|M12
 1 Indrik Stomphowler|DIS
 1 Inferno Titan|M12
-1 Inquisition of Kozilek|ROE
+1 Inquisition of Kozilek|MM3
 1 Into the Roil|ZEN
 1 Ire Shaman|DTK
 1 Isamaru, Hound of Konda|CHK
 1 Isochron Scepter|EMA
 1 Isolated Chapel|ISD
-1 Izzet Charm|RTR
+1 Izzet Charm|MM3
 1 Jace Beleren|M11
 1 Jace, Architect of Thought|RTR
 1 Jace, the Mind Sculptor|VMA
@@ -289,7 +289,7 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Kitchen Finks|MMA
 1 Kodama's Reach|MMA
 1 Kokusho, the Evening Star|MMA
-1 Kor Skyfisher|ZEN
+1 Kor Skyfisher|MM3
 1 Koth of the Hammer|SOM
 1 Krenko's Command|M13
 1 Kytheon, Hero of Akros|ORI
@@ -303,12 +303,12 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Lightning Helix|MMA
 1 Lightning Mauler|AVR
 1 Lightning Strike|M15
-1 Liliana of the Veil|ISD
+1 Liliana of the Veil|MM3
 1 Liliana Vess|M15
 1 Liliana, Heretical Healer|ORI
 1 Liliana, the Last Hope|EMN
-1 Lingering Souls|DKA
-1 Linvala, Keeper of Silence|ROE
+1 Lingering Souls|MM3
+1 Linvala, Keeper of Silence|MM3
 1 Linvala, the Preserver|OGW
 1 Living Death|TPR
 1 Llanowar Elves|EMA
@@ -317,7 +317,7 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Loxodon Warhammer|10E
 1 Lumbering Falls|BFZ
 1 Maelstrom Pulse|MMA
-1 Magma Jet|THS
+1 Magma Jet|MM3
 1 Makeshift Mannequin|LRW
 1 Malicious Affliction|EMA
 1 Man-o'-War|VIS
@@ -325,7 +325,7 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Mana Tithe|PLC
 1 Managorger Hydra|ORI
 1 Manic Vandal|M12
-1 Marsh Flats|EXP
+1 Marsh Flats|MM3
 1 Martial Coup|CFX
 1 Massacre Wurm|MBS
 1 Master of the Wild Hunt|M10
@@ -340,8 +340,8 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Mirror Entity|MM2
 1 Miscalculation|ULG
 1 Mishra's Factory|EMA
-1 Misty Rainforest|EXP
-1 Mizzium Mortars|RTR
+1 Misty Rainforest|MM3
+1 Mizzium Mortars|MM3
 1 Mogg War Marshal|EMA
 1 Monastery Mentor|FRF
 1 Monastery Swiftspear|KTK
@@ -373,7 +373,7 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Obstinate Baloth|M11
 1 Ohran Viper|CSP
 1 Old Man of the Sea|ARN
-1 Olivia Voldaren|ISD
+1 Olivia Voldaren|MM3
 1 Omnath, Locus of Rage|BFZ
 1 Oona's Prowler|LRW
 1 Ophiomancer
@@ -387,9 +387,9 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Pact of Negation|MMA
 1 Parallax Wave|VMA
 1 Part the Waterveil|BFZ
-1 Path to Exile|MMA
+1 Path to Exile|MM3
 1 Pestermite|MMA
-1 Phantasmal Image|M12
+1 Phantasmal Image|MM3
 1 Phyrexian Arena|9ED
 1 Phyrexian Metamorph|NPH
 1 Phyrexian Obliterator|NPH
@@ -405,11 +405,11 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Precinct Captain|RTR
 1 Precursor Golem|MM2
 1 Preordain|M11
-1 Primal Command|LRW
+1 Primal Command|MM3
 1 Primeval Titan|MM2
 1 Profane Command|MM2
 1 Purphoros, God of the Forge|THS
-1 Pyroclasm|M11
+1 Pyroclasm|MM3
 1 Qasali Pridemage|ARB
 1 Quarantine Field|BFZ
 1 Raging Ravine|WWK
@@ -418,7 +418,7 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Ral Zarek|DGM
 1 Rampaging Baloths|ZEN
 1 Rampant Growth|MM2
-1 Ranger of Eos|ALA
+1 Ranger of Eos|MM3
 1 Ratchet Bomb|M14
 1 Ravages of War|PTK
 1 Read the Bones|ORI
@@ -434,7 +434,7 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Remand|MM2
 1 Remove Soul|10E
 1 Repeal|MM2
-1 Restoration Angel|AVR
+1 Restoration Angel|MM3
 1 Reveillark|MMA
 1 Rift Bolt|MMA
 1 Riftwing Cloudskate|MMA
@@ -447,11 +447,11 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Sakura-Tribe Elder|CNS
 1 Sarkhan, the Dragonspeaker|KTK
 1 Savannah|VMA
-1 Scalding Tarn|EXP
-1 Scavenging Ooze|M14
+1 Scalding Tarn|MM3
+1 Scavenging Ooze|MM3
 1 Scroll Rack|TMP
 1 Scrubland|VMA
-1 Sea Gate Oracle|ROE
+1 Sea Gate Oracle|MM3
 1 Seal of Fire|DIS
 1 Search for Tomorrow|MMA
 1 Searing Spear|M13
@@ -461,7 +461,7 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Selfless Spirit|EMN
 1 Sensei's Divining Top|EMA
 1 Serendib Efreet|EMA
-1 Serum Visions|5DN
+1 Serum Visions|MM3
 1 Shadowmage Infiltrator|MM2
 1 Shaman of Forgotten Ways|DTK
 1 Shambling Vent|BFZ
@@ -475,7 +475,7 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Skinrender|SOM
 1 Slagstorm|MBS
 1 Slaughter Pact|MMA
-1 Snapcaster Mage|ISD
+1 Snapcaster Mage|MM3
 1 Soldier of the Pantheon|THS
 1 Solemn Simulacrum|M12
 1 Song of the Dryads
@@ -485,10 +485,10 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Sower of Temptation|LRW
 1 Spear of Heliod|THS
 1 Spectral Procession|MM2
-1 Spell Pierce|ZEN
+1 Spell Pierce|MM3
 1 Spell Queller|EMN
 1 Spellskite|MM2
-1 Sphinx's Revelation|RTR
+1 Sphinx's Revelation|MM3
 1 Splinter Twin|MM2
 1 Staggershock|ROE
 1 Steam Vents|EXP
@@ -503,7 +503,7 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Student of Warfare|ROE
 1 Sublime Archangel|M13
 1 Sulfur Falls|ISD
-1 Summoning Trap|ZEN
+1 Summoning Trap|MM3
 1 Sun Titan|M12
 1 Sundering Titan|DST
 1 Sunpetal Grove|M13
@@ -517,7 +517,7 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Talrand, Sky Summoner|M13
 1 Tamiyo, the Moon Sage|AVR
 1 Tangle Wire|NMS
-1 Tarmogoyf|MM2
+1 Tarmogoyf|MM3
 1 Tasigur, the Golden Fang|FRF
 1 Tectonic Edge|EXP
 1 Teferi, Mage of Zhalfir|TSP
@@ -533,14 +533,14 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Temple of Silence|THS
 1 Temple of Triumph|THS
 1 Terastodon|CNS
-1 Terminate|ARB
-1 Terminus|AVR
+1 Terminate|MM3
+1 Terminus|MM3
 1 Thalia, Guardian of Thraben|DKA
 1 Thalia, Heretic Cathar|EMN
 1 Thassa, God of the Sea|THS
 1 Thing in the Ice|SOI
 1 Thoughtseize|THS
-1 Thragtusk|M13
+1 Thragtusk|MM3
 1 Threads of Disloyalty|BOK
 1 Thrun, the Last Troll|MBS
 1 Thunderbreak Regent|DTK
@@ -557,17 +557,17 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Ugin, the Spirit Dragon|FRF
 1 Ulamog, the Ceaseless Hunger|BFZ
 1 Ultimate Price|DTK
-1 Unburial Rites|ISD
+1 Unburial Rites|MM3
 1 Underground Sea|VMA
 1 Underworld Connections|RTR
 1 Unexpectedly Absent|EMA
 1 Upheaval|VMA
 1 Utopia Sprawl|DIS
 1 Vampire Hexmage|CNS
-1 Vampire Nighthawk|M13
+1 Vampire Nighthawk|MM3
 1 Vendilion Clique|MM2
-1 Venser, Shaper Savant|FUT
-1 Verdant Catacombs|EXP
+1 Venser, Shaper Savant|MM3
+1 Verdant Catacombs|MM3
 1 Victimize|EMA
 1 Vindicate|EMA
 1 Volcanic Island|VMA
@@ -600,4 +600,4 @@ Name=MTGO Legacy Cube September 2016 (600 cards)
 1 Yavimaya Elder|VMA
 1 Yosei, the Morning Star|MMA
 1 Young Pyromancer|EMA
-1 Zealous Conscripts|AVR
+1 Zealous Conscripts|MM3

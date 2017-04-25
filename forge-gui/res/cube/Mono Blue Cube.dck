@@ -19,7 +19,7 @@ Name=Mono Blue Cube
 1 Arcanis the Omnipotent|EMA
 1 Archaeomancer|M14
 1 Archive Trap|ZEN
-1 Augur of Bolas|M13
+1 Augur of Bolas|MM3
 1 Basalt Monolith|3ED
 1 Bident of Thassa|THS
 1 Black Lotus|VMA
@@ -42,7 +42,7 @@ Name=Mono Blue Cube
 1 Candelabra of Tawnos|ATQ
 1 Capsize|TPR
 1 Careful Consideration|MMA
-1 Cavern of Souls|AVR
+1 Cavern of Souls|MM3
 1 Chalice of the Void|MMA
 1 Chancellor of the Spires|NPH
 1 Chronomaton|M13
@@ -55,7 +55,7 @@ Name=Mono Blue Cube
 1 Cold-Eyed Selkie|MMA
 1 Commandeer|CSP
 1 Complicate|ONS
-1 Compulsive Research|CNS
+1 Compulsive Research|MM3
 1 Condescend|5DN
 1 Contested War Zone|MBS
 1 Control Magic|EMA
@@ -63,10 +63,10 @@ Name=Mono Blue Cube
 1 Copper Gnomes|USG
 1 Coralhelm Commander|ROE
 1 Counterspell|EMA
-1 Crippling Chill|KTK
+1 Crippling Chill|MM3
 1 Cryptic Command|MM2
 1 Cursecatcher|SHM
-1 Cyclonic Rift|RTR
+1 Cyclonic Rift|MM3
 1 Darksteel Colossus|M10
 1 Daze|EMA
 1 Deep Analysis|EMA
@@ -213,7 +213,7 @@ Name=Mono Blue Cube
 1 Oblivion Stone|MRD
 1 Omniscience|M13
 1 Oona, Queen of the Fae|MMA
-1 Opportunity|M14
+1 Opportunity|MM3
 1 Overtaker|MMQ
 1 Pact of Negation|MMA
 1 Painter's Servant|SHM
@@ -225,7 +225,7 @@ Name=Mono Blue Cube
 1 Pestermite|MMA
 1 Phantasmal Bear|M12
 1 Phantasmal Dragon|M12
-1 Phantasmal Image|M12
+1 Phantasmal Image|MM3
 1 Phyrexian Ingester|EMA
 1 Phyrexian Metamorph|NPH
 1 Piracy Charm|PLC
@@ -254,7 +254,7 @@ Name=Mono Blue Cube
 1 Remand|MM2
 1 Remote Isle|USG
 1 Repeal|MM2
-1 Rewind|M13
+1 Rewind|MM3
 1 Riftwing Cloudskate|MMA
 1 Riptide Director|LGN
 1 Riptide Laboratory|ONS
@@ -265,13 +265,13 @@ Name=Mono Blue Cube
 1 Sands of Delirium|M13
 1 Sapphire Medallion|TMP
 1 Sea Drake|VMA
-1 Sea Gate Oracle|ROE
+1 Sea Gate Oracle|MM3
 1 Sea Scryer|MIR
 1 Seasinger|5ED
 1 Sensei's Divining Top|EMA
 1 Sensory Deprivation|M14
 1 Serendib Efreet|EMA
-1 Serum Visions|5DN
+1 Serum Visions|MM3
 1 Shape Anew|SOM
 1 Shapesharer|LRW
 1 Shelldock Isle|LRW
@@ -282,10 +282,10 @@ Name=Mono Blue Cube
 1 Skywatcher Adept|ROE
 1 Sleight of Hand|9ED
 1 Smokestack|VMA
-1 Snapcaster Mage|ISD
+1 Snapcaster Mage|MM3
 1 Sol Ring|VMA
 1 Sower of Temptation|LRW
-1 Spell Pierce|ZEN
+1 Spell Pierce|MM3
 1 Spell Snare|MMA
 1 Spellstutter Sprite|MMA
 1 Spiketail Drakeling|TSP
@@ -342,7 +342,7 @@ Name=Mono Blue Cube
 1 Vedalken Shackles|MMA
 1 Veiled Serpent|USG
 1 Vendilion Clique|MM2
-1 Venser, Shaper Savant|FUT
+1 Venser, Shaper Savant|MM3
 1 Vesuvan Shapeshifter|TSP
 1 Vexing Sphinx|CSP
 1 Vision Charm|VIS

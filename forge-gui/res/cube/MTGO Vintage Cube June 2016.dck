@@ -2,14 +2,14 @@
 Name=MTGO Vintage Cube June 2016
 [main]
 1 Abbot of Keral Keep|ORI
-1 Abrupt Decay|RTR
+1 Abrupt Decay|MM3
 1 Academy Rector|UDS
 1 Academy Ruins|MMA
 1 Acidic Slime|M13
 1 Ajani Vengeant|ALA
 1 Ancestral Recall|VMA
 1 Ancestral Vision|TSP
-1 Ancient Grudge|ISD
+1 Ancient Grudge|MM3
 1 Ancient Tomb|EXP
 1 Angel of Serenity|RTR
 1 Anguished Unmaking|SOI
@@ -17,14 +17,14 @@ Name=MTGO Vintage Cube June 2016
 1 Anticipate|BFZ
 1 Arbor Elf|M13
 1 Archangel of Thune|M14
-1 Arid Mesa|EXP
+1 Arid Mesa|MM3
 1 Armageddon|VMA
 1 Ashiok, Nightmare Weaver|THS
-1 Avacyn's Pilgrim|ISD
+1 Avacyn's Pilgrim|MM3
 1 Avalanche Riders|TSB
 1 Avenger of Zendikar|WWK
 1 Awakening Zone|ROE
-1 Azorius Signet|DIS
+1 Azorius Signet|MM3
 1 Badlands|VMA
 1 Balance|EMA
 1 Baleful Strix|EMA
@@ -40,15 +40,15 @@ Name=MTGO Vintage Cube June 2016
 1 Birthing Pod|NPH
 1 Bitterblossom|MM2
 1 Black Lotus|VMA
-1 Blade Splicer|NPH
+1 Blade Splicer|MM3
 1 Blightsteel Colossus|MBS
 1 Blood Crypt|EXP
 1 Bloodbraid Elf|EMA
 1 Bloodstained Mire|EXP
 1 Bone Shredder|ULG
-1 Bonfire of the Damned|AVR
+1 Bonfire of the Damned|MM3
 1 Boros Charm|GTC
-1 Boros Signet|RAV
+1 Boros Signet|MM3
 1 Braids, Cabal Minion|EMA
 1 Brain Freeze|VMA
 1 Brain Maggot|JOU
@@ -72,7 +72,7 @@ Name=MTGO Vintage Cube June 2016
 1 Chrome Mox|EMA
 1 Coalition Relic|FUT
 1 Coercive Portal|VMA
-1 Compulsive Research|CNS
+1 Compulsive Research|MM3
 1 Conclave Naturalists|ORI
 1 Consecrated Sphinx|MBS
 1 Control Magic|EMA
@@ -81,12 +81,12 @@ Name=MTGO Vintage Cube June 2016
 1 Counterspell|EMA
 1 Courser of Kruphix|BNG
 1 Crater's Claws|KTK
-1 Craterhoof Behemoth|AVR
+1 Craterhoof Behemoth|MM3
 1 Creeping Tar Pit|WWK
 1 Crucible of Worlds|10E
 1 Cryptic Command|MM2
 1 Dack Fayden|EMA
-1 Damnation|PLC
+1 Damnation|MM3
 1 Daretti, Scrap Savant
 1 Dark Confidant|MM2
 1 Dark Petition|ORI
@@ -100,10 +100,10 @@ Name=MTGO Vintage Cube June 2016
 1 Demonic Tutor|VMA
 1 Den Protector|DTK
 1 Deranged Hermit|VMA
-1 Desecration Demon|RTR
+1 Desecration Demon|MM3
 1 Diabolic Edict|TPR
 1 Dig Through Time|KTK
-1 Dimir Signet|RAV
+1 Dimir Signet|MM3
 1 Disenchant|TPR
 1 Disfigure|ZEN
 1 Dismember|MM2
@@ -149,7 +149,7 @@ Name=MTGO Vintage Cube June 2016
 1 Firebolt|EMA
 1 Firedrinker Satyr|THS
 1 Flametongue Kavu|VMA
-1 Flickerwisp|MMA
+1 Flickerwisp|MM3
 1 Flooded Strand|EXP
 1 Force of Will|EMA
 1 Force Spike|7ED
@@ -166,33 +166,33 @@ Name=MTGO Vintage Cube June 2016
 1 Genesis Wave|SOM
 1 Gideon Jura|M12
 1 Gideon, Ally of Zendikar|BFZ
-1 Gifts Ungiven|MMA
+1 Gifts Ungiven|MM3
 1 Gilded Lotus|M13
 1 Gitaxian Probe|NPH
 1 Glen Elendra Archmage|MMA
 1 Go for the Throat|MBS
 1 Goblin Dark-Dwellers|OGW
-1 Goblin Guide|ZEN
+1 Goblin Guide|MM3
 1 Goblin Welder|ULG
 1 Godless Shrine|EXP
-1 Golgari Signet|RAV
+1 Golgari Signet|MM3
 1 Grave Titan|M12
 1 Green Sun's Zenith|EMA
 1 Grim Lavamancer|M12
 1 Grim Monolith|ULG
 1 Grim Tutor|S99
-1 Griselbrand|AVR
-1 Gruul Signet|GPT
+1 Griselbrand|MM3
+1 Gruul Signet|MM3
 1 Gurmag Angler|FRF
 1 Gush|VMA
 1 Guttersnipe|RTR
 1 Hallowed Fountain|EXP
 1 Hangarback Walker|ORI
-1 Harmonize|EMA
+1 Harmonize|MM3
 1 Heartbeat of Spring|CHK
 1 Hedron Archive|BFZ
 1 Heir of Falkenrath|SOI
-1 Hellrider|DKA
+1 Hellrider|MM3
 1 Hero of Bladehold|MBS
 1 Hero's Downfall|THS
 1 High Tide|VMA
@@ -207,12 +207,12 @@ Name=MTGO Vintage Cube June 2016
 1 Incinerate|M12
 1 Inferno Titan|M12
 1 Inkwell Leviathan|EMA
-1 Inquisition of Kozilek|ROE
+1 Inquisition of Kozilek|MM3
 1 Iona, Shield of Emeria|MM2
 1 Isamaru, Hound of Konda|CHK
 1 Isochron Scepter|EMA
-1 Izzet Charm|RTR
-1 Izzet Signet|GPT
+1 Izzet Charm|MM3
+1 Izzet Signet|MM3
 1 Jace Beleren|M11
 1 Jace, Architect of Thought|RTR
 1 Jace, the Mind Sculptor|VMA
@@ -243,9 +243,9 @@ Name=MTGO Vintage Cube June 2016
 1 Lightning Helix|MMA
 1 Lightning Mauler|AVR
 1 Lightning Strike|M15
-1 Liliana of the Veil|ISD
-1 Lingering Souls|DKA
-1 Linvala, Keeper of Silence|ROE
+1 Liliana of the Veil|MM3
+1 Lingering Souls|MM3
+1 Linvala, Keeper of Silence|MM3
 1 Linvala, the Preserver|OGW
 1 Lion's Eye Diamond|MIR
 1 Living Death|TPR
@@ -256,7 +256,7 @@ Name=MTGO Vintage Cube June 2016
 1 Lotus Cobra|ZEN
 1 Lumbering Falls|BFZ
 1 Maelstrom Pulse|MMA
-1 Magma Jet|THS
+1 Magma Jet|MM3
 1 Magus of the Moon|FUT
 1 Magus of the Wheel
 1 Makeshift Mannequin|LRW
@@ -269,7 +269,7 @@ Name=MTGO Vintage Cube June 2016
 1 Mana Vault|VMA
 1 Manic Vandal|M12
 1 Mardu Woe-Reaper|FRF
-1 Marsh Flats|EXP
+1 Marsh Flats|MM3
 1 Massacre Wurm|MBS
 1 Master of the Wild Hunt|M10
 1 Maze of Ith|EMA
@@ -285,8 +285,8 @@ Name=MTGO Vintage Cube June 2016
 1 Mirran Crusader|MM2
 1 Mishra's Factory|EMA
 1 Mishra's Workshop|ATQ
-1 Misty Rainforest|EXP
-1 Mizzium Mortars|RTR
+1 Misty Rainforest|MM3
+1 Mizzium Mortars|MM3
 1 Moat|LEG
 1 Monastery Mentor|FRF
 1 Monastery Swiftspear|KTK
@@ -321,23 +321,23 @@ Name=MTGO Vintage Cube June 2016
 1 Oath of Druids|TPR
 1 Oath of Nissa|OGW
 1 Oblivion Ring|MM2
-1 Olivia Voldaren|ISD
+1 Olivia Voldaren|MM3
 1 Oona's Prowler|LRW
 1 Ophiomancer
 1 Opposition|7ED
 1 Oracle of Mul Daya|ZEN
-1 Orzhov Signet|GPT
+1 Orzhov Signet|MM3
 1 Outpost Siege|FRF
 1 Overgrown Tomb|EXP
 1 Pack Rat|RTR
 1 Painful Truths|BFZ
 1 Palinchron|VMA
 1 Parallax Wave|VMA
-1 Path to Exile|MMA
+1 Path to Exile|MM3
 1 Pentad Prism|5DN
 1 Pernicious Deed|CNS
 1 Pestermite|MMA
-1 Phantasmal Image|M12
+1 Phantasmal Image|MM3
 1 Phyrexian Metamorph|NPH
 1 Phyrexian Revoker|M15
 1 Pithing Needle|RTR
@@ -347,7 +347,7 @@ Name=MTGO Vintage Cube June 2016
 1 Ponder|M12
 1 Porcelain Legionnaire|NPH
 1 Preordain|M11
-1 Primal Command|LRW
+1 Primal Command|MM3
 1 Primeval Titan|MM2
 1 Progenitus|MMA
 1 Puppeteer Clique|MM2
@@ -355,7 +355,7 @@ Name=MTGO Vintage Cube June 2016
 1 Qasali Pridemage|ARB
 1 Quicken|M14
 1 Raging Ravine|WWK
-1 Rakdos Signet|DIS
+1 Rakdos Signet|MM3
 1 Rakdos's Return|RTR
 1 Ral Zarek|DGM
 1 Ravages of War|PTK
@@ -367,7 +367,7 @@ Name=MTGO Vintage Cube June 2016
 1 Regrowth|VMA
 1 Remand|MM2
 1 Repeal|MM2
-1 Restoration Angel|AVR
+1 Restoration Angel|MM3
 1 Reveillark|MMA
 1 Rift Bolt|MMA
 1 Riftwing Cloudskate|MMA
@@ -377,8 +377,8 @@ Name=MTGO Vintage Cube June 2016
 1 Sacred Foundry|EXP
 1 Sakura-Tribe Elder|CNS
 1 Savannah|VMA
-1 Scalding Tarn|EXP
-1 Scavenging Ooze|M14
+1 Scalding Tarn|MM3
+1 Scavenging Ooze|MM3
 1 Scroll Rack|TMP
 1 Scrubland|VMA
 1 Search for Tomorrow|MMA
@@ -388,7 +388,7 @@ Name=MTGO Vintage Cube June 2016
 1 Secure the Wastes|DTK
 1 Seeker of the Way|KTK
 1 Seething Song|9ED
-1 Selesnya Signet|RAV
+1 Selesnya Signet|MM3
 1 Sensei's Divining Top|EMA
 1 Shadowmage Infiltrator|MM2
 1 Shallow Grave|MIR
@@ -402,12 +402,12 @@ Name=MTGO Vintage Cube June 2016
 1 Sidisi, Undead Vizier|DTK
 1 Siege-Gang Commander|EMA
 1 Silverblade Paladin|AVR
-1 Simic Signet|DIS
+1 Simic Signet|MM3
 1 Skinrender|SOM
 1 Skullclamp|VMA
 1 Smash to Smithereens|ORI
 1 Smokestack|VMA
-1 Snapcaster Mage|ISD
+1 Snapcaster Mage|MM3
 1 Sneak Attack|EMA
 1 Sol Ring|VMA
 1 Soldier of the Pantheon|THS
@@ -417,10 +417,10 @@ Name=MTGO Vintage Cube June 2016
 1 Sower of Temptation|LRW
 1 Spear of Heliod|THS
 1 Spectral Procession|MM2
-1 Spell Pierce|ZEN
+1 Spell Pierce|MM3
 1 Spellskite|MM2
 1 Sphinx of the Steel Wind|EMA
-1 Sphinx's Revelation|RTR
+1 Sphinx's Revelation|MM3
 1 Spirit of the Labyrinth|BNG
 1 Splinter Twin|MM2
 1 Staff of Domination
@@ -447,7 +447,7 @@ Name=MTGO Vintage Cube June 2016
 1 Taiga|VMA
 1 Tamiyo, the Moon Sage|AVR
 1 Tangle Wire|NMS
-1 Tarmogoyf|MM2
+1 Tarmogoyf|MM3
 1 Tasigur, the Golden Fang|FRF
 1 Temple Garden|EXP
 1 Temple of Abandon|THS
@@ -462,7 +462,7 @@ Name=MTGO Vintage Cube June 2016
 1 Temple of Triumph|THS
 1 Tendrils of Agony|VMA
 1 Terastodon|CNS
-1 Terminate|ARB
+1 Terminate|MM3
 1 Tezzeret the Seeker|MM2
 1 Tezzeret, Agent of Bolas|MBS
 1 Thada Adel, Acquisitor|WWK
@@ -471,7 +471,7 @@ Name=MTGO Vintage Cube June 2016
 1 Thing in the Ice|SOI
 1 Thirst for Knowledge|MMA
 1 Thoughtseize|THS
-1 Thragtusk|M13
+1 Thragtusk|MM3
 1 Thran Dynamo|UDS
 1 Through the Breach|CHK
 1 Thrun, the Last Troll|MBS
@@ -500,20 +500,20 @@ Name=MTGO Vintage Cube June 2016
 1 Ulamog, the Infinite Gyre|MM2
 1 Ultimate Price|DTK
 1 Umezawa's Jitte|BOK
-1 Unburial Rites|ISD
+1 Unburial Rites|MM3
 1 Underground Sea|VMA
 1 Unexpectedly Absent|EMA
 1 Upheaval|VMA
 1 Urborg, Tomb of Yawgmoth|M15
-1 Vampire Nighthawk|M13
+1 Vampire Nighthawk|MM3
 1 Vampiric Tutor|EMA
 1 Vedalken Shackles|MMA
 1 Vendilion Clique|MM2
-1 Venser, Shaper Savant|FUT
-1 Verdant Catacombs|EXP
+1 Venser, Shaper Savant|MM3
+1 Verdant Catacombs|MM3
 1 Villainous Wealth|KTK
 1 Vindicate|EMA
-1 Voice of Resurgence|DGM
+1 Voice of Resurgence|MM3
 1 Volcanic Island|VMA
 1 Vryn Wingmare|ORI
 1 Wall of Blossoms|TPR
@@ -540,5 +540,5 @@ Name=MTGO Vintage Cube June 2016
 1 Yawgmoth's Bargain|UDS
 1 Yawgmoth's Will|USG
 1 Young Pyromancer|EMA
-1 Zealous Conscripts|AVR
+1 Zealous Conscripts|MM3
 1 Zurgo Bellstriker|DTK

@@ -2,7 +2,7 @@
 Name=MTGO Legacy Cube (600 cards)
 [main]
 1 Accorder Paladin|MBS
-1 Abrupt Decay|RTR
+1 Abrupt Decay|MM3
 1 Acidic Slime|M13
 1 Act of Aggression|NPH
 1 Adarkar Wastes|10E
@@ -13,7 +13,7 @@ Name=MTGO Legacy Cube (600 cards)
 1 Ajani, Caller of the Pride|M14
 1 Ajani, Mentor of Heroes|JOU
 1 Ancestral Vision|TSP
-1 Ancient Grudge|ISD
+1 Ancient Grudge|MM3
 1 Ancient Tomb|EXP
 1 Angel of Serenity|RTR
 1 Angelic Destiny|M12
@@ -22,12 +22,12 @@ Name=MTGO Legacy Cube (600 cards)
 1 Arbor Elf|M13
 1 Arc Trail|SOM
 1 Archangel of Thune|M14
-1 Arid Mesa|EXP
+1 Arid Mesa|MM3
 1 Armageddon|VMA
 1 Ashcloud Phoenix|KTK
 1 Ashiok, Nightmare Weaver|THS
-1 Augur of Bolas|M13
-1 Avacyn's Pilgrim|ISD
+1 Augur of Bolas|MM3
+1 Avacyn's Pilgrim|MM3
 1 Avalanche Riders|TSB
 1 Avenger of Zendikar|WWK
 1 Awakening Zone|ROE
@@ -38,7 +38,7 @@ Name=MTGO Legacy Cube (600 cards)
 1 Banisher Priest|M14
 1 Banishing Light|JOU
 1 Basalt Monolith|3ED
-1 Basilisk Collar|WWK
+1 Basilisk Collar|MM3
 1 Batterskull|NPH
 1 Battlefield Forge|ORI
 1 Bayou|VMA
@@ -49,7 +49,7 @@ Name=MTGO Legacy Cube (600 cards)
 1 Birthing Pod|NPH
 1 Bitterblossom|MM2
 1 Black Sun's Zenith|MBS
-1 Blade Splicer|NPH
+1 Blade Splicer|MM3
 1 Blood Crypt|EXP
 1 Bloodbraid Elf|EMA
 1 Bloodghast|ZEN
@@ -58,12 +58,12 @@ Name=MTGO Legacy Cube (600 cards)
 1 Bloodstained Mire|EXP
 1 Bone Shredder|ULG
 1 Bonesplitter|MMA
-1 Bonfire of the Damned|AVR
+1 Bonfire of the Damned|MM3
 1 Boon Satyr|THS
 1 Borderland Marauder|EMA
 1 Boros Charm|GTC
 1 Boros Elite|GTC
-1 Boros Reckoner|GTC
+1 Boros Reckoner|MM3
 1 Brago, King Eternal|VMA
 1 Brain Maggot|JOU
 1 Brainstorm|EMA
@@ -71,9 +71,9 @@ Name=MTGO Legacy Cube (600 cards)
 1 Brimaz, King of Oreskos|BNG
 1 Brimstone Volley|CNS
 1 Brushland|10E
-1 Burning-Tree Emissary|GTC
+1 Burning-Tree Emissary|MM3
 1 Burst Lightning|MM2
-1 Call of the Herd|TSB
+1 Call of the Herd|MM3
 1 Carnophage|TPR
 1 Caves of Koilos|ORI
 1 Chain Lightning|EMA
@@ -92,7 +92,7 @@ Name=MTGO Legacy Cube (600 cards)
 1 Cloudgoat Ranger|MMA
 1 Coalition Relic|FUT
 1 Commune with the Gods|EMA
-1 Compulsive Research|CNS
+1 Compulsive Research|MM3
 1 Condemn|M11
 1 Condescend|5DN
 1 Consecrated Sphinx|MBS
@@ -104,15 +104,15 @@ Name=MTGO Legacy Cube (600 cards)
 1 Counterspell|EMA
 1 Courser of Kruphix|BNG
 1 Crater's Claws|KTK
-1 Craterhoof Behemoth|AVR
+1 Craterhoof Behemoth|MM3
 1 Crusade|6ED
 1 Cryptic Command|MM2
 1 Cultivate|M11
 1 Cunning Sparkmage|WWK
 1 Curse of Predation
 1 Cursed Scroll|TPR
-1 Cyclonic Rift|RTR
-1 Damnation|PLC
+1 Cyclonic Rift|MM3
+1 Damnation|MM3
 1 Dark Confidant|MM2
 1 Dark Ritual|TPR
 1 Darkblast|RAV
@@ -122,7 +122,7 @@ Name=MTGO Legacy Cube (600 cards)
 1 Deep Analysis|EMA
 1 Delver of Secrets|ISD
 1 Deranged Hermit|VMA
-1 Desecration Demon|RTR
+1 Desecration Demon|MM3
 1 Detention Sphere|RTR
 1 Devil's Play|ISD
 1 Diabolic Servitude|USG
@@ -135,10 +135,10 @@ Name=MTGO Legacy Cube (600 cards)
 1 Dismember|MM2
 1 Dismiss|TPR
 1 Dissolve|THS
-1 Domri Rade|GTC
+1 Domri Rade|MM3
 1 Doom Blade|M14
 1 Doomed Traveler|CNS
-1 Dragon Fodder|ORI
+1 Dragon Fodder|MM3
 1 Dragonskull Summit|M13
 1 Dread Return|TSP
 1 Dreadbore|RTR
@@ -160,18 +160,18 @@ Name=MTGO Legacy Cube (600 cards)
 1 Emeria Angel|ZEN
 1 Emrakul, the Aeons Torn|MM2
 1 Entomb|EMA
-1 Entreat the Angels|AVR
-1 Essence Scatter|M14
+1 Entreat the Angels|MM3
+1 Essence Scatter|AKH
 1 Eternal Dragon|VMA
 1 Eternal Witness|MMA
 1 Eureka|VMA
 1 Everflowing Chalice|MM2
 1 Exalted Angel|ONS
 1 Exhume|USG
-1 Explore|WWK
+1 Explore|MM3
 1 Fact or Fiction|EMA
 1 Faith's Fetters|EMA
-1 Falkenrath Aristocrat|DKA
+1 Falkenrath Aristocrat|MM3
 1 Far // Away|DGM
 1 Farseek|M13
 1 Fauna Shaman|M11
@@ -184,10 +184,10 @@ Name=MTGO Legacy Cube (600 cards)
 1 Flame Slash|ROE
 1 Flametongue Kavu|VMA
 1 Fleecemane Lion|THS
-1 Flickerwisp|MMA
+1 Flickerwisp|MM3
 1 Flooded Strand|EXP
 1 Forbid|TPR
-1 Forbidden Alchemy|ISD
+1 Forbidden Alchemy|MM3
 1 Force of Will|EMA
 1 Force Spike|7ED
 1 Frenzied Goblin|M15
@@ -208,9 +208,9 @@ Name=MTGO Legacy Cube (600 cards)
 1 Genesis Wave|SOM
 1 Geralf's Messenger|DKA
 1 Gerrard's Verdict|APC
-1 Ghor-Clan Rampager|GTC
+1 Ghor-Clan Rampager|MM3
 1 Gideon Jura|M12
-1 Gifts Ungiven|MMA
+1 Gifts Ungiven|MM3
 1 Gilded Lotus|M13
 1 Glacial Fortress|M13
 1 Glen Elendra Archmage|MMA
@@ -219,8 +219,8 @@ Name=MTGO Legacy Cube (600 cards)
 1 Go for the Throat|MBS
 1 Goblin Bombardment|TPR
 1 Goblin Bushwhacker|ZEN
-1 Goblin Electromancer|RTR
-1 Goblin Guide|ZEN
+1 Goblin Electromancer|MM3
+1 Goblin Guide|MM3
 1 Goblin Rabblemaster|M15
 1 Goblin Wardriver|MBS
 1 Godless Shrine|EXP
@@ -234,15 +234,15 @@ Name=MTGO Legacy Cube (600 cards)
 1 Green Sun's Zenith|EMA
 1 Grim Lavamancer|M12
 1 Grim Monolith|ULG
-1 Griselbrand|AVR
+1 Griselbrand|MM3
 1 Grisly Salvage|RTR
 1 Guttersnipe|RTR
 1 Hall of Triumph|JOU
 1 Hallowed Fountain|EXP
 1 Hallowed Spiritkeeper
 1 Hammer of Purphoros|THS
-1 Harmonize|EMA
-1 Hellrider|DKA
+1 Harmonize|MM3
+1 Hellrider|MM3
 1 Herald of Torment|BNG
 1 Hero of Bladehold|MBS
 1 Hero of Oxid Ridge|MBS
@@ -260,7 +260,7 @@ Name=MTGO Legacy Cube (600 cards)
 1 Incinerate|M12
 1 Indrik Stomphowler|DIS
 1 Inferno Titan|M12
-1 Inquisition of Kozilek|ROE
+1 Inquisition of Kozilek|MM3
 1 Into the Roil|ZEN
 1 Intuition|TPR
 1 Isamaru, Hound of Konda|CHK
@@ -286,7 +286,7 @@ Name=MTGO Legacy Cube (600 cards)
 1 Knight of Infamy|M13
 1 Kodama's Reach|MMA
 1 Kokusho, the Evening Star|MMA
-1 Kor Skyfisher|ZEN
+1 Kor Skyfisher|MM3
 1 Koth of the Hammer|SOM
 1 Kozilek, Butcher of Truth|MM2
 1 Krenko's Command|M13
@@ -299,10 +299,10 @@ Name=MTGO Legacy Cube (600 cards)
 1 Lightning Helix|MMA
 1 Lightning Mauler|AVR
 1 Lightning Strike|M15
-1 Liliana of the Veil|ISD
+1 Liliana of the Veil|MM3
 1 Liliana Vess|M15
-1 Lingering Souls|DKA
-1 Linvala, Keeper of Silence|ROE
+1 Lingering Souls|MM3
+1 Linvala, Keeper of Silence|MM3
 1 Living Death|TPR
 1 Llanowar Elves|EMA
 1 Llanowar Wastes|ORI
@@ -310,14 +310,14 @@ Name=MTGO Legacy Cube (600 cards)
 1 Lotleth Troll|RTR
 1 Lotus Cobra|ZEN
 1 Loxodon Warhammer|10E
-1 Madcap Skills|GTC
+1 Madcap Skills|MM3
 1 Maelstrom Pulse|MMA
-1 Magma Jet|THS
+1 Magma Jet|MM3
 1 Man-o'-War|VIS
 1 Mana Confluence|EXP
 1 Mana Leak|MM2
 1 Mana Tithe|PLC
-1 Marsh Flats|EXP
+1 Marsh Flats|MM3
 1 Martial Coup|CFX
 1 Massacre Wurm|MBS
 1 Master of the Feast|JOU
@@ -332,13 +332,13 @@ Name=MTGO Legacy Cube (600 cards)
 1 Mirran Crusader|MM2
 1 Miscalculation|ULG
 1 Mishra's Factory|EMA
-1 Misty Rainforest|EXP
-1 Mizzium Mortars|RTR
+1 Misty Rainforest|MM3
+1 Mizzium Mortars|MM3
 1 Mogg Fanatic|EMA
 1 Mogg War Marshal|EMA
-1 Molten Rain|MRD
+1 Molten Rain|MM3
 1 Molten-Tail Masticore|SOM
-1 Momentary Blink|TSP
+1 Momentary Blink|MM3
 1 Mother of Runes|EMA
 1 Mox Diamond|TPR
 1 Mulch|TPR
@@ -349,7 +349,7 @@ Name=MTGO Legacy Cube (600 cards)
 1 Mutavault|M14
 1 Myr Battlesphere|SOM
 1 Mystic Snake|MM2
-1 Mystical Teachings|TSP
+1 Mystical Teachings|MM3
 1 Nantuko Shade|M11
 1 Natural Order|EMA
 1 Naturalize|DTK
@@ -365,7 +365,7 @@ Name=MTGO Legacy Cube (600 cards)
 1 Oblivion Ring|MM2
 1 Obstinate Baloth|M11
 1 Old Man of the Sea|ARN
-1 Olivia Voldaren|ISD
+1 Olivia Voldaren|MM3
 1 Ophiomancer
 1 Opposition|7ED
 1 Oracle of Mul Daya|ZEN
@@ -375,9 +375,9 @@ Name=MTGO Legacy Cube (600 cards)
 1 Pact of Negation|MMA
 1 Pain Seer|BNG
 1 Parallax Wave|VMA
-1 Path to Exile|MMA
+1 Path to Exile|MM3
 1 Pestermite|MMA
-1 Phantasmal Image|M12
+1 Phantasmal Image|MM3
 1 Phantom Centaur|JUD
 1 Phyrexian Arena|9ED
 1 Phyrexian Metamorph|NPH
@@ -393,7 +393,7 @@ Name=MTGO Legacy Cube (600 cards)
 1 Precinct Captain|RTR
 1 Precursor Golem|MM2
 1 Preordain|M11
-1 Primal Command|LRW
+1 Primal Command|MM3
 1 Prime Speaker Zegana|GTC
 1 Primeval Titan|MM2
 1 Profane Command|MM2
@@ -408,7 +408,7 @@ Name=MTGO Legacy Cube (600 cards)
 1 Ral Zarek|DGM
 1 Rampant Growth|MM2
 1 Rancor|EMA
-1 Ranger of Eos|ALA
+1 Ranger of Eos|MM3
 1 Ravages of War|PTK
 1 Reanimate|TPR
 1 Reclamation Sage|M15
@@ -418,7 +418,7 @@ Name=MTGO Legacy Cube (600 cards)
 1 Remand|MM2
 1 Remove Soul|10E
 1 Repeal|MM2
-1 Restoration Angel|AVR
+1 Restoration Angel|MM3
 1 Reveillark|MMA
 1 Rift Bolt|MMA
 1 Riftwing Cloudskate|MMA
@@ -434,11 +434,11 @@ Name=MTGO Legacy Cube (600 cards)
 1 Satyr Wayfinder|M15
 1 Savannah|VMA
 1 Savannah Lions|9ED
-1 Scalding Tarn|EXP
-1 Scavenging Ooze|M14
-1 Scorched Rusalka|GPT
+1 Scalding Tarn|MM3
+1 Scavenging Ooze|MM3
+1 Scorched Rusalka|MM3
 1 Scrubland|VMA
-1 Sea Gate Oracle|ROE
+1 Sea Gate Oracle|MM3
 1 Seal of Cleansing|EMA
 1 Seal of Fire|DIS
 1 Search for Tomorrow|MMA
@@ -448,7 +448,7 @@ Name=MTGO Legacy Cube (600 cards)
 1 Seeker of the Way|KTK
 1 Sensei's Divining Top|EMA
 1 Serendib Efreet|EMA
-1 Serum Visions|5DN
+1 Serum Visions|MM3
 1 Setessan Tactics|JOU
 1 Shadowmage Infiltrator|MM2
 1 Shardless Agent|EMA
@@ -459,14 +459,14 @@ Name=MTGO Legacy Cube (600 cards)
 1 Shrine of Burning Rage|NPH
 1 Siege-Gang Commander|EMA
 1 Silverblade Paladin|AVR
-1 Sin Collector|DGM
+1 Sin Collector|MM3
 1 Sinkhole|EMA
 1 Skinrender|SOM
 1 Skullcrack|GTC
 1 Slagstorm|MBS
 1 Slaughter Pact|MMA
 1 Smash to Smithereens|ORI
-1 Snapcaster Mage|ISD
+1 Snapcaster Mage|MM3
 1 Sneak Attack|EMA
 1 Soldier of the Pantheon|THS
 1 Solemn Simulacrum|M12
@@ -480,7 +480,7 @@ Name=MTGO Legacy Cube (600 cards)
 1 Spectral Procession|MM2
 1 Spellskite|MM2
 1 Sphere of the Suns|MM2
-1 Sphinx's Revelation|RTR
+1 Sphinx's Revelation|MM3
 1 Spikeshot Elder|MM2
 1 Spiteful Returned|BNG
 1 Splinter Twin|MM2
@@ -497,7 +497,7 @@ Name=MTGO Legacy Cube (600 cards)
 1 Sulfur Falls|ISD
 1 Sulfuric Vortex|EMA
 1 Sulfurous Springs|10E
-1 Summoning Trap|ZEN
+1 Summoning Trap|MM3
 1 Sun Titan|M12
 1 Sundering Titan|DST
 1 Sunpetal Grove|M13
@@ -509,7 +509,7 @@ Name=MTGO Legacy Cube (600 cards)
 1 Talrand, Sky Summoner|M13
 1 Tamiyo, the Moon Sage|AVR
 1 Tangle Wire|NMS
-1 Tarmogoyf|MM2
+1 Tarmogoyf|MM3
 1 Tectonic Edge|EXP
 1 Teetering Peaks|ZEN
 1 Teferi, Mage of Zhalfir|TSP
@@ -527,13 +527,13 @@ Name=MTGO Legacy Cube (600 cards)
 1 Tempt with Vengeance
 1 Tendrils of Corruption|M10
 1 Terastodon|CNS
-1 Terminate|ARB
-1 Terminus|AVR
+1 Terminate|MM3
+1 Terminus|MM3
 1 Thalia, Guardian of Thraben|DKA
 1 Thassa, God of the Sea|THS
 1 Think Twice|ISD
 1 Thoughtseize|THS
-1 Thragtusk|M13
+1 Thragtusk|MM3
 1 Thran Dynamo|UDS
 1 Through the Breach|CHK
 1 Thrun, the Last Troll|MBS
@@ -552,7 +552,7 @@ Name=MTGO Legacy Cube (600 cards)
 1 Ulamog, the Infinite Gyre|MM2
 1 Ultimate Price|DTK
 1 Umezawa's Jitte|BOK
-1 Unburial Rites|ISD
+1 Unburial Rites|MM3
 1 Underground River|10E
 1 Underground Sea|VMA
 1 Underworld Connections|RTR
@@ -560,16 +560,16 @@ Name=MTGO Legacy Cube (600 cards)
 1 Upheaval|VMA
 1 Vampire Hexmage|CNS
 1 Vampire Lacerator|MM2
-1 Vampire Nighthawk|M13
+1 Vampire Nighthawk|MM3
 1 Vedalken Shackles|MMA
 1 Vendilion Clique|MM2
 1 Vengevine|ROE
-1 Venser, Shaper Savant|FUT
+1 Venser, Shaper Savant|MM3
 1 Venser, the Sojourner|SOM
-1 Verdant Catacombs|EXP
+1 Verdant Catacombs|MM3
 1 Vindicate|EMA
 1 Visara the Dreadful|EMA
-1 Voice of Resurgence|DGM
+1 Voice of Resurgence|MM3
 1 Volcanic Island|VMA
 1 Volrath's Stronghold|TPR
 1 Vraska the Unseen|RTR
@@ -600,4 +600,4 @@ Name=MTGO Legacy Cube (600 cards)
 1 Yavimaya Elder|VMA
 1 Yosei, the Morning Star|MMA
 1 Young Pyromancer|EMA
-1 Zealous Conscripts|AVR
+1 Zealous Conscripts|MM3

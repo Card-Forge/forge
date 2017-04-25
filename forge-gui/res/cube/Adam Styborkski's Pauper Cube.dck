@@ -6,22 +6,22 @@ Name=Adam Styborkski's Pauper Cube
 1 Aerie Ouphes|EVE
 1 Aether Adept|M12
 1 Aethersnipe|MM2
-1 Agony Warp|MM2
+1 Agony Warp|MM3
 1 Aim High|SOI
 1 Ambush Viper|ISD
 1 Angelic Purge|SOI
-1 Arachnus Web|M12
+1 Arachnus Web|MM3
 1 Arc Lightning|KTK
 1 Armillary Sphere|CFX
 1 Arrest|MM2
 1 Ash Barrens
 1 Ashes to Ashes|5ED
 1 Assault Zeppelid|DIS
-1 Attended Knight|M13
-1 Auger Spree|RTR
+1 Attended Knight|MM3
+1 Auger Spree|MM3
 1 Aven Riftwatcher|EMA
 1 Aven Surveyor|FRF
-1 Azorius Guildgate|DGM
+1 Azorius Guildgate|MM3
 1 Baleful Eidolon|THS
 1 Barbed Lightning|DST
 1 Barren Moor|VMA
@@ -38,8 +38,9 @@ Name=Adam Styborkski's Pauper Cube
 1 Bonded Construct|ORI
 1 Bonds of Faith|ISD
 1 Bonesplitter|MMA
+1 Borderland Explorer
 1 Borderland Marauder|EMA
-1 Boros Guildgate|DGM
+1 Boros Guildgate|MM3
 1 Branching Bolt|ALA
 1 Brazen Wolves|EMN
 1 Brute Force|MM2
@@ -51,7 +52,7 @@ Name=Adam Styborkski's Pauper Cube
 1 Capsize|TPR
 1 Cathodion|MM2
 1 Cavern Harpy|PLS
-1 Centaur Healer|RTR
+1 Centaur Healer|MM3
 1 Center Soul|DTK
 1 Cephalid Sage|EMA
 1 Chain Lightning|EMA
@@ -63,7 +64,7 @@ Name=Adam Styborkski's Pauper Cube
 1 Cloaked Siren|JOU
 1 Clutch of Currents|BFZ
 1 Colossal Might|ARB
-1 Compulsive Research|CNS
+1 Compulsive Research|MM3
 1 Consume Strength|APC
 1 Corpse Churn|OGW
 1 Corrupted Zendikon|WWK
@@ -84,20 +85,20 @@ Name=Adam Styborkski's Pauper Cube
 1 Death Denied|MM2
 1 Deep Analysis|EMA
 1 Deprive|ROE
-1 Deputy of Acquittals|DGM
+1 Deputy of Acquittals|MM3
 1 Desert|TSB
 1 Desperate Sentry|EMN
 1 Devour Flesh|GTC
 1 Diabolic Edict|TPR
-1 Dimir Guildgate|DGM
+1 Dimir Guildgate|MM3
 1 Disfigure|ZEN
 1 Dismal Backwater|EMA
 1 Disowned Ancestor|KTK
 1 Doom Blade|M14
 1 Doomed Traveler|CNS
 1 Drag Under|EMN
-1 Dragon Fodder|ORI
-1 Dynacharge|RTR
+1 Dragon Fodder|MM3
+1 Dynacharge|MM3
 1 Eager Construct|KLD
 1 Eldrazi Devastator|BFZ
 1 Eldrazi Skyspawner|BFZ
@@ -108,9 +109,9 @@ Name=Adam Styborkski's Pauper Cube
 1 Epic Confrontation|DTK
 1 Errant Ephemeron|MMA
 1 Esper Cormorants|CFX
-1 Essence Scatter|M14
+1 Essence Scatter|AKH
 1 Evincar's Justice|TMP
-1 Evolving Wilds|BFZ
+1 Evolving Wilds|AKH
 1 Exultant Cultist|EMN
 1 Faceless Butcher|TSB
 1 Faith's Fetters|EMA
@@ -133,19 +134,19 @@ Name=Adam Styborkski's Pauper Cube
 1 Ghirapur Gearcrafter|ORI
 1 Ghitu Slinger|EMA
 1 Giant Growth|M14
-1 Gideon's Lawkeeper|M12
+1 Gideon's Lawkeeper|MM3
 1 Glint-Sleeve Artisan|KLD
 1 Goblin Freerunner|OGW
 1 Goblin Heelcutter|FRF
 1 Gods Willing|THS
 1 Goldmeadow Harrier|LRW
-1 Golgari Guildgate|DGM
+1 Golgari Guildgate|MM3
 1 Grapple with the Past|EMN
-1 Gravedigger|EMA
+1 Gravedigger|AKH
 1 Gray Merchant of Asphodel|THS
 1 Grim Contest|FRF
 1 Grisly Salvage|RTR
-1 Gruul Guildgate|DGM
+1 Gruul Guildgate|MM3
 1 Gryff Vanguard|AVR
 1 Guardian Automaton|ORI
 1 Guardian of the Guildpact|DIS
@@ -164,7 +165,7 @@ Name=Adam Styborkski's Pauper Cube
 1 Into the Roil|ZEN
 1 Isolation Zone|OGW
 1 Izzet Chronarch|GPT
-1 Izzet Guildgate|DGM
+1 Izzet Guildgate|MM3
 1 Jilt|APC
 1 Journey to Nowhere|ZEN
 1 Jungle Hollow|EMA
@@ -173,7 +174,7 @@ Name=Adam Styborkski's Pauper Cube
 1 Khalni Garden|WWK
 1 Kingpin's Pet|GTC
 1 Kodama's Reach|MMA
-1 Kor Skyfisher|ZEN
+1 Kor Skyfisher|MM3
 1 Kozilek's Channeler|BFZ
 1 Krenko's Command|M13
 1 Krosan Tusker|VMA
@@ -204,13 +205,13 @@ Name=Adam Styborkski's Pauper Cube
 1 Mire's Malice|BFZ
 1 Miscalculation|ULG
 1 Mishra's Factory|EMA
-1 Mist Raven|AVR
+1 Mist Raven|MM3
 1 Mistral Charger|EMA
 1 Mogg Fanatic|EMA
-1 Mogg Flunkies|TPR
+1 Mogg Flunkies|MM3
 1 Mogg War Marshal|EMA
 1 Moldervine Cloak|MMA
-1 Momentary Blink|TSP
+1 Momentary Blink|MM3
 1 Morgue Theft|ODY
 1 Mortuary Mire|BFZ
 1 Mulldrifter|MM2
@@ -226,13 +227,13 @@ Name=Adam Styborkski's Pauper Cube
 1 Okiba-Gang Shinobi|BOK
 1 Oona's Grace|EMA
 1 Orcish Oriflamme|EMA
-1 Orzhov Guildgate|DGM
+1 Orzhov Guildgate|MM3
 1 Otherworldly Journey|MM2
 1 Pacifism|EMA
 1 Palace Sentinels
 1 Path of Anger's Flame|SOK
 1 Peema Outrider|KLD
-1 Penumbra Spider|MMA
+1 Penumbra Spider|MM3
 1 Peregrine Drake|EMA
 1 Perilous Myr|SOM
 1 Pestermite|MMA
@@ -243,7 +244,7 @@ Name=Adam Styborkski's Pauper Cube
 1 Phyrexian Rager|EMA
 1 Pillory of the Sleepless|MM2
 1 Pit Fight|GTC
-1 Pit Keeper|TSP
+1 Pit Keeper|MM3
 1 Plated Geopede|ZEN
 1 Plover Knights|LRW
 1 Porcelain Legionnaire|NPH
@@ -261,7 +262,7 @@ Name=Adam Styborkski's Pauper Cube
 1 Pyrotechnics|FRF
 1 Qasali Pridemage|ARB
 1 Raise the Alarm|EMA
-1 Rakdos Guildgate|DGM
+1 Rakdos Guildgate|MM3
 1 Rakdos Shred-Freak|RTR
 1 Rally the Peasants|EMA
 1 Rampant Growth|MM2
@@ -299,7 +300,7 @@ Name=Adam Styborkski's Pauper Cube
 1 Searing Blaze|WWK
 1 Sejiri Steppe|WWK
 1 Select for Inspection|KLD
-1 Selesnya Guildgate|DGM
+1 Selesnya Guildgate|MM3
 1 Sentinel Spider|EMA
 1 Separatist Voidmage|ORI
 1 Seraph of Dawn|AVR
@@ -310,15 +311,15 @@ Name=Adam Styborkski's Pauper Cube
 1 Shimmering Glasskite|BOK
 1 Sigil Blessing|MM2
 1 Silent Departure|EMA
-1 Simic Guildgate|DGM
+1 Simic Guildgate|MM3
 1 Skinthinner|LGN
 1 Skirk Marauder|LGN
-1 Skyknight Legionnaire|GTC
+1 Skyknight Legionnaire|MM3
 1 Skyline Cascade|BFZ
 1 Slash Panther|NPH
 1 Snakeform|EVE
 1 Snap|ULG
-1 Soul Manipulation|ARB
+1 Soul Manipulation|MM3
 1 Sphere of the Suns|MM2
 1 Spined Thopter|NPH
 1 Splatter Thug|RTR
@@ -339,7 +340,7 @@ Name=Adam Styborkski's Pauper Cube
 1 Teetering Peaks|ZEN
 1 Temporal Isolation|TSP
 1 Tenement Crasher|RTR
-1 Terminate|ARB
+1 Terminate|MM3
 1 Terramorphic Expanse|MMA
 1 Test of Faith|MMA
 1 Thorn of the Black Rose
