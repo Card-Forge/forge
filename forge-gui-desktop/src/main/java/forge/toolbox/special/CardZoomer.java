@@ -18,6 +18,7 @@
 
 package forge.toolbox.special;
 
+import forge.StaticData;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -33,8 +34,10 @@ import javax.swing.Timer;
 
 import net.miginfocom.swing.MigLayout;
 import forge.assets.FSkinProp;
+import forge.game.card.Card;
 import forge.game.card.CardView.CardStateView;
 import forge.gui.SOverlayUtils;
+import forge.item.PaperCard;
 import forge.toolbox.FOverlay;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
@@ -226,10 +229,14 @@ public enum CardZoomer {
         if (thisCard == null) {
             return 0;
         }
-        if (thisCard.getCard().isSplitCard() && thisCard.getCard().getText().contains("Aftermath")) {
-            return 270; // rotate Aftermath splits the other way to correctly show the right split (graveyard) half
+        if (thisCard.getCard().isSplitCard()) {
+            PaperCard pc = StaticData.instance().getCommonCards().getCard(thisCard.getName());
+            boolean isAftermath = pc != null && Card.getCardForUi(pc).hasKeyword("Aftermath");
+
+            return isAftermath ? 270 : 90; // rotate Aftermath splits the other way to correctly show the right split (graveyard) half
         }
-        return thisCard.getCard().isSplitCard() || thisCard.getType().isPlane() || thisCard.getType().isPhenomenon() ? 90 : 0;
+
+        return thisCard.getType().isPlane() || thisCard.getType().isPhenomenon() ? 90 : 0;
     }
 
     private void setLayout() {

@@ -36,11 +36,14 @@ import javax.swing.SwingUtilities;
 
 import forge.CachedCardImage;
 import forge.FThreads;
+import forge.StaticData;
 import forge.card.CardEdition;
 import forge.card.mana.ManaCost;
+import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.gui.CardContainer;
+import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
@@ -368,8 +371,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             if (!showSplitMana) {
                 drawManaCost(g, card.getCurrentState().getManaCost(), 0);
             } else {
-                drawManaCost(g, card.getCurrentState().getManaCost(), +12);
-                drawManaCost(g, card.getAlternateState().getManaCost(), -12);
+                PaperCard pc = StaticData.instance().getCommonCards().getCard(card.getName());
+                int ofs = pc != null && Card.getCardForUi(pc).hasKeyword("Aftermath") ? -12 : 12;
+
+                drawManaCost(g, card.getCurrentState().getManaCost(), ofs);
+                drawManaCost(g, card.getAlternateState().getManaCost(), -ofs);
             }
         }
 
