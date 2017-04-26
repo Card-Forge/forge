@@ -22,6 +22,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.card.MagicColor;
+import forge.card.mana.ManaCostParser;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.ability.AbilityUtils;
@@ -163,6 +164,19 @@ public final class GameActionUtil {
 
         if (!sa.isBasicSpell()) {
             return alternatives;
+        }
+
+        if (sa.isCycling() && activator.hasKeyword("CyclingForZero")) {
+            final SpellAbility newSA = sa.copyWithNoManaCost();
+            newSA.setBasicSpell(false);
+            newSA.getMapParams().put("CostDesc", ManaCostParser.parse("0"));
+            // makes new SpellDescription
+            final StringBuilder sb = new StringBuilder();
+            sb.append(newSA.getCostDescription());
+            sb.append(newSA.getParam("SpellDescription"));
+            newSA.setDescription(sb.toString());
+            
+            alternatives.add(newSA);
         }
 
         for (final String keyword : source.getKeywords()) {

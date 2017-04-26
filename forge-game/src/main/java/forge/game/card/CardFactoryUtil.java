@@ -3959,10 +3959,12 @@ public class CardFactoryUtil {
             }
 
             sb.append(" Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ ").append(desc).append("cycling ");
+            sb.append(" | CostDesc$ ").append(ManaCostParser.parse(manacost));
             sb.append("| Origin$ Library | Destination$ Hand |");
             sb.append("ChangeType$ ").append(type);
-            sb.append(" | SpellDescription$ Search your library for a ").append(desc).append(" card, reveal it,");
-            sb.append(" and put it into your hand. Then shuffle your library.");
+            // no Keyword.getReminderText, it does not work yet
+            sb.append(" | SpellDescription$ (Search your library for a ").append(desc).append(" card, reveal it,");
+            sb.append(" and put it into your hand. Then shuffle your library.)");
 
             SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
             sa.setIsCycling(true);
