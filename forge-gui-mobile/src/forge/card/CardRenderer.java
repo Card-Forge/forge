@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import forge.Graphics;
+import forge.StaticData;
 import forge.assets.FImageComplex;
 import forge.assets.FRotatedImage;
 import forge.assets.FSkinColor;
@@ -23,9 +24,11 @@ import forge.assets.ImageCache;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.CardZoom.ActivateHandler;
 import forge.card.mana.ManaCost;
+import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.item.IPaperCard;
+import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.MatchController;
@@ -348,8 +351,14 @@ public class CardRenderer {
                 float manaSymbolSize = w / 4;
                 if (card.isSplitCard() && card.hasAlternateState()) {
                     float dy = manaSymbolSize / 2 + Utils.scale(5);
-                    drawManaCost(g, card.getAlternateState().getManaCost(), x - padding, y + dy, w + 2 * padding, h, manaSymbolSize);
-                    drawManaCost(g, card.getCurrentState().getManaCost(), x - padding, y - dy, w + 2 * padding, h, manaSymbolSize);
+
+                    PaperCard pc = StaticData.instance().getCommonCards().getCard(card.getName());
+                    if (Card.getCardForUi(pc).hasKeyword("Aftermath")){
+                        dy *= -1; // flip card costs for Aftermath cards
+                    }
+
+                    drawManaCost(g, card.getAlternateState().getManaCost(), x - padding, y - dy, w + 2 * padding, h, manaSymbolSize);
+                    drawManaCost(g, card.getCurrentState().getManaCost(), x - padding, y + dy, w + 2 * padding, h, manaSymbolSize);
                 }
                 else {
                     drawManaCost(g, card.getCurrentState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
