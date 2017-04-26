@@ -155,13 +155,13 @@ public class HttpUtil {
         try {
             url = new URL(sURL);
         } catch (final MalformedURLException e) {
-            return "error 1";
+            return null;
         }
         InputStream is = null;
         try {
             is = url.openStream();
         } catch (final IOException e) {
-            return "error 2";
+            return null;
         }
         int ptr = 0;
         final StringBuffer buffer = new StringBuffer();
@@ -170,12 +170,12 @@ public class HttpUtil {
                 buffer.append((char) ptr);
             }
         } catch (final IOException e) {
-            return "error 3";
+            return null;
         }
 
         return buffer.toString();
     }
-    
+
     // disable instantiation
     private HttpUtil () { }
 }

@@ -18,16 +18,17 @@
 package forge.download;
 
 import com.google.common.collect.Iterables;
+import forge.StaticData;
 import forge.card.CardEdition;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
+import forge.util.HttpUtil;
 import forge.util.ImageUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class GuiDownloadSetPicturesLQ extends GuiDownloadService {
     @Override
@@ -39,12 +40,33 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloadService {
     protected final Map<String, String> getNeededFiles() {
         final Map<String, String> downloads = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
+        final Map<String, String> setMapping = new HashMap<>();
+        final HashSet<String> existingSets = retrieveManifestDirectory();
+        final HashSet<String> missingSets = new HashSet<>();
+
         for (final PaperCard c : Iterables.concat(FModel.getMagicDb().getCommonCards().getAllCards(), FModel.getMagicDb().getVariantCards().getAllCards())) {
             final String setCode3 = c.getEdition();
+
+            if (!setMapping.containsKey(setCode3)) {
+                setMapping.put(setCode3, StaticData.instance().getEditions().getCode2ByCode(setCode3));
+            }
+            final String setCode2 = setMapping.get(setCode3);
+
             if (StringUtils.isBlank(setCode3) || CardEdition.UNKNOWN.getCode().equals(setCode3)) {
                 // we don't want cards from unknown sets
                 continue;
             }
+
+            if (!(existingSets.contains(setCode3) || existingSets.contains(setCode2))) {
+                // If set doesn't exist on server, don't try to download cards for it
+                if (!missingSets.contains(setCode3)) {
+                    missingSets.add(setCode3);
+                    System.out.println(setCode3 + " not found on server. Ignoring downloads for this set.");
+                }
+
+                continue;
+            }
+
             addDLObject(ImageUtil.getDownloadUrl(c, false), ImageUtil.getImageKey(c, false, true), downloads);
 
             if (ImageUtil.hasBackFacePicture(c)) {
@@ -64,5 +86,28 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloadService {
         if (!destFile.exists()) {
             downloads.put(destFile.getAbsolutePath(), ForgeConstants.URL_PIC_DOWNLOAD + urlPath);
         }
+    }
+
+    private HashSet<String> retrieveManifestDirectory() {
+        String manifestUrl = ForgeConstants.URL_PIC_DOWNLOAD;
+        HashSet<String> existingSets = new HashSet<>();
+
+        String response = HttpUtil.getURL(manifestUrl);
+
+        if (response == null)  return null;
+
+        String[] strings = response.split("<a href=\"");
+
+        for (String s : strings) {
+            int idx = s.indexOf('/');
+            if (!Character.isLetterOrDigit(s.charAt(0)) || idx > 4 || idx == -1) {
+                continue;
+            }
+
+            String set = s.substring(0, idx);
+            existingSets.add(set);
+        }
+
+        return existingSets;
     }
 }
