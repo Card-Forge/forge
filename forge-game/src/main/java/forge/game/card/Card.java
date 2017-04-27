@@ -5261,6 +5261,29 @@ public class Card extends GameEntity implements Comparable<Card> {
             return getBlockedThisTurn() != null;
         } else if (property.startsWith("blockedByThisTurn")) {
             return getBlockedByThisTurn() != null;
+        } else if (property.startsWith("blockedValidThisTurn ")) {
+            if (getBlockedThisTurn() == null) {
+                return false;
+            }
+
+            String valid = property.split(" ")[1];
+            for(Card c : getBlockedThisTurn()) {
+                if (c.isValid(valid, this.getController(), source, spellAbility)) {
+                    return true;
+                }
+            }
+            return false;
+        } else if (property.startsWith("blockedByValidThisTurn ")) {
+            if (getBlockedByThisTurn() == null) {
+                return false;
+            }
+            String valid = property.split(" ")[1];
+            for(Card c : getBlockedByThisTurn()) {
+                if (c.isValid(valid, this.getController(), source, spellAbility)) {
+                    return true;
+                }
+            }
+            return false;
         } else if (property.startsWith("blockedBySourceThisTurn")) {
             return source.blockedByThisTurn != null && source.blockedByThisTurn.contains(this);
         } else if (property.startsWith("blockedSource")) {
