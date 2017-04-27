@@ -93,8 +93,6 @@ public final class FModel {
     private static IStorage<QuestWorld> worlds;
     private static GameFormat.Collection formats;
 
-    private static GameFormat.Collection customFormats;
-
     public static void initialize(final IProgressBar progressBar, Function<ForgePreferences, Void> adjustPrefs) {
         ImageKeys.initializeDirs(
                 ForgeConstants.CACHE_CARD_PICS_DIR, ForgeConstants.CACHE_CARD_PICS_SUBDIR,
@@ -165,7 +163,7 @@ public final class FModel {
 
         formats = new GameFormat.Collection(new GameFormat.Reader(new File(ForgeConstants.BLOCK_DATA_DIR + "formats.txt")));
         //add user custom formats if file present
-        customFormats = new GameFormat.Collection(new GameFormat.Reader(new File(ForgeConstants.USER_PREFS_DIR + "customformats.txt")));
+        GameFormat.Collection customFormats = new GameFormat.Collection(new GameFormat.Reader(new File(ForgeConstants.USER_PREFS_DIR + "customformats.txt")));
         for (GameFormat format:customFormats){
             formats.add(format);
         }
