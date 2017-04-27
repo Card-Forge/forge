@@ -4945,6 +4945,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!getDamageHistory().getCreatureBlockedThisTurn()) {
                 return false;
             }
+        } else if (property.startsWith("notExertedThisTurn")) {
+            if (getExertedThisTurn() > 0) {
+                return false;
+            }
         } else if (property.startsWith("gotBlockedThisTurn")) {
             if (!getDamageHistory().getCreatureGotBlockedThisTurn()) {
                 return false;
