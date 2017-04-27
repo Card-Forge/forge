@@ -280,6 +280,11 @@ public class GameFormat implements Comparable<GameFormat> {
             }
             return result;
         }
+
+        @Override
+        public void add(GameFormat item) {
+            naturallyOrdered.add(item);
+        }
     }
 
     public final Predicate<CardEdition> editionLegalPredicate = new Predicate<CardEdition>() {
