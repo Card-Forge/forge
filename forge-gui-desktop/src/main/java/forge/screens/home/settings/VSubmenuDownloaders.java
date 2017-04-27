@@ -52,25 +52,40 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
      * Constructor.
      */
     VSubmenuDownloaders() {
+
         final String constraintsLBL = "w 90%!, h 20px!, center, gap 0 0 3px 8px";
         final String constraintsBTN = "h 30px!, w 50%!, center";
 
         pnlContent.setOpaque(false);
 
-        pnlContent.add(btnDownloadPics, constraintsBTN);
-        pnlContent.add(_makeLabel("Download default card picture for each card."), constraintsLBL);
+        if (javaRecentEnough()) {
 
-        pnlContent.add(btnDownloadSetPics, constraintsBTN);
-        pnlContent.add(_makeLabel("Download all pictures of each card (one for each set the card appeared in)"), constraintsLBL);
+            pnlContent.add(btnDownloadPics, constraintsBTN);
+            pnlContent.add(_makeLabel("Download default card picture for each card."), constraintsLBL);
 
-        pnlContent.add(btnDownloadQuestImages, constraintsBTN);
-        pnlContent.add(_makeLabel("Download tokens and icons used in Quest mode."), constraintsLBL);
+            pnlContent.add(btnDownloadSetPics, constraintsBTN);
+            pnlContent.add(_makeLabel("Download all pictures of each card (one for each set the card appeared in)"), constraintsLBL);
 
-        pnlContent.add(btnDownloadAchievementImages, constraintsBTN);
-        pnlContent.add(_makeLabel("Download achievement images to really make your trophies stand out."), constraintsLBL);
+            pnlContent.add(btnDownloadQuestImages, constraintsBTN);
+            pnlContent.add(_makeLabel("Download tokens and icons used in Quest mode."), constraintsLBL);
 
-        pnlContent.add(btnDownloadPrices, constraintsBTN);
-        pnlContent.add(_makeLabel("Download up-to-date price list for in-game card shops."), constraintsLBL);
+            pnlContent.add(btnDownloadAchievementImages, constraintsBTN);
+            pnlContent.add(_makeLabel("Download achievement images to really make your trophies stand out."), constraintsLBL);
+
+            pnlContent.add(btnDownloadPrices, constraintsBTN);
+            pnlContent.add(_makeLabel("Download up-to-date price list for in-game card shops."), constraintsLBL);
+
+        } else {
+
+            String text = "Your version of Java is too old to use the content downloaders.";
+            FLabel label = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text(text).fontStyle(Font.BOLD).fontSize(18).build();
+            pnlContent.add(label, "w 90%!, h 25px!, center, gap 0 0 30px 3px");
+
+            text = "Please update to the latest version of Java 8 to use this feature.";
+            label = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text(text).fontStyle(Font.BOLD).fontSize(18).build();
+            pnlContent.add(label, "w 90%!, h 25px!, center, gap 0 0 0 36px");
+
+        }
 
         pnlContent.add(btnImportPictures, constraintsBTN);
         pnlContent.add(_makeLabel("Import data from a local directory."), constraintsLBL);
@@ -83,6 +98,18 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
         pnlContent.add(btnLicensing, constraintsBTN);
         pnlContent.add(_makeLabel("Forge legal."), constraintsLBL);
+
+    }
+
+    private boolean javaRecentEnough() {
+
+        String fullJavaVersion = System.getProperty("java.version");
+
+        int majorVersion = Integer.parseInt(fullJavaVersion.split("_")[0].split("\\.")[1]);
+        int minorVersion = Integer.parseInt(fullJavaVersion.split("_")[1]);
+
+        return majorVersion > 8 || (majorVersion == 8 && minorVersion >= 101);
+
     }
 
     /* (non-Javadoc)
