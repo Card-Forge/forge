@@ -18734,6 +18734,7 @@ forge-gui/res/cube/Ben's[!!-~]Cube[!!-~](720[!!-~]cards).dck -text
 forge-gui/res/cube/Cube[!!-~]Tutor[!!-~]360[!!-~]Pauper.dck -text
 forge-gui/res/cube/Cube[!!-~]Tutor[!!-~]720.dck -text
 forge-gui/res/cube/Eric[!!-~]Klug's[!!-~]Pro[!!-~]Tour[!!-~]Cube.dck -text
+forge-gui/res/cube/Frontier[!!-~]Cube.dck -text
 forge-gui/res/cube/Guillaume[!!-~]Matignon's[!!-~]Jenny's-Johnny's[!!-~]Cube.dck -text
 forge-gui/res/cube/Jim[!!-~]Davis's[!!-~]Cube[!!-~](469[!!-~]cards).dck -text
 forge-gui/res/cube/Jospeh[!!-~]Vasoli's[!!-~]Peasant[!!-~]Cube.dck -text
@@ -18773,6 +18774,7 @@ forge-gui/res/draft/Ben's[!!-~]Cube[!!-~](720[!!-~]cards).draft -text
 forge-gui/res/draft/Cube[!!-~]Tutor[!!-~]360[!!-~]Pauper.draft -text
 forge-gui/res/draft/Cube[!!-~]Tutor[!!-~]720.draft -text
 forge-gui/res/draft/Eric[!!-~]Klug's[!!-~]Pro[!!-~]Tour[!!-~]Cube.draft -text
+forge-gui/res/draft/Frontier.draft -text
 forge-gui/res/draft/Guillaume[!!-~]Matignon's[!!-~]Jenny's-Johnny's[!!-~]Cube.draft -text
 forge-gui/res/draft/Jim[!!-~]Davis's[!!-~]Cube[!!-~](469[!!-~]cards).draft -text
 forge-gui/res/draft/Jospeh[!!-~]Vasoli's[!!-~]Peasant[!!-~]Cube.draft -text

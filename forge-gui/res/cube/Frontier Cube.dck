@@ -1,0 +1,365 @@
+[metadata]
+Name=Frontier Cube
+[Main]
+1 Abzan Banner|KTK
+1 Abzan Charm|KTK
+1 Aether Hub|KLD
+1 Aethersphere Harvester|AER
+1 AEtherspouts|M15
+1 Ajani Unyielding|AER
+1 Alesha, Who Smiles at Death|FRF
+1 Always Watching|SOI
+1 Anafenza, Kin-Tree Spirit|DTK
+1 Anafenza, the Foremost|KTK
+1 Angel of Invention|KLD
+1 Angelic Purge|SOI
+1 Anguished Unmaking|SOI
+1 Anticipate|BFZ
+1 Archangel Avacyn|SOI
+1 Atarka Monument|DTK
+1 Attune with Aether|KLD
+1 Authority of the Consuls|KLD
+1 Avaricious Dragon|ORI
+1 Ayli, Eternal Pilgrim|OGW
+1 Baral's Expertise|AER
+1 Baral, Chief of Compliance|AER
+1 Battle at the Bridge|AER
+1 Battlefield Forge|ORI
+1 Become Immense|KTK
+1 Blessed Alliance|EMN
+1 Blighted Cataract|BFZ
+1 Blighted Woodland|BFZ
+1 Bloodsoaked Champion|KTK
+1 Bloodstained Mire|KTK
+1 Blooming Marsh|KLD
+1 Bone Splinters|MM3
+1 Botanical Sanctum|KLD
+1 Bound by Moonsilver|SOI
+1 Bounding Krasis|ORI
+1 Breakneck Rider|SOI
+1 Bruna, the Fading Light|EMN
+1 Butcher of the Horde|KTK
+1 Cancel|KTK
+1 Canopy Vista|BFZ
+1 Cataclysmic Gearhulk|KLD
+1 Catacomb Sifter|BFZ
+1 Caves of Koilos|ORI
+1 Chandra, Fire of Kaladesh|ORI
+1 Chandra, Flamecaller|OGW
+1 Chief Engineer|M15
+1 Chief of the Foundry|KLD
+1 Chord of Calling|M15
+1 Cinder Glade|BFZ
+1 Cloudblazer|KLD
+1 Collected Company|DTK
+1 Combustible Gearhulk|KLD
+1 Concealed Courtyard|KLD
+1 Confirm Suspicions|SOI
+1 Corrupted Grafstone|SOI
+1 Crater's Claws|KTK
+1 Crux of Fate|FRF
+1 Cryptolith Rite|SOI
+1 Cultivator's Caravan|KLD
+1 Dark Intimations|AER
+1 Dark Petition|ORI
+1 Dead Weight|SOI
+1 Deathbringer Regent|DTK
+1 Decimator of the Provinces|EMN
+1 Declaration in Stone|SOI
+1 Den Protector|DTK
+1 Descend upon the Sinful|SOI
+1 Despise|KTK
+1 Die Young|KLD
+1 Dig Through Time|KTK
+1 Disallow|AER
+1 Disdainful Stroke|KTK
+1 Dispel|BFZ
+1 Dissipate|M15
+1 Dovin Baan|KLD
+1 Dragon Fodder|MM3
+1 Dragonlord Atarka|DTK
+1 Dragonlord Dromoka|DTK
+1 Dragonlord Silumgar|DTK
+1 Dragonlord's Prerogative|DTK
+1 Dragonmaster Outcast|BFZ
+1 Drana, Liberator of Malakir|BFZ
+1 Dromoka Monument|DTK
+1 Dromoka's Command|DTK
+1 Druid of the Cowl|AER
+1 Duress|EMA
+1 Duskwatch Recruiter|SOI
+1 Dynavolt Tower|KLD
+1 Elder Deep-Fiend|EMN
+1 Eldrazi Displacer|OGW
+1 Electrostatic Pummeler|KLD
+1 Elvish Mystic|M15
+1 Encase in Ice|DTK
+1 Ensoul Artifact|M15
+1 Erdwal Illuminator|SOI
+1 Evolutionary Leap|ORI
+1 Evolving Wilds|BFZ
+1 Explosive Vegetation|DTK
+1 Eyeless Watcher|BFZ
+1 Fatal Push|AER
+1 Felidar Cub|BFZ
+1 Felidar Guardian|AER
+1 Fevered Visions|SOI
+1 Fiery Impulse|ORI
+1 Fleeting Memories|SOI
+1 Flooded Strand|KTK
+1 Foul-Tongue Invocation|DTK
+1 Foundry Inspector|KLD
+1 Foundry Street Denizen|M15
+1 From Beyond|BFZ
+1 Frontier Bivouac|KTK
+1 Fumigate|KLD
+1 Gaea's Revenge|ORI
+1 Garruk, Apex Predator|M15
+1 Genesis Hydra|M15
+1 Ghostfire Blade|KTK
+1 Gifted Aetherborn|AER
+1 Gisela, the Broken Blade|EMN
+1 Glimmer of Genius|KLD
+1 Glint-Nest Crane|KLD
+1 Glint-Sleeve Siphoner|AER
+1 Goblin Dark-Dwellers|OGW
+1 Goblin Piledriver|ORI
+1 Goblin Rabblemaster|M15
+1 Grasp of Darkness|OGW
+1 Grim Haruspex|KTK
+1 Gurmag Angler|FRF
+1 Hallowed Moonlight|ORI
+1 Hangarback Walker|ORI
+1 Hanweir Militia Captain|SOI
+1 Hardened Scales|KTK
+1 Harnessed Lightning|KLD
+1 Hedron Archive|BFZ
+1 Hedron Crawler|OGW
+1 Heir of the Wilds|KTK
+1 Herald of Kozilek|BFZ
+1 Heron's Grace Champion|EMN
+1 Hissing Quagmire|OGW
+1 Hordeling Outburst|KTK
+1 Hornet Queen|M15
+1 Hushwing Gryff|M15
+1 Immolating Glare|OGW
+1 Imprisoned in the Moon|EMN
+1 In Garruk's Wake|M15
+1 Incendiary Flow|EMN
+1 Inspiring Vantage|KLD
+1 Inventors' Fair|KLD
+1 Ire Shaman|DTK
+1 Iroas's Champion|ORI
+1 Jace's Ingenuity|M15
+1 Jace, Unraveler of Secrets|SOI
+1 Jaddi Offshoot|BFZ
+1 Jalira, Master Polymorphist|M15
+1 Jeskai Banner|KTK
+1 Jeskai Charm|KTK
+1 Kalitas, Traitor of Ghet|OGW
+1 Kari Zev, Skyship Raider|AER
+1 Knight of the White Orchid|ORI
+1 Kolaghan Monument|DTK
+1 Kolaghan's Command|DTK
+1 Kozilek's Channeler|BFZ
+1 Kozilek's Return|OGW
+1 Kozilek, the Great Distortion|OGW
+1 Kytheon, Hero of Akros|ORI
+1 Lambholt Pacifist|SOI
+1 Languish|ORI
+1 Lifecrafter's Bestiary|AER
+1 Lifespring Druid|BFZ
+1 Lightning Berserker|DTK
+1 Lightning Strike|M15
+1 Liliana, Heretical Healer|ORI
+1 Linvala, the Preserver|OGW
+1 Live Fast|KLD
+1 Llanowar Wastes|ORI
+1 Lumbering Falls|BFZ
+1 Magnifying Glass|SOI
+1 Managorger Hydra|ORI
+1 Mantis Rider|KTK
+1 Mardu Banner|KTK
+1 Mardu Charm|KTK
+1 Mardu Scout|FRF
+1 Mardu Strike Leader|FRF
+1 Mardu Woe-Reaper|FRF
+1 Mastery of the Unseen|FRF
+1 Maverick Thopterist|AER
+1 Mechanized Production|AER
+1 Metallic Mimic|AER
+1 Mina and Denn, Wildborn|OGW
+1 Monastery Swiftspear|KTK
+1 Murder|EMN
+1 Murderous Cut|KTK
+1 Mystic Monastery|KTK
+1 Nahiri, the Harbinger|SOI
+1 Nantuko Husk|ORI
+1 Natural State|OGW
+1 Naturalize|DTK
+1 Needle Spires|OGW
+1 Negate|AER
+1 Nissa's Pilgrimage|ORI
+1 Nissa's Renewal|BFZ
+1 Nissa, Vastwood Seer|ORI
+1 Nissa, Vital Force|KLD
+1 Nomad Outpost|KTK
+1 Noose Constrictor|EMN
+1 Noxious Gearhulk|KLD
+1 Noyan Dar, Roil Shaper|BFZ
+1 Oath of Chandra|OGW
+1 Oath of Gideon|OGW
+1 Oath of Liliana|EMN
+1 Ob Nixilis Reignited|BFZ
+1 Ojutai Monument|DTK
+1 Ojutai's Command|DTK
+1 Olivia, Mobilized for War|SOI
+1 Ongoing Investigation|SOI
+1 Opulent Palace|KTK
+1 Orbs of Warding|ORI
+1 Outpost Siege|FRF
+1 Pacifism|EMA
+1 Pearl Lake Ancient|KTK
+1 Pia Nalaar|KLD
+1 Pilgrim's Eye|EMA
+1 Planar Outburst|BFZ
+1 Polluted Delta|KTK
+1 Prairie Stream|BFZ
+1 Quarantine Field|BFZ
+1 Rabid Bite|SOI
+1 Radiant Flames|BFZ
+1 Radiant Purge|DTK
+1 Raise the Alarm|EMA
+1 Rally the Ancestors|FRF
+1 Rashmi, Eternities Crafter|KLD
+1 Rattleclaw Mystic|KTK
+1 Ravenous Intruder|AER
+1 Read the Bones|ORI
+1 Reave Soul|ORI
+1 Reckless Bushwhacker|OGW
+1 Reclamation Sage|M15
+1 Reflector Mage|OGW
+1 Renegade Rallier|AER
+1 Rishkar, Peema Renegade|AER
+1 Roast|DTK
+1 Rogue Refiner|AER
+1 Ruinous Path|BFZ
+1 Saheeli Rai|KLD
+1 Sandsteppe Citadel|KTK
+1 Sarkhan Unbroken|DTK
+1 Savage Knuckleblade|KTK
+1 Scatter to the Winds|BFZ
+1 Searing Light|OGW
+1 Seasons Past|SOI
+1 Secure the Wastes|DTK
+1 See the Unwritten|KTK
+1 Seeker of the Way|KTK
+1 Seer's Lantern|OGW
+1 Self-Inflicted Wound|DTK
+1 Servant of the Conduit|KLD
+1 Shaman of Forgotten Ways|DTK
+1 Shambling Vent|BFZ
+1 Shielded Aether Thief|AER
+1 Shivan Reef|ORI
+1 Shock|AER
+1 Shrapnel Blast|M15
+1 Sidisi, Brood Tyrant|KTK
+1 Sigarda, Heron's Grace|SOI
+1 Sigiled Starfish|ORI
+1 Sign in Blood|MM2
+1 Silkwrap|DTK
+1 Silumgar Assassin|DTK
+1 Silumgar Monument|DTK
+1 Silumgar's Scorn|DTK
+1 Skyrider Elf|BFZ
+1 Skysovereign, Consul Flagship|KLD
+1 Smoldering Marsh|BFZ
+1 Smuggler's Copter|KLD
+1 Sorin, Grim Nemesis|SOI
+1 Soul of New Phyrexia|M15
+1 Soul of Theros|M15
+1 Soul of Zendikar|M15
+1 Soulflayer|FRF
+1 Spawning Bed|BFZ
+1 Spell Queller|EMN
+1 Sphinx's Tutelage|ORI
+1 Spire of Industry|AER
+1 Spirebluff Canal|KLD
+1 Sram's Expertise|AER
+1 Stasis Snare|BFZ
+1 Stoke the Flames|M15
+1 Stormchaser Mage|OGW
+1 Stormtide Leviathan|M15
+1 Stratus Dancer|DTK
+1 Stubborn Denial|KTK
+1 Sultai Banner|KTK
+1 Sultai Charm|KTK
+1 Summary Dismissal|EMN
+1 Sunken Hollow|BFZ
+1 Surge of Righteousness|DTK
+1 Surrak, the Hunt Caller|DTK
+1 Swift Warkite|DTK
+1 Tamiyo, Field Researcher|EMN
+1 Tasigur, the Golden Fang|FRF
+1 Temur Banner|KTK
+1 Temur Battle Rage|FRF
+1 Temur Charm|KTK
+1 Tezzeret the Schemer|AER
+1 Tezzeret's Touch|AER
+1 Thalia's Lieutenant|SOI
+1 Thalia, Heretic Cathar|EMN
+1 Thermo-Alchemist|EMN
+1 Thing in the Ice|SOI
+1 Thopter Engineer|ORI
+1 Thopter Spy Network|ORI
+1 Thought-Knot Seer|OGW
+1 Thraben Inspector|SOI
+1 Tireless Tracker|SOI
+1 Titan's Strength|ORI
+1 To the Slaughter|SOI
+1 Tormod's Crypt|M15
+1 Tragic Arrogance|ORI
+1 Traverse the Ulvenwald|SOI
+1 Treasure Cruise|KTK
+1 Turn to Frog|ORI
+1 Ulamog, the Ceaseless Hunger|BFZ
+1 Ulcerate|M15
+1 Ulrich of the Krallenhorde|EMN
+1 Ultimate Price|DTK
+1 Ulvenwald Hydra|SOI
+1 Ulvenwald Mysteries|SOI
+1 Unlicensed Disintegration|KLD
+1 Utter End|KTK
+1 Valorous Stance|FRF
+1 Village Messenger|SOI
+1 Villainous Wealth|KTK
+1 Virulent Plague|DTK
+1 Void Shatter|OGW
+1 Voltaic Brawler|KLD
+1 Vryn Wingmare|ORI
+1 Walking Ballista|AER
+1 Wall of Resurgence|OGW
+1 Wandering Fumarole|OGW
+1 War-Name Aspirant|KTK
+1 Wastes|OGW|1
+1 Weirding Wood|SOI
+1 Westvale Abbey|SOI
+1 Whir of Invention|AER
+1 Whirler Rogue|ORI
+1 Whirler Virtuoso|KLD
+1 Whisperer of the Wilds|FRF
+1 Whisperwood Elemental|FRF
+1 Wild Slash|FRF
+1 Winding Constrictor|AER
+1 Windswept Heath|KTK
+1 Wingmate Roc|KTK
+1 Wooded Foothills|KTK
+1 World Breaker|OGW
+1 Yahenni's Expertise|AER
+1 Yahenni, Undying Partisan|AER
+1 Yavimaya Coast|ORI
+1 Yisan, the Wanderer Bard|M15
+1 Zulaport Cutthroat|BFZ
+1 Zurgo Bellstriker|DTK
+[Sideboard]
+
