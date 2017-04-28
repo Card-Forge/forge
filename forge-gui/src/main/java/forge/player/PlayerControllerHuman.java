@@ -578,7 +578,7 @@ public class PlayerControllerHuman
 
     @Override
     public List<Card> exertAttackers(List<Card> attackers) {
-        return getGui().getChoices("Exert Attackers?", 0, attackers.size(), attackers);
+        return getGui().order("Exert Attackers?", "Exerted", 0, attackers.size(), attackers, null, null, false);
     }
 
     @Override
