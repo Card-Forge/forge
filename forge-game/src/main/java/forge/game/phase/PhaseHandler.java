@@ -18,6 +18,7 @@
 package forge.game.phase;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
@@ -66,7 +67,7 @@ public class PhaseHandler implements java.io.Serializable {
     private int turn = 0;
 
     private final transient Stack<ExtraTurn> extraTurns = new Stack<ExtraTurn>();
-    private final transient Map<PhaseType, Stack<PhaseType>> extraPhases = new HashMap<PhaseType, Stack<PhaseType>>();
+    private final transient Map<PhaseType, Stack<PhaseType>> extraPhases = Maps.newEnumMap(PhaseType.class);
 
     private int nUpkeepsThisTurn = 0;
     private int nUpkeepsThisGame = 0;
@@ -377,7 +378,7 @@ public class PhaseHandler implements java.io.Serializable {
 
         if (!skipped) {
             // Run triggers if phase isn't being skipped
-            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Phase", phase.nameForScripts);
             runParams.put("Player", playerTurn);
             game.getTriggerHandler().runTrigger(TriggerType.Phase, runParams, false);
@@ -452,7 +453,7 @@ public class PhaseHandler implements java.io.Serializable {
                 if (!bRepeatCleanup) {
                     setPlayerTurn(handleNextTurn());
                     // "Trigger" for begin turn to get around a phase skipping
-                    final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                    final Map<String, Object> runParams = Maps.newHashMap();
                     runParams.put("Player", playerTurn);
                     game.getTriggerHandler().runTrigger(TriggerType.TurnBegin, runParams, false);
                 }
@@ -514,13 +515,15 @@ public class PhaseHandler implements java.io.Serializable {
             List<Card> possibleExerters = CardLists.getKeyword(combat.getAttackers(),
                     "You may exert CARDNAME as it attacks.");
 
-            for(Card exerter : whoDeclares.getController().exertAttackers(possibleExerters)) {
-                //exerter.addExtrinsicKeyword("Exerted");
-                exerter.exert();
-                final Map<String, Object> runParams = Maps.newHashMap();
-                runParams.put("Card", exerter);
-                runParams.put("Player", playerTurn);
-                game.getTriggerHandler().runTrigger(TriggerType.Exerted, runParams, false);
+            if (!possibleExerters.isEmpty()) {
+                for(Card exerter : whoDeclares.getController().exertAttackers(possibleExerters)) {
+                    //exerter.addExtrinsicKeyword("Exerted");
+                    exerter.exert();
+                    final Map<String, Object> runParams = Maps.newHashMap();
+                    runParams.put("Card", exerter);
+                    runParams.put("Player", playerTurn);
+                    game.getTriggerHandler().runTrigger(TriggerType.Exerted, runParams, false);
+                }
             }
         }
 
@@ -541,11 +544,11 @@ public class PhaseHandler implements java.io.Serializable {
 
         // fire AttackersDeclared trigger
         if (!combat.getAttackers().isEmpty()) {
-            List<GameEntity> attackedTarget = new ArrayList<GameEntity>();
+            List<GameEntity> attackedTarget = Lists.newArrayList();
             for (final Card c : combat.getAttackers()) {
                 attackedTarget.add(combat.getDefenderByAttacker(c));
             }
-            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Attackers", combat.getAttackers());
             runParams.put("AttackingPlayer", combat.getAttackingPlayer());
             runParams.put("AttackedTarget", attackedTarget);
@@ -585,7 +588,7 @@ public class PhaseHandler implements java.io.Serializable {
             // Handles removing cards like Mogg Flunkies from combat if group block
             // didn't occur
             for (Card blocker : CardLists.filterControlledBy(combat.getAllBlockers(), p)) {
-                final List<Card> attackers = new ArrayList<Card>(combat.getAttackersBlockedBy(blocker));
+                final List<Card> attackers = Lists.newArrayList(combat.getAttackersBlockedBy(blocker));
                 for (Card attacker : attackers) {
                     boolean hasPaid = payRequiredBlockCosts(game, blocker, attacker);
 
@@ -629,7 +632,7 @@ public class PhaseHandler implements java.io.Serializable {
             // Player is done declaring blockers - redraw UI at this point
 
             // map: defender => (many) attacker => (many) blocker
-            Map<GameEntity, MapOfLists<Card, Card>> blockers = new HashMap<GameEntity, MapOfLists<Card,Card>>();
+            Map<GameEntity, MapOfLists<Card, Card>> blockers = Maps.newHashMap();
             for (GameEntity ge : combat.getDefendersControlledBy(p)) {
                 MapOfLists<Card, Card> protectThisDefender = new HashMapOfLists<Card, Card>(CollectionSuppliers.<Card>arrayLists());
                 for (Card att : combat.getAttackersOf(ge)) {
@@ -649,7 +652,7 @@ public class PhaseHandler implements java.io.Serializable {
 
         final List<Card> declaredBlockers = combat.getAllBlockers();
         if (!declaredBlockers.isEmpty()) {
-            final List<Card> blockedAttackers = new ArrayList<Card>();
+            final List<Card> blockedAttackers = Lists.newArrayList();
             for (final Card blocker : declaredBlockers) {
                 for (final Card blockedAttacker : combat.getAttackersBlockedBy(blocker)) {
                     if (!blockedAttackers.contains(blockedAttacker)) {
@@ -658,7 +661,7 @@ public class PhaseHandler implements java.io.Serializable {
                 }
             }
             // fire blockers declared trigger
-            final HashMap<String, Object> bdRunParams = new HashMap<String, Object>();
+            final Map<String, Object> bdRunParams = Maps.newHashMap();
             bdRunParams.put("Blockers", declaredBlockers);
             bdRunParams.put("Attackers", blockedAttackers);
             game.getTriggerHandler().runTrigger(TriggerType.BlockersDeclared, bdRunParams, false);
@@ -671,7 +674,7 @@ public class PhaseHandler implements java.io.Serializable {
 
             if (!c1.getDamageHistory().getCreatureBlockedThisCombat()) {
                 // Run triggers
-                final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                final Map<String, Object> runParams = Maps.newHashMap();
                 runParams.put("Blocker", c1);
                 runParams.put("Attackers", combat.getAttackersBlockedBy(c1));
                 game.getTriggerHandler().runTrigger(TriggerType.Blocks, runParams, false);
@@ -692,7 +695,7 @@ public class PhaseHandler implements java.io.Serializable {
             }
 
             // Run triggers
-            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Attacker", a);
             runParams.put("Blockers", blockers);
             runParams.put("NumBlockers", blockers.size());
@@ -704,7 +707,7 @@ public class PhaseHandler implements java.io.Serializable {
                 b.addBlockedThisTurn(a);
                 a.addBlockedByThisTurn(b);
 
-            	final HashMap<String, Object> runParams2 = new HashMap<String, Object>();
+            	final Map<String, Object> runParams2 = Maps.newHashMap();
             	runParams2.put("Attacker", a);
             	runParams2.put("Blocker", b);
             	game.getTriggerHandler().runTrigger(TriggerType.AttackerBlockedByCreature, runParams2, false);
