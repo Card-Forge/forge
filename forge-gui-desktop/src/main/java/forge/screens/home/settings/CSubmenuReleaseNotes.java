@@ -67,20 +67,29 @@ public enum CSubmenuReleaseNotes implements ICDoc {
     }
 
     /**
-     * Returns content of CHANGES.txt.
+     * Returns content of README.txt (release) or CHANGES.txt (snapshot).
      */
     private static String getReleaseNotes() {
-        // !! Linux is case-sensitive so file name and extension need to match exactly !!
-        final String filename = ForgeConstants.CHANGES_FILE;
+
+        final String filename = ForgeConstants.CHANGES_FILE_NO_RELEASE;
         final String filePath = FileUtil.pathCombine(System.getProperty("user.dir"), filename);
+
+        //The file packaged with full releases is not the same as the one for snapshots
+        final String filenameRelease = ForgeConstants.CHANGES_FILE;
+        final String filePathRelease = FileUtil.pathCombine(System.getProperty("user.dir"), filenameRelease);
+
         String notes;
 
         if (FileUtil.doesFileExist(filePath)) {
             notes = filePath + "\n\n" + FileUtil.readFileToString(filePath);
+        } else if (FileUtil.doesFileExist(filePathRelease)) {
+            notes = filePathRelease + "\n\n" + FileUtil.readFileToString(filePathRelease);
         } else {
             notes = filePath + "\nis MISSING!";
         }
 
         return notes;
+
     }
+
 }

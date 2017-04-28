@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -31,14 +31,14 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 
-/** 
- * Displays contents of CHANGES.txt file.
+/**
+ * Displays contents of README.txt (release) or CHANGES.txt (snapshot) file.
  *
  * @version $Id$
- * 
+ *
  */
 public enum VSubmenuReleaseNotes implements IVSubmenu<CSubmenuReleaseNotes> {
-    /** */
+
     SINGLETON_INSTANCE;
 
     // Fields used with interface IVDoc
@@ -49,10 +49,7 @@ public enum VSubmenuReleaseNotes implements IVSubmenu<CSubmenuReleaseNotes> {
     private SkinnedTextArea tar;
     private final FScrollPane scroller;
 
-    /**
-     * Constructor.
-     */
-    private VSubmenuReleaseNotes() {
+    VSubmenuReleaseNotes() {
         pnlMain.setOpaque(false);
         pnlMain.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
 
@@ -165,4 +162,5 @@ public enum VSubmenuReleaseNotes implements IVSubmenu<CSubmenuReleaseNotes> {
             }
         });
     }
+
 }

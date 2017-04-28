@@ -45,10 +45,11 @@ public final class ForgeConstants {
     public static final String NET_DECKS_LIST_FILE                   = LISTS_DIR + "net-decks.txt";
     public static final String NET_DECKS_COMMANDER_LIST_FILE         = LISTS_DIR + "net-decks-commander.txt";
 
-    public static final String CHANGES_FILE = ASSETS_DIR + "CHANGES.txt";
-    public static final String LICENSE_FILE = ASSETS_DIR + "LICENSE.txt";
-    public static final String README_FILE  = ASSETS_DIR + "README.txt";
-    public static final String HOWTO_FILE   = RES_DIR + "howto.txt";
+    public static final String CHANGES_FILE            = ASSETS_DIR + "README.txt";
+    public static final String CHANGES_FILE_NO_RELEASE = ASSETS_DIR + "CHANGES.txt";
+    public static final String LICENSE_FILE            = ASSETS_DIR + "LICENSE.txt";
+    public static final String README_FILE             = ASSETS_DIR + "MANUAL.txt";
+    public static final String HOWTO_FILE              = RES_DIR + "howto.txt";
 
     public static final String DRAFT_DIR           = RES_DIR + "draft" + PATH_SEPARATOR;
     public static final String DRAFT_RANKINGS_FILE = DRAFT_DIR + "rankings.txt";
