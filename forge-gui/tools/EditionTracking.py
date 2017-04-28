@@ -63,7 +63,7 @@ def initializeOracleText():
 		print "Need to download Json file..."
 		r = requests.get(allJsonUrl)
 		with open(allJson, 'w') as f:
-			f.write(r.text)
+			f.write(r.text.encode("utf-8"))
 
 		oracleDict = r.json()
 
