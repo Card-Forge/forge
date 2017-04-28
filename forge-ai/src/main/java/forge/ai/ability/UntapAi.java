@@ -148,6 +148,7 @@ public class UntapAi extends SpellAbilityAi {
         final String[] tappablePermanents = { "Creature", "Land", "Artifact" };
         untapList = CardLists.getValidCards(untapList, tappablePermanents, source.getController(), source, sa);
 
+        sa.resetTargets();
         while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
             Card choice = null;
 
