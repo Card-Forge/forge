@@ -1469,6 +1469,7 @@ forge-gui/MANUAL.txt -text
 forge-gui/README.txt -text
 forge-gui/forge.profile.properties.example -text
 forge-gui/pom.xml -text
+forge-gui/release-files/ANNOUNCEMENTS.txt -text
 forge-gui/release-files/CHANGES.txt -text
 forge-gui/release-files/CONTRIBUTORS.txt -text
 forge-gui/release-files/INSTALLATION.txt -text
