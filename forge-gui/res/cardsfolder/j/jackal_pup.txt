@@ -1,6 +1,6 @@
 Name:Jackal Pup
 ManaCost:R
-Types:Creature Hound
+Types:Creature Jackal
 PT:2/1
 T:Mode$ DamageDone | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to you.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | NumDmg$ X | Defined$ You | References$ X
