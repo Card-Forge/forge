@@ -44,6 +44,9 @@ public class MillAi extends SpellAbilityAi {
     
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
+        if ("ExileAndPlayUntilEOT".equals(sa.getParam("AILogic"))) {
+            return ph.is(PhaseType.MAIN1) && ph.isPlayerTurn(ai);
+        }
         if ("You".equals(sa.getParam("Defined")) && !(!SpellAbilityAi.isSorcerySpeed(sa) && ph.is(PhaseType.END_OF_TURN)
                 && ph.getNextTurn().equals(ai))) {
             return false; // only self-mill at opponent EOT
