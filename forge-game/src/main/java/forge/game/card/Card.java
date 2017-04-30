@@ -2645,10 +2645,14 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final CardTypeView getType() {
+        return getType(currentState);
+    }
+    
+    public final CardTypeView getType(CardState state) {
         if (changedCardTypes.isEmpty()) {
-            return currentState.getType();
+            return state.getType();
         }
-        return currentState.getType().getTypeWithChanges(changedCardTypes);
+        return state.getType().getTypeWithChanges(changedCardTypes);
     }
 
     public Map<Long, CardChangedType> getChangedCardTypes() {
@@ -2746,8 +2750,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final ColorSet determineColor() {
+        return determineColor(currentState);
+    }
+    public final ColorSet determineColor(CardState state) {
         final Iterable<CardColor> colorList = changedCardColors.values();
-        byte colors = currentState.getColor();
+        byte colors = state.getColor();
         for (final CardColor cc : colorList) {
             if (cc.isAdditional()) {
                 colors |= cc.getColorMask();
@@ -2838,10 +2845,11 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     private synchronized Pair<Integer, Integer> getLatestPT() {
         // Find latest set power
+        // TODO Java 1.8 use comparingLong
         Collections.sort(newPT, new Comparator<CardPowerToughness>() {
             @Override
             public int compare(CardPowerToughness o1, CardPowerToughness o2) {
-                return o1.getTimestamp() < o2.getTimestamp() ? -1 : o1.getTimestamp() == o2.getTimestamp() ? 0 : 1;
+                return Long.compare(o1.getTimestamp(),o2.getTimestamp());
             }
         });
 
@@ -3875,49 +3883,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (source.hasChosenCard(this)) {
                 return false;
             }
-        }
-        // ... Card colors
-        else if (property.contains("White") || property.contains("Blue") || property.contains("Black")
-                || property.contains("Red") || property.contains("Green")) {
-            boolean mustHave = !property.startsWith("non");
-            boolean withSource = property.endsWith("Source");
-            if (withSource && hasKeyword("Colorless Damage Source")) {
-                return false;
-            }
-
-            final String colorName = property.substring(mustHave ? 0 : 3, property.length() - (withSource ? 6 : 0));
-
-            int desiredColor = MagicColor.fromName(colorName);
-            boolean hasColor = CardUtil.getColors(this).hasAnyColor(desiredColor);
-            if (mustHave != hasColor)
-                return false;
-
-        } else if (property.contains("Colorless")) { // ... Card is colorless
-            boolean non = property.startsWith("non");
-            boolean withSource = property.endsWith("Source");
-            if (non && withSource && hasKeyword("Colorless Damage Source")) {
-                return false;
-            }
-            if (non == CardUtil.getColors(this).isColorless()) return false;
-
-        } else if (property.contains("MultiColor")) { // ... Card is multicolored
-            if (property.endsWith("Source") && hasKeyword("Colorless Damage Source")) return false;
-            if (property.startsWith("non") == CardUtil.getColors(this).isMulticolor()) return false;
-
-        } else if (property.contains("MonoColor")) { // ... Card is monocolored
-            if (property.endsWith("Source") && hasKeyword("Colorless Damage Source")) return false;
-            if (property.startsWith("non") == CardUtil.getColors(this).isMonoColor()) return false;
-
-        } else if (property.startsWith("ChosenColor")) {
-            if (property.endsWith("Source") && hasKeyword("Colorless Damage Source")) return false;
-            if (!source.hasChosenColor() || !CardUtil.getColors(this).hasAnyColor(MagicColor.fromName(source.getChosenColor())))
-                return false;
-
-        } else if (property.startsWith("AnyChosenColor")) {
-            if (property.endsWith("Source") && hasKeyword("Colorless Damage Source")) return false;
-            if (!source.hasChosenColor() || !CardUtil.getColors(this).hasAnyColor(ColorSet.fromNames(source.getChosenColors()).getColor()))
-                return false;
-
         } else if (property.equals("DoubleFaced")) {
             if (!isDoubleFaced()) {
                 return false;
@@ -5111,9 +5076,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else if (property.startsWith("power") || property.startsWith("toughness")
                 || property.startsWith("cmc") || property.startsWith("totalPT")) {
             int x;
-            int x2 = -1; // used for the special case when counting TopOfLibraryCMC for a split card and then testing against it
             int y = 0;
-            int y2 = -1; // alternative value for the second split face of a split card
             String rhs = "";
 
             if (property.startsWith("power")) {
@@ -5124,12 +5087,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 y = getNetToughness();
             } else if (property.startsWith("cmc")) {
                 rhs = property.substring(5);
-                if (isSplitCard() && getCurrentStateName() == CardStateName.Original) {
-                    y = getState(CardStateName.LeftSplit).getManaCost().getCMC();
-                    y2 = getState(CardStateName.RightSplit).getManaCost().getCMC();
-                } else {
-                    y = getCMC();
-                }
+                y = getCMC();
             } else if (property.startsWith("totalPT")) {
                 rhs = property.substring(10);
                 y = getNetPower() + getNetToughness();
@@ -5140,18 +5098,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                 x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
             }
 
-            if (y2 == -1) {
-                if (!Expressions.compare(y, property, x)) {
-                    if (x2 == -1 || !Expressions.compare(y, property, x2)) {
-                        return false;
-                    }
-                }
-            } else {
-                if (!Expressions.compare(y, property, x) && !Expressions.compare(y2, property, x)) {
-                    if (x2 == -1 || (!Expressions.compare(y, property, x2) && !Expressions.compare(y2, property, x2))) {
-                        return false;
-                    }
-                }
+            if (!Expressions.compare(y, property, x)) {
+                return false;
             }
         }
 
@@ -5388,15 +5336,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (isRenowned()) {
                 return false;
             }
-        } else if (property.startsWith("non")) {
-            // ... Other Card types
-            if (getType().hasStringType(property.substring(3))) {
-                return false;
-            }
-        } else if (property.equals("CostsPhyrexianMana")) {
-            if (!currentState.getManaCost().hasPhyrexian()) {
-                return false;
-            }
         } else if (property.startsWith("RememberMap")) {
             System.out.println(source.getRememberMap());
             for (SpellAbility sa : source.getSpellAbilities()) {
@@ -5424,34 +5363,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (source.hasImprintedCard(this)) {
                 return false;
             }
-        } else if (property.equals("hasActivatedAbilityWithTapCost")) {
-            for (final SpellAbility sa : getSpellAbilities()) {
-                if (sa.isAbility() && (sa.getPayCosts() != null) && sa.getPayCosts().hasTapCost()) {
-                    return true;
-                }
-            }
-            return false;
-        } else if (property.equals("hasActivatedAbility")) {
-            for (final SpellAbility sa : getSpellAbilities()) {
-                if (sa.isAbility()) {
-                    return true;
-                }
-            }
-            return false;
-        } else if (property.equals("hasManaAbility")) {
-            for (final SpellAbility sa : getSpellAbilities()) {
-                if (sa.isManaAbility()) {
-                    return true;
-                }
-            }
-            return false;
-        } else if (property.equals("hasNonManaActivatedAbility")) {
-            for (final SpellAbility sa : getSpellAbilities()) {
-                if (sa.isAbility() && !sa.isManaAbility()) {
-                    return true;
-                }
-            }
-            return false;
         } else if (property.equals("NoAbilities")) {
             if (!((getAbilityText().trim().equals("") || isFaceDown()) && (getUnhiddenKeywords().isEmpty()))) {
                 return false;
@@ -5496,39 +5407,18 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!isInZone(realZone)) {
                 return false;
             }
-        } else if (property.equals("ChosenType")) {
-            if (!getType().hasStringType(source.getChosenType())) {
-                return false;
-            }
-        } else if (property.equals("IsNotChosenType")) {
-            if (getType().hasStringType(source.getChosenType())) {
-                return false;
-            }
         } else if (property.equals("IsCommander")) {
             if (!isCommander) {
                 return false;
             }
-        } else if (property.startsWith("HasSVar")) {
-        	final String svar = property.substring(8);
-        	if (!hasSVar(svar)) {
-                return false;
-            }
-        } else if (property.startsWith("HasSubtype")) {
-            final String subType = property.substring(11);
-            if (!getType().hasSubtype(subType)) {
-                return false;
-            }
-        } else if (property.startsWith("HasNoSubtype")) {
-            final String subType = property.substring(13);
-            if (getType().hasSubtype(subType)) {
-                return false;
-            }
         } else {
-            if (!getType().hasStringType(property)) {
+            // StringType done in CardState
+            if (!this.currentState.hasProperty(property, sourceController, source, spellAbility)) {
                 return false;
             }
         }
         return true;
+        
     }
 
     public final boolean isImmutable() {
