@@ -957,12 +957,12 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     @Override
     public final boolean canReceiveCounters(final CounterType type) {
-        if (hasKeyword("CARDNAME can't have counters placed on it.")) {
+        if (hasKeyword("CARDNAME can't have counters put on it.")) {
             return false;
         }
         if (isCreature() && type == CounterType.M1M1) {
             for (final Card c : getController().getCreaturesInPlay()) { // look for Melira, Sylvok Outcast
-                if (c.hasKeyword("Creatures you control can't have -1/-1 counters placed on them.")) {
+                if (c.hasKeyword("Creatures you control can't have -1/-1 counters put on them.")) {
                     return false;
                 }
             }

@@ -854,7 +854,7 @@ public class ComputerUtilCombat {
         if (dealsFirstStrikeDamage(attacker, withoutAbilities, null)
                 && (attacker.hasKeyword("Wither") || attacker.hasKeyword("Infect"))
                 && !dealsFirstStrikeDamage(blocker, withoutAbilities, null)
-                && !blocker.hasKeyword("CARDNAME can't have counters placed on it.")) {
+                && !blocker.hasKeyword("CARDNAME can't have counters put on it.")) {
             power -= attacker.getNetCombatDamage();
         }
 
@@ -1192,7 +1192,7 @@ public class ComputerUtilCombat {
             if (ComputerUtilCombat.dealsFirstStrikeDamage(blocker, withoutAbilities, combat)
                     && (blocker.hasKeyword("Wither") || blocker.hasKeyword("Infect"))
                     && !ComputerUtilCombat.dealsFirstStrikeDamage(attacker, withoutAbilities, combat) 
-                    && !attacker.hasKeyword("CARDNAME can't have counters placed on it.")) {
+                    && !attacker.hasKeyword("CARDNAME can't have counters put on it.")) {
                 power -= blocker.getNetCombatDamage();
             }
             theTriggers.addAll(blocker.getTriggers());

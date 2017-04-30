@@ -868,7 +868,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean canReceiveCounters(final CounterType type) {
-        if (hasKeyword("PLAYER can't have counters placed on him or her.")) {
+        if (hasKeyword("PLAYER can't have counters put on him or her.")) {
             return false;
         }
         if (type == CounterType.POISON) {
