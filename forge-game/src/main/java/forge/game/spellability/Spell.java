@@ -81,13 +81,10 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         }
 
         boolean isInstant = card.isInstant();
-        // special case for Aftermath split cards
-        if (card.isSplitCard() && card.hasKeyword("Aftermath")) {
-            if (card.getZone().is(ZoneType.Graveyard)) {
-                isInstant = card.getState(CardStateName.RightSplit).getType().isInstant();
-            } else {
-                isInstant = card.getState(CardStateName.LeftSplit).getType().isInstant();
-            }
+        // special case for split cards
+        if (card.isSplitCard()) {
+            CardStateName name = isLeftSplit() ? CardStateName.LeftSplit : CardStateName.RightSplit;
+            isInstant = card.getState(name).getType().isInstant();
         }
 
         boolean flash = card.hasKeyword("Flash");
