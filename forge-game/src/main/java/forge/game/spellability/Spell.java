@@ -80,6 +80,16 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             return false;
         }
 
+        boolean isInstant = card.isInstant();
+        // special case for Aftermath split cards
+        if (card.isSplitCard() && card.hasKeyword("Aftermath")) {
+            if (card.getZone().is(ZoneType.Graveyard)) {
+                isInstant = card.getState(CardStateName.RightSplit).getType().isInstant();
+            } else {
+                isInstant = card.getState(CardStateName.LeftSplit).getType().isInstant();
+            }
+        }
+
         boolean flash = card.hasKeyword("Flash");
 
         if (this.hasParam("Bestow") && !card.isBestowed() && !card.isInZone(ZoneType.Battlefield)) {
@@ -96,7 +106,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(card));
         }
 
-        if (!(card.isInstant() || activator.canCastSorcery() || flash
+        if (!(isInstant || activator.canCastSorcery() || flash
                || this.getRestrictions().isInstantSpeed()
                || activator.hasKeyword("You may cast nonland cards as though they had flash.")
                || card.hasStartOfKeyword("You may cast CARDNAME as though it had flash.")
