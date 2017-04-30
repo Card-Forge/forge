@@ -85,6 +85,10 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
             label = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text(text).fontStyle(Font.BOLD).fontSize(18).build();
             pnlContent.add(label, "w 90%!, h 25px!, center, gap 0 0 0 36px");
 
+            text = "You're running " + System.getProperty("java.version") + ". You need at least version 1.8.0_101.";
+            label = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text(text).fontStyle(Font.BOLD).fontSize(18).build();
+            pnlContent.add(label, "w 90%!, h 25px!, center, gap 0 0 0 36px");
+
         }
 
         pnlContent.add(btnImportPictures, constraintsBTN);
