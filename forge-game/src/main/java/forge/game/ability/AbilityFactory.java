@@ -46,6 +46,7 @@ public final class AbilityFactory {
             "WinSubAbility", "OtherwiseSubAbility", // Clash
             "ChooseNumberSubAbility", "Lowest", "Highest", // ChooseNumber
             "HeadsSubAbility", "TailsSubAbility", "LoseSubAbility", // FlipCoin
+            "TrueSubAbility", "FalseSubAbility", // Branch
             "ChosenPile", "UnchosenPile", // MultiplePiles & TwoPiles
             "RepeatSubAbility", // Repeat & RepeatEach
             "Execute" // DelayedTrigger

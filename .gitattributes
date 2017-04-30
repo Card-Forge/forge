@@ -350,6 +350,7 @@ forge-game/src/main/java/forge/game/ability/effects/BecomeMonarchEffect.java -te
 forge-game/src/main/java/forge/game/ability/effects/BecomesBlockedEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/BidLifeEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/BondEffect.java -text
+forge-game/src/main/java/forge/game/ability/effects/BranchEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ChangeTargetsEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ChangeTextEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ChangeZoneAllEffect.java -text
@@ -16720,6 +16721,7 @@ forge-gui/res/cardsfolder/upcoming/angel_of_sanctions.txt -text
 forge-gui/res/cardsfolder/upcoming/angler_drake.txt -text
 forge-gui/res/cardsfolder/upcoming/anointed_procession.txt -text
 forge-gui/res/cardsfolder/upcoming/anointer_priest.txt -text
+forge-gui/res/cardsfolder/upcoming/approach_of_the_second_sun.txt -text
 forge-gui/res/cardsfolder/upcoming/archfiend_of_ifnir.txt -text
 forge-gui/res/cardsfolder/upcoming/aven_initiate.txt -text
 forge-gui/res/cardsfolder/upcoming/aven_wind_guide.txt -text

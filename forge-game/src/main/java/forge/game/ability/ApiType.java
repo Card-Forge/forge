@@ -26,6 +26,7 @@ public enum ApiType {
     BecomesBlocked (BecomesBlockedEffect.class),
     BidLife (BidLifeEffect.class),
     Bond (BondEffect.class),
+    Branch (BranchEffect.class),
     ChangeTargets (ChangeTargetsEffect.class),
     ChangeText (ChangeTextEffect.class),
     ChangeZone (ChangeZoneEffect.class),
