@@ -22,6 +22,7 @@ public class AltWinAchievements extends AchievementCollection {
 
     @Override
     protected void addAchievements() {
+        add("Approach of the Second Sun", "The Omen", "So wondrous... But is it a harbinger of something divine or demonic?");
         add("Azor's Elocutors", "The Filibuster", "Talk might be cheap, but it can buy you victory!");
         add("Barren Glory", "The Clean Slate", "When you have nothing, you can lose nothing... so you can win everything!");
         add("Battle of Wits", "The Great Library", "So many answers, so little time to look through them...");
