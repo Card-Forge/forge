@@ -552,7 +552,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // hostCard in AF is not the same object that's on the battlefield
         // verified by System.identityHashCode(card);
         final Card tmp = sa.getHostCard();
-        tmp.setCanCounter(true); // reset mana pumped counter magic flag
+        if (!(sa instanceof WrappedAbility && sa.isTrigger())) { tmp.setCanCounter(true); } // reset mana pumped counter magic flag
         if (tmp.getClones().size() > 0) {
             for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
                 if (c.equals(tmp)) {

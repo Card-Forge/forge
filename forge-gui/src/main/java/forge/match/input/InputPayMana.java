@@ -251,6 +251,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         }
 
         boolean choice = true;
+        boolean isPayingGeneric = false;
         if (guessAbilityWithRequiredColors) {
             // express Mana Choice
             if (colorNeeded == 0) {
@@ -258,6 +259,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 //avoid unnecessary prompt by pretending we need White
                 //for the sake of "Add one mana of any color" effects
                 colorNeeded = MagicColor.WHITE;
+                isPayingGeneric = true; // for further processing
             }
             else {
                 final List<SpellAbility> colorMatches = new ArrayList<SpellAbility>();
@@ -277,6 +279,11 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                     abilities = colorMatches;
                 }
             }
+        }
+
+        // Exceptions for cards that have conditional abilities which are better handled manually
+        if (card.getName().equals("Cavern of Souls") && isPayingGeneric) {
+            choice = true;
         }
 
         final SpellAbility chosen;
