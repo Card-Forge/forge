@@ -450,6 +450,14 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     libraryPosition = sa.hasParam("LibraryPositionAlternative") ? Integer.parseInt(sa.getParam("LibraryPositionAlternative")) : 0;
                 }
 
+                // If a card is Exiled from the stack, remove its spells from the stack
+                if (sa.hasParam("Fizzle")) {
+                    if (tgtC.isInZone(ZoneType.Exile) || tgtC.isInZone(ZoneType.Hand) || tgtC.isInZone(ZoneType.Stack)) {
+                        // This only fizzles spells, not anything else.
+                        game.getStack().remove(tgtC);
+                    }
+                }
+
                 movedCard = game.getAction().moveToLibrary(tgtC, libraryPosition);
 
             } else {
