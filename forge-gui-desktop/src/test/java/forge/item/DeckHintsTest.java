@@ -1,11 +1,12 @@
 package forge.item;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.google.common.collect.Iterables;
+import forge.card.ColorSet;
 import junit.framework.Assert;
 
 import org.testng.annotations.BeforeTest;
@@ -153,6 +154,57 @@ public class DeckHintsTest {
         list.add(readCard("assault_griffin.txt"));
 
         Assert.assertEquals(1, hints.filter(list).size());
+    }
+
+    /**
+     * Test for finding dual lands for deck generation.
+     */
+    @Test(timeOut = 1000, enabled = true)
+    void testFindDualLands() {
+        List<String> cardNames= Arrays.asList("tundra.txt", "hallowed_fountain.txt", "flooded_strand.txt", "prairie_stream.txt", "sunken_hollow.txt", "smoldering_marsh.txt");
+        List<PaperCard> cards = new ArrayList<>();
+        for (String name:cardNames){
+            cards.add(readCard(name));
+        }
+        final String pattern="Add \\{([WUBRG])\\} or \\{([WUBRG])\\} to your mana pool";
+        Pattern p = Pattern.compile(pattern);
+        for (PaperCard card:cards){
+            System.out.println(card.getRules().getOracleText());
+            Matcher matcher = p.matcher(card.getRules().getOracleText());
+            while (matcher.find()) {
+                System.out.println("Full match: " + matcher.group(0));
+                for (int i = 1; i <= matcher.groupCount(); i++) {
+                    System.out.println("Group " + i + ": " + matcher.group(i));
+                }
+            }
+        }
+
+        final String fetchPattern="Search your library for a ([^\\s]*) or ([^\\s]*) card";
+        final List<String> dLands = new ArrayList<String>();
+        Map<String,String> colorLookup= new HashMap<>();
+        colorLookup.put("Plains","W");
+        colorLookup.put("Forest","G");
+        colorLookup.put("Mountain","R");
+        colorLookup.put("Island","U");
+        colorLookup.put("Swamp","B");
+        Pattern p2 = Pattern.compile(fetchPattern);
+        for (PaperCard card:cards){
+            System.out.println(card.getName());
+            Matcher matcher = p2.matcher(card.getRules().getOracleText());
+            while (matcher.find()) {
+                List<String> manaColorNames = new ArrayList<>();
+                System.out.println(card.getName());
+                for (int i = 1; i <= matcher.groupCount(); i++) {
+                    manaColorNames.add(colorLookup.get(matcher.group(i)));
+                }
+                System.out.println(manaColorNames.toString());
+                ColorSet manaColorSet = ColorSet.fromNames(manaColorNames);
+            }
+        }
+        System.out.println(dLands.toString());
+        return;
+
+        //Assert.assertNotNull(has);
     }
 
     /**

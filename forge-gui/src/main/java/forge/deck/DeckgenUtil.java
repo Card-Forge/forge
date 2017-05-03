@@ -13,6 +13,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.deck.generation.*;
 import forge.game.GameType;
+import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.itemmanager.IItemManager;
 import forge.model.FModel;
@@ -44,34 +45,48 @@ public class DeckgenUtil {
      * @param selection {@link java.lang.String} array
      * @return {@link forge.deck.Deck}
      */
-    public static Deck buildColorDeck(List<String> selection, boolean forAi) {
+
+    public static Deck buildColorDeck(List<String> selection, Predicate<PaperCard> formatFilter, boolean forAi) {
         try {
             final Deck deck;
             String deckName = null;
-    
+
             DeckGeneratorBase gen = null;
             CardDb cardDb = FModel.getMagicDb().getCommonCards();
-            if (selection.size() == 1) {
-                gen = new DeckGeneratorMonoColor(cardDb, DeckFormat.Constructed, selection.get(0));
-            }
-            else if (selection.size() == 2) {
-                gen = new DeckGenerator2Color(cardDb, DeckFormat.Constructed, selection.get(0), selection.get(1));
-            }
-            else if (selection.size() == 3) {
-                gen = new DeckGenerator3Color(cardDb, DeckFormat.Constructed, selection.get(0), selection.get(1), selection.get(2));
-            }
-            else {
-                gen = new DeckGenerator5Color(cardDb, DeckFormat.Constructed);
-                deckName = "5 colors";
+            if (formatFilter == null){
+                if (selection.size() == 1) {
+                    gen = new DeckGeneratorMonoColor(cardDb, DeckFormat.Constructed,selection.get(0));
+                }
+                else if (selection.size() == 2) {
+                    gen = new DeckGenerator2Color(cardDb, DeckFormat.Constructed,selection.get(0), selection.get(1));
+                }
+                else if (selection.size() == 3) {
+                    gen = new DeckGenerator3Color(cardDb, DeckFormat.Constructed,selection.get(0), selection.get(1), selection.get(2));
+                }
+                else {
+                    gen = new DeckGenerator5Color(cardDb, DeckFormat.Constructed);
+                    deckName = "5 colors";
+                }
+            }else {
+                if (selection.size() == 1) {
+                    gen = new DeckGeneratorMonoColor(cardDb, DeckFormat.Constructed, formatFilter, selection.get(0));
+                } else if (selection.size() == 2) {
+                    gen = new DeckGenerator2Color(cardDb, DeckFormat.Constructed, formatFilter, selection.get(0), selection.get(1));
+                } else if (selection.size() == 3) {
+                    gen = new DeckGenerator3Color(cardDb, DeckFormat.Constructed, formatFilter, selection.get(0), selection.get(1), selection.get(2));
+                } else {
+                    gen = new DeckGenerator5Color(cardDb, DeckFormat.Constructed, formatFilter);
+                    deckName = "5 colors";
+                }
             }
             gen.setSingleton(FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS));
             gen.setUseArtifacts(!FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
             final CardPool cards = gen.getDeck(60, forAi);
-    
+
             if (null == deckName) {
                 deckName = Lang.joinHomogenous(Arrays.asList(selection));
             }
-    
+
             // After generating card lists, build deck.
             deck = new Deck("Random deck : " + deckName);
             deck.setDirectory("generated/color");
@@ -81,7 +96,7 @@ public class DeckgenUtil {
         catch (Exception e) {
             e.printStackTrace();
         }
-        return buildColorDeck(selection, forAi); //try again if previous color deck couldn't be generated
+        return buildColorDeck(selection, formatFilter, forAi); //try again if previous color deck couldn't be generated
     }
 
     public static QuestEvent getQuestEvent(final String name) {
@@ -99,6 +114,17 @@ public class DeckgenUtil {
     }
 
     /** @return {@link forge.deck.Deck} */
+    public static Deck getRandomColorDeck(Predicate<PaperCard> formatFilter, boolean forAi) {
+        final int[] colorCount = new int[] {1, 2, 3};
+        final int count = colorCount[MyRandom.getRandom().nextInt(colorCount.length)];
+        final List<String> selection = new ArrayList<String>();
+
+        // A simulated selection of "random 1" will trigger the AI selection process.
+        for (int i = 0; i < count; i++) { selection.add("Random"); }
+        return DeckgenUtil.buildColorDeck(selection, formatFilter, forAi);
+    }
+
+    /** @return {@link forge.deck.Deck} */
     public static Deck getRandomColorDeck(boolean forAi) {
         final int[] colorCount = new int[] {1, 2, 3, 5};
         final int count = colorCount[MyRandom.getRandom().nextInt(colorCount.length)];
@@ -106,8 +132,7 @@ public class DeckgenUtil {
 
         // A simulated selection of "random 1" will trigger the AI selection process.
         for (int i = 0; i < count; i++) { selection.add("Random"); }
-
-        return DeckgenUtil.buildColorDeck(selection, forAi);
+        return DeckgenUtil.buildColorDeck(selection, null, forAi);
     }
 
     /** @return {@link forge.deck.Deck} */

@@ -17,12 +17,14 @@
  */
 package forge.deck.generation;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 import forge.card.ColorSet;
 import forge.deck.CardPool;
 import forge.deck.DeckFormat;
 
+import forge.item.PaperCard;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.List;
@@ -65,12 +67,21 @@ public class DeckGenerator5Color extends DeckGeneratorBase {
     /**
      * Instantiates a new generate5 color deck.
      */
+    public DeckGenerator5Color(IDeckGenPool pool0, DeckFormat format0, Predicate<PaperCard> formatFilter0) {
+        super(pool0, format0, formatFilter0);
+
+    }
+
     public DeckGenerator5Color(IDeckGenPool pool0, DeckFormat format0) {
         super(pool0, format0);
         format0.adjustCMCLevels(cmcLevels);
         colors = ColorSet.fromMask(0).inverse();
     }
 
+    private void initialize(DeckFormat format0) {
+        format0.adjustCMCLevels(cmcLevels);
+        colors = ColorSet.fromMask(0).inverse();
+    }
 
     @Override
     public final CardPool getDeck(final int size, final boolean forAi) {
@@ -91,7 +102,6 @@ public class DeckGenerator5Color extends DeckGeneratorBase {
         numLands -= dblsAdded;
 
         addBasicLand(numLands);
-        trace.append("DeckSize:").append(tDeck.countAll()).append("\n");
         return tDeck;
     }
 }

@@ -70,6 +70,8 @@ public enum CSubmenuGauntletQuick implements ICDoc {
         // Find appropriate filename for new save, create and set new save file.
         final List<DeckType> allowedDeckTypes = new ArrayList<DeckType>();
         if (view.getBoxColorDecks().isSelected()) { allowedDeckTypes.add(DeckType.COLOR_DECK); }
+        if (view.getBoxStandardColorDecks().isSelected()) { allowedDeckTypes.add(DeckType.STANDARD_COLOR_DECK); }
+        if (view.getBoxModernColorDecks().isSelected()) { allowedDeckTypes.add(DeckType.MODERN_COLOR_DECK); }
         if (view.getBoxThemeDecks().isSelected()) { allowedDeckTypes.add(DeckType.THEME_DECK); }
         if (view.getBoxUserDecks().isSelected()) { allowedDeckTypes.add(DeckType.CUSTOM_DECK); }
         if (view.getBoxQuestDecks().isSelected()) { allowedDeckTypes.add(DeckType.QUEST_OPPONENT_DECK); }

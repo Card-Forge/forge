@@ -8,6 +8,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.google.common.base.Predicate;
+import forge.item.PaperCard;
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
@@ -135,10 +137,10 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         updateDecks(DeckProxy.getAllConstructedDecks(), ItemManagerConfig.CONSTRUCTED_DECKS);
     }
 
-    private void updateColors() {
+    private void updateColors(Predicate<PaperCard> formatFilter) {
         lstDecks.setAllowMultipleSelections(true);
 
-        lstDecks.setPool(ColorDeckGenerator.getColorDecks(lstDecks, isAi));
+        lstDecks.setPool(ColorDeckGenerator.getColorDecks(lstDecks, formatFilter, isAi));
         lstDecks.setup(ItemManagerConfig.STRING_ONLY);
 
         btnRandom.setText("Random Colors");
@@ -277,7 +279,13 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 updateCustom();
                 break;
             case COLOR_DECK:
-                updateColors();
+                updateColors(null);
+                break;
+            case STANDARD_COLOR_DECK:
+                updateColors(FModel.getFormats().getStandard().getFilterPrinted());
+                break;
+            case MODERN_COLOR_DECK:
+                updateColors(FModel.getFormats().getModern().getFilterPrinted());
                 break;
             case THEME_DECK:
                 updateThemes();

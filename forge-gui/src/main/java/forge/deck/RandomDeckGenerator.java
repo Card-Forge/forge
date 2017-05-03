@@ -8,6 +8,7 @@ import com.google.common.collect.Iterables;
 
 import forge.game.GameType;
 import forge.game.IHasGameType;
+import forge.model.FModel;
 import forge.quest.QuestController;
 import forge.util.Aggregates;
 
@@ -91,12 +92,26 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
                 case QUEST_OPPONENT_DECK:
                     return Aggregates.random(DeckProxy.getAllQuestEventAndChallenges()).getDeck();
                 case COLOR_DECK:
-                    final List<String> colors = new ArrayList<String>();
-                    final int count = Aggregates.randomInt(1, 3);
+                    List<String> colors = new ArrayList<String>();
+                    int count = Aggregates.randomInt(1, 3);
                     for (int i = 1; i <= count; i++) {
                         colors.add("Random " + i);
                     }
-                    return DeckgenUtil.buildColorDeck(colors, isAi);
+                    return DeckgenUtil.buildColorDeck(colors, null, isAi);
+                case STANDARD_COLOR_DECK:
+                    colors = new ArrayList<String>();
+                    count = Aggregates.randomInt(1, 3);
+                    for (int i = 1; i <= count; i++) {
+                        colors.add("Random " + i);
+                    }
+                    return DeckgenUtil.buildColorDeck(colors, FModel.getFormats().getStandard().getFilterPrinted(), isAi);
+                case MODERN_COLOR_DECK:
+                    colors = new ArrayList<String>();
+                    count = Aggregates.randomInt(1, 3);
+                    for (int i = 1; i <= count; i++) {
+                        colors.add("Random " + i);
+                    }
+                    return DeckgenUtil.buildColorDeck(colors, FModel.getFormats().getModern().getFilterPrinted(), isAi);
                 case THEME_DECK:
                     return Aggregates.random(DeckProxy.getAllThemeDecks()).getDeck();
                 default:

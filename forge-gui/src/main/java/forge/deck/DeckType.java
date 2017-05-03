@@ -12,6 +12,8 @@ public enum DeckType {
     PRECONSTRUCTED_DECK("Preconstructed Decks"),
     QUEST_OPPONENT_DECK ("Quest Opponent Decks"),
     COLOR_DECK ("Random Color Decks"),
+    STANDARD_COLOR_DECK ("Random Standard Color Decks"),
+    MODERN_COLOR_DECK ("Random Modern Color Decks"),
     THEME_DECK ("Random Theme Decks"),
     RANDOM_DECK ("Random Decks"),
     NET_DECK ("Net Decks"),
@@ -22,6 +24,8 @@ public enum DeckType {
         DeckType.PRECONSTRUCTED_DECK,
         DeckType.QUEST_OPPONENT_DECK,
         DeckType.COLOR_DECK,
+        DeckType.STANDARD_COLOR_DECK,
+        DeckType.MODERN_COLOR_DECK,
         DeckType.THEME_DECK,
         DeckType.RANDOM_DECK,
         DeckType.NET_DECK

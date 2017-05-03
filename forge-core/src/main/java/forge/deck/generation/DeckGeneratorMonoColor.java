@@ -17,6 +17,7 @@
  */
 package forge.deck.generation;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 import forge.card.ColorSet;
@@ -24,6 +25,7 @@ import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.deck.DeckFormat;
 
+import forge.item.PaperCard;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.List;
@@ -65,8 +67,17 @@ public class DeckGeneratorMonoColor extends DeckGeneratorBase {
     // 4x 7 - 20
     // = 52x - card pool (before further random filtering)
 
+    public DeckGeneratorMonoColor(IDeckGenPool pool0, DeckFormat format0, Predicate<PaperCard> formatFilter0, final String clr1) {
+        super(pool0, format0, formatFilter0);
+        initialize(clr1);
+    }
+
     public DeckGeneratorMonoColor(IDeckGenPool pool0, DeckFormat format0, final String clr1) {
         super(pool0, format0);
+        initialize(clr1);
+    }
+
+    public void initialize(final String clr1){
         if (MagicColor.fromName(clr1) == 0) {
             int color1 = r.nextInt(5);
             colors = ColorSet.fromMask(MagicColor.WHITE << color1);
@@ -90,7 +101,6 @@ public class DeckGeneratorMonoColor extends DeckGeneratorBase {
 
         adjustDeckSize(size);
         trace.append("DeckSize:").append(tDeck.countAll()).append("\n");
-
         return tDeck;
     }
 }

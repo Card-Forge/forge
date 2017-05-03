@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
+import forge.item.IPaperCard;
 import forge.item.PaperCard;
 
 public class DeckGenPool implements IDeckGenPool {
@@ -37,12 +39,18 @@ public class DeckGenPool implements IDeckGenPool {
 
     @Override
     public PaperCard getCard(String name, String edition) {
-        return cards.get(name);
+        Predicate<PaperCard> filter = Predicates.and(IPaperCard.Predicates.printedInSet(edition),IPaperCard.Predicates.name(name));
+        Iterable<PaperCard> editionCards=Iterables.filter(cards.values(), filter);
+        if (editionCards.iterator().hasNext()){
+            return editionCards.iterator().next();
+        }else {
+            return getCard(name);
+        }
     }
 
     @Override
     public PaperCard getCard(String name, String edition, int artIndex) {
-        return cards.get(name);
+        return getCard(name, edition);
     }
 
     public boolean contains(PaperCard card) {

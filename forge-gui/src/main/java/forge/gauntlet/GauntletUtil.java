@@ -29,6 +29,12 @@ public class GauntletUtil {
                 deck = DeckgenUtil.getRandomColorDeck(true);
                 eventNames.add("Random colors deck");
                 break;
+            case STANDARD_COLOR_DECK:
+                deck = DeckgenUtil.getRandomColorDeck(FModel.getFormats().getStandard().getFilterPrinted(),true);
+                break;
+            case MODERN_COLOR_DECK:
+                deck = DeckgenUtil.getRandomColorDeck(FModel.getFormats().getModern().getFilterPrinted(),true);
+                break;
             case CUSTOM_DECK:
                 deck = DeckgenUtil.getRandomCustomDeck();
                 eventNames.add(deck.getName());

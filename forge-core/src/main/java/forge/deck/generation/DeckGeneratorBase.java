@@ -26,6 +26,7 @@ import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.deck.CardPool;
 import forge.deck.DeckFormat;
+import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.DebugTrace;
@@ -34,8 +35,11 @@ import forge.util.MyRandom;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import java.awt.print.Paper;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * <p>
@@ -51,19 +55,31 @@ public abstract class DeckGeneratorBase {
     protected final Map<String, Integer> cardCounts = new HashMap<String, Integer>();
     protected int maxDuplicates = 4;
     protected boolean useArtifacts = true;
+    protected String basicLandEdition = null;
 
     protected ColorSet colors;
     protected final CardPool tDeck = new CardPool();
     protected final IDeckGenPool pool;
+    protected IDeckGenPool landPool;
     protected final DeckFormat format;
+    protected final IDeckGenPool fullCardDB;
 
     protected abstract float getLandPercentage();
     protected abstract float getCreaturePercentage();
     protected abstract float getSpellPercentage();
 
-    public DeckGeneratorBase(IDeckGenPool pool0, DeckFormat format0) {
-        pool = format0.getCardPool(pool0);
+    public DeckGeneratorBase(IDeckGenPool pool0, DeckFormat format0, Predicate<PaperCard> formatFilter0) {
+        pool = new DeckGenPool(format0.getCardPool(pool0).getAllCards(formatFilter0));
         format = format0;
+        fullCardDB = pool0;
+        //setBasicLandPool(null);
+    }
+
+    public DeckGeneratorBase(IDeckGenPool pool0, DeckFormat format0) {
+        pool = new DeckGenPool(format0.getCardPool(pool0).getAllCards());
+        format = format0;
+        fullCardDB = pool0;
+        //setBasicLandPool(null);
     }
 
     public void setSingleton(boolean singleton){
@@ -78,6 +94,7 @@ public abstract class DeckGeneratorBase {
         
         final Iterable<PaperCard> cards = selectCardsOfMatchingColorForPlayer(forAi);
         // build subsets based on type
+
 
         final Iterable<PaperCard> creatures = Iterables.filter(cards, Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES));
         final int creatCnt = (int) Math.ceil(getCreaturePercentage() * size);
@@ -97,6 +114,19 @@ public abstract class DeckGeneratorBase {
         return null; // all but theme deck do override this method
     }
 
+    protected boolean setBasicLandPool(String edition){
+        Predicate<PaperCard> isSetBasicLand;
+        if (edition !=null){
+            isSetBasicLand = Predicates.and(IPaperCard.Predicates.printedInSet(edition),
+                    Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard.FN_GET_RULES));
+        }else{
+            isSetBasicLand = Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard.FN_GET_RULES);
+        }
+
+        landPool = new DeckGenPool(format.getCardPool(fullCardDB).getAllCards(isSetBasicLand));
+        return landPool.contains("Plains");
+    }
+
     protected int addSome(int cnt, List<PaperCard> source) {
         int srcLen = source.size();
         if (srcLen == 0) { return 0; }
@@ -109,6 +139,11 @@ public abstract class DeckGeneratorBase {
             //add card to deck if not already maxed out on card
             if (newCount <= maxDuplicates) {
                 tDeck.add(pool.getCard(cp.getName(), cp.getEdition()));
+                if(basicLandEdition == null){
+                    if(setBasicLandPool(cp.getEdition())){
+                        basicLandEdition = cp.getEdition();
+                    };
+                }
                 cardCounts.put(cp.getName(), newCount);
                 trace.append(String.format("(%d) %s [%s]%n", cp.getRules().getManaCost().getCMC(), cp.getName(), cp.getRules().getManaCost()));
                 res++;
@@ -181,17 +216,19 @@ public abstract class DeckGeneratorBase {
             cardCounts.put(basicLandName, nLand);
 
             PaperCard cp;
+            if (!landPool.contains("Plains")) {//in case none of the cards came from a set with all basic lands
+                setBasicLandPool("BFZ");
+                basicLandEdition="BFZ";
+            }
             if (edition != null) {
-            	cp = pool.getCard(basicLandName, edition);
+            	cp = landPool.getCard(basicLandName, edition);
             }
             else {
-            	cp = pool.getCard(basicLandName);
+            	cp = landPool.getCard(basicLandName, basicLandEdition);
             }
 
-            String basicLandSet = cp.getEdition();
-
             for (int i = 0; i < nLand; i++) {
-                tDeck.add(pool.getCard(cp.getName(), basicLandSet, -1), 1);
+                tDeck.add(landPool.getCard(cp.getName(), basicLandEdition, -1), 1);
             }
 
             landsLeft -= nLand;
@@ -254,11 +291,10 @@ public abstract class DeckGeneratorBase {
         // remove cards that generated decks don't like
         Predicate<CardRules> canPlay = forAi ? AI_CAN_PLAY : HUMAN_CAN_PLAY;
         Predicate<CardRules> hasColor = new MatchColorIdentity(colors);
-
         if (useArtifacts) {
             hasColor = Predicates.or(hasColor, COLORLESS_CARDS);
         }
-        return Iterables.filter(pool.getAllCards(), Predicates.compose(Predicates.and(canPlay, hasColor), PaperCard.FN_GET_RULES));
+        return Iterables.filter(pool.getAllCards(),Predicates.compose(Predicates.and(canPlay, hasColor), PaperCard.FN_GET_RULES));
     }
 
     protected static Map<String, Integer> countLands(ItemPool<PaperCard> outList) {
@@ -351,24 +387,22 @@ public abstract class DeckGeneratorBase {
 
     private static Map<Integer, String[]> dualLands = new HashMap<Integer, String[]>();
     static {
-        dualLands.put(MagicColor.WHITE | MagicColor.BLUE, new String[] { "Tundra", "Hallowed Fountain", "Flooded Strand" });
-        dualLands.put(MagicColor.BLACK | MagicColor.BLUE, new String[] { "Underground Sea", "Watery Grave", "Polluted Delta" });
-        dualLands.put(MagicColor.BLACK | MagicColor.RED, new String[] { "Badlands", "Blood Crypt", "Bloodstained Mire" });
-        dualLands.put(MagicColor.GREEN | MagicColor.RED, new String[] { "Taiga", "Stomping Ground", "Wooded Foothills" });
-        dualLands.put(MagicColor.GREEN | MagicColor.WHITE, new String[] { "Savannah", "Temple Garden", "Windswept Heath" });
+        dualLands.put(MagicColor.WHITE | MagicColor.BLUE, new String[] { "Tundra", "Hallowed Fountain", "Flooded Strand", "Prairie Stream" });
+        dualLands.put(MagicColor.BLACK | MagicColor.BLUE, new String[] { "Underground Sea", "Watery Grave", "Polluted Delta", "Sunken Hollow" });
+        dualLands.put(MagicColor.BLACK | MagicColor.RED, new String[] { "Badlands", "Blood Crypt", "Bloodstained Mire", "Smoldering Marsh" });
+        dualLands.put(MagicColor.GREEN | MagicColor.RED, new String[] { "Taiga", "Stomping Ground", "Wooded Foothills", "Cinder Glade" });
+        dualLands.put(MagicColor.GREEN | MagicColor.WHITE, new String[] { "Savannah", "Temple Garden", "Windswept Heath", "Canopy Vista" });
 
-        dualLands.put(MagicColor.WHITE | MagicColor.BLACK, new String[] { "Scrubland", "Godless Shrine", "Marsh Flats" });
-        dualLands.put(MagicColor.BLUE  | MagicColor.RED, new String[] { "Volcanic Island", "Steam Vents", "Scalding Tarn" });
-        dualLands.put(MagicColor.BLACK | MagicColor.GREEN, new String[] { "Bayou", "Overgrown Tomb", "Verdant Catacombs" });
-        dualLands.put(MagicColor.WHITE | MagicColor.RED, new String[] { "Plateau", "Sacred Foundry", "Arid Mesa" });
-        dualLands.put(MagicColor.GREEN | MagicColor.BLUE, new String[] { "Tropical Island", "Breeding Pool", "Misty Rainforest" });
+        dualLands.put(MagicColor.WHITE | MagicColor.BLACK, new String[] { "Scrubland", "Godless Shrine", "Marsh Flats", "Concealed Courtyard" });
+        dualLands.put(MagicColor.BLUE  | MagicColor.RED, new String[] { "Volcanic Island", "Steam Vents", "Scalding Tarn", "Spirebluff Canal" });
+        dualLands.put(MagicColor.BLACK | MagicColor.GREEN, new String[] { "Bayou", "Overgrown Tomb", "Verdant Catacombs", "Blooming Marsh" });
+        dualLands.put(MagicColor.WHITE | MagicColor.RED, new String[] { "Plateau", "Sacred Foundry", "Arid Mesa", "Inspiring Vantage" });
+        dualLands.put(MagicColor.GREEN | MagicColor.BLUE, new String[] { "Tropical Island", "Breeding Pool", "Misty Rainforest", "Botanical Sanctum" });
     }
 
     /**
      * Get list of dual lands for this color combo.
-     * 
-     * @param color
-     *            the color
+     *
      * @return dual land names
      */
     protected List<String> getDualLandList() {
@@ -383,22 +417,70 @@ public abstract class DeckGeneratorBase {
             addCardNameToList("Evolving Wilds", dLands);
             addCardNameToList("Terramorphic Expanse", dLands);
         }
-        for (Entry<Integer, String[]> dual : dualLands.entrySet()) {
-            if (colors.hasAllColors(dual.getKey())) {
-                for (String s : dual.getValue()) {
-                    addCardNameToList(s, dLands);
+
+        //filter to provide all dual lands from pool matching 2 or 3 colors from current deck
+        Predicate<PaperCard> dualLandFilter = Predicates.compose(CardRulesPredicates.coreType(true, CardType.CoreType.Land), PaperCard.FN_GET_RULES);
+        Predicate<PaperCard> exceptBasicLand = Predicates.not(Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard.FN_GET_RULES));
+        Iterable<PaperCard> landCards = pool.getAllCards(Predicates.and(dualLandFilter,exceptBasicLand));
+        Iterable<String> dualLandPatterns = Arrays.asList("Add \\{([WUBRG])\\} or \\{([WUBRG])\\} to your mana pool",
+                "Add \\{([WUBRG])\\}, \\{([WUBRG])\\}, or \\{([WUBRG])\\} to your mana pool",
+                "Add \\{([WUBRG])\\}\\{([WUBRG])\\} to your mana pool",
+                "Add \\{[WUBRG]\\}\\{[WUBRG]\\}, \\{([WUBRG])\\}\\{([WUBRG])\\}, or \\{[WUBRG]\\}\\{[WUBRG]\\} to your mana pool");
+        for (String pattern:dualLandPatterns){
+            dLands.addAll(regexLandSearch(pattern, landCards));
+        }
+        dLands.addAll(regexFetchLandSearch(landCards));
+        return dLands;
+    }
+
+    public List<String> regexLandSearch(String pattern, Iterable<PaperCard> landCards){
+        final List<String> dLands = new ArrayList<String>();
+        Pattern p = Pattern.compile(pattern);
+        for (PaperCard card:landCards){
+            Matcher matcher = p.matcher(card.getRules().getOracleText());
+            while (matcher.find()) {
+                List<String> manaColorNames = new ArrayList<>();
+                for (int i = 1; i <= matcher.groupCount(); i++) {
+                    manaColorNames.add(matcher.group(i));
+                }
+                ColorSet manaColorSet = ColorSet.fromNames(manaColorNames);
+                if (colors.hasAllColors(manaColorSet.getColor())){
+                    addCardNameToList(card.getName(),dLands);
                 }
             }
         }
+        return dLands;
+    }
 
+    public List<String> regexFetchLandSearch(Iterable<PaperCard> landCards){
+        final String fetchPattern="Search your library for a ([^\\s]*) or ([^\\s]*) card";
+        final List<String> dLands = new ArrayList<String>();
+        Map<String,String> colorLookup= new HashMap<>();
+        colorLookup.put("Plains","W");
+        colorLookup.put("Forest","G");
+        colorLookup.put("Mountain","R");
+        colorLookup.put("Island","U");
+        colorLookup.put("Swamp","B");
+        Pattern p = Pattern.compile(fetchPattern);
+        for (PaperCard card:landCards){
+            Matcher matcher = p.matcher(card.getRules().getOracleText());
+            while (matcher.find()) {
+                List<String> manaColorNames = new ArrayList<>();
+                for (int i = 1; i <= matcher.groupCount(); i++) {
+                    manaColorNames.add(colorLookup.get(matcher.group(i)));
+                }
+                ColorSet manaColorSet = ColorSet.fromNames(manaColorNames);
+                if (colors.hasAllColors(manaColorSet.getColor())){
+                    addCardNameToList(card.getName(),dLands);
+                }
+            }
+        }
         return dLands;
     }
 
     /**
      * Get all dual lands that do not match this color combo.
-     * 
-     * @param color
-     *            the color
+     *
      * @return dual land names
      */
     protected List<String> getInverseDualLandList() {

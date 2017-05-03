@@ -17,12 +17,14 @@
  */
 package forge.deck.generation;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.deck.DeckFormat;
+import forge.item.PaperCard;
 import forge.util.MyRandom;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -58,15 +60,23 @@ public class DeckGenerator3Color extends DeckGeneratorBase {
         ImmutablePair.of(new FilterCMC(6, 20), 3)
     );
 
+    public DeckGenerator3Color(IDeckGenPool pool0, DeckFormat format0, Predicate<PaperCard> formatFilter0, final String clr1, final String clr2, final String clr3) {
+        super(pool0, format0, formatFilter0);
+        initialize(format0,clr1,clr2,clr3);
+    }
+
     public DeckGenerator3Color(IDeckGenPool pool0, DeckFormat format0, final String clr1, final String clr2, final String clr3) {
         super(pool0, format0);
+        initialize(format0,clr1,clr2,clr3);
+    }
 
+    private void initialize(DeckFormat format0, final String clr1, final String clr2, final String clr3){
         format0.adjustCMCLevels(cmcLevels);
 
         int c1 = MagicColor.fromName(clr1);
         int c2 = MagicColor.fromName(clr2);
         int c3 = MagicColor.fromName(clr3);
-        
+
         int rc = 0;
         int combo = c1 | c2 | c3;
 
@@ -84,14 +94,14 @@ public class DeckGenerator3Color extends DeckGeneratorBase {
 
             case 1:
                 do {
-                    rc = MagicColor.WHITE << MyRandom.getRandom().nextInt(5); 
+                    rc = MagicColor.WHITE << MyRandom.getRandom().nextInt(5);
                 } while ( rc == combo );
                 combo |= rc;
 
-            //$FALL-THROUGH$
+                //$FALL-THROUGH$
             case 2:
                 do {
-                    rc = MagicColor.WHITE << MyRandom.getRandom().nextInt(5); 
+                    rc = MagicColor.WHITE << MyRandom.getRandom().nextInt(5);
                 } while ( (rc & combo) != 0 );
                 combo |= rc;
                 break;
@@ -119,7 +129,6 @@ public class DeckGenerator3Color extends DeckGeneratorBase {
 
         addBasicLand(numLands);
         trace.append("DeckSize:").append(tDeck.countAll()).append("\n");
-
         return tDeck;
     }
 }

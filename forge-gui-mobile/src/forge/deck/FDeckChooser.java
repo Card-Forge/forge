@@ -147,7 +147,8 @@ public class FDeckChooser extends FScreen {
         btnViewDeck.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                if (selectedDeckType != DeckType.COLOR_DECK && selectedDeckType != DeckType.THEME_DECK) {
+                if (selectedDeckType != DeckType.STANDARD_COLOR_DECK && selectedDeckType != DeckType.MODERN_COLOR_DECK &&
+                        selectedDeckType != DeckType.COLOR_DECK && selectedDeckType != DeckType.THEME_DECK) {
                     FDeckViewer.show(getDeck());
                 }
             }
@@ -160,7 +161,8 @@ public class FDeckChooser extends FScreen {
                     testSelectedDeck();
                     return;
                 }
-                if (selectedDeckType == DeckType.COLOR_DECK) {
+                if (selectedDeckType == DeckType.COLOR_DECK || selectedDeckType == DeckType.STANDARD_COLOR_DECK
+                        || selectedDeckType == DeckType.MODERN_COLOR_DECK) {
                     DeckgenUtil.randomSelectColors(lstDecks);
                 }
                 else {
@@ -259,6 +261,8 @@ public class FDeckChooser extends FScreen {
             NewGameScreen.SealedDeck.open();
             return;
         case COLOR_DECK:
+        case STANDARD_COLOR_DECK:
+        case MODERN_COLOR_DECK:
         case THEME_DECK:
         case RANDOM_DECK:
             final DeckProxy deck = lstDecks.getSelectedItem();
@@ -427,6 +431,8 @@ public class FDeckChooser extends FScreen {
                 cmbDeckTypes.addItem(DeckType.PRECONSTRUCTED_DECK);
                 cmbDeckTypes.addItem(DeckType.QUEST_OPPONENT_DECK);
                 cmbDeckTypes.addItem(DeckType.COLOR_DECK);
+                cmbDeckTypes.addItem(DeckType.STANDARD_COLOR_DECK);
+                cmbDeckTypes.addItem(DeckType.MODERN_COLOR_DECK);
                 cmbDeckTypes.addItem(DeckType.THEME_DECK);
                 cmbDeckTypes.addItem(DeckType.RANDOM_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_DECK);
@@ -575,7 +581,17 @@ public class FDeckChooser extends FScreen {
             break;
         case COLOR_DECK:
             maxSelections = 3;
-            pool = ColorDeckGenerator.getColorDecks(lstDecks, isAi);
+            pool = ColorDeckGenerator.getColorDecks(lstDecks, null, isAi);
+            config = ItemManagerConfig.STRING_ONLY;
+            break;
+        case STANDARD_COLOR_DECK:
+            maxSelections = 3;
+            pool = ColorDeckGenerator.getColorDecks(lstDecks, FModel.getFormats().getStandard().getFilterPrinted(), isAi);
+            config = ItemManagerConfig.STRING_ONLY;
+            break;
+        case MODERN_COLOR_DECK:
+            maxSelections = 3;
+            pool = ColorDeckGenerator.getColorDecks(lstDecks, FModel.getFormats().getModern().getFilterPrinted(), isAi);
             config = ItemManagerConfig.STRING_ONLY;
             break;
         case THEME_DECK:
@@ -900,11 +916,13 @@ public class FDeckChooser extends FScreen {
                 if (numOpponents == null) { return; }
 
                 ListChooser<DeckType> chooser = new ListChooser<DeckType>(
-                        "Choose allowed deck types for opponents", 0, 5, Arrays.asList(new DeckType[] {
+                        "Choose allowed deck types for opponents", 0, 7, Arrays.asList(new DeckType[] {
                         DeckType.CUSTOM_DECK,
                         DeckType.PRECONSTRUCTED_DECK,
                         DeckType.QUEST_OPPONENT_DECK,
                         DeckType.COLOR_DECK,
+                        DeckType.STANDARD_COLOR_DECK,
+                        DeckType.MODERN_COLOR_DECK,
                         DeckType.THEME_DECK
                 }), null, new Callback<List<DeckType>>() {
                     @Override

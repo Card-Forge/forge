@@ -51,6 +51,8 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
     private final JCheckBox boxPreconDecks = new FCheckBox(DeckType.PRECONSTRUCTED_DECK.toString());
     private final JCheckBox boxQuestDecks = new FCheckBox(DeckType.QUEST_OPPONENT_DECK.toString());
     private final JCheckBox boxColorDecks = new FCheckBox(DeckType.COLOR_DECK.toString());
+    private final JCheckBox boxStandardColorDecks = new FCheckBox(DeckType.STANDARD_COLOR_DECK.toString());
+    private final JCheckBox boxModernColorDecks = new FCheckBox(DeckType.MODERN_COLOR_DECK.toString());
     private final JCheckBox boxThemeDecks = new FCheckBox(DeckType.THEME_DECK.toString());
 
     private final FDeckChooser lstDecks = new FDeckChooser(null, false);
@@ -78,6 +80,8 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         boxQuestDecks.setSelected(true);
         boxThemeDecks.setSelected(true);
         boxColorDecks.setSelected(true);
+        boxStandardColorDecks.setSelected(true);
+        boxModernColorDecks.setSelected(true);
 
         sliOpponents.setMajorTickSpacing(5);
         sliOpponents.setMinorTickSpacing(0);
@@ -98,7 +102,9 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         pnlOptions.add(boxPreconDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
         pnlOptions.add(boxQuestDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
         pnlOptions.add(boxThemeDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
-        pnlOptions.add(boxColorDecks, "w 96%!, h 30px!, gap 2% 0 0 0");
+        pnlOptions.add(boxColorDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
+        pnlOptions.add(boxStandardColorDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
+        pnlOptions.add(boxModernColorDecks, "w 96%!, h 30px!, gap 2% 0 0 0");
     }
 
     /* (non-Javadoc)
@@ -169,6 +175,16 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getBoxColorDecks() {
         return boxColorDecks;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getBoxStandardColorDecks() {
+        return boxStandardColorDecks;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getBoxModernColorDecks() {
+        return boxModernColorDecks;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
