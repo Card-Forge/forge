@@ -289,3 +289,12 @@ AdditionalSetUnlockedInQuest=MPS_AKH
 277 R Liliana's Influence
 278 C Tattered Mummy
 279 C Foul Orchard
+280 C Cinder Barrens
+281 C Forsaken Sanctuary
+282 C Highland Lake
+283 C Meandering River
+284 C Submerged Boneyard
+285 C Timber Gorge
+286 C Tranquil Expanse
+287 C Woodland Stream
+
