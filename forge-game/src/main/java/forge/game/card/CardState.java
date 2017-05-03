@@ -34,12 +34,14 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.GameObject;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
+import forge.util.Expressions;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 
@@ -507,6 +509,19 @@ public class CardState extends GameObject {
                 }
             }
             return false;
+        } else if (property.startsWith("cmc")) {
+            int x;
+            String rhs = property.substring(5);
+            int y = getManaCost().getCMC();
+            try {
+                x = Integer.parseInt(rhs);
+            } catch (final NumberFormatException e) {
+                x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
+            }
+
+            if (!Expressions.compare(y, property, x)) {
+                return false;
+            }
         } else if (!card.getType(this).hasStringType(property)) {
             return false;
         }
