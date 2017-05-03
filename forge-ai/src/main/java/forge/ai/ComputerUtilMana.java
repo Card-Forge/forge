@@ -223,7 +223,7 @@ public class ComputerUtilMana {
             // to attempt to make the spell uncounterable when possible.
             if ((toPay == ManaCostShard.GENERIC || toPay == ManaCostShard.X) 
                     && ma.getHostCard().getName().equals("Cavern of Souls")
-                    && !ma.getManaPart().canProduce("W")) {
+                    && !ma.getManaPart().isAnyMana()) {
                 continue;
             }
 
