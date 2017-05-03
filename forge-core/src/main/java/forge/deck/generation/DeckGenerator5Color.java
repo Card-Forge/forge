@@ -102,6 +102,7 @@ public class DeckGenerator5Color extends DeckGeneratorBase {
         numLands -= dblsAdded;
 
         addBasicLand(numLands);
+        adjustDeckSize(size);
         return tDeck;
     }
 }

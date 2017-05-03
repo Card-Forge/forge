@@ -128,6 +128,7 @@ public class DeckGenerator3Color extends DeckGeneratorBase {
         numLands -= dblsAdded;
 
         addBasicLand(numLands);
+        adjustDeckSize(size);
         trace.append("DeckSize:").append(tDeck.countAll()).append("\n");
         return tDeck;
     }
