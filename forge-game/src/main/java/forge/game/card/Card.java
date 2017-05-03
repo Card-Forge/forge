@@ -911,7 +911,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         return mustAttackEntity;
     }
     public final void clearMustAttackEntity(final Player playerturn) {
-    	if (this.getController().equals(playerturn)) {
+    	if (getController().equals(playerturn)) {
     		mustAttackEntity = null;
     	}
     }
