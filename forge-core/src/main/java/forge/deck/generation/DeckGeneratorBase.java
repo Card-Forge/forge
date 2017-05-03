@@ -437,6 +437,9 @@ public abstract class DeckGeneratorBase {
         final List<String> dLands = new ArrayList<String>();
         Pattern p = Pattern.compile(pattern);
         for (PaperCard card:landCards){
+            if (card.getRules().getAiHints().getRemAIDecks()) {
+                continue;
+            }
             Matcher matcher = p.matcher(card.getRules().getOracleText());
             while (matcher.find()) {
                 List<String> manaColorNames = new ArrayList<>();
@@ -463,6 +466,9 @@ public abstract class DeckGeneratorBase {
         colorLookup.put("Swamp","B");
         Pattern p = Pattern.compile(fetchPattern);
         for (PaperCard card:landCards){
+            if (card.getRules().getAiHints().getRemAIDecks()) {
+                continue;
+            }
             Matcher matcher = p.matcher(card.getRules().getOracleText());
             while (matcher.find()) {
                 List<String> manaColorNames = new ArrayList<>();
