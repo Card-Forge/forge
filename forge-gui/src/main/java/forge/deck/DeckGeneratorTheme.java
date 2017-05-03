@@ -62,6 +62,7 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
      */
     public DeckGeneratorTheme(IDeckGenPool pool0) {
         super(pool0, DeckFormat.Constructed);
+        setBasicLandPool(null);
         this.maxDuplicates = 4;
     }
 
