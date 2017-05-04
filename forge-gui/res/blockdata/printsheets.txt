@@ -1157,3 +1157,11 @@ Desiccated Naga
 Liliana's Influence
 Tattered Mummy
 Foul Orchard
+Cinder Barrens
+Forsaken Sanctuary
+Highland Lake
+Meandering River
+Submerged Boneyard
+Timber Gorge
+Tranquil Expanse
+Woodland Stream
