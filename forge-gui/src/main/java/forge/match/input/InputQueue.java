@@ -50,12 +50,15 @@ public class InputQueue extends Observable {
         return inputStack.isEmpty() ? null : inputStack.peek();
     }
 
+    /*pfps sometimes this is being called twice for the same input */
     public final void removeInput(final Input inp) {
-        final Input topMostInput = inputStack.isEmpty() ? null : inputStack.pop();
+        final Input topMostInput = inputStack.isEmpty() ? null : inputStack.peek();
 
         if (topMostInput != inp) {
             System.out.println("Cannot remove input " + inp.getClass().getSimpleName() + " because it's not on top of stack. Stack = " + inputStack );
-        }
+        } else {
+	    inputStack.pop();
+	}
         updateObservers();
     }
 
