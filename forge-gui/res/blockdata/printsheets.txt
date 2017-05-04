@@ -1146,7 +1146,7 @@ Rhonas the Indomitable|MPS_AKH
 Maelstrom Pulse|MPS_AKH
 Vindicate|MPS_AKH
 
-[AKH Planeswalker Decks]
+[AKH Planeswalker Decks and Toolkit]
 Gideon, Martial Paragon
 Companion of the Trials
 Gideon's Resolve
