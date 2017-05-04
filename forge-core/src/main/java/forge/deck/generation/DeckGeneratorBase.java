@@ -226,7 +226,7 @@ public abstract class DeckGeneratorBase {
             }
 
             for (int i = 0; i < nLand; i++) {
-                tDeck.add(landPool.getCard(cp.getName(), basicLandEdition, -1), 1);
+                tDeck.add(landPool.getCard(basicLandName, basicLandEdition, -1), 1);
             }
 
             landsLeft -= nLand;
