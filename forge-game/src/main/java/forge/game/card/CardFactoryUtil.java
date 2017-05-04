@@ -3249,23 +3249,30 @@ public class CardFactoryUtil {
             }
         } else if (keyword.startsWith("Vanishing")) {
             // Remove Time counter trigger
-            final String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | " +
-                    "TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE1_TIME | " +
-                    "Secondary$ True | TriggerDescription$ At the beginning of your upkeep, " +
-                    "if CARDNAME has a time counter on it, remove a time counter from it.";
+            final StringBuilder upkeepTrig = new StringBuilder("Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | " +
+                    "TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE1_TIME");
+            if (keyword.contains(":")) {
+                upkeepTrig.append(" | Secondary$ True");
+            }
+            upkeepTrig.append(" | TriggerDescription$ At the beginning of your upkeep, " +
+                    "if CARDNAME has a time counter on it, remove a time counter from it.");
+
             final String remove = "DB$ RemoveCounter | Defined$ Self" +
                     " | CounterType$ TIME | CounterNum$ 1";
-            final Trigger parsedUpkeepTrig = TriggerHandler.parseTrigger(upkeepTrig, card, intrinsic);
+            final Trigger parsedUpkeepTrig = TriggerHandler.parseTrigger(upkeepTrig.toString(), card, intrinsic);
             parsedUpkeepTrig.setOverridingAbility(AbilityFactory.getAbility(remove, card));
             final Trigger cardUpkeepTrig = card.addTrigger(parsedUpkeepTrig);
 
             // sacrifice trigger
-            String sacTrig = "Mode$ CounterRemoved | TriggerZones$ Battlefield | ValidCard$" +
-                    " Card.Self | NewCounterAmount$ 0 | Secondary$ True | CounterType$ TIME |" +
-                    " TriggerDescription$ When the last time counter is removed from CARDNAME," +
-                    " sacrifice it.";
+            final StringBuilder sacTrig = new StringBuilder("Mode$ CounterRemoved | TriggerZones$ Battlefield" +
+            " | ValidCard$ Card.Self | NewCounterAmount$ 0 | CounterType$ TIME");
+            if (keyword.contains(":")) {
+                sacTrig.append("| Secondary$ True");
+            }
+            sacTrig.append("| TriggerDescription$ When the last time counter is removed from CARDNAME, sacrifice it.");
+
             final String sac = "DB$ Sacrifice | SacValid$ Self";
-            final Trigger parsedSacTrigger = TriggerHandler.parseTrigger(sacTrig, card, intrinsic);
+            final Trigger parsedSacTrigger = TriggerHandler.parseTrigger(sacTrig.toString(), card, intrinsic);
             parsedSacTrigger.setOverridingAbility(AbilityFactory.getAbility(sac, card));
             final Trigger cardSacTrig = card.addTrigger(parsedSacTrigger);
 
@@ -3418,7 +3425,8 @@ public class CardFactoryUtil {
             if (!intrinsic) {
                 kws.addReplacement(cardre);
             }
-        } else if (keyword.startsWith("Vanishing")) {
+        } else if (keyword.startsWith("Vanishing") && keyword.contains(":")) {
+            // Vanishing could be added to a card, but this Effect should only be done when it has amount
             final String[] k = keyword.split(":");
             final String m = k[1];
 
