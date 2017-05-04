@@ -154,6 +154,35 @@ public class CardRenderer {
         return cardArt;
     }
 
+    public static FImageComplex getAftermathSecondCardArt(String imageKey) {
+        FImageComplex cardArt = cardArtCache.get("Aftermath_second_"+imageKey);
+        if (cardArt == null) {
+            Texture image = ImageCache.getImage(imageKey, true);
+            if (image != null) {
+                if (image == ImageCache.defaultImage) {
+                    cardArt = CardImageRenderer.forgeArt;
+                }
+                else {
+                    float x, y;
+                    float w = image.getWidth();
+                    float h = image.getHeight();
+                    //allow rotated image for split cards
+                        x = w * 138f / 250f;
+                        y = h * 210f / 370f; //delay adjusting y and h until drawn
+                        w *= 68f / 250f;
+                        h *= 128f / 370f;
+
+                    cardArt = new FTextureRegionImage(new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h)));
+
+                }
+                cardArtCache.put("Aftermath_second_"+imageKey, cardArt);
+            }
+        }
+        return cardArt;
+    }
+
+
+
     public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, CardView card, int count, String suffix, float x, float y, float w, float h, boolean compactMode) {
         final CardStateView state = card.getCurrentState();
         if (card.getId() > 0) {
@@ -197,9 +226,9 @@ public class CardRenderer {
                 g.drawRotatedImage(cardArt.getTexture(), artX, artY + cardArtWidth / 2, cardArtHeight, cardArtWidth / 2, artX + cardArtWidth / 2, artY + cardArtWidth / 2, cardArt.getRegionX(), (int)cardArt.getHeight() - (int)(srcY + srcHeight), (int)cardArt.getWidth(), (int)srcHeight, -90);
             }
             else if (card.getText().contains("Aftermath")) {
-                //Simply show the top art repeated
+                FImageComplex secondArt = CardRenderer.getAftermathSecondCardArt(card.getCurrentState().getImageKey());
                 g.drawRotatedImage(cardArt.getTexture(), artX, artY, cardArtWidth, cardArtHeight / 2, artX + cardArtWidth, artY + cardArtHeight / 2, cardArt.getRegionX(), cardArt.getRegionY(), (int)cardArt.getWidth(), (int)cardArt.getHeight() /2, 0);
-                g.drawRotatedImage(cardArt.getTexture(), artX, artY + cardArtHeight / 2, cardArtWidth, cardArtHeight / 2, artX + cardArtWidth, artY + cardArtHeight / 2, cardArt.getRegionX(), cardArt.getRegionY(), (int)cardArt.getWidth(), (int)cardArt.getHeight() /2, 0);
+                g.drawRotatedImage(secondArt.getTexture(), artX - cardArtHeight / 2 , artY + cardArtHeight / 2, cardArtHeight /2, cardArtWidth, artX, artY + cardArtHeight / 2, secondArt.getRegionX(), secondArt.getRegionY(), (int)secondArt.getWidth(), (int)secondArt.getHeight(), 90);
             }
             else {
                 g.drawImage(cardArt, artX, artY, cardArtWidth, cardArtHeight);
