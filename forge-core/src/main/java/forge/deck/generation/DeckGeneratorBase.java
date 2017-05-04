@@ -72,14 +72,12 @@ public abstract class DeckGeneratorBase {
         pool = new DeckGenPool(format0.getCardPool(pool0).getAllCards(formatFilter0));
         format = format0;
         fullCardDB = pool0;
-        //setBasicLandPool(null);
     }
 
     public DeckGeneratorBase(IDeckGenPool pool0, DeckFormat format0) {
         pool = new DeckGenPool(format0.getCardPool(pool0).getAllCards());
         format = format0;
         fullCardDB = pool0;
-        //setBasicLandPool(null);
     }
 
     public void setSingleton(boolean singleton){
