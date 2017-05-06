@@ -1103,8 +1103,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             final int selBorderSize = 1;
 
             // Determine whether to render border from properties
-            boolean noBorder = !isPreferenceEnabled(ForgePreferences.FPref.UI_RENDER_BLACK_BORDERS)
-                    ||CardView.getCardForUi((IPaperCard)itemInfo.item).getCurrentState().getSetCode().equalsIgnoreCase("MPS_AKH");
+            boolean noBorder = !isPreferenceEnabled(ForgePreferences.FPref.UI_RENDER_BLACK_BORDERS) ||
+                    (itemInfo.item instanceof IPaperCard && CardView.getCardForUi((IPaperCard)itemInfo.item).
+                            getCurrentState().getSetCode().equalsIgnoreCase("MPS_AKH"));
 
             final int borderSize = noBorder? 2 : Math.round(itemWidth * CardPanel.BLACK_BORDER_SIZE);
             final int cornerSize = Math.max(4, Math.round(itemWidth * CardPanel.ROUNDED_CORNER_SIZE));
