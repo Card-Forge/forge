@@ -361,4 +361,3 @@ if __name__ == '__main__':
 	releaseOutput.close()
 
 	print ("Done!")
-	raw_input("Press Enter to continue...")
