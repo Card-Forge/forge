@@ -2,10 +2,7 @@
 In case you have decks in your profile folder that contain one or more Masterpieces from the Kaladesh/Aether Revolt masterpiece series (previously the set code was MPS), you may experience an issue with cards that are present in the Masterpieces set disappearing visually and malfunctioning in the game (even if you use a version of the same card from a different set). The two primary waya this manifests itself are: a) you get a message stating that there is an unsupported card in one of your decks (this message shows in the console only); b) the card picture does not show in the game or in the deck editor and the card is reported as non-functional. If this happens to you, you have several options: either remove the offending deck altogether (you may have to do a search inside the profile folder to determine which decks have the mentioned card from the MPS set), or manually edit the deck file and change the set code MPS to MPS_KLD for such cards, or start with a fresh profile folder or at least fresh deck subfolder (but the latter obviously only works if you don't mind losing your entire progress and would like to start fresh). We apologize for the inconvenience.
 
 - Amonkhet Release -
-This release contains most of the cards from the newly released Amonkhet set. Please bear with us as we iron out any bugs with this set and get the images uploaded.
-
-- Display Storm Count in Prompt Pane/Panel -
-There is a new option to visualize the current storm count in the prompt pane (in desktop Forge) or panel (in mobile Forge). It is disabled by default, but can be enabled in Forge preferences, please refer to the "Show Storm Count in Prompt Pane/Panel" option.
+This release contains all but two of the cards (As Foretold and Shadow of the Grave) from the newly released Amonkhet set. Hopefully we'll get these last two out soon enough.
 
 - Bug fixes -
-As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the 1.5.60 Beta release run.
+As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the 1.5.61 release run.
