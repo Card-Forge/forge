@@ -237,6 +237,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                         }
                     }
 
+                    // TODO: this is an exception for Aftermath. Needs to be somehow generalized.
+                    if (this.getZone() != ZoneType.Graveyard && sa.getHostCard().hasKeyword("Aftermath") && sa.isRightSplit()) {
+                        return false;
+                    }
+
                     return true;
                 }
             }
