@@ -141,6 +141,10 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
         pnlButtons.add(btnDown, "h 40px!, w 100%!, ay baseline");
     }
 
+    public void updateDeckPanel() {
+        lstLeft.restoreSavedState();
+    }
+
     public void focusName() {
         txfFilename.requestFocusInWindow();
     }

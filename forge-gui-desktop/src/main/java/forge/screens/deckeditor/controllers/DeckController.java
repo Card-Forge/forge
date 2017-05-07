@@ -25,6 +25,9 @@ import forge.deck.DeckBase;
 import forge.deck.DeckProxy;
 import forge.screens.deckeditor.menus.DeckFileMenu;
 import forge.screens.deckeditor.views.VCurrentDeck;
+import forge.screens.home.gauntlet.VSubmenuGauntletBuild;
+import forge.screens.home.gauntlet.VSubmenuGauntletContests;
+import forge.screens.home.gauntlet.VSubmenuGauntletQuick;
 import forge.screens.home.sanctioned.VSubmenuConstructed;
 import forge.util.storage.IStorage;
 
@@ -198,6 +201,9 @@ public class DeckController<T extends DeckBase> {
         setSaved(true);
 
         VSubmenuConstructed.SINGLETON_INSTANCE.getLobby().updateDeckPanel();
+        VSubmenuGauntletBuild.SINGLETON_INSTANCE.updateDeckPanel();
+        VSubmenuGauntletQuick.SINGLETON_INSTANCE.updateDeckPanel();
+        VSubmenuGauntletContests.SINGLETON_INSTANCE.updateDeckPanel();
     }
 
     /**

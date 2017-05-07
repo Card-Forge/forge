@@ -107,6 +107,10 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         pnlOptions.add(boxModernColorDecks, "w 96%!, h 30px!, gap 2% 0 0 0");
     }
 
+    public void updateDeckPanel() {
+        lstDecks.restoreSavedState();
+    }
+
     /* (non-Javadoc)
      * @see forge.gui.home.IVSubmenu#getGroupEnum()
      */

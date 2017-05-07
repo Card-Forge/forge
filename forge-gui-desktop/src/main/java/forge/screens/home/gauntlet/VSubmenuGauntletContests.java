@@ -108,6 +108,9 @@ public enum VSubmenuGauntletContests implements IVSubmenu<CSubmenuGauntletContes
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
     }
 
+    public void updateDeckPanel() {
+        lstDecks.restoreSavedState();
+    }
 
     /** @return {@link javax.swing.JButton} */
     public JButton getBtnStart() {
