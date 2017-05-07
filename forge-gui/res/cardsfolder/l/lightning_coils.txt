@@ -1,4 +1,4 @@
- Name:Lightning Coils
+Name:Lightning Coils
 ManaCost:3
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken+YouCtrl | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a nontoken creature you control dies, put a charge counter on CARDNAME.
