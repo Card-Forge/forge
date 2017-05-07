@@ -114,4 +114,10 @@ public class GauntletWinLose extends ControlWinLose {
             super.actionOnContinue();
         }
     }
+
+    @Override
+    public void actionOnQuit() {
+        super.actionOnQuit();
+        controller.actionOnQuit();
+    }
 }

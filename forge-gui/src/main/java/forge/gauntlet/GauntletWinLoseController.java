@@ -15,6 +15,8 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 
 public abstract class GauntletWinLoseController {
+    private static final String SAVE_AND_QUIT = "Save and Quit";
+
     private final IWinLoseView<? extends IButton> view;
     private final GameView lastGame;
 
@@ -125,6 +127,13 @@ public abstract class GauntletWinLoseController {
             return true;
         }
         return false;
+    }
+
+    public final void actionOnQuit() {
+        if (!SAVE_AND_QUIT.equals(view.getBtnQuit().getText())) {
+            // Quitting mid-match abandons the gauntlet.
+            FModel.getGauntletData().reset();
+        }
     }
 
     protected abstract void showOutcome(boolean isMatchOver, String message1, String message2, FSkinProp icon, List<String> lstEventNames, List<String> lstEventRecords, int len, int num);

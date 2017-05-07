@@ -69,6 +69,7 @@ public final class GauntletData {
 
     /** Resets a gauntlet data to an unplayed state, then stamps and saves. */
     public void reset() {
+        userDeck = null;
         completed = 0;
         stamp();
         eventRecords.clear();
