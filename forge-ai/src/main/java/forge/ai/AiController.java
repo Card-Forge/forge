@@ -1562,7 +1562,7 @@ public class AiController {
 
         // filter list by ApiTypes
         List<SpellAbility> discard = filterListByApi(activePlayerSAs, ApiType.Discard);
-        List<SpellAbility> mandatoryDiscard = filterList(activePlayerSAs, SpellAbilityPredicates.isMandatory());
+        List<SpellAbility> mandatoryDiscard = filterList(discard, SpellAbilityPredicates.isMandatory());
 
         List<SpellAbility> draw = filterListByApi(activePlayerSAs, ApiType.Draw);
 
@@ -1666,6 +1666,14 @@ public class AiController {
                 } else if (!doubleLife.isEmpty()) {
                     // other than that, do double life
                     return Iterables.getFirst(doubleLife, null);
+                }
+            } else if ("DamageDone".equals(runParams.get("Event"))) {
+                List<ReplacementEffect> prevention = filterList(list, CardTraitPredicates.hasParam("Prevention"));
+
+                // TODO when Protection is done as ReplacementEffect do them
+                // before normal prevention
+                if (!prevention.isEmpty()) {
+                    return Iterables.getFirst(prevention, null);
                 }
             }
         }

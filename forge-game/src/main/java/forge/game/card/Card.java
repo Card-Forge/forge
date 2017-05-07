@@ -5822,37 +5822,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             return 0;
         }
 
-        for (String kw : source.getKeywords()) {
-            if (isCombat) {
-                if (kw.equals("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) {
-                    return 0;
-                }
-                if (kw.equals("Prevent all combat damage that would be dealt by CARDNAME.")) {
-                    return 0;
-                }
-            }
-            if (kw.equals("Prevent all damage that would be dealt to and dealt by CARDNAME.")) {
-                return 0;
-            }
-            if (kw.equals("Prevent all damage that would be dealt by CARDNAME.")) {
-                return 0;
-            }
-        }
         for (String kw : getKeywords()) {
-            if (isCombat) {
-                if (kw.equals("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) {
-                    return 0;
-                }
-                if (kw.equals("Prevent all combat damage that would be dealt to CARDNAME.")) {
-                    return 0;
-                }
-            }
-            if (kw.equals("Prevent all damage that would be dealt to CARDNAME.")) {
-                return 0;
-            }
-            if (kw.equals("Prevent all damage that would be dealt to and dealt by CARDNAME.")) {
-                return 0;
-            }
             if (kw.startsWith("Absorb")) {
                 final int absorbed = getKeywordMagnitude("Absorb");
                 if (restDamage > absorbed) {

@@ -628,23 +628,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         int restDamage = damage;
 
-        for (String kw : source.getKeywords()) {
-            if (isCombat) {
-                if (kw.equals("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) {
-                    return 0;
-                }
-                if (kw.equals("Prevent all combat damage that would be dealt by CARDNAME.")) {
-                    return 0;
-                }
-            }
-            if (kw.equals("Prevent all damage that would be dealt to and dealt by CARDNAME.")) {
-                return 0;
-            }
-            if (kw.equals("Prevent all damage that would be dealt by CARDNAME.")) {
-                return 0;
-            }
-        }
-
         // Prevent Damage static abilities
         for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
             final Iterable<StaticAbility> staticAbilities = ca.getStaticAbilities();

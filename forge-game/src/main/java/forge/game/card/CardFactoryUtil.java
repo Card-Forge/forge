@@ -3442,6 +3442,54 @@ public class CardFactoryUtil {
                 kws.addReplacement(re);
             }
         }
+        
+        // extra part for the Damage Prevention keywords
+        if (keyword.startsWith("Prevent all ")) {
+            boolean isCombat = false;
+            boolean from = false;
+            boolean to = false;
+
+            if (keyword.equals("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) {
+                isCombat = from = to = true;
+            } else if (keyword.equals("Prevent all combat damage that would be dealt by CARDNAME.")) {
+                isCombat = from = true;
+            } else if (keyword.equals("Prevent all combat damage that would be dealt to CARDNAME.")) {
+                isCombat = to = true;
+            } else if (keyword.equals("Prevent all damage that would be dealt to and dealt by CARDNAME.")) {
+                from = to = true;
+            } else if (keyword.equals("Prevent all damage that would be dealt by CARDNAME.")) {
+                from = true;
+            } else if (keyword.equals("Prevent all damage that would be dealt to CARDNAME.")) {
+                to = true;
+            }
+
+            String rep = "Event$ DamageDone | Prevention$ True";
+            if (isCombat) {
+                rep += "| IsCombat$ True";
+            }
+            rep += "| Secondary$ True | Description$ " + keyword;
+
+            if (from) {
+                String fromRep = rep + " | ValidSource$ Card.Self";
+                ReplacementEffect re = ReplacementHandler.parseReplacement(fromRep, card, intrinsic);
+                re.setLayer(ReplacementLayer.Other);
+                ReplacementEffect cardre = card.addReplacementEffect(re);
+
+                if (!intrinsic) {
+                    kws.addReplacement(cardre);
+                }
+            }
+            if (to) {
+                String toRep = rep + " | ValidTarget$ Card.Self";
+                ReplacementEffect re = ReplacementHandler.parseReplacement(toRep, card, intrinsic);
+                re.setLayer(ReplacementLayer.Other);
+                ReplacementEffect cardre = card.addReplacementEffect(re);
+
+                if (!intrinsic) {
+                    kws.addReplacement(cardre);
+                }
+            }
+        }
     }
 
     public static void addSpellAbility(final String keyword, final Card card, final KeywordsChange kws) {
