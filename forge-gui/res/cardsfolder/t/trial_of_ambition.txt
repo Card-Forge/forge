@@ -6,5 +6,6 @@ SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0 | ValidTgts$ Opponent | SacValid$ Cre
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Cartouche.YouCtrl | Execute$ TrigReturn | TriggerDescription$ When a Cartouche enters the battlefield under your control, return CARDNAME to its owner's hand.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ Self
 SVar:PlayMain1:TRUE
+SVar:NeedsToPlay:Creature.OppCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trial_of_ambition.jpg
 Oracle:WWhen Trial of Ambition enters the battlefield, target opponent sacrifices a creature.\nWhen a Cartouche enters the battlefield under your control, return Trial of Ambition to its owner's hand.
