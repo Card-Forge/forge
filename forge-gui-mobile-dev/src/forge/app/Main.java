@@ -43,21 +43,27 @@ public class Main {
 
         // Fullscreen width and height for desktop mode (desktopMode = true)
         // Can be specified inside the file fullscreen_resolution.ini to override default (in the format WxH, e.g. 1920x1080)
-        int fullscreenWidth = LwjglApplicationConfiguration.getDesktopDisplayMode().width;
-        int fullscreenHeight = LwjglApplicationConfiguration.getDesktopDisplayMode().height;
-        if (FileUtil.doesFileExist(desktopModeAssetsDir + "fullscreen_resolution.ini")) {
-            String[] res = FileUtil.readFileToString(desktopModeAssetsDir + "fullscreen_resolution.ini").split("x");
-            if (res.length == 2) {
-                fullscreenWidth = Integer.parseInt(res[0].trim());
-                fullscreenHeight = Integer.parseInt(res[1].trim());
+        int desktopScreenWidth = LwjglApplicationConfiguration.getDesktopDisplayMode().width;
+        int desktopScreenHeight = LwjglApplicationConfiguration.getDesktopDisplayMode().height;
+        boolean fullscreenFlag = false;
+        if (FileUtil.doesFileExist(desktopModeAssetsDir + "screen_resolution.ini")) {
+            String[] res = FileUtil.readFileToString(desktopModeAssetsDir + "screen_resolution.ini").split("x");
+            if (res.length == 3) {
+                fullscreenFlag = Integer.parseInt(res[2].trim()) > 0;
+                desktopScreenWidth = Integer.parseInt(res[0].trim());
+                desktopScreenHeight = Integer.parseInt(res[1].trim());
+            } else if (res.length == 2) {
+                fullscreenFlag = true;
+                desktopScreenWidth = Integer.parseInt(res[0].trim());
+                desktopScreenHeight = Integer.parseInt(res[1].trim());
             }
         }
                 
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.resizable = false;
-        config.width = desktopMode ? fullscreenWidth : screenWidth;
-        config.height = desktopMode ? fullscreenHeight : screenHeight;
-        config.fullscreen = desktopMode;
+        config.width = desktopMode ? desktopScreenWidth : screenWidth;
+        config.height = desktopMode ? desktopScreenHeight : screenHeight;
+        config.fullscreen = desktopMode && fullscreenFlag;
         config.title = "Forge";
         config.useHDPI = desktopMode; // enable HiDPI on Mac OS
 
