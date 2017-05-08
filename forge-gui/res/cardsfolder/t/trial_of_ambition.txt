@@ -8,4 +8,4 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Han
 SVar:PlayMain1:TRUE
 SVar:NeedsToPlay:Creature.OppCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trial_of_ambition.jpg
-Oracle:WWhen Trial of Ambition enters the battlefield, target opponent sacrifices a creature.\nWhen a Cartouche enters the battlefield under your control, return Trial of Ambition to its owner's hand.
+Oracle:When Trial of Ambition enters the battlefield, target opponent sacrifices a creature.\nWhen a Cartouche enters the battlefield under your control, return Trial of Ambition to its owner's hand.
