@@ -93,7 +93,9 @@ public class ConquestController {
             aiStart.setStartingLife(aiStart.getStartingLife() + 10);
             humanStart.assignCommander();
             aiStart.assignCommander();
-        }
+        } else { // Add commander as just a normal card in the deck
+            CardPool main = humanStart.getDeck().getOrCreate(DeckSection.Main);
+            main.add(humanStart.getDeck().getOrCreate(DeckSection.Commander).toFlatList());}
         if (variants.contains(GameType.Vanguard)) { //add opponent vanguard to player deck
             CardPool avatarPool = humanStart.getDeck().getOrCreate(DeckSection.Avatar);
             avatarPool.clear();
@@ -111,7 +113,9 @@ public class ConquestController {
             aiStart.setPlanes(planes);
         }
 
-        String humanPlayerName = commander.getPlayerName();
+        //String humanPlayerName = commander.getPlayerName(); // TODO: this currently makes it impossible to manually pay mana from pool (see VManaPool#tap)
+        String humanPlayerName = GamePlayerUtil.getGuiPlayer().getName();
+
         String aiPlayerName = battle.getOpponentName();
         if (humanPlayerName.equals(aiPlayerName)) {
             aiPlayerName += " (AI)"; //ensure player names are distinct
