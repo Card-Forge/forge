@@ -26,7 +26,9 @@ public class RepeatEachAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         String logic = sa.getParam("AILogic");
 
-        if ("CloneMyTokens".equals(logic)) {
+        if ("Never".equals(logic)) {
+            return false;
+        } else if ("CloneMyTokens".equals(logic)) {
             if (CardLists.filter(aiPlayer.getCreaturesInPlay(), Presets.TOKEN).size() < 2) {
                 return false;
             }
