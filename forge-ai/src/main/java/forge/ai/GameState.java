@@ -15,6 +15,7 @@ import com.google.common.collect.Lists;
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -50,6 +51,8 @@ public abstract class GameState {
 
     private final Map<Integer, Card> idToCard = new HashMap<>();
     private final Map<Card, Integer> cardToAttachId = new HashMap<>();
+
+    private final Map<String, String> abilityString = new HashMap<>();
 
     private String tChangePlayer = "NONE";
     private String tChangePhase = "NONE";
@@ -286,6 +289,10 @@ public abstract class GameState {
                 aiCardTexts.put(ZoneType.Command, categoryValue);
         }
 
+        else if (categoryName.startsWith("ability")) {
+            abilityString.put(categoryName.substring("ability".length()), categoryValue);
+        }
+
         else {
             System.out.println("Unknown key: " + categoryName);
         }
@@ -452,6 +459,9 @@ public abstract class GameState {
                 } else if (info.startsWith("Attaching:")) {
                     int id = Integer.parseInt(info.substring(info.indexOf(':') + 1));
                     cardToAttachId.put(c, id);
+                } else if (info.startsWith("Ability:")) {
+                    String abString = info.substring(info.indexOf(':') + 1).toLowerCase();
+                    c.addSpellAbility(AbilityFactory.getAbility(abilityString.get(abString), c));
                 }
             }
 

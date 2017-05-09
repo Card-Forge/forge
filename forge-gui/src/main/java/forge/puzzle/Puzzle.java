@@ -20,6 +20,7 @@ public class Puzzle extends GameState implements InventoryItem {
     String name;
     String goal;
     String url;
+    String difficulty;
     int turns;
 
     public Puzzle(Map<String, List<String>> puzzleLines) {
@@ -39,6 +40,8 @@ public class Puzzle extends GameState implements InventoryItem {
                 this.url = split[1];
             } else if ("Turns".equalsIgnoreCase(split[0])) {
                 this.turns = Integer.parseInt(split[1]);
+            } else if ("Difficulty".equalsIgnoreCase(split[0])) {
+                this.difficulty = split[1];
             }
         }
     }

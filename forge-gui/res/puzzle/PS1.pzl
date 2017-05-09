@@ -3,6 +3,7 @@ Name:Possibility Storm #1
 URL:https://i.redd.it/wws1h03gy7ky.png
 Goal:Win
 Turns:1
+Difficulty:Easy
 [state]
 ActivePlayer=Human
 ActivePhase=Main1
