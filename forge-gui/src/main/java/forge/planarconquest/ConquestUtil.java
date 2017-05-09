@@ -207,7 +207,7 @@ public class ConquestUtil {
         WUBRG     (null, new ColorFilter(MagicColor.ALL_COLORS), "Playable in {W}{U}{B}{R}{G}"),
 
         CREATURE              (FSkinProp.IMG_CREATURE, new TypeFilter(EnumSet.of(CoreType.Creature)), "Creature"),
-        NONCREATURE_PERMANENT (FSkinProp.IMG_ENCHANTMENT, new TypeFilter(EnumSet.of(CoreType.Artifact, CoreType.Enchantment, CoreType.Planeswalker, CoreType.Land)), "Noncreature Permanent"),
+        NONCREATURE_PERMANENT (FSkinProp.IMG_ENCHANTMENT, new TypeFilter(EnumSet.of(CoreType.Artifact, CoreType.Enchantment, CoreType.Planeswalker, CoreType.Land), EnumSet.of(CoreType.Creature)), "Noncreature Permanent"),
         INSTANT_SORCERY       (FSkinProp.IMG_SORCERY, new TypeFilter(EnumSet.of(CoreType.Instant, CoreType.Sorcery)), "Instant or Sorcery"),
 
         COMMON   (FSkinProp.IMG_PW_BADGE_COMMON, new RarityFilter(EnumSet.of(CardRarity.Common, CardRarity.Uncommon, CardRarity.Rare, CardRarity.Special, CardRarity.MythicRare)), "Common"),
@@ -366,9 +366,16 @@ public class ConquestUtil {
 
     private static class TypeFilter implements Predicate<PaperCard> {
         private final EnumSet<CoreType> types;
+        private final EnumSet<CoreType> nonTypes;
 
         private TypeFilter(EnumSet<CoreType> types0) {
             types = types0;
+            nonTypes = null;
+        }
+
+        private TypeFilter(EnumSet<CoreType> types0, EnumSet<CoreType> nonTypes0) {
+            types = types0;
+            nonTypes = nonTypes0;
         }
 
         @Override
@@ -376,6 +383,13 @@ public class ConquestUtil {
             CardType cardType = card.getRules().getType();
             for (CoreType type : types) {
                 if (cardType.hasType(type)) {
+                    if (nonTypes != null) {
+                        for (CoreType nonType : nonTypes) {
+                            if (cardType.hasType(nonType)) {
+                                return false;
+                            }
+                        }
+                    }
                     return true;
                 }
             }
