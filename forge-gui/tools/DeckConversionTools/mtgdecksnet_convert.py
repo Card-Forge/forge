@@ -3,7 +3,7 @@
 
 # Modify key directories here
 # Recommended parameters: -i -w (will add ! to all unsupported decks) OR -i -f (will only convert supported decks)
-CARDSFOLDER = "/home/agetian/Software/ForgeDeckAnalyzer/cardsfolder"
+CARDSFOLDER = "../../res/cardsfolder"
 DECKFOLDER = "."
 OUT_DECKFOLDER = "./ForgeDecks"
 
