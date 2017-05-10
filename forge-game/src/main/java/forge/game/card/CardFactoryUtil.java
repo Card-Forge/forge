@@ -3463,7 +3463,7 @@ public class CardFactoryUtil {
                 to = true;
             }
 
-            String rep = "Event$ DamageDone | Prevention$ True";
+            String rep = "Event$ DamageDone | Prevent$ True";
             if (isCombat) {
                 rep += "| IsCombat$ True";
             }
@@ -3492,7 +3492,7 @@ public class CardFactoryUtil {
         // No finish yet, need card updates
         if (keyword.startsWith("PreventAllDamageBy") && keyword.contains(":")) {
             final String[] k = keyword.split(":");
-            String rep = "Event$ DamageDone | Prevention$ True | ValidTarget$ Card.Self | ValidSource$ " + k[1];
+            String rep = "Event$ DamageDone | Prevent$ True | ValidTarget$ Card.Self | ValidSource$ " + k[1];
             rep += "| Description$ ";
             if (k.length > 2) {
                 rep += k[2];
