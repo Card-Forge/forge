@@ -1,15 +1,16 @@
 package forge.planarconquest;
 
-import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.EnumSet;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 import forge.assets.FSkinProp;
 import forge.assets.IHasSkinProp;
@@ -44,7 +45,7 @@ public class ConquestUtil {
     public static Deck generateDeck(PaperCard commander, IDeckGenPool pool, boolean forAi) {
         ColorSet colorID = commander.getRules().getColorIdentity();
 
-        List<String> colors = new ArrayList<String>();
+        List<String> colors = Lists.newArrayList();
         if (colorID.hasWhite()) { colors.add("White"); }
         if (colorID.hasBlue())  { colors.add("Blue"); }
         if (colorID.hasBlack()) { colors.add("Black"); }
@@ -105,7 +106,7 @@ public class ConquestUtil {
     }
 
     public static CardPool getAvailablePool(Deck deck) {
-        HashSet<PaperCard> availableCards = new HashSet<PaperCard>();
+        Set<PaperCard> availableCards = Sets.newHashSet();
         ConquestData model = FModel.getConquest().getModel();
         for (PaperCard pc : model.getUnlockedCards()) {
             availableCards.add(pc);
@@ -253,7 +254,7 @@ public class ConquestUtil {
             if (predicate instanceof RarityFilter) {
                 float total = 0;
                 CardRarity rarity = null;
-                EnumMap<CardRarity, Double> rarityOdds = ((RarityFilter)predicate).rarityOdds;
+                Map<CardRarity, Double> rarityOdds = ((RarityFilter)predicate).rarityOdds;
                 for (Entry<CardRarity, Double> entry : rarityOdds.entrySet()) {
                     rarity = entry.getKey();
                     total += entry.getValue();
@@ -290,7 +291,7 @@ public class ConquestUtil {
     public static void updateRarityFilterOdds() {
         ConquestPreferences prefs = FModel.getConquestPreferences();
 
-        EnumMap<CardRarity, Double> odds = new EnumMap<CardRarity, Double>(CardRarity.class);
+        Map<CardRarity, Double> odds = Maps.newEnumMap(CardRarity.class);
         double commonsPerBooster = prefs.getPrefInt(CQPref.BOOSTER_COMMONS);
         double uncommonPerBooster = prefs.getPrefInt(CQPref.BOOSTER_UNCOMMONS);
         double raresPerBooster = prefs.getPrefInt(CQPref.BOOSTER_RARES);
@@ -365,15 +366,15 @@ public class ConquestUtil {
     }
 
     private static class TypeFilter implements Predicate<PaperCard> {
-        private final EnumSet<CoreType> types;
-        private final EnumSet<CoreType> nonTypes;
+        private final Iterable<CoreType> types;
+        private final Iterable<CoreType> nonTypes;
 
-        private TypeFilter(EnumSet<CoreType> types0) {
+        private TypeFilter(Iterable<CoreType> types0) {
             types = types0;
             nonTypes = null;
         }
 
-        private TypeFilter(EnumSet<CoreType> types0, EnumSet<CoreType> nonTypes0) {
+        private TypeFilter(Iterable<CoreType> types0, Iterable<CoreType> nonTypes0) {
             types = types0;
             nonTypes = nonTypes0;
         }
@@ -381,15 +382,15 @@ public class ConquestUtil {
         @Override
         public boolean apply(PaperCard card) {
             CardType cardType = card.getRules().getType();
+            if (nonTypes != null) {
+                for (CoreType nonType : nonTypes) {
+                    if (cardType.hasType(nonType)) {
+                        return false;
+                    }
+                }
+            }
             for (CoreType type : types) {
                 if (cardType.hasType(type)) {
-                    if (nonTypes != null) {
-                        for (CoreType nonType : nonTypes) {
-                            if (cardType.hasType(nonType)) {
-                                return false;
-                            }
-                        }
-                    }
                     return true;
                 }
             }
@@ -398,16 +399,16 @@ public class ConquestUtil {
     }
 
     private static class RarityFilter implements Predicate<PaperCard> {
-        private final EnumMap<CardRarity, Double> rarityOdds;
+        private final Map<CardRarity, Double> rarityOdds;
 
-        private RarityFilter(EnumSet<CardRarity> rarities0) {
-            rarityOdds = new EnumMap<CardRarity, Double>(CardRarity.class);
+        private RarityFilter(Iterable<CardRarity> rarities0) {
+            rarityOdds = Maps.newEnumMap(CardRarity.class);
             for (CardRarity rarity : rarities0) {
                 rarityOdds.put(rarity, 0d); //values will be set later
             }
         }
 
-        private String updateOdds(EnumMap<CardRarity, Double> oddsLookup) {
+        private String updateOdds(Map<CardRarity, Double> oddsLookup) {
             double baseOdds = 0;
             double remainingOdds = 1;
             CardRarity baseRarity = null;
