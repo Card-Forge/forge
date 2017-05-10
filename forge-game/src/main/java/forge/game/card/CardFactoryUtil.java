@@ -3472,7 +3472,6 @@ public class CardFactoryUtil {
             if (from) {
                 String fromRep = rep + " | ValidSource$ Card.Self";
                 ReplacementEffect re = ReplacementHandler.parseReplacement(fromRep, card, intrinsic);
-                re.setLayer(ReplacementLayer.Other);
                 ReplacementEffect cardre = card.addReplacementEffect(re);
 
                 if (!intrinsic) {
@@ -3482,12 +3481,30 @@ public class CardFactoryUtil {
             if (to) {
                 String toRep = rep + " | ValidTarget$ Card.Self";
                 ReplacementEffect re = ReplacementHandler.parseReplacement(toRep, card, intrinsic);
-                re.setLayer(ReplacementLayer.Other);
                 ReplacementEffect cardre = card.addReplacementEffect(re);
 
                 if (!intrinsic) {
                     kws.addReplacement(cardre);
                 }
+            }
+        }
+        
+        // No finish yet, need card updates
+        if (keyword.startsWith("PreventAllDamageBy") && keyword.contains(":")) {
+            final String[] k = keyword.split(":");
+            String rep = "Event$ DamageDone | Prevention$ True | ValidTarget$ Card.Self | ValidSource$ " + k[1];
+            rep += "| Description$ ";
+            if (k.length > 2) {
+                rep += k[2];
+            } else {
+                rep += "Prevent all damage that would be dealt to CARDNAME by " + k[1];
+            }
+            
+            ReplacementEffect re = ReplacementHandler.parseReplacement(rep, card, intrinsic);
+            ReplacementEffect cardre = card.addReplacementEffect(re);
+
+            if (!intrinsic) {
+                kws.addReplacement(cardre);
             }
         }
     }
