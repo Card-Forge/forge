@@ -1,7 +1,7 @@
 Name:Glyph of Destruction
 ManaCost:R
 Types:Instant
-A:SP$ Pump | Cost$ R | ValidTgts$ Creature.Wall+blocking | TgtPrompt$ Select target blocking Wall you control | SubAbility$ DBPump | KW$ HIDDEN Prevent all damage that would be dealt to CARDNAME. | SpellDescription$ Target blocking Wall you control gets +10/+0 until end of combat. Prevent all damage that would be dealt to it this turn. Destroy it at the beginning of the next end step.
+A:SP$ Pump | Cost$ R | ValidTgts$ Creature.Wall+blocking | TgtPrompt$ Select target blocking Wall you control | SubAbility$ DBPump | KW$ Prevent all damage that would be dealt to CARDNAME. | SpellDescription$ Target blocking Wall you control gets +10/+0 until end of combat. Prevent all damage that would be dealt to it this turn. Destroy it at the beginning of the next end step.
 SVar:DBPump:DB$ Pump | NumAtt$ +10 | Defined$ Targeted | UntilEndOfCombat$ True | AtEOT$ Destroy
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
