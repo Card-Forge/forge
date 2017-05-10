@@ -61,6 +61,9 @@ public class ConquestChaosWheel extends FOverlay {
 
     private class WheelSpinAnimation extends ForgeAnimation {
         private final PhysicsObject rotationManager;
+        private final float WAIT_DURATION = 1f;
+        private float timeSpentWaiting = 0f;
+        private boolean doneSpinning = false;
 
         private WheelSpinAnimation() {
             float initialPosition = Aggregates.randomInt(1, 8) * 45f - 22.5f; //-22.5f because wheel image slightly rotated initially
@@ -75,23 +78,27 @@ public class ConquestChaosWheel extends FOverlay {
 
         @Override
         protected boolean advance(float dt) {
-            rotationManager.advance(dt);
-            Vector2 pos = rotationManager.getPosition();
-            while (pos.x > 360f) { //loop back around
-                pos.x -= 360f;
+            if (!doneSpinning) {
+                rotationManager.advance(dt);
+                Vector2 pos = rotationManager.getPosition();
+                while (pos.x > 360f) { //loop back around
+                    pos.x -= 360f;
+                }
+                if (!rotationManager.isMoving()) {
+                    doneSpinning = true;
+                }
+                return true;
+            } else {
+                // Wait a bit after the wheel stops spinning before ending
+                timeSpentWaiting += dt;
+                return timeSpentWaiting < WAIT_DURATION;
             }
-            return rotationManager.isMoving();
         }
 
         @Override
         protected void onEnd(boolean endingAll) {
-            ThreadUtil.delay(1000, new Runnable() {
-                @Override
-                public void run() {
-                    hide();
-                    callback.run(ChaosWheelOutcome.getWheelOutcome(getWheelRotation()));
-                }
-            });
+            hide();
+            callback.run(ChaosWheelOutcome.getWheelOutcome(getWheelRotation()));
         }
     }
 
