@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
-CARDSFOLDER = "../../res/cardsfolder"
-EDITIONS = "../../res/editions"
+CARDSFOLDER = "/home/agetian/Software/ForgeDeckAnalyzer/cardsfolder"
+EDITIONS = "/home/agetian/Software/ForgeDeckAnalyzer/editions"
 DECKFOLDER = "."
 
 import argparse, os, re, shutil
 
-print("Agetian's MTG Forge Deck Sorter v1.4\n")
+print("Agetian's MTG Forge Deck Sorter v1.4a\n")
 
 parser = argparse.ArgumentParser(description="Sort decks into folders (by edition).")
 parser.add_argument("-d", action="store_true", help="physically delete original (unsorted) decks")
@@ -19,10 +19,16 @@ if not (os.access(os.path.join(CARDSFOLDER,"a","abu_jafar.txt"),os.F_OK) or os.a
     exit(1)
 
 # basic variables
+cardlist = {}
 editions = {}
 edition_names = {}
 cards_by_edition = {}
+total_cards = 0
 total_editions = 0
+ai_playable_cards = 0
+total_decks = 0
+playable_decks = 0
+nonplayable_in_deck = 0
 
 ignore_cards = ['Swamp', 'Plains', 'Mountain', 'Island', 'Forest']
 
@@ -35,6 +41,35 @@ re_Name = '^Name=(.*)$'
 re_Card = '^[0-9]* *[A-Z] (.*)$'
 
 # main algorithm
+print("Loading cards...")
+for root, dirs, files in os.walk(CARDSFOLDER):
+    for name in files:
+	if name.find(".txt") != -1:
+	    total_cards += 1
+	    fullpath = os.path.join(root, name)
+	    cardtext = open(fullpath).read()
+	    cardtext_lower = cardtext.lower()
+	    cardname_literal = cardtext.replace('\r','').split('\n')[0].split(':')
+	    cardname = ":".join(cardname_literal[1:]).strip()
+	    if (cardtext_lower.find("alternatemode:split") != -1) or (cardtext_lower.find("alternatemode: split") != -1):
+		# split card, special handling needed
+		cardsplittext = cardtext.replace('\r','').split('\n')
+		cardnames = []
+		for line in cardsplittext:
+		    if line.lower().find("name:") != -1:
+			cardnames.extend([line.split('\n')[0].split(':')[1]])
+		cardname = " // ".join(cardnames)
+	    if cardtext.lower().find("remaideck") != -1:
+		cardlist[cardname] = 0
+	    else:
+		cardlist[cardname] = 1
+		ai_playable_cards += 1
+
+perc_playable = (float(ai_playable_cards) / total_cards) * 100
+perc_unplayable = ((float(total_cards) - ai_playable_cards) / total_cards) * 100
+
+print("Loaded %d cards, among them %d playable by the AI (%d%%), %d unplayable by the AI (%d%%).\n" % (total_cards, ai_playable_cards, perc_playable, total_cards - ai_playable_cards, perc_unplayable))
+
 print("Loading editions...")
 for root, dirs, files in os.walk(EDITIONS):
     for name in files:
@@ -139,6 +174,18 @@ def get_event_for_deck(deck):
     else:
 	return ""
 
+#print(cards_by_edition["Fireball"])
+#print(edition_names[get_latest_set_for_card("Fireball")])
+#testdeck = """
+#3[main]
+#4 Fireball
+#4 Lim-Dul's Vault
+#4 Bygone Bishop
+#[sideboard]
+#4 Thassa's Bounty
+#"""
+#print(edition_names[get_latest_set_for_deck(testdeck)])
+
 print("Scanning decks...")
 for root, dirs, files in os.walk(DECKFOLDER):
     for name in files:
@@ -148,7 +195,7 @@ for root, dirs, files in os.walk(DECKFOLDER):
 	    deckdata = open(fullpath).read()
 	    set_for_deck = edition_names[get_latest_set_for_deck(deckdata)]
 	    event_for_deck = get_event_for_deck(deckdata)
-	    if event_for_deck[len(event_for_deck)-1] == ".":
+	    if event_for_deck != "" and event_for_deck[len(event_for_deck)-1] == ".":
 		event_for_deck = event_for_deck[0:len(event_for_deck)-1]
 	    print("Deck: " + name + ", Set: " + set_for_deck + ", Event: " + event_for_deck)
 	    if not os.access(os.path.join(root, set_for_deck, event_for_deck), os.F_OK):

@@ -3,13 +3,13 @@
 
 # Modify key directories here
 # Recommended parameters: -i -w (will add ! to all unsupported decks) OR -i -f (will only convert supported decks)
-CARDSFOLDER = "../../res/cardsfolder"
+CARDSFOLDER = "/home/agetian/Software/ForgeDeckAnalyzer/cardsfolder"
 DECKFOLDER = "."
 OUT_DECKFOLDER = "./ForgeDecks"
 
 import argparse, os, re
 
-print("Agetian's MtgDecks.net DEC to MTG Forge Deck Converter v3.3a\n")
+print("Agetian's MtgDecks.net DEC to MTG Forge Deck Converter v3.5\n")
 
 parser = argparse.ArgumentParser(description="Convert MtgDecks.net DEC to Forge DCK.")
 
@@ -66,7 +66,7 @@ perc_unplayable = ((float(total_cards) - ai_playable_cards) / total_cards) * 100
 
 print("Loaded %d cards, among them %d playable by the AI (%d%%), %d unplayable by the AI (%d%%).\n" % (total_cards, ai_playable_cards, perc_playable, total_cards - ai_playable_cards, perc_unplayable))
 
-re_Metadata = '^//(.*), a (.*) deck by (.*)$'
+re_Metadata = '^//(.*) a (.*) deck by (.*)$'
 re_Metadata2 = '^//(.*) a ([A-Za-z]+) MTG deck played by (.*) in (.*) - MTGDECKS.NET.*$'
 re_DeckID = '^([0-9]+)\.dec$'
 re_Maindeck = '^([0-9]+) (.*)$'
@@ -116,6 +116,8 @@ for root, dirs, files in os.walk(DECKFOLDER):
 		line = line.replace("\xFB", "u")
 		line = line.replace("\xFC", "u")
 		line = line.replace("\xC4", "A")
+		if line[0] != "/" and line.find(" // ") == -1:
+		    line = line.replace("/"," // ")
 		timepos = line.find("<!")
 		if timepos > -1:
 		    line = line[0:timepos]
@@ -227,7 +229,10 @@ for root, dirs, files in os.walk(DECKFOLDER):
 		outname += deckname + ".dck"
 		print ("Writing converted deck: " + outname)
 		dck = open(OUT_DECKFOLDER + "/" + outname, "w")
-		dck.write("#EVENT:"+event+"\n")
+
+		if event:
+		    dck.write("#EVENT:"+event+"\n")
+
 		dck.write("[metadata]\n")
 		dck.write("Name="+deckname+"\n")
 		dck.write("[general]\n")
