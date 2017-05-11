@@ -20939,6 +20939,7 @@ forge-gui/src/main/java/forge/limited/CardThemedDeckBuilder.java -text
 forge-gui/src/main/java/forge/limited/CustomLimited.java svneol=native#text/plain
 forge-gui/src/main/java/forge/limited/DeckColors.java svneol=native#text/plain
 forge-gui/src/main/java/forge/limited/DraftRankCache.java -text
+forge-gui/src/main/java/forge/limited/FullDeckColors.java -text
 forge-gui/src/main/java/forge/limited/GauntletMini.java -text
 forge-gui/src/main/java/forge/limited/IBoosterDraft.java svneol=native#text/plain
 forge-gui/src/main/java/forge/limited/LimitedDeckBuilder.java -text

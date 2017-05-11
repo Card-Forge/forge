@@ -60,6 +60,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
     protected Iterable<PaperCard> keyCards;
 
     protected static final boolean logToConsole = false;
+    protected static final boolean logColorsToConsole = false;
 
 
     /**
@@ -84,11 +85,18 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
                 deckColors.addColorsOf(c);
             }
         }
-        this.colors = deckColors.getChosenColors();
+        colors = deckColors.getChosenColors();
+        if (logColorsToConsole) {
+            System.out.println(keyCard.getName());
+            System.out.println("Pre Colors: " + colors.toEnumSet().toString());
+        }
         if(!colors.hasAllColors(keyCard.getRules().getColorIdentity().getColor())){
             colors = ColorSet.fromMask(colors.getColor() | keyCard.getRules().getColorIdentity().getColor());
         }
-
+        if (logColorsToConsole) {
+            System.out.println(keyCard.getName());
+            System.out.println("Pre Colors: " + colors.toEnumSet().toString());
+        }
         findBasicLandSets();
     }
 
@@ -110,7 +118,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
     public Deck buildDeck() {
         // 1. Prepare
         hasColor = Predicates.or(new MatchColorIdentity(colors), COLORLESS_CARDS);
-        if (logToConsole) {
+        if (logColorsToConsole) {
             System.out.println(keyCard.getName());
             System.out.println("Colors: " + colors.toEnumSet().toString());
         }
@@ -174,7 +182,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         // 7. If not enough cards yet, try to add a third color,
         // to try and avoid adding purely random cards.
         addThirdColorCards(numSpellsNeeded - deckList.size());
-        if (logToConsole) {
+        if (logColorsToConsole) {
             System.out.println("Post 3rd colour : " + deckList.size());
             System.out.println("Colors: " + colors.toEnumSet().toString());
         }
@@ -188,7 +196,17 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         if (logToConsole) {
             System.out.println("Post Randoms : " + deckList.size());
         }
-
+        //TODO: update colors
+        FullDeckColors finalDeckColors = new FullDeckColors();
+        for(PaperCard c:deckList){
+            if(finalDeckColors.canChoseMoreColors()){
+                finalDeckColors.addColorsOf(c);
+            }
+        }
+        colors = finalDeckColors.getChosenColors();
+        if (logColorsToConsole) {
+            System.out.println("Final Colors: " + colors.toEnumSet().toString());
+        }
         // 10. Add non-basic lands that were drafted.
         addWastesIfRequired();
         List<String> duals = getDualLandList();
@@ -833,11 +851,11 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
     }
 
     /**
-     * @param colors
+     * @param colors0
      *            the colors to set
      */
-    public void setColors(final ColorSet colors) {
-        this.colors = colors;
+    public void setColors(final ColorSet colors0) {
+        colors = colors0;
     }
 
     /**

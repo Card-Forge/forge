@@ -393,7 +393,7 @@ public abstract class DeckGeneratorBase {
      */
     protected List<String> getDualLandList() {
 
-
+        System.out.println("Dual Land Colors: " + colors.toEnumSet().toString());
         if (colors.countColors() > 3) {
             addCardNameToList("Rupture Spire", dLands);
             addCardNameToList("Undiscovered Paradise", dLands);
@@ -445,7 +445,7 @@ public abstract class DeckGeneratorBase {
     }
 
     public List<String> regexFetchLandSearch(Iterable<PaperCard> landCards){
-        final String fetchPattern="Search your library for a ([^\\s]*) or ([^\\s]*) card";
+        final String fetchPattern="Search your library for an* ([^\\s]*) or ([^\\s]*) card";
         //final List<String> dLands = new ArrayList<String>();
         Map<String,String> colorLookup= new HashMap<>();
         colorLookup.put("Plains","W");

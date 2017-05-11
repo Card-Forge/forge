@@ -28,7 +28,7 @@ public class DeckColors {
     private ColorSet chosen;
     private int colorMask;
 
-    public final static int MAX_COLORS = 2;
+    public int MAX_COLORS = 2;
 
     public ColorSet getChosenColors() {
         if (null == chosen) {
@@ -47,7 +47,7 @@ public class DeckColors {
             return;
         }
 
-        for (final byte color : MagicColor.WUBRGC) {
+        for (final byte color : MagicColor.WUBRG) {
             if (toAdd.hasAnyColor(color)) {
                 colorMask |= color;
                 chosen = null; // invalidate color set
