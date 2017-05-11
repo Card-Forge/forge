@@ -303,7 +303,9 @@ public class MatchController extends AbstractGuiGame {
     public void restoreOldZones(final Map<PlayerView, Object> playersToRestoreZonesFor) {
         for (final Entry<PlayerView, Object> player : playersToRestoreZonesFor.entrySet()) {
             final VPlayerPanel playerPanel = view.getPlayerPanel(player.getKey());
-            playerPanel.setSelectedTab((InfoTab)player.getValue());
+            if (player.getValue() == null || player.getValue() instanceof InfoTab) {
+                playerPanel.setSelectedTab((InfoTab) player.getValue());
+            }
         }
     }
 
