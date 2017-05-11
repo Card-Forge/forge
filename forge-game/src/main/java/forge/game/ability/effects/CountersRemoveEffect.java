@@ -71,9 +71,17 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
         final Game game = card.getGame();
         final String type = sa.getParam("CounterType");
         final String num = sa.getParam("CounterNum");
+
         int cntToRemove = 0;
         if (!num.equals("All") && !num.equals("Remembered")) {
             cntToRemove = AbilityUtils.calculateAmount(sa.getHostCard(), num, sa);
+        }
+
+        if (sa.hasParam("Optional")) {
+            String ctrs = cntToRemove > 1 ? "counters" : num.equals("All") ? "all counters" : "a counter";
+            if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, "Remove " + ctrs + "?")) {
+                return;
+            }
         }
 
         CounterType counterType = null;
