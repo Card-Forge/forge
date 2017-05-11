@@ -23,7 +23,7 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.item.IPaperCard;
 
-class DeckColors {
+public class DeckColors {
 
     private ColorSet chosen;
     private int colorMask;
@@ -47,7 +47,7 @@ class DeckColors {
             return;
         }
 
-        for (final byte color : MagicColor.WUBRG) {
+        for (final byte color : MagicColor.WUBRGC) {
             if (toAdd.hasAnyColor(color)) {
                 colorMask |= color;
                 chosen = null; // invalidate color set

@@ -430,7 +430,13 @@ public class QuestController {
      */
     public void resetDuelsManager() {
         QuestWorld world = getWorld();
-        String path = world == null || world.getDuelsDir() == null ? ForgeConstants.DEFAULT_DUELS_DIR : ForgeConstants.QUEST_WORLD_DIR + world.getDuelsDir();
+        String path;
+        if (world == null || !world.isCustom()){
+            path = world == null || world.getDuelsDir() == null ? ForgeConstants.DEFAULT_DUELS_DIR : ForgeConstants.QUEST_WORLD_DIR + world.getDuelsDir();
+        }else{
+            path = world == null || world.getDuelsDir() == null ? ForgeConstants.DEFAULT_DUELS_DIR : ForgeConstants.USER_QUEST_WORLD_DIR + world.getDuelsDir();
+        }
+
         this.duelManager = new QuestEventDuelManager(new File(path));
     }
 
@@ -440,7 +446,13 @@ public class QuestController {
      */
     public void resetChallengesManager() {
         QuestWorld world = getWorld();
-        String path = world == null || world.getChallengesDir() == null ? ForgeConstants.DEFAULT_CHALLENGES_DIR : ForgeConstants.QUEST_WORLD_DIR + world.getChallengesDir();
+        String path;
+        if (world == null || !world.isCustom()){
+            path = world == null || world.getChallengesDir() == null ? ForgeConstants.DEFAULT_CHALLENGES_DIR : ForgeConstants.QUEST_WORLD_DIR + world.getChallengesDir();
+        }else{
+            path = world == null || world.getChallengesDir() == null ? ForgeConstants.DEFAULT_CHALLENGES_DIR : ForgeConstants.USER_QUEST_WORLD_DIR + world.getChallengesDir();
+
+        }
         this.allChallenges = new StorageBase<QuestEventChallenge>("Quest Challenges", new QuestChallengeReader(new File(path)));
     }
 

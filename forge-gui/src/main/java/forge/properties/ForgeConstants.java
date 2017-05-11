@@ -64,6 +64,7 @@ public final class ForgeConstants {
     public static final String LANG_DIR            = RES_DIR + "languages" + PATH_SEPARATOR;
     public static final String EFFECTS_DIR         = RES_DIR + "effects" + PATH_SEPARATOR;
     public static final String PUZZLE_DIR          = RES_DIR + "puzzle" + PATH_SEPARATOR;
+    public static final String DECK_GEN_DIR        = RES_DIR + "deckgendecks" + PATH_SEPARATOR;
 
 
     private static final String QUEST_DIR             = RES_DIR + "quest" + PATH_SEPARATOR;
@@ -113,6 +114,7 @@ public final class ForgeConstants {
 
     // data that is only in the profile dirs
     public static final String USER_QUEST_DIR       = USER_DIR + "quest" + PATH_SEPARATOR;
+    public static final String USER_QUEST_WORLD_DIR = USER_QUEST_DIR + "world" + PATH_SEPARATOR;
     public static final String USER_CONQUEST_DIR    = USER_DIR + "conquest" + PATH_SEPARATOR;
     public static final String USER_PREFS_DIR       = USER_DIR + "preferences" + PATH_SEPARATOR;
     public static final String USER_GAMES_DIR       = USER_DIR + "games" + PATH_SEPARATOR;

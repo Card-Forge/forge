@@ -8,14 +8,12 @@ import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
-import forge.deck.CardPool;
-import forge.deck.Deck;
-import forge.deck.DeckSection;
 import forge.deck.generation.*;
+import forge.game.GameFormat;
 import forge.game.GameType;
-import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.itemmanager.IItemManager;
+import forge.limited.CardThemedDeckBuilder;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
@@ -31,6 +29,7 @@ import forge.util.storage.IStorage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /** 
  * Utility collection for various types of decks.
@@ -41,6 +40,81 @@ import java.util.List;
  */
 // TODO This class can be used for home menu constructed deck generation as well.
 public class DeckgenUtil {
+
+    public static Deck buildCardGenDeck(GameFormat format){
+        Random random    = new Random();
+        List<String> keys      = new ArrayList<>(CardRelationMatrixGenerator.cardPools.get(format).keySet());
+        String       randomKey = keys.get( random.nextInt(keys.size()) );
+        Predicate<PaperCard> cardFilter = Predicates.and(format.getFilterPrinted(),PaperCard.Predicates.name(randomKey));
+        PaperCard keyCard = FModel.getMagicDb().getCommonCards().getAllCards(cardFilter).get(0);
+        try {
+            return buildCardGenDeck(keyCard,format);
+        }catch (Exception e){
+            e.printStackTrace();
+            return buildCardGenDeck(format);
+        }
+    }
+
+    public static Deck buildCardGenDeck(String cardName, GameFormat format){
+        try {
+            Predicate<PaperCard> cardFilter = Predicates.and(format.getFilterPrinted(),PaperCard.Predicates.name(cardName));
+            return buildCardGenDeck(FModel.getMagicDb().getCommonCards().getAllCards(cardFilter).get(0),format);
+        }catch (Exception e){
+            e.printStackTrace();
+            return buildCardGenDeck(format);
+        }
+    }
+
+    public static Deck buildCardGenDeck(PaperCard card, GameFormat format){
+        List<PaperCard> selectedCards = new ArrayList<>();
+        selectedCards.addAll(CardRelationMatrixGenerator.cardPools.get(format).get(card.getName()));
+        List<PaperCard> toRemove = new ArrayList<>();
+        Random r = new Random();
+        //randomly remove cards
+        int removeCount=0;
+        int i=0;
+        for(PaperCard c:selectedCards){
+            if(r.nextInt(100)>70+(15-(i/selectedCards.size())*selectedCards.size()) && removeCount<4){
+                toRemove.add(c);
+                removeCount++;
+            }
+            ++i;
+        }
+        selectedCards.removeAll(toRemove);
+        List<PaperCard> playsetList = new ArrayList<>();
+        int keyCardCount=4;
+        if(card.getRules().getMainPart().getManaCost().getCMC()>7){
+            keyCardCount=1+r.nextInt(4);
+        }else if(card.getRules().getMainPart().getManaCost().getCMC()>5){
+            keyCardCount=2+r.nextInt(3);
+        }
+        for(int j=0;j<keyCardCount;++j) {
+            playsetList.add(card);
+        }
+        for (PaperCard c:selectedCards){
+            for(int j=0;j<4;++j) {
+                if(r.nextInt(100)<90) {
+                    playsetList.add(c);
+                }
+            }
+        }
+        CardThemedDeckBuilder dBuilder = new CardThemedDeckBuilder(card, playsetList,format);
+        Deck deck = dBuilder.buildDeck();
+        if(deck.getMain().countAll()!=60){
+            System.out.println(deck.getMain().countAll());
+            System.out.println("Wrong card count "+deck.getMain().countAll());
+            deck=buildCardGenDeck(format);
+        }
+        if(deck.getMain().countAll(Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard.FN_GET_RULES))>27){
+            System.out.println("Too many lands "+deck.getMain().countAll(Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard.FN_GET_RULES)));
+            deck=buildCardGenDeck(format);
+        }
+        while(deck.get(DeckSection.Sideboard).countAll()>15){
+            deck.get(DeckSection.Sideboard).remove(deck.get(DeckSection.Sideboard).get(0));
+        }
+        return deck;
+    }
+
     /**
      * @param selection {@link java.lang.String} array
      * @return {@link forge.deck.Deck}

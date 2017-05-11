@@ -88,7 +88,9 @@ public class NewGauntletScreen extends LaunchScreen {
                         DeckType.QUEST_OPPONENT_DECK,
                         DeckType.COLOR_DECK,
                         DeckType.STANDARD_COLOR_DECK,
+                        DeckType.STANDARD_CARDGEN_DECK,
                         DeckType.MODERN_COLOR_DECK,
+                        DeckType.MODERN_CARDGEN_DECK,
                         DeckType.THEME_DECK
                 }), null, new Callback<List<DeckType>>() {
                     @Override

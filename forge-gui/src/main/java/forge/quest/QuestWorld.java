@@ -40,9 +40,10 @@ public class QuestWorld implements Comparable<QuestWorld>{
     private final String dir;
     private final GameFormatQuest format;
 
+    private boolean isCustom;
+
     /**
      * Instantiate a new quest world.
-     * @param useIdx int, the quest world internal identifier
      * @param useName String, the display name for the world
      * @param useDir String, the basedir that contains the duels and challenges for the quest world
      * @param useFormat GameFormatQuest that contains the initial format for the world
@@ -51,6 +52,21 @@ public class QuestWorld implements Comparable<QuestWorld>{
         name = useName;
         dir = useDir;
         format = useFormat;
+        isCustom = false;
+    }
+
+    /**
+     * Instantiate a new quest world.
+     * @param useName String, the display name for the world
+     * @param useDir String, the basedir that contains the duels and challenges for the quest world
+     * @param useFormat GameFormatQuest that contains the initial format for the world
+     * @param isCustom0 boolean determining whether the world is from the user's custom folder
+     */
+    public QuestWorld(final String useName, final String useDir, final GameFormatQuest useFormat, final boolean isCustom0) {
+        name = useName;
+        dir = useDir;
+        format = useFormat;
+        isCustom = isCustom0;
     }
 
     /**
@@ -223,5 +239,13 @@ public class QuestWorld implements Comparable<QuestWorld>{
             }
         }
         return result;
+    }
+
+    public boolean isCustom() {
+        return isCustom;
+    }
+
+    public void setCustom(boolean custom) {
+        isCustom = custom;
     }
 }

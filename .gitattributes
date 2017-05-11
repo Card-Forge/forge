@@ -18770,6 +18770,8 @@ forge-gui/res/cube/Sam[!!-~]Black's[!!-~]No[!!-~]Search[!!-~]Cube.dck -text
 forge-gui/res/cube/The[!!-~]Peasant's[!!-~]Toolbox.dck -text
 forge-gui/res/cube/Timothee[!!-~]Simonot's[!!-~]Twisted[!!-~]Color[!!-~]Pie[!!-~]Cube.dck -text
 forge-gui/res/cube/www.mtgcube.com[!!-~](502[!!-~]cards).dck -text
+forge-gui/res/deckgendecks/Modern.dat -text
+forge-gui/res/deckgendecks/Standard.dat -text
 forge-gui/res/defaults/editor.xml svneol=native#text/xml
 forge-gui/res/defaults/gauntlet/LOCKED_DotP[!!-~]Preconstructed.dat -text
 forge-gui/res/defaults/gauntlet/LOCKED_Swimming[!!-~]With[!!-~]Sharks.dat -text
@@ -20863,6 +20865,8 @@ forge-gui/src/main/java/forge/control/FControlGameEventHandler.java -text
 forge-gui/src/main/java/forge/control/FControlGamePlayback.java -text
 forge-gui/src/main/java/forge/control/WatchLocalGame.java -text
 forge-gui/src/main/java/forge/control/package-info.java -text
+forge-gui/src/main/java/forge/deck/CardRelationMatrixGenerator.java -text
+forge-gui/src/main/java/forge/deck/CardThemedDeckGenerator.java -text
 forge-gui/src/main/java/forge/deck/ColorDeckGenerator.java -text
 forge-gui/src/main/java/forge/deck/DeckGeneratorTheme.java -text
 forge-gui/src/main/java/forge/deck/DeckImportController.java -text
@@ -20871,6 +20875,7 @@ forge-gui/src/main/java/forge/deck/DeckType.java -text
 forge-gui/src/main/java/forge/deck/DeckgenUtil.java -text
 forge-gui/src/main/java/forge/deck/NetDeckCategory.java -text
 forge-gui/src/main/java/forge/deck/RandomDeckGenerator.java -text
+forge-gui/src/main/java/forge/deck/io/CardThemedMatrixIO.java -text
 forge-gui/src/main/java/forge/deck/io/DeckPreferences.java -text
 forge-gui/src/main/java/forge/deck/io/DeckRecords.java -text
 forge-gui/src/main/java/forge/download/GuiDownloadAchievementImages.java -text
@@ -20930,6 +20935,7 @@ forge-gui/src/main/java/forge/limited/BoosterDraft.java svneol=native#text/plain
 forge-gui/src/main/java/forge/limited/BoosterDraftAI.java svneol=native#text/plain
 forge-gui/src/main/java/forge/limited/CardRanker.java -text
 forge-gui/src/main/java/forge/limited/CardRankingComparator.java -text
+forge-gui/src/main/java/forge/limited/CardThemedDeckBuilder.java -text
 forge-gui/src/main/java/forge/limited/CustomLimited.java svneol=native#text/plain
 forge-gui/src/main/java/forge/limited/DeckColors.java svneol=native#text/plain
 forge-gui/src/main/java/forge/limited/DraftRankCache.java -text

@@ -26,6 +26,7 @@ import forge.achievement.*;
 import forge.ai.AiProfileUtil;
 import forge.card.CardPreferences;
 import forge.card.CardType;
+import forge.deck.CardRelationMatrixGenerator;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
 import forge.game.GameType;
@@ -173,7 +174,13 @@ public final class FModel {
         conquestPreferences = new ConquestPreferences();
         fantasyBlocks = new StorageBase<>("Custom blocks", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "fantasyblocks.txt", magicDb.getEditions()));
         planes = new StorageBase<>("Conquest planes", new ConquestPlane.Reader(ForgeConstants.CONQUEST_PLANES_DIR + "planes.txt"));
-        worlds = new StorageBase<>("Quest worlds", new QuestWorld.Reader(ForgeConstants.QUEST_WORLD_DIR + "worlds.txt"));
+        Map<String, QuestWorld> standardWorlds = new QuestWorld.Reader(ForgeConstants.QUEST_WORLD_DIR + "worlds.txt").readAll();
+        Map<String, QuestWorld> customWorlds = new QuestWorld.Reader(ForgeConstants.USER_QUEST_WORLD_DIR + "customworlds.txt").readAll();
+        for (QuestWorld world:customWorlds.values()){
+            world.setCustom(true);
+        }
+        standardWorlds.putAll(customWorlds);
+        worlds = new StorageBase<>("Quest worlds", null, standardWorlds);
 
         loadDynamicGamedata();
 
@@ -203,6 +210,9 @@ public final class FModel {
 
         //preload AI profiles
         AiProfileUtil.loadAllProfiles(ForgeConstants.AI_PROFILE_DIR);
+
+        //generate Deck Gen matrix
+        CardRelationMatrixGenerator.initialize();
     }
 
     public static QuestController getQuest() {

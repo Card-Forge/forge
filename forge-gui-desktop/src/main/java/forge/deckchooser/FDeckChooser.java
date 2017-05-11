@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.google.common.base.Predicate;
+import forge.deck.*;
+import forge.game.GameFormat;
 import forge.item.PaperCard;
 import net.miginfocom.swing.MigLayout;
 
@@ -18,13 +20,6 @@ import com.google.common.collect.ImmutableList;
 
 import forge.FThreads;
 import forge.UiCommand;
-import forge.deck.ColorDeckGenerator;
-import forge.deck.Deck;
-import forge.deck.DeckProxy;
-import forge.deck.DeckType;
-import forge.deck.DeckgenUtil;
-import forge.deck.NetDeckCategory;
-import forge.deck.RandomDeckGenerator;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.itemmanager.DeckManager;
@@ -155,6 +150,24 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setSelectedIndices(new Integer[]{0, 1});
     }
 
+    private void updateMatrix(GameFormat format) {
+        lstDecks.setAllowMultipleSelections(false);
+
+        lstDecks.setPool(CardThemedDeckGenerator.getMatrixDecks(format));
+        lstDecks.setup(ItemManagerConfig.STRING_ONLY);
+
+        btnRandom.setText("Random");
+        btnRandom.setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                DeckgenUtil.randomSelect(lstDecks);
+            }
+        });
+
+        // default selection = basic two color deck
+        lstDecks.setSelectedIndices(new Integer[]{0});
+    }
+
     private void updateThemes() {
         updateDecks(DeckProxy.getAllThemeDecks(), ItemManagerConfig.STRING_ONLY);
     }
@@ -179,6 +192,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     public Deck getDeck() {
+        /*if(selectedDeckType.equals(DeckType.STANDARD_CARDGEN_DECK)){
+            return DeckgenUtil.buildCardGenDeck(lstDecks.getSelectedItem().getName(),Predicate<PaperCard> formatFilter);
+        }*/
         final DeckProxy proxy = lstDecks.getSelectedItem();
         if (proxy == null) {
             return null;
@@ -286,6 +302,12 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 break;
             case MODERN_COLOR_DECK:
                 updateColors(FModel.getFormats().getModern().getFilterPrinted());
+                break;
+            case STANDARD_CARDGEN_DECK:
+                updateMatrix(FModel.getFormats().getStandard());
+                break;
+            case MODERN_CARDGEN_DECK:
+                updateMatrix(FModel.getFormats().getModern());
                 break;
             case THEME_DECK:
                 updateThemes();

@@ -32,6 +32,12 @@ public class TournamentUtil {
                 case STANDARD_COLOR_DECK:
                     deck = DeckgenUtil.getRandomColorDeck(FModel.getFormats().getStandard().getFilterPrinted(),true);
                     break;
+                case STANDARD_CARDGEN_DECK:
+                    deck = DeckgenUtil.buildCardGenDeck(FModel.getFormats().getStandard());
+                    break;
+                case MODERN_CARDGEN_DECK:
+                    deck = DeckgenUtil.buildCardGenDeck(FModel.getFormats().getModern());
+                    break;
                 case MODERN_COLOR_DECK:
                     deck = DeckgenUtil.getRandomColorDeck(FModel.getFormats().getModern().getFilterPrinted(),true);
                     break;

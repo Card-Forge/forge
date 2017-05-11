@@ -3,7 +3,6 @@ package forge.deck;
 import forge.FThreads;
 import forge.Forge;
 import forge.GuiBase;
-import forge.deck.Deck;
 import forge.deck.FDeckEditor.EditorType;
 import forge.deck.io.DeckPreferences;
 import forge.error.BugReporter;
@@ -147,7 +146,8 @@ public class FDeckChooser extends FScreen {
         btnViewDeck.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                if (selectedDeckType != DeckType.STANDARD_COLOR_DECK && selectedDeckType != DeckType.MODERN_COLOR_DECK &&
+                if (selectedDeckType != DeckType.STANDARD_COLOR_DECK && selectedDeckType != DeckType.STANDARD_CARDGEN_DECK
+                        && selectedDeckType != DeckType.MODERN_CARDGEN_DECK && selectedDeckType != DeckType.MODERN_COLOR_DECK &&
                         selectedDeckType != DeckType.COLOR_DECK && selectedDeckType != DeckType.THEME_DECK) {
                     FDeckViewer.show(getDeck());
                 }
@@ -164,6 +164,12 @@ public class FDeckChooser extends FScreen {
                 if (selectedDeckType == DeckType.COLOR_DECK || selectedDeckType == DeckType.STANDARD_COLOR_DECK
                         || selectedDeckType == DeckType.MODERN_COLOR_DECK) {
                     DeckgenUtil.randomSelectColors(lstDecks);
+                }
+                else if (selectedDeckType == DeckType.STANDARD_CARDGEN_DECK){
+                    DeckgenUtil.randomSelect(lstDecks);
+                }
+                else if (selectedDeckType == DeckType.MODERN_CARDGEN_DECK){
+                    DeckgenUtil.randomSelect(lstDecks);
                 }
                 else {
                     DeckgenUtil.randomSelect(lstDecks);
@@ -262,6 +268,8 @@ public class FDeckChooser extends FScreen {
             return;
         case COLOR_DECK:
         case STANDARD_COLOR_DECK:
+        case STANDARD_CARDGEN_DECK:
+        case MODERN_CARDGEN_DECK:
         case MODERN_COLOR_DECK:
         case THEME_DECK:
         case RANDOM_DECK:
@@ -432,6 +440,8 @@ public class FDeckChooser extends FScreen {
                 cmbDeckTypes.addItem(DeckType.QUEST_OPPONENT_DECK);
                 cmbDeckTypes.addItem(DeckType.COLOR_DECK);
                 cmbDeckTypes.addItem(DeckType.STANDARD_COLOR_DECK);
+                cmbDeckTypes.addItem(DeckType.STANDARD_CARDGEN_DECK);
+                cmbDeckTypes.addItem(DeckType.MODERN_CARDGEN_DECK);
                 cmbDeckTypes.addItem(DeckType.MODERN_COLOR_DECK);
                 cmbDeckTypes.addItem(DeckType.THEME_DECK);
                 cmbDeckTypes.addItem(DeckType.RANDOM_DECK);
@@ -587,6 +597,16 @@ public class FDeckChooser extends FScreen {
         case STANDARD_COLOR_DECK:
             maxSelections = 3;
             pool = ColorDeckGenerator.getColorDecks(lstDecks, FModel.getFormats().getStandard().getFilterPrinted(), isAi);
+            config = ItemManagerConfig.STRING_ONLY;
+            break;
+        case STANDARD_CARDGEN_DECK:
+            maxSelections = 1;
+            pool = CardThemedDeckGenerator.getMatrixDecks(FModel.getFormats().getStandard());
+            config = ItemManagerConfig.STRING_ONLY;
+            break;
+        case MODERN_CARDGEN_DECK:
+            maxSelections = 1;
+            pool = CardThemedDeckGenerator.getMatrixDecks(FModel.getFormats().getModern());
             config = ItemManagerConfig.STRING_ONLY;
             break;
         case MODERN_COLOR_DECK:
@@ -758,6 +778,9 @@ public class FDeckChooser extends FScreen {
     public DeckManager getLstDecks() { return lstDecks; }
 
     public Deck getDeck() {
+        /*if(selectedDeckType.equals(DeckType.STANDARD_CARDGEN_DECK)){
+            return DeckgenUtil.buildCardGenDeck(lstDecks.getSelectedItem().getName());
+        }*/
         DeckProxy proxy = lstDecks.getSelectedItem();
         if (proxy == null) { return null; }
         return proxy.getDeck();
@@ -922,7 +945,9 @@ public class FDeckChooser extends FScreen {
                         DeckType.QUEST_OPPONENT_DECK,
                         DeckType.COLOR_DECK,
                         DeckType.STANDARD_COLOR_DECK,
+                        DeckType.STANDARD_CARDGEN_DECK,
                         DeckType.MODERN_COLOR_DECK,
+                        DeckType.MODERN_CARDGEN_DECK,
                         DeckType.THEME_DECK
                 }), null, new Callback<List<DeckType>>() {
                     @Override

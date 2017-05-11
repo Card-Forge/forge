@@ -56,6 +56,8 @@ public abstract class DeckGeneratorBase {
     protected int maxDuplicates = 4;
     protected boolean useArtifacts = true;
     protected String basicLandEdition = null;
+    protected List<String> inverseDLands= new ArrayList<>();
+    protected List<String> dLands = new ArrayList<>();
 
     protected ColorSet colors;
     protected final CardPool tDeck = new CardPool();
@@ -137,6 +139,7 @@ public abstract class DeckGeneratorBase {
             //add card to deck if not already maxed out on card
             if (newCount <= maxDuplicates) {
                 tDeck.add(pool.getCard(cp.getName(), cp.getEdition()));
+                //see if current card is from an edition with basic lands to use for this deck
                 if(basicLandEdition == null){
                     if(setBasicLandPool(cp.getEdition())){
                         basicLandEdition = cp.getEdition();
@@ -383,28 +386,13 @@ public abstract class DeckGeneratorBase {
         }
     }
 
-    private static Map<Integer, String[]> dualLands = new HashMap<Integer, String[]>();
-    static {
-        dualLands.put(MagicColor.WHITE | MagicColor.BLUE, new String[] { "Tundra", "Hallowed Fountain", "Flooded Strand", "Prairie Stream" });
-        dualLands.put(MagicColor.BLACK | MagicColor.BLUE, new String[] { "Underground Sea", "Watery Grave", "Polluted Delta", "Sunken Hollow" });
-        dualLands.put(MagicColor.BLACK | MagicColor.RED, new String[] { "Badlands", "Blood Crypt", "Bloodstained Mire", "Smoldering Marsh" });
-        dualLands.put(MagicColor.GREEN | MagicColor.RED, new String[] { "Taiga", "Stomping Ground", "Wooded Foothills", "Cinder Glade" });
-        dualLands.put(MagicColor.GREEN | MagicColor.WHITE, new String[] { "Savannah", "Temple Garden", "Windswept Heath", "Canopy Vista" });
-
-        dualLands.put(MagicColor.WHITE | MagicColor.BLACK, new String[] { "Scrubland", "Godless Shrine", "Marsh Flats", "Concealed Courtyard" });
-        dualLands.put(MagicColor.BLUE  | MagicColor.RED, new String[] { "Volcanic Island", "Steam Vents", "Scalding Tarn", "Spirebluff Canal" });
-        dualLands.put(MagicColor.BLACK | MagicColor.GREEN, new String[] { "Bayou", "Overgrown Tomb", "Verdant Catacombs", "Blooming Marsh" });
-        dualLands.put(MagicColor.WHITE | MagicColor.RED, new String[] { "Plateau", "Sacred Foundry", "Arid Mesa", "Inspiring Vantage" });
-        dualLands.put(MagicColor.GREEN | MagicColor.BLUE, new String[] { "Tropical Island", "Breeding Pool", "Misty Rainforest", "Botanical Sanctum" });
-    }
-
     /**
      * Get list of dual lands for this color combo.
      *
      * @return dual land names
      */
     protected List<String> getDualLandList() {
-        final List<String> dLands = new ArrayList<String>();
+
 
         if (colors.countColors() > 3) {
             addCardNameToList("Rupture Spire", dLands);
@@ -425,9 +413,10 @@ public abstract class DeckGeneratorBase {
                 "Add \\{([WUBRG])\\}\\{([WUBRG])\\} to your mana pool",
                 "Add \\{[WUBRG]\\}\\{[WUBRG]\\}, \\{([WUBRG])\\}\\{([WUBRG])\\}, or \\{[WUBRG]\\}\\{[WUBRG]\\} to your mana pool");
         for (String pattern:dualLandPatterns){
-            dLands.addAll(regexLandSearch(pattern, landCards));
+            regexLandSearch(pattern, landCards);
         }
-        dLands.addAll(regexFetchLandSearch(landCards));
+        regexFetchLandSearch(landCards);
+
         return dLands;
     }
 
@@ -447,6 +436,8 @@ public abstract class DeckGeneratorBase {
                 ColorSet manaColorSet = ColorSet.fromNames(manaColorNames);
                 if (colors.hasAllColors(manaColorSet.getColor())){
                     addCardNameToList(card.getName(),dLands);
+                }else{
+                    addCardNameToList(card.getName(),inverseDLands);
                 }
             }
         }
@@ -455,7 +446,7 @@ public abstract class DeckGeneratorBase {
 
     public List<String> regexFetchLandSearch(Iterable<PaperCard> landCards){
         final String fetchPattern="Search your library for a ([^\\s]*) or ([^\\s]*) card";
-        final List<String> dLands = new ArrayList<String>();
+        //final List<String> dLands = new ArrayList<String>();
         Map<String,String> colorLookup= new HashMap<>();
         colorLookup.put("Plains","W");
         colorLookup.put("Forest","G");
@@ -476,6 +467,8 @@ public abstract class DeckGeneratorBase {
                 ColorSet manaColorSet = ColorSet.fromNames(manaColorNames);
                 if (colors.hasAllColors(manaColorSet.getColor())){
                     addCardNameToList(card.getName(),dLands);
+                }else{
+                    addCardNameToList(card.getName(),inverseDLands);
                 }
             }
         }
@@ -488,16 +481,7 @@ public abstract class DeckGeneratorBase {
      * @return dual land names
      */
     protected List<String> getInverseDualLandList() {
-        final List<String> dLands = new ArrayList<String>();
-
-        for (Entry<Integer, String[]> dual : dualLands.entrySet()) {
-            if (!colors.hasAllColors(dual.getKey())) {
-                for (String s : dual.getValue()) {
-                    addCardNameToList(s, dLands);
-                }
-            }
-        }
-        return dLands;
+        return inverseDLands;
     }
 
     private void addCardNameToList(String cardName, List<String> cardNameList) {

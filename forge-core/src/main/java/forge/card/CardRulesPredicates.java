@@ -542,6 +542,14 @@ public final class CardRulesPredicates {
             }
         };
 
+        /** The Constant isBasicLandNotWastes. */
+        public static final Predicate<CardRules> IS_BASIC_LAND_NOT_WASTES = new Predicate<CardRules>() {
+            @Override
+            public boolean apply(final CardRules subject) {
+                return !subject.getName().equals("Wastes")&&subject.getType().isBasicLand();
+            }
+        };
+
         /** The Constant isNonBasicLand. */
         public static final Predicate<CardRules> IS_NONBASIC_LAND = new Predicate<CardRules>() {
             @Override
