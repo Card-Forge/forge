@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Predicate;
+import forge.card.CardEdition;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.itemmanager.IItemManager;
@@ -33,6 +34,10 @@ public class ColorDeckGenerator extends DeckProxy implements Comparable<ColorDec
         lstDecks = lstDecks0;
         isAi = isAi0;
         formatFilter = formatFilter0;
+    }
+
+    public CardEdition getEdition() {
+        return CardEdition.UNKNOWN;
     }
 
     @Override

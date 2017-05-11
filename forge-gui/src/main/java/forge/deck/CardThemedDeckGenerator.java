@@ -1,5 +1,6 @@
 package forge.deck;
 
+import forge.card.CardEdition;
 import forge.game.GameFormat;
 
 import java.util.ArrayList;
@@ -27,6 +28,11 @@ public class CardThemedDeckGenerator extends DeckProxy implements Comparable<Car
         index = 0;
         format=format0;
     }
+
+    public CardEdition getEdition() {
+        return CardEdition.UNKNOWN;
+    }
+
 
     @Override
     public String getName() {
