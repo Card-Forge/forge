@@ -22,6 +22,7 @@ import forge.model.FModel;
 import forge.util.MyRandom;
 import forge.util.PredicateString;
 
+import java.awt.print.Paper;
 import java.util.*;
 
 /**
@@ -238,11 +239,23 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             System.out.println("Post Size fix : " + deckList.size());
         }
 
+        //Create Deck
         final Deck result = new Deck(generateName());
         result.getMain().add(deckList);
+
+        //Add remaining non-land colour matching cards to sideboard
         final CardPool cp = result.getOrCreate(DeckSection.Sideboard);
-        cp.add(aiPlayables);
-        cp.add(availableList);
+        Iterable<PaperCard> potentialSideboard = Iterables.filter(aiPlayables,
+                Predicates.and(Predicates.compose(hasColor, PaperCard.FN_GET_RULES),
+                        Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, PaperCard.FN_GET_RULES)));
+        int i=0;
+        while(i<15 && potentialSideboard.iterator().hasNext()){
+            PaperCard sbCard = potentialSideboard.iterator().next();
+            cp.add(sbCard);
+            aiPlayables.remove(sbCard);
+
+            ++i;
+        }
         if (logToConsole) {
             debugFinalDeck();
         }
