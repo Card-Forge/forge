@@ -51,7 +51,7 @@ public class SimulationTestCase extends TestCase {
             FModel.initialize(null, new Function<ForgePreferences, Void>()  {
                 @Override
                 public Void apply(ForgePreferences preferences) {
-                    preferences.setPref(FPref.LOAD_CARD_SCRIPTS_LAZILY, true);
+                    preferences.setPref(FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
                     return null;
                 }
             });
