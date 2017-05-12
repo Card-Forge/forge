@@ -393,7 +393,6 @@ public abstract class DeckGeneratorBase {
      */
     protected List<String> getDualLandList() {
 
-        System.out.println("Dual Land Colors: " + colors.toEnumSet().toString());
         if (colors.countColors() > 3) {
             addCardNameToList("Rupture Spire", dLands);
             addCardNameToList("Undiscovered Paradise", dLands);
