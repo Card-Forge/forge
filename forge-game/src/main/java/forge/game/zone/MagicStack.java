@@ -583,6 +583,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             game.getAction().exile(source);
             sa.setFlashBackAbility(false);
         }
+        else if (sa.isAftermath()) {
+            game.getAction().exile(source);
+        }
         else if (source.hasKeyword("Rebound")
                 && !fizzle
                 && source.getCastFrom() == ZoneType.Hand

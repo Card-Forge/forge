@@ -97,6 +97,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private List<Object> triggerRemembered = Lists.newArrayList();
 
     private boolean flashBackAbility = false;
+    private boolean aftermath = false;
     private boolean cycling = false;
     private boolean delve = false;
     private boolean dash = false;
@@ -734,6 +735,20 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public boolean isFlashBackAbility() {
         return flashBackAbility;
+    }
+
+    /**
+     * @return the aftermath
+     */
+    public boolean isAftermath() {
+        return aftermath;
+    }
+
+    /**
+     * @param aftermath the aftermath to set
+     */
+    public void setAftermath(boolean aftermath) {
+        this.aftermath = aftermath;
     }
 
     public boolean isOutlast() {

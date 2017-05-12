@@ -3536,15 +3536,9 @@ public class CardFactoryUtil {
 
             // only target RightSplit of it
             final SpellAbility origSA = card.getState(CardStateName.RightSplit).getFirstAbility();
+            origSA.setAftermath(true);
             origSA.getRestrictions().setZone(ZoneType.Graveyard);
-
-            // Add the Exile Self Part
-            String dbStr = "DB$ ChangeZone | Origin$ Stack | Destination$ Exile";
-
-            final AbilitySub newSA = (AbilitySub) AbilityFactory.getAbility(dbStr.toString(), card);
-
-            // append to original SA
-            origSA.appendSubAbility(newSA); 
+            // The Exile part is done by the System itself
         } else if (keyword.startsWith("Awaken")) {
             final String[] k = keyword.split(":");
             final String counters = k[1];
