@@ -387,6 +387,13 @@ public class ComputerUtilMana {
 
             SpellAbility saPayment = saList.isEmpty() ? null : chooseManaAbility(cost, sa, ai, toPay, saList, checkPlayable || !test);
 
+            if (saPayment != null && ComputerUtilCost.isSacrificeSelfCost(saPayment.getPayCosts())) {
+                if (sa.getTargets() != null && sa.getTargets().isTargeting(saPayment.getHostCard())) {
+                    saExcludeList.add(saPayment); // not a good idea to sac a card that you're targeting with the SA you're paying for
+                    continue;
+                }
+            }
+
             if (saPayment != null && saPayment.hasParam("AILogic")) {
                 boolean consider = false;
                 if (saPayment.getParam("AILogic").equals("BlackLotus")) {
