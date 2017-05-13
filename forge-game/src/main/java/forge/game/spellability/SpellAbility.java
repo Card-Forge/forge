@@ -1208,6 +1208,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return getTargets().getNumTargeted() < getTargetRestrictions().getMaxTargets(hostCard, this);
     }
     
+    public boolean isZeroTargets() {
+        return getTargetRestrictions().getMinTargets(hostCard, this) == 0 && getTargets().getNumTargeted() == 0;
+    }
+    
     public boolean isTargetNumberValid() {
         if (!this.usesTargeting()) {
             return getTargets().isEmpty();

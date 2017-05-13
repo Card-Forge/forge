@@ -17,12 +17,10 @@
  */
 package forge.game.zone;
 
-import java.util.ArrayList;
 import java.util.Deque;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 import java.util.Stack;
@@ -31,6 +29,8 @@ import java.util.concurrent.LinkedBlockingDeque;
 import com.esotericsoftware.minlog.Log;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 import forge.GameCommand;
 import forge.card.mana.ManaCost;
@@ -62,7 +62,6 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
@@ -76,7 +75,7 @@ import forge.game.trigger.WrappedAbility;
  * @version $Id$
  */
 public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbilityStackInstance> {
-    private final List<SpellAbility> simultaneousStackEntryList = new ArrayList<SpellAbility>();
+    private final List<SpellAbility> simultaneousStackEntryList = Lists.newArrayList();
 
     // They don't provide a LIFO queue, so had to use a deque
     private final Deque<SpellAbilityStackInstance> stack = new LinkedBlockingDeque<SpellAbilityStackInstance>();
@@ -90,7 +89,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     private final List<Card> thisTurnCast = Lists.newArrayList();
     private List<Card> lastTurnCast = Lists.newArrayList();
     private Card curResolvingCard = null;
-    private final HashMap<String, List<GameCommand>> commandList = new HashMap<String, List<GameCommand>>();
+    private final Map<String, List<GameCommand>> commandList = Maps.newHashMap();
 
     private final Game game;
 
@@ -352,7 +351,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         // Copied spells aren't cast per se so triggers shouldn't run for them.
-        HashMap<String, Object> runParams = new HashMap<String, Object>();
+        Map<String, Object> runParams = Maps.newHashMap();
         if (!(sp instanceof AbilityStatic) && !sp.isCopied()) {
             // Run SpellAbilityCast triggers
             runParams.put("Cost", sp.getPayCosts());
@@ -386,14 +385,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // Create a new object, since the triggers aren't happening right away
         List<TargetChoices> chosenTargets = sp.getAllTargetChoices();
         if (!chosenTargets.isEmpty()) { 
-            runParams = new HashMap<String, Object>();
+            runParams = Maps.newHashMap();
             SpellAbility s = sp;
             if (si != null) {
                 s = si.getSpellAbility(true);
                 chosenTargets = s.getAllTargetChoices();
             }
             runParams.put("SourceSA", s);
-            Set<Object> distinctObjects = new HashSet<Object>();
+            Set<Object> distinctObjects = Sets.newHashSet();
             for (final TargetChoices tc : chosenTargets) {
                 if (tc != null && tc.getTargetCards() != null) {
                     for (final Object tgt : tc.getTargets()) {
@@ -634,9 +633,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         Boolean fizzle = null;
         boolean rememberTgt = sa.getRootAbility().hasParam("RememberOriginalTargets");
 
-        TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt != null) {
-            if (tgt.getMinTargets(source, sa) == 0 && sa.getTargets().getNumTargeted() == 0) {
+        if (sa.usesTargeting()) {
+            if (sa.isZeroTargets()) {
                 // Nothing targeted, and nothing needs to be targeted.
             }
             else {
@@ -800,7 +798,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return false;
         }
 
-        final List<SpellAbility> activePlayerSAs = new ArrayList<SpellAbility>();
+        final List<SpellAbility> activePlayerSAs = Lists.newArrayList();
         for (int i = 0; i < simultaneousStackEntryList.size(); i++) {
             SpellAbility sa = simultaneousStackEntryList.get(i);
             Player activator = sa.getActivatingPlayer();

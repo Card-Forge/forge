@@ -3829,8 +3829,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     public boolean hasProperty(final String property, final Player sourceController, final Card source, SpellAbility spellAbility) {
         final Game game = getGame();
         final Combat combat = game.getCombat();
+        // lki can't be null but it does return this
         final Card lki = getGame().getChangeZoneLKIInfo(this);
-        final Player controller = lki != null ? lki.getController() :  getController();
+        final Player controller = lki.getController();
 
         // by name can also have color names, so needs to happen before colors.
         if (property.startsWith("named")) {
@@ -5405,7 +5406,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else if (property.startsWith("inZone")) {
             final String strZone = property.substring(6);
             final ZoneType realZone = ZoneType.smartValueOf(strZone);
-            if (!isInZone(realZone)) {
+            // lki last zone does fall back to this zone
+            final Zone lkiZone = lki.getLastKnownZone();
+            
+            if (lkiZone == null || !lkiZone.is(realZone)) {
                 return false;
             }
         } else if (property.equals("IsCommander")) {
@@ -6408,7 +6412,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public boolean isInZone(final ZoneType zone) {
         Zone z = getZone();
-        return z != null && z.getZoneType() == zone;
+        return z != null && z.is(zone);
     }
 
     public final boolean canBeDestroyed() {

@@ -18,6 +18,10 @@
 package forge.game.trigger;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import com.google.common.collect.Sets;
 
 import forge.game.Game;
 import forge.game.GameObject;
@@ -32,8 +36,6 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * <p>
@@ -57,13 +59,13 @@ public class TriggerSpellAbilityCast extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerSpellAbilityCast(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerSpellAbilityCast(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<String, Object> runParams2) {
         final SpellAbility spellAbility = (SpellAbility) runParams2.get("CastSA");
         if (spellAbility == null) {
             System.out.println("TriggerSpellAbilityCast performTest encountered spellAbility == null. runParams2 = " + runParams2);
@@ -85,28 +87,28 @@ public class TriggerSpellAbilityCast extends Trigger {
             // Empty block for readability.
         }
 
-        if (this.mapParams.containsKey("ActivatedOnly")) {
+        if (hasParam("ActivatedOnly")) {
             if (spellAbility.isTrigger()) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("ValidControllingPlayer")) {
-            if (!matchesValid(cast.getController(), this.mapParams.get("ValidControllingPlayer").split(","),
-                    this.getHostCard())) {
+        if (hasParam("ValidControllingPlayer")) {
+            if (!matchesValid(cast.getController(), getParam("ValidControllingPlayer").split(","),
+                    getHostCard())) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("ValidActivatingPlayer")) {
-            if (si == null || !matchesValid(si.getSpellAbility(true).getActivatingPlayer(), this.mapParams.get("ValidActivatingPlayer")
-                    .split(","), this.getHostCard())) {
+        if (hasParam("ValidActivatingPlayer")) {
+            if (si == null || !matchesValid(si.getSpellAbility(true).getActivatingPlayer(), getParam("ValidActivatingPlayer")
+                    .split(","), getHostCard())) {
                 return false;
             }
-            if (this.mapParams.containsKey("ActivatorThisTurnCast")) {
-                String compare = this.mapParams.get("ActivatorThisTurnCast");
-                List<Card> thisTurnCast = CardUtil.getThisTurnCast(this.mapParams.containsKey("ValidCard") ? this.mapParams.get("ValidCard") : "Card",
-                        this.getHostCard());
+            if (hasParam("ActivatorThisTurnCast")) {
+                final String compare = getParam("ActivatorThisTurnCast");
+                final String valid = hasParam("ValidCard") ? getParam("ValidCard") : "Card";
+                List<Card> thisTurnCast = CardUtil.getThisTurnCast(valid, getHostCard());
                 thisTurnCast = CardLists.filterControlledBy(thisTurnCast, si.getSpellAbility(true).getActivatingPlayer());
                 int left = thisTurnCast.size();
                 int right = Integer.parseInt(compare.substring(2));
@@ -116,13 +118,13 @@ public class TriggerSpellAbilityCast extends Trigger {
             }
         }
 
-        if (this.mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(cast, this.mapParams.get("ValidCard").split(","), this.getHostCard())) {
+        if (hasParam("ValidCard")) {
+            if (!matchesValid(cast, getParam("ValidCard").split(","), getHostCard())) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("TargetsValid")) {
+        if (hasParam("TargetsValid")) {
             SpellAbility sa = spellAbility;
             if (si != null) {
                 sa = si.getSpellAbility(true);
@@ -131,15 +133,15 @@ public class TriggerSpellAbilityCast extends Trigger {
             boolean validTgtFound = false;
             while (sa != null && !validTgtFound) {
                 for (final Card tgt : sa.getTargets().getTargetCards()) {
-                    if (tgt.isValid(this.mapParams.get("TargetsValid").split(","), this.getHostCard()
-                            .getController(), this.getHostCard(), null)) {
+                    if (tgt.isValid(getParam("TargetsValid").split(","), getHostCard()
+                            .getController(), getHostCard(), null)) {
                         validTgtFound = true;
                         break;
                     }
                 }
 
                 for (final Player p : sa.getTargets().getTargetPlayers()) {
-                    if (matchesValid(p, this.mapParams.get("TargetsValid").split(","), this.getHostCard())) {
+                    if (matchesValid(p, getParam("TargetsValid").split(","), getHostCard())) {
                         validTgtFound = true;
                         break;
                     }
@@ -151,14 +153,14 @@ public class TriggerSpellAbilityCast extends Trigger {
             }
         }
 
-        if (this.mapParams.containsKey("NonTapCost")) {
+        if (hasParam("NonTapCost")) {
             final Cost cost = (Cost) (runParams2.get("Cost"));
             if (cost.hasTapCost()) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("Conspire")) {
+        if (hasParam("Conspire")) {
             if (!spellAbility.isOptionalCostPaid(OptionalCost.Conspire)) {
                 return false;
             }
@@ -170,14 +172,14 @@ public class TriggerSpellAbilityCast extends Trigger {
             }
         }
 
-        if (this.mapParams.containsKey("Outlast")) {
+        if (hasParam("Outlast")) {
             if (!spellAbility.isOutlast()) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("IsSingleTarget")) {
-            Set<GameObject> targets = new HashSet<>();
+        if (hasParam("IsSingleTarget")) {
+            Set<GameObject> targets = Sets.newHashSet();
             for (TargetChoices tc : spellAbility.getAllTargetChoices()) {
                 targets.addAll(tc.getTargets());
                 if (targets.size() > 1) {
@@ -189,17 +191,17 @@ public class TriggerSpellAbilityCast extends Trigger {
             }
         }
 
-        if (this.mapParams.containsKey("SpellSpeed")) {
-            if (this.mapParams.get("SpellSpeed").equals("NotSorcerySpeed")) {
-                if (this.getHostCard().getController().couldCastSorcery(spellAbility)) {
+        if (hasParam("SpellSpeed")) {
+            if (getParam("SpellSpeed").equals("NotSorcerySpeed")) {
+                if (getHostCard().getController().couldCastSorcery(spellAbility)) {
                     return false;
                 }
-                if (this.getHostCard().hasKeyword("You may cast CARDNAME as though it had flash. If you cast it any time a "
+                if (getHostCard().hasKeyword("You may cast CARDNAME as though it had flash. If you cast it any time a "
                         + "sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning"
                         + " of the next cleanup step.")) {
                     // for these cards the trigger must only fire if using their own ability to cast at instant speed
-                    if (this.getHostCard().hasKeyword("Flash")
-                            || this.getHostCard().getController().hasKeyword("You may cast nonland cards as though they had flash.")) {
+                    if (getHostCard().hasKeyword("Flash")
+                            || getHostCard().getController().hasKeyword("You may cast nonland cards as though they had flash.")) {
                         return false;
                     }
                 }
@@ -207,16 +209,16 @@ public class TriggerSpellAbilityCast extends Trigger {
             }
         }
 
-        if (this.mapParams.containsKey("SharesNameWithActivatorsZone")) {
-        	String zones = this.mapParams.get("SharesNameWithActivatorsZone");
+        if (hasParam("SharesNameWithActivatorsZone")) {
+            String zones = getParam("SharesNameWithActivatorsZone");
             if (si == null) {
                 return false;
             }
             boolean sameNameFound = false;
             for (Card c: si.getSpellAbility(true).getActivatingPlayer().getCardsIn(ZoneType.listValueOf(zones))) {
-            	if (cast.getName().equals(c.getName())) {
-            		sameNameFound = true;
-            		break;
+                if (cast.getName().equals(c.getName())) {
+                    sameNameFound = true;
+                    break;
                 }
             }
             if (!sameNameFound) {
@@ -230,16 +232,16 @@ public class TriggerSpellAbilityCast extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        final SpellAbility castSA = (SpellAbility) this.getRunParams().get("CastSA");
+        final SpellAbility castSA = (SpellAbility) getRunParams().get("CastSA");
         final SpellAbilityStackInstance si = sa.getHostCard().getGame().getStack().getInstanceFromSpellAbility(castSA);
         sa.setTriggeringObject("Card", castSA.getHostCard());
         sa.setTriggeringObject("SpellAbility", castSA);
         sa.setTriggeringObject("StackInstance", si);
         sa.setTriggeringObject("SpellAbilityTargetingCards", (si != null ? si.getSpellAbility(true) : castSA).getTargets().getTargetCards());
-        sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
-        sa.setTriggeringObject("Activator", this.getRunParams().get("Activator"));
-        sa.setTriggeringObject("CurrentStormCount", this.getRunParams().get("CurrentStormCount"));
-        sa.setTriggeringObject("CastSACMC", this.getRunParams().get("CastSACMC"));
+        sa.setTriggeringObject("Player", getRunParams().get("Player"));
+        sa.setTriggeringObject("Activator", getRunParams().get("Activator"));
+        sa.setTriggeringObject("CurrentStormCount", getRunParams().get("CurrentStormCount"));
+        sa.setTriggeringObject("CastSACMC", getRunParams().get("CastSACMC"));
     }
 
     @Override
