@@ -44,12 +44,14 @@ public class AiCardMemory {
     private final Set<Card> memHeldManaSources;
     private final Set<Card> memAttachedThisTurn;
     private final Set<Card> memAnimatedThisTurn;
+    private final Set<Card> memBouncedThisTurn;
 
     public AiCardMemory() {
         this.memMandatoryAttackers = new HashSet<>();
         this.memHeldManaSources = new HashSet<>();
         this.memAttachedThisTurn = new HashSet<>();
         this.memAnimatedThisTurn = new HashSet<>();
+        this.memBouncedThisTurn = new HashSet<>();
     }
 
     /**
@@ -62,6 +64,7 @@ public class AiCardMemory {
         HELD_MANA_SOURCES, 
         ATTACHED_THIS_TURN,
         ANIMATED_THIS_TURN,
+        BOUNCED_THIS_TURN,
         //REVEALED_CARDS // stub, not linked to AI code yet
     }
 
@@ -75,6 +78,8 @@ public class AiCardMemory {
                 return memAttachedThisTurn;
             case ANIMATED_THIS_TURN:
                 return memAnimatedThisTurn;
+            case BOUNCED_THIS_TURN:
+                return memBouncedThisTurn;
             //case REVEALED_CARDS:
             //    return memRevealedCards;
             default:
@@ -247,6 +252,7 @@ public class AiCardMemory {
         clearMemorySet(MemorySet.HELD_MANA_SOURCES);
         clearMemorySet(MemorySet.ATTACHED_THIS_TURN);
         clearMemorySet(MemorySet.ANIMATED_THIS_TURN);
+        clearMemorySet(MemorySet.BOUNCED_THIS_TURN);
     }
 
     // Static functions to simplify access to AI card memory of a given AI player.

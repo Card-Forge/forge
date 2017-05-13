@@ -860,7 +860,22 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 // save my about to die stuff
                 Card tobounce = canBouncePermanent(ai, sa, list);
                 if (tobounce != null) {
+                    if ("BounceOnce".equals(sa.getParam("AILogic")) && isBouncedThisTurn(ai, tobounce)) {
+                        return false;
+                    }
+
                     sa.getTargets().add(tobounce);
+
+                    boolean saheeliFelidarCombo = sa.getHostCard().getName().equals("Felidar Guardian") 
+                            && tobounce.getName().equals("Saheeli Rai")
+                            && CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Felidar Guardian")).size() < 
+                            CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Creature")).size() + ai.getOpponentsGreatestLifeTotal() + 10;
+
+                    // remember that the card was bounced already unless it's a special combo case
+                    if (!saheeliFelidarCombo) {
+                        rememberBouncedThisTurn(ai, tobounce);
+                    }
+
                     return true;
                 }
                 // bounce opponent's stuff
@@ -1109,6 +1124,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
         CardCollectionView aiPermanents = CardLists
                 .filterControlledBy(list, ai);
 
+        // Felidar Guardian + Saheeli Rai combo support
+        if (sa.getHostCard().getName().equals("Felidar Guardian")) {
+            CardCollection saheeli = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Saheeli Rai"));
+            if (!saheeli.isEmpty()) {
+                return saheeli.get(0);
+            }
+        }
+
         // Don't blink cards that will die.
         aiPermanents = ComputerUtil.getSafeTargets(ai, sa, aiPermanents);
         if (!game.getStack().isEmpty()) {
@@ -1340,6 +1363,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     Card tobounce = canBouncePermanent(player, sa, fetchList);
                     if (tobounce != null) {
                         c = tobounce;
+                        rememberBouncedThisTurn(player, c);
                     }
                 }
             }
@@ -1558,5 +1582,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         return false;
+    }
+
+    private static void rememberBouncedThisTurn(Player ai, Card c) {
+        AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.BOUNCED_THIS_TURN);
+    }
+
+    private static boolean isBouncedThisTurn(Player ai, Card c) {
+        return AiCardMemory.isRememberedCard(ai, c, AiCardMemory.MemorySet.BOUNCED_THIS_TURN);
     }
 }
