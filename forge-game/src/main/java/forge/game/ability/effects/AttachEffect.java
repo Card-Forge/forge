@@ -92,6 +92,8 @@ public class AttachEffect extends SpellAbilityEffect {
      */
     public static void handleAttachment(final Card card, final Object o, final SpellAbility sa) {
 
+        if (card == null) { return; }
+
         if (o instanceof Card) {
             final Card c = (Card) o;
             if (card.isAura()) {
