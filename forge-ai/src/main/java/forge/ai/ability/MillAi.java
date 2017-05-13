@@ -46,6 +46,8 @@ public class MillAi extends SpellAbilityAi {
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
         if ("ExileAndPlayUntilEOT".equals(sa.getParam("AILogic"))) {
             return ph.is(PhaseType.MAIN1) && ph.isPlayerTurn(ai); // try to maximize the chance of being able to play the card this turn
+        } else if ("ExileAndPlayOrDealDamage".equals(sa.getParam("AILogic"))) {
+            return (ph.is(PhaseType.MAIN1) || ph.is(PhaseType.MAIN2)) && ph.isPlayerTurn(ai); // Chandra, Torch of Defiance and similar
         }
         if ("You".equals(sa.getParam("Defined")) && !(!SpellAbilityAi.isSorcerySpeed(sa) && ph.is(PhaseType.END_OF_TURN)
                 && ph.getNextTurn().equals(ai))) {
