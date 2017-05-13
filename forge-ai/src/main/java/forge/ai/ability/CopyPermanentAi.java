@@ -10,12 +10,14 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.zone.ZoneType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +58,16 @@ public class CopyPermanentAi extends SpellAbilityAi {
 
         if (abTgt != null) {
             sa.resetTargets();
+
+            // Saheeli Rai + Felidar Guardian combo support
+            if (sa.getHostCard().getName().equals("Saheeli Rai")) {
+                CardCollection felidarGuardian = CardLists.filter(aiPlayer.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Felidar Guardian"));
+                if (felidarGuardian.size() > 0) {
+                    // can copy a Felidar Guardian and combo off, so let's do it
+                    sa.getTargets().add(felidarGuardian.get(0));
+                    return true;
+                }
+            }
 
             CardCollection list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(abTgt.getZone()),
                     abTgt.getValidTgts(), source.getController(), source, sa);
