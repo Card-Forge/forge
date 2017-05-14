@@ -384,7 +384,8 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
 
             if (tournamentComplete) {
                 String sid = qd.getStandings()[qd.getStandings().length - 1];
-                String winnersName = sid.equals(QuestEventDraft.HUMAN) ? FModel.getPreferences().getPref(FPref.PLAYER_NAME) : qd.getAINames()[Integer.parseInt(sid) - 1];
+                String winnersName = sid.equals(QuestEventDraft.HUMAN) ? FModel.getPreferences().getPref(FPref.PLAYER_NAME) : 
+                        sid.equals(QuestEventDraft.UNDETERMINED) ? "---" : qd.getAINames()[Integer.parseInt(sid) - 1];
                 FLabel lblWinner = add(new FLabel.Builder().text("Winner: " + winnersName).align(HAlignment.CENTER).font(FSkinFont.get(20)).build());
                 lblWinner.setBounds(x, y, w, lblStandings.getAutoSizeBounds().height);
                 y += lblWinner.getHeight() + PADDING;
