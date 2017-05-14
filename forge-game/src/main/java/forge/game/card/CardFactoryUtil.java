@@ -128,8 +128,6 @@ public class CardFactoryUtil {
      * 
      * @param sourceCard
      *            a {@link forge.game.card.Card} object.
-     * @param cost
-     *            a {@link forge.game.cost.Cost} object.
      * @return a {@link forge.game.spellability.AbilityActivated} object.
      */
     public static SpellAbility abilityMorphUp(final Card sourceCard, final String costStr, final boolean mega) {
@@ -2910,7 +2908,7 @@ public class CardFactoryUtil {
                     " | ConditionDefined$ Self | ConditionPresent$ Card.StrictlySelf+inZoneExile" + 
                     " | Optional$ True | SubAbility$ DBWasNotPlayMadness | RememberPlayed$ True | Madness$ True";
             final String moveToYard = "DB$ ChangeZone | Defined$ Self.StrictlySelf | Origin$ Exile | " +
-                    "Destination$ Graveyard | ConditionDefined$ Remembered | ConditionPresent$" +
+                    "Destination$ Graveyard | TrackDiscarded$ True | ConditionDefined$ Remembered | ConditionPresent$" +
                     " Card | ConditionCompare$ EQ0 | SubAbility$ DBMadnessCleanup";
             final String cleanUp = "DB$ Cleanup | ClearRemembered$ True";
 

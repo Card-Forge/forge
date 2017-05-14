@@ -609,6 +609,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("ExileFaceDown")) {
                         movedCard.setState(CardStateName.FaceDown, true);
                     }
+
+                    if (sa.hasParam("TrackDiscarded")) {
+                        movedCard.setMadnessWithoutCast(true);
+                    }
                 }
             }
             if (!movedCard.getZone().equals(originZone)) {

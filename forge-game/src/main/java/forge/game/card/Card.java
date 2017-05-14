@@ -168,6 +168,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean tributed = false;
     private boolean embalmed = false;
     private boolean madness = false;
+    private boolean madnessWithoutCast = false;
 
     private boolean phasedOut = false;
     private boolean directlyPhasedOut = true;
@@ -4721,6 +4722,17 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!cards.contains(this)) {
                 return false;
             }
+        } else if (property.equals("DiscardedThisTurn")) {
+            if (this.getTurnInZone() != game.getPhaseHandler().getTurn()) {
+                return false;
+            }
+
+            CardCollectionView cards = CardUtil.getThisTurnEntered(ZoneType.Graveyard,
+                    ZoneType.Hand, "Card", source);
+
+            if (!cards.contains(this) && !this.getMadnessWithoutCast()) {
+                return false;
+            }
         } else if (property.startsWith("ControlledByPlayerInTheDirection")) {
             final String restrictions = property.split("ControlledByPlayerInTheDirection_")[1];
             final String[] res = restrictions.split("_");
@@ -6132,6 +6144,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     public void setMadness(boolean madness0) {
         madness = madness0;
     }
+    public boolean getMadnessWithoutCast() { return madnessWithoutCast; }
+    public void setMadnessWithoutCast(boolean state) { madnessWithoutCast = state; }
 
     public final boolean isMonstrous() {
         return monstrous;

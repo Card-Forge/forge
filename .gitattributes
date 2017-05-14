@@ -14057,6 +14057,7 @@ forge-gui/res/cardsfolder/s/shadow_glider.txt -text
 forge-gui/res/cardsfolder/s/shadow_guildmage.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shadow_lance.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shadow_of_doubt.txt -text
+forge-gui/res/cardsfolder/s/shadow_of_the_grave.txt -text
 forge-gui/res/cardsfolder/s/shadow_rider.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shadow_rift.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shadow_slice.txt -text
