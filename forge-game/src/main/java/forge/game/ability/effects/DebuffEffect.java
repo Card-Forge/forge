@@ -7,26 +7,27 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.Lists;
+
 public class DebuffEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        final List<String> kws = sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : new ArrayList<String>();
+        final List<String> kws = Lists.newArrayList();
+        if (sa.hasParam("Keywords")) {
+            kws.addAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
+        }
         final StringBuilder sb = new StringBuilder();
 
         final List<Card> tgtCards = getTargetCards(sa);
 
-
         if (tgtCards.size() > 0) {
-
-
             final Iterator<Card> it = tgtCards.iterator();
             while (it.hasNext()) {
                 final Card tgtC = it.next();
@@ -58,7 +59,7 @@ public class DebuffEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final List<String> kws = new ArrayList<String>();
+        final List<String> kws = Lists.newArrayList();
         if (sa.hasParam("Keywords")) {
             kws.addAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
         }
@@ -66,9 +67,9 @@ public class DebuffEffect extends SpellAbilityEffect {
         final long timestamp = game.getNextTimestamp();
 
         for (final Card tgtC : getTargetCards(sa)) {
-            final List<String> hadIntrinsic = new ArrayList<String>();
-            final List<String> addedKW = new ArrayList<String>();
-            final List<String> removedKW = new ArrayList<String>();
+            final List<String> hadIntrinsic = Lists.newArrayList();
+            final List<String> addedKW = Lists.newArrayList();
+            final List<String> removedKW = Lists.newArrayList();
             if (tgtC.isInPlay() && tgtC.canBeTargetedBy(sa)) {
                 if (sa.hasParam("AllSuffixKeywords")) {
                     String suffix = sa.getParam("AllSuffixKeywords");
@@ -83,7 +84,7 @@ public class DebuffEffect extends SpellAbilityEffect {
                 for (final String keyword : tgtC.getKeywords()) {
                     if (keyword.startsWith("Protection:")) {
                         for (final String kw : kws) {
-                            if (keyword.matches("(?i).*:" + kw + ":.*"))
+                            if (keyword.matches("(?i).*:" + kw))
                                 removedKW.add(keyword);
                         }
                     }
@@ -111,7 +112,7 @@ public class DebuffEffect extends SpellAbilityEffect {
                 // Split "Protection from all colors" into extra Protection from <color>
                 String allColors = "Protection from all colors";
                 if (ProtectionFromColor && tgtC.hasKeyword(allColors)) {
-                    final List<String> allColorsProtect = new ArrayList<String>();
+                    final List<String> allColorsProtect = Lists.newArrayList();
 
                     for(byte col : MagicColor.WUBRG) {
                         allColorsProtect.add("Protection from " + MagicColor.toLongString(col).toLowerCase());
@@ -129,7 +130,7 @@ public class DebuffEffect extends SpellAbilityEffect {
                 // Extra for Spectra Ward
                 allColors = "Protection:Card.nonColorless:Protection from all colors:Aura";
                 if (ProtectionFromColor && tgtC.hasKeyword(allColors)) {
-                    final List<String> allColorsProtect = new ArrayList<String>();
+                    final List<String> allColorsProtect = Lists.newArrayList();
 
                     for(byte col : MagicColor.WUBRG) {
                         final String colString = MagicColor.toLongString(col);
