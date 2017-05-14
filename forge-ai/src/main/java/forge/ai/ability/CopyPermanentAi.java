@@ -1,6 +1,9 @@
 package forge.ai.ability;
 
+import java.util.List;
+
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.ai.ComputerUtil;
@@ -12,16 +15,12 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.card.CardUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
-import forge.game.zone.ZoneType;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class CopyPermanentAi extends SpellAbilityAi {
     @Override
@@ -37,7 +36,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
             return false;
         }
 
-        if (sa.getTargetRestrictions() != null && sa.hasParam("TargetingPlayer")) {
+        if (sa.usesTargeting() && sa.hasParam("TargetingPlayer")) {
             sa.resetTargets();
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);
@@ -49,26 +48,24 @@ public class CopyPermanentAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(final Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        final Card source = sa.getHostCard();
-
         // ////
         // Targeting
-
-        final TargetRestrictions abTgt = sa.getTargetRestrictions();
-
-        if (abTgt != null) {
+        if (sa.usesTargeting()) {
             sa.resetTargets();
 
-            CardCollection list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(abTgt.getZone()),
-                    abTgt.getValidTgts(), source.getController(), source, sa);
-            list = CardLists.getTargetableCards(list, sa);
-            list = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    final Map<String, String> vars = c.getSVars();
-                    return !vars.containsKey("RemAIDeck");
+            CardCollection list = new CardCollection(CardUtil.getValidCardsToTarget(sa.getTargetRestrictions(), sa));
+
+            // Saheeli Rai + Felidar Guardian combo support
+            if (sa.getHostCard().getName().equals("Saheeli Rai")) {
+                CardCollection felidarGuardian = CardLists.filter(list, CardPredicates.nameEquals("Felidar Guardian"));
+                if (felidarGuardian.size() > 0) {
+                    // can copy a Felidar Guardian and combo off, so let's do it
+                    sa.getTargets().add(felidarGuardian.get(0));
+                    return true;
                 }
-            });
+            }
+
+            list = CardLists.filter(list, Predicates.not(CardPredicates.hasSVar("RemAIDeck")));
             //Nothing to target
             if (list.isEmpty()) {
             	return false;
@@ -85,10 +82,9 @@ public class CopyPermanentAi extends SpellAbilityAi {
             }
 
             // target loop
-            while (sa.getTargets().getNumTargeted() < abTgt.getMaxTargets(sa.getHostCard(), sa)) {
+            while (sa.canAddMoreTarget()) {
                 if (list.isEmpty()) {
-                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getHostCard(), sa))
-                            || (sa.getTargets().getNumTargeted() == 0)) {
+                    if (!sa.isTargetNumberValid() || (sa.getTargets().getNumTargeted() == 0)) {
                         sa.resetTargets();
                         return false;
                     } else {
@@ -100,7 +96,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        return !c.getType().isLegendary() || c.getController().isOpponentOf(aiPlayer);
+                        return !c.getType().isLegendary() || !c.getController().equals(aiPlayer);
                     }
                 });
                 Card choice;
@@ -115,8 +111,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
                 }
 
                 if (choice == null) { // can't find anything left
-                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getHostCard(), sa))
-                            || (sa.getTargets().getNumTargeted() == 0)) {
+                    if (!sa.isTargetNumberValid() || (sa.getTargets().getNumTargeted() == 0)) {
                         sa.resetTargets();
                         return false;
                     } else {
@@ -154,10 +149,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
 
     @Override
     protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
-        final List<Card> cards = new ArrayList<Card>();
-        for (Player p : options) {
-            cards.addAll(p.getCreaturesInPlay());
-        }
+        final List<Card> cards = new PlayerCollection(options).getCreaturesInPlay();
         Card chosen = ComputerUtilCard.getBestCreatureAI(cards);
         return chosen != null ? chosen.getController() : Iterables.getFirst(options, null);
     }
