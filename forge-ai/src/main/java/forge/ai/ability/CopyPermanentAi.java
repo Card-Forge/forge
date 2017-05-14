@@ -55,16 +55,6 @@ public class CopyPermanentAi extends SpellAbilityAi {
 
             CardCollection list = new CardCollection(CardUtil.getValidCardsToTarget(sa.getTargetRestrictions(), sa));
 
-            // Saheeli Rai + Felidar Guardian combo support
-            if (sa.getHostCard().getName().equals("Saheeli Rai")) {
-                CardCollection felidarGuardian = CardLists.filter(list, CardPredicates.nameEquals("Felidar Guardian"));
-                if (felidarGuardian.size() > 0) {
-                    // can copy a Felidar Guardian and combo off, so let's do it
-                    sa.getTargets().add(felidarGuardian.get(0));
-                    return true;
-                }
-            }
-
             list = CardLists.filter(list, Predicates.not(CardPredicates.hasSVar("RemAIDeck")));
             //Nothing to target
             if (list.isEmpty()) {
