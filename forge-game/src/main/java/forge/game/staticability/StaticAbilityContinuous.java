@@ -201,7 +201,7 @@ public final class StaticAbilityContinuous {
             for (int w = 0; w < addKeywords.length; w++) {
                 addKeywords[w] = addKeywords[w].replaceAll("ChosenType", chosenType);
             }
-            final String chosenName = hostCard.getNamedCard();
+            final String chosenName = hostCard.getNamedCard().replace(",", ";");
             final String hostCardUID = Integer.toString(hostCard.getId()); // Protection with "doesn't remove" effect
             final String hostCardPower = Integer.toString(hostCard.getNetPower());
             for (int w = 0; w < addKeywords.length; w++) {
