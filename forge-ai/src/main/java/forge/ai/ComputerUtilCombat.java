@@ -190,7 +190,9 @@ public class ComputerUtilCombat {
 
         if (!attacked.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
             if (attacker.hasKeyword("Prevent all damage that would be dealt by CARDNAME.")
-                    || attacker.hasKeyword("Prevent all damage that would be dealt to and by CARDNAME.")) {
+                    || attacker.hasKeyword("Prevent all damage that would be dealt to and by CARDNAME.")
+                    || attacker.hasKeyword("Prevent all combat damage that would be dealt by CARDNAME.")
+                    || attacker.hasKeyword("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) {
                 return 0;
             }
         }
