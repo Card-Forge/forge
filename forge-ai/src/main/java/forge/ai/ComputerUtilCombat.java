@@ -17,8 +17,13 @@
  */
 package forge.ai;
 
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.game.CardTraitBase;
 import forge.game.Game;
@@ -40,6 +45,7 @@ import forge.game.cost.CostPayment;
 import forge.game.phase.Untap;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
@@ -48,11 +54,6 @@ import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollection;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -189,10 +190,8 @@ public class ComputerUtilCombat {
         }
 
         if (!attacked.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
-            if (attacker.hasKeyword("Prevent all damage that would be dealt by CARDNAME.")
-                    || attacker.hasKeyword("Prevent all damage that would be dealt to and by CARDNAME.")
-                    || attacker.hasKeyword("Prevent all combat damage that would be dealt by CARDNAME.")
-                    || attacker.hasKeyword("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) {
+            // ask ReplacementDamage directly
+            if (ComputerUtilCombat.isCombatDamagePrevented(attacker, attacked, damage)) {
                 return 0;
             }
         }
@@ -288,7 +287,7 @@ public class ComputerUtilCombat {
         int damage = 0;
 
         final List<Card> attackers = combat.getAttackersOf(ai);
-        final List<Card> unblocked = new ArrayList<Card>();
+        final List<Card> unblocked = Lists.newArrayList();
 
         for (final Card attacker : attackers) {
 
@@ -330,7 +329,7 @@ public class ComputerUtilCombat {
         int poison = 0;
 
         final List<Card> attackers = combat.getAttackersOf(ai);
-        final List<Card> unblocked = new ArrayList<Card>();
+        final List<Card> unblocked = Lists.newArrayList();
 
         for (final Card attacker : attackers) {
 
@@ -357,7 +356,7 @@ public class ComputerUtilCombat {
     }
     
     public static List<Card> getLifeThreateningCommanders(final Player ai, final Combat combat) {
-        List<Card> res = new ArrayList<Card>();
+        List<Card> res = Lists.newArrayList();
         for (Card c : combat.getAttackers()) {
             if (c.isCommander()) {
                 int currentCommanderDamage = ai.getCommanderDamage(c);       
@@ -1267,7 +1266,7 @@ public class ComputerUtilCombat {
                 }
             }
 
-            List<Card> list = new ArrayList<Card>();
+            List<Card> list = Lists.newArrayList();
             if (!abilityParams.containsKey("ValidCards")) {
                 list = AbilityUtils.getDefinedCards(source, abilityParams.get("Defined"), null);
             }
@@ -1479,7 +1478,7 @@ public class ComputerUtilCombat {
                 }
             }
 
-            List<Card> list = new ArrayList<Card>();
+            List<Card> list = Lists.newArrayList();
             if (!abilityParams.containsKey("ValidCards")) {
                 list = AbilityUtils.getDefinedCards(source, abilityParams.get("Defined"), null);
             }
@@ -2034,7 +2033,7 @@ public class ComputerUtilCombat {
      */
     public static Map<Card, Integer> distributeAIDamage(final Card attacker, final CardCollectionView block, int dmgCanDeal, GameEntity defender, boolean overrideOrder) {
         // TODO: Distribute defensive Damage (AI controls how damage is dealt to own cards) for Banding and Defensive Formation
-        Map<Card, Integer> damageMap = new HashMap<Card, Integer>();
+        Map<Card, Integer> damageMap = Maps.newHashMap();
         
         boolean isAttacking = defender != null;
         
@@ -2317,10 +2316,7 @@ public class ComputerUtilCombat {
         }
         
         if (!withoutAbilities) {
-        	List<String> keywords = new ArrayList<String>();
-        	keywords.add("Double Strike");
-        	keywords.add("First Strike");
-            return canGainKeyword(combatant, keywords, combat);
+            return canGainKeyword(combatant, Lists.newArrayList("Double Strike", "First Strike"), combat);
         }
     
         return false;
@@ -2339,9 +2335,7 @@ public class ComputerUtilCombat {
             return true;
         }
         if (!withoutAbilities) {
-        	List<String> keywords = new ArrayList<String>();
-        	keywords.add(keyword);
-            return canGainKeyword(combatant, keywords, combat);
+            return canGainKeyword(combatant, Lists.newArrayList(keyword), combat);
         } else {
             return false;
         }
@@ -2405,6 +2399,25 @@ public class ComputerUtilCombat {
             }
         }
         return original;
+    }
+
+    private final static boolean isCombatDamagePrevented(final Card attacker, final GameEntity target, final int damage) {
+        final Game game = attacker.getGame();
+
+        // first try to replace the damage
+        final Map<String, Object> repParams = Maps.newHashMap();
+        repParams.put("Event", "DamageDone");
+        repParams.put("Affected", target);
+        repParams.put("DamageSource", attacker);
+        repParams.put("DamageAmount", damage);
+        repParams.put("IsCombat", true);
+        repParams.put("Prevention", true);
+        // repParams.put("PreventMap", preventMap);
+
+        List<ReplacementEffect> list = game.getReplacementHandler().getReplacementList(repParams,
+                ReplacementLayer.None);
+        
+        return !list.isEmpty();
     }
 }
 
