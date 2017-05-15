@@ -23,6 +23,7 @@ import com.google.common.collect.Iterables;
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -186,6 +187,14 @@ public class ComputerUtilCombat {
         if (!attacked.canLoseLife()) {
             return 0;
         }
+
+        if (!attacked.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
+            if (attacker.hasKeyword("Prevent all damage that would be dealt by CARDNAME.")
+                    || attacker.hasKeyword("Prevent all damage that would be dealt to and by CARDNAME.")) {
+                return 0;
+            }
+        }
+
         damage += ComputerUtilCombat.predictPowerBonusOfAttacker(attacker, null, combat, withoutAbilities);
         if (!attacker.hasKeyword("Infect")) {
             sum = ComputerUtilCombat.predictDamageTo(attacked, damage, attacker, true);
