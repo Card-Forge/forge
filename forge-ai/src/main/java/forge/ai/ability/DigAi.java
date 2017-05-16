@@ -14,6 +14,7 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.TextUtil;
 
 
 public class DigAi extends SpellAbilityAi {
@@ -97,6 +98,16 @@ public class DigAi extends SpellAbilityAi {
             } else if (mandatory && sa.canTarget(ai)) {
                 sa.getTargets().add(ai);
             }
+        }
+
+        // Triggers that ask to pay {X} (e.g. Depala, Pilot Exemplar).
+        if (sa.hasParam("AILogic") && sa.getParam("AILogic").startsWith("PayXButSaveMana")) {
+            int manaToSave = Integer.parseInt(TextUtil.split(sa.getParam("AILogic"), '.')[1]);
+            int numCards = ComputerUtilMana.determineLeftoverMana(sa, ai) - manaToSave;
+            if (numCards <= 0) {
+                return mandatory;
+            }
+            sa.getHostCard().setSVar("PayX", Integer.toString(numCards));
         }
 
         return true;
