@@ -1098,11 +1098,15 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // vs. two cards in the second player's graveyard, which cards are more relevant to be targeted, etc.). Consider improving.
         if (sa.getTargetRestrictions().isSingleZone()) {
             Card firstTgt = sa.getTargets().getFirstTargetedCard();
+            CardCollection toRemove = new CardCollection();
             if (firstTgt != null) {
                 for (Card t : sa.getTargets().getTargetCards()) {
                    if (!t.getController().equals(firstTgt.getController())) {
-                       sa.getTargets().remove(t);
+                       toRemove.add(t);
                    }
+                }
+                for (Card dontTarget : toRemove) {
+                   sa.getTargets().remove(dontTarget);
                 }
             }
         }
