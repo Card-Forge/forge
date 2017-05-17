@@ -8,7 +8,8 @@ SVar:TrigSacrifice:DB$ Sacrifice | Optional$ True | SacrificeParam$ HeartPiercer
 
 T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Creature.Other | CauseParam$ HeartPiercer | Execute$ TrigDamage | Secondary$ True | TriggerDescription$ CARDNAME deals damage equal to that creature's power to target creature or player.
 
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ XPower | References$ XPower
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ XPower | References$ XPower | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 
 K:Embalm:5 R
 SVar:XPower:RememberedLKI$CardPower
