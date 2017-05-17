@@ -214,7 +214,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         if (logToConsole) {
             System.out.println("Post Randoms : " + deckList.size());
         }
-        //TODO: update colors
+        //update colors
         FullDeckColors finalDeckColors = new FullDeckColors();
         for(PaperCard c:deckList){
             if(finalDeckColors.canChoseMoreColors()){
@@ -232,6 +232,8 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         if (logToConsole) {
             System.out.println("Post Nonbasic lands : " + deckList.size());
         }
+
+        checkEvolvingWilds();
 
         // 11. Fill up with basic lands.
         final int[] clrCnts = calculateLandNeeds();
@@ -280,6 +282,18 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
     }
 
+    /**
+     * If evolving wilds is in the deck and there are fewer than 4 spaces for basic lands - remove evolving wilds
+     */
+    protected void checkEvolvingWilds(){
+        List<PaperCard> evolvingWilds = Lists.newArrayList(Iterables.filter(deckList,PaperCard.Predicates.name("Evolving Wilds")));
+        if((evolvingWilds.size()>0 && landsNeeded<4 ) || colors.countColors()<2){
+            deckList.removeAll(evolvingWilds);
+            landsNeeded=landsNeeded+evolvingWilds.size();
+            aiPlayables.addAll(evolvingWilds);
+        }
+    }
+
 
     protected void addLowCMCCard(){
         final Iterable<PaperCard> nonLands = Iterables.filter(rankedColorList,
@@ -319,7 +333,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      * @return name
      */
     private String generateName() {
-        return keyCard.getName() + " / " + secondKeyCard.getName() +" based deck";
+        return keyCard.getName() + " - " + secondKeyCard.getName() +" based deck";
     }
 
     /**
@@ -505,15 +519,11 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      * Only adds wastes if present in the card pool but if present adds them all
      */
     private void addWastesIfRequired(){
-        List<PaperCard> toAdd = new ArrayList<>();
-        for (final PaperCard cp : aiPlayables) {
-            if(cp.getName().equalsIgnoreCase("Wastes")){
-                toAdd.add(cp);
-            }
-        }
+        List<PaperCard> toAdd = Lists.newArrayList(Iterables.filter(aiPlayables,PaperCard.Predicates.name("Wastes")));
         deckList.addAll(toAdd);
         aiPlayables.removeAll(toAdd);
         rankedColorList.removeAll(toAdd);
+        landsNeeded = landsNeeded - toAdd.size();
     }
 
     /**
@@ -551,8 +561,9 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         final Iterable<PaperCard> lands = Iterables.filter(aiPlayables,
                 Predicates.compose(CardRulesPredicates.Presets.IS_NONBASIC_LAND, PaperCard.FN_GET_RULES));
         List<PaperCard> landsToAdd = new ArrayList<>();
+        int minBasics=r.nextInt(6)+3;//Keep a minimum number of basics to ensure playable decks
         for (final PaperCard card : lands) {
-            if (landsNeeded > 0) {
+            if (landsNeeded > minBasics) {
                 // Throw out any dual-lands for the wrong colors. Assume
                 // everything else is either
                 // (a) dual-land of the correct two colors, or
@@ -667,62 +678,6 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         deckList.addAll(toAdd);
         aiPlayables.removeAll(toAdd);
         rankedColorList.removeAll(toAdd);
-    }
-
-    /**
-     * Check all cards that should be removed from Random Decks. If they have
-     * DeckNeeds or DeckHints, we can check to make sure they have the requisite
-     * complementary cards present. Throw it out if it has no DeckNeeds or
-     * DeckHints (because we have no idea what else should be in here) or if the
-     * DeckNeeds or DeckHints are not met. Replace the removed cards with new
-     * cards.
-     */
-    private void checkRemRandomDeckCards() {
-        int numCreatures = 0;
-        int numOthers = 0;
-        for (final ListIterator<PaperCard> it = deckList.listIterator(); it.hasNext();) {
-            final PaperCard card = it.next();
-            final CardAiHints ai = card.getRules().getAiHints();
-            if (ai.getRemRandomDecks()) {
-                final List<PaperCard> comboCards = new ArrayList<PaperCard>();
-                if (ai.getDeckNeeds() != null && ai.getDeckNeeds().isValid()) {
-                    final DeckHints needs = ai.getDeckNeeds();
-                    comboCards.addAll(needs.filter(deckList));
-                }
-                if (ai.getDeckHints() != null && ai.getDeckHints().isValid()) {
-                    final DeckHints hints = ai.getDeckHints();
-                    comboCards.addAll(hints.filter(deckList));
-                }
-                if (comboCards.isEmpty()) {
-                    if (logToConsole) {
-                        System.out.println("No combo cards found for " + card.getName() + ", removing it.");
-                    }
-                    it.remove();
-                    availableList.add(card);
-                    if (card.getRules().getType().isCreature()) {
-                        numCreatures++;
-                    } else {
-                        numOthers++;
-                    }
-                } else {
-                    if (logToConsole) {
-                        System.out.println("Found " + comboCards.size() + " cards for " + card.getName());
-                    }
-                }
-            }
-        }
-        if (numCreatures > 0) {
-            addCreatures(onColorCreatures, numCreatures);
-        }
-        if (numOthers > 0) {
-            addNonCreatures(onColorNonCreatures, numOthers);
-        }
-        // If we added some replacement cards, and we still have cards available
-        // in aiPlayables, call this function again in case the replacement
-        // cards are also RemRandomDeck cards.
-        if ((numCreatures > 0 || numOthers > 0) && aiPlayables.size() > 0) {
-            checkRemRandomDeckCards();
-        }
     }
 
     /**
