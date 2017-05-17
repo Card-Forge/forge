@@ -39,6 +39,7 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
         AETHER_MYTHIC_MULTIPLIER("25"),
         AETHER_START_SHARDS("3000"),
         AETHER_WHEEL_SHARDS("1000"),
+        AETHER_USE_DEFAULT_RARITY_ODDS("true"),
 
         BOOSTER_COMMONS("11"),
         BOOSTER_UNCOMMONS("3"),

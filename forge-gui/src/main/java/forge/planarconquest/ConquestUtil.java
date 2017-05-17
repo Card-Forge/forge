@@ -248,17 +248,17 @@ public class ConquestUtil {
         }
 
         public CardRarity getRarity() {
-            return getRarity(0);
+            return getRarity(0d);
         }
-        public CardRarity getRarity(double randomSeed) {
+        public CardRarity getRarity(double random) {
             if (predicate instanceof RarityFilter) {
-                float total = 0;
+                double total = 0d;
                 CardRarity rarity = null;
                 Map<CardRarity, Double> rarityOdds = ((RarityFilter)predicate).rarityOdds;
-                for (Entry<CardRarity, Double> entry : rarityOdds.entrySet()) {
+                for (final Entry<CardRarity, Double> entry : rarityOdds.entrySet()) {
                     rarity = entry.getKey();
                     total += entry.getValue();
-                    if (randomSeed < total) {
+                    if (random < total) {
                         return rarity;
                     }
                 }
@@ -292,15 +292,22 @@ public class ConquestUtil {
         ConquestPreferences prefs = FModel.getConquestPreferences();
 
         Map<CardRarity, Double> odds = Maps.newEnumMap(CardRarity.class);
-        double commonsPerBooster = prefs.getPrefInt(CQPref.BOOSTER_COMMONS);
-        double uncommonPerBooster = prefs.getPrefInt(CQPref.BOOSTER_UNCOMMONS);
-        double raresPerBooster = prefs.getPrefInt(CQPref.BOOSTER_RARES);
-        double mythicsPerBooster = raresPerBooster / (double)prefs.getPrefInt(CQPref.BOOSTERS_PER_MYTHIC);
+        if (prefs.getPrefBoolean(CQPref.AETHER_USE_DEFAULT_RARITY_ODDS)) {
+            odds.put(CardRarity.Common, 1d);
+            odds.put(CardRarity.Uncommon, 0.17);
+            odds.put(CardRarity.Rare, 0.03);
+            odds.put(CardRarity.MythicRare, 0.005);
+        } else {
+            double commonsPerBooster = prefs.getPrefInt(CQPref.BOOSTER_COMMONS);
+            double uncommonPerBooster = prefs.getPrefInt(CQPref.BOOSTER_UNCOMMONS);
+            double raresPerBooster = prefs.getPrefInt(CQPref.BOOSTER_RARES);
+            double mythicsPerBooster = raresPerBooster / (double)prefs.getPrefInt(CQPref.BOOSTERS_PER_MYTHIC);
 
-        odds.put(CardRarity.Common, 1d);
-        odds.put(CardRarity.Uncommon, uncommonPerBooster / commonsPerBooster);
-        odds.put(CardRarity.Rare, raresPerBooster / commonsPerBooster);
-        odds.put(CardRarity.MythicRare, mythicsPerBooster / commonsPerBooster);
+            odds.put(CardRarity.Common, 1d);
+            odds.put(CardRarity.Uncommon, uncommonPerBooster / commonsPerBooster);
+            odds.put(CardRarity.Rare, raresPerBooster / commonsPerBooster);
+            odds.put(CardRarity.MythicRare, mythicsPerBooster / commonsPerBooster);
+        }
 
         for (AEtherFilter filter : RARITY_FILTERS) {
             filter.caption = ((RarityFilter)filter.predicate).updateOdds(odds);
@@ -425,7 +432,11 @@ public class ConquestUtil {
                 else {
                     odds /= baseOdds;
                     remainingOdds -= odds;
-                    caption += ", " + rarity.getLongName() + " (" + (Math.round(1000 * odds) / 10) + "%)"; //round to nearest single decimal point
+                    final double rounded = Math.round(1000 * odds) / 10d;
+                    final String display = rounded < 1d
+                            ? Double.toString(rounded) // Display decimal if < 1%
+                            : Long.toString(Math.round(rounded));
+                    caption += ", " + rarity.getLongName() + " (" + display + "%)";
                     rarityOdds.put(rarity, odds);
                 }
             }

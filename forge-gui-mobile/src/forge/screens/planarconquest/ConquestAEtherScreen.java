@@ -54,8 +54,9 @@ public class ConquestAEtherScreen extends FScreen {
     private static final float PADDING = Utils.scale(5f);
 
     private final AEtherDisplay display = add(new AEtherDisplay());
-    private final Set<PaperCard> pool = new HashSet<PaperCard>();
-    private final Set<PaperCard> filteredPool = new HashSet<PaperCard>();
+    private final Set<PaperCard> pool = new HashSet<>();
+    private final Set<PaperCard> filteredPool = new HashSet<>();
+    private final Set<PaperCard> strictPool = new HashSet<>();
 
     private final FilterButton btnColorFilter = add(new FilterButton("Color", ConquestUtil.COLOR_FILTERS));
     private final FilterButton btnTypeFilter = add(new FilterButton("Type", ConquestUtil.TYPE_FILTERS));
@@ -108,10 +109,16 @@ public class ConquestAEtherScreen extends FScreen {
         predicate = btnRarityFilter.buildFilterPredicate(predicate);
         predicate = btnCMCFilter.buildFilterPredicate(predicate);
 
+        final CardRarity selectedRarity = btnRarityFilter.selectedOption.getRarity();
+
         filteredPool.clear();
+        strictPool.clear();
         for (PaperCard card : pool) {
             if (predicate == null || predicate.apply(card)) {
                 filteredPool.add(card);
+                if (selectedRarity == card.getRarity()) {
+                    strictPool.add(card);
+                }
             }
         }
         updateShardCost();
@@ -133,14 +140,13 @@ public class ConquestAEtherScreen extends FScreen {
     }
 
     private void pullFromTheAEther() {
-        if (filteredPool.isEmpty()) { return; }
+        if (filteredPool.isEmpty() || strictPool.isEmpty()) { return; }
 
         ConquestData model = FModel.getConquest().getModel();
         if (model.getAEtherShards() < shardCost) { return; }
 
         //determine final pool to pull from based on rarity odds
         Iterable<PaperCard> rewardPool;
-        boolean lowerRarity = true;
         CardRarity minRarity = btnRarityFilter.selectedOption.getRarity();
         CardRarity rarity = btnRarityFilter.selectedOption.getRarity(Math.random());
         while (true) {
@@ -148,29 +154,23 @@ public class ConquestAEtherScreen extends FScreen {
             rewardPool = Iterables.filter(filteredPool, new Predicate<PaperCard>() {
                 @Override
                 public boolean apply(PaperCard card) {
-                    if (allowedRarity == card.getRarity()) { return true; }
-                    if (allowedRarity == CardRarity.Rare && card.getRarity() == CardRarity.Special) { return true; }
-                    return false;
+                    return allowedRarity == card.getRarity()
+                    || allowedRarity == CardRarity.Rare && card.getRarity() == CardRarity.Special;
                 }
             });
             if (Iterables.isEmpty(rewardPool)) { //if pool is empty, must reduce rarity and try again
                 if (rarity == minRarity) {
-                    if (lowerRarity) { lowerRarity = false; } //switch to increasing rarity if min rarity empty
-                    else { break; } //shouldn't happen, but prevent infinite loop
+                    return;
                 }
                 switch (rarity) {
                 case MythicRare:
-                    rarity = lowerRarity ? CardRarity.Rare : CardRarity.Common;
+                    rarity = CardRarity.Rare;
                     continue;
                 case Rare:
-                    rarity = lowerRarity ? CardRarity.Uncommon : CardRarity.MythicRare;
+                    rarity = CardRarity.Uncommon;
                     continue;
                 case Uncommon:
-                    rarity = lowerRarity ? CardRarity.Common : CardRarity.Rare;
-                    continue;
-                case Common:
-                    if (lowerRarity) { break; } //shouldn't happen
-                    rarity = CardRarity.Uncommon;
+                    rarity = CardRarity.Common;
                     continue;
                 default:
                     break;
@@ -184,6 +184,7 @@ public class ConquestAEtherScreen extends FScreen {
 
         pool.remove(card);
         filteredPool.remove(card);
+        strictPool.remove(card); // Card might not have been in strictPool in the first place; that's fine
 
         activePullAnimation = new PullAnimation(card);
         activePullAnimation.start();
@@ -230,6 +231,15 @@ public class ConquestAEtherScreen extends FScreen {
 
             message += " (";
 
+            if (strictPool.isEmpty()) {
+                message += TextRenderer.startColor(Color.RED) + "0" + TextRenderer.endColor();
+            }
+            else {
+                message += strictPool.size();
+            }
+
+            message += " [";
+
             if (filteredPool.isEmpty()) {
                 message += TextRenderer.startColor(Color.RED) + "0" + TextRenderer.endColor();
             }
@@ -237,7 +247,7 @@ public class ConquestAEtherScreen extends FScreen {
                 message += filteredPool.size();
             }
 
-            message += " / " + pool.size() + ")";
+            message += "] / " + pool.size() + ")";
         }
 
         @Override
