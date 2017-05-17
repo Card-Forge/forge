@@ -118,8 +118,8 @@ public class FDeckViewer extends FDialog {
             }
         });
 
-        final int width = 1920;
-        final int height = 1080;
+        final int width = 800;
+        final int height = 600;
         this.setPreferredSize(new Dimension(width, height));
         this.setSize(width, height);
 
