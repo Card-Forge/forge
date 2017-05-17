@@ -22,12 +22,12 @@ import java.util.*;
  */
 public final class CardRelationMatrixGenerator {
 
-    public static HashMap<GameFormat,HashMap<String,List<PaperCard>>> cardPools = new HashMap<>();
+    public static HashMap<GameFormat,HashMap<String,List<Map.Entry<PaperCard,Integer>>>> cardPools = new HashMap<>();
 
 
     public static void initialize(){
-        HashMap<String,List<PaperCard>> standardMap = CardThemedMatrixIO.loadMatrix(FModel.getFormats().getStandard());
-        HashMap<String,List<PaperCard>> modernMap = CardThemedMatrixIO.loadMatrix(FModel.getFormats().getModern());
+        HashMap<String,List<Map.Entry<PaperCard,Integer>>> standardMap = CardThemedMatrixIO.loadMatrix(FModel.getFormats().getStandard());
+        HashMap<String,List<Map.Entry<PaperCard,Integer>>> modernMap = CardThemedMatrixIO.loadMatrix(FModel.getFormats().getModern());
         if(standardMap==null || modernMap==null){
             reInitialize();
             return;
@@ -40,12 +40,12 @@ public final class CardRelationMatrixGenerator {
         cardPools.put(FModel.getFormats().getStandard(),initializeFormat(FModel.getFormats().getStandard()));
         cardPools.put(FModel.getFormats().getModern(),initializeFormat(FModel.getFormats().getModern()));
         for(GameFormat format:cardPools.keySet()){
-            HashMap<String,List<PaperCard>> map = cardPools.get(format);
+            HashMap<String,List<Map.Entry<PaperCard,Integer>>> map = cardPools.get(format);
             CardThemedMatrixIO.saveMatrix(format,map);
         }
     }
 
-    public static HashMap<String,List<PaperCard>> initializeFormat(GameFormat format){
+    public static HashMap<String,List<Map.Entry<PaperCard,Integer>>> initializeFormat(GameFormat format){
 
         IStorage<Deck> decks = new StorageImmediatelySerialized<Deck>("Generator", new DeckStorage(new File(ForgeConstants.DECK_GEN_DIR+ForgeConstants.PATH_SEPARATOR+format.getName()),
                 ForgeConstants.DECK_GEN_DIR, false),
@@ -83,7 +83,7 @@ public final class CardRelationMatrixGenerator {
                 }
             }
         }
-        HashMap<String,List<PaperCard>> cardPools = new HashMap<>();
+        HashMap<String,List<Map.Entry<PaperCard,Integer>>> cardPools = new HashMap<>();
         for (PaperCard card:cardList){
             int col=cardIntegerMap.get(card.getName());
             int[] distances = matrix[col];
@@ -92,21 +92,21 @@ public final class CardRelationMatrixGenerator {
                 ArrayIndexComparator comparator = new ArrayIndexComparator(ArrayUtils.toObject(distances));
                 Integer[] indices = comparator.createIndexArray();
                 Arrays.sort(indices, comparator);
-                List<PaperCard> deckPool=new ArrayList<>();
+                List<Map.Entry<PaperCard,Integer>> deckPool=new ArrayList<>();
                 int k=0;
-                boolean isZeroDistance=false;
+                boolean excludeThisCard=false;//if there are too few cards with at least one connection
                 for (int j=0;j<20;++k){
                     if(distances[indices[cardList.size()-1-k]]==0){
-                        isZeroDistance=true;
+                        excludeThisCard = true;
                         break;
                     }
                     PaperCard cardToAdd=integerCardMap.get(indices[cardList.size()-1-k]);
-                    if(!cardToAdd.getRules().getMainPart().getType().isLand()){//need 15 non-land cards
+                    if(!cardToAdd.getRules().getMainPart().getType().isLand()){//need x non-land cards
                         ++j;
                     }
-                    deckPool.add(cardToAdd);
+                    deckPool.add(new AbstractMap.SimpleEntry<PaperCard, Integer>(cardToAdd,distances[indices[cardList.size()-1-k]]));
                 };
-                if(isZeroDistance){
+                if(excludeThisCard){
                     continue;
                 }
                 cardPools.put(card.getName(),deckPool);

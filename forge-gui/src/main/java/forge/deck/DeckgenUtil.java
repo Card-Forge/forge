@@ -4,6 +4,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
+import com.google.common.collect.Lists;
 import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
@@ -26,10 +27,7 @@ import forge.util.MyRandom;
 import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /** 
  * Utility collection for various types of decks.
@@ -41,35 +39,125 @@ import java.util.Random;
 // TODO This class can be used for home menu constructed deck generation as well.
 public class DeckgenUtil {
 
-    public static Deck buildCardGenDeck(GameFormat format){
+    public static Deck buildCardGenDeck(GameFormat format, boolean isForAI){
         Random random    = new Random();
         List<String> keys      = new ArrayList<>(CardRelationMatrixGenerator.cardPools.get(format).keySet());
         String       randomKey = keys.get( random.nextInt(keys.size()) );
         Predicate<PaperCard> cardFilter = Predicates.and(format.getFilterPrinted(),PaperCard.Predicates.name(randomKey));
         PaperCard keyCard = FModel.getMagicDb().getCommonCards().getAllCards(cardFilter).get(0);
         try {
-            return buildCardGenDeck(keyCard,format);
+            return buildCardGenDeck(keyCard,format,isForAI);
         }catch (Exception e){
             e.printStackTrace();
-            return buildCardGenDeck(format);
+            return buildCardGenDeck(format,isForAI);
         }
     }
 
-    public static Deck buildCardGenDeck(String cardName, GameFormat format){
+    public static Deck buildCardGenDeck(String cardName, GameFormat format, boolean isForAI){
         try {
             Predicate<PaperCard> cardFilter = Predicates.and(format.getFilterPrinted(),PaperCard.Predicates.name(cardName));
-            return buildCardGenDeck(FModel.getMagicDb().getCommonCards().getAllCards(cardFilter).get(0),format);
+            return buildCardGenDeck(FModel.getMagicDb().getCommonCards().getAllCards(cardFilter).get(0),format,isForAI);
         }catch (Exception e){
             e.printStackTrace();
-            return buildCardGenDeck(format);
+            return buildCardGenDeck(format,isForAI);
         }
     }
 
-    public static Deck buildCardGenDeck(PaperCard card, GameFormat format){
-        List<PaperCard> selectedCards = new ArrayList<>();
-        selectedCards.addAll(CardRelationMatrixGenerator.cardPools.get(format).get(card.getName()));
-        List<PaperCard> toRemove = new ArrayList<>();
+    /**
+     * Take two lists of cards with counts of each and combine the second into the first by adding a mean normalized fraction
+     * of the count in the second list to the first list.
+     * @param cards1
+     * @param cards2
+     */
+    public static void combineDistances(List<Map.Entry<PaperCard,Integer>> cards1,List<Map.Entry<PaperCard,Integer>> cards2){
+        Integer maxDistance=0;
+        for (Map.Entry<PaperCard,Integer> pair1:cards1){
+            maxDistance=maxDistance+pair1.getValue();
+        }
+        maxDistance=maxDistance/cards1.size();
+        Integer maxDistance2=0;
+        for (Map.Entry<PaperCard,Integer> pair2:cards2){
+            maxDistance2=maxDistance2+pair2.getValue();
+        }
+        maxDistance2=maxDistance2/cards2.size();
+        for (Map.Entry<PaperCard,Integer> pair2:cards2){
+            boolean isCardPresent=false;
+            for (Map.Entry<PaperCard,Integer> pair1:cards1){
+                if (pair1.getKey().equals(pair2.getKey())){
+                    pair1.setValue(pair1.getValue()+new Float((pair2.getValue()*0.4*maxDistance/maxDistance2)).intValue());
+                    isCardPresent=true;
+                    break;
+                }
+            }
+            if(!isCardPresent){
+                Map.Entry<PaperCard,Integer> newEntry=new AbstractMap.SimpleEntry<PaperCard, Integer>(pair2.getKey(),new Float((pair2.getValue()*0.4*maxDistance/maxDistance2)).intValue());
+                cards1.add(pair2);
+            }
+        }
+    }
+
+    public static class CardDistanceComparator implements Comparator<Map.Entry<PaperCard,Integer>>
+    {
+        @Override
+        public int compare(Map.Entry<PaperCard,Integer> index1, Map.Entry<PaperCard,Integer> index2)
+        {
+            // Autounbox from Integer to int to use as array indexes
+            return index1.getValue().compareTo(index2.getValue());
+        }
+    }
+
+    /**
+     * Build a deck based on the chosen card.
+     *
+     * @param card
+     * @param format
+     * @param isForAI
+     * @return
+     */
+    public static Deck buildCardGenDeck(PaperCard card, GameFormat format, boolean isForAI){
+        List<Map.Entry<PaperCard,Integer>> potentialCards = new ArrayList<>();
+        potentialCards.addAll(CardRelationMatrixGenerator.cardPools.get(format).get(card.getName()));
+        Collections.sort(potentialCards,new CardDistanceComparator());
+        Collections.reverse(potentialCards);
+        //get second keycard
         Random r = new Random();
+        List<PaperCard> preSelectedCards = new ArrayList<>();
+        for(Map.Entry<PaperCard,Integer> pair:potentialCards){
+            preSelectedCards.add(pair.getKey());
+        }
+        //filter out land cards and if for AI non-playable cards as potential second key cards
+        Iterable<PaperCard> preSelectedNonLandCards;
+        if(isForAI){
+            preSelectedNonLandCards=Iterables.filter(preSelectedCards,Predicates.and(
+                    Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, PaperCard.FN_GET_RULES),
+                    Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, PaperCard.FN_GET_RULES)));
+        }else{
+            preSelectedNonLandCards=Iterables.filter(preSelectedCards,
+                    Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, PaperCard.FN_GET_RULES));
+        }
+        preSelectedCards= Lists.newArrayList(preSelectedNonLandCards);
+
+        //choose a second card randomly from the top 8 cards if possible
+        int randMax=8;
+        if(preSelectedCards.size()<randMax){
+            randMax=preSelectedCards.size();
+        }
+        PaperCard secondKeycard = preSelectedCards.get(r.nextInt(randMax));
+        List<Map.Entry<PaperCard,Integer>> potentialSecondCards = CardRelationMatrixGenerator.cardPools.get(format).get(secondKeycard.getName());
+
+        //combine card distances from second key card and re-sort 
+        if(potentialSecondCards !=null && potentialSecondCards.size()>0) {
+            combineDistances(potentialCards, potentialSecondCards);
+            Collections.sort(potentialCards, new CardDistanceComparator());
+            Collections.reverse(potentialCards);
+        }
+
+        List<PaperCard> selectedCards = new ArrayList<>();
+        for(Map.Entry<PaperCard,Integer> pair:potentialCards){
+            selectedCards.add(pair.getKey());
+        }
+        List<PaperCard> toRemove = new ArrayList<>();
+
         //randomly remove cards
         int removeCount=0;
         int i=0;
@@ -78,9 +166,16 @@ public class DeckgenUtil {
                 toRemove.add(c);
                 removeCount++;
             }
+            if(c.getName().equals(card.getName())){//may have been added in secondary list
+                toRemove.add(c);
+            }
+            if(c.getName().equals(secondKeycard.getName())){//remove so we can add correct amount
+                toRemove.add(c);
+            }
             ++i;
         }
         selectedCards.removeAll(toRemove);
+        //Add keycard
         List<PaperCard> playsetList = new ArrayList<>();
         int keyCardCount=4;
         if(card.getRules().getMainPart().getManaCost().getCMC()>7){
@@ -91,6 +186,16 @@ public class DeckgenUtil {
         for(int j=0;j<keyCardCount;++j) {
             playsetList.add(card);
         }
+        //Add 2nd keycard
+        int keyCard2Count=4;
+        if(card.getRules().getMainPart().getManaCost().getCMC()>7){
+            keyCard2Count=1+r.nextInt(4);
+        }else if(card.getRules().getMainPart().getManaCost().getCMC()>5){
+            keyCard2Count=2+r.nextInt(3);
+        }
+        for(int j=0;j<keyCard2Count;++j) {
+            playsetList.add(secondKeycard);
+        }
         for (PaperCard c:selectedCards){
             for(int j=0;j<4;++j) {
                 if(r.nextInt(100)<90) {
@@ -98,16 +203,18 @@ public class DeckgenUtil {
                 }
             }
         }
-        CardThemedDeckBuilder dBuilder = new CardThemedDeckBuilder(card, playsetList,format);
+
+        //build deck from combined list
+        CardThemedDeckBuilder dBuilder = new CardThemedDeckBuilder(card,secondKeycard, playsetList,format,isForAI);
         Deck deck = dBuilder.buildDeck();
         if(deck.getMain().countAll()!=60){
             System.out.println(deck.getMain().countAll());
             System.out.println("Wrong card count "+deck.getMain().countAll());
-            deck=buildCardGenDeck(format);
+            deck=buildCardGenDeck(format,isForAI);
         }
         if(deck.getMain().countAll(Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard.FN_GET_RULES))>27){
             System.out.println("Too many lands "+deck.getMain().countAll(Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard.FN_GET_RULES)));
-            deck=buildCardGenDeck(format);
+            deck=buildCardGenDeck(format,isForAI);
         }
         while(deck.get(DeckSection.Sideboard).countAll()>15){
             deck.get(DeckSection.Sideboard).remove(deck.get(DeckSection.Sideboard).get(0));

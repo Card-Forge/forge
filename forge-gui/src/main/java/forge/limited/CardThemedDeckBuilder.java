@@ -46,6 +46,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
     protected int landsNeeded = 25;
 
     protected final PaperCard keyCard;
+    protected final PaperCard secondKeyCard;
 
     protected DeckColors deckColors;
     protected Predicate<CardRules> hasColor;
@@ -71,14 +72,19 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      * @param dList
      *            Cards to build the deck from.
      */
-    public CardThemedDeckBuilder(PaperCard keyCard0, final List<PaperCard> dList, GameFormat format) {
+    public CardThemedDeckBuilder(PaperCard keyCard0,PaperCard secondKeyCard0, final List<PaperCard> dList, GameFormat format, boolean isForAI) {
         super(FModel.getMagicDb().getCommonCards(), DeckFormat.Limited, format.getFilterPrinted());
         this.availableList = dList;
         keyCard=keyCard0;
+        secondKeyCard=secondKeyCard0;
         // remove Unplayables
-        final Iterable<PaperCard> playables = Iterables.filter(availableList,
-                Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, PaperCard.FN_GET_RULES));
-        this.aiPlayables = Lists.newArrayList(playables);
+        if(isForAI) {
+            final Iterable<PaperCard> playables = Iterables.filter(availableList,
+                    Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, PaperCard.FN_GET_RULES));
+            this.aiPlayables = Lists.newArrayList(playables);
+        }else{
+            this.aiPlayables = Lists.newArrayList(availableList);
+        }
         this.availableList.removeAll(aiPlayables);
         deckColors = new DeckColors();
         for(PaperCard c:getAiPlayables()){
@@ -93,6 +99,9 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         }
         if(!colors.hasAllColors(keyCard.getRules().getColorIdentity().getColor())){
             colors = ColorSet.fromMask(colors.getColor() | keyCard.getRules().getColorIdentity().getColor());
+        }
+        if(!colors.hasAllColors(secondKeyCard.getRules().getColorIdentity().getColor())){
+            colors = ColorSet.fromMask(colors.getColor() | secondKeyCard.getRules().getColorIdentity().getColor());
         }
         if (logColorsToConsole) {
             System.out.println(keyCard.getName());
@@ -132,6 +141,14 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         if(!keyCard.getRules().getMainPart().getType().isLand()&&!keyCard.getRules().getMainPart().getType().isCreature()) {
             keyCards = Iterables.filter(aiPlayables,PaperCard.Predicates.name(keyCard.getName()));
             final List<PaperCard> keyCardList = Lists.newArrayList(keyCards);
+            deckList.addAll(keyCardList);
+            aiPlayables.removeAll(keyCardList);
+            rankedColorList.removeAll(keyCardList);
+        }
+        // Add the deck card
+        if(!secondKeyCard.getRules().getMainPart().getType().isLand()&&!keyCard.getRules().getMainPart().getType().isCreature()) {
+            Iterable<PaperCard> secondKeyCards = Iterables.filter(aiPlayables,PaperCard.Predicates.name(secondKeyCard.getName()));
+            final List<PaperCard> keyCardList = Lists.newArrayList(secondKeyCards);
             deckList.addAll(keyCardList);
             aiPlayables.removeAll(keyCardList);
             rankedColorList.removeAll(keyCardList);
@@ -302,7 +319,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      * @return name
      */
     private String generateName() {
-        return keyCard.getName() + " based deck";
+        return keyCard.getName() + " / " + secondKeyCard.getName() +" based deck";
     }
 
     /**
@@ -754,11 +771,11 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             rankedColorList.removeAll(keyCardList);
         }
         final Map<Integer,Integer> targetCMCs = new HashMap<>();
-        targetCMCs.put(1,r.nextInt(5));//2
-        targetCMCs.put(2,r.nextInt(5)+4);//6
-        targetCMCs.put(3,r.nextInt(5)+5);//7
-        targetCMCs.put(4,r.nextInt(5)+2);//4
-        targetCMCs.put(5,r.nextInt(5)+2);//3
+        targetCMCs.put(1,r.nextInt(4)+2);//2
+        targetCMCs.put(2,r.nextInt(5)+5);//6
+        targetCMCs.put(3,r.nextInt(5)+6);//7
+        targetCMCs.put(4,r.nextInt(3)+3);//4
+        targetCMCs.put(5,r.nextInt(3)+3);//3
         targetCMCs.put(6,r.nextInt(3)+1);//2
 
 

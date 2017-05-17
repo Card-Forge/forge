@@ -30,7 +30,7 @@ public class CardThemedMatrixIO {
     /** suffix for all gauntlet data files */
     public static final String SUFFIX_DATA = ".dat";
 
-    public static void saveMatrix(GameFormat format, HashMap<String,List<PaperCard>> map){
+    public static void saveMatrix(GameFormat format, HashMap<String,List<Map.Entry<PaperCard,Integer>>> map){
         File file = getMatrixFile(format);
         ObjectOutputStream s = null;
         try {
@@ -51,11 +51,11 @@ public class CardThemedMatrixIO {
         }
     }
 
-    public static HashMap<String,List<PaperCard>> loadMatrix(GameFormat format){
+    public static HashMap<String,List<Map.Entry<PaperCard,Integer>>> loadMatrix(GameFormat format){
         try {
             FileInputStream fin = new FileInputStream(getMatrixFile(format));
             ObjectInputStream s = new ObjectInputStream(fin);
-            HashMap<String, List<PaperCard>> matrix = (HashMap<String, List<PaperCard>>) s.readObject();
+            HashMap<String, List<Map.Entry<PaperCard,Integer>>> matrix = (HashMap<String, List<Map.Entry<PaperCard,Integer>>>) s.readObject();
             s.close();
             return matrix;
         }catch (Exception e){
