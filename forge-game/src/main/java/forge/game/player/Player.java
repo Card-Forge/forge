@@ -2369,7 +2369,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         // Play the Sacrifice sound
         game.fireEvent(new GameEventCardSacrificed());
 
-        final Card cpy = CardFactory.copyCardWithChangedStats(c, false);
+        final Card cpy = CardUtil.getLKICopy(c);
         sacrificedThisTurn.add(cpy);
 
         // Run triggers
