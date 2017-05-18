@@ -190,8 +190,12 @@ public class ComputerUtilCombat {
         }
 
         if (!attacked.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
-            // ask ReplacementDamage directly
-            if (ComputerUtilCombat.isCombatDamagePrevented(attacker, attacked, damage)) {
+            // ask ReplacementDamage directly -- FIXME: this actually doesn't work right now, so it's temporarily reverted to the old form (see below).
+            //if (ComputerUtilCombat.isCombatDamagePrevented(attacker, attacked, damage)) {
+            if (attacker.hasKeyword("Prevent all damage that would be dealt by CARDNAME.")
+                    || attacker.hasKeyword("Prevent all damage that would be dealt to and by CARDNAME.")
+                    || attacker.hasKeyword("Prevent all combat damage that would be dealt by CARDNAME.")
+                    || attacker.hasKeyword("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) {
                 return 0;
             }
         }
