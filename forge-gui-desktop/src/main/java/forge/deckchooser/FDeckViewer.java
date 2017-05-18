@@ -118,8 +118,9 @@ public class FDeckViewer extends FDialog {
             }
         });
 
-        final int width = 800;
-        final int height = 600;
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        final int width = (int)(screenSize.width * 0.8);
+        final int height = (int)(screenSize.height * 0.9);
         this.setPreferredSize(new Dimension(width, height));
         this.setSize(width, height);
 
