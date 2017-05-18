@@ -70,6 +70,7 @@ public class DeckgenUtil {
      * @param cards2
      */
     public static void combineDistances(List<Map.Entry<PaperCard,Integer>> cards1,List<Map.Entry<PaperCard,Integer>> cards2){
+        Float secondListWeighting=0.4f;
         Integer maxDistance=0;
         for (Map.Entry<PaperCard,Integer> pair1:cards1){
             maxDistance=maxDistance+pair1.getValue();
@@ -84,7 +85,7 @@ public class DeckgenUtil {
             boolean isCardPresent=false;
             for (Map.Entry<PaperCard,Integer> pair1:cards1){
                 if (pair1.getKey().equals(pair2.getKey())){
-                    pair1.setValue(pair1.getValue()+new Float((pair2.getValue()*0.4*maxDistance/maxDistance2)).intValue());
+                    pair1.setValue(pair1.getValue()+new Float((pair2.getValue()*secondListWeighting*maxDistance/maxDistance2)).intValue());
                     isCardPresent=true;
                     break;
                 }
@@ -101,7 +102,6 @@ public class DeckgenUtil {
         @Override
         public int compare(Map.Entry<PaperCard,Integer> index1, Map.Entry<PaperCard,Integer> index2)
         {
-            // Autounbox from Integer to int to use as array indexes
             return index1.getValue().compareTo(index2.getValue());
         }
     }
@@ -145,7 +145,7 @@ public class DeckgenUtil {
         PaperCard secondKeycard = preSelectedCards.get(r.nextInt(randMax));
         List<Map.Entry<PaperCard,Integer>> potentialSecondCards = CardRelationMatrixGenerator.cardPools.get(format).get(secondKeycard.getName());
 
-        //combine card distances from second key card and re-sort 
+        //combine card distances from second key card and re-sort
         if(potentialSecondCards !=null && potentialSecondCards.size()>0) {
             combineDistances(potentialCards, potentialSecondCards);
             Collections.sort(potentialCards, new CardDistanceComparator());
@@ -162,7 +162,8 @@ public class DeckgenUtil {
         int removeCount=0;
         int i=0;
         for(PaperCard c:selectedCards){
-            if(r.nextInt(100)>70+(15-(i/selectedCards.size())*selectedCards.size()) && removeCount<4){
+            if(r.nextInt(100)>70+(15-(i/selectedCards.size())*selectedCards.size()) && removeCount<4 //randomly remove some cards - more likely as distance increases
+                    &&!c.getName().contains("Urza")){ //avoid breaking Tron decks
                 toRemove.add(c);
                 removeCount++;
             }
