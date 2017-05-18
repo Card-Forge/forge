@@ -5,6 +5,7 @@ A:SP$ RepeatEach | Cost$ 1 G | RepeatCards$ Creature.Human+DoubleFaced | Zone$ B
 SVar:DBState:DB$ SetState | Defined$ Remembered | Mode$ Transform | SpellDescription$ Transform all Humans. Prevent all combat damage that would be dealt this turn by creatures other than Werewolves and Wolves. (Only double-faced cards can be transformed.)
 SVar:DBCurseNonWolves:DB$ Effect | Name$ Moonmist Effect | StaticAbilities$ Curse
 SVar:Curse:Mode$ PreventDamage | EffectZone$ Command | Source$ Creature.nonWerewolf+nonWolf | CombatDamage$ True | Description$ Prevent all combat damage that would be dealt this turn by creatures other than Werewolves and Wolves.
+SVar:NeedsToPlay:Human.YouCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonmist.jpg
 Oracle:Transform all Humans. Prevent all combat damage that would be dealt this turn by creatures other than Werewolves and Wolves. (Only double-faced cards can be transformed.)
