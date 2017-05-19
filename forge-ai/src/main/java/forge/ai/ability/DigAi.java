@@ -142,6 +142,8 @@ public class DigAi extends SpellAbilityAi {
                 // for Explorer's Scope, always put a land on the battlefield tapped
                 // (TODO: might not always be a good idea, e.g. when a land ETBing can have detrimental effects)
                 return true;
+            } else if ("AlwaysConfirm".equals(sa.getParam("AILogic"))) {
+                return true;
             }
         }
 
