@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import forge.model.FModel;
+import forge.properties.ForgePreferences;
 import net.miginfocom.swing.MigLayout;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -118,9 +120,17 @@ public class FDeckViewer extends FDialog {
             }
         });
 
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        final int width = (int)(screenSize.width * 0.8);
-        final int height = (int)(screenSize.height * 0.9);
+        final int width;
+        final int height;
+        if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_SMALL_DECK_VIEWER)){
+            width = 800;
+            height = 600;
+        }else{
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            width = (int)(screenSize.width * 0.8);
+            height = (int)(screenSize.height * 0.9);
+        }
+
         this.setPreferredSize(new Dimension(width, height));
         this.setSize(width, height);
 

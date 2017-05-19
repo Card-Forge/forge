@@ -70,6 +70,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbScaleLarger = new OptionsCheckBox("Scale Image Larger");
     private final JCheckBox cbRenderBlackCardBorders = new OptionsCheckBox("Render Black Card Borders");
     private final JCheckBox cbLargeCardViewers = new OptionsCheckBox("Use Large Card Viewers");
+    private final JCheckBox cbSmallDeckViewer = new OptionsCheckBox("Use Small Deck Viewer");
     private final JCheckBox cbDisplayFoil = new OptionsCheckBox("Display Foil Overlay");
     private final JCheckBox cbRandomFoil = new OptionsCheckBox("Random Foil");
     private final JCheckBox cbRandomArtInPools = new OptionsCheckBox("Randomize Card Art in Generated Card Pools");
@@ -240,6 +241,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbLargeCardViewers, regularConstraints);
         pnlPrefs.add(new NoteLabel("Makes all card viewers much larger for use with high resolution images. Will not fit on smaller screens."), regularConstraints);
+
+        pnlPrefs.add(cbSmallDeckViewer, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Sets the deck viewer window to be 800x600 rather than a proportion of the screen size."), regularConstraints);
 
         pnlPrefs.add(cbRandomArtInPools, regularConstraints);
         pnlPrefs.add(new NoteLabel("Generates cards with random art in generated limited mode card pools."), regularConstraints);
@@ -532,6 +536,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbLargeCardViewers() {
         return cbLargeCardViewers;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbSmallDeckViewer() {
+        return cbSmallDeckViewer;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
