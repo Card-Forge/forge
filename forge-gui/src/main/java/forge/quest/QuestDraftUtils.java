@@ -275,7 +275,7 @@ public class QuestDraftUtils {
         if (nextMatch.hasHumanPlayer()) {
             waitForUserInput = true;
         } else {
-            if (FModel.getQuestPreferences().getPrefInt(QuestPreferences.QPref.SIMULATE_AI_VS_AI_RESULTS) == 1) {
+            if (FModel.getQuestPreferences().getPrefInt(QuestPreferences.QPref.SIMULATE_AI_VS_AI_RESULTS) == 1 || GuiBase.getInterface().isLibgdxPort()) {
                 return;
             }
             gui.disableOverlay();

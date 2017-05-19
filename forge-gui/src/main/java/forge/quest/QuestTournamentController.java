@@ -458,7 +458,7 @@ public class QuestTournamentController {
             return;
         }
 
-        if (FModel.getQuestPreferences().getPrefInt(QuestPreferences.QPref.SIMULATE_AI_VS_AI_RESULTS) == 1) {
+        if (FModel.getQuestPreferences().getPrefInt(QuestPreferences.QPref.SIMULATE_AI_VS_AI_RESULTS) == 1 || GuiBase.getInterface().isLibgdxPort()) {
             if (!QuestDraftUtils.injectRandomMatchOutcome(false)) {
                 gui = GuiBase.getInterface().getNewGuiGame();
                 QuestDraftUtils.startNextMatch(gui);

@@ -251,7 +251,7 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
 
     @Override
     protected void startMatch() {
-        if (mode == Mode.TOURNAMENT_ACTIVE && FModel.getQuestPreferences().getPrefInt(QuestPreferences.QPref.SIMULATE_AI_VS_AI_RESULTS) == 1 && QuestDraftUtils.isNextMatchAIvsAI()) {
+        if (mode == Mode.TOURNAMENT_ACTIVE /*&& FModel.getQuestPreferences().getPrefInt(QuestPreferences.QPref.SIMULATE_AI_VS_AI_RESULTS) == 1*/ && QuestDraftUtils.isNextMatchAIvsAI()) {
             // Special handling for simulating AI vs. AI match outcome - do not invoke in background thread (since the match is not played out)
             // and instead revalidate right after the outcome is decided in order to refresh the tournament screen.
             controller.startNextMatch();

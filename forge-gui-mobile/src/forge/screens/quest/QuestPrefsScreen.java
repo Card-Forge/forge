@@ -92,8 +92,9 @@ public class QuestPrefsScreen extends FScreen {
         scroller.add(new PrefsOption("Playset Size: Any Number", QPref.PLAYSET_ANY_NUMBER_SIZE, PrefsGroup.SHOP));
 
         //Quest Draft Tournament Preferences
-        scroller.add(new PrefsHeader("Quest Draft Tournaments", FSkinImage.QUEST_NOTES, PrefsGroup.DIFFICULTY_EXPERT));
-        scroller.add(new PrefsOption("Simulate AI vs. AI Results", QPref.SIMULATE_AI_VS_AI_RESULTS, PrefsGroup.DRAFT_TOURNAMENTS));
+        //NOTE: -- currently this setting is ignored since only the AI vs. AI Simulation mode can be used on mobile without hanging the game.
+        //scroller.add(new PrefsHeader("Quest Draft Tournaments", FSkinImage.QUEST_NOTES, PrefsGroup.DIFFICULTY_ALL));
+        //scroller.add(new PrefsOption("Simulate AI vs. AI Results", QPref.SIMULATE_AI_VS_AI_RESULTS, PrefsGroup.DRAFT_TOURNAMENTS));
 
         //Difficulty Adjustments (All)
         scroller.add(new PrefsHeader("Difficulty Adjustments (All)", FSkinImage.QUEST_NOTES, PrefsGroup.DIFFICULTY_ALL));
