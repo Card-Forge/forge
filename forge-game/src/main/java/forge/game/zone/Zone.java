@@ -80,6 +80,13 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     }
 
     public void add(final Card c, final Integer index, final Card latestState) {
+        if (index != null && cardList.isEmpty() && index.intValue() > 0) {
+            // something went wrong, most likely the method fired when the game was in an unexpected state
+            // (e.g. conceding during the mana payment prompt)
+            System.out.println("Warning: tried to add a card to zone with a specific non-zero index, but the zone was empty! Canceling Zone#add to avoid a crash.");
+            return;
+        }
+
         // Immutable cards are usually emblems and effects
         if (!c.isImmutable()) {
             final Zone oldZone = game.getZoneOf(c);
