@@ -84,7 +84,8 @@ public class HumanPlaySpellAbility {
         boolean manaColorConversion = false;
 
         if (ability.isSpell()) {
-            if (option != null && option.isIgnoreManaCostType()) {
+            if (c.hasKeyword("May spend mana as though it were mana of any type to cast CARDNAME")
+                    || (option != null && option.isIgnoreManaCostType())) {
                 manaTypeConversion = true;
             } else  if (c.hasKeyword("May spend mana as though it were mana of any color to cast CARDNAME")
                     || (option != null && option.isIgnoreManaCostColor())) {
