@@ -3,6 +3,7 @@ ManaCost:2 G G
 Types:Enchantment
 # TODO: it should be possible to cast cards through Aluren from other zones (e.g. Graveyard), but only if there is another card allowing to cast cards from that zone.
 # This is currently difficult to achieve, and adding other zones to AffectedZone makes it always possible for all players to cast cards from all the listed zones.
+# Once the problem is resolved, change AffectedZone to Library,Hand,Graveyard,Exile.
 S:Mode$ Continuous | Affected$ Creature.cmcLE3+nonToken | MayPlay$ True | MayPlayCardOwner$ True | MayPlayWithoutManaCost$ True | MayPlayWithFlash$ True | AffectedZone$ Hand | Description$ Any player may cast creature spells with converted mana cost 3 or less without paying their mana cost and as though they had flash.
 SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
