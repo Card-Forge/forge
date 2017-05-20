@@ -4,8 +4,5 @@ Types:Creature Naga Cleric
 PT:3/4
 S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library. (You may do this at any time.)
 S:Mode$ Continuous | Affected$ Creature.TopLibrary+YouCtrl+nonLand | AffectedZone$ Library | MayPlay$ True | Description$ You may cast the top card of your library if it's a creature card. (Do this only any time you could cast that creature card. You still pay the spell's costs.)
-# TODO: it should be possible to cast cards through Vizier of the Menagerie from other zones (e.g. Graveyard), but only if there is another card allowing to cast cards from that zone.
-# This is currently difficult to achieve, and adding other zones to AffectedZone makes it always possible for all players to cast cards from all the listed zones.
-# Once the problem is resolved, change AffectedZone to Library,Hand,Graveyard,Exile.
-S:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | Affected$ Card.Creature+nonLand | AffectedZone$ Hand | Description$ You may spend mana as though it were mana of any type to cast creature spells.
+S:Mode$ Continuous | AddHiddenKeyword$ May spend mana as though it were mana of any type to cast CARDNAME | Affected$ Card.Creature+nonLand | AffectedZone$ Library,Hand,Graveyard,Exile | Description$ You may spend mana as though it were mana of any type to cast creature spells.
 Oracle:You may look at the top card of your library. (You may do this at any time.)\nYou may cast the top card of your library if it’s a creature card.\nYou may spend mana as though it were mana of any type to cast creature spells.
