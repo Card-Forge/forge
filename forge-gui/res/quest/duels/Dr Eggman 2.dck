@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Dr Eggman 2
+Title=Dr Eggman
+Difficulty=medium
+Description=WR Vehicles deck with Depala, Pilot Exemplar and Veteran Motorist
+Icon=Dr Eggman.jpg
+Deck Type=constructed
+[metadata]
+[Main]
+2 Aether Hub
+2 Aethersphere Harvester
+2 Cultivator's Caravan
+3 Depala, Pilot Exemplar
+3 Fleetwheel Cruiser
+2 Gearshift Ace
+3 Gideon, Ally of Zendikar
+4 Harnessed Lightning
+2 Heart of Kiran
+4 Inspiring Vantage
+3 Master Trinketeer
+6 Mountain
+2 Needle Spires|OGW
+2 Pia Nalaar
+10 Plains
+1 Skysovereign, Consul Flagship
+1 Smuggler's Copter
+4 Toolcraft Exemplar
+4 Veteran Motorist
+[sideboard]
