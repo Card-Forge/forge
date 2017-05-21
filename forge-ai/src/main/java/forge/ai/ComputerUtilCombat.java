@@ -66,6 +66,12 @@ import forge.util.collect.FCollection;
  */
 public class ComputerUtilCombat {
 
+    // A special flag used in ComputerUtil#canRegenerate to avoid recursive reentry and stack overflow
+    private static boolean dontTestRegen = false;
+    public static void setCombatRegenTestSuppression(boolean shouldSuppress) {
+        dontTestRegen = shouldSuppress;
+    }
+
     /**
      * <p>
      * canAttackNextTurn.
@@ -1840,7 +1846,7 @@ public class ComputerUtilCombat {
             }
         } // flanking
         
-        if (blocker.hasKeyword("Indestructible") || ComputerUtil.canRegenerate(blocker.getController(), blocker)) {
+        if (blocker.hasKeyword("Indestructible") || dontTestRegen || ComputerUtil.canRegenerate(blocker.getController(), blocker)) {
             return false;
         }
 

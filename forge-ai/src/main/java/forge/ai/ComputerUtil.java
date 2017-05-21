@@ -810,6 +810,9 @@ public class ComputerUtil {
             return false;
         }
 
+        boolean canRegen = false;
+        ComputerUtilCombat.setCombatRegenTestSuppression(true); // do not check canRegenerate recursively from combat code
+
         final Player controller = card.getController();
         final Game game = controller.getGame();
         final CardCollectionView l = controller.getCardsIn(ZoneType.Battlefield);
@@ -846,10 +849,10 @@ public class ComputerUtil {
                     final TargetRestrictions tgt = sa.getTargetRestrictions();
                     if (tgt != null) {
                         if (CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getHostCard(), sa).contains(card)) {
-                            return true;
+                            canRegen = true;
                         }
                     } else if (AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa).contains(card)) {
-                        return true;
+                        canRegen = true;
                     }
 
                 }  catch (final Exception ex) {
@@ -857,7 +860,9 @@ public class ComputerUtil {
                 } 
             }
         }
-        return false;
+
+        ComputerUtilCombat.setCombatRegenTestSuppression(false);
+        return canRegen;
     }
 
     public static int possibleDamagePrevention(final Card card) {
