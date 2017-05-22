@@ -1,7 +1,4 @@
 Unstable Obelisk
-Baleful Strix
-Shardless Agent
-Etherium-Horn Sorcerer
 Patron of the Valiant
 Sublime Archangel
 Naya Soulbeast
@@ -27,9 +24,6 @@ Cathedral of War
 Meren of Clan Nel Toth
 Jazal Goldmane
 Jhessian Thief
-Maelstrom Wanderer
-Preyseizer Dragon
-Thromok the Insatiable
 Restore
 Rhox Faithmender
 Rhox Pikemaster

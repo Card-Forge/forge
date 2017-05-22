@@ -3,8 +3,6 @@ Gem of Becoming
 Obelisk of Urd
 Will-Forged Golem
 Seraph of the Masses
-Avatar of Slaughter
-Basandra, Battle Seraph
 Soul of Ravnica
 Duskhunter Bat
 Shattergang Brothers
@@ -38,7 +36,6 @@ Mizzix of the Izmagnus
 Karlov of the Ghost Council
 Mazirek, Kraul Death Priest
 Fungal Sprouting
-Ghave, Guru of Spores
 Jade Mage
 Sporemound
 Jace, the Living Guildpact

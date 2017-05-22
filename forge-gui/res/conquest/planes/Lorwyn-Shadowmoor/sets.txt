@@ -2,3 +2,5 @@ LRW
 MOR
 SHM
 EVE
+CNS
+CN2

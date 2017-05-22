@@ -18245,6 +18245,7 @@ forge-gui/res/conquest/planes/Alara/The[!!-~]Maelstrom/Maelstrom[!!-~]Five[!!-~]
 forge-gui/res/conquest/planes/Alara/The[!!-~]Maelstrom/Maelstrom[!!-~]Wanderer.dck -text
 forge-gui/res/conquest/planes/Alara/The[!!-~]Maelstrom/Maelstroms[!!-~]Gold.dck -text
 forge-gui/res/conquest/planes/Alara/The[!!-~]Maelstrom/_events.txt -text
+forge-gui/res/conquest/planes/Alara/banned_cards.txt -text
 forge-gui/res/conquest/planes/Alara/cards.txt -text
 forge-gui/res/conquest/planes/Alara/plane_cards.txt -text
 forge-gui/res/conquest/planes/Alara/regions.txt -text
@@ -18310,6 +18311,7 @@ forge-gui/res/conquest/planes/Innistrad/Stensia/Nekrataal.dck -text
 forge-gui/res/conquest/planes/Innistrad/Stensia/Olivia,[!!-~]Mobilized[!!-~]for[!!-~]War.dck -text
 forge-gui/res/conquest/planes/Innistrad/Stensia/Sorin,[!!-~]Lord[!!-~]of[!!-~]Innistrad.dck -text
 forge-gui/res/conquest/planes/Innistrad/Stensia/_events.txt -text
+forge-gui/res/conquest/planes/Innistrad/banned_cards.txt -text
 forge-gui/res/conquest/planes/Innistrad/cards.txt -text
 forge-gui/res/conquest/planes/Innistrad/plane_cards.txt -text
 forge-gui/res/conquest/planes/Innistrad/regions.txt -text
@@ -18406,6 +18408,7 @@ forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Wanderwine[!!-~]Hub/Sygg,[!!-~]R
 forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Wanderwine[!!-~]Hub/Wanderwine[!!-~]Rogues.dck -text
 forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Wanderwine[!!-~]Hub/Wizards[!!-~]of[!!-~]Wanderwine[!!-~]Hub.dck -text
 forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/Wanderwine[!!-~]Hub/_events.txt -text
+forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/banned_cards.txt -text
 forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/cards.txt -text
 forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/plane_cards.txt -text
 forge-gui/res/conquest/planes/Lorwyn-Shadowmoor/regions.txt -text
