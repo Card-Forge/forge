@@ -37,6 +37,7 @@ import forge.planarconquest.ConquestPreferences.CQPref;
 import forge.properties.ForgeConstants;
 import forge.quest.QuestUtil;
 import forge.util.FileUtil;
+import forge.util.MyRandom;
 import forge.util.gui.SOptionPane;
 
 public class ConquestUtil {
@@ -65,6 +66,24 @@ public class ConquestUtil {
             break;
         case 3:
             gen = new DeckGenerator3Color(pool, DeckFormat.PlanarConquest, colors.get(0), colors.get(1), colors.get(2));
+            break;
+        case 4:
+            int colorSubset = MyRandom.getRandom().nextInt(3);
+            switch (colorSubset) {
+                case 0:
+                    gen = new DeckGenerator3Color(pool, DeckFormat.PlanarConquest, colors.get(0), colors.get(1), colors.get(2));
+                    break;
+                case 1:
+                    gen = new DeckGenerator3Color(pool, DeckFormat.PlanarConquest, colors.get(0), colors.get(1), colors.get(3));
+                    break;
+                case 2:
+                    gen = new DeckGenerator3Color(pool, DeckFormat.PlanarConquest, colors.get(0), colors.get(1), colors.get(3));
+                    break;
+                default:
+                    // This branch should never hit under the current setup, but this might change if the mechanism is changed
+                    gen = new DeckGenerator3Color(pool, DeckFormat.PlanarConquest, colors.get(0), colors.get(1), colors.get(2));
+                    break;
+            }
             break;
         case 5:
             gen = new DeckGenerator5Color(pool, DeckFormat.PlanarConquest);
@@ -205,6 +224,11 @@ public class ConquestUtil {
         GWU (null, new ColorFilter(MagicColor.GREEN | MagicColor.WHITE | MagicColor.BLUE), "Playable in {G}{W}{U}"),
         GUR (null, new ColorFilter(MagicColor.GREEN | MagicColor.BLUE | MagicColor.RED), "Playable in {G}{U}{R}"),
 
+        WUBR (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK | MagicColor.RED), "Playable in {W}{U}{B}{R}"),
+        WUBG (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK | MagicColor.GREEN), "Playable in {W}{U}{B}{G}"),
+        WBRG (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLACK | MagicColor.RED | MagicColor.GREEN), "Playable in {W}{B}{R}{G}"),
+        UBRG (null, new ColorFilter(MagicColor.BLUE | MagicColor.BLACK | MagicColor.RED | MagicColor.GREEN), "Playable in {U}{B}{R}{G}"),
+
         WUBRG     (null, new ColorFilter(MagicColor.ALL_COLORS), "Playable in {W}{U}{B}{R}{G}"),
 
         CREATURE              (FSkinProp.IMG_CREATURE, new TypeFilter(EnumSet.of(CoreType.Creature)), "Creature"),
@@ -340,7 +364,11 @@ public class ConquestUtil {
         AEtherFilter.RWB,
         AEtherFilter.GWU,
         AEtherFilter.GUR,
-        AEtherFilter.WUBRG };
+        AEtherFilter.WUBR,
+        AEtherFilter.WUBG,
+        AEtherFilter.WBRG,
+        AEtherFilter.UBRG,
+        AEtherFilter.WUBRG};
 
     public static final AEtherFilter[] TYPE_FILTERS = new AEtherFilter[] {
         AEtherFilter.CREATURE,
