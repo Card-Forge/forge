@@ -160,7 +160,7 @@ public class CounterEffect extends SpellAbilityEffect {
         }
         game.getStack().remove(si);
 
-        String destination =  srcSA.hasParam("Destination") ? srcSA.getParam("Destination") : "Graveyard";
+        String destination =  srcSA.hasParam("Destination") ? srcSA.getParam("Destination") : tgtSA.isAftermath() ? "Exile" : "Graveyard";
         if (srcSA.hasParam("DestinationChoice")) {//Hinder
             List<String> pos = Arrays.asList(srcSA.getParam("DestinationChoice").split(","));
             destination = srcSA.getActivatingPlayer().getController().chooseSomeType("a destination to remove", tgtSA, pos, null);
