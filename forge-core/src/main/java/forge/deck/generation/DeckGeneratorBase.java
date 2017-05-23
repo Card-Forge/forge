@@ -21,6 +21,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import forge.StaticData;
 
 import forge.card.*;
 import forge.card.mana.ManaCost;
@@ -123,7 +124,7 @@ public abstract class DeckGeneratorBase {
             isSetBasicLand = Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard.FN_GET_RULES);
         }
 
-        landPool = new DeckGenPool(format.getCardPool(fullCardDB).getAllCards(isSetBasicLand));
+        landPool = new DeckGenPool(StaticData.instance().getCommonCards().getAllCards(isSetBasicLand));
         return landPool.contains("Plains");
     }
 
@@ -196,6 +197,12 @@ public abstract class DeckGeneratorBase {
         
         // attempt to optimize basic land counts according to colors of picked cards
         final Map<String, Integer> clrCnts = countLands(tDeck);
+
+        if (cnt > 0 && clrCnts.isEmpty()) {
+            // The deck is completely colorless. Add some Plains then to fill the deck.
+            clrCnts.put(MagicColor.Constant.BASIC_LANDS.get(0), cnt);
+        }
+
         // total of all ClrCnts
         float totalColor = 0;
         for (Entry<String, Integer> c : clrCnts.entrySet()) {
@@ -216,20 +223,17 @@ public abstract class DeckGeneratorBase {
             // just to prevent a null exception by the deck size fixing code
             cardCounts.put(basicLandName, nLand);
 
-            PaperCard cp;
             if (!landPool.contains("Plains")) {//in case none of the cards came from a set with all basic lands
-                setBasicLandPool("BFZ");
-                basicLandEdition="BFZ";
-            }
-            if (edition != null) {
-            	cp = landPool.getCard(basicLandName, edition);
-            }
-            else {
-            	cp = landPool.getCard(basicLandName, basicLandEdition);
+                setBasicLandPool("ORI");
+                basicLandEdition="ORI";
             }
 
             for (int i = 0; i < nLand; i++) {
-                tDeck.add(landPool.getCard(basicLandName, basicLandEdition, -1), 1);
+                PaperCard cp = landPool.getCard(basicLandName, edition != null ? edition : basicLandEdition, -1);
+                if (cp == null) {
+                    cp = fullCardDB.getCard(basicLandName, edition != null ? edition : basicLandEdition, -1);
+                }
+                tDeck.add(cp, 1);
             }
 
             landsLeft -= nLand;
