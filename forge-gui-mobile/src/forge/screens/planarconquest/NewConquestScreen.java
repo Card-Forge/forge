@@ -77,7 +77,7 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
         private final ConquestPlaneSelector planeSelector = add(new ConquestPlaneSelector());
 
         protected SelectStartingPlaneStep() {
-            super("Select Starting Plane");
+            super("Select Starting Plane\n(Tap art for more info)");
         }
 
         @Override
