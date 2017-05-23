@@ -2241,8 +2241,9 @@ public class CardFactoryUtil {
                 card.setSVar("DredgeMoveToPlay", moveToPlay);
                 card.setSVar("DredgeCheckLib", checkSVar);
                 card.addReplacementEffect(ReplacementHandler.parseReplacement(actualRep, card, true));
-            }
-            else if (keyword.startsWith("Tribute")) {
+            } else if (keyword.startsWith("Prevent all") || keyword.startsWith("PreventAllDamageBy") ) {
+                addReplacementEffect(keyword, card, null);
+            }else if (keyword.startsWith("Tribute")) {
                 addReplacementEffect(keyword, card, null);
                 addTriggerAbility(keyword, card, null);
             }
