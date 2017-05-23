@@ -132,8 +132,10 @@ public class ConquestPlaneSelector extends FDisplayObject {
             String desc = plane.getDescription();
             if (!desc.isEmpty()) {
                 GuiDialog.message(plane.getDescription().replace("\\n", "'\n"), plane.getName());
-                return true;
+            } else {
+                GuiDialog.message("This plane has no description.", plane.getName());
             }
+            return true;
         }
         return false;
     }
