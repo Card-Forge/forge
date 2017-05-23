@@ -68,7 +68,7 @@ public class ConquestUtil {
             gen = new DeckGenerator3Color(pool, DeckFormat.PlanarConquest, colors.get(0), colors.get(1), colors.get(2));
             break;
         case 4:
-            int colorSubset = MyRandom.getRandom().nextInt(3);
+            int colorSubset = MyRandom.getRandom().nextInt(4);
             switch (colorSubset) {
                 case 0:
                     gen = new DeckGenerator3Color(pool, DeckFormat.PlanarConquest, colors.get(0), colors.get(1), colors.get(2));
@@ -77,7 +77,10 @@ public class ConquestUtil {
                     gen = new DeckGenerator3Color(pool, DeckFormat.PlanarConquest, colors.get(0), colors.get(1), colors.get(3));
                     break;
                 case 2:
-                    gen = new DeckGenerator3Color(pool, DeckFormat.PlanarConquest, colors.get(0), colors.get(1), colors.get(3));
+                    gen = new DeckGenerator3Color(pool, DeckFormat.PlanarConquest, colors.get(0), colors.get(2), colors.get(3));
+                    break;
+                case 3:
+                    gen = new DeckGenerator3Color(pool, DeckFormat.PlanarConquest, colors.get(1), colors.get(2), colors.get(3));
                     break;
                 default:
                     // This branch should never hit under the current setup, but this might change if the mechanism is changed
@@ -161,14 +164,14 @@ public class ConquestUtil {
         return pool;
     }
 
-    public static Iterable<PaperCard> getStartingPlaneswalkerOptions(PaperCard startingCommander) {
+    public static Iterable<PaperCard> getStartingPlaneswalkerOptions(final PaperCard startingCommander) {
         final byte colorIdentity = startingCommander.getRules().getColorIdentity().getColor();
         return Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards(), new Predicate<PaperCard>() {
             @Override
             public boolean apply(PaperCard card) {
                 CardRules rules = card.getRules();
                 return rules.getType().isPlaneswalker() &&
-                        !rules.canBeCommander() && //don't allow picking a commander as a starting planeswalker
+                        !card.getName().equals(startingCommander.getName()) && //don't allow picking a commander as a starting planeswalker
                         rules.getColorIdentity().hasNoColorsExcept(colorIdentity);
             }
         });
