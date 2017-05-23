@@ -1,5 +1,4 @@
 ALA
 CON
 ARB
-HOP
-PCA
+C13

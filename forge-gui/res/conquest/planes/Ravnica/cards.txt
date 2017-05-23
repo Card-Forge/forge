@@ -32,8 +32,6 @@ Unmake the Graves
 Deadbridge Shaman
 Extract from Darkness
 Mizzium Meddler
-Mizzix of the Izmagnus
-Karlov of the Ghost Council
 Mazirek, Kraul Death Priest
 Fungal Sprouting
 Jade Mage
@@ -55,3 +53,4 @@ Rhox Maulers
 Goblin Glory Chaser
 Scab-Clan Berserker
 Undercity Troll
+Orzhov Advokist

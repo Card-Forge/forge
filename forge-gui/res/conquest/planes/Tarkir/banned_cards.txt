@@ -1,0 +1,37 @@
+Artisan of Kozilek
+Azorius Chancery
+Azorius Guildmage
+Boros Garrison
+Boros Guildmage
+Boros Signet
+Dimir Aqueduct
+Dimir Signet
+Dreamstone Hedron
+Duergar Hedge-Mage
+Evincar's Justice
+Flametongue Kavu
+Golgari Guildmage
+Golgari Rot Farm
+Golgari Signet
+Gruul Signet
+Gruul Turf
+Gwyllion Hedge-Mage
+Izzet Boilerworks
+Izzet Chronarch
+Izzet Signet
+Nezumi Graverobber
+Orzhov Basilica
+Orzhov Guildmage
+Orzhov Signet
+Patron of the Nezumi
+Rakdos Carnarium
+Rakdos Signet
+Rapacious One
+Selesnya Evangel
+Selesnya Sanctuary
+Selesnya Signet
+Simic Growth Chamber
+Simic Signet
+Simic Sky Swallower
+Svogthos, the Restless Tomb
+Yavimaya Elder

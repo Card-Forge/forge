@@ -1,7 +1,8 @@
 Unstable Obelisk
+Shardless Agent
+Etherium-Horn Sorcerer
 Patron of the Valiant
 Sublime Archangel
-Naya Soulbeast
 Stalwart Aven
 Citadel Castellan
 Ajani's Mantra
@@ -11,7 +12,6 @@ Honored Hierarch
 Knight of the Pilgrim's Road
 Relic Seeker
 War Oracle
-Derevi, Empyrial Tactician
 Kaalia of the Vast
 Bloodspore Thrinax
 Duskmantle Prowler
@@ -24,8 +24,8 @@ Cathedral of War
 Meren of Clan Nel Toth
 Jazal Goldmane
 Jhessian Thief
-Restore
 Rhox Faithmender
 Rhox Pikemaster
-Roon of the Hidden Realm
 Scourge of Nel Toth
+Breya, Etherium Shaper
+Yidris, Maelstrom Wielder

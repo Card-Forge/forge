@@ -1,0 +1,85 @@
+Ancient Den
+Arsenal Thresher
+Ascendant Evincar
+Beetleback Chief
+Bloodbraid Elf
+Artisan of Kozilek
+Azorius Chancery
+Azorius Guildmage
+Boros Garrison
+Boros Guildmage
+Boros Signet
+Boros Swiftblade
+Bosh, Iron Golem
+Copper Myr
+Darksteel Forge
+Dimir Infiltrator
+Enigma Sphinx
+Festering Goblin
+Fractured Powerstone
+Furnace of Rath
+Glen Elendra Liege
+Goblin Offensive
+Dimir Aqueduct
+Dimir Signet
+Dreamstone Hedron
+Duergar Hedge-Mage
+Evincar's Justice
+Flametongue Kavu
+Golgari Guildmage
+Golgari Rot Farm
+Golgari Signet
+Gold Myr
+Great Furnace
+Hearthfire Hobgoblin
+Higure, the Still Wind
+Ink-Eyes, Servant of Oni
+Iron Myr
+Kor Sanctifiers
+Kor Spiritdancer
+Leaden Myr
+Lodestone Myr
+Master of Etherium
+Mistblade Shinobi
+Mudbutton Torchrunner
+Myr Enforcer
+Nest Invader
+Ninja of the Deep Hours
+Okiba-Gang Shinobi
+Razia, Boros Archangel
+Sarcomite Myr
+Seat of the Synod
+Silent-Blade Oni
+Silver Myr
+Sludge Strider
+Sunhome, Fortress of the Legion
+Suntouched Myr
+Throat Slitter
+Tree of Tales
+Tukatongue Thallid
+Vault of Whispers
+Vedalken Engineer
+Vitu-Ghazi, the City-Tree
+Walker of Secret Ways
+Gruul Signet
+Gruul Turf
+Gwyllion Hedge-Mage
+Izzet Boilerworks
+Izzet Chronarch
+Izzet Signet
+Nezumi Graverobber
+Orzhov Basilica
+Orzhov Guildmage
+Orzhov Signet
+Patron of the Nezumi
+Rakdos Carnarium
+Rakdos Signet
+Rapacious One
+Selesnya Evangel
+Selesnya Sanctuary
+Selesnya Signet
+Simic Growth Chamber
+Simic Signet
+Simic Sky Swallower
+Svogthos, the Restless Tomb
+Yavimaya Elder

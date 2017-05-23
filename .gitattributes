@@ -18545,6 +18545,7 @@ forge-gui/res/conquest/planes/Ravnica/Simic[!!-~]Growth[!!-~]Chamber/Simic[!!-~]
 forge-gui/res/conquest/planes/Ravnica/Simic[!!-~]Growth[!!-~]Chamber/Simic[!!-~]Graft.dck -text
 forge-gui/res/conquest/planes/Ravnica/Simic[!!-~]Growth[!!-~]Chamber/Vorel[!!-~]of[!!-~]the[!!-~]Hull[!!-~]Clade.dck -text
 forge-gui/res/conquest/planes/Ravnica/Simic[!!-~]Growth[!!-~]Chamber/_events.txt -text
+forge-gui/res/conquest/planes/Ravnica/banned_cards.txt -text
 forge-gui/res/conquest/planes/Ravnica/cards.txt -text
 forge-gui/res/conquest/planes/Ravnica/plane_cards.txt -text
 forge-gui/res/conquest/planes/Ravnica/regions.txt -text
@@ -18614,6 +18615,7 @@ forge-gui/res/conquest/planes/Tarkir/Temur[!!-~]Frontier/Temur[!!-~]Ferocious.dc
 forge-gui/res/conquest/planes/Tarkir/Temur[!!-~]Frontier/Temur[!!-~]Formidable.dck -text
 forge-gui/res/conquest/planes/Tarkir/Temur[!!-~]Frontier/Yasova[!!-~]Dragonclaw.dck -text
 forge-gui/res/conquest/planes/Tarkir/Temur[!!-~]Frontier/_events.txt -text
+forge-gui/res/conquest/planes/Tarkir/banned_cards.txt -text
 forge-gui/res/conquest/planes/Tarkir/cards.txt -text
 forge-gui/res/conquest/planes/Tarkir/plane_cards.txt -text
 forge-gui/res/conquest/planes/Tarkir/regions.txt -text
@@ -18662,6 +18664,7 @@ forge-gui/res/conquest/planes/Theros/The[!!-~]Underworld/Tymaret.dck -text
 forge-gui/res/conquest/planes/Theros/The[!!-~]Underworld/UBControl.dck -text
 forge-gui/res/conquest/planes/Theros/The[!!-~]Underworld/UBMiling.dck -text
 forge-gui/res/conquest/planes/Theros/The[!!-~]Underworld/_events.txt -text
+forge-gui/res/conquest/planes/Theros/banned_cards.txt -text
 forge-gui/res/conquest/planes/Theros/cards.txt -text
 forge-gui/res/conquest/planes/Theros/plane_cards.txt -text
 forge-gui/res/conquest/planes/Theros/regions.txt -text
@@ -18737,6 +18740,7 @@ forge-gui/res/conquest/planes/Zendikar/Sejiri/Noyan[!!-~]Dar,[!!-~]Roil[!!-~]Sha
 forge-gui/res/conquest/planes/Zendikar/Sejiri/Thada[!!-~]Adel,[!!-~]Acquisitor.dck -text
 forge-gui/res/conquest/planes/Zendikar/Sejiri/Totem[!!-~]Armor.dck -text
 forge-gui/res/conquest/planes/Zendikar/Sejiri/_events.txt -text
+forge-gui/res/conquest/planes/Zendikar/banned_cards.txt -text
 forge-gui/res/conquest/planes/Zendikar/cards.txt -text
 forge-gui/res/conquest/planes/Zendikar/plane_cards.txt -text
 forge-gui/res/conquest/planes/Zendikar/regions.txt -text
