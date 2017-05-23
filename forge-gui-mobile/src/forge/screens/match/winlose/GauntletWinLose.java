@@ -65,7 +65,9 @@ public class GauntletWinLose extends ControlWinLose {
                             sb.append(message2);
                         }
                         else {
-                            sb.deleteCharAt(sb.length() - 1); //remove final new line character
+                            if (sb.length() > 0) {
+                                sb.deleteCharAt(sb.length() - 1); //remove final new line character
+                            }
                         }
 
                         SOptionPane.showMessageDialog(sb.toString(), "Gauntlet Progress", icon);
