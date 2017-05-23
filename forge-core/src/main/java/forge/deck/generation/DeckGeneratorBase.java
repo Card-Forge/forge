@@ -224,16 +224,12 @@ public abstract class DeckGeneratorBase {
             cardCounts.put(basicLandName, nLand);
 
             if (!landPool.contains("Plains")) {//in case none of the cards came from a set with all basic lands
-                setBasicLandPool("ORI");
-                basicLandEdition="ORI";
+                setBasicLandPool("BFZ");
+                basicLandEdition="BFZ";
             }
 
             for (int i = 0; i < nLand; i++) {
-                PaperCard cp = landPool.getCard(basicLandName, edition != null ? edition : basicLandEdition, -1);
-                if (cp == null) {
-                    cp = fullCardDB.getCard(basicLandName, edition != null ? edition : basicLandEdition, -1);
-                }
-                tDeck.add(cp, 1);
+                tDeck.add(landPool.getCard(basicLandName, edition != null ? edition : basicLandEdition, -1), 1);
             }
 
             landsLeft -= nLand;
