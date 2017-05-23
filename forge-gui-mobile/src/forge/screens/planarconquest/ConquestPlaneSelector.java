@@ -22,6 +22,7 @@ import forge.planarconquest.ConquestPlane;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTimer;
+import forge.toolbox.GuiDialog;
 import forge.util.Utils;
 import forge.util.collect.FCollectionView;
 
@@ -53,7 +54,7 @@ public class ConquestPlaneSelector extends FDisplayObject {
     private int selectedIndex, artIndex;
     private int currentPlaneIndex = -1;
     private FImage currentArt;
-    private Rectangle leftArrowBounds, rightArrowBounds;
+    private Rectangle leftArrowBounds, rightArrowBounds, currentArtBounds;
 
     public ConquestPlaneSelector() {
         reset();
@@ -126,6 +127,14 @@ public class ConquestPlaneSelector extends FDisplayObject {
             incrementSelectedIndex(1);
             return true;
         }
+        if (currentArtBounds != null && currentArtBounds.contains(x, y)) {
+            ConquestPlane plane = getSelectedPlane();
+            String desc = plane.getDescription();
+            if (!desc.isEmpty()) {
+                GuiDialog.message(plane.getDescription().replace("\\n", "'\n"), plane.getName());
+                return true;
+            }
+        }
         return false;
     }
 
@@ -171,6 +180,8 @@ public class ConquestPlaneSelector extends FDisplayObject {
             g.startClip(x, y, artWidth, artHeight);
             g.drawImage(currentArt, x + (monitorWidth - fullArtWidth) / 2, y, fullArtWidth, artHeight);
             g.endClip();
+
+            currentArtBounds = new Rectangle(x, y, artWidth, artHeight);
         }
 
         //draw monitor so plane art remains within it
