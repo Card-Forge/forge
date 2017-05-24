@@ -1,16 +1,16 @@
-Name:Alara|RegionSize:9|Desc:
+Name:Alara|RegionSize:9|Desc:As the boundaries between the shards dissolve, cultures clash and wars ensue.\nContains cards from ALA, CON, ARB, C13, assorted.
 Name:Dominaria|RegionSize:9|Unreachable:True|Desc:
-Name:Innistrad|RegionSize:9|Desc:
+Name:Innistrad|RegionSize:9|Desc:On this plane, humanity is terrorized by vampires, werewolves, zombies, and ghouls.\nContains cards from ISD, DKA, AVR, SOI, EMN, most of C14.
 Name:Kaladesh|RegionSize:6|Unreachable:True|Desc:
 Name:Kamigawa|RegionSize:6|Unreachable:True|Desc:
-Name:Lorwyn-Shadowmoor|RegionSize:9|Desc:
+Name:Lorwyn-Shadowmoor|RegionSize:9|Desc:A sunny utopia with a thriving storybook community, or a battle-wrought land cursed to perpetual gloom.\nContains cards from LRW, MOR, SHM, EVE, CNS, CN2, some C14.
 Name:Mercadia|RegionSize:6|Unreachable:True|Desc:
 Name:Mirrodin|RegionSize:9|Unreachable:True|Desc:
 Name:Rath|RegionSize:6|Unreachable:True|Desc:
-Name:Ravnica|RegionSize:9|Desc:
+Name:Ravnica|RegionSize:9|Desc:A worldwide cityscape of grand halls, decrepit slums, and ancient ruins.\nContains cards from RAV, GPT, DIS, RTR, GTC, DGM, C15. 
 Name:Regatha|RegionSize:6|Unreachable:True|Desc:
 Name:Shandalar|RegionSize:9|Unreachable:True|Desc:
-Name:Tarkir|RegionSize:9|Desc:
-Name:Theros|RegionSize:9|Desc:
+Name:Tarkir|RegionSize:9|Desc:A plane dominated by five powerful clans... or five powerful dragon lords.\nContains cards from KTK, FRF, DTK, CMD, assorted.
+Name:Theros|RegionSize:9|Desc:Mortals tremble before an awe-inspiring pantheon of gods.\nContains cards from THS, BNG, JOU, HOP, PCA, assorted.
 Name:Ulgrotha|RegionSize:6|Unreachable:True|Desc:
-Name:Zendikar|RegionSize:9|Desc:
+Name:Zendikar|RegionSize:9|Desc:This land of primal mana was lethal even before its Eldrazi prisoners escaped.\nContains cards from ZEN, WWK, ROE, BFZ, OGW, most of C16.
