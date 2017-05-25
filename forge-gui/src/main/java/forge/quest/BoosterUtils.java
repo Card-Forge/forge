@@ -21,11 +21,8 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
-import forge.card.CardRules;
-import forge.card.CardRulesPredicates;
-import forge.card.MagicColor;
-import forge.card.PrintSheet;
+import forge.card.*;
+import forge.game.GameFormat;
 import forge.item.*;
 import forge.item.IPaperCard.Predicates.Presets;
 import forge.model.FModel;
@@ -33,13 +30,14 @@ import forge.quest.data.QuestPreferences.QPref;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.PredicateString.StringOp;
-
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import static forge.quest.QuestUtilCards.isLegalInQuestFormat;
 
 /**
  * <p>
@@ -60,6 +58,22 @@ public final class BoosterUtils {
             1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 4, 4, 5, 6
     };
 
+    private static final GameFormat.Collection  formats   = FModel.getFormats();
+    private static final Predicate<CardEdition> filterExt = formats.getExtended().editionLegalPredicate;
+
+    /** The filter t2booster. */
+    private static final Predicate<CardEdition> filterT2booster = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
+            formats.getStandard().editionLegalPredicate);
+
+    /** The filter ext but t2. */
+    private static final Predicate<CardEdition> filterExtButT2 = Predicates.and(
+            CardEdition.Predicates.CAN_MAKE_BOOSTER,
+            Predicates.and(filterExt, formats.getStandard().editionLegalPredicate));
+
+    /** The filter not ext. */
+    private static final Predicate<CardEdition> filterNotExt = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
+            Predicates.not(filterExt));
+
     /**
      * Gets the quest starter deck.
      *
@@ -76,7 +90,7 @@ public final class BoosterUtils {
      * @return the quest starter deck
      */
     public static List<PaperCard> getQuestStarterDeck(final Predicate<PaperCard> filter, final int numCommons,
-            final int numUncommons, final int numRares, final StartingPoolPreferences userPrefs) {
+            final int numUncommons, final int numRares, final StartingPoolPreferences userPrefs, final QuestController questController) {
 
         if (possibleColors.isEmpty()) {
             possibleColors.add(MagicColor.BLACK);
@@ -89,6 +103,16 @@ public final class BoosterUtils {
 
         final List<PaperCard> cardPool = Lists.newArrayList(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), filter));
         final List<PaperCard> cards = new ArrayList<>();
+
+        if (userPrefs != null && userPrefs.getPoolType() == StartingPoolPreferences.PoolType.BOOSTERS) {
+
+            for (InventoryItem inventoryItem : generateRandomBoosterPacks(userPrefs.getNumberOfBoosters(), questController)) {
+                cards.addAll(((BoosterPack) inventoryItem).getCards());
+            }
+
+            return cards;
+
+        }
 
         if (userPrefs != null && userPrefs.grantCompleteSet()) {
             for (PaperCard card : cardPool) {
@@ -116,6 +140,44 @@ public final class BoosterUtils {
         }
 
         return cards;
+
+    }
+
+    /**
+     * Generates a number of booster packs from random editions using the current quest's prize pool format.
+     * @param quantity The number of booster packs to generate
+     * @return A list containing the booster packs
+     */
+    public static List<InventoryItem> generateRandomBoosterPacks(final int quantity, final QuestController questController) {
+
+        List<InventoryItem> output = new ArrayList<>();
+
+        for (int i = 0; i < quantity; i++) {
+
+            final int rollD100 = MyRandom.getRandom().nextInt(100);
+
+            Predicate<CardEdition> filter = rollD100 < 40 ? filterT2booster : (rollD100 < 75 ? filterExtButT2 : filterNotExt);
+            if (questController.getFormat() != null) {
+                filter = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER, isLegalInQuestFormat(questController.getFormat()));
+            }
+
+            Iterable<CardEdition> rightEditions = Iterables.filter(FModel.getMagicDb().getEditions(), filter);
+            if (!rightEditions.iterator().hasNext()) {
+                continue;
+            }
+
+            CardEdition edition = Aggregates.random(rightEditions);
+            BoosterPack pack = BoosterPack.FN_FROM_SET.apply(edition);
+
+            if (pack != null) {
+                output.add(pack);
+            } else {
+                System.err.println("Could not create booster of edition: " + edition);
+            }
+
+        }
+
+        return output;
 
     }
 

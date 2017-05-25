@@ -1,11 +1,9 @@
 package forge.toolbox;
 
-import java.util.Date;
-
-import javax.swing.JProgressBar;
-import javax.swing.SwingUtilities;
-
 import forge.interfaces.IProgressBar;
+
+import javax.swing.*;
+import java.util.Date;
 
 /**
  * A simple progress bar component using the Forge skin.
@@ -47,8 +45,8 @@ public class FProgressBar extends JProgressBar implements IProgressBar {
     };
 
     @Override
-    public void setValue(final int value0) {
-        super.setValue(value0);
+    public void setValue(final int progress) {
+        super.setValue(progress);
 
         // String.format leads to StringBuilder anyway. Direct calls will be faster
         final StringBuilder sb = new StringBuilder(desc);
@@ -56,15 +54,15 @@ public class FProgressBar extends JProgressBar implements IProgressBar {
             sb.append(" ");
             final int maximum = getMaximum();
             if (percentMode) {
-                sb.append(100 * value0 / maximum).append("%");
+                sb.append(100 * progress / maximum).append("%");
             }
             else {
-                sb.append(value0).append(" of ").append(maximum);
+                sb.append(progress).append(" of ").append(maximum);
             }
         }
 
         if (showETA) {
-            calculateETA(value0);
+            calculateETA(progress);
             sb.append(", ETA").append(String.format("%02d:%02d:%02d", etaSecs / 3600, (etaSecs % 3600) / 60, etaSecs % 60 + 1));
         }
         setString(sb.toString());

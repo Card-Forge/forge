@@ -30,6 +30,9 @@ public class DialogChooseColors {
     private final FRadioButton radBalanced = new FRadioButton("Balanced");
     private final FRadioButton radRandom = new FRadioButton("Random");
     private final FRadioButton radSurpriseMe = new FRadioButton("Surprise Me");
+    private final FRadioButton radBoosters = new FRadioButton("Boosters");
+
+    private final FTextField numberOfBoostersField = new FTextField.Builder().text("0").maxLength(10).build();
 
     private final FButton btnOk = new FButton("OK");
 
@@ -68,16 +71,25 @@ public class DialogChooseColors {
                 radBalanced.setSelected(true);
                 radRandom.setSelected(false);
                 radSurpriseMe.setSelected(false);
+                radBoosters.setSelected(false);
                 break;
             case RANDOM:
                 radBalanced.setSelected(false);
                 radRandom.setSelected(true);
                 radSurpriseMe.setSelected(false);
+                radBoosters.setSelected(false);
                 break;
             case RANDOM_BALANCED:
                 radBalanced.setSelected(false);
                 radRandom.setSelected(false);
                 radSurpriseMe.setSelected(true);
+                radBoosters.setSelected(false);
+                break;
+            case BOOSTERS:
+                radBalanced.setSelected(false);
+                radRandom.setSelected(false);
+                radSurpriseMe.setSelected(false);
+                radBoosters.setSelected(true);
                 break;
         }
 
@@ -122,6 +134,7 @@ public class DialogChooseColors {
         poolTypePanel.add(radBalanced, radioConstraints);
         poolTypePanel.add(radRandom, radioConstraints);
         poolTypePanel.add(radSurpriseMe, radioConstraints);
+        poolTypePanel.add(radBoosters, radioConstraints);
 
         ActionListener radioButtonListener = new ActionListener() {
             @Override
@@ -133,7 +146,8 @@ public class DialogChooseColors {
                 cbxRed.setEnabled(radBalanced.isSelected());
                 cbxWhite.setEnabled(radBalanced.isSelected());
                 cbxColorless.setEnabled(radBalanced.isSelected());
-                cbxArtifacts.setEnabled(!radSurpriseMe.isSelected());
+                cbxArtifacts.setEnabled(!radSurpriseMe.isSelected() && !radBoosters.isSelected());
+                numberOfBoostersField.setEnabled(radBoosters.isSelected());
             }
         };
 
@@ -144,19 +158,23 @@ public class DialogChooseColors {
         cbxRed.setEnabled(radBalanced.isSelected());
         cbxWhite.setEnabled(radBalanced.isSelected());
         cbxColorless.setEnabled(radBalanced.isSelected());
-        cbxArtifacts.setEnabled(!radSurpriseMe.isSelected());
+        cbxArtifacts.setEnabled(!radSurpriseMe.isSelected() && !radBoosters.isSelected());
+        numberOfBoostersField.setEnabled(radBoosters.isSelected());
 
         radBalanced.setToolTipText("A balanced distribution will provide a roughly equal number of cards in each selected color.");
         radRandom.setToolTipText("A random distribution will be almost entirely randomly selected. This ignores any color selections.");
         radSurpriseMe.setToolTipText("This is the same as a balanced distribution, except the colors picked will be random and you will not be told what they are.");
+        radBoosters.setToolTipText("This ignores all color settings and instead generates a card pool out of a specified number of booster packs.");
         cbxArtifacts.setToolTipText("When selected, artifacts will be included in your pool regardless of color selections. This mimics the old card pool behavior.");
 
         radBalanced.addActionListener(radioButtonListener);
         radRandom.addActionListener(radioButtonListener);
         radSurpriseMe.addActionListener(radioButtonListener);
+        radBoosters.addActionListener(radioButtonListener);
 
         left.add(poolTypePanel, "gaptop 15");
         left.add(cbxArtifacts, "gaptop 25");
+        left.add(numberOfBoostersField, "w 100px!, gaptop 15");
 
         //Add Bottom and Panels
         mainPanel.add(left);
@@ -234,6 +252,8 @@ public class DialogChooseColors {
             return PoolType.RANDOM;
         } else if (radSurpriseMe.isSelected()) {
             return PoolType.RANDOM_BALANCED;
+        } else if (radBoosters.isSelected()) {
+            return PoolType.BOOSTERS;
         }
 
         return PoolType.BALANCED;
@@ -242,6 +262,14 @@ public class DialogChooseColors {
 
     public boolean includeArtifacts() {
         return cbxArtifacts.isSelected();
+    }
+
+    public int getNumberOfBoosters() {
+        try {
+            return Integer.valueOf(numberOfBoostersField.getText());
+        } catch (NumberFormatException e) {
+            return 0;
+        }
     }
 
 }

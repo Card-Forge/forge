@@ -605,7 +605,7 @@ public class NewQuestScreen extends FScreen {
                     public void run() {
                         final QuestMode mode = isFantasy() ? QuestMode.Fantasy : QuestMode.Classic;
                         final StartingPoolPreferences userPrefs =
-                                new StartingPoolPreferences(getPoolType(), getPreferredColors(), cbIncludeArtifacts.isSelected(), startWithCompleteSet(), allowDuplicateCards());
+                                new StartingPoolPreferences(getPoolType(), getPreferredColors(), cbIncludeArtifacts.isSelected(), startWithCompleteSet(), allowDuplicateCards(), 0);
                         QuestController qc = FModel.getQuest();
                         qc.newGame(questName, getSelectedDifficulty(), mode, fmtPrizes, isUnlockSetsAllowed(), dckStartPool, fmtStartPool, getStartingWorldName(), userPrefs);
                         qc.save();

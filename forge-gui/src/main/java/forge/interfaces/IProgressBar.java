@@ -2,7 +2,7 @@ package forge.interfaces;
 
 public interface IProgressBar {
     void setDescription(String s0);
-    void setValue(int value0);
+    void setValue(int progress);
     void reset();
     void setShowETA(boolean b0);
     void setShowCount(boolean b0);

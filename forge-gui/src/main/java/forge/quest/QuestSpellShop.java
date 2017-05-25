@@ -282,9 +282,12 @@ public class QuestSpellShop {
     }
 
     public static void sell(Iterable<Entry<InventoryItem, Integer>> items, IItemManager<InventoryItem> shopManager, IItemManager<InventoryItem> inventoryManager, boolean confirmSale) {
+
         long totalReceived = 0;
         int sellPriceLimit = FModel.getQuest().getCards().getSellPriceLimit();
+
         ItemPool<InventoryItem> itemsToSell = new ItemPool<>(InventoryItem.class);
+
         for (Entry<InventoryItem, Integer> itemEntry : items) {
             final InventoryItem item = itemEntry.getKey();
             if (item instanceof PaperCard) {
@@ -293,7 +296,10 @@ public class QuestSpellShop {
                 totalReceived += qty * Math.min((int) (multiplier * getCardValue(item)), sellPriceLimit);
             }
         }
-        if (itemsToSell.isEmpty()) { return; }
+
+        if (itemsToSell.isEmpty()) {
+            return;
+        }
 
         if (confirmSale) {
             List<InventoryItem> itemFlatList = itemsToSell.toFlatList();
@@ -308,24 +314,27 @@ public class QuestSpellShop {
         }
 
         for (Entry<InventoryItem, Integer> itemEntry : itemsToSell) {
-            final PaperCard card = (PaperCard) itemEntry.getKey();
-            final int qty = itemEntry.getValue();
-            final int price = Math.min((int) (multiplier * getCardValue(card)), FModel.getQuest().getCards().getSellPriceLimit());
 
-            FModel.getQuest().getCards().sellCard(card, qty, price);
+            final PaperCard card = (PaperCard) itemEntry.getKey();
+            final int pricePerCard = Math.min((int) (multiplier * getCardValue(card)), FModel.getQuest().getCards().getSellPriceLimit());
+
+            sellCard(card, itemEntry.getValue(), pricePerCard);
+
         }
 
         inventoryManager.removeItems(itemsToSell);
         shopManager.addItems(itemsToSell);
+
     }
 
     public static void sellExtras(IItemManager<InventoryItem> shopManager, IItemManager<InventoryItem> inventoryManager) {
+
         List<Entry<InventoryItem, Integer>> cardsToRemove = new LinkedList<>();
         for (Entry<InventoryItem, Integer> item : inventoryManager.getPool()) {
             PaperCard card = (PaperCard)item.getKey();
             int numToKeep = card.getRules().getType().isBasic() ?
                     FModel.getQuestPreferences().getPrefInt(QPref.PLAYSET_BASIC_LAND_SIZE) : FModel.getQuestPreferences().getPrefInt(QPref.PLAYSET_SIZE);
-            if ("Relentless Rats".equals(card.getName()) || "Shadowborn Apostle".equals(card.getName())) {
+            if (card.getName().equals("Relentless Rats") || card.getName().equals("Shadowborn Apostle")) {
                 numToKeep = FModel.getQuestPreferences().getPrefInt(QPref.PLAYSET_ANY_NUMBER_SIZE);
             }
             if (numToKeep < item.getValue()) {
@@ -337,14 +346,23 @@ public class QuestSpellShop {
         shopManager.addItems(cardsToRemove);
 
         for (Entry<InventoryItem, Integer> item : cardsToRemove) {
+
             if (!(item.getKey() instanceof PaperCard)) {
                 continue;
             }
+
             PaperCard card = (PaperCard)item.getKey();
-            final int price = Math.min((int) (multiplier * getCardValue(card)),
-                    FModel.getQuest().getCards().getSellPriceLimit());
-            FModel.getQuest().getCards().sellCard(card, item.getValue(), price);
+            final int pricePerCard = Math.min((int) (multiplier * getCardValue(card)), FModel.getQuest().getCards().getSellPriceLimit());
+
+            sellCard(card, item.getValue(), pricePerCard);
+
         }
+
+    }
+
+    private static void sellCard(final PaperCard card, final int quantity, final int pricePerCard) {
+        FModel.getQuest().getCards().removeCard(card, quantity);
+        FModel.getQuest().getAssets().addCredits(pricePerCard * quantity);
     }
 
     // fills number of decks using each card

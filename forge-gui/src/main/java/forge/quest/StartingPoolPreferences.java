@@ -34,7 +34,9 @@ public final class StartingPoolPreferences {
         /** Anything goes. Selected colors are ignored and what goes in the pool is almost entirely random. */
         RANDOM,
         /** Same as BALANCED, except this picks colors for you without telling you what they are. */
-        RANDOM_BALANCED
+        RANDOM_BALANCED,
+        /** Opens a number of booster packs to create the initial card pool. */
+        BOOSTERS
     }
 
     private final PoolType poolType;
@@ -42,6 +44,7 @@ public final class StartingPoolPreferences {
     private final boolean includeArtifacts;
     private final boolean completeSet;
     private final boolean allowDuplicates;
+    private final int numberOfPacks;
 
     /**
      * Creates a new StartingPoolPreferences instance.
@@ -53,12 +56,13 @@ public final class StartingPoolPreferences {
      * @param completeSet If true, four of each card in the starting pool will be generated.
      * @param allowDuplicates If true, multiples of each card will be allowed to be generated.
      */
-    public StartingPoolPreferences(final PoolType poolType, final List<Byte> preferredColors, final boolean includeArtifacts, final boolean completeSet, final boolean allowDuplicates) {
+    public StartingPoolPreferences(final PoolType poolType, final List<Byte> preferredColors, final boolean includeArtifacts, final boolean completeSet, final boolean allowDuplicates, final int numberOfPacks) {
         this.poolType = poolType;
         this.preferredColors = preferredColors;
         this.includeArtifacts = includeArtifacts;
         this.completeSet = completeSet;
         this.allowDuplicates = allowDuplicates;
+        this.numberOfPacks = numberOfPacks;
     }
 
     /**
@@ -85,6 +89,10 @@ public final class StartingPoolPreferences {
 
     public boolean allowDuplicates() {
         return allowDuplicates;
+    }
+
+    public int getNumberOfBoosters() {
+        return numberOfPacks;
     }
 
 }

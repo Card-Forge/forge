@@ -6,30 +6,21 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.quest;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
-
 import forge.card.CardEdition;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -54,9 +45,12 @@ import forge.quest.io.QuestChallengeReader;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
 
+import java.io.File;
+import java.util.*;
+
 /**
  * TODO: Write javadoc for this type.
- * 
+ *
  */
 public class QuestController {
     private QuestData model;
@@ -83,9 +77,9 @@ public class QuestController {
 
     // This is used by shop. Had no idea where else to place this
     private static transient IStorage<PreconDeck> preconManager = null;
-    
+
     private transient IStorage<DeckGroup> draftDecks;
-    
+
 
     /** The Constant RANK_TITLES. */
     public static final String[] RANK_TITLES = new String[] { "Level 0 - Confused Wizard", "Level 1 - Mana Mage",
@@ -106,7 +100,7 @@ public class QuestController {
     }
 
     /**
-     * 
+     *
      * TODO: Write javadoc for this method.
      * @param slot &emsp; int
      * @param name &emsp; String
@@ -128,7 +122,7 @@ public class QuestController {
     }
 
     /**
-     * 
+     *
      * @param slot &emsp; int
      * @return String
      */
@@ -139,7 +133,7 @@ public class QuestController {
     // Cards - class uses data from here
     /**
      * Gets the cards.
-     * 
+     *
      * @return the cards
      */
     public QuestUtilCards getCards() {
@@ -148,13 +142,13 @@ public class QuestController {
 
     /**
      * Gets the my decks.
-     * 
+     *
      * @return the myDecks
      */
     public IStorage<Deck> getMyDecks() {
         return this.decks;
     }
-    
+
     public IStorage<DeckGroup> getDraftDecks() {
         if (draftDecks == null) {
             draftDecks = new QuestDeckGroupMap(new HashMap<String, DeckGroup>());
@@ -168,7 +162,7 @@ public class QuestController {
 
     /**
      * Gets the current format if any.
-     * 
+     *
      * @return GameFormatQuest, the game format (if persistent).
      */
     public GameFormatQuest getFormat() {
@@ -219,7 +213,7 @@ public class QuestController {
     public static SellRules getPreconDeals(PreconDeck deck) {
         return preconDeals.get(deck.getName());
     }
-    
+
     /**
      * TODO: Write javadoc for this method.
      *
@@ -232,7 +226,7 @@ public class QuestController {
         this.myCards = this.model == null ? null : new QuestUtilCards(this);
         this.questFormat = this.model == null ? null : this.model.getFormat();
         this.currentEvent = null;
-        
+
         this.draftDecks = this.model == null ? null : this.model.getAssets().getDraftDeckStorage();
 
         this.resetDuelsManager();
@@ -284,7 +278,7 @@ public class QuestController {
             if (formatStartingPool != null) {
                 filter = formatStartingPool.getFilterPrinted();
             }
-            this.myCards.setupNewGameCardPool(filter, difficulty, userPrefs);
+            this.myCards.setupNewGameCardPool(filter, difficulty, userPrefs, this);
         }
 
         this.getAssets().setCredits(FModel.getQuestPreferences().getPrefInt(DifficultyPrefs.STARTING_CREDITS, difficulty));
@@ -292,7 +286,7 @@ public class QuestController {
 
     /**
      * Gets the rank.
-     * 
+     *
      * @return the rank
      */
     public String getRank() {
@@ -321,7 +315,7 @@ public class QuestController {
 
     /**
      * Gets the QuestWorld, if any.
-     * 
+     *
      * @return QuestWorld or null, if using regular duels and challenges.
      */
     public QuestWorld getWorld() {
@@ -330,7 +324,7 @@ public class QuestController {
 
     /**
      * Sets a new QuestWorld.
-     * 
+     *
      * @param newWorld
      *      string, the new world id
      */
@@ -344,7 +338,7 @@ public class QuestController {
 
     /**
      * Gets the QuestWorld Format, if any.
-     * 
+     *
      * @return GameFormatQuest or null.
      */
     public GameFormatQuest getWorldFormat() {
@@ -413,7 +407,7 @@ public class QuestController {
     }
 
     /**
-     * 
+     *
      * TODO: Write javadoc for this method.
      * @return QuestEventManager
      */
@@ -425,7 +419,7 @@ public class QuestController {
     }
 
     /**
-     * 
+     *
      * Reset the duels manager.
      */
     public void resetDuelsManager() {
@@ -441,7 +435,7 @@ public class QuestController {
     }
 
     /**
-     * 
+     *
      * Reset the challenges manager.
      */
     public void resetChallengesManager() {
@@ -457,7 +451,7 @@ public class QuestController {
     }
 
     /**
-     * 
+     *
      * TODO: Write javadoc for this method.
      * @return QuestPetStorage
      */
@@ -502,7 +496,7 @@ public class QuestController {
 
     public int getTurnsToUnlockChallenge() {
     	int turns = FModel.getQuestPreferences().getPrefInt(QPref.WINS_NEW_CHALLENGE);
-    	
+
         if (FModel.getQuest().getAssets().hasItem(QuestItemType.ZEPPELIN)) {
         	turns -= 2;
         }

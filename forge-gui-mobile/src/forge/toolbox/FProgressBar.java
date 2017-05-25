@@ -1,18 +1,16 @@
 package forge.toolbox;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-
 import forge.Graphics;
 import forge.assets.FSkinFont;
 import forge.interfaces.IProgressBar;
 import forge.util.Utils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class FProgressBar extends FDisplayObject implements IProgressBar {
     public static Color BACK_COLOR, FORE_COLOR, SEL_BACK_COLOR, SEL_FORE_COLOR;
@@ -38,7 +36,7 @@ public class FProgressBar extends FDisplayObject implements IProgressBar {
 
     /**
      * Sets description on bar.
-     * 
+     *
      * @param s0 &emsp; A description to prepend before statistics.
      */
     public void setDescription(final String s0) {
@@ -47,8 +45,8 @@ public class FProgressBar extends FDisplayObject implements IProgressBar {
     }
 
     /** Increments bar. */
-    public void setValue(int value0) {
-        value = value0;
+    public void setValue(int progress) {
+        value = progress;
         setShowProgressTrail(false); //can't show progress trail if value set
 
         // String.format leads to StringBuilder anyway. Direct calls will be faster
@@ -105,11 +103,11 @@ public class FProgressBar extends FDisplayObject implements IProgressBar {
     public void setPercentMode(boolean percentMode0) {
         percentMode = percentMode0;
     }
-    
+
     public int getMaximum() {
         return maximum;
     }
-    
+
     public void setMaximum(int maximum0) {
         maximum = maximum0;
     }

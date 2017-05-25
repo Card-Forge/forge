@@ -52,6 +52,7 @@ public enum CSubmenuQuestData implements ICDoc {
     private List<Byte> preferredColors = new ArrayList<>();
     private PoolType poolType = PoolType.BALANCED;
     private boolean includeArtifacts = true;
+    private int numberOfBoosters = 0;
 
     @Override
     public void register() {
@@ -112,6 +113,7 @@ public enum CSubmenuQuestData implements ICDoc {
                         preferredColors = colorChooser.getPreferredColors();
                         poolType = colorChooser.getPoolType();
                         includeArtifacts = colorChooser.includeArtifacts();
+                        numberOfBoosters = colorChooser.getNumberOfBoosters();
                     }
                 });
             }
@@ -270,7 +272,7 @@ public enum CSubmenuQuestData implements ICDoc {
             }
         }
 
-        final StartingPoolPreferences userPrefs = new StartingPoolPreferences(poolType, preferredColors, includeArtifacts, view.startWithCompleteSet(), view.allowDuplicateCards());
+        final StartingPoolPreferences userPrefs = new StartingPoolPreferences(poolType, preferredColors, includeArtifacts, view.startWithCompleteSet(), view.allowDuplicateCards(), numberOfBoosters);
 
         String questName;
         while (true) {
