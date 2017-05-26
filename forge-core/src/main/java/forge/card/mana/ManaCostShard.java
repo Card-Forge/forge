@@ -250,19 +250,19 @@ public enum ManaCostShard {
     }
 
     public boolean isWhite() {
-        return (this.shard & ManaAtom.WHITE) != 0;
+        return isOfKind(ManaAtom.WHITE);
     }
     public boolean isBlue() {
-        return (this.shard & ManaAtom.BLUE) != 0;
+        return isOfKind(ManaAtom.BLUE);
     }
     public boolean isBlack() {
-        return (this.shard & ManaAtom.BLACK) != 0;
+        return isOfKind(ManaAtom.BLACK);
     }
     public boolean isRed() {
-        return (this.shard & ManaAtom.RED) != 0;
+        return isOfKind(ManaAtom.RED);
     }
     public boolean isGreen() {
-        return (this.shard & ManaAtom.GREEN) != 0;
+        return isOfKind(ManaAtom.GREEN);
     }
 
     /**
@@ -270,7 +270,7 @@ public enum ManaCostShard {
      * @return
      */
     public boolean isPhyrexian() {
-        return (this.shard & ManaAtom.OR_2_LIFE) != 0;
+        return isOfKind(ManaAtom.OR_2_LIFE);
     }
 
     /**
@@ -278,7 +278,7 @@ public enum ManaCostShard {
      * @return
      */
     public boolean isSnow() {
-        return (this.shard & ManaAtom.IS_SNOW) != 0;
+        return isOfKind(ManaAtom.IS_SNOW);
     }
 
     public boolean isMonoColor() {
@@ -286,11 +286,19 @@ public enum ManaCostShard {
     }
 
     public boolean isOr2Generic() {
-        return (this.shard & ManaAtom.OR_2_GENERIC) != 0;
+        return isOfKind(ManaAtom.OR_2_GENERIC);
     }
 
     public boolean canBePaidWithManaOfColor(byte colorCode) {
         return this.isOr2Generic() || ((COLORS_SUPERPOSITION | ManaAtom.COLORLESS) & this.shard) == 0 ||
                 (colorCode & this.shard) > 0;
+    }
+    
+    public boolean isOfKind(int atom) {
+        return (this.shard & atom) != 0;
+    }
+    
+    public int getShard() {
+        return this.shard;
     }
 }

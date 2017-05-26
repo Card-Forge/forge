@@ -180,9 +180,13 @@ public class CostAdjustment {
         }
 
         // Reduce cost
+        int sumGeneric = 0;
         for (final StaticAbility stAb : reduceAbilities) {
-            applyReduceCostAbility(stAb, sa, cost);
+            sumGeneric += applyReduceCostAbility(stAb, sa, cost);
         }
+        // need to reduce generic extra because of 2 hybrid mana
+        cost.decreaseGenericMana(sumGeneric);
+        
         if (sa.isSpell() && sa.isOffering()) { // cost reduction from offerings
             adjustCostByOffering(cost, sa);
         }
@@ -348,10 +352,10 @@ public class CostAdjustment {
      * @param manaCost
      *            a ManaCost
      */
-    private static void applyReduceCostAbility(final StaticAbility staticAbility, final SpellAbility sa, final ManaCostBeingPaid manaCost) {
+    private static int applyReduceCostAbility(final StaticAbility staticAbility, final SpellAbility sa, final ManaCostBeingPaid manaCost) {
         //Can't reduce zero cost
         if (manaCost.toString().equals("{0}")) {
-            return;
+            return 0;
         }
         final Map<String, String> params = staticAbility.getMapParams();
         final Card hostCard = staticAbility.getHostCard();
@@ -359,7 +363,7 @@ public class CostAdjustment {
         final String amount = params.get("Amount");
 
         if (!checkRequirement(sa, staticAbility)) {
-            return;
+            return 0;
         }
 
         int value;
@@ -381,18 +385,22 @@ public class CostAdjustment {
 
             final int maxReduction = Math.max(0, manaCost.getConvertedManaCost() - minMana);
             if (maxReduction > 0) {
-                manaCost.decreaseGenericMana(Math.min(value, maxReduction));
+                return Math.min(value, maxReduction);
             }
         } else {
             final String color = params.containsKey("Cost") ? params.get("Cost") : params.get("Color");
+            int sumGeneric = 0;
+            // might be problematic for wierd hybrid combinations
             for (final String cost : color.split(" ")) {
                 if (StringUtils.isNumeric(cost)) {
-                    manaCost.decreaseGenericMana(Integer.parseInt(cost) * value);
+                    sumGeneric += Integer.parseInt(cost) * value;
                 } else {
                     manaCost.decreaseShard(ManaCostShard.parseNonGeneric(cost), value);
                 }
             }
+            return sumGeneric;
         }
+        return 0;
     }    
 
     private static boolean checkRequirement(final SpellAbility sa, final StaticAbility st) {

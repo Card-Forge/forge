@@ -19,6 +19,8 @@ package forge.game.mana;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -109,7 +111,7 @@ public class ManaCostBeingPaid {
 
     // holds Mana_Part objects
     // ManaPartColor is stored before ManaPartGeneric
-    private final Map<ManaCostShard, ShardCount> unpaidShards = new HashMap<ManaCostShard, ShardCount>();
+    private final Map<ManaCostShard, ShardCount> unpaidShards = Maps.newHashMap();
     private Map<String, Integer> xManaCostPaidByColor;
     private final String sourceRestriction;
     private byte sunburstMap = 0;
@@ -283,13 +285,114 @@ public class ManaCostBeingPaid {
 
         ShardCount sc = unpaidShards.get(shard);
         if (sc == null) {
+            // only special rules for Mono Color Shards and for Generic
+            if (!shard.isMonoColor() && shard != ManaCostShard.GENERIC) {
+                return;
+            }
+            int otherSubtract = manaToSubtract;
+            List<ManaCostShard> toRemove = Lists.newArrayList();
+            
+            //TODO move that for parts into extra function if able
+            
+            // try to remove multicolored hybrid shards
+            // for that, this shard need to be mono colored
+            if (shard.isMonoColor()) {
+                for (Entry<ManaCostShard, ShardCount> e : unpaidShards.entrySet()) {
+                    final ManaCostShard eShard = e.getKey();
+                    sc = e.getValue();
+                    if (eShard.isOfKind(shard.getShard()) && !eShard.isMonoColor()) {
+                        if (otherSubtract >= sc.totalCount) {
+                            otherSubtract -= sc.totalCount;
+                            sc.xCount = sc.totalCount = 0;
+                            toRemove.add(eShard);
+                        } else {
+                            sc.totalCount -= otherSubtract;
+                            if (sc.xCount > sc.totalCount) {
+                                sc.xCount = sc.totalCount;
+                            }
+                            // nothing more left in otherSubtract
+                            return;
+                        }
+                    }
+                }
+
+                // try to remove 2 generic hybrid shards with colored shard
+                for (Entry<ManaCostShard, ShardCount> e : unpaidShards.entrySet()) {
+                    final ManaCostShard eShard = e.getKey();
+                    sc = e.getValue();
+                    if (eShard.isOfKind(shard.getShard()) && eShard.isOr2Generic()) {
+                        if (otherSubtract >= sc.totalCount) {
+                            otherSubtract -= sc.totalCount;
+                            sc.xCount = sc.totalCount = 0;
+                            toRemove.add(eShard);
+                        } else {
+                            sc.totalCount -= otherSubtract;
+                            if (sc.xCount > sc.totalCount) {
+                                sc.xCount = sc.totalCount;
+                            }
+                            // nothing more left in otherSubtract
+                            return;
+                        }
+                    }
+                }
+
+                // try to remove phyrexian shards with colored shard
+                for (Entry<ManaCostShard, ShardCount> e : unpaidShards.entrySet()) {
+                    final ManaCostShard eShard = e.getKey();
+                    sc = e.getValue();
+                    if (eShard.isOfKind(shard.getShard()) && eShard.isPhyrexian()) {
+                        if (otherSubtract >= sc.totalCount) {
+                            otherSubtract -= sc.totalCount;
+                            sc.xCount = sc.totalCount = 0;
+                            toRemove.add(eShard);
+                        } else {
+                            sc.totalCount -= otherSubtract;
+                            if (sc.xCount > sc.totalCount) {
+                                sc.xCount = sc.totalCount;
+                            }
+                            // nothing more left in otherSubtract
+                            return;
+                        }
+                    }
+                }
+            } else if (shard == ManaCostShard.GENERIC) {
+                // try to remove 2 generic hybrid shards WITH generic shard
+                int shardAmount = otherSubtract / 2;
+                for (Entry<ManaCostShard, ShardCount> e : unpaidShards.entrySet()) {
+                    final ManaCostShard eShard = e.getKey();
+                    sc = e.getValue();
+                    if (eShard.isOr2Generic()) {
+                        if (shardAmount >= sc.totalCount) {
+                            shardAmount -= sc.totalCount;
+                            otherSubtract -= sc.totalCount * 2;
+                            sc.xCount = sc.totalCount = 0;
+                            toRemove.add(eShard);
+                        } else {
+                            sc.totalCount -= shardAmount;
+                            if (sc.xCount > sc.totalCount) {
+                                sc.xCount = sc.totalCount;
+                            }
+                            // nothing more left in otherSubtract
+                            return;
+                        }
+                    }
+                }
+            }
+            
+            unpaidShards.keySet().removeAll(toRemove);
             //System.out.println("Tried to substract a " + shard.toString() + " shard that is not present in this ManaCostBeingPaid");
             return;
         }
+        
+        
+        int difference = manaToSubtract - sc.totalCount;  
+        
         if (manaToSubtract >= sc.totalCount) {
             sc.xCount = 0;
             sc.totalCount = 0;
             unpaidShards.remove(shard);
+            // try to remove difference from the rest
+            this.decreaseShard(shard, difference);
             return;
         }
 
