@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import forge.game.ability.AbilityFactory;
+import forge.game.keyword.Keyword;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -613,6 +615,48 @@ public class ComputerUtilCard {
                         map.put(var, 1);
                     } else {
                         map.put(var, map.get(var) + 1);
+                    }
+                }
+            }
+            //also take into account abilities that generate tokens
+            for(SpellAbility sa:c.getSpellAbilities()){
+                if(sa.getParam("TokenName")!=null){
+                    for(String var:sa.getParam("TokenName").split(" ")){
+                        if (valid.contains(var)) {
+                            if (!map.containsKey(var)) {
+                                map.put(var, 1);
+                            } else {
+                                map.put(var, map.get(var) + 1);
+                            }
+                        }
+                    }
+                }
+            }
+            for(Trigger t:c.getTriggers()){
+                final String execute = t.getMapParams().get("Execute");
+                if (execute == null) {
+                    continue;
+                }
+                final SpellAbility sa = AbilityFactory.getAbility(c.getSVar(execute), c);
+                if(sa.getParam("TokenName")!=null){
+                    String tokenName=sa.getParam("TokenName");
+                    for(String var:tokenName.split(" ")){
+                        if (valid.contains(var)) {
+                            if (!map.containsKey(var)) {
+                                map.put(var, 1);
+                            } else {
+                                map.put(var, map.get(var) + 1);
+                            }
+                        }
+                    }
+                }
+            }
+            for(String k: c.getCurrentState().getIntrinsicKeywords()){
+                if(k.split(":")[0].equals(Keyword.FABRICATE.toString())){
+                    if (!map.containsKey("Servo")) {
+                        map.put("Servo", 1);
+                    } else {
+                        map.put("Servo", map.get("Servo") + 1);
                     }
                 }
             }

@@ -18,6 +18,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
+import forge.game.ability.AbilityFactory;
+import forge.game.keyword.Keyword;
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -820,14 +822,59 @@ public class PlayerControllerHuman
     //sort creature types such that those most prevalent in player's deck are sorted to the top
     private void sortCreatureTypes(List<String> types) {
         //build map of creature types in player's main deck against the occurrences of each
-        CardPool pool = player.getRegisteredPlayer().getDeck().getMain();
+        CardCollection pool = CardLists.filterControlledBy(game.getCardsInGame(),player);
         HashMap<String, Integer> typesInDeck = new HashMap<String, Integer>();
-        for (Entry<PaperCard, Integer> entry : pool) {
-            Set<String> cardCreatureTypes = entry.getKey().getRules().getType().getCreatureTypes();
+        for (Card c : pool) {
+            if(c.getRules()==null || c.getRules().getType()==null){
+                continue;
+            }
+            Set<String> cardCreatureTypes = c.getRules().getType().getCreatureTypes();
             for (String type : cardCreatureTypes) {
                 Integer count = typesInDeck.get(type);
                 if (count == null) { count = 0; }
-                typesInDeck.put(type, count + entry.getValue());
+                typesInDeck.put(type, count + 1);
+            }
+            //also take into account abilities that generate tokens
+            for(SpellAbility sa:c.getAllSpellAbilities()){
+                if(sa.getParam("TokenName")!=null){
+                    for(String var:sa.getParam("TokenName").split(" ")){
+                        if (types.contains(var)) {
+                            if (!typesInDeck.containsKey(var)) {
+                                typesInDeck.put(var, 1);
+                            } else {
+                                typesInDeck.put(var, typesInDeck.get(var) + 1);
+                            }
+                        }
+                    }
+                }
+            }
+            for(Trigger t:c.getTriggers()){
+                final String execute = t.getMapParams().get("Execute");
+                if (execute == null) {
+                    continue;
+                }
+                final SpellAbility sa = AbilityFactory.getAbility(c.getSVar(execute), c);
+                if(sa.getParam("TokenName")!=null){
+                    String tokenName=sa.getParam("TokenName");
+                    for(String var:tokenName.split(" ")){
+                        if (types.contains(var)) {
+                            if (!typesInDeck.containsKey(var)) {
+                                typesInDeck.put(var, 1);
+                            } else {
+                                typesInDeck.put(var, typesInDeck.get(var) + 1);
+                            }
+                        }
+                    }
+                }
+            }
+            for(String k: c.getCurrentState().getIntrinsicKeywords()){
+                if(k.split(":")[0].equals(Keyword.FABRICATE.toString())){
+                    if (!typesInDeck.containsKey("Servo")) {
+                        typesInDeck.put("Servo", 1);
+                    } else {
+                        typesInDeck.put("Servo", typesInDeck.get("Servo") + 1);
+                    }
+                }
             }
         }
 
