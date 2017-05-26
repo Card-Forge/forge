@@ -10,10 +10,12 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.SpellPermanent;
 import forge.game.trigger.TriggerType;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 public class CounterEffect extends SpellAbilityEffect {
     @Override
@@ -24,7 +26,7 @@ public class CounterEffect extends SpellAbilityEffect {
         final List<SpellAbility> sas;
 
         if (sa.hasParam("AllType")) {
-            sas = new ArrayList<SpellAbility>();
+            sas = Lists.newArrayList();
             for (SpellAbilityStackInstance si : game.getStack()) {
                 SpellAbility spell = si.getSpellAbility(true);
                 if (sa.getParam("AllType").equals("Spell") && !spell.isSpell()) {
@@ -69,7 +71,7 @@ public class CounterEffect extends SpellAbilityEffect {
         final List<SpellAbility> sas;
 
         if (sa.hasParam("AllType")) {
-            sas = new ArrayList<SpellAbility>();
+            sas = Lists.newArrayList();
             for (SpellAbilityStackInstance si : game.getStack()) {
                 SpellAbility spell = si.getSpellAbility(true);
                 if (sa.getParam("AllType").equals("Spell") && !spell.isSpell()) {
@@ -150,7 +152,7 @@ public class CounterEffect extends SpellAbilityEffect {
             final SpellAbility srcSA, final SpellAbilityStackInstance si) {
         final Game game = tgtSA.getActivatingPlayer().getGame();
         // Run any applicable replacement effects. 
-        final HashMap<String, Object> repParams = new HashMap<String, Object>();
+        final Map<String, Object> repParams = Maps.newHashMap();
         repParams.put("Event", "Counter");
         repParams.put("TgtSA", tgtSA);
         repParams.put("Affected", tgtSA.getHostCard());
@@ -168,7 +170,7 @@ public class CounterEffect extends SpellAbilityEffect {
         if (tgtSA.isAbility()) {
             // For Ability-targeted counterspells - do not move it anywhere,
             // even if Destination$ is specified.
-        } else if (tgtSA.isFlashBackAbility())  {
+        } else if (tgtSA.isFlashBackAbility() || tgtSA.isAftermath())  {
             game.getAction().exile(tgtSA.getHostCard());
         } else if (destination.equals("Graveyard")) {
             game.getAction().moveToGraveyard(tgtSA.getHostCard());
@@ -198,7 +200,7 @@ public class CounterEffect extends SpellAbilityEffect {
                     + srcSA.getHostCard().getName());
         }
         // Run triggers
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("Player", tgtSA.getActivatingPlayer());
         runParams.put("Card", tgtSA.getHostCard());
         runParams.put("Cause", srcSA.getHostCard());
