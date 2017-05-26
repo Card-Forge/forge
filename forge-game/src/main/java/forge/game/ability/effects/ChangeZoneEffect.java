@@ -1177,7 +1177,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             final boolean remember = srcSA.hasParam("RememberChanged");
             if (tgtSA.isAbility()) {
                 // Shouldn't be able to target Abilities but leaving this in for now
-            } else if (tgtSA.isFlashBackAbility())  {
+            } else if (tgtSA.isFlashBackAbility() || tgtSA.isAftermath())  {
                 game.getAction().exile(tgtSA.getHostCard());
             } else if (srcSA.getParam("Destination").equals("Graveyard")) {
                 game.getAction().moveToGraveyard(tgtSA.getHostCard());
