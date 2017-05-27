@@ -166,7 +166,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                 sb.append(" counters from ").append(source).append(".");
 
                 tgtCards = player.getController().chooseCardsForEffect(
-                        tgtCards, sa, sb.toString(), 0, srcCards.size(), true);
+                        tgtCards, sa, sb.toString(), 0, tgtCards.size(), true);
             }
 
             for (final Card dest : tgtCards) {
