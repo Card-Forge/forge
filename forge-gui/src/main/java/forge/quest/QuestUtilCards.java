@@ -563,7 +563,7 @@ public final class QuestUtilCards {
      *
      * @param quantity the count
      */
-    private void generateOpenedBoostersInShop(final int quantity) {
+    private void generateSinglesInShop(final int quantity) {
 
     	if (questController.getFormat() == null) {
 		    SealedProduct.Template boosterTemplate = getShopBoosterTemplate();
@@ -574,8 +574,8 @@ public final class QuestUtilCards {
 	    }
 
 	    int commons = questPreferences.getPrefInt(QPref.SHOP_SINGLES_COMMON) * quantity;
-	    int uncommons = questPreferences.getPrefInt(QPref.SHOP_SINGLES_COMMON) * quantity;
-	    int rareOrMythics = questPreferences.getPrefInt(QPref.SHOP_SINGLES_COMMON) * quantity;
+	    int uncommons = questPreferences.getPrefInt(QPref.SHOP_SINGLES_UNCOMMON) * quantity;
+	    int rareOrMythics = questPreferences.getPrefInt(QPref.SHOP_SINGLES_RARE) * quantity;
 
 	    int attempts = commons + uncommons + rareOrMythics + 50;
 
@@ -772,7 +772,7 @@ public final class QuestUtilCards {
         final int winPacks = questController.getAchievements().getWin() / winsForPack;
         final int totalPacks = Math.min(Math.max(levelPacks + winPacks, minPacks), maxPacks);
 
-        generateOpenedBoostersInShop(totalPacks);
+        generateSinglesInShop(totalPacks);
 
         generateBoostersInShop(totalPacks);
         generatePreconsInShop(totalPacks);
