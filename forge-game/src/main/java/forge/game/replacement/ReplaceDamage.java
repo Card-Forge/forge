@@ -50,25 +50,25 @@ public class ReplaceDamage extends ReplacementEffect {
         if (!runParams.get("Event").equals("DamageDone")) {
             return false;
         }
-        if (!(runParams.containsKey("Prevention") == getMapParams().containsKey("PreventionEffect"))) {
+        if (!(runParams.containsKey("Prevention") == (hasParam("PreventionEffect") || hasParam("Prevent")))) {
             return false;
         }
-        if (getMapParams().containsKey("ValidSource")) {
-        	String validSource = getMapParams().get("ValidSource");
+        if (hasParam("ValidSource")) {
+        	String validSource = getParam("ValidSource");
         	validSource = AbilityUtils.applyAbilityTextChangeEffects(validSource, this);        	
             if (!matchesValid(runParams.get("DamageSource"), validSource.split(","), getHostCard())) {
                 return false;
             }
         }
-        if (getMapParams().containsKey("ValidTarget")) {
-        	String validTarget = getMapParams().get("ValidTarget");
+        if (hasParam("ValidTarget")) {
+        	String validTarget = getParam("ValidTarget");
         	validTarget = AbilityUtils.applyAbilityTextChangeEffects(validTarget, this);
             if (!matchesValid(runParams.get("Affected"), validTarget.split(","), getHostCard())) {
                 return false;
             }
         }
-        if (getMapParams().containsKey("DamageAmount")) {
-            String full = getMapParams().get("DamageAmount");
+        if (hasParam("DamageAmount")) {
+            String full = getParam("DamageAmount");
             String operator = full.substring(0, 2);
             String operand = full.substring(2);
             int intoperand = 0;
@@ -82,8 +82,8 @@ public class ReplaceDamage extends ReplacementEffect {
                 return false;
             }
         }
-        if (getMapParams().containsKey("IsCombat")) {
-            if (getMapParams().get("IsCombat").equals("True")) {
+        if (hasParam("IsCombat")) {
+            if (getParam("IsCombat").equals("True")) {
                 if (!((Boolean) runParams.get("IsCombat"))) {
                     return false;
                 }
@@ -93,13 +93,13 @@ public class ReplaceDamage extends ReplacementEffect {
                 }
             }
         }
-        if (getMapParams().containsKey("IsEquipping") && !getHostCard().isEquipping()) {
+        if (hasParam("IsEquipping") && !getHostCard().isEquipping()) {
             return false;
         }
 
         // check for DamageRedirection, the Thing where the damage is redirected to must be a creature or planeswalker or a player 
-        if (getMapParams().containsKey("DamageTarget")) {
-            String def = getMapParams().get("DamageTarget");
+        if (hasParam("DamageTarget")) {
+            String def = getParam("DamageTarget");
 
             for (Player p : AbilityUtils.getDefinedPlayers(hostCard, def, null)) {
                 if (!p.getGame().getPlayers().contains(p)) {
