@@ -651,13 +651,11 @@ public class ComputerUtilCard {
                     }
                 }
             }
-            for(String k: c.getCurrentState().getIntrinsicKeywords()){
-                if(k.split(":")[0].equals(Keyword.FABRICATE.toString())){
-                    if (!map.containsKey("Servo")) {
-                        map.put("Servo", 1);
-                    } else {
-                        map.put("Servo", map.get("Servo") + 1);
-                    }
+            if(c.hasStartOfKeyword(Keyword.FABRICATE.toString())){
+                if (!map.containsKey("Servo")) {
+                    map.put("Servo", 1);
+                } else {
+                    map.put("Servo", map.get("Servo") + 1);
                 }
             }
         } // for

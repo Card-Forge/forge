@@ -867,13 +867,11 @@ public class PlayerControllerHuman
                     }
                 }
             }
-            for(String k: c.getCurrentState().getIntrinsicKeywords()){
-                if(k.split(":")[0].equals(Keyword.FABRICATE.toString())){
-                    if (!typesInDeck.containsKey("Servo")) {
-                        typesInDeck.put("Servo", 1);
-                    } else {
-                        typesInDeck.put("Servo", typesInDeck.get("Servo") + 1);
-                    }
+            if(c.hasStartOfKeyword(Keyword.FABRICATE.toString())){
+                if (!typesInDeck.containsKey("Servo")) {
+                    typesInDeck.put("Servo", 1);
+                } else {
+                    typesInDeck.put("Servo", typesInDeck.get("Servo") + 1);
                 }
             }
         }
