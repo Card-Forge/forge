@@ -8,8 +8,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import forge.game.ability.AbilityFactory;
-import forge.game.keyword.Keyword;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -28,6 +26,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.Game;
 import forge.game.GameObject;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -41,9 +40,12 @@ import forge.game.card.CardUtil;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
@@ -606,64 +608,105 @@ public class ComputerUtilCard {
             return "";
         }
 
-        final Map<String, Integer> map = Maps.newHashMap();
+        final Map<String, Integer> typesInDeck = Maps.newHashMap();
 
+        // TODO JAVA 8 use getOrDefault
         for (final Card c : list) {
-            for (final String var : c.getType()) {
-                if (valid.contains(var)) {
-                    if (!map.containsKey(var)) {
-                        map.put(var, 1);
-                    } else {
-                        map.put(var, map.get(var) + 1);
-                    }
+
+            // Changeling are all creature types, they are not interesting for
+            // counting creature types
+            if (c.hasStartOfKeyword(Keyword.CHANGELING.toString())) {
+                continue;
+            }
+            // ignore cards that does enter the battlefield as clones
+            boolean isClone = false;
+            for (ReplacementEffect re : c.getReplacementEffects()) {
+                if (re.getLayer() == ReplacementLayer.Copy) {
+                    isClone = true;
+                    break;
                 }
+            }
+            if (isClone) {
+                continue;
+            }
+
+            Set<String> cardCreatureTypes = c.getType().getCreatureTypes();
+            for (String type : cardCreatureTypes) {
+                Integer count = typesInDeck.get(type);
+                if (count == null) {
+                    count = 0;
+                }
+                typesInDeck.put(type, count + 1);
             }
             //also take into account abilities that generate tokens
-            for(SpellAbility sa:c.getSpellAbilities()){
-                if(sa.getParam("TokenName")!=null){
-                    for(String var:sa.getParam("TokenName").split(" ")){
-                        if (valid.contains(var)) {
-                            if (!map.containsKey(var)) {
-                                map.put(var, 1);
-                            } else {
-                                map.put(var, map.get(var) + 1);
-                            }
-                        }
-                    }
-                }
-            }
-            for(Trigger t:c.getTriggers()){
-                final String execute = t.getMapParams().get("Execute");
-                if (execute == null) {
+            for (SpellAbility sa : c.getAllSpellAbilities()) {
+                if (sa.getApi() != ApiType.Token) {
                     continue;
                 }
-                final SpellAbility sa = AbilityFactory.getAbility(c.getSVar(execute), c);
-                if(sa.getParam("TokenName")!=null){
-                    String tokenName=sa.getParam("TokenName");
-                    for(String var:tokenName.split(" ")){
-                        if (valid.contains(var)) {
-                            if (!map.containsKey(var)) {
-                                map.put(var, 1);
-                            } else {
-                                map.put(var, map.get(var) + 1);
-                            }
+                if (sa.hasParam("TokenTypes")) {
+                    for (String var : sa.getParam("TokenTypes").split(",")) {
+                        if (!CardType.isACreatureType(var)) {
+                            continue;
                         }
+                        Integer count = typesInDeck.get(var);
+                        if (count == null) {
+                            count = 0;
+                        }
+                        typesInDeck.put(var, count + 1);
                     }
                 }
             }
-            if(c.hasStartOfKeyword(Keyword.FABRICATE.toString())){
-                if (!map.containsKey("Servo")) {
-                    map.put("Servo", 1);
-                } else {
-                    map.put("Servo", map.get("Servo") + 1);
+            // same for Trigger that does make Tokens
+            for(Trigger t:c.getTriggers()){
+                SpellAbility sa = t.getOverridingAbility();
+                String sTokenTypes = null;
+                if (sa != null) {
+                    if (sa.getApi() != ApiType.Token || !sa.hasParam("TokenTypes")) {
+                        continue;
+                    }
+                    sTokenTypes = sa.getParam("TokenTypes");
+                } else if (t.hasParam("Execute")) {
+                    String name = t.getParam("Execute");
+                    if (!c.hasSVar(name)) {
+                        continue;
+                    }
+
+                    Map<String, String> params = AbilityFactory.getMapParams(c.getSVar(name));
+                    if (!params.containsKey("TokenTypes")) {
+                        continue;
+                    }
+                    sTokenTypes = params.get("TokenTypes");
                 }
+
+                if (sTokenTypes == null) {
+                    continue;
+                }
+
+                for (String var : sTokenTypes.split(",")) {
+                    if (!CardType.isACreatureType(var)) {
+                        continue;
+                    }
+                    Integer count = typesInDeck.get(var);
+                    if (count == null) {
+                        count = 0;
+                    }
+                    typesInDeck.put(var, count + 1);
+                }
+            }
+            // special rule for Fabricate and Servo
+            if(c.hasStartOfKeyword(Keyword.FABRICATE.toString())){
+                Integer count = typesInDeck.get("Servo");
+                if (count == null) {
+                    count = 0;
+                }
+                typesInDeck.put("Servo", count + 1);
             }
         } // for
 
         int max = 0;
         String maxType = "";
     
-        for (final Entry<String, Integer> entry : map.entrySet()) {
+        for (final Entry<String, Integer> entry : typesInDeck.entrySet()) {
             final String type = entry.getKey();
             // Log.debug(type + " - " + entry.getValue());
 

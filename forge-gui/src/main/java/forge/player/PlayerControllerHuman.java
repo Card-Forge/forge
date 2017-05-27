@@ -6,19 +6,17 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.ApiType;
 import forge.game.keyword.Keyword;
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.StringUtils;
@@ -34,6 +32,7 @@ import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
 
 import forge.FThreads;
 import forge.GuiBase;
@@ -42,6 +41,7 @@ import forge.achievement.AchievementCollection;
 import forge.ai.GameState;
 import forge.assets.FSkinProp;
 import forge.card.CardDb;
+import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.ICardFace;
 import forge.card.MagicColor;
@@ -80,6 +80,7 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerController;
 import forge.game.player.PlayerView;
 import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
@@ -186,7 +187,7 @@ public class PlayerControllerHuman
         return mayLookAtAllCards;
     }
 
-    private final Set<Card> tempShownCards = new HashSet<Card>();
+    private final Set<Card> tempShownCards = Sets.newHashSet();
     public <T> void tempShow(final Iterable<T> objects) {
         for (final T t : objects) {
             // assume you may see any card passed through here
@@ -791,7 +792,7 @@ public class PlayerControllerHuman
      */
     @Override
     public Mana chooseManaFromPool(final List<Mana> manaChoices) {
-        final List<String> options = new ArrayList<String>();
+        final List<String> options = Lists.newArrayList();
         for (int i = 0; i < manaChoices.size(); i++) {
             final Mana m = manaChoices.get(i);
             options.add(String.format("%d. %s mana from %s", 1+i, MagicColor.toLongString(m.getColor()), m.getSourceCard()));
@@ -823,61 +824,94 @@ public class PlayerControllerHuman
     private void sortCreatureTypes(List<String> types) {
         //build map of creature types in player's main deck against the occurrences of each
         CardCollection pool = CardLists.filterControlledBy(game.getCardsInGame(),player);
-        HashMap<String, Integer> typesInDeck = new HashMap<String, Integer>();
+        Map<String, Integer> typesInDeck = Maps.newHashMap();
+        
+        // TODO JAVA 8 use getOrDefault
         for (Card c : pool) {
-            if(c.getRules()==null || c.getRules().getType()==null){
+            
+            // Changeling are all creature types, they are not interesting for counting creature types
+            if (c.hasStartOfKeyword(Keyword.CHANGELING.toString())) {
                 continue;
             }
-            Set<String> cardCreatureTypes = c.getRules().getType().getCreatureTypes();
+            // ignore cards that does enter the battlefield as clones
+            boolean isClone = false;
+            for (ReplacementEffect re : c.getReplacementEffects()) {
+                if (re.getLayer() == ReplacementLayer.Copy) {
+                    isClone = true;
+                    break;
+                }
+            }
+            if (isClone) {
+                continue;
+            }
+            
+            Set<String> cardCreatureTypes = c.getType().getCreatureTypes();
             for (String type : cardCreatureTypes) {
                 Integer count = typesInDeck.get(type);
                 if (count == null) { count = 0; }
                 typesInDeck.put(type, count + 1);
             }
             //also take into account abilities that generate tokens
-            for(SpellAbility sa:c.getAllSpellAbilities()){
-                if(sa.getParam("TokenName")!=null){
-                    for(String var:sa.getParam("TokenName").split(" ")){
-                        if (types.contains(var)) {
-                            if (!typesInDeck.containsKey(var)) {
-                                typesInDeck.put(var, 1);
-                            } else {
-                                typesInDeck.put(var, typesInDeck.get(var) + 1);
-                            }
-                        }
-                    }
-                }
-            }
-            for(Trigger t:c.getTriggers()){
-                final String execute = t.getMapParams().get("Execute");
-                if (execute == null) {
+            for(SpellAbility sa: c.getAllSpellAbilities()){
+                if (sa.getApi() != ApiType.Token) {
                     continue;
                 }
-                final SpellAbility sa = AbilityFactory.getAbility(c.getSVar(execute), c);
-                if(sa.getParam("TokenName")!=null){
-                    String tokenName=sa.getParam("TokenName");
-                    for(String var:tokenName.split(" ")){
-                        if (types.contains(var)) {
-                            if (!typesInDeck.containsKey(var)) {
-                                typesInDeck.put(var, 1);
-                            } else {
-                                typesInDeck.put(var, typesInDeck.get(var) + 1);
-                            }
+                if(sa.hasParam("TokenTypes")){
+                    for(String var: sa.getParam("TokenTypes").split(",")){
+                        if (!CardType.isACreatureType(var)) {
+                            continue;
                         }
+                        Integer count = typesInDeck.get(var);
+                        if (count == null) { count = 0; }
+                        typesInDeck.put(var, count + 1);
                     }
                 }
             }
-            if(c.hasStartOfKeyword(Keyword.FABRICATE.toString())){
-                if (!typesInDeck.containsKey("Servo")) {
-                    typesInDeck.put("Servo", 1);
-                } else {
-                    typesInDeck.put("Servo", typesInDeck.get("Servo") + 1);
+            // same for Trigger that does make Tokens
+            for(Trigger t:c.getTriggers()){
+                SpellAbility sa = t.getOverridingAbility();
+                String sTokenTypes = null;
+                if (sa != null) {
+                    if (sa.getApi() != ApiType.Token || !sa.hasParam("TokenTypes")) {
+                        continue;
+                    }
+                    sTokenTypes = sa.getParam("TokenTypes");
+                } else if (t.hasParam("Execute")) {
+                    String name = t.getParam("Execute");
+                    if (!c.hasSVar(name)) {
+                        continue;
+                    }
+                    
+                    Map<String,String> params = AbilityFactory.getMapParams(c.getSVar(name));
+                    if (!params.containsKey("TokenTypes")) {
+                        continue;
+                    }
+                    sTokenTypes = params.get("TokenTypes");
                 }
+                
+                if (sTokenTypes == null) {
+                    continue;
+                }
+                
+                for(String var: sTokenTypes.split(",")){
+                    if (!CardType.isACreatureType(var)) {
+                        continue;
+                    }
+                    Integer count = typesInDeck.get(var);
+                    if (count == null) { count = 0; }
+                    typesInDeck.put(var, count + 1);
+                }
+            }
+            // special rule for Fabricate and Servo
+            if(c.hasStartOfKeyword(Keyword.FABRICATE.toString())){
+                Integer count = typesInDeck.get("Servo");
+                if (count == null) { count = 0; }
+                typesInDeck.put("Servo", count + 1);
             }
         }
 
         //create sorted list from map from least to most frequent 
-        List<Entry<String, Integer>> sortedList = new LinkedList<Entry<String, Integer>>(typesInDeck.entrySet());
+        List<Entry<String, Integer>> sortedList = Lists.newArrayList(typesInDeck.entrySet());
         Collections.sort(sortedList, new Comparator<Entry<String, Integer>>() {
             public int compare(Entry<String, Integer> o1, Entry<String, Integer> o2) {
                 return o1.getValue().compareTo(o2.getValue());
@@ -1041,7 +1075,7 @@ public class PlayerControllerHuman
         for (final SpellAbility sa : usableFromOpeningHand) {
             srcCards.add(sa.getHostCard());
         }
-        final List<SpellAbility> result = new ArrayList<SpellAbility>();
+        final List<SpellAbility> result = Lists.newArrayList();
         if (srcCards.isEmpty()) {
             return result;
         }
@@ -1243,7 +1277,7 @@ public class PlayerControllerHuman
     }
 
     //stores saved order for different sets of SpellAbilities
-    private final HashMap<String, List<Integer>> orderedSALookup = new HashMap<String, List<Integer>>();
+    private final Map<String, List<Integer>> orderedSALookup = Maps.newHashMap();
 
     @Override
     public void orderAndPlaySimultaneousSa(final List<SpellAbility> activePlayerSAs) {
@@ -1274,7 +1308,7 @@ public class PlayerControllerHuman
             	List<Integer> savedOrder = orderedSALookup.get(saLookupKey);
 
             	if (savedOrder != null) {
-            		orderedSAs = new ArrayList<SpellAbility>();
+            		orderedSAs = Lists.newArrayList();
             		for (Integer index : savedOrder) {
             			orderedSAs.add(activePlayerSAs.get(index));
                     }
@@ -1282,12 +1316,12 @@ public class PlayerControllerHuman
                 if (savedOrder != null) {
                     boolean preselect = FModel.getPreferences().getPrefBoolean(FPref.UI_PRESELECT_PREVIOUS_ABILITY_ORDER);
                     orderedSAs = getGui().order("Reorder simultaneous abilities", "Resolve first", 0, 0,
-                            preselect ? new ArrayList<SpellAbility>() : orderedSAs, preselect ? orderedSAs : new ArrayList<SpellAbility>(), null, false);
+                            preselect ? Lists.<SpellAbility>newArrayList() : orderedSAs, preselect ? orderedSAs : Lists.<SpellAbility>newArrayList(), null, false);
                 } else {
                    	orderedSAs = getGui().order("Select order for simultaneous abilities", "Resolve first", orderedSAs, null);
                 }
                 //save order to avoid needing to prompt a second time to order the same abilities
-                savedOrder = new ArrayList<Integer>(activePlayerSAs.size());
+                savedOrder = Lists.newArrayListWithCapacity(activePlayerSAs.size());
                 for (SpellAbility sa : orderedSAs) {
                     savedOrder.add(activePlayerSAs.indexOf(sa));
                 }
@@ -1391,7 +1425,7 @@ public class PlayerControllerHuman
         if (c.getShieldCount() < 2) {
             return Iterables.getFirst(c.getShields(), null);
         }
-        final List<CardShields> shields = new ArrayList<CardShields>();
+        final List<CardShields> shields = Lists.newArrayList();
         for (final CardShields shield : c.getShields()) {
             shields.add(shield);
         }
@@ -1601,7 +1635,7 @@ public class PlayerControllerHuman
 
             final Card dummy = new Card(-777777, game);
             dummy.setOwner(pPriority);
-            final Map<String, String> produced = new HashMap<String, String>();
+            final Map<String, String> produced = Maps.newHashMap();
             produced.put("Produced", "W W W W W W W U U U U U U U B B B B B B B G G G G G G G R R R R R R R 7");
             final AbilityManaPart abMana = new AbilityManaPart(dummy, produced);
             game.getAction().invoke(new Runnable() {
@@ -1690,7 +1724,7 @@ public class PlayerControllerHuman
             }
 
             final CardCollection lib = (CardCollection)pPriority.getCardsIn(ZoneType.Library);
-            final List<ZoneType> origin = new ArrayList<ZoneType>();
+            final List<ZoneType> origin = Lists.newArrayList();
             origin.add(ZoneType.Library);
             final SpellAbility sa = new SpellAbility.EmptySa(new Card(-1, game));
             final Card card = chooseSingleCardForZoneChange(ZoneType.Hand, origin, sa, lib, null, "Choose a card", true, pPriority);
@@ -1984,7 +2018,7 @@ public class PlayerControllerHuman
             if (!game.getRules().hasAppliedVariant(GameType.Planechase)) { return; }
             final Player p = game.getPhaseHandler().getPlayerTurn();
 
-            final List<PaperCard> allPlanars = new ArrayList<PaperCard>();
+            final List<PaperCard> allPlanars = Lists.newArrayList();
             for (final PaperCard c : FModel.getMagicDb().getVariantCards().getAllCards()) {
                 if (c.getRules().getType().isPlane() || c.getRules().getType().isPhenomenon()) {
                     allPlanars.add(c);
@@ -2024,7 +2058,7 @@ public class PlayerControllerHuman
         private int sequenceIndex = 0;
         // "Actions" are stored as a pair of the "action" recipient (the entity
         // to "click") and a boolean representing whether the entity is a player.
-        private final List<Pair<GameEntityView, Boolean>> rememberedActions = new ArrayList<>();
+        private final List<Pair<GameEntityView, Boolean>> rememberedActions = Lists.newArrayList();
         private String rememberedSequenceText = "";
 
         @Override
@@ -2040,7 +2074,7 @@ public class PlayerControllerHuman
             int currentIndex = sequenceIndex;
             sequenceIndex = 0;
             // Use a Pair so we can keep a flag for isPlayer
-            final List<Pair<Integer, Boolean>> entityInfo = new ArrayList<>();
+            final List<Pair<Integer, Boolean>> entityInfo = Lists.newArrayList();
             final int playerID = getPlayer().getId();
             // Only support 1 opponent for now. There are some ideas about supporting
             // multiplayer games in the future, but for now it would complicate the parsing
