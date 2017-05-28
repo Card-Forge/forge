@@ -28,6 +28,7 @@ import com.google.common.collect.Lists;
 import forge.ai.ability.AnimateAi;
 import forge.card.CardTypeView;
 import forge.game.GameEntity;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.ProtectEffect;
 import forge.game.card.*;
@@ -39,8 +40,8 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.util.collect.FCollectionView;
 import forge.util.MyRandom;
+import forge.util.collect.FCollectionView;
 
 
 //doesHumanAttackAndWin() uses the global variable AllZone.getComputerPlayer()
@@ -1112,11 +1113,40 @@ public class AiAttackController {
         for(Card c : attackers) {
             boolean shouldExert = false;
 
-            if (c.hasKeyword("Vigilance")) {
+            if (c.hasSVar("EndOfTurnLeavePlay")) {
+                // creature would leave the battlefield
+                // no pain in exerting it
+                shouldExert = true;
+            } else if (c.hasKeyword("Vigilance")) {
                 // Free exert - why not?
                 shouldExert = true;
             }
-            else if (random.nextBoolean()) {
+
+            // if card has a Exert Trigger which would target,
+            // but there are no creatures it can target, no need to exert with
+            // it
+            boolean missTarget = false;
+            for (Trigger t : c.getTriggers()) {
+                if (!TriggerType.Exerted.equals(t.getMode())) {
+                    continue;
+                }
+                SpellAbility sa = t.getOverridingAbility();
+                if (sa == null) {
+                    sa = AbilityFactory.getAbility(c, t.getParam("Execute"));
+                }
+                if (sa.usesTargeting()) {
+                    if (CardUtil.getValidCardsToTarget(sa.getTargetRestrictions(), sa).isEmpty()) {
+                        missTarget = true;
+                        break;
+                    }
+                }
+            }
+
+            if (missTarget) {
+                continue;
+            }
+
+            if (random.nextBoolean()) {
                 // TODO Improve when the AI wants to use Exert powers
                 shouldExert = true;
             }
