@@ -1480,7 +1480,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sbLong.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
             } else if (keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst")
                     || keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift")
-                    || keyword.startsWith("Crew") || keyword.startsWith("Tribute")
+                    || keyword.startsWith("Crew") || keyword.startsWith("Tribute") || keyword.startsWith("Absorb")
                     || keyword.startsWith("Graft") || keyword.startsWith("Fading") || keyword.startsWith("Vanishing")
                     || keyword.startsWith("Renown") || keyword.startsWith("Annihilator")) {
                 final String[] k = keyword.split(":");
@@ -5839,14 +5839,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         for (String kw : getKeywords()) {
-            if (kw.startsWith("Absorb")) {
-                final int absorbed = getKeywordMagnitude("Absorb");
-                if (restDamage > absorbed) {
-                    restDamage = restDamage - absorbed;
-                } else {
-                    return 0;
-                }
-            }
             if (kw.startsWith("PreventAllDamageBy")) {
                 if (source.isValid(kw.split(" ", 2)[1].split(","), getController(), this, null)) {
                     return 0;

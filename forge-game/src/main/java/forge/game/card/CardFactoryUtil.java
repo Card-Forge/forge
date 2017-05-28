@@ -1948,7 +1948,9 @@ public class CardFactoryUtil {
         // -1 means keyword "Cycling" not found
 
         for (String keyword : card.getKeywords()) {
-            if (keyword.startsWith("Multikicker")) {
+            if (keyword.startsWith("Absorb")) {
+                addStaticAbility(keyword, card, null);
+            } else if (keyword.startsWith("Multikicker")) {
                 final String[] n = keyword.split(":");
                 final SpellAbility sa = card.getFirstSpellAbility();
                 sa.setMultiKickerManaCost(new ManaCost(new ManaCostParser(n[1])));
@@ -4068,7 +4070,16 @@ public class CardFactoryUtil {
         final boolean intrinsic = kws == null;
         String effect = null;
 
-        if (keyword.startsWith("Escalate")) {
+        if (keyword.startsWith("Absorb")) {
+            final String[] k = keyword.split(":");
+            final String n = k[1];
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("Mode$ PreventDamage | Target$ Card.Self | Amount$ ");
+            sb.append(n).append("| Secondary$ True | Description$ Absorb ").append(n);
+            sb.append(" (").append(Keyword.getInstance(keyword).getReminderText()).append(")");
+            effect = sb.toString();
+        } else if (keyword.startsWith("Escalate")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
             final Cost cost = new Cost(manacost, false);
