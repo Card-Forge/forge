@@ -6116,6 +6116,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public void exert() {
         exertedByPlayer.add(getController());
         exertThisTurn++;
+        view.updateExertedThisTurn(this, true);
     }
     
     public boolean isExertedBy(final Player player) {
@@ -6124,6 +6125,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     
     public void removeExertedBy(final Player player) {
         exertedByPlayer.remove(player);
+        view.updateExertedThisTurn(this, getExertedThisTurn() > 0);
     }
     
     protected void resetExtertedThisTurn() {

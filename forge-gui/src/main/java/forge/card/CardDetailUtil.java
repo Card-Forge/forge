@@ -532,6 +532,14 @@ public class CardDetailUtil {
             area.append("Must block " + mustBlockThese);
         }
 
+        // exerted
+        if (card.isExertedThisTurn()) {
+            if (area.length() != 0) {
+                area.append("\n\n");
+            }
+            area.append("^Exerted^");
+        }
+
         //show current card colors if enabled
         String curCardColors = formatCurrentCardColors(state);
         if (!curCardColors.isEmpty()) {

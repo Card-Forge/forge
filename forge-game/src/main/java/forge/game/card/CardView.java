@@ -139,6 +139,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Attacking, combat != null && combat.isAttacking(c));
     }
 
+    public boolean isExertedThisTurn() {
+        return get(TrackableProperty.ExertedThisTurn);
+    }
+    void updateExertedThisTurn(Card c, boolean exerted) {
+        set(TrackableProperty.ExertedThisTurn, exerted);
+    }
+
     public boolean isBlocking() {
         return get(TrackableProperty.Blocking);
     }
