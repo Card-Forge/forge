@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Oketra 2
+Title=Oketra the True
+Difficulty=medium
+Description=UW Embalm deck with Anointed Procession
+Icon=Oketra.jpg
+Deck Type=constructed
+[main]
+2 Angel of Sanctions
+4 Anointed Procession
+2 Aven Wind Guide
+2 Glyph Keeper
+3 In Oketra's Name
+4 Island
+4 Meandering River
+2 Oketra the True
+3 Oketra's Monument
+9 Plains
+4 Port Town
+4 Prairie Stream
+4 Sacred Cat
+2 Temmet, Vizier of Naktamun
+4 Trueheart Duelist
+4 Unwavering Initiate
+2 Vizier of Many Faces
+[sideboard]

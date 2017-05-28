@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Iroh 2
+Title=Iroh
+Difficulty=medium
+Description=WRG Naya Exert creature-heavy deck with Always Watching
+Icon=Iroh.jpg
+Deck Type=constructed
+[main]
+2 Ahn-Crop Champion
+2 Ahn-Crop Crasher
+4 Always Watching
+2 Bitterblade Warrior
+3 Champion of Rhonas
+3 Combat Celebrant
+2 Devoted Crop-Mate
+2 Emberhorn Minotaur
+4 Evolving Wilds
+2 Forest
+3 Gideon, Ally of Zendikar
+2 Glory-Bound Initiate
+4 Glorybringer
+2 Gust Walker
+2 Hooded Brawler
+4 Inspiring Vantage
+3 Mountain
+3 Plains
+3 Tah-Crop Elite
+4 Timber Gorge
+4 Tranquil Expanse
+[sideboard]
