@@ -185,7 +185,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
             runParams.put("Player", caller);
             runParams.put("Result", Boolean.valueOf(wonFlip));
             caller.getGame().getTriggerHandler().runTrigger(TriggerType.FlippedCoin, runParams, false);
-        } while (sa.hasParam("FlipUntilYouLose") && !wonFlip);
+        } while (sa.hasParam("FlipUntilYouLose") && wonFlip);
         
         if (sa.hasParam("FlipUntilYouLose")) {
             sa.getAdditonalAbility("LoseSubAbility").setSVar(sa.hasParam("SaveNumFlipsToSVar") ? sa.getParam("SaveNumFlipsToSVar") : "X", "Number$" + numSuccesses);
