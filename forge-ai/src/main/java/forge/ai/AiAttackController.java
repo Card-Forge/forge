@@ -1110,12 +1110,18 @@ public class AiAttackController {
     public static List<Card> exertAttackers(List<Card> attackers) {
         List<Card> exerters = Lists.newArrayList();
         for(Card c : attackers) {
+            boolean shouldExert = false;
+
             if (c.hasKeyword("Vigilance")) {
                 // Free exert - why not?
-                exerters.add(c);
+                shouldExert = true;
             }
             else if (random.nextBoolean()) {
                 // TODO Improve when the AI wants to use Exert powers
+                shouldExert = true;
+            }
+
+            if (shouldExert) {
                 exerters.add(c);
             }
         }
