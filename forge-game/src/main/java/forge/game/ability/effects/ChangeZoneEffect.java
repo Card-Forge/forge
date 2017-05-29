@@ -750,7 +750,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         final boolean optional = sa.hasParam("Optional");
         if (optional) {
-            String message = MessageUtil.formatMessage(defined ? "Put that card from {player's} " + Lang.joinHomogenous(origin).toLowerCase() + "to " + destination.name().toLowerCase() : "Search {player's} " + Lang.joinHomogenous(origin).toLowerCase() + "?", decider, player);
+            String message = MessageUtil.formatMessage(defined ? "Put that card from {player's} " + Lang.joinHomogenous(origin).toLowerCase() + " to " + destination.name().toLowerCase() : "Search {player's} " + Lang.joinHomogenous(origin).toLowerCase() + "?", decider, player);
             if (!decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, message)) {
                 return;
             }
