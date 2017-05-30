@@ -3,9 +3,10 @@
 Name=Vanellope von Schweetz 3
 Title=Vanellope von Schweetz
 Difficulty=hard
-Description=WR Haste token deck with Assemble the Legion, Purphoros God of the Forge, Iroas God of Victory
+Description=WR Haste tokens aggro deck with Assemble the Legion, Purphoros God of the Forge, Iroas God of Victory
 Icon=Vanellope von Schweetz.jpg
 Deck Type=constructed
+Profile=Reckless
 [Main]
 4 Arid Mesa|ZEN
 3 Assemble the Legion|GTC
