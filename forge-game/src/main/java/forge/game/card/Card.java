@@ -6130,6 +6130,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     
     protected void resetExtertedThisTurn() {
         exertThisTurn = 0;
+        view.updateExertedThisTurn(this, false);
     }
 
     public boolean isMadness() {
