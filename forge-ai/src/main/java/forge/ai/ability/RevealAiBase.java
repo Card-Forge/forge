@@ -22,12 +22,11 @@ public abstract class RevealAiBase extends SpellAbilityAi {
             sa.resetTargets();
 
             List<Player> opps = ai.getOpponents();
+            opps = Lists.newArrayList(Iterables.filter(opps, PlayerPredicates.isTargetableBy(sa)));
 
             if (opps.isEmpty()) {
                 return false;
             }
-
-            opps = Lists.newArrayList(Iterables.filter(opps, PlayerPredicates.isTargetableBy(sa)));
 
             Player p = Collections.max(opps, PlayerPredicates.compareByZoneSize(ZoneType.Hand));
 
