@@ -5424,6 +5424,13 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (lkiZone == null || !lkiZone.is(realZone)) {
                 return false;
             }
+        } else if (property.startsWith("inRealZone")) {
+            final String strZone = property.substring(10);
+            final ZoneType realZone = ZoneType.smartValueOf(strZone);
+
+            if (!this.isInZone(realZone)) {
+                return false;
+            }
         } else if (property.equals("IsCommander")) {
             if (!isCommander) {
                 return false;
