@@ -204,7 +204,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 }
                 triggerList.get(originZone.getZoneType()).add(movedCard);
             }
-
         }
 
         if (!triggerList.isEmpty()) {
