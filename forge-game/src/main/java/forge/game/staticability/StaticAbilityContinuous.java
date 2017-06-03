@@ -595,6 +595,19 @@ public final class StaticAbilityContinuous {
             if (addTriggers != null) {
                 for (final String trigger : addTriggers) {
                     final Trigger actualTrigger = TriggerHandler.parseTrigger(trigger, affectedCard, false);
+                    // if the trigger has Execute param, which most trigger gained by Static Abilties should have
+                    // turn them into SpellAbility object before adding to card
+                    // with that the TargetedCard does not need the Svars added to them anymore
+                    // but only do it if the trigger doesn't already have a overriding ability
+                    if (actualTrigger.hasParam("Execute") && actualTrigger.getOverridingAbility() == null) {
+                        SpellAbility sa = AbilityFactory.getAbility(hostCard, actualTrigger.getParam("Execute"));
+                        // set hostcard there so when the card is added to trigger, it doesn't make a copy of it
+                        sa.setHostCard(affectedCard);
+                        // set OriginalHost to get the owner of this static ability
+                        sa.setOriginalHost(hostCard);
+                        // set overriding ability to the trigger
+                        actualTrigger.setOverridingAbility(sa);    
+                    }
                     actualTrigger.setIntrinsic(false);
                     affectedCard.addTrigger(actualTrigger).setTemporary(true);
                 }
