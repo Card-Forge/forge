@@ -1616,7 +1616,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
     }
 
     private static void rememberBouncedThisTurn(Player ai, Card c) {
-        System.out.println("Remembering Bounce: " + c);
         AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.BOUNCED_THIS_TURN);
     }
 
