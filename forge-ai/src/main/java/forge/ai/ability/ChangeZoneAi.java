@@ -128,13 +128,16 @@ public class ChangeZoneAi extends SpellAbilityAi {
      */
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+        if (sa.isReplacementAbility() && "Command".equals(sa.getParam("Destination")) && "ReplacedCard".equals(sa.getParam("Defined"))) {
+            // Process the commander replacement effect ("return to Command zone instead")
+            return doReturnCommanderLogic(sa, aiPlayer);
+        }
+
         if (isHidden(sa)) {
             return hiddenTriggerAI(aiPlayer, sa, mandatory);
         }
         return knownOriginTriggerAI(aiPlayer, sa, mandatory);
     }
-
-
 
     // *************************************************************************************
     // ************ Hidden Origin (Library/Hand/Sideboard/Non-targetd other)
@@ -663,7 +666,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
-
         if (isHidden(sa)) {
             return true;
         }
@@ -1280,7 +1282,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @return a boolean.
      */
     private static boolean knownOriginTriggerAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
-
         if (sa.getTargetRestrictions() == null) {
             // Just in case of Defined cases
             if (!mandatory && sa.hasParam("AttachedTo")) {
@@ -1588,7 +1589,34 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return false;
     }
 
+    public boolean doReturnCommanderLogic(SpellAbility sa, Player aiPlayer) {
+        Map<String, Object> originalParams = (Map<String, Object>)sa.getReplacingObject("OriginalParams");
+        SpellAbility causeSa = (SpellAbility)originalParams.get("Cause");
+        SpellAbility causeSub = null;
+        
+        if (causeSa != null && (causeSub = causeSa.getSubAbility()) != null) {
+            ApiType subApi = causeSub.getApi();
+            
+            if ((subApi == ApiType.DelayedTrigger || subApi == ApiType.ChangeZone)
+                    && "Exile".equals(causeSub.getParam("Origin"))
+                    && "Battlefield".equals(causeSub.getParam("Destination"))) {
+                // This is some kind of a blink effect, the commander will be back, so don't put him in Command zone instead
+                // TODO: if this is too permissive, maybe make it also dependent on who's activating causeSa (activating player should be aiPlayer?)
+                return false;
+            } else if (causeSa.getHostCard() != null && causeSa.getHostCard().equals((Card)sa.getReplacingObject("Card"))
+                    && causeSa.getActivatingPlayer().equals(aiPlayer)) {
+                // This is an intrinsic effect that blinks the card (e.g. Obzedat, Ghost Council), no need to
+                // return the commander to the Command zone.
+                return false;
+            }
+        }
+        
+        // Normally we want the commander back in Command zone to recast him later
+        return true;
+    }
+
     private static void rememberBouncedThisTurn(Player ai, Card c) {
+        System.out.println("Remembering Bounce: " + c);
         AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.BOUNCED_THIS_TURN);
     }
 
