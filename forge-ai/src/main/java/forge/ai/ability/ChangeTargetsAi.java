@@ -6,6 +6,7 @@ import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
+import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -48,6 +49,14 @@ public class ChangeTargetsAi extends SpellAbilityAi {
         if (!topSa.usesTargeting() || topSa.getTargets().getTargetCards().contains(sa.getHostCard())) {
             // if this does not target at all or already targets host, no need to redirect it again
             return false;
+        }
+
+        for (Card tgt : topSa.getTargets().getTargetCards()) {
+            // We are already targeting at least one card with the same name (e.g. in presence of 2+ Spellskites),
+            // no need to retarget again to another one
+            if (ComputerUtilAbility.getAbilitySourceName(sa).equals(tgt.getName()) && tgt.getController().equals(aiPlayer)) {
+                return false;
+            }
         }
 
         if (topSa.getHostCard() != null && !topSa.getHostCard().getController().isOpponentOf(aiPlayer)) {
