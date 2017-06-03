@@ -1475,6 +1475,7 @@ forge-gui/release-files/CHANGES.txt -text
 forge-gui/release-files/CONTRIBUTORS.txt -text
 forge-gui/release-files/INSTALLATION.txt -text
 forge-gui/release-files/ISSUES.txt -text
+forge-gui/res/ai/Cautious.ai -text
 forge-gui/res/ai/Default.ai -text
 forge-gui/res/ai/Experimental.ai -text
 forge-gui/res/ai/Reckless.ai -text
