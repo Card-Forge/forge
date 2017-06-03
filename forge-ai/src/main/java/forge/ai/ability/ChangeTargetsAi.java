@@ -52,9 +52,9 @@ public class ChangeTargetsAi extends SpellAbilityAi {
         }
 
         for (Card tgt : topSa.getTargets().getTargetCards()) {
-            // We are already targeting at least one card with the same name (e.g. in presence of 2+ Spellskites),
-            // no need to retarget again to another one
             if (ComputerUtilAbility.getAbilitySourceName(sa).equals(tgt.getName()) && tgt.getController().equals(aiPlayer)) {
+                // We are already targeting at least one card with the same name (e.g. in presence of 2+ Spellskites),
+                // no need to retarget again to another one
                 return false;
             }
         }
