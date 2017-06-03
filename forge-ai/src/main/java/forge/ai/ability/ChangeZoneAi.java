@@ -1597,12 +1597,18 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (causeSa != null && (causeSub = causeSa.getSubAbility()) != null) {
             ApiType subApi = causeSub.getApi();
             
-            if ((subApi == ApiType.DelayedTrigger || subApi == ApiType.ChangeZone)
-                    && "Exile".equals(causeSub.getParam("Origin"))
+            if (subApi == ApiType.ChangeZone && "Exile".equals(causeSub.getParam("Origin"))
                     && "Battlefield".equals(causeSub.getParam("Destination"))) {
-                // This is some kind of a blink effect, the commander will be back, so don't put him in Command zone instead
-                // TODO: if this is too permissive, maybe make it also dependent on who's activating causeSa (activating player should be aiPlayer?)
+                // A blink effect implemented using ChangeZone API
                 return false;
+            } else if (subApi == ApiType.DelayedTrigger) {
+                SpellAbility exec = causeSub.getAdditonalAbility("Execute");
+                if (exec != null && exec.getApi() == ApiType.ChangeZone) {
+                    if ("Exile".equals(exec.getParam("Origin")) && "Battlefield".equals(exec.getParam("Destination"))) {
+                        // A blink effect implemented using a delayed trigger
+                        return false;
+                    }
+                }
             } else if (causeSa.getHostCard() != null && causeSa.getHostCard().equals((Card)sa.getReplacingObject("Card"))
                     && causeSa.getActivatingPlayer().equals(aiPlayer)) {
                 // This is an intrinsic effect that blinks the card (e.g. Obzedat, Ghost Council), no need to
