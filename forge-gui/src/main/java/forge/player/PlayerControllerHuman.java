@@ -1733,7 +1733,7 @@ public class PlayerControllerHuman
             game.getAction().invoke(new Runnable() {
                 @Override
                 public void run() {
-                    game.getAction().moveToHand(card);
+                    game.getAction().moveToHand(card, null);
                 }
             });
         }
@@ -1861,7 +1861,7 @@ public class PlayerControllerHuman
             final PaperCard c = carddb.getUniqueByName(f.getName());
 
             game.getAction().invoke(new Runnable() { @Override public void run() {
-                game.getAction().moveToHand(Card.fromPaperCard(c, p));
+                game.getAction().moveToHand(Card.fromPaperCard(c, p), null);
             }});
         }
 
@@ -1884,7 +1884,7 @@ public class PlayerControllerHuman
                 for (Card c : selection)
                 {
                     if (c == null) { continue; }
-                    if (game.getAction().moveTo(ZoneType.Exile, c) != null)
+                    if (game.getAction().moveTo(ZoneType.Exile, c, null) != null)
                     {
                         StringBuilder sb = new StringBuilder();
                         sb.append(p).append(" exiles ").append(c).append(" due to Dev Cheats.");
@@ -1917,7 +1917,7 @@ public class PlayerControllerHuman
                 for (Card c : selection)
                 {
                     if (c == null) { continue; }
-                    if (game.getAction().moveTo(ZoneType.Exile, c) != null)
+                    if (game.getAction().moveTo(ZoneType.Exile, c, null) != null)
                     {
                         StringBuilder sb = new StringBuilder();
                         sb.append(p).append(" exiles ").append(c).append(" due to Dev Cheats.");
@@ -1958,8 +1958,8 @@ public class PlayerControllerHuman
                     final Card forgeCard = Card.fromPaperCard(c, p);
 
                     if (c.getRules().getType().isLand()) {
-                        game.getAction().moveToHand(forgeCard); //this is needed to ensure land abilities fire
-                        game.getAction().moveToPlay(forgeCard);
+                        game.getAction().moveToHand(forgeCard, null); //this is needed to ensure land abilities fire
+                        game.getAction().moveToPlay(forgeCard, null);
                         game.getTriggerHandler().runWaitingTriggers(); //ensure triggered abilities fire
                     }
                     else {
@@ -1979,7 +1979,7 @@ public class PlayerControllerHuman
                             return; // happens if cancelled
                         }
 
-                        game.getAction().moveToHand(forgeCard); // this is really needed (for rollbacks at least)
+                        game.getAction().moveToHand(forgeCard, null); // this is really needed (for rollbacks at least)
                         // Human player is choosing targets for an ability controlled by chosen player.
                         sa.setActivatingPlayer(p);
                         HumanPlay.playSaWithoutPayingManaCost(PlayerControllerHuman.this, game, sa, true);
@@ -2034,7 +2034,7 @@ public class PlayerControllerHuman
             forgeCard.setOwner(p);
             game.getAction().invoke(new Runnable() {
                 @Override public void run() {
-                    game.getAction().changeZone(null, p.getZone(ZoneType.PlanarDeck), forgeCard, 0);
+                    game.getAction().changeZone(null, p.getZone(ZoneType.PlanarDeck), forgeCard, 0, null);
                     PlanarDice.roll(p, PlanarDice.Planeswalk);
                 }
             });

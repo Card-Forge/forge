@@ -89,7 +89,7 @@ public class Match {
             Multimap<Player, Card> list = game.chooseCardsForAnte(rules.getMatchAnteRarity());
             for (Entry<Player, Card> kv : list.entries()) {
                 Player p = kv.getKey();
-                game.getAction().moveTo(ZoneType.Ante, kv.getValue());
+                game.getAction().moveTo(ZoneType.Ante, kv.getValue(), null);
                 game.getGameLog().add(GameLogEntryType.ANTE, p + " anted " + kv.getValue());
             }
             game.fireEvent(new GameEventAnteCardsSelected(list));

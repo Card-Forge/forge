@@ -31,7 +31,7 @@ public class AttachEffect extends SpellAbilityEffect {
             // move the card into play before Attaching
             
             sa.getHostCard().setController(ap, 0);
-            final Card c = ap.getGame().getAction().moveTo(ap.getZone(ZoneType.Battlefield), sa.getHostCard());
+            final Card c = ap.getGame().getAction().moveTo(ap.getZone(ZoneType.Battlefield), sa.getHostCard(), sa);
             sa.setHostCard(c);
         }
 

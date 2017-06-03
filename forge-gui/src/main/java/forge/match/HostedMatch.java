@@ -316,7 +316,12 @@ public class HostedMatch {
 
         @Subscribe
         public void receiveEvent(final UiEvent evt) {
-            evt.visit(this);
+            try {
+                evt.visit(this);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
         }
     }
 

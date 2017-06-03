@@ -87,7 +87,7 @@ public class ZoneExchangeEffect extends SpellAbilityEffect {
             object2.enchantEntity(c);
         }
         // Exchange Zone
-        game.getAction().moveTo(zone2, object1);
-        game.getAction().moveTo(zone1, object2);
+        game.getAction().moveTo(zone2, object1, sa);
+        game.getAction().moveTo(zone1, object2, sa);
     }
 }

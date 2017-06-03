@@ -76,7 +76,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
 
             List<Card> newLibrary = playerLibraries.get(player);
             for (Card c : newLibrary) {
-                action.moveToLibrary(c, 0);
+                action.moveToLibrary(c, 0, sa);
             }
 
             player.shuffle(null);

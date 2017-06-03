@@ -378,9 +378,9 @@ public abstract class GameState {
                     c.setCounters(new HashMap<CounterType, Integer>());
                     p.getZone(ZoneType.Hand).add(c);
                     if (c.isAura()) {
-                        p.getGame().getAction().moveToPlay(c);
+                        p.getGame().getAction().moveToPlay(c, null);
                     } else {
-                        p.getGame().getAction().moveToPlay(c);
+                        p.getGame().getAction().moveToPlay(c, null);
                     }
 
                     c.setTapped(tapped);

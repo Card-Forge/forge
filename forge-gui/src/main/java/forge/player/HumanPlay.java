@@ -120,7 +120,7 @@ public class HumanPlay {
             }
         } else if (payManaCostIfNeeded(controller, p, sa)) {
             if (sa.isSpell() && !source.isCopiedSpell()) {
-                sa.setHostCard(p.getGame().getAction().moveToStack(source));
+                sa.setHostCard(p.getGame().getAction().moveToStack(source, sa));
             }
 
             p.getGame().getStack().add(sa);
@@ -202,7 +202,7 @@ public class HumanPlay {
             if (sa.isSpell()) {
                 final Card c = sa.getHostCard();
                 if (!c.isCopiedSpell()) {
-                    sa.setHostCard(game.getAction().moveToStack(c));
+                    sa.setHostCard(game.getAction().moveToStack(c, sa));
                 }
             }
             game.getStack().add(sa);
@@ -512,7 +512,7 @@ public class HumanPlay {
 
                     CardCollection cards = new CardCollection(p.getCardsIn(ZoneType.Graveyard));
                     for (final Card card : cards) {
-                        exiledList.add(p.getGame().getAction().exile(card));
+                        exiledList.add(p.getGame().getAction().exile(card, null));
                     }
                 }
                 else {
@@ -530,7 +530,7 @@ public class HumanPlay {
                         }
                         list = list.subList(0, nNeeded);
                         for (Card c : list) {
-                            exiledList.add(p.getGame().getAction().exile(c));
+                            exiledList.add(p.getGame().getAction().exile(c, null));
                         }
                     } else {
                         // replace this with input
@@ -541,7 +541,7 @@ public class HumanPlay {
                             }
 
                             list.remove(c);
-                            exiledList.add(p.getGame().getAction().exile(c));
+                            exiledList.add(p.getGame().getAction().exile(c, null));
                         }
                     }
                 }
@@ -595,7 +595,7 @@ public class HumanPlay {
 
                         if (c != null) {
                             typeList.remove(c);
-                            p.getGame().getAction().moveToLibrary(c, Integer.parseInt(((CostPutCardToLib) part).getLibPos()));
+                            p.getGame().getAction().moveToLibrary(c, Integer.parseInt(((CostPutCardToLib) part).getLibPos()), null);
                         }
                         else {
                             return false;
@@ -746,12 +746,12 @@ public class HumanPlay {
 
             for (final Card c : cardsToDelve) {
                 hostCard.addDelved(c);
-                delved.add(game.getAction().exile(c));
+                delved.add(game.getAction().exile(c, null));
             }
 
             if (!delved.isEmpty()) {
                 triggerList.put(ZoneType.Graveyard, delved);
-                final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                final Map<String, Object> runParams = Maps.newHashMap();
                 runParams.put("Cards", triggerList);
                 runParams.put("Destination", ZoneType.Exile);
                 game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);

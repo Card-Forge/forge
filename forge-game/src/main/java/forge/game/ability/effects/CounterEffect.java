@@ -171,29 +171,29 @@ public class CounterEffect extends SpellAbilityEffect {
             // For Ability-targeted counterspells - do not move it anywhere,
             // even if Destination$ is specified.
         } else if (tgtSA.isFlashBackAbility() || tgtSA.isAftermath())  {
-            game.getAction().exile(tgtSA.getHostCard());
+            game.getAction().exile(tgtSA.getHostCard(), srcSA);
         } else if (destination.equals("Graveyard")) {
-            game.getAction().moveToGraveyard(tgtSA.getHostCard());
+            game.getAction().moveToGraveyard(tgtSA.getHostCard(), srcSA);
         } else if (destination.equals("Exile")) {
-            game.getAction().exile(tgtSA.getHostCard());
+            game.getAction().exile(tgtSA.getHostCard(), srcSA);
         } else if (destination.equals("TopOfLibrary")) {
-            game.getAction().moveToLibrary(tgtSA.getHostCard());
+            game.getAction().moveToLibrary(tgtSA.getHostCard(), srcSA);
         } else if (destination.equals("Hand")) {
-            game.getAction().moveToHand(tgtSA.getHostCard());
+            game.getAction().moveToHand(tgtSA.getHostCard(), srcSA);
         } else if (destination.equals("Battlefield")) {
             if (tgtSA instanceof SpellPermanent) {
                 Card c = tgtSA.getHostCard();
                 System.out.println(c + " is SpellPermanent");
                 c.setController(srcSA.getActivatingPlayer(), 0);
-                game.getAction().moveToPlay(c, srcSA.getActivatingPlayer());
+                game.getAction().moveToPlay(c, srcSA.getActivatingPlayer(), srcSA);
             } else {
-                Card c = game.getAction().moveToPlay(tgtSA.getHostCard(), srcSA.getActivatingPlayer());
+                Card c = game.getAction().moveToPlay(tgtSA.getHostCard(), srcSA.getActivatingPlayer(), srcSA);
                 c.setController(srcSA.getActivatingPlayer(), 0);
             }
         } else if (destination.equals("BottomOfLibrary")) {
-            game.getAction().moveToBottomOfLibrary(tgtSA.getHostCard());
+            game.getAction().moveToBottomOfLibrary(tgtSA.getHostCard(), srcSA);
         } else if (destination.equals("ShuffleIntoLibrary")) {
-            game.getAction().moveToBottomOfLibrary(tgtSA.getHostCard());
+            game.getAction().moveToBottomOfLibrary(tgtSA.getHostCard(), srcSA);
             tgtSA.getHostCard().getController().shuffle(srcSA);
         } else {
             throw new IllegalArgumentException("AbilityFactory_CounterMagic: Invalid Destination argument for card "

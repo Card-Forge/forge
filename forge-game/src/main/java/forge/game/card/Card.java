@@ -520,7 +520,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         Game game = p.getGame();
 		// Just in case you aren't the controller, now you are!
         this.setController(p, game.getNextTimestamp());
-        Card c = game.getAction().moveToPlay(this, p);
+        Card c = game.getAction().moveToPlay(this, p, null);
         c.setPreFaceDownState(CardStateName.Original);
         // Mark this card as "manifested"
         c.setManifested(true);

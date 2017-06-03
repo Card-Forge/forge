@@ -618,7 +618,7 @@ public class Game {
             } else {
                 c.removeTempController(p);
                 if (c.getController().equals(p)) {
-                    this.getAction().exile(c);
+                    this.getAction().exile(c, null);
                 }
             }
         }

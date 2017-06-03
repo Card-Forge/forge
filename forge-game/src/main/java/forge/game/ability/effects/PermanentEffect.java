@@ -20,7 +20,7 @@ public class PermanentEffect extends SpellAbilityEffect {
         sa.getHostCard().setController(p, 0);
         final Card host = sa.getHostCard();
 
-        final Card c = p.getGame().getAction().moveToPlay(host, p);
+        final Card c = p.getGame().getAction().moveToPlay(host, p, sa);
         sa.setHostCard(c);
 
         // some extra for Dashing

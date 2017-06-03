@@ -117,7 +117,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
                 @Override public void run() {
                     final CardCollection hand = new CardCollection(c0.getController().getCardsIn(ZoneType.Hand));
                     for (final Card c : hand) {
-                        player.getGame().getAction().exile(c);
+                        player.getGame().getAction().exile(c, null);
                     }
                     c0.getController().drawCards(hand.size());
                     cardSelectLocked = false;

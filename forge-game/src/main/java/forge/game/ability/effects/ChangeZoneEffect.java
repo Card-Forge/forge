@@ -458,7 +458,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
 
-                movedCard = game.getAction().moveToLibrary(tgtC, libraryPosition);
+                movedCard = game.getAction().moveToLibrary(tgtC, libraryPosition, sa);
 
             } else {
                 if (destination.equals(ZoneType.Battlefield)) {
@@ -549,7 +549,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                     }
 
-                    movedCard = game.getAction().moveTo(tgtC.getController().getZone(destination), tgtC);
+                    movedCard = game.getAction().moveTo(tgtC.getController().getZone(destination), tgtC, sa);
                     if (sa.hasParam("Unearth")) {
                         movedCard.setUnearthed(true);
                         movedCard.addExtrinsicKeyword("Haste");
@@ -592,7 +592,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                         tgtC.setExiledWith(host);
                     }
-                    movedCard = game.getAction().moveTo(destination, tgtC);
+                    movedCard = game.getAction().moveTo(destination, tgtC, sa);
                     // If a card is Exiled from the stack, remove its spells from the stack
                     if (sa.hasParam("Fizzle")) {
                         if (tgtC.isInZone(ZoneType.Exile) || tgtC.isInZone(ZoneType.Hand) || tgtC.isInZone(ZoneType.Stack)) {
@@ -948,7 +948,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             Card movedCard = null;
             final Zone originZone = game.getZoneOf(c);
             if (destination.equals(ZoneType.Library)) {
-                movedCard = game.getAction().moveToLibrary(c, libraryPos);
+                movedCard = game.getAction().moveToLibrary(c, libraryPos, sa);
             }
             else if (destination.equals(ZoneType.Battlefield)) {
                 if (sa.hasParam("Tapped")) {
@@ -1083,7 +1083,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                     }
                 }
-                movedCard = game.getAction().moveTo(c.getController().getZone(destination), c);
+                movedCard = game.getAction().moveTo(c.getController().getZone(destination), c, sa);
                 if (sa.hasParam("Tapped")) {
                     movedCard.setTapped(true);
                 }
@@ -1093,7 +1093,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 movedCard.setTimestamp(ts);
             }
             else if (destination.equals(ZoneType.Exile)) {
-                movedCard = game.getAction().exile(c);
+                movedCard = game.getAction().exile(c, sa);
                 if (!c.isToken()) {
                     Card host = sa.getOriginalHost();
                     if (host == null) {
@@ -1106,7 +1106,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
             }
             else {
-                movedCard = game.getAction().moveTo(destination, c);
+                movedCard = game.getAction().moveTo(destination, c, sa);
             }
             
             movedCards.add(movedCard);
@@ -1178,24 +1178,24 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (tgtSA.isAbility()) {
                 // Shouldn't be able to target Abilities but leaving this in for now
             } else if (tgtSA.isFlashBackAbility() || tgtSA.isAftermath())  {
-                game.getAction().exile(tgtSA.getHostCard());
+                game.getAction().exile(tgtSA.getHostCard(), srcSA);
             } else if (srcSA.getParam("Destination").equals("Graveyard")) {
-                game.getAction().moveToGraveyard(tgtSA.getHostCard());
+                game.getAction().moveToGraveyard(tgtSA.getHostCard(), srcSA);
             } else if (srcSA.getParam("Destination").equals("Exile")) {
                 Card host = srcSA.getOriginalHost();
                 if (host == null) {
                     host = srcSA.getHostCard();
                 }
                 tgtSA.getHostCard().setExiledWith(host);
-                game.getAction().exile(tgtSA.getHostCard());
+                game.getAction().exile(tgtSA.getHostCard(), srcSA);
             } else if (srcSA.getParam("Destination").equals("TopOfLibrary")) {
-                game.getAction().moveToLibrary(tgtSA.getHostCard());
+                game.getAction().moveToLibrary(tgtSA.getHostCard(), srcSA);
             } else if (srcSA.getParam("Destination").equals("Hand")) {
-                game.getAction().moveToHand(tgtSA.getHostCard());
+                game.getAction().moveToHand(tgtSA.getHostCard(), srcSA);
             } else if (srcSA.getParam("Destination").equals("BottomOfLibrary")) {
-                game.getAction().moveToBottomOfLibrary(tgtSA.getHostCard());
+                game.getAction().moveToBottomOfLibrary(tgtSA.getHostCard(), srcSA);
             } else if (srcSA.getParam("Destination").equals("Library")) {
-                game.getAction().moveToBottomOfLibrary(tgtSA.getHostCard());
+                game.getAction().moveToBottomOfLibrary(tgtSA.getHostCard(), srcSA);
                 if (srcSA.hasParam("Shuffle") && "True".equals(srcSA.getParam("Shuffle"))) {
                     tgtSA.getHostCard().getOwner().shuffle(srcSA);
                 }

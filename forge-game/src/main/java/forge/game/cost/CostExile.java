@@ -152,7 +152,7 @@ public class CostExile extends CostPartWithList {
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard) {
         final Game game = targetCard.getGame();
-        return game.getAction().exile(targetCard);
+        return game.getAction().exile(targetCard, null);
     }
 
     public static final String HashLKIListKey = "Exiled";

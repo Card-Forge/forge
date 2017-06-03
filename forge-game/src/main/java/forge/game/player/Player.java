@@ -238,7 +238,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         activeScheme = getZone(ZoneType.SchemeDeck).get(0);
         // gameAction moveTo ?
-        game.getAction().moveTo(ZoneType.Command, activeScheme);
+        game.getAction().moveTo(ZoneType.Command, activeScheme, null);
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
         // Run triggers
@@ -1223,7 +1223,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         if (toBottom != null) {
             for(Card c : toBottom) {
-                getGame().getAction().moveToBottomOfLibrary(c);
+                getGame().getAction().moveToBottomOfLibrary(c, null);
                 numToBottom++;
             }
         }
@@ -1231,7 +1231,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (toTop != null) {
             Collections.reverse(toTop); // the last card in list will become topmost in library, have to revert thus.
             for(Card c : toTop) {
-                getGame().getAction().moveToLibrary(c);
+                getGame().getAction().moveToLibrary(c, null);
                 numToTop++;
             }
         }
@@ -1294,7 +1294,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
             }
 
-            c = game.getAction().moveToHand(c);
+            c = game.getAction().moveToHand(c, null);
             drawn.add(c);
 
             if (topCardRevealed) {
@@ -1503,16 +1503,16 @@ public class Player extends GameEntity implements Comparable<Player> {
         sb.append(this).append(" discards ").append(c);
         final Card newCard;
         if (discardToTopOfLibrary) {
-            newCard = game.getAction().moveToLibrary(c, 0);
+            newCard = game.getAction().moveToLibrary(c, 0, sa);
             sb.append(" to the library");
             // Play the Discard sound
         }
         else if (discardMadness) {
-            newCard = game.getAction().exile(c);
+            newCard = game.getAction().exile(c, sa);
             sb.append(" with Madness");
         }
         else {
-            newCard = game.getAction().moveToGraveyard(c);
+            newCard = game.getAction().moveToGraveyard(c, sa);
             // Play the Discard sound
         }
         sb.append(".");
@@ -1567,10 +1567,10 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         for (int i = 0; i < max; i++) {
             if (bottom) {
-                milled.add(game.getAction().moveTo(destination, lib.getLast()));
+                milled.add(game.getAction().moveTo(destination, lib.getLast(), null));
             }
             else {
-                milled.add(game.getAction().moveTo(destination, lib.getFirst()));
+                milled.add(game.getAction().moveTo(destination, lib.getFirst(), null));
             }
         }
         return milled;
@@ -1638,7 +1638,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (land.isFaceDown()) {
                 land.turnFaceUp();
             }
-            game.getAction().moveTo(getZone(ZoneType.Battlefield), land);
+            game.getAction().moveTo(getZone(ZoneType.Battlefield), land, null);
 
             // play a sound
             game.fireEvent(new GameEventLandPlayed(this, land));
@@ -2700,7 +2700,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         currentPlanes.addAll(destinations);
 
         for (Card c : currentPlanes) {
-            game.getAction().moveTo(ZoneType.Command,c);
+            game.getAction().moveTo(ZoneType.Command,c, null);
             //getZone(ZoneType.PlanarDeck).remove(c);
             //getZone(ZoneType.Command).add(c);
         }
@@ -2729,7 +2729,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             //game.getZoneOf(plane).remove(plane);
             plane.clearControllers();
             //getZone(ZoneType.PlanarDeck).add(plane);
-            game.getAction().moveTo(ZoneType.PlanarDeck, plane,-1);
+            game.getAction().moveTo(ZoneType.PlanarDeck, plane,-1, null);
         }
         currentPlanes.clear();
 

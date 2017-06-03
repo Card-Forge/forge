@@ -99,10 +99,10 @@ public class ClashEffect extends SpellAbilityEffect {
         if ((pLib.size() == 0) && (oLib.size() == 0)) {
             return false;
         } else if (pLib.isEmpty()) {
-            clashMoveToTopOrBottom(opponent, oCard);
+            clashMoveToTopOrBottom(opponent, oCard, sa);
             return false;
         } else if (oLib.isEmpty()) {
-            clashMoveToTopOrBottom(player, pCard);
+            clashMoveToTopOrBottom(player, pCard, sa);
             return true;
         } else {
             final int pCMC = pCard.getCMC();
@@ -117,19 +117,19 @@ public class ClashEffect extends SpellAbilityEffect {
             reveal.append(player).append(pCMC > oCMC ? " wins clash." : " loses clash.");
             
             player.getGame().getAction().nofityOfValue(sa, source, reveal.toString(), null);
-            clashMoveToTopOrBottom(player, pCard);
-            clashMoveToTopOrBottom(opponent, oCard);
+            clashMoveToTopOrBottom(player, pCard, sa);
+            clashMoveToTopOrBottom(opponent, oCard, sa);
             return pCMC > oCMC;
         }
     }
 
-    private static void clashMoveToTopOrBottom(final Player p, final Card c) {
+    private static void clashMoveToTopOrBottom(final Player p, final Card c, final SpellAbility sa) {
         final GameAction action = p.getGame().getAction();
         final boolean putOnTop = p.getController().willPutCardOnTop(c);
         if (putOnTop) {
-            action.moveToLibrary(c);
+            action.moveToLibrary(c, sa);
         } else {
-            action.moveToBottomOfLibrary(c);
+            action.moveToBottomOfLibrary(c, sa);
         }
         // computer just puts the card back until such time it can make a smarter decision
     }

@@ -23,7 +23,7 @@ public class EndTurnEffect extends SpellAbilityEffect {
         // Time Stop, though it will continue to resolve. It also includes
         // spells and abilities that can't be countered.
         for (final Card c : game.getStackZone().getCards()) {
-            game.getAction().exile(c);
+            game.getAction().exile(c, sa);
         }
         game.getStack().clear();
         game.getStack().clearSimultaneousStack();

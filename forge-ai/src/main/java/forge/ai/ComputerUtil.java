@@ -101,7 +101,7 @@ public class ComputerUtil {
             source.setCastSA(sa);
             sa.setLastStateBattlefield(game.getLastStateBattlefield());
             sa.setLastStateGraveyard(game.getLastStateGraveyard());
-            sa.setHostCard(game.getAction().moveToStack(source));
+            sa.setHostCard(game.getAction().moveToStack(source, sa));
 
             if (source.getType().hasStringType("Arcane")) {
                 sa = AbilityUtils.addSpliceEffects(sa);
@@ -227,7 +227,7 @@ public class ComputerUtil {
             source.setCastSA(sa);
             sa.setLastStateBattlefield(game.getLastStateBattlefield());
             sa.setLastStateGraveyard(game.getLastStateGraveyard());
-            sa.setHostCard(game.getAction().moveToStack(source));
+            sa.setHostCard(game.getAction().moveToStack(source, sa));
         }
         final Cost cost = sa.getPayCosts();
         if (cost == null) {
@@ -251,7 +251,7 @@ public class ComputerUtil {
             source.setCastSA(sa);
             sa.setLastStateBattlefield(game.getLastStateBattlefield());
             sa.setLastStateGraveyard(game.getLastStateGraveyard());
-            sa.setHostCard(game.getAction().moveToStack(source));
+            sa.setHostCard(game.getAction().moveToStack(source, sa));
         }
 
         ai.getGame().getStack().add(sa);
@@ -270,7 +270,7 @@ public class ComputerUtil {
             source.setCastSA(newSA);
             sa.setLastStateBattlefield(game.getLastStateBattlefield());
             sa.setLastStateGraveyard(game.getLastStateGraveyard());
-            newSA.setHostCard(game.getAction().moveToStack(source));
+            newSA.setHostCard(game.getAction().moveToStack(source, sa));
         }
 
         final CostPayment pay = new CostPayment(newSA.getPayCosts(), newSA);
@@ -289,7 +289,7 @@ public class ComputerUtil {
                 source.setCastSA(sa);
                 sa.setLastStateBattlefield(game.getLastStateBattlefield());
                 sa.setLastStateGraveyard(game.getLastStateGraveyard());
-                sa.setHostCard(game.getAction().moveToStack(source));
+                sa.setHostCard(game.getAction().moveToStack(source, sa));
             }
 
             final Cost cost = sa.getPayCosts();

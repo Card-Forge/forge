@@ -79,7 +79,7 @@ public class PlayLandVariantEffect extends SpellAbilityEffect {
         source.setImageKey(imageFileName);
         
         source.setController(activator, 0);
-        game.getAction().moveTo(activator.getZone(ZoneType.Battlefield), source);
+        game.getAction().moveTo(activator.getZone(ZoneType.Battlefield), source, sa);
 
         // play a sound
         game.fireEvent(new GameEventLandPlayed(activator, source));

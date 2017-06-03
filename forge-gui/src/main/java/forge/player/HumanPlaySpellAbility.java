@@ -114,7 +114,7 @@ public class HumanPlaySpellAbility {
             c.setCastSA(ability);
             ability.setLastStateBattlefield(game.getLastStateBattlefield());
             ability.setLastStateGraveyard(game.getLastStateGraveyard());
-            ability.setHostCard(game.getAction().moveToStack(c));
+            ability.setHostCard(game.getAction().moveToStack(c, null));
         }
 
         ability.resetPaidHash();
@@ -158,7 +158,7 @@ public class HumanPlaySpellAbility {
                 rollbackAbility(fromZone, fromState, zonePosition);
                 if (ability.getHostCard().isMadness()) {
                     // if a player failed to play madness cost, move the card to graveyard
-                    Card newCard = game.getAction().moveToGraveyard(c);
+                    Card newCard = game.getAction().moveToGraveyard(c, null);
                     newCard.setMadnessWithoutCast(true);
                     newCard.setMadness(false);
                 } else if (ability.getHostCard().isBestowed()) {
@@ -245,7 +245,7 @@ public class HumanPlaySpellAbility {
 
         if (fromZone != null) { // and not a copy
             // add back to where it came from
-            game.getAction().moveTo(fromZone, ability.getHostCard(), zonePosition >= 0 ? Integer.valueOf(zonePosition) : null);
+            game.getAction().moveTo(fromZone, ability.getHostCard(), zonePosition >= 0 ? Integer.valueOf(zonePosition) : null, null);
             ability.getHostCard().setState(fromState, true);
         }
 

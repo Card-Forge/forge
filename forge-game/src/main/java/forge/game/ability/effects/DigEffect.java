@@ -306,10 +306,10 @@ public class DigEffect extends SpellAbilityEffect {
                             if (libraryPosition == -1 || libraryPosition > zone.size()) {
                                 libraryPosition = zone.size();
                             }
-                            c = game.getAction().moveTo(zone, c, libraryPosition);
+                            c = game.getAction().moveTo(zone, c, libraryPosition, sa);
                         }
                         else {
-                            c = game.getAction().moveTo(zone, c);
+                            c = game.getAction().moveTo(zone, c, sa);
                             if (destZone1.equals(ZoneType.Battlefield)) {
                                 for (final String kw : keywords) {
                                     c.addExtrinsicKeyword(kw);
@@ -352,10 +352,10 @@ public class DigEffect extends SpellAbilityEffect {
                         }
                         for (final Card c : afterOrder) {
                             if (destZone2 == ZoneType.Library) {
-                                game.getAction().moveToLibrary(c, libraryPosition2);
+                                game.getAction().moveToLibrary(c, libraryPosition2, sa);
                             }
                             else {
-                                game.getAction().moveToVariantDeck(c, destZone2, libraryPosition2);
+                                game.getAction().moveToVariantDeck(c, destZone2, libraryPosition2, sa);
                             }
                         }
                     }
@@ -364,7 +364,7 @@ public class DigEffect extends SpellAbilityEffect {
                         for (int i = 0; i < rest.size(); i++) {
                             Card c = rest.get(i);
                             final PlayerZone toZone = c.getOwner().getZone(destZone2);
-                            c = game.getAction().moveTo(toZone, c);
+                            c = game.getAction().moveTo(toZone, c, sa);
                             if (destZone2.equals(ZoneType.Battlefield) && !keywords.isEmpty()) {
                                 for (final String kw : keywords) {
                                     c.addExtrinsicKeyword(kw);

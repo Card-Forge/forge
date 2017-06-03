@@ -123,7 +123,7 @@ public class Untap extends Phase {
 
         CardCollection bounceList = CardLists.getKeyword(list, "During your next untap step, as you untap your permanents, return CARDNAME to its owner's hand.");
         for (final Card c : bounceList) {
-            game.getAction().moveToHand(c);
+            game.getAction().moveToHand(c, null);
         }
         list.removeAll((Collection<?>)bounceList);
 

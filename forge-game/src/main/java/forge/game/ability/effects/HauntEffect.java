@@ -11,7 +11,7 @@ public class HauntEffect extends SpellAbilityEffect {
         final Card card = sa.getHostCard();
         if (sa.usesTargeting() && !card.isToken()) {
             // haunt target but only if card is no token
-            final Card copy = card.getGame().getAction().exile(card);
+            final Card copy = card.getGame().getAction().exile(card, sa);
             sa.getTargets().getFirstTargetedCard().addHauntedBy(copy);
         } else if (!sa.usesTargeting() && card.getHaunting() != null) {
             // unhaunt

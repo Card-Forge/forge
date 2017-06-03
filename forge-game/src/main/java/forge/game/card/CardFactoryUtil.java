@@ -99,7 +99,7 @@ public class CardFactoryUtil {
 
             @Override
             public void resolve() {
-                Card c = hostCard.getGame().getAction().moveToPlay(hostCard);
+                Card c = hostCard.getGame().getAction().moveToPlay(hostCard, this);
                 c.setPreFaceDownState(CardStateName.Original);
             }
 
@@ -238,7 +238,7 @@ public class CardFactoryUtil {
             @Override
             public void resolve() {
                 final Game game = sourceCard.getGame();
-                final Card c = game.getAction().exile(sourceCard);
+                final Card c = game.getAction().exile(sourceCard, this);
 
                 int counters = AbilityUtils.calculateAmount(c, timeCounters, this);
                 c.addCounter(CounterType.TIME, counters, c, true);

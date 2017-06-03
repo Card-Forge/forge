@@ -155,7 +155,7 @@ public class CostPutCardToLib extends CostPartWithList {
 
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard) {
-        return targetCard.getGame().getAction().moveToLibrary(targetCard, Integer.parseInt(getLibPos()));
+        return targetCard.getGame().getAction().moveToLibrary(targetCard, Integer.parseInt(getLibPos()),null);
     }
 
     public <T> T accept(ICostVisitor<T> visitor) {

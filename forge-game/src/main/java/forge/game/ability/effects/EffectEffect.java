@@ -262,7 +262,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
                 @Override
                 public void run() {
-                    game.getAction().exile(eff);
+                    game.getAction().exile(eff, null);
                 }
             };
 
@@ -295,7 +295,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
         // TODO: Add targeting to the effect so it knows who it's dealing with
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff);
+        game.getAction().moveTo(ZoneType.Command, eff, sa);
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         //if (effectTriggers != null) {
         //    game.getTriggerHandler().registerActiveTrigger(cmdEffect, false);

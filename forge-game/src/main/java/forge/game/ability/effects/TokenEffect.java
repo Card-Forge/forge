@@ -333,7 +333,7 @@ public class TokenEffect extends SpellAbilityEffect {
                     if (this.tokenTapped) {
                         tok.setTapped(true);
                     }
-                    game.getAction().moveToPlay(tok);
+                    game.getAction().moveToPlay(tok, sa);
                 }
                 game.fireEvent(new GameEventTokenCreated());
 

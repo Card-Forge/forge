@@ -141,7 +141,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (ability.isSpell()) {
             final Card source = ability.getHostCard();
             if (!source.isCopiedSpell() && !source.isInZone(ZoneType.Stack)) {
-                ability.setHostCard(game.getAction().moveToStack(source));
+                ability.setHostCard(game.getAction().moveToStack(source, ability));
             }
         }
 
@@ -576,14 +576,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             // Handle cards that need to be moved differently
             // TODO: replacement effects: Rebound, Buyback and Soulfire Grand Master
             source.removeAllExtrinsicKeyword("Move CARDNAME to your hand as it resolves");
-            game.getAction().moveToHand(source);
+            game.getAction().moveToHand(source, sa);
         }
         else if (sa.isFlashBackAbility()) {
-            game.getAction().exile(source);
+            game.getAction().exile(source, sa);
             sa.setFlashBackAbility(false);
         }
         else if (sa.isAftermath()) {
-            game.getAction().exile(source);
+            game.getAction().exile(source, sa);
         }
         else if (source.hasKeyword("Rebound")
                 && !fizzle
@@ -592,7 +592,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 && source.getOwner().equals(source.getController())) //"If you cast this spell from your hand"
         {
             //Move rebounding card to exile
-            source = game.getAction().exile(source);
+            source = game.getAction().exile(source, null);
 
             source.setSVar("ReboundAbilityTrigger", "DB$ Play | Defined$ Self "
                     + "| WithoutManaCost$ True | Optional$ True");
@@ -609,7 +609,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 (source.isInstant() || source.isSorcery() || fizzle) &&
                 source.isInZone(ZoneType.Stack)) {
             // If Spell and still on the Stack then let it goto the graveyard or replace its own movement
-            game.getAction().moveToGraveyard(source);
+            game.getAction().moveToGraveyard(source, null);
         }
     }
 

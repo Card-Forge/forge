@@ -11,6 +11,6 @@ import forge.game.spellability.SpellAbility;
 public class ETBReplacementEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
-        sa.getActivatingPlayer().getGame().getAction().moveToPlay(((Card) sa.getReplacingObject("Card")));
+        sa.getActivatingPlayer().getGame().getAction().moveToPlay(((Card) sa.getReplacingObject("Card")), sa);
     }
 }

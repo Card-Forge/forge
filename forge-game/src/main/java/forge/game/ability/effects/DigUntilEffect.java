@@ -149,7 +149,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
 
                 if (foundDest != null) {
                     // Allow ordering of found cards
-                    if ((foundDest.isKnown()) && found.size() >= 2) {
+                    if ((foundDest.isKnown()) && found.size() >= 2 && !foundDest.equals(ZoneType.Exile)) {
                         found = (CardCollection)p.getController().orderMoveToZoneList(found, foundDest);
                     }
 
@@ -158,11 +158,11 @@ public class DigUntilEffect extends SpellAbilityEffect {
                         final Card c = itr.next();
                         if (sa.hasParam("GainControl") && foundDest.equals(ZoneType.Battlefield)) {
                             c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
-                            game.getAction().moveTo(c.getController().getZone(foundDest), c);
+                            game.getAction().moveTo(c.getController().getZone(foundDest), c, sa);
                         } else if (sa.hasParam("NoMoveFound") && foundDest.equals(ZoneType.Library)) {
                             //Don't do anything
                         } else {
-                            game.getAction().moveTo(foundDest, c, foundLibPos);
+                            game.getAction().moveTo(foundDest, c, foundLibPos, sa);
                         }
                         revealed.remove(c);
                     }
@@ -196,7 +196,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     final Iterator<Card> itr = revealed.iterator();
                     while (itr.hasNext()) {
                         final Card c = itr.next();
-                        game.getAction().moveTo(noneFoundDest, c, noneFoundLibPos);
+                        game.getAction().moveTo(noneFoundDest, c, noneFoundLibPos, sa);
                     }
                 } else {
                  // Allow ordering the rest of the revealed cards
@@ -211,7 +211,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     final Iterator<Card> itr = revealed.iterator();
                     while (itr.hasNext()) {
                         final Card c = itr.next();
-                        game.getAction().moveTo(revealedDest, c, revealedLibPos);
+                        game.getAction().moveTo(revealedDest, c, revealedLibPos, sa);
                     }
                 }
 

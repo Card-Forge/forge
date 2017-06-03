@@ -86,7 +86,7 @@ public class InputPayManaSimple extends InputPayMana {
         }
         if (!this.saPaidFor.getHostCard().isCopiedSpell()) {
             if (this.saPaidFor.isSpell()) {
-                this.saPaidFor.setHostCard(game.getAction().moveToStack(this.originalCard));
+                this.saPaidFor.setHostCard(game.getAction().moveToStack(this.originalCard, null));
             }
         }
     }

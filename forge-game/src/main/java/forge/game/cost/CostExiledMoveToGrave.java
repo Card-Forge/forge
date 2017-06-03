@@ -79,7 +79,7 @@ public class CostExiledMoveToGrave extends CostPartWithList {
 
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard) {
-        return targetCard.getGame().getAction().moveToGraveyard(targetCard);
+        return targetCard.getGame().getAction().moveToGraveyard(targetCard, null);
     }
 
     public <T> T accept(ICostVisitor<T> visitor) {
