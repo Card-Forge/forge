@@ -92,7 +92,7 @@ public class DeckgenUtil {
             }
             if(!isCardPresent){
                 Map.Entry<PaperCard,Integer> newEntry=new AbstractMap.SimpleEntry<PaperCard, Integer>(pair2.getKey(),new Float((pair2.getValue()*0.4*maxDistance/maxDistance2)).intValue());
-                cards1.add(pair2);
+                cards1.add(newEntry);
             }
         }
     }
