@@ -39,7 +39,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         //don't update achievements if player cheated during game
         if (controller.hasCheated()) {
             return;
-        } 
+        }
 
         final Game game = controller.getGame();
         final Player player = controller.getPlayer();
@@ -70,6 +70,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         cb.addItem(FModel.getAchievements(GameType.Draft));
         cb.addItem(FModel.getAchievements(GameType.Sealed));
         cb.addItem(FModel.getAchievements(GameType.Quest));
+        cb.addItem(FModel.getAchievements(GameType.Puzzle));
         cb.addItem(AltWinAchievements.instance);
         cb.addItem(PlaneswalkerAchievements.instance);
         cb.addItem(ChallengeAchievements.instance);

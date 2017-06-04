@@ -207,6 +207,7 @@ public final class FModel {
         achievements.put(GameType.Draft, new DraftAchievements());
         achievements.put(GameType.Sealed, new SealedAchievements());
         achievements.put(GameType.Quest, new QuestAchievements());
+        achievements.put(GameType.Puzzle, new PuzzleAchievements());
 
         //preload AI profiles
         AiProfileUtil.loadAllProfiles(ForgeConstants.AI_PROFILE_DIR);
@@ -288,6 +289,7 @@ public final class FModel {
         case Draft:
         case Sealed:
         case Quest:
+        case Puzzle:
             break;
         case QuestDraft:
             gameType = GameType.Quest;
