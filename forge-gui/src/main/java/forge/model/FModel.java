@@ -207,6 +207,7 @@ public final class FModel {
         achievements.put(GameType.Draft, new DraftAchievements());
         achievements.put(GameType.Sealed, new SealedAchievements());
         achievements.put(GameType.Quest, new QuestAchievements());
+        achievements.put(GameType.PlanarConquest, new PlanarConquestAchievements());
         achievements.put(GameType.Puzzle, new PuzzleAchievements());
 
         //preload AI profiles
@@ -289,6 +290,7 @@ public final class FModel {
         case Draft:
         case Sealed:
         case Quest:
+        case PlanarConquest:
         case Puzzle:
             break;
         case QuestDraft:
