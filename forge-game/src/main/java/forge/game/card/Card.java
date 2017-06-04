@@ -107,7 +107,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private CardCollection mustBlockCards, clones, gainControlTargets, chosenCards, blockedThisTurn, blockedByThisTurn;
 
     // if this card is attached or linked to something, what card is it currently attached to
-    private Card equipping, fortifying, cloneOrigin, haunting, effectSource, pairedWith, meldedWith;
+    private Card equipping, encoding, fortifying, cloneOrigin, haunting, effectSource, pairedWith, meldedWith;
 
     // if this card is an Aura, what Entity is it enchanting?
     private GameEntity enchanting = null;
@@ -761,6 +761,14 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public final void clearEncodedCards() {
         encodedCards = view.clearCards(encodedCards, TrackableProperty.EncodedCards);
+    }
+
+    public final Card getEncodingCard() {
+        return encoding;
+    }
+
+    public final void setEncodingCard(final Card e) {
+        encoding = e;
     }
 
     public final String getFlipResult(final Player flipper) {
@@ -4097,6 +4105,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
 
             if (!getExiledWith().equals(host)) {
+                return false;
+            }
+        } else if (property.equals("EncodedWithSource")) {
+            if (!getEncodedCards().contains(source)) {
                 return false;
             }
         } else if (property.equals("EffectSource")) {

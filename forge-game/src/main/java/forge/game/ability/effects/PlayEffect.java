@@ -74,11 +74,6 @@ public class PlayEffect extends SpellAbilityEffect {
             }
             tgtCards = (CardCollection)AbilityUtils.filterListByType(game.getCardsIn(zone), sa.getParam("Valid"), sa);
         }
-        else if (sa.hasParam("Encoded")) {
-            final CardCollectionView encodedCards = source.getEncodedCards();
-            final int encodedIndex = Integer.parseInt(sa.getParam("Encoded")) - 1;
-            tgtCards = new CardCollection(encodedCards.get(encodedIndex));
-        }
         else if (sa.hasParam("AnySupportedCard")) {
             List<PaperCard> cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
             final String valid = sa.getParam("AnySupportedCard");

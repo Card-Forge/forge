@@ -5,11 +5,8 @@ import forge.game.GameLogEntryType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 
 public class EncodeEffect extends SpellAbilityEffect {
@@ -38,8 +35,7 @@ public class EncodeEffect extends SpellAbilityEffect {
         }
         
         // make list of creatures that controller has on Battlefield
-        CardCollectionView choices = game.getCardsIn(ZoneType.Battlefield);
-        choices = CardLists.getValidCards(choices, "Creature.YouCtrl", host.getController(), host);
+        CardCollectionView choices = host.getController().getCreaturesInPlay();
 
         // if no creatures on battlefield, cannot encoded
         if (choices.isEmpty()) {
@@ -70,19 +66,8 @@ public class EncodeEffect extends SpellAbilityEffect {
 
         // store hostcard in encoded array
         choice.addEncodedCard(movedCard);
+        movedCard.setEncodingCard(choice);
 
-        // add trigger
-        final int numEncoded = choice.getEncodedCards().size();
-        final StringBuilder cipherTrigger = new StringBuilder();
-        cipherTrigger.append("Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ PlayEncoded").append(numEncoded);
-        cipherTrigger.append(" | CombatDamage$ True | OptionalDecider$ You | TriggerDescription$ ");
-        cipherTrigger.append("Whenever CARDNAME deals combat damage to a player, its controller may cast a copy of ");
-        cipherTrigger.append(movedCard).append(" without paying its mana cost.");
-        final String abName = "PlayEncoded" + numEncoded;
-        final String abString = "AB$ Play | Cost$ 0 | Encoded$ " + numEncoded + " | WithoutManaCost$ True | CopyCard$ True";
-        final Trigger parsedTrigger = TriggerHandler.parseTrigger(cipherTrigger.toString(), choice, false);
-        choice.addTrigger(parsedTrigger);
-        choice.setSVar(abName, abString);
         return;
 
     }

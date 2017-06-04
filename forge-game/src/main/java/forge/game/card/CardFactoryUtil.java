@@ -1950,6 +1950,8 @@ public class CardFactoryUtil {
         for (String keyword : card.getKeywords()) {
             if (keyword.startsWith("Absorb")) {
                 addStaticAbility(keyword, card, null);
+            } else if (keyword.equals("Cipher")) {
+                addStaticAbility(keyword, card, null);
             } else if (keyword.startsWith("Multikicker")) {
                 final String[] n = keyword.split(":");
                 final SpellAbility sa = card.getFirstSpellAbility();
@@ -4079,6 +4081,31 @@ public class CardFactoryUtil {
             sb.append(n).append("| Secondary$ True | Description$ Absorb ").append(n);
             sb.append(" (").append(Keyword.getInstance(keyword).getReminderText()).append(")");
             effect = sb.toString();
+        } else if (keyword.equals("Changeling")) {
+            effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self" +
+                    " | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Secondary$ True" +
+                    " | Description$ Changeling (" + Keyword.getInstance(keyword).getReminderText() + ")";
+        } else if (keyword.equals("Cipher")) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Mode$ Continuous | EffectZone$ Exile | Affected$ Card.EncodedWithSource");
+            sb.append(" | AddTrigger$ CipherTrigger");
+            sb.append(" | Description$ Cipher (" + Keyword.getInstance(keyword).getReminderText() + ")");
+
+            effect = sb.toString();
+
+            sb = new StringBuilder();
+
+            sb.append("Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ PlayEncoded");
+            sb.append(" | CombatDamage$ True | OptionalDecider$ You | TriggerDescription$ ");
+            sb.append("Whenever CARDNAME deals combat damage to a player, its controller may cast a copy of ");
+            sb.append(card.getName()).append(" without paying its mana cost.");
+
+            String trig = sb.toString();
+
+            String ab = "DB$ Play | Defined$ OriginalHost | WithoutManaCost$ True | CopyCard$ True";
+
+            card.setSVar("CipherTrigger", trig);
+            card.setSVar("PlayEncoded", ab);
         } else if (keyword.startsWith("Escalate")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
@@ -4092,10 +4119,6 @@ public class CardFactoryUtil {
 
             effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Escalate | Cost$ "+ manacost +" | EffectZone$ All" +
                     " | Description$ " + sb.toString() + " (" + Keyword.getInstance(keyword).getReminderText() + ")";
-        } else if (keyword.equals("Changeling")) {
-            effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self" +
-                " | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Secondary$ True" +
-                " | Description$ Changeling (" + Keyword.getInstance(keyword).getReminderText() + ")";
         } else if (keyword.startsWith("Strive")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];

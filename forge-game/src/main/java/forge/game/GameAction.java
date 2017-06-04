@@ -299,6 +299,19 @@ public class GameAction {
             if (!zoneTo.is(ZoneType.Exile) && !zoneTo.is(ZoneType.Stack)) {
                 c.setExiledWith(null);
             }
+
+            // cleanup Encoding
+            if (c.hasEncodedCard()) {
+                for (final Card e : c.getEncodedCards()) {
+                    e.setEncodingCard(null);
+                }
+            }
+            if (zoneFrom.is(ZoneType.Exile)) {
+                Card e = c.getEncodingCard();
+                if (e != null) {
+                    e.removeEncodedCard(c);
+                }
+            }
         }
 
         // "enter the battlefield as a copy" - apply code here

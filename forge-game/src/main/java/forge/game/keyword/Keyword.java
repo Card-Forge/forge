@@ -25,6 +25,7 @@ public enum Keyword {
     CASCADE(SimpleKeyword.class, false, "When you cast this spell, exile cards from the top of your library until you exile a nonland card whose converted mana cost is less than this spell's converted mana cost. You may cast that card without paying its mana cost. Then put all cards exiled this way that weren't cast on the bottom of your library in a random order."),
     CHAMPION(KeywordWithType.class, false, "When this enters the battlefield, sacrifice it unless you exile another %s you control. When this leaves the battlefield, that card returns to the battlefield."),
     CHANGELING(SimpleKeyword.class, true, "This card is every creature type."),
+    CIPHER(SimpleKeyword.class, true, "Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost."),
     CONSPIRE(SimpleKeyword.class, false, "As an additional cost to cast this spell, you may tap two untapped creatures you control that each share a color with it. If you do, copy it."),
     CONVOKE(SimpleKeyword.class, true, "Each creature you tap while playing this spell reduces its cost by {1} or by one mana of that creature's color."),
     CREW(KeywordWithAmount.class, true, "Tap any number of creatures you control with total power %1$d or more: This Vehicle becomes an artifact creature until end of turn."),
