@@ -1,5 +1,8 @@
 package forge.ai.ability;
 
+import java.util.List;
+import java.util.Random;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -24,28 +27,24 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-import java.util.List;
-import java.util.Random;
-
 public class EffectAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(final Player ai,final SpellAbility sa) {
         final Game game = ai.getGame();
         final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= .6667;
-        final Player opp = ai.getOpponent();
         String logic = "";
 
         if (sa.hasParam("AILogic")) {
             logic = sa.getParam("AILogic");
             final PhaseHandler phase = game.getPhaseHandler();
             if (logic.equals("BeginningOfOppTurn")) {
-                if (phase.isPlayerTurn(ai) || phase.getPhase().isAfter(PhaseType.DRAW)) {
+                if (!phase.getPlayerTurn().isOpponentOf(ai) || phase.getPhase().isAfter(PhaseType.DRAW)) {
                     return false;
                 }
                 randomReturn = true;
             } else if (logic.equals("EndOfOppTurn")) {
-                if (phase.isPlayerTurn(ai) || phase.getPhase().isBefore(PhaseType.END_OF_TURN)) {
+                if (!phase.getPlayerTurn().isOpponentOf(ai) || phase.getPhase().isBefore(PhaseType.END_OF_TURN)) {
                     return false;
                 }
                 randomReturn = true;
@@ -69,9 +68,17 @@ public class EffectAi extends SpellAbilityAi {
                 if (tgt != null) {
                     sa.resetTargets();
                     if (tgt.canOnlyTgtOpponent()) {
-                        if (sa.canTarget(ai.getOpponent())) {
-                            sa.getTargets().add(ai.getOpponent());
-                        } else {
+                        boolean canTgt = false;
+
+                        for (Player opp2 : ai.getOpponents()) {
+                            if (sa.canTarget(opp2)) {
+                                sa.getTargets().add(opp2);
+                                canTgt = true;
+                                break;
+                            }
+                        }
+
+                        if (!canTgt) {
                             return false;
                         }
                     } else {
@@ -140,28 +147,40 @@ public class EffectAi extends SpellAbilityAi {
             		return false;
             	}
 
-                List<Card> comp = ai.getCreaturesInPlay();
-                List<Card> human = opp.getCreaturesInPlay();
+                boolean shouldPlay = false;
 
-                // only count creatures that can attack or block
-                comp = CardLists.filter(comp, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        return CombatUtil.canAttack(c, opp);
+                List<Card> comp = ai.getCreaturesInPlay();
+
+                for (final Player opp : ai.getOpponents()) {
+                    List<Card> human = opp.getCreaturesInPlay();
+
+                    // only count creatures that can attack or block
+                    comp = CardLists.filter(comp, new Predicate<Card>() {
+                        @Override
+                        public boolean apply(final Card c) {
+                            return CombatUtil.canAttack(c, opp);
+                        }
+                    });
+                    if (comp.size() < 2) {
+                        continue;
                     }
-                });
-                if (comp.size() < 2) {
-                	return false;
+                    final List<Card> attackers = comp;
+                    human = CardLists.filter(human, new Predicate<Card>() {
+                        @Override
+                        public boolean apply(final Card c) {
+                            return CombatUtil.canBlockAtLeastOne(c, attackers);
+                        }
+                    });
+                    if (human.isEmpty()) {
+                        continue;
+                    }
+
+                    shouldPlay = true;
+                    break;
                 }
-                final List<Card> attackers = comp;
-                human = CardLists.filter(human, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        return CombatUtil.canBlockAtLeastOne(c, attackers);
-                    }
-                });
-                if (human.isEmpty()) {
-                	return false;
+
+                if (shouldPlay) {
+                    return true;
                 }
             } else if (logic.equals("RedirectSpellDamageFromPlayer")) {
                 if (game.getStack().isEmpty()) {
@@ -202,7 +221,7 @@ public class EffectAi extends SpellAbilityAi {
                     return false;
                 }
                 final SpellAbility topStack = game.getStack().peekAbility();
-                if (topStack.getActivatingPlayer() == ai.getOpponent() && topStack.getApi() == ApiType.GainLife) {
+                if (topStack.getActivatingPlayer().isOpponentOf(ai) && topStack.getApi() == ApiType.GainLife) {
                 	return true;
                 } else {
                 	return false;
@@ -215,6 +234,18 @@ public class EffectAi extends SpellAbilityAi {
                 return SpellApiToAi.Converter.get(burn.getApi()).canPlayAIWithSubs(ai, burn);
             } else if (logic.equals("YawgmothsWill")) {
                 return SpecialCardAi.YawgmothsWill.consider(ai, sa);
+            } else if (logic.startsWith("NeedCreatures")) {
+                if (ai.getCreaturesInPlay().isEmpty()) {
+                    return false;
+                }
+                if (logic.contains(":")) {
+                    String k[] = logic.split(":");
+                    Integer i = Integer.valueOf(k[1]);
+                    if (ai.getCreaturesInPlay().size() < i) {
+                        return false;
+                    }
+                }
+                return true;
             }
         } else { //no AILogic
             return false;
@@ -234,7 +265,15 @@ public class EffectAi extends SpellAbilityAi {
         if (tgt != null && tgt.canTgtPlayer()) {
             sa.resetTargets();
             if (tgt.canOnlyTgtOpponent() || logic.equals("BeginningOfOppTurn")) {
-                sa.getTargets().add(ai.getOpponent());
+                boolean canTgt = false;
+                for (Player opp : ai.getOpponents()) {
+                    if (sa.canTarget(opp)) {
+                        sa.getTargets().add(opp);
+                        canTgt = true;
+                        break;
+                    }
+                }
+                return canTgt;
             } else {
                 sa.getTargets().add(ai);
             }
