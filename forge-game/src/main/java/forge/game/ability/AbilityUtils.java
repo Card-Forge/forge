@@ -18,6 +18,7 @@ import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.*;
 import forge.game.zone.ZoneType;
@@ -851,8 +852,8 @@ public class AbilityUtils {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static FCollection<Player> getDefinedPlayers(final Card card, final String def, final SpellAbility sa) {
-        final FCollection<Player> players = new FCollection<Player>();
+    public static PlayerCollection getDefinedPlayers(final Card card, final String def, final SpellAbility sa) {
+        final PlayerCollection players = new PlayerCollection();
         final String defined = (def == null) ? "You" : applyAbilityTextChangeEffects(def, sa);
         final Game game = card == null ? null : card.getGame();
 
