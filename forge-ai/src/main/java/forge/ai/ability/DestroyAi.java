@@ -63,17 +63,6 @@ public class DestroyAi extends SpellAbilityAi {
         	return false;
         }
 
-        // Special logic not related to targeting
-        if ("LandForLand".equals(logic)) {
-            // Strip Mine and Wasteland
-            int numLandsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS_PRODUCING_MANA).size();
-            int numLandsOTB = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA).size();
-
-            // TODO: improve this logic
-            boolean isViable = numLandsInHand > 0 && numLandsInHand + numLandsOTB > 2;
-            if (!isViable) { return false; }
-        }
-        
         // Targeting
         if (abTgt != null) {
             sa.resetTargets();
@@ -228,6 +217,13 @@ public class DestroyAi extends SpellAbilityAi {
                 }
                 else if (CardLists.getNotType(list, "Land").isEmpty()) {
                     choice = ComputerUtilCard.getBestLandAI(list);
+
+                    if ("LandForLand".equals(logic)) {
+                        // Strip Mine, Wasteland - cut short if the relevant logic fails
+                        if (!doLandForLandRemovalLogic(sa, ai, choice)) {
+                            return false;
+                        }
+                    }
                 }
                 else {
                     choice = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, true);
@@ -402,4 +398,31 @@ public class DestroyAi extends SpellAbilityAi {
         return true;
     }
 
+    public boolean doLandForLandRemovalLogic(SpellAbility sa, Player ai, Card tgtLand) {
+        if (tgtLand == null) { return false; }
+
+        Player tgtPlayer = tgtLand.getController();
+        int oppLandsOTB = tgtPlayer.getLandsInPlay().size();
+        
+        // if the opponent didn't play a land and has few lands OTB, might be worth mana-locking him
+        boolean oppSkippedLandDrop = tgtPlayer.getLandsPlayedThisTurn() == 0 && tgtPlayer.getLandsPlayedLastTurn() == 0;
+        boolean canManaLock = oppLandsOTB <= 3 && oppSkippedLandDrop;
+
+        // Best target is a basic land, and there's only one of it, so destroying it may potentially color-lock the opponent
+        CardCollection oppLands = tgtPlayer.getLandsInPlay();
+        boolean canColorLock = oppSkippedLandDrop && tgtLand.isBasicLand() && CardLists.filter(oppLands, CardPredicates.nameEquals(tgtLand.getName())).size() == 1;
+
+        // Non-basic lands are currently not ranked in any way in ComputerUtilCard#getBestLandAI, so if a non-basic land is best target,
+        // consider killing it off unless there's too much potential tempo loss.
+        // TODO: actually rank non-basics in that method and then kill off the potentially dangerous (manlands, Valakut) or lucrative 
+        // (dual/triple mana that opens access to a certain color) lands
+        boolean nonBasicTgt = !tgtLand.isBasicLand();
+
+        // Try not to lose tempo too much and not to mana-screw yourself when considering this logic
+        int numLandsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS_PRODUCING_MANA).size();
+        int numLandsOTB = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA).size();
+        boolean tempoCheck = numLandsOTB > 5 || (numLandsInHand > 0 && ((numLandsInHand + numLandsOTB > 2) || canManaLock || canColorLock || nonBasicTgt));
+
+        return tempoCheck;
+    }
 }
