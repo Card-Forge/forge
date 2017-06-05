@@ -2,10 +2,10 @@ package forge.game.ability.effects;
 
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
+import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
-import org.apache.commons.lang3.StringUtils;
+import forge.util.Lang;
 
 import java.util.List;
 
@@ -17,15 +17,14 @@ import java.util.List;
     public class PoisonEffect extends SpellAbilityEffect {
 
         /* (non-Javadoc)
-         * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
+         * @see forge.game.ability.SpellAbilityEffect#resolve(forge.game.spellability.SpellAbility)
          */
         @Override
         public void resolve(SpellAbility sa) {
             final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Num"), sa);
 
-            final TargetRestrictions tgt = sa.getTargetRestrictions();
             for (final Player p : getTargetPlayers(sa)) {
-                if ((tgt == null) || p.canBeTargetedBy(sa)) {
+                if ((!sa.usesTargeting()) || p.canBeTargetedBy(sa)) {
                     if (amount >= 0) {
                         p.addPoisonCounters(amount, sa.getHostCard());
                     } else {
@@ -36,7 +35,7 @@ import java.util.List;
         }
 
         /* (non-Javadoc)
-         * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
+         * @see forge.game.ability.SpellAbilityEffect#getStackDescription(forge.game.spellability.SpellAbility)
          */
         @Override
         protected String getStackDescription(SpellAbility sa) {
@@ -45,19 +44,17 @@ import java.util.List;
 
             final List<Player> tgtPlayers = getTargetPlayers(sa);
 
-            sb.append(StringUtils.join(tgtPlayers, ", "));
+            sb.append(Lang.joinHomogenous(tgtPlayers));
             sb.append(" ");
 
             sb.append("get");
             if (tgtPlayers.size() < 2) {
                 sb.append("s");
             }
-            sb.append(" ").append(amount).append(" poison counter");
-            if (amount != 1) {
-                sb.append("s.");
-            } else {
-                sb.append(".");
-            }
+
+            String type = CounterType.POISON.getName() + " counter";
+
+            sb.append(" ").append(Lang.nounWithAmount(amount, type)).append(".");
 
             return sb.toString();
         }
