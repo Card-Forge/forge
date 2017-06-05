@@ -18,6 +18,7 @@ import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostSacrifice;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -405,7 +406,9 @@ public class DestroyAi extends SpellAbilityAi {
         int oppLandsOTB = tgtPlayer.getLandsInPlay().size();
         
         // if the opponent didn't play a land and has few lands OTB, might be worth mana-locking him
-        boolean oppSkippedLandDrop = tgtPlayer.getLandsPlayedThisTurn() == 0 && tgtPlayer.getLandsPlayedLastTurn() == 0;
+        PhaseHandler ph = ai.getGame().getPhaseHandler();
+        boolean oppSkippedLandDrop = (tgtPlayer.getLandsPlayedLastTurn() == 0 && ph.isPlayerTurn(ai))
+                || (tgtPlayer.getLandsPlayedThisTurn() == 0 && ph.isPlayerTurn(tgtPlayer) && ph.getPhase().isAfter(PhaseType.MAIN2));
         boolean canManaLock = oppLandsOTB <= 3 && oppSkippedLandDrop;
 
         // Best target is a basic land, and there's only one of it, so destroying it may potentially color-lock the opponent
