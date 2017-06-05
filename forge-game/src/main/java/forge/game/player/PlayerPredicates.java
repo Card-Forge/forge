@@ -122,6 +122,15 @@ public final class PlayerPredicates {
         };
     }
     
+    public static final Comparator<Player> compareByPoison() {
+        return new Comparator<Player>() {
+            @Override
+            public int compare(Player arg0, Player arg1) {
+                return Integer.compare(arg0.getPoisonCounters(), arg1.getPoisonCounters());
+            }
+        };
+    }
+
     public static final Predicate<Player> NOT_LOST = new Predicate<Player>() {
         @Override
         public boolean apply(Player p) {
