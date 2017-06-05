@@ -63,6 +63,17 @@ public class DestroyAi extends SpellAbilityAi {
         	return false;
         }
 
+        // Special logic not related to targeting
+        if ("LandForLand".equals(logic)) {
+            // Strip Mine and Wasteland
+            int numLandsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS_PRODUCING_MANA).size();
+            int numLandsOTB = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA).size();
+
+            // TODO: improve this logic
+            boolean isViable = numLandsInHand > 0 && numLandsInHand + numLandsOTB > 2;
+            if (!isViable) { return false; }
+        }
+        
         // Targeting
         if (abTgt != null) {
             sa.resetTargets();
