@@ -1,11 +1,14 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
+import forge.ai.AiController;
+import forge.ai.AiProps;
 
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
+import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -405,15 +408,25 @@ public class DestroyAi extends SpellAbilityAi {
         Player tgtPlayer = tgtLand.getController();
         int oppLandsOTB = tgtPlayer.getLandsInPlay().size();
         
+        // AI profile-dependent properties
+        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+        int amountNoTempoCheck = aic.getIntProperty(AiProps.STRIPMINE_MIN_LANDS_OTB_FOR_NO_TEMPO_CHECK);
+        int amountNoTimingCheck = aic.getIntProperty(AiProps.STRIPMINE_MIN_LANDS_FOR_NO_TIMING_CHECK);
+        int amountLandsInHand = aic.getIntProperty(AiProps.STRIPMINE_MIN_LANDS_IN_HAND_TO_ACTIVATE);
+        int amountLandsToManalock = aic.getIntProperty(AiProps.STRIPMINE_MAX_LANDS_TO_ATTEMPT_MANALOCKING);
+        boolean highPriorityIfNoLandDrop = aic.getBooleanProperty(AiProps.STRIPMINE_HIGH_PRIORITY_ON_SKIPPED_LANDDROP);
+
         // if the opponent didn't play a land and has few lands OTB, might be worth mana-locking him
         PhaseHandler ph = ai.getGame().getPhaseHandler();
         boolean oppSkippedLandDrop = (tgtPlayer.getLandsPlayedLastTurn() == 0 && ph.isPlayerTurn(ai))
                 || (tgtPlayer.getLandsPlayedThisTurn() == 0 && ph.isPlayerTurn(tgtPlayer) && ph.getPhase().isAfter(PhaseType.MAIN2));
-        boolean canManaLock = oppLandsOTB <= 3 && oppSkippedLandDrop;
+        boolean canManaLock = oppLandsOTB <= amountLandsToManalock && oppSkippedLandDrop;
 
         // Best target is a basic land, and there's only one of it, so destroying it may potentially color-lock the opponent
+        // (triggers either if the opponent skipped a land drop or if there are quite a few lands already in play but only one of the given type)
         CardCollection oppLands = tgtPlayer.getLandsInPlay();
-        boolean canColorLock = oppSkippedLandDrop && tgtLand.isBasicLand() && CardLists.filter(oppLands, CardPredicates.nameEquals(tgtLand.getName())).size() == 1;
+        boolean canColorLock = (oppSkippedLandDrop || oppLands.size() > 3)
+                && tgtLand.isBasicLand() && CardLists.filter(oppLands, CardPredicates.nameEquals(tgtLand.getName())).size() == 1;
 
         // Non-basic lands are currently not ranked in any way in ComputerUtilCard#getBestLandAI, so if a non-basic land is best target,
         // consider killing it off unless there's too much potential tempo loss.
@@ -424,7 +437,13 @@ public class DestroyAi extends SpellAbilityAi {
         // Try not to lose tempo too much and not to mana-screw yourself when considering this logic
         int numLandsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS_PRODUCING_MANA).size();
         int numLandsOTB = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA).size();
-        boolean tempoCheck = numLandsOTB > 5 || (numLandsInHand > 0 && ((numLandsInHand + numLandsOTB > 2) || canManaLock || canColorLock || nonBasicTgt));
+
+        // If the opponent skipped a land drop, consider not looking at having the extra land in hand if the profile allows it
+        boolean isHighPriority = highPriorityIfNoLandDrop && oppSkippedLandDrop;
+
+        boolean timingCheck = canManaLock || canColorLock || nonBasicTgt;
+        boolean tempoCheck = numLandsOTB >= amountNoTempoCheck 
+                || ((numLandsInHand >= amountLandsInHand || isHighPriority) && ((numLandsInHand + numLandsOTB >= amountNoTimingCheck) || timingCheck));
 
         return tempoCheck;
     }

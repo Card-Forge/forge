@@ -45,7 +45,12 @@ public enum AiProps { /** */
     ACTIVELY_DESTROY_ARTS_AND_NONAURA_ENCHS ("false"), /** */
     PRIORITY_REDUCTION_FOR_STORM_SPELLS ("0"), /** */
     USE_BERSERK_AGGRESSIVELY ("false"), /** */
-    MIN_COUNT_FOR_STORM_SPELLS ("0"); /** */
+    MIN_COUNT_FOR_STORM_SPELLS ("0"), /** */
+    STRIPMINE_MIN_LANDS_IN_HAND_TO_ACTIVATE ("1"), /** */
+    STRIPMINE_MIN_LANDS_FOR_NO_TIMING_CHECK ("3"), /** */
+    STRIPMINE_MIN_LANDS_OTB_FOR_NO_TEMPO_CHECK ("6"), /** */
+    STRIPMINE_MAX_LANDS_TO_ATTEMPT_MANALOCKING ("3"), /** */
+    STRIPMINE_HIGH_PRIORITY_ON_SKIPPED_LANDDROP ("false"); /** */
 
     private final String strDefaultVal;
 
