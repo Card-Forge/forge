@@ -150,7 +150,7 @@ public class GameAction {
         Card copied = null;
         Card lastKnownInfo = null;
 
-        if (c.isSplitCard() && !zoneTo.is(ZoneType.Stack)) {
+        if (c.isSplitCard() && !zoneTo.is(ZoneType.Stack) && !c.isManifested()) {
             c.setState(CardStateName.Original, true);
         }
 
