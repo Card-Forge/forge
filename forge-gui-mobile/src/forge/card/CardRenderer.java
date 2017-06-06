@@ -379,15 +379,17 @@ public class CardRenderer {
             if (showCardManaCostOverlay(card)) {
                 float manaSymbolSize = w / 4;
                 if (card.isSplitCard() && card.hasAlternateState()) {
-                    float dy = manaSymbolSize / 2 + Utils.scale(5);
+                    if (!card.getName().isEmpty()) { // FIXME: temporary crash prevention measure for face-down (manifested) split cards
+                        float dy = manaSymbolSize / 2 + Utils.scale(5);
 
-                    PaperCard pc = StaticData.instance().getCommonCards().getCard(card.getName());
-                    if (Card.getCardForUi(pc).hasKeyword("Aftermath")){
-                        dy *= -1; // flip card costs for Aftermath cards
+                        PaperCard pc = StaticData.instance().getCommonCards().getCard(card.getName());
+                        if (Card.getCardForUi(pc).hasKeyword("Aftermath")){
+                            dy *= -1; // flip card costs for Aftermath cards
+                        }
+
+                        drawManaCost(g, card.getAlternateState().getManaCost(), x - padding, y - dy, w + 2 * padding, h, manaSymbolSize);
+                        drawManaCost(g, card.getCurrentState().getManaCost(), x - padding, y + dy, w + 2 * padding, h, manaSymbolSize);
                     }
-
-                    drawManaCost(g, card.getAlternateState().getManaCost(), x - padding, y - dy, w + 2 * padding, h, manaSymbolSize);
-                    drawManaCost(g, card.getCurrentState().getManaCost(), x - padding, y + dy, w + 2 * padding, h, manaSymbolSize);
                 }
                 else {
                     drawManaCost(g, card.getCurrentState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);

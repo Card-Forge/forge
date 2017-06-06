@@ -372,11 +372,13 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             if (!showSplitMana) {
                 drawManaCost(g, card.getCurrentState().getManaCost(), 0);
             } else {
-                PaperCard pc = StaticData.instance().getCommonCards().getCard(card.getName());
-                int ofs = pc != null && Card.getCardForUi(pc).hasKeyword("Aftermath") ? -12 : 12;
+                if (!card.getName().isEmpty()) { // FIXME: temporary crash prevention measure for face-down (manifested) split cards
+                    PaperCard pc = StaticData.instance().getCommonCards().getCard(card.getName());
+                    int ofs = pc != null && Card.getCardForUi(pc).hasKeyword("Aftermath") ? -12 : 12;
 
-                drawManaCost(g, card.getCurrentState().getManaCost(), ofs);
-                drawManaCost(g, card.getAlternateState().getManaCost(), -ofs);
+                    drawManaCost(g, card.getCurrentState().getManaCost(), ofs);
+                    drawManaCost(g, card.getAlternateState().getManaCost(), -ofs);
+                }
             }
         }
 
