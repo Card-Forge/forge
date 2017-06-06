@@ -230,6 +230,11 @@ public enum CardZoomer {
             return 0;
         }
         if (thisCard.getCard().isSplitCard()) {
+            if (thisCard.getCard().getName().isEmpty()) {
+                // FIXME: Temporary crash prevention for manifested split cards
+                return 0;
+            }
+            
             PaperCard pc = StaticData.instance().getCommonCards().getCard(thisCard.getName());
             boolean isAftermath = pc != null && Card.getCardForUi(pc).hasKeyword("Aftermath");
 
