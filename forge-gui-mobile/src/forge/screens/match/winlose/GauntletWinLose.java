@@ -49,13 +49,14 @@ public class GauntletWinLose extends ControlWinLose {
                     @Override
                     public void run() {
                         StringBuilder sb = new StringBuilder();
-                        for (int i = 0; i < len; i++) {
-                            if (i <= num) {
-                                sb.append((i + 1) + ". " + lstEventNames.get(i)
-                                        + " (" + lstEventRecords.get(i) + ")\n");
-                            }
-                            else {
-                                sb.append((i + 1) + ". ??????\n");
+                        if (!lstEventNames.isEmpty()) {
+                            for (int i = 0; i < len; i++) {
+                                if (i <= num) {
+                                    sb.append((i + 1) + ". " + lstEventNames.get(i)
+                                            + " (" + lstEventRecords.get(i) + ")\n");
+                                } else {
+                                    sb.append((i + 1) + ". ??????\n");
+                                }
                             }
                         }
 

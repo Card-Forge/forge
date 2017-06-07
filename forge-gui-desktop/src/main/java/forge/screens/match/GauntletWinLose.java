@@ -58,21 +58,22 @@ public class GauntletWinLose extends ControlWinLose {
                 pnlResults.setLayout(new MigLayout("insets 0, gap 0, wrap "
                         + (int) Math.ceil(len / 2d) + ", flowy"));
 
-                JLabel lblTemp;
-                for (int i = 0; i < len; i++) {
-                    lblTemp = new FLabel.Builder().fontSize(14).build();
+                if (!lstEventNames.isEmpty()) {
+                    JLabel lblTemp;
+                    for (int i = 0; i < len; i++) {
+                        lblTemp = new FLabel.Builder().fontSize(14).build();
 
-                    if (i <= num) {
-                        lblTemp.setForeground(Color.green.darker());
-                        lblTemp.setText((i + 1) + ". " + lstEventNames.get(i)
-                                + " (" + lstEventRecords.get(i) + ")");
-                    }
-                    else {
-                        lblTemp.setForeground(Color.red);
-                        lblTemp.setText((i + 1) + ". ??????");
-                    }
+                        if (i <= num) {
+                            lblTemp.setForeground(Color.green.darker());
+                            lblTemp.setText((i + 1) + ". " + lstEventNames.get(i)
+                                    + " (" + lstEventRecords.get(i) + ")");
+                        } else {
+                            lblTemp.setForeground(Color.red);
+                            lblTemp.setText((i + 1) + ". ??????");
+                        }
 
-                    pnlResults.add(lblTemp, "w 50%!, h 25px!, gap 0 0 5px 0");
+                        pnlResults.add(lblTemp, "w 50%!, h 25px!, gap 0 0 5px 0");
+                    }
                 }
 
                 final SkinnedPanel pnl = view0.getPnlCustom();
