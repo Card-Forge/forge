@@ -1,7 +1,7 @@
 - IMPORTANT: Partial backwards incompatibility with older decks that contain Masterpieces -
-In case you have decks in your profile folder that contain one or more Masterpieces from the Kaladesh/Aether Revolt masterpiece series (previously the set code was MPS), you may experience an issue with cards that are present in the Masterpieces set disappearing visually and malfunctioning in the game (even if you use a version of the same card from a different set). The two primary waya this manifests itself are: a) you get a message stating that there is an unsupported card in one of your decks (this message shows in the console only); b) the card picture does not show in the game or in the deck editor and the card is reported as non-functional. If this happens to you, you have several options: either remove the offending deck altogether (you may have to do a search inside the profile folder to determine which decks have the mentioned card from the MPS set), or manually edit the deck file and change the set code MPS to MPS_KLD for such cards, or start with a fresh profile folder or at least fresh deck subfolder (but the latter obviously only works if you don't mind losing your entire progress and would like to start fresh). We apologize for the inconvenience.
+In case you have decks in your profile folder that contain one or more Masterpieces from the Kaladesh/Aether Revolt masterpiece series (previously the set code was MPS), you may experience an issue with cards that are present in the Masterpieces set disappearing visually and malfunctioning in the game (even if you use a version of the same card from a different set). The two primary ways this manifests itself are: a) you get a message stating that there is an unsupported card in one of your decks (this message shows in the console only); b) the card picture does not show in the game or in the deck editor and the card is reported as non-functional. If this happens to you, you have several options: either remove the offending deck altogether (you may have to do a search inside the profile folder to determine which decks have the mentioned card from the MPS set), or manually edit the deck file and change the set code MPS to MPS_KLD for such cards, or start with a fresh profile folder or at least fresh deck subfolder (but the latter obviously only works if you don't mind losing your entire progress and would like to start fresh). We apologize for the inconvenience.
 
-- Planar Conquest changes -
+- Planar Conquest Changes -
 Planar Conquest received a rather major overhaul of planes. Additional cards from Commander-specific sets and other variant sets (most notably Conspiracy and Planechase) have been added to planes where they are relevant according to the plane theme and lore. Implemented planes now have descriptions that are displayed on the "Select a Plane" and "Planeswalk" screens when the player taps the plane art. Four-color commanders from C16 are now supported in Planar Conquest (the player will start with a random 3-color deck matching random three of the four colors of the color identity of such a planeswalker). There is also experimental support for planeswalkers that can also be commanders (e.g. Daretti, Scrap Savant), although this hasn't been extensively tested yet, so certain issues are possible.
 Some adjustments have been made to the algorithm used for calculating probabilities of drawing a card from the Aether which is of rarity that is higher than selected in the filter. Higher rarity cards should now be considerably less common and thus the Aether should not be nearly as susceptible to being exploited for shards.
 
@@ -17,10 +17,10 @@ This release contains all but one of the cards (As Foretold) from the newly rele
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the 1.5.61 release run.
 
-- AI generated decks -
+- AI Generated Decks -
 This release contains a new way to generate random Standard or Modern decks that are themed around a specific card.  In the deck selector you choose a card and the AI will build a deck around that card based on associations learnt from recent human generated online decks.  The algorithm is non-deterministic, so the decks will vary every time they are generated for a unique deck virtually every time.
 
-- User created quest worlds -
+- User Created Quest Worlds -
 If you have created some of your own quest worlds and don't want them to be overwritten when Forge updates, you can move the world folders to the user quest folder (in USER_FOLDER/quest/worlds) - you will also need to add the world definitions to a customworlds.txt file in that same folder
 
 - Quest Shop Singles Update -
@@ -28,3 +28,6 @@ The quest shop will now generate singles using the full availability of cards in
 
 - Booster Pack Quest Starting Pool -
 Quests can now use booster packs as a starting pool. A number of random packs will be opened and used instead of the normal card generation. You can find this option in the "Choose Colors" section when creating a new quest. This will override any other starting pool settings.
+
+- Card Image Updates -
+Most (if not all) of the missing card images have been added to the in-game content downloaders.
