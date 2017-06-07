@@ -86,8 +86,8 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final FCheckBox boxCompleteSet = new FCheckBox("Start with all cards in selected sets");
     private final FCheckBox boxAllowDuplicates = new FCheckBox("Allow duplicate cards");
 
-    private final FLabel lblPreferredColor = new FLabel.Builder().text("Starting pool colors:").build();
-    private final FLabel btnPreferredColors = new FLabel.Builder().opaque(true).hoverable(true).text("Choose Colors").build();
+    private final FLabel lblPreferredColor = new FLabel.Builder().text("Starting pool distribution:").build();
+    private final FLabel btnPreferredColors = new FLabel.Builder().opaque(true).hoverable(true).text("Choose Distribution").build();
 
     private final FLabel btnPrizeDefineCustomFormat = new FLabel.Builder().opaque(true).hoverable(true).text("Define custom format").build();
 
