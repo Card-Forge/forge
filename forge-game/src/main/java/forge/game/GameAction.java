@@ -150,8 +150,24 @@ public class GameAction {
         Card copied = null;
         Card lastKnownInfo = null;
 
-        if (c.isSplitCard() && !zoneTo.is(ZoneType.Stack) && !c.isManifested()) {
-            c.setState(CardStateName.Original, true);
+        if (c.isSplitCard()) {
+            boolean resetToOriginal = false;
+
+            if (c.isManifested()) {
+                if (zoneFrom.is(ZoneType.Battlefield)) {
+                    // Make sure the card returns from the battlefield as the original card with two halves
+                    resetToOriginal = true;
+                }
+            } else {
+                if (!zoneTo.is(ZoneType.Stack)) {
+                    // For regular splits, recreate the original state unless the card is going to stack as one half
+                    resetToOriginal = true;
+                }
+            }
+
+            if (resetToOriginal) {
+                c.setState(CardStateName.Original, true);
+            }
         }
 
         // Cards returned from exile face-down must be reset to their original state, otherwise
