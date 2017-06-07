@@ -6,16 +6,25 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.deck;
+
+import com.google.common.collect.Lists;
+import forge.StaticData;
+import forge.card.CardDb;
+import forge.item.PaperCard;
+import forge.util.ItemPool;
+import forge.util.ItemPoolSorter;
+import forge.util.MyRandom;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -23,17 +32,6 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.Lists;
-
-import forge.StaticData;
-import forge.card.CardDb;
-import forge.item.PaperCard;
-import forge.util.ItemPool;
-import forge.util.ItemPoolSorter;
-import forge.util.MyRandom;
 
 
 public class CardPool extends ItemPool<PaperCard> {
@@ -47,7 +45,7 @@ public class CardPool extends ItemPool<PaperCard> {
         this();
         this.addAll(cards);
     }
-    
+
     public void add(final String cardName, final int amount) {
         if (cardName.contains("|")) {
             // an encoded cardName with set and possibly art index was passed, split it and pass in full
@@ -62,7 +60,7 @@ public class CardPool extends ItemPool<PaperCard> {
         } else {
             this.add(cardName, null, -1, amount);
         }
-    }    
+    }
 
     public void add(final String cardName, final String setCode) {
         this.add(cardName, setCode, -1, 1);
@@ -74,50 +72,51 @@ public class CardPool extends ItemPool<PaperCard> {
 
     // NOTE: ART indices are "1" -based
     public void add(String cardName, String setCode, final int artIndex, final int amount) {
-        PaperCard cp = StaticData.instance().getCommonCards().getCard(cardName, setCode, artIndex);
-        final boolean isCommonCard = cp != null;
+
+        PaperCard paperCard = StaticData.instance().getCommonCards().getCard(cardName, setCode, artIndex);
+        final boolean isCommonCard = paperCard != null;
+
         if (!isCommonCard) {
-            cp = StaticData.instance().getVariantCards().getCard(cardName, setCode);
-            if (cp == null) {
+            paperCard = StaticData.instance().getVariantCards().getCard(cardName, setCode);
+            if (paperCard == null) {
                 StaticData.instance().attemptToLoadCard(cardName, setCode);
-                cp = StaticData.instance().getVariantCards().getCard(cardName, setCode);
+                paperCard = StaticData.instance().getVariantCards().getCard(cardName, setCode);
             }
         }
 
         int artCount = 1;
-        if (cp != null ) {
-            setCode = cp.getEdition();
-            cardName = cp.getName();
+        if (paperCard != null) {
+            setCode = paperCard.getEdition();
+            cardName = paperCard.getName();
             artCount = isCommonCard ? StaticData.instance().getCommonCards().getArtCount(cardName, setCode) : 1;
-        }
-        else {
-            cp = StaticData.instance().getCommonCards().createUnsuportedCard(cardName); 
+        } else {
+            paperCard = StaticData.instance().getCommonCards().createUnsupportedCard(cardName);
         }
 
-        boolean artIndexExplicitlySet = artIndex > 0 || Character.isDigit(cardName.charAt(cardName.length()-1)) && cardName.charAt(cardName.length()-2) == CardDb.NameSetSeparator;
+        boolean artIndexExplicitlySet = artIndex > 0 || Character.isDigit(cardName.charAt(cardName.length() - 1)) && cardName.charAt(cardName.length() - 2) == CardDb.NameSetSeparator;
+
         if (artIndexExplicitlySet || artCount <= 1) {
             // either a specific art index is specified, or there is only one art, so just add the card
-            this.add(cp, amount);
+            this.add(paperCard, amount);
         } else {
             // random art index specified, make sure we get different groups of cards with different art
             int[] artGroups = MyRandom.splitIntoRandomGroups(amount, artCount);
             for (int i = 1; i <= artGroups.length; i++) {
-                int cnt = artGroups[i-1];
-                if (cnt <= 0)
+                int cnt = artGroups[i - 1];
+                if (cnt <= 0) {
                     continue;
-                PaperCard cp_random = isCommonCard 
-                        ? StaticData.instance().getCommonCards().getCard(cardName, setCode, i) 
-                        : StaticData.instance().getVariantCards().getCard(cardName, setCode, i);
-                this.add(cp_random, cnt);
+                }
+                PaperCard randomCard = StaticData.instance().getCommonCards().getCard(cardName, setCode, i);
+                this.add(randomCard, cnt);
             }
         }
     }
-    
-    
+
+
 
     /**
      * Add all from a List of CardPrinted.
-     * 
+     *
      * @param list
      *            CardPrinteds to add
      */
@@ -194,25 +193,25 @@ public class CardPool extends ItemPool<PaperCard> {
         }
         return pool;
     }
-    
+
     public String toCardList(String separator) {
         List<Entry<PaperCard, Integer>> main2sort = Lists.newArrayList(this);
         Collections.sort(main2sort, ItemPoolSorter.BY_NAME_THEN_SET);
         final CardDb commonDb = StaticData.instance().getCommonCards();
         StringBuilder sb = new StringBuilder();
-        
+
         boolean isFirst = true;
-        
+
         for (final Entry<PaperCard, Integer> e : main2sort) {
             if(!isFirst)
                 sb.append(separator);
             else
                 isFirst = false;
-            
+
             CardDb db = !e.getKey().getRules().isVariant() ? commonDb : StaticData.instance().getVariantCards();
             sb.append(e.getValue()).append(" ");
             db.appendCardToStringBuilder(e.getKey(), sb);
-            
+
         }
         return sb.toString();
     }

@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -39,14 +39,14 @@ import java.util.Map.Entry;
 public final class CardDb implements ICardDatabase, IDeckGenPool {
     public final static String foilSuffix = "+";
     public final static char NameSetSeparator = '|';
-    
+
     // need this to obtain cardReference by name+set+artindex
     private final ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<String,Collection<PaperCard>>(String.CASE_INSENSITIVE_ORDER),  CollectionSuppliers.<PaperCard>arrayLists());
     private final Map<String, PaperCard> uniqueCardsByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, CardRules> rulesByName;
     private final Map<String, ICardFace> facesByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private static Map<String, String> artPrefs = new HashMap<String, String>();
-    
+
     private final Map<String, String> alternateName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, Integer> artIds = new HashMap<String, Integer>();
 
@@ -60,32 +60,32 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         Earliest(false),
         EarliestCoreExp(true),
         Random(false);
-        
+
         final boolean filterSets;
         private SetPreference(boolean filterIrregularSets) {
             filterSets = filterIrregularSets;
         }
-        
+
         public boolean accept(CardEdition ed) {
             if (ed == null)  return false;
-            return !filterSets || ed.getType() == Type.CORE || ed.getType() == Type.EXPANSION || ed.getType() == Type.REPRINT; 
+            return !filterSets || ed.getType() == Type.CORE || ed.getType() == Type.EXPANSION || ed.getType() == Type.REPRINT;
         }
     }
-    
+
     // NO GETTERS/SETTERS HERE!
     public static class CardRequest {
         public String cardName;
         public String edition;
         public int artIndex;
         public boolean isFoil;
-        
+
         private CardRequest(String name, String edition, int artIndex, boolean isFoil) {
             cardName = name;
             this.edition = edition;
             this.artIndex = artIndex;
             this.isFoil = isFoil;
         }
-        
+
         public static CardRequest fromString(String name) {
             boolean isFoil = name.endsWith(foilSuffix);
             if (isFoil) {
@@ -107,7 +107,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 cardName = cardName.substring(0, cardName.length() - foilSuffix.length());
                 isFoil = true;
             }
-            
+
             int artIndex = artPos > 0 ? Integer.parseInt(nameParts[artPos]) : 0;
             String setName = setPos > 0 ? nameParts[setPos] : null;
             if ("???".equals(setName)) {
@@ -124,7 +124,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
         // create faces list from rules
         for (final CardRules rule : rules.values() ) {
-            final ICardFace main = rule.getMainPart(); 
+            final ICardFace main = rule.getMainPart();
             facesByName.put(main.getName(), main);
             if (main.getAltName() != null) {
                 alternateName.put(main.getAltName(), main.getName());
@@ -138,7 +138,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             }
         }
     }
-    
+
     private void addSetCard(CardEdition e, CardInSet cis, CardRules cr) {
         int artIdx = 1;
         String key = e.getCode() + "/" + cis.name;
@@ -171,7 +171,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         Date today = new Date();
 
         for (CardEdition e : editions.getOrderedEditions()) {
-            boolean isCoreExpSet = e.getType() == CardEdition.Type.CORE || e.getType() == CardEdition.Type.EXPANSION || e.getType() == CardEdition.Type.REPRINT; 
+            boolean isCoreExpSet = e.getType() == CardEdition.Type.CORE || e.getType() == CardEdition.Type.EXPANSION || e.getType() == CardEdition.Type.REPRINT;
             if (logMissingPerEdition && isCoreExpSet) {
                 System.out.print(e.getName() + " (" + e.getCards().length + " cards)");
             }
@@ -203,7 +203,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             missingCards.clear();
             artIds.clear();
         }
-        
+
         if (logMissingSummary) {
             System.out.printf("Totally %d cards not implemented: %s\n", allMissingCards.size(), StringUtils.join(allMissingCards, " | "));
         }
@@ -309,7 +309,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
         return tryGetCard(request);
     }
-    
+
     public int getCardCollectorNumber(String cardName, String reqEdition) {
         cardName = getName(cardName);
         CardEdition edition = editions.get(reqEdition);
@@ -499,7 +499,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         Collection<PaperCard> cards = getAllCards(cardName);
         if (null == cards) {
             return 0;
-        } 
+        }
 
         for (PaperCard pc : cards) {
             if (pc.getEdition().equalsIgnoreCase(setName)) {
@@ -539,7 +539,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
         return cardName;
     }
-    
+
     @Override
     public List<PaperCard> getAllCards(String cardName) {
         return allCardsByName.get(getName(cardName));
@@ -582,7 +582,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             return false;
         }
     }
-    
+
     public StringBuilder appendCardToStringBuilder(PaperCard card, StringBuilder sb) {
         final boolean hasBadSetInfo = "???".equals(card.getEdition()) || StringUtils.isBlank(card.getEdition());
         sb.append(card.getName());
@@ -601,51 +601,49 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return sb;
     }
 
-    public PaperCard createUnsuportedCard(String cardName) {
+    public PaperCard createUnsupportedCard(String cardName) {
+
         CardRequest request = CardRequest.fromString(cardName);
-        CardEdition cE = CardEdition.UNKNOWN;
-        CardRarity cR = CardRarity.Unknown;
+        CardEdition cardEdition = CardEdition.UNKNOWN;
+        CardRarity cardRarity = CardRarity.Unknown;
 
         // May iterate over editions and find out if there is any card named 'cardName' but not implemented with Forge script.
         if (StringUtils.isBlank(request.edition)) {
-            for (CardEdition e : editions) {
-                for (CardInSet cs : e.getCards()) {
-                    if (cs.name.equals(request.cardName)) {
-                        cE = e;
-                        cR = cs.rarity;
+            for (CardEdition edition : editions) {
+                for (CardInSet cardInSet : edition.getCards()) {
+                    if (cardInSet.name.equals(request.cardName)) {
+                        cardEdition = edition;
+                        cardRarity = cardInSet.rarity;
                         break;
                     }
                 }
-                if (cE != CardEdition.UNKNOWN) {
+                if (cardEdition != CardEdition.UNKNOWN) {
                     break;
                 }
             }
-        }
-        else {
-            cE = editions.get(request.edition);
-            if (cE != null) {
-                for (CardInSet cs : cE.getCards()) {
-                    if (cs.name.equals(request.cardName)) {
-                        cR = cs.rarity;
+        } else {
+            cardEdition = editions.get(request.edition);
+            if (cardEdition != null) {
+                for (CardInSet cardInSet : cardEdition.getCards()) {
+                    if (cardInSet.name.equals(request.cardName)) {
+                        cardRarity = cardInSet.rarity;
                         break;
                     }
                 }
             }
             else {
-                cE = CardEdition.UNKNOWN;
+                cardEdition = CardEdition.UNKNOWN;
             }
         }
-            
 
-        // Write to log that attempt,
-        if (cR == CardRarity.Unknown) {
+        if (cardRarity == CardRarity.Unknown) {
             System.err.println(String.format("An unknown card found when loading Forge decks: \"%s\" Forge does not know of such a card's existence. Have you mistyped the card name?", cardName));
+        } else {
+            System.err.println(String.format("An unsupported card was requested: \"%s\" from \"%s\" set. We're sorry, but you cannot use this card yet.", request.cardName, cardEdition.getName()));
         }
-        else {
-            System.err.println(String.format("An unsupported card was requested: \"%s\" from \"%s\" set. We're sorry, but you cannot use this card yet.", request.cardName, cE.getName()));
-        }
-        
-        return new PaperCard(CardRules.getUnsupportedCardNamed(request.cardName), cE.getCode(), cR, 1);
+
+        return new PaperCard(CardRules.getUnsupportedCardNamed(request.cardName), cardEdition.getCode(), cardRarity, 1);
+
     }
 
     private final Editor editor = new Editor();
@@ -663,7 +661,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             }
 
             result = rulesByName.put(cardName, rules);
-            
+
             // 1. generate all paper cards from edition data we have (either explicit, or found in res/editions, or add to unknown edition)
             List<PaperCard> paperCards = new ArrayList<PaperCard>();
             if (null == whenItWasPrinted || whenItWasPrinted.isEmpty()) {

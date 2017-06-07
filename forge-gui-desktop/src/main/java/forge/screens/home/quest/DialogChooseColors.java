@@ -143,6 +143,8 @@ public class DialogChooseColors {
 		left.setOpaque(false);
 		left.add(new FLabel.Builder().text("Distribution").fontSize(18).build(), "gaptop 10");
 
+		left.add(new FTextPane("Hover over each item for a more detailed description."), "gaptop 20");
+
 		final JXButtonPanel poolTypePanel    = new JXButtonPanel();
 		final String        radioConstraints = "h 25px!, gaptop 5";
 		poolTypePanel.add(radBalanced, radioConstraints);
@@ -201,9 +203,9 @@ public class DialogChooseColors {
 		cbxArtifacts.setVisible(!radSurpriseMe.isSelected() && !radBoosters.isSelected());
 		numberOfBoostersField.setVisible(radBoosters.isSelected());
 
-		radBalanced.setToolTipText("A balanced distribution will provide a roughly equal number of cards in each selected color.");
-		radRandom.setToolTipText("A random distribution will be almost entirely randomly selected. This ignores any color selections.");
-		radSurpriseMe.setToolTipText("This is the same as a balanced distribution, except the colors picked will be random and you will not be told what they are.");
+		radBalanced.setToolTipText("A \"Balanced\" distribution will provide a roughly equal number of cards in each selected color.");
+		radRandom.setToolTipText("A \"True Random\" distribution will be almost entirely randomly selected. This ignores any color selections.");
+		radSurpriseMe.setToolTipText("This is the same as a \"Balanced\" distribution, except the colors picked will be random and you will not be told what they are.");
 		radBoosters.setToolTipText("This ignores all color settings and instead generates a card pool out of a specified number of booster packs.");
 		cbxArtifacts.setToolTipText("When selected, artifacts will be included in your pool regardless of color selections. This mimics the old card pool behavior.");
 
