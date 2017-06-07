@@ -372,7 +372,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             if (!showSplitMana) {
                 drawManaCost(g, card.getCurrentState().getManaCost(), 0);
             } else {
-                if (!card.getName().isEmpty()) { // FIXME: temporary crash prevention measure for face-down (manifested) split cards
+                if (!card.isFaceDown()) { // no need to draw mana symbols on face down split cards (e.g. manifested)
                     PaperCard pc = StaticData.instance().getCommonCards().getCard(card.getName());
                     int ofs = pc != null && Card.getCardForUi(pc).hasKeyword("Aftermath") ? -12 : 12;
 

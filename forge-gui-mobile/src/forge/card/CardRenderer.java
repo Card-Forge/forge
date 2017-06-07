@@ -379,7 +379,7 @@ public class CardRenderer {
             if (showCardManaCostOverlay(card)) {
                 float manaSymbolSize = w / 4;
                 if (card.isSplitCard() && card.hasAlternateState()) {
-                    if (!card.getName().isEmpty()) { // FIXME: temporary crash prevention measure for face-down (manifested) split cards
+                    if (!card.isFaceDown()) { // no need to draw mana symbols on face down split cards (e.g. manifested)
                         float dy = manaSymbolSize / 2 + Utils.scale(5);
 
                         PaperCard pc = StaticData.instance().getCommonCards().getCard(card.getName());

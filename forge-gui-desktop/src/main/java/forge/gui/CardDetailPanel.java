@@ -199,7 +199,7 @@ public class CardDetailPanel extends SkinnedPanel {
             nameCost = name;
         } else {
             final String manaCost;
-            if (card.isSplitCard() && card.hasAlternateState() && card.getZone() != ZoneType.Stack) { //only display current state's mana cost when on stack
+            if (card.isSplitCard() && card.hasAlternateState() && !card.isFaceDown() && card.getZone() != ZoneType.Stack) { //only display current state's mana cost when on stack
                 manaCost = card.getCurrentState().getManaCost() + " // " + card.getAlternateState().getManaCost();
             } else {
                 manaCost = state.getManaCost().toString();

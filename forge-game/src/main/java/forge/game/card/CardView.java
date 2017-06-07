@@ -566,7 +566,7 @@ public class CardView extends GameEntityView {
             sb.append(getOwner().getCommanderInfo(this)).append("\r\n");
         }
 
-        if (isSplitCard()) {
+        if (isSplitCard() && !isFaceDown()) {
             CardStateView view = state.getState() == CardStateName.LeftSplit ? state : getAlternateState();
             if (getZone() != ZoneType.Stack) {
                 sb.append("(");
@@ -578,7 +578,7 @@ public class CardView extends GameEntityView {
             sb.append(state.getAbilityText());
         }
 
-        if (isSplitCard() && getZone() != ZoneType.Stack) {
+        if (isSplitCard() && !isFaceDown() && getZone() != ZoneType.Stack) {
             //ensure ability text for right half of split card is included unless spell is on stack
             sb.append("\r\n\r\n").append("(").append(getAlternateState().getName()).append(") ").append(getAlternateState().getOracleText());
         }
@@ -659,7 +659,7 @@ public class CardView extends GameEntityView {
 
         CardState currentState = c.getCurrentState();
         if (isSplitCard) {
-            if (c.getCurrentStateName() != CardStateName.LeftSplit && c.getCurrentStateName() != CardStateName.RightSplit) {
+            if (c.getCurrentStateName() != CardStateName.LeftSplit && c.getCurrentStateName() != CardStateName.RightSplit && c.getCurrentStateName() != CardStateName.FaceDown) {
                 currentState = c.getState(CardStateName.LeftSplit);
             }
         }
@@ -678,7 +678,7 @@ public class CardView extends GameEntityView {
         }
         currentState.getView().updateKeywords(c, currentState); //update keywords even if state doesn't change
 
-        CardState alternateState = isSplitCard ? c.getState(CardStateName.RightSplit) : c.getAlternateState();
+        CardState alternateState = isSplitCard && !c.isFaceDown() ? c.getState(CardStateName.RightSplit) : c.getState(CardStateName.Original);
         if (alternateState == null) {
             set(TrackableProperty.AlternateState, null);
         }

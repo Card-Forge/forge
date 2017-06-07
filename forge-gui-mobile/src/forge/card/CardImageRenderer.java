@@ -426,7 +426,7 @@ public class CardImageRenderer {
         float manaCostWidth = 0;
         if (canShow) {
             ManaCost mainManaCost = state.getManaCost();
-            if (card.isSplitCard() && card.hasAlternateState() && card.getZone() != ZoneType.Stack) { //only display current state's mana cost when on stack
+            if (card.isSplitCard() && card.hasAlternateState() && !card.isFaceDown() && card.getZone() != ZoneType.Stack) { //only display current state's mana cost when on stack
                 //handle rendering both parts of split card
                 mainManaCost = state.getManaCost();
                 ManaCost otherManaCost = card.getAlternateState().getManaCost();
