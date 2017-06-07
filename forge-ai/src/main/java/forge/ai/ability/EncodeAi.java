@@ -17,6 +17,8 @@
  */
 package forge.ai.ability;
 
+import java.util.List;
+
 import com.google.common.base.Predicate;
 
 import forge.ai.ComputerUtilCard;
@@ -28,8 +30,6 @@ import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
-
-import java.util.List;
 
 /**
  * <p>
@@ -63,20 +63,36 @@ public final class EncodeAi extends SpellAbilityAi {
     }
     
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.ai.SpellAbilityAi#confirmAction(forge.game.player.Player,
+     * forge.game.spellability.SpellAbility,
+     * forge.game.player.PlayerActionConfirmMode, java.lang.String)
+     */
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
-        return true;
+        // only try to encode if there is a creature it can be used on
+        return chooseCard(player, player.getCreaturesInPlay(), true) != null;
     }
-    
-    /* (non-Javadoc)
-     * @see forge.card.ability.SpellAbilityAi#chooseSingleCard(forge.game.player.Player, forge.card.spellability.SpellAbility, java.util.List, boolean)
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see forge.ai.SpellAbilityAi#chooseSingleCard(forge.game.player.Player,
+     * forge.game.spellability.SpellAbility, java.lang.Iterable, boolean,
+     * forge.game.player.Player)
      */
     @Override
     public Card chooseSingleCard(final Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
+        return chooseCard(ai, options, isOptional);
+    }
+
+    private Card chooseCard(final Player ai, Iterable<Card> list, boolean isOptional) {
         Card choice = null;
-//        final String logic = sa.getParam("AILogic");
-//        if (logic == null) {
-        final List<Card> attackers = CardLists.filter(options, new Predicate<Card>() {
+        // final String logic = sa.getParam("AILogic");
+        // if (logic == null) {
+        final List<Card> attackers = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return ComputerUtilCombat.canAttackNextTurn(c);
@@ -85,17 +101,24 @@ public final class EncodeAi extends SpellAbilityAi {
         final List<Card> unblockables = CardLists.filter(attackers, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return !CombatUtil.canBeBlocked(c, ai.getOpponent());
+                boolean canAttackOpponent = false;
+                for (Player opp : ai.getOpponents()) {
+                    if (CombatUtil.canAttack(c, opp) && !CombatUtil.canBeBlocked(c, opp)) {
+                        canAttackOpponent = true;
+                        break;
+                    }
+                }
+                return canAttackOpponent;
             }
         });
         if (!unblockables.isEmpty()) {
             choice = ComputerUtilCard.getBestAI(unblockables);
         } else if (!attackers.isEmpty()) {
             choice = ComputerUtilCard.getBestAI(attackers);
-        } else {
-            choice = ComputerUtilCard.getBestAI(options);
+        } else if (!isOptional) {
+            choice = ComputerUtilCard.getBestAI(list);
         }
-//        }
+        // }
         return choice;
     }
 }
