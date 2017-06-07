@@ -15,7 +15,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DialogChooseColors {
+@SuppressWarnings("WeakerAccess")
+public class DialogChoosePoolDistribution {
 
 	private final FPanel mainPanel = new FPanel(new MigLayout("insets 20, gap 25, center, wrap 2"));
 
@@ -39,7 +40,7 @@ public class DialogChooseColors {
 	private Runnable callback;
 
 	@SuppressWarnings("serial")
-	public DialogChooseColors(final List<Byte> preferredColors, final PoolType poolType, final boolean includeArtifacts) {
+	public DialogChoosePoolDistribution(final List<Byte> preferredColors, final PoolType poolType, final boolean includeArtifacts) {
 
 		for (Byte color : preferredColors) {
 			switch (color) {
@@ -143,14 +144,15 @@ public class DialogChooseColors {
 		left.setOpaque(false);
 		left.add(new FLabel.Builder().text("Distribution").fontSize(18).build(), "gaptop 10");
 
-		left.add(new FTextPane("Hover over each item for a more detailed description."), "gaptop 20");
-
 		final JXButtonPanel poolTypePanel    = new JXButtonPanel();
 		final String        radioConstraints = "h 25px!, gaptop 5";
 		poolTypePanel.add(radBalanced, radioConstraints);
 		poolTypePanel.add(radRandom, radioConstraints);
 		poolTypePanel.add(radSurpriseMe, radioConstraints);
 		poolTypePanel.add(radBoosters, radioConstraints);
+
+		left.add(poolTypePanel, "gaptop 15");
+		left.add(new FTextPane("Hover over each item for a more detailed description."), "gaptop 20");
 
 		ActionListener radioButtonListener = new ActionListener() {
 			@Override
@@ -213,8 +215,6 @@ public class DialogChooseColors {
 		radRandom.addActionListener(radioButtonListener);
 		radSurpriseMe.addActionListener(radioButtonListener);
 		radBoosters.addActionListener(radioButtonListener);
-
-		left.add(poolTypePanel, "gaptop 15");
 
 		//Add Bottom and Panels
 		mainPanel.add(left);

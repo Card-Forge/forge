@@ -106,7 +106,7 @@ public enum CSubmenuQuestData implements ICDoc {
         view.getBtnPreferredColors().setCommand(new UiCommand() {
             @Override
             public void run() {
-                final DialogChooseColors colorChooser = new DialogChooseColors(preferredColors, poolType, includeArtifacts);
+                final DialogChoosePoolDistribution colorChooser = new DialogChoosePoolDistribution(preferredColors, poolType, includeArtifacts);
                 colorChooser.show(new UiCommand() {
                     @Override
                     public void run() {
