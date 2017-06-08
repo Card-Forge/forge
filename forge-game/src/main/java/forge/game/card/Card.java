@@ -1522,7 +1522,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || keyword.startsWith("Evoke") || keyword.startsWith("Bestow") || keyword.startsWith("Dash")
                     || keyword.startsWith("Surge") || keyword.startsWith("Transmute") || keyword.startsWith("Suspend")
                     || keyword.equals("Undaunted") || keyword.startsWith("Monstrosity") || keyword.startsWith("Embalm")
-                    || keyword.startsWith("Level up")
+                    || keyword.startsWith("Level up") || keyword.equals("Prowess")
                     || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")) {
                 // keyword parsing takes care of adding a proper description
             } else if (keyword.startsWith("CantBeBlockedBy")) {
