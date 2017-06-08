@@ -2504,21 +2504,32 @@ public class CardFactoryUtil {
                     "Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCascade | Secondary$ " +
                     "True | TriggerDescription$ Cascade - CARDNAME");
 
-            final String abString = "AB$ DigUntil | Cost$ 0 | Defined$ You | Amount$ 1 | Valid$ "
+            final String abString = "DB$ DigUntil | Defined$ You | Amount$ 1 | Valid$ "
                     + "Card.nonLand+cmcLTCascadeX | FoundDestination$ Exile | RevealedDestination$"
-                    + " Exile | References$ CascadeX | ImprintRevealed$ True | RememberFound$ True"
-                    + " | SubAbility$ CascadeCast";
-            final String dbCascadeCast = "DB$ Play | Defined$ Remembered | WithoutManaCost$ True | "
-                    + "Optional$ True | SubAbility$ CascadeMoveToLib";
+                    + " Exile | ImprintRevealed$ True | RememberFound$ True";
+
+            SpellAbility dig = AbilityFactory.getAbility(abString, card);
+            dig.setSVar("CascadeX", "Count$CardManaCost");
+
+            final String dbCascadeCast = "DB$ Play | Defined$ Remembered | WithoutManaCost$ True | Optional$ True";
+            AbilitySub cascadeCast = (AbilitySub)AbilityFactory.getAbility(dbCascadeCast, card);
+
+            dig.setSubAbility(cascadeCast);
+
             final String dbMoveToLib = "DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered,Card.IsImprinted"
-                    + " | Origin$ Exile | Destination$ Library | RandomOrder$ True | LibraryPosition$ -1"
-                    + " | SubAbility$ CascadeCleanup";
-            card.setSVar("TrigCascade", abString);
-            card.setSVar("CascadeCast", dbCascadeCast);
-            card.setSVar("CascadeMoveToLib", dbMoveToLib);
-            card.setSVar("CascadeX", "Count$CardManaCost");
-            card.setSVar("CascadeCleanup", "DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True");
+                    + " | Origin$ Exile | Destination$ Library | RandomOrder$ True | LibraryPosition$ -1";
+
+            AbilitySub moveToLib = (AbilitySub)AbilityFactory.getAbility(dbMoveToLib, card);
+            cascadeCast.setSubAbility(moveToLib);
+
+            final String cascadeCleanup = "DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True";
+            AbilitySub cleanup = (AbilitySub)AbilityFactory.getAbility(cascadeCleanup, card);
+            moveToLib.setSubAbility(cleanup);
+
+            dig.setIntrinsic(intrinsic);
+
             final Trigger cascadeTrigger = TriggerHandler.parseTrigger(trigScript.toString(), card, intrinsic);
+            cascadeTrigger.setOverridingAbility(dig);
 
             final Trigger cardTrigger = card.addTrigger(cascadeTrigger);
             if (!intrinsic) {
