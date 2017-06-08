@@ -5,5 +5,6 @@ PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1| AddKeyword$ First Strike | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as you control a red or white permanent, CARDNAME gets +1/+0 and has first strike.
 SVar:X:Count$Valid Permanent.White+YouCtrl,Permanent.Red+YouCtrl
 SVar:BuffedBy:Permanent.White,Permanent.Red
+DeckHints:Color$White|Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_brawler.jpg
 Oracle:As long as you control a red or white permanent, Battle Brawler gets +1/+0 and has first strike.

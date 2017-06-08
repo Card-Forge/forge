@@ -9,4 +9,5 @@ SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ DrainedLifeCard | Refe
 SVar:DrainedLifeCard:SVar$BlackManaPaid/LimitMax.Limit
 SVar:Limit:Count$xPaid
 SVar:BlackManaPaid:Count$xColorPaid B
+DeckHints:Color$Red
 Oracle:Spend only black and/or red mana on X.\nSoul Burn deals X damage to target creature or player. You gain life equal to the damage dealt, but not more than the amount of {B} spent on X, the player's life total before Soul Burn dealt damage, or the creature's toughness.

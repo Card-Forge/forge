@@ -7,5 +7,6 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2 | NumDef$ 2
 SVar:BuffedBy:Card.Black
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Black
+DeckHints:Color$Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_gnarr.jpg
 Oracle:Whenever a player casts a black spell, Bog Gnarr gets +2/+2 until end of turn.
