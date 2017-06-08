@@ -133,8 +133,10 @@ public class NewQuestScreen extends FScreen {
 
     private final FLabel lblPoolDistribution = scroller.add(new FLabel.Builder().text("Starting pool distribution:").build());
     private final FRadioButton radBalanced = scroller.add(new FRadioButton("Balanced"));
-    private final FRadioButton radRandom = scroller.add(new FRadioButton("Random"));
     private final FRadioButton radSurpriseMe = scroller.add(new FRadioButton("Surprise Me"));
+    private final FRadioButton radRandom = scroller.add(new FRadioButton("Random"));
+    private final FRadioButton radBoosters = scroller.add(new FRadioButton("Boosters"));
+    private final FNumericTextField numberOfBoostersField = scroller.add(new FNumericTextField(10));
 
     private final FLabel lblPreferredColor = scroller.add(new FLabel.Builder().text("Starting pool colors:").build());
     private final FColorCheckBox cbBlack = scroller.add(new FColorCheckBox("Black"));
@@ -216,7 +218,9 @@ public class NewQuestScreen extends FScreen {
         radBalanced.setGroup(distributionGroup);
         radBalanced.setSelected(true);
         radRandom.setGroup(distributionGroup);
+        radBoosters.setGroup(distributionGroup);
         radSurpriseMe.setGroup(distributionGroup);
+        numberOfBoostersField.setEnabled(false);
 
         @SuppressWarnings("serial")
         UiCommand colorBoxEnabler = new UiCommand() {
@@ -229,11 +233,13 @@ public class NewQuestScreen extends FScreen {
                 cbWhite.setEnabled(radBalanced.isSelected());
                 cbColorless.setEnabled(radBalanced.isSelected());
                 cbIncludeArtifacts.setEnabled(!radSurpriseMe.isSelected());
+                numberOfBoostersField.setEnabled(radBoosters.isSelected());
             }
         };
 
         radBalanced.setCommand(colorBoxEnabler);
         radRandom.setCommand(colorBoxEnabler);
+        radBoosters.setCommand(colorBoxEnabler);
         radSurpriseMe.setCommand(colorBoxEnabler);
 
         for (QuestWorld qw : FModel.getWorlds()) {
@@ -439,6 +445,9 @@ public class NewQuestScreen extends FScreen {
         if (radRandom.isSelected()) {
             return PoolType.RANDOM;
         }
+        if (radBoosters.isSelected()){
+            return PoolType.BOOSTERS;
+        }
         return PoolType.BALANCED;
     }
 
@@ -605,7 +614,7 @@ public class NewQuestScreen extends FScreen {
                     public void run() {
                         final QuestMode mode = isFantasy() ? QuestMode.Fantasy : QuestMode.Classic;
                         final StartingPoolPreferences userPrefs =
-                                new StartingPoolPreferences(getPoolType(), getPreferredColors(), cbIncludeArtifacts.isSelected(), startWithCompleteSet(), allowDuplicateCards(), 0);
+                                new StartingPoolPreferences(getPoolType(), getPreferredColors(), cbIncludeArtifacts.isSelected(), startWithCompleteSet(), allowDuplicateCards(), numberOfBoostersField.getValue());
                         QuestController qc = FModel.getQuest();
                         qc.newGame(questName, getSelectedDifficulty(), mode, fmtPrizes, isUnlockSetsAllowed(), dckStartPool, fmtStartPool, getStartingWorldName(), userPrefs);
                         qc.save();

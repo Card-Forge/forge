@@ -9,6 +9,11 @@ public class FNumericTextField extends FTextField {
         setAlignment(HAlignment.RIGHT);
     }
 
+    public FNumericTextField(int value0) {
+        setAlignment(HAlignment.RIGHT);
+        setValue(value0);
+    }
+
     public int getValue() {
         return value;
     }
