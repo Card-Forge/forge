@@ -1965,11 +1965,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.startsWith("Storm")) {
                 if (sb.toString().contains("Target") || sb.toString().contains("target")) {
                     String stormDescBegin = "Storm (When you cast this spell, copy it for each spell cast before it this turn.";
-                    String stormDescEnd = " You may choose new targets for the copies.)";
+                    String stormDescEnd = " You may choose new targets for the copies.";
                     if (sb.toString().contains(stormDescBegin)) {
-                        sb.insert(sb.indexOf(stormDescBegin) + stormDescBegin.length() + 1, stormDescEnd);
+                        sb.insert(sb.indexOf(stormDescBegin) + stormDescBegin.length(), stormDescEnd);
                     } else {
-                        sb.append(stormDescBegin + stormDescEnd);
+                        sb.append(stormDescBegin).append(stormDescEnd);
                     }
                 }
             } else if (keyword.startsWith("Replicate") && !sb.toString().contains("you paid its replicate cost.")) {
