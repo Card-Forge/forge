@@ -43,6 +43,7 @@ public class AltWinAchievements extends AchievementCollection {
         add("Near-Death Experience", "The Edge", "Phew... I thought I was going to die!");
         add("Phage the Untouchable", "The Untouchable", "None are immune to her deadly touch!");
         add("Test of Endurance", "The Test", "So... did I pass?");
+        add("Triskaidekaphobia", "The Fear of 13", "It's just a silly ancient superstition... right?");
         add("Mechanized Production", "The Rise of Replicas", "Welcome to the future of mass production!");
     }
 
