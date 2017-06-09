@@ -1107,7 +1107,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     (itemInfo.item instanceof IPaperCard && CardView.getCardForUi((IPaperCard)itemInfo.item).
                             getCurrentState().getSetCode().equalsIgnoreCase("MPS_AKH"));
 
-            final int borderSize = noBorder? 2 : Math.round(itemWidth * CardPanel.BLACK_BORDER_SIZE);
+            final int borderSize = noBorder? 0 : Math.round(itemWidth * CardPanel.BLACK_BORDER_SIZE);
             final int cornerSize = Math.max(4, Math.round(itemWidth * CardPanel.ROUNDED_CORNER_SIZE));
 
             if (itemInfo.selected || itemInfo == hoveredItem) {

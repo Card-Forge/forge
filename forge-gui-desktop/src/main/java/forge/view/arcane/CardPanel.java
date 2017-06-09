@@ -309,7 +309,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         // Determine whether to render border from properties
         boolean noBorder = !isPreferenceEnabled(FPref.UI_RENDER_BLACK_BORDERS) || getCard().getCurrentState().getSetCode().equalsIgnoreCase("MPS_AKH");
 
-        final int borderSize = noBorder ? 2 : Math.round(cardWidth * CardPanel.BLACK_BORDER_SIZE);
+        final int borderSize = noBorder ? 0 : Math.round(cardWidth * CardPanel.BLACK_BORDER_SIZE);
 
         final Point imgPos = new Point(cardXOffset + borderSize, cardYOffset + borderSize);
         final Dimension imgSize = new Dimension(cardWidth - (borderSize * 2), cardHeight - (borderSize * 2));
