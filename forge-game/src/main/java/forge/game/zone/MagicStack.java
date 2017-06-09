@@ -733,7 +733,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 if (sa instanceof WrappedAbility) {
                     WrappedAbility wi = (WrappedAbility)sa;
                     if (wi.getTrigger().getMode() == t) {
-                        sa.setSVar("TriggerFizzled", "True");
+                        ((WrappedAbility)sa).getWrappedAbility().setSVar("TriggerFizzled", "True");
                     }
                 }
             }
