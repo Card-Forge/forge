@@ -16942,6 +16942,8 @@ forge-gui/res/cardsfolder/u/utter_end.txt -text
 forge-gui/res/cardsfolder/u/utvara_hellkite.txt -text
 forge-gui/res/cardsfolder/u/utvara_scalper.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/u/uyo_silent_prophet.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/upcoming/bontus_last_reckoning.txt -text
+forge-gui/res/cardsfolder/upcoming/samut_the_tested.txt -text
 forge-gui/res/cardsfolder/v/vacuumelt.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/vaevictis_asmadi.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/vagrant_plowbeasts.txt svneol=native#text/plain
@@ -18847,6 +18849,7 @@ forge-gui/res/editions/Commander[!!-~]2013.txt -text svneol=unset#application/oc
 forge-gui/res/editions/Commander[!!-~]2014.txt -text
 forge-gui/res/editions/Commander[!!-~]2015.txt -text
 forge-gui/res/editions/Commander[!!-~]2016.txt -text
+forge-gui/res/editions/Commander[!!-~]2017.txt -text
 forge-gui/res/editions/Commander[!!-~]Anthology.txt -text
 forge-gui/res/editions/Commander's[!!-~]Arsenal.txt -text
 forge-gui/res/editions/Commander.txt -text
@@ -18900,6 +18903,7 @@ forge-gui/res/editions/Future[!!-~]Sight.txt -text
 forge-gui/res/editions/Gatecrash.txt -text
 forge-gui/res/editions/Guildpact.txt -text
 forge-gui/res/editions/Homelands.txt -text
+forge-gui/res/editions/Hour[!!-~]of[!!-~]Devastation.txt -text
 forge-gui/res/editions/Ice[!!-~]Age.txt -text
 forge-gui/res/editions/Innistrad.txt -text
 forge-gui/res/editions/Invasion.txt -text
