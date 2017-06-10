@@ -1309,7 +1309,7 @@ public class ComputerUtilMana {
      */
     public static int determineLeftoverMana(final SpellAbility sa, final Player player) {
         for (int i = 1; i < 100; i++) {
-            if (!canPayManaCost(sa, player, i)) {
+            if (!canPayManaCost(sa.getRootAbility(), player, i)) {
                 return i - 1;
             }
         }
@@ -1331,7 +1331,7 @@ public class ComputerUtilMana {
      * @since 1.5.59
      */
     public static int determineLeftoverMana(final SpellAbility sa, final Player player, final String shardColor) {
-        ManaCost origCost = sa.getPayCosts().getTotalMana();
+        ManaCost origCost = sa.getRootAbility().getPayCosts().getTotalMana();
 
         String shardSurplus = shardColor;
         for (int i = 1; i < 100; i++) {
