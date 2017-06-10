@@ -222,9 +222,9 @@ public class DestroyAi extends SpellAbilityAi {
                 else if (CardLists.getNotType(list, "Land").isEmpty()) {
                     choice = ComputerUtilCard.getBestLandAI(list);
 
-                    if ("LandForLand".equals(logic)) {
+                    if ("LandForLand".equals(logic) || "GhostQuarter".equals(logic)) {
                         // Strip Mine, Wasteland - cut short if the relevant logic fails
-                        if (!doLandForLandRemovalLogic(sa, ai, choice)) {
+                        if (!doLandForLandRemovalLogic(sa, ai, choice, logic)) {
                             return false;
                         }
                     }
@@ -402,7 +402,7 @@ public class DestroyAi extends SpellAbilityAi {
         return true;
     }
 
-    public boolean doLandForLandRemovalLogic(SpellAbility sa, Player ai, Card tgtLand) {
+    public boolean doLandForLandRemovalLogic(SpellAbility sa, Player ai, Card tgtLand, String logic) {
         if (tgtLand == null) { return false; }
 
         Player tgtPlayer = tgtLand.getController();
@@ -445,6 +445,12 @@ public class DestroyAi extends SpellAbilityAi {
         boolean tempoCheck = numLandsOTB >= amountNoTempoCheck 
                 || ((numLandsInHand >= amountLandsInHand || isHighPriority) && ((numLandsInHand + numLandsOTB >= amountNoTimingCheck) || timingCheck));
 
-        return tempoCheck;
+        // For Ghost Quarter, only use it if you have either more lands in play than your opponent
+        // or the same number of lands but an extra land in hand (otherwise the AI plays too suboptimally)
+        if ("GhostQuarter".equals(logic)) {
+            return tempoCheck && (numLandsOTB > oppLands.size() || (numLandsOTB == oppLands.size() && numLandsInHand > 0));
+        } else {
+            return tempoCheck;
+        }
     }
 }
