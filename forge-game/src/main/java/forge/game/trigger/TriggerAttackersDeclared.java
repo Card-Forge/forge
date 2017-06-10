@@ -23,6 +23,7 @@ import forge.game.spellability.SpellAbility;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * TODO Write javadoc for this type.
@@ -45,6 +46,7 @@ public class TriggerAttackersDeclared extends Trigger {
     }
 
     /** {@inheritDoc} */
+	@SuppressWarnings("unchecked")
     @Override
     public final boolean performTest(final Map<String, Object> runParams2) {
         if (this.mapParams.containsKey("AttackingPlayer")) {
@@ -55,12 +57,24 @@ public class TriggerAttackersDeclared extends Trigger {
         }
         if (this.mapParams.containsKey("AttackedTarget")) {
             boolean valid = false;
-            @SuppressWarnings("unchecked")
             List<GameEntity> list = (List<GameEntity>) runParams2.get("AttackedTarget");
             for (GameEntity b : list) {
                 if (matchesValid(b, this.mapParams.get("AttackedTarget").split(","), this.getHostCard())) {
                     valid = true;
                     break;
+                }
+            }
+            if (!valid) {
+                return false;
+            }
+        }
+        if (this.mapParams.containsKey("ValidAttackers")) {
+            boolean valid = false;
+
+            final Set<Card> srcs = (Set<Card>) runParams2.get("Attackers");
+            for (Card c : srcs) {
+                if (c.isValid(this.mapParams.get("ValidAttackers").split(","), this.getHostCard().getController(), this.getHostCard(), null)) {
+                    valid = true;
                 }
             }
             if (!valid) {

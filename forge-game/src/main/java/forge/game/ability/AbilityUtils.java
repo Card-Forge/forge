@@ -663,6 +663,10 @@ public class AbilityUtils {
                 list = null;
             }
         }
+        else if (calcX[0].startsWith("TriggerObjects")) {
+            final SpellAbility root = sa.getRootAbility();
+            list = (CardCollection) root.getTriggeringObject(calcX[0].substring(14));
+        }
         else if (calcX[0].startsWith("Triggered")) {
             final SpellAbility root = sa.getRootAbility();
             list = new CardCollection((Card) root.getTriggeringObject(calcX[0].substring(9)));

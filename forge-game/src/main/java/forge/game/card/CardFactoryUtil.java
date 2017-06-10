@@ -1071,13 +1071,15 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].contains("ColorsCtrl")) {
-                final CardCollectionView list = cc.getCardsIn(ZoneType.Battlefield);
-                int n = 0;
-                for (final byte col : MagicColor.WUBRG) {
-                        if (!CardLists.getColor(list, col).isEmpty()) {
-                                n++;
-                        }
+            final String restriction = l[0].substring(11);
+            final String[] rest = restriction.split(",");
+            final CardCollection list = CardLists.getValidCards(cc.getGame().getCardsInGame(), rest, cc, c, null);
+            int n = 0;
+            for (final byte col : MagicColor.WUBRG) {
+                if (!CardLists.getColor(list, col).isEmpty()) {
+                    n++;
                 }
+            }
             return doXMath(n, m, c);
         }
 
