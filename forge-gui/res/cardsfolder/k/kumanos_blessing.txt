@@ -4,7 +4,8 @@ Types:Enchantment Aura
 K:Flash
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.DamagedByEnchanted | AddHiddenKeyword$ If CARDNAME would be put into a graveyard, exile it instead. | Description$ If a creature dealt damage by enchanted creature this turn would die, exile it instead.
+R:Event$ Moved | ValidCard$ Creature.DamagedByEnchanted | Destination$ Graveyard | ReplaceWith$ DBExile | Description$ If a creature dealt damage by enchanted creature this turn would die, exile it instead.
+SVar:DBExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ Exile
 SVar:RemRandomDeck:True
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kumanos_blessing.jpg
