@@ -1,8 +1,7 @@
 Name:Yamabushi's Storm
 ManaCost:1 R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 1 R | ValidCards$ Creature | NumDmg$ 1 | RememberDamaged$ True | SubAbility$ DBPumpAll | SpellDescription$ CARDNAME deals 1 damage to each creature. If a creature dealt damage this way would die this turn, exile it instead.
-SVar:DBPumpAll:DB$ PumpAll | KW$ HIDDEN If CARDNAME would be put into a graveyard, exile it instead. | ValidCards$ Creature.IsRemembered | SubAbility$ DBCleanup
+A:SP$ DamageAll | Cost$ 1 R | ValidCards$ Creature | NumDmg$ 1 | RememberDamaged$ True | ReplaceDyingDefined$ Remembered | SubAbility$ DBCleanup | SpellDescription$ CARDNAME deals 1 damage to each creature. If a creature dealt damage this way would die this turn, exile it instead.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yamabushis_storm.jpg
 Oracle:Yamabushi's Storm deals 1 damage to each creature. If a creature dealt damage this way would die this turn, exile it instead.
