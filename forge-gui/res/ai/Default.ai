@@ -38,7 +38,8 @@ ALWAYS_COUNTER_SPELLS_FROM_NAMED_CARDS=None
 PRIORITY_REDUCTION_FOR_STORM_SPELLS=0
 MIN_COUNT_FOR_STORM_SPELLS=0
 
-# Strip Mine, Wasteland, Ghost Quarter logic
+# Logic for Strip Mine, Wasteland, Ghost Quarter and other similar sac-destroy lands marked with
+# AILogic$ LandForLand or GhostQuarter.
 STRIPMINE_MIN_LANDS_IN_HAND_TO_ACTIVATE=1
 STRIPMINE_MIN_LANDS_FOR_NO_TIMING_CHECK=9999
 STRIPMINE_MIN_LANDS_OTB_FOR_NO_TEMPO_CHECK=6
