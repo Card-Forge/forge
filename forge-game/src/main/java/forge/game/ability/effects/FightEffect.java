@@ -5,7 +5,6 @@ import com.google.common.collect.Maps;
 
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardDamageMap;
 import forge.game.spellability.SpellAbility;
@@ -14,8 +13,11 @@ import forge.game.trigger.TriggerType;
 import java.util.List;
 import java.util.Map;
 
-public class FightEffect extends SpellAbilityEffect {
+public class FightEffect extends DamageBaseEffect {
 
+    /* (non-Javadoc)
+     * @see forge.game.ability.SpellAbilityEffect#getStackDescription(forge.game.spellability.SpellAbility)
+     */
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -31,8 +33,9 @@ public class FightEffect extends SpellAbilityEffect {
         return sb.toString();
     }
 
+
     /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
+     * @see forge.game.ability.SpellAbilityEffect#resolve(forge.game.spellability.SpellAbility)
      */
     @Override
     public void resolve(SpellAbility sa) {
@@ -61,6 +64,8 @@ public class FightEffect extends SpellAbilityEffect {
 
         preventMap.triggerPreventDamage(false);
         damageMap.dealLifelinkDamage();
+        
+        replaceDying(sa);
 
         for (Card c : fighters) {
             final Map<String, Object> runParams = Maps.newHashMap();
@@ -112,7 +117,8 @@ public class FightEffect extends SpellAbilityEffect {
         return fighterList;
     }
     
-    private void dealDamage(Card source, Card target, boolean fightToughness, CardDamageMap damageMap, CardDamageMap preventMap) {
+    private void dealDamage(Card source, Card target, boolean fightToughness, CardDamageMap damageMap,
+            CardDamageMap preventMap) {
         final int dmg = fightToughness ? source.getNetToughness() : source.getNetPower();
 
         target.addDamage(dmg, source, damageMap, preventMap);

@@ -3,7 +3,6 @@ package forge.game.ability.effects;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardDamageMap;
@@ -18,10 +17,10 @@ import java.util.Map.Entry;
 
 import com.google.common.collect.Iterables;
 
-public class DamageDealEffect extends SpellAbilityEffect {
+public class DamageDealEffect extends DamageBaseEffect {
 
     /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
+     * @see forge.game.ability.SpellAbilityEffect#getStackDescription(forge.game.spellability.SpellAbility)
      */
     @Override
     protected String getStackDescription(SpellAbility sa) {
@@ -65,6 +64,9 @@ public class DamageDealEffect extends SpellAbilityEffect {
         return sb.toString();
     }
 
+    /* (non-Javadoc)
+     * @see forge.game.ability.SpellAbilityEffect#resolve(forge.game.spellability.SpellAbility)
+     */
     @Override
     public void resolve(SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
@@ -152,8 +154,10 @@ public class DamageDealEffect extends SpellAbilityEffect {
             if (combatDmg) {
                 game.getCombat().getDamageMap().putAll(damageMap);
             } else {
+                preventMap.triggerPreventDamage(false);
                 // non combat damage cause lifegain there
                 damageMap.dealLifelinkDamage();
+                replaceDying(sa);
             }
             return;
         }
@@ -192,5 +196,7 @@ public class DamageDealEffect extends SpellAbilityEffect {
             // non combat damage cause lifegain there
             damageMap.dealLifelinkDamage();
         }
+
+        replaceDying(sa);
     }
 }

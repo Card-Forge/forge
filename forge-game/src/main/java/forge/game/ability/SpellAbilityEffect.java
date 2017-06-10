@@ -264,4 +264,22 @@ public abstract class SpellAbilityEffect {
         trig.setOverridingAbility(AbilityFactory.getAbility(trigSA, card));
         card.addTrigger(trig);
     }
+    
+    protected static void addForgetOnMovedTrigger(final Card card, final String zone) {
+        String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ " + zone + " | Destination$ Any | TriggerZones$ Command | Static$ True";
+        String effect = "DB$ Pump | ForgetObjects$ TriggeredCard";
+        final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
+        parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+        final Trigger addedTrigger = card.addTrigger(parsedTrigger);
+        addedTrigger.setIntrinsic(true);
+    }
+
+    protected static void addExileOnMovedTrigger(final Card card, final String zone) {
+        String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ " + zone + " | Destination$ Any | TriggerZones$ Command | Static$ True";
+        String effect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile";
+        final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
+        parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+        final Trigger addedTrigger = card.addTrigger(parsedTrigger);
+        addedTrigger.setIntrinsic(true);
+    }
 }

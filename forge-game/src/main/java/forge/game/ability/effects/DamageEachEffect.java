@@ -2,7 +2,6 @@ package forge.game.ability.effects;
 
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardDamageMap;
 import forge.game.card.CardFactoryUtil;
@@ -14,7 +13,7 @@ import forge.util.collect.FCollectionView;
 
 import java.util.List;
 
-public class DamageEachEffect extends SpellAbilityEffect {
+public class DamageEachEffect extends DamageBaseEffect {
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
@@ -123,5 +122,7 @@ public class DamageEachEffect extends SpellAbilityEffect {
         preventMap.triggerPreventDamage(false);
 
         damageMap.dealLifelinkDamage();
+
+        replaceDying(sa);
     }
 }

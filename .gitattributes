@@ -386,6 +386,7 @@ forge-game/src/main/java/forge/game/ability/effects/CountersPutOrRemoveEffect.ja
 forge-game/src/main/java/forge/game/ability/effects/CountersRemoveAllEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/CountersRemoveEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/DamageAllEffect.java -text
+forge-game/src/main/java/forge/game/ability/effects/DamageBaseEffect.java -text svneol=unset#text/plain
 forge-game/src/main/java/forge/game/ability/effects/DamageDealEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/DamageEachEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/DamagePreventAllEffect.java -text
