@@ -1039,7 +1039,6 @@ public class ComputerUtilMana {
             restriction = payCosts.getCostMana().getRestiction();
         }
         ManaCostBeingPaid cost = new ManaCostBeingPaid(mana, restriction);
-        CostAdjustment.adjust(cost, sa, null, test);
 
         // Tack xMana Payments into mana here if X is a set value
         if (sa.getPayCosts() != null && (cost.getXcounter() > 0 || extraMana > 0)) {
@@ -1069,6 +1068,8 @@ public class ComputerUtilMana {
             }
         }
         
+        CostAdjustment.adjust(cost, sa, null, test);
+
         int timesMultikicked = card.getKickerMagnitude();
         if (timesMultikicked > 0 && sa.hasParam("Announce") && sa.getParam("Announce").startsWith("Multikicker")) {
             ManaCost mkCost = sa.getMultiKickerManaCost();
