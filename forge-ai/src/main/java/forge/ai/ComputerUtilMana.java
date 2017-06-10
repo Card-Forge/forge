@@ -222,10 +222,13 @@ public class ComputerUtilMana {
             // Exception: when paying generic mana with Cavern of Souls, prefer the colored mana producing ability
             // to attempt to make the spell uncounterable when possible.
             if ((toPay == ManaCostShard.GENERIC || toPay == ManaCostShard.X) 
-                    && ma.getHostCard().getName().equals("Cavern of Souls")
-                    && !ma.getManaPart().isAnyMana() 
+                    && ComputerUtilAbility.getAbilitySourceName(ma).equals("Cavern of Souls")
                     && sa.getHostCard().getType().getCreatureTypes().contains(ma.getHostCard().getChosenType())) {
-                continue;
+                for (SpellAbility ab : saList) {
+                    if (ab.isManaAbility() && ab.getManaPart().isAnyMana() && ab.hasParam("AddsNoCounter")) {
+                        return ab;
+                    }
+                }
             }
 
             final String typeRes = cost.getSourceRestriction();
