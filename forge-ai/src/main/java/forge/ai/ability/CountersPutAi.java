@@ -590,7 +590,9 @@ public class CountersPutAi extends SpellAbilityAi {
             // No target. So must be defined
             list = new CardCollection(AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa));
             
-            if (amountStr.equals("X") && ((sa.hasParam(amountStr) && sa.getSVar(amountStr).equals("Count$xPaid")) || source.getSVar(amountStr).equals("Count$xPaid") )) {
+            if (amountStr.equals("X") 
+                    && !source.hasSVar("PayX") /* SubAbility on something that already had set PayX, e.g. Endless One ETB counters */
+                    && ((sa.hasParam(amountStr) && sa.getSVar(amountStr).equals("Count$xPaid")) || source.getSVar(amountStr).equals("Count$xPaid") )) {
 
                 // detect if there's more than one X in the cost (Hangarback Walker, Walking Ballista, etc.)
                 SpellAbility testSa = sa;
