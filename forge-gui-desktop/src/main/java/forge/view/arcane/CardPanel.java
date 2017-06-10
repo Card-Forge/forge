@@ -229,8 +229,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        final int cornerSize = Math.max(4, Math.round(cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
-        final int offset = isTapped() ? 1 : 0;
+        // in "no borders" mode, use square card corners to avoid highlight glitches
+        boolean noBorderPref = !isPreferenceEnabled(FPref.UI_RENDER_BLACK_BORDERS);
+
+        final int cornerSize = noBorderPref ? 0 : Math.max(4, Math.round(cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
+        final int offset = isTapped() && !noBorderPref ? 1 : 0;
 
         // Magenta outline for when card was chosen to pay
         if (matchUI.isUsedToPay(getCard())) {
@@ -307,9 +310,16 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     @Override
     public final void doLayout() {
         // Determine whether to render border from properties
-        boolean noBorder = !isPreferenceEnabled(FPref.UI_RENDER_BLACK_BORDERS) || getCard().getCurrentState().getSetCode().equalsIgnoreCase("MPS_AKH");
+        boolean noBorderPref = !isPreferenceEnabled(FPref.UI_RENDER_BLACK_BORDERS);
+        // Borderless cards should be accounted for here
+        boolean noBorderOnCard = getCard().getCurrentState().getSetCode().equalsIgnoreCase("MPS_AKH");
 
-        final int borderSize = noBorder ? 0 : Math.round(cardWidth * CardPanel.BLACK_BORDER_SIZE);
+        int borderSize = 0;
+
+        if (!noBorderPref) {
+            // A 2 px border is necessary to ensure the rounded card corners don't glitch when the card is highlighted
+            borderSize = noBorderOnCard ? 2 : Math.round(cardWidth * CardPanel.BLACK_BORDER_SIZE);
+        }
 
         final Point imgPos = new Point(cardXOffset + borderSize, cardYOffset + borderSize);
         final Dimension imgSize = new Dimension(cardWidth - (borderSize * 2), cardHeight - (borderSize * 2));
