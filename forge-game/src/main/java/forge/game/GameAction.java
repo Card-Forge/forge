@@ -680,7 +680,7 @@ public class GameAction {
     }
 
     public final void checkStaticAbilities() {
-        checkStaticAbilities(true, new CardCollection());
+        checkStaticAbilities(true, Sets.<Card>newHashSet());
     }
     public final void checkStaticAbilities(final boolean runEvents, final Set<Card> affectedCards) {
         if (isCheckingStaticAbilitiesOnHold()) {

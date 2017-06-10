@@ -179,7 +179,7 @@ public class AttackConstraints {
 
         // Now try all others (plus empty attack) and count their violations
         final FCollection<Map<Card, GameEntity>> legalAttackers = collectLegalAttackers(reqs, myMax);
-        possible.putAll(Maps.asMap(legalAttackers, FN_COUNT_VIOLATIONS));
+        possible.putAll(Maps.asMap(legalAttackers.asSet(), FN_COUNT_VIOLATIONS));
         possible.put(Collections.<Card, GameEntity>emptyMap(), countViolations(Collections.<Card, GameEntity>emptyMap()));
  
         // take the case with the fewest violations
@@ -260,7 +260,7 @@ public class AttackConstraints {
             }
 
             for (final Predicate<Card> predicateRestriction : predicateRestrictions) {
-                if (Iterables.any(Sets.union(myAttackers.keySet(), reserved), predicateRestriction)) {
+                if (Iterables.any(Sets.union(myAttackers.keySet(), reserved.asSet()), predicateRestriction)) {
                     // predicate fulfilled already, ignore!
                     continue;
                 }

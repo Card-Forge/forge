@@ -214,7 +214,7 @@ public class Combat {
     }
 
     public final Map<Card, GameEntity> getAttackersAndDefenders() {
-        return Maps.asMap(getAttackers(), new Function<Card, GameEntity>() {
+        return Maps.asMap(getAttackers().asSet(), new Function<Card, GameEntity>() {
             @Override
             public GameEntity apply(final Card attacker) {
                 return getDefenderByAttacker(attacker);
