@@ -229,11 +229,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        // in "no borders" mode, use square card corners to avoid highlight glitches
         boolean noBorderPref = !isPreferenceEnabled(FPref.UI_RENDER_BLACK_BORDERS);
+        boolean hasAlpha = imagePanel != null && imagePanel.getSrcImage() != null && imagePanel.getSrcImage().getColorModel().hasAlpha();
 
-        final int cornerSize = noBorderPref ? 0 : Math.max(4, Math.round(cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
-        final int offset = isTapped() && !noBorderPref ? 1 : 0;
+        final int cornerSize = noBorderPref && !hasAlpha ? 0 : Math.max(4, Math.round(cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
+        final int offset = isTapped() && (!noBorderPref || hasAlpha) ? 1 : 0;
 
         // Magenta outline for when card was chosen to pay
         if (matchUI.isUsedToPay(getCard())) {
@@ -313,10 +313,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         boolean noBorderPref = !isPreferenceEnabled(FPref.UI_RENDER_BLACK_BORDERS);
         // Borderless cards should be accounted for here
         boolean noBorderOnCard = getCard().getCurrentState().getSetCode().equalsIgnoreCase("MPS_AKH");
+        boolean hasAlpha = imagePanel != null && imagePanel.getSrcImage() != null && imagePanel.getSrcImage().getColorModel().hasAlpha();
 
         int borderSize = 0;
 
-        if (!noBorderPref) {
+        if (!noBorderPref && !(noBorderOnCard && hasAlpha)) {
             // A 2 px border is necessary to ensure the rounded card corners don't glitch when the card is highlighted
             borderSize = noBorderOnCard ? 2 : Math.round(cardWidth * CardPanel.BLACK_BORDER_SIZE);
         }
