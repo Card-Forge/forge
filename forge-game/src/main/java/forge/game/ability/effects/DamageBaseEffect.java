@@ -43,21 +43,11 @@ abstract public class DamageBaseEffect extends SpellAbilityEffect {
             // build an Effect with that infomation
             String name = host.getName() + "'s Effect";
 
-            final Card eff = new Card(game.nextCardId(), game);
-            eff.setTimestamp(game.getNextTimestamp());
-            eff.setName(name);
-            eff.addType("Effect");
-            eff.setToken(true); // Set token to true, so when leaving play it gets nuked
-            eff.setOwner(controller);
-
-            eff.setImageKey(host.getImageKey());
-            eff.setColor(host.determineColor().getColor());
-            eff.setImmutable(true);
-            eff.setEffectSource(host);
-
+            final Card eff = createEffect(host, controller, name, host.getImageKey());
             eff.addRemembered(cards);
 
-            String repeffstr = "Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Graveyard " +
+            String repeffstr = "Event$ Moved | ValidCard$ Card.IsRemembered " +
+            "| Origin$ Battlefield | Destination$ Graveyard " +
             "| Description$ If the creature would die this turn, exile it instead.";
             String effect = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ " + zone;
 

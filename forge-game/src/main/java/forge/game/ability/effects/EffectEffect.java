@@ -2,7 +2,6 @@ package forge.game.ability.effects;
 
 import forge.GameCommand;
 import forge.ImageKeys;
-import forge.card.CardType;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -83,7 +82,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
         String name = sa.getParam("Name");
         if (name == null) {
-            name = sa.getHostCard().getName() + "'s Effect";
+            name = hostCard.getName() + "'s Effect";
         }
 
         // Unique Effects shouldn't be duplicated
@@ -101,22 +100,7 @@ public class EffectEffect extends SpellAbilityEffect {
         }
 
         final Player controller = sa.hasParam("EffectOwner") ? ownerEff : sa.getActivatingPlayer();
-        final Card eff = new Card(game.nextCardId(), game);
-        eff.setTimestamp(game.getNextTimestamp());
-        eff.setName(name);
-        // if name includes emplem then it should be one
-        eff.addType(name.endsWith("emblem") ? "Emblem" : "Effect");
-        // add Planeswalker types into Emblem for fun
-        if (name.endsWith("emblem") && hostCard.isPlaneswalker()) {
-            for (final String type : hostCard.getType().getSubtypes()) {
-                if (CardType.isAPlaneswalkerType(type)) {
-                    eff.addType(type);
-                }
-            }
-        }
-        eff.setToken(true); // Set token to true, so when leaving play it gets nuked
-        eff.setOwner(controller);
-
+        
         String image;
         if (sa.hasParam("Image")) {
             image = ImageKeys.getTokenKey(sa.getParam("Image"));
@@ -126,10 +110,7 @@ public class EffectEffect extends SpellAbilityEffect {
             image = hostCard.getImageKey();
         }
 
-        eff.setImageKey(image);
-        eff.setColor(hostCard.determineColor().getColor());
-        eff.setImmutable(true);
-        eff.setEffectSource(hostCard);
+        final Card eff = createEffect(hostCard, controller, name, image);
 
         // Grant SVars first in order to give references to granted abilities
         if (effectSVars != null) {

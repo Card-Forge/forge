@@ -8,15 +8,22 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
 
+import forge.card.CardType;
+import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardFactoryUtil;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementHandler;
+import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
+import forge.game.trigger.TriggerType;
+import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.collect.FCollection;
 
@@ -281,5 +288,72 @@ public abstract class SpellAbilityEffect {
         parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
         final Trigger addedTrigger = card.addTrigger(parsedTrigger);
         addedTrigger.setIntrinsic(true);
+    }
+
+    protected static void addLeaveBattlefieldReplacement(final Card card, final SpellAbility sa, final String zone) {
+        final Card host = sa.getHostCard();
+        final Game game = card.getGame();
+        final Card eff = createEffect(host, sa.getActivatingPlayer(), host.getName() + "'s Effect", host.getImageKey());
+
+        addLeaveBattlefieldReplacement(eff, zone);
+
+        eff.addRemembered(card);
+
+        // Add forgot trigger
+        addExileOnMovedTrigger(eff, "Battlefield");
+
+        // Copy text changes
+        if (sa.isIntrinsic()) {
+            eff.copyChangedTextFrom(card);
+        }
+
+        eff.updateStateForView();
+
+        // TODO: Add targeting to the effect so it knows who it's dealing with
+        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+        game.getAction().moveTo(ZoneType.Command, eff, sa);
+        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+    }
+    
+    protected static void addLeaveBattlefieldReplacement(final Card eff, final String zone) {
+        final String repeffstr = "Event$ Moved | ValidCard$ Card.IsRemembered "
+                + "| Origin$ Battlefield | ExcludeDestination$ " + zone 
+                + "| Description$ If Creature would leave the battlefield, "
+                + " exile it instead of putting it anywhere else.";
+        String effect = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ " + zone;
+
+        ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
+        re.setLayer(ReplacementLayer.Other);
+
+        re.setOverridingAbility(AbilityFactory.getAbility(effect, eff));
+        eff.addReplacementEffect(re);
+    }
+    
+    // create a basic template for Effect to be used somewhere else
+    protected static Card createEffect(final Card hostCard, final Player controller, final String name,
+            final String image) {
+        final Game game = hostCard.getGame();
+        final Card eff = new Card(game.nextCardId(), game);
+        eff.setTimestamp(game.getNextTimestamp());
+        eff.setName(name);
+        // if name includes emplem then it should be one
+        eff.addType(name.endsWith("emblem") ? "Emblem" : "Effect");
+        // add Planeswalker types into Emblem for fun
+        if (name.endsWith("emblem") && hostCard.isPlaneswalker()) {
+            for (final String type : hostCard.getType().getSubtypes()) {
+                if (CardType.isAPlaneswalkerType(type)) {
+                    eff.addType(type);
+                }
+            }
+        }
+        eff.setToken(true); // Set token to true, so when leaving play it gets nuked
+        eff.setOwner(controller);
+
+        eff.setImageKey(image);
+        eff.setColor(hostCard.determineColor().getColor());
+        eff.setImmutable(true);
+        eff.setEffectSource(hostCard);
+
+        return eff;
     }
 }
