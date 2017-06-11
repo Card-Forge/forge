@@ -230,10 +230,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         boolean noBorderPref = !isPreferenceEnabled(FPref.UI_RENDER_BLACK_BORDERS);
-        boolean hasAlpha = imagePanel != null && imagePanel.getSrcImage() != null && imagePanel.getSrcImage().getColorModel().hasAlpha();
+        boolean cardImgHasAlpha = imagePanel != null && imagePanel.getSrcImage() != null && imagePanel.getSrcImage().getColorModel().hasAlpha();
 
-        final int cornerSize = noBorderPref && !hasAlpha ? 0 : Math.max(4, Math.round(cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
-        final int offset = isTapped() && (!noBorderPref || hasAlpha) ? 1 : 0;
+        // if we are rendering borderless and the card has no alpha channel, use square corners to avoid visual glitches with highlight frames.
+        final int cornerSize = noBorderPref && !cardImgHasAlpha ? 0 : Math.max(4, Math.round(cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
+        final int offset = isTapped() && (!noBorderPref || cardImgHasAlpha) ? 1 : 0;
 
         // Magenta outline for when card was chosen to pay
         if (matchUI.isUsedToPay(getCard())) {
@@ -313,11 +314,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         boolean noBorderPref = !isPreferenceEnabled(FPref.UI_RENDER_BLACK_BORDERS);
         // Borderless cards should be accounted for here
         boolean noBorderOnCard = getCard().getCurrentState().getSetCode().equalsIgnoreCase("MPS_AKH");
-        boolean hasAlpha = imagePanel != null && imagePanel.getSrcImage() != null && imagePanel.getSrcImage().getColorModel().hasAlpha();
+        boolean cardImgHasAlpha = imagePanel != null && imagePanel.getSrcImage() != null && imagePanel.getSrcImage().getColorModel().hasAlpha();
 
         int borderSize = 0;
 
-        if (!noBorderPref && !(noBorderOnCard && hasAlpha)) {
+        if (!noBorderPref && !(noBorderOnCard && cardImgHasAlpha)) {
             // A 2 px border is necessary to ensure the rounded card corners don't glitch when the card is highlighted
             borderSize = noBorderOnCard ? 2 : Math.round(cardWidth * CardPanel.BLACK_BORDER_SIZE);
         }
