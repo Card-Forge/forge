@@ -30,21 +30,21 @@ public class ReplaceMoved extends ReplacementEffect {
         if (!runParams.get("Event").equals("Moved")) {
             return false;
         }
-        if (this.getMapParams().containsKey("ValidCard")) {
-            if (!matchesValid(runParams.get("Affected"), this.getMapParams().get("ValidCard").split(","), this.getHostCard())) {
+        if (hasParam("ValidCard")) {
+            if (!matchesValid(runParams.get("Affected"), getParam("ValidCard").split(","), getHostCard())) {
                 return false;
             }
         }
 
-        if (this.getMapParams().containsKey("ValidLKI")) {
-            if (!matchesValid(runParams.get("CardLKI"), this.getMapParams().get("ValidLKI").split(","), this.getHostCard())) {
+        if (hasParam("ValidLKI")) {
+            if (!matchesValid(runParams.get("CardLKI"), getParam("ValidLKI").split(","), getHostCard())) {
                 return false;
             }
         }
         
         boolean matchedZone = false;
-        if (this.getMapParams().containsKey("Origin")) {
-            for(ZoneType z : ZoneType.listValueOf(this.getMapParams().get("Origin"))) {
+        if (hasParam("Origin")) {
+            for(ZoneType z : ZoneType.listValueOf(getParam("Origin"))) {
                 if(z == (ZoneType) runParams.get("Origin"))
                     matchedZone =  true;
             }
@@ -55,9 +55,9 @@ public class ReplaceMoved extends ReplacementEffect {
             }
         }        
         
-        if (this.getMapParams().containsKey("Destination")) {
+        if (hasParam("Destination")) {
             matchedZone = false;
-            for(ZoneType z : ZoneType.listValueOf(this.getMapParams().get("Destination"))) {
+            for(ZoneType z : ZoneType.listValueOf(getParam("Destination"))) {
                 if(z == (ZoneType) runParams.get("Destination"))
                     matchedZone =  true;
             }
@@ -68,6 +68,18 @@ public class ReplaceMoved extends ReplacementEffect {
             }
         }
         
+        if (hasParam("ExcludeDestination")) {
+            matchedZone = false;
+            for(ZoneType z : ZoneType.listValueOf(getParam("ExcludeDestination"))) {
+                if(z == (ZoneType) runParams.get("Destination"))
+                    matchedZone =  true;
+            }
+            
+            if(matchedZone)
+            {
+                return false;
+            }
+        }
         
         return true;
     }
