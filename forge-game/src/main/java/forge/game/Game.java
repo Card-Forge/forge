@@ -146,19 +146,8 @@ public class Game {
                 : zone.equals(ZoneType.Graveyard) ? lastStateGraveyard
                 : null;
 
-        if (lookup != null && lookup.contains(c)) {
-            Card foundCard = null;
-            for (Card lki : lookup) {
-                if (lki.getId() == c.getId()) {
-                    foundCard = lki;
-                    break;
-                }
-            }
-
-            if (foundCard != null) {
-                lookup.remove(foundCard);
-                lookup.add(CardUtil.getLKICopy(c));
-            }
+        if (lookup != null && lookup.remove(c)) {
+            lookup.add(CardUtil.getLKICopy(c));
         }
     }
 
