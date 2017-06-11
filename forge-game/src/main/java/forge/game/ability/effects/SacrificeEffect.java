@@ -61,6 +61,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
             }
             
             sa.setCumulativeupkeep(true);
+            game.updateLastStateForCard(card);
             
             StringBuilder sb = new StringBuilder();
             sb.append("Cumulative upkeep for " + card);

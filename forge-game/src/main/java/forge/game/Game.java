@@ -136,6 +136,32 @@ public class Game {
         }
     }
 
+    public void updateLastStateForCard(Card c) {
+        if (c == null) {
+            return;
+        }
+
+        ZoneType zone = c.getZone().getZoneType();
+        CardCollection lookup = zone.equals(ZoneType.Battlefield) ? lastStateBattlefield
+                : zone.equals(ZoneType.Graveyard) ? lastStateGraveyard
+                : null;
+
+        if (lookup != null) {
+            Card foundCard = null;
+            for (Card lki : lookup) {
+                if (lki.getId() == c.getId()) {
+                    foundCard = lki;
+                    break;
+                }
+            }
+
+            if (foundCard != null) {
+                lookup.remove(foundCard);
+                lookup.add(CardUtil.getLKICopy(c));
+            }
+        }
+    }
+
     public final Ability PLAY_LAND_SURROGATE = new Ability(null, (Cost) null) {
         @Override
         public boolean canPlay() {
