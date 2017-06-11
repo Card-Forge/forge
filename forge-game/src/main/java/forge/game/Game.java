@@ -146,7 +146,7 @@ public class Game {
                 : zone.equals(ZoneType.Graveyard) ? lastStateGraveyard
                 : null;
 
-        if (lookup != null) {
+        if (lookup != null && lookup.contains(c)) {
             Card foundCard = null;
             for (Card lki : lookup) {
                 if (lki.getId() == c.getId()) {
