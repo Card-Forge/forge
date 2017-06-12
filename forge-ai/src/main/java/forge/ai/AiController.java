@@ -414,7 +414,7 @@ public class AiController {
         landList = CardLists.filter(landList, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                canPlaySpellBasic(c);
+                canPlaySpellBasic(c, null);
                 if (c.getType().isLegendary() && !c.getName().equals("Flagstones of Trokair")) {
                     final CardCollectionView list = player.getCardsIn(ZoneType.Battlefield);
                     if (Iterables.any(list, CardPredicates.nameEquals(c.getName()))) {
@@ -671,14 +671,17 @@ public class AiController {
                     && !player.cantLoseForZeroOrLessLife() && player.canLoseLife()) {
                 return AiPlayDecision.CurseEffects;
             }
-            return canPlaySpellBasic(card);
+            return canPlaySpellBasic(card, sa);
         }
         return AiPlayDecision.WillPlay;
     }
 
-    private AiPlayDecision canPlaySpellBasic(final Card card) {
-        if (card.hasSVar("NeedsToPlay")) {
-            final String needsToPlay = card.getSVar("NeedsToPlay");
+    private AiPlayDecision canPlaySpellBasic(final Card card, final SpellAbility sa) {
+        String needsToPlayName = sa != null && sa.isRightSplit() ? "NeedsToPlaySplit" : "NeedsToPlay";
+        String needsToPlayVarName = sa != null && sa.isRightSplit() ? "NeedsToPlayVarSplit": "NeedsToPlayVar";
+
+        if (card.hasSVar(needsToPlayName)) {
+            final String needsToPlay = card.getSVar(needsToPlayName);
             CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
 
             list = CardLists.getValidCards(list, needsToPlay.split(","), card.getController(), card, null);
@@ -686,8 +689,8 @@ public class AiController {
                 return AiPlayDecision.MissingNeededCards;
             }
         }
-        if (card.getSVar("NeedsToPlayVar").length() > 0) {
-            final String needsToPlay = card.getSVar("NeedsToPlayVar");
+        if (card.getSVar(needsToPlayVarName).length() > 0) {
+            final String needsToPlay = card.getSVar(needsToPlayVarName);
             int x = 0;
             int y = 0;
             String sVar = needsToPlay.split(" ")[0];
@@ -999,7 +1002,7 @@ public class AiController {
             }
         }
 
-        return canPlaySpellBasic(card);
+        return canPlaySpellBasic(card, spell);
     }
 
     // declares blockers for given defender in a given combat
