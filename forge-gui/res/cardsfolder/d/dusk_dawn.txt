@@ -16,6 +16,6 @@ ManaCost:3 W W
 Types:Sorcery
 K:Aftermath
 A:SP$ ChangeZoneAll | Cost$ 3 W W | ChangeType$ Creature.powerLE2+YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return all creature cards with power 2 or less from your graveyard to your hand.
-SVar:NeedsToPlayVarSplit:ZZ GE1
+SVar:SplitNeedsToPlayVar:ZZ GE1
 SVar:ZZ:Count$ValidGraveyard Creature.YouCtrl+powerLE2
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nReturn all creature cards with power 2 or less from your graveyard to your hand.
