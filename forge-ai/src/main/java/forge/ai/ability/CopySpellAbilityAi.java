@@ -11,12 +11,14 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        return sa.isMandatory(); // the AI should not miss mandatory activations (e.g. Precursor Golem trigger)
+        // the AI should not miss mandatory activations (e.g. Precursor Golem trigger)
+        return sa.isMandatory() || "Always".equals(sa.getParam("AILogic"));
     }
 
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        return sa.isMandatory(); // the AI should not miss mandatory activations (e.g. Precursor Golem trigger)
+        // the AI should not miss mandatory activations (e.g. Precursor Golem trigger)
+        return sa.isMandatory() || "Always".equals(sa.getParam("AILogic"));
     }
 
     @Override
