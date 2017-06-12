@@ -2,6 +2,7 @@ package forge.screens.home.puzzle;
 
 import forge.GuiBase;
 import forge.UiCommand;
+import forge.assets.FSkinProp;
 import forge.deck.Deck;
 import forge.game.GameRules;
 import forge.game.GameType;
@@ -17,6 +18,7 @@ import forge.player.GamePlayerUtil;
 import forge.puzzle.Puzzle;
 import forge.puzzle.PuzzleIO;
 import forge.quest.QuestUtil;
+import forge.util.gui.SOptionPane;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -71,6 +73,10 @@ public enum CSubmenuPuzzleSolve implements ICDoc, IMenuProvider {
 
     private boolean startPuzzleSolve() {
         final Puzzle selected = (Puzzle)view.getList().getSelectedValue();
+        if (selected == null) {
+            SOptionPane.showMessageDialog("Please select a puzzle from the list first!", "No puzzle selected", FSkinProp.ICO_ERROR);
+            return false;
+        }
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
