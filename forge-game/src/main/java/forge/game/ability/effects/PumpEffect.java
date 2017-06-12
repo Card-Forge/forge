@@ -50,7 +50,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
         applyTo.addTempPowerBoost(a);
         applyTo.addTempToughnessBoost(d);
-        applyTo.addChangedCardKeywords(kws, Lists.newArrayList(), false, timestamp);
+        applyTo.addChangedCardKeywords(kws, Lists.<String>newArrayList(), false, timestamp);
         if (redrawPT)           {     applyTo.updatePowerToughnessView();     }
         
         if (sa.hasParam("LeaveBattlefield")) {
