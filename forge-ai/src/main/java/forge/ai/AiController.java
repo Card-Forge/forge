@@ -677,8 +677,9 @@ public class AiController {
     }
 
     private AiPlayDecision canPlaySpellBasic(final Card card, final SpellAbility sa) {
-        String needsToPlayName = sa != null && sa.isRightSplit() ? "NeedsToPlaySplit" : "NeedsToPlay";
-        String needsToPlayVarName = sa != null && sa.isRightSplit() ? "NeedsToPlayVarSplit": "NeedsToPlayVar";
+        boolean isRightSplit = sa != null && sa.isRightSplit();
+        String needsToPlayName = isRightSplit ? "NeedsToPlaySplit" : "NeedsToPlay";
+        String needsToPlayVarName = isRightSplit ? "NeedsToPlayVarSplit": "NeedsToPlayVar";
 
         if (card.hasSVar(needsToPlayName)) {
             final String needsToPlay = card.getSVar(needsToPlayName);
