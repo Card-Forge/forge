@@ -114,7 +114,10 @@ public class CharmEffect extends SpellAbilityEffect {
         }
 
         if (!list.isEmpty()) {
-            sb.append(" \u2014\r\n");
+            if (!repeat) {
+                sb.append(" \u2014");
+            }
+            sb.append("\r\n");
             for (AbilitySub sub : list) {
                 sb.append("\u2022 ").append(sub.getParam("SpellDescription"));
                 sb.append("\r\n");
