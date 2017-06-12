@@ -16,11 +16,11 @@ import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Lang;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
 public class PumpEffect extends SpellAbilityEffect {
 
@@ -33,7 +33,7 @@ public class PumpEffect extends SpellAbilityEffect {
             return;
         }
         final Game game = sa.getActivatingPlayer().getGame();
-        final List<String> kws = new ArrayList<String>();
+        final List<String> kws = Lists.newArrayList();
 
         boolean redrawPT = false;
         for (String kw : keywords) {
@@ -50,8 +50,12 @@ public class PumpEffect extends SpellAbilityEffect {
 
         applyTo.addTempPowerBoost(a);
         applyTo.addTempToughnessBoost(d);
-        applyTo.addChangedCardKeywords(kws, new ArrayList<String>(), false, timestamp);
+        applyTo.addChangedCardKeywords(kws, Lists.newArrayList(), false, timestamp);
         if (redrawPT)           {     applyTo.updatePowerToughnessView();     }
+        
+        if (sa.hasParam("LeaveBattlefield")) {
+            addLeaveBattlefieldReplacement(applyTo, sa, sa.getParam("LeaveBattlefield"));
+        }
 
         if (!sa.hasParam("Permanent")) {
             // If not Permanent, remove Pumped at EOT
@@ -138,7 +142,7 @@ public class PumpEffect extends SpellAbilityEffect {
     protected String getStackDescription(final SpellAbility sa) {
 
         final StringBuilder sb = new StringBuilder();
-        List<GameEntity> tgts = new ArrayList<GameEntity>();
+        List<GameEntity> tgts = Lists.newArrayList();
         tgts.addAll(getTargetCards(sa));
         tgts.addAll(getTargetPlayers(sa));
 
@@ -158,7 +162,10 @@ public class PumpEffect extends SpellAbilityEffect {
                 }
             }
 
-            final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
+            List<String> keywords = Lists.newArrayList();
+            if (sa.hasParam("KW")) {
+                keywords.addAll(Arrays.asList(sa.getParam("KW").split(" & ")));
+            }
             final int atk = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumAtt"), sa);
             final int def = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumDef"), sa);
 
@@ -192,7 +199,7 @@ public class PumpEffect extends SpellAbilityEffect {
     @Override
     public void resolve(final SpellAbility sa) {
 
-        final List<Card> untargetedCards = new ArrayList<Card>();
+        final List<Card> untargetedCards = Lists.newArrayList();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Game game = sa.getActivatingPlayer().getGame();
         final Card host = sa.getHostCard();
@@ -201,11 +208,14 @@ public class PumpEffect extends SpellAbilityEffect {
         String pumpForget = null;
         String pumpImprint = null;
 
-        List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
+        List<String> keywords = Lists.newArrayList();
+        if (sa.hasParam("KW")) {
+            keywords.addAll(Arrays.asList(sa.getParam("KW").split(" & ")));
+        }
         final int a = AbilityUtils.calculateAmount(host, sa.getParam("NumAtt"), sa);
         final int d = AbilityUtils.calculateAmount(host, sa.getParam("NumDef"), sa);
 
-        List<GameEntity> tgts = new ArrayList<GameEntity>();
+        List<GameEntity> tgts = Lists.newArrayList();
         List<Card> tgtCards = getTargetCards(sa);
         List<Player> tgtPlayers = getTargetPlayers(sa);
         tgts.addAll(tgtCards);
@@ -235,8 +245,8 @@ public class PumpEffect extends SpellAbilityEffect {
         if (sa.hasParam("RandomKeyword")) {
             final String num = sa.hasParam("RandomKWNum") ? sa.getParam("RandomKWNum") : "1";
             final int numkw = AbilityUtils.calculateAmount(host, num, sa);
-            List<String> choice = new ArrayList<String>();
-            List<String> total = new ArrayList<String>(keywords);
+            List<String> choice = Lists.newArrayList();
+            List<String> total = Lists.newArrayList(keywords);
             if (sa.hasParam("NoRepetition")) {
                 final List<String> tgtCardskws = tgtCards.get(0).getKeywords();
                 for (String kws : tgtCardskws) {
