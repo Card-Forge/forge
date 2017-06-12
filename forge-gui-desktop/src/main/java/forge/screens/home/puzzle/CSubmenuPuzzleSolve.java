@@ -7,8 +7,6 @@ import forge.deck.Deck;
 import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
-import forge.gauntlet.GauntletData;
-import forge.gauntlet.GauntletIO;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.match.HostedMatch;
@@ -17,13 +15,11 @@ import forge.menus.MenuUtil;
 import forge.player.GamePlayerUtil;
 import forge.puzzle.Puzzle;
 import forge.puzzle.PuzzleIO;
-import forge.quest.QuestUtil;
 import forge.util.gui.SOptionPane;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
