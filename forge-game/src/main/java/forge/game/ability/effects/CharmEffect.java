@@ -56,12 +56,13 @@ public class CharmEffect extends SpellAbilityEffect {
         int num = Integer.parseInt(sa.getParamOrDefault("CharmNum", "1"));
         int min = Integer.parseInt(sa.getParamOrDefault("MinCharmNum", String.valueOf(num)));
         boolean repeat = sa.hasParam("CanRepeatModes");
+        boolean oppChooses = "Opponent".equals(sa.getParam("Chooser"));
 
         List<AbilitySub> list = CharmEffect.makePossibleOptions(sa);
 
         StringBuilder sb = new StringBuilder();
         sb.append(sa.getCostDescription());
-        sb.append("Choose ");
+        sb.append(oppChooses ? "An opponent chooses " : "Choose ");
 
         if (num == min) {
             sb.append(Lang.getNumeral(num));
@@ -89,12 +90,13 @@ public class CharmEffect extends SpellAbilityEffect {
         int num = Integer.parseInt(sa.getParamOrDefault("CharmNum", "1"));
         int min = Integer.parseInt(sa.getParamOrDefault("MinCharmNum", String.valueOf(num)));
         boolean repeat = sa.hasParam("CanRepeatModes");
+        boolean oppChooses = "Opponent".equals(sa.getParam("Chooser"));
 
         List<AbilitySub> list = CharmEffect.makePossibleOptions(sa);
 
         StringBuilder sb = new StringBuilder();
         sb.append(sa.getCostDescription());
-        sb.append("Choose ");
+        sb.append(oppChooses ? "An opponent chooses " : "Choose ");
 
         if (num == min) {
             sb.append(Lang.getNumeral(num));
