@@ -1,10 +1,10 @@
 Name:Fascination
 ManaCost:X U U
 Types:Sorcery
-A:SP$ Charm | Cost$ X U U | Choices$ DBDraw,DBMill | SpellDescription$ Choose one - Each player draws X cards; Each player puts the top X cards of his or her library into his or her graveyard.
+A:SP$ Charm | Cost$ X U U | Choices$ DBDraw,DBMill | SpellDescription$ Choose one — • Each player draws X cards; • Each player puts the top X cards of his or her library into his or her graveyard.
 SVar:DBDraw:DB$ Draw | Defined$ Player | NumCards$ X | References$ X | SpellDescription$ Each player draws X cards.
 SVar:DBMill:DB$ Mill | Defined$ Player | NumCards$ X | References$ X | SpellDescription$ Each player puts the top X cards of his or her library into his or her graveyard.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fascination.jpg
-Oracle:Choose one -\n• Each player draws X cards.\n• Each player puts the top X cards of his or her library into his or her graveyard.
+Oracle:Choose one —\n• Each player draws X cards.\n• Each player puts the top X cards of his or her library into his or her graveyard.

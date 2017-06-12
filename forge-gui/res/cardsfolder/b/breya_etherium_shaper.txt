@@ -10,4 +10,4 @@ SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 5 | Defined$ You | SpellDescription$ You gain 5 life.
 DeckHas:Ability$Token & Ability$LifeGain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/breya_etherium_shaper.jpg
-Oracle:When Breya, Etherium Shaper enters the battlefield, create two 1/1 blue Thopter artifact creature tokens with flying.\n{2}, Sacrifice two artifacts: Choose one -\n• Breya deals 3 damage to target player.\n• Target creature gets -4/-4 until end of turn.\n• You gain 5 life.
+Oracle:When Breya, Etherium Shaper enters the battlefield, create two 1/1 blue Thopter artifact creature tokens with flying.\n{2}, Sacrifice two artifacts: Choose one —\n• Breya deals 3 damage to target player.\n• Target creature gets -4/-4 until end of turn.\n• You gain 5 life.

@@ -1,9 +1,9 @@
 Name:AEther Shockwave
 ManaCost:3 W
 Types:Instant
-A:SP$ Charm | Cost$ 3 W | Choices$ DBTapAll,DBTapAll2 | SpellDescription$ Choose one - Tap all Spirits; or tap all non-Spirit creatures.
+A:SP$ Charm | Cost$ 3 W | Choices$ DBTapAll,DBTapAll2 | SpellDescription$ Choose one — • Tap all Spirits; • Tap all non-Spirit creatures.
 SVar:DBTapAll:DB$ TapAll | ValidCards$ Spirit | SpellDescription$ Tap all Spirits.
 SVar:DBTapAll2:DB$ TapAll | ValidCards$ Creature.nonSpirit | SpellDescription$ Tap all non-Spirit creatures.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_shockwave.jpg
-Oracle:Choose one -\n• Tap all Spirits.\n• Tap all non-Spirit creatures.
+Oracle:Choose one —\n• Tap all Spirits.\n• Tap all non-Spirit creatures.

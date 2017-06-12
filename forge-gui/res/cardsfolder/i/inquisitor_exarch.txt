@@ -9,4 +9,4 @@ SVar:DBLose:DB$ LoseLife | LifeAmount$ 2 | ValidTgts$ Opponent | SpellDescriptio
 SVar:RemAIDeck:True
 DeckHas:Ability$LifeGain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inquisitor_exarch.jpg
-Oracle:When Inquisitor Exarch enters the battlefield, choose one -\n• You gain 2 life.\n• Target opponent loses 2 life.
+Oracle:When Inquisitor Exarch enters the battlefield, choose one —\n• You gain 2 life.\n• Target opponent loses 2 life.

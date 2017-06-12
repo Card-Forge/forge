@@ -9,4 +9,4 @@ SVar:RemAIDeck:True
 DeckNeeds:Type$Artifact
 DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/energy_chamber.jpg
-Oracle:At the beginning of your upkeep, choose one -\n• Put a +1/+1 counter on target artifact creature.\n• Put a charge counter on target noncreature artifact.
+Oracle:At the beginning of your upkeep, choose one —\n• Put a +1/+1 counter on target artifact creature.\n• Put a charge counter on target noncreature artifact.

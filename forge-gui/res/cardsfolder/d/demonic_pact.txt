@@ -13,4 +13,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonic_pact.jpg
-Oracle:At the beginning of your upkeep, choose one that hasn't been chosen -\n• Demonic Pact deals 4 damage to target creature or player and you gain 4 life.\n• Target opponent discards two cards.\n• Draw two cards.\n• You lose the game.
+Oracle:At the beginning of your upkeep, choose one that hasn't been chosen —\n• Demonic Pact deals 4 damage to target creature or player and you gain 4 life.\n• Target opponent discards two cards.\n• Draw two cards.\n• You lose the game.

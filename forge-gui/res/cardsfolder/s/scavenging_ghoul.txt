@@ -2,7 +2,7 @@ Name:Scavenging Ghoul
 ManaCost:3 B
 Types:Creature Zombie
 PT:2/2
-T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of each end step, put a corpse counter on CARDNAME for each creature put into a graveyard from the battlefield this turn.
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of each end step, put a corpse counter on CARDNAME for each creature that died this turn.
 A:AB$ Regenerate | Cost$ SubCounter<1/CORPSE> | SpellDescription$ Regenerate CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ CORPSE | CounterNum$ X | References$ X
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
