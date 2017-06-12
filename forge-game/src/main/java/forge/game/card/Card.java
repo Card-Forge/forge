@@ -223,6 +223,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private int chosenNumber;
     private Player chosenPlayer;
     private Direction chosenDirection = null;
+    private String chosenMode = "";
 
     private Card exiledWith = null;
 
@@ -1285,6 +1286,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (chosenDirection == chosenDirection0) { return; }
         chosenDirection = chosenDirection0;
         view.updateChosenDirection(this);
+    }
+
+    public String getChosenMode() {
+        return chosenMode;
+    }
+    public void setChosenMode(String mode) {
+        chosenMode = mode;
+        view.updateChosenMode(this);
     }
 
     // used for cards like Meddling Mage...

@@ -280,6 +280,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.ChosenDirection, c.getChosenDirection());
     }
 
+    public String getChosenMode() {
+        return get(TrackableProperty.ChosenMode);
+    }
+    void updateChosenMode(Card c) {
+        set(TrackableProperty.ChosenMode, c.getChosenMode());
+    }
+
     private String getRemembered() {
         return get(TrackableProperty.Remembered);
     }

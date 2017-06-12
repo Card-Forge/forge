@@ -36,6 +36,7 @@ public enum TrackableProperty {
     ChosenCards(TrackableTypes.CardViewCollectionType),
     ChosenPlayer(TrackableTypes.PlayerViewType),
     ChosenDirection(TrackableTypes.EnumType(Direction.class)),
+    ChosenMode(TrackableTypes.StringType),
     Remembered(TrackableTypes.StringType),
     NamedCard(TrackableTypes.StringType),
     PlayerMayLook(TrackableTypes.PlayerViewCollectionType, false),

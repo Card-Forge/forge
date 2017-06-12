@@ -417,6 +417,14 @@ public class CardDetailUtil {
             area.append("(chosen player: " + card.getChosenPlayer() + ")");
         }
 
+        // chosen mode
+        if (!card.getChosenMode().equals("")) {
+            if (area.length() != 0) {
+                area.append("\n");
+            }
+            area.append("(chosen mode: " + card.getChosenMode() + ")");
+        }
+
         // named card
         if (!card.getNamedCard().equals("")) {
             if (area.length() != 0) {
