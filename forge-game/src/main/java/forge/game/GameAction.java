@@ -509,14 +509,6 @@ public class GameAction {
         final Zone zoneFrom = game.getZoneOf(c);
         // String prevName = prev != null ? prev.getZoneName() : "";
 
-        if (c.hasKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.")
-                && !zoneTo.is(ZoneType.Exile)) {
-            final PlayerZone removed = c.getOwner().getZone(ZoneType.Exile);
-            c.removeAllExtrinsicKeyword("If CARDNAME would leave the battlefield, "
-                    + "exile it instead of putting it anywhere else.");
-            return moveTo(removed, c, cause);
-        }
-
         // Card lastKnownInfo = c;
 
         c = changeZone(zoneFrom, zoneTo, c, position, cause);
