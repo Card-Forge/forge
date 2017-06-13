@@ -564,7 +564,7 @@ public class QuestUtil {
         final List<RegisteredPlayer> starter = new ArrayList<>();
         starter.add(humanStart.setPlayer(GamePlayerUtil.getQuestPlayer()));
 
-        final LobbyPlayer aiPlayer = GamePlayerUtil.createAiPlayer(event.getOpponent() == null ? event.getTitle() : event.getOpponent(), event.getProfile());
+        final LobbyPlayer aiPlayer = GamePlayerUtil.createAiPlayer(event.getOpponentName() == null ? event.getTitle() : event.getOpponentName(), event.getProfile());
         starter.add(aiStart.setPlayer(aiPlayer));
 
         final boolean useRandomFoil = FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);

@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -27,22 +27,19 @@ import java.util.List;
  * <p>
  * QuestQuest class.
  * </p>
- * 
+ *
  * MODEL - A single quest event data instance, including meta, deck, and
  * quest-specific properties.
- * 
+ *
  */
 public class QuestEventChallenge extends QuestEvent {
     public static final Function<QuestEventChallenge, String> FN_GET_ID = new Function<QuestEventChallenge, String>() {
-        @Override public final String apply(QuestEventChallenge qe) { return qe.id; }  
+        @Override public final String apply(QuestEventChallenge qe) { return qe.id; }
     };
 
     // ID (default -1, should be explicitly set at later time.)
     /** The id. */
     private String id = "-1";
-
-    // Opponent name if different from the challenge name
-    private String opponentName = null;
 
     // Default vals if none provided for this ID
     /** The ai life. */
@@ -89,7 +86,7 @@ public class QuestEventChallenge extends QuestEvent {
      * <p>
      * getAILife.
      * </p>
-     * 
+     *
      * @return {@link java.lang.Integer}.
      */
     public final int getAILife() {
@@ -100,7 +97,7 @@ public class QuestEventChallenge extends QuestEvent {
      * <p>
      * getCreditsReward.
      * </p>
-     * 
+     *
      * @return {@link java.lang.Integer}.
      */
     public final int getCreditsReward() {
@@ -111,7 +108,7 @@ public class QuestEventChallenge extends QuestEvent {
      * <p>
      * getId.
      * </p>
-     * 
+     *
      * @return {@link java.lang.Integer}.
      */
     public final String getId() {
@@ -120,22 +117,9 @@ public class QuestEventChallenge extends QuestEvent {
 
     /**
      * <p>
-     * get the opponent's name, or null if not explicitly set.
-     *
-     * </p>
-     * 
-     * @return {@link java.lang.String}.
-     */
-    @Override
-    public final String getOpponent() {
-        return this.opponentName;
-    }
-
-    /**
-     * <p>
      * getWinsReqd.
      * </p>
-     * 
+     *
      * @return {@link java.lang.Integer}.
      */
     public final int getWinsReqd() {
@@ -147,7 +131,7 @@ public class QuestEventChallenge extends QuestEvent {
      * getHumanExtraCards.
      * </p>
      * Retrieves list of cards human has in play at the beginning of this quest.
-     * 
+     *
      * @return the human extra cards
      */
     @Override
@@ -157,7 +141,7 @@ public class QuestEventChallenge extends QuestEvent {
 
     /**
      * Gets the ai extra cards.
-     * 
+     *
      * @return the aiExtraCards
      */
     @Override
@@ -167,7 +151,7 @@ public class QuestEventChallenge extends QuestEvent {
 
     /**
      * Sets the ai extra cards.
-     * 
+     *
      * @param aiExtraCards0
      *            the aiExtraCards to set
      */
@@ -177,7 +161,7 @@ public class QuestEventChallenge extends QuestEvent {
 
     /**
      * Sets the id.
-     * 
+     *
      * @param id0
      *            the id to set
      */
@@ -186,18 +170,8 @@ public class QuestEventChallenge extends QuestEvent {
     }
 
     /**
-     * Sets the opponent's name.
-     * 
-     * @param newName
-     *            the name to set
-     */
-    public void setOpponent(final String newName) {
-        this.opponentName = newName;
-    }
-
-    /**
      * Checks if is repeatable.
-     * 
+     *
      * @return the repeatable
      */
     public boolean isRepeatable() {
@@ -206,7 +180,7 @@ public class QuestEventChallenge extends QuestEvent {
 
     /**
      * Sets the repeatable.
-     * 
+     *
      * @param repeatable0
      *            the repeatable to set
      */
@@ -216,7 +190,7 @@ public class QuestEventChallenge extends QuestEvent {
 
     /**
      * Checks if is persistent.
-     * 
+     *
      * @return the persistent
      */
     public boolean isPersistent() {
@@ -225,7 +199,7 @@ public class QuestEventChallenge extends QuestEvent {
 
     /**
      * Sets the persistent.
-     * 
+     *
      * @param persistent0
      *            the repeatable to set
      */
@@ -235,7 +209,7 @@ public class QuestEventChallenge extends QuestEvent {
 
     /**
      * Gets the ai life.
-     * 
+     *
      * @return the aiLife
      */
     public int getAiLife() {
@@ -244,7 +218,7 @@ public class QuestEventChallenge extends QuestEvent {
 
     /**
      * Sets the ai life.
-     * 
+     *
      * @param aiLife0
      *            the aiLife to set
      */
@@ -254,7 +228,7 @@ public class QuestEventChallenge extends QuestEvent {
 
     /**
      * Sets the wins reqd.
-     * 
+     *
      * @param winsReqd0
      *            the winsReqd to set
      */
@@ -264,7 +238,7 @@ public class QuestEventChallenge extends QuestEvent {
 
     /**
      * Sets the credits reward.
-     * 
+     *
      * @param creditsReward0
      *            the creditsReward to set
      */
@@ -274,7 +248,7 @@ public class QuestEventChallenge extends QuestEvent {
 
     /**
      * Sets the human extra cards.
-     * 
+     *
      * @param humanExtraCards0
      *            the humanExtraCards to set
      */
@@ -307,7 +281,7 @@ public class QuestEventChallenge extends QuestEvent {
      * @param useBazaar the useBazaar to set
      */
     public void setUseBazaar(boolean useBazaar) {
-        this.useBazaar = useBazaar; 
+        this.useBazaar = useBazaar;
     }
 
     /**
@@ -326,7 +300,7 @@ public class QuestEventChallenge extends QuestEvent {
 
     /**
      * Gets the win message.
-     * 
+     *
      * @return the winMessage
      */
     public String getWinMessage() {
@@ -335,7 +309,7 @@ public class QuestEventChallenge extends QuestEvent {
 
     /**
      * Sets the win message
-     * 
+     *
      * @param winMessage0
      *            the winMessage to set
      */

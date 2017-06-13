@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -30,7 +30,7 @@ import java.util.List;
  * <p>
  * QuestEvent.
  * </p>
- * 
+ *
  * MODEL - A basic event instance in Quest mode. Can be extended for use in
  * unique event types: battles, quests, and others.
  */
@@ -40,17 +40,20 @@ public abstract class QuestEvent implements IQuestEvent {
     private String title = "Mystery Event";
     private String description = "";
     private QuestEventDifficulty difficulty = QuestEventDifficulty.MEDIUM;
+    private boolean showDifficulty = true;
     private String imageKey = "";
     private String name = "Noname";
     private String cardReward = null;
     private List<InventoryItem> cardRewardList = null;
     private String profile = "Default";
+    // Opponent name if different from the challenge name
+    private String opponentName = null;
 
-    
+
     public static final Function<QuestEvent, String> FN_GET_NAME = new Function<QuestEvent, String>() {
-        @Override public final String apply(QuestEvent qe) { return qe.name; }  
+        @Override public final String apply(QuestEvent qe) { return qe.name; }
     };
-    
+
     public final String getTitle() {
         return title;
     }
@@ -58,8 +61,18 @@ public abstract class QuestEvent implements IQuestEvent {
     /**
      * Returns null for standard quest events, may return something different for challenges.
      */
-    public String getOpponent() {
-        return null;
+    public String getOpponentName() {
+        return opponentName;
+    }
+
+    /**
+     * Sets the opponent's name.
+     *
+     * @param newName
+     *            the name to set
+     */
+    public void setOpponentName(final String newName) {
+        this.opponentName = newName;
     }
 
     public final QuestEventDifficulty getDifficulty() {
@@ -86,7 +99,7 @@ public abstract class QuestEvent implements IQuestEvent {
     public final String getProfile() {
         return profile;
     }
-    
+
     public void setProfile(final String profile0) {
         profile = profile0;
     }
@@ -121,7 +134,7 @@ public abstract class QuestEvent implements IQuestEvent {
             return null;
         }
         if (cardRewardList == null) {
-            cardRewardList = new ArrayList<InventoryItem>(BoosterUtils.generateCardRewardList(cardReward));
+            cardRewardList = new ArrayList<>(BoosterUtils.generateCardRewardList(cardReward));
         }
         return cardRewardList;
     }
@@ -140,7 +153,7 @@ public abstract class QuestEvent implements IQuestEvent {
 
     @Override
     public final String getFullTitle() {
-        return title + " (" + difficulty.getTitle() + ")";
+        return title + (showDifficulty ? " (" + difficulty.getTitle() + ")" : "");
     }
 
     @Override
@@ -152,4 +165,13 @@ public abstract class QuestEvent implements IQuestEvent {
     public boolean hasImage() {
         return true;
     }
+
+    public boolean showDifficulty() {
+        return showDifficulty;
+    }
+
+    public void setShowDifficulty(final boolean showDifficulty) {
+        this.showDifficulty = showDifficulty;
+    }
+
 }

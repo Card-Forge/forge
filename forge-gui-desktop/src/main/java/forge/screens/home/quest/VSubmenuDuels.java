@@ -1,30 +1,17 @@
 package forge.screens.home.quest;
 
-import java.awt.Font;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
-
-import net.miginfocom.swing.MigLayout;
 import forge.assets.FSkinProp;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.interfaces.IButton;
 import forge.quest.IVQuestStats;
-import forge.screens.home.EMenuGroup;
-import forge.screens.home.IVSubmenu;
-import forge.screens.home.LblHeader;
-import forge.screens.home.StartButton;
-import forge.screens.home.VHomeUI;
-import forge.toolbox.FCheckBox;
-import forge.toolbox.FComboBoxWrapper;
-import forge.toolbox.FLabel;
-import forge.toolbox.FScrollPanel;
-import forge.toolbox.FSkin;
+import forge.screens.home.*;
+import forge.toolbox.*;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Assembles Swing components of quest duels submenu singleton.
@@ -32,6 +19,7 @@ import forge.toolbox.FSkin;
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
 public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
+
     SINGLETON_INSTANCE;
 
     // Fields used with interface IVDoc
@@ -86,7 +74,6 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
     private final FLabel btnTravel = new FLabel.ButtonBuilder().text("Travel").fontSize(16).build();
     private final FLabel btnBazaar = new FLabel.ButtonBuilder().text("Bazaar").fontSize(16).build();
     private final FLabel btnSpellShop = new FLabel.ButtonBuilder().text("Spell Shop").fontSize(16).build();
-    private final FLabel btnRandomOpponent = new FLabel.ButtonBuilder().text("Random Duel").fontSize(16).build();
 
     /**
      * Constructor.
@@ -97,7 +84,6 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
         pnlStats.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 0"));
         pnlStats.add(btnUnlock, "w 150px!, h 30px!, gap 0 0 0 10px");
         pnlStats.add(btnTravel, "w 150px!, h 30px!, gap 0 0 0 10px");
-        pnlStats.add(btnRandomOpponent, "w 150px!, h 30px!, gap 0 0 0 10px");
         pnlStats.add(btnSpellShop, "w 150px!, h 30px!, gap 0 0 0 10px");
         pnlStats.add(btnBazaar, "w 150px!, h 30px!, gap 0 0 0 10px");
         pnlStats.add(lblWins, constraints);
@@ -110,8 +96,6 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
         cbxMatchLength.addTo(pnlStats, constraints);
         cbxPet.addTo(pnlStats, constraints);
         pnlStats.setOpaque(false);
-
-        btnRandomOpponent.setToolTipText("Starts a duel against a randomly selected opponent.");
 
     }
 
@@ -228,11 +212,6 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
     @Override
     public FLabel getBtnSpellShop() {
         return btnSpellShop;
-    }
-
-    @Override
-    public FLabel getBtnRandomOpponent() {
-        return btnRandomOpponent;
     }
 
     @Override

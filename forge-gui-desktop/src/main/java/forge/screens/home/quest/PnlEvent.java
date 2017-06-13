@@ -1,23 +1,23 @@
 package forge.screens.home.quest;
 
 import forge.ImageCache;
+import forge.assets.FSkinProp;
 import forge.quest.QuestEvent;
 import forge.quest.QuestUtil;
 import forge.toolbox.FRadioButton;
 import forge.toolbox.FSkin;
-import forge.toolbox.FTextArea;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinImage;
+import forge.toolbox.FTextArea;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-/** 
+/**
  * Panels for displaying duels and challenges.<br>
  * Handles radio button selection, event storage, and repainting.<br>
  * Package private!
@@ -26,7 +26,7 @@ import java.awt.image.BufferedImage;
 class PnlEvent extends JPanel {
     private final QuestEvent event;
     private final FRadioButton rad;
-    private final SkinImage img;
+    private final SkinImage image;
 
     private final int wImg = 100;
     private final int hImg = 100;
@@ -40,16 +40,21 @@ class PnlEvent extends JPanel {
      * Panels for displaying duels and challenges.<br>
      * Handles radio button selection, event storage, and repainting.<br>
      * Package private!
-     * 
+     *
      * @param e0 &emsp; QuestEvent
      */
     public PnlEvent(final QuestEvent e0) {
         super();
         this.event = e0;
-        img = ImageCache.getIcon(e0.getIconImageKey());
+
+        if (event.getFullTitle().startsWith("Random Opponent")) {
+            image = FSkin.getIcon(FSkinProp.ICO_UNKNOWN);
+        } else {
+            image = event.hasImage() ? ImageCache.getIcon(e0.getIconImageKey()) : null;
+        }
 
         // Title and description
-        this.rad = new FRadioButton(event.getTitle() + " (" + event.getDifficulty().getTitle() + ")");
+        this.rad = new FRadioButton(event.getFullTitle());
         this.rad.setFont(FSkin.getBoldFont(16));
 
         final FTextArea tarDesc = new FTextArea();
@@ -91,12 +96,12 @@ class PnlEvent extends JPanel {
 
         // Padding here
         g2d.translate(5, 5);
-        
-        Dimension srcSize = img.getSizeForPaint(g2d);
+
+        Dimension srcSize = image.getSizeForPaint(g2d);
         int wSrc = srcSize.width;
         int hSrc = srcSize.height;
 
-        FSkin.drawImage(g2d, img,
+        FSkin.drawImage(g2d, image,
                 0, 0, wImg, hImg, // Destination
                 0, 0, wSrc, hSrc); // Source
 
@@ -107,7 +112,7 @@ class PnlEvent extends JPanel {
         BufferedImage refl = new BufferedImage(wImg, hImg, BufferedImage.TYPE_INT_ARGB);
         Graphics2D gRefl = refl.createGraphics();
 
-        FSkin.drawImage(gRefl, img,
+        FSkin.drawImage(gRefl, image,
                 0, hRfl, wImg, 0, // Destination
                 0, hSrc - hRfl * hSrc / hImg, wSrc, hSrc); // Source
 

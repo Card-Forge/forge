@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -47,7 +47,7 @@ import java.util.concurrent.ExecutionException;
  * <li>Keys start with the file name, extension is skipped</li>
  * <li>The key without suffix belongs to the unmodified image from the file</li>
  * </ul>
- * 
+ *
  * @author Forge
  * @version $Id: ImageCache.java 24769 2014-02-09 13:56:04Z Hellfish $
  */
@@ -71,7 +71,7 @@ public class ImageCache {
         } catch (Exception ex) {
             System.err.println("could not load default card image");
         } finally {
-            defaultImage = (null == defImage) ? new Texture(10, 10, Format.RGBA8888) : defImage; 
+            defaultImage = (null == defImage) ? new Texture(10, 10, Format.RGBA8888) : defImage;
         }
     }
 
@@ -96,8 +96,7 @@ public class ImageCache {
     public static FImage getIcon(IHasIcon ihi) {
         String imageKey = ihi.getIconImageKey();
         final Texture icon;
-        if (missingIconKeys.contains(imageKey) ||
-                null == (icon = getImage(ihi.getIconImageKey(), false))) {
+        if (missingIconKeys.contains(imageKey) || (icon = getImage(ihi.getIconImageKey(), false)) == null) {
             missingIconKeys.add(imageKey);
             return FSkinImage.UNKNOWN;
         }
@@ -109,11 +108,11 @@ public class ImageCache {
      * If the image does not exist then it can return a default image if desired.
      * <p>
      * If the requested image is not present in the cache then it attempts to load
-     * the image from file (slower) and then add it to the cache for fast future access. 
+     * the image from file (slower) and then add it to the cache for fast future access.
      * </p>
      */
     public static Texture getImage(String imageKey, boolean useDefaultIfNotFound) {
-        if (StringUtils.isEmpty(imageKey)) { 
+        if (StringUtils.isEmpty(imageKey)) {
             return null;
         }
 
@@ -123,7 +122,7 @@ public class ImageCache {
         }
         if (imageKey.startsWith(ImageKeys.CARD_PREFIX)) {
             imageKey = ImageUtil.getImageKey(ImageUtil.getPaperCardFromImageKey(imageKey), altState, true);
-            if (StringUtils.isBlank(imageKey)) { 
+            if (StringUtils.isBlank(imageKey)) {
                 return defaultImage;
             }
         }
@@ -133,7 +132,7 @@ public class ImageCache {
             // Load from file and add to cache if not found in cache initially.
             image = cache.getIfPresent(imageKey);
             if (image != null) { return image; }
-    
+
             if (imageLoaded) { //prevent loading more than one image each render for performance
                 if (!delayLoadRequested) {
                     //ensure images continue to load even if no input is being received
@@ -161,7 +160,7 @@ public class ImageCache {
         // No image file exists for the given key so optionally associate with
         // a default "not available" image and add to cache for given key.
         if (image == null) {
-            if (useDefaultIfNotFound) { 
+            if (useDefaultIfNotFound) {
                 image = defaultImage;
                 cache.put(imageKey, defaultImage);
             }

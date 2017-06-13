@@ -30,6 +30,7 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.util.ThreadUtil;
 
 public class QuestMenu extends FPopupMenu implements IVQuestStats {
+
     private static final QuestMenu questMenu = new QuestMenu();
     private static final QuestBazaarScreen bazaarScreen = new QuestBazaarScreen();
     private static final QuestChallengesScreen challengesScreen = new QuestChallengesScreen();
@@ -240,11 +241,6 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
     }
 
     @Override
-    public IButton getBtnRandomOpponent() {
-        return duelsScreen.getBtnRandomOpponent();
-    }
-
-    @Override
     public IButton getBtnBazaar() {
         return bazaarItem;
     }
@@ -326,7 +322,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
 
     @Override
     public boolean isChallengesView() {
-        return Forge.getCurrentScreen() == challengesScreen || Forge.getCurrentScreen() == statsScreen; //treat stats screen as challenges view so Zeppelin shows up 
+        return Forge.getCurrentScreen() == challengesScreen || Forge.getCurrentScreen() == statsScreen; //treat stats screen as challenges view so Zeppelin shows up
     }
 
     @Override

@@ -30,7 +30,7 @@ public class QuestChallengeReader extends StorageReaderFolder<QuestEventChalleng
         // Unique properties
         FileSection sectionQuest = FileSection.parse(contents.get("quest"), "=");
         qc.setId(sectionQuest.get("ID", "-1"));
-        qc.setOpponent(sectionQuest.get("OpponentName"));
+        qc.setOpponentName(sectionQuest.get("OpponentName"));
         qc.setRepeatable(sectionQuest.getBoolean("Repeat", false));
         qc.setPersistent(sectionQuest.getBoolean("Persistent", false));
         qc.setAiLife(sectionQuest.getInt("AILife", 25));
@@ -76,7 +76,7 @@ public class QuestChallengeReader extends StorageReaderFolder<QuestEventChalleng
     }
 
     @Override
-    protected FilenameFilter getFileFilter() { 
+    protected FilenameFilter getFileFilter() {
         return DeckStorage.DCK_FILE_FILTER;
     }
 }

@@ -8,7 +8,6 @@ import forge.interfaces.IComboBox;
 
 public interface IVQuestStats {
 
-    IButton getBtnRandomOpponent();
     IButton getBtnBazaar();
     IButton getBtnSpellShop();
     IButton getBtnUnlock();

@@ -1,10 +1,7 @@
 package forge.screens.quest;
 
-import java.util.List;
-
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
-
 import forge.assets.FSkinFont;
 import forge.interfaces.IButton;
 import forge.model.FModel;
@@ -13,7 +10,10 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 
+import java.util.List;
+
 public class QuestDuelsScreen extends QuestLaunchScreen {
+
     private final FLabel lblInfo = add(new FLabel.Builder().text("Select your next duel.")
             .align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
 
@@ -26,8 +26,6 @@ public class QuestDuelsScreen extends QuestLaunchScreen {
         .font(FSkinFont.get(12)).build());
 
     private final QuestEventPanel.Container pnlDuels = add(new QuestEventPanel.Container());
-
-    private final FLabel btnRandomOpponent = add(new FLabel.ButtonBuilder().text("Random Duel").font(FSkinFont.get(16)).build());
 
     public QuestDuelsScreen() {
         super();
@@ -50,11 +48,7 @@ public class QuestDuelsScreen extends QuestLaunchScreen {
         y += lblCurrentDeck.getHeight();
         lblNextChallengeInWins.setBounds(x, y, w, lblCurrentDeck.getHeight());
         y += lblCurrentDeck.getHeight() + PADDING / 2;
-        pnlDuels.setBounds(x, y, w, height - y);
-    }
-
-    public IButton getBtnRandomOpponent() {
-        return btnRandomOpponent;
+        pnlDuels.setBounds(x, y, w, height - y + PADDING * 2);
     }
 
     public IButton getLblNextChallengeInWins() {
@@ -72,9 +66,11 @@ public class QuestDuelsScreen extends QuestLaunchScreen {
 
     @Override
     public void onUpdate() {
+
         pnlDuels.clear();
 
         List<QuestEventDuel> duels = FModel.getQuest().getDuelsManager().generateDuels();
+
         if (duels != null) {
             for (QuestEventDuel duel : duels) {
                 pnlDuels.add(new QuestEventPanel(duel, pnlDuels));
@@ -82,5 +78,6 @@ public class QuestDuelsScreen extends QuestLaunchScreen {
         }
 
         pnlDuels.revalidate();
+
     }
 }

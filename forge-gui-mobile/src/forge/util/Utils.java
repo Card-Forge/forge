@@ -58,9 +58,9 @@ public class Utils {
         float n_b = (l1p2.x - l1p1.x) * (l1p1.y - l2p1.y) - (l1p2.y - l1p1.y) * (l1p1.x - l2p1.x);
 
         // Make sure there is not a division by zero - this also indicates that
-        // the lines are parallel.  
-        // If n_a and n_b were both equal to zero the lines would be on top of each 
-        // other (coincidental).  This check is not done because it is not 
+        // the lines are parallel.
+        // If n_a and n_b were both equal to zero the lines would be on top of each
+        // other (coincidental).  This check is not done because it is not
         // necessary for this implementation (the parallel check accounts for this).
         if (d != 0) {
             // Calculate the intermediate fractional point that the lines potentially intersect.

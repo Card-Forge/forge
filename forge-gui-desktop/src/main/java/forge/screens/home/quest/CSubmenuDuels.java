@@ -1,16 +1,5 @@
 package forge.screens.home.quest;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.List;
-
-import javax.swing.JRadioButton;
-import javax.swing.SwingUtilities;
-
 import forge.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.model.FModel;
@@ -19,6 +8,10 @@ import forge.quest.QuestEventDuel;
 import forge.quest.QuestUtil;
 import forge.quest.bazaar.QuestPetController;
 import forge.toolbox.JXButtonPanel;
+
+import javax.swing.*;
+import java.awt.event.*;
+import java.util.List;
 
 /**
  * Controls the quest duels submenu in the home UI.
@@ -91,18 +84,6 @@ public enum CSubmenuDuels implements ICDoc {
                 final String petName = index <= 0 || index > pets.size() ? null : pets.get(index - 1).getName();
                 quest.selectPet(slot, petName);
                 quest.save();
-            }
-        });
-
-        view.getBtnRandomOpponent().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                if (QuestUtil.canStartGame()) {
-                    FModel.getQuest().getDuelsManager().randomizeOpponents();
-                    final List<QuestEventDuel> duels = FModel.getQuest().getDuelsManager().generateDuels();
-                    QuestUtil.setEvent(duels.get((int) (Math.random() * duels.size())));
-                    QuestUtil.startGame();
-                }
             }
         });
 
