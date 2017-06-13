@@ -54,5 +54,10 @@ public enum CBazaarUI implements ICDoc {
      */
     @Override
     public void update() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override public void run() {
+                view.getPnlSingleStall().updateStall();
+            }
+        });
     }
 }
