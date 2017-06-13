@@ -197,7 +197,7 @@ public class ComputerUtilCombat {
 
         if (!attacked.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
             // ask ReplacementDamage directly
-            if (ComputerUtilCombat.isCombatDamagePrevented(attacker, attacked, damage)) {
+            if (isCombatDamagePrevented(attacker, attacked, damage)) {
                 return 0;
             }
         }
@@ -2407,7 +2407,7 @@ public class ComputerUtilCombat {
         return original;
     }
 
-    private final static boolean isCombatDamagePrevented(final Card attacker, final GameEntity target, final int damage) {
+    public final static boolean isCombatDamagePrevented(final Card attacker, final GameEntity target, final int damage) {
         final Game game = attacker.getGame();
 
         // first try to replace the damage

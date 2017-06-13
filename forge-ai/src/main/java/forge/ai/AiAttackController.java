@@ -549,6 +549,7 @@ public class AiAttackController {
             playAggro = ((PlayerControllerAi) ai.getController()).getAi().getProperty(AiProps.PLAY_AGGRO).equals("true");
         }
         final boolean bAssault = this.doAssault(ai);
+        // TODO: detect Lightmine Field by presence of a card with a specific trigger
         final boolean lightmineField = ComputerUtilCard.isPresentOnBattlefield(ai.getGame(), "Lightmine Field");
 
         // Determine who will be attacked
@@ -565,6 +566,7 @@ public class AiAttackController {
         }
 
         // Attackers that don't really have a choice
+        int numForcedAttackers = 0;
         for (final Card attacker : this.attackers) {
             if (!CombatUtil.canAttack(attacker, defender)) {
                 attackersLeft.remove(attacker);
@@ -591,6 +593,7 @@ public class AiAttackController {
             if (mustAttack || attacker.getController().getMustAttackEntity() != null) {
                 combat.addAttacker(attacker, defender);
                 attackersLeft.remove(attacker);
+                numForcedAttackers++;
             }
         }
         if (attackersLeft.isEmpty()) {
@@ -603,7 +606,7 @@ public class AiAttackController {
             CardCollection attUnsafe = new CardCollection();
             CardLists.sortByToughnessDesc(attSorted);
             
-            int i = 0;
+            int i = numForcedAttackers;
             int refPowerValue = 0; // Aggro profiles do not account for the possible blockers' power, conservative profiles do.
 
             if (!playAggro && this.blockers.size() > 0) {
@@ -613,11 +616,12 @@ public class AiAttackController {
                 // running simulations.
                 CardCollection blkSorted = new CardCollection(this.blockers);
                 CardLists.sortByPowerDesc(blkSorted);
-                refPowerValue = blkSorted.get(0).getCurrentPower();
+                refPowerValue += blkSorted.get(0).getCurrentPower();
             }
 
             for (Card cre : attSorted) {
                 i++;
+
                 if (i + refPowerValue >= cre.getCurrentToughness()) {
                     attUnsafe.add(cre);
                 } else {
