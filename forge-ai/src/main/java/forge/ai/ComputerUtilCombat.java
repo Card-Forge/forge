@@ -2407,7 +2407,7 @@ public class ComputerUtilCombat {
         return original;
     }
 
-    public final static boolean isCombatDamagePrevented(final Card attacker, final GameEntity target, final int damage) {
+    private static boolean isCombatDamagePrevented(final Card attacker, final GameEntity target, final int damage) {
         final Game game = attacker.getGame();
 
         // first try to replace the damage
