@@ -602,33 +602,7 @@ public class AiAttackController {
 
         // Lightmine Field: make sure the AI doesn't wipe out its own creatures
         if (lightmineField) {
-            CardCollection attSorted = new CardCollection(attackersLeft);
-            CardCollection attUnsafe = new CardCollection();
-            CardLists.sortByToughnessDesc(attSorted);
-            
-            int i = numForcedAttackers;
-            int refPowerValue = 0; // Aggro profiles do not account for the possible blockers' power, conservative profiles do.
-
-            if (!playAggro && this.blockers.size() > 0) {
-                // Conservative play: check to ensure that the card can't be killed off while damaged
-                // TODO: currently sorting a copy of this.blockers, but it looks safe to operate on this.blockers directly?
-                // Also, this should ideally somehow account for double blocks, unblockability, etc. Difficult to do without
-                // running simulations.
-                CardCollection blkSorted = new CardCollection(this.blockers);
-                CardLists.sortByPowerDesc(blkSorted);
-                refPowerValue += blkSorted.get(0).getCurrentPower();
-            }
-
-            for (Card cre : attSorted) {
-                i++;
-                if (i + refPowerValue >= cre.getCurrentToughness()) {
-                    attUnsafe.add(cre);
-                } else {
-                    continue;
-                }
-            }
-
-            attackersLeft.removeAll(attUnsafe);
+            doLightmineFieldAttackLogic(attackersLeft, numForcedAttackers, playAggro);
         }
 
         if (bAssault) {
@@ -1260,4 +1234,35 @@ public class AiAttackController {
         }
         return null;    //should never get here
     }
+
+    private void doLightmineFieldAttackLogic(List<Card> attackersLeft, int numForcedAttackers, boolean playAggro) {
+        CardCollection attSorted = new CardCollection(attackersLeft);
+        CardCollection attUnsafe = new CardCollection();
+        CardLists.sortByToughnessDesc(attSorted);
+        
+        int i = numForcedAttackers;
+        int refPowerValue = 0; // Aggro profiles do not account for the possible blockers' power, conservative profiles do.
+        
+        if (!playAggro && this.blockers.size() > 0) {
+            // Conservative play: check to ensure that the card can't be killed off while damaged
+            // TODO: currently sorting a copy of this.blockers, but it looks safe to operate on this.blockers directly?
+            // Also, this should ideally somehow account for double blocks, unblockability, etc. Difficult to do without
+            // running simulations.
+            CardCollection blkSorted = new CardCollection(this.blockers);
+            CardLists.sortByPowerDesc(blkSorted);
+            refPowerValue += blkSorted.get(0).getCurrentPower();
+        }
+        
+        for (Card cre : attSorted) {
+            i++;
+            if (i + refPowerValue >= cre.getCurrentToughness()) {
+                attUnsafe.add(cre);
+            } else {
+                continue;
+            }
+        }
+        
+        attackersLeft.removeAll(attUnsafe);
+    }
+
 } // end class ComputerUtil_Attack2
