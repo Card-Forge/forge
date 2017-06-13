@@ -73,6 +73,12 @@ public class CardLists {
             return a.getNetToughness() - b.getNetToughness();
         }
     };
+    public static final Comparator<Card> ToughnessComparatorInv = new Comparator<Card>() {
+        @Override
+        public int compare(final Card a, final Card b) {
+            return b.getNetToughness() - a.getNetToughness();
+        }
+    };
     public static final Comparator<Card> PowerComparator = new Comparator<Card>() {
         @Override
         public int compare(final Card a, final Card b) {
@@ -104,18 +110,29 @@ public class CardLists {
      */
     public static void sortByCmcDesc(final List<Card> list) {
         Collections.sort(list, CmcComparatorInv);
-    } // sortCMC
+    } // sortByCmcDesc
 
     /**
      * <p>
-     * sortAttackLowFirst.
+     * sortByToughnessAsc
      * </p>
      * 
      * @param list
      */
     public static void sortByToughnessAsc(final List<Card> list) {
         Collections.sort(list, ToughnessComparator);
-    } // sortAttackLowFirst()
+    } // sortByToughnessAsc()
+
+    /**
+     * <p>
+     * sortByToughnessDesc
+     * </p>
+     * 
+     * @param list
+     */
+    public static void sortByToughnessDesc(final List<Card> list) {
+        Collections.sort(list, ToughnessComparatorInv);
+    } // sortByToughnessDesc()
 
     /**
      * <p>

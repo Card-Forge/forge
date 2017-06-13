@@ -1584,4 +1584,7 @@ public class ComputerUtilCard {
         return false;
     }
 
+    public static boolean isPresentOnBattlefield(final Game game, final String cardName) {
+        return !CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(cardName)).isEmpty();
+    }
 }

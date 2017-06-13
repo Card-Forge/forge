@@ -544,7 +544,13 @@ public class AiAttackController {
             return;
         }
 
+        boolean playAggro = false;
+        if (ai.getController().isAI()) {
+            playAggro = ((PlayerControllerAi) ai.getController()).getAi().getProperty(AiProps.PLAY_AGGRO).equals("true");
+        }
         final boolean bAssault = this.doAssault(ai);
+        final boolean lightmineField = ComputerUtilCard.isPresentOnBattlefield(ai.getGame(), "Lightmine Field");
+
         // Determine who will be attacked
         GameEntity defender = this.chooseDefender(combat, bAssault);
         List<Card> attackersLeft = new ArrayList<Card>(this.attackers);
@@ -590,6 +596,38 @@ public class AiAttackController {
         if (attackersLeft.isEmpty()) {
             return;
         }
+
+        // Lightmine Field: make sure the AI doesn't wipe out its own creatures
+        if (lightmineField) {
+            CardCollection attSorted = new CardCollection(attackersLeft);
+            CardCollection attUnsafe = new CardCollection();
+            CardLists.sortByToughnessDesc(attSorted);
+            
+            int i = 0;
+            int refPowerValue = 0; // Aggro profiles do not account for the possible blockers' power, conservative profiles do.
+
+            if (!playAggro && this.blockers.size() > 0) {
+                // Conservative play: check to ensure that the card can't be killed off while damaged
+                // TODO: currently sorting a copy of this.blockers, but it looks safe to operate on this.blockers directly?
+                // Also, this should ideally somehow account for double blocks, unblockability, etc. Difficult to do without
+                // running simulations.
+                CardCollection blkSorted = new CardCollection(this.blockers);
+                CardLists.sortByPowerDesc(blkSorted);
+                refPowerValue = blkSorted.get(0).getCurrentPower();
+            }
+
+            for (Card cre : attSorted) {
+                i++;
+                if (i + refPowerValue >= cre.getCurrentToughness()) {
+                    attUnsafe.add(cre);
+                } else {
+                    continue;
+                }
+            }
+
+            attackersLeft.removeAll(attUnsafe);
+        }
+
         if (bAssault) {
             if (LOG_AI_ATTACKS)
                 System.out.println("Assault");
@@ -824,15 +862,11 @@ public class AiAttackController {
         // end see how long until unblockable attackers will be fatal
         // *****************
 
+
         // decide on attack aggression based on a comparison of forces, life
         // totals and other considerations
         // some bad "magic numbers" here, TODO replace with nice descriptive
         // variable names
-        boolean playAggro = false;
-        if (ai.getController().isAI()) {
-            playAggro = ((PlayerControllerAi) ai.getController()).getAi().getProperty(AiProps.PLAY_AGGRO).equals("true");
-        }
-
         if (ratioDiff > 0 && doAttritionalAttack) {
             this.aiAggression = 5; // attack at all costs
         } else if ((ratioDiff >= 1 && this.attackers.size() > 1 && (humanLifeToDamageRatio < 2 || outNumber > 0))
