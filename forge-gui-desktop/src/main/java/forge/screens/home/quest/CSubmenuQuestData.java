@@ -14,6 +14,7 @@ import forge.quest.data.GameFormatQuest;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
+import forge.screens.bazaar.CBazaarUI;
 import forge.toolbox.FOptionPane;
 
 import javax.swing.*;
@@ -318,6 +319,7 @@ public enum CSubmenuQuestData implements ICDoc {
         CSubmenuChallenges.SINGLETON_INSTANCE.update();
         CSubmenuQuestDecks.SINGLETON_INSTANCE.update();
         CSubmenuQuestDraft.SINGLETON_INSTANCE.update();
+	    CBazaarUI.SINGLETON_INSTANCE.update();
 
     }
 
