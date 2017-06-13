@@ -621,7 +621,6 @@ public class AiAttackController {
 
             for (Card cre : attSorted) {
                 i++;
-
                 if (i + refPowerValue >= cre.getCurrentToughness()) {
                     attUnsafe.add(cre);
                 } else {
