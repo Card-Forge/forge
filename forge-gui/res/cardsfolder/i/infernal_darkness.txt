@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Enchantment
 K:Cumulative upkeep:B PayLife<1>:Pay {B} and 1 life.
 R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Land | ManaReplacement$ ProduceB | Description$ If a land is tapped for mana, it produces {B} instead of any other type.
-SVar:ProduceB:Colorless->B & U->B & R->B & G->B & W->B
+SVar:ProduceB:C->B & U->B & R->B & G->B & W->B
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infernal_darkness.jpg

@@ -39,6 +39,26 @@ public class ManaEffect extends SpellAbilityEffect {
         if (optional && !sa.getActivatingPlayer().getController().confirmAction(sa, null, "Do you want to add mana to your mana pool?")) {
             return;
         }
+
+        if (sa.hasParam("DoubleManaInPool")) {
+            for (final Player player : tgtPlayers) {
+                for (byte color : MagicColor.WUBRG) {
+                    int amountColor = player.getManaPool().getAmountOfColor(color);
+                    for (int i = 0; i < amountColor; i++) {
+                        abMana.produceMana(MagicColor.toShortString(color), player, sa);
+                    }
+                }
+                int amountColorless = player.getManaPool().getAmountOfColor((byte)(1 << 5));
+                for (int i = 0; i < amountColorless; i++) {
+                    abMana.produceMana(MagicColor.toShortString("C"), player, sa);
+                }
+            }
+        }
+
+        if (sa.hasParam("ProduceNoOtherMana")) {
+            return;
+        }
+
         if (abMana.isComboMana()) {
             for (Player p : tgtPlayers) {
                 int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(card, sa.getParam("Amount"), sa) : 1;

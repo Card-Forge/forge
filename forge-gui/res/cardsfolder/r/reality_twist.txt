@@ -4,13 +4,13 @@ Types:Enchantment
 Text:If tapped for mana, Plains produce {R}, Swamps produce {G}, Mountains produce {W}, and Forests produce {B} instead of any other type.
 K:Cumulative upkeep:1 U U
 R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Plains | ManaReplacement$ ProduceR | Secondary$ True | Description$ If tapped for mana, Plains produce R.
-SVar:ProduceR:Colorless->R & B->R & U->R & G->R & W->R
+SVar:ProduceR:C->R & B->R & U->R & G->R & W->R
 R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Swamp | ManaReplacement$ ProduceG | Secondary$ True | Description$ If tapped for mana, Swamps produce G.
-SVar:ProduceG:Colorless->G & B->G & U->G & R->G & W->G
+SVar:ProduceG:C->G & B->G & U->G & R->G & W->G
 R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Mountain | ManaReplacement$ ProduceW | Secondary$ True | Description$ If tapped for mana, Mountains produce U.
-SVar:ProduceW:Colorless->W & B->W & G->W & R->W & U->W
+SVar:ProduceW:C->W & B->W & G->W & R->W & U->W
 R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Forest | ManaReplacement$ ProduceB | Secondary$ True | Description$ If tapped for mana, Forests produce B.
-SVar:ProduceB:Colorless->B & G->B & U->B & R->B & W->B
+SVar:ProduceB:C->B & G->B & U->B & R->B & W->B
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:NonStackingEffect:True
