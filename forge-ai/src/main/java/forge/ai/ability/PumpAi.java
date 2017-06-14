@@ -477,23 +477,13 @@ public class PumpAi extends PumpAiBase {
             list = ComputerUtil.getSafeTargets(ai, sa, list);
         }
         
-        if ("Snapcaster".equals(sa.getParam("AILogic"))) {  // can afford to and will play snap-casted spell
-            AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-            Card targetSnapcast = null;
-            for (Card c : list) {
-                for (SpellAbility ab : c.getSpellAbilities()) {
-                    final boolean play = AiPlayDecision.WillPlay == aic.canPlaySa(ab);
-                    final boolean pay = ComputerUtilCost.canPayCost(ab, ai);
-                    if (play && pay) {
-                        targetSnapcast = c;
-                        break;
-                    }
-                }
-            }
-            if (targetSnapcast == null) {
+        if ("Snapcaster".equals(sa.getParam("AILogic"))) {
+            if (!doTargetSpellToPlayLogic(ai, list, sa, false)) {
                 return false;
-            } else {
-                sa.getTargets().add(targetSnapcast);
+            }
+        } else if ("PlaySpellForFree".equals(sa.getParam("AILogic"))) {
+            if (!doTargetSpellToPlayLogic(ai, list, sa, true)) {
+                return false;
             }
         }
 
@@ -529,6 +519,32 @@ public class PumpAi extends PumpAiBase {
 
         return true;
     } // pumpTgtAI()
+
+    private boolean doTargetSpellToPlayLogic(final Player ai, CardCollection options, final SpellAbility sa, final boolean withoutPayingManaCost) {
+        // determine and target a card with a SA that the AI can afford and will play
+        AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+        Card targetSpellCard = null;
+        for (Card c : options) {
+            for (SpellAbility ab : c.getSpellAbilities()) {
+                SpellAbility abTest = withoutPayingManaCost ? ab.copyWithNoManaCost() : ab.copy();
+                // at this point, we're assuming that card will be castable from whichever zone it's in by the AI player.
+                abTest.setActivatingPlayer(ai);
+                abTest.getRestrictions().setZone(c.getZone().getZoneType());
+                final boolean play = AiPlayDecision.WillPlay == aic.canPlaySa(abTest);
+                final boolean pay = ComputerUtilCost.canPayCost(abTest, ai);
+                if (play && pay) {
+                    targetSpellCard = c;
+                    break;
+                }
+            }
+        }
+        if (targetSpellCard == null) {
+            return false;
+        } else {
+            sa.getTargets().add(targetSpellCard);
+        }
+        return true;
+    }
 
     private boolean pumpMandatoryTarget(final Player ai, final SpellAbility sa) {
         final Game game = ai.getGame();
