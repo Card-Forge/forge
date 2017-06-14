@@ -42,6 +42,7 @@ public class BecomesBlockedEffect extends SpellAbilityEffect {
                     runParams.put("Attacker", c);
                     runParams.put("Blockers", new ArrayList<Card>());
                     runParams.put("NumBlockers", 0);
+                    runParams.put("DefendingPlayer", game.getCombat().getDefenderPlayerByAttacker(c));
                     game.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams, false);
                 }
             }

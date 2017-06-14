@@ -2182,6 +2182,9 @@ public class CardFactoryUtil {
             else if (keyword.startsWith("Rampage")) {
                 addTriggerAbility(keyword, card, null);
             }
+            else if (keyword.startsWith("Afflict")) {
+                addTriggerAbility(keyword, card, null);
+            }
             else if (keyword.startsWith("Strive")) {
                 addStaticAbility(keyword, card, null);
             }
@@ -2455,7 +2458,26 @@ public class CardFactoryUtil {
     public static void addTriggerAbility(final String keyword, final Card card, final KeywordsChange kws) {
         final boolean intrinsic = kws == null;
 
-        if (keyword.startsWith("Annihilator")) {
+        if (keyword.startsWith("Afflict")) {
+            final String[] k = keyword.split(" ");
+            final String n = k[1];
+
+            final String trigStr = "Mode$ AttackerBlocked | ValidCard$ Card.Self | TriggerZones$ Battlefield " +
+                    " | ValidBlocker$ Creature | Execute$ AfflictLoseLife | Secondary$ True " +
+                    " | TriggerDescription$ Rampage " + n + " (" + Keyword.getInstance(keyword).getReminderText() + ")";
+
+            final String abStringRampage = "DB$ Loselife | Defined$ TriggeredDefendingPlayer" +
+                    " | LifeAmount$ " + n;
+
+            final Trigger rampageTrigger = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
+            final Trigger cardTrigger = card.addTrigger(rampageTrigger);
+
+            card.setSVar("AfflictLoseLife", abStringRampage);
+
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger);
+            }
+        } else if (keyword.startsWith("Annihilator")) {
             final String[] k = keyword.split(":");
             final String n = k[1];
             
