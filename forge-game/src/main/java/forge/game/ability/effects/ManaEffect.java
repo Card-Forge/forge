@@ -42,15 +42,11 @@ public class ManaEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("DoubleManaInPool")) {
             for (final Player player : tgtPlayers) {
-                for (byte color : MagicColor.WUBRG) {
+                for (byte color : ManaAtom.MANATYPES) {
                     int amountColor = player.getManaPool().getAmountOfColor(color);
                     for (int i = 0; i < amountColor; i++) {
                         abMana.produceMana(MagicColor.toShortString(color), player, sa);
                     }
-                }
-                int amountColorless = player.getManaPool().getAmountOfColor((byte)(1 << 5));
-                for (int i = 0; i < amountColorless; i++) {
-                    abMana.produceMana(MagicColor.toShortString("C"), player, sa);
                 }
             }
         }
