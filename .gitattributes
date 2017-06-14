@@ -16943,6 +16943,7 @@ forge-gui/res/cardsfolder/u/utter_end.txt -text
 forge-gui/res/cardsfolder/u/utvara_hellkite.txt -text
 forge-gui/res/cardsfolder/u/utvara_scalper.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/u/uyo_silent_prophet.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/upcoming/abrade.txt -text
 forge-gui/res/cardsfolder/upcoming/because_i_have_willed_it.txt -text
 forge-gui/res/cardsfolder/upcoming/behold_my_grandeur.txt -text
 forge-gui/res/cardsfolder/upcoming/bontus_last_reckoning.txt -text
@@ -16950,6 +16951,7 @@ forge-gui/res/cardsfolder/upcoming/nicol_bolas_god_pharaoh.txt -text
 forge-gui/res/cardsfolder/upcoming/no_one_will_hear_your_cries.txt -text
 forge-gui/res/cardsfolder/upcoming/pay_tribute_to_me.txt -text
 forge-gui/res/cardsfolder/upcoming/power_without_equal.txt -text
+forge-gui/res/cardsfolder/upcoming/ramunap_excavator.txt -text
 forge-gui/res/cardsfolder/upcoming/samut_the_tested.txt -text
 forge-gui/res/cardsfolder/upcoming/the_mighty_will_fall.txt -text
 forge-gui/res/cardsfolder/upcoming/there_is_no_refuge.txt -text
