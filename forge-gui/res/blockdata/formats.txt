@@ -1,6 +1,6 @@
 [Standard]
 Sets:BFZ, OGW, SOI, EMN, W16, KLD, AER, AKH
-Banned: Emrakul, the Promised End; Smuggler's Copter; Reflector Mage
+Banned: Emrakul, the Promised End; Smuggler's Copter; Reflector Mage; Aetherworks Marvel
 
 [Extended]
 Sets:SOM, MBS, NPH, M12, ISD, DKA, AVR, M13, RTR, GTC, DGM, M14, THS, BNG, JOU, M15
