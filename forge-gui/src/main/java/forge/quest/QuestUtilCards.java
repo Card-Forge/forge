@@ -529,18 +529,18 @@ public final class QuestUtilCards {
 	 * @param quantity The number of booster packs to generate
 	 * @return A list containing the booster packs
 	 */
-	private List<InventoryItem> generateRandomSpecialBoosterPacks(final int quantity) {
+    private List<InventoryItem> generateRandomSpecialBoosterPacks(final int quantity) {
 
-		List<InventoryItem> output = new ArrayList<>();
+        List<InventoryItem> output = new ArrayList<>();
 
         for (int i = 0; i < quantity; i++) {
             String color = SealedProduct.specialSets.get(MyRandom.getRandom().nextInt(SealedProduct.specialSets.size()));
             output.add(new BoosterPack(color, getColoredBoosterTemplate(color)));
         }
 
-		return output;
+        return output;
 
-	}
+    }
 
     /**
      * Generate boosters in shop.
