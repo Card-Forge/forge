@@ -526,6 +526,10 @@ public class PumpAi extends PumpAiBase {
         Card targetSpellCard = null;
         for (Card c : options) {
             for (SpellAbility ab : c.getSpellAbilities()) {
+                if (ab.getApi() == null) {
+                    // only API-based SAs are supported, other things may lead to a NPE (e.g. Ancestral Vision Suspend SA)
+                    continue;
+                }
                 SpellAbility abTest = withoutPayingManaCost ? ab.copyWithNoManaCost() : ab.copy();
                 // at this point, we're assuming that card will be castable from whichever zone it's in by the AI player.
                 abTest.setActivatingPlayer(ai);
