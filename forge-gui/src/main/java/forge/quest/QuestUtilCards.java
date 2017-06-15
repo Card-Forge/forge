@@ -524,11 +524,13 @@ public final class QuestUtilCards {
     }
 
 
-	/**
-	 * Generates a number of special booster packs from random editions using the current quest's prize pool format.
-	 * @param quantity The number of booster packs to generate
-	 * @return A list containing the booster packs
-	 */
+    /**
+     * Generates a number of special booster packs from random editions using
+     * the current quest's prize pool format.
+     *
+     * @param quantity The number of booster packs to generate
+     * @return A list containing the booster packs
+     */
     private List<InventoryItem> generateRandomSpecialBoosterPacks(final int quantity) {
 
         List<InventoryItem> output = new ArrayList<>();
