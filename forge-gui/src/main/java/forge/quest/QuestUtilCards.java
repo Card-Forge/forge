@@ -533,11 +533,10 @@ public final class QuestUtilCards {
 
 		List<InventoryItem> output = new ArrayList<>();
 
-		for (String color : SealedProduct.specialSets) {
-			for (int i = 0; i < quantity; i++) {
-				output.add(new BoosterPack(color, getColoredBoosterTemplate(color)));
-			}
-		}
+        for (int i = 0; i < quantity; i++) {
+            String color = SealedProduct.specialSets.get(MyRandom.getRandom().nextInt(SealedProduct.specialSets.size()));
+            output.add(new BoosterPack(color, getColoredBoosterTemplate(color)));
+        }
 
 		return output;
 
