@@ -21,7 +21,7 @@ As always, this release of Forge features an assortment of bug fixes and improve
 This release contains a new way to generate random Standard or Modern decks that are themed around a specific card.  In the deck selector you choose a card and the AI will build a deck around that card based on associations learnt from recent human generated online decks.  The algorithm is non-deterministic, so the decks will vary every time they are generated for a unique deck virtually every time.
 
 - User Created Quest Worlds -
-If you have created some of your own quest worlds and don't want them to be overwritten when Forge updates, you can move the world folders to the user quest folder (in USER_FOLDER/quest/worlds) - you will also need to add the world definitions to a customworlds.txt file in that same folder
+If you have created some of your own quest worlds and don't want them to be overwritten when Forge updates, you can move the world folders to the user quest folder (in USER_FOLDER/quest/world) - you will also need to add the world definitions to a customworlds.txt file in that same folder
 
 - Quest Shop Singles Update -
 The quest shop will now generate singles using the full availability of cards in a set, including things like Amonkhet Invocations and Kaladesh Inventions. The rarity of these additional cards is unchanged and it may take some time for them to finally appear.
