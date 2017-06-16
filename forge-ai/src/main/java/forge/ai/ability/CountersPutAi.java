@@ -217,7 +217,7 @@ public class CountersPutAi extends SpellAbilityAi {
         }
         
         if ("PayEnergy".equals(sa.getParam("AILogic"))) {
-            return false;
+            return true;
         }
 
         if ("PayEnergyConservatively".equals(sa.getParam("AILogic"))) {
