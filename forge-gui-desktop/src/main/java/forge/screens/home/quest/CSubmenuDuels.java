@@ -134,7 +134,7 @@ public enum CSubmenuDuels implements ICDoc {
                 }
                 rad.addKeyListener(_startOnEnter);
                 rad.addMouseListener(_startOnDblClick);
-                grpPanel.add(temp, rad, "w 100%!, h 135px!, gapy 15px");
+                grpPanel.add(temp, rad, "w 100%!, h 95px!, gapy 8px");
             }
             view.getPnlDuels().add(grpPanel, "w 100%!");
 

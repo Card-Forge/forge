@@ -15,7 +15,6 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 /**
  * Panels for displaying duels and challenges.<br>
@@ -28,8 +27,8 @@ class PnlEvent extends JPanel {
     private final FRadioButton rad;
     private final SkinImage image;
 
-    private final int wImg = 100;
-    private final int hImg = 100;
+    private final int wImg = 85;
+    private final int hImg = 85;
     private final int hRfl = 20;
 
     private final Color clr1 = new Color(255, 0, 255, 100);
@@ -90,6 +89,7 @@ class PnlEvent extends JPanel {
 
     @Override
     public void paintComponent(final Graphics g) {
+
         Graphics2D g2d = (Graphics2D) g.create();
         FSkin.setGraphicsGradientPaint(g2d, 0, 0, clr3, getWidth(), 0, clr2);
         g2d.fillRect(0, 0, getWidth(), getHeight());
@@ -105,7 +105,7 @@ class PnlEvent extends JPanel {
                 0, 0, wImg, hImg, // Destination
                 0, 0, wSrc, hSrc); // Source
 
-        // Gap between image and reflection set here
+        /*// Gap between image and reflection set here
         g2d.translate(0, hImg + 2);
 
         // Reflection drawn onto temporary graphics
@@ -122,7 +122,9 @@ class PnlEvent extends JPanel {
 
         // Reflection drawn onto panel graphics, cleanup
         g2d.drawImage(refl, 0, 0, null);
-        gRefl.dispose();
+        gRefl.dispose();*/
         g2d.dispose();
+
     }
+
 }
