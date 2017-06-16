@@ -225,14 +225,12 @@ public class CountersPutAi extends SpellAbilityAi {
             if (playAggro) {
                 // aggro profiles ignore conservative play for this AI logic
                 return true;
-            }
-            if (ai.getGame().getCombat() != null && sa.getHostCard() != null) {
+            } else if (ai.getCounters(CounterType.ENERGY) > ComputerUtilCard.getMaxSAEnergyCostOnBattlefield(ai) + sa.getPayCosts().getCostEnergy().convertAmount()) {
+                return true;
+            } else if (ai.getGame().getCombat() != null && sa.getHostCard() != null) {
                 if (ai.getGame().getCombat().isAttacking(sa.getHostCard())) {  
                     return true;
                 }
-            }
-            if (ai.getCounters(CounterType.ENERGY) > ComputerUtilCard.getMaxSAEnergyCostOnBattlefield(ai) + sa.getPayCosts().getCostEnergy().convertAmount()) {
-                return true;
             }
         }
 
