@@ -130,6 +130,7 @@ public class CountersPutAi extends SpellAbilityAi {
         final boolean isClockwork = "True".equals(sa.getParam("UpTo")) && "Self".equals(sa.getParam("Defined"))
                 && "P1P0".equals(sa.getParam("CounterType")) && "Count$xPaid".equals(source.getSVar("X"))
                 && sa.hasParam("MaxFromEffect");
+        boolean playAggro = ((PlayerControllerAi) ai.getController()).getAi().getProperty(AiProps.PLAY_AGGRO).equals("true");
 
         if ("ExistingCounter".equals(type)) {
             final boolean eachExisting = sa.hasParam("EachExistingCounter");
@@ -221,6 +222,10 @@ public class CountersPutAi extends SpellAbilityAi {
         }
 
         if ("PayEnergyConservatively".equals(sa.getParam("AILogic"))) {
+            if (playAggro) {
+                // aggro profiles ignore conservative play for this AI logic
+                return true;
+            }
             if (ai.getGame().getCombat() != null && sa.getHostCard() != null) {
                 if (ai.getGame().getCombat().isAttacking(sa.getHostCard())) {  
                     return true;
