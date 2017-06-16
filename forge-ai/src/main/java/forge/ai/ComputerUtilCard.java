@@ -40,7 +40,6 @@ import forge.game.card.CardUtil;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
-import forge.game.cost.CostPart;
 import forge.game.cost.CostPayEnergy;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
