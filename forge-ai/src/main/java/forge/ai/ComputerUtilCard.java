@@ -40,6 +40,8 @@ import forge.game.card.CardUtil;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostPayEnergy;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -1586,5 +1588,29 @@ public class ComputerUtilCard {
 
     public static boolean isPresentOnBattlefield(final Game game, final String cardName) {
         return !CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(cardName)).isEmpty();
+    }
+
+    public static int getMaxSAEnergyCostOnBattlefield(final Player ai) {
+        // returns the maximum energy cost of an ability that permanents on the battlefield under AI's control have
+        CardCollectionView otb = ai.getCardsIn(ZoneType.Battlefield);
+        int maxEnergyCost = 0;
+
+        for (Card c : otb) {
+            for (SpellAbility sa : c.getSpellAbilities()) {
+                if (sa.getPayCosts() == null) {
+                    continue;
+                }
+
+                CostPayEnergy energyCost = sa.getPayCosts().getCostEnergy();
+                if (energyCost != null) {
+                    int amount = energyCost.convertAmount();
+                    if (amount > maxEnergyCost) {
+                        maxEnergyCost = amount;
+                    }
+                }
+            }
+        }
+
+        return maxEnergyCost;
     }
 }

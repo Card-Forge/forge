@@ -494,6 +494,15 @@ public class Cost {
         return null;
     }
 
+    public final CostPayEnergy getCostEnergy() {
+        for (final CostPart part : this.costParts) {
+            if (part instanceof CostPayEnergy) {
+                return (CostPayEnergy) part;
+            }
+        }
+        return null;
+    }
+
     /**
      * <p>
      * refundPaidCost.

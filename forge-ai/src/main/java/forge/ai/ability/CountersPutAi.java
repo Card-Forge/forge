@@ -217,7 +217,18 @@ public class CountersPutAi extends SpellAbilityAi {
         }
         
         if ("PayEnergy".equals(sa.getParam("AILogic"))) {
-            return true;
+            return false;
+        }
+
+        if ("PayEnergyConservatively".equals(sa.getParam("AILogic"))) {
+            if (ai.getGame().getCombat() != null && sa.getHostCard() != null) {
+                if (ai.getGame().getCombat().isAttacking(sa.getHostCard()) || ai.getGame().getCombat().isBlocking(sa.getHostCard())) {  
+                    return true;
+                }
+            }
+            if (ai.getCounters(CounterType.ENERGY) > ComputerUtilCard.getMaxSAEnergyCostOnBattlefield(ai) + sa.getPayCosts().getCostEnergy().convertAmount()) {
+                return true;
+            }
         }
 
         if (sa.getConditions() != null && !sa.getConditions().areMet(sa) && sa.getSubAbility() == null) {
