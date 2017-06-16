@@ -333,9 +333,9 @@ public class GameAction {
         // "enter the battlefield as a copy" - apply code here
         // but how to query for input here and continue later while the callers assume synchronous result?
         zoneTo.add(copied, position, c); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
+        c.setZone(zoneTo);
 
         if (fromBattlefield) {
-            c.setZone(zoneTo);
             c.setDamage(0); //clear damage after a card leaves the battlefield
             c.setHasBeenDealtDeathtouchDamage(false);
             if (c.isTapped()) {
