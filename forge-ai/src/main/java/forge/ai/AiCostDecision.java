@@ -306,6 +306,9 @@ public class AiCostDecision extends CostDecisionMakerBase {
             final String sVar = ability.getSVar(cost.getAmount());
             // Generalize cost
             if (sVar.equals("XChoice")) {
+                if (source.getName().equals("Maralen of the Mornsong Avatar")) {
+                    return PaymentDecision.number(2);
+                }
                 return null;
             } else {
                 c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);

@@ -15,6 +15,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.WrappedAbility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,6 +131,13 @@ public class StoreSVarAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+        if (sa instanceof WrappedAbility) {
+            SpellAbility origSa = ((WrappedAbility)sa).getWrappedAbility();
+            if (origSa.getHostCard().getName().equals("Maralen of the Mornsong Avatar")) {
+                origSa.setSVar("PayX", "2");
+                origSa.getHostCard().setSVar("ChosenX", "2");
+            }
+        }
 
         return true;
     }
