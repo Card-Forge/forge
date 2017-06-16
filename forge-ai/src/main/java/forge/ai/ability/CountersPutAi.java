@@ -222,7 +222,7 @@ public class CountersPutAi extends SpellAbilityAi {
 
         if ("PayEnergyConservatively".equals(sa.getParam("AILogic"))) {
             if (ai.getGame().getCombat() != null && sa.getHostCard() != null) {
-                if (ai.getGame().getCombat().isAttacking(sa.getHostCard()) || ai.getGame().getCombat().isBlocking(sa.getHostCard())) {  
+                if (ai.getGame().getCombat().isAttacking(sa.getHostCard())) {  
                     return true;
                 }
             }
