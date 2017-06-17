@@ -16953,6 +16953,9 @@ forge-gui/res/cardsfolder/u/utvara_scalper.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/u/uyo_silent_prophet.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/upcoming/abrade.txt -text
 forge-gui/res/cardsfolder/upcoming/bontus_last_reckoning.txt -text
+forge-gui/res/cardsfolder/upcoming/carrion_screecher.txt -text
+forge-gui/res/cardsfolder/upcoming/hour_of_revelation.txt -text
+forge-gui/res/cardsfolder/upcoming/khenra_eternal.txt -text
 forge-gui/res/cardsfolder/upcoming/nicol_bolas_god_pharaoh.txt -text
 forge-gui/res/cardsfolder/upcoming/nissa_genesis_mage.txt -text
 forge-gui/res/cardsfolder/upcoming/ramunap_excavator.txt -text
