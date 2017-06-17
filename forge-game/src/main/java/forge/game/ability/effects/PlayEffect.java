@@ -10,18 +10,23 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import forge.GameCommand;
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
 import forge.card.CardStateName;
 import forge.game.Game;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementHandler;
+import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
@@ -228,6 +233,11 @@ public class PlayEffect extends SpellAbilityEffect {
                 tgtSA.getTargetRestrictions().setMandatory(true);
             }
 
+            // can't be done later
+            if (sa.hasParam("ReplaceGraveyard")) {
+                addReplaceGraveyardEffect(tgtCard, sa, sa.getParam("ReplaceGraveyard"));
+            }
+            
             if (controller.getController().playSaFromPlayEffect(tgtSA)) {
                 if (remember) {
                     source.addRemembered(tgtSA.getHostCard());
@@ -247,4 +257,51 @@ public class PlayEffect extends SpellAbilityEffect {
         }
     } // end resolve
 
+    
+    protected void addReplaceGraveyardEffect(Card c, SpellAbility sa, String zone) {
+        final Card hostCard = sa.getHostCard();
+        final Game game = hostCard.getGame();
+        final Player controller = sa.getActivatingPlayer();
+        final String name = hostCard.getName() + "'s Effect";
+        final String image = hostCard.getImageKey();
+        final Card eff = createEffect(hostCard, controller, name, image);
+
+        eff.addRemembered(c);
+
+        String repeffstr = "Event$ Moved | ValidCard$ Card.IsRemembered " +
+        "| Origin$ Stack | Destination$ Graveyard " +
+        "| Description$ If that card would be put into your graveyard this turn, exile it instead.";
+        String effect = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ " + zone;
+
+        ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
+        re.setLayer(ReplacementLayer.Other);
+
+        re.setOverridingAbility(AbilityFactory.getAbility(effect, eff));
+        eff.addReplacementEffect(re);
+
+        addExileOnMovedTrigger(eff, "Stack");
+
+        // Copy text changes
+        if (sa.isIntrinsic()) {
+            eff.copyChangedTextFrom(hostCard);
+        }
+
+        final GameCommand endEffect = new GameCommand() {
+            private static final long serialVersionUID = -5861759814760561373L;
+
+            @Override
+            public void run() {
+                game.getAction().exile(eff, null);
+            }
+        };
+
+        game.getEndOfTurn().addUntil(endEffect);
+
+        eff.updateStateForView();
+
+        // TODO: Add targeting to the effect so it knows who it's dealing with
+        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+        game.getAction().moveTo(ZoneType.Command, eff, sa);
+        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+    }
 }
