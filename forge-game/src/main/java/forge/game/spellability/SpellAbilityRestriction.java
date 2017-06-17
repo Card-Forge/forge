@@ -17,9 +17,10 @@
  */
 package forge.game.spellability;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import com.google.common.collect.Lists;
 
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -86,8 +87,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             if (value.equals("Hellbent")) {
                 this.setHellbent(true);
             }
+            if (value.equals("Desert")) {
+                this.setDesert(true);
+            }
             if (value.startsWith("Prowl")) {
-                final List<String> prowlTypes = new ArrayList<String>();
+                final List<String> prowlTypes = Lists.newArrayList();
                 prowlTypes.add("Rogue");
                 if (value.split("Prowl").length > 1) {
                     prowlTypes.add(value.split("Prowl")[1]);
@@ -368,6 +372,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
         if (this.isSurge()) {
             if (!activator.hasSurge()) {
+                return false;
+            }
+        }
+        if (this.isDesert()) {
+            if (!activator.hasDesert()) {
                 return false;
             }
         }

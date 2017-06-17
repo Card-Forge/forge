@@ -154,6 +154,7 @@ public class SpellAbilityVariables implements Cloneable {
     private boolean delirium = false;
     private boolean hellbent = false;
     private boolean revolt = false;
+    private boolean desert = false;
 
     /** The surge. */
     private boolean surge = false;
@@ -471,6 +472,8 @@ public class SpellAbilityVariables implements Cloneable {
     public void setDelirium(boolean delirium) {  this.delirium = delirium; }
 
     public void setRevolt(final boolean bRevolt) { revolt = bRevolt; }
+
+    public void setDesert(final boolean bDesert) { desert = bDesert; }
     /**
      * <p>
      * Setter for the field <code>surge</code>.
@@ -688,6 +691,8 @@ public class SpellAbilityVariables implements Cloneable {
     public final boolean isHellbent() {     return this.hellbent;  }
     
     public final boolean isRevolt() {     return this.revolt;  }
+
+    public final boolean isDesert() {     return this.desert;  }
 
     /**
      * Checks if is surge.

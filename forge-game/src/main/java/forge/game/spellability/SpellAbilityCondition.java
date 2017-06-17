@@ -94,6 +94,9 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (value.equals("Revolt")) {
                 this.setRevolt(true);
             }
+            if (value.equals("Desert")) {
+                this.setDesert(true);
+            }
             if (value.equals("Kicked")) {
                 this.kicked = true;
             }
@@ -232,6 +235,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.isMetalcraft() && !activator.hasMetalcraft()) return false;
         if (this.isDelirium() && !activator.hasDelirium()) return false;
         if (this.isRevolt() && !activator.hasRevolt()) return false;
+        if (this.isDesert() && !activator.hasDesert()) return false;
         
         if (this.kicked && !sa.isKicked()) return false;
         if (this.kicked1 && !sa.isOptionalCostPaid(OptionalCost.Kicker1)) return false;

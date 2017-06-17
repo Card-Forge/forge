@@ -491,6 +491,7 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
             if (condition.equals("Hellbent") && !controller.hasHellbent()) return false;
             if (condition.equals("Metalcraft") && !controller.hasMetalcraft()) return false;
             if (condition.equals("Delirium") && !controller.hasDelirium()) return false;
+            if (condition.equals("Desert") && !controller.hasDesert()) return false;
 
             if (condition.equals("PlayerTurn")) {
                 if (!ph.isPlayerTurn(controller)) {
