@@ -71,7 +71,6 @@ public class PlayAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final Game game = ai.getGame();
         
-        // general logic (no AILogic specified)
         if (sa.usesTargeting()) {
             if (!sa.hasParam("AILogic")) {
                 return false;
