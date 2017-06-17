@@ -167,6 +167,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean suspend = false;
     private boolean tributed = false;
     private boolean embalmed = false;
+    private boolean eternalized = false;
     private boolean madness = false;
     private boolean madnessWithoutCast = false;
 
@@ -1531,7 +1532,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || keyword.startsWith("Evoke") || keyword.startsWith("Bestow") || keyword.startsWith("Dash")
                     || keyword.startsWith("Surge") || keyword.startsWith("Transmute") || keyword.startsWith("Suspend")
                     || keyword.equals("Undaunted") || keyword.startsWith("Monstrosity") || keyword.startsWith("Embalm")
-                    || keyword.startsWith("Level up") || keyword.equals("Prowess")
+                    || keyword.startsWith("Level up") || keyword.equals("Prowess") || keyword.startsWith("Eternalize")
                     || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")) {
                 // keyword parsing takes care of adding a proper description
             } else if (keyword.startsWith("CantBeBlockedBy")) {
@@ -6138,7 +6139,14 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void setEmbalmed(final boolean b) {
         embalmed = b;
     }
-    
+
+    public final boolean isEternalized() {
+        return eternalized;
+    }
+    public final void setEternalized(final boolean b) {
+    	eternalized = b;
+    }
+
     public final int getExertedThisTurn() {
         return exertThisTurn;
     }

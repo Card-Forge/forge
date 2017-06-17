@@ -2176,6 +2176,9 @@ public class CardFactoryUtil {
             else if (keyword.startsWith("Escalate")) {
                 addStaticAbility(keyword, card, null);
             }
+            else if (keyword.startsWith("Eternalize")) {
+                addSpellAbility(keyword, card, null);
+            }
             else if (keyword.startsWith("Fabricate")) {
                 addTriggerAbility(keyword, card, null);
             }
@@ -3775,6 +3778,24 @@ public class CardFactoryUtil {
                 kws.addSpellAbility(newSA);
             }
             card.addSpellAbility(newSA);
+        } else if (keyword.startsWith("Eternalize")) {
+            final String[] kw = keyword.split(":");
+            String costStr = kw[1];
+
+            String effect = "AB$ CopyPermanent | Cost$ " + costStr + " ExileFromGrave<1/CARDNAME> " +
+            "| ActivationZone$ Graveyard | SorcerySpeed$ True | Eternalize$ True " + 
+            "| PrecostDesc$ Eternalize | CostDesc$ " + ManaCostParser.parse(costStr) + " | Defined$ Self " + 
+            "| StackDescription$ Eternalize - CARDNAME "+
+            "| SpellDescription$ (" + Keyword.getInstance(keyword).getReminderText() + ")" ; 
+            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setIntrinsic(intrinsic);
+
+            if (!intrinsic) {
+                sa.setTemporary(true);
+                //sa.setOriginalHost(hostCard);
+                kws.addSpellAbility(sa);
+            }
+            card.addSpellAbility(sa);
         } else if (keyword.startsWith("Evoke")) {
             final String[] k = keyword.split(":");
             final SpellAbility sa = card.getFirstSpellAbility();

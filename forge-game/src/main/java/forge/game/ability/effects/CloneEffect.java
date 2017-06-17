@@ -342,6 +342,13 @@ public class CloneEffect extends SpellAbilityEffect {
             tgtCard.setColor(MagicColor.WHITE);
             tgtCard.setManaCost(ManaCost.NO_COST);
         }
+        if (sa.hasParam("Eternalize") && tgtCard.isEternalized()) {
+            tgtCard.addType("Zombie");
+            tgtCard.setColor(MagicColor.BLACK);
+            tgtCard.setManaCost(ManaCost.NO_COST);
+            tgtCard.setBasePower(4);
+            tgtCard.setBaseToughness(4);
+        }
     }
 
 }

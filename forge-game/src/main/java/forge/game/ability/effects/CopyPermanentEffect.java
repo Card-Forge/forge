@@ -253,6 +253,17 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         String name = copy.getName().replace(",", "").replace(" ", "_").toLowerCase();
                         copy.setImageKey(ImageKeys.getTokenKey("embalm_" + name));
                     }
+                    if (sa.hasParam("Eternalize")) {
+                    	copy.addType("Zombie");
+                    	copy.setColor(MagicColor.BLACK);
+                    	copy.setManaCost(ManaCost.NO_COST);
+                    	copy.setBasePower(4);
+                    	copy.setBaseToughness(4);
+                        copy.setEternalized(true);
+
+                        String name = copy.getName().replace(",", "").replace(" ", "_").toLowerCase();
+                        copy.setImageKey(ImageKeys.getTokenKey("eternalize_" + name));
+                    }
                     
                     copy.updateStateForView();
 
