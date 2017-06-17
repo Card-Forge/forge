@@ -517,6 +517,7 @@ forge-game/src/main/java/forge/game/cost/CostDamage.java -text
 forge-game/src/main/java/forge/game/cost/CostDecisionMakerBase.java -text
 forge-game/src/main/java/forge/game/cost/CostDiscard.java -text
 forge-game/src/main/java/forge/game/cost/CostDraw.java -text
+forge-game/src/main/java/forge/game/cost/CostExert.java -text
 forge-game/src/main/java/forge/game/cost/CostExile.java -text
 forge-game/src/main/java/forge/game/cost/CostExileFromStack.java -text
 forge-game/src/main/java/forge/game/cost/CostExiledMoveToGrave.java -text
@@ -16959,6 +16960,7 @@ forge-gui/res/cardsfolder/upcoming/hour_of_revelation.txt -text
 forge-gui/res/cardsfolder/upcoming/khenra_eternal.txt -text
 forge-gui/res/cardsfolder/upcoming/nicol_bolas_god_pharaoh.txt -text
 forge-gui/res/cardsfolder/upcoming/nissa_genesis_mage.txt -text
+forge-gui/res/cardsfolder/upcoming/oasis_ritualist.txt -text
 forge-gui/res/cardsfolder/upcoming/ramunap_excavator.txt -text
 forge-gui/res/cardsfolder/upcoming/samut_the_tested.txt -text
 forge-gui/res/cardsfolder/upcoming/steadfast_sentinel.txt -text

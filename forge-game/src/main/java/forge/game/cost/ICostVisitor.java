@@ -10,6 +10,7 @@ public interface ICostVisitor<T> {
     public T visit(CostExile cost);
     public T visit(CostExileFromStack cost);
     public T visit(CostExiledMoveToGrave cost);
+    public T visit(CostExert cost);
     public T visit(CostFlipCoin cost);
     public T visit(CostMill cost);
     public T visit(CostAddMana cost);
@@ -69,6 +70,11 @@ public interface ICostVisitor<T> {
 
         @Override
         public T visit(CostExiledMoveToGrave cost) {
+            return null;
+        }
+
+        @Override
+        public T visit(CostExert cost) {
             return null;
         }
 

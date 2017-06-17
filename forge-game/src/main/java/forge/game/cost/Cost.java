@@ -436,6 +436,12 @@ public class Cost {
             return new CostPutCardToLib(splitStr[0], splitStr[1], splitStr[2], description, ZoneType.Graveyard, true);
         }
 
+        if (parse.startsWith("Exert<")) {
+            final String[] splitStr = abCostParse(parse, 3);
+            final String description = splitStr.length > 2 ? splitStr[2] : null;
+            return new CostExert(splitStr[0], splitStr[1], description);
+        }
+
         // These won't show up with multiples
         if (parse.equals("Untap") || parse.equals("Q")) {
             return new CostUntap();

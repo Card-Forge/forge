@@ -219,6 +219,36 @@ public class AiCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(CostExert cost) {
+        if (cost.payCostFromSource()) {
+            return PaymentDecision.card(source);
+        }
+
+        Integer c = cost.convertAmount();
+        if (c == null) {
+            if (ability.getSVar(cost.getAmount()).equals("XChoice")) {
+                return null;
+            }
+
+            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
+        }
+
+        final CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), player, source, ability);
+
+        if (typeList.size() < c) {
+            return null;
+        }
+
+        CardLists.sortByPowerAsc(typeList);
+        final CardCollection res = new CardCollection();
+
+        for (int i = 0; i < c; i++) {
+            res.add(typeList.get(i));
+        }
+        return res.isEmpty() ? null : PaymentDecision.card(res);
+    }
+
+    @Override
     public PaymentDecision visit(CostFlipCoin cost) {
         Integer c = cost.convertAmount();
         if (c == null) {

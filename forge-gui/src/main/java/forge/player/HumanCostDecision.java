@@ -442,6 +442,49 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(final CostExert cost) {
+        final String amount = cost.getAmount();
+        final String type = cost.getType();
+
+        CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), player, source, ability);
+
+        if (cost.payCostFromSource()) {
+            if (source.getController() == ability.getActivatingPlayer() && source.isInPlay()) {
+                return player.getController().confirmPayment(cost, "Exert " + source.getName() + "?",ability) ? PaymentDecision.card(source) : null;
+            }
+            else {
+                return null;
+            }
+        }
+
+        Integer c = cost.convertAmount();
+        if (c == null) {
+            // Generalize this
+            if (ability.getSVar(amount).equals("XChoice")) {
+                c = chooseXValue(list.size());
+            } else {
+                c = AbilityUtils.calculateAmount(source, amount, ability);
+            }
+        }
+        if (0 == c.intValue()) {
+            return PaymentDecision.number(0);
+        }
+        if (list.size() < c) {
+            return null;
+        }
+        final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, list, ability);
+        inp.setMessage("Select a " + cost.getDescriptiveType() + " to exert (%d left)");
+        inp.setCancelAllowed(true);
+        inp.showAndWait();
+        if (inp.hasCancelled()) {
+            return null;
+        }
+
+        return PaymentDecision.card(inp.getSelected());
+
+    }
+
+    @Override
     public PaymentDecision visit(final CostFlipCoin cost) {
         final String amount = cost.getAmount();
         Integer c = cost.convertAmount();
