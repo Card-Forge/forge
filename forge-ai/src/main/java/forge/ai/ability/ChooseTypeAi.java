@@ -96,12 +96,12 @@ public class ChooseTypeAi extends SpellAbilityAi {
                 }
                 avgPower /= cre.size();
                 
-                boolean overpower = cre.size() >= oppUsefulCreatures && maxX > maxOppPower && maxX >= maxOppToughness;
+                boolean overpower = cre.size() > oppUsefulCreatures;
                 if (!overpower) {
                     maxX = Math.max(0, maxX - 3); // conserve some mana unless the board position looks overpowering
                 }
 
-                if (maxX > avgPower) {
+                if (maxX > avgPower && maxX > maxOppPower && maxX >= maxOppToughness) {
                     sa.setSVar("PayX", String.valueOf(maxX));
                     AiCardMemory.rememberCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ANIMATED_THIS_TURN);
                     return true;
