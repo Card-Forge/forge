@@ -580,16 +580,8 @@ public class GameAction {
         return moveTo(stack, c, cause);
     }
 
-    public final Card moveToGraveyard(Card c, SpellAbility cause) {
-        final Player owner = c.getOwner();
-        final PlayerZone grave = owner.getZone(ZoneType.Graveyard);
-        final PlayerZone exile = owner.getZone(ZoneType.Exile);
-
-        if (c.hasKeyword("If CARDNAME would be put into a graveyard, exile it instead.")) {
-            c.removeAllExtrinsicKeyword("If CARDNAME would be put into a graveyard, exile it instead.");
-            return moveTo(exile, c, cause);
-        }
-
+    public final Card moveToGraveyard(final Card c, SpellAbility cause) {
+        final PlayerZone grave = c.getOwner().getZone(ZoneType.Graveyard);
         // must put card in OWNER's graveyard not controller's
         return moveTo(grave, c, cause);
     }
