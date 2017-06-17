@@ -2308,6 +2308,10 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (this.getLife() >= (int) Math.ceil(this.getStartingLife() / 2.0)) {
                 return false;
             }
+        } else if (property.startsWith("Triggered")) {
+            if (!AbilityUtils.getDefinedPlayers(source, property, spellAbility).contains(this)) {
+                return false;
+            }
         }
         return true;
     }
