@@ -37,7 +37,7 @@ public class PlayAi extends SpellAbilityAi {
             return false; // prevent infinite loop
         }
 
-        CardCollection cards;
+        CardCollection cards = null;
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             ZoneType zone = tgt.getZone().get(0);
@@ -52,6 +52,11 @@ public class PlayAi extends SpellAbilityAi {
                 return false;
             }
         }
+        
+        if ("PlayWithNoManaCost".equals(sa.getParam("AILogic"))) {
+            return ComputerUtil.targetPlayableSpellCard(ai, cards, sa, true);                
+        }
+        
         return true;
     }
     
@@ -68,34 +73,12 @@ public class PlayAi extends SpellAbilityAi {
      */
     @Override
     protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        final Card source = sa.getHostCard();
-        final Game game = ai.getGame();
-        
         if (sa.usesTargeting()) {
             if (!sa.hasParam("AILogic")) {
                 return false;
             }
             
-            CardCollection cards = null;
-            final TargetRestrictions tgt = sa.getTargetRestrictions();
-            if (tgt != null) {
-                ZoneType zone = tgt.getZone().get(0);
-                cards = CardLists.getValidCards(game.getCardsIn(zone), tgt.getValidTgts(), ai, source, sa);
-                if (cards.isEmpty()) {
-                    return false;
-                }
-            } else if (!sa.hasParam("Valid")) {
-                cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
-                if (cards.isEmpty()) {
-                    return false;
-                }
-            }
-
-            if ("PlayWithNoManaCost".equals(sa.getParam("AILogic"))) {
-                return ComputerUtil.targetPlayableSpellCard(ai, cards, sa, true);                
-            }
-            
-            return false;
+            return checkApiLogic(ai, sa);
         }
 
         return true;
