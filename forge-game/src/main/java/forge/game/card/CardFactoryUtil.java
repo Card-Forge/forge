@@ -2466,13 +2466,13 @@ public class CardFactoryUtil {
                     " | ValidBlocker$ Creature | Execute$ AfflictLoseLife | Secondary$ True " +
                     " | TriggerDescription$ Rampage " + n + " (" + Keyword.getInstance(keyword).getReminderText() + ")";
 
-            final String abStringRampage = "DB$ Loselife | Defined$ TriggeredDefendingPlayer" +
+            final String abStringAfflict = "DB$ Loselife | Defined$ TriggeredDefendingPlayer" +
                     " | LifeAmount$ " + n;
 
-            final Trigger rampageTrigger = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
-            final Trigger cardTrigger = card.addTrigger(rampageTrigger);
+            final Trigger afflictTrigger = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
+            final Trigger cardTrigger = card.addTrigger(afflictTrigger);
 
-            card.setSVar("AfflictLoseLife", abStringRampage);
+            card.setSVar("AfflictLoseLife", abStringAfflict);
 
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
