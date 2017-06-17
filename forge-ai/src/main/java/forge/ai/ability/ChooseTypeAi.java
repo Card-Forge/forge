@@ -68,6 +68,29 @@ public class ChooseTypeAi extends SpellAbilityAi {
         int maxX = ComputerUtilMana.determineMaxAffordableX(aiPlayer, sa);
         int avgPower = 0;
         
+        // predict the opposition
+        CardCollection oppCreatures = CardLists.filter(aiPlayer.getOpponents().getCreaturesInPlay(), CardPredicates.Presets.UNTAPPED);
+        int maxOppPower = 0;
+        int maxOppToughness = 0;
+        int oppUsefulCreatures = 0;
+        
+        for (Card oppCre : oppCreatures) {
+            if (ComputerUtilCard.isUselessCreature(aiPlayer, oppCre)) {
+                continue;
+            }
+            // TODO: should low-power tokens be considered here?
+            if (oppCre.isToken() && oppCre.getCurrentPower() < 2 && oppCre.getCurrentToughness() < 3) {
+                continue;
+            }
+            if (oppCre.getCurrentPower() > maxOppPower) {
+                maxOppPower = oppCre.getCurrentPower();
+            }
+            if (oppCre.getCurrentToughness() > maxOppToughness) {
+                maxOppToughness = oppCre.getCurrentToughness();
+            }
+            oppUsefulCreatures++;
+        }
+
         if (maxX > 1) {
             CardCollection cre = CardLists.filter(aiPlayer.getCardsIn(ZoneType.Battlefield),
                     Predicates.and(CardPredicates.isType(chosenType), CardPredicates.Presets.UNTAPPED));
@@ -76,7 +99,7 @@ public class ChooseTypeAi extends SpellAbilityAi {
                     avgPower += c.getCurrentPower();
                 }
                 avgPower /= cre.size();
-                if (maxX > avgPower) {
+                if (maxX > avgPower && maxX > maxOppPower && maxX > maxOppToughness && cre.size() >= oppUsefulCreatures) {
                     sa.setSVar("PayX", String.valueOf(maxX));
                     AiCardMemory.rememberCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ANIMATED_THIS_TURN);
                     return true;
