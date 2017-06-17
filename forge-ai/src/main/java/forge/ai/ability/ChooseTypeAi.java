@@ -11,12 +11,15 @@ import forge.card.CardType;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 import java.util.List;
 
 public class ChooseTypeAi extends SpellAbilityAi {
@@ -41,10 +44,25 @@ public class ChooseTypeAi extends SpellAbilityAi {
             return false;
         }
         
+        CardCollectionView otb = aiPlayer.getCardsIn(ZoneType.Battlefield);
         List<String> valid = Lists.newArrayList(CardType.getAllCreatureTypes());
-        String chosenType = ComputerUtilCard.getMostProminentType(aiPlayer.getCardsIn(ZoneType.Battlefield), valid);
+
+        String chosenType = ComputerUtilCard.getMostProminentType(otb, valid);
         if (chosenType.isEmpty()) {
-            return false;
+            // Account for the situation when only changelings are on the battlefield
+            boolean allChangeling = false;
+            for (Card c : otb) {
+                if (c.isCreature() && c.hasStartOfKeyword(Keyword.CHANGELING.toString())) {
+                    chosenType = Aggregates.random(valid); // just choose a random type for changelings
+                    allChangeling = true;
+                    break;
+                }
+            }
+
+            if (!allChangeling) {
+                // Still empty, probably no creatures on board
+                return false;
+            }
         }
         
         int maxX = ComputerUtilMana.determineMaxAffordableX(aiPlayer, sa);
