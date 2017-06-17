@@ -3,12 +3,10 @@ package forge.ai.ability;
 import java.util.List;
 
 import com.google.common.base.Predicate;
-import forge.ai.AiController;
 
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
 import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
