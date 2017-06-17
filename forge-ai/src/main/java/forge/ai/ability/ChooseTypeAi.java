@@ -78,10 +78,6 @@ public class ChooseTypeAi extends SpellAbilityAi {
             if (ComputerUtilCard.isUselessCreature(aiPlayer, oppCre)) {
                 continue;
             }
-            // TODO: should low-power tokens be considered here?
-            if (oppCre.isToken() && oppCre.getCurrentPower() < 2 && oppCre.getCurrentToughness() < 3) {
-                continue;
-            }
             if (oppCre.getCurrentPower() > maxOppPower) {
                 maxOppPower = oppCre.getCurrentPower();
             }
@@ -99,7 +95,13 @@ public class ChooseTypeAi extends SpellAbilityAi {
                     avgPower += c.getCurrentPower();
                 }
                 avgPower /= cre.size();
-                if (maxX > avgPower && maxX > maxOppPower && maxX > maxOppToughness && cre.size() >= oppUsefulCreatures) {
+                
+                boolean overpower = cre.size() >= oppUsefulCreatures && maxX > maxOppPower && maxX >= maxOppToughness;
+                if (!overpower) {
+                    maxX = Math.max(0, maxX - 3); // conserve some mana unless the board position looks overpowering
+                }
+
+                if (maxX > avgPower) {
                     sa.setSVar("PayX", String.valueOf(maxX));
                     AiCardMemory.rememberCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ANIMATED_THIS_TURN);
                     return true;
