@@ -98,7 +98,7 @@ public class ChooseTypeAi extends SpellAbilityAi {
                 
                 boolean overpower = cre.size() > oppUsefulCreatures;
                 if (!overpower) {
-                    maxX = Math.max(0, maxX - 3); // conserve some mana unless the board position looks overpowering
+                    maxX = Math.max(2, maxX - 3); // conserve some mana unless the board position looks overpowering
                 }
 
                 if (maxX > avgPower && maxX > maxOppPower && maxX >= maxOppToughness) {
