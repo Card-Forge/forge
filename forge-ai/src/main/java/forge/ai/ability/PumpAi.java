@@ -478,15 +478,11 @@ public class PumpAi extends PumpAiBase {
         }
         
         if ("Snapcaster".equals(sa.getParam("AILogic"))) {
-            if (!doTargetSpellToPlayLogic(ai, list, sa, false)) {
-                return false;
-            }
-        } else if ("PlaySpellForFree".equals(sa.getParam("AILogic"))) {
-            if (!doTargetSpellToPlayLogic(ai, list, sa, true)) {
+            if (!ComputerUtil.targetPlayableSpellCard(ai, list, sa, false)) {
                 return false;
             }
         }
-
+        
         while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
             Card t = null;
             // boolean goodt = false;
@@ -519,36 +515,6 @@ public class PumpAi extends PumpAiBase {
 
         return true;
     } // pumpTgtAI()
-
-    private boolean doTargetSpellToPlayLogic(final Player ai, CardCollection options, final SpellAbility sa, final boolean withoutPayingManaCost) {
-        // determine and target a card with a SA that the AI can afford and will play
-        AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-        Card targetSpellCard = null;
-        for (Card c : options) {
-            for (SpellAbility ab : c.getSpellAbilities()) {
-                if (ab.getApi() == null) {
-                    // only API-based SAs are supported, other things may lead to a NPE (e.g. Ancestral Vision Suspend SA)
-                    continue;
-                }
-                SpellAbility abTest = withoutPayingManaCost ? ab.copyWithNoManaCost() : ab.copy();
-                // at this point, we're assuming that card will be castable from whichever zone it's in by the AI player.
-                abTest.setActivatingPlayer(ai);
-                abTest.getRestrictions().setZone(c.getZone().getZoneType());
-                final boolean play = AiPlayDecision.WillPlay == aic.canPlaySa(abTest);
-                final boolean pay = ComputerUtilCost.canPayCost(abTest, ai);
-                if (play && pay) {
-                    targetSpellCard = c;
-                    break;
-                }
-            }
-        }
-        if (targetSpellCard == null) {
-            return false;
-        } else {
-            sa.getTargets().add(targetSpellCard);
-        }
-        return true;
-    }
 
     private boolean pumpMandatoryTarget(final Player ai, final SpellAbility sa) {
         final Game game = ai.getGame();

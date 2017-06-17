@@ -2636,4 +2636,34 @@ public class ComputerUtil {
 
         return false;
     }
+    
+    public static boolean targetPlayableSpellCard(final Player ai, CardCollection options, final SpellAbility sa, final boolean withoutPayingManaCost) {
+            // determine and target a card with a SA that the AI can afford and will play
+        AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+        Card targetSpellCard = null;
+        for (Card c : options) {
+            for (SpellAbility ab : c.getSpellAbilities()) {
+                if (ab.getApi() == null) {
+                    // only API-based SAs are supported, other things may lead to a NPE (e.g. Ancestral Vision Suspend SA)
+                    continue;
+                }
+                SpellAbility abTest = withoutPayingManaCost ? ab.copyWithNoManaCost() : ab.copy();
+                // at this point, we're assuming that card will be castable from whichever zone it's in by the AI player.
+                abTest.setActivatingPlayer(ai);
+                abTest.getRestrictions().setZone(c.getZone().getZoneType());
+                final boolean play = AiPlayDecision.WillPlay == aic.canPlaySa(abTest);
+                final boolean pay = ComputerUtilCost.canPayCost(abTest, ai);
+                if (play && pay) {
+                    targetSpellCard = c;
+                    break;
+                }
+            }
+        }
+        if (targetSpellCard == null) {
+            return false;
+        } else {
+            sa.getTargets().add(targetSpellCard);
+        }
+        return true;
+    }
 }

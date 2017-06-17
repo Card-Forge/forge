@@ -3,10 +3,12 @@ package forge.ai.ability;
 import java.util.List;
 
 import com.google.common.base.Predicate;
+import forge.ai.AiController;
 
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCost;
 import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -68,7 +70,34 @@ public class PlayAi extends SpellAbilityAi {
      */
     @Override
     protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
+        final Card source = sa.getHostCard();
+        final Game game = ai.getGame();
+        
+        // general logic (no AILogic specified)
         if (sa.usesTargeting()) {
+            if (!sa.hasParam("AILogic")) {
+                return false;
+            }
+            
+            CardCollection cards = null;
+            final TargetRestrictions tgt = sa.getTargetRestrictions();
+            if (tgt != null) {
+                ZoneType zone = tgt.getZone().get(0);
+                cards = CardLists.getValidCards(game.getCardsIn(zone), tgt.getValidTgts(), ai, source, sa);
+                if (cards.isEmpty()) {
+                    return false;
+                }
+            } else if (!sa.hasParam("Valid")) {
+                cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+                if (cards.isEmpty()) {
+                    return false;
+                }
+            }
+
+            if ("PlayWithNoManaCost".equals(sa.getParam("AILogic"))) {
+                return ComputerUtil.targetPlayableSpellCard(ai, cards, sa, true);                
+            }
+            
             return false;
         }
 
