@@ -42,17 +42,21 @@ import forge.card.mana.ManaCostShard;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
+import forge.deck.DeckgenUtil;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FComboBoxPanel;
 import forge.toolbox.FHtmlViewer;
 import forge.toolbox.FLabel;
+import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FTextField;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.view.arcane.CardPanel;
+import java.awt.event.MouseEvent;
+import java.util.Map;
 
 
 @SuppressWarnings("serial")
@@ -99,6 +103,26 @@ public class AddBasicLandsDialog {
         panel.add(lblDeckInfo);
 
         lblDeckInfo.setFont(FSkin.getFont(14));
+        lblDeckInfo.addMouseListener(new FMouseAdapter() {
+            @Override
+            public void onLeftDoubleClick(MouseEvent e) {
+                Map<ManaCostShard, Integer> suggestionMap = DeckgenUtil.suggestBasicLandCount(deck);
+                pnlPlains.count = suggestionMap.get(ManaCostShard.WHITE);
+                pnlIsland.count = suggestionMap.get(ManaCostShard.BLUE);
+                pnlSwamp.count = suggestionMap.get(ManaCostShard.BLACK);
+                pnlMountain.count = suggestionMap.get(ManaCostShard.RED);
+                pnlForest.count = suggestionMap.get(ManaCostShard.GREEN);
+
+                pnlPlains.lblCount.setText(String.valueOf(pnlPlains.count));
+                pnlIsland.lblCount.setText(String.valueOf(pnlIsland.count));
+                pnlSwamp.lblCount.setText(String.valueOf(pnlSwamp.count));
+                pnlMountain.lblCount.setText(String.valueOf(pnlMountain.count));
+                pnlForest.lblCount.setText(String.valueOf(pnlForest.count));
+                
+                updateDeckInfoLabel();
+            }
+        });
+        lblDeckInfo.setToolTipText("Deck statistics. Double click to auto-suggest basic lands.");
 
         cbLandSet.addActionListener(new ActionListener() {
             @Override

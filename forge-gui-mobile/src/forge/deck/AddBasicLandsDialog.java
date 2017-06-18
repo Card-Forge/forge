@@ -48,11 +48,14 @@ import forge.util.Callback;
 import forge.util.Utils;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import java.util.Map;
 
 
 public class AddBasicLandsDialog extends FDialog {
     private static final float ADD_BTN_SIZE = Utils.AVG_FINGER_HEIGHT * 0.75f;
     private static final float LAND_PANEL_PADDING = Utils.scale(3);
+
+    private final Deck currentDeck;
 
     private final Callback<CardPool> callback;
 
@@ -86,15 +89,37 @@ public class AddBasicLandsDialog extends FDialog {
     private final LandPanel pnlMountain = scroller.add(new LandPanel("Mountain"));
     private final LandPanel pnlForest = scroller.add(new LandPanel("Forest"));
 
-    private final FTextArea lblDeckInfo = add(new FTextArea(true));
+    private final FTextArea lblDeckInfo = add(new FTextArea(true) {
+        @Override
+        public boolean tap(float x, float y, int count) {
+            if (count == 2) {
+                Map<ManaCostShard, Integer> suggestionMap = DeckgenUtil.suggestBasicLandCount(currentDeck);
+                pnlPlains.count = suggestionMap.get(ManaCostShard.WHITE);
+                pnlIsland.count = suggestionMap.get(ManaCostShard.BLUE);
+                pnlSwamp.count = suggestionMap.get(ManaCostShard.BLACK);
+                pnlMountain.count = suggestionMap.get(ManaCostShard.RED);
+                pnlForest.count = suggestionMap.get(ManaCostShard.GREEN);
+
+                pnlPlains.lblCount.setText(String.valueOf(pnlPlains.count));
+                pnlIsland.lblCount.setText(String.valueOf(pnlIsland.count));
+                pnlSwamp.lblCount.setText(String.valueOf(pnlSwamp.count));
+                pnlMountain.lblCount.setText(String.valueOf(pnlMountain.count));
+                pnlForest.lblCount.setText(String.valueOf(pnlForest.count));
+                
+                updateDeckInfoLabel();
+            }
+            return true;
+        }
+    });
 
     private int nonLandCount, oldLandCount;
     private CardEdition landSet;
 
     public AddBasicLandsDialog(Deck deck, CardEdition defaultLandSet, final Callback<CardPool> callback0) {
-        super("Add Basic Lands \n" + deck.getName(), 2);
+        super("Add Basic Lands to " + deck.getName() + "\n(double-tap statistics to auto-suggest)", 2);
 
         callback = callback0;
+        currentDeck = deck;
 
         lblDeckInfo.setAlignment(HAlignment.CENTER);
         lblDeckInfo.setFont(FSkinFont.get(12));
