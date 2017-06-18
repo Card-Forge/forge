@@ -30,7 +30,8 @@ public class PlayAi extends SpellAbilityAi {
         
         final Game game = ai.getGame();
         final Card source = sa.getHostCard();
-        // don't use this as a response (ReplaySpell logic is an exception)
+        // don't use this as a response (ReplaySpell logic is an exception, might be called from a subability
+        // while the trigger is on stack)
         if (!game.getStack().isEmpty() && !"ReplaySpell".equals(logic)) {
             return false;
         }
@@ -75,7 +76,7 @@ public class PlayAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
         if (sa.usesTargeting()) {
-             if (!sa.hasParam("AILogic")) {
+            if (!sa.hasParam("AILogic")) {
                 return false;
             }
             
