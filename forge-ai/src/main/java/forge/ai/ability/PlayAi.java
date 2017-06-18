@@ -26,10 +26,12 @@ public class PlayAi extends SpellAbilityAi {
 
     @Override
     protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+        final String logic = sa.hasParam("AILogic") ? sa.getParam("AILogic") : "";
+        
         final Game game = ai.getGame();
         final Card source = sa.getHostCard();
-        // don't use this as a response
-        if (!game.getStack().isEmpty()) {
+        // don't use this as a response (ReplaySpell logic is an exception)
+        if (!game.getStack().isEmpty() && !"ReplaySpell".equals(logic)) {
             return false;
         }
 
@@ -45,7 +47,6 @@ public class PlayAi extends SpellAbilityAi {
             if (cards.isEmpty()) {
                 return false;
             }
-            sa.getTargets().add(ComputerUtilCard.getBestAI(cards));
         } else if (!sa.hasParam("Valid")) {
             cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
             if (cards.isEmpty()) {
@@ -53,7 +54,7 @@ public class PlayAi extends SpellAbilityAi {
             }
         }
         
-        if ("ReplaySpell".equals(sa.getParam("AILogic"))) {
+        if ("ReplaySpell".equals(logic)) {
             return ComputerUtil.targetPlayableSpellCard(ai, cards, sa, sa.hasParam("WithoutManaCost"));                
         }
         
@@ -74,7 +75,7 @@ public class PlayAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
         if (sa.usesTargeting()) {
-            if (!sa.hasParam("AILogic")) {
+             if (!sa.hasParam("AILogic")) {
                 return false;
             }
             
