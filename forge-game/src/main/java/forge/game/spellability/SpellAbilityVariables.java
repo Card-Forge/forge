@@ -71,7 +71,6 @@ public class SpellAbilityVariables implements Cloneable {
         this.cardsInHand = sav.getCardsInHand();
         this.chosenColors = sav.getColorToCheck();
         this.threshold = sav.isThreshold();
-        this.surge = sav.isSurge();
         this.metalcraft = sav.isMetalcraft();
         this.delirium = sav.isDelirium();
         this.hellbent = sav.isHellbent();
@@ -155,9 +154,6 @@ public class SpellAbilityVariables implements Cloneable {
     private boolean hellbent = false;
     private boolean revolt = false;
     private boolean desert = false;
-
-    /** The surge. */
-    private boolean surge = false;
 
     private boolean allTargetsLegal = false;
 
@@ -474,17 +470,6 @@ public class SpellAbilityVariables implements Cloneable {
     public void setRevolt(final boolean bRevolt) { revolt = bRevolt; }
 
     public void setDesert(final boolean bDesert) { desert = bDesert; }
-    /**
-     * <p>
-     * Setter for the field <code>surge</code>.
-     * </p>
-     * 
-     * @param bSurge
-     *            a boolean.
-     */
-    public final void setSurge(final boolean bSurge) {
-        this.surge = bSurge;
-    }
 
     /** Optional Costs */
     protected boolean kicked = false;
@@ -693,15 +678,6 @@ public class SpellAbilityVariables implements Cloneable {
     public final boolean isRevolt() {     return this.revolt;  }
 
     public final boolean isDesert() {     return this.desert;  }
-
-    /**
-     * Checks if is surge.
-     * 
-     * @return the surge
-     */
-    public final boolean isSurge() {
-        return this.surge;
-    }
 
     public String getShareAllColors() {
         return shareAllColors;

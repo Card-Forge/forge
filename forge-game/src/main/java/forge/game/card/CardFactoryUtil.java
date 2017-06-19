@@ -3962,7 +3962,6 @@ public class CardFactoryUtil {
             newSA.setPayCosts(surgeCost);
             newSA.setBasicSpell(false);
             newSA.addOptionalCost(OptionalCost.Surge);
-            newSA.getRestrictions().setSurge(true);
 
             String desc = "Surge " + surgeCost.toSimpleString() + " (" + Keyword.getInstance(keyword).getReminderText()
                     + ")";

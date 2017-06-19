@@ -370,7 +370,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 return false;
             }
         }
-        if (this.isSurge()) {
+        if (sa.isSurged()) {
             if (!activator.hasSurge()) {
                 return false;
             }
