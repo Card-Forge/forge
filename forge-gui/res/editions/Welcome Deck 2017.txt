@@ -1,0 +1,38 @@
+[metadata]
+Code=W17
+Date=2017-04-15
+Name=Welcome Deck 2017
+MciCode=w17
+Type=Other
+
+[cards]
+1 C Divine Verdict
+2 C Glory Seeker
+3 U Serra Angel
+4 C Standing Troops
+5 U Stormfront Pegasus
+6 R Victory's Herald
+7 U Air Elemental
+8 C Coral Merfolk
+9 C Drag Under
+10 C Inspiration
+11 C Sleep Paralysis
+12 R Sphinx of Magosi
+13 C Stealer of Secrets
+14 C Tricks of the Trade
+15 C Bloodhunter Bat
+16 C Certain Death
+17 R Nightmare
+18 C Raise Dead
+19 U Sengir Vampire
+20 C Untamed Hunger
+21 C Falkenrath Reaver
+22 R Shivan Dragon
+23 C Thundering Giant
+24 R Garruk's Horde
+25 C Oakenform
+26 C Rabid Bite
+27 C Rootwalla
+28 C Stalking Tiger
+29 C Stampeding Rhino
+30 U Wing Snare
