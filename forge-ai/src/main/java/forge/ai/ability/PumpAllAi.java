@@ -5,6 +5,7 @@ import com.google.common.base.Predicate;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
+import forge.ai.ComputerUtilCost;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
@@ -12,6 +13,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.combat.Combat;
+import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -33,6 +35,7 @@ public class PumpAllAi extends PumpAiBase {
         final Card source = sa.getHostCard();
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
+        final Cost abCost = sa.getPayCosts();
 
         final int power = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumAtt"), sa);
         final int defense = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumDef"), sa);
@@ -42,6 +45,12 @@ public class PumpAllAi extends PumpAiBase {
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;
+        }
+
+        if (abCost != null && source.hasSVar("AIPreference")) {
+            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, true)) {
+                return false;
+            }
         }
 
         if (sa.hasParam("ValidCards")) {
