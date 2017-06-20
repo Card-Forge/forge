@@ -731,6 +731,14 @@ public class ComputerUtil {
                 public boolean apply(final Card c) {
                     int sacThreshold = 190;
 
+                    if ("HeartPiercer".equals(source.getParam("SacrificeParam"))) {
+                        if (c.getCurrentPower() == 0) {
+                            return false;
+                        } else if (c.getCurrentPower() >= ai.getOpponentsSmallestLifeTotal()) {
+                            return true;
+                        }
+                    }
+
                     if ("DesecrationDemon".equals(source.getParam("AILogic"))) {
                         sacThreshold = SpecialCardAi.DesecrationDemon.getSacThreshold();
                     } else if (considerSacLogic && considerSacThreshold != -1) {
