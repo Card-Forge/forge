@@ -506,12 +506,14 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             return false;
         }
 
-        if (!checkTimingRestrictions(c, sa)) {
-            return false;
-        }
+        if (!sa.hasSVar("IsCastFromPlayEffect")) {
+            if (!checkTimingRestrictions(c, sa)) {
+                return false;
+            }
 
-        if (!checkActivatorRestrictions(c, sa)) {
-            return false;
+            if (!checkActivatorRestrictions(c, sa)) {
+                return false;
+            }
         }
 
         if (!checkZoneRestrictions(c, sa)) {

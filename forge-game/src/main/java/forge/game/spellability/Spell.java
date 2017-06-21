@@ -113,9 +113,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         }
 
         if (!this.getRestrictions().canPlay(card, this)) {
-            if (!this.hasSVar("IsCastFromPlayEffect")) {
-                return false;
-            }
+            return false;
         }
 
         // for uncastables like lotus bloom, check if manaCost is blank (except for morph spells)
