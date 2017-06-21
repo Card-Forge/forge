@@ -6,5 +6,6 @@ SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Beast | TokenTy
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Cartouche.YouCtrl | Execute$ TrigReturn | TriggerDescription$ When a Cartouche enters the battlefield under your control, return CARDNAME to its owner's hand.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ Self
 SVar:PlayMain1:TRUE
+DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trial_of_strength.jpg
 Oracle:When Trial of Strength enters the battlefield, create a 4/2 green Beast creature token.\nWhen a Cartouche enters the battlefield under your control, return Trial of Strength to its owner's hand.
