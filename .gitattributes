@@ -268,6 +268,7 @@ forge-core/src/main/java/forge/util/MyRandom.java svneol=native#text/plain
 forge-core/src/main/java/forge/util/NameGenerator.java -text
 forge-core/src/main/java/forge/util/PredicateString.java -text
 forge-core/src/main/java/forge/util/ReflectionUtil.java -text
+forge-core/src/main/java/forge/util/RuntimeVersion.java -text
 forge-core/src/main/java/forge/util/Settable.java -text
 forge-core/src/main/java/forge/util/TextUtil.java -text
 forge-core/src/main/java/forge/util/ThreadUtil.java -text

@@ -12,6 +12,7 @@ import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
 import forge.toolbox.*;
 import forge.util.FileUtil;
+import forge.util.RuntimeVersion;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -107,12 +108,9 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
     private boolean javaRecentEnough() {
 
-        String fullJavaVersion = System.getProperty("java.version");
+        RuntimeVersion javaVersion = RuntimeVersion.of(System.getProperty("java.version"));
 
-        int majorVersion = Integer.parseInt(fullJavaVersion.split("_")[0].split("\\.")[1]);
-        int minorVersion = Integer.parseInt(fullJavaVersion.split("_")[1]);
-
-        return majorVersion > 8 || (majorVersion == 8 && minorVersion >= 101);
+        return javaVersion.getMajor() > 8 || (javaVersion.getMajor() == 8 && javaVersion.getSecurityLevel() >= 101);
 
     }
 
@@ -274,4 +272,5 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         return new FLabel.Builder().fontAlign(SwingConstants.CENTER)
                 .text(label).fontStyle(Font.ITALIC).build();
     }
+
 }
