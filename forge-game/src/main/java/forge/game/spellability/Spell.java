@@ -107,12 +107,15 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
                || this.getRestrictions().isInstantSpeed()
                || activator.hasKeyword("You may cast nonland cards as though they had flash.")
                || card.hasStartOfKeyword("You may cast CARDNAME as though it had flash.")
+               || this.hasSVar("IsCastFromPlayEffect")
                || (card.isFaceDown() && !card.getZone().is(ZoneType.Battlefield) && card.getState(CardStateName.Original).getType().isInstant()))) {
             return false;
         }
 
         if (!this.getRestrictions().canPlay(card, this)) {
-            return false;
+            if (!this.hasSVar("IsCastFromPlayEffect")) {
+                return false;
+            }
         }
 
         // for uncastables like lotus bloom, check if manaCost is blank (except for morph spells)
