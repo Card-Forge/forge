@@ -256,8 +256,10 @@ public final class GameActionUtil {
                     costs.add(new OptionalCostValue(type, cost));
                 }
             } else if (keyword.equals("Retrace")) {
-                final Cost cost = new Cost("Discard<1/Land>", false);
-                costs.add(new OptionalCostValue(OptionalCost.Retrace, cost));
+                if (source.getZone().is(ZoneType.Graveyard)) {
+                    final Cost cost = new Cost("Discard<1/Land>", false);
+                    costs.add(new OptionalCostValue(OptionalCost.Retrace, cost));
+                }
             }
             
             // Surge while having OptionalCost is none of them
