@@ -221,6 +221,113 @@ public final class GameActionUtil {
         return alternatives;
     }
 
+    public static List<OptionalCostValue> getOptionalCostValues(final SpellAbility sa) {
+        final List<OptionalCostValue> costs = Lists.newArrayList();
+        if (sa == null || !sa.isSpell()) {
+            return costs;
+        }
+        final Card source = sa.getHostCard();
+        for (String keyword : source.getKeywords()) {
+            if (keyword.startsWith("Buyback")) {
+                final Cost cost = new Cost(keyword.substring(8), false);
+                costs.add(new OptionalCostValue(OptionalCost.Buyback, cost));
+            } else if (keyword.equals("Conspire")) {
+                final String conspireCost = "tapXType<2/Creature.SharesColorWith/" +
+            "untapped creature you control that shares a color with " + source.getName() + ">";
+                final Cost cost = new Cost(conspireCost, false);
+                costs.add(new OptionalCostValue(OptionalCost.Conspire, cost));
+            } else if (keyword.startsWith("Entwine")) {
+                String[] k = keyword.split(":");
+                final Cost cost = new Cost(k[1], false);
+                costs.add(new OptionalCostValue(OptionalCost.Entwine, cost));
+            } else if (keyword.startsWith("Kicker")) {
+                String[] sCosts = TextUtil.split(keyword.substring(6), ':');
+                boolean generic = "Generic".equals(sCosts[sCosts.length - 1]);
+                // If this is a "generic kicker" (Undergrowth), ignore value for kicker creations
+                int numKickers = sCosts.length - (generic ? 1 : 0);
+                for (int j = 0; j < numKickers; j++) {
+                    final Cost cost = new Cost(sCosts[j], false);
+                    OptionalCost type = null;
+                    if (!generic) {
+                        type = j == 0 ? OptionalCost.Kicker1 : OptionalCost.Kicker2;
+                    } else {
+                        type = OptionalCost.Generic;
+                    }
+                    costs.add(new OptionalCostValue(type, cost));
+                }
+            } else if (keyword.equals("Retrace")) {
+                final Cost cost = new Cost("Discard<1/Land>", false);
+                costs.add(new OptionalCostValue(OptionalCost.Retrace, cost));
+            }
+            
+            // Surge while having OptionalCost is none of them
+        }
+        return costs;
+    }
+    
+    public static SpellAbility addOptionalCosts(final SpellAbility sa, List<OptionalCostValue> list) {
+        if (sa == null || list.isEmpty()) {
+            return sa;
+        }
+        final SpellAbility result = sa.copy();
+        for (OptionalCostValue v : list) {
+            // need to copy cost, otherwise it does alter the original
+            result.setPayCosts(result.getPayCosts().copy().add(v.getCost()));
+            result.addOptionalCost(v.getType());
+            
+            // add some extra logic, try to move it to other parts
+            switch (v.getType()) {
+            case Conspire:
+                result.addConspireInstance();
+                break;
+            case Retrace:
+                result.getRestrictions().setZone(ZoneType.Graveyard);
+                break;
+            }
+        }
+        return result;
+    }
+    
+    public static List<SpellAbility> getAdditionalCostSpell(final SpellAbility sa) {
+        final List<SpellAbility> abilities = Lists.newArrayList(sa);
+        if (!sa.isSpell()) {
+            return abilities;
+        }
+        final Card source = sa.getHostCard();
+        for (String keyword : source.getKeywords()) {
+            if (keyword.startsWith("AlternateAdditionalCost")) {
+                final List<SpellAbility> newAbilities = Lists.newArrayList();
+                String[] costs = TextUtil.split(keyword, ':');
+
+                final SpellAbility newSA = sa.copy();
+                newSA.setBasicSpell(false);
+
+                final Cost cost1 = new Cost(costs[1], false);
+                newSA.setDescription(sa.getDescription() + " (Additional cost " + cost1.toSimpleString() + ")");
+                newSA.setPayCosts(cost1.add(sa.getPayCosts()));
+                if (newSA.canPlay()) {
+                    newAbilities.add(newSA);
+                }
+
+                //second option
+                final SpellAbility newSA2 = sa.copy();
+                newSA2.setBasicSpell(false);
+
+                final Cost cost2 = new Cost(costs[2], false);
+                newSA2.setDescription(sa.getDescription() + " (Additional cost " + cost2.toSimpleString() + ")");
+                newSA2.setPayCosts(cost2.add(sa.getPayCosts()));
+                if (newSA2.canPlay()) {
+                    newAbilities.add(newSA2);
+                }
+                
+                abilities.clear();
+                abilities.addAll(newAbilities);
+            }
+        }
+        return abilities;
+    }
+    
+    
     /**
      * get optional additional costs.
      * 
@@ -229,44 +336,17 @@ public final class GameActionUtil {
      * @return an ArrayList<SpellAbility>.
      */
     public static List<SpellAbility> getOptionalCosts(final SpellAbility original) {
-        final List<SpellAbility> abilities = Lists.newArrayList();
+        final List<SpellAbility> abilities = getAdditionalCostSpell(original);
 
         final Card source = original.getHostCard();
-        abilities.add(original);
+
         if (!original.isSpell()) {
             return abilities;
         }
 
         // Buyback, Kicker
         for (String keyword : source.getKeywords()) {
-            if (keyword.startsWith("AlternateAdditionalCost")) {
-                final List<SpellAbility> newAbilities = Lists.newArrayList();
-                String[] costs = TextUtil.split(keyword, ':');
-                for (SpellAbility sa : abilities) {
-                    final SpellAbility newSA = sa.copy();
-                    newSA.setBasicSpell(false);
-
-                    final Cost cost1 = new Cost(costs[1], false);
-                    newSA.setDescription(sa.getDescription() + " (Additional cost " + cost1.toSimpleString() + ")");
-                    newSA.setPayCosts(cost1.add(sa.getPayCosts()));
-                    if (newSA.canPlay()) {
-                        newAbilities.add(newSA);
-                    }
-
-                    //second option
-                    final SpellAbility newSA2 = sa.copy();
-                    newSA2.setBasicSpell(false);
-
-                    final Cost cost2 = new Cost(costs[2], false);
-                    newSA2.setDescription(sa.getDescription() + " (Additional cost " + cost2.toSimpleString() + ")");
-                    newSA2.setPayCosts(cost2.add(sa.getPayCosts()));
-                    if (newSA2.canPlay()) {
-                        newAbilities.add(newAbilities.size(), newSA2);
-                    }
-                }
-                abilities.clear();
-                abilities.addAll(newAbilities);
-            } else if (keyword.startsWith("Buyback")) {
+            if (keyword.startsWith("Buyback")) {
                 for (int i = 0; i < abilities.size(); i++) {
                     final SpellAbility newSA = abilities.get(i).copy();
                     newSA.setBasicSpell(false);

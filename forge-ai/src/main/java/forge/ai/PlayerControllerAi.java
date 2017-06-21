@@ -929,4 +929,11 @@ public class PlayerControllerAi extends PlayerController {
         }
         return result;
     }
+
+    @Override
+    public List<OptionalCostValue> chooseOptionalCosts(SpellAbility choosen,
+            List<OptionalCostValue> optionalCostValues) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

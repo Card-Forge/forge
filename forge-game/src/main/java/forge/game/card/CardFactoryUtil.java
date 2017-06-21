@@ -4109,25 +4109,6 @@ public class CardFactoryUtil {
                 kws.addSpellAbility(sa);
             }
             card.addSpellAbility(sa);
-        } else if (keyword.equals("Retrace")) {
-            final SpellAbility sa = card.getFirstSpellAbility();
-
-            final SpellAbility newSA = sa.copy();
-            newSA.getRestrictions().setZone(ZoneType.Graveyard);
-            newSA.getMapParams().put("CostDesc", "Retrace");
-            newSA.getMapParams().put("Secondary", "True");
-            newSA.setBasicSpell(false);
-
-            final Cost cost = new Cost("Discard<1/Land>", false).add(sa.getPayCosts());
-            newSA.setPayCosts(cost);
-            newSA.setIntrinsic(intrinsic);
-
-            //newSA.setDescription(sa.getDescription() + " (Retrace)");
-            if (!intrinsic) {
-                newSA.setTemporary(true);
-                kws.addSpellAbility(newSA);
-            }
-            card.addSpellAbility(newSA);
         }
     }
 

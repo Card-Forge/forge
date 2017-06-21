@@ -53,6 +53,7 @@ import forge.game.player.PlayerController;
 import forge.game.player.PlayerView;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilitySub;
+import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -674,6 +675,13 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public List<Card> chooseCardsForSplice(SpellAbility sa, List<Card> cards) {
         return Lists.newArrayList();
+    }
+
+    @Override
+    public List<OptionalCostValue> chooseOptionalCosts(SpellAbility choosen,
+            List<OptionalCostValue> optionalCostValues) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

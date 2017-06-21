@@ -6874,13 +6874,16 @@ public class Card extends GameEntity implements Comparable<Card> {
         final Collection<SpellAbility> toRemove = Lists.newArrayListWithCapacity(abilities.size());
         for (final SpellAbility sa : abilities) {
             sa.setActivatingPlayer(player);
+            // fix things like retrace
+            // check only if SA can't be cast normally
+            if (sa.canPlay(true)) {
+                continue;
+            }
             if ((removeUnplayable && !sa.canPlay()) || !sa.isPossible()) {
                 toRemove.add(sa);
             }
         }
-        for (final SpellAbility sa : toRemove) {
-            abilities.remove(sa);
-        }
+        abilities.removeAll(toRemove);
 
         if (getState(CardStateName.Original).getType().isLand() && player.canPlayLand(this)) {
             game.PLAY_LAND_SURROGATE.setHostCard(this);

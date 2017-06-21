@@ -35,6 +35,7 @@ import forge.game.cost.CostPartMana;
 import forge.game.mana.Mana;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilitySub;
+import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
@@ -254,4 +255,6 @@ public abstract class PlayerController {
     public AnteResult getAnteResult() {
         return game.getOutcome().anteResult.get(player);
     }
+
+    public abstract List<OptionalCostValue> chooseOptionalCosts(SpellAbility choosen, List<OptionalCostValue> optionalCostValues);
 }

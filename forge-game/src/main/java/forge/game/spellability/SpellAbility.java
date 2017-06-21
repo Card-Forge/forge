@@ -25,6 +25,7 @@ import com.google.common.collect.Maps;
 import forge.card.mana.ManaCost;
 import forge.game.CardTraitBase;
 import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.IIdentifiable;
@@ -309,6 +310,27 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     // Spell, and Ability, and other Ability objects override this method
     public abstract boolean canPlay();
+    
+    public boolean canPlay(boolean checkOptionalCosts) {
+        if (canPlay()) {
+            return true;
+        }
+        if (!checkOptionalCosts) {
+            return false;
+        }
+        for (OptionalCostValue val : GameActionUtil.getOptionalCostValues(this)) {
+            if (canPlayWithOptionalCost(val)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean canPlayWithOptionalCost(OptionalCostValue opt) {
+        SpellAbility saCopy = this.copy();
+        saCopy = GameActionUtil.addOptionalCosts(saCopy, Lists.newArrayList(opt));
+        return saCopy.canPlay();
+    }
 
     public boolean isPossible() {
     	return canPlay(); //by default, ability is only possible if it can be played
@@ -349,7 +371,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 }
             }
         }
-        view.updateCanPlay(this);
+        view.updateCanPlay(this, false);
     }
 
     public Player getTargetingPlayer() {
@@ -1607,7 +1629,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public SpellAbilityView getView() {
         view.updateHostCard(this);
         view.updateDescription(this);
-        view.updateCanPlay(this);
+        view.updateCanPlay(this, true);
         view.updatePromptIfOnlyPossibleAbility(this);
         return view;
     }

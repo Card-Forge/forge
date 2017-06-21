@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.game.cost.*;
+import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.Spell;
 import org.apache.commons.lang3.StringUtils;
 
@@ -33,6 +34,7 @@ import forge.game.card.CardView;
 import forge.game.card.CounterType;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
+import forge.game.player.PlayerController;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -77,6 +79,11 @@ public class HumanPlay {
         source.setSplitStateToPlayAbility(sa);
         sa = chooseOptionalAdditionalCosts(p, sa);
         if (sa == null) {
+            return false;
+        }
+
+        // extra play check
+        if (!sa.canPlay()) {
             return false;
         }
 
@@ -146,8 +153,19 @@ public class HumanPlay {
         if (!original.isSpell()) {
             return original;
         }
-        final List<SpellAbility> abilities = GameActionUtil.getOptionalCosts(original);
-        return p.getController().getAbilityToPlay(original.getHostCard(), abilities);
+
+        PlayerController c = p.getController();
+
+        // choose alternative additional cost
+        final List<SpellAbility> abilities = GameActionUtil.getAdditionalCostSpell(original);
+
+        final SpellAbility choosen = c.getAbilityToPlay(original.getHostCard(), abilities);
+
+        List<OptionalCostValue> list =  GameActionUtil.getOptionalCostValues(choosen);
+        list = c.chooseOptionalCosts(choosen, list);
+
+        return GameActionUtil.addOptionalCosts(choosen, list);
+        //final List<SpellAbility> abilities = GameActionUtil.getOptionalCosts(original);
     }
 
     private static boolean payManaCostIfNeeded(final PlayerControllerHuman controller, final Player p, final SpellAbility sa) {
