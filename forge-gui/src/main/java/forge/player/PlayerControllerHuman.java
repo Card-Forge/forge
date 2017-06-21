@@ -1506,7 +1506,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public boolean playSaFromPlayEffect(final SpellAbility tgtSA) {
-        return HumanPlay.playSpellAbility(this, player, tgtSA);
+        return HumanPlay.playSpellAbility(this, player, tgtSA, true);
     }
 
     @Override

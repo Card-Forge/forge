@@ -63,6 +63,10 @@ public class HumanPlay {
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
     public final static boolean playSpellAbility(final PlayerControllerHuman controller, final Player p, SpellAbility sa) {
+        return playSpellAbility(controller, p, sa, false);
+    }
+
+    public final static boolean playSpellAbility(final PlayerControllerHuman controller, final Player p, SpellAbility sa, boolean fromPlayEffect) {
         FThreads.assertExecutedByEdt(false);
 
         if (sa == controller.getGame().PLAY_LAND_SURROGATE) {
@@ -82,8 +86,8 @@ public class HumanPlay {
             return false;
         }
 
-        // extra play check
-        if (!sa.canPlay()) {
+        // extra play check (unless the card is cast from a play effect)
+        if (!(fromPlayEffect || sa.canPlay())) {
             return false;
         }
 
