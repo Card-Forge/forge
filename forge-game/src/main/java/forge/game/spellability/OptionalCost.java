@@ -5,12 +5,26 @@ package forge.game.spellability;
  *
  */
 public enum OptionalCost {
-    Conspire,
-    Buyback,
-    Entwine,
-    Kicker1,
-    Kicker2,
-    Surge,
-    AltCost, // used by prowl
-    Generic, // used by "Dragon Presence" and pseudo-kicker cards
+    Conspire("Conspire"),
+    Buyback("Buyback"),
+    Entwine("Entwine"),
+    Kicker1("Kicker"),
+    Kicker2("Kicker"),
+    Retrace("Retrace"),
+    Surge("Surge"), // no real OptionalCost but used there
+    AltCost(""), // used by prowl
+    Generic("Generic"); // used by "Dragon Presence" and pseudo-kicker cards
+
+    private String name;
+    
+    OptionalCost(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
 }
