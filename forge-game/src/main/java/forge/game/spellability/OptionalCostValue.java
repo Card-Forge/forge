@@ -45,7 +45,7 @@ public class OptionalCostValue {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(type.name());
+        sb.append(type.getName());
         sb.append(" ");
         sb.append(cost.toSimpleString());
         return sb.toString();
