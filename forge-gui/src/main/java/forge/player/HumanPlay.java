@@ -162,7 +162,9 @@ public class HumanPlay {
         final SpellAbility choosen = c.getAbilityToPlay(original.getHostCard(), abilities);
 
         List<OptionalCostValue> list =  GameActionUtil.getOptionalCostValues(choosen);
-        list = c.chooseOptionalCosts(choosen, list);
+        if (!list.isEmpty()) {
+            list = c.chooseOptionalCosts(choosen, list);
+        }
 
         return GameActionUtil.addOptionalCosts(choosen, list);
         //final List<SpellAbility> abilities = GameActionUtil.getOptionalCosts(original);
