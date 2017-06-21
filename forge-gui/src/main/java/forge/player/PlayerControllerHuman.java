@@ -1409,12 +1409,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         final String firstStr = first.toString();
         for (int i = 1; i < possibleReplacers.size(); i++) {
+            // prompt user if there are multiple different options
             if (!possibleReplacers.get(i).toString().equals(firstStr)) {
-                return getGui().one(prompt, possibleReplacers); // prompt user
-                                                                // if there are
-                                                                // multiple
-                                                                // different
-                                                                // options
+                return getGui().one(prompt, possibleReplacers);
             }
         }
         return first; // return first option without prompting if all options
@@ -1444,12 +1441,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final String firstStr = activePlayerSAs.get(0).toString();
             boolean needPrompt = false;
 
-            Integer idxAdditionalInfo = firstStr.indexOf(" ["); // for the
-                                                                // purpose of
-                                                                // pre-ordering,
-                                                                // no need for
-                                                                // extra
-                                                                // granularity.
+            // for the purpose of pre-ordering, no need for extra granularity
+            Integer idxAdditionalInfo = firstStr.indexOf(" [");
             String saLookupKey = idxAdditionalInfo != -1 ? firstStr.substring(0, idxAdditionalInfo - 1) : firstStr;
 
             char delim = (char) 5;
@@ -1627,17 +1620,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         while (true) {
             final ICardFace cardFace = chooseSingleCardFace(sa, message, cpp, sa.getHostCard().getName());
             final PaperCard cp = FModel.getMagicDb().getCommonCards().getCard(cardFace.getName());
-            final Card instanceForPlayer = Card.fromPaperCard(cp, player); // the
-                                                                           // Card
-                                                                           // instance
-                                                                           // for
-                                                                           // test
-                                                                           // needs
-                                                                           // a
-                                                                           // game
-                                                                           // to
-                                                                           // be
-                                                                           // tested
+            // the Card instance for test needs a game to be tested
+            final Card instanceForPlayer = Card.fromPaperCard(cp, player);
             if (instanceForPlayer.isValid(valid, sa.getHostCard().getController(), sa.getHostCard(), sa)) {
                 return cp.getName();
             }
@@ -1684,8 +1668,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (game.getStack().undo()) {
             final Input currentInput = inputQueue.getInput();
             if (currentInput instanceof InputPassPriority) {
-                currentInput.showMessageInitial(); // ensure prompt updated if
-                                                   // needed
+                // ensure prompt updated if needed
+                currentInput.showMessageInitial();
             }
             return true;
         }
@@ -2212,18 +2196,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     final Card forgeCard = Card.fromPaperCard(c, p);
 
                     if (c.getRules().getType().isLand()) {
-                        game.getAction().moveToHand(forgeCard, null); // this is
-                                                                      // needed
-                                                                      // to
-                                                                      // ensure
-                                                                      // land
-                                                                      // abilities
-                                                                      // fire
+                        // this is needed to ensure land abilities fire
+                        game.getAction().moveToHand(forgeCard, null); 
                         game.getAction().moveToPlay(forgeCard, null);
-                        game.getTriggerHandler().runWaitingTriggers(); // ensure
-                                                                       // triggered
-                                                                       // abilities
-                                                                       // fire
+                        // ensure triggered abilities fire
+                        game.getTriggerHandler().runWaitingTriggers();
                     } else {
                         final FCollectionView<SpellAbility> choices = forgeCard.getBasicSpells();
                         if (choices.isEmpty()) {
@@ -2240,23 +2217,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                             return; // happens if cancelled
                         }
 
-                        game.getAction().moveToHand(forgeCard, null); // this is
-                                                                      // really
-                                                                      // needed
-                                                                      // (for
-                                                                      // rollbacks
-                                                                      // at
-                                                                      // least)
+                        // this is really needed (for rollbacks at least)
+                        game.getAction().moveToHand(forgeCard, null);
                         // Human player is choosing targets for an ability
                         // controlled by chosen player.
                         sa.setActivatingPlayer(p);
                         HumanPlay.playSaWithoutPayingManaCost(PlayerControllerHuman.this, game, sa, true);
                     }
-                    game.getStack().addAllTriggeredAbilitiesToStack(); // playSa
-                                                                       // could
-                                                                       // fire
-                                                                       // some
-                                                                       // triggers
+                    // playSa could fire some triggers
+                    game.getStack().addAllTriggeredAbilitiesToStack();
                 }
             });
         }
