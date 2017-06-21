@@ -82,8 +82,8 @@ public class HumanPlay {
             return false;
         }
 
-        // extra play check (unless the card is cast from a play effect)
-        if (!sa.canPlay()) {
+        // extra play check
+        if (sa.isSpell() && !sa.canPlay()) {
             return false;
         }
 
