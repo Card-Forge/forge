@@ -1047,7 +1047,7 @@ public class ComputerUtilMana {
                 final int multiplicator = Math.max(cost.getXcounter(), 1);
                 manaToAdd = extraMana * multiplicator;
             } else {
-                // For Count$xPrestrictionaid set PayX in the AFs then use that here
+                // For Count$xPaid set PayX in the AFs then use that here
                 // Else calculate it as appropriate.
                 final String xSvar = card.getSVar("X").startsWith("Count$xPaid") ? "PayX" : "X";
                 if (!sa.getSVar(xSvar).isEmpty() || card.hasSVar(xSvar)) {
