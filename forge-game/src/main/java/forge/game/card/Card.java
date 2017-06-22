@@ -6155,6 +6155,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         exertedByPlayer.add(getController());
         exertThisTurn++;
         view.updateExertedThisTurn(this, true);
+        final Map<String, Object> runParams = Maps.newHashMap();
+        runParams.put("Card", this);
+        runParams.put("Player", getController());
+        game.getTriggerHandler().runTrigger(TriggerType.Exerted, runParams, false);
     }
     
     public boolean isExertedBy(final Player player) {

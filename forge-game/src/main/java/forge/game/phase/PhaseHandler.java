@@ -519,10 +519,6 @@ public class PhaseHandler implements java.io.Serializable {
                 for(Card exerter : whoDeclares.getController().exertAttackers(possibleExerters)) {
                     //exerter.addExtrinsicKeyword("Exerted");
                     exerter.exert();
-                    final Map<String, Object> runParams = Maps.newHashMap();
-                    runParams.put("Card", exerter);
-                    runParams.put("Player", playerTurn);
-                    game.getTriggerHandler().runTrigger(TriggerType.Exerted, runParams, false);
                 }
             }
         }
