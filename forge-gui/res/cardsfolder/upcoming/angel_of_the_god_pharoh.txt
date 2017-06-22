@@ -1,0 +1,8 @@
+Name:Angel of the God-Pharoh
+ManaCost:4 W W
+Types:Creature Angel
+PT:4/4
+K:Flying
+K:Cycling:2
+SVar:Picture:http://www.wizards.com/global/images/magic/general/angel_of_the_god_pharoh.jpg
+Oracle:Flying\nCycling {2} ({2}, Discard this card: Draw a card.)
