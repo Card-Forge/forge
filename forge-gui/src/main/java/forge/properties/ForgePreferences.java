@@ -90,6 +90,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_PRESELECT_PREVIOUS_ABILITY_ORDER ("false"),
         UI_AUTO_YIELD_MODE (ForgeConstants.AUTO_YIELD_PER_ABILITY),
         UI_SHOW_STORM_COUNT_IN_PROMPT ("false"),
+        UI_TEXT_BASED_COUNTERS ("true"),
 
         UI_FOR_TOUCHSCREN("false"),
 
@@ -179,7 +180,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SHORTCUT_AUTOYIELD_ALWAYS_NO ("78"),
         SHORTCUT_MACRO_RECORD ("16 82"),
         SHORTCUT_MACRO_NEXT_ACTION ("16 50");
-        
+
         private final String strDefaultVal;
 
         private FPref(final String s0) {

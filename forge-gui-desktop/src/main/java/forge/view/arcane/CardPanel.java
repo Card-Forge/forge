@@ -17,23 +17,6 @@
  */
 package forge.view.arcane;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JRootPane;
-import javax.swing.SwingUtilities;
-
 import forge.CachedCardImage;
 import forge.FThreads;
 import forge.StaticData;
@@ -42,6 +25,7 @@ import forge.card.mana.ManaCost;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.card.CounterType;
 import forge.gui.CardContainer;
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -51,6 +35,18 @@ import forge.toolbox.CardFaceSymbols;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.IDisposable;
 import forge.view.arcane.util.OutlinedLabel;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.font.TextAttribute;
+import java.awt.geom.RoundRectangle2D;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -251,9 +247,8 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
 
         // Black fill - (will become outline for white bordered cards)
-        final int n = 0;
         g2d.setColor(Color.black);
-        g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n , cornerSize + n);
+        g2d.fillRoundRect(cardXOffset, cardYOffset  + offset, cardWidth, cardHeight, cornerSize, cornerSize);
 
         // White border if card is known to have it.
         if (getCard() != null && matchUI.mayView(getCard())) {
@@ -310,21 +305,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     @Override
     public final void doLayout() {
-        // Determine whether to render border from properties
-        boolean noBorderPref = !isPreferenceEnabled(FPref.UI_RENDER_BLACK_BORDERS);
-        // Borderless cards should be accounted for here
-        boolean noBorderOnCard = getCard().getCurrentState().getSetCode().equalsIgnoreCase("MPS_AKH");
-        boolean cardImgHasAlpha = imagePanel != null && imagePanel.getSrcImage() != null && imagePanel.getSrcImage().getColorModel().hasAlpha();
 
-        int borderSize = 0;
-
-        if (!noBorderPref && !(noBorderOnCard && cardImgHasAlpha)) {
-            // A 2 px border is necessary to ensure the rounded card corners don't glitch when the card is highlighted
-            borderSize = noBorderOnCard ? 2 : Math.round(cardWidth * CardPanel.BLACK_BORDER_SIZE);
-        }
+        int borderSize = calculateBorderSize();
 
         final Point imgPos = new Point(cardXOffset + borderSize, cardYOffset + borderSize);
-        final Dimension imgSize = new Dimension(cardWidth - (borderSize * 2), cardHeight - (borderSize * 2));
+        final Dimension imgSize = calculateImageSize();
 
         imagePanel.setLocation(imgPos);
         imagePanel.setSize(imgSize);
@@ -335,6 +320,29 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         displayCardNameOverlay(showText && canShow && showCardNameOverlay(), imgSize, imgPos);
         displayPTOverlay(showText && (canShow || card.isFaceDown()) && showCardPowerOverlay(), imgSize, imgPos);
         displayCardIdOverlay(showText && canShow && showCardIdOverlay(), imgSize, imgPos);
+    }
+
+    private int calculateBorderSize() {
+
+        // Determine whether to render border from properties
+        boolean noBorderPref = !isPreferenceEnabled(FPref.UI_RENDER_BLACK_BORDERS);
+
+        // Borderless cards should be accounted for here
+        boolean noBorderOnCard = getCard().getCurrentState().getSetCode().equalsIgnoreCase("MPS_AKH");
+        boolean cardImgHasAlpha = imagePanel != null && imagePanel.getSrcImage() != null && imagePanel.getSrcImage().getColorModel().hasAlpha();
+
+        if (!noBorderPref && !(noBorderOnCard && cardImgHasAlpha)) {
+            // A 2 px border is necessary to ensure the rounded card corners don't glitch when the card is highlighted
+            return noBorderOnCard ? 2 : Math.round(cardWidth * CardPanel.BLACK_BORDER_SIZE);
+        }
+
+        return 0;
+
+    }
+
+    private Dimension calculateImageSize() {
+        int borderSize = calculateBorderSize();
+        return new Dimension(cardWidth - (borderSize * 2), cardHeight - (borderSize * 2));
     }
 
     private void displayCardIdOverlay(final boolean isVisible, final Dimension imgSize, final Point imgPos) {
@@ -394,24 +402,32 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             }
         }
 
-        int number = 0;
+
         if (card.getCounters() != null) {
-            for (final Integer i : card.getCounters().values()) {
-                number += i.intValue();
+
+            if (isPreferenceEnabled(FPref.UI_TEXT_BASED_COUNTERS)) {
+                drawCounterTabs(g);
+            } else {
+
+                int counters = 0;
+                for (final Integer i : card.getCounters().values()) {
+                    counters += i;
+                }
+
+                final int yCounters = (cardYOffset + cardHeight) - (cardHeight / 3) - 40;
+
+                if (counters == 1) {
+                    CardFaceSymbols.drawSymbol("counters1", g, cardXOffset - 15, yCounters);
+                } else if (counters == 2) {
+                    CardFaceSymbols.drawSymbol("counters2", g, cardXOffset - 15, yCounters);
+                } else if (counters == 3) {
+                    CardFaceSymbols.drawSymbol("counters3", g, cardXOffset - 15, yCounters);
+                } else if (counters > 3) {
+                    CardFaceSymbols.drawSymbol("countersMulti", g, cardXOffset - 15, yCounters);
+                }
+
             }
-        }
 
-        final int counters = number;
-        final int yCounters = (cardYOffset + cardHeight) - (cardHeight / 3) - 40;
-
-        if (counters == 1) {
-            CardFaceSymbols.drawSymbol("counters1", g, cardXOffset - 15, yCounters);
-        } else if (counters == 2) {
-            CardFaceSymbols.drawSymbol("counters2", g, cardXOffset - 15, yCounters);
-        } else if (counters == 3) {
-            CardFaceSymbols.drawSymbol("counters3", g, cardXOffset - 15, yCounters);
-        } else if (counters > 3) {
-            CardFaceSymbols.drawSymbol("countersMulti", g, cardXOffset - 15, yCounters);
         }
 
         final int combatXSymbols = (cardXOffset + (cardWidth / 4)) - 16;
@@ -437,6 +453,93 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             CardFaceSymbols.drawSymbol("sacrifice", g, (cardXOffset + (cardWidth / 2)) - 20,
                     (cardYOffset + (cardHeight / 2)) - 20);
         }
+
+    }
+
+    private void drawCounterTabs(final Graphics g) {
+
+        final Dimension imgSize = calculateImageSize();
+        final int titleY = Math.round(imgSize.height * (54f / 640)) - 15;
+
+        final int spaceFromTopOfCard = titleY + 65;
+        final int counterBoxHeight = 27;
+        final int counterBoxBaseWidth = 65;
+        final int counterBoxSpacing = 2;
+
+        int currentCounter = 0;
+
+        Map<TextAttribute, Object> attributes = new HashMap<>();
+
+        attributes.put(TextAttribute.FAMILY, "Roboto Bold");
+        attributes.put(TextAttribute.WEIGHT, TextAttribute.WEIGHT_BOLD);
+        attributes.put(TextAttribute.SIZE, 11);
+        attributes.put(TextAttribute.KERNING, TextAttribute.KERNING_ON);
+
+        Font smallFont = Font.getFont(attributes);
+
+        attributes.put(TextAttribute.SIZE, 15);
+        Font largeFont = Font.getFont(attributes);
+
+        FontMetrics smallFontMetrics = g.getFontMetrics(smallFont);
+        FontMetrics largeFontMetrics = g.getFontMetrics(largeFont);
+
+        for (Map.Entry<CounterType, Integer> counterEntry : card.getCounters().entrySet()) {
+
+            final CounterType counter = counterEntry.getKey();
+            final int numberOfCounters = counterEntry.getValue();
+            final int counterBoxRealWidth = counterBoxBaseWidth + largeFontMetrics.stringWidth(String.valueOf(numberOfCounters));
+
+            final int counterYOffset = cardYOffset + spaceFromTopOfCard - counterBoxHeight + currentCounter++ * (counterBoxHeight + counterBoxSpacing);
+
+            if (isSelected) {
+                g.setColor(new Color(0, 0, 0, 255));
+            } else {
+                g.setColor(new Color(0, 0, 0, 200));
+            }
+
+            RoundRectangle2D counterArea = new RoundRectangle2D.Float(cardXOffset, counterYOffset, counterBoxRealWidth, counterBoxHeight, 10, 10);
+            ((Graphics2D) g).fill(counterArea);
+
+            g.fillRect(cardXOffset, counterYOffset, 10, counterBoxHeight);
+
+            if (isSelected) {
+                g.setColor(new Color(counter.getRed(), counter.getGreen(), counter.getBlue()));
+            } else {
+                g.setColor(new Color(counter.getRed(), counter.getGreen(), counter.getBlue(), 180));
+            }
+
+            Rectangle nameBounds = counterArea.getBounds();
+            nameBounds.x += 13;
+            nameBounds.width = 48;
+            drawVerticallyCenteredString(g, counter.getCounterOnCardDisplayName(), nameBounds, smallFont, smallFontMetrics);
+
+            Rectangle numberBounds = counterArea.getBounds();
+            numberBounds.x += 58;
+            drawVerticallyCenteredString(g, String.valueOf(numberOfCounters), numberBounds, largeFont, largeFontMetrics);
+
+        }
+
+    }
+
+    /**
+     * Draws a String justified to the left of the rectangle, centered vertically.
+     *
+     * @param g The Graphics instance.
+     * @param text The String to draw.
+     * @param area The Rectangle to center the text in.
+     * @param font The font to use to draw the text.
+     */
+    private void drawVerticallyCenteredString(Graphics g, String text, Rectangle area, Font font, final FontMetrics fontMetrics) {
+
+        Font oldFont = g.getFont();
+
+        int x = area.x;
+        int y = area.y + (area.height - fontMetrics.getHeight()) / 2 + fontMetrics.getAscent();
+
+        g.setFont(font);
+        g.drawString(text, x, y);
+        g.setFont(oldFont);
+
     }
 
     @Override

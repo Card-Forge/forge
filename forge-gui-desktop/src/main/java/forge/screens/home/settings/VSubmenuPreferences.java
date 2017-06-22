@@ -79,6 +79,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbAltSoundSystem = new OptionsCheckBox("Use Alternate Sound System");
     private final JCheckBox cbUiForTouchScreen = new OptionsCheckBox("Enhance UI for Touchscreens");
     private final JCheckBox cbTimedTargOverlay = new OptionsCheckBox("Enable Targeting Overlay Optimization");
+    private final JCheckBox cbTextBasedCounters = new OptionsCheckBox("Use new text-based counters on cards");
     private final JCheckBox cbCompactMainMenu = new OptionsCheckBox("Use Compact Main Sidebar Menu");
     private final JCheckBox cbDetailedPaymentDesc = new OptionsCheckBox("Spell Description in Payment Prompt");
     private final JCheckBox cbPromptFreeBlocks = new OptionsCheckBox("Free Block Handling");
@@ -111,8 +112,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
 
         // Spacing between components is defined here.
-        final String sectionConstraints = "w 80%!, h 42px!, gap 10% 0 10px 10px, span 2 1";
-        final String regularConstraints = "w 80%!, h 22px!, gap 10% 0 0 10px, span 2 1";
+        final String sectionConstraints = "w 80%!, h 42px!, gap 10% 0 80px 20px, span 2 1";
+        final String titleConstraints = "w 80%!, h 22px!, gap 10% 0 0 0px, span 2 1";
+        final String comboBoxConstraints = "w 80%!, h 25px!, gap 10% 0 0 0px, span 2 1";
+        final String descriptionConstraints = "w 80%!, h 22px!, gap 10% 0 0 20px, span 2 1";
 
         // Troubleshooting
         pnlPrefs.add(new SectionLabel("Troubleshooting"), sectionConstraints);
@@ -128,175 +131,176 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(btnContentDirectoryUI, twoButtonConstraints2);
 
         // General Configuration
-        pnlPrefs.add(new SectionLabel("General Configuration"), sectionConstraints + ", gaptop 2%");
+        pnlPrefs.add(new SectionLabel("General Configuration"), sectionConstraints);
 
-        pnlPrefs.add(getPlayerNamePanel(), regularConstraints + ", h 26px!");
-        pnlPrefs.add(new NoteLabel("Sets the name that you will be referred to by Forge during gameplay."), regularConstraints);
+        pnlPrefs.add(getPlayerNamePanel(), titleConstraints + ", h 26px!");
+        pnlPrefs.add(new NoteLabel("Sets the name that you will be referred to by Forge during gameplay."), descriptionConstraints);
 
-        pnlPrefs.add(cbCompactMainMenu, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Enable for a space efficient sidebar that displays only one menu group at a time (RESTART REQUIRED)."), regularConstraints);
-
+        pnlPrefs.add(cbCompactMainMenu, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Enable for a space efficient sidebar that displays only one menu group at a time (RESTART REQUIRED)."), descriptionConstraints);
 
         // Gameplay Options
-        pnlPrefs.add(new SectionLabel("Gameplay"), sectionConstraints + ", gaptop 2%");
+        pnlPrefs.add(new SectionLabel("Gameplay"), sectionConstraints);
 
-        pnlPrefs.add(cbpAiProfiles, "w 80%!, gap 10% 0 0 10px, span 2 1");
-        pnlPrefs.add(new NoteLabel("Choose your AI opponent."), regularConstraints);
+        pnlPrefs.add(cbpAiProfiles, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel("Choose your AI opponent."), descriptionConstraints);
 
-        pnlPrefs.add(cbAnte, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Determines whether or not the game is played for ante."), regularConstraints);
+        pnlPrefs.add(cbAnte, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Determines whether or not the game is played for ante."), descriptionConstraints);
 
-        pnlPrefs.add(cbAnteMatchRarity, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Attempts to make antes the same rarity for all players."), regularConstraints);
+        pnlPrefs.add(cbAnteMatchRarity, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Attempts to make antes the same rarity for all players."), descriptionConstraints);
 
-        pnlPrefs.add(cbEnableAICheats, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Allow the AI to cheat to gain advantage (for personalities that have cheat shuffling options set)."), regularConstraints);
+        pnlPrefs.add(cbEnableAICheats, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Allow the AI to cheat to gain advantage (for personalities that have cheat shuffling options set)."), descriptionConstraints);
 
-        pnlPrefs.add(cbManaBurn, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Play with mana burn (from pre-Magic 2010 rules)."), regularConstraints);
+        pnlPrefs.add(cbManaBurn, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Play with mana burn (from pre-Magic 2010 rules)."), descriptionConstraints);
 
-        pnlPrefs.add(cbManaLostPrompt, regularConstraints);
-        pnlPrefs.add(new NoteLabel("When enabled, you get a warning if passing priority would cause you to lose mana in your mana pool."), regularConstraints);
+        pnlPrefs.add(cbManaLostPrompt, titleConstraints);
+        pnlPrefs.add(new NoteLabel("When enabled, you get a warning if passing priority would cause you to lose mana in your mana pool."), descriptionConstraints);
 
-        pnlPrefs.add(cbEnforceDeckLegality, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Enforces deck legality relevant to each environment (minimum deck sizes, max card count etc)."), regularConstraints);
+        pnlPrefs.add(cbEnforceDeckLegality, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Enforces deck legality relevant to each environment (minimum deck sizes, max card count etc)."), descriptionConstraints);
 
-        pnlPrefs.add(cbCloneImgSource, regularConstraints);
-        pnlPrefs.add(new NoteLabel("When enabled clones will use their original art instead of the cloned card's art."), regularConstraints);
+        pnlPrefs.add(cbCloneImgSource, titleConstraints);
+        pnlPrefs.add(new NoteLabel("When enabled clones will use their original art instead of the cloned card's art."), descriptionConstraints);
 
-        pnlPrefs.add(cbPromptFreeBlocks, regularConstraints);
-        pnlPrefs.add(new NoteLabel("When enabled, if you would have to pay 0 to block, pay automatically without prompt."), regularConstraints);
+        pnlPrefs.add(cbPromptFreeBlocks, titleConstraints);
+        pnlPrefs.add(new NoteLabel("When enabled, if you would have to pay 0 to block, pay automatically without prompt."), descriptionConstraints);
 
-        pnlPrefs.add(cbPauseWhileMinimized, regularConstraints);
-        pnlPrefs.add(new NoteLabel("When enabled, Forge pauses when minimized (primarily for AI vs AI)."), regularConstraints);
+        pnlPrefs.add(cbPauseWhileMinimized, titleConstraints);
+        pnlPrefs.add(new NoteLabel("When enabled, Forge pauses when minimized (primarily for AI vs AI)."), descriptionConstraints);
 
-        pnlPrefs.add(cbEscapeEndsTurn, regularConstraints);
-        pnlPrefs.add(new NoteLabel("When enabled, Escape key functions as an alternative shortcut to end the current turn."), regularConstraints);
+        pnlPrefs.add(cbEscapeEndsTurn, titleConstraints);
+        pnlPrefs.add(new NoteLabel("When enabled, Escape key functions as an alternative shortcut to end the current turn."), descriptionConstraints);
 
-        pnlPrefs.add(cbDetailedPaymentDesc, regularConstraints);
-        pnlPrefs.add(new NoteLabel("When enabled, detailed spell/ability descriptions are shown when choosing targets and paying costs."), regularConstraints);
+        pnlPrefs.add(cbDetailedPaymentDesc, titleConstraints);
+        pnlPrefs.add(new NoteLabel("When enabled, detailed spell/ability descriptions are shown when choosing targets and paying costs."), descriptionConstraints);
 
-        pnlPrefs.add(cbShowStormCount, regularConstraints);
-        pnlPrefs.add(new NoteLabel("When enabled, displays the current storm count in the prompt pane."), regularConstraints);
+        pnlPrefs.add(cbShowStormCount, titleConstraints);
+        pnlPrefs.add(new NoteLabel("When enabled, displays the current storm count in the prompt pane."), descriptionConstraints);
 
-        pnlPrefs.add(cbPreselectPrevAbOrder, regularConstraints);
-        pnlPrefs.add(new NoteLabel("When enabled, preselects the last defined simultaneous ability order in the ordering dialog."), regularConstraints);
+        pnlPrefs.add(cbPreselectPrevAbOrder, titleConstraints);
+        pnlPrefs.add(new NoteLabel("When enabled, preselects the last defined simultaneous ability order in the ordering dialog."), descriptionConstraints);
 
-        pnlPrefs.add(cbpAutoYieldMode, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Defines the granularity level of auto-yields (per unique ability or per unique card)."), regularConstraints);
+        pnlPrefs.add(cbpAutoYieldMode, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Defines the granularity level of auto-yields (per unique ability or per unique card)."), descriptionConstraints);
 
         // Deck building options
         pnlPrefs.add(new SectionLabel("Random Deck Generation"), sectionConstraints);
 
-        pnlPrefs.add(cbRemoveSmall, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Disables 1/1 and 0/X creatures in generated decks."), regularConstraints);
+        pnlPrefs.add(cbRemoveSmall, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Disables 1/1 and 0/X creatures in generated decks."), descriptionConstraints);
 
-        pnlPrefs.add(cbSingletons, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Disables non-land duplicates in generated decks."), regularConstraints);
+        pnlPrefs.add(cbSingletons, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Disables non-land duplicates in generated decks."), descriptionConstraints);
 
-        pnlPrefs.add(cbRemoveArtifacts, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Disables artifact cards in generated decks."), regularConstraints);
+        pnlPrefs.add(cbRemoveArtifacts, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Disables artifact cards in generated decks."), descriptionConstraints);
 
         // Deck building options
         pnlPrefs.add(new SectionLabel("Deck Editor Options"), sectionConstraints);
 
-        pnlPrefs.add(cbFilterLandsByColorId, regularConstraints);
-        pnlPrefs.add(new NoteLabel("When using card color filters, filter lands in a way to make it easier to find relevant mana producing lands."), regularConstraints);
+        pnlPrefs.add(cbFilterLandsByColorId, titleConstraints);
+        pnlPrefs.add(new NoteLabel("When using card color filters, filter lands in a way to make it easier to find relevant mana producing lands."), descriptionConstraints);
 
         // Advanced
         pnlPrefs.add(new SectionLabel("Advanced Settings"), sectionConstraints);
 
-        pnlPrefs.add(cbDevMode, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Enables menu with functions for testing during development."), regularConstraints);
+        pnlPrefs.add(cbDevMode, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Enables menu with functions for testing during development."), descriptionConstraints);
 
-        pnlPrefs.add(cbWorkshopSyntax, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Enables syntax checking of card scripts in the Workshop. Note: functionality still in testing phase!"), regularConstraints);
+        pnlPrefs.add(cbWorkshopSyntax, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Enables syntax checking of card scripts in the Workshop. Note: functionality still in testing phase!"), descriptionConstraints);
 
-        pnlPrefs.add(cbpGameLogEntryType, "w 80%!, gap 10% 0 0 10px, span 2 1");
-        pnlPrefs.add(new NoteLabel("Changes how much information is displayed in the game log. Sorted by least to most verbose."), regularConstraints);
+        pnlPrefs.add(cbpGameLogEntryType, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel("Changes how much information is displayed in the game log. Sorted by least to most verbose."), descriptionConstraints);
 
-        pnlPrefs.add(cbpCloseAction, "w 80%!, gap 10% 0 0 10px, span 2 1");
-        pnlPrefs.add(new NoteLabel("Changes what happens when clicking the X button in the upper right."), regularConstraints);
+        pnlPrefs.add(cbpCloseAction, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel("Changes what happens when clicking the X button in the upper right."), descriptionConstraints);
 
-        pnlPrefs.add(cbLoadCardsLazily, regularConstraints);
-        pnlPrefs.add(new NoteLabel("If turned on, Forge will load card scripts as they're needed instead of at start up. (Warning: Experimental)"), regularConstraints);
+        pnlPrefs.add(cbLoadCardsLazily, titleConstraints);
+        pnlPrefs.add(new NoteLabel("If turned on, Forge will load card scripts as they're needed instead of at start up. (Warning: Experimental)"), descriptionConstraints);
 
         // Graphic Options
         pnlPrefs.add(new SectionLabel("Graphic Options"), sectionConstraints + ", gaptop 2%");
 
-        pnlPrefs.add(cbImageFetcher, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Enables live fetching of missing card images from an online resource."), regularConstraints);
+        pnlPrefs.add(cbImageFetcher, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Enables live fetching of missing card images from an online resource."), descriptionConstraints);
 
-        pnlPrefs.add(cbDisplayFoil, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Displays foil cards with the visual foil overlay effect."), regularConstraints);
+        pnlPrefs.add(cbDisplayFoil, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Displays foil cards with the visual foil overlay effect."), descriptionConstraints);
 
-        pnlPrefs.add(cbRandomFoil, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Adds foil effect to random cards."), regularConstraints);
+        pnlPrefs.add(cbRandomFoil, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Adds foil effect to random cards."), descriptionConstraints);
 
-        pnlPrefs.add(cbScaleLarger, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Allows card pictures to be expanded larger than their original size."), regularConstraints);
+        pnlPrefs.add(cbScaleLarger, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Allows card pictures to be expanded larger than their original size."), descriptionConstraints);
 
-        pnlPrefs.add(cbRenderBlackCardBorders, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Render black borders around card images."), regularConstraints);
+        pnlPrefs.add(cbRenderBlackCardBorders, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Render black borders around card images."), descriptionConstraints);
 
-        pnlPrefs.add(cbLargeCardViewers, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Makes all card viewers much larger for use with high resolution images. Will not fit on smaller screens."), regularConstraints);
+        pnlPrefs.add(cbLargeCardViewers, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Makes all card viewers much larger for use with high resolution images. Will not fit on smaller screens."), descriptionConstraints);
 
-        pnlPrefs.add(cbSmallDeckViewer, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Sets the deck viewer window to be 800x600 rather than a proportion of the screen size."), regularConstraints);
+        pnlPrefs.add(cbSmallDeckViewer, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Sets the deck viewer window to be 800x600 rather than a proportion of the screen size."), descriptionConstraints);
 
-        pnlPrefs.add(cbRandomArtInPools, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Generates cards with random art in generated limited mode card pools."), regularConstraints);
+        pnlPrefs.add(cbRandomArtInPools, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Generates cards with random art in generated limited mode card pools."), descriptionConstraints);
 
-        pnlPrefs.add(cbUiForTouchScreen, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Increases some UI elements to provide a better experience on touchscreen devices. (Needs restart)"), regularConstraints);
+        pnlPrefs.add(cbUiForTouchScreen, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Increases some UI elements to provide a better experience on touchscreen devices. (Needs restart)"), descriptionConstraints);
 
-        pnlPrefs.add(cbCompactPrompt, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Hide header and use smaller font in Prompt pane to make it more compact."), regularConstraints);
+        pnlPrefs.add(cbCompactPrompt, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Hide header and use smaller font in Prompt pane to make it more compact."), descriptionConstraints);
 
-        /*pnlPrefs.add(cbStackCardView, regularConstraints); TODO: Show this checkbox when setting can support being enabled
-        pnlPrefs.add(new NoteLabel("Show cards and abilities on Stack in card view rather than list view."), regularConstraints);*/
+        /*pnlPrefs.add(cbStackCardView, titleConstraints); TODO: Show this checkbox when setting can support being enabled
+        pnlPrefs.add(new NoteLabel("Show cards and abilities on Stack in card view rather than list view."), descriptionConstraints);*/
 
-        pnlPrefs.add(cbHideReminderText, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Hide reminder text in Card Detail pane."), regularConstraints);
+        pnlPrefs.add(cbHideReminderText, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Hide reminder text in Card Detail pane."), descriptionConstraints);
 
-        pnlPrefs.add(cbOpenPacksIndiv, regularConstraints);
-        pnlPrefs.add(new NoteLabel("When opening Fat Packs and Booster Boxes, booster packs will be opened and displayed one at a time."), regularConstraints);
+        pnlPrefs.add(cbOpenPacksIndiv, titleConstraints);
+        pnlPrefs.add(new NoteLabel("When opening Fat Packs and Booster Boxes, booster packs will be opened and displayed one at a time."), descriptionConstraints);
 
-        pnlPrefs.add(cbTokensInSeparateRow, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Displays tokens in a separate row on the battlefield below the non-token creatures."), regularConstraints);
+        pnlPrefs.add(cbTokensInSeparateRow, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Displays tokens in a separate row on the battlefield below the non-token creatures."), descriptionConstraints);
 
-        pnlPrefs.add(cbStackCreatures, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Stacks identical creatures on the battlefield like lands, artifacts, and enchantments."), regularConstraints);
+        pnlPrefs.add(cbStackCreatures, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Stacks identical creatures on the battlefield like lands, artifacts, and enchantments."), descriptionConstraints);
 
-        pnlPrefs.add(cbTimedTargOverlay, "w 80%!, gap 10% 0 0 10px, span 2 1");
-        pnlPrefs.add(new NoteLabel("Enables throttling-based optimization of targeting overlay to reduce CPU use (only disable if you experience choppiness on older hardware, requires starting a new match)"), regularConstraints);
+        pnlPrefs.add(cbTimedTargOverlay, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Enables throttling-based optimization of targeting overlay to reduce CPU use (only disable if you experience choppiness on older hardware, requires starting a new match)"), descriptionConstraints);
 
-        pnlPrefs.add(cbpDisplayCurrentCardColors, "w 80%!, gap 10% 0 0 10px, span 2 1");
-        pnlPrefs.add(new NoteLabel("Displays the breakdown of the current color of cards in the card detail information panel."), regularConstraints);
+        pnlPrefs.add(cbTextBasedCounters, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Enables text-based counters on cards instead of the old image based ones"), descriptionConstraints);
+
+        pnlPrefs.add(cbpDisplayCurrentCardColors, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel("Displays the breakdown of the current color of cards in the card detail information panel."), descriptionConstraints);
 
         // Sound options
         pnlPrefs.add(new SectionLabel("Sound Options"), sectionConstraints + ", gaptop 2%");
 
-        pnlPrefs.add(cbEnableSounds, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Enable sound effects during the game."), regularConstraints);
+        pnlPrefs.add(cbEnableSounds, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Enable sound effects during the game."), descriptionConstraints);
 
-        pnlPrefs.add(cbEnableMusic, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Enable background music during the game."), regularConstraints);
+        pnlPrefs.add(cbEnableMusic, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Enable background music during the game."), descriptionConstraints);
 
-        pnlPrefs.add(cbAltSoundSystem, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Use the alternate sound system (only use if you have issues with sound not playing or disappearing)."), regularConstraints);
+        pnlPrefs.add(cbAltSoundSystem, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Use the alternate sound system (only use if you have issues with sound not playing or disappearing)."), descriptionConstraints);
 
 
         // Keyboard shortcuts
-        final JLabel lblShortcuts = new SectionLabel("Keyboard Shortcuts");
-        pnlPrefs.add(lblShortcuts, sectionConstraints + ", gaptop 2%");
+        pnlPrefs.add(new SectionLabel("Keyboard Shortcuts"), sectionConstraints);
 
         final List<Shortcut> shortcuts = KeyboardShortcuts.getKeyboardShortcuts();
 
         for (final Shortcut s : shortcuts) {
             pnlPrefs.add(new FLabel.Builder().text(s.getDescription())
-                    .fontAlign(SwingConstants.RIGHT).build(), "w 50%!, h 22px!, gap 0 2% 0 1%");
+                    .fontAlign(SwingConstants.RIGHT).build(), "w 50%!, h 22px!, gap 0 2% 0 20px");
             KeyboardShortcutField field = new KeyboardShortcutField(s);
             pnlPrefs.add(field, "w 25%!");
             shortcutFields.put(s.getPrefKey(), field);
@@ -663,6 +667,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public final JCheckBox getCbPreselectPrevAbOrder() {
         return cbPreselectPrevAbOrder;
+    }
+
+    public final JCheckBox getCbTextBasedCounters() {
+        return cbTextBasedCounters;
     }
 
     /** @return {@link forge.toolbox.FLabel} */

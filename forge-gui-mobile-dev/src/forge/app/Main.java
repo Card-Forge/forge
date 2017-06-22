@@ -1,14 +1,9 @@
 package forge.app;
 
-import java.awt.Desktop;
-import java.io.File;
-import java.io.IOException;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl.LwjglClipboard;
-
 import forge.Forge;
 import forge.assets.AssetsDownloader;
 import forge.interfaces.IDeviceAdapter;
@@ -16,6 +11,10 @@ import forge.util.FileUtil;
 import forge.util.OperatingSystem;
 import forge.util.RestartUtil;
 import forge.util.Utils;
+
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
@@ -26,7 +25,7 @@ public class Main {
         // like to make the game load from a desktop game folder configuration).
         String desktopModeAssetsDir = "../forge-gui/";
         //String desktopModeAssetsDir = "./";
-        
+
         // Assets directory used when the game fully emulates smartphone/tablet mode (desktopMode = false), useful when debugging from IDE
         String assetsDir = AssetsDownloader.SHARE_DESKTOP_ASSETS ? "../forge-gui/" : "testAssets/";
         if (!AssetsDownloader.SHARE_DESKTOP_ASSETS) {
@@ -54,7 +53,10 @@ public class Main {
                 desktopScreenHeight = Integer.parseInt(res[1].trim());
             }
         }
-                
+
+        screenWidth = 640;
+        screenHeight = 960;
+
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.resizable = false;
         config.width = desktopMode ? desktopScreenWidth : screenWidth;

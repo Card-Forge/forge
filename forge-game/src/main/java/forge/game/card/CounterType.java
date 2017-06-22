@@ -28,315 +28,323 @@ import com.google.common.collect.ImmutableList;
  */
 public enum CounterType {
 
-    M1M1("-1/-1"),
-    P1P1("+1/+1"),
-    LOYALTY,
+    M1M1("-1/-1", "-1/-1", 255, 110, 106),
+    P1P1("+1/+1", "+1/+1", 96, 226, 23),
 
-    AGE(),
+    LOYALTY("LOYAL", 198, 198, 198),
 
-    AIM(),
+    AGE("AGE", 255, 137, 57),
 
-    ARROW(),
+    AIM("AIM", 255, 180, 0),
 
-    ARROWHEAD(),
+    ARROW("ARROW", 237, 195, 0),
 
-    AWAKENING(),
+    ARROWHEAD("ARWHD", 230, 191, 167),
 
-    BLAZE(),
+    AWAKENING("AWAKE", 0, 231, 79),
 
-    BLOOD(),
+    BLAZE("BLAZE", 255, 124, 82),
 
-    BOUNTY(),
+    BLOOD("BLOOD", 255, 108, 111),
 
-    BRIBERY(),
-    
-    BRICK(),
+    BOUNTY("BOUNT", 255, 158, 0),
 
-    CARRION(),
+    BRIBERY("BRIBE", 172, 201, 235),
 
-    CHARGE(),
+    BRICK("BRICK", 226, 192, 164),
 
-    CORPSE(),
+    CARRION("CRRON", 255, 163, 222),
 
-    CREDIT(),
+    CHARGE("CHARG", 246, 192, 0),
 
-    CRYSTAL(),
+    CORPSE("CRPSE", 230, 186, 209),
 
-    CUBE(),
+    CREDIT("CRDIT", 188, 197, 234),
 
-    CURRENCY(),
+    CRYSTAL("CRYST", 255, 85, 206),
 
-    DEATH(),
+    CUBE("CUBE", 148, 219, 0),
 
-    DELAY(),
+    CURRENCY("CURR", 223, 200, 0),
 
-    DEPLETION(),
+    DEATH("DEATH", 255, 108, 110),
 
-    DESPAIR(),
+    DELAY("DELAY", 102, 206, 255),
 
-    DEVOTION(),
+    DEPLETION("DPLT", 185, 201, 208),
 
-    DIVINITY(),
+    DESPAIR("DESPR", 238, 186, 187),
 
-    DREAM(),
+    DEVOTION("DEVOT", 255, 111, 255),
 
-    DOOM(),
+    DIVINITY("DVNTY", 0, 233, 255),
 
-    ECHO(),
+    DOOM("DOOM", 255, 104, 118),
 
-    ELIXIR(),
+    DREAM("DREAM", 190, 189, 255),
 
-    EON(),
+    ECHO("ECHO", 225, 180, 255),
 
-    EYEBALL(),
+    ELIXIR("ELIXR", 81, 221, 175),
 
-    FADE(),
+    EON("EON", 23, 194, 255),
 
-    FATE(),
+    EYEBALL("EYE", 184, 202, 201),
 
-    FEATHER(),
+    FADE("FADE", 159, 209, 192),
 
-    FILIBUSTER(),
+    FATE("FATE", 255, 164, 226),
 
-    FLAME(),
+    FEATHER("FTHR", 195, 202, 165),
 
-    FLOOD(),
+    FILIBUSTER("FLBTR", 255, 179, 119),
 
-    FUNGUS(),
-    
-    FURY(),
+    FLAME("FLAME", 255, 143, 43),
 
-    FUSE(),
+    FLOOD("FLOOD", 0, 203, 255),
 
-    GEM(),
+    FUNGUS("FNGUS", 121, 219, 151),
 
-    GLYPH(),
+    FURY("FURY", 255, 120, 89),
 
-    GOLD(),
+    FUSE("FUSE", 255, 122, 85),
 
-    GROWTH(),
+    GEM("GEM", 255, 99, 251),
 
-    HATCHLING(),
+    GLYPH("GLYPH", 184, 202, 199),
 
-    HEALING(),
+    GOLD("GOLD", 248, 191, 0),
 
-    HOOFPRINT(),
+    GROWTH("GRWTH", 87, 226, 32),
 
-    HOUR(),
+    HATCHLING("HATCH", 201, 199, 186),
 
-    HOURGLASS(),
+    HEALING("HEAL", 255, 166, 236),
 
-    HUNGER(),
+    HOOFPRINT("HOOF", 233, 189, 170),
 
-    ICE(),
+    HOUR("HOUR", 198, 197, 210),
 
-    INFECTION(),
+    HOURGLASS("HRGLS", 0, 215, 255),
 
-    INTERVENTION(),
+    HUNGER("HUNGR", 255, 91, 149),
 
-    ISOLATION(),
+    ICE("ICE", 0, 239, 255),
 
-    JAVELIN(),
+    INFECTION("INFCT", 0, 230, 66),
 
-    KI(),
+    INTERVENTION("INTRV", 205, 203, 105),
 
-    LEVEL("Level"),
+    ISOLATION("ISOLT", 250, 190, 0),
 
-    LORE(),
+    JAVELIN("JAVLN", 180, 206, 172),
 
-    LUCK(),
+    KI("KI", 190, 189, 255),
 
-    M0M1("-0/-1"),
+    LEVEL("LEVEL", 60, 222, 185),
 
-    M0M2("-0/-2"),
+    LORE("LORE", 209, 198, 161),
 
-    M1M0("-1/-0"),
+    LUCK("LUCK", 185, 174, 255),
 
-    M2M1("-2/-1"),
+    M0M1("-0/-1", "-0/-1", 255, 110, 106),
 
-    M2M2("-2/-2"),
+    M0M2("-0/-2", "-0/-2", 255, 110, 106),
 
-    MAGNET(),
+    M1M0("-1/-0", "-1/-0", 255, 110, 106),
 
-    MANA(),
+    M2M1("-2/-1", "-2/-1", 255, 110, 106),
 
-    MANIFESTATION(),
+    M2M2("-2/-2", "-2/-2", 255, 110, 106),
 
-    MANNEQUIN(),
+    MAGNET("MAGNT", 198, 197, 210),
 
-    MATRIX(),
+    MANA("MANA", 0, 237, 152),
 
-    MINE(),
+    MANIFESTATION("MNFST", 104, 225, 8),
 
-    MINING(),
+    MANNEQUIN("MANQN", 206, 199, 162),
 
-    MIRE(),
+    MATRIX("MATRX", 183, 174, 255),
 
-    MUSIC(),
+    MINE("MINE", 255, 100, 127),
 
-    MUSTER(),
+    MINING("MINNG", 184, 201, 207),
 
-    NET(),
+    MIRE("MIRE", 153, 209, 199),
 
-    OMEN(),
+    MUSIC("MUSIC", 255, 138, 255),
 
-    ORE(),
+    MUSTER("MUSTR", 235, 196, 0),
 
-    PAGE(),
+    NET("NET", 0, 221, 251),
 
-    PAIN(),
+    OMEN("OMEN", 255, 178, 120),
 
-    PARALYZATION(),
+    ORE("ORE", 200, 201, 163),
 
-    PETAL(),
+    PAGE("PAGE", 218, 195, 162),
 
-    PETRIFICATION(),
+    PAIN("PAIN", 255, 108, 111),
 
-    PIN(),
+    PARALYZATION("PRLYZ", 220, 201, 0),
 
-    PLAGUE(),
+    PETAL("PETAL", 255, 162, 216),
 
-    PLOT(),
+    PETRIFICATION("PETRI", 185, 201, 208),
 
-    PRESSURE(),
+    PIN("PIN", 194, 196, 233),
 
-    PHYLACTERY,
+    PLAGUE("PLGUE", 94, 226, 25),
 
-    POLYP(),
+    PLOT("PLOT", 255, 172, 133),
 
-    PUPA(),
+    PRESSURE("PRESS", 255, 164, 159),
 
-    P0P1("+0/+1"),
+    PHYLACTERY("PHYLA", 117, 219, 153),
 
-    P0P2("+0/+2"),
+    POLYP("POLYP", 236, 185, 198),
 
-    P1P0("+1/+0"),
+    PUPA("PUPA", 0, 223, 203),
 
-    P1P2("+1/+2"),
+    P0P1("+0/+1", "+0/+1", 96, 226, 23),
 
-    P2P0("+2/+0"),
+    P0P2("+0/+2", "+0/+2", 96, 226, 23),
 
-    P2P2("+2/+2"),
+    P1P0("+1/+0", "+1/+0", 96, 226, 23),
 
-    QUEST(),
+    P1P2("+1/+2", "+1/+2", 96, 226, 23),
 
-    RUST(),
+    P2P0("+2/+0", "+2/+0", 96, 226, 23),
 
-    SCREAM(),
+    P2P2("+2/+2", "+2/+2", 96, 226, 23),
 
-    SCROLL(),
+    QUEST("QUEST", 251, 189, 0),
 
-    SHELL(),
+    RUST("RUST", 255, 181, 116),
 
-    SHIELD(),
+    SCREAM("SCREM", 0, 220, 255),
 
-    SHRED(),
+    SCROLL("SCRLL", 206, 199, 162),
 
-    SLEEP(),
+    SHELL("SHELL", 190, 207, 111),
 
-    SLEIGHT(),
+    SHIELD("SHLD", 202, 198, 186),
 
-    SLIME(),
+    SHRED("SHRED", 255, 165, 152),
 
-    SOOT(),
-    
-    SPITE(),
+    SLEEP("SLEEP", 178, 192, 255),
 
-    SPORE(),
+    SLEIGHT("SLGHT", 185, 174, 255),
 
-    STORAGE(),
+    SLIME("SLIME", 101, 220, 163 ),
 
-    STRIFE(),
+    SOOT("SOOT", 211, 194, 198),
 
-    STUDY(),
+    SPITE("SPITE", 0, 218, 255),
 
-    THEFT(),
+    SPORE("SPORE", 122, 218, 150),
 
-    TIDE(),
+    STORAGE("STORG", 255, 177, 121),
 
-    TIME(),
+    STRIFE("STRFE", 255, 89, 223),
 
-    TOWER("tower"),
+    STUDY("STUDY", 226, 192, 165),
 
-    TRAINING(),
+    THEFT("THEFT", 255, 176, 125),
 
-    TRAP(),
+    TIDE("TIDE", 0, 212, 187),
 
-    TREASURE(),
-    
-    UNITY(),
+    TIME("TIME", 255, 121, 255),
 
-    VELOCITY(),
+    TOWER("tower", "TOWER", 0, 239, 255),
 
-    VERSE(),
+    TRAINING("TRAIN", 220, 201, 0),
 
-    VITALITY(),
+    TRAP("TRAP", 255, 121, 86),
 
-    VORTEX(),
+    TREASURE("TRSUR", 255, 184, 0),
 
-    WAGE(),
+    UNITY("UNITY", 242, 156, 255),
 
-    WINCH(),
+    VELOCITY("VELO", 255, 95, 138),
 
-    WIND(),
+    VERSE("VERSE", 0, 237, 155),
 
-    WISH(),
+    VITALITY("VITAL", 255, 94, 142),
+
+    VORTEX("VORTX", 142, 200, 255),
+
+    WAGE("WAGE", 242, 190, 106),
+
+    WINCH("WINCH", 208, 195, 203),
+
+    WIND("WIND", 0, 236, 255),
+
+    WISH("WISH", 255, 85, 206),
 
     // Player Counters
 
-    ENERGY(),
+    ENERGY("ENRGY"),
 
-    EXPERIENCE(),
+    EXPERIENCE("EXP"),
 
-    POISON();
+    POISON("POISN");
 
-    private String name;
+    private String name, counterOnCardDisplayName;
+    private int red, green, blue;
 
-    /**
-     * <p>
-     * Constructor for Counters.
-     * </p>
-     */
     CounterType() {
         this.name = this.name().substring(0, 1).toUpperCase() + this.name().substring(1).toLowerCase();
+        if (red == 0 && green == 0 && blue == 0) {
+            red = 255;
+            green = 255;
+            blue = 255;
+        }
     }
 
-    /**
-     * <p>
-     * Constructor for Counters.
-     * </p>
-     *
-     * @param name
-     *            a {@link java.lang.String} object.
-     */
-    CounterType(final String name) {
+    CounterType(final String counterOnCardDisplayName) {
+        this();
+        this.counterOnCardDisplayName = counterOnCardDisplayName;
+    }
+
+    CounterType(final String counterOnCardDisplayName, final int red, final int green, final int blue) {
+        this(counterOnCardDisplayName);
+        this.red = red;
+        this.green = green;
+        this.blue = blue;
+    }
+
+    CounterType(final String name, final String counterOnCardDisplayName, final int red, final int green, final int blue) {
+        this(counterOnCardDisplayName, red, green, blue);
         this.name = name;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>name</code>.
-     * </p>
-     *
-     * @return a {@link java.lang.String} object.
-     */
     public String getName() {
         return this.name;
     }
 
-    /**
-     * <p>
-     * getType.
-     * </p>
-     *
-     * @param name
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.game.card.CounterType} object.
-     */
+    public int getRed() {
+        return red;
+    }
+
+    public int getGreen() {
+        return green;
+    }
+
+    public int getBlue() {
+        return blue;
+    }
+
+    public String getCounterOnCardDisplayName() {
+        return counterOnCardDisplayName;
+    }
+
     public static CounterType getType(final String name) {
         final String replacedName = name.replace("/", "").replaceAll("\\+", "p").replaceAll("\\-", "m").toUpperCase();
         return Enum.valueOf(CounterType.class, replacedName);
     }
 
     public static final ImmutableList<CounterType> values = ImmutableList.copyOf(values());
+
 }

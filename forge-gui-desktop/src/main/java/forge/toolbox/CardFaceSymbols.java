@@ -17,17 +17,16 @@
  */
 package forge.toolbox;
 
-import java.awt.Graphics;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringTokenizer;
-
 import com.esotericsoftware.minlog.Log;
-
 import forge.assets.FSkinProp;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.toolbox.FSkin.SkinImage;
+
+import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 /**
  * <p>
@@ -182,7 +181,7 @@ public class CardFaceSymbols {
      * @param h and int
      */
     public static void drawOther(final Graphics g, final String s, int x, final int y, final int w, final int h) {
-        if (s.length() == 0) {
+        if (s.isEmpty()) {
             return;
         }
 
