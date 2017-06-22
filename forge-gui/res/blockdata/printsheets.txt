@@ -1146,6 +1146,32 @@ Rhonas the Indomitable|MPS_AKH
 Maelstrom Pulse|MPS_AKH
 Vindicate|MPS_AKH
 
+[MPS Hour of Devastation Invocations]
+Armageddon|MPS_AKH
+Capsize|MPS_AKH
+Forbid|MPS_AKH
+Omniscience|MPS_AKH
+Opposition|MPS_AKH
+Sunder|MPS_AKH
+Threads of Disloyalty|MPS_AKH
+Avatar of Woe|MPS_AKH
+Damnation|MPS_AKH
+Desolation Angel|MPS_AKH
+Diabolic Edict|MPS_AKH
+Doomsday|MPS_AKH
+No Mercy|MPS_AKH
+Slaughter Pact|MPS_AKH
+Thoughtseize|MPS_AKH
+Blood Moon|MPS_AKH
+Boil|MPS_AKH
+Shatterstorm|MPS_AKH
+Through the Breach|MPS_AKH
+Choke|MPS_AKH
+The Locust God|MPS_AKH
+Lord of Extinction|MPS_AKH
+The Scarab God|MPS_AKH
+The Scorpion God|MPS_AKH
+
 [AKH Planeswalker Decks and Toolkit]
 Gideon, Martial Paragon
 Companion of the Trials

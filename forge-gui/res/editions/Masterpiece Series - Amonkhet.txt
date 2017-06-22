@@ -36,3 +36,27 @@ Type=Other
 28 M Rhonas the Indomitable
 29 M Maelstrom Pulse
 30 M Vindicate
+31 M Armageddon
+32 M Capsize
+33 M Forbid
+34 M Omniscience
+35 M Opposition
+36 M Sunder
+37 M Threads of Disloyalty
+38 M Avatar of Woe
+39 M Damnation
+40 M Desolation Angel
+41 M Diabolic Edict
+42 M Doomsday
+43 M No Mercy
+44 M Slaughter Pact
+45 M Thoughtseize
+46 M Blood Moon
+47 M Boil
+48 M Shatterstorm
+49 M Through the Breach
+50 M Choke
+51 M The Locust God
+52 M Lord of Extinction
+53 M The Scarab God
+54 M The Scorpion God
