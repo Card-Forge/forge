@@ -24,6 +24,7 @@ final class ImageLoader extends CacheLoader<String, Texture> {
                     Texture t = new Texture(fh, true);
                     t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
 
+                    /* // Optional experimental feature: Anisotropic filtering
                     GL20 gl = Gdx.gl20;
                     if (gl != null && Gdx.graphics.supportsExtension("GL_EXT_texture_filter_anisotropic")) {
                         FloatBuffer buffer = BufferUtils.newFloatBuffer(16);
@@ -32,7 +33,7 @@ final class ImageLoader extends CacheLoader<String, Texture> {
 
                         t.bind();
                         gl.glTexParameterf(GL20.GL_TEXTURE_2D, GL20.GL_TEXTURE_MAX_ANISOTROPY_EXT, maxAniso);
-                    } 
+                    } */
                     return t;
                 } else {
                     return new Texture(fh);
