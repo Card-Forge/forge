@@ -43,6 +43,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.font.TextAttribute;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -88,6 +89,36 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private int cardXOffset, cardYOffset, cardWidth, cardHeight;
     private boolean isSelected;
     private CachedCardImage cachedImage;
+
+    private static Font smallCounterFont;
+    private static Font largeCounterFont;
+
+    static {
+
+        try {
+
+            Font roboto = Font.createFont(Font.TRUETYPE_FONT, CardPanel.class.getClassLoader().getResourceAsStream("Roboto-Bold.ttf"));
+
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(roboto);
+
+            Map<TextAttribute, Object> attributes = new HashMap<>();
+
+            attributes.put(TextAttribute.FAMILY, "Roboto Bold");
+            attributes.put(TextAttribute.WEIGHT, TextAttribute.WEIGHT_BOLD);
+            attributes.put(TextAttribute.SIZE, 11);
+            attributes.put(TextAttribute.KERNING, TextAttribute.KERNING_ON);
+
+            smallCounterFont = Font.getFont(attributes);
+
+            attributes.put(TextAttribute.SIZE, 15);
+            largeCounterFont = Font.getFont(attributes);
+
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public CardPanel(final CMatchUI matchUI, final CardView card0) {
         this.matchUI = matchUI;
@@ -468,20 +499,8 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         int currentCounter = 0;
 
-        Map<TextAttribute, Object> attributes = new HashMap<>();
-
-        attributes.put(TextAttribute.FAMILY, "Roboto Bold");
-        attributes.put(TextAttribute.WEIGHT, TextAttribute.WEIGHT_BOLD);
-        attributes.put(TextAttribute.SIZE, 11);
-        attributes.put(TextAttribute.KERNING, TextAttribute.KERNING_ON);
-
-        Font smallFont = Font.getFont(attributes);
-
-        attributes.put(TextAttribute.SIZE, 15);
-        Font largeFont = Font.getFont(attributes);
-
-        FontMetrics smallFontMetrics = g.getFontMetrics(smallFont);
-        FontMetrics largeFontMetrics = g.getFontMetrics(largeFont);
+        FontMetrics smallFontMetrics = g.getFontMetrics(smallCounterFont);
+        FontMetrics largeFontMetrics = g.getFontMetrics(largeCounterFont);
 
         for (Map.Entry<CounterType, Integer> counterEntry : card.getCounters().entrySet()) {
 
@@ -511,11 +530,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             Rectangle nameBounds = counterArea.getBounds();
             nameBounds.x += 13;
             nameBounds.width = 48;
-            drawVerticallyCenteredString(g, counter.getCounterOnCardDisplayName(), nameBounds, smallFont, smallFontMetrics);
+            drawVerticallyCenteredString(g, counter.getCounterOnCardDisplayName(), nameBounds, smallCounterFont, smallFontMetrics);
 
             Rectangle numberBounds = counterArea.getBounds();
             numberBounds.x += 58;
-            drawVerticallyCenteredString(g, String.valueOf(numberOfCounters), numberBounds, largeFont, largeFontMetrics);
+            drawVerticallyCenteredString(g, String.valueOf(numberOfCounters), numberBounds, largeCounterFont, largeFontMetrics);
 
         }
 
@@ -534,7 +553,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         Font oldFont = g.getFont();
 
         int x = area.x;
-        int y = area.y + (area.height - fontMetrics.getHeight()) / 2 + fontMetrics.getAscent();
+        int y = area.y + (area.height - fontMetrics.getHeight()) / 2 + fontMetrics.getAscent() + 1;
 
         g.setFont(font);
         g.drawString(text, x, y);
