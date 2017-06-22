@@ -217,7 +217,7 @@ public class ConquestAEtherScreen extends FScreen {
         private String message;
 
         private void updateMessage() {
-            message = "Tap to pull from the AEther\n{AE}";
+            message = "Tap to pull from the Aether\n{AE}";
 
             if (shardCost == 0) {
                 message += "--";

@@ -1,4 +1,4 @@
-Name:AEther Shockwave
+Name:Aether Shockwave
 ManaCost:3 W
 Types:Instant
 A:SP$ Charm | Cost$ 3 W | Choices$ DBTapAll,DBTapAll2 | SpellDescription$ Choose one — • Tap all Spirits; • Tap all non-Spirit creatures.

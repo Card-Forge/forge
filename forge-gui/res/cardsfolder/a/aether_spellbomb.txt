@@ -1,4 +1,4 @@
-Name:AEther Spellbomb
+Name:Aether Spellbomb
 ManaCost:1
 Types:Artifact
 A:AB$ ChangeZone | Cost$ U Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
@@ -7,4 +7,4 @@ SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_spellbomb.jpg
-Oracle:{U}, Sacrifice AEther Spellbomb: Return target creature to its owner's hand.\n{1}, Sacrifice AEther Spellbomb: Draw a card.
+Oracle:{U}, Sacrifice Aether Spellbomb: Return target creature to its owner's hand.\n{1}, Sacrifice Aether Spellbomb: Draw a card.

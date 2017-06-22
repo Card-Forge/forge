@@ -1,4 +1,4 @@
-Name:AErathi Berserker
+Name:Aerathi Berserker
 ManaCost:2 R R R
 Types:Creature Human Berserker
 PT:2/4

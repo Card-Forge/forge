@@ -1,4 +1,4 @@
-Name:AEtherspouts
+Name:Aetherspouts
 ManaCost:3 U U
 Types:Instant
 A:SP$ RepeatEach | Cost$ 3 U U | RepeatCards$ Creature.attacking | RepeatSubAbility$ DBChangeZone | SpellDescription$ For each attacking creature, its owner puts it on the top or bottom of his or her library.

@@ -1,4 +1,4 @@
-Name:Frozen AEther
+Name:Frozen Aether
 ManaCost:3 U
 Types:Enchantment
 S:Mode$ ETBTapped | ValidCard$ Artifact.OppCtrl,Creature.OppCtrl,Land.OppCtrl | Description$ Artifacts, creatures, and lands your opponents control enter the battlefield tapped.

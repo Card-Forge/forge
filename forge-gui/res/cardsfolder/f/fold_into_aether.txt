@@ -1,4 +1,4 @@
-Name:Fold into AEther
+Name:Fold into Aether
 ManaCost:2 U U
 Types:Instant
 A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | RememberCountered$ True | SubAbility$ DBChangeZone | SpellDescription$ Counter target spell. If that spell is countered this way, its controller may put a creature card from his or her hand onto the battlefield.

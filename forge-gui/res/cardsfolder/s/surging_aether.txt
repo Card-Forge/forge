@@ -1,4 +1,4 @@
-Name:Surging AEther
+Name:Surging Aether
 ManaCost:3 U
 Types:Instant
 K:Ripple:4

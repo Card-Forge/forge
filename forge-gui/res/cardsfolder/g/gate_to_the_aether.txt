@@ -1,4 +1,4 @@
-Name:Gate to the AEther
+Name:Gate to the Aether
 ManaCost:6
 Types:Artifact
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigAetherDig | TriggerController$ TriggeredPlayer | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player reveals the top card of his or her library. If it's an artifact, creature, enchantment, or land card, the player may put it onto the battlefield.

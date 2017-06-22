@@ -1,4 +1,4 @@
-Name:Anchor to the AEther
+Name:Anchor to the Aether
 ManaCost:2 U
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SubAbility$ DBScry | SpellDescription$ Put target creature on top of its owner's library. Scry 1.

@@ -496,7 +496,7 @@ public final class ConquestData {
             commanderCount = commanders.size();
         }
 
-        view.getLblAEtherShards().setText("AEther Shards: " + aetherShards);
+        view.getLblAEtherShards().setText("Aether Shards: " + aetherShards);
         view.getLblPlaneswalkEmblems().setText("Planeswalk Emblems: " + planeswalkEmblems);
         view.getLblTotalWins().setText("Total Wins: " + wins);
         view.getLblTotalLosses().setText("Total Losses: " + losses);

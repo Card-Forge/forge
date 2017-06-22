@@ -1,4 +1,4 @@
-Name:Azorius AEthermage
+Name:Azorius Aethermage
 ManaCost:1 W U
 Types:Creature Human Wizard
 PT:1/1

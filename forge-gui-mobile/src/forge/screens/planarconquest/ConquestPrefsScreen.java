@@ -51,7 +51,7 @@ public class ConquestPrefsScreen extends FScreen {
     public ConquestPrefsScreen() {
         super("Conquest Preferences", ConquestMenu.getMenu());
 
-        scroller.add(new PrefsHeader("AEther Shards", FSkinImage.AETHER_SHARD, PrefsGroup.BOOSTER));
+        scroller.add(new PrefsHeader("Aether Shards", FSkinImage.AETHER_SHARD, PrefsGroup.BOOSTER));
         scroller.add(new PrefsOption("Base Duplicate Value", CQPref.AETHER_BASE_DUPLICATE_VALUE, PrefsGroup.AETHER));
         scroller.add(new PrefsOption("Base Exile Value", CQPref.AETHER_BASE_EXILE_VALUE, PrefsGroup.AETHER));
         scroller.add(new PrefsOption("Base Retrieve Cost", CQPref.AETHER_BASE_RETRIEVE_COST, PrefsGroup.AETHER));

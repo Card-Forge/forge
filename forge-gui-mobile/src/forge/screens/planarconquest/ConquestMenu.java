@@ -31,7 +31,7 @@ public class ConquestMenu extends FPopupMenu {
             setCurrentScreen(multiverseScreen);
         }
     });
-    private static final FMenuItem aetherItem = new FMenuItem("The AEther", FSkinImage.AETHER_SHARD, new FEventHandler() {
+    private static final FMenuItem aetherItem = new FMenuItem("The Aether", FSkinImage.AETHER_SHARD, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             setCurrentScreen(aetherScreen);

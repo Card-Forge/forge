@@ -1,4 +1,4 @@
-Name:AEtherplasm
+Name:Aetherplasm
 ManaCost:2 U U
 Types:Creature Illusion
 PT:1/1
@@ -10,4 +10,4 @@ SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:HasBlockEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aetherplasm.jpg
-Oracle:Whenever AEtherplasm blocks a creature, you may return AEtherplasm to its owner's hand. If you do, you may put a creature card from your hand onto the battlefield blocking that creature.
+Oracle:Whenever Aetherplasm blocks a creature, you may return Aetherplasm to its owner's hand. If you do, you may put a creature card from your hand onto the battlefield blocking that creature.

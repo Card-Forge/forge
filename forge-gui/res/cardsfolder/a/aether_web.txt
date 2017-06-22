@@ -1,4 +1,4 @@
-Name:AEther Web
+Name:Aether Web
 ManaCost:1 G
 Types:Enchantment Aura
 K:Flash

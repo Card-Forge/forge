@@ -101,6 +101,16 @@ public final class ImageKeys {
         File file = findFile(dir, filename);
         if (file != null) { return file; }
 
+        // AE -> Ae and Ae -> AE for older cards with different file names 
+        // on case-sensitive file systems
+        if (filename.contains("Ae")) {
+            file = findFile(dir, filename.replace("Ae", "AE"));
+            if (file != null) { return file; }
+        } else if (filename.contains("AE")) {
+            file = findFile(dir, filename.replace("AE", "Ae"));
+            if (file != null) { return file; }
+        }
+
         // some S00 cards are really part of 6ED
         String s2kAlias = getSetFolder("S00");
         if (filename.startsWith(s2kAlias)) {

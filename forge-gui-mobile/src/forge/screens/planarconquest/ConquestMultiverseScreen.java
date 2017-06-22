@@ -224,7 +224,7 @@ public class ConquestMultiverseScreen extends FScreen {
     };
 
     private void awardShards(int shards, boolean fromDuplicateCards) {
-        String message = "Received AEther Shards";
+        String message = "Received Aether Shards";
         if (fromDuplicateCards) { //if from duplicate cards, shards already added to model
             message += " for Duplicate Cards";
         }

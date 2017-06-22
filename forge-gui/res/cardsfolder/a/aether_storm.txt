@@ -1,8 +1,8 @@
-Name:AEther Storm
+Name:Aether Storm
 ManaCost:3 U
 Types:Enchantment
 S:Mode$ CantBeCast | ValidCard$ Creature | Description$ Creature spells can't be cast.
 A:AB$ Destroy | Cost$ PayLife<4> | Defined$ Self | NoReg$ True | AnyPlayer$ True | SpellDescription$ Destroy CARDNAME. It can't be regenerated. Any player may activate this ability.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_storm.jpg
-Oracle:Creature spells can't be cast.\nPay 4 life: Destroy AEther Storm. It can't be regenerated. Any player may activate this ability.
+Oracle:Creature spells can't be cast.\nPay 4 life: Destroy Aether Storm. It can't be regenerated. Any player may activate this ability.

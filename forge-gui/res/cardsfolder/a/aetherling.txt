@@ -1,4 +1,4 @@
-Name:AEtherling
+Name:Aetherling
 ManaCost:4 U U
 Types:Creature Shapeshifter
 PT:4/5
@@ -9,4 +9,4 @@ A:AB$ Pump | Cost$ U | Defined$ Self | KW$ HIDDEN Unblockable | SpellDescription
 A:AB$ Pump | Cost$ 1 | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
 A:AB$ Pump | Cost$ 1 | NumAtt$ -1 | NumDef$ +1 | SpellDescription$ CARDNAME gets -1/+1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aetherling.jpg
-Oracle:{U}: Exile AEtherling. Return it to the battlefield under its owner's control at the beginning of the next end step.\n{U}: AEtherling can't be blocked this turn.\n{1}: AEtherling gets +1/-1 until end of turn.\n{1}: AEtherling gets -1/+1 until end of turn.
+Oracle:{U}: Exile Aetherling. Return it to the battlefield under its owner's control at the beginning of the next end step.\n{U}: Aetherling can't be blocked this turn.\n{1}: Aetherling gets +1/-1 until end of turn.\n{1}: Aetherling gets -1/+1 until end of turn.

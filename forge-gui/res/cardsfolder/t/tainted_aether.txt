@@ -1,4 +1,4 @@
-Name:Tainted AEther
+Name:Tainted Aether
 ManaCost:2 B B
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature enters the battlefield, its controller sacrifices a creature or land.

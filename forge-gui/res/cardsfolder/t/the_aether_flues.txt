@@ -1,4 +1,4 @@
-Name:The AEther Flues
+Name:The Aether Flues
 ManaCost:no cost
 Types:Plane Iquatana
 T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | TriggerZones$ Command | Execute$ FluesSacrifice | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your upkeep, you may sacrifice a creature. If you do, reveal cards from the top of your library until you reveal a creature card, put that card onto the battlefield, then shuffle all other cards revealed this way into your library.
@@ -10,4 +10,4 @@ T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChao
 SVar:RolledChaos:AB$ ChangeZone | Cost$ 0 | ChangeType$ Creature | ChangeNum$ 1 | Origin$ Hand | Destination$ Battlefield
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_aether_flues.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always
-Oracle:When you planeswalk to The AEther Flues or at the beginning of your upkeep, you may sacrifice a creature. If you do, reveal cards from the top of your library until you reveal a creature card, put that card onto the battlefield, then shuffle all other cards revealed this way into your library.\nWhenever you roll {CHAOS}, you may put a creature card from your hand onto the battlefield.
+Oracle:When you planeswalk to The Aether Flues or at the beginning of your upkeep, you may sacrifice a creature. If you do, reveal cards from the top of your library until you reveal a creature card, put that card onto the battlefield, then shuffle all other cards revealed this way into your library.\nWhenever you roll {CHAOS}, you may put a creature card from your hand onto the battlefield.
