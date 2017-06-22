@@ -157,17 +157,17 @@ public class SpecialCardAi {
                 final Iterable<Player> oppList = Iterables.filter(ai.getOpponents(),
                         PlayerPredicates.isTargetableBy(sa));
 
+                // All opponents have hexproof or something like that
+                if (Iterables.isEmpty(oppList)) {
+                    return false;
+                }
+
                 // filter for player who does not have donate target already
                 Iterable<Player> oppTarget = Iterables.filter(oppList,
                         PlayerPredicates.isNotCardInPlay(donateTarget.getName()));
                 // fall back to previous list
                 if (Iterables.isEmpty(oppTarget)) {
                     oppTarget = oppList;
-                }
-
-                // All opponents have hexproof or something like that
-                if (Iterables.isEmpty(oppList)) {
-                    return false;
                 }
 
                 // select player with less lands on the field (helpful for Illusions of Grandeur and probably Pacts too)
