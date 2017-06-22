@@ -197,6 +197,17 @@ public final class ConquestData {
         return planeDataMap.size();
     }
 
+    public int getAccessiblePlaneCount() {
+        // TODO: Java 8 stream implementation of filtering
+        int i = 0;
+        for (ConquestPlane plane : FModel.getPlanes()) {
+            if (!plane.isUnreachable()) {
+                i++;
+            }
+        }
+        return i;
+    }
+
     public void unlockPlane(ConquestPlane plane) {
         if (isPlaneUnlocked(plane)) { return; }
 

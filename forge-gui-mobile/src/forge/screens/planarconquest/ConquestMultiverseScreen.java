@@ -148,7 +148,16 @@ public class ConquestMultiverseScreen extends FScreen {
                     awardShards(2 * FModel.getConquestPreferences().getPrefInt(CQPref.AETHER_WHEEL_SHARDS), false);
                     break;
                 case PLANESWALK:
-                    awardBonusPlaneswalkEmblems(FModel.getConquestPreferences().getPrefInt(CQPref.PLANESWALK_WHEEL_EMBLEMS));
+                    if (model.getUnlockedPlaneCount() == model.getAccessiblePlaneCount()) {
+                        FOptionPane.showMessageDialog("With a feeling that you don't need more planeswalker emblems, you attempt to tap the Aether for another reward, causing a chaotic disturbance. An unknown entity is summoned from the Aether. It approaches you and a chaos battle ensues...", "All Planes Unlocked", EMBLEM_IMAGE, new Callback<Integer>() {
+                            @Override
+                            public void run(Integer result) {
+                                launchChaosBattle();
+                            }
+                        });
+                    } else {
+                        awardBonusPlaneswalkEmblems(FModel.getConquestPreferences().getPrefInt(CQPref.PLANESWALK_WHEEL_EMBLEMS));
+                    }
                     break;
                 case CHAOS:
                     launchChaosBattle();
