@@ -165,6 +165,11 @@ public class SpecialCardAi {
                     oppTarget = oppList;
                 }
 
+                // All opponents have hexproof or something like that
+                if (Iterables.isEmpty(oppList)) {
+                    return false;
+                }
+
                 // select player with less lands on the field (helpful for Illusions of Grandeur and probably Pacts too)
                 Player opp = Collections.min(Lists.newArrayList(oppTarget),
                         PlayerPredicates.compareByZoneSize(ZoneType.Battlefield, CardPredicates.Presets.LANDS));
