@@ -118,7 +118,7 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
                         onSelectionChange();
                     }
                 }
-                else if (maxChoices > 0 && !selectedIndices.contains(index)) {
+                else if (maxChoices > 0) {
                     selectedIndices.clear();
                     selectedIndices.add(index);
                     onSelectionChange();
