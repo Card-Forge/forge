@@ -202,4 +202,40 @@ public final class ForgeConstants {
     // Constants for Auto-Yield Mode
     public static final String AUTO_YIELD_PER_CARD = "Per Card (Each Game)";
     public static final String AUTO_YIELD_PER_ABILITY = "Per Ability (Each Match)";
+
+    public enum CounterDisplayType {
+
+        /** Use only the new tab-like counter display */
+        TEXT("Text-based"),
+
+        /** Use only the old image-based counter display */
+        IMAGE("Image-based"),
+
+        /** Use both counter displays at the same time */
+        HYBRID("Hybrid"),
+
+        /** Use the new tab-like counter display unless the card panel is very small, then use the old image-based counter display */
+        OLD_WHEN_SMALL("Images when cards are small; text otherwise");
+
+        private final String name;
+
+        CounterDisplayType(final String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public static CounterDisplayType from(final String name) {
+            for (CounterDisplayType counterDisplayType : values()) {
+                if (counterDisplayType.name.equals(name)) {
+                    return counterDisplayType;
+                }
+            }
+            throw new IllegalArgumentException("Counter display type '" + name + "' not found.");
+        }
+
+    }
+
 }

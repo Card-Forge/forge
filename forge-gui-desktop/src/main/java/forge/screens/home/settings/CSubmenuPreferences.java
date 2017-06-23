@@ -107,7 +107,6 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbUiForTouchScreen(), FPref.UI_FOR_TOUCHSCREN));
         lstControls.add(Pair.of(view.getCbTimedTargOverlay(), FPref.UI_TIMED_TARGETING_OVERLAY_UPDATES));
         lstControls.add(Pair.of(view.getCbCompactMainMenu(), FPref.UI_COMPACT_MAIN_MENU));
-        lstControls.add(Pair.of(view.getCbTextBasedCounters(), FPref.UI_TEXT_BASED_COUNTERS));
         lstControls.add(Pair.of(view.getCbPromptFreeBlocks(), FPref.MATCHPREF_PROMPT_FREE_BLOCKS));
         lstControls.add(Pair.of(view.getCbPauseWhileMinimized(), FPref.UI_PAUSE_WHILE_MINIMIZED));
         lstControls.add(Pair.of(view.getCbWorkshopSyntax(), FPref.DEV_WORKSHOP_SYNTAX));
@@ -186,6 +185,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeAiProfilesComboBox();
         initializeColorIdentityCombobox();
         initializeAutoYieldModeComboBox();
+        initializeCounterDisplayTypeComboBox();
         initializePlayerNameButton();
     }
 
@@ -331,6 +331,26 @@ public enum CSubmenuPreferences implements ICDoc {
         final String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);
     }
+
+    private void initializeCounterDisplayTypeComboBox() {
+
+        final String[] elements = new String[ForgeConstants.CounterDisplayType.values().length];
+
+        ForgeConstants.CounterDisplayType[] values = ForgeConstants.CounterDisplayType.values();
+        for (int i = 0; i < values.length; i++) {
+            elements[i] = values[i].getName();
+        }
+
+        final FPref userSetting = FPref.UI_CARD_COUNTER_DISPLAY_TYPE;
+        final FComboBoxPanel<String> panel = this.view.getCounterDisplayTypeComboBoxPanel();
+
+        final FComboBox<String> comboBox = createComboBox(elements, userSetting);
+        final String selectedItem = this.prefs.getPref(userSetting);
+
+        panel.setComboBox(comboBox, selectedItem);
+
+    }
+
     private <E> FComboBox<E> createComboBox(final E[] items, final ForgePreferences.FPref setting) {
         final FComboBox<E> comboBox = new FComboBox<>(items);
         addComboBoxListener(comboBox, setting);

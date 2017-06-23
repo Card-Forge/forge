@@ -29,6 +29,7 @@ import forge.game.card.CounterType;
 import forge.gui.CardContainer;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.properties.ForgeConstants.CounterDisplayType;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.CardFaceSymbols;
@@ -58,6 +59,7 @@ import java.util.Map;
  * @version $Id: CardPanel.java 25264 2014-03-27 01:59:18Z drdev $
  */
 public class CardPanel extends SkinnedPanel implements CardContainer, IDisposable {
+
     private static final long serialVersionUID = 2361907095724263295L;
 
     public static final double TAPPED_ANGLE = Math.PI / 2;
@@ -106,12 +108,12 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
             attributes.put(TextAttribute.FAMILY, "Roboto Bold");
             attributes.put(TextAttribute.WEIGHT, TextAttribute.WEIGHT_BOLD);
-            attributes.put(TextAttribute.SIZE, 11);
+            attributes.put(TextAttribute.SIZE, 10);
             attributes.put(TextAttribute.KERNING, TextAttribute.KERNING_ON);
 
             smallCounterFont = Font.getFont(attributes);
 
-            attributes.put(TextAttribute.SIZE, 15);
+            attributes.put(TextAttribute.SIZE, 14);
             largeCounterFont = Font.getFont(attributes);
 
         } catch (FontFormatException | IOException e) {
@@ -305,7 +307,8 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private void drawManaCost(final Graphics g, final ManaCost cost, final int deltaY) {
         final int width = CardFaceSymbols.getWidth(cost);
         final int height = CardFaceSymbols.getHeight();
-        CardFaceSymbols.draw(g, cost, (cardXOffset + (cardWidth / 2)) - (width / 2), deltaY + cardYOffset + (cardHeight / 2) - height/2);
+        final int counterOffset = card.getCounters() != null && !card.getCounters().isEmpty() ? 15 : 0;
+        CardFaceSymbols.draw(g, cost, (cardXOffset + (cardWidth / 2)) - (width / 2), deltaY + cardYOffset + (cardHeight / 2) - height/2 + counterOffset);
     }
 
     @Override
@@ -436,27 +439,18 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         if (card.getCounters() != null) {
 
-            if (isPreferenceEnabled(FPref.UI_TEXT_BASED_COUNTERS)) {
-                drawCounterTabs(g);
-            } else {
-
-                int counters = 0;
-                for (final Integer i : card.getCounters().values()) {
-                    counters += i;
-                }
-
-                final int yCounters = (cardYOffset + cardHeight) - (cardHeight / 3) - 40;
-
-                if (counters == 1) {
-                    CardFaceSymbols.drawSymbol("counters1", g, cardXOffset - 15, yCounters);
-                } else if (counters == 2) {
-                    CardFaceSymbols.drawSymbol("counters2", g, cardXOffset - 15, yCounters);
-                } else if (counters == 3) {
-                    CardFaceSymbols.drawSymbol("counters3", g, cardXOffset - 15, yCounters);
-                } else if (counters > 3) {
-                    CardFaceSymbols.drawSymbol("countersMulti", g, cardXOffset - 15, yCounters);
-                }
-
+            switch (CounterDisplayType.from(FModel.getPreferences().getPref(FPref.UI_CARD_COUNTER_DISPLAY_TYPE))) {
+                case OLD_WHEN_SMALL:
+                case TEXT:
+                    drawCounterTabs(g);
+                    break;
+                case IMAGE:
+                    drawCounterImage(g);
+                    break;
+                case HYBRID:
+                    drawCounterImage(g);
+                    drawCounterTabs(g);
+                    break;
             }
 
         }
@@ -492,15 +486,30 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final Dimension imgSize = calculateImageSize();
         final int titleY = Math.round(imgSize.height * (54f / 640)) - 15;
 
-        final int spaceFromTopOfCard = titleY + 65;
-        final int counterBoxHeight = 27;
-        final int counterBoxBaseWidth = 65;
+        final int spaceFromTopOfCard = titleY + 60;
+        final int counterBoxHeight = 24;
+        final int counterBoxBaseWidth = 58;
         final int counterBoxSpacing = 2;
 
         int currentCounter = 0;
 
         FontMetrics smallFontMetrics = g.getFontMetrics(smallCounterFont);
         FontMetrics largeFontMetrics = g.getFontMetrics(largeCounterFont);
+
+        if (CounterDisplayType.from(FModel.getPreferences().getPref(FPref.UI_CARD_COUNTER_DISPLAY_TYPE)) == CounterDisplayType.OLD_WHEN_SMALL) {
+
+            int maxCounters = 0;
+            for (Integer numberOfCounters : card.getCounters().values()) {
+                maxCounters = Math.max(maxCounters, numberOfCounters);
+            }
+
+            if (counterBoxBaseWidth + largeFontMetrics.stringWidth(String.valueOf(maxCounters)) > cardWidth) {
+                drawCounterImage(g);
+                return;
+            }
+
+        }
+
 
         for (Map.Entry<CounterType, Integer> counterEntry : card.getCounters().entrySet()) {
 
@@ -516,10 +525,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                 g.setColor(new Color(0, 0, 0, 200));
             }
 
-            RoundRectangle2D counterArea = new RoundRectangle2D.Float(cardXOffset, counterYOffset, counterBoxRealWidth, counterBoxHeight, 10, 10);
+            RoundRectangle2D counterArea = new RoundRectangle2D.Float(cardXOffset, counterYOffset, counterBoxRealWidth, counterBoxHeight, 9, 9);
             ((Graphics2D) g).fill(counterArea);
 
-            g.fillRect(cardXOffset, counterYOffset, 10, counterBoxHeight);
+            g.fillRect(cardXOffset, counterYOffset, 9, counterBoxHeight);
 
             if (isSelected) {
                 g.setColor(new Color(counter.getRed(), counter.getGreen(), counter.getBlue()));
@@ -528,14 +537,35 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             }
 
             Rectangle nameBounds = counterArea.getBounds();
-            nameBounds.x += 13;
-            nameBounds.width = 48;
+            nameBounds.x += 12;
+            nameBounds.width = 43;
             drawVerticallyCenteredString(g, counter.getCounterOnCardDisplayName(), nameBounds, smallCounterFont, smallFontMetrics);
 
             Rectangle numberBounds = counterArea.getBounds();
-            numberBounds.x += 58;
+            numberBounds.x += 52;
             drawVerticallyCenteredString(g, String.valueOf(numberOfCounters), numberBounds, largeCounterFont, largeFontMetrics);
 
+        }
+
+    }
+
+    private void drawCounterImage(final Graphics g) {
+
+        int counters = 0;
+        for (final Integer i : card.getCounters().values()) {
+            counters += i;
+        }
+
+        final int yCounters = (cardYOffset + cardHeight) - (cardHeight / 3) - 40;
+
+        if (counters == 1) {
+            CardFaceSymbols.drawSymbol("counters1", g, cardXOffset - 15, yCounters);
+        } else if (counters == 2) {
+            CardFaceSymbols.drawSymbol("counters2", g, cardXOffset - 15, yCounters);
+        } else if (counters == 3) {
+            CardFaceSymbols.drawSymbol("counters3", g, cardXOffset - 15, yCounters);
+        } else if (counters > 3) {
+            CardFaceSymbols.drawSymbol("countersMulti", g, cardXOffset - 15, yCounters);
         }
 
     }

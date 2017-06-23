@@ -79,7 +79,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbAltSoundSystem = new OptionsCheckBox("Use Alternate Sound System");
     private final JCheckBox cbUiForTouchScreen = new OptionsCheckBox("Enhance UI for Touchscreens");
     private final JCheckBox cbTimedTargOverlay = new OptionsCheckBox("Enable Targeting Overlay Optimization");
-    private final JCheckBox cbTextBasedCounters = new OptionsCheckBox("Use new text-based counters on cards");
     private final JCheckBox cbCompactMainMenu = new OptionsCheckBox("Use Compact Main Sidebar Menu");
     private final JCheckBox cbDetailedPaymentDesc = new OptionsCheckBox("Spell Description in Payment Prompt");
     private final JCheckBox cbPromptFreeBlocks = new OptionsCheckBox("Free Block Handling");
@@ -102,6 +101,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FComboBoxPanel<String> cbpAiProfiles = new FComboBoxPanel<>("AI Personality:");
     private final FComboBoxPanel<String> cbpDisplayCurrentCardColors = new FComboBoxPanel<>("Show Detailed Card Color:");
     private final FComboBoxPanel<String> cbpAutoYieldMode = new FComboBoxPanel<>("Auto-Yield:");
+    private final FComboBoxPanel<String> cbpCounterDisplayType = new FComboBoxPanel<>("Counter Display Type:");
 
     /**
      * Constructor.
@@ -184,7 +184,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbPreselectPrevAbOrder, titleConstraints);
         pnlPrefs.add(new NoteLabel("When enabled, preselects the last defined simultaneous ability order in the ordering dialog."), descriptionConstraints);
 
-        pnlPrefs.add(cbpAutoYieldMode, titleConstraints);
+        pnlPrefs.add(cbpAutoYieldMode, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel("Defines the granularity level of auto-yields (per unique ability or per unique card)."), descriptionConstraints);
 
         // Deck building options
@@ -274,8 +274,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbTimedTargOverlay, titleConstraints);
         pnlPrefs.add(new NoteLabel("Enables throttling-based optimization of targeting overlay to reduce CPU use (only disable if you experience choppiness on older hardware, requires starting a new match)"), descriptionConstraints);
 
-        pnlPrefs.add(cbTextBasedCounters, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Enables text-based counters on cards instead of the old image based ones"), descriptionConstraints);
+        pnlPrefs.add(cbpCounterDisplayType, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel("Selects the style of the in-game counter display for cards. Text-based is a new tab-like display on the cards. Image-based is the old counter image. Hybrid displays both at once."), descriptionConstraints);
 
         pnlPrefs.add(cbpDisplayCurrentCardColors, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel("Displays the breakdown of the current color of cards in the card detail information panel."), descriptionConstraints);
@@ -586,6 +586,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbpAutoYieldMode;
     }
 
+    public FComboBoxPanel<String> getCounterDisplayTypeComboBoxPanel() {
+        return cbpCounterDisplayType;
+    }
+
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbEnforceDeckLegality() {
         return cbEnforceDeckLegality;
@@ -667,10 +671,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public final JCheckBox getCbPreselectPrevAbOrder() {
         return cbPreselectPrevAbOrder;
-    }
-
-    public final JCheckBox getCbTextBasedCounters() {
-        return cbTextBasedCounters;
     }
 
     /** @return {@link forge.toolbox.FLabel} */

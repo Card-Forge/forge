@@ -90,7 +90,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_PRESELECT_PREVIOUS_ABILITY_ORDER ("false"),
         UI_AUTO_YIELD_MODE (ForgeConstants.AUTO_YIELD_PER_ABILITY),
         UI_SHOW_STORM_COUNT_IN_PROMPT ("false"),
-        UI_TEXT_BASED_COUNTERS ("true"),
+        UI_CARD_COUNTER_DISPLAY_TYPE(ForgeConstants.CounterDisplayType.TEXT.getName()),
 
         UI_FOR_TOUCHSCREN("false"),
 
