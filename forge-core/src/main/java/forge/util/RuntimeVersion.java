@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class RuntimeVersion {
 
-	private static Pattern versionNumberPattern = Pattern.compile("([1-9][0-9]*((\\.0)*\\.[1-9][0-9]*)*)");
+	private static Pattern versionNumberPattern = Pattern.compile("([1-9][0-9]*((\\.0)*\\.[0-9]*)*(_[0-9]+)?)");
 	private static Pattern preReleasePattern = Pattern.compile("([a-zA-Z0-9]+)");
 	private static Pattern buildNumberPattern = Pattern.compile("(0|[1-9][0-9]*)");
 	private static Pattern buildInformationPattern = Pattern.compile("([-a-zA-Z0-9.]+)");
@@ -18,6 +18,7 @@ public class RuntimeVersion {
 	private int major;
 	private int minor;
 	private int securityLevel;
+	private int update;
 
 	private String preReleaseIdentifier;
 	private int buildNumber;
@@ -32,7 +33,7 @@ public class RuntimeVersion {
 			throw new IllegalArgumentException("Improperly formatted version string provided: " + versionString);
 		}
 
-		String[] versionNumbers = matcher.group().split("\\.");
+		String[] versionNumbers = matcher.group().split("[._]");
 
 		if (versionNumbers.length >= 1) {
 			major = Integer.parseInt(versionNumbers[0]);
@@ -44,6 +45,10 @@ public class RuntimeVersion {
 
 		if (versionNumbers.length >= 3) {
 			securityLevel = Integer.parseInt(versionNumbers[2]);
+		}
+
+		if (versionNumbers.length >= 4) {
+			update = Integer.parseInt(versionNumbers[3]);
 		}
 
 		if (versionStringPattern1.matcher(versionString).find()) {
@@ -107,6 +112,10 @@ public class RuntimeVersion {
 
 	public int getSecurityLevel() {
 		return securityLevel;
+	}
+
+	public int getUpdate() {
+		return update;
 	}
 
 	public String getPreReleaseIdentifier() {

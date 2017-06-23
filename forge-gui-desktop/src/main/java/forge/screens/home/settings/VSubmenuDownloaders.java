@@ -110,7 +110,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
         RuntimeVersion javaVersion = RuntimeVersion.of(System.getProperty("java.version"));
 
-        return javaVersion.getMajor() > 8 || (javaVersion.getMajor() == 8 && javaVersion.getSecurityLevel() >= 101);
+        return javaVersion.getMajor() >= 1 && (javaVersion.getMinor() > 8 || (javaVersion.getMinor() == 8 && javaVersion.getUpdate() >= 101));
 
     }
 
