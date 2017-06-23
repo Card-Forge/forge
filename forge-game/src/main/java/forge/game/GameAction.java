@@ -1123,7 +1123,7 @@ public class GameAction {
                     if (losers == null) {
                         losers = Lists.newArrayListWithCapacity(3);
                     }
-                    losers.add(p);
+                    losers.add(pl);
                 }
             }
             break;
