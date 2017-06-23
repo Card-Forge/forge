@@ -861,21 +861,23 @@ public class Combat {
     }
 
     public boolean isBlocking(Card blocker) {
-        if (!blocker.isInPlay()) {
-            CombatLki lki = lkiCache.get(blocker);
-            return null != lki && !lki.isAttacker; // was blocking something anyway
-        }
-        return blockedBands.containsValue(blocker);
+        if (blockedBands.containsValue(blocker)) {
+            return true; // is blocking something at the moment
+        };
+
+        CombatLki lki = lkiCache.get(blocker);
+        return null != lki && !lki.isAttacker; // was blocking something anyway
     }
 
     public boolean isBlocking(Card blocker, Card attacker) {
         AttackingBand ab = getBandOfAttacker(attacker);
-        if (!blocker.isInPlay()) {
-            CombatLki lki = lkiCache.get(blocker);
-            return null != lki && !lki.isAttacker && lki.relatedBands.contains(ab); // was blocking that very band
-        }
         Collection<Card> blockers = blockedBands.get(ab);
-        return blockers != null && blockers.contains(blocker);
+        if (blockers != null && blockers.contains(blocker)) {
+            return true; // is blocking the attacker's band at the moment
+        }
+        
+        CombatLki lki = lkiCache.get(blocker);
+        return null != lki && !lki.isAttacker && lki.relatedBands.contains(ab); // was blocking that very band
     }
 
     public void saveLKI(Card lastKnownInfo) {
