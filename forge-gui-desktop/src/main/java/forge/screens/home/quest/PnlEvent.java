@@ -15,6 +15,8 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Panels for displaying duels and challenges.<br>
@@ -59,6 +61,27 @@ class PnlEvent extends JPanel {
         final FTextArea tarDesc = new FTextArea();
         tarDesc.setText(event.getDescription());
         tarDesc.setFont(FSkin.getItalicFont(12));
+
+        tarDesc.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseDragged(final MouseEvent e) {
+                mousePressed(e);
+            }
+            @Override
+            public void mousePressed(final MouseEvent e) {
+                e.getComponent().getParent().dispatchEvent(e);
+            }
+
+            @Override
+            public void mouseEntered(final MouseEvent e) {
+                e.getComponent().getParent().dispatchEvent(e);
+            }
+
+            @Override
+            public void mouseExited(final MouseEvent e) {
+                e.getComponent().getParent().dispatchEvent(e);
+            }
+        });
 
         // Change listener for radio button
         this.rad.addChangeListener(new ChangeListener() {
