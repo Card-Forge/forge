@@ -77,7 +77,7 @@ public class DestroyAi extends SpellAbilityAi {
             }
             if ("MadSarkhanDragon".equals(logic)) {
                 // TODO: expand this logic to make the AI force the opponent to sacrifice a big threat bigger than a 5/5 flier?
-                CardCollection creatures = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+                CardCollection creatures = ai.getCreaturesInPlay();
                 boolean hasValidTgt = !CardLists.filter(creatures, new Predicate<Card>() {
                     @Override
                     public boolean apply(Card t) {

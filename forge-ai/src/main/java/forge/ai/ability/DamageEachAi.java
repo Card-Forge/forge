@@ -2,7 +2,13 @@ package forge.ai.ability;
 
 
 import forge.game.ability.AbilityUtils;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 
@@ -14,12 +20,28 @@ public class DamageEachAi extends DamageAiBase {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
+        final String logic = sa.getParam("AILogic");
 
-        if (tgt != null && sa.canTarget(ai.getOpponent())) {
+        PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
+        Player weakestOpp = targetableOpps.min(PlayerPredicates.compareByLife());
+
+        if (tgt != null && weakestOpp != null) {
             sa.resetTargets();
-            sa.getTargets().add(ai.getOpponent());
+            sa.getTargets().add(weakestOpp);
         }
 
+        if ("MadSarkhanUltimate".equals(logic)) {
+            int minLife = weakestOpp.getLife();
+
+            int dragonPower = 0;
+            CardCollection dragons = CardLists.filter(ai.getCreaturesInPlay(), CardPredicates.isType("Dragon"));
+            for (Card c : dragons) {
+                dragonPower += c.getCurrentPower();
+            }
+
+            return dragonPower >= minLife;
+        }
+        
         final String damage = sa.getParam("NumDmg");
         final int iDmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
         return this.shouldTgtP(ai, sa, iDmg, false);
