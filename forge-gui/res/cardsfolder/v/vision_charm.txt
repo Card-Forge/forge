@@ -1,7 +1,7 @@
 Name:Vision Charm
 ManaCost:U
 Types:Instant
-A:SP$ Charm | Cost$ U | Choices$ MillOpp,ChangeType,PhaseArtifact | CharmNum$ 1 | SpellDescription$ Choose one — • Target player puts the top four cards of his or her library into his or her graveyard; • Choose a land type and a basic land type. Each land of the first chosen type becomes the second chosen type until end of turn; • target artifact phases out. (While it's phased out, it's treated as though it doesn't exist. It phases in before its controller untaps during his or her next untap step.)
+A:SP$ Charm | Cost$ U | Choices$ MillOpp,ChangeType,PhaseArtifact | CharmNum$ 1
 SVar:MillOpp:DB$ Mill | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top four cards of his or her library into his or her graveyard.
 SVar:ChangeType:DB$ ChooseType | Defined$ You | Type$ Land | SubAbility$ RemFirstLand | SpellDescription$ Choose a land type and a basic land type. Each land of the first chosen type becomes the second chosen type until end of turn.
 SVar:RemFirstLand:DB$ PumpAll | ValidCards$ Land.ChosenType | RememberAllPumped$ True | SubAbility$ ChooseType2

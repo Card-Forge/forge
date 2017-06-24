@@ -1,7 +1,7 @@
 Name:Consult the Necrosages
 ManaCost:1 U B
 Types:Sorcery
-A:SP$ Charm | Cost$ 1 U B | Choices$ DBDraw,DBDiscard | SpellDescription$ Choose one — • Target player draws two cards; • Target player discards two cards.
+A:SP$ Charm | Cost$ 1 U B | Choices$ DBDraw,DBDiscard
 SVar:DBDraw:DB$ Draw | ValidTgts$ Player | NumCards$ 2 | SpellDescription$ Target player draws two cards.
 SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
 SVar:RemAIDeck:True
