@@ -9,6 +9,7 @@ import com.google.common.collect.Maps;
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
+import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
@@ -186,6 +187,9 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     // add keywords from sa
                     for (final String kw : keywords) {
                         copy.addIntrinsicKeyword(kw);
+                    }
+                    if (sa.hasParam("SetTypes")) {
+                        copy.setType(CardType.parse(sa.getParam("SetTypes")));
                     }
                     for (final String type : types) {
                         copy.addType(type);
