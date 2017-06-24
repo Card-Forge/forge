@@ -37,6 +37,10 @@ public class DamageDealAi extends DamageAiBase {
 
         Card source = sa.getHostCard();
 
+        if ("MadSarkhanDigDmg".equals(logic)) {
+            return source.getCounters(CounterType.LOYALTY) == 1;
+        }
+       
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$ChosenNumber")) {
             int energy = ai.getCounters(CounterType.ENERGY);
             for (SpellAbility s : source.getSpellAbilities()) {

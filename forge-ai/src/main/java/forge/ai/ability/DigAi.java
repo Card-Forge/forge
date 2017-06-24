@@ -8,6 +8,7 @@ import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CounterType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -92,6 +93,10 @@ public class DigAi extends SpellAbilityAi {
         	return false;
         }
 
+        if ("MadSarkhanDigDmg".equals(sa.getParam("AILogic"))) {
+            return host.getCounters(CounterType.LOYALTY) == 1;
+        }
+        
         return !ComputerUtil.preventRunAwayActivations(sa);
     }
 
