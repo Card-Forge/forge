@@ -1,0 +1,18 @@
+Name:Struggle
+ManaCost:2 R
+AlternateMode: Split
+Types:Instant
+A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage to target creature equal to the number of lands you control.
+
+SVar:X:Count$TypeYouCtrl.Land
+SVar:Picture:http://www.wizards.com/global/images/magic/general/struggle_survive.jpg
+Oracle:Struggle deals damage to target creature equal to the number of lands you control.
+
+ALTERNATE
+
+Name:Survive
+ManaCost:1 G
+Types:Sorcery
+K:Aftermath
+A:SP$ ChangeZoneAll | Cost$ 1 G | Defined$ Player | ChangeType$ Card | Origin$ Graveyard | Destination$ Library | Shuffle$ True | SpellDescription$ Each player shuffles his or her graveyard into his or her library.
+Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nEach player shuffles his or graveyard into his or her library.
