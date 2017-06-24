@@ -1,8 +1,17 @@
 Name:Lobotomy
 ManaCost:2 U B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 U B | Origin$ Hand | Destination$ Exile | ValidTgts$ Player | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card.nonBasic | ChangeNum$ 1 | IsCurse$ True | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBSearch | SpellDescription$ Target player reveals his or her hand, then you choose a card other than a basic land card from it. Search that player's graveyard, hand, and library for all cards with the same name as the chosen card and exile them. Then that player shuffles his or her library.
-SVar:DBSearch:DB$ ChangeZoneAll | Origin$ Graveyard,Hand,Library | Destination$ Exile | ChangeType$ Remembered.sameName | Shuffle$ True| Defined$ Targeted | Search$ True | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:SP$ RevealHand | Cost$ 2 U B | ValidTgts$ Player | SubAbility$ ChooseCard | StackDescription$ SpellDescription | SpellDescription$ Target player reveals his or her hand.
+SVar:ChooseCard:DB$ ChooseCard | Choices$ Card.nonBasic+TargetedPlayerCtrl+inZoneHand | ChoiceZone$ Hand | SubAbility$ ExileYard | RememberChosen$ True | ForgetOtherTargets$ True | SpellDescription$ Target player reveals his or her hand, then you choose a card other than a basic land card from it. Search that player's graveyard, hand, and library for all cards with the same name as the chosen card and exile them. Then that player shuffles his or her library.
+
+SVar:ExileYard:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | Defined$ Targeted | ChangeType$ Remembered.sameName | SubAbility$ ExileHand | StackDescription$ None
+SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | ChangeType$ Remembered.sameName | ChangeNum$ NumInHand | Chooser$ You | SubAbility$ ExileLib | References$ NumInHand | AlreadyRevealed$ True | StackDescription$ None
+SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ Targeted | ChangeType$ Remembered.sameName | ChangeNum$ NumInLib | Chooser$ You | Search$ True | Shuffle$ True | SubAbility$ DBCleanup | References$ NumInLib | StackDescription$ None
+
+SVar:NumInHand:TargetedPlayer$CardsInHand
+SVar:NumInLib:TargetedPlayer$CardsInLibrary
+
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lobotomy.jpg
 Oracle:Target player reveals his or her hand, then you choose a card other than a basic land card from it. Search that player's graveyard, hand, and library for all cards with the same name as the chosen card and exile them. Then that player shuffles his or her library.
