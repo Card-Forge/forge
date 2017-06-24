@@ -83,8 +83,7 @@ public class DestroyAi extends SpellAbilityAi {
                     public boolean apply(Card t) {
                         return t.getCurrentPower() < 5 && t.getCurrentToughness() < 5;
                     }
-                }
-                ).isEmpty();
+                }).isEmpty();
                 if (hasValidTgt) {
                     Card worstCreature = ComputerUtilCard.getWorstCreatureAI(creatures);
                     sa.getTargets().add(worstCreature);
