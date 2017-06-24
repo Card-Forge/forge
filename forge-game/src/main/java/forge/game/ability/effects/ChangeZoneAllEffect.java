@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
@@ -76,12 +77,22 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             if (!libCardsYouOwn.isEmpty()) { // Only searching one's own library would fire Archive Trap's altcost
                 sa.getActivatingPlayer().incLibrarySearched();
             }
-            sa.getActivatingPlayer().getController().reveal(libCards, ZoneType.Library, sa.getActivatingPlayer());
+            if (!libCards.isEmpty()) {
+                sa.getActivatingPlayer().getController().reveal(libCards, ZoneType.Library, libCards.get(0).getOwner());
+            }
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Player", sa.getActivatingPlayer());
             runParams.put("Target", tgtPlayers);
             game.getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
         }
+        if (origin.contains(ZoneType.Hand) && sa.hasParam("Search")) {
+            CardCollection handCards = CardLists.filterControlledBy(CardLists.getValidCards(cards, "Card.inZoneHand", sa.getActivatingPlayer(), source),
+                sa.getActivatingPlayer().getOpponents());
+            if (!handCards.isEmpty()) {
+                sa.getActivatingPlayer().getController().reveal(handCards, ZoneType.Hand, handCards.get(0).getOwner());
+            }
+        }
+        
         cards = (CardCollection)AbilityUtils.filterListByType(cards, sa.getParam("ChangeType"), sa);
 
         if (sa.hasParam("Optional")) {
