@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import forge.ai.AiController;
 import forge.ai.AiProps;
 
@@ -60,12 +59,12 @@ public class DestroyAi extends SpellAbilityAi {
             if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
                 return false;
             }
-            
+
             hasXCost = abCost.getCostMana() != null ? abCost.getCostMana().getAmountOfX() > 0 : false;
         }
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
-        	return false;
+            return false;
         }
 
         // Targeting
@@ -93,49 +92,49 @@ public class DestroyAi extends SpellAbilityAi {
                 }
                 return false;
             } else if ("Polymorph".equals(logic)) {
-        		list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
-        		if (list.isEmpty()) {
-        			return false;
-        		}
-        		for (Card c : list) {
-        			if (c.hasKeyword("Indestructible")) {
-        				sa.getTargets().add(c);
-                		return true;
-        			}
-        		}
-        		Card worst = ComputerUtilCard.getWorstAI(list);
-        		if (worst.isCreature() && ComputerUtilCard.evaluateCreature(worst) >= 200) {
-        			return false;
-        		}
-        		if (!worst.isCreature() && worst.getCMC() > 1) {
-        			return false;
-        		}
-        		sa.getTargets().add(worst);
-        		return true;
-        	}
+                list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
+                if (list.isEmpty()) {
+                    return false;
+                }
+                for (Card c : list) {
+                    if (c.hasKeyword("Indestructible")) {
+                        sa.getTargets().add(c);
+                        return true;
+                    }
+                }
+                Card worst = ComputerUtilCard.getWorstAI(list);
+                if (worst.isCreature() && ComputerUtilCard.evaluateCreature(worst) >= 200) {
+                    return false;
+                }
+                if (!worst.isCreature() && worst.getCMC() > 1) {
+                    return false;
+                }
+                sa.getTargets().add(worst);
+                return true;
+            }
             list = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
             if ("FatalPush".equals(logic)) {
                 final int cmcMax = ai.hasRevolt() ? 4 : 2;
                 list = CardLists.filter(list, CardPredicates.lessCMC(cmcMax));
             }
             if (sa.hasParam("AITgts")) {
-            	if (sa.getParam("AITgts").equals("BetterThanSource")) {
-            		if (source.isEnchanted()) {
-            			if (source.getEnchantedBy(false).get(0).getController().equals(ai)) {
-            				return false;
-            			}
-            		} else {
-            			final int value = ComputerUtilCard.evaluateCreature(source);
-            			list = CardLists.filter(list, new Predicate<Card>() {
+                if (sa.getParam("AITgts").equals("BetterThanSource")) {
+                    if (source.isEnchanted()) {
+                        if (source.getEnchantedBy(false).get(0).getController().equals(ai)) {
+                            return false;
+                        }
+                    } else {
+                        final int value = ComputerUtilCard.evaluateCreature(source);
+                        list = CardLists.filter(list, new Predicate<Card>() {
                             @Override
                             public boolean apply(final Card c) {
                                 return ComputerUtilCard.evaluateCreature(c) > value + 30;
                             }
                         });
-            		}
-            	} else {
-            		list = CardLists.getValidCards(list, sa.getParam("AITgts"), sa.getActivatingPlayer(), source);
-            	}
+                    }
+                } else {
+                    list = CardLists.getValidCards(list, sa.getParam("AITgts"), sa.getActivatingPlayer(), source);
+                }
             }
             list = CardLists.getNotKeyword(list, "Indestructible");
             if (!SpellAbilityAi.playReusable(ai, sa)) {
@@ -158,7 +157,7 @@ public class DestroyAi extends SpellAbilityAi {
                             }
                         }
                         if (c.hasSVar("SacMe")) {
-                        	return false;
+                            return false;
                         }
                         //Check for undying
                         return (!c.hasKeyword("Undying") || c.getCounters(CounterType.P1P1) > 0);
@@ -183,7 +182,7 @@ public class DestroyAi extends SpellAbilityAi {
             }
 
             int maxTargets = abTgt.getMaxTargets(sa.getHostCard(), sa);
-            
+
             if (hasXCost) {
                 // TODO: currently the AI will maximize mana spent on X, trying to maximize damage. This may need improvement.
                 maxTargets = Math.min(ComputerUtilMana.determineMaxAffordableX(ai, sa), abTgt.getMaxTargets(sa.getHostCard(), sa));
@@ -203,7 +202,7 @@ public class DestroyAi extends SpellAbilityAi {
             while (sa.getTargets().getNumTargeted() < maxTargets) {
                 if (list.isEmpty()) {
                     if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getHostCard(), sa))
-                            || (sa.getTargets().getNumTargeted() == 0)) {
+                        || (sa.getTargets().getNumTargeted() == 0)) {
                         sa.resetTargets();
                         return false;
                     } else {
@@ -228,15 +227,15 @@ public class DestroyAi extends SpellAbilityAi {
                             return true;    // becomes Terminate
                         } else {
                             if (source.getGame().getPhaseHandler().getPhase()
-                                    .isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS) || // prevent surprise combatant
-                                    ComputerUtilCard.evaluateCreature(choice) < 1.5
-                                            * ComputerUtilCard.evaluateCreature(token)) {
+                                .isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                                || // prevent surprise combatant
+                                ComputerUtilCard.evaluateCreature(choice) < 1.5
+                                * ComputerUtilCard.evaluateCreature(token)) {
                                 return false;
                             }
                         }
                     }
-                }
-                else if (CardLists.getNotType(list, "Land").isEmpty()) {
+                } else if (CardLists.getNotType(list, "Land").isEmpty()) {
                     choice = ComputerUtilCard.getBestLandAI(list);
 
                     if ("LandForLand".equals(logic) || "GhostQuarter".equals(logic)) {
@@ -245,8 +244,7 @@ public class DestroyAi extends SpellAbilityAi {
                             return false;
                         }
                     }
-                }
-                else {
+                } else {
                     choice = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, true);
                 }
                 //option to hold removal instead only applies for single targeted removal
@@ -258,7 +256,7 @@ public class DestroyAi extends SpellAbilityAi {
 
                 if (choice == null) { // can't find anything left
                     if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getHostCard(), sa))
-                            || (sa.getTargets().getNumTargeted() == 0)) {
+                        || (sa.getTargets().getNumTargeted() == 0)) {
                         sa.resetTargets();
                         return false;
                     } else {
@@ -270,8 +268,8 @@ public class DestroyAi extends SpellAbilityAi {
                     if (choice.getOwner() == ai) {
                         for (Card aura : choice.getEnchantedBy(false)) {
                             SpellAbility sp = aura.getFirstSpellAbility();
-                            if (sp != null && "GainControl".equals(sp.getParam("AILogic")) 
-                                    && aura.getController() != ai && sa.canTarget(aura)) {
+                            if (sp != null && "GainControl".equals(sp.getParam("AILogic"))
+                                && aura.getController() != ai && sa.canTarget(aura)) {
                                 choice = aura;
                             }
                         }
@@ -280,20 +278,19 @@ public class DestroyAi extends SpellAbilityAi {
                 list.remove(choice);
                 sa.getTargets().add(choice);
             }
-        }
-        else if (sa.hasParam("Defined")) {
+        } else if (sa.hasParam("Defined")) {
             list = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
             if ("WillSkipTurn".equals(logic) && (sa.getHostCard().getController().equals(ai)
-                    || ai.getCreaturesInPlay().size() < ai.getOpponent().getCreaturesInPlay().size()
-                    || !source.getGame().getPhaseHandler().isPlayerTurn(ai)
-                    || ai.getLife() <= 5)) {
+                || ai.getCreaturesInPlay().size() < ai.getOpponent().getCreaturesInPlay().size()
+                || !source.getGame().getPhaseHandler().isPlayerTurn(ai)
+                || ai.getLife() <= 5)) {
                 // Basic ai logic for Lethal Vapors
                 return false;
             }
 
             if (list.isEmpty()
-                    || !CardLists.filterControlledBy(list, ai).isEmpty()
-                    || CardLists.getNotKeyword(list, "Indestructible").isEmpty()) {
+                || !CardLists.filterControlledBy(list, ai).isEmpty()
+                || CardLists.getNotKeyword(list, "Indestructible").isEmpty()) {
                 return false;
             }
         }
