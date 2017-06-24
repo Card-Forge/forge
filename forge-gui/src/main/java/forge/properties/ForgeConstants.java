@@ -80,8 +80,9 @@ public final class ForgeConstants {
     private static final String CONQUEST_DIR       = RES_DIR + "conquest" + PATH_SEPARATOR;
     public static final String CONQUEST_PLANES_DIR = CONQUEST_DIR + "planes" + PATH_SEPARATOR;
 
-    public static final String SKINS_DIR         = RES_DIR + "skins" + PATH_SEPARATOR;
-    public static final String DEFAULT_SKINS_DIR = SKINS_DIR + "default" + PATH_SEPARATOR;
+    public static final String SKINS_DIR              = RES_DIR + "skins" + PATH_SEPARATOR;
+    public static final String COMMON_FONTS_DIR       = RES_DIR + "fonts" + PATH_SEPARATOR;
+    public static final String DEFAULT_SKINS_DIR      = SKINS_DIR + "default" + PATH_SEPARATOR;
     //don't associate these skin files with a directory since skin directory will be determined later
     public static final String SPRITE_ICONS_FILE      = "sprite_icons.png";
     public static final String SPRITE_FOILS_FILE      = "sprite_foils.png";
@@ -202,6 +203,31 @@ public final class ForgeConstants {
     // Constants for Auto-Yield Mode
     public static final String AUTO_YIELD_PER_CARD = "Per Card (Each Game)";
     public static final String AUTO_YIELD_PER_ABILITY = "Per Ability (Each Match)";
+
+    public enum CounterDisplayLocation {
+
+        TOP("Top of Card"), BOTTOM("Bottom of Card");
+
+        private String name;
+
+        CounterDisplayLocation(final String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public static CounterDisplayLocation from(final String name) {
+            for (CounterDisplayLocation counterDisplayLocation : values()) {
+                if (counterDisplayLocation.name.equals(name)) {
+                    return counterDisplayLocation;
+                }
+            }
+            throw new IllegalArgumentException("Counter display location '" + name + "' not found.");
+        }
+
+    }
 
     public enum CounterDisplayType {
 

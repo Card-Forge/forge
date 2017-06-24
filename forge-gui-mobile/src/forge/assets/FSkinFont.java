@@ -1,9 +1,5 @@
 package forge.assets;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
@@ -20,11 +16,14 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Array;
-
 import forge.FThreads;
 import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.Utils;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FSkinFont {
     private static final int MIN_FONT_SIZE = 8;
@@ -127,8 +126,7 @@ public class FSkinFont {
         font.setColor(color);
         if (wrap) {
             font.drawWrapped(batch, text, x, y, w, horzAlignment);
-        }
-        else {
+        } else {
             font.drawMultiLine(batch, text, x, y, w, horzAlignment);
         }
     }
@@ -152,8 +150,7 @@ public class FSkinFont {
         if (scale != 1) { //re-use font inside range if possible
             if (fontSize > MAX_FONT_SIZE) {
                 font = _get(MAX_FONT_SIZE).font;
-            }
-            else {
+            } else {
                 font = _get(MIN_FONT_SIZE).font;
             }
             return;
@@ -169,9 +166,7 @@ public class FSkinFont {
                     font = new BitmapFont(data, (TextureRegion)null, true);
                 }
             });
-            return;
-        }
-        else {
+        } else {
             generateFont(FSkin.getSkinFile(TTF_FILE), fontName, fontSize);
         }
     }
@@ -226,7 +221,7 @@ public class FSkinFont {
                 if (pixmapDir != null) {
                     FileHandle fontFile = pixmapDir.child(fontName + ".fnt");
                     BitmapFontWriter.setOutputFormat(BitmapFontWriter.OutputFormat.Text);
-    
+
                     String[] pageRefs = BitmapFontWriter.writePixmaps(packer.getPages(), pixmapDir, fontName);
                     BitmapFontWriter.writeFont(font.getData(), pageRefs, fontFile, new BitmapFontWriter.FontInfo(fontName, fontSize), 1, 1);
                 }

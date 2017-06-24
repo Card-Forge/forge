@@ -29,6 +29,7 @@ import forge.game.card.CounterType;
 import forge.gui.CardContainer;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.properties.ForgeConstants;
 import forge.properties.ForgeConstants.CounterDisplayType;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
@@ -45,6 +46,7 @@ import java.awt.font.TextAttribute;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -99,7 +101,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         try {
 
-            Font roboto = Font.createFont(Font.TRUETYPE_FONT, CardPanel.class.getClassLoader().getResourceAsStream("Roboto-Bold.ttf"));
+            Font roboto = Font.createFont(Font.TRUETYPE_FONT, Paths.get(ForgeConstants.COMMON_FONTS_DIR, "Roboto-Bold.ttf").toFile());
 
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(roboto);
@@ -108,7 +110,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
             attributes.put(TextAttribute.FAMILY, "Roboto Bold");
             attributes.put(TextAttribute.WEIGHT, TextAttribute.WEIGHT_BOLD);
-            attributes.put(TextAttribute.SIZE, 10);
+            attributes.put(TextAttribute.SIZE, 11);
             attributes.put(TextAttribute.KERNING, TextAttribute.KERNING_ON);
 
             smallCounterFont = Font.getFont(attributes);
@@ -437,7 +439,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
 
 
-        if (card.getCounters() != null) {
+        if (card.getCounters() != null && !card.getCounters().isEmpty()) {
 
             switch (CounterDisplayType.from(FModel.getPreferences().getPref(FPref.UI_CARD_COUNTER_DISPLAY_TYPE))) {
                 case OLD_WHEN_SMALL:
@@ -517,7 +519,13 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             final int numberOfCounters = counterEntry.getValue();
             final int counterBoxRealWidth = counterBoxBaseWidth + largeFontMetrics.stringWidth(String.valueOf(numberOfCounters));
 
-            final int counterYOffset = cardYOffset + spaceFromTopOfCard - counterBoxHeight + currentCounter++ * (counterBoxHeight + counterBoxSpacing);
+            final int counterYOffset;
+
+            if (ForgeConstants.CounterDisplayLocation.from(FModel.getPreferences().getPref(FPref.UI_CARD_COUNTER_DISPLAY_LOCATION)) == ForgeConstants.CounterDisplayLocation.TOP) {
+                counterYOffset = cardYOffset + spaceFromTopOfCard - counterBoxHeight + currentCounter++ * (counterBoxHeight + counterBoxSpacing);
+            } else {
+                counterYOffset = cardYOffset + cardHeight - spaceFromTopOfCard / 2 - counterBoxHeight + currentCounter++ * (counterBoxHeight + counterBoxSpacing);
+            }
 
             if (isSelected) {
                 g.setColor(new Color(0, 0, 0, 255));
@@ -537,7 +545,8 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             }
 
             Rectangle nameBounds = counterArea.getBounds();
-            nameBounds.x += 12;
+            nameBounds.x += 8;
+            nameBounds.y -= 1;
             nameBounds.width = 43;
             drawVerticallyCenteredString(g, counter.getCounterOnCardDisplayName(), nameBounds, smallCounterFont, smallFontMetrics);
 

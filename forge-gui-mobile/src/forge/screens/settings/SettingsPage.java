@@ -133,7 +133,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_AUTO_YIELD_MODE,
                 "Auto-Yield",
                 "Defines the granularity level of auto-yields (yield to each unique ability or to each unique card).",
-                new String[]{ForgeConstants.AUTO_YIELD_PER_ABILITY, ForgeConstants.AUTO_YIELD_PER_CARD}), 
+                new String[]{ForgeConstants.AUTO_YIELD_PER_ABILITY, ForgeConstants.AUTO_YIELD_PER_CARD}),
                 1);
 
         //Random Deck Generation
@@ -214,9 +214,17 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 "Detailed Card Color",
                 "Displays the breakdown of the current color of cards in the card detail information panel.",
                 new String[]{
-                    ForgeConstants.DISP_CURRENT_COLORS_NEVER, ForgeConstants.DISP_CURRENT_COLORS_MULTICOLOR, 
+                    ForgeConstants.DISP_CURRENT_COLORS_NEVER, ForgeConstants.DISP_CURRENT_COLORS_MULTICOLOR,
                     ForgeConstants.DISP_CURRENT_COLORS_CHANGED, ForgeConstants.DISP_CURRENT_COLORS_MULTI_OR_CHANGED,
                     ForgeConstants.DISP_CURRENT_COLORS_ALWAYS}),
+                4);
+
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_CARD_COUNTER_DISPLAY_TYPE,
+                        "Counter Display Type",
+                        "Selects the style of the in-game counter display for cards. Text-based is a new tab-like display on the cards. Image-based is the old counter image. Hybrid displays both at once.",
+                        new String[]{
+                                ForgeConstants.CounterDisplayType.TEXT.getName(), ForgeConstants.CounterDisplayType.IMAGE.getName(),
+                                ForgeConstants.CounterDisplayType.HYBRID.getName(), ForgeConstants.CounterDisplayType.OLD_WHEN_SMALL.getName()}),
                 4);
 
         //Card Overlays

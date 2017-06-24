@@ -103,6 +103,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FComboBoxPanel<String> cbpDisplayCurrentCardColors = new FComboBoxPanel<>("Show Detailed Card Color:");
     private final FComboBoxPanel<String> cbpAutoYieldMode = new FComboBoxPanel<>("Auto-Yield:");
     private final FComboBoxPanel<String> cbpCounterDisplayType = new FComboBoxPanel<>("Counter Display Type:");
+    private final FComboBoxPanel<String> cbpCounterDisplayLocation = new FComboBoxPanel<>("Counter Display Location:");
 
     /**
      * Constructor.
@@ -279,6 +280,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbpCounterDisplayType, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel("Selects the style of the in-game counter display for cards. Text-based is a new tab-like display on the cards. Image-based is the old counter image. Hybrid displays both at once."), descriptionConstraints);
+
+        pnlPrefs.add(cbpCounterDisplayLocation, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel("Determines where to position the text-based counters on the card: close to the top or close to the bottom."), descriptionConstraints);
 
         pnlPrefs.add(cbpDisplayCurrentCardColors, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel("Displays the breakdown of the current color of cards in the card detail information panel."), descriptionConstraints);
@@ -591,6 +595,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public FComboBoxPanel<String> getCounterDisplayTypeComboBoxPanel() {
         return cbpCounterDisplayType;
+    }
+
+    public FComboBoxPanel<String> getCounterDisplayLocationComboBoxPanel() {
+        return cbpCounterDisplayLocation;
     }
 
     /** @return {@link javax.swing.JCheckBox} */

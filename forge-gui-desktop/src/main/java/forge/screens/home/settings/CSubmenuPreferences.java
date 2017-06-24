@@ -195,6 +195,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeColorIdentityCombobox();
         initializeAutoYieldModeComboBox();
         initializeCounterDisplayTypeComboBox();
+        initializeCounterDisplayLocationComboBox();
         initializePlayerNameButton();
     }
 
@@ -352,6 +353,25 @@ public enum CSubmenuPreferences implements ICDoc {
 
         final FPref userSetting = FPref.UI_CARD_COUNTER_DISPLAY_TYPE;
         final FComboBoxPanel<String> panel = this.view.getCounterDisplayTypeComboBoxPanel();
+
+        final FComboBox<String> comboBox = createComboBox(elements, userSetting);
+        final String selectedItem = this.prefs.getPref(userSetting);
+
+        panel.setComboBox(comboBox, selectedItem);
+
+    }
+
+    private void initializeCounterDisplayLocationComboBox() {
+
+        final String[] elements = new String[ForgeConstants.CounterDisplayLocation.values().length];
+
+        ForgeConstants.CounterDisplayLocation[] values = ForgeConstants.CounterDisplayLocation.values();
+        for (int i = 0; i < values.length; i++) {
+            elements[i] = values[i].getName();
+        }
+
+        final FPref userSetting = FPref.UI_CARD_COUNTER_DISPLAY_LOCATION;
+        final FComboBoxPanel<String> panel = this.view.getCounterDisplayLocationComboBoxPanel();
 
         final FComboBox<String> comboBox = createComboBox(elements, userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);

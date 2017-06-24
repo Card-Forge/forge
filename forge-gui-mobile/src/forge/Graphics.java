@@ -1,15 +1,13 @@
 package forge;
 
-import java.util.Stack;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Matrix4;
@@ -17,12 +15,13 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
-
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
+
+import java.util.Stack;
 
 public class Graphics {
     private static final int GL_BLEND = GL20.GL_BLEND;
@@ -60,6 +59,10 @@ public class Graphics {
     public void dispose() {
         batch.dispose();
         shapeRenderer.dispose();
+    }
+
+    public SpriteBatch getBatch() {
+        return batch;
     }
 
     public boolean startClip() {
@@ -138,7 +141,7 @@ public class Graphics {
             }
             else if (displayObj.getRotate180()) { //use center of bounds as pivot point
                 startRotateTransform(displayObj.getWidth() / 2, displayObj.getHeight() / 2, 180);
-                //screen position won't change for this object from a 180 degree rotation 
+                //screen position won't change for this object from a 180 degree rotation
             }
 
             displayObj.draw(this);
@@ -546,10 +549,10 @@ public class Graphics {
     public void drawRepeatingImage(Texture image, float x, float y, float w, float h) {
         if (startClip(x, y, w, h)) { //only render if clip successful, otherwise it will escape bounds
             int tilesW = (int)(w / image.getWidth()) + 1;
-            int tilesH = (int)(h / image.getHeight()) + 1;  
+            int tilesH = (int)(h / image.getHeight()) + 1;
             batch.draw(image, adjustX(x), adjustY(y, h),
-                    image.getWidth() * tilesW, 
-                    image.getHeight() * tilesH, 
+                    image.getWidth() * tilesW,
+                    image.getHeight() * tilesH,
                     0, tilesH, tilesW, 0);
         }
         endClip();
@@ -617,7 +620,7 @@ public class Graphics {
         else {
             textBounds = font.getMultiLineBounds(text);
         }
-        
+
         boolean needClip = false;
 
         while (textBounds.width > w || textBounds.height > h) {
@@ -667,11 +670,11 @@ public class Graphics {
         drawText(text, skinFont, textColor, x, y, w, h, wrap, horzAlignment, centerVertically);
     }
 
-    private float adjustX(float x) {
+    public float adjustX(float x) {
         return x + bounds.x;
     }
 
-    private float adjustY(float y, float height) {
+    public float adjustY(float y, float height) {
         return regionHeight - y - bounds.y - height; //flip y-axis
     }
 }

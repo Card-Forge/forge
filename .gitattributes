@@ -1174,7 +1174,6 @@ forge-gui-desktop/src/main/java/forge/view/arcane/util/CardPanelMouseListener.ja
 forge-gui-desktop/src/main/java/forge/view/arcane/util/OutlinedLabel.java -text
 forge-gui-desktop/src/main/java/forge/view/arcane/util/package-info.java -text
 forge-gui-desktop/src/main/java/forge/view/package-info.java -text
-forge-gui-desktop/src/main/resources/Roboto-Bold.ttf -text
 forge-gui-desktop/src/test/java/forge/BoosterDraft1Test.java -text
 forge-gui-desktop/src/test/java/forge/BoosterDraftTest.java -text
 forge-gui-desktop/src/test/java/forge/CardRankerTest.java -text
@@ -19084,6 +19083,7 @@ forge-gui/res/editions/Worldwake.txt -text
 forge-gui/res/editions/Zendikar[!!-~]Expeditions.txt -text
 forge-gui/res/editions/Zendikar.txt -text
 forge-gui/res/effects/lightning.gif -text
+forge-gui/res/fonts/Roboto-Bold.ttf -text
 forge-gui/res/howto.txt svneol=native#text/plain
 forge-gui/res/languages/en-US.properties -text
 forge-gui/res/licenses/java-yield-license.txt svneol=native#text/plain

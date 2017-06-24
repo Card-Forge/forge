@@ -1,39 +1,46 @@
 package forge.card;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
+import com.badlogic.gdx.graphics.g2d.PixmapPacker;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
+import com.badlogic.gdx.utils.Array;
+import forge.FThreads;
 import forge.Graphics;
 import forge.StaticData;
-import forge.assets.FImageComplex;
-import forge.assets.FRotatedImage;
-import forge.assets.FSkinColor;
-import forge.assets.FSkinFont;
-import forge.assets.FSkinImage;
-import forge.assets.FTextureRegionImage;
-import forge.assets.ImageCache;
+import forge.assets.*;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.CardZoom.ActivateHandler;
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.card.CounterType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.properties.ForgeConstants;
+import forge.properties.ForgeConstants.CounterDisplayType;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.MatchController;
 import forge.toolbox.FList;
 import forge.util.Utils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class CardRenderer {
     public enum CardStackPosition {
@@ -52,6 +59,16 @@ public class CardRenderer {
     private static final float NAME_COST_THRESHOLD = Utils.scale(200);
     private static final float BORDER_THICKNESS = Utils.scale(1);
     public static final float PADDING_MULTIPLIER = 0.021f;
+
+    private static BitmapFont counterFont;
+    private static final Color counterBackgroundColor = new Color(0f, 0f, 0f, 0.9f);
+    private static final Map<CounterType, Color> counterColorCache = new HashMap<>();
+
+    static {
+        if (counterFont == null) {
+            generateFontForCounters();
+        }
+    }
 
     private static Color fromDetailColor(DetailColors detailColor) {
         return FSkinColor.fromRGB(detailColor.r, detailColor.g, detailColor.b);
@@ -88,10 +105,12 @@ public class CardRenderer {
         CardType type = pc.getRules().getType();
         return getCardArt(pc.getImageKey(false), pc.getRules().getSplitType() == CardSplitType.Split, type.isPlane() || type.isPhenomenon(),pc.getRules().getOracleText().contains("Aftermath"));
     }
+
     public static FImageComplex getCardArt(CardView card) {
         CardTypeView type = card.getCurrentState().getType();
         return getCardArt(card.getCurrentState().getImageKey(), card.isSplitCard(), type.isPlane() || type.isPhenomenon(),card.getText().contains("Aftermath"));
     }
+
     public static FImageComplex getCardArt(String imageKey, boolean isSplitCard, boolean isHorizontalCard, boolean isAftermathCard) {
         FImageComplex cardArt = cardArtCache.get(imageKey);
         if (cardArt == null) {
@@ -181,8 +200,6 @@ public class CardRenderer {
         return cardArt;
     }
 
-
-
     public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, CardView card, int count, String suffix, float x, float y, float w, float h, boolean compactMode) {
         final CardStateView state = card.getCurrentState();
         if (card.getId() > 0) {
@@ -201,6 +218,7 @@ public class CardRenderer {
             g.drawText(name, font, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
         }
     }
+
     public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, IPaperCard pc, int count, String suffix, float x, float y, float w, float h, boolean compactMode) {
         final CardView card = CardView.getCardForUi(pc);
         final CardStateView state = card.getCurrentState();
@@ -208,6 +226,7 @@ public class CardRenderer {
                 pc.getRarity(), state.getPower(), state.getToughness(),
                 state.getLoyalty(), count, suffix, x, y, w, h, compactMode);
     }
+
     public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, FImageComplex cardArt, CardView card, String set, CardRarity rarity, int power, int toughness, int loyalty, int count, String suffix, float x, float y, float w, float h, boolean compactMode) {
         float cardArtHeight = h + 2 * FList.PADDING;
         float cardArtWidth = cardArtHeight * CARD_ART_RATIO;
@@ -295,6 +314,7 @@ public class CardRenderer {
         }
         return false;
     }
+
     public static boolean paperCardListItemTap(List<?> cards, int selectedIndex, ActivateHandler activateHandler, float x, float y, int count, boolean compactMode) {
         float cardArtHeight = getCardListItemHeight(compactMode);
         float cardArtWidth = cardArtHeight * CARD_ART_RATIO;
@@ -337,6 +357,7 @@ public class CardRenderer {
             g.fillRect(Color.BLACK, x, y, w, h);
         }
     }
+
     public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos) {
         Texture image = ImageCache.getImage(card);
         if (image != null) {
@@ -406,36 +427,28 @@ public class CardRenderer {
             g.drawOutlinedText(String.valueOf(card.getId()), idFont, Color.WHITE, Color.BLACK, x + padding, y + h - idHeight - padding, w, h, false, HAlignment.LEFT, false);
         }
 
-        int number = 0;
-        if (card.getCounters() != null) {
-            for (final Integer i : card.getCounters().values()) {
-                number += i.intValue();
+        if (card.getCounters() != null && !card.getCounters().isEmpty()) {
+
+            switch (CounterDisplayType.from(FModel.getPreferences().getPref(FPref.UI_CARD_COUNTER_DISPLAY_TYPE))) {
+                case OLD_WHEN_SMALL:
+                case TEXT:
+                    drawCounterTabs(card, g, x, y, w, h);
+                    break;
+                case IMAGE:
+                    drawCounterImage(card, g, x, y, w, h);
+                    break;
+                case HYBRID:
+                    drawCounterImage(card, g, x, y, w, h);
+                    drawCounterTabs(card, g, x, y, w, h);
+                    break;
             }
+
         }
 
-        final int counters = number;
-
-        float countersSize = w / 2;
-        final float xCounters = x - countersSize / 2;
-        final float yCounters = y + h * 2 / 3 - countersSize;
-
-        if (counters == 1) {
-            CardFaceSymbols.drawSymbol("counters1", g, xCounters, yCounters, countersSize, countersSize);
-        }
-        else if (counters == 2) {
-            CardFaceSymbols.drawSymbol("counters2", g, xCounters, yCounters, countersSize, countersSize);
-        }
-        else if (counters == 3) {
-            CardFaceSymbols.drawSymbol("counters3", g, xCounters, yCounters, countersSize, countersSize);
-        }
-        else if (counters > 3) {
-            CardFaceSymbols.drawSymbol("countersMulti", g, xCounters, yCounters, countersSize, countersSize);
-        }
-
-        float otherSymbolsSize = w / 2;
-        final float combatXSymbols = (x + (w / 4)) - otherSymbolsSize / 2;
-        final float stateXSymbols = (x + (w / 2)) - otherSymbolsSize / 2;
-        final float ySymbols = (y + h) - (h / 8) - otherSymbolsSize / 2;
+        float otherSymbolsSize = w / 3.5f;
+        final float combatXSymbols = (x + (w / 4)) - otherSymbolsSize / 2 - 10;
+        final float stateXSymbols = (x + (w / 2)) - otherSymbolsSize / 2 - 10;
+        final float ySymbols = (y + h) - (h / 12) - otherSymbolsSize / 2;
 
         if (card.isAttacking()) {
             CardFaceSymbols.drawSymbol("attack", g, combatXSymbols, ySymbols, otherSymbolsSize, otherSymbolsSize);
@@ -462,6 +475,111 @@ public class CardRenderer {
             //only needed if on top since otherwise P/T will be hidden
             drawPtBox(g, card, details, color, x, y, w, h);
         }
+
+    }
+
+    private static void drawCounterTabs(final CardView card, final Graphics g, final float x, final float y, final float w, final float h) {
+
+        float otherSymbolsSize = w / 3.5f;
+        final float ySymbols = (h / 12) - otherSymbolsSize / 2;
+
+        final float counterBoxHeight = 20;
+        final float counterBoxBaseWidth = 50;
+        final float counterBoxSpacing = -4;
+
+        final float spaceFromTopOfCard = y + h - counterBoxHeight - counterBoxSpacing - otherSymbolsSize + ySymbols;
+
+        int currentCounter = 0;
+
+        if (CounterDisplayType.from(FModel.getPreferences().getPref(FPref.UI_CARD_COUNTER_DISPLAY_TYPE)) == CounterDisplayType.OLD_WHEN_SMALL) {
+
+            int maxCounters = 0;
+            for (Integer numberOfCounters : card.getCounters().values()) {
+                maxCounters = Math.max(maxCounters, numberOfCounters);
+            }
+
+            if (counterBoxBaseWidth + counterFont.getBounds(String.valueOf(maxCounters)).width > w) {
+                drawCounterImage(card, g, x, y, w, h);
+                return;
+            }
+
+        }
+
+        for (Map.Entry<CounterType, Integer> counterEntry : card.getCounters().entrySet()) {
+
+            final CounterType counter = counterEntry.getKey();
+            final int numberOfCounters = counterEntry.getValue();
+            final float counterBoxRealWidth = counterBoxBaseWidth + counterFont.getBounds(String.valueOf(numberOfCounters)).width + 4;
+
+            final float counterYOffset = spaceFromTopOfCard - (currentCounter++ * (counterBoxHeight + counterBoxSpacing));
+
+            g.fillRect(counterBackgroundColor, x - 2, counterYOffset, counterBoxRealWidth, counterBoxHeight);
+
+            if (!counterColorCache.containsKey(counter)) {
+                counterColorCache.put(counter, new Color(counter.getRed() / 255.0f, counter.getGreen() / 255.0f, counter.getBlue() / 255.0f, 1.0f));
+            }
+
+            Color counterColor = counterColorCache.get(counter);
+
+            drawText(g, counter.getCounterOnCardDisplayName(), counterFont, counterColor, x + 2, counterYOffset, counterBoxRealWidth, counterBoxHeight, HAlignment.LEFT);
+            drawText(g, String.valueOf(numberOfCounters), counterFont, counterColor, x + counterBoxBaseWidth - 3f, counterYOffset, counterBoxRealWidth, counterBoxHeight, HAlignment.LEFT);
+
+        }
+
+    }
+
+    private static final int GL_BLEND = GL20.GL_BLEND;
+
+    private static void drawText(Graphics g, String text, BitmapFont font, Color color, float x, float y, float w, float h, HAlignment horizontalAlignment) {
+
+        if (color.a < 1) { //enable blending so alpha colored shapes work properly
+            Gdx.gl.glEnable(GL_BLEND);
+        }
+
+        TextBounds textBounds = font.getMultiLineBounds(text);
+
+        float textHeight = textBounds.height;
+        if (h > textHeight) {
+            y += (h - textHeight) / 2;
+        }
+
+        font.setColor(color);
+        font.drawMultiLine(g.getBatch(), text, g.adjustX(x), g.adjustY(y, 0), w, horizontalAlignment);
+
+        if (color.a < 1) {
+            Gdx.gl.glDisable(GL_BLEND);
+        }
+
+    }
+
+    private static void drawCounterImage(final CardView card, final Graphics g, final float x, final float y, final float w, final float h) {
+
+        int number = 0;
+        if (card.getCounters() != null) {
+            for (final Integer i : card.getCounters().values()) {
+                number += i;
+            }
+        }
+
+        final int counters = number;
+
+        float countersSize = w / 2;
+        final float xCounters = x - countersSize / 2;
+        final float yCounters = y + h * 2 / 3 - countersSize;
+
+        if (counters == 1) {
+            CardFaceSymbols.drawSymbol("counters1", g, xCounters, yCounters, countersSize, countersSize);
+        }
+        else if (counters == 2) {
+            CardFaceSymbols.drawSymbol("counters2", g, xCounters, yCounters, countersSize, countersSize);
+        }
+        else if (counters == 3) {
+            CardFaceSymbols.drawSymbol("counters3", g, xCounters, yCounters, countersSize, countersSize);
+        }
+        else if (counters > 3) {
+            CardFaceSymbols.drawSymbol("countersMulti", g, xCounters, yCounters, countersSize, countersSize);
+        }
+
     }
 
     private static void drawPtBox(Graphics g, CardView card, CardStateView details, Color color, float x, float y, float w, float h) {
@@ -564,4 +682,66 @@ public class CardRenderer {
     private static boolean showCardIdOverlay(CardView card) {
         return card.getId() > 0 && isShowingOverlays(card) && isPreferenceEnabled(FPref.UI_OVERLAY_CARD_ID);
     }
+
+    //TODO Make FSkinFont accept more than one kind of font and merge this with it
+    private static void generateFontForCounters() {
+
+        FileHandle ttfFile = Gdx.files.absolute(ForgeConstants.COMMON_FONTS_DIR).child("Roboto-Bold.ttf");
+        final int fontSize = 11;
+
+        if (!ttfFile.exists()) { return; }
+
+        final FreeTypeFontGenerator generator = new FreeTypeFontGenerator(ttfFile);
+
+        //approximate optimal page size
+        int pageSize = 128;
+
+        //only generate images for characters that could be used by Forge
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890\"!?'.,;:()[]{}<>|/@\\^$-%+=#_&*\u2014\u2022";
+
+        final PixmapPacker packer = new PixmapPacker(pageSize, pageSize, Pixmap.Format.RGBA8888, 2, false);
+        final FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+        parameter.characters = chars;
+        parameter.size = fontSize;
+        parameter.packer = packer;
+        final FreeTypeFontGenerator.FreeTypeBitmapFontData fontData = generator.generateData(parameter);
+        final Array<PixmapPacker.Page> pages = packer.getPages();
+
+        //finish generating font on UI thread
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
+            @Override
+            public void run() {
+                TextureRegion[] textureRegions = new TextureRegion[pages.size];
+                for (int i = 0; i < pages.size; i++) {
+                    PixmapPacker.Page p = pages.get(i);
+                    Texture texture = new Texture(new PixmapTextureData(p.getPixmap(), p.getPixmap().getFormat(), false, false)) {
+                        @Override
+                        public void dispose() {
+                            super.dispose();
+                            getTextureData().consumePixmap().dispose();
+                        }
+                    };
+                    texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+                    textureRegions[i] = new TextureRegion(texture);
+                }
+
+                counterFont = new BitmapFont(fontData, textureRegions, true);
+
+                //create .fnt and .png files for font
+                FileHandle pixmapDir = Gdx.files.absolute(ForgeConstants.FONTS_DIR);
+                if (pixmapDir != null) {
+                    FileHandle fontFile = pixmapDir.child("Roboto-Bold.fnt");
+                    BitmapFontWriter.setOutputFormat(BitmapFontWriter.OutputFormat.Text);
+
+                    String[] pageRefs = BitmapFontWriter.writePixmaps(packer.getPages(), pixmapDir, "Roboto-Bold");
+                    BitmapFontWriter.writeFont(counterFont.getData(), pageRefs, fontFile, new BitmapFontWriter.FontInfo("Roboto-Bold", fontSize), 1, 1);
+                }
+
+                generator.dispose();
+                packer.dispose();
+            }
+        });
+
+    }
+
 }
