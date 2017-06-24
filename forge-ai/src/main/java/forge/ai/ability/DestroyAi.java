@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import forge.ai.AiController;
 import forge.ai.AiProps;
 
@@ -75,7 +76,23 @@ public class DestroyAi extends SpellAbilityAi {
                 sa.setTargetingPlayer(targetingPlayer);
                 return targetingPlayer.getController().chooseTargetsFor(sa);
             }
-        	if ("Polymorph".equals(logic)) {
+            if ("SarkhanDragon".equals(logic)) {
+                // TODO: expand this logic to make the AI force the opponent to sacrifice a big threat bigger than a 5/5 flier?
+                CardCollection creatures = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+                boolean hasValidTgt = !CardLists.filter(creatures, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(Card t) {
+                        return t.getCurrentPower() < 5 && t.getCurrentToughness() < 5;
+                    }
+                }
+                ).isEmpty();
+                if (hasValidTgt) {
+                    Card worstCreature = ComputerUtilCard.getWorstCreatureAI(creatures);
+                    sa.getTargets().add(worstCreature);
+                    return true;
+                }
+                return false;
+            } else if ("Polymorph".equals(logic)) {
         		list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
         		if (list.isEmpty()) {
         			return false;
