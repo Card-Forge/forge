@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class DialogChooseSets {
+
 	private final List<String> selectedSets = new ArrayList<>();
 	private boolean wantReprints = true;
 	private Runnable okCallback;
@@ -25,8 +26,7 @@ public class DialogChooseSets {
 	private final FCheckBox cbWantReprints = new FCheckBox("Allow compatible reprints from other sets");
 
 	// lists are of set codes (e.g. "2ED")
-	public DialogChooseSets(
-			Collection<String> preselectedSets, Collection<String> unselectableSets, boolean showWantReprintsCheckbox) {
+	public DialogChooseSets(Collection<String> preselectedSets, Collection<String> unselectableSets, boolean showWantReprintsCheckbox) {
 
 		// create a local copy of the editions list so we can sort it
 		List<CardEdition> editions = new ArrayList<>();
