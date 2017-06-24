@@ -227,8 +227,7 @@ public class DestroyAi extends SpellAbilityAi {
                             return true;    // becomes Terminate
                         } else {
                             if (source.getGame().getPhaseHandler().getPhase()
-                                .isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                                || // prevent surprise combatant
+                                .isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS) || // prevent surprise combatant
                                 ComputerUtilCard.evaluateCreature(choice) < 1.5
                                 * ComputerUtilCard.evaluateCreature(token)) {
                                 return false;
