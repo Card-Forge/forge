@@ -797,7 +797,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         //determine list of all cards to reveal to player in addition to those that can be chosen
         DelayedReveal delayedReveal = null;
-        if (!defined) {
+        if (!defined && !sa.hasParam("AlreadyRevealed")) {
             if (origin.contains(ZoneType.Library) && searchedLibrary) {
                 final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
                 CardCollectionView shown = !decider.hasKeyword("LimitSearchLibrary") ? player.getCardsIn(ZoneType.Library) : player.getCardsIn(ZoneType.Library, fetchNum);
