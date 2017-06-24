@@ -3,7 +3,8 @@ package forge.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RuntimeVersion {
+@SuppressWarnings("unused")
+public final class RuntimeVersion {
 
 	private static Pattern versionNumberPattern = Pattern.compile("([1-9][0-9]*((\\.0)*\\.[0-9]*)*(_[0-9]+)?)");
 	private static Pattern preReleasePattern = Pattern.compile("([a-zA-Z0-9]+)");
@@ -24,7 +25,6 @@ public class RuntimeVersion {
 	private int buildNumber;
 	private String buildInformation;
 
-	@SuppressWarnings("ResultOfMethodCallIgnored")
 	private RuntimeVersion(final String versionString) {
 
 		Matcher matcher = versionNumberPattern.matcher(versionString);
@@ -100,6 +100,11 @@ public class RuntimeVersion {
 
 	public static RuntimeVersion of(final String versionString) {
 		return new RuntimeVersion(versionString);
+	}
+
+	@Override
+	public String toString() {
+		return "1." + minor + "." + securityLevel + "_" + update;
 	}
 
 	public int getMajor() {

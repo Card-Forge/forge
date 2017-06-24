@@ -20,10 +20,11 @@ package forge.properties;
 import forge.game.GameLogEntryType;
 
 public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
+
     /**
-     * Preference identifiers, and their default values.
+     * Preference identifiers and their default values.
      */
-    public static enum FPref {
+    public enum FPref {
         PLAYER_NAME (""),
         CONSTRUCTED_P1_DECK_STATE(""),
         CONSTRUCTED_P2_DECK_STATE(""),
@@ -98,6 +99,10 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_VIBRATE_ON_LONG_PRESS("true"),
 
         UI_LANGUAGE("en-US"),
+
+        /** This is used to disable the future version compatibility warning dialog for Java 8. */
+        //TODO This should be removed after the update that requires Java 8.
+        DISABLE_DISPLAY_JAVA_8_UPDATE_WARNING("false"),
 
         MATCH_HOT_SEAT_MODE("false"), //this only applies to mobile game
         MATCHPREF_PROMPT_FREE_BLOCKS("false"),

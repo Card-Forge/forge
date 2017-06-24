@@ -51,6 +51,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FLabel btnDeleteWorkshopUI = new FLabel.Builder().opaque(true).hoverable(true).text("Reset Workshop Layout").build();
     private final FLabel btnUserProfileUI = new FLabel.Builder().opaque(true).hoverable(true).text("Open User Directory").build();
     private final FLabel btnContentDirectoryUI = new FLabel.Builder().opaque(true).hoverable(true).text("Open Content Directory").build();
+    private final FLabel btnResetJavaFutureCompatibilityWarnings = new FLabel.Builder().opaque(true).hoverable(true).text("Reset Java Compatibility Warnings").build();
     private final FLabel btnPlayerName = new FLabel.Builder().opaque(true).hoverable(true).text("").build();
 
     private final JCheckBox cbRemoveSmall = new OptionsCheckBox("Remove Small Creatures");
@@ -138,6 +139,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbCompactMainMenu, titleConstraints);
         pnlPrefs.add(new NoteLabel("Enable for a space efficient sidebar that displays only one menu group at a time (RESTART REQUIRED)."), descriptionConstraints);
+
+        pnlPrefs.add(btnResetJavaFutureCompatibilityWarnings, "w 300px!, h 30px!, gap 10% 0 0 20px, span 2 1");
 
         // Gameplay Options
         pnlPrefs.add(new SectionLabel("Gameplay"), sectionConstraints);
@@ -700,9 +703,13 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public final FLabel getBtnUserProfileUI() { return btnUserProfileUI; }
 
+    public final FLabel getBtnResetJavaFutureCompatibilityWarnings() {
+        return btnResetJavaFutureCompatibilityWarnings;
+    }
+
     /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#getDocumentID()
-     */
+		 * @see forge.gui.framework.IVDoc#getDocumentID()
+		 */
     @Override
     public EDocID getDocumentID() {
         return EDocID.HOME_PREFERENCES;

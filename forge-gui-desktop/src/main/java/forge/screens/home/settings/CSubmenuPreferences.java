@@ -173,6 +173,15 @@ public enum CSubmenuPreferences implements ICDoc {
             }
         });
 
+        view.getBtnResetJavaFutureCompatibilityWarnings().setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                prefs.setPref(FPref.DISABLE_DISPLAY_JAVA_8_UPDATE_WARNING, false);
+                prefs.save();
+                FOptionPane.showMessageDialog("Compatibility warnings re-enabled!");
+            }
+        });
+
         view.getBtnContentDirectoryUI().setCommand(new UiCommand() {
             @Override
             public void run() {

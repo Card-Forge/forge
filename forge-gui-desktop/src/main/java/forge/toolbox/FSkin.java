@@ -949,6 +949,10 @@ public class FSkin {
             this.updateFont();
         }
 
+        public Font getBaseFont() {
+            return font;
+        }
+
         public int getSize() {
             return this.font.getSize();
         }
