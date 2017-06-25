@@ -9,9 +9,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.MagicStack;
-import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
