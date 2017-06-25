@@ -202,6 +202,11 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
 
                         copy.setType(CardType.parse(newType.toString()));
                     }
+
+                    if (sa.hasParam("SetColor")) {
+                        copy.setColor(sa.getParam("SetColor"));
+                    }
+
                     for (final String type : types) {
                         copy.addType(type);
                     }
@@ -230,11 +235,6 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         } catch (final NumberFormatException e) {
                             power = CardFactoryUtil.xCount(copy, copy.getSVar(rhs));
                         }
-                        for (StaticAbility sta : copy.getStaticAbilities()) {
-                            Map<String, String> params = sta.getMapParams();
-                            if (params.containsKey("CharacteristicDefining") && params.containsKey("SetPower"))
-                                copy.removeStaticAbility(sta);
-                        }
                         copy.setBasePower(power);
                     }
 
@@ -246,11 +246,6 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                             toughness = Integer.parseInt(rhs);
                         } catch (final NumberFormatException e) {
                             toughness = CardFactoryUtil.xCount(copy, copy.getSVar(rhs));
-                        }
-                        for (StaticAbility sta : copy.getStaticAbilities()) {
-                            Map<String, String> params = sta.getMapParams();
-                            if (params.containsKey("CharacteristicDefining") && params.containsKey("SetToughness"))
-                                copy.removeStaticAbility(sta);
                         }
                         copy.setBaseToughness(toughness);
                     }
@@ -280,6 +275,37 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         copy.setImageKey(ImageKeys.getTokenKey("eternalize_" + name));
                     }
                     
+                    // remove some characteristic static abilties
+                    if (sa.hasParam("SetPower") || sa.hasParam("Eternalize")) {
+                        for (StaticAbility sta : copy.getStaticAbilities()) {
+                            Map<String, String> params = sta.getMapParams();
+                            if (params.containsKey("CharacteristicDefining") && params.containsKey("SetPower"))
+                                copy.removeStaticAbility(sta);
+                        }
+                    }
+
+                    if (sa.hasParam("SetToughness") || sa.hasParam("Eternalize")) {
+                        for (StaticAbility sta : copy.getStaticAbilities()) {
+                            Map<String, String> params = sta.getMapParams();
+                            if (params.containsKey("CharacteristicDefining") && params.containsKey("SetToughness"))
+                                copy.removeStaticAbility(sta);
+                        }
+                    }
+
+                    if (sa.hasParam("SetCreatureTypes")) {
+                        for (StaticAbility sta : copy.getStaticAbilities()) {
+                            Map<String, String> params = sta.getMapParams();
+                            if (params.containsKey("CharacteristicDefining") && params.containsKey("AddType"))
+                                copy.removeStaticAbility(sta);
+                        }
+                        copy.removeIntrinsicKeyword("Changeling");
+                    }
+
+                    if (sa.hasParam("SetColor") || sa.hasParam("Embalm") || sa.hasParam("Eternalize")) {
+                        // there is currently no characteristic static ability, but remove Devoid keyword
+                        copy.removeIntrinsicKeyword("Devoid");
+                    }
+
                     copy.updateStateForView();
 
                     // Temporarily register triggers of an object created with CopyPermanent
