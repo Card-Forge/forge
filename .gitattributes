@@ -16957,11 +16957,8 @@ forge-gui/res/cardsfolder/u/uyo_silent_prophet.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/upcoming/abrade.txt -text
 forge-gui/res/cardsfolder/upcoming/accursed_horde.txt -text
 forge-gui/res/cardsfolder/upcoming/adorned_pouncer.txt -text
-forge-gui/res/cardsfolder/upcoming/agent_of_masks.txt -text
-forge-gui/res/cardsfolder/upcoming/akki_rockspeaker.txt -text
 forge-gui/res/cardsfolder/upcoming/angel_of_condemnation.txt -text
 forge-gui/res/cardsfolder/upcoming/angel_of_the_god_pharaoh.txt -text
-forge-gui/res/cardsfolder/upcoming/battleflight_eagle.txt -text
 forge-gui/res/cardsfolder/upcoming/bontus_last_reckoning.txt -text
 forge-gui/res/cardsfolder/upcoming/carrion_screecher.txt -text
 forge-gui/res/cardsfolder/upcoming/chandras_defeat.txt -text
@@ -16977,10 +16974,8 @@ forge-gui/res/cardsfolder/upcoming/djeru_with_eyes_open.txt -text
 forge-gui/res/cardsfolder/upcoming/doomfall.txt -text
 forge-gui/res/cardsfolder/upcoming/dreamstealer.txt -text
 forge-gui/res/cardsfolder/upcoming/earthshaker_khenra.txt -text
-forge-gui/res/cardsfolder/upcoming/fanatic_of_mogis.txt -text
 forge-gui/res/cardsfolder/upcoming/farm_market.txt -text
 forge-gui/res/cardsfolder/upcoming/fervent_paincaster.txt -text
-forge-gui/res/cardsfolder/upcoming/fevered_convulsions.txt -text
 forge-gui/res/cardsfolder/upcoming/fraying_sanity.txt -text
 forge-gui/res/cardsfolder/upcoming/gideons_defeat.txt -text
 forge-gui/res/cardsfolder/upcoming/gilded_cerodon.txt -text
@@ -16993,7 +16988,6 @@ forge-gui/res/cardsfolder/upcoming/khenra_eternal.txt -text
 forge-gui/res/cardsfolder/upcoming/khenra_scrapper.txt -text
 forge-gui/res/cardsfolder/upcoming/lilianas_defeat.txt -text
 forge-gui/res/cardsfolder/upcoming/marauding_boneslasher.txt -text
-forge-gui/res/cardsfolder/upcoming/messenger_falcons.txt -text
 forge-gui/res/cardsfolder/upcoming/neheb_the_eternal.txt -text
 forge-gui/res/cardsfolder/upcoming/nicol_bolas_god_pharaoh.txt -text
 forge-gui/res/cardsfolder/upcoming/nimble_obstructionist.txt -text
@@ -17008,7 +17002,6 @@ forge-gui/res/cardsfolder/upcoming/ramunap_excavator.txt -text
 forge-gui/res/cardsfolder/upcoming/ramunap_hydra.txt -text
 forge-gui/res/cardsfolder/upcoming/razaketh_the_foulblooded.txt -text
 forge-gui/res/cardsfolder/upcoming/reason_believe.txt -text
-forge-gui/res/cardsfolder/upcoming/reclusive_artificer.txt -text
 forge-gui/res/cardsfolder/upcoming/resilient_khenra.txt -text
 forge-gui/res/cardsfolder/upcoming/resolute_survivors.txt -text
 forge-gui/res/cardsfolder/upcoming/rhonass_last_stand.txt -text
@@ -17030,7 +17023,6 @@ forge-gui/res/cardsfolder/upcoming/torment_of_venom.txt -text
 forge-gui/res/cardsfolder/upcoming/uncage_the_menagerie.txt -text
 forge-gui/res/cardsfolder/upcoming/unesh_criosphinx_sovereign.txt -text
 forge-gui/res/cardsfolder/upcoming/vizier_of_the_true.txt -text
-forge-gui/res/cardsfolder/upcoming/vulshok_sorcerer.txt -text
 forge-gui/res/cardsfolder/upcoming/wildfire_eternal.txt -text
 forge-gui/res/cardsfolder/v/vacuumelt.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/vaevictis_asmadi.txt svneol=native#text/plain
