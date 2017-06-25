@@ -39,6 +39,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class CopyPermanentEffect extends SpellAbilityEffect {
 
@@ -188,8 +189,15 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     for (final String kw : keywords) {
                         copy.addIntrinsicKeyword(kw);
                     }
-                    if (sa.hasParam("SetTypes")) {
-                        copy.setType(CardType.parse(sa.getParam("SetTypes")));
+                    if (sa.hasParam("SetCreatureTypes")) {
+                        String typeLine = "";
+                        for (CardType.Supertype st : copy.getType().getSupertypes()) {
+                            typeLine += st.name() + " ";
+                        }
+                        for (CardType.CoreType ct : copy.getType().getCoreTypes()) {
+                            typeLine += ct.name() + " ";
+                        }
+                        copy.setType(CardType.parse(typeLine + sa.getParam("SetCreatureTypes")));
                     }
                     for (final String type : types) {
                         copy.addType(type);

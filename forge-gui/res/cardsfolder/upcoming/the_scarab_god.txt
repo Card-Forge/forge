@@ -6,7 +6,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X | References$ X | SubAbility$ DBScry
 SVar:DBScry:DB$Scry | ScryNum$ X | References$ X
 A:AB$ ChangeZone | Cost$ 2 U B | RememberLKI$ True | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | ChangeNum$ 1 | SubAbility$ DBCopy | SpellDescription$ Exile target creature card from a graveyard. Create a token that's a copy of it, except it's a 4/4 black Zombie.
-SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | SetPower$ 4 | SetToughness$ 4 | SetColor$ Black | SetTypes$ Creature Zombie | SubAbility$ DBCleanup
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | SetPower$ 4 | SetToughness$ 4 | SetColor$ Black | SetCreatureTypes$ Zombie | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | TriggerController$ TriggeredCardController | Execute$ TrigDelay | TriggerDescription$ When CARDNAME dies, return it to its owner's hand at the beginning of the next end step.
 SVar:TrigDelay:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | RememberObjects$ Self | Execute$ TrigReturn | SpellDescription$ Return that creature to its owner's hand at the beginning of the next end step.
