@@ -65,8 +65,10 @@ public class CardRenderer {
     private static final Map<CounterType, Color> counterColorCache = new HashMap<>();
 
     static {
-        if (counterFont == null) {
+        try {
             generateFontForCounters();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -707,10 +709,12 @@ public class CardRenderer {
         final FreeTypeFontGenerator.FreeTypeBitmapFontData fontData = generator.generateData(parameter);
         final Array<PixmapPacker.Page> pages = packer.getPages();
 
+        //TODO Cache this
         //finish generating font on UI thread
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override
             public void run() {
+
                 TextureRegion[] textureRegions = new TextureRegion[pages.size];
                 for (int i = 0; i < pages.size; i++) {
                     PixmapPacker.Page p = pages.get(i);
@@ -727,18 +731,9 @@ public class CardRenderer {
 
                 counterFont = new BitmapFont(fontData, textureRegions, true);
 
-                //create .fnt and .png files for font
-                FileHandle pixmapDir = Gdx.files.absolute(ForgeConstants.FONTS_DIR);
-                if (pixmapDir != null) {
-                    FileHandle fontFile = pixmapDir.child("Roboto-Bold.fnt");
-                    BitmapFontWriter.setOutputFormat(BitmapFontWriter.OutputFormat.Text);
-
-                    String[] pageRefs = BitmapFontWriter.writePixmaps(packer.getPages(), pixmapDir, "Roboto-Bold");
-                    BitmapFontWriter.writeFont(counterFont.getData(), pageRefs, fontFile, new BitmapFontWriter.FontInfo("Roboto-Bold", fontSize), 1, 1);
-                }
-
                 generator.dispose();
                 packer.dispose();
+
             }
         });
 
