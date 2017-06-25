@@ -22,6 +22,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
+import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 
 public class AiCostDecision extends CostDecisionMakerBase {
@@ -710,6 +711,36 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return result;
         }
 
+        // check if the card defines its own priorities for counter removal as cost
+        if (source.hasSVar("AIRemoveCounterCostPriority")) {
+            String[] counters = TextUtil.split(source.getSVar("AIRemoveCounterCostPriority"), ',');
+            
+            for (final String ctr : counters) {
+                List<Card> withCtr = CardLists.filter(typeList, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card crd) {
+                        for (Map.Entry<CounterType, Integer> e : crd.getCounters().entrySet()) {
+                            if (e.getValue() >= c && (ctr.equals("ANY") || e.getKey() == CounterType.valueOf(ctr))) {
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+                });
+                if (!withCtr.isEmpty()) {
+                    final Card card = withCtr.get(0);
+                    PaymentDecision result = PaymentDecision.card(card);
+
+                    for (Map.Entry<CounterType, Integer> e : card.getCounters().entrySet()) {
+                        if (e.getValue() >= c && (ctr.equals("ANY") || e.getKey() == CounterType.valueOf(ctr))) {
+                            result.ct = e.getKey();
+                            break;
+                        }
+                    }
+                    return result;
+                }
+            }
+        }
         return null;
     }
 
