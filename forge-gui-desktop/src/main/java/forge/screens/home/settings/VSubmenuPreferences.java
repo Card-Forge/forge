@@ -114,16 +114,16 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
 
         // Spacing between components is defined here.
-        final String sectionConstraints = "w 80%!, h 42px!, gap 10% 0 80px 20px, span 2 1";
-        final String titleConstraints = "w 80%!, h 22px!, gap 10% 0 0 0px, span 2 1";
-        final String comboBoxConstraints = "w 80%!, h 25px!, gap 10% 0 0 0px, span 2 1";
-        final String descriptionConstraints = "w 80%!, h 22px!, gap 10% 0 0 20px, span 2 1";
+        final String sectionConstraints = "w 80%!, h 42px!, gap 25px 0 80px 20px, span 2 1";
+        final String titleConstraints = "w 80%!, h 22px!, gap 25px 0 0 0px, span 2 1";
+        final String comboBoxConstraints = "w 80%!, h 25px!, gap 25px 0 0 0px, span 2 1";
+        final String descriptionConstraints = "w 80%!, h 22px!, gap 28px 0 0 20px, span 2 1";
 
         // Troubleshooting
         pnlPrefs.add(new SectionLabel("Troubleshooting"), sectionConstraints);
 
         // Reset buttons
-        final String twoButtonConstraints1 = "w 38%!, h 30px!, gap 10% 0 0 10px";
+        final String twoButtonConstraints1 = "w 38%!, h 30px!, gap 25px 0 0 10px";
         final String twoButtonConstraints2 = "w 38%!, h 30px!, gap 0 0 0 10px";
         pnlPrefs.add(btnReset, twoButtonConstraints1);
         pnlPrefs.add(btnDeleteMatchUI, twoButtonConstraints2);
@@ -141,7 +141,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbCompactMainMenu, titleConstraints);
         pnlPrefs.add(new NoteLabel("Enable for a space efficient sidebar that displays only one menu group at a time (RESTART REQUIRED)."), descriptionConstraints);
 
-        pnlPrefs.add(btnResetJavaFutureCompatibilityWarnings, "w 300px!, h 30px!, gap 10% 0 0 20px, span 2 1");
+        pnlPrefs.add(btnResetJavaFutureCompatibilityWarnings, "w 300px!, h 30px!, gap 27px 0 0 20px, span 2 1");
 
         // Gameplay Options
         pnlPrefs.add(new SectionLabel("Gameplay"), sectionConstraints);
@@ -759,7 +759,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         JPanel p = new JPanel(new MigLayout("insets 0, gap 0!"));
         p.setOpaque(false);
         FLabel lbl = new FLabel.Builder().text("Player Name: ").fontSize(12).fontStyle(Font.BOLD).build();
-        p.add(lbl, "aligny top, h 100%");
+        p.add(lbl, "aligny top, h 100%, gap 4px 0 0 0");
         p.add(btnPlayerName, "aligny top, h 100%, w 200px!");
         return p;
     }
