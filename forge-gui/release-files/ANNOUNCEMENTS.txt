@@ -1,3 +1,3 @@
 #Add one announcement per line
+[b]Forge will require Java 8 in the next release. A notification will appear when you start the game if you are not yet running Java 8.[/b]
 We have a Discord server for hanging out with Forge devs and other Forge fans. Feel free to [url=https://discord.gg/3v9JCVr]jump on in and say hi[/url]!
-Forge will require Java 8 in one of the next few major releases. It is highly recommended that you ensure your Java installation is up to date. If you're unsure, try downloading the card prices from the content downloader in game. If you can, you should be good to go.

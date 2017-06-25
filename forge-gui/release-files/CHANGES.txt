@@ -1,5 +1,5 @@
-- New Counters HUD -
-A new way of visualizing counters has been implemented, available in both desktop and mobile Forge as a toggleable option. It provides a textual overlay on top of the card showing all the counters on the card with their name and exact count. Each counter is also visualized in its own color.
+- New Counter Display -
+Counters now have a new, text-based display option alongside the old counter images. It provides a textual overlay on top of each card (that has counters) showing all of the counters on the card with their names and exact counts, each type being displayed in a unique color. This can be customized to show only text-based counters (default), only the old style, both at the same time, or show the old image when cards are small to fit the textual display.
 
 - Automatically Suggest Basic Lands in Deck Editor -
 It is now possible to ask Forge to automatically suggest basic lands for your deck in the Add Basic Lands dialog of the deck editor. In desktop Forge, this is accomplished by double-clicking the statistics text in the bottom part of the dialog (hopefully someone will be able to code in a better, more intuitive way of doing this eventually). In mobile Forge, this is done by double tapping the statistics text. A tooltip is available in desktop Forge (and a hint text in mobile Forge) to make this feature more visible. Three deck sizes are supported by this algorithm: 40-card decks (if the number of cards in the main portion of the deck is less than 30, the algorithm will target a 40-card deck), 60-card decks (if the number of cards in the main portion is between 30 and 60, a 60-card deck will be targeted), and 100-card decks (if the deck is already above 60 cards when the feature is used, a 100-card deck will be targeted).
@@ -13,23 +13,8 @@ As part of increased privacy protections (cardforge.org now uses SSL), the conte
 - Hour of Devastation Spoiler Period -
 This release contains some cards from the upcoming Hour of Devastation set. They are an early effort and may thus contain errors or provoke crashes. Please test them if you'd like and provide feedback if you encounter any issues. These cards should only be visible and playable if Developer Mode is enabled in the game options.
 
-- Amonkhet Release -
-This release contains all but one of the cards (As Foretold) from the newly released Amonkhet set. Hopefully we'll get the last one out soon enough.
+- Quest UI Improvements -
+When selecting sets for a custom quest format, you can now hold shift and select two sets and it will select all sets between your two clicks. You can also now click on any part of a duel or event's box to select it; you don't need to click just the name/radio button anymore.
 
 - Bug fixes -
-As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the 1.5.61 release run.
-
-- AI Generated Decks -
-This release contains a new way to generate random Standard or Modern decks that are themed around a specific card.  In the deck selector you choose a card and the AI will build a deck around that card based on associations learnt from recent human generated online decks.  The algorithm is non-deterministic, so the decks will vary every time they are generated for a unique deck virtually every time.
-
-- User Created Quest Worlds -
-If you have created some of your own quest worlds and don't want them to be overwritten when Forge updates, you can move the world folders to the user quest folder (in USER_FOLDER/quest/world) - you will also need to add the world definitions to a customworlds.txt file in that same folder
-
-- Quest Shop Singles Update -
-The quest shop will now generate singles using the full availability of cards in a set, including things like Amonkhet Invocations and Kaladesh Inventions. The rarity of these additional cards is unchanged and it may take some time for them to finally appear.
-
-- Booster Pack Quest Starting Pool -
-Quests can now use booster packs as a starting pool. A number of random packs will be opened and used instead of the normal card generation. You can find this option in the "Choose Colors" section when creating a new quest. This will override any other starting pool settings.
-
-- Card Image Updates -
-Most (if not all) of the missing card images have been added to the in-game content downloaders.
+As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the 1.5.64 release run.
