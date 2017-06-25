@@ -1,5 +1,5 @@
 - New Counters HUD -
-A new way of visualizing counters has been implemented, currently available in desktop Forge as a toggleable option. It provides a textual overlay on top of the card showing all the counters on the card with their name and exact count. Each counter is also visualized in its own color.
+A new way of visualizing counters has been implemented, available in both desktop and mobile Forge as a toggleable option. It provides a textual overlay on top of the card showing all the counters on the card with their name and exact count. Each counter is also visualized in its own color.
 
 - Automatically Suggest Basic Lands in Deck Editor -
 It is now possible to ask Forge to automatically suggest basic lands for your deck in the Add Basic Lands dialog of the deck editor. In desktop Forge, this is accomplished by double-clicking the statistics text in the bottom part of the dialog (hopefully someone will be able to code in a better, more intuitive way of doing this eventually). In mobile Forge, this is done by double tapping the statistics text. A tooltip is available in desktop Forge (and a hint text in mobile Forge) to make this feature more visible. Three deck sizes are supported by this algorithm: 40-card decks (if the number of cards in the main portion of the deck is less than 30, the algorithm will target a 40-card deck), 60-card decks (if the number of cards in the main portion is between 30 and 60, a 60-card deck will be targeted), and 100-card decks (if the deck is already above 60 cards when the feature is used, a 100-card deck will be targeted).
@@ -9,6 +9,9 @@ In Planar Conquest, if you have already unlocked all the planes, receiving a gre
 
 - Java 8 -
 As part of increased privacy protections (cardforge.org now uses SSL), the content downloaders now require a minimum Java version of 8u101. In the future, all of Forge will be updated to require Java 8. If you're running the latest version of Java, but Forge does not let you use the content downloaders, check to make sure that you've uninstalled old versions. Additionally, check any JDK installations you have and ensure Forge is using the most up-to-date version.
+
+- Hour of Devastation Spoiler Period -
+This release contains some cards from the upcoming Hour of Devastation set. They are an early effort and may thus contain errors or provoke crashes. Please test them if you'd like and provide feedback if you encounter any issues. These cards should only be visible and playable if Developer Mode is enabled in the game options.
 
 - Amonkhet Release -
 This release contains all but one of the cards (As Foretold) from the newly released Amonkhet set. Hopefully we'll get the last one out soon enough.
