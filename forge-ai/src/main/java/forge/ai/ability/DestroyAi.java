@@ -9,6 +9,7 @@ import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
 import forge.ai.PlayerControllerAi;
+import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -76,20 +77,7 @@ public class DestroyAi extends SpellAbilityAi {
                 return targetingPlayer.getController().chooseTargetsFor(sa);
             }
             if ("MadSarkhanDragon".equals(logic)) {
-                // TODO: expand this logic to make the AI force the opponent to sacrifice a big threat bigger than a 5/5 flier?
-                CardCollection creatures = ai.getCreaturesInPlay();
-                boolean hasValidTgt = !CardLists.filter(creatures, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(Card t) {
-                        return t.getCurrentPower() < 5 && t.getCurrentToughness() < 5;
-                    }
-                }).isEmpty();
-                if (hasValidTgt) {
-                    Card worstCreature = ComputerUtilCard.getWorstCreatureAI(creatures);
-                    sa.getTargets().add(worstCreature);
-                    return true;
-                }
-                return false;
+                return SpecialCardAi.SarkhanTheMad.considerMakeDragon(ai, sa);
             } else if ("Polymorph".equals(logic)) {
                 list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
                 if (list.isEmpty()) {

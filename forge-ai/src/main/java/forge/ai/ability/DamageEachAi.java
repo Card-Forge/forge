@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 
+import forge.ai.SpecialCardAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -31,15 +32,7 @@ public class DamageEachAi extends DamageAiBase {
         }
 
         if ("MadSarkhanUltimate".equals(logic)) {
-            int minLife = weakestOpp.getLife();
-
-            int dragonPower = 0;
-            CardCollection dragons = CardLists.filter(ai.getCreaturesInPlay(), CardPredicates.isType("Dragon"));
-            for (Card c : dragons) {
-                dragonPower += c.getCurrentPower();
-            }
-
-            return dragonPower >= minLife;
+            return SpecialCardAi.SarkhanTheMad.considerUltimate(ai, sa, weakestOpp);
         }
         
         final String damage = sa.getParam("NumDmg");

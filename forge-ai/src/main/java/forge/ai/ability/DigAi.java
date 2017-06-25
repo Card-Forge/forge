@@ -4,6 +4,7 @@ import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilMana;
+import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -94,7 +95,7 @@ public class DigAi extends SpellAbilityAi {
         }
 
         if ("MadSarkhanDigDmg".equals(sa.getParam("AILogic"))) {
-            return host.getCounters(CounterType.LOYALTY) == 1;
+            return SpecialCardAi.SarkhanTheMad.considerDig(ai, sa);
         }
         
         return !ComputerUtil.preventRunAwayActivations(sa);

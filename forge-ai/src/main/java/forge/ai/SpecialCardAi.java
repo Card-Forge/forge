@@ -17,6 +17,7 @@
  */
 package forge.ai;
 
+import com.google.common.base.Predicate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -409,6 +410,43 @@ public class SpecialCardAi {
             return new CardCollection(toKeep);
         }
     }
+
+    // Sarkhan the Mad
+    public static class SarkhanTheMad {
+        public static boolean considerDig(Player ai, SpellAbility sa) {
+            return sa.getHostCard().getCounters(CounterType.LOYALTY) == 1;
+        }
+
+        public static boolean considerMakeDragon(Player ai, SpellAbility sa) {
+            // TODO: expand this logic to make the AI force the opponent to sacrifice a big threat bigger than a 5/5 flier?
+            CardCollection creatures = ai.getCreaturesInPlay();
+            boolean hasValidTgt = !CardLists.filter(creatures, new Predicate<Card>() {
+                @Override
+                public boolean apply(Card t) {
+                    return t.getCurrentPower() < 5 && t.getCurrentToughness() < 5;
+                }
+            }).isEmpty();
+            if (hasValidTgt) {
+                Card worstCreature = ComputerUtilCard.getWorstCreatureAI(creatures);
+                sa.getTargets().add(worstCreature);
+                return true;
+            }
+            return false;
+        }
+
+        public static boolean considerUltimate(Player ai, SpellAbility sa, Player weakestOpp) {
+            int minLife = weakestOpp.getLife();
+
+            int dragonPower = 0;
+            CardCollection dragons = CardLists.filter(ai.getCreaturesInPlay(), CardPredicates.isType("Dragon"));
+            for (Card c : dragons) {
+                dragonPower += c.getCurrentPower();
+            }
+
+            return dragonPower >= minLife;
+        }
+    }
+
     // Timetwister
     public static class Timetwister {
         public static boolean consider(Player ai, SpellAbility sa) {
