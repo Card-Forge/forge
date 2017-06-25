@@ -197,7 +197,11 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         for (CardType.CoreType ct : copy.getType().getCoreTypes()) {
                             typeLine += ct.name() + " ";
                         }
-                        copy.setType(CardType.parse(typeLine + sa.getParam("SetCreatureTypes")));
+
+                        StringBuilder newType = new StringBuilder(typeLine);
+                        newType.append(sa.getParam("SetCreatureTypes"));
+
+                        copy.setType(CardType.parse(newType.toString()));
                     }
                     for (final String type : types) {
                         copy.addType(type);
