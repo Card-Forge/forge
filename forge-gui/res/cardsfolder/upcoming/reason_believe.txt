@@ -4,7 +4,7 @@ AlternateMode: Split
 Types:Sorcery
 A:SP$ Scry | Cost$ U | ScryNum$ 3 | SpellDescription$ Scry 3. (Look at the top three cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reason_believe.jpg
-Oracle:Scry 3. 
+Oracle:Scry 3.
 
 ALTERNATE
 
@@ -13,4 +13,4 @@ ManaCost:4 G
 Types:Sorcery
 K:Aftermath
 A:SP$ Dig | Cost$ 4 G | DigNum$ 1 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Creature | DestinationZone$ Battlefield | DestinationZone2$ Hand | SpellDescription$ Look at the top card of your library. You may put it onto the battlefield if it's a creature card. If you don't, put it into your hand.
-Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nLook at the top card of your library. You may put it onto the battlefield if it's a creature card. If you don't, put it into your hand.
+Oracle:Aftermath\nLook at the top card of your library. You may put it onto the battlefield if it's a creature card. If you don't, put it into your hand.
