@@ -54,6 +54,9 @@ public class Main {
             }
         }
 
+        screenWidth = 1900;
+        screenHeight = 1300;
+
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.resizable = false;
         config.width = desktopMode ? desktopScreenWidth : screenWidth;

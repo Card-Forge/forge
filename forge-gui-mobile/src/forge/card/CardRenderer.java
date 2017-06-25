@@ -60,13 +60,15 @@ public class CardRenderer {
     private static final float BORDER_THICKNESS = Utils.scale(1);
     public static final float PADDING_MULTIPLIER = 0.021f;
 
-    private static BitmapFont counterFont;
+    private static Map<Integer, BitmapFont> counterFonts = new HashMap<>();
     private static final Color counterBackgroundColor = new Color(0f, 0f, 0f, 0.9f);
     private static final Map<CounterType, Color> counterColorCache = new HashMap<>();
 
     static {
         try {
-            generateFontForCounters();
+            for (int fontSize = 11; fontSize <= 22; fontSize++) {
+                generateFontForCounters(fontSize);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -482,11 +484,17 @@ public class CardRenderer {
 
     private static void drawCounterTabs(final CardView card, final Graphics g, final float x, final float y, final float w, final float h) {
 
+        int fontSize = Math.max(11, Math.min(22, (int) (h * 0.08)));
+        BitmapFont font = counterFonts.get(fontSize);
+
+        final float additionalXOffset = 3f * ((fontSize - 11) / 11f);
+        final float variableWidth = ((fontSize - 11) / 11f) * 44f;
+
         float otherSymbolsSize = w / 3.5f;
         final float ySymbols = (h / 12) - otherSymbolsSize / 2;
 
-        final float counterBoxHeight = 20;
-        final float counterBoxBaseWidth = 50;
+        final float counterBoxHeight = 9 + fontSize;
+        final float counterBoxBaseWidth = 50 + variableWidth + additionalXOffset * 2;
         final float counterBoxSpacing = -4;
 
         final float spaceFromTopOfCard = y + h - counterBoxHeight - counterBoxSpacing - otherSymbolsSize + ySymbols;
@@ -500,7 +508,7 @@ public class CardRenderer {
                 maxCounters = Math.max(maxCounters, numberOfCounters);
             }
 
-            if (counterBoxBaseWidth + counterFont.getBounds(String.valueOf(maxCounters)).width > w) {
+            if (counterBoxBaseWidth + font.getBounds(String.valueOf(maxCounters)).width > w) {
                 drawCounterImage(card, g, x, y, w, h);
                 return;
             }
@@ -511,11 +519,11 @@ public class CardRenderer {
 
             final CounterType counter = counterEntry.getKey();
             final int numberOfCounters = counterEntry.getValue();
-            final float counterBoxRealWidth = counterBoxBaseWidth + counterFont.getBounds(String.valueOf(numberOfCounters)).width + 4;
+            final float counterBoxRealWidth = counterBoxBaseWidth + font.getBounds(String.valueOf(numberOfCounters)).width + 4;
 
             final float counterYOffset = spaceFromTopOfCard - (currentCounter++ * (counterBoxHeight + counterBoxSpacing));
 
-            g.fillRect(counterBackgroundColor, x - 2, counterYOffset, counterBoxRealWidth, counterBoxHeight);
+            g.fillRect(counterBackgroundColor, x - 3, counterYOffset, counterBoxRealWidth, counterBoxHeight);
 
             if (!counterColorCache.containsKey(counter)) {
                 counterColorCache.put(counter, new Color(counter.getRed() / 255.0f, counter.getGreen() / 255.0f, counter.getBlue() / 255.0f, 1.0f));
@@ -523,8 +531,8 @@ public class CardRenderer {
 
             Color counterColor = counterColorCache.get(counter);
 
-            drawText(g, counter.getCounterOnCardDisplayName(), counterFont, counterColor, x + 2, counterYOffset, counterBoxRealWidth, counterBoxHeight, HAlignment.LEFT);
-            drawText(g, String.valueOf(numberOfCounters), counterFont, counterColor, x + counterBoxBaseWidth - 3f, counterYOffset, counterBoxRealWidth, counterBoxHeight, HAlignment.LEFT);
+            drawText(g, counter.getCounterOnCardDisplayName(), font, counterColor, x + 2 + additionalXOffset, counterYOffset, counterBoxRealWidth, counterBoxHeight, HAlignment.LEFT);
+            drawText(g, String.valueOf(numberOfCounters), font, counterColor, x + counterBoxBaseWidth - 4f - additionalXOffset, counterYOffset, counterBoxRealWidth, counterBoxHeight, HAlignment.LEFT);
 
         }
 
@@ -686,10 +694,9 @@ public class CardRenderer {
     }
 
     //TODO Make FSkinFont accept more than one kind of font and merge this with it
-    private static void generateFontForCounters() {
+    private static void generateFontForCounters(final int fontSize) {
 
         FileHandle ttfFile = Gdx.files.absolute(ForgeConstants.COMMON_FONTS_DIR).child("Roboto-Bold.ttf");
-        final int fontSize = 11;
 
         if (!ttfFile.exists()) { return; }
 
@@ -729,7 +736,7 @@ public class CardRenderer {
                     textureRegions[i] = new TextureRegion(texture);
                 }
 
-                counterFont = new BitmapFont(fontData, textureRegions, true);
+                counterFonts.put(fontSize, new BitmapFont(fontData, textureRegions, true));
 
                 generator.dispose();
                 packer.dispose();
