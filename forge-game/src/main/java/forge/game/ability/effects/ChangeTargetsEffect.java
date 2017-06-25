@@ -9,7 +9,9 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.MagicStack;
+import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -80,7 +82,8 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                 replaceIn.updateTarget(newTargetBlock);
                 // 3. test if updated choices would be correct.
                 GameObject newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa), null);
-                if (replaceIn.getSpellAbility(true).canTarget(newTarget)) {
+
+                if (replaceIn.getSpellAbility(true).canTarget(newTarget, true)) {
                     newTargetBlock.add(newTarget);
                     replaceIn.updateTarget(newTargetBlock, oldTarget, newTarget);
                 }
@@ -102,7 +105,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                     }
                     else if (sa.hasParam("DefinedMagnet")){
                         GameObject newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa, "DefinedMagnet"), null);
-                        if (newTarget != null && changingTgtSA.canTarget(newTarget)) {
+                        if (newTarget != null && changingTgtSA.canTarget(newTarget, true)) {
                             changingTgtSA.resetTargets();
                             changingTgtSA.getTargets().add(newTarget);
                             changingTgtSI.updateTarget(changingTgtSA.getTargets(), null, newTarget);
