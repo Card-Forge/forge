@@ -310,40 +310,43 @@ public class ComputerUtil {
     public static Card getCardPreference(final Player ai, final Card activate, final String pref, final CardCollection typeList) {
         final Game game = ai.getGame();
         if (activate != null) {
-            final String[] prefValid = activate.getSVar("AIPreference").split("\\$");
-            if (prefValid[0].equals(pref)) {
-                final CardCollection prefList = CardLists.getValidCards(typeList, prefValid[1].split(","), activate.getController(), activate, null);
-                CardCollection overrideList = null;
+            final String[] prefGroups = activate.getSVar("AIPreference").split("\\|");
+            for (String prefGroup : prefGroups) {
+                final String[] prefValid = prefGroup.trim().split("\\$");
+                if (prefValid[0].equals(pref)) {
+                    final CardCollection prefList = CardLists.getValidCards(typeList, prefValid[1].split(","), activate.getController(), activate, null);
+                    CardCollection overrideList = null;
 
-                if (activate.hasSVar("AIPreferenceOverride")) {
-                    overrideList = CardLists.getValidCards(typeList, activate.getSVar("AIPreferenceOverride"), activate.getController(), activate, null);
-                }
+                    if (activate.hasSVar("AIPreferenceOverride")) {
+                        overrideList = CardLists.getValidCards(typeList, activate.getSVar("AIPreferenceOverride"), activate.getController(), activate, null);
+                    }
 
-                int threshold = getAIPreferenceParameter(activate, "CreatureEvalThreshold");
-                int minNeeded = getAIPreferenceParameter(activate, "MinCreaturesBelowThreshold");
+                    int threshold = getAIPreferenceParameter(activate, "CreatureEvalThreshold");
+                    int minNeeded = getAIPreferenceParameter(activate, "MinCreaturesBelowThreshold");
 
-                if (threshold != -1) {
-                    List<Card> toRemove = Lists.newArrayList();
-                    for (Card c : prefList) {
-                        if (c.isCreature()) {
-                            if (ComputerUtilCard.isUselessCreature(ai, c) || ComputerUtilCard.evaluateCreature(c) <= threshold) {
-                                continue;
-                            } else if (ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
-                                continue;
+                    if (threshold != -1) {
+                        List<Card> toRemove = Lists.newArrayList();
+                        for (Card c : prefList) {
+                            if (c.isCreature()) {
+                                if (ComputerUtilCard.isUselessCreature(ai, c) || ComputerUtilCard.evaluateCreature(c) <= threshold) {
+                                    continue;
+                                } else if (ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
+                                    continue;
+                                }
+                                toRemove.add(c);
                             }
-                            toRemove.add(c);
+                        }
+                        prefList.removeAll(toRemove);
+                    }
+                    if (minNeeded != -1) {
+                        if (prefList.size() < minNeeded) {
+                            return null;
                         }
                     }
-                    prefList.removeAll(toRemove);
-                }
-                if (minNeeded != -1) {
-                    if (prefList.size() < minNeeded) {
-                        return null;
-                    }
-                }
 
-                if (!prefList.isEmpty()) {
-                	return ComputerUtilCard.getWorstAI(overrideList == null ? prefList : overrideList);
+                    if (!prefList.isEmpty()) {
+                        return ComputerUtilCard.getWorstAI(overrideList == null ? prefList : overrideList);
+                    }
                 }
             }
         }

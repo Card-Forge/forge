@@ -49,7 +49,8 @@ public final class AbilityFactory {
             "TrueSubAbility", "FalseSubAbility", // Branch
             "ChosenPile", "UnchosenPile", // MultiplePiles & TwoPiles
             "RepeatSubAbility", // Repeat & RepeatEach
-            "Execute" // DelayedTrigger
+            "Execute", // DelayedTrigger
+            "FallbackAbility" // Complex Unless costs which can be unpayable
         );
 
     public enum AbilityRecordType {
