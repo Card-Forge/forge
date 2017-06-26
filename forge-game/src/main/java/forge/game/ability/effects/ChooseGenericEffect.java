@@ -37,6 +37,24 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         for (final Player p : tgtPlayers) {
+            // determine if any of the choices are not valid
+            List<SpellAbility> saToRemove = Lists.<SpellAbility>newArrayList();
+            
+            for (SpellAbility saChoice : abilities) {
+                if ("Player.IsRemembered".equals(saChoice.getParam("Defined")) && saChoice.hasParam("UnlessCost")) {
+                    String unlessCost = saChoice.getParam("UnlessCost");
+                    // Sac a creature in presence of Sigarda, Host of Herons
+                    // TODO: expand this to be more robust, potentially using a regular expression
+                    if (unlessCost.startsWith("Sac<") && unlessCost.contains("Creature")) {
+                        if (saChoice.getActivatingPlayer().isOpponentOf(p)
+                            && p.hasKeyword("Spells and abilities your opponents control can't cause you to sacrifice permanents.")) {
+                            saToRemove.add(saChoice);
+                        }
+                    }
+                }
+            }
+            abilities.removeAll(saToRemove);
+        
             if (tgt != null && sa.getTargets().isTargeting(p) && !p.canBeTargetedBy(sa)) {
                 continue;
             }
