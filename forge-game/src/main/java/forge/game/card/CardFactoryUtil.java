@@ -2170,9 +2170,6 @@ public class CardFactoryUtil {
             else if (keyword.startsWith("Embalm")) {
                 addSpellAbility(keyword, card, null);
             }
-            else if (keyword.startsWith("Entwine")) {
-                addSpellAbility(keyword, card, null);
-            }
             else if (keyword.startsWith("Escalate")) {
                 addStaticAbility(keyword, card, null);
             }
@@ -3706,25 +3703,6 @@ public class CardFactoryUtil {
                 kws.addSpellAbility(sa);
             }
             card.addSpellAbility(sa);
-        } else if (keyword.startsWith("Entwine")) {
-            final String[] kw = keyword.split(":");
-            String costStr = kw[1];
-            final SpellAbility sa = card.getFirstSpellAbility();
-
-            final SpellAbility newSA = sa.copy();
-            newSA.getMapParams().put("Secondary", "True");
-            newSA.setBasicSpell(false);
-            newSA.setPayCosts(new Cost(costStr, false).add(sa.getPayCosts()));
-            newSA.addOptionalCost(OptionalCost.Entwine);
-            newSA.setDescription(sa.getDescription() + " (Entwine)");
-            newSA.setStackDescription(""); // Empty StackDescription to rebuild it.
-            newSA.setIntrinsic(intrinsic);
-
-            if (!intrinsic) {
-                newSA.setTemporary(true);
-                kws.addSpellAbility(newSA);
-            }
-            card.addSpellAbility(newSA);
         } else if (keyword.equals("Epic")) {
             // Epic does modify existing SA, and does not add new one
 
@@ -4150,6 +4128,10 @@ public class CardFactoryUtil {
 
             card.setSVar("CipherTrigger", trig);
             card.setSVar("PlayEncoded", ab);
+        } else if (keyword.equals("Devoid")) {
+            effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self" +
+                    " | CharacteristicDefining$ True | SetColor$ Colorless | Secondary$ True" +
+                    " | Description$ Devoid (" + Keyword.getInstance(keyword).getReminderText() + ")";
         } else if (keyword.startsWith("Escalate")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
@@ -4310,7 +4292,7 @@ public class CardFactoryUtil {
         }
 
         if (hasKeyword(card, "Devoid") != -1) {
-            card.setColor("1");
+            addStaticAbility("Devoid", card, null);
         }
 
         if (hasKeyword(card, "Morph") != -1) {
