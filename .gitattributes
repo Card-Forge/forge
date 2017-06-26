@@ -1469,6 +1469,7 @@ forge-gui/.project -text
 forge-gui/.settings/org.eclipse.core.resources.prefs -text
 forge-gui/.settings/org.eclipse.jdt.core.prefs -text
 forge-gui/.settings/org.eclipse.m2e.core.prefs -text
+forge-gui/COMPILE.txt -text
 forge-gui/LICENSE.txt -text
 forge-gui/MANUAL.txt -text
 forge-gui/README.txt -text
