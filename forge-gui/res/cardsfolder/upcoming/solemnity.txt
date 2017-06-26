@@ -1,0 +1,7 @@
+Name:Solemnity
+ManaCost:2 W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Player | AddKeyword$ PLAYER can't have counters put on him or her. | Description$ Players can't get counters.
+S:Mode$ Continuous | Affected$ Creature,Artifact,Enchantment,Land | AddKeyword$ CARDNAME can't have counters put on it. | Description$ Counters can't be put on artifacts, creatures, enchantments or lands.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/solemnity.jpg
+Oracle:Players can't get counters.\nCounters can't be put on artifacts, creatures, enchantments, or lands.
