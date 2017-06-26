@@ -204,7 +204,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     }
 
                     if (sa.hasParam("SetColor")) {
-                        copy.setColor(sa.getParam("SetColor"));
+                        copy.setColor(MagicColor.fromName(sa.getParam("SetColor")));
                     }
 
                     for (final String type : types) {
@@ -276,33 +276,33 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     }
                     
                     // remove some characteristic static abilties
-                    if (sa.hasParam("SetPower") || sa.hasParam("Eternalize")) {
-                        for (StaticAbility sta : copy.getStaticAbilities()) {
-                            Map<String, String> params = sta.getMapParams();
-                            if (params.containsKey("CharacteristicDefining") && params.containsKey("SetPower"))
+                    for (StaticAbility sta : copy.getStaticAbilities()) {
+                        if (!sta.hasParam("CharacteristicDefining")) {
+                            continue;
+                        }
+                        if (sa.hasParam("SetPower") || sa.hasParam("Eternalize")) {
+                            if (sta.hasParam("SetPower"))
                                 copy.removeStaticAbility(sta);
                         }
-                    }
-
-                    if (sa.hasParam("SetToughness") || sa.hasParam("Eternalize")) {
-                        for (StaticAbility sta : copy.getStaticAbilities()) {
-                            Map<String, String> params = sta.getMapParams();
-                            if (params.containsKey("CharacteristicDefining") && params.containsKey("SetToughness"))
+                        if (sa.hasParam("SetToughness") || sa.hasParam("Eternalize")) {
+                            if (sta.hasParam("SetToughness"))
                                 copy.removeStaticAbility(sta);
                         }
+                        if (sa.hasParam("SetCreatureTypes")) {
+                            if (sta.hasParam("AddType")) {
+                                copy.removeStaticAbility(sta);
+                            }
+                        }
+                        if (sa.hasParam("SetColor") || sa.hasParam("Embalm") || sa.hasParam("Eternalize")) {
+                            if (sta.hasParam("SetColor")) {
+                                copy.removeStaticAbility(sta);
+                            }
+                        }
                     }
-
                     if (sa.hasParam("SetCreatureTypes")) {
-                        for (StaticAbility sta : copy.getStaticAbilities()) {
-                            Map<String, String> params = sta.getMapParams();
-                            if (params.containsKey("CharacteristicDefining") && params.containsKey("AddType"))
-                                copy.removeStaticAbility(sta);
-                        }
                         copy.removeIntrinsicKeyword("Changeling");
                     }
-
                     if (sa.hasParam("SetColor") || sa.hasParam("Embalm") || sa.hasParam("Eternalize")) {
-                        // there is currently no characteristic static ability, but remove Devoid keyword
                         copy.removeIntrinsicKeyword("Devoid");
                     }
 
