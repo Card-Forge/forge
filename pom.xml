@@ -148,6 +148,13 @@
                 <role>developer</role>
             </roles>
         </developer>
+        <developer>
+            <id>KrazyTheFox</id>
+            <name>Mitchell Matthews</name>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
     </developers>
 
     <licenses>
