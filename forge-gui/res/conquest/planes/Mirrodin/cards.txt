@@ -19,6 +19,7 @@ Aeronaut Tinkerer
 Aspiring Aeronaut
 Foundry of the Consuls
 Ghirapur Gearcrafter
+Pia and Kiran Nalaar
 Thopter Engineer
 Thopter Spy Network
 Whirler Rogue
@@ -45,4 +46,3 @@ Preordain
 Scrap Mastery
 Scrapyard Mongrel
 Smelt
-Atraxa, Praetors' Voice

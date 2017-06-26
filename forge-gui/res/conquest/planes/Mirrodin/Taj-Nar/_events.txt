@@ -1,6 +1,9 @@
-Name:Name1|Deck:Deck1.dck|Variant:None|Avatar:Avatar1|Desc:
-Name:Name2|Deck:Deck2.dck|Variant:None|Avatar:Avatar2|Desc:
-Name:Name3|Deck:Deck3.dck|Variant:None|Avatar:Avatar3|Desc:
-Name:Name4|Deck:Deck4.dck|Variant:Commander|Avatar:Avatar4|Desc:
-Name:Name5|Deck:Deck5.dck|Variant:Vanguard|Avatar:Avatar5|Desc:
-Name:Name6|Deck:Deck6.dck|Variant:Planeswalker|Avatar:Avatar6|Desc:
+Name:Ajani, Caller of the Pride|Deck:Ajani, Caller of the Pride.dck|Variant:Planeswalker|Avatar:Ajani, Caller of the Pride|Desc:
+Name:Elspeth Tirel|Deck:Elspeth Tirel.dck|Variant:Planeswalker|Avatar:Elspeth Tirel|Desc:
+Name:Leonin|Deck:Leonin.dck|Variant:None|Avatar:Leonin Arbiter|Desc:
+Name:Elesh Norn, Grand Cenobite|Deck:Elesh Norn, Grand Cenobite.dck|Variant:Commander|Avatar:Elesh Norn, Grand Cenobite|Desc:
+Name:Khemba, Kha Regent|Deck:Khemba, Kha Regent.dck|Variant:Commander|Avatar:Khemba, Kha Regent|Desc:
+Name:Raksha Golden Cub|Deck:Raksha Golden Cub.dck|Variant:Commander|Avatar:Raksha Golden Cub|Desc:
+Name:Razor Field Resistance|Deck:Razor Field Resistance.dck|Variant:None|Avatar:Mirran Crusader|Desc:
+Name:Battle Cry|Deck:battle cry.dck|Variant:None|Avatar:Hero of Bladehold|Desc:
+Name:Raksha Golden Cub|Deck:Raksha Golden Cub - Vanguard.dck|Variant:Vanguard|Avatar:Raksha Golden Cub|Desc:

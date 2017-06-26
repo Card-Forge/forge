@@ -1,6 +1,9 @@
-Name:Name1|Deck:Deck1.dck|Variant:None|Avatar:Avatar1|Desc:
-Name:Name2|Deck:Deck2.dck|Variant:None|Avatar:Avatar2|Desc:
-Name:Name3|Deck:Deck3.dck|Variant:None|Avatar:Avatar3|Desc:
-Name:Name4|Deck:Deck4.dck|Variant:Commander|Avatar:Avatar4|Desc:
-Name:Name5|Deck:Deck5.dck|Variant:Vanguard|Avatar:Avatar5|Desc:
-Name:Name6|Deck:Deck6.dck|Variant:Planeswalker|Avatar:Avatar6|Desc:
+Name:Neurok|Deck:Neurok.dck|Variant:None|Avatar:Neurok Commando|Desc:
+Name:Vedalken|Deck:Vedalken.dck|Variant:None|Avatar:Vedalken Mastermind|Desc:
+Name:Jin-Gitaxias, Core Augur|Deck:Jin-Gitaxias, Core Augur.dck|Variant:Commander|Avatar:Jin-Gitaxias, Core Augur|Desc:
+Name:Muzzio, Visionary Architect|Deck:Muzzio, Visionary Architect.dck|Variant:Commander|Avatar:Muzzio, Visionary Architect|Desc:
+Name:Magnificent Metalcraft|Deck:Magnificent Metalcraft.dck|Variant:None|Avatar:Vedalken Certarch|Desc:
+Name:Imprint|Deck:Imprint.dck|Variant:None|Avatar:Knowledge Pool|Desc:
+Name:Affinity|Deck:Affinity.dck|Variant:None|Avatar:Frogmite|Desc:
+Name:Karn|Deck:Karn - Vanguard.dck|Variant:Vanguard|Avatar:Karn, Silver Golem|Desc:
+Name:Poisonous Proliferation|Deck:Poisonous Proliferation.dck|Variant:None|Avatar:Viral Drake|Desc:

@@ -1,6 +1,9 @@
-Name:Name1|Deck:Deck1.dck|Variant:None|Avatar:Avatar1|Desc:
-Name:Name2|Deck:Deck2.dck|Variant:None|Avatar:Avatar2|Desc:
-Name:Name3|Deck:Deck3.dck|Variant:None|Avatar:Avatar3|Desc:
-Name:Name4|Deck:Deck4.dck|Variant:Commander|Avatar:Avatar4|Desc:
-Name:Name5|Deck:Deck5.dck|Variant:Vanguard|Avatar:Avatar5|Desc:
-Name:Name6|Deck:Deck6.dck|Variant:Planeswalker|Avatar:Avatar6|Desc:
+Name:Elves of Tel-Jilad|Deck:Elves of Tel-Jilad.dck|Variant:None|Avatar:Ezuri's Brigade|Desc:
+Name:Ezuri, Renegard Leader|Deck:Ezuri, Renegard Leader.dck|Variant:Commander|Avatar:Ezuri, Renegard Leader|Desc:
+Name:Glissa Sunseeker|Deck:Glissa Sunseeker.dck|Variant:Commander|Avatar:Glissa Sunseeker|Desc:
+Name:Melira, Sylvok Outcast|Deck:Melira, Sylvok Outcast.dck|Variant:Commander|Avatar:Melira, Sylvok Outcast|Desc:
+Name:Thrun, the Last Troll|Deck:Thrun, the Last Troll.dck|Variant:Commander|Avatar:Thrun, the Last Troll|Desc:
+Name:Vorniclex, Voice of Hunger|Deck:Vorniclex, Voice of Hunger.dck|Variant:Commander|Avatar:Vorniclex, Voice of Hunger|Desc:
+Name:Platinum Angel|Deck:Platinum Angel Vanguard.dck|Variant:Vanguard|Avatar:Platinum Angel|Desc:
+Name:Phyrexian Plague|Deck:Phyrexian Plague.dck|Variant:None|Avatar:Phyrexian Swarmlord|Desc:
+Name:Tej-Jilad Defiance|Deck:Tej-Jilad Defiance.dck|Variant:None|Avatar:Tej-Jilad Defiance|Desc:
