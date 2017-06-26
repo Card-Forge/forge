@@ -46,3 +46,4 @@ Preordain
 Scrap Mastery
 Scrapyard Mongrel
 Smelt
+Urza's Incubator
