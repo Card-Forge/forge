@@ -32,8 +32,8 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -124,7 +124,7 @@
                                 <debug>true</debug>
                             </sign>
                             <sdk>
-                                <platform>20</platform>
+                                <platform>25</platform>
                             </sdk>
                             <dexForceJumbo>true</dexForceJumbo>
                             <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
@@ -165,7 +165,7 @@
                                 <debug>false</debug>
                             </sign>
                             <sdk>
-                                <platform>20</platform>
+                                <platform>25</platform>
                             </sdk>
                             <zipalign>
                                 <verbose>false</verbose>
