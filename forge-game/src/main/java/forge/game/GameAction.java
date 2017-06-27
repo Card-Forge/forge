@@ -184,15 +184,9 @@ public class GameAction {
             zoneChangedEarly = true;
         }
 
-        if (fromBattlefield) {
-            // Clean up the temporary Dash SVar when the Dashed card leaves the battlefield
-            if (c.getSVar("EndOfTurnLeavePlay").equals("Dash")) {
-                c.removeSVar("EndOfTurnLeavePlay");
-            }
-            // Clean up the temporary X announcement variable used by the AI
-            if (!zoneTo.is(ZoneType.Stack) && c.hasSVar("PayX")) {
-                c.removeSVar("PayX");
-            }
+        // Clean up the temporary Dash SVar when the Dashed card leaves the battlefield
+        if (fromBattlefield && c.getSVar("EndOfTurnLeavePlay").equals("Dash")) {
+            c.removeSVar("EndOfTurnLeavePlay");
         }
 
         if (fromBattlefield && !toBattlefield) {
