@@ -2654,11 +2654,6 @@ public class ComputerUtil {
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
         Card targetSpellCard = null;
         for (Card c : options) {
-            if (withoutPayingManaCost && c.getManaCost() != null && c.getManaCost().getShardCount(ManaCostShard.X) > 0) {
-                // The AI will otherwise cheat with the mana payment, announcing X > 0 for spells like Heat Ray when replaying them
-                // without paying their mana cost.
-                continue;
-            }
             for (SpellAbility ab : c.getSpellAbilities()) {
                 if (ab.getApi() == null) {
                     // only API-based SAs are supported, other things may lead to a NPE (e.g. Ancestral Vision Suspend SA)
