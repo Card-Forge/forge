@@ -736,9 +736,9 @@ public class ComputerUtil {
                     int sacThreshold = 190;
 
                     if ("HeartPiercer".equals(source.getParam("SacrificeParam"))) {
-                        if (c.getCurrentPower() == 0) {
+                        if (c.getNetPower() == 0) {
                             return false;
-                        } else if (c.getCurrentPower() >= ai.getOpponentsSmallestLifeTotal()) {
+                        } else if (c.getNetPower() >= ai.getOpponentsSmallestLifeTotal()) {
                             return true;
                         }
                     }

@@ -78,11 +78,11 @@ public class ChooseTypeAi extends SpellAbilityAi {
             if (ComputerUtilCard.isUselessCreature(aiPlayer, oppCre)) {
                 continue;
             }
-            if (oppCre.getCurrentPower() > maxOppPower) {
-                maxOppPower = oppCre.getCurrentPower();
+            if (oppCre.getNetPower() > maxOppPower) {
+                maxOppPower = oppCre.getNetPower();
             }
-            if (oppCre.getCurrentToughness() > maxOppToughness) {
-                maxOppToughness = oppCre.getCurrentToughness();
+            if (oppCre.getNetToughness() > maxOppToughness) {
+                maxOppToughness = oppCre.getNetToughness();
             }
             oppUsefulCreatures++;
         }
@@ -92,7 +92,7 @@ public class ChooseTypeAi extends SpellAbilityAi {
                     Predicates.and(CardPredicates.isType(chosenType), CardPredicates.Presets.UNTAPPED));
             if (!cre.isEmpty()) {
                 for (Card c: cre) {
-                    avgPower += c.getCurrentPower();
+                    avgPower += c.getNetPower();
                 }
                 avgPower /= cre.size();
                 

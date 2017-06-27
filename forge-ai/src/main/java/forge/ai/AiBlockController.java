@@ -197,9 +197,13 @@ public class AiBlockController {
                 // 1.Blockers that can destroy the attacker but won't get destroyed
                 killingBlockers = getKillingBlockers(combat, attacker, safeBlockers);
                 if (!killingBlockers.isEmpty()) {
+                    if (ComputerUtilCombat.attackerHasThreateningAfflict(attacker, ai)) {
+                        continue;
+                    }
                     blocker = ComputerUtilCard.getWorstCreatureAI(killingBlockers);
                 // 2.Blockers that won't get destroyed
-                } else if (!attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
+                } else if (!attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
+                    && !ComputerUtilCombat.attackerHasThreateningAfflict(attacker, ai)) {
                     blocker = ComputerUtilCard.getWorstCreatureAI(safeBlockers);
                     // check whether it's better to block a creature without trample to absorb more damage
                     if (attacker.hasKeyword("Trample")) {
@@ -207,6 +211,7 @@ public class AiBlockController {
                         for (Card other : attackersLeft) {
                             if (other.equals(attacker) || !CombatUtil.canBlock(other, blocker)
                             		|| other.hasKeyword("Trample")
+                                    || ComputerUtilCombat.attackerHasThreateningAfflict(other, ai)
                                     || ComputerUtilCombat.canDestroyBlocker(ai, blocker, other, combat, false)
                                     || other.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
                                 continue;
@@ -545,6 +550,9 @@ public class AiBlockController {
             List<Card> possibleBlockers = getPossibleBlockers(combat, attacker, blockersLeft, true);
             killingBlockers = getKillingBlockers(combat, attacker, possibleBlockers);
             if (!killingBlockers.isEmpty() && ComputerUtilCombat.lifeInDanger(ai, combat)) {
+                if (ComputerUtilCombat.attackerHasThreateningAfflict(attacker, ai)) {
+                    continue;
+                }
                 final Card blocker = ComputerUtilCard.getWorstCreatureAI(killingBlockers);
                 combat.addBlocker(attacker, blocker);
                 currentAttackers.remove(attacker);
@@ -573,8 +581,11 @@ public class AiBlockController {
 
         Card attacker = attackers.get(0);
 
-        if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
-                || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.") || attacker.hasKeyword("Menace")) {
+        if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") 
+            || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
+            || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")
+            || attacker.hasKeyword("Menace")
+            || ComputerUtilCombat.attackerHasThreateningAfflict(attacker, ai)) {
             attackers.remove(0);
             makeChumpBlocks(combat, attackers);
             return;
@@ -595,6 +606,7 @@ public class AiBlockController {
                         if (other.getNetCombatDamage() >= damageAbsorbed
                                 && !other.hasKeyword("Trample")
                                 && !other.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
+                                && !ComputerUtilCombat.attackerHasThreateningAfflict(other, ai)
                                 && CombatUtil.canBlock(other, blocker, combat)) {
                             combat.addBlocker(other, blocker);
                             attackersLeft.remove(other);

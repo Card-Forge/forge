@@ -2425,6 +2425,12 @@ public class ComputerUtilCombat {
         
         return !list.isEmpty();
     }
+    
+    public static boolean attackerHasThreateningAfflict(Card attacker, Player aiDefender) {
+        // TODO: expand this to account for more complex situations like the Wildfire Eternal unblocked trigger
+        int afflictDmg = attacker.getKeywordMagnitude("Afflict");
+        return afflictDmg > attacker.getNetPower() || afflictDmg >= aiDefender.getLife();
+    }
 }
 
 

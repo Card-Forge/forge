@@ -423,7 +423,7 @@ public class SpecialCardAi {
             boolean hasValidTgt = !CardLists.filter(creatures, new Predicate<Card>() {
                 @Override
                 public boolean apply(Card t) {
-                    return t.getCurrentPower() < 5 && t.getCurrentToughness() < 5;
+                    return t.getNetPower() < 5 && t.getNetToughness() < 5;
                 }
             }).isEmpty();
             if (hasValidTgt) {
@@ -440,7 +440,7 @@ public class SpecialCardAi {
             int dragonPower = 0;
             CardCollection dragons = CardLists.filter(ai.getCreaturesInPlay(), CardPredicates.isType("Dragon"));
             for (Card c : dragons) {
-                dragonPower += c.getCurrentPower();
+                dragonPower += c.getNetPower();
             }
 
             return dragonPower >= minLife;
