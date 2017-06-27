@@ -63,7 +63,7 @@ public class ChangeTargetsAi extends SpellAbilityAi {
             // make sure not to redirect our own abilities
             return false;
         }
-        if (!topSa.canTarget(sa.getHostCard(), true)) {
+        if (!topSa.canTarget(sa.getHostCard())) {
             // don't try targeting it if we can't legally target the host card with it in the first place
             return false;
         }

@@ -973,27 +973,19 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                     return false;
                 }
             }
+
+            if (entity instanceof Card) {
+                final Card c = (Card) entity;
+                if (!tr.getZone().contains(c.getZone().getZoneType())) {
+                    return false;
+                }
+            }
         }
 
         // Restrictions coming from target
         return entity.canBeTargetedBy(this);
     }
     
-    public final boolean canTarget(final GameObject object, final boolean zoneCheck) {
-        // TODO: the zone check should most likely be integrated as a part of the 
-        // regular canTarget call, but that needs testing.
-        boolean zoneTestPassed = true;
-        if (object instanceof Card && zoneCheck) {
-            final TargetRestrictions tr = getTargetRestrictions();
-            final Card c = (Card)object;
-            if (!tr.getZone().contains(c.getZone().getZoneType())) {
-                zoneTestPassed = false;
-            }
-        }
-
-        return zoneTestPassed && canTarget(object);
-    }
-
     // is this a wrapping ability (used by trigger abilities)
     public boolean isWrapper() {
         return false;
