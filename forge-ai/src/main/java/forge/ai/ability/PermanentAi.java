@@ -133,6 +133,7 @@ public class PermanentAi extends SpellAbilityAi {
                 }
                 card.setKickerMagnitude(i + 1);
             }
+            sa.setSVar("Multikicker", String.valueOf(card.getKickerMagnitude()));
         }
 
         // don't play cards without being able to pay the upkeep for

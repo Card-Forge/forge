@@ -1076,7 +1076,6 @@ public class ComputerUtilMana {
             for (int i = 0; i < timesMultikicked; i++) {
             	cost.addManaCost(mkCost);
             }
-            sa.setSVar("Multikicker", String.valueOf(timesMultikicked));
         }
 
         if (test && sa.isSpell()) {
