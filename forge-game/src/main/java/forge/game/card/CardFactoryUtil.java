@@ -2464,7 +2464,7 @@ public class CardFactoryUtil {
 
             final String trigStr = "Mode$ AttackerBlocked | ValidCard$ Card.Self | TriggerZones$ Battlefield " +
                     " | ValidBlocker$ Creature | Execute$ AfflictLoseLife | Secondary$ True " +
-                    " | TriggerDescription$ Rampage " + n + " (" + Keyword.getInstance(keyword).getReminderText() + ")";
+                    " | TriggerDescription$ Afflict " + n + " (" + Keyword.getInstance(keyword).getReminderText() + ")";
 
             final String abStringAfflict = "DB$ Loselife | Defined$ TriggeredDefendingPlayer" +
                     " | LifeAmount$ " + n;
