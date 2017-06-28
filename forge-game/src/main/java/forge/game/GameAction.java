@@ -189,6 +189,11 @@ public class GameAction {
             c.removeSVar("EndOfTurnLeavePlay");
         }
 
+        // Clean up temporary variables such as Sunburst value or announced PayX value
+        if (!(zoneTo.is(ZoneType.Stack) || zoneTo.is(ZoneType.Battlefield))) {
+            c.clearTemporaryVars();
+        }
+
         if (fromBattlefield && !toBattlefield) {
             c.getController().setRevolt(true);
         }

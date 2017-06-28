@@ -7111,4 +7111,12 @@ public class Card extends GameEntity implements Comparable<Card> {
             this.addCounter(e.getKey(), e.getValue(), this, true);
         }
     }
+
+    public final void clearTemporaryVars() {
+        // Add cleanup for all variables that are set temporarily but that need
+        // to be restored to their original value if a card changes zones
+
+        removeSVar("PayX"); // Temporary AI X announcement variable
+        setSunburstValue(0); // Sunburst
+    }
 }
