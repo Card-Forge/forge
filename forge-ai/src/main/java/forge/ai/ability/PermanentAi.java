@@ -124,6 +124,7 @@ public class PermanentAi extends SpellAbilityAi {
             // String announce = sa.getParam("Announce");
             ManaCost mkCost = sa.getMultiKickerManaCost();
             ManaCost mCost = sa.getPayCosts().getTotalMana();
+            boolean isZeroCost = mCost.isZero();
             for (int i = 0; i < 10; i++) {
                 mCost = ManaCost.combine(mCost, mkCost);
                 ManaCostBeingPaid mcbp = new ManaCostBeingPaid(mCost);
@@ -132,6 +133,11 @@ public class PermanentAi extends SpellAbilityAi {
                     break;
                 }
                 card.setKickerMagnitude(i + 1);
+            }
+            if (isZeroCost && card.getKickerMagnitude() == 0) {
+                // Bail if the card cost was {0} and no multikicker was paid (e.g. Everflowing Chalice).
+                // TODO: update this if there's ever a card where it makes sense to play it for {0} with no multikicker
+                return false;
             }
         }
 
