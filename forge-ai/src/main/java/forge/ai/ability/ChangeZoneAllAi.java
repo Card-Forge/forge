@@ -155,6 +155,10 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 final Iterable<Player> oppList = Iterables.filter(ai.getOpponents(),
                         PlayerPredicates.isTargetableBy(sa));
 
+                if (Iterables.isEmpty(oppList)) {
+                    return false;
+                }
+
                 // get the one with the most in graveyard
                 // zone is visible so evaluate which would be hurt the most
                 Player oppTarget = Collections.max(Lists.newArrayList(oppList),
