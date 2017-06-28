@@ -976,7 +976,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
             if (entity instanceof Card) {
                 final Card c = (Card) entity;
-                if (!tr.getZone().contains(c.getZone().getZoneType())) {
+                if (c.getZone() != null && !tr.getZone().contains(c.getZone().getZoneType())) {
                     return false;
                 }
             }
