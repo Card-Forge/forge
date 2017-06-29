@@ -161,6 +161,7 @@ public class QuestEventDuelManager {
         final List<QuestEventDuel> duelOpponents = new ArrayList<>();
 
         QuestEventDifficulty randomDuelDifficulty = QuestEventDifficulty.EASY;
+
         if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_MEDIUMAI, index)) {
             addDuel(duelOpponents, QuestEventDifficulty.EASY, 3);
             randomDuelDifficulty = QuestEventDifficulty.EASY;
