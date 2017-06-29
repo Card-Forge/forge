@@ -97,6 +97,9 @@ public class RevealEffect extends SpellAbilityEffect {
             sb.append(tgtPlayers.get(0)).append(" reveals ");
             if (sa.hasParam("AnyNumber")) {
                 sb.append("any number of cards ");
+            } else if (sa.hasParam("NumCards")) {
+                int numCards = Integer.valueOf(sa.getParam("NumCards"));
+                sb.append(numCards > 1 ? numCards + " cards " : "a card ");
             } else {
                 sb.append("a card ");
             }
