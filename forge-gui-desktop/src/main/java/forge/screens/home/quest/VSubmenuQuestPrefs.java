@@ -346,6 +346,9 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         pnlDifficulty.add(new FLabel.Builder().text("Penalty for Loss").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
         pnlDifficulty.add(new PrefInput(QPref.PENALTY_LOSS, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
 
+        pnlDifficulty.add(new FLabel.Builder().text("More Duel Choices").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
+        pnlDifficulty.add(new PrefInput(QPref.MORE_DUEL_CHOICES, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
+
     }
 
     private void populateBooster() {

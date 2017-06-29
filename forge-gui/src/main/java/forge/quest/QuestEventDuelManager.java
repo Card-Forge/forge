@@ -20,6 +20,7 @@ package forge.quest;
 import forge.model.FModel;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.DifficultyPrefs;
+import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDuelReader;
 import forge.util.CollectionSuppliers;
 import forge.util.maps.EnumMapOfLists;
@@ -147,6 +148,8 @@ public class QuestEventDuelManager {
     public final List<QuestEventDuel> generateDuels() {
 
         final QuestPreferences questPreferences = FModel.getQuestPreferences();
+        boolean moreDuelChoices = questPreferences.getPrefInt(QPref.MORE_DUEL_CHOICES) > 0;
+
         if (FModel.getQuest().getAchievements() == null) {
             return null;
         }
@@ -157,30 +160,64 @@ public class QuestEventDuelManager {
         final int index = qCtrl.getAchievements().getDifficulty();
         final List<QuestEventDuel> duelOpponents = new ArrayList<>();
 
-        if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_MEDIUMAI, index)) {
-            addDuel(duelOpponents, QuestEventDifficulty.EASY, 3);
-            addRandomDuel(duelOpponents, QuestEventDifficulty.EASY);
-        } else if (numberOfWins == questPreferences.getPrefInt(DifficultyPrefs.WINS_MEDIUMAI, index)) {
-            addDuel(duelOpponents, QuestEventDifficulty.EASY, 1);
-            addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 2);
-            addRandomDuel(duelOpponents, QuestEventDifficulty.MEDIUM);
-        } else if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_HARDAI, index)) {
-            addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 3);
-            addRandomDuel(duelOpponents, QuestEventDifficulty.MEDIUM);
-        } else if (numberOfWins == questPreferences.getPrefInt(DifficultyPrefs.WINS_HARDAI, index)) {
-            addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 1);
-            addDuel(duelOpponents, QuestEventDifficulty.HARD, 2);
-            addRandomDuel(duelOpponents, QuestEventDifficulty.HARD);
-        } else if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_EXPERTAI, index)) {
-            addDuel(duelOpponents, QuestEventDifficulty.HARD, 3);
-            addRandomDuel(duelOpponents, QuestEventDifficulty.HARD);
-        } else {
-            addDuel(duelOpponents, QuestEventDifficulty.HARD, 2);
-            addDuel(duelOpponents, QuestEventDifficulty.EXPERT, 1);
-            if (Math.random() * 3 < 2) {
+        if (moreDuelChoices) {
+            if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_MEDIUMAI, index)) {
+                addDuel(duelOpponents, QuestEventDifficulty.EASY, 3);
+                addRandomDuel(duelOpponents, QuestEventDifficulty.EASY);
+            } else if (numberOfWins == questPreferences.getPrefInt(DifficultyPrefs.WINS_MEDIUMAI, index)) {
+                addDuel(duelOpponents, QuestEventDifficulty.EASY, 2);
+                addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 2);
+                addRandomDuel(duelOpponents, QuestEventDifficulty.MEDIUM);
+            } else if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_HARDAI, index)) {
+                addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 3);
+                addDuel(duelOpponents, QuestEventDifficulty.EASY, 1);
+                addRandomDuel(duelOpponents, QuestEventDifficulty.MEDIUM);
+            } else if (numberOfWins == questPreferences.getPrefInt(DifficultyPrefs.WINS_HARDAI, index)) {
+                addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 2);
+                addDuel(duelOpponents, QuestEventDifficulty.HARD, 2);
+                addRandomDuel(duelOpponents, QuestEventDifficulty.HARD);
+            } else if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_EXPERTAI, index)) {
+                addDuel(duelOpponents, QuestEventDifficulty.HARD, 3);
+                addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 1);
+                addDuel(duelOpponents, QuestEventDifficulty.EASY, 1);
                 addRandomDuel(duelOpponents, QuestEventDifficulty.HARD);
             } else {
-                addRandomDuel(duelOpponents, QuestEventDifficulty.EXPERT);
+                addDuel(duelOpponents, QuestEventDifficulty.HARD, 2);
+                addDuel(duelOpponents, QuestEventDifficulty.EXPERT, 1);
+                addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 1);
+                addDuel(duelOpponents, QuestEventDifficulty.EASY, 1);
+                if (Math.random() * 3 < 2) {
+                    addRandomDuel(duelOpponents, QuestEventDifficulty.HARD);
+                } else {
+                    addRandomDuel(duelOpponents, QuestEventDifficulty.EXPERT);
+                }
+            }
+        } else { 
+            if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_MEDIUMAI, index)) {
+                addDuel(duelOpponents, QuestEventDifficulty.EASY, 3);
+                addRandomDuel(duelOpponents, QuestEventDifficulty.EASY);
+            } else if (numberOfWins == questPreferences.getPrefInt(DifficultyPrefs.WINS_MEDIUMAI, index)) {
+                addDuel(duelOpponents, QuestEventDifficulty.EASY, 1);
+                addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 2);
+                addRandomDuel(duelOpponents, QuestEventDifficulty.MEDIUM);
+            } else if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_HARDAI, index)) {
+                addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 3);
+                addRandomDuel(duelOpponents, QuestEventDifficulty.MEDIUM);
+            } else if (numberOfWins == questPreferences.getPrefInt(DifficultyPrefs.WINS_HARDAI, index)) {
+                addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 1);
+                addDuel(duelOpponents, QuestEventDifficulty.HARD, 2);
+                addRandomDuel(duelOpponents, QuestEventDifficulty.HARD);
+            } else if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_EXPERTAI, index)) {
+                addDuel(duelOpponents, QuestEventDifficulty.HARD, 3);
+                addRandomDuel(duelOpponents, QuestEventDifficulty.HARD);
+            } else {
+                addDuel(duelOpponents, QuestEventDifficulty.HARD, 2);
+                addDuel(duelOpponents, QuestEventDifficulty.EXPERT, 1);
+                if (Math.random() * 3 < 2) {
+                    addRandomDuel(duelOpponents, QuestEventDifficulty.HARD);
+                } else {
+                    addRandomDuel(duelOpponents, QuestEventDifficulty.EXPERT);
+                }
             }
         }
 

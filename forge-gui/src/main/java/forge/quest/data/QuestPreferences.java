@@ -162,6 +162,8 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         SHOP_MAX_SELLING_PRICE("1000"),
         // Wins until the selling price limit is removed
         SHOP_WINS_FOR_NO_SELL_LIMIT("50"),
+        // Duels of the current difficulty only, or that and all difficulties below it?
+        MORE_DUEL_CHOICES("0"),
 
         //The number of cards to keep before selling
         PLAYSET_SIZE("4"),
@@ -316,6 +318,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
             case SHOP_SINGLES_UNCOMMON:
             case SHOP_SINGLES_RARE:
             case SHOP_WINS_FOR_NO_SELL_LIMIT:
+            case MORE_DUEL_CHOICES:
             default:
                 if (val < 0) {
                     return "Value too small (minimum 0).";
