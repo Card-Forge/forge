@@ -1,4 +1,4 @@
-Name:Lif Goes On
+Name:Life Goes On
 ManaCost:G
 Types:Instant
 A:SP$ GainLife | Cost$ G | LifeAmount$ X | SpellDescription$ You gain 4 life. If a creature died this turn, you gain 8 life instead.
