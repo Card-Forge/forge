@@ -143,36 +143,40 @@ public class SFilterUtil {
 
     public static Predicate<PaperCard> buildFoilFilter(Map<SItemManagerUtil.StatTypes, ? extends IButton> buttonMap) {
 
-    //		final Map<StatTypes, ? extends IButton> buttonMap2 =buttonMap;
-    	final int Foil = (((buttonMap.get(StatTypes.FOIL_OLD).isSelected()) ? 1 : 0) +
-    			((buttonMap.get(StatTypes.FOIL_NEW).isSelected()) ? 2 : 0) +
-    					((buttonMap.get(StatTypes.FOIL_NONE).isSelected()) ? 4 : 0));
-    	
-        	return new Predicate<PaperCard>() {
-                @Override
-                public boolean apply(PaperCard card) {
+        //		final Map<StatTypes, ? extends IButton> buttonMap2 =buttonMap;
+        final int Foil = (((buttonMap.get(StatTypes.FOIL_OLD).isSelected()) ? 1 : 0)
+                + ((buttonMap.get(StatTypes.FOIL_NEW).isSelected()) ? 2 : 0)
+                + ((buttonMap.get(StatTypes.FOIL_NONE).isSelected()) ? 4 : 0));
 
-              	                  	
-                	boolean result=false;
+        return new Predicate<PaperCard>() {
+            @Override
+            public boolean apply(PaperCard card) {
 
-            		CardEdition edition = StaticData.instance().getEditions().get(card.getEdition());
-                	if ((Foil & 1)==1) { 
-                		// Old Style Foil
-                		if (edition.getFoilType()==CardEdition.FoilType.OLD_STYLE) {result=result || card.isFoil();}
-                	}
-                	if ((Foil & 2)==2) { 
-                		// New Style Foil
-                		if (edition.getFoilType()==CardEdition.FoilType.MODERN) {result=result || card.isFoil();}
-                	}
-                	if ((Foil & 4)==4)
-                	{ result=result || !card.isFoil(); }
-                	return result;
+                boolean result = false;
+
+                CardEdition edition = StaticData.instance().getEditions().get(card.getEdition());
+                if ((Foil & 1) == 1) {
+                    // Old Style Foil
+                    if (edition.getFoilType() == CardEdition.FoilType.OLD_STYLE) {
+                        result = result || card.isFoil();
+                    }
                 }
-        	
+                if ((Foil & 2) == 2) {
+                    // New Style Foil
+                    if (edition.getFoilType() == CardEdition.FoilType.MODERN) {
+                        result = result || card.isFoil();
+                    }
+                }
+                if ((Foil & 4) == 4) {
+                    result = result || !card.isFoil();
+                }
+                return result;
+            }
+
         };
 
     }
-    
+
     public static Predicate<PaperCard> buildColorFilter(Map<SItemManagerUtil.StatTypes, ? extends IButton> buttonMap) {
         byte colors0 = 0;
 
