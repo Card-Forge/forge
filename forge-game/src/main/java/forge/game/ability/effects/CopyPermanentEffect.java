@@ -38,7 +38,6 @@ import forge.util.PredicateString.StringOp;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -291,7 +290,9 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                                 copy.removeStaticAbility(sta);
                         }
                         if (sa.hasParam("SetCreatureTypes")) {
-                            if (sta.hasParam("AddType")) {
+                            // currently only Changeling and similar should be affected by that
+                            // other cards using AddType$ ChosenType should not
+                            if (sta.hasParam("AddType") && "AllCreatureTypes".equals(sta.getParam("AddType"))) {
                                 copy.removeStaticAbility(sta);
                             }
                         }
@@ -403,10 +404,10 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                 }
                 if (sa.hasParam("Embalm") || sa.hasParam("Eternalize")) {
                     // Trigger EmbalmOrEternalize!
-                    final HashMap<String, Object> runParams = new HashMap<String, Object>();
-                    runParams.put("Card", sa.getHostCard());
+                    final Map<String, Object> runParams = Maps.newHashMap();
+                    runParams.put("Card", c);
                     runParams.put("Player", sa.getActivatingPlayer());
-                    sa.getHostCard().getGame().getTriggerHandler().runTrigger(TriggerType.EmbalmOrEternalize, runParams, false);
+                    game.getTriggerHandler().runTrigger(TriggerType.EmbalmOrEternalize, runParams, false);
                 }
             } // end canBeTargetedBy
         } // end foreach Card
