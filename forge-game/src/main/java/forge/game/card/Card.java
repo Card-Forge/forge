@@ -4843,13 +4843,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!isManifested()) {
                 return false;
             }
-        } else if (property.startsWith("hasLevelUp")) {
-            for (final SpellAbility sa : getSpellAbilities()) {
-                if (sa.getApi() == ApiType.PutCounter && sa.hasParam("LevelUp")) {
-                    return true;
-                }
-            }
-            return false;
         } else if (property.startsWith("DrawnThisTurn")) {
           if (!getDrawnThisTurn()) {
               return false;
