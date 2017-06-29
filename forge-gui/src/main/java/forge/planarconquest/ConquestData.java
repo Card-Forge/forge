@@ -45,7 +45,6 @@ import java.util.Map.Entry;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-import java.util.stream.Collectors;
 
 public final class ConquestData {
     private static final String XML_FILE = "data.xml";
