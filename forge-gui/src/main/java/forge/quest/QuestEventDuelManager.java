@@ -38,85 +38,84 @@ import java.util.*;
  */
 public class QuestEventDuelManager {
 
-	private final MapOfLists<QuestEventDifficulty, QuestEventDuel> sortedDuels = new EnumMapOfLists<>(QuestEventDifficulty.class, CollectionSuppliers.<QuestEventDuel>arrayLists());
-	private final IStorage<QuestEventDuel> allDuels;
+    private final MapOfLists<QuestEventDifficulty, QuestEventDuel> sortedDuels = new EnumMapOfLists<>(QuestEventDifficulty.class, CollectionSuppliers.<QuestEventDuel>arrayLists());
+    private final IStorage<QuestEventDuel> allDuels;
 
-	/**
-	 * Instantiate all events and difficulty lists.
-	 *
-	 * @param dir &emsp; File object
-	 */
-	public QuestEventDuelManager(final File dir) {
-		allDuels = new StorageBase<>("Quest duels", new QuestDuelReader(dir));
-		assembleDuelDifficultyLists();
-	}
+    /**
+     * Instantiate all events and difficulty lists.
+     *
+     * @param dir &emsp; File object
+     */
+    public QuestEventDuelManager(final File dir) {
+        allDuels = new StorageBase<>("Quest duels", new QuestDuelReader(dir));
+        assembleDuelDifficultyLists();
+    }
 
-	public Iterable<QuestEventDuel> getAllDuels() {
-		return allDuels;
-	}
+    public Iterable<QuestEventDuel> getAllDuels() {
+        return allDuels;
+    }
 
-	public Iterable<QuestEventDuel> getDuels(QuestEventDifficulty difficulty) {
-		return sortedDuels.get(difficulty);
-	}
+    public Iterable<QuestEventDuel> getDuels(QuestEventDifficulty difficulty) {
+        return sortedDuels.get(difficulty);
+    }
 
-	// define fallback orders if there aren't enough opponents defined for a particular difficultly level
-	private static List<QuestEventDifficulty> easyOrder = Arrays.asList(QuestEventDifficulty.EASY, QuestEventDifficulty.MEDIUM, QuestEventDifficulty.HARD, QuestEventDifficulty.EXPERT);
-	private static List<QuestEventDifficulty> mediumOrder = Arrays.asList(QuestEventDifficulty.MEDIUM, QuestEventDifficulty.HARD, QuestEventDifficulty.EASY, QuestEventDifficulty.EXPERT);
-	private static List<QuestEventDifficulty> hardOrder = Arrays.asList(QuestEventDifficulty.HARD, QuestEventDifficulty.MEDIUM, QuestEventDifficulty.EASY, QuestEventDifficulty.EXPERT);
-	private static List<QuestEventDifficulty> expertOrder = Arrays.asList(QuestEventDifficulty.EXPERT, QuestEventDifficulty.HARD, QuestEventDifficulty.MEDIUM, QuestEventDifficulty.EASY);
+    // define fallback orders if there aren't enough opponents defined for a particular difficultly level
+    private static List<QuestEventDifficulty> easyOrder = Arrays.asList(QuestEventDifficulty.EASY, QuestEventDifficulty.MEDIUM, QuestEventDifficulty.HARD, QuestEventDifficulty.EXPERT);
+    private static List<QuestEventDifficulty> mediumOrder = Arrays.asList(QuestEventDifficulty.MEDIUM, QuestEventDifficulty.HARD, QuestEventDifficulty.EASY, QuestEventDifficulty.EXPERT);
+    private static List<QuestEventDifficulty> hardOrder = Arrays.asList(QuestEventDifficulty.HARD, QuestEventDifficulty.MEDIUM, QuestEventDifficulty.EASY, QuestEventDifficulty.EXPERT);
+    private static List<QuestEventDifficulty> expertOrder = Arrays.asList(QuestEventDifficulty.EXPERT, QuestEventDifficulty.HARD, QuestEventDifficulty.MEDIUM, QuestEventDifficulty.EASY);
 
     private List<QuestEventDifficulty> getOrderForDifficulty(QuestEventDifficulty d) {
         final List<QuestEventDifficulty> difficultyOrder;
 
-		switch (d) {
-			case EASY:
-				difficultyOrder = easyOrder;
-				break;
-			case MEDIUM:
-				difficultyOrder = mediumOrder;
-				break;
-			case HARD:
-				difficultyOrder = hardOrder;
-				break;
-			case EXPERT:
-				difficultyOrder = expertOrder;
-				break;
-			default:
-				throw new RuntimeException("unhandled difficulty: " + d);
-		}
+        switch (d) {
+            case EASY:
+                difficultyOrder = easyOrder;
+                break;
+            case MEDIUM:
+                difficultyOrder = mediumOrder;
+                break;
+            case HARD:
+                difficultyOrder = hardOrder;
+                break;
+            case EXPERT:
+                difficultyOrder = expertOrder;
+                break;
+            default:
+                throw new RuntimeException("unhandled difficulty: " + d);
+        }
 
         return difficultyOrder;
     }
-    
-	private void addDuel(List<QuestEventDuel> outList, QuestEventDifficulty targetDifficulty, int toAdd) {
 
-		// if there's no way we can satisfy the request, return now
-		if (allDuels.size() <= toAdd) {
-			return;
-		}
+    private void addDuel(List<QuestEventDuel> outList, QuestEventDifficulty targetDifficulty, int toAdd) {
 
-		final List<QuestEventDifficulty> difficultyOrder = getOrderForDifficulty(targetDifficulty);
+        // if there's no way we can satisfy the request, return now
+        if (allDuels.size() <= toAdd) {
+            return;
+        }
 
-		for (QuestEventDifficulty d : difficultyOrder) { // will add duels from preferred difficulty, will use others if the former has too few options.
-			for (QuestEventDuel duel : sortedDuels.get(d)) {
-				if (toAdd <= 0) {
-					return;
-				}
-				if (!outList.contains(duel)) {
-					outList.add(duel);
-					toAdd--;
-				}
-			}
-		}
+        final List<QuestEventDifficulty> difficultyOrder = getOrderForDifficulty(targetDifficulty);
 
-	}
+        for (QuestEventDifficulty d : difficultyOrder) { // will add duels from preferred difficulty, will use others if the former has too few options.
+            for (QuestEventDuel duel : sortedDuels.get(d)) {
+                if (toAdd <= 0) {
+                    return;
+                }
+                if (!outList.contains(duel)) {
+                    outList.add(duel);
+                    toAdd--;
+                }
+            }
+        }
 
-	private void addRandomDuel(final List<QuestEventDuel> listOfDuels, final QuestEventDifficulty difficulty) {
+    }
 
-		QuestEventDuel duel = new QuestEventDuel();
+    private void addRandomDuel(final List<QuestEventDuel> listOfDuels, final QuestEventDifficulty difficulty) {
+
+        QuestEventDuel duel = new QuestEventDuel();
 
         List<QuestEventDifficulty> difficultyOrder = getOrderForDifficulty(difficulty);
-        
         List<QuestEventDuel> possibleDuels = new ArrayList<>();
         for (QuestEventDifficulty diff : difficultyOrder) {
             possibleDuels = new ArrayList<>(sortedDuels.get(diff));
@@ -124,99 +123,100 @@ public class QuestEventDuelManager {
                 break;
             }
         }
-        
-		QuestEventDuel randomOpponent = possibleDuels.get(((int) (possibleDuels.size() * Math.random())));
 
-		duel.setTitle("Random Opponent");
-		duel.setIconImageKey(randomOpponent.getIconImageKey());
-		duel.setOpponentName(randomOpponent.getTitle());
-		duel.setDifficulty(difficulty);
-		duel.setProfile(randomOpponent.getProfile());
-		duel.setShowDifficulty(false);
-		duel.setDescription("Fight a random opponent");
-		duel.setEventDeck(randomOpponent.getEventDeck());
+        QuestEventDuel randomOpponent = possibleDuels.get(((int) (possibleDuels.size() * Math.random())));
 
-		listOfDuels.add(duel);
+        duel.setTitle("Random Opponent");
+        duel.setIconImageKey(randomOpponent.getIconImageKey());
+        duel.setOpponentName(randomOpponent.getTitle());
+        duel.setDifficulty(difficulty);
+        duel.setProfile(randomOpponent.getProfile());
+        duel.setShowDifficulty(false);
+        duel.setDescription("Fight a random opponent");
+        duel.setEventDeck(randomOpponent.getEventDeck());
 
-	}
+        listOfDuels.add(duel);
 
-	/**
-	 * Generates an array of new duel opponents based on current win conditions.
-	 *
-	 * @return an array of {@link java.lang.String} objects.
-	 */
-	public final List<QuestEventDuel> generateDuels() {
+    }
 
-		final QuestPreferences questPreferences = FModel.getQuestPreferences();
-		if (FModel.getQuest().getAchievements() == null) {
-			return null;
-		}
+    /**
+     * Generates an array of new duel opponents based on current win conditions.
+     *
+     * @return an array of {@link java.lang.String} objects.
+     */
+    public final List<QuestEventDuel> generateDuels() {
 
-		final QuestController qCtrl = FModel.getQuest();
-		final int numberOfWins = qCtrl.getAchievements().getWin();
+        final QuestPreferences questPreferences = FModel.getQuestPreferences();
+        if (FModel.getQuest().getAchievements() == null) {
+            return null;
+        }
 
-		final int index = qCtrl.getAchievements().getDifficulty();
-		final List<QuestEventDuel> duelOpponents = new ArrayList<>();
+        final QuestController qCtrl = FModel.getQuest();
+        final int numberOfWins = qCtrl.getAchievements().getWin();
 
-		if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_MEDIUMAI, index)) {
-			addDuel(duelOpponents, QuestEventDifficulty.EASY, 3);
-			addRandomDuel(duelOpponents, QuestEventDifficulty.EASY);
-		} else if (numberOfWins == questPreferences.getPrefInt(DifficultyPrefs.WINS_MEDIUMAI, index)) {
-			addDuel(duelOpponents, QuestEventDifficulty.EASY, 1);
-			addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 2);
-			addRandomDuel(duelOpponents, QuestEventDifficulty.MEDIUM);
-		} else if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_HARDAI, index)) {
-			addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 3);
-			addRandomDuel(duelOpponents, QuestEventDifficulty.MEDIUM);
-		} else if (numberOfWins == questPreferences.getPrefInt(DifficultyPrefs.WINS_HARDAI, index)) {
-			addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 1);
-			addDuel(duelOpponents, QuestEventDifficulty.HARD, 2);
-			addRandomDuel(duelOpponents, QuestEventDifficulty.HARD);
-		} else if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_EXPERTAI, index)) {
-			addDuel(duelOpponents, QuestEventDifficulty.HARD, 3);
-			addRandomDuel(duelOpponents, QuestEventDifficulty.HARD);
-		} else {
-			addDuel(duelOpponents, QuestEventDifficulty.HARD, 2);
-			addDuel(duelOpponents, QuestEventDifficulty.EXPERT, 1);
-			if (Math.random() * 3 < 2) {
-				addRandomDuel(duelOpponents, QuestEventDifficulty.HARD);
-			} else {
-				addRandomDuel(duelOpponents, QuestEventDifficulty.EXPERT);
-			}
-		}
+        final int index = qCtrl.getAchievements().getDifficulty();
+        final List<QuestEventDuel> duelOpponents = new ArrayList<>();
 
-		return duelOpponents;
+        if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_MEDIUMAI, index)) {
+            addDuel(duelOpponents, QuestEventDifficulty.EASY, 3);
+            addRandomDuel(duelOpponents, QuestEventDifficulty.EASY);
+        } else if (numberOfWins == questPreferences.getPrefInt(DifficultyPrefs.WINS_MEDIUMAI, index)) {
+            addDuel(duelOpponents, QuestEventDifficulty.EASY, 1);
+            addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 2);
+            addRandomDuel(duelOpponents, QuestEventDifficulty.MEDIUM);
+        } else if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_HARDAI, index)) {
+            addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 3);
+            addRandomDuel(duelOpponents, QuestEventDifficulty.MEDIUM);
+        } else if (numberOfWins == questPreferences.getPrefInt(DifficultyPrefs.WINS_HARDAI, index)) {
+            addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 1);
+            addDuel(duelOpponents, QuestEventDifficulty.HARD, 2);
+            addRandomDuel(duelOpponents, QuestEventDifficulty.HARD);
+        } else if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_EXPERTAI, index)) {
+            addDuel(duelOpponents, QuestEventDifficulty.HARD, 3);
+            addRandomDuel(duelOpponents, QuestEventDifficulty.HARD);
+        } else {
+            addDuel(duelOpponents, QuestEventDifficulty.HARD, 2);
+            addDuel(duelOpponents, QuestEventDifficulty.EXPERT, 1);
+            if (Math.random() * 3 < 2) {
+                addRandomDuel(duelOpponents, QuestEventDifficulty.HARD);
+            } else {
+                addRandomDuel(duelOpponents, QuestEventDifficulty.EXPERT);
+            }
+        }
 
-	}
+        return duelOpponents;
 
-	/**
-	 * <p>
-	 * assembleDuelDifficultyLists.
-	 * </p>
-	 * Assemble duel deck difficulty lists
-	 */
-	private void assembleDuelDifficultyLists() {
+    }
 
-		sortedDuels.clear();
-		sortedDuels.put(QuestEventDifficulty.EASY, new ArrayList<QuestEventDuel>());
-		sortedDuels.put(QuestEventDifficulty.MEDIUM, new ArrayList<QuestEventDuel>());
-		sortedDuels.put(QuestEventDifficulty.HARD, new ArrayList<QuestEventDuel>());
-		sortedDuels.put(QuestEventDifficulty.EXPERT, new ArrayList<QuestEventDuel>());
+    /**
+     * <p>
+     * assembleDuelDifficultyLists.
+     * </p>
+     * Assemble duel deck difficulty lists
+     */
+    private void assembleDuelDifficultyLists() {
 
-		for (final QuestEventDuel qd : allDuels) {
-			sortedDuels.add(qd.getDifficulty(), qd);
-		}
+        sortedDuels.clear();
+        sortedDuels.put(QuestEventDifficulty.EASY, new ArrayList<QuestEventDuel>());
+        sortedDuels.put(QuestEventDifficulty.MEDIUM, new ArrayList<QuestEventDuel>());
+        sortedDuels.put(QuestEventDifficulty.HARD, new ArrayList<QuestEventDuel>());
+        sortedDuels.put(QuestEventDifficulty.EXPERT, new ArrayList<QuestEventDuel>());
 
-	}
+        for (final QuestEventDuel qd : allDuels) {
+            sortedDuels.add(qd.getDifficulty(), qd);
+        }
 
-	/** */
-	public void randomizeOpponents() {
-		final long seed = new Random().nextLong();
-		final Random r = new Random(seed);
-		for (QuestEventDifficulty qd : sortedDuels.keySet()) {
-			List<QuestEventDuel> list = (List<QuestEventDuel>) sortedDuels.get(qd);
-			Collections.shuffle(list, r);
-		}
-	}
+    }
+
+    /**
+     *      */
+    public void randomizeOpponents() {
+        final long seed = new Random().nextLong();
+        final Random r = new Random(seed);
+        for (QuestEventDifficulty qd : sortedDuels.keySet()) {
+            List<QuestEventDuel> list = (List<QuestEventDuel>) sortedDuels.get(qd);
+            Collections.shuffle(list, r);
+        }
+    }
 
 }
