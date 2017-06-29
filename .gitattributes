@@ -720,6 +720,7 @@ forge-game/src/main/java/forge/game/trigger/TriggerDestroyed.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerDevoured.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerDiscarded.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerDrawn.java svneol=native#text/plain
+forge-game/src/main/java/forge/game/trigger/TriggerEmbalmOrEternalize.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerEvolved.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerExerted.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerExploited.java -text
@@ -17042,6 +17043,7 @@ forge-gui/res/cardsfolder/upcoming/torment_of_venom.txt -text
 forge-gui/res/cardsfolder/upcoming/uncage_the_menagerie.txt -text
 forge-gui/res/cardsfolder/upcoming/unesh_criosphinx_sovereign.txt -text
 forge-gui/res/cardsfolder/upcoming/visage_of_bolas.txt -text
+forge-gui/res/cardsfolder/upcoming/vizier_of_the_anointed.txt -text
 forge-gui/res/cardsfolder/upcoming/vizier_of_the_true.txt -text
 forge-gui/res/cardsfolder/upcoming/wasp_of_the_bitter_end.txt -text
 forge-gui/res/cardsfolder/upcoming/wildfire_eternal.txt -text

@@ -4850,6 +4850,20 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
             return false;
+        } else if (property.startsWith("hasEmbalm")) {
+            for (final SpellAbility sa : getSpellAbilities()) {
+                if (sa.getApi() == ApiType.CopyPermanent && sa.hasParam("Embalm")) {
+                    return true;
+                }
+            }
+            return false;
+        } else if (property.startsWith("hasEternalize")) {
+            for (final SpellAbility sa : getSpellAbilities()) {
+                if (sa.getApi() == ApiType.CopyPermanent && sa.hasParam("Eternalize")) {
+                    return true;
+                }
+            }
+            return false;
         } else if (property.startsWith("DrawnThisTurn")) {
           if (!getDrawnThisTurn()) {
               return false;

@@ -28,6 +28,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
@@ -37,6 +38,7 @@ import forge.util.PredicateString.StringOp;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -398,6 +400,13 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                 }
                 if (sa.hasParam("ImprintCopied")) {
                     hostCard.addImprintedCards(crds);
+                }
+                if (sa.hasParam("Embalm") || sa.hasParam("Eternalize")) {
+                    // Trigger EmbalmOrEternalize!
+                    final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                    runParams.put("Card", sa.getHostCard());
+                    runParams.put("Player", sa.getActivatingPlayer());
+                    sa.getHostCard().getGame().getTriggerHandler().runTrigger(TriggerType.EmbalmOrEternalize, runParams, false);
                 }
             } // end canBeTargetedBy
         } // end foreach Card
