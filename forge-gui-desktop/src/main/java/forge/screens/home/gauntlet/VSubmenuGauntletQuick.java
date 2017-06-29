@@ -5,6 +5,8 @@ import forge.deckchooser.FDeckChooser;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
+import forge.model.FModel;
+import forge.properties.ForgePreferences;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.StartButton;
@@ -83,7 +85,13 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         boxThemeDecks.setSelected(true);
         boxColorDecks.setSelected(true);
         boxStandardColorDecks.setSelected(true);
-        boxStandardCardgenDecks.setSelected(true);
+        if(!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY)) {
+            boxStandardCardgenDecks.setSelected(true);
+            boxModernCardgenDecks.setSelected(true);
+        }else{
+            boxStandardCardgenDecks.setSelected(false);
+            boxModernCardgenDecks.setSelected(false);
+        }
         boxModernColorDecks.setSelected(true);
 
         sliOpponents.setMajorTickSpacing(5);
@@ -106,9 +114,11 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         pnlOptions.add(boxQuestDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
         pnlOptions.add(boxThemeDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
         pnlOptions.add(boxColorDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
+        if(!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY)) {
+            pnlOptions.add(boxStandardCardgenDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
+            pnlOptions.add(boxModernCardgenDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
+        }
         pnlOptions.add(boxStandardColorDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
-        pnlOptions.add(boxStandardCardgenDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
-        pnlOptions.add(boxModernCardgenDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
         pnlOptions.add(boxModernColorDecks, "w 96%!, h 30px!, gap 2% 0 0 0");
     }
 

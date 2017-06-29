@@ -440,8 +440,10 @@ public class FDeckChooser extends FScreen {
                 cmbDeckTypes.addItem(DeckType.QUEST_OPPONENT_DECK);
                 cmbDeckTypes.addItem(DeckType.COLOR_DECK);
                 cmbDeckTypes.addItem(DeckType.STANDARD_COLOR_DECK);
-                cmbDeckTypes.addItem(DeckType.STANDARD_CARDGEN_DECK);
-                cmbDeckTypes.addItem(DeckType.MODERN_CARDGEN_DECK);
+                if(!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY)) {
+                    cmbDeckTypes.addItem(DeckType.STANDARD_CARDGEN_DECK);
+                    cmbDeckTypes.addItem(DeckType.MODERN_CARDGEN_DECK);
+                }
                 cmbDeckTypes.addItem(DeckType.MODERN_COLOR_DECK);
                 cmbDeckTypes.addItem(DeckType.THEME_DECK);
                 cmbDeckTypes.addItem(DeckType.RANDOM_DECK);
@@ -937,19 +939,32 @@ public class FDeckChooser extends FScreen {
             @Override
             public void run(final Integer numOpponents) {
                 if (numOpponents == null) { return; }
-
+                List<DeckType> deckTypes=null;
+                if(!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY)) {
+                    deckTypes=Arrays.asList(new DeckType[] {
+                            DeckType.CUSTOM_DECK,
+                            DeckType.PRECONSTRUCTED_DECK,
+                            DeckType.QUEST_OPPONENT_DECK,
+                            DeckType.COLOR_DECK,
+                            DeckType.STANDARD_COLOR_DECK,
+                            DeckType.STANDARD_CARDGEN_DECK,
+                            DeckType.MODERN_COLOR_DECK,
+                            DeckType.MODERN_CARDGEN_DECK,
+                            DeckType.THEME_DECK
+                    });
+                }else{
+                    deckTypes=Arrays.asList(new DeckType[] {
+                            DeckType.CUSTOM_DECK,
+                            DeckType.PRECONSTRUCTED_DECK,
+                            DeckType.QUEST_OPPONENT_DECK,
+                            DeckType.COLOR_DECK,
+                            DeckType.STANDARD_COLOR_DECK,
+                            DeckType.MODERN_COLOR_DECK,
+                            DeckType.THEME_DECK
+                    });
+                }
                 ListChooser<DeckType> chooser = new ListChooser<DeckType>(
-                        "Choose allowed deck types for opponents", 0, 7, Arrays.asList(new DeckType[] {
-                        DeckType.CUSTOM_DECK,
-                        DeckType.PRECONSTRUCTED_DECK,
-                        DeckType.QUEST_OPPONENT_DECK,
-                        DeckType.COLOR_DECK,
-                        DeckType.STANDARD_COLOR_DECK,
-                        DeckType.STANDARD_CARDGEN_DECK,
-                        DeckType.MODERN_COLOR_DECK,
-                        DeckType.MODERN_CARDGEN_DECK,
-                        DeckType.THEME_DECK
-                }), null, new Callback<List<DeckType>>() {
+                        "Choose allowed deck types for opponents", 0, 7, deckTypes, null, new Callback<List<DeckType>>() {
                     @Override
                     public void run(final List<DeckType> allowedDeckTypes) {
                         if (allowedDeckTypes == null || allowedDeckTypes.isEmpty()) { return; }

@@ -214,7 +214,9 @@ public final class FModel {
         AiProfileUtil.loadAllProfiles(ForgeConstants.AI_PROFILE_DIR);
 
         //generate Deck Gen matrix
-        CardRelationMatrixGenerator.initialize();
+        if(!FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY)) {
+            CardRelationMatrixGenerator.initialize();
+        }
     }
 
     public static QuestController getQuest() {

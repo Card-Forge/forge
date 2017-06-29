@@ -1,5 +1,8 @@
 package forge.deck;
 
+import forge.model.FModel;
+import forge.properties.ForgePreferences;
+
 public enum DeckType {
     CUSTOM_DECK ("Custom User Decks"),
     CONSTRUCTED_DECK ("Constructed Decks"),
@@ -21,19 +24,37 @@ public enum DeckType {
     NET_DECK ("Net Decks"),
     NET_COMMANDER_DECK ("Net Commander Decks");
 
-    public static final DeckType[] ConstructedOptions = new DeckType[] {
-        DeckType.CUSTOM_DECK,
-        DeckType.PRECONSTRUCTED_DECK,
-        DeckType.QUEST_OPPONENT_DECK,
-        DeckType.COLOR_DECK,
-        DeckType.STANDARD_COLOR_DECK,
-        DeckType.STANDARD_CARDGEN_DECK,
-        DeckType.MODERN_CARDGEN_DECK,
-        DeckType.MODERN_COLOR_DECK,
-        DeckType.THEME_DECK,
-        DeckType.RANDOM_DECK,
-        DeckType.NET_DECK
-    };
+    public static DeckType[] ConstructedOptions;
+
+    static {
+        if (!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY)) {
+            ConstructedOptions = new DeckType[]{
+                    DeckType.CUSTOM_DECK,
+                    DeckType.PRECONSTRUCTED_DECK,
+                    DeckType.QUEST_OPPONENT_DECK,
+                    DeckType.COLOR_DECK,
+                    DeckType.STANDARD_COLOR_DECK,
+                    DeckType.STANDARD_CARDGEN_DECK,
+                    DeckType.MODERN_CARDGEN_DECK,
+                    DeckType.MODERN_COLOR_DECK,
+                    DeckType.THEME_DECK,
+                    DeckType.RANDOM_DECK,
+                    DeckType.NET_DECK
+            };
+        } else {
+            ConstructedOptions = new DeckType[]{
+                    DeckType.CUSTOM_DECK,
+                    DeckType.PRECONSTRUCTED_DECK,
+                    DeckType.QUEST_OPPONENT_DECK,
+                    DeckType.COLOR_DECK,
+                    DeckType.STANDARD_COLOR_DECK,
+                    DeckType.MODERN_COLOR_DECK,
+                    DeckType.THEME_DECK,
+                    DeckType.RANDOM_DECK,
+                    DeckType.NET_DECK
+            };
+        }
+    }
 
     private String value;
     private DeckType(final String value) {
