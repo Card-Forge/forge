@@ -44,7 +44,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.base.Function;
-import com.google.common.collect.Lists;
 
 public final class ConquestData {
     private static final String XML_FILE = "data.xml";
@@ -199,9 +198,14 @@ public final class ConquestData {
     }
 
     public int getAccessiblePlaneCount() {
-        return Lists.newArrayList(FModel.getPlanes()).stream()
-                .filter((ConquestPlane c) -> { return !c.isUnreachable(); } )
-                .toArray().length;
+        // TODO: Java 8 stream implementation of filtering
+        int i = 0;
+        for (ConquestPlane plane : FModel.getPlanes()) {
+            if (!plane.isUnreachable()) {
+                i++;
+            }
+        }
+        return i;
     }
 
     public void unlockPlane(ConquestPlane plane) {
