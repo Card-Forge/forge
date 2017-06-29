@@ -899,7 +899,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
                 c = Aggregates.random(fetchList);
             }
-            else if (defined) {
+            else if (defined && !sa.hasParam("ChooseFromDefined")) {
                 c = Iterables.getFirst(fetchList, null);
             }
             else {
