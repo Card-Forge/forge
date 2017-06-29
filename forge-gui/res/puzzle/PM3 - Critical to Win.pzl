@@ -9,9 +9,9 @@ ActivePlayer=Human
 ActivePhase=Main1
 HumanLife=7
 AILife=5
-HumanPlay=Blind Zealot; Mortis Dogs|Id:2; Shrine of Boundless Growth|Counters:CHARGE=7|Id:3; Strider Harness|Attaching:2; Viridian Harvest|Attaching:3; Plains; Forest; Swamp; Swamp
 HumanHand=Gut Shot; Karn Liberated; Noxious Revival; Phyrexian Metamorph
-AIPlay=Alpha Tyrranax; Caustic Hound|Id:1; Batterskull|Attaching:1; Fangren Marauder|Tapped; Soul Conduit; Forest; Forest; Forest; Mountain; Mountain; Mountain
+HumanPlay=Shrine of Boundless Growth|Counters:CHARGE=7|Id:5;Viridian Harvest|Attaching:5;Mortis Dogs|Id:7;Strider Harness|Attaching:7;Blind Zealot;Plains;Forest;Swamp;Swamp
+AIPlay=Caustic Hound|Id:14;Batterskull|Attaching:14;Alpha Tyrranax;Fangren Marauder|Tapped;Soul Conduit;Forest;Forest;Forest;Mountain;Mountain;Mountain
 # Ramp difficulty by changing
 # A) Noxious Revival => Surgical Extraction
 # B) Blind Zealot => Pro Artifacts, Apostle's Blessing => Your graveyard
