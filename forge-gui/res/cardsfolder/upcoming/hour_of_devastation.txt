@@ -1,0 +1,7 @@
+Name:Hour of Devastation
+ManaCost:3 R R
+Types:Instant
+A:SP$ AnimateAll | Cost$ 3 R R | ValidCards$ Creature | RemoveKeywords$ Indestructible | SubAbility$ DBDealDamage | SpellDescription$ All creatures lose indestructible until end of turn. Hour of Devastation deals 5 damage to each creature and each non-Bolas planeswalker.
+SVar:DBDealDamage:DB$ DealDamage | Defined$ Creature,Planeswalker.nonBolas | NumDmg$ 5
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hour_of_devastation.jpg
+Oracle:All creatures lose indestructible until end of turn. Hour of Devastation deals 5 damage to each creature and each non-Bolas planeswalker.

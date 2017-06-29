@@ -1,0 +1,16 @@
+Name:Consign
+ManaCost:1 U
+AlternateMode: Split
+Types:Instant
+A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent to its owner's hand.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/consign_oblivion.jpg
+Oracle:Return target nonland permanent to its owner's hand.
+
+ALTERNATE
+
+Name:Oblivion
+ManaCost:4 B
+Types:Sorcery
+K:Aftermath
+A:SP$ Discard | Cost$ 4 B | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target opponent discards two cards.
+Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nTarget opponent discards two cards.
