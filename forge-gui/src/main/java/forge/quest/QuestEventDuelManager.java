@@ -160,66 +160,48 @@ public class QuestEventDuelManager {
         final int index = qCtrl.getAchievements().getDifficulty();
         final List<QuestEventDuel> duelOpponents = new ArrayList<>();
 
-        if (moreDuelChoices) {
-            if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_MEDIUMAI, index)) {
-                addDuel(duelOpponents, QuestEventDifficulty.EASY, 3);
-                addRandomDuel(duelOpponents, QuestEventDifficulty.EASY);
-            } else if (numberOfWins == questPreferences.getPrefInt(DifficultyPrefs.WINS_MEDIUMAI, index)) {
-                addDuel(duelOpponents, QuestEventDifficulty.EASY, 2);
-                addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 2);
-                addRandomDuel(duelOpponents, QuestEventDifficulty.MEDIUM);
-            } else if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_HARDAI, index)) {
-                addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 3);
-                addDuel(duelOpponents, QuestEventDifficulty.EASY, 1);
-                addRandomDuel(duelOpponents, QuestEventDifficulty.MEDIUM);
-            } else if (numberOfWins == questPreferences.getPrefInt(DifficultyPrefs.WINS_HARDAI, index)) {
-                addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 2);
-                addDuel(duelOpponents, QuestEventDifficulty.HARD, 2);
-                addRandomDuel(duelOpponents, QuestEventDifficulty.HARD);
-            } else if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_EXPERTAI, index)) {
-                addDuel(duelOpponents, QuestEventDifficulty.HARD, 3);
-                addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 1);
-                addDuel(duelOpponents, QuestEventDifficulty.EASY, 1);
-                addRandomDuel(duelOpponents, QuestEventDifficulty.HARD);
+        QuestEventDifficulty randomDuelDifficulty = QuestEventDifficulty.EASY;
+        if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_MEDIUMAI, index)) {
+            addDuel(duelOpponents, QuestEventDifficulty.EASY, 3);
+            randomDuelDifficulty = QuestEventDifficulty.EASY;
+        } else if (numberOfWins == questPreferences.getPrefInt(DifficultyPrefs.WINS_MEDIUMAI, index)) {
+            addDuel(duelOpponents, QuestEventDifficulty.EASY, 1);
+            addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 2);
+            randomDuelDifficulty = QuestEventDifficulty.MEDIUM;
+        } else if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_HARDAI, index)) {
+            addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 3);
+            randomDuelDifficulty = QuestEventDifficulty.MEDIUM;
+        } else if (numberOfWins == questPreferences.getPrefInt(DifficultyPrefs.WINS_HARDAI, index)) {
+            addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 1);
+            addDuel(duelOpponents, QuestEventDifficulty.HARD, 2);
+            randomDuelDifficulty = QuestEventDifficulty.HARD;
+        } else if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_EXPERTAI, index)) {
+            addDuel(duelOpponents, QuestEventDifficulty.HARD, 3);
+            randomDuelDifficulty = QuestEventDifficulty.HARD;
+        } else {
+            addDuel(duelOpponents, QuestEventDifficulty.HARD, 2);
+            addDuel(duelOpponents, QuestEventDifficulty.EXPERT, 1);
+            if (Math.random() * 3 < 2) {
+                randomDuelDifficulty = QuestEventDifficulty.HARD;
             } else {
-                addDuel(duelOpponents, QuestEventDifficulty.HARD, 2);
-                addDuel(duelOpponents, QuestEventDifficulty.EXPERT, 1);
-                addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 1);
-                addDuel(duelOpponents, QuestEventDifficulty.EASY, 1);
-                if (Math.random() * 3 < 2) {
-                    addRandomDuel(duelOpponents, QuestEventDifficulty.HARD);
-                } else {
-                    addRandomDuel(duelOpponents, QuestEventDifficulty.EXPERT);
-                }
-            }
-        } else { 
-            if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_MEDIUMAI, index)) {
-                addDuel(duelOpponents, QuestEventDifficulty.EASY, 3);
-                addRandomDuel(duelOpponents, QuestEventDifficulty.EASY);
-            } else if (numberOfWins == questPreferences.getPrefInt(DifficultyPrefs.WINS_MEDIUMAI, index)) {
-                addDuel(duelOpponents, QuestEventDifficulty.EASY, 1);
-                addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 2);
-                addRandomDuel(duelOpponents, QuestEventDifficulty.MEDIUM);
-            } else if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_HARDAI, index)) {
-                addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 3);
-                addRandomDuel(duelOpponents, QuestEventDifficulty.MEDIUM);
-            } else if (numberOfWins == questPreferences.getPrefInt(DifficultyPrefs.WINS_HARDAI, index)) {
-                addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 1);
-                addDuel(duelOpponents, QuestEventDifficulty.HARD, 2);
-                addRandomDuel(duelOpponents, QuestEventDifficulty.HARD);
-            } else if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_EXPERTAI, index)) {
-                addDuel(duelOpponents, QuestEventDifficulty.HARD, 3);
-                addRandomDuel(duelOpponents, QuestEventDifficulty.HARD);
-            } else {
-                addDuel(duelOpponents, QuestEventDifficulty.HARD, 2);
-                addDuel(duelOpponents, QuestEventDifficulty.EXPERT, 1);
-                if (Math.random() * 3 < 2) {
-                    addRandomDuel(duelOpponents, QuestEventDifficulty.HARD);
-                } else {
-                    addRandomDuel(duelOpponents, QuestEventDifficulty.EXPERT);
-                }
+                randomDuelDifficulty = QuestEventDifficulty.EXPERT;
             }
         }
+
+        if (moreDuelChoices) {
+            if (numberOfWins == questPreferences.getPrefInt(DifficultyPrefs.WINS_MEDIUMAI, index)) {
+                addDuel(duelOpponents, QuestEventDifficulty.EASY, 1);
+            } else if (numberOfWins < questPreferences.getPrefInt(DifficultyPrefs.WINS_HARDAI, index)) {
+                addDuel(duelOpponents, QuestEventDifficulty.EASY, 1);
+            } else if (numberOfWins == questPreferences.getPrefInt(DifficultyPrefs.WINS_HARDAI, index)) {
+                addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 1);
+            } else {
+                addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 1);
+                addDuel(duelOpponents, QuestEventDifficulty.EASY, 1);
+            }
+        }
+
+        addRandomDuel(duelOpponents, randomDuelDifficulty);
 
         return duelOpponents;
 
