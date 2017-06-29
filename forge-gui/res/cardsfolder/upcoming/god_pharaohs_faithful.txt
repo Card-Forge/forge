@@ -1,0 +1,10 @@
+Name:God-Pharaoh's Faithful
+ManaCost:W
+Types:Creature Human Wizard
+PT:0/4
+T:Mode$ SpellCast | ValidCard$ Card.Blue,Card.Red,Card.Black | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a blue, black or red spell, you gain 1 life.
+SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
+SVar:RemRandomDeck:True
+DeckNeeds:Color$Blue|Black|Red
+SVar:Picture:http://www.wizards.com/global/images/magic/general/god_pharaohs_faithful.jpg
+Oracle:Whenever you cast a blue, black or red spell, you gain 1 life.
