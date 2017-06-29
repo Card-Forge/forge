@@ -208,8 +208,7 @@ public class QuestEventDuelManager {
 
     }
 
-    /**
-     *      */
+    /** */
     public void randomizeOpponents() {
         final long seed = new Random().nextLong();
         final Random r = new Random(seed);
