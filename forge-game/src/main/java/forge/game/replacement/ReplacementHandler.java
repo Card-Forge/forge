@@ -110,6 +110,15 @@ public class ReplacementHandler {
                     // getting hit by mass removal should still produce tokens).
                     Zone cardZone = "True".equals(replacementEffect.getMapParams().get("CheckSelfLKIZone")) ? game.getChangeZoneLKIInfo(crd).getLastKnownZone() : game.getZoneOf(crd);
 
+                    // Replacement effects that are tied to keywords (e.g. damage prevention effects - if the keyword is removed, the replacement
+                    // effect should be inactive)
+                    if (replacementEffect.hasParam("TiedToKeyword")) {
+                        String kw = replacementEffect.getParam("TiedToKeyword");
+                        if (!crd.hasKeyword(kw)) {
+                            continue;
+                        }
+                    }
+
                     if (!replacementEffect.hasRun()
                             && (layer == null || replacementEffect.getLayer() == layer)
                             && replacementEffect.requirementsCheck(game)

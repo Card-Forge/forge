@@ -3513,7 +3513,7 @@ public class CardFactoryUtil {
             if (isCombat) {
                 rep += "| IsCombat$ True";
             }
-            rep += "| Secondary$ True | Description$ " + keyword;
+            rep += "| Secondary$ True | TiedToKeyword$ " + keyword + " | Description$ " + keyword;
 
             if (from) {
                 String fromRep = rep + " | ValidSource$ Card.Self";
