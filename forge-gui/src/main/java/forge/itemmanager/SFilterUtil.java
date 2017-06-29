@@ -3,6 +3,8 @@ package forge.itemmanager;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
+import forge.StaticData;
+import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
@@ -95,7 +97,7 @@ public class SFilterUtil {
             case '\\':
                 if (i < text.length() - 1 && text.charAt(i + 1) == '"') {
                     ch = '"'; //allow appending escaped quotation character
-                    i++; //prevent chaging inQuotes for that character
+                    i++; //prevent changing inQuotes for that character
                 }
                 break;
             case ',':
@@ -137,6 +139,38 @@ public class SFilterUtil {
             }
             return false;
         }
+    }
+
+    public static Predicate<PaperCard> buildFoilFilter(Map<SItemManagerUtil.StatTypes, ? extends IButton> buttonMap) {
+
+    //		final Map<StatTypes, ? extends IButton> buttonMap2 =buttonMap;
+    	final int Foil = (((buttonMap.get(StatTypes.FOIL_OLD).isSelected()) ? 1 : 0) +
+    			((buttonMap.get(StatTypes.FOIL_NEW).isSelected()) ? 2 : 0) +
+    					((buttonMap.get(StatTypes.FOIL_NONE).isSelected()) ? 4 : 0));
+    	
+        	return new Predicate<PaperCard>() {
+                @Override
+                public boolean apply(PaperCard card) {
+
+              	                  	
+                	boolean result=false;
+
+            		CardEdition edition = StaticData.instance().getEditions().get(card.getEdition());
+                	if ((Foil & 1)==1) { 
+                		// Old Style Foil
+                		if (edition.getFoilType()==CardEdition.FoilType.OLD_STYLE) {result=result || card.isFoil();}
+                	}
+                	if ((Foil & 2)==2) { 
+                		// New Style Foil
+                		if (edition.getFoilType()==CardEdition.FoilType.MODERN) {result=result || card.isFoil();}
+                	}
+                	if ((Foil & 4)==4)
+                	{ result=result || !card.isFoil(); }
+                	return result;
+                }
+        	
+        };
+
     }
     
     public static Predicate<PaperCard> buildColorFilter(Map<SItemManagerUtil.StatTypes, ? extends IButton> buttonMap) {

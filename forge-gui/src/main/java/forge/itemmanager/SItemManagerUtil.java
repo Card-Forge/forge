@@ -60,7 +60,12 @@ public final class SItemManagerUtil {
         DECK_RED        (FSkinProp.IMG_MANA_R,         null, "Red decks"),
         DECK_GREEN      (FSkinProp.IMG_MANA_G,         null, "Green decks"),
         DECK_COLORLESS  (FSkinProp.IMG_MANA_COLORLESS, null, "Colorless decks"),
-        DECK_MULTICOLOR (FSkinProp.IMG_MULTI,          null, "Multicolor decks");
+        DECK_MULTICOLOR (FSkinProp.IMG_MULTI,          null, "Multicolor decks"),
+    	
+        FOIL_OLD  (FSkinProp.FOIL_11,      null, "Old style Foil cards"),
+        FOIL_NEW   (FSkinProp.FOIL_01,     null, "New style Foil cards"),
+        FOIL_NONE   (FSkinProp.ICO_CLOSE,  null, "non-Foil cards");
+    	    	
 
         public final FSkinProp skinProp;
         public final Predicate<CardRules> predicate;

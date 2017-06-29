@@ -157,6 +157,15 @@ public class CardManager extends ItemManager<PaperCard> {
 
         GuiUtils.addSeparator(menu);
 
+        GuiUtils.addMenuItem(menu, "Foil", null, new Runnable() {
+            @Override
+            public void run() {
+                itemManager.addFilter(new CardFoilFilter(itemManager));
+            }
+        }, itemManager.getFilter(CardFoilFilter.class) == null);
+
+        GuiUtils.addSeparator(menu);
+
         GuiUtils.addMenuItem(menu, "Advanced...", null, new Runnable() {
             @Override
             @SuppressWarnings("unchecked")

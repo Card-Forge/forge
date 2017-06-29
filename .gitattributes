@@ -900,6 +900,7 @@ forge-gui-desktop/src/main/java/forge/itemmanager/filters/AdvancedSearchFilter.j
 forge-gui-desktop/src/main/java/forge/itemmanager/filters/CardCMCFilter.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/filters/CardCMCRangeFilter.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/filters/CardColorFilter.java -text
+forge-gui-desktop/src/main/java/forge/itemmanager/filters/CardFoilFilter.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/filters/CardFormatFilter.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/filters/CardPowerFilter.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/filters/CardQuestWorldFilter.java -text
