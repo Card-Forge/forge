@@ -87,6 +87,7 @@ public class QuestPrefsScreen extends FScreen {
         scroller.add(new PrefsOption("Rare Singles", QPref.SHOP_SINGLES_RARE, PrefsGroup.SHOP));
         scroller.add(new PrefsOption("Selling Percentage Base", QPref.SHOP_SELLING_PERCENTAGE_BASE, PrefsGroup.SHOP));
         scroller.add(new PrefsOption("Selling Percentage Max", QPref.SHOP_SELLING_PERCENTAGE_MAX, PrefsGroup.SHOP));
+        scroller.add(new PrefsOption("Selling Price Max", QPref.SHOP_MAX_SELLING_PRICE, PrefsGroup.SHOP));
         scroller.add(new PrefsOption("Playset Size", QPref.PLAYSET_SIZE, PrefsGroup.SHOP));
         scroller.add(new PrefsOption("Playset Size: Basic Lands", QPref.PLAYSET_BASIC_LAND_SIZE, PrefsGroup.SHOP));
         scroller.add(new PrefsOption("Playset Size: Any Number", QPref.PLAYSET_ANY_NUMBER_SIZE, PrefsGroup.SHOP));
