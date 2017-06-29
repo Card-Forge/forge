@@ -102,7 +102,7 @@ public class QuestEventDraft implements IQuestEvent {
     private int[] aiIcons = new int[7];
 
     private boolean started = false;
-    private int age = FModel.getQuestPreferences().getPrefInt(QPref.WINS_NEW_DRAFT);
+    private int age = FModel.getQuestPreferences().getPrefInt(QPref.WINS_ROTATE_DRAFT);
 
     public QuestEventDraft(final String title) {
         this.title = title;
