@@ -65,16 +65,10 @@ public class QuestEventDuelManager {
 	private static List<QuestEventDifficulty> hardOrder = Arrays.asList(QuestEventDifficulty.HARD, QuestEventDifficulty.MEDIUM, QuestEventDifficulty.EASY, QuestEventDifficulty.EXPERT);
 	private static List<QuestEventDifficulty> expertOrder = Arrays.asList(QuestEventDifficulty.EXPERT, QuestEventDifficulty.HARD, QuestEventDifficulty.MEDIUM, QuestEventDifficulty.EASY);
 
-	private void addDuel(List<QuestEventDuel> outList, QuestEventDifficulty targetDifficulty, int toAdd) {
+    private List<QuestEventDifficulty> getOrderForDifficulty(QuestEventDifficulty d) {
+        final List<QuestEventDifficulty> difficultyOrder;
 
-		// if there's no way we can satisfy the request, return now
-		if (allDuels.size() <= toAdd) {
-			return;
-		}
-
-		final List<QuestEventDifficulty> difficultyOrder;
-
-		switch (targetDifficulty) {
+		switch (d) {
 			case EASY:
 				difficultyOrder = easyOrder;
 				break;
@@ -88,8 +82,20 @@ public class QuestEventDuelManager {
 				difficultyOrder = expertOrder;
 				break;
 			default:
-				throw new RuntimeException("unhandled difficulty: " + targetDifficulty);
+				throw new RuntimeException("unhandled difficulty: " + d);
 		}
+
+        return difficultyOrder;
+    }
+    
+	private void addDuel(List<QuestEventDuel> outList, QuestEventDifficulty targetDifficulty, int toAdd) {
+
+		// if there's no way we can satisfy the request, return now
+		if (allDuels.size() <= toAdd) {
+			return;
+		}
+
+		final List<QuestEventDifficulty> difficultyOrder = getOrderForDifficulty(targetDifficulty);
 
 		for (QuestEventDifficulty d : difficultyOrder) { // will add duels from preferred difficulty, will use others if the former has too few options.
 			for (QuestEventDuel duel : sortedDuels.get(d)) {
@@ -109,7 +115,16 @@ public class QuestEventDuelManager {
 
 		QuestEventDuel duel = new QuestEventDuel();
 
-		List<QuestEventDuel> possibleDuels = new ArrayList<>(sortedDuels.get(difficulty));
+        List<QuestEventDifficulty> difficultyOrder = getOrderForDifficulty(difficulty);
+        
+        List<QuestEventDuel> possibleDuels = new ArrayList<>();
+        for (QuestEventDifficulty diff : difficultyOrder) {
+            possibleDuels = new ArrayList<>(sortedDuels.get(diff));
+            if (!possibleDuels.isEmpty()) {
+                break;
+            }
+        }
+        
 		QuestEventDuel randomOpponent = possibleDuels.get(((int) (possibleDuels.size() * Math.random())));
 
 		duel.setTitle("Random Opponent");
