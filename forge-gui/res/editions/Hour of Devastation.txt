@@ -156,9 +156,9 @@ AdditionalSetUnlockedInQuest=MPS_AKH
 144 M Samut, the Tested
 145 M The Scarab God
 146 M The Scorpion God
-147 U Unravelling Mummy
+147 U Unraveling Mummy
 148 U Farm // Market
-149 U Consign // Dust
+149 U Consign // Oblivion
 150 U Claim // Fame
 151 U Struggle // Survive
 152 U Appeal // Authority
@@ -192,8 +192,8 @@ AdditionalSetUnlockedInQuest=MPS_AKH
 180 U Ipnu Rivulet
 181 U Ramunap Ruins
 182 R Scavenger Grounds
-183 U Shefnet Dunes
-184 C Survivor's Encampment
+183 U Shefet Dunes
+184 C Survivors' Encampment
 185 L Plains
 186 L Island
 187 L Swamp
