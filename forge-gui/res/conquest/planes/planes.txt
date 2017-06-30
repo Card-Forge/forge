@@ -1,16 +1,16 @@
-Name:Alara|RegionSize:9|Desc:As the boundaries between the shards dissolve, cultures clash and wars ensue.\nContains cards from ALA, CON, ARB, C13, assorted.
+Name:Alara|RegionSize:9|Desc:As the boundaries between the shards dissolve, cultures clash and wars ensue.\nContains cards from ALA, CON, ARB, C13, and more.
 Name:Dominaria|RegionSize:9|Unreachable:True|Desc:
-Name:Innistrad|RegionSize:9|Desc:On this plane, humanity is terrorized by vampires, werewolves, zombies, and ghouls.\nContains cards from ISD, DKA, AVR, SOI, EMN, most of C14.
-Name:Kaladesh|RegionSize:6|Unreachable:True|Desc:
-Name:Kamigawa|RegionSize:6|Unreachable:True|Desc:
-Name:Lorwyn-Shadowmoor|RegionSize:9|Desc:A sunny utopia with a thriving storybook community, or a battle-wrought land cursed to perpetual gloom.\nContains cards from LRW, MOR, SHM, EVE, most of CNS/CN2, some C14.
+Name:Innistrad|RegionSize:9|Desc:On this plane, humanity is terrorized by vampires, werewolves, zombies, and ghouls.\nContains cards from ISD, DKA, AVR, SOI, EMN, and C14.
+Name:Kaladesh|RegionSize:6|Unreachable:True|Desc:Kaladesh is a living work of art. Aether is inextricably woven into the world's culture of inspired invention.\nContains cards from KLD and AER.
+Name:Kamigawa|RegionSize:6|Unreachable:True|Desc:For hundreds of years, Kamigawa's denizens peacefully worshipped the spirits of their world. Then suddenly their gods attacked, forcing the world into brutal war.\nContains cards from CHK, BOK, and SOK.
+Name:Lorwyn-Shadowmoor|RegionSize:9|Desc:A sunny utopia with a thriving storybook community, or a battle-wrought land cursed to perpetual gloom.\nContains cards from LRW, MOR, SHM, EVE, CNS/CN2, and C14.
 Name:Mercadia|RegionSize:6|Unreachable:True|Desc:
-Name:Mirrodin|RegionSize:9|Desc:A dark contagion is taking over this metal planet, breeding wave after wave of Phyrexian horrors.\nContains cards from MRD, DST, 5DN, SOM, MBS, NPH, assorted.
+Name:Mirrodin|RegionSize:9|Desc:A dark contagion is taking over this metal planet, breeding wave after wave of Phyrexian horrors.\nContains cards from MRD, DST, 5DN, SOM, MBS, NPH, and more.
 Name:Rath|RegionSize:6|Unreachable:True|Desc:
-Name:Ravnica|RegionSize:9|Desc:A worldwide cityscape of grand halls, decrepit slums, and ancient ruins.\nContains cards from RAV, GPT, DIS, RTR, GTC, DGM, C15. 
+Name:Ravnica|RegionSize:9|Desc:A worldwide cityscape of grand halls, decrepit slums, and ancient ruins.\nContains cards from RAV, GPT, DIS, RTR, GTC, DGM, and C15. 
 Name:Regatha|RegionSize:6|Unreachable:True|Desc:
 Name:Shandalar|RegionSize:9|Unreachable:True|Desc:
-Name:Tarkir|RegionSize:9|Desc:A plane dominated by five powerful clans... or five powerful dragon lords.\nContains cards from KTK, FRF, DTK, CMD, some CNS/CN2.
-Name:Theros|RegionSize:9|Desc:Mortals tremble before an awe-inspiring pantheon of gods.\nContains cards from THS, BNG, JOU, HOP, PCA, assorted.
+Name:Tarkir|RegionSize:9|Desc:A plane dominated by five powerful clans... or five powerful dragon lords.\nContains cards from KTK, FRF, DTK, CMD, and CNS/CN2.
+Name:Theros|RegionSize:9|Desc:Mortals tremble before an awe-inspiring pantheon of gods.\nContains cards from THS, BNG, JOU, HOP, PCA, and more.
 Name:Ulgrotha|RegionSize:6|Unreachable:True|Desc:
-Name:Zendikar|RegionSize:9|Desc:This land of primal mana was lethal even before its Eldrazi prisoners escaped.\nContains cards from ZEN, WWK, ROE, BFZ, OGW, most of C16.
+Name:Zendikar|RegionSize:9|Desc:This land of primal mana was lethal even before its Eldrazi prisoners escaped.\nContains cards from ZEN, WWK, ROE, BFZ, OGW, and C16.
