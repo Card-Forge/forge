@@ -9,4 +9,4 @@ SVar:X:Count$Valid Creature.YouCtrl/Twice
 SVar:BuffedBy:Creature
 SVar:NoZeroToughnessAI:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/majestic_myriarch.jpg
-Oracle:Majestic Myriarch's power and toughness are each equal to twice the number of creatures you control.\nAt the beginning of each combat, if you control a creature with flying, Majestic Myriarch gains flying until end of turn. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance.
+Oracle:Majestic Myriarch's power and toughness are each equal to twice the number of creatures you control.\nAt the beginning of each combat, Majestic Myriarch gains flying until end of turn if you control a creature with flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance.

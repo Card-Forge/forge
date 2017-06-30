@@ -1,0 +1,7 @@
+Name:Beneath the Sands
+ManaCost:2 G
+Types:Sorcery
+A:SP$ ChangeZone | Cost$ 2 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
+K:Cycling:2
+SVar:Picture:http://www.wizards.com/global/images/magic/general/beneath_the_sands.jpg
+Oracle:Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.\nCycling {2} ({2}, Discard this card: Draw a card.)
