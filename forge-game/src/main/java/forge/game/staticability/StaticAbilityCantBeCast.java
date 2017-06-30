@@ -115,6 +115,10 @@ public class StaticAbilityCantBeCast {
             return false;
         }
 
+        if (params.containsKey("NonLoyalty") && (spellAbility.getRestrictions().isPwAbility())) {
+            return false;
+        }
+
         if (params.containsKey("TapAbility") && !(spellAbility.getPayCosts().hasTapCost())) {
             return false;
         }
