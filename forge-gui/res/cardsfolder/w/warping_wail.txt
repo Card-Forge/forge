@@ -9,4 +9,4 @@ SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ C | Amount$ 1 | SpellDe
 DeckNeeds:Ability$Mana.Colorless
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warping_wail.jpg
-Oracle:({C} represents colorless mana)\nChoose one â€”\n• Exile target creature with power or toughness 1 or less.\n• Counter target sorcery spell.\n• Create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C} to your mana pool."
+Oracle:({C} represents colorless mana)\nChoose one â€”\nâ€¢ Exile target creature with power or toughness 1 or less.\nâ€¢ Counter target sorcery spell.\nâ€¢ Create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C} to your mana pool."

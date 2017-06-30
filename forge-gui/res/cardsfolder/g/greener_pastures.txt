@@ -1,10 +1,10 @@
 Name:Greener Pastures
 ManaCost:2 G
 Types:Enchantment
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigToken | CheckSVar$ ActiveLands | SVarCompare$ GTHighestOpp | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, if that player controls more lands than each other player, the player puts a 1/1 green Saproling creature token onto the battlefield.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigToken | CheckSVar$ ActiveLands | SVarCompare$ GTHighestOpp | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, if that player controls more lands than each other player, the player creates a 1/1 green Saproling creature token.
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ TriggeredPlayer | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 SVar:ActiveLands:Count$Valid Land.ActivePlayerCtrl
 SVar:HighestOpp:PlayerCountNonActive$HighestValid Land.YouCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greener_pastures.jpg
-Oracle:At the beginning of each player's upkeep, if that player controls more lands than each other player, the player puts a 1/1 green Saproling creature token onto the battlefield.
+Oracle:At the beginning of each player's upkeep, if that player controls more lands than each other player, the player creates a 1/1 green Saproling creature token.

@@ -4,4 +4,4 @@ Types:Artifact Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
 K:Indestructible
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_citadel.jpg
-Oracle:Indestructible (Effects that say "destroy" don't destroy this land.)\n{T}: Add {C} to your mana pool.
+Oracle:Indestructible\n{T}: Add {C} to your mana pool.

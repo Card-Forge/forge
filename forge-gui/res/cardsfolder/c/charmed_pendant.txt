@@ -12,4 +12,4 @@ SVar:ManaB:Milled$ChromaSource.B
 SVar:ManaR:Milled$ChromaSource.R
 SVar:ManaG:Milled$ChromaSource.G
 SVar:Picture:http://www.wizards.com/global/images/magic/general/charmed_pendant.jpg
-Oracle:{T}, Put the top card of your library into your graveyard: For each colored mana symbol in that card's mana cost, add one mana of that color to your mana pool. Activate this ability only any time you could cast an instant. (For example, if the card's mana cost is {3}{U}{U}{B}, you add {U}{U}{B} to your mana pool.)
+Oracle:{T}, Put the top card of your library into your graveyard: For each colored mana symbol in that card's mana cost, add one mana of that color to your mana pool. Activate this ability only any time you could cast an instant.

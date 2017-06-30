@@ -1,6 +1,6 @@
 Name:Mondronen Shaman
 ManaCost:3 R
-Types:Creature Human Werewolf Shaman
+Types:Creature Human Shaman Werewolf
 PT:3/2
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
 SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform

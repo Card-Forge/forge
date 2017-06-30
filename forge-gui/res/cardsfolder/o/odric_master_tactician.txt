@@ -8,4 +8,4 @@ SVar:TrigOdricEffect:AB$ DeclareCombatants | Cost$ 0 | DeclareBlockers$ True
 SVar:OdricTest:Count$Valid Creature.attacking+Other
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/odric_master_tactician.jpg
-Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nWhenever Odric, Master Tactician and at least three other creatures attack, you choose which creatures block this combat and how those creatures block.
+Oracle:First strike\nWhenever Odric, Master Tactician and at least three other creatures attack, you choose which creatures block this combat and how those creatures block.

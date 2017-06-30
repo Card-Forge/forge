@@ -7,4 +7,4 @@ T:Mode$ SpellCast | ValidCard$ Card | TriggerZones$ Battlefield | Execute$ TrigP
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:BuffedBy:Card
 SVar:Picture:http://www.wizards.com/global/images/magic/general/managorger_hydra.jpg
-Oracle:Trample (This creature can deal excess combat damage to defending player or planeswalker while attacking.)\nWhenever a player casts a spell, put a +1/+1 counter on Managorger Hydra.
+Oracle:Trample\nWhenever a player casts a spell, put a +1/+1 counter on Managorger Hydra.

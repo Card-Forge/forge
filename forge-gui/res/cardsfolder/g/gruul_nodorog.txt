@@ -4,4 +4,4 @@ Types:Creature Beast
 PT:4/4
 A:AB$ Pump | Cost$ R | KW$ Menace | SpellDescription$ CARDNAME gains menace until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_nodorog.jpg
-Oracle:{R}: Gruul Nodorog gains menace until end of turn.
+Oracle:{R}: Gruul Nodorog gains menace until end of turn. (It can't be blocked except by two or more creatures.)
