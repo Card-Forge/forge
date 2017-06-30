@@ -6,5 +6,4 @@ K:First Strike
 K:Protection from black
 K:Protection from red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paladin_en_vec.jpg
-Oracle:First strike\n
-Protection from black and from red (This creature can't be blocked, targeted, dealt damage, or enchanted by anything black or red.)
+Oracle:First strike\nProtection from black and from red (This creature can't be blocked, targeted, dealt damage, or enchanted by anything black or red.)
