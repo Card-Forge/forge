@@ -1,3 +1,9 @@
+- Optional More Duels Setting for Quest Mode -
+In Quest Preferences, there is now an option called More Duel Choices which, when set to 1, makes the game produce additional duel choices from the lower difficulties. For example, at the Hard tier, you will still get an extra Easy and an extra Medium opponent to face.
+
+- Foil Card Filter -
+In the deck editor, there is now an additional Foil filter which allows one to sort cards by their foil overlay, choosing from three options: cards with the Modern style foil, cards with the Old style foil, and non-foil cards.
+
 - New Counter Display -
 Counters now have a new, text-based display option alongside the old counter images. It provides a textual overlay on top of each card (that has counters) showing all of the counters on the card with their names and exact counts, each type being displayed in a unique color. This can be customized to show only text-based counters (default), only the old style, both at the same time, or show the old image when cards are small to fit the textual display.
 
