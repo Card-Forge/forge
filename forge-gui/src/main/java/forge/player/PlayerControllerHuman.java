@@ -1506,7 +1506,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public boolean playSaFromPlayEffect(final SpellAbility tgtSA) {
-        tgtSA.setSVar("IsCastFromPlayEffect", "True");
         return HumanPlay.playSpellAbility(this, player, tgtSA);
     }
 

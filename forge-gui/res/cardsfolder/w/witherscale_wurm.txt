@@ -5,9 +5,9 @@ PT:9/9
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigPumpAttacker | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigPumpBlocker | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigRemoveCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, remove all -1/-1 counters from it.
-SVar:TrigPumpAttacker:AB$ Pump | Cost$ 0 | Defined$ TriggeredAttacker | KW$ Wither
-SVar:TrigPumpBlocker:AB$ Pump | Cost$ 0 | Defined$ TriggeredBlocker | KW$ Wither
-SVar:TrigRemoveCounter:AB$ RemoveCounter | Cost$ 0 | CounterType$ M1M1 | CounterNum$ All | References$ All
+SVar:TrigPumpAttacker:DB$ Pump | Defined$ TriggeredAttacker | KW$ Wither
+SVar:TrigPumpBlocker:DB$ Pump | Defined$ TriggeredBlocker | KW$ Wither
+SVar:TrigRemoveCounter:DB$ RemoveCounter | CounterType$ M1M1 | CounterNum$ All | References$ All
 SVar:All:Count$CardCounters.M1M1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/witherscale_wurm.jpg
-Oracle:Whenever Witherscale Wurm blocks or becomes blocked by a creature, that creature gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)\nWhenever Witherscale Wurm deals damage to an opponent, remove all -1/-1 counters from it.
+Oracle:Whenever Witherscale Wurm blocks or becomes blocked by a creature, that creature gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)\nWhenever Witherscale Wurm deals damage to an opponent, remove all -1/-1 counters from it. 

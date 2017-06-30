@@ -238,6 +238,8 @@ public class PlayEffect extends SpellAbilityEffect {
                 addReplaceGraveyardEffect(tgtCard, sa, sa.getParam("ReplaceGraveyard"));
             }
             
+            tgtSA.setSVar("IsCastFromPlayEffect", "True");
+
             if (controller.getController().playSaFromPlayEffect(tgtSA)) {
                 if (remember) {
                     source.addRemembered(tgtSA.getHostCard());

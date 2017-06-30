@@ -7110,6 +7110,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         // to be restored to their original value if a card changes zones
 
         removeSVar("PayX"); // Temporary AI X announcement variable
+        removeSVar("IsCastFromPlayEffect"); // Temporary SVar indicating that the spell is cast indirectly via AF Play
         setSunburstValue(0); // Sunburst
     }
 }
