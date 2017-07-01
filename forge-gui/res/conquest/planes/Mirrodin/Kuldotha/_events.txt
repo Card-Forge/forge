@@ -1,7 +1,7 @@
 Name:Koth of the Hammer|Deck:Koth of the Hammer.dck|Variant:Planeswalker|Avatar:Koth of the Hammer|Desc:
 Name:Vulshok Violence|Deck:Vulshok Violence.dck|Variant:None|Avatar:Savage Beating|Desc:
 Name:Slobad, Goblin Tinkerer|Deck:Slobad, Goblin Tinkerer.dck|Variant:Commander|Avatar:Slobad, Goblin Tinkerer|Desc:
-Name:Bosh, Iron Golemn|Deck:Bosh, Iron Golemn.dck|Variant:Commander|Avatar:Bosh, Iron Golemn|Desc:
+Name:Bosh, Iron Golem|Deck:Bosh, Iron Golem.dck|Variant:Commander|Avatar:Bosh, Iron Golem|Desc:
 Name:Feldon of the Third Path|Deck:Feldon of the Third Path.dck|Variant:Commander|Avatar:Feldon of the Third Path|Desc:
 Name:Urabrask the Hidden|Deck:Urabrask the Hidden.dck|Variant:Commander|Avatar:Urabrask the Hidden|Desc:
 Name:Krark-Clan Craziness|Deck:Krark-Clan Craziness.dck|Variant:None|Avatar:Krark-Clan Engineers|Desc:
