@@ -1,0 +1,17 @@
+[metadata]
+Name:Pauper Puzzles #6 - Let It Snow
+URL:https://pauperpuzzles.wordpress.com/2017/01/22/6-let-it-snow/
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=1
+AILife=10
+humanhand=Aurochs Herd;Relic of Progenitus;Exhume;Act of Treason;Burst of Speed
+humanbattlefield=Snow-Covered Forest;Snow-Covered Forest;Snow-Covered Forest;Snow-Covered Mountain;Snow-Covered Mountain;Snow-Covered Mountain;Snow-Covered Mountain;Snow-Covered Swamp;Aurochs Herd
+humanlibrary=Skred
+humangraveyard=Aurochs Herd;Fume Spitter
+aibattlefield=Aurochs Herd|Counters:M1M1=1
+aigraveyard=Shu Soldier-Farmers;Snow-Covered Swamp

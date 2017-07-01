@@ -1,0 +1,15 @@
+[metadata]
+Name:Pauper Puzzles #9 - Hazing Rituals
+URL:https://pauperpuzzles.wordpress.com/2017/01/25/9-hazing-rituals/
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=6
+AILife=20
+humanhand=Mountain;Keldon Marauders;Rites of Initiation;Giantbaiting
+humanbattlefield=Forest;Forest;Forest;Swamp;Swamp;Swamp;Swamp;Rugged Highlands;Rugged Highlands;Crypt Rats;Quirion Ranger;Battlefield Scrounger
+humangraveyard=Flame Jab;Viscera Dragger;Lava Dart
+aibattlefield=Young Wolf|Id:20;Favor of the Overbeing|Attaching:20;Aura Gnarlid|Id:22;Rancor|Attaching:22;Slippery Bogle|Id:24;Lifelink|Attaching:24;Ancestral Mask|Attaching:24
