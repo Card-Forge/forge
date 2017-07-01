@@ -4,6 +4,9 @@ In Quest Preferences, there is now an option called More Duel Choices which, whe
 - Foil Card Filter -
 In the deck editor, there is now an additional Foil filter which allows one to sort cards by their foil overlay, choosing from three options: cards with the Modern style foil, cards with the Old style foil, and non-foil cards.
 
+- More Puzzles -
+This release features over 30 puzzles to crack in Puzzle Mode. All the included puzzles rely on the features that Forge should support well, but because the mode is currently in its early development stages, some issues are to be expected. Please report any errors and inconsistencies you may find.
+
 - New Counter Display -
 Counters now have a new, text-based display option alongside the old counter images. It provides a textual overlay on top of each card (that has counters) showing all of the counters on the card with their names and exact counts, each type being displayed in a unique color. This can be customized to show only text-based counters (default), only the old style, both at the same time, or show the old image when cards are small to fit the textual display.
 
