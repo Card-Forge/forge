@@ -178,6 +178,12 @@ public class TriggerSpellAbilityCast extends Trigger {
             }
         }
 
+        if (hasParam("EternalizeOrEmbalm")) {
+            if (!spellAbility.hasParam("Eternalize") && !spellAbility.hasParam("Embalm")) {
+                return false;
+            }
+        }
+
         if (hasParam("IsSingleTarget")) {
             Set<GameObject> targets = Sets.newHashSet();
             for (TargetChoices tc : spellAbility.getAllTargetChoices()) {

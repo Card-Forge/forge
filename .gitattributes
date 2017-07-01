@@ -720,7 +720,6 @@ forge-game/src/main/java/forge/game/trigger/TriggerDestroyed.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerDevoured.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerDiscarded.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerDrawn.java svneol=native#text/plain
-forge-game/src/main/java/forge/game/trigger/TriggerEmbalmOrEternalize.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerEvolved.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerExerted.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerExploited.java -text
