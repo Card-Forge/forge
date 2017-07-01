@@ -1,0 +1,11 @@
+Name:Glint Hawk Idol
+ManaCost:2
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.Other+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigAnimate | TriggerDescription$ Whenever another artifact enters the battlefield under your control, you may have CARDNAME become a 2/2 Bird artifact creature with flying until end of turn.
+SVar:TrigAnimate:DB$Animate | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Artifact,Creature,Bird | Keywords$ Flying
+A:AB$ Animate | Cost$ W | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Artifact,Creature,Bird | Keywords$ Flying | SpellDescription$ CARDNAME becomes a 2/2 Bird artifact creature with flying until end of turn.
+SVar:BuffedBy:Artifact
+SVar:RemRandomDeck:True
+DeckNeeds:Color$white
+SVar:Picture:http://www.wizards.com/global/images/magic/general/glint_hawk_idol.jpg
+Oracle:Whenever another artifact enters the battlefield under your control, you may have Glint Hawk Idol become a 2/2 Bird artifact creature with flying until end of turn.\n{W}: Glint Hawk Idol becomes a 2/2 Bird artifact creature with flying until end of turn. 
