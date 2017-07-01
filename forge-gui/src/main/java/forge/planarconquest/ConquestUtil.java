@@ -228,7 +228,8 @@ public class ConquestUtil {
         GUR (null, new ColorFilter(MagicColor.GREEN | MagicColor.BLUE | MagicColor.RED), "Playable in {G}{U}{R}"),
 
         WUBR (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK | MagicColor.RED), "Playable in {W}{U}{B}{R}"),
-        GWUB (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK | MagicColor.GREEN), "Playable in {W}{U}{B}{G}"),
+        WUBG (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK | MagicColor.GREEN), "Playable in {W}{U}{B}{G}"),
+        WURG (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLUE | MagicColor.RED | MagicColor.GREEN), "Playable in {W}{U}{R}{G}"),
         WBRG (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLACK | MagicColor.RED | MagicColor.GREEN), "Playable in {W}{B}{R}{G}"),
         UBRG (null, new ColorFilter(MagicColor.BLUE | MagicColor.BLACK | MagicColor.RED | MagicColor.GREEN), "Playable in {U}{B}{R}{G}"),
 
@@ -368,7 +369,8 @@ public class ConquestUtil {
         AEtherFilter.GWU,
         AEtherFilter.GUR,
         AEtherFilter.WUBR,
-        AEtherFilter.GWUB,
+        AEtherFilter.WUBG,
+        AEtherFilter.WURG,
         AEtherFilter.WBRG,
         AEtherFilter.UBRG,
         AEtherFilter.WUBRG};
