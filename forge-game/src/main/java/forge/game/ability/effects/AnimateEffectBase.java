@@ -24,10 +24,7 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerType;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public abstract class AnimateEffectBase extends SpellAbilityEffect {
@@ -93,13 +90,6 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         c.addColor(colors, !sa.hasParam("OverwriteColors"), timestamp);
 
-        if (sa.getMapParams().containsKey("Crew")) {
-            // Trigger crews!
-            final HashMap<String, Object> runParams = new HashMap<String, Object>();
-            runParams.put("Vehicle", sa.getHostCard());
-            runParams.put("Crew", sa.getPaidList("TappedCards"));
-            sa.getHostCard().getGame().getTriggerHandler().runTrigger(TriggerType.Crewed, runParams, false);
-        }
     }
 
     /**
