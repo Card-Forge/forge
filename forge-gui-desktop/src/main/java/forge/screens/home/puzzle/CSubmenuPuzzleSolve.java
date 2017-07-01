@@ -21,6 +21,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public enum CSubmenuPuzzleSolve implements ICDoc, IMenuProvider {
@@ -50,6 +52,8 @@ public enum CSubmenuPuzzleSolve implements ICDoc, IMenuProvider {
 
     private void updateData() {
         final ArrayList<Puzzle> puzzles = PuzzleIO.loadPuzzles();
+        Collections.sort(puzzles);
+
         for(Puzzle p : puzzles) {
             view.getModel().addElement(p);
         }
