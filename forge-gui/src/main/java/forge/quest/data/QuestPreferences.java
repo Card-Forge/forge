@@ -137,8 +137,11 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         WINS_EXPERTAI_MEDIUM("60"),
         WINS_EXPERTAI_HARD("50"),
         WINS_EXPERTAI_EXPERT("40"),
-
+        
         WINS_UNLOCK_SET("20"),
+        // if enabled, any set can be unlocked, but higher distances raise the price exponentially
+        UNLIMITED_UNLOCKING("0"),
+        UNLOCK_DISTANCE_MULTIPLIER("1.25"),
 
         // Maximum amount of "Packs" opened by the Shop and available as singles
         SHOP_MAX_PACKS("7"),
@@ -298,6 +301,11 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
                     return "Value too small (minimum 1).";
                 }
                 break;
+            case UNLOCK_DISTANCE_MULTIPLIER:
+                if (val < 1) {
+                    return "Value too small (minimum 1).";
+                }
+                break;
 
             case BOOSTER_COMMONS:
             case BOOSTER_UNCOMMONS:
@@ -319,6 +327,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
             case SHOP_SINGLES_RARE:
             case SHOP_WINS_FOR_NO_SELL_LIMIT:
             case MORE_DUEL_CHOICES:
+            case UNLIMITED_UNLOCKING:
             default:
                 if (val < 0) {
                     return "Value too small (minimum 0).";

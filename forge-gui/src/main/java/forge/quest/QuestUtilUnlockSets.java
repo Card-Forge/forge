@@ -36,6 +36,7 @@ import forge.card.UnOpenedProduct;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.model.FModel;
+import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.ReadPriceList;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
@@ -67,12 +68,23 @@ public class QuestUtilUnlockSets {
         final Map<String, Integer> mapPrices = prices.getPriceList();
         final List<ImmutablePair<CardEdition, Integer>> setPrices = new ArrayList<ImmutablePair<CardEdition, Integer>>();
 
+        Double multiplier = (double) 1;
+        int j = 0;
         for (CardEdition ed : getUnlockableEditions(qData)) {
+            j++;
+            if (j > 5) {
+                multiplier = multiplier * Double.parseDouble(FModel.getQuestPreferences().getPref(QPref.UNLOCK_DISTANCE_MULTIPLIER));
+                // prevent overflow
+                if (multiplier >= 500) {
+                    multiplier = (double) 500;
+                }
+            }
             int price = UNLOCK_COST;
             if (mapPrices.containsKey(ed.getName() + " Booster Pack")) {
                 price = Math.max(new Double(30 * Math.pow(Math.sqrt(mapPrices.get(ed.getName()
-                        + " Booster Pack")), 1.70)).intValue(), UNLOCK_COST);
+                    + " Booster Pack")), 1.70)).intValue(), UNLOCK_COST);
             }
+            price = (int) ((double) price * multiplier);
             setPrices.add(ImmutablePair.of(ed, price));
         }
 
@@ -154,23 +166,26 @@ public class QuestUtilUnlockSets {
             excludedWithDistances.add(ImmutablePair.of(ex, distance));
         }
 
-         // sort by distance, then by code desc
-         Collections.sort(excludedWithDistances, new Comparator<ImmutablePair<CardEdition, Long>>() {
+        // sort by distance, then by code desc
+        Collections.sort(excludedWithDistances, new Comparator<ImmutablePair<CardEdition, Long>>() {
             @Override
             public int compare(ImmutablePair<CardEdition, Long> o1, ImmutablePair<CardEdition, Long> o2) {
                 long delta = o2.right - o1.right;
                 return delta < 0 ? -1 : delta == 0 ? 0 : 1;
             }
-         });
+        });
 
+        for (ImmutablePair<CardEdition, Long> set : excludedWithDistances) {
+            options.add(set.left);
+            // System.out.println("Padded with: " + fillers.get(i).getName());
+        }
+        Collections.reverse(options);
 
-         for (ImmutablePair<CardEdition, Long> set : excludedWithDistances) {
-             options.add(set.left);
-             // System.out.println("Padded with: " + fillers.get(i).getName());
-         }
-         Collections.reverse(options);
-
-         return options.subList(0, Math.min(options.size(), Math.min(8, 2 + ((qData.getAchievements().getWin()) / 50))));
+        if (FModel.getQuestPreferences().getPrefInt(QPref.UNLIMITED_UNLOCKING) == 0) {
+            return options.subList(0, Math.min(options.size(), Math.min(8, 2 + ((qData.getAchievements().getWin()) / 50))));
+        } else {
+            return options.subList(0, options.size());
+        }
     }
 
     /**

@@ -396,6 +396,12 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         pnlShop.add(new FLabel.Builder().text("Wins per Set Unlock").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
         pnlShop.add(new PrefInput(QPref.WINS_UNLOCK_SET, QuestPreferencesErrType.SHOP), fieldConstraints);
 
+        pnlShop.add(new FLabel.Builder().text("Allow Far Unlocks").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
+        pnlShop.add(new PrefInput(QPref.UNLIMITED_UNLOCKING, QuestPreferencesErrType.SHOP), fieldConstraints);
+
+        pnlShop.add(new FLabel.Builder().text("Unlock Distance Multiplier").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
+        pnlShop.add(new PrefInput(QPref.UNLOCK_DISTANCE_MULTIPLIER, QuestPreferencesErrType.SHOP), fieldConstraints);
+
         pnlShop.add(new FLabel.Builder().text("Common Singles").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
         pnlShop.add(new PrefInput(QPref.SHOP_SINGLES_COMMON, QuestPreferencesErrType.SHOP), fieldConstraints);
 
