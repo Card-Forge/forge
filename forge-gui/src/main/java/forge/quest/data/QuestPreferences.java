@@ -297,16 +297,11 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
             case WINS_NEW_DRAFT:
             case WINS_ROTATE_DRAFT:
             case WINS_UNLOCK_SET:
-                if (val < 1) {
-                    return "Value too small (minimum 1).";
-                }
-                break;
             case UNLOCK_DISTANCE_MULTIPLIER:
                 if (val < 1) {
                     return "Value too small (minimum 1).";
                 }
                 break;
-
             case BOOSTER_COMMONS:
             case BOOSTER_UNCOMMONS:
             case BOOSTER_RARES:
