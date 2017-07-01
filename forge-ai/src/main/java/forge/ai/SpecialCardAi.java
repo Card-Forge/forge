@@ -61,7 +61,10 @@ import forge.util.Aggregates;
  * circumstances. A good convention to follow is to call the method "consider" if it's the only
  * method necessary, or considerXXXX if several methods do different tasks, and use at least two
  * mandatory parameters (Player ai, SpellAbility sa, in this order) and, if necessary, additional
- * parameters later.
+ * parameters later. Methods that perform utility tasks and return a certain value for further
+ * processing should be called getXXXX. If they take Player and SpellAbility parameters, it is
+ * good practice to put them in the same order as for considerXXXX methods (Player ai, SpellAbility
+ * sa, followed by any additional parameters necessary).
  * 
  * If this class ends up being busy, consider splitting it into individual classes, each in its
  * own file, inside its own package, for example, forge.ai.cards.
@@ -97,6 +100,46 @@ public class SpecialCardAi {
         }
     }
 
+    // Bonds of Faith
+    public static class BondsOfFaith {
+        public static Card getBestAttachTarget(Player ai, SpellAbility sa, List<Card> list) {
+            Card chosen = null;
+            
+            List<Card> aiHumans = CardLists.filter(list, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    // Don't buff opponent's humans
+                    if (!c.getController().equals(ai)) {
+                        return false;
+                    }
+                    return c.getType().hasCreatureType("Human");
+                }
+            });
+            List<Card> oppNonHumans = CardLists.filter(list, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    // Don't debuff AI's own non-humans
+                    if (c.getController().equals(ai)) {
+                        return false;
+                    }
+                    return !c.getType().hasCreatureType("Human") && !ComputerUtilCard.isUselessCreature(ai, c);
+                }
+            });
+
+            if (!aiHumans.isEmpty() && !oppNonHumans.isEmpty()) {
+                Card bestAi = ComputerUtilCard.getBestCreatureAI(aiHumans);
+                Card bestOpp = ComputerUtilCard.getBestCreatureAI(oppNonHumans);
+                chosen = ComputerUtilCard.evaluateCreature(bestAi) > ComputerUtilCard.evaluateCreature(bestOpp) ? bestAi : bestOpp;
+            } else if (!aiHumans.isEmpty()) {
+                chosen = ComputerUtilCard.getBestCreatureAI(aiHumans);
+            } else if (!oppNonHumans.isEmpty()) {
+                chosen = ComputerUtilCard.getBestCreatureAI(oppNonHumans);
+            }
+            
+            return chosen;
+        }
+    }
+    
     // Chain of Smog
     public static class ChainOfSmog {
         public static boolean consider(Player ai, SpellAbility sa) {
@@ -229,6 +272,42 @@ public class SpecialCardAi {
         }
     }
 
+    public static class GuiltyConscience {
+        public static Card getBestAttachTarget(Player ai, SpellAbility sa, List<Card> list) {
+            Card chosen = null;
+            
+            List<Card> aiStuffies = CardLists.filter(list, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    // Don't enchant creatures that can survive
+                    if (!c.getController().equals(ai)) {
+                        return false;
+                    }
+                    final String name = c.getName();
+                    return name.equals("Stuffy Doll") || name.equals("Boros Reckoner") || name.equals("Spitemare");
+                }
+            });
+            if (!aiStuffies.isEmpty()) {
+                chosen = aiStuffies.get(0);
+            } else {
+                List<Card> creatures = CardLists.filterControlledBy(list, ai.getOpponents());
+                creatures = CardLists.filter(creatures, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        // Don't enchant creatures that can survive
+                        if (!c.canBeDestroyed() || c.getNetCombatDamage() < c.getNetToughness() || c.isEnchantedBy("Guilty Conscience")) {
+                            return false;
+                        }
+                        return true;
+                    }
+                });
+                chosen = ComputerUtilCard.getBestCreatureAI(creatures);
+            }
+            
+            return chosen;
+        }
+    }
+    
     // Living Death (and possibly other similar cards using AILogic LivingDeath)
     public static class LivingDeath {
         public static boolean consider(Player ai, SpellAbility sa) {

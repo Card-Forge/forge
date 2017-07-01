@@ -472,35 +472,13 @@ public class AttachAi extends SpellAbilityAi {
             final Card attachSource) {
         // I know this isn't much better than Hardcoding, but some cards need it for now
         final Player ai = sa.getActivatingPlayer();
+        final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         Card chosen = null;
-        if ("Guilty Conscience".equals(ComputerUtilAbility.getAbilitySourceName(sa))) {
-            List<Card> aiStuffies = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    // Don't enchant creatures that can survive
-                    if (!c.getController().equals(ai)) {
-                        return false;
-                    }
-                    final String name = c.getName();
-                    return name.equals("Stuffy Doll") || name.equals("Boros Reckoner") || name.equals("Spitemare");
-                }
-            });
-            if (!aiStuffies.isEmpty()) {
-                chosen = aiStuffies.get(0);
-            } else {
-                List<Card> creatures = CardLists.filterControlledBy(list, ai.getOpponents());
-                creatures = CardLists.filter(creatures, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        // Don't enchant creatures that can survive
-                        if (!c.canBeDestroyed() || c.getNetCombatDamage() < c.getNetToughness() || c.isEnchantedBy("Guilty Conscience")) {
-                            return false;
-                        }
-                        return true;
-                    }
-                });
-                chosen = ComputerUtilCard.getBestCreatureAI(creatures);
-            }
+        
+        if ("Guilty Conscience".equals(sourceName)) {
+            chosen = SpecialCardAi.GuiltyConscience.getBestAttachTarget(ai, sa, list);
+        } else if ("Bonds of Faith".equals(sourceName)) {
+            chosen = SpecialCardAi.BondsOfFaith.getBestAttachTarget(ai, sa, list);
         }
 
         // If Mandatory (brought directly into play without casting) gotta
