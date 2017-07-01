@@ -68,7 +68,7 @@ public class QuestUtilUnlockSets {
         final Map<String, Integer> mapPrices = prices.getPriceList();
         final List<ImmutablePair<CardEdition, Integer>> setPrices = new ArrayList<ImmutablePair<CardEdition, Integer>>();
 
-        Double multiplier = (double) 1;
+        Double multiplier = 1d;
         int j = 0;
         for (CardEdition ed : getUnlockableEditions(qData)) {
             j++;
@@ -76,7 +76,7 @@ public class QuestUtilUnlockSets {
                 multiplier = multiplier * Double.parseDouble(FModel.getQuestPreferences().getPref(QPref.UNLOCK_DISTANCE_MULTIPLIER));
                 // prevent overflow
                 if (multiplier >= 500) {
-                    multiplier = (double) 500;
+                    multiplier = 500d;
                 }
             }
             int price = UNLOCK_COST;
