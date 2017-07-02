@@ -316,6 +316,9 @@ public abstract class GameState {
         final Player human = game.getPlayers().get(0);
         final Player ai = game.getPlayers().get(1);
 
+        idToCard.clear();
+        cardToAttachId.clear();
+
         Player newPlayerTurn = tChangePlayer.equals("human") ? human : tChangePlayer.equals("ai") ? ai : null;
         PhaseType newPhase = tChangePhase.equals("none") ? null : PhaseType.smartValueOf(tChangePhase);
 
