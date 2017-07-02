@@ -183,9 +183,7 @@
 #182|Swarm Intelligence|R|HOU
 #183|Dunes of the Dead|U|HOU
 #184|Fraying Sanity|R|HOU
-
-
-
+//Rank|Name|Rarity|Set
 #1|Angel of Sanctions|M|AKH
 #2|Liliana, Death's Majesty|M|AKH
 #3|Glorybringer|R|AKH
