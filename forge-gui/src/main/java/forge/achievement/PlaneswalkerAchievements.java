@@ -86,8 +86,11 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Nahiri, the Harbinger", "Nahiri's Mystery Guest", "This should be your cue to run.");
         add("Nahiri, the Lithomancer", "Nahiri's Gift", "I pulled it out! Now I'm a king!");
         add("Narset Transcendent", "Narset's One Rule", "No spells for you!");
+        add("Nicol Bolas, God-Pharaoh", "Bolas's Cleansing", "Let's just tear this down and start again. Or... maybe tearing it down will suffice.");
         add("Nicol Bolas, Planeswalker", "Bolas's Ultimatum", "Whatever you do, don't call him \"Nicol\"!");
+        add("Nicol Bolas, the Deceiver", "Bolas's Cunning Hit", "I know exactly how to hurt you.");
         add("Nissa Revane", "Nissa's Summoning", "The whole village is here!");
+        add("Nissa, Genesis Mage", "Nissa's Genesis Wave", "Let's see who shows up.");
         add("Nissa, Nature's Artisan", "Nissa's Stampede", "Big enough for you?");
         add("Nissa, Sage Animist", "Nissa's Wake-Up Call", "Wake up! Time to work!");
         add("Nissa, Steward of Elements", "Nissa's Flying Rocks", "You don't need to be without sin to throw rocks!");
@@ -98,6 +101,7 @@ public class PlaneswalkerAchievements extends AchievementCollection {
         add("Ob Nixilis Reignited", "Ob Nixilis's Torment", "I'll give you dreams from beyond the underworld!");
         add("Ral Zarek", "Ral's Long Day", "So much work, so much time!");
         add("Saheeli Rai", "Saheeli's Creativity", "I love when all the pieces come together!");
+        add("Samut, the Tested", "Samut's Rapid Deployment", "My friends will be here in a flash.");
         add("Sarkhan Vol", "Sarkhan's Dragons", "Go forth, my minions!");
         add("Sarkhan the Mad", "Sarkhan's Beatdown", "Tag! You're it!");
         add("Sarkhan, the Dragonspeaker", "Sarkhan's Voices", "Huh? What are you saying?)");
