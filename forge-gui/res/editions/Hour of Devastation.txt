@@ -111,7 +111,7 @@ AdditionalSetUnlockedInQuest=MPS_AKH
 99 U Inferno Jet
 100 C Khenra Scrapper
 101 C Kindled Fury
-192 U Magmaroth
+102 U Magmaroth
 103 U Manticore Eternal
 104 M Neheb, the Eternal
 105 C Open Fire
