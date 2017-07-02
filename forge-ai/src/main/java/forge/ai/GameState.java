@@ -151,6 +151,9 @@ public abstract class GameState {
                     newText.append(":Manifested");
                 }
             }
+            if (c.getCurrentStateName().equals(CardStateName.Transformed)) {
+                newText.append("|Transformed");
+            }
             Map<CounterType, Integer> counters = c.getCounters();
             if (!counters.isEmpty()) {
                 newText.append("|Counters:");
@@ -456,6 +459,8 @@ public abstract class GameState {
                     if (info.endsWith("Manifested")) {
                         c.setManifested(true);
                     }
+                } else if (info.startsWith("Transformed")) {
+                    c.setState(CardStateName.Transformed, true);
                 } else if (info.startsWith("IsCommander")) {
                     // TODO: This doesn't seem to properly restore the ability to play the commander. Why?
                     c.setCommander(true);
