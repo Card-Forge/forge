@@ -106,7 +106,7 @@ public enum VSubmenuPuzzleSolve implements IVSubmenu<CSubmenuPuzzleSolve> {
         vLobby.getLblTitle().setText("Puzzle Mode: Solve");
         container.add(vLobby.getLblTitle(), "w 80%, h 40px!, gap 0 0 15px 15px, span 2, al right, pushx");
         puzzleList.setModel(model);
-        container.add(puzzleListPane, "w 80%, h 200px!, gap 0 0 0px 0px, span 2, al center");
+        container.add(puzzleListPane, "w 80%, h 80%, gap 0 0 0px 0px, span 2, al center");
         container.add(btnStart, "w 98%!, ax center, gap 1% 0 20px 20px, span 2");
 
 
