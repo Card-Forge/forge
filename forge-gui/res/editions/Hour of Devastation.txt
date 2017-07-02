@@ -117,7 +117,7 @@ AdditionalSetUnlockedInQuest=MPS_AKH
 105 C Open Fire
 106 C Puncturing Blow
 107 U Sand Strangler
-110 C Thorned Moloch
+108 C Thorned Moloch
 109 R Wildfire Eternal
 110 C Ambuscade
 111 C Beneath the Sands
