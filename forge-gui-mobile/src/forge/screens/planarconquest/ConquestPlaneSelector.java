@@ -177,9 +177,19 @@ public class ConquestPlaneSelector extends FDisplayObject {
             float artWidth = monitorWidth - 2 * monitorLeftOffset + 2;
             float artHeight = monitorHeight - monitorTopOffset - monitorBottomOffset + 2;
 
-            //scale up art to fill height of monitor while retain aspect ratio
+            //scale up art to fill height of monitor while retaining aspect ratio
             float fullArtWidth = artHeight * currentArt.getWidth() / currentArt.getHeight();
-            g.startClip(x, y, artWidth, artHeight);
+            
+            float artHeightClipMod = 0f;
+            if (fullArtWidth < monitorWidth) {
+                //if the card art is too narrow, widen it to fully cover the monitor size               
+                float scaledArtHeight = monitorWidth * (artHeight / fullArtWidth);
+                fullArtWidth = monitorWidth;
+                artHeightClipMod = scaledArtHeight - artHeight;
+                artHeight = scaledArtHeight;                
+            }
+            
+            g.startClip(x, y, artWidth, artHeight - artHeightClipMod);
             g.drawImage(currentArt, x + (monitorWidth - fullArtWidth) / 2, y, fullArtWidth, artHeight);
             g.endClip();
 

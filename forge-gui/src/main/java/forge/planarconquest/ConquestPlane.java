@@ -139,8 +139,12 @@ public class ConquestPlane {
             for (String name : planeCardNames) {
                 PaperCard pc = variantCards.getCard(name);
                 if (pc == null) {
-                    System.out.println("\"" + name + "\" does not correspond to a valid Plane card");
-                    continue;
+                    // try to get a non-variant Magic card in case a plane card with the given name does not exist
+                    pc = FModel.getMagicDb().getCommonCards().getCard(name);
+                    if (pc == null) {
+                        System.out.println("\"" + name + "\" does not correspond to a valid Plane card or standard Magic card!");
+                        continue;
+                    }
                 }
                 planeCards.add(pc);
             }
