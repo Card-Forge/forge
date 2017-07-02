@@ -348,6 +348,7 @@ public abstract class GameState {
 
     private void setupPlayerState(int life, Map<ZoneType, String> cardTexts, final Player p) {
         // Lock check static as we setup player state
+        final Game game = p.getGame();
 
         Map<ZoneType, CardCollectionView> playerCards = new EnumMap<ZoneType, CardCollectionView>(ZoneType.class);
         for (Entry<ZoneType, String> kv : cardTexts.entrySet()) {
@@ -392,9 +393,14 @@ public abstract class GameState {
             }
         }
 
+        game.getTriggerHandler().suppressMode(TriggerType.Unequip);
+
         for(Entry<Card, Integer> entry : cardToAttachId.entrySet()) {
             Card attachedTo = idToCard.get(entry.getValue());
             Card attacher = entry.getKey();
+
+            attachedTo.unEnchantAllCards();
+            attachedTo.unEquipAllCards();
 
             if (attacher.isEquipment()) {
                 attacher.equipCard(attachedTo);
@@ -404,6 +410,8 @@ public abstract class GameState {
                 attacher.fortifyCard(attachedTo);
             }
         }
+
+        game.getTriggerHandler().clearSuppression(TriggerType.Unequip);
     }
 
     /**
