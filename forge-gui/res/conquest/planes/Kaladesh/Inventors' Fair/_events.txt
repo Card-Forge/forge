@@ -1,0 +1,9 @@
+Name:Hope of Ghirapur|Deck:Hope of Ghirapur.dck|Variant:Commander|Avatar:Hope of Ghirapur|Desc:
+Name:Padeem, Consul of Innovation|Deck:Padeem, Consul of Innovation.dck|Variant:Commander|Avatar:Padeem, Consul of Innovation|Desc:
+Name:Baral, Chief of Compliance|Deck:Baral, Chief of Compliance.dck|Variant:Commander|Avatar:Baral, Chief of Compliance|Desc:
+Name:Tezzeret the Schemer|Deck:Tezzeret the Schemer.dck|Variant:Planeswalker|Avatar:Tezzeret the Schemer|Desc:
+Name:Dovin Baan|Deck:Dovin Baan.dck|Variant:Planeswalker|Avatar:Dovin Baan|Desc:
+Name:Saheeli Rai|Deck:Saheeli Rai.dck|Variant:Planeswalker|Avatar:Saheeli Rai|Desc:
+Name:Fabricated Forces|Deck:Fabricated Forces.dck|Variant:None|Avatar:Angel of Invention|Desc:
+Name:Improvised Inventions|Deck:Improvised Inventions.dck|Variant:None|Avatar:Whir of Invention|Desc:
+Name:Vedalken|Deck:Vedalken.dck|Variant:None|Avatar:Aether Theorist|Desc:

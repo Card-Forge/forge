@@ -1,0 +1,9 @@
+Name:Sram, Senior Edificer|Deck:Sram, Senior Edificer.dck|Variant:Commander|Avatar:Sram, Senior Edificer|Desc:
+Name:Ajani Unyielding|Deck:Ajani Unyielding.dck|Variant:Planeswalker|Avatar:Ajani Unyielding|Desc:
+Name:Ajani, Valiant Protector|Deck:Ajani, Valiant Protector.dck|Variant:Planeswalker|Avatar:Ajani, Valiant Protector|Desc:
+Name:Consulate|Deck:Consulate.dck|Variant:None|Avatar:Authority of the Consuls|Desc:
+Name:Dwarves|Deck:Dwarves.dck|Variant:None|Avatar:Aerial Responder|Desc:
+Name:Fabrications|Deck:Fabrications.dck|Variant:None|Avatar:Visionary Augmenter|Desc:
+Name:Modules|Deck:Modules.dck|Variant:None|Avatar:Animation Module|Desc:
+Name:Servos|Deck:Servos.dck|Variant:None|Avatar:Master Trinketeer|Desc:
+Name:Speedway Fanatics|Deck:Speedway Fanatics.dck|Variant:None|Avatar:Speedway Fanatic|Desc:

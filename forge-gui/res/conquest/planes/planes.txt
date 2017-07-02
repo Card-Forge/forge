@@ -1,7 +1,7 @@
 Name:Alara|RegionSize:9|Desc:As the boundaries between the shards dissolve, cultures clash and wars ensue.\nContains cards from ALA, CON, ARB, C13, and more.
 Name:Dominaria|RegionSize:9|Unreachable:True|Desc:
 Name:Innistrad|RegionSize:9|Desc:On this plane, humanity is terrorized by vampires, werewolves, zombies, and ghouls.\nContains cards from ISD, DKA, AVR, SOI, EMN, and C14.
-Name:Kaladesh|RegionSize:6|Unreachable:True|Desc:Kaladesh is a living work of art. Aether is inextricably woven into the world's culture of inspired invention.\nContains cards from KLD and AER.
+Name:Kaladesh|RegionSize:9|Desc:Kaladesh is a living work of art. Aether is inextricably woven into the world's culture of inspired invention.\nContains cards from KLD, AER, and MPS_KLD.
 Name:Kamigawa|RegionSize:6|Unreachable:True|Desc:For hundreds of years, Kamigawa's denizens peacefully worshipped the spirits of their world. Then suddenly their gods attacked, forcing the world into brutal war.\nContains cards from CHK, BOK, and SOK.
 Name:Lorwyn-Shadowmoor|RegionSize:9|Desc:A sunny utopia with a thriving storybook community, or a battle-wrought land cursed to perpetual gloom.\nContains cards from LRW, MOR, SHM, EVE, CNS/CN2, and C14.
 Name:Mercadia|RegionSize:6|Unreachable:True|Desc:
