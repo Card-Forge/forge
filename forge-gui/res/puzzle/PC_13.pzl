@@ -1,0 +1,17 @@
+[metadata]
+Name:Perplexing Chimera #13 - Waking Life
+URL:https://perplexingchimera.com/2015/01/05/13-waking-life/
+Goal:Win
+Turns:1
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=1
+AILife=6
+HumanPlay=Mountain; Mountain; Mountain; Mountain; Mountain; Mountain; Plains; Plains; Plains
+HumanHand=Sanctified Charge; Return to the Ranks; Thundering Giant
+HumanLibrary=
+HumanGraveyard=Forge Devil; Altac Bloodseeker; Lightning Strike; Paragon of Fierce Defiance; Selfless Cathar; Torch Fiend; Scrapyard Mongrel; Kinsbaile Skirmisher
+AIPlay=Military Intelligence; Typhoid Rats|Tapped; Carrion Crow|Tapped; Jorubai Murk Lurker|Tapped; Juggernaut|Tapped; Swamp|Tapped; Swamp|Tapped; Swamp|Tapped; Swamp|Tapped; Swamp|Tapped; Island|Tapped; Island|Tapped; Island|Tapped; Island|Tapped
+AIGraveyard=
+
