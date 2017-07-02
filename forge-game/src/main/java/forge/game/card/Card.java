@@ -2560,7 +2560,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (equipping != null && equipping.getId() == c.getId()) {
             setEquipping(null);
         }
-
         c.equippedBy = c.view.removeCard(c.equippedBy, this, TrackableProperty.EquippedBy);
 
         getGame().fireEvent(new GameEventCardAttachment(this, c, null, AttachMethod.Equip));
