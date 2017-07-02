@@ -65,7 +65,7 @@ AdditionalSetUnlockedInQuest=MPS_AKH
 53 C Unquenchable Thirst
 54 C Unsummon
 55 U Vizier of the Anointed
-56 U Accursed horde
+56 U Accursed Horde
 57 R Ammit Eternal
 58 R Apocalypse Demon
 59 U Banewhip Punisher
@@ -200,14 +200,14 @@ AdditionalSetUnlockedInQuest=MPS_AKH
 188 L Mountain
 189 L Forest
 190 L Plains
-191 L Island
-192 L Swamp
-193 L Mountain
-194 L Forest
-195 L Plains
-196 L Island
-197 L Swamp
-198 L Mountain
+191 L Plains
+192 L Island
+193 L Island
+194 L Swamp
+195 L Swamp
+196 L Mountain
+197 L Mountain
+198 L Forest
 199 L Forest
 200 M Nissa, Genesis Mage
 201 U Avid Reclaimer
