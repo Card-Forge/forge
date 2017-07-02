@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.collect.Lists;
+import forge.StaticData;
 
 import forge.card.CardStateName;
 import forge.game.Game;
@@ -28,6 +29,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
+import forge.item.PaperCard;
 import forge.util.collect.FCollectionView;
 
 public abstract class GameState {
@@ -433,22 +435,30 @@ public abstract class GameState {
         for (final String element : data) {
             final String[] cardinfo = element.trim().split("\\|");
 
+            String setCode = null;
+            for (final String info : cardinfo) {
+                if (info.startsWith("Set:")) {
+                    setCode = info.substring(info.indexOf(':') + 1);
+                    break;
+                }
+            }
+            
             Card c;
+            boolean hasSetCurSet = false;
             if (cardinfo[0].startsWith("t:")) {
                 String tokenStr = cardinfo[0].substring(2);
                 c = CardFactory.makeOneToken(CardFactory.TokenInfo.fromString(tokenStr), player);
             } else {
-                c = Card.fromPaperCard(getPaperCard(cardinfo[0]), player);
+                PaperCard pc = StaticData.instance().getCommonCards().getCard(cardinfo[0], setCode);
+                c = Card.fromPaperCard(pc, player);
+                if (setCode != null) {
+                    hasSetCurSet = true;
+                }
             }
             c.setSickness(false);
 
-            boolean hasSetCurSet = false;
             for (final String info : cardinfo) {
-                if (info.startsWith("Set:")) {
-                    c.setSetCode(info.substring(info.indexOf(':') + 1));
-                    hasSetCurSet = true;
-                }
-                else if (info.startsWith("Tapped")) {
+                if (info.startsWith("Tapped")) {
                     c.tap();
                 } else if (info.startsWith("Counters:")) {
                     applyCountersToGameEntity(c, info.substring(info.indexOf(':') + 1));
