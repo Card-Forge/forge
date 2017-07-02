@@ -70,4 +70,4 @@ Eternal Masters, 3/6/SOI, EMA
 #Conspiracy Take the Crown, 3/6/ORI, CN2
 Kaladesh, 3/6/KLD, KLD AER
 Modern Masters 2017, 3/6/M15, MM3
-Amonkhet, 3/6/AKH, AKH
+Amonkhet, 3/6/AKH, AKH HOU
