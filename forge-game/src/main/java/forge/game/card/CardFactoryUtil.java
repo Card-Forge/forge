@@ -3561,6 +3561,9 @@ public class CardFactoryUtil {
             final String[] kw = keyword.split(":");
             String costStr = kw[1];   
             final SpellAbility sa = card.getFirstSpellAbility();
+            if (sa == null) {
+                return;
+            }
             final SpellAbility newSA = sa.copy();
             newSA.setBasicSpell(false);
             if (costStr.equals("ConvertedManaCost")) {
