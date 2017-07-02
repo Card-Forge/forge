@@ -148,8 +148,8 @@ AdditionalSetUnlockedInQuest=MPS_AKH
 136 U Tenacious Hunter
 137 M Uncage the Menagerie
 138 U Bloodwater Entity
-139 M Nicol Bolas, God-Pharaoh
-140 M The Locust God
+139 M The Locust God
+140 M Nicol Bolas, God-Pharaoh
 141 U Obelisk Spider
 142 U Resolute Survivors
 143 U River Hoopoe
