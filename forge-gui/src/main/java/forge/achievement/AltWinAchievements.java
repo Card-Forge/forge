@@ -39,12 +39,12 @@ public class AltWinAchievements extends AchievementCollection {
         add("Laboratory Maniac", "The Insanity", "No more questions? I'm omniscient now!");
         add("Mayael's Aria", "The Gargantuan", "Just my shadow weighs a ton!");
         add("Maze's End", "The Labyrinth", "What? No bossfight?");
+        add("Mechanized Production", "The Rise of Replicas", "Welcome to the future of mass production!");
         add("Mortal Combat", "The Boneyard", "So peaceful...");
         add("Near-Death Experience", "The Edge", "Phew... I thought I was going to die!");
         add("Phage the Untouchable", "The Untouchable", "None are immune to her deadly touch!");
         add("Test of Endurance", "The Test", "So... did I pass?");
         add("Triskaidekaphobia", "The Fear of 13", "It's just a silly ancient superstition... right?");
-        add("Mechanized Production", "The Rise of Replicas", "Welcome to the future of mass production!");
     }
 
     private void add(String cardName0, String displayName0, String flavorText0) {
