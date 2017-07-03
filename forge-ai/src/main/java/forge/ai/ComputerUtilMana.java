@@ -758,6 +758,12 @@ public class ComputerUtilMana {
             return false;
         }
 
+        if (ma.hasParam("ActivationLimit")) {
+            if (ma.getActivationsThisTurn() >= AbilityUtils.calculateAmount(sourceCard, ma.getParam("ActivationLimit"), ma)) {
+                return false;
+            }
+        }
+
         if (checkCosts) {
             // Check if AI can still play this mana ability
             ma.setActivatingPlayer(ai);
