@@ -99,7 +99,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
         final String remSVar = sa.getParam("RememberSacrificedSVar");
         int countSacrificed = 0;
 
-        if (valid.equals("Self")) {
+        if (valid.equals("Self") && game.getZoneOf(card) != null) {
             if (game.getZoneOf(card).is(ZoneType.Battlefield)) {
                 if (game.getAction().sacrifice(card, sa) != null) {
                 	countSacrificed++;
