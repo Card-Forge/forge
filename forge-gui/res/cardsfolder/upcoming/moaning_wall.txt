@@ -1,6 +1,6 @@
 Name:Moaning Wall
 ManaCost:2 B
-Types:Creature Wall
+Types:Creature Wall Zombie
 PT:0/5
 K:Defender
 K:Cycling:2
