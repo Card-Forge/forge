@@ -185,7 +185,7 @@ AdditionalSetUnlockedInQuest=MPS_AKH
 173 C Desert of the Mindful
 174 C Desert of the True
 175 U Dunes of the Dead
-176 C Endless Sands
+176 R Endless Sands
 177 U Hashep Oasis
 178 R Hostile Desert
 179 U Ifnir Deadlands
