@@ -23,7 +23,7 @@ abstract public class DamageBaseEffect extends SpellAbilityEffect {
             if (sa.hasParam("ReplaceDyingCondition")) {
                 // currently there is only one with Kicker
                 final String condition = sa.getParam("ReplaceDyingCondition");
-                if ("Kicker".equals(condition)) {
+                if ("Kicked".equals(condition)) {
                     if (!sa.isKicked()) {
                         return;
                     }
