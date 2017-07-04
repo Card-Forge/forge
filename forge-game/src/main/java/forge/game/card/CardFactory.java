@@ -804,7 +804,6 @@ public class CardFactory {
     public static List<Card> makeToken(final TokenInfo tokenInfo, final Player controller, final boolean applyMultiplier) {
         final List<Card> list = Lists.newArrayList();
         final Game game = controller.getGame();
-        final Card c = tokenInfo.toCard(game);
 
         int multiplier = 1;
 
@@ -826,7 +825,7 @@ public class CardFactory {
         }
 
         for (int i = 0; i < multiplier; i++) {
-            Card temp = i == 0 ? c : copyStats(c, controller, true);
+            Card temp = tokenInfo.toCard(game);
 
             for (final String kw : tokenInfo.intrinsicKeywords) {
                 temp.addIntrinsicKeyword(kw);
