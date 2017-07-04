@@ -2,6 +2,8 @@ Name:Sidewinder Naga
 ManaCost:2 G
 Types:Creature Naga Warrior
 PT:3/2
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddKeyword$ Trample | Desert$ True | Description$ As long as you control a Desert or there is a Desert card in your graveyard, CARDNAME gets +1/+0 and has trample.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddKeyword$ Trample | CheckSVar$ X | SVarCompare$ GE1 | References$ X,Y | Description$ As long as you control a Desert or there is a Desert card in your graveyard, CARDNAME gets +1/+0 and has trample.
+SVar:X:Count$Valid Desert.YouCtrl/Plus.Y
+SVar:Y:Count$TypeInYourYard.Desert
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sidewinder_naga.jpg
 Oracle:As long as you control a Desert or there is a Desert card in your graveyard, Sidewinder Naga gets +1/+0 and has trample.
