@@ -1,7 +1,11 @@
 package forge.ai.ability;
 
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.ai.*;
 import forge.game.Game;
@@ -23,10 +27,6 @@ import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import java.util.HashMap;
-
-import java.util.List;
-import java.util.Map;
 
 public class DamageDealAi extends DamageAiBase {
     @Override
@@ -101,7 +101,7 @@ public class DamageDealAi extends DamageAiBase {
             }
         }
 
-        if (source.equals("Crater's Claws") && ai.hasFerocious()) {
+        if (sourceName.equals("Crater's Claws") && ai.hasFerocious()) {
             dmg += 2;
         }
         
@@ -748,7 +748,7 @@ public class DamageDealAi extends DamageAiBase {
         // set the color map for black X for the purpose of Soul Burn
         // TODO: somehow generalize this calculation to allow other potential similar cards to function in the future
         if ("Soul Burn".equals(sourceName)) {
-            Map<String, Integer> xByColor = new HashMap<>();
+            Map<String, Integer> xByColor = Maps.newHashMap();
             xByColor.put("B", dmg - ComputerUtilMana.determineLeftoverMana(sa, ai, "R"));
             source.setXManaCostPaidByColor(xByColor);
         }
