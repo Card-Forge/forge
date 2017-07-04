@@ -1491,7 +1491,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     && keyword.contains(" unless you pay")) {
                 sbLong.append(keyword).append("\r\n");
             } else if (keyword.startsWith("Strive") || keyword.startsWith("Escalate")
-                    || keyword.startsWith("ETBReplacement") || keyword.startsWith("MayEffectFromOpeningHand")
+                    || keyword.startsWith("ETBReplacement")
                     || keyword.startsWith("UpkeepCost")) {
             } else if (keyword.startsWith("Provoke") || keyword.startsWith("Devour") || keyword.equals("Unleash")
                     || keyword.startsWith("Soulbond") || keyword.equals("Partner") || keyword.equals("Retrace")
@@ -1558,6 +1558,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sbLong.append(getName()).append(" can block ")
                 .append(CardUtil.getPluralType(k[1]))
                 .append(" as though it had reach.\r\n");
+            } else if (keyword.startsWith("MayEffectFromOpeningHand")) {
+                final String[] k = keyword.split(":");
+                // need to get SpellDescription from Svar
+                String desc = AbilityFactory.getMapParams(getSVar(k[1])).get("SpellDescription");
+                sbLong.append(desc);
             }
             else {
                 if ((i != 0) && (sb.length() != 0)) {
