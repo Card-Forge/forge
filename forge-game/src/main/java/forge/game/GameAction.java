@@ -419,7 +419,7 @@ public class GameAction {
                 //c.setMeldedWith(null);
                 ((PlayerZoneBattlefield)zoneFrom).removeFromMelded(unmeld);
                 Integer unmeldPosition = position;
-                if (unmeldPosition != null && (zoneTo.equals(ZoneType.Library) || zoneTo.equals(ZoneType.Graveyard))) {
+                if (unmeldPosition != null && (zoneTo.is(ZoneType.Library) || zoneTo.is(ZoneType.Graveyard))) {
                     // Ask controller if it wants to be on top or bottom of other meld.
                     unmeldPosition++;
                 }
