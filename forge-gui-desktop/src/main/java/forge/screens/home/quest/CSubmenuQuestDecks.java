@@ -90,7 +90,6 @@ public enum CSubmenuQuestDecks implements ICDoc {
         }
         else {
             view.getLstDecks().setSelectedIndex(0);
-            cmdDeckSelect.run(); //update prefs immediately
         }
 
         view.getLstDecks().setSelectCommand(cmdDeckSelect);
