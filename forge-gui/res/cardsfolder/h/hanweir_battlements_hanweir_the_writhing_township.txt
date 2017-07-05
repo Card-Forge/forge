@@ -3,9 +3,7 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
 A:AB$ Pump | Cost$ R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SpellDescription$ Target creature gains haste until end of turn.
-A:AB$ ChangeZone | Cost$ 3 R R T | Defined$ Self | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ ExileOther | ConditionPresent$ Card.Self+YouCtrl+YouOwn | ConditionCheckSVar$ X | References$ X | SpellDescription$ If you both own and control CARDNAME and a creature named Hanweir Garrison, exile them, then meld them into Hanweir, the Writhing Township.
-SVar:ExileOther:DB$ ChangeZone | ChangeType$ Creature.YouCtrl+YouOwn+namedHanweir Garrison | Hidden$ True | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | Mandatory$ True | SubAbility$ Meld | ConditionCheckSVar$ X | References$ X
-SVar:Meld:DB$ Meld | Defined$ Remembered | Name$ Hanweir, the Writhing Township | Primary$ Hanweir Battlements | Secondary$ Hanweir Garrison
+A:AB$ Meld | Cost$ 3 R R T | ConditionPresent$ Card.Self+YouCtrl+YouOwn | ConditionCheckSVar$ X | References$ X | Name$ Hanweir, the Writhing Township | Primary$ Hanweir Battlements | Secondary$ Hanweir Garrison | SpellDescription$ If you both own and control CARDNAME and a creature named Hanweir Garrison, exile them, then meld them into Hanweir, the Writhing Township.
 SVar:X:Count$Valid Creature.YouCtrl+YouOwn+namedHanweir Garrison
 DeckHints:Name$Hanweir Garrison & Type$Eldrazi|Horror
 DeckHas:Ability$Mana.Colorless & Ability$Token
