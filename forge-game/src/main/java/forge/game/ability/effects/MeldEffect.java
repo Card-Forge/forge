@@ -1,11 +1,14 @@
 package forge.game.ability.effects;
 
+import com.google.common.collect.Lists;
+
 import forge.card.CardStateName;
 import forge.game.Game;
-import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZoneBattlefield;
@@ -19,31 +22,36 @@ public class MeldEffect extends SpellAbilityEffect {
         String secName = sa.getParam("Secondary");
         Game game = hostCard.getGame();
         Player controller = sa.getActivatingPlayer();
-        CardCollection list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("Defined"), sa);
 
-        if (list.size() < 2) {
-            // Haven't found enough cards to Meld, leave Melding choices in their current zone
+        Card primary = game.getAction().exile(hostCard, sa);
+
+        // a creature you control and own named secondary
+        CardCollection field = CardLists.filter(
+                controller.getCreaturesInPlay(),
+                CardPredicates.isOwner(controller),
+                CardPredicates.nameEquals(secName));
+
+        if (field.isEmpty()) {
             return;
         }
 
-        Card primary = null;
-        Card secondary = null;
+        Card secondary = controller.getController().chooseSingleEntityForEffect(field, sa, "Choose card to meld with");
 
-        for(Card c : list) {
+        secondary = game.getAction().exile(secondary, sa);
+
+        // cards has wrong name in exile
+        if (!primary.sharesNameWith(primName) || !secondary.sharesNameWith(secName)) {
+            return;
+        }
+
+        for(Card c : Lists.newArrayList(primary, secondary)) {
             if (c.isToken() || c.getCloneOrigin() != null) {
                 // Neither of these things
                 return;
-            }
-            if (primName.equals(c.getName())) {
-                primary = c;
-            } else if (secName.equals(c.getName())) {
-                secondary = c;
-            } else {
+            } else if (!c.isInZone(ZoneType.Exile)) {
                 return;
             }
         }
-
-
 
         primary.changeToState(CardStateName.Meld);
         PlayerZoneBattlefield bf = (PlayerZoneBattlefield)controller.getZone(ZoneType.Battlefield);
