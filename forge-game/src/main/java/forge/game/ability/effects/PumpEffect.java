@@ -21,6 +21,7 @@ import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import forge.game.card.CardFactoryUtil;
 
 public class PumpEffect extends SpellAbilityEffect {
 
@@ -214,6 +215,12 @@ public class PumpEffect extends SpellAbilityEffect {
         }
         final int a = AbilityUtils.calculateAmount(host, sa.getParam("NumAtt"), sa);
         final int d = AbilityUtils.calculateAmount(host, sa.getParam("NumDef"), sa);
+
+        if (sa.hasParam("SharedKeywordsZone")) {
+            List<ZoneType> zones = ZoneType.listValueOf(sa.getParam("SharedKeywordsZone"));
+            String[] restrictions = sa.hasParam("SharedRestrictions") ? sa.getParam("SharedRestrictions").split(",") : new String[]{"Card"};
+            keywords = CardFactoryUtil.sharedKeywords(sa.getParam("KW").split(" & "), restrictions, zones, sa.getHostCard());
+        }
 
         List<GameEntity> tgts = Lists.newArrayList();
         List<Card> tgtCards = getTargetCards(sa);
