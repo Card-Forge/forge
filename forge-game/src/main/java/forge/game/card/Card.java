@@ -50,6 +50,7 @@ import forge.game.replacement.ReplacementResult;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.SpellPermanent;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
@@ -1700,6 +1701,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public String getAbilityText() {
         return getAbilityText(currentState);
     }
+
     public String getAbilityText(final CardState state) {
         final CardTypeView type = state.getType();
 
@@ -1736,8 +1738,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         sb.append(keywordsToText(getUnhiddenKeywords(state)));
 
-        // Process replacement effects first so that ETB tabbed can be printed here.
-        // The rest will be printed later.
+        // Process replacement effects first so that ETB tabbed can be printed
+        // here. The rest will be printed later.
         StringBuilder replacementEffects = new StringBuilder();
         for (final ReplacementEffect replacementEffect : state.getReplacementEffects()) {
             if (!replacementEffect.isSecondary()) {
@@ -1749,7 +1751,21 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
         }
-        
+
+        if (this.getRules() != null && state.getView().getState().equals(CardStateName.Original)) {
+            // try to look which what card this card can be meld to
+            // only show this info if this card does not has the meld Effect itself
+
+            boolean hasMeldEffect = hasSVar("Meld")
+                    || Iterables.any(state.getNonManaAbilities(), SpellAbilityPredicates.isApi(ApiType.Meld));
+            String meld = this.getRules().getMeldWith();
+            if (meld != "" && (!hasMeldEffect)) {
+                sb.append("\r\n");
+                sb.append("(Melds with " + meld + ".)");
+                sb.append("\r\n");
+            }
+        }
+
         // Give spellText line breaks for easier reading
         sb.append("\r\n");
         sb.append(text.replaceAll("\\\\r\\\\n", "\r\n"));
@@ -1758,7 +1774,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         // Triggered abilities
         for (final Trigger trig : state.getTriggers()) {
             if (!trig.isSecondary()) {
-                sb.append(trig.replaceAbilityText(trig.toString(), null).replaceAll("\\\\r\\\\n", "\r\n")).append("\r\n");
+                String trigStr = trig.replaceAbilityText(trig.toString(), null);
+                sb.append(trigStr.replaceAll("\\\\r\\\\n", "\r\n")).append("\r\n");
             }
         }
 
@@ -1785,9 +1802,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                 continue;
             }
 
-            // should not print Spelldescription for Morph 
-            if (sa instanceof Spell && ((Spell)sa).isCastFaceDown()) {
-            	continue;
+            // should not print Spelldescription for Morph
+            if (sa instanceof Spell && ((Spell) sa).isCastFaceDown()) {
+                continue;
             }
 
             boolean isNonAuraPermanent = (sa instanceof SpellPermanent) && isNonAura;
@@ -1809,8 +1826,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (isNonAuraPermanent) {
                 sb.insert(0, "\r\n");
                 sb.insert(0, sAbility);
-            }
-            else if (!sAbility.endsWith(state.getName() + "\r\n")) {
+            } else if (!sAbility.endsWith(state.getName() + "\r\n")) {
                 sb.append(sAbility);
                 sb.append("\r\n");
             }
