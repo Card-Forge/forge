@@ -277,6 +277,7 @@ public final class CardRules implements ICardCharacteristics {
             this.needs = null;
             this.hints = null;
             this.has = null;
+            this.meldWith = "";
         }
 
         /**
