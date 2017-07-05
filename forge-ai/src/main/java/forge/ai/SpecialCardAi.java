@@ -102,7 +102,7 @@ public class SpecialCardAi {
 
     // Bonds of Faith
     public static class BondsOfFaith {
-        public static Card getBestAttachTarget(Player ai, SpellAbility sa, List<Card> list) {
+        public static Card getBestAttachTarget(final Player ai, SpellAbility sa, List<Card> list) {
             Card chosen = null;
             
             List<Card> aiHumans = CardLists.filter(list, new Predicate<Card>() {
@@ -273,7 +273,7 @@ public class SpecialCardAi {
     }
 
     public static class GuiltyConscience {
-        public static Card getBestAttachTarget(Player ai, SpellAbility sa, List<Card> list) {
+        public static Card getBestAttachTarget(final Player ai, SpellAbility sa, List<Card> list) {
             Card chosen = null;
             
             List<Card> aiStuffies = CardLists.filter(list, new Predicate<Card>() {
