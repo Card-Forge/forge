@@ -14,6 +14,7 @@ import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
@@ -510,9 +511,7 @@ public class CountersPutAi extends SpellAbilityAi {
     @Override
     public boolean chkAIDrawback(final SpellAbility sa, Player ai) {
         boolean chance = true;
-        // final TargetRestrictions abTgt = sa.getTargetRestrictions();
-        final Card source = sa.getHostCard();
-        final Game game = source.getGame();
+        final Game game = ai.getGame();
         Card choice = null;
         final String type = sa.getParam("CounterType");
 
@@ -536,7 +535,7 @@ public class CountersPutAi extends SpellAbilityAi {
 
             if (list.isEmpty() && isMandatoryTrigger) {
                 // broaden the scope of possible targets if we are resolving a mandatory trigger
-                list = CardLists.getTargetableCards(new CardCollection(game.getCardsIn(ZoneType.Battlefield)), sa);
+                list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
             }
 
             sa.resetTargets();
@@ -556,9 +555,10 @@ public class CountersPutAi extends SpellAbilityAi {
                 if (sa.isCurse()) {
                     choice = CountersAi.chooseCursedTarget(list, type, amount);
                 } else {
-                    String txt = source.getAbilityText();
-                    if (txt != null && txt.contains("Awaken ")) {
-                        choice = ComputerUtilCard.getWorstLand(list);
+                    CardCollection lands = CardLists.filter(list, CardPredicates.Presets.LANDS);
+                    SpellAbility animate = sa.findSubAbilityByType(ApiType.Animate);
+                    if (!lands.isEmpty() && animate != null) {
+                        choice = ComputerUtilCard.getWorstLand(lands);
                     } else if ("BoonCounterOnOppCreature".equals(sa.getParam("AILogic"))) {
                         choice = ComputerUtilCard.getWorstCreatureAI(list);
                     } else {
