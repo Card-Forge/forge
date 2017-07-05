@@ -241,7 +241,7 @@ public class CardImageRenderer {
         if (state.isBasicLand()) {
             //draw icons for basic lands
             FSkinImage image;
-            switch (state.getName()) {
+            switch (state.getName().replaceFirst("^Snow-Covered ", "")) {
             case "Plains":
                 image = FSkinImage.MANA_W;
                 break;
