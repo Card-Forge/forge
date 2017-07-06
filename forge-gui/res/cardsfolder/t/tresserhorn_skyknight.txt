@@ -1,9 +1,8 @@
 Name:Tresserhorn Skyknight
 ManaCost:5 B B
 Types:Creature Zombie Knight
-Text:Prevent all damage that would be dealt to CARDNAME by creatures with first strike.
 PT:5/3
 K:Flying
-K:PreventAllDamageBy Creature.withFirst Strike
+K:PreventAllDamageBy:Creature.withFirst Strike:Prevent all damage that would be dealt to CARDNAME by creatures with first strike.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tresserhorn_skyknight.jpg
 Oracle:Flying\nPrevent all damage that would be dealt to Tresserhorn Skyknight by creatures with first strike.

@@ -1,8 +1,7 @@
 Name:Champion Lancer
 ManaCost:4 W W
 Types:Creature Human Knight
-Text:Prevent all damage that would be dealt to CARDNAME by creatures.
 PT:3/3
-K:PreventAllDamageBy Creature
+K:PreventAllDamageBy:Creature:Prevent all damage that would be dealt to CARDNAME by creatures.
 SVar:Picture:http://magiccards.info/scans/en/st/11.jpg
 Oracle:Prevent all damage that would be dealt to Champion Lancer by creatures.
