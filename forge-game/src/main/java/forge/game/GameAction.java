@@ -288,11 +288,6 @@ public class GameAction {
                 lastKnownInfo = CardUtil.getLKICopy(c);
                 c.setUnearthed(false);
             }
-
-            if (toBattlefield) {
-                copied.putEtbCounters();
-            }
-            copied.clearEtbCounters();
         }
 
         copied.getOwner().removeInboundToken(copied);
@@ -354,6 +349,14 @@ public class GameAction {
         checkStaticAbilities();
         game.getTriggerHandler().clearInstrinsicActiveTriggers(c, zoneFrom);
         game.getTriggerHandler().registerActiveTrigger(c, false);
+
+        // do ETB counters after StaticAbilities check
+        if (!suppress) {
+            if (toBattlefield) {
+                copied.putEtbCounters();
+            }
+            copied.clearEtbCounters();
+        }
 
         // play the change zone sound
         game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
