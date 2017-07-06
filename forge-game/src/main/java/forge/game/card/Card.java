@@ -1752,6 +1752,18 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
 
+        // add As an additional cost to Permanent spells
+        if (state.getFirstAbility() != null && type.isPermanent()) {
+            SpellAbility first = state.getFirstAbility();
+            if (first.isSpell()) {
+                Cost cost = first.getPayCosts();
+                if (cost != null && !cost.isOnlyManaCost()) {
+                    sb.append(cost.toString());
+                    sb.append("\r\n");
+                }
+            }
+        }
+
         if (this.getRules() != null && state.getView().getState().equals(CardStateName.Original)) {
             // try to look which what card this card can be meld to
             // only show this info if this card does not has the meld Effect itself
