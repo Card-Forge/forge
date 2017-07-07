@@ -19,6 +19,8 @@ package forge.game.trigger;
 
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * <p>
@@ -72,6 +74,20 @@ public class TriggerCountered extends Trigger {
                 return false;
             }
         }
+        
+        if (this.mapParams.containsKey("ValidType")) {
+            // TODO: if necessary, expand the syntax to account for multiple valid types (e.g. Spell,Ability)
+            SpellAbility ctrdSA = (SpellAbility)runParams2.get("CounteredSA");
+            String validType = this.mapParams.get("ValidType");
+            if (ctrdSA != null) {
+                if (validType.equals("Spell") && !ctrdSA.isSpell()) {
+                    return false;
+                } else if (validType.equals("Ability") && !ctrdSA.isAbility()) {
+                    return false;
+                }
+            }
+            
+        }
         return true;
     }
 
@@ -81,6 +97,7 @@ public class TriggerCountered extends Trigger {
         sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
         sa.setTriggeringObject("Cause", this.getRunParams().get("Cause"));
         sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
+        sa.setTriggeringObject("CounteredSA", this.getRunParams().get("CounteredSA"));
     }
 
     @Override
