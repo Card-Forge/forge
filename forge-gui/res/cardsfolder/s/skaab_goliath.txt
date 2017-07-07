@@ -1,7 +1,6 @@
 Name:Skaab Goliath
 ManaCost:5 U
 Types:Creature Zombie Giant
-Text:As an additional cost to cast CARDNAME, exile two creature cards from your graveyard.
 PT:6/9
 K:Trample
 SVar:FullCost:5 U ExileFromGrave<2/Creature>
