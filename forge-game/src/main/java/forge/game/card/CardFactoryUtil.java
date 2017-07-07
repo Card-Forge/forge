@@ -2334,9 +2334,13 @@ public class CardFactoryUtil {
 
         // AddCost
         if (card.hasSVar("FullCost")) {
+            String k[] = card.getSVar("FullCost").split(":");
             final SpellAbility sa1 = card.getFirstSpellAbility();
             if (sa1 != null && sa1.isSpell()) {
-                sa1.setPayCosts(new Cost(card.getSVar("FullCost"), sa1.isAbility()));
+                sa1.setPayCosts(new Cost(k[0], sa1.isAbility()));
+                if (k.length > 1) {
+                    sa1.getMapParams().put("AILogic", k[1]);
+                }
             }
         }
 
@@ -3596,7 +3600,7 @@ public class CardFactoryUtil {
             final SpellAbility awakenSpell = card.getFirstSpellAbility().copy();
 
             final String awaken = "DB$ PutCounter | CounterType$ P1P1 | CounterNum$ "+ counters + " | "
-                    + "ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control";
+                    + "ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | Awaken$ True";
             final String animate = "DB$ Animate | Defined$ Targeted | Power$ 0 | Toughness$ 0 | Types$"
                     + " Creature,Elemental | Permanent$ True | Keywords$ Haste";
 
