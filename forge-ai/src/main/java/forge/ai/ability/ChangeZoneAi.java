@@ -1177,7 +1177,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
     private static boolean isUnpreferredTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
         if (!mandatory) {
-            return false;
+            if (!"Always".equals(sa.getParam("AILogic"))) {
+                return false;
+            }
         }
 
         final Card source = sa.getHostCard();
