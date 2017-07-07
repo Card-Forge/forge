@@ -254,7 +254,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private CardRules cardRules;
     private final CardView view;
 
-    private Map<CounterType, Integer> etbCounters = Maps.newEnumMap(CounterType.class);
+    private Table<Card, CounterType, Integer> etbCounters = HashBasedTable.create();
 
     // Enumeration for CMC request types
     public enum SplitCMCMode {
@@ -7118,14 +7118,14 @@ public class Card extends GameEntity implements Comparable<Card> {
      * ETBCounters are only used between replacementEffects
      * and when the Card really enters the Battlefield with the counters
      * @return map of counters
-     */    
-    public final Map<CounterType,Integer> getEtbCounters() {
-        return etbCounters;
+     */
+    public final void addEtbCounter(CounterType type, Integer val) {
+        addEtbCounter(type, val, this);
     }
 
-    public final void addEtbCounter(CounterType type, Integer val) {
-        int old = etbCounters.containsKey(type) ? etbCounters.get(type) : 0;
-        etbCounters.put(type, old + val);
+    public final void addEtbCounter(CounterType type, Integer val, final Card source) {
+        int old = etbCounters.get(source, type);
+        etbCounters.put(source, type, old + val);
     }
 
     public final void clearEtbCounters() {
@@ -7133,8 +7133,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final void putEtbCounters() {
-        for (Map.Entry<CounterType, Integer> e : etbCounters.entrySet()) {
-            this.addCounter(e.getKey(), e.getValue(), this, true);
+        for (Table.Cell<Card, CounterType, Integer> e : etbCounters.cellSet()) {
+            this.addCounter(e.getColumnKey(), e.getValue(), e.getRowKey(), true);
         }
     }
 

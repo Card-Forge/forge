@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
@@ -20,7 +19,6 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -80,7 +78,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             if (!libCards.isEmpty()) {
                 sa.getActivatingPlayer().getController().reveal(libCards, ZoneType.Library, libCards.get(0).getOwner());
             }
-            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Player", sa.getActivatingPlayer());
             runParams.put("Target", tgtPlayers);
             game.getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
@@ -218,7 +216,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         }
 
         if (!triggerList.isEmpty()) {
-            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Cards", triggerList);
             runParams.put("Destination", destination);
             game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
