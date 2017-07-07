@@ -475,7 +475,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                     if (sa.hasParam("WithCounters")) {
                         String[] parse = sa.getParam("WithCounters").split("_");
-                        tgtC.addCounter(CounterType.getType(parse[0]), Integer.parseInt(parse[1]), hostCard, true);
+                        tgtC.addEtbCounter(CounterType.getType(parse[0]), Integer.parseInt(parse[1]));
                     }
                     if (sa.hasParam("GainControl")) {
                         if (sa.hasParam("NewController")) {
