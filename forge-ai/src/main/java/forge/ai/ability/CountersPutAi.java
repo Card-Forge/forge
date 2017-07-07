@@ -199,9 +199,11 @@ public class CountersPutAi extends SpellAbilityAi {
                 if (sa.canTarget(ai)) {
                     // don't target itself when its forced to add poison
                     // counters too
-                    if (!eachExisting || ai.getPoisonCounters() < 5) {
-                        sa.getTargets().add(ai);
-                        return true;
+                    if (!ai.getCounters().isEmpty()) {
+                        if (!eachExisting || ai.getPoisonCounters() < 5) {
+                            sa.getTargets().add(ai);
+                            return true;
+                        }
                     }
                 }
 
