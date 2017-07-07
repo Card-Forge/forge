@@ -17,11 +17,11 @@
  */
 package forge.ai;
 
-import com.google.common.base.Predicate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -559,7 +559,7 @@ public class SpecialCardAi {
             int x = -1, best = 0;
             Card single = null;
             for (int i = 0; i < loyalty; i++) {
-                source.setSVar("ChosenX", "Number$" + i);
+                sa.setSVar("ChosenX", "Number$" + i);
                 oppType = CardLists.filterControlledBy(game.getCardsIn(origin), ai.getOpponents());
                 oppType = AbilityUtils.filterListByType(oppType, sa.getParam("ChangeType"), sa);
                 computerType = AbilityUtils.filterListByType(ai.getCardsIn(origin), sa.getParam("ChangeType"), sa);
@@ -603,7 +603,7 @@ public class SpecialCardAi {
              if (x == -1) {
                 return false;
             }
-            source.setSVar("ChosenX", "Number$" + x);
+            sa.setSVar("ChosenX", "Number$" + x);
             return true;
         }
     }

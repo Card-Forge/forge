@@ -62,12 +62,15 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         // ex. "Return all blocking/blocked by target creature"
 
         CardCollectionView oppType = CardLists.filterControlledBy(game.getCardsIn(origin), ai.getOpponents());
-        oppType = AbilityUtils.filterListByType(oppType, sa.getParam("ChangeType"), sa);
-
-        // final CardCollectionView humanType =
-        // AbilityUtils.filterListByType(opp.getCardsIn(origin),
-        // sa.getParam("ChangeType"), sa);
         CardCollectionView computerType = ai.getCardsIn(origin);
+
+        // Ugin check need to be done before filterListByType because of ChosenX
+        // Ugin AI: always try to sweep before considering +1
+        if (sourceName.equals("Ugin, the Spirit Dragon")) {
+            return SpecialCardAi.UginTheSpiritDragon.considerPWAbilityPriority(ai, sa, origin, oppType, computerType);
+        }
+
+        oppType = AbilityUtils.filterListByType(oppType, sa.getParam("ChangeType"), sa);
         computerType = AbilityUtils.filterListByType(computerType, sa.getParam("ChangeType"), sa);
         
         // Living Death AI
@@ -78,11 +81,6 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         // Timetwister AI
         if ("Timetwister".equals(sa.getParam("AILogic"))) {
             return SpecialCardAi.Timetwister.consider(ai, sa);
-        }
-        
-        // Ugin AI: always try to sweep before considering +1 
-        if (sourceName.equals("Ugin, the Spirit Dragon")) {
-            return SpecialCardAi.UginTheSpiritDragon.considerPWAbilityPriority(ai, sa, origin, oppType, computerType);
         }
 
         // TODO improve restrictions on when the AI would want to use this
