@@ -51,16 +51,16 @@ public class FList<T> extends FScrollPane implements Iterable<T> {
         renderer = new DefaultListItemRenderer<T>();
     }
 
-    public void addItem(T item) {
+    public synchronized void addItem(T item) {
         items.add(item);
     }
 
-    public void removeItem(T item) {
+    public synchronized void removeItem(T item) {
         items.remove(item);
     }
 
     @Override
-    public void clear() {
+    public synchronized void clear() {
         super.clear();
         items.clear();
     }
@@ -68,14 +68,14 @@ public class FList<T> extends FScrollPane implements Iterable<T> {
     public List<T> extractListData() {
         return new ArrayList<T>(items); //create copy to avoid modifying items
     }
-    public void setListData(Iterable<? extends T> items0) {
+    public synchronized void setListData(Iterable<? extends T> items0) {
         clear();
         for (T item : items0) {
             addItem(item);
         }
         revalidate();
     }
-    public void setListData(T[] items0) {
+    public synchronized void setListData(T[] items0) {
         clear();
         for (T item : items0) {
             addItem(item);
@@ -213,7 +213,7 @@ public class FList<T> extends FScrollPane implements Iterable<T> {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public synchronized void draw(Graphics g) {
         float w = getWidth();
         float h = getHeight();
         g.startClip(0, 0, w, h);
