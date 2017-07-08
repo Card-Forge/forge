@@ -7,7 +7,7 @@
 #6|Bontu's Last Reckoning|R|HOU
 #7|Rhonas's Last Stand|R|HOU
 #8|The Scarab God|M|HOU
-#9|GrindDust|R|HOU
+#9|Grind Dust|R|HOU
 #10|Kefnet's Last Word|R|HOU
 #11|Hour of Devastation|R|HOU
 #12|Hour of Glory|R|HOU
@@ -23,7 +23,7 @@
 #22|Banewhip Punisher|U|HOU
 #23|Abrade|U|HOU
 #24|Pride Sovereign|R|HOU
-#25|StruggleSurvive|U|HOU
+#25|Struggle Survive|U|HOU
 #26|Sunscourge Champion|U|HOU
 #27|Majestic Myriarch|M|HOU
 #28|Overcome|U|HOU
@@ -32,11 +32,11 @@
 #31|Torment of Hailfire|R|HOU
 #32|Torment of Venom|C|HOU
 #33|Open Fire|C|HOU
-#34|ConsignOblivion|U|HOU
+#34|Consign Oblivion|U|HOU
 #35|Champion of Wits|R|HOU
 #36|Nimble Obstructionist|R|HOU
 #37|Ambuscade|C|HOU
-#38|FarmMarket|U|HOU
+#38|Farm Market|U|HOU
 #39|Tenacious Hunter|U|HOU
 #40|River Hoopoe|U|HOU
 #41|Unraveling Mummy|U|HOU
@@ -70,7 +70,7 @@
 #69|Khenra Eternal|C|HOU
 #70|Chaos Maw|R|HOU
 #71|Magmaroth|U|HOU
-#72|LeaveChance|R|HOU
+#72|Leave Chance|R|HOU
 #73|Desert of the Fervent|C|HOU
 #74|Desert of the Glorified|C|HOU
 #75|Desert of the Indomitable|C|HOU
@@ -95,7 +95,7 @@
 #94|Ruin Rat|C|HOU
 #95|Khenra Scrapper|C|HOU
 #96|Hope Tender|U|HOU
-#97|RefuseCooperate|R|HOU
+#97|Refuse Cooperate|R|HOU
 #98|Abandoned Sarcophagus|R|HOU
 #99|Angel of the God-Pharaoh|U|HOU
 #100|Sandblast|C|HOU
@@ -110,8 +110,8 @@
 #109|Devotee of Strength|U|HOU
 #110|Rampaging Hippo|C|HOU
 #111|Claim Fame|U|HOU
-#112|AppealAuthority|U|HOU
-#113|ReasonBelieve|R|HOU
+#112|Appeal Authority|U|HOU
+#113|Reason Believe|R|HOU
 #114|Sunset Pyramid|U|HOU
 #115|Ifnir Deadlands|U|HOU
 #116|Aven of Enduring Hope|C|HOU
