@@ -461,7 +461,12 @@ public class AiAttackController {
             remainingAttackers.remove(0);
             maxBlockersAfterCrew--;
         }
-        unblockedAttackers.addAll(remainingAttackers);
+        
+        for (Card remainingAttacker : remainingAttackers) {
+            if (!unblockedAttackers.contains(remainingAttacker)) {
+                unblockedAttackers.add(remainingAttacker);
+            }
+        }
         
         int trampleDamage = 0;
         for (Card attacker : blockedAttackers) {
