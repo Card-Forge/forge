@@ -20,7 +20,7 @@ It is now possible to ask Forge to automatically suggest basic lands for your de
 A new plane is now available in Planar Conquest (Kaladesh), implemented by Sirspud. Also, if you have already unlocked all the planes, receiving a green reward on the chaos wheel will cause a Chaos Battle to start instead of awarding 5 planeswalker emblems.
 
 - Java 8 -
-Forge now requires Java 8 (1.8.0) as a bare minimum. If you haven't updated to this version of Java yet, you would need to do so before you are able to run this and all subsequent Forge releases. Forge is compatible both with Oracle Java 8 and with OpenJDK 8.
+Forge now requires Java 8 (1.8.0) as a bare minimum. If you haven't updated to this version of Java yet, you would need to do so before you are able to run this and all subsequent Forge releases. Forge is compatible both with Oracle Java 8 and with OpenJDK 8. If you're running the latest version of Java, but Forge does not run for you, check to make sure that you've uninstalled old versions. Additionally, check any JDK installations you have and ensure Forge is using the most up-to-date version.
 
 - Hour of Devastation Pre-release -
 This release contains all cards from the upcoming Hour of Devastation set. We did our best to fix the issues you reported so far with these cards, but there may still be more, so please consider these cards beta quality. Please test them if you'd like and provide feedback if you encounter any issues. These cards should only be visible and playable if Developer Mode is enabled in the game options.
