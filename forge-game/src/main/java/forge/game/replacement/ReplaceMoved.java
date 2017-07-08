@@ -1,6 +1,7 @@
 package forge.game.replacement;
 
 import forge.game.card.Card;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -30,6 +31,8 @@ public class ReplaceMoved extends ReplacementEffect {
         if (!runParams.get("Event").equals("Moved")) {
             return false;
         }
+        final Player controller = getHostCard().getController();
+        
         if (hasParam("ValidCard")) {
             if (!matchesValid(runParams.get("Affected"), getParam("ValidCard").split(","), getHostCard())) {
                 return false;
@@ -81,6 +84,30 @@ public class ReplaceMoved extends ReplacementEffect {
             }
         }
         
+        if (hasParam("Cause")) {
+            if (!runParams.containsKey("Cause")) {
+                return false;
+            }
+            SpellAbility cause = (SpellAbility) runParams.get("Cause");
+            if (cause == null) {
+                return false;
+            }
+            if (!cause.isValid(getParam("Cause").split(","), controller, getHostCard(), null)) {
+                return false;
+            }
+        }
+
+        if (hasParam("NotCause")) {
+            if (runParams.containsKey("Cause")) {
+                SpellAbility cause = (SpellAbility) runParams.get("Cause");
+                if (cause != null) {
+                    if (cause.isValid(getParam("NotCause").split(","), controller, getHostCard(), null)) {
+                        return false;
+                    }
+                }
+            }
+        }
+
         return true;
     }
 
