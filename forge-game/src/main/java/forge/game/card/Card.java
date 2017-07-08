@@ -7124,7 +7124,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final void addEtbCounter(CounterType type, Integer val, final Card source) {
-        int old = etbCounters.get(source, type);
+        int old = etbCounters.contains(source, type) ? etbCounters.get(source, type) : 0;
         etbCounters.put(source, type, old + val);
     }
 
