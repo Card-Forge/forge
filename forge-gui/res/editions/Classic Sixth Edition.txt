@@ -8,8 +8,7 @@ Type=Core
 Border=White
 BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare
-Foil=OldStyle
-FoilAlwaysInCommonSlot=False
+Foil=NotSupported
 
 [cards]
 163 U AEther Flash
