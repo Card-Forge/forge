@@ -8,6 +8,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.ai.*;
+import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
@@ -741,10 +742,15 @@ public class DamageDealAi extends DamageAiBase {
 
         Player opponent = ai.getOpponents().min(PlayerPredicates.compareByLife());
 
-        // TODO: somehow account for the possible cost reduction?
-        int xColorRemaining = ComputerUtilMana.determineLeftoverMana(sa, ai, saTgt.getParam("XColor"));
-        int dmg = xColorRemaining - saTgt.getPayCosts().getTotalMana().getCMC(); // otherwise AI incorrectly calculates mana it can afford
-
+        // TODO: somehow account for the possible cost reduction?      
+        int dmg = ComputerUtilMana.determineLeftoverMana(sa, ai, saTgt.getParam("XColor"));
+        
+        while (!ComputerUtilMana.canPayManaCost(sa, ai, dmg)) {
+            // TODO: ideally should never get here, currently put here as a precaution for complex mana base cases where the miscalculation might occur. Will remove later if it proves to never trigger.
+            System.out.println("Warning: AI could not pay mana cost for a XLifeDrain logic spell. Reducing X value to "+dmg);
+            dmg--;
+        }
+        
         // set the color map for black X for the purpose of Soul Burn
         // TODO: somehow generalize this calculation to allow other potential similar cards to function in the future
         if ("Soul Burn".equals(sourceName)) {
