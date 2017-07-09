@@ -388,10 +388,10 @@ public class AiAttackController {
 
         CardLists.sortByPowerDesc(this.attackers);
 
-        final List<Card> unblockedAttackers = new ArrayList<Card>();
-        final List<Card> remainingAttackers = new ArrayList<Card>(this.attackers);
-        final List<Card> remainingBlockers = new ArrayList<Card>(this.blockers);
-        final List<Card> blockedAttackers = new ArrayList<Card>();
+        final CardCollection unblockedAttackers = new CardCollection();
+        final CardCollection remainingAttackers = new CardCollection(this.attackers);
+        final CardCollection remainingBlockers = new CardCollection(this.blockers);
+        final CardCollection blockedAttackers = new CardCollection();
 
         // Conservative prediction for vehicles: the AI tries to acknowledge the fact that
         // at least one creature will tap to crew a blocking vehicle when predicting if an
@@ -461,12 +461,7 @@ public class AiAttackController {
             remainingAttackers.remove(0);
             maxBlockersAfterCrew--;
         }
-        
-        for (Card remainingAttacker : remainingAttackers) {
-            if (!unblockedAttackers.contains(remainingAttacker)) {
-                unblockedAttackers.add(remainingAttacker);
-            }
-        }
+        unblockedAttackers.addAll(remainingAttackers);
         
         int trampleDamage = 0;
         for (Card attacker : blockedAttackers) {
