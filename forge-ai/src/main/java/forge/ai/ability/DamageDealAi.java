@@ -744,10 +744,10 @@ public class DamageDealAi extends DamageAiBase {
         // TODO: somehow account for the possible cost reduction?      
         int dmg = ComputerUtilMana.determineLeftoverMana(sa, ai, saTgt.getParam("XColor"));
         
-        while (!ComputerUtilMana.canPayManaCost(sa, ai, dmg)) {
+        while (!ComputerUtilMana.canPayManaCost(sa, ai, dmg) && dmg > 0) {
             // TODO: ideally should never get here, currently put here as a precaution for complex mana base cases where the miscalculation might occur. Will remove later if it proves to never trigger.
-            System.out.println("Warning: AI could not pay mana cost for a XLifeDrain logic spell. Reducing X value to "+dmg);
             dmg--;
+            System.out.println("Warning: AI could not pay mana cost for a XLifeDrain logic spell. Reducing X value to "+dmg);
         }
         
         // set the color map for black X for the purpose of Soul Burn
