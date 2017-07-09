@@ -1510,11 +1510,32 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     // Takes arguments like Blue or withFlying
     @Override
     public boolean hasProperty(final String property, final Player sourceController, final Card source, SpellAbility spellAbility) {
-        if (property.equals("Cycling")) {
+        if (property.equals("Buyback")) {
+            if (!isBuyBackAbility()) {
+                return false;
+            }
+        } else if (property.equals("Cycling")) {
             if (!isCycling()) {
                 return false;
             }
+        } else if (property.equals("Dash")) {
+            if (!isDash()) {
+                return false;
+            }
+        } else if (property.equals("Flashback")) {
+            if (!isFlashBackAbility()) {
+                return false;
+            }
+        } else if (property.equals("MorphUp")) {
+            if (!isMorphUp()) {
+                return false;
+            }
+        } else if (property.equals("Equip")) {
+            if (!hasParam("Equip")) {
+                return false;
+            }
         }
+
         return true;
     }
 
