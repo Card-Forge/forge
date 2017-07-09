@@ -1,7 +1,7 @@
 Name:Hazoret the Fervent
 ManaCost:3 R
 Types:Legendary Creature God
-PT:5/5
+PT:5/4
 K:Indestructible
 K:Haste
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack or block. | CheckSVar$ X | SVarCompare$ GE2 | Description$ CARDNAME can't attack or block unless you have one or fewer cards in hand.
