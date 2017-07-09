@@ -428,7 +428,7 @@ public class CostAdjustment {
             return false;
         }
         if (params.containsKey("ValidSpell")) {
-            if (sa.isValid(params.get("ValidSpell").split(","), controller, hostCard, sa)) {
+            if (!sa.isValid(params.get("ValidSpell").split(","), controller, hostCard, sa)) {
                 return false;
             }
         }
