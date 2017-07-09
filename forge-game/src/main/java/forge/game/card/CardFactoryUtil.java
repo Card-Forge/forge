@@ -17,7 +17,6 @@
  */
 package forge.game.card;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
@@ -32,6 +31,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 import forge.GameCommand;
 import forge.card.CardStateName;
@@ -782,7 +782,7 @@ public class CardFactoryUtil {
         }
 
         if (l[0].startsWith("DifferentCardNames_")) {
-            final List<String> crdname = new ArrayList<String>();
+            final List<String> crdname = Lists.newArrayList();
             final String restriction = l[0].substring(19);
             final String[] rest = restriction.split(",");
             CardCollection list = CardLists.getValidCards(cc.getGame().getCardsInGame(), rest, cc, c, null);
@@ -1271,7 +1271,7 @@ public class CardFactoryUtil {
             final String[] workingCopy = l[0].split("_");
             final String validFilter = workingCopy[1];
 
-            List<Card> res = new ArrayList<>();
+            List<Card> res = Lists.newArrayList();
             if (workingCopy[0].contains("This")) {
                 res = CardUtil.getThisTurnCast(validFilter, c);
             }
@@ -1770,7 +1770,7 @@ public class CardFactoryUtil {
      * @return a boolean.
      */
     public static byte getMostProminentColorsFromList(final CardCollectionView list, final List<String> restrictedToColors) {
-        List<Byte> colorRestrictions = new ArrayList<Byte>();
+        List<Byte> colorRestrictions = Lists.newArrayList();
         for (final String col : restrictedToColors) {
             colorRestrictions.add(MagicColor.fromName(col));
         }
@@ -1853,12 +1853,12 @@ public class CardFactoryUtil {
      */
     public static List<String> sharedKeywords(final String[] kw, final String[] restrictions,
             final List<ZoneType> zones, final Card host) {
-        final List<String> filteredkw = new ArrayList<String>();
+        final List<String> filteredkw = Lists.newArrayList();
         final Player p = host.getController();
         CardCollection cardlist = new CardCollection(p.getGame().getCardsIn(zones));
-        final List<String> landkw = new ArrayList<String>();
-        final List<String> protectionkw = new ArrayList<String>();
-        final List<String> allkw = new ArrayList<String>();
+        final List<String> landkw = Lists.newArrayList();
+        final List<String> protectionkw = Lists.newArrayList();
+        final List<String> allkw = Lists.newArrayList();
         
         cardlist = CardLists.getValidCards(cardlist, restrictions, p, host, null);
         for (Card c : cardlist) {
@@ -3850,17 +3850,32 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
             final String magnitude = k[1];
             final String manacost = k[2];
+            
+            final String reduceCost = k.length > 3 ? k[3] : null;
+            
+            Set<String> references = Sets.newHashSet();
+            String desc = "Monstrosity " + magnitude;
 
             String effect = "AB$ PutCounter | Cost$ " + manacost + " | ConditionPresent$ "
                     + "Card.Self+IsNotMonstrous | Monstrosity$ True | CounterNum$ " + magnitude
-                    + " | CounterType$ P1P1 | SpellDescription$ Monstrosity " + magnitude + " ("
-                    + Keyword.getInstance(keyword).getReminderText() + ") | StackDescription$ SpellDescription";
+                    + " | CounterType$ P1P1 | StackDescription$ SpellDescription";
             if ("X".equals(magnitude)) {
-                effect += " | References$ X";
+                references.add("X");
             }
+            if (reduceCost != null) {
+                effect += "| ReduceCost$ " + reduceCost;
+                references.add(reduceCost);
+                desc += ". This ability costs {1} less to activate for each creature card in your graveyard.";
+            }
+            if (!references.isEmpty()) {
+                effect += "| References$ " + String.join(",", references);
+            }
+            
             if (card.hasSVar("MonstrosityAILogic")) {
                 effect += "| AILogic$ " + card.getSVar("MonstrosityAILogic");
             }
+            
+            effect += "| SpellDescription$ " + desc + " (" + Keyword.getInstance(keyword).getReminderText() + ")";
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
