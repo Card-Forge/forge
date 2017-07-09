@@ -11,6 +11,7 @@ import com.google.common.collect.Maps;
 
 import forge.card.CardStateName;
 import forge.card.mana.ManaAtom;
+import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GameObject;
@@ -27,7 +28,6 @@ import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -68,6 +68,11 @@ public class CostAdjustment {
                 }
             }
         }
+        if (sa.hasParam("RaiseCost")) {
+            int n = AbilityUtils.calculateAmount(host, sa.getParam("RaiseCost"), sa);
+            result.add(new Cost(ManaCost.get(n), false));
+        }
+
         // Raise cost
         for (final StaticAbility stAb : raiseAbilities) {
             applyRaise(result, sa, stAb);
@@ -181,6 +186,10 @@ public class CostAdjustment {
 
         // Reduce cost
         int sumGeneric = 0;
+        if (sa.hasParam("ReduceCost")) {
+            sumGeneric += AbilityUtils.calculateAmount(originalCard, sa.getParam("ReduceCost"), sa);
+        }
+
         for (final StaticAbility stAb : reduceAbilities) {
             sumGeneric += applyReduceCostAbility(stAb, sa, cost);
         }
@@ -410,15 +419,21 @@ public class CostAdjustment {
 
         final Map<String, String> params = st.getMapParams();
         final Card hostCard = st.getHostCard();
+        final Player controller = hostCard.getController();
         final Player activator = sa.getActivatingPlayer();
         final Card card = sa.getHostCard();
 
         if (params.containsKey("ValidCard")
-                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard, sa)) {
+                && !card.isValid(params.get("ValidCard").split(","), controller, hostCard, sa)) {
             return false;
         }
+        if (params.containsKey("ValidSpell")) {
+            if (sa.isValid(params.get("ValidSpell").split(","), controller, hostCard, sa)) {
+                return false;
+            }
+        }
         if (params.containsKey("Activator") && ((activator == null)
-                || !activator.isValid(params.get("Activator"), hostCard.getController(), hostCard, sa))) {
+                || !activator.isValid(params.get("Activator"), controller, hostCard, sa))) {
             return false;
         }
 
@@ -502,8 +517,7 @@ public class CostAdjustment {
             }
         }
         if (params.containsKey("ValidTarget")) {
-            TargetRestrictions tgt = sa.getTargetRestrictions();
-            if (tgt == null) {
+            if (!sa.usesTargeting()) {
                 return false;
             }
             boolean targetValid = false;
@@ -517,8 +531,7 @@ public class CostAdjustment {
             }
         }
         if (params.containsKey("ValidSpellTarget")) {
-            TargetRestrictions tgt = sa.getTargetRestrictions();
-            if (tgt == null) {
+            if (!sa.usesTargeting()) {
                 return false;
             }
             boolean targetValid = false;
