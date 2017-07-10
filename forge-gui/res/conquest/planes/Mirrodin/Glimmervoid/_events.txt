@@ -4,6 +4,6 @@ Name:Glissa, the Traitor|Deck:Glissa, the Traitor.dck|Variant:Commander|Avatar:G
 Name:Jor Kadeen, the Prevailer|Deck:Jor Kadeen, the Prevailer.dck|Variant:Commander|Avatar:Jor Kadeen, the Prevailer|Desc:
 Name:Venser, the Sojouner|Deck:Venser, the Sojouner.dck|Variant:Planeswalker|Avatar:Venser, the Sojouner|Desc:
 Name:Sydri, Galvanic Genius|Deck:Sydri, Galvanic Genius.dck|Variant:Commander|Avatar:Sydri, Galvanic Genius|Desc:
-Name:Sunburst|Deck:Sunburst.dck|Variant:None|Avatar:Fist of the Suns|Desc:
+Name:Sunburst|Deck:Sunburst.dck|Variant:None|Avatar:Fist of Suns|Desc:
 Name:Etched Oracle|Deck:etched oracle vanguard.dck|Variant:Vanguard|Avatar:Etched Oracle|Desc:
 Name:All Suns Dawn|Deck:All Suns Dawn.dck|Variant:None|Avatar:All Suns Dawn|Desc:
