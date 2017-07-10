@@ -685,7 +685,7 @@ public class CardView extends GameEntityView {
         }
         currentState.getView().updateKeywords(c, currentState); //update keywords even if state doesn't change
 
-        CardState alternateState = isSplitCard ? c.getState(CardStateName.RightSplit) : c.getAlternateState();
+        CardState alternateState = isSplitCard && isFaceDown() ? c.getState(CardStateName.RightSplit) : c.getAlternateState();
 
         if (isSplitCard && isFaceDown()) {
             // face-down (e.g. manifested) split cards should show the original face on their flip side
