@@ -145,7 +145,7 @@ public class UntapAi extends SpellAbilityAi {
         CardCollection untapList = CardLists.filter(list, Presets.TAPPED);
         // filter out enchantments and planeswalkers, their tapped state doesn't
         // matter.
-        final String[] tappablePermanents = { "Creature", "Land", "Artifact" };
+        final String[] tappablePermanents = {"Creature", "Land", "Artifact"};
         untapList = CardLists.getValidCards(untapList, tappablePermanents, source.getController(), source, sa);
 
         sa.resetTargets();
@@ -153,38 +153,32 @@ public class UntapAi extends SpellAbilityAi {
             Card choice = null;
 
             if (untapList.isEmpty()) {
-            	// Animate untapped lands (Koth of the Hamer)
+                // Animate untapped lands (Koth of the Hamer)
                 if (sa.getSubAbility() != null && sa.getSubAbility().getApi() == ApiType.Animate && !list.isEmpty()
-                		&& ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-                	choice = ComputerUtilCard.getWorstPermanentAI(list, false, false, false, false);
+                        && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                    choice = ComputerUtilCard.getWorstPermanentAI(list, false, false, false, false);
+                } else if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa) || sa.getTargets().getNumTargeted() == 0) {
+                    sa.resetTargets();
+                    return false;
+                } else {
+                    // TODO is this good enough? for up to amounts?
+                    break;
                 }
-                else {
-	                if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa) || sa.getTargets().getNumTargeted() == 0) {
-	                    sa.resetTargets();
-	                    return false;
-	                } else {
-	                    // TODO is this good enough? for up to amounts?
-	                    break;
-	                }
+            } else {
+                //Untap Time Vault? - Yes please!
+                for (Card c : untapList) {
+                    if (c.getName().equals("Time Vault")) {
+                        choice = c;
+                        break;
+                    }
                 }
-            } 
-            else {
-            	//Untap Time Vault? - Yes please!
-            	for (Card c : untapList) {
-            		if (c.getName().equals("Time Vault")) {
-            			choice = c;
-            			break;
-            		}
-            	}
-            	if (choice == null) {
-	            	if (CardLists.getNotType(untapList, "Creature").isEmpty()) {
-		                choice = ComputerUtilCard.getBestCreatureAI(untapList); // if only creatures take the best
-		            } else {
-                        if (!sa.getPayCosts().hasManaCost() || sa.getRootAbility().isTrigger()) {
-                            choice = ComputerUtilCard.getMostExpensivePermanentAI(untapList, sa, false);
-                        }
-		            }
-            	}
+                if (choice == null) {
+                    if (CardLists.getNotType(untapList, "Creature").isEmpty()) {
+                        choice = ComputerUtilCard.getBestCreatureAI(untapList); // if only creatures take the best
+                    } else if (!sa.getPayCosts().hasManaCost() || sa.getRootAbility().isTrigger()) {
+                        choice = ComputerUtilCard.getMostExpensivePermanentAI(untapList, sa, false);
+                    }
+                }
             }
 
             if (choice == null) { // can't find anything left
