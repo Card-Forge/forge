@@ -1,0 +1,19 @@
+[quest]
+id=15
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=booster pack ULG;3 black uncommon
+Credit Reward=300
+HumanExtras=
+AIExtras=Subversion|Subversion|Subversion|Energy Field
+[metadata]
+Name=quest15
+Title=The Cursed Lands
+Difficulty=easy
+Description=These lands drain the life force out of living things. Can you purify them?
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+15 Swamp
+10 Subversion

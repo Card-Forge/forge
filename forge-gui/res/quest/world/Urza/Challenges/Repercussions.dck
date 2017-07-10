@@ -1,0 +1,27 @@
+[quest]
+id=1
+AILife=20
+Repeat=true
+Wins=20
+Card Reward=chosen card sets:USG,ULG,UDS rarity:R;duplicate card
+Credit Reward=700
+HumanExtras=
+AIExtras=Repercussion|Repercussion|Repercussion|Repercussion
+[metadata]
+Name=quest1
+Title=Repercussions
+Difficulty=hard
+Description=Summoning creatures is forbidden - if you break the law, there will be repercussions!
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[main]
+4 Wildfire|USG
+4 Lava Axe|ULG
+4 Arc Lightning|USG
+4 Flame Jet|UDS
+4 Parch|ULG
+4 Shivan Gorge|USG
+4 Steam Blast|USG
+4 Torch Song|USG
+28 Mountain|USG
+[sideboard]

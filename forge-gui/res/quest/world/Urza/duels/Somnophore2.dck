@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Somnophore2
+Title=Somnophore
+Difficulty=medium
+Description=Blue deck
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+1 Aura Thief|UDS
+4 Cloud of Faeries|ULG
+2 Confiscate|USG
+4 Faerie Conclave|ULG
+2 Fog Bank|USG
+19 Island|USG|1
+4 Miscalculation|ULG
+4 Palinchron|ULG
+4 Somnophore|USG
+2 Thieving Magpie|UDS
+4 Thornwind Faeries|ULG
+2 Treachery|UDS
+4 Veiled Sentry|USG
+4 Zephid's Embrace|USG

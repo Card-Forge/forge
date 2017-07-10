@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Assassin
+Title=Phyrexian Assassins
+Difficulty=easy
+Description=Based on the preconstructed deck "Assassins"
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+1 Attrition|UDS
+1 Bone Shredder|ULG
+2 Dark Ritual|USG
+1 Despondency|USG
+2 Disease Carriers|UDS
+2 Duress|USG
+2 Dying Wail|UDS
+1 Engineered Plague|ULG
+2 Eradicate|UDS
+2 Festering Wound|UDS
+2 Looming Shade|USG
+1 Mantis Engine|UDS
+2 Order of Yawgmoth|USG
+1 Ostracize|ULG
+1 Plague Dogs|UDS
+4 Polluted Mire|USG
+4 Ravenous Rats|UDS
+1 Sanguine Guard|USG
+2 Sicken|USG
+4 Slinking Skirge|UDS
+1 Soul Feast|UDS
+1 Spawning Pool|ULG
+2 Squirming Mass|UDS
+4 Swamp|6ED|1
+3 Swamp|6ED|2
+6 Swamp|6ED|3
+3 Swamp|6ED|4
+2 Unnerve|USG

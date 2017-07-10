@@ -1,0 +1,29 @@
+[quest]
+id=4
+AILife=30
+Repeat=true
+Wins=20
+Card Reward=3 random rares
+Credit Reward=400
+Ticket Reward=true
+HumanExtras=Phyrexian Negator|Phyrexian Negator|Phyrexian Negator|Swamp|Swamp
+AIExtras=Shimmering Barrier|Mobile Fort|Mobile Fort|Shimmering Barrier
+[metadata]
+Name=quest4
+Title=Serra
+Difficulty=medium
+Description=Can you invade the realm of light using Phyrexian forces?
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[main]
+10 Voice of Grace|USG
+2 Radiant, Archangel|ULG
+26 Plains|USG
+10 Voice of All
+2 Serra Angel
+4 Absolute Law
+4 Absolute Grace
+4 Voice of Duty|UDS
+4 Voice of Reason|UDS
+4 Voice of Law|USG
+[sideboard]

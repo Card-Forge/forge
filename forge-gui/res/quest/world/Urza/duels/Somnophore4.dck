@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Somnophore4
+Title=Barrin, Master Wizard
+Difficulty=very hard
+Description=Blue deck
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+1 Aura Thief|UDS
+4 Confiscate|USG
+4 Faerie Conclave|ULG
+2 Fog Bank|USG
+19 Island|USG|1
+4 Miscalculation|ULG
+2 Morphling|USG
+2 Palinchron|ULG
+2 Power Sink|USG
+3 Somnophore|USG
+3 Temporal Adept|UDS
+4 Thieving Magpie|UDS
+2 Thornwind Faeries|ULG
+4 Treachery|UDS
+4 Veiled Sentry|USG
+1 Opportunity|ULG

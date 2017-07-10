@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Somnophore1
+Title=Somnophore
+Difficulty=easy
+Description=Blue deck
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Cloud of Faeries|ULG
+1 Confiscate|USG
+2 Faerie Conclave|ULG
+4 Iridescent Drake|UDS
+21 Island|USG|1
+4 Metathran Soldier|UDS
+4 Miscalculation|ULG
+2 Palinchron|ULG
+2 Somnophore|USG
+4 Thornwind Faeries|ULG
+1 Treachery|UDS
+4 Veiled Sentry|USG
+4 Veiled Serpent|USG
+3 Zephid's Embrace|USG

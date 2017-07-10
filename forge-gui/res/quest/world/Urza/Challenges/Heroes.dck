@@ -1,0 +1,19 @@
+[quest]
+id=6
+AILife=20
+Repeat=true
+Wins=20
+Card Reward=chosen card sets:USG,ULG,UDS rarity:C,U;7 white uncommons
+Credit Reward=800
+HumanExtras=Glorious Anthem|Glorious Anthem|Glorious Anthem|Glorious Anthem
+AIExtras=Plains|Plains|Plains|Plains|Plains|Forbidding Watchtower
+[metadata]
+Name=quest6
+Title=The heroes!
+Difficulty=easy
+Description=If they are the heroes, that must make you the bad guy!
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+30 Intrepid Hero|USG
+30 Radiant's Judgment|ULG

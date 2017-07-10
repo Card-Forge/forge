@@ -1,0 +1,18 @@
+[quest]
+id=19
+AILife=20
+Repeat=true
+Wins=20
+Card Reward=chosen card sets:USG,ULG,UDS rules:green
+Credit Reward=300
+HumanExtras=Wall of Glare|Wall of Glare|Wall of Glare
+AIExtras=Gaea's Cradle|Deranged Hermit|TOKEN;G;1;1;Squirrel;Creature;Squirrel|TOKEN;G;1;1;Squirrel;Creature;Squirrel|TOKEN;G;1;1;Squirrel;Creature;Squirrel|TOKEN;G;1;1;Squirrel;Creature;Squirrel
+[metadata]
+Name=quest19
+Title=The Mad Hermits
+Difficulty=medium
+Description=What's up with these guys and their squirrels?
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+12 Deranged Hermit

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Battle Surge
+Title=Battle Surge
+Difficulty=easy
+Description=Based on the preconstructed deck "Battle Surge"
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+1 Aether Sting|UDS
+3 Arc Lightning|USG
+1 Ghitu War Cry|ULG
+2 Goblin Berserker|UDS
+2 Goblin Marshal|UDS
+2 Goblin War Buggy|USG
+2 Island|6ED|1
+3 Island|6ED|2
+2 Island|6ED|3
+2 Island|6ED|4
+2 Jagged Lightning|USG
+2 Keldon Champion|UDS
+3 Kingfisher|UDS
+1 Mark of Fury|UDS
+5 Mountain|6ED|1
+4 Mountain|6ED|2
+2 Mountain|6ED|3
+3 Mountain|6ED|4
+1 Parch|ULG
+1 Raven Familiar|ULG
+2 Thieving Magpie|UDS
+3 Thundering Giant|USG
+1 Trumpet Blast|UDS
+1 Urza's Incubator|UDS
+2 Viashino Cutthroat|ULG
+3 Viashino Sandscout|ULG
+4 Wild Colos|UDS

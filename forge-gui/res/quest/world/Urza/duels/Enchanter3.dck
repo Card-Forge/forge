@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Enchanter3
+Title=Enchantress Union
+Difficulty=hard
+Description=An unusual alliance of blue and green magic...
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Argothian Enchantress|USG
+3 Forest|USG|1
+3 Forest|USG|2
+2 Forest|USG|3
+3 Forest|USG|4
+1 Gaea's Embrace|USG
+6 Island|USG|1
+1 Island|USG|2
+4 Island|USG|3
+1 Island|USG|4
+4 Metathran Elite|UDS
+2 Pattern of Rebirth|UDS
+4 Rancor|ULG
+2 Rayne, Academy Chancellor|UDS
+4 Sigil of Sleep|UDS
+2 Thorn Elemental|UDS
+4 Thran Golem|UDS
+2 Treachery|UDS
+4 Yavimaya Enchantress|UDS
+4 Zephid's Embrace|USG

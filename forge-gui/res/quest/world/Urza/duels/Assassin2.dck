@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Assassin2
+Title=Phyrexian Assassins
+Difficulty=medium
+Description=Improved version of "Assassins"
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+2 Attrition|UDS
+4 Bone Shredder|ULG
+4 Dark Ritual|USG
+4 Despondency|USG
+3 Duress|USG
+2 Engineered Plague|ULG
+3 Eradicate|UDS
+4 Festering Wound|UDS
+2 Order of Yawgmoth|USG
+3 Ostracize|ULG
+4 Polluted Mire|USG
+4 Ravenous Rats|UDS
+2 Sanguine Guard|USG
+1 Soul Feast|UDS
+3 Spawning Pool|ULG
+4 Swamp|6ED|1
+3 Swamp|6ED|2
+4 Swamp|6ED|3
+3 Swamp|6ED|4
+1 Unnerve|USG

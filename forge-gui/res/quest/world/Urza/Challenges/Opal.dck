@@ -1,0 +1,28 @@
+[quest]
+id=8
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=tournament pack USG
+Credit Reward=600
+HumanExtras=
+AIExtras=
+[metadata]
+Name=quest8
+Title=The Temple of Opal
+Difficulty=medium
+Description=Look, everything is made of opal around here!
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+2 Knighthood|ULG
+4 Opal Archangel|USG
+4 Opal Avenger|ULG
+4 Opal Champion|ULG
+4 Opal Gargoyle|USG
+4 Opal Titan|USG
+4 Opalescence|UDS
+4 Remembrance|USG
+4 Replenish|UDS
+2 Worship|USG
+24 Plains|USG

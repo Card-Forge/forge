@@ -1,0 +1,30 @@
+[quest]
+id=9
+AILife=20
+Repeat=true
+Wins=20
+Card Reward=booster pack USG;booster pack ULG;booster pack UDS;duplicate card
+Credit Reward=600
+HumanExtras=Arcane Laboratory
+AIExtras=Arcane Laboratory
+[metadata]
+Name=quest9
+Title=The Laboratory
+Difficulty=hard
+Description=Research must be taken seriously. No rushing please!
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Annul|USG
+4 Confiscate|USG
+6 Island|USG|1
+6 Island|USG|2
+8 Island|USG|3
+4 Island|USG|4
+4 Miscalculation|ULG
+4 Palinchron|ULG
+4 Peregrine Drake|USG
+4 Power Sink|USG
+4 Rewind|USG
+4 Snap|ULG
+4 Temporal Adept|UDS

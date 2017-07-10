@@ -1,0 +1,19 @@
+[quest]
+id=7
+AILife=20
+Repeat=true
+Wins=20
+Card Reward=chosen card sets:USG,ULG,UDS rarity:C,U;booster pack ULG 
+Credit Reward=800
+HumanExtras=
+AIExtras=Forbidding Watchtower|Forbidding Watchtower|Forbidding Watchtower|Forbidding Watchtower|Forbidding Watchtower|Forbidding Watchtower|Forbidding Watchtower|Forbidding Watchtower|Forbidding Watchtower
+[metadata]
+Name=quest7
+Title=The Watchtowers
+Difficulty=medium
+Description=Nonland permanents are not allowed around here!
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+30 Purify|ULG
+30 Wrath of God|6ED

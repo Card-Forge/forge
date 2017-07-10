@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Assimilator
+Title=Phyrexian Assimilator
+Difficulty=very hard
+Description=Conquest isn't about the strength of your armies, it's about making everything yours...or dead!
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Confiscate|USG
+2 Duress|USG
+4 Eradicate|UDS
+4 Expunge|USG
+2 Hollow Dogs|USG
+2 Island|USG|1
+2 Island|USG|2
+2 Island|USG|3
+2 Island|USG|4
+4 Opportunity|ULG
+4 Palinchron|ULG
+2 Persecute|USG
+1 Soul Feast|UDS
+1 Stroke of Genius|USG
+2 Swamp|USG|1
+2 Swamp|USG|2
+2 Swamp|USG|3
+2 Swamp|USG|4
+4 Thieving Magpie|UDS
+4 Treachery|UDS
+4 Reflecting Pool|TMP
+4 Underground Sea|LEA

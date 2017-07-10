@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Rofellos1
+Title=Rofellos
+Difficulty=easy
+Description=Green deck
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+4 Acridian|USG
+4 Citanul Centaurs|USG
+2 Emperor Crocodile|USG
+2 Albino Troll|USG
+2 Child of Gaea|USG
+2 Cradle Guard|USG
+4 Deranged Hermit|ULG
+4 Forest|USG|1
+17 Forest|USG|4
+2 Gaea's Cradle|USG
+2 Momentum|UDS
+1 Taunting Elf|USG
+4 Pouncing Jaguar|USG
+4 Rofellos, Llanowar Emissary|UDS
+2 Thorn Elemental|UDS
+4 Yavimaya Elder|UDS

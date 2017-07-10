@@ -1,0 +1,22 @@
+[quest]
+id=20
+AILife=20
+Repeat=true
+Wins=20
+Card Reward=tournament pack USG;1 blue rare;1 black rare
+Credit Reward=400
+HumanExtras=Caltrops|Caltrops
+AIExtras=Academy Researchers|Academy Researchers|Swamp|Swamp|Swamp
+[metadata]
+Name=quest20
+Title=Forbidden Experiments
+Difficulty=medium
+Description=Something seems to have went wrong with the experiment - death seems to be on a vacation now.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+40 Unearth
+5 Zephid's Embrace
+5 Serra's Embrace
+5 Vampiric Embrace
+5 Gaea's Embrace

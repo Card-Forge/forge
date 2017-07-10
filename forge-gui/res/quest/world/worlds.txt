@@ -14,3 +14,4 @@ Name:Homelands|Dir:1995-10 Homelands|Sets:HML|Banned:Apocalypse Chime
 Name:Terisiare: Ice Age|Dir:1996-05 Ice Age|Sets:ICE, ALL
 Name:Jamuraa: The Mirage Wars|Dir:1997-01 Mirage|Sets:MIR, VIS
 Name:Portal|Dir:1997-05 Portal|Sets:POR
+Name:Urza's Block|Dir:Urza|Sets:USG, ULG, UDS|Banned:Gaea's Cradle;Memory Jar;Serra's Sanctum;Time Spiral;Tolarian Academy;Voltaic Key;Windfall
