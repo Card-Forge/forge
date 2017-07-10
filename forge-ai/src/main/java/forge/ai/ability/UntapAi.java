@@ -180,7 +180,7 @@ public class UntapAi extends SpellAbilityAi {
 	            	if (CardLists.getNotType(untapList, "Creature").isEmpty()) {
 		                choice = ComputerUtilCard.getBestCreatureAI(untapList); // if only creatures take the best
 		            } else {
-		            	if (!sa.getPayCosts().hasManaCost() || sa.isTrigger()) {
+		            	if (!sa.getPayCosts().hasManaCost() || sa.getRootAbility().isTrigger()) {
 		            		choice = ComputerUtilCard.getMostExpensivePermanentAI(untapList, sa, false);
 		            	}
 		            }

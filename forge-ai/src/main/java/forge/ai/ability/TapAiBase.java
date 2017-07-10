@@ -202,7 +202,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
 
                 if (!attackers.isEmpty() && !creatureList.isEmpty()) {
                     choice = ComputerUtilCard.getBestCreatureAI(creatureList);
-                } else if (sa.isTrigger() || ComputerUtil.castSpellInMain1(ai, sa)) {
+                } else if (sa.getRootAbility().isTrigger() || ComputerUtil.castSpellInMain1(ai, sa)) {
                     choice = ComputerUtilCard.getMostExpensivePermanentAI(tapList, sa, false);
                 }
 
