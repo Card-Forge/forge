@@ -59,8 +59,12 @@ public class FightEffect extends DamageBaseEffect {
         CardDamageMap damageMap = new CardDamageMap();
         CardDamageMap preventMap = new CardDamageMap();
 
-        dealDamage(fighters.get(0), fighters.get(1), fightToughness, damageMap, preventMap);
-        dealDamage(fighters.get(1), fighters.get(0), fightToughness, damageMap, preventMap);
+        // Damage is dealt simultaneously, so we calculate the damage from source to target before it is applied
+        final int dmg1 = fightToughness ? fighters.get(0).getNetToughness() : fighters.get(0).getNetPower();
+        final int dmg2 = fightToughness ? fighters.get(1).getNetToughness() : fighters.get(1).getNetPower();
+
+        dealDamage(fighters.get(0), fighters.get(1), dmg1, damageMap, preventMap);
+        dealDamage(fighters.get(1), fighters.get(0), dmg2, damageMap, preventMap);
 
         preventMap.triggerPreventDamage(false);
         damageMap.dealLifelinkDamage();
@@ -117,11 +121,8 @@ public class FightEffect extends DamageBaseEffect {
         return fighterList;
     }
     
-    private void dealDamage(Card source, Card target, boolean fightToughness, CardDamageMap damageMap,
-            CardDamageMap preventMap) {
-        final int dmg = fightToughness ? source.getNetToughness() : source.getNetPower();
-
-        target.addDamage(dmg, source, damageMap, preventMap);
+    private void dealDamage(Card source, Card target, int damage, CardDamageMap damageMap, CardDamageMap preventMap) {
+        target.addDamage(damage, source, damageMap, preventMap);
     }
 
 }
