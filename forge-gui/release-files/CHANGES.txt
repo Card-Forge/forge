@@ -1,2 +1,5 @@
+- New Quest World: Urza's Block -
+This release features a new quest mode world based on one of the most powerful blocks of the first decade of Magic: the Gathering, the Urza's block. The new world was designed by Seravy and it features 30 duels and 20 challenges for you to attempt.
+
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.
