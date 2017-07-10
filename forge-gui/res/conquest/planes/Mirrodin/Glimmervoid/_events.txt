@@ -1,4 +1,4 @@
-Name:Atraxa, Praetor's Voice|Deck:Atraxa, Praetor's Voice.dck|Variant:Commander|Avatar:Atraxa, Praetor's Voice|Desc:
+Name:Atraxa, Praetors' Voice|Deck:Atraxa, Praetors Voice.dck|Variant:Commander|Avatar:Atraxa, Praetors' Voice|Desc:
 Name:Ezuri, Claw of Progress|Deck:Ezuri, Claw of Progress.dck|Variant:Commander|Avatar:Ezuri, Claw of Progress|Desc:
 Name:Glissa, the Traitor|Deck:Glissa, the Traitor.dck|Variant:Commander|Avatar:Glissa, the Traitor|Desc:
 Name:Jor Kadeen, the Prevailer|Deck:Jor Kadeen, the Prevailer.dck|Variant:Commander|Avatar:Jor Kadeen, the Prevailer|Desc:
