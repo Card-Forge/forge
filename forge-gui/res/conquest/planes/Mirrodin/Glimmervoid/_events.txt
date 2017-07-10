@@ -2,7 +2,7 @@ Name:Atraxa, Praetors' Voice|Deck:Atraxa, Praetors Voice.dck|Variant:Commander|A
 Name:Ezuri, Claw of Progress|Deck:Ezuri, Claw of Progress.dck|Variant:Commander|Avatar:Ezuri, Claw of Progress|Desc:
 Name:Glissa, the Traitor|Deck:Glissa, the Traitor.dck|Variant:Commander|Avatar:Glissa, the Traitor|Desc:
 Name:Jor Kadeen, the Prevailer|Deck:Jor Kadeen, the Prevailer.dck|Variant:Commander|Avatar:Jor Kadeen, the Prevailer|Desc:
-Name:Venser, the Sojourner|Deck:Venser, the Sojouner.dck|Variant:Planeswalker|Avatar:Venser, the Sojourner|Desc:
+Name:Venser, the Sojourner|Deck:Venser, the Sojourner.dck|Variant:Planeswalker|Avatar:Venser, the Sojourner|Desc:
 Name:Sydri, Galvanic Genius|Deck:Sydri, Galvanic Genius.dck|Variant:Commander|Avatar:Sydri, Galvanic Genius|Desc:
 Name:Sunburst|Deck:Sunburst.dck|Variant:None|Avatar:Fist of Suns|Desc:
 Name:Etched Oracle|Deck:etched oracle vanguard.dck|Variant:Vanguard|Avatar:Etched Oracle|Desc:
