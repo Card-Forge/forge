@@ -39,8 +39,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             return true;
         } else if (aiLogic.startsWith("Fabricate")) {
             return true;
-        } else if ("Pump".equals(aiLogic)) {
-            // or is that more generic?
+        } else if ("Pump".equals(aiLogic) || "BestOption".equals(aiLogic)) {
             for (AbilitySub sb : sa.getAdditionalAbilityList("Choices")) {
                 if (SpellApiToAi.Converter.get(sb.getApi()).canPlayAIWithSubs(ai, sb)) {
                     return true;
@@ -324,7 +323,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
 
             int bestGuessDamage = totalCMC * 3 / revealedCards.size();
             return life <= bestGuessDamage ? spells.get(0) : spells.get(1);
-        } else if ("Pump".equals(logic)) {
+        } else if ("Pump".equals(logic) || "BestOption".equals(logic)) {
             List<SpellAbility> filtered = Lists.newArrayList();
             // filter first for the spells which can be done
             for (SpellAbility sp : spells) {
