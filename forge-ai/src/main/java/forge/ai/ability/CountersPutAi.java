@@ -324,6 +324,12 @@ public class CountersPutAi extends SpellAbilityAi {
         }
 
         PhaseHandler ph = ai.getGame().getPhaseHandler();
+
+        if ("AlwaysAtOppEOT".equals(sa.getParam("AILogic"))) {
+            if (ph.is(PhaseType.END_OF_TURN) && !ph.isPlayerTurn(ai)) {
+                return true;
+            }
+        }
         
         if (!ai.getGame().getStack().isEmpty() && !SpellAbilityAi.isSorcerySpeed(sa)) {
             final TargetRestrictions abTgt = sa.getTargetRestrictions();
