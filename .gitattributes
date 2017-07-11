@@ -19089,9 +19089,13 @@ forge-gui/res/cube/MTGO[!!-~]Vintage[!!-~]Cube[!!-~]2015.dck -text
 forge-gui/res/cube/MTGO[!!-~]Vintage[!!-~]Cube[!!-~]2016.dck -text
 forge-gui/res/cube/MTGO[!!-~]Vintage[!!-~]Cube[!!-~]2017.dck -text
 forge-gui/res/cube/MTGO[!!-~]Vintage[!!-~]Cube[!!-~]June[!!-~]2016.dck -text
+forge-gui/res/cube/MTGO[!!-~]Vintage[!!-~]Cube[!!-~]June[!!-~]2017.dck -text
 forge-gui/res/cube/MTGO[!!-~]Vintage[!!-~]Cube[!!-~]November[!!-~]2016.dck -text
 forge-gui/res/cube/Modern[!!-~]Cube[!!-~]2017.dck -text
 forge-gui/res/cube/Mono[!!-~]Blue[!!-~]Cube.dck -text
+forge-gui/res/cube/Oldschool[!!-~]93-94[!!-~]Magic[!!-~]Full[!!-~]Set[!!-~]878[!!-~]Card[!!-~]Cube.dck -text
+forge-gui/res/cube/Oldschool[!!-~]93-94[!!-~]Magic[!!-~]Powered[!!-~]360[!!-~]Card[!!-~]Cube.dck -text
+forge-gui/res/cube/Oldschool[!!-~]93-94[!!-~]Magic[!!-~]Unpowered[!!-~]400[!!-~]Card[!!-~]Cube.dck -text
 forge-gui/res/cube/Sam[!!-~]Black's[!!-~]No[!!-~]Search[!!-~]Cube.dck -text
 forge-gui/res/cube/The[!!-~]Peasant's[!!-~]Toolbox.dck -text
 forge-gui/res/cube/Timothee[!!-~]Simonot's[!!-~]Twisted[!!-~]Color[!!-~]Pie[!!-~]Cube.dck -text
@@ -19131,9 +19135,13 @@ forge-gui/res/draft/MTGO[!!-~]Vintage[!!-~]Cube[!!-~]2015.draft -text
 forge-gui/res/draft/MTGO[!!-~]Vintage[!!-~]Cube[!!-~]2016.draft -text
 forge-gui/res/draft/MTGO[!!-~]Vintage[!!-~]Cube[!!-~]2017.draft -text
 forge-gui/res/draft/MTGO[!!-~]Vintage[!!-~]Cube[!!-~]June[!!-~]2016.draft -text
+forge-gui/res/draft/MTGO[!!-~]Vintage[!!-~]Cube[!!-~]June[!!-~]2017.draft -text
 forge-gui/res/draft/MTGO[!!-~]Vintage[!!-~]Cube[!!-~]November[!!-~]2016.draft -text
 forge-gui/res/draft/Modern[!!-~]Cube[!!-~]2017.draft -text
 forge-gui/res/draft/Mono[!!-~]Blue[!!-~]Cube.draft -text
+forge-gui/res/draft/Oldschool[!!-~]93-94[!!-~]Magic[!!-~]Full[!!-~]Set[!!-~]878[!!-~]Card[!!-~]Cube.draft -text
+forge-gui/res/draft/Oldschool[!!-~]93-94[!!-~]Magic[!!-~]Powered[!!-~]360[!!-~]Card[!!-~]Cube.draft -text
+forge-gui/res/draft/Oldschool[!!-~]93-94[!!-~]Magic[!!-~]Unpowered[!!-~]400[!!-~]Card[!!-~]Cube.draft -text
 forge-gui/res/draft/Sam[!!-~]Black's[!!-~]No[!!-~]Search[!!-~]Cube.draft -text
 forge-gui/res/draft/The[!!-~]Peasant's[!!-~]Toolbox.draft -text
 forge-gui/res/draft/Timothee[!!-~]Simonot's[!!-~]Twisted[!!-~]Color[!!-~]Pie[!!-~]Cube.draft -text

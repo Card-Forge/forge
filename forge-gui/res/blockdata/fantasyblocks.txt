@@ -5,6 +5,7 @@
 (3) Urza's Tempest Mirage, 3/6/5ED, MIR TMP USG      
 (3) Twilight of an Era, 3/6/7ED, INV ODY ONS      
 (3) New Dawn, 3/6/9ED, MRD CHK RAV      
+(4) Arabian Africa, 3/6/MIR, ARN MIR VIS WTH     
 (5-6) Chronicles 01 - Origins, 3/6/2ED, 2ED ARN ATQ LEG DRK FEM   
 (5-6) Chronicles 02 - Icy Mirage, 3/6/5ED, ICE HML ALL MIR VIS WTH   
 (5-6) Chronicles 03 - Urza's Tempest, 3/6/6ED, TMP USG STH ULG EXO UDS   
@@ -15,10 +16,12 @@
 (5-6) Chronicles 08 - Cold Lorwynmoor (5 only), 3/6/10E, LRW SHM MOR EVE CSP    
 (5-6) Chronicles 09 - Shards of Zendikar, 3/6/M11, ALA ZEN CFX WWK ARB ROE   
 (5-6) Chronicles 10 - Scars of Innistrad, 3/6/M11, SOM ISD MBS DKA NPH AVR   
-(4) Arabian Africa, 3/6/MIR, ARN MIR VIS WTH     
+(5-6) Oldschool 93-94 Magic (6-pack sealed), 3/6/LEB, LEB ARN ATQ LEG DRK
 (6) Africa-Asia, 3/6/MIR, MIR CHK VIS BOK WTH SOK   
 (6-7)Cores 1 (2,3,4,5,6,7), 3/6/4ED, 2ED 3ED 4ED 5ED 6ED 7ED   
 (6-7)Cores 2 (8,9,10,M10,M11,M12,M13), 3/7/10E, 8ED 9ED 10E M10 M11 M12 M13  
+(7) Oldschool 93-94 Magic (7-pack sealed, with FEM), 3/7/LEB, LEA LEB ARN ATQ LEG DRK FEM
+(8) Oldschool 93-94 Magic (8-pack sealed, with FEM), 3/8/LEB, LEA LEB 2ED ARN ATQ LEG DRK FEM
 (4) Ice Age Extended, 3/6/ICE, ICE ALL CSP HML     
 (6) Sample 6-pack, 3/6/2ED, 2ED ICE HML LEG DRK FEM   
 (7) Sample 7-pack, 3/7/4ED, 4ED ALL ICE HML LEG DRK FEM  
