@@ -4,7 +4,7 @@ public enum LimitedPoolType {
     Full("Full Cardpool"),
     Block("Block / Set"),
     FantasyBlock("Fantasy Block"),
-    Custom("Custom");
+    Custom("Custom Cube");
     
     private final String displayName;
     private LimitedPoolType(String name) {
