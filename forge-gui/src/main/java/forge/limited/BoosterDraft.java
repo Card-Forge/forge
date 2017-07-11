@@ -43,6 +43,7 @@ import java.util.*;
  * Booster Draft Format.
  */
 public class BoosterDraft implements IBoosterDraft {
+
     private static final int N_PLAYERS = 8;
     public static final String FILE_EXT = ".draft";
     private final List<LimitedPlayer> players = new ArrayList<>();
@@ -60,101 +61,114 @@ public class BoosterDraft implements IBoosterDraft {
 
     public static BoosterDraft createDraft(final LimitedPoolType draftType) {
         final BoosterDraft draft = new BoosterDraft(draftType);
-        if (!draft.generateProduct()) { return null; }
+        if (!draft.generateProduct()) {
+            return null;
+        }
         draft.initializeBoosters();
         return draft;
     }
 
     protected boolean generateProduct() {
         switch (this.draftFormat) {
-        case Full: // Draft from all cards in Forge
-            final Supplier<List<PaperCard>> s = new UnOpenedProduct(SealedProduct.Template.genericBooster);
+            case Full: // Draft from all cards in Forge
+                final Supplier<List<PaperCard>> s = new UnOpenedProduct(SealedProduct.Template.genericBooster);
 
-            for (int i = 0; i < 3; i++) {
-                this.product.add(s);
-            }
-            IBoosterDraft.LAND_SET_CODE[0] = CardEdition.Predicates.getRandomSetWithAllBasicLands(FModel.getMagicDb().getEditions());
-            IBoosterDraft.CUSTOM_RANKINGS_FILE[0] = null;
-            break;
-
-        case Block: // Draft from cards by block or set
-        case FantasyBlock:
-            final List<CardBlock> blocks = new ArrayList<>();
-            final IStorage<CardBlock> storage = this.draftFormat == LimitedPoolType.Block
-                    ? FModel.getBlocks()
-                    : FModel.getFantasyBlocks();
-
-            for (final CardBlock b : storage) {
-                if (b.getCntBoostersDraft() > 0) {
-                    blocks.add(b);
+                for (int i = 0; i < 3; i++) {
+                    this.product.add(s);
                 }
-            }
+                IBoosterDraft.LAND_SET_CODE[0] = CardEdition.Predicates.getRandomSetWithAllBasicLands(FModel.getMagicDb().getEditions());
+                IBoosterDraft.CUSTOM_RANKINGS_FILE[0] = null;
+                break;
 
-            final CardBlock block = SGuiChoose.oneOrNone("Choose Block", blocks);
-            if (block == null) { return false; }
+            case Block: // Draft from cards by block or set
+            case FantasyBlock:
+                final List<CardBlock> blocks = new ArrayList<>();
+                final IStorage<CardBlock> storage = this.draftFormat == LimitedPoolType.Block
+                        ? FModel.getBlocks()
+                        : FModel.getFantasyBlocks();
 
-            final List<CardEdition> cardSets = block.getSets();
-            final Stack<String> sets = new Stack<>();
-            for (int k = cardSets.size() - 1; k >= 0; k--) {
-                sets.add(cardSets.get(k).getCode());
-            }
-
-            for (final String setCode : block.getMetaSetNames()) {
-                if (block.getMetaSet(setCode).isDraftable()) {
-                    sets.push(setCode); // to the beginning
+                for (final CardBlock b : storage) {
+                    if (b.getCntBoostersDraft() > 0) {
+                        blocks.add(b);
+                    }
                 }
-            }
 
-            if (sets.isEmpty()) {
-                SOptionPane.showErrorDialog(block.toString() + " does not contain any set combinations.");
-                return false;
-            }
+                final CardBlock block = SGuiChoose.oneOrNone("Choose Block", blocks);
+                if (block == null) {
+                    return false;
+                }
 
-            final int nPacks = block.getCntBoostersDraft();
+                final List<CardEdition> cardSets = block.getSets();
+                final Stack<String> sets = new Stack<>();
+                for (int k = cardSets.size() - 1; k >= 0; k--) {
+                    sets.add(cardSets.get(k).getCode());
+                }
 
-            if (sets.size() > 1) {
-                Object p;
-                if (nPacks == 3 && sets.size() < 4) {
-                    p = SGuiChoose.oneOrNone("Choose Set Combination", getSetCombos(sets));
+                for (final String setCode : block.getMetaSetNames()) {
+                    if (block.getMetaSet(setCode).isDraftable()) {
+                        sets.push(setCode); // to the beginning
+                    }
+                }
+
+                if (sets.isEmpty()) {
+                    SOptionPane.showErrorDialog(block.toString() + " does not contain any set combinations.");
+                    return false;
+                }
+
+                final int nPacks = block.getCntBoostersDraft();
+
+                if (sets.size() > 1) {
+                    Object p;
+                    if (nPacks == 3 && sets.size() < 4) {
+                        p = SGuiChoose.oneOrNone("Choose Set Combination", getSetCombos(sets));
+                    } else {
+                        p = choosePackByPack(sets, nPacks);
+                    }
+
+                    if (p == null) {
+                        return false;
+                    }
+
+                    final String[] pp = p.toString().split("/");
+                    for (int i = 0; i < nPacks; i++) {
+                        this.product.add(block.getBooster(pp[i]));
+                    }
                 } else {
-                    p = choosePackByPack(sets, nPacks);
+                    final IUnOpenedProduct product1 = block.getBooster(sets.get(0));
+
+                    for (int i = 0; i < nPacks; i++) {
+                        this.product.add(product1);
+                    }
                 }
 
-                if (p == null) { return false; }
+                IBoosterDraft.LAND_SET_CODE[0] = block.getLandSet();
+                IBoosterDraft.CUSTOM_RANKINGS_FILE[0] = null;
+                break;
 
-                final String[] pp = p.toString().split("/");
-                for (int i = 0; i < nPacks; i++) {
-                    this.product.add(block.getBooster(pp[i]));
+            case Custom:
+                final List<CustomLimited> myDrafts = loadCustomDrafts();
+
+                myDrafts.sort(new Comparator<CustomLimited>() {
+                    @Override
+                    public int compare(CustomLimited o1, CustomLimited o2) {
+                        return o1.getName().compareTo(o2.getName());
+                    }
+                });
+
+                if (myDrafts.isEmpty()) {
+                    SOptionPane.showMessageDialog("No custom draft files found.");
+                } else {
+                    final CustomLimited customDraft = SGuiChoose.oneOrNone("Choose Custom Draft", myDrafts);
+                    if (customDraft == null) {
+                        return false;
+                    }
+
+                    this.setupCustomDraft(customDraft);
                 }
-            }
-            else {
-                final IUnOpenedProduct product1 = block.getBooster(sets.get(0));
+                break;
 
-                for (int i = 0; i < nPacks; i++) {
-                    this.product.add(product1);
-                }
-            }
-
-            IBoosterDraft.LAND_SET_CODE[0] = block.getLandSet();
-            IBoosterDraft.CUSTOM_RANKINGS_FILE[0] = null;
-            break;
-
-        case Custom:
-            final List<CustomLimited> myDrafts = loadCustomDrafts();
-
-            if (myDrafts.isEmpty()) {
-                SOptionPane.showMessageDialog("No custom draft files found.");
-            }
-            else {
-                final CustomLimited customDraft = SGuiChoose.oneOrNone("Choose Custom Draft", myDrafts);
-                if (customDraft == null) { return false; }
-
-                this.setupCustomDraft(customDraft);
-            }
-            break;
-
-        default:
-            throw new NoSuchElementException("Draft for mode " + this.draftFormat + " has not been set up!");
+            default:
+                throw new NoSuchElementException("Draft for mode " + this.draftFormat + " has not been set up!");
         }
 
         return true;
@@ -177,12 +191,13 @@ public class BoosterDraft implements IBoosterDraft {
     protected BoosterDraft() {
         this(LimitedPoolType.Full);
     }
+
     protected BoosterDraft(final LimitedPoolType draftType) {
         this.draftFormat = draftType;
 
         localPlayer = new LimitedPlayer(0);
         players.add(localPlayer);
-        for(int i = 1; i < N_PLAYERS; i++) {
+        for (int i = 1; i < N_PLAYERS; i++) {
             players.add(new LimitedPlayerAI(i));
         }
     }
@@ -210,7 +225,9 @@ public class BoosterDraft implements IBoosterDraft {
         IBoosterDraft.CUSTOM_RANKINGS_FILE[0] = draft.getCustomRankingsFileName();
     }
 
-    /** Looks for draft files, reads them, returns a list. */
+    /**
+     * Looks for draft files, reads them, returns a list.
+     */
     private static List<CustomLimited> loadCustomDrafts() {
         String[] dList;
         final List<CustomLimited> customs = new ArrayList<>();
@@ -262,7 +279,7 @@ public class BoosterDraft implements IBoosterDraft {
     }
 
     public void initializeBoosters() {
-        for(Supplier<List<PaperCard>> boosterRound : this.product) {
+        for (Supplier<List<PaperCard>> boosterRound : this.product) {
             for (int i = 0; i < N_PLAYERS; i++) {
                 this.players.get(i).receiveUnopenedPack(boosterRound.get());
             }
@@ -279,7 +296,7 @@ public class BoosterDraft implements IBoosterDraft {
             return false;
         }
 
-        for(LimitedPlayer pl : this.players) {
+        for (LimitedPlayer pl : this.players) {
             pl.newPack();
         }
         this.currentBoosterSize = firstPlayer.packQueue.peek().size();
@@ -290,7 +307,7 @@ public class BoosterDraft implements IBoosterDraft {
     public Deck[] getDecks() {
         Deck decks[] = new Deck[7];
         for (int i = 1; i < N_PLAYERS; i++) {
-            decks[i-1] = ((LimitedPlayerAI)this.players.get(i)).buildDeck();
+            decks[i - 1] = ((LimitedPlayerAI) this.players.get(i)).buildDeck();
         }
         return decks;
     }
@@ -298,7 +315,7 @@ public class BoosterDraft implements IBoosterDraft {
     public void passPacks() {
         // Alternate direction of pack passing
         int adjust = this.nextBoosterGroup % 2 == 1 ? 1 : -1;
-        for(int i = 0; i < N_PLAYERS; i++) {
+        for (int i = 0; i < N_PLAYERS; i++) {
             List<PaperCard> passingPack = this.players.get(i).passPack();
 
             if (!passingPack.isEmpty()) {
@@ -335,7 +352,9 @@ public class BoosterDraft implements IBoosterDraft {
         return !this.isRoundOver() || !this.localPlayer.unopenedPacks.isEmpty();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setChoice(final PaperCard c) {
         final List<PaperCard> thisBooster = this.localPlayer.nextChoice();
@@ -352,11 +371,10 @@ public class BoosterDraft implements IBoosterDraft {
         this.passPacks();
     }
 
-
     private static String choosePackByPack(final List<String> setz, int packs) {
         StringBuilder sb = new StringBuilder();
 
-        for(int i = 1; i <= packs; i++) {
+        for (int i = 1; i <= packs; i++) {
             String choice = SGuiChoose.oneOrNone(String.format("Choose set for Pack %d of %d", i, packs), setz);
             if (choice == null) {
                 return null;
@@ -443,15 +461,13 @@ public class BoosterDraft implements IBoosterDraft {
                 if (cc.equals(c)) {
                     pickValue = thisBooster.size()
                             * (1f - (((float) this.currentBoosterPick / this.currentBoosterSize) * 2f));
-                }
-                else {
+                } else {
                     pickValue = 0;
                 }
 
                 if (!this.draftPicks.containsKey(cnBk)) {
                     this.draftPicks.put(cnBk, pickValue);
-                }
-                else {
+                } else {
                     final float curValue = this.draftPicks.get(cnBk);
                     final float newValue = (curValue + pickValue) / 2;
                     this.draftPicks.put(cnBk, newValue);
