@@ -20,8 +20,10 @@ public class ThreadUtil {
         }
     }
 
-    private final static ExecutorService gameThreadPool = Executors.newCachedThreadPool(new WorkerThreadFactory("Game"));
-    private static ExecutorService getGameThreadPool() { return gameThreadPool; }
+    // Use a single game thread, rather than a pool of them, because when something
+    // needs to execute on the game thread, it's because it's not thread safe.
+    private final static ExecutorService gameThread = Executors.newSingleThreadExecutor(new WorkerThreadFactory("Game"));
+    private static ExecutorService getGameThreadPool() { return gameThread; }
     private final static ScheduledExecutorService scheduledPool = Executors.newScheduledThreadPool(2, new WorkerThreadFactory("Delayed"));
     private static ScheduledExecutorService getScheduledPool() { return scheduledPool; }
 
