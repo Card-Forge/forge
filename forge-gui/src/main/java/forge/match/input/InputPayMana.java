@@ -298,7 +298,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         // System.out.println("Chosen sa=" + chosen + " of " + chosen.getHostCard() + " to pay mana");
 
         locked = true;
-        runOnGameThread(game, new Runnable() {
+        game.getAction().invoke(new Runnable() {
             @Override
             public void run() {
                 HumanPlay.playSpellAbility(getController(), chosen.getActivatingPlayer(), chosen);
@@ -390,7 +390,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 }
             };
             //must run in game thread as certain payment actions can only be automated there
-            runOnGameThread(game, new Runnable() {
+            game.getAction().invoke(new Runnable() {
                 @Override
                 public void run() {
                     runAsAi(proc);
