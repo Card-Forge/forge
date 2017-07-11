@@ -27,59 +27,11 @@ public class DestroyAllAi extends SpellAbilityAi {
      */
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final Card source = sa.getHostCard();
-        String valid = "";
         if (mandatory) {
             return true;
         }
-        if (sa.hasParam("ValidCards")) {
-            valid = sa.getParam("ValidCards");
-        }
 
-        Player opponent = ai.getOpponent(); // TODO: how should this AI logic work with multiplayer and getOpponents()?
-
-        CardCollection opplist = CardLists.getValidCards(opponent.getCardsIn(ZoneType.Battlefield),
-                valid.split(","), source.getController(), source, sa);
-        CardCollection ailist = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","),
-                source.getController(), source, sa);
-        
-        if (sa.usesTargeting()) {
-            sa.resetTargets();
-            if (sa.canTarget(opponent)) {
-                sa.getTargets().add(opponent);
-                ailist.clear();
-            } else {
-                return false;
-            }
-        }
-
-        opplist = CardLists.filter(opplist, predicate);
-        ailist = CardLists.filter(ailist, predicate);
-        if (opplist.isEmpty() && !ailist.isEmpty()) {
-            return false;
-        }
-
-        if ((CardLists.getNotType(opplist, "Creature").size() == 0) && (CardLists.getNotType(ailist, "Creature").size() == 0)) {
-            // if only creatures are affected evaluate both lists and pass only if
-            // human creatures are more valuable
-            if (ComputerUtilCard.evaluateCreatureList(ailist) >= ComputerUtilCard.evaluateCreatureList(opplist)
-                    && !ailist.isEmpty()) {
-                return false;
-            }
-        } else if (CardLists.getNotType(opplist, "Land").isEmpty() && CardLists.getNotType(ailist, "Land").isEmpty()) {
-            // only lands are involved - check that AI's permanents are better
-            if (ai.isCardInPlay("Crucible of Worlds") && !opponent.isCardInPlay("Crucible of Worlds") && !opplist.isEmpty()) {
-                return true;
-            }
-            if (ComputerUtilCard.evaluatePermanentList(ailist) < ComputerUtilCard.evaluatePermanentList(opplist) + 1) {
-                return false;
-            }
-        } else if (ComputerUtilCard.evaluatePermanentList(ailist) >= ComputerUtilCard.evaluatePermanentList(opplist)) {
-            // otherwise evaluate both lists by CMC and pass only if human
-            // permanents are more valuable
-            return false;
-        }
-        return true;
+        return doMassRemovalLogic(ai, sa);
     }
 
     @Override
@@ -94,8 +46,29 @@ public class DestroyAllAi extends SpellAbilityAi {
         // based on what the expected targets could be
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
-        String valid = "";
 
+        if (abCost != null) {
+            // AI currently disabled for some costs
+            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
+                return false;
+            }
+        }
+
+        // prevent run-away activations - first time will always return true
+        if (ComputerUtil.preventRunAwayActivations(sa)) {
+            return false;
+        }
+        
+        return doMassRemovalLogic(ai, sa);
+    }
+
+    public boolean doMassRemovalLogic(Player ai, SpellAbility sa) {
+        final Card source = sa.getHostCard();
+        Player opponent = ai.getOpponent(); // TODO: how should this AI logic work for multiplayer and getOpponents()?
+
+        final int CREATURE_EVAL_THRESHOLD = 200;
+
+        String valid = "";
         if (sa.hasParam("ValidCards")) {
             valid = sa.getParam("ValidCards");
         }
@@ -107,43 +80,31 @@ public class DestroyAllAi extends SpellAbilityAi {
             valid = valid.replace("X", Integer.toString(xPay));
         }
 
-        Player opponent = ai.getOpponent(); // TODO: how should this AI logic work for multiplayer and getOpponents()?
-
         CardCollection opplist = CardLists.getValidCards(opponent.getCardsIn(ZoneType.Battlefield),
                 valid.split(","), source.getController(), source, sa);
         CardCollection ailist = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","),
                 source.getController(), source, sa);
+        
+        opplist = CardLists.filter(opplist, predicate);
+        ailist = CardLists.filter(ailist, predicate);
+        if (opplist.isEmpty()) {
+            return false;
+        }
 
         if (sa.usesTargeting()) {
             sa.resetTargets();
-            sa.getTargets().add(opponent);
-            ailist.clear();
-        }
-
-        opplist = CardLists.filter(opplist, predicate);
-        ailist = CardLists.filter(ailist, predicate);
-
-        if (abCost != null) {
-            // AI currently disabled for some costs
-
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
+            if (sa.canTarget(opponent)) {
+                sa.getTargets().add(opponent);
+                ailist.clear();
+            } else {
                 return false;
             }
-        }
-
-        // prevent run-away activations - first time will always return true
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false;
-        }
-        
-        if (opplist.isEmpty()) {
-        	return false;
         }
 
         // if only creatures are affected evaluate both lists and pass only if
         // human creatures are more valuable
         if (CardLists.getNotType(opplist, "Creature").isEmpty() && CardLists.getNotType(ailist, "Creature").isEmpty()) {
-            if (ComputerUtilCard.evaluateCreatureList(ailist) + 200 < ComputerUtilCard.evaluateCreatureList(opplist)) {
+            if (ComputerUtilCard.evaluateCreatureList(ailist) + CREATURE_EVAL_THRESHOLD < ComputerUtilCard.evaluateCreatureList(opplist)) {
                 return true;
             }
             
@@ -175,7 +136,16 @@ public class DestroyAllAi extends SpellAbilityAi {
         	if (ai.isCardInPlay("Crucible of Worlds") && !opponent.isCardInPlay("Crucible of Worlds") && !opplist.isEmpty()) {
         		return true;
         	}
-            if (ComputerUtilCard.evaluatePermanentList(ailist) < ComputerUtilCard.evaluatePermanentList(opplist) + 1) {
+            // evaluate the situation with creatures on the battlefield separately, as that's where the AI typically makes mistakes
+            CardCollection aiCreatures = ai.getCreaturesInPlay();
+            CardCollection oppCreatures = opponent.getCreaturesInPlay();
+            if (!oppCreatures.isEmpty()) {
+                if (ComputerUtilCard.evaluateCreatureList(aiCreatures) < ComputerUtilCard.evaluateCreatureList(oppCreatures) + CREATURE_EVAL_THRESHOLD) {
+                    return false;
+                }
+            }
+            // check if the AI would lose more lands than the opponent would
+            if (ComputerUtilCard.evaluatePermanentList(ailist) > ComputerUtilCard.evaluatePermanentList(opplist) + 1) {
                 return false;
             }
         } // otherwise evaluate both lists by CMC and pass only if human permanents are more valuable
@@ -185,5 +155,4 @@ public class DestroyAllAi extends SpellAbilityAi {
 
         return true;
     }
-
 }
