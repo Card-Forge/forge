@@ -72,6 +72,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Lang;
+import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 
 /**
@@ -3868,7 +3869,7 @@ public class CardFactoryUtil {
                 desc += ". This ability costs {1} less to activate for each creature card in your graveyard.";
             }
             if (!references.isEmpty()) {
-                effect += "| References$ " + String.join(",", references);
+                effect += "| References$ " + TextUtil.join(references, ",");
             }
             
             if (card.hasSVar("MonstrosityAILogic")) {
