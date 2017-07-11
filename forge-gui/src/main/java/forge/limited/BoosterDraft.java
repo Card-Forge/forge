@@ -148,16 +148,16 @@ public class BoosterDraft implements IBoosterDraft {
             case Custom:
                 final List<CustomLimited> myDrafts = loadCustomDrafts();
 
-                myDrafts.sort(new Comparator<CustomLimited>() {
-                    @Override
-                    public int compare(CustomLimited o1, CustomLimited o2) {
-                        return o1.getName().compareTo(o2.getName());
-                    }
-                });
-
                 if (myDrafts.isEmpty()) {
                     SOptionPane.showMessageDialog("No custom draft files found.");
                 } else {
+                    myDrafts.sort(new Comparator<CustomLimited>() {
+                        @Override
+                        public int compare(CustomLimited o1, CustomLimited o2) {
+                            return o1.getName().compareTo(o2.getName());
+                        }
+                    });
+
                     final CustomLimited customDraft = SGuiChoose.oneOrNone("Choose Custom Draft", myDrafts);
                     if (customDraft == null) {
                         return false;
