@@ -58,7 +58,6 @@ public class PuzzleScreen extends LaunchScreen {
                 LoadingOverlay.show("Loading the puzzle...", new Runnable() {
                     @Override
                     public void run() {
-
                         // Load selected puzzle
                         final Puzzle selected = result;
 
