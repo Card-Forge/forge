@@ -45,6 +45,25 @@ public class Puzzle extends GameState implements InventoryItem, Comparable {
         }
     }
 
+    private String getGoalDescription() {
+        StringBuilder desc = new StringBuilder();
+
+        String name = this.name == null ? "Unnamed Puzzle" : this.name;
+        String goal = this.goal == null ? "(Unspecified)" : this.goal;
+        String diff = this.difficulty == null ? "(Unspecified)" : this.difficulty;
+
+        desc.append(name);
+        desc.append("\nDifficulty: ");
+        desc.append(diff);
+
+        desc.append("\n\nGoal: ");
+        desc.append(goal);
+        desc.append("\nTurns Limit: ");
+        desc.append(this.turns);
+
+        return desc.toString();
+    }
+    
     private void loadGameState(List<String> stateLines) {
         this.parse(stateLines);
     }
@@ -67,6 +86,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable {
         goalCard.setImageKey("t:puzzle");
         goalCard.setName("Puzzle Goal");
         goalCard.addType("Effect");
+        goalCard.setOracleText(getGoalDescription());
 
         {
             final String loseTrig = "Mode$ Phase | Phase$ Cleanup | TriggerZones$ Command | Static$ True | " +
