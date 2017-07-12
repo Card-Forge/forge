@@ -1247,4 +1247,33 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         assertEquals(24, simGame.getPlayers().get(0).getLife());
     }
+
+    public void testMassRemovalVsKalitas() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        Player opp = game.getPlayers().get(1);
+
+        addCardToZone("Kalitas, Traitor of Ghet", p, ZoneType.Battlefield);
+        addCardToZone("Plains", p, ZoneType.Battlefield);
+        addCardToZone("Plains", p, ZoneType.Battlefield);
+        addCardToZone("Plains", p, ZoneType.Battlefield);
+        addCardToZone("Plains", p, ZoneType.Battlefield);
+
+        addCardToZone("Aboroth", opp, ZoneType.Battlefield);
+        addCardToZone("Aboroth", opp, ZoneType.Battlefield);
+
+        Card wrathOfGod = addCardToZone("Wrath of God", p, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+
+        SpellAbility wrathSA = wrathOfGod.getFirstSpellAbility();
+        assertNotNull(wrathSA);
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(wrathSA).value;
+        assertTrue(score > 0);
+        Game simGame = sim.getSimulatedGameState();
+
+        int numZombies = countCardsWithName(simGame, "Zombie");
+        assertTrue(numZombies == 2);
+    }
 }

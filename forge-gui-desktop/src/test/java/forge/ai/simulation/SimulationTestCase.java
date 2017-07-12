@@ -69,6 +69,16 @@ public class SimulationTestCase extends TestCase {
         }, game, p, null);
     }
 
+    protected int countCardsWithName(Game game, String name) {
+        int i = 0;
+        for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
+            if (c.getName().equals(name)) {
+                i++;
+            }
+        }
+        return i;
+    }
+
     protected Card findCardWithName(Game game, String name) {
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
             if (c.getName().equals(name)) {
