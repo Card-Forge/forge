@@ -1,0 +1,10 @@
+Name:Razaketh, the Foulblooded|Deck:Razaketh, the Foulblooded.dck|Variant:Commander|Avatar:Razaketh, the Foulblooded|Desc:
+Name:Bontu the Glorified|Deck:Bontu the Glorified.dck|Variant:Commander|Avatar:Bontu the Glorified|Desc:
+Name:The Scorpion God|Deck:The Scorpion God.dck|Variant:Commander|Avatar:The Scorpion God|Desc:
+Name:Neheb, the Worthy|Deck:Neheb, the Worthy.dck|Variant:Commander|Avatar:Neheb, the Worthy|Desc:
+Name:Liliana, Death Wielder|Deck:Liliana, Death Wielder.dck|Variant:Planeswalker|Avatar:Liliana, Death Wielder|Desc:
+Name:Liliana, Death's Majesty|Deck:Liliana, Death's Majesty.dck|Variant:Planeswalker|Avatar:Liliana, Death's Majesty|Desc:
+Name:Eternal Afflictions|Deck:Eternal Afflictions.dck|Variant:None|Avatar:Wildfire Eternal|Desc:
+Name:God Pharaoh's Torment|Deck:God Pharaoh's Torment.dck|Variant:None|Avatar:Torment of Hailfire|Desc:
+Name:Trial of Ambition|Deck:Trial of Ambition.dck|Variant:None|Avatar:Trial of Ambition|Desc:
+

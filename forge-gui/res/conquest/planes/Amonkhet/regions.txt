@@ -1,0 +1,5 @@
+Name:Shefet Dunes|Art:Shefet Dunes|Colors:W
+Name:Ipnu Rivulet|Art:Ipnu Rivulet|Colors:U
+Name:Ifnir Deadlands|Art:Ifnir Deadlands|Colors:B
+Name:Ramunap Ruins|Art:Ramunap Ruins|Colors:R
+Name:Hashep Oasis|Art:Hashep Oasis|Colors:G
