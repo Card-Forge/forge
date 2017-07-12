@@ -59,13 +59,11 @@ public class PuzzleScreen extends LaunchScreen {
                     @Override
                     public void run() {
                         // Load selected puzzle
-                        final Puzzle selected = result;
-
                         final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
                         hostedMatch.setStartGameHook(new Runnable() {
                             @Override
                             public final void run() {
-                                selected.applyToGame(hostedMatch.getGame());
+                                result.applyToGame(hostedMatch.getGame());
                             }
                         });
 
