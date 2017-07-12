@@ -1,5 +1,5 @@
 Name:Alara|RegionSize:9|Desc:As the boundaries between the shards dissolve, cultures clash and wars ensue.\nConsists of 55 events. Contains cards from ALA, CON, ARB, C13, and more.
-Name:Amonkhet|RegionSize:9|Desc:The people of the ancient and powerful civilization of Amonkhet raise monuments to the glory of their gods and compete for their blessings. But something sinister lurks beneath the orderly facade of this society.\nConsists of 45 events. Contains cards from AKH, HOU, and Amonkhet Invocations.
+Name:Amonkhet|RegionSize:9|Desc:On the surface, Amonkhet seems like a marvelous place to live, but something unsettling and nefarious lurks behind the grand facade.\nConsists of 45 events. Contains cards from AKH, HOU, and Amonkhet Invocations.
 Name:Dominaria|RegionSize:9|Unreachable:True|Desc:
 Name:Innistrad|RegionSize:9|Desc:On this plane, humanity is terrorized by vampires, werewolves, zombies, and ghouls.\nConsists of 45 events. Contains cards from ISD, DKA, AVR, SOI, EMN, and C14.
 Name:Ixalan|RegionSize:9|Unreachable:True|Desc:
