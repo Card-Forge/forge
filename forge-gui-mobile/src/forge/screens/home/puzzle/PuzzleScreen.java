@@ -28,7 +28,7 @@ public class PuzzleScreen extends LaunchScreen {
 
     private final FTextArea lblDesc = add(new FTextArea(false,
             "Puzzle Mode loads in a puzzle that you have to win in a predetermined time/way.\n\n" +
-            "To begin, click the Start button below, then select a puzzle from a list.\n\n" +
+            "To begin, press the Start button below, then select a puzzle from a list.\n\n" +
             "Your objective will be specified on a special effect card which will be placed in your command zone."));
 
     public PuzzleScreen() {
@@ -54,7 +54,7 @@ public class PuzzleScreen extends LaunchScreen {
 
         GuiChoose.one("Choose a puzzle", puzzles, new Callback<Puzzle>() {
             @Override
-            public void run(Puzzle result) {
+            public void run(Puzzle chosen) {
                 LoadingOverlay.show("Loading the puzzle...", new Runnable() {
                     @Override
                     public void run() {
@@ -63,7 +63,7 @@ public class PuzzleScreen extends LaunchScreen {
                         hostedMatch.setStartGameHook(new Runnable() {
                             @Override
                             public final void run() {
-                                result.applyToGame(hostedMatch.getGame());
+                                chosen.applyToGame(hostedMatch.getGame());
                             }
                         });
 
