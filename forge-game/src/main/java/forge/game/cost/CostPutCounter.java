@@ -20,6 +20,7 @@ package forge.game.cost;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -128,8 +129,7 @@ public class CostPutCounter extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability) {
-        final Player activator = ability.getActivatingPlayer();
+    public final boolean canPay(final SpellAbility ability, final Player payer) {
         final Card source = ability.getHostCard();
         if (this.payCostFromSource()) {
             if (!source.canReceiveCounters(this.counter)) {
@@ -137,10 +137,12 @@ public class CostPutCounter extends CostPartWithList {
             }
         } else {
             // 3 Cards have Put a -1/-1 Counter on a Creature you control.
-            final List<Card> typeList = CardLists.getValidCards(activator.getGame().getCardsIn(ZoneType.Battlefield),
-                    this.getType().split(";"), activator, source, ability);
+            List<Card> typeList = CardLists.getValidCards(source.getGame().getCardsIn(ZoneType.Battlefield),
+                    this.getType().split(";"), payer, source, ability);
+            
+            typeList = CardLists.filter(typeList, CardPredicates.canReceiveCounters(this.counter));
 
-            if (typeList.size() == 0) {
+            if (typeList.isEmpty()) {
                 return false;
             }
         }

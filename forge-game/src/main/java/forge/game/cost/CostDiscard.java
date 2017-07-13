@@ -97,11 +97,10 @@ public class CostDiscard extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability) {
-        final Player activator = ability.getActivatingPlayer();
+    public final boolean canPay(final SpellAbility ability, final Player payer) {
         final Card source = ability.getHostCard();
 
-        CardCollectionView handList = activator.getCardsIn(ZoneType.Hand);
+        CardCollectionView handList = payer.getCardsIn(ZoneType.Hand);
         String type = this.getType();
         final Integer amount = this.convertAmount();
 
@@ -115,7 +114,7 @@ public class CostDiscard extends CostPartWithList {
                 // this will always work
             }
             else if (type.equals("LastDrawn")) {
-                final Card c = activator.getLastDrawnCard();
+                final Card c = payer.getLastDrawnCard();
                 return handList.contains(c);
             }
             else {
@@ -126,7 +125,7 @@ public class CostDiscard extends CostPartWithList {
                 }
                 if (!type.equals("Random") && !type.contains("X")) {
                     // Knollspine Invocation fails to activate without the above conditional
-                    handList = CardLists.getValidCards(handList, type.split(";"), activator, source, ability);
+                    handList = CardLists.getValidCards(handList, type.split(";"), payer, source, ability);
                 }
                 if (sameName) {
                     for (Card c : handList) {
@@ -137,7 +136,7 @@ public class CostDiscard extends CostPartWithList {
                     return false;
                 }
                 int adjustment = 0;
-                if (source.isInZone(ZoneType.Hand) && activator.equals(source.getOwner())) {
+                if (source.isInZone(ZoneType.Hand) && payer.equals(source.getOwner())) {
                     // If this card is in my hand, I can't use it to pay for it's own cost
                     if (handList.contains(source)) {
                         adjustment = 1;

@@ -72,9 +72,8 @@ public class CostPayLife extends CostPart {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability) {
+    public final boolean canPay(final SpellAbility ability, final Player payer) {
         Integer amount = this.convertAmount();
-        Player activator = ability.getActivatingPlayer();
         if (amount == null) { // try to calculate when it's defined.
             String sAmount = getAmount();
             String sVar = ability.getSVar(sAmount);
@@ -83,11 +82,11 @@ public class CostPayLife extends CostPart {
             }
         }
 
-        if ((amount != null) && !activator.canPayLife(amount)) {
+        if ((amount != null) && !payer.canPayLife(amount)) {
             return false;
         }
 
-        if (activator.hasKeyword("You can't pay life to cast spells or activate abilities.")) {
+        if (payer.hasKeyword("You can't pay life to cast spells or activate abilities.")) {
             return false;
         }
 

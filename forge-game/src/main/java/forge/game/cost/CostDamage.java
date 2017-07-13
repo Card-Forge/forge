@@ -54,7 +54,7 @@ public class CostDamage extends CostPart {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability) {
+    public final boolean canPay(final SpellAbility ability, final Player payer) {
         return true;
     }
     

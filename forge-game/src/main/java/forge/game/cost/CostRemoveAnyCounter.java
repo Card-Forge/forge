@@ -17,12 +17,11 @@
  */
 package forge.game.cost;
 
-import com.google.common.base.Predicate;
-
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -87,17 +86,11 @@ public class CostRemoveAnyCounter extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability) {
-        final Player activator = ability.getActivatingPlayer();
+    public final boolean canPay(final SpellAbility ability, final Player payer) {
         final Card source = ability.getHostCard();
-        CardCollectionView validCards = activator.getCardsIn(ZoneType.Battlefield);
-        validCards = CardLists.getValidCards(validCards, this.getType().split(";"), activator, source, ability);
-        validCards = CardLists.filter(validCards, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.hasCounters();
-            }
-        });
+        CardCollectionView validCards = payer.getCardsIn(ZoneType.Battlefield);
+        validCards = CardLists.getValidCards(validCards, this.getType().split(";"), payer, source, ability);
+        validCards = CardLists.filter(validCards, CardPredicates.hasCounters());
         if (validCards.isEmpty()) {
             return false;
         }

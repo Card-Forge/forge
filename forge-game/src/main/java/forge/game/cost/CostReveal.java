@@ -44,11 +44,10 @@ public class CostReveal extends CostPartWithList {
     public boolean isRenewable() { return true; }
 
     @Override
-    public final boolean canPay(final SpellAbility ability) {
-        final Player activator = ability.getActivatingPlayer();
+    public final boolean canPay(final SpellAbility ability, final Player payer) {
         final Card source = ability.getHostCard();
 
-        CardCollectionView handList = activator.getCardsIn(ZoneType.Hand);
+        CardCollectionView handList = payer.getCardsIn(ZoneType.Hand);
         final String type = this.getType();
         final Integer amount = this.convertAmount();
 
@@ -80,7 +79,7 @@ public class CostReveal extends CostPartWithList {
                 modifiedHand.remove(source); // can't pay for itself
                 handList = modifiedHand;
             }
-            handList = CardLists.getValidCards(handList, type.split(";"), activator, source, ability);
+            handList = CardLists.getValidCards(handList, type.split(";"), payer, source, ability);
             if ((amount != null) && (amount > handList.size())) {
                 // not enough cards in hand to pay
                 return false;

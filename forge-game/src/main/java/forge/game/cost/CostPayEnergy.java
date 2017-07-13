@@ -74,9 +74,8 @@ public class CostPayEnergy extends CostPart {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability) {
+    public final boolean canPay(final SpellAbility ability, final Player payer) {
         Integer amount = this.convertAmount();
-        Player activator = ability.getActivatingPlayer();
         if (amount == null) { // try to calculate when it's defined.
             String sAmount = getAmount();
             String sVar = ability.getSVar(sAmount);
@@ -85,7 +84,7 @@ public class CostPayEnergy extends CostPart {
             }
         }
 
-        return activator.getCounters(CounterType.ENERGY) >= amount;
+        return payer.getCounters(CounterType.ENERGY) >= amount;
     }
 
     @Override

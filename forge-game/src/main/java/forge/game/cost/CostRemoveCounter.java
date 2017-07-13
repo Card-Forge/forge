@@ -122,9 +122,8 @@ public class CostRemoveCounter extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability) {
+    public final boolean canPay(final SpellAbility ability, final Player payer) {
         final CounterType cntrs = this.counter;
-        final Player activator = ability.getActivatingPlayer();
         final Card source = ability.getHostCard();
         final String type = this.getType();
 
@@ -139,9 +138,10 @@ public class CostRemoveCounter extends CostPartWithList {
             if (type.equals("OriginalHost")) {
                 typeList = Lists.newArrayList(ability.getOriginalHost());
             } else {
-                typeList = CardLists.getValidCards(activator.getCardsIn(this.zone), type.split(";"), activator, source, ability);
+                typeList = CardLists.getValidCards(payer.getCardsIn(this.zone), type.split(";"), payer, source, ability);
             }
             if (amount != null) {
+                // TODO find better way than TypeDescription
                 if (this.getTypeDescription().equals("among creatures you control")) {
                     // remove X counters from among creatures you control
                     int totalCounters = 0;

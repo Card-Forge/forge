@@ -73,7 +73,7 @@ public class CostUntapType extends CostPartWithList {
     }
 
     @Override
-    public final boolean canPay(final SpellAbility ability) {
+    public final boolean canPay(final SpellAbility ability, final Player payer) {
         final Player activator = ability.getActivatingPlayer();
         final Card source = ability.getHostCard();
 

@@ -101,10 +101,9 @@ public class CostExile extends CostPartWithList {
     }
 
     @Override
-    public final boolean canPay(final SpellAbility ability) {
-        final Player activator = ability.getActivatingPlayer();
+    public final boolean canPay(final SpellAbility ability, final Player payer) {
         final Card source = ability.getHostCard();
-        final Game game = activator.getGame();
+        final Game game = source.getGame();
 
         String type = this.getType();
         if (type.equals("All")) {
@@ -119,14 +118,14 @@ public class CostExile extends CostPartWithList {
             list = game.getCardsIn(this.from);
         }
         else {
-            list = activator.getCardsIn(this.from);
+            list = payer.getCardsIn(this.from);
         }
 
         if (this.payCostFromSource()) {
             return list.contains(source);
         }
 
-        list = CardLists.getValidCards(list, type.split(";"), activator, source, ability);
+        list = CardLists.getValidCards(list, type.split(";"), payer, source, ability);
 
         final Integer amount = this.convertAmount();
         if ((amount != null) && (list.size() < amount)) {

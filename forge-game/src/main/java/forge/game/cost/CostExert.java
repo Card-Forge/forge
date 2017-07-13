@@ -76,16 +76,15 @@ public class CostExert extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability) {
-        final Player activator = ability.getActivatingPlayer();
+    public final boolean canPay(final SpellAbility ability, final Player payer) {
         final Card source = ability.getHostCard();
 
 
         if (!this.payCostFromSource()) {
             boolean needsAnnoucement = ability.hasParam("Announce") && this.getType().contains(ability.getParam("Announce"));
 
-            CardCollectionView typeList = activator.getCardsIn(ZoneType.Battlefield);
-            typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source, ability);
+            CardCollectionView typeList = payer.getCardsIn(ZoneType.Battlefield);
+            typeList = CardLists.getValidCards(typeList, this.getType().split(";"), payer, source, ability);
             final Integer amount = this.convertAmount();
 
 

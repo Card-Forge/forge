@@ -17,7 +17,6 @@
  */
 package forge.game.cost;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -32,6 +31,8 @@ import forge.game.CardTraitBase;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.mana.ManaCostBeingPaid;
+import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.TextUtil;
@@ -46,7 +47,7 @@ import forge.util.TextUtil;
  */
 public class Cost {
     private boolean isAbility = true;
-    private final List<CostPart> costParts = new ArrayList<CostPart>();
+    private final List<CostPart> costParts = Lists.newArrayList();
     private boolean isMandatory = false;
 
     private boolean tapCost = false;
@@ -144,6 +145,10 @@ public class Cost {
      */
     public final boolean isMandatory() {
         return this.isMandatory;
+    }
+    
+    public final boolean isAbility() {
+        return this.isAbility;
     }
     
     private Cost() {
@@ -856,6 +861,20 @@ public class Cost {
         for (final CostPart part : this.getCostParts()) {
             part.applyTextChangeEffects(trait);
         }
+    }
+
+    public boolean canPay(SpellAbility sa) {
+        return canPay(sa, sa.getActivatingPlayer());
+    }
+
+    public boolean canPay(SpellAbility sa, Player payer) {
+        for (final CostPart part : this.getCostParts()) {
+            if (!part.canPay(sa, payer)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public static final Cost Zero = new Cost(0);

@@ -79,12 +79,12 @@ public class CostGainLife extends CostPart {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability) {
+    public final boolean canPay(final SpellAbility ability, final Player payer) {
         final Integer amount = this.convertAmount();
         if ( amount == null ) return false;
 
         int cntAbleToGainLife = 0;
-        List<Player> possibleTargets = getPotentialTargets(ability.getActivatingPlayer(), ability.getHostCard());
+        List<Player> possibleTargets = getPotentialTargets(payer, ability.getHostCard());
 
         for (final Player opp : possibleTargets) {
             if (opp.canGainLife()) {

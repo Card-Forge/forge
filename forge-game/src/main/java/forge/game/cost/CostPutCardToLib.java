@@ -108,10 +108,9 @@ public class CostPutCardToLib extends CostPartWithList {
     }
 
     @Override
-    public final boolean canPay(final SpellAbility ability) {
-        final Player activator = ability.getActivatingPlayer();
+    public final boolean canPay(final SpellAbility ability, final Player payer) {
         final Card source = ability.getHostCard();
-        final Game game = activator.getGame();
+        final Game game = source.getGame();
 
         Integer i = convertAmount();
 
@@ -128,10 +127,10 @@ public class CostPutCardToLib extends CostPartWithList {
             typeList = game.getCardsIn(getFrom());
         }
         else {
-            typeList = activator.getCardsIn(getFrom());
+            typeList = payer.getCardsIn(getFrom());
         }
 
-        typeList = CardLists.getValidCards(typeList, getType().split(";"), activator, source, ability);
+        typeList = CardLists.getValidCards(typeList, getType().split(";"), payer, source, ability);
         
         if (typeList.size() < i) {
             return false;

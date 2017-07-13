@@ -62,8 +62,7 @@ public class CostUnattach extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability) {
-        final Player activator = ability.getActivatingPlayer();
+    public final boolean canPay(final SpellAbility ability, final Player payer) {
         final Card source = ability.getHostCard();
 
         final String type = this.getType();
@@ -77,7 +76,7 @@ public class CostUnattach extends CostPartWithList {
                 return true;
             }
         } else {
-            if (CardLists.getValidCards(source.getEquippedBy(false), type, activator, source).size() > 0) {
+            if (CardLists.getValidCards(source.getEquippedBy(false), type, payer, source).size() > 0) {
                 return true;
             }
         }

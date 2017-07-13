@@ -77,8 +77,8 @@ public class CostDraw extends CostPart {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability) {
-        List<Player> potentials = getPotentialPlayers(ability.getActivatingPlayer(), ability.getHostCard());
+    public final boolean canPay(final SpellAbility ability, final Player payer) {
+        List<Player> potentials = getPotentialPlayers(payer, ability.getHostCard());
         return !potentials.isEmpty();
     }
 

@@ -88,13 +88,7 @@ public class CostPayment {
             return true;
         }
 
-        for (final CostPart part : cost.getCostParts()) {
-            if (!part.canPay(ability)) {
-                return false;
-            }
-        }
-
-        return true;
+        return cost.canPay(ability);
     }
 
     /**

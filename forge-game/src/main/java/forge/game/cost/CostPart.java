@@ -141,9 +141,10 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable {
      * 
      * @param ability
      *            the ability
+     * @param payer 
      * @return true, if successful
      */
-    public abstract boolean canPay(SpellAbility ability);
+    public abstract boolean canPay(SpellAbility ability, Player payer);
 
     public abstract <T> T accept(final ICostVisitor<T> visitor);
 

@@ -22,6 +22,7 @@ import com.google.common.base.Predicate;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -102,8 +103,7 @@ public class CostTapType extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability) {
-        final Player activator = ability.getActivatingPlayer();
+    public final boolean canPay(final SpellAbility ability, final Player payer) {
         final Card source = ability.getHostCard();
 
         String type = this.getType();
@@ -121,7 +121,7 @@ public class CostTapType extends CostPartWithList {
             type = type.replace("+withTotalPowerGE" + totalP, "");
         }
 
-        CardCollection typeList = CardLists.getValidCards(activator.getCardsIn(ZoneType.Battlefield), type.split(";"), activator, source, ability);
+        CardCollection typeList = CardLists.getValidCards(payer.getCardsIn(ZoneType.Battlefield), type.split(";"), payer, source, ability);
 
         if (!canTapSource) {
             typeList.remove(source);
@@ -134,12 +134,7 @@ public class CostTapType extends CostPartWithList {
 
         if (sameType) {
             for (final Card card : typeList) {
-                if (CardLists.filter(typeList, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        return c.sharesCreatureTypeWith(card);
-                    }
-                }).size() > 1) {
+                if (CardLists.count(typeList, CardPredicates.sharesCreatureTypeWith(card)) > 1) {
                     return true;
                 }
             }

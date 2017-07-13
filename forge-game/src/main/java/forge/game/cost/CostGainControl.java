@@ -69,11 +69,10 @@ public class CostGainControl extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability) {
-        final Player activator = ability.getActivatingPlayer();
+    public final boolean canPay(final SpellAbility ability, final Player payer) {
         final Card source = ability.getHostCard();
-        CardCollectionView typeList = activator.getGame().getCardsIn(ZoneType.Battlefield);
-        typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source, ability);
+        CardCollectionView typeList = payer.getGame().getCardsIn(ZoneType.Battlefield);
+        typeList = CardLists.getValidCards(typeList, this.getType().split(";"), payer, source, ability);
 
         Integer amount = this.convertAmount();
         if (amount == null) {

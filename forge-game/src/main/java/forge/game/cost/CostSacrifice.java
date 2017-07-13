@@ -80,8 +80,7 @@ public class CostSacrifice extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability) {
-        final Player activator = ability.getActivatingPlayer();
+    public final boolean canPay(final SpellAbility ability, final Player activator) {
         final Card source = ability.getHostCard();
 
         // You can always sac all

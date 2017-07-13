@@ -61,8 +61,7 @@ public class CostExiledMoveToGrave extends CostPartWithList {
     }
 
     @Override
-    public final boolean canPay(final SpellAbility ability) {
-        final Player activator = ability.getActivatingPlayer();
+    public final boolean canPay(final SpellAbility ability, final Player payer) {
         final Card source = ability.getHostCard();
 
         Integer i = convertAmount();
@@ -71,9 +70,9 @@ public class CostExiledMoveToGrave extends CostPartWithList {
             i = AbilityUtils.calculateAmount(source, getAmount(), ability);
         }
 
-        CardCollectionView typeList = activator.getGame().getCardsIn(ZoneType.Exile);
+        CardCollectionView typeList = payer.getGame().getCardsIn(ZoneType.Exile);
 
-        typeList = CardLists.getValidCards(typeList, getType().split(";"), activator, source, ability);
+        typeList = CardLists.getValidCards(typeList, getType().split(";"), payer, source, ability);
         return typeList.size() >= i;
     }
 

@@ -77,8 +77,7 @@ public class CostExileFromStack extends CostPart {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability) {
-        final Player activator = ability.getActivatingPlayer();
+    public final boolean canPay(final SpellAbility ability, final Player payer) {
         final Card source = ability.getHostCard();
 
         String type = this.getType();
@@ -86,9 +85,9 @@ public class CostExileFromStack extends CostPart {
             return true; // this will always work
         }
 
-        CardCollectionView list = activator.getCardsIn(ZoneType.Stack);
+        CardCollectionView list = payer.getCardsIn(ZoneType.Stack);
 
-        list = CardLists.getValidCards(list, type.split(";"), activator, source, ability);
+        list = CardLists.getValidCards(list, type.split(";"), payer, source, ability);
 
         final Integer amount = this.convertAmount();
         if ((amount != null) && (list.size() < amount)) {
