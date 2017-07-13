@@ -5,9 +5,11 @@ Name=Hour of Devastation
 Code2=HOU
 Type=Expansion
 MciCode=hou
+BoosterCovers=3
 Booster=10 Common:!fromSheet("HOU Planeswalker Decks and Toolkit"), 3 Uncommon:!fromSheet("HOU Planeswalker Decks and Toolkit"), 1 RareMythic:!fromSheet("HOU Planeswalker Decks and Toolkit"), 1 BasicLand
 AdditionalSheetForFoils=fromSheet("MPS Hour of Devastation Invocations")
 AdditionalSetUnlockedInQuest=MPS_AKH
+TreatAsSmallSet=true
 
 [cards]
 1 C Act of Heroism
