@@ -119,7 +119,7 @@ public class  DamageAllAi extends SpellAbilityAi {
 					if (ComputerUtilCombat.predictDamageTo(opp, dmg, source, false) > 0) {
 						// When using Pestilence to hurt players, do it at
 						// the end of the opponent's turn only
-						if ((!source.getName().equals("Pestilence"))
+						if ((!"DmgAllCreaturesAndPlayers".equals(sa.getParam("AILogic")))
 								|| ((ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)
 										&& (ai.getGame().getNonactivePlayers().contains(ai)))))
 						// Need further improvement : if able to kill immediately with repeated activations, do not wait
@@ -130,9 +130,7 @@ public class  DamageAllAi extends SpellAbilityAi {
 							if (ComputerUtilCombat.predictDamageTo(ai, dmg, source, false)<1) {
 								return 1;
 							}
-							// enemy is expected to die faster than AI from
-							// damage
-							// if repeated
+							// enemy is expected to die faster than AI from damage if repeated
 							if (ai.getLife() > ComputerUtilCombat.predictDamageTo(ai, dmg, source, false)
 									* ((opp.getLife() + ComputerUtilCombat.predictDamageTo(opp, dmg, source, false) - 1)
 											/ ComputerUtilCombat.predictDamageTo(opp, dmg, source, false))) {
