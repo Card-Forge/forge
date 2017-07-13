@@ -465,7 +465,7 @@ public class HumanPlay {
                 CounterType counterType = ((CostRemoveCounter) part).counter;
                 int amount = getAmountFromPartX(part, source, sourceAbility);
 
-                if (!part.canPay(sourceAbility)) {
+                if (!part.canPay(sourceAbility, p)) {
                     return false;
                 }
 
@@ -696,7 +696,7 @@ public class HumanPlay {
                 CounterType counterType = CounterType.ENERGY;
                 int amount = getAmountFromPartX(part, source, sourceAbility);
 
-                if (!part.canPay(sourceAbility)) {
+                if (!part.canPay(sourceAbility, p)) {
                     return false;
                 }
 
