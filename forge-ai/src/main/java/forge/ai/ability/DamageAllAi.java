@@ -122,11 +122,8 @@ public class  DamageAllAi extends SpellAbilityAi {
 						if ((!source.getName().equals("Pestilence"))
 								|| ((ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)
 										&& (ai.getGame().getNonactivePlayers().contains(ai)))))
-						// Need further improvement : if able to kill
-						// immediately with repeated activations, do not wait
-						// for phases!
-						// Will also need to implement considering repeated
-						// activations for killed creatures!
+						// Need further improvement : if able to kill immediately with repeated activations, do not wait
+						// for phases! Will also need to implement considering repeated activations for killed creatures!
 						// || (ai.sa.getPayCosts(). ??? )
 						{
 							// would take zero damage, and hurt opponent, do it!
@@ -144,12 +141,8 @@ public class  DamageAllAi extends SpellAbilityAi {
 										&& (ComputerUtilCombat.predictDamageTo(opp, dmg, source, false) >= 1)) {
 									return 1;
 								}
-								// At least half enemy remaining life can be
-								// removed
-								// in one go
-								// worth doing even if enemy still has high
-								// health -
-								// one more copy of spell to win!
+								// At least half enemy remaining life can be removed in one go
+								// worth doing even if enemy still has high health - one more copy of spell to win!
 								if (opp.getLife() <= 2 * ComputerUtilCombat.predictDamageTo(opp, dmg, source, false)) {
 									return 1;
 								}
