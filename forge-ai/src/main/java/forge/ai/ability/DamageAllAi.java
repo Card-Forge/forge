@@ -9,6 +9,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
 import forge.game.cost.Cost;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -103,12 +104,61 @@ public class  DamageAllAi extends SpellAbilityAi {
             return 1;
         }
 
-        int minGain = 200; // The minimum gain in destroyed creatures
-        if (sa.getPayCosts() != null && sa.getPayCosts().isReusuableResource()) {
-        	if (computerList.isEmpty()) {
-        		minGain = 10; // nothing to lose
-        	} else {
-        		minGain = 100; // safety for errors in evaluate creature
+		int minGain = 200; // The minimum gain in destroyed creatures
+		if (sa.getPayCosts() != null && sa.getPayCosts().isReusuableResource()) {
+			if (computerList.isEmpty()) {
+				minGain = 10; // nothing to lose
+				// no creatures to lose and player can be damaged
+				// so do it if it's helping!
+				// ----------------------------
+				// needs future improvement on pestilence : 
+				// what if we lose creatures but can win by repeated activations?
+				// that tactic only works if there are creatures left to keep pestilence in play
+				// and can kill the player in a reasonable amount of time (no more than 2-3 turns?)
+				if (validP.equals("Player")) {
+					if (ComputerUtilCombat.predictDamageTo(opp, dmg, source, false) > 0) {
+						// When using Pestilence to hurt players, do it at
+						// the end of the opponent's turn only
+						if ((!source.getName().equals("Pestilence"))
+								|| ((ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)
+										&& (ai.getGame().getNonactivePlayers().contains(ai)))))
+						// Need further improvement : if able to kill
+						// immediately with repeated activations, do not wait
+						// for phases!
+						// Will also need to implement considering repeated
+						// activations for killed creatures!
+						// || (ai.sa.getPayCosts(). ??? )
+						{
+							// would take zero damage, and hurt opponent, do it!
+							if (ComputerUtilCombat.predictDamageTo(ai, dmg, source, false)<1) {
+								return 1;
+							}
+							// enemy is expected to die faster than AI from
+							// damage
+							// if repeated
+							if (ai.getLife() > ComputerUtilCombat.predictDamageTo(ai, dmg, source, false)
+									* ((opp.getLife() + ComputerUtilCombat.predictDamageTo(opp, dmg, source, false) - 1)
+											/ ComputerUtilCombat.predictDamageTo(opp, dmg, source, false))) {
+								// enemy below 10 life, go for it!
+								if ((opp.getLife() < 10)
+										&& (ComputerUtilCombat.predictDamageTo(opp, dmg, source, false) >= 1)) {
+									return 1;
+								}
+								// At least half enemy remaining life can be
+								// removed
+								// in one go
+								// worth doing even if enemy still has high
+								// health -
+								// one more copy of spell to win!
+								if (opp.getLife() <= 2 * ComputerUtilCombat.predictDamageTo(opp, dmg, source, false)) {
+									return 1;
+								}
+							}
+						}
+					}
+				}
+			} else {
+				minGain = 100; // safety for errors in evaluate creature
         	}
         } else if (sa.getSubAbility() != null && ai.getGame().getPhaseHandler().isPreCombatMain() && computerList.isEmpty()
         		&& opp.getCreaturesInPlay().size() > 1 && !ai.getCreaturesInPlay().isEmpty()) {
