@@ -5408,8 +5408,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             for (SpellAbility sa : source.getSpellAbilities()) {
                 if (sa.getActivatingPlayer() == null) continue;
                 for (Player p : AbilityUtils.getDefinedPlayers(source, property.split("RememberMap_")[1], sa)) {
-                    if (source.getRememberMap().get(p).contains(this)) {
-                        return true;
+                    if (source.getRememberMap() != null && source.getRememberMap().get(p) != null) {
+                        if (source.getRememberMap().get(p).contains(this)) {
+                            return true;
+                        }
                     }
                 }
             }
