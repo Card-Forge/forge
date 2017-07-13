@@ -135,6 +135,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 "Defines the granularity level of auto-yields (yield to each unique ability or to each unique card).",
                 new String[]{ForgeConstants.AUTO_YIELD_PER_ABILITY, ForgeConstants.AUTO_YIELD_PER_CARD}),
                 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ALLOW_ESC_TO_END_TURN,
+                "Use Escape Key To End Turn",
+                "Allows to use Esc keyboard shortcut to end turn prematurely"),
+                1);
 
         //Random Deck Generation
         lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_NOSMALL,

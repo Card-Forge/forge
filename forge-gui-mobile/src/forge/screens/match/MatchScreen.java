@@ -16,6 +16,7 @@ import com.google.common.collect.Maps;
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
+import forge.GuiBase;
 import forge.animation.AbilityEffect;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -367,17 +368,22 @@ public class MatchScreen extends FScreen {
             }
             return getActivePrompt().getBtnCancel().trigger(); //trigger Cancel if can't trigger OK
         case Keys.ESCAPE:
+            if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN)) {
+                if (getActivePrompt().getBtnCancel().getText().equals("End Turn")) {
+                    return false;
+                }
+            }
             return getActivePrompt().getBtnCancel().trigger(); //otherwise trigger Cancel
         case Keys.BACK:
             return true; //suppress Back button so it's not bumped when trying to press OK or Cancel buttons
-        case Keys.A: //alpha strike on Ctrl+A
-            if (KeyInputAdapter.isCtrlKeyDown()) {
+        case Keys.A: //alpha strike on Ctrl+A on Android, A when running on desktop
+            if (KeyInputAdapter.isCtrlKeyDown() || GuiBase.getInterface().isRunningOnDesktop()) {
                 getGameController().alphaStrike();
                 return true;
             }
             break;
-        case Keys.E: //end turn on Ctrl+E
-            if (KeyInputAdapter.isCtrlKeyDown()) {
+        case Keys.E: //end turn on Ctrl+E on Android, E when running on desktop
+            if (KeyInputAdapter.isCtrlKeyDown() || GuiBase.getInterface().isRunningOnDesktop()) {
                 getGameController().passPriorityUntilEndOfTurn();
                 return true;
             }
