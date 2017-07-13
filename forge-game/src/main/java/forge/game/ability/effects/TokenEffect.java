@@ -185,6 +185,13 @@ public class TokenEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final SpellAbility root = sa.getRootAbility();
         readParameters(sa);
+        
+        // Cause of the Token Effect, in general it should be this
+        // but if its a Replacement Effect, it might be something else or null
+        SpellAbility cause = sa;
+        if (root.isReplacementAbility() && root.hasReplacingObject("Cause")) {
+            cause = (SpellAbility)root.getReplacingObject("Cause");
+        }
 
         String cost = "";
 
@@ -266,7 +273,7 @@ public class TokenEffect extends SpellAbilityEffect {
                 final String imageName = imageNames.get(MyRandom.getRandom().nextInt(imageNames.size()));
                 final CardFactory.TokenInfo tokenInfo = new CardFactory.TokenInfo(substitutedName, imageName,
                         cost, substitutedTypes, this.tokenKeywords, finalPower, finalToughness);
-                final List<Card> tokens = CardFactory.makeToken(tokenInfo, controller);
+                final List<Card> tokens = CardFactory.makeToken(tokenInfo, controller, cause != null);
                 
                 // Grant rule changes
                 if (this.tokenHiddenKeywords != null) {

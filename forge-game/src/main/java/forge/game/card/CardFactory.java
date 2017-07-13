@@ -796,10 +796,6 @@ public class CardFactory {
            return new TokenInfo(tokenInfo[0], imageName, manaCost, types, keywords, power, toughness);
         }
     }
-
-    public static List<Card> makeToken(final TokenInfo tokenInfo, final Player controller) {
-        return makeToken(tokenInfo, controller, true);
-    }
     
     public static List<Card> makeToken(final TokenInfo tokenInfo, final Player controller, final boolean applyMultiplier) {
         final List<Card> list = Lists.newArrayList();

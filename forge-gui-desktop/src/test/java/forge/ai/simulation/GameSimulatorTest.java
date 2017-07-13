@@ -1300,8 +1300,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertNotNull(fatalPushSA);
         fatalPushSA.setTargetCard(goblin);
 
-        // Electrify: should only generate 1 token (FIXME: Forge currently generates 2 tokens!)
-        // (check http://magicjudge.tumblr.com/post/160491073029/weird-card-interaction-alert-kalitas-anointed )
+        // Electrify: should only generate 1 token
         Card electrify = addCardToZone("Electrify", p, ZoneType.Hand);
         SpellAbility electrifySA = electrify.getFirstSpellAbility();
         assertNotNull(electrifySA);
@@ -1314,9 +1313,6 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         score = sim.simulateSpellAbility(electrifySA).value;
         assertTrue(score > 0);
-        // TODO: this will currently fail because Forge does not implement this interaction correctly,
-        // generating two tokens instead of one after Electrify.
-        // Please fix and then enable the assertion line below to ensure it stays properly implemented.
-        //assertTrue(countCardsWithName(sim.getSimulatedGameState(), "Zombie") == 3);
+        assertTrue(countCardsWithName(sim.getSimulatedGameState(), "Zombie") == 3);
     }
 }
