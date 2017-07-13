@@ -17,7 +17,6 @@
  */
 package forge.game;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
@@ -77,7 +76,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.concurrent.Callable;
 
 /**
  * Methods for common actions performed during a game.
@@ -1746,17 +1744,8 @@ public class GameAction {
         // state effects are checked only when someone gets priority
     }
 
-    private Function<Runnable, Void> invokeFunction;
-    public synchronized void setInvokeFunction(Function<Runnable, Void> invokeFunction) {
-        this.invokeFunction = invokeFunction;
-    }
-
-    // Invokes given runnable on the Game thread - used to start game and perform actions from UI when waiting for input.
-    public synchronized void invoke(final Runnable proc) {
-        if (invokeFunction != null) {
-            invokeFunction.apply(proc);
-            return;
-        }
+    // Invokes given runnable in Game thread pool - used to start game and perform actions from UI (when game-0 waits for input)
+    public void invoke(final Runnable proc) {
         if (ThreadUtil.isGameThread()) {
             proc.run();
         }
