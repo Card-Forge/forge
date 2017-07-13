@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Vegeta 2
+Title=Vegeta
+Difficulty=medium
+Description=URG Temur Energy deck
+Icon=Vegeta.jpg
+Deck Type=constructed
+[main]
+4 Aether Hub
+4 Attune with Aether
+4 Botanical Sanctum
+3 Bristling Hydra
+3 Chandra, Torch of Defiance
+4 Forest
+1 Game Trail
+3 Glimmer of Genius
+4 Harnessed Lightning
+1 Island
+4 Longtusk Cub
+1 Lumbering Falls
+3 Mountain
+4 Rogue Refiner
+4 Servant of the Conduit
+3 Sheltered Thicket
+2 Spirebluff Canal
+4 Tireless Tracker
+4 Whirler Virtuoso
+[sideboard]

@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Vegeta 3
+Title=Vegeta
+Difficulty=hard
+Description=URG Temur Marvel deck with Aetherworks Marvel and Ulamog, the Ceaseless Hunger
+Icon=Vegeta.jpg
+Deck Type=constructed
+[main]
+4 Aether Hub
+4 Aetherworks Marvel
+4 Attune with Aether
+2 Botanical Sanctum
+3 Chandra, Torch of Defiance
+5 Forest
+2 Game Trail
+3 Glimmer of Genius
+4 Harnessed Lightning
+1 Island
+1 Lumbering Falls
+2 Mountain
+4 Rogue Refiner
+4 Servant of the Conduit
+1 Sheltered Thicket
+4 Spirebluff Canal
+4 Tireless Tracker
+4 Ulamog, the Ceaseless Hunger
+4 Woodweaver's Puzzleknot
+[sideboard]
