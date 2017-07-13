@@ -1276,4 +1276,47 @@ public class GameSimulatorTest extends SimulationTestCase {
         int numZombies = countCardsWithName(simGame, "Zombie");
         assertTrue(numZombies == 2);
     }
+
+    public void testKalitasNumberOfTokens() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        Player opp = game.getPlayers().get(1);
+
+        addCardToZone("Kalitas, Traitor of Ghet", p, ZoneType.Battlefield);
+        addCardToZone("Anointed Procession", p, ZoneType.Battlefield);
+        addCardToZone("Swamp", p, ZoneType.Battlefield);
+        addCardToZone("Mountain", p, ZoneType.Battlefield);
+        addCardToZone("Mountain", p, ZoneType.Battlefield);
+        addCardToZone("Mountain", p, ZoneType.Battlefield);
+        addCardToZone("Mountain", p, ZoneType.Battlefield);
+
+        Card goblin = addCardToZone("Raging Goblin", opp, ZoneType.Battlefield);
+        Card goblin2 = addCardToZone("Raging Goblin", opp, ZoneType.Battlefield);
+
+        // Fatal Push: should generate 2 tokens
+        Card fatalPush = addCardToZone("Fatal Push", p, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        SpellAbility fatalPushSA = fatalPush.getFirstSpellAbility();
+        assertNotNull(fatalPushSA);
+        fatalPushSA.setTargetCard(goblin);
+
+        // Electrify: should only generate 1 token (FIXME: Forge currently generates 2 tokens!)
+        // (check http://magicjudge.tumblr.com/post/160491073029/weird-card-interaction-alert-kalitas-anointed )
+        Card electrify = addCardToZone("Electrify", p, ZoneType.Hand);
+        SpellAbility electrifySA = electrify.getFirstSpellAbility();
+        assertNotNull(electrifySA);
+        electrifySA.setTargetCard(goblin2);
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(fatalPushSA).value;
+        assertTrue(score > 0);
+        assertTrue(countCardsWithName(sim.getSimulatedGameState(), "Zombie") == 2);
+
+        score = sim.simulateSpellAbility(electrifySA).value;
+        assertTrue(score > 0);
+        // TODO: this will currently fail because Forge does not implement this interaction correctly,
+        // generating two tokens instead of one after Electrify.
+        // Please fix and then enable the assertion line below to ensure it stays properly implemented.
+        //assertTrue(countCardsWithName(sim.getSimulatedGameState(), "Zombie") == 3);
+    }
 }
