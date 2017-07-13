@@ -7,5 +7,4 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Crea
 SVar:SacMe:1
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dunes_of_the_dead.jpg
-Oracle:{T}: Add {C} to your mana pool.
-When Dunes of the Dead is put into a graveyard from the battlefield, create a 2/2 black Zombie creature token.
+Oracle:{T}: Add {C} to your mana pool.\nWhen Dunes of the Dead is put into a graveyard from the battlefield, create a 2/2 black Zombie creature token.
