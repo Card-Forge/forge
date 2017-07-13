@@ -574,6 +574,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public HashMap<String, Object> getReplacingObjects() {
         return replacingObjects;
     }
+    public boolean hasReplacingObject(final String type) {
+        return replacingObjects.containsKey(type);
+    }
     public Object getReplacingObject(final String type) {
         final Object res = replacingObjects.get(type);
         return res;
