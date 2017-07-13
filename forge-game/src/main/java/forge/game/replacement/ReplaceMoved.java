@@ -118,6 +118,7 @@ public class ReplaceMoved extends ReplacementEffect {
     public void setReplacingObjects(Map<String, Object> runParams, SpellAbility sa) {
         sa.setReplacingObject("Card", runParams.get("Affected"));
         sa.setReplacingObject("CardLKI", runParams.get("CardLKI"));
+        sa.setReplacingObject("Cause", runParams.get("Cause"));
     }
 
 }
