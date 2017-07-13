@@ -431,7 +431,9 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 public Map<String, SealedProduct.Template> readAll() {
                     Map<String, SealedProduct.Template> map = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
                     for(CardEdition ce : Collection.this) {
-                         map.put(ce.getCode(), ce.getBoosterTemplate());
+                        if (ce.hasBoosterTemplate()) {
+                            map.put(ce.getCode(), ce.getBoosterTemplate());
+                        }
                     }
                     return map;
                 }

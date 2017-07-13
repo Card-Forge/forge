@@ -217,8 +217,11 @@ public class QuestUtilUnlockSets {
             cardsWon.addAll(booster.get());
         }
 
-        qData.getCards().addAllCards(cardsWon);
-        GuiBase.getInterface().showCardList(unlockedSet.getName(), "You get the following bonus cards:", cardsWon);
+        if (!cardsWon.isEmpty()) {
+            qData.getCards().addAllCards(cardsWon);
+            GuiBase.getInterface().showCardList(unlockedSet.getName(), "You get the following bonus cards:", cardsWon);
+        }
+
         qData.save();
     }
 }
