@@ -1,4 +1,4 @@
-Name:Control your Nightmares|Deck:UBControl.dck|Variant:None|Avatar:Thoughseize|Desc:
+Name:Control your Nightmares|Deck:UBControl.dck|Variant:None|Avatar:Thoughtseize|Desc:
 Name:Tymaret|Deck:Tymaret.dck|Variant:Commander|Avatar:Tymaret, the Murder King|Desc:
 Name:Death Devotion|Deck:MonoBDev.dck|Variant:None|Avatar:Gray Merchant of Asphodel|Desc:
 Name:King Macar|Deck:KingMacar.dck|Variant:Commander|Avatar:King Macar, the Gold-Cursed|Desc:
