@@ -83,9 +83,16 @@ public class LifeGainAi extends SpellAbilityAi {
             } else {
             	// don't sac possible blockers
             	if (!ph.getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS) || !game.getCombat().getDefenders().contains(ai)) {
-    	            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, false)) {
-    	                return false;
-    	            }
+                    boolean skipCheck = false;
+                    // if it's a sac self cost and the effect source is not a creature, skip this check
+                    // (e.g. Woodweaver's Puzzleknot)
+                    skipCheck |= ComputerUtilCost.isSacrificeSelfCost(abCost) && !source.isCreature();
+
+                    if (!skipCheck) {
+                        if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, false)) {
+                            return false;
+                        }
+                    }
             	}
             }
         }
@@ -153,8 +160,6 @@ public class LifeGainAi extends SpellAbilityAi {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param mandatory
      *            a boolean.
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
      *
      * @return a boolean.
      */
