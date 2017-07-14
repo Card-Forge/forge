@@ -40,7 +40,7 @@ public class LifeGainAi extends SpellAbilityAi {
 
         //Ugin AI: always use ultimate
         if (sourceName.equals("Ugin, the Spirit Dragon")) {
-          //TODO: somehow link with DamageDealAi for cases where +1 = win
+            //TODO: somehow link with DamageDealAi for cases where +1 = win
             return true;
         }
         
