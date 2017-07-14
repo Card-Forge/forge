@@ -36,6 +36,13 @@ public class CopyPermanentAi extends SpellAbilityAi {
             return false;
         }
 
+        if (sa.hasParam("Defined")) {
+            // If there needs to be an imprinted card, don't activate the ability if nothing was imprinted yet (e.g. Mimic Vat)
+            if (sa.getParam("Defined").equals("Imprinted.ExiledWithSource") && sa.getHostCard().getImprintedCards().isEmpty()) {
+                return false;
+            }
+        }
+
         if (sa.usesTargeting() && sa.hasParam("TargetingPlayer")) {
             sa.resetTargets();
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("TargetingPlayer"), sa).get(0);
