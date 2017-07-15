@@ -9,9 +9,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 public class MeldAi extends SpellAbilityAi {
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
-     */
     @Override
     protected boolean checkApiLogic(Player aiPlayer, SpellAbility sa) {
         String primaryMeld = sa.getParam("Primary");
