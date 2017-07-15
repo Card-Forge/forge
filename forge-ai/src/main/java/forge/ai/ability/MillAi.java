@@ -28,9 +28,15 @@ public class MillAi extends SpellAbilityAi {
 
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
+        PhaseHandler ph = ai.getGame().getPhaseHandler();
+
         if (aiLogic.equals("Main1")) {
-            if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
+            if (ph.getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
                     && !ComputerUtil.castSpellInMain1(ai, sa)) {
+                return false;
+            }
+        } else if (aiLogic.equals("EndOfOppTurn")) {
+            if (!(ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai))) {
                 return false;
             }
         } else if (aiLogic.equals("LilianaMill")) {
