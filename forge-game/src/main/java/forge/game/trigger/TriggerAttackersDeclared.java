@@ -71,7 +71,7 @@ public class TriggerAttackersDeclared extends Trigger {
         if (this.mapParams.containsKey("ValidAttackers")) {
             boolean valid = false;
 
-            final Set<Card> srcs = (Set<Card>) runParams2.get("Attackers");
+            final Iterable<Card> srcs = (Iterable<Card>) runParams2.get("Attackers");
             for (Card c : srcs) {
                 if (c.isValid(this.mapParams.get("ValidAttackers").split(","), this.getHostCard().getController(), this.getHostCard(), null)) {
                     valid = true;
