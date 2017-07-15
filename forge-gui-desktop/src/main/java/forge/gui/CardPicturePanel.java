@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package forge.gui;
 
 import java.awt.BorderLayout;
@@ -45,7 +44,10 @@ import forge.toolbox.imaging.FImageUtil;
  *
  */
 public final class CardPicturePanel extends JPanel implements ImageFetcher.Callback {
-    /** Constant <code>serialVersionUID=-3160874016387273383L</code>. */
+
+    /**
+     * Constant <code>serialVersionUID=-3160874016387273383L</code>.
+     */
     private static final long serialVersionUID = -3160874016387273383L;
 
     private Object displayed;
@@ -68,6 +70,7 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
     public void setCard(final CardStateView c) {
         setCard(c, true);
     }
+
     public void setCard(final CardStateView c, final boolean mayView) {
         setImage(c, mayView);
     }
@@ -76,26 +79,26 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
         this.displayed = display;
         this.mayView = mayView;
 
-		final BufferedImage image = getImage();
-		if (image != null && image != this.currentImage) {
-			if (displayed instanceof PaperCard && ((PaperCard)displayed).isFoil()) {
-				ColorModel cm = image.getColorModel();
-				boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
-				WritableRaster raster = image.copyData(null);
-				final BufferedImage displayedimage = new BufferedImage(cm, raster, isAlphaPremultiplied, null)
-						.getSubimage(0, 0, image.getWidth(), image.getHeight());
-				this.currentImage = displayedimage;
-				this.panel.setImage(displayedimage, getAutoSizeImageMode());
-				if (FModel.getPreferences().getPrefBoolean(FPref.UI_OVERLAY_FOIL_EFFECT)) {
+        final BufferedImage image = getImage();
+        if (image != null && image != this.currentImage) {
+            if (displayed instanceof PaperCard && ((PaperCard) displayed).isFoil()) {
+                ColorModel cm = image.getColorModel();
+                boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+                WritableRaster raster = image.copyData(null);
+                final BufferedImage displayedimage = new BufferedImage(cm, raster, isAlphaPremultiplied, null)
+                        .getSubimage(0, 0, image.getWidth(), image.getHeight());
+                this.currentImage = displayedimage;
+                this.panel.setImage(displayedimage, getAutoSizeImageMode());
+                if (FModel.getPreferences().getPrefBoolean(FPref.UI_OVERLAY_FOIL_EFFECT)) {
                     CardFaceSymbols.drawOther(image.getGraphics(), String.format("foil%02d", 1), 0, 0,
                             displayedimage.getWidth(), displayedimage.getHeight());
-				}
-			} else {
-				this.currentImage = image;
-				this.panel.setImage(image, getAutoSizeImageMode());
-			}
-		}
-	}
+                }
+            } else {
+                this.currentImage = image;
+                this.panel.setImage(image, getAutoSizeImageMode());
+            }
+        }
+    }
 
     private BufferedImage getImage() {
         if (!mayView) {
@@ -111,7 +114,7 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
             if (image == null) {
                 ImageFetcher.fetchImage(card.getCard(), card.getImageKey(), this);
             }
-            return FImageUtil.getImage((CardStateView)displayed);
+            return FImageUtil.getImage((CardStateView) displayed);
         }
         return null;
     }
