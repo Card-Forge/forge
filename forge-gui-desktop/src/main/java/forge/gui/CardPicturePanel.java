@@ -20,6 +20,8 @@ package forge.gui;
 
 import java.awt.BorderLayout;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.WritableRaster;
 
 import javax.swing.JPanel;
 
@@ -28,8 +30,10 @@ import forge.ImageFetcher;
 import forge.ImageKeys;
 import forge.game.card.CardView.CardStateView;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
+import forge.toolbox.CardFaceSymbols;
 import forge.toolbox.imaging.FImagePanel;
 import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.toolbox.imaging.FImageUtil;
@@ -72,12 +76,26 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
         this.displayed = display;
         this.mayView = mayView;
 
-        final BufferedImage image = getImage();
-        if (image != null && image != this.currentImage) {
-            this.currentImage = image;
-            this.panel.setImage(image, getAutoSizeImageMode());
-        }
-    }
+		final BufferedImage image = getImage();
+		if (image != null && image != this.currentImage) {
+			if (displayed instanceof PaperCard && ((PaperCard)displayed).isFoil()) {
+				ColorModel cm = image.getColorModel();
+				boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+				WritableRaster raster = image.copyData(null);
+				final BufferedImage displayedimage = new BufferedImage(cm, raster, isAlphaPremultiplied, null)
+						.getSubimage(0, 0, image.getWidth(), image.getHeight());
+				this.currentImage = displayedimage;
+				this.panel.setImage(displayedimage, getAutoSizeImageMode());
+				if (FModel.getPreferences().getPrefBoolean(FPref.UI_OVERLAY_FOIL_EFFECT)) {
+                    CardFaceSymbols.drawOther(image.getGraphics(), String.format("foil%02d", 1), 0, 0,
+                            displayedimage.getWidth(), displayedimage.getHeight());
+				}
+			} else {
+				this.currentImage = image;
+				this.panel.setImage(image, getAutoSizeImageMode());
+			}
+		}
+	}
 
     private BufferedImage getImage() {
         if (!mayView) {
