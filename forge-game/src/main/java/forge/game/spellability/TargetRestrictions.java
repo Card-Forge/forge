@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
@@ -413,9 +414,15 @@ public class TargetRestrictions {
      */
     public final boolean canTgtCreature() {
         for (final String s : this.validTgts) {
-            if ((s.contains("Creature") || CardType.isACreatureType(s) || s.startsWith("Permanent"))
+            if ((s.contains("Creature") || s.startsWith("Permanent"))
                     && !s.contains("nonCreature")) {
                 return true;
+            }
+            String[] tgtParams = TextUtil.split(s, '.');
+            for (String param : tgtParams) {
+                if (CardType.isACreatureType(param)) {
+                    return true;
+                }
             }
         }
         return false;
