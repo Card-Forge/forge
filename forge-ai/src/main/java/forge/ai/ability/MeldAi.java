@@ -18,6 +18,9 @@ public class MeldAi extends SpellAbilityAi {
         String secondaryMeld = sa.getParam("Secondary");
         
         CardCollectionView cardsOTB = aiPlayer.getCardsIn(ZoneType.Battlefield);
+        if (cardsOTB.isEmpty()) {
+            return false;
+        }
         
         boolean hasPrimaryMeld = !CardLists.filter(cardsOTB, CardPredicates.nameEquals(primaryMeld)).isEmpty();
         boolean hasSecondaryMeld = !CardLists.filter(cardsOTB, CardPredicates.nameEquals(secondaryMeld)).isEmpty();
