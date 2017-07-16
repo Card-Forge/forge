@@ -1852,17 +1852,16 @@ public class CardFactoryUtil {
      *            a  String arry.
      * @return a List<String>.
      */
-    public static List<String> sharedKeywords(final String[] kw, final String[] restrictions,
-            final List<ZoneType> zones, final Card host) {
+    public static List<String> sharedKeywords(final Iterable<String> kw, final String[] restrictions,
+            final Iterable<ZoneType> zones, final Card host) {
         final List<String> filteredkw = Lists.newArrayList();
         final Player p = host.getController();
-        CardCollection cardlist = new CardCollection(p.getGame().getCardsIn(zones));
+        CardCollectionView cardlist = p.getGame().getCardsIn(zones);
         final List<String> landkw = Lists.newArrayList();
         final List<String> protectionkw = Lists.newArrayList();
         final List<String> allkw = Lists.newArrayList();
-        
-        cardlist = CardLists.getValidCards(cardlist, restrictions, p, host, null);
-        for (Card c : cardlist) {
+
+        for (Card c : CardLists.getValidCards(cardlist, restrictions, p, host, null)) {
             for (String k : c.getKeywords()) {
                 if (k.endsWith("walk")) {
                     if (!landkw.contains(k)) {

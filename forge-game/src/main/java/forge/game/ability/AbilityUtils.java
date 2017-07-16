@@ -340,6 +340,10 @@ public class AbilityUtils {
      * @return a int.
      */
     public static int calculateAmount(final Card card, String amount, final CardTraitBase ability) {
+        return calculateAmount(card, amount, ability, false);
+    }
+
+    public static int calculateAmount(final Card card, String amount, final CardTraitBase ability, boolean maxto) {
         // return empty strings and constants
         if (StringUtils.isBlank(amount)) { return 0; }
         final Player player = card.getController();
@@ -352,7 +356,13 @@ public class AbilityUtils {
         int multiplier = startsWithMinus ? -1 : 1;
 
         // return result soon for plain numbers
-        if (StringUtils.isNumeric(amount)) { return Integer.parseInt(amount) * multiplier; }
+        if (StringUtils.isNumeric(amount)) {
+            int val = Integer.parseInt(amount);
+            if (maxto) {
+                val = Integer.max(val, 0);
+            }
+            return val * multiplier;
+        }
 
         // Try to fetch variable, try ability first, then card.
         String svarval = null;
@@ -387,7 +397,11 @@ public class AbilityUtils {
 
         // Handle numeric constant coming in svar value
         if (StringUtils.isNumeric(svarval)) {
-            return multiplier * Integer.parseInt(svarval);
+            int val = Integer.parseInt(svarval);
+            if (maxto) {
+                val = Integer.max(val, 0);
+            }
+            return val * multiplier;
         }
 
         // Parse Object$Property string
@@ -401,38 +415,33 @@ public class AbilityUtils {
         // modify amount string for text changes
         calcX[1] = AbilityUtils.applyAbilityTextChangeEffects(calcX[1], ability);
 
+        Integer val = null;
         if (calcX[0].startsWith("Count")) {
-            return AbilityUtils.xCount(card, calcX[1], ability) * multiplier;
-        }
-
-        if (calcX[0].startsWith("Number")) {
-            return CardFactoryUtil.xCount(card, svarval) * multiplier;
-        }
-
-        if (calcX[0].startsWith("SVar")) {
+            val = AbilityUtils.xCount(card, calcX[1], ability);
+        } else if (calcX[0].startsWith("Number")) {
+            val = CardFactoryUtil.xCount(card, svarval);
+        } else if (calcX[0].startsWith("SVar")) {
             final String[] l = calcX[1].split("/");
             final String m = CardFactoryUtil.extractOperators(calcX[1]);
-            return CardFactoryUtil.doXMath(AbilityUtils.calculateAmount(card, l[0], ability), m, card) * multiplier;
-        }
-
-        if (calcX[0].startsWith("PlayerCount")) {
+            val = CardFactoryUtil.doXMath(AbilityUtils.calculateAmount(card, l[0], ability), m, card);
+        } else if (calcX[0].startsWith("PlayerCount")) {
             final String hType = calcX[0].substring(11);
             final FCollection<Player> players = new FCollection<Player>();
             if (hType.equals("Players") || hType.equals("")) {
                 players.addAll(game.getPlayers());
-                return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+                val = CardFactoryUtil.playerXCount(players, calcX[1], card);
             }
             else if (hType.equals("Opponents")) {
                 players.addAll(player.getOpponents());
-                return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+                val = CardFactoryUtil.playerXCount(players, calcX[1], card);
             }
             else if (hType.equals("RegisteredOpponents")) {
                 players.addAll(Iterables.filter(game.getRegisteredPlayers(),PlayerPredicates.isOpponentOf(player)));
-                return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+                val = CardFactoryUtil.playerXCount(players, calcX[1], card);
             }
             else if (hType.equals("Other")) {
                 players.addAll(player.getAllOtherPlayers());
-                return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+                val = CardFactoryUtil.playerXCount(players, calcX[1], card);
             }
             else if (hType.equals("Remembered")) {
                 for (final Object o : card.getRemembered()) {
@@ -440,12 +449,12 @@ public class AbilityUtils {
                         players.add((Player) o);
                     }
                 }
-                return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+                val = CardFactoryUtil.playerXCount(players, calcX[1], card);
             }
             else if (hType.equals("NonActive")) {
                 players.addAll(game.getPlayers());
                 players.remove(game.getPhaseHandler().getPlayerTurn());
-                return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+                val = CardFactoryUtil.playerXCount(players, calcX[1], card);
             }
             else if (hType.startsWith("Property") && ability instanceof SpellAbility) {
                 String defined = hType.split("Property")[1];
@@ -454,9 +463,16 @@ public class AbilityUtils {
                         players.add(p);
                     }
                 }
-                return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+                val = CardFactoryUtil.playerXCount(players, calcX[1], card);
             }
-            return 0;
+            val = 0;
+        }
+
+        if (val != null) {
+            if (maxto) {
+                val = Integer.max(val, 0);
+            }
+            return val * multiplier;
         }
 
         if (calcX[0].startsWith("Remembered")) {

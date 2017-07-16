@@ -145,7 +145,9 @@ public class PumpEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
         List<GameEntity> tgts = Lists.newArrayList();
         tgts.addAll(getTargetCards(sa));
-        tgts.addAll(getTargetPlayers(sa));
+        if ((sa.usesTargeting() && sa.getTargetRestrictions().canTgtPlayer()) || sa.hasParam("Defined")) {
+            tgts.addAll(getTargetPlayers(sa));
+        }
 
         if (tgts.size() > 0) {
 
@@ -167,11 +169,11 @@ public class PumpEffect extends SpellAbilityEffect {
             if (sa.hasParam("KW")) {
                 keywords.addAll(Arrays.asList(sa.getParam("KW").split(" & ")));
             }
-            final int atk = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumAtt"), sa);
-            final int def = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumDef"), sa);
+            final int atk = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumAtt"), sa, true);
+            final int def = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumDef"), sa, true);
 
             sb.append("gains ");
-            if ((atk != 0) || (def != 0)) {
+            if (sa.hasParam("NumAtt") || sa.hasParam("NumDef")) {
                 if (atk >= 0) {
                     sb.append("+");
                 }
@@ -213,13 +215,13 @@ public class PumpEffect extends SpellAbilityEffect {
         if (sa.hasParam("KW")) {
             keywords.addAll(Arrays.asList(sa.getParam("KW").split(" & ")));
         }
-        final int a = AbilityUtils.calculateAmount(host, sa.getParam("NumAtt"), sa);
-        final int d = AbilityUtils.calculateAmount(host, sa.getParam("NumDef"), sa);
+        final int a = AbilityUtils.calculateAmount(host, sa.getParam("NumAtt"), sa, true);
+        final int d = AbilityUtils.calculateAmount(host, sa.getParam("NumDef"), sa, true);
 
         if (sa.hasParam("SharedKeywordsZone")) {
             List<ZoneType> zones = ZoneType.listValueOf(sa.getParam("SharedKeywordsZone"));
             String[] restrictions = sa.hasParam("SharedRestrictions") ? sa.getParam("SharedRestrictions").split(",") : new String[]{"Card"};
-            keywords = CardFactoryUtil.sharedKeywords(sa.getParam("KW").split(" & "), restrictions, zones, sa.getHostCard());
+            keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, sa.getHostCard());
         }
 
         List<GameEntity> tgts = Lists.newArrayList();
