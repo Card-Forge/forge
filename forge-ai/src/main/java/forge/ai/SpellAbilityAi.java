@@ -8,10 +8,13 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.card.ICardFace;
+import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostParser;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.cost.Cost;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -19,6 +22,7 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityCondition;
 import forge.util.MyRandom;
 
 /**
@@ -53,8 +57,11 @@ public abstract class SpellAbilityAi {
         final Card source = sa.getHostCard();
         final Cost cost = sa.getPayCosts();
 
-        if (sa.getConditions() != null && !sa.getConditions().areMet(sa)) {
-            return false;
+        if (!checkConditions(ai, sa, sa.getConditions())) {
+            SpellAbility sub = sa.getSubAbility();
+            if (sub != null && !checkConditions(ai, sub, sub.getConditions())) {
+                return false;
+            }
         }
 
         if (sa.hasParam("AILogic")) {
@@ -74,6 +81,22 @@ public abstract class SpellAbilityAi {
             return false;
         }
         return checkApiLogic(ai, sa);
+    }
+
+    protected boolean checkConditions(final Player ai, final SpellAbility sa, SpellAbilityCondition con) {
+        // copy it to disable some checks that the AI need to check extra
+        con = (SpellAbilityCondition) con.copy();
+
+        // if manaspent, check if AI can pay the colored mana as cost
+        if (!con.getManaSpent().isEmpty()) {
+            // need to use ManaCostBeingPaid check, can't use Cost#canPay
+            ManaCostBeingPaid paid = new ManaCostBeingPaid(new ManaCost(new ManaCostParser(con.getManaSpent())));
+            if (ComputerUtilMana.canPayManaCost(paid, sa, ai)) {
+                con.setManaSpent("");
+            }
+        }
+
+        return con.areMet(sa);
     }
 
     /**
