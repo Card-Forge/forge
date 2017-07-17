@@ -6,8 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigPump:DB$Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | References$ X
 K:Eternalize:4 G G
 # HOU Release Notes: if power less than 0 as the ability resolves, then X=0
-# TODO: monitor in case this becomes a general rule (if it does, extrapolate to other similar cards)
-SVar:X:Count$CardPower/LimitMin.0
+SVar:X:Count$CardPower
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Token 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/resilient_khenra.jpg
