@@ -1,18 +1,26 @@
 package forge.ai.ability;
 
+import com.google.common.collect.Maps;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
+import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by friarsol on 1/23/15.
@@ -93,6 +101,24 @@ public class ManifestAi extends SpellAbilityAi {
             return false;
         }
 
+        // check to ensure that there are no replacement effects that prevent creatures ETBing from library
+        // (e.g. Grafdigger's Cage)
+        Card topCopy = CardUtil.getLKICopy(library.getFirst());
+        topCopy.setState(CardStateName.FaceDown, true);
+        topCopy.setManifested(true);
+
+        final Map<String, Object> repParams = Maps.newHashMap();
+        repParams.put("Event", "Moved");
+        repParams.put("Affected", topCopy);
+        repParams.put("Origin", ZoneType.Library);
+        repParams.put("Destination", ZoneType.Battlefield);
+        repParams.put("Source", sa.getHostCard());
+        List<ReplacementEffect> list = game.getReplacementHandler().getReplacementList(repParams, ReplacementLayer.None);
+        if (!list.isEmpty()) {
+            return false;
+        }
+
+        // if the AI can see the top card of the library, check it
         final Card topCard = library.getFirst();
         if (topCard.mayPlayerLook(ai)) {
             // try to avoid manifest a non Permanent
