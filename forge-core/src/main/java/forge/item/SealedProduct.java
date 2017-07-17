@@ -140,6 +140,18 @@ public abstract class SealedProduct implements InventoryItemFromSet {
             return slots;
         }
 
+        public boolean hasSlot(String s)
+        {
+            for (Pair<String, Integer> slot : getSlots()) {
+                String slotName = slot.getLeft();
+                // Anything after a space or ! or : is not part of the slot's main type
+                if (slotName.split("[ :!]")[0].equals(s)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
         public final String getEdition() {
             return name;
         }
