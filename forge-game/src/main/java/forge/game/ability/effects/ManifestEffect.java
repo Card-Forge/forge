@@ -34,7 +34,7 @@ public class ManifestEffect extends SpellAbilityEffect {
                 }
 
                 for(Card c : tgtCards) {
-                    Card rem = c.manifest(p);
+                    Card rem = c.manifest(p, sa);
                     if (sa.hasParam("RememberManifested") && rem != null) {
                         source.addRemembered(rem);
                     }

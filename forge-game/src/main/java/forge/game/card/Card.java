@@ -508,7 +508,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         return false;
     }
 
-    public Card manifest(Player p) {
+    public Card manifest(Player p, SpellAbility sa) {
         // Turn Face Down (even if it's DFC).
         CardState originalCard = this.getState(CardStateName.Original);
         ManaCost cost = originalCard.getManaCost();
@@ -528,7 +528,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.setPreFaceDownState(CardStateName.Original);
         this.setManifested(true);
 
-        Card c = game.getAction().moveToPlay(this, p, null);
+        Card c = game.getAction().moveToPlay(this, p, sa);
 
         // Add manifest demorph static ability for creatures
         if (isCreature && !cost.isNoCost()) {

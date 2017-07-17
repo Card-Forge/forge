@@ -275,6 +275,12 @@ public class GameAction {
                 if (zoneChangedEarly) {
                     c.setZone(originalZone); // TODO: part of a workaround for bounced suspend-cast cards 
                 }
+
+                // reset failed manifested Cards back to original
+                if (c.isManifested()) {
+                    c.turnFaceUp(false, false);
+                }
+
                 if (game.getStack().isResolving(c) && !zoneTo.is(ZoneType.Graveyard) && repres == ReplacementResult.Prevented) {
                 	copied.getOwner().removeInboundToken(copied);
                 	return moveToGraveyard(c, cause);
