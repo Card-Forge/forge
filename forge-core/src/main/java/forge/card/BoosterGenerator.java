@@ -138,8 +138,7 @@ public class BoosterGenerator {
         boolean replaceCommon = edition != null && !template.getSlots().isEmpty()
                 && MyRandom.getRandom().nextDouble() < edition.getChanceReplaceCommonWith();
 
-        // Default, if no matching slot type is found : equal chance for each
-        // slot
+        // Default, if no matching slot type is found : equal chance for each slot
         // should not have effect unless new sets that do not match existing
         // rarities are added
         String foilSlot = Aggregates.random(template.getSlots()).getLeft().split("[ :!]")[0];
