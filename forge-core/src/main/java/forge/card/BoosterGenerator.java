@@ -204,7 +204,11 @@ public class BoosterGenerator {
 
             boolean foilInThisSlot = hasFoil && (slotType.equals(foilSlot));
 
-            if (foilInThisSlot) {
+            if (foilInThisSlot && !foilAtEndOfPack) {
+                numCards--;
+            }
+
+            if (foilAtEndOfPack && hasFoil && slotType.startsWith(BoosterSlots.COMMON)) {
                 numCards--;
             }
 
