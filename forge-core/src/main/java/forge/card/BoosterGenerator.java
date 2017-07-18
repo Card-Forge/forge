@@ -204,7 +204,7 @@ public class BoosterGenerator {
 
             boolean foilInThisSlot = hasFoil && (slotType.equals(foilSlot));
 
-            if ((foilInThisSlot && !foilAtEndOfPack)
+            if ((!foilAtEndOfPack && foilInThisSlot)
                     || (foilAtEndOfPack && hasFoil && slotType.startsWith(BoosterSlots.COMMON))) {
                 numCards--;
             }
@@ -224,62 +224,62 @@ public class BoosterGenerator {
             result.addAll(ps.random(numCards, true));
             sheetsUsed.add(ps);
 
-            if (foilInThisSlot && !foilAtEndOfPack) {
-                hasFoil = false;
-                if (!extraFoilSheetKey.isEmpty()) {
-                    // TODO: extra foil sheets are currently reliably supported
-                    // only for boosters with FoilAlwaysInCommonSlot=True.
-                    // If FoilAlwaysInCommonSlot is false, a card from the extra
-                    // sheet may still replace a card in any slot.
-                    List<PaperCard> foilCards = new ArrayList<>();
-                    for (PaperCard card : ps.toFlatList()) {
-                        if (!foilCards.contains(card)) {
-                            foilCards.add(card);
-                        }
-                    }
-                    addCardsFromExtraSheet(foilCards, sheetKey);
-                    result.add(generateFoilCard(foilCards));
-                } else {
-                    result.add(generateFoilCard(ps));
-                }
-            }
-            if (foilInThisSlot && foilAtEndOfPack) {
-                if (!extraFoilSheetKey.isEmpty()) {
-                    // TODO: extra foil sheets are currently reliably supported
-                    // only for boosters with FoilAlwaysInCommonSlot=True.
-                    // If FoilAlwaysInCommonSlot is false, a card from the extra
-                    // sheet may still replace a card in any slot.
-                    List<PaperCard> foilCards = new ArrayList<>();
-                    for (PaperCard card : ps.toFlatList()) {
-                        if (!foilCards.contains(card)) {
-                            foilCards.add(card);
-                        }
-                    }
-                    addCardsFromExtraSheet(foilCards, sheetKey);
-                    FoilCardGeneratedAndHeld.add(generateFoilCard(foilCards));
-                } else {
-                    if (edition != null) {
-                        if (edition.getName().equals("Vintage Masters")) {
-                            // Vintage Masters foil slot
-                            // If "Special" was picked here, either foil or
-                            // nonfoil P9 needs to be generated
-                            // 1 out of ~30 normal and mythic rares are foil,
-                            // match that.
-                            // If not special card, make it always foil.
-                            if ((rand.nextInt(30) == 1) || (foilSlot != BoosterSlots.SPECIAL)) {
-                                FoilCardGeneratedAndHeld.add(generateFoilCard(ps));
-                            } else {
-                                // Otherwise it's not foil (even though this is the
-                                // foil slot!)
-                                result.addAll(ps.random(1, true));
+            if (foilInThisSlot) {
+                if (!foilAtEndOfPack) {
+                    hasFoil = false;
+                    if (!extraFoilSheetKey.isEmpty()) {
+                        // TODO: extra foil sheets are currently reliably supported
+                        // only for boosters with FoilAlwaysInCommonSlot=True.
+                        // If FoilAlwaysInCommonSlot is false, a card from the extra
+                        // sheet may still replace a card in any slot.
+                        List<PaperCard> foilCards = new ArrayList<>();
+                        for (PaperCard card : ps.toFlatList()) {
+                            if (!foilCards.contains(card)) {
+                                foilCards.add(card);
                             }
-                        } else {
-                            FoilCardGeneratedAndHeld.add(generateFoilCard(ps));
+                        }
+                        addCardsFromExtraSheet(foilCards, sheetKey);
+                        result.add(generateFoilCard(foilCards));
+                    } else {
+                        result.add(generateFoilCard(ps));
+                    }
+                } else {
+                    if (!extraFoilSheetKey.isEmpty()) {
+                        // TODO: extra foil sheets are currently reliably supported
+                        // only for boosters with FoilAlwaysInCommonSlot=True.
+                        // If FoilAlwaysInCommonSlot is false, a card from the extra
+                        // sheet may still replace a card in any slot.
+                        List<PaperCard> foilCards = new ArrayList<>();
+                        for (PaperCard card : ps.toFlatList()) {
+                            if (!foilCards.contains(card)) {
+                                foilCards.add(card);
+                            }
+                        }
+                        addCardsFromExtraSheet(foilCards, sheetKey);
+                        FoilCardGeneratedAndHeld.add(generateFoilCard(foilCards));
+                    } else {
+                        if (edition != null) {
+                            if (edition.getName().equals("Vintage Masters")) {
+                                // Vintage Masters foil slot
+                                // If "Special" was picked here, either foil or
+                                // nonfoil P9 needs to be generated
+                                // 1 out of ~30 normal and mythic rares are foil,
+                                // match that.
+                                // If not special card, make it always foil.
+                                if ((rand.nextInt(30) == 1) || (foilSlot != BoosterSlots.SPECIAL)) {
+                                    FoilCardGeneratedAndHeld.add(generateFoilCard(ps));
+                                } else {
+                                    // Otherwise it's not foil (even though this is the
+                                    // foil slot!)
+                                    result.addAll(ps.random(1, true));
+                                }
+                            } else {
+                                FoilCardGeneratedAndHeld.add(generateFoilCard(ps));
+                            }
                         }
                     }
                 }
             }
-
         }
 
         if (hasFoil && foilAtEndOfPack) {
