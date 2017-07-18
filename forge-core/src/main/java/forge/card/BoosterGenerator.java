@@ -243,7 +243,7 @@ public class BoosterGenerator {
                     } else {
                         result.add(generateFoilCard(ps));
                     }
-                } else {
+                } else { // foilAtEndOfPack
                     if (!extraFoilSheetKey.isEmpty()) {
                         // TODO: extra foil sheets are currently reliably supported
                         // only for boosters with FoilAlwaysInCommonSlot=True.
