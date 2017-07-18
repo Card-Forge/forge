@@ -288,12 +288,6 @@ public class GameAction {
                 copied.getOwner().removeInboundToken(copied);
                 return c;
             }
-
-            if (c.isUnearthed() && (zoneTo.is(ZoneType.Graveyard) || zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library))) {
-                zoneTo = c.getOwner().getZone(ZoneType.Exile);
-                lastKnownInfo = CardUtil.getLKICopy(c);
-                c.setUnearthed(false);
-            }
         }
 
         copied.getOwner().removeInboundToken(copied);
