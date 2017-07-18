@@ -204,7 +204,7 @@ public class BoosterGenerator {
 
             boolean foilInThisSlot = hasFoil && (slotType.equals(foilSlot));
 
-            if ((foilInThisSlot) && !(foilAtEndOfPack)) {
+            if (foilInThisSlot) {
                 numCards--;
             }
 
