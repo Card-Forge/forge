@@ -300,15 +300,7 @@ public class CardView extends GameEntityView {
         for (final Object o : c.getRemembered()) {
             if (o instanceof Card) {
                 final Card card = (Card) o;
-                if (card.isFaceDown()) {
-                    sb.append("Face Down");
-                    // face-down cards don't show unique number to avoid cheating
-                } else {
-                    sb.append(card.getName());
-                    sb.append(" (");
-                    sb.append(card.getId());
-                    sb.append(")");
-                }
+                sb.append(card.getView().toString());
             } else if (o != null) {
                 sb.append(o.toString());
             }
