@@ -145,47 +145,45 @@ public class BoosterGenerator {
 
         if (hasFoil) {
             switch (foilCard) {
-            case Rare:
-                // Take whichever rare slot the pack has.
-                // Not the "MYTHIC" slot, no pack has that AFAIK
-                // and chance was for rare/mythic.
-                if (template.hasSlot(BoosterSlots.RARE_MYTHIC)) {
-                    foilSlot = BoosterSlots.RARE_MYTHIC;
-                } else if (template.hasSlot(BoosterSlots.RARE)) {
-                    foilSlot = BoosterSlots.RARE;
-                } else if (template.hasSlot(BoosterSlots.UNCOMMON_RARE)) {
-                    foilSlot = BoosterSlots.UNCOMMON_RARE;
-                }
-                break;
-            case Uncommon:
-                if (template.hasSlot(BoosterSlots.UNCOMMON)) {
-                    foilSlot = BoosterSlots.UNCOMMON;
-                } else if (template.hasSlot(BoosterSlots.UNCOMMON_RARE)) {
-                    foilSlot = BoosterSlots.UNCOMMON_RARE;
-                }
-                break;
-            case Common:
-                foilSlot = BoosterSlots.COMMON;
-                if (template.hasSlot(BoosterSlots.BASIC_LAND)) {
-                    // According to information I found, Basic Lands
-                    // are on the common foil sheet, each type appearing once.
-                    // Large Sets usually have 110 commons and 20 lands.
-                    if (rand.nextInt(130) <= 20) {
-                        foilSlot = BoosterSlots.BASIC_LAND;
+                case Rare:
+                    // Take whichever rare slot the pack has.
+                    // Not the "MYTHIC" slot, no pack has that AFAIK
+                    // and chance was for rare/mythic.
+                    if (template.hasSlot(BoosterSlots.RARE_MYTHIC)) {
+                        foilSlot = BoosterSlots.RARE_MYTHIC;
+                    } else if (template.hasSlot(BoosterSlots.RARE)) {
+                        foilSlot = BoosterSlots.RARE;
+                    } else if (template.hasSlot(BoosterSlots.UNCOMMON_RARE)) {
+                        foilSlot = BoosterSlots.UNCOMMON_RARE;
                     }
-                }
-                break;
-            case Special:
-                if (template.hasSlot(BoosterSlots.TIME_SHIFTED)) {
-                    foilSlot = BoosterSlots.TIME_SHIFTED;
-                }
-                if (template.hasSlot(BoosterSlots.DUAL_FACED_CARD)) {
-                    foilSlot = BoosterSlots.DUAL_FACED_CARD;
-                }
-                if (template.hasSlot(BoosterSlots.SPECIAL)) {
-                    foilSlot = BoosterSlots.SPECIAL;
-                }
-                break;
+                    break;
+                case Uncommon:
+                    if (template.hasSlot(BoosterSlots.UNCOMMON)) {
+                        foilSlot = BoosterSlots.UNCOMMON;
+                    } else if (template.hasSlot(BoosterSlots.UNCOMMON_RARE)) {
+                        foilSlot = BoosterSlots.UNCOMMON_RARE;
+                    }
+                    break;
+                case Common:
+                    foilSlot = BoosterSlots.COMMON;
+                    if (template.hasSlot(BoosterSlots.BASIC_LAND)) {
+                        // According to information I found, Basic Lands
+                        // are on the common foil sheet, each type appearing once.
+                        // Large Sets usually have 110 commons and 20 lands.
+                        if (rand.nextInt(130) <= 20) {
+                            foilSlot = BoosterSlots.BASIC_LAND;
+                        }
+                    }
+                    break;
+                case Special:
+                    if (template.hasSlot(BoosterSlots.TIME_SHIFTED)) {
+                        foilSlot = BoosterSlots.TIME_SHIFTED;
+                    } else if (template.hasSlot(BoosterSlots.DUAL_FACED_CARD)) {
+                        foilSlot = BoosterSlots.DUAL_FACED_CARD;
+                    } else if (template.hasSlot(BoosterSlots.SPECIAL)) {
+                        foilSlot = BoosterSlots.SPECIAL;
+                    }
+                    break;
             }
         }
 
