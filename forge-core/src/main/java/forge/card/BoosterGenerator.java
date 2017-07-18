@@ -189,7 +189,7 @@ public class BoosterGenerator {
             }
         }
 
-        List<PaperCard> FoilCardGeneratedAndHeld = new ArrayList<>();
+        List<PaperCard> foilCardGeneratedAndHeld = new ArrayList<>();
 
         for (Pair<String, Integer> slot : template.getSlots()) {
             String slotType = slot.getLeft(); // add expansion symbol here?
@@ -256,7 +256,7 @@ public class BoosterGenerator {
                             }
                         }
                         addCardsFromExtraSheet(foilCards, sheetKey);
-                        FoilCardGeneratedAndHeld.add(generateFoilCard(foilCards));
+                        foilCardGeneratedAndHeld.add(generateFoilCard(foilCards));
                     } else {
                         if (edition != null) {
                             if (edition.getName().equals("Vintage Masters")) {
@@ -267,14 +267,14 @@ public class BoosterGenerator {
                                 // match that.
                                 // If not special card, make it always foil.
                                 if ((rand.nextInt(30) == 1) || (foilSlot != BoosterSlots.SPECIAL)) {
-                                    FoilCardGeneratedAndHeld.add(generateFoilCard(ps));
+                                    foilCardGeneratedAndHeld.add(generateFoilCard(ps));
                                 } else {
                                     // Otherwise it's not foil (even though this is the
                                     // foil slot!)
                                     result.addAll(ps.random(1, true));
                                 }
                             } else {
-                                FoilCardGeneratedAndHeld.add(generateFoilCard(ps));
+                                foilCardGeneratedAndHeld.add(generateFoilCard(ps));
                             }
                         }
                     }
@@ -283,7 +283,7 @@ public class BoosterGenerator {
         }
 
         if (hasFoil && foilAtEndOfPack) {
-            result.addAll(FoilCardGeneratedAndHeld);
+            result.addAll(foilCardGeneratedAndHeld);
         }
 
         return result;
