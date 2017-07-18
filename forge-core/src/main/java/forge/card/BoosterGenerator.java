@@ -76,8 +76,8 @@ public class BoosterGenerator {
         // 2-3 Uncommons
         // 4-6 Commons or Basic Lands
         // 7 Time Shifted
-        // 8 DFC
-        // 9 VMA Special
+        // 8 VMA Special
+        // 9 DFC
         // if result not valid for pack, reroll
         // Other special types of foil slots, add here
         CardRarity foilCard = CardRarity.Unknown;
@@ -110,8 +110,9 @@ public class BoosterGenerator {
                 case 8:
                     if (edition != null) {
                         if (edition.getName().equals("Vintage Masters")) {
-                            // 1 in 53 packs
-                            if (rand.nextInt(53) == 1) {
+                            // 1 in 53 packs, with 7 possibilities for the slot itself in VMA
+                            // (1 RareMythic, 2 Uncommon, 3 Common, 1 Special)
+                            if (rand.nextInt(53) <= 7) {
                                 foilCard = CardRarity.Special;
                             }
                         }
