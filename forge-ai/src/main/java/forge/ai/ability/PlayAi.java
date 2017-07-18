@@ -122,7 +122,7 @@ public class PlayAi extends SpellAbilityAi {
 
                         spell = (Spell) spell.copyWithDefinedCost(abCost);
                     }
-                    if( AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlayFromEffectAI(spell, false, true)) {
+                    if( AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlayFromEffectAI(spell, !isOptional, true)) {
                         return true;
                     }
                 }
