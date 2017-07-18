@@ -298,12 +298,7 @@ public class CardView extends GameEntityView {
         StringBuilder sb = new StringBuilder();
         sb.append("\r\nRemembered: \r\n");
         for (final Object o : c.getRemembered()) {
-            if (o instanceof Card) {
-                final Card card = (Card) o;
-                sb.append(card.getView().toString());
-            } else if (o != null) {
-                sb.append(o.toString());
-            }
+            sb.append(o.toString());
             sb.append("\r\n");
         }
         set(TrackableProperty.Remembered, sb.toString());
