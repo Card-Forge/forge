@@ -19160,7 +19160,6 @@ forge-gui/res/cube/The[!!-~]Peasant's[!!-~]Toolbox.dck -text
 forge-gui/res/cube/Timothee[!!-~]Simonot's[!!-~]Twisted[!!-~]Color[!!-~]Pie[!!-~]Cube.dck -text
 forge-gui/res/cube/www.mtgcube.com[!!-~](502[!!-~]cards).dck -text
 forge-gui/res/deckgendecks/Modern.dat -text
-forge-gui/res/deckgendecks/Standard.dat -text
 forge-gui/res/defaults/editor.xml svneol=native#text/xml
 forge-gui/res/defaults/gauntlet/LOCKED_DotP[!!-~]Preconstructed.dat -text
 forge-gui/res/defaults/gauntlet/LOCKED_Swimming[!!-~]With[!!-~]Sharks.dat -text
