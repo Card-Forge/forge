@@ -1285,10 +1285,9 @@ public class GameSimulatorTest extends SimulationTestCase {
         addCardToZone("Kalitas, Traitor of Ghet", p, ZoneType.Battlefield);
         addCardToZone("Anointed Procession", p, ZoneType.Battlefield);
         addCardToZone("Swamp", p, ZoneType.Battlefield);
-        addCardToZone("Mountain", p, ZoneType.Battlefield);
-        addCardToZone("Mountain", p, ZoneType.Battlefield);
-        addCardToZone("Mountain", p, ZoneType.Battlefield);
-        addCardToZone("Mountain", p, ZoneType.Battlefield);
+        for (int i = 0; i < 4; i++) {
+            addCardToZone("Mountain", p, ZoneType.Battlefield);
+        }
 
         Card goblin = addCardToZone("Raging Goblin", opp, ZoneType.Battlefield);
         Card goblin2 = addCardToZone("Raging Goblin", opp, ZoneType.Battlefield);
@@ -1314,5 +1313,22 @@ public class GameSimulatorTest extends SimulationTestCase {
         score = sim.simulateSpellAbility(electrifySA).value;
         assertTrue(score > 0);
         assertTrue(countCardsWithName(sim.getSimulatedGameState(), "Zombie") == 3);
+    }
+
+    public void testPlayerXCondition() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        Player opp = game.getPlayers().get(1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        Card bloodghast = addCardToZone("Bloodghast", p, ZoneType.Battlefield);
+        game.getAction().checkStateEffects(true);
+
+        assert(!bloodghast.hasKeyword("Haste"));
+
+        opp.setLife(5, null);
+        game.getAction().checkStateEffects(true);
+
+        assert(bloodghast.hasKeyword("Haste"));
     }
 }
