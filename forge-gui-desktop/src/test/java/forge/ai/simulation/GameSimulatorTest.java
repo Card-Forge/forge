@@ -1254,13 +1254,13 @@ public class GameSimulatorTest extends SimulationTestCase {
         Player opp = game.getPlayers().get(1);
 
         addCardToZone("Kalitas, Traitor of Ghet", p, ZoneType.Battlefield);
-        addCardToZone("Plains", p, ZoneType.Battlefield);
-        addCardToZone("Plains", p, ZoneType.Battlefield);
-        addCardToZone("Plains", p, ZoneType.Battlefield);
-        addCardToZone("Plains", p, ZoneType.Battlefield);
+        for (int i = 0; i < 4; i++) {
+            addCardToZone("Plains", p, ZoneType.Battlefield);
+        }
 
-        addCardToZone("Aboroth", opp, ZoneType.Battlefield);
-        addCardToZone("Aboroth", opp, ZoneType.Battlefield);
+        for (int i = 0; i < 2; i++) {
+            addCardToZone("Aboroth", opp, ZoneType.Battlefield);
+        }
 
         Card wrathOfGod = addCardToZone("Wrath of God", p, ZoneType.Hand);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
