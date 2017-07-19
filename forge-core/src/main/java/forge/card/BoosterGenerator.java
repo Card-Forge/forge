@@ -237,7 +237,7 @@ public class BoosterGenerator {
                                 foilCards.add(card);
                             }
                         }
-                        addCardsFromExtraSheet(foilCards, sheetKey);
+                        addCardsFromExtraSheet(foilCards, extraFoilSheetKey);
                         result.add(generateFoilCard(foilCards));
                     } else {
                         result.add(generateFoilCard(ps));
@@ -254,7 +254,7 @@ public class BoosterGenerator {
                                 foilCards.add(card);
                             }
                         }
-                        addCardsFromExtraSheet(foilCards, sheetKey);
+                        addCardsFromExtraSheet(foilCards, extraFoilSheetKey);
                         foilCardGeneratedAndHeld.add(generateFoilCard(foilCards));
                     } else {
                         if (edition != null) {
