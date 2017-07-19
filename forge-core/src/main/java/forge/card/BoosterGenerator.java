@@ -21,6 +21,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import forge.StaticData;
 import forge.card.CardEdition.FoilType;
 import forge.item.IPaperCard;
@@ -290,8 +291,17 @@ public class BoosterGenerator {
 
     public static void addCardsFromExtraSheet(List<PaperCard> dest, String printSheetKey) {
         PrintSheet extraSheet = getPrintSheet(printSheetKey);
+
+        // try to determine the allowed rarity of the cards in dest
+        Set<CardRarity> allowedRarity = Sets.newHashSet();
+        if (!dest.isEmpty()) {
+            for (PaperCard inDest : dest) {
+                allowedRarity.add(inDest.getRarity());
+            }
+        }
+
         for (PaperCard card : extraSheet.toFlatList()) {
-            if (!dest.contains(card)) {
+            if (!dest.contains(card) && allowedRarity.contains(card.getRarity())) {
                 dest.add(card);
             }
         }
