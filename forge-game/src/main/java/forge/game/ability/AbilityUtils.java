@@ -465,7 +465,9 @@ public class AbilityUtils {
                 }
                 val = CardFactoryUtil.playerXCount(players, calcX[1], card);
             }
-            val = 0;
+            else {
+                val = 0;
+            }
         }
 
         if (val != null) {
