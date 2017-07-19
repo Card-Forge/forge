@@ -64,6 +64,9 @@ public class BoosterGenerator {
     }
 
     public static List<PaperCard> getBoosterPack(SealedProduct.Template template) {
+        // TODO: tweak the chances of generating Masterpieces to be more authentic
+        // (currently merely added to the Rare/Mythic Rare print sheet via ExtraFoilSheetKey)
+
         List<PaperCard> result = new ArrayList<>();
         List<PrintSheet> sheetsUsed = new ArrayList<>();
 
