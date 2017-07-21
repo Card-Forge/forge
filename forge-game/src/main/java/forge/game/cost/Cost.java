@@ -65,11 +65,9 @@ public class Cost {
     }
 
     public final boolean hasSpecificCostType(Class<? extends CostPart> costType) {
-        if (!getCostParts().isEmpty()) {
-            for (CostPart p : getCostParts()) {
-                if (costType.isInstance(p)) {
-                    return true;
-                }
+        for (CostPart p : getCostParts()) {
+            if (costType.isInstance(p)) {
+                return true;
             }
         }
         return false;
