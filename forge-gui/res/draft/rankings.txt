@@ -488,6 +488,7 @@
 #1|Lord of Extinction|M|MPS_AKH
 #1|The Scarab God|M|MPS_AKH
 #1|The Scorpion God|M|MPS_AKH
+#100|Dummy Card|M|MPS_AKH
 //Rank|Name|Rarity|Set
 #1|Bonfire of the Damned|M|MM3
 #2|Mizzium Mortars|R|MM3
