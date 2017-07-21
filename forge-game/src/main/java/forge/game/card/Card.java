@@ -37,6 +37,8 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostSacrifice;
 import forge.game.event.*;
 import forge.game.event.GameEventCardAttachment.AttachMethod;
 import forge.game.event.GameEventCardDamaged.DamageType;
@@ -6836,7 +6838,12 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         if (isCreature() && source.getActivatingPlayer().hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
-            return false;
+            Cost srcCost = source.getPayCosts();
+            if (srcCost != null) {
+                if (srcCost.hasSpecificCostType(CostSacrifice.class)) {
+                    return false;
+                }
+            }
         }
 
         if (getController().isOpponentOf(source.getActivatingPlayer())

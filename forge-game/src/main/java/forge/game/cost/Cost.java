@@ -64,6 +64,17 @@ public class Cost {
         return !this.hasNoManaCost();
     }
 
+    public final boolean hasSpecificCostType(Class<? extends CostPart> costType) {
+        if (!getCostParts().isEmpty()) {
+            for (CostPart p : getCostParts()) {
+                if (costType.isInstance(p)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     /**
      * Gets the cost parts.
      * 
