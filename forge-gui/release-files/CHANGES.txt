@@ -1,14 +1,2 @@
-- New Quest World: Urza's Block -
-This release features a new quest mode world based on one of the most powerful blocks of the first decade of Magic: the Gathering, the Urza's block. The new world was designed by Seravy and it features 30 duels and 20 challenges for you to attempt.
-
-- Planar Conquest (Mobile Forge only) -
-There is a new plane available in Planar Conquest mode in mobile Forge - Amonkhet, submitted by Sirspud. The plane contains cards from AKH, HOU, as well as Amonkhet Invocations.
-
-- Puzzle Mode -
-Puzzle Mode is now available in mobile Forge.
-
-- Foil Chance in Boosters -
-This release features an overhaul of the chance of generating foils of various rarities in booster packs, making foils of higher rarity more rare compared to those of lower rarity instead of offering an equal chance of finding a foil card of each rarity. Also, Masterpieces are now more rare (although most of them are still more commonly found than in real life and this needs further tweaking). For the first time in Forge, in Vintage Masters you'll be able to find not only foil Power Nine cards, but also non-foil ones (the game now correctly differentiates between the two), but both are very rare.
-
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.
