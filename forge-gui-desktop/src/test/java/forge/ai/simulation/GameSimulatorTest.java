@@ -1315,7 +1315,9 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertTrue(countCardsWithName(sim.getSimulatedGameState(), "Zombie") == 3);
     }
 
-    public void testPlayerXCondition() {
+    public void testPlayerXCount() {
+        // If playerXCount is operational, then conditions that count something about the player (e.g.
+        // cards in hand, life total) should work, similar to the Bloodghast "Haste" condition.
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(0);
         Player opp = game.getPlayers().get(1);
@@ -1330,5 +1332,33 @@ public class GameSimulatorTest extends SimulationTestCase {
         game.getAction().checkStateEffects(true);
 
         assert(bloodghast.hasKeyword("Haste"));
+    }
+
+    public void testDeathsShadowOnNegativeLife() {
+        // Death's Shadow should be 13/13 when its controller has negative life
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        Player opp = game.getPlayers().get(1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        addCardToZone("Platinum Angel", p, ZoneType.Battlefield);
+        Card deathsShadow = addCardToZone("Death's Shadow", p, ZoneType.Battlefield);
+
+        addCardToZone("Mountain", opp, ZoneType.Battlefield);
+        Card bolt = addCardToZone("Lightning Bolt", opp, ZoneType.Hand);
+
+        p.setLife(1, null);
+
+        SpellAbility boltSA = bolt.getFirstSpellAbility();
+        boltSA.getTargets().add(p);
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(boltSA).value;
+        assertTrue(score > 0);
+
+        game.getAction().checkStateEffects(true);
+
+        assert(deathsShadow.getNetPower() == 13);
+
     }
 }
