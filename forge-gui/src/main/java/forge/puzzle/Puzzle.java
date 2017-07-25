@@ -20,6 +20,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable {
     String goal;
     String url;
     String difficulty;
+    String description;
     int turns;
 
     public Puzzle(Map<String, List<String>> puzzleLines) {
@@ -41,6 +42,8 @@ public class Puzzle extends GameState implements InventoryItem, Comparable {
                 this.turns = Integer.parseInt(split[1]);
             } else if ("Difficulty".equalsIgnoreCase(split[0])) {
                 this.difficulty = split[1];
+            } else if ("Description".equalsIgnoreCase(split[0])) {
+                this.description = split[1];
             }
         }
     }
@@ -60,6 +63,11 @@ public class Puzzle extends GameState implements InventoryItem, Comparable {
         desc.append(goal);
         desc.append("\nTurns Limit: ");
         desc.append(this.turns);
+
+        if (this.description != null) {
+            desc.append("\n\n");
+            desc.append(this.description);
+        }
 
         return desc.toString();
     }

@@ -17,7 +17,7 @@ public class PuzzleIO {
 
     public static ArrayList<Puzzle> loadPuzzles() {
         String[] pList;
-        // get list of custom draft files
+        // get list of puzzles
         final File pFolder = new File(ForgeConstants.PUZZLE_DIR);
         if (!pFolder.exists()) {
             throw new RuntimeException("Puzzles : folder not found -- folder is " + pFolder.getAbsolutePath());
