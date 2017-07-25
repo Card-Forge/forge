@@ -1345,10 +1345,10 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         p.setLife(1, null);
         game.getAction().checkStateEffects(true);
-        assert(deathsShadow.getNetPower() == 12); // positive life value
+        assert(deathsShadow.getNetPower() == 12);
 
         p.setLife(-1, null);
         game.getAction().checkStateEffects(true);
-        assert(deathsShadow.getNetPower() == 13); // negative life value
+        assert(deathsShadow.getNetPower() == 13); // on negative life, should always be 13/13
     }
 }
