@@ -2,8 +2,8 @@ Name:Death's Shadow
 ManaCost:B
 Types:Creature Avatar
 PT:13/13
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets -X/-X, where X is your life total.
-SVar:X:Count$YourLifeTotal/Negative
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ -X | AddToughness$ -X | Description$ CARDNAME gets -X/-X, where X is your life total.
+SVar:X:Count$YourLifeTotal
 SVar:NeedsToPlayVar:Y LE12
 SVar:Y:Count$YourLifeTotal
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deaths_shadow.jpg
