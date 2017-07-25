@@ -165,7 +165,7 @@ public final class StaticAbilityContinuous {
 
         if (layer == StaticAbilityLayer.MODIFYPT && params.containsKey("AddPower")) {
             addP = params.get("AddPower");
-            powerBonus = AbilityUtils.calculateAmount(hostCard, addP, stAb);
+            powerBonus = AbilityUtils.calculateAmount(hostCard, addP, stAb, true);
             if (!StringUtils.isNumeric(addP) && !addP.equals("AffectedX")) {
                 se.setXValue(powerBonus);
             }
@@ -173,7 +173,7 @@ public final class StaticAbilityContinuous {
 
         if (layer == StaticAbilityLayer.MODIFYPT && params.containsKey("AddToughness")) {
             addT = params.get("AddToughness");
-            toughnessBonus = AbilityUtils.calculateAmount(hostCard, addT, stAb);
+            toughnessBonus = AbilityUtils.calculateAmount(hostCard, addT, stAb, true);
             if (!StringUtils.isNumeric(addT) && !addT.equals("AffectedX")) {
                 se.setYValue(toughnessBonus);
             }
