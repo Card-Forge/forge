@@ -359,7 +359,7 @@ public class AbilityUtils {
         if (StringUtils.isNumeric(amount)) {
             int val = Integer.parseInt(amount);
             if (maxto) {
-                val = Integer.max(val, 0);
+                val = Math.max(val, 0);
             }
             return val * multiplier;
         }
@@ -399,7 +399,7 @@ public class AbilityUtils {
         if (StringUtils.isNumeric(svarval)) {
             int val = Integer.parseInt(svarval);
             if (maxto) {
-                val = Integer.max(val, 0);
+                val = Math.max(val, 0);
             }
             return val * multiplier;
         }
@@ -472,7 +472,7 @@ public class AbilityUtils {
 
         if (val != null) {
             if (maxto) {
-                val = Integer.max(val, 0);
+                val = Math.max(val, 0);
             }
             return val * multiplier;
         }
