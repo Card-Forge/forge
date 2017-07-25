@@ -19405,6 +19405,10 @@ forge-gui/res/music/menus/Evil[!!-~]March.mp3 -text
 forge-gui/res/music/menus/Heroic[!!-~]Age.mp3 -text
 forge-gui/res/music/menus/Lord[!!-~]of[!!-~]the[!!-~]Land.mp3 -text
 forge-gui/res/music/menus/The[!!-~]Pyre.mp3 -text
+forge-gui/res/puzzle/PC_01.pzl -text
+forge-gui/res/puzzle/PC_02.pzl -text
+forge-gui/res/puzzle/PC_03.pzl -text
+forge-gui/res/puzzle/PC_06.pzl -text
 forge-gui/res/puzzle/PC_13.pzl -text
 forge-gui/res/puzzle/PC_18.pzl -text
 forge-gui/res/puzzle/PC_19.pzl -text

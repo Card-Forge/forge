@@ -1,0 +1,17 @@
+[metadata]
+Name:Perplexing Chimera #03 - Plans Within Plans
+URL:http://www.gatheringmagic.com/seanuy-041415-perplexing-chimera-3-plans-within-plans/
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=9
+AILife=6
+humanhand=Reduce in Stature; Cloudform; Flamewake Phoenix; Taigam's Scheming
+humanlibrary=Mountain|Set:DTK; Vial of Dragonfire; Hidden Dragonslayer; Mirror Mockery; Rite of Undoing
+humanbattlefield=Island|Set:DTK; Island|Set:DTK; Island|Set:DTK; Island|Set:DTK; Island|Set:DTK; Island|Set:DTK; Island|Set:DTK; Island|Set:DTK; Island|Set:DTK; Wind-Scarred Crag; Monastery Flock; Zephyr Scribe; Watcher of the Roost|FaceDown; Ugin's Construct; Suspension Field
+humancommand=t:Suspension Field's Effect,P:0,T:0,Cost:no cost,Types:Effect,Keywords:,Image:null
+AIexile=Mistfire Adept
+aibattlefield=Island|Set:DTK|Tapped; Island|Set:DTK; Swamp|Set:DTK|Tapped; Swamp|Set:DTK|Tapped; Swamp|Set:DTK; Forest|Set:DTK|Tapped; Forest|Set:DTK; Thornwood Falls; Opulent Palace; Elusive Spellfist|Tapped; Jeskai Windscout; Monastery Loremaster; Bellowing Saddlebrute; Sagu Archer; Goblin Boom Keg

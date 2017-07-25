@@ -1,0 +1,16 @@
+[metadata]
+Name:Perplexing Chimera #02 - Death in Segments
+URL:http://www.gatheringmagic.com/seanuy-040715-perplexing-chimera-2-death-in-segments/
+Goal:Win
+Turns:2
+Difficulty:Hard
+[state]
+ActivePlayer=AI
+ActivePhase=Main2
+HumanLife=6
+AILife=13
+humanhand=Mountain|Set:DTK; Collateral Damage; Twin Bolt; Gravepurge
+humangraveyard=Gurmag Angler; Atarka Efreet
+humanlibrary=Mountain|Set:DTK
+humanbattlefield=Swamp|Set:DTK; Swamp|Set:DTK; Swamp|Set:DTK; Swamp|Set:DTK; Mountain|Set:DTK; Mountain|Set:DTK; Mountain|Set:DTK; Shambling Goblin; Kolaghan Stormsinger|Counters:P1P1=1; Qarsi High Priest; Qal Sisma Behemoth|Id:420; Deadly Wanderings
+aibattlefield=Pacifism|Set:DTK|Attaching:420; Forest|Set:DTK|Tapped; Forest|Set:DTK|Tapped; Forest|Set:DTK|Tapped; Forest|Set:DTK|Tapped; Plains|Set:DTK|Tapped; Plains|Set:DTK|Tapped; Blossoming Sands|Tapped; Glade Watcher; Champion of Arashin; Segmented Krotiq|Counters:P1P1=1; Segmented Krotiq|Counters:P1P1=1|Tapped
