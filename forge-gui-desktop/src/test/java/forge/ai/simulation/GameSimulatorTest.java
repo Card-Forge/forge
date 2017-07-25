@@ -1334,8 +1334,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assert(bloodghast.hasKeyword("Haste"));
     }
 
-    public void testDeathsShadowOnNegativeLife() {
-        // Death's Shadow should be 13/13 when its controller has negative life
+    public void testDeathsShadow() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(0);
         Player opp = game.getPlayers().get(1);
@@ -1344,21 +1343,12 @@ public class GameSimulatorTest extends SimulationTestCase {
         addCardToZone("Platinum Angel", p, ZoneType.Battlefield);
         Card deathsShadow = addCardToZone("Death's Shadow", p, ZoneType.Battlefield);
 
-        addCardToZone("Mountain", opp, ZoneType.Battlefield);
-        Card bolt = addCardToZone("Lightning Bolt", opp, ZoneType.Hand);
-
         p.setLife(1, null);
-
-        SpellAbility boltSA = bolt.getFirstSpellAbility();
-        boltSA.getTargets().add(p);
-
-        GameSimulator sim = createSimulator(game, p);
-        int score = sim.simulateSpellAbility(boltSA).value;
-        assertTrue(score > 0);
-
         game.getAction().checkStateEffects(true);
+        assert(deathsShadow.getNetPower() == 12); // positive life value
 
-        assert(deathsShadow.getNetPower() == 13);
-
+        p.setLife(-1, null);
+        game.getAction().checkStateEffects(true);
+        assert(deathsShadow.getNetPower() == 13); // negative life value
     }
 }
