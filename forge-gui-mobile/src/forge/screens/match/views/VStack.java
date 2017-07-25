@@ -314,7 +314,7 @@ public class VStack extends FDropDown {
                                             gui.setShouldAlwaysDeclineTrigger(triggerID);
                                             if (stackInstance.equals(gameView.peekStack())) {
                                                 //auto-no if ability is on top of stack
-                                                controller.selectButtonOk();
+                                                controller.selectButtonCancel();
                                             }
                                         }
                                     }
