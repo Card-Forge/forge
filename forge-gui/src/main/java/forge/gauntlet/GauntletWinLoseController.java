@@ -30,7 +30,7 @@ public abstract class GauntletWinLoseController {
         final List<String> lstEventNames = gd.getEventNames();
         final List<Deck> lstDecks = gd.getDecks();
         final List<String> lstEventRecords = gd.getEventRecords();
-        final int len = lstDecks.size();
+        final int len = lstEventNames.size();
         final int num = gd.getCompleted();
         FSkinProp icon = null;
         String message1 = null;
