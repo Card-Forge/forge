@@ -264,6 +264,13 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
 
+        if (this.mapParams.containsKey("TurnCount")) {
+            int turn = Integer.parseInt(this.mapParams.get("TurnCount"));
+            if (phaseHandler.getTurn() != turn) {
+                return false;
+            }
+        }
+
         return true;
     }
     /**

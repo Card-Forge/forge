@@ -80,6 +80,12 @@ public class Puzzle extends GameState implements InventoryItem, Comparable {
         return FModel.getMagicDb().getCommonCards().getCard(cardName);
     }
 
+    public void setupMaxPlayerHandSize(Game game, int maxHandSize) {
+        for(Player p : game.getPlayers()) {
+            p.setMaxHandSize(maxHandSize);
+        }
+    }
+
     public void addGoalEnforcement(Game game) {
         Player human = null;
         for(Player p : game.getPlayers()) {
@@ -96,21 +102,21 @@ public class Puzzle extends GameState implements InventoryItem, Comparable {
         goalCard.addType("Effect");
         goalCard.setOracleText(getGoalDescription());
 
-        {
-            final String loseTrig = "Mode$ Phase | Phase$ Cleanup | TriggerZones$ Command | Static$ True | " +
-                    "ValidPlayer$ You | TriggerDescription$ At the beginning of your cleanup step, you lose the game.";
-            final String loseEff = "DB$ LosesGame | Defined$ You";
+        final String loseTrig = "Mode$ Phase | Phase$ Cleanup | TriggerZones$ Command | Static$ True | " +
+                "TurnCount$ " + turns + " | TriggerDescription$ At the beginning of your cleanup step, you lose the game.";
+        final String loseEff = "DB$ LosesGame | Defined$ You";
 
-            final Trigger loseTrigger = TriggerHandler.parseTrigger(loseTrig, goalCard, true);
+        final Trigger loseTrigger = TriggerHandler.parseTrigger(loseTrig, goalCard, true);
 
-            loseTrigger.setOverridingAbility(AbilityFactory.getAbility(loseEff, goalCard));
-            goalCard.addTrigger(loseTrigger);
-        }
+        loseTrigger.setOverridingAbility(AbilityFactory.getAbility(loseEff, goalCard));
+        goalCard.addTrigger(loseTrigger);
+
         human.getZone(ZoneType.Command).add(goalCard);
     }
 
     @Override
     protected void applyGameOnThread(final Game game) {
+        setupMaxPlayerHandSize(game, 7);
         super.applyGameOnThread(game);
         addGoalEnforcement(game);
     }
