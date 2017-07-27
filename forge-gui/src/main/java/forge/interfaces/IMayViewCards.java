@@ -30,6 +30,10 @@ public interface IMayViewCards {
 
         @Override
         public boolean mayFlip(final CardView c) {
+            if (c.isSplitCard()) {
+                return false;
+            }
+
             return c.hasAlternateState();
         }
     };
