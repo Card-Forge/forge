@@ -30,7 +30,8 @@ public class PuzzleScreen extends LaunchScreen {
     private final FTextArea lblDesc = add(new FTextArea(false,
             "Puzzle Mode loads in a puzzle that you have to win in a predetermined time/way.\n\n" +
             "To begin, press the Start button below, then select a puzzle from a list.\n\n" +
-            "Your objective will be specified on a special effect card which will be placed in your command zone."));
+            "Your objective will be displayed in a pop-up window when the puzzle starts and also " +
+            "specified on a special effect card which will be placed in your command zone."));
 
     public PuzzleScreen() {
         super(null, NewGameMenu.getMenu());
