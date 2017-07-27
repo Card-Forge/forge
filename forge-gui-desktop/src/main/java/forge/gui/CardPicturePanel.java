@@ -78,7 +78,6 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
     private void setImage(final Object display, final boolean mayView) {
         this.displayed = display;
         this.mayView = mayView;
-
         final BufferedImage image = getImage();
         if (image != null && image != this.currentImage) {
             if (displayed instanceof PaperCard) {
@@ -89,9 +88,12 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
                         .getSubimage(0, 0, image.getWidth(), image.getHeight());
                 this.currentImage = displayedimage;
                 this.panel.setImage(displayedimage, getAutoSizeImageMode());
+                PaperCard card = (PaperCard) displayed;
                 if (FModel.getPreferences().getPrefBoolean(FPref.UI_OVERLAY_FOIL_EFFECT)) {
-                    CardFaceSymbols.drawOther(image.getGraphics(), String.format("foil%02d", 1), 0, 0,
-                            displayedimage.getWidth(), displayedimage.getHeight());
+                    if (card.isFoil()) {
+                        CardFaceSymbols.drawOther(displayedimage.getGraphics(), String.format("foil%02d", 1), 0, 0,
+                                displayedimage.getWidth(), displayedimage.getHeight());
+                    }
                 }
             } else {
                 this.currentImage = image;
