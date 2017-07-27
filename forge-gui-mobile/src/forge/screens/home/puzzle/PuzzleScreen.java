@@ -14,6 +14,7 @@ import forge.screens.LaunchScreen;
 import forge.screens.LoadingOverlay;
 import forge.screens.home.NewGameMenu;
 import forge.toolbox.FLabel;
+import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextArea;
 import forge.toolbox.GuiChoose;
 import forge.util.Callback;
@@ -79,6 +80,7 @@ public class PuzzleScreen extends LaunchScreen {
                         GameRules rules = new GameRules(GameType.Puzzle);
                         rules.setGamesPerMatch(1);
                         hostedMatch.startMatch(rules, null, players, human, GuiBase.getInterface().getNewGuiGame());
+                        FOptionPane.showMessageDialog(chosen.getGoalDescription(), chosen.getName());
                     }
                 });
             }

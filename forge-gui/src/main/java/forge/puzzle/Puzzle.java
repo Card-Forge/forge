@@ -48,7 +48,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable {
         }
     }
 
-    private String getGoalDescription() {
+    public String getGoalDescription() {
         StringBuilder desc = new StringBuilder();
 
         String name = this.name == null ? "Unnamed Puzzle" : this.name;
@@ -66,7 +66,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable {
 
         if (this.description != null) {
             desc.append("\n\n");
-            desc.append(this.description);
+            desc.append(this.description.replace("\\n", "\n"));
         }
 
         return desc.toString();
