@@ -332,7 +332,7 @@ public class BoosterGenerator {
                 src = StaticData.instance().getPrintSheets().get(sheetName).toFlatList();
                 setPred = Predicates.alwaysTrue();
 
-            } else if (mainCode.startsWith("promo")) { // get exactly the named cards, that's a tiny inlined print sheet
+            } else if (mainCode.startsWith("promo") || mainCode.startsWith("name")) { // get exactly the named cards, that's a tiny inlined print sheet
 
                 String list = StringUtils.strip(mainCode.substring(5), "() ");
                 String[] cardNames = TextUtil.splitWithParenthesis(list, ',', '"', '"');
