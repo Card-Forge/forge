@@ -3563,27 +3563,25 @@ public class CardFactoryUtil {
         final boolean intrinsic = kws == null;
         if (keyword.startsWith("Alternative Cost") && !card.isLand()) {
             final String[] kw = keyword.split(":");
-            String costStr = kw[1];   
-            final SpellAbility sa = card.getFirstSpellAbility();
-            if (sa == null) {
-                return;
-            }
-            final SpellAbility newSA = sa.copy();
-            newSA.setBasicSpell(false);
-            if (costStr.equals("ConvertedManaCost")) {
-                costStr = Integer.toString(card.getCMC());
-            }
-            final Cost cost = new Cost(costStr, false).add(sa.getPayCosts().copyWithNoMana());
-            newSA.getMapParams().put("Secondary", "True");
-            newSA.setPayCosts(cost);
-            newSA.setDescription(sa.getDescription() + " (by paying " + cost.toSimpleString() + " instead of its mana cost)");
-            newSA.setIntrinsic(intrinsic);
+            String costStr = kw[1];
+            for (SpellAbility sa: card.getBasicSpells()) {
+                final SpellAbility newSA = sa.copy();
+                newSA.setBasicSpell(false);
+                if (costStr.equals("ConvertedManaCost")) {
+                    costStr = Integer.toString(card.getCMC());
+                }
+                final Cost cost = new Cost(costStr, false).add(sa.getPayCosts().copyWithNoMana());
+                newSA.getMapParams().put("Secondary", "True");
+                newSA.setPayCosts(cost);
+                newSA.setDescription(sa.getDescription() + " (by paying " + cost.toSimpleString() + " instead of its mana cost)");
+                newSA.setIntrinsic(intrinsic);
 
-            if (!intrinsic) {
-                newSA.setTemporary(true);
-                kws.addSpellAbility(newSA);
+                if (!intrinsic) {
+                    newSA.setTemporary(true);
+                    kws.addSpellAbility(newSA);
+                }
+                card.addSpellAbility(newSA);
             }
-            card.addSpellAbility(newSA);
         } else if (keyword.equals("Aftermath")) {
             // Aftermath does modify existing SA, and does not add new one
 
