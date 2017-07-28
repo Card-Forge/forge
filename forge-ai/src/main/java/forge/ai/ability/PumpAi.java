@@ -465,17 +465,17 @@ public class PumpAi extends PumpAiBase {
         // Detain and similar effects: don't target noncreature permanents that don't have
         // any activated abilities.
         if ("HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated.".equals(sa.getParam("KW"))) {
-                list = CardLists.filter(list, Predicates.or(CardPredicates.Presets.CREATURES, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(Card card) {
-                        for (SpellAbility sa: card.getSpellAbilities()) {
-                            if (sa.isAbility()) {
-                                return true;
-                            }
+            list = CardLists.filter(list, Predicates.or(CardPredicates.Presets.CREATURES, new Predicate<Card>() {
+                @Override
+                public boolean apply(Card card) {
+                    for (SpellAbility sa: card.getSpellAbilities()) {
+                        if (sa.isAbility()) {
+                            return true;
                         }
-                        return false;
                     }
-                }));
+                    return false;
+                }
+            }));
         }
 
         if (list.isEmpty()) {
