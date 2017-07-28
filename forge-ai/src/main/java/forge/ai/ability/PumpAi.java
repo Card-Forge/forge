@@ -462,9 +462,9 @@ public class PumpAi extends PumpAiBase {
             }
         }
 
-        // Detain and similar effects: don't target noncreature permanents that don't have
+        // Detain target nonland permanent: don't target noncreature permanents that don't have
         // any activated abilities.
-        if ("HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated.".equals(sa.getParam("KW"))) {
+        if ("DetainNonLand".equals(sa.getParam("AILogic"))) {
             list = CardLists.filter(list, Predicates.or(CardPredicates.Presets.CREATURES, new Predicate<Card>() {
                 @Override
                 public boolean apply(Card card) {
