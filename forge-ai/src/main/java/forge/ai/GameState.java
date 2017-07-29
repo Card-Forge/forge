@@ -172,6 +172,10 @@ public abstract class GameState {
             if (!c.getEnchantedBy(false).isEmpty() || !c.getEquippedBy(false).isEmpty() || !c.getFortifiedBy(false).isEmpty()) {
                 newText.append("|Id:").append(c.getId());
             }
+
+            if (c.getDamage() > 0) {
+                newText.append("|Damage:").append(c.getDamage());
+            }
         }
         cardTexts.put(zoneType, newText.toString());
     }
@@ -488,6 +492,9 @@ public abstract class GameState {
                 } else if (info.startsWith("Ability:")) {
                     String abString = info.substring(info.indexOf(':') + 1).toLowerCase();
                     c.addSpellAbility(AbilityFactory.getAbility(abilityString.get(abString), c));
+                } else if (info.startsWith("Damage:")) {
+                    int dmg = Integer.parseInt(info.substring(info.indexOf(':') + 1));
+                    c.setDamage(dmg);
                 }
             }
 
