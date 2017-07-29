@@ -212,8 +212,7 @@ public class TriggerHandler {
         }
     }
 
-    public final void resetActiveTriggers() {
-        collectTriggerForWaiting();
+    private void buildActiveTrigger() {
         activeTriggers.clear();
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
@@ -225,6 +224,17 @@ public class TriggerHandler {
                 }
             }
         });
+    }
+
+    public final void resetActiveTriggers() {
+        resetActiveTriggers(true);
+    }
+
+    public final void resetActiveTriggers(boolean collect) {
+        if (collect) {
+            collectTriggerForWaiting();
+        }
+        buildActiveTrigger();        
     }
 
     public final void clearInstrinsicActiveTriggers(final Card c, Zone zoneFrom) {

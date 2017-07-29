@@ -367,7 +367,7 @@ public class GameAction {
         runParams.put("Destination", zoneTo.getZoneType().name());
         runParams.put("SpellAbilityStackInstance", game.stack.peek());
         runParams.put("IndividualCostPaymentInstance", game.costPaymentStack.peek());
-        game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, false);
+        game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, true);
         if (zoneFrom != null && zoneFrom.is(ZoneType.Battlefield)) {
             final Map<String, Object> runParams2 = Maps.newHashMap();
             runParams2.put("Card", lastKnownInfo);

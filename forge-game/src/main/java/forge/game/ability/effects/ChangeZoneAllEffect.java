@@ -215,6 +215,8 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             }
         }
 
+        game.getTriggerHandler().resetActiveTriggers(false);
+
         if (!triggerList.isEmpty()) {
             final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Cards", triggerList);
