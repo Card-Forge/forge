@@ -175,7 +175,7 @@ TreatAsSmallSet=true
 161 R God-Pharaoh's Gift
 162 C Graven Abomination
 163 R Hollow One
-164 U Manalith
+164 C Manalith
 165 R Mirage Mirror
 166 U Sunset Pyramid
 167 C Traveler's Amulet
