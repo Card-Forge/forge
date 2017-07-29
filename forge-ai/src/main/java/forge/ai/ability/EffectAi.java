@@ -179,9 +179,7 @@ public class EffectAi extends SpellAbilityAi {
                     break;
                 }
 
-                if (shouldPlay) {
-                    return true;
-                }
+                return shouldPlay;
             } else if (logic.equals("RedirectSpellDamageFromPlayer")) {
                 if (game.getStack().isEmpty()) {
                     return false;
