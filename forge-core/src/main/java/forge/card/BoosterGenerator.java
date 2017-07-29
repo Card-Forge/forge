@@ -71,7 +71,11 @@ public class BoosterGenerator {
         List<PrintSheet> sheetsUsed = new ArrayList<>();
 
         CardEdition edition = StaticData.instance().getEditions().get(template.getEdition());
-        boolean hasFoil = edition != null && !template.getSlots().isEmpty() && MyRandom.getRandom().nextDouble() < edition.getFoilChanceInBooster() && edition.getFoilType() != FoilType.NOT_SUPPORTED;
+
+        boolean hasFoil = edition != null
+                && !template.getSlots().isEmpty()
+                && MyRandom.getRandom().nextDouble() < edition.getFoilChanceInBooster()
+                && edition.getFoilType() != FoilType.NOT_SUPPORTED;
         boolean foilAtEndOfPack = hasFoil && edition.getFoilAlwaysInCommonSlot();
 
         Random rand = new Random();
@@ -143,12 +147,14 @@ public class BoosterGenerator {
         boolean replaceCommon = edition != null && !template.getSlots().isEmpty()
                 && MyRandom.getRandom().nextDouble() < edition.getChanceReplaceCommonWith();
 
-        // Default, if no matching slot type is found : equal chance for each slot
-        // should not have effect unless new sets that do not match existing
-        // rarities are added
-        String foilSlot = Aggregates.random(template.getSlots()).getLeft().split("[ :!]")[0];
+        String foilSlot = "";
 
         if (hasFoil) {
+            // Default, if no matching slot type is found : equal chance for each slot
+            // should not have effect unless new sets that do not match existing
+            // rarities are added
+            foilSlot = Aggregates.random(template.getSlots()).getLeft().split("[ :!]")[0];
+
             switch (foilCard) {
                 case Rare:
                     // Take whichever rare slot the pack has.
