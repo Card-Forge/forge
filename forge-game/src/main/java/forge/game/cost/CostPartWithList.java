@@ -95,6 +95,11 @@ public abstract class CostPartWithList extends CostPart {
         lkiList.add(CardUtil.getLKICopy(targetCard));
         final Card newCard = doPayment(ability, targetCard);
         cardList.add(newCard);
+
+        // need to update the LKI info to ensure correct interaction with cards which may trigger on this
+        // (e.g. Necroskitter + a creature dying from a -1/-1 counter on a cost payment).
+        targetCard.getGame().updateLastStateForCard(targetCard);
+
         return true;
     }
 
