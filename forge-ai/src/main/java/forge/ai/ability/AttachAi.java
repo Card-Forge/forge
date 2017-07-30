@@ -580,8 +580,8 @@ public class AttachAi extends SpellAbilityAi {
                 continue;
             }
             if ((affected.contains(stCheck) || affected.contains("AttachedBy"))) {
-                totToughness += AttachAi.parseSVar(attachSource, stabMap.get("AddToughness"));
-                totPower += AttachAi.parseSVar(attachSource, stabMap.get("AddPower"));
+                totToughness += AbilityUtils.calculateAmount(attachSource, stabMap.get("AddToughness"), sa);
+                totPower += AbilityUtils.calculateAmount(attachSource, stabMap.get("AddPower"), sa);
 
                 String kws = stabMap.get("AddKeyword");
                 if (kws != null) {
@@ -700,34 +700,6 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         return true;
-    }
-
-    /**
-     * parseSVar TODO - flesh out javadoc for this method.
-     * 
-     * @param hostCard
-     *            the Card with the SVar on it
-     * @param amount
-     *            a String
-     * @return the calculated number
-     */
-    public static int parseSVar(final Card hostCard, final String amount) {
-        int num = 0;
-        if (amount == null) {
-            return num;
-        }
-    
-        try {
-            num = Integer.valueOf(amount);
-        } catch (final NumberFormatException e) {
-            String svarName = amount.startsWith("-") ? amount.substring(1) : amount;
-            num = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(svarName).split("\\$")[1]);
-            if (amount.startsWith("-")) {
-                num *= -1; // -X, e.g. Quag Sickness
-            }
-        }
-    
-        return num;
     }
 
     /**
@@ -878,8 +850,8 @@ public class AttachAi extends SpellAbilityAi {
                 continue;
             }
             if ((affected.contains(stCheck) || affected.contains("AttachedBy"))) {
-                totToughness += AttachAi.parseSVar(attachSource, stabMap.get("AddToughness"));
-                totPower += AttachAi.parseSVar(attachSource, stabMap.get("AddPower"));
+                totToughness += AbilityUtils.calculateAmount(attachSource, stabMap.get("AddToughness"), sa);
+                totPower += AbilityUtils.calculateAmount(attachSource, stabMap.get("AddPower"), sa);
 
                 grantingAbilities |= stabMap.containsKey("AddAbility");
 
