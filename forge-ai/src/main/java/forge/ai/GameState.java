@@ -377,6 +377,10 @@ public abstract class GameState {
     }
 
     private void handleChosenEntities() {
+        // TODO: the AI still gets to choose something (and the notification box pops up) before the
+        // choice is overwritten here. Somehow improve this so that there is at least no notification
+        // about the choice that will be force-changed anyway.
+
         // Chosen colors
         for (Entry<Card, List<String>> entry : cardToChosenClrs.entrySet()) {
             Card c = entry.getKey();
