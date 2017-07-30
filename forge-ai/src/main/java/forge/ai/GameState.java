@@ -510,6 +510,11 @@ public abstract class GameState {
                 c = CardFactory.makeOneToken(CardFactory.TokenInfo.fromString(tokenStr), player);
             } else {
                 PaperCard pc = StaticData.instance().getCommonCards().getCard(cardinfo[0], setCode);
+                if (pc == null) {
+                    System.err.println("ERROR: Tried to create a non-existent card named " + cardinfo[0] + " (set: " + (setCode == null ? "any" : setCode) + ") when loading game state!");
+                    continue;
+                }
+
                 c = Card.fromPaperCard(pc, player);
                 if (setCode != null) {
                     hasSetCurSet = true;
