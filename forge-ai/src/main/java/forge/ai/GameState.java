@@ -347,6 +347,7 @@ public abstract class GameState {
         setupPlayerState(computerLife, aiCardTexts, ai);
 
         handleCardAttachments();
+        handleMarkedDamage();
 
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         game.getTriggerHandler().clearSuppression(TriggerType.DamageDone);
@@ -355,7 +356,9 @@ public abstract class GameState {
         game.getStack().setResolving(false);
 
         game.getAction().checkStateEffects(true); //ensure state based effects and triggers are updated
+    }
 
+    private void handleMarkedDamage() {
         for (Entry<Card, Integer> entry : markedDamage.entrySet()) {
             Card c = entry.getKey();
             Integer dmg = entry.getValue();
