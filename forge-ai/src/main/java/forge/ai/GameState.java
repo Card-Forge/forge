@@ -3,11 +3,7 @@ package forge.ai;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 import com.google.common.collect.Lists;
@@ -30,6 +26,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 
 public abstract class GameState {
@@ -54,6 +51,8 @@ public abstract class GameState {
     private final Map<Integer, Card> idToCard = new HashMap<>();
     private final Map<Card, Integer> cardToAttachId = new HashMap<>();
     private final Map<Card, Integer> markedDamage = new HashMap<>();
+    private final Map<Card, List<String>> cardToChosenClrs = new HashMap<>();
+    private final Map<Card, String> cardToChosenType = new HashMap<>();
 
     private final Map<String, String> abilityString = new HashMap<>();
 
@@ -176,6 +175,13 @@ public abstract class GameState {
 
             if (c.getDamage() > 0) {
                 newText.append("|Damage:").append(c.getDamage());
+            }
+
+            if (!c.getChosenColor().isEmpty()) {
+                newText.append("|ChosenColor:").append(TextUtil.join(c.getChosenColors(), ","));
+            }
+            if (!c.getChosenType().isEmpty()) {
+                newText.append("|ChosenType:").append(c.getChosenType());
             }
         }
         cardTexts.put(zoneType, newText.toString());
@@ -324,6 +330,8 @@ public abstract class GameState {
         idToCard.clear();
         cardToAttachId.clear();
         markedDamage.clear();
+        cardToChosenClrs.clear();
+        cardToChosenType.clear();
 
         Player newPlayerTurn = tChangePlayer.equals("human") ? human : tChangePlayer.equals("ai") ? ai : null;
         PhaseType newPhase = tChangePhase.equals("none") ? null : PhaseType.smartValueOf(tChangePhase);
@@ -347,6 +355,7 @@ public abstract class GameState {
         setupPlayerState(computerLife, aiCardTexts, ai);
 
         handleCardAttachments();
+        handleChosenEntities();
         handleMarkedDamage();
 
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
@@ -367,6 +376,22 @@ public abstract class GameState {
         }
     }
 
+    private void handleChosenEntities() {
+        // Chosen colors
+        for (Entry<Card, List<String>> entry : cardToChosenClrs.entrySet()) {
+            Card c = entry.getKey();
+            List<String> colors = entry.getValue();
+
+            c.setChosenColors(colors);
+        }
+
+        // Chosen type
+        for (Entry<Card, String> entry : cardToChosenType.entrySet()) {
+            Card c = entry.getKey();
+            c.setChosenType(entry.getValue());
+        }
+    }
+
     private void handleCardAttachments() {
         for(Entry<Card, Integer> entry : cardToAttachId.entrySet()) {
             Card attachedTo = idToCard.get(entry.getValue());
@@ -374,6 +399,9 @@ public abstract class GameState {
 
             attachedTo.unEnchantAllCards();
             attachedTo.unEquipAllCards();
+            for (Card c : attachedTo.getFortifiedBy(true)) {
+                attachedTo.unFortifyCard(c);
+            }
 
             if (attacher.isEquipment()) {
                 attacher.equipCard(attachedTo);
@@ -516,6 +544,10 @@ public abstract class GameState {
                 } else if (info.startsWith("Damage:")) {
                     int dmg = Integer.parseInt(info.substring(info.indexOf(':') + 1));
                     markedDamage.put(c, dmg);
+                } else if (info.startsWith("ChosenColor:")) {
+                    cardToChosenClrs.put(c, Arrays.asList(info.substring(info.indexOf(':') + 1).split(",")));
+                } else if (info.startsWith("ChosenType:")) {
+                    cardToChosenType.put(c, info.substring(info.indexOf(':') + 1));
                 }
             }
 
