@@ -720,7 +720,11 @@ public class AttachAi extends SpellAbilityAi {
         try {
             num = Integer.valueOf(amount);
         } catch (final NumberFormatException e) {
-            num = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(amount).split("\\$")[1]);
+            String svarName = amount.startsWith("-") ? amount.substring(1) : amount;
+            num = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(svarName).split("\\$")[1]);
+            if (amount.startsWith("-")) {
+                num *= -1; // -X, e.g. Quag Sickness
+            }
         }
     
         return num;
