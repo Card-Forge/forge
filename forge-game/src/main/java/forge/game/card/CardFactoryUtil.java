@@ -3764,13 +3764,28 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Eternalize")) {
             final String[] kw = keyword.split(":");
             String costStr = kw[1];
+            Cost cost = new Cost(costStr, true);
+            
+            StringBuilder sb = new StringBuilder();
 
-            String effect = "AB$ CopyPermanent | Cost$ " + costStr + " ExileFromGrave<1/CARDNAME> " +
-            "| ActivationZone$ Graveyard | SorcerySpeed$ True | Eternalize$ True " + 
-            "| PrecostDesc$ Eternalize | CostDesc$ " + ManaCostParser.parse(costStr) + " | Defined$ Self " + 
-            "| StackDescription$ Eternalize - CARDNAME "+
-            "| SpellDescription$ (" + Keyword.getInstance(keyword).getReminderText() + ")" ; 
-            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sb.append("AB$ CopyPermanent | Cost$ ").append(costStr).append(" ExileFromGrave<1/CARDNAME>")
+            .append(" | Defined$ Self | ActivationZone$ Graveyard | SorcerySpeed$ True | Eternalize$ True");
+
+            sb.append(" | PrecostDesc$ Eternalize ");
+            if (!cost.isOnlyManaCost()) { //Something other than a mana cost
+                sb.append("- ");
+            }
+            // don't use SimpleString there because it does has "and" between cost i dont want that
+            costStr = cost.toString();
+            // but now it has ": " at the end i want to remove
+            sb.append("| CostDesc$ ").append(costStr.substring(0, costStr.length() - 2));
+            if (!cost.isOnlyManaCost()) {
+                sb.append(".");
+            }
+
+            sb.append(" | StackDescription$ Eternalize - CARDNAME ")
+            .append("| SpellDescription$ (").append(Keyword.getInstance(keyword).getReminderText()).append(")"); 
+            final SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
             sa.setIntrinsic(intrinsic);
 
             if (!intrinsic) {
