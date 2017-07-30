@@ -53,6 +53,7 @@ public abstract class GameState {
 
     private final Map<Integer, Card> idToCard = new HashMap<>();
     private final Map<Card, Integer> cardToAttachId = new HashMap<>();
+    private final Map<Card, Integer> markedDamage = new HashMap<>();
 
     private final Map<String, String> abilityString = new HashMap<>();
 
@@ -322,6 +323,7 @@ public abstract class GameState {
 
         idToCard.clear();
         cardToAttachId.clear();
+        markedDamage.clear();
 
         Player newPlayerTurn = tChangePlayer.equals("human") ? human : tChangePlayer.equals("ai") ? ai : null;
         PhaseType newPhase = tChangePhase.equals("none") ? null : PhaseType.smartValueOf(tChangePhase);
@@ -338,15 +340,46 @@ public abstract class GameState {
         game.getPhaseHandler().devModeSet(newPhase, newPlayerTurn);
 
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+        game.getTriggerHandler().suppressMode(TriggerType.DamageDone);
+        game.getTriggerHandler().suppressMode(TriggerType.Unequip);
 
         setupPlayerState(humanLife, humanCardTexts, human);
         setupPlayerState(computerLife, aiCardTexts, ai);
 
+        handleCardAttachments();
+
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        game.getTriggerHandler().clearSuppression(TriggerType.DamageDone);
+        game.getTriggerHandler().clearSuppression(TriggerType.Unequip);
 
         game.getStack().setResolving(false);
 
         game.getAction().checkStateEffects(true); //ensure state based effects and triggers are updated
+
+        for (Entry<Card, Integer> entry : markedDamage.entrySet()) {
+            Card c = entry.getKey();
+            Integer dmg = entry.getValue();
+
+            c.setDamage(dmg);
+        }
+    }
+
+    private void handleCardAttachments() {
+        for(Entry<Card, Integer> entry : cardToAttachId.entrySet()) {
+            Card attachedTo = idToCard.get(entry.getValue());
+            Card attacher = entry.getKey();
+
+            attachedTo.unEnchantAllCards();
+            attachedTo.unEquipAllCards();
+
+            if (attacher.isEquipment()) {
+                attacher.equipCard(attachedTo);
+            } else if (attacher.isAura()) {
+                attacher.enchantEntity(attachedTo);
+            } else if (attacher.isFortified()) {
+                attacher.fortifyCard(attachedTo);
+            }
+        }
     }
 
     private void applyCountersToGameEntity(GameEntity entity, String counterString) {
@@ -391,6 +424,10 @@ public abstract class GameState {
                     c.setCounters(new HashMap<CounterType, Integer>());
                     p.getZone(ZoneType.Hand).add(c);
                     if (c.isAura()) {
+                        // dummy "enchanting" to indicate that the card will be force-attached elsewhere
+                        // (will be overridden later, so the actual value shouldn't matter)
+                        c.setEnchanting(c);
+
                         p.getGame().getAction().moveToPlay(c, null);
                     } else {
                         p.getGame().getAction().moveToPlay(c, null);
@@ -405,25 +442,6 @@ public abstract class GameState {
             }
         }
 
-        game.getTriggerHandler().suppressMode(TriggerType.Unequip);
-
-        for(Entry<Card, Integer> entry : cardToAttachId.entrySet()) {
-            Card attachedTo = idToCard.get(entry.getValue());
-            Card attacher = entry.getKey();
-
-            attachedTo.unEnchantAllCards();
-            attachedTo.unEquipAllCards();
-
-            if (attacher.isEquipment()) {
-                attacher.equipCard(attachedTo);
-            } else if (attacher.isAura()) {
-                attacher.enchantEntity(attachedTo);
-            } else if (attacher.isFortified()) {
-                attacher.fortifyCard(attachedTo);
-            }
-        }
-
-        game.getTriggerHandler().clearSuppression(TriggerType.Unequip);
     }
 
     /**
@@ -494,7 +512,7 @@ public abstract class GameState {
                     c.addSpellAbility(AbilityFactory.getAbility(abilityString.get(abString), c));
                 } else if (info.startsWith("Damage:")) {
                     int dmg = Integer.parseInt(info.substring(info.indexOf(':') + 1));
-                    c.setDamage(dmg);
+                    markedDamage.put(c, dmg);
                 }
             }
 
