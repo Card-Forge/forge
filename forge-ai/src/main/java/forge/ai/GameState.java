@@ -386,7 +386,7 @@ public abstract class GameState {
 
             if (!c.hasSVar(sPtr)) {
                 System.out.println("ERROR: Unable to find SVar " + sPtr + " on card " + c + " + to execute!");
-                return;
+                continue;
             }
 
             String svarValue = c.getSVar(sPtr);
