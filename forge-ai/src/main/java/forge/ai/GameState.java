@@ -21,6 +21,7 @@ import forge.game.card.CardFactory;
 import forge.game.card.CounterType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -53,6 +54,8 @@ public abstract class GameState {
     private final Map<Card, Integer> markedDamage = new HashMap<>();
     private final Map<Card, List<String>> cardToChosenClrs = new HashMap<>();
     private final Map<Card, String> cardToChosenType = new HashMap<>();
+
+    private final Map<Card, String> cardToScript = new HashMap<>();
 
     private final Map<String, String> abilityString = new HashMap<>();
 
@@ -332,6 +335,7 @@ public abstract class GameState {
         markedDamage.clear();
         cardToChosenClrs.clear();
         cardToChosenType.clear();
+        cardToScript.clear();
 
         Player newPlayerTurn = tChangePlayer.equals("human") ? human : tChangePlayer.equals("ai") ? ai : null;
         PhaseType newPhase = tChangePhase.equals("none") ? null : PhaseType.smartValueOf(tChangePhase);
@@ -356,6 +360,7 @@ public abstract class GameState {
 
         handleCardAttachments();
         handleChosenEntities();
+        handleScriptExecution();
         handleMarkedDamage();
 
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
@@ -365,6 +370,35 @@ public abstract class GameState {
         game.getStack().setResolving(false);
 
         game.getAction().checkStateEffects(true); //ensure state based effects and triggers are updated
+    }
+
+    private void handleScriptExecution() {
+        for (Entry<Card, String> scriptPtr : cardToScript.entrySet()) {
+            Card c = scriptPtr.getKey();
+            String sPtr = scriptPtr.getValue();
+
+            // Determine if there's a forced target involved
+            int tgtID = -1;
+            if (sPtr.contains("->")) {
+                tgtID = Integer.parseInt(sPtr.substring(sPtr.indexOf("->") + 2));
+                sPtr = sPtr.substring(0, sPtr.indexOf("->"));
+            }
+
+            for (Entry<String, String> svar : c.getSVars().entrySet()) {
+                String svarName = svar.getKey();
+                String svarValue = svar.getValue();
+
+                if (svarName.equals(sPtr)) {
+                    SpellAbility sa = AbilityFactory.getAbility(svarValue, c);
+                    sa.setActivatingPlayer(c.getController());
+                    if (tgtID != -1) {
+                        sa.getTargets().add(idToCard.get(tgtID));
+                    }
+                    sa.resolve();
+                }
+            }
+        }
+
     }
 
     private void handleMarkedDamage() {
@@ -557,6 +591,8 @@ public abstract class GameState {
                     cardToChosenClrs.put(c, Arrays.asList(info.substring(info.indexOf(':') + 1).split(",")));
                 } else if (info.startsWith("ChosenType:")) {
                     cardToChosenType.put(c, info.substring(info.indexOf(':') + 1));
+                } else if (info.startsWith("ExecuteScript:")) {
+                    cardToScript.put(c, info.substring(info.indexOf(':') + 1));
                 }
             }
 

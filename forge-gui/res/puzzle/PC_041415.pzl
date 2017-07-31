@@ -1,0 +1,17 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 041415 - Plans Within Plans
+URL:http://www.gatheringmagic.com/seanuy-041415-perplexing-chimera-3-plans-within-plans/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win this turn. Start by casting Taigam's Scheming.
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=9
+AILife=6
+humanhand=Reduce in Stature|Set:DTK; Cloudform|Set:FRF; Flamewake Phoenix|Set:FRF; Taigam's Scheming|Set:KTK
+humanlibrary=Mountain|Set:DTK; Vial of Dragonfire|Set:DTK; Hidden Dragonslayer|Set:DTK; Mirror Mockery|Set:DTK; Rite of Undoing|Set:FRF
+humanbattlefield=Island|Set:DTK; Island|Set:DTK; Island|Set:DTK; Island|Set:DTK; Island|Set:DTK; Island|Set:DTK; Island|Set:DTK; Island|Set:DTK; Island|Set:DTK; Wind-Scarred Crag|Set:KTK; Monastery Flock|Set:KTK; Zephyr Scribe|Set:DTK; Watcher of the Roost|FaceDown|Set:KTK; Ugin's Construct|Set:FRF; Suspension Field|Set:KTK|ExecuteScript:DBEffect->101
+AIexile=Mistfire Adept|Set:FRF|Id:101
+aibattlefield=Island|Set:DTK|Tapped; Island|Set:DTK; Swamp|Set:DTK|Tapped; Swamp|Set:DTK|Tapped; Swamp|Set:DTK; Forest|Set:DTK|Tapped; Forest|Set:DTK; Thornwood Falls|Set:FRF; Opulent Palace|Set:KTK; Elusive Spellfist|Tapped|Set:DTK; Jeskai Windscout|Set:KTK; Monastery Loremaster|Set:DTK; Bellowing Saddlebrute|Set:KTK; Sagu Archer|Set:KTK; Goblin Boom Keg|Set:FRF
