@@ -384,19 +384,19 @@ public abstract class GameState {
                 sPtr = sPtr.substring(0, sPtr.indexOf("->"));
             }
 
-            for (Entry<String, String> svar : c.getSVars().entrySet()) {
-                String svarName = svar.getKey();
-                String svarValue = svar.getValue();
-
-                if (svarName.equals(sPtr)) {
-                    SpellAbility sa = AbilityFactory.getAbility(svarValue, c);
-                    sa.setActivatingPlayer(c.getController());
-                    if (tgtID != -1) {
-                        sa.getTargets().add(idToCard.get(tgtID));
-                    }
-                    sa.resolve();
-                }
+            if (!c.hasSVar(sPtr)) {
+                System.out.println("ERROR: Unable to find SVar " + sPtr + " on card " + c + " + to execute!");
+                return;
             }
+
+            String svarValue = c.getSVar(sPtr);
+
+            SpellAbility sa = AbilityFactory.getAbility(svarValue, c);
+            sa.setActivatingPlayer(c.getController());
+            if (tgtID != -1) {
+                sa.getTargets().add(idToCard.get(tgtID));
+            }
+            sa.resolve();
         }
 
     }
