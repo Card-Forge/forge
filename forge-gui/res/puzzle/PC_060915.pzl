@@ -4,7 +4,7 @@ URL:http://www.gatheringmagic.com/seanuy-060915-now-you-see-it/
 Goal:Win
 Turns:1
 Difficulty:Hard
-Description: Win on this turn.
+Description:Win on this turn.
 [state]
 ActivePlayer=human
 ActivePhase=Main1

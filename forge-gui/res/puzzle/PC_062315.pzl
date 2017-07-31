@@ -4,7 +4,7 @@ URL:http://www.gatheringmagic.com/seanuy-062315-darker-than-black/
 Goal:Win
 Turns:1
 Difficulty:Hard
-Description: Win on this turn. Opponent has Sprinting Warbrute in hand.
+Description:Win on this turn. Opponent has Sprinting Warbrute in hand.
 [state]
 ActivePlayer=human
 ActivePhase=Main1
