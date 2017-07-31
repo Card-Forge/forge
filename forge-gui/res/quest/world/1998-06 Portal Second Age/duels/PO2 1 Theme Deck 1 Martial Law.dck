@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=PO2 1 Theme Deck: 1 Martial Law
+Title=Martial Law
+Difficulty=easy
+Description="Martial Law" will overrun your opponent with a small army of fast, white creatures. Charge across the field of battle with the soldiers of Alaborn or rule the skies with fierce Griffins.\n\n"Martial Law" will keep you in command. 
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+2 Alaborn Cavalier|PO2
+2 Alaborn Grenadier|PO2
+3 Alaborn Trooper|PO2
+1 Alaborn Veteran|PO2
+1 Angel of Fury|PO2
+1 Armageddon|PO2
+2 Armored Griffin|PO2
+2 Path of Peace|PO2
+15 Plains|PO2|2
+2 Righteous Charge|PO2
+2 Temple Acolyte|PO2
+2 Vengeance|PO2
+2 Volunteer Militia|PO2
+3 Wild Griffin|PO2

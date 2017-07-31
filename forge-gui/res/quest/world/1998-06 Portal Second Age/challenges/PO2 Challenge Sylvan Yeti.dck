@@ -1,0 +1,18 @@
+[quest]
+id=PO2 Challenge: Sylvan Yeti
+OpponentName=Yet Another Yeti
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:PO2
+Credit Reward=120
+AIExtras=Norwood Priestess
+[metadata]
+Name=PO2 Challenge: Sylvan Yeti
+Title=Yet Another Yeti
+Difficulty=medium
+Description=His palms are hairy, knees too, arms are hairy/ There's fur on his chest already,  Sylvan Yeti
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+60 Sylvan Yeti|PO2

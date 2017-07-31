@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PO2 2 Gimmick: Rat Catcher
+Title=Rat Catcher
+Difficulty=medium
+Description="Just as some fool said it couldn't get worse, the rats began to show up."\n-Alaborn soldier
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Alaborn Veteran|PO2
+4 Ancient Craving|PO2
+4 Armageddon|PO2
+4 Breath of Life|PO2
+4 Muck Rats|PO2
+12 Plains|PO2|3
+4 Raise Dead|PO2
+4 Ravenous Rats|PO2
+4 Righteous Charge|PO2
+12 Swamp|PO2|3
+4 Swarm of Rats|PO2

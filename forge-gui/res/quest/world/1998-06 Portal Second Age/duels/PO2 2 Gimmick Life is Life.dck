@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PO2 2 Gimmick: Life is Life
+Title=Life is Life
+Difficulty=medium
+Description=Every loss is a gain.\n-Proverb
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+4 Ancient Craving|PO2
+4 Angel of Mercy|PO2
+4 Bargain|PO2
+4 Festival of Trokin|PO2
+14 Plains|PO2|3
+4 Rain of Daggers|PO2
+4 Righteous Fury|PO2
+10 Swamp|PO2|3
+4 Temple Acolyte|PO2
+4 Temple Elder|PO2
+4 Vampiric Spirit|PO2

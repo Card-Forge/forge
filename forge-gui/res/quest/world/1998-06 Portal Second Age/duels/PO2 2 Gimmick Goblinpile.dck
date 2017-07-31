@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PO2 2 Gimmick: Goblinpile
+Title=Goblinpile
+Difficulty=medium
+Description=Lead, follow, or run around like crazy.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+4 Goblin Cavaliers|PO2
+4 Goblin Firestarter|PO2
+4 Goblin General|PO2
+4 Goblin Glider|PO2
+4 Goblin Matron|PO2
+4 Goblin Mountaineer|PO2
+4 Goblin Piker|PO2
+4 Goblin Raider|PO2
+4 Goblin War Strike|PO2
+20 Mountain|PO2|2
+4 Raging Goblin|PO2

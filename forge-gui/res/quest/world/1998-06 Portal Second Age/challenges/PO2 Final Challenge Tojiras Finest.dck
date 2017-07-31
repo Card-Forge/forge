@@ -1,0 +1,20 @@
+[quest]
+id=PO2 Final Challenge: Tojira's Finest
+OpponentName=Tojira's Finest
+AILife=20
+Repeat=false
+Persistent=true
+WinMessage=Congratulations!\nYou have completed the ultimate challenge in this quest and have proven that you are strong enough to defeat the deadliest of opponents!\n\nYou are free to continue playing this quest for as long as you desire or start a new one and try proving yourself yet again!
+Wins=20
+Card Reward=chosen card sets:PO2
+Credit Reward=120
+AIExtras=Dakmor Sorceress|Dakmor Sorceress|Dakmor Sorceress|Dakmor Sorceress
+[metadata]
+Name=PO2 Final Challenge: Tojira's Finest
+Title=The Final Challenge
+Difficulty=medium
+Description="I have all the weapons my enemies have--and far deeper rage." -Tojira, swamp queen
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+60 Swamp|PO2|1

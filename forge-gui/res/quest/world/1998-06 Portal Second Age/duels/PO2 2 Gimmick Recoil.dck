@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=PO2 2 Gimmick: Recoil
+Title=Recoil
+Difficulty=medium
+Description="Human tenderness is simply weakness in a pretty package."\n-Tojira, swamp queen
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Abyssal Nightstalker|PO2
+4 Brutal Nightstalker|PO2
+3 Coercion|PO2
+4 Denizen of the Deep|PO2
+10 Island|PO2|2
+3 Mind Rot|PO2
+4 Predatory Nightstalker|PO2
+4 Ravenous Rats|PO2
+3 Remove|PO2
+4 Screeching Drake|PO2
+14 Swamp|PO2|3
+3 Undo|PO2

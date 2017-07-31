@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PO2 3 Color: 5 Green
+Title=The Color Green
+Difficulty=hard
+Description=One razorclaw is three bears too many.\n-Elvish saying
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+4 Barbtooth Wurm|PO2
+4 Bear Cub|PO2
+2 Deathcoil Wurm|PO2
+24 Forest|PO2|2
+2 Hurricane|PO2
+4 Ironhoof Ox|PO2
+4 Nature's Lore|PO2
+4 Norwood Priestess|PO2
+4 Norwood Warrior|PO2
+4 Plated Wurm|PO2
+4 Razorclaw Bear|PO2

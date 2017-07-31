@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PO2 2 Gimmick: Giant Ramp
+Title=Giant Ramp
+Difficulty=medium
+Description=There goes the neighborhood!
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Brimstone Dragon|PO2
+4 Cunning Giant|PO2
+4 Earthquake|PO2
+11 Forest|PO2|1
+2 Hurricane|PO2
+4 Magma Giant|PO2
+15 Mountain|PO2|3
+4 Nature's Lore|PO2
+4 Ogre Arsonist|PO2
+4 Stone Rain|PO2
+4 Untamed Wilds|PO2

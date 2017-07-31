@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PO2 3 Strategy: 07 Wildfire
+Title=Wildfire
+Difficulty=hard
+Description=A custom strategy for the Red/Green color pair.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Blaze|PO2
+2 Brimstone Dragon|PO2
+10 Forest|PO2|1
+4 Magma Giant|PO2
+16 Mountain|PO2|3
+4 Nature's Lore|PO2
+4 Ogre Arsonist|PO2
+4 Plated Wurm|PO2
+4 Untamed Wilds|PO2
+4 Volcanic Hammer|PO2
+4 Wildfire|PO2

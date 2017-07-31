@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=PO2 3 Strategy: 09 Weenie Pump
+Title=Weenie Pump
+Difficulty=hard
+Description=A custom strategy for the Green/White color pair.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Alaborn Zealot|PO2
+4 Angelic Blessing|PO2
+4 Armageddon|PO2
+9 Forest|PO2|2
+2 Hurricane|PO2
+4 Monstrous Growth|PO2
+4 Norwood Ranger|PO2
+13 Plains|PO2|1
+4 Righteous Charge|PO2
+4 Temple Acolyte|PO2
+4 Tree Monkey|PO2
+4 Volunteer Militia|PO2

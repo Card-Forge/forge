@@ -1,0 +1,19 @@
+[quest]
+id=PO2 Challenge: Earthquake
+OpponentName=The Great Quake
+AILife=100
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:PO2
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=PO2 Challenge: Earthquake
+Title=The Great Quake
+Difficulty=medium
+Description="It's snowing still," said Eeyore gloomily. "And freezing." "However," he said, brightening up a little, "we haven't had an earthquake lately."\n-Eeyore, A.A. Milne's Winnie-the-Pooh
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+30 Earthquake|PO2
+30 Mountain|PO2|1

@@ -64,7 +64,7 @@ public class QuestChallengeReader extends StorageReaderFolder<QuestEventChalleng
         qc.setTitle(sectionMeta.get("Title"));
         qc.setName(qc.getTitle()); // Challenges have unique titles
         qc.setDifficulty(QuestEventDifficulty.fromString(sectionMeta.get("Difficulty")));
-        qc.setDescription(sectionMeta.get("Description"));
+        qc.setDescription(sectionMeta.get("Description").replace("\\n", "\n"));
         qc.setIconImageKey(ImageKeys.ICON_PREFIX + sectionMeta.get("Icon"));
         if (sectionMeta.contains("Profile")) {
         	qc.setProfile(sectionMeta.get("Profile"));

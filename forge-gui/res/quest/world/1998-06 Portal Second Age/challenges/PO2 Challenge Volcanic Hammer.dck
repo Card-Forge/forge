@@ -1,0 +1,19 @@
+[quest]
+id=PO2 Challenge: Volcanic Hammer
+OpponentName=Hammertime
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:PO2
+Credit Reward=120
+AIExtras=Talas Researcher
+[metadata]
+Name=PO2 Challenge: Volcanic Hammer
+Title=Hammertime
+Difficulty=medium
+Description=Can't Touch This!\n-MC Hammer
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+20 Mountain|PO2|1
+40 Volcanic Hammer|PO2

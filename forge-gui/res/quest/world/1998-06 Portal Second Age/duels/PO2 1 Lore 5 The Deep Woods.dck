@@ -1,0 +1,18 @@
+[duel]
+[metadata]
+Name=PO2 1 Lore: 5 The Deep Woods
+Title=The Deep Woods
+Difficulty=easy
+Description=The deeper the wood, the greater its strength.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+4 Barbtooth Wurm|PO2
+4 Bee Sting|PO2
+4 Deathcoil Wurm|PO2
+28 Forest|PO2|3
+4 Hurricane|PO2
+4 Natural Spring|PO2
+4 Plated Wurm|PO2
+4 Sylvan Basilisk|PO2
+4 Sylvan Yeti|PO2

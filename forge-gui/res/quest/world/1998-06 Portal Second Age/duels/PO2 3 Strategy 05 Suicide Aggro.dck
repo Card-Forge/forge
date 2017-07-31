@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=PO2 3 Strategy: 05 Suicide Aggro
+Title=Suicide Aggro
+Difficulty=hard
+Description=A custom strategy for the Black/Red color pair.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Blaze|PO2
+4 Dakmor Scorpion|PO2
+4 Foul Spirit|PO2
+4 Goblin Piker|PO2
+4 Goblin Raider|PO2
+4 Hand of Death|PO2
+4 Hidden Horror|PO2
+10 Mountain|PO2|1
+4 Stone Rain|PO2
+12 Swamp|PO2|2
+2 Vampiric Spirit|PO2
+4 Volcanic Hammer|PO2

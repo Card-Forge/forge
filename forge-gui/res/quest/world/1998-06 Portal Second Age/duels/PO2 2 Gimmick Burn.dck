@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PO2 2 Gimmick: Burn
+Title=Burn
+Difficulty=medium
+Description=Meant to cut through the body and burn straight to the soul.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Ancient Craving|PO2
+4 Blaze|PO2
+4 Dakmor Plague|PO2
+4 Dark Offering|PO2
+4 Earthquake|PO2
+4 Goblin Lore|PO2
+4 Kiss of Death|PO2
+4 Lava Axe|PO2
+10 Mountain|PO2|3
+14 Swamp|PO2|1
+4 Volcanic Hammer|PO2

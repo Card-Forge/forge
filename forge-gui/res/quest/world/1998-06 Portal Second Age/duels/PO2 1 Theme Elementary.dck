@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PO2 1 Theme: Elementary
+Title=Elementary
+Difficulty=easy
+Description=The dying ask for water because they know it contains life.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Blaze|PO2
+4 Earthquake|PO2
+12 Forest|PO2|1
+4 Hurricane|PO2
+4 Jagged Lightning|PO2
+12 Mountain|PO2|1
+4 Natural Spring|PO2
+4 Stone Rain|PO2
+4 Tremor|PO2
+4 Untamed Wilds|PO2
+4 Wildfire|PO2

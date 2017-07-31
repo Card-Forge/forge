@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PO2 2 Gimmick: Breath of Fire
+Title=Breath of Fire
+Difficulty=medium
+Description="I done forgot more than you'll ever know, pipsqueak."\n"Yeah--that's your problem."
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Archangel|PO2
+4 Breath of Life|PO2
+4 Brimstone Dragon|PO2
+4 Earthquake|PO2
+4 Goblin Lore|PO2
+4 Magma Giant|PO2
+12 Mountain|PO2|2
+12 Plains|PO2|1
+4 Temple Acolyte|PO2
+4 Tremor|PO2
+4 Wildfire|PO2

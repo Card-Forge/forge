@@ -1,0 +1,19 @@
+[quest]
+id=PO2 Challenge: Hidden Horror
+OpponentName=The Horror
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:PO2
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=PO2 Challenge: Hidden Horror
+Title=The Horror
+Difficulty=medium
+Description=If the presence of evil were obvious, it wouldn't be nearly as dangerous.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+40 Hidden Horror|PO2
+20 Swamp|PO2|1

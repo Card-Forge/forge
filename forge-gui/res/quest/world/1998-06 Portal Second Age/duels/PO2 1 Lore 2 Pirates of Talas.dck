@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PO2 1 Lore: 2 Pirates of Talas
+Title=Pirates of Talas
+Difficulty=easy
+Description="Is it merchants or is it pirates?"\n"It's Talas--there's no difference."
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+3 Armored Galleon|PO2
+24 Island|PO2|3
+4 Sleight of Hand|PO2
+3 Steam Frigate|PO2
+4 Talas Air Ship|PO2
+4 Talas Explorer|PO2
+4 Talas Merchant|PO2
+4 Talas Scout|PO2
+4 Talas Warrior|PO2
+3 Tidal Surge|PO2
+3 Wind Sail|PO2

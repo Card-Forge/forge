@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=PO2 2 Gimmick: White Weenie
+Title=White Weenie
+Difficulty=medium
+Description=People fight hardest on their own soil.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Alaborn Grenadier|PO2
+4 Alaborn Musketeer|PO2
+4 Alaborn Trooper|PO2
+4 Alaborn Veteran|PO2
+4 Alaborn Zealot|PO2
+4 Armageddon|PO2
+24 Plains|PO2|2
+4 Righteous Charge|PO2
+4 Volunteer Militia|PO2
+4 Wild Griffin|PO2

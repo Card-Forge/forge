@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=PO2 3 Strategy: 02 Attrition
+Title=Attrition
+Difficulty=hard
+Description=A custom strategy for the White/Black color pair.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Alaborn Zealot|PO2
+2 Ancient Craving|PO2
+3 Angel of Mercy|PO2
+4 Archangel|PO2
+4 Brutal Nightstalker|PO2
+4 Hand of Death|PO2
+13 Plains|PO2|3
+4 Predatory Nightstalker|PO2
+4 Ravenous Rats|PO2
+1 Steam Catapult|PO2
+13 Swamp|PO2|3
+4 Temple Acolyte|PO2

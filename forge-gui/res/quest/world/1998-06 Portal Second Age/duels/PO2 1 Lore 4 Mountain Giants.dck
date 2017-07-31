@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=PO2 1 Lore: 4 Mountain Giants
+Title=Mountain Giants
+Difficulty=easy
+Description=Three little goblins, enjoying their brew. One bumped an ogre, and then there were two.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+4 Cunning Giant|PO2
+4 Magma Giant|PO2
+24 Mountain|PO2|3
+4 Obsidian Giant|PO2
+4 Ogre Arsonist|PO2
+4 Ogre Berserker|PO2
+4 Ogre Taskmaster|PO2
+4 Ogre Warrior|PO2
+4 Relentless Assault|PO2
+4 Tremor|PO2

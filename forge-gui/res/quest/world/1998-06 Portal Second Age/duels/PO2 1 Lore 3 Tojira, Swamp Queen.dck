@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PO2 1 Lore: 3 Tojira, Swamp Queen
+Title=Tojira, Swamp Queen
+Difficulty=easy
+Description="Knowledge demands sacrifice."\n-Tojira, swamp queen
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Ancient Craving|PO2
+3 Bloodcurdling Scream|PO2
+4 Coercion|PO2
+4 Cruel Edict|PO2
+4 Dakmor Sorceress|PO2
+3 Dark Offering|PO2
+3 Hand of Death|PO2
+3 Kiss of Death|PO2
+4 Prowling Nightstalker|PO2
+4 Raise Dead|PO2
+24 Swamp|PO2|3

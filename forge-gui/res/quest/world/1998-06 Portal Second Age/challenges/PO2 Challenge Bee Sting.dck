@@ -1,0 +1,19 @@
+[quest]
+id=PO2 Challenge: Bee Sting
+OpponentName=The Bees
+AILife=100
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:PO2
+Credit Reward=120
+AIExtras=Angelic Wall|Angelic Wall|Angelic Wall|Angelic Wall|Talas Researcher
+[metadata]
+Name=PO2 Challenge: Bee Sting
+Title=The Bees
+Difficulty=medium
+Description=NOT THE BEES!
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+60 Bee Sting|PO2
+40 Forest|PO2|2

@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PO2 3 Color: 1 White
+Title=The Color White
+Difficulty=hard
+Description="Ever proud, ever vigilant."\n-Grenadier motto
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+2 Alaborn Grenadier|PO2
+4 Alaborn Veteran|PO2
+4 Alaborn Zealot|PO2
+4 Angel of Mercy|PO2
+4 Archangel|PO2
+2 Armageddon|PO2
+4 Just Fate|PO2
+4 Path of Peace|PO2
+26 Plains|PO2|2
+2 Steam Catapult|PO2
+4 Temple Acolyte|PO2

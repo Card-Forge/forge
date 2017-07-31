@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PO2 1 Lore: 3 The Nightstalker Menace
+Title=The Nightstalker Menace
+Difficulty=easy
+Description=Silent as a serpent, twisted as a lone bog tree, evil as Tojira's heart.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Abyssal Nightstalker|PO2
+4 Brutal Nightstalker|PO2
+3 Chorus of Woe|PO2
+4 Lurking Nightstalker|PO2
+3 Mind Rot|PO2
+4 Nightstalker Engine|PO2
+4 Predatory Nightstalker|PO2
+4 Raiding Nightstalker|PO2
+3 Rain of Daggers|PO2
+3 Return of the Nightstalkers|PO2
+24 Swamp|PO2|3

@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=PO2 3 Strategy: 08 Swarm Aggro
+Title=Swarm Aggro
+Difficulty=hard
+Description=A custom strategy for the Red/White color pair.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Alaborn Grenadier|PO2
+4 Alaborn Musketeer|PO2
+4 Alaborn Zealot|PO2
+4 Armageddon|PO2
+4 Goblin Mountaineer|PO2
+4 Goblin Piker|PO2
+9 Mountain|PO2|2
+13 Plains|PO2|1
+4 Raging Goblin|PO2
+2 Righteous Charge|PO2
+4 Volcanic Hammer|PO2
+4 Volunteer Militia|PO2

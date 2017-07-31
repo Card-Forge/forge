@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=PO2 3 Strategy: 01 Classic Control
+Title=Classic Control
+Difficulty=hard
+Description=A custom strategy for the White/Blue color pair.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+3 Air Elemental|PO2
+2 Alaborn Zealot|PO2
+2 Angelic Wall|PO2
+1 Apprentice Sorcerer|PO2
+4 Archangel|PO2
+4 False Summoning|PO2
+11 Island|PO2|3
+4 Just Fate|PO2
+2 Mystic Denial|PO2
+15 Plains|PO2|3
+2 Righteous Fury|PO2
+2 Steam Catapult|PO2
+4 Temple Acolyte|PO2
+4 Time Ebb|PO2

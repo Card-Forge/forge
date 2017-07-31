@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PO2 3 Color: 3 Black
+Title=The Color Black
+Difficulty=hard
+Description=The touch of death is never gentle.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+2 Abyssal Nightstalker|PO2
+4 Brutal Nightstalker|PO2
+4 Cruel Edict|PO2
+2 Dakmor Plague|PO2
+4 Dakmor Sorceress|PO2
+4 Hand of Death|PO2
+2 Moaning Spirit|PO2
+4 Predatory Nightstalker|PO2
+4 Ravenous Rats|PO2
+26 Swamp|PO2|2
+4 Vampiric Spirit|PO2
