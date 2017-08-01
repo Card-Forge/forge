@@ -1,24 +1,14 @@
 package forge.ai;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.*;
-import java.util.Map.Entry;
-
 import com.google.common.collect.Lists;
 import forge.StaticData;
-
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.effects.DetachedCardEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactory;
-import forge.game.card.CounterType;
+import forge.game.card.*;
+import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -29,6 +19,12 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.*;
+import java.util.Map.Entry;
 
 public abstract class GameState {
     private static final Map<ZoneType, String> ZONES = new HashMap<ZoneType, String>();
@@ -56,6 +52,7 @@ public abstract class GameState {
     private final Map<Card, String> cardToChosenType = new HashMap<>();
     private final Map<Card, List<String>> cardToRememberedId = new HashMap<>();
     private final Map<Card, String> cardToExiledWithId = new HashMap<>();
+    private final Map<Card, Card> cardAttackMap = new HashMap<>();
 
     private final Map<Card, String> cardToScript = new HashMap<>();
 
@@ -139,6 +136,13 @@ public abstract class GameState {
                     // TODO: we can currently support remembered cards only. Expand to support other remembered objects.
                     if (o instanceof Card) {
                         cardsReferencedByID.add((Card)o);
+                    }
+                }
+                if (game.getCombat() != null && game.getCombat().isAttacking(card)) {
+                    // Remember the IDs of attacked planeswalkers
+                    GameEntity def = game.getCombat().getDefenderByAttacker(card);
+                    if (def instanceof Card) {
+                        cardsReferencedByID.add((Card)def);
                     }
                 }
             }
@@ -234,6 +238,16 @@ public abstract class GameState {
         if (zoneType == ZoneType.Exile) {
             if (c.getExiledWith() != null) {
                 newText.append("|ExiledWith:").append(c.getExiledWith().getId());
+            }
+        }
+
+        if (c.getGame().getCombat() != null) {
+            if (c.getGame().getCombat().isAttacking(c)) {
+                newText.append("|Attacking");
+                GameEntity def = c.getGame().getCombat().getDefenderByAttacker(c);
+                if (def instanceof Card) {
+                    newText.append(":" + def.getId());
+                }
             }
         }
 
@@ -388,6 +402,7 @@ public abstract class GameState {
         cardToChosenClrs.clear();
         cardToChosenType.clear();
         cardToScript.clear();
+        cardAttackMap.clear();
 
         Player newPlayerTurn = tChangePlayer.equals("human") ? human : tChangePlayer.equals("ai") ? ai : null;
         PhaseType newPhase = tChangePhase.equals("none") ? null : PhaseType.smartValueOf(tChangePhase);
@@ -401,6 +416,7 @@ public abstract class GameState {
         if (!computerCounters.isEmpty()) {
             applyCountersToGameEntity(ai, computerCounters);
         }
+
         game.getPhaseHandler().devModeSet(newPhase, newPlayerTurn);
 
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
@@ -416,6 +432,12 @@ public abstract class GameState {
         handleScriptExecution();
         handleMarkedDamage();
 
+        // Combat only works for 1v1 matches for now (which are the only matches dev mode supports anyway)
+        if (newPhase == PhaseType.COMBAT_DECLARE_ATTACKERS || newPhase == PhaseType.COMBAT_DECLARE_BLOCKERS) {
+            boolean toDeclareBlockers = newPhase == PhaseType.COMBAT_DECLARE_BLOCKERS;
+            handleCombat(game, newPlayerTurn, newPlayerTurn.getSingleOpponent(), toDeclareBlockers);
+        }
+
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         game.getTriggerHandler().clearSuppression(TriggerType.DamageDone);
         game.getTriggerHandler().clearSuppression(TriggerType.Unequip);
@@ -423,6 +445,31 @@ public abstract class GameState {
         game.getStack().setResolving(false);
 
         game.getAction().checkStateEffects(true); //ensure state based effects and triggers are updated
+    }
+
+    private void handleCombat(final Game game, final Player attackingPlayer, final Player defendingPlayer, final boolean toDeclareBlockers) {
+        // First we need to ensure that all attackers are declared in the Declare Attackers step,
+        // even if proceeding straight to Declare Blockers
+        game.getPhaseHandler().devModeSet(PhaseType.COMBAT_DECLARE_ATTACKERS, attackingPlayer);
+
+        if (game.getPhaseHandler().getCombat() == null) {
+            game.getPhaseHandler().setCombat(new Combat(attackingPlayer));
+            game.updateCombatForView();
+        }
+
+        for (Entry<Card, Card> attackMap : cardAttackMap.entrySet()) {
+            Card attacker = attackMap.getKey();
+            Card attacked = attackMap.getValue();
+
+            game.getPhaseHandler().getCombat().addAttacker(attacker, attacked == null ? defendingPlayer : attacked);
+        }
+
+        game.updateCombatForView();
+
+        // Gracefully proceed to Declare Blockers, giving priority to the defending player
+        if (toDeclareBlockers) {
+            game.getPhaseHandler().devAdvanceToPhase(PhaseType.COMBAT_DECLARE_BLOCKERS);
+        }
     }
 
     private void handleRememberedEntities() {
@@ -678,6 +725,13 @@ public abstract class GameState {
                     cardToRememberedId.put(c, Arrays.asList(info.substring(info.indexOf(':') + 1).split(",")));
                 } else if (info.startsWith("ExiledWith:")) {
                     cardToExiledWithId.put(c, info.substring(info.indexOf(':') + 1));
+                } else if (info.startsWith("Attacking")) {
+                    if (info.contains(":")) {
+                        int id = Integer.parseInt(info.substring(info.indexOf(':') + 1));
+                        cardAttackMap.put(c, idToCard.get(id));
+                    } else {
+                        cardAttackMap.put(c, null);
+                    }
                 }
             }
 
