@@ -115,7 +115,22 @@ public class PlayerControllerAi extends PlayerController {
         if (ability.getApi() != null) {
             switch (ability.getApi()) {
                 case ChooseNumber:
-                    return ability.getActivatingPlayer().isOpponentOf(player) ? 0 : ComputerUtilMana.determineLeftoverMana(ability, player);
+                    Player payingPlayer = ability.getActivatingPlayer();
+                    String logic = ability.getParamOrDefault("AILogic", "");
+
+                    if (logic.startsWith("PowerLeakMaxMana.") && ability.getHostCard().isEnchantingCard()) {
+                        // For cards like Power Leak, the payer will be the owner of the enchanted card
+                        // TODO: is there any way to generalize this and avoid a special exclusion?
+                        payingPlayer = ability.getHostCard().getEnchantingCard().getController();
+                    }
+
+                    int number = ComputerUtilMana.determineLeftoverMana(ability, player);
+
+                    if (logic.startsWith("MaxMana.") || logic.startsWith("PowerLeakMaxMana.")) {
+                        number = Math.min(number, Integer.parseInt(logic.substring(logic.indexOf(".") + 1)));
+                    }
+
+                    return payingPlayer.isOpponentOf(player) ? 0 : number;
                 case BidLife:
                     return 0;
                 default:
