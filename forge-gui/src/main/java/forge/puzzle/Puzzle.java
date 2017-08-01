@@ -102,14 +102,28 @@ public class Puzzle extends GameState implements InventoryItem, Comparable {
         goalCard.addType("Effect");
         goalCard.setOracleText(getGoalDescription());
 
-        final String loseTrig = "Mode$ Phase | Phase$ Cleanup | TriggerZones$ Command | Static$ True | " +
+        // Default goal: win the game; lose on turn X
+        String trig = "Mode$ Phase | Phase$ Cleanup | TriggerZones$ Command | Static$ True | " +
                 "TurnCount$ " + turns + " | TriggerDescription$ At the beginning of your cleanup step, you lose the game.";
-        final String loseEff = "DB$ LosesGame | Defined$ You";
+        String eff = "DB$ LosesGame | Defined$ You";
 
-        final Trigger loseTrigger = TriggerHandler.parseTrigger(loseTrig, goalCard, true);
+        switch(goal.toLowerCase()) {
+            case "win":
+                // Handled as default
+                break;
+            case "survive":
+                trig = "Mode$ Phase | Phase$ Upkeep | TriggerZones$ Command | Static$ True | " +
+                       "TurnCount$ " + (turns + 1) + " | TriggerDescription$ At the beginning of your upkeep step, you win the game.";
+                eff = "DB$ WinsGame | Defined$ You";
+                break;
+            default:
+                break;
+        }
 
-        loseTrigger.setOverridingAbility(AbilityFactory.getAbility(loseEff, goalCard));
-        goalCard.addTrigger(loseTrigger);
+        final Trigger trigger = TriggerHandler.parseTrigger(trig, goalCard, true);
+        trigger.setOverridingAbility(AbilityFactory.getAbility(eff, goalCard));
+
+        goalCard.addTrigger(trigger);
 
         human.getZone(ZoneType.Command).add(goalCard);
     }
