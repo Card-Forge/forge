@@ -54,10 +54,14 @@ public abstract class GameState {
     private final Map<Card, Integer> markedDamage = new HashMap<>();
     private final Map<Card, List<String>> cardToChosenClrs = new HashMap<>();
     private final Map<Card, String> cardToChosenType = new HashMap<>();
+    private final Map<Card, List<String>> cardToRememberedId = new HashMap<>();
+    private final Map<Card, String> cardToExiledWithId = new HashMap<>();
 
     private final Map<Card, String> cardToScript = new HashMap<>();
 
     private final Map<String, String> abilityString = new HashMap<>();
+
+    private final Set<Card> cardsReferencedByID = new HashSet<>();
 
     private String tChangePlayer = "NONE";
     private String tChangePhase = "NONE";
@@ -113,6 +117,32 @@ public abstract class GameState {
         tChangePhase = game.getPhaseHandler().getPhase().toString();
         aiCardTexts.clear();
         humanCardTexts.clear();
+
+        // Mark the cards that need their ID remembered for various reasons
+        cardsReferencedByID.clear();
+        for (ZoneType zone : ZONES.keySet()) {
+            for (Card card : game.getCardsIn(zone)) {
+                if (card.getExiledWith() != null) {
+                    // Remember the ID of the card that exiled this card
+                    cardsReferencedByID.add(card.getExiledWith());
+                }
+                if (zone == ZoneType.Battlefield) {
+                    if (!card.getEnchantedBy(false).isEmpty()
+                            || !card.getEquippedBy(false).isEmpty()
+                            || !card.getFortifiedBy(false).isEmpty()) {
+                        cardsReferencedByID.add(card);
+                    }
+                }
+                for (Object o : card.getRemembered()) {
+                    // Remember the IDs of remembered cards
+                    // TODO: we can currently support remembered cards only. Expand to support other remembered objects.
+                    if (o instanceof Card) {
+                        cardsReferencedByID.add((Card)o);
+                    }
+                }
+            }
+        }
+
         for (ZoneType zone : ZONES.keySet()) {
             // Init texts to empty, so that restoring will clear the state
             // if the zone had no cards in it (e.g. empty hand).
@@ -143,6 +173,11 @@ public abstract class GameState {
         if (c.isCommander()) {
             newText.append("|IsCommander");
         }
+
+        if (cardsReferencedByID.contains(c)) {
+            newText.append("|Id:").append(c.getId());
+        }
+
         if (zoneType == ZoneType.Battlefield) {
             if (c.isTapped()) {
                 newText.append("|Tapped");
@@ -172,10 +207,6 @@ public abstract class GameState {
                 newText.append("|Attaching:").append(c.getEnchantingCard().getId());
             }
 
-            if (!c.getEnchantedBy(false).isEmpty() || !c.getEquippedBy(false).isEmpty() || !c.getFortifiedBy(false).isEmpty()) {
-                newText.append("|Id:").append(c.getId());
-            }
-
             if (c.getDamage() > 0) {
                 newText.append("|Damage:").append(c.getDamage());
             }
@@ -186,7 +217,25 @@ public abstract class GameState {
             if (!c.getChosenType().isEmpty()) {
                 newText.append("|ChosenType:").append(c.getChosenType());
             }
+
+            List<String> rememberedCardIds = Lists.newArrayList();
+            for (Object obj : c.getRemembered()) {
+                if (obj instanceof Card) {
+                    int id = ((Card)obj).getId();
+                    rememberedCardIds.add(String.valueOf(id));
+                }
+            }
+            if (!rememberedCardIds.isEmpty()) {
+                newText.append("|RememberedCards:").append(TextUtil.join(rememberedCardIds, ","));
+            }
         }
+
+        if (zoneType == ZoneType.Exile) {
+            if (c.getExiledWith() != null) {
+                newText.append("|ExiledWith:").append(c.getExiledWith().getId());
+            }
+        }
+
         cardTexts.put(zoneType, newText.toString());
     }
 
@@ -332,6 +381,8 @@ public abstract class GameState {
 
         idToCard.clear();
         cardToAttachId.clear();
+        cardToRememberedId.clear();
+        cardToExiledWithId.clear();
         markedDamage.clear();
         cardToChosenClrs.clear();
         cardToChosenType.clear();
@@ -360,6 +411,7 @@ public abstract class GameState {
 
         handleCardAttachments();
         handleChosenEntities();
+        handleRememberedEntities();
         handleScriptExecution();
         handleMarkedDamage();
 
@@ -370,6 +422,28 @@ public abstract class GameState {
         game.getStack().setResolving(false);
 
         game.getAction().checkStateEffects(true); //ensure state based effects and triggers are updated
+    }
+
+    private void handleRememberedEntities() {
+        // Remembered: X
+        for (Entry<Card, List<String>> rememberedEnts : cardToRememberedId.entrySet()) {
+            Card c = rememberedEnts.getKey();
+            List<String> ids = rememberedEnts.getValue();
+
+            for (String id : ids) {
+                Card tgt = idToCard.get(Integer.parseInt(id));
+                c.addRemembered(tgt);
+            }
+        }
+
+        // Exiled with X
+        for (Entry<Card, String> rememberedEnts : cardToExiledWithId.entrySet()) {
+            Card c = rememberedEnts.getKey();
+            String id = rememberedEnts.getValue();
+
+            Card exiledWith = idToCard.get(Integer.parseInt(id));
+            c.setExiledWith(exiledWith);
+        }
     }
 
     private void handleScriptExecution() {
@@ -431,6 +505,7 @@ public abstract class GameState {
     }
 
     private void handleCardAttachments() {
+        // Unattach all permanents first
         for(Entry<Card, Integer> entry : cardToAttachId.entrySet()) {
             Card attachedTo = idToCard.get(entry.getValue());
             Card attacher = entry.getKey();
@@ -440,6 +515,12 @@ public abstract class GameState {
             for (Card c : attachedTo.getFortifiedBy(true)) {
                 attachedTo.unFortifyCard(c);
             }
+        }
+
+        // Attach permanents by ID
+        for(Entry<Card, Integer> entry : cardToAttachId.entrySet()) {
+            Card attachedTo = idToCard.get(entry.getValue());
+            Card attacher = entry.getKey();
 
             if (attacher.isEquipment()) {
                 attacher.equipCard(attachedTo);
@@ -593,6 +674,10 @@ public abstract class GameState {
                     cardToChosenType.put(c, info.substring(info.indexOf(':') + 1));
                 } else if (info.startsWith("ExecuteScript:")) {
                     cardToScript.put(c, info.substring(info.indexOf(':') + 1));
+                } else if (info.startsWith("RememberedCards:")) {
+                    cardToRememberedId.put(c, Arrays.asList(info.substring(info.indexOf(':') + 1).split(",")));
+                } else if (info.startsWith("ExiledWith:")) {
+                    cardToExiledWithId.put(c, info.substring(info.indexOf(':') + 1));
                 }
             }
 
