@@ -1,0 +1,16 @@
+[metadata]
+Name:Pauper Puzzles #27 - Butcher? I Hardly Knew Her!
+URL:https://pauperpuzzles.wordpress.com/2017/05/20/27-butcher-i-hardly-knew-her/
+Goal:Win
+Turns:1
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=3
+AILife=7
+humanhand=Pillar of Flame;Blightning;Ghostly Flicker;Ghostly Flicker
+humanbattlefield=Mountain;Swamp;Swamp;Island;Island;Faceless Butcher|Id:21|RememberedCards:22;Murk Strider;Nightscape Familiar;Crossway Vampire
+aihand=Fiery Temper;Sandstorm
+aibattlefield=Mountain;Forest;Forest;Gathan Raiders;Basking Rootwalla;Arrogant Wurm
+aiexile=Wild Mongrel|Id:22|ExiledWith:21

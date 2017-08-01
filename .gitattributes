@@ -19426,6 +19426,7 @@ forge-gui/res/puzzle/PP00.pzl -text
 forge-gui/res/puzzle/PP01.pzl -text
 forge-gui/res/puzzle/PP02.pzl -text
 forge-gui/res/puzzle/PP03.pzl -text
+forge-gui/res/puzzle/PP04.pzl -text
 forge-gui/res/puzzle/PP06.pzl -text
 forge-gui/res/puzzle/PP07.pzl -text
 forge-gui/res/puzzle/PP08.pzl -text
@@ -19434,10 +19435,15 @@ forge-gui/res/puzzle/PP11.pzl -text
 forge-gui/res/puzzle/PP12.pzl -text
 forge-gui/res/puzzle/PP15.pzl -text
 forge-gui/res/puzzle/PP16.pzl -text
+forge-gui/res/puzzle/PP17.pzl -text
 forge-gui/res/puzzle/PP18.pzl -text
+forge-gui/res/puzzle/PP19.pzl -text
+forge-gui/res/puzzle/PP20.pzl -text
 forge-gui/res/puzzle/PP22.pzl -text
 forge-gui/res/puzzle/PP23.pzl -text
 forge-gui/res/puzzle/PP24.pzl -text
+forge-gui/res/puzzle/PP25.pzl -text
+forge-gui/res/puzzle/PP27.pzl -text
 forge-gui/res/puzzle/PP28.pzl -text
 forge-gui/res/puzzle/PP29.pzl -text
 forge-gui/res/puzzle/PP30.pzl -text

@@ -1,0 +1,15 @@
+[metadata]
+Name:Pauper Puzzles #19 - No Pain No Gain
+URL:https://pauperpuzzles.wordpress.com/2017/03/25/19-no-pain-no-gain/
+Goal:Win
+Turns:3
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=1
+AILife=4
+humanhand=Journey to Nowhere;Field Surgeon;Aven Riftwatcher;Prismatic Strands;Chainer's Edict
+humanbattlefield=Swamp;Swamp;Plains;Island;Island;Dinrova Horror;Angelic Renewal
+ailibrary=Seat of the Synod
+aibattlefield=Ancient Den;Ancient Den;Seat of the Synod;Great Furnace;Great Furnace;Myr Enforcer;Myr Enforcer;Gearseeker Serpent;Ardent Recruit;Blade-Tribe Berserkers

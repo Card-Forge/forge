@@ -1,0 +1,17 @@
+[metadata]
+Name:Pauper Puzzles #20 - Stacking The Odds
+URL:https://pauperpuzzles.wordpress.com/2017/04/01/20-stacking-the-odds/
+Goal:Win
+Turns:3
+Difficulty:Hard
+[state]
+ActivePlayer=Human
+ActivePhase=Main1
+HumanLife=2
+AILife=2
+humanhand=Evolving Wilds;Envelop;Deprive;Dregscape Zombie;Faerie Macabre;Pulse of Murasa
+humanlibrary=Swamp
+humanbattlefield=Thornwood Falls;Thornwood Falls;Bojuka Bog;Forest;Forest;Island;Island;Island;Putrid Leech
+aihand=Remove Soul;Counterspell;Counterspell;Choking Sands;Firebolt;Electrostatic Bolt
+ailibrary=Mountain
+aibattlefield=Urza's Mine;Urza's Tower;Urza's Power Plant;Island;Island;Swiftwater Cliffs;Swiftwater Cliffs;Swiftwater Cliffs;Prophetic Prism;Prophetic Prism
