@@ -1,0 +1,8 @@
+Name:For Each of You, a Gift
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, for each opponent, create a 3/3 black Horror creature token that attacks that player each combat if able.
+SVar:TrigRepeat:AB$ RepeatEach | Cost$ 0 | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Horror | TokenTypes$ Creature,Horror | TokenOwner$ You | TokenColors$ Black | TokenPower$ 3 | TokenToughness$ 3 | TokenHiddenKeywords$ CARDNAME attacks specific player each combat if able:Remembered | TokenRemembered$ Player.IsRemembered
+SVar:Picture:https://downloads.cardforge.org/images/cards/E01/For Each of You, a Gift.full.jpg
+Oracle:When you set this scheme in motion, for each opponent, create a 3/3 black Horror creature token that attacks that player each combat if able.
