@@ -509,7 +509,6 @@ public abstract class GameState {
         // Unattach all permanents first
         for(Entry<Card, Integer> entry : cardToAttachId.entrySet()) {
             Card attachedTo = idToCard.get(entry.getValue());
-            Card attacher = entry.getKey();
 
             attachedTo.unEnchantAllCards();
             attachedTo.unEquipAllCards();
