@@ -130,6 +130,7 @@ public abstract class GameState {
                     if (!card.getEnchantedBy(false).isEmpty()
                             || !card.getEquippedBy(false).isEmpty()
                             || !card.getFortifiedBy(false).isEmpty()) {
+                        // Remember the ID of cards that have attachments
                         cardsReferencedByID.add(card);
                     }
                 }
