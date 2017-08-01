@@ -89,8 +89,8 @@ public enum CSubmenuPuzzleSolve implements ICDoc, IMenuProvider {
         hostedMatch.setStartGameHook(new Runnable() {
             @Override
             public final void run() {
-                selected.applyToGame(hostedMatch.getGame());
                 SOptionPane.showMessageDialog(selected.getGoalDescription(), selected.getName(), SOptionPane.INFORMATION_ICON);
+                selected.applyToGame(hostedMatch.getGame());
             }
         });
 
