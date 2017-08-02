@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import forge.FThreads;
 import forge.Forge;
 import forge.GuiBase;
+import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.LaunchScreen;
 import forge.screens.LoadingOverlay;
@@ -104,14 +105,6 @@ public class LoadDraftScreen extends LaunchScreen {
                     return;
                 }
 
-                if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-                    String errorMessage = GameType.Draft.getDeckFormat().getDeckConformanceProblem(humanDeck.getDeck());
-                    if (errorMessage != null) {
-                        FOptionPane.showErrorDialog("Your deck " + errorMessage + "\nPlease edit or choose a different deck.", "Invalid Deck");
-                        return;
-                    }
-                }
-
                 // TODO: if booster draft tournaments are supported in the future, add the possibility to choose them here
                 final boolean gauntlet = cbMode.getSelectedItem().equals("Gauntlet");
 
@@ -125,6 +118,10 @@ public class LoadDraftScreen extends LaunchScreen {
                     FThreads.invokeInEdtLater(new Runnable() {
                         @Override
                         public void run() {
+                            if (!checkDeckLegality(humanDeck)) {
+                                return;
+                            }
+
                             LoadingOverlay.show("Loading new game...", new Runnable() {
                                 @Override
                                 public void run() {
@@ -150,6 +147,10 @@ public class LoadDraftScreen extends LaunchScreen {
                             LoadingOverlay.show("Loading new game...", new Runnable() {
                                 @Override
                                 public void run() {
+                                    if (!checkDeckLegality(humanDeck)) {
+                                        return;
+                                    }
+
                                     final List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
                                     final RegisteredPlayer human = new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
                                     starter.add(human);
@@ -168,5 +169,16 @@ public class LoadDraftScreen extends LaunchScreen {
                 }
             }
         });
+    }
+
+    private boolean checkDeckLegality(DeckProxy humanDeck) {
+        if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
+            String errorMessage = GameType.Draft.getDeckFormat().getDeckConformanceProblem(humanDeck.getDeck());
+            if (errorMessage != null) {
+                FOptionPane.showErrorDialog("Your deck " + errorMessage + "\nPlease edit or choose a different deck.", "Invalid Deck");
+                return false;
+            }
+        }
+        return true;
     }
 }

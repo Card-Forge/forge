@@ -21,6 +21,7 @@ import forge.itemmanager.filters.ItemFilter;
 import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
+import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.LaunchScreen;
 import forge.screens.LoadingOverlay;
@@ -103,20 +104,16 @@ public class LoadSealedScreen extends LaunchScreen {
                     return;
                 }
 
-                if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-                    String errorMessage = GameType.Sealed.getDeckFormat().getDeckConformanceProblem(humanDeck.getDeck());
-                    if (errorMessage != null) {
-                        FOptionPane.showErrorDialog("Your deck " + errorMessage + "\nPlease edit or choose a different deck.", "Invalid Deck");
-                        return;
-                    }
-                }
-
                 final boolean gauntlet = cbMode.getSelectedItem().equals("Gauntlet");
 
                 if (gauntlet) {
                     FThreads.invokeInEdtLater(new Runnable() {
                         @Override
                         public void run() {
+                            if (!checkDeckLegality(humanDeck)) {
+                                return;
+                            }
+
                             LoadingOverlay.show("Loading new game...", new Runnable() {
                                 @Override
                                 public void run() {
@@ -140,6 +137,10 @@ public class LoadSealedScreen extends LaunchScreen {
                     FThreads.invokeInEdtLater(new Runnable() {
                         @Override
                         public void run() {
+                            if (!checkDeckLegality(humanDeck)) {
+                                return;
+                            }
+
                             LoadingOverlay.show("Loading new game...", new Runnable() {
                                 @Override
                                 public void run() {
@@ -161,5 +162,16 @@ public class LoadSealedScreen extends LaunchScreen {
                 }
             }
         });
+    }
+
+    private boolean checkDeckLegality(DeckProxy humanDeck) {
+        if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
+            String errorMessage = GameType.Sealed.getDeckFormat().getDeckConformanceProblem(humanDeck.getDeck());
+            if (errorMessage != null) {
+                FOptionPane.showErrorDialog("Your deck " + errorMessage + "\nPlease edit or choose a different deck.", "Invalid Deck");
+                return false;
+            }
+        }
+        return true;
     }
 }
