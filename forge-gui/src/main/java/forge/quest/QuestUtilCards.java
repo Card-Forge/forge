@@ -298,20 +298,20 @@ public final class QuestUtilCards {
     /**
      * Setup new game card pool.
      *
-     * @param filter
-     *            the filter
+     * @param formatStartingPool
+     *            the starting pool format for the new quest
      * @param idxDifficulty
      *            the idx difficulty
      * @param userPrefs
      *            user preferences
      */
-    public void setupNewGameCardPool(final Predicate<PaperCard> filter, final int idxDifficulty, final StartingPoolPreferences userPrefs, final QuestController questController) {
+    public void setupNewGameCardPool(final GameFormat formatStartingPool, final int idxDifficulty, final StartingPoolPreferences userPrefs) {
 
         final int nC = questPreferences.getPrefInt(DifficultyPrefs.STARTING_COMMONS, idxDifficulty);
         final int nU = questPreferences.getPrefInt(DifficultyPrefs.STARTING_UNCOMMONS, idxDifficulty);
         final int nR = questPreferences.getPrefInt(DifficultyPrefs.STARTING_RARES, idxDifficulty);
 
-        addAllCards(BoosterUtils.getQuestStarterDeck(filter, nC, nU, nR, userPrefs, questController));
+        addAllCards(BoosterUtils.getQuestStarterDeck(formatStartingPool, nC, nU, nR, userPrefs));
 
     }
 

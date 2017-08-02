@@ -17,8 +17,6 @@
  */
 package forge.quest;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
 import forge.card.CardEdition;
@@ -27,7 +25,6 @@ import forge.deck.DeckGroup;
 import forge.game.GameFormat;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventMulligan;
-import forge.item.PaperCard;
 import forge.item.PreconDeck;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -272,16 +269,12 @@ public class QuestController {
 
         if (startingCards != null) {
             this.myCards.addDeck(startingCards);
-        }
-        else {
-            Predicate<PaperCard> filter = Predicates.alwaysTrue();
-            if (formatStartingPool != null) {
-                filter = formatStartingPool.getFilterPrinted();
-            }
-            this.myCards.setupNewGameCardPool(filter, difficulty, userPrefs, this);
+        } else {
+            this.myCards.setupNewGameCardPool(formatStartingPool, difficulty, userPrefs);
         }
 
         this.getAssets().setCredits(FModel.getQuestPreferences().getPrefInt(DifficultyPrefs.STARTING_CREDITS, difficulty));
+
     }
 
     /**
