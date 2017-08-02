@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact
 PT:2/3
 S:Mode$ Continuous | Affected$ Card.nonLand+YouOwn+withCycling,Card.nonLand+YouOwn+withTypeCycling | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may cast nonland cards with cycling from your graveyard.
-R:Event$ Moved | ValidCard$ Card.YouOwn+withCycling,Card.YouOwn+withTypeCycling | Destination$ Graveyard | NotCause$ Activated.Cycling | ReplaceWith$ Exile | Description$ If a card with cycling would be put into your graveyard from anywhere and it wasn't cycled, exile it instead.
+R:Event$ Moved | ValidCard$ Card.YouOwn+withCycling,Card.YouOwn+withTypeCycling | Destination$ Graveyard | NotCause$ Activated.Cycling | ReplaceWith$ Exile | ActiveZones$ Battlefield | Description$ If a card with cycling would be put into your graveyard from anywhere and it wasn't cycled, exile it instead.
 SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abandoned_sarcophagus.jpg
