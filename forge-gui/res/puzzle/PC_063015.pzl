@@ -4,7 +4,7 @@ URL:http://www.gatheringmagic.com/seanuy-063015-turning-the-wurm/
 Goal:Win
 Turns:1
 Difficulty:Hard
-Description: Win on this turn. Opponent has Debt to the Deathless on top of the library.
+Description:Win on this turn. Opponent has Debt to the Deathless on top of the library.
 [state]
 ActivePlayer=human
 ActivePhase=Main1
