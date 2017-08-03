@@ -117,6 +117,7 @@ public class PlayerControllerAi extends PlayerController {
                 case ChooseNumber:
                     Player payingPlayer = ability.getActivatingPlayer();
                     String logic = ability.getParamOrDefault("AILogic", "");
+                    boolean anyController = logic.equals("MaxForAnyController");
 
                     if (logic.startsWith("PowerLeakMaxMana.") && ability.getHostCard().isEnchantingCard()) {
                         // For cards like Power Leak, the payer will be the owner of the enchanted card
@@ -130,7 +131,7 @@ public class PlayerControllerAi extends PlayerController {
                         number = Math.min(number, Integer.parseInt(logic.substring(logic.indexOf(".") + 1)));
                     }
 
-                    return payingPlayer.isOpponentOf(player) ? 0 : number;
+                    return payingPlayer.isOpponentOf(player) && !anyController ? 0 : number;
                 case BidLife:
                     return 0;
                 default:
