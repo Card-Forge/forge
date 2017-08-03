@@ -35,6 +35,13 @@ public class SetInMotionEffect extends SpellAbilityEffect {
             if (again) {
                 // Set the current scheme in motion again
                 Game game = controller.getGame();
+
+                for (final Player p : game.getPlayers()) {
+                    if (p.hasKeyword("Schemes can't be set in motion this turn.")) {
+                        return;
+                    }
+                }
+
                 game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
                 game.getAction().moveTo(ZoneType.Command, controller.getActiveScheme(), null);
                 game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
