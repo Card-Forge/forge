@@ -3688,6 +3688,7 @@ forge-gui/res/cardsfolder/c/ceta_disciple.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/ceta_sanctuary.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/cetavolver.txt -text
 forge-gui/res/cardsfolder/c/chain_lightning.txt -text
+forge-gui/res/cardsfolder/c/chain_of_acid.txt -text
 forge-gui/res/cardsfolder/c/chain_of_plasma.txt -text
 forge-gui/res/cardsfolder/c/chain_of_smog.txt -text
 forge-gui/res/cardsfolder/c/chain_of_vapor.txt -text

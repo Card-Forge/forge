@@ -63,6 +63,11 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             controller = AbilityUtils.getDefinedPlayers(card, sa.getParam("Controller"), sa).get(0);
         }
 
+        boolean isOptional = sa.hasParam("Optional");
+        if (isOptional && !controller.getController().confirmAction(sa, null, "Do you want to copy the spell " + card + "?")) {
+            return;
+        }
+
         final List<SpellAbility> tgtSpells = getTargetSpells(sa);
 
 
