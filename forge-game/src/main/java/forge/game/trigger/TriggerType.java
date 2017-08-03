@@ -12,6 +12,7 @@ import java.util.Map;
  *
  */
 public enum TriggerType {
+    Abandoned(TriggerAbandoned.class),
     AbilityCast(TriggerSpellAbilityCast.class),
     Always(TriggerAlways.class),
     Attached(TriggerAttached.class),

@@ -688,6 +688,7 @@ forge-game/src/main/java/forge/game/staticability/StaticAbilityLayer.java -text
 forge-game/src/main/java/forge/game/staticability/StaticAbilityPreventDamage.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/staticability/package-info.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/Trigger.java svneol=native#text/plain
+forge-game/src/main/java/forge/game/trigger/TriggerAbandoned.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerAlways.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerAttached.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerAttackerBlocked.java svneol=native#text/plain
@@ -10975,6 +10976,7 @@ forge-gui/res/cardsfolder/m/mwonvuli_ooze.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/my_crushing_masterstroke.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/m/my_forces_are_innumerable.txt -text
 forge-gui/res/cardsfolder/m/my_genius_knows_no_bounds.txt -text
+forge-gui/res/cardsfolder/m/my_laughter_echoes.txt -text
 forge-gui/res/cardsfolder/m/my_undead_horde_awakens.txt -text
 forge-gui/res/cardsfolder/m/my_wish_is_your_command.txt -text
 forge-gui/res/cardsfolder/m/mycoid_shepherd.txt svneol=native#text/plain

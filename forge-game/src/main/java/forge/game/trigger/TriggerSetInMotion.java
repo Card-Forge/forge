@@ -17,6 +17,7 @@
  */
 package forge.game.trigger;
 
+import forge.card.CardType;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -53,6 +54,18 @@ public class TriggerSetInMotion extends Trigger {
             if (!matchesValid(runParams2.get("Scheme"), this.mapParams.get("ValidCard").split(","),
                     this.getHostCard())) {
                 return false;
+            }
+        }
+
+        if (this.mapParams.containsKey("SchemeType")) {
+            if (this.mapParams.get("SchemeType").equals("NonOngoing")) {
+                if (((Card) runParams2.get("Scheme")).getType().hasSupertype(CardType.Supertype.Ongoing)) {
+                    return false;
+                }
+            } else if (this.mapParams.get("SchemeType").equals("Ongoing")) {
+                if (!((Card)runParams2.get("Scheme")).getType().hasSupertype(CardType.Supertype.Ongoing)) {
+                    return false;
+                }
             }
         }
 

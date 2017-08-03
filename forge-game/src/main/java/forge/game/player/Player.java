@@ -219,6 +219,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         return getZone(ZoneType.SchemeDeck).size() > 0; //Only the archenemy has schemes.
     }
 
+    public Card getActiveScheme() {
+        return activeScheme;
+    }
+
     public void setSchemeInMotion() {
         for (final Player p : game.getPlayers()) {
             if (p.hasKeyword("Schemes can't be set in motion this turn.")) {
