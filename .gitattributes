@@ -5973,6 +5973,7 @@ forge-gui/res/cardsfolder/e/erosion.txt -text
 forge-gui/res/cardsfolder/e/errand_of_duty.txt -text
 forge-gui/res/cardsfolder/e/errant_doomsayers.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/errant_ephemeron.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/e/errant_minion.txt -text
 forge-gui/res/cardsfolder/e/errantry.txt -text
 forge-gui/res/cardsfolder/e/erratic_explosion.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/erratic_mutation.txt -text
