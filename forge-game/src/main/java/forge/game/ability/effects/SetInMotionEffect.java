@@ -20,7 +20,6 @@ public class SetInMotionEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        System.out.println("AF_SIM");
         Card source = sa.getHostCard();
         Player controller = source.getController();
         boolean again = sa.hasParam("Again");
