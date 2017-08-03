@@ -1495,6 +1495,7 @@ forge-gui/res/blockdata/formats.txt -text
 forge-gui/res/blockdata/printsheets.txt -text
 forge-gui/res/blockdata/starters.txt -text
 forge-gui/res/cardsfolder/a/a_display_of_my_dark_power.txt -text
+forge-gui/res/cardsfolder/a/a_reckoning_approaches.txt -text
 forge-gui/res/cardsfolder/a/abandon_hope.txt -text
 forge-gui/res/cardsfolder/a/abandon_reason.txt -text
 forge-gui/res/cardsfolder/a/abandoned_outpost.txt svneol=native#text/plain
