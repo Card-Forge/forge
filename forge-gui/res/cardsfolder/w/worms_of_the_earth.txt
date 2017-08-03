@@ -3,6 +3,8 @@ ManaCost:2 B B B
 Types:Enchantment
 S:Mode$ CantPlayLand | Description$ Players can't play lands.
 R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Hand,Library,Graveyard,Exile | Destination$ Battlefield | ValidCard$ Land | Prevent$ True | Description$ Lands can't enter the battlefield.
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Stack | Destination$ Battlefield | ValidCard$ Land | ReplaceWith$ MoveToGraveyard | Description$ Lands can't enter the battlefield.
+SVar:MoveToGraveyard:DB$ ChangeZone | Destination$ Graveyard | Defined$ ReplacedCard
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ RepeatAbility | TriggerDescription$ At the beginning of each upkeep, any player may sacrifice two lands or have CARDNAME deal 5 damage to him or her. If a player does either, destroy CARDNAME.
 SVar:RepeatAbility:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose
 SVar:DBChoose:DB$ GenericChoice | Defined$ Player.IsRemembered | Choices$ SacTwoLands,DealDmg | AILogic$ PayUnlessCost
