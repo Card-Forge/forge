@@ -1863,7 +1863,12 @@ public class Card extends GameEntity implements Comparable<Card> {
             sb.replace(start, start + 4, "\r\n");
         }
 
-        return sb.toString().replaceAll("CARDNAME", state.getName()).trim();
+        String desc = sb.toString().replaceAll("CARDNAME", state.getName());
+        if (getEffectSource() != null) {
+            desc = desc.replace("EFFECTSOURCE", getEffectSource().getName());
+        }
+
+        return desc;
     }
 
     private StringBuilder abilityTextInstantSorcery(CardState state) {
