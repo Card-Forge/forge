@@ -143,8 +143,6 @@ public class SpecialCardAi {
     // Chain of Acid
     public static class ChainOfAcid {
         public static boolean consider(Player ai, SpellAbility sa) {
-            List<Card> AiPerms = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
-                    Predicates.not(CardPredicates.Presets.CREATURES));
             List<Card> AiLandsOnly = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
                     CardPredicates.Presets.LANDS);
             List<Card> OppPerms = CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield),
