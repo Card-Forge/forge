@@ -20,6 +20,7 @@ import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostRemoveCounter;
+import forge.game.cost.CostSacrifice;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -372,6 +373,13 @@ public class CountersPutAi extends SpellAbilityAi {
                     return sa.canTarget(c) && c.canReceiveCounters(CounterType.valueOf(type));
                 }
             });
+
+            if (abCost.hasSpecificCostType(CostSacrifice.class)) {
+                Card sacTarget = ComputerUtil.getCardPreference(ai, source, "SacCost", list);
+                // this card is planned to be sacrificed during cost payment, so don't target it
+                // (otherwise the AI can cheat by activating this SA and not paying the sac cost, e.g. Extruder)
+                list.remove(sacTarget);
+            }
 
             if (list.size() < sa.getTargetRestrictions().getMinTargets(source, sa)) {
                 return false;
