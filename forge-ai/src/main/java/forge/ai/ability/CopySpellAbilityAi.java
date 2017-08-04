@@ -3,6 +3,7 @@ package forge.ai.ability;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 
 import java.util.List;
@@ -25,9 +26,10 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
     public boolean chkAIDrawback(final SpellAbility sa, final Player aiPlayer) {
         // NOTE: Other SAs that use CopySpellAbilityAi (e.g. Chain Lightning) are currently routed through
         // generic method SpellAbilityAi#chkDrawbackWithSubs and are handled there.
-
         if ("ChainOfSmog".equals(sa.getParam("AILogic"))) {
             return SpecialCardAi.ChainOfSmog.consider(aiPlayer, sa);
+        } else if ("ChainOfAcid".equals(sa.getParam("AILogic"))) {
+            return SpecialCardAi.ChainOfAcid.consider(aiPlayer, sa);
         }
 
         return super.chkAIDrawback(sa, aiPlayer);
@@ -37,5 +39,17 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
     public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells) {
         return spells.get(0);
     }
+
+    @Override
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+        // Chain of Acid requires special attention here since otherwise the AI will confirm the copy and then
+        // run into the necessity of confirming a mandatory Destroy, thus destroying all of its own permanents.
+        if ("ChainOfAcid".equals(sa.getParam("AILogic"))) {
+            return SpecialCardAi.ChainOfAcid.consider(player, sa);
+        }
+
+        return true;
+    }
+
 }
 

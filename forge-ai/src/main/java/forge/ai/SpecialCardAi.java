@@ -139,7 +139,25 @@ public class SpecialCardAi {
             return chosen;
         }
     }
-    
+
+    // Chain of Acid
+    public static class ChainOfAcid {
+        public static boolean consider(Player ai, SpellAbility sa) {
+            List<Card> AiPerms = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
+                    Predicates.not(CardPredicates.Presets.CREATURES));
+            List<Card> AiLandsOnly = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
+                    CardPredicates.Presets.LANDS);
+            List<Card> OppPerms = CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield),
+                    Predicates.not(CardPredicates.Presets.CREATURES));
+
+            // TODO: improve this logic (currently the AI has difficulty evaluating non-creature permanents,
+            // which it can only distinguish by their CMC, considering >CMC higher value).
+            // Currently ensures that the AI will still have lands provided that the human player goes to
+            // destroy all the AI's lands in order (to avoid manalock).
+            return !OppPerms.isEmpty() && AiLandsOnly.size() > OppPerms.size() + 2;
+        }
+    }
+
     // Chain of Smog
     public static class ChainOfSmog {
         public static boolean consider(Player ai, SpellAbility sa) {
