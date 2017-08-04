@@ -1,0 +1,24 @@
+Name:Bow to My Command
+ManaCost:no cost
+Types:Ongoing Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ ChooseOpponent | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, choose an opponent. Creatures the chosen player controls can't attack you or planeswalkers you control.
+SVar:ChooseOpponent:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SubAbility$ CantAttackEffect
+SVar:CantAttackEffect:DB$ Effect | Name$ Bow to My Command Effect | StaticAbilities$ STCantAttack | Triggers$ TrigAbandoned | SVars$ EffectCleanup | RememberObjects$ Self | Duration$ Permanent
+SVar:TrigAbandoned:Mode$ Abandoned | ValidCard$ Card.IsRemembered | Execute$ EffectCleanup | Static$ True
+SVar:EffectCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:STCantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature.ChosenCtrl | Target$ You,Planeswalker.YouCtrl | Description$ Creatures the chosen player controls can't attack you or planeswalkers you control.
+# TODO: If shared turns are ever implemented that are needed for proper E01 support, this would need to be updated to ensure
+# that several opponents may choose to tap a total of 8 power creatures, as opposed to one opponent fully paying the cost.
+# Ideally, UnlessCost should be expanded to support tapXType<Any/Creature.YouCtrl+withTotalPowerGE8> cost, which would allow
+# to also get rid of the complex script part below and the AILogic$ BowToMyCommand hack in AiController#chooseCardsForEffect
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Opponent | TriggerZones$ Command | Execute$ RepeatOpp | TriggerDescription$ At the beginning of your opponents' end step, they may tap any number of untapped creatures they control with total power 8 or greater. If they do, abandon this scheme.
+SVar:RepeatOpp:DB$ RepeatEach | RepeatSubAbility$ ChooseCardsToTap | RepeatPlayers$ Opponent
+SVar:ChooseCardsToTap:DB$ ChooseCard | Defined$ Opponent | MinAmount$ 0 | Amount$ NumCreatures | References$ NumCreatures | Choices$ Creature.untapped+RememberedPlayerCtrl | ChoiceTitle$ Choose any number of untapped creatures you control | ChoiceZone$ Battlefield | RememberChosen$ True | AILogic$ BowToMyCommand | SubAbility$ TapChosenCards
+SVar:TapChosenCards:DB$ Tap | Defined$ Remembered | SubAbility$ AbandonSelf | ConditionCheckSVar$ TappedCreaturePower | ConditionSVarCompare$ GE8 | References$ TappedCreaturePower
+SVar:AbandonSelf:DB$ Abandon | SubAbility$ DBCleanup | ConditionCheckSVar$ TappedCreaturePower | ConditionSVarCompare$ GE8 | References$ TappedCreaturePower
+T:Mode$ Abandoned | ValidCard$ Self | Execute$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+SVar:NumCreatures:Count$Valid Creature.RememberedPlayerCtrl
+SVar:TappedCreaturePower:Count$SumPower_Card.IsRemembered
+SVar:Picture:https://downloads.cardforge.org/images/cards/E01/Bow to My Command.full.jpg
+Oracle:(An ongoing scheme remains face up until it's abandoned.)\nAs you set this scheme in motion, choose an opponent.\nCreatures the chosen player controls can't attack you or planeswalkers you control.\nAt the beginning of your opponents' end step, they may tap any number of untapped creatures they control with total power 8 or greater. If they do, abandon this scheme.
