@@ -3841,6 +3841,7 @@ forge-gui/res/cardsfolder/c/choking_sands.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/choking_tethers.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/choking_vines.txt -text
 forge-gui/res/cardsfolder/c/choose_your_champion.txt -text
+forge-gui/res/cardsfolder/c/choose_your_demise.txt -text
 forge-gui/res/cardsfolder/c/chord_of_calling.txt -text
 forge-gui/res/cardsfolder/c/chorus_of_might.txt -text
 forge-gui/res/cardsfolder/c/chorus_of_the_conclave.txt -text
