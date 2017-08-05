@@ -135,6 +135,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable {
 
                 String countVar = "Count$Valid " + targets;
                 goalCard.setSVar("PermCount", countVar);
+                break;
             default:
                 break;
         }
