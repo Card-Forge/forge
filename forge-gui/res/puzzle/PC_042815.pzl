@@ -1,7 +1,7 @@
 [metadata]
 Name:Perplexing Chimera (GatheringMagic.com) 042815 - Dracophobia
 URL:http://www.gatheringmagic.com/seanuy-042815-perplexing-chimera-5-dracophobia/
-Goal:Kill Opposing Creatures
+Goal:Kill Specified Creatures
 Targets:Creature.Dragon+OppCtrl
 Turns:1
 Difficulty:Hard

@@ -121,7 +121,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable {
                 break;
             case "destroy specified permanents":
             case "destroy specified creatures":
-            case "kill opposing creatures":
+            case "kill specified creatures":
                 if (targets == null) {
                     targets = "Creature.OppCtrl"; // by default, kill all opponent's creatures
                 }
