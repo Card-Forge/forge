@@ -4,16 +4,19 @@ import forge.GuiBase;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
+import com.google.common.collect.Maps;
 
 import forge.game.Game;
 import forge.game.GameType;
@@ -27,8 +30,8 @@ import forge.util.ThreadUtil;
 import forge.util.XmlUtil;
 
 public abstract class AchievementCollection implements Iterable<Achievement> {
-    protected final Map<String, Achievement> achievements = new LinkedHashMap<String, Achievement>();
-    protected final String name, filename;
+    protected final Map<String, Achievement> achievements = Maps.newLinkedHashMap();
+    protected final String name, filename, path;
     protected final boolean isLimitedFormat;
 
     static {
@@ -78,9 +81,14 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
     }
 
     protected AchievementCollection(String name0, String filename0, boolean isLimitedFormat0) {
+        this(name0, filename0, isLimitedFormat0, (String) null);
+    }
+    
+    protected AchievementCollection(String name0, String filename0, boolean isLimitedFormat0, String path0) {
         name = name0;
         filename = filename0;
         isLimitedFormat = isLimitedFormat0;
+        path = path0;
         addSharedAchivements();
         addAchievements();
         load();
@@ -112,10 +120,23 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         add(new RagsToRiches());
     }
 
-    protected abstract void addAchievements();
+    protected void addAchievements() {
+        if (path != null) {
+            final List<String> achievementListFile = FileUtil.readFile(path);
+            for (final String s : achievementListFile) {
+                if (!s.isEmpty()) {
+                    String k[] = StringUtils.split(s, "|");
+                    add(k[0],k[1],k[2]);
+                }
+            }
+        }
+    }
 
     protected void add(Achievement achievement) {
         achievements.put(achievement.getKey(), achievement);
+    }
+    protected void add(String name, String title, String desc) {
+        // to overwrite
     }
 
     public void updateAll(Player player) {

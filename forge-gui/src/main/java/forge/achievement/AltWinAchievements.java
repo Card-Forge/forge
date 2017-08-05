@@ -12,7 +12,7 @@ public class AltWinAchievements extends AchievementCollection {
     public static final AltWinAchievements instance = new AltWinAchievements();
 
     private AltWinAchievements() {
-        super("Alternate Win Conditions", ForgeConstants.ACHIEVEMENTS_DIR + "altwin.xml", false);
+        super("Alternate Win Conditions", ForgeConstants.ACHIEVEMENTS_DIR + "altwin.xml", false, ForgeConstants.ALTWIN_ACHIEVEMENT_LIST_FILE);
     }
 
     @Override
@@ -20,34 +20,7 @@ public class AltWinAchievements extends AchievementCollection {
         //prevent including shared achievements
     }
 
-    @Override
-    protected void addAchievements() {
-        add("Approach of the Second Sun", "The God-Pharaoh's Return", "I'm back! Did you miss me?");
-        add("Azor's Elocutors", "The Filibuster", "Talk might be cheap, but it can buy you victory!");
-        add("Barren Glory", "The Clean Slate", "When you have nothing, you can lose nothing... so you can win everything!");
-        add("Battle of Wits", "The Great Library", "So many answers, so little time to look through them...");
-        add("Biovisionary", "The Clique", "And now my... I mean our plan is complete!");
-        add("Chance Encounter", "The Accident", "This victory was brought to you by a series of fortunate events.");
-        add("Coalition Victory", "The Teamwork", "Let's all be friends!");
-        add("Darksteel Reactor", "The Machine", "What are you going to do with all this power? Whatever you want!");
-        add("Door to Nothingness", "The Door", "And behind door #2 is...");
-        add("Epic Struggle", "The Army", "Let's just trample them into the ground already!");
-        add("Felidar Sovereign", "The Cat's Life", "Just wait for his other eight lives!");
-        add("Hedron Alignment", "The Alignment", "The hedrons are right!");
-        add("Helix Pinnacle", "The Tower", "The view from the top is great!");
-        add("Hellkite Tyrant", "The Hoard", "You made your bed of treasure, now lie in it!");
-        add("Laboratory Maniac", "The Insanity", "No more questions? I'm omniscient now!");
-        add("Mayael's Aria", "The Gargantuan", "Just my shadow weighs a ton!");
-        add("Maze's End", "The Labyrinth", "What? No bossfight?");
-        add("Mechanized Production", "The Rise of Replicas", "Welcome to the future of mass production!");
-        add("Mortal Combat", "The Boneyard", "So peaceful...");
-        add("Near-Death Experience", "The Edge", "Phew... I thought I was going to die!");
-        add("Phage the Untouchable", "The Untouchable", "None are immune to her deadly touch!");
-        add("Test of Endurance", "The Test", "So... did I pass?");
-        add("Triskaidekaphobia", "The Fear of 13", "It's just a silly ancient superstition... right?");
-    }
-
-    private void add(String cardName0, String displayName0, String flavorText0) {
+    protected void add(String cardName0, String displayName0, String flavorText0) {
         add(new AltWinAchievement(cardName0, displayName0, flavorText0));
     }
 
