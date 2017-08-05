@@ -56,8 +56,9 @@ public class ChallengeAchievements extends AchievementCollection {
 
         @Override
         protected final boolean eval(Player player, Game game) {
-            if (game.getRules().hasAppliedVariant(GameType.MomirBasic)) {
-                // Momir Basic uses a fixed pre-defined deck format (all lands), so designing it to be that way is not the player's achievement
+            if (game.getRules().hasAppliedVariant(GameType.MomirBasic)
+                    || game.getRules().hasAppliedVariant(GameType.Puzzle)) {
+                // these modes use a fixed pre-defined deck format, so challenge achievements don't apply in them
                 return false;
             }
             if (player.getOutcome().hasWon()) {
