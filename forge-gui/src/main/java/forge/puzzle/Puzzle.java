@@ -121,19 +121,20 @@ public class Puzzle extends GameState implements InventoryItem, Comparable {
                 break;
             case "destroy specified permanents":
             case "destroy specified creatures":
+            case "remove specified permanents from the battlefield":
             case "kill specified creatures":
                 if (targets == null) {
                     targets = "Creature.OppCtrl"; // by default, kill all opponent's creatures
                 }
-                String trigKill = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCards$ Creature.OppCtrl | " +
-                        "Static$ True | TriggerDescription$ When the last creature opponent controls dies, you win the game.";
-                String effKill = "DB$ WinsGame | Defined$ You | ConditionCheckSVar$ CreatureCount | ConditionSVarCompare$ EQ0";
+                String trigKill = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCards$ " + targets + " | " +
+                        "Static$ True | TriggerDescription$ When the last permanent specified in the goal leaves the battlefield, you win the game.";
+                String effKill = "DB$ WinsGame | Defined$ You | ConditionCheckSVar$ PermCount | ConditionSVarCompare$ EQ0";
                 final Trigger triggerKill = TriggerHandler.parseTrigger(trigKill, goalCard, true);
                 triggerKill.setOverridingAbility(AbilityFactory.getAbility(effKill, goalCard));
                 goalCard.addTrigger(triggerKill);
 
                 String countVar = "Count$Valid " + targets;
-                goalCard.setSVar("CreatureCount", countVar);
+                goalCard.setSVar("PermCount", countVar);
             default:
                 break;
         }
