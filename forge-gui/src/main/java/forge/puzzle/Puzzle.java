@@ -21,6 +21,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable {
     String url;
     String difficulty;
     String description;
+    String targets;
     int turns;
 
     public Puzzle(Map<String, List<String>> puzzleLines) {
@@ -44,6 +45,8 @@ public class Puzzle extends GameState implements InventoryItem, Comparable {
                 this.difficulty = split[1];
             } else if ("Description".equalsIgnoreCase(split[0])) {
                 this.description = split[1];
+            } else if ("Targets".equalsIgnoreCase(split[0])) {
+                this.targets = split[1];
             }
         }
     }
@@ -116,6 +119,21 @@ public class Puzzle extends GameState implements InventoryItem, Comparable {
                        "TurnCount$ " + (turns + 1) + " | TriggerDescription$ At the beginning of your upkeep step, you win the game.";
                 eff = "DB$ WinsGame | Defined$ You";
                 break;
+            case "destroy specified permanents":
+            case "destroy specified creatures":
+            case "kill opposing creatures":
+                if (targets == null) {
+                    targets = "Creature.OppCtrl"; // by default, kill all opponent's creatures
+                }
+                String trigKill = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCards$ Creature.OppCtrl | " +
+                        "Static$ True | TriggerDescription$ When the last creature opponent controls dies, you win the game.";
+                String effKill = "DB$ WinsGame | Defined$ You | ConditionCheckSVar$ CreatureCount | ConditionSVarCompare$ EQ0";
+                final Trigger triggerKill = TriggerHandler.parseTrigger(trigKill, goalCard, true);
+                triggerKill.setOverridingAbility(AbilityFactory.getAbility(effKill, goalCard));
+                goalCard.addTrigger(triggerKill);
+
+                String countVar = "Count$Valid " + targets;
+                goalCard.setSVar("CreatureCount", countVar);
             default:
                 break;
         }
