@@ -33,6 +33,8 @@ public final class ForgeConstants {
     public static final String LISTS_DIR = RES_DIR + "lists" + PATH_SEPARATOR;
     public static final String KEYWORD_LIST_FILE                     = LISTS_DIR + "NonStackingKWList.txt";
     public static final String TYPE_LIST_FILE                        = LISTS_DIR + "TypeLists.txt";
+    public static final String PLANESWALKER_ACHIEVEMENT_LIST_FILE    = LISTS_DIR + "planeswalker-archivements.txt";
+    public static final String ALTWIN_ACHIEVEMENT_LIST_FILE          = LISTS_DIR + "altwin-archivements.txt";
     public static final String IMAGE_LIST_TOKENS_FILE                = LISTS_DIR + "token-images.txt";
     public static final String IMAGE_LIST_QUEST_OPPONENT_ICONS_FILE  = LISTS_DIR + "quest-opponent-icons.txt";
     public static final String IMAGE_LIST_QUEST_TOKENS_FILE          = LISTS_DIR + "quest-pet-token-images.txt";
