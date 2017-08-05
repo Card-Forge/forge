@@ -16,6 +16,7 @@ import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
@@ -244,6 +245,12 @@ public class EffectAi extends SpellAbilityAi {
                     }
                 }
                 return true;
+            } else if (logic.equals("CastFromGraveThisTurn")) {
+                CardCollection list = new CardCollection(game.getCardsIn(ZoneType.Graveyard));
+                list = CardLists.getValidCards(list, sa.getTargetRestrictions().getValidTgts(), ai, sa.getHostCard(), sa);
+                if (!ComputerUtil.targetPlayableSpellCard(ai, list, sa, false)) {
+                    return false;
+                }
             }
         } else { //no AILogic
             return false;
