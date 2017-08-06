@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Ice King 1
+Title=Ice King
+Difficulty=easy
+Description=Mono U snow deck with two copies of Heidar, Rimewind Master and Frost Titan.
+Icon=Ice King.jpg
+Deck Type=constructed
+[main]
+22 Snow-Covered Island
+1 Mindstorm Crown
+3 Sapphire Medallion
+4 Balduvian Conjurer
+2 Frost Titan
+4 Frost Walker
+2 Heidar, Rimewind Master
+4 Rimewind Taskmage
+4 Wall of Frost
+4 Ice Cage
+2 Chilling Grasp
+2 Crippling Chill
+2 Frost Breath
+4 Think Twice
+[sideboard]

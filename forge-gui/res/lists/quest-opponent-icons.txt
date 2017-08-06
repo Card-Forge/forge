@@ -199,6 +199,7 @@ https://downloads.cardforge.org/images/icons/Hugo%20Drax.jpg
 https://downloads.cardforge.org/images/icons/Hulk.jpg
 https://downloads.cardforge.org/images/icons/Iblis.jpg
 https://downloads.cardforge.org/images/icons/Iceman.jpg
+https://downloads.cardforge.org/images/icons/Ice%20King.jpg
 https://downloads.cardforge.org/images/icons/IdiAmin.jpg
 https://downloads.cardforge.org/images/icons/Ikenga.jpg
 https://downloads.cardforge.org/images/icons/Immortus.jpg
