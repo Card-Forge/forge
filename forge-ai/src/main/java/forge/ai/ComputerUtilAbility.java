@@ -95,6 +95,7 @@ public class ComputerUtilAbility {
     public static List<SpellAbility> getOriginalAndAltCostAbilities(final List<SpellAbility> originList, final Player player) {
         final List<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
         for (SpellAbility sa : originList) {
+            sa.setActivatingPlayer(player);
             //add alternative costs as additional spell abilities
             newAbilities.add(sa);
             newAbilities.addAll(GameActionUtil.getAlternativeCosts(sa, player));
@@ -102,6 +103,7 @@ public class ComputerUtilAbility {
     
         final List<SpellAbility> result = new ArrayList<SpellAbility>();
         for (SpellAbility sa : newAbilities) {
+            sa.setActivatingPlayer(player);
             result.addAll(GameActionUtil.getOptionalCosts(sa));
         }
         return result;

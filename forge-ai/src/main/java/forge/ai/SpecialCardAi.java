@@ -471,19 +471,11 @@ public class SpecialCardAi {
                     continue;
                 }
 
-                Player originalActivator = testSa.getActivatingPlayer(); // needed for delayed triggers
                 testSa.setActivatingPlayer(ai);
-
-                boolean willPlay = false;
                 if (((PlayerControllerAi)ai.getController()).getAi().canPlaySa(testSa) == AiPlayDecision.WillPlay) {
-                    willPlay = true;
+                    // the AI is willing to play the spell
+                    return true;
                 }
-
-                if (originalActivator != null) {
-                    testSa.setActivatingPlayer(originalActivator); // we are only simulating, so set the original activator back
-                }
-
-                if (willPlay) { return true; } // The AI seems willing to play the spell
             }
 
             return false; // haven't found anything to play with the excess generated mana

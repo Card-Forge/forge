@@ -545,11 +545,10 @@ public class AiController {
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(possibleCounters, player)) {
             SpellAbility currentSA = sa;
-
-            Player originalActivator = sa.getActivatingPlayer(); // needed for delayed triggers
             sa.setActivatingPlayer(player);
             // check everything necessary
-
+            
+            
             AiPlayDecision opinion = canPlayAndPayFor(currentSA);
             //PhaseHandler ph = game.getPhaseHandler();
             // System.out.printf("Ai thinks '%s' of %s @ %s %s >>> \n", opinion, sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
@@ -560,17 +559,12 @@ public class AiController {
                 } else {
                     // Compare bestSA with this SA
                     final int restrictionLevel = ComputerUtil.counterSpellRestriction(player, currentSA);
-
+    
                     if (restrictionLevel > bestRestriction) {
                         bestRestriction = restrictionLevel;
                         bestSA = currentSA;
                     }
                 }
-            }
-
-            // This was only a simulation, so set the original activator back if there was one
-            if (originalActivator != null) {
-                sa.setActivatingPlayer(originalActivator);
             }
         }
 
@@ -598,17 +592,11 @@ public class AiController {
             if (sa.getApi() == ApiType.Counter || sa.getApi() == exceptSA) {
                 continue;
             }
-
-            Player originalActivator = sa.getActivatingPlayer(); // needed for delayed triggers
             sa.setActivatingPlayer(player);
             // TODO: this currently only works as a limited prediction of permanent spells.
             // Ideally this should cast canPlaySa to determine that the AI is truly able/willing to cast a spell,
             // but that is currently difficult to implement due to various side effects leading to stack overflow.
             if (!ComputerUtil.castPermanentInMain1(player, sa) && sa.getHostCard() != null && !sa.getHostCard().isLand() && ComputerUtilCost.canPayCost(sa, player)) {
-                if (originalActivator != null) {
-                    sa.setActivatingPlayer(originalActivator); // we are only simulating, so set the original activator back
-                }
-
                 if (sa instanceof SpellPermanent) {
                     return sa;
                 }
@@ -1130,10 +1118,6 @@ public class AiController {
                 }
             }
 
-            // We need the original activating player in case the SA is on a delayed trigger waiting to be
-            // activated by another player (e.g. Rainbow Vale EOT trigger).
-            Player origActivatingPlayer = sa.getActivatingPlayer();
-
             sa.setActivatingPlayer(player);
             sa.setLastStateBattlefield(game.getLastStateBattlefield());
             sa.setLastStateGraveyard(game.getLastStateGraveyard());
@@ -1141,14 +1125,9 @@ public class AiController {
             AiPlayDecision opinion = canPlayAndPayFor(sa);
             // PhaseHandler ph = game.getPhaseHandler();
             // System.out.printf("Ai thinks '%s' of %s -> %s @ %s %s >>> \n", opinion, sa.getHostCard(), sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
-
-            if (origActivatingPlayer != null) {
-                sa.setActivatingPlayer(origActivatingPlayer); // since this was only a simulation, restore the original activator
-            }
-
-            if (opinion != AiPlayDecision.WillPlay) {
+            
+            if (opinion != AiPlayDecision.WillPlay)
                 continue;
-            }
     
             return sa;
         }
