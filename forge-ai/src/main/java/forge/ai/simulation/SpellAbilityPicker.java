@@ -81,15 +81,23 @@ public class SpellAbilityPicker {
             if (sa.isManaAbility()) {
                 continue;
             }
+
+            Player originalActivator = sa.getActivatingPlayer(); // needed for delayed triggers
             sa.setActivatingPlayer(player);
             
             AiPlayDecision opinion = canPlayAndPayForSim(sa);
             // print("  " + opinion + ": " + sa);
             // PhaseHandler ph = game.getPhaseHandler();
             // System.out.printf("Ai thinks '%s' of %s -> %s @ %s %s >>> \n", opinion, sa.getHostCard(), sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
-            
-            if (opinion != AiPlayDecision.WillPlay)
+
+            if (originalActivator != null) {
+                sa.setActivatingPlayer(originalActivator); // we are only simulating, so set the original activator back
+            }
+
+            if (opinion != AiPlayDecision.WillPlay) {
                 continue;
+            }
+
             candidateSAs.set(writeIndex,  sa);
             writeIndex++;
         }

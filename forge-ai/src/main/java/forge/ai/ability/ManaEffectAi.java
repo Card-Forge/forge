@@ -156,7 +156,7 @@ public class ManaEffectAi extends SpellAbilityAi {
             }
 
             SpellAbility testSaNoCost = testSa.copyWithNoManaCost();
-            testSaNoCost.setActivatingPlayer(ai);
+            testSaNoCost.setActivatingPlayer(ai); // should be safe since we're operating on a copy
             if (((PlayerControllerAi)ai.getController()).getAi().canPlaySa(testSaNoCost) == AiPlayDecision.WillPlay) {
                 if (testSa.getHostCard().isPermanent() && !testSa.getHostCard().hasKeyword("Haste") 
                     && !ai.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
