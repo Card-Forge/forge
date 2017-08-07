@@ -379,7 +379,7 @@ public abstract class GameState {
                 aiCardTexts.put(ZoneType.Command, categoryValue);
         }
 
-        else if (categoryName.endsWith("ability")) {
+        else if (categoryName.startsWith("ability")) {
             abilityString.put(categoryName.substring("ability".length()), categoryValue);
         }
 
