@@ -443,7 +443,7 @@ public abstract class GameState {
         handleChosenEntities();
         handleRememberedEntities();
         handleScriptExecution();
-        handlePrecastSpells(human, ai);
+        handlePrecastSpells(game);
         handleMarkedDamage();
 
         // Combat only works for 1v1 matches for now (which are the only matches dev mode supports anyway)
@@ -536,32 +536,72 @@ public abstract class GameState {
         }
     }
 
-    private void handlePrecastSpells(final Player human, final Player ai) {
+    private void handlePrecastSpells(final Game game) {
+        Player human = game.getPlayers().get(0);
+        Player ai = game.getPlayers().get(1);
+
         if (precastHuman != null) {
             String[] spellList = TextUtil.split(precastHuman, ';');
             for (String spell : spellList) {
-                precastSpellFromCard(spell, human);
+                precastSpellFromCard(spell, human, game);
             }
         }
         if (precastAI != null) {
             String[] spellList = TextUtil.split(precastAI, ';');
             for (String spell : spellList) {
-                precastSpellFromCard(spell, ai);
+                precastSpellFromCard(spell, ai, game);
             }
         }
     }
 
-    private void precastSpellFromCard(String cardName, Player activator) {
-        PaperCard pc = StaticData.instance().getCommonCards().getCard(cardName);
+    private void precastSpellFromCard(String spellDef, final Player activator, final Game game) {
+        Player human = game.getPlayers().get(0);
+        Player ai = game.getPlayers().get(1);
+
+        final int TARGET_NONE = -1; // untargeted spell (e.g. Joraga Invocation)
+        final int TARGET_HUMAN = -2;
+        final int TARGET_AI = -3;
+
+        int tgtID = TARGET_NONE;
+        if (spellDef.contains("->")) {
+            String tgtDef = spellDef.substring(spellDef.indexOf("->") + 2);
+
+            if (tgtDef.equalsIgnoreCase("human")) {
+                tgtID = TARGET_HUMAN;
+            } else if (tgtDef.equalsIgnoreCase("ai")) {
+                tgtID = TARGET_AI;
+            } else {
+                tgtID = Integer.parseInt(spellDef.substring(spellDef.indexOf("->") + 2));
+            }
+
+            spellDef = spellDef.substring(0, spellDef.indexOf("->"));
+        }
+
+        PaperCard pc = StaticData.instance().getCommonCards().getCard(spellDef);
 
         if (pc == null) {
-            System.err.println("ERROR: Could not find a card with name " + cardName + " to precast!");
+            System.err.println("ERROR: Could not find a card with name " + spellDef + " to precast!");
             return;
         }
 
         Card c = Card.fromPaperCard(pc, activator);
         SpellAbility sa = c.getFirstSpellAbility();
         sa.setActivatingPlayer(activator);
+
+        switch (tgtID) {
+            case TARGET_HUMAN:
+                sa.getTargets().add(human);
+                break;
+            case TARGET_AI:
+                sa.getTargets().add(ai);
+                break;
+            case TARGET_NONE:
+                break;
+            default:
+                sa.getTargets().add(idToCard.get(tgtID));
+                break;
+        }
+
         sa.resolve();
     }
 
