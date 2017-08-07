@@ -34,7 +34,7 @@ public class ReplaceEffect extends SpellAbilityEffect {
             if (list.size() > 0) {
                 params.put(varName, list.get(0));
             }
-        } else  if ("Player".equals(type)) {
+        } else if ("Player".equals(type)) {
             List<Player> list = AbilityUtils.getDefinedPlayers(card, varValue, sa);
             if (list.size() > 0) {
                 params.put(varName, list.get(0));
