@@ -538,13 +538,13 @@ public abstract class GameState {
 
     private void handlePrecastSpells(final Player human, final Player ai) {
         if (precastHuman != null) {
-            String[] spellList = TextUtil.split(precastHuman, ',');
+            String[] spellList = TextUtil.split(precastHuman, ';');
             for (String spell : spellList) {
                 precastSpellFromCard(spell, human);
             }
         }
         if (precastAI != null) {
-            String[] spellList = TextUtil.split(precastAI, ',');
+            String[] spellList = TextUtil.split(precastAI, ';');
             for (String spell : spellList) {
                 precastSpellFromCard(spell, ai);
             }
