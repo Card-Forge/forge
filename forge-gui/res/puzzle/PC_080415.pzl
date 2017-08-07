@@ -1,0 +1,21 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 080415 - Variations on a Theme
+URL:http://www.gatheringmagic.com/seanuy-080415-variations-on-a-theme/
+Goal:Win
+Turns:2
+Difficulty:Hard
+Description:Win before your Opponent's next turn is done. Start by casting Ponder. For each of the three cards you may choose to draw, a solution exists.
+[state]
+ActivePlayer=human
+ActivePhase=Main1
+HumanLife=5
+AILife=8
+humanhand=Ponder; Banishing Knack; Hammerhand
+humangraveyard=
+humanlibrary=Immolation; Rupture; Bone Saw
+humanbattlefield=Island|Set:ORI; Island|Set:ORI; Island|Set:ORI; Island|Set:ORI; Mountain|Set:ORI; Mountain|Set:ORI; Mountain|Set:ORI; Wind Dancer; Izzet Staticaster; Monastery Loremaster; Viashino Warrior
+aibattlefield=Swamp|Set:ORI|Tapped; Swamp|Set:ORI|Tapped; Swamp|Set:ORI; Swamp|Set:ORI; Forest|Set:ORI|Tapped; Forest|Set:ORI|Tapped; Forest|Set:ORI; Sultai Flayer; Kezzerdrix; Caustic Hound; Quilled Slagwurm|Tapped
+aihand=
+aigraveyard=
+ailibrary=Island|Set:ORI
+aiexile=
