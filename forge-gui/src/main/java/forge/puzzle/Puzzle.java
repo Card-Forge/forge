@@ -34,19 +34,19 @@ public class Puzzle extends GameState implements InventoryItem, Comparable {
         for(String line : metadataLines) {
             String[] split = line.split(":");
             if ("Name".equalsIgnoreCase(split[0])) {
-                this.name = split[1];
+                this.name = split[1].trim();
             } else if ("Goal".equalsIgnoreCase(split[0])) {
-                this.goal = split[1];
+                this.goal = split[1].trim();
             } else if ("Url".equalsIgnoreCase(split[0])) {
-                this.url = split[1];
+                this.url = split[1].trim();
             } else if ("Turns".equalsIgnoreCase(split[0])) {
                 this.turns = Integer.parseInt(split[1]);
             } else if ("Difficulty".equalsIgnoreCase(split[0])) {
-                this.difficulty = split[1];
+                this.difficulty = split[1].trim();
             } else if ("Description".equalsIgnoreCase(split[0])) {
-                this.description = split[1];
+                this.description = split[1].trim();
             } else if ("Targets".equalsIgnoreCase(split[0])) {
-                this.targets = split[1];
+                this.targets = split[1].trim();
             }
         }
     }

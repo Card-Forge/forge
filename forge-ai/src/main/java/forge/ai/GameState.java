@@ -62,6 +62,9 @@ public abstract class GameState {
 
     private String tChangePlayer = "NONE";
     private String tChangePhase = "NONE";
+
+    private String precastHuman = null;
+    private String precastAI = null;
     
     public GameState() {
     }
@@ -198,6 +201,10 @@ public abstract class GameState {
             }
             if (c.getCurrentStateName().equals(CardStateName.Transformed)) {
                 newText.append("|Transformed");
+            } else if (c.getCurrentStateName().equals(CardStateName.Flipped)) {
+                newText.append("|Flipped");
+            } else if (c.getCurrentStateName().equals(CardStateName.Meld)) {
+                newText.append("|Meld");
             }
             Map<CounterType, Integer> counters = c.getCounters();
             if (!counters.isEmpty()) {
@@ -372,10 +379,16 @@ public abstract class GameState {
                 aiCardTexts.put(ZoneType.Command, categoryValue);
         }
 
-        else if (categoryName.startsWith("ability")) {
+        else if (categoryName.endsWith("ability")) {
             abilityString.put(categoryName.substring("ability".length()), categoryValue);
         }
 
+        else if (categoryName.endsWith("precast")) {
+            if (isHuman)
+                precastHuman = categoryValue;
+            else
+                precastAI = categoryValue;
+        }
         else {
             System.out.println("Unknown key: " + categoryName);
         }
@@ -430,6 +443,7 @@ public abstract class GameState {
         handleChosenEntities();
         handleRememberedEntities();
         handleScriptExecution();
+        handlePrecastSpells(human, ai);
         handleMarkedDamage();
 
         // Combat only works for 1v1 matches for now (which are the only matches dev mode supports anyway)
@@ -520,7 +534,35 @@ public abstract class GameState {
             }
             sa.resolve();
         }
+    }
 
+    private void handlePrecastSpells(final Player human, final Player ai) {
+        if (precastHuman != null) {
+            String[] spellList = TextUtil.split(precastHuman, ',');
+            for (String spell : spellList) {
+                precastSpellFromCard(spell, human);
+            }
+        }
+        if (precastAI != null) {
+            String[] spellList = TextUtil.split(precastAI, ',');
+            for (String spell : spellList) {
+                precastSpellFromCard(spell, ai);
+            }
+        }
+    }
+
+    private void precastSpellFromCard(String cardName, Player activator) {
+        PaperCard pc = StaticData.instance().getCommonCards().getCard(cardName);
+
+        if (pc == null) {
+            System.err.println("ERROR: Could not find a card with name " + cardName + " to precast!");
+            return;
+        }
+
+        Card c = Card.fromPaperCard(pc, activator);
+        SpellAbility sa = c.getFirstSpellAbility();
+        sa.setActivatingPlayer(activator);
+        sa.resolve();
     }
 
     private void handleMarkedDamage() {
@@ -698,6 +740,10 @@ public abstract class GameState {
                     }
                 } else if (info.startsWith("Transformed")) {
                     c.setState(CardStateName.Transformed, true);
+                } else if (info.startsWith("Flipped")) {
+                    c.setState(CardStateName.Flipped, true);
+                } else if (info.startsWith("Meld")) {
+                    c.setState(CardStateName.Meld, true);
                 } else if (info.startsWith("IsCommander")) {
                     // TODO: This doesn't seem to properly restore the ability to play the commander. Why?
                     c.setCommander(true);
