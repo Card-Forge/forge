@@ -74,6 +74,7 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
         if (mapParams.containsKey("Execute")) {
             SpellAbility overridingSA = sa.getAdditonalAbility("Execute");
             overridingSA.setActivatingPlayer(sa.getActivatingPlayer());
+            overridingSA.setDeltrigActivatingPlayer(sa.getActivatingPlayer()); // ensure that the original activator can be restored later
             // Set Transform timestamp when the delayed trigger is created
             if (ApiType.SetState == overridingSA.getApi()) {
                 overridingSA.setSVar("StoredTransform", String.valueOf(sa.getHostCard().getTransformedTimestamp()));

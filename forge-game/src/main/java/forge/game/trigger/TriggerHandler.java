@@ -578,9 +578,15 @@ public class TriggerHandler {
         if (regtrig.getStoredTriggeredObjects() != null) {
             sa.setTriggeringObjects(regtrig.getStoredTriggeredObjects());
         }
+
         if (sa.getActivatingPlayer() == null) { // overriding delayed trigger should have set activator
             sa.setActivatingPlayer(host.getController());
+        } else if (sa.getDeltrigActivatingPlayer() != null) {
+            // make sure that the original delayed trigger activator is restored
+            // (may have been overwritten by the AI simulation routines, e.g. Rainbow Vale)
+            sa.setActivatingPlayer(sa.getDeltrigActivatingPlayer());
         }
+
         if (triggerParams.containsKey("TriggerController")) {
             Player p = AbilityUtils.getDefinedPlayers(regtrig.getHostCard(), triggerParams.get("TriggerController"), sa).get(0);
             sa.setActivatingPlayer(p);
