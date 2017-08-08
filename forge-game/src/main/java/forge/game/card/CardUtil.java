@@ -88,6 +88,7 @@ public final class CardUtil {
             .put("Elves", "Elf")
             .put("Goblins", "Goblin")
             .put("Gorgons", "Gorgon")
+            .put("Rats", "Rat")
             .put("Vampires", "Vampire")
             .put("Werewolves", "Werewolf")
             .put("Zombies", "Zombie")
