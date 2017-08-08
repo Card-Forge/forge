@@ -13,6 +13,8 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
+import forge.game.cost.CostTap;
+import forge.game.cost.CostTapType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -147,6 +149,25 @@ public class UntapAi extends SpellAbilityAi {
         // matter.
         final String[] tappablePermanents = {"Creature", "Land", "Artifact"};
         untapList = CardLists.getValidCards(untapList, tappablePermanents, source.getController(), source, sa);
+
+        // Try to avoid potential infinite recursion,
+        // e.g. Kiora's Follower untapping another Kiora's Follower and repeating infinitely
+        if (sa.getPayCosts() != null && sa.getPayCosts().hasOnlySpecificCostType(CostTap.class)) {
+            CardCollection toRemove = new CardCollection();
+            for (Card c : untapList) {
+                for (SpellAbility ab : c.getAllSpellAbilities()) {
+                    if (ab.getApi() == ApiType.Untap
+                            && ab.getPayCosts() != null
+                            && ab.getPayCosts().hasOnlySpecificCostType(CostTap.class)
+                            && ab.canTarget(source)) {
+                        System.out.println("Found a recursive untap target: " + c);
+                        toRemove.add(c);
+                        break;
+                    }
+                }
+            }
+            untapList.removeAll(toRemove);
+        }
 
         sa.resetTargets();
         while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
