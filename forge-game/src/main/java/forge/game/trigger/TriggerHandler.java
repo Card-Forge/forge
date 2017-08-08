@@ -137,6 +137,16 @@ public class TriggerHandler {
         suppressedModes.add(mode);
     }
 
+    public final void setSuppressAllTriggers(final boolean suppress) {
+        for (TriggerType t : TriggerType.values()) {
+            if (suppress) {
+                suppressMode(t);
+            } else {
+                clearSuppression(t);
+            }
+        }
+    }
+
     public final void clearSuppression(final TriggerType mode) {
         suppressedModes.remove(mode);
     }

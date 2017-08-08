@@ -1,6 +1,9 @@
 package forge.ai;
 
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
 import forge.StaticData;
 import forge.card.CardStateName;
 import forge.game.Game;
@@ -9,6 +12,9 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.card.*;
 import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
+import forge.game.event.GameEventAttackersDeclared;
+import forge.game.event.GameEventCombatChanged;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -432,9 +438,7 @@ public abstract class GameState {
 
         game.getPhaseHandler().devModeSet(newPhase, newPlayerTurn);
 
-        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getTriggerHandler().suppressMode(TriggerType.DamageDone);
-        game.getTriggerHandler().suppressMode(TriggerType.Unequip);
+        game.getTriggerHandler().setSuppressAllTriggers(true);
 
         setupPlayerState(humanLife, humanCardTexts, human);
         setupPlayerState(computerLife, aiCardTexts, ai);
@@ -446,15 +450,14 @@ public abstract class GameState {
         handlePrecastSpells(game);
         handleMarkedDamage();
 
+        game.getTriggerHandler().setSuppressAllTriggers(false);
+
         // Combat only works for 1v1 matches for now (which are the only matches dev mode supports anyway)
+        // Note: triggers may fire during combat declarations ("whenever X attacks, ...", etc.)
         if (newPhase == PhaseType.COMBAT_DECLARE_ATTACKERS || newPhase == PhaseType.COMBAT_DECLARE_BLOCKERS) {
             boolean toDeclareBlockers = newPhase == PhaseType.COMBAT_DECLARE_BLOCKERS;
             handleCombat(game, newPlayerTurn, newPlayerTurn.getSingleOpponent(), toDeclareBlockers);
         }
-
-        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-        game.getTriggerHandler().clearSuppression(TriggerType.DamageDone);
-        game.getTriggerHandler().clearSuppression(TriggerType.Unequip);
 
         game.getStack().setResolving(false);
 
@@ -471,17 +474,46 @@ public abstract class GameState {
             game.updateCombatForView();
         }
 
+        Combat combat = game.getPhaseHandler().getCombat();
         for (Entry<Card, Card> attackMap : cardAttackMap.entrySet()) {
             Card attacker = attackMap.getKey();
             Card attacked = attackMap.getValue();
 
-            game.getPhaseHandler().getCombat().addAttacker(attacker, attacked == null ? defendingPlayer : attacked);
+            combat.addAttacker(attacker, attacked == null ? defendingPlayer : attacked);
         }
 
-        game.updateCombatForView();
+        // Run the necessary combat events and triggers to set things up correctly as if the
+        // attack was actually declared by the attacking player
+        Multimap<GameEntity, Card> attackersMap = ArrayListMultimap.create();
+        for (GameEntity ge : combat.getDefenders()) {
+            attackersMap.putAll(ge, combat.getAttackersOf(ge));
+        }
+        game.fireEvent(new GameEventAttackersDeclared(attackingPlayer, attackersMap));
 
-        // Gracefully proceed to Declare Blockers, giving priority to the defending player
-        if (toDeclareBlockers) {
+        if (!combat.getAttackers().isEmpty()) {
+            List<GameEntity> attackedTarget = Lists.newArrayList();
+            for (final Card c : combat.getAttackers()) {
+                attackedTarget.add(combat.getDefenderByAttacker(c));
+            }
+            final Map<String, Object> runParams = Maps.newHashMap();
+            runParams.put("Attackers", combat.getAttackers());
+            runParams.put("AttackingPlayer", combat.getAttackingPlayer());
+            runParams.put("AttackedTarget", attackedTarget);
+            game.getTriggerHandler().runTrigger(TriggerType.AttackersDeclared, runParams, false);
+        }
+
+        for (final Card c : combat.getAttackers()) {
+            CombatUtil.checkDeclaredAttacker(game, c, combat);
+        }
+
+        game.getTriggerHandler().resetActiveTriggers();
+        game.updateCombatForView();
+        game.fireEvent(new GameEventCombatChanged());
+
+        // Gracefully proceed to Declare Blockers, giving priority to the defending player,
+        // but only if the stack is empty (otherwise the game will crash).
+        game.getStack().addAllTriggeredAbilitiesToStack();
+        if (toDeclareBlockers && game.getStack().isEmpty()) {
             game.getPhaseHandler().devAdvanceToPhase(PhaseType.COMBAT_DECLARE_BLOCKERS);
         }
     }
