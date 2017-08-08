@@ -159,7 +159,6 @@ public class UntapAi extends SpellAbilityAi {
                             && ab.getPayCosts() != null
                             && ab.getPayCosts().hasOnlySpecificCostType(CostTap.class)
                             && ab.canTarget(source)) {
-                        System.out.println("Found a recursive untap target: " + c);
                         toRemove.add(c);
                         break;
                     }
