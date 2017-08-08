@@ -31,7 +31,7 @@ public class QuestDuelReader extends StorageReaderFolder<QuestEventDuel> {
         qc.setTitle(sectionMeta.get("Title"));
         qc.setName(sectionMeta.get("Name")); // Challenges have unique titles
         qc.setDifficulty(QuestEventDifficulty.fromString(sectionMeta.get("Difficulty")));
-        qc.setDescription(sectionMeta.get("Description").replace("\\n", "\n"));
+        qc.setDescription(sectionMeta.get("Description", "").replace("\\n", "\n"));
         qc.setCardReward(sectionMeta.get("Card Reward"));
         qc.setIconImageKey(ImageKeys.ICON_PREFIX + sectionMeta.get("Icon"));
         if (sectionMeta.contains("Profile")) {
