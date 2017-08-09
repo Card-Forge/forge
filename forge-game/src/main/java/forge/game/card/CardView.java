@@ -291,7 +291,7 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.Remembered);
     }
     void updateRemembered(Card c) {
-        if (c.getRemembered() == null) {
+        if (c.getRemembered() == null || Iterables.size(c.getRemembered()) == 0) {
             set(TrackableProperty.Remembered, null);
             return;
         }
