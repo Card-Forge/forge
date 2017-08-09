@@ -2712,8 +2712,8 @@ public class CardFactoryUtil {
             final String choose = "DB$ GenericChoice | Choices$ DB" + name + "Counter,DB" + name + "Token | ConditionPresent$ Card.StrictlySelf | SubAbility$ DB" + name + "Token2 | AILogic$ " + name;
             final String counter = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ " + n + " | SpellDescription$ Put "
                     + Lang.nounWithNumeral(n, "+1/+1 counter") + " on it.";
-            final String token = "DB$ Token | TokenAmount$ " + n + " | TokenName$ Servo | TokenTypes$ Artifact,Creature,Servo "
-                    + " | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | "
+            final String token = "DB$ Token | TokenAmount$ " + n + " | TokenName$ Servo | TokenTypes$ Artifact,Creature,Servo"
+                    + " | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1"
                     + " | TokenImage$ c 1 1 servo | TokenAltImages$ c_1_1_servo2,c_1_1_servo3 | SpellDescription$ Create "
                     + Lang.nounWithNumeral(n, "1/1 colorless Servo artifact creature token") + ".";
 
