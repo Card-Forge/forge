@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import com.google.common.base.Predicate;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -68,6 +69,14 @@ public class DestroyAllEffect extends SpellAbilityEffect {
         if (remDestroyed) {
             card.clearRemembered();
         }
+
+        // exclude cards that can't be destroyed at this moment
+        list = CardLists.filter(list, new Predicate<Card>() {
+            @Override
+            public boolean apply(Card card) {
+                return card.canBeDestroyed();
+            }
+        });
 
         if (noRegen) {
             for (Card c : list) {
