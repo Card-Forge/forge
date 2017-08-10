@@ -53,6 +53,8 @@ public enum CounterType {
 
     BRICK("BRICK", 226, 192, 164),
 
+    CAGE("CAGE", 155, 155, 155),
+
     CARRION("CRRON", 255, 163, 222),
 
     CHARGE("CHARG", 246, 192, 0),
