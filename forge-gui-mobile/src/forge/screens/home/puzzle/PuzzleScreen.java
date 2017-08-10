@@ -56,7 +56,7 @@ public class PuzzleScreen extends LaunchScreen {
 
         GuiChoose.one("Choose a puzzle", puzzles, new Callback<Puzzle>() {
             @Override
-            public void run(Puzzle chosen) {
+            public void run(final Puzzle chosen) {
                 LoadingOverlay.show("Loading the puzzle...", new Runnable() {
                     @Override
                     public void run() {

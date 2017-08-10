@@ -1,26 +1,18 @@
 package forge.deck.io;
 
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.converters.Converter;
-import com.thoughtworks.xstream.converters.MarshallingContext;
-import com.thoughtworks.xstream.converters.UnmarshallingContext;
-import com.thoughtworks.xstream.io.HierarchicalStreamReader;
-import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
-import forge.deck.CardPool;
-import forge.game.GameFormat;
-import forge.gauntlet.GauntletData;
-import forge.item.PaperCard;
-import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.util.IgnoringXStream;
-import org.apache.commons.lang3.StringUtils;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
+
+import forge.game.GameFormat;
+import forge.item.PaperCard;
+import forge.properties.ForgeConstants;
 
 /**
  * Created by maustin on 11/05/2017.
