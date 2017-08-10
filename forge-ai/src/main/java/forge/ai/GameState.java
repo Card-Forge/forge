@@ -1,16 +1,34 @@
 package forge.ai;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+
 import forge.StaticData;
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.effects.DetachedCardEffect;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactory;
+import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.event.GameEventAttackersDeclared;
@@ -25,12 +43,6 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.*;
-import java.util.Map.Entry;
 
 public abstract class GameState {
     private static final Map<ZoneType, String> ZONES = new HashMap<ZoneType, String>();
@@ -739,7 +751,7 @@ public abstract class GameState {
                     Map<CounterType, Integer> counters = c.getCounters();
                     // Note: Not clearCounters() since we want to keep the counters
                     // var as-is.
-                    c.setCounters(new HashMap<CounterType, Integer>());
+                    c.setCounters(Maps.<CounterType, Integer>newEnumMap(CounterType.class));
                     p.getZone(ZoneType.Hand).add(c);
                     if (c.isAura()) {
                         // dummy "enchanting" to indicate that the card will be force-attached elsewhere
