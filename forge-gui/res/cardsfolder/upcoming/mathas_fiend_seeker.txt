@@ -8,7 +8,7 @@ SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Se
 
 #TODO: Ideally, this has to be implemented with a condition where, if counters are removed from the permanent, the trigger
 #is removed even if the counters of the same type are later added via something else.
-SVar:DBAnimate:DB$ Animate | Defined$ Targeted | sVars$ MathasPayoffDraw,MathasPayoffLife,MathasDeath | Triggers$ MathasDeath | Permanent$ True | References$ Ctrs
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | sVars$ MathasPayoffDraw,MathasPayoffLife,MathasDeath | Triggers$ MathasDeath | Permanent$ True
 
 SVar:MathasDeath:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+counters_GE1_BOUNTY | Execute$ MathasPayoffDraw | TriggerDescription$ When this creature dies, each opponent draws a card and gains 2 life.
 SVar:MathasPayoffDraw:DB$ Draw | Defined$ Player.Opponent | NumCards$ 1 | SubAbility$ MathasPayoffLife
