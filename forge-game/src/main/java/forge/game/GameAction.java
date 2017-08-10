@@ -19,6 +19,7 @@ package forge.game;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -715,11 +716,14 @@ public class GameAction {
             }
         });
 
-        // TODO Java 1.8 use comparingLong
+        
         final Comparator<StaticAbility> comp = new Comparator<StaticAbility>() {
             @Override
             public int compare(final StaticAbility a, final StaticAbility b) {
-                return Long.compare(a.getHostCard().getTimestamp(), b.getHostCard().getTimestamp());
+                return ComparisonChain.start()
+                        .compareTrueFirst(a.hasParam("CharacteristicDefining"), b.hasParam("CharacteristicDefining"))
+                        .compare(a.getHostCard().getTimestamp(), b.getHostCard().getTimestamp())
+                        .result();
             }
         };
         Collections.sort(staticAbilities, comp);
