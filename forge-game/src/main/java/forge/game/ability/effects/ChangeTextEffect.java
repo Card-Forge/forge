@@ -79,11 +79,11 @@ public class ChangeTextEffect extends SpellAbilityEffect {
             validTypes.clear();
             final List<String> forbiddenTypes = sa.hasParam("ForbiddenNewTypes") ? Lists.newArrayList(sa.getParam("ForbiddenNewTypes").split(",")) : Lists.<String>newArrayList();
             forbiddenTypes.add(changedTypeWordOriginal);
-            if (changedTypeWordsArray[0].startsWith("Choose")) {
-                if (changedTypeWordsArray[0].equals("ChooseBasicLandType")) {
+            if (changedTypeWordsArray[1].startsWith("Choose")) {
+                if (changedTypeWordsArray[1].equals("ChooseBasicLandType")) {
                     validTypes.addAll(CardType.getBasicTypes());
                     kindOfType = "basic land";
-                } else if (changedTypeWordsArray[0].equals("ChooseCreatureType")) {
+                } else if (changedTypeWordsArray[1].equals("ChooseCreatureType")) {
                     validTypes.addAll(CardType.Constant.CREATURE_TYPES);
                     kindOfType = "creature";
                 }
