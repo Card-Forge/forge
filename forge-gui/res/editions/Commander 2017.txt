@@ -7,3 +7,311 @@ MciCode=c17
 Type=Other
 
 [cards]
+1 R Alms Collector
+2 R Balan, Wandering Knight
+3 U Curse of Vitality
+4 R Fortunate Few
+5 R Kindred Boon
+6 R Scalelord Reckoner
+7 R Stalking Leonin
+8 R Teferi's Protection
+9 U Curse of Verbosity
+10 R Galecaster Colossus
+11 R Kindred Discovery
+12 R Magus of the Mind
+13 R Gate Mage
+14 U Bloodline Necromancer
+15 R Boneyard Scourge
+16 U Curse of Disturbance
+17 R Kheru Mind-Eater
+18 R Kindred Dominance
+19 R New Blood
+20 R Patron of the Vein
+21 R Vindictive Lich
+22 R Bloodsworn Steward
+23 R Crimson Honor Guard
+24 U Curse of Opulence
+25 R Disrupt Decorum
+26 R Izzet Chemister
+27 R Kindred Charge
+28 R Shifting Shadow
+29 R Territorial Hellkite
+30 U Curse of Bounty
+31 R Hungry Lynx
+32 R Kindred Summons
+33 R Qasali Slingers
+34 R Traverse the Outlands
+35 M Arahbo, Roar of the World
+36 M Edgar Markov
+37 R Fractured Identity
+38 M Inalla, Archmage Ritualist
+39 M Kess, Dissident Mage
+40 M Licia, Sanguine Tribune
+41 M Mairsil, the Pretender
+42 M Mathas, Fiend Seeker
+43 M Mirri, Weatherlight Duelist
+44 M Nazahn, Revered Bladesmith
+45 M O-Kagachi, Vengeful Kami
+46 R Taigam, Ojutai Master
+47 R Taigam, Sidisi's Hand
+48 M The Ur-Dragon
+49 R Wasitora, Nekoru Queen
+50 R Bloodforged Battle-Axe
+51 R Hammer of Nazahn
+52 U Heirloom Blade
+53 U Herald's Horn
+54 U Mirror of the Forebears
+55 M Ramos, Dragon Engine
+56 C Path of Ancestry
+57 R Blind Obedience
+58 U Condemn
+59 R Divine Reckoning
+60 R Fell the Mighty
+61 R Jareth, Leonine Titan
+62 M Jazal Goldmane
+63 R Kemba, Kha Regent
+64 R Leonin Arbiter
+65 U Leonin Relic-Warder
+66 R Leonin Shikari
+67 U Orator of Ojutai
+68 U Oreskos Explorer
+69 R Raksha Golden Cub
+70 U Return to Dust
+71 R Rout
+72 R Seht's Tiger
+73 R Spirit of the Hearth
+74 R Sunscorch Regent
+75 C Sunspear Shikari
+76 U Swords to Plowshares
+77 U Taj-Nar Swordsmith
+78 R White Sun's Zenith
+79 U Wing Shards
+80 R Arcanis the Omnipotent
+81 C Archaeomancer
+82 R Azami, Lady of Scrolls
+83 R Body Double
+84 M Clone Legion
+85 R Harbinger of the Tides
+86 C Into the Roil
+87 C Merchant of Secrets
+88 R Monastery Siege
+89 U Opportunity
+90 R Polymorphist's Jest
+91 U Reality Shift
+92 C Sea Gate Oracle
+93 R Serendib Sorcerer
+94 R Spelltwine
+95 U Ambition's Cost
+96 R Anowon, the Ruin Sage
+97 R Apprentice Necromancer
+98 R Black Market
+99 U Blood Artist
+100 R Blood Tribute
+101 U Bloodhusk Ritualist
+102 M Bloodlord of Vaasgoth
+103 R Butcher of Malakir
+104 R Captivating Vampire
+105 R Consuming Vapors
+106 U Corpse Augur
+107 R Crux of Fate
+108 R Damnable Pact
+109 R Dark Impostor
+110 R Deathbringer Regent
+111 R Decree of Pain
+112 R Drana, Kalastria Bloodchief
+113 C Falkenrath Noble
+114 U Go for the Throat
+115 R Magus of the Abyss
+116 R Malakir Bloodwitch
+117 R Necromantic Selection
+118 R Painful Truths
+119 R Palace Siege
+120 U Pawn of Ulamog
+121 R Puppeteer Clique
+122 C Read the Bones
+123 R Sangromancer
+124 R Sanguine Bond
+125 U Skeletal Scrying
+126 R Skeletal Vampire
+127 C Syphon Mind
+128 R Underworld Connections
+129 U Vampire Nighthawk
+130 R Vein Drinker
+131 R Chaos Warp
+132 M Comet Storm
+133 R Crucible of Fire
+134 R Dragon Tempest
+135 U Dragonlord's Servant
+136 U Dragonspeaker Shaman
+137 R Earthquake
+138 R Hellkite Charger
+139 R Outpost Siege
+140 U Rakish Heir
+141 M Ryusei, the Falling Star
+142 M Scourge of Valkas
+143 R Tyrant's Familiar
+144 M Utvara Hellkite
+145 R Abundance
+146 C Crushing Vines
+147 C Cultivate
+148 U Elemental Bond
+149 C Farseek
+150 R Frontier Siege
+151 U Harmonize
+152 R Hunter's Prowess
+153 R Jedit Ojanen of Efrava
+154 C Kodama's Reach
+155 C Nissa's Pilgrimage
+156 U Rain of Thorns
+157 U Relic Crush
+158 R Soul's Majesty
+159 R Temur Sabertooth
+160 R Zendikar Resurgent
+161 R Atarka, World Render
+162 U Behemoth Sledge
+163 R Bladewing the Risen
+164 M Blood Baron of Vizkopa
+165 R Broodmate Dragon
+166 U Cauldron Dance
+167 R Crackling Doom
+168 R Crosis's Charm
+169 U Crosis, the Purger
+170 R Dromoka, the Eternal
+171 R Etherium-Horn Sorcerer
+172 R Fleecemane Lion
+173 M Havengul Lich
+174 R Intet, the Dreamer
+175 C Izzet Chronarch
+176 R Kolaghan, the Storm's Fury
+177 M Marchesa, the Black Rose
+178 R Memory Plunder
+179 R Merciless Eviction
+180 R Mercurial Chemister
+181 M Mirari's Wake
+182 U Mortify
+183 R Nin, the Pain Artist
+184 R Niv-Mizzet, Dracogenius
+185 R Niv-Mizzet, the Firemind
+186 U Nivix Guildmage
+187 R Ojutai, Soul of Winter
+188 R Phantom Nishoba
+189 C Qasali Pridemage
+190 U Rakdos Charm
+191 U Savage Ventmaw
+192 R Shadowmage Infiltrator
+193 R Silumgar's Command
+194 R Silumgar, the Drifting Death
+195 R Spellbound Dragon
+196 U Stromkirk Captain
+197 R Teneb, the Harvester
+198 U Terminate
+199 C Tithe Drinker
+200 M Vela the Night-Clad
+201 R Argentum Armor
+202 C Armillary Sphere
+203 U Blade of the Bloodchief
+204 U Boros Signet
+205 C Commander's Sphere
+206 U Darksteel Ingot
+207 R Door of Destinies
+208 U Dreamstone Hedron
+209 U Fellwar Stone
+210 R Fist of Suns
+211 R Grappling Hook
+212 U Hedron Archive
+213 U Hero's Blade
+214 U Lightning Greaves
+215 U Loxodon Warhammer
+216 R Nevinyrral's Disk
+217 C Nihil Spellbomb
+218 U Orzhov Signet
+219 R Quietus Spike
+220 U Rakdos Signet
+221 U Skullclamp
+222 U Sol Ring
+223 R Staff of Nin
+224 R Steel Hellkite
+225 U Swiftfoot Boots
+226 R Sword of the Animist
+227 R Sword of Vengeance
+228 U Unstable Obelisk
+229 C Wayfarer's Bauble
+230 R Well of Lost Dreams
+231 U Worn Powerstone
+232 U Akoum Refuge
+233 U Arcane Sanctum
+234 U Blighted Woodland
+235 C Bloodfell Caves
+236 C Blossoming Sands
+237 C Bojuka Bog
+238 C Boros Garrison
+239 C Boros Guildgate
+240 U Cinder Barrens
+241 C Command Tower
+242 R Crucible of the Spirit Dragon
+243 U Crumbling Necropolis
+244 U Dimir Aqueduct
+245 C Dismal Backwater
+246 U Elfhame Palace
+247 C Evolving Wilds
+248 R Exotic Orchard
+249 U Forsaken Sanctuary
+250 U Frontier Bivouac
+251 U Grasslands
+252 U Graypelt Refuge
+253 C Grixis Panorama
+254 R Haven of the Spirit Dragon
+255 U Izzet Boilerworks
+256 U Jungle Shrine
+257 U Jwar Isle Refuge
+258 C Kabira Crossroads
+259 U Krosan Verge
+260 R Mosswort Bridge
+261 U Myriad Landscape
+262 U Mystic Monastery
+263 R Mystifying Maze
+264 U Nomad Outpost
+265 C Opal Palace
+266 U Opulent Palace
+267 C Orzhov Basilica
+268 C Orzhov Guildgate
+269 C Rakdos Carnarium
+270 C Rakdos Guildgate
+271 U Rogue's Passage
+272 U Saltcrusted Steppe
+273 U Sandsteppe Citadel
+274 U Savage Lands
+275 C Scoured Barrens
+276 U Seaside Citadel
+277 C Secluded Steppe
+278 C Selesnya Guildgate
+279 C Selesnya Sanctuary
+280 R Stirring Wildwood
+281 U Stone Quarry
+282 C Swiftwater Cliffs
+283 U Temple of the False God
+284 C Terramorphic Expanse
+285 U Tranquil Expanse
+286 C Tranquil Thicket
+287 U Urborg Volcano
+288 U Vivid Crag
+289 U Vivid Creek
+290 U Vivid Grove
+291 U Vivid Marsh
+292 U Vivid Meadow
+293 C Wind-Scarred Crag
+294 L Plains
+295 L Plains
+296 L Plains
+297 L Island
+298 L Island
+299 L Island
+300 L Swamp
+301 L Swamp
+302 L Swamp
+303 L Mountain
+304 L Mountain
+305 L Mountain
+306 L Forest
+307 L Forest
+308 L Forest
