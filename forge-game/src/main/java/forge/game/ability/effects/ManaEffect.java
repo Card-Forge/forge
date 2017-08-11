@@ -95,7 +95,7 @@ public class ManaEffect extends SpellAbilityEffect {
                         choiceString.append(choice);
                     }
 
-                    if ("".equals(choiceString.toString()) && "Combo ColorIdentity".equals(abMana.getOrigProduced())) {
+                    if (choiceString.toString().isEmpty() && "Combo ColorIdentity".equals(abMana.getOrigProduced())) {
                         // No mana could be produced here (non-EDH match?), so cut short
                         return;
                     }
