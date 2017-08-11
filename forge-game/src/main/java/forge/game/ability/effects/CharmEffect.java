@@ -156,12 +156,10 @@ public class CharmEffect extends SpellAbilityEffect {
             return;
         }
 
-        int num = Integer.parseInt(sa.hasParam("CharmNum") ? sa.getParam("CharmNum") : "1");
+        final int num = sa.hasParam("CharmNumOnResolve") ?
+                AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CharmNumOnResolve"), sa)
+                : Integer.parseInt(sa.hasParam("CharmNum") ? sa.getParam("CharmNum") : "1");
         final int min = sa.hasParam("MinCharmNum") ? Integer.parseInt(sa.getParam("MinCharmNum")) : num;
-
-        if (sa.hasParam("CharmNumOnResolve")) {
-            num = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CharmNumOnResolve"), sa);
-        }
 
         Card source = sa.getHostCard();
         Player activator = sa.getActivatingPlayer();
@@ -177,7 +175,7 @@ public class CharmEffect extends SpellAbilityEffect {
             source.setChosenPlayer(chooser);
         }
         
-        List<AbilitySub> chosen = chooser.getController().chooseModeForAbility(sa, min, num, sa.hasParam(("CanRepeatModes")));
+        List<AbilitySub> chosen = chooser.getController().chooseModeForAbility(sa, min, num, sa.hasParam("CanRepeatModes"));
         chainAbilities(sa, chosen);
     }
 
