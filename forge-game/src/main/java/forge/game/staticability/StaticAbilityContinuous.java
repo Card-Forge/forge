@@ -363,9 +363,9 @@ public final class StaticAbilityContinuous {
                     for (SpellAbility sa : c.getSpellAbilities()) {
                         if (sa instanceof AbilityActivated) {
                             SpellAbility newSA = ((AbilityActivated) sa).getCopy();
-                            if (params.containsKey("GainsAbilitiesOncePerTurn")) {
+                            if (params.containsKey("GainsAbilitiesLimitPerTurn")) {
                                 newSA.setRestrictions(sa.getRestrictions());
-                                newSA.getRestrictions().setLimitToCheck("1");
+                                newSA.getRestrictions().setLimitToCheck(params.get("GainsAbilitiesLimitPerTurn"));
                             }
                             newSA.setOriginalHost(c);
                             newSA.setIntrinsic(false);
