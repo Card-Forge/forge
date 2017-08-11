@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import com.google.common.collect.Lists;
 
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -155,8 +156,12 @@ public class CharmEffect extends SpellAbilityEffect {
             return;
         }
 
-        final int num = Integer.parseInt(sa.hasParam("CharmNum") ? sa.getParam("CharmNum") : "1");
+        int num = Integer.parseInt(sa.hasParam("CharmNum") ? sa.getParam("CharmNum") : "1");
         final int min = sa.hasParam("MinCharmNum") ? Integer.parseInt(sa.getParam("MinCharmNum")) : num;
+
+        if (sa.hasParam("CharmNumOnResolve")) {
+            num = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CharmNumOnResolve"), sa);
+        }
 
         Card source = sa.getHostCard();
         Player activator = sa.getActivatingPlayer();
