@@ -104,10 +104,6 @@ public class CharmEffect extends SpellAbilityEffect {
             sb.append(Lang.getNumeral(min)).append(" or ").append(list.size() == 2 ? "both" : "more");
         }
 
-        if (repeat) {
-            sb.append(". You may choose the same mode more than once.");
-        }
-
         if (sa.hasParam("ChoiceRestriction")) {
             String rest = sa.getParam("ChoiceRestriction");
             if (rest.equals("NotRemembered")) {
@@ -115,8 +111,17 @@ public class CharmEffect extends SpellAbilityEffect {
             }
         }
 
+        if (repeat) {
+            sb.append(". You may choose the same mode more than once.");
+        }
+
+        boolean additionalDesc = sa.hasParam("AdditionalDescription");
+        if (additionalDesc) {
+            sb.append(" ").append(sa.getParam("AdditionalDescription").trim());
+        }
+
         if (!list.isEmpty()) {
-            if (!repeat) {
+            if (!repeat && !additionalDesc) {
                 sb.append(" \u2014");
             }
             sb.append("\r\n");
