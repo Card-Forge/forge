@@ -1319,6 +1319,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             } else if ("WorstCard".equals(logic)) {
                 return ComputerUtilCard.getWorstAI(fetchList);
+            } else if ("Mairsil".equals(logic)) {
+                return SpecialCardAi.MairsilThePretender.considerCardFromList(fetchList);
             }
         }
         if (fetchList.isEmpty()) {

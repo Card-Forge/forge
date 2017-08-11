@@ -17,28 +17,17 @@
  */
 package forge.ai;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.cost.CostPart;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
@@ -48,6 +37,10 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Special logic for individual cards
@@ -367,7 +360,23 @@ public class SpecialCardAi {
             return (aiGraveyardPower - aiBattlefieldPower) > (oppGraveyardPower - oppBattlefieldPower);
         }
     }
-    
+
+    // Mairsil, the Pretender
+    public static class MairsilThePretender {
+        // Scan the fetch list for a card with at least one activated ability.
+        // TODO: can be improved to a full consider(sa, ai) logic which would scan the graveyard first and hand last
+        public static Card considerCardFromList(CardCollection fetchList) {
+            for (Card c : CardLists.filter(fetchList, Predicates.or(CardPredicates.Presets.ARTIFACTS, CardPredicates.Presets.CREATURES))) {
+                for (SpellAbility ab : c.getSpellAbilities()) {
+                    if (ab.isAbility() && !ab.isTrigger()) {
+                        return c;
+                    }
+                }
+            }
+            return null;
+        }
+    }
+
     // Necropotence
     public static class Necropotence {
         public static boolean consider(Player ai, SpellAbility sa) {
