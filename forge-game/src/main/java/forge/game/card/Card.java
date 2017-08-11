@@ -4565,6 +4565,14 @@ public class Card extends GameEntity implements Comparable<Card> {
                             return false;
                         }
                         break;
+                    case "Commander":
+                        final List<Card> cmdrs = sourceController.getCommanders();
+                        for (Card cmdr : cmdrs) {
+                            if (sharesCreatureTypeWith(cmdr)) {
+                                return true;
+                            }
+                        }
+                        return false;
                     case "Enchanted":
                         for (final SpellAbility sa : source.currentState.getNonManaAbilities()) {
                             final SpellAbility root = sa.getRootAbility();

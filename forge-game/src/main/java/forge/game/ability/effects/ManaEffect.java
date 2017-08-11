@@ -62,7 +62,7 @@ public class ManaEffect extends SpellAbilityEffect {
                     Player activator = sa.getActivatingPlayer();
                     String express = abMana.getExpressChoice();
                     String[] colorsProduced = abMana.getComboColors().split(" ");
-                    
+
                     final StringBuilder choiceString = new StringBuilder();
                     ColorSet colorOptions = null;
                     String[] colorsNeeded = express.isEmpty() ? null : express.split(" ");
@@ -94,6 +94,12 @@ public class ManaEffect extends SpellAbilityEffect {
                         }
                         choiceString.append(choice);
                     }
+
+                    if ("".equals(choiceString.toString()) && "Combo ColorIdentity".equals(abMana.getOrigProduced())) {
+                        // No mana could be produced here (non-EDH match?), so cut short
+                        return;
+                    }
+
                     game.action.nofityOfValue(sa, card, activator + " picked " + choiceString, activator);
                     abMana.setExpressChoice(choiceString.toString());
                 }
