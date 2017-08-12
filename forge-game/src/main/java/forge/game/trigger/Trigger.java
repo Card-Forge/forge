@@ -362,6 +362,25 @@ public abstract class Trigger extends TriggerReplacementBase {
                     this.getHostCard().getController(), this.getHostCard(), null)) {
                 return false;
             }
+        } else if ("AttackedPlayerWhoAttackedYouLastTurn".equals(condition)) {
+            GameEntity attacked = (GameEntity) runParams.get("Attacked");
+            if (attacked == null) {
+                // Check "Defender" too because once triggering objects are set on TriggerAttacks, the value of Attacked
+                // ends up being in Defender at that point.
+                attacked = (GameEntity) runParams.get("DefendingPlayer");
+            }
+            Player attacker = this.getHostCard().getController();
+
+            boolean valid = false;
+            if (game.getPlayersAttackedLastTurn().containsKey(attacked)) {
+                if (game.getPlayersAttackedLastTurn().get(attacked).contains(attacker)) {
+                    valid = true;
+                }
+            }
+
+            if (attacked == null || !valid) {
+                return false;
+            }
         }
         return true;
     }

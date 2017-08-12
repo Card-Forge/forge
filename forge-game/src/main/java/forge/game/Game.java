@@ -23,6 +23,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.eventbus.EventBus;
 
@@ -90,6 +91,9 @@ public class Game {
     private CardCollection lastStateBattlefield = new CardCollection();
     private CardCollection lastStateGraveyard = new CardCollection();
 
+    private Map<Player, PlayerCollection> attackedThisTurn = Maps.newHashMap();
+    private Map<Player, PlayerCollection> attackedLastTurn = Maps.newHashMap();
+
     private Player monarch = null;
     private Player monarchBeginTurn = null;
 
@@ -118,6 +122,28 @@ public class Game {
 
     public void setMonarchBeginTurn(Player monarchBeginTurn) {
         this.monarchBeginTurn = monarchBeginTurn;
+    }
+
+    public Map<Player, PlayerCollection> getPlayersAttackedThisTurn() {
+        return attackedThisTurn;
+    }
+
+    public Map<Player, PlayerCollection> getPlayersAttackedLastTurn() {
+        return attackedLastTurn;
+    }
+
+    public void addPlayerAttackedThisTurn(Player attacker, Player defender) {
+        PlayerCollection atk = attackedThisTurn.get(attacker);
+        if (atk == null) {
+            attackedThisTurn.put(attacker, new PlayerCollection());
+        }
+        attackedThisTurn.get(attacker).add(defender);
+    }
+
+    public void resetPlayersAttackedOnNextTurn() {
+        attackedLastTurn.clear();
+        attackedLastTurn.putAll(attackedThisTurn);
+        attackedThisTurn.clear();
     }
 
     public CardCollectionView getLastStateBattlefield() {

@@ -21,7 +21,6 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
-
 import forge.card.mana.ManaCost;
 import forge.game.*;
 import forge.game.card.Card;
@@ -45,7 +44,6 @@ import forge.util.CollectionSuppliers;
 import forge.util.collect.FCollectionView;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
-
 import org.apache.commons.lang3.time.StopWatch;
 
 import java.util.*;
@@ -273,6 +271,14 @@ public class PhaseHandler implements java.io.Serializable {
                                 && !game.getTriggerHandler().hasDelayedTriggers()) {
                             endCombat();
                         }
+
+                        if (combat != null) {
+                            for (Card c : combat.getAttackers()) {
+                                if (combat.getDefenderByAttacker(c) instanceof Player) {
+                                    game.addPlayerAttackedThisTurn(c.getController(), (Player)combat.getDefenderByAttacker(c));
+                                }
+                            }
+                        }
                     }
 
                     givePriorityToPlayer = inCombat();
@@ -328,6 +334,10 @@ public class PhaseHandler implements java.io.Serializable {
                     if (playerTurn.getController().isAI()) {
                         playerTurn.getController().resetAtEndOfTurn();
                     }
+
+                    // Reset the attackers this turn/last turn
+                    game.resetPlayersAttackedOnNextTurn();
+
                     game.getEndOfTurn().executeAt();
                     break;
 
