@@ -1651,6 +1651,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
 
+            // Kor Castigator and other similar creatures with composite subtype Eldrazi Scion in their text
+            creatures = creatures.replace("Scions or Eldrazis", "Eldrazi Scions");
+
             StringBuilder sbShort = new StringBuilder();
             if (allNegative) {
                 boolean isFirst = true;
