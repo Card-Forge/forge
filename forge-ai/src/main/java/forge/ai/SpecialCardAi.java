@@ -369,7 +369,19 @@ public class SpecialCardAi {
             for (Card c : CardLists.filter(fetchList, Predicates.or(CardPredicates.Presets.ARTIFACTS, CardPredicates.Presets.CREATURES))) {
                 for (SpellAbility ab : c.getSpellAbilities()) {
                     if (ab.isAbility() && !ab.isTrigger()) {
-                        return c;
+                        Player controller = c.getController();
+                        boolean wasCaged = false;
+                        for (Card caged : CardLists.filter(controller.getCardsIn(ZoneType.Exile),
+                                CardPredicates.hasCounter(CounterType.CAGE))) {
+                            if (c.getName().equals(caged.getName())) {
+                                wasCaged = true;
+                                break;
+                            }
+                        }
+
+                        if (!wasCaged) {
+                            return c;
+                        }
                     }
                 }
             }
