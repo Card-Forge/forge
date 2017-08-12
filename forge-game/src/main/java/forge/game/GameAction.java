@@ -437,6 +437,8 @@ public class GameAction {
             	copied.setState(CardStateName.Original, true);
             }
             unattachCardLeavingBattlefield(copied);
+            // Remove all changed keywords
+            copied.removeAllChangedText(game.getNextTimestamp());
         } else if (toBattlefield) {
             // reset timestamp in changezone effects so they have same timestamp if ETB simutaneously 
             copied.setTimestamp(game.getNextTimestamp());

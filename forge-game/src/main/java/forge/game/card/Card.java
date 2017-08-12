@@ -3371,6 +3371,13 @@ public class Card extends GameEntity implements Comparable<Card> {
         updateChangedText();
     }
 
+    public final void removeAllChangedText(final Long timestamp) {
+        changedTextTypes.removeAll();
+        changedTextColors.removeAll();
+        updateKeywordsOnRemoveChangedText(removeChangedCardKeywords(timestamp));
+        updateChangedText();
+    }
+
     private void updateKeywordsChangedText(final Long timestamp) {
         if (hasSVar("LockInKeywords")) {
             return;

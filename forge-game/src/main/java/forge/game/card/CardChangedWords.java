@@ -29,6 +29,11 @@ public final class CardChangedWords {
         isDirty = true;
     }
 
+    public void removeAll() {
+        map.clear();
+        isDirty = true;
+    }
+
     void copyFrom(final CardChangedWords other) {
         map.clear();
         map.putAll(other.map);
