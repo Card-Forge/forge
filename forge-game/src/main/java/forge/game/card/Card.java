@@ -1646,13 +1646,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                     } else {
                         creatures = StringUtils.capitalize(Lang.getPlural(part)) + (creatures == null ? "" : " or " + creatures);
                     }
+                    // Kor Castigator and other similar creatures with composite subtype Eldrazi Scion in their text
+                    creatures = creatures.replace("Scions or Eldrazis", "Eldrazi Scions");
                 } else {
                     prependedAdjectives.add(Pair.of(positive, part.toLowerCase()));
                 }
             }
-
-            // Kor Castigator and other similar creatures with composite subtype Eldrazi Scion in their text
-            creatures = creatures.replace("Scions or Eldrazis", "Eldrazi Scions");
 
             StringBuilder sbShort = new StringBuilder();
             if (allNegative) {
