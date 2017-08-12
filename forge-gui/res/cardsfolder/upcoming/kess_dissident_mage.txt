@@ -1,0 +1,13 @@
+Name:Kess, Dissident Mage
+ManaCost:1 U B R
+Types:Legendary Creature Human Wizard
+PT:3/4
+K:Flying
+S:Mode$ Continuous | Affected$ Instant.YouCtrl,Sorcery.YouCtrl | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Battlefield | AffectedZone$ Graveyard | Description$ During each of your turns, you may cast an instant or sorcery card from your graveyard. If a card cast this way would be put into your graveyard this turn, exile it instead.
+T:Mode$ ChangesZone | ValidCard$ Instant.YouCtrl,Sorcery.YouCtrl | Origin$ Graveyard | Destination$ Stack | TriggerZones$ Battlefield | Execute$ RememberCastFromGrave | Static$ True
+SVar:RememberCastFromGrave:DB$ Pump | RememberObjects$ TriggeredCard
+R:Event$ Moved | ValidCard$ Instant.YouCtrl+IsRemembered,Sorcery.YouCtrl+IsRemembered | Origin$ Stack | Destination$ Graveyard | ReplaceWith$ MoveExile
+SVar:MoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kess_dissident_mage.jpg
+Oracle:Flying\nDuring each of your turns, you may cast an instant or sorcery card from your graveyard. If a card cast this way would be put into your graveyard this turn, exile it instead.
