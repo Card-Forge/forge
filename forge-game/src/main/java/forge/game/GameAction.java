@@ -258,6 +258,36 @@ public class GameAction {
             }
         }
 
+        // special rule for Worms of the Earth
+        if (toBattlefield && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLandBattlefield)) {
+            // something that is already a Land cant enter the battlefield
+            if (c.isLand()) {
+                return c;
+            }
+            // check if something would be a land
+            Card noLandLKI = CardUtil.getLKICopy(c);
+            
+            //setZone is not enough
+            //noLandLKI.setZone(zoneTo);
+            noLandLKI.setImmutable(true); // immu doesn't trigger Zone
+            zoneTo.add(noLandLKI);
+            
+            noLandLKI.setImmutable(false); // but need to remove that or Static doesn't find it
+            checkStaticAbilities(false, Sets.newHashSet(noLandLKI));
+
+            boolean noLand = noLandLKI.isLand(); 
+            zoneTo.remove(noLandLKI);
+            
+            // reset static
+            checkStaticAbilities(false, Sets.newHashSet(noLandLKI));
+            
+            if(noLand) {
+                // if something would only be a land when entering the battlefield and not before
+                // put it into the graveyard instead
+                zoneTo = c.getOwner().getZone(ZoneType.Graveyard);
+            }
+        }
+
         if (!suppress) {
             if (zoneFrom == null) {
                 copied.getOwner().addInboundToken(copied);

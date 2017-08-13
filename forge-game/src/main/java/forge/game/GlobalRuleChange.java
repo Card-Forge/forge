@@ -34,7 +34,8 @@ public enum GlobalRuleChange {
     onlyOneBlocker ("No more than one creature can block each combat."),
     onlyTwoBlockers ("No more than two creatures can block each combat."),
     toughnessAssignsDamage ("Each creature assigns combat damage equal to its toughness rather than its power."),
-    blankIsChaos("Each blank roll of the planar dice is a {CHAOS} roll.");
+    blankIsChaos("Each blank roll of the planar dice is a {CHAOS} roll."),
+    noLandBattlefield("Lands can't enter the battlefield.");
     
     private final String ruleText;
 
