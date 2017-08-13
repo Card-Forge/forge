@@ -200,23 +200,19 @@ public class ConquestController {
         int boostersPerMythic = prefs.getPrefInt(CQPref.BOOSTERS_PER_MYTHIC);
         int raresPerBooster = prefs.getPrefInt(CQPref.BOOSTER_RARES);
         for (int i = 0; i < raresPerBooster; i++) {
-            if (pool.getMythics().isEmpty() || Aggregates.randomInt(1, boostersPerMythic) > 1) {
-                pool.getRares().rewardCard(rewards);
-            }
-            else {
-                pool.getMythics().rewardCard(rewards);
-            }
+            if (!pool.mythics.isEmpty() && Aggregates.randomInt(1, boostersPerMythic) == 1) 
+                rewards.add(Aggregates.removeRandom(pool.mythics));
+            else if(!pool.rares.isEmpty()) 
+                rewards.add(Aggregates.removeRandom(pool.rares));
         }
 
         int uncommonsPerBooster = prefs.getPrefInt(CQPref.BOOSTER_UNCOMMONS);
-        for (int i = 0; i < uncommonsPerBooster; i++) {
-            pool.getUncommons().rewardCard(rewards);
-        }
+        for (int i = 0; i < uncommonsPerBooster && !pool.uncommons.isEmpty(); i++)
+            rewards.add(Aggregates.removeRandom(pool.uncommons));
 
         int commonsPerBooster = prefs.getPrefInt(CQPref.BOOSTER_COMMONS);
-        for (int i = 0; i < commonsPerBooster; i++) {
-            pool.getCommons().rewardCard(rewards);
-        }
+        for (int i = 0; i < commonsPerBooster && !pool.commons.isEmpty(); i++)
+            rewards.add(Aggregates.removeRandom(pool.commons));
 
         BoosterUtils.sort(rewards);
 
