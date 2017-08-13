@@ -13,7 +13,6 @@ import forge.toolbox.FOverlay;
 import forge.util.Aggregates;
 import forge.util.Callback;
 import forge.util.PhysicsObject;
-import forge.util.ThreadUtil;
 
 public class ConquestChaosWheel extends FOverlay {
     public static void spin(Callback<ChaosWheelOutcome> callback0) {

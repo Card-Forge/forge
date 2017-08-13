@@ -21,7 +21,6 @@ import forge.itemmanager.filters.ItemFilter;
 import forge.match.HostedMatch;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
-import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.LaunchScreen;
 import forge.screens.LoadingOverlay;

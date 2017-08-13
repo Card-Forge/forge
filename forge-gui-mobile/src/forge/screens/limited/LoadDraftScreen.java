@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import forge.FThreads;
 import forge.Forge;
 import forge.GuiBase;
-import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.LaunchScreen;
 import forge.screens.LoadingOverlay;

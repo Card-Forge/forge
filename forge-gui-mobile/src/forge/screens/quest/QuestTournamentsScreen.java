@@ -25,7 +25,6 @@ import forge.quest.QuestEventDraft;
 import forge.quest.QuestTournamentController;
 import forge.quest.QuestDraftUtils.Mode;
 import forge.quest.data.QuestEventDraftContainer;
-import forge.quest.data.QuestPreferences;
 import forge.screens.limited.DraftingProcessScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
