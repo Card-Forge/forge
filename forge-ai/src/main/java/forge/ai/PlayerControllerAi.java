@@ -46,7 +46,6 @@ import forge.game.player.PlayerController;
 import forge.game.player.PlayerView;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.*;
-import forge.game.trigger.Trigger;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
@@ -195,8 +194,8 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean confirmTrigger(WrappedAbility wrapper, Map<String, String> triggerParams, boolean isMandatory) {
-	final SpellAbility sa = wrapper.getWrappedAbility();
-	final Trigger regtrig = wrapper.getTrigger();
+        final SpellAbility sa = wrapper.getWrappedAbility();
+        //final Trigger regtrig = wrapper.getTrigger();
         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Deathmist Raptor")) {
             return true;
         }

@@ -5,7 +5,6 @@ import com.google.common.base.Predicate;
 import forge.item.PaperCard;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.SFilterUtil;
-import forge.itemmanager.SpellShopManager;
 import forge.itemmanager.SItemManagerUtil.StatTypes;
 
 import javax.swing.*;

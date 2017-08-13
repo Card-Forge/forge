@@ -23,7 +23,6 @@ import forge.game.spellability.SpellAbility;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * TODO Write javadoc for this type.

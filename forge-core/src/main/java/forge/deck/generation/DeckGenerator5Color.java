@@ -78,10 +78,6 @@ public class DeckGenerator5Color extends DeckGeneratorBase {
         colors = ColorSet.fromMask(0).inverse();
     }
 
-    private void initialize(DeckFormat format0) {
-        format0.adjustCMCLevels(cmcLevels);
-        colors = ColorSet.fromMask(0).inverse();
-    }
 
     @Override
     public final CardPool getDeck(final int size, final boolean forAi) {
