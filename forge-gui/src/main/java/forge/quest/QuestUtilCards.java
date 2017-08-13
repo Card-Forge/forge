@@ -29,6 +29,8 @@ import forge.deck.DeckSection;
 import forge.game.GameFormat;
 import forge.item.*;
 import forge.item.SealedProduct.Template;
+import forge.item.generation.BoosterSlots;
+import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.bazaar.QuestItemType;

@@ -18,8 +18,8 @@
 
 package forge.model;
 
-import forge.card.IUnOpenedProduct;
 import forge.item.PaperCard;
+import forge.item.generation.IUnOpenedProduct;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.gui.SGuiChoose;

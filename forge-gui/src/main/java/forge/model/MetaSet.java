@@ -20,11 +20,11 @@ package forge.model;
 
 import com.google.common.base.Predicate;
 
-import forge.card.IUnOpenedProduct;
-import forge.card.UnOpenedProduct;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
+import forge.item.generation.IUnOpenedProduct;
+import forge.item.generation.UnOpenedProduct;
 import forge.limited.CustomLimited;
 import forge.limited.SealedCardPoolGenerator;
 import forge.properties.ForgeConstants;

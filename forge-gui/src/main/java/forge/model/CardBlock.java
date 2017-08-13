@@ -21,10 +21,10 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import forge.card.CardEdition;
-import forge.card.IUnOpenedProduct;
-import forge.card.UnOpenedProduct;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.item.generation.IUnOpenedProduct;
+import forge.item.generation.UnOpenedProduct;
 import forge.util.TextUtil;
 import forge.util.storage.StorageReaderFile;
 

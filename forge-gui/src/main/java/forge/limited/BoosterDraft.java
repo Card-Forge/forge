@@ -19,12 +19,12 @@ package forge.limited;
 
 import com.google.common.base.Supplier;
 import forge.card.CardEdition;
-import forge.card.IUnOpenedProduct;
-import forge.card.UnOpenedProduct;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
+import forge.item.generation.IUnOpenedProduct;
+import forge.item.generation.UnOpenedProduct;
 import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;

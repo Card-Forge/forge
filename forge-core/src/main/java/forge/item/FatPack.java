@@ -28,8 +28,8 @@ import com.google.common.base.Function;
 
 import forge.ImageKeys;
 import forge.StaticData;
-import forge.card.BoosterGenerator;
 import forge.card.CardEdition;
+import forge.item.generation.BoosterGenerator;
 import forge.util.TextUtil;
 import forge.util.storage.StorageReaderFile;
 

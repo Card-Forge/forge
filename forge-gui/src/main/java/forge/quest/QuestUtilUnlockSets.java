@@ -32,9 +32,9 @@ import com.google.common.collect.Lists;
 
 import forge.GuiBase;
 import forge.card.CardEdition;
-import forge.card.UnOpenedProduct;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
+import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.ReadPriceList;

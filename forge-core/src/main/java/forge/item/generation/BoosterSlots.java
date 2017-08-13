@@ -1,4 +1,4 @@
-package forge.card;
+package forge.item.generation;
 
 public class BoosterSlots {
     public static final String LAND = "Land";

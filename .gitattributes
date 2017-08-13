@@ -178,8 +178,6 @@ forge-core/src/main/java/forge/FTrace.java -text
 forge-core/src/main/java/forge/ImageKeys.java -text
 forge-core/src/main/java/forge/LobbyPlayer.java -text
 forge-core/src/main/java/forge/StaticData.java -text
-forge-core/src/main/java/forge/card/BoosterGenerator.java svneol=native#text/plain
-forge-core/src/main/java/forge/card/BoosterSlots.java -text
 forge-core/src/main/java/forge/card/CardAiHints.java -text
 forge-core/src/main/java/forge/card/CardChangedType.java -text
 forge-core/src/main/java/forge/card/CardDb.java -text
@@ -199,10 +197,8 @@ forge-core/src/main/java/forge/card/ICardCharacteristics.java -text
 forge-core/src/main/java/forge/card/ICardDatabase.java -text
 forge-core/src/main/java/forge/card/ICardFace.java -text
 forge-core/src/main/java/forge/card/ICardRawAbilites.java -text
-forge-core/src/main/java/forge/card/IUnOpenedProduct.java -text
 forge-core/src/main/java/forge/card/MagicColor.java -text
 forge-core/src/main/java/forge/card/PrintSheet.java -text
-forge-core/src/main/java/forge/card/UnOpenedProduct.java -text
 forge-core/src/main/java/forge/card/mana/IParserManaCost.java -text
 forge-core/src/main/java/forge/card/mana/ManaAtom.java -text
 forge-core/src/main/java/forge/card/mana/ManaCost.java -text
@@ -243,6 +239,10 @@ forge-core/src/main/java/forge/item/PaperToken.java -text
 forge-core/src/main/java/forge/item/PreconDeck.java -text
 forge-core/src/main/java/forge/item/SealedProduct.java -text
 forge-core/src/main/java/forge/item/TournamentPack.java -text
+forge-core/src/main/java/forge/item/generation/BoosterGenerator.java -text
+forge-core/src/main/java/forge/item/generation/BoosterSlots.java -text
+forge-core/src/main/java/forge/item/generation/IUnOpenedProduct.java -text
+forge-core/src/main/java/forge/item/generation/UnOpenedProduct.java -text
 forge-core/src/main/java/forge/item/package-info.java -text
 forge-core/src/main/java/forge/util/Aggregates.java -text
 forge-core/src/main/java/forge/util/Base64Coder.java -text

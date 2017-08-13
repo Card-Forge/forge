@@ -23,8 +23,8 @@ import com.google.common.collect.ImmutableList;
 
 import forge.ImageKeys;
 import forge.StaticData;
-import forge.card.BoosterSlots;
 import forge.card.CardEdition;
+import forge.item.generation.BoosterSlots;
 import forge.util.MyRandom;
 
 import org.apache.commons.lang3.tuple.Pair;

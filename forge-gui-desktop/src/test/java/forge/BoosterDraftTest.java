@@ -1,11 +1,11 @@
 package forge;
 
-import forge.card.BoosterGenerator;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.game.card.Card;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
+import forge.item.generation.BoosterGenerator;
 import forge.limited.IBoosterDraft;
 import forge.model.FModel;
 

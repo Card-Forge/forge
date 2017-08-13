@@ -1,8 +1,9 @@
-package forge.card;
+package forge.item.generation;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import forge.StaticData;
+import forge.card.PrintSheet;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.util.ItemPool;

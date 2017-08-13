@@ -1,4 +1,4 @@
-package forge.card;
+package forge.item.generation;
 
 import com.google.common.base.Supplier;
 import forge.item.PaperCard;
