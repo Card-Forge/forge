@@ -1,7 +1,9 @@
 package forge.puzzle;
 
+import com.google.common.collect.Sets;
 import forge.ai.GameState;
 import forge.game.Game;
+import forge.game.GameType;
 import forge.game.ability.AbilityFactory;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -153,6 +155,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
         setupMaxPlayerHandSize(game, 7);
         super.applyGameOnThread(game);
         addGoalEnforcement(game);
+        game.getRules().setAppliedVariants(Sets.newHashSet(GameType.Puzzle));
     }
 
     @Override

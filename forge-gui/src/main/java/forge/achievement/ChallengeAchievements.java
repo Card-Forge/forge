@@ -44,6 +44,9 @@ public class ChallengeAchievements extends AchievementCollection {
 
         @Override
         protected boolean eval(Player player, Game game) {
+            if (!ChallengeAchievements.checkValidGameMode(game)) {
+                return false;
+            }
             return player.getOutcome().hasWon() &&
                     player.getAchievementTracker().challengesCompleted.contains(getKey());
         }
@@ -56,9 +59,7 @@ public class ChallengeAchievements extends AchievementCollection {
 
         @Override
         protected final boolean eval(Player player, Game game) {
-            if (game.getRules().hasAppliedVariant(GameType.MomirBasic)
-                    || game.getRules().hasAppliedVariant(GameType.Puzzle)) {
-                // these modes use a fixed pre-defined deck format, so challenge achievements don't apply in them
+            if (!ChallengeAchievements.checkValidGameMode(game)) {
                 return false;
             }
             if (player.getOutcome().hasWon()) {
@@ -68,5 +69,14 @@ public class ChallengeAchievements extends AchievementCollection {
         }
 
         protected abstract boolean eval(Deck deck);
+    }
+
+    public static boolean checkValidGameMode(final Game game) {
+        if (game.getRules().hasAppliedVariant(GameType.MomirBasic)
+                || game.getRules().hasAppliedVariant(GameType.Puzzle)) {
+            // these modes use a fixed pre-defined deck format, so challenge achievements don't apply in them
+            return false;
+        }
+        return true;
     }
 }
