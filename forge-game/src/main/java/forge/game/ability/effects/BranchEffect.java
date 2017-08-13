@@ -3,7 +3,6 @@ package forge.game.ability.effects;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
@@ -12,7 +11,6 @@ public class BranchEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
-        final Player player = host.getController();
 
         // TODO Reuse SpellAbilityCondition and areMet() here instead of repeating each
 

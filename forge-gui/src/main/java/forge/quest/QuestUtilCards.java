@@ -496,23 +496,6 @@ public final class QuestUtilCards {
     }
 
     /**
-     * Generate cards in shop.
-     */
-    private final GameFormat.Collection formats = FModel.getFormats();
-    private final Predicate<CardEdition> filterExt = formats.getExtended().editionLegalPredicate;
-
-    /** The filter t2booster. */
-    private final Predicate<CardEdition> filterT2booster = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER, formats.getStandard().editionLegalPredicate);
-
-    /** The filter ext but t2. */
-    private final Predicate<CardEdition> filterExtButT2 = Predicates.and(
-            CardEdition.Predicates.CAN_MAKE_BOOSTER,
-            Predicates.and(filterExt, formats.getStandard().editionLegalPredicate));
-
-    /** The filter not ext. */
-    private final Predicate<CardEdition> filterNotExt = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER, Predicates.not(filterExt));
-
-    /**
      * Helper predicate for shops: is legal in quest format.
      *
      * @param qFormat
