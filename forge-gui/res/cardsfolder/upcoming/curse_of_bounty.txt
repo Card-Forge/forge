@@ -5,7 +5,8 @@ K:Enchant player
 A:SP$ Attach | Cost$ 1 G | ValidTgts$ Player | AILogic$ Curse
 # TODO: ensure that TriggeredAttackerController would work correctly (or expand as needed) for multiple opponents attacking
 # the player (Player.EnchantedBy) after shared turns are implemented.
-T:Mode$ AttackersDeclared | ValidCard$ Creature | AttackedTarget$ Player.EnchantedBy | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted player is attacked, you gain 2 life. Each opponent attacking that player does the same.
-SVar:TrigUntap:DB$ UntapAll | Defined$ TriggeredAttackingPlayer | ValidCards$ Permanent.nonLand | SpellDescription$ Whenever enchanted player is attacked, untap all nonland permanents you control. Each opponent attacking that player untaps all nonland permanents he or she controls.
+T:Mode$ AttackersDeclared | ValidCard$ Creature | AttackedTarget$ Player.EnchantedBy | Execute$ TrigRepeat | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted player is attacked, untap all nonland permanents you control. Each opponent attacking that player untaps all nonland permanents he or she controls.
+SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ TriggeredAttackingPlayerAndYou | RepeatSubAbility$ TrigUntap
+SVar:TrigUntap:DB$ UntapAll | Defined$ Player.IsRemembered | ValidCards$ Permanent.nonLand | SpellDescription$ Whenever enchanted player is attacked, untap all nonland permanents you control. Each opponent attacking that player untaps all nonland permanents he or she controls.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_vitality.jpg
 Oracle:Enchant player\nWhenever enchanted player is attacked, untap all nonland permanents you control. Each opponent attacking that player untaps all nonland permanents he or she controls.

@@ -5,7 +5,8 @@ K:Enchant player
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Player | AILogic$ Curse
 # TODO: ensure that TriggeredAttackerController would work correctly (or expand as needed) for multiple opponents attacking
 # the player (Player.EnchantedBy) after shared turns are implemented.
-T:Mode$ AttackersDeclared | ValidCard$ Creature | AttackedTarget$ Player.EnchantedBy | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted player is attacked, you gain 2 life. Each opponent attacking that player does the same.
-SVar:TrigGainLife:DB$ GainLife | Defined$ TriggeredAttackerController | LifeAmount$ 2
+T:Mode$ AttackersDeclared | ValidCard$ Creature | AttackedTarget$ Player.EnchantedBy | Execute$ TrigRepeat | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted player is attacked, you gain 2 life. Each opponent attacking that player does the same.
+SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ TriggeredAttackingPlayerAndYou | RepeatSubAbility$ TrigGainLife
+SVar:TrigGainLife:DB$ GainLife | Defined$ Player.IsRemembered | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_vitality.jpg
 Oracle:Enchant player\nWhenever enchanted player is attacked, you gain 2 life. Each opponent attacking that player does the same.

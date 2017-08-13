@@ -971,10 +971,14 @@ public class AbilityUtils {
             }
         }
         else if (defined.startsWith("Triggered")) {
+            String defParsed = defined.endsWith("AndYou") ? defined.substring(0, defined.indexOf("AndYou")) : defined;
+            if (defined.endsWith("AndYou")) {
+                players.add(sa.getHostCard().getController());
+            }
             final SpellAbility root = sa.getRootAbility();
             Object o = null;
-            if (defined.endsWith("Controller")) {
-                String triggeringType = defined.substring(9);
+            if (defParsed.endsWith("Controller")) {
+                String triggeringType = defParsed.substring(9);
                 triggeringType = triggeringType.substring(0, triggeringType.length() - 10);
                 final Object c = root.getTriggeringObject(triggeringType);
                 if (c instanceof Card) {
@@ -984,8 +988,8 @@ public class AbilityUtils {
                     o = ((SpellAbility) c).getActivatingPlayer();
                 }
             }
-            else if (defined.endsWith("Opponent")) {
-                String triggeringType = defined.substring(9);
+            else if (defParsed.endsWith("Opponent")) {
+                String triggeringType = defParsed.substring(9);
                 triggeringType = triggeringType.substring(0, triggeringType.length() - 8);
                 final Object c = root.getTriggeringObject(triggeringType);
                 if (c instanceof Card) {
@@ -995,8 +999,8 @@ public class AbilityUtils {
                     o = ((SpellAbility) c).getActivatingPlayer().getOpponents();
                 }
             }
-            else if (defined.endsWith("Owner")) {
-                String triggeringType = defined.substring(9);
+            else if (defParsed.endsWith("Owner")) {
+                String triggeringType = defParsed.substring(9);
                 triggeringType = triggeringType.substring(0, triggeringType.length() - 5);
                 final Object c = root.getTriggeringObject(triggeringType);
                 if (c instanceof Card) {
@@ -1004,7 +1008,7 @@ public class AbilityUtils {
                 }
             }
             else {
-                final String triggeringType = defined.substring(9);
+                final String triggeringType = defParsed.substring(9);
                 o = root.getTriggeringObject(triggeringType);
             }
             if (o != null) {
