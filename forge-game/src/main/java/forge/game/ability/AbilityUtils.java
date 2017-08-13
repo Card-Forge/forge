@@ -973,7 +973,7 @@ public class AbilityUtils {
         else if (defined.startsWith("Triggered")) {
             String defParsed = defined.endsWith("AndYou") ? defined.substring(0, defined.indexOf("AndYou")) : defined;
             if (defined.endsWith("AndYou")) {
-                players.add(sa.getHostCard().getController());
+                players.add(sa.getActivatingPlayer());
             }
             final SpellAbility root = sa.getRootAbility();
             Object o = null;
