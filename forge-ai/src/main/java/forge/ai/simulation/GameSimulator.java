@@ -204,7 +204,7 @@ public class GameSimulator {
         }
 
         // TODO: Support multiple opponents.
-        Player opponent = aiPlayer.getOpponent();
+        Player opponent = ComputerUtil.getOpponentFor(aiPlayer);
         resolveStack(simGame, opponent);
 
         // TODO: If this is during combat, before blockers are declared,

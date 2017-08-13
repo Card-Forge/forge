@@ -6,6 +6,8 @@ import java.util.List;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 
 import forge.ai.ComputerUtilCard;
@@ -122,7 +124,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             }
         } else if (aiLogic.equals("Duneblast")) {
             CardCollection aiCreatures = ai.getCreaturesInPlay();
-            CardCollection oppCreatures = ai.getOpponent().getCreaturesInPlay();
+            CardCollection oppCreatures = ComputerUtil.getOpponentFor(ai).getCreaturesInPlay();
             aiCreatures = CardLists.getNotKeyword(aiCreatures, "Indestructible");
             oppCreatures = CardLists.getNotKeyword(oppCreatures, "Indestructible");
 

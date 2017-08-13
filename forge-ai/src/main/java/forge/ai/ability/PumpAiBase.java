@@ -181,7 +181,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
         final PhaseHandler ph = game.getPhaseHandler();
-        final Player opp = ai.getOpponent();
+        final Player opp = ComputerUtil.getOpponentFor(ai);
         final int newPower = card.getNetCombatDamage() + attack;
         //int defense = getNumDefense(sa);
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {

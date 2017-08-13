@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
@@ -59,7 +60,7 @@ public class SacrificeAi extends SpellAbilityAi {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final boolean destroy = sa.hasParam("Destroy");
 
-        Player opp = ai.getOpponent();
+        Player opp = ComputerUtil.getOpponentFor(ai);
         if (tgt != null) {
             sa.resetTargets();
             if (!opp.canBeTargetedBy(sa)) {
@@ -72,7 +73,7 @@ public class SacrificeAi extends SpellAbilityAi {
             final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), num, sa);
 
             List<Card> list =
-                    CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
+                    CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
             for (Card c : list) {
                 if (c.hasSVar("SacMe") && Integer.parseInt(c.getSVar("SacMe")) > 3) {
                 	return false;

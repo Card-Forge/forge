@@ -147,9 +147,10 @@ public class ProtectAi extends SpellAbilityAi {
                     if (s==null) {
                         return false;
                     } else {
+                    	Player opponent = ComputerUtil.getOpponentFor(ai);
                         Combat combat = ai.getGame().getCombat();
-                        int dmg = ComputerUtilCombat.damageIfUnblocked(c, ai.getOpponent(), combat, true);
-                        float ratio = 1.0f * dmg / ai.getOpponent().getLife();
+                        int dmg = ComputerUtilCombat.damageIfUnblocked(c, opponent, combat, true);
+                        float ratio = 1.0f * dmg / opponent.getLife();
                         Random r = MyRandom.getRandom();
                         return r.nextFloat() < ratio;
                     }

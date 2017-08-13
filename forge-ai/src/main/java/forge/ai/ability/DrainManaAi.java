@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import forge.ai.ComputerUtil;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -19,7 +20,7 @@ public class DrainManaAi extends SpellAbilityAi {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
-        final Player opp = ai.getOpponent();
+        final Player opp = ComputerUtil.getOpponentFor(ai);
         final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
@@ -42,7 +43,7 @@ public class DrainManaAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final Player opp = ai.getOpponent();
+        final Player opp = ComputerUtil.getOpponentFor(ai);
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
@@ -83,7 +84,7 @@ public class DrainManaAi extends SpellAbilityAi {
             }
         } else {
             sa.resetTargets();
-            sa.getTargets().add(ai.getOpponent());
+            sa.getTargets().add(ComputerUtil.getOpponentFor(ai));
         }
 
         return randomReturn;

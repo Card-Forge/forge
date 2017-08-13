@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
@@ -29,7 +30,7 @@ public class DigUntilAi extends SpellAbilityAi {
         final boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
         Player libraryOwner = ai;
-        Player opp = ai.getOpponent();
+        Player opp = ComputerUtil.getOpponentFor(ai);
 
         if (sa.usesTargeting()) {
             sa.resetTargets();

@@ -3,6 +3,7 @@ package forge.ai.ability;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -30,7 +31,7 @@ public class TapAllAi extends SpellAbilityAi {
         // or during upkeep/begin combat?
 
         final Card source = sa.getHostCard();
-        final Player opp = ai.getOpponent();
+        final Player opp = ComputerUtil.getOpponentFor(ai);
         final Game game = ai.getGame();
 
         if (game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN)) {
@@ -126,8 +127,8 @@ public class TapAllAi extends SpellAbilityAi {
 
         if (tgt != null) {
             sa.resetTargets();
-            sa.getTargets().add(ai.getOpponent());
-            validTappables = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
+            sa.getTargets().add(ComputerUtil.getOpponentFor(ai));
+            validTappables = ComputerUtil.getOpponentFor(ai).getCardsIn(ZoneType.Battlefield);
         }
 
         if (mandatory) {

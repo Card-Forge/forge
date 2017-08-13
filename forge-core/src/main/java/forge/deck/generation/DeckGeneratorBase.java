@@ -36,7 +36,6 @@ import forge.util.MyRandom;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-import java.awt.print.Paper;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;

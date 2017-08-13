@@ -57,7 +57,7 @@ public class PumpAllAi extends PumpAiBase {
             valid = sa.getParam("ValidCards");
         }
 
-        final Player opp = ai.getOpponent();
+        final Player opp = ComputerUtil.getOpponentFor(ai);
         CardCollection comp = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source);
         CardCollection human = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source);
 

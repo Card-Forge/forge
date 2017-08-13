@@ -864,7 +864,7 @@ public class PlayerControllerAi extends PlayerController {
             if (logic.equals("MostProminentInComputerDeck")) {
                 return ComputerUtilCard.getMostProminentCardName(player.getCardsIn(ZoneType.Library));
             } else if (logic.equals("MostProminentInHumanDeck")) {
-                return ComputerUtilCard.getMostProminentCardName(player.getOpponent().getCardsIn(ZoneType.Library));
+                return ComputerUtilCard.getMostProminentCardName(ComputerUtil.getOpponentFor(player).getCardsIn(ZoneType.Library));
             } else if (logic.equals("MostProminentCreatureInComputerDeck")) {
                 CardCollectionView cards = CardLists.getValidCards(player.getCardsIn(ZoneType.Library), "Creature", player, sa.getHostCard());
                 return ComputerUtilCard.getMostProminentCardName(cards);

@@ -345,7 +345,7 @@ public class DamageDealAi extends DamageAiBase {
         final boolean divided = sa.hasParam("DividedAsYouChoose");
         final boolean oppTargetsChoice = sa.hasParam("TargetingPlayer");
 
-        Player enemy = ai.getOpponent();
+        Player enemy = ComputerUtil.getOpponentFor(ai);
         
         if ("PowerDmg".equals(sa.getParam("AILogic"))) {
             // check if it is better to target the player instead, the original target is already set in PumpAi.pumpTgtAI()
@@ -377,7 +377,7 @@ public class DamageDealAi extends DamageAiBase {
         }
         if ("Polukranos".equals(sa.getParam("AILogic"))) {
             int dmgTaken = 0;
-            CardCollection humCreatures = ai.getOpponent().getCreaturesInPlay();
+            CardCollection humCreatures = enemy.getCreaturesInPlay();
             Card lastTgt = null;
             humCreatures = CardLists.getTargetableCards(humCreatures, sa);
             ComputerUtilCard.sortByEvaluateCreature(humCreatures);
@@ -633,7 +633,7 @@ public class DamageDealAi extends DamageAiBase {
         // this is for Triggered targets that are mandatory
         final boolean noPrevention = sa.hasParam("NoPrevention");
         final boolean divided = sa.hasParam("DividedAsYouChoose");
-        final Player opp = ai.getOpponent();
+        final Player opp = ComputerUtil.getOpponentFor(ai);
         System.out.println("damageChooseRequiredTargets " + ai + " " + sa);
 
         while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {

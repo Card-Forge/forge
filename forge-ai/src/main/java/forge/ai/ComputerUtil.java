@@ -192,7 +192,7 @@ public class ComputerUtil {
         if (unless != null && !unless.endsWith(">")) {
             final int amount = AbilityUtils.calculateAmount(source, unless, sa);
 
-            final int usableManaSources = ComputerUtilMana.getAvailableMana(ai.getOpponent(), true).size();
+            final int usableManaSources = ComputerUtilMana.getAvailableMana(ComputerUtil.getOpponentFor(ai), true).size();
 
             // If the Unless isn't enough, this should be less likely to be used
             if (amount > usableManaSources) {
@@ -926,7 +926,7 @@ public class ComputerUtil {
         		return true;
         	} else if (card.getSVar("PlayMain1").equals("OPPONENTCREATURES")) {
         		//Only play these main1 when the opponent has creatures (stealing and giving them haste)
-        		if (!card.getController().getOpponent().getCreaturesInPlay().isEmpty()) {
+        		if (!ComputerUtil.getOpponentFor(card.getController()).getCreaturesInPlay().isEmpty()) {
         			return true;
         		}
         	} else if (!card.getController().getCreaturesInPlay().isEmpty()) {
@@ -973,7 +973,7 @@ public class ComputerUtil {
                     return true;
                 }
             }
-            if (card.isEquipment() && buffedcard.isCreature() && CombatUtil.canAttack(buffedcard, ai.getOpponent())) {
+            if (card.isEquipment() && buffedcard.isCreature() && CombatUtil.canAttack(buffedcard, ComputerUtil.getOpponentFor(ai))) {
                 return true;
             }
             if (card.isCreature()) {
@@ -993,7 +993,7 @@ public class ComputerUtil {
         } // BuffedBy
 
         // get all cards the human controls with AntiBuffedBy
-        final CardCollectionView antibuffed = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
+        final CardCollectionView antibuffed = ComputerUtil.getOpponentFor(ai).getCardsIn(ZoneType.Battlefield);
         for (Card buffedcard : antibuffed) {
             if (buffedcard.hasSVar("AntiBuffedBy")) {
                 final String buffedby = buffedcard.getSVar("AntiBuffedBy");
@@ -1033,11 +1033,11 @@ public class ComputerUtil {
             return ret;
         } else {
             // Otherwise, if life is possibly in danger, then this is fine.
-            Combat combat = new Combat(ai.getOpponent());
-            CardCollectionView attackers = ai.getOpponent().getCreaturesInPlay();
+            Combat combat = new Combat(ComputerUtil.getOpponentFor(ai));
+            CardCollectionView attackers = ComputerUtil.getOpponentFor(ai).getCreaturesInPlay();
             for (Card att : attackers) {
                 if (ComputerUtilCombat.canAttackNextTurn(att, ai)) {
-                    combat.addAttacker(att, att.getController().getOpponent());
+                    combat.addAttacker(att, ComputerUtil.getOpponentFor(att.getController()));
                 }
             }
             AiBlockController aiBlock = new AiBlockController(ai);
@@ -1145,7 +1145,7 @@ public class ComputerUtil {
         }
 
         // get all cards the human controls with AntiBuffedBy
-        final CardCollectionView antibuffed = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
+        final CardCollectionView antibuffed = ComputerUtil.getOpponentFor(ai).getCardsIn(ZoneType.Battlefield);
         for (Card buffedcard : antibuffed) {
             if (buffedcard.hasSVar("AntiBuffedBy")) {
                 final String buffedby = buffedcard.getSVar("AntiBuffedBy");
@@ -1331,7 +1331,7 @@ public class ComputerUtil {
                 if (tgt == null) {
                     continue;
                 }
-                final Player enemy = ai.getOpponent();
+                final Player enemy = ComputerUtil.getOpponentFor(ai);
                 if (!sa.canTarget(enemy)) {
                     continue;
                 }
@@ -2047,7 +2047,7 @@ public class ComputerUtil {
                     }
                 }
                 else if (logic.equals("ChosenLandwalk")) {
-                    for (Card c : ai.getOpponent().getLandsInPlay()) {
+                    for (Card c : ComputerUtil.getOpponentFor(ai).getLandsInPlay()) {
                         for (String t : c.getType()) {
                             if (!invalidTypes.contains(t) && CardType.isABasicLandType(t)) {
                                 chosen = t;
@@ -2065,7 +2065,7 @@ public class ComputerUtil {
         else if (kindOfType.equals("Land")) {
             if (logic != null) {
                 if (logic.equals("ChosenLandwalk")) {
-                    for (Card c : ai.getOpponent().getLandsInPlay()) {
+                    for (Card c : ComputerUtil.getOpponentFor(ai).getLandsInPlay()) {
                         for (String t : c.getType().getLandTypes()) {
                             if (!invalidTypes.contains(t)) {
                                 chosen = t;
@@ -2098,7 +2098,7 @@ public class ComputerUtil {
         case "Torture":
             return "Torture";
         case "GraceOrCondemnation":
-            return ai.getCreaturesInPlay().size() > ai.getOpponent().getCreaturesInPlay().size() ? "Grace"
+            return ai.getCreaturesInPlay().size() > ComputerUtil.getOpponentFor(ai).getCreaturesInPlay().size() ? "Grace"
                     : "Condemnation";
         case "CarnageOrHomage":
             CardCollection cardsInPlay = CardLists
@@ -2683,4 +2683,23 @@ public class ComputerUtil {
         }
         return true;
     }
+
+
+    public static final Player getOpponentFor(final Player player) {
+        Player opponent = null;
+        int minLife = Integer.MAX_VALUE;
+
+        for (Player p : player.getOpponents()) {
+            if (p.getLife() < minLife) {
+                opponent = p;
+                minLife = p.getLife();
+            }
+        }
+
+        if (opponent != null) {
+            return opponent;
+        }
+
+        throw new IllegalStateException("No opponents left ingame for " + player);
+    }    
 }

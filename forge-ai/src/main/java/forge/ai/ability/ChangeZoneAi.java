@@ -166,7 +166,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         ZoneType origin = null;
-        final Player opponent = ai.getOpponent();
+        final Player opponent = ComputerUtil.getOpponentFor(ai);
         boolean activateForCost = ComputerUtil.activateForCost(sa, ai);
 
         if (sa.hasParam("Origin")) {
@@ -367,7 +367,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // if putting cards from hand to library and parent is drawing cards
         // make sure this will actually do something:
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Player opp = aiPlayer.getOpponent();
+        final Player opp = ComputerUtil.getOpponentFor(aiPlayer);
         if (tgt != null && tgt.canTgtPlayer()) {
             boolean isCurse = sa.isCurse();
             if (isCurse && sa.canTarget(opp)) {
@@ -428,7 +428,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         Iterable<Player> pDefined;
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if ((tgt != null) && tgt.canTgtPlayer()) {
-            final Player opp = ai.getOpponent();
+            final Player opp = ComputerUtil.getOpponentFor(ai);
             if (sa.isCurse()) {
                 if (sa.canTarget(opp)) {
                     sa.getTargets().add(opp);
@@ -547,8 +547,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
      */
     private static Card chooseCreature(final Player ai, CardCollection list) {
         // Creating a new combat for testing purposes. 
-        Combat combat = new Combat(ai.getOpponent());
-        for (Card att : ai.getOpponent().getCreaturesInPlay()) {
+    	final Player opponent = ComputerUtil.getOpponentFor(ai);
+        Combat combat = new Combat(opponent);
+        for (Card att : opponent.getCreaturesInPlay()) {
             combat.addAttacker(att, ai);
         }
         AiBlockController block = new AiBlockController(ai);
@@ -828,7 +829,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                                 && !currCombat.getBlockers(attacker).isEmpty()) {
                             ComputerUtilCard.sortByEvaluateCreature(blockers);
                             Combat combat = new Combat(ai);
-                            combat.addAttacker(attacker, ai.getOpponent());
+                            combat.addAttacker(attacker, ComputerUtil.getOpponentFor(ai));
                             for (Card blocker : blockers) {
                                 combat.addBlocker(attacker, blocker);
                             }

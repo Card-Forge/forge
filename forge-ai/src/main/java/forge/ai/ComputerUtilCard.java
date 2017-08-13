@@ -482,7 +482,7 @@ public class ComputerUtilCard {
      */
     public static CardCollectionView getLikelyBlockers(final Player ai, final CardCollectionView blockers) {
         AiBlockController aiBlk = new AiBlockController(ai);
-        final Player opp = ai.getOpponent();
+        final Player opp = ComputerUtil.getOpponentFor(ai);
         Combat combat = new Combat(opp);
         //Use actual attackers if available, else consider all possible attackers
         Combat currentCombat = ai.getGame().getCombat();
@@ -845,9 +845,10 @@ public class ComputerUtilCard {
         List<String> chosen = new ArrayList<String>();
         Player ai = sa.getActivatingPlayer();
         final Game game = ai.getGame();
-        Player opp = ai.getOpponent();
+        Player opp = ComputerUtil.getOpponentFor(ai);
         if (sa.hasParam("AILogic")) {
             final String logic = sa.getParam("AILogic");
+             
             if (logic.equals("MostProminentInHumanDeck")) {
                 chosen.add(ComputerUtilCard.getMostProminentColor(CardLists.filterControlledBy(game.getCardsInGame(), opp), colorChoices));
             }
@@ -873,7 +874,7 @@ public class ComputerUtilCard {
                 chosen.add(ComputerUtilCard.getMostProminentColor(ai.getCardsIn(ZoneType.Battlefield), colorChoices));
             }
             else if (logic.equals("MostProminentHumanControls")) {
-                chosen.add(ComputerUtilCard.getMostProminentColor(ai.getOpponent().getCardsIn(ZoneType.Battlefield), colorChoices));
+                chosen.add(ComputerUtilCard.getMostProminentColor(opp.getCardsIn(ZoneType.Battlefield), colorChoices));
             }
             else if (logic.equals("MostProminentPermanent")) {
                 chosen.add(ComputerUtilCard.getMostProminentColor(game.getCardsIn(ZoneType.Battlefield), colorChoices));
@@ -897,7 +898,7 @@ public class ComputerUtilCard {
             	String bestColor = Constant.GREEN;
             	for (byte color : MagicColor.WUBRG) {
             		CardCollectionView ailist = ai.getCardsIn(ZoneType.Battlefield);
-            		CardCollectionView opplist = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
+            		CardCollectionView opplist = opp.getCardsIn(ZoneType.Battlefield);
             		
             		ailist = CardLists.filter(ailist, CardPredicates.isColor(color));
             		opplist = CardLists.filter(opplist, CardPredicates.isColor(color));
@@ -934,7 +935,7 @@ public class ComputerUtilCard {
     public static boolean useRemovalNow(final SpellAbility sa, final Card c, final int dmg, ZoneType destination) {
         final Player ai = sa.getActivatingPlayer();
         final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-        final Player opp = ai.getOpponent();
+        final Player opp = ComputerUtil.getOpponentFor(ai);
         final Game game = ai.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
         final PhaseType phaseType = ph.getPhase();
@@ -1217,7 +1218,7 @@ public class ComputerUtilCard {
             }
         }
 
-        final Player opp = ai.getOpponent();
+        final Player opp = ComputerUtil.getOpponentFor(ai);
         Card pumped = getPumpedCreature(ai, sa, c, toughness, power, keywords);
         List<Card> oppCreatures = opp.getCreaturesInPlay();
         float chance = 0;

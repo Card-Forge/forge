@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import forge.ai.ComputerUtil;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
@@ -16,7 +17,7 @@ public class BalanceAi extends SpellAbilityAi {
 
         int diff = 0;
         // TODO Add support for multiplayer logic
-        final Player opp = aiPlayer.getOpponent();
+        final Player opp = ComputerUtil.getOpponentFor(aiPlayer);
         final CardCollectionView humPerms = opp.getCardsIn(ZoneType.Battlefield);
         final CardCollectionView compPerms = aiPlayer.getCardsIn(ZoneType.Battlefield);
         

@@ -8,7 +8,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.ai.AiCardMemory;
-
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
@@ -86,13 +86,13 @@ public class AnimateAi extends SpellAbilityAi {
                 num = (num == null) ? "1" : num;
                 final int nToSac = AbilityUtils.calculateAmount(topStack.getHostCard(), num, topStack);
                 CardCollection list = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","),
-                        ai.getOpponent(), topStack.getHostCard(), topStack);
+                		ComputerUtil.getOpponentFor(ai), topStack.getHostCard(), topStack);
                 list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
                 ComputerUtilCard.sortByEvaluateCreature(list);
                 if (!list.isEmpty() && list.size() == nToSac && ComputerUtilCost.canPayCost(sa, ai)) {
                     Card animatedCopy = becomeAnimated(source, sa);
                     list.add(animatedCopy);
-                    list = CardLists.getValidCards(list, valid.split(","), ai.getOpponent(), topStack.getHostCard(),
+                    list = CardLists.getValidCards(list, valid.split(","), ComputerUtil.getOpponentFor(ai), topStack.getHostCard(),
                             topStack);
                     list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
                     if (ComputerUtilCard.evaluateCreature(animatedCopy) < ComputerUtilCard.evaluateCreature(list.get(0))

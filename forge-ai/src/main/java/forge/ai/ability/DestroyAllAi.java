@@ -64,7 +64,7 @@ public class DestroyAllAi extends SpellAbilityAi {
 
     public boolean doMassRemovalLogic(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
-        Player opponent = ai.getOpponent(); // TODO: how should this AI logic work for multiplayer and getOpponents()?
+        Player opponent = ComputerUtil.getOpponentFor(ai); // TODO: how should this AI logic work for multiplayer and getOpponents()?
 
         final int CREATURE_EVAL_THRESHOLD = 200;
 

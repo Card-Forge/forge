@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
 
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -18,7 +19,7 @@ public abstract class DamageAiBase extends SpellAbilityAi {
     protected boolean shouldTgtP(final Player comp, final SpellAbility sa, final int d, final boolean noPrevention) {
         int restDamage = d;
         final Game game = comp.getGame();
-        final Player enemy = comp.getOpponent();
+        final Player enemy = ComputerUtil.getOpponentFor(comp);
         if (!sa.canTarget(enemy)) {
             return false;
         }

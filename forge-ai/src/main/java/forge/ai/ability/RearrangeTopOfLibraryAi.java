@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 
+import forge.ai.ComputerUtil;
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -27,7 +28,7 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
             // ability is targeted
             sa.resetTargets();
 
-            Player opp = ai.getOpponent();
+            Player opp = ComputerUtil.getOpponentFor(ai);
             final boolean canTgtHuman = opp.canBeTargetedBy(sa);
 
             if (!canTgtHuman) {

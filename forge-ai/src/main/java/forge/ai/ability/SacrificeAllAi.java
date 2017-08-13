@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
@@ -38,7 +39,7 @@ public class SacrificeAllAi extends SpellAbilityAi {
         }
 
         CardCollection humanlist =
-                CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source, sa);
+                CardLists.getValidCards(ComputerUtil.getOpponentFor(ai).getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source, sa);
         CardCollection computerlist =
                 CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source, sa);
 

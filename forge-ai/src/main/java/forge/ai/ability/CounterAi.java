@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import forge.ai.AiController;
 import forge.ai.AiProps;
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import java.util.Iterator;
 
@@ -94,7 +95,7 @@ public class CounterAi extends SpellAbilityAi {
 
         if (unlessCost != null && !unlessCost.endsWith(">")) {
             // Is this Usable Mana Sources? Or Total Available Mana?
-            final int usableManaSources = ComputerUtilMana.getAvailableMana(ai.getOpponent(), true).size();
+            final int usableManaSources = ComputerUtilMana.getAvailableMana(ComputerUtil.getOpponentFor(ai), true).size();
             int toPay = 0;
             boolean setPayX = false;
             if (unlessCost.equals("X") && source.getSVar(unlessCost).equals("Count$xPaid")) {
@@ -213,7 +214,7 @@ public class CounterAi extends SpellAbilityAi {
             final Card source = sa.getHostCard();
             if (unlessCost != null) {
                 // Is this Usable Mana Sources? Or Total Available Mana?
-                final int usableManaSources = ComputerUtilMana.getAvailableMana(ai.getOpponent(), true).size();
+                final int usableManaSources = ComputerUtilMana.getAvailableMana(ComputerUtil.getOpponentFor(ai), true).size();
                 int toPay = 0;
                 boolean setPayX = false;
                 if (unlessCost.equals("X") && source.getSVar(unlessCost).equals("Count$xPaid")) {

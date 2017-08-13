@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 
 import forge.ai.AiController;
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilMana;
 import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
@@ -17,7 +18,7 @@ public class RepeatAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
     	final Card source = sa.getHostCard();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Player opp = ai.getOpponent();
+        final Player opp = ComputerUtil.getOpponentFor(ai);
 
         if (tgt != null) {
             if (!opp.canBeTargetedBy(sa)) {
@@ -48,7 +49,7 @@ public class RepeatAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
     	
     	 if (sa.usesTargeting()) {
-         	final Player opp = ai.getOpponent();
+         	final Player opp = ComputerUtil.getOpponentFor(ai);
              if (sa.canTarget(opp)) {
                  sa.resetTargets();
                  sa.getTargets().add(opp);

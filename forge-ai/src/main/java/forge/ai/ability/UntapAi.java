@@ -133,7 +133,7 @@ public class UntapAi extends SpellAbilityAi {
         Player targetController = ai;
 
         if (sa.isCurse()) {
-            targetController = ai.getOpponent();
+            targetController = ComputerUtil.getOpponentFor(ai);
         }
 
         CardCollection list = CardLists.getTargetableCards(targetController.getCardsIn(ZoneType.Battlefield), sa);

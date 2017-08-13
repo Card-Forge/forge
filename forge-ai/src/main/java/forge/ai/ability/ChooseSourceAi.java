@@ -5,6 +5,7 @@ import java.util.List;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.ComputerUtilCost;
@@ -63,8 +64,9 @@ public class ChooseSourceAi extends SpellAbilityAi {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             sa.resetTargets();
-            if (sa.canTarget(ai.getOpponent())) {
-                sa.getTargets().add(ai.getOpponent());
+            Player opp = ComputerUtil.getOpponentFor(ai);
+            if (sa.canTarget(opp)) {
+                sa.getTargets().add(opp);
             } else {
                 return false;
             }

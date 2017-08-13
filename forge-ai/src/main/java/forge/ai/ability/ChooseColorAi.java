@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.base.Predicates;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
@@ -53,7 +52,7 @@ public class ChooseColorAi extends SpellAbilityAi {
         }
 
         if ("Addle".equals(sourceName)) {
-            if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) || ai.getOpponent().getCardsIn(ZoneType.Hand).isEmpty()) {
+            if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) || ComputerUtil.getOpponentFor(ai).getCardsIn(ZoneType.Hand).isEmpty()) {
                 return false;
             }
             return true;
@@ -62,7 +61,7 @@ public class ChooseColorAi extends SpellAbilityAi {
         if (logic.equals("MostExcessOpponentControls")) {
             for (byte color : MagicColor.WUBRG) {
                 CardCollectionView ailist = ai.getCardsIn(ZoneType.Battlefield);
-                CardCollectionView opplist = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
+                CardCollectionView opplist = ComputerUtil.getOpponentFor(ai).getCardsIn(ZoneType.Battlefield);
 
                 ailist = CardLists.filter(ailist, CardPredicates.isColor(color));
                 opplist = CardLists.filter(opplist, CardPredicates.isColor(color));

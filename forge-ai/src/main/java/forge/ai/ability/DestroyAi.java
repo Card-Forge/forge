@@ -267,7 +267,7 @@ public class DestroyAi extends SpellAbilityAi {
         } else if (sa.hasParam("Defined")) {
             list = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
             if ("WillSkipTurn".equals(logic) && (sa.getHostCard().getController().equals(ai)
-                || ai.getCreaturesInPlay().size() < ai.getOpponent().getCreaturesInPlay().size()
+                || ai.getCreaturesInPlay().size() < ComputerUtil.getOpponentFor(ai).getCreaturesInPlay().size()
                 || !source.getGame().getPhaseHandler().isPlayerTurn(ai)
                 || ai.getLife() <= 5)) {
                 // Basic ai logic for Lethal Vapors
