@@ -4,9 +4,9 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.AIOption;
 import forge.GuiBase;
 import forge.LobbyPlayer;
+import forge.ai.AIOption;
 import forge.ai.AiProfileUtil;
 import forge.ai.LobbyPlayerAi;
 import forge.model.FModel;

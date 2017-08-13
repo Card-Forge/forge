@@ -5,7 +5,7 @@ import java.util.Set;
 
 import com.google.common.collect.ImmutableSet;
 
-import forge.AIOption;
+import forge.ai.AIOption;
 import forge.deck.Deck;
 import forge.net.event.UpdateLobbyPlayerEvent;
 

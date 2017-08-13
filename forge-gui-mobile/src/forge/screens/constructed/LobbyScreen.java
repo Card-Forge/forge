@@ -8,10 +8,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.google.common.collect.Iterables;
 
-import forge.AIOption;
 import forge.FThreads;
 import forge.Forge;
 import forge.Graphics;
+import forge.ai.AIOption;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.deck.CardPool;

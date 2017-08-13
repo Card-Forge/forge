@@ -2,7 +2,6 @@ package forge.ai;
 
 import java.util.Set;
 
-import forge.AIOption;
 import forge.LobbyPlayer;
 import forge.game.Game;
 import forge.game.player.IGameEntitiesFactory;

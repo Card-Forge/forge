@@ -2,8 +2,8 @@ package forge.match;
 
 import java.util.Collections;
 
-import forge.AIOption;
 import forge.GuiBase;
+import forge.ai.AIOption;
 import forge.interfaces.IGuiGame;
 
 public final class LocalLobby extends GameLobby {

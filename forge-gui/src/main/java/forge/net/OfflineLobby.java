@@ -2,7 +2,7 @@ package forge.net;
 
 import java.util.Collections;
 
-import forge.AIOption;
+import forge.ai.AIOption;
 import forge.interfaces.IGuiGame;
 import forge.match.GameLobby;
 import forge.match.LobbySlot;

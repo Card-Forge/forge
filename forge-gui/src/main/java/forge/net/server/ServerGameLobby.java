@@ -4,7 +4,7 @@ import java.util.Collections;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.AIOption;
+import forge.ai.AIOption;
 import forge.interfaces.IGuiGame;
 import forge.match.GameLobby;
 import forge.match.LobbySlot;

@@ -7,10 +7,10 @@ import java.util.Set;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
-import forge.AIOption;
 import forge.GuiBase;
 import forge.GuiDesktop;
 import forge.StaticData;
+import forge.ai.AIOption;
 import forge.ai.LobbyPlayerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.deck.Deck;

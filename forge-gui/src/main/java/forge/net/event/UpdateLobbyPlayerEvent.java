@@ -3,7 +3,7 @@ package forge.net.event;
 import java.util.Collections;
 import java.util.Set;
 
-import forge.AIOption;
+import forge.ai.AIOption;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;

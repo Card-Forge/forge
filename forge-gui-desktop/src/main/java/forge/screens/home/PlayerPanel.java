@@ -21,9 +21,9 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableSet;
 
-import forge.AIOption;
 import forge.Singletons;
 import forge.UiCommand;
+import forge.ai.AIOption;
 import forge.assets.FSkinProp;
 import forge.deck.DeckSection;
 import forge.game.GameType;

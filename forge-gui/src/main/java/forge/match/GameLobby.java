@@ -14,9 +14,9 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.primitives.Ints;
 
-import forge.AIOption;
 import forge.GuiBase;
 import forge.LobbyPlayer;
+import forge.ai.AIOption;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckFormat;

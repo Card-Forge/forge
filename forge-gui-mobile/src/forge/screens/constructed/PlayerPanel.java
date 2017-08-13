@@ -10,9 +10,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
-import forge.AIOption;
 import forge.Forge;
 import forge.Graphics;
+import forge.ai.AIOption;
 import forge.assets.FSkin;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
