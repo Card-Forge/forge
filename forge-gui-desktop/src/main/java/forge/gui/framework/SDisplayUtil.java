@@ -18,7 +18,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import forge.FThreads;
-import forge.toolbox.FButton;
 import forge.view.FFrame;
 
 /**

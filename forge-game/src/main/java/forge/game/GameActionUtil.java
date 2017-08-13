@@ -285,6 +285,8 @@ public final class GameActionUtil {
             case Retrace:
                 result.getRestrictions().setZone(ZoneType.Graveyard);
                 break;
+            default:
+                break;
             }
         }
         return result;

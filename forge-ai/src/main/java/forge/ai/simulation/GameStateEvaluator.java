@@ -4,7 +4,6 @@ import forge.ai.CreatureEvaluator;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
-import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;

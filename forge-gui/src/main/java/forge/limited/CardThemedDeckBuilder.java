@@ -1,10 +1,22 @@
 package forge.limited;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import forge.card.*;
+
+import forge.card.CardEdition;
+import forge.card.CardRules;
+import forge.card.CardRulesPredicates;
+import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.CardPool;
@@ -14,16 +26,10 @@ import forge.deck.DeckSection;
 import forge.deck.generation.DeckGenPool;
 import forge.deck.generation.DeckGeneratorBase;
 import forge.game.GameFormat;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.util.MyRandom;
-import forge.util.PredicateString;
-
-import java.awt.print.Paper;
-import java.util.*;
 
 /**
  * Limited format deck.

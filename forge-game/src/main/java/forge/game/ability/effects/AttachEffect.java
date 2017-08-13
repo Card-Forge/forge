@@ -19,8 +19,6 @@ import forge.util.Lang;
 
 import java.util.List;
 
-import com.google.common.collect.Iterables;
-
 public class AttachEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {

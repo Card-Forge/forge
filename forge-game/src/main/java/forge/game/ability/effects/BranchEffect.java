@@ -8,8 +8,6 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
 
-import java.util.List;
-
 public class BranchEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {

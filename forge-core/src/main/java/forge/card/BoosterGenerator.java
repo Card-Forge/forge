@@ -195,6 +195,8 @@ public class BoosterGenerator {
                         foilSlot = BoosterSlots.SPECIAL;
                     }
                     break;
+                default:
+                    break;
             }
         }
 

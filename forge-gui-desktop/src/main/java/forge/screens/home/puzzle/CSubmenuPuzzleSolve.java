@@ -44,7 +44,9 @@ public enum CSubmenuPuzzleSolve implements ICDoc, IMenuProvider {
     }
 
     private final UiCommand cmdStart = new UiCommand() {
-        @Override public void run() {
+		private static final long serialVersionUID = -367368436333443417L;
+
+		@Override public void run() {
             startPuzzleSolve();
         }
     };
