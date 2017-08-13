@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Predicate;
+
 import forge.card.CardEdition;
-import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.itemmanager.IItemManager;
-import forge.model.FModel;
 
 public class ColorDeckGenerator extends DeckProxy implements Comparable<ColorDeckGenerator> {
     public static List<DeckProxy> getColorDecks(final IItemManager<DeckProxy> lstDecks0, final Predicate<PaperCard> formatFilter0, final boolean isAi0) {

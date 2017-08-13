@@ -8,7 +8,6 @@ import java.util.Map.Entry;
 
 import com.google.common.collect.ImmutableList;
 
-import forge.GuiBase;
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.ApiType;

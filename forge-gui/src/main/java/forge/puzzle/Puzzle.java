@@ -15,7 +15,7 @@ import forge.model.FModel;
 import java.util.List;
 import java.util.Map;
 
-public class Puzzle extends GameState implements InventoryItem, Comparable {
+public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzle> {
     String name;
     String goal;
     String url;
@@ -172,7 +172,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable {
 
     public String toString() { return name; }
 
-    public int compareTo(Object pzl) throws ClassCastException {
+    public int compareTo(Puzzle pzl) throws ClassCastException {
         if (!(pzl instanceof Puzzle)) {
             throw new ClassCastException("Tried to compare a Puzzle object to a non-Puzzle object.");
         }
