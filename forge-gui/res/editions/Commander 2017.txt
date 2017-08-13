@@ -290,7 +290,7 @@ Type=Other
 281 R Stirring Wildwood   
 282 U Stone Quarry   
 283 C Swiftwater Cliffs   
-284 U Temple of the FALSE God
+284 U Temple of the False God
 285 C Terramorphic Expanse   
 286 U Tranquil Expanse   
 287 C Tranquil Thicket   
