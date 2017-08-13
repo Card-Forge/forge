@@ -133,6 +133,9 @@ public class LoadDraftScreen extends LaunchScreen {
                 } else {
                     final Integer aiIndex = SGuiChoose.getInteger("Which opponent would you like to face?",
                             1, FModel.getDecks().getDraft().get(humanDeck.getName()).getAiDecks().size());
+                    if (aiIndex == null) {
+                        return; // Cancel was pressed
+                    }
 
                     final DeckGroup opponentDecks = FModel.getDecks().getDraft().get(humanDeck.getName());
                     final Deck aiDeck = opponentDecks.getAiDecks().get(aiIndex - 1);

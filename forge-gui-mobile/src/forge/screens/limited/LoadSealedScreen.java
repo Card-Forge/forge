@@ -126,6 +126,9 @@ public class LoadSealedScreen extends LaunchScreen {
 
                     final Integer aiIndex = SGuiChoose.getInteger("Which opponent would you like to face?",
                             1, FModel.getDecks().getSealed().get(humanDeck.getName()).getAiDecks().size());
+                    if (aiIndex == null) {
+                        return; // Cancel was pressed
+                    }
 
                     final DeckGroup opponentDecks = FModel.getDecks().getSealed().get(humanDeck.getName());
                     final Deck aiDeck = opponentDecks.getAiDecks().get(aiIndex - 1);
