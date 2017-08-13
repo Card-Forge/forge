@@ -17166,6 +17166,7 @@ forge-gui/res/cardsfolder/upcoming/disrupt_decorum.txt -text
 forge-gui/res/cardsfolder/upcoming/edgar_markov.txt -text
 forge-gui/res/cardsfolder/upcoming/fortunate_few.txt -text
 forge-gui/res/cardsfolder/upcoming/fractured_identity.txt -text
+forge-gui/res/cardsfolder/upcoming/galecaster_colossus.txt -text
 forge-gui/res/cardsfolder/upcoming/hammer_of_nazahn.txt -text
 forge-gui/res/cardsfolder/upcoming/heirloom_blade.txt -text
 forge-gui/res/cardsfolder/upcoming/heralds_horn.txt -text
@@ -17173,8 +17174,10 @@ forge-gui/res/cardsfolder/upcoming/hungry_lynx.txt -text
 forge-gui/res/cardsfolder/upcoming/inalla_archmage_ritualist.txt -text
 forge-gui/res/cardsfolder/upcoming/kess_dissident_mage.txt -text
 forge-gui/res/cardsfolder/upcoming/kheru_mind_eater.txt -text
+forge-gui/res/cardsfolder/upcoming/kindred_boon.txt -text
 forge-gui/res/cardsfolder/upcoming/kindred_charge.txt -text
 forge-gui/res/cardsfolder/upcoming/kindred_discovery.txt -text
+forge-gui/res/cardsfolder/upcoming/kindred_dominance.txt -text
 forge-gui/res/cardsfolder/upcoming/kindred_summons.txt -text
 forge-gui/res/cardsfolder/upcoming/licia_sanguine_tribune.txt -text
 forge-gui/res/cardsfolder/upcoming/mairsil_the_pretender.txt -text
