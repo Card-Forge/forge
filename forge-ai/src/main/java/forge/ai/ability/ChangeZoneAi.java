@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+import forge.game.card.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -22,11 +23,6 @@ import forge.game.GameObject;
 import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
@@ -646,6 +642,20 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
                 if (!contains) {
                     return false;
+                }
+            }
+
+            if (destination == ZoneType.Battlefield) {
+                // predict whether something may put a ETBing creature below zero toughness
+                // (e.g. Reassembing Skeleton + Elesh Norn, Grand Cenobite)
+                for (final Card c : retrieval) {
+                    if (c.isCreature()) {
+                        final Card copy = CardUtil.getLKICopy(c);
+                        ComputerUtilCard.applyStaticContPT(c.getGame(), copy, null);
+                        if (copy.getNetToughness() <= 0) {
+                            return false;
+                        }
+                    }
                 }
             }
         }
