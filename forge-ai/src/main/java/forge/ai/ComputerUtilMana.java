@@ -219,27 +219,32 @@ public class ComputerUtilMana {
                 }
             }
 
+            SpellAbility paymentChoice = ma;
+
             // Exception: when paying generic mana with Cavern of Souls, prefer the colored mana producing ability
             // to attempt to make the spell uncounterable when possible.
-            if ((toPay == ManaCostShard.GENERIC || toPay == ManaCostShard.X) 
-                    && ComputerUtilAbility.getAbilitySourceName(ma).equals("Cavern of Souls")
+            if (ComputerUtilAbility.getAbilitySourceName(ma).equals("Cavern of Souls")
                     && sa.getHostCard().getType().getCreatureTypes().contains(ma.getHostCard().getChosenType())) {
-                for (SpellAbility ab : saList) {
-                    if (ab.isManaAbility() && ab.getManaPart().isAnyMana() && ab.hasParam("AddsNoCounter")) {
-                        if (canPayShardWithSpellAbility(toPay, ai, ma, sa, checkCosts)) {
-                            return ab;
+                if (toPay == ManaCostShard.COLORLESS && cost.getUnpaidShards().contains(ManaCostShard.GENERIC)) {
+                    // Deprioritize Cavern of Souls, try to pay generic mana with it instead to use the NoCounter ability
+                    continue;
+                } else if (toPay == ManaCostShard.GENERIC || toPay == ManaCostShard.X) {
+                    for (SpellAbility ab : saList) {
+                        if (ab.isManaAbility() && ab.getManaPart().isAnyMana() && ab.hasParam("AddsNoCounter")) {
+                            paymentChoice = ab;
+                            break;
                         }
                     }
                 }
             }
 
             final String typeRes = cost.getSourceRestriction();
-            if (StringUtils.isNotBlank(typeRes) && !ma.getHostCard().getType().hasStringType(typeRes)) {
+            if (StringUtils.isNotBlank(typeRes) && !paymentChoice.getHostCard().getType().hasStringType(typeRes)) {
                 continue;
             }
 
-            if (canPayShardWithSpellAbility(toPay, ai, ma, sa, checkCosts)) {
-                return ma;
+            if (canPayShardWithSpellAbility(toPay, ai, paymentChoice, sa, checkCosts)) {
+                return paymentChoice;
             }
         }
         return null;
