@@ -226,7 +226,9 @@ public class ComputerUtilMana {
                     && sa.getHostCard().getType().getCreatureTypes().contains(ma.getHostCard().getChosenType())) {
                 for (SpellAbility ab : saList) {
                     if (ab.isManaAbility() && ab.getManaPart().isAnyMana() && ab.hasParam("AddsNoCounter")) {
-                        return ab;
+                        if (canPayShardWithSpellAbility(toPay, ai, ma, sa, checkCosts)) {
+                            return ab;
+                        }
                     }
                 }
             }
