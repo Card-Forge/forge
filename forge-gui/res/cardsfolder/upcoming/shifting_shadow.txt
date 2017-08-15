@@ -1,0 +1,14 @@
+Name:Shifting Shadow
+ManaCost:2 R
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature | AILogic$ Pump | SubAbility$ DBEffect | OverrideSpellDescription$ True
+SVar:DBEffect:DB$ Effect | Triggers$ ShadowUpkeepTrig | RememberObjects$ Enchanted | ImprintCards$ Self | SVars$ ShadowRevealCards,ShadowReattach,ShadowDestroyEnchanted,ShadowForgetDestroyed | ConditionPresent$ Card.Self | Duration$ UntilHostLeavesPlay | ExileOnMoved$ Exile | Name$ Shifting Shadow Effect | MoveWithRemembered$ True | SpellDescription$ Enchanted creature has haste and "At the beginning of your upkeep, destroy this creature. Reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and attach CARDNAME to it, then put all other cards revealed this way on the bottom of your library in a random order."
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Haste
+SVar:ShadowUpkeepTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | TriggerController$ RememberedController | Execute$ ShadowDestroyEnchanted | TriggerDescription$ At the beginning of your upkeep, destroy this creature. Reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and attach EFFECTSOURCE to it, then put all other cards revealed this way on the bottom of your library in a random order.
+SVar:ShadowDestroyEnchanted:DB$ Destroy | Defined$ Remembered | SubAbility$ ShadowForgetDestroyed
+SVar:ShadowForgetDestroyed:DB$ Pump | ForgetObjects$ Remembered | SubAbility$ ShadowRevealCards
+SVar:ShadowRevealCards:DB$ DigUntil | Valid$ Creature | ValidDescription$ creature | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | RememberFound$ True | SubAbility$ ShadowReattach
+SVar:ShadowReattach:DB$ Attach | Defined$ Remembered | Object$ Imprinted
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shifting_shadow.jpg
+Oracle:Enchant creature\nEnchanted creature has haste and "At the beginning of your upkeep, destroy this creature. Reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and attach Shifting Shadow to it, then put all other cards revealed this way on the bottom of your library in a random order."

@@ -252,7 +252,12 @@ public final class AbilityFactory {
             }
         }
 
-        if (spellAbility instanceof SpellApiBased && hostCard.isPermanent()) {
+        // OverrideSpellDescription can be set in case a permanent spell with subs explicitly specifies
+        // SpellDescription for all its components, potentially in subabilities, which allows to avoid artifacts
+        // such as splashing the card name in the beginning of the description (e.g. Shifting Shadow)
+
+        if (spellAbility instanceof SpellApiBased && hostCard.isPermanent()
+                && !mapParams.containsKey("OverrideSpellDescription")) {
             spellAbility.setDescription(spellAbility.getHostCard().getName());
         } else if (mapParams.containsKey("SpellDescription")) {
             final StringBuilder sb = new StringBuilder();

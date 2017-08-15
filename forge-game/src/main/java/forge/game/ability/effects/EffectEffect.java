@@ -112,6 +112,14 @@ public class EffectEffect extends SpellAbilityEffect {
 
         final Card eff = createEffect(hostCard, controller, name, image);
 
+        // For effects that need to change their controller and zone together with the card remembered/imprinted on them
+        if (sa.hasParam("MoveWithRemembered")) {
+            eff.setSVar("MoveWithRemembered", "True");
+        }
+        if (sa.hasParam("MoveWithImprinted")) {
+            eff.setSVar("MoveWithImprinted", "True");
+        }
+
         // Grant SVars first in order to give references to granted abilities
         if (effectSVars != null) {
             for (final String s : effectSVars) {
