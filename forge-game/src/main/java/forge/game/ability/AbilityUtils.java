@@ -177,16 +177,6 @@ public class AbilityUtils {
                     cards.addAll(addRememberedFromCardState(game, (Card)o));
                 }
             }
-        } else if (defined.equals("RememberedLast")) {
-            Card remembered = null;
-            for (final Object o : hostCard.getRemembered()) {
-                if (o instanceof Card) {
-                    remembered = (Card)o;
-                }
-            }
-            if (remembered != null) {
-                cards.add(remembered);
-            }
         } else if (defined.equals("RememberedLKI")) {
             for (final Object o : hostCard.getRemembered()) {
                 if (o instanceof Card) {
@@ -223,6 +213,16 @@ public class AbilityUtils {
             Object o = Iterables.getFirst(hostCard.getRemembered(), null);
             if (o != null && o instanceof Card) {
                 cards.add(game.getCardState((Card) o));
+            }
+        } else if (defined.equals("LastRemembered")) {
+            Card remembered = null;
+            for (final Object o : hostCard.getRemembered()) {
+                if (o instanceof Card) {
+                    remembered = (Card)o;
+                }
+            }
+            if (remembered != null) {
+                cards.add(remembered);
             }
         } else if (defined.equals("Clones")) {
             for (final Card clone : hostCard.getClones()) {
