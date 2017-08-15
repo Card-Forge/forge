@@ -174,7 +174,7 @@ public class AbilityUtils {
             // game.getCardState(Card c) is not working for LKI
             for (final Object o : hostCard.getRemembered()) {
                 if (o instanceof Card) {
-                    cards.addAll(addRememberedFromCardState(game, (Card) o));
+                    cards.addAll(addRememberedFromCardState(game, (Card)o));
                 }
             }
         } else if (defined.equals("RememberedLast")) {
