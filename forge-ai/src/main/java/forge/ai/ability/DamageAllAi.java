@@ -59,7 +59,7 @@ public class  DamageAllAi extends SpellAbilityAi {
             return evaluateDamageAll(ai, sa, source, dmg) > 0;
         } else {
             int best = -1, best_x = -1;
-            for (int i = 0; i < x; i++) {
+            for (int i = 0; i <= x; i++) {
                 final int value = evaluateDamageAll(ai, sa, source, i);
                 if (value > best) {
                     best = value;
