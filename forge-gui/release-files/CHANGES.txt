@@ -1,3 +1,6 @@
+- Commander 2017 Spoiler Season -
+Most Commander 2017 cards have been implemented and are ready for testing. They will only be visible and playable if Developer Mode is enabled. At least some of the remaining few unimplemented cards may be scripted in the future.
+
 - Puzzle Mode -
 Many new puzzles were implemented, including several that start in combat with attackers declared and some that require you to survive for a certain set of turns.
 
