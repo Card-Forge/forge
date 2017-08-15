@@ -37,6 +37,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
         final String type = sa.getParam("CounterType");
         final String amountStr = sa.getParam("CounterNum");
         final String valid = sa.getParam("ValidCards");
+        final String logic = sa.getParamOrDefault("AILogic", "");
         final boolean curse = sa.isCurse();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
@@ -54,6 +55,12 @@ public class CountersPutAllAi extends SpellAbilityAi {
             }
 
             if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source)) {
+                return false;
+            }
+        }
+
+        if (logic.equals("AtEOTOrBlock")) {
+            if (!ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && !ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 return false;
             }
         }
