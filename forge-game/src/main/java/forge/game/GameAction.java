@@ -607,8 +607,8 @@ public class GameAction {
         // check for related effects and correct their controller and zone if necessary
         for (Card eff : game.getCardsIn(ZoneType.Command)) {
             if (eff.getType().hasSubtype("Effect")) {
-                boolean moveWithImprinted = eff.hasSVar("MoveWithImprinted") && eff.getImprintedCards().contains(c);
-                boolean moveWithRemembered = eff.hasSVar("MoveWithRemembered") && (Iterables.contains(eff.getRemembered(), c));
+                boolean moveWithImprinted = eff.hasSVar("MoveWithImprinted") && eff.getImprintedCards() != null && eff.getImprintedCards().contains(c);
+                boolean moveWithRemembered = eff.hasSVar("MoveWithRemembered") && eff.getRemembered() != null && (Iterables.contains(eff.getRemembered(), c));
 
                 if (moveWithImprinted || moveWithRemembered) {
                     eff.setController(c.getController(), game.getNextTimestamp());
