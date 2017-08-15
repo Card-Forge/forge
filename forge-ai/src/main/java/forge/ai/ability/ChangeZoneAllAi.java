@@ -73,14 +73,15 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         oppType = AbilityUtils.filterListByType(oppType, sa.getParam("ChangeType"), sa);
         computerType = AbilityUtils.filterListByType(computerType, sa.getParam("ChangeType"), sa);
         
-        // Living Death AI
         if ("LivingDeath".equals(sa.getParam("AILogic"))) {
+            // Living Death AI
             return SpecialCardAi.LivingDeath.consider(ai, sa);
-        }
-
-        // Timetwister AI
-        if ("Timetwister".equals(sa.getParam("AILogic"))) {
+        } else if ("Timetwister".equals(sa.getParam("AILogic"))) {
+            // Timetwister AI
             return SpecialCardAi.Timetwister.consider(ai, sa);
+        } else if ("RetDiscardedThisTurn".equals(sa.getParam("AILogic"))) {
+            // e.g. Shadow of the Grave
+            return ai.getNumDiscardedThisTurn() > 0 && ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN);
         }
 
         // TODO improve restrictions on when the AI would want to use this
