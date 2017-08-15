@@ -303,7 +303,7 @@ public class GameCopier {
             newCard.setSemiPermanentToughnessBoost(c.getSemiPermanentToughnessBoost());
             newCard.setDamage(c.getDamage());
             
-            newCard.setChangedCardTypes(c.getChangedCardTypes());
+            newCard.setChangedCardTypes(c.getChangedCardTypesMap());
             newCard.setChangedCardKeywords(c.getChangedCardKeywords());
             // TODO: Is this correct? Does it not duplicate keywords from enchantments and such?
             for (String kw : c.getHiddenExtrinsicKeywords())

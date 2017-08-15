@@ -723,7 +723,6 @@ public abstract class GameState {
 
     private void setupPlayerState(int life, Map<ZoneType, String> cardTexts, final Player p) {
         // Lock check static as we setup player state
-        final Game game = p.getGame();
 
         Map<ZoneType, CardCollectionView> playerCards = new EnumMap<ZoneType, CardCollectionView>(ZoneType.class);
         for (Entry<ZoneType, String> kv : cardTexts.entrySet()) {

@@ -411,11 +411,13 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     @Override
-    public CardTypeView getTypeWithChanges(final Map<Long, CardChangedType> changedCardTypes) {
-        if (changedCardTypes.isEmpty()) { return this; }
+    public CardTypeView getTypeWithChanges(final Iterable<CardChangedType> changedCardTypes) {
+        CardType newType = null;
+        // we assume that changes are already correctly ordered (taken from TreeMap.values())
+        for (final CardChangedType ct : changedCardTypes) {
+            if(null == newType)
+                newType = new CardType(CardType.this);
 
-        final CardType newType = new CardType(CardType.this);
-        for (final CardChangedType ct : changedCardTypes.values()) {
             if (ct.isRemoveCardTypes()) {
                 newType.coreTypes.clear();
             }
@@ -441,7 +443,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
                 newType.addAll(ct.getAddType());
             }
         }
-        return newType;
+        return newType == null ? this : newType;
     }
 
     @Override

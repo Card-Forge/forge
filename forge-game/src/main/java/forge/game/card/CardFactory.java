@@ -151,7 +151,7 @@ public class CardFactory {
         // information about the latest state of the card as it left the battlefield)
         out.setChangedCardColors(in.getChangedCardColors());
         out.setChangedCardKeywords(in.getChangedCardKeywords());
-        out.setChangedCardTypes(in.getChangedCardTypes());
+        out.setChangedCardTypes(in.getChangedCardTypesMap());
 
         return out;
     }

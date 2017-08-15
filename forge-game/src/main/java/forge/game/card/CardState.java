@@ -29,19 +29,17 @@ import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardType;
 import forge.card.CardTypeView;
-import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
+import forge.game.ForgeScript;
 import forge.game.GameObject;
-import forge.game.ability.AbilityUtils;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
-import forge.util.Expressions;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 
@@ -377,6 +375,7 @@ public class CardState extends GameObject {
         view.updateKeywords(c, this);
     }
 
+    
     public CardRarity getRarity() {
         return rarity;
     }
@@ -388,6 +387,11 @@ public class CardState extends GameObject {
     public String getSetCode() {
         return setCode;
     }
+    
+    public CardTypeView getTypeWithChanges() {
+        return getType().getTypeWithChanges(card.getChangedCardTypes());
+    }
+    
     public void setSetCode(String setCode0) {
         setCode = setCode0;
         view.updateSetCode(this);
@@ -398,136 +402,7 @@ public class CardState extends GameObject {
      */
     @Override
     public boolean hasProperty(String property, Player sourceController, Card source, SpellAbility spellAbility) {
-        final boolean isColorlessSource = card.hasKeyword("Colorless Damage Source", this);
-        final ColorSet colors = card.determineColor(this);
-        if (property.contains("White") || property.contains("Blue") || property.contains("Black")
-                || property.contains("Red") || property.contains("Green")) {
-            boolean mustHave = !property.startsWith("non");
-            boolean withSource = property.endsWith("Source");
-            if (withSource && isColorlessSource) {
-                return false;
-            }
-
-            final String colorName = property.substring(mustHave ? 0 : 3, property.length() - (withSource ? 6 : 0));
-
-            int desiredColor = MagicColor.fromName(colorName);
-            boolean hasColor = colors.hasAnyColor(desiredColor);
-            if (mustHave != hasColor)
-                return false;
-
-        } else if (property.contains("Colorless")) { // ... Card is colorless
-            boolean non = property.startsWith("non");
-            boolean withSource = property.endsWith("Source");
-            if (non && withSource && isColorlessSource) {
-                return false;
-            }
-            if (non == colors.isColorless()) return false;
-
-        } else if (property.contains("MultiColor")) {
-            // ... Card is multicolored
-            if (property.endsWith("Source") && isColorlessSource)
-                return false;
-            if (property.startsWith("non") == colors.isMulticolor())
-                return false;
-
-        } else if (property.contains("MonoColor")) { // ... Card is monocolored
-            if (property.endsWith("Source") && isColorlessSource)
-                return false;
-            if (property.startsWith("non") == colors.isMonoColor())
-                return false;
-
-        } else if (property.startsWith("ChosenColor")) {
-            if (property.endsWith("Source") && isColorlessSource)
-                return false;
-            if (!source.hasChosenColor() || !colors.hasAnyColor(MagicColor.fromName(source.getChosenColor())))
-                return false;
-
-        } else if (property.startsWith("AnyChosenColor")) {
-            if (property.endsWith("Source") && isColorlessSource)
-                return false;
-            if (!source.hasChosenColor()
-                    || !colors.hasAnyColor(ColorSet.fromNames(source.getChosenColors()).getColor()))
-                return false;
-
-        } else if (property.startsWith("non")) {
-            // ... Other Card types
-            if (card.getType(this).hasStringType(property.substring(3))) {
-                return false;
-            }
-        } else if (property.equals("CostsPhyrexianMana")) {
-            if (!getManaCost().hasPhyrexian()) {
-                return false;
-            }
-        } else if (property.startsWith("HasSVar")) {
-            final String svar = property.substring(8);
-            if (!hasSVar(svar)) {
-                return false;
-            }
-        } else if (property.equals("ChosenType")) {
-            if (!card.getType(this).hasStringType(source.getChosenType())) {
-                return false;
-            }
-        } else if (property.equals("IsNotChosenType")) {
-            if (card.getType(this).hasStringType(source.getChosenType())) {
-                return false;
-            }
-        } else if (property.startsWith("HasSubtype")) {
-            final String subType = property.substring(11);
-            if (!card.getType(this).hasSubtype(subType)) {
-                return false;
-            }
-        } else if (property.startsWith("HasNoSubtype")) {
-            final String subType = property.substring(13);
-            if (card.getType(this).hasSubtype(subType)) {
-                return false;
-            }
-        } else if (property.equals("hasActivatedAbilityWithTapCost")) {
-            for (final SpellAbility sa : getSpellAbilities()) {
-                if (sa.isAbility() && (sa.getPayCosts() != null) && sa.getPayCosts().hasTapCost()) {
-                    return true;
-                }
-            }
-            return false;
-        } else if (property.equals("hasActivatedAbility")) {
-            for (final SpellAbility sa : getSpellAbilities()) {
-                if (sa.isAbility()) {
-                    return true;
-                }
-            }
-            return false;
-        } else if (property.equals("hasManaAbility")) {
-            for (final SpellAbility sa : getSpellAbilities()) {
-                if (sa.isManaAbility()) {
-                    return true;
-                }
-            }
-            return false;
-        } else if (property.equals("hasNonManaActivatedAbility")) {
-            for (final SpellAbility sa : getSpellAbilities()) {
-                if (sa.isAbility() && !sa.isManaAbility()) {
-                    return true;
-                }
-            }
-            return false;
-        } else if (property.startsWith("cmc")) {
-            int x;
-            String rhs = property.substring(5);
-            int y = getManaCost().getCMC();
-            try {
-                x = Integer.parseInt(rhs);
-            } catch (final NumberFormatException e) {
-                x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
-            }
-
-            if (!Expressions.compare(y, property, x)) {
-                return false;
-            }
-        } else if (!card.getType(this).hasStringType(property)) {
-            return false;
-        }
-        
-        return true;
-        
+        return ForgeScript.cardStateHasProperty(this, property, sourceController, source, spellAbility);
     }
     
     

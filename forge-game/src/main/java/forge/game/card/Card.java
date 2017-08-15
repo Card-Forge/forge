@@ -2709,10 +2709,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (changedCardTypes.isEmpty()) {
             return state.getType();
         }
-        return state.getType().getTypeWithChanges(changedCardTypes);
+        return state.getType().getTypeWithChanges(getChangedCardTypes());
     }
 
-    public Map<Long, CardChangedType> getChangedCardTypes() {
+    public Iterable<CardChangedType> getChangedCardTypes() {
+        return Iterables.unmodifiableIterable(changedCardTypes.values());
+    }
+    
+    public Map<Long, CardChangedType> getChangedCardTypesMap() {
         return Collections.unmodifiableMap(changedCardTypes);
     }
 

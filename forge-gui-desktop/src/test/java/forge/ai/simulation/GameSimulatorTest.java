@@ -1337,7 +1337,7 @@ public class GameSimulatorTest extends SimulationTestCase {
     public void testDeathsShadow() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(0);
-        Player opp = game.getPlayers().get(1);
+        //Player opp = game.getPlayers().get(1);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
 
         addCardToZone("Platinum Angel", p, ZoneType.Battlefield);

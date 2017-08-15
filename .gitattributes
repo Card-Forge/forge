@@ -304,6 +304,7 @@ forge-game/src/main/java/forge/GameCommand.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/CardTraitBase.java -text
 forge-game/src/main/java/forge/game/CardTraitPredicates.java -text svneol=unset#text/plain
 forge-game/src/main/java/forge/game/Direction.java -text
+forge-game/src/main/java/forge/game/ForgeScript.java -text
 forge-game/src/main/java/forge/game/Game.java -text
 forge-game/src/main/java/forge/game/GameAction.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/GameActionUtil.java svneol=native#text/plain
