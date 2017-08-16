@@ -199,120 +199,120 @@ Type=Other
 190 U Rakdos Charm
 191 U Savage Ventmaw
 192 R Scion of the Ur-Dragon
-193 R Shadowmage Infiltrator   
-194 R Silumgar's Command   
-195 R Silumgar, the Drifting Death 
-196 R Spellbound Dragon   
-197 U Stromkirk Captain   
-198 R Teneb, the Harvester  
-199 U Terminate    
-200 C Tithe Drinker   
-201 M Vela the Night-Clad  
-202 R Argentum Armor   
-203 C Armillary Sphere   
-204 R Blade of the Bloodchief 
-205 U Boros Signet   
-206 C Commander's Sphere   
-207 U Darksteel Ingot   
-208 R Door of Destinies  
-209 U Dreamstone Hedron   
-210 U Fellwar Stone   
-211 R Fist of Suns  
-212 R Grappling Hook   
-213 U Hedron Archive   
-214 U Hero's Blade   
-215 U Lightning Greaves   
-216 U Loxodon Warhammer   
-217 R Nevinyrral's Disk   
-218 C Nihil Spellbomb   
-219 U Orzhov Signet   
-220 R Quietus Spike   
-221 U Rakdos Signet   
-222 U Skullclamp    
-223 U Sol Ring   
-224 R Staff of Nin  
-225 R Steel Hellkite   
-226 U Swiftfoot Boots   
-227 R Sword of the Animist 
-228 R Sword of Vengeance  
-229 U Unstable Obelisk   
-230 C Wayfarer's Bauble   
-231 R Well of Lost Dreams 
-232 U Worn Powerstone   
-233 U Akoum Refuge   
-234 U Arcane Sanctum   
-235 U Blighted Woodland   
-236 C Bloodfell Caves   
-237 C Blossoming Sands   
-238 C Bojuka Bog   
-239 C Boros Garrison   
-240 C Boros Guildgate   
-241 U Cinder Barrens   
-242 C Command Tower   
+193 R Shadowmage Infiltrator
+194 R Silumgar's Command
+195 R Silumgar, the Drifting Death
+196 R Spellbound Dragon
+197 U Stromkirk Captain
+198 R Teneb, the Harvester
+199 U Terminate
+200 C Tithe Drinker
+201 M Vela the Night-Clad
+202 R Argentum Armor
+203 C Armillary Sphere
+204 R Blade of the Bloodchief
+205 U Boros Signet
+206 C Commander's Sphere
+207 U Darksteel Ingot
+208 R Door of Destinies
+209 U Dreamstone Hedron
+210 U Fellwar Stone
+211 R Fist of Suns
+212 R Grappling Hook
+213 U Hedron Archive
+214 U Hero's Blade
+215 U Lightning Greaves
+216 U Loxodon Warhammer
+217 R Nevinyrral's Disk
+218 C Nihil Spellbomb
+219 U Orzhov Signet
+220 R Quietus Spike
+221 U Rakdos Signet
+222 U Skullclamp
+223 U Sol Ring
+224 R Staff of Nin
+225 R Steel Hellkite
+226 U Swiftfoot Boots
+227 R Sword of the Animist
+228 R Sword of Vengeance
+229 U Unstable Obelisk
+230 C Wayfarer's Bauble
+231 R Well of Lost Dreams
+232 U Worn Powerstone
+233 U Akoum Refuge
+234 U Arcane Sanctum
+235 U Blighted Woodland
+236 C Bloodfell Caves
+237 C Blossoming Sands
+238 C Bojuka Bog
+239 C Boros Garrison
+240 C Boros Guildgate
+241 U Cinder Barrens
+242 C Command Tower
 243 R Crucible of the Spirit Dragon
-244 U Crumbling Necropolis   
-245 U Dimir Aqueduct   
-246 C Dismal Backwater   
-247 U Elfhame Palace   
-248 C Evolving Wilds   
-249 R Exotic Orchard   
-250 U Forsaken Sanctuary   
-251 U Frontier Bivouac   
-252 U Grasslands    
-253 U Graypelt Refuge   
-254 C Grixis Panorama   
+244 U Crumbling Necropolis
+245 U Dimir Aqueduct
+246 C Dismal Backwater
+247 U Elfhame Palace
+248 C Evolving Wilds
+249 R Exotic Orchard
+250 U Forsaken Sanctuary
+251 U Frontier Bivouac
+252 U Grasslands
+253 U Graypelt Refuge
+254 C Grixis Panorama
 255 R Haven of the Spirit Dragon
-256 U Izzet Boilerworks   
-257 U Jungle Shrine   
-258 U Jwar Isle Refuge  
-259 C Kabira Crossroads   
-260 U Krosan Verge   
-261 R Mosswort Bridge   
-262 U Myriad Landscape   
-263 U Mystic Monastery   
-264 R Mystifying Maze   
-265 U Nomad Outpost   
-266 C Opal Palace   
-267 U Opulent Palace   
-268 C Orzhov Basilica   
-269 C Orzhov Guildgate   
-270 C Rakdos Carnarium   
-271 C Rakdos Guildgate   
-272 U Rogue's Passage   
-273 U Saltcrusted Steppe   
-274 U Sandsteppe Citadel   
-275 U Savage Lands   
-276 C Scoured Barrens   
-277 U Seaside Citadel   
-278 C Secluded Steppe   
-279 C Selesnya Guildgate   
-280 C Selesnya Sanctuary   
-281 R Stirring Wildwood   
-282 U Stone Quarry   
-283 C Swiftwater Cliffs   
+256 U Izzet Boilerworks
+257 U Jungle Shrine
+258 U Jwar Isle Refuge
+259 C Kabira Crossroads
+260 U Krosan Verge
+261 R Mosswort Bridge
+262 U Myriad Landscape
+263 U Mystic Monastery
+264 R Mystifying Maze
+265 U Nomad Outpost
+266 C Opal Palace
+267 U Opulent Palace
+268 C Orzhov Basilica
+269 C Orzhov Guildgate
+270 C Rakdos Carnarium
+271 C Rakdos Guildgate
+272 U Rogue's Passage
+273 U Saltcrusted Steppe
+274 U Sandsteppe Citadel
+275 U Savage Lands
+276 C Scoured Barrens
+277 U Seaside Citadel
+278 C Secluded Steppe
+279 C Selesnya Guildgate
+280 C Selesnya Sanctuary
+281 R Stirring Wildwood
+282 U Stone Quarry
+283 C Swiftwater Cliffs
 284 U Temple of the False God
-285 C Terramorphic Expanse   
-286 U Tranquil Expanse   
-287 C Tranquil Thicket   
-288 U Urborg Volcano   
-289 U Vivid Crag   
-290 U Vivid Creek   
-291 U Vivid Grove   
-292 U Vivid Marsh   
-293 U Vivid Meadow   
-294 C Wind-Scarred Crag   
-295 L Plains    
-296 L Plains    
-297 L Plains    
-298 L Island    
-299 L Island    
-300 L Island    
-301 L Swamp    
-302 L Swamp    
-303 L Swamp    
-304 L Mountain    
-305 L Mountain    
-306 L Mountain    
-307 L Forest    
-308 L Forest    
-309 L Forest 
+285 C Terramorphic Expanse
+286 U Tranquil Expanse
+287 C Tranquil Thicket
+288 U Urborg Volcano
+289 U Vivid Crag
+290 U Vivid Creek
+291 U Vivid Grove
+292 U Vivid Marsh
+293 U Vivid Meadow
+294 C Wind-Scarred Crag
+295 L Plains
+296 L Plains
+297 L Plains
+298 L Island
+299 L Island
+300 L Island
+301 L Swamp
+302 L Swamp
+303 L Swamp
+304 L Mountain
+305 L Mountain
+306 L Mountain
+307 L Forest
+308 L Forest
+309 L Forest
