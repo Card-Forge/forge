@@ -98,18 +98,16 @@ public class TriggerChangesZone extends Trigger {
         }
 
         if (this.mapParams.containsKey("ValidCard")) {
-            final Card moved = (Card) runParams2.get("Card");
-            if (!moved.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
-                return false;
-            }
-        }
-
-        if (this.mapParams.containsKey("ValidCardLKI")) {
+            Card moved = (Card) runParams2.get("Card");
             final Game game = this.getHostCard().getGame();
-            final Card movedLKI = game.getChangeZoneLKIInfo((Card) runParams2.get("Card"));
+            boolean isDiesTrig = "Battlefield".equals(this.mapParams.get("Origin"))
+                    && "Graveyard".equals(this.mapParams.get("Destination"));
 
-            if (!movedLKI.isValid(this.mapParams.get("ValidCardLKI").split(","), this.getHostCard().getController(),
+            if (isDiesTrig) {
+                moved = game.getChangeZoneLKIInfo(moved);
+            }
+
+            if (!moved.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
                 return false;
             }
