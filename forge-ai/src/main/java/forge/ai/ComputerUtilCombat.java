@@ -1746,7 +1746,7 @@ public class ComputerUtilCombat {
         defenderDamage = predictDamageTo(attacker, defenderDamage, possibleAttackerPrevention, blocker, true);
         attackerDamage = predictDamageTo(blocker, attackerDamage, possibleDefenderPrevention, attacker, true);
         if (!attacker.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
-            if (isCombatDamagePrevented(blocker, attacker, defenderDamage)) {
+            if (defenderDamage > 0 && isCombatDamagePrevented(blocker, attacker, defenderDamage)) {
                 return false;
             }
         }
