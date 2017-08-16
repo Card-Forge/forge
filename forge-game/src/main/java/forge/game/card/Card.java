@@ -3735,20 +3735,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (combat != null && phasedOut) {
             combat.removeFromCombat(this);
         }
-        if (phasedOut && isToken()) {
-            // 702.23k Phased-out tokens cease to exist as a state-based action.
-            // See rule 704.5d.
-            // 702.23d The phasing event doesn't actually cause a permanent to
-            // change zones or control,
-            // even though it's treated as though it's not on the battlefield
-            // and not under its controller's control while it's phased out.
-            // Zone-change triggers don't trigger when a permanent phases in or
-            // out.
-
-            // Just remove it's zone, so we don't run through the exile stuff
-            // This allows auras on phased out tokens to just phase out permanently
-            this.ceaseToExist();
-        }
 
         if (!phasedOut) {
             // Just phased in, time to run the phased in trigger
