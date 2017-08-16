@@ -218,6 +218,9 @@ public abstract class GameState {
                 newText.append("|Monstrous:");
                 newText.append(c.getMonstrosityNum());
             }
+            if (c.isPhasedOut()) {
+                newText.append("|PhasedOut");
+            }
             if (c.isFaceDown()) {
                 newText.append("|FaceDown");
                 if (c.isManifested()) {
@@ -824,6 +827,8 @@ public abstract class GameState {
                 } else if (info.startsWith("Monstrous:")) {
                     c.setMonstrous(true);
                     c.setMonstrosityNum(Integer.parseInt(info.substring((info.indexOf(':') + 1))));
+                } else if (info.startsWith("PhasedOut")) {
+                    c.setPhasedOut(true);
                 } else if (info.startsWith("Counters:")) {
                     applyCountersToGameEntity(c, info.substring(info.indexOf(':') + 1));
                 } else if (info.startsWith("SummonSick")) {
