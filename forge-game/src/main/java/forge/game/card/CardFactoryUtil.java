@@ -656,7 +656,7 @@ public class CardFactoryUtil {
      * @return a int.
      */
     public static int xCount(final Card c, final String expression) {
-        if (StringUtils.isBlank(expression)) {
+        if (StringUtils.isBlank(expression) || c == null) {
             return 0;
         }
         if (StringUtils.isNumeric(expression)) {
