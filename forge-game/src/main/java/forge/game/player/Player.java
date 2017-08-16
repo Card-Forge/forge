@@ -17,6 +17,18 @@
  */
 package forge.game.player;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
+import java.util.TreeMap;
+import java.util.concurrent.ConcurrentSkipListMap;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
@@ -27,14 +39,38 @@ import com.google.common.collect.Maps;
 
 import forge.LobbyPlayer;
 import forge.card.MagicColor;
-import forge.game.*;
+import forge.game.ForgeScript;
+import forge.game.Game;
+import forge.game.GameEntity;
+import forge.game.GameLogEntryType;
+import forge.game.GameStage;
+import forge.game.GameType;
+import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.DetachedCardEffect;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardDamageMap;
+import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.event.*;
+import forge.game.card.CardUtil;
+import forge.game.card.CounterType;
+import forge.game.event.GameEventCardSacrificed;
+import forge.game.event.GameEventLandPlayed;
+import forge.game.event.GameEventMulligan;
+import forge.game.event.GameEventPlayerControl;
+import forge.game.event.GameEventPlayerCounters;
+import forge.game.event.GameEventPlayerDamaged;
+import forge.game.event.GameEventPlayerLivesChanged;
+import forge.game.event.GameEventPlayerPoisoned;
+import forge.game.event.GameEventPlayerStatsChanged;
+import forge.game.event.GameEventScry;
+import forge.game.event.GameEventShuffle;
 import forge.game.keyword.KeywordCollection;
 import forge.game.keyword.KeywordCollection.KeywordCollectionView;
 import forge.game.keyword.KeywordsChange;
@@ -55,18 +91,10 @@ import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
-import forge.util.collect.FCollection;
-import forge.util.collect.FCollectionView;
-import forge.util.Expressions;
 import forge.util.Lang;
 import forge.util.MyRandom;
-
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentSkipListMap;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
+import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 
 /**
  * <p>
@@ -2002,309 +2030,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     @Override
     public final boolean hasProperty(final String property, final Player sourceController, final Card source, SpellAbility spellAbility) {
-        if (property.equals("You")) {
-            if (!equals(sourceController)) {
-                return false;
-            }
-        } else if (property.equals("Opponent")) {
-            if (equals(sourceController) || !isOpponentOf(sourceController)) {
-                return false;
-            }
-        } else if (property.startsWith("OpponentOf ")) {
-            final String v = property.split(" ")[1];
-            final List<Player> players = AbilityUtils.getDefinedPlayers(source, v, spellAbility);
-            for (final Player p : players) {
-                if (equals(p) || !isOpponentOf(p)) {
-                    return false;
-                }
-            }
-        } else if (property.equals("Allies")) {
-            if (equals(sourceController) || isOpponentOf(sourceController)) {
-                return false;
-            }
-        } else if (property.equals("Active")) {
-            if (!equals(game.getPhaseHandler().getPlayerTurn())) {
-                return false;
-            }
-        } else if (property.equals("NonActive")) {
-            if (equals(game.getPhaseHandler().getPlayerTurn())) {
-                return false;
-            }
-        } else if (property.equals("OpponentToActive")) {
-            final Player active = game.getPhaseHandler().getPlayerTurn();
-            if (equals(active) || !isOpponentOf(active)) {
-                return false;
-            }
-        } else if (property.equals("Other")) {
-            if (equals(sourceController)) {
-                return false;
-            }
-        } else if (property.equals("OtherThanSourceOwner")) {
-            if (equals(source.getOwner())) {
-                return false;
-            }
-        } else if (property.equals("isMonarch")) {
-            if (!equals(game.getMonarch())) {
-                return false;
-            }
-        } else if (property.startsWith("wasDealtCombatDamageThisCombatBy ")) {
-            final String v = property.split(" ")[1];
-            final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
-            boolean found = false;
-            for (final Card card : cards) {
-                if (card.getDamageHistory().getThisCombatDamaged().contains(this)) {
-                    found = true;
-                    break;
-        	    }
-            }
-            if (!found) {
-                return false;
-            }
-        } else if (property.startsWith("wasDealtDamageThisGameBy ")) {
-            final String v = property.split(" ")[1];
-            final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
-            boolean found = false;
-            for (final Card card : cards) {
-                if (card.getDamageHistory().getThisGameDamaged().contains(this)) {
-                    found = true;
-                    break;
-                    }
-            }
-            if (!found) {
-                return false;
-            }
-        } else if (property.startsWith("wasDealtDamageThisTurnBy ")) {
-            final String v = property.split(" ")[1];
-            final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
-            boolean found = false;
-            for (final Card card : cards) {
-                if (card.getDamageHistory().getThisTurnDamaged().contains(this)) {
-                    found = true;
-                    break;
-                    }
-            }
-            if (!found) {
-                return false;
-            }
-        } else if (property.startsWith("wasDealtCombatDamageThisTurnBy ")) {
-            final String v = property.split(" ")[1];
-            final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
-            
-            boolean found = false;
-            for (final Card card : cards) {
-                if (card.getDamageHistory().getThisTurnCombatDamaged().contains(this)) {
-                    found = true;
-                    break;
-                    }
-            }
-            if (!found) {
-                return false;
-            }
-        } else if (property.equals("attackedBySourceThisCombat")) {
-            if (game.getCombat() == null || !equals(game.getCombat().getDefenderPlayerByAttacker(source))) {
-                return false;
-            }
-        } else if (property.equals("wasDealtDamageThisTurn")) {
-            if (assignedDamage.isEmpty()) {
-                return false;
-            }
-        } else if (property.equals("wasDealtCombatDamageThisTurn")) {
-            if (assignedCombatDamage.isEmpty()) {
-                return false;
-            }
-        } else if (property.equals("LostLifeThisTurn")) {
-            if (lifeLostThisTurn <= 0) {
-                return false;
-            }
-        } else if (property.equals("DeclaredAttackerThisTurn")) {
-            if (attackersDeclaredThisTurn <= 0) {
-                return false;
-            }
-        } else if (property.equals("TappedLandForManaThisTurn")) {
-            if (!this.tappedLandForManaThisTurn) {
-                return false;
-            }
-        } else if (property.equals("NoCardsInHandAtBeginningOfTurn")) {
-            if (numCardsInHandStartedThisTurnWith > 0) {
-                return false;
-            }
-        } else if (property.equals("CardsInHandAtBeginningOfTurn")) {
-            if (numCardsInHandStartedThisTurnWith <= 0) {
-                return false;
-            }
-        } else if (property.startsWith("WithCardsInHand")) {
-            if (property.contains("AtLeast")) {
-                int amount = Integer.parseInt(property.split("AtLeast")[1]);
-                if (getCardsIn(ZoneType.Hand).size() < amount) {
-                    return false;
-                }
-            }
-        } else if (property.equals("IsRemembered")) {
-            if (!source.isRemembered(this)) {
-                return false;
-            }
-        } else if (property.equals("IsNotRemembered")) {
-            if (source.isRemembered(this)) {
-                return false;
-            }
-        } else if (property.equals("EnchantedBy")) {
-            if (!isEnchantedBy(source)) {
-                return false;
-            }
-        } else if (property.equals("Chosen")) {
-            if (source.getChosenPlayer() == null || !source.getChosenPlayer().equals(this)) {
-                return false;
-            }
-        } else if (property.startsWith("LifeEquals_")) {
-            int life = AbilityUtils.calculateAmount(source, property.substring(11), null);
-            if (getLife() != life) {
-                return false;
-            }
-        } else if (property.equals("IsPoisoned")) {
-            if (getPoisonCounters() <= 0) {
-                return false;
-            }
-        } else if (property.startsWith("controls")) {
-            final String[] type = property.substring(8).split("_");
-            final CardCollectionView list = CardLists.getValidCards(getCardsIn(ZoneType.Battlefield), type[0], sourceController, source);
-            String comparator = type[1];
-            String compareTo = comparator.substring(2);
-            int y = StringUtils.isNumeric(compareTo) ? Integer.parseInt(compareTo) : 0;
-            if (!Expressions.compare(list.size(), comparator, y)) {
-                return false;
-            }
-        } else if (property.startsWith("withMore")) {
-            final String cardType = property.split("sThan")[0].substring(8);
-            final Player controller = "Active".equals(property.split("sThan")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
-            final CardCollectionView oppList = CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
-            final CardCollectionView yourList = CardLists.filter(controller.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
-            if (oppList.size() <= yourList.size()) {
-                return false;
-            }
-        } else if (property.startsWith("withAtLeast")) {
-            final String cardType = property.split("More")[1].split("sThan")[0];
-            final int amount = Integer.parseInt(property.substring(11, 12));
-            final Player controller = "Active".equals(property.split("sThan")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
-            final CardCollectionView oppList = CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
-            final CardCollectionView yourList = CardLists.filter(controller.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
-            System.out.println(yourList.size());
-            if (oppList.size() < yourList.size() + amount) {
-                return false;
-            }
-        } else if (property.startsWith("hasMore")) {
-            final Player controller = property.contains("Than") && "Active".equals(property.split("Than")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
-            if (property.substring(7).startsWith("Life") && getLife() <= controller.getLife()) {
-                return false;
-            } else if (property.substring(7).startsWith("CardsInHand")
-                    && getCardsIn(ZoneType.Hand).size() <= controller.getCardsIn(ZoneType.Hand).size()) {
-                return false;
-            }
-        } else if (property.startsWith("hasFewer")) {
-            final Player controller = "Active".equals(property.split("Than")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
-            if (property.substring(8).startsWith("CreaturesInYard")) {
-                final CardCollectionView oppList = CardLists.filter(getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
-                final CardCollectionView yourList = CardLists.filter(controller.getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
-                if (oppList.size() >= yourList.size()) {
-                    return false;
-                }
-            }
-        } else if (property.startsWith("withMost")) {
-            final String kind = property.substring(8);
-            if (kind.equals("Life")) {
-                int highestLife = getLife(); // Negative base just in case a few Lich's are running around
-                for (final Player p : game.getPlayers()) {
-                    if (p.getLife() > highestLife) {
-                        highestLife = p.getLife();
-                    }
-                }
-                if (getLife() != highestLife) {
-                    return false;
-                }
-            }
-            else if (kind.equals("PermanentInPlay")) {
-                int typeNum = 0;
-                List<Player> controlmost = new ArrayList<Player>();
-                for (final Player p : game.getPlayers()) {
-                    final int num = p.getCardsIn(ZoneType.Battlefield).size();
-                    if (num > typeNum) {
-                        typeNum = num;
-                        controlmost.clear();
-                    }
-                    if (num == typeNum) {
-                        controlmost.add(p);
-                    }
-                }
-
-                if (controlmost.size() != 1 || !controlmost.contains(this)) {
-                    return false;
-                }
-            }
-            else if (kind.equals("CardsInHand")) {
-                int largestHand = 0;
-                Player withLargestHand = null;
-                for (final Player p : game.getPlayers()) {
-                    if (p.getCardsIn(ZoneType.Hand).size() > largestHand) {
-                        largestHand = p.getCardsIn(ZoneType.Hand).size();
-                        withLargestHand = p;
-                    }
-                }
-                if (!equals(withLargestHand)) {
-                    return false;
-                }
-            }
-            else if (kind.startsWith("Type")) {
-                String type = property.split("Type")[1];
-                boolean checkOnly = false;
-                if (type.endsWith("Only")) {
-                    checkOnly = true;
-                    type = type.replace("Only", "");
-                }
-                int typeNum = 0;
-                List<Player> controlmost = new ArrayList<Player>();
-                for (final Player p : game.getPlayers()) {
-                    final int num = CardLists.getType(p.getCardsIn(ZoneType.Battlefield), type).size();
-                    if (num > typeNum) {
-                        typeNum = num;
-                        controlmost.clear();
-                    }
-                    if (num == typeNum) {
-                        controlmost.add(p);
-                    }
-                }
-                if (checkOnly && controlmost.size() != 1) {
-                    return false;
-                }
-                if (!controlmost.contains(this)) {
-                    return false;
-                }
-            }
-        } else if (property.startsWith("withLowest")) {
-            if (property.substring(10).equals("Life")) {
-                int lowestLife = getLife();
-                List<Player> lowestlifep = new ArrayList<Player>();
-                for (final Player p : game.getPlayers()) {
-                    if (p.getLife() == lowestLife) {
-                        lowestlifep.add(p);
-                    } else if (p.getLife() < lowestLife) {
-                        lowestLife = p.getLife();
-                        lowestlifep.clear();
-                        lowestlifep.add(p);
-                    }
-                }
-                if (!lowestlifep.contains(this)) {
-                    return false;
-                }
-            }
-        } else if (property.startsWith("LessThanHalfStartingLifeTotal")) {
-            if (this.getLife() >= (int) Math.ceil(this.getStartingLife() / 2.0)) {
-                return false;
-            }
-        } else if (property.startsWith("Triggered")) {
-            if (!AbilityUtils.getDefinedPlayers(source, property, spellAbility).contains(this)) {
-                return false;
-            }
-        }
-        return true;
+        return ForgeScript.playerHasProperty(this, property, sourceController, source, spellAbility);
     }
 
     public final int getMaxHandSize() {
