@@ -1310,7 +1310,7 @@ public class ComputerUtilCombat {
                     bonus = bonus.replace("TriggeredPlayersDefenders$Amount", "Number$1");
                 } else if (bonus.contains("TriggeredAttacker$CardPower")) { // e.g. Arahbo, Roar of the World
                     bonus = bonus.replace("TriggeredAttacker$CardPower", "Number$" + attacker.getNetPower());
-                } else if (bonus.contains("TriggeredAttacker$CardToughness")) { // e.g. Arahbo, Roar of the World
+                } else if (bonus.contains("TriggeredAttacker$CardToughness")) {
                     bonus = bonus.replace("TriggeredAttacker$CardToughness", "Number$" + attacker.getNetToughness());
                 }
                 power += CardFactoryUtil.xCount(source, bonus);
