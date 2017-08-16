@@ -1745,6 +1745,11 @@ public class ComputerUtilCombat {
         // consider Damage Prevention/Replacement
         defenderDamage = predictDamageTo(attacker, defenderDamage, possibleAttackerPrevention, blocker, true);
         attackerDamage = predictDamageTo(blocker, attackerDamage, possibleDefenderPrevention, attacker, true);
+        if (!attacker.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
+            if (isCombatDamagePrevented(blocker, attacker, defenderDamage)) {
+                return false;
+            }
+        }
 
         final int defenderLife = ComputerUtilCombat.getDamageToKill(blocker)
                 + ComputerUtilCombat.predictToughnessBonusOfBlocker(attacker, blocker, withoutAbilities);
