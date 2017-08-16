@@ -2103,4 +2103,35 @@ public class ForgeScript {
         }
         return true;
     }
+
+    public static boolean spellAbilityHasProperty(SpellAbility sa, String property, Player sourceController,
+            Card source, SpellAbility spellAbility) {
+        if (property.equals("Buyback")) {
+            if (!sa.isBuyBackAbility()) {
+                return false;
+            }
+        } else if (property.equals("Cycling")) {
+            if (!sa.isCycling()) {
+                return false;
+            }
+        } else if (property.equals("Dash")) {
+            if (!sa.isDash()) {
+                return false;
+            }
+        } else if (property.equals("Flashback")) {
+            if (!sa.isFlashBackAbility()) {
+                return false;
+            }
+        } else if (property.equals("MorphUp")) {
+            if (!sa.isMorphUp()) {
+                return false;
+            }
+        } else if (property.equals("Equip")) {
+            if (!sa.hasParam("Equip")) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
