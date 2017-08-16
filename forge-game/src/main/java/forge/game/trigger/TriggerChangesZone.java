@@ -17,6 +17,7 @@
  */
 package forge.game.trigger;
 
+import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
@@ -99,6 +100,16 @@ public class TriggerChangesZone extends Trigger {
         if (this.mapParams.containsKey("ValidCard")) {
             final Card moved = (Card) runParams2.get("Card");
             if (!moved.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
+                    this.getHostCard(), null)) {
+                return false;
+            }
+        }
+
+        if (this.mapParams.containsKey("ValidCardLKI")) {
+            final Game game = this.getHostCard().getGame();
+            final Card movedLKI = game.getChangeZoneLKIInfo((Card) runParams2.get("Card"));
+
+            if (!movedLKI.isValid(this.mapParams.get("ValidCardLKI").split(","), this.getHostCard().getController(),
                     this.getHostCard(), null)) {
                 return false;
             }
