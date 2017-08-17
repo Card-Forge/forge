@@ -55,7 +55,7 @@ Dragon's Maze Race, -/5/RTR, DGM DGM DGM Meta-Choose(All(S(RTR Azorius Guild);Ra
 Modern Masters, 3/6/M13, MMA
 Magic 2014, 3/6/M14, M14
 Theros, 3/6/THS, THS BNG JOU
-#Conspiracy, 3/6/M14, CNS
+Conspiracy, 3/6/M14, CNS
 Vintage Masters, 3/6/M14, VMA
 Magic 2015, 3/6/M15, M15
 Khans of Tarkir, 3/6/KTK, KTK FRF
@@ -67,7 +67,7 @@ Magic Origins Prerelease, -/7/ORI, ORI ORI ORI Meta-Choose(S(ORI Prerelease Gide
 Battle for Zendikar, 3/6/BFZ, BFZ OGW
 Shadows over Innistrad, 3/6/SOI, SOI EMN
 Eternal Masters, 3/6/SOI, EMA
-#Conspiracy Take the Crown, 3/6/ORI, CN2
+Conspiracy Take the Crown, 3/6/ORI, CN2
 Kaladesh, 3/6/KLD, KLD AER
 Modern Masters 2017, 3/6/M15, MM3
 Amonkhet, 3/6/AKH, AKH HOU
