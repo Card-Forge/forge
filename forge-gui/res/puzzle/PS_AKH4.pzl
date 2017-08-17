@@ -4,6 +4,7 @@ URL:https://i.redd.it/vfe0zsipygzy.png
 Goal:Win
 Turns:1
 Difficulty:Easy
+Description:Try to do as much damage as possible during your turn.
 [state]
 ActivePlayer=Human
 ActivePhase=Main1
