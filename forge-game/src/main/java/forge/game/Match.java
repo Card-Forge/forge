@@ -248,9 +248,11 @@ public class Match {
             if (myDeck.has(DeckSection.Sideboard)) {
                 preparePlayerLibrary(player, ZoneType.Sideboard, myDeck.get(DeckSection.Sideboard), psc.useRandomFoil(), generator);
             }
-            player.shuffle(null);
 
             player.initVariantsZones(psc);
+
+            player.shuffle(null);
+
 
             if (isFirstGame) {
                 Collection<? extends PaperCard> cardsComplained = player.getController().complainCardsCantPlayWell(myDeck);
