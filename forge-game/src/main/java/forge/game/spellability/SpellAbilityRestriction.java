@@ -220,6 +220,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         if (cardZone == null || this.getZone() == null || !cardZone.is(this.getZone())) {
             // If Card is not in the default activating zone, do some additional checks
+
+            // A conspiracy with hidden agenda: reveal at any time
+            if (cardZone != null && cardZone.is(ZoneType.Command) && sa.hasParam("HiddenAgenda")) {
+                return true;
+            }
             // Not a Spell, or on Battlefield, return false
             if (!sa.isSpell() || (cardZone != null && ZoneType.Battlefield.equals(cardZone.getZoneType()))
                     || (this.getZone() != null && !this.getZone().equals(ZoneType.Hand))) {
