@@ -1,0 +1,21 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 092915 - Push It
+URL:http://www.gatheringmagic.com/seanuy-092915-push-it/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description: Win this turn.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=2
+AILife=9
+humanhand=Mortuary Mire|Set:BFZ; Grave Birthing|Set:BFZ; Rising Miasma|Set:BFZ
+humangraveyard=
+humanlibrary=
+humanbattlefield=Swamp|Set:BFZ; Swamp|Set:BFZ; Swamp|Set:BFZ; Swamp|Set:BFZ; Swamp|Set:BFZ; Forest|Set:BFZ; Forest|Set:BFZ; Forest|Set:BFZ; Forest|Set:BFZ; Zulaport Cutthroat|Set:BFZ; Dominator Drone|Set:BFZ; Eyeless Watcher|Set:BFZ
+aibattlefield=Plains|Set:BFZ|Tapped; Plains|Set:BFZ|Tapped; Plains|Set:BFZ|Tapped; Plains|Set:BFZ|Tapped; Plains|Set:BFZ|Tapped; Island|Set:BFZ|Tapped; Island|Set:BFZ|Tapped; Island|Set:BFZ|Tapped; Island|Set:BFZ|Tapped; Island|Set:BFZ|Tapped; Mist Intruder|Set:BFZ|Tapped; Coralhelm Guide|Set:BFZ; Ondu Greathorn|Set:BFZ|Tapped; Ruin Processor|Set:BFZ|Tapped
+aihand=
+aigraveyard=
+ailibrary=
+aiexile=
