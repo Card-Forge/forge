@@ -72,12 +72,12 @@ public class RestartGameEffect extends SpellAbilityEffect {
             player.setLandsPlayedLastTurn(0);
             player.resetLandsPlayedThisTurn();
             player.resetInvestigatedThisTurn();
-            player.initVariantsZones(psc);
 
             List<Card> newLibrary = playerLibraries.get(player);
             for (Card c : newLibrary) {
                 action.moveToLibrary(c, 0, sa);
             }
+            player.initVariantsZones(psc);
 
             player.shuffle(null);
         }

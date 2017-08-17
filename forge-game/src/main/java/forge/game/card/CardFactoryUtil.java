@@ -193,7 +193,7 @@ public class CardFactoryUtil {
 
         card.setNamedCard(name);
         card.turnFaceDown();
-        // Hopefully face down also hides the named card?
+        card.setMayLookAt(player, true);
         card.addSpellAbility(abilityRevealHiddenAgenda(card));
         return true;
     }

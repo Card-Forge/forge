@@ -424,12 +424,16 @@ public class CardDetailUtil {
         }
 
         // named card
-        if (!card.getNamedCard().isEmpty() && !card.isFaceDown()) {
+        if (!card.getNamedCard().isEmpty()) {
             if (area.length() != 0) {
                 area.append("\n");
             }
             area.append("(named card: ");
-            area.append(card.getNamedCard());
+            if (card.isFaceDown() && state.getState() == CardStateName.FaceDown) {
+                area.append("Hidden");
+            } else {
+                area.append(card.getNamedCard());
+            }
             area.append(")");
         }
 

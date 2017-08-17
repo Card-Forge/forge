@@ -59,6 +59,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
     protected final List<PaperCard> deckList = new ArrayList<PaperCard>();
     protected final List<String> setsWithBasicLands = new ArrayList<String>();
     protected List<PaperCard> rankedColorList;
+    protected final List<PaperCard> draftedConspiracies;
 
     // Views for aiPlayable
     private Iterable<PaperCard> onColorCreatures;
@@ -86,6 +87,11 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
                 Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, PaperCard.FN_GET_RULES));
         this.aiPlayables = Lists.newArrayList(playables);
         this.availableList.removeAll(aiPlayables);
+
+        // keep Conspiracies in a separate list
+        final Iterable<PaperCard> conspiracies = Iterables.filter(aiPlayables,
+                Predicates.compose(CardRulesPredicates.coreType(true, "Conspiracy"), PaperCard.FN_GET_RULES));
+        this.draftedConspiracies = Lists.newArrayList(conspiracies);
 
         findBasicLandSets();
     }
@@ -200,11 +206,18 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
         fixDeckSize(clrCnts, landSetCode);
 
         if (deckList.size() == 40) {
+            // add the main deck cards
             final Deck result = new Deck(generateName());
             result.getMain().add(deckList);
+            // create the sideboard
             final CardPool cp = result.getOrCreate(DeckSection.Sideboard);
             cp.add(aiPlayables);
             cp.add(availableList);
+            // add conspiracies, if any were drafted
+            if (!draftedConspiracies.isEmpty()) {
+                final CardPool cpConsp = result.getOrCreate(DeckSection.Conspiracy);
+                cpConsp.add(draftedConspiracies);
+            }
             if (logToConsole) {
                 debugFinalDeck();
             }
