@@ -654,6 +654,16 @@ public class Game {
         CardCollectionView cards = this.getCardsInGame();
 
         for(Card c : cards) {
+            // 901.6: If the current planar controller would leave the game, instead the next player
+            // in turn order that wouldn’t leave the game becomes the planar controller, then the old
+            // planar controller leaves the game.
+            if (c.isPlane() || c.isPhenomenon()) {
+                c.removeTempController(p);
+                c.setController(getPhaseHandler().getNextTurn(), getNextTimestamp());
+                getAction().controllerChangeZoneCorrection(c);
+                continue;
+            }
+
             if (c.getOwner().equals(p)) {
                 c.ceaseToExist();
             } else {
