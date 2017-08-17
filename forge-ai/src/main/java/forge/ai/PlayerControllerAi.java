@@ -859,25 +859,25 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public String chooseCardName(SpellAbility sa, Predicate<ICardFace> cpp, String valid, String message) {
-        CardCollectionView aiLibrary = player.getCardsIn(ZoneType.Library);
-        CardCollectionView oppLibrary = ComputerUtil.getOpponentFor(player).getCardsIn(ZoneType.Library);
-        final Card source = sa.getHostCard();
+        if (sa.hasParam("AILogic")) {
+            CardCollectionView aiLibrary = player.getCardsIn(ZoneType.Library);
+            CardCollectionView oppLibrary = ComputerUtil.getOpponentFor(player).getCardsIn(ZoneType.Library);
+            final Card source = sa.getHostCard();
+            final String logic = sa.getParam("AILogic");
 
-        if (source != null && source.getState(CardStateName.Original).hasIntrinsicKeyword("Hidden agenda")) {
-            // If any Conspiracies are present, try not to choose the same name twice
-            // (otherwise the AI will spam the same name)
-            for (Card consp : player.getCardsIn(ZoneType.Command)) {
-                if (consp.getState(CardStateName.Original).hasIntrinsicKeyword("Hidden agenda")) {
-                    String chosenName = consp.getNamedCard();
-                    if (!chosenName.isEmpty()) {
-                        aiLibrary = CardLists.filter(aiLibrary, Predicates.not(CardPredicates.nameEquals(chosenName)));
+            if (source != null && source.getState(CardStateName.Original).hasIntrinsicKeyword("Hidden agenda")) {
+                // If any Conspiracies are present, try not to choose the same name twice
+                // (otherwise the AI will spam the same name)
+                for (Card consp : player.getCardsIn(ZoneType.Command)) {
+                    if (consp.getState(CardStateName.Original).hasIntrinsicKeyword("Hidden agenda")) {
+                        String chosenName = consp.getNamedCard();
+                        if (!chosenName.isEmpty()) {
+                            aiLibrary = CardLists.filter(aiLibrary, Predicates.not(CardPredicates.nameEquals(chosenName)));
+                        }
                     }
                 }
             }
-        }
 
-        if (sa.hasParam("AILogic")) {
-            final String logic = sa.getParam("AILogic");
             if (logic.equals("MostProminentInComputerDeck")) {
                 return ComputerUtilCard.getMostProminentCardName(aiLibrary);
             } else if (logic.equals("MostProminentInHumanDeck")) {
