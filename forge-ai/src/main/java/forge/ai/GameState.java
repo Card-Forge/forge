@@ -43,6 +43,7 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.StringUtils;
 
 public abstract class GameState {
     private static final Map<ZoneType, String> ZONES = new HashMap<ZoneType, String>();
@@ -618,16 +619,25 @@ public abstract class GameState {
             sPtr = sPtr.substring(0, sPtr.indexOf("->"));
         }
 
-        if (!c.hasSVar(sPtr)) {
-            System.err.println("ERROR: Unable to find SVar " + sPtr + " on card " + c + " + to execute!");
-            return;
-        }
+        SpellAbility sa = null;
+        if (StringUtils.isNumeric(sPtr)) {
+            int numSA = Integer.parseInt(sPtr);
+            if (c.getSpellAbilities().size() >= numSA) {
+                sa = c.getSpellAbilities().get(numSA);
+            } else {
+                System.err.println("ERROR: Unable to find SA with index " + numSA + " on card " + c + " to execute!");
+            }
+        } else {
+            if (!c.hasSVar(sPtr)) {
+                System.err.println("ERROR: Unable to find SVar " + sPtr + " on card " + c + " + to execute!");
+                return;
+            }
 
-        String svarValue = c.getSVar(sPtr);
-
-        SpellAbility sa = AbilityFactory.getAbility(svarValue, c);
-        if (sa == null) {
-            System.err.println("ERROR: Unable to generate ability for SVar " + svarValue);
+            String svarValue = c.getSVar(sPtr);
+            sa = AbilityFactory.getAbility(svarValue, c);
+            if (sa == null) {
+                System.err.println("ERROR: Unable to generate ability for SVar " + svarValue);
+            }
         }
 
         sa.setActivatingPlayer(c.getController());
