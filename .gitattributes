@@ -495,6 +495,7 @@ forge-game/src/main/java/forge/game/card/CardLists.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardPlayOption.java -text
 forge-game/src/main/java/forge/game/card/CardPowerToughness.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardPredicates.java svneol=native#text/plain
+forge-game/src/main/java/forge/game/card/CardProperty.java -text
 forge-game/src/main/java/forge/game/card/CardShields.java -text
 forge-game/src/main/java/forge/game/card/CardState.java -text
 forge-game/src/main/java/forge/game/card/CardUtil.java svneol=native#text/plain
@@ -634,6 +635,7 @@ forge-game/src/main/java/forge/game/player/PlayerCollection.java -text svneol=un
 forge-game/src/main/java/forge/game/player/PlayerController.java -text
 forge-game/src/main/java/forge/game/player/PlayerOutcome.java -text
 forge-game/src/main/java/forge/game/player/PlayerPredicates.java -text svneol=unset#text/plain
+forge-game/src/main/java/forge/game/player/PlayerProperty.java -text
 forge-game/src/main/java/forge/game/player/PlayerStatistics.java -text
 forge-game/src/main/java/forge/game/player/PlayerView.java -text
 forge-game/src/main/java/forge/game/player/RegisteredPlayer.java -text

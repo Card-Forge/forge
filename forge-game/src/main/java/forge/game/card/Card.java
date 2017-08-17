@@ -3882,7 +3882,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     // Takes arguments like Blue or withFlying
     @Override
     public boolean hasProperty(final String property, final Player sourceController, final Card source, SpellAbility spellAbility) {
-        return ForgeScript.cardHasProperty(this, property, sourceController, source, spellAbility);
+        return CardProperty.cardHasProperty(this, property, sourceController, source, spellAbility);
     }
 
     public final boolean isImmutable() {

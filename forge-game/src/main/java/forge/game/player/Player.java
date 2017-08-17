@@ -39,7 +39,6 @@ import com.google.common.collect.Maps;
 
 import forge.LobbyPlayer;
 import forge.card.MagicColor;
-import forge.game.ForgeScript;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameLogEntryType;
@@ -2030,7 +2029,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     @Override
     public final boolean hasProperty(final String property, final Player sourceController, final Card source, SpellAbility spellAbility) {
-        return ForgeScript.playerHasProperty(this, property, sourceController, source, spellAbility);
+        return PlayerProperty.playerHasProperty(this, property, sourceController, source, spellAbility);
     }
 
     public final int getMaxHandSize() {
