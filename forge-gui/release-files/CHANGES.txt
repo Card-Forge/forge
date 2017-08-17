@@ -2,7 +2,7 @@
 Most Commander 2017 cards have been implemented and are ready for testing. They will only be visible and playable if Developer Mode is enabled. At least some of the remaining few unimplemented cards may be scripted in the future.
 
 - Conspiracy -
-Conspiracy and Conspiracy: Take the Crown are now available for drafting in Booster Draft mode. Support for Conspiracy is still somewhat experimental and is a little rough around the edges - in particular, choosing card names in the beginning of the game is a little awkward, not all Conspiracies are implemented, and the AI could use some improvement.
+Conspiracy and Conspiracy: Take the Crown are now available for drafting in Booster Draft mode. Support for Conspiracy is still somewhat experimental and is a little rough around the edges - in particular, choosing card names in the beginning of the game is a little awkward, not all Conspiracies are implemented, and the AI could use some improvement. Only 1v1 matches are available at the moment (like in any other Forge booster draft).
 
 - Puzzle Mode -
 Many new puzzles were implemented, including several that start in combat with attackers declared and some that require you to survive for a certain set of turns. Over 75 puzzles are available now in Puzzle Mode.
