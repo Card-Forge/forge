@@ -3,6 +3,7 @@ package forge.ai;
 import java.security.InvalidParameterException;
 import java.util.*;
 
+import forge.card.CardStateName;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -858,21 +859,38 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public String chooseCardName(SpellAbility sa, Predicate<ICardFace> cpp, String valid, String message) {
+        CardCollectionView aiLibrary = player.getCardsIn(ZoneType.Library);
+        CardCollectionView oppLibrary = ComputerUtil.getOpponentFor(player).getCardsIn(ZoneType.Library);
+        final Card source = sa.getHostCard();
+
+        if (source != null && source.getState(CardStateName.Original).hasIntrinsicKeyword("Hidden agenda")) {
+            // If any Conspiracies are present, try not to choose the same name twice
+            // (otherwise the AI will spam the same name)
+            for (Card consp : player.getCardsIn(ZoneType.Command)) {
+                if (consp.getState(CardStateName.Original).hasIntrinsicKeyword("Hidden agenda")) {
+                    String chosenName = consp.getNamedCard();
+                    if (!chosenName.isEmpty()) {
+                        aiLibrary = CardLists.filter(aiLibrary, Predicates.not(CardPredicates.nameEquals(chosenName)));
+                    }
+                }
+            }
+        }
+
         if (sa.hasParam("AILogic")) {
             final String logic = sa.getParam("AILogic");
             if (logic.equals("MostProminentInComputerDeck")) {
-                return ComputerUtilCard.getMostProminentCardName(player.getCardsIn(ZoneType.Library));
+                return ComputerUtilCard.getMostProminentCardName(aiLibrary);
             } else if (logic.equals("MostProminentInHumanDeck")) {
-                return ComputerUtilCard.getMostProminentCardName(ComputerUtil.getOpponentFor(player).getCardsIn(ZoneType.Library));
+                return ComputerUtilCard.getMostProminentCardName(oppLibrary);
             } else if (logic.equals("MostProminentCreatureInComputerDeck")) {
-                CardCollectionView cards = CardLists.getValidCards(player.getCardsIn(ZoneType.Library), "Creature", player, sa.getHostCard());
+                CardCollectionView cards = CardLists.getValidCards(aiLibrary, "Creature", player, sa.getHostCard());
                 return ComputerUtilCard.getMostProminentCardName(cards);
             } else if (logic.equals("BestCreatureInComputerDeck")) {
-                return ComputerUtilCard.getBestCreatureAI(player.getCardsIn(ZoneType.Library)).getName();
+                return ComputerUtilCard.getBestCreatureAI(aiLibrary).getName();
             } else if (logic.equals("RandomInComputerDeck")) {
-                return Aggregates.random(player.getCardsIn(ZoneType.Library)).getName();
+                return Aggregates.random(aiLibrary).getName();
             } else if (logic.equals("MostProminentSpellInComputerDeck")) {
-                CardCollectionView cards = CardLists.getValidCards(player.getCardsIn(ZoneType.Library), "Card.Instant,Card.Sorcery", player, sa.getHostCard());
+                CardCollectionView cards = CardLists.getValidCards(aiLibrary, "Card.Instant,Card.Sorcery", player, sa.getHostCard());
                 return ComputerUtilCard.getMostProminentCardName(cards);
             }
         } else {
