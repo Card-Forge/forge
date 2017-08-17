@@ -652,16 +652,11 @@ public class Game {
     public void onPlayerLost(Player p) {
         // Rule 800.4 Losing a Multiplayer game
         CardCollectionView cards = this.getCardsInGame();
+        boolean planarControllerLost = false;
 
         for(Card c : cards) {
-            // 901.6: If the current planar controller would leave the game, instead the next player
-            // in turn order that wouldn’t leave the game becomes the planar controller, then the old
-            // planar controller leaves the game.
-            if (c.isPlane() || c.isPhenomenon()) {
-                c.removeTempController(p);
-                c.setController(getPhaseHandler().getNextTurn(), getNextTimestamp());
-                getAction().controllerChangeZoneCorrection(c);
-                continue;
+            if (c.getController().equals(p) && (c.isPlane() || c.isPhenomenon())) {
+                planarControllerLost = true;
             }
 
             if (c.getOwner().equals(p)) {
@@ -672,6 +667,17 @@ public class Game {
                     this.getAction().exile(c, null);
                 }
             }
+
+        }
+
+        // 901.6: If the current planar controller would leave the game, instead the next player
+        // in turn order that wouldn’t leave the game becomes the planar controller, then the old
+        // planar controller leaves
+        // 901.10: When a player leaves the game, all objects owned by that player except abilities
+        // from phenomena leave the game. (See rule 800.4a.) If that includes a face-up plane card
+        // or phenomenon card, the planar controller turns the top card of his or her planar deck face up.the game.
+        if (planarControllerLost) {
+            getNextPlayerAfter(p).initPlane();
         }
 
         if (p != null && p.equals(getMonarch())) {
