@@ -83,7 +83,12 @@ public abstract class GameState {
 
     private String precastHuman = null;
     private String precastAI = null;
-    
+
+    // Targeting for precast spells in a game state (mostly used by Puzzle Mode game states)
+    private final int TARGET_NONE = -1; // untargeted spell (e.g. Joraga Invocation)
+    private final int TARGET_HUMAN = -2;
+    private final int TARGET_AI = -3;
+
     public GameState() {
     }
 
@@ -468,7 +473,7 @@ public abstract class GameState {
         handleCardAttachments();
         handleChosenEntities();
         handleRememberedEntities();
-        handleScriptExecution();
+        handleScriptExecution(game);
         handlePrecastSpells(game);
         handleMarkedDamage();
 
@@ -562,32 +567,73 @@ public abstract class GameState {
         }
     }
 
-    private void handleScriptExecution() {
+    private int parseTargetInScript(final String tgtDef) {
+        int tgtID = TARGET_NONE;
+
+        if (tgtDef.equalsIgnoreCase("human")) {
+            tgtID = TARGET_HUMAN;
+        } else if (tgtDef.equalsIgnoreCase("ai")) {
+            tgtID = TARGET_AI;
+        } else {
+            tgtID = Integer.parseInt(tgtDef);
+        }
+
+        return tgtID;
+    }
+
+    private void handleScriptedTargetingForSA(final Game game, final SpellAbility sa, int tgtID) {
+        Player human = game.getPlayers().get(0);
+        Player ai = game.getPlayers().get(1);
+
+        if (tgtID != TARGET_NONE) {
+            switch (tgtID) {
+                case TARGET_HUMAN:
+                    sa.getTargets().add(human);
+                    break;
+                case TARGET_AI:
+                    sa.getTargets().add(ai);
+                    break;
+                default:
+                    sa.getTargets().add(idToCard.get(tgtID));
+                    break;
+            }
+        }
+    }
+
+    private void handleScriptExecution(final Game game) {
         for (Entry<Card, String> scriptPtr : cardToScript.entrySet()) {
             Card c = scriptPtr.getKey();
             String sPtr = scriptPtr.getValue();
 
-            // Determine if there's a forced target involved
-            int tgtID = -1;
-            if (sPtr.contains("->")) {
-                tgtID = Integer.parseInt(sPtr.substring(sPtr.indexOf("->") + 2));
-                sPtr = sPtr.substring(0, sPtr.indexOf("->"));
-            }
-
-            if (!c.hasSVar(sPtr)) {
-                System.out.println("ERROR: Unable to find SVar " + sPtr + " on card " + c + " + to execute!");
-                continue;
-            }
-
-            String svarValue = c.getSVar(sPtr);
-
-            SpellAbility sa = AbilityFactory.getAbility(svarValue, c);
-            sa.setActivatingPlayer(c.getController());
-            if (tgtID != -1) {
-                sa.getTargets().add(idToCard.get(tgtID));
-            }
-            sa.resolve();
+            executeScript(game, c, sPtr);
         }
+    }
+
+    private void executeScript(Game game, Card c, String sPtr) {
+        int tgtID = TARGET_NONE;
+        if (sPtr.contains("->")) {
+            String tgtDef = sPtr.substring(sPtr.indexOf("->") + 2);
+
+            tgtID = parseTargetInScript(tgtDef);
+            sPtr = sPtr.substring(0, sPtr.indexOf("->"));
+        }
+
+        if (!c.hasSVar(sPtr)) {
+            System.err.println("ERROR: Unable to find SVar " + sPtr + " on card " + c + " + to execute!");
+            return;
+        }
+
+        String svarValue = c.getSVar(sPtr);
+
+        SpellAbility sa = AbilityFactory.getAbility(svarValue, c);
+        if (sa == null) {
+            System.err.println("ERROR: Unable to generate ability for SVar " + svarValue);
+        }
+
+        sa.setActivatingPlayer(c.getController());
+        handleScriptedTargetingForSA(game, sa, tgtID);
+
+        sa.resolve();
     }
 
     private void handlePrecastSpells(final Game game) {
@@ -609,25 +655,16 @@ public abstract class GameState {
     }
 
     private void precastSpellFromCard(String spellDef, final Player activator, final Game game) {
-        Player human = game.getPlayers().get(0);
-        Player ai = game.getPlayers().get(1);
-
-        final int TARGET_NONE = -1; // untargeted spell (e.g. Joraga Invocation)
-        final int TARGET_HUMAN = -2;
-        final int TARGET_AI = -3;
-
         int tgtID = TARGET_NONE;
-        if (spellDef.contains("->")) {
+        String scriptID = "";
+
+        if (spellDef.contains(":")) {
+            // targeting via -> will be handled in executeScript
+            scriptID = spellDef.substring(spellDef.indexOf(":") + 1);
+            spellDef = spellDef.substring(0, spellDef.indexOf(":"));
+        } else if (spellDef.contains("->")) {
             String tgtDef = spellDef.substring(spellDef.indexOf("->") + 2);
-
-            if (tgtDef.equalsIgnoreCase("human")) {
-                tgtID = TARGET_HUMAN;
-            } else if (tgtDef.equalsIgnoreCase("ai")) {
-                tgtID = TARGET_AI;
-            } else {
-                tgtID = Integer.parseInt(spellDef.substring(spellDef.indexOf("->") + 2));
-            }
-
+            tgtID = parseTargetInScript(tgtDef);
             spellDef = spellDef.substring(0, spellDef.indexOf("->"));
         }
 
@@ -639,22 +676,17 @@ public abstract class GameState {
         }
 
         Card c = Card.fromPaperCard(pc, activator);
-        SpellAbility sa = c.getFirstSpellAbility();
+        SpellAbility sa = null;
+
+        if (!scriptID.isEmpty()) {
+            executeScript(game, c, scriptID);
+            return;
+        }
+
+        sa = c.getFirstSpellAbility();
         sa.setActivatingPlayer(activator);
 
-        switch (tgtID) {
-            case TARGET_HUMAN:
-                sa.getTargets().add(human);
-                break;
-            case TARGET_AI:
-                sa.getTargets().add(ai);
-                break;
-            case TARGET_NONE:
-                break;
-            default:
-                sa.getTargets().add(idToCard.get(tgtID));
-                break;
-        }
+        handleScriptedTargetingForSA(game, sa, tgtID);
 
         sa.resolve();
     }
