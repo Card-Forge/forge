@@ -1,22 +1,6 @@
 package forge.game;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Random;
-import java.util.Set;
-
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.HashMultiset;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Multiset;
-
+import com.google.common.collect.*;
 import forge.LobbyPlayer;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -31,8 +15,11 @@ import forge.game.trigger.Trigger;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
-import forge.util.collect.FCollectionView;
 import forge.util.MyRandom;
+import forge.util.collect.FCollectionView;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 public class Match {
     private final List<RegisteredPlayer> players;
@@ -243,8 +230,6 @@ public class Match {
                 }
             }
 
-            player.initVariantsZones(psc);
-
             Deck myDeck = psc.getDeck();
 
             Set<PaperCard> myRemovedAnteCards = null;
@@ -264,6 +249,8 @@ public class Match {
                 preparePlayerLibrary(player, ZoneType.Sideboard, myDeck.get(DeckSection.Sideboard), psc.useRandomFoil(), generator);
             }
             player.shuffle(null);
+
+            player.initVariantsZones(psc);
 
             if (isFirstGame) {
                 Collection<? extends PaperCard> cardsComplained = player.getController().complainCardsCantPlayWell(myDeck);

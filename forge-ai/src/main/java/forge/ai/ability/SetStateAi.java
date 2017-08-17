@@ -1,19 +1,14 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
-
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.card.CardSplitType;
+import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardState;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -172,6 +167,18 @@ public class SetStateAi extends SpellAbilityAi {
 
     private boolean shouldTurnFace(Card card, Player ai, PhaseHandler ph) {
         if (card.isFaceDown()) {
+            // hidden agenda
+            if (card.getState(CardStateName.Original).hasIntrinsicKeyword("Hidden agenda")
+                    && card.getZone().is(ZoneType.Command)) {
+                String chosenName = card.getNamedCard();
+                for (Card cast : ai.getGame().getStack().getSpellsCastThisTurn()) {
+                    if (cast.getController() == ai && cast.getName().equals(chosenName)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
             // non-permanent facedown can't be turned face up
             if (!card.getRules().getType().isPermanent()) {
                 return false;

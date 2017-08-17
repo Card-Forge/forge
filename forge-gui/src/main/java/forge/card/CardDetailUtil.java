@@ -1,14 +1,6 @@
 package forge.card;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Sets;
-
 import forge.card.mana.ManaCostShard;
 import forge.game.GameView;
 import forge.game.card.Card;
@@ -24,6 +16,12 @@ import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.util.Lang;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class CardDetailUtil {
 
@@ -380,7 +378,7 @@ public class CardDetailUtil {
         }
 
         // chosen type
-        if (!card.getChosenType().equals("")) {
+        if (!card.getChosenType().isEmpty()) {
             if (area.length() != 0) {
                 area.append("\n");
             }
@@ -418,7 +416,7 @@ public class CardDetailUtil {
         }
 
         // chosen mode
-        if (!card.getChosenMode().equals("")) {
+        if (!card.getChosenMode().isEmpty()) {
             if (area.length() != 0) {
                 area.append("\n");
             }
@@ -426,7 +424,7 @@ public class CardDetailUtil {
         }
 
         // named card
-        if (!card.getNamedCard().equals("")) {
+        if (!card.getNamedCard().isEmpty() && !card.isFaceDown()) {
             if (area.length() != 0) {
                 area.append("\n");
             }
