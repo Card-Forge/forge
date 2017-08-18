@@ -14,6 +14,7 @@ import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
+import forge.toolbox.special.CardZoomer;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
@@ -185,7 +186,20 @@ public class KeyboardShortcuts {
                 matchUI.getGameController().macros().nextRememberedAction();
             }
         };
-        
+
+        final Action actZoomCard = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                if (matchUI == null) { return; }
+                if (!CardZoomer.SINGLETON_INSTANCE.isZoomerOpen()) {
+                    CardZoomer.SINGLETON_INSTANCE.doMouseWheelZoom();
+                } else {
+                    CardZoomer.SINGLETON_INSTANCE.closeZoomer();
+                }
+            }
+        };
+
         //========== Instantiate shortcut objects and add to list.
         list.add(new Shortcut(FPref.SHORTCUT_SHOWSTACK, "Match: show stack panel", actShowStack, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_SHOWCOMBAT, "Match: show combat panel", actShowCombat, am, im));
@@ -199,6 +213,7 @@ public class KeyboardShortcuts {
         list.add(new Shortcut(FPref.SHORTCUT_AUTOYIELD_ALWAYS_NO, "Match: auto-yield ability on stack (Always No)", actAutoYieldAndNo, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_MACRO_RECORD, "Match: record a macro sequence of actions", actMacroRecord, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_MACRO_NEXT_ACTION, "Match: execute next action in a recorded macro", actMacroNextAction, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_CARD_ZOOM, "Match: zoom the currently selected card", actZoomCard, am, im));
         return list;
     } // End initMatchShortcuts()
 
