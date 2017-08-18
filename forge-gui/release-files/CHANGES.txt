@@ -12,5 +12,8 @@ In Quest mode, a new world has been implemented by Xyx: Caliman, based on Portal
 
 Portal Second Age is the first official "Starter Level" set (a term not yet in use when the original Portal was released.) It outdoes its predecessor in easy-to-understand cards. Portal Second Age has a unique steampunk flavor that hasn't been replicated since, featuring firearms, steam engines and zeppelins. The open-ended story is staged in the Dominarian island of Caliman and focuses on the conflicts between the kingdom of Alaborn, the Talas merchant/pirates (some say there is no difference), the goblin tribes, the elves of Norwood forest and the nightstalkers created by the evil Tojira, swamp queen of Dakmor.
 
+- Card Zoomer Shortcut -
+There is a new configurable keyboard shortcut available in desktop Forge: toggle card zoom on the current card (default "Z").
+
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.
