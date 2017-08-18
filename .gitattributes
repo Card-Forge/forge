@@ -13430,6 +13430,7 @@ forge-gui/res/cardsfolder/r/roc_hatchling.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/roc_of_kher_ridges.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rock_badger.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rock_basilisk.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/r/rock_hydra.txt -text
 forge-gui/res/cardsfolder/r/rock_jockey.txt -text
 forge-gui/res/cardsfolder/r/rock_slide.txt -text
 forge-gui/res/cardsfolder/r/rockcaster_platoon.txt svneol=native#text/plain
