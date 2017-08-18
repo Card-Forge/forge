@@ -1101,7 +1101,7 @@ public class ComputerUtil {
         return (sa.getHostCard().isCreature()
                 && sa.getPayCosts().hasTapCost()
                 && (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                        || !ph.getNextTurn().equals(sa.getActivatingPlayer()))
+                        && !ph.getNextTurn().equals(sa.getActivatingPlayer()))
                 && !sa.getHostCard().hasSVar("EndOfTurnLeavePlay")
                 && !sa.hasParam("ActivationPhases"));
     }
