@@ -381,6 +381,11 @@ public class CombatUtil {
             return false;
         }
 
+        final int blockersFromOnePlayer = CardLists.filter(combat.getAllBlockers(), CardPredicates.isController(blocker.getController())).size();
+        if (blockersFromOnePlayer > 0 && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyOneBlockerPerOpponent)) {
+            return false;
+        }
+
         return CombatUtil.canBlock(blocker);
     }
 

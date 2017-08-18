@@ -2440,6 +2440,20 @@ public class ComputerUtilCombat {
         int afflictDmg = attacker.getKeywordMagnitude("Afflict");
         return afflictDmg > attacker.getNetPower() || afflictDmg >= aiDefender.getLife();
     }
+
+    public static int getMaxAttackersFor(final GameEntity defender) {
+        if (defender instanceof Player) {
+            for (final Card card : ((Player) defender).getCardsIn(ZoneType.Battlefield)) {
+                if (card.hasKeyword("No more than one creature can attack you each combat.")) {
+                    return 1;
+                } else if (card.hasKeyword("No more than two creatures can attack you each combat.")) {
+                    return 2;
+                }
+            }
+        }
+
+        return -1;
+    }
 }
 
 

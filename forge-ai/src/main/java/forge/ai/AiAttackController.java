@@ -558,7 +558,11 @@ public class AiAttackController {
 
         // TODO probably use AttackConstraints instead of only GlobalAttackRestrictions?
         GlobalAttackRestrictions restrict = GlobalAttackRestrictions.getGlobalRestrictions(ai, combat.getDefenders());
-        final int attackMax = restrict.getMax();
+        int attackMax = restrict.getMax();
+        if (attackMax == -1) {
+            // check with the local limitations vs. the chosen defender
+            attackMax = ComputerUtilCombat.getMaxAttackersFor(defender);
+        }
 
         if (attackMax == 0) {
             //  can't attack anymore
