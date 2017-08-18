@@ -151,7 +151,7 @@ public class AiBlockController {
         		for (final Card c : attackers) {
         			sortedAttackers.add(c);
         		}
-        	} else {
+        	} else if (defender instanceof Player && defender.equals(ai)){
         		firstAttacker = combat.getAttackersOf(defender);
         	}
         }
