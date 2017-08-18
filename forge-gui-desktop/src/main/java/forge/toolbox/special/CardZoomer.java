@@ -193,6 +193,10 @@ public enum CardZoomer {
     }
 
     private void displayCard() {
+        if (thisCard == null) {
+            return;
+        }
+
         isMouseWheelEnabled = false;
         setLayout();
         setImage();
