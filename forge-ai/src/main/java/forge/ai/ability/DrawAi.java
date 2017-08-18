@@ -126,6 +126,12 @@ public class DrawAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
+        // LifeLessThan logic presupposes activation as soon as possible in an
+        // attempt to save the AI from dying
+        if (sa.hasParam("AILogic") && sa.getParam("AILogic").startsWith("LifeLessThan.")) {
+            return true;
+        }
+
         // Don't use draw abilities before main 2 if possible
         if (ph.getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
                 && !ComputerUtil.castSpellInMain1(ai, sa)) {
@@ -204,6 +210,7 @@ public class DrawAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final boolean drawback = sa.getParent() != null;
         final Game game = ai.getGame();
+        final String logic = sa.getParamOrDefault("AILogic", "");
 
         int computerHandSize = ai.getCardsIn(ZoneType.Hand).size();
         final int computerLibrarySize = ai.getCardsIn(ZoneType.Library).size();
@@ -241,10 +248,8 @@ public class DrawAi extends SpellAbilityAi {
         }
 
         // Logic for cards that require special handling
-        if (sa.hasParam("AILogic")) {
-            if ("YawgmothsBargain".equals(sa.getParam("AILogic"))) {
-                return SpecialCardAi.YawgmothsBargain.consider(ai, sa);
-            }
+        if ("YawgmothsBargain".equals(logic)) {
+            return SpecialCardAi.YawgmothsBargain.consider(ai, sa);
         }
 
         // Generic logic for all cards that do not need any special handling
@@ -311,6 +316,13 @@ public class DrawAi extends SpellAbilityAi {
                         sa.getTargets().add(oppA);
                         return true;
                     }
+                }
+                // we're trying to save ourselves from death
+                // (e.g. Bargain), so target the opp anyway
+                if (logic.startsWith("LifeLessThan.")) {
+                    int threshold = Integer.parseInt(logic.substring(logic.indexOf(".") + 1));
+                    sa.getTargets().add(oppA);
+                    return ai.getLife() < threshold;
                 }
             }
             
