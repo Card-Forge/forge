@@ -1,7 +1,7 @@
 Name:Morningtide
 ManaCost:1 W
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 1 W | ChangeType$ Card | Origin$ Graveyard | Destination$ Exile | SpellDescription$ Exile all cards from all graveyards.
+A:SP$ ChangeZoneAll | Cost$ 1 W | ChangeType$ Card | Origin$ Graveyard | Destination$ Exile | AILogic$ ExileGraveyards | SpellDescription$ Exile all cards from all graveyards.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morningtide.jpg
 Oracle:Exile all cards from all graveyards.
