@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import forge.card.CardStateName;
+import forge.game.card.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
@@ -37,12 +39,6 @@ import forge.game.StaticEffects;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -66,7 +62,7 @@ public final class StaticAbilityContinuous {
     /**
      * Apply the effects of a static ability that apply in a particular layer.
      * The cards to which the effects are applied are dynamically determined.
-     * 
+     *
      * @param stAb
      *            a {@link StaticAbility}.
      * @param layer
@@ -84,7 +80,7 @@ public final class StaticAbilityContinuous {
     /**
      * Apply the effects of a static ability that apply in a particular layer to
      * a predefined set of cards.
-     * 
+     *
      * @param stAb
      *            a {@link StaticAbility}.
      * @param affectedCards
@@ -109,6 +105,7 @@ public final class StaticAbilityContinuous {
         se.setTimestamp(hostCard.getTimestamp());
 
         String changeColorWordsTo = null;
+        Card gainTextSource = null;
 
         String addP = "";
         int powerBonus = 0;
@@ -148,6 +145,19 @@ public final class StaticAbilityContinuous {
         if (layer == StaticAbilityLayer.RULES && params.containsKey("GlobalRule")) {
             final StaticEffects effects = game.getStaticEffects();
             effects.setGlobalRuleChange(GlobalRuleChange.fromString(params.get("GlobalRule")));
+        }
+
+        if (layer == StaticAbilityLayer.TEXT && params.containsKey("GainTextOf")) {
+            final String valid = params.get("GainTextOf");
+            CardCollection allValid = CardLists.getValidCards(game.getCardsInGame(), valid, hostCard.getController(), hostCard, null);
+            if (allValid.size() > 1) {
+                // TODO: if ever necessary, support gaining text of multiple cards at the same time
+                System.err.println("Error: GainTextOf parameter was not defined as a unique card for " + hostCard);
+            } else if (allValid.size() == 1) {
+                gainTextSource = allValid.get(0);
+            } else {
+                gainTextSource = null;
+            }
         }
 
         if (layer == StaticAbilityLayer.TEXT && params.containsKey("ChangeColorWordsTo")) {
@@ -455,10 +465,60 @@ public final class StaticAbilityContinuous {
         // start modifying the cards
         for (int i = 0; i < affectedCards.size(); i++) {
             final Card affectedCard = affectedCards.get(i);
-            
+
             // Gain control
             if (layer == StaticAbilityLayer.CONTROL && params.containsKey("GainControl")) {
                 affectedCard.addTempController(hostCard.getController(), hostCard.getTimestamp());
+            }
+
+            // Gain text from another card
+            if (layer == StaticAbilityLayer.TEXT) {
+                // Restore the original text in case it was remembered before
+                if (affectedCard.getStates().contains(CardStateName.OriginalText)) {
+                    affectedCard.clearTriggersNew();
+                    for (SpellAbility saTemp : affectedCard.getSpellAbilities()) {
+                        if (saTemp.isTemporary()) {
+                            affectedCard.removeSpellAbility(saTemp);
+                        }
+                    }
+                    CardFactory.copyState(affectedCard, CardStateName.OriginalText, affectedCard, CardStateName.Original, false);
+                }
+
+                if (gainTextSource != null) {
+                    if (!affectedCard.getStates().contains(CardStateName.OriginalText)) {
+                        // Remember the original text first in case it hasn't been done yet
+                        CardFactory.copyState(affectedCard, CardStateName.Original, affectedCard, CardStateName.OriginalText, false);
+                    }
+
+                    CardFactory.copyState(gainTextSource, CardStateName.Original, affectedCard, CardStateName.Original, false);
+
+                    // Enable this in case Volrath's original image is to be used
+                    affectedCard.getState(CardStateName.Original).setImageKey(affectedCard.getState(CardStateName.OriginalText).getImageKey());
+
+                    // Activated abilities (statics and repleffects are apparently copied vis copyState?)
+                    for (SpellAbility sa : gainTextSource.getSpellAbilities()) {
+                        if (sa instanceof AbilityActivated) {
+                            SpellAbility newSA = ((AbilityActivated) sa).getCopy();
+                            newSA.setOriginalHost(gainTextSource);
+                            newSA.setIntrinsic(false);
+                            newSA.setTemporary(true);
+                            newSA.setHostCard(affectedCard);
+                            affectedCard.addSpellAbility(newSA);
+                        }
+                    }
+                    // Triggered abilities
+                    for (Trigger t: gainTextSource.getTriggers()) {
+                        affectedCard.addTrigger(t.getCopyForHostCard(affectedCard));
+                    }
+
+                    // Volrath's Shapeshifter shapeshifting ability needs to be added onto the new text
+                    if (params.containsKey("GainedTextHasThisStaticAbility")) {
+                        affectedCard.getCurrentState().addStaticAbility(stAb);
+                    }
+
+                }
+
+                affectedCard.updateStateForView();
             }
 
             // Change color words

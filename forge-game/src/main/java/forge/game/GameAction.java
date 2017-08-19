@@ -227,6 +227,15 @@ public class GameAction {
                     if (c.isFlipCard()) {
                         c.clearStates(CardStateName.Flipped, false);
                     }
+                    if (c.getStates().contains(CardStateName.OriginalText)) {
+                        c.clearStates(CardStateName.OriginalText, false);
+                    }
+                    c.updateStateForView();
+                } else if (c.getStates().contains(CardStateName.OriginalText)) {
+                    // Volrath's Shapeshifter
+                    CardFactory.copyState(c, CardStateName.OriginalText, c, CardStateName.Original, false);
+                    c.setState(CardStateName.Original, false);
+                    c.clearStates(CardStateName.OriginalText, false);
                     c.updateStateForView();
                 }
 

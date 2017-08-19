@@ -10,7 +10,8 @@ public enum CardStateName {
     Meld,
     Cloned, 
     LeftSplit,
-    RightSplit;
+    RightSplit,
+    OriginalText; // backup state for cards like Volrath's Shapeshifter
 
     /**
      * TODO: Write javadoc for this method.

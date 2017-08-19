@@ -281,6 +281,7 @@ public class SpecialCardAi {
         }
     }
 
+    // Guilty Conscience
     public static class GuiltyConscience {
         public static Card getBestAttachTarget(final Player ai, SpellAbility sa, List<Card> list) {
             Card chosen = null;
@@ -586,7 +587,40 @@ public class SpecialCardAi {
             return false;
         }
     }
-    
+
+    // Volrath's Shapeshifter
+    public static class VolrathsShapeshifter {
+        public static boolean consider(Player ai, SpellAbility sa) {
+            CardCollectionView aiGY = ai.getCardsIn(ZoneType.Graveyard);
+            Card topGY = null;
+            Card creatHand = ComputerUtilCard.getBestCreatureAI(ai.getCardsIn(ZoneType.Hand));
+
+            if (aiGY.size() > 0) {
+                topGY = ai.getCardsIn(ZoneType.Graveyard).get(0);
+            }
+
+            if ((topGY != null && !topGY.isCreature()) || creatHand != null) {
+                return true;
+            }
+
+            return false;
+        }
+
+        public static CardCollection targetBestCreature(Player ai, SpellAbility sa) {
+            Card creatHand = ComputerUtilCard.getBestCreatureAI(ai.getCardsIn(ZoneType.Hand));
+            if (creatHand != null) {
+                CardCollection cc = new CardCollection();
+                cc.add(creatHand);
+                return cc;
+            }
+
+            // Should ideally never get here
+            System.err.println("Volrath's Shapeshifter AI: Could not find a discard target despite the previous confirmation to proceed!");
+            return null;
+        }
+    }
+
+    // Ugin, the Spirit Dragon
     public static class UginTheSpiritDragon {
         public static boolean considerPWAbilityPriority(Player ai, SpellAbility sa, ZoneType origin, CardCollectionView oppType, CardCollectionView computerType) {
             Card source = sa.getHostCard();

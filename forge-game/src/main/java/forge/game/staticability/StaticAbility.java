@@ -117,7 +117,7 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
             layers.add(StaticAbilityLayer.CONTROL);
         }
 
-        if (hasParam("ChangeColorWordsTo")) {
+        if (hasParam("ChangeColorWordsTo") || hasParam("GainTextOf")) {
             layers.add(StaticAbilityLayer.TEXT);
         }
 

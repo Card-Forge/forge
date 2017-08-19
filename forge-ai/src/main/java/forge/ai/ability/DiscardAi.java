@@ -1,10 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
@@ -27,6 +23,7 @@ public class DiscardAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final Cost abCost = sa.getPayCosts();
+        final String aiLogic = sa.getParamOrDefault("AILogic", "");
 
         if (abCost != null) {
             // AI currently disabled for these costs
@@ -51,6 +48,10 @@ public class DiscardAi extends SpellAbilityAi {
         if ("Chandra, Flamecaller".equals(sourceName)) {
             final int hand = ai.getCardsIn(ZoneType.Hand).size();
             return MyRandom.getRandom().nextFloat() < (1.0 / (1 + hand));
+        }
+
+        if (aiLogic.equals("VolrathsShapeshifter")) {
+            return SpecialCardAi.VolrathsShapeshifter.consider(ai, sa);
         }
 
         final boolean humanHasHand = ComputerUtil.getOpponentFor(ai).getCardsIn(ZoneType.Hand).size() > 0;

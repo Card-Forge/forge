@@ -17614,6 +17614,7 @@ forge-gui/res/cardsfolder/v/volraths_curse.txt -text
 forge-gui/res/cardsfolder/v/volraths_dungeon.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/volraths_gardens.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/volraths_laboratory.txt -text
+forge-gui/res/cardsfolder/v/volraths_shapeshifter.txt -text
 forge-gui/res/cardsfolder/v/volraths_stronghold.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/volt_charge.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/voltaic_brawler.txt -text

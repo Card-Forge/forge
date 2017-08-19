@@ -843,6 +843,10 @@ public class AiController {
             }
         }
 
+        if ("VolrathsShapeshifter".equals(sa.getParam("AILogic"))) {
+            return SpecialCardAi.VolrathsShapeshifter.targetBestCreature(player, sa);
+        }
+
         // look for good discards
         while (count < min) {
             Card prefCard = null;
