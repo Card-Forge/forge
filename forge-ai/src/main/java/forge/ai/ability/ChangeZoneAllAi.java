@@ -82,6 +82,16 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         } else if ("RetDiscardedThisTurn".equals(sa.getParam("AILogic"))) {
             // e.g. Shadow of the Grave
             return ai.getNumDiscardedThisTurn() > 0 && ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN);
+        } else if ("ExileGraveyards".equals(sa.getParam("AILogic"))) {
+            for (Player opp : ai.getOpponents()) {
+                CardCollectionView cardsGY = opp.getCardsIn(ZoneType.Graveyard);
+                CardCollection creats = CardLists.filter(cardsGY, CardPredicates.Presets.CREATURES);
+
+                if (opp.hasDelirium() || opp.hasThreshold() || creats.size() >= 5) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         // TODO improve restrictions on when the AI would want to use this
