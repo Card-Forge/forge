@@ -240,13 +240,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 } else if (o.getPlayer() == activator) {
                     Map<String,String> params = sa.getMayPlay().getMapParams();
 
-                    if (params.containsKey("OnlyIfZoneAllowedByOther")) {
+                    if (!o.grantsZonePermissions() && cardZone != null && !cardZone.is(ZoneType.Hand)) {
                         final List<CardPlayOption> opts = c.mayPlay(activator);
                         boolean hasOtherGrantor = false;
                         for (CardPlayOption opt : opts) {
-                            // TODO: improve the detection of a different grantor source
-                            // (possibly by static ability itself and not by host name)
-                            if (!opt.getHost().getName().equals(o.getHost().getName())) {
+                            if (opt.grantsZonePermissions()) {
                                 hasOtherGrantor = true;
                                 break;
                             }

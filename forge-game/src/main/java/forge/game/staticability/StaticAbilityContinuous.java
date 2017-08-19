@@ -141,6 +141,7 @@ public final class StaticAbilityContinuous {
         List<Player> mayLookAt = null;
 
         boolean controllerMayPlay = false, mayPlayWithoutManaCost = false, mayPlayWithFlash = false;
+        boolean mayPlayGrantZonePermissions = true;
         Integer mayPlayLimit = null;
 
         //Global rules changes
@@ -397,6 +398,9 @@ public final class StaticAbilityContinuous {
                 }
                 if (params.containsKey("MayPlayLimit")) {
                     mayPlayLimit = Integer.parseInt(params.get("MayPlayLimit"));
+                }
+                if (params.containsKey("MayPlayDontGrantZonePermissions")) {
+                    mayPlayGrantZonePermissions = false;
                 }
             }
 
@@ -658,7 +662,7 @@ public final class StaticAbilityContinuous {
             }
             if (controllerMayPlay && (mayPlayLimit == null || hostCard.getMayPlayTurn() < mayPlayLimit)) {
                 Player mayPlayController = params.containsKey("MayPlayCardOwner") ? affectedCard.getOwner() : controller;
-                affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost, mayPlayWithFlash, stAb);
+                affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost, mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);
             }
 
             //affectedCard.updateStateForView(); // FIXME: causes intolerable flickering for cards such as Thassa, God of the Sea or Wind Zendikon.

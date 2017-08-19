@@ -7,9 +7,9 @@ import forge.game.staticability.StaticAbility;
 
 public final class CardPlayOption {
     public enum PayManaCost {
-        /** Indicates the mana cost must be payed. */
+        /** Indicates the mana cost must be paid. */
         YES,
-        /** Indicates the mana cost may not be payed. */
+        /** Indicates the mana cost may not be paid. */
         NO;
     }
 
@@ -17,15 +17,19 @@ public final class CardPlayOption {
     private final StaticAbility sta;
     private final PayManaCost payManaCost;
     private final boolean withFlash;
+    private final boolean grantsZonePermissions;
 
-    public CardPlayOption(final Player player, final StaticAbility sta, final boolean withoutManaCost, final boolean withFlash) {
-        this(player, sta, withoutManaCost ? PayManaCost.NO : PayManaCost.YES, withFlash);
+    public CardPlayOption(final Player player, final StaticAbility sta, final boolean withoutManaCost, final boolean withFlash,
+                          final boolean grantZonePermissions) {
+        this(player, sta, withoutManaCost ? PayManaCost.NO : PayManaCost.YES, withFlash, grantZonePermissions);
     }
-    private CardPlayOption(final Player player, final StaticAbility sta, final PayManaCost payManaCost, final boolean withFlash) {
+    private CardPlayOption(final Player player, final StaticAbility sta, final PayManaCost payManaCost, final boolean withFlash,
+                           final boolean grantZonePermissions) {
         this.player = player;
         this.sta = sta;
         this.payManaCost = payManaCost;
         this.withFlash = withFlash;
+        this.grantsZonePermissions = grantZonePermissions;
     }
 
 
@@ -56,6 +60,8 @@ public final class CardPlayOption {
     public boolean isWithFlash() {
     	return withFlash;
     }
+
+    public boolean grantsZonePermissions() { return grantsZonePermissions; }
 
     @Override
     public String toString() {
