@@ -595,7 +595,7 @@ public class SpecialCardAi {
             Card topGY = null;
             Card creatHand = ComputerUtilCard.getBestCreatureAI(ai.getCardsIn(ZoneType.Hand));
 
-            if (aiGY.size() > 0) {
+            if (!aiGY.isEmpty()) {
                 topGY = ai.getCardsIn(ZoneType.Graveyard).get(0);
             }
 
