@@ -24,6 +24,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
     String difficulty;
     String description;
     String targets;
+    int targetCount = 1;
     int turns;
 
     public Puzzle(Map<String, List<String>> puzzleLines) {
@@ -49,6 +50,8 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
                 this.description = split[1].trim();
             } else if ("Targets".equalsIgnoreCase(split[0])) {
                 this.targets = split[1].trim();
+            } else if ("TargetCount".equalsIgnoreCase(split[0])) {
+                this.targetCount = Integer.parseInt(split[1]);
             }
         }
     }
@@ -137,6 +140,22 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
 
                 String countVar = "Count$Valid " + targets;
                 goalCard.setSVar("PermCount", countVar);
+                break;
+            case "put the specified permanent on the battlefield":
+            case "play the specified permanent":
+                if (targets == null) {
+                    System.err.println("Error: target was not specified for the puzzle with an OTB permanent objective!");
+                    break;
+                }
+                String trigPlay = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCards$ " + targets + " | " +
+                        "Static$ True | TriggerDescription$ When the specified permanent enters the battlefield, you win the game.";
+                String effPlay = "DB$ WinsGame | Defined$ You | ConditionCheckSVar$ PermCount | ConditionSVarCompare$ GE" + targetCount;
+                final Trigger triggerPlay = TriggerHandler.parseTrigger(trigPlay, goalCard, true);
+                triggerPlay.setOverridingAbility(AbilityFactory.getAbility(effPlay, goalCard));
+                goalCard.addTrigger(triggerPlay);
+
+                String countPerm = "Count$Valid " + targets;
+                goalCard.setSVar("PermCount", countPerm);
                 break;
             default:
                 break;
