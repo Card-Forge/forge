@@ -840,11 +840,9 @@ public class AiController {
             sourceCard = sa.getHostCard();
             if ("Always".equals(sa.getParam("AILogic")) && !validCards.isEmpty()) {
                 min = 1;
+            } else if ("VolrathsShapeshifter".equals(sa.getParam("AILogic"))) {
+                return SpecialCardAi.VolrathsShapeshifter.targetBestCreature(player, sa);
             }
-        }
-
-        if ("VolrathsShapeshifter".equals(sa.getParam("AILogic"))) {
-            return SpecialCardAi.VolrathsShapeshifter.targetBestCreature(player, sa);
         }
 
         // look for good discards
