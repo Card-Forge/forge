@@ -681,7 +681,7 @@ public class CardView extends GameEntityView {
             alternateState = c.getState(CardStateName.Original);
         }
 
-        if (alternateState == null) {
+        if (alternateState == null || c.getAlternateStateName() == CardStateName.OriginalText) {
             set(TrackableProperty.AlternateState, null);
         }
         else {

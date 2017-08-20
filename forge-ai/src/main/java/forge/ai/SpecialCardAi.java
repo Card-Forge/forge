@@ -594,13 +594,16 @@ public class SpecialCardAi {
             CardCollectionView aiGY = ai.getCardsIn(ZoneType.Graveyard);
             Card topGY = null;
             Card creatHand = ComputerUtilCard.getBestCreatureAI(ai.getCardsIn(ZoneType.Hand));
+            int numCreatsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.CREATURES).size();
 
             if (!aiGY.isEmpty()) {
                 topGY = ai.getCardsIn(ZoneType.Graveyard).get(0);
             }
 
             if ((topGY != null && !topGY.isCreature()) || creatHand != null) {
-                return true;
+                if (numCreatsInHand > 1 || !ComputerUtilMana.canPayManaCost(creatHand.getSpellPermanent(), ai, 0)) {
+                    return true;
+                }
             }
 
             return false;

@@ -611,7 +611,17 @@ public class Card extends GameEntity implements Comparable<Card> {
         // Note: Since FaceDown state is created lazily (whereas previously
         // it was always created), adjust threshold based on its existence.
         int threshold = (states.containsKey(CardStateName.FaceDown) ? 2 : 1);
-        return states.keySet().size() > threshold;
+
+        int numStates = states.keySet().size();
+
+        // OriginalText is a technical state used for backup purposes by cards
+        // like Volrath's Shapeshifter. It's not a directly playable card state,
+        // so ignore it
+        if (states.containsKey(CardStateName.OriginalText)) {
+            numStates--;
+        }
+
+        return numStates > threshold;
     }
 
     public final boolean isDoubleFaced() {

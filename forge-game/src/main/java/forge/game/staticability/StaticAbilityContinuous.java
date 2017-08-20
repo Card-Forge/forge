@@ -515,10 +515,7 @@ public final class StaticAbilityContinuous {
                     if (params.containsKey("GainedTextHasThisStaticAbility")) {
                         affectedCard.getCurrentState().addStaticAbility(stAb);
                     }
-
                 }
-
-                affectedCard.updateStateForView();
             }
 
             // Change color words
