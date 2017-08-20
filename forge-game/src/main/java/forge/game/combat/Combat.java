@@ -529,7 +529,7 @@ public class Combat {
     }
 
     // removes references to this attacker from all indices and orders
-    private void unregisterAttacker(final Card c, AttackingBand ab) {
+    public void unregisterAttacker(final Card c, AttackingBand ab) {
         blockersOrderedForDamageAssignment.remove(c);
         
         Collection<Card> blockers = blockedBands.get(ab);
@@ -544,7 +544,7 @@ public class Combat {
     }
 
     // removes references to this defender from all indices and orders
-    private void unregisterDefender(final Card c, AttackingBand bandBeingBlocked) {
+    public void unregisterDefender(final Card c, AttackingBand bandBeingBlocked) {
         attackersOrderedForDamageAssignment.remove(c);
         for (Card atk : bandBeingBlocked.getAttackers()) {
             if (blockersOrderedForDamageAssignment.containsKey(atk)) {

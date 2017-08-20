@@ -354,6 +354,7 @@ forge-game/src/main/java/forge/game/ability/effects/BecomesBlockedEffect.java -t
 forge-game/src/main/java/forge/game/ability/effects/BidLifeEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/BondEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/BranchEffect.java -text
+forge-game/src/main/java/forge/game/ability/effects/ChangeCombatantsEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ChangeTargetsEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ChangeTextEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ChangeZoneAllEffect.java -text
@@ -12326,6 +12327,7 @@ forge-gui/res/cardsfolder/p/pore_over_the_pages.txt -text
 forge-gui/res/cardsfolder/p/porphyry_nodes.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/port_inspector.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/port_town.txt -text
+forge-gui/res/cardsfolder/p/portal_mage.txt -text
 forge-gui/res/cardsfolder/p/portcullis.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/portent.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/portent_of_betrayal.txt -text

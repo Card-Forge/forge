@@ -27,6 +27,7 @@ public enum ApiType {
     BidLife (BidLifeEffect.class),
     Bond (BondEffect.class),
     Branch (BranchEffect.class),
+    ChangeCombatants (ChangeCombatantsEffect.class),
     ChangeTargets (ChangeTargetsEffect.class),
     ChangeText (ChangeTextEffect.class),
     ChangeZone (ChangeZoneEffect.class),
