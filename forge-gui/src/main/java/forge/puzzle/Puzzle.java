@@ -6,6 +6,7 @@ import forge.game.Game;
 import forge.game.GameType;
 import forge.game.ability.AbilityFactory;
 import forge.game.card.Card;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
@@ -110,6 +111,10 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
         goalCard.addType("Effect");
         goalCard.setOracleText(getGoalDescription());
 
+        if (game.getPhaseHandler().getPhase() == PhaseType.CLEANUP) {
+            turns++;
+        }
+
         // Default goal: win the game; lose on turn X
         String trig = "Mode$ Phase | Phase$ Cleanup | TriggerZones$ Command | Static$ True | " +
                 "TurnCount$ " + turns + " | TriggerDescription$ At the beginning of your cleanup step, you lose the game.";
@@ -156,6 +161,20 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
 
                 String countPerm = "Count$Valid " + targets;
                 goalCard.setSVar("PermCount", countPerm);
+                break;
+            case "gain control of specified permanents":
+                if (targets == null) {
+                    targets = "Card.inZoneBattlefield+OppCtrl"; // by default, gain control of all opponent's permanents
+                }
+                String trigClear = "Mode$ ChangesController | ValidCards$ " + targets + " | Static$ True | " +
+                        "TriggerDescription$ When the last permanent controlled by the opponent leaves the battlefield, you win the game.";
+                String effClear = "DB$ WinsGame | Defined$ You | ConditionCheckSVar$ PermCount | ConditionSVarCompare$ EQ0";
+                final Trigger triggerClear = TriggerHandler.parseTrigger(trigClear, goalCard, true);
+                triggerClear.setOverridingAbility(AbilityFactory.getAbility(effClear, goalCard));
+                goalCard.addTrigger(triggerClear);
+
+                String countOTB = "Count$Valid " + targets;
+                goalCard.setSVar("PermCount", countOTB);
                 break;
             default:
                 break;
