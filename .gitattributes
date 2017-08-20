@@ -646,6 +646,7 @@ forge-game/src/main/java/forge/game/replacement/ReplaceDamage.java -text
 forge-game/src/main/java/forge/game/replacement/ReplaceDestroy.java -text
 forge-game/src/main/java/forge/game/replacement/ReplaceDiscard.java -text
 forge-game/src/main/java/forge/game/replacement/ReplaceDraw.java -text
+forge-game/src/main/java/forge/game/replacement/ReplaceDrawCards.java -text
 forge-game/src/main/java/forge/game/replacement/ReplaceGainLife.java -text
 forge-game/src/main/java/forge/game/replacement/ReplaceGameLoss.java -text
 forge-game/src/main/java/forge/game/replacement/ReplaceMoved.java -text
@@ -1841,6 +1842,7 @@ forge-gui/res/cardsfolder/a/alluring_siren.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/ally_encampment.txt -text
 forge-gui/res/cardsfolder/a/alms.txt -text
 forge-gui/res/cardsfolder/a/alms_beast.txt -text
+forge-gui/res/cardsfolder/a/alms_collector.txt -text
 forge-gui/res/cardsfolder/a/alms_of_the_vein.txt -text
 forge-gui/res/cardsfolder/a/alpha_authority.txt -text
 forge-gui/res/cardsfolder/a/alpha_brawl.txt -text

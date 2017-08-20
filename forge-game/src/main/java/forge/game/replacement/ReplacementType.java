@@ -18,6 +18,7 @@ public enum ReplacementType {
     Destroy(ReplaceDestroy.class),
     Discard(ReplaceDiscard.class),
     Draw(ReplaceDraw.class),
+    DrawCards(ReplaceDrawCards.class),
     GainLife(ReplaceGainLife.class),
     GameLoss(ReplaceGameLoss.class),
     Moved(ReplaceMoved.class),

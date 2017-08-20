@@ -1263,6 +1263,16 @@ public class Player extends GameEntity implements Comparable<Player> {
         final CardCollection drawn = new CardCollection();
         final CardCollection toReveal = new CardCollection();
 
+        // Replacement effects
+        final Map<String, Object> repRunParams = Maps.newHashMap();
+        repRunParams.put("Event", "DrawCards");
+        repRunParams.put("Affected", this);
+        repRunParams.put("Number", n);
+
+        if (game.getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
+            return drawn;
+        }
+
         // always allow drawing cards before the game actually starts (e.g. Maralen of the Mornsong Avatar)
         final boolean gameStarted = game.getAge().ordinal() > GameStage.Mulligan.ordinal();
 
