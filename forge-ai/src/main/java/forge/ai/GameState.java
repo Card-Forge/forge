@@ -70,6 +70,7 @@ public abstract class GameState {
     private final Map<Card, List<String>> cardToChosenClrs = new HashMap<>();
     private final Map<Card, String> cardToChosenType = new HashMap<>();
     private final Map<Card, List<String>> cardToRememberedId = new HashMap<>();
+    private final Map<Card, List<String>> cardToImprintedId = new HashMap<>();
     private final Map<Card, String> cardToExiledWithId = new HashMap<>();
     private final Map<Card, Card> cardAttackMap = new HashMap<>();
 
@@ -160,10 +161,13 @@ public abstract class GameState {
                 }
                 for (Object o : card.getRemembered()) {
                     // Remember the IDs of remembered cards
-                    // TODO: we can currently support remembered cards only. Expand to support other remembered objects.
                     if (o instanceof Card) {
                         cardsReferencedByID.add((Card)o);
                     }
+                }
+                for (Card i : card.getImprintedCards()) {
+                    // Remember the IDs of imprinted cards
+                    cardsReferencedByID.add(i);
                 }
                 if (game.getCombat() != null && game.getCombat().isAttacking(card)) {
                     // Remember the IDs of attacked planeswalkers
@@ -273,6 +277,15 @@ public abstract class GameState {
             }
             if (!rememberedCardIds.isEmpty()) {
                 newText.append("|RememberedCards:").append(TextUtil.join(rememberedCardIds, ","));
+            }
+
+            List<String> imprintedCardIds = Lists.newArrayList();
+            for (Card impr : c.getImprintedCards()) {
+                int id = impr.getId();
+                imprintedCardIds.add(String.valueOf(id));
+            }
+            if (!imprintedCardIds.isEmpty()) {
+                newText.append("|Imprinting:").append(TextUtil.join(imprintedCardIds, ","));
             }
         }
 
@@ -555,6 +568,17 @@ public abstract class GameState {
             for (String id : ids) {
                 Card tgt = idToCard.get(Integer.parseInt(id));
                 c.addRemembered(tgt);
+            }
+        }
+
+        // Imprinting: X
+        for (Entry<Card, List<String>> imprintedCards : cardToImprintedId.entrySet()) {
+            Card c = imprintedCards.getKey();
+            List<String> ids = imprintedCards.getValue();
+
+            for (String id : ids) {
+                Card tgt = idToCard.get(Integer.parseInt(id));
+                c.addImprintedCard(tgt);
             }
         }
 
@@ -911,6 +935,8 @@ public abstract class GameState {
                     cardToScript.put(c, info.substring(info.indexOf(':') + 1));
                 } else if (info.startsWith("RememberedCards:")) {
                     cardToRememberedId.put(c, Arrays.asList(info.substring(info.indexOf(':') + 1).split(",")));
+                } else if (info.startsWith("Imprinting:")) {
+                    cardToImprintedId.put(c, Arrays.asList(info.substring(info.indexOf(':') + 1).split(",")));
                 } else if (info.startsWith("ExiledWith:")) {
                     cardToExiledWithId.put(c, info.substring(info.indexOf(':') + 1));
                 } else if (info.startsWith("Attacking")) {
