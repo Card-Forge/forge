@@ -237,14 +237,12 @@ public class TokenAi extends SpellAbilityAi {
         }
 
         if (sa.getRestrictions() != null && sa.getRestrictions().isPwAbility() && alwaysFromPW) {
-            System.out.println("Always if from planeswalker");
             return true;
         } else if (ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && ai.getGame().getPhaseHandler().getPlayerTurn().isOpponentOf(ai)
                 && ai.getGame().getCombat() != null
                 && !ai.getGame().getCombat().getAttackers().isEmpty()
                 && alwaysOnOppAttack) {
-            System.out.println("Always if opp attacks");
             return true;
         }
 
