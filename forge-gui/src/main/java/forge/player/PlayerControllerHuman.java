@@ -1875,7 +1875,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         public void setupGameState() {
             final File gamesDir = new File(ForgeConstants.USER_GAMES_DIR);
             if (!gamesDir.exists()) { // if the directory does not exist, try to
-                                      // create it
+                // create it
                 gamesDir.mkdir();
             }
 
@@ -2069,7 +2069,26 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
          */
         @Override
         public void addCardToHand() {
-            final Player p = game.getPlayer(getGui().oneOrNone("Put card in hand for which player?",
+            addCardToZone(ZoneType.Hand);
+        }
+
+        @Override
+        public void addCardToLibrary() {
+            addCardToZone(ZoneType.Library);
+        }
+
+        @Override
+        public void addCardToGraveyard() {
+            addCardToZone(ZoneType.Graveyard);
+        }
+
+        @Override
+        public void addCardToExile() {
+            addCardToZone(ZoneType.Exile);
+        }
+
+        private void addCardToZone(ZoneType zone) {
+            final Player p = game.getPlayer(getGui().oneOrNone("Put card in " + zone.name().toLowerCase() + " for which player?",
                     PlayerView.getCollection(game.getPlayers())));
             if (p == null) {
                 return;
@@ -2090,7 +2109,22 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             game.getAction().invoke(new Runnable() {
                 @Override
                 public void run() {
-                    game.getAction().moveToHand(Card.fromPaperCard(c, p), null);
+                    switch(zone) {
+                        case Hand:
+                            game.getAction().moveToHand(Card.fromPaperCard(c, p), null);
+                            break;
+                        case Library:
+                            game.getAction().moveToLibrary(Card.fromPaperCard(c, p), null);
+                            break;
+                        case Graveyard:
+                            game.getAction().moveToGraveyard(Card.fromPaperCard(c, p), null);
+                            break;
+                        case Exile:
+                            game.getAction().exile(Card.fromPaperCard(c, p), null);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             });
         }

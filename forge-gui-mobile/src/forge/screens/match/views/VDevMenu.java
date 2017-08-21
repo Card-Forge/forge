@@ -44,6 +44,17 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
+        addItem(new FMenuItem("Exile Card from Hand", new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                ThreadUtil.invokeInGameThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        MatchController.instance.getGameController().cheat().exileCardsFromHand();
+                    }
+                });
+            }
+        }));
         addItem(new FMenuItem("Add Card to Play", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
@@ -51,6 +62,50 @@ public class VDevMenu extends FDropDownMenu {
                     @Override
                     public void run() {
                         MatchController.instance.getGameController().cheat().addCardToBattlefield();
+                    }
+                });
+            }
+        }));
+        addItem(new FMenuItem("Exile Card from Play", new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                ThreadUtil.invokeInGameThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        MatchController.instance.getGameController().cheat().exileCardsFromBattlefield();
+                    }
+                });
+            }
+        }));
+        addItem(new FMenuItem("Add Card to Library", new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                ThreadUtil.invokeInGameThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        MatchController.instance.getGameController().cheat().addCardToLibrary();
+                    }
+                });
+            }
+        }));
+        addItem(new FMenuItem("Add Card to Graveyard", new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                ThreadUtil.invokeInGameThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        MatchController.instance.getGameController().cheat().addCardToGraveyard();
+                    }
+                });
+            }
+        }));
+        addItem(new FMenuItem("Add Card to Exile", new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                ThreadUtil.invokeInGameThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        MatchController.instance.getGameController().cheat().addCardToExile();
                     }
                 });
             }

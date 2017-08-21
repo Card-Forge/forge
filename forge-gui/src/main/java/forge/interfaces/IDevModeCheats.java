@@ -26,6 +26,12 @@ public interface IDevModeCheats {
 
     void addCardToHand();
 
+    void addCardToLibrary();
+
+    void addCardToGraveyard();
+
+    void addCardToExile();
+
     /*
      * Exiles cards from specified player's hand. Will prompt user for player and cards.
      */
@@ -97,6 +103,15 @@ public interface IDevModeCheats {
         }
         @Override
         public void addCardToBattlefield() {
+        }
+        @Override
+        public void addCardToLibrary() {
+        }
+        @Override
+        public void addCardToGraveyard() {
+        }
+        @Override
+        public void addCardToExile() {
         }
     };
 

@@ -61,6 +61,8 @@ public abstract class GameState {
     private String humanCounters = "";
     private String computerCounters = "";
 
+    private boolean puzzleCreatorState = false;
+
     private final Map<ZoneType, String> humanCardTexts = new EnumMap<ZoneType, String>(ZoneType.class);
     private final Map<ZoneType, String> aiCardTexts = new EnumMap<ZoneType, String>(ZoneType.class);
 
@@ -99,6 +101,19 @@ public abstract class GameState {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+
+        if (puzzleCreatorState) {
+            // append basic puzzle metadata if we're dumping from the puzzle creator screen
+            sb.append("[metadata]\n");
+            sb.append("Name:New Puzzle\n");
+            sb.append("URL:https://www.cardforge.org\n");
+            sb.append("Goal:Win\n");
+            sb.append("Turns:1\n");
+            sb.append("Difficulty:Easy\n");
+            sb.append("Description:Win this turn.\n");
+            sb.append("[state]\n");
+        }
+
         sb.append(String.format("humanlife=%d\n", humanLife));
         sb.append(String.format("ailife=%d\n", computerLife));
 
@@ -124,7 +139,7 @@ public abstract class GameState {
 
     public void initFromGame(Game game) throws Exception {
         FCollectionView<Player> players = game.getPlayers();
-        // Can only serialized a two player game with one AI and one human.
+        // Can only serialize a two player game with one AI and one human.
         if (players.size() != 2) {
             throw new Exception("Game not supported");
         }
@@ -185,6 +200,9 @@ public abstract class GameState {
             aiCardTexts.put(zone, "");
             humanCardTexts.put(zone, "");
             for (Card card : game.getCardsIn(zone)) {
+                if (card.getName().equals("Puzzle Goal") && card.getOracleText().contains("New Puzzle")) {
+                    puzzleCreatorState = true;
+                }
                 if (card instanceof DetachedCardEffect) {
                     continue;
                 }

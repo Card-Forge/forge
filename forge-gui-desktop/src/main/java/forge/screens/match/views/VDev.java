@@ -69,6 +69,10 @@ public class VDev implements IVDoc<CDev>, IDevListener {
     private final DevLabel lblExileFromPlay = new DevLabel("Exile Card from Play");
     private final DevLabel lblCardToHand = new DevLabel("Add Card to Hand");
     private final DevLabel lblExileFromHand = new DevLabel("Exile Card from Hand");
+    private final DevLabel lblCardToLibrary = new DevLabel("Add Card to Library");
+    private final DevLabel lblCardToGraveyard = new DevLabel("Add Card to Graveyard");
+    private final DevLabel lblCardToExile = new DevLabel("Add Card to Exile");
+
     private final DevLabel lblRiggedRoll = new DevLabel("Rigged Planar Roll");
     private final DevLabel lblWalkTo = new DevLabel("Planeswalk to");
 
@@ -88,10 +92,13 @@ public class VDev implements IVDoc<CDev>, IDevListener {
         viewport.add(this.lblViewAll, halfConstraints);
         viewport.add(this.lblCardToHand, halfConstraintsLeft);
         viewport.add(this.lblCardToBattlefield, halfConstraints);
-        viewport.add(this.lblExileFromPlay, halfConstraintsLeft);
-        viewport.add(this.lblExileFromHand, halfConstraints);
-        viewport.add(this.lblSetLife, halfConstraintsLeft);
-        viewport.add(this.lblWinGame, halfConstraints);
+        viewport.add(this.lblExileFromHand, halfConstraintsLeft);
+        viewport.add(this.lblExileFromPlay, halfConstraints);
+        viewport.add(this.lblCardToLibrary, halfConstraintsLeft);
+        viewport.add(this.lblCardToGraveyard, halfConstraints);
+        viewport.add(this.lblCardToExile, halfConstraintsLeft);
+        viewport.add(this.lblSetLife, halfConstraints);
+        viewport.add(this.lblWinGame, constraints);
         viewport.add(this.lblSetupGame, halfConstraintsLeft);
         viewport.add(this.lblDumpGame, halfConstraints);
         viewport.add(this.lblUnlimitedLands, constraints);
@@ -184,6 +191,21 @@ public class VDev implements IVDoc<CDev>, IDevListener {
     /** @return {@link forge.screens.match.views.VDev.DevLabel} */
     public DevLabel getLblCardToHand() {
         return this.lblCardToHand;
+    }
+
+    /** @return {@link forge.screens.match.views.VDev.DevLabel} */
+    public DevLabel getLblCardToLibrary() {
+        return this.lblCardToLibrary;
+    }
+
+    /** @return {@link forge.screens.match.views.VDev.DevLabel} */
+    public DevLabel getLblCardToGraveyard() {
+        return this.lblCardToGraveyard;
+    }
+
+    /** @return {@link forge.screens.match.views.VDev.DevLabel} */
+    public DevLabel getLblCardToExile() {
+        return this.lblCardToExile;
     }
 
     /** @return {@link forge.screens.match.views.VDev.DevLabel} */
