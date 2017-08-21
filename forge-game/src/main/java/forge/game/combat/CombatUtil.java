@@ -624,6 +624,30 @@ public class CombatUtil {
         return canAttackerBeBlockedWithAmount(attacker, blocks, combat);
     }
 
+    public static List<Card> getPotentialBestBlockers(final Card attacker, final List<Card> blockers, final Combat combat) {
+        List<Card> potentialBlockers = Lists.newArrayList();
+        if (blockers.isEmpty() || attacker == null) {
+            return potentialBlockers;
+        }
+
+        for (final Card blocker : blockers) {
+            if (CombatUtil.canBeBlocked(attacker, blocker.getController()) && CombatUtil.canBlock(attacker, blocker)) {
+                potentialBlockers.add(blocker);
+            }
+        }
+
+        int minBlockers = getMinNumBlockersForAttacker(attacker, blockers.get(0).getController());
+
+        CardLists.sortByPowerDesc(potentialBlockers);
+
+        List<Card> minBlockerList = Lists.newArrayList();
+        for (int i = 0; i < minBlockers && i < potentialBlockers.size(); i++) {
+            minBlockerList.add(potentialBlockers.get(i));
+        }
+
+        return minBlockerList;
+    }
+
     /**
      * <p>
      * needsMoreBlockers.
@@ -1077,7 +1101,7 @@ public class CombatUtil {
                 if (defender != null) {
                     return amount >= defender.getCreaturesInPlay().size();
                 }
-                System.out.println("Warning: it was impossible to deduce the defending player in CombatUtil::canAttackerBeBlockedWithAmount, returning 'true' (safest default).");
+                System.out.println("Warning: it was impossible to deduce the defending player in CombatUtil#canAttackerBeBlockedWithAmount, returning 'true' (safest default).");
                 return true;
             }
             if (amount < defender.getCreaturesInPlay().size()) {
@@ -1088,4 +1112,36 @@ public class CombatUtil {
         return true;
     }
 
+    public static int getMinNumBlockersForAttacker(Card attacker, Player defender) {
+        List<String> restrictions = Lists.newArrayList();
+        for (String kw : attacker.getKeywords()) {
+            if (kw.startsWith("CantBeBlockedByAmount")) {
+                restrictions.add(TextUtil.split(kw, ' ', 2)[1]);
+            }
+            if (kw.equals("Menace")) {
+                restrictions.add("LT2");
+            }
+        }
+        int minBlockers = 1;
+        for ( String res : restrictions ) {
+            int operand = Integer.parseInt(res.substring(2));
+            String operator = res.substring(0, 2);
+            if (operator.equals("LT") || operator.equals("GE")) {
+                if (minBlockers < operand) {
+                    minBlockers = operand;
+                }
+            } else if (operator.equals("LE") || operator.equals("GT") || operator.equals("EQ")) {
+                if (minBlockers < operand + 1) {
+                    minBlockers = operand + 1;
+                }
+            }
+        }
+        if (attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
+            if (defender != null) {
+                minBlockers = defender.getCreaturesInPlay().size();
+            }
+        }
+
+        return minBlockers;
+    }
 } // end class CombatUtil

@@ -51,3 +51,7 @@ TOKEN_GENERATION_ABILITY_CHANCE=80
 # Situations where the AI should always use the token-generation abilities if possible
 TOKEN_GENERATION_ALWAYS_IF_FROM_PLANESWALKER=true
 TOKEN_GENERATION_ALWAYS_IF_OPP_ATTACKS=true
+
+# Attempt to predict the number of potential blockers with various forms of evasion when
+# deciding to do an all-in assault attack (Experimental!)
+COMBAT_ASSAULT_EVASION_PREDICTION=false

@@ -53,7 +53,8 @@ public enum AiProps { /** */
     STRIPMINE_HIGH_PRIORITY_ON_SKIPPED_LANDDROP ("false"),
     TOKEN_GENERATION_ABILITY_CHANCE ("100"), /** */
     TOKEN_GENERATION_ALWAYS_IF_FROM_PLANESWALKER ("true"), /** */
-    TOKEN_GENERATION_ALWAYS_IF_OPP_ATTACKS ("true"); /** */
+    TOKEN_GENERATION_ALWAYS_IF_OPP_ATTACKS ("true"),
+    COMBAT_ASSAULT_ATTACK_EVASION_PREDICTION ("false"); /** */
 
     private final String strDefaultVal;
 

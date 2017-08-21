@@ -424,10 +424,21 @@ public class AiAttackController {
 
         final Player opp = this.defendingOpponent;
 
+        CardCollection accountedBlockers = new CardCollection(this.blockers);
         for (Card attacker : attackers) {
-            if (!CombatUtil.canBeBlocked(attacker, this.blockers, null)
+            if (!CombatUtil.canBeBlocked(attacker, accountedBlockers, null)
                     || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
                 unblockedAttackers.add(attacker);
+            } else {
+                if (ai.getController().isAI()) {
+                    AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+                    if (aic.getBooleanProperty(AiProps.COMBAT_ASSAULT_ATTACK_EVASION_PREDICTION)) {
+                        // Attempt to identify which blockers will already be taken (blocking other things),
+                        // such that Flying, Shadow, Reach, and other mechanics can be properly accounted for.
+                        List<Card> potentialBestBlockers = CombatUtil.getPotentialBestBlockers(attacker, accountedBlockers, null);
+                        accountedBlockers.removeAll(potentialBestBlockers);
+                    }
+                }
             }
         }
 
