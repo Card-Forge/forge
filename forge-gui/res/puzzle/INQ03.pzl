@@ -1,0 +1,25 @@
+[metadata]
+Name:Inquest Gamer - Dead Man's Hand #03
+URL:http://imgur.com/a/EeY71
+Goal:Play the Specified Permanent
+Targets:Card.YouCtrl+namedMarit Lage
+Turns:1
+Difficulty:Hard
+Description:You can't win the game. Instead, you need to remove 10 ice counters from Dark Depths and create a Marit Lage token.\nDesperate Ritual is the only card in your library that will be drawn in your Draw step.
+[state]
+humanlife=1
+ailife=18
+activeplayer=ai
+activephase=CLEANUP
+humanhand=Proclamation of Rebirth;Rite of Flame;Shatter
+humanlibrary=Desperate Ritual
+humangraveyard=
+humanbattlefield=Adarkar Valkyrie;Barbed Sextant;Black Market;Carnival of Souls;Celestial Gatekeeper;Dark Depths|Counters:ICE=10;Herald of Leshrac;Martyr of Sands;Soldevi Adnate;Thermopod
+humanexile=
+humancommand=
+aihand=
+ailibrary=
+aigraveyard=
+aibattlefield=Damping Matrix;Plague Spitter;School of the Unseen;Tresserhorn Sinks;Varchild's War-Riders|Counters:AGE=18
+aiexile=
+aicommand=

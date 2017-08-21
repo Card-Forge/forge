@@ -111,13 +111,14 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
         goalCard.addType("Effect");
         goalCard.setOracleText(getGoalDescription());
 
+        int turnCorr = 0;
         if (game.getPhaseHandler().getPhase() == PhaseType.CLEANUP) {
-            turns++;
+            turnCorr = 1;
         }
 
         // Default goal: win the game; lose on turn X
         String trig = "Mode$ Phase | Phase$ Cleanup | TriggerZones$ Command | Static$ True | " +
-                "TurnCount$ " + turns + " | TriggerDescription$ At the beginning of your cleanup step, you lose the game.";
+                "TurnCount$ " + (turns + turnCorr) + " | TriggerDescription$ At the beginning of your cleanup step, you lose the game.";
         String eff = "DB$ LosesGame | Defined$ You";
 
         switch(goal.toLowerCase()) {
