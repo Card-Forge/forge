@@ -243,6 +243,19 @@ public class AiAttackController {
         return false;
     }
 
+    public final static Card getCardCanBlockAnAttacker(final Card c, final List<Card> attackers, final boolean nextTurn) {
+        final List<Card> attackerList = new ArrayList<Card>(attackers);
+        if (!c.isCreature()) {
+            return null;
+        }
+        for (final Card attacker : attackerList) {
+            if (CombatUtil.canBlock(attacker, c, nextTurn)) {
+                return attacker;
+            }
+        }
+        return null;
+    }
+
     // this checks to make sure that the computer player doesn't lose when the human player attacks
     // this method is used by getAttackers()
     public final List<Card> notNeededAsBlockers(final Player ai, final List<Card> attackers) {
@@ -734,8 +747,15 @@ public class AiAttackController {
                 humanForces += 1; // player forces they might use to attack
             }
             // increment player forces that are relevant to an attritional attack - includes walls
-            if (canBlockAnAttacker(pCard, candidateAttackers, true)) {
+
+            boolean predictEvasion = (ai.getController().isAI()
+                    && ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION));
+            Card potentialOppBlocker = getCardCanBlockAnAttacker(pCard, candidateAttackers, true);
+            if (potentialOppBlocker != null) {
                 humanForcesForAttritionalAttack += 1;
+                if (predictEvasion) {
+                    candidateAttackers.remove(potentialOppBlocker);
+                }
             }
         }
 

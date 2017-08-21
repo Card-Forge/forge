@@ -55,3 +55,6 @@ TOKEN_GENERATION_ALWAYS_IF_OPP_ATTACKS=true
 # Attempt to predict the number of potential blockers with various forms of evasion when
 # deciding to do an all-in assault attack (Experimental!)
 COMBAT_ASSAULT_ATTACK_EVASION_PREDICTION=true
+# Attempt to predict the number of potential blockers with various forms of evasion when
+# deciding to do an attrition race attack (Experimental!)
+COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION=true
