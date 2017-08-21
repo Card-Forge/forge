@@ -2072,16 +2072,31 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             addCardToZone(ZoneType.Hand);
         }
 
+        /*
+         * (non-Javadoc)
+         *
+         * @see forge.player.IDevModeCheats#addCardToLibrary()
+         */
         @Override
         public void addCardToLibrary() {
             addCardToZone(ZoneType.Library);
         }
 
+        /*
+         * (non-Javadoc)
+         *
+         * @see forge.player.IDevModeCheats#addCardToGraveyard()
+         */
         @Override
         public void addCardToGraveyard() {
             addCardToZone(ZoneType.Graveyard);
         }
 
+        /*
+         * (non-Javadoc)
+         *
+         * @see forge.player.IDevModeCheats#addCardToExile()
+         */
         @Override
         public void addCardToExile() {
             addCardToZone(ZoneType.Exile);
@@ -2202,7 +2217,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         /*
          * (non-Javadoc)
          *
-         * @see forge.player.IDevModeCheats#exileCardsFromBattlefield()
+         * @see forge.player.IDevModeCheats#removeCardsFromGame()
          */
         @Override
         public void removeCardsFromGame() {
