@@ -1874,8 +1874,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         @Override
         public void setupGameState() {
             final File gamesDir = new File(ForgeConstants.USER_GAMES_DIR);
-            if (!gamesDir.exists()) { // if the directory does not exist, try to
-                // create it
+            if (!gamesDir.exists()) {
+                // if the directory does not exist, try to create it
                 gamesDir.mkdir();
             }
 
