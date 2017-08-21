@@ -28,17 +28,26 @@ public class QuestSpellShop {
     private static ItemPool<InventoryItem> decksUsingMyCards;
 
     public static Integer getCardValue(final InventoryItem card) {
-        String ns;
+        String ns, nsArt;
         int value = 1337; // previously this was the returned default
         boolean foil = false;
         int foilMultiplier;
 
+        PaperCard pc = null;
+        int artIndex = 0;
+
         if (card instanceof PaperCard) {
-            ns = card.getName() + "|" + ((PaperCard) card).getEdition();
+            pc = (PaperCard) card;
+            artIndex = pc.getArtIndex();
+
+            ns = card.getName() + "|" + pc.getEdition();
+            nsArt = card.getName() + " (" + artIndex + ")|" + pc.getEdition();
+
             foil = ((PaperCard) card).isFoil();
         }
         else {
             ns = card.getName();
+            nsArt = ns;
         }
 
         if (mapPrices == null) { //initialize price map if not already done
@@ -46,8 +55,10 @@ public class QuestSpellShop {
         }
         if (mapPrices.containsKey(ns)) {
             value = mapPrices.get(ns);
-        }
-        else if (card instanceof PaperCard) {
+        } else if (mapPrices.containsKey(nsArt)) {
+            // Card with specific art index (for cards with multiple art variants, e.g. Arcane Denial from Alliances)
+            value = mapPrices.get(nsArt);
+        } else if (card instanceof PaperCard) {
             switch (((IPaperCard) card).getRarity()) {
                 case BasicLand:
                     value = 4;
