@@ -233,7 +233,9 @@ public class TokenAi extends SpellAbilityAi {
                 }
             }
         }
-        return MyRandom.getRandom().nextFloat() < .8;
+
+        return true;
+        //return MyRandom.getRandom().nextFloat() < .8;
     }
 
     /**
