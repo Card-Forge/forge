@@ -116,9 +116,11 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
             turnCorr = 1;
         }
 
+        int turnLimit = turns + turnCorr;
+
         // Default goal: win the game; lose on turn X
         String trig = "Mode$ Phase | Phase$ Cleanup | TriggerZones$ Command | Static$ True | " +
-                "TurnCount$ " + (turns + turnCorr) + " | TriggerDescription$ At the beginning of your cleanup step, you lose the game.";
+                "TurnCount$ " + turnLimit + " | TriggerDescription$ At the beginning of your cleanup step on the specified turn, you lose the game.";
         String eff = "DB$ LosesGame | Defined$ You";
 
         switch(goal.toLowerCase()) {
@@ -127,7 +129,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
                 break;
             case "survive":
                 trig = "Mode$ Phase | Phase$ Upkeep | TriggerZones$ Command | Static$ True | " +
-                       "TurnCount$ " + (turns + 1) + " | TriggerDescription$ At the beginning of your upkeep step, you win the game.";
+                       "TurnCount$ " + (turnLimit + 1) + " | TriggerDescription$ At the beginning of the upkeep step on the specified turn, you win the game.";
                 eff = "DB$ WinsGame | Defined$ You";
                 break;
             case "destroy specified permanents":
