@@ -5,7 +5,7 @@ Goal:Play the Specified Permanent
 Targets:Card.YouCtrl+namedBroodstar
 Turns:1
 Difficulty:Hard
-Description:Play Broodstar before the end of your turn.\nYou know that the top four cards in your library are Ancient Tomb, Voltaic Key, Channel, and Welding Jar (in this order).
+Description:You can't win the game. Instead, play Broodstar before the end of your turn.\nYou know that the top four cards in your library are Ancient Tomb, Voltaic Key, Channel, and Welding Jar (in this order).
 [state]
 humanlife=7
 ailife=20
