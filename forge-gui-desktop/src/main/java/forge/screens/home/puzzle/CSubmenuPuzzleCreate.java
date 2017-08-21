@@ -13,6 +13,7 @@ import forge.menus.IMenuProvider;
 import forge.menus.MenuUtil;
 import forge.player.GamePlayerUtil;
 import forge.puzzle.Puzzle;
+import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
 
 import javax.swing.*;
@@ -52,7 +53,7 @@ public enum CSubmenuPuzzleCreate implements ICDoc, IMenuProvider {
         return menus;
     }
 
-    private Map<String, List<String>> generateEmptyPuzzle() {
+    private Map<String, List<String>> generateEmptyPuzzle(String firstPlayer) {
         Map<String, List<String>> emptyPuzzle = Maps.newHashMap();
 
         emptyPuzzle.put("metadata", Arrays.asList(
@@ -66,7 +67,7 @@ public enum CSubmenuPuzzleCreate implements ICDoc, IMenuProvider {
         );
 
         emptyPuzzle.put("state", Arrays.asList(
-                "ActivePlayer=human",
+                "ActivePlayer=" + firstPlayer,
                 "ActivePhase=upkeep",
                 "HumanLife=20",
                 "AILife=20"
@@ -77,7 +78,10 @@ public enum CSubmenuPuzzleCreate implements ICDoc, IMenuProvider {
     }
 
     private void startPuzzleCreate() {
-        final Puzzle emptyPuzzle = new Puzzle(generateEmptyPuzzle());
+        String firstPlayer = SGuiChoose.one("Who should be the first to take a turn?",
+                Arrays.asList(new String[] {"Human", "AI"}));
+
+        final Puzzle emptyPuzzle = new Puzzle(generateEmptyPuzzle(firstPlayer));
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -91,12 +95,11 @@ public enum CSubmenuPuzzleCreate implements ICDoc, IMenuProvider {
         hostedMatch.setStartGameHook(new Runnable() {
             @Override
             public final void run() {
-                SOptionPane.showMessageDialog("This mode presents you with a clean battlefield.\n\n"
+                SOptionPane.showMessageDialog("Welcome to the Create a Puzzle mode.\n\n"
                         + "Please make sure that Developer Mode is enabled in Forge preferences.\n"
-                        + "You can use the Developer Mode tools to set up the battlefield, and then\n"
-                        + "export the game state to a text file using the Dump Game State command.\n"
-                        + "Please use existing puzzle files as a reference for what is possible.",
-                        "Create a New Puzzle", SOptionPane.INFORMATION_ICON);
+                        + "Remember that rule enforcement is active, so players will lose the game\n"
+                        + "for drawing from empty library!",
+                        "Create a New Puzzle", SOptionPane.WARNING_ICON);
                 emptyPuzzle.applyToGame(hostedMatch.getGame());
             }
         });
