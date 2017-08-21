@@ -652,15 +652,38 @@ public abstract class GameState {
                 System.err.println("ERROR: Unable to find SA with index " + numSA + " on card " + c + " to execute!");
             }
         } else {
-            if (!c.hasSVar(sPtr)) {
-                System.err.println("ERROR: Unable to find SVar " + sPtr + " on card " + c + " + to execute!");
-                return;
-            }
+            // Special handling for keyworded abilities
+            if (sPtr.startsWith("KW#")) {
+                String kwName = sPtr.substring(3);
+                FCollectionView<SpellAbility> saList = c.getSpellAbilities();
 
-            String svarValue = c.getSVar(sPtr);
-            sa = AbilityFactory.getAbility(svarValue, c);
-            if (sa == null) {
-                System.err.println("ERROR: Unable to generate ability for SVar " + svarValue);
+                if (kwName.equals("Awaken")) {
+                    for (SpellAbility ab : saList) {
+                        if (ab.getDescription().startsWith("Awaken")) {
+                            ab.setActivatingPlayer(c.getController());
+                            ab.getSubAbility().setActivatingPlayer(c.getController());
+                            sa = ab;
+                            // target for Awaken is set in its first subability
+                            handleScriptedTargetingForSA(game, sa.getSubAbility(), tgtID);
+                        }
+                    }
+                    if (sa == null) {
+                        System.err.println("ERROR: Could not locate keyworded ability Awaken in card " + c + " to execute!");
+                        return;
+                    }
+                }
+            } else {
+                // SVar-based script execution
+                if (!c.hasSVar(sPtr)) {
+                    System.err.println("ERROR: Unable to find SVar " + sPtr + " on card " + c + " + to execute!");
+                    return;
+                }
+
+                String svarValue = c.getSVar(sPtr);
+                sa = AbilityFactory.getAbility(svarValue, c);
+                if (sa == null) {
+                    System.err.println("ERROR: Unable to generate ability for SVar " + svarValue);
+                }
             }
         }
 
@@ -668,6 +691,13 @@ public abstract class GameState {
         handleScriptedTargetingForSA(game, sa, tgtID);
 
         sa.resolve();
+
+        // resolve subabilities
+        SpellAbility subSa = sa.getSubAbility();
+        while (subSa != null) {
+            subSa.resolve();
+            subSa = subSa.getSubAbility();
+        }
     }
 
     private void handlePrecastSpells(final Game game) {
