@@ -110,6 +110,17 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
+        addItem(new FMenuItem("Remove Card from Game", new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                ThreadUtil.invokeInGameThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        MatchController.instance.getGameController().cheat().removeCardsFromGame();
+                    }
+                });
+            }
+        }));
         addItem(new FMenuItem("Set Player Life", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {

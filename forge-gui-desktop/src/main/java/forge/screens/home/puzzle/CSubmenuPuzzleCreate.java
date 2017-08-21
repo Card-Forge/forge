@@ -79,7 +79,7 @@ public enum CSubmenuPuzzleCreate implements ICDoc, IMenuProvider {
 
     private void startPuzzleCreate() {
         String firstPlayer = SGuiChoose.one("Who should be the first to take a turn?",
-                Arrays.asList(new String[] {"Human", "AI"}));
+                Arrays.asList("Human", "AI"));
 
         final Puzzle emptyPuzzle = new Puzzle(generateEmptyPuzzle(firstPlayer));
 

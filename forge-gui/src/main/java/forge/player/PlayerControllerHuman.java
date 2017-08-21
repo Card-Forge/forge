@@ -2201,6 +2201,42 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         /*
          * (non-Javadoc)
+         *
+         * @see forge.player.IDevModeCheats#exileCardsFromBattlefield()
+         */
+        @Override
+        public void removeCardsFromGame() {
+            final Player p = game.getPlayer(getGui().oneOrNone("Remove card(s) belonging to which player?",
+                    PlayerView.getCollection(game.getPlayers())));
+            if (p == null) {
+                return;
+            }
+
+            final String zone = getGui().one("Remove card(s) from which zone?",
+                    Arrays.asList("Hand", "Battlefield", "Library", "Graveyard", "Exile"));
+
+            final CardCollection selection;
+
+            CardCollectionView cards = p.getCardsIn(ZoneType.smartValueOf(zone));
+            selection = game.getCardList(getGui().many("Choose cards to remove from game", "Removed", 0, -1,
+                    CardView.getCollection(cards), null));
+
+            if (selection != null && selection.size() > 0) {
+                for (Card c : selection) {
+                    if (c == null) {
+                        continue;
+                    }
+                    c.ceaseToExist();
+
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(p).append(" removes ").append(c).append(" from game due to Dev Cheats.");
+                    game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, sb.toString());
+                }
+            }
+        }
+
+        /*
+         * (non-Javadoc)
          * 
          * @see forge.player.IDevModeCheats#addCardToBattlefield()
          */

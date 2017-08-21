@@ -42,6 +42,8 @@ public interface IDevModeCheats {
      */
     void exileCardsFromBattlefield();
 
+    void removeCardsFromGame();
+
     void addCardToBattlefield();
 
     void riggedPlanarRoll();
@@ -112,6 +114,9 @@ public interface IDevModeCheats {
         }
         @Override
         public void addCardToExile() {
+        }
+        @Override
+        public void removeCardsFromGame() {
         }
     };
 

@@ -72,6 +72,7 @@ public class VDev implements IVDoc<CDev>, IDevListener {
     private final DevLabel lblCardToLibrary = new DevLabel("Add Card to Library");
     private final DevLabel lblCardToGraveyard = new DevLabel("Add Card to Graveyard");
     private final DevLabel lblCardToExile = new DevLabel("Add Card to Exile");
+    private final DevLabel lblRemoveFromGame = new DevLabel("Remove Card from Game");
 
     private final DevLabel lblRiggedRoll = new DevLabel("Rigged Planar Roll");
     private final DevLabel lblWalkTo = new DevLabel("Planeswalk to");
@@ -97,8 +98,9 @@ public class VDev implements IVDoc<CDev>, IDevListener {
         viewport.add(this.lblCardToLibrary, halfConstraintsLeft);
         viewport.add(this.lblCardToGraveyard, halfConstraints);
         viewport.add(this.lblCardToExile, halfConstraintsLeft);
-        viewport.add(this.lblSetLife, halfConstraints);
-        viewport.add(this.lblWinGame, constraints);
+        viewport.add(this.lblRemoveFromGame, halfConstraints);
+        viewport.add(this.lblSetLife, halfConstraintsLeft);
+        viewport.add(this.lblWinGame, halfConstraints);
         viewport.add(this.lblSetupGame, halfConstraintsLeft);
         viewport.add(this.lblDumpGame, halfConstraints);
         viewport.add(this.lblUnlimitedLands, constraints);
@@ -221,6 +223,11 @@ public class VDev implements IVDoc<CDev>, IDevListener {
     /** @return {@link forge.screens.match.views.VDev.DevLabel} */
     public DevLabel getLblExileFromPlay() {
         return this.lblExileFromPlay;
+    }
+
+    /** @return {@link forge.screens.match.views.VDev.DevLabel} */
+    public DevLabel getLblRemoveFromGame() {
+        return this.lblRemoveFromGame;
     }
 
     /** @return {@link forge.screens.match.views.VDev.DevLabel} */

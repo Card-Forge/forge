@@ -46,6 +46,7 @@ public final class CDev implements ICDoc {
         view.getLblWinGame().addMouseListener(madWinGame);
         view.getLblCardToBattlefield().addMouseListener(madCardToBattlefield);
         view.getLblExileFromPlay().addMouseListener(madExileFromPlay);
+        view.getLblRemoveFromGame().addMouseListener(madRemoveFromGame);
         view.getLblRiggedRoll().addMouseListener(madRiggedRoll);
         view.getLblWalkTo().addMouseListener(madWalkToPlane);
     }
@@ -244,6 +245,16 @@ public final class CDev implements ICDoc {
     };
     public void exileCardsFromPlay() {
         getController().cheat().exileCardsFromBattlefield();
+    }
+
+    private final MouseListener madRemoveFromGame = new MouseAdapter() {
+        @Override
+        public void mousePressed(final MouseEvent e) {
+            removeCardsFromGame();
+        }
+    };
+    public void removeCardsFromGame() {
+        getController().cheat().removeCardsFromGame();
     }
 
     private final MouseListener madRiggedRoll = new MouseAdapter() {
