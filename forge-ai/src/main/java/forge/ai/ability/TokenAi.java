@@ -7,11 +7,7 @@ import java.util.List;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilMana;
-import forge.ai.SpellAbilityAi;
-import forge.ai.SpellApiToAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
@@ -234,8 +230,12 @@ public class TokenAi extends SpellAbilityAi {
             }
         }
 
-        return true;
-        //return MyRandom.getRandom().nextFloat() < .8;
+        double chance = 1.0F; // 100%
+        if (ai.getController().isAI()) {
+            chance = (double)((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.TOKEN_GENERATION_ABILITY_CHANCE) / 100;
+        }
+
+        return MyRandom.getRandom().nextFloat() <= chance;
     }
 
     /**

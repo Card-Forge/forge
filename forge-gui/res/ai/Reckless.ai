@@ -45,3 +45,7 @@ STRIPMINE_MIN_LANDS_FOR_NO_TIMING_CHECK=3
 STRIPMINE_MIN_LANDS_OTB_FOR_NO_TEMPO_CHECK=4
 STRIPMINE_MAX_LANDS_TO_ATTEMPT_MANALOCKING=4
 STRIPMINE_HIGH_PRIORITY_ON_SKIPPED_LANDDROP=true
+
+# A chance to use the token-generation abilities (The Hive, etc.). If less than 100, the AI will sometimes
+# feel "forgetful" (might miss activation of planeswalker token abilities, The Hive on defense, etc.)
+TOKEN_GENERATION_ABILITY_CHANCE=100

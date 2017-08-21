@@ -50,7 +50,8 @@ public enum AiProps { /** */
     STRIPMINE_MIN_LANDS_FOR_NO_TIMING_CHECK ("3"), /** */
     STRIPMINE_MIN_LANDS_OTB_FOR_NO_TEMPO_CHECK ("6"), /** */
     STRIPMINE_MAX_LANDS_TO_ATTEMPT_MANALOCKING ("3"), /** */
-    STRIPMINE_HIGH_PRIORITY_ON_SKIPPED_LANDDROP ("false"); /** */
+    STRIPMINE_HIGH_PRIORITY_ON_SKIPPED_LANDDROP ("false"),
+    TOKEN_GENERATION_ABILITY_CHANCE ("100"); /** */
 
     private final String strDefaultVal;
 
