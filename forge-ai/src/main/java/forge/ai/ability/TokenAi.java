@@ -1,23 +1,14 @@
 package forge.ai.ability;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-
 import forge.ai.*;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardFactory;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPutCounter;
@@ -34,6 +25,10 @@ import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 import forge.item.PaperToken;
 import forge.util.MyRandom;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * <p>
@@ -231,8 +226,26 @@ public class TokenAi extends SpellAbilityAi {
         }
 
         double chance = 1.0F; // 100%
+        boolean alwaysFromPW = true;
+        boolean alwaysOnOppAttack = true;
+
         if (ai.getController().isAI()) {
-            chance = (double)((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.TOKEN_GENERATION_ABILITY_CHANCE) / 100;
+            AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+            chance = (double)aic.getIntProperty(AiProps.TOKEN_GENERATION_ABILITY_CHANCE) / 100;
+            alwaysFromPW = aic.getBooleanProperty(AiProps.TOKEN_GENERATION_ALWAYS_IF_FROM_PLANESWALKER);
+            alwaysOnOppAttack = aic.getBooleanProperty(AiProps.TOKEN_GENERATION_ALWAYS_IF_OPP_ATTACKS);
+        }
+
+        if (sa.getRestrictions() != null && sa.getRestrictions().isPwAbility() && alwaysFromPW) {
+            System.out.println("Always if from planeswalker");
+            return true;
+        } else if (ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                && ai.getGame().getPhaseHandler().getPlayerTurn().isOpponentOf(ai)
+                && ai.getGame().getCombat() != null
+                && !ai.getGame().getCombat().getAttackers().isEmpty()
+                && alwaysOnOppAttack) {
+            System.out.println("Always if opp attacks");
+            return true;
         }
 
         return MyRandom.getRandom().nextFloat() <= chance;
