@@ -78,6 +78,20 @@ public class DiscardEffect extends SpellAbilityEffect {
 
             if (mode.equals("Defined")) {
                 sb.append(" defined cards");
+
+                if (sa.getHostCard() != null) {
+                    final List<Card> toDiscard = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedCards"), sa);
+                    if (!toDiscard.isEmpty()) {
+                        sb.append(": ");
+
+                        List<String> definedNames = Lists.newArrayList();
+                        for (Card discarded : toDiscard) {
+                            definedNames.add(discarded.toString());
+                        }
+
+                        sb.append(String.join(",", definedNames));
+                    }
+                }
             }
 
             if (mode.equals("Random")) {
