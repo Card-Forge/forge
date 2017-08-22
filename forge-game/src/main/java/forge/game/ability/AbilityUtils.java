@@ -9,6 +9,7 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
 import forge.game.CardTraitBase;
 import forge.game.Game;
@@ -1371,6 +1372,9 @@ public class AbilityUtils {
         	else {
             	cost = new Cost(Iterables.getFirst(source.getChosenCards(), null).getManaCost(), true);
             }
+        }
+        else if (unlessCost.equals("ChosenNumber")) {
+            cost = new Cost(new ManaCost(new ManaCostParser(String.valueOf(source.getChosenNumber()))), true);
         }
         else if (unlessCost.equals("RememberedCostMinus2")) {
             Card rememberedCard = (Card) source.getFirstRemembered();
