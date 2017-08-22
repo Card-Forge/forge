@@ -1543,7 +1543,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         Card cause = null;
         if (sa != null) {
             cause = sa.getHostCard();
-            // for Replacement of the dicard Cause
+            // for Replacement of the discard Cause
             if (sa.hasParam("Cause")) {
                 final CardCollection col = AbilityUtils.getDefinedCards(cause, sa.getParam("Cause"), sa);
                 if (!col.isEmpty()) {
