@@ -2454,6 +2454,41 @@ public class ComputerUtilCombat {
 
         return -1;
     }
+
+    public static List<Card> categorizeAttackersByEvasion(List<Card> attackers) {
+        List<Card> categorizedAttackers = Lists.newArrayList();
+
+        CardCollection withEvasion = new CardCollection();
+        CardCollection withoutEvasion = new CardCollection();
+
+        for (Card atk : attackers) {
+            boolean hasProtection = false;
+            for (String kw : atk.getKeywords()) {
+                if (kw.startsWith("Protection")) {
+                    hasProtection = true;
+                    break;
+                }
+            }
+
+            if (atk.hasKeyword("Flying") || atk.hasKeyword("Shadow")
+                    || atk.hasKeyword("Horsemanship") || (atk.hasKeyword("Fear")
+                    || atk.hasKeyword("Intimidate") || atk.hasKeyword("Skulk") || hasProtection)) {
+                withEvasion.add(atk);
+            } else {
+                withoutEvasion.add(atk);
+            }
+        }
+
+        // attackers that can only be blocked by cards with specific keywords or color, etc.
+        // (maybe will need to split into 2 or 3 tiers depending on importance)
+        categorizedAttackers.addAll(withEvasion);
+        // all other attackers that have no evasion
+        // (Menace and other abilities that limit blocking by amount of blockers is likely handled
+        // elsewhere, but that needs testing and possibly fine-tuning).
+        categorizedAttackers.addAll(withoutEvasion);
+
+        return categorizedAttackers;
+    }
 }
 
 

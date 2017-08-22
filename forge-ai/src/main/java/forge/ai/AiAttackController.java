@@ -437,20 +437,36 @@ public class AiAttackController {
 
         final Player opp = this.defendingOpponent;
 
+        // if true, the AI will attempt to identify which blockers will already be taken,
+        // thus attempting to predict how many creatures with evasion can actively block
+        boolean predictEvasion = false;
+        if (ai.getController().isAI()) {
+            AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+            if (aic.getBooleanProperty(AiProps.COMBAT_ASSAULT_ATTACK_EVASION_PREDICTION)) {
+                predictEvasion = true;
+            }
+        }
+
         CardCollection accountedBlockers = new CardCollection(this.blockers);
-        for (Card attacker : attackers) {
+        CardCollection categorizedAttackers = new CardCollection();
+
+        if (predictEvasion) {
+            // split categorizedAttackers such that the ones with evasion come first and
+            // can be properly accounted for. Note that at this point the attackers need
+            // to be sorted by power already (see the Collections.sort call above).
+            categorizedAttackers.addAll(ComputerUtilCombat.categorizeAttackersByEvasion(this.attackers));
+        } else {
+            categorizedAttackers.addAll(this.attackers);
+        }
+
+        for (Card attacker : categorizedAttackers) {
             if (!CombatUtil.canBeBlocked(attacker, accountedBlockers, null)
                     || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
                 unblockedAttackers.add(attacker);
             } else {
-                if (ai.getController().isAI()) {
-                    AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-                    if (aic.getBooleanProperty(AiProps.COMBAT_ASSAULT_ATTACK_EVASION_PREDICTION)) {
-                        // Attempt to identify which blockers will already be taken (blocking other things),
-                        // such that Flying, Shadow, Reach, and other mechanics can be properly accounted for.
-                        List<Card> potentialBestBlockers = CombatUtil.getPotentialBestBlockers(attacker, accountedBlockers, null);
-                        accountedBlockers.removeAll(potentialBestBlockers);
-                    }
+                if (predictEvasion) {
+                    List<Card> potentialBestBlockers = CombatUtil.getPotentialBestBlockers(attacker, accountedBlockers, null);
+                    accountedBlockers.removeAll(potentialBestBlockers);
                 }
             }
         }
@@ -739,7 +755,20 @@ public class AiAttackController {
             }
         }
 
-        for (final Card pCard : this.oppList) {
+        boolean predictEvasion = (ai.getController().isAI()
+                && ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION));
+
+        CardCollection categorizedOppList = new CardCollection();
+        if (predictEvasion) {
+            // If predicting evasion, make sure that attackers with evasion are considered first
+            // (to avoid situations where the AI would predict his non-flyers to be blocked with
+            // flying creatures and then believe that flyers will necessarily be left unblocked)
+            categorizedOppList.addAll(ComputerUtilCombat.categorizeAttackersByEvasion(this.oppList));
+        } else {
+            categorizedOppList.addAll(this.oppList);
+        }
+
+        for (final Card pCard : categorizedOppList) {
             // if the creature can attack next turn add it to counter attackers list
             if (ComputerUtilCombat.canAttackNextTurn(pCard) && pCard.getNetCombatDamage() > 0) {
                 nextTurnAttackers.add(pCard);
@@ -748,8 +777,6 @@ public class AiAttackController {
             }
             // increment player forces that are relevant to an attritional attack - includes walls
 
-            boolean predictEvasion = (ai.getController().isAI()
-                    && ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION));
             Card potentialOppBlocker = getCardCanBlockAnAttacker(pCard, candidateAttackers, true);
             if (potentialOppBlocker != null) {
                 humanForcesForAttritionalAttack += 1;
