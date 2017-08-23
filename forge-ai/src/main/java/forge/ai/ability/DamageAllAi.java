@@ -101,7 +101,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         // if we can kill human, do it
         if ((validP.equals("Player") || validP.contains("Opponent"))
                 && (opp.getLife() <= ComputerUtilCombat.predictDamageTo(opp, dmg, source, false))) {
-            return 1;
+            return Integer.MAX_VALUE;
         }
 
 		int minGain = 200; // The minimum gain in destroyed creatures
