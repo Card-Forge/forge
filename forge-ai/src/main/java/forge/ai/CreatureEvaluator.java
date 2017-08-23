@@ -213,11 +213,11 @@ public class CreatureEvaluator implements Function<Card, Integer> {
     private int evaluateSpecialAbility(SpellAbility sa) {
         // Pump abilities
         if (sa.getApi() == ApiType.Pump) {
+            // Pump abilities that grant +X/+X to the card
             if ("+X".equals(sa.getParam("NumAtt"))
                     && "+X".equals(sa.getParam("NumDef"))
                     && !sa.usesTargeting()
                     && (!sa.hasParam("Defined") || "Self".equals(sa.getParam("Defined")))) {
-                // Pump abilities that grant +X/+X to the card
                 if (sa.getPayCosts() != null && sa.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
                     // Electrostatic Pummeler
                     int initPower = getEffectivePower(sa.getHostCard());
