@@ -58,3 +58,7 @@ COMBAT_ASSAULT_ATTACK_EVASION_PREDICTION=false
 # Attempt to predict the number of potential blockers with various forms of evasion when
 # deciding to do an attrition race attack (Experimental!)
 COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION=false
+
+# AILogic$ PayEnergyConservatively (used for Britsling Hydra and Longtusk Cub) will only
+# be used in case the creature is engaged in favorable combat
+CONSERVATIVE_ENERGY_PAYMENT_ONLY_IN_COMBAT=true

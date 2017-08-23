@@ -583,6 +583,13 @@ public final class CardPredicates {
             }
         };
 
+        public static final Function<Card, Integer> fnGetNetToughness = new Function<Card, Integer>() {
+            @Override
+            public Integer apply(Card a) {
+                return a.getNetToughness();
+            }
+        };
+
         public static final Function<Card, Integer> fnGetAttack = new Function<Card, Integer>() {
             @Override
             public Integer apply(Card a) {

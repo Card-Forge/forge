@@ -226,13 +226,31 @@ public class CountersPutAi extends SpellAbilityAi {
         }
 
         if ("PayEnergyConservatively".equals(sa.getParam("AILogic"))) {
+            boolean onlyInCombat = ai.getController().isAI()
+                    && ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.CONSERVATIVE_ENERGY_PAYMENT_ONLY_IN_COMBAT);
+
             if (playAggro) {
                 // aggro profiles ignore conservative play for this AI logic
                 return true;
-            } else if (ai.getCounters(CounterType.ENERGY) > ComputerUtilCard.getMaxSAEnergyCostOnBattlefield(ai) + sa.getPayCosts().getCostEnergy().convertAmount()) {
-                return true;
             } else if (ai.getGame().getCombat() != null && sa.getHostCard() != null) {
-                if (ai.getGame().getCombat().isAttacking(sa.getHostCard())) {  
+                if (ai.getGame().getCombat().isAttacking(sa.getHostCard())) {
+                    return true;
+                } else if (ai.getGame().getCombat().isBlocking(sa.getHostCard())) {
+                    // when blocking, consider this if it's possible to save the blocker and/or kill at least one attacker
+                    CardCollection blocked = ai.getGame().getCombat().getAttackersBlockedBy(sa.getHostCard());
+                    int totBlkPower = Aggregates.sum(blocked, CardPredicates.Accessors.fnGetNetPower);
+                    int totBlkToughness = Aggregates.min(blocked, CardPredicates.Accessors.fnGetNetToughness);
+
+                    int numActivations = ai.getCounters(CounterType.ENERGY) / sa.getPayCosts().getCostEnergy().convertAmount();
+                    if (sa.getHostCard().getNetToughness() + numActivations > totBlkPower
+                            || sa.getHostCard().getNetPower() + numActivations >= totBlkToughness) {
+                        return true;
+                    }
+                }
+            } else if (ai.getCounters(CounterType.ENERGY) > ComputerUtilCard.getMaxSAEnergyCostOnBattlefield(ai) + sa.getPayCosts().getCostEnergy().convertAmount()) {
+                // outside of combat, this logic only works if the relevant AI profile option is enabled
+                // and if there is enough energy saved
+                if (!onlyInCombat) {
                     return true;
                 }
             }
