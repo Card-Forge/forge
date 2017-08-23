@@ -2,7 +2,10 @@ package forge.ai;
 
 import com.google.common.base.Function;
 
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CounterType;
+import forge.game.cost.CostPayEnergy;
 import forge.game.spellability.SpellAbility;
 
 public class CreatureEvaluator implements Function<Card, Integer> {
@@ -184,7 +187,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
     
         for (final SpellAbility sa : c.getSpellAbilities()) {
             if (sa.isAbility()) {
-                value += addValue(10, "sa: " + sa);
+                value += addValue(evaluateSpecialAbility(sa), "sa: " + sa);
             }
         }
         if (!c.getManaAbilities().isEmpty()) {
@@ -203,9 +206,38 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         if (!c.getEncodedCards().isEmpty()) {
             value += addValue(24, "encoded");
         }
+
         return value;
     }
-    
+
+    private int evaluateSpecialAbility(SpellAbility sa) {
+        // Pump abilities
+        if (sa.getApi() == ApiType.Pump) {
+            if ("+X".equals(sa.getParam("NumAtt"))
+                    && "+X".equals(sa.getParam("NumDef"))
+                    && !sa.usesTargeting()
+                    && (!sa.hasParam("Defined") || "Self".equals(sa.getParam("Defined")))) {
+                // Pump abilities that grant +X/+X to the card
+                if (sa.getPayCosts() != null && sa.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
+                    // Electrostatic Pummeler
+                    int initPower = getEffectivePower(sa.getHostCard());
+                    int pumpedPower = initPower;
+                    int energy = sa.getHostCard().getController().getCounters(CounterType.ENERGY);
+                    if (energy > 0) {
+                        int numActivations = energy / 3;
+                        for (int i = 0; i < numActivations; i++) {
+                            pumpedPower *= 2;
+                        }
+                        return (pumpedPower - initPower) * 15;
+                    }
+                }
+            }
+        }
+
+        // default value
+        return 10;
+    }
+
     protected int addValue(int value, String text) {
         return value;
     }

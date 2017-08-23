@@ -60,11 +60,7 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
-import forge.game.cost.Cost;
-import forge.game.cost.CostDiscard;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostPutCounter;
-import forge.game.cost.CostRemoveCounter;
+import forge.game.cost.*;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -729,7 +725,26 @@ public class AiController {
             } else if (ApiType.RollPlanarDice == b.getApi() && b.getHostCard().hasSVar("AIRollPlanarDieParams") && b.getHostCard().getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
                 return -1;
             }
-    
+
+            // deprioritize pump spells with pure energy cost (can be activated last,
+            // since energy is generally scarce, plus can benefit e.g. Electrostatic Pummeler)
+            int a2 = 0, b2 = 0;
+            if (a.getApi() == ApiType.Pump && a.getPayCosts() != null && a.getPayCosts().getCostEnergy() != null) {
+                if (a.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
+                    a2 = a.getPayCosts().getCostEnergy().convertAmount();
+                }
+            }
+            if (b.getApi() == ApiType.Pump && b.getPayCosts() != null && b.getPayCosts().getCostEnergy() != null) {
+                if (b.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
+                    b2 = b.getPayCosts().getCostEnergy().convertAmount();
+                }
+            }
+            if (a2 == 0 && b2 > 0) {
+                return -1;
+            } else if (b2 == 0 && a2 > 0) {
+                return 1;
+            }
+
             // cast 0 mana cost spells first (might be a Mox)
             if (a1 == 0 && b1 > 0 && ApiType.Mana != a.getApi()) {
                 return -1;
