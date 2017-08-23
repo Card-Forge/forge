@@ -1423,7 +1423,7 @@ public class ComputerUtilCard {
         // Electrostatic Pummeler
         for (SpellAbility ab : c.getSpellAbilities()) {
             if ("Pummeler".equals(ab.getParam("AILogic"))) {
-                Pair<Integer, Integer> newPT = SpecialCardAi.ElectrostaticPummeler.getPumpedPT(ai, sa, power, toughness, kws);
+                Pair<Integer, Integer> newPT = SpecialCardAi.ElectrostaticPummeler.getPumpedPT(ai, sa, power, toughness);
                 power = newPT.getLeft();
                 toughness = newPT.getRight();
             }
