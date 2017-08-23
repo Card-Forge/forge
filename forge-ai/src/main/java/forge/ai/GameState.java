@@ -830,7 +830,6 @@ public abstract class GameState {
     }
 
     private void applyCountersToGameEntity(GameEntity entity, String counterString) {
-        //entity.setCounters(new HashMap<CounterType, Integer>());
         entity.clearCounters();
         String[] allCounterStrings = counterString.split(",");
         for (final String counterPair : allCounterStrings) {

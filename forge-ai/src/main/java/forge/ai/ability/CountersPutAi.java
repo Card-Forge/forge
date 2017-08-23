@@ -228,12 +228,14 @@ public class CountersPutAi extends SpellAbilityAi {
         if ("PayEnergyConservatively".equals(sa.getParam("AILogic"))) {
             boolean onlyInCombat = ai.getController().isAI()
                     && ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.CONSERVATIVE_ENERGY_PAYMENT_ONLY_IN_COMBAT);
+            boolean onlyDefensive = ai.getController().isAI()
+                    && ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.CONSERVATIVE_ENERGY_PAYMENT_ONLY_DEFENSIVELY);
 
             if (playAggro) {
                 // aggro profiles ignore conservative play for this AI logic
                 return true;
             } else if (ai.getGame().getCombat() != null && sa.getHostCard() != null) {
-                if (ai.getGame().getCombat().isAttacking(sa.getHostCard())) {
+                if (ai.getGame().getCombat().isAttacking(sa.getHostCard()) && !onlyDefensive) {
                     return true;
                 } else if (ai.getGame().getCombat().isBlocking(sa.getHostCard())) {
                     // when blocking, consider this if it's possible to save the blocker and/or kill at least one attacker

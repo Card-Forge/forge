@@ -62,3 +62,6 @@ COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION=false
 # AILogic$ PayEnergyConservatively (used for Britsling Hydra and Longtusk Cub) will only
 # be used in case the creature is engaged in favorable combat
 CONSERVATIVE_ENERGY_PAYMENT_ONLY_IN_COMBAT=true
+# If true, the conservative energy payment will not be used when the creature is attacking,
+# only when it's blocking (for more controlling AIs)
+CONSERVATIVE_ENERGY_PAYMENT_ONLY_DEFENSIVELY=false

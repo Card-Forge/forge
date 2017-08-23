@@ -56,7 +56,8 @@ public enum AiProps { /** */
     TOKEN_GENERATION_ALWAYS_IF_OPP_ATTACKS ("true"), /** */
     COMBAT_ASSAULT_ATTACK_EVASION_PREDICTION ("true"), /** */
     COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION ("true"), /** */
-    CONSERVATIVE_ENERGY_PAYMENT_ONLY_IN_COMBAT ("true"); /** */
+    CONSERVATIVE_ENERGY_PAYMENT_ONLY_IN_COMBAT ("true"), /** */
+    CONSERVATIVE_ENERGY_PAYMENT_ONLY_DEFENSIVELY ("true"); /** */
 
     private final String strDefaultVal;
 
