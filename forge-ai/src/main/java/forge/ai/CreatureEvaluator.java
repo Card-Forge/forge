@@ -187,7 +187,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
     
         for (final SpellAbility sa : c.getSpellAbilities()) {
             if (sa.isAbility()) {
-                value += addValue(evaluateSpecialAbility(sa), "sa: " + sa);
+                value += addValue(evaluateSpellAbility(sa), "sa: " + sa);
             }
         }
         if (!c.getManaAbilities().isEmpty()) {
@@ -210,7 +210,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         return value;
     }
 
-    private int evaluateSpecialAbility(SpellAbility sa) {
+    private int evaluateSpellAbility(SpellAbility sa) {
         // Pump abilities
         if (sa.getApi() == ApiType.Pump) {
             // Pump abilities that grant +X/+X to the card
