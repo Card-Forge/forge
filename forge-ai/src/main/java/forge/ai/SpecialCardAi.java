@@ -277,7 +277,7 @@ public class SpecialCardAi {
             return true;
         }
 
-        public static Pair<Integer, Integer> getPumpedPT(Player ai, SpellAbility sa, int power, int toughness, List<String> kws) {
+        public static Pair<Integer, Integer> getPumpedPT(Player ai, SpellAbility sa, int power, int toughness) {
             int energy = sa.getHostCard().getController().getCounters(CounterType.ENERGY);
             if (energy > 0) {
                 int numActivations = energy / 3;
