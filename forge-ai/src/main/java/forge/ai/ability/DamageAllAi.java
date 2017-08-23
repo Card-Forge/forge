@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
-
 import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -56,16 +55,35 @@ public class  DamageAllAi extends SpellAbilityAi {
             x = source.getCounters(CounterType.LOYALTY);
         }
         if (x == -1) {
+            Player bestOpp = determineOppToKill(ai, sa, source, dmg);
+            if (determineOppToKill(ai, sa, source, dmg) != null) {
+                // we already know we can kill a player, so go for it
+                return true;
+            }
+            // look for other value in this (damaging creatures or
+            // creatures + player, e.g. Pestilence, etc.)
             return evaluateDamageAll(ai, sa, source, dmg) > 0;
         } else {
             int best = -1, best_x = -1;
-            for (int i = 0; i <= x; i++) {
-                final int value = evaluateDamageAll(ai, sa, source, i);
-                if (value > best) {
-                    best = value;
-                    best_x = i;
+            Player bestOpp = determineOppToKill(ai, sa, source, x);
+            if (bestOpp != null) {
+                // we can finish off a player, so go for it
+
+                // TODO: improve this by possibly damaging more creatures
+                // on the battlefield belonging to other opponents at the same
+                // time, if viable
+                best_x = bestOpp.getLife();
+            } else {
+                // see if it's possible to get value from killing off creatures
+                for (int i = 0; i <= x; i++) {
+                    final int value = evaluateDamageAll(ai, sa, source, i);
+                    if (value > best) {
+                        best = value;
+                        best_x = i;
+                    }
                 }
             }
+
             if (best_x > 0) {
                 if (sa.getSVar(damage).equals("Count$xPaid")) {
                     source.setSVar("PayX", Integer.toString(best_x));
@@ -79,8 +97,31 @@ public class  DamageAllAi extends SpellAbilityAi {
         }
     }
 
+    private Player determineOppToKill(Player ai, SpellAbility sa, Card source, int x) {
+        // Attempt to determine which opponent can be finished off such that the most players
+        // are killed at the same time, given X damage tops
+        final String validP = sa.hasParam("ValidPlayers") ? sa.getParam("ValidPlayers") : "";
+        int aiLife = ai.getLife();
+        Player bestOpp = null; // default opponent, if all else fails
+
+        for (int dmg = 1; dmg <= x; dmg++) {
+            // Don't kill yourself in the process
+            if (validP.equals("Player") && aiLife <= ComputerUtilCombat.predictDamageTo(ai, dmg, source, false)) {
+                break;
+            }
+            for (Player opp : ai.getOpponents()) {
+                if ((validP.equals("Player") || validP.contains("Opponent"))
+                        && (opp.getLife() <= ComputerUtilCombat.predictDamageTo(opp, dmg, source, false))) {
+                    bestOpp = opp;
+                }
+            }
+        }
+
+        return bestOpp;
+    }
+
     private int evaluateDamageAll(Player ai, SpellAbility sa, final Card source, int dmg) {
-        Player opp = ComputerUtil.getOpponentFor(ai);
+        final Player opp = ai.getWeakestOpponent();
         final CardCollection humanList = getKillableCreatures(sa, opp, dmg);
         CardCollection computerList = getKillableCreatures(sa, ai, dmg);
 
@@ -96,12 +137,6 @@ public class  DamageAllAi extends SpellAbilityAi {
         // Don't kill yourself
         if (validP.equals("Player") && (ai.getLife() <= ComputerUtilCombat.predictDamageTo(ai, dmg, source, false))) {
             return -1;
-        }
-
-        // if we can kill human, do it
-        if ((validP.equals("Player") || validP.contains("Opponent"))
-                && (opp.getLife() <= ComputerUtilCombat.predictDamageTo(opp, dmg, source, false))) {
-            return Integer.MAX_VALUE;
         }
 
 		int minGain = 200; // The minimum gain in destroyed creatures

@@ -2685,17 +2685,15 @@ public class ComputerUtil {
     }
 
 
+    @Deprecated
     public static final Player getOpponentFor(final Player player) {
-        Player opponent = null;
-        int minLife = Integer.MAX_VALUE;
+        // This method is deprecated and currently functions as a synonym for player.getWeakestOpponent
+        // until it can be replaced everywhere in the code.
 
-        for (Player p : player.getOpponents()) {
-            if (p.getLife() < minLife) {
-                opponent = p;
-                minLife = p.getLife();
-            }
-        }
-
+        // Consider replacing calls to this method either with a multiplayer-friendly determination of
+        // opponent that contextually makes the most sense, or with a direct call to player.getWeakestOpponent
+        // where that is applicable and makes sense from the point of view of multiplayer AI logic.
+        Player opponent = player.getWeakestOpponent();
         if (opponent != null) {
             return opponent;
         }
