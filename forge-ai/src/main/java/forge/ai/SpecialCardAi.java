@@ -28,6 +28,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
+import forge.game.combat.Combat;
 import forge.game.cost.CostPart;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
@@ -37,6 +38,7 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -252,6 +254,42 @@ public class SpecialCardAi {
         }
     }
 
+    // Electrostatic Pummeler
+    public static class ElectrostaticPummeler {
+        public static boolean considerCombatTrick(Player ai, SpellAbility sa) {
+            // Activate Electrostatic Pummeler's pump only as a combat trick
+            final Card source = sa.getHostCard();
+            Game game = ai.getGame();
+            Combat combat = game.getCombat();
+
+            if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                return false;
+            }
+            if (combat != null) {
+                if (combat.getDefenderByAttacker(source) instanceof Card) {
+                    if (source.getNetPower() > Aggregates.sum(combat.getBlockers(source), CardPredicates.Accessors.fnGetNetToughness)
+                            + ((Card)combat.getDefenderByAttacker(source)).getCounters(CounterType.LOYALTY)) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        public static Pair<Integer, Integer> getPumpedPT(Player ai, SpellAbility sa, int power, int toughness, List<String> kws) {
+            int energy = sa.getHostCard().getController().getCounters(CounterType.ENERGY);
+            if (energy > 0) {
+                int numActivations = energy / 3;
+                for (int i = 0; i < numActivations; i++) {
+                    power *= 2;
+                    power *= 2;
+                }
+            }
+
+            return Pair.of(power, toughness);
+        }
+    }
     // Force of Will
     public static class ForceOfWill {
         public static boolean consider(Player ai, SpellAbility sa) {

@@ -1423,14 +1423,9 @@ public class ComputerUtilCard {
         // Electrostatic Pummeler
         for (SpellAbility ab : c.getSpellAbilities()) {
             if ("Pummeler".equals(ab.getParam("AILogic"))) {
-                int energy = c.getController().getCounters(CounterType.ENERGY);
-                if (energy > 0) {
-                    int numActivations = energy / 3;
-                    for (int i = 0; i < numActivations; i++) {
-                        power *= 2;
-                        toughness *= 2;
-                    }
-                }
+                Pair<Integer, Integer> newPT = SpecialCardAi.ElectrostaticPummeler.getPumpedPT(ai, sa, power, toughness, kws);
+                power = newPT.getLeft();
+                toughness = newPT.getRight();
             }
         }
 

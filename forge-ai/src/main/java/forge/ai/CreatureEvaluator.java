@@ -1,7 +1,6 @@
 package forge.ai;
 
 import com.google.common.base.Function;
-
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
@@ -219,7 +218,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
                     && !sa.usesTargeting()
                     && (!sa.hasParam("Defined") || "Self".equals(sa.getParam("Defined")))) {
                 if (sa.getPayCosts() != null && sa.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
-                    // Electrostatic Pummeler
+                    // Electrostatic Pummeler, can be expanded for similar cards
                     int initPower = getEffectivePower(sa.getHostCard());
                     int pumpedPower = initPower;
                     int energy = sa.getHostCard().getController().getCounters(CounterType.ENERGY);
