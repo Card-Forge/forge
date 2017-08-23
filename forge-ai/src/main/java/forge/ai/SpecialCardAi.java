@@ -283,7 +283,7 @@ public class SpecialCardAi {
                 int numActivations = energy / 3;
                 for (int i = 0; i < numActivations; i++) {
                     power *= 2;
-                    power *= 2;
+                    toughness *= 2;
                 }
             }
 
