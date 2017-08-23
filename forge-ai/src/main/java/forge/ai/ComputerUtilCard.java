@@ -1,22 +1,9 @@
 package forge.ai;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.MutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
-
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -29,15 +16,7 @@ import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactory;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.CostPayEnergy;
@@ -55,6 +34,12 @@ import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.MutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 
 public class ComputerUtilCard {
@@ -1418,8 +1403,7 @@ public class ComputerUtilCard {
      * @return
      */
     public static Card getPumpedCreature(final Player ai, final SpellAbility sa,
-            final Card c, final int toughness, final int power,
-            final List<String> keywords) {
+            final Card c, int toughness, int power, final List<String> keywords) {
         Card pumped = CardFactory.copyCard(c, true);
         pumped.setSickness(c.hasSickness());
         final long timestamp = c.getGame().getNextTimestamp();
@@ -1432,8 +1416,23 @@ public class ComputerUtilCard {
             }
         }
 
+        // Berserk
         final boolean isBerserk = "Berserk".equals(sa.getParam("AILogic"));
         final int berserkPower = isBerserk ? c.getCurrentPower() : 0;
+
+        // Electrostatic Pummeler
+        for (SpellAbility ab : c.getSpellAbilities()) {
+            if ("Pummeler".equals(ab.getParam("AILogic"))) {
+                int energy = c.getController().getCounters(CounterType.ENERGY);
+                if (energy > 0) {
+                    int numActivations = energy / 3;
+                    for (int i = 0; i < numActivations; i++) {
+                        power *= 2;
+                        toughness *= 2;
+                    }
+                }
+            }
+        }
 
         pumped.addNewPT(c.getCurrentPower(), c.getCurrentToughness(), timestamp);
         pumped.addTempPowerBoost(c.getTempPowerBoost() + power + berserkPower);
