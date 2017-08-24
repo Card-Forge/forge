@@ -456,6 +456,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         view.updateState(this);
     }
 
+    public void updateAbilityTextForView() {
+        view.getCurrentState().updateKeywords(this, getCurrentState());
+        view.getCurrentState().updateAbilityText(this, getCurrentState());
+    }
+
     public void setPreFaceDownState(CardStateName preCharacteristic) {
         preFaceDownState = preCharacteristic;
     }

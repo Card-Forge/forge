@@ -516,6 +516,7 @@ public final class StaticAbilityContinuous {
                         affectedCard.getCurrentState().addStaticAbility(stAb);
                     }
                 }
+                affectedCard.updateAbilityTextForView();
             }
 
             // Change color words
