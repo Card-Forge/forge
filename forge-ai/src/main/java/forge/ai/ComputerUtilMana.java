@@ -224,7 +224,7 @@ public class ComputerUtilMana {
                             && ai.getController().isAI()
                             && ma.getPayCosts().hasTapCost()
                             && sa.getTargets().getTargetCards().contains(ma.getHostCard())) {
-                        // do not activate pump instants targeting creatures by tapping targeted
+                        // do not activate pump instants/sorceries targeting creatures by tapping targeted
                         // creatures for mana (for example, Servant of the Conduit)
                         continue;
                     }
