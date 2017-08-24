@@ -203,20 +203,33 @@ public class ComputerUtilMana {
                 continue;
             }
 
-            if (sa.getHostCard() != null && sa.getApi() == ApiType.Animate) {
-                // For abilities like Genju of the Cedars, make sure that we're not activating the aura ability by tapping the enchanted card for mana
-                if (sa.getHostCard().isAura() && "Enchanted".equals(sa.getParam("Defined"))
-                        && ma.getHostCard() == sa.getHostCard().getEnchantingCard()
-                        && ma.getPayCosts().hasTapCost()) {
-                    continue;
+            if (sa.getHostCard() != null) {
+                if (sa.getApi() == ApiType.Animate) {
+                    // For abilities like Genju of the Cedars, make sure that we're not activating the aura ability by tapping the enchanted card for mana
+                    if (sa.getHostCard().isAura() && "Enchanted".equals(sa.getParam("Defined"))
+                            && ma.getHostCard() == sa.getHostCard().getEnchantingCard()
+                            && ma.getPayCosts().hasTapCost()) {
+                        continue;
+                    }
+
+                    // If a manland was previously animated this turn, do not tap it to animate another manland
+                    if (sa.getHostCard().isLand() && ma.getHostCard().isLand()
+                            && ai.getController() instanceof PlayerControllerAi
+                            && AnimateAi.isAnimatedThisTurn(ai, ma.getHostCard())) {
+                        continue;
+                    }
+                } else if (sa.getApi() == ApiType.Pump) {
+                    if ((sa.getHostCard().isInstant() || sa.getHostCard().isSorcery())
+                            && ma.getHostCard().isCreature()
+                            && ai.getController().isAI()
+                            && ma.getPayCosts().hasTapCost()
+                            && sa.getTargets().getTargetCards().contains(ma.getHostCard())) {
+                        // do not activate pump instants targeting creatures by tapping targeted
+                        // creatures for mana (for example, Servant of the Conduit)
+                        continue;
+                    }
                 }
 
-                // If a manland was previously animated this turn, do not tap it to animate another manland
-                if (sa.getHostCard().isLand() && ma.getHostCard().isLand() 
-                        && ai.getController() instanceof PlayerControllerAi
-                        && AnimateAi.isAnimatedThisTurn(ai, ma.getHostCard())) {
-                    continue;
-                }
             }
 
             SpellAbility paymentChoice = ma;
