@@ -280,7 +280,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new NoteLabel("Enables throttling-based optimization of targeting overlay to reduce CPU use (only disable if you experience choppiness on older hardware, requires starting a new match)."), descriptionConstraints);
 
         pnlPrefs.add(cbTargOverlayDarkArrows, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Makes the targeting overlay arrows darker for creatures attacking planeswalkers, to make those arrows easier to distinguish from the blocker arrows."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel("Makes the targeting overlay arrows darker for creatures attacking planeswalkers, to make those arrows easier to distinguish from the blocker arrows (requires a restart)."), descriptionConstraints);
 
         pnlPrefs.add(cbpCounterDisplayType, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel("Selects the style of the in-game counter display for cards. Text-based is a new tab-like display on the cards. Image-based is the old counter image. Hybrid displays both at once."), descriptionConstraints);

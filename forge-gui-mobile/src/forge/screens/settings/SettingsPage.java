@@ -141,7 +141,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_TARGETING_DARKER_PW_ARROWS,
                 "Darker Arrows for Planeswalker Attackers",
-                "Makes targeting arrows darker for creatures attacking planeswalkers."),
+                "Makes targeting arrows darker for creatures attacking planeswalkers (requires restart)."),
                 1);
 
         //Random Deck Generation
