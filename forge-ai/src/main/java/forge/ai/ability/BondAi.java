@@ -36,11 +36,11 @@ public final class BondAi extends SpellAbilityAi {
      * <p>
      * bondCanPlayAI.
      * </p>
+     * @param aiPlayer
+     *            a {@link forge.game.player.Player} object.
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
-     * 
+     *
      * @return a boolean.
      */
     @Override
@@ -52,5 +52,10 @@ public final class BondAi extends SpellAbilityAi {
     @Override
     protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
         return ComputerUtilCard.getBestCreatureAI(options);
+    }
+
+    @Override
+    protected boolean doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
+        return true;
     }
 }
