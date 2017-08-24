@@ -1307,7 +1307,7 @@ public class CardFactoryUtil {
 
             if (c.getCastFrom() != null && c.getCastSA() != null) {
                 int revealed = AbilityUtils.calculateAmount(c, "Revealed$Valid " + type, c.getCastSA());
-                int ctrl = AbilityUtils.calculateAmount(c, "Count$LastStateBattlefield " + type + ".YouCtrl", c.getCastSA());
+                int ctrl = AbilityUtils.calculateAmount(c, "Count$Valid " + type + ".inZoneBattlefield+YouCtrl", c.getCastSA());
                 if (revealed + ctrl >= 1) {
                     return doXMath(StringUtils.isNumeric(sq[1]) ? Integer.parseInt(sq[1]) : xCount(c, c.getSVar(sq[1])), m, c);
                 }

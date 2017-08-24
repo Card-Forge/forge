@@ -253,7 +253,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             final String type = this.getPresenceCondition();
 
             int revealed = AbilityUtils.calculateAmount(host, "Revealed$Valid " + type, host.getCastSA());
-            int ctrl = AbilityUtils.calculateAmount(host, "Count$LastStateBattlefield " + type + ".YouCtrl", host.getCastSA());
+            int ctrl = AbilityUtils.calculateAmount(host, "Count$Valid " + type + ".inZoneBattlefield+YouCtrl", host.getCastSA());
 
             if (revealed + ctrl == 0) {
                 return false;
