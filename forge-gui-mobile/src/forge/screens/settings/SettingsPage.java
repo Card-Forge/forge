@@ -139,6 +139,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 "Use Escape Key To End Turn",
                 "Allows to use Esc keyboard shortcut to end turn prematurely"),
                 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_TARGETING_DARKER_PW_ARROWS,
+                "Darker Arrows for Planeswalker Attackers",
+                "Makes targeting arrows darker for creatures attacking planeswalkers."),
+                1);
 
         //Random Deck Generation
         lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_NOSMALL,

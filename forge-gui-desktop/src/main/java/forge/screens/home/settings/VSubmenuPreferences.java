@@ -80,6 +80,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbAltSoundSystem = new OptionsCheckBox("Use Alternate Sound System");
     private final JCheckBox cbUiForTouchScreen = new OptionsCheckBox("Enhance UI for Touchscreens");
     private final JCheckBox cbTimedTargOverlay = new OptionsCheckBox("Enable Targeting Overlay Optimization");
+    private final JCheckBox cbTargOverlayDarkArrows = new OptionsCheckBox("Darker Arrows for Planeswalker Attackers");
     private final JCheckBox cbCompactMainMenu = new OptionsCheckBox("Use Compact Main Sidebar Menu");
     private final JCheckBox cbDetailedPaymentDesc = new OptionsCheckBox("Spell Description in Payment Prompt");
     private final JCheckBox cbPromptFreeBlocks = new OptionsCheckBox("Free Block Handling");
@@ -276,7 +277,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new NoteLabel("Stacks identical creatures on the battlefield like lands, artifacts, and enchantments."), descriptionConstraints);
 
         pnlPrefs.add(cbTimedTargOverlay, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Enables throttling-based optimization of targeting overlay to reduce CPU use (only disable if you experience choppiness on older hardware, requires starting a new match)"), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel("Enables throttling-based optimization of targeting overlay to reduce CPU use (only disable if you experience choppiness on older hardware, requires starting a new match)."), descriptionConstraints);
+
+        pnlPrefs.add(cbTargOverlayDarkArrows, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Makes the targeting overlay arrows darker for creatures attacking planeswalkers, to make those arrows easier to distinguish from the blocker arrows."), descriptionConstraints);
 
         pnlPrefs.add(cbpCounterDisplayType, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel("Selects the style of the in-game counter display for cards. Text-based is a new tab-like display on the cards. Image-based is the old counter image. Hybrid displays both at once."), descriptionConstraints);
@@ -638,6 +642,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbTimedTargOverlay() {
         return cbTimedTargOverlay;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbTargOverlayDarkArrows() {
+        return cbTargOverlayDarkArrows;
     }
 
     public final JCheckBox getCbUiForTouchScreen() {

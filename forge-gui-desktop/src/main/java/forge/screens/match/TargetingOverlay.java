@@ -64,7 +64,8 @@ public class TargetingOverlay {
     private final CMatchUI matchUI;
     private final OverlayPanel pnl = new OverlayPanel();
     private final List<CardPanel> cardPanels = new ArrayList<CardPanel>();
-    private final List<Arc> arcsFoe = new ArrayList<Arc>();
+    private final List<Arc> arcsFoeAtk = new ArrayList<Arc>();
+    private final List<Arc> arcsFoeDef = new ArrayList<Arc>();
     private final List<Arc> arcsFriend = new ArrayList<Arc>();
     private final ArcAssembler assembler = new ArcAssembler();
     private final Set<Integer> stackItemIDs = new HashSet<Integer>();
@@ -87,6 +88,14 @@ public class TargetingOverlay {
     private int allowedUpdates = 0;
     private final int MAX_CONSECUTIVE_UPDATES = 1;
 
+    private enum ArcConnection {
+        Friends,
+        FoesAttacking,
+        FoesBlocking,
+        FriendsStackTargeting,
+        FoesStackTargeting
+    }
+
     /**
      * Semi-transparent overlay panel. Should be used with layered panes.
      */
@@ -107,7 +116,8 @@ public class TargetingOverlay {
     // Re-added as the new version was causing issues for at least one user.
     private void assembleArcs(final CombatView combat) {
         //List<VField> fields = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
-        arcsFoe.clear();
+        arcsFoeAtk.clear();
+        arcsFoeDef.clear();
         arcsFriend.clear();
         cardPanels.clear();
         cardsVisualized.clear();
@@ -183,12 +193,14 @@ public class TargetingOverlay {
                 PlayerView activator = instance.getActivatingPlayer();
                 while (instance != null) {
                     for (CardView c : instance.getTargetCards()) {
-                        addArc(endpoints.get(c.getId()), itemLocOnScreen, activator.isOpponentOf(c.getController()));
+                        addArc(endpoints.get(c.getId()), itemLocOnScreen, activator.isOpponentOf(c.getController()) ?
+                                ArcConnection.FoesStackTargeting : ArcConnection.FriendsStackTargeting);
                     }
                     for (PlayerView p : instance.getTargetPlayers()) {
                         Point point = getPlayerTargetingArrowPoint(p, locOnScreen);
                         if(point != null) {
-                            addArc(point, itemLocOnScreen, activator.isOpponentOf(p));
+                            addArc(point, itemLocOnScreen, activator.isOpponentOf(p) ?
+                                    ArcConnection.FoesStackTargeting : ArcConnection.FriendsStackTargeting);
                         }
                     }
                     instance = instance.getSubInstance();
@@ -232,7 +244,8 @@ public class TargetingOverlay {
             }
         }
         //List<VField> fields = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
-        arcsFoe.clear();
+        arcsFoeAtk.clear();
+        arcsFoeDef.clear();
         arcsFriend.clear();
         cardPanels.clear();
         cardsVisualized.clear();
@@ -339,12 +352,14 @@ public class TargetingOverlay {
                 PlayerView activator = instance.getActivatingPlayer();
                 while (instance != null) {
                     for (CardView c : instance.getTargetCards()) {
-                        addArc(endpoints.get(c.getId()), itemLocOnScreen, activator.isOpponentOf(c.getController()));
+                        addArc(endpoints.get(c.getId()), itemLocOnScreen, activator.isOpponentOf(c.getController()) ?
+                                ArcConnection.FoesStackTargeting : ArcConnection.FriendsStackTargeting);
                     }
                     for (PlayerView p : instance.getTargetPlayers()) {
                         Point point = getPlayerTargetingArrowPoint(p, locOnScreen);
                         if (point != null) {
-                            addArc(point, itemLocOnScreen, activator.isOpponentOf(p));
+                            addArc(point, itemLocOnScreen, activator.isOpponentOf(p) ?
+                                    ArcConnection.FoesStackTargeting : ArcConnection.FriendsStackTargeting);
                         }
                     }
                     instance = instance.getSubInstance();
@@ -365,16 +380,22 @@ public class TargetingOverlay {
         return point;
     }
 
-    private void addArc(Point end, Point start, boolean connectsFoes) {
+    private void addArc(Point end, Point start, ArcConnection connects) {
         if (start == null || end == null) {
             return;
         }
 
-        if (connectsFoes) {
-            arcsFoe.add(new Arc(end, start));
-        }
-        else {
-            arcsFriend.add(new Arc(end, start));
+        switch (connects) {
+            case Friends:
+            case FriendsStackTargeting:
+                arcsFriend.add(new Arc(end, start));
+                break;
+            case FoesAttacking:
+                arcsFoeAtk.add(new Arc(end, start));
+                break;
+            case FoesBlocking:
+            case FoesStackTargeting:
+                arcsFoeDef.add(new Arc(end, start));
         }
     }
 
@@ -393,26 +414,26 @@ public class TargetingOverlay {
 
         if (null != enchanting) {
             if (enchanting.getController() != null && !enchanting.getController().equals(c.getController())) {
-                addArc(endpoints.get(enchanting.getId()), endpoints.get(c.getId()), false);
+                addArc(endpoints.get(enchanting.getId()), endpoints.get(c.getId()), ArcConnection.Friends);
                 cardsVisualized.add(enchanting);
             }
         }
         if (null != equipping) {
             if (equipping.getController() != null && !equipping.getController().equals(c.getController())) {
-                addArc(endpoints.get(equipping.getId()), endpoints.get(c.getId()), false);
+                addArc(endpoints.get(equipping.getId()), endpoints.get(c.getId()), ArcConnection.Friends);
                 cardsVisualized.add(equipping);
             }
         }
         if (null != fortifying) {
             if (fortifying.getController() != null && !fortifying.getController().equals(c.getController())) {
-                addArc(endpoints.get(fortifying.getId()), endpoints.get(c.getId()), false);
+                addArc(endpoints.get(fortifying.getId()), endpoints.get(c.getId()), ArcConnection.Friends);
                 cardsVisualized.add(fortifying);
             }
         }
         if (null != enchantedBy) {
             for (final CardView enc : enchantedBy) {
                 if (enc.getController() != null && !enc.getController().equals(c.getController())) {
-                    addArc(endpoints.get(c.getId()), endpoints.get(enc.getId()), false);
+                    addArc(endpoints.get(c.getId()), endpoints.get(enc.getId()), ArcConnection.Friends);
                     cardsVisualized.add(enc);
                 }
             }
@@ -420,7 +441,7 @@ public class TargetingOverlay {
         if (null != equippedBy) {
             for (final CardView eq : equippedBy) {
                 if (eq.getController() != null && !eq.getController().equals(c.getController())) {
-                    addArc(endpoints.get(c.getId()), endpoints.get(eq.getId()), false);
+                    addArc(endpoints.get(c.getId()), endpoints.get(eq.getId()), ArcConnection.Friends);
                     cardsVisualized.add(eq);
                 }
             }
@@ -428,31 +449,31 @@ public class TargetingOverlay {
         if (null != fortifiedBy) {
             for (final CardView eq : fortifiedBy) {
                 if (eq.getController() != null && !eq.getController().equals(c.getController())) {
-                    addArc(endpoints.get(c.getId()), endpoints.get(eq.getId()), false);
+                    addArc(endpoints.get(c.getId()), endpoints.get(eq.getId()), ArcConnection.Friends);
                     cardsVisualized.add(eq);
                 }
             }
         }
         if (null != paired) {
-            addArc(endpoints.get(paired.getId()), endpoints.get(c.getId()), false);
+            addArc(endpoints.get(paired.getId()), endpoints.get(c.getId()), ArcConnection.Friends);
             cardsVisualized.add(paired);
         }
         if (null != combat) {
             final GameEntityView defender = combat.getDefender(c);
             // if c is attacking a planeswalker
             if (defender instanceof CardView) {
-                addArc(endpoints.get(defender.getId()), endpoints.get(c.getId()), true);
+                addArc(endpoints.get(defender.getId()), endpoints.get(c.getId()), ArcConnection.FoesAttacking);
             }
             // if c is a planeswalker that's being attacked
             for (final CardView pwAttacker : combat.getAttackersOf(c)) {
-                addArc(endpoints.get(c.getId()), endpoints.get(pwAttacker.getId()), true);
+                addArc(endpoints.get(c.getId()), endpoints.get(pwAttacker.getId()), ArcConnection.FoesAttacking);
             }
             for (final CardView attackingCard : combat.getAttackers()) {
                 final Iterable<CardView> cards = combat.getPlannedBlockers(attackingCard);
                 if (cards == null) continue;
                 for (final CardView blockingCard : cards) {
                     if (!attackingCard.equals(c) && !blockingCard.equals(c)) { continue; }
-                    addArc(endpoints.get(attackingCard.getId()), endpoints.get(blockingCard.getId()), true);
+                    addArc(endpoints.get(attackingCard.getId()), endpoints.get(blockingCard.getId()), ArcConnection.FoesBlocking);
                     cardsVisualized.add(blockingCard);
                 }
                 cardsVisualized.add(attackingCard);
@@ -552,6 +573,7 @@ public class TargetingOverlay {
             super.paintComponent(g);
 
             final ArcState overlaystate = matchUI.getCDock().getArcState();
+            final boolean darkerPWArrows = FModel.getPreferences().getPrefBoolean(FPref.UI_TARGETING_DARKER_PW_ARROWS);
 
             // Arcs are off
             if (overlaystate == ArcState.OFF) { return; }
@@ -568,7 +590,7 @@ public class TargetingOverlay {
                 }
             }
 
-            if (arcsFoe.isEmpty() && arcsFriend.isEmpty()) {
+            if (arcsFoeAtk.isEmpty() && arcsFoeDef.isEmpty() && arcsFriend.isEmpty()) {
                 if (assembled) {
                     // We still need to repaint to get rid of visual artifacts
                     // The original (non-throttled) code did not do this repaint.
@@ -589,9 +611,12 @@ public class TargetingOverlay {
             if (colorCombat.getAlpha() == 0) {
                 colorCombat = new Color(255, 0, 0, 153); 
             }
+            // For planeswalker attackers, use a somewhat darker shade if the player opts in
+            Color colorCombatAtk = darkerPWArrows ? colorCombat.darker() : colorCombat;
 
             drawArcs(g2d, colorOther, arcsFriend);
-            drawArcs(g2d, colorCombat, arcsFoe);
+            drawArcs(g2d, colorCombatAtk, arcsFoeAtk);
+            drawArcs(g2d, colorCombat, arcsFoeDef);
 
             if (assembled || !useThrottling) {
                 FView.SINGLETON_INSTANCE.getFrame().repaint(); // repaint the match UI

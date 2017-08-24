@@ -22,6 +22,8 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
+import forge.model.FModel;
+import forge.properties.ForgePreferences;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
@@ -33,47 +35,84 @@ public class TargetingOverlay {
     private static final float BORDER_THICKNESS = Utils.scale(1);
     private static final float ARROW_THICKNESS = Utils.scale(5);
     private static final float ARROW_SIZE = 3 * ARROW_THICKNESS;
-    private static FSkinColor friendColor, foeColor;
+    private static FSkinColor friendColor, foeAtkColor, foeDefColor;
+
+    public enum ArcConnection {
+        Friends,
+        FoesAttacking,
+        FoesBlocking,
+        FriendsStackTargeting,
+        FoesStackTargeting
+    }
 
     public static void updateColors() {
+        final boolean darkerPWArrows = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_TARGETING_DARKER_PW_ARROWS);
+
         friendColor = FSkinColor.get(Colors.CLR_NORMAL_TARGETING_ARROW);
         if (friendColor.getAlpha() == 0) {
             friendColor = FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(153f / 255f);
         }
 
-        foeColor = FSkinColor.get(Colors.CLR_COMBAT_TARGETING_ARROW);
-        if (foeColor.getAlpha() == 0) {
-            foeColor = FSkinColor.getStandardColor(new Color(1, 0, 0, 153 / 255f));
+        foeDefColor = FSkinColor.get(Colors.CLR_COMBAT_TARGETING_ARROW);
+        if (foeDefColor.getAlpha() == 0) {
+            foeDefColor = FSkinColor.getStandardColor(new Color(1, 0, 0, 153 / 255f));
         }
+
+        foeAtkColor = darkerPWArrows ? foeDefColor.darker().stepColor(-60) : foeDefColor;
     }
 
     private TargetingOverlay() {
     }
 
     public static void drawArrow(Graphics g, CardView startCard, CardView endCard) {
+        ArcConnection connects;
+        if (startCard.getOwner().isOpponentOf((endCard.getOwner()))) {
+            if (startCard.isAttacking()) {
+                connects = ArcConnection.FoesAttacking;
+            } else {
+                connects = ArcConnection.FoesBlocking;
+            }
+        } else {
+            connects = ArcConnection.Friends;
+        }
+
         drawArrow(g, CardAreaPanel.get(startCard).getTargetingArrowOrigin(),
                     CardAreaPanel.get(endCard).getTargetingArrowOrigin(),
-                    startCard.getOwner().isOpponentOf(endCard.getOwner()));
+                    connects);
     }
-    public static void drawArrow(Graphics g, Vector2 start, CardView targetCard, boolean connectsFoes) {
+    public static void drawArrow(Graphics g, Vector2 start, CardView targetCard, ArcConnection connects) {
         drawArrow(g, start,
                 CardAreaPanel.get(targetCard).getTargetingArrowOrigin(),
-                connectsFoes);
+                connects);
     }
-    public static void drawArrow(Graphics g, Vector2 start, PlayerView targetPlayer, boolean connectsFoes) {
+    public static void drawArrow(Graphics g, Vector2 start, PlayerView targetPlayer, ArcConnection connects) {
         drawArrow(g, start,
                 MatchController.getView().getPlayerPanel(targetPlayer).getAvatar().getTargetingArrowOrigin(),
-                connectsFoes);
+                connects);
     }
-    public static void drawArrow(Graphics g, FDisplayObject startCardDisplay, FDisplayObject endCardDisplay, boolean connectsFoes) {
+    public static void drawArrow(Graphics g, FDisplayObject startCardDisplay, FDisplayObject endCardDisplay, ArcConnection connects) {
         drawArrow(g, CardAreaPanel.getTargetingArrowOrigin(startCardDisplay, false),
                 CardAreaPanel.getTargetingArrowOrigin(endCardDisplay, false),
-                connectsFoes);
+                connects);
     }
-    public static void drawArrow(Graphics g, Vector2 start, Vector2 end, boolean connectsFoes) {
+    public static void drawArrow(Graphics g, Vector2 start, Vector2 end, ArcConnection connects) {
         if (start == null || end == null) { return; }
 
-        FSkinColor color = connectsFoes ? foeColor : friendColor;
+        FSkinColor color = foeDefColor;
+
+        switch (connects) {
+            case Friends:
+            case FriendsStackTargeting:
+                color = friendColor;
+                break;
+            case FoesAttacking:
+                color = foeAtkColor;
+                break;
+            case FoesBlocking:
+            case FoesStackTargeting:
+                color = foeDefColor;
+        }
+
         g.drawArrow(BORDER_THICKNESS, ARROW_THICKNESS, ARROW_SIZE, color, start.x, start.y, end.x, end.y);
     }
 }
