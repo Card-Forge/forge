@@ -125,6 +125,7 @@ public class ManaEffectAi extends SpellAbilityAi {
             for (CostPart part : sa.getPayCosts().getCostParts()) {
                 if (part instanceof CostRemoveCounter) {
                     ctrType = ((CostRemoveCounter)part).counter;
+                    break;
                 }
             }
             manaReceived = host.getCounters(ctrType);
