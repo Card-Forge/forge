@@ -90,6 +90,13 @@ public class ComputerUtilCost {
                     return false;
                 }
 
+                // Remove X counters - set ChosenX to max possible value here, the SAs should correct that
+                // value later as the AI decides what to do (in checkApiLogic / checkAiLogic)
+                final String sVar = sa.getSVar(remCounter.getAmount());
+                if (sVar.equals("XChoice")) {
+                    sa.setSVar("ChosenX", String.valueOf(source.getCounters(type)));
+                }
+
                 // check the sa what the PaymentDecision is.
                 // ignore Loyality abilities with Zero as Cost
                 if (sa != null && !CounterType.LOYALTY.equals(type)) {

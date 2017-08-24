@@ -7,7 +7,7 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ KI | 
 A:AB$ Pump | Cost$ 1 SubCounter<X/KI> | Defined$ Self | NumAtt$ +Y | References$ X,Y | SpellDescription$ For each counter removed, CARDNAME gets +2/+0 until end of turn.
 SVar:X:XChoice
 #ChosenX SVar created by Cost payment
-SVar:Y:Number$2/Times.ChosenX
+SVar:Y:SVar$ChosenX/Times.2
 SVar:RemRandomDeck:True
 DeckHints:Type$Spirit|Arcane
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blademane_baku.jpg

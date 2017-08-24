@@ -5,7 +5,10 @@ import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CounterType;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostRemoveCounter;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -58,6 +61,19 @@ public class TapAi extends TapAiBase {
                 return false;
             }
         } else {
+            if ("TapForXCounters".equals(sa.getParam("AILogic"))) {
+                // e.g. Waxmane Baku
+                CounterType ctrType = CounterType.KI;
+                for (CostPart part : sa.getPayCosts().getCostParts()) {
+                    if (part instanceof CostRemoveCounter) {
+                        ctrType = ((CostRemoveCounter)part).counter;
+                    }
+                }
+
+                int numTargetable = Math.min(sa.getHostCard().getCounters(ctrType), ai.getOpponents().getCreaturesInPlay().size());
+                sa.setSVar("ChosenX", String.valueOf(numTargetable));
+            }
+
             sa.resetTargets();
             if (!tapPrefTargeting(ai, source, tgt, sa, false)) {
                 return false;

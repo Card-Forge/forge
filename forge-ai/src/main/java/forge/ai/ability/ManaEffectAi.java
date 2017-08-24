@@ -12,10 +12,9 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostRemoveCounter;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -116,7 +115,21 @@ public class ManaEffectAi extends SpellAbilityAi {
         manaReceived *= sa.getParam("Produced").split(" ").length;
 
         int selfCost = sa.getPayCosts().getCostMana() != null ? sa.getPayCosts().getCostMana().getMana().getCMC() : 0;
-        byte producedColor = MagicColor.fromName(sa.getParam("Produced"));
+
+        String produced = sa.getParam("Produced");
+        byte producedColor = produced.equals("Any") ? MagicColor.ALL_COLORS : MagicColor.fromName(produced);
+
+        if ("ChosenX".equals(sa.getParam("Amount"))
+                && sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostRemoveCounter.class)) {
+            CounterType ctrType = CounterType.KI; // Petalmane Baku
+            for (CostPart part : sa.getPayCosts().getCostParts()) {
+                if (part instanceof CostRemoveCounter) {
+                    ctrType = ((CostRemoveCounter)part).counter;
+                }
+            }
+            manaReceived = host.getCounters(ctrType);
+        }
+
         int searchCMC = numManaSrcs - selfCost + manaReceived;
 
         if ("X".equals(sa.getParam("Produced"))) {
