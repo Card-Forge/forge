@@ -11,6 +11,7 @@ import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
+import forge.game.cost.CostRemoveCounter;
 import forge.game.cost.CostTapType;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -362,6 +363,21 @@ public class PumpAi extends PumpAiBase {
         //Targeted
         if (!pumpTgtAI(ai, sa, defense, attack, false, false)) {
             return false;
+        }
+
+        if ("DebuffForXCounters".equals(sa.getParam("AILogic")) && sa.getTargetCard() != null) {
+            // e.g. Skullmane Baku
+            CounterType ctrType = CounterType.KI;
+            for (CostPart part : sa.getPayCosts().getCostParts()) {
+                if (part instanceof CostRemoveCounter) {
+                    ctrType = ((CostRemoveCounter)part).counter;
+                    break;
+                }
+            }
+
+            // Do not pay more counters than necessary to kill the targeted creature
+            int chosenX = Math.min(source.getCounters(ctrType), sa.getTargetCard().getNetToughness());
+            sa.setSVar("ChosenX", String.valueOf(chosenX));
         }
 
         return true;
