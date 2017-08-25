@@ -1114,25 +1114,53 @@ public class ComputerUtilMana {
 
     // This method can be used to estimate the total amount of mana available to the player,
     // including the mana available in that player's mana pool
-    public static int getAvailableManaEstimate(final Player ai, final boolean checkPlayable) {
-        CardCollection srcs = getAvailableManaSources(ai, checkPlayable);
+    public static int getAvailableManaEstimate(final Player p) {
         int availableMana = 0;
 
-        for (Card src : srcs) {
-            int maxProduced = 0;
-            for (SpellAbility ma : src.getManaAbilities()) {
-                int producedMana = ma.getParamOrDefault("Produced", "").split(" ").length;
-                int producedAmount = AbilityUtils.calculateAmount(src, ma.getParamOrDefault("Amount", "1"), ma);
+        final CardCollectionView list = new CardCollection(p.getCardsIn(ZoneType.Battlefield));
+        final List<Card> srcs = CardLists.filter(list, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return !c.getManaAbilities().isEmpty();
+            }
+        });
 
-                int producedTotal = producedMana * producedAmount;
-                if (producedTotal > maxProduced) {
-                    maxProduced = producedTotal;
+        int maxProduced = 0;
+        int producedWithCost = 0;
+        boolean hasSourcesWithNoManaCost = false;
+
+        for (Card src : srcs) {
+            maxProduced = 0;
+
+            for (SpellAbility ma : src.getManaAbilities()) {
+                ma.setActivatingPlayer(p);
+                if (ma.canPlay()) {
+                    int costsToActivate = ma.getPayCosts() != null && ma.getPayCosts().getCostMana() != null ? ma.getPayCosts().getCostMana().convertAmount() : 0;
+                    int producedMana = ma.getParamOrDefault("Produced", "").split(" ").length;
+                    int producedAmount = AbilityUtils.calculateAmount(src, ma.getParamOrDefault("Amount", "1"), ma);
+
+                    int producedTotal = producedMana * producedAmount - costsToActivate;
+
+                    if (costsToActivate > 0) {
+                        producedWithCost += producedTotal;
+                    } else if (!hasSourcesWithNoManaCost) {
+                        hasSourcesWithNoManaCost = true;
+                    }
+
+                    if (producedTotal > maxProduced) {
+                        maxProduced = producedTotal;
+                    }
                 }
             }
+
             availableMana += maxProduced;
         }
 
-        availableMana += ai.getManaPool().totalMana();
+        availableMana += p.getManaPool().totalMana();
+
+        if (producedWithCost > 0 && !hasSourcesWithNoManaCost) {
+            availableMana -= producedWithCost; // probably can't activate them, no other mana available
+        }
 
         return availableMana;
     }

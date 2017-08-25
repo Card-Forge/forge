@@ -95,7 +95,7 @@ public class CounterAi extends SpellAbilityAi {
 
         if (unlessCost != null && !unlessCost.endsWith(">")) {
             Player opp = tgtSA.getActivatingPlayer();
-            int usableManaSources = ComputerUtilMana.getAvailableManaEstimate(opp, true);
+            int usableManaSources = ComputerUtilMana.getAvailableManaEstimate(opp);
 
             int toPay = 0;
             boolean setPayX = false;
@@ -215,7 +215,7 @@ public class CounterAi extends SpellAbilityAi {
             final Card source = sa.getHostCard();
             if (unlessCost != null) {
                 Player opp = tgtSA.getActivatingPlayer();
-                int usableManaSources = ComputerUtilMana.getAvailableManaEstimate(opp, true);
+                int usableManaSources = ComputerUtilMana.getAvailableManaEstimate(opp);
 
                 int toPay = 0;
                 boolean setPayX = false;
