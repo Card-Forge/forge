@@ -92,7 +92,7 @@ public class ComputerUtilCost {
 
                 // Remove X counters - set ChosenX to max possible value here, the SAs should correct that
                 // value later as the AI decides what to do (in checkApiLogic / checkAiLogic)
-                if (sa.hasSVar(remCounter.getAmount())) {
+                if (sa != null && sa.hasSVar(remCounter.getAmount())) {
                     final String sVar = sa.getSVar(remCounter.getAmount());
                     if (sVar.equals("XChoice")) {
                         sa.setSVar("ChosenX", String.valueOf(source.getCounters(type)));
