@@ -44,6 +44,7 @@ public enum FSkinProp {
     CLR_OVERLAY                 (new int[] {70, 250}, PropType.COLOR),
     CLR_COMBAT_TARGETING_ARROW  (new int[] {70, 270}, PropType.COLOR),
     CLR_NORMAL_TARGETING_ARROW  (new int[] {70, 290}, PropType.COLOR),
+    CLR_PWATTK_TARGETING_ARROW  (new int[] {70, 310}, PropType.COLOR),
 
     //zone images
     IMG_ZONE_HAND        (new int[] {280, 40, 40, 40}, PropType.IMAGE),

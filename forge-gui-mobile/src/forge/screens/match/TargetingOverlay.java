@@ -46,8 +46,6 @@ public class TargetingOverlay {
     }
 
     public static void updateColors() {
-        final boolean darkerPWArrows = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_TARGETING_DARKER_PW_ARROWS);
-
         friendColor = FSkinColor.get(Colors.CLR_NORMAL_TARGETING_ARROW);
         if (friendColor.getAlpha() == 0) {
             friendColor = FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(153f / 255f);
@@ -58,7 +56,10 @@ public class TargetingOverlay {
             foeDefColor = FSkinColor.getStandardColor(new Color(1, 0, 0, 153 / 255f));
         }
 
-        foeAtkColor = darkerPWArrows ? foeDefColor.darker().stepColor(-60) : foeDefColor;
+        foeAtkColor = FSkinColor.get(Colors.CLR_PWATTK_TARGETING_ARROW);
+        if (foeAtkColor.getAlpha() == 0) {
+            foeAtkColor = FSkinColor.getStandardColor(new Color(255 / 255f, 138 / 255f, 1 / 255f, 153 / 255f));
+        }
     }
 
     private TargetingOverlay() {

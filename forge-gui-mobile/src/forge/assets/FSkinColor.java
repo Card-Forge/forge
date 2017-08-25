@@ -22,7 +22,8 @@ public class FSkinColor {
         CLR_THEME2                  (FSkinProp.CLR_THEME2),
         CLR_OVERLAY                 (FSkinProp.CLR_OVERLAY),
         CLR_COMBAT_TARGETING_ARROW  (FSkinProp.CLR_COMBAT_TARGETING_ARROW),
-        CLR_NORMAL_TARGETING_ARROW  (FSkinProp.CLR_NORMAL_TARGETING_ARROW);
+        CLR_NORMAL_TARGETING_ARROW  (FSkinProp.CLR_NORMAL_TARGETING_ARROW),
+        CLR_PWATTK_TARGETING_ARROW  (FSkinProp.CLR_PWATTK_TARGETING_ARROW);
 
         private Color color;
         private final int x, y;

@@ -573,7 +573,6 @@ public class TargetingOverlay {
             super.paintComponent(g);
 
             final ArcState overlaystate = matchUI.getCDock().getArcState();
-            final boolean darkerPWArrows = FModel.getPreferences().getPrefBoolean(FPref.UI_TARGETING_DARKER_PW_ARROWS);
 
             // Arcs are off
             if (overlaystate == ArcState.OFF) { return; }
@@ -611,8 +610,10 @@ public class TargetingOverlay {
             if (colorCombat.getAlpha() == 0) {
                 colorCombat = new Color(255, 0, 0, 153); 
             }
-            // For planeswalker attackers, use a somewhat darker shade if the player opts in
-            Color colorCombatAtk = darkerPWArrows ? colorCombat.darker() : colorCombat;
+            Color colorCombatAtk = FSkin.getColor(FSkin.Colors.CLR_PWATTK_TARGETING_ARROW).getColor();
+            if (colorCombatAtk.getAlpha() == 0) {
+                colorCombatAtk = new Color(255,138,1,153);
+            }
 
             drawArcs(g2d, colorOther, arcsFriend);
             drawArcs(g2d, colorCombatAtk, arcsFoeAtk);
