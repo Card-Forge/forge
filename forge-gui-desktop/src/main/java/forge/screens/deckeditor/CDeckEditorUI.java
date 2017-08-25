@@ -36,11 +36,7 @@ import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
-import forge.screens.deckeditor.controllers.ACEditorBase;
-import forge.screens.deckeditor.controllers.CEditorConstructed;
-import forge.screens.deckeditor.controllers.CProbabilities;
-import forge.screens.deckeditor.controllers.CStatistics;
-import forge.screens.deckeditor.controllers.DeckController;
+import forge.screens.deckeditor.controllers.*;
 import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VCardCatalog;
 import forge.screens.deckeditor.views.VCurrentDeck;
@@ -162,8 +158,13 @@ public enum CDeckEditorUI implements ICDoc {
         if (items.isEmpty()) { return; }
 
         moveAction.move(items);
-        CStatistics.SINGLETON_INSTANCE.update();
-        CProbabilities.SINGLETON_INSTANCE.update();
+
+        // Update the card statistics, except for when in a quest shop pool, where statistics make no sense
+        // and cause problems (lag, hanging) when the quest shop pool builds up
+        if (!(childController instanceof CEditorQuestCardShop)) {
+            CStatistics.SINGLETON_INSTANCE.update();
+            CProbabilities.SINGLETON_INSTANCE.update();
+        }
     }
 
     @SuppressWarnings("unchecked")
