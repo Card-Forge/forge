@@ -169,9 +169,13 @@ public class CounterAi extends SpellAbilityAi {
                 }
             }
                 
-            // should always counter CMC 1 with Mental Misstep despite a possible limitation by minimum CMC
-            if (tgtCMC == 1 && "Mental Misstep".equals(source.getName())) {
-                dontCounter = false;
+            // should not refrain from countering a  CMC X spell if that's the only CMC
+            // counterable with that particular counterspell type (e.g. Mental Misstep vs. CMC 1 spells)
+            if (sa.getParamOrDefault("ValidTgts", "").startsWith("Card.cmcEQ")) {
+                int validTgtCMC = Integer.parseInt(sa.getParam("ValidTgts").substring(10));
+                if (tgtCMC == validTgtCMC) {
+                    dontCounter = false;
+                }
             }
 
             if (dontCounter) {
