@@ -94,8 +94,11 @@ public class CounterAi extends SpellAbilityAi {
         String unlessCost = sa.hasParam("UnlessCost") ? sa.getParam("UnlessCost").trim() : null;
 
         if (unlessCost != null && !unlessCost.endsWith(">")) {
-            // Is this Usable Mana Sources? Or Total Available Mana?
-            final int usableManaSources = ComputerUtilMana.getAvailableMana(ComputerUtil.getOpponentFor(ai), true).size();
+            Player opp = tgtSA.getActivatingPlayer();
+
+            int usableManaSources = ComputerUtilMana.getAvailableMana(opp, true).size();
+            usableManaSources += opp.getManaPool().totalMana();
+
             int toPay = 0;
             boolean setPayX = false;
             if (unlessCost.equals("X") && source.getSVar(unlessCost).equals("Count$xPaid")) {
