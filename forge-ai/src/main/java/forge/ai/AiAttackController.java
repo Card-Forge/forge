@@ -471,6 +471,8 @@ public class AiAttackController {
             }
         }
 
+        remainingAttackers.removeAll(unblockedAttackers);
+
         for (Card blocker : this.blockers) {
             if (blocker.hasKeyword("CARDNAME can block any number of creatures.")
                     || blocker.hasKeyword("CARDNAME can block an additional ninety-nine creatures.")) {
