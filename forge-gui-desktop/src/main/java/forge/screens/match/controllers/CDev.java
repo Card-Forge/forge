@@ -36,15 +36,16 @@ public final class CDev implements ICDoc {
         view.getLblTutor().addMouseListener(madTutor);
         view.getLblCardToHand().addMouseListener(madCardToHand);
         view.getLblExileFromHand().addMouseListener(madExileFromHand);
+        view.getLblCardToBattlefield().addMouseListener(madCardToBattlefield);
         view.getLblCardToLibrary().addMouseListener(madCardToLibrary);
         view.getLblCardToGraveyard().addMouseListener(madCardToGraveyard);
         view.getLblCardToExile().addMouseListener(madCardToExile);
+        view.getLblRepeatAddCard().addMouseListener(madRepeatAddCard);
         view.getLblCounterPermanent().addMouseListener(madCounter);
         view.getLblTapPermanent().addMouseListener(madTap);
         view.getLblUntapPermanent().addMouseListener(madUntap);
         view.getLblSetLife().addMouseListener(madLife);
         view.getLblWinGame().addMouseListener(madWinGame);
-        view.getLblCardToBattlefield().addMouseListener(madCardToBattlefield);
         view.getLblExileFromPlay().addMouseListener(madExileFromPlay);
         view.getLblRemoveFromGame().addMouseListener(madRemoveFromGame);
         view.getLblRiggedRoll().addMouseListener(madRiggedRoll);
@@ -166,13 +167,22 @@ public final class CDev implements ICDoc {
         getController().cheat().addCardToExile();
     }
 
+    private final MouseListener madRepeatAddCard = new MouseAdapter() {
+        @Override
+        public void mousePressed(final MouseEvent e) {
+            repeatAddCard();
+        }
+    };
+    public void repeatAddCard() {
+        getController().cheat().repeatLastAddition();
+    }
+
     private final MouseListener madExileFromHand = new MouseAdapter() {
         @Override
         public void mousePressed(final MouseEvent e) {
             exileCardsFromHand();
         }
     };
-
     public void exileCardsFromHand() {
         getController().cheat().exileCardsFromHand();;
     }

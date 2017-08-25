@@ -1778,6 +1778,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public class DevModeCheats implements IDevModeCheats {
+        private ICardFace lastAdded;
+        private ZoneType lastAddedZone;
+        private Player lastAddedPlayer;
+        private SpellAbility lastAddedSA;
+
         private DevModeCheats() {
         }
 
@@ -2069,7 +2074,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
          */
         @Override
         public void addCardToHand() {
-            addCardToZone(ZoneType.Hand);
+            addCardToZone(ZoneType.Hand, false);
+        }
+
+        /*
+         * (non-Javadoc)
+         *
+         * @see forge.player.IDevModeCheats#addCardToBattlefield()
+         */
+        @Override
+        public void addCardToBattlefield() {
+            addCardToZone(ZoneType.Battlefield, false);
         }
 
         /*
@@ -2079,7 +2094,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
          */
         @Override
         public void addCardToLibrary() {
-            addCardToZone(ZoneType.Library);
+            addCardToZone(ZoneType.Library, false);
         }
 
         /*
@@ -2089,7 +2104,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
          */
         @Override
         public void addCardToGraveyard() {
-            addCardToZone(ZoneType.Graveyard);
+            addCardToZone(ZoneType.Graveyard, false);
         }
 
         /*
@@ -2099,11 +2114,25 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
          */
         @Override
         public void addCardToExile() {
-            addCardToZone(ZoneType.Exile);
+            addCardToZone(ZoneType.Exile, false);
         }
 
-        private void addCardToZone(ZoneType zone) {
-            final Player p = game.getPlayer(getGui().oneOrNone("Put card in " + zone.name().toLowerCase() + " for which player?",
+        /*
+         * (non-Javadoc)
+         *
+         * @see forge.player.IDevModeCheats#repeatLastAddition()
+         */
+        @Override
+        public void repeatLastAddition() {
+            addCardToZone(null, true);
+        }
+
+        private void addCardToZone(ZoneType zone, boolean repeatLast) {
+            ZoneType targetZone = repeatLast ? lastAddedZone : zone;
+            String zoneStr = targetZone != ZoneType.Battlefield ? "in " + targetZone.name().toLowerCase() : "on the battlefield";
+
+            final Player p = repeatLast ? lastAddedPlayer
+                    : game.getPlayer(getGui().oneOrNone("Put card " + zoneStr + " for which player?",
                     PlayerView.getCollection(game.getPlayers())));
             if (p == null) {
                 return;
@@ -2114,7 +2143,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             Collections.sort(faces);
 
             // use standard forge's list selection dialog
-            final ICardFace f = getGui().oneOrNone("Name the card", faces);
+            final ICardFace f = repeatLast ? lastAdded : getGui().oneOrNone("Name the card", faces);
             if (f == null) {
                 return;
             }
@@ -2124,22 +2153,49 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             game.getAction().invoke(new Runnable() {
                 @Override
                 public void run() {
-                    switch(zone) {
-                        case Hand:
-                            game.getAction().moveToHand(Card.fromPaperCard(c, p), null);
-                            break;
-                        case Library:
-                            game.getAction().moveToLibrary(Card.fromPaperCard(c, p), null);
-                            break;
-                        case Graveyard:
-                            game.getAction().moveToGraveyard(Card.fromPaperCard(c, p), null);
-                            break;
-                        case Exile:
-                            game.getAction().exile(Card.fromPaperCard(c, p), null);
-                            break;
-                        default:
-                            break;
+                    if (targetZone != ZoneType.Battlefield) {
+                        game.getAction().moveTo(targetZone, Card.fromPaperCard(c, p), null);
+                    } else {
+                        final Card forgeCard = Card.fromPaperCard(c, p);
+
+                        if (c.getRules().getType().isLand()) {
+                            // this is needed to ensure land abilities fire
+                            game.getAction().moveToHand(forgeCard, null);
+                            game.getAction().moveToPlay(forgeCard, null);
+                            // ensure triggered abilities fire
+                            game.getTriggerHandler().runWaitingTriggers();
+                        } else {
+                            final FCollectionView<SpellAbility> choices = forgeCard.getBasicSpells();
+                            if (choices.isEmpty()) {
+                                return; // when would it happen?
+                            }
+
+                            final SpellAbility sa;
+                            if (choices.size() == 1) {
+                                sa = choices.iterator().next();
+                            } else {
+                                sa = repeatLast ? lastAddedSA : getGui().oneOrNone("Choose", (FCollection<SpellAbility>) choices);
+                            }
+                            if (sa == null) {
+                                return; // happens if cancelled
+                            }
+
+                            lastAddedSA = sa;
+
+                            // this is really needed (for rollbacks at least)
+                            game.getAction().moveToHand(forgeCard, null);
+                            // Human player is choosing targets for an ability
+                            // controlled by chosen player.
+                            sa.setActivatingPlayer(p);
+                            HumanPlay.playSaWithoutPayingManaCost(PlayerControllerHuman.this, game, sa, true);
+                        }
+                        // playSa could fire some triggers
+                        game.getStack().addAllTriggeredAbilitiesToStack();
                     }
+
+                    lastAdded = f;
+                    lastAddedZone = targetZone;
+                    lastAddedPlayer = p;
                 }
             });
         }
@@ -2241,6 +2297,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     if (c == null) {
                         continue;
                     }
+                    c.getZone().remove(c);
                     c.ceaseToExist();
 
                     StringBuilder sb = new StringBuilder();
@@ -2248,71 +2305,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, sb.toString());
                 }
             }
-        }
-
-        /*
-         * (non-Javadoc)
-         * 
-         * @see forge.player.IDevModeCheats#addCardToBattlefield()
-         */
-        @Override
-        public void addCardToBattlefield() {
-            final Player p = game.getPlayer(getGui().oneOrNone("Put card in play for which player?",
-                    PlayerView.getCollection(game.getPlayers())));
-            if (p == null) {
-                return;
-            }
-
-            final CardDb carddb = FModel.getMagicDb().getCommonCards();
-            final List<ICardFace> faces = Lists.newArrayList(carddb.getAllFaces());
-            Collections.sort(faces);
-
-            // use standard forge's list selection dialog
-            final ICardFace f = getGui().oneOrNone("Name the card", faces);
-            if (f == null) {
-                return;
-            }
-
-            final PaperCard c = carddb.getUniqueByName(f.getName());
-
-            game.getAction().invoke(new Runnable() {
-                @Override
-                public void run() {
-                    final Card forgeCard = Card.fromPaperCard(c, p);
-
-                    if (c.getRules().getType().isLand()) {
-                        // this is needed to ensure land abilities fire
-                        game.getAction().moveToHand(forgeCard, null); 
-                        game.getAction().moveToPlay(forgeCard, null);
-                        // ensure triggered abilities fire
-                        game.getTriggerHandler().runWaitingTriggers();
-                    } else {
-                        final FCollectionView<SpellAbility> choices = forgeCard.getBasicSpells();
-                        if (choices.isEmpty()) {
-                            return; // when would it happen?
-                        }
-
-                        final SpellAbility sa;
-                        if (choices.size() == 1) {
-                            sa = choices.iterator().next();
-                        } else {
-                            sa = getGui().oneOrNone("Choose", (FCollection<SpellAbility>) choices);
-                        }
-                        if (sa == null) {
-                            return; // happens if cancelled
-                        }
-
-                        // this is really needed (for rollbacks at least)
-                        game.getAction().moveToHand(forgeCard, null);
-                        // Human player is choosing targets for an ability
-                        // controlled by chosen player.
-                        sa.setActivatingPlayer(p);
-                        HumanPlay.playSaWithoutPayingManaCost(PlayerControllerHuman.this, game, sa, true);
-                    }
-                    // playSa could fire some triggers
-                    game.getStack().addAllTriggeredAbilitiesToStack();
-                }
-            });
         }
 
         /*

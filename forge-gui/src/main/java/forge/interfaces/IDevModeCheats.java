@@ -26,11 +26,15 @@ public interface IDevModeCheats {
 
     void addCardToHand();
 
+    void addCardToBattlefield();
+
     void addCardToLibrary();
 
     void addCardToGraveyard();
 
     void addCardToExile();
+
+    void repeatLastAddition();
 
     /*
      * Exiles cards from specified player's hand. Will prompt user for player and cards.
@@ -44,7 +48,6 @@ public interface IDevModeCheats {
 
     void removeCardsFromGame();
 
-    void addCardToBattlefield();
 
     void riggedPlanarRoll();
 
@@ -114,6 +117,9 @@ public interface IDevModeCheats {
         }
         @Override
         public void addCardToExile() {
+        }
+        @Override
+        public void repeatLastAddition() {
         }
         @Override
         public void removeCardsFromGame() {

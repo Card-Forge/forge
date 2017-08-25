@@ -72,6 +72,7 @@ public class VDev implements IVDoc<CDev>, IDevListener {
     private final DevLabel lblCardToLibrary = new DevLabel("Add Card to Library");
     private final DevLabel lblCardToGraveyard = new DevLabel("Add Card to Graveyard");
     private final DevLabel lblCardToExile = new DevLabel("Add Card to Exile");
+    private final DevLabel lblRepeatAddCard = new DevLabel("Repeat Last Add Card");
     private final DevLabel lblRemoveFromGame = new DevLabel("Remove Card from Game");
 
     private final DevLabel lblRiggedRoll = new DevLabel("Rigged Planar Roll");
@@ -88,23 +89,24 @@ public class VDev implements IVDoc<CDev>, IDevListener {
         final String halfConstraints = "w 47%!, gap 0 0 4px 0";
         final String halfConstraintsLeft = halfConstraints + ", split 2";
         viewport.setOpaque(false);
-        viewport.add(this.lblGenerateMana, constraints);
-        viewport.add(this.lblTutor, halfConstraintsLeft);
-        viewport.add(this.lblViewAll, halfConstraints);
+        viewport.add(this.lblGenerateMana, halfConstraintsLeft);
+        viewport.add(this.lblTutor, halfConstraints);
+        viewport.add(this.lblViewAll, halfConstraintsLeft);
+        viewport.add(this.lblUnlimitedLands, halfConstraints);
         viewport.add(this.lblCardToHand, halfConstraintsLeft);
         viewport.add(this.lblCardToBattlefield, halfConstraints);
-        viewport.add(this.lblExileFromHand, halfConstraintsLeft);
-        viewport.add(this.lblExileFromPlay, halfConstraints);
         viewport.add(this.lblCardToLibrary, halfConstraintsLeft);
         viewport.add(this.lblCardToGraveyard, halfConstraints);
         viewport.add(this.lblCardToExile, halfConstraintsLeft);
-        viewport.add(this.lblRemoveFromGame, halfConstraints);
-        viewport.add(this.lblSetLife, halfConstraintsLeft);
-        viewport.add(this.lblWinGame, halfConstraints);
+        viewport.add(this.lblRepeatAddCard, halfConstraints);
+        viewport.add(this.lblExileFromHand, halfConstraintsLeft);
+        viewport.add(this.lblExileFromPlay, halfConstraints);
+        viewport.add(this.lblRemoveFromGame, halfConstraintsLeft);
+        viewport.add(this.lblSetLife, halfConstraints);
+        viewport.add(this.lblCounterPermanent, constraints);
+        viewport.add(this.lblWinGame, constraints);
         viewport.add(this.lblSetupGame, halfConstraintsLeft);
         viewport.add(this.lblDumpGame, halfConstraints);
-        viewport.add(this.lblUnlimitedLands, constraints);
-        viewport.add(this.lblCounterPermanent, constraints);
         viewport.add(this.lblTapPermanent, halfConstraintsLeft);
         viewport.add(this.lblUntapPermanent, halfConstraints);
         viewport.add(this.lblRiggedRoll, halfConstraintsLeft);
@@ -218,6 +220,11 @@ public class VDev implements IVDoc<CDev>, IDevListener {
     /** @return {@link forge.screens.match.views.VDev.DevLabel} */
     public final DevLabel getLblCardToBattlefield() {
         return lblCardToBattlefield;
+    }
+
+    /** @return {@link forge.screens.match.views.VDev.DevLabel} */
+    public final DevLabel getLblRepeatAddCard() {
+        return lblRepeatAddCard;
     }
 
     /** @return {@link forge.screens.match.views.VDev.DevLabel} */
