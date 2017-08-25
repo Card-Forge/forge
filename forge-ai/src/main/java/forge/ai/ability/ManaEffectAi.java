@@ -109,7 +109,7 @@ public class ManaEffectAi extends SpellAbilityAi {
     private boolean doManaRitualLogic(Player ai, SpellAbility sa) {
         final Card host = sa.getHostCard();
           
-        CardCollection manaSources = ComputerUtilMana.getAvailableMana(ai, true);
+        CardCollection manaSources = ComputerUtilMana.getAvailableManaSources(ai, true);
         int numManaSrcs = manaSources.size();
         int manaReceived = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa) : 1;
         manaReceived *= sa.getParam("Produced").split(" ").length;

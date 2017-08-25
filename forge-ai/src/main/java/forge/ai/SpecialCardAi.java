@@ -69,7 +69,7 @@ public class SpecialCardAi {
     // Black Lotus and Lotus Bloom
     public static class BlackLotus {
         public static boolean consider(Player ai, SpellAbility sa, ManaCostBeingPaid cost) {
-            CardCollection manaSources = ComputerUtilMana.getAvailableMana(ai, true);
+            CardCollection manaSources = ComputerUtilMana.getAvailableManaSources(ai, true);
             int numManaSrcs = manaSources.size();
 
             CardCollection allCards = CardLists.filter(ai.getAllCards(), Arrays.asList(CardPredicates.Presets.NON_TOKEN,
@@ -504,7 +504,7 @@ public class SpecialCardAi {
             final CardCollectionView cards = ai.getCardsIn(new ZoneType[] {ZoneType.Hand, ZoneType.Battlefield, ZoneType.Command});
             List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, ai);
 
-            int numManaSrcs = CardLists.filter(ComputerUtilMana.getAvailableMana(ai, true), CardPredicates.Presets.UNTAPPED).size();
+            int numManaSrcs = CardLists.filter(ComputerUtilMana.getAvailableManaSources(ai, true), CardPredicates.Presets.UNTAPPED).size();
 
             for (final SpellAbility testSa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, ai)) {
                 ManaCost cost = testSa.getPayCosts().getTotalMana();

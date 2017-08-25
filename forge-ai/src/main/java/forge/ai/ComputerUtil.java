@@ -192,7 +192,7 @@ public class ComputerUtil {
         if (unless != null && !unless.endsWith(">")) {
             final int amount = AbilityUtils.calculateAmount(source, unless, sa);
 
-            final int usableManaSources = ComputerUtilMana.getAvailableMana(ComputerUtil.getOpponentFor(ai), true).size();
+            final int usableManaSources = ComputerUtilMana.getAvailableManaSources(ComputerUtil.getOpponentFor(ai), true).size();
 
             // If the Unless isn't enough, this should be less likely to be used
             if (amount > usableManaSources) {

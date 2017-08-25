@@ -183,14 +183,14 @@ public class PermanentAi extends SpellAbilityAi {
                     }
                 } else if (param.equals("NumManaSources")) {
                     // Only cast if there are X or more mana sources controlled by the AI
-                    CardCollection m = ComputerUtilMana.getAvailableMana(ai, true);
+                    CardCollection m = ComputerUtilMana.getAvailableManaSources(ai, true);
                     if (m.size() < Integer.parseInt(value)) {
                         dontCast = true;
                     }
                 } else if (param.equals("NumManaSourcesNextTurn")) {
                     // Only cast if there are X or more mana sources controlled by the AI *or*
                     // if there are X-1 mana sources in play but the AI has an extra land in hand
-                    CardCollection m = ComputerUtilMana.getAvailableMana(ai, true);
+                    CardCollection m = ComputerUtilMana.getAvailableManaSources(ai, true);
                     int extraMana = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS).size() > 0 ? 1 : 0;
                     if (card.getName().equals("Illusions of Grandeur")) {
                         // TODO: this is currently hardcoded for specific Illusions-Donate cost reduction spells, need to make this generic.

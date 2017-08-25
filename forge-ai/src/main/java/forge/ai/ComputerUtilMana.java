@@ -1113,7 +1113,7 @@ public class ComputerUtilMana {
     }
 
     //This method is currently used by AI to estimate available mana
-    public static CardCollection getAvailableMana(final Player ai, final boolean checkPlayable) {
+    public static CardCollection getAvailableManaSources(final Player ai, final boolean checkPlayable) {
         final CardCollectionView list = CardCollection.combine(ai.getCardsIn(ZoneType.Battlefield), ai.getCardsIn(ZoneType.Hand));
         final List<Card> manaSources = CardLists.filter(list, new Predicate<Card>() {
             @Override
@@ -1220,7 +1220,7 @@ public class ComputerUtilMana {
             System.out.println("DEBUG_MANA_PAYMENT: sortedManaSources = " + sortedManaSources);
         }
         return sortedManaSources;
-    } // getAvailableMana()
+    } // getAvailableManaSources()
 
     //This method is currently used by AI to estimate mana available
     private static ListMultimap<Integer, SpellAbility> groupSourcesByManaColor(final Player ai, boolean checkPlayable) {
@@ -1241,7 +1241,7 @@ public class ComputerUtilMana {
         }
 
         // Loop over all current available mana sources
-        for (final Card sourceCard : getAvailableMana(ai, checkPlayable)) {
+        for (final Card sourceCard : getAvailableManaSources(ai, checkPlayable)) {
             if (DEBUG_MANA_PAYMENT) {
                 System.out.println("DEBUG_MANA_PAYMENT: groupSourcesByManaColor sourceCard = " + sourceCard);
             }
