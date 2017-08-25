@@ -1435,20 +1435,28 @@ public class ComputerUtil {
             }
             objects = canBeTargeted;
         }
-        
-        if (saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll) {
-            toughness = saviour.hasParam("NumDef") ? 
-                    AbilityUtils.calculateAmount(saviour.getHostCard(), saviour.getParam("NumDef"), saviour) : 0;
-            final List<String> keywords = saviour.hasParam("KW") ? 
-                            Arrays.asList(saviour.getParam("KW").split(" & ")) : new ArrayList<String>();
-            if (keywords.contains("Indestructible")) {
-                grantIndestructible = true;
+
+        SpellAbility saviorWithSubs = saviour;
+        while (saviorWithSubs != null) {
+            ApiType curApi = saviorWithSubs.getApi();
+            if (curApi == ApiType.Pump || curApi == ApiType.PumpAll) {
+                toughness = saviorWithSubs.hasParam("NumDef") ?
+                        AbilityUtils.calculateAmount(saviorWithSubs.getHostCard(), saviorWithSubs.getParam("NumDef"), saviour) : 0;
+                final List<String> keywords = saviorWithSubs.hasParam("KW") ?
+                        Arrays.asList(saviorWithSubs.getParam("KW").split(" & ")) : new ArrayList<String>();
+                if (keywords.contains("Indestructible")) {
+                    grantIndestructible = true;
+                }
+                if (keywords.contains("Hexproof") || keywords.contains("Shroud")) {
+                    grantShroud = true;
+                }
+                break;
             }
-            if (keywords.contains("Hexproof") || keywords.contains("Shroud")) {
-                grantShroud = true;
-            }
+            // Consider pump in subabilities, e.g. Bristling Hydra hexproof subability
+            saviorWithSubs = saviorWithSubs.getSubAbility();
+
         }
-        
+
         if (saviourApi == ApiType.PutCounter || saviourApi == ApiType.PutCounterAll) {
             if (saviour.getParam("CounterType").equals("P1P1")) {
                 toughness = AbilityUtils.calculateAmount(saviour.getHostCard(), saviour.getParam("CounterNum"), saviour);
@@ -1588,9 +1596,11 @@ public class ComputerUtil {
         // Destroy => regeneration/bounce/shroud
         else if ((threatApi == ApiType.Destroy || threatApi == ApiType.DestroyAll)
                 && (((saviourApi == ApiType.Regenerate || saviourApi == ApiType.RegenerateAll)
-                        && !topStack.hasParam("NoRegen")) || saviourApi == ApiType.ChangeZone 
+                        && !topStack.hasParam("NoRegen")) || saviourApi == ApiType.ChangeZone
                         || saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll
-                        || saviourApi == ApiType.Protection || saviourApi == null)) {
+                        || saviourApi == ApiType.Protection || saviourApi == null
+                        || saviorWithSubs.getApi() == ApiType.Pump
+                        || saviorWithSubs.getApi() == ApiType.PumpAll)) {
             for (final Object o : objects) {
                 if (o instanceof Card) {
                     final Card c = (Card) o;
@@ -1604,7 +1614,9 @@ public class ComputerUtil {
                         continue;
                     }
 
-                    if (saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll) {
+                    if (saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll
+                            || saviorWithSubs.getApi() == ApiType.Pump
+                            || saviorWithSubs.getApi() == ApiType.PumpAll) {
                         if ((tgt == null && !grantIndestructible)
                                 || (!grantShroud && !grantIndestructible)) {
                             continue;

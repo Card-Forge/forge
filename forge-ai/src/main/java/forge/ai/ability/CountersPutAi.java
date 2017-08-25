@@ -249,6 +249,15 @@ public class CountersPutAi extends SpellAbilityAi {
                         return true;
                     }
                 }
+            } else if (sa.getSubAbility() != null
+                        && "Self".equals(sa.getSubAbility().getParam("Defined"))
+                        && sa.getSubAbility().getParamOrDefault("KW", "").contains("Hexproof")
+                        && !AiCardMemory.isRememberedCard(ai, source, AiCardMemory.MemorySet.ANIMATED_THIS_TURN)) {
+                    // Bristling Hydra: save from death using a ping activation
+                    if (ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa).contains(source)) {
+                        AiCardMemory.rememberCard(ai, source, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
+                        return true;
+                    }
             } else if (ai.getCounters(CounterType.ENERGY) > ComputerUtilCard.getMaxSAEnergyCostOnBattlefield(ai) + sa.getPayCosts().getCostEnergy().convertAmount()) {
                 // outside of combat, this logic only works if the relevant AI profile option is enabled
                 // and if there is enough energy saved
