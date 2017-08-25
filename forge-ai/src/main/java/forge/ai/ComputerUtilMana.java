@@ -1112,6 +1112,8 @@ public class ComputerUtilMana {
         return cost;
     }
 
+    // This method can be used to estimate the total amount of mana available to the player,
+    // including the mana available in that player's mana pool
     public static int getAvailableManaEstimate(final Player ai, final boolean checkPlayable) {
         CardCollection srcs = getAvailableManaSources(ai, checkPlayable);
         int availableMana = 0;
