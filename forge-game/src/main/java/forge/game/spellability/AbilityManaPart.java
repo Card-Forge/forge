@@ -58,7 +58,7 @@ public class AbilityManaPart implements java.io.Serializable {
     private final String manaRestrictions;
     private final String cannotCounterSpell;
     private final String addsKeywords;
-    private final String addsKeyowrdsType;
+    private final String addsKeywordsType;
     private final String addsKeywordsUntil;
     private final String addsCounters;
     private final String triggersWhenSpent;
@@ -88,7 +88,7 @@ public class AbilityManaPart implements java.io.Serializable {
         this.manaRestrictions = params.containsKey("RestrictValid") ? params.get("RestrictValid") : "";
         this.cannotCounterSpell = params.get("AddsNoCounter");
         this.addsKeywords = params.get("AddsKeywords");
-        this.addsKeyowrdsType = params.get("AddsKeywordsType");
+        this.addsKeywordsType = params.get("AddsKeywordsType");
         this.addsKeywordsUntil = params.get("AddsKeywordsUntil");
         this.addsCounters = params.get("AddsCounters");
         this.triggersWhenSpent = params.get("TriggersWhenSpent");
@@ -205,8 +205,8 @@ public class AbilityManaPart implements java.io.Serializable {
         return this.addsKeywords != null;
     }
 
-    public String getAddsKeyowrdsType() {
-        return addsKeyowrdsType;
+    public String getAddsKeywordsType() {
+        return addsKeywordsType;
     }
 
     public String getAddsKeywordsUntil() {

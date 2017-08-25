@@ -102,7 +102,7 @@ public class Mana {
     }
 
     public final boolean addsKeywordsType() {
-        return this.manaAbility != null && manaAbility.getAddsKeyowrdsType() != null;
+        return this.manaAbility != null && manaAbility.getAddsKeywordsType() != null;
     }
     
     public final boolean addsKeywordsUntil() {

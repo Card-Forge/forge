@@ -243,7 +243,7 @@ public class ManaPool implements Iterable<Mana> {
         if (sa.isSpell() && sa.getHostCard() != null) {
             final Card host = sa.getHostCard();
             if (mana.addsKeywords(sa) && mana.addsKeywordsType()
-                    && host.getType().hasStringType(mana.getManaAbility().getAddsKeyowrdsType())) {
+                    && host.getType().hasStringType(mana.getManaAbility().getAddsKeywordsType())) {
                 final long timestamp = sa.getHostCard().getGame().getNextTimestamp();
                 final List<String> kws = Arrays.asList(mana.getAddedKeywords().split(" & "));
                 host.addChangedCardKeywords(kws, new ArrayList<String>(), false, timestamp);

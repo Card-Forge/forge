@@ -1112,6 +1112,29 @@ public class ComputerUtilMana {
         return cost;
     }
 
+    public static int getAvailableManaEstimate(final Player ai, final boolean checkPlayable) {
+        CardCollection srcs = getAvailableManaSources(ai, checkPlayable);
+        int availableMana = 0;
+
+        for (Card src : srcs) {
+            int maxProduced = 0;
+            for (SpellAbility ma : src.getManaAbilities()) {
+                int producedMana = ma.getParamOrDefault("Produced", "").split(" ").length;
+                int producedAmount = AbilityUtils.calculateAmount(src, ma.getParamOrDefault("Amount", "1"), ma);
+
+                int producedTotal = producedMana * producedAmount;
+                if (producedTotal > maxProduced) {
+                    maxProduced = producedTotal;
+                }
+            }
+            availableMana += maxProduced;
+        }
+
+        availableMana += ai.getManaPool().totalMana();
+
+        return availableMana;
+    }
+
     //This method is currently used by AI to estimate available mana
     public static CardCollection getAvailableManaSources(final Player ai, final boolean checkPlayable) {
         final CardCollectionView list = CardCollection.combine(ai.getCardsIn(ZoneType.Battlefield), ai.getCardsIn(ZoneType.Hand));
