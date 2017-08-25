@@ -1437,6 +1437,7 @@ public class ComputerUtil {
         }
 
         SpellAbility saviorWithSubs = saviour;
+        ApiType saviorWithSubsApi = saviorWithSubs == null ? null : saviorWithSubs.getApi();
         while (saviorWithSubs != null) {
             ApiType curApi = saviorWithSubs.getApi();
             if (curApi == ApiType.Pump || curApi == ApiType.PumpAll) {
@@ -1599,8 +1600,7 @@ public class ComputerUtil {
                         && !topStack.hasParam("NoRegen")) || saviourApi == ApiType.ChangeZone
                         || saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll
                         || saviourApi == ApiType.Protection || saviourApi == null
-                        || saviorWithSubs.getApi() == ApiType.Pump
-                        || saviorWithSubs.getApi() == ApiType.PumpAll)) {
+                        || saviorWithSubsApi == ApiType.Pump || saviorWithSubsApi == ApiType.PumpAll)) {
             for (final Object o : objects) {
                 if (o instanceof Card) {
                     final Card c = (Card) o;
