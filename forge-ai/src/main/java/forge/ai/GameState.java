@@ -680,9 +680,9 @@ public abstract class GameState {
                         if (ab.getDescription().startsWith("Awaken")) {
                             ab.setActivatingPlayer(c.getController());
                             ab.getSubAbility().setActivatingPlayer(c.getController());
-                            sa = ab;
                             // target for Awaken is set in its first subability
-                            handleScriptedTargetingForSA(game, sa.getSubAbility(), tgtID);
+                            handleScriptedTargetingForSA(game, ab.getSubAbility(), tgtID);
+                            sa = ab.getSubAbility(); // only resolve the keyworded part
                         }
                     }
                     if (sa == null) {
