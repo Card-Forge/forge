@@ -75,7 +75,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         }
                     }
                 }, 0);
-
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ANDROID_MINIMIZE_ON_SCRLOCK,
+                "Minimize on Screen Lock",
+                "Minimize Forge when screen is locked (enable if you experience graphic glitches after locking your screen)."),
+                0);
         //Gameplay Options
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CURRENT_AI_PROFILE,
                 "AI Personality",

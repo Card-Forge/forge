@@ -1,8 +1,5 @@
 package forge.app;
 
-import java.io.File;
-import java.util.concurrent.Callable;
-
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.ClipData;
@@ -17,17 +14,21 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.PowerManager;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
-
 import forge.FThreads;
 import forge.Forge;
 import forge.interfaces.IDeviceAdapter;
+import forge.model.FModel;
+import forge.properties.ForgePreferences;
 import forge.util.FileUtil;
 import forge.util.ThreadUtil;
+
+import java.io.File;
+import java.util.concurrent.Callable;
 
 public class Main extends AndroidApplication {
     @Override
@@ -79,6 +80,21 @@ public class Main extends AndroidApplication {
 
         
     }*/
+
+    @Override
+    protected void onPause()
+    {
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ANDROID_MINIMIZE_ON_SCRLOCK)) {
+            super.onPause();
+            // If the screen is off then the device has been locked
+            PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+            boolean isScreenOn = powerManager.isScreenOn();
+            if (!isScreenOn) {
+                this.moveTaskToBack(true);
+                // Minimize the app to the background...
+            }
+        }
+    }
 
     //special clipboard that words on Android
     private class AndroidClipboard implements com.badlogic.gdx.utils.Clipboard {

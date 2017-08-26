@@ -93,6 +93,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_SHOW_STORM_COUNT_IN_PROMPT ("false"),
         UI_CARD_COUNTER_DISPLAY_TYPE(ForgeConstants.CounterDisplayType.TEXT.getName()),
         UI_CARD_COUNTER_DISPLAY_LOCATION(ForgeConstants.CounterDisplayLocation.TOP.getName()),
+        UI_ANDROID_MINIMIZE_ON_SCRLOCK("false"),
 
         UI_FOR_TOUCHSCREN("false"),
 
