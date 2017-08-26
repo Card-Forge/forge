@@ -1,0 +1,21 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 102715 - This Is My Broomstick
+URL:http://www.gatheringmagic.com/seanuy-102715-this-is-my-broomstick/
+Goal:Win
+Turns:2
+Difficulty:Hard
+Description: Win on your next turn.
+[state]
+ActivePlayer=AI
+ActivePhase=main2
+HumanLife=14
+AILife=5
+humanhand=Festering Newt; Undying Evil; Wretched Banquet; Crown of Suspicion
+humangraveyard=Skeletal Scrying
+humanlibrary=Dead Drop
+humanbattlefield=Swamp|Set:SHM; Swamp|Set:SHM; Swamp|Set:SHM; Swamp|Set:SHM; Swamp|Set:SHM; Swamp|Set:SHM|Tapped; Swamp|Set:SHM|Tapped; Polluted Mire|Tapped; Haunted Fengraf; Cackling Witch; Plague Witch; Bogbrew Witch; Bubbling Cauldron
+aibattlefield=Forest|Set:AVR; Forest|Set:AVR; Forest|Set:AVR|Tapped; Forest|Set:AVR|Tapped; Forest|Set:AVR|Tapped; Plains|Set:AVR; Plains|Set:AVR; Plains|Set:AVR|Tapped; Plains|Set:AVR|Tapped; Folk of An-Havva; Loyal Sentry; Norwood Archers; Foot Soldiers; Village Survivors
+aihand=
+aigraveyard=
+ailibrary=
+aiexile=
