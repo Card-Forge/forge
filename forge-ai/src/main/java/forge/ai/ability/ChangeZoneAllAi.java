@@ -188,7 +188,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
 
                 if (numExiledWithSrc > curHandSize) {
                     if (ComputerUtil.predictThreatenedObjects(ai, sa, true).contains(source)) {
-                        // Ping-activate to try to gain some card advantage
+                        // Try to gain some card advantage if the card will die anyway
                         // TODO: ideally, should evaluate the hand value and not discard good hands to it
                         return true;
                     }
