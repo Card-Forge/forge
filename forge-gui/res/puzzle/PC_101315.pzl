@@ -17,7 +17,7 @@ humanbattlefield=Forest|Set:BFZ; Forest|Set:BFZ; Forest|Set:BFZ; Forest|Set:BFZ;
 aibattlefield=Swamp|Set:BFZ|Tapped; Swamp|Set:BFZ|Tapped; Swamp|Set:BFZ|Tapped; Swamp|Set:BFZ|Tapped; Swamp|Set:BFZ|Tapped; Swamp|Set:BFZ|Tapped; Mountain|Set:BFZ|Tapped; Mountain|Set:BFZ|Tapped; Mountain|Set:BFZ|Tapped; Mountain|Set:BFZ|Tapped; Mountain|Set:BFZ|Tapped; Mountain|Set:BFZ|Tapped; Mortuary Mire|Set:BFZ|Tapped; Hedron Blade|Set:BFZ|Attaching:420; Silent Skimmer|Set:BFZ|Tapped|Id:420; Skitterskin|Set:BFZ; Goblin War Paint|Set:BFZ|Attaching:422; Shatterskull Recruit|Set:BFZ|Id:422|Tapped; Endless One|Set:BFZ|Counters:P1P1=13; Mountain|Set:BFZ|Id:424; Retreat to Hagra|Set:BFZ
 # Precast Ondu Rising with Awaken for the AI, targeting mountain - requires KW Awaken implementation
 # with the target for Awaken set in its first subability.
-aiprecast=Ondu Rising:KW#Awaken->424
+aiprecast=Ondu Rising:KW#AwakenOnly->424
 aihand=
 aigraveyard=
 ailibrary=

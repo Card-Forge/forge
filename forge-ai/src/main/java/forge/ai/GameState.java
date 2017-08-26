@@ -675,14 +675,15 @@ public abstract class GameState {
                 String kwName = sPtr.substring(3);
                 FCollectionView<SpellAbility> saList = c.getSpellAbilities();
 
-                if (kwName.equals("Awaken")) {
+                if (kwName.equals("Awaken") || kwName.equals("AwakenOnly")) {
+                    // AwakenOnly only creates the Awaken effect, while Awaken precasts the whole spell with Awaken
                     for (SpellAbility ab : saList) {
                         if (ab.getDescription().startsWith("Awaken")) {
                             ab.setActivatingPlayer(c.getController());
                             ab.getSubAbility().setActivatingPlayer(c.getController());
                             // target for Awaken is set in its first subability
                             handleScriptedTargetingForSA(game, ab.getSubAbility(), tgtID);
-                            sa = ab.getSubAbility(); // only resolve the keyworded part
+                            sa = kwName.equals("AwakenOnly") ? ab.getSubAbility() : ab;
                         }
                     }
                     if (sa == null) {
