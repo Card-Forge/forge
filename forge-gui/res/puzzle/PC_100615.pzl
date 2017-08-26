@@ -1,0 +1,25 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 100615 - Lost in the Crowd
+URL:http://www.gatheringmagic.com/seanuy-100615-lost-in-the-crowd/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win this turn.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=14
+AILife=8
+humanhand=Evolving Wilds|Set:BFZ; Clutch of Currents|Set:BFZ; Sure Strike|Set:BFZ
+humangraveyard=Coastal Discovery|Set:BFZ
+humanlibrary=Island|Set:BFZ; Island|Set:BFZ
+# Generate 1 Eldrazi Scion for the human - uses SVar TrigToken in card Brood Monitor as template
+humanprecast=Abstruse Interference:DBToken
+humanbattlefield=Island|Set:BFZ; Island|Set:BFZ; Island|Set:BFZ; Island|Set:BFZ; Island|Set:BFZ; Mountain|Set:BFZ; Mountain|Set:BFZ; Mountain|Set:BFZ; Mountain|Set:BFZ; Mountain|Set:BFZ; Blighted Gorge|Set:BFZ; Firemantle Mage|Set:BFZ; Halimar Tidecaller|Set:BFZ; Ruination Guide|Set:BFZ; Vestige of Emrakul|Set:BFZ; Retreat to Valakut|Set:BFZ
+aibattlefield=Plains|Set:BFZ; Plains|Set:BFZ; Plains|Set:BFZ|Tapped; Plains|Set:BFZ|Tapped; Plains|Set:BFZ|Tapped; Forest|Set:BFZ; Forest|Set:BFZ; Forest|Set:BFZ|Tapped; Forest|Set:BFZ|Tapped; Forest|Set:BFZ|Tapped; Stone Haven Medic|Set:BFZ; Serene Steward|Set:BFZ; Pilgrim's Eye|Set:BFZ; Shadow Glider|Set:BFZ; Makindi Patrol|Set:BFZ; Giant Mantis|Set:BFZ; Brood Monitor|Set:BFZ; From Beyond|Set:BFZ
+# Generate 5 Eldrazi Scions for the AI - uses SVar TrigToken in card Brood Monitor as template
+aiprecast=Abstruse Interference:DBToken;Abstruse Interference:DBToken;Abstruse Interference:DBToken;Abstruse Interference:DBToken;Abstruse Interference:DBToken
+aihand=
+aigraveyard=
+ailibrary=
+aiexile=
