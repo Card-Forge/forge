@@ -1,6 +1,7 @@
 package forge.ai;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
@@ -18,11 +19,7 @@ import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostAdjustment;
@@ -227,6 +224,15 @@ public class ComputerUtilMana {
                         // do not activate pump instants/sorceries targeting creatures by tapping targeted
                         // creatures for mana (for example, Servant of the Conduit)
                         continue;
+                    }
+                } else if (sa.getApi() == ApiType.Attach
+                        && "AvoidPayingWithAttachTarget".equals(sa.getHostCard().getSVar("AIPaymentPreference"))) {
+                    // For cards like Genju of the Cedars, make sure we're not attaching to the same land that will
+                    // be tapped to pay its own cost if there's another untapped land like that available
+                    if (ma.getHostCard().equals(sa.getTargetCard())) {
+                        if (CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.nameEquals(ma.getHostCard().getName()), CardPredicates.Presets.UNTAPPED)).size() > 1) {
+                            continue;
+                        }
                     }
                 }
 
