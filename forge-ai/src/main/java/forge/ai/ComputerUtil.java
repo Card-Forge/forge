@@ -1615,8 +1615,8 @@ public class ComputerUtil {
                     }
 
                     if (saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll
-                            || saviorWithSubs.getApi() == ApiType.Pump
-                            || saviorWithSubs.getApi() == ApiType.PumpAll) {
+                            || saviorWithSubsApi == ApiType.Pump
+                            || saviorWithSubsApi == ApiType.PumpAll) {
                         if ((tgt == null && !grantIndestructible)
                                 || (!grantShroud && !grantIndestructible)) {
                             continue;
