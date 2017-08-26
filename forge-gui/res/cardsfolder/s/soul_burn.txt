@@ -5,7 +5,7 @@ A:SP$ StoreSVar | Cost$ X 2 B | XColor$ BR | ValidTgts$ Creature,Player | TgtPro
 SVar:StoreTgtP:DB$ StoreSVar | SVar$ Limit | Type$ Count | Expression$ TargetedLifeTotal | SubAbility$ DBDamage | ConditionDefined$ Targeted | ConditionPresent$ Card.Creature | ConditionCompare$ EQ0
 SVar:DBDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | SubAbility$ DBGainLife | References$ X | AILogic$ XLifeDrain
 SVar:X:Count$xPaid
-SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ DrainedLifeCard | References$ DrainedLifeCard
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ DrainedLifeCard | References$ DrainedLifeCard,X,BlackManaPaid
 SVar:DrainedLifeCard:SVar$BlackManaPaid/LimitMax.Limit
 SVar:Limit:Count$xPaid
 SVar:BlackManaPaid:Count$xColorPaid B
