@@ -1107,7 +1107,7 @@ public class AiAttackController {
             }
         }
         
-        if (!attacker.hasKeyword("vigilance") && ComputerUtilCard.canBeKilledByRoyalAssassin(ai, attacker)) {
+        if (!attacker.hasKeyword("Vigilance") && ComputerUtilCard.canBeKilledByRoyalAssassin(ai, attacker)) {
             canKillAllDangerous = false;
             canBeKilled = true;
             canBeKilledByOne = true;
