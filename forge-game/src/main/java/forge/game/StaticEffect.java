@@ -1063,7 +1063,8 @@ public class StaticEffect {
             if (removeMayPlay) {
                 affectedCard.removeMayPlay(ability);
             }
-            //affectedCard.updateStateForView(); // FIXME: causes intolerable flickering for cards such as Thassa, God of the Sea or Wind Zendikon
+
+            affectedCard.updateAbilityTextForView(); // only update keywords and text for view to avoid flickering
         }
         return affectedCards;
     }

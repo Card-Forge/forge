@@ -476,10 +476,14 @@ public final class StaticAbilityContinuous {
                 // Restore the original text in case it was remembered before
                 if (affectedCard.getStates().contains(CardStateName.OriginalText)) {
                     affectedCard.clearTriggersNew();
+                    List<SpellAbility> saToRemove = Lists.newArrayList();
                     for (SpellAbility saTemp : affectedCard.getSpellAbilities()) {
                         if (saTemp.isTemporary()) {
-                            affectedCard.removeSpellAbility(saTemp);
+                            saToRemove.add(saTemp);
                         }
+                    }
+                    for (SpellAbility saRem : saToRemove) {
+                        affectedCard.removeSpellAbility(saRem);
                     }
                     CardFactory.copyState(affectedCard, CardStateName.OriginalText, affectedCard, CardStateName.Original, false);
                 }
@@ -516,7 +520,6 @@ public final class StaticAbilityContinuous {
                         affectedCard.getCurrentState().addStaticAbility(stAb);
                     }
                 }
-                affectedCard.updateAbilityTextForView();
             }
 
             // Change color words
@@ -723,7 +726,7 @@ public final class StaticAbilityContinuous {
                 affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost, mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);
             }
 
-            //affectedCard.updateStateForView(); // FIXME: causes intolerable flickering for cards such as Thassa, God of the Sea or Wind Zendikon.
+            affectedCard.updateAbilityTextForView(); // only update keywords and text for view to avoid flickering
         }
 
         return affectedCards;
