@@ -62,7 +62,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_DETAILED_SPELLDESC_IN_PROMPT ("true"),
         UI_CARD_SIZE ("small"),
         UI_SINGLE_CARD_ZOOM("false"),
-        UI_LIBGDX_TEXTURE_FILTERING("false"),
+        UI_LIBGDX_TEXTURE_FILTERING("true"),
         UI_BUGZ_NAME (""),
         UI_BUGZ_PWD (""),
         UI_ANTE ("false"),
