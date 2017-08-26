@@ -6,12 +6,7 @@ import java.util.Random;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.ai.AiPlayerPredicates;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -190,6 +185,14 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             
                 // minimum card advantage unless the hand will be fully reloaded
                 int minAdv = logic.contains(".minAdv") ? Integer.parseInt(logic.substring(logic.indexOf(".minAdv") + 7)) : 0;
+
+                if (numExiledWithSrc > curHandSize) {
+                    if (ComputerUtil.predictThreatenedObjects(ai, sa, true).contains(source)) {
+                        // Ping-activate to try to gain some card advantage
+                        // TODO: ideally, should evaluate the hand value and not discard good hands to it
+                        return true;
+                    }
+                }
 
                 return (curHandSize + minAdv - 1 < numExiledWithSrc) || (numExiledWithSrc >= ai.getMaxHandSize());
             }
