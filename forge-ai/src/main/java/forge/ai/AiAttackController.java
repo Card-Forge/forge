@@ -1060,7 +1060,8 @@ public class AiAttackController {
         		|| "Blocked".equals(attacker.getSVar("HasAttackEffect"));
         if (!hasCombatEffect) {
             for (String keyword : attacker.getKeywords()) {
-                if (keyword.equals("Wither") || keyword.equals("Infect") || keyword.equals("Lifelink")) {
+                if (keyword.equals("Wither") || keyword.equals("Infect")
+                        || keyword.equals("Lifelink") || keyword.startsWith("Afflict")) {
                     hasCombatEffect = true;
                     break;
                 }
