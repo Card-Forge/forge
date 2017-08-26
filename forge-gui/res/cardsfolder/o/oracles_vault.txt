@@ -5,7 +5,7 @@ A:AB$ Mill | Cost$ 2 T | Defined$ You | NumCards$ 1 | Destination$ Exile | Remem
 SVar:DBEffect1:DB$Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play1 | SubAbility$ DBPutCounter | ExileOnMoved$ Exile
 SVar:DBPutCounter:DB$PutCounter | Defined$ Self | CounterType$ BRICK | CounterNum$ 1 | SubAbility$ DBCleanup
 SVar:Play1:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
-A:AB$ Mill | Cost$ T | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBEffect2 | CheckSVar$ X | SVarCompare$ GE3 | References$ X | AILogic$ ExilePlayUntilEOT | SpellDescription$ Exile the top card of your library. Until end of turn, you may play that card without paying its mana cost. Activate this ability only if there are three or more brick counters on CARDNAME.
+A:AB$ Mill | Cost$ T | Defined$ You | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBEffect2 | CheckSVar$ X | SVarCompare$ GE3 | References$ X | AILogic$ ExileAndPlayUntilEOT | SpellDescription$ Exile the top card of your library. Until end of turn, you may play that card without paying its mana cost. Activate this ability only if there are three or more brick counters on CARDNAME.
 SVar:DBEffect2:DB$Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play2 | SubAbility$ DBCleanup | ExileOnMoved$ Exile
 SVar:Play2:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | MayPlayWithoutManaCost$ True | AffectedZone$ Exile | Description$ You may play remembered card without paying its mana cost.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
