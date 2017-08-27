@@ -6,10 +6,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.StaticData;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilMana;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
@@ -36,22 +33,9 @@ public class ChooseCardNameAi extends SpellAbilityAi {
 
             String logic = sa.getParam("AILogic");
             if (logic.equals("MomirAvatar")) {
-                if (source.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN1)) {
-                    return false;
-                }
-                // Set PayX here to maximum value.
-                int tokenSize = ComputerUtilMana.determineLeftoverMana(sa, ai);
-                
-             // Some basic strategy for Momir
-                if (tokenSize < 2) {
-                    return false;
-                }
-
-                if (tokenSize > 11) {
-                    tokenSize = 11;
-                }
-
-                source.setSVar("PayX", Integer.toString(tokenSize));
+                return SpecialCardAi.MomirVigAvatar.consider(ai, sa);
+            } else if (logic.equals("CursedScroll")) {
+                return SpecialCardAi.CursedScroll.consider(ai, sa);
             }
 
             final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -78,6 +62,7 @@ public class ChooseCardNameAi extends SpellAbilityAi {
      */
     @Override
     public Card chooseSingleCard(final Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
+
         return ComputerUtilCard.getBestAI(options);
     }
 

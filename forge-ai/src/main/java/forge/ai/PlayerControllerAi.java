@@ -892,6 +892,8 @@ public class PlayerControllerAi extends PlayerController {
             } else if (logic.equals("MostProminentSpellInComputerDeck")) {
                 CardCollectionView cards = CardLists.getValidCards(aiLibrary, "Card.Instant,Card.Sorcery", player, sa.getHostCard());
                 return ComputerUtilCard.getMostProminentCardName(cards);
+            } else if (logic.equals("CursedScroll")) {
+                return SpecialCardAi.CursedScroll.chooseCard(player, sa);
             }
         } else {
             CardCollectionView list = CardLists.filterControlledBy(game.getCardsInGame(), player.getOpponents());

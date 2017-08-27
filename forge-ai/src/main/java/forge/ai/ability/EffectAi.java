@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.ai.ComputerUtil;
@@ -18,6 +19,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -49,6 +51,19 @@ public class EffectAi extends SpellAbilityAi {
                     return false;
                 }
                 randomReturn = true;
+            } else if (logic.equals("KeepOppCreatsLandsTapped")) {
+                for (Player opp : ai.getOpponents()) {
+                    boolean worthHolding = false;
+                    if (CardLists.filter(opp.getCardsIn(ZoneType.Battlefield),
+                            Predicates.and(Predicates.or(CardPredicates.Presets.LANDS, CardPredicates.Presets.CREATURES),
+                                    CardPredicates.Presets.TAPPED)).size() >= 3) {
+                        worthHolding = true;
+                    }
+                    if (!worthHolding) {
+                        return false;
+                    }
+                    randomReturn = true;
+                }
             } else if (logic.equals("Fog")) {
                 if (game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
                     return false;

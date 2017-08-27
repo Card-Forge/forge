@@ -29,6 +29,7 @@ import forge.ai.ability.AnimateAi;
 import forge.card.CardTypeView;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.ProtectEffect;
 import forge.game.card.*;
@@ -40,6 +41,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.Expressions;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
 
@@ -1212,18 +1214,51 @@ public class AiAttackController {
                 }
                 if (sa.usesTargeting()) {
                     sa.setActivatingPlayer(c.getController());
-                    if (CardUtil.getValidCardsToTarget(sa.getTargetRestrictions(), sa).isEmpty()) {
+                    List<Card> validTargets = CardUtil.getValidCardsToTarget(sa.getTargetRestrictions(), sa);
+                    if (validTargets.isEmpty()) {
+                        missTarget = true;
+                        break;
+                    } else if (sa.isCurse() && CardLists.filter(validTargets,
+                            CardPredicates.isControlledByAnyOf(c.getController().getOpponents())).isEmpty()) {
+                        // e.g. Ahn-Crop Crasher - the effect is only good when aimed at opponent's creatures
                         missTarget = true;
                         break;
                     }
                 }
+
             }
 
             if (missTarget) {
                 continue;
             }
 
-            if (random.nextBoolean()) {
+            // A specific AI condition for Exert: if specified on the card, the AI will always
+            // exert creatures that meet this condition
+            if (c.hasSVar("AIExertCondition")) {
+                if (!c.getSVar("AIExertCondition").isEmpty()) {
+                    final String needsToExert = c.getSVar("AIExertCondition");
+                    int x = 0;
+                    int y = 0;
+                    String sVar = needsToExert.split(" ")[0];
+                    String comparator = needsToExert.split(" ")[1];
+                    String compareTo = comparator.substring(2);
+                    try {
+                        x = Integer.parseInt(sVar);
+                    } catch (final NumberFormatException e) {
+                        x = CardFactoryUtil.xCount(c, c.getSVar(sVar));
+                    }
+                    try {
+                        y = Integer.parseInt(compareTo);
+                    } catch (final NumberFormatException e) {
+                        y = CardFactoryUtil.xCount(c, c.getSVar(compareTo));
+                    }
+                    if (Expressions.compare(x, comparator, y)) {
+                        shouldExert = true;
+                    }
+                }
+            }
+
+            if (!shouldExert && random.nextBoolean()) {
                 // TODO Improve when the AI wants to use Exert powers
                 shouldExert = true;
             }
