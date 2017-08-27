@@ -86,7 +86,7 @@ public class DrawAi extends SpellAbilityAi {
      */
     @Override
     protected boolean willPayCosts(Player ai, SpellAbility sa, Cost cost, Card source) {
-        if (!ComputerUtilCost.checkCreatureSacrificeCost(ai, cost, source)) {
+        if (!ComputerUtilCost.checkCreatureSacrificeCost(ai, cost, source, sa)) {
             return false;
         }
 

@@ -43,7 +43,7 @@ public class DebuffAi extends SpellAbilityAi {
         final Cost cost = sa.getPayCosts();
 
         // temporarily disabled until AI is improved
-        if (!ComputerUtilCost.checkCreatureSacrificeCost(ai, cost, source)) {
+        if (!ComputerUtilCost.checkCreatureSacrificeCost(ai, cost, source, sa)) {
             return false;
         }
 

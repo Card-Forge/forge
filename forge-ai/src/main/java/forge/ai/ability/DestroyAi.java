@@ -49,7 +49,7 @@ public class DestroyAi extends SpellAbilityAi {
         CardCollection list;
 
         if (abCost != null) {
-            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source)) {
+            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa)) {
                 return false;
             }
 

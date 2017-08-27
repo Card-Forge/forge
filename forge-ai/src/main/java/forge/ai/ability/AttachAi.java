@@ -38,7 +38,7 @@ public class AttachAi extends SpellAbilityAi {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source)) {
+            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa)) {
                 return false;
             }
             if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {

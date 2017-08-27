@@ -848,11 +848,11 @@ public class ComputerUtil {
                                 continue; // Won't play ability
                             }
 
-                            if (!ComputerUtilCost.checkSacrificeCost(controller, abCost, c)) {
+                            if (!ComputerUtilCost.checkSacrificeCost(controller, abCost, c, sa)) {
                                 continue; // Won't play ability
                             }
 
-                            if (!ComputerUtilCost.checkCreatureSacrificeCost(controller, abCost, c)) {
+                            if (!ComputerUtilCost.checkCreatureSacrificeCost(controller, abCost, c, sa)) {
                                 continue; // Won't play ability
                             }
                         }

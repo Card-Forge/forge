@@ -48,7 +48,7 @@ public class PumpAllAi extends PumpAiBase {
         }
 
         if (abCost != null && source.hasSVar("AIPreference")) {
-            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, true)) {
+            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa, true)) {
                 return false;
             }
         }

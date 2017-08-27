@@ -178,7 +178,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source)
+            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa)
                     && !(destination.equals("Battlefield") && !source.isLand())) {
                 return false;
             }

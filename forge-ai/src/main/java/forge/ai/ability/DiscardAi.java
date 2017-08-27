@@ -27,7 +27,7 @@ public class DiscardAi extends SpellAbilityAi {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source)) {
+            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa)) {
                 return false;
             }
 

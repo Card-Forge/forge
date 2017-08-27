@@ -157,7 +157,7 @@ public class DamageDealAi extends DamageAiBase {
             return false;
         }
 
-        if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source)) {
+        if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa)) {
             return false;
         }
 

@@ -240,13 +240,15 @@ public class ComputerUtilCost {
      *            the source
      * @return true, if successful
      */
-    public static boolean checkCreatureSacrificeCost(final Player ai, final Cost cost, final Card source) {
+    public static boolean checkCreatureSacrificeCost(final Player ai, final Cost cost, final Card source, final SpellAbility sourceAbility) {
         if (cost == null) {
             return true;
         }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostSacrifice) {
                 final CostSacrifice sac = (CostSacrifice) part;
+                final int amount = AbilityUtils.calculateAmount(source, sac.getAmount(), sourceAbility);
+
                 if (sac.payCostFromSource() && source.isCreature()) {
                     return false;
                 }
@@ -255,10 +257,19 @@ public class ComputerUtilCost {
                 if (type.equals("CARDNAME")) {
                     continue;
                 }
-    
+
+                final CardCollection sacList = new CardCollection();
                 final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), source.getController(), source, null);
-                if (ComputerUtil.getCardPreference(ai, source, "SacCost", typeList) == null) {
-                    return false;
+
+                int count = 0;
+                while (count < amount) {
+                    Card prefCard = ComputerUtil.getCardPreference(ai, source, "SacCost", typeList);
+                    if (prefCard == null) {
+                        return false;
+                    }
+                    sacList.add(prefCard);
+                    typeList.remove(prefCard);
+                    count++;
                 }
             }
         }
@@ -276,14 +287,15 @@ public class ComputerUtilCost {
      *            is the gain important enough?
      * @return true, if successful
      */
-    public static boolean checkSacrificeCost(final Player ai, final Cost cost, final Card source, final boolean important) {
+    public static boolean checkSacrificeCost(final Player ai, final Cost cost, final Card source, final SpellAbility sourceAbility, final boolean important) {
         if (cost == null) {
             return true;
         }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostSacrifice) {
                 final CostSacrifice sac = (CostSacrifice) part;
-    
+                final int amount = AbilityUtils.calculateAmount(source, sac.getAmount(), sourceAbility);
+
                 final String type = sac.getType();
 
                 if (type.equals("CARDNAME")) {
@@ -295,9 +307,19 @@ public class ComputerUtilCost {
                     }
                     continue;
                 }
-                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, null);
-                if (ComputerUtil.getCardPreference(ai, source, "SacCost", typeList) == null) {
-                    return false;
+
+                final CardCollection sacList = new CardCollection();
+                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), source.getController(), source, null);
+
+                int count = 0;
+                while (count < amount) {
+                    Card prefCard = ComputerUtil.getCardPreference(ai, source, "SacCost", typeList);
+                    if (prefCard == null) {
+                        return false;
+                    }
+                    sacList.add(prefCard);
+                    typeList.remove(prefCard);
+                    count++;
                 }
             }
         }
@@ -373,8 +395,8 @@ public class ComputerUtilCost {
      *            the source
      * @return true, if successful
      */
-    public static boolean checkSacrificeCost(final Player ai, final Cost cost, final Card source) {
-        return checkSacrificeCost(ai, cost, source, true);
+    public static boolean checkSacrificeCost(final Player ai, final Cost cost, final Card source, final SpellAbility sourceAbility) {
+        return checkSacrificeCost(ai, cost, source, sourceAbility,true);
     }
 
     /**
@@ -570,7 +592,7 @@ public class ComputerUtilCost {
 
         return checkLifeCost(payer, cost, source, 4, sa)
             && checkDamageCost(payer, cost, source, 4)
-            && (isMine || checkSacrificeCost(payer, cost, source))
+            && (isMine || checkSacrificeCost(payer, cost, source, sa))
             && (isMine || checkDiscardCost(payer, cost, source))
             && (!source.getName().equals("Tyrannize") || payer.getCardsIn(ZoneType.Hand).size() > 2)
             && (!source.getName().equals("Perplex") || payer.getCardsIn(ZoneType.Hand).size() < 2)

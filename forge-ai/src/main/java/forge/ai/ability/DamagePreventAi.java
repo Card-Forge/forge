@@ -42,7 +42,7 @@ public class DamagePreventAi extends SpellAbilityAi {
             return false;
         }
 
-        if (!ComputerUtilCost.checkSacrificeCost(ai, cost, hostCard)) {
+        if (!ComputerUtilCost.checkSacrificeCost(ai, cost, hostCard, sa)) {
             return false;
         }
 

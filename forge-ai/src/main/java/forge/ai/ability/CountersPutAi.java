@@ -528,7 +528,7 @@ public class CountersPutAi extends SpellAbilityAi {
 
         boolean immediately = ComputerUtil.playImmediately(ai, sa);
         
-        if (abCost != null && !ComputerUtilCost.checkSacrificeCost(ai, abCost, source, immediately)) {
+        if (abCost != null && !ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa, immediately)) {
             return false;
         }
         

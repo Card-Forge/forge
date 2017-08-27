@@ -35,7 +35,7 @@ public class LifeGainAi extends SpellAbilityAi {
 
         if (!lifeCritical) {
             // return super.willPayCosts(ai, sa, cost, source);
-            if (!ComputerUtilCost.checkSacrificeCost(ai, cost, source, false)) {
+            if (!ComputerUtilCost.checkSacrificeCost(ai, cost, source, sa,false)) {
                 return false;
             }
             if (!ComputerUtilCost.checkLifeCost(ai, cost, source, 4, sa)) {
@@ -60,7 +60,7 @@ public class LifeGainAi extends SpellAbilityAi {
                 skipCheck |= ComputerUtilCost.isSacrificeSelfCost(cost) && !source.isCreature();
 
                 if (!skipCheck) {
-                    if (!ComputerUtilCost.checkSacrificeCost(ai, cost, source, false)) {
+                    if (!ComputerUtilCost.checkSacrificeCost(ai, cost, source, sa,false)) {
                         return false;
                     }
                 }
