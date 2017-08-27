@@ -84,8 +84,8 @@ public class Main extends AndroidApplication {
     @Override
     protected void onPause()
     {
+        super.onPause();
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ANDROID_MINIMIZE_ON_SCRLOCK)) {
-            super.onPause();
             // If the screen is off then the device has been locked
             PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
             boolean isScreenOn = powerManager.isScreenOn();
