@@ -7,7 +7,6 @@
 .settings/org.eclipse.jdt.core.prefs -text
 .settings/org.eclipse.jdt.ui.prefs -text
 /AppIcon.png -text
-/Readme.txt -text
 forge-ai/.classpath -text
 forge-ai/.project -text
 forge-ai/.settings/org.eclipse.core.resources.prefs -text
