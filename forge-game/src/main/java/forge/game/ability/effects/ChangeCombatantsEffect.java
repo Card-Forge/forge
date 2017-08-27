@@ -7,7 +7,9 @@ import forge.game.card.Card;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.event.GameEventCombatChanged;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.collect.FCollectionView;
 
@@ -38,17 +40,29 @@ public class ChangeCombatantsEffect extends SpellAbilityEffect {
         for (final Card c : getTargetCards(sa)) {
             if ((tgt == null) || c.canBeTargetedBy(sa)) {
                 final Combat combat = game.getCombat();
-                final GameEntity orginalDefender = combat.getDefenderByAttacker(c);
+                final GameEntity originalDefender = combat.getDefenderByAttacker(c);
                 final FCollectionView<GameEntity> defs = combat.getDefenders();
                 final GameEntity defender = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(defs, sa,
                         "Choose which defender to attack with " + c, false);
-                if (orginalDefender != null && !orginalDefender.equals(defender)) {
+                if (originalDefender != null && !originalDefender.equals(defender)) {
                     AttackingBand ab = combat.getBandOfAttacker(c);
                     if (ab != null) {
                         combat.unregisterAttacker(c, ab);
                         ab.removeAttacker(c);
                     }
                     combat.addAttacker(c, defender);
+                    // retarget triggers to the new defender (e.g. Ulamog, Ceaseless Hunger + Portal Mage)
+                    for (SpellAbilityStackInstance si : game.getStack()) {
+                        if (si.isTrigger() && c.equals(si.getSourceCard())
+                                && si.getTriggeringObject("Attacker") != null) {
+                            si.addTriggeringObject("OriginalDefender", originalDefender);
+                            if (defender instanceof Player) {
+                                si.updateTriggeringObject("DefendingPlayer", defender);
+                            } else if (defender instanceof Card) {
+                                si.updateTriggeringObject("DefendingPlayer", ((Card)defender).getController());
+                            }
+                        }
+                    }
                     isCombatChanged = true;
                 }
             }

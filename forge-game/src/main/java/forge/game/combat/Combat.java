@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import forge.game.Game;
+import forge.game.spellability.SpellAbilityStackInstance;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
@@ -538,6 +540,24 @@ public class Combat {
                 // Clear removed attacker from assignment order 
                 if (attackersOrderedForDamageAssignment.containsKey(b)) {
                     attackersOrderedForDamageAssignment.get(b).remove(c);
+                }
+            }
+        }
+
+        // restore the original defender in case it was changed before the creature was
+        // removed from combat but before the trigger resolved (e.g. Ulamog, the Ceaseless
+        // Hunger + Portal Mage + Unsummon)
+        Game game = c.getGame();
+        for (SpellAbilityStackInstance si : game.getStack()) {
+            if (si.isTrigger() && c.equals(si.getSourceCard())) {
+                GameEntity origDefender = (GameEntity)si.getTriggeringObject("OriginalDefender");
+                if (origDefender != null) {
+                    si.updateTriggeringObject("Defender", origDefender);
+                    if (origDefender instanceof Player) {
+                        si.updateTriggeringObject("DefendingPlayer", origDefender);
+                    } else if (origDefender instanceof Card) {
+                        si.updateTriggeringObject("DefendingPlayer", ((Card)origDefender).getController());
+                    }
                 }
             }
         }

@@ -356,6 +356,29 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         }
     }
 
+    public boolean addTriggeringObject(String trigObj, Object value) {
+        if (!triggeringObjects.containsKey(trigObj)) {
+            triggeringObjects.put(trigObj, value);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean updateTriggeringObject(String trigObj, Object value) {
+        if (triggeringObjects.containsKey(trigObj)) {
+            triggeringObjects.replace(trigObj, value);
+            return true;
+        }
+        return false;
+    }
+
+    public Object getTriggeringObject(String trigObj) {
+        if (triggeringObjects.containsKey(trigObj)) {
+            return triggeringObjects.get(trigObj);
+        }
+        return null;
+    }
+
     public boolean compareToSpellAbility(SpellAbility sa) {
         // Compare my target choices to the SA passed in
         // TODO? Compare other data points in the SI to the passed SpellAbility for confirmation
