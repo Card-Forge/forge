@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Title=Ma Chao, Wastern Warrior
+Icon=Dungeon Crawling Red.jpg
+Difficulty=easy
+Description=Red burn deck
+Deck Type=constructed
+Name=Burn
+[Main]
+2 Blaze|POR|2
+4 Burning Fields|PTK
+3 Earthquake|POR
+2 Fire Ambush|PTK
+4 Fire Tempest|POR
+4 Forked Lightning|POR
+4 Lava Axe|POR
+1 Ma Chao, Western Warrior|PTK
+8 Mountain|PTK|1
+10 Mountain|PTK|2
+6 Mountain|PTK|3
+4 Ogre Berserker|PO2
+4 Rolling Earthquake|PTK
+2 Volcanic Hammer|POR
+2 Wall of Granite|POR

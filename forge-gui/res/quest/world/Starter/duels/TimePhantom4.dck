@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Title=Time Phantom
+Icon=Dungeon Crawling Blue.jpg
+Difficulty=very hard
+Description=A blue creature deck that's hard to block.
+Deck Type=constructed
+Name=TimePhantom4
+[Main]
+4 Capture of Jingzhou|PTK
+4 Cloud Spirit|POR
+7 Island|PTK|1
+8 Island|PTK|2
+10 Island|PTK|3
+4 Lu Xun, Scholar General|PTK
+4 Man-o'-War|POR
+4 Phantom Warrior|POR
+3 Talas Air Ship|PO2
+4 Talas Warrior|PO2
+4 Temporal Manipulation|PO2
+4 Time Warp|S99

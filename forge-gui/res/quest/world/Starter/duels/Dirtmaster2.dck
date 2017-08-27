@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Title=Dirtmaster
+Icon=Dungeon Crawling Black.jpg
+Difficulty=medium
+Description=Swamps are welcome here!
+Deck Type=constructed
+Name=Dirtmaster2
+[Main]
+2 Arrogant Vampire|POR
+4 Bog Raiders|POR
+4 Ghostly Visit|PTK
+4 Hand of Death|POR|2
+4 Nature's Ruin|POR
+4 Serpent Assassin|POR
+5 Swamp|POR|1
+8 Swamp|POR|2
+6 Swamp|POR|3
+5 Swamp|POR|4
+4 Virtue's Ruin|POR
+2 Wicked Pact|POR
+4 Zodiac Pig|PTK
+4 Zodiac Snake|PTK

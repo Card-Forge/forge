@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Title=Deja Vu
+Icon=Dungeon Crawling Blue.jpg
+Difficulty=easy
+Description=I think I have seen this card before... (U/W control)
+Deck Type=constructed
+Name=DejaVu
+[Main]
+2 Air Elemental|PO2
+2 Alabaster Dragon|POR
+4 Angel of Mercy|PO2
+1 Archangel|POR
+2 Deja Vu|PO2
+2 Deja Vu|POR
+3 Island|S99|1
+1 Island|S99|2
+2 Island|S99|3
+7 Island|S99|4
+2 Lu Meng, Wu General|PTK
+2 Lu Xun, Scholar General|PTK
+1 Plains|S99|2
+6 Plains|S99|3
+6 Plains|S99|4
+1 Righteous Fury|PO2
+2 Sage's Knowledge|PTK
+2 Shu Cavalry|PTK
+1 Shu Elite Companions|PTK
+4 Tidings|S99
+4 Wrath of God|POR
+2 Wu Elite Cavalry|PTK
+1 Zhang Fei, Fierce Warrior|PTK

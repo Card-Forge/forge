@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Mercy
+Title=Mercy
+Icon=Dungeon Crawling White.jpg
+Difficulty=easy
+Description=Lifegain deck
+Deck Type=constructed
+[Main]
+4 Angel of Mercy|PO2
+4 Bargain|S99
+2 Blessed Reversal|POR
+4 Path of Peace|POR
+8 Plains|POR|1
+4 Plains|POR|2
+6 Plains|POR|3
+6 Plains|POR|4
+1 Shu Farmer|PTK
+4 Shu Grain Caravan|PTK
+1 Shu Soldier-Farmers|PTK
+4 Spiritual Guardian|POR
+4 Temple Acolyte|PO2
+4 Temple Elder|PO2
+4 Venerable Monk|POR

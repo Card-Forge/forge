@@ -1,0 +1,26 @@
+[quest]
+id=Bears
+OpponentName=The One Who Rides with Bears
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=1 green rare;1 blue rare
+Credit Reward=300
+AIExtras=Island|Island
+HumanExtras=
+[metadata]
+Title=The One Who Rides with Bears
+Icon=Dungeon Crawling Green.jpg
+Difficulty=medium
+Description=Since when can bears ride on horses?
+Deck Type=constructed
+Name=Bears
+[Main]
+4 Bear Cub|PO2
+4 Forest Bear|PTK
+4 Golden Bear|PO2
+4 Grizzly Bears|POR
+4 Razorclaw Bear|PO2
+4 River Bear|PO2
+12 Sun Quan, Lord of Wu|PTK
+24 Forest|PTK

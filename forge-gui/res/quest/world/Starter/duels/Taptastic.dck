@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Title=Seasoned Marshal
+Icon=Dungeon Crawling White.jpg
+Difficulty=easy
+Description=A deck built around "tap target creature" effects.
+Deck Type=constructed
+Name=Taptastic
+[Main]
+4 Alaborn Cavalier|PO2
+4 Blinding Light|POR
+3 Champion Lancer|S99
+2 Disenchant|S00
+4 Eightfold Maze|PTK
+4 Flanking Troops|PTK
+4 Gift of Estates|POR
+9 Plains|POR|1
+5 Plains|POR|2
+5 Plains|POR|3
+4 Plains|POR|4
+4 Seasoned Marshal|POR
+4 Steam Catapult|PO2
+4 Vengeance|POR

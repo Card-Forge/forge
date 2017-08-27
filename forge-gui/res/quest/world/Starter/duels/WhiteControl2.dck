@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Title=Archangel
+Icon=Dungeon Crawling White.jpg
+Difficulty=medium
+Description=White control
+Deck Type=constructed
+Name=WhiteControl2
+[Main]
+4 Alaborn Zealot|PO2
+4 Archangel|S99
+4 Disenchant|S00
+4 Eightfold Maze|PTK
+4 Gift of Estates|POR
+4 Loyal Sentry|S99
+4 Plains|PO2|1
+4 Plains|PO2|2
+4 Plains|PO2|3
+3 Plains|S99|1
+2 Plains|S99|2
+3 Plains|S99|3
+1 Plains|S99|4
+4 Starlit Angel|POR
+2 Temple Acolyte|PO2
+1 Wall of Swords|POR
+4 Wrath of God|POR
+4 Zhang Fei, Fierce Warrior|PTK

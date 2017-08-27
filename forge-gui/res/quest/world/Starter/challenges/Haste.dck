@@ -1,0 +1,24 @@
+[quest]
+id=Haste
+OpponentName=Dragon Highway
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=5 red rares
+Ticket Reward=true
+Credit Reward=300
+AIExtras=Mountain|Mountain|Mountain|Mountain
+HumanExtras=
+[metadata]
+Title=Dragon Highway
+Icon=Dungeon Crawling Red.jpg
+Difficulty=hard
+Description="The dragons are not going to wait for you!"
+Deck Type=constructed
+Name=Haste
+[Main]
+10 Brimstone Dragon|PO2
+2 Lu Bu, Master-at-Arms|PTK
+10 Volcanic Dragon|POR
+18 Mountain|PO2
+

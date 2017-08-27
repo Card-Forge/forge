@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Title=Dark Forces
+Icon=Dungeon Crawling Black.jpg
+Difficulty=medium
+Description=Black weenie deck
+Deck Type=constructed
+Name=BlackRush2
+[Main]
+1 Cao Ren, Wei Commander|PTK
+4 Craven Knight|POR
+4 Foul Spirit|PO2
+4 Hidden Horror|PO2
+4 Imperial Edict|PTK
+2 Lurking Nightstalker|PO2
+4 Mercenary Knight|POR
+4 Ravenous Rats|PO2
+5 Swamp|PO2|1
+7 Swamp|PO2|2
+9 Swamp|PO2|3
+2 Vampiric Spirit|PO2
+3 Wei Infantry|PTK
+3 Wei Strike Force|PTK
+4 Young Wei Recruits|PTK

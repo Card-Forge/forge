@@ -1,0 +1,24 @@
+[quest]
+id=Seismic
+OpponentName=Seismic Fires
+AILife=50
+Repeat=true
+Wins=0
+Card Reward=booster pack PTK;booster pack PTK
+Ticket Reward=true
+Credit Reward=125
+AIExtras=Mountain
+HumanExtras=
+[metadata]
+Title=Seismic Fires
+Icon=Dungeon Crawling Red.jpg
+Difficulty=medium
+Description=X? What do you mean by X?
+Deck Type=constructed
+Name=Seismic
+[Main]
+10 Blaze|PO2
+10 Nature's Lore|POR
+10 Rolling Earthquake|PTK
+10 Three Visits|PTK
+20 Forest|PTK

@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Title=Ambition
+Icon=Dungeon Crawling Black.jpg
+Difficulty=hard
+Description=Black control
+Deck Type=constructed
+Name=BlackControl3
+[Main]
+3 Ambition's Cost|PTK
+3 Ancient Craving|PO2
+4 Arrogant Vampire|POR
+1 Cao Cao, Lord of Wei|PTK
+2 Coercion|PO2
+2 Dakmor Lancer|S99
+2 Dakmor Sorceress|PO2
+2 Dark Offering|PO2
+2 Ghostly Visit|PTK
+4 Imperial Edict|PTK
+4 King's Assassin|POR
+1 Overwhelming Forces|PTK
+1 Predatory Nightstalker|PO2
+4 Soul Feast|S99
+1 Stone Catapult|PTK
+9 Swamp|PTK|1
+7 Swamp|PTK|2
+8 Swamp|PTK|3

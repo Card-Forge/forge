@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Title=The Ravaging Horde
+Icon=Dungeon Crawling Red.jpg
+Difficulty=medium
+Description=Land removal deck
+Deck Type=constructed
+Name=LandRemoval2
+[Main]
+2 Ancient Craving|PO2
+4 Goblin Settler|S99
+4 Lava Flow|POR
+2 Mountain|S99|1
+3 Mountain|S99|2
+4 Mountain|S99|3
+3 Mountain|S99|4
+4 Ogre Arsonist|PO2
+2 Rain of Salt|POR
+4 Rain of Tears|POR
+4 Ravaging Horde|PTK
+2 Ravenous Rats|PO2
+4 Stone Rain|POR
+4 Stream of Acid|S99
+4 Swamp|S99|1
+2 Swamp|S99|2
+3 Swamp|S99|3
+3 Swamp|S99|4
+2 Wei Night Raiders|PTK

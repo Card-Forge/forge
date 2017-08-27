@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Title=The Jungle
+Icon=Dungeon Crawling Green.jpg
+Difficulty=very hard
+Description=A.k.a. Stompy.
+Deck Type=constructed
+Name=Stompy4
+[Main]
+2 Bear Cub|PO2
+1 Forest|POR|1
+8 Forest|POR|2
+6 Forest|POR|3
+8 Forest|POR|4
+4 Hurricane|POR
+4 Jungle Lion|POR
+2 Lone Wolf|PO2
+1 Lone Wolf|PTK
+2 Lynx|PO2
+2 Meng Huo, Barbarian King|PTK
+3 Monstrous Growth|POR|2
+2 Natural Order|POR
+4 Plant Elemental|POR
+4 Riding the Dilu Horse|PTK
+1 Thorn Elemental|S99
+3 Wielding the Green Dragon|PTK
+3 Zodiac Rooster|PTK

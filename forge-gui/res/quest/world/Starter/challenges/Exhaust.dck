@@ -1,0 +1,20 @@
+[quest]
+id=Exhaustion
+OpponentName=Exhaustion
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=duplicate card
+Ticket Reward=true
+Credit Reward=200
+AIExtras=Island|Island|Island|Wu Light Cavalry|Wu Light Cavalry|Wu Light Cavalry
+HumanExtras=
+[metadata]
+Title=Exhaustion
+Icon=Dungeon Crawling Blue.jpg
+Difficulty=hard
+Description=Sometimes wizards are too tired to cast spells. Be careful not to be one of them!
+Deck Type=constructed
+Name=Exhaustion
+[Main]
+60 Exhaustion|POR

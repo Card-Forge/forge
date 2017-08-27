@@ -1,0 +1,22 @@
+[quest]
+id=Doomsday
+OpponentName=Doomsday
+AILife=200
+Repeat=true
+Wins=60
+Card Reward=10 rares
+Ticket Reward=true
+Credit Reward=1500
+AIExtras=Mountain|Mountain|Mountain|Mountain|Mountain
+HumanExtras=Symbiotic Deployment|Cao Ren, Wei Commander|Kongming, "Sleeping Dragon"|Lady Zhurong, Warrior Queen|Lu Bu, Master-at-Arms|Sun Quan, Lord of Wu|Plains|Island|Forest|Swamp|Mountain
+[metadata]
+Title=Doomsday
+Icon=Dungeon Crawling Red.jpg
+Difficulty=very hard
+Description=The end is coming and out and magic starts to disappear from the world. Can the alliance of all colors save the world?
+Deck Type=constructed
+Name=Doomsday
+[Main]
+100 Mountain|PO2
+100 Devastation
+20 Blaze|POR

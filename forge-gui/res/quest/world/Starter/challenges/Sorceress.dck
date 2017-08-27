@@ -1,0 +1,19 @@
+[quest]
+id=Sorceress
+OpponentName=The Sorceress Twins
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=3 black rares
+Credit Reward=200
+AIExtras=Dakmor Sorceress|Dakmor Sorceress|Swamp
+HumanExtras=
+[metadata]
+Title=The Sorceress Twins
+Icon=Dungeon Crawling Black.jpg
+Difficulty=medium
+Description=Just in case some "accidents" happen, we prepared two of them for you!
+Deck Type=constructed
+Name=Sorceress
+[Main]
+60 Swamp

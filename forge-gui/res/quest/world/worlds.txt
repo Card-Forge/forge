@@ -16,3 +16,4 @@ Name:Jamuraa: The Mirage Wars|Dir:1997-01 Mirage|Sets:MIR, VIS
 Name:Portal|Dir:1997-05 Portal|Sets:POR
 Name:Caliman|Dir:1998-06 Portal Second Age|Sets:PO2
 Name:Urza's Block|Dir:Urza|Sets:USG, ULG, UDS|Banned:Gaea's Cradle;Memory Jar;Serra's Sanctum;Time Spiral;Tolarian Academy;Voltaic Key;Windfall
+Name:The Gates of Magic|Dir:Starter|Sets:POR, PO2, S99, S00, PTK
