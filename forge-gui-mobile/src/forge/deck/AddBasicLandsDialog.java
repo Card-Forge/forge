@@ -20,6 +20,7 @@ package forge.deck;
 import java.text.NumberFormat;
 import java.util.Map.Entry;
 
+import com.google.common.collect.Iterables;
 import forge.Forge;
 import forge.Graphics;
 import forge.StaticData;
@@ -60,7 +61,7 @@ public class AddBasicLandsDialog extends FDialog {
     private final Callback<CardPool> callback;
 
     private final FLabel lblLandSet = add(new FLabel.Builder().text("Land Set:").font(FSkinFont.get(12)).textColor(FLabel.INLINE_LABEL_COLOR).build());
-    private final FComboBox<CardEdition> cbLandSet = add(new FComboBox<CardEdition>(StaticData.instance().getEditions()));
+    private final FComboBox<CardEdition> cbLandSet = add(new FComboBox<CardEdition>(Iterables.filter(StaticData.instance().getEditions(), CardEdition.Predicates.hasBasicLands)));
 
     private final FScrollPane scroller = add(new FScrollPane() {
         @Override

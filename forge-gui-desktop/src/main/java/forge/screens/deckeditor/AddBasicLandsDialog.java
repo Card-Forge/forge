@@ -32,6 +32,7 @@ import javax.swing.SwingConstants;
 
 import com.google.common.collect.ImmutableList;
 
+import com.google.common.collect.Iterables;
 import forge.ImageCache;
 import forge.StaticData;
 import forge.UiCommand;
@@ -66,7 +67,7 @@ public class AddBasicLandsDialog {
     private static final int ADD_BTN_SIZE = 30;
     private static final int LAND_PANEL_PADDING = 3;
 
-    private final FComboBoxPanel<CardEdition> cbLandSet = new FComboBoxPanel<CardEdition>("Land Set:", FlowLayout.CENTER, StaticData.instance().getEditions());
+    private final FComboBoxPanel<CardEdition> cbLandSet = new FComboBoxPanel<CardEdition>("Land Set:", FlowLayout.CENTER, Iterables.filter(StaticData.instance().getEditions(), CardEdition.Predicates.hasBasicLands));
 
     private final MainPanel panel = new MainPanel();
     private final LandPanel pnlPlains = new LandPanel("Plains");

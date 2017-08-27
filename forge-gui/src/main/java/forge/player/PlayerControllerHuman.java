@@ -2149,15 +2149,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
 
             final PaperCard c = carddb.getUniqueByName(f.getName());
+            Card forgeCard = Card.fromPaperCard(c, p);
 
             game.getAction().invoke(new Runnable() {
                 @Override
                 public void run() {
                     if (targetZone != ZoneType.Battlefield) {
-                        game.getAction().moveTo(targetZone, Card.fromPaperCard(c, p), null);
+                        game.getAction().moveTo(targetZone, forgeCard, null);
                     } else {
-                        final Card forgeCard = Card.fromPaperCard(c, p);
-
                         if (c.getRules().getType().isLand()) {
                             // this is needed to ensure land abilities fire
                             game.getAction().moveToHand(forgeCard, null);
