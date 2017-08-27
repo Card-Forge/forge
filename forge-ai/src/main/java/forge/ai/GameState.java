@@ -831,7 +831,7 @@ public abstract class GameState {
     }
 
     private void applyCountersToGameEntity(GameEntity entity, String counterString) {
-        entity.clearCounters();
+        entity.setCounters(Maps.<CounterType, Integer>newEnumMap(CounterType.class));
         String[] allCounterStrings = counterString.split(",");
         for (final String counterPair : allCounterStrings) {
             String[] pair = counterPair.split("=", 2);
