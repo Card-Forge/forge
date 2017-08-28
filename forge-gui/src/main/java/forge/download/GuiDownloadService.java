@@ -32,6 +32,7 @@ import java.io.*;
 import java.net.*;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.net.URLDecoder;
 
 @SuppressWarnings("serial")
 public abstract class GuiDownloadService implements Runnable {
@@ -242,9 +243,9 @@ public abstract class GuiDownloadService implements Runnable {
             count++;
             cardSkipped = true; //assume skipped unless saved successfully
             String url = kv.getValue();
-            //replace web url punctuation by their real punctuation...
-            String renamedKey = kv.getKey().replace("%2C",",").replace("%27s","'s");
-            final File fileDest = new File(renamedKey);
+            //decode URL Key
+            String decodedKey = URLDecoder.decode(kv.getKey());
+            final File fileDest = new File(decodedKey);
 
             System.out.println(count + "/" + totalCount + " - " + fileDest);
 
