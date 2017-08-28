@@ -67,56 +67,80 @@ public class PlayerProperty {
                 return false;
             }
         } else if (property.startsWith("wasDealtCombatDamageThisCombatBy ")) {
-            final String v = property.split(" ")[1];
+            String v = property.split(" ")[1];
+
+            int count = 1;
+            if (v.contains("_AtLeast")) {
+                count = Integer.parseInt(v.substring(v.indexOf("_AtLeast") + 8));
+                v = v.substring(0, v.indexOf("_AtLeast")).replace("Valid:", "Valid ");
+            }
+
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
-            boolean found = false;
+            int found = 0;
             for (final Card card : cards) {
                 if (card.getDamageHistory().getThisCombatDamaged().contains(player)) {
-                    found = true;
-                    break;
+                    found++;
                 }
             }
-            if (!found) {
+            if (found < count) {
                 return false;
             }
         } else if (property.startsWith("wasDealtDamageThisGameBy ")) {
-            final String v = property.split(" ")[1];
+            String v = property.split(" ")[1];
+
+            int count = 1;
+            if (v.contains("_AtLeast")) {
+                count = Integer.parseInt(v.substring(v.indexOf("_AtLeast") + 8));
+                v = v.substring(0, v.indexOf("_AtLeast")).replace("Valid:", "Valid ");
+            }
+
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
-            boolean found = false;
+            int found = 0;
             for (final Card card : cards) {
                 if (card.getDamageHistory().getThisGameDamaged().contains(player)) {
-                    found = true;
-                    break;
-                    }
+                    found++;
+                }
             }
-            if (!found) {
+            if (found < count) {
                 return false;
             }
         } else if (property.startsWith("wasDealtDamageThisTurnBy ")) {
-            final String v = property.split(" ")[1];
+            String v = property.split(" ")[1];
+            int count = 1;
+
+            if (v.contains("_AtLeast")) {
+                count = Integer.parseInt(v.substring(v.indexOf("_AtLeast") + 8));
+                v = v.substring(0, v.indexOf("_AtLeast")).replace("Valid:", "Valid ");
+            }
+
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
-            boolean found = false;
+            int found = 0;
             for (final Card card : cards) {
                 if (card.getDamageHistory().getThisTurnDamaged().contains(player)) {
-                    found = true;
-                    break;
-                    }
+                    found++;
+                }
             }
-            if (!found) {
+            if (found < count) {
                 return false;
             }
         } else if (property.startsWith("wasDealtCombatDamageThisTurnBy ")) {
-            final String v = property.split(" ")[1];
+            String v = property.split(" ")[1];
+
+            int count = 1;
+            if (v.contains("_AtLeast")) {
+                count = Integer.parseInt(v.substring(v.indexOf("_AtLeast") + 8));
+                v = v.substring(0, v.indexOf("_AtLeast")).replace("Valid:", "Valid ");
+            }
+
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
-            
-            boolean found = false;
+
+            int found = 0;
             for (final Card card : cards) {
                 if (card.getDamageHistory().getThisTurnCombatDamaged().contains(player)) {
-                    found = true;
-                    break;
-                    }
+                    found++;
+                }
             }
-            if (!found) {
+            if (found < count) {
                 return false;
             }
         } else if (property.equals("attackedBySourceThisCombat")) {
