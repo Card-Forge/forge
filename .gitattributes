@@ -17208,6 +17208,16 @@ forge-gui/res/cardsfolder/u/utter_end.txt -text
 forge-gui/res/cardsfolder/u/utvara_hellkite.txt -text
 forge-gui/res/cardsfolder/u/utvara_scalper.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/u/uyo_silent_prophet.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/upcoming/burning_suns_avatar.txt -text
+forge-gui/res/cardsfolder/upcoming/carnage_tyrant.txt -text
+forge-gui/res/cardsfolder/upcoming/emperors_vanguard.txt -text
+forge-gui/res/cardsfolder/upcoming/gishark_suns_avatar.txt -text
+forge-gui/res/cardsfolder/upcoming/goring_ceratops.txt -text
+forge-gui/res/cardsfolder/upcoming/kinjallis_sunwing.txt -text
+forge-gui/res/cardsfolder/upcoming/priest_of_the_wandering_sun.txt -text
+forge-gui/res/cardsfolder/upcoming/ripjaw_raptor.txt -text
+forge-gui/res/cardsfolder/upcoming/unclaimed_territory.txt -text
+forge-gui/res/cardsfolder/upcoming/verdant_suns_avatar.txt -text
 forge-gui/res/cardsfolder/v/vacuumelt.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/vaevictis_asmadi.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/vagrant_plowbeasts.txt svneol=native#text/plain

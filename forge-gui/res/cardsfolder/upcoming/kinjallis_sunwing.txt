@@ -1,0 +1,7 @@
+Name:Kinjalli's Sunwing
+ManaCost:2 W 
+Types:Creature Dinosaur 
+PT:2/3
+K:Flying
+S:Mode$ ETBTapped | ValidCard$ Creature.OppCtrl | Description$ Creatures your opponents control enter the battlefield tapped.
+Oracle:Creatures your opponents control enter the battlefield tapped.

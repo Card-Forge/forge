@@ -1,0 +1,10 @@
+Name:Emperor's Vanguard
+ManaCost:3 G
+Types:Creature Human Scout
+PT:4/3
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDig | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, it explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back on top or into your graveyard.)
+SVar:TrigDig:DB$ Dig | DigNum$ 1 | Reveal$ True | NoMove$ True | RememberRevealed$ True | SubAbility$ DBGrabLand | SpellDescription$ TODO
+SVar:DBGrabLand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ConditionCompare$ GE1 | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterNum$ 1 | CounterType$ P1P1 | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Whenever Emperor's Vanguard deals combat damage to a player, it explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back on top or into your graveyard.)
