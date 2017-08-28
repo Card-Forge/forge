@@ -67,6 +67,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         final List<String> svars = Lists.newArrayList();
         final List<String> triggers = Lists.newArrayList();
         final List<String> pumpKeywords = Lists.newArrayList();
+        boolean asNonLegendary = false;
 
         final long timestamp = game.getNextTimestamp();
 
@@ -83,6 +84,9 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         }
         if (sa.hasParam("AddTypes")) {
             types.addAll(Arrays.asList(sa.getParam("AddTypes").split(" & ")));
+        }
+        if (sa.hasParam("NonLegendary")) {
+            asNonLegendary = true;
         }
         if (sa.hasParam("AddSVars")) {
             svars.addAll(Arrays.asList(sa.getParam("AddSVars").split(" & ")));
@@ -187,6 +191,23 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     // add keywords from sa
                     for (final String kw : keywords) {
                         copy.addIntrinsicKeyword(kw);
+                    }
+                    if (asNonLegendary) {
+                        String typeLine = "";
+                        for (CardType.Supertype st : copy.getType().getSupertypes()) {
+                            if (!st.equals(CardType.Supertype.Legendary)) {
+                                typeLine += st.name() + " ";
+                            }
+                        }
+                        for (CardType.CoreType ct : copy.getType().getCoreTypes()) {
+                            typeLine += ct.name() + " ";
+                        }
+                        for (String subt: copy.getType().getSubtypes()) {
+                            typeLine += subt + " ";
+                        }
+
+                        StringBuilder newType = new StringBuilder(typeLine);
+                        copy.setType(CardType.parse(newType.toString()));
                     }
                     if (sa.hasParam("SetCreatureTypes")) {
                         String typeLine = "";
