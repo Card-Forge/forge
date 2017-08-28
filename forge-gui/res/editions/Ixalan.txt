@@ -1,0 +1,9 @@
+[metadata]
+Code=XLN
+Date=2017-09-29
+Name=Ixalan
+Code2=XLN
+Type=Expansion
+MciCode=xln
+
+[cards]
