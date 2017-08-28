@@ -973,9 +973,10 @@ public class GameAction {
                     checkAgain = true;
                 }
 
+                /* -- As of Ixalan, planeswalker uniqueness is only established via the Legendary rule
                 if (handlePlaneswalkerRule(p)) {
                     checkAgain = true;
-                }
+                }*/
             }
             // 704.5m World rule
             checkAgain |= handleWorldRule();
