@@ -1225,6 +1225,7 @@ public class GameAction {
         game.getStack().clearSimultaneousStack();
     }
 
+    /* -- As of Ixalan, the Planeswalker Rule no longer applies --
     private boolean handlePlaneswalkerRule(Player p) {
         // get all Planeswalkers
         final List<Card> list = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
@@ -1263,7 +1264,7 @@ public class GameAction {
             }
         }
         return recheck;
-    }
+    }*/
 
     private boolean handleLegendRule(Player p) {
         final List<Card> a = CardLists.getType(p.getCardsIn(ZoneType.Battlefield), "Legendary");
