@@ -1227,9 +1227,10 @@ public class GameAction {
     private boolean handlePlaneswalkerRule(Player p) {
         // get all Planeswalkers
         final List<Card> list = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
-
         boolean recheck = false;
-        //final Multimap<String, Card> uniqueWalkers = ArrayListMultimap.create();
+
+        //final Multimap<String, Card> uniqueWalkers = ArrayListMultimap.create(); // Not used as of Ixalan
+
         for (Card c : list) {
             if (c.getCounters(CounterType.LOYALTY) <= 0) {
                 moveToGraveyard(c, null);
@@ -1238,7 +1239,7 @@ public class GameAction {
                 recheck = true;
             }
 
-            /*
+            /* -- Not used as of Ixalan --
             for (final String type : c.getType()) {
                 if (CardType.isAPlaneswalkerType(type)) {
                     uniqueWalkers.put(type, c);
@@ -1246,7 +1247,7 @@ public class GameAction {
             }*/
         }
 
-        /*
+        /* -- Not used as of Ixalan --
         for (String key : uniqueWalkers.keySet()) {
             Collection<Card> duplicates = uniqueWalkers.get(key);
             if (duplicates.size() < 2) {
