@@ -1,6 +1,6 @@
 Name:Nissa, Steward of Elements
 ManaCost:X G U
-Types:Planeswalker Nissa
+Types:Legendary Planeswalker Nissa
 Loyalty:0
 K:etbCounter:LOYALTY:X
 SVar:X:Count$xPaid

@@ -1,6 +1,6 @@
 Name:Jace, the Living Guildpact
 ManaCost:2 U U
-Types:Planeswalker Jace
+Types:Legendary Planeswalker Jace
 Loyalty:5
 A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | Defined$ You | DigNum$ 2 | DestinationZone$ Graveyard | LibraryPosition2$ 0 | Planeswalker$ True | SpellDescription$ Look at the top two cards of your library. Put one of them into your graveyard.
 A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.Other+nonLand | TgtPrompt$ Select another target nonland permanent | Planeswalker$ True | SpellDescription$ Return another target nonland permanent to its owner's hand.

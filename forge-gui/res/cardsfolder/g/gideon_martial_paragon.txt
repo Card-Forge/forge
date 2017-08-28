@@ -1,6 +1,6 @@
 Name:Gideon, Martial Paragon
 ManaCost:4 W
-Types:Planeswalker Gideon
+Types:Legendary Planeswalker Gideon
 Loyalty:5
 A:AB$ UntapAll | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidCards$ Creature.YouCtrl | SubAbility$ DBPumpAll | SpellDescription$ Untap all creatures you control. Those creatures get +1/+1 until end of turn.
 SVar:DBPumpAll:DB$PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 

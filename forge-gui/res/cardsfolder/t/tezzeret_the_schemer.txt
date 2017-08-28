@@ -1,6 +1,6 @@
 Name:Tezzeret the Schemer
 ManaCost:2 U B
-Types:Planeswalker Tezzeret
+Types:Legendary Planeswalker Tezzeret
 Loyalty:5
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenName$ Etherium Cell | TokenImage$ c etherium cell | TokenTypes$ Artifact | TokenOwner$ You | TokenColors$ Colorless | TokenAbilities$ ABMana | References$ ABMana | SpellDescription$ Create a colorless artifact token named Etherium Cell with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
 SVar:ABMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.

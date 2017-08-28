@@ -1,6 +1,6 @@
 Name:Tamiyo, the Moon Sage
 ManaCost:3 U U
-Types:Planeswalker Tamiyo
+Types:Legendary Planeswalker Tamiyo
 Loyalty:4
 A:AB$ Tap | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Permanent | TgtPrompt$ Choose target permanent. | Planeswalker$ True | SubAbility$ TamiyoPump | SpellDescription$ Tap target permanent. It doesn't untap during its controller's next untap step.
 SVar:TamiyoPump:DB$ Pump | Defined$ Targeted | Permanent$ True | KW$ HIDDEN This card doesn't untap during your next untap step.

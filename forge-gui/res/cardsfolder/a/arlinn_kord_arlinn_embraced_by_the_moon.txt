@@ -1,6 +1,6 @@
 Name:Arlinn Kord
 ManaCost:2 R G
-Types:Planeswalker Arlinn
+Types:Legendary Planeswalker Arlinn
 Loyalty:3
 A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumAtt$ +2 | NumDef$ +2 | KW$ Vigilance & Haste | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Until end of turn, up to one target creature gets +2/+2 and gains vigilance and haste.
 A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | TokenAmount$ 1 | TokenName$ Wolf | TokenColors$ Green | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ g 2 2 wolf SOI | Planeswalker$ True | SubAbility$ DBTransform | SpellDescription$ Create a 2/2 green Wolf creature token. Transform CARDNAME.
@@ -15,7 +15,7 @@ ALTERNATE
 Name:Arlinn, Embraced by the Moon
 ManaCost:no cost
 Colors:red,green
-Types:Planeswalker Arlinn
+Types:Legendary Planeswalker Arlinn
 Loyalty:0
 A:AB$ PumpAll | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Trample | SpellDescription$ Creatures you control get +1/+1 and gain trample until end of turn.
 A:AB$ DealDamage | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 3 | SubAbility$ DBTransform | SpellDescription$ CARDNAME deals 3 damage to target creature or player. Transform CARDNAME.

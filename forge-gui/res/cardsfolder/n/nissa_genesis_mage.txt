@@ -1,6 +1,6 @@
 Name:Nissa, Genesis Mage
 ManaCost:5 G G
-Types:Planeswalker Nissa
+Types:Legendary Planeswalker Nissa
 Loyalty:5
 A:AB$ Untap | Cost$ AddCounter<2/LOYALTY> | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | Planeswalker$ True | SubAbility$ DBUntap | TgtPrompt$ Select target creature |  SpellDescription$ Untap up to two target creatures and up to two target lands.
 SVar:DBUntap:DB$ Untap | ValidTgts$ Land | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select target Land

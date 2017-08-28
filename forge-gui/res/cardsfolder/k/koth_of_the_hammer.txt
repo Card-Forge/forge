@@ -1,6 +1,6 @@
 Name:Koth of the Hammer
 ManaCost:2 R R
-Types:Planeswalker Koth
+Types:Legendary Planeswalker Koth
 Loyalty:3
 A:AB$ Untap | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Mountain | TgtPrompt$ Select target Mountain | SubAbility$ DBAnimate | SpellDescription$ Untap target Mountain. It becomes a 4/4 red Elemental creature until end of turn. It's still a land.
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Power$ 4 | Toughness$ 4 | Types$ Creature,Elemental | Colors$ Red

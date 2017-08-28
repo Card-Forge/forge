@@ -1,6 +1,6 @@
 Name:Nicol Bolas, the Deceiver
 ManaCost:5 U B R
-Types:Planeswalker Bolas
+Types:Legendary Planeswalker Bolas
 Loyalty:5
 A:AB$ RepeatEach | Cost$ AddCounter<3/LOYALTY> | RepeatPlayers$ Opponent | RepeatSubAbility$ DBChoose | Planeswalker$ True | SpellDescription$ Each opponent loses 3 life unless that player sacrifices a nonland permanent or discards a card.
 SVar:DBChoose:DB$ GenericChoice | Defined$ Player.IsRemembered | Choices$ SacNonland,Discard | FallbackAbility$ LoseLifeFallback | AILogic$ PayUnlessCost

@@ -1,6 +1,6 @@
 Name:Samut, the Tested
 ManaCost:2 R G
-Types:Planeswalker Samut
+Types:Legendary Planeswalker Samut
 Loyalty:4
 A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | Planeswalker$ True | KW$ Double Strike | SpellDescription$ Up to one target creature gains double strike until end of turn.
 A:AB$ DealDamage | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to distribute damage to | NumDmg$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2 | Planeswalker$ True | SpellDescription$ CARDNAME deals 2 damage divided as you choose among one or two target creatures and/or players.

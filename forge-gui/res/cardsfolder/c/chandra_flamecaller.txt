@@ -1,6 +1,6 @@
 Name:Chandra, Flamecaller
 ManaCost:4 R R
-Types:Planeswalker Chandra
+Types:Legendary Planeswalker Chandra
 Loyalty:4
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 2 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Red | TokenPower$ 3 | TokenToughness$ 1 | TokenImage$ r 3 1 elemental OGW | TokenKeywords$ Haste | AtEOT$ Exile | TokenSVars$ ChandraEOT | SpellDescription$ Create two 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step.
 SVar:ChandraEOT:SVar:EndOfTurnLeavePlay:True 

@@ -1,4 +1,4 @@
-Name:Xenagos, the Reveler
+Name:Legendary Xenagos, the Reveler
 ManaCost:2 R G
 Types:Planeswalker Xenagos
 Loyalty:3

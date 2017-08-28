@@ -17,7 +17,7 @@ ALTERNATE
 Name:Liliana, Defiant Necromancer
 ManaCost:no cost
 Colors:black
-Types:Planeswalker Liliana
+Types:Legendary Planeswalker Liliana
 Loyalty:3
 A:AB$ Discard | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Defined$ Player | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Each player discards a card.
 A:AB$ ChangeZone | Cost$ SubCounter<X/LOYALTY> | Planeswalker$ True | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature in your graveyard | ValidTgts$ Creature.YouCtrl+nonLegendary | SpellDescription$ Return target nonlegendary creature card with converted mana cost X from your graveyard to the battlefield.

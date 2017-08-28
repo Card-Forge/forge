@@ -1,6 +1,6 @@
 Name:Jace, Architect of Thought
 ManaCost:2 U U
-Types:Planeswalker Jace
+Types:Legendary Planeswalker Jace
 Loyalty:4
 A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Triggers$ TrigAttack | SVars$ JacePump | Duration$ UntilYourNextTurn | Name$ Jace, Architect of Thought Effect | AILogic$ Main2 | SpellDescription$ Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.
 SVar:TrigAttack:Mode$ Attacks | ValidCard$ Creature.OppCtrl | TriggerZones$ Command | Execute$ JacePump | TriggerDescription$ Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.

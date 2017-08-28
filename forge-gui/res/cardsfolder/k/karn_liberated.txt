@@ -1,6 +1,6 @@
 Name:Karn Liberated
 ManaCost:7
-Types:Planeswalker Karn
+Types:Legendary Planeswalker Karn
 Loyalty:6
 A:AB$ ChangeZone | Cost$ AddCounter<4/LOYALTY> | Planeswalker$ True | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | RememberChanged$ True | Chooser$ Targeted | Hidden$ True | IsCurse$ True | Mandatory$ True | SpellDescription$ Target player exiles a card from his or her hand.
 A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SpellDescription$ Exile target permanent.

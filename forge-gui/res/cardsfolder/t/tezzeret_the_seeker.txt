@@ -1,6 +1,6 @@
 Name:Tezzeret the Seeker
 ManaCost:3 U U
-Types:Planeswalker Tezzeret
+Types:Legendary Planeswalker Tezzeret
 Loyalty:4
 A:AB$ Untap | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Artifact | TgtPrompt$ Choose target artifact | TargetMin$ 0 | TargetMax$ 2 | Planeswalker$ True | SpellDescription$ Untap up to two target artifacts.
 A:AB$ ChangeZone | Cost$ SubCounter<X/LOYALTY> | Origin$ Library | Destination$ Battlefield | ChangeType$ Artifact.cmcLEChosenX | References$ X |  ChangeNum$ 1 | Shuffle$ True | Planeswalker$ True | SpellDescription$ Search your library for an artifact card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.

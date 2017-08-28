@@ -1,6 +1,6 @@
 Name:Garruk, Primal Hunter
 ManaCost:2 G G G
-Types:Planeswalker Garruk
+Types:Legendary Planeswalker Garruk
 Loyalty:3
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | TokenImage$ g 3 3 beast M12 | SpellDescription$ Create a 3/3 green Beast creature token.
 A:AB$ Draw | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Defined$ You | NumCards$ X | References$ X | SpellDescription$ Draw cards equal to the greatest power among creatures you control.

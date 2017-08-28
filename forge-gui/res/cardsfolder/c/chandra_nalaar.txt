@@ -1,6 +1,6 @@
 Name:Chandra Nalaar
 ManaCost:3 R R
-Types:Planeswalker Chandra
+Types:Legendary Planeswalker Chandra
 Loyalty:6
 A:AB$ DealDamage | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1 | Planeswalker$ True | SpellDescription$ CARDNAME deals 1 damage to target player.
 A:AB$ DealDamage | Cost$ SubCounter<X/LOYALTY> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ ChosenX | Planeswalker$ True | References$ X | SpellDescription$ CARDNAME deals X damage to target creature.

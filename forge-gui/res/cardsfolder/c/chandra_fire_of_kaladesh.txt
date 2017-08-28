@@ -17,7 +17,7 @@ ALTERNATE
 Name:Chandra, Roaring Flame
 ManaCost:no cost
 Colors:red
-Types:Planeswalker Chandra
+Types:Legendary Planeswalker Chandra
 Loyalty:4
 A:AB$ DealDamage | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Player | Planeswalker$ True | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target player
 A:AB$ DealDamage | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Creature | Planeswalker$ True | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature.

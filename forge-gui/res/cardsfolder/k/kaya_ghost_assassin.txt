@@ -1,6 +1,6 @@
 Name:Kaya, Ghost Assassin
 ManaCost:2 W B
-Types:Planeswalker Kaya
+Types:Legendary Planeswalker Kaya
 Loyalty:5
 A:AB$ Pump | Cost$ AddCounter<0/LOYALTY> | ValidTgts$ Creature | TargetMax$ 1 | TargetMin$ 0 | Planeswalker$ True | SubAbility$ DBChoose | StackDeSpellDescription$ SpellDescription | SpellDescription$ Exile CARDNAME or up to one target creature. Return that card to the battlefield under its owner's control at the beginning of your next upkeep. You lose 2 life.
 SVar:DBChoose:DB$ GenericChoice | Choices$ DBExileSelf,DBExileTarget | Defined$ You

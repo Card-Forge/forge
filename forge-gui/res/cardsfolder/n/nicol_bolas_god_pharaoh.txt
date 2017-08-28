@@ -1,6 +1,6 @@
 Name:Nicol Bolas, God-Pharaoh
 ManaCost:4 U B R
-Types:Planeswalker Bolas
+Types:Legendary Planeswalker Bolas
 Loyalty:7
 A:AB$ DigUntil | Cost$ AddCounter<2/LOYALTY> | ValidTgts$ Opponent | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | IsCurse$ True | SubAbility$ DBEffect | Planeswalker$ True | SpellDescription$ Target opponent exiles cards from the top of his or her library until he or she exiles a non land card. Until end of turn, you may cast that card without paying its mana cost.
 SVar:DBEffect:DB$ Effect | Name$ Stolen Goods Effect | StaticAbilities$ NicolBolasPlay | SVars$ DBCleanup | RememberObjects$ Remembered | Permanent$ True | SubAbility$ DBCleanup

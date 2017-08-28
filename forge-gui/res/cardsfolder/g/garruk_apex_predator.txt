@@ -1,6 +1,6 @@
 Name:Garruk, Apex Predator
 ManaCost:5 B G
-Types:Planeswalker Garruk
+Types:Legendary Planeswalker Garruk
 Loyalty:5
 A:AB$ Destroy | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Planeswalker.Other | TgtPrompt$ Select another target planeswalker | Planeswalker$ True | SpellDescription$ Destroy another target planeswalker.
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ Black | TokenPower$ 3 | TokenToughness$ 3 | TokenKeywords$ Deathtouch | SpellDescription$ Create a 3/3 black Beast creature token with deathtouch.

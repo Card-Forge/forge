@@ -1,6 +1,6 @@
 Name:Sarkhan Unbroken
 ManaCost:2 G U R
-Types:Planeswalker Sarkhan
+Types:Legendary Planeswalker Sarkhan
 Loyalty:4
 A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Defined$ You | SubAbility$ DBMana | Planeswalker$ True | SpellDescription$ Draw a card, then add one mana of any color to your mana pool.
 SVar:DBMana:DB$Mana | Produced$ Any | AILogic$ MostProminentInComputerHand

@@ -1,6 +1,6 @@
 Name:Elspeth Tirel
 ManaCost:3 W W
-Types:Planeswalker Elspeth
+Types:Legendary Planeswalker Elspeth
 Loyalty:4
 A:AB$ GainLife | Cost$ AddCounter<2/LOYALTY> | LifeAmount$ XLife | Planeswalker$ True | References$ XLife | SpellDescription$ You gain 1 life for each creature you control.
 A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | TokenAmount$ 3 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ w 1 1 soldier SOM | Planeswalker$ True | SpellDescription$ Create three 1/1 white Soldier creature tokens.

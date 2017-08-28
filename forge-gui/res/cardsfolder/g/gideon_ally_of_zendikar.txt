@@ -1,6 +1,6 @@
 Name:Gideon, Ally of Zendikar
 ManaCost:2 W W
-Types:Planeswalker Gideon
+Types:Legendary Planeswalker Gideon
 Loyalty:4
 A:AB$ Animate | Cost$ AddCounter<1/LOYALTY> | Defined$ Self | Power$ 5 | Toughness$ 5 | Keywords$ Indestructible | Types$ Creature,Human,Soldier,Ally | SubAbility$ GideonPrevent | Planeswalker$ True | SpellDescription$ Until end of turn, CARDNAME becomes a 5/5 Human Soldier Ally creature with indestructible that is still a planeswalker. Prevent all damage that would be dealt to him this turn.
 SVar:GideonPrevent:DB$ Pump | Defined$ Self | KW$ Prevent all damage that would be dealt to CARDNAME.

@@ -1,6 +1,6 @@
 Name:Liliana of the Veil
 ManaCost:1 B B
-Types:Planeswalker Liliana
+Types:Legendary Planeswalker Liliana
 Loyalty:3
 A:AB$ Discard | Cost$ AddCounter<1/LOYALTY> | NumCards$ 1 | Mode$ TgtChoose | Defined$ Player | Planeswalker$ True | SpellDescription$ Each player discards a card.
 A:AB$ Sacrifice | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature | Planeswalker$ True | SpellDescription$ Target player sacrifices a creature.

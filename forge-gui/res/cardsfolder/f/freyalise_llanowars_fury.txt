@@ -1,6 +1,6 @@
 Name:Freyalise, Llanowar's Fury
 ManaCost:3 G G
-Types:Planeswalker Freyalise
+Types:Legendary Planeswalker Freyalise
 Loyalty:3
 Text:CARDNAME can be your commander.
 A:AB$ Token | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenName$ Elf Druid | TokenTypes$ Creature,Elf,Druid | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenAbilities$ DBMana | SpellDescription$ Create a 1/1 green Elf Druid creature token with "{T}: Add {G} to your mana pool."

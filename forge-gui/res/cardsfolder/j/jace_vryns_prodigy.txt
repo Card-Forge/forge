@@ -17,7 +17,7 @@ ALTERNATE
 Name:Jace, Telepath Unbound
 ManaCost:no cost
 Colors:blue
-Types:Planeswalker Jace
+Types:Legendary Planeswalker Jace
 Loyalty:5
 A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumAtt$ -2 | IsCurse$ True | UntilYourNextTurn$ True | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Up to one target creature gets -2/-0 until your next turn.
 

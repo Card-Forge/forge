@@ -1,6 +1,6 @@
 Name:Garruk, Caller of Beasts
 ManaCost:4 G G
-Types:Planeswalker Garruk
+Types:Legendary Planeswalker Garruk
 Loyalty:4
 A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | DigNum$ 5 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature | SpellDescription$ Reveal the top five cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.
 A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Green+YouCtrl | Optional$ True | SpellDescription$ You may put a Green creature card from your hand onto the battlefield.

@@ -1,6 +1,6 @@
 Name:Teferi, Temporal Archmage
 ManaCost:4 U U
-Types:Planeswalker Teferi
+Types:Legendary Planeswalker Teferi
 Loyalty:5
 Text:CARDNAME can be your commander.
 A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | DigNum$ 2 | SpellDescription$ Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.

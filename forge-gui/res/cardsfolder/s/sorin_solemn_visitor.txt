@@ -1,6 +1,6 @@
 Name:Sorin, Solemn Visitor
 ManaCost:2 W B
-Types:Planeswalker Sorin
+Types:Legendary Planeswalker Sorin
 Loyalty:4
 A:AB$ PumpAll | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | KW$ Lifelink | UntilYourNextTurn$ True | SpellDescription$ Until your next turn, creatures you control get +1/+0 and gain lifelink.
 A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenImage$ b 2 2 vampire KTK | TokenOwner$ You | TokenName$ Vampire | TokenColors$ Black | TokenTypes$ Creature,Vampire | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Flying | SpellDescription$ Create a 2/2 black Vampire creature token with flying.

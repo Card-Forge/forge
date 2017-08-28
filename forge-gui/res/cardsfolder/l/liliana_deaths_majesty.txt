@@ -1,6 +1,6 @@
 Name:Liliana, Death's Majesty
 ManaCost:3 B B
-Types:Planeswalker Liliana
+Types:Legendary Planeswalker Liliana
 Loyalty:5
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 1 | TokenName$ Zombie | TokenColors$ Black | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ b 2 2 zombie AKH | Planeswalker$ True | SubAbility$ DBMill | SpellDescription$ Create a 2/2 black Zombie creature token. Put the top two cards of your library into your graveyard.
 SVar:DBMill:DB$Mill | Defined$ You | NumCards$ 2

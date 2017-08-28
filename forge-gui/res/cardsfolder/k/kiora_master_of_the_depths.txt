@@ -1,6 +1,6 @@
 Name:Kiora, Master of the Depths
 ManaCost:2 G U
-Types:Planeswalker Kiora
+Types:Legendary Planeswalker Kiora
 Loyalty:4
 A:AB$ Untap | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Creature | TgtPrompt$ Choose target creature | TargetMin$ 0 | TargetMax$ 1 | Planeswalker$ True | SubAbility$ DBUntap | SpellDescription$ Untap up to one target creature and up to one target land.
 SVar:DBUntap:DB$ Untap | ValidTgts$ Land | TgtPrompt$ Choose target land | TargetMin$ 0 | TargetMax$ 1

@@ -1,6 +1,6 @@
 Name:Ajani Steadfast
 ManaCost:3 W
-Types:Planeswalker Ajani
+Types:Legendary Planeswalker Ajani
 Loyalty:4
 A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumAtt$ +1 | NumDef$ +1 | KW$ First Strike & Vigilance & Lifelink | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Until end of turn, up to one target creature gets +1/+1 and gains first strike, vigilance, and lifelink.
 A:AB$ PutCounterAll | Cost$ SubCounter<2/LOYALTY> | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | Planeswalker$ True | SubAbility$ DBPutCounterAll | SpellDescription$ Put a +1/+1 counter on each creature you control and a loyalty counter on each other planeswalker you control.

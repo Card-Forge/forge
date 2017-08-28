@@ -1,6 +1,6 @@
 Name:Ajani Goldmane
 ManaCost:2 W W
-Types:Planeswalker Ajani
+Types:Legendary Planeswalker Ajani
 Loyalty:4
 A:AB$ GainLife | Cost$ AddCounter<1/LOYALTY> | LifeAmount$ 2 | Planeswalker$ True | SpellDescription$ You gain 2 life.
 A:AB$ PutCounterAll | Cost$ SubCounter<1/LOYALTY> | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | Planeswalker$ True | SubAbility$ DBPumpAll | SpellDescription$ Put a +1/+1 counter on each creature you control. Those creatures gain vigilance until end of turn.

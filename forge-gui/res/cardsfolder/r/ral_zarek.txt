@@ -1,6 +1,6 @@
 Name:Ral Zarek
 ManaCost:2 U R
-Types:Planeswalker Ral
+Types:Legendary Planeswalker Ral
 Loyalty:4
 A:AB$ Tap | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent to tap | Planeswalker$ True | SubAbility$ DBUntap | SpellDescription$ Tap target permanent, then untap another target permanent.
 SVar:DBUntap:DB$ Untap | ValidTgts$ Permanent | TargetUnique$ True | TgtPrompt$ Select target permanent to untap

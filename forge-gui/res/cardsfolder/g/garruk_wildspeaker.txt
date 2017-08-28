@@ -1,6 +1,6 @@
 Name:Garruk Wildspeaker
 ManaCost:2 G G
-Types:Planeswalker Garruk
+Types:Legendary Planeswalker Garruk
 Loyalty:3
 A:AB$ Untap | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Land | TgtPrompt$ Select target land | TargetMin$ 2 | TargetMax$ 2 | SpellDescription$ Untap two target lands.
 A:AB$ Token | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | TokenImage$ g 3 3 beast LRW | SpellDescription$ Create a 3/3 green Beast creature token.

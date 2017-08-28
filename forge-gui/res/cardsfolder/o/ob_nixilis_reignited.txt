@@ -1,6 +1,6 @@
 Name:Ob Nixilis Reignited
 ManaCost:3 B B
-Types:Planeswalker Nixilis
+Types:Legendary Planeswalker Nixilis
 Loyalty:5
 A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | NumCards$ 1 | SubAbility$ DBLoseLife1 | Planeswalker$ True | SpellDescription$ You draw a card and you lose 1 life.
 SVar:DBLoseLife1:DB$ LoseLife | LifeAmount$ 1

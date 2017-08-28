@@ -1,6 +1,6 @@
 Name:Garruk Relentless
 ManaCost:3 G
-Types:Planeswalker Garruk
+Types:Legendary Planeswalker Garruk
 Loyalty:3
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_LE2_LOYALTY | Execute$ TrigTransform | TriggerDescription$ When CARDNAME has two or fewer loyalty counters on him, transform him.
 A:AB$ DealDamage | Cost$ AddCounter<0/LOYALTY> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SubAbility$ DamageThis | Planeswalker$ True | SpellDescription$ CARDNAME deals 3 damage to target creature. That creature deals damage equal to its power to him.
@@ -17,7 +17,7 @@ ALTERNATE
 Name:Garruk, the Veil-Cursed
 ManaCost:no cost
 Colors:green,black
-Types:Planeswalker Garruk
+Types:Legendary Planeswalker Garruk
 Loyalty:3
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 1 | TokenName$ Wolf | TokenImage$ b 1 1 wolf |TokenColors$ Black | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Deathtouch | Planeswalker$ True | SpellDescription$ Create a 1/1 black Wolf creature token with deathtouch.
 A:AB$ Sacrifice | Cost$ SubCounter<1/LOYALTY> | Defined$ You | SacValid$ Creature | SacMessage$ Creature | SubAbility$ DBSearch | Planeswalker$ True | SpellDescription$ Sacrifice a creature. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle your library.

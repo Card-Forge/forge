@@ -1,6 +1,6 @@
 Name:Chandra, Pyromaster
 ManaCost:2 R R
-Types:Planeswalker Chandra
+Types:Legendary Planeswalker Chandra
 Loyalty:4
 A:AB$ DealDamage | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1 | SubAbility$ ChandraDamage | SpellDescription$ CARDNAME deals 1 damage to target player and 1 damage to up to one target creature that player controls. That creature can't block this turn.
 SVar:ChandraDamage:DB$ DealDamage | ValidTgts$ Creature.TargetedPlayerCtrl | TgtPrompt$ Select target creature that player controls | TargetMin$ 0 | TargetMax$ 1 | NumDmg$ 1 | SubAbility$ DBPump

@@ -1,6 +1,6 @@
 Name:Nahiri, the Harbinger
 ManaCost:2 R W
-Types:Planeswalker Nahiri
+Types:Legendary Planeswalker Nahiri
 Loyalty:4
 A:AB$ Discard | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | NumCards$ 1 | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ You may discard a card. If you do, draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup

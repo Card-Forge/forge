@@ -1,6 +1,6 @@
 Name:Nahiri, the Lithomancer
 ManaCost:3 W W
-Types:Planeswalker Nahiri
+Types:Legendary Planeswalker Nahiri
 Loyalty:3
 Text:CARDNAME can be your commander.
 A:AB$ Token | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenName$ Kor Soldier | TokenTypes$ Creature,Kor,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ w 1 1 kor soldier C14 | RememberTokens$ True | SubAbility$ DBChooseTarget | SpellDescription$ Create a 1/1 white Kor Soldier creature token. You may attach an Equipment you control to it.

@@ -1,6 +1,6 @@
 Name:Dack Fayden
 ManaCost:1 U R
-Types:Planeswalker Dack
+Types:Legendary Planeswalker Dack
 Loyalty:3
 A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws two cards, then discards two cards. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ Targeted | NumCards$ 2 | Mode$ TgtChoose

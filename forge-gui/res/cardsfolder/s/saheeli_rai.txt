@@ -1,6 +1,6 @@
 Name:Saheeli Rai
 ManaCost:1 U R
-Types:Planeswalker Saheeli
+Types:Legendary Planeswalker Saheeli
 Loyalty:3
 A:AB$ Scry | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ScryNum$ 1 | SubAbility$ DBDealDamage | SpellDescription$ Scry 1. CARDNAME deals 1 damage to each opponent.
 SVar:DBDealDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1 | AILogic$ Good

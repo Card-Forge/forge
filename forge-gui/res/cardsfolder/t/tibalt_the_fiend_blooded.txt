@@ -1,6 +1,6 @@
 Name:Tibalt, the Fiend-Blooded
 ManaCost:R R
-Types:Planeswalker Tibalt
+Types:Legendary Planeswalker Tibalt
 Loyalty:2
 A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | NumCards$ 1 | Planeswalker$ True | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card at random.
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ Random

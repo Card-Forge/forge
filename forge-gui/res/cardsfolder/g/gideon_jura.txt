@@ -1,6 +1,6 @@
 Name:Gideon Jura
 ManaCost:3 W W
-Types:Planeswalker Gideon
+Types:Legendary Planeswalker Gideon
 Loyalty:6
 A:AB$ MustAttack | Cost$ AddCounter<2/LOYALTY> | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Defender$ Self | Planeswalker$ True | SpellDescription$ During target opponent's next turn, creatures that player controls attack CARDNAME if able.
 A:AB$ Destroy | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | Planeswalker$ True | SpellDescription$ Destroy target tapped creature.

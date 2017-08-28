@@ -1,6 +1,6 @@
 Name:Nissa, Voice of Zendikar
 ManaCost:1 G G
-Types:Planeswalker Nissa
+Types:Legendary Planeswalker Nissa
 Loyalty:3
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenImage$ g 0 1 plant OGW | TokenName$ Plant | TokenColors$ Green | TokenTypes$ Creature,Plant | TokenPower$ 0 | TokenToughness$ 1 | SpellDescription$ Create a 0/1 green Plant creature token.
 A:AB$ PutCounterAll | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each creature you control.

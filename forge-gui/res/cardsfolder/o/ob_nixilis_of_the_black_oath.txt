@@ -1,6 +1,6 @@
 Name:Ob Nixilis of the Black Oath
 ManaCost:3 B B
-Types:Planeswalker Nixilis
+Types:Legendary Planeswalker Nixilis
 Loyalty:3
 Text:CARDNAME can be your commander.
 A:AB$ LoseLife | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 1 life. You gain life equal to the life lost this way.

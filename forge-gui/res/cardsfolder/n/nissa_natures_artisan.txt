@@ -1,6 +1,6 @@
 Name:Nissa, Nature's Artisan
 ManaCost:4 G G
-Types:Planeswalker Nissa
+Types:Legendary Planeswalker Nissa
 Loyalty:5
 A:AB$ GainLife | Cost$ AddCounter<3/LOYALTY> | Planeswalker$ True | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 A:AB$ Dig | Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | DigNum$ 2 | Reveal$ True | ChangeNum$ All | ChangeValid$ Land | DestinationZone$ Battlefield | DestinationZone2$ Hand | SpellDescription$ Reveal the top two cards of your library. Put all land cards from among them onto the battlefield and the rest into your hand.
