@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
+import org.apache.commons.lang3.StringUtils;
 
 public class RevealEffect extends SpellAbilityEffect {
 
@@ -98,7 +99,9 @@ public class RevealEffect extends SpellAbilityEffect {
             if (sa.hasParam("AnyNumber")) {
                 sb.append("any number of cards ");
             } else if (sa.hasParam("NumCards")) {
-                int numCards = Integer.valueOf(sa.getParam("NumCards"));
+                int numCards = sa.getHostCard() != null ?
+                        AbilityUtils.calculateAmount(sa.getHostCard(), "NumCards", sa)
+                        : StringUtils.isNumeric(sa.getParam("NumCards")) ? Integer.parseInt(sa.getParam("NumCards")) : 0;
                 sb.append(numCards > 1 ? numCards + " cards " : "a card ");
             } else {
                 sb.append("a card ");
