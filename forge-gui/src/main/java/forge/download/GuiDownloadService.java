@@ -242,7 +242,9 @@ public abstract class GuiDownloadService implements Runnable {
             count++;
             cardSkipped = true; //assume skipped unless saved successfully
             String url = kv.getValue();
-            final File fileDest = new File(kv.getKey());
+            //replace web url punctuation by their real punctuation...
+            String renamedKey = kv.getKey().replace("%2C",",").replace("%27s","'s");
+            final File fileDest = new File(renamedKey);
 
             System.out.println(count + "/" + totalCount + " - " + fileDest);
 
@@ -331,7 +333,7 @@ public abstract class GuiDownloadService implements Runnable {
 
     protected static void addMissingItems(Map<String, String> list, String nameUrlFile, String dir) {
         for (Pair<String, String> nameUrlPair : FileUtil.readNameUrlFile(nameUrlFile)) {
-            File f = new File(dir, nameUrlPair.getLeft());
+            File f = new File(dir, nameUrlPair.getLeft().replace("%2C",",").replace("%27s","'s"));
             //System.out.println(f.getAbsolutePath());
             if (!f.exists()) {
                 list.put(f.getAbsolutePath(), nameUrlPair.getRight());
