@@ -1003,8 +1003,9 @@ public class StaticEffect {
             if (addT.startsWith("AffectedX")) {
                 toughnessBonus = getXMapValue(affectedCard);
             }
-            affectedCard.addSemiPermanentPowerBoost(powerBonus * -1);
-            affectedCard.addSemiPermanentToughnessBoost(toughnessBonus * -1);
+            // the view is updated in GameAction#checkStaticAbilities to avoid flickering
+            affectedCard.addSemiPermanentPowerBoost(powerBonus * -1, false);
+            affectedCard.addSemiPermanentToughnessBoost(toughnessBonus * -1, false);
 
             // remove keywords
             // TODO regular keywords currently don't try to use keyword multiplier
@@ -1046,7 +1047,8 @@ public class StaticEffect {
 
             // remove Types
             if (params.containsKey("AddType") || params.containsKey("RemoveType")) {
-                affectedCard.removeChangedCardTypes(getTimestamp());
+                // the view is updated in GameAction#checkStaticAbilities to avoid flickering
+                affectedCard.removeChangedCardTypes(getTimestamp(), false);
             }
 
             // remove colors

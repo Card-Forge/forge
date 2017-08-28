@@ -63,8 +63,8 @@ public class StaticEffects {
     /**
      * Add a static effect to the list of static effects.
      * 
-     * @param staticEffect
-     *            a {@link StaticEffect}.
+     * @param staticAbility
+     *            a {@link StaticAbility}.
      */
     public final StaticEffect getStaticEffect(final StaticAbility staticAbility) {
         final StaticEffect currentEffect = staticEffects.get(staticAbility);

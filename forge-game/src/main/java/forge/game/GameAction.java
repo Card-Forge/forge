@@ -843,6 +843,12 @@ public class GameAction {
         final Map<String, Object> runParams = Maps.newHashMap();
         game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
 
+        // Update P/T and type in the view only once after all the cards have been processed, to avoid flickering
+        for (Card c : affectedCards) {
+            c.updatePowerToughnessForView();
+            c.updateTypesForView();
+        }
+
         if (runEvents && !affectedCards.isEmpty()) {
             game.fireEvent(new GameEventCardStatsChanged(affectedCards));
         }

@@ -496,6 +496,10 @@ public final class StaticAbilityContinuous {
 
                     CardFactory.copyState(gainTextSource, CardStateName.Original, affectedCard, CardStateName.Original, false);
 
+                    // Do not clone the set code and rarity from the target card
+                    affectedCard.getState(CardStateName.Original).setSetCode(affectedCard.getState(CardStateName.OriginalText).getSetCode());
+                    affectedCard.getState(CardStateName.Original).setRarity(affectedCard.getState(CardStateName.OriginalText).getRarity());
+
                     // Enable this in case Volrath's original image is to be used
                     affectedCard.getState(CardStateName.Original).setImageKey(affectedCard.getState(CardStateName.OriginalText).getImageKey());
 
@@ -572,8 +576,8 @@ public final class StaticAbilityContinuous {
                     toughnessBonus = CardFactoryUtil.xCount(affectedCard, AbilityUtils.getSVar(stAb, addT));
                     se.addXMapValue(affectedCard, toughnessBonus);
                 }
-                affectedCard.addSemiPermanentPowerBoost(powerBonus);
-                affectedCard.addSemiPermanentToughnessBoost(toughnessBonus);
+                affectedCard.addSemiPermanentPowerBoost(powerBonus, false);
+                affectedCard.addSemiPermanentToughnessBoost(toughnessBonus, false);
             }
 
             // add keywords

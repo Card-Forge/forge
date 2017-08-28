@@ -52,7 +52,7 @@ public class PumpEffect extends SpellAbilityEffect {
         applyTo.addTempPowerBoost(a);
         applyTo.addTempToughnessBoost(d);
         applyTo.addChangedCardKeywords(kws, Lists.<String>newArrayList(), false, timestamp);
-        if (redrawPT)           {     applyTo.updatePowerToughnessView();     }
+        if (redrawPT)           {     applyTo.updatePowerToughnessForView();     }
         
         if (sa.hasParam("LeaveBattlefield")) {
             addLeaveBattlefieldReplacement(applyTo, sa, sa.getParam("LeaveBattlefield"));
@@ -76,7 +76,7 @@ public class PumpEffect extends SpellAbilityEffect {
                             if (kw.startsWith("HIDDEN")) {
                                 applyTo.removeHiddenExtrinsicKeyword(kw);
                                 if (redrawPT) {
-                                    applyTo.updatePowerToughnessView();
+                                    applyTo.updatePowerToughnessForView();
                                 }
                             }
                         }
