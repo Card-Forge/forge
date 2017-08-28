@@ -32,7 +32,6 @@ import java.io.*;
 import java.net.*;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.net.URLDecoder;
 
 @SuppressWarnings("serial")
 public abstract class GuiDownloadService implements Runnable {
@@ -334,7 +333,7 @@ public abstract class GuiDownloadService implements Runnable {
 
     protected static void addMissingItems(Map<String, String> list, String nameUrlFile, String dir) {
         for (Pair<String, String> nameUrlPair : FileUtil.readNameUrlFile(nameUrlFile)) {
-            File f = new File(dir, nameUrlPair.getLeft().replace("%2C",",").replace("%27s","'s"));
+            File f = new File(dir, URLDecoder.decode(nameUrlPair.getLeft()));
             //System.out.println(f.getAbsolutePath());
             if (!f.exists()) {
                 list.put(f.getAbsolutePath(), nameUrlPair.getRight());
