@@ -973,10 +973,9 @@ public class GameAction {
                     checkAgain = true;
                 }
 
-                /* -- As of Ixalan, planeswalker uniqueness is only established via the Legendary rule
                 if (handlePlaneswalkerRule(p)) {
                     checkAgain = true;
-                }*/
+                }
             }
             // 704.5m World rule
             checkAgain |= handleWorldRule();
@@ -1225,13 +1224,12 @@ public class GameAction {
         game.getStack().clearSimultaneousStack();
     }
 
-    /* -- As of Ixalan, the Planeswalker Rule no longer applies --
     private boolean handlePlaneswalkerRule(Player p) {
         // get all Planeswalkers
         final List<Card> list = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
 
         boolean recheck = false;
-        final Multimap<String, Card> uniqueWalkers = ArrayListMultimap.create();
+        //final Multimap<String, Card> uniqueWalkers = ArrayListMultimap.create();
         for (Card c : list) {
             if (c.getCounters(CounterType.LOYALTY) <= 0) {
                 moveToGraveyard(c, null);
@@ -1240,14 +1238,15 @@ public class GameAction {
                 recheck = true;
             }
 
-
+            /*
             for (final String type : c.getType()) {
                 if (CardType.isAPlaneswalkerType(type)) {
                     uniqueWalkers.put(type, c);
                 }
-            }
+            }*/
         }
 
+        /*
         for (String key : uniqueWalkers.keySet()) {
             Collection<Card> duplicates = uniqueWalkers.get(key);
             if (duplicates.size() < 2) {
@@ -1263,8 +1262,9 @@ public class GameAction {
                 }
             }
         }
+        */
         return recheck;
-    }*/
+    }
 
     private boolean handleLegendRule(Player p) {
         final List<Card> a = CardLists.getType(p.getCardsIn(ZoneType.Battlefield), "Legendary");
