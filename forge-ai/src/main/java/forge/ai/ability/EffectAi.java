@@ -16,10 +16,7 @@ import forge.ai.SpellApiToAi;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -54,9 +51,11 @@ public class EffectAi extends SpellAbilityAi {
             } else if (logic.equals("KeepOppCreatsLandsTapped")) {
                 for (Player opp : ai.getOpponents()) {
                     boolean worthHolding = false;
-                    if (CardLists.filter(opp.getCardsIn(ZoneType.Battlefield),
-                            Predicates.and(Predicates.or(CardPredicates.Presets.LANDS, CardPredicates.Presets.CREATURES),
-                                    CardPredicates.Presets.TAPPED)).size() >= 3) {
+                    CardCollectionView oppCreatsLands = CardLists.filter(opp.getCardsIn(ZoneType.Battlefield),
+                        Predicates.or(CardPredicates.Presets.LANDS, CardPredicates.Presets.CREATURES));
+                    CardCollectionView oppCreatsLandsTapped = CardLists.filter(oppCreatsLands, CardPredicates.Presets.TAPPED);
+
+                    if (oppCreatsLandsTapped.size() >= 3 || oppCreatsLands.size() == oppCreatsLandsTapped.size()) {
                         worthHolding = true;
                     }
                     if (!worthHolding) {
