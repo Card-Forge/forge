@@ -273,8 +273,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 if (!s.isEmpty()) {
                     if (s.get(0).getCard().getCurrentState().isCreature()) {
                         creatures.add(s);
-                    } else {
-                        others.add(s);
                     }
                 } 
             }
@@ -361,6 +359,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 for (int panelIndex = 0, panelCount = stack.size(); panelIndex < panelCount; panelIndex++) {
                     final CardPanel panel = stack.get(panelIndex);
                     final int stackPosition = panelCount - panelIndex - 1;
+                    System.out.println("Added " + stack.get(panelIndex).getCard() + " as position " + stackPosition + ", stack size = " + stack.size());
                     this.setComponentZOrder(panel, panelIndex);
                     final int panelX = x + (stackPosition * this.stackSpacingX);
                     final int panelY = y + (stackPosition * this.stackSpacingY);
