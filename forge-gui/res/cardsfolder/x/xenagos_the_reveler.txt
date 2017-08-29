@@ -1,6 +1,6 @@
-Name:Legendary Xenagos, the Reveler
+Name:Xenagos, the Reveler
 ManaCost:2 R G
-Types:Planeswalker Xenagos
+Types:Legendary Planeswalker Xenagos
 Loyalty:3
 A:AB$ Mana | Cost$ AddCounter<1/LOYALTY> | Amount$ X | Produced$ Combo R G | Planeswalker$ True | References$ X | SpellDescription$ Add X mana in any combination of {R} and/or {G} to your mana pool, where X is the number of creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl
