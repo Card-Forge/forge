@@ -809,6 +809,24 @@ public class CardFactoryUtil {
             return doXMath(num, m, c);
         }
 
+        if (l[0].startsWith("RememberedWithSharedCardType")) {
+            int num = 0;
+            for (final Object o : c.getRemembered()) {
+                if (o instanceof Card) {
+                    Card firstCard = (Card) o;
+                    for (final Object p : c.getRemembered()) {
+                        if (p instanceof Card) {
+                            Card secondCard = (Card) p;
+                            if (!firstCard.equals(secondCard) && firstCard.sharesCardTypeWith(secondCard)) {
+                                num++;
+                            }
+                        }
+                    }
+                }
+            }
+            return doXMath(num, m, c);
+        }
+
         // Count$CountersAddedToPermYouCtrl <CounterType>
         if (l[0].startsWith("CountersAddedToPermYouCtrl")) {
             final String[] components = l[0].split(" ", 2);
