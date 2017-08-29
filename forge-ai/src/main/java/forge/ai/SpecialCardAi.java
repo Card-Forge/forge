@@ -301,6 +301,13 @@ public class SpecialCardAi {
                         return false;
                     }
                 }
+                if (combat.isBlocking(source)) {
+                    if (source.getNetPower() > Aggregates.sum(combat.getAttackersBlockedBy(source), CardPredicates.Accessors.fnGetNetToughness)
+                        && source.getNetToughness() > Aggregates.sum(combat.getAttackersBlockedBy(source), CardPredicates.Accessors.fnGetNetPower)) {
+                        // Already enough to kill the blockers and survive, don't overpump
+                        return false;
+                    }
+                }
             }
 
             return true;
