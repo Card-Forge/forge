@@ -143,7 +143,7 @@ public enum CounterType {
 
     KI("KI", 190, 189, 255),
 
-    LANDMARK("LMARK", 186, 28, 28),
+    LANDMARK("LNMRK", 186, 28, 28),
 
     LEVEL("LEVEL", 60, 222, 185),
 
