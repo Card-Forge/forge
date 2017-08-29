@@ -707,6 +707,13 @@ public class CountersPutAi extends SpellAbilityAi {
                         list = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
                         preferred = false;
                     }
+
+                    if (list.isEmpty()) {
+                        // Still an empty list, but we have to choose something (mandatory); expand targeting to
+                        // include AI's own cards to see if there's anything targetable (e.g. Plague Belcher).
+                        list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
+                        preferred = false;
+                    }
                 }
 
                 if (list.isEmpty()) {
