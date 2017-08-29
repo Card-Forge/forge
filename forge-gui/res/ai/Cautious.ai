@@ -53,11 +53,11 @@ TOKEN_GENERATION_ALWAYS_IF_FROM_PLANESWALKER=true
 TOKEN_GENERATION_ALWAYS_IF_OPP_ATTACKS=true
 
 # Attempt to predict the number of potential blockers with various forms of evasion when
-# deciding to do an all-in assault attack (Experimental!)
-COMBAT_ASSAULT_ATTACK_EVASION_PREDICTION=false
+# deciding to do an all-in assault attack
+COMBAT_ASSAULT_ATTACK_EVASION_PREDICTION=true
 # Attempt to predict the number of potential blockers with various forms of evasion when
-# deciding to do an attrition race attack (Experimental!)
-COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION=false
+# deciding to do an attrition race attack
+COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION=true
 
 # AILogic$ PayEnergyConservatively (used for Britsling Hydra and Longtusk Cub) will only
 # be used in case the creature is engaged in favorable combat
