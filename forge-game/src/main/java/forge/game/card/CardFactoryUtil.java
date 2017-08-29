@@ -810,9 +810,10 @@ public class CardFactoryUtil {
         }
 
         if (l[0].startsWith("RememberedWithSharedCardType")) {
-            int num = 0;
+            int maxNum = 1;
             for (final Object o : c.getRemembered()) {
                 if (o instanceof Card) {
+                    int num = 1;
                     Card firstCard = (Card) o;
                     for (final Object p : c.getRemembered()) {
                         if (p instanceof Card) {
@@ -822,9 +823,12 @@ public class CardFactoryUtil {
                             }
                         }
                     }
+                    if (num > maxNum) {
+                        maxNum = num;
+                    }
                 }
             }
-            return doXMath(num, m, c);
+            return doXMath(maxNum, m, c);
         }
 
         // Count$CountersAddedToPermYouCtrl <CounterType>
