@@ -1,0 +1,10 @@
+Name:Mavren Fein, Dusk Apostle
+ManaCost:2 W
+Types:Legendary Creature Vampire Cleric
+PT:2/2
+T:Mode$ AttackersDeclared | ValidAttackers$ Vampire.nonToken+YouCtrl | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more nontoken Vampires you control attack, create a 1/1 white Vampire creature token with lifelink.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenImage$ w 1 1 vampire | TokenName$ Vampire | TokenTypes$ Creature,Vampire | TokenColors$ White | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Lifelink
+DeckHints:Type$Vampire
+DeckHas:Ability$Token
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mavren_fein_dusk_apostle.jpg
+Oracle:Whenever one or more nontoken Vampires you control attack, create a 1/1 white Vampire creature token with lifelink.

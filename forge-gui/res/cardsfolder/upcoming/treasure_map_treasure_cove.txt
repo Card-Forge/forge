@@ -14,6 +14,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | Execute$ DBInitSV
 SVar:DBInitSVar:DB$ StoreSVar | SVar$ FoundTreasure | Type$ Number | Expression$ 0 | References$ FoundTreasure
 SVar:FoundTreasure:Number$0
 AlternateMode:DoubleFaced
+DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treasure_map.jpg
 Oracle:{1}, {T}: Scry 1. Put a landmark counter on Treasure Map. Then if there are three or more landmark counters on it, remove those counters, transform Treasure Map, and create three colorless Treasure artifact tokens with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
 

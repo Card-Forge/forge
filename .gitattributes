@@ -17209,6 +17209,7 @@ forge-gui/res/cardsfolder/u/utvara_hellkite.txt -text
 forge-gui/res/cardsfolder/u/utvara_scalper.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/u/uyo_silent_prophet.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/upcoming/admiral_beckett_brass.txt -text
+forge-gui/res/cardsfolder/upcoming/ashes_of_the_abhorrent.txt -text
 forge-gui/res/cardsfolder/upcoming/bishop_of_rebirth.txt -text
 forge-gui/res/cardsfolder/upcoming/burning_suns_avatar.txt -text
 forge-gui/res/cardsfolder/upcoming/carnage_tyrant.txt -text
@@ -17218,12 +17219,16 @@ forge-gui/res/cardsfolder/upcoming/gishath_suns_avatar.txt -text
 forge-gui/res/cardsfolder/upcoming/goring_ceratops.txt -text
 forge-gui/res/cardsfolder/upcoming/jace_cunning_castaway.txt -text
 forge-gui/res/cardsfolder/upcoming/kinjallis_sunwing.txt -text
+forge-gui/res/cardsfolder/upcoming/mavren_fein_dusk_apostle.txt -text
 forge-gui/res/cardsfolder/upcoming/priest_of_the_wakening_sun.txt -text
 forge-gui/res/cardsfolder/upcoming/prosperous_pirates.txt -text
 forge-gui/res/cardsfolder/upcoming/revel_in_riches.txt -text
 forge-gui/res/cardsfolder/upcoming/ripjaw_raptor.txt -text
+forge-gui/res/cardsfolder/upcoming/sanguine_sacrament.txt -text
+forge-gui/res/cardsfolder/upcoming/settle_the_wreckage.txt -text
 forge-gui/res/cardsfolder/upcoming/sleek_schooner.txt -text
 forge-gui/res/cardsfolder/upcoming/sun_crowned_hunters.txt -text
+forge-gui/res/cardsfolder/upcoming/tocatli_honor_guard.txt -text
 forge-gui/res/cardsfolder/upcoming/treasure_map_treasure_cove.txt -text
 forge-gui/res/cardsfolder/upcoming/unclaimed_territory.txt -text
 forge-gui/res/cardsfolder/upcoming/verdant_suns_avatar.txt -text
