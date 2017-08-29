@@ -5,4 +5,5 @@ PT:7/6
 K:CARDNAME can't be countered.
 K:Trample
 K:Hexproof
-Oracle:Carnage Tyrant can't be countered.\nTrample, hexproof 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/carnage_tyrant.jpg
+Oracle:Carnage Tyrant can't be countered.\nTrample, hexproof

@@ -1,0 +1,28 @@
+Name:Treasure Map
+ManaCost:2
+Types:Artifact
+A:AB$ Scry | Cost$ 1 T | ScryNum$ 1 | SubAbility$ DBLandmark
+SVar:DBLandmark:DB$ PutCounter | Defined$ Self | CounterType$ LANDMARK | CounterNum$ 1 | SubAbility$ DBStoreSVar
+SVar:DBStoreSVar:DB$ StoreSVar | SVar$ FoundTreasure | Type$ Number | Expression$ 1 | ConditionCheckSVar$ XMarksTheSpot | ConditionSVarCompare$ GE1 | References$ XMarksTheSpot,FoundTreasure | SubAbility$ DBRemoveCtrs
+SVar:DBRemoveCtrs:DB$ RemoveCounter | Defined$ Self | CounterType$ LANDMARK | CounterNum$ 3 | ConditionCheckSVar$ FoundTreasure | ConditionSVarCompare$ GE1 | References$ FoundTreasure | SubAbility$ DBTreasureTokens
+# TODO: How many Treasure tokens are there? (with different art)
+SVar:DBTreasureTokens:DB$ Token | TokenAmount$ 3 | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAbilities$ ABTreasureMana | TokenAltImages$ c_treasure2,c_treasure3,c_treasure4,c_treasure5,c_treasure6 | ConditionCheckSVar$ FoundTreasure | ConditionSVarCompare$ GE1 | SubAbility$ DBTransform | References$ FoundTreasure | SpellDescription$ Create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | ConditionCheckSVar$ FoundTreasure | ConditionSVarCompare$ GE1 | References$ FoundTreasure
+SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color to your mana pool.
+SVar:XMarksTheSpot:Count$Valid Card.Self+counters_GE3_LANDMARK
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | Execute$ DBInitSVar | Static$ True
+SVar:DBInitSVar:DB$ StoreSVar | SVar$ FoundTreasure | Type$ Number | Expression$ 0 | References$ FoundTreasure
+SVar:FoundTreasure:Number$0
+AlternateMode:DoubleFaced
+SVar:Picture:http://www.wizards.com/global/images/magic/general/treasure_map.jpg
+Oracle:{1}, {T}: Scry 1. Put a landmark counter on Treasure Map. Then if there are three or more landmark counters on it, remove those counters, transform Treasure Map, and create three colorless Treasure artifact tokens with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+
+ALTERNATE
+
+Name:Treasure Cove
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
+A:AB$ Draw | Cost$ T Sac<1/Treasure> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/treasure_cove.jpg
+Oracle:(Transforms from Treasure Map.)\n{T}: Add {C} to your mana pool.\n{T}, Sacrifice a Treasure: Draw a card.
