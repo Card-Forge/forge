@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Jafar 2
+Title=Jafar
+Difficulty=medium
+Description=Mono B Zombies deck with Ammit Eternal, Diregraf Colossus, Lord of the Accursed and Liliana's Mastery
+Icon=Jafar.jpg
+Deck Type=constructed
+[main]
+3 Ammit Eternal|HOU
+4 Dark Salvation|EMN
+3 Desert of the Glorified|HOU
+4 Diregraf Colossus|SOI
+4 Dread Wanderer|AKH
+3 Fatal Push|AER
+2 Grasp of Darkness|OGW
+2 Hostile Desert|HOU
+4 Ifnir Deadlands|HOU
+2 Khenra Eternal|HOU
+3 Liliana's Mastery|AKH
+2 Lord of the Accursed|AKH
+4 Relentless Dead|SOI
+15 Swamp|HOU
+4 Wretched Camel|HOU
+[sideboard]

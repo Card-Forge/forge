@@ -184,6 +184,7 @@ https://downloads.cardforge.org/images/icons/Happosai.jpg
 https://downloads.cardforge.org/images/icons/Harry%20Potter.jpg
 https://downloads.cardforge.org/images/icons/Havok.jpg
 https://downloads.cardforge.org/images/icons/He-Man.jpg
+https://downloads.cardforge.org/images/icons/Heinz%20Doofenshmirtz.jpg
 https://downloads.cardforge.org/images/icons/Hellboy.jpg
 https://downloads.cardforge.org/images/icons/Hercules.jpg
 https://downloads.cardforge.org/images/icons/Hermes%20Conrad.jpg
@@ -220,6 +221,7 @@ https://downloads.cardforge.org/images/icons/Jack%20Sparrow.jpg
 https://downloads.cardforge.org/images/icons/Jacob%20Grimm.jpg
 https://downloads.cardforge.org/images/icons/James%20Bond.jpg
 https://downloads.cardforge.org/images/icons/James%20T%20Kirk.jpg
+https://downloads.cardforge.org/images/icons/Jafar.jpg
 https://downloads.cardforge.org/images/icons/Jarad.jpg
 https://downloads.cardforge.org/images/icons/Jengu.jpg
 https://downloads.cardforge.org/images/icons/Jesse%20James.jpg
