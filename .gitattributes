@@ -17210,12 +17210,14 @@ forge-gui/res/cardsfolder/u/utvara_hellkite.txt -text
 forge-gui/res/cardsfolder/u/utvara_scalper.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/u/uyo_silent_prophet.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/upcoming/admiral_beckett_brass.txt -text
+forge-gui/res/cardsfolder/upcoming/angraths_marauders.txt -text
 forge-gui/res/cardsfolder/upcoming/arcane_adaptation.txt -text
 forge-gui/res/cardsfolder/upcoming/ashes_of_the_abhorrent.txt -text
 forge-gui/res/cardsfolder/upcoming/bishop_of_rebirth.txt -text
 forge-gui/res/cardsfolder/upcoming/bloodcrazed_paladin.txt -text
 forge-gui/res/cardsfolder/upcoming/boneyard_parley.txt -text
 forge-gui/res/cardsfolder/upcoming/burning_suns_avatar.txt -text
+forge-gui/res/cardsfolder/upcoming/captain_lannery_storm.txt -text
 forge-gui/res/cardsfolder/upcoming/carnage_tyrant.txt -text
 forge-gui/res/cardsfolder/upcoming/daring_saboteur.txt -text
 forge-gui/res/cardsfolder/upcoming/deadeye_tormentor.txt -text
@@ -17244,6 +17246,8 @@ forge-gui/res/cardsfolder/upcoming/settle_the_wreckage.txt -text
 forge-gui/res/cardsfolder/upcoming/shapers_sanctuary.txt -text
 forge-gui/res/cardsfolder/upcoming/sleek_schooner.txt -text
 forge-gui/res/cardsfolder/upcoming/sun_crowned_hunters.txt -text
+forge-gui/res/cardsfolder/upcoming/sunbirds_invocation.txt -text
+forge-gui/res/cardsfolder/upcoming/tilonallis_skinshifter.txt -text
 forge-gui/res/cardsfolder/upcoming/tocatli_honor_guard.txt -text
 forge-gui/res/cardsfolder/upcoming/treasure_map_treasure_cove.txt -text
 forge-gui/res/cardsfolder/upcoming/unclaimed_territory.txt -text
