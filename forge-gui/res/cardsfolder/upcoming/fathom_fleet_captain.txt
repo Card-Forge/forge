@@ -1,0 +1,10 @@
+Name:Fathom Fleet Captain
+ManaCost:1 B
+Types:Creature Human Pirate
+PT:2/1
+K:Menace
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | IsPresent$ Creature.Pirate+Other+nonToken+YouCtrl | PresentCompare$ GE1 | TriggerDescription$ Whenever CARDNAME attacks, if you control another nontoken Pirate, you may pay {2}. If you do, create a 2/2 black Pirate creature token with menace.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Pirate | TokenTypes$ Creature,Pirate | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Menace
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fathom_fleet_captain.jpg
+DeckHas:Ability$Token
+Oracle:Menace\nWhenever Fathom Fleet Captain attacks, if you control another nontoken Pirate, you may pay {2}. If you do, create a 2/2 black Pirate creature token with menace.
