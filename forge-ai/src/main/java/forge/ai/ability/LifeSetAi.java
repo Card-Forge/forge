@@ -94,7 +94,7 @@ public class LifeSetAi extends SpellAbilityAi {
                     }
                 }
             }
-            if (amount < myLife) {
+            if (amount <= myLife) {
                 return false;
             }
         }
