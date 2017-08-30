@@ -352,6 +352,7 @@ public class AbilityUtils {
     public static int calculateAmount(final Card card, String amount, final CardTraitBase ability, boolean maxto) {
         // return empty strings and constants
         if (StringUtils.isBlank(amount)) { return 0; }
+        if (card == null) { return 0; }
         final Player player = card.getController();
         final Game game = player.getGame();
 

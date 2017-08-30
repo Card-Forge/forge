@@ -291,6 +291,18 @@ public class SpecialCardAi {
             final Card source = sa.getHostCard();
             Game game = ai.getGame();
             Combat combat = game.getCombat();
+            Pair<Integer, Integer> predictedPT = getPumpedPT(ai, source.getNetPower(), source.getNetToughness());
+
+            if (ComputerUtil.predictThreatenedObjects(ai, null, true).contains(source)) {
+                SpellAbility saTop = game.getStack().peekAbility();
+
+                if (saTop.getApi() == ApiType.DealDamage || saTop.getApi() == ApiType.DamageAll) {
+                    int dmg = AbilityUtils.calculateAmount(saTop.getHostCard(), saTop.getParam("NumDmg"), saTop);
+                    if (source.getNetToughness() <= dmg && predictedPT.getRight() > dmg)
+                    // Try to save the Pummeler from death by pumping it
+                    return true;
+                }
+            }
 
             if (game.getPhaseHandler().is(PhaseType.COMBAT_BEGIN)) {
                 if (predictOverwhelmingDamage(ai, sa)) {
@@ -313,8 +325,6 @@ public class SpecialCardAi {
             CardCollection opposition = isBlocking ? combat.getAttackersBlockedBy(source) : combat.getBlockers(source);
             int oppP = Aggregates.sum(opposition, CardPredicates.Accessors.fnGetNetPower);
             int oppT = Aggregates.sum(opposition, CardPredicates.Accessors.fnGetNetToughness);
-
-            Pair<Integer, Integer> predictedPT = getPumpedPT(ai, source.getNetPower(), source.getNetToughness());
 
             boolean oppHasFirstStrike = false;
             boolean oppCantDie = true;
