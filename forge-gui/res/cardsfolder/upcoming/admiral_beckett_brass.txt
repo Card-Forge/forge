@@ -1,4 +1,4 @@
-Name:Admiral Becket Brass
+Name:Admiral Beckett Brass
 ManaCost:1 U B R
 Types:Legendary Creature Human Pirate
 PT:3/3
