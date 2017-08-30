@@ -132,7 +132,7 @@ public class PumpAi extends PumpAiBase {
         final boolean isBerserk = "Berserk".equals(aiLogic);
 
         if ("Pummeler".equals(sa.getParam("AILogic"))) {
-            return SpecialCardAi.ElectrostaticPummeler.considerCombatTrick(ai, sa);
+            return SpecialCardAi.ElectrostaticPummeler.consider(ai, sa);
         } else if ("MoveCounter".equals(aiLogic)) {
             final SpellAbility moveSA = sa.findSubAbilityByType(ApiType.MoveCounter);
 

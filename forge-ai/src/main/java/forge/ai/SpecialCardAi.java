@@ -286,24 +286,24 @@ public class SpecialCardAi {
 
     // Electrostatic Pummeler
     public static class ElectrostaticPummeler {
-        public static boolean considerCombatTrick(Player ai, SpellAbility sa) {
-            // Activate Electrostatic Pummeler's pump only as a combat trick
+        public static boolean consider(Player ai, SpellAbility sa) {
             final Card source = sa.getHostCard();
             Game game = ai.getGame();
             Combat combat = game.getCombat();
             Pair<Integer, Integer> predictedPT = getPumpedPT(ai, source.getNetPower(), source.getNetToughness());
 
+            // Try to save the Pummeler from death by pumping it if it's threatened with a damage spell
             if (ComputerUtil.predictThreatenedObjects(ai, null, true).contains(source)) {
                 SpellAbility saTop = game.getStack().peekAbility();
 
                 if (saTop.getApi() == ApiType.DealDamage || saTop.getApi() == ApiType.DamageAll) {
                     int dmg = AbilityUtils.calculateAmount(saTop.getHostCard(), saTop.getParam("NumDmg"), saTop);
                     if (source.getNetToughness() <= dmg && predictedPT.getRight() > dmg)
-                    // Try to save the Pummeler from death by pumping it
                     return true;
                 }
             }
 
+            // Activate Electrostatic Pummeler's pump only as a combat trick
             if (game.getPhaseHandler().is(PhaseType.COMBAT_BEGIN)) {
                 if (predictOverwhelmingDamage(ai, sa)) {
                     // We'll try to deal lethal trample/unblocked damage, so remember the card for attack
