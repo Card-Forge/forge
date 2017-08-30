@@ -18,6 +18,7 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -89,7 +90,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                             definedNames.add(discarded.toString());
                         }
 
-                        sb.append(String.join(",", definedNames));
+                        sb.append(TextUtil.join(definedNames, ","));
                     }
                 }
             }
