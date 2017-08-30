@@ -1,5 +1,5 @@
 Name:Carnage Tyrant
-ManaCost:4 G G 
+ManaCost:4 G G
 Types:Creature Dinosaur
 PT:7/6
 K:CARDNAME can't be countered.
