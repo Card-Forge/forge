@@ -2202,14 +2202,6 @@ public class ComputerUtilCombat {
     public final static int getDamageToKill(final Card c) {
         int killDamage = c.getLethalDamage() + c.getPreventNextDamageTotalShields();
 
-        // Prediction of toughness-based one-shot pumps, currently used for Electrostatic Pummeler
-        for (SpellAbility sa : c.getSpellAbilities()) {
-            if ("Pummeler".equals(sa.getParam("AILogic"))) {
-                killDamage += SpecialCardAi.ElectrostaticPummeler.getPumpedPT(c.getController(), c.getNetPower(), c.getNetToughness()).getRight() - c.getNetToughness();
-                break;
-            }
-        }
-
         if ((killDamage > c.getPreventNextDamageTotalShields())
                 && c.hasSVar("DestroyWhenDamaged")) {
             killDamage = 1 + c.getPreventNextDamageTotalShields();

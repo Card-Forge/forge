@@ -29,6 +29,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
 import forge.game.cost.CostPart;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
@@ -291,26 +292,110 @@ public class SpecialCardAi {
             Game game = ai.getGame();
             Combat combat = game.getCombat();
 
-            if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+            if (game.getPhaseHandler().is(PhaseType.COMBAT_BEGIN)) {
+                if (predictOverwhelmingDamage(ai, sa)) {
+                    // We'll try to deal lethal trample/unblocked damage, so remember the card for attack
+                    // and wait until declare blockers step.
+                    AiCardMemory.rememberCard(ai, source, AiCardMemory.MemorySet.MANDATORY_ATTACKERS);
+                    return false;
+                }
+            } else if (!game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 return false;
             }
-            if (combat != null) {
-                if (combat.getDefenderByAttacker(source) instanceof Card) {
-                    if (source.getNetPower() > Aggregates.sum(combat.getBlockers(source), CardPredicates.Accessors.fnGetNetToughness)
-                            + ((Card)combat.getDefenderByAttacker(source)).getCounters(CounterType.LOYALTY)) {
-                        return false;
-                    }
+
+            if (combat == null || !(combat.isAttacking(source) || combat.isBlocking(source))) {
+                return false;
+            }
+
+            boolean isBlocking = combat.isBlocking(source);
+            boolean cantDie = ComputerUtilCombat.attackerCantBeDestroyedInCombat(ai, source);
+
+            CardCollection opposition = isBlocking ? combat.getAttackersBlockedBy(source) : combat.getBlockers(source);
+            int oppP = Aggregates.sum(opposition, CardPredicates.Accessors.fnGetNetPower);
+            int oppT = Aggregates.sum(opposition, CardPredicates.Accessors.fnGetNetToughness);
+
+            Pair<Integer, Integer> predictedPT = getPumpedPT(ai, source.getNetPower(), source.getNetToughness());
+
+            boolean oppHasFirstStrike = false;
+            boolean oppCantDie = true;
+            boolean unblocked = opposition.isEmpty();
+            boolean canTrample = source.hasKeyword("Trample");
+
+            if (!isBlocking && combat.getDefenderByAttacker(source) instanceof Card) {
+                int loyalty = ((Card)combat.getDefenderByAttacker(source)).getCounters(CounterType.LOYALTY);
+                if (source.getNetPower() >= oppT + loyalty) {
+                    // Already enough damage to take care of the planeswalker
+                    return false;
                 }
-                if (combat.isBlocking(source)) {
-                    if (source.getNetPower() > Aggregates.sum(combat.getAttackersBlockedBy(source), CardPredicates.Accessors.fnGetNetToughness)
-                        && source.getNetToughness() > Aggregates.sum(combat.getAttackersBlockedBy(source), CardPredicates.Accessors.fnGetNetPower)) {
-                        // Already enough to kill the blockers and survive, don't overpump
-                        return false;
-                    }
+                if ((unblocked || canTrample) && predictedPT.getLeft() >= oppT + loyalty) {
+                    // Can pump to kill the planeswalker, go for it
+                    return true;
                 }
             }
 
+            for (Card c : opposition) {
+                if (c.hasKeyword("First Strike") || c.hasKeyword("Double Strike")) {
+                    oppHasFirstStrike = true;
+                }
+                if (!ComputerUtilCombat.attackerCantBeDestroyedInCombat(c.getController(), c)) {
+                    oppCantDie = false;
+                }
+            }
+
+            if (!isBlocking) {
+                int oppLife = combat.getDefendingPlayerRelatedTo(source).getLife();
+                if (((unblocked || canTrample) && (predictedPT.getLeft() - oppT > oppLife / 2))
+                        || (canTrample && predictedPT.getLeft() - oppT > 0 && predictedPT.getRight() > oppP)) {
+                    // We can deal a lot of damage (either a lot of damage directly to the opponent,
+                    // or kill the blocker(s) and damage the opponent at the same time, so go for it
+                    AiCardMemory.rememberCard(ai, source, AiCardMemory.MemorySet.MANDATORY_ATTACKERS);
+                    return true;
+                }
+            }
+
+            if (predictedPT.getRight() <= oppP && oppHasFirstStrike && !cantDie) {
+                // Can't survive first strike or double strike, don't pump
+                return false;
+            }
+            if (predictedPT.getLeft() < oppT && (!cantDie || predictedPT.getRight() <= oppP)) {
+                // Can't pump enough to kill the blockers and survive, don't pump
+                return false;
+            }
+            if (source.getNetPower() > oppT && source.getNetToughness() > oppP) {
+                // Already enough to kill the blockers and survive, don't overpump
+                return false;
+            }
+            if (oppCantDie && !source.hasKeyword("Trample") && !source.hasKeyword("Wither")
+                    && !source.hasKeyword("Infect") && predictedPT.getLeft() <= oppT) {
+                // Can't kill or cripple anyone, as well as can't Trample over, so don't pump
+                return false;
+            }
+
+            // If we got here, it should be a favorable combat pump, resulting in at least one
+            // opposing creature dying, and hopefully with the Pummeler surviving combat.
             return true;
+        }
+
+        public static boolean predictOverwhelmingDamage(Player ai, SpellAbility sa) {
+            final Card source = sa.getHostCard();
+            int oppLife = ai.getWeakestOpponent().getLife();
+            CardCollection oppInPlay = ai.getWeakestOpponent().getCreaturesInPlay();
+            CardCollection potentialBlockers = new CardCollection();
+
+            for (Card b : oppInPlay) {
+                if (CombatUtil.canBlock(sa.getHostCard(), b)) {
+                    potentialBlockers.add(b);
+                }
+            }
+
+            Pair<Integer, Integer> predictedPT = getPumpedPT(ai, source.getNetPower(), source.getNetToughness());
+            int oppT = Aggregates.sum(potentialBlockers, CardPredicates.Accessors.fnGetNetToughness);
+
+            if (potentialBlockers.isEmpty() || (sa.getHostCard().hasKeyword("Trample") && predictedPT.getLeft() - oppT >= oppLife)) {
+                return true;
+            }
+
+            return false;
         }
 
         public static Pair<Integer, Integer> getPumpedPT(Player ai, int power, int toughness) {
