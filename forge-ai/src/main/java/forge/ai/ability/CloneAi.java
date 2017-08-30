@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import java.util.List;
 
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -15,6 +16,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.zone.ZoneType;
 
 public class CloneAi extends SpellAbilityAi {
 
@@ -131,13 +133,19 @@ public class CloneAi extends SpellAbilityAi {
      * cloneTgtAI.
      * </p>
      * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a boolean.
      */
     private boolean cloneTgtAI(final SpellAbility sa) {
+        // Specific logic for cards
+        if ("CloneAttacker".equals(sa.getParam("AILogic"))) {
+            CardCollection valid = CardLists.getValidCards(sa.getHostCard().getController().getCardsIn(ZoneType.Battlefield), sa.getParam("ValidTgts"), sa.getHostCard().getController(), sa.getHostCard());
+            sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(valid));
+            return true;
+        }
+
+        // Default:
         // This is reasonable for now. Kamahl, Fist of Krosa and a sorcery or
         // two are the only things
         // that clone a target. Those can just use SVar:RemAIDeck:True until

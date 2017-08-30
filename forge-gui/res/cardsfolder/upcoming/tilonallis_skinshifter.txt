@@ -3,6 +3,6 @@ ManaCost:2 R
 Types:Creature Human Shaman
 PT:0/1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBClone | TriggerZones$ Battlefield | Mandatory$ True | TriggerDescription$ Whenever CARDNAME attacks, it becomes a copy of another target nonlegendary attacking creature until end of turn.
-SVar:DBClone:DB$ Clone | CloneTarget$ Self | ValidTgts$ Creature.nonLegendary+Other+attacking | TgtPrompt$ Select target nonlegendary attacking creature to copy | Duration$ UntilEndOfTurn
+SVar:DBClone:DB$ Clone | CloneTarget$ Self | ValidTgts$ Creature.nonLegendary+Other+attacking | TgtPrompt$ Select target nonlegendary attacking creature to copy | Duration$ UntilEndOfTurn | AILogic$ CloneAttacker
 SVar:Picture:http://media.wizards.com/2017/xln/en_Vpp3G9u49p.png
 Oracle:Whenever Tilomalli's Skinshifter attacks, it becomes a copy of another target nonlegendary attacking creature until end of turn.
