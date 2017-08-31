@@ -17229,6 +17229,7 @@ forge-gui/res/cardsfolder/upcoming/fathom_fleet_captain.txt -text
 forge-gui/res/cardsfolder/upcoming/gishath_suns_avatar.txt -text
 forge-gui/res/cardsfolder/upcoming/goring_ceratops.txt -text
 forge-gui/res/cardsfolder/upcoming/herald_of_secret_streams.txt -text
+forge-gui/res/cardsfolder/upcoming/hostage_taker.txt -text
 forge-gui/res/cardsfolder/upcoming/jace_cunning_castaway.txt -text
 forge-gui/res/cardsfolder/upcoming/kinjallis_sunwing.txt -text
 forge-gui/res/cardsfolder/upcoming/kopala_warden_of_waves.txt -text
@@ -17245,10 +17246,12 @@ forge-gui/res/cardsfolder/upcoming/sanguine_sacrament.txt -text
 forge-gui/res/cardsfolder/upcoming/settle_the_wreckage.txt -text
 forge-gui/res/cardsfolder/upcoming/shapers_sanctuary.txt -text
 forge-gui/res/cardsfolder/upcoming/sleek_schooner.txt -text
+forge-gui/res/cardsfolder/upcoming/sorcerous_spyglass.txt -text
 forge-gui/res/cardsfolder/upcoming/star_of_extinction.txt -text
 forge-gui/res/cardsfolder/upcoming/sun_crowned_hunters.txt -text
 forge-gui/res/cardsfolder/upcoming/sunbirds_invocation.txt -text
 forge-gui/res/cardsfolder/upcoming/tilonallis_skinshifter.txt -text
+forge-gui/res/cardsfolder/upcoming/tishana_voice_of_thunder.txt -text
 forge-gui/res/cardsfolder/upcoming/tocatli_honor_guard.txt -text
 forge-gui/res/cardsfolder/upcoming/treasure_map_treasure_cove.txt -text
 forge-gui/res/cardsfolder/upcoming/unclaimed_territory.txt -text

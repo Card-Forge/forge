@@ -1,0 +1,12 @@
+Name:Sorcerous Spyglass
+ManaCost:2
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPeek | TriggerDescription$ As CARDNAME enters the battlefield, look at an opponent's hand, then choose any card name. Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.
+SVar:TrigPeek:DB$ RevealHand | ValidTgts$ Opponent | TgtPrompt$ Select an opponent | SubAbility$ DBNameCard
+SVar:DBNameCard:DB$ NameCard | Defined$ You
+S:Mode$ CantBeActivated | ValidCard$ Card.NamedCard | NonMana$ True
+SVar:RemRandomDeck:True
+# TODO: Might improve AI logic to support it (the AI needs to pick cards that actually have activated nonmana abilities on them)
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sorcerous_spyglass.jpg
+Oracle:As Sorcerous Spyglass enters the battlefield, look at an opponent's hand, then choose any card name. Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.
