@@ -304,6 +304,11 @@ public class SpecialCardAi {
                 }
             }
 
+            // Do not activate if damage will be prevented
+            if (source.staticDamagePrevention(predictedPT.getLeft(), source, true, true) == 0) {
+                return false;
+            }
+
             // Activate Electrostatic Pummeler's pump only as a combat trick
             if (game.getPhaseHandler().is(PhaseType.COMBAT_BEGIN)) {
                 if (predictOverwhelmingDamage(ai, sa)) {
