@@ -2127,8 +2127,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             addCardToZone(null, true);
         }
 
-        private void addCardToZone(ZoneType zone, boolean repeatLast) {
-            ZoneType targetZone = repeatLast ? lastAddedZone : zone;
+        private void addCardToZone(ZoneType zone, final boolean repeatLast) {
+            final ZoneType targetZone = repeatLast ? lastAddedZone : zone;
             String zoneStr = targetZone != ZoneType.Battlefield ? "in " + targetZone.name().toLowerCase() : "on the battlefield";
 
             final Player p = repeatLast ? lastAddedPlayer
@@ -2149,7 +2149,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
 
             final PaperCard c = carddb.getUniqueByName(f.getName());
-            Card forgeCard = Card.fromPaperCard(c, p);
+            final Card forgeCard = Card.fromPaperCard(c, p);
 
             game.getAction().invoke(new Runnable() {
                 @Override
