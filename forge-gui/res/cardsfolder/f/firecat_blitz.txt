@@ -2,7 +2,7 @@ Name:Firecat Blitz
 ManaCost:X R R
 Types:Sorcery
 A:SP$ Token | Cost$ X R R | TokenAmount$ X | TokenName$ Elemental Cat | TokenTypes$ Creature,Elemental,Cat | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Haste | TokenSVars$ FirecatBlitzEOT | AtEOT$ Exile | References$ X | SpellDescription$ Create X 1/1 red Elemental Cat creature tokens with haste. Exile them at the beginning of the next end step.
-A:SP$ Token | Cost$ R R Sac<Y/Mountain> | TokenAmount$ ChosenX | TokenName$ Elemental Cat | TokenTypes$ Creature,Elemental,Cat | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Haste | TokenSVars$ FirecatBlitzEOT | AtEOT$ Exile | Flashback$ True | PrecostDesc$ Flashback - | CostDesc$ {R}{R}, Sacrifice X Mountains. | References$ Y | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+A:SP$ Token | Cost$ R R Sac<Y/Mountain> | TokenAmount$ ChosenX | TokenName$ Elemental Cat | TokenTypes$ Creature,Elemental,Cat | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Haste | TokenSVars$ FirecatBlitzEOT | AtEOT$ Exile | Flashback$ True | CostDesc$Flashback—{R}{R}, Sacrifice X Mountains. | References$ Y | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:FirecatBlitzEOT:SVar:EndOfTurnLeavePlay:True
 SVar:X:Count$xPaid
 SVar:Y:XChoice

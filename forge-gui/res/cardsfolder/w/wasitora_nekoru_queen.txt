@@ -4,7 +4,7 @@ Types:Legendary Creature Cat Dragon
 PT:5/4
 K:Flying
 K:Trample
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player,that player sacrifices a creature. If the player can't, you create a 3/3 black, red, and green Cat Dragon creature token with flying.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player sacrifices a creature. If the player can't, you create a 3/3 black, red, and green Cat Dragon creature token with flying.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ TriggeredTarget | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Cat Dragon | TokenTypes$ Creature,Cat,Dragon | TokenOwner$ You | TokenColors$ Black,Red,Green | TokenPower$ 3 | TokenToughness$ 3 | TokenImage$ brg 3 3 cat dragon C17 | TokenKeywords$ Flying | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered $ True

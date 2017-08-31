@@ -7,4 +7,4 @@ SVar:DestroyAndDraw:DB$ Destroy | ValidTgts$ Creature.ChosenCtrl | TgtPrompt$ Se
 SVar:ChooserDraws:DB$ Draw | NumCards$ 3 | Defined$ ChosenPlayer
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fatal_lore.jpg
-Oracle:An opponent chooses one -\n• You draw three cards.\n• You destroy up to two target creatures that player controls. They can't be regenerated. That player draws up to three cards.
+Oracle:An opponent chooses one —\n• You draw three cards.\n• You destroy up to two target creatures that player controls. They can't be regenerated. That player draws up to three cards.

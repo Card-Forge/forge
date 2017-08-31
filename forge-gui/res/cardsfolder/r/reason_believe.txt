@@ -2,7 +2,7 @@ Name:Reason
 ManaCost:U
 AlternateMode: Split
 Types:Sorcery
-A:SP$ Scry | Cost$ U | ScryNum$ 3 | SpellDescription$ Scry 3. (Look at the top three cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+A:SP$ Scry | Cost$ U | ScryNum$ 3 | SpellDescription$ Scry 3.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reason_believe.jpg
 Oracle:Scry 3.
 

@@ -2,7 +2,7 @@ Name:Hearth Charm
 ManaCost:R
 Types:Instant
 A:SP$ Charm | Cost$ R | Choices$ DBDestroy,DBPumpAll,DBPump | CharmNum$ 1
-SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature | PrecostDesc$ Choose one - | SpellDescription$ Destroy target artifact creature.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature | SpellDescription$ Destroy target artifact creature.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.attacking | NumAtt$ +1 | SpellDescription$ Attacking creatures get +1/+0 until end of turn.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less | KW$ HIDDEN Unblockable | SpellDescription$ Target creature with power 2 or less can't be blocked this turn.
 SVar:RemAIDeck:True

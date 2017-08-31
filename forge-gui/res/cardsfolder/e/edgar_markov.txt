@@ -2,8 +2,8 @@ Name:Edgar Markov
 ManaCost:3 R W B
 Types:Legendary Creature Vampire Knight
 PT:4/4
-T:Mode$ SpellCast | ValidCard$ Card.Vampire+Other | ValidActivatingPlayer$ You | TriggerZones$ Command | PresentZone$ Command | Execute$ TrigToken | TriggerDescription$ Eminence - Whenever you cast another Vampire spell, if Edgar Markov is in the command zone or on the battlefield, create a 1/1 black Vampire creature token.
-T:Mode$ SpellCast | ValidCard$ Card.Vampire+Other | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | PresentZone$ Battlefield | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Eminence - Whenever you cast another Vampire spell, if Edgar Markov is in the command zone or on the battlefield, create a 1/1 black Vampire creature token.
+T:Mode$ SpellCast | ValidCard$ Creature.Vampire+Other | ValidActivatingPlayer$ You | TriggerZones$ Command | PresentZone$ Command | Execute$ TrigToken | TriggerDescription$ Eminence — Whenever you cast another Vampire spell, if Edgar Markov is in the command zone or on the battlefield, create a 1/1 black Vampire creature token.
+T:Mode$ SpellCast | ValidCard$ Creature.Vampire+Other | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | PresentZone$ Battlefield | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Eminence — Whenever you cast another Vampire spell, if Edgar Markov is in the command zone or on the battlefield, create a 1/1 black Vampire creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Vampire | TokenTypes$ Creature,Vampire | TokenColors$ Black | TokenPower$ 1 | TokenToughness$ 1 | TokenOwner$ You | TokenImage$ b 1 1 vampire C17
 K:First Strike
 K:Haste
@@ -14,4 +14,4 @@ SVar:HasAttackEffect:TRUE
 SVar:BuffedBy:Vampire
 DeckHints:Type$Vampire
 SVar:Picture:http://www.wizards.com/global/images/magic/general/edgar_markov.jpg
-Oracle:Eminence - Whenever you cast another Vampire spell, if Edgar Markov is in the command zone or on the battlefield, create a 1/1 black Vampire creature token.\nFirst strike, haste\nWhenever Edgar Markov attacks, put a +1/+1 counter on each Vampire you control.
+Oracle:Eminence — Whenever you cast another Vampire spell, if Edgar Markov is in the command zone or on the battlefield, create a 1/1 black Vampire creature token.\nFirst strike, haste\nWhenever Edgar Markov attacks, put a +1/+1 counter on each Vampire you control.

@@ -2,7 +2,7 @@ Name:Steward of Solidarity
 ManaCost:1 W
 Types:Creature Human Warrior
 PT:2/2
-A:AB$ Token | Cost$ T Exert<1/CARDNAME> | TokenAmount$ 1 | TokenName$ Warrior | TokenTypes$ Creature,Warrior | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Vigilance | TokenImage$ w 1 1 warrior AKH | SpellDescription$ Create a 1/1 white Warrior creature token with vigilance.
+A:AB$ Token | Cost$ T Exert<1/CARDNAME> | TokenAmount$ 1 | TokenName$ Warrior | TokenTypes$ Creature,Warrior | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Vigilance | TokenImage$ w 1 1 warrior AKH | SpellDescription$ Create a 1/1 white Warrior creature token with vigilance. (An exerted creature won't untap during your next untap step.)
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steward_of_solidarity.jpg
 Oracle:{T}, Exert Steward of Solidarity: Create a 1/1 white Warrior creature token with vigilance. (An exerted creature won't untap during your next untap step.)

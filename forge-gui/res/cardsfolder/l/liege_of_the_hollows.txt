@@ -2,11 +2,11 @@ Name:Liege of the Hollows
 ManaCost:2 G G
 Types:Creature Spirit
 PT:3/4
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ RepeatPayment | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, each player may pay any amount of mana. Then each player who paid mana this way puts that many 1/1 green Squirrel creature tokens onto the battlefield.
-SVar:RepeatPayment:DB$ RepeatEach | RepeatPlayers$ Player | StartingWithActivator$ True | RepeatSubAbility$ DBPay | StackDescription$ When CARDNAME dies, each player may pay any amount of mana. Then each player who paid mana this way puts that many 1/1 green Squirrel creature tokens onto the battlefield.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ RepeatPayment | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, each player may pay any amount of mana. Then each player creates a number of 1/1 green Squirrel creature tokens equal to the amount of mana he or she paid this way.
+SVar:RepeatPayment:DB$ RepeatEach | RepeatPlayers$ Player | StartingWithActivator$ True | RepeatSubAbility$ DBPay | StackDescription$ When CARDNAME dies, each player may pay any amount of mana. Then each player creates a number of 1/1 green Squirrel creature tokens equal to the amount of mana he or she paid this way.
 SVar:DBPay:DB$ ChooseNumber | Defined$ Player.IsRemembered | ChooseAnyNumber$ True | ListTitle$ Pay Any Mana | AILogic$ MaxForAnyController | SubAbility$ DBToken
 # TODO: ideally the tokens should be created simultaneously after all the players have finished paying mana, but that's difficult to implement.
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenName$ Squirrel | TokenTypes$ Creature,Squirrel | TokenOwner$ Player.IsRemembered | TokenColors$ green | TokenPower$ 1 | TokenToughness$ 1 | UnlessCost$ X | UnlessPayer$ Player.IsRemembered | UnlessSwitched$ True | References$ X
 SVar:X:Count$ChosenNumber
 SVar:Picture:http://www.wizards.com/global/images/magic/general/liege_of_the_hollows.jpg
-Oracle:When Liege of the Hollows dies, each player may pay any amount of mana. Then each player who paid mana this way puts that many 1/1 green Squirrel creature tokens onto the battlefield.
+Oracle:When Liege of the Hollows dies, each player may pay any amount of mana. Then each player creates a number of 1/1 green Squirrel creature tokens equal to the amount of mana he or she paid this way.
