@@ -1,16 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.AiController;
-import forge.ai.AiProps;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilAbility;
-import java.util.Iterator;
-
-import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -25,6 +15,8 @@ import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.Iterator;
 
 public class CounterAi extends SpellAbilityAi {
 
@@ -137,6 +129,10 @@ public class CounterAi extends SpellAbilityAi {
             } else if (logic.startsWith("MinCMC.")) {
                 int minCMC = Integer.parseInt(logic.substring(7));
                 if (tgtCMC < minCMC) {
+                    return false;
+                }
+            } else if ("NullBrooch".equals(logic)) {
+                if (!SpecialCardAi.NullBrooch.consider(ai, sa)) {
                     return false;
                 }
             }

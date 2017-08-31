@@ -1011,6 +1011,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return false;
         }
 
+        // Check if the opponent can save a creature from bounce/blink/whatever by paying
+        // the Unless cost (for example, Erratic Portal)
+        list.removeAll(getSafeTargetsIfUnlessCostPaid(ai, sa, list));
+
         if (!mandatory && list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             return false;
         }
@@ -1634,6 +1638,45 @@ public class ChangeZoneAi extends SpellAbilityAi {
         
         // Normally we want the commander back in Command zone to recast him later
         return true;
+    }
+
+    private static CardCollection getSafeTargetsIfUnlessCostPaid(Player ai, SpellAbility sa, Iterable<Card> potentialTgts) {
+        // Determines if the controller of each potential target can negate the ChangeZone effect
+        // by paying the Unless cost. Returns the list of targets that can be saved that way.
+        final Card source = sa.getHostCard();
+        final CardCollection canBeSaved = new CardCollection();
+
+        for (Card potentialTgt : potentialTgts) {
+            String unlessCost = sa.hasParam("UnlessCost") ? sa.getParam("UnlessCost").trim() : null;
+
+            if (unlessCost != null && !unlessCost.endsWith(">")) {
+                Player opp = potentialTgt.getController();
+                int usableManaSources = ComputerUtilMana.getAvailableManaEstimate(opp);
+
+                int toPay = 0;
+                boolean setPayX = false;
+                if (unlessCost.equals("X") && source.getSVar(unlessCost).equals("Count$xPaid")) {
+                    setPayX = true;
+                    toPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                } else {
+                    toPay = AbilityUtils.calculateAmount(source, unlessCost, sa);
+                }
+
+                if (toPay == 0) {
+                    canBeSaved.add(potentialTgt);
+                }
+
+                if (toPay <= usableManaSources) {
+                    canBeSaved.add(potentialTgt);
+                }
+
+                if (setPayX) {
+                    source.setSVar("PayX", Integer.toString(toPay));
+                }
+            }
+        }
+
+        return canBeSaved;
     }
 
     private static void rememberBouncedThisTurn(Player ai, Card c) {

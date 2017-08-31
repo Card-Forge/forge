@@ -37,6 +37,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import org.apache.commons.lang3.tuple.Pair;
@@ -637,6 +638,31 @@ public class SpecialCardAi {
                 // Only activate in AI's own turn (sans the exception above)
                 return false;
             } 
+
+            return true;
+        }
+    }
+
+    // Null Brooch
+    public static class NullBrooch {
+        public static boolean consider(Player ai, SpellAbility sa) {
+            // TODO: improve the detection of Ensnaring Bridge type effects ("GTX", "X" need generalization)
+            boolean hasEnsnaringBridgeEffect = false;
+            for (Card otb : ai.getCardsIn(ZoneType.Battlefield)) {
+                for (StaticAbility stab : otb.getStaticAbilities()) {
+                    if ("CARDNAME can't attack.".equals(stab.getParam("AddHiddenKeyword"))
+                            && "Creature.powerGTX".equals(stab.getParam("Affected"))
+                            && "Count$InYourHand".equals(otb.getSVar("X"))) {
+                        hasEnsnaringBridgeEffect = true;
+                        break;
+                    }
+                }
+
+            }
+            // Maybe use it for some important high-impact spells even if there are more cards in hand?
+            if (ai.getCardsIn(ZoneType.Hand).size() > 1 && !hasEnsnaringBridgeEffect) {
+                return false;
+            }
 
             return true;
         }
