@@ -2711,5 +2711,18 @@ public class ComputerUtil {
         }
 
         throw new IllegalStateException("No opponents left ingame for " + player);
-    }    
+    }
+
+    public static int countUsefulCreatures(Player p) {
+        CardCollection creats = p.getCreaturesInPlay();
+        int count = 0;
+
+        for (Card c : creats) {
+            if (!ComputerUtilCard.isUselessCreature(p, c)) {
+                count ++;
+            }
+        }
+
+        return count;
+    }
 }

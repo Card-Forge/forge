@@ -21,6 +21,10 @@ public class CreatureEvaluator implements Function<Card, Integer> {
     }
 
     public int evaluateCreature(final Card c) {
+        return evaluateCreature(c, true, true);
+    }
+
+    public int evaluateCreature(final Card c, final boolean considerPT, final boolean considerCMC) {
         int value = 80;
         if (!c.isToken()) {
             value += addValue(20, "non-token"); // tokens should be worth less than actual cards
@@ -36,9 +40,13 @@ public class CreatureEvaluator implements Function<Card, Integer> {
                 break;
             }
         }
-        value += addValue(power * 15, "power");
-        value += addValue(toughness * 10, "toughness: " + toughness);
-        value += addValue(c.getCMC() * 5, "cmc");
+        if (considerPT) {
+            value += addValue(power * 15, "power");
+            value += addValue(toughness * 10, "toughness: " + toughness);
+        }
+        if (considerCMC) {
+            value += addValue(c.getCMC() * 5, "cmc");
+        }
     
         // Evasion keywords
         if (c.hasKeyword("Flying")) {

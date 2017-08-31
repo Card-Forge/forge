@@ -32,6 +32,7 @@ import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
+import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
 
 import java.util.ArrayList;
@@ -541,21 +542,63 @@ public class AiBlockController {
 
         for (final Card attacker : attackersLeft) {
 
+            boolean enableRandomTrades = false;
+            boolean randomTradeIfBehindOnBoard = false;
+            int minRandomTradeChance = 0;
+            int maxRandomTradeChance = 0;
+
+            if (ai.getController().isAI()) {
+                AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+                enableRandomTrades = aic.getBooleanProperty(AiProps.ENABLE_RANDOM_FAVORABLE_TRADES_ON_BLOCK);
+                randomTradeIfBehindOnBoard = aic.getBooleanProperty(AiProps.RANDOMLY_TRADE_EVEN_IF_HAS_LESS_CREATS);
+                minRandomTradeChance = aic.getIntProperty(AiProps.MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
+                maxRandomTradeChance = aic.getIntProperty(AiProps.MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
+            }
+
             if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")
         			|| attacker.hasKeyword("Menace")
                     || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
                 continue;
             }
+            if (ComputerUtilCombat.attackerHasThreateningAfflict(attacker, ai)) {
+                continue;
+            }
 
             List<Card> possibleBlockers = getPossibleBlockers(combat, attacker, blockersLeft, true);
             killingBlockers = getKillingBlockers(combat, attacker, possibleBlockers);
-            if (!killingBlockers.isEmpty() && ComputerUtilCombat.lifeInDanger(ai, combat)) {
-                if (ComputerUtilCombat.attackerHasThreateningAfflict(attacker, ai)) {
-                    continue;
-                }
+
+            if (!killingBlockers.isEmpty()) {
                 final Card blocker = ComputerUtilCard.getWorstCreatureAI(killingBlockers);
-                combat.addBlocker(attacker, blocker);
-                currentAttackers.remove(attacker);
+                boolean doTrade = false;
+
+                if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
+                    // Always trade when life in danger
+                    doTrade = true;
+                } else if (enableRandomTrades) {
+                    // Randomly trade creatures with lower power and worse abilities
+                    float chanceStep = (100 - minRandomTradeChance) / 15; // 15 steps between 5 life and 20+ life
+                    int chance = (int)Math.max(minRandomTradeChance, (100 - (Math.abs(5 - ai.getLife()) * chanceStep)));
+                    if (chance > maxRandomTradeChance) {
+                        chance = maxRandomTradeChance;
+                    }
+
+                    int evalAtk = ComputerUtilCard.evaluateCreature(attacker, false, false);
+                    int evalBlk = ComputerUtilCard.evaluateCreature(blocker, false, false);
+                    boolean powerParityOrHigher = blocker.getNetPower() >= attacker.getNetPower();
+                    boolean creatureParityOrHigher = ComputerUtil.countUsefulCreatures(ai) >= ComputerUtil.countUsefulCreatures(attacker.getController());
+
+                    if (evalBlk >= evalAtk
+                            && powerParityOrHigher
+                            && (creatureParityOrHigher || randomTradeIfBehindOnBoard)
+                            && MyRandom.percentTrue(chance)) {
+                        doTrade = true;
+                    }
+                }
+
+                if (doTrade) {
+                    combat.addBlocker(attacker, blocker);
+                    currentAttackers.remove(attacker);
+                }
             }
         }
         attackersLeft = (new ArrayList<>(currentAttackers));
@@ -856,9 +899,8 @@ public class AiBlockController {
         // When the AI holds some Fog effect, don't bother about lifeInDanger
         if (!ComputerUtil.hasAFogEffect(ai)) {
         	lifeInDanger = ComputerUtilCombat.lifeInDanger(ai, combat);
-	        if (lifeInDanger) {
-	            makeTradeBlocks(combat); // choose necessary trade blocks
-	        }
+            makeTradeBlocks(combat); // choose necessary trade blocks
+
 	        // if life is still in danger
 	        if (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)) {
 	            makeChumpBlocks(combat); // choose necessary chump blocks

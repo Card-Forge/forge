@@ -1,9 +1,21 @@
-# Aggro preferences (enabling these will generally make the AI attack more aggressively)
-PLAY_AGGRO=false
-USE_BERSERK_AGGRESSIVELY=false
-
 # The amount of cards at which to stop considering mulligan
 MULLIGAN_THRESHOLD=4
+
+# Aggro preferences (enabling these will generally make the AI attack more aggressively into potential trades)
+PLAY_AGGRO=false
+# The chance to attack aggressively into a potential trade even if not playing all-out aggro (PLAY_AGGRO disabled)
+CHANCE_TO_ATTACK_INTO_TRADE=20
+# When enabled, the AI will use Berserk on offense to try to severely damage the opponent at the expense of the creature
+USE_BERSERK_AGGRESSIVELY=true
+
+# Trade blocking preferences (enabling these will make the AI trade more aggressively when considering blocks,
+# but only with creatures that are worse in abilities and have lower or the same power as the attacker)
+ENABLE_RANDOM_FAVORABLE_TRADES_ON_BLOCK=true
+# If enabled, the AI will consider trade blocking even if its creature count is lower than the opponent's
+RANDOMLY_TRADE_EVEN_IF_HAS_LESS_CREATS=true
+# Min and max chance to randomly aggressively trade when blocking
+MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK=20
+MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK=100
 
 # Only works when AI cheating is enabled in preferences, otherwise does nothing
 CHEAT_WITH_MANA_ON_SHUFFLE=true

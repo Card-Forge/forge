@@ -384,6 +384,10 @@ public class ComputerUtilCard {
         return creatureEvaluator.evaluateCreature(c);
     }
 
+    public static int evaluateCreature(final Card c, final boolean considerPT, final boolean considerCMC) {
+        return creatureEvaluator.evaluateCreature(c, considerPT, considerCMC);
+    }
+
     public static int evaluatePermanentList(final CardCollectionView list) {
         int value = 0;
         for (int i = 0; i < list.size(); i++) {

@@ -35,7 +35,12 @@ public enum AiProps { /** */
     PRIORITIZE_MOVE_EQUIPMENT_IF_USELESS ("true"),
     PREDICT_SPELLS_FOR_MAIN2 ("true"), /** */
     RESERVE_MANA_FOR_MAIN2_CHANCE ("0"), /** */
-    PLAY_AGGRO ("false"), /** */
+    PLAY_AGGRO ("false"),
+    CHANCE_TO_ATTACK_INTO_TRADE ("100"), /** */
+    ENABLE_RANDOM_FAVORABLE_TRADES_ON_BLOCK ("false"), /** */
+    RANDOMLY_TRADE_EVEN_IF_HAS_LESS_CREATS ("false"), /** */
+    MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK ("20"), /** */
+    MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK ("100"), /** */
     MIN_SPELL_CMC_TO_COUNTER ("0"),
     ALWAYS_COUNTER_OTHER_COUNTERSPELLS ("true"), /** */
     ALWAYS_COUNTER_DAMAGE_SPELLS ("true"), /** */
