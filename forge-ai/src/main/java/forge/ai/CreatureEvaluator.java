@@ -101,6 +101,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
                 value += addValue(power * 15, "infect");
             }
             value += addValue(c.getKeywordMagnitude("Rampage"), "rampage");
+            value += addValue(c.getKeywordMagnitude("Afflict") * 5, "afflict");
         }
     
         value += addValue(c.getKeywordMagnitude("Bushido") * 16, "bushido");
@@ -108,6 +109,14 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         value += addValue(c.getAmountOfKeyword("Exalted") * 15, "exalted");
         value += addValue(c.getKeywordMagnitude("Annihilator") * 50, "eldrazi");
         value += addValue(c.getKeywordMagnitude("Absorb") * 11, "absorb");
+
+        // Keywords that may produce temporary or permanent buffs over time
+        if (c.hasKeyword("Prowess")) {
+            value += addValue(5, "prowess");
+        }
+        if (c.hasKeyword("Outlast")) {
+            value += addValue(10, "outlast");
+        }
 
         // Defensive Keywords
         if (c.hasKeyword("Reach") && !c.hasKeyword("Flying")) {
@@ -137,7 +146,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         if (c.hasStartOfKeyword("PreventAllDamageBy")) {
             value += addValue(10, "prevent-dmg");
         }
-    
+
         // Bad keywords
         if (c.hasKeyword("Defender") || c.hasKeyword("CARDNAME can't attack.")) {
             value -= subValue((power * 9) + 40, "defender");
