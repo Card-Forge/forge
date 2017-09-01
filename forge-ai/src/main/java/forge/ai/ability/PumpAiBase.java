@@ -207,6 +207,18 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 return true;
             }
             Predicate<Card> flyingOrReach = Predicates.or(CardPredicates.hasKeyword("Flying"), CardPredicates.hasKeyword("Reach"));
+            if (ph.isPlayerTurn(opp) && combat != null
+                    && Iterables.any(combat.getAttackers(), CardPredicates.hasKeyword("Flying"))
+                    && CombatUtil.canBlock(card)) {
+                // Use defensively to destroy the opposing Flying creature when possible, or to block with an indestructible
+                // creature buffed with Flying
+                for (Card c : CardLists.filter(combat.getAttackers(), CardPredicates.hasKeyword("Flying"))) {
+                    if (card.getNetPower() >= c.getNetToughness() && card.getNetToughness() > c.getNetPower()
+                            || ComputerUtilCombat.attackerCantBeDestroyedInCombat(ai, card)) {
+                        return true;
+                    }
+                }
+            }
             if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     || newPower <= 0

@@ -102,7 +102,7 @@ public class PumpAi extends PumpAiBase {
             if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && ph.isPlayerTurn(ai)) {
                 return false;
             }
-            if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS) && ph.getPlayerTurn().isOpponentOf(ai)) {
+            if (ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN) && ph.getPlayerTurn().isOpponentOf(ai)) {
                 return false;
             }
         }
@@ -351,9 +351,12 @@ public class PumpAi extends PumpAiBase {
 
                     return true;
                 }
-                if (!card.getController().isOpponentOf(ai) 
-                        && ComputerUtilCard.shouldPumpCard(ai, sa, card, defense, attack, keywords, false)) {
-                    return true;
+                if (!card.getController().isOpponentOf(ai)) {
+                    if (ComputerUtilCard.shouldPumpCard(ai, sa, card, defense, attack, keywords, false)) {
+                        return true;
+                    } else if (containsUsefulKeyword(ai, keywords, card, sa, attack)) {
+                        return true;
+                    }
                 }
             }
             return false;
