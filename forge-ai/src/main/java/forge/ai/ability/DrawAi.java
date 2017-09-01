@@ -126,10 +126,14 @@ public class DrawAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
-        // LifeLessThan logic presupposes activation as soon as possible in an
-        // attempt to save the AI from dying
-        if (sa.hasParam("AILogic") && sa.getParam("AILogic").startsWith("LifeLessThan.")) {
+        String logic = sa.getParamOrDefault("AILogic", "");
+
+        if (logic.startsWith("LifeLessThan.")) {
+            // LifeLessThan logic presupposes activation as soon as possible in an
+            // attempt to save the AI from dying
             return true;
+        } else if (logic.equals("AtEndOfOppTurn")) {
+            return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai);
         }
 
         // Don't use draw abilities before main 2 if possible

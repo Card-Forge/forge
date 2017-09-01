@@ -356,7 +356,7 @@ public class CountersPutAi extends SpellAbilityAi {
         PhaseHandler ph = ai.getGame().getPhaseHandler();
 
         if ("AlwaysAtOppEOT".equals(sa.getParam("AILogic"))) {
-            if (ph.is(PhaseType.END_OF_TURN) && !ph.isPlayerTurn(ai)) {
+            if (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai)) {
                 return true;
             }
         }
