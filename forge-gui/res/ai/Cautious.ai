@@ -2,10 +2,16 @@
 MULLIGAN_THRESHOLD=4
 
 # Aggro preferences (enabling these will generally make the AI attack more aggressively into potential trades)
+# If the following option is enabled, the AI will generally play aggressively, seeking trades on offense when possible
+# (the following two parameters will then be ignored)
 PLAY_AGGRO=false
 # The chance to attack aggressively into a potential trade (works even if not playing all-out aggro, e.g. PLAY_AGGRO disabled,
 # but only in more favorable conditions in that case - when ahead in life count and in parity or ahead in creature count)
 CHANCE_TO_ATTACK_INTO_TRADE=0
+# When enabled, the AI will attack into trading options when it's tapped out (note that this flag is ignored if PLAY_AGGRO
+# is globally enabled). If disabled, the non-aggro AI will only attack into trades when it has mana open, thus having a chance
+# to "bluff" (or use, if available) combat tricks at the same time.
+ATTACK_INTO_TRADE_WHEN_TAPPED_OUT=false
 # When enabled, the AI will use Berserk on offense to try to severely damage the opponent at the expense of the creature
 USE_BERSERK_AGGRESSIVELY=false
 
@@ -13,7 +19,7 @@ USE_BERSERK_AGGRESSIVELY=false
 # but only with creatures that are worse in abilities and have lower or the same power as the attacker)
 ENABLE_RANDOM_FAVORABLE_TRADES_ON_BLOCK=false
 # If enabled, the AI will consider trade blocking even if its creature count is lower than the opponent's
-RANDOMLY_TRADE_EVEN_IF_HAS_LESS_CREATS=false
+RANDOMLY_TRADE_EVEN_WHEN_HAVE_LESS_CREATS=false
 # Min and max chance to randomly aggressively trade when blocking (note that it will become 100 if the AI is in danger)
 MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK=20
 MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK=65

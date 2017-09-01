@@ -590,10 +590,12 @@ public class AiAttackController {
 
         boolean playAggro = false;
         int chanceToAttackToTrade = 0;
+        boolean tradeIfTappedOut = false;
         if (ai.getController().isAI()) {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
             playAggro = aic.getBooleanProperty(AiProps.PLAY_AGGRO);
             chanceToAttackToTrade = aic.getIntProperty(AiProps.CHANCE_TO_ATTACK_INTO_TRADE);
+            tradeIfTappedOut = aic.getBooleanProperty(AiProps.ATTACK_INTO_TRADE_WHEN_TAPPED_OUT);
         }
         final boolean bAssault = this.doAssault(ai);
         // TODO: detect Lightmine Field by presence of a card with a specific trigger
@@ -921,7 +923,8 @@ public class AiAttackController {
         } else if (MyRandom.percentTrue(chanceToAttackToTrade) && humanLifeToDamageRatio > 1
                 && defendingOpponent != null
                 && ComputerUtil.countUsefulCreatures(ai) > ComputerUtil.countUsefulCreatures(defendingOpponent)
-                && ai.getLife() > defendingOpponent.getLife()) {
+                && ai.getLife() > defendingOpponent.getLife()
+                && (ComputerUtilMana.getAvailableManaEstimate(ai) > 0) || tradeIfTappedOut) {
             this.aiAggression = 4; // random (chance-based) attack expecting to trade or damage player.
         } else if (ratioDiff >= 0 && this.attackers.size() > 1) {
             this.aiAggression = 3; // attack expecting to make good trades or damage player.

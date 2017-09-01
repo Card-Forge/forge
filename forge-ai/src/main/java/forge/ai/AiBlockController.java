@@ -548,7 +548,7 @@ public class AiBlockController {
         if (ai.getController().isAI()) {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
             enableRandomTrades = aic.getBooleanProperty(AiProps.ENABLE_RANDOM_FAVORABLE_TRADES_ON_BLOCK);
-            randomTradeIfBehindOnBoard = aic.getBooleanProperty(AiProps.RANDOMLY_TRADE_EVEN_IF_HAS_LESS_CREATS);
+            randomTradeIfBehindOnBoard = aic.getBooleanProperty(AiProps.RANDOMLY_TRADE_EVEN_WHEN_HAVE_LESS_CREATS);
             minRandomTradeChance = aic.getIntProperty(AiProps.MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
             maxRandomTradeChance = aic.getIntProperty(AiProps.MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
         }
@@ -575,10 +575,10 @@ public class AiBlockController {
                     // Always trade when life in danger
                     doTrade = true;
                 } else if (enableRandomTrades) {
-                    // Randomly trade creatures with lower power and [hopefully] worse abilities
+                    // Randomly trade creatures with lower power and [hopefully] worse abilities, if enabled in profile
                     int numSteps = ai.getStartingLife() - 5; // e.g. 15 steps between 5 life and 20 life
                     float chanceStep = (maxRandomTradeChance - minRandomTradeChance) / numSteps;
-                    int chance = (int)Math.max(minRandomTradeChance, (maxRandomTradeChance - (Math.abs(5 - ai.getLife()) * chanceStep)));
+                    int chance = (int)Math.max(minRandomTradeChance, (maxRandomTradeChance - (Math.max(5, ai.getLife() - 5)) * chanceStep));
                     if (chance > maxRandomTradeChance) {
                         chance = maxRandomTradeChance;
                     }

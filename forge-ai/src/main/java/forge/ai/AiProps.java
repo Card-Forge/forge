@@ -37,8 +37,9 @@ public enum AiProps { /** */
     RESERVE_MANA_FOR_MAIN2_CHANCE ("0"), /** */
     PLAY_AGGRO ("false"),
     CHANCE_TO_ATTACK_INTO_TRADE ("100"), /** */
+    ATTACK_INTO_TRADE_WHEN_TAPPED_OUT ("false"), /** */
     ENABLE_RANDOM_FAVORABLE_TRADES_ON_BLOCK ("false"), /** */
-    RANDOMLY_TRADE_EVEN_IF_HAS_LESS_CREATS ("false"), /** */
+    RANDOMLY_TRADE_EVEN_WHEN_HAVE_LESS_CREATS ("false"), /** */
     MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK ("20"), /** */
     MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK ("100"), /** */
     MIN_SPELL_CMC_TO_COUNTER ("0"),
