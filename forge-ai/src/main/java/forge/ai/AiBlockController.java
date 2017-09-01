@@ -588,7 +588,7 @@ public class AiBlockController {
                     boolean powerParityOrHigher = blocker.getNetPower() >= attacker.getNetPower();
                     boolean creatureParityOrHigher = ComputerUtil.countUsefulCreatures(ai) >= ComputerUtil.countUsefulCreatures(attacker.getController());
 
-                    if (evalBlk >= evalAtk
+                    if (evalBlk <= evalAtk
                             && powerParityOrHigher
                             && (creatureParityOrHigher || randomTradeIfBehindOnBoard)
                             && MyRandom.percentTrue(chance)) {
