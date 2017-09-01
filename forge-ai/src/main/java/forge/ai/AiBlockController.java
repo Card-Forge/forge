@@ -591,6 +591,13 @@ public class AiBlockController {
                     doTrade = true;
                 } else if (enableRandomTrades) {
                     // Randomly trade creatures with lower power and [hopefully] worse abilities, if enabled in profile
+
+                    if (attacker.getOwner().equals(ai) && "6".equals(attacker.getSVar("SacMe"))) {
+                        // Temporarily controlled object - don't trade with it
+                        // TODO: find a more reliable way to figure out that control will be reestablished next turn
+                        continue;
+                    }
+
                     int numSteps = ai.getStartingLife() - 5; // e.g. 15 steps between 5 life and 20 life
                     float chanceStep = (maxRandomTradeChance - minRandomTradeChance) / numSteps;
                     int chance = (int)Math.max(minRandomTradeChance, (maxRandomTradeChance - (Math.max(5, ai.getLife() - 5)) * chanceStep));
