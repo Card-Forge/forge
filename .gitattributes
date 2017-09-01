@@ -17219,6 +17219,7 @@ forge-gui/res/cardsfolder/upcoming/boneyard_parley.txt -text
 forge-gui/res/cardsfolder/upcoming/burning_suns_avatar.txt -text
 forge-gui/res/cardsfolder/upcoming/captain_lannery_storm.txt -text
 forge-gui/res/cardsfolder/upcoming/carnage_tyrant.txt -text
+forge-gui/res/cardsfolder/upcoming/castaways_despair.txt -text
 forge-gui/res/cardsfolder/upcoming/daring_saboteur.txt -text
 forge-gui/res/cardsfolder/upcoming/deadeye_tormentor.txt -text
 forge-gui/res/cardsfolder/upcoming/deeproot_champion.txt -text
@@ -17228,9 +17229,15 @@ forge-gui/res/cardsfolder/upcoming/entrancing_melody.txt -text
 forge-gui/res/cardsfolder/upcoming/fathom_fleet_captain.txt -text
 forge-gui/res/cardsfolder/upcoming/gishath_suns_avatar.txt -text
 forge-gui/res/cardsfolder/upcoming/goring_ceratops.txt -text
+forge-gui/res/cardsfolder/upcoming/grasping_current.txt -text
 forge-gui/res/cardsfolder/upcoming/herald_of_secret_streams.txt -text
 forge-gui/res/cardsfolder/upcoming/hostage_taker.txt -text
+forge-gui/res/cardsfolder/upcoming/huatli_dinosaur_knight.txt -text
+forge-gui/res/cardsfolder/upcoming/huatlis_snubhorn.txt -text
+forge-gui/res/cardsfolder/upcoming/huatlis_spurring.txt -text
 forge-gui/res/cardsfolder/upcoming/jace_cunning_castaway.txt -text
+forge-gui/res/cardsfolder/upcoming/jace_ingenious_mind_mage.txt -text
+forge-gui/res/cardsfolder/upcoming/jaces_sentinel.txt -text
 forge-gui/res/cardsfolder/upcoming/kinjallis_sunwing.txt -text
 forge-gui/res/cardsfolder/upcoming/kopala_warden_of_waves.txt -text
 forge-gui/res/cardsfolder/upcoming/mavren_fein_dusk_apostle.txt -text
@@ -17249,6 +17256,7 @@ forge-gui/res/cardsfolder/upcoming/shapers_sanctuary.txt -text
 forge-gui/res/cardsfolder/upcoming/sleek_schooner.txt -text
 forge-gui/res/cardsfolder/upcoming/sorcerous_spyglass.txt -text
 forge-gui/res/cardsfolder/upcoming/star_of_extinction.txt -text
+forge-gui/res/cardsfolder/upcoming/sun_blessed_mount.txt -text
 forge-gui/res/cardsfolder/upcoming/sun_crowned_hunters.txt -text
 forge-gui/res/cardsfolder/upcoming/sunbirds_invocation.txt -text
 forge-gui/res/cardsfolder/upcoming/tilonallis_skinshifter.txt -text

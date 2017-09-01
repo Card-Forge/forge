@@ -264,6 +264,7 @@ Clue
 Contraption
 Equipment
 Fortification
+Treasure
 Vehicle
 [WalkerTypes]
 Ajani
@@ -279,6 +280,7 @@ Elspeth
 Freyalise
 Garruk
 Gideon
+Huatli
 Jace
 Karn
 Kaya
