@@ -545,12 +545,27 @@ public class AiBlockController {
         boolean randomTradeIfBehindOnBoard = false;
         int minRandomTradeChance = 0;
         int maxRandomTradeChance = 0;
+        int maxCreatDiff = 0;
+        int aiCreatureCount = 0;
+        int oppCreatureCount = 0;
         if (ai.getController().isAI()) {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
             enableRandomTrades = aic.getBooleanProperty(AiProps.ENABLE_RANDOM_FAVORABLE_TRADES_ON_BLOCK);
             randomTradeIfBehindOnBoard = aic.getBooleanProperty(AiProps.RANDOMLY_TRADE_EVEN_WHEN_HAVE_LESS_CREATS);
             minRandomTradeChance = aic.getIntProperty(AiProps.MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
             maxRandomTradeChance = aic.getIntProperty(AiProps.MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
+            maxCreatDiff = aic.getIntProperty(AiProps.MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE);
+        }
+
+        if (enableRandomTrades) {
+            aiCreatureCount = ComputerUtil.countUsefulCreatures(ai);
+            if (randomTradeIfBehindOnBoard) {
+                aiCreatureCount += maxCreatDiff;
+            }
+
+            if (!attackersLeft.isEmpty()) {
+                oppCreatureCount = ComputerUtil.countUsefulCreatures(attackersLeft.get(0).getController());
+            }
         }
 
         for (final Card attacker : attackersLeft) {
@@ -586,11 +601,11 @@ public class AiBlockController {
                     int evalAtk = ComputerUtilCard.evaluateCreature(attacker, false, false);
                     int evalBlk = ComputerUtilCard.evaluateCreature(blocker, false, false);
                     boolean powerParityOrHigher = blocker.getNetPower() >= attacker.getNetPower();
-                    boolean creatureParityOrHigher = ComputerUtil.countUsefulCreatures(ai) >= ComputerUtil.countUsefulCreatures(attacker.getController());
+                    boolean creatureParityOrAllowedDiff = aiCreatureCount >= oppCreatureCount;
 
-                    if (evalBlk <= evalAtk
+                    if (evalBlk <= evalAtk + 1 // "1" accounts for tapped. Maybe increase to 3 or 5 for higher tolerance?
                             && powerParityOrHigher
-                            && (creatureParityOrHigher || randomTradeIfBehindOnBoard)
+                            && creatureParityOrAllowedDiff
                             && MyRandom.percentTrue(chance)) {
                         doTrade = true;
                     }
