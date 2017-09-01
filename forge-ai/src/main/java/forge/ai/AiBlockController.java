@@ -575,9 +575,10 @@ public class AiBlockController {
                     // Always trade when life in danger
                     doTrade = true;
                 } else if (enableRandomTrades) {
-                    // Randomly trade creatures with lower power and worse abilities
-                    float chanceStep = (100 - minRandomTradeChance) / 15; // 15 steps between 5 life and 20+ life
-                    int chance = (int)Math.max(minRandomTradeChance, (100 - (Math.abs(5 - ai.getLife()) * chanceStep)));
+                    // Randomly trade creatures with lower power and [hopefully] worse abilities
+                    int numSteps = ai.getStartingLife() - 5; // e.g. 15 steps between 5 life and 20 life
+                    float chanceStep = (maxRandomTradeChance - minRandomTradeChance) / numSteps;
+                    int chance = (int)Math.max(minRandomTradeChance, (maxRandomTradeChance - (Math.abs(5 - ai.getLife()) * chanceStep)));
                     if (chance > maxRandomTradeChance) {
                         chance = maxRandomTradeChance;
                     }
