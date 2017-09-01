@@ -540,20 +540,20 @@ public class AiBlockController {
         List<Card> currentAttackers = new ArrayList<>(attackersLeft);
         List<Card> killingBlockers;
 
+        // Parameters related to randomly trading when blocking (need to be enabled in the AI profile)
+        boolean enableRandomTrades = false;
+        boolean randomTradeIfBehindOnBoard = false;
+        int minRandomTradeChance = 0;
+        int maxRandomTradeChance = 0;
+        if (ai.getController().isAI()) {
+            AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+            enableRandomTrades = aic.getBooleanProperty(AiProps.ENABLE_RANDOM_FAVORABLE_TRADES_ON_BLOCK);
+            randomTradeIfBehindOnBoard = aic.getBooleanProperty(AiProps.RANDOMLY_TRADE_EVEN_IF_HAS_LESS_CREATS);
+            minRandomTradeChance = aic.getIntProperty(AiProps.MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
+            maxRandomTradeChance = aic.getIntProperty(AiProps.MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
+        }
+
         for (final Card attacker : attackersLeft) {
-
-            boolean enableRandomTrades = false;
-            boolean randomTradeIfBehindOnBoard = false;
-            int minRandomTradeChance = 0;
-            int maxRandomTradeChance = 0;
-
-            if (ai.getController().isAI()) {
-                AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-                enableRandomTrades = aic.getBooleanProperty(AiProps.ENABLE_RANDOM_FAVORABLE_TRADES_ON_BLOCK);
-                randomTradeIfBehindOnBoard = aic.getBooleanProperty(AiProps.RANDOMLY_TRADE_EVEN_IF_HAS_LESS_CREATS);
-                minRandomTradeChance = aic.getIntProperty(AiProps.MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
-                maxRandomTradeChance = aic.getIntProperty(AiProps.MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
-            }
 
             if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")
         			|| attacker.hasKeyword("Menace")
