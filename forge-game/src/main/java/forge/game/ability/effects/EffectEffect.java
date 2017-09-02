@@ -105,7 +105,7 @@ public class EffectEffect extends SpellAbilityEffect {
         if (sa.hasParam("Image")) {
             image = ImageKeys.getTokenKey(sa.getParam("Image"));
         } else if (name.startsWith("Emblem")) { // try to get the image from name
-            image = ImageKeys.getTokenKey(name.replace(",", "").replace(" ", "_").toLowerCase());
+            image = ImageKeys.getTokenKey(name.toLowerCase().replace(" - ", "_").replace(",", "").replace(" ", "_").toLowerCase());
         } else { // use host image
             image = hostCard.getImageKey();
         }
