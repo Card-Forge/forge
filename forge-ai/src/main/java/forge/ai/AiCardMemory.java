@@ -69,7 +69,7 @@ public class AiCardMemory {
         MANDATORY_ATTACKERS,
         TRICK_ATTACKERS,
         HELD_MANA_SOURCES_FOR_MAIN2,
-        HELD_MANA_SOURCES_FOR_COMBAT,
+        HELD_MANA_SOURCES_FOR_DECLBLK,
         ATTACHED_THIS_TURN,
         ANIMATED_THIS_TURN,
         BOUNCED_THIS_TURN,
@@ -85,7 +85,7 @@ public class AiCardMemory {
                 return memTrickAttackers;
             case HELD_MANA_SOURCES_FOR_MAIN2:
                 return memHeldManaSources;
-            case HELD_MANA_SOURCES_FOR_COMBAT:
+            case HELD_MANA_SOURCES_FOR_DECLBLK:
                 return memHeldManaSourcesForCombat;
             case ATTACHED_THIS_TURN:
                 return memAttachedThisTurn;
@@ -266,7 +266,7 @@ public class AiCardMemory {
         clearMemorySet(MemorySet.MANDATORY_ATTACKERS);
         clearMemorySet(MemorySet.TRICK_ATTACKERS);
         clearMemorySet(MemorySet.HELD_MANA_SOURCES_FOR_MAIN2);
-        clearMemorySet(MemorySet.HELD_MANA_SOURCES_FOR_COMBAT);
+        clearMemorySet(MemorySet.HELD_MANA_SOURCES_FOR_DECLBLK);
         clearMemorySet(MemorySet.ATTACHED_THIS_TURN);
         clearMemorySet(MemorySet.ANIMATED_THIS_TURN);
         clearMemorySet(MemorySet.BOUNCED_THIS_TURN);

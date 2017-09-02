@@ -1167,10 +1167,12 @@ public class ComputerUtilCard {
 
         boolean combatTrick = false;
         boolean holdCombatTricks = false;
+        int chanceToHoldCombatTricks = -1;
 
         if (ai.getController().isAI()) {
             AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
             holdCombatTricks = aic.getBooleanProperty(AiProps.TRY_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK);
+            chanceToHoldCombatTricks = aic.getIntProperty(AiProps.CHANCE_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK);
         }
         
         if (!c.canBeTargetedBy(sa)) {
@@ -1402,16 +1404,26 @@ public class ComputerUtilCard {
             }
         }
 
-        boolean isHeldCombatTrick = combatTrick && holdCombatTricks && MyRandom.getRandom().nextFloat() < chance;
+        boolean wantToHoldTrick = holdCombatTricks;
+        if (chanceToHoldCombatTricks >= 0) {
+            // Obey the chance specified in the AI profile for holding combat tricks
+            wantToHoldTrick &= MyRandom.percentTrue(chanceToHoldCombatTricks);
+        } else {
+            // Use standard considerations dependent solely on the buff chance determined above
+            wantToHoldTrick &= MyRandom.getRandom().nextFloat() < chance;
+        }
+
+        boolean isHeldCombatTrick = combatTrick && wantToHoldTrick;
 
         if (isHeldCombatTrick) {
            if (AiCardMemory.isMemorySetEmpty(ai, AiCardMemory.MemorySet.TRICK_ATTACKERS)) {
                // Attempt to hold combat tricks until blockers are declared, and try to lure the opponent into blocking
                // (The AI will only do it for one attacker at the moment, otherwise it risks running his attackers into
                // an army of opposing blockers with only one combat trick in hand)
-               // TODO: somehow ensure that the AI doesn't tap out before it has a chance to buff the attacker
                AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.MANDATORY_ATTACKERS);
                AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.TRICK_ATTACKERS);
+               // Reserve the mana until Declare Blockers such that the AI doesn't tap out before having a chance to use
+               // the combat trick
                if (ai.getController().isAI()) {
                    ((PlayerControllerAi) ai.getController()).getAi().reserveManaSources(sa, PhaseType.COMBAT_DECLARE_BLOCKERS);
                }

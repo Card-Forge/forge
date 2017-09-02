@@ -610,13 +610,18 @@ public class AiController {
         ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, true, 0);
         CardCollection manaSources = ComputerUtilMana.getManaSourcesToPayCost(cost, sa, player);
 
-        AiCardMemory.MemorySet memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2;
+        AiCardMemory.MemorySet memSet;
 
         switch (phaseType) {
+            case MAIN2:
+                memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2;
+                break;
             case COMBAT_DECLARE_BLOCKERS:
-                memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_COMBAT;
+                memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_DECLBLK;
                 break;
             default:
+                System.out.println("Warning: unsupported mana reservation phase specified for reserveManaSources: "
+                        + phaseType.name() + ", reserving until Main 2 instead. Consider adding support for the phase if needed.");
                 memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2;
                 break;
         }
