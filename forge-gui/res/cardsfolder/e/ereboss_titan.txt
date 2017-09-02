@@ -5,6 +5,6 @@ PT:5/5
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Indestructible | CheckSVar$ X | SVarCompare$ EQ0 | Description$ As long as your opponents control no creatures, CARDNAME has indestructible.
 SVar:X:Count$Valid Creature.OppCtrl
 T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Any | ValidCard$ Creature.OppOwn | Execute$ TrigReturn | TriggerZones$ Graveyard | TriggerDescription$ Whenever a creature card leaves an opponent's graveyard, you may discard a card. If you do, return CARDNAME from your graveyard to your hand.
-SVar:TrigReturn:AB$ ChangeZone | Cost$  Discard<1/Card> | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+SVar:TrigReturn:AB$ ChangeZone | Cost$ Discard<1/Card> | Defined$ Self | Origin$ Graveyard | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ereboss_titan.jpg
 Oracle:As long as your opponents control no creatures, Erebos's Titan has indestructible.\nWhenever a creature card leaves an opponent's graveyard, you may discard a card. If you do, return Erebos's Titan from your graveyard to your hand.

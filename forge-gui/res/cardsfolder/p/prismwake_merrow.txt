@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Creature Merfolk Wizard
 PT:2/1
 K:Flash
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self |  Execute$ TrigChooseColor | TriggerDescription$ When CARDNAME enters the battlefield, target permanent becomes the color or colors of your choice until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChooseColor | TriggerDescription$ When CARDNAME enters the battlefield, target permanent becomes the color or colors of your choice until end of turn.
 SVar:TrigChooseColor:AB$ ChooseColor | Cost$ 0 | Defined$ You | OrColors$ True | SubAbility$ Animate
 SVar:Animate:DB$ Animate | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Colors$ ChosenColor | OverwriteColors$ True
 SVar:RemAIDeck:True

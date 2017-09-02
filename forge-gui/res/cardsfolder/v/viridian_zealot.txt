@@ -2,6 +2,6 @@ Name:Viridian Zealot
 ManaCost:G G
 Types:Creature Elf Warrior
 PT:2/1
-A:AB$ Destroy | Cost$ 1 G Sac<1/CARDNAME> | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target  artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+A:AB$ Destroy | Cost$ 1 G Sac<1/CARDNAME> | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_zealot.jpg
 Oracle:{1}{G}, Sacrifice Viridian Zealot: Destroy target artifact or enchantment.

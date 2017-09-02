@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 K:Totem armor
 A:SP$ Attach | Cost$ 4 G W | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 4 | AddToughness$ 4 | AddKeyword$ First Strike |  AddHiddenKeyword$ All creatures able to block CARDNAME do so. | Description$ Enchanted creature gets +4/+4 and has first strike, and all creatures able to block it do so.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 4 | AddToughness$ 4 | AddKeyword$ First Strike | AddHiddenKeyword$ All creatures able to block CARDNAME do so. | Description$ Enchanted creature gets +4/+4 and has first strike, and all creatures able to block it do so.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/indrik_umbra.jpg
 Oracle:Enchant creature\nEnchanted creature gets +4/+4 and has first strike, and all creatures able to block it do so.\nTotem armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)

@@ -1,7 +1,7 @@
 Name:Defense Grid
 ManaCost:2
 Types:Artifact
-S:Mode$ RaiseCost | Activator$ You | Type$ Spell | Amount$ 3  | Condition$ NotPlayerTurn | Description$ Each spell costs {3} more to cast except during its controller's turn.
+S:Mode$ RaiseCost | Activator$ You | Type$ Spell | Amount$ 3 | Condition$ NotPlayerTurn | Description$ Each spell costs {3} more to cast except during its controller's turn.
 S:Mode$ RaiseCost | Activator$ Opponent | Type$ Spell | Amount$ 3 | Condition$ PlayerTurn
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defense_grid.jpg

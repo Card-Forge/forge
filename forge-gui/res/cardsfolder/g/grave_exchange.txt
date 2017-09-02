@@ -1,7 +1,7 @@
 Name:Grave Exchange
 ManaCost:4 B B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 4 B B | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouCtrl  | SubAbility$ DBSacrifice | SpellDescription$ Return target creature card from your graveyard to your hand. Target player sacrifices a creature.
+A:SP$ ChangeZone | Cost$ 4 B B | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SubAbility$ DBSacrifice | SpellDescription$ Return target creature card from your graveyard to your hand. Target player sacrifices a creature.
 SVar:DBSacrifice:DB$ Sacrifice | Cost$ 0 | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_exchange.jpg
 Oracle:Return target creature card from your graveyard to your hand. Target player sacrifices a creature.

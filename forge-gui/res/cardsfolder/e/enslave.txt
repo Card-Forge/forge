@@ -5,7 +5,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 4 B B | ValidTgts$ Creature | AILogic$ GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of your upkeep, enchanted creature deals 1 damage to its owner.
-SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ EnchantedOwner | DamageSource$ Enchanted  | NumDmg$ 1
+SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ EnchantedOwner | DamageSource$ Enchanted | NumDmg$ 1
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enslave.jpg
 Oracle:Enchant creature\nYou control enchanted creature.\nAt the beginning of your upkeep, enchanted creature deals 1 damage to its owner.

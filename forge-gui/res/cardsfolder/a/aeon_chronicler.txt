@@ -5,7 +5,7 @@ Text:X can't be 0.
 PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | References$ Y | Description$ CARDNAME's power and toughness are each equal to the number of cards in your hand.
 K:Suspend:X:XCantBe0 X 3 U
-T:Mode$ CounterRemoved | ValidCard$ Card.Self  | TriggerZones$ Exile | CounterType$ TIME | Execute$ TrigDraw | TriggerDescription$ Whenever a time counter is removed from CARDNAME while it's exiled, draw a card.
+T:Mode$ CounterRemoved | ValidCard$ Card.Self | TriggerZones$ Exile | CounterType$ TIME | Execute$ TrigDraw | TriggerDescription$ Whenever a time counter is removed from CARDNAME while it's exiled, draw a card.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You
 SVar:X:Count$xPaid
 SVar:Y:Count$InYourHand

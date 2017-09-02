@@ -5,7 +5,7 @@ Loyalty:3
 A:AB$ Animate | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | Power$ 4 | Toughness$ 4 | Types$ Creature,Elemental | Permanent$ True | Keywords$ Trample | SpellDescription$ Target land you control becomes a 4/4 Elemental creature with trample. It's still a land.
 A:AB$ Untap | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Forest | TgtPrompt$ Choose target forest | TargetMin$ 0 | TargetMax$ 4 | Planeswalker$ True | SpellDescription$ Untap up to four target Forests.
 A:AB$ ChangeZone | Cost$ SubCounter<7/LOYALTY> | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ XFetch | Planeswalker$ True | Ultimate$ True | StackDescription$ SpellDescription | References$ XFetch | RememberChanged$ True | SubAbility$ DBAnimate | SpellDescription$ Search your library for any number of basic land cards, put them onto the battlefield, then shuffle your library. Those lands become 4/4 Elemental creatures with trample. They're still lands.
-SVar:DBAnimate:DB$ Animate | Defined$ Remembered  | Power$ 4 | Toughness$ 4 | Types$ Creature,Elemental | Permanent$ True | Keywords$ Trample | SubAbility$ DBCleanup
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Power$ 4 | Toughness$ 4 | Types$ Creature,Elemental | Permanent$ True | Keywords$ Trample | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:XFetch:Count$ValidLibrary Land.Basic+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nissa_worldwaker.jpg

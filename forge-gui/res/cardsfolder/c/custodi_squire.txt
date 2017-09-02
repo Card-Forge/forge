@@ -3,7 +3,7 @@ ManaCost:4 W
 Types:Creature Spirit Cleric
 PT:3/3
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigVote | TriggerDescription$ Will of the Council — When CARDNAME enters the battlefield,  starting with you, each player votes for an artifact, creature, or enchantment card in your graveyard. Return each card with the most votes or tied for the most votes to your hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigVote | TriggerDescription$ Will of the Council — When CARDNAME enters the battlefield, starting with you, each player votes for an artifact, creature, or enchantment card in your graveyard. Return each card with the most votes or tied for the most votes to your hand.
 SVar:TrigVote:DB$ Vote | Defined$ Player | VoteSubAbility$ DBReturn | Zone$ Graveyard | VoteCard$ Creature.YouOwn,Enchantment.YouOwn,Arifact.YouOwn | VoteMessage$ for an artifact, creature, or enchantment card in your graveyard | AILogic$ Judgment
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/custodi_squire.jpg

@@ -4,7 +4,7 @@ Types:Creature Human Warrior
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may put a -1/-1 counter on target creature.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True
-A:AB$ Destroy | Cost$ B Sac<1/CARDNAME> | ValidTgts$ Creature.counters_GE1_M1M1  | TgtPrompt$ Select target creature that has a -1/-1 counter on it. | SpellDescription$ Destroy target creature that has a -1/-1 counter on it.
+A:AB$ Destroy | Cost$ B Sac<1/CARDNAME> | ValidTgts$ Creature.counters_GE1_M1M1 | TgtPrompt$ Select target creature that has a -1/-1 counter on it. | SpellDescription$ Destroy target creature that has a -1/-1 counter on it.
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/banewhip_punisher.jpg

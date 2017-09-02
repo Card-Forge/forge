@@ -3,7 +3,7 @@ ManaCost:4 W B
 Types:Creature Angel
 PT:4/4
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigVote | TriggerDescription$ Will of the Council — When CARDNAME enters the battlefield,  starting with you, each player votes for grace or condemnation. If grace gets more votes, each player returns each creature card from his or her graveyard to the battlefield. If condemnation gets more votes or the vote is tied, destroy all creatures other than CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigVote | TriggerDescription$ Will of the Council — When CARDNAME enters the battlefield, starting with you, each player votes for grace or condemnation. If grace gets more votes, each player returns each creature card from his or her graveyard to the battlefield. If condemnation gets more votes or the vote is tied, destroy all creatures other than CARDNAME.
 SVar:TrigVote:DB$ Vote | Defined$ Player | VoteGrace$ MagisterofWorthZombify | VoteCondemnation$ MagisterofWorthDestroy | Tied$ MagisterofWorthDestroy | VoteType$ Grace,Condemnation | AILogic$ GraceOrCondemnation
 SVar:MagisterofWorthZombify:DB$ ChangeZoneAll | ChangeType$ Creature | Origin$ Graveyard | Destination$ Battlefield
 SVar:MagisterofWorthDestroy:DB$ DestroyAll | ValidCards$ Creature.Other

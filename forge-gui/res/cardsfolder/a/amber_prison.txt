@@ -2,7 +2,7 @@ Name:Amber Prison
 ManaCost:4
 Types:Artifact
 K:You may choose not to untap CARDNAME during your untap step.
-A:AB$ Tap | Cost$ 4 T | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | RememberTapped$ True | AlwaysRemember$ True |  SpellDescription$ Tap target artifact, creature, or land. That permanent doesn't untap during its controller's untap step for as long as CARDNAME remains tapped. | StackDescription$ SpellDescription
+A:AB$ Tap | Cost$ 4 T | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | RememberTapped$ True | AlwaysRemember$ True | SpellDescription$ Tap target artifact, creature, or land. That permanent doesn't untap during its controller's untap step for as long as CARDNAME remains tapped. | StackDescription$ SpellDescription
 S:Mode$ Continuous | Affected$ Card.IsRemembered | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step.
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ ClearRemembered | Static$ True
 SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True

@@ -4,7 +4,7 @@ Types:Creature Human Wizard
 PT:2/2
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ When CARDNAME enters the battlefield, copy target instant or sorcery spell. You may choose new targets for that copy.
-SVar:TrigCopy:AB$ CopySpellAbility | Cost$ 0 |  ValidTgts$ Instant,Sorcery | TargetType$ Spell
+SVar:TrigCopy:AB$ CopySpellAbility | Cost$ 0 | ValidTgts$ Instant,Sorcery | TargetType$ Spell
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dualcaster_mage.jpg
 Oracle:Flash\nWhen Dualcaster Mage enters the battlefield, copy target instant or sorcery spell. You may choose new targets for the copy.

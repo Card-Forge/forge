@@ -2,7 +2,7 @@ Name:Searing Blood
 ManaCost:R R
 Types:Instant
 A:SP$ DealDamage | Cost$ R R | ValidTgts$ Creature | TgtPrompt$ Select target creature to deal damage to | NumDmg$ 2 | SubAbility$ SBEffect | SpellDescription$ CARDNAME deals 2 damage to target creature. When that creature dies this turn, CARDNAME deals 3 damage to the creature's controller.
-SVar:SBEffect:DB$ Effect | Name$ Searing Blood Effect | Triggers$ SearingDeath | SVars$ SBDeathDmg | RememberObjects$ ParentTarget | StackDescription$  When {c:Targeted} dies this turn, CARDNAME deals 3 damage to {p:TargetedController}.
+SVar:SBEffect:DB$ Effect | Name$ Searing Blood Effect | Triggers$ SearingDeath | SVars$ SBDeathDmg | RememberObjects$ ParentTarget | StackDescription$ When {c:Targeted} dies this turn, CARDNAME deals 3 damage to {p:TargetedController}.
 SVar:SearingDeath:Mode$ ChangesZone | ValidCard$ Creature.IsRemembered | Origin$ Battlefield | Destination$ Graveyard | Execute$ SBDeathDmg | TriggerDescription$ When a creature dealt damage by Searing Blood dies this turn, Searing Blood deals 3 damage to the creature's controller.
 SVar:SBDeathDmg:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 3 | DamageSource$ EffectSource
 SVar:Picture:http://www.wizards.com/global/images/magic/general/searing_blood.jpg

@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Pump
-A:AB$ Pump | Cost$ 1 ExileFromGrave<1/Card.TopGraveyard>  | Defined$ Enchanted | NumAtt$ +1 | NumDef$ +1 | CostDesc$ {1}, Exile the top card of your graveyard: | SpellDescription$ Enchanted creature gets +1/+1 until end of turn.
+A:AB$ Pump | Cost$ 1 ExileFromGrave<1/Card.TopGraveyard> | Defined$ Enchanted | NumAtt$ +1 | NumDef$ +1 | CostDesc$ {1}, Exile the top card of your graveyard: | SpellDescription$ Enchanted creature gets +1/+1 until end of turn.
 SVar:RemAIDeck:True
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_kiss.jpg

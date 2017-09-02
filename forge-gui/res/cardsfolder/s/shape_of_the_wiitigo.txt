@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Enchanted | CounterType$ P1P1 | CounterNum$ 6
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter2 | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on enchanted creature if it attacked or blocked since your last upkeep. Otherwise, remove a +1/+1 counter from it.
 SVar:TrigPutCounter2:AB$ PutCounter | Cost$ 0 | Defined$ Enchanted | CounterType$ P1P1 | CounterNum$ 1 | ConditionPresent$ Card.EnchantedBy+attackedOrBlockedSinceYourLastUpkeep | SubAbility$ RemCounter
-SVar:RemCounter:DB$ RemoveCounter | Defined$ Enchanted | CounterType$ P1P1 | CounterNum$ 1 | ConditionPresent$ Card.EnchantedBy+attackedOrBlockedSinceYourLastUpkeep  | ConditionCompare$ EQ0
+SVar:RemCounter:DB$ RemoveCounter | Defined$ Enchanted | CounterType$ P1P1 | CounterNum$ 1 | ConditionPresent$ Card.EnchantedBy+attackedOrBlockedSinceYourLastUpkeep | ConditionCompare$ EQ0
 SVar:SacMe:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shape_of_the_wiitigo.jpg
 Oracle:Enchant creature\nWhen Shape of the Wiitigo enters the battlefield, put six +1/+1 counters on enchanted creature.\nAt the beginning of your upkeep, put a +1/+1 counter on enchanted creature if it attacked or blocked since your last upkeep. Otherwise, remove a +1/+1 counter from it.

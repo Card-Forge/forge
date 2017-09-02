@@ -2,7 +2,7 @@ Name:Council Guardian
 ManaCost:5 W
 Types:Creature Giant Soldier
 PT:5/5
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigVote | TriggerDescription$ Will of the Council — When CARDNAME enters the battlefield,  starting with you, each player votes for blue, black, red, or green. CARDNAME gains protection from each color with the most votes or tied for most votes.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigVote | TriggerDescription$ Will of the Council — When CARDNAME enters the battlefield, starting with you, each player votes for blue, black, red, or green. CARDNAME gains protection from each color with the most votes or tied for most votes.
 SVar:TrigVote:DB$ Vote | Defined$ Player | VoteRed$ PumpRed | VoteGreen$ PumpGreen | VoteBlack$ PumpBlack | VoteBlue$ PumpBlue | VoteType$ Blue,Black,Red,Green | AILogic$ Protection
 SVar:PumpRed:DB$ Pump | KW$ Protection from red | Permanent$ True | Defined$ Self
 SVar:PumpGreen:DB$ Pump | KW$ Protection from green | Permanent$ True | Defined$ Self

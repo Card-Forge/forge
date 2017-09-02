@@ -3,7 +3,7 @@ ManaCost:4 R R
 Types:Creature Dragon
 PT:5/4
 K:Flying
-A:AB$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SubAbility$ DBPump | IsPresent$ Card.Self+attacking | SpellDescription$ CARDNAME deals 1 damage to target creature. It can't be regenerated this turn.  That creature can't block this combat. Activate this ability only if CARDNAME is attacking.
+A:AB$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SubAbility$ DBPump | IsPresent$ Card.Self+attacking | SpellDescription$ CARDNAME deals 1 damage to target creature. It can't be regenerated this turn. That creature can't block this combat. Activate this ability only if CARDNAME is attacking.
 SVar:DBPump:DB$ Pump | Defined$ ParentTarget | KW$ HIDDEN CARDNAME can't block. | UntilEndOfCombat$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forgestoker_dragon.jpg
 Oracle:Flying\n{1}{R}: Forgestoker Dragon deals 1 damage to target creature. That creature can't block this combat. Activate this ability only if Forgestoker Dragon is attacking.

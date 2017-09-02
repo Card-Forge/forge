@@ -1,7 +1,7 @@
 Name:Pongify
 ManaCost:U
 Types:Instant
-A:SP$ Destroy | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select a creature |  AILogic$ Pongify | SubAbility$ DBToken | NoRegen$ True | SpellDescription$ Destroy target creature. It can't be regenerated. Its controller creates a 3/3 green Ape creature token.
+A:SP$ Destroy | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select a creature | AILogic$ Pongify | SubAbility$ DBToken | NoRegen$ True | SpellDescription$ Destroy target creature. It can't be regenerated. Its controller creates a 3/3 green Ape creature token.
 SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Ape | TokenTypes$ Creature,Ape | TokenOwner$ TargetedController | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pongify.jpg
 Oracle:Destroy target creature. It can't be regenerated. Its controller creates a 3/3 green Ape creature token.

@@ -4,7 +4,7 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.Spirit | EffectZone$ Battlefield | AddTrigger$ CoRSpiritETB | AddSVar$ CoRSpiritDmg | Description$ All Spirits have "When this permanent enters the battlefield, you may have it deal 3 damage to target non-Spirit creature."
 S:Mode$ Continuous | Affected$ Creature.nonSpirit | EffectZone$ Battlefield | AddTrigger$ CoRNonETB | AddSVar$ CoRNonDmg | Description$ Non-Spirit creatures have "When this permanent enters the battlefield, you may have it deal 3 damage to target Spirit creature."
 SVar:CoRSpiritETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ TriggeredCardController | TriggerZones$ Battlefield | Execute$ CoRSpiritDmg | TriggerDescription$ When this permanent enters the battlefield, you may have it deal 3 damage to target non-Spirit creature.
-SVar:CoRSpiritDmg:DB$DealDamage | ValidTgts$ Creature.nonSpirit  | TgtPrompt$ Select target non-Spirit creature | NumDmg$ 3
+SVar:CoRSpiritDmg:DB$DealDamage | ValidTgts$ Creature.nonSpirit | TgtPrompt$ Select target non-Spirit creature | NumDmg$ 3
 SVar:CoRNonETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ TriggeredCardController | TriggerZones$ Battlefield | Execute$ CoRNonDmg | TriggerDescription$ When this permanent enters the battlefield, you may have it deal 3 damage to target Spirit creature.
 SVar:CoRNonDmg:DB$DealDamage | ValidTgts$ Creature.Spirit | TgtPrompt$ Select target Spirit creature | NumDmg$ 3
 SVar:RemRandomDeck:True

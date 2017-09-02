@@ -2,7 +2,7 @@ Name:Nezumi Shortfang
 ManaCost:1 B
 Types:Creature Rat Rogue
 PT:1/1
-A:AB$ Discard | Cost$ 1 B T | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBFlip | SpellDescription$  Target opponent discards a card. Then if that player has no cards in hand, flip Nezumi Shortfang.
+A:AB$ Discard | Cost$ 1 B T | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBFlip | SpellDescription$ Target opponent discards a card. Then if that player has no cards in hand, flip Nezumi Shortfang.
 SVar:DBFlip:DB$ SetState | Defined$ Self | ConditionCheckSVar$ A | ConditionSVarCompare$ EQ0 | References$ A | Mode$ Flip
 SVar:A:TargetedPlayer$CardsInHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nezumi_shortfang.jpg

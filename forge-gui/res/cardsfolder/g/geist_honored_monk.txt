@@ -3,9 +3,9 @@ ManaCost:3 W W
 Types:Creature Human Monk
 PT:*/*
 K:Vigilance
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X |  SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures you control.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures you control.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 white Spirit creature tokens with flying.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ w 1 1 spirit ISD |  TokenAmount$ 2 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenColors$ White | TokenKeywords$ Flying
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ w 1 1 spirit ISD | TokenAmount$ 2 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenColors$ White | TokenKeywords$ Flying
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:BuffedBy:Creature
 SVar:NoZeroToughnessAI:True

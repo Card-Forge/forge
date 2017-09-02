@@ -2,7 +2,7 @@ Name:Twinflame
 ManaCost:1 R
 Types:Sorcery
 K:Strive:2 R
-A:SP$ CopyPermanent | Cost$ 1 R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | TargetMin$ 0 | TargetMax$ MaxTargets | Keywords$ Haste | AtEOT$ Exile | AddSVars$ SneakAttackEOT |  References$ MaxTargets | SpellDescription$ Choose any number of target creatures you control. For each of them, create a token that's a copy of that creature. Those tokens have haste. Exile them at the beginning of the next end step.
+A:SP$ CopyPermanent | Cost$ 1 R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | TargetMin$ 0 | TargetMax$ MaxTargets | Keywords$ Haste | AtEOT$ Exile | AddSVars$ SneakAttackEOT | References$ MaxTargets | SpellDescription$ Choose any number of target creatures you control. For each of them, create a token that's a copy of that creature. Those tokens have haste. Exile them at the beginning of the next end step.
 SVar:MaxTargets:Count$Valid Creature.YouCtrl
 SVar:SneakAttackEOT:SVar:EndOfTurnLeavePlay:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twinflame.jpg

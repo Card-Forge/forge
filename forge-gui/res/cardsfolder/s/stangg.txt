@@ -8,6 +8,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Battlefield | Destination$ Exile | DB$ Cleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ TrigSac | TriggerDescription$ When that token leaves the battlefield, sacrifice CARDNAME.
-SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self  | SubAbility$ DBCleanup
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBCleanup
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stangg.jpg
 Oracle:When Stangg enters the battlefield, create a legendary 3/4 red and green Human Warrior creature token named Stangg Twin. When Stangg leaves the battlefield, exile that token. When that token leaves the battlefield, sacrifice Stangg.

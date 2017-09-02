@@ -2,7 +2,7 @@ Name:Wandering Champion
 ManaCost:1 W
 Types:Creature Human Monk
 PT:3/1
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | IsPresent$ Permanent.Blue+YouCtrl,Permanent.Red+YouCtrl  | CombatDamage$ True | Execute$ TrigDiscard | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, if you control a blue or red permanent, you may discard a card. If you do, draw a card.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | IsPresent$ Permanent.Blue+YouCtrl,Permanent.Red+YouCtrl | CombatDamage$ True | Execute$ TrigDiscard | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, if you control a blue or red permanent, you may discard a card. If you do, draw a card.
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

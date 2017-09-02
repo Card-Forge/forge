@@ -6,7 +6,7 @@ A:AB$ Repeat | Cost$ XCantBe0 X T | ValidTgts$ Opponent | MaxRepeat$ MaxRepeats 
 SVar:DBCleanBeforeRepeat:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBMill
 SVar:DBMill:DB$ Mill | NumCards$ 1 | RememberMilled$ True | Defined$ Targeted | SubAbility$ DBAccumulateX | NoReveal$ True
 SVar:DBAccumulateX:DB$ StoreSVar | SVar$ AccumlatedMilled | Type$ CountSVar | Expression$ AccumlatedMilled/Plus.1 | ConditionCheckSVar$ MilledCard | ConditionSVarCompare$ EQ1 | SubAbility$ DBMilledCreature
-SVar:DBMilledCreature:DB$ StoreSVar | SVar$ AccumlatedMilled | Type$ CountSVar | Expression$ X |  ConditionCheckSVar$ MilledCreature | ConditionSVarCompare$ EQ1 | SubAbility$ DBEmptyLibrary
+SVar:DBMilledCreature:DB$ StoreSVar | SVar$ AccumlatedMilled | Type$ CountSVar | Expression$ X | ConditionCheckSVar$ MilledCreature | ConditionSVarCompare$ EQ1 | SubAbility$ DBEmptyLibrary
 SVar:DBEmptyLibrary:DB$ StoreSVar | SVar$ AccumlatedMilled | Type$ CountSVar | Expression$ X | ConditionCheckSVar$ TargetedLibrary | ConditionSVarCompare$ EQ0
 SVar:DBSacHelm:DB$ Sacrifice | Defined$ Self | ConditionCheckSVar$ MilledCreature | ConditionSVarCompare$ EQ1 | SubAbility$ DBStealCreature
 SVar:DBStealCreature:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SubAbility$ DBResetCounter | ConditionCheckSVar$ MilledCreature | ConditionSVarCompare$ EQ1

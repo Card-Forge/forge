@@ -5,7 +5,7 @@ Text:X can't be 0.
 PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | References$ Y | Description$ CARDNAME's power and toughness are each equal to the number of nonbasic land cards in your opponents' graveyards.
 K:Suspend:X:XCantBe0 X 3 R
-T:Mode$ CounterRemoved | ValidCard$ Card.Self  | TriggerZones$ Exile | CounterType$ TIME | Execute$ TrigDestroy | TriggerDescription$ Whenever a time counter is removed from CARDNAME while it's exiled, destroy target nonbasic land.
+T:Mode$ CounterRemoved | ValidCard$ Card.Self | TriggerZones$ Exile | CounterType$ TIME | Execute$ TrigDestroy | TriggerDescription$ Whenever a time counter is removed from CARDNAME while it's exiled, destroy target nonbasic land.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Land.nonBasic | TgtPrompt$ Select a nonbasic land.
 SVar:X:Count$xPaid
 SVar:Y:Count$ValidGraveyard Land.nonBasic+OppCtrl

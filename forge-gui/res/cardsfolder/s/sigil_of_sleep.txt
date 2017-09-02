@@ -3,7 +3,7 @@ ManaCost:U
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
-T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ Player  | Execute$ TrigReturn | TriggerDescription$ Whenever enchanted creature deals damage to a player, return target creature that player controls to its owner's hand.
+T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ Player | Execute$ TrigReturn | TriggerDescription$ Whenever enchanted creature deals damage to a player, return target creature that player controls to its owner's hand.
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature | TargetsWithDefinedController$ TriggeredTarget | TgtPrompt$ Select target creature your opponent controls | IsCurse$ True | Origin$ Battlefield | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_of_sleep.jpg
 Oracle:Enchant creature\nWhenever enchanted creature deals damage to a player, return target creature that player controls to its owner's hand.

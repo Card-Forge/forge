@@ -4,7 +4,7 @@ Types:Creature Elemental
 PT:8/5
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute damage to | NumDmg$ FirePower | TargetMin$ Min | TargetMax$ FirePower | References$ FirePower,Min | DividedAsYouChoose$ FirePower | SubAbility$ Retribution | RememberTargets$ True | SpellDescription$ CARDNAME deals damage equal to its power divided as you choose among any number of target creatures. Each of those creatures deals damage equal to its power to CARDNAME.
 SVar:Retribution:DB$ EachDamage | ValidCards$ Creature.IsRemembered | ValidDescription$ of those creatures | NumDmg$ X | DamageDesc$ damage equal to its power | DefinedCards$ Remembered | SubAbility$ DBCleanup | References$ X | StackDescription$ then each of those creatures deals damage equal to its power to CARDNAME
-#NumDmg isn't really used here.  It is left for clarity.  The AF pulls Damage straight from "X" hardcoded.
+#NumDmg isn't really used here. It is left for clarity. The AF pulls Damage straight from "X" hardcoded.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$CardPower
 SVar:FirePower:Count$CardPower

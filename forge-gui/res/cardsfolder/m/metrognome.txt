@@ -1,7 +1,7 @@
 Name:Metrognome
 ManaCost:4
 Types:Artifact
-A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenName$ Gnome | TokenTypes$ Artifact,Creature,Gnome | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$  Create a 1/1 colorless Gnome artifact creature token.
+A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenName$ Gnome | TokenTypes$ Artifact,Creature,Gnome | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Create a 1/1 colorless Gnome artifact creature token.
 T:Mode$ Discarded | ValidCard$ Card.Self | ValidCause$ Card.OppCtrl | Execute$ TrigToken | TriggerDescription$ When a spell or ability an opponent controls causes you to discard CARDNAME, create four 1/1 colorless Gnome artifact creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 4 | TokenName$ Gnome | TokenTypes$ Artifact,Creature,Gnome | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1
 SVar:DiscardMeByOpp:2

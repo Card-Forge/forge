@@ -6,7 +6,7 @@ K:CantBeBlockedByAmount LT3
 R:Event$ Counter | ActiveZones$ Battlefield | ValidType$ Spell | ValidCause$ Card.YouCtrl | ReplaceWith$ DBRemove | Description$ If a spell or ability you control would counter a spell, instead exile that spell and you may play that card without paying its mana cost.
 SVar:DBRemove:AB$ ChangeZone | Cost$ 0 | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile | Fizzle$ True | SubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | Defined$ ReplacedCard | WithoutManaCost$ True | Optional$ True
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.Self  | Execute$ TrigShuffle | TriggerDescription$ When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigShuffle | TriggerDescription$ When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library.
 SVar:TrigShuffle:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ TriggeredCard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guile.jpg
 Oracle:Guile can't be blocked except by three or more creatures.\nIf a spell or ability you control would counter a spell, instead exile that spell and you may play that card without paying its mana cost.\nWhen Guile is put into a graveyard from anywhere, shuffle it into its owner's library.

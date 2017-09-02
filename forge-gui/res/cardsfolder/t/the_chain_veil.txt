@@ -1,7 +1,7 @@
 Name:The Chain Veil
 ManaCost:4
 Types:Legendary Artifact
-T:Mode$ Phase | Phase$ End of Turn | ActivateNoLoyaltyAbilitiesCondition$ True | ValidPlayer$ You | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$  At the beginning of your end step, if you didn't activate a loyalty ability of a planeswalker this turn, you lose 2 life.
+T:Mode$ Phase | Phase$ End of Turn | ActivateNoLoyaltyAbilitiesCondition$ True | ValidPlayer$ You | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, if you didn't activate a loyalty ability of a planeswalker this turn, you lose 2 life.
 SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 2
 A:AB$ Effect | Cost$ 4 T | StaticAbilities$ STPump | AILogic$ ChainVeil | SpellDescription$ For each planeswalker you control, you may activate one of its loyalty abilities once this turn as though none of its loyalty abilities had been activated this turn.
 SVar:STPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Planeswalker.YouCtrl | AddHiddenKeyword$ May activate CARDNAME's loyalty abilities once | Description$ For each planeswalker you control, you may activate one of its loyalty abilities once this turn as though none of its loyalty abilities had been activated this turn.

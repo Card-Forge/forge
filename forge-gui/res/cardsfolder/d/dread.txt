@@ -4,7 +4,7 @@ Types:Creature Elemental Incarnation
 PT:6/6
 K:Fear
 T:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ You | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature deals damage to you, destroy it.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.Self  | Execute$ TrigShuffle | TriggerDescription$ When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.Self | Execute$ TrigShuffle | TriggerDescription$ When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library.
 SVar:TrigShuffle:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ TriggeredCard
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredSource
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread.jpg

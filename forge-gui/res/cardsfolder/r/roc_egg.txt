@@ -4,7 +4,7 @@ Types:Creature Bird
 PT:0/3
 K:Defender
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, create a 3/3 white Bird creature token with flying.
-SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1  | TokenName$ Bird | TokenTypes$ Creature,Bird | TokenOwner$ TriggeredCardController | TokenColors$ White | TokenPower$ 3 | TokenToughness$ 3 | TokenKeywords$ Flying
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Bird | TokenTypes$ Creature,Bird | TokenOwner$ TriggeredCardController | TokenColors$ White | TokenPower$ 3 | TokenToughness$ 3 | TokenKeywords$ Flying
 SVar:SacMe:4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roc_egg.jpg
 Oracle:Defender (This creature can't attack.)\nWhen Roc Egg dies, create a 3/3 white Bird creature token with flying.

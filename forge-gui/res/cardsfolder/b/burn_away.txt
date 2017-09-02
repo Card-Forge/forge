@@ -2,7 +2,7 @@ Name:Burn Away
 ManaCost:4 R
 Types:Instant
 A:SP$ DealDamage | Cost$ 4 R | ValidTgts$ Creature | TgtPrompt$ Select target creature to deal damage to | NumDmg$ 6 | SubAbility$ DBEffect | SpellDescription$ CARDNAME deals 6 damage to target creature. When that creature dies this turn, exile all cards from its controller's graveyard.
-SVar:DBEffect:DB$ Effect | Name$ Burn Away Effect | Triggers$ SearingDeath | SVars$ DBExile,EndEffect | RememberObjects$ ParentTarget | StackDescription$  When {c:Targeted} dies this turn, exile all cards from its controller's graveyard.
+SVar:DBEffect:DB$ Effect | Name$ Burn Away Effect | Triggers$ SearingDeath | SVars$ DBExile,EndEffect | RememberObjects$ ParentTarget | StackDescription$ When {c:Targeted} dies this turn, exile all cards from its controller's graveyard.
 SVar:SearingDeath:Mode$ ChangesZone | ValidCard$ Creature.IsRemembered | Origin$ Battlefield | Destination$ Graveyard | Execute$ DBExile | TriggerDescription$ When that creature dies this turn, exile all cards from its controller's graveyard.
 SVar:DBExile:DB$ ChangeZoneAll | Defined$ TriggeredCardController | Origin$ Graveyard | Destination$ Exile | SubAbility$ EndEffect
 SVar:EndEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
