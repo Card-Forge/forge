@@ -3,6 +3,7 @@ package forge.game.event;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.util.Lang;
+import forge.util.TextUtil;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -27,6 +28,6 @@ public class GameEventTurnPhase extends GameEvent {
     @Override
     public String toString() {
         String playerName = Lang.getPossesive(playerTurn.getName());
-        return String.format("%s turn, %s%s phase", playerName, phaseDesc, phase.nameForUi );
+        return TextUtil.concatWithSpace(playerName,"turn,", phaseDesc+phase.nameForUi, "phase");
     }
 }

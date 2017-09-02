@@ -6,6 +6,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
+import forge.util.TextUtil;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class ControlPlayerEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         
         List<Player> tgtPlayers = getTargetPlayers(sa);
-        return String.format("%s controls %s during their next turn", sa.getActivatingPlayer(), Lang.joinHomogenous(tgtPlayers));
+        return TextUtil.concatWithSpace(sa.getActivatingPlayer().toString(),"controls", Lang.joinHomogenous(tgtPlayers),"during their next turn");
     }
     
     @SuppressWarnings("serial")

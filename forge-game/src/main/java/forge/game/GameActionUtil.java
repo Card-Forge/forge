@@ -392,7 +392,7 @@ public final class GameActionUtil {
                         newSA.setBasicSpell(false);
                         final Cost cost1 = new Cost(sCosts[0], false);
                         final Cost cost2 = new Cost(sCosts[1], false);
-                        newSA.setDescription(newSA.getDescription() + String.format(" (Both kickers: %s and %s)", cost1.toSimpleString(), cost2.toSimpleString()));
+                        newSA.setDescription(newSA.getDescription() + TextUtil.concatWithSpace(" (Both kickers:", cost1.toSimpleString(),"and",cost2.toSimpleString()+")"));
                         newSA.setPayCosts(cost2.add(cost1.add(newSA.getPayCosts())));
                         newSA.addOptionalCost(OptionalCost.Kicker1);
                         newSA.addOptionalCost(OptionalCost.Kicker2);

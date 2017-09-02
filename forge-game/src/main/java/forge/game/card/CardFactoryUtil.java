@@ -244,7 +244,7 @@ public class CardFactoryUtil {
                 int counters = AbilityUtils.calculateAmount(c, timeCounters, this);
                 c.addCounter(CounterType.TIME, counters, c, true);
                 
-                String sb = String.format("%s has suspended %s with %d time counters on it.", this.getActivatingPlayer(), c.getName(), counters);
+                String sb = TextUtil.concatWithSpace(this.getActivatingPlayer().toString(),"has suspended", c.getName(), "with", String.valueOf(counters),"time counters on it.");
                 game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
             }
         };
@@ -4249,7 +4249,7 @@ public class CardFactoryUtil {
         altCostSA.setRestrictions(restriction);
 
         final String costDescription = params.containsKey("Description") ? params.get("Description") 
-                : String.format("You may %s rather than pay %s's mana cost.", abCost.toStringAlt(), card.getName());
+                : TextUtil.concatWithSpace("You may", abCost.toStringAlt(),"rather than pay", card.getName()+"'s mana cost.");
         
         altCostSA.setDescription(costDescription);
         if (params.containsKey("References")) {

@@ -27,6 +27,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.TextUtil;
 import forge.util.collect.*;
 import forge.util.Lang;
 import forge.util.MessageUtil;
@@ -427,7 +428,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 hostCard.addRemembered(CardUtil.getLKICopy(tgtC));
             }
 
-            final String prompt = String.format("Do you want to move %s from %s to %s?", tgtC, origin, destination);
+            final String prompt = TextUtil.concatWithSpace("Do you want to move", tgtC.toString(), "from", origin.toString(), "to",destination.toString()+"?");
             if (optional && !player.getController().confirmAction(sa, null, prompt) )
                 continue;
 

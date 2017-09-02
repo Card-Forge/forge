@@ -1,6 +1,7 @@
 package forge.game.event;
 
 import forge.game.player.Player;
+import forge.util.TextUtil;
 
 public class GameEventTurnBegan extends GameEvent {
     
@@ -23,6 +24,6 @@ public class GameEventTurnBegan extends GameEvent {
      */
     @Override
     public String toString() {
-        return String.format("Turn %d (%s)", turnNumber, turnOwner);
+        return TextUtil.concatWithSpace("Turn", String.valueOf(turnNumber), "("+turnOwner.toString()+")");
     }
 }

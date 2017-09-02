@@ -17,6 +17,7 @@ import java.util.Map;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import forge.util.TextUtil;
 
 public class CountersMoveEffect extends SpellAbilityEffect {
 
@@ -51,7 +52,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
         try{
             sb.append(tgtCards.get(0));
         } catch(final IndexOutOfBoundsException exception) {
-            System.out.println(String.format("Somehow this is missing targets? %s", source.toString()));
+            System.out.println(TextUtil.concatWithSpace("Somehow this is missing targets?", source.toString()));
         }
 
         sb.append(".");

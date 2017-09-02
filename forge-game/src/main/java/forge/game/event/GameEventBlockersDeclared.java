@@ -4,6 +4,7 @@ import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.util.Lang;
+import forge.util.TextUtil;
 import forge.util.maps.MapOfLists;
 
 import java.util.ArrayList;
@@ -42,6 +43,6 @@ public class GameEventBlockersDeclared extends GameEvent {
                 blockerCards.addAll(cc);
             }
         }
-        return String.format("%s declared %d blockers: %s", defendingPlayer.getName(), blockerCards.size(), Lang.joinHomogenous(blockerCards) );
+        return TextUtil.concatWithSpace(defendingPlayer.getName(),"declared", String.valueOf(blockerCards.size()),"blockers:", Lang.joinHomogenous(blockerCards) );
     }
 }

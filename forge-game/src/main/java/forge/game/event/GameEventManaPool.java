@@ -3,6 +3,7 @@ package forge.game.event;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.util.Lang;
+import forge.util.TextUtil;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -29,6 +30,6 @@ public class GameEventManaPool extends GameEvent {
      */
     @Override
     public String toString() {
-        return String.format("%s mana pool %s - %s ", Lang.getPossesive(player.getName()), mode, mana);
+        return TextUtil.concatWithSpace(Lang.getPossesive(player.getName()),"mana pool",  mode.toString(), "-", mana.toString()+" ");
     }
 }

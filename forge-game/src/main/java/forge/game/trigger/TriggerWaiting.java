@@ -1,5 +1,7 @@
 package forge.game.trigger;
 
+import forge.util.TextUtil;
+
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +37,6 @@ public class TriggerWaiting {
 
 	@Override
     public String toString() {
-        return String.format("Waiting trigger: %s with %s", mode, params);
+        return TextUtil.concatWithSpace("Waiting trigger:", mode.toString(),"with", params.toString());
     }
 }

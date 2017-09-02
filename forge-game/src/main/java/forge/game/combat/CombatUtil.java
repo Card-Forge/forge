@@ -693,13 +693,13 @@ public class CombatUtil {
                for (Card cardToBeBlocked : blocker.getMustBlockCards()) {
                  if (!blockedSoFar.contains(cardToBeBlocked) && CombatUtil.canBlockMoreCreatures(blocker, blockedSoFar) 
                          && combat.isAttacking(cardToBeBlocked) && CombatUtil.canBlock(cardToBeBlocked, blocker)) {
-                     return String.format("%s must still block %s.", blocker, cardToBeBlocked);
+                     return TextUtil.concatWithSpace(blocker.toString(),"must still block", cardToBeBlocked.toString()+".");
                  }
                } 
             }
             // lure effects
             if (!blockers.contains(blocker) && CombatUtil.mustBlockAnAttacker(blocker, combat)) {
-                return String.format("%s must block an attacker, but has not been assigned to block any.", blocker);
+                return TextUtil.concatWithSpace(blocker.toString(),"must block an attacker, but has not been assigned to block any.");
             }
 
             // "CARDNAME blocks each turn if able."
@@ -715,7 +715,7 @@ public class CombatUtil {
                             }
                         }
                         if (must) {
-                            return String.format("%s must block each turn, but was not assigned to block any attacker now.", blocker);
+                            return TextUtil.concatWithSpace(blocker.toString(),"must block each turn, but was not assigned to block any attacker now.");
                         }
                     }
                 }
@@ -725,9 +725,9 @@ public class CombatUtil {
         // Creatures that aren't allowed to block unless certain restrictions are met.
         for (final Card blocker : blockers) {
             if (blockers.size() < 2 && blocker.hasKeyword("CARDNAME can't attack or block alone.")) {
-                return String.format("%s can't block alone.", blocker);
+                return TextUtil.concatWithSpace(blocker.toString(),"can't block alone.");
             } else if (blockers.size() < 3 && blocker.hasKeyword("CARDNAME can't block unless at least two other creatures block.")) {
-                return String.format("%s can't block unless at least two other creatures block.", blocker);
+                return TextUtil.concatWithSpace(blocker.toString(),"can't block unless at least two other creatures block.");
             } else if (blocker.hasKeyword("CARDNAME can't block unless a creature with greater power also blocks.")) {
                 boolean found = false;
                 int power = blocker.getNetPower();
@@ -739,7 +739,7 @@ public class CombatUtil {
                     }
                 }
                 if (!found) {
-                    return String.format("%s can't block unless a creature with greater power also blocks.", blocker);
+                    return TextUtil.concatWithSpace(blocker.toString(),"can't block unless a creature with greater power also blocks.");
                 }
             }
         }
@@ -748,7 +748,7 @@ public class CombatUtil {
             int cntBlockers = combat.getBlockers(attacker).size();
             // don't accept blocker amount for attackers with keyword defining valid blockers amount
             if (cntBlockers > 0 && !canAttackerBeBlockedWithAmount(attacker, cntBlockers, combat))
-                return String.format("%s cannot be blocked with %d creatures you've assigned", attacker, cntBlockers);
+                return TextUtil.concatWithSpace(attacker.toString(),"cannot be blocked with", String.valueOf(cntBlockers), "creatures you've assigned");
         }
 
         return null;

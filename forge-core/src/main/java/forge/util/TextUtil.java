@@ -183,4 +183,30 @@ public class TextUtil {
         return s.substring(0, 1).toUpperCase()
                 + s.substring(1);
     }
+    //concatenate with spaces
+    public static String concatWithSpace(String s1, String s2) {
+        return new StringBuilder().append(s1).append(" ").append(s2).toString();
+    }
+    public static String concatWithSpace(String s1, String s2, String s3) {
+        return new StringBuilder().append(s1).append(" ").append(s2).append(" ").append(s3).toString();
+    }
+    public static String concatWithSpace(String s1, String s2, String s3, String s4) {
+        return new StringBuilder().append(s1).append(" ").append(s2).append(" ").append(s3).append(" ").append(s4).toString();
+    }
+    public static String concatWithSpace(String s1, String s2, String s3, String s4, String s5) {
+        return new StringBuilder().append(s1).append(" ").append(s2).append(" ").append(s3).append(" ").append(s4).append(" ").append(s5).toString();
+    }
+    public static String concatWithSpace(String s1, String s2, String s3, String s4, String s5, String s6) {
+        return new StringBuilder().append(s1).append(" ").append(s2).append(" ").append(s3).append(" ").append(s4).append(" ").append(s5).append(" ").append(s6).toString();
+    }
+    public static String concatWithSpace(String s1, String s2, String s3, String s4, String s5, String s6, String s7) {
+        return new StringBuilder().append(s1).append(" ").append(s2).append(" ").append(s3).append(" ").append(s4).append(" ").append(s5).append(" ").append(s6).append(" ").append(s7).toString();
+    }
+    //concatenate no spaces
+    public static String concatNoSpace(String s1, String s2, String s3) {
+        return new StringBuilder().append(s1).append(s2).append(s3).toString();
+    }
+    public static String concatNoSpace(String s1, String s2, String s3, String s4, String s5) {
+        return new StringBuilder().append(s1).append(s2).append(s3).append(s4).append(s5).toString();
+    }
 }

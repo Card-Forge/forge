@@ -2,6 +2,7 @@ package forge.game.event;
 
 import forge.game.player.Player;
 import forge.util.Lang;
+import forge.util.TextUtil;
 
 public class GameEventShuffle extends GameEvent {
     
@@ -21,6 +22,6 @@ public class GameEventShuffle extends GameEvent {
      */
     @Override
     public String toString() {
-        return String.format("%s %s his/her/its library", player, Lang.joinVerb(player.getName(), "shuffle"));
+        return TextUtil.concatWithSpace(player.toString(), Lang.joinVerb(player.getName(), "shuffle"),"his/her/its library");
     }
 }

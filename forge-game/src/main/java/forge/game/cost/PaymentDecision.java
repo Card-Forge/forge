@@ -6,6 +6,7 @@ import forge.game.card.CounterType;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.TextUtil;
 
 import java.util.List;
 
@@ -80,7 +81,7 @@ public class PaymentDecision {
      */
     @Override
     public String toString() {
-        return  String.format("Payment Decision: %d, %s", c, cards);
+        return  TextUtil.concatWithSpace("Payment Decision:", String.valueOf(c)+",", cards.toString());
     }
 
     public static PaymentDecision type(String choice) {

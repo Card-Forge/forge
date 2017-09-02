@@ -7,6 +7,7 @@ import com.google.common.collect.Iterables;
 
 import forge.game.player.Player;
 import forge.util.Lang;
+import forge.util.TextUtil;
 
 /**
  * This means card's characteristics have changed on server, clients must re-request them
@@ -36,7 +37,7 @@ public class GameEventPlayerStatsChanged extends GameEvent {
         if (null == players || Iterables.isEmpty(players)) {
             return "Player state changes: (empty list)";
         }
-        return String.format("Player state changes: %s", Lang.joinHomogenous(players));
+        return TextUtil.concatWithSpace("Player state changes:", Lang.joinHomogenous(players));
     }
 
 }

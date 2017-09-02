@@ -6,6 +6,7 @@ import forge.StaticData;
 import forge.game.card.Card;
 import forge.item.PaperCard;
 import forge.util.EnumUtil;
+import forge.util.TextUtil;
 
 public enum Keyword {
     UNDEFINED(SimpleKeyword.class, false, ""),
@@ -217,7 +218,7 @@ public enum Keyword {
     }
 
     public String getDescription() {
-        return String.format("%s (%s)", displayName, reminderText);
+        return TextUtil.concatWithSpace(displayName," ("+reminderText+")");
     }
 
     public static List<Keyword> getAllKeywords() {

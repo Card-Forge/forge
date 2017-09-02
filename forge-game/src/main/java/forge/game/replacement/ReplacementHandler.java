@@ -28,6 +28,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
+import forge.util.TextUtil;
 import forge.util.Visitor;
 
 import org.apache.commons.lang3.StringUtils;
@@ -241,8 +242,8 @@ public class ReplacementHandler {
             Card cardForUi = host.getCardForUi();
             String effectDesc = replacementEffect.toString().replace("CARDNAME", cardForUi.getName());
             final String question = replacementEffect instanceof ReplaceDiscard
-                ? String.format("Apply replacement effect of %s to %s?\r\n(%s)", cardForUi, runParams.get("Card").toString(), effectDesc)
-                : String.format("Apply replacement effect of %s?\r\n(%s)", cardForUi, effectDesc);
+                ? TextUtil.concatWithSpace("Apply replacement effect of", cardForUi.toString(), "to", runParams.get("Card").toString()+"?", "\r\n(", effectDesc+")")
+                : TextUtil.concatWithSpace("Apply replacement effect of", cardForUi.toString()+"?", "\r\n(", effectDesc+")");
             boolean confirmed = optDecider.getController().confirmReplacementEffect(replacementEffect, effectSA, question);
             if (!confirmed) {
                 return ReplacementResult.NotReplaced;

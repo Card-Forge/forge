@@ -10,6 +10,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+import forge.util.TextUtil;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class MillEffect extends SpellAbilityEffect {
         for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (sa.hasParam("Optional")) {
-                    final String prompt = String.format("Do you want to put card(s) from library to %s?", destination);
+                    final String prompt = TextUtil.concatWithSpace("Do you want to put card(s) from library to", destination.toString()+"?");
                     if (!p.getController().confirmAction(sa, null, prompt)) {
                         continue;
                     }

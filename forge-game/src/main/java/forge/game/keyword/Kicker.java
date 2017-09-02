@@ -27,9 +27,6 @@ public class Kicker extends KeywordWithCost {
             return super.formatReminderText(reminderText);
         }
         //handle special case of double kicker
-        return String.format("You may pay an additional %s and/or %s as you cast this spell.",
-                cost.toSimpleString(),
-                cost2.toSimpleString()
-        );
+        return TextUtil.concatWithSpace("You may pay an additional", cost.toSimpleString(),"and/or", cost2.toSimpleString(),"as you cast this spell.");
     }
 }

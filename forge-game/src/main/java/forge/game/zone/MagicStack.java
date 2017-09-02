@@ -65,6 +65,7 @@ import forge.game.spellability.TargetChoices;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
+import forge.util.TextUtil;
 
 /**
  * <p>
@@ -284,7 +285,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                     boolean hasPaid = false;
                     do {
                         int mkMagnitude = source.getPseudoKickerMagnitude();
-                        String prompt = String.format("Additional Cost for %s\r\nTimes Kicked: %d\r\n", source, mkMagnitude );
+                        String prompt = TextUtil.concatWithSpace("Additional Cost for",source.toString(),"\r\nTimes Kicked:",  String.valueOf(mkMagnitude),"\r\n");
                         hasPaid = activator.getController().payManaOptional(source, costPseudoKicker, sp, prompt, ManaPaymentPurpose.Multikicker);
                         if (hasPaid) {
                             source.addPseudoMultiKickerMagnitude(1);
@@ -324,7 +325,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                         boolean hasPaid = false;
                         int replicateCMC = source.getManaCost().getCMC();
                         do {
-                            String prompt = String.format("Replicate for %s\r\nTimes Replicated: %d\r\n", source, magnitude);
+                            String prompt = TextUtil.concatWithSpace("Replicate for", source.toString(),"\r\nTimes Replicated:", magnitude.toString(),"\r\n");
                             hasPaid = activator.getController().payManaOptional(source, costReplicate, sp, prompt, ManaPaymentPurpose.Replicate);
                             if (hasPaid) {
                                 magnitude++;
@@ -334,7 +335,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                     }
 
                     // Replicate Trigger
-                    String effect = String.format("DB$ CopySpellAbility | Cost$ 0 | Defined$ Parent | Amount$ %d", magnitude);
+                    String effect = TextUtil.concatWithSpace("DB$ CopySpellAbility | Cost$ 0 | Defined$ Parent | Amount$", magnitude.toString());
                     AbilitySub sa = (AbilitySub) AbilityFactory.getAbility(effect, source);
                     sa.setParent(sp);
                     sa.setDescription("Replicate - " + source);
@@ -917,6 +918,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     
     @Override 
     public String toString() {
-        return String.format("%s==%s==%s", simultaneousStackEntryList, frozenStack.toString(), stack.toString()); 
+        return TextUtil.concatNoSpace(simultaneousStackEntryList.toString(),"==", frozenStack.toString(), "==", stack.toString());
     }
 }

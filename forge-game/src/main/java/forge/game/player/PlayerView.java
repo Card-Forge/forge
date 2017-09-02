@@ -7,6 +7,7 @@ import forge.card.CardType;
 import forge.card.mana.ManaAtom;
 import forge.game.card.CounterType;
 
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Objects;
@@ -109,8 +110,8 @@ public class PlayerView extends GameEntityView {
         for (final PlayerView p : Iterables.concat(Collections.singleton(this), opponents)) {
             final int damage = p.getCommanderDamage(v);
             if (damage > 0) {
-                final String text = String.format("Commander damage to %s from %s:", p, v.getName());
-                sb.append(String.format(text + " %d\r\n", damage));
+                final String text = TextUtil.concatWithSpace("Commander damage to", p.toString(),"from", v.getName()+":");
+                sb.append(TextUtil.concatWithSpace(text, String.valueOf(damage)+"\r\n"));
             }
         }
         return sb.toString();
@@ -124,18 +125,18 @@ public class PlayerView extends GameEntityView {
 
         final FCollectionView<PlayerView> opponents = getOpponents();
         final List<String> info = Lists.newArrayListWithExpectedSize(opponents.size());
-        info.add(String.format("Commanders: %s", Lang.joinHomogenous(commanders)));
+        info.add(TextUtil.concatWithSpace("Commanders:", Lang.joinHomogenous(commanders)));
         for (final PlayerView p : Iterables.concat(Collections.singleton(this), opponents)) {
             for (final CardView v : p.getCommanders()) {
                 final int damage = this.getCommanderDamage(v);
                 if (damage > 0) {
                     final String text;
                     if (p.equals(this)) {
-                        text = String.format("Commander damage from own commander %s:", v);
+                        text = TextUtil.concatWithSpace("Commander damage from own commander", v.toString()+":");
                     } else {
-                        text = String.format("Commander damage from %s's %s:", p, v);
+                        text = TextUtil.concatWithSpace("Commander damage from", p.toString()+"'s", v.toString()+":");
                     }
-                    info.add(String.format(text + " %d\r\n", damage));
+                    info.add(TextUtil.concatWithSpace(text,String.valueOf(damage)+"\r\n"));
                 }
             }
         }
@@ -383,27 +384,27 @@ public class PlayerView extends GameEntityView {
 
     private List<String> getDetailsList() {
         final List<String> details = Lists.newArrayListWithCapacity(8);
-        details.add(String.format("Life: %d", getLife()));
+        details.add(TextUtil.concatWithSpace("Life:", String.valueOf(getLife())));
 
         Map<CounterType, Integer> counters = getCounters();
         if (counters != null) {
             for (Entry<CounterType, Integer> p : counters.entrySet()) {
                 if (p.getValue() > 0) {
-                    details.add(String.format("%s counters: %d", p.getKey().getName(), p.getValue()));
+                    details.add(TextUtil.concatWithSpace(p.getKey().getName(), "counters:", String.valueOf(p.getValue())));
                 }
             }
         }
 
-        details.add(String.format("Cards in hand: %d/%s", getHandSize(), getMaxHandString()));
-        details.add(String.format("Cards drawn this turn: %d", getNumDrawnThisTurn()));
-        details.add(String.format("Damage prevention: %d", getPreventNextDamage()));
+        details.add(TextUtil.concatNoSpace("Cards in hand: ", String.valueOf(getHandSize())+"/", getMaxHandString()));
+        details.add(TextUtil.concatWithSpace("Cards drawn this turn:", String.valueOf(getNumDrawnThisTurn())));
+        details.add(TextUtil.concatWithSpace("Damage prevention:", String.valueOf(getPreventNextDamage())));
         final String keywords = Lang.joinHomogenous(getDisplayableKeywords());
         if (!keywords.isEmpty()) {
             details.add(keywords);
         }
         final FCollectionView<CardView> ante = getAnte();
         if (ante != null && !ante.isEmpty()) {
-            details.add(String.format("Ante'd: %s", Lang.joinHomogenous(ante)));
+            details.add(TextUtil.concatWithSpace("Ante'd:", Lang.joinHomogenous(ante)));
         }
         details.addAll(getPlayerCommanderInfo());
         return details;

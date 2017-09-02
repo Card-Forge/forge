@@ -2,6 +2,7 @@ package forge.game.event;
 
 import forge.game.player.Player;
 import forge.util.Lang;
+import forge.util.TextUtil;
 
 public class GameEventPlayerLivesChanged extends GameEvent {
     public final Player player;
@@ -21,6 +22,6 @@ public class GameEventPlayerLivesChanged extends GameEvent {
     
     @Override
     public String toString() {
-        return String.format("%s lives changed: %d -> %d", Lang.getPossesive(player.getName()), oldLives, newLives);
+        return TextUtil.concatWithSpace(Lang.getPossesive(player.getName()),"lives changed:",  String.valueOf(oldLives),"->", String.valueOf(newLives));
     }
 }

@@ -25,6 +25,7 @@ import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
+import forge.util.TextUtil;
 
 /**
  * <p>
@@ -101,7 +102,7 @@ public class PlayerZone extends Zone {
 
     @Override
     public final String toString() {
-        return String.format("%s %s", Lang.getPossesive(player.toString()), zoneType);
+        return TextUtil.concatWithSpace(Lang.getPossesive(player.toString()), zoneType.toString());
     }
 
     public CardCollectionView getCardsPlayerCanActivate(Player who) {

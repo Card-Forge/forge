@@ -2,6 +2,7 @@ package forge.game.event;
 
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.util.TextUtil;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -30,6 +31,6 @@ public class GameEventPlayerPriority extends GameEvent {
      */
     @Override
     public String toString() {
-        return String.format("Priority - %s", priority.getName());
+        return TextUtil.concatWithSpace("Priority -", priority.getName());
     }
 }

@@ -41,6 +41,7 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.CollectionSuppliers;
+import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
@@ -985,7 +986,7 @@ public class PhaseHandler implements java.io.Serializable {
             if (game.isGameOver() || nextPlayer == null) { return; } // conceded?
 
             if (DEBUG_PHASES) {
-                System.out.println(String.format("%s %s: %s is active, previous was %s", playerTurn, phase, pPlayerPriority, nextPlayer));
+                System.out.println(TextUtil.concatWithSpace(playerTurn.toString(),phase.toString()+":", pPlayerPriority.toString(),"is active, previous was", nextPlayer.toString()));
             }
             if (pFirstPriority == nextPlayer) {
                 if (game.getStack().isEmpty()) {

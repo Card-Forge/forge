@@ -21,6 +21,7 @@ import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.TextUtil;
 
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class CostUnattach extends CostPartWithList {
      */
     @Override
     public final String toString() {
-        return String.format("Unattach %s", this.getTypeDescription());
+        return TextUtil.concatWithSpace("Unattach", this.getTypeDescription());
     }
 
     /*

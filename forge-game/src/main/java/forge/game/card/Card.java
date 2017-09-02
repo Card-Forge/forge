@@ -3046,7 +3046,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         @Override
         public String toString() {
-            return String.format("c:%d tb:%d spb:%d bfc:%d", currentValue, tempBoost, semiPermanentBoost, bonusFromCounters);
+            return TextUtil.concatWithSpace("c:"+String.valueOf(currentValue),"tb:"+String.valueOf(tempBoost), "spb:"+String.valueOf(semiPermanentBoost),"bfc:"+String.valueOf(bonusFromCounters));
         }
     }
 
@@ -5229,7 +5229,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     requestedCMC += xPaid;
                     break;
                 default:
-                    System.out.println(String.format("Illegal Split Card CMC mode %s passed to getCMC!", mode.toString()));
+                    System.out.println(TextUtil.concatWithSpace("Illegal Split Card CMC mode", mode.toString(),"passed to getCMC!"));
                     break;
             }
         } else if (currentStateName == CardStateName.Transformed) {

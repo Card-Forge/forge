@@ -3,6 +3,7 @@ package forge.game.event;
 import forge.game.GameType;
 import forge.game.player.Player;
 import forge.util.Lang;
+import forge.util.TextUtil;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -32,7 +33,7 @@ public class GameEventGameStarted extends GameEvent {
      */
     @Override
     public String toString() {
-        return String.format("%s game between %s started. %s goes first ", gameType, Lang.joinHomogenous(players), firstTurn) ;
+        return TextUtil.concatWithSpace(gameType.toString(),"game between", Lang.joinHomogenous(players), "started.", firstTurn.toString(), "goes first ");
     }
 
 }

@@ -2,6 +2,7 @@ package forge.game.event;
 
 import com.google.common.collect.Iterables;
 import forge.game.card.Card;
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
@@ -36,9 +37,9 @@ public class GameEventCardStatsChanged extends GameEvent {
         if ( null == card )
             return "Card state changes: (empty list)";
         if( cards.size() == 1) 
-            return String.format("Card state changes: %s (%s) %d/%d", card.getName(), StringUtils.join(card.getType(), ' '), card.getNetPower(), card.getNetToughness() );
+            return TextUtil.concatWithSpace("Card state changes:", card.getName(), "("+StringUtils.join(card.getType(), ' ')+")", card.getNetPower()+"/"+card.getNetToughness() );
         else
-            return String.format("Card state changes: %s (%s) %d/%d and %d more", card.getName(), StringUtils.join(card.getType(), ' '), card.getNetPower(), card.getNetToughness(), cards.size() - 1 );
+            return TextUtil.concatWithSpace("Card state changes: %s (%s)", card.getName(), "("+StringUtils.join(card.getType(), ' ')+")", card.getNetPower()+"/"+card.getNetToughness(),"and", cards.size() - 1 +" more");
     }
 
 }

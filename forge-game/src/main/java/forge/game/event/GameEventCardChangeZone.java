@@ -2,6 +2,7 @@ package forge.game.event;
 
 import forge.game.card.Card;
 import forge.game.zone.Zone;
+import forge.util.TextUtil;
 
 public class GameEventCardChangeZone extends GameEvent {
     
@@ -26,7 +27,7 @@ public class GameEventCardChangeZone extends GameEvent {
      */
     @Override
     public String toString() {
-        return String.format("%s : [%s] -> [%s]", card, from, to);
+        return TextUtil.concatWithSpace(card.toString(),":", "["+from.toString()+"]","->", "["+to.toString()+"]");
     }
 }
 

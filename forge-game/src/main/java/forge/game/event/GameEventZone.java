@@ -4,6 +4,7 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
+import forge.util.TextUtil;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -35,9 +36,10 @@ public class GameEventZone extends GameEvent {
     @Override
     public String toString() {
         String owners = player == null ? "Game" : Lang.getPossesive(player.getName());
-        String zts = zoneType.toString();
-        String ms = mode.toString();
-        return String.format(card == null ? "%s %s : %s" : "%s %s : %s %s", owners, zts, ms, card);
+        return card == null
+                ? TextUtil.concatWithSpace(owners, zoneType.toString(), ":", mode.toString())
+                : TextUtil.concatWithSpace(owners, zoneType.toString(), ":", mode.toString(), card.toString()
+        );
     }
 
 }

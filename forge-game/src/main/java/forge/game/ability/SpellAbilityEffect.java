@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
@@ -105,12 +106,12 @@ public abstract class SpellAbilityEffect {
         if (sa.hasParam("Announce")) {
             String svar = sa.getParam("Announce");
             int amount = CardFactoryUtil.xCount(sa.getHostCard(), sa.getSVar(svar));
-            sb.append(String.format(" (%s=%d)", svar, amount));
+            sb.append(TextUtil.concatNoSpace(" (", svar,"="+amount+")"));
         } else{
             if (sa.getPayCosts() != null && sa.getPayCosts().getCostMana() != null &&
                     sa.getPayCosts().getCostMana().getAmountOfX() > 0) {
                 int amount = sa.getHostCard().getXManaCostPaid();
-                sb.append(String.format(" (%s=%d)", "X", amount));
+                sb.append(TextUtil.concatNoSpace(" (","X","="+amount+")"));
             }
         }
 
