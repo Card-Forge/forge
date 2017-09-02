@@ -1,7 +1,7 @@
 Name:Ghitu Fire
 ManaCost:X R
 Types:Sorcery
-K:You may cast CARDNAME as though it had flash if you pay 2 more to cast it.
+K:You may cast CARDNAME as though it had flash if you pay {2} more to cast it.
 A:SP$ DealDamage | Cost$ X R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature or player.
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghitu_fire.jpg

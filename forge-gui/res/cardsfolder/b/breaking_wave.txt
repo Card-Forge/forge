@@ -1,7 +1,7 @@
 Name:Breaking Wave
 ManaCost:2 U U
 Types:Sorcery
-K:You may cast CARDNAME as though it had flash if you pay 2 more to cast it.
+K:You may cast CARDNAME as though it had flash if you pay {2} more to cast it.
 A:SP$ UntapAll | Cost$ 2 U U | ValidCards$ Creature.tapped | RememberUntapped$ True | SubAbility$ DBTap | SpellDescription$ Simultaneously untap all tapped creatures and tap all untapped creatures.
 SVar:DBTap:DB$ TapAll | ValidCards$ Creature.untapped+IsNotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

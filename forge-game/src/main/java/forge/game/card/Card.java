@@ -1971,7 +1971,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sb.append(keyword).append("\r\n");
             } else if (keyword.equals("Aftermath")) {
                 sb.append(Keyword.getInstance(keyword).getReminderText()).append("\r\n");
-            } else if (keyword.equals("You may cast CARDNAME as though it had flash if you pay 2 more to cast it.")) {
+            } else if (keyword.equals("You may cast CARDNAME as though it had flash if you pay {2} more to cast it.")) {
                 sb.append(keyword).append("\r\n");
             } else if (keyword.startsWith("Flashback")) {
                 sb.append("Flashback");

@@ -2,7 +2,7 @@ Name:Harbinger of the Tides
 ManaCost:U U
 Types:Creature Merfolk Wizard
 PT:2/2
-K:You may cast CARDNAME as though it had flash if you pay 2 more to cast it.
+K:You may cast CARDNAME as though it had flash if you pay {2} more to cast it.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target tapped creature an opponent controls to its owner's hand.
 SVar:TrigChangeZone:DB$ChangeZone | ValidTgts$ Creature.OppCtrl+tapped | TgtPrompt$ Select target tapped creature an opponent controls | Origin$ Battlefield | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harbinger_of_the_tides.jpg

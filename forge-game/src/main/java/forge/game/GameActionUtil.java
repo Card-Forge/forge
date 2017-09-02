@@ -198,7 +198,7 @@ public final class GameActionUtil {
                 }
                 alternatives.add(flashback);
             }
-            if (sa.isSpell() && keyword.equals("You may cast CARDNAME as though it had flash if you pay 2 more to cast it.")) {
+            if (sa.isSpell() && keyword.equals("You may cast CARDNAME as though it had flash if you pay {2} more to cast it.")) {
                 final SpellAbility newSA = sa.copy();
                 newSA.setBasicSpell(false);
                 ManaCostBeingPaid newCost = new ManaCostBeingPaid(source.getManaCost());
