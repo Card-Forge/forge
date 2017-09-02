@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
+import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
@@ -1726,8 +1727,8 @@ public class AbilityUtils {
         }
         for (final Entry<String, String> e : card.getChangedTextTypeWords().entrySet()) {
             final String key = e.getKey();
-            final String pkey = CardUtil.getPluralType(key);
-            final String pvalue = getReplacedText(pkey, CardUtil.getPluralType(e.getValue()), isDescriptive);
+            final String pkey = CardType.getPluralType(key);
+            final String pvalue = getReplacedText(pkey, CardType.getPluralType(e.getValue()), isDescriptive);
             replaced = replaced.replaceAll("(?<!>)" + pkey, pvalue);
             final String value = getReplacedText(key, e.getValue(), isDescriptive);
             replaced = replaced.replaceAll("(?<!>)" + key, value);
