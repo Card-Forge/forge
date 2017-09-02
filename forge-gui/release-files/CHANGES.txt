@@ -1,3 +1,6 @@
+- Emblem File Name Convention Change -
+Emblem token file names have been standardized (and this is a change from the previous version): instead of having "_emblem" appended to the end of the file name, now they have "emblem_" prepended to the beginning, so that instead of gideon_ally_of_zendikar_emblem.jpg, you have emblem_gideon_ally_of_zendikar.jpg. This will require you to locally rename the emblem picture files to match this new naming scheme. You can use any of the batch renaming tools available to you to simplify this task (Advanced Renamer, Unix/Linux rename, etc.). We apologize for the inconvenience.
+
 - Create a Puzzle -
 A simple "create a puzzle" mode has been added, which presents you with a clean battlefield and allows you to use Developer Mode functions to set up the battlefield state for the puzzle. The "Dump Game State" dev mode command can then be used to save the state with a simple puzzle metadata template to a text file, which can then be hand-edited in a text editor to complete the puzzle file. Please note that you need Developer Mode to be enabled in Forge preferences for this mode to be of use. Also, very importantly, keep in mind that rule enforcement is active in this mode, so, for example, players will lose for drawing out of an empty library.
 
