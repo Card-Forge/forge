@@ -7,6 +7,8 @@ import java.util.SortedMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
+import forge.card.CardType;
+
 public final class CardChangedWords {
 
     private final SortedMap<Long, CardChangedWord> map = Maps.newTreeMap();
@@ -68,7 +70,7 @@ public final class CardChangedWords {
                 resultCache.put(ccw.getOriginalWord(), ccw.getNewWord());
 
                 // possible plural form
-                final String singular = CardUtil.getPluralType(ccw.getOriginalWord());
+                final String singular = CardType.getPluralType(ccw.getOriginalWord());
                 if (!singular.equals(ccw.getOriginalWord())) {
                     resultCache.put(singular, ccw.getNewWord());
                 }

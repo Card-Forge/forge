@@ -1580,7 +1580,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.startsWith("IfReach")) {
                 String k[] = keyword.split(":");
                 sbLong.append(getName()).append(" can block ")
-                .append(CardUtil.getPluralType(k[1]))
+                .append(CardType.getPluralType(k[1]))
                 .append(" as though it had reach.\r\n");
             } else if (keyword.startsWith("MayEffectFromOpeningHand")) {
                 final String[] k = keyword.split(":");
@@ -4899,7 +4899,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                         return true;
                     }
                 } else if (kw.startsWith("Protection from ")) {
-                    final String protectType = CardUtil.getSingularType(kw.substring("Protection from ".length()));
+                    final String protectType = CardType.getSingularType(kw.substring("Protection from ".length()));
                     if (source.getType().hasStringType(protectType)) {
                         return true;
                     }

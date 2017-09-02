@@ -17,13 +17,9 @@
  */
 package forge.card;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -31,8 +27,13 @@ import java.util.Set;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 import forge.util.EnumUtil;
 import forge.util.Settable;
@@ -86,8 +87,8 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     // This will be useful for faster parses
-    private static Map<String, CoreType> stringToCoreType = new HashMap<String, CoreType>();
-    private static Map<String, Supertype> stringToSupertype = new HashMap<String, Supertype>();
+    private static Map<String, CoreType> stringToCoreType = Maps.newHashMap();
+    private static Map<String, Supertype> stringToSupertype = Maps.newHashMap();
     static {
         for (final Supertype st : Supertype.values()) {
             stringToSupertype.put(st.name(), st);
@@ -99,7 +100,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     private final Set<CoreType> coreTypes = EnumSet.noneOf(CoreType.class);
     private final Set<Supertype> supertypes = EnumSet.noneOf(Supertype.class);
-    private final Set<String> subtypes = new LinkedHashSet<String>();
+    private final Set<String> subtypes = Sets.newLinkedHashSet();
     private transient String calculatedType = null;
 
     public CardType() {
@@ -199,7 +200,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
     @Override
     public Set<String> getCreatureTypes() {
-        final Set<String> creatureTypes = new HashSet<String>();
+        final Set<String> creatureTypes = Sets.newHashSet();
         if (isCreature() || isTribal()) {
             for (final String t : subtypes) {
                 if (isACreatureType(t) || t.equals("AllCreatureTypes")) {
@@ -211,7 +212,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
     @Override
     public Set<String> getLandTypes() {
-        final Set<String> landTypes = new HashSet<String>();
+        final Set<String> landTypes = Sets.newHashSet();
         if (isLand()) {
             for (final String t : subtypes) {
                 if (isALandType(t) || isABasicLandType(t)) {
@@ -400,7 +401,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     private Set<String> getTypesBeforeDash() {
-        final Set<String> types = new LinkedHashSet<String>();
+        final Set<String> types = Sets.newLinkedHashSet();
         for (final Supertype st : supertypes) {
             types.add(st.name());
         }
@@ -537,13 +538,18 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     public static class Constant {
         public static final Settable LOADED = new Settable();
-        public static final List<String> BASIC_TYPES = new ArrayList<String>();
-        public static final List<String> LAND_TYPES = new ArrayList<String>();
-        public static final List<String> CREATURE_TYPES = new ArrayList<String>();
-        public static final List<String> SPELL_TYPES = new ArrayList<String>();
-        public static final List<String> ENCHANTMENT_TYPES = new ArrayList<String>();
-        public static final List<String> ARTIFACT_TYPES = new ArrayList<String>();
-        public static final List<String> WALKER_TYPES = new ArrayList<String>();
+        public static final List<String> BASIC_TYPES = Lists.newArrayList();
+        public static final List<String> LAND_TYPES = Lists.newArrayList();
+        public static final List<String> CREATURE_TYPES = Lists.newArrayList();
+        public static final List<String> SPELL_TYPES = Lists.newArrayList();
+        public static final List<String> ENCHANTMENT_TYPES = Lists.newArrayList();
+        public static final List<String> ARTIFACT_TYPES = Lists.newArrayList();
+        public static final List<String> WALKER_TYPES = Lists.newArrayList();
+        
+        // singular -> plural
+        public static final BiMap<String,String> pluralTypes = HashBiMap.create();
+        // plural -> singular
+        public static final BiMap<String,String> singularTypes = pluralTypes.inverse();
     }
 
     ///////// Utility methods
@@ -558,7 +564,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     private static List<String> combinedSuperAndCoreTypes;
     public static List<String> getCombinedSuperAndCoreTypes() {
         if (combinedSuperAndCoreTypes == null) {
-            combinedSuperAndCoreTypes = new ArrayList<String>();
+            combinedSuperAndCoreTypes = Lists.newArrayList();
             combinedSuperAndCoreTypes.addAll(Supertype.allSuperTypeNames);
             combinedSuperAndCoreTypes.addAll(CoreType.allCoreTypeNames);
         }
@@ -568,7 +574,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     private static List<String> sortedSubTypes;
     public static List<String> getSortedSubTypes() {
         if (sortedSubTypes == null) {
-            sortedSubTypes = new ArrayList<String>();
+            sortedSubTypes = Lists.newArrayList();
             sortedSubTypes.addAll(Constant.BASIC_TYPES);
             sortedSubTypes.addAll(Constant.LAND_TYPES);
             sortedSubTypes.addAll(Constant.CREATURE_TYPES);
@@ -617,5 +623,32 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     public static boolean isABasicLandType(final String cardType) {
         return (Constant.BASIC_TYPES.contains(cardType));
+    }
+    
+
+    /**
+     * If the input is a plural type, return the corresponding singular form.
+     * Otherwise, simply return the input.
+     * @param type a String.
+     * @return the corresponding type.
+     */
+    public static final String getSingularType(final String type) {
+        if (Constant.singularTypes.containsKey(type)) {
+            return Constant.singularTypes.get(type);
+        }
+        return type;
+    }
+
+    /**
+     * If the input is a singular type, return the corresponding plural form.
+     * Otherwise, simply return the input.
+     * @param type a String.
+     * @return the corresponding type.
+     */
+    public static final String getPluralType(final String type) {
+        if (Constant.pluralTypes.containsKey(type)) {
+            return Constant.pluralTypes.get(type);
+        }
+        return type;
     }
 }
