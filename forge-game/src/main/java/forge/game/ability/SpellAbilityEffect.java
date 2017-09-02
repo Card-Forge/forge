@@ -337,9 +337,9 @@ public abstract class SpellAbilityEffect {
         eff.setTimestamp(game.getNextTimestamp());
         eff.setName(name);
         // if name includes emblem then it should be one
-        eff.addType(name.startsWith("emblem") ? "Emblem" : "Effect");
+        eff.addType(name.startsWith("Emblem") ? "Emblem" : "Effect");
         // add Planeswalker types into Emblem for fun
-        if (name.startsWith("emblem") && hostCard.isPlaneswalker()) {
+        if (name.startsWith("Emblem") && hostCard.isPlaneswalker()) {
             for (final String type : hostCard.getType().getSubtypes()) {
                 if (CardType.isAPlaneswalkerType(type)) {
                     eff.addType(type);
