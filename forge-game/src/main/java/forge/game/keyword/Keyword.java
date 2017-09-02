@@ -48,7 +48,7 @@ public enum Keyword {
     EPIC(SimpleKeyword.class, true, "For the rest of the game, you can't cast spells. At the beginning of each of your upkeeps for the rest of the game, copy this spell except for its epic ability. If the spell has any targets, you may choose new targets for the copy."),
     EQUIP(KeywordWithCost.class, false, "%s: Attach this permanent to target creature you control. Activate this ability only any time you could cast a sorcery."),
     ESCALATE(KeywordWithCost.class, true, "Pay this cost for each mode chosen beyond the first."),
-    ETERNALIZE(KeywordWithCost.class, false, "Create a token that's a copy of this card, except it's 4/4 black Zombie with no mana cost. Eternalize only as a sorcery."),
+    ETERNALIZE(KeywordWithCost.class, false, "Create a token that's a copy of this card, except it's black, it's 4/4, it has no mana cost, and it's a Zombie in addition to its other types. Eternalize only as a sorcery."),
     EVOKE(KeywordWithCost.class, false, "You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield."),
     EVOLVE(SimpleKeyword.class, false, "Whenever a creature enters the battlefield under your control, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature."),
     EXALTED(SimpleKeyword.class, false, "Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn."),
