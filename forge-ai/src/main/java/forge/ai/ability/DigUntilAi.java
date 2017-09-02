@@ -21,6 +21,7 @@ public class DigUntilAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         Card source = sa.getHostCard();
+        final String logic = sa.getParamOrDefault("AILogic", "");
         double chance = .4; // 40 percent chance with instant speed stuff
         if (SpellAbilityAi.isSorcerySpeed(sa)) {
             chance = .667; // 66.7% chance for sorcery speed (since it will
@@ -31,6 +32,16 @@ public class DigUntilAi extends SpellAbilityAi {
 
         Player libraryOwner = ai;
         Player opp = ComputerUtil.getOpponentFor(ai);
+
+        if ("DontMillSelf".equals(logic)) {
+            // A card that digs for specific things and puts everything revealed before it into graveyard
+            // (e.g. Hermit Druid) - don't use it to mill itself and also make sure there's enough playable
+            // material in the library after using it several times.
+            // TODO: maybe this should happen for any DigUntil SA with RevealedDestination$ Graveyard?
+            if (ai.getCardsIn(ZoneType.Library).size() < 20) {
+                return false;
+            }
+        }
 
         if (sa.usesTargeting()) {
             sa.resetTargets();
@@ -110,7 +121,7 @@ public class DigUntilAi extends SpellAbilityAi {
                 // or none in play with one in library, oath
                 return creaturesInLibrary.size() > 2
                         || (creaturesInBattlefield.size() == 0 && creaturesInLibrary.size() > 0);
-                    
+
             }
         }
         return true;
