@@ -1167,12 +1167,10 @@ public class ComputerUtilCard {
 
         boolean combatTrick = false;
         boolean holdCombatTricks = false;
-        int chanceHoldCombatTricks = 0;
 
         if (ai.getController().isAI()) {
             AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
             holdCombatTricks = aic.getBooleanProperty(AiProps.TRY_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK);
-            chanceHoldCombatTricks = aic.getIntProperty(AiProps.CHANCE_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK);
         }
         
         if (!c.canBeTargetedBy(sa)) {
@@ -1404,13 +1402,14 @@ public class ComputerUtilCard {
             }
         }
 
-        boolean isHeldCombatTrick = combatTrick && holdCombatTricks && MyRandom.percentTrue(chanceHoldCombatTricks);
+        boolean isHeldCombatTrick = combatTrick && holdCombatTricks && MyRandom.getRandom().nextFloat() < chance;
 
         if (isHeldCombatTrick) {
            if (AiCardMemory.isMemorySetEmpty(ai, AiCardMemory.MemorySet.TRICK_ATTACKERS)) {
                // Attempt to hold combat tricks until blockers are declared, and try to lure the opponent into blocking
                // (The AI will only do it for one attacker at the moment, otherwise it risks running his attackers into
                // an army of opposing blockers with only one combat trick in hand)
+               // TODO: somehow ensure that the AI doesn't tap out before it has a chance to buff the attacker
                AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.MANDATORY_ATTACKERS);
                AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.TRICK_ATTACKERS);
                return false;
