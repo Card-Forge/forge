@@ -62,6 +62,7 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
 import forge.game.mana.ManaCostBeingPaid;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.replacement.ReplaceMoved;
@@ -601,11 +602,27 @@ public class AiController {
         return null;
     }
 
-    public void reserveManaSourcesForMain2(SpellAbility sa) {
+    public void reserveManaSources(SpellAbility sa) {
+        reserveManaSources(sa, PhaseType.MAIN2);
+    }
+
+    public void reserveManaSources(SpellAbility sa, PhaseType phaseType) {
         ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, true, 0);
         CardCollection manaSources = ComputerUtilMana.getManaSourcesToPayCost(cost, sa, player);
+
+        AiCardMemory.MemorySet memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2;
+
+        switch (phaseType) {
+            case COMBAT_DECLARE_BLOCKERS:
+                memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_COMBAT;
+                break;
+            default:
+                memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2;
+                break;
+        }
+
         for (Card c : manaSources) {
-            AiCardMemory.rememberCard(player, c, AiCardMemory.MemorySet.HELD_MANA_SOURCES);
+            AiCardMemory.rememberCard(player, c, memSet);
         }
     }
 

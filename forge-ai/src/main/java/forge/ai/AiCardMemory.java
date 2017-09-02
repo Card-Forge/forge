@@ -43,6 +43,7 @@ public class AiCardMemory {
     private final Set<Card> memMandatoryAttackers;
     private final Set<Card> memTrickAttackers;
     private final Set<Card> memHeldManaSources;
+    private final Set<Card> memHeldManaSourcesForCombat;
     private final Set<Card> memAttachedThisTurn;
     private final Set<Card> memAnimatedThisTurn;
     private final Set<Card> memBouncedThisTurn;
@@ -51,6 +52,7 @@ public class AiCardMemory {
     public AiCardMemory() {
         this.memMandatoryAttackers = new HashSet<>();
         this.memHeldManaSources = new HashSet<>();
+        this.memHeldManaSourcesForCombat = new HashSet<>();
         this.memAttachedThisTurn = new HashSet<>();
         this.memAnimatedThisTurn = new HashSet<>();
         this.memBouncedThisTurn = new HashSet<>();
@@ -66,7 +68,8 @@ public class AiCardMemory {
     public enum MemorySet {
         MANDATORY_ATTACKERS,
         TRICK_ATTACKERS,
-        HELD_MANA_SOURCES, 
+        HELD_MANA_SOURCES_FOR_MAIN2,
+        HELD_MANA_SOURCES_FOR_COMBAT,
         ATTACHED_THIS_TURN,
         ANIMATED_THIS_TURN,
         BOUNCED_THIS_TURN,
@@ -80,8 +83,10 @@ public class AiCardMemory {
                 return memMandatoryAttackers;
             case TRICK_ATTACKERS:
                 return memTrickAttackers;
-            case HELD_MANA_SOURCES:
+            case HELD_MANA_SOURCES_FOR_MAIN2:
                 return memHeldManaSources;
+            case HELD_MANA_SOURCES_FOR_COMBAT:
+                return memHeldManaSourcesForCombat;
             case ATTACHED_THIS_TURN:
                 return memAttachedThisTurn;
             case ANIMATED_THIS_TURN:
@@ -260,7 +265,8 @@ public class AiCardMemory {
     public void clearAllRemembered() {
         clearMemorySet(MemorySet.MANDATORY_ATTACKERS);
         clearMemorySet(MemorySet.TRICK_ATTACKERS);
-        clearMemorySet(MemorySet.HELD_MANA_SOURCES);
+        clearMemorySet(MemorySet.HELD_MANA_SOURCES_FOR_MAIN2);
+        clearMemorySet(MemorySet.HELD_MANA_SOURCES_FOR_COMBAT);
         clearMemorySet(MemorySet.ATTACHED_THIS_TURN);
         clearMemorySet(MemorySet.ANIMATED_THIS_TURN);
         clearMemorySet(MemorySet.BOUNCED_THIS_TURN);

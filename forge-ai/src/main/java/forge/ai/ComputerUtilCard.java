@@ -1184,11 +1184,11 @@ public class ComputerUtilCard {
         /* -- currently disabled until better conditions are devised and the spell prediction is made smarter --
         // Determine if some mana sources need to be held for the future spell to cast in Main 2 before determining whether to pump.
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-        if (aic.getCardMemory().isMemorySetEmpty(AiCardMemory.MemorySet.HELD_MANA_SOURCES)) {
+        if (aic.getCardMemory().isMemorySetEmpty(AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2)) {
             // only hold mana sources once
             SpellAbility futureSpell = aic.predictSpellToCastInMain2(ApiType.Pump);
             if (futureSpell != null && futureSpell.getHostCard() != null) {
-                aic.reserveManaSourcesForMain2(futureSpell);
+                aic.reserveManaSources(futureSpell);
             }
         }
         */
@@ -1412,6 +1412,9 @@ public class ComputerUtilCard {
                // TODO: somehow ensure that the AI doesn't tap out before it has a chance to buff the attacker
                AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.MANDATORY_ATTACKERS);
                AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.TRICK_ATTACKERS);
+               if (ai.getController().isAI()) {
+                   ((PlayerControllerAi) ai.getController()).getAi().reserveManaSources(sa, PhaseType.COMBAT_DECLARE_BLOCKERS);
+               }
                return false;
            } else {
                // Don't try to mix "lure" and "precast" paradigms for combat tricks, since that creates issues with

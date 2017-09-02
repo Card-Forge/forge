@@ -828,7 +828,7 @@ public class ComputerUtilMana {
     }
 
     // isManaSourceReserved returns true if sourceCard is reserved as a mana source for payment
-    // for the future spell to be cast in Mana 2. However, if "sa" (the spell ability that is
+    // for the future spell to be cast in another phase. However, if "sa" (the spell ability that is
     // being considered for casting) is high priority, then mana source reservation will be
     // ignored.
     private static boolean isManaSourceReserved(Player ai, Card sourceCard, SpellAbility sa) {
@@ -842,8 +842,21 @@ public class ComputerUtilMana {
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
         int chanceToReserve = aic.getIntProperty(AiProps.RESERVE_MANA_FOR_MAIN2_CHANCE);
 
+        PhaseType curPhase = ai.getGame().getPhaseHandler().getPhase();
+
+        // For combat tricks, always obey mana reservation
+        if (curPhase == PhaseType.COMBAT_DECLARE_BLOCKERS || curPhase == PhaseType.CLEANUP) {
+            AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_COMBAT);
+        }
+        else {
+            if (AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_COMBAT)) {
+                // This mana source is held elsewhere for a combat trick.
+                return true;
+            }
+        }
+
         // If it's a low priority spell (it's explicitly marked so elsewhere in the AI with a SVar), always
-        // obey mana reservations; otherwise, obey mana reservations depending on the "chance to reserve" 
+        // obey mana reservations for Main 2; otherwise, obey mana reservations depending on the "chance to reserve"
         // AI profile variable.
         if (sa.getSVar("LowPriorityAI").equals("")) {
             if (chanceToReserve == 0 || MyRandom.getRandom().nextInt(100) >= chanceToReserve) {
@@ -851,16 +864,16 @@ public class ComputerUtilMana {
             }
         }
 
-        PhaseType curPhase = ai.getGame().getPhaseHandler().getPhase();
         if (curPhase == PhaseType.MAIN2 || curPhase == PhaseType.CLEANUP) {
-            AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.HELD_MANA_SOURCES);
+            AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2);
         }
         else {
-            if (AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES)) {
+            if (AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2)) {
                 // This mana source is held elsewhere for a Main Phase 2 spell.
                 return true;
             }
         }
+
         return false;
     }
 

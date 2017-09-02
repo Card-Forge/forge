@@ -1053,10 +1053,10 @@ public class AttachAi extends SpellAbilityAi {
             // make sure to prioritize casting spells in main 2 (creatures, other equipment, etc.) rather than moving equipment around
             boolean decideMoveFromUseless = uselessCreature && aic.getBooleanProperty(AiProps.PRIORITIZE_MOVE_EQUIPMENT_IF_USELESS);
 
-            if (!decideMoveFromUseless && AiCardMemory.isMemorySetEmpty(aiPlayer, AiCardMemory.MemorySet.HELD_MANA_SOURCES)) {
+            if (!decideMoveFromUseless && AiCardMemory.isMemorySetEmpty(aiPlayer, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2)) {
                 SpellAbility futureSpell = aic.predictSpellToCastInMain2(ApiType.Attach);
                 if (futureSpell != null && futureSpell.getHostCard() != null) {
-                    aic.reserveManaSourcesForMain2(futureSpell);
+                    aic.reserveManaSources(futureSpell);
                 }
             }
 
