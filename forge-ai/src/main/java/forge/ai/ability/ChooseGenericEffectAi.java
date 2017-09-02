@@ -196,7 +196,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             }
             
             // milling against Tamiyo is pointless
-            if (owner.isCardInCommand("Emblem Tamiyo, the Moon Sage")) {
+            if (owner.isCardInCommand("Emblem - Tamiyo, the Moon Sage")) {
                 return allow;
             }
             
