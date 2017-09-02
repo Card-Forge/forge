@@ -1164,6 +1164,16 @@ public class ComputerUtilCard {
         final PhaseHandler phase = game.getPhaseHandler();
         final Combat combat = phase.getCombat();
         final boolean isBerserk = "Berserk".equals(sa.getParam("AILogic"));
+
+        boolean combatTrick = false;
+        boolean holdCombatTricks = false;
+        int chanceHoldCombatTricks = 0;
+
+        if (ai.getController().isAI()) {
+            AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+            holdCombatTricks = aic.getBooleanProperty(AiProps.TRY_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK);
+            chanceHoldCombatTricks = aic.getIntProperty(AiProps.CHANCE_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK);
+        }
         
         if (!c.canBeTargetedBy(sa)) {
             return false;
@@ -1224,6 +1234,7 @@ public class ComputerUtilCard {
                     threat *= 4;    //over-value self +attack for 0 power creatures which may be pumped further after attacking 
                 }
                 chance += threat;
+                combatTrick = true;
             }
             
             //2. grant haste
@@ -1391,6 +1402,23 @@ public class ComputerUtilCard {
                     return false;
                 }
             }
+        }
+
+        boolean isHeldCombatTrick = combatTrick && holdCombatTricks && MyRandom.percentTrue(chanceHoldCombatTricks);
+
+        if (isHeldCombatTrick) {
+           if (AiCardMemory.isMemorySetEmpty(ai, AiCardMemory.MemorySet.TRICK_ATTACKERS)) {
+               // Attempt to hold combat tricks until blockers are declared, and try to lure the opponent into blocking
+               // (The AI will only do it for one attacker at the moment, otherwise it risks running his attackers into
+               // an army of opposing blockers with only one combat trick in hand
+               AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.MANDATORY_ATTACKERS);
+               AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.TRICK_ATTACKERS);
+               return false;
+           } else {
+               // Don't try to mix "lure" and "precast" paradigms for combat tricks, since that creates issues with
+               // the AI overextending the attack
+               return false;
+           }
         }
 
         return MyRandom.getRandom().nextFloat() < chance;

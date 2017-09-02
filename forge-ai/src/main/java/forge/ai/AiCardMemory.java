@@ -41,6 +41,7 @@ import java.util.Set;
 public class AiCardMemory {
 
     private final Set<Card> memMandatoryAttackers;
+    private final Set<Card> memTrickAttackers;
     private final Set<Card> memHeldManaSources;
     private final Set<Card> memAttachedThisTurn;
     private final Set<Card> memAnimatedThisTurn;
@@ -54,6 +55,7 @@ public class AiCardMemory {
         this.memAnimatedThisTurn = new HashSet<>();
         this.memBouncedThisTurn = new HashSet<>();
         this.memActivatedThisTurn = new HashSet<>();
+        this.memTrickAttackers = new HashSet<>();
     }
 
     /**
@@ -63,6 +65,7 @@ public class AiCardMemory {
      */
     public enum MemorySet {
         MANDATORY_ATTACKERS,
+        TRICK_ATTACKERS,
         HELD_MANA_SOURCES, 
         ATTACHED_THIS_TURN,
         ANIMATED_THIS_TURN,
@@ -75,6 +78,8 @@ public class AiCardMemory {
         switch (set) {
             case MANDATORY_ATTACKERS:
                 return memMandatoryAttackers;
+            case TRICK_ATTACKERS:
+                return memTrickAttackers;
             case HELD_MANA_SOURCES:
                 return memHeldManaSources;
             case ATTACHED_THIS_TURN:
@@ -254,6 +259,7 @@ public class AiCardMemory {
      */
     public void clearAllRemembered() {
         clearMemorySet(MemorySet.MANDATORY_ATTACKERS);
+        clearMemorySet(MemorySet.TRICK_ATTACKERS);
         clearMemorySet(MemorySet.HELD_MANA_SOURCES);
         clearMemorySet(MemorySet.ATTACHED_THIS_TURN);
         clearMemorySet(MemorySet.ANIMATED_THIS_TURN);

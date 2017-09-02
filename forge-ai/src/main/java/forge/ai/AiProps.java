@@ -38,6 +38,8 @@ public enum AiProps { /** */
     PLAY_AGGRO ("false"),
     CHANCE_TO_ATTACK_INTO_TRADE ("100"), /** */
     ATTACK_INTO_TRADE_WHEN_TAPPED_OUT ("false"), /** */
+    TRY_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK ("false"), /** */
+    CHANCE_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK ("30"), /** */
     ENABLE_RANDOM_FAVORABLE_TRADES_ON_BLOCK ("false"), /** */
     RANDOMLY_TRADE_EVEN_WHEN_HAVE_LESS_CREATS ("false"), /** */
     MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE ("1"), /** */
