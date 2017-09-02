@@ -1,10 +1,13 @@
 package forge.ai.ability;
 
+import com.google.common.collect.Iterables;
 import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
+import forge.game.cost.CostRemoveCounter;
+import forge.game.cost.CostSacrifice;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -79,6 +82,23 @@ public class LifeGainAi extends SpellAbilityAi {
         boolean lifeCritical = life <= 5;
         lifeCritical |= ph.getPhase().isBefore(PhaseType.COMBAT_DAMAGE)
                 && ComputerUtilCombat.lifeInDanger(ai, game.getCombat());
+
+        // When life is critical but there is no immediate danger, try to wait until declare blockers
+        // before using the lifegain ability if it's an ability on a creature with a detrimental activation cost
+        if (lifeCritical
+                && sa.isAbility()
+                && sa.getHostCard() != null && sa.getHostCard().isCreature()
+                && sa.getPayCosts() != null
+                && (sa.getPayCosts().hasSpecificCostType(CostRemoveCounter.class) || sa.getPayCosts().hasSpecificCostType(CostSacrifice.class))) {
+            if (!game.getStack().isEmpty()) {
+                SpellAbility saTop = game.getStack().peekAbility();
+                if (saTop.getTargets() != null && Iterables.contains(saTop.getTargets().getTargetPlayers(), ai)) {
+                    return ComputerUtil.predictDamageFromSpell(saTop, ai) > 0;
+                }
+            }
+            if (game.getCombat() == null) { return false; }
+            if (!ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) { return false; }
+        }
 
         // Don't use lifegain before main 2 if possible
         if (!lifeCritical && ph.getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
