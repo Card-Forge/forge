@@ -336,10 +336,10 @@ public abstract class SpellAbilityEffect {
         final Card eff = new Card(game.nextCardId(), game);
         eff.setTimestamp(game.getNextTimestamp());
         eff.setName(name);
-        // if name includes emplem then it should be one
-        eff.addType(name.endsWith("emblem") ? "Emblem" : "Effect");
+        // if name includes emblem then it should be one
+        eff.addType(name.startsWith("emblem") ? "Emblem" : "Effect");
         // add Planeswalker types into Emblem for fun
-        if (name.endsWith("emblem") && hostCard.isPlaneswalker()) {
+        if (name.startsWith("emblem") && hostCard.isPlaneswalker()) {
             for (final String type : hostCard.getType().getSubtypes()) {
                 if (CardType.isAPlaneswalkerType(type)) {
                     eff.addType(type);

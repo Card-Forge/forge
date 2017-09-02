@@ -357,19 +357,19 @@ wu_1_1_bird.jpg                        https://downloads.cardforge.org/images/to
 
 # Emblems
 chandra_the_firebrand_effect.jpg       https://downloads.cardforge.org/images/tokens/chandra_the_firebrand_effect.jpg
-domri_rade_emblem.jpg                  https://downloads.cardforge.org/images/tokens/domri_rade_emblem.jpg
-elspeth_knight_errant_emblem.jpg       https://downloads.cardforge.org/images/tokens/elspeth_knight_errant_emblem.jpg
-elspeth_suns_champion_emblem.jpg       https://downloads.cardforge.org/images/tokens/elspeth_suns_champion_emblem.jpg
-garruk_caller_of_beasts_emblem.jpg     https://downloads.cardforge.org/images/tokens/garruk_caller_of_beasts_emblem.jpg
-gideon_ally_of_zendikar_emblem.jpg     https://downloads.cardforge.org/images/tokens/gideon_ally_of_zendikar_emblem.jpg
-kiora_master_of_the_depths_emblem.jpg  https://downloads.cardforge.org/images/tokens/kiora_master_of_the_depths_emblem.jpg
-kiora_the_crashing_wave_emblem.jpg     https://downloads.cardforge.org/images/tokens/kiora_the_crashing_wave_emblem.jpg
-koth_of_the_hammer_emblem.jpg          https://downloads.cardforge.org/images/tokens/koth_of_the_hammer_emblem.jpg
-liliana_of_the_dark_realms_emblem.jpg  https://downloads.cardforge.org/images/tokens/liliana_of_the_dark_realms_emblem.jpg
-ob_nixilis_reignited_emblem.jpg        https://downloads.cardforge.org/images/tokens/ob_nixilis_reignited_emblem.jpg
-sorin_lord_of_innistrad_emblem.jpg     https://downloads.cardforge.org/images/tokens/sorin_lord_of_innistrad_emblem.jpg
-tamiyo_the_moon_sage_emblem.jpg        https://downloads.cardforge.org/images/tokens/tamiyo_the_moon_sage_emblem.jpg
-venser_the_sojourner_emblem.jpg        https://downloads.cardforge.org/images/tokens/venser_the_sojourner_emblem.jpg
+emblem_domri_rade.jpg                  https://downloads.cardforge.org/images/tokens/domri_rade_emblem.jpg
+emblem_elspeth_knight_errant.jpg       https://downloads.cardforge.org/images/tokens/elspeth_knight_errant_emblem.jpg
+emblem_elspeth_suns_champion.jpg       https://downloads.cardforge.org/images/tokens/elspeth_suns_champion_emblem.jpg
+emblem_garruk_caller_of.jpg     https://downloads.cardforge.org/images/tokens/garruk_caller_of_beasts_emblem.jpg
+emblem_gideon_ally_of_zendikar.jpg     https://downloads.cardforge.org/images/tokens/gideon_ally_of_zendikar_emblem.jpg
+emblem_kiora_master_of_the_depths.jpg  https://downloads.cardforge.org/images/tokens/kiora_master_of_the_depths_emblem.jpg
+emblem_kiora_the_crashing_wave.jpg     https://downloads.cardforge.org/images/tokens/kiora_the_crashing_wave_emblem.jpg
+emblem_koth_of_the_hammer.jpg          https://downloads.cardforge.org/images/tokens/koth_of_the_hammer_emblem.jpg
+emblem_liliana_of_the_dark_realms.jpg  https://downloads.cardforge.org/images/tokens/liliana_of_the_dark_realms_emblem.jpg
+emblem_ob_nixilis_reignited.jpg        https://downloads.cardforge.org/images/tokens/ob_nixilis_reignited_emblem.jpg
+emblem_sorin_lord_of_innistrad.jpg     https://downloads.cardforge.org/images/tokens/sorin_lord_of_innistrad_emblem.jpg
+emblem_tamiyo_the_moon_sage.jpg        https://downloads.cardforge.org/images/tokens/tamiyo_the_moon_sage_emblem.jpg
+emblem_venser_the_sojourner.jpg        https://downloads.cardforge.org/images/tokens/venser_the_sojourner_emblem.jpg
 
 # Other
 hidden.jpg                             https://downloads.cardforge.org/images/tokens/morph.jpg
