@@ -184,6 +184,7 @@ public class TextUtil {
                 + s.substring(1);
 
     }
+
     //concatenate with spaces
     public static String concatWithSpace(String ... s) {
         StringBuilder sb = new StringBuilder();
