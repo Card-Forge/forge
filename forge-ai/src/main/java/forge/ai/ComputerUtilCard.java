@@ -3,6 +3,7 @@ package forge.ai;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.card.CardType;
 import forge.card.ColorSet;
@@ -1234,7 +1235,23 @@ public class ComputerUtilCard {
                     threat *= 4;    //over-value self +attack for 0 power creatures which may be pumped further after attacking 
                 }
                 chance += threat;
-                combatTrick = true;
+
+                // Enable combat trick mode only in case it's a pure pump spell with no keywords or with Trample,
+                // First Strike, or Double Strike, otherwise the AI is unlikely to cast it, thus ruining its attacker
+                if (sa.getApi() == ApiType.Pump && sa.hasParam("NumAtt")) {
+                    final List<String> kws = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & "))
+                            : Lists.newArrayList();
+                    if (kws.isEmpty()) {
+                        combatTrick = true;
+                    } else {
+                        for (String kw : kws) {
+                            if (kw.equals("Trample") || kw.equals("First Strike") || kw.equals("Double Strike")) {
+                                combatTrick = true;
+                                break;
+                            }
+                        }
+                    }
+                }
             }
             
             //2. grant haste
