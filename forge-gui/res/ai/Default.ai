@@ -30,9 +30,11 @@ RANDOMLY_TRADE_EVEN_WHEN_HAVE_LESS_CREATS=false
 # If the previous option is enabled, then the next option controls how big of a handicap in creature count the AI
 # is allowed to have to still decide to trade
 MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE=1
+# If enabled, the AI will also consider trading if it has a replacement creature in hand
+ALSO_TRADE_WHEN_HAVE_A_REPLACEMENT_CREAT=true
 # Min and max chance to randomly aggressively trade when blocking (note that it will become 100 if the AI is in danger)
-MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK=20
-MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK=65
+MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK=30
+MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK=70
 
 # Only works when AI cheating is enabled in preferences, otherwise does nothing
 CHEAT_WITH_MANA_ON_SHUFFLE=true

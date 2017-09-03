@@ -21,25 +21,17 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import forge.game.CardTraitBase;
 import forge.game.GameEntity;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -543,6 +535,7 @@ public class AiBlockController {
         // Parameters related to randomly trading when blocking (need to be enabled in the AI profile)
         boolean enableRandomTrades = false;
         boolean randomTradeIfBehindOnBoard = false;
+        boolean randomTradeIfCreatInHand = false;
         int minRandomTradeChance = 0;
         int maxRandomTradeChance = 0;
         int maxCreatDiff = 0;
@@ -552,6 +545,7 @@ public class AiBlockController {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
             enableRandomTrades = aic.getBooleanProperty(AiProps.ENABLE_RANDOM_FAVORABLE_TRADES_ON_BLOCK);
             randomTradeIfBehindOnBoard = aic.getBooleanProperty(AiProps.RANDOMLY_TRADE_EVEN_WHEN_HAVE_LESS_CREATS);
+            randomTradeIfCreatInHand = aic.getBooleanProperty(AiProps.ALSO_TRADE_WHEN_HAVE_A_REPLACEMENT_CREAT);
             minRandomTradeChance = aic.getIntProperty(AiProps.MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
             maxRandomTradeChance = aic.getIntProperty(AiProps.MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
             maxCreatDiff = aic.getIntProperty(AiProps.MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE);
@@ -609,10 +603,12 @@ public class AiBlockController {
                     int evalBlk = ComputerUtilCard.evaluateCreature(blocker, false, false);
                     boolean powerParityOrHigher = blocker.getNetPower() >= attacker.getNetPower();
                     boolean creatureParityOrAllowedDiff = aiCreatureCount >= oppCreatureCount;
+                    boolean wantToTradeWithCreatInHand = randomTradeIfCreatInHand
+                        && !CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.CREATURES).isEmpty();
 
                     if (evalBlk <= evalAtk + 1 // "1" accounts for tapped. Maybe increase to 3 or 5 for higher tolerance?
                             && powerParityOrHigher
-                            && creatureParityOrAllowedDiff
+                            && (creatureParityOrAllowedDiff || wantToTradeWithCreatInHand)
                             && MyRandom.percentTrue(chance)) {
                         doTrade = true;
                     }

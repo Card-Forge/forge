@@ -7,7 +7,7 @@ MULLIGAN_THRESHOLD=4
 PLAY_AGGRO=false
 # The chance to attack aggressively into a potential trade (works even if not playing all-out aggro, e.g. PLAY_AGGRO disabled,
 # but only in more favorable conditions in that case - when ahead in life count and in parity or ahead in creature count)
-CHANCE_TO_ATTACK_INTO_TRADE=20
+CHANCE_TO_ATTACK_INTO_TRADE=40
 # When enabled, the AI will attack into trading options when it's tapped out (note that this flag is ignored if PLAY_AGGRO
 # is globally enabled). If disabled, the non-aggro AI will only attack into trades when it has mana open, thus having a chance
 # to "bluff" (or use, if available) combat tricks at the same time.
@@ -19,7 +19,7 @@ USE_BERSERK_AGGRESSIVELY=true
 TRY_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK=true
 # Chance to hold combat tricks until blockers are declared. If -1 is specified, this chance is not used, and the standard
 # evaluation for offensive pump buff is used instead.
-CHANCE_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK=30
+CHANCE_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK=40
 
 # Trade blocking preferences (enabling these will make the AI trade more aggressively when considering blocks,
 # but only with creatures that are worse in abilities and have lower or the same power as the attacker). Note
@@ -29,10 +29,12 @@ ENABLE_RANDOM_FAVORABLE_TRADES_ON_BLOCK=true
 RANDOMLY_TRADE_EVEN_WHEN_HAVE_LESS_CREATS=true
 # If the previous option is enabled, then the next option controls how big of a handicap in creature count the AI
 # is allowed to have to still decide to trade
-MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE=999
+MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE=1
+# If enabled, the AI will also consider trading if it has a replacement creature in hand
+ALSO_TRADE_WHEN_HAVE_A_REPLACEMENT_CREAT=true
 # Min and max chance to randomly aggressively trade when blocking (note that it will become 100 if the AI is in danger)
-MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK=20
-MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK=65
+MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK=30
+MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK=70
 
 # Only works when AI cheating is enabled in preferences, otherwise does nothing
 CHEAT_WITH_MANA_ON_SHUFFLE=true
