@@ -6,4 +6,4 @@ A:AB$ Discard | Cost$ 1 R T Sac<1/CARDNAME> | Defined$ Player | Mode$ Hand | Sub
 SVar:DBDraw:DB$ Draw | Defined$ Player | NumCards$ 7
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_wheel.jpg
-Oracle:{1}{R}, {T}, Sacrifice Magus of the Wheel: Each player discards his or her hand, then draws seven cards.Name:Meteor Blast
+Oracle:{1}{R}, {T}, Sacrifice Magus of the Wheel: Each player discards his or her hand, then draws seven cards.
