@@ -29,7 +29,7 @@ public enum Keyword {
     CHANGELING(SimpleKeyword.class, true, "This card is every creature type."),
     CIPHER(SimpleKeyword.class, true, "Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost."),
     CONSPIRE(SimpleKeyword.class, false, "As an additional cost to cast this spell, you may tap two untapped creatures you control that each share a color with it. If you do, copy it."),
-    CONVOKE(SimpleKeyword.class, true, "Each creature you tap while playing this spell reduces its cost by {1} or by one mana of that creature's color."),
+    CONVOKE(SimpleKeyword.class, true, "Your creatures can help cast this spell. Each creature you tap while playing this spell reduces its cost by {1} or by one mana of that creature's color."),
     CREW(KeywordWithAmount.class, true, "Tap any number of creatures you control with total power %1$d or more: This Vehicle becomes an artifact creature until end of turn."),
     CUMULATIVE_UPKEEP(KeywordWithCost.class, false, "At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it."),
     CYCLING(Cycling.class, false, "%s, Discard this card: Draw a card."), //Typecycling reminder text handled by Cycling class

@@ -2071,7 +2071,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (sb.toString().endsWith("\r\n\r\n")) {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
                 }
-                sb.append("Convoke (Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\r\n");
+                sb.append("Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\r\n");
             } else if (keyword.equals("Improvise")) {
                 sb.append(Keyword.IMPROVISE.getDescription()).append("\r\n");
             } else if (keyword.equals("Delve")) {
