@@ -1239,16 +1239,15 @@ public class ComputerUtilCard {
                 // Enable combat trick mode only in case it's a pure pump spell with no keywords or with Trample,
                 // First Strike, or Double Strike, otherwise the AI is unlikely to cast it, thus ruining its attacker
                 if (sa.getApi() == ApiType.Pump && sa.hasParam("NumAtt")) {
+                    combatTrick = true;
+
                     final List<String> kws = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & "))
                             : Lists.newArrayList();
-                    if (kws.isEmpty()) {
-                        combatTrick = true;
-                    } else {
-                        for (String kw : kws) {
-                            if (kw.equals("Trample") || kw.equals("First Strike") || kw.equals("Double Strike")) {
-                                combatTrick = true;
-                                break;
-                            }
+
+                    for (String kw : kws) {
+                        if (!kw.equals("Trample") && !kw.equals("First Strike") && !kw.equals("Double Strike")) {
+                            combatTrick = false;
+                            break;
                         }
                     }
                 }
