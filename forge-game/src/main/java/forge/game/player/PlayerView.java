@@ -110,8 +110,8 @@ public class PlayerView extends GameEntityView {
         for (final PlayerView p : Iterables.concat(Collections.singleton(this), opponents)) {
             final int damage = p.getCommanderDamage(v);
             if (damage > 0) {
-                final String text = TextUtil.concatWithSpace("Commander damage to", p.toString(),"from", v.getName()+":");
-                sb.append(TextUtil.concatWithSpace(text, String.valueOf(damage)+"\r\n"));
+                final String text = TextUtil.concatWithSpace("Commander damage to", p.toString(),"from", TextUtil.addSuffix(v.getName(),":"));
+                sb.append(TextUtil.concatWithSpace(text, TextUtil.addSuffix(String.valueOf(damage),"\r\n")));
             }
         }
         return sb.toString();
@@ -132,11 +132,11 @@ public class PlayerView extends GameEntityView {
                 if (damage > 0) {
                     final String text;
                     if (p.equals(this)) {
-                        text = TextUtil.concatWithSpace("Commander damage from own commander", v.toString()+":");
+                        text = TextUtil.concatWithSpace("Commander damage from own commander", TextUtil.addSuffix(v.toString(),":"));
                     } else {
-                        text = TextUtil.concatWithSpace("Commander damage from", p.toString()+"'s", v.toString()+":");
+                        text = TextUtil.concatWithSpace("Commander damage from", TextUtil.addSuffix(p.toString(),"'s"), TextUtil.addSuffix(v.toString(),":"));
                     }
-                    info.add(TextUtil.concatWithSpace(text,String.valueOf(damage)+"\r\n"));
+                    info.add(TextUtil.concatWithSpace(text,TextUtil.addSuffix(String.valueOf(damage),"\r\n")));
                 }
             }
         }
@@ -395,7 +395,7 @@ public class PlayerView extends GameEntityView {
             }
         }
 
-        details.add(TextUtil.concatNoSpace("Cards in hand: ", String.valueOf(getHandSize())+"/", getMaxHandString()));
+        details.add(TextUtil.concatNoSpace("Cards in hand: ", TextUtil.addSuffix(String.valueOf(getHandSize()),"/"), getMaxHandString()));
         details.add(TextUtil.concatWithSpace("Cards drawn this turn:", String.valueOf(getNumDrawnThisTurn())));
         details.add(TextUtil.concatWithSpace("Damage prevention:", String.valueOf(getPreventNextDamage())));
         final String keywords = Lang.joinHomogenous(getDisplayableKeywords());

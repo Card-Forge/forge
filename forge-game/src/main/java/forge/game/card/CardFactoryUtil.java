@@ -4249,7 +4249,7 @@ public class CardFactoryUtil {
         altCostSA.setRestrictions(restriction);
 
         final String costDescription = params.containsKey("Description") ? params.get("Description") 
-                : TextUtil.concatWithSpace("You may", abCost.toStringAlt(),"rather than pay", card.getName()+"'s mana cost.");
+                : TextUtil.concatWithSpace("You may", abCost.toStringAlt(),"rather than pay", TextUtil.addSuffix(card.getName(),"'s mana cost."));
         
         altCostSA.setDescription(costDescription);
         if (params.containsKey("References")) {

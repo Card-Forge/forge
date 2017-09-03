@@ -21,6 +21,7 @@ import forge.LobbyPlayer;
 import forge.util.Aggregates;
 import forge.util.FileUtil;
 
+import forge.util.TextUtil;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.File;
@@ -52,7 +53,7 @@ public class AiProfileUtil {
      * @return the full relative path and file name for the given profile.
      */
     private static String buildFileName(final String profileName) {
-        return String.format("%s/%s%s", AI_PROFILE_DIR, profileName, AI_PROFILE_EXT);
+        return TextUtil.concatNoSpace(AI_PROFILE_DIR, "/", profileName, AI_PROFILE_EXT);
     }
     
     /**

@@ -16,6 +16,7 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
+import forge.util.TextUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -130,7 +131,7 @@ public class DigEffect extends SpellAbilityEffect {
                     game.getAction().reveal(top, p, false);
                 }
                 else if (sa.hasParam("RevealOptional")) {
-                    String question = "Reveal: " + Lang.joinHomogenous(top) +"?";
+                    String question = TextUtil.concatWithSpace("Reveal:", TextUtil.addSuffix(Lang.joinHomogenous(top),"?"));
 
                     hasRevealed = p.getController().confirmAction(sa, null, question);
                     if (hasRevealed) {

@@ -79,7 +79,7 @@ public class ImageUtil {
 
         if (includeSet) {
             String editionAliased = isDownloadUrl ? StaticData.instance().getEditions().getCode2ByCode(edition) : ImageKeys.getSetFolder(edition);
-            return String.format("%s/%s", editionAliased, fname);
+            return TextUtil.concatNoSpace(editionAliased, "/", fname);
         } else {
             return fname;
         }

@@ -19,6 +19,7 @@ package forge.card;
 
 import java.util.StringTokenizer;
 
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.mana.IParserManaCost;
@@ -217,7 +218,7 @@ public final class CardRules implements ICardCharacteristics {
     public void setVanguardProperties(String pt) {
         final int slashPos = pt == null ? -1 : pt.indexOf('/');
         if (slashPos == -1) {
-            throw new RuntimeException(String.format("Vanguard '%s' has bad hand/life stats", this.getName()));
+            throw new RuntimeException(TextUtil.concatWithSpace("Vanguard", TextUtil.enclosedSingleQuote(this.getName()), "has bad hand/life stats"));
         }
         this.deltaHand = Integer.parseInt(pt.substring(0, slashPos).replace("+", ""));
         this.deltaLife = Integer.parseInt(pt.substring(slashPos+1).replace("+", ""));

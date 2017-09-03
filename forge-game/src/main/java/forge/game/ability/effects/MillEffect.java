@@ -38,7 +38,7 @@ public class MillEffect extends SpellAbilityEffect {
         for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (sa.hasParam("Optional")) {
-                    final String prompt = TextUtil.concatWithSpace("Do you want to put card(s) from library to", destination.toString()+"?");
+                    final String prompt = TextUtil.concatWithSpace("Do you want to put card(s) from library to", TextUtil.addSuffix(destination.toString(),"?"));
                     if (!p.getController().confirmAction(sa, null, prompt)) {
                         continue;
                     }

@@ -693,7 +693,7 @@ public class CombatUtil {
                for (Card cardToBeBlocked : blocker.getMustBlockCards()) {
                  if (!blockedSoFar.contains(cardToBeBlocked) && CombatUtil.canBlockMoreCreatures(blocker, blockedSoFar) 
                          && combat.isAttacking(cardToBeBlocked) && CombatUtil.canBlock(cardToBeBlocked, blocker)) {
-                     return TextUtil.concatWithSpace(blocker.toString(),"must still block", cardToBeBlocked.toString()+".");
+                     return TextUtil.concatWithSpace(blocker.toString(),"must still block", TextUtil.addSuffix(cardToBeBlocked.toString(),"."));
                  }
                } 
             }

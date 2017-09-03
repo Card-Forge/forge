@@ -151,7 +151,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 game.getAction().revealTo(tgtCard, activator);
             }
 
-            if (optional && !controller.getController().confirmAction(sa, null, TextUtil.concatWithSpace("Do you want to play", tgtCard.toString()+"?"))) {
+            if (optional && !controller.getController().confirmAction(sa, null, TextUtil.concatWithSpace("Do you want to play", TextUtil.addSuffix(tgtCard.toString(),"?")))) {
                 if (wasFaceDown) {
                     tgtCard.setState(CardStateName.FaceDown, false);
                 }

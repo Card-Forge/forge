@@ -27,11 +27,7 @@ import forge.card.CardDb.SetPreference;
 import forge.deck.CardPool;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
-import forge.util.Aggregates;
-import forge.util.FileSection;
-import forge.util.FileUtil;
-import forge.util.IItemReader;
-import forge.util.MyRandom;
+import forge.util.*;
 import forge.util.storage.StorageBase;
 import forge.util.storage.StorageReaderBase;
 import forge.util.storage.StorageReaderFolder;
@@ -307,7 +303,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                     enumType = Type.valueOf(type.toUpperCase(Locale.ENGLISH));
                 } catch (IllegalArgumentException ignored) {
                     // ignore; type will get UNKNOWN
-                    System.err.println(String.format("Ignoring unknown type in set definitions: name: %s; type: %s", res.name, type));
+                    System.err.println(TextUtil.concatWithSpace("Ignoring unknown type in set definitions: name:", TextUtil.addSuffix(res.name, ";"), "type:", type));
                 }
             }
             res.type = enumType;
@@ -393,7 +389,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         public CardEdition getEditionByCodeOrThrow(final String code) {
             final CardEdition set = this.get(code);
             if (null == set) {
-                throw new RuntimeException(String.format("Edition with code '%s' not found", code));
+                throw new RuntimeException(TextUtil.concatWithSpace("Edition with code", TextUtil.enclosedSingleQuote(code), "not found"));
             }
             return set;
         }

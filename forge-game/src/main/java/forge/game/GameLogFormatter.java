@@ -105,7 +105,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
             return null;
         }
 
-        String modeChoiceOutcome = TextUtil.concatWithSpace(ev.player.toString(), "has chosen", ev.mode, "for", ev.cardName+".");
+        String modeChoiceOutcome = TextUtil.concatWithSpace(ev.player.toString(), "has chosen", ev.mode, "for", TextUtil.addSuffix(ev.cardName,"."));
         return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, modeChoiceOutcome);
     }
 
@@ -167,7 +167,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         if (event.type == DamageType.LoyaltyLoss) {
             additionalLog = "(Removing " + Lang.nounWithAmount(event.amount, "loyalty counter") + ")";
         }
-        String message = TextUtil.concatWithSpace(event.source.toString(),"deals", String.valueOf(event.amount),"damage", additionalLog,"to", event.card.toString()+".");
+        String message = TextUtil.concatWithSpace(event.source.toString(),"deals", String.valueOf(event.amount),"damage", additionalLog,"to", TextUtil.addSuffix(event.card.toString(),"."));
         return new GameLogEntry(GameLogEntryType.DAMAGE, message);
     }
 
@@ -190,7 +190,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     public GameLogEntry visit(GameEventPlayerDamaged ev) {
         String extra = ev.infect ? " (as poison counters)" : "";
         String damageType = ev.combat ? "combat" : "non-combat";
-        String message = TextUtil.concatWithSpace(ev.source.toString(),"deals", String.valueOf(ev.amount), damageType, "damage to", ev.target.toString()+extra+".");
+        String message = TextUtil.concatWithSpace(ev.source.toString(),"deals", String.valueOf(ev.amount), damageType, "damage to", TextUtil.addSuffix(ev.target.toString(), TextUtil.addSuffix(extra,".")));
         return new GameLogEntry(GameLogEntryType.DAMAGE, message);
     }
 

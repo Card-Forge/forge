@@ -6,6 +6,7 @@ import forge.deck.DeckSection;
 import forge.util.FileSection;
 import forge.util.FileSectionManual;
 import forge.util.FileUtil;
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -41,19 +42,19 @@ public class DeckSerializer {
 
     private static List<String> serializeDeck(Deck d) {
         final List<String> out = new ArrayList<String>();
-        out.add(String.format("[metadata]"));
+        out.add(TextUtil.enclosedBracket("metadata"));
     
-        out.add(String.format("%s=%s", DeckFileHeader.NAME, d.getName().replaceAll("\n", "")));
+        out.add(TextUtil.concatNoSpace(DeckFileHeader.NAME,"=", d.getName().replaceAll("\n", "")));
         // these are optional
         if (d.getComment() != null) {
-            out.add(String.format("%s=%s", DeckFileHeader.COMMENT, d.getComment().replaceAll("\n", "")));
+            out.add(TextUtil.concatNoSpace(DeckFileHeader.COMMENT,"=", d.getComment().replaceAll("\n", "")));
         }
         if (!d.getTags().isEmpty()) {
-            out.add(String.format("%s=%s", DeckFileHeader.TAGS, StringUtils.join(d.getTags(), DeckFileHeader.TAGS_SEPARATOR)));
+            out.add(TextUtil.concatNoSpace(DeckFileHeader.TAGS,"=", StringUtils.join(d.getTags(), DeckFileHeader.TAGS_SEPARATOR)));
         }
     
         for(Entry<DeckSection, CardPool> s : d) {
-            out.add(String.format("[%s]", s.getKey().toString()));
+            out.add(TextUtil.enclosedBracket(s.getKey().toString()));
             out.add(s.getValue().toCardList(System.getProperty("line.separator")));
         }
         return out;

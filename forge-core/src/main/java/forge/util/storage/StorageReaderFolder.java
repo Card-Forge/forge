@@ -18,6 +18,7 @@
 package forge.util.storage;
 
 import com.google.common.base.Function;
+import forge.util.TextUtil;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -97,7 +98,7 @@ public abstract class StorageReaderFolder<T> extends StorageReaderBase<T> {
                 }
                 result.put(newKey, newDeck);
             } catch (final NoSuchElementException ex) {
-                final String message = String.format("%s failed to load because ---- %s", file.getName(), ex.getMessage());
+                final String message = TextUtil.concatWithSpace( file.getName(),"failed to load because ----", ex.getMessage());
                 objectsThatFailedToLoad.add(message);
             }
         }

@@ -114,18 +114,18 @@ public abstract class GameState {
             sb.append("[state]\n");
         }
 
-        sb.append(String.format("humanlife=%d\n", humanLife));
-        sb.append(String.format("ailife=%d\n", computerLife));
+        sb.append(TextUtil.concatNoSpace("humanlife=", String.valueOf(humanLife), "\n"));
+        sb.append(TextUtil.concatNoSpace("ailife=", String.valueOf(computerLife), "\n"));
 
         if (!humanCounters.isEmpty()) {
-            sb.append(String.format("humancounters=%s\n", humanCounters));
+            sb.append(TextUtil.concatNoSpace("humancounters=", humanCounters, "\n"));
         }
         if (!computerCounters.isEmpty()) {
-            sb.append(String.format("aicounters=%s\n", computerCounters));
+            sb.append(TextUtil.concatNoSpace("aicounters=", computerCounters, "\n"));
         }
 
-        sb.append(String.format("activeplayer=%s\n", tChangePlayer));
-        sb.append(String.format("activephase=%s\n", tChangePhase));
+        sb.append(TextUtil.concatNoSpace("activeplayer=", tChangePlayer, "\n"));
+        sb.append(TextUtil.concatNoSpace("activephase=", tChangePhase, "\n"));
         appendCards(humanCardTexts, "human", sb);
         appendCards(aiCardTexts, "ai", sb);
         return sb.toString();
@@ -133,7 +133,7 @@ public abstract class GameState {
 
     private void appendCards(Map<ZoneType, String> cardTexts, String categoryPrefix, StringBuilder sb) {
         for (Entry<ZoneType, String> kv : cardTexts.entrySet()) {
-            sb.append(String.format("%s%s=%s\n", categoryPrefix, ZONES.get(kv.getKey()), kv.getValue()));
+            sb.append(TextUtil.concatNoSpace(categoryPrefix, ZONES.get(kv.getKey()), "=", kv.getValue(), "\n"));
         }
     }
 
@@ -343,7 +343,7 @@ public abstract class GameState {
             }
 
             first = false;
-            counterString.append(String.format("%s=%d", kv.getKey().toString(), kv.getValue()));
+            counterString.append(TextUtil.concatNoSpace(kv.getKey().toString(), "=", String.valueOf(kv.getValue())));
         }
         return counterString.toString();
     }

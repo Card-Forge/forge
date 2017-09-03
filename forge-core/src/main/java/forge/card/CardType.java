@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import forge.util.TextUtil;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
 
@@ -394,7 +395,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
                 calculatedType = StringUtils.join(getTypesBeforeDash(), ' ');
             }
             else {
-                calculatedType = String.format("%s - %s", StringUtils.join(getTypesBeforeDash(), ' '), StringUtils.join(subtypes, " "));
+                calculatedType = TextUtil.concatWithSpace(StringUtils.join(getTypesBeforeDash(), ' '), "-", StringUtils.join(subtypes, " "));
             }
         }
         return calculatedType;

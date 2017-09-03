@@ -6,6 +6,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
+import forge.util.TextUtil;
 
 import java.util.List;
 
@@ -14,19 +15,19 @@ public class DeclareCombatantsEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
-
         boolean attackers = sa.hasParam("DeclareAttackers");
-        final String attDesc =  "which creatures attack";
-
         boolean blockers = sa.hasParam("DeclareBlockers");
-        final String defDesc = "which creatures block this turn and how those creatures block";
-        
-        String what = Lang.joinHomogenous(attackers ? attDesc : null, blockers ? defDesc : null);
-        String until = sa.getParam("Until");
-        String duration = "EndOfTurn".equals(until) ? "turn" : "combat";
-        
+        String what = Lang.joinHomogenous(
+                attackers
+                        ? "which creatures attack"
+                        : null,
+                blockers
+                        ? "which creatures block this turn and how those creatures block"
+                        : null
+        );
+        String duration = "EndOfTurn".equals(sa.getParam("Until")) ? "turn" : "combat";
         // TODO Auto-generated method stub
-        return Lang.joinHomogenous(tgtPlayers)  + " " + Lang.joinVerb(tgtPlayers, "choose") + " " + what + " this " + duration +".";
+        return TextUtil.concatWithSpace(Lang.joinHomogenous(tgtPlayers),Lang.joinVerb(tgtPlayers, "choose"),what,"this",TextUtil.addSuffix(duration,"."));
     }
 
     @Override

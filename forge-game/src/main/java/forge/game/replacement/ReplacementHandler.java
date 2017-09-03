@@ -242,8 +242,8 @@ public class ReplacementHandler {
             Card cardForUi = host.getCardForUi();
             String effectDesc = replacementEffect.toString().replace("CARDNAME", cardForUi.getName());
             final String question = replacementEffect instanceof ReplaceDiscard
-                ? TextUtil.concatWithSpace("Apply replacement effect of", cardForUi.toString(), "to", runParams.get("Card").toString()+"?", "\r\n", TextUtil.enclosedParen(effectDesc))
-                : TextUtil.concatWithSpace("Apply replacement effect of", cardForUi.toString()+"?", "\r\n", TextUtil.enclosedParen(effectDesc));
+                ? TextUtil.concatWithSpace("Apply replacement effect of", cardForUi.toString(), "to", TextUtil.addSuffix(runParams.get("Card").toString(),"?\r\n"), TextUtil.enclosedParen(effectDesc))
+                : TextUtil.concatWithSpace("Apply replacement effect of", TextUtil.addSuffix(cardForUi.toString(),"?\r\n"), TextUtil.enclosedParen(effectDesc));
             boolean confirmed = optDecider.getController().confirmReplacementEffect(replacementEffect, effectSA, question);
             if (!confirmed) {
                 return ReplacementResult.NotReplaced;

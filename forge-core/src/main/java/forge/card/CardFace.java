@@ -1,6 +1,7 @@
 package forge.card;
 
 import forge.card.mana.ManaCost;
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -89,7 +90,7 @@ final class CardFace implements ICardFace {
     void setPtText(String value) {
         final int slashPos = value.indexOf('/');
         if (slashPos == -1) {
-            throw new RuntimeException(String.format("Creature '%s' has bad p/t stats", this.getName()));
+            throw new RuntimeException(TextUtil.concatWithSpace("Creature", TextUtil.enclosedSingleQuote(this.getName()),"has bad p/t stats"));
         }
         boolean negPower = value.charAt(0) == '-';
         boolean negToughness = value.charAt(slashPos + 1) == '-';

@@ -986,7 +986,7 @@ public class PhaseHandler implements java.io.Serializable {
             if (game.isGameOver() || nextPlayer == null) { return; } // conceded?
 
             if (DEBUG_PHASES) {
-                System.out.println(TextUtil.concatWithSpace(playerTurn.toString(),phase.toString()+":", pPlayerPriority.toString(),"is active, previous was", nextPlayer.toString()));
+                System.out.println(TextUtil.concatWithSpace(playerTurn.toString(),TextUtil.addSuffix(phase.toString(),":"), pPlayerPriority.toString(),"is active, previous was", nextPlayer.toString()));
             }
             if (pFirstPriority == nextPlayer) {
                 if (game.getStack().isEmpty()) {

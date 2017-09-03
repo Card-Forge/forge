@@ -637,9 +637,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
 
         if (cardRarity == CardRarity.Unknown) {
-            System.err.println(String.format("An unknown card found when loading Forge decks: \"%s\" Forge does not know of such a card's existence. Have you mistyped the card name?", cardName));
+            System.err.println(TextUtil.concatWithSpace("An unknown card found when loading Forge decks:", TextUtil.enclosedDoubleQuote(cardName), "Forge does not know of such a card's existence. Have you mistyped the card name?"));
         } else {
-            System.err.println(String.format("An unsupported card was requested: \"%s\" from \"%s\" set. We're sorry, but you cannot use this card yet.", request.cardName, cardEdition.getName()));
+            System.err.println(TextUtil.concatWithSpace("An unsupported card was requested:", TextUtil.enclosedDoubleQuote(request.cardName), "from", TextUtil.enclosedDoubleQuote(cardEdition.getName()), "set. We're sorry, but you cannot use this card yet."));
         }
 
         return new PaperCard(CardRules.getUnsupportedCardNamed(request.cardName), cardEdition.getCode(), cardRarity, 1);

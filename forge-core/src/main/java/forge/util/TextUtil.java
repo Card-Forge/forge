@@ -215,12 +215,55 @@ public class TextUtil {
         return sb.toString();
     }
 
+    //enclosed in Brackets
+    public static String enclosedBracket(String s){
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        sb.append(s);
+        sb.append("]");
+        return sb.toString();
+    }
+
+    //enclosed in Single Quote
+    public static String enclosedSingleQuote(String s){
+        StringBuilder sb = new StringBuilder();
+        sb.append("'");
+        sb.append(s);
+        sb.append("'");
+        return sb.toString();
+    }
+
+    //enclosed in Double Quote
+    public static String enclosedDoubleQuote(String s){
+        StringBuilder sb = new StringBuilder();
+        sb.append("\"");
+        sb.append(s);
+        sb.append("\"");
+        return sb.toString();
+    }
+
     //transform to P/T
     public static String transformPT(int power, int toughness){
         StringBuilder sb = new StringBuilder();
         sb.append(power);
         sb.append("/");
         sb.append(toughness);
+        return sb.toString();
+    }
+
+    //suffix
+    public static String addSuffix(String s, String suffix){
+        StringBuilder sb = new StringBuilder();
+        sb.append(s);
+        sb.append(suffix);
+        return sb.toString();
+    }
+
+    //prefix
+    public static String addPrefix(String prefix, String s){
+        StringBuilder sb = new StringBuilder();
+        sb.append(prefix);
+        sb.append(s);
         return sb.toString();
     }
 }

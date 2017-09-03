@@ -27,7 +27,7 @@ public class GameEventCardChangeZone extends GameEvent {
      */
     @Override
     public String toString() {
-        return TextUtil.concatWithSpace(card.toString(),":", "["+from.toString()+"]","->", "["+to.toString()+"]");
+        return TextUtil.concatWithSpace(card.toString(),":", TextUtil.enclosedBracket(from.toString()),"->", TextUtil.enclosedBracket(to.toString()));
     }
 }
 

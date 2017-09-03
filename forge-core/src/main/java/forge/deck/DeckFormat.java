@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import forge.util.TextUtil;
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -252,11 +253,11 @@ public enum DeckFormat {
         }
 
         if (deckSize < min) {
-            return String.format("should have at least %d cards", min);
+            return TextUtil.concatWithSpace("should have at least", String.valueOf(min), "cards");
         }
 
         if (deckSize > max) {
-            return String.format("should have no more than %d cards", max);
+            return TextUtil.concatWithSpace("should have no more than", String.valueOf(max), "cards");
         }
 
         if (cardPoolFilter != null) {
@@ -290,12 +291,12 @@ public enum DeckFormat {
             for (final Entry<String, Integer> cp : Aggregates.groupSumBy(allCards, PaperCard.FN_GET_NAME)) {
                 final IPaperCard simpleCard = StaticData.instance().getCommonCards().getCard(cp.getKey());
                 if (simpleCard == null) {
-                    return String.format("contains the nonexisting card %s", cp.getKey());
+                    return TextUtil.concatWithSpace("contains the nonexisting card", cp.getKey());
                 }
 
                 final boolean canHaveMultiple = simpleCard.getRules().getType().isBasicLand() || limitExceptions.contains(cp.getKey());
                 if (!canHaveMultiple && cp.getValue() > maxCopies) {
-                    return String.format("must not contain more than %d copies of the card %s", maxCopies, cp.getKey());
+                    return TextUtil.concatWithSpace("must not contain more than", String.valueOf(maxCopies), "copies of the card", cp.getKey());
                 }
             }
         }
@@ -305,8 +306,8 @@ public enum DeckFormat {
         Range<Integer> sbRange = getSideRange();
         if (sbRange != null && sideboardSize > 0 && !sbRange.contains(sideboardSize)) {
             return sbRange.getMinimum() == sbRange.getMaximum()
-            ? String.format("must have a sideboard of %d cards or no sideboard at all", sbRange.getMaximum())
-            : String.format("must have a sideboard of %d to %d cards or no sideboard at all", sbRange.getMinimum(), sbRange.getMaximum());
+            ? TextUtil.concatWithSpace("must have a sideboard of", String.valueOf(sbRange.getMinimum()), "cards or no sideboard at all")
+            : TextUtil.concatWithSpace("must have a sideboard of", String.valueOf(sbRange.getMinimum()), "to", String.valueOf(sbRange.getMaximum()), "cards or no sideboard at all");
         }
 
         return null;
@@ -340,7 +341,7 @@ public enum DeckFormat {
 
         for (Entry<PaperCard, Integer> cp : schemes) {
             if (cp.getValue() > 2) {
-                return String.format("must not contain more than 2 copies of any Scheme, but has %d of '%s'", cp.getValue(), cp.getKey().getName());
+                return TextUtil.concatWithSpace("must not contain more than 2 copies of any Scheme, but has", String.valueOf(cp.getValue()), "of", TextUtil.enclosedSingleQuote(cp.getKey().getName()));
             }
         }
         return null;

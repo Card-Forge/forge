@@ -40,9 +40,9 @@ public final class ReflectionUtil {
             final Constructor<? extends T> c = cls.getConstructor();
             return c.newInstance();
         } catch (final NoSuchMethodException e) {
-            throw new RuntimeException(String.format("No default constructor found in class %s", cls.getName()));
+            throw new RuntimeException(TextUtil.concatWithSpace("No default constructor found in class", cls.getName()));
         } catch (final SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            throw new RuntimeException(String.format("Can't instantiate class %s using default constructor", cls.getName()));
+            throw new RuntimeException(TextUtil.concatWithSpace("Can't instantiate class", cls.getName(),"using default constructor"));
         }
     }
 

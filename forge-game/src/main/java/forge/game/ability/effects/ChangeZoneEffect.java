@@ -428,7 +428,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 hostCard.addRemembered(CardUtil.getLKICopy(tgtC));
             }
 
-            final String prompt = TextUtil.concatWithSpace("Do you want to move", tgtC.toString(), "from", origin.toString(), "to",destination.toString()+"?");
+            final String prompt = TextUtil.concatWithSpace("Do you want to move", tgtC.toString(), "from", origin.toString(), "to", TextUtil.addSuffix(destination.toString(),"?"));
             if (optional && !player.getController().confirmAction(sa, null, prompt) )
                 continue;
 
