@@ -182,7 +182,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventTurnBegan event) {
-        String message = TextUtil.concatWithSpace("Turn", String.valueOf(event.turnNumber), "("+event.turnOwner.toString()+")");
+        String message = TextUtil.concatWithSpace("Turn", String.valueOf(event.turnNumber), TextUtil.enclosedParen(event.turnOwner.toString()));
         return new GameLogEntry(GameLogEntryType.TURN, message);
     }
 

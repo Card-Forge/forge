@@ -218,7 +218,7 @@ public enum Keyword {
     }
 
     public String getDescription() {
-        return TextUtil.concatWithSpace(displayName," ("+reminderText+")");
+        return TextUtil.concatWithSpace(displayName,TextUtil.enclosedParen(reminderText));
     }
 
     public static List<Keyword> getAllKeywords() {

@@ -37,9 +37,9 @@ public class GameEventCardStatsChanged extends GameEvent {
         if ( null == card )
             return "Card state changes: (empty list)";
         if( cards.size() == 1) 
-            return TextUtil.concatWithSpace("Card state changes:", card.getName(), "("+StringUtils.join(card.getType(), ' ')+")", card.getNetPower()+"/"+card.getNetToughness() );
+            return TextUtil.concatWithSpace("Card state changes:", card.getName(), TextUtil.enclosedParen(StringUtils.join(card.getType(), ' ')), TextUtil.transformPT(card.getNetPower(),card.getNetToughness()) );
         else
-            return TextUtil.concatWithSpace("Card state changes: %s (%s)", card.getName(), "("+StringUtils.join(card.getType(), ' ')+")", card.getNetPower()+"/"+card.getNetToughness(),"and", cards.size() - 1 +" more");
+            return TextUtil.concatWithSpace("Card state changes:", card.getName(), TextUtil.enclosedParen(StringUtils.join(card.getType(), ' ')), TextUtil.transformPT(card.getNetPower(),card.getNetToughness()),"and", String.valueOf(cards.size() - 1), "more");
     }
 
 }

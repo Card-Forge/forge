@@ -24,6 +24,6 @@ public class GameEventTurnBegan extends GameEvent {
      */
     @Override
     public String toString() {
-        return TextUtil.concatWithSpace("Turn", String.valueOf(turnNumber), "("+turnOwner.toString()+")");
+        return TextUtil.concatWithSpace("Turn", String.valueOf(turnNumber), TextUtil.enclosedParen(turnOwner.toString()));
     }
 }

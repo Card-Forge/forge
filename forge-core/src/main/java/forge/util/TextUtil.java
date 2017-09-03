@@ -205,4 +205,22 @@ public class TextUtil {
         }
         return sb.toString();
     }
+
+    //enclosed in Parentheses
+    public static String enclosedParen(String s){
+        StringBuilder sb = new StringBuilder();
+        sb.append("(");
+        sb.append(s);
+        sb.append(")");
+        return sb.toString();
+    }
+
+    //transform to P/T
+    public static String transformPT(int power, int toughness){
+        StringBuilder sb = new StringBuilder();
+        sb.append(power);
+        sb.append("/");
+        sb.append(toughness);
+        return sb.toString();
+    }
 }
