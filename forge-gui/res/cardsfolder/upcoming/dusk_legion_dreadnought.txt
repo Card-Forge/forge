@@ -1,0 +1,8 @@
+Name:Dusk Legion Dreadnought
+ManaCost:5
+Types:Artifact Vehicle
+PT:4/6
+K:Vigilance
+K:Crew:2
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dusk_legion_dreadnought.jpg
+Oracle:Vigilance\nCrew 2
