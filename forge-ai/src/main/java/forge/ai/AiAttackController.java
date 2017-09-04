@@ -588,15 +588,19 @@ public class AiAttackController {
             return;
         }
 
+        // Aggro options
         boolean playAggro = false;
         int chanceToAttackToTrade = 0;
         boolean tradeIfTappedOut = false;
+        int extraChanceIfOppHasMana = 0;
         if (ai.getController().isAI()) {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
             playAggro = aic.getBooleanProperty(AiProps.PLAY_AGGRO);
             chanceToAttackToTrade = aic.getIntProperty(AiProps.CHANCE_TO_ATTACK_INTO_TRADE);
             tradeIfTappedOut = aic.getBooleanProperty(AiProps.ATTACK_INTO_TRADE_WHEN_TAPPED_OUT);
+            extraChanceIfOppHasMana = aic.getIntProperty(AiProps.CHANCE_TO_ATKTRADE_WHEN_OPP_HAS_MANA);
         }
+
         final boolean bAssault = this.doAssault(ai);
         // TODO: detect Lightmine Field by presence of a card with a specific trigger
         final boolean lightmineField = ComputerUtilCard.isPresentOnBattlefield(ai.getGame(), "Lightmine Field");
@@ -924,7 +928,8 @@ public class AiAttackController {
                 && defendingOpponent != null
                 && ComputerUtil.countUsefulCreatures(ai) > ComputerUtil.countUsefulCreatures(defendingOpponent)
                 && ai.getLife() > defendingOpponent.getLife()
-                && (ComputerUtilMana.getAvailableManaEstimate(ai) > 0) || tradeIfTappedOut) {
+                && (ComputerUtilMana.getAvailableManaEstimate(ai) > 0) || tradeIfTappedOut
+                && (ComputerUtilMana.getAvailableManaEstimate(defendingOpponent) == 0) || MyRandom.percentTrue(extraChanceIfOppHasMana)) {
             this.aiAggression = 4; // random (chance-based) attack expecting to trade or damage player.
         } else if (ratioDiff >= 0 && this.attackers.size() > 1) {
             this.aiAggression = 3; // attack expecting to make good trades or damage player.

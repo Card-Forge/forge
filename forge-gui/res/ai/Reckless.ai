@@ -12,6 +12,10 @@ CHANCE_TO_ATTACK_INTO_TRADE=100
 # is globally enabled). If disabled, the non-aggro AI will only attack into trades when it has mana open, thus having a chance
 # to "bluff" (or use, if available) combat tricks at the same time.
 ATTACK_INTO_TRADE_WHEN_TAPPED_OUT=true
+# When above zero, the AI will attack into trading options when the opponent is not tapped out, thus risking getting an
+# unexpected combat trick or ability activation. Note that this chance is rolled separately after CHANCE_TO_ATTACK_INTO_TRADE
+# has already succeeded.
+CHANCE_TO_ATKTRADE_WHEN_OPP_HAS_MANA=35
 # When enabled, the AI will use Berserk on offense to try to severely damage the opponent at the expense of the creature
 USE_BERSERK_AGGRESSIVELY=true
 # Try to hold combat tricks until blockers are declared in an attempt to trick the opponent into blocking a weak creature

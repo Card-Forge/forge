@@ -38,6 +38,7 @@ public enum AiProps { /** */
     PLAY_AGGRO ("false"),
     CHANCE_TO_ATTACK_INTO_TRADE ("40"), /** */
     ATTACK_INTO_TRADE_WHEN_TAPPED_OUT ("false"), /** */
+    CHANCE_TO_ATKTRADE_WHEN_OPP_HAS_MANA ("0"), /** */
     TRY_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK ("false"), /** */
     CHANCE_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK ("30"), /** */
     ENABLE_RANDOM_FAVORABLE_TRADES_ON_BLOCK ("false"), /** */

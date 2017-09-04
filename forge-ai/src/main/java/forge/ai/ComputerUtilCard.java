@@ -1236,6 +1236,7 @@ public class ComputerUtilCard {
                 }
                 chance += threat;
 
+                // -- Hold combat trick (the AI will try to delay the pump until Declare Blockers) --
                 // Enable combat trick mode only in case it's a pure buff spell in hand with no keywords or with Trample,
                 // First Strike, or Double Strike, otherwise the AI is unlikely to cast it or it's too late to
                 // cast it during Declare Blockers, thus ruining its attacker
