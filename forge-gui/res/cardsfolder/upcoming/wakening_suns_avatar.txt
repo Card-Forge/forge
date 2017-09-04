@@ -1,0 +1,7 @@
+Name:Wakening Sun's Avatar
+ManaCost:5 W W W
+Types:Creature Dinosaur Avatar
+PT:7/7
+T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromHand+Self | Destination$ Battlefield | Execute$ TrigDestroyAll | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, destroy all non-Dinosaur creatures.
+SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Creature.nonDinosaur
+Oracle:When Wakening Sun's Avatar enters the battlefield, if you cast it from your hand, destroy all non-Dinosaur creatures.
