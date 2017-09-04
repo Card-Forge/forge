@@ -1236,10 +1236,11 @@ public class ComputerUtilCard {
                 }
                 chance += threat;
 
-                // Enable combat trick mode only in case it's a pure buff spell with no keywords or with Trample,
+                // Enable combat trick mode only in case it's a pure buff spell in hand with no keywords or with Trample,
                 // First Strike, or Double Strike, otherwise the AI is unlikely to cast it or it's too late to
                 // cast it during Declare Blockers, thus ruining its attacker
-                if (holdCombatTricks && sa.getApi() == ApiType.Pump && sa.hasParam("NumAtt")) {
+                if (holdCombatTricks && sa.getApi() == ApiType.Pump
+                        && sa.hasParam("NumAtt") && sa.getHostCard() != null && sa.getHostCard().getZone().is(ZoneType.Hand)) {
                     combatTrick = true;
 
                     final List<String> kws = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & "))
