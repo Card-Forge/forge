@@ -1243,7 +1243,7 @@ public class ComputerUtilCard {
                     combatTrick = true;
 
                     final List<String> kws = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & "))
-                            : Lists.newArrayList();
+                            : Lists.<String>newArrayList();
                     for (String kw : kws) {
                         if (!kw.equals("Trample") && !kw.equals("First Strike") && !kw.equals("Double Strike")) {
                             combatTrick = false;
