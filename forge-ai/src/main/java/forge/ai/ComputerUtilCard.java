@@ -1240,7 +1240,8 @@ public class ComputerUtilCard {
                 // First Strike, or Double Strike, otherwise the AI is unlikely to cast it or it's too late to
                 // cast it during Declare Blockers, thus ruining its attacker
                 if (holdCombatTricks && sa.getApi() == ApiType.Pump
-                        && sa.hasParam("NumAtt") && sa.getHostCard() != null && sa.getHostCard().getZone().is(ZoneType.Hand)) {
+                        && sa.hasParam("NumAtt") && sa.getHostCard() != null
+                        && sa.getHostCard().getZone() != null && sa.getHostCard().getZone().is(ZoneType.Hand)) {
                     combatTrick = true;
 
                     final List<String> kws = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & "))
