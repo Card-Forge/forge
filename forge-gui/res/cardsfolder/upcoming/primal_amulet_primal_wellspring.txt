@@ -1,0 +1,28 @@
+Name:Primal Amulet
+ManaCost:4
+Types:Artifact
+S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Instant and sorcery spells you cast cost {1} less to cast.
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCharge | TriggerDescription$ Whenever you cast an instant or sorcery spell, put a charge counter on CARDNAME. Then if there are four or more charge counters on it, you may remove those counters and transform it.
+SVar:TrigCharge:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1 | SubAbility$ DBStoreSVar
+SVar:DBStoreSVar:DB$ StoreSVar | SVar$ FullyCharged | Type$ Number | Expression$ 1 | ConditionCheckSVar$ ChargeCounter | ConditionSVarCompare$ GE1 | References$ ChargeCounter,FullyCharged | SubAbility$ DBRemoveCtrs
+SVar:DBRemoveCtrs:DB$ RemoveCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ All | Optional$ True | ConditionCheckSVar$ FullyCharged | ConditionSVarCompare$ GE1 | References$ FullyCharged | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | ConditionCheckSVar$ Discharged | ConditionSVarCompare$ EQ1 | References$ Discharged
+SVar:ChargeCounter:Count$Valid Card.Self+counters_GE4_CHARGE
+SVar:Discharged:Count$Valid Card.Self+counters_EQ0_CHARGE
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | Execute$ DBInitSVar | Static$ True
+SVar:DBInitSVar:DB$ StoreSVar | SVar$ FullyCharged | Type$ Number | Expression$ 0 | References$ FullyCharged
+SVar:FullyCharged:Number$0
+AlternateMode:DoubleFaced
+SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_amulet.jpg
+Oracle:Instant and sorcery spells you cast cost {1} less to cast.\nWhenever you cast an instant or sorcery spell, put a charge counter on Primal Amulet. Then if there are four or more charge counters on it, you may remove those counters and transform it.
+
+ALTERNATE
+
+Name:Primal Wellspring
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ Any | TriggersWhenSpent$ TrigCopy | SpellDescription$ Add one mana of any color to your mana pool. When that mana is spent to cast an instant or sorcery spell, copy that spell and you may choose new targets for the copy.
+SVar:TrigCopy:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | OneOff$ True | Execute$ TrigCopyMain | TriggerDescription$ When that mana is spent to cast an instant or sorcery spell, copy that spell and you may choose new targets for the copy.
+SVar:TrigCopyMain:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility
+SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_wellspring.jpg
+Oracle:(Transforms from Primal Amulet.)\n{T}: Add one mana of any color to your mana pool. When that mana is spent to cast an instant or sorcery spell, copy that spell and you may choose new targets for the copy.

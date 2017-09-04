@@ -3,7 +3,7 @@ ManaCost:4 B
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ DBTreasure | TriggerDescription$ Whenever a creature an opponent controls dies, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
 # TODO: how many Treasure tokens are there? (with different art)
-SVar:DBTreasure:DB$ Token | TokenAmount$ 1 | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAbilities$ ABTreasureMana | TokenAltImages$ c_treasure2,c_treasure3,c_treasure4,c_treasure5,c_treasure6 | SpellDescription$ Create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+SVar:DBTreasure:DB$ Token | TokenAmount$ 1 | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAbilities$ ABTreasureMana | TokenAltImages$ c_treasure2,c_treasure3 | SpellDescription$ Create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
 SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color to your mana pool.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | PresentCompare$ GE10 | IsPresent$ Treasure.YouCtrl | Execute$ TrigWinsGame | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if you control ten or more Treasures, you win the game.
 SVar:TrigWinsGame:DB$WinsGame | Defined$ You
