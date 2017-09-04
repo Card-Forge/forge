@@ -311,11 +311,13 @@ public class ComputerUtil {
 
     public static Card getCardPreference(final Player ai, final Card activate, final String pref, final CardCollection typeList) {
         final Game game = ai.getGame();
+        String prefDef = "";
         if (activate != null) {
+            prefDef = activate.getSVar("AIPreference");
             final String[] prefGroups = activate.getSVar("AIPreference").split("\\|");
             for (String prefGroup : prefGroups) {
                 final String[] prefValid = prefGroup.trim().split("\\$");
-                if (prefValid[0].equals(pref)) {
+                if (prefValid[0].equals(pref) && !prefValid[1].startsWith("Special:")) {
                     final CardCollection prefList = CardLists.getValidCards(typeList, prefValid[1].split(","), activate.getController(), activate, null);
                     CardCollection overrideList = null;
 
@@ -410,6 +412,11 @@ public class ComputerUtil {
                         return c;
                     }
                 }
+            }
+
+            // Survival of the Fittest logic
+            if (prefDef.contains("DiscardCost$Special:SurvivalOfTheFittest")) {
+                return SpecialCardAi.SurvivalOfTheFittest.considerDiscardTarget(ai);
             }
 
             // Discard lands

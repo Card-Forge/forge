@@ -283,6 +283,9 @@ public class AiCardMemory {
     public static boolean isRememberedCard(Player ai, Card c, MemorySet set) {
         return ((PlayerControllerAi)ai.getController()).getAi().getCardMemory().isRememberedCard(c, set);
     }
+    public static boolean isRememberedCardByName(Player ai, String name, MemorySet set) {
+        return ((PlayerControllerAi)ai.getController()).getAi().getCardMemory().isRememberedCardByName(name, set);
+    }
     public static void clearMemorySet(Player ai, MemorySet set) {
         ((PlayerControllerAi)ai.getController()).getAi().getCardMemory().clearMemorySet(set);
     }

@@ -792,6 +792,106 @@ public class SpecialCardAi {
         }
     }
 
+    // Survival of the Fittest
+    public static class SurvivalOfTheFittest {
+        public static Card considerDiscardTarget(Player ai) {
+            // The AI here only checks the number of available creatures of various CMC, which is equivalent to knowing
+            // your deck composition and checking (and counting) the cards in other zones so you know what you have left
+            // in the library. As such, this does not cause unfair advantage, at least unless there are cards that are
+            // face down (on the battlefield or in exile). Might need some kind of an update to consider hidden information
+            // like that properly (probably by adding all those cards to the evaluation mix so the AI doesn't "know" which
+            // ones are already face down in play and which are still in the library)
+            CardCollectionView creatsInLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.Presets.CREATURES);
+            CardCollectionView creatsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.CREATURES);
+            CardCollectionView manaSrcsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS_PRODUCING_MANA);
+
+            if (creatsInHand.isEmpty() || creatsInLib.isEmpty()) { return null; }
+
+            int numManaSrcs = ComputerUtilMana.getAvailableManaEstimate(ai, false)
+                    + Math.min(1, manaSrcsInHand.size());
+
+            // Cards in library that are either below/at (preferred) or above the max CMC affordable by the AI
+            // (the latter might happen if we're playing a Reanimator deck with lots of fatties)
+            CardCollection atTargetCMCInLib = CardLists.filter(creatsInLib, new Predicate<Card>() {
+                @Override
+                public boolean apply(Card card) {
+                    return ComputerUtilMana.hasEnoughManaSourcesToCast(card.getSpellPermanent(), ai);
+                }
+            });
+            if (atTargetCMCInLib.isEmpty()) {
+                atTargetCMCInLib = CardLists.filter(creatsInLib, CardPredicates.greaterCMC(numManaSrcs));
+            }
+            Collections.sort(atTargetCMCInLib, CardLists.CmcComparatorInv);
+            if (atTargetCMCInLib.isEmpty()) {
+                // Nothing to aim for?
+                return null;
+            }
+
+            // Cards in hand that are below the max CMC affordable by the AI
+            CardCollection belowMaxCMC = CardLists.filter(creatsInHand, CardPredicates.lessCMC(numManaSrcs - 1));
+            Collections.sort(belowMaxCMC, Collections.reverseOrder(CardLists.CmcComparatorInv));
+
+            // Cards in hand that are above the max CMC affordable by the AI
+            CardCollection aboveMaxCMC = CardLists.filter(creatsInHand, CardPredicates.greaterCMC(numManaSrcs + 1));
+            Collections.sort(aboveMaxCMC, CardLists.CmcComparatorInv);
+
+            Card maxCMC = !aboveMaxCMC.isEmpty() ? aboveMaxCMC.getFirst() : null;
+            Card minCMC = !belowMaxCMC.isEmpty() ? belowMaxCMC.getFirst() : null;
+            Card bestInLib = !atTargetCMCInLib.isEmpty() ? atTargetCMCInLib.getFirst() : null;
+
+            int maxCMCdiff = 0;
+            if (maxCMC != null) {
+                maxCMCdiff = maxCMC.getCMC() - numManaSrcs; // how far are we from viably casting it?
+            }
+
+            // We have something too fat to viably cast in the nearest future, discard it hoping to
+            // grab something more immediately valuable (or maybe we're playing Reanimator and we want
+            // it to be in the graveyard anyway)
+            if (maxCMCdiff >= 3) {
+                return maxCMC;
+            }
+            // We have a card in hand that is worse than the one in library, so discard the worst card
+            if (maxCMCdiff <= 0 && minCMC != null
+                    && ComputerUtilCard.evaluateCreature(bestInLib) > ComputerUtilCard.evaluateCreature(minCMC)) {
+                return minCMC;
+            }
+            // We have a card in the library that is closer to being castable than the one in hand, and
+            // no options with smaller CMC, so discard the one that is harder to cast for the one that is
+            // easier to cast right now, but only if the best card in the library is at least CMC 3
+            // (probably not worth it to grab low mana cost cards this way)
+            if (maxCMC != null && maxCMC.getCMC() < bestInLib.getCMC() && bestInLib.getCMC() >= 3) {
+                return maxCMC;
+            }
+
+            // probably nothing that is worth changing, so bail
+            return null;
+        }
+
+        public static Card considerCardToGet(Player ai, SpellAbility sa) {
+            CardCollectionView creatsInLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.Presets.CREATURES);
+            if (creatsInLib.isEmpty()) { return null; }
+
+            CardCollectionView manaSrcsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS_PRODUCING_MANA);
+            int numManaSrcs = ComputerUtilMana.getAvailableManaEstimate(ai, false)
+                    + Math.min(1, manaSrcsInHand.size());
+
+            CardCollection atTargetCMCInLib = CardLists.filter(creatsInLib, new Predicate<Card>() {
+                @Override
+                public boolean apply(Card card) {
+                    return ComputerUtilMana.hasEnoughManaSourcesToCast(card.getSpellPermanent(), ai);
+                }
+            });
+            if (atTargetCMCInLib.isEmpty()) {
+                atTargetCMCInLib = CardLists.filter(creatsInLib, CardPredicates.greaterCMC(numManaSrcs));
+            }
+            Collections.sort(atTargetCMCInLib, CardLists.CmcComparatorInv);
+
+            Card bestInLib = atTargetCMCInLib != null ? atTargetCMCInLib.getFirst() : null;
+
+            return bestInLib;
+        }
+    }
+
     // Timetwister
     public static class Timetwister {
         public static boolean consider(Player ai, SpellAbility sa) {

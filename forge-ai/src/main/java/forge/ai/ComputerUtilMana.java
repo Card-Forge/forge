@@ -1134,6 +1134,10 @@ public class ComputerUtilMana {
     // This method can be used to estimate the total amount of mana available to the player,
     // including the mana available in that player's mana pool
     public static int getAvailableManaEstimate(final Player p) {
+        return getAvailableManaEstimate(p, true);
+    }
+
+    public static int getAvailableManaEstimate(final Player p, final boolean checkPlayable) {
         int availableMana = 0;
 
         final CardCollectionView list = new CardCollection(p.getCardsIn(ZoneType.Battlefield));
@@ -1153,7 +1157,7 @@ public class ComputerUtilMana {
 
             for (SpellAbility ma : src.getManaAbilities()) {
                 ma.setActivatingPlayer(p);
-                if (ma.canPlay()) {
+                if (ma.canPlay() || !checkPlayable) {
                     int costsToActivate = ma.getPayCosts() != null && ma.getPayCosts().getCostMana() != null ? ma.getPayCosts().getCostMana().convertAmount() : 0;
                     int producedMana = ma.getParamOrDefault("Produced", "").split(" ").length;
                     int producedAmount = AbilityUtils.calculateAmount(src, ma.getParamOrDefault("Amount", "1"), ma);
