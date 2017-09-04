@@ -706,6 +706,17 @@ public abstract class GameState {
                 }
 
                 String svarValue = c.getSVar(sPtr);
+
+                if (tgtID != TARGET_NONE && svarValue.contains("| Defined$")) {
+                    // We want a specific target, so try to undefine a predefined target if possible
+                    svarValue = svarValue.replace("| Defined$", "| Undefined$");
+                    if (tgtID == TARGET_HUMAN || tgtID == TARGET_AI) {
+                        svarValue += " | ValidTgts$ Player";
+                    } else {
+                        svarValue += " | ValidTgts$ Card";
+                    }
+                }
+
                 sa = AbilityFactory.getAbility(svarValue, c);
                 if (sa == null) {
                     System.err.println("ERROR: Unable to generate ability for SVar " + svarValue);
