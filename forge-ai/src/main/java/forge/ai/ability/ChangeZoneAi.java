@@ -73,6 +73,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return true;
             } else if (aiLogic.startsWith("SacAndUpgrade")) { // Birthing Pod, Natural Order, etc.
                 return this.doSacAndUpgradeLogic(aiPlayer, sa);
+            } else if (aiLogic.startsWith("SacAndRetFromGrave")) { // Recurring Nightmare, etc.
+                return this.doSacAndReturnFromGraveLogic(aiPlayer, sa);
             } else if (aiLogic.equals("Necropotence")) {
                 return SpecialCardAi.Necropotence.consider(aiPlayer, sa);
             } else if (aiLogic.equals("SameName")) {   // Declaration in Stone
@@ -1475,8 +1477,33 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // But just in case it does, just select the first option
         return Iterables.getFirst(options, null);
     }
-    
-    private boolean doSacAndUpgradeLogic(final Player ai, SpellAbility sa) {
+
+    private boolean doSacAndReturnFromGraveLogic(final Player ai, final SpellAbility sa) {
+        Card source = sa.getHostCard();
+        String definedSac = StringUtils.split(source.getSVar("AIPreference"), "$")[1];
+
+        CardCollection listToSac = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.restriction(definedSac.split(","), ai, source, sa));
+        listToSac.sort(Collections.reverseOrder(CardLists.CmcComparatorInv));
+
+        CardCollection listToRet = CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
+        listToRet.sort(CardLists.CmcComparatorInv);
+
+        if (!listToSac.isEmpty() && !listToRet.isEmpty()) {
+            Card worstSac = listToSac.getFirst();
+            Card bestRet = listToRet.getFirst();
+
+            if (bestRet.getCMC() > worstSac.getCMC()) {
+                sa.resetTargets();
+                sa.getTargets().add(bestRet);
+                source.setSVar("AIPreferenceOverride", "Creature.cmcEQ" + worstSac.getCMC());
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean doSacAndUpgradeLogic(final Player ai, final SpellAbility sa) {
         Card source = sa.getHostCard();
         PhaseHandler ph = ai.getGame().getPhaseHandler();
         String logic = sa.getParam("AILogic");
