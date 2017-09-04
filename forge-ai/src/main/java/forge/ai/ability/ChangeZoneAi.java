@@ -1492,7 +1492,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
             Card worstSac = listToSac.getFirst();
             Card bestRet = listToRet.getFirst();
 
-            if (bestRet.getCMC() > worstSac.getCMC()) {
+            if (bestRet.getCMC() > worstSac.getCMC()
+                    && ComputerUtilCard.evaluateCreature(bestRet) > ComputerUtilCard.evaluateCreature(worstSac)) {
                 sa.resetTargets();
                 sa.getTargets().add(bestRet);
                 source.setSVar("AIPreferenceOverride", "Creature.cmcEQ" + worstSac.getCMC());
