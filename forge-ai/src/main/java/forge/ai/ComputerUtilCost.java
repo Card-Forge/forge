@@ -259,7 +259,7 @@ public class ComputerUtilCost {
                 }
 
                 final CardCollection sacList = new CardCollection();
-                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), source.getController(), source, null);
+                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, null);
 
                 int count = 0;
                 while (count < amount) {
@@ -309,7 +309,7 @@ public class ComputerUtilCost {
                 }
 
                 final CardCollection sacList = new CardCollection();
-                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), source.getController(), source, null);
+                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, null);
 
                 int count = 0;
                 while (count < amount) {
