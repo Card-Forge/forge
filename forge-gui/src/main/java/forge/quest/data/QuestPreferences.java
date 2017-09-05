@@ -19,6 +19,7 @@ package forge.quest.data;
 
 import forge.properties.ForgeConstants;
 import forge.properties.PreferencesStore;
+import forge.util.TextUtil;
 
 import java.io.Serializable;
 
@@ -256,7 +257,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
             newQPref += "_EXPERT";
             break;
         default:
-            throw new IllegalArgumentException(String.format("Difficulty index %d out of bounds, preference %s", difficultyIndex, newQPref));
+            throw new IllegalArgumentException(TextUtil.concatNoSpace("Difficulty index ", String.valueOf(difficultyIndex), " out of bounds, preference ", newQPref));
         }
 
         return getPref(QPref.valueOf(newQPref));

@@ -27,6 +27,7 @@ import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.MyRandom;
+import forge.util.TextUtil;
 import forge.util.gui.SGuiChoose;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -282,8 +283,8 @@ public class QuestWinLoseController {
 
                 if (altReward > 0) {
                     credGameplay += altReward;
-                    sb.append(String.format("Alternate win condition: <u>%s</u>! Bonus: %d credits.\n",
-                            winConditionName, altReward));
+                    sb.append(TextUtil.concatNoSpace("Alternate win condition: <u>",
+                            winConditionName, "</u>! Bonus: ", String.valueOf(altReward), " credits.\n"));
                 }
             }
             // Mulligan to zero
@@ -292,7 +293,7 @@ public class QuestWinLoseController {
 
             if (0 == cntCardsHumanStartedWith) {
                 credGameplay += mulliganReward;
-                sb.append(String.format("Mulliganed to zero and still won! Bonus: %d credits.\n", mulliganReward));
+                sb.append(TextUtil.concatNoSpace("Mulliganed to zero and still won! Bonus: ", String.valueOf(mulliganReward), " credits.\n"));
             }
 
             // Early turn bonus
@@ -317,7 +318,7 @@ public class QuestWinLoseController {
 
             if (turnCredits > 0) {
                 credGameplay += turnCredits;
-                sb.append(String.format(" Bonus: %d credits.\n", turnCredits));
+                sb.append(TextUtil.concatNoSpace(" Bonus: ", String.valueOf(turnCredits), " credits.\n"));
             }
 
             if (game.getLifeDelta() >= 50) {
@@ -327,14 +328,14 @@ public class QuestWinLoseController {
         } // End for(game)
 
         if (lifeDifferenceCredits > 0) {
-            sb.append(String.format("Life total difference: %d credits.\n", lifeDifferenceCredits));
+            sb.append(TextUtil.concatNoSpace("Life total difference: ", String.valueOf(lifeDifferenceCredits), " credits.\n"));
         }
 
         // Undefeated bonus
         if (hasNeverLost) {
             credUndefeated += FModel.getQuestPreferences().getPrefInt(QPref.REWARDS_UNDEFEATED);
             final int reward = FModel.getQuestPreferences().getPrefInt(QPref.REWARDS_UNDEFEATED);
-            sb.append(String.format("You have not lost once! Bonus: %d credits.\n", reward));
+            sb.append(TextUtil.concatNoSpace("You have not lost once! Bonus: ", String.valueOf(reward), " credits.\n"));
         }
 
         // Estates bonus
@@ -360,24 +361,24 @@ public class QuestWinLoseController {
         }
 
         // Final output
-        String congrats = "\n";
+        sb.append("\n");
         if (credTotal < 100) {
-            congrats += "You've earned";
+            sb.append("You've earned ");
         }
         else if (credTotal < 250) {
-            congrats += "Could be worse: ";
+            sb.append("Could be worse: ");
         }
         else if (credTotal < 500) {
-            congrats += "A respectable";
+            sb.append("A respectable ");
         }
         else if (credTotal < 750) {
-            congrats += "An impressive";
+            sb.append("An impressive ");
         }
         else {
-            congrats += "Spectacular match!";
+            sb.append("Spectacular match! ");
         }
 
-        sb.append(String.format("%s %d credits in total.", congrats, credTotal));
+        sb.append(TextUtil.concatWithSpace(String.valueOf(credTotal), "credits in total."));
         qData.getAssets().addCredits(credTotal);
 
         view.showMessage(sb.toString(), "Gameplay Results", FSkinProp.ICO_QUEST_GOLD);

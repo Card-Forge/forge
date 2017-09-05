@@ -2,6 +2,7 @@ package forge.player;
 
 import java.util.Set;
 
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.GuiBase;
@@ -73,10 +74,12 @@ public final class GamePlayerUtil {
             if (lastProfileChosen.equals(AiProfileUtil.AI_PROFILE_RANDOM_MATCH)) {
                 lastProfileChosen = AiProfileUtil.getRandomProfile();
             }
-            System.out.println(String.format("[AI Preferences] AI profile %s was chosen for the lobby player %s.", lastProfileChosen, player.getName()));
+            System.out.println(TextUtil.concatNoSpace("[AI Preferences] AI profile ", lastProfileChosen,
+                    " was chosen for the lobby player ", player.getName(), "."));
             profile = lastProfileChosen;
         } else {
-            System.out.println(String.format("[Override] AI profile %s was chosen for the lobby player %s.", profileOverride, player.getName()));
+            System.out.println(TextUtil.concatNoSpace("[Override] AI profile ", profileOverride,
+                    " was chosen for the lobby player ", player.getName(), "."));
             profile = profileOverride;
         }
 

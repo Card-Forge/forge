@@ -23,6 +23,7 @@ import forge.quest.data.QuestPreferences;
 import forge.tournament.system.TournamentBracket;
 import forge.tournament.system.TournamentPairing;
 import forge.tournament.system.TournamentPlayer;
+import forge.util.TextUtil;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
@@ -180,7 +181,7 @@ public class QuestTournamentController {
             if (format != null) {
                 QuestEventDraft evt = QuestEventDraft.getDraftOrNull(FModel.getQuest(), format);
                 if (evt != null) {
-                    String fee = String.format("The entry fee for this booster draft tournament is %d credits.\nWould you like to spend a token and create this tournament?", evt.getEntryFee());
+                    String fee = TextUtil.concatNoSpace("The entry fee for this booster draft tournament is ", String.valueOf(evt.getEntryFee()), " credits.\nWould you like to spend a token and create this tournament?");
                     if (SOptionPane.showConfirmDialog(fee, "Creating a Booster Draft Tournament")) {
                         achievements.spendDraftToken(format);
     

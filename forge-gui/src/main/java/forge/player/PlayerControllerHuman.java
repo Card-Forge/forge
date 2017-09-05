@@ -299,13 +299,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (newMain != null) {
                 String errMsg;
                 if (newMain.size() < deckMinSize) {
-                    errMsg = String.format(
-                            "Too few cards in your main deck (minimum %d), please make modifications to your deck again.",
-                            deckMinSize);
+                    errMsg = TextUtil.concatNoSpace("Too few cards in your main deck (minimum ",
+                            String.valueOf(deckMinSize), "), please make modifications to your deck again.");
                 } else {
-                    errMsg = String.format(
-                            "Too many cards in your sideboard (maximum %d), please make modifications to your deck again.",
-                            sbMax);
+                    errMsg = TextUtil.concatNoSpace("Too many cards in your sideboard (maximum ",
+                            String.valueOf(sbMax), "), please make modifications to your deck again.");
                 }
                 getGui().showErrorDialog(errMsg, "Invalid Deck");
             }
@@ -713,7 +711,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         getGui().setCard(c.getView());
 
         boolean result = false;
-        result = InputConfirm.confirm(this, view, String.format("Put %s on the top or bottom of your library?", view),
+        result = InputConfirm.confirm(this, view, TextUtil.concatNoSpace("Put ", view.toString(), " on the top or bottom of your library?"),
                 true, ImmutableList.of("Top", "Bottom"));
 
         endTempShowCards();
@@ -869,8 +867,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final List<String> options = Lists.newArrayList();
         for (int i = 0; i < manaChoices.size(); i++) {
             final Mana m = manaChoices.get(i);
-            options.add(String.format("%d. %s mana from %s", 1 + i, MagicColor.toLongString(m.getColor()),
-                    m.getSourceCard()));
+            options.add(TextUtil.concatNoSpace(String.valueOf(1 + i), ". ", MagicColor.toLongString(m.getColor()),
+                    " mana from ", m.getSourceCard().toString()));
         }
         final String chosen = getGui().one("Pay Mana from Mana Pool", options);
         final String idx = TextUtil.split(chosen, '.')[0];
@@ -1303,8 +1301,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public List<AbilitySub> chooseModeForAbility(final SpellAbility sa, final int min, final int num,
             boolean allowRepeat) {
         final List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
-        final String modeTitle = String.format("%s activated %s - Choose a mode", sa.getActivatingPlayer(),
-                sa.getHostCard());
+        final String modeTitle = TextUtil.concatNoSpace(sa.getActivatingPlayer().toString(), " activated ",
+                sa.getHostCard().toString(), " - Choose a mode");
         final List<AbilitySub> chosen = Lists.newArrayListWithCapacity(num);
         for (int i = 0; i < num; i++) {
             AbilitySub a;
@@ -1529,8 +1527,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean chooseCardsPile(final SpellAbility sa, final CardCollectionView pile1,
             final CardCollectionView pile2, final String faceUp) {
-        final String p1Str = String.format("-- Pile 1 (%s cards) --", pile1.size());
-        final String p2Str = String.format("-- Pile 2 (%s cards) --", pile2.size());
+        final String p1Str = TextUtil.concatNoSpace("-- Pile 1 (", String.valueOf(pile1.size()), " cards) --");
+        final String p2Str = TextUtil.concatNoSpace("-- Pile 2 (", String.valueOf(pile2.size()), " cards) --");
 
         /*
          * if (faceUp.equals("True")) { final List<String> possibleValues =

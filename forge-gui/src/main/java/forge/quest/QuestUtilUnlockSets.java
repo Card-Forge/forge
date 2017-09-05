@@ -24,6 +24,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
+import forge.util.TextUtil;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import com.google.common.collect.ImmutableList;
@@ -80,9 +81,9 @@ public class QuestUtilUnlockSets {
                 }
             }
             int price = UNLOCK_COST;
-            if (mapPrices.containsKey(ed.getName() + " Booster Pack")) {
-                price = Math.max(new Double(30 * Math.pow(Math.sqrt(mapPrices.get(ed.getName()
-                    + " Booster Pack")), 1.70)).intValue(), UNLOCK_COST);
+            if (mapPrices.containsKey(TextUtil.concatNoSpace(ed.getName(), " Booster Pack"))) {
+                price = Math.max(new Double(30 * Math.pow(Math.sqrt(mapPrices.get(TextUtil.concatNoSpace(ed.getName(),
+                     " Booster Pack"))), 1.70)).intValue(), UNLOCK_COST);
             }
             price = (int) ((double) price * multiplier);
             setPrices.add(ImmutablePair.of(ed, price));
@@ -91,7 +92,7 @@ public class QuestUtilUnlockSets {
         final String setPrompt = "You have " + qData.getAssets().getCredits() + " credits. Unlock:";
         List<String> options = new ArrayList<String>();
         for (ImmutablePair<CardEdition, Integer> ee : setPrices) {
-            options.add(String.format("%s [PRICE: %d credits]",  ee.left.getName(), ee.right));
+            options.add(TextUtil.concatNoSpace(ee.left.getName()," [PRICE: ", String.valueOf(ee.right), " credits]"));
         }
 
         int index = options.indexOf(SGuiChoose.oneOrNone(setPrompt, options));

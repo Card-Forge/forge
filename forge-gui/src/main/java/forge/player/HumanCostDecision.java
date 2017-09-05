@@ -33,6 +33,7 @@ import forge.match.input.InputConfirm;
 import forge.match.input.InputSelectCardsFromList;
 import forge.match.input.InputSelectManyBase;
 import forge.util.Aggregates;
+import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
@@ -302,7 +303,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.number(0);
         }
         final Game game = controller.getGame();
-        final Player p = game.getPlayer(controller.getGui().oneOrNone(String.format("Exile from whose %s?", cost.getFrom()), PlayerView.getCollection(payableZone)));
+        final Player p = game.getPlayer(controller.getGui().oneOrNone(TextUtil.concatNoSpace("Exile from whose ", cost.getFrom().toString(), "?"), PlayerView.getCollection(payableZone)));
         if (p == null) {
             return null;
         }
@@ -702,7 +703,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.number(0);
         }
 
-        final Player p = controller.getGame().getPlayer(controller.getGui().oneOrNone(String.format("Put cards from whose %s?", fromZone), PlayerView.getCollection(payableZone)));
+        final Player p = controller.getGame().getPlayer(controller.getGui().oneOrNone(TextUtil.concatNoSpace("Put cards from whose ", fromZone.toString(), "?"), PlayerView.getCollection(payableZone)));
         if (p == null) {
             return null;
         }

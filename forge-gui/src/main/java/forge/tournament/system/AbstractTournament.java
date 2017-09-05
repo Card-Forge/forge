@@ -8,6 +8,7 @@ import forge.deck.DeckGroup;
 import forge.game.player.RegisteredPlayer;
 import forge.player.GamePlayerUtil;
 import forge.util.MyRandom;
+import forge.util.TextUtil;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -135,8 +136,12 @@ public abstract class AbstractTournament implements Serializable {
         sortAllPlayers("score");
         //System.out.println("Name\t\tScore\tW(By)\tL\tT");
         for(TournamentPlayer tp : allPlayers) {
-            System.out.println(String.format("%s\t\t%d Wins(%d Byes)-%d Losses-%d Ties\t=>\t%d Points", tp.getPlayer().getName(),
-                    tp.getWins(), tp.getByes(), tp.getLosses(), tp.getTies(), tp.getScore()));
+            System.out.println(TextUtil.concatNoSpace(tp.getPlayer().getName(),"\t\t",
+                    String.valueOf(tp.getWins())," Wins(",
+                    String.valueOf(tp.getByes())," Byes)-",
+                    String.valueOf(tp.getLosses())," Losses-",
+                    String.valueOf(tp.getTies())," Ties\t=>\t",
+                    String.valueOf(tp.getScore())," Points"));
         }
     }
 

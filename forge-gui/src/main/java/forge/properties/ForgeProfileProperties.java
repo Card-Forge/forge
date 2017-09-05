@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Properties;
 
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -156,7 +157,7 @@ public class ForgeProfileProperties {
             throw new RuntimeException("cannot determine OS and user home directory");
         }
 
-        final String fallbackDataDir = String.format("%s/.forge", homeDir);
+        final String fallbackDataDir = TextUtil.concatNoSpace(homeDir, "/.forge");
 
         if (StringUtils.containsIgnoreCase(osName, "windows")) {
             // the split between appdata and localappdata on windows is relatively recent.  If
@@ -175,12 +176,12 @@ public class ForgeProfileProperties {
             return Pair.of(appRoot + File.separator + "Forge", cacheRoot + File.separator + "Forge" + File.separator + "Cache");
         }
         else if (StringUtils.containsIgnoreCase(osName, "mac os x")) {
-            return Pair.of(String.format("%s/Library/Application Support/Forge", homeDir),
-                    String.format("%s/Library/Caches/Forge", homeDir));
+            return Pair.of(TextUtil.concatNoSpace(homeDir, "/Library/Application Support/Forge"),
+                    TextUtil.concatNoSpace(homeDir, "/Library/Caches/Forge"));
         }
 
         // Linux and everything else
-        return Pair.of(fallbackDataDir, String.format("%s/.cache/forge", homeDir));
+        return Pair.of(fallbackDataDir, TextUtil.concatNoSpace(homeDir, "/.cache/forge"));
     }
 
     private static void save() {

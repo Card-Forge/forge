@@ -2,6 +2,7 @@ package forge.tournament.system;
 
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import forge.LobbyPlayer;
+import forge.util.TextUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +68,7 @@ public class TournamentPlayer {
     public int getSwissScore() { return (wins+byes)*30+ties*10+byes; }
 
     public String getNameAndScore() {
-        return String.format("%s[%d]", getPlayer().getName(), getScore());
+        return TextUtil.concatNoSpace(getPlayer().getName(), TextUtil.enclosedBracket(String.valueOf(getScore())));
     }
 
     public int getWins() {
