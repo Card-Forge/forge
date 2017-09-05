@@ -15,7 +15,7 @@ humanlibrary=Blur of Blades|Id:420;Mountain|Id:421|Set:AKH
 humangraveyard=Kari Zev's Expertise;Renegade Tactics;Shard of Broken Glass;Uncaged Fury
 humanbattlefield=Mountain|Set:AKH;Mountain|Set:AKH;Mountain|Set:AKH;Mountain|Set:AKH;Blooming Marsh;Blooming Marsh;Blooming Marsh;Grim Flayer;Grim Flayer
 #TODO: make it possible for the player to see the top two cards of the library at the beginning of the puzzle
-#humanprecast=Preordain
+humanprecast=Preordain|CustomScript:DB$ Draw | NumCards$ 3 | Defined$ You
 humanexile=
 humancommand=
 aihand=
