@@ -17226,6 +17226,7 @@ forge-gui/res/cardsfolder/upcoming/castaways_despair.txt -text
 forge-gui/res/cardsfolder/upcoming/conquerors_galleon_conquerors_foothold.txt -text
 forge-gui/res/cardsfolder/upcoming/daring_saboteur.txt -text
 forge-gui/res/cardsfolder/upcoming/deadeye_plunderers.txt -text
+forge-gui/res/cardsfolder/upcoming/deadeye_quartermaster.txt -text
 forge-gui/res/cardsfolder/upcoming/deadeye_tormentor.txt -text
 forge-gui/res/cardsfolder/upcoming/deadeye_tracker.txt -text
 forge-gui/res/cardsfolder/upcoming/deathless_ancient.txt -text
@@ -17252,12 +17253,15 @@ forge-gui/res/cardsfolder/upcoming/jace_cunning_castaway.txt -text
 forge-gui/res/cardsfolder/upcoming/jace_ingenious_mind_mage.txt -text
 forge-gui/res/cardsfolder/upcoming/jaces_sentinel.txt -text
 forge-gui/res/cardsfolder/upcoming/kinjallis_sunwing.txt -text
+forge-gui/res/cardsfolder/upcoming/kitesail_freebooter.txt -text
 forge-gui/res/cardsfolder/upcoming/kopala_warden_of_waves.txt -text
 forge-gui/res/cardsfolder/upcoming/kumenas_speaker.txt -text
 forge-gui/res/cardsfolder/upcoming/marauding_looter.txt -text
 forge-gui/res/cardsfolder/upcoming/mavren_fein_dusk_apostle.txt -text
 forge-gui/res/cardsfolder/upcoming/old_growth_dryads.txt -text
+forge-gui/res/cardsfolder/upcoming/overflowing_insight.txt -text
 forge-gui/res/cardsfolder/upcoming/pillar_of_origins.txt -text
+forge-gui/res/cardsfolder/upcoming/pirates_cutlass.txt -text
 forge-gui/res/cardsfolder/upcoming/priest_of_the_wakening_sun.txt -text
 forge-gui/res/cardsfolder/upcoming/primal_amulet_primal_wellspring.txt -text
 forge-gui/res/cardsfolder/upcoming/prosperous_pirates.txt -text
