@@ -662,10 +662,10 @@ public abstract class GameState {
     private void executeScript(Game game, Card c, String sPtr) {
         int tgtID = TARGET_NONE;
         if (sPtr.contains("->")) {
-            String tgtDef = sPtr.substring(sPtr.indexOf("->") + 2);
+            String tgtDef = sPtr.substring(sPtr.lastIndexOf("->") + 2);
 
             tgtID = parseTargetInScript(tgtDef);
-            sPtr = sPtr.substring(0, sPtr.indexOf("->"));
+            sPtr = sPtr.substring(0, sPtr.lastIndexOf("->"));
         }
 
         SpellAbility sa = null;
