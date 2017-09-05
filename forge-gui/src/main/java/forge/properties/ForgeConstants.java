@@ -18,6 +18,7 @@
 package forge.properties;
 
 import forge.GuiBase;
+import forge.util.FileUtil;
 
 import java.io.File;
 import java.util.Collections;
@@ -205,6 +206,9 @@ public final class ForgeConstants {
     // Constants for Auto-Yield Mode
     public static final String AUTO_YIELD_PER_CARD = "Per Card (Each Game)";
     public static final String AUTO_YIELD_PER_ABILITY = "Per Ability (Each Match)";
+
+    // Set boolean constant for landscape mode for gdx port
+    public static final boolean isGdxPortLandscape = FileUtil.doesFileExist(ASSETS_DIR + "switch_orientation.ini") ? true : false;
 
     public enum CounterDisplayLocation {
 

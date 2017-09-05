@@ -18,8 +18,10 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
+import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.util.ITriggerEvent;
+import forge.util.TextUtil;
 
 public final class InputSelectTargets extends InputSyncronizedBase {
     private final List<Card> choices;
@@ -61,10 +63,16 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             sb.append("\nTargeted:");
         }
         for (final Entry<GameEntity, Integer> o : targetDepth.entrySet()) {
-            sb.append("\n");
+            //if it's not in gdx port landscape mode, append the linebreak or it will make the android port
+            // display smaller fonts consecutively when targeting with multiple targets
+            if(!ForgeConstants.isGdxPortLandscape)
+                sb.append("\n");
             sb.append(o.getKey());
+            //if it's in gdx port landscape mode, instead append the comma with space...
+            if(ForgeConstants.isGdxPortLandscape)
+                sb.append(", ");
             if (o.getValue() > 1) {
-                sb.append(String.format(" (%d times)", o.getValue()));
+                sb.append(TextUtil.concatNoSpace(" (", String.valueOf(o.getValue()), " times)"));
             }
         }
         if (!sa.getUniqueTargets().isEmpty()) {
@@ -75,7 +83,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         final int maxTargets = tgt.getMaxTargets(sa.getHostCard(), sa);
         final int targeted = sa.getTargets().getNumTargeted();
         if(maxTargets > 1) {
-            sb.append(String.format("\n(%d more can be targeted)", Integer.valueOf(maxTargets - targeted)));
+            sb.append(TextUtil.concatNoSpace("\n(", String.valueOf(maxTargets - targeted), " more can be targeted)"));
         }
 
         String message = sb.toString().replace("CARDNAME", sa.getHostCard().toString()).replace("(Targeting ERROR)", "");
