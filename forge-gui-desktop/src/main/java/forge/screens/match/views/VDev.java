@@ -100,8 +100,8 @@ public class VDev implements IVDoc<CDev>, IDevListener {
         viewport.add(this.lblCardToGraveyard, halfConstraints);
         viewport.add(this.lblCardToExile, halfConstraintsLeft);
         viewport.add(this.lblCastSpell, halfConstraints);
-        viewport.add(this.lblRepeatAddCard, halfConstraintsLeft);
-        viewport.add(this.lblRemoveFromGame, halfConstraints);
+        viewport.add(this.lblRemoveFromGame, halfConstraintsLeft);
+        viewport.add(this.lblRepeatAddCard, halfConstraints);
         viewport.add(this.lblExileFromHand, halfConstraintsLeft);
         viewport.add(this.lblExileFromPlay, halfConstraints);
         viewport.add(this.lblSetLife, halfConstraintsLeft);
