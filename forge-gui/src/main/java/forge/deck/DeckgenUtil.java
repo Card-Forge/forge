@@ -537,9 +537,14 @@ public class DeckgenUtil {
         int W=0, U=0, R=0, B=0, G=0, total=0;
         List<PaperCard> cards = d.getOrCreate(DeckSection.Main).toFlatList();
 
+        // determine how many additional lands we need, but don't take lands already in deck into consideration,
+        // or we risk incorrectly determining the target deck size
+        int numLands = Iterables.size(Iterables.filter(cards, Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard.FN_GET_RULES)));
+        int sizeNoLands = cards.size() - numLands;
+
         // attempt to determine if building for sealed, constructed or EDH
-        int targetDeckSize = cards.size() < 30 ? 40 
-                : cards.size() > 60 ? 100 : 60; 
+        int targetDeckSize = sizeNoLands < 30 ? 40
+                : sizeNoLands > 60 ? 100 : 60;
 
         int numLandsToAdd = targetDeckSize - cards.size();
 
@@ -553,19 +558,24 @@ public class DeckgenUtil {
         }
         total = W + U + R + B + G;
 
-        int whiteSources = Math.round(numLandsToAdd * ((float)W / (float)total));
+        int whiteSources = Math.max(0, Math.round(numLandsToAdd * ((float)W / (float)total)));
+        if (W > 0) { whiteSources = Math.max(1, whiteSources); }
         numLandsToAdd -= whiteSources;
         total -= W;
-        int blueSources = Math.round(numLandsToAdd * ((float)U / (float)total));
+        int blueSources = Math.max(0, Math.round(numLandsToAdd * ((float)U / (float)total)));
+        if (U > 0) { blueSources = Math.max(1, blueSources); }
         numLandsToAdd -= blueSources;
         total -= U;
-        int blackSources = Math.round(numLandsToAdd * ((float)B / (float)total));
+        int blackSources = Math.max(0, Math.round(numLandsToAdd * ((float)B / (float)total)));
+        if (B > 0) { blackSources = Math.max(1, blackSources); }
         numLandsToAdd -= blackSources;
         total -= B;
-        int redSources = Math.round(numLandsToAdd * ((float)R / (float)total));
+        int redSources = Math.max(0, Math.round(numLandsToAdd * ((float)R / (float)total)));
+        if (R > 0) { redSources = Math.max(1, redSources); }
         numLandsToAdd -= redSources;
         total -= R;
-        int greenSources = Math.round(numLandsToAdd * ((float)G / (float)total));
+        int greenSources = Math.max(0, Math.round(numLandsToAdd * ((float)G / (float)total)));
+        if (G > 0) { greenSources = Math.max(1, greenSources); }
         numLandsToAdd -= greenSources;
         total -= G;
         
