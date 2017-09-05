@@ -1780,6 +1780,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         private ZoneType lastAddedZone;
         private Player lastAddedPlayer;
         private SpellAbility lastAddedSA;
+        private boolean lastTrigs;
 
         private DevModeCheats() {
         }
@@ -2072,7 +2073,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
          */
         @Override
         public void addCardToHand() {
-            addCardToZone(ZoneType.Hand, false);
+            addCardToZone(ZoneType.Hand, false, false);
         }
 
         /*
@@ -2082,7 +2083,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
          */
         @Override
         public void addCardToBattlefield() {
-            addCardToZone(ZoneType.Battlefield, false);
+            addCardToZone(ZoneType.Battlefield, false, true);
         }
 
         /*
@@ -2092,7 +2093,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
          */
         @Override
         public void addCardToLibrary() {
-            addCardToZone(ZoneType.Library, false);
+            addCardToZone(ZoneType.Library, false, false);
         }
 
         /*
@@ -2102,7 +2103,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
          */
         @Override
         public void addCardToGraveyard() {
-            addCardToZone(ZoneType.Graveyard, false);
+            addCardToZone(ZoneType.Graveyard, false, false);
         }
 
         /*
@@ -2112,7 +2113,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
          */
         @Override
         public void addCardToExile() {
-            addCardToZone(ZoneType.Exile, false);
+            addCardToZone(ZoneType.Exile, false, false);
+        }
+
+        /*
+         * (non-Javadoc)
+         *
+        * @see forge.player.IDevModeCheats#addCardToExile()
+        */
+        @Override
+        public void castASpell() {
+            addCardToZone(ZoneType.Battlefield, false, false);
         }
 
         /*
@@ -2122,12 +2133,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
          */
         @Override
         public void repeatLastAddition() {
-            addCardToZone(null, true);
+            addCardToZone(null, true, lastTrigs);
         }
 
-        private void addCardToZone(ZoneType zone, final boolean repeatLast) {
+        private void addCardToZone(ZoneType zone, final boolean repeatLast, final boolean noTriggers) {
             final ZoneType targetZone = repeatLast ? lastAddedZone : zone;
-            String zoneStr = targetZone != ZoneType.Battlefield ? "in " + targetZone.name().toLowerCase() : "on the battlefield";
+            String zoneStr = targetZone != ZoneType.Battlefield ? "in " + targetZone.name().toLowerCase()
+                    : noTriggers ? "on the battlefield" : "on the stack / in play";
 
             final Player p = repeatLast ? lastAddedPlayer
                     : game.getPlayer(getGui().oneOrNone("Put card " + zoneStr + " for which player?",
@@ -2152,8 +2164,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             game.getAction().invoke(new Runnable() {
                 @Override
                 public void run() {
-                    if (targetZone != ZoneType.Battlefield) {
-                        game.getAction().moveTo(targetZone, forgeCard, null);
+                    if (targetZone != ZoneType.Battlefield || noTriggers) {
+                        if (forgeCard.isPermanent()) {
+                            game.getAction().moveTo(targetZone, forgeCard, null);
+                        } else {
+                            getGui().message("The chosen card is not a permanent.\nIf you'd like to cast a non-permanent spell, or if you'd like to cast a permanent spell (and place it on stack), please use the Cast Spell/Play Land button.", "Error");
+                            return;
+                        }
                     } else {
                         if (c.getRules().getType().isLand()) {
                             // this is needed to ensure land abilities fire
@@ -2193,6 +2210,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     lastAdded = f;
                     lastAddedZone = targetZone;
                     lastAddedPlayer = p;
+                    lastTrigs = noTriggers;
                 }
             });
         }

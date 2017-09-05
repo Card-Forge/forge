@@ -34,6 +34,8 @@ public interface IDevModeCheats {
 
     void addCardToExile();
 
+    void castASpell();
+
     void repeatLastAddition();
 
     /*
@@ -117,6 +119,9 @@ public interface IDevModeCheats {
         }
         @Override
         public void addCardToExile() {
+        }
+        @Override
+        public void castASpell() {
         }
         @Override
         public void repeatLastAddition() {

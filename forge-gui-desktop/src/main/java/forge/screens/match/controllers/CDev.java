@@ -40,6 +40,7 @@ public final class CDev implements ICDoc {
         view.getLblCardToLibrary().addMouseListener(madCardToLibrary);
         view.getLblCardToGraveyard().addMouseListener(madCardToGraveyard);
         view.getLblCardToExile().addMouseListener(madCardToExile);
+        view.getLblCastSpell().addMouseListener(madCastASpell);
         view.getLblRepeatAddCard().addMouseListener(madRepeatAddCard);
         view.getLblCounterPermanent().addMouseListener(madCounter);
         view.getLblTapPermanent().addMouseListener(madTap);
@@ -165,6 +166,16 @@ public final class CDev implements ICDoc {
     };
     public void addCardToExile() {
         getController().cheat().addCardToExile();
+    }
+
+    private final MouseListener madCastASpell = new MouseAdapter() {
+        @Override
+        public void mousePressed(final MouseEvent e) {
+            castASpell();
+        }
+    };
+    public void castASpell() {
+        getController().cheat().castASpell();
     }
 
     private final MouseListener madRepeatAddCard = new MouseAdapter() {

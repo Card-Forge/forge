@@ -44,7 +44,7 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
-        addItem(new FMenuItem("Add Card to Play", new FEventHandler() {
+        addItem(new FMenuItem("Add Card to Battlefield", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
@@ -84,6 +84,17 @@ public class VDevMenu extends FDropDownMenu {
                     @Override
                     public void run() {
                         MatchController.instance.getGameController().cheat().addCardToExile();
+                    }
+                });
+            }
+        }));
+        addItem(new FMenuItem("Cast Spell/Play Land", new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                ThreadUtil.invokeInGameThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        MatchController.instance.getGameController().cheat().castASpell();
                     }
                 });
             }
