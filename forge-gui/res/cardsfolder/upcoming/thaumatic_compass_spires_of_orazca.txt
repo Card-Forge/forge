@@ -1,0 +1,20 @@
+Name:Thaumatic Compass
+ManaCost:2
+Types:Artifact
+A:SP$ ChangeZone | Cost$ 3 T | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card and put that card into your hand, then shuffle your library.
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Land.YouCtrl | PresentCompare$ GE7 | Execute$ DBTransform | TriggerDescription$ At the beginning of your end step, if you control seven or more lands, transform Thaumatic Compass.
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thaumatic_compass.jpg
+Oracle:{3}, {T}: Search your library for a basic land card, put it into your hand, then shuffle your library.\nAt the beginning of your end step, if you control seven or more lands, transform Thaumatic Compass.
+
+ALTERNATE
+
+Name:Spires of Orazca
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 1 | SpellDescription$ Add {C} to your mana pool.
+A:AB$ Untap | Cost$ T | ValidTgts$ Creature.attacking+OppCtrl | TgtPrompt$ Select target attacking creature an opponent controls | SubAbility$ RemCombat | SpellDescription$ Untap target attacking creature an opponent controls and remove it from combat.
+SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Targeted
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spires_of_orazca.jpg
+Oracle:(Transforms from Thaumatic Compass.)\n{T}: Add {C} to your mana pool.\n{T}: Untap target attacking creature an opponent controls and remove it from combat.
