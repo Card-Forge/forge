@@ -1,0 +1,23 @@
+[metadata]
+Name:Possibility Storm - Amonkhet #09
+URL:http://www.possibilitystorm.com/wp-content/uploads/2017/08/AKH9.jpg
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description:Win this turn.
+[state]
+humanlife=7
+ailife=2
+activeplayer=human
+activephase=MAIN1
+humanhand=Swamp;Essence Extraction;Metallic Mimic;Warfire Javelineer;Bloodhall Priest
+humanlibrary=
+humangraveyard=
+humanbattlefield=Swamp;Swamp;Swamp;Mountain;Mountain;Mountain;Panharmonicon;Animation Module;Olivia, Mobilized for War
+humanexile=
+aibattlefield=Panharmonicon;Pilgrim's Eye|Counters:P1P1=4;Verdurous Gearhulk|Counters:P1P1=4
+aiprecast=Trespasser's Curse
+aihand=
+ailibrary=
+aigraveyard=
+aiexile=

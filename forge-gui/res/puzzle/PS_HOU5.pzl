@@ -1,0 +1,24 @@
+[metadata]
+Name:Possibility Storm - Hour of Devastation #05
+URL:http://www.possibilitystorm.com/wp-content/uploads/2017/08/socialmedia-HOU5.jpg
+Goal:Win
+Turns:1
+Difficulty:Medium
+Description:Win this turn.
+[state]
+humanlife=20
+ailife=14
+activeplayer=human
+activephase=MAIN1
+humanhand=Onward // Victory;Earthshaker Khenra;Reckless Bushwhacker;Bloodrage Brawler;Reality Hemorrhage
+humanlibrary=
+humangraveyard=
+humanbattlefield=Mountain|Set:AKH;Mountain|Set:AKH;Mountain|Set:AKH;Plains|Set:AKH;Plains|Set:AKH;Vizier of the True;Oketra's Avenger;Fervent Paincaster;Devoted Crop-Mate
+humanexile=
+humancommand=
+aihand=
+ailibrary=
+aigraveyard=
+aibattlefield=Aerial Responder;Aerial Responder;Aerial Responder;Gifted Aetherborn;Gifted Aetherborn;Gifted Aetherborn
+aiexile=
+aicommand=

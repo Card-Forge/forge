@@ -19600,6 +19600,8 @@ forge-gui/res/puzzle/PC_110315.pzl -text
 forge-gui/res/puzzle/PC_111015.pzl -text
 forge-gui/res/puzzle/PC_111715.pzl -text
 forge-gui/res/puzzle/PC_112415.pzl -text
+forge-gui/res/puzzle/PC_120815.pzl -text
+forge-gui/res/puzzle/PC_121515.pzl -text
 forge-gui/res/puzzle/PC_13.pzl -text
 forge-gui/res/puzzle/PC_18.pzl -text
 forge-gui/res/puzzle/PC_19.pzl -text
@@ -19651,6 +19653,15 @@ forge-gui/res/puzzle/PS_AKH5.pzl -text
 forge-gui/res/puzzle/PS_AKH6.pzl -text
 forge-gui/res/puzzle/PS_AKH7.pzl -text
 forge-gui/res/puzzle/PS_AKH8.pzl -text
+forge-gui/res/puzzle/PS_AKH9.pzl -text
+forge-gui/res/puzzle/PS_HOU0.pzl -text
+forge-gui/res/puzzle/PS_HOU1.pzl -text
+forge-gui/res/puzzle/PS_HOU2.pzl -text
+forge-gui/res/puzzle/PS_HOU3.pzl -text
+forge-gui/res/puzzle/PS_HOU4.pzl -text
+forge-gui/res/puzzle/PS_HOU5.pzl -text
+forge-gui/res/puzzle/PS_HOU6.pzl -text
+forge-gui/res/puzzle/PS_HOU7.pzl -text
 forge-gui/res/quest/bazaar/ape_pet_l1.txt -text
 forge-gui/res/quest/bazaar/ape_pet_l2.txt -text
 forge-gui/res/quest/bazaar/ape_pet_l3.txt -text
