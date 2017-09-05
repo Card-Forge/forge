@@ -2,6 +2,7 @@ package forge.screens.match.winlose;
 
 import java.util.List;
 
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Input.Keys;
@@ -127,9 +128,9 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         if (winner == null) {
             return "It's a draw!";
         } else if (winningTeam != -1) {
-            return String.format("Team %d won!", Integer.valueOf(winningTeam));
+            return TextUtil.concatNoSpace("Team ", String.valueOf(winningTeam), " won!");
         } else {
-            return String.format("%s won!", winner);
+            return TextUtil.concatNoSpace(winner, " won!");
         }
     }
 

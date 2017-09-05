@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Queue;
 
 import forge.game.GameActionUtil;
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.FThreads;
@@ -460,7 +461,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     @Override
     public String toString() {
-        return String.format("PayManaBase %s left", manaCost.toString());
+        return TextUtil.concatNoSpace("PayManaBase ", manaCost.toString(), " left");
     }
 
     public boolean isPaid() { return bPaid; }

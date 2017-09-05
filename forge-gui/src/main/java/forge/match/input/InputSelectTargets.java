@@ -55,16 +55,18 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             // sb.append(sa.getStackDescription().replace("(Targeting ERROR)", "")).append("\n").append(tgt.getVTSelection());
             // Apparently <b>...</b> tags do not work in mobile Forge, so don't include them (for now)
             sb.append(sa.getHostCard().toString()).append(" - ");
-            sb.append(sa.toString()).append("\n\n").append(tgt.getVTSelection());
+            sb.append(sa.toString()).append("\n");
+            if(!ForgeConstants.isGdxPortLandscape)
+                sb.append("\n");
+            sb.append(tgt.getVTSelection());
         } else {
             sb.append(sa.getHostCard()).append(" - ").append(tgt.getVTSelection());
         }
         if (!targetDepth.entrySet().isEmpty()) {
-            sb.append("\nTargeted:");
+                sb.append("\nTargeted: ");
         }
         for (final Entry<GameEntity, Integer> o : targetDepth.entrySet()) {
-            //if it's not in gdx port landscape mode, append the linebreak or it will make the android port
-            // display smaller fonts consecutively when targeting with multiple targets
+            //if it's not in gdx port landscape mode, append the linebreak
             if(!ForgeConstants.isGdxPortLandscape)
                 sb.append("\n");
             sb.append(o.getKey());

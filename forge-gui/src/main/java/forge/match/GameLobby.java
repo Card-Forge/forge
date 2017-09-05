@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
@@ -305,16 +306,16 @@ public abstract class GameLobby implements IHasGameType {
 
         for (final LobbySlot slot : activeSlots) {
             if (!slot.isReady() && slot.getType() != LobbySlotType.OPEN) {
-                SOptionPane.showMessageDialog(String.format("Player %s is not ready", slot.getName()));
+                SOptionPane.showMessageDialog(TextUtil.concatNoSpace("Player ", slot.getName(), " is not ready"));
                 return null;
             }
             if (slot.getDeck() == null) {
-                SOptionPane.showMessageDialog(String.format("Please specify a deck for %s", slot.getName()));
+                SOptionPane.showMessageDialog(TextUtil.concatNoSpace("Please specify a deck for ", slot.getName()));
                 return null;
             }
             if (hasVariant(GameType.Commander) || hasVariant(GameType.TinyLeaders)) {
                 if (!slot.getDeck().has(DeckSection.Commander)) {
-                    SOptionPane.showMessageDialog(String.format("%s doesn't have a commander", slot.getName()));
+                    SOptionPane.showMessageDialog(TextUtil.concatNoSpace(slot.getName(), " doesn't have a commander"));
                     return null;
                 }
             }

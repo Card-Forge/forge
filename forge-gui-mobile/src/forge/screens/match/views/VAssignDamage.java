@@ -39,6 +39,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.util.Callback;
+import forge.util.TextUtil;
 import forge.util.Utils;
 import forge.util.WaitCallback;
 
@@ -419,7 +420,8 @@ public class VAssignDamage extends FDialog {
             dt.label.setText(sb.toString());
         }
 
-        lblTotalDamage.setText(String.format("Available damage points: %d (of %d)", damageLeft, totalDamageToAssign));
+        lblTotalDamage.setText(TextUtil.concatNoSpace("Available damage points: ",
+                String.valueOf(damageLeft), " (of ", String.valueOf(totalDamageToAssign), ")"));
         setButtonEnabled(1, damageLeft == 0);
         lblAssignRemaining.setVisible(allHaveLethal && damageLeft > 0);
     }

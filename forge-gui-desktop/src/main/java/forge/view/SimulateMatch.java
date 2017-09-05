@@ -8,6 +8,7 @@ import forge.LobbyPlayer;
 import forge.deck.DeckGroup;
 import forge.properties.ForgeConstants;
 import forge.tournament.system.*;
+import forge.util.TextUtil;
 import forge.util.storage.IStorage;
 import org.apache.commons.lang3.text.WordUtils;
 import org.apache.commons.lang3.time.StopWatch;
@@ -102,13 +103,13 @@ public class SimulateMatch {
             for(String deck : params.get("d")) {
                 Deck d = deckFromCommandLineParameter(deck, type);
                 if (d == null) {
-                    System.out.println(String.format("Could not load deck - %s, match cannot start", deck));
+                    System.out.println(TextUtil.concatNoSpace("Could not load deck - ", deck, ", match cannot start"));
                     return;
                 }
                 if (i > 1) {
                     sb.append(" vs ");
                 }
-                String name = String.format("Ai(%s)-%s", i, d.getName());
+                String name = TextUtil.concatNoSpace("Ai(", String.valueOf(i), ")-", d.getName());
                 sb.append(name);
 
                 RegisteredPlayer rp;
@@ -195,7 +196,7 @@ public class SimulateMatch {
             for(String deck : params.get("d")) {
                 Deck d = deckFromCommandLineParameter(deck, rules.getGameType());
                 if (d == null) {
-                    System.out.println(String.format("Could not load deck - %s, match cannot start", deck));
+                    System.out.println(TextUtil.concatNoSpace("Could not load deck - ", deck, ", match cannot start"));
                     return;
                 }
 
@@ -220,7 +221,7 @@ public class SimulateMatch {
                 })) {
                     Deck d = DeckSerializer.fromFile(deck);
                     if (d == null) {
-                        System.out.println(String.format("Could not load deck - %s, match cannot start", deck.getName()));
+                        System.out.println(TextUtil.concatNoSpace("Could not load deck - ", deck.getName(), ", match cannot start"));
                         return;
                     }
                     deckGroup.addAiDeck(d);
@@ -251,16 +252,17 @@ public class SimulateMatch {
 
         String lastWinner = "";
         int curRound = 0;
-        System.out.println(String.format("Starting a %s tournament with %d players over %d rounds", tournament,
-                numPlayers, tourney.getTotalRounds()));
+        System.out.println(TextUtil.concatNoSpace("Starting a ", tournament, " tournament with ",
+                String.valueOf(numPlayers), " players over ",
+                String.valueOf(tourney.getTotalRounds()), " rounds"));
         while(!tourney.isTournamentOver()) {
             if (tourney.getActiveRound() != curRound) {
                 if (curRound != 0) {
-                    System.out.println(String.format("End Round - %d", curRound));
+                    System.out.println(TextUtil.concatNoSpace("End Round - ", String.valueOf(curRound)));
                 }
                 curRound = tourney.getActiveRound();
                 System.out.println("");
-                System.out.println(String.format("Round %d Pairings:", curRound));
+                System.out.println(TextUtil.concatNoSpace("Round ", String.valueOf(curRound) ," Pairings:"));
 
                 for(TournamentPairing pairing : tourney.getActivePairings()) {
                     System.out.println(pairing.outputHeader());
@@ -303,7 +305,7 @@ public class SimulateMatch {
                     if (winner.equals(tp.getPlayer())) {
                         pairing.setWinner(tp);
                         lastWinner = winner.getName();
-                        System.out.println(String.format("Match Winner - %s!", lastWinner));
+                        System.out.println(TextUtil.concatNoSpace("Match Winner - ", lastWinner, "!"));
                         System.out.println("");
                         break;
                     }

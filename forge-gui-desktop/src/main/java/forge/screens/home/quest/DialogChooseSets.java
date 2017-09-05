@@ -5,6 +5,7 @@ import forge.card.CardEdition;
 import forge.gui.SOverlayUtils;
 import forge.model.FModel;
 import forge.toolbox.*;
+import forge.util.TextUtil;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -43,7 +44,7 @@ public class DialogChooseSets {
 		for (CardEdition ce : editions) {
 
 			String code = ce.getCode();
-			FCheckBox box = new FCheckBox(String.format("%s (%s)", ce.getName(), code));
+			FCheckBox box = new FCheckBox(TextUtil.concatWithSpace(ce.getName(), TextUtil.enclosedParen(code)));
 
 			box.setName(code);
 			box.setSelected(null != preselectedSets && preselectedSets.contains(code));

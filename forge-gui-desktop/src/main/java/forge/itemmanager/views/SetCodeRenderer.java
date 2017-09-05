@@ -19,6 +19,7 @@ package forge.itemmanager.views;
 
 import forge.card.CardEdition;
 import forge.model.FModel;
+import forge.util.TextUtil;
 
 /**
  * A wrapper to show explanatory tooltips for edition set abbreviations.
@@ -41,6 +42,6 @@ public class SetCodeRenderer extends ItemCellRenderer {
             setFullName = editions.get(setAbbrev).getName();
         }
         
-        return String.format("%s (%s)", setFullName, setAbbrev);
+        return TextUtil.concatWithSpace(setFullName, TextUtil.enclosedParen(setAbbrev));
     }
 }

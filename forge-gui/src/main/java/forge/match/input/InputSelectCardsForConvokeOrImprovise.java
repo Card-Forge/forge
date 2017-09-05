@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import forge.util.TextUtil;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import forge.model.FModel;
@@ -51,7 +52,7 @@ public final class InputSelectCardsForConvokeOrImprovise extends InputSelectMany
 	     sa != null ) {
 	    sb.append(sa.getStackDescription()).append("\n");
 	}
-	sb.append(String.format("Choose %s to tap for %s .\nRemaining mana cost is %s", cardType, description, remainingCost.toString()));
+	sb.append(TextUtil.concatNoSpace("Choose ", cardType, " to tap for ", description, " .\nRemaining mana cost is ", remainingCost.toString()));
         return sb.toString();
     }
 
@@ -104,7 +105,7 @@ public final class InputSelectCardsForConvokeOrImprovise extends InputSelectMany
     @Override
     public String getActivateAction(final Card card) {
         if (availableCards.contains(card)) {
-            return String.format("tap %s for %s", cardType, description);
+            return TextUtil.concatNoSpace("tap ", cardType, " for ", description);
         }
         return null;
     }

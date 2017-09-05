@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableMap;
@@ -112,9 +113,9 @@ public class HostedMatch {
         });
 
         if (sortedPlayers.size() == 2) {
-            title = String.format("%s vs %s", sortedPlayers.get(0).getPlayer().getName(), sortedPlayers.get(1).getPlayer().getName());
+            title = TextUtil.concatNoSpace(sortedPlayers.get(0).getPlayer().getName(), " vs ", sortedPlayers.get(1).getPlayer().getName());
         } else {
-            title = String.format("Multiplayer Game (%d players)", sortedPlayers.size());
+            title = TextUtil.concatNoSpace("Multiplayer Game (", String.valueOf(sortedPlayers.size()), " players)");
         }
         this.match = new Match(gameRules, sortedPlayers, title);
         startGame();

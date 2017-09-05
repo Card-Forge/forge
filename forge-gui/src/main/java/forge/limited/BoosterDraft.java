@@ -31,6 +31,7 @@ import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.util.FileUtil;
 import forge.util.ItemPool;
+import forge.util.TextUtil;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
@@ -375,7 +376,7 @@ public class BoosterDraft implements IBoosterDraft {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 1; i <= packs; i++) {
-            String choice = SGuiChoose.oneOrNone(String.format("Choose set for Pack %d of %d", i, packs), setz);
+            String choice = SGuiChoose.oneOrNone(TextUtil.concatNoSpace("Choose set for Pack ", String.valueOf(i), " of ", String.valueOf(packs)), setz);
             if (choice == null) {
                 return null;
             }
@@ -392,61 +393,61 @@ public class BoosterDraft implements IBoosterDraft {
         final String[] sets = setz.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
         final List<String> setCombos = new ArrayList<>();
         if (sets.length >= 2) {
-            setCombos.add(String.format("%s/%s/%s", sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s/%s/%s", sets[0], sets[0], sets[1]));
-            setCombos.add(String.format("%s/%s/%s", sets[0], sets[1], sets[1]));
+            setCombos.add(TextUtil.concatNoSpace(sets[0], "/", sets[0], "/", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[0], "/", sets[0], "/", sets[1]));
+            setCombos.add(TextUtil.concatNoSpace(sets[0], "/", sets[1], "/", sets[1]));
             if (sets.length >= 3) {
-                setCombos.add(String.format("%s/%s/%s", sets[0], sets[1], sets[2]));
-                setCombos.add(String.format("%s/%s/%s", sets[0], sets[2], sets[2]));
+                setCombos.add(TextUtil.concatNoSpace(sets[0], "/", sets[1], "/", sets[2]));
+                setCombos.add(TextUtil.concatNoSpace(sets[0], "/", sets[2], "/", sets[2]));
             }
-            setCombos.add(String.format("%s/%s/%s", sets[1], sets[0], sets[0]));
-            setCombos.add(String.format("%s/%s/%s", sets[1], sets[1], sets[0]));
-            setCombos.add(String.format("%s/%s/%s", sets[1], sets[1], sets[1]));
+            setCombos.add(TextUtil.concatNoSpace(sets[1], "/", sets[0], "/", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[1], "/", sets[1], "/", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[1], "/", sets[1], "/", sets[1]));
             if (sets.length >= 3) {
-                setCombos.add(String.format("%s/%s/%s", sets[1], sets[1], sets[2]));
-                setCombos.add(String.format("%s/%s/%s", sets[1], sets[2], sets[2]));
+                setCombos.add(TextUtil.concatNoSpace(sets[1], "/", sets[1], "/", sets[2]));
+                setCombos.add(TextUtil.concatNoSpace(sets[1], "/", sets[2], "/", sets[2]));
             }
         }
         if (sets.length >= 3) {
-            setCombos.add(String.format("%s/%s/%s", sets[2], sets[1], sets[0]));
-            setCombos.add(String.format("%s/%s/%s", sets[2], sets[2], sets[0]));
-            setCombos.add(String.format("%s/%s/%s", sets[2], sets[2], sets[1]));
-            setCombos.add(String.format("%s/%s/%s", sets[2], sets[2], sets[2]));
+            setCombos.add(TextUtil.concatNoSpace(sets[2], "/", sets[1], "/", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[2], "/", sets[2], "/", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[2], "/", sets[2], "/", sets[1]));
+            setCombos.add(TextUtil.concatNoSpace(sets[2], "/", sets[2], "/", sets[2]));
         } // Beyond 3, skimp on the choice configurations, or the list will be enormous!
         if (sets.length >= 4) {
-            setCombos.add(String.format("%s/%s/%s", sets[3], sets[1], sets[0]));
-            setCombos.add(String.format("%s/%s/%s", sets[3], sets[2], sets[1]));
+            setCombos.add(TextUtil.concatNoSpace(sets[3], "/", sets[1], "/", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[3], "/", sets[2], "/", sets[1]));
         }
         if (sets.length >= 5) {
-            setCombos.add(String.format("%s/%s/%s", sets[4], sets[1], sets[0]));
-            setCombos.add(String.format("%s/%s/%s", sets[4], sets[3], sets[2]));
-            setCombos.add(String.format("%s/%s/%s", sets[4], sets[2], sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[4], "/", sets[1], "/", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[4], "/", sets[3], "/", sets[2]));
+            setCombos.add(TextUtil.concatNoSpace(sets[4], "/", sets[2], "/", sets[0]));
         }
         if (sets.length >= 6) {
-            setCombos.add(String.format("%s/%s/%s", sets[5], sets[1], sets[0]));
-            setCombos.add(String.format("%s/%s/%s", sets[5], sets[3], sets[2]));
-            setCombos.add(String.format("%s/%s/%s", sets[5], sets[4], sets[3]));
-            setCombos.add(String.format("%s/%s/%s", sets[5], sets[2], sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[5], "/", sets[1], "/", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[5], "/", sets[3], "/", sets[2]));
+            setCombos.add(TextUtil.concatNoSpace(sets[5], "/", sets[4], "/", sets[3]));
+            setCombos.add(TextUtil.concatNoSpace(sets[5], "/", sets[2], "/", sets[0]));
         }
         if (sets.length >= 7) {
-            setCombos.add(String.format("%s/%s/%s", sets[6], sets[1], sets[0]));
-            setCombos.add(String.format("%s/%s/%s", sets[6], sets[3], sets[2]));
-            setCombos.add(String.format("%s/%s/%s", sets[6], sets[5], sets[4]));
-            setCombos.add(String.format("%s/%s/%s", sets[6], sets[3], sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[6], "/", sets[1], "/", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[6], "/", sets[3], "/", sets[2]));
+            setCombos.add(TextUtil.concatNoSpace(sets[6], "/", sets[5], "/", sets[4]));
+            setCombos.add(TextUtil.concatNoSpace(sets[6], "/", sets[3], "/", sets[0]));
         }
         if (sets.length >= 8) {
-            setCombos.add(String.format("%s/%s/%s", sets[7], sets[1], sets[0]));
-            setCombos.add(String.format("%s/%s/%s", sets[7], sets[3], sets[2]));
-            setCombos.add(String.format("%s/%s/%s", sets[7], sets[5], sets[4]));
-            setCombos.add(String.format("%s/%s/%s", sets[7], sets[6], sets[5]));
-            setCombos.add(String.format("%s/%s/%s", sets[7], sets[3], sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[7], "/", sets[1], "/", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[7], "/", sets[3], "/", sets[2]));
+            setCombos.add(TextUtil.concatNoSpace(sets[7], "/", sets[5], "/", sets[4]));
+            setCombos.add(TextUtil.concatNoSpace(sets[7], "/", sets[6], "/", sets[5]));
+            setCombos.add(TextUtil.concatNoSpace(sets[7], "/", sets[3], "/", sets[0]));
         }
         if (sets.length >= 9) {
-            setCombos.add(String.format("%s/%s/%s", sets[8], sets[1], sets[0]));
-            setCombos.add(String.format("%s/%s/%s", sets[8], sets[3], sets[2]));
-            setCombos.add(String.format("%s/%s/%s", sets[8], sets[5], sets[4]));
-            setCombos.add(String.format("%s/%s/%s", sets[8], sets[7], sets[6]));
-            setCombos.add(String.format("%s/%s/%s", sets[8], sets[4], sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[8], "/", sets[1], "/", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[8], "/", sets[3], "/", sets[2]));
+            setCombos.add(TextUtil.concatNoSpace(sets[8], "/", sets[5], "/", sets[4]));
+            setCombos.add(TextUtil.concatNoSpace(sets[8], "/", sets[7], "/", sets[6]));
+            setCombos.add(TextUtil.concatNoSpace(sets[8], "/", sets[4], "/", sets[0]));
         }
         return setCombos;
     }

@@ -50,6 +50,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import forge.util.TextUtil;
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
@@ -479,7 +480,7 @@ public class ImportDialog {
                     selectedOptions.add(entry.getKey());
                 }
 
-                cb.setText(String.format("%s (%d)", cb.getName(), selection.getRight().size()));
+                cb.setText(TextUtil.concatWithSpace(cb.getName(), TextUtil.enclosedParen(String.valueOf(selection.getRight().size()))));
             }
 
             // asynchronously update the text in the op log, which may be many tens of thousands of lines long

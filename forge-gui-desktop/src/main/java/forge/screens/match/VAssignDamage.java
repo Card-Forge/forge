@@ -32,6 +32,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
+import forge.util.TextUtil;
 import net.miginfocom.swing.MigLayout;
 
 import com.google.common.collect.Lists;
@@ -409,7 +410,7 @@ public class VAssignDamage {
             dt.label.setText(sb.toString());
         }
 
-        lblTotalDamage.setText(String.format("Available damage points: %d (of %d)", damageLeft, totalDamageToAssign));
+        lblTotalDamage.setText(TextUtil.concatNoSpace("Available damage points: ", String.valueOf(damageLeft), " (of ", String.valueOf(totalDamageToAssign), ")"));
         btnOK.setEnabled(damageLeft == 0);
         lblAssignRemaining.setVisible(allHaveLethal && damageLeft > 0);
     }

@@ -280,146 +280,146 @@ public class SealedCardPoolGenerator {
 
         if (nPacks == 3) {
             if (sets.length >= 2) {
-                setCombos.add(String.format("%s, %s, %s", sets[0], sets[0], sets[0]));
-                setCombos.add(String.format("%s, %s, %s", sets[1], sets[0], sets[0]));
-                setCombos.add(String.format("%s, %s, %s", sets[1], sets[1], sets[0]));
-                setCombos.add(String.format("3 %s", sets[1]));
+                setCombos.add(TextUtil.concatNoSpace(sets[0], ", ", sets[0], ", ", sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[1], ", ", sets[0], ", ", sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[1], ", ", sets[1], ", ", sets[0]));
+                setCombos.add(TextUtil.concatNoSpace("3 ", sets[1]));
             }
             if (sets.length >= 3) {
-                setCombos.add(String.format("%s, %s, %s", sets[2], sets[0], sets[0]));
-                setCombos.add(String.format("%s, %s, %s", sets[0], sets[2], sets[0]));
-                setCombos.add(String.format("%s, %s, %s", sets[2], sets[2], sets[2]));
-                setCombos.add(String.format("%s, %s, %s", sets[2], sets[1], sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[2], ", ", sets[0], ", ", sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[0], ", ", sets[2], ", ", sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[2], ", ", sets[2], ", ", sets[2]));
+                setCombos.add(TextUtil.concatNoSpace(sets[2], ", ", sets[1], ", ", sets[0]));
             }
         }
         else if (nPacks == 4) {
             if (sets.length >= 2) {
-                setCombos.add(String.format("%s, %s, %s, %s", sets[0], sets[0], sets[0], sets[0]));
-                setCombos.add(String.format("%s, %s, %s, %s", sets[1], sets[0], sets[0], sets[0]));
-                setCombos.add(String.format("%s, %s, %s, %s", sets[1], sets[1], sets[0], sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[0], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[1], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[1], ", ", sets[1], ", ", sets[0], ", ", sets[0]));
             }
             if (sets.length >= 3) {
-                setCombos.add(String.format("%s, %s, %s, %s", sets[2], sets[2], sets[0], sets[0]));
-                setCombos.add(String.format("%s, %s, %s, %s", sets[2], sets[1], sets[0], sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[2], ", ", sets[2], ", ", sets[0], ", ", sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[2], ", ", sets[1], ", ", sets[0], ", ", sets[0]));
             }
             if (sets.length >= 4) {
-                setCombos.add(String.format("%s, %s, %s, %s", sets[3], sets[2], sets[1], sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[3], ", ", sets[2], ", ", sets[1], ", ", sets[0]));
             }
         }
         else if (nPacks == 5) {
             if (sets.length == 1 || !sets[0].equals(sets[1]) ) {
-                setCombos.add(String.format("5 %s", sets[0]));
+                setCombos.add(TextUtil.concatNoSpace("5 ", sets[0]));
             }
 
             if (sets.length >= 2 && !sets[0].equals(sets[1])) {
-                setCombos.add(String.format("3 %s, 2 %s", sets[0], sets[1]));
-                setCombos.add(String.format("2 %s, 3 %s", sets[0], sets[1]));
+                setCombos.add(TextUtil.concatNoSpace("3 ", sets[0], ", 2 ", sets[1]));
+                setCombos.add(TextUtil.concatNoSpace("2 ", sets[0], ", 3 ", sets[1]));
             }
             if (sets.length >= 3 && !sets[0].equals(sets[2])) {
-                setCombos.add(String.format("3 %s, 2 %s", sets[0], sets[2]));
-                setCombos.add(String.format("3 %s, %s, %s", sets[0], sets[1], sets[2]));
-                setCombos.add(String.format("2 %s, 2 %s, %s", sets[0], sets[1], sets[2]));
+                setCombos.add(TextUtil.concatNoSpace("3 ", sets[0], ", 2 ", sets[2]));
+                setCombos.add(TextUtil.concatNoSpace("3 ", sets[0], ", ", sets[1], ", ", sets[2]));
+                setCombos.add(TextUtil.concatNoSpace("2 ", sets[0], ", 2 ", sets[1], ", ", sets[2]));
             }
             if (sets.length >= 4) {
                 if( sets[1].equals(sets[2]) && sets[1].equals(sets[0])) {
-                    setCombos.add(String.format("%s, 4 %s", sets[3], sets[0])); // for guild sealed
+                    setCombos.add(TextUtil.concatNoSpace(sets[3], ", 4 ", sets[0])); // for guild sealed
                 } else {
-                    setCombos.add(String.format("%s, %s, %s, 2 %s", sets[3], sets[2], sets[1], sets[0]));
+                    setCombos.add(TextUtil.concatNoSpace(sets[3], ", ", sets[2], ", ", sets[1], ", 2 ", sets[0]));
                 }
             }
             if (sets.length >= 5) {
-                setCombos.add(String.format("%s, %s, %s, %s, %s", sets[4], sets[3], sets[2], sets[1], sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[4], ", ", sets[3], ", ", sets[2], ", ", sets[1], ", ", sets[0]));
             }
         }
         else if (nPacks == 7 && (sets.length == 4 || sets.length >= 7)) {
             // Sorry. This whole function is awful, it really needs to be rewritten to just generate permutations
             if (sets.length >= 7) {
-                setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[6], sets[5], sets[4], sets[3], sets[2], sets[1], sets[0]));
-                setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[5], sets[4], sets[3], sets[2], sets[1], sets[0], sets[0]));
-                setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[4], sets[3], sets[2], sets[1], sets[1], sets[0], sets[0]));
-                setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[4], sets[3], sets[2], sets[1], sets[0], sets[0], sets[0]));
-                setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[3], sets[2], sets[2], sets[1], sets[1], sets[0], sets[0]));
-                setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[3], sets[2], sets[1], sets[1], sets[0], sets[0], sets[0]));
-                setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[3], sets[2], sets[1], sets[0], sets[0], sets[0], sets[0]));
-                setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[2], sets[2], sets[1], sets[1], sets[0], sets[0], sets[0]));
-                setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[2], sets[1], sets[1], sets[0], sets[0], sets[0], sets[0]));
-                setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[2], sets[2], sets[2], sets[0], sets[0], sets[0], sets[0]));
-                setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[1], sets[1], sets[1], sets[0], sets[0], sets[0], sets[0]));
-                setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s", sets[0], sets[0], sets[0], sets[0], sets[0], sets[0], sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[6], ", ", sets[5], ", ", sets[4], ", ", sets[3], ", ", sets[2], ", ", sets[1], ", ", sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[5], ", ", sets[4], ", ", sets[3], ", ", sets[2], ", ", sets[1], ", ", sets[0], ", ", sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[4], ", ", sets[3], ", ", sets[2], ", ", sets[1], ", ", sets[1], ", ", sets[0], ", ", sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[4], ", ", sets[3], ", ", sets[2], ", ", sets[1], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[3], ", ", sets[2], ", ", sets[2], ", ", sets[1], ", ", sets[1], ", ", sets[0], ", ", sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[3], ", ", sets[2], ", ", sets[1], ", ", sets[1], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[3], ", ", sets[2], ", ", sets[1], ", ", sets[0], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[2], ", ", sets[2], ", ", sets[1], ", ", sets[1], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[2], ", ", sets[1], ", ", sets[1], ", ", sets[0], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[2], ", ", sets[2], ", ", sets[2], ", ", sets[0], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[1], ", ", sets[1], ", ", sets[1], ", ", sets[0], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[0], ", ", sets[0], ", ", sets[0], ", ", sets[0], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
             } else if (sets.length == 4) {
                 if( sets[1].equals(sets[2]) && sets[1].equals(sets[0])) {
-                    setCombos.add(String.format("%s, 6 %s", sets[3], sets[0])); // for origins sealed
+                    setCombos.add(TextUtil.concatNoSpace(sets[3], ", 6 ", sets[0])); // for origins sealed
                 } else {
-                    setCombos.add(String.format("%s, 2 %s, 2 %s, 2 %s", sets[3], sets[2], sets[1], sets[0]));
+                    setCombos.add(TextUtil.concatNoSpace(sets[3], ", 2 ", sets[2], ", 2 ", sets[1], ", 2 ", sets[0]));
                 }
             }
         }
         else if (nPacks == 8 && sets.length >= 8) {
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s", sets[7], sets[6], sets[5], sets[4], sets[3], sets[2], sets[1], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s", sets[6], sets[5], sets[4], sets[3], sets[2], sets[1], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s", sets[5], sets[4], sets[3], sets[2], sets[1], sets[1], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s", sets[5], sets[4], sets[3], sets[2], sets[1], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s", sets[4], sets[3], sets[2], sets[2], sets[1], sets[1], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s", sets[4], sets[3], sets[2], sets[1], sets[1], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s", sets[4], sets[3], sets[2], sets[1], sets[0], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s", sets[3], sets[3], sets[2], sets[2], sets[1], sets[1], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s", sets[3], sets[2], sets[2], sets[1], sets[1], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s", sets[3], sets[2], sets[1], sets[1], sets[0], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s", sets[3], sets[2], sets[1], sets[0], sets[0], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s", sets[2], sets[2], sets[1], sets[1], sets[0], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s", sets[2], sets[2], sets[2], sets[2], sets[0], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s", sets[1], sets[1], sets[1], sets[1], sets[0], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s", sets[0], sets[0], sets[0], sets[0], sets[0], sets[0], sets[0], sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[7], ", ", sets[6], ", ", sets[5], ", ", sets[4], ", ", sets[3], ", ", sets[2], ", ", sets[1], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[6], ", ", sets[5], ", ", sets[4], ", ", sets[3], ", ", sets[2], ", ", sets[1], ", ", sets[0], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[5], ", ", sets[4], ", ", sets[3], ", ", sets[2], ", ", sets[1], ", ", sets[1], ", ", sets[0], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[5], ", ", sets[4], ", ", sets[3], ", ", sets[2], ", ", sets[1], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[4], ", ", sets[3], ", ", sets[2], ", ", sets[2], ", ", sets[1], ", ", sets[1], ", ", sets[0], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[4], ", ", sets[3], ", ", sets[2], ", ", sets[1], ", ", sets[1], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[4], ", ", sets[3], ", ", sets[2], ", ", sets[1], ", ", sets[0], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[3], ", ", sets[3], ", ", sets[2], ", ", sets[2], ", ", sets[1], ", ", sets[1], ", ", sets[0], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[3], ", ", sets[2], ", ", sets[2], ", ", sets[1], ", ", sets[1], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[3], ", ", sets[2], ", ", sets[1], ", ", sets[1], ", ", sets[0], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[3], ", ", sets[2], ", ", sets[1], ", ", sets[0], ", ", sets[0], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[2], ", ", sets[2], ", ", sets[1], ", ", sets[1], ", ", sets[0], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[2], ", ", sets[2], ", ", sets[2], ", ", sets[2], ", ", sets[0], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[1], ", ", sets[1], ", ", sets[1], ", ", sets[1], ", ", sets[0], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[0], ", ", sets[0], ", ", sets[0], ", ", sets[0], ", ", sets[0], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
         }
         else if (nPacks == 9 && sets.length >= 9) {
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s", sets[8], sets[7], sets[6], sets[5], sets[4], sets[3], sets[2], sets[1], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s", sets[7], sets[6], sets[5], sets[4], sets[3], sets[2], sets[1], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s", sets[6], sets[5], sets[4], sets[3], sets[2], sets[1], sets[1], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s", sets[6], sets[5], sets[4], sets[3], sets[2], sets[1], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s", sets[4], sets[3], sets[3], sets[2], sets[2], sets[1], sets[1], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s", sets[4], sets[3], sets[2], sets[2], sets[1], sets[1], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s", sets[4], sets[3], sets[2], sets[1], sets[1], sets[1], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s", sets[4], sets[3], sets[2], sets[2], sets[1], sets[1], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s", sets[4], sets[3], sets[2], sets[1], sets[1], sets[0], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s", sets[4], sets[3], sets[2], sets[1], sets[0], sets[0], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s", sets[3], sets[3], sets[2], sets[2], sets[1], sets[1], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s", sets[3], sets[2], sets[2], sets[1], sets[1], sets[1], sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s, %s, 2 %s, 5 %s", sets[3], sets[2], sets[1], sets[0]));
-            setCombos.add(String.format("3 %s, 3 %s, 3 %s", sets[2], sets[1], sets[0]));
-            setCombos.add(String.format("2 %s, 2 %s, 5 %s", sets[2], sets[1], sets[0]));
-            setCombos.add(String.format("%s, %s, 7 %s", sets[2], sets[1], sets[0]));
-            setCombos.add(String.format("4 %s, 5 %s", sets[2], sets[0]));
-            setCombos.add(String.format("4 %s, 5 %s", sets[1], sets[0]));
-            setCombos.add(String.format("9 %s", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[8], ", ", sets[7], ", ", sets[6], ", ", sets[5], ", ", sets[4], ", ", sets[3], ", ", sets[2], ", ", sets[1], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[7], ", ", sets[6], ", ", sets[5], ", ", sets[4], ", ", sets[3], ", ", sets[2], ", ", sets[1], ", ", sets[0], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[6], ", ", sets[5], ", ", sets[4], ", ", sets[3], ", ", sets[2], ", ", sets[1], ", ", sets[1], ", ", sets[0], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[6], ", ", sets[5], ", ", sets[4], ", ", sets[3], ", ", sets[2], ", ", sets[1], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[4], ", ", sets[3], ", ", sets[3], ", ", sets[2], ", ", sets[2], ", ", sets[1], ", ", sets[1], ", ", sets[0], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[4], ", ", sets[3], ", ", sets[2], ", ", sets[2], ", ", sets[1], ", ", sets[1], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[4], ", ", sets[3], ", ", sets[2], ", ", sets[1], ", ", sets[1], ", ", sets[1], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[4], ", ", sets[3], ", ", sets[2], ", ", sets[2], ", ", sets[1], ", ", sets[1], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[4], ", ", sets[3], ", ", sets[2], ", ", sets[1], ", ", sets[1], ", ", sets[0], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[4], ", ", sets[3], ", ", sets[2], ", ", sets[1], ", ", sets[0], ", ", sets[0], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[3], ", ", sets[3], ", ", sets[2], ", ", sets[2], ", ", sets[1], ", ", sets[1], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[3], ", ", sets[2], ", ", sets[2], ", ", sets[1], ", ", sets[1], ", ", sets[1], ", ", sets[0], ", ", sets[0], ", ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[3], ", ", sets[2], ", 2 ", sets[1], ", 5 ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace("3 ", sets[2], ", 3 ", sets[1], ", 3 ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace("2 ", sets[2], ", 2 ", sets[1], ", 5 ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace(sets[2], ", ", sets[1], ", 7 ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace("4 ", sets[2], ", 5 ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace("4 ", sets[1], ", 5 ", sets[0]));
+            setCombos.add(TextUtil.concatNoSpace("9 ", sets[0]));
         }
         else { // Default to 6 packs
             if (sets.length == 1 || !sets[0].equals(sets[1]) ) {
-                setCombos.add(String.format("6 %s", sets[0]));
+                setCombos.add(TextUtil.concatNoSpace("6 ", sets[0]));
             }
 
             if (sets.length >= 2 && !sets[0].equals(sets[1])) {
-                setCombos.add(String.format("4 %s, 2 %s", sets[0], sets[1]));
-                setCombos.add(String.format("3 %s, 3 %s", sets[0], sets[1]));
-                setCombos.add(String.format("2 %s, 4 %s", sets[0], sets[1]));
+                setCombos.add(TextUtil.concatNoSpace("4 ", sets[0], ", 2 ", sets[1]));
+                setCombos.add(TextUtil.concatNoSpace("3 ", sets[0], ", 3 ", sets[1]));
+                setCombos.add(TextUtil.concatNoSpace("2 ", sets[0], ", 4 ", sets[1]));
             }
             if (sets.length >= 3 && !sets[0].equals(sets[2])) {
-                setCombos.add(String.format("3 %s, 3 %s", sets[0], sets[2]));
-                setCombos.add(String.format("2 %s, 2 %s, 2 %s", sets[0], sets[1], sets[2]));
+                setCombos.add(TextUtil.concatNoSpace("3 ", sets[0], ", 3 ", sets[2]));
+                setCombos.add(TextUtil.concatNoSpace("2 ", sets[0], ", 2 ", sets[1], ", 2 ", sets[2]));
             }
             if (sets.length >= 4) {
                 if ( sets[1].equals(sets[2]) && sets[1].equals(sets[0])) {
-                    setCombos.add(String.format("%s, 5 %s", sets[3], sets[0])); // for guild sealed
+                    setCombos.add(TextUtil.concatNoSpace(sets[3], ", 5 ", sets[0])); // for guild sealed
                 }
                 else {
-                    setCombos.add(String.format("%s, %s, %s, 3 %s", sets[3], sets[2], sets[1], sets[0]));
-                    setCombos.add(String.format("%s, %s, 2 %s, 2 %s", sets[3], sets[2], sets[1], sets[0]));
+                    setCombos.add(TextUtil.concatNoSpace(sets[3], ", ", sets[2], ", ", sets[1], ", 3 ", sets[0]));
+                    setCombos.add(TextUtil.concatNoSpace(sets[3], ", ", sets[2], ", 2 ", sets[1], ", 2 ", sets[0]));
                 }
             }
             if (sets.length >= 5) {
-                setCombos.add(String.format("%s, %s, %s, %s, 2 %s", sets[4], sets[3], sets[2], sets[1], sets[0]));
+                setCombos.add(TextUtil.concatNoSpace(sets[4], ", ", sets[3], ", ", sets[2], ", ", sets[1], ", 2 ", sets[0]));
             }
             if (sets.length >= 6) {
-                setCombos.add(String.format("%s, %s, %s, %s, %s, %s", sets[5], sets[4], sets[3], sets[2], sets[1], sets[0]));
+                setCombos.add(TextUtil.concatNoSpace( sets[5], ", ", sets[4], ", ", sets[3], ", ", sets[2], ", ", sets[1], ", ", sets[0]));
             }
         }
         return setCombos;

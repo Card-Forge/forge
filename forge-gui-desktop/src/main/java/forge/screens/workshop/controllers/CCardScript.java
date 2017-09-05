@@ -29,6 +29,7 @@ import forge.screens.workshop.views.VCardDesigner;
 import forge.screens.workshop.views.VCardScript;
 import forge.screens.workshop.views.VWorkshopCatalog;
 import forge.toolbox.FOptionPane;
+import forge.util.TextUtil;
 
 /**
  * Controls the "card script" panel in the workshop UI.
@@ -127,7 +128,7 @@ public enum CCardScript implements ICDoc {
         switchInProgress = true;
         Singletons.getControl().ensureScreenActive(FScreen.WORKSHOP_SCREEN); //ensure Workshop is active before showing dialog
         final int choice = FOptionPane.showOptionDialog(
-                String.format("Save changes to %s?", currentCard),
+                TextUtil.concatNoSpace("Save changes to ", currentCard.toString(), "?"),
                 "Save Changes?",
                 FOptionPane.QUESTION_ICON,
                 switchAwayOptions);

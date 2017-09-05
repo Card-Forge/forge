@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
+import forge.util.TextUtil;
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
@@ -216,9 +217,9 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         if (winner == null || winner.isEmpty()) {
             return "It's a draw!";
         } else if (winningTeam != -1) {
-            return String.format("Team %d won!", Integer.valueOf(winningTeam));
+            return TextUtil.concatNoSpace("Team ", String.valueOf(winningTeam), " won!");
         } else {
-            return String.format("%s won!", winner);
+            return TextUtil.concatNoSpace(winner, " won!");
         }
     }
 
