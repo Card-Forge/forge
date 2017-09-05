@@ -50,6 +50,7 @@ public enum TriggerType {
     Evolved(TriggerEvolved.class),
     Exerted(TriggerExerted.class),
     Exploited(TriggerExploited.class),
+    Explores(TriggerExplores.class),
     Fight(TriggerFight.class),
     FlippedCoin(TriggerFlippedCoin.class),
     Investigated(TriggerInvestigated.class),
