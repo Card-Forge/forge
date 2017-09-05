@@ -700,20 +700,28 @@ public abstract class GameState {
                 }
             } else {
                 // SVar-based script execution
-                if (!c.hasSVar(sPtr)) {
-                    System.err.println("ERROR: Unable to find SVar " + sPtr + " on card " + c + " + to execute!");
-                    return;
-                }
+                String svarValue = "";
 
-                String svarValue = c.getSVar(sPtr);
+                if (sPtr.startsWith("CustomScript:")) {
+                    // A custom line defined in the game state file
+                    svarValue = sPtr.substring(sPtr.indexOf(":") + 1);
+                } else {
+                    // A SVar from the card script file
+                    if (!c.hasSVar(sPtr)) {
+                        System.err.println("ERROR: Unable to find SVar " + sPtr + " on card " + c + " + to execute!");
+                        return;
+                    }
 
-                if (tgtID != TARGET_NONE && svarValue.contains("| Defined$")) {
-                    // We want a specific target, so try to undefine a predefined target if possible
-                    svarValue = svarValue.replace("| Defined$", "| Undefined$");
-                    if (tgtID == TARGET_HUMAN || tgtID == TARGET_AI) {
-                        svarValue += " | ValidTgts$ Player";
-                    } else {
-                        svarValue += " | ValidTgts$ Card";
+                    svarValue = c.getSVar(sPtr);
+
+                    if (tgtID != TARGET_NONE && svarValue.contains("| Defined$")) {
+                        // We want a specific target, so try to undefine a predefined target if possible
+                        svarValue = svarValue.replace("| Defined$", "| Undefined$");
+                        if (tgtID == TARGET_HUMAN || tgtID == TARGET_AI) {
+                            svarValue += " | ValidTgts$ Player";
+                        } else {
+                            svarValue += " | ValidTgts$ Card";
+                        }
                     }
                 }
 
