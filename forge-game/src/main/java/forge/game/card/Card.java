@@ -1538,8 +1538,14 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.append("exile it haunting target creature.");
                 }
                 sb.append(")");
-            } else if (keyword.equals("Convoke") || keyword.equals("Dethrone")
-                     || keyword.equals("Melee") || keyword.equals("Improvise")) {
+            } else if (keyword.equals("Convoke") || keyword.equals("Dethrone")|| keyword.equals("Cascade")
+                     || keyword.equals("Melee") || keyword.equals("Improvise")|| keyword.equals("Conspire")
+                     || keyword.equals("Devoid") || keyword.equals("Epic")|| keyword.equals("Evolve")
+                     || keyword.equals("Exalted") || keyword.equals("Extort")|| keyword.equals("Flanking")
+                     || keyword.equals("Horsemanship") || keyword.equals("Infect")|| keyword.equals("Persist")
+                     || keyword.equals("Phasing") || keyword.equals("Shadow")|| keyword.equals("Skulk")
+                     || keyword.equals("Sunburst") || keyword.equals("Undying")|| keyword.equals("Wither")
+                     || keyword.equals("Fear") || keyword.equals("Intimidate")|| keyword.equals("Banding"))  {
                 if (sb.length() != 0) {
                     sb.append("\r\n");
                 }
