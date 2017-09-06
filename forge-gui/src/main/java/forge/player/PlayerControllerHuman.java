@@ -2164,47 +2164,51 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             game.getAction().invoke(new Runnable() {
                 @Override
                 public void run() {
-                    if (targetZone != ZoneType.Battlefield || noTriggers) {
-                        if (targetZone != ZoneType.Battlefield || forgeCard.isPermanent()) {
-                            game.getAction().moveTo(targetZone, forgeCard, null);
-                        } else {
-                            getGui().message("The chosen card is not a permanent.\nIf you'd like to cast a non-permanent spell, or if you'd like to cast a permanent spell (and place it on stack), please use the Cast Spell/Play Land button.", "Error");
-                            return;
-                        }
+                    if (targetZone != ZoneType.Battlefield) {
+                        game.getAction().moveTo(targetZone, forgeCard, null);
                     } else {
-                        if (c.getRules().getType().isLand()) {
-                            // this is needed to ensure land abilities fire
-                            game.getAction().moveToHand(forgeCard, null);
-                            game.getAction().moveToPlay(forgeCard, null);
-                            // ensure triggered abilities fire
-                            game.getTriggerHandler().runWaitingTriggers();
-                        } else {
-                            final FCollectionView<SpellAbility> choices = forgeCard.getBasicSpells();
-                            if (choices.isEmpty()) {
-                                return; // when would it happen?
-                            }
-
-                            final SpellAbility sa;
-                            if (choices.size() == 1) {
-                                sa = choices.iterator().next();
+                        if (noTriggers) {
+                            if (forgeCard.isPermanent()) {
+                                game.getAction().moveTo(targetZone, forgeCard, null);
                             } else {
-                                sa = repeatLast ? lastAddedSA : getGui().oneOrNone("Choose", (FCollection<SpellAbility>) choices);
+                                getGui().message("The chosen card is not a permanent.\nIf you'd like to cast a non-permanent spell, or if you'd like to cast a permanent spell (and place it on stack), please use the Cast Spell/Play Land button.", "Error");
+                                return;
                             }
-                            if (sa == null) {
-                                return; // happens if cancelled
+                        } else {
+                            if (c.getRules().getType().isLand()) {
+                                // this is needed to ensure land abilities fire
+                                game.getAction().moveToHand(forgeCard, null);
+                                game.getAction().moveToPlay(forgeCard, null);
+                                // ensure triggered abilities fire
+                                game.getTriggerHandler().runWaitingTriggers();
+                            } else {
+                                final FCollectionView<SpellAbility> choices = forgeCard.getBasicSpells();
+                                if (choices.isEmpty()) {
+                                    return; // when would it happen?
+                                }
+
+                                final SpellAbility sa;
+                                if (choices.size() == 1) {
+                                    sa = choices.iterator().next();
+                                } else {
+                                    sa = repeatLast ? lastAddedSA : getGui().oneOrNone("Choose", (FCollection<SpellAbility>) choices);
+                                }
+                                if (sa == null) {
+                                    return; // happens if cancelled
+                                }
+
+                                lastAddedSA = sa;
+
+                                // this is really needed (for rollbacks at least)
+                                game.getAction().moveToHand(forgeCard, null);
+                                // Human player is choosing targets for an ability
+                                // controlled by chosen player.
+                                sa.setActivatingPlayer(p);
+                                HumanPlay.playSaWithoutPayingManaCost(PlayerControllerHuman.this, game, sa, true);
                             }
-
-                            lastAddedSA = sa;
-
-                            // this is really needed (for rollbacks at least)
-                            game.getAction().moveToHand(forgeCard, null);
-                            // Human player is choosing targets for an ability
-                            // controlled by chosen player.
-                            sa.setActivatingPlayer(p);
-                            HumanPlay.playSaWithoutPayingManaCost(PlayerControllerHuman.this, game, sa, true);
+                            // playSa could fire some triggers
+                            game.getStack().addAllTriggeredAbilitiesToStack();
                         }
-                        // playSa could fire some triggers
-                        game.getStack().addAllTriggeredAbilitiesToStack();
                     }
 
                     lastAdded = f;
