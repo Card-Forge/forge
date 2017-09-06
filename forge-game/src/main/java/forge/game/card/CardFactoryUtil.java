@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Forge: Play Magic: the Gathering.
  * Copyright (C) 2011  Forge Team
  *
@@ -249,7 +249,7 @@ public class CardFactoryUtil {
             }
         };
         final StringBuilder sbDesc = new StringBuilder();
-        sbDesc.append("Suspend ").append(timeCounters).append(" - ").append(cost.toSimpleString());
+        sbDesc.append("Suspend ").append(timeCounters).append("—").append(cost.toSimpleString());
         sbDesc.append(" (Rather than cast CARDNAME from your hand, you may pay cost and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)");
         suspend.setDescription(sbDesc.toString());
 
@@ -3630,7 +3630,7 @@ public class CardFactoryUtil {
 
             awakenSub.setSubAbility(animateSub);
             awakenSpell.appendSubAbility(awakenSub);
-            String desc = "Awaken " + counters + " — " + awakenCost.toSimpleString() +
+            String desc = "Awaken " + counters + "—" + awakenCost.toSimpleString() +
                     " (" + Keyword.getInstance(keyword).getReminderText() + ")";
             awakenSpell.setDescription(desc);
             awakenSpell.setBasicSpell(false);
