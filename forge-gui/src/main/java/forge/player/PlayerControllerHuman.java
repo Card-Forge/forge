@@ -2165,7 +2165,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 @Override
                 public void run() {
                     if (targetZone != ZoneType.Battlefield || noTriggers) {
-                        if (forgeCard.isPermanent()) {
+                        if (targetZone != ZoneType.Battlefield || forgeCard.isPermanent()) {
                             game.getAction().moveTo(targetZone, forgeCard, null);
                         } else {
                             getGui().message("The chosen card is not a permanent.\nIf you'd like to cast a non-permanent spell, or if you'd like to cast a permanent spell (and place it on stack), please use the Cast Spell/Play Land button.", "Error");
