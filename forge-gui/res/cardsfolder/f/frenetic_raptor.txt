@@ -1,6 +1,6 @@
 Name:Frenetic Raptor
 ManaCost:5 R
-Types:Creature Lizard Beast
+Types:Creature Dinosaur Beast
 PT:6/6
 S:Mode$ Continuous | Affected$ Creature.Beast | AddHiddenKeyword$ CARDNAME can't block. | Description$ Beasts can't block.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frenetic_raptor.jpg

@@ -1,6 +1,6 @@
 Name:Shivan Raptor
 ManaCost:2 R
-Types:Creature Lizard
+Types:Creature Dinosaur
 PT:3/1
 K:First Strike
 K:Haste

@@ -1,6 +1,6 @@
 Name:Putrid Raptor
 ManaCost:4 B B
-Types:Creature Zombie Lizard Beast
+Types:Creature Zombie Dinosaur Beast
 PT:4/4
 K:Morph:Discard<1/Zombie>
 SVar:Picture:http://www.wizards.com/global/images/magic/general/putrid_raptor.jpg
