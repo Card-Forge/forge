@@ -928,6 +928,7 @@ public class AiAttackController {
                 && defendingOpponent != null
                 && ComputerUtil.countUsefulCreatures(ai) > ComputerUtil.countUsefulCreatures(defendingOpponent)
                 && ai.getLife() > defendingOpponent.getLife()
+                && !ComputerUtilCombat.lifeInDanger(ai, combat)
                 && (ComputerUtilMana.getAvailableManaEstimate(ai) > 0) || tradeIfTappedOut
                 && (ComputerUtilMana.getAvailableManaEstimate(defendingOpponent) == 0) || MyRandom.percentTrue(extraChanceIfOppHasMana)) {
             this.aiAggression = 4; // random (chance-based) attack expecting to trade or damage player.
