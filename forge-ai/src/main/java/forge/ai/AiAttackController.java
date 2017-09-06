@@ -1126,14 +1126,19 @@ public class AiAttackController {
                             }
                         }
 
-                        // We can't kill a blocker, there is no reason to attack unless we can cripple a
-                        // blocker or gain life from attacking or we have some kind of another attack/combat effect,
-                        // or if we can deal damage to the opponent via the sheer number of potential attackers
-                        // (note that the AI will sometimes still miscount here, and thus attack into a block,
-                        // because there is no way to check which attackers are actually guaranteed to attack at this point)
                         if (canKillAllDangerous && !hasAttackEffect && !hasCombatEffect && this.attackers.size() <= defenders.size()) {
-                            canKillAllDangerous = false;
+                            if (ai.getController().isAI()) {
+                                if (((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.TRY_TO_AVOID_ATTACKING_INTO_CERTAIN_BLOCK)) {
+                                    // We can't kill a blocker, there is no reason to attack unless we can cripple a
+                                    // blocker or gain life from attacking or we have some kind of another attack/combat effect,
+                                    // or if we can deal damage to the opponent via the sheer number of potential attackers
+                                    // (note that the AI will sometimes still miscount here, and thus attack into a block,
+                                    // because there is no way to check which attackers are actually guaranteed to attack at this point)
+                                    canKillAllDangerous = false;
+                                }
+                            }
                         }
+
                     }
                 }
             }
