@@ -1125,6 +1125,12 @@ public class AiAttackController {
                                 // and combat will have negative effects
                             }
                         }
+
+                        // We can't kill a single blocker, there is no reason to attack unless we can cripple a
+                        // blocker or gain life from attacking or we have some kind of another attack/combat effect
+                        if (canKillAllDangerous && !hasAttackEffect && !hasCombatEffect) {
+                            canKillAllDangerous = false;
+                        }
                     }
                 }
             }
