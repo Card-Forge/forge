@@ -536,6 +536,7 @@ public class AiBlockController {
         boolean enableRandomTrades = false;
         boolean randomTradeIfBehindOnBoard = false;
         boolean randomTradeIfCreatInHand = false;
+        int chanceToTradeToSaveWalker = 0;
         int minRandomTradeChance = 0;
         int maxRandomTradeChance = 0;
         int maxCreatDiff = 0;
@@ -551,13 +552,11 @@ public class AiBlockController {
             maxRandomTradeChance = aic.getIntProperty(AiProps.MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
             maxCreatDiff = aic.getIntProperty(AiProps.MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE);
             maxCreatDiffWithRepl = aic.getIntProperty(AiProps.MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE_WITH_REPL);
+            chanceToTradeToSaveWalker = aic.getIntProperty(AiProps.CHANCE_TO_TRADE_TO_SAVE_PLANESWALKER);
         }
 
         if (enableRandomTrades) {
             aiCreatureCount = ComputerUtil.countUsefulCreatures(ai);
-            if (randomTradeIfBehindOnBoard) {
-                aiCreatureCount += maxCreatDiff;
-            }
 
             if (!attackersLeft.isEmpty()) {
                 oppCreatureCount = ComputerUtil.countUsefulCreatures(attackersLeft.get(0).getController());
@@ -609,11 +608,14 @@ public class AiBlockController {
                     boolean wantToTradeWithCreatInHand = randomTradeIfCreatInHand
                             && !CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.CREATURES).isEmpty()
                             && aiCreatureCount + maxCreatDiffWithRepl >= oppCreatureCount;
+                    boolean wantToSavePlaneswalker = MyRandom.percentTrue(chanceToTradeToSaveWalker)
+                            && combat.getDefenderByAttacker(attacker) instanceof Card
+                            && ((Card) combat.getDefenderByAttacker(attacker)).isPlaneswalker();
 
                     if (evalBlk <= evalAtk + 1 // "1" accounts for tapped. Maybe increase to 3 or 5 for higher tolerance?
                             && powerParityOrHigher
                             && (creatureParityOrAllowedDiff || wantToTradeWithCreatInHand)
-                            && MyRandom.percentTrue(chance)) {
+                            && (MyRandom.percentTrue(chance) || wantToSavePlaneswalker)) {
                         doTrade = true;
                     }
                 }

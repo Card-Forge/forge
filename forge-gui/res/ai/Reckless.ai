@@ -12,6 +12,8 @@ CHANCE_TO_ATTACK_INTO_TRADE=100
 # is globally enabled). If disabled, the non-aggro AI will only attack into trades when it has mana open, thus having a chance
 # to "bluff" (or use, if available) combat tricks at the same time.
 ATTACK_INTO_TRADE_WHEN_TAPPED_OUT=true
+# If enabled, the AI will only randomly attack into a trade if its life pressure is lower than the opponent's.
+RANDOMLY_ATKTRADE_ONLY_ON_LOWER_LIFE_PRESSURE=false
 # When above zero, the AI will attack into trading options when the opponent is not tapped out, thus risking getting an
 # unexpected combat trick or ability activation. Note that this chance is rolled separately after CHANCE_TO_ATTACK_INTO_TRADE
 # has already succeeded.
@@ -41,6 +43,8 @@ MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE_WITH_REPL=1
 # Min and max chance to randomly aggressively trade when blocking (note that it will become 100 if the AI is in danger)
 MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK=0
 MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK=50
+# Chance to trade a creature in order to save a planeswalker
+CHANCE_TO_TRADE_TO_SAVE_PLANESWALKER=70
 
 # Only works when AI cheating is enabled in preferences, otherwise does nothing
 CHEAT_WITH_MANA_ON_SHUFFLE=true

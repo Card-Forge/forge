@@ -593,12 +593,14 @@ public class AiAttackController {
         int chanceToAttackToTrade = 0;
         boolean tradeIfTappedOut = false;
         int extraChanceIfOppHasMana = 0;
+        boolean tradeIfLowerLifePressure = false;
         if (ai.getController().isAI()) {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
             playAggro = aic.getBooleanProperty(AiProps.PLAY_AGGRO);
             chanceToAttackToTrade = aic.getIntProperty(AiProps.CHANCE_TO_ATTACK_INTO_TRADE);
             tradeIfTappedOut = aic.getBooleanProperty(AiProps.ATTACK_INTO_TRADE_WHEN_TAPPED_OUT);
             extraChanceIfOppHasMana = aic.getIntProperty(AiProps.CHANCE_TO_ATKTRADE_WHEN_OPP_HAS_MANA);
+            tradeIfLowerLifePressure = aic.getBooleanProperty(AiProps.RANDOMLY_ATKTRADE_ONLY_ON_LOWER_LIFE_PRESSURE);
         }
 
         final boolean bAssault = this.doAssault(ai);
@@ -930,7 +932,9 @@ public class AiAttackController {
                 && ai.getLife() > defendingOpponent.getLife()
                 && !ComputerUtilCombat.lifeInDanger(ai, combat)
                 && (ComputerUtilMana.getAvailableManaEstimate(ai) > 0) || tradeIfTappedOut
-                && (ComputerUtilMana.getAvailableManaEstimate(defendingOpponent) == 0) || MyRandom.percentTrue(extraChanceIfOppHasMana)) {
+                && (ComputerUtilMana.getAvailableManaEstimate(defendingOpponent) == 0) || MyRandom.percentTrue(extraChanceIfOppHasMana)
+                && (!tradeIfLowerLifePressure || (ai.getLifeLostLastTurn() + ai.getLifeLostThisTurn() <
+                        defendingOpponent.getLifeLostThisTurn() + defendingOpponent.getLifeLostThisTurn()))) {
             this.aiAggression = 4; // random (chance-based) attack expecting to trade or damage player.
         } else if (ratioDiff >= 0 && this.attackers.size() > 1) {
             this.aiAggression = 3; // attack expecting to make good trades or damage player.

@@ -37,6 +37,7 @@ public enum AiProps { /** */
     RESERVE_MANA_FOR_MAIN2_CHANCE ("0"), /** */
     PLAY_AGGRO ("false"),
     CHANCE_TO_ATTACK_INTO_TRADE ("40"), /** */
+    RANDOMLY_ATKTRADE_ONLY_ON_LOWER_LIFE_PRESSURE ("true"), /** */
     ATTACK_INTO_TRADE_WHEN_TAPPED_OUT ("false"), /** */
     CHANCE_TO_ATKTRADE_WHEN_OPP_HAS_MANA ("0"), /** */
     TRY_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK ("false"), /** */
@@ -48,6 +49,7 @@ public enum AiProps { /** */
     MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE_WITH_REPL ("1"), /** */
     MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK ("30"), /** */
     MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK ("70"), /** */
+    CHANCE_TO_TRADE_TO_SAVE_PLANESWALKER ("70"), /** */
     MIN_SPELL_CMC_TO_COUNTER ("0"),
     ALWAYS_COUNTER_OTHER_COUNTERSPELLS ("true"), /** */
     ALWAYS_COUNTER_DAMAGE_SPELLS ("true"), /** */

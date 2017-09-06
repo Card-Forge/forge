@@ -12,6 +12,8 @@ CHANCE_TO_ATTACK_INTO_TRADE=0
 # is globally enabled). If disabled, the non-aggro AI will only attack into trades when it has mana open, thus having a chance
 # to "bluff" (or use, if available) combat tricks at the same time.
 ATTACK_INTO_TRADE_WHEN_TAPPED_OUT=false
+# If enabled, the AI will only randomly attack into a trade if its life pressure is lower than the opponent's.
+RANDOMLY_ATKTRADE_ONLY_ON_LOWER_LIFE_PRESSURE=true
 # When above zero, the AI will attack into trading options when the opponent is not tapped out, thus risking getting an
 # unexpected combat trick or ability activation. Note that this chance is rolled separately after CHANCE_TO_ATTACK_INTO_TRADE
 # has already succeeded.
@@ -23,7 +25,7 @@ USE_BERSERK_AGGRESSIVELY=false
 TRY_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK=false
 # Chance to hold combat tricks until blockers are declared. If -1 is specified, this chance is not used, and the standard
 # evaluation for offensive pump buff is used instead.
-CHANCE_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK=-1
+CHANCE_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK=75
 
 # Trade blocking preferences (enabling these will make the AI trade more aggressively when considering blocks,
 # but only with creatures that are worse in abilities and have lower or the same power as the attacker). Note
@@ -41,6 +43,8 @@ MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE_WITH_REPL=0
 # Min and max chance to randomly aggressively trade when blocking (note that it will become 100 if the AI is in danger)
 MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK=40
 MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK=65
+# Chance to trade a creature in order to save a planeswalker
+CHANCE_TO_TRADE_TO_SAVE_PLANESWALKER=90
 
 # Only works when AI cheating is enabled in preferences, otherwise does nothing
 CHEAT_WITH_MANA_ON_SHUFFLE=true
