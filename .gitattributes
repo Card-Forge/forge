@@ -17275,6 +17275,7 @@ forge-gui/res/cardsfolder/upcoming/rowdy_crew.txt -text
 forge-gui/res/cardsfolder/upcoming/ruin_raider.txt -text
 forge-gui/res/cardsfolder/upcoming/sanctum_seeker.txt -text
 forge-gui/res/cardsfolder/upcoming/sanguine_sacrament.txt -text
+forge-gui/res/cardsfolder/upcoming/savage_stomp.txt -text
 forge-gui/res/cardsfolder/upcoming/sentinel_totem.txt -text
 forge-gui/res/cardsfolder/upcoming/settle_the_wreckage.txt -text
 forge-gui/res/cardsfolder/upcoming/shapers_of_the_nature.txt -text
@@ -17301,6 +17302,7 @@ forge-gui/res/cardsfolder/upcoming/wakening_suns_avatar.txt -text
 forge-gui/res/cardsfolder/upcoming/waker_of_the_wilds.txt -text
 forge-gui/res/cardsfolder/upcoming/walk_the_plank.txt -text
 forge-gui/res/cardsfolder/upcoming/wanted_scoundrels.txt -text
+forge-gui/res/cardsfolder/upcoming/wily_goblin.txt -text
 forge-gui/res/cardsfolder/v/vacuumelt.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/vaevictis_asmadi.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/vagrant_plowbeasts.txt svneol=native#text/plain
