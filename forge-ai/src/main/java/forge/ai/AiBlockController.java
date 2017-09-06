@@ -539,6 +539,7 @@ public class AiBlockController {
         int minRandomTradeChance = 0;
         int maxRandomTradeChance = 0;
         int maxCreatDiff = 0;
+        int maxCreatDiffWithRepl = 0;
         int aiCreatureCount = 0;
         int oppCreatureCount = 0;
         if (ai.getController().isAI()) {
@@ -549,6 +550,7 @@ public class AiBlockController {
             minRandomTradeChance = aic.getIntProperty(AiProps.MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
             maxRandomTradeChance = aic.getIntProperty(AiProps.MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
             maxCreatDiff = aic.getIntProperty(AiProps.MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE);
+            maxCreatDiffWithRepl = aic.getIntProperty(AiProps.MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE_WITH_REPL);
         }
 
         if (enableRandomTrades) {
@@ -602,9 +604,11 @@ public class AiBlockController {
                     int evalAtk = ComputerUtilCard.evaluateCreature(attacker, false, false);
                     int evalBlk = ComputerUtilCard.evaluateCreature(blocker, false, false);
                     boolean powerParityOrHigher = blocker.getNetPower() >= attacker.getNetPower();
-                    boolean creatureParityOrAllowedDiff = aiCreatureCount >= oppCreatureCount;
+                    boolean creatureParityOrAllowedDiff = aiCreatureCount
+                            + (randomTradeIfBehindOnBoard ? maxCreatDiff : 0) >= oppCreatureCount;
                     boolean wantToTradeWithCreatInHand = randomTradeIfCreatInHand
-                        && !CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.CREATURES).isEmpty();
+                            && !CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.CREATURES).isEmpty()
+                            && aiCreatureCount + maxCreatDiffWithRepl >= oppCreatureCount;
 
                     if (evalBlk <= evalAtk + 1 // "1" accounts for tapped. Maybe increase to 3 or 5 for higher tolerance?
                             && powerParityOrHigher

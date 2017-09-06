@@ -36,6 +36,8 @@ RANDOMLY_TRADE_EVEN_WHEN_HAVE_LESS_CREATS=false
 MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE=1
 # If enabled, the AI will also consider trading if it has a replacement creature in hand
 ALSO_TRADE_WHEN_HAVE_A_REPLACEMENT_CREAT=true
+# The allowed handicap in creature count when the AI wants to trade while having a replacement creature in hand
+MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE_WITH_REPL=1
 # Min and max chance to randomly aggressively trade when blocking (note that it will become 100 if the AI is in danger)
 MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK=30
 MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK=70
