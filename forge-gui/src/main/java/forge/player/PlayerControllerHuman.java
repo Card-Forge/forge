@@ -2168,10 +2168,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                         game.getAction().moveTo(targetZone, forgeCard, null);
                     } else {
                         if (noTriggers) {
-                            if (forgeCard.isPermanent()) {
+                            if (forgeCard.isPermanent() && !forgeCard.isAura()) {
                                 game.getAction().moveTo(targetZone, forgeCard, null);
                             } else {
-                                getGui().message("The chosen card is not a permanent.\nIf you'd like to cast a non-permanent spell, or if you'd like to cast a permanent spell (and place it on stack), please use the Cast Spell/Play Land button.", "Error");
+                                getGui().message("The chosen card is not a permanent or can't exist independently on the battlefield.\nIf you'd like to cast a non-permanent spell, or if you'd like to cast a permanent spell and place it on stack, please use the Cast Spell/Play Land button.", "Error");
                                 return;
                             }
                         } else {
