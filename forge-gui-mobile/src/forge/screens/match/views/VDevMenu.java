@@ -33,6 +33,17 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
+        addItem(new FMenuItem("Cast Spell/Play Land", new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                ThreadUtil.invokeInGameThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        MatchController.instance.getGameController().cheat().castASpell();
+                    }
+                });
+            }
+        }));
         addItem(new FMenuItem("Add Card to Hand", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
@@ -84,17 +95,6 @@ public class VDevMenu extends FDropDownMenu {
                     @Override
                     public void run() {
                         MatchController.instance.getGameController().cheat().addCardToExile();
-                    }
-                });
-            }
-        }));
-        addItem(new FMenuItem("Cast Spell/Play Land", new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                ThreadUtil.invokeInGameThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        MatchController.instance.getGameController().cheat().castASpell();
                     }
                 });
             }
