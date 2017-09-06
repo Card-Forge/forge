@@ -250,6 +250,18 @@ public class AttachAi extends SpellAbilityAi {
                     return false;
                 }
 
+                if (!mandatory) {
+                    if (!c.isCreature() && !c.getType().hasSubtype("Vehicle") && !c.isTapped()) {
+                        // try to identify if this thing can actually tap
+                        for (SpellAbility ab : c.getAllSpellAbilities()) {
+                            if (ab.getPayCosts() != null && ab.getPayCosts().hasTapCost()) {
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+                }
+
                 if (!c.isEnchanted()) {
                     return true;
                 }
