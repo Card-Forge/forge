@@ -536,6 +536,7 @@ public class DeckgenUtil {
     public static Map<ManaCostShard, Integer> suggestBasicLandCount(Deck d) {
         int W=0, U=0, R=0, B=0, G=0, total=0;
         List<PaperCard> cards = d.getOrCreate(DeckSection.Main).toFlatList();
+        HashMap<ManaCostShard, Integer> suggestionMap = new HashMap<>();
 
         // determine how many additional lands we need, but don't take lands already in deck into consideration,
         // or we risk incorrectly determining the target deck size
@@ -547,6 +548,16 @@ public class DeckgenUtil {
                 : sizeNoLands > 60 ? 100 : 60;
 
         int numLandsToAdd = targetDeckSize - cards.size();
+
+        if (numLandsToAdd == 0) {
+            // already at target deck size, do nothing
+            suggestionMap.put(ManaCostShard.WHITE, 0);
+            suggestionMap.put(ManaCostShard.BLUE, 0);
+            suggestionMap.put(ManaCostShard.RED, 0);
+            suggestionMap.put(ManaCostShard.BLACK, 0);
+            suggestionMap.put(ManaCostShard.GREEN, 0);
+            return suggestionMap;
+        }
 
         for (PaperCard c : d.getMain().toFlatList()) {
             ManaCost m = c.getRules().getManaCost();
@@ -588,7 +599,6 @@ public class DeckgenUtil {
             else if (greenSources > 0) { greenSources += numLandsToAdd; }
         }
 
-        HashMap<ManaCostShard, Integer> suggestionMap = new HashMap<>();
         suggestionMap.put(ManaCostShard.WHITE, whiteSources);
         suggestionMap.put(ManaCostShard.BLUE, blueSources);
         suggestionMap.put(ManaCostShard.RED, redSources);
