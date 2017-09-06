@@ -156,7 +156,7 @@ public class CardZoom extends FOverlay {
             zoomMode = !zoomMode;
             return true;
         }
-        if (currentActivateAction != null) {
+        if (currentActivateAction != null && activateHandler != null) {
             hide();
             activateHandler.activate(currentIndex);
             return true;
