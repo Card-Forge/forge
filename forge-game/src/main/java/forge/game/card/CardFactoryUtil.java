@@ -3630,7 +3630,7 @@ public class CardFactoryUtil {
 
             awakenSub.setSubAbility(animateSub);
             awakenSpell.appendSubAbility(awakenSub);
-            String desc = "Awaken " + counters + " - " + awakenCost.toSimpleString() +
+            String desc = "Awaken " + counters + " — " + awakenCost.toSimpleString() +
                     " (" + Keyword.getInstance(keyword).getReminderText() + ")";
             awakenSpell.setDescription(desc);
             awakenSpell.setBasicSpell(false);
