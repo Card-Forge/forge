@@ -5,6 +5,7 @@ PT:2/1
 A:AB$SetState | Cost$ Discard<1/Card> | Defined$ Self | Mode$ Transform | ActivationLimit$ 1 | SpellDescription$ Transform CARDNAME. Activate this ability only once each turn.
 DeckHas:Ability$Discard
 DeckHints:Keyword$Madness & Ability$Delirium
+SVar:AIPreference:DiscardCost$Card.cmcEQ1,Card.cmcEQ2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heir_of_falkenrath.jpg
 AlternateMode:DoubleFaced
 Oracle:Discard a card: Transform Heir of Falkenrath. Activate this ability only once each turn.
