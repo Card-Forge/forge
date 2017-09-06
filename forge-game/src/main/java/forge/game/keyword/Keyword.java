@@ -24,7 +24,7 @@ public enum Keyword {
     BLOODTHIRST(KeywordWithAmount.class, false, "If an opponent was dealt damage this turn, this creature enters the battlefield with {%d:+1/+1 counter} on it."),
     BUSHIDO(KeywordWithAmount.class, false, "Whenever this creature blocks or becomes blocked, it gets +%1$d/+%1$d until end of turn."),
     BUYBACK(KeywordWithCost.class, false, "You may pay an additional %s as you cast this spell. If you do, put it into your hand instead of your graveyard as it resolves."),
-    CASCADE(SimpleKeyword.class, false, "When you cast this spell, exile cards from the top of your library until you exile a nonland card whose converted mana cost is less than this spell's converted mana cost. You may cast that card without paying its mana cost. Then put all cards exiled this way that weren't cast on the bottom of your library in a random order."),
+    CASCADE(SimpleKeyword.class, false, "When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order."),
     CHAMPION(KeywordWithType.class, false, "When this enters the battlefield, sacrifice it unless you exile another %s you control. When this leaves the battlefield, that card returns to the battlefield."),
     CHANGELING(SimpleKeyword.class, true, "This card is every creature type."),
     CIPHER(SimpleKeyword.class, true, "Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost."),
@@ -76,7 +76,7 @@ public enum Keyword {
     HIDEAWAY(SimpleKeyword.class, false, "This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library."),
     HORSEMANSHIP(SimpleKeyword.class, true, "This creature can't be blocked except by creatures with horsemanship."),
     IMPROVISE(SimpleKeyword.class, true, "Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}."),
-    INFECT(SimpleKeyword.class, true, " This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters."),
+    INFECT(SimpleKeyword.class, true, "This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters."),
     INGEST(SimpleKeyword.class, false, "Whenever this creature deals combat damage to a player, that player exiles the top card of his or her library."),
     INTIMIDATE(SimpleKeyword.class, true, "This creature can't be blocked except by artifact creatures and/or creatures that share a color with it."),
     KICKER(Kicker.class, false, "You may pay an additional %s as you cast this spell."),
@@ -103,7 +103,7 @@ public enum Keyword {
     POISONOUS(KeywordWithAmount.class, false, "Whenever this creature deals combat damage to a player, that player gets {%d:poison counter}."),
     PRESENCE(KeywordWithType.class, false, "As an additional cost to cast CARDNAME, you may reveal a %s card from your hand."),
     PROTECTION(Protection.class, false, "This creature can't be blocked, targeted, dealt damage, or equipped/enchanted by %s."),
-    PROVOKE(SimpleKeyword.class, false, "Whenever this creature attacks, you may choose to have target creature defending player controls block this creature this combat if able. If you do, untap that creature."),
+    PROVOKE(SimpleKeyword.class, false, "Whenever this creature attacks, you may have target creature defending player controls untap and block it if able."),
     PROWESS(SimpleKeyword.class, false, "Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn."),
     PROWL(KeywordWithCost.class, false, "You may cast this card by paying %s rather than paying its mana cost if you dealt combat damage to a player this turn with a creature that shares any of this spell's creature types."),
     RAMPAGE(KeywordWithAmount.class, false, "Whenever this creature becomes blocked, it gets +%1$d/+%1$d until end of turn for each creature blocking it beyond the first."),
@@ -139,7 +139,7 @@ public enum Keyword {
     UNLEASH(SimpleKeyword.class, true, "You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it."),
     VANISHING(KeywordWithAmount.class, false, "This permanent enters the battlefield with %d time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it."),
     VIGILANCE(SimpleKeyword.class, true, "Attacking doesn't cause this creature to tap."),
-    WITHER(SimpleKeyword.class, true, "This creature deals damage to creatures in the form of -1/-1 counters.");
+    WITHER(SimpleKeyword.class, true, "This deals damage to creatures in the form of -1/-1 counters.");
 
     protected final Class<? extends KeywordInstance<?>> type;
     protected final boolean isMultipleRedundant;
