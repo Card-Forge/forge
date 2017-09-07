@@ -308,7 +308,11 @@ public class HumanPlay {
         }
         String orString = prompt == null ? sourceAbility.getStackDescription().trim() : "";
         if (!orString.isEmpty()) {
-            orString = " (or: " + orString + ")";
+            if (sourceAbility.hasParam("UnlessSwitched")) {
+                orString = TextUtil.concatWithSpace(" (if you do:", orString, ")");
+            } else {
+                orString = TextUtil.concatWithSpace(" (or:", orString, ")");
+            }
         }
 
         if (parts.isEmpty() || (costPart.getAmount().equals("0") && parts.size() < 2)) {
