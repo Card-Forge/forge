@@ -360,7 +360,7 @@ chandra_the_firebrand_effect.jpg       https://downloads.cardforge.org/images/to
 emblem_domri_rade.jpg                  https://downloads.cardforge.org/images/tokens/emblem_domri_rade.jpg
 emblem_elspeth_knight_errant.jpg       https://downloads.cardforge.org/images/tokens/emblem_elspeth_knight_errant.jpg
 emblem_elspeth_suns_champion.jpg       https://downloads.cardforge.org/images/tokens/emblem_elspeth_suns_champion.jpg
-emblem_garruk_caller_of.jpg            https://downloads.cardforge.org/images/tokens/emblem_garruk_caller_of_beasts.jpg
+emblem_garruk_caller_of_beasts.jpg     https://downloads.cardforge.org/images/tokens/emblem_garruk_caller_of_beasts.jpg
 emblem_gideon_ally_of_zendikar.jpg     https://downloads.cardforge.org/images/tokens/emblem_gideon_ally_of_zendikar.jpg
 emblem_kiora_master_of_the_depths.jpg  https://downloads.cardforge.org/images/tokens/emblem_kiora_master_of_the_depths.jpg
 emblem_kiora_the_crashing_wave.jpg     https://downloads.cardforge.org/images/tokens/emblem_kiora_the_crashing_wave.jpg
