@@ -162,6 +162,11 @@ public class CounterEffect extends SpellAbilityEffect {
         }
         game.getStack().remove(si);
 
+        // if the target card on stack was a spell with Bestow, then unbestow it
+        if (tgtSA.getHostCard() != null && tgtSA.getHostCard().isBestowed()) {
+            tgtSA.getHostCard().unanimateBestow(true);
+        }
+
         String destination =  srcSA.hasParam("Destination") ? srcSA.getParam("Destination") : tgtSA.isAftermath() ? "Exile" : "Graveyard";
         if (srcSA.hasParam("DestinationChoice")) {//Hinder
             List<String> pos = Arrays.asList(srcSA.getParam("DestinationChoice").split(","));
