@@ -1126,7 +1126,9 @@ public class AiAttackController {
                             }
                         }
 
-                        if (canKillAllDangerous && !hasAttackEffect && !hasCombatEffect && this.attackers.size() <= defenders.size()) {
+                        if (canKillAllDangerous
+                                && !hasAttackEffect && !hasCombatEffect
+                                && (this.attackers.size() <= defenders.size() || attacker.getNetPower() <= 0)) {
                             if (ai.getController().isAI()) {
                                 if (((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.TRY_TO_AVOID_ATTACKING_INTO_CERTAIN_BLOCK)) {
                                     // We can't kill a blocker, there is no reason to attack unless we can cripple a
