@@ -6,7 +6,7 @@ Loyalty:6
 A:AB$ Token | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenName$ Pirate | TokenTypes$ Creature,Pirate | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Menace | SpellDescription$ Create a 2/2 black Pirate creature token with menace.
 
 # TODO: How many Treasure tokens with different art are there?
-A:AB$ Destroy | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Artifact,Creature,Enchantment | TgtPrompt$ Select target artifact, creature, or enchantment | SubAbility$ DBTreasureToken | SpellDescription$ Destroy target artifact, creature, or enchantment. Create a colorless treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+A:AB$ Destroy | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Artifact,Creature,Enchantment | TgtPrompt$ Select target artifact, creature, or enchantment | SubAbility$ DBTreasure | SpellDescription$ Destroy target artifact, creature, or enchantment. Create a colorless treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
 SVar:DBTreasure:DB$ Token | TokenAmount$ 1 | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAbilities$ ABTreasureMana | TokenAltImages$ c_treasure2,c_treasure3
 SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color to your mana pool.
 
