@@ -250,7 +250,9 @@ public class CardFactoryUtil {
         };
         final StringBuilder sbDesc = new StringBuilder();
         sbDesc.append("Suspend ").append(timeCounters).append("—").append(cost.toSimpleString());
-        sbDesc.append(" (Rather than cast CARDNAME from your hand, you may pay cost and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)");
+        sbDesc.append(" (Rather than cast CARDNAME from your hand, you may pay ").append(cost.toSimpleString());
+        sbDesc.append(" and exile it with ").append(timeCounters);
+        sbDesc.append(" time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)");
         suspend.setDescription(sbDesc.toString());
 
         String svar = "X"; // emulate "References X" here
