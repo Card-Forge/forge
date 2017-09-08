@@ -17236,6 +17236,7 @@ forge-gui/res/cardsfolder/upcoming/deadeye_tracker.txt -text
 forge-gui/res/cardsfolder/upcoming/deathless_ancient.txt -text
 forge-gui/res/cardsfolder/upcoming/deeproot_champion.txt -text
 forge-gui/res/cardsfolder/upcoming/deeproot_waters.txt -text
+forge-gui/res/cardsfolder/upcoming/dinosaur_stampede.txt -text
 forge-gui/res/cardsfolder/upcoming/dreamcaller_siren.txt -text
 forge-gui/res/cardsfolder/upcoming/drover_of_the_mighty.txt -text
 forge-gui/res/cardsfolder/upcoming/dusk_legion_dreadnought.txt -text
@@ -17277,7 +17278,9 @@ forge-gui/res/cardsfolder/upcoming/primal_amulet_primal_wellspring.txt -text
 forge-gui/res/cardsfolder/upcoming/prosperous_pirates.txt -text
 forge-gui/res/cardsfolder/upcoming/queens_bay_soldier.txt -text
 forge-gui/res/cardsfolder/upcoming/raging_swordtooth.txt -text
+forge-gui/res/cardsfolder/upcoming/rampaging_ferocidon.txt -text
 forge-gui/res/cardsfolder/upcoming/ranging_raptors.txt -text
+forge-gui/res/cardsfolder/upcoming/raptor_hatchling.txt -text
 forge-gui/res/cardsfolder/upcoming/ravenous_daggertooth.txt -text
 forge-gui/res/cardsfolder/upcoming/regisaur_alpha.txt -text
 forge-gui/res/cardsfolder/upcoming/revel_in_riches.txt -text
