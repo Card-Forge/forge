@@ -5,10 +5,12 @@ import forge.game.GameLogEntryType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
-import forge.game.zone.ZoneType;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
+import forge.util.TextUtil;
 
 import java.util.Iterator;
 import java.util.List;
@@ -51,6 +53,7 @@ public class SetStateEffect extends SpellAbilityEffect {
         final boolean morphUp = sa.hasParam("MorphUp");
         final boolean manifestUp = sa.hasParam("ManifestUp");
         final boolean hiddenAgenda = sa.hasParam("HiddenAgenda");
+        final boolean optional = sa.hasParam("Optional");
 
         for (final Card tgt : tgtCards) {
             if (sa.usesTargeting() && !tgt.canBeTargetedBy(sa)) {
@@ -70,6 +73,13 @@ public class SetStateEffect extends SpellAbilityEffect {
                 sa.getSVars().remove("StoredTransform");
                 if (skip) {
                     continue;
+                }
+            }
+
+            if (optional) {
+                String message = TextUtil.concatWithSpace("Transform", host.getName(), "?");
+                if (!p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, message)) {
+                    return;
                 }
             }
 

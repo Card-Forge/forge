@@ -13,6 +13,7 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
@@ -247,5 +248,10 @@ public class SetStateAi extends SpellAbilityAi {
         // no clear way, alternate state is better,
         // but for more cleaner way use Evaluate for check
         return valueCard <= valueTransformed;
+    }
+
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+        // TODO: improve the AI for when it may want to transform something that's optional to transform
+        return true;
     }
 }
