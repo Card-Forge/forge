@@ -1520,7 +1520,9 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.startsWith("Provoke") || keyword.startsWith("Ingest") || keyword.equals("Unleash")
                     || keyword.startsWith("Soulbond") || keyword.equals("Partner") || keyword.equals("Retrace")
                     || keyword.equals("Living Weapon") || keyword.equals("Myriad") || keyword.equals("Exploit")
-                    || keyword.equals("Changeling")) {
+                    || keyword.equals("Changeling") || keyword.equals("Delve") || keyword.startsWith("Dredge")
+                    || (keyword.startsWith("Split second") && !sb.toString().contains("Split second"))
+                    || keyword.startsWith("Devoid")){
                 sbLong.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
             } else if (keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst")
                     || keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift")
@@ -1538,13 +1540,15 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.append("exile it haunting target creature.");
                 }
                 sb.append(")");
-            } else if (keyword.equals("Convoke") || keyword.equals("Dethrone")|| keyword.equals("Fear") 
+            } else if (keyword.equals("Convoke") || keyword.equals("Dethrone")|| keyword.equals("Fear")
                      || keyword.equals("Melee") || keyword.equals("Improvise")|| keyword.equals("Shroud")
-                    || keyword.equals("Banding") || keyword.equals("Intimidate")|| keyword.equals("Evolve")
+                     || keyword.equals("Banding") || keyword.equals("Intimidate")|| keyword.equals("Evolve")
                      || keyword.equals("Exalted") || keyword.equals("Extort")|| keyword.equals("Flanking")
                      || keyword.equals("Horsemanship") || keyword.equals("Infect")|| keyword.equals("Persist")
                      || keyword.equals("Phasing") || keyword.equals("Shadow")|| keyword.equals("Skulk")
-                     || keyword.equals("Undying") || keyword.equals("Wither") || keyword.equals("Totem Armor"))  {
+                     || keyword.equals("Undying") || keyword.equals("Wither") || keyword.equals("Totem armor")
+                     || keyword.startsWith ("Afflict") || keyword.startsWith("Bushido") || keyword.startsWith ("Poisonous")
+                    || keyword.startsWith ("Rampage") || keyword.startsWith("Cascade")) {
                 if (sb.length() != 0) {
                     sb.append("\r\n");
                 }
@@ -1958,7 +1962,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         // keyword descriptions
         for (final String keyword : kw) {
             if ((keyword.startsWith("Ripple") && !sb.toString().contains("Ripple"))
-                    || (keyword.startsWith("Dredge") && !sb.toString().contains("Dredge"))
+                    //|| (keyword.startsWith("Dredge") && !sb.toString().contains("Dredge")) | Replaced with
+                    // keyword.startsWith("Dredge") Hopefully that doesn't break anything. -Indigo Dragon 8/9/2017
                     || (keyword.startsWith("CARDNAME is ") && !sb.toString().contains("CARDNAME is "))) {
                 sb.append(keyword.replace(":", " ")).append("\r\n");
             } else if (keyword.startsWith("Madness")
@@ -1967,15 +1972,19 @@ public class Card extends GameEntity implements Comparable<Card> {
                 String[] parts = keyword.split(":");
                 sb.append(parts[0]).append(" ").append(ManaCostParser.parse(parts[1]))
                     .append(" (").append(Keyword.getInstance(keyword).getReminderText()).append(")").append("\r\n");
-            } else if (keyword.equals("CARDNAME can't be countered.")
-                    || keyword.startsWith("Conspire")
+            } else if (keyword.equals("CARDNAME can't be countered.")) {
+                sb.append(keyword).append("\r\n");
+            } else if (keyword.equals("Aftermath")) {
+                sb.append(Keyword.getInstance(keyword).getReminderText()).append("\r\n");
+            } else if (keyword.startsWith("Conspire") || keyword.startsWith("Dredge")
                     || keyword.startsWith("Cascade") || keyword.startsWith("Wither")
                     || (keyword.startsWith("Epic") && !sb.toString().contains("Epic"))
                     || (keyword.startsWith("Split second") && !sb.toString().contains("Split second"))
                     || (keyword.startsWith("Devoid"))) {
-                sb.append(keyword).append("\r\n");
-            } else if (keyword.equals("Aftermath")) {
-                sb.append(Keyword.getInstance(keyword).getReminderText()).append("\r\n");
+                if (sb.length() != 0) {
+                    sb.append("\r\n");
+                sb.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
+                }
             } else if (keyword.equals("You may cast CARDNAME as though it had flash if you pay {2} more to cast it.")) {
                 sb.append(keyword).append("\r\n");
             } else if (keyword.startsWith("Flashback")) {
@@ -1983,12 +1992,16 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (keyword.contains(" ")) {
                     final Cost fbCost = new Cost(keyword.substring(10), true);
                     if (!fbCost.isOnlyManaCost()) {
-                        sb.append(" -");
+                        sb.append("—");
                     }
-                    sb.append(" ").append(fbCost.toString()).delete(sb.length() - 2, sb.length());
+                    if (fbCost.isOnlyManaCost()) {
+                        sb.append(" ");
+                    }
+                    sb.append(fbCost.toString()).delete(sb.length() - 2, sb.length());
                     if (!fbCost.isOnlyManaCost()) {
                         sb.append(".");
                     }
+                    sb.append(" (You may cast this card from your graveyard for its flashback cost. Then exile it.)");
                 }
                 sb.append("\r\n");
             } else if (keyword.startsWith("Splice")) {
