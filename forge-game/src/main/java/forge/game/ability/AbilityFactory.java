@@ -50,7 +50,9 @@ public final class AbilityFactory {
             "ChosenPile", "UnchosenPile", // MultiplePiles & TwoPiles
             "RepeatSubAbility", // Repeat & RepeatEach
             "Execute", // DelayedTrigger
-            "FallbackAbility" // Complex Unless costs which can be unpayable
+            "FallbackAbility", // Complex Unless costs which can be unpayable
+            "ChooseSubAbility", // Can choose a player via ChoosePlayer
+            "CantChooseSubAbility" // Can't choose a player via ChoosePlayer
         );
 
     public enum AbilityRecordType {

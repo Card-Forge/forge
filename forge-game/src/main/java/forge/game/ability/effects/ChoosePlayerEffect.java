@@ -4,6 +4,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.Aggregates;
@@ -53,8 +54,31 @@ public class ChoosePlayerEffect extends SpellAbilityEffect {
                 }
                 if( null != chosen ) {
                     card.setChosenPlayer(chosen);
+                    if (sa.hasParam("ForgetOtherRemembered")) {
+                        card.clearRemembered();
+                    }
                     if (sa.hasParam("RememberChosen")) {
                         card.addRemembered(chosen);
+                    }
+
+                    // SubAbility that only fires if a player is chosen
+                    AbilitySub chosenSA = sa.getAdditonalAbility("ChooseSubAbility");
+                    if (chosenSA != null) {
+                        if (!chosenSA.getHostCard().equals(sa.getHostCard())) {
+                            System.out.println("Warning: ChooseSubAbility had the wrong host set (potentially after cloning the root SA), attempting to correct...");
+                            chosenSA.setHostCard(sa.getHostCard());
+                        }
+                        AbilityUtils.resolve(chosenSA);
+                    }
+                } else {
+                    // SubAbility that only fires if a player is not chosen
+                    AbilitySub notChosenSA = sa.getAdditonalAbility("CantChooseSubAbility");
+                    if (notChosenSA != null) {
+                        if (!notChosenSA.getHostCard().equals(sa.getHostCard())) {
+                            System.out.println("Warning: CantChooseSubAbility had the wrong host set (potentially after cloning the root SA), attempting to correct...");
+                            notChosenSA.setHostCard(sa.getHostCard());
+                        }
+                        AbilityUtils.resolve(notChosenSA);
                     }
                 }
             }

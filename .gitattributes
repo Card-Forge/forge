@@ -16267,6 +16267,7 @@ forge-gui/res/cardsfolder/t/terrifying_presence.txt -text
 forge-gui/res/cardsfolder/t/territorial_baloth.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/territorial_dispute.txt -text
 forge-gui/res/cardsfolder/t/territorial_gorger.txt -text svneol=unset#text/plain
+forge-gui/res/cardsfolder/t/territorial_hellkite.txt -text
 forge-gui/res/cardsfolder/t/territorial_roc.txt -text
 forge-gui/res/cardsfolder/t/terror.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/terror_of_the_fairgrounds.txt -text
