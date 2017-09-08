@@ -17264,6 +17264,7 @@ forge-gui/res/cardsfolder/upcoming/kinjallis_sunwing.txt -text
 forge-gui/res/cardsfolder/upcoming/kitesail_freebooter.txt -text
 forge-gui/res/cardsfolder/upcoming/kopala_warden_of_waves.txt -text
 forge-gui/res/cardsfolder/upcoming/kumenas_speaker.txt -text
+forge-gui/res/cardsfolder/upcoming/lookouts_dispersal.txt -text
 forge-gui/res/cardsfolder/upcoming/marauding_looter.txt -text
 forge-gui/res/cardsfolder/upcoming/mavren_fein_dusk_apostle.txt -text
 forge-gui/res/cardsfolder/upcoming/old_growth_dryads.txt -text
@@ -17276,6 +17277,8 @@ forge-gui/res/cardsfolder/upcoming/primal_amulet_primal_wellspring.txt -text
 forge-gui/res/cardsfolder/upcoming/prosperous_pirates.txt -text
 forge-gui/res/cardsfolder/upcoming/queens_bay_soldier.txt -text
 forge-gui/res/cardsfolder/upcoming/raging_swordtooth.txt -text
+forge-gui/res/cardsfolder/upcoming/ranging_raptors.txt -text
+forge-gui/res/cardsfolder/upcoming/ravenous_daggertooth.txt -text
 forge-gui/res/cardsfolder/upcoming/regisaur_alpha.txt -text
 forge-gui/res/cardsfolder/upcoming/revel_in_riches.txt -text
 forge-gui/res/cardsfolder/upcoming/ripjaw_raptor.txt -text
@@ -17296,6 +17299,7 @@ forge-gui/res/cardsfolder/upcoming/sorcerous_spyglass.txt -text
 forge-gui/res/cardsfolder/upcoming/star_of_extinction.txt -text
 forge-gui/res/cardsfolder/upcoming/storm_fleet_aerialist.txt -text
 forge-gui/res/cardsfolder/upcoming/storm_fleet_arsonist.txt -text
+forge-gui/res/cardsfolder/upcoming/storm_fleet_spy.txt -text
 forge-gui/res/cardsfolder/upcoming/sun_blessed_mount.txt -text
 forge-gui/res/cardsfolder/upcoming/sun_crowned_hunters.txt -text
 forge-gui/res/cardsfolder/upcoming/sunbirds_invocation.txt -text
