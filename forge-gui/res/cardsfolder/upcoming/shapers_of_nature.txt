@@ -1,4 +1,4 @@
-Name:Shapers of the Nature
+Name:Shapers of Nature
 ManaCost:1 G U
 Types:Creature Merfolk Shaman
 PT:3/3
