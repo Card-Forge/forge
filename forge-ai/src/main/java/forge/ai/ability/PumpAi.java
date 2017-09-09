@@ -95,7 +95,7 @@ public class PumpAi extends PumpAiBase {
             }
             return true;
         } else if (logic.equals("Aristocrat")) {
-            if (!ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS, ai)) {
+            if (!ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 return false;
             }
         }
