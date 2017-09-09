@@ -226,6 +226,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     ForgeConstants.DISP_CURRENT_COLORS_CHANGED, ForgeConstants.DISP_CURRENT_COLORS_MULTI_OR_CHANGED,
                     ForgeConstants.DISP_CURRENT_COLORS_ALWAYS}),
                 4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ROTATE_PLANE_OR_PHENOMENON,
+                        "Rotate Zoom Image of Planes/Phenomenon",
+                        "Rotates the zoomed image of Plane or Phenomenon cards."),
+                4);
 
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CARD_COUNTER_DISPLAY_TYPE,
                         "Counter Display Type",

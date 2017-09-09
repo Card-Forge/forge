@@ -3,6 +3,8 @@ package forge.card;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.properties.ForgeConstants;
+import forge.properties.ForgePreferences;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.Color;
@@ -323,7 +325,7 @@ public class CardImageRenderer {
         }
     }
 
-    public static void drawZoom(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h) {
+    public static void drawZoom(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h, float dispW, float dispH) {
         final Texture image = ImageCache.getImage(card.getState(altState).getImageKey(MatchController.instance.getLocalPlayers()), true);
         if (image == null) { //draw details if can't draw zoom
             drawDetails(g, card, gameView, altState, x, y, w, h);
@@ -333,8 +335,20 @@ public class CardImageRenderer {
         if (image == ImageCache.defaultImage) { //support drawing card image manually if card image not found
             drawCardImage(g, card, altState, x, y, w, h, CardStackPosition.Top);
         }
-        else {
-            g.drawImage(image, x, y, w, h);
+        else {//rotate plane or phenomenon...
+            ForgePreferences prefs = new ForgePreferences();
+            boolean rotateZoomDisplay = prefs != null
+                    && prefs.getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
+                    && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane());
+            float wh_Adj = ForgeConstants.isGdxPortLandscape && x == 0 ? 1.2f:1.0f;
+            float new_w = w*wh_Adj;
+            float new_h = h*wh_Adj;
+            float new_x = ForgeConstants.isGdxPortLandscape && x != 0 ? (dispW - new_w) / 2:x;
+            float new_y = ForgeConstants.isGdxPortLandscape && x != 0 ? (dispH - new_h) / 2:y;
+            if(rotateZoomDisplay)
+                g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
+            else
+                g.drawImage(image, x, y, w, h);
         }
         CardRenderer.drawFoilEffect(g, card, x, y, w, h);
     }
