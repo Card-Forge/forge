@@ -1342,6 +1342,23 @@ public class ComputerUtilCard {
             if (combat.isAttacking(c) && opp.getLife() > 0) {
                 int dmg = ComputerUtilCombat.damageIfUnblocked(c, opp, combat, true);
                 int pumpedDmg = ComputerUtilCombat.damageIfUnblocked(pumped, opp, pumpedCombat, true);
+                int poisonOrig = ComputerUtilCombat.poisonIfUnblocked(c, ai);
+                int poisonPumped = ComputerUtilCombat.poisonIfUnblocked(pumped, ai);
+
+                // predict Infect
+                if (pumpedDmg == 0 && c.hasKeyword("Infect")) {
+                    if (poisonPumped > poisonOrig) {
+                        if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && !combat.isBlocked(c)
+                                && combat.getDefenderByAttacker(c) instanceof Player) {
+                            // We need only 10 counters to finish off an opponent, so each point counts as 2 damage
+                            pumpedDmg = poisonPumped * 2;
+                        } else {
+                            // For other circumstances (dealing damage to creatures and PWs), 1 point = 1 damage
+                            pumpedDmg = poisonPumped;
+                        }
+                    }
+                }
+
                 if (combat.isBlocked(c)) {
                     if (!c.hasKeyword("Trample")) {
                         dmg = 0;
@@ -1354,7 +1371,8 @@ public class ComputerUtilCard {
                         pumpedDmg = 0;
                     }
                 }
-                if (pumpedDmg >= opp.getLife()) {
+                if ( (!c.hasKeyword("Infect") && pumpedDmg >= opp.getLife())
+                        || (c.hasKeyword("Infect") && pumpedDmg >= opp.getPoisonCounters()) ){
                     return true;
                 }
                 // try to determine if pumping a creature for more power will give lethal on board
