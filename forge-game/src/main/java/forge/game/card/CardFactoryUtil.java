@@ -3037,7 +3037,7 @@ public class CardFactoryUtil {
             
             String trigStr = "Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard" +
                     " | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController" +
-                    " | Secondary$ True | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, " +
+                    " | Secondary$ True | TriggerDescription$ When CARDNAME dies, " +
                     "you may put a +1/+1 counter on target artifact creature for each +1/+1 counter on CARDNAME";
 
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
