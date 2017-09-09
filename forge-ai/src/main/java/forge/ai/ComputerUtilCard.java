@@ -1372,7 +1372,7 @@ public class ComputerUtilCard {
                     }
                 }
                 if ( (!c.hasKeyword("Infect") && pumpedDmg >= opp.getLife())
-                        || (c.hasKeyword("Infect") && pumpedDmg >= opp.getPoisonCounters()) ){
+                        || (c.hasKeyword("Infect") && pumpedDmg >= opp.getPoisonCounters()) ) {
                     return true;
                 }
                 // try to determine if pumping a creature for more power will give lethal on board
