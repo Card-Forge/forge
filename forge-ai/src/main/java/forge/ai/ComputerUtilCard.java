@@ -1348,14 +1348,7 @@ public class ComputerUtilCard {
                 // predict Infect
                 if (pumpedDmg == 0 && c.hasKeyword("Infect")) {
                     if (poisonPumped > poisonOrig) {
-                        if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && !combat.isBlocked(c)
-                                && combat.getDefenderByAttacker(c) instanceof Player) {
-                            // We need only 10 counters to finish off an opponent, so each point counts as 2 damage
-                            pumpedDmg = poisonPumped * 2;
-                        } else {
-                            // For other circumstances (dealing damage to creatures and PWs), 1 point = 1 damage
-                            pumpedDmg = poisonPumped;
-                        }
+                        pumpedDmg = poisonPumped;
                     }
                 }
 
