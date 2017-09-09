@@ -218,10 +218,10 @@ public class CardZoom extends FOverlay {
             }
             y = (h - cardHeight) / 2;
             if (prevCard != null) {
-                CardImageRenderer.drawZoom(g, prevCard, gameView, false, 0, y, cardWidth, cardHeight, getWidth(), getHeight());
+                CardImageRenderer.drawZoom(g, prevCard, gameView, false, 0, y, cardWidth, cardHeight, getWidth(), getHeight(), false);
             }
             if (nextCard != null) {
-                CardImageRenderer.drawZoom(g, nextCard, gameView, false, w - cardWidth, y, cardWidth, cardHeight, getWidth(), getHeight());
+                CardImageRenderer.drawZoom(g, nextCard, gameView, false, w - cardWidth, y, cardWidth, cardHeight, getWidth(), getHeight(), false);
             }
             
             cardWidth = w * 0.7f;
@@ -235,7 +235,7 @@ public class CardZoom extends FOverlay {
         float x = (w - cardWidth) / 2;
         y = (h - cardHeight) / 2;
         if (zoomMode) {
-            CardImageRenderer.drawZoom(g, currentCard, gameView, showAltState, x, y, cardWidth, cardHeight, getWidth(), getHeight());
+            CardImageRenderer.drawZoom(g, currentCard, gameView, showAltState, x, y, cardWidth, cardHeight, getWidth(), getHeight(), true);
         }
         else {
             CardImageRenderer.drawDetails(g, currentCard, gameView, showAltState, x, y, cardWidth, cardHeight);

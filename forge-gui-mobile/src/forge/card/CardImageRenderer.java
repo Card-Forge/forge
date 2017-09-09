@@ -325,7 +325,7 @@ public class CardImageRenderer {
         }
     }
 
-    public static void drawZoom(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h, float dispW, float dispH) {
+    public static void drawZoom(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h, float dispW, float dispH, boolean isCurrentCard) {
         final Texture image = ImageCache.getImage(card.getState(altState).getImageKey(MatchController.instance.getLocalPlayers()), true);
         if (image == null) { //draw details if can't draw zoom
             drawDetails(g, card, gameView, altState, x, y, w, h);
@@ -340,11 +340,11 @@ public class CardImageRenderer {
             boolean rotateZoomDisplay = prefs != null
                     && prefs.getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
                     && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane());
-            float wh_Adj = ForgeConstants.isGdxPortLandscape && x == 0 ? 1.2f:1.0f;
+            float wh_Adj = ForgeConstants.isGdxPortLandscape && isCurrentCard ? 1.25f:1.0f;
             float new_w = w*wh_Adj;
             float new_h = h*wh_Adj;
-            float new_x = ForgeConstants.isGdxPortLandscape && x != 0 ? (dispW - new_w) / 2:x;
-            float new_y = ForgeConstants.isGdxPortLandscape && x != 0 ? (dispH - new_h) / 2:y;
+            float new_x = ForgeConstants.isGdxPortLandscape && isCurrentCard ? (dispW - new_w) / 2:x;
+            float new_y = ForgeConstants.isGdxPortLandscape && isCurrentCard ? (dispH - new_h) / 2:y;
             if(rotateZoomDisplay)
                 g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
             else
