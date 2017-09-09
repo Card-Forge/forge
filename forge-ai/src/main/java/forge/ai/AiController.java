@@ -742,9 +742,9 @@ public class AiController {
             int b1 = b.getPayCosts() == null ? 0 : b.getPayCosts().getTotalMana().getCMC();
 
             // deprioritize planar die roll marked with AIRollPlanarDieParams:LowPriority$ True
-            if (ApiType.RollPlanarDice == a.getApi() && a.getHostCard().hasSVar("AIRollPlanarDieParams") && a.getHostCard().getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
+            if (ApiType.RollPlanarDice == a.getApi() && a.getHostCard() != null && a.getHostCard().hasSVar("AIRollPlanarDieParams") && a.getHostCard().getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
                 return 1;
-            } else if (ApiType.RollPlanarDice == b.getApi() && b.getHostCard().hasSVar("AIRollPlanarDieParams") && b.getHostCard().getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
+            } else if (ApiType.RollPlanarDice == b.getApi() && b.getHostCard() != null && b.getHostCard().hasSVar("AIRollPlanarDieParams") && b.getHostCard().getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
                 return -1;
             }
 
@@ -774,9 +774,9 @@ public class AiController {
                 return 1;
             }
             
-            if (a.getHostCard().hasSVar("FreeSpellAI")) {
+            if (a.getHostCard() != null && a.getHostCard().hasSVar("FreeSpellAI")) {
                 return -1;
-            } else if (b.getHostCard().hasSVar("FreeSpellAI")) {
+            } else if (b.getHostCard() != null && b.getHostCard().hasSVar("FreeSpellAI")) {
                 return 1;
             }
 
@@ -791,33 +791,41 @@ public class AiController {
             Card source = sa.getHostCard();
             final Player ai = source.getController();
             final boolean noCreatures = ai.getCreaturesInPlay().isEmpty();
-            // puts creatures in front of spells
-            if (source.isCreature()) {
-                p += 1;
+
+            if (source != null) {
+                // puts creatures in front of spells
+                if (source.isCreature()) {
+                    p += 1;
+                }
+                // don't play equipments before having any creatures
+                if (source.isEquipment() && noCreatures) {
+                    p -= 9;
+                }
+                // 1. increase chance of using Surge effects
+                // 2. non-surged versions are usually inefficient
+                if (source.getOracleText().contains("surge cost") && !sa.isSurged()) {
+                    p -= 9;
+                }
+                // move snap-casted spells to front
+                if (source.isInZone(ZoneType.Graveyard)) {
+                    if (sa.getMayPlay() != null && source.mayPlay(sa.getMayPlay()) != null) {
+                        p += 50;
+                    }
+                }
+                // artifacts and enchantments with effects that do not stack
+                if ("True".equals(source.getSVar("NonStackingEffect")) && ai.isCardInPlay(source.getName())) {
+                    p -= 9;
+                }
+                // if the profile specifies it, deprioritize Storm spells in an attempt to build up storm count
+                if (source.hasKeyword("Storm") && ai.getController() instanceof PlayerControllerAi) {
+                    p -= (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.PRIORITY_REDUCTION_FOR_STORM_SPELLS));
+                }
             }
-            // don't play equipments before having any creatures
-            if (source.isEquipment() && noCreatures) {
-                p -= 9;
-            }
+
             // use Surge and Prowl costs when able to
             if (sa.isSurged() || 
                     (sa.getRestrictions().getProwlTypes() != null && !sa.getRestrictions().getProwlTypes().isEmpty())) {
                 p += 9;
-            }
-            // 1. increase chance of using Surge effects
-            // 2. non-surged versions are usually inefficient
-            if (sa.getHostCard().getOracleText().contains("surge cost") && !sa.isSurged()) {
-                p -= 9;
-            }
-            // move snap-casted spells to front
-            if (source.isInZone(ZoneType.Graveyard)) {
-                if(sa.getMayPlay() != null && source.mayPlay(sa.getMayPlay()) != null) {
-                    p += 50;
-                }
-            }
-            // artifacts and enchantments with effects that do not stack
-            if ("True".equals(source.getSVar("NonStackingEffect")) && ai.isCardInPlay(source.getName())) {
-                p -= 9;
             }
             // sort planeswalker abilities with most costly first
             if (sa.getRestrictions().isPwAbility()) {
@@ -836,11 +844,6 @@ public class AiController {
                 p += 4;
             } else if (ApiType.Mana == sa.getApi()) {
                 p -= 9;
-            }
-
-            // if the profile specifies it, deprioritize Storm spells in an attempt to build up storm count
-            if (source.hasKeyword("Storm") && ai.getController() instanceof PlayerControllerAi) {
-                p -= (((PlayerControllerAi)ai.getController()).getAi().getIntProperty(AiProps.PRIORITY_REDUCTION_FOR_STORM_SPELLS));
             }
 
             // try to cast mana ritual spells before casting spells to maximize potential mana
