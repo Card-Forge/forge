@@ -138,6 +138,7 @@ public final class StaticAbilityContinuous {
         List<Player> mayLookAt = null;
 
         boolean controllerMayPlay = false, mayPlayWithoutManaCost = false, mayPlayWithFlash = false;
+        String mayPlayAltManaCost = null;
         boolean mayPlayGrantZonePermissions = true;
         Integer mayPlayLimit = null;
 
@@ -402,6 +403,8 @@ public final class StaticAbilityContinuous {
                 controllerMayPlay = true;
                 if (params.containsKey("MayPlayWithoutManaCost")) {
                     mayPlayWithoutManaCost = true;
+                } else if (params.containsKey("MayPlayAltManaCost")) {
+                    mayPlayAltManaCost = params.get("MayPlayAltManaCost");
                 }
                 if (params.containsKey("MayPlayWithFlash")) {
                 	mayPlayWithFlash = true;
@@ -727,7 +730,7 @@ public final class StaticAbilityContinuous {
             }
             if (controllerMayPlay && (mayPlayLimit == null || hostCard.getMayPlayTurn() < mayPlayLimit)) {
                 Player mayPlayController = params.containsKey("MayPlayCardOwner") ? affectedCard.getOwner() : controller;
-                affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost, mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);
+                affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost, mayPlayAltManaCost, mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);
             }
 
             affectedCard.updateAbilityTextForView(); // only update keywords and text for view to avoid flickering

@@ -104,7 +104,7 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
         sealClass(shardsTemp);
     }
 
-    private String getSimpleString() {
+    public String getSimpleString() {
         if (this.hasNoCost) {
             return "no cost";
         }

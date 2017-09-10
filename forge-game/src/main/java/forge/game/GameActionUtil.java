@@ -144,6 +144,9 @@ public final class GameActionUtil {
                 if (o.getPayManaCost() == PayManaCost.NO) {
                     newSA.setBasicSpell(false);
                     newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());
+                } else if (o.getAltManaCost() != null) {
+                    newSA.setBasicSpell(false);
+                    newSA.setPayCosts(newSA.getPayCosts().copyWithDefinedMana(o.getAltManaCost()));
                 }
 
                 final StringBuilder sb = new StringBuilder(sa.getDescription());

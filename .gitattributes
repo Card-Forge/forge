@@ -2240,6 +2240,7 @@ forge-gui/res/cardsfolder/a/artillerize.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/artisan_of_forms.txt -text
 forge-gui/res/cardsfolder/a/artisan_of_kozilek.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/artisans_sorrow.txt -text
+forge-gui/res/cardsfolder/a/as_foretold.txt -text
 forge-gui/res/cardsfolder/a/ascendant_evincar.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/ascended_lawmage.txt -text
 forge-gui/res/cardsfolder/a/ascending_aven.txt svneol=native#text/plain
