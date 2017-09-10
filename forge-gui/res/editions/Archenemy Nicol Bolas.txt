@@ -39,7 +39,7 @@ Type=Other
 30 C Windrider Eel
 31 R Archfiend of Depravity
 32 R Deathbringer Regent
-33 C Doom Blade
+33 U Doom Blade
 34 R Harvester of Souls
 35 C Nightscape Familiar
 36 R Overseer of the Damned
@@ -93,11 +93,11 @@ Type=Other
 84 U Extract from Darkness
 85 M Nicol Bolas, Planeswalker
 86 U Slave of Bolas
-87 R Soul Ransom
+87 U Soul Ransom
 88 C Obelisk of Grixis
 89 R Sword of the Animist
-90 C Talisman of Dominance
-91 C Talisman of Indulgence
+90 U Talisman of Dominance
+91 U Talisman of Indulgence
 92 U Crumbling Necropolis
 93 R Dragonskull Summit
 94 R Drowned Catacomb
