@@ -517,11 +517,10 @@ public class Cost {
     public final Cost copyWithDefinedMana(String manaCost) {
         Cost toRet = new Cost(0);
         toRet.isAbility = this.isAbility;
+        toRet.costParts.add(new CostPartMana(new ManaCost(new ManaCostParser(manaCost)), null));
         for (CostPart cp : this.costParts) {
             if (!(cp instanceof CostPartMana))
                 toRet.costParts.add(cp.copy());
-            else
-                toRet.costParts.add(new CostPartMana(new ManaCost(new ManaCostParser(manaCost)), null));
         }
         return toRet;
     }
