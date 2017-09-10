@@ -1,0 +1,25 @@
+[metadata]
+Name:Possibility Storm - Hour of Devastation #08
+URL:http://www.possibilitystorm.com/wp-content/uploads/2017/09/HOU8.jpg
+Goal:Win
+Turns:1
+Difficulty:Medium
+Description:Win this turn.
+[state]
+humanlife=20
+ailife=7
+activeplayer=human
+activephase=MAIN1
+humanhand=Mind Rot|Set:KLD;Swamp|Set:AKH;Driven // Despair;Hollow One;Mind Rot|Set:KLD;Whispers of Emrakul;
+humanlibrary=Swamp|Set:AKH;Swamp|Set:AKH;Swamp|Set:AKH;Swamp|Set:AKH;Swamp|Set:AKH;Swamp|Set:AKH;Swamp|Set:AKH;
+humangraveyard=
+humanbattlefield=Sky Scourer;Hound of the Farbogs;Hazoret the Fervent|Set:AKH;Blooming Marsh;Blooming Marsh;Canyon Slough;Canyon Slough;Swamp|Set:AKH;
+humanexile=
+humancommand=
+aihand=Swamp|Set:AKH;Swamp|Set:AKH;Swamp|Set:AKH;Swamp|Set:AKH;
+ailibrary=
+aigraveyard=
+aibattlefield=Silkweaver Elite;Sage of Ancient Lore;
+aiprecast=
+aiexile=
+aicommand=
