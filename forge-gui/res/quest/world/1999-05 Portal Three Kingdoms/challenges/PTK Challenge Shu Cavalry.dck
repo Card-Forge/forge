@@ -1,0 +1,19 @@
+[quest]
+id=PTK Challenge: Shu Cavalry
+OpponentName=The Cavalry
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:PTK
+Credit Reward=120
+AIExtras=Lu Xun, Scholar General
+[metadata]
+Name=PTK Challenge: Shu Cavalry
+Title=The Cavalry
+Difficulty=medium
+Description=Chaaarge!!
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+20 Plains|PTK|1
+40 Shu Cavalry|PTK

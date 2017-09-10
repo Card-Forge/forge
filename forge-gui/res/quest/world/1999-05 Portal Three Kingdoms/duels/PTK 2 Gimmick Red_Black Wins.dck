@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=PTK 2 Gimmick Red_Black Wins
+Title=Red/Black Wins
+Difficulty=medium
+Description=Over 500,000 commoners followed Zhang Jue, General of Heaven, in his attempt to overthrow the corrupt Han dynasty.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Blaze|PTK
+4 Corrupt Eunuchs|PTK
+4 Fire Ambush|PTK
+4 Independent Troops|PTK
+11 Mountain|PTK|1
+4 Mountain Bandit|PTK
+9 Swamp|PTK|1
+4 Wei Ambush Force|PTK
+4 Wei Infantry|PTK
+4 Wei Strike Force|PTK
+4 Yellow Scarves Troops|PTK
+4 Young Wei Recruits|PTK

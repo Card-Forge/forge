@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=PTK 2 Gimmick: Tempo
+Title=Tempo
+Difficulty=medium
+Description=Leadership, not numbers, determines victory."\n-A Wu commander, before his 5,000 troops forced 15,000 Wei troops to retreat from Ruxu
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Corrupt Eunuchs|PTK
+2 Counterintelligence|PTK
+4 Fire Ambush|PTK
+4 Forced Retreat|PTK
+4 Independent Troops|PTK
+10 Island|PTK|3
+14 Mountain|PTK|3
+4 Preemptive Strike|PTK
+4 Ravaging Horde|PTK
+4 Stone Rain|PTK
+4 Wu Infantry|PTK
+4 Yellow Scarves Troops|PTK

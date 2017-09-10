@@ -1,0 +1,19 @@
+[quest]
+id=PTK Challenge: Riding Red Hare
+OpponentName=The Militia
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:PTK
+Credit Reward=120
+AIExtras=Volunteer Militia|Volunteer Militia|Volunteer Militia|Volunteer Militia
+[metadata]
+Name=PTK Challenge: Riding Red Hare
+Title=The Militia
+Difficulty=hard
+Description="Look at my horse\nMy horse is amazing"\n-Amazing Horse by Weebl
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+30 Plains|PTK|1
+30 Riding Red Hare|PTK

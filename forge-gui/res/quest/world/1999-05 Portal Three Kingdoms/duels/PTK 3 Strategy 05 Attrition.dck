@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=PTK 3 Strategy: 05 Attrition
+Title=Attrition
+Difficulty=hard
+Description=Cao Cao was haunted to death by the ghosts of the empresses and other high courtiers he had murdered.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+1 Cao Cao, Lord of Wei|PTK
+4 Corrupt Court Official|PTK
+4 Corrupt Eunuchs|PTK
+2 Desert Sandstorm|PTK
+4 Fire Ambush|PTK
+4 Ghostly Visit|PTK
+11 Mountain|PTK|3
+2 Overwhelming Forces|PTK
+2 Ravaging Horde|PTK
+4 Rolling Earthquake|PTK
+1 Stone Catapult|PTK
+15 Swamp|PTK|2
+4 Wei Assassins|PTK
+2 Wei Night Raiders|PTK

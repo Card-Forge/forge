@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=PTK 2 Gimmick: Enter the Dragon
+Title=Enter the Dragon
+Difficulty=medium
+Description="A good fight should be like a small play, but played seriously. A good martial artist does not become tense, but ready. Not thinking, yet not dreaming. Ready for whatever may come. When the opponent expands, I contract. When he contracts, I expand. And when there is an opportunity, I do not hit. It hits all by itself."\n-Bruce Lee, Enter the Dragon
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Control of the Court|PTK
+2 Dong Zhou, the Tyrant|PTK
+4 False Defeat|PTK
+2 Guan Yu, Sainted Warrior|PTK
+2 Huang Zhong, Shu General|PTK
+2 Kongming, "Sleeping Dragon"|PTK
+2 Liu Bei, Lord of Shu|PTK
+4 Loyal Retainers|PTK
+2 Lu Bu, Master-at-Arms|PTK
+2 Ma Chao, Western Warrior|PTK
+10 Mountain|PTK|1
+14 Plains|PTK|3
+2 Yuan Shao, the Indecisive|PTK
+2 Zhang Fei, Fierce Warrior|PTK
+2 Zhao Zilong, Tiger General|PTK
+4 Zodiac Dragon|PTK

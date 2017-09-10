@@ -1,0 +1,19 @@
+[quest]
+id=PTK Challenge: Mountain Bandit
+OpponentName=The Bandits
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:PTK
+Credit Reward=120
+AIExtras=Lu Xun, Scholar General
+[metadata]
+Name=PTK Challenge: Mountain Bandit
+Title=The Bandits
+Difficulty=hard
+Description=Chaaarge!!
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+20 Mountain|PTK|1
+40 Mountain Bandit|PTK

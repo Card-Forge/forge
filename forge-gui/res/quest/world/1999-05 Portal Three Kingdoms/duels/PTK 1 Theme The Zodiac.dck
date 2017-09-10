@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=PTK 1 Theme: The Zodiac
+Title=The Zodiac
+Difficulty=easy
+Description="Thrice Xuande's ardent quest led to Nanyang,\nWhere Sleeping Dragon unveiled Han's partition:\n\n'First take Jingzhou, next the Riverlands;\nOn that rich region, base your own royal stand.'\n\nNear death in Baidi, having reigned three years,\nBei sadly placed his son in Kongming's care\n\nBy six offensives from the hills of Qi\nKongming sought to change Han's destiny.\n\nBut the time of Han had run--could he Kongming not tell?--\nThat night his master star fell past the hills.\n\nJiang Wei alone still strove with might and main:\nNine times more he fought the north--in vain.\n\nZhong Hui and Deng Ai next led armies west:\nAnd to the Cao, Han's hills and streams now passed.\n\nCao Pi, Cao Rui, Fang, Mao, and briefly, Huan--\nThe Sima took the empire in their turn.\n\nCao's abdication changed the face of all;\nNo mighty battles marked the Southland's fall.\n\nThree kings no more--Chenliu, Guiming, Anle.\nThe fiefs and posts must now be filled anew.\n\nThe world's affairs rush on, an endless stream;\nA sky-told fate, infinite in reach, dooms all.\n\nThe kingdoms three are now the stuff of dream,\nFor men to ponder, past all praise or blame."\n-Three Kingdoms: A Historical Novel
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+10 Forest|PTK|1
+8 Mountain|PTK|3
+6 Swamp|PTK|2
+3 Zodiac Dog|PTK
+3 Zodiac Dragon|PTK
+3 Zodiac Goat|PTK
+3 Zodiac Horse|PTK
+3 Zodiac Monkey|PTK
+3 Zodiac Ox|PTK
+3 Zodiac Pig|PTK
+3 Zodiac Rabbit|PTK
+3 Zodiac Rat|PTK
+3 Zodiac Rooster|PTK
+3 Zodiac Snake|PTK
+3 Zodiac Tiger|PTK

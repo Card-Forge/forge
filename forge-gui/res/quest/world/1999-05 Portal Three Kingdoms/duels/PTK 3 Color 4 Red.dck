@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PTK 3 Color: 4 Red
+Title=The Color Red
+Difficulty=hard
+Description="Dong Zhuo's man, Lu Bu, warrior without peer, / Far surpassed the champions of his sphere."
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+4 Blaze|PTK
+4 Corrupt Eunuchs|PTK
+4 Fire Ambush|PTK
+4 Fire Bowman|PTK
+4 Imperial Recruiter|PTK
+2 Lu Bu, Master-at-Arms|PTK
+1 Ma Chao, Western Warrior|PTK
+25 Mountain|PTK|1
+4 Ravaging Horde|PTK
+4 Rockslide Ambush|PTK
+4 Rolling Earthquake|PTK

@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=PTK 1 Plot: AD 212: The Five Tiger Generals
+Title=AD 212: The Five Tiger Generals
+Difficulty=easy
+Description=In establishing the Shu kingdom, Liu Bei's forces fought against Ma Chao at Chengdu. Eventually, Ma Chao surrendered and became one of Liu Bei's Tiger Generals.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Guan Yu's 1,000-Li March|PTK
+4 Guan Yu, Sainted Warrior|PTK
+4 Huang Zhong, Shu General|PTK
+4 Ma Chao, Western Warrior|PTK
+4 Misfortune's Gain|PTK
+8 Mountain|PTK|2
+16 Plains|PTK|3
+2 Riding Red Hare|PTK
+2 Shu Cavalry|PTK
+2 Shu Defender|PTK
+4 Shu Elite Companions|PTK
+4 Zhang Fei, Fierce Warrior|PTK
+4 Zhao Zilong, Tiger General|PTK

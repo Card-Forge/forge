@@ -1,0 +1,18 @@
+[quest]
+id=PTK Challenge: Zodiac Dragon
+OpponentName=The Dragon
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:PTK
+Credit Reward=120
+AIExtras=Zodiac Dragon
+[metadata]
+Name=PTK Challenge: Zodiac Dragon
+Title=The Dragon
+Difficulty=hard
+Description="I have dragons."\n-Daenerys Targaryen, Game of Thrones
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+60 Mountain|PTK|1

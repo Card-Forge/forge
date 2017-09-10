@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=PTK 3 Strategy: 10 Horse Ramp
+Title=Horse Ramp
+Difficulty=hard
+Description="Trying to meet a worthy man in the wrong way is as bad as closing the door on an invited guest."\n-Mencius, a Chinese philosopher
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Forced Retreat|PTK
+10 Forest|PTK|1
+1 Hunting Cheetah|PTK
+14 Island|PTK|2
+2 Lady Zhurong, Warrior Queen|PTK
+2 Lu Meng, Wu General|PTK
+2 Lu Su, Wu Advisor|PTK
+3 Lu Xun, Scholar General|PTK
+4 Preemptive Strike|PTK
+4 Strategic Planning|PTK
+3 Sun Ce, Young Conquerer|PTK
+1 Sun Quan, Lord of Wu|PTK
+4 Three Visits|PTK
+4 Trip Wire|PTK
+2 Wu Longbowman|PTK

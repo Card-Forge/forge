@@ -1,0 +1,19 @@
+[quest]
+id=PTK Challenge: Cao Cao, Lord of Wei
+OpponentName=Cao Cao, Lord of Wei
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:PTK
+Credit Reward=120
+AIExtras=Cao Cao, Lord of Wei
+[metadata]
+Name=PTK Challenge: Cao Cao, Lord of Wei
+Title=Cao Cao, Lord of Wei
+Difficulty=medium
+Description=It's "Tsow Tsow," not "Cow Cow."
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+30 Cao Cao, Lord of Wei|PTK
+30 Swamp|PTK|3

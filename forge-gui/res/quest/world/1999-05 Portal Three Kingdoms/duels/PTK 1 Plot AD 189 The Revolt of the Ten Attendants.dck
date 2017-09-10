@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PTK 1 Plot: AD 189: The Revolt of the Ten Attendants
+Title=AD 189: The Revolt of the Ten Attendants
+Difficulty=easy
+Description=Taking control of powerful court positions one by one, eunuchs eventually brought on the fall of the Han dynasty, leading to the chaos of the Three Kingdoms.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Control of the Court|PTK
+4 Corrupt Court Official|PTK
+4 Corrupt Eunuchs|PTK
+4 Cunning Advisor|PTK
+4 Eunuchs' Intrigues|PTK
+4 Famine|PTK
+4 Fire Bowman|PTK
+4 Imperial Edict|PTK
+4 Imperial Recruiter|PTK
+12 Mountain|PTK|1
+12 Swamp|PTK|1

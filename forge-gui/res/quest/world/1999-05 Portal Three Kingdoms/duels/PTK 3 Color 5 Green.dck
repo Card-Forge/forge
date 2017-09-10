@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PTK 3 Color: 5 Green
+Title=The Color Green
+Difficulty=hard
+Description="A man, and such a fool! I, a woman, will fight them for you."\n-Lady Zhurong to her husband Meng Huo, before leading an army against the Shu
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+24 Forest|PTK|2
+4 Forest Bear|PTK
+4 Hunting Cheetah|PTK
+2 Lady Zhurong, Warrior Queen|PTK
+4 Meng Huo's Horde|PTK
+4 Meng Huo, Barbarian King|PTK
+4 Southern Elephant|PTK
+4 Three Visits|PTK
+4 Trip Wire|PTK
+2 Wolf Pack|PTK
+4 Zodiac Tiger|PTK

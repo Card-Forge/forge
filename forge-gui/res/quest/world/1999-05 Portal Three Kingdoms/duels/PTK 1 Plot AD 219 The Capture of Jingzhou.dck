@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=PTK 1 Plot: AD 219: The Capture of Jingzhou
+Title=AD 219: The Capture of Jingzhou
+Difficulty=easy
+Description=The province of Jingzhou was the fulcrum of the three kingdoms. At separate times it was coveted and controlled by the Wu, the Shu, and the Wei.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+3 Cao Cao, Lord of Wei|PTK
+4 Cao Ren, Wei Commander|PTK
+4 Capture of Jingzhou|PTK
+12 Island|PTK|1
+4 Lu Meng, Wu General|PTK
+4 Lu Xun, Scholar General|PTK
+3 Poison Arrow|PTK
+3 Preemptive Strike|PTK
+4 Sima Yi, Wei Field Marshal|PTK
+4 Sun Quan, Lord of Wu|PTK
+12 Swamp|PTK|2
+3 Zhuge Jin, Wu Strategist|PTK

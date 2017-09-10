@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=PTK 3 Strategy: 03 Control
+Title=Control
+Difficulty=hard
+Description=The battle of Puyang marked the beginning of the end for Lu Bu. He lost the city--and later his life--to Cao Cao.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+1 Cao Cao, Lord of Wei|PTK
+1 Cao Ren, Wei Commander|PTK
+4 Corrupt Court Official|PTK
+4 Forced Retreat|PTK
+4 Ghostly Visit|PTK
+11 Island|PTK|1
+1 Lu Meng, Wu General|PTK
+1 Lu Su, Wu Advisor|PTK
+1 Lu Xun, Scholar General|PTK
+1 Overwhelming Forces|PTK
+4 Preemptive Strike|PTK
+1 Stone Catapult|PTK
+1 Sun Ce, Young Conquerer|PTK
+1 Sun Quan, Lord of Wu|PTK
+13 Swamp|PTK|2
+4 Wei Ambush Force|PTK
+4 Wei Assassins|PTK
+1 Wu Longbowman|PTK
+1 Xiahou Dun, the One-Eyed|PTK
+1 Zhang He, Wei General|PTK

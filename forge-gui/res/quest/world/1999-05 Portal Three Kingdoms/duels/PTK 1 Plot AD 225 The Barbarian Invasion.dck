@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PTK 1 Plot: AD 225: The Barbarian Invasion
+Title=AD 225: The Barbarian Invasion
+Difficulty=easy
+Description=Only twenty years after the Sima clan united the empire, invading barbarians divided it again.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Barbarian General|PTK
+4 Barbarian Horde|PTK
+14 Forest|PTK|3
+4 Lady Zhurong, Warrior Queen|PTK
+4 Meng Huo's Horde|PTK
+4 Meng Huo, Barbarian King|PTK
+10 Mountain|PTK|2
+4 Rockslide Ambush|PTK
+4 Southern Elephant|PTK
+4 Trained Cheetah|PTK
+4 Trip Wire|PTK

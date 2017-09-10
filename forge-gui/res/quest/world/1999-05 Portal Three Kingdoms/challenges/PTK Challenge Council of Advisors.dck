@@ -1,0 +1,20 @@
+[quest]
+id=PTK Challenge: Council of Advisors
+OpponentName=The Council
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:PTK
+Credit Reward=120
+AIExtras=Zhou Yu, Chief Commander
+[metadata]
+Name=PTK Challenge: Council of Advisors
+Title=The Council
+Difficulty=medium
+Description=There is always someone who knows better.  (Also, watch out for Zhou Yu.)
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+30 Council of Advisors|PTK
+24 Island|PTK|2
+6 Sun Quan, Lord of Wu|PTK

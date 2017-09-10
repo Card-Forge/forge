@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=PTK 1 Plot: AD 198: The Battle of Xiapi
+Title=AD 198: The Battle of Xiapi
+Difficulty=easy
+Description="Swallowing his eye, the valiant Xiahou Dun fought on; / But Cao Cao's vanguard, its commander wounded, could not hold out for long."
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Cao Cao, Lord of Wei|PTK
+4 Guan Yu, Sainted Warrior|PTK
+4 Liu Bei, Lord of Shu|PTK
+4 Misfortune's Gain|PTK
+12 Plains|PTK|2
+4 Return to Battle|PTK
+4 Riding Red Hare|PTK
+4 Shu Grain Caravan|PTK
+4 Stone Catapult|PTK
+12 Swamp|PTK|3
+4 Xiahou Dun, the One-Eyed|PTK

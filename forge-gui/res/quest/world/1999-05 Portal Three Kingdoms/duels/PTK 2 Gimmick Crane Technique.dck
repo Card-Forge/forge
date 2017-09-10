@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=PTK 2 Gimmick: Crane Technique
+Title=Crane Technique
+Difficulty=medium
+Description="If do right, no can defense."\n-Mr. Miyagi on the Crane Technique, The Karate Kid
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+14 Forest|PTK|2
+4 Hunting Cheetah|PTK
+4 Kongming, "Sleeping Dragon"|PTK
+3 Lady Zhurong, Warrior Queen|PTK
+3 Meng Huo, Barbarian King|PTK
+10 Plains|PTK|1
+4 Riding Red Hare|PTK
+4 Riding the Dilu Horse|PTK
+4 Taoist Mystic|PTK
+4 Trip Wire|PTK
+4 Wielding the Green Dragon|PTK
+2 Zuo Ci, the Mocking Sage|PTK

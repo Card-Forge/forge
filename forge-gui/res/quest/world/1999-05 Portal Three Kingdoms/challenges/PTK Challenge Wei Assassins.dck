@@ -1,0 +1,19 @@
+[quest]
+id=PTK Challenge: Wei Assassins
+OpponentName=The Assassins
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:PTK
+Credit Reward=120
+AIExtras=
+[metadata]
+Name=PTK Challenge: Wei Assassins
+Title=The Assassins
+Difficulty=medium
+Description="Better watch out, cause I'm the assassin"\n-The Assassin, Iron Maiden
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+30 Swamp|PTK|2
+30 Wei Assassins|PTK

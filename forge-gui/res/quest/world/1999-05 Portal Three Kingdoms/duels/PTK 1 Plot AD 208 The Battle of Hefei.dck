@@ -1,0 +1,19 @@
+[duel]
+[metadata]
+Name=PTK 1 Plot: AD 208: The Battle of Hefei
+Title=AD 208: The Battle of Hefei
+Difficulty=easy
+Description=Wei won the battle of Hefei when Zhang Liao defeated Sun Quan and then foiled a Wu scheme to incite rebellion.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Cao Cao, Lord of Wei|PTK
+4 Cao Ren, Wei Commander|PTK
+4 Cunning Advisor|PTK
+4 Desperate Charge|PTK
+4 Poison Arrow|PTK
+24 Swamp|PTK|3
+4 Wei Elite Companions|PTK
+4 Wei Infantry|PTK
+4 Wei Scout|PTK
+4 Zhang Liao, Hero of Hefei|PTK

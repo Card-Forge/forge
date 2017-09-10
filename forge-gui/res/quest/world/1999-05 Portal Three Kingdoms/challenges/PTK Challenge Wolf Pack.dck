@@ -1,0 +1,20 @@
+[quest]
+id=PTK Challenge: Wolf Pack
+OpponentName=The Wolf Pack
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:PTK
+Credit Reward=120
+AIExtras=Hunting Cheetah
+[metadata]
+Name=PTK Challenge: Wolf Pack
+Title=The Wolf Pack
+Difficulty=hard
+Description=And then the wolves came.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+20 Forest|PTK|2
+20 Three Visits|PTK
+20 Wolf Pack|PTK

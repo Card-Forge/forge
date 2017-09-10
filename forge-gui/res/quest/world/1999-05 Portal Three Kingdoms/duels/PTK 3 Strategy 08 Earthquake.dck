@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=PTK 3 Strategy: 08 Earthquake
+Title=Earthquake
+Difficulty=hard
+Description=During Kongming's campaigns against the Wei, his Shu troops rotated from the battlefront to the fields every hundred days.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Corrupt Eunuchs|PTK
+4 Eightfold Maze|PTK
+4 Fire Ambush|PTK
+2 Guan Yu, Sainted Warrior|PTK
+2 Kongming's Contraptions|PTK
+1 Kongming, "Sleeping Dragon"|PTK
+2 Liu Bei, Lord of Shu|PTK
+2 Lu Bu, Master-at-Arms|PTK
+11 Mountain|PTK|1
+15 Plains|PTK|3
+4 Rolling Earthquake|PTK
+4 Shu Soldier-Farmers|PTK
+3 Zhang Fei, Fierce Warrior|PTK
+2 Zhao Zilong, Tiger General|PTK

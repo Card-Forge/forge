@@ -1,0 +1,21 @@
+[duel]
+[metadata]
+Name=PTK 1 Plot: AD 191: Sun Ce Builds a Dynasty
+Title=AD 191: Sun Ce Builds a Dynasty
+Difficulty=easy
+Description=Using nature to their advantage, wise Three Kingdoms generals often let dammed rivers loose to destroy their enemies.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Champion's Victory|PTK
+4 Council of Advisors|PTK
+3 False Mourning|PTK
+8 Forest|PTK|1
+16 Island|PTK|1
+4 Spoils of Victory|PTK
+3 Spring of Eternal Peace|PTK
+4 Sun Ce, Young Conquerer|PTK
+3 Sun Quan, Lord of Wu|PTK
+4 Wu Spy|PTK
+4 Wu Warship|PTK
+3 Zhou Yu, Chief Commander|PTK

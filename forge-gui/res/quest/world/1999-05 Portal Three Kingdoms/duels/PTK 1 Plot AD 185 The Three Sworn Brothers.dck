@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=PTK 1 Plot: AD 185: The Three Sworn Brothers
+Title=AD 185: The Three Sworn Brothers
+Difficulty=easy
+Description="We three, though of separate ancestry, join in brotherhood . . . . We dare not hope to be together always but hereby vow to die the selfsame day."\n-Peach Garden Oath
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+8 Forest|PTK|2
+2 Guan Yu's 1,000-Li March|PTK
+4 Guan Yu, Sainted Warrior|PTK
+4 Liu Bei, Lord of Shu|PTK
+4 Peach Garden Oath|PTK
+16 Plains|PTK|2
+2 Riding Red Hare|PTK
+2 Riding the Dilu Horse|PTK
+2 Three Visits|PTK
+4 Vengeance|PTK
+2 Virtuous Charge|PTK
+4 Volunteer Militia|PTK
+2 Wielding the Green Dragon|PTK
+4 Zhang Fei, Fierce Warrior|PTK
