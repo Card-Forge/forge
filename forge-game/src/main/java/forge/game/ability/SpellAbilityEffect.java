@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import forge.card.MagicColor;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -353,7 +354,11 @@ public abstract class SpellAbilityEffect {
         eff.setOwner(controller);
 
         eff.setImageKey(image);
-        eff.setColor(hostCard.determineColor().getColor());
+        if (eff.getType().hasType(CardType.CoreType.Emblem)) {
+            eff.setColor(MagicColor.COLORLESS);
+        } else {
+            eff.setColor(hostCard.determineColor().getColor());
+        }
         eff.setImmutable(true);
         eff.setEffectSource(hostCard);
 
