@@ -252,6 +252,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                                 break;
                             }
                         }
+                        if (cardZone.is(ZoneType.Graveyard) && sa.isAftermath()) {
+                            // Special exclusion for Aftermath, useful for e.g. As Foretold
+                            return true;
+                        }
                         if (!hasOtherGrantor) {
                             return false;
                         }

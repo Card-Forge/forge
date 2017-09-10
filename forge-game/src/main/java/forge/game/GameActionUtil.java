@@ -27,10 +27,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardPlayOption;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.card.CardPlayOption.PayManaCost;
 import forge.game.cost.Cost;
 import forge.game.mana.ManaCostBeingPaid;
@@ -151,6 +148,20 @@ public final class GameActionUtil {
                     newSA.setBasicSpell(false);
                     newSA.setPayCosts(newSA.getPayCosts().copyWithDefinedMana(o.getAltManaCost()));
                     changedManaCost = true;
+                    if (host.hasSVar("AsForetoldSplitCMCHack")) {
+                        // FIXME: A temporary workaround for As Foretold interaction with split cards, better solution needed.
+                        if (sa.isLeftSplit()) {
+                            int leftCMC = sa.getHostCard().getCMC(Card.SplitCMCMode.LeftSplitCMC);
+                            if (leftCMC > host.getCounters(CounterType.TIME)) {
+                                continue;
+                            }
+                        } else if (sa.isRightSplit()) {
+                            int rightCMC = sa.getHostCard().getCMC(Card.SplitCMCMode.RightSplitCMC);
+                            if (rightCMC > host.getCounters(CounterType.TIME)) {
+                                continue;
+                            }
+                        }
+                    }
                 }
                 if (changedManaCost) {
                     if ("0".equals(sa.getParam("ActivationLimit")) && sa.getHostCard().getManaCost().isNoCost()) {
