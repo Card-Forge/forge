@@ -147,6 +147,9 @@ public final class GameActionUtil {
                 } else if (o.getAltManaCost() != null) {
                     newSA.setBasicSpell(false);
                     newSA.setPayCosts(newSA.getPayCosts().copyWithDefinedMana(o.getAltManaCost()));
+                    if ("0".equals(sa.getParam("ActivationLimit")) && sa.getHostCard().getManaCost().isNoCost()) {
+                        sar.setLimitToCheck(null);
+                    }
                 }
 
                 final StringBuilder sb = new StringBuilder(sa.getDescription());
