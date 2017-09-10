@@ -141,12 +141,18 @@ public final class GameActionUtil {
                 sar.setZone(null);
                 newSA.setMayPlay(o.getAbility());
                 newSA.setMayPlayOriginal(sa);
+
+                boolean changedManaCost = false;
                 if (o.getPayManaCost() == PayManaCost.NO) {
                     newSA.setBasicSpell(false);
                     newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());
+                    changedManaCost = true;
                 } else if (o.getAltManaCost() != null) {
                     newSA.setBasicSpell(false);
                     newSA.setPayCosts(newSA.getPayCosts().copyWithDefinedMana(o.getAltManaCost()));
+                    changedManaCost = true;
+                }
+                if (changedManaCost) {
                     if ("0".equals(sa.getParam("ActivationLimit")) && sa.getHostCard().getManaCost().isNoCost()) {
                         sar.setLimitToCheck(null);
                     }
