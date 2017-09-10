@@ -111,10 +111,10 @@ public class CardProperty {
 
             if (property.startsWith("leftcmc")) {
                 rhs = property.substring(9);
-                y = card.getState(CardStateName.LeftSplit).getManaCost().getCMC();
+                y = card.getCMC(Card.SplitCMCMode.LeftSplitCMC);
             } else if (property.startsWith("rightcmc")) {
                 rhs = property.substring(10);
-                y = card.getState(CardStateName.RightSplit).getManaCost().getCMC();
+                y = card.getCMC(Card.SplitCMCMode.RightSplitCMC);
             }
 
             try {
