@@ -1182,7 +1182,10 @@ public class ComputerUtilCombat {
      *            a {@link forge.game.combat.Combat} object.
      * @return a int.
      */
-    public static int predictPowerBonusOfAttacker(final Card attacker, final Card blocker, final Combat combat , boolean withoutAbilities) {
+    public static int predictPowerBonusOfAttacker(final Card attacker, final Card blocker, final Combat combat, boolean withoutAbilities) {
+        return predictPowerBonusOfAttacker(attacker, blocker, combat, withoutAbilities, false);
+    }
+    public static int predictPowerBonusOfAttacker(final Card attacker, final Card blocker, final Combat combat, boolean withoutAbilities, boolean withoutCombatStaticAbilities) {
         int power = 0;
 
         power += attacker.getKeywordMagnitude("Bushido");
@@ -1222,27 +1225,29 @@ public class ComputerUtilCombat {
 
         // look out for continuous static abilities that only care for attacking
         // creatures
-        final CardCollectionView cardList = CardCollection.combine(game.getCardsIn(ZoneType.Battlefield), game.getCardsIn(ZoneType.Command));
-        for (final Card card : cardList) {
-            for (final StaticAbility stAb : card.getStaticAbilities()) {
-                final Map<String, String> params = stAb.getMapParams();
-                if (!params.get("Mode").equals("Continuous")) {
-                    continue;
-                }
-                if (!params.containsKey("Affected") || !params.get("Affected").contains("attacking")) {
-                    continue;
-                }
-                final String valid = params.get("Affected").replace("attacking", "Creature");
-                if (!attacker.isValid(valid, card.getController(), card, null)) {
-                    continue;
-                }
-                if (params.containsKey("AddPower")) {
-                    if (params.get("AddPower").equals("X")) {
-                        power += CardFactoryUtil.xCount(card, card.getSVar("X"));
-                    } else if (params.get("AddPower").equals("Y")) {
-                        power += CardFactoryUtil.xCount(card, card.getSVar("Y"));
-                    } else {
-                        power += Integer.valueOf(params.get("AddPower"));
+        if (!withoutCombatStaticAbilities) {
+            final CardCollectionView cardList = CardCollection.combine(game.getCardsIn(ZoneType.Battlefield), game.getCardsIn(ZoneType.Command));
+            for (final Card card : cardList) {
+                for (final StaticAbility stAb : card.getStaticAbilities()) {
+                    final Map<String, String> params = stAb.getMapParams();
+                    if (!params.get("Mode").equals("Continuous")) {
+                        continue;
+                    }
+                    if (!params.containsKey("Affected") || !params.get("Affected").contains("attacking")) {
+                        continue;
+                    }
+                    final String valid = params.get("Affected").replace("attacking", "Creature");
+                    if (!attacker.isValid(valid, card.getController(), card, null)) {
+                        continue;
+                    }
+                    if (params.containsKey("AddPower")) {
+                        if (params.get("AddPower").equals("X")) {
+                            power += CardFactoryUtil.xCount(card, card.getSVar("X"));
+                        } else if (params.get("AddPower").equals("Y")) {
+                            power += CardFactoryUtil.xCount(card, card.getSVar("Y"));
+                        } else {
+                            power += Integer.valueOf(params.get("AddPower"));
+                        }
                     }
                 }
             }
@@ -1382,6 +1387,10 @@ public class ComputerUtilCombat {
      */
     public static int predictToughnessBonusOfAttacker(final Card attacker, final Card blocker, final Combat combat
             , boolean withoutAbilities) {
+        return predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities, false);
+    }
+    public static int predictToughnessBonusOfAttacker(final Card attacker, final Card blocker, final Combat combat
+            , boolean withoutAbilities, boolean withoutCombatStaticAbilities) {
         int toughness = 0;
 
         //check Exalted only for the first attacker
@@ -1410,37 +1419,39 @@ public class ComputerUtilCombat {
 
         // look out for continuous static abilities that only care for attacking
         // creatures
-        final CardCollectionView cardList = game.getCardsIn(ZoneType.Battlefield);
-        for (final Card card : cardList) {
-            for (final StaticAbility stAb : card.getStaticAbilities()) {
-                final Map<String, String> params = stAb.getMapParams();
-                if (!params.get("Mode").equals("Continuous")) {
-                    continue;
-                }
-                if (params.containsKey("Affected") && params.get("Affected").contains("attacking")) {
-	                final String valid = params.get("Affected").replace("attacking", "Creature");
-	                if (!attacker.isValid(valid, card.getController(), card, null)) {
-	                    continue;
-	                }
-	                if (params.containsKey("AddToughness")) {
-	                    if (params.get("AddToughness").equals("X")) {
-	                        toughness += CardFactoryUtil.xCount(card, card.getSVar("X"));
-	                    } else if (params.get("AddToughness").equals("Y")) {
-	                        toughness += CardFactoryUtil.xCount(card, card.getSVar("Y"));
-	                    } else {
-	                        toughness += Integer.valueOf(params.get("AddToughness"));
-	                    }
-	                }
-                } else if (params.containsKey("Affected") && params.get("Affected").contains("untapped")) {
-	                final String valid = params.get("Affected").replace("untapped", "Creature");
-	                if (!attacker.isValid(valid, card.getController(), card, null) 
-	                		|| attacker.hasKeyword("Vigilance")) {
-	                    continue;
-	                }
-	                // remove the bonus, because it will no longer be granted
-	                if (params.containsKey("AddToughness")) {
-	                	toughness -= Integer.valueOf(params.get("AddToughness"));
-	                }
+        if (!withoutCombatStaticAbilities) {
+            final CardCollectionView cardList = game.getCardsIn(ZoneType.Battlefield);
+            for (final Card card : cardList) {
+                for (final StaticAbility stAb : card.getStaticAbilities()) {
+                    final Map<String, String> params = stAb.getMapParams();
+                    if (!params.get("Mode").equals("Continuous")) {
+                        continue;
+                    }
+                    if (params.containsKey("Affected") && params.get("Affected").contains("attacking")) {
+                        final String valid = params.get("Affected").replace("attacking", "Creature");
+                        if (!attacker.isValid(valid, card.getController(), card, null)) {
+                            continue;
+                        }
+                        if (params.containsKey("AddToughness")) {
+                            if (params.get("AddToughness").equals("X")) {
+                                toughness += CardFactoryUtil.xCount(card, card.getSVar("X"));
+                            } else if (params.get("AddToughness").equals("Y")) {
+                                toughness += CardFactoryUtil.xCount(card, card.getSVar("Y"));
+                            } else {
+                                toughness += Integer.valueOf(params.get("AddToughness"));
+                            }
+                        }
+                    } else if (params.containsKey("Affected") && params.get("Affected").contains("untapped")) {
+                        final String valid = params.get("Affected").replace("untapped", "Creature");
+                        if (!attacker.isValid(valid, card.getController(), card, null)
+                                || attacker.hasKeyword("Vigilance")) {
+                            continue;
+                        }
+                        // remove the bonus, because it will no longer be granted
+                        if (params.containsKey("AddToughness")) {
+                            toughness -= Integer.valueOf(params.get("AddToughness"));
+                        }
+                    }
                 }
             }
         }
@@ -1684,6 +1695,10 @@ public class ComputerUtilCombat {
      */
     public static boolean canDestroyAttacker(Player ai, Card attacker, Card blocker, final Combat combat,
             final boolean withoutAbilities) {
+        return canDestroyAttacker(ai, attacker, blocker, combat, withoutAbilities, false);
+    }
+    public static boolean canDestroyAttacker(Player ai, Card attacker, Card blocker, final Combat combat,
+            final boolean withoutAbilities, final boolean withoutAttackerStaticAbilities) {
         // Can activate transform ability
         if (!withoutAbilities) {
             attacker = canTransform(attacker);
@@ -1735,10 +1750,10 @@ public class ComputerUtilCombat {
         }
         if (attacker.toughnessAssignsDamage()) {
             attackerDamage = attacker.getNetToughness()
-                    + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities);
+                    + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities, withoutAttackerStaticAbilities);
         } else {
         	attackerDamage = attacker.getNetPower()
-                    + ComputerUtilCombat.predictPowerBonusOfAttacker(attacker, blocker, combat, withoutAbilities);
+                    + ComputerUtilCombat.predictPowerBonusOfAttacker(attacker, blocker, combat, withoutAbilities, withoutAttackerStaticAbilities);
         }
 
         int possibleDefenderPrevention = 0;
@@ -1760,7 +1775,7 @@ public class ComputerUtilCombat {
         final int defenderLife = ComputerUtilCombat.getDamageToKill(blocker)
                 + ComputerUtilCombat.predictToughnessBonusOfBlocker(attacker, blocker, withoutAbilities);
         final int attackerLife = ComputerUtilCombat.getDamageToKill(attacker)
-                + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities);
+                + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities, withoutAttackerStaticAbilities);
 
         if (blocker.hasKeyword("Double Strike")) {
             if (defenderDamage > 0 && (hasKeyword(blocker, "Deathtouch", withoutAbilities, combat) || attacker.hasSVar("DestroyWhenDamaged"))) {
@@ -1929,6 +1944,10 @@ public class ComputerUtilCombat {
      */
     public static boolean canDestroyBlocker(Player ai, Card blocker, Card attacker, final Combat combat,
             final boolean withoutAbilities) {
+        return canDestroyBlocker(ai, blocker, attacker, combat, withoutAbilities, false);
+    }
+    public static boolean canDestroyBlocker(Player ai, Card blocker, Card attacker, final Combat combat,
+            final boolean withoutAbilities, final boolean withoutAttackerStaticAbilities) {
         // Can activate transform ability
         if (!withoutAbilities) {
             attacker = canTransform(attacker);
@@ -1962,10 +1981,10 @@ public class ComputerUtilCombat {
         }
         if (attacker.toughnessAssignsDamage()) {
             attackerDamage = attacker.getNetToughness()
-                    + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities);
+                    + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities, withoutAttackerStaticAbilities);
         } else {
         	attackerDamage = attacker.getNetPower()
-                    + ComputerUtilCombat.predictPowerBonusOfAttacker(attacker, blocker, combat, withoutAbilities);
+                    + ComputerUtilCombat.predictPowerBonusOfAttacker(attacker, blocker, combat, withoutAbilities, withoutAttackerStaticAbilities);
         }
 
         int possibleDefenderPrevention = 0;
@@ -1990,7 +2009,7 @@ public class ComputerUtilCombat {
         final int defenderLife = ComputerUtilCombat.getDamageToKill(blocker)
                 + ComputerUtilCombat.predictToughnessBonusOfBlocker(attacker, blocker, withoutAbilities);
         final int attackerLife = ComputerUtilCombat.getDamageToKill(attacker)
-                + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities);
+                + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities, withoutAttackerStaticAbilities);
 
         if (attacker.hasKeyword("Double Strike")) {
             if (attackerDamage > 0 && (hasKeyword(attacker, "Deathtouch", withoutAbilities, combat) || blocker.hasSVar("DestroyWhenDamaged"))) {

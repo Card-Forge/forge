@@ -72,7 +72,9 @@ public enum AiProps { /** */
     COMBAT_ASSAULT_ATTACK_EVASION_PREDICTION ("true"), /** */
     COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION ("true"), /** */
     CONSERVATIVE_ENERGY_PAYMENT_ONLY_IN_COMBAT ("true"), /** */
-    CONSERVATIVE_ENERGY_PAYMENT_ONLY_DEFENSIVELY ("true"); /** */
+    CONSERVATIVE_ENERGY_PAYMENT_ONLY_DEFENSIVELY ("true"), /** */
+    // Experimental features, must be removed after extensive testing and, ideally, defaulting
+    EXPERIMENTAL_AVOID_ST_ATK_BONUS_2X_COUNT ("false"); /** */
 
     private final String strDefaultVal;
 
