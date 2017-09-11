@@ -737,7 +737,7 @@ public class PumpAi extends PumpAiBase {
         return true;
     }
 
-    public boolean doAristocratLogic(SpellAbility sa, Player ai) {
+    public boolean doAristocratLogic(final SpellAbility sa, final Player ai) {
         // A logic for cards that say "Sacrifice a creature: CARDNAME gets +X/+X until EOT"
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
