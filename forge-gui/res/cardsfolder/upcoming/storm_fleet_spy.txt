@@ -1,5 +1,5 @@
 Name:Storm Fleet Spy
-ManaCost:2 G
+ManaCost:2 U
 Types:Creature Dinosaur
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ RaidTest | Execute$ TrigDraw | TriggerDescription$ Raid — When CARDNAME enters the battlefield, if you attacked with a creature this turn, draw a card.
