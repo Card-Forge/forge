@@ -162,6 +162,8 @@ public class CombatView extends TrackableObject {
     }
 
     public void addAttackingBand(final Iterable<CardView> attackingBand, final GameEntityView defender, final Iterable<CardView> blockers, final Iterable<CardView> plannedBlockers) {
+        if (defender == null) { return; }
+
         final FCollection<CardView> attackingBandCopy = new FCollection<CardView>();
         final FCollection<CardView> blockersCopy = new FCollection<CardView>();
         final FCollection<CardView> plannedBlockersCopy = new FCollection<CardView>();
