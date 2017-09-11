@@ -739,6 +739,7 @@ public class PumpAi extends PumpAiBase {
 
     public boolean doAristocratLogic(final SpellAbility sa, final Player ai) {
         // A logic for cards that say "Sacrifice a creature: CARDNAME gets +X/+X until EOT"
+        // TODO: use getNetCombatDamage() instead of getNetPower() for cases where damage is assigned by toughness
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
         final Card source = sa.getHostCard();
