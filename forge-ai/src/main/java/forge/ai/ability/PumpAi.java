@@ -95,7 +95,8 @@ public class PumpAi extends PumpAiBase {
             }
             return true;
         } else if (logic.equals("Aristocrat")) {
-            if (!ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+            final boolean isThreatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(sa.getHostCard());
+            if (!ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && !isThreatened) {
                 return false;
             }
         }
@@ -743,9 +744,47 @@ public class PumpAi extends PumpAiBase {
         final Card source = sa.getHostCard();
         final int numOtherCreats = Math.max(0, ai.getCreaturesInPlay().size() - 1);
         final int powerBonus = sa.hasParam("NumAtt") ? AbilityUtils.calculateAmount(source, sa.getParam("NumAtt"), sa) : 0;
+        final int toughnessBonus = sa.hasParam("NumDef") ? AbilityUtils.calculateAmount(source, sa.getParam("NumDef"), sa) : 0;
         final int selfEval = ComputerUtilCard.evaluateCreature(source);
+        final boolean isThreatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(source);
 
-        if (combat == null || numOtherCreats == 0) {
+        if (numOtherCreats == 0) {
+            return false;
+        }
+
+        // Try to save the card from death by pumping it if it's threatened with a damage spell
+        if (isThreatened && toughnessBonus > 0) {
+            SpellAbility saTop = game.getStack().peekAbility();
+
+            if (saTop.getApi() == ApiType.DealDamage || saTop.getApi() == ApiType.DamageAll) {
+                int dmg = AbilityUtils.calculateAmount(saTop.getHostCard(), saTop.getParam("NumDmg"), saTop) + source.getDamage();
+                final int numCreatsToSac = Math.max(1, (int)Math.ceil((dmg - source.getNetToughness() + 1) / toughnessBonus));
+
+                if (numCreatsToSac > 1) { // probably not worth sacrificing too much
+                    return false;
+                }
+
+                if (source.getNetToughness() <= dmg && source.getNetToughness() + toughnessBonus * numCreatsToSac > dmg) {
+                    final CardCollection sacFodder = CardLists.filter(ai.getCreaturesInPlay(),
+                            new Predicate<Card>() {
+                                @Override
+                                public boolean apply(Card card) {
+                                    return ComputerUtilCard.isUselessCreature(ai, card)
+                                            || card.hasSVar("SacMe")
+                                            || ComputerUtilCard.evaluateCreature(card) < selfEval; // Maybe around 150 is OK?
+                                }
+                            }
+                    );
+                    if (sacFodder.size() >= numCreatsToSac) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        if (combat == null) {
             return false;
         }
 
@@ -793,7 +832,7 @@ public class PumpAi extends PumpAiBase {
                 final int DefP = Aggregates.sum(combat.getBlockers(source), CardPredicates.Accessors.fnGetNetPower);
 
                 // Make sure we don't over-sacrifice, only sac until we can survive and kill a creature
-                return source.getNetToughness() <= DefP || source.getNetPower() < minDefT;
+                return source.getNetToughness() - source.getDamage() <= DefP || source.getNetPower() < minDefT;
             }
         } else {
             // We can't deal lethal, check if there's any sac fodder than can be used for other circumstances
