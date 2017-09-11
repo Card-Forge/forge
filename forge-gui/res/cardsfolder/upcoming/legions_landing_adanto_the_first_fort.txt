@@ -1,0 +1,21 @@
+Name:Legion's Landing
+ManaCost:W
+Types:Legendary Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 white Vampire creature token with lifelink.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenImage$ w 1 1 vampire | TokenName$ Vampire | TokenTypes$ Creature,Vampire | TokenColors$ White | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Lifelink
+T:Mode$ AttackersDeclared | Execute$ DBTransform | CheckSVar$ NumAttackers | SVarCompare$ GE3 | NoResolvingCheck$ True | TriggerZones$ Battlefield | AttackingPlayer$ You | References$ NumAttackers | TriggerDescription$ When you attack with three or more creatures, transform CARDNAME.
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+SVar:NumAttackers:Count$Valid Creature.attacking
+AlternateMode:DoubleFaced
+SVar:Picture:http://www.wizards.com/global/images/magic/general/legions_landing.jpg
+Oracle:When Legion's Landing enters the battlefield, create a 1/1 white Vampire creature token with lifelink.\nWhen you attack with three or more creatures, transform Legion's Landing.
+
+ALTERNATE
+
+Name:Adanto, the First Fort
+ManaCost:no cost
+Types:Legendary Land
+A:AB$ Mana | Cost$ T | Produced$ W | Amount$ 1 | SpellDescription$ Add {W} to your mana pool.
+A:AB$ Token | Cost$ 2 W T | TokenAmount$ 1 | TokenImage$ w 1 1 vampire | TokenName$ Vampire | TokenTypes$ Creature,Vampire | TokenColors$ White | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Lifelink | SpellDescription$ Create a 1/1 white Vampire creature token with lifelink.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/adanto_the_first_fort.jpg
+Oracle:(Transforms from Legion's Landing.)\n{T}: Add {W} to your mana pool.\n{2}{W}, {T}: Create a 1/1 white Vampire creature token with lifelink.
