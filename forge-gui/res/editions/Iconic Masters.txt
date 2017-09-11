@@ -1,0 +1,260 @@
+[metadata]
+Name=Iconic Masters
+Code=IMA
+Date=2017-11-17
+MciCode=ima
+Type=Reprint
+BoosterCovers=3
+Booster=11 Common, 3 Uncommon, 1 RareMythic
+FoilChanceInBooster=100
+
+[cards]
+1 C Scion of Ugin
+2 U Abzan Battle Priest
+3 U Abzan Falconer
+4 C Ainok Bond-Kin
+5 U Ajani's Pridemate
+6 C Angel of Mercy
+7 U Angelic Accord
+8 M Archangel of Thune
+9 R Auriok Champion
+10 R Austere Command
+11 M Avacyn, Angel of Hope
+12 C Benevolent Ancestor
+13 C Blinding Mage
+14 U Burrenton Forge-Tender
+15 C Disenchant
+16 C Doomed Traveler
+17 C Dragon Bell Monk
+18 M Elesh Norn, Grand Cenobite
+19 C Emerge Unscathed
+20 R Emeria Angel
+21 U Great Teacher's Decree
+22 C Guard Duty
+23 C Guided Strike
+24 C Infantry Veteran
+25 C Iona's Judgment
+26 R Path of Bravery
+27 C Pentarch Ward
+28 R Restoration Angel
+29 C Seeker of the Way
+30 U Serra Angel
+31 R Serra Ascendant
+32 C Stalwart Aven
+33 C Student of Ojutai
+34 C Survival Cache
+35 C Sustainer of the Realm
+36 U Swords to Plowshares
+37 U Topan Freeblade
+38 U Wing Shards
+39 R Yosei, the Morning Star
+40 U Aetherize
+41 C Amass the Components
+42 R Ancestral Vision
+43 C Bewilder
+44 U Cephalid Broker
+45 C Claustrophobia
+46 U Condescend
+47 M Consecrated Sphinx
+48 R Cryptic Command
+49 R Day of the Dragons
+50 C Diminish
+51 C Dissolve
+52 U Distortion Strike
+53 C Doorkeeper
+54 C Elusive Spellfist
+55 R Flusterstorm
+56 U Fog Bank
+57 C Frost Lynx
+58 U Illusory Ambusher
+59 U Illusory Angel
+60 C Jace's Phantasm
+61 C Jhessian Thief
+62 M Jin-Gitaxias, Core Augur
+63 R Keiga, the Tide Star
+64 U Mahamoti Djinn
+65 M Mana Drain
+66 C Mana Leak
+67 C Mnemonic Wall
+68 C Ojutai's Breath
+69 C Phantom Monster
+70 C Repeal
+71 C Riverwheel Aerialists
+72 C Shriekgeist
+73 U Skywise Teachings
+74 R Sphinx of Uthuun
+75 R Teferi, Mage of Zhalfir
+76 C Thought Scour
+77 U Windfall
+78 R Abyssal Persecutor
+79 C Bala Ged Scorpion
+80 C Balustrade Spy
+81 U Bladewing's Thrall
+82 R Bloodghast
+83 U Bogbrew Witch
+84 C Butcher's Glee
+85 C Child of Night
+86 C Dead Reveler
+87 U Doom Blade
+88 C Duress
+89 C Eternal Thirst
+90 C Festering Newt
+91 C Foul-Tongue Invocation
+92 C Grisly Spectacle
+93 U Haunting Hymn
+94 U Indulgent Tormentor
+95 R Kokusho, the Evening Star
+96 R Lord of the Pit
+97 U Mer-ek Nightblade
+98 M Necropotence
+99 R Night of Souls' Betrayal
+100 U Noxious Dragon
+101 M Ob Nixilis, the Fallen
+102 C Phyrexian Rager
+103 C Rakdos Drake
+104 C Reave Soul
+105 C Rotfeaster Maggot
+106 R Rune-Scarred Demon
+107 U Sanguine Bond
+108 M Sheoldred, Whispering One
+109 U Tavern Swindler
+110 R Thoughtseize
+111 C Thrill-Kill Assassin
+112 U Ulcerate
+113 C Virulent Swipe
+114 C Wight of Precinct Six
+115 C Wrench Mind
+116 R Anger of the Gods
+117 C Battle-Rattle Shaman
+118 R Bogardan Hellkite
+119 C Borderland Marauder
+120 R Charmbreaker Devils
+121 U Coordinated Assault
+122 R Crucible of Fire
+123 C Draconic Roar
+124 C Dragon Egg
+125 U Dragon Tempest
+126 C Dragonlord's Servant
+127 C Earth Elemental
+128 U Fireball
+129 C Furnace Whelp
+130 C Fury Charm
+131 U Guttersnipe
+132 C Hammerhand
+133 C Heat Ray
+134 U Hoarding Dragon
+135 C Keldon Halberdier
+136 M Kiki-Jiki, Mirror Breaker
+137 C Kiln Fiend
+138 R Magus of the Moon
+139 C Mark of Mutiny
+140 U Monastery Swiftspear
+141 C Pillar of Flame
+142 U Prodigal Pyromancer
+143 U Rift Bolt
+144 R Ryusei, the Falling Star
+145 R Scourge of Valkas
+146 C Splatter Thug
+147 U Staggershock
+148 U Surreal Memoir
+149 M Thundermaw Hellkite
+150 C Tormenting Voice
+151 C Trumpet Blast
+152 M Urabrask the Hidden
+153 C Vent Sentinel
+154 C Aerial Predation
+155 U Assault Formation
+156 U Carven Caryatid
+157 M Channel
+158 C Crowned Ceratok
+159 R Curse of Predation
+160 C Durkwood Baloth
+161 C Duskdale Wurm
+162 U Enlarge
+163 R Genesis Hydra
+164 R Genesis Wave
+165 C Greater Basilisk
+166 U Heroes' Bane
+167 C Hunt the Weak
+168 U Hunting Pack
+169 U Inspiring Call
+170 C Ivy Elemental
+171 C Jaddi Offshoot
+172 R Jugan, the Rising Star
+173 C Lead the Stampede
+174 R Lotus Cobra
+175 U Lure
+176 C Nantuko Shaman
+177 C Nature's Claim
+178 C Netcaster Spider
+179 R Obstinate Baloth
+180 U Overgrown Battlement
+181 C Phantom Tiger
+182 C Prey's Vengeance
+183 M Primeval Titan
+184 R Rampaging Baloths
+185 C Search for Tomorrow
+186 U Sultai Flayer 
+187 C Timberland Guide
+188 U Undercity Troll
+189 M Vorinclex, Voice of Hunger
+190 C Wall of Roots
+191 C Wildsize
+192 U Azorius Charm
+193 U Bladewing the Risen
+194 U Blizzard Specter
+195 R Blood Baron of Vizkopa
+196 U Chronicler of Heroes
+197 U Corpsejack Menace
+198 U Electrolyze
+199 R Firemane Angel
+200 R Glimpse the Unthinkable
+201 R Hypersonic Dragon
+202 U Jungle Barrier
+203 R Knight of the Reliquary
+204 U Lightning Helix
+205 R Malfegor
+206 U Rosheen Meanderer
+207 R Savageborn Hydra
+208 R Simic Sky Swallower
+209 R Spiritmonger
+210 R Supreme Verdict
+211 U Vizkopa Guildmage
+212 R Aether Vial
+213 U Bubbling Cauldron
+214 C Darksteel Axe
+215 U Dragonloft Idol 
+216 C Guardian Idol
+217 U Kolaghan Monument
+218 C Manakin
+219 C Mind Stone
+220 U Mindcrank
+221 U Mishra's Bauble
+222 C Moonglove Extract
+223 R Oblivion Stone
+224 U Palladium Myr
+225 U Pristine Talisman
+226 C Runed Servitor
+227 U Sandstone Oracle
+228 R Serum Powder
+229 C Star Compass
+230 U Thran Dynamo
+231 U Trepanation Blade
+232 U Azorius Chancery
+233 U Boros Garrison
+234 U Dimir Aqueduct
+235 C Evolving Wilds
+236 U Golgari Rot Farm
+237 R Graven Cairns
+238 R Grove of the Burnwillows
+239 U Gruul Turf
+240 R Horizon Canopy
+241 U Izzet Boilerworks
+242 R Nimbus Maze
+243 U Orzhov Basilica
+244 C Radiant Fountain
+245 U Rakdos Carnarium
+246 R River of Tears
+247 U Selesnya Sanctuary
+248 C Shimmering Grotto
+249 U Simic Growth Chamber
