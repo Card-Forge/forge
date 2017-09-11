@@ -47,8 +47,17 @@ MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE_WITH_REPL=1
 # Min and max chance to randomly aggressively trade when blocking (note that it will become 100 if the AI is in danger)
 MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK=30
 MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK=70
-# Chance to trade a creature in order to save a planeswalker
+
+# Options to save / preserve loyalty of planeswalkers
+# Chance to trade a (worse or roughly equal) creature in order to save a planeswalker or preserve its loyalty
+# (random favorable trades must be enabled)
 CHANCE_TO_TRADE_TO_SAVE_PLANESWALKER=70
+# Chance to trade a better creature for a worse one in order to save a planeswalker
+CHANCE_TO_TRADE_DOWN_TO_SAVE_PLANESWALKER=40
+# Creature evaluation threshold for which creatures to consider good candidates for chump blocking to protect a
+# planeswalker (135 is about the level of a 1/2 nontoken creature with no abilities or a 2/2 token with no abilities)
+# Set to -1 to disable chump blocking to save planeswalkers.
+THRESHOLD_CHUMP_TO_SAVE_PLANESWALKER=135
 
 # Only works when AI cheating is enabled in preferences, otherwise does nothing
 CHEAT_WITH_MANA_ON_SHUFFLE=true

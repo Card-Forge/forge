@@ -21,12 +21,12 @@ CHANCE_TO_ATKTRADE_WHEN_OPP_HAS_MANA=30
 # When enabled, the AI will run some additional checks in an attempt to avoid attacking into certain block situations
 # when it can't deal at least some permanent damage to the defending creature/planeswalker or to at least one defending
 # creature. Works in many but not all cases.
-TRY_TO_AVOID_ATTACKING_INTO_CERTAIN_BLOCK=false
+TRY_TO_AVOID_ATTACKING_INTO_CERTAIN_BLOCK=true
 # When enabled, the AI will use Berserk on offense to try to severely damage the opponent at the expense of the creature
-USE_BERSERK_AGGRESSIVELY=false
+USE_BERSERK_AGGRESSIVELY=true
 # Try to hold combat tricks until blockers are declared in an attempt to trick the opponent into blocking a weak creature
 # and dying to it (currently has some limitations, the AI will only try to do it to one creature per turn)
-TRY_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK=false
+TRY_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK=true
 # Chance to hold combat tricks until blockers are declared. If -1 is specified, this chance is not used, and the standard
 # evaluation for offensive pump buff is used instead.
 CHANCE_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK=65
@@ -34,7 +34,7 @@ CHANCE_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK=65
 # Trade blocking preferences (enabling these will make the AI trade more aggressively when considering blocks,
 # but only with creatures that are worse in abilities and have lower or the same power as the attacker). Note
 # that the first option serves as a master toggle. If it is disabled, the following related options have no effect.
-ENABLE_RANDOM_FAVORABLE_TRADES_ON_BLOCK=false
+ENABLE_RANDOM_FAVORABLE_TRADES_ON_BLOCK=true
 # If enabled, the AI will consider trade blocking even if its creature count is lower than the opponent's
 RANDOMLY_TRADE_EVEN_WHEN_HAVE_LESS_CREATS=false
 # If the previous option is enabled, then the next option controls how big of a handicap in creature count the AI
@@ -47,8 +47,17 @@ MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE_WITH_REPL=1
 # Min and max chance to randomly aggressively trade when blocking (note that it will become 100 if the AI is in danger)
 MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK=30
 MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK=70
-# Chance to trade a creature in order to save a planeswalker
-CHANCE_TO_TRADE_TO_SAVE_PLANESWALKER=80
+
+# Options to save / preserve loyalty of planeswalkers
+# Chance to trade a (worse or roughly equal) creature in order to save a planeswalker or preserve its loyalty
+# (random favorable trades must be enabled)
+CHANCE_TO_TRADE_TO_SAVE_PLANESWALKER=70
+# Chance to trade a better creature for a worse one in order to save a planeswalker
+CHANCE_TO_TRADE_DOWN_TO_SAVE_PLANESWALKER=0
+# Creature evaluation threshold for which creatures to consider good candidates for chump blocking to protect a
+# planeswalker (135 is about the level of a 1/2 nontoken creature with no abilities or a 2/2 token with no abilities)
+# Set to -1 to disable chump blocking to save planeswalkers.
+THRESHOLD_CHUMP_TO_SAVE_PLANESWALKER=-1
 
 # Only works when AI cheating is enabled in preferences, otherwise does nothing
 CHEAT_WITH_MANA_ON_SHUFFLE=true

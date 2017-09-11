@@ -555,6 +555,7 @@ public class AiBlockController {
         boolean randomTradeIfBehindOnBoard = false;
         boolean randomTradeIfCreatInHand = false;
         int chanceToTradeToSaveWalker = 0;
+        int chanceToTradeDownToSaveWalker = 0;
         int minRandomTradeChance = 0;
         int maxRandomTradeChance = 0;
         int maxCreatDiff = 0;
@@ -571,6 +572,7 @@ public class AiBlockController {
             maxCreatDiff = aic.getIntProperty(AiProps.MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE);
             maxCreatDiffWithRepl = aic.getIntProperty(AiProps.MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE_WITH_REPL);
             chanceToTradeToSaveWalker = aic.getIntProperty(AiProps.CHANCE_TO_TRADE_TO_SAVE_PLANESWALKER);
+            chanceToTradeDownToSaveWalker = aic.getIntProperty(AiProps.CHANCE_TO_TRADE_DOWN_TO_SAVE_PLANESWALKER);
         }
 
         if (enableRandomTrades) {
@@ -620,17 +622,19 @@ public class AiBlockController {
 
                     int evalAtk = ComputerUtilCard.evaluateCreature(attacker, false, false);
                     int evalBlk = ComputerUtilCard.evaluateCreature(blocker, false, false);
+                    int chanceToSavePW = chanceToTradeDownToSaveWalker > 0 && evalAtk + 1 < evalBlk ? chanceToTradeDownToSaveWalker : chanceToTradeToSaveWalker;
                     boolean powerParityOrHigher = blocker.getNetPower() >= attacker.getNetPower();
                     boolean creatureParityOrAllowedDiff = aiCreatureCount
                             + (randomTradeIfBehindOnBoard ? maxCreatDiff : 0) >= oppCreatureCount;
                     boolean wantToTradeWithCreatInHand = randomTradeIfCreatInHand
                             && !CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.CREATURES).isEmpty()
                             && aiCreatureCount + maxCreatDiffWithRepl >= oppCreatureCount;
-                    boolean wantToSavePlaneswalker = MyRandom.percentTrue(chanceToTradeToSaveWalker)
+                    boolean wantToSavePlaneswalker = MyRandom.percentTrue(chanceToSavePW)
                             && combat.getDefenderByAttacker(attacker) instanceof Card
                             && ((Card) combat.getDefenderByAttacker(attacker)).isPlaneswalker();
+                    boolean wantToTradeDownToSavePW = chanceToTradeDownToSaveWalker > 0;
 
-                    if (evalBlk <= evalAtk + 1 // "1" accounts for tapped. Maybe increase to 3 or 5 for higher tolerance?
+                    if ((evalBlk <= evalAtk + 1) || (wantToSavePlaneswalker && wantToTradeDownToSavePW) // "1" accounts for tapped.
                             && powerParityOrHigher
                             && (creatureParityOrAllowedDiff || wantToTradeWithCreatInHand)
                             && (MyRandom.percentTrue(chance) || wantToSavePlaneswalker)) {
@@ -846,6 +850,71 @@ public class AiBlockController {
         }
     }
 
+    private void makeChumpBlocksToSavePW(Combat combat) {
+        final int evalThreshold = ((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.THRESHOLD_CHUMP_TO_SAVE_PLANESWALKER);
+        if (evalThreshold > 0) {
+            CardCollection pwsWithChumpBlocks = new CardCollection();
+            CardCollection chosenChumpBlockers = new CardCollection();
+            CardCollection chumpPWDefenders = CardLists.filter(new CardCollection(this.blockersLeft), new Predicate<Card>() {
+                @Override
+                public boolean apply(Card card) {
+                    return ComputerUtilCard.evaluateCreature(card) <= evalThreshold;
+                }
+            });
+            CardLists.sortByPowerAsc(chumpPWDefenders);
+            if (!chumpPWDefenders.isEmpty()) {
+                for (final Card attacker : attackers) {
+                    if (combat.getDefenderByAttacker(attacker) instanceof Card) {
+                        if (attacker.hasKeyword("Trample")) {
+                            // don't bother trying to chump a trampling creature
+                            continue;
+                        }
+                        if (!combat.getBlockers(attacker).isEmpty()) {
+                            // already blocked by something, no need to chump
+                            continue;
+                        }
+                        Card blockerDecided = null;
+                        for (final Card blocker : chumpPWDefenders) {
+                            if (CombatUtil.canBlock(attacker, blocker, combat)) {
+                                combat.addBlocker(attacker, blocker);
+                                pwsWithChumpBlocks.add((Card) combat.getDefenderByAttacker(attacker));
+                                chosenChumpBlockers.add(blocker);
+                                blockerDecided = blocker;
+                                blockersLeft.remove(blocker);
+                                break;
+                            }
+                        }
+                        chumpPWDefenders.remove(blockerDecided);
+                    }
+                }
+                // check to see if we managed to cover all the blockers of the planeswalker; if not, bail
+                for (final Card pw : pwsWithChumpBlocks) {
+                    CardCollection pwAttackers = combat.getAttackersOf(pw);
+                    CardCollection pwDefenders = new CardCollection();
+                    boolean isFullyBlocked = true;
+                    if (!pwAttackers.isEmpty()) {
+                        int damageToPW = 0;
+                        for (Card pwAtk : pwAttackers) {
+                            if (!combat.getBlockers(pwAtk).isEmpty()) {
+                                pwDefenders.addAll(combat.getBlockers(pwAtk));
+                            } else {
+                                isFullyBlocked = false;
+                                damageToPW += pwAtk.getNetCombatDamage();
+                            }
+                        }
+                        if (!isFullyBlocked && damageToPW >= pw.getCounters(CounterType.LOYALTY)) {
+                            for (Card chump : pwDefenders) {
+                                if (chosenChumpBlockers.contains(chump)) {
+                                    combat.removeFromCombat(chump);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     private void clearBlockers(final Combat combat, final List<Card> possibleBlockers) {
 
         final List<Card> oldBlockers = combat.getAllBlockers();
@@ -910,7 +979,7 @@ public class AiBlockController {
         List<Card> chumpBlockers;
 
         diff = (ai.getLife() * 2) - 5; // This is the minimal gain for an unnecessary trade
-        if (ai.getController().isAI() && diff > 0 && ((PlayerControllerAi) ai.getController()).getAi().getProperty(AiProps.PLAY_AGGRO).equals("true")) {
+        if (ai.getController().isAI() && diff > 0 && ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.PLAY_AGGRO)) {
         	diff = 0;
         }
 
@@ -1041,6 +1110,14 @@ public class AiBlockController {
                 }
             }
         }
+
+
+        // check to see if it's possible to defend a Planeswalker under attack with a chump block,
+        // unless life is low enough to be more worried about saving preserving the life total
+        if (ai.getController().isAI() && !ComputerUtilCombat.lifeInDanger(ai, combat)) {
+            makeChumpBlocksToSavePW(combat);
+        }
+
         //Check for validity of blocks in case something slipped through
         for (Card attacker : attackers) {
             if (!CombatUtil.canAttackerBeBlockedWithAmount(attacker, combat.getBlockers(attacker).size(), combat)) {
