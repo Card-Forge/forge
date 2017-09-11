@@ -287,6 +287,7 @@ public class SpecialCardAi {
 
     // Electrostatic Pummeler
     public static class ElectrostaticPummeler {
+        // TODO: use getNetCombatDamage() instead of getNetPower() for cases where damage is assigned by toughness
         public static boolean consider(final Player ai, final SpellAbility sa) {
             final Card source = sa.getHostCard();
             Game game = ai.getGame();
@@ -377,7 +378,7 @@ public class SpecialCardAi {
                 // Can't pump enough to kill the blockers and survive, don't pump
                 return false;
             }
-            if (source.getNetPower() > oppT && source.getNetToughness() - source.getDamage() > oppP) {
+            if (source.getNetPower() > oppT && source.getNetToughness() > oppP) {
                 // Already enough to kill the blockers and survive, don't overpump
                 return false;
             }
