@@ -789,7 +789,11 @@ public class AiController {
         private int getSpellAbilityPriority(SpellAbility sa) {
             int p = 0;
             Card source = sa.getHostCard();
-            final Player ai = source.getController();
+            final Player ai = source == null ? sa.getActivatingPlayer() : source.getController();
+            if (ai == null) {
+                System.err.println("Error: couldn't figure out the activating player and host card for SA: " + sa);
+                return 0;
+            }
             final boolean noCreatures = ai.getCreaturesInPlay().isEmpty();
 
             if (source != null) {
