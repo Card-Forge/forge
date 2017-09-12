@@ -106,7 +106,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     // if this card is an Aura, what Entity is it enchanting?
     private GameEntity enchanting = null;
+
     private GameEntity mustAttackEntity = null;
+    private boolean mustAttackEntityThisTurn = false;
 
     private final Map<StaticAbility, CardPlayOption> mayPlay = Maps.newTreeMap();
     private int mayPlayTurn = 0;
@@ -948,10 +950,13 @@ public class Card extends GameEntity implements Comparable<Card> {
         return mustAttackEntity;
     }
     public final void clearMustAttackEntity(final Player playerturn) {
-    	if (getController().equals(playerturn)) {
+    	if (getController().equals(playerturn) || mustAttackEntityThisTurn) {
     		mustAttackEntity = null;
+    		mustAttackEntityThisTurn = false;
     	}
     }
+    public final boolean getMustAttackEntityThisTurn() { return mustAttackEntityThisTurn; }
+    public final void setMustAttackEntityThisTurn(boolean thisTurnOnly) { mustAttackEntityThisTurn = thisTurnOnly; }
 
     public final CardCollectionView getClones() {
         return CardCollection.getView(clones);

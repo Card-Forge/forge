@@ -48,6 +48,7 @@ public class MustAttackEffect extends SpellAbilityEffect {
         final List<Player> tgtPlayers = getTargetPlayers(sa);
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final String defender = sa.getParam("Defender");
+        final boolean thisTurn = sa.hasParam("ThisTurn");
         final GameEntity entity;
         if (defender.equals("Self")) {
             entity = sa.getHostCard();
@@ -61,11 +62,13 @@ public class MustAttackEffect extends SpellAbilityEffect {
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 p.setMustAttackEntity(entity);
+                p.setMustAttackEntityThisTurn(thisTurn);
             }
         }
         for (final Card c : getTargetCards(sa)) {
             if ((tgt == null) || c.canBeTargetedBy(sa)) {
                 c.setMustAttackEntity(entity);
+                c.setMustAttackEntityThisTurn(thisTurn);
             }
         }
 
