@@ -1,5 +1,5 @@
 Name:Conqueror's Galleon
-ManaCost:2
+ManaCost:4
 Types:Artifact Vehicle
 PT:2/10
 K:Crew:4
