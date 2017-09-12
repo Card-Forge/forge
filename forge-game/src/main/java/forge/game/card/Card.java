@@ -108,7 +108,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private GameEntity enchanting = null;
 
     private GameEntity mustAttackEntity = null;
-    private boolean mustAttackEntityThisTurn = false;
+    private GameEntity mustAttackEntityThisTurn = null;
 
     private final Map<StaticAbility, CardPlayOption> mayPlay = Maps.newTreeMap();
     private int mayPlayTurn = 0;
@@ -950,13 +950,13 @@ public class Card extends GameEntity implements Comparable<Card> {
         return mustAttackEntity;
     }
     public final void clearMustAttackEntity(final Player playerturn) {
-    	if (getController().equals(playerturn) || mustAttackEntityThisTurn) {
+    	if (getController().equals(playerturn)) {
     		mustAttackEntity = null;
-    		mustAttackEntityThisTurn = false;
     	}
+    	mustAttackEntityThisTurn = null;
     }
-    public final boolean getMustAttackEntityThisTurn() { return mustAttackEntityThisTurn; }
-    public final void setMustAttackEntityThisTurn(boolean thisTurnOnly) { mustAttackEntityThisTurn = thisTurnOnly; }
+    public final GameEntity getMustAttackEntityThisTurn() { return mustAttackEntityThisTurn; }
+    public final void setMustAttackEntityThisTurn(GameEntity entThisTurn) { mustAttackEntityThisTurn = entThisTurn; }
 
     public final CardCollectionView getClones() {
         return CardCollection.getView(clones);

@@ -542,11 +542,16 @@ public class AiAttackController {
         }
         Player prefDefender = (Player) (defs.contains(this.defendingOpponent) ? this.defendingOpponent : defs.get(0));
 
-        final GameEntity entity = ai.getMustAttackEntity();
+        // Attempt to see if there's a defined entity that must be attacked strictly this turn...
+        GameEntity entity = ai.getMustAttackEntityThisTurn();
+        if (entity == null) {
+            // ...or during the attacking creature controller's turn
+            entity = ai.getMustAttackEntity();
+        }
         if (null != entity) {
             int n = defs.indexOf(entity);
             if (-1 == n) {
-                System.out.println("getMustAttackEntity() returned something not in defenders.");
+                System.out.println("getMustAttackEntity() or getMustAttackEntityThisTurn() returned something not in defenders.");
                 return prefDefender;
             } else {
                 return entity;
@@ -649,7 +654,7 @@ public class AiAttackController {
                     }
                 }
             }
-            if (mustAttack || attacker.getController().getMustAttackEntity() != null) {
+            if (mustAttack || attacker.getController().getMustAttackEntity() != null || attacker.getController().getMustAttackEntityThisTurn() != null) {
                 combat.addAttacker(attacker, defender);
                 attackersLeft.remove(attacker);
                 numForcedAttackers++;

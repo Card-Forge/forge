@@ -61,14 +61,21 @@ public class MustAttackEffect extends SpellAbilityEffect {
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                p.setMustAttackEntity(entity);
-                p.setMustAttackEntityThisTurn(thisTurn);
+                if (thisTurn) {
+                    p.setMustAttackEntityThisTurn(entity);
+                } else {
+                    p.setMustAttackEntity(entity);
+                }
+
             }
         }
         for (final Card c : getTargetCards(sa)) {
             if ((tgt == null) || c.canBeTargetedBy(sa)) {
-                c.setMustAttackEntity(entity);
-                c.setMustAttackEntityThisTurn(thisTurn);
+                if (thisTurn) {
+                    c.setMustAttackEntityThisTurn(entity);
+                } else {
+                    c.setMustAttackEntity(entity);
+                }
             }
         }
 

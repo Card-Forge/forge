@@ -152,7 +152,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private Map<Long, KeywordsChange> changedKeywords = new ConcurrentSkipListMap<Long, KeywordsChange>();
     private ManaPool manaPool = new ManaPool(this);
     private GameEntity mustAttackEntity = null;
-    private boolean mustAttackEntityThisTurn = false;
+    private GameEntity mustAttackEntityThisTurn = null;
     private boolean attackedWithCreatureThisTurn = false;
     private boolean activateLoyaltyAbilityThisTurn = false;
     private boolean tappedLandForManaThisTurn = false;
@@ -2191,8 +2191,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void setMustAttackEntity(final GameEntity o) {
         mustAttackEntity = o;
     }
-    public final boolean getMustAttackEntityThisTurn() { return mustAttackEntityThisTurn; }
-    public final void setMustAttackEntityThisTurn(boolean thisTurnOnly) { mustAttackEntityThisTurn = thisTurnOnly; }
+    public final GameEntity getMustAttackEntityThisTurn() { return mustAttackEntityThisTurn; }
+    public final void setMustAttackEntityThisTurn(GameEntity entThisTurn) { mustAttackEntityThisTurn = entThisTurn; }
 
     @Override
     public int compareTo(Player o) {

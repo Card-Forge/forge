@@ -32,6 +32,10 @@ public class AttackRequirement {
         if (mustAttack != null) {
             defenderSpecific.add(mustAttack);
         }
+        final GameEntity mustAttackThisTurn = attacker.getController().getMustAttackEntityThisTurn();
+        if (mustAttackThisTurn != null) {
+            defenderSpecific.add(mustAttackThisTurn);
+        }
 
         int nAttackAnything = 0;
 
@@ -53,6 +57,10 @@ public class AttackRequirement {
         final GameEntity mustAttack3 = attacker.getMustAttackEntity();
         if (mustAttack3 != null) {
             defenderSpecific.add(mustAttack3);
+        }
+        final GameEntity mustAttackThisTurn3 = attacker.getMustAttackEntityThisTurn();
+        if (mustAttackThisTurn3 != null) {
+            defenderSpecific.add(mustAttackThisTurn3);
         }
 
         final Game game = attacker.getGame();
