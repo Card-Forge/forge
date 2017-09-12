@@ -2,7 +2,7 @@ Name:Alluring Siren
 ManaCost:1 U
 Types:Creature Siren
 PT:1/1
-A:AB$ Pump | Cost$ T | ValidTgts$ Creature.OppCtrl | KW$ HIDDEN CARDNAME attacks each turn if able. | TgtPrompt$ Choose target creature opponent controls. | SpellDescription$ Target creature an opponent controls attacks you this turn if able.
+A:AB$ MustAttack | Cost$ T | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls. | Defender$ You | SpellDescription$ Target creature an opponent controls attacks you this turn if able.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alluring_siren.jpg
 Oracle:{T}: Target creature an opponent controls attacks you this turn if able.
