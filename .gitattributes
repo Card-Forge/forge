@@ -17212,6 +17212,7 @@ forge-gui/res/cardsfolder/u/utter_end.txt -text
 forge-gui/res/cardsfolder/u/utvara_hellkite.txt -text
 forge-gui/res/cardsfolder/u/utvara_scalper.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/u/uyo_silent_prophet.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/upcoming/adanto_vanguard.txt -text
 forge-gui/res/cardsfolder/upcoming/admiral_beckett_brass.txt -text
 forge-gui/res/cardsfolder/upcoming/angraths_marauders.txt -text
 forge-gui/res/cardsfolder/upcoming/arcane_adaptation.txt -text
@@ -17226,6 +17227,7 @@ forge-gui/res/cardsfolder/upcoming/boneyard_parley.txt -text
 forge-gui/res/cardsfolder/upcoming/burning_suns_avatar.txt -text
 forge-gui/res/cardsfolder/upcoming/call_to_the_feast.txt -text
 forge-gui/res/cardsfolder/upcoming/captain_lannery_storm.txt -text
+forge-gui/res/cardsfolder/upcoming/captivating_crew.txt -text
 forge-gui/res/cardsfolder/upcoming/carnage_tyrant.txt -text
 forge-gui/res/cardsfolder/upcoming/castaways_despair.txt -text
 forge-gui/res/cardsfolder/upcoming/chart_a_course.txt -text
@@ -17240,6 +17242,7 @@ forge-gui/res/cardsfolder/upcoming/deathless_ancient.txt -text
 forge-gui/res/cardsfolder/upcoming/deeproot_champion.txt -text
 forge-gui/res/cardsfolder/upcoming/deeproot_waters.txt -text
 forge-gui/res/cardsfolder/upcoming/dinosaur_stampede.txt -text
+forge-gui/res/cardsfolder/upcoming/dire_fleet_ravager.txt -text
 forge-gui/res/cardsfolder/upcoming/dowsing_dagger_lost_vale.txt -text
 forge-gui/res/cardsfolder/upcoming/dreamcaller_siren.txt -text
 forge-gui/res/cardsfolder/upcoming/drover_of_the_mighty.txt -text
@@ -17295,6 +17298,7 @@ forge-gui/res/cardsfolder/upcoming/regisaur_alpha.txt -text
 forge-gui/res/cardsfolder/upcoming/revel_in_riches.txt -text
 forge-gui/res/cardsfolder/upcoming/rile.txt -text
 forge-gui/res/cardsfolder/upcoming/ripjaw_raptor.txt -text
+forge-gui/res/cardsfolder/upcoming/river_sneak.txt -text
 forge-gui/res/cardsfolder/upcoming/rivers_rebuke.txt -text
 forge-gui/res/cardsfolder/upcoming/rowdy_crew.txt -text
 forge-gui/res/cardsfolder/upcoming/ruin_raider.txt -text
@@ -17310,6 +17314,7 @@ forge-gui/res/cardsfolder/upcoming/siren_stormtamer.txt -text
 forge-gui/res/cardsfolder/upcoming/skittering_heartstopper.txt -text
 forge-gui/res/cardsfolder/upcoming/sleek_schooner.txt -text
 forge-gui/res/cardsfolder/upcoming/sorcerous_spyglass.txt -text
+forge-gui/res/cardsfolder/upcoming/spell_swindle.txt -text
 forge-gui/res/cardsfolder/upcoming/star_of_extinction.txt -text
 forge-gui/res/cardsfolder/upcoming/storm_fleet_aerialist.txt -text
 forge-gui/res/cardsfolder/upcoming/storm_fleet_arsonist.txt -text
