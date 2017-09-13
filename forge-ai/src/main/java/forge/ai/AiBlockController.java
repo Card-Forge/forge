@@ -640,7 +640,7 @@ public class AiBlockController {
                             && ((Card) combat.getDefenderByAttacker(attacker)).isPlaneswalker();
                     boolean wantToTradeDownToSavePW = chanceToTradeDownToSaveWalker > 0;
 
-                    if ((evalBlk <= evalAtk + 1) || (wantToSavePlaneswalker && wantToTradeDownToSavePW) // "1" accounts for tapped.
+                    if (((evalBlk <= evalAtk + 1) || (wantToSavePlaneswalker && wantToTradeDownToSavePW)) // "1" accounts for tapped.
                             && powerParityOrHigher
                             && (creatureParityOrAllowedDiff || wantToTradeWithCreatInHand)
                             && (MyRandom.percentTrue(chance) || wantToSavePlaneswalker)) {
