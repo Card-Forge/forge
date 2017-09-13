@@ -889,6 +889,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public final boolean canTarget(final GameObject entity) {
+        if (entity == null) {
+            return false;
+        }
+
         final TargetRestrictions tr = getTargetRestrictions();
 
         // Restriction related to this ability

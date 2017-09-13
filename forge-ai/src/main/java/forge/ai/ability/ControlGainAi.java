@@ -227,16 +227,18 @@ public class ControlGainAi extends SpellAbilityAi {
                     t = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, true);
                 }
 
-                if (t.isCreature())
-                    creatures--;
-                if (t.isPlaneswalker())
-                    planeswalkers--;
-                if (t.isLand())
-                    lands--;
-                if (t.isArtifact())
-                    artifacts--;
-                if (t.isEnchantment())
-                    enchantments--;
+                if (t != null) {
+                    if (t.isCreature())
+                        creatures--;
+                    if (t.isPlaneswalker())
+                        planeswalkers--;
+                    if (t.isLand())
+                        lands--;
+                    if (t.isArtifact())
+                        artifacts--;
+                    if (t.isEnchantment())
+                        enchantments--;
+                }
 
                 if (!sa.canTarget(t)) {
                     list.remove(t);
