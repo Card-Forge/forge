@@ -1,0 +1,8 @@
+Name:Charging Monstrosaur
+ManaCost:4 R
+Types:Creature Dinosaur
+PT:5/5
+K:Trample
+K:Haste
+SVar:Picture:http://www.wizards.com/global/images/magic/general/charging_monstrosaur.jpg
+Oracle:Trample, haste
