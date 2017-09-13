@@ -251,184 +251,184 @@
 //Rank|Name|Rarity|Set
 #1|The Scorpion God|M|HOU
 #2|The Locust God|M|HOU
-#3|Neheb, the Eternal|M|HOU
+#3|The Scarab God|M|HOU
 #4|Angel of Condemnation|R|HOU
-#5|Samut, the Tested|M|HOU
-#6|Kefnet's Last Word|R|HOU
-#7|Bontu's Last Reckoning|R|HOU
-#8|Rhonas's Last Stand|R|HOU
-#9|The Scarab God|M|HOU
-#10|Grind Dust|R|HOU
-#11|Hour of Devastation|R|HOU
-#12|Unesh, Criosphinx Sovereign|M|HOU
-#13|Hour of Glory|R|HOU
+#5|Kefnet's Last Word|R|HOU
+#6|Rhonas's Last Stand|R|HOU
+#7|Grind Dust|R|HOU
+#8|Bontu's Last Reckoning|R|HOU
+#9|Hour of Devastation|R|HOU
+#10|Samut, the Tested|M|HOU
+#11|Unesh, Criosphinx Sovereign|M|HOU
+#12|Hour of Glory|R|HOU
+#13|Pride Sovereign|R|HOU
 #14|Ramunap Hydra|R|HOU
 #15|Adorned Pouncer|R|HOU
 #16|Earthshaker Khenra|R|HOU
-#17|Pride Sovereign|R|HOU
-#18|Crested Sunmare|M|HOU
-#19|Desert's Hold|U|HOU
-#20|Hour of Revelation|R|HOU
-#21|Ammit Eternal|R|HOU
-#22|Banewhip Punisher|U|HOU
-#23|Abrade|U|HOU
-#24|Overcome|U|HOU
-#25|Struggle Survive|U|HOU
-#26|Dreamstealer|R|HOU
-#27|Majestic Myriarch|M|HOU
-#28|Resilient Khenra|R|HOU
-#29|Nicol Bolas, God-Pharaoh|M|HOU
-#30|Sunscourge Champion|U|HOU
-#31|Torment of Venom|C|HOU
-#32|Sand Strangler|U|HOU
+#17|Majestic Myriarch|M|HOU
+#18|God-Pharaoh's Gift|R|HOU
+#19|Crested Sunmare|M|HOU
+#20|Desert's Hold|U|HOU
+#21|Banewhip Punisher|U|HOU
+#22|Abrade|U|HOU
+#23|Struggle Survive|U|HOU
+#24|Dreamstealer|R|HOU
+#25|Resilient Khenra|R|HOU
+#26|Sifter Wurm|U|HOU
+#27|Nicol Bolas, God-Pharaoh|M|HOU
+#28|Hour of Revelation|R|HOU
+#29|Ammit Eternal|R|HOU
+#30|Neheb, the Eternal|M|HOU
+#31|Sand Strangler|U|HOU
+#32|Sunscourge Champion|U|HOU
 #33|Champion of Wits|R|HOU
 #34|Open Fire|C|HOU
 #35|Ambuscade|C|HOU
 #36|Farm Market|U|HOU
-#37|Consign Oblivion|U|HOU
-#38|Nimble Obstructionist|R|HOU
-#39|Obelisk Spider|U|HOU
+#37|Nimble Obstructionist|R|HOU
+#38|Ominous Sphinx|U|HOU
+#39|Overcome|U|HOU
 #40|Resolute Survivors|U|HOU
 #41|River Hoopoe|U|HOU
-#42|Ominous Sphinx|U|HOU
-#43|Fervent Paincaster|U|HOU
-#44|Tenacious Hunter|U|HOU
-#45|Unraveling Mummy|U|HOU
-#46|Mirage Mirror|R|HOU
-#47|Steward of Solidarity|U|HOU
-#48|Puncturing Blow|C|HOU
-#49|Bloodwater Entity|U|HOU
-#50|God-Pharaoh's Gift|R|HOU
-#51|Vizier of the Anointed|U|HOU
-#52|Torment of Hailfire|R|HOU
-#53|Burning-Fist Minotaur|U|HOU
-#54|Sifter Wurm|U|HOU
-#55|Driven Despair|R|HOU
-#56|Overwhelming Splendor|M|HOU
-#57|Riddleform|U|HOU
-#58|Accursed Horde|U|HOU
-#59|Apocalypse Demon|R|HOU
-#60|Lethal Sting|C|HOU
-#61|Chaos Maw|R|HOU
-#62|Rhonas's Stalwart|C|HOU
-#63|Vizier of the True|U|HOU
-#64|Eternal of Harsh Truths|U|HOU
-#65|Imaginary Threats|U|HOU
-#66|Khenra Eternal|C|HOU
-#67|Magmaroth|U|HOU
-#68|Uncage the Menagerie|M|HOU
-#69|Dauntless Aven|C|HOU
-#70|Gideon's Defeat|U|HOU
-#71|Oketra's Avenger|C|HOU
-#72|Aerial Guide|C|HOU
-#73|Sinuous Striker|U|HOU
-#74|Spellweaver Eternal|C|HOU
+#42|Consign Oblivion|U|HOU
+#43|Overwhelming Splendor|M|HOU
+#44|Torment of Venom|C|HOU
+#45|Burning-Fist Minotaur|U|HOU
+#46|Tenacious Hunter|U|HOU
+#47|Bloodwater Entity|U|HOU
+#48|Unraveling Mummy|U|HOU
+#49|Mirage Mirror|R|HOU
+#50|Chaos Maw|R|HOU
+#51|Fervent Paincaster|U|HOU
+#52|Puncturing Blow|C|HOU
+#53|Obelisk Spider|U|HOU
+#54|Steward of Solidarity|U|HOU
+#55|Vizier of the Anointed|U|HOU
+#56|Torment of Hailfire|R|HOU
+#57|Driven Despair|R|HOU
+#58|Desert of the Fervent|C|HOU
+#59|Hour of Eternity|R|HOU
+#60|Vile Manifestation|U|HOU
+#61|Hour of Promise|R|HOU
+#62|Desert of the Glorified|C|HOU
+#63|Desert of the Indomitable|C|HOU
+#64|Desert of the True|C|HOU
+#65|Oketra's Avenger|C|HOU
+#66|Vizier of the True|U|HOU
+#67|Eternal of Harsh Truths|U|HOU
+#68|Riddleform|U|HOU
+#69|Accursed Horde|U|HOU
+#70|Uncage the Menagerie|M|HOU
+#71|Desert of the Mindful|C|HOU
+#72|Dauntless Aven|C|HOU
+#73|Gideon's Defeat|U|HOU
+#74|Sinuous Striker|U|HOU
 #75|Unsummon|C|HOU
 #76|Liliana's Defeat|U|HOU
-#77|Merciless Eternal|U|HOU
-#78|Chandra's Defeat|U|HOU
-#79|Hollow One|R|HOU
-#80|Desert of the Fervent|C|HOU
-#81|Desert of the Glorified|C|HOU
-#82|Desert of the Indomitable|C|HOU
-#83|Desert of the Mindful|C|HOU
-#84|Desert of the True|C|HOU
-#85|Mummy Paramount|C|HOU
-#86|Hour of Eternity|R|HOU
-#87|Supreme Will|U|HOU
-#88|Doomfall|U|HOU
-#89|Ruin Rat|C|HOU
-#90|Vile Manifestation|U|HOU
-#91|Khenra Scrapper|C|HOU
-#92|Harrier Naga|C|HOU
-#93|Hope Tender|U|HOU
+#77|Chandra's Defeat|U|HOU
+#78|Oasis Ritualist|C|HOU
+#79|Rhonas's Stalwart|C|HOU
+#80|Hollow One|R|HOU
+#81|Sunset Pyramid|U|HOU
+#82|Ifnir Deadlands|U|HOU
+#83|Aerial Guide|C|HOU
+#84|Spellweaver Eternal|C|HOU
+#85|Supreme Will|U|HOU
+#86|Unquenchable Thirst|C|HOU
+#87|Doomfall|U|HOU
+#88|Ruin Rat|C|HOU
+#89|Torment of Scarabs|U|HOU
+#90|Khenra Scrapper|C|HOU
+#91|Magmaroth|U|HOU
+#92|Hope Tender|U|HOU
+#93|Appeal Authority|U|HOU
 #94|Abandoned Sarcophagus|R|HOU
-#95|Ifnir Deadlands|U|HOU
-#96|Angel of the God-Pharaoh|U|HOU
-#97|Sandblast|C|HOU
-#98|Marauding Boneslasher|C|HOU
-#99|Razaketh, the Foulblooded|M|HOU
-#100|Frontline Devastator|C|HOU
-#101|Inferno Jet|U|HOU
-#102|Manticore Eternal|U|HOU
-#103|Bitterbow Sharpshooters|C|HOU
-#104|Devotee of Strength|U|HOU
-#105|Rampaging Hippo|C|HOU
-#106|Appeal Authority|U|HOU
-#107|Reason Believe|R|HOU
-#108|Sunset Pyramid|U|HOU
-#109|Hashep Oasis|U|HOU
-#110|Ramunap Ruins|U|HOU
-#111|Shefet Dunes|U|HOU
+#95|Ramunap Ruins|U|HOU
+#96|Shefet Dunes|U|HOU
+#97|Angel of the God-Pharaoh|U|HOU
+#98|Sandblast|C|HOU
+#99|Apocalypse Demon|R|HOU
+#100|Lethal Sting|C|HOU
+#101|Merciless Eternal|U|HOU
+#102|Razaketh, the Foulblooded|M|HOU
+#103|Wretched Camel|C|HOU
+#104|Frontline Devastator|C|HOU
+#105|Inferno Jet|U|HOU
+#106|Manticore Eternal|U|HOU
+#107|Bitterbow Sharpshooters|C|HOU
+#108|Devotee of Strength|U|HOU
+#109|Harrier Naga|C|HOU
+#110|Rampaging Hippo|C|HOU
+#111|Hashep Oasis|U|HOU
 #112|Aven of Enduring Hope|C|HOU
-#113|Aven Reedstalker|C|HOU
-#114|Jace's Defeat|U|HOU
-#115|Unquenchable Thirst|C|HOU
+#113|Mummy Paramount|C|HOU
+#114|Unconventional Tactics|U|HOU
+#115|Firebrand Archer|C|HOU
 #116|Gilded Cerodon|C|HOU
 #117|Thorned Moloch|C|HOU
-#118|Oasis Ritualist|C|HOU
-#119|Quarry Beetle|U|HOU
-#120|Claim Fame|U|HOU
-#121|Refuse Cooperate|R|HOU
-#122|Unconventional Tactics|U|HOU
-#123|Striped Riverwinder|C|HOU
-#124|Carrion Screecher|C|HOU
-#125|Lurching Rotbeast|C|HOU
-#126|Blur of Blades|C|HOU
-#127|Defiant Khenra|C|HOU
-#128|Granitic Titan|C|HOU
-#129|Feral Prowler|C|HOU
-#130|Sidewinder Naga|C|HOU
-#131|Endless Sands|R|HOU
-#132|Saving Grace|U|HOU
-#133|Solitary Camel|C|HOU
-#134|Strategic Planning|C|HOU
-#135|Tragic Lesson|C|HOU
-#136|Grisly Survivor|C|HOU
-#137|Wretched Camel|C|HOU
-#138|Kindled Fury|C|HOU
-#139|Dune Diviner|U|HOU
+#118|Quarry Beetle|U|HOU
+#119|Jace's Defeat|U|HOU
+#120|Striped Riverwinder|C|HOU
+#121|Khenra Eternal|C|HOU
+#122|Blur of Blades|C|HOU
+#123|Ramunap Excavator|R|HOU
+#124|Sidewinder Naga|C|HOU
+#125|Wall of Forgotten Pharaohs|C|HOU
+#126|Endless Sands|R|HOU
+#127|Ipnu Rivulet|U|HOU
+#128|Saving Grace|U|HOU
+#129|Solitary Camel|C|HOU
+#130|Countervailing Winds|C|HOU
+#131|Strategic Planning|C|HOU
+#132|Tragic Lesson|C|HOU
+#133|Carrion Screecher|C|HOU
+#134|Lurching Rotbeast|C|HOU
+#135|Marauding Boneslasher|C|HOU
+#136|Defiant Khenra|C|HOU
+#137|Granitic Titan|C|HOU
+#138|Beneath the Sands|C|HOU
+#139|Feral Prowler|C|HOU
 #140|Frilled Sandwalla|C|HOU
-#141|Hour of Promise|R|HOU
-#142|Ramunap Excavator|R|HOU
-#143|Leave Chance|R|HOU
-#144|Dagger of the Worthy|U|HOU
-#145|Ipnu Rivulet|U|HOU
-#146|Act of Heroism|C|HOU
-#147|Disposal Mummy|C|HOU
+#141|Gift of Strength|C|HOU
+#142|Claim Fame|U|HOU
+#143|Reason Believe|R|HOU
+#144|Survivors' Encampment|C|HOU
+#145|Act of Heroism|C|HOU
+#146|Disposal Mummy|C|HOU
+#147|Aven Reedstalker|C|HOU
 #148|Cunning Survivor|C|HOU
 #149|Seer of the Last Tomorrow|C|HOU
-#150|Razaketh's Rite|U|HOU
-#151|Without Weakness|C|HOU
-#152|Firebrand Archer|C|HOU
-#153|Wildfire Eternal|R|HOU
-#154|Gift of Strength|C|HOU
-#155|Survivors' Encampment|C|HOU
-#156|Djeru, With Eyes Open|R|HOU
-#157|Dutiful Servants|C|HOU
-#158|Solemnity|R|HOU
-#159|Steadfast Sentinel|C|HOU
-#160|Countervailing Winds|C|HOU
-#161|Scrounger of Souls|C|HOU
-#162|Torment of Scarabs|U|HOU
-#163|Crash Through|C|HOU
-#164|Beneath the Sands|C|HOU
-#165|Crook of Condemnation|U|HOU
-#166|Manalith|C|HOU
-#167|Traveler's Amulet|C|HOU
-#168|Wall of Forgotten Pharaohs|C|HOU
-#169|Djeru's Renunciation|C|HOU
-#170|Proven Combatant|C|HOU
-#171|Nissa's Defeat|U|HOU
-#172|Graven Abomination|C|HOU
-#173|God-Pharaoh's Faithful|C|HOU
-#174|Oketra's Last Mercy|R|HOU
-#175|Moaning Wall|C|HOU
-#176|Crypt of the Eternals|U|HOU
-#177|Dunes of the Dead|U|HOU
-#178|Hazoret's Undying Fury|R|HOU
-#179|Scavenger Grounds|R|HOU
-#180|Imminent Doom|R|HOU
+#150|Grisly Survivor|C|HOU
+#151|Moaning Wall|C|HOU
+#152|Razaketh's Rite|U|HOU
+#153|Scrounger of Souls|C|HOU
+#154|Imminent Doom|R|HOU
+#155|Kindled Fury|C|HOU
+#156|Wildfire Eternal|R|HOU
+#157|Dune Diviner|U|HOU
+#158|Refuse Cooperate|R|HOU
+#159|Dagger of the Worthy|U|HOU
+#160|Manalith|C|HOU
+#161|Traveler's Amulet|C|HOU
+#162|Dunes of the Dead|U|HOU
+#163|Djeru, With Eyes Open|R|HOU
+#164|Dutiful Servants|C|HOU
+#165|Solemnity|R|HOU
+#166|Steadfast Sentinel|C|HOU
+#167|Imaginary Threats|U|HOU
+#168|Proven Combatant|C|HOU
+#169|Without Weakness|C|HOU
+#170|Crash Through|C|HOU
+#171|Leave Chance|R|HOU
+#172|Crook of Condemnation|U|HOU
+#173|Djeru's Renunciation|C|HOU
+#174|Nissa's Defeat|U|HOU
+#175|Graven Abomination|C|HOU
+#176|God-Pharaoh's Faithful|C|HOU
+#177|Oketra's Last Mercy|R|HOU
+#178|Crypt of the Eternals|U|HOU
+#179|Hazoret's Undying Fury|R|HOU
+#180|Scavenger Grounds|R|HOU
 #181|Life Goes On|C|HOU
 #182|Hostile Desert|R|HOU
 #183|Swarm Intelligence|R|HOU
@@ -458,227 +458,227 @@
 #22|Oketra the True|M|AKH
 #23|Liliana's Mastery|R|AKH
 #24|Channeler Initiate|R|AKH
-#25|Neheb, the Worthy|R|AKH
-#26|Temmet, Vizier of Naktamun|R|AKH
-#27|Prepare Fight|R|AKH
-#28|Hazoret the Fervent|M|AKH
-#29|Trial of Zeal|U|AKH
-#30|Oketra's Attendant|U|AKH
-#31|Angler Drake|U|AKH
-#32|Deem Worthy|U|AKH
-#33|Hapatra, Vizier of Poisons|R|AKH
-#34|Glory-Bound Initiate|R|AKH
-#35|Stir the Sands|U|AKH
-#36|Sweltering Suns|R|AKH
-#37|Ahn-Crop Champion|U|AKH
-#38|Decimator Beetle|U|AKH
-#39|Final Reward|C|AKH
-#40|Prowling Serpopard|R|AKH
-#41|Scaled Behemoth|U|AKH
-#42|Merciless Javelineer|U|AKH
-#43|Cartouche of Strength|C|AKH
-#44|Aven Wind Guide|U|AKH
-#45|Weaver of Currents|U|AKH
-#46|Edifice of Authority|U|AKH
-#47|Compulsory Rest|C|AKH
-#48|Kefnet the Mindful|M|AKH
-#49|Vizier of Tumbling Sands|U|AKH
-#50|Bone Picker|U|AKH
-#51|Gravedigger|U|AKH
-#52|Shefet Monitor|U|AKH
-#53|Khenra Charioteer|U|AKH
-#54|Dusk Dawn|R|AKH
-#55|Mouth Feed|R|AKH
-#56|Destined Lead|U|AKH
-#57|Aven Mindcensor|R|AKH
-#58|Cartouche of Knowledge|C|AKH
-#59|Bontu the Glorified|M|AKH
-#60|Ruthless Sniper|U|AKH
-#61|Ahn-Crop Crasher|U|AKH
-#62|Crocodile of the Crossing|U|AKH
-#63|Honored Crop-Captain|U|AKH
-#64|Lay Claim|U|AKH
-#65|Pull from Tomorrow|R|AKH
-#66|Baleful Ammit|U|AKH
-#67|Combat Celebrant|M|AKH
-#68|Electrify|C|AKH
-#69|Harsh Mentor|R|AKH
+#25|Temmet, Vizier of Naktamun|R|AKH
+#26|Hazoret the Fervent|M|AKH
+#27|Neheb, the Worthy|R|AKH
+#28|Prepare Fight|R|AKH
+#29|Deem Worthy|U|AKH
+#30|Dusk Dawn|R|AKH
+#31|Glory-Bound Initiate|R|AKH
+#32|Oketra's Attendant|U|AKH
+#33|Angler Drake|U|AKH
+#34|Trial of Zeal|U|AKH
+#35|Kefnet the Mindful|M|AKH
+#36|Stir the Sands|U|AKH
+#37|Sweltering Suns|R|AKH
+#38|Aven Wind Guide|U|AKH
+#39|Decimator Beetle|U|AKH
+#40|Hapatra, Vizier of Poisons|R|AKH
+#41|Trial of Solidarity|U|AKH
+#42|Final Reward|C|AKH
+#43|Ahn-Crop Crasher|U|AKH
+#44|Magma Spray|C|AKH
+#45|Prowling Serpopard|R|AKH
+#46|Merciless Javelineer|U|AKH
+#47|Bone Picker|U|AKH
+#48|Ruthless Sniper|U|AKH
+#49|Cartouche of Strength|C|AKH
+#50|Crocodile of the Crossing|U|AKH
+#51|Ahn-Crop Champion|U|AKH
+#52|Weaver of Currents|U|AKH
+#53|Edifice of Authority|U|AKH
+#54|Compulsory Rest|C|AKH
+#55|Fan Bearer|C|AKH
+#56|Lay Claim|U|AKH
+#57|Vizier of Tumbling Sands|U|AKH
+#58|Baleful Ammit|U|AKH
+#59|Gravedigger|U|AKH
+#60|Scaled Behemoth|U|AKH
+#61|Khenra Charioteer|U|AKH
+#62|Wayward Servant|U|AKH
+#63|Mouth Feed|R|AKH
+#64|Destined Lead|U|AKH
+#65|Heaven Earth|R|AKH
+#66|Aven Mindcensor|R|AKH
+#67|Cartouche of Knowledge|C|AKH
+#68|Bontu the Glorified|M|AKH
+#69|Lord of the Accursed|U|AKH
 #70|Enigma Drake|U|AKH
-#71|Wayward Servant|U|AKH
-#72|Oracle's Vault|R|AKH
-#73|Trueheart Duelist|U|AKH
-#74|Open into Wonder|U|AKH
-#75|Lord of the Accursed|U|AKH
-#76|Splendid Agony|C|AKH
-#77|Bloodrage Brawler|U|AKH
-#78|Magma Spray|C|AKH
-#79|Champion of Rhonas|R|AKH
-#80|Defiant Greatmaw|U|AKH
-#81|Trial of Strength|U|AKH
-#82|Shadowstorm Vizier|U|AKH
-#83|Canyon Slough|R|AKH
-#84|Fetid Pools|R|AKH
-#85|Irrigated Farmland|R|AKH
-#86|Scattered Groves|R|AKH
-#87|Sheltered Thicket|R|AKH
-#88|Fan Bearer|C|AKH
-#89|Vizier of Deferment|U|AKH
-#90|Aven Initiate|C|AKH
-#91|Emberhorn Minotaur|C|AKH
-#92|Exemplar of Strength|U|AKH
-#93|Hooded Brawler|C|AKH
-#94|Naga Vitalist|C|AKH
-#95|Synchronized Strike|U|AKH
-#96|Onward Victory|U|AKH
-#97|Rags Riches|R|AKH
-#98|Heaven Earth|R|AKH
-#99|Rhonas's Monument|U|AKH
-#100|Tah-Crop Elite|C|AKH
-#101|Time to Reflect|U|AKH
-#102|Unwavering Initiate|C|AKH
-#103|Shimmerscale Drake|C|AKH
-#104|Trial of Knowledge|U|AKH
-#105|Cartouche of Ambition|C|AKH
-#106|Grim Strider|U|AKH
-#107|Trial of Ambition|U|AKH
-#108|Wander in Death|C|AKH
-#109|Wasteland Scorpion|C|AKH
-#110|Battlefield Scavenger|U|AKH
-#111|Trueheart Twins|U|AKH
-#112|Bitterblade Warrior|C|AKH
-#113|Greater Sandwurm|C|AKH
-#114|Quarry Hauler|C|AKH
-#115|Bounty of the Luxa|R|AKH
-#116|Commit Memory|R|AKH
-#117|Start Finish|U|AKH
-#118|Cartouche of Solidarity|C|AKH
-#119|Devoted Crop-Mate|U|AKH
-#120|Djeru's Resolve|C|AKH
-#121|Gideon's Intervention|R|AKH
-#122|Gust Walker|C|AKH
-#123|Essence Scatter|C|AKH
-#124|Hieroglyphic Illumination|C|AKH
-#125|Illusory Wrappings|C|AKH
-#126|New Perspectives|R|AKH
-#127|Winds of Rebuke|C|AKH
-#128|Blighted Bat|C|AKH
-#129|Unburden|C|AKH
-#130|Nef-Crop Entangler|C|AKH
-#131|Thresher Lizard|C|AKH
-#132|Oketra's Monument|U|AKH
-#133|Seraph of the Suns|U|AKH
-#134|Trial of Solidarity|U|AKH
-#135|Vizier of Remedies|U|AKH
-#136|Winged Shepherd|C|AKH
-#137|Censor|U|AKH
-#138|Cryptic Serpent|U|AKH
-#139|Floodwaters|C|AKH
-#140|Galestrike|U|AKH
-#141|Labyrinth Guardian|U|AKH
-#142|River Serpent|C|AKH
-#143|Zenith Seeker|U|AKH
-#144|Cruel Reality|M|AKH
-#145|Dread Wanderer|R|AKH
-#146|Nest of Scarabs|U|AKH
-#147|Pitiless Vizier|C|AKH
-#148|Soulstinger|C|AKH
-#149|Cartouche of Zeal|C|AKH
-#150|Desert Cerodon|C|AKH
-#151|Limits of Solidarity|U|AKH
-#152|Minotaur Sureshot|C|AKH
-#153|Colossapede|C|AKH
-#154|Giant Spider|C|AKH
-#155|Spring Mind|U|AKH
-#156|Grasping Dunes|U|AKH
-#157|Binding Mummy|C|AKH
-#158|Forsake the Worldly|C|AKH
-#159|Impeccable Timing|C|AKH
-#160|Rhet-Crop Spearmaster|C|AKH
-#161|Supply Caravan|C|AKH
-#162|Cursed Minotaur|C|AKH
-#163|Doomed Dissenter|C|AKH
-#164|Horror of the Broken Lands|C|AKH
-#165|Supernatural Stamina|C|AKH
-#166|Warfire Javelineer|U|AKH
-#167|Ornery Kudu|C|AKH
-#168|Watchful Naga|U|AKH
-#169|Reduce Rubble|U|AKH
-#170|Hazoret's Monument|U|AKH
-#171|Cradle of the Accursed|C|AKH
-#172|Anointer Priest|C|AKH
-#173|Those Who Serve|C|AKH
-#174|Naga Oracle|C|AKH
-#175|Tah-Crop Skirmisher|C|AKH
-#176|Faith of the Devoted|U|AKH
-#177|Brute Strength|C|AKH
-#178|Hyena Pack|C|AKH
-#179|Pathmaker Initiate|C|AKH
-#180|Pursue Glory|C|AKH
-#181|Initiate's Companion|C|AKH
-#182|Shed Weakness|C|AKH
-#183|Honed Khopesh|C|AKH
-#184|Watchers of the Dead|U|AKH
-#185|Evolving Wilds|C|AKH
-#186|Approach of the Second Sun|R|AKH
-#187|Renewed Faith|U|AKH
-#188|Ancient Crab|C|AKH
-#189|Hekma Sentinels|C|AKH
-#190|Dune Beetle|C|AKH
-#191|Lay Bare the Heart|U|AKH
-#192|Painful Lesson|C|AKH
-#193|Manticore of the Gauntlet|C|AKH
-#194|Tormenting Voice|C|AKH
-#195|Sandwurm Convergence|R|AKH
-#196|Spidery Grasp|C|AKH
-#197|Stinging Shot|C|AKH
-#198|Throne of the God-Pharaoh|R|AKH
-#199|Sunscorched Desert|C|AKH
-#200|In Oketra's Name|C|AKH
-#201|Sparring Mummy|C|AKH
-#202|Cancel|C|AKH
-#203|Seeker of Insight|C|AKH
-#204|Festering Mummy|C|AKH
-#205|Scarab Feast|C|AKH
-#206|Bloodlust Inciter|C|AKH
-#207|Soul-Scar Mage|R|AKH
-#208|Violent Impact|C|AKH
-#209|Dissenter's Deliverance|C|AKH
-#210|Gift of Paradise|C|AKH
-#211|Haze of Pollen|C|AKH
-#212|Pouncing Cheetah|C|AKH
-#213|Kefnet's Monument|U|AKH
-#214|Cascading Cataracts|R|AKH
-#215|As Foretold|M|AKH
-#216|Slither Blade|C|AKH
-#217|Miasmic Mummy|C|AKH
-#218|Blazing Volley|C|AKH
-#219|Consuming Fervor|U|AKH
-#220|Flameblade Adept|U|AKH
-#221|Nimble-Blade Khenra|C|AKH
-#222|Benefaction of Rhonas|C|AKH
-#223|Manglehorn|U|AKH
-#224|Oashra Cultivator|C|AKH
-#225|Bontu's Monument|U|AKH
-#226|Gate to the Afterlife|U|AKH
-#227|Luxa River Shrine|C|AKH
-#228|Pyramid of the Pantheon|R|AKH
-#229|Painted Bluffs|C|AKH
-#230|Anointed Procession|R|AKH
-#231|Mighty Leap|C|AKH
-#232|Protection of the Hekma|U|AKH
-#233|Decision Paralysis|C|AKH
-#234|Fling|C|AKH
-#235|Hapatra's Mark|U|AKH
-#236|Sacred Cat|C|AKH
-#237|Compelling Argument|C|AKH
-#238|Failure Comply|R|AKH
-#239|Embalmer's Tools|U|AKH
-#240|Trespasser's Curse|C|AKH
-#241|By Force|U|AKH
-#242|Glorious End|M|AKH
-#243|Hazoret's Favor|R|AKH
-#244|Sixth Sense|U|AKH
-#245|Scribe of the Mindful|C|AKH
+#71|Honored Crop-Captain|U|AKH
+#72|Gust Walker|C|AKH
+#73|Pull from Tomorrow|R|AKH
+#74|Bloodrage Brawler|U|AKH
+#75|Combat Celebrant|M|AKH
+#76|Electrify|C|AKH
+#77|Emberhorn Minotaur|C|AKH
+#78|Harsh Mentor|R|AKH
+#79|Exemplar of Strength|U|AKH
+#80|Shefet Monitor|U|AKH
+#81|Oracle's Vault|R|AKH
+#82|Tah-Crop Elite|C|AKH
+#83|Trueheart Duelist|U|AKH
+#84|Cartouche of Ambition|C|AKH
+#85|Champion of Rhonas|R|AKH
+#86|Synchronized Strike|U|AKH
+#87|Shadowstorm Vizier|U|AKH
+#88|Start Finish|U|AKH
+#89|Cartouche of Solidarity|C|AKH
+#90|Vizier of Deferment|U|AKH
+#91|Aven Initiate|C|AKH
+#92|Splendid Agony|C|AKH
+#93|Battlefield Scavenger|U|AKH
+#94|Nef-Crop Entangler|C|AKH
+#95|Hooded Brawler|C|AKH
+#96|Rags Riches|R|AKH
+#97|Rhonas's Monument|U|AKH
+#98|Canyon Slough|R|AKH
+#99|Fetid Pools|R|AKH
+#100|Irrigated Farmland|R|AKH
+#101|Scattered Groves|R|AKH
+#102|Sheltered Thicket|R|AKH
+#103|Binding Mummy|C|AKH
+#104|Devoted Crop-Mate|U|AKH
+#105|Rhet-Crop Spearmaster|C|AKH
+#106|Unwavering Initiate|C|AKH
+#107|Open into Wonder|U|AKH
+#108|Shimmerscale Drake|C|AKH
+#109|Grim Strider|U|AKH
+#110|Wander in Death|C|AKH
+#111|Wasteland Scorpion|C|AKH
+#112|Trueheart Twins|U|AKH
+#113|Warfire Javelineer|U|AKH
+#114|Defiant Greatmaw|U|AKH
+#115|Naga Vitalist|C|AKH
+#116|Trial of Strength|U|AKH
+#117|Bounty of the Luxa|R|AKH
+#118|Commit Memory|R|AKH
+#119|Djeru's Resolve|C|AKH
+#120|Essence Scatter|C|AKH
+#121|Hieroglyphic Illumination|C|AKH
+#122|Blighted Bat|C|AKH
+#123|Trial of Ambition|U|AKH
+#124|Cartouche of Zeal|C|AKH
+#125|Thresher Lizard|C|AKH
+#126|Bitterblade Warrior|C|AKH
+#127|Watchful Naga|U|AKH
+#128|Onward Victory|U|AKH
+#129|Oketra's Monument|U|AKH
+#130|Gideon's Intervention|R|AKH
+#131|Impeccable Timing|C|AKH
+#132|Seraph of the Suns|U|AKH
+#133|Vizier of Remedies|U|AKH
+#134|Winged Shepherd|C|AKH
+#135|Censor|U|AKH
+#136|Cryptic Serpent|U|AKH
+#137|Galestrike|U|AKH
+#138|Labyrinth Guardian|U|AKH
+#139|River Serpent|C|AKH
+#140|Trial of Knowledge|U|AKH
+#141|Cruel Reality|M|AKH
+#142|Cursed Minotaur|C|AKH
+#143|Dread Wanderer|R|AKH
+#144|Nest of Scarabs|U|AKH
+#145|Pitiless Vizier|C|AKH
+#146|Soulstinger|C|AKH
+#147|Supernatural Stamina|C|AKH
+#148|Unburden|C|AKH
+#149|Desert Cerodon|C|AKH
+#150|Minotaur Sureshot|C|AKH
+#151|Colossapede|C|AKH
+#152|Greater Sandwurm|C|AKH
+#153|Quarry Hauler|C|AKH
+#154|Spring Mind|U|AKH
+#155|Grasping Dunes|U|AKH
+#156|Those Who Serve|C|AKH
+#157|Winds of Rebuke|C|AKH
+#158|Horror of the Broken Lands|C|AKH
+#159|Brute Strength|C|AKH
+#160|Ornery Kudu|C|AKH
+#161|Shed Weakness|C|AKH
+#162|Stinging Shot|C|AKH
+#163|Forsake the Worldly|C|AKH
+#164|Supply Caravan|C|AKH
+#165|Time to Reflect|U|AKH
+#166|Floodwaters|C|AKH
+#167|Illusory Wrappings|C|AKH
+#168|Naga Oracle|C|AKH
+#169|Tah-Crop Skirmisher|C|AKH
+#170|Doomed Dissenter|C|AKH
+#171|Faith of the Devoted|U|AKH
+#172|Hyena Pack|C|AKH
+#173|Limits of Solidarity|U|AKH
+#174|Pathmaker Initiate|C|AKH
+#175|Pursue Glory|C|AKH
+#176|Initiate's Companion|C|AKH
+#177|Honed Khopesh|C|AKH
+#178|Watchers of the Dead|U|AKH
+#179|Evolving Wilds|C|AKH
+#180|Anointer Priest|C|AKH
+#181|Approach of the Second Sun|R|AKH
+#182|Renewed Faith|U|AKH
+#183|Sparring Mummy|C|AKH
+#184|New Perspectives|R|AKH
+#185|Lay Bare the Heart|U|AKH
+#186|Manticore of the Gauntlet|C|AKH
+#187|Giant Spider|C|AKH
+#188|Sandwurm Convergence|R|AKH
+#189|Spidery Grasp|C|AKH
+#190|Reduce Rubble|U|AKH
+#191|Throne of the God-Pharaoh|R|AKH
+#192|Cradle of the Accursed|C|AKH
+#193|Painted Bluffs|C|AKH
+#194|In Oketra's Name|C|AKH
+#195|Cancel|C|AKH
+#196|Hekma Sentinels|C|AKH
+#197|Seeker of Insight|C|AKH
+#198|Zenith Seeker|U|AKH
+#199|Festering Mummy|C|AKH
+#200|Bloodlust Inciter|C|AKH
+#201|Fling|C|AKH
+#202|Soul-Scar Mage|R|AKH
+#203|Dissenter's Deliverance|C|AKH
+#204|Gift of Paradise|C|AKH
+#205|Pouncing Cheetah|C|AKH
+#206|Gate to the Afterlife|U|AKH
+#207|Hazoret's Monument|U|AKH
+#208|Cascading Cataracts|R|AKH
+#209|Sacred Cat|C|AKH
+#210|Ancient Crab|C|AKH
+#211|As Foretold|M|AKH
+#212|Compelling Argument|C|AKH
+#213|Slither Blade|C|AKH
+#214|Miasmic Mummy|C|AKH
+#215|Painful Lesson|C|AKH
+#216|Blazing Volley|C|AKH
+#217|Consuming Fervor|U|AKH
+#218|Flameblade Adept|U|AKH
+#219|Nimble-Blade Khenra|C|AKH
+#220|Tormenting Voice|C|AKH
+#221|Benefaction of Rhonas|C|AKH
+#222|Manglehorn|U|AKH
+#223|Oashra Cultivator|C|AKH
+#224|Bontu's Monument|U|AKH
+#225|Luxa River Shrine|C|AKH
+#226|Pyramid of the Pantheon|R|AKH
+#227|Sunscorched Desert|C|AKH
+#228|Anointed Procession|R|AKH
+#229|Mighty Leap|C|AKH
+#230|Protection of the Hekma|U|AKH
+#231|Dune Beetle|C|AKH
+#232|Scarab Feast|C|AKH
+#233|Hapatra's Mark|U|AKH
+#234|Kefnet's Monument|U|AKH
+#235|Haze of Pollen|C|AKH
+#236|Failure Comply|R|AKH
+#237|Embalmer's Tools|U|AKH
+#238|Decision Paralysis|C|AKH
+#239|Trespasser's Curse|C|AKH
+#240|By Force|U|AKH
+#241|Glorious End|M|AKH
+#242|Hazoret's Favor|R|AKH
+#243|Sixth Sense|U|AKH
+#244|Scribe of the Mindful|C|AKH
+#245|Violent Impact|C|AKH
 #246|Harvest Season|R|AKH
 #247|Sacred Excavation|U|AKH
 #248|Shadow of the Grave|R|AKH
