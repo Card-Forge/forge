@@ -2133,6 +2133,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
          */
         @Override
         public void repeatLastAddition() {
+            if (lastAdded == null) {
+                return;
+            }
             addCardToZone(null, true, lastTrigs);
         }
 
