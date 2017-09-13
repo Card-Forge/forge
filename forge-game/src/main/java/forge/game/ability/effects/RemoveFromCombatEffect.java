@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -36,7 +37,25 @@ public class RemoveFromCombatEffect extends SpellAbilityEffect {
         for (final Card c : getTargetCards(sa)) {
         	final Combat combat = game.getPhaseHandler().getCombat();
             if (combat != null && (tgt == null || c.canBeTargetedBy(sa))) {
+                // Unblock creatures that were blocked only by this card (e.g. Ydwen Efreet)
+                if (sa.hasParam("UnblockCreaturesBlockedOnlyBySelf")) {
+                    CardCollection blockedBySelf = combat.getAttackersBlockedBy(sa.getHostCard());
+                    for (Card atk : blockedBySelf) {
+                        boolean blockedOnlyBySelf = true;
+                        for (Card blocker : combat.getBlockers(atk)) {
+                            if (!blocker.equals(sa.getHostCard())) {
+                                blockedOnlyBySelf = false;
+                                break;
+                            }
+                        }
+                        if (blockedOnlyBySelf) {
+                            combat.setBlocked(atk, false);
+                        }
+                    }
+                }
+
             	combat.removeFromCombat(c);
+
                 if (rem) {
                     sa.getHostCard().addRemembered(c);
                 }
