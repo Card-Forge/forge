@@ -629,7 +629,7 @@ public class AiBlockController {
                         evalBlk = ComputerUtilCard.evaluateCreature(Card.fromPaperCard(blocker.getPaperCard(), ai), false, true);
                     }
                     int chanceToSavePW = chanceToTradeDownToSaveWalker > 0 && evalAtk + 1 < evalBlk ? chanceToTradeDownToSaveWalker : chanceToTradeToSaveWalker;
-                    boolean powerParityOrHigher = blocker.getNetPower() >= attacker.getNetPower();
+                    boolean powerParityOrHigher = blocker.getNetPower() <= attacker.getNetPower();
                     boolean creatureParityOrAllowedDiff = aiCreatureCount
                             + (randomTradeIfBehindOnBoard ? maxCreatDiff : 0) >= oppCreatureCount;
                     boolean wantToTradeWithCreatInHand = randomTradeIfCreatInHand
