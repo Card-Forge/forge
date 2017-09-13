@@ -17274,6 +17274,7 @@ forge-gui/res/cardsfolder/upcoming/kopala_warden_of_waves.txt -text
 forge-gui/res/cardsfolder/upcoming/kumenas_speaker.txt -text
 forge-gui/res/cardsfolder/upcoming/legion_conquistador.txt -text
 forge-gui/res/cardsfolder/upcoming/legions_landing_adanto_the_first_fort.txt -text
+forge-gui/res/cardsfolder/upcoming/lightning_rig_crew.txt -text
 forge-gui/res/cardsfolder/upcoming/lookouts_dispersal.txt -text
 forge-gui/res/cardsfolder/upcoming/lurking_chupacabra.txt -text
 forge-gui/res/cardsfolder/upcoming/makeshift_munitions.txt -text
@@ -17290,6 +17291,7 @@ forge-gui/res/cardsfolder/upcoming/primal_amulet_primal_wellspring.txt -text
 forge-gui/res/cardsfolder/upcoming/prosperous_pirates.txt -text
 forge-gui/res/cardsfolder/upcoming/queens_bay_soldier.txt -text
 forge-gui/res/cardsfolder/upcoming/raging_swordtooth.txt -text
+forge-gui/res/cardsfolder/upcoming/raiders_wake.txt -text
 forge-gui/res/cardsfolder/upcoming/rampaging_ferocidon.txt -text
 forge-gui/res/cardsfolder/upcoming/ranging_raptors.txt -text
 forge-gui/res/cardsfolder/upcoming/raptor_hatchling.txt -text
@@ -17323,6 +17325,7 @@ forge-gui/res/cardsfolder/upcoming/storm_fleet_spy.txt -text
 forge-gui/res/cardsfolder/upcoming/sun_blessed_mount.txt -text
 forge-gui/res/cardsfolder/upcoming/sun_crowned_hunters.txt -text
 forge-gui/res/cardsfolder/upcoming/sunbirds_invocation.txt -text
+forge-gui/res/cardsfolder/upcoming/sword_point_diplomacy.txt -text
 forge-gui/res/cardsfolder/upcoming/thaumatic_compass_spires_of_orazca.txt -text
 forge-gui/res/cardsfolder/upcoming/thundering_spineback.txt -text
 forge-gui/res/cardsfolder/upcoming/tilonallis_skinshifter.txt -text
