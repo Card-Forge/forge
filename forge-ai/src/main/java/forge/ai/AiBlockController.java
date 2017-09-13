@@ -19,6 +19,7 @@ package forge.ai;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import forge.card.CardStateName;
 import forge.game.CardTraitBase;
 import forge.game.GameEntity;
 import forge.game.card.*;
@@ -622,6 +623,11 @@ public class AiBlockController {
 
                     int evalAtk = ComputerUtilCard.evaluateCreature(attacker, false, false);
                     int evalBlk = ComputerUtilCard.evaluateCreature(blocker, false, false);
+                    if (blocker.isFaceDown() && blocker.getState(CardStateName.Original).getType().isCreature()) {
+                        // if the blocker is a face-down creature (e.g. cast via Morph, Manifest), evaluate it
+                        // in relation to the original state, not to the Morph state
+                        evalBlk = ComputerUtilCard.evaluateCreature(Card.fromPaperCard(blocker.getPaperCard(), ai), true, false);
+                    }
                     int chanceToSavePW = chanceToTradeDownToSaveWalker > 0 && evalAtk + 1 < evalBlk ? chanceToTradeDownToSaveWalker : chanceToTradeToSaveWalker;
                     boolean powerParityOrHigher = blocker.getNetPower() >= attacker.getNetPower();
                     boolean creatureParityOrAllowedDiff = aiCreatureCount
