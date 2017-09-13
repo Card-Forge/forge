@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+0/-6
 A:AB$ ChooseSource | Cost$ 0 | ActivationZone$ Command | Choices$ Card | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBTargetOpp | ActivationLimit$ 1 | SpellDescription$ If damage would be dealt to you this turn by a source of your choice, prevent that damage. CARDNAME deals damage to you and target opponent equal to half the damage prevented this way, rounded up. Activate this ability only once each turn.
-SVar:DBTargetOpp:DB$ Pump | ValidTgts$ Opponent | TgtPrompt$ Select target opponent to give damamge | RememberObjects$ Targeted | StackDescription$ None | SubAbility$ DBEffect
+SVar:DBTargetOpp:DB$ Pump | ValidTgts$ Opponent | TgtPrompt$ Select target opponent to give damage | RememberObjects$ Targeted | StackDescription$ None | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ SelflessDamage | RememberObjects$ Remembered | SVars$ DamageEffectYou,DamageEffectPlayer,X | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
 
 SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ You | ValidSource$ Card.IsRemembered | PreventionEffect$ True | ReplaceWith$ DamageEffectYou | Description$ If damage would be dealt to you this turn by a source of your choice, prevent that damage. Stuffy Doll Avatar deals damage to you and target opponent equal to half the damage prevented this way, rounded up. Activate this ability only once each turn.
