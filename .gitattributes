@@ -19610,13 +19610,13 @@ forge-gui/res/licenses/xstream-license.txt svneol=native#text/plain
 forge-gui/res/lists/NonStackingKWList.txt svneol=native#text/plain
 forge-gui/res/lists/TypeLists.txt svneol=native#text/plain
 forge-gui/res/lists/achievement-images.txt -text
-forge-gui/res/lists/altwin-archivements.txt -text svneol=unset#text/plain
+forge-gui/res/lists/altwin-achievements.txt -text
 forge-gui/res/lists/booster-images.txt svneol=native#text/plain
 forge-gui/res/lists/boosterbox-images.txt -text
 forge-gui/res/lists/fatpack-images.txt svneol=native#text/plain
 forge-gui/res/lists/net-decks-commander.txt -text
 forge-gui/res/lists/net-decks.txt -text
-forge-gui/res/lists/planeswalker-archivements.txt -text svneol=unset#text/plain
+forge-gui/res/lists/planeswalker-achievements.txt -text
 forge-gui/res/lists/precon-images.txt svneol=native#text/plain
 forge-gui/res/lists/quest-opponent-icons.txt svneol=native#text/plain
 forge-gui/res/lists/quest-pet-token-images.txt svneol=native#text/plain
