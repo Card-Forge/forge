@@ -451,7 +451,10 @@ public class WrappedAbility extends Ability {
                 Card card = (Card) o;
                 Card current = game.getCardState(card);
                 if (current.getTimestamp() != card.getTimestamp()) {
-                    sa.getTriggerRemembered().remove(o);
+                    // TODO: figure out if NoTimestampCheck should be the default for ChangesZone triggers
+                    if (!triggerParams.containsKey("NoTimestampCheck")) {
+                        sa.getTriggerRemembered().remove(o);
+                    }
                 }
             }
         }
@@ -461,7 +464,10 @@ public class WrappedAbility extends Ability {
                 Card card = (Card) ev.getValue();
                 Card current = game.getCardState(card);
                 if (card.isInPlay() && current.isInPlay() && current.getTimestamp() != card.getTimestamp()) {
-                    sa.getTriggeringObjects().remove(ev.getKey());
+                    // TODO: figure out if NoTimestampCheck should be the default for ChangesZone triggers
+                    if (!triggerParams.containsKey("NoTimestampCheck")) {
+                        sa.getTriggeringObjects().remove(ev.getKey());
+                    }
                 }
             }
         }
