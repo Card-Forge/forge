@@ -1,4 +1,4 @@
-add("Ajani Goldmane|Ajani's Avatar|Serra? Is that you?
+Ajani Goldmane|Ajani's Avatar|Serra? Is that you?
 Ajani Steadfast|Ajani's Forcefield|Shields up!
 Ajani Unyielding|Ajani's Mentoring|Today's lesson: How to be strong.
 Ajani Vengeant|Ajani's Tantrum|Look Ma! No lands!
