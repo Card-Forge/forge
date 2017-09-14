@@ -13,7 +13,7 @@ A new option is available in Mobile Forge, which sends the game to background ("
 - Mobile Forge: Texture Filtering -
 Texture filtering is now enabled by default for new Mobile Forge installations on Android. After extensive testing this mode has shown no noticeable performance downgrade on modern Android devices while offering a significantly higher quality of card rendering on the battlefield. Older installations will not be affected by this and you will still need to enable the feature manually if desired (in Forge preferences). If you are on a significantly older or low-end device and you are experiencing inadequately low game performance, please try disabling this option in case it is enabled on your installation.
 
-- Mobile Forge: Dynamic Plane Background Art in Planechase Mode -
+- Mobile Forge: Dynamic Plane Background Art in Planechase Mode (option) -
 It is now possible to make the playfield background switch to the plane art in Planechase mode on mobile Forge using the new game option that is available in mobile Forge preferences. In order for this option to work, you need to download the plane art and extract it into the "planechase" folder under the "pics" folder in your Forge cache.
 
 - New Quest World: The Gates of Magic -
