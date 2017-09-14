@@ -13,6 +13,8 @@ public enum TrackableProperty {
     PreventNextDamage(TrackableTypes.IntegerType),
     EnchantedBy(TrackableTypes.CardViewCollectionType),
     Counters(TrackableTypes.CounterMapType),
+    CurrentPlane(TrackableTypes.StringType),
+    PlanarPlayer(TrackableTypes.PlayerViewType),
 
     //Card 
     Owner(TrackableTypes.PlayerViewType),

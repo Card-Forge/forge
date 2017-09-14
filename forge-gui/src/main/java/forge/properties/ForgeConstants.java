@@ -100,6 +100,85 @@ public final class ForgeConstants {
     public static final String SPACE_BG_FILE          = "bg_space.png";
     public static final String CHAOS_WHEEL_IMG_FILE   = "bg_chaos_wheel.png";
     public static final String DRAFT_DECK_IMG_FILE    = "bg_draft_deck.png";
+    //Planes addon
+    public static final String BG_1                   = "Academy_at_Tolaria_West.jpg";
+    public static final String BG_2                   = "Agyrem.jpg";
+    public static final String BG_3                   = "Akoum.jpg";
+    public static final String BG_4                   = "Aretopolis.jpg";
+    public static final String BG_5                   = "Astral_Arena.jpg";
+    public static final String BG_6                   = "Bant.jpg";
+    public static final String BG_7                   = "Bloodhill_Bastion.jpg";
+    public static final String BG_8                   = "Cliffside_Market.jpg";
+    public static final String BG_9                   = "Edge_of_Malacol.jpg";
+    public static final String BG_10                  = "Eloren_Wilds.jpg";
+    public static final String BG_11                  = "Feeding_Grounds.jpg";
+    public static final String BG_12                  = "Fields_of_Summer.jpg";
+    public static final String BG_13                  = "Furnace_Layer.jpg";
+    public static final String BG_14                  = "Gavony.jpg";
+    public static final String BG_15                  = "Glen_Elendra.jpg";
+    public static final String BG_16                  = "Glimmervoid_Basin.jpg";
+    public static final String BG_17                  = "Goldmeadow.jpg";
+    public static final String BG_18                  = "Grand_Ossuary.jpg";
+    public static final String BG_19                  = "Grixis.jpg";
+    public static final String BG_20                  = "Grove_of_the_Dreampods.jpg";
+    public static final String BG_21                  = "Hedron_Fields_of_Agadeem.jpg";
+    public static final String BG_22                  = "Immersturm.jpg";
+    public static final String BG_23                  = "Isle_of_Vesuva.jpg";
+    public static final String BG_24                  = "Izzet_Steam_Maze.jpg";
+    public static final String BG_25                  = "Jund.jpg";
+    public static final String BG_26                  = "Kessig.jpg";
+    public static final String BG_27                  = "Kharasha_Foothills.jpg";
+    public static final String BG_28                  = "Kilnspire_District.jpg";
+    public static final String BG_29                  = "Krosa.jpg";
+    public static final String BG_30                  = "Lair_of_the_Ashen_Idol.jpg";
+    public static final String BG_31                  = "Lethe_Lake.jpg";
+    public static final String BG_32                  = "Llanowar.jpg";
+    public static final String BG_33                  = "Minamo.jpg";
+    public static final String BG_34                  = "Mount_Keralia.jpg";
+    public static final String BG_35                  = "Murasa.jpg";
+    public static final String BG_36                  = "Naar_Isle.jpg";
+    public static final String BG_37                  = "Naya.jpg";
+    public static final String BG_38                  = "Nephalia.jpg";
+    public static final String BG_39                  = "Norn's_Dominion.jpg";
+    public static final String BG_40                  = "Onakke_Catacomb.jpg";
+    public static final String BG_41                  = "Orochi_Colony.jpg";
+    public static final String BG_42                  = "Orzhova.jpg";
+    public static final String BG_43                  = "Otaria.jpg";
+    public static final String BG_44                  = "Panopticon.jpg";
+    public static final String BG_45                  = "Pools_of_Becoming.jpg";
+    public static final String BG_46                  = "Prahv.jpg";
+    public static final String BG_47                  = "Quicksilver_Sea.jpg";
+    public static final String BG_48                  = "Raven's_Run.jpg";
+    public static final String BG_49                  = "Sanctum_of_Serra.jpg";
+    public static final String BG_50                  = "Sea_of_Sand.jpg";
+    public static final String BG_51                  = "Selesnya_Loft_Gardens.jpg";
+    public static final String BG_52                  = "Shiv.jpg";
+    public static final String BG_53                  = "Skybreen.jpg";
+    public static final String BG_54                  = "Sokenzan.jpg";
+    public static final String BG_55                  = "Stairs_to_Infinity.jpg";
+    public static final String BG_56                  = "Stensia.jpg";
+    public static final String BG_57                  = "Stronghold_Furnace.jpg";
+    public static final String BG_58                  = "Takenuma.jpg";
+    public static final String BG_59                  = "Tazeem.jpg";
+    public static final String BG_60                  = "The_Aether_Flues.jpg";
+    public static final String BG_61                  = "The_Dark_Barony.jpg";
+    public static final String BG_62                  = "The_Eon_Fog.jpg";
+    public static final String BG_63                  = "The_Fourth_Sphere.jpg";
+    public static final String BG_64                  = "The_Great_Forest.jpg";
+    public static final String BG_65                  = "The_Hippodrome.jpg";
+    public static final String BG_66                  = "The_Maelstrom.jpg";
+    public static final String BG_67                  = "The_Zephyr_Maze.jpg";
+    public static final String BG_68                  = "Trail_of_the_Mage-Rings.jpg";
+    public static final String BG_69                  = "Truga_Jungle.jpg";
+    public static final String BG_70                  = "Turri_Island.jpg";
+    public static final String BG_71                  = "Undercity_Reaches.jpg";
+    public static final String BG_72                  = "Velis_Vel.jpg";
+    public static final String BG_73                  = "Windriddle_Palaces.jpg";
+    public static final String BG_74                  = "Tember_City.jpg";
+    public static final String BG_75                  = "Celestine_Reef.jpg";
+    public static final String BG_76                  = "Horizon_Boughs.jpg";
+    public static final String BG_77                  = "Mirrored_Depths.jpg";
+    public static final String BG_78                  = "Talon_Gates.jpg";
 
     // data tree roots
     public static final String USER_DIR;
@@ -165,6 +244,7 @@ public final class ForgeConstants {
     public static final String CACHE_BOOSTERBOX_PICS_DIR     = PICS_DIR + "boosterboxes" + PATH_SEPARATOR;
     public static final String CACHE_PRECON_PICS_DIR         = PICS_DIR + "precons" + PATH_SEPARATOR;
     public static final String CACHE_TOURNAMENTPACK_PICS_DIR = PICS_DIR + "tournamentpacks" + PATH_SEPARATOR;
+    public static final String CACHE_PLANECHASE_PICS_DIR     = PICS_DIR + "planechase" + PATH_SEPARATOR;
     public static final String CACHE_ACHIEVEMENTS_DIR        = PICS_DIR + "achievements" + PATH_SEPARATOR;
     public static final String QUEST_CARD_PRICE_FILE         = DB_DIR + "all-prices.txt";
 
@@ -189,7 +269,8 @@ public final class ForgeConstants {
             CACHE_FATPACK_PICS_DIR,
             CACHE_BOOSTERBOX_PICS_DIR,
             CACHE_PRECON_PICS_DIR,
-            CACHE_TOURNAMENTPACK_PICS_DIR };
+            CACHE_TOURNAMENTPACK_PICS_DIR,
+            CACHE_PLANECHASE_PICS_DIR };
 
     // URLs
     private static final String URL_CARDFORGE = "https://downloads.cardforge.org";

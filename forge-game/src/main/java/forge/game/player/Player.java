@@ -2436,6 +2436,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void planeswalkTo(final CardCollectionView destinations) {
         System.out.println(getName() + ": planeswalk to " + destinations.toString());
         currentPlanes.addAll(destinations);
+        game.getView().updatePlanarPlayer(getView());
 
         for (Card c : currentPlanes) {
             game.getAction().moveTo(ZoneType.Command,c, null);
@@ -2453,6 +2454,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         Map<String,Object> runParams = Maps.newHashMap();
         runParams.put("Cards", currentPlanes);
         game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedTo, runParams,false);
+        view.updateCurrentPlaneName(currentPlanes.toString().replaceAll(" \\(.*","").replace("[",""));
     }
 
     /**
@@ -2482,6 +2484,9 @@ public class Player extends GameEntity implements Comparable<Player> {
      */
     public void initPlane() {
         Card firstPlane = null;
+        view.updateCurrentPlaneName("");
+        game.getView().updatePlanarPlayer(getView());
+
         while (true) {
             firstPlane = getZone(ZoneType.PlanarDeck).get(0);
             getZone(ZoneType.PlanarDeck).remove(firstPlane);
@@ -2495,6 +2500,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
         game.setActivePlanes(currentPlanes);
+        view.updateCurrentPlaneName(currentPlanes.toString().replaceAll(" \\(.*","").replace("[",""));
     }
 
     public final void resetCombatantsThisCombat() {

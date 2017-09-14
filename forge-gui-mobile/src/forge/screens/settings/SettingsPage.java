@@ -230,6 +230,14 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         "Rotate Zoom Image of Planes/Phenomenon",
                         "Rotates the zoomed image of Plane or Phenomenon cards."),
                 4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_DYNAMIC_PLANECHASE_BG,
+                        "Dynamic Background Planechase",
+                        "Use current plane images as background (Planes Card images must be on the cache/pics/planechase folder)."),
+                4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_DISABLE_IMAGES_EFFECT_CARDS,
+                        "Disable Card 'Effect' Images",
+                        "Disable the zoomed image for the 'Effect' cards."),
+                4);
 
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CARD_COUNTER_DISPLAY_TYPE,
                         "Counter Display Type",

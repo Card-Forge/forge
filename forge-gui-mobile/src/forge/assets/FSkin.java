@@ -292,6 +292,13 @@ public class FSkin {
         return Gdx.files.absolute(ForgeConstants.DEFAULT_SKINS_DIR + filename);
     }
 
+    /**
+     * Gets a FileHandle for a file within the planechase cache directory
+     */
+    public static FileHandle getCachePlanechaseFile(String filename) {
+        return Gdx.files.absolute(ForgeConstants.CACHE_PLANECHASE_PICS_DIR + filename);
+    }
+
     public static FileHandle getSkinDir() {
         return preferredDir;
     }

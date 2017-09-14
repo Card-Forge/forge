@@ -85,6 +85,12 @@ public class GameView extends TrackableObject {
         set(TrackableProperty.PlayerTurn, PlayerView.get(phaseHandler.getPlayerTurn()));
     }
 
+    public void updatePlanarPlayer(PlayerView p) {
+        set(TrackableProperty.PlanarPlayer, p);
+    }
+    public PlayerView getPlanarPlayer() {
+        return get(TrackableProperty.PlanarPlayer);
+    }
     public FCollectionView<StackItemView> getStack() {
         return get(TrackableProperty.Stack);
     }

@@ -327,20 +327,26 @@ public class CardImageRenderer {
 
     public static void drawZoom(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h, float dispW, float dispH, boolean isCurrentCard) {
         final Texture image = ImageCache.getImage(card.getState(altState).getImageKey(MatchController.instance.getLocalPlayers()), true);
+        ForgePreferences prefs = new ForgePreferences();
+        //rotate plane or phenomenon...
+        boolean rotateZoomDisplay = prefs != null
+                && prefs.getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
+                && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane());
+        boolean hideEffectCardImage = prefs != null
+                && prefs.getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_IMAGES_EFFECT_CARDS);
         if (image == null) { //draw details if can't draw zoom
             drawDetails(g, card, gameView, altState, x, y, w, h);
             return;
         }
-
+        if(card.isToken() && card.getCurrentState().getType().hasSubtype("Effect") && hideEffectCardImage){
+            drawDetails(g, card, gameView, altState, x, y, w, h);
+            return;
+        }
         if (image == ImageCache.defaultImage) { //support drawing card image manually if card image not found
             drawCardImage(g, card, altState, x, y, w, h, CardStackPosition.Top);
         }
-        else {//rotate plane or phenomenon...
-            ForgePreferences prefs = new ForgePreferences();
-            boolean rotateZoomDisplay = prefs != null
-                    && prefs.getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
-                    && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane());
-            float wh_Adj = ForgeConstants.isGdxPortLandscape && isCurrentCard ? 1.25f:1.0f;
+        else {
+            float wh_Adj = ForgeConstants.isGdxPortLandscape && isCurrentCard ? 1.38f:1.0f;
             float new_w = w*wh_Adj;
             float new_h = h*wh_Adj;
             float new_x = ForgeConstants.isGdxPortLandscape && isCurrentCard ? (dispW - new_w) / 2:x;

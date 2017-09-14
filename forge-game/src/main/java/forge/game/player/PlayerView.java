@@ -85,6 +85,11 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.AvatarCardImageKey, p.getLobbyPlayer().getAvatarCardImageKey());
     }
 
+    public String getCurrentPlaneName() { return get(TrackableProperty.CurrentPlane); }
+    void updateCurrentPlaneName( String plane ) {
+        set(TrackableProperty.CurrentPlane, plane);
+    }
+
     public FCollectionView<PlayerView> getOpponents() {
         return Objects.firstNonNull(this.<FCollectionView<PlayerView>>get(TrackableProperty.Opponents), new FCollection<PlayerView>());
     }
