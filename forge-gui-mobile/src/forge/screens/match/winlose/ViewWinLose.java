@@ -1,13 +1,7 @@
 package forge.screens.match.winlose;
 
-import java.util.List;
-
-import forge.util.TextUtil;
-import org.apache.commons.lang3.StringUtils;
-
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-
 import forge.FThreads;
 import forge.Forge;
 import forge.assets.FSkinColor;
@@ -21,17 +15,15 @@ import forge.interfaces.IWinLoseView;
 import forge.item.PaperCard;
 import forge.menu.FMagnifyView;
 import forge.model.FModel;
-import forge.toolbox.FButton;
-import forge.toolbox.FContainer;
-import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
+import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.toolbox.FLabel;
-import forge.toolbox.FOverlay;
-import forge.toolbox.FTextArea;
+import forge.util.TextUtil;
 import forge.util.Utils;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
 
 public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
     private static final float INSETS_FACTOR = 0.025f;
@@ -219,6 +211,13 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
     public boolean keyDown(int keyCode) {
         if (keyCode == Keys.ESCAPE || keyCode == Keys.BACK) {
             btnQuit.trigger(); //quit on escape or back
+            return true;
+        } else if (keyCode == Keys.SPACE || keyCode == Keys.ENTER) {
+            if (btnContinue.isEnabled()) {
+                btnContinue.trigger();
+            } else {
+                btnQuit.trigger();
+            }
             return true;
         }
         return super.keyDown(keyCode);
