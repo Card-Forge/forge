@@ -126,8 +126,6 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
             for (final String s : achievementListFile) {
                 if (!s.isEmpty()) {
                     String k[] = StringUtils.split(s, "|");
-                    if(k[0].contains("add(\""))
-                        k[0] = k[0].replace("add(\"","");
                     add(k[0],k[1],k[2]);
                 }
             }
