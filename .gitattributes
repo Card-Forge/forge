@@ -17242,11 +17242,13 @@ forge-gui/res/cardsfolder/upcoming/deadeye_plunderers.txt -text
 forge-gui/res/cardsfolder/upcoming/deadeye_quartermaster.txt -text
 forge-gui/res/cardsfolder/upcoming/deadeye_tormentor.txt -text
 forge-gui/res/cardsfolder/upcoming/deadeye_tracker.txt -text
+forge-gui/res/cardsfolder/upcoming/deathgorge_scavenger.txt -text
 forge-gui/res/cardsfolder/upcoming/deathless_ancient.txt -text
 forge-gui/res/cardsfolder/upcoming/deeproot_champion.txt -text
 forge-gui/res/cardsfolder/upcoming/deeproot_waters.txt -text
 forge-gui/res/cardsfolder/upcoming/desperate_castaways.txt -text
 forge-gui/res/cardsfolder/upcoming/dinosaur_stampede.txt -text
+forge-gui/res/cardsfolder/upcoming/dire_fleet_captain.txt -text
 forge-gui/res/cardsfolder/upcoming/dire_fleet_hoarder.txt -text
 forge-gui/res/cardsfolder/upcoming/dire_fleet_ravager.txt -text
 forge-gui/res/cardsfolder/upcoming/dowsing_dagger_lost_vale.txt -text
@@ -17254,10 +17256,12 @@ forge-gui/res/cardsfolder/upcoming/dreamcaller_siren.txt -text
 forge-gui/res/cardsfolder/upcoming/drover_of_the_mighty.txt -text
 forge-gui/res/cardsfolder/upcoming/dusk_legion_dreadnought.txt -text
 forge-gui/res/cardsfolder/upcoming/duskborne_skymarcher.txt -text
+forge-gui/res/cardsfolder/upcoming/emissary_of_sunrise.txt -text
 forge-gui/res/cardsfolder/upcoming/emperors_vanguard.txt -text
 forge-gui/res/cardsfolder/upcoming/entrancing_melody.txt -text
 forge-gui/res/cardsfolder/upcoming/fathom_fleet_captain.txt -text
 forge-gui/res/cardsfolder/upcoming/fell_flagship.txt -text
+forge-gui/res/cardsfolder/upcoming/field_of_ruin.txt -text
 forge-gui/res/cardsfolder/upcoming/gishath_suns_avatar.txt -text
 forge-gui/res/cardsfolder/upcoming/goring_ceratops.txt -text
 forge-gui/res/cardsfolder/upcoming/grasping_current.txt -text
@@ -17292,6 +17296,7 @@ forge-gui/res/cardsfolder/upcoming/merfolk_branchwalker.txt -text
 forge-gui/res/cardsfolder/upcoming/old_growth_dryads.txt -text
 forge-gui/res/cardsfolder/upcoming/otepec_huntmaster.txt -text
 forge-gui/res/cardsfolder/upcoming/overflowing_insight.txt -text
+forge-gui/res/cardsfolder/upcoming/perilous_voyage.txt -text
 forge-gui/res/cardsfolder/upcoming/pillar_of_origins.txt -text
 forge-gui/res/cardsfolder/upcoming/pirates_cutlass.txt -text
 forge-gui/res/cardsfolder/upcoming/priest_of_the_wakening_sun.txt -text
@@ -17306,6 +17311,7 @@ forge-gui/res/cardsfolder/upcoming/raptor_hatchling.txt -text
 forge-gui/res/cardsfolder/upcoming/ravenous_daggertooth.txt -text
 forge-gui/res/cardsfolder/upcoming/regisaur_alpha.txt -text
 forge-gui/res/cardsfolder/upcoming/revel_in_riches.txt -text
+forge-gui/res/cardsfolder/upcoming/rigging_runner.txt -text
 forge-gui/res/cardsfolder/upcoming/rile.txt -text
 forge-gui/res/cardsfolder/upcoming/ripjaw_raptor.txt -text
 forge-gui/res/cardsfolder/upcoming/river_sneak.txt -text
@@ -17319,6 +17325,7 @@ forge-gui/res/cardsfolder/upcoming/savage_stomp.txt -text
 forge-gui/res/cardsfolder/upcoming/search_for_azcanta_azcanta_the_sunken_ruin.txt -text
 forge-gui/res/cardsfolder/upcoming/sentinel_totem.txt -text
 forge-gui/res/cardsfolder/upcoming/settle_the_wreckage.txt -text
+forge-gui/res/cardsfolder/upcoming/shadowed_caravel.txt -text
 forge-gui/res/cardsfolder/upcoming/shapers_of_nature.txt -text
 forge-gui/res/cardsfolder/upcoming/shapers_sanctuary.txt -text
 forge-gui/res/cardsfolder/upcoming/siren_stormtamer.txt -text

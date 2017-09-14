@@ -1,0 +1,9 @@
+Name:Field of Ruin
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
+A:AB$ Destroy | Cost$ 2 T Sac<1/CARDNAME> | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land. | SubAbility$ DBSearch | AILogic$ GhostQuarter | SpellDescription$ Destroy target nonbasic land. Each player searches his or her library for a basic land card, puts it onto the battlefield, then shuffles his or her library.
+SVar:DBSearch:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | DefinedPlayer$ Player | ChangeType$ Land.Basic | ChangeNum$ 1
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/field_of_ruin.jpg
+Oracle:{T}: Add {C} to your mana pool\n{2}, {T}, Sacrifice Field of Ruin: Destroy target nonbasic land. Each player searches his or her library for a basic land card, puts it onto the battlefield, then shuffles his or her library.
