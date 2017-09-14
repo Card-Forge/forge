@@ -144,14 +144,31 @@ public class CounterAi extends SpellAbilityAi {
         boolean ctrCmc0ManaPerms = aic.getBooleanProperty(AiProps.ALWAYS_COUNTER_CMC_0_MANA_MAKING_PERMS);
         boolean ctrDamageSpells = aic.getBooleanProperty(AiProps.ALWAYS_COUNTER_DAMAGE_SPELLS);
         boolean ctrRemovalSpells = aic.getBooleanProperty(AiProps.ALWAYS_COUNTER_REMOVAL_SPELLS);
+        boolean ctrPumpSpells = aic.getBooleanProperty(AiProps.ALWAYS_COUNTER_PUMP_SPELLS);
+        boolean ctrAuraSpells = aic.getBooleanProperty(AiProps.ALWAYS_COUNTER_AURAS);
         boolean ctrOtherCounters = aic.getBooleanProperty(AiProps.ALWAYS_COUNTER_OTHER_COUNTERSPELLS);
+        int ctrChanceCMC1 = aic.getIntProperty(AiProps.CHANCE_TO_COUNTER_CMC_1);
+        int ctrChanceCMC2 = aic.getIntProperty(AiProps.CHANCE_TO_COUNTER_CMC_2);
+        int ctrChanceCMC3 = aic.getIntProperty(AiProps.CHANCE_TO_COUNTER_CMC_3);
         String ctrNamed = aic.getProperty(AiProps.ALWAYS_COUNTER_SPELLS_FROM_NAMED_CARDS);
+        boolean dontCounter = false;
+
+        if (tgtCMC == 1 && !MyRandom.percentTrue(ctrChanceCMC1)) {
+            dontCounter = true;
+        } else if (tgtCMC == 2 && !MyRandom.percentTrue(ctrChanceCMC2)) {
+            dontCounter = true;
+        } else if (tgtCMC == 3 && !MyRandom.percentTrue(ctrChanceCMC3)) {
+            dontCounter = true;
+        }
+
         if (tgtSA != null && tgtCMC < aic.getIntProperty(AiProps.MIN_SPELL_CMC_TO_COUNTER)) {
-            boolean dontCounter = true;
+            dontCounter = true;
             Card tgtSource = tgtSA.getHostCard();
             if ((tgtSource != null && tgtCMC == 0 && tgtSource.isPermanent() && !tgtSource.getManaAbilities().isEmpty() && ctrCmc0ManaPerms)
                     || (tgtSA.getApi() == ApiType.DealDamage || tgtSA.getApi() == ApiType.LoseLife || tgtSA.getApi() == ApiType.DamageAll && ctrDamageSpells)
                     || (tgtSA.getApi() == ApiType.Counter && ctrOtherCounters)
+                    || ((tgtSA.getApi() == ApiType.Pump || tgtSA.getApi() == ApiType.PumpAll) && ctrPumpSpells)
+                    || (tgtSA.getApi() == ApiType.Attach && ctrAuraSpells)
                     || (tgtSA.getApi() == ApiType.Destroy || tgtSA.getApi() == ApiType.DestroyAll || tgtSA.getApi() == ApiType.Sacrifice
                        || tgtSA.getApi() == ApiType.SacrificeAll && ctrRemovalSpells)) {
                 dontCounter = false;
@@ -164,8 +181,8 @@ public class CounterAi extends SpellAbilityAi {
                     }
                 }
             }
-                
-            // should not refrain from countering a  CMC X spell if that's the only CMC
+
+            // should not refrain from countering a CMC X spell if that's the only CMC
             // counterable with that particular counterspell type (e.g. Mental Misstep vs. CMC 1 spells)
             if (sa.getParamOrDefault("ValidTgts", "").startsWith("Card.cmcEQ")) {
                 int validTgtCMC = AbilityUtils.calculateAmount(source, sa.getParam("ValidTgts").substring(10), sa);
@@ -173,12 +190,12 @@ public class CounterAi extends SpellAbilityAi {
                     dontCounter = false;
                 }
             }
-
-            if (dontCounter) {
-                return false;
-            }
         }
-        
+
+        if (dontCounter) {
+            return false;
+        }
+
         return toReturn;
     }
 
