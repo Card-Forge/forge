@@ -135,7 +135,7 @@ public class FOptionPane extends FDialog {
                     final float x = (getWidth() - w) / 2;
                     final float y = 0;
 
-                    CardRenderer.drawCard(g, card, x, y, w, h, CardStackPosition.Top);
+                    CardRenderer.drawCard(g, card, x, y, w, h, CardStackPosition.Top, true);
                 }
             };
             cardDisplay.setHeight(Forge.getScreenHeight() / 2);

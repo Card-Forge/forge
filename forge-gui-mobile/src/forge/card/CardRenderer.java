@@ -31,6 +31,7 @@ import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgeConstants.CounterDisplayType;
+import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.MatchController;
 import forge.toolbox.FList;
@@ -362,14 +363,23 @@ public class CardRenderer {
         }
     }
 
-    public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos) {
+    public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate) {
+        ForgePreferences prefs = new ForgePreferences();
+        //rotate plane or phenomenon...
+        boolean rotateDisplay = prefs != null
+                && prefs.getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
+                && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane());
+
         Texture image = ImageCache.getImage(card);
         if (image != null) {
             if (image == ImageCache.defaultImage) {
                 CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos);
             }
             else {
-                g.drawImage(image, x, y, w, h);
+                if(rotateDisplay && rotate)
+                    g.drawRotatedImage(image, x, y, w, h, x + w / 2, y + h / 2, -90);
+                else
+                    g.drawImage(image, x, y, w, h);
             }
             drawFoilEffect(g, card, x, y, w, h);
         }
@@ -379,7 +389,7 @@ public class CardRenderer {
     }
 
     public static void drawCardWithOverlays(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos) {
-        drawCard(g, card, x, y, w, h, pos);
+        drawCard(g, card, x, y, w, h, pos, false);
 
         float padding = w * PADDING_MULTIPLIER; //adjust for card border
         x += padding;
