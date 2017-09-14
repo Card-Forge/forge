@@ -17219,12 +17219,14 @@ forge-gui/res/cardsfolder/upcoming/angraths_marauders.txt -text
 forge-gui/res/cardsfolder/upcoming/arcane_adaptation.txt -text
 forge-gui/res/cardsfolder/upcoming/arguels_blood_fast_temple_of_aclazotz.txt -text
 forge-gui/res/cardsfolder/upcoming/ashes_of_the_abhorrent.txt -text
+forge-gui/res/cardsfolder/upcoming/axis_of_mortality.txt -text
 forge-gui/res/cardsfolder/upcoming/belligerent_brontodon.txt -text
 forge-gui/res/cardsfolder/upcoming/bellowing_aegisaur.txt -text
 forge-gui/res/cardsfolder/upcoming/bishop_of_rebirth.txt -text
 forge-gui/res/cardsfolder/upcoming/bishop_of_the_bloodstained.txt -text
 forge-gui/res/cardsfolder/upcoming/bloodcrazed_paladin.txt -text
 forge-gui/res/cardsfolder/upcoming/boneyard_parley.txt -text
+forge-gui/res/cardsfolder/upcoming/brazen_buccaneers.txt -text
 forge-gui/res/cardsfolder/upcoming/burning_suns_avatar.txt -text
 forge-gui/res/cardsfolder/upcoming/call_to_the_feast.txt -text
 forge-gui/res/cardsfolder/upcoming/captain_lannery_storm.txt -text
@@ -17243,7 +17245,9 @@ forge-gui/res/cardsfolder/upcoming/deadeye_tracker.txt -text
 forge-gui/res/cardsfolder/upcoming/deathless_ancient.txt -text
 forge-gui/res/cardsfolder/upcoming/deeproot_champion.txt -text
 forge-gui/res/cardsfolder/upcoming/deeproot_waters.txt -text
+forge-gui/res/cardsfolder/upcoming/desperate_castaways.txt -text
 forge-gui/res/cardsfolder/upcoming/dinosaur_stampede.txt -text
+forge-gui/res/cardsfolder/upcoming/dire_fleet_hoarder.txt -text
 forge-gui/res/cardsfolder/upcoming/dire_fleet_ravager.txt -text
 forge-gui/res/cardsfolder/upcoming/dowsing_dagger_lost_vale.txt -text
 forge-gui/res/cardsfolder/upcoming/dreamcaller_siren.txt -text
@@ -17266,6 +17270,7 @@ forge-gui/res/cardsfolder/upcoming/huatli_dinosaur_knight.txt -text
 forge-gui/res/cardsfolder/upcoming/huatli_warrior_poet.txt -text
 forge-gui/res/cardsfolder/upcoming/huatlis_snubhorn.txt -text
 forge-gui/res/cardsfolder/upcoming/huatlis_spurring.txt -text
+forge-gui/res/cardsfolder/upcoming/imperial_lancer.txt -text
 forge-gui/res/cardsfolder/upcoming/ixalans_binding.txt -text
 forge-gui/res/cardsfolder/upcoming/jace_cunning_castaway.txt -text
 forge-gui/res/cardsfolder/upcoming/jace_ingenious_mind_mage.txt -text
@@ -17318,6 +17323,7 @@ forge-gui/res/cardsfolder/upcoming/shapers_of_nature.txt -text
 forge-gui/res/cardsfolder/upcoming/shapers_sanctuary.txt -text
 forge-gui/res/cardsfolder/upcoming/siren_stormtamer.txt -text
 forge-gui/res/cardsfolder/upcoming/skittering_heartstopper.txt -text
+forge-gui/res/cardsfolder/upcoming/skulduggery.txt -text
 forge-gui/res/cardsfolder/upcoming/sky_terror.txt -text
 forge-gui/res/cardsfolder/upcoming/sleek_schooner.txt -text
 forge-gui/res/cardsfolder/upcoming/snapping_sailback.txt -text

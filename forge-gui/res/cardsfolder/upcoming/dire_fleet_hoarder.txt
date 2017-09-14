@@ -1,0 +1,11 @@
+Name:Dire Fleet Hoarder
+ManaCost:1 B
+Types:Creature Human Pirate
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+# TODO: how many Treasure tokens are there (with different art)?
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAltImages$ c_treasure2,c_treasure3 | TokenAbilities$ ABMana | References$ ABMana
+SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
+DeckHas:Ability$Token
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wily_goblin.jpg
+Oracle:When Wily Goblin enters the battlefield, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."

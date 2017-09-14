@@ -9,5 +9,6 @@ SVar:DBGrabLand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destina
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterNum$ 1 | CounterType$ P1P1 | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ConditionCompare$ EQ0 | SubAbility$ DBPutInGraveyardOption
 SVar:DBPutInGraveyardOption:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Library | DestinationAlternative$ Graveyard | AlternativeDestinationMessage$ Would you like to put the revealed card back on top of your library (and not into your graveyard?) | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emperors_vanguard.jpg
 Oracle:Whenever Emperor's Vanguard deals combat damage to a player, it explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back on top or into your graveyard.)
