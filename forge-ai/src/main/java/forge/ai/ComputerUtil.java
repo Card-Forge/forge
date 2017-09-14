@@ -1933,7 +1933,6 @@ public class ComputerUtil {
             int cmc = c.isSplitCard() ? Math.min(c.getCMC(Card.SplitCMCMode.LeftSplitCMC), c.getCMC(Card.SplitCMCMode.RightSplitCMC))
                     : c.getCMC();
             int maxCastable = ComputerUtilMana.getAvailableManaEstimate(player, false) + landsInHand.size();
-            System.out.println("Scry: cmc = " + cmc + ", maxCastable = " + maxCastable + ", threshold = " + uncastableCMCThreshold);
             if (cmc - maxCastable >= uncastableCMCThreshold) {
                 bottom = true;
             }
