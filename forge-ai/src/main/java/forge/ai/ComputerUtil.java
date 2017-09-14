@@ -17,24 +17,9 @@
  */
 package forge.ai;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
-import forge.util.TextUtil;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
-
+import com.google.common.collect.*;
 import forge.ai.ability.ProtectAi;
 import forge.ai.ability.TokenAi;
 import forge.card.CardType;
@@ -47,32 +32,17 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
-import forge.game.cost.Cost;
-import forge.game.cost.CostDiscard;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostPayment;
-import forge.game.cost.CostPutCounter;
-import forge.game.cost.CostSacrifice;
+import forge.game.cost.*;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementLayer;
-import forge.game.spellability.AbilityManaPart;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.spellability.TargetRestrictions;
+import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -80,7 +50,11 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
+import forge.util.TextUtil;
 import forge.util.collect.FCollection;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
 
 
 /**
@@ -1877,6 +1851,27 @@ public class ComputerUtil {
     public static boolean scryWillMoveCardToBottomOfLibrary(Player player, Card c) {
         boolean bottom = false;
 
+        // AI profile-based toggles
+        int maxLandsToScryLandsToTop = 3;
+        int minLandsToScryLandsAway = 8;
+        int minCreatsToScryCreatsAway = 5;
+        int minCreatEvalThreshold = 160; // just a bit higher than a baseline 2/2 creature or a 1/1 mana dork
+        int lowCMCThreshold = 3;
+        int maxCreatsToScryLowCMCAway = 3;
+        boolean uncastablesToBottom = false;
+        int uncastableCMCThreshold = 1;
+        if (player.getController().isAI()) {
+            AiController aic = ((PlayerControllerAi)player.getController()).getAi();
+            maxLandsToScryLandsToTop = aic.getIntProperty(AiProps.SCRY_NUM_LANDS_TO_STILL_NEED_MORE);
+            minLandsToScryLandsAway = aic.getIntProperty(AiProps.SCRY_NUM_LANDS_TO_NOT_NEED_MORE);
+            minCreatsToScryCreatsAway = aic.getIntProperty(AiProps.SCRY_NUM_CREATURES_TO_NOT_NEED_SUBPAR_ONES);
+            minCreatEvalThreshold = aic.getIntProperty(AiProps.SCRY_EVALTHR_TO_SCRY_AWAY_LOWCMC_CREATURE);
+            lowCMCThreshold = aic.getIntProperty(AiProps.SCRY_EVALTHR_CMC_THRESHOLD);
+            maxCreatsToScryLowCMCAway = aic.getIntProperty(AiProps.SCRY_EVALTHR_CREATCOUNT_TO_SCRY_AWAY_LOWCMC);
+            uncastablesToBottom = aic.getBooleanProperty(AiProps.SCRY_IMMEDIATELY_UNCASTABLE_TO_BOTTOM);
+            uncastableCMCThreshold = aic.getIntProperty(AiProps.SCRY_IMMEDIATELY_UNCASTABLE_CMC_DIFF);
+        }
+
         CardCollectionView allCards = player.getAllCards();
         CardCollectionView cardsInHand = player.getCardsIn(ZoneType.Hand);
         CardCollectionView cardsOTB = player.getCardsIn(ZoneType.Battlefield);
@@ -1891,7 +1886,7 @@ public class ComputerUtil {
         CardCollectionView allCreatures = CardLists.filter(allCards, Predicates.and(CardPredicates.Presets.CREATURES, CardPredicates.isOwner(player)));
         int numCards = allCreatures.size();
 
-        if (landsOTB.size() < 3 && landsInHand.isEmpty()) {
+        if (landsOTB.size() < maxLandsToScryLandsToTop && landsInHand.isEmpty()) {
             if ((!c.isLand() && !manaArts.contains(c.getName())) || c.getManaAbilities().isEmpty()) {
                 // scry away non-lands and non-manaproducing lands in situations when the land count
                 // on the battlefield is low, to try to improve the mana base early
@@ -1900,7 +1895,7 @@ public class ComputerUtil {
         }
 
         if (c.isLand()) {
-            if (landsOTB.size() >= 8) {
+            if (landsOTB.size() >= minLandsToScryLandsAway) {
                 // probably enough lands not to urgently need another one, so look for more gas instead
                 bottom = true;
             } else if (landsInHand.size() >= Math.max(cardsInHand.size() / 2, 2)) {
@@ -1918,20 +1913,29 @@ public class ComputerUtil {
         } else if (c.isCreature()) {
             CardCollection creaturesOTB = CardLists.filter(cardsOTB, CardPredicates.Presets.CREATURES);
             int avgCreatureValue = numCards != 0 ? ComputerUtilCard.evaluateCreatureList(allCreatures) / numCards : 0;
-            int minCreatEvalThreshold = 160; // just a bit higher than a baseline 2/2 creature or a 1/1 mana dork
             int maxControlledCMC = Aggregates.max(creaturesOTB, CardPredicates.Accessors.fnGetCmc);
 
             if (ComputerUtilCard.evaluateCreature(c) < avgCreatureValue) {
-                if (creaturesOTB.size() > 5) {
+                if (creaturesOTB.size() > minCreatsToScryCreatsAway) {
                     // if there are more than five creatures and the creature is question is below average for
                     // the deck, scry it to the bottom
                     bottom = true;
-                } else if (creaturesOTB.size() > 3 && c.getCMC() <= 3
-                        && maxControlledCMC >= 4 && ComputerUtilCard.evaluateCreature(c) <= minCreatEvalThreshold) {
+                } else if (creaturesOTB.size() > maxCreatsToScryLowCMCAway && c.getCMC() <= lowCMCThreshold
+                        && maxControlledCMC >= lowCMCThreshold + 1 && ComputerUtilCard.evaluateCreature(c) <= minCreatEvalThreshold) {
                     // if we are already at a stage when we have 4+ CMC creatures on the battlefield,
                     // probably worth it to scry away very low value creatures with low CMC
                     bottom = true;
                 }
+            }
+        }
+
+        if (uncastablesToBottom && !c.isLand()) {
+            int cmc = c.isSplitCard() ? Math.min(c.getCMC(Card.SplitCMCMode.LeftSplitCMC), c.getCMC(Card.SplitCMCMode.RightSplitCMC))
+                    : c.getCMC();
+            int maxCastable = ComputerUtilMana.getAvailableManaEstimate(player, false) + landsInHand.size();
+            System.out.println("Scry: cmc = " + cmc + ", maxCastable = " + maxCastable + ", threshold = " + uncastableCMCThreshold);
+            if (cmc - maxCastable >= uncastableCMCThreshold) {
+                bottom = true;
             }
         }
 

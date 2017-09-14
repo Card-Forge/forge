@@ -106,6 +106,29 @@ TOKEN_GENERATION_ABILITY_CHANCE=80
 TOKEN_GENERATION_ALWAYS_IF_FROM_PLANESWALKER=true
 TOKEN_GENERATION_ALWAYS_IF_OPP_ATTACKS=true
 
+# Scry AI toggles
+# The total number of mana-producing lands at which the AI will still consider scrying away non-lands
+SCRY_NUM_LANDS_TO_STILL_NEED_MORE=3
+# The total number of mana-producing lands at which the AI will stop considering scrying such lands to top
+SCRY_NUM_LANDS_TO_NOT_NEED_MORE=5
+# The total number of creatures when the AI will consider scrying away the ones that are below average in
+# evaluation score for the deck
+SCRY_NUM_CREATURES_TO_NOT_NEED_SUBPAR_ONES=4
+# The total number of creatures on board at which to start considering scrying away low CMC creatures
+# as defined in the two following options
+SCRY_EVALTHR_CREATCOUNT_TO_SCRY_AWAY_LOWCMC=3
+# The evaluation score at which the AI will consider the creature bad enough to scry it away in case it's
+# low CMC (see the next option) and the AI already has higher CMC creatures on board
+SCRY_EVALTHR_TO_SCRY_AWAY_LOWCMC_CREATURE=160
+# The CMC threshold at which (and below which) the AI considers creatures to be "low CMC" for the purpose
+# of the previous option
+SCRY_EVALTHR_CMC_THRESHOLD=1
+# If enabled, the AI will scry cards that it can't immediately cast to the bottom
+SCRY_IMMEDIATELY_UNCASTABLE_TO_BOTTOM=true
+# How big of a CMC difference between the currently castable and the considered card's CMC is allowed before
+# the card is considered not immediately castable for the purpose of the previous option
+SCRY_IMMEDIATELY_UNCASTABLE_CMC_DIFF=1
+
 # Attempt to predict the number of potential blockers with various forms of evasion when
 # deciding to do an all-in assault attack
 COMBAT_ASSAULT_ATTACK_EVASION_PREDICTION=true
