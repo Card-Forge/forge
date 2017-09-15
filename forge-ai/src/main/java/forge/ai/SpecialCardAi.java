@@ -287,12 +287,11 @@ public class SpecialCardAi {
 
     // Electrostatic Pummeler
     public static class ElectrostaticPummeler {
-        // TODO: use getNetCombatDamage() instead of getNetPower() for cases where damage is assigned by toughness
         public static boolean consider(final Player ai, final SpellAbility sa) {
             final Card source = sa.getHostCard();
             Game game = ai.getGame();
             Combat combat = game.getCombat();
-            Pair<Integer, Integer> predictedPT = getPumpedPT(ai, source.getNetPower(), source.getNetToughness());
+            Pair<Integer, Integer> predictedPT = getPumpedPT(ai, source.getNetCombatDamage(), source.getNetToughness());
 
             // Try to save the Pummeler from death by pumping it if it's threatened with a damage spell
             if (ComputerUtil.predictThreatenedObjects(ai, null, true).contains(source)) {
@@ -330,7 +329,7 @@ public class SpecialCardAi {
             boolean cantDie = ComputerUtilCombat.attackerCantBeDestroyedInCombat(ai, source);
 
             CardCollection opposition = isBlocking ? combat.getAttackersBlockedBy(source) : combat.getBlockers(source);
-            int oppP = Aggregates.sum(opposition, CardPredicates.Accessors.fnGetNetPower);
+            int oppP = Aggregates.sum(opposition, CardPredicates.Accessors.fnGetAttack);
             int oppT = Aggregates.sum(opposition, CardPredicates.Accessors.fnGetNetToughness);
 
             boolean oppHasFirstStrike = false;
@@ -340,7 +339,13 @@ public class SpecialCardAi {
 
             if (!isBlocking && combat.getDefenderByAttacker(source) instanceof Card) {
                 int loyalty = ((Card)combat.getDefenderByAttacker(source)).getCounters(CounterType.LOYALTY);
-                if (source.getNetPower() >= oppT + loyalty) {
+                int totalDamageToPW = 0;
+                for (Card atk : (combat.getAttackersOf(combat.getDefenderByAttacker(source)))) {
+                    if (combat.isUnblocked(atk)) {
+                        totalDamageToPW += atk.getNetCombatDamage();
+                    }
+                }
+                if (totalDamageToPW >= oppT + loyalty) {
                     // Already enough damage to take care of the planeswalker
                     return false;
                 }
@@ -348,6 +353,7 @@ public class SpecialCardAi {
                     // Can pump to kill the planeswalker, go for it
                     return true;
                 }
+
             }
 
             for (Card c : opposition) {
@@ -378,7 +384,7 @@ public class SpecialCardAi {
                 // Can't pump enough to kill the blockers and survive, don't pump
                 return false;
             }
-            if (source.getNetPower() > oppT && source.getNetToughness() > oppP) {
+            if (source.getNetCombatDamage() > oppT && source.getNetToughness() > oppP) {
                 // Already enough to kill the blockers and survive, don't overpump
                 return false;
             }
@@ -405,7 +411,7 @@ public class SpecialCardAi {
                 }
             }
 
-            Pair<Integer, Integer> predictedPT = getPumpedPT(ai, source.getNetPower(), source.getNetToughness());
+            Pair<Integer, Integer> predictedPT = getPumpedPT(ai, source.getNetCombatDamage(), source.getNetToughness());
             int oppT = Aggregates.sum(potentialBlockers, CardPredicates.Accessors.fnGetNetToughness);
 
             if (potentialBlockers.isEmpty() || (sa.getHostCard().hasKeyword("Trample") && predictedPT.getLeft() - oppT >= oppLife)) {

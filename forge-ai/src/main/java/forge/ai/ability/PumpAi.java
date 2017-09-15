@@ -739,7 +739,6 @@ public class PumpAi extends PumpAiBase {
 
     public boolean doAristocratLogic(final SpellAbility sa, final Player ai) {
         // A logic for cards that say "Sacrifice a creature: CARDNAME gets +X/+X until EOT"
-        // TODO: use getNetCombatDamage() instead of getNetPower() for cases where damage is assigned by toughness
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
         final Card source = sa.getHostCard();
@@ -804,11 +803,11 @@ public class PumpAi extends PumpAiBase {
                 final boolean isInfect = source.hasKeyword("Infect"); // Flesh-Eater Imp
                 final int lethalDmg = isInfect ? 10 - defPlayer.getPoisonCounters() : defPlayer.getLife();
 
-                final int numCreatsToSac = (lethalDmg - source.getNetPower()) / powerBonus;
+                final int numCreatsToSac = (lethalDmg - source.getNetCombatDamage()) / powerBonus;
 
                 if (defTappedOut || numCreatsToSac < numOtherCreats / 2) {
-                    return source.getNetPower() < lethalDmg
-                            && source.getNetPower() + numOtherCreats * powerBonus >= lethalDmg;
+                    return source.getNetCombatDamage() < lethalDmg
+                            && source.getNetCombatDamage() + numOtherCreats * powerBonus >= lethalDmg;
                 } else {
                     return false;
                 }
@@ -833,7 +832,7 @@ public class PumpAi extends PumpAiBase {
                 final int DefP = Aggregates.sum(combat.getBlockers(source), CardPredicates.Accessors.fnGetNetPower);
 
                 // Make sure we don't over-sacrifice, only sac until we can survive and kill a creature
-                return source.getNetToughness() - source.getDamage() <= DefP || source.getNetPower() < minDefT;
+                return source.getNetToughness() - source.getDamage() <= DefP || source.getNetCombatDamage() < minDefT;
             }
         } else {
             // We can't deal lethal, check if there's any sac fodder than can be used for other circumstances
