@@ -269,6 +269,9 @@ public class TextUtil {
 
     //fast Replace
     public static String fastReplace( String str, String target, String replacement ) {
+        if (str == null) {
+            return null;
+        }
         int targetLength = target.length();
         if( targetLength == 0 ) {
             return str;
