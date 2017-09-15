@@ -2,7 +2,8 @@ Name:El-Hajjaj
 ManaCost:1 B B
 Types:Creature Human Wizard
 PT:1/1
-T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
+T:Mode$ DamageDone | CombatDamage$ False | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
+T:Mode$ DealtCombatDamageOnce | Secondary$ True | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
 SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE

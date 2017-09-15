@@ -806,6 +806,8 @@ public class Combat {
 
         // Run triggers
         for (final GameEntity ge : dealtDamageTo.columnKeySet()) {
+
+            // TODO find better way to get the sum (use streams once Java 8 is OK on Android?)
             int totalDmg = 0;
             for (Integer dmgEntry : dealtDamageTo.column(ge).values()) {
                 totalDmg += dmgEntry;

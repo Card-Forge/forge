@@ -108,7 +108,7 @@ public class TriggerDealtCombatDamageOnce extends Trigger {
         StringBuilder sb = new StringBuilder();
         sb.append("Damage Source: ").append(sa.getTriggeringObject("Source")).append(", ");
         sb.append("Damaged: ").append(sa.getTriggeringObject("Targets")).append(", ");
-        sb.append("Amount: ").append(sa.getTriggeringObject("Amount"));
+        sb.append("Amount: ").append(sa.getTriggeringObject("DamageAmount"));
         return sb.toString();
     }
 }

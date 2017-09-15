@@ -2,7 +2,8 @@ Name:Putrid Warrior
 ManaCost:W B
 Types:Creature Zombie Soldier Warrior
 PT:2/2
-T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, ABILITY
+T:Mode$ DamageDone | CombatDamage$ False | ValidSource$ Card.Self | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, ABILITY
+T:Mode$ DealtCombatDamageOnce | Secondary$ True | ValidSource$ Card.Self | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ SVar1,SVar2
 SVar:SVar1:DB$ LoseLife | Defined$ Player | LifeAmount$ 1 | SpellDescription$ Each player loses 1 life.
 SVar:SVar2:DB$ GainLife | Defined$ Player | LifeAmount$ 1 | SpellDescription$ Each player gains 1 life.
