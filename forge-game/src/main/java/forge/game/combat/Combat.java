@@ -17,26 +17,9 @@
  */
 package forge.game.combat;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import forge.game.Game;
-import forge.game.spellability.SpellAbilityStackInstance;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Function;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
-import com.google.common.collect.Table;
-
+import com.google.common.collect.*;
+import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameLogEntryType;
 import forge.game.GameObjectMap;
@@ -45,9 +28,14 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardDamageMap;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.TriggerType;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * <p>
@@ -815,11 +803,17 @@ public class Combat {
             c.addCombatDamage(c.getAssignedDamageMap(), dealtDamageTo, preventMap);
             c.clearAssignedDamage();
         }
-        
+
         // Run triggers
         for (final GameEntity ge : dealtDamageTo.columnKeySet()) {
+            int totalDmg = 0;
+            for (Integer dmgEntry : dealtDamageTo.column(ge).values()) {
+                totalDmg += dmgEntry;
+            }
+
             final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("DamageSources", dealtDamageTo.column(ge).keySet());
+            runParams.put("DamageAmount", totalDmg);
             runParams.put("DamageTarget", ge);
             ge.getGame().getTriggerHandler().runTrigger(TriggerType.CombatDamageDoneOnce, runParams, false);
         }

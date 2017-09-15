@@ -82,13 +82,15 @@ public class TriggerCombatDamageDoneOnce extends Trigger {
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Sources", this.getRunParams().get("DamageSources"));
         sa.setTriggeringObject("Target", this.getRunParams().get("DamageTarget"));
+        sa.setTriggeringObject("DamageAmount", this.getRunParams().get("DamageAmount"));
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Sources: ").append(sa.getTriggeringObject("Sources")).append(", ");
+        //sb.append("Sources: ").append(sa.getTriggeringObject("Sources")).append(", "); // FIXME: why does this end up empty at all times?
         sb.append("Target: ").append(sa.getTriggeringObject("Target"));
+        sb.append("Damage: ").append(sa.getTriggeringObject("DamageAmount"));
         return sb.toString();
     }
 }
