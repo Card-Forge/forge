@@ -5,6 +5,8 @@ Name=Ixalan
 Code2=XLN
 Type=Expansion
 MciCode=xln
+BoosterCovers=5
+Booster=10 Common:!fromSheet("XLN Planeswalker Decks and Toolkit"), 3 Uncommon:!fromSheet("XLN Planeswalker Decks and Toolkit"), 1 RareMythic:!fromSheet("XLN Planeswalker Decks and Toolkit"), 1 BasicLand
 
 [cards]
 1 U Adanto Vanguard
