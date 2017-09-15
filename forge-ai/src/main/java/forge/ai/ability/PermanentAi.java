@@ -62,6 +62,8 @@ public class PermanentAi extends SpellAbilityAi {
                 return false;
             }
         }
+
+        /* -- not used anymore after Ixalan (Planeswalkers are now legendary, not unique by subtype) --
         if (card.isPlaneswalker()) {
             CardCollection list = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
                     CardPredicates.Presets.PLANEWALKERS);
@@ -75,7 +77,7 @@ public class PermanentAi extends SpellAbilityAi {
                 }
                 break;
             }
-        }
+        }*/
 
         if (card.getType().hasSupertype(Supertype.World)) {
             CardCollection list = CardLists.getType(ai.getCardsIn(ZoneType.Battlefield), "World");
