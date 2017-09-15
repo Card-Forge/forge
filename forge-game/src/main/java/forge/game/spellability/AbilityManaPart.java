@@ -27,6 +27,7 @@ import java.util.regex.Pattern;
 import forge.card.mana.ManaAtom;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.ColorSet;
@@ -337,7 +338,7 @@ public class AbilityManaPart implements java.io.Serializable {
 
             if (sa.isAbility()) {
                 if (restriction.startsWith("Activated")) {
-                    restriction = restriction.replace("Activated", "Card");
+                    restriction = TextUtil.fastReplace(restriction, "Activated", "Card");
                 }
                 else {
                     continue;
@@ -565,7 +566,7 @@ public class AbilityManaPart implements java.io.Serializable {
             return "W U B R G";
         }
         if (!origProduced.contains("ColorIdentity")) {
-            return origProduced.replace("Combo ", "");
+            return TextUtil.fastReplace(origProduced, "Combo ", "");
         }
         // ColorIdentity
         List<Card> commanders = getSourceCard().getController().getCommanders();

@@ -20,6 +20,7 @@ package forge.game.ability.effects;
 import java.util.Arrays;
 import java.util.List;
 
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
@@ -215,7 +216,8 @@ public class TokenEffect extends SpellAbilityEffect {
 
         final List<String> imageNames = Lists.newArrayListWithCapacity(1);
         if (this.tokenImage.equals("")) {
-            imageNames.add(PaperToken.makeTokenFileName(originalColorDesc.replace(" ", ""), tokenPower, tokenToughness, tokenOriginalName));
+            imageNames.add(PaperToken.makeTokenFileName(TextUtil.fastReplace(originalColorDesc,
+                    " ", ""), tokenPower, tokenToughness, tokenOriginalName));
         } else {
             imageNames.add(0, this.tokenImage);
         }

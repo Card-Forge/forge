@@ -5,6 +5,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.spellability.SpellAbility;
+import forge.util.TextUtil;
 
 public class StoreSVarEffect extends SpellAbilityEffect {
 
@@ -46,7 +47,7 @@ public class StoreSVarEffect extends SpellAbilityEffect {
             if (expr.contains("/")) {
                 final String exprMathVar = expr.split("\\/")[1].split("\\.")[1];
                 int exprMath = AbilityUtils.calculateAmount(source, exprMathVar, sa);
-                expr = expr.replace(exprMathVar, Integer.toString(exprMath));
+                expr = TextUtil.fastReplace(expr, exprMathVar, Integer.toString(exprMath));
             }
             value = CardFactoryUtil.xCount(source, "SVar$" + expr);
         }

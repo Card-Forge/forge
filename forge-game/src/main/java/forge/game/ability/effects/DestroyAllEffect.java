@@ -11,6 +11,7 @@ import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.TextUtil;
 
 public class DestroyAllEffect extends SpellAbilityEffect {
 
@@ -54,7 +55,8 @@ public class DestroyAllEffect extends SpellAbilityEffect {
         // to use the X variable
         // We really need a better solution to this
         if (valid.contains("X")) {
-            valid = valid.replace("X", Integer.toString(AbilityUtils.calculateAmount(card, "X", sa)));
+            valid = TextUtil.fastReplace(valid,
+                    "X", Integer.toString(AbilityUtils.calculateAmount(card, "X", sa)));
         }
 
         CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);

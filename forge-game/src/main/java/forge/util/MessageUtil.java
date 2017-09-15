@@ -14,7 +14,7 @@ public class MessageUtil {
     public static String formatMessage(String message, Player player, Object related) {
         if (related instanceof Player && message.indexOf("{player") >= 0) {
             String noun = mayBeYou(player, related);
-            message = message.replace("{player}", noun).replace("{player's}", Lang.getPossesive(noun));
+            message = TextUtil.fastReplace(TextUtil.fastReplace(message, "{player}", noun),"{player's}", Lang.getPossesive(noun));
         }
         return message;
     }
@@ -22,7 +22,7 @@ public class MessageUtil {
     public static String formatMessage(String message, PlayerView player, Object related) {
         if (related instanceof PlayerView && message.indexOf("{player") >= 0) {
             String noun = mayBeYou(player, related);
-            message = message.replace("{player}", noun).replace("{player's}", Lang.getPossesive(noun));
+            message = TextUtil.fastReplace(TextUtil.fastReplace(message, "{player}", noun),"{player's}", Lang.getPossesive(noun));
         }
         return message;
     }

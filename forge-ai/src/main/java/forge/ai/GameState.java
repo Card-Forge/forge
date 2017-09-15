@@ -716,7 +716,7 @@ public abstract class GameState {
 
                     if (tgtID != TARGET_NONE && svarValue.contains("| Defined$")) {
                         // We want a specific target, so try to undefine a predefined target if possible
-                        svarValue = svarValue.replace("| Defined$", "| Undefined$");
+                        svarValue = TextUtil.fastReplace(svarValue, "| Defined$", "| Undefined$");
                         if (tgtID == TARGET_HUMAN || tgtID == TARGET_AI) {
                             svarValue += " | ValidTgts$ Player";
                         } else {

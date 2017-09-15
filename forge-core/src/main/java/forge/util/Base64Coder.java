@@ -122,7 +122,7 @@ public final class Base64Coder {
         String t = new String(Base64Coder.encode(s.getBytes()));
 
         if (noPad) {
-            t = t.replace("=", "");
+            t = TextUtil.fastReplace(t, "=", "");
         }
 
         return t;

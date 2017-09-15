@@ -37,6 +37,7 @@ import java.util.*;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import forge.util.TextUtil;
 
 /**
  * <p>
@@ -154,9 +155,15 @@ public abstract class Trigger extends TriggerReplacementBase {
 
             StringBuilder sb = new StringBuilder();
             String desc = this.mapParams.get("TriggerDescription");
-            desc = desc.replace("CARDNAME", active ? getHostCard().toString() : getHostCard().getName());
+            if(active)
+                desc = TextUtil.fastReplace(desc, "CARDNAME", getHostCard().toString());
+            else
+                desc = TextUtil.fastReplace(desc, "CARDNAME", getHostCard().getName());
             if (getHostCard().getEffectSource() != null) {
-                desc = desc.replace("EFFECTSOURCE", active ? getHostCard().getEffectSource().toString() : getHostCard().getEffectSource().getName());
+                if(active)
+                    desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", getHostCard().getEffectSource().toString());
+                else
+                    desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", getHostCard().getEffectSource().getName());
             }
             sb.append(desc);
             if (!this.triggerRemembered.isEmpty()) {
@@ -207,7 +214,7 @@ public abstract class Trigger extends TriggerReplacementBase {
                 // string might have leading whitespace
                 saDesc = saDesc.trim();
                 saDesc = saDesc.substring(0, 1).toLowerCase() + saDesc.substring(1);
-                result = result.replace("ABILITY", saDesc);
+                result = TextUtil.fastReplace(result, "ABILITY", saDesc);
             }
         }
         return result;

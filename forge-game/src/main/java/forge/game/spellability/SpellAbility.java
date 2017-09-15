@@ -625,7 +625,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (stackDescription.equals(text)) {
             return getHostCard().getName() + " - " + text;
         }
-        return stackDescription.replaceAll("CARDNAME", getHostCard().getName());
+        return TextUtil.fastReplace(stackDescription, "CARDNAME", getHostCard().getName());
     }
     public void setStackDescription(final String s) {
         originalStackDescription = s;
@@ -689,7 +689,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 sb.append(" ");
             }
             if (node.getHostCard() != null) {
-                sb.append(node.getDescription().replace("CARDNAME", node.getHostCard().getName()));
+                sb.append(TextUtil.fastReplace(node.getDescription(), "CARDNAME", node.getHostCard().getName()));
             }
             node = node.getSubAbility();
         }

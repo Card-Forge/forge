@@ -463,7 +463,7 @@ public class CardFactoryUtil {
         // methods for getting the highest/lowest playerXCount from a range of players
         if (l[0].startsWith("Highest")) {
             for (final Player player : players) {
-                final int current = playerXProperty(player, s.replace("Highest", ""), source);
+                final int current = playerXProperty(player, TextUtil.fastReplace(s, "Highest", ""), source);
                 if (current > n) {
                     n = current;
                 }
@@ -475,7 +475,7 @@ public class CardFactoryUtil {
         if (l[0].startsWith("Lowest")) {
             n = 99999; // if no players have fewer than 99999 valids, the game is frozen anyway
             for (final Player player : players) {
-                final int current = playerXProperty(player, s.replace("Lowest", ""), source);
+                final int current = playerXProperty(player, TextUtil.fastReplace(s, "Lowest", ""), source);
                 if (current < n) {
                     n = current;
                 }
@@ -534,7 +534,7 @@ public class CardFactoryUtil {
         if (l[0].startsWith("Valid") && !l[0].contains("Valid ")) {
             String[] lparts = l[0].split(" ", 2);
             final List<ZoneType> vZone = ZoneType.listValueOf(lparts[0].split("Valid")[1]);
-            String restrictions = l[0].replace(lparts[0] + " ", "");
+            String restrictions = TextUtil.fastReplace(l[0], TextUtil.addSuffix(lparts[0]," "), "");
             final String[] rest = restrictions.split(",");
             CardCollection cards = CardLists.getValidCards(game.getCardsIn(vZone), rest, player, source, null);
             return doXMath(cards.size(), m, source);
@@ -1708,8 +1708,8 @@ public class CardFactoryUtil {
             final String pString = filter[0].substring(18);
             FCollectionView<Player> controllers = AbilityUtils.getDefinedPlayers(source, pString, null);
             filteredList = CardLists.filterControlledBy(filteredList, controllers);
-            filteredString = filteredString.replace(pString, "");
-            filteredString = filteredString.replace("FilterControlledBy_", "");
+            filteredString = TextUtil.fastReplace(filteredString, pString, "");
+            filteredString = TextUtil.fastReplace(filteredString, "FilterControlledBy_", "");
         }
 
         int tot = 0;
@@ -2280,7 +2280,7 @@ public class CardFactoryUtil {
                 final String actualRep = "Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self |"
                         + " ReplaceWith$ AmplifyReveal | Secondary$ True | Description$ As this creature "
                         + "enters the battlefield, put " + amplifyMagnitude + " +1/+1 counter" + suffix 
-                        + " on it for each " + ampTypes.replace(",", " and/or ") 
+                        + " on it for each " + TextUtil.fastReplace(ampTypes, ",", " and/or ")
                         + " card you reveal in your hand.)";
                 final String abString = "DB$ Reveal | AnyNumber$ True | RevealValid$ "
                         + types.toString() + " | RememberRevealed$ True | SubAbility$ Amplify";
@@ -3853,9 +3853,10 @@ public class CardFactoryUtil {
                 final String hauntSVarName = k[1];            
 
                 // no nice way to get the cost
-                String abString = card.getSVar(hauntSVarName).replace("DB$", "SP$");
-                abString += " | Cost$ 0 | StackDescription$ SpellDescription";
-
+                String abString = TextUtil.concatNoSpace(
+                        TextUtil.fastReplace(card.getSVar(hauntSVarName), "DB$", "SP$"),
+                        " | Cost$ 0 | StackDescription$ SpellDescription"
+                );
                 final SpellAbility sa = AbilityFactory.getAbility(abString, card);
                 sa.setPayCosts(new Cost(card.getManaCost(), false));
                 sa.setIntrinsic(intrinsic);

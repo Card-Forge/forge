@@ -266,4 +266,26 @@ public class TextUtil {
         sb.append(s);
         return sb.toString();
     }
+
+    //fast Replace
+    public static String fastReplace( String str, String target, String replacement ) {
+        int targetLength = target.length();
+        if( targetLength == 0 ) {
+            return str;
+        }
+        int idx2 = str.indexOf( target );
+        if( idx2 < 0 ) {
+            return str;
+        }
+        StringBuilder sb = new StringBuilder( targetLength > replacement.length() ? str.length() : str.length() * 2 );
+        int idx1 = 0;
+        do {
+            sb.append( str, idx1, idx2 );
+            sb.append( replacement );
+            idx1 = idx2 + targetLength;
+            idx2 = str.indexOf( target, idx1 );
+        } while( idx2 > 0 );
+        sb.append( str, idx1, str.length() );
+        return sb.toString();
+    }
 }

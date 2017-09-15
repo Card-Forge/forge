@@ -24,6 +24,7 @@ import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.TextUtil;
 
 /**
  * The Class CostDiscard.
@@ -121,7 +122,7 @@ public class CostDiscard extends CostPartWithList {
                 boolean sameName = false;
                 if (type.contains("+WithSameName")) {
                     sameName = true;
-                    type = type.replace("+WithSameName", "");
+                    type = TextUtil.fastReplace(type, "+WithSameName", "");
                 }
                 if (!type.equals("Random") && !type.contains("X")) {
                     // Knollspine Invocation fails to activate without the above conditional

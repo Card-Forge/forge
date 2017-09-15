@@ -1,5 +1,7 @@
 package forge.game.keyword;
 
+import forge.util.TextUtil;
+
 public class KeywordWithAmountAndType extends KeywordInstance<KeywordWithAmountAndType> {
     private int amount;
     private String type;
@@ -13,7 +15,7 @@ public class KeywordWithAmountAndType extends KeywordInstance<KeywordWithAmountA
     protected void parse(String details) {
         String[] d = details.split(":");  
         amount = Integer.parseInt(d[0]);
-        type = d[1].replace(",", " and/or ");
+        type = TextUtil.fastReplace(d[1], ",", " and/or ");
     }
 
     @Override

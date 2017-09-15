@@ -15,6 +15,7 @@ import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.TextUtil;
 
 
 public class RepeatEachAi extends SpellAbilityAi {
@@ -85,7 +86,7 @@ public class RepeatEachAi extends SpellAbilityAi {
 
             String svar = repeat.getSVar(repeat.getParam("LifeAmount"));
             // replace RememberedPlayerCtrl with YouCtrl
-            String svarYou = svar.replace("RememberedPlayer", "You");
+            String svarYou = TextUtil.fastReplace(svar, "RememberedPlayer", "You");
 
             // Currently all Cards with that are affect all player, including AI
             if (aiPlayer.canLoseLife()) {

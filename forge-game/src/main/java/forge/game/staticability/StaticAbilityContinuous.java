@@ -25,6 +25,7 @@ import java.util.Set;
 
 import forge.card.CardStateName;
 import forge.game.card.*;
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
@@ -632,10 +633,10 @@ public final class StaticAbilityContinuous {
             if (addAbilities != null) {
                 for (String abilty : addAbilities) {
                     if (abilty.contains("CardManaCost")) {
-                        abilty = abilty.replace("CardManaCost", affectedCard.getManaCost().getShortString());
+                        abilty = TextUtil.fastReplace(abilty, "CardManaCost", affectedCard.getManaCost().getShortString());
                     } else if (abilty.contains("ConvertedManaCost")) {
                         final String costcmc = Integer.toString(affectedCard.getCMC());
-                        abilty = abilty.replace("ConvertedManaCost", costcmc);
+                        abilty = TextUtil.fastReplace(abilty, "ConvertedManaCost", costcmc);
                     }
                     if (abilty.startsWith("AB") || abilty.startsWith("ST")) { // grant the ability
                         final SpellAbility sa = AbilityFactory.getAbility(abilty, affectedCard);
@@ -694,7 +695,7 @@ public final class StaticAbilityContinuous {
                 for (String s : addStatics) {
                     if (s.contains("ConvertedManaCost")) {
                         final String costcmc = Integer.toString(affectedCard.getCMC());
-                        s = s.replace("ConvertedManaCost", costcmc);
+                        s = TextUtil.fastReplace(s, "ConvertedManaCost", costcmc);
                     }
 
                     StaticAbility stat = affectedCard.addStaticAbility(s);

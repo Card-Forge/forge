@@ -31,6 +31,7 @@ import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
+import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import forge.util.PredicateString.StringOp;
 
@@ -118,7 +119,8 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
             List<PaperCard> cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
             String valid = sa.getParam("ValidSupportedCopy");
             if (valid.contains("X")) {
-                valid = valid.replace("X", Integer.toString(AbilityUtils.calculateAmount(hostCard, "X", sa)));
+                valid = TextUtil.fastReplace(valid,
+                        "X", Integer.toString(AbilityUtils.calculateAmount(hostCard, "X", sa)));
             }
             if (StringUtils.containsIgnoreCase(valid, "creature")) {
                 Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES);
@@ -285,7 +287,9 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         copy.setManaCost(ManaCost.NO_COST);
                         copy.setEmbalmed(true);
 
-                        String name = copy.getName().replace(",", "").replace(" ", "_").toLowerCase();
+                        String name = TextUtil.fastReplace(
+                                TextUtil.fastReplace(copy.getName(), ",", ""),
+                                " ", "_").toLowerCase();
                         copy.setImageKey(ImageKeys.getTokenKey("embalm_" + name));
                     }
                     if (sa.hasParam("Eternalize")) {
@@ -296,7 +300,9 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     	copy.setBaseToughness(4);
                         copy.setEternalized(true);
 
-                        String name = copy.getName().replace(",", "").replace(" ", "_").toLowerCase();
+                        String name = TextUtil.fastReplace(
+                            TextUtil.fastReplace(copy.getName(), ",", ""),
+                                " ", "_").toLowerCase();
                         copy.setImageKey(ImageKeys.getTokenKey("eternalize_" + name));
                     }
                     

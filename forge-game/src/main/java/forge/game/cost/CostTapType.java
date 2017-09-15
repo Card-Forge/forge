@@ -25,6 +25,7 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.TextUtil;
 
 /**
  * The Class CostTapType.
@@ -109,14 +110,14 @@ public class CostTapType extends CostPartWithList {
         
         if (type.contains(".sharesCreatureTypeWith")) {
             sameType = true;
-            type = type.replace(".sharesCreatureTypeWith", "");
+            type = TextUtil.fastReplace(type, ".sharesCreatureTypeWith", "");
         }
         boolean totalPower = false;
         String totalP = "";
         if (type.contains("+withTotalPowerGE")) {
             totalPower = true;
             totalP = type.split("withTotalPowerGE")[1];
-            type = type.replace("+withTotalPowerGE" + totalP, "");
+            type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalPowerGE", totalP), "");
         }
 
         CardCollection typeList = CardLists.getValidCards(payer.getCardsIn(ZoneType.Battlefield), type.split(";"), payer, source, ability);

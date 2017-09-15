@@ -469,7 +469,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         CardCollectionView totap;
         if (isVehicle) {
             totalP = type.split("withTotalPowerGE")[1];
-            type = type.replace("+withTotalPowerGE" + totalP, "");
+            type = TextUtil.fastReplace(type, "+withTotalPowerGE", "");
             totap = ComputerUtil.chooseTapTypeAccumulatePower(player, type, ability, !cost.canTapSource, Integer.parseInt(totalP), tapped);
         } else {
             totap = ComputerUtil.chooseTapType(player, type, source, !cost.canTapSource, c, tapped);

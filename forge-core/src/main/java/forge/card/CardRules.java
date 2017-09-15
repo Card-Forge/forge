@@ -220,8 +220,8 @@ public final class CardRules implements ICardCharacteristics {
         if (slashPos == -1) {
             throw new RuntimeException(TextUtil.concatWithSpace("Vanguard", TextUtil.enclosedSingleQuote(this.getName()), "has bad hand/life stats"));
         }
-        this.deltaHand = Integer.parseInt(pt.substring(0, slashPos).replace("+", ""));
-        this.deltaLife = Integer.parseInt(pt.substring(slashPos+1).replace("+", ""));
+        this.deltaHand = Integer.parseInt(TextUtil.fastReplace(pt.substring(0, slashPos), "+", ""));
+        this.deltaLife = Integer.parseInt(TextUtil.fastReplace(pt.substring(slashPos+1), "+", ""));
     }
 
     // Downloadable image

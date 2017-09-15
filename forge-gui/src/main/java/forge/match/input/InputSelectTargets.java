@@ -88,7 +88,9 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             sb.append(TextUtil.concatNoSpace("\n(", String.valueOf(maxTargets - targeted), " more can be targeted)"));
         }
 
-        String message = sb.toString().replace("CARDNAME", sa.getHostCard().toString()).replace("(Targeting ERROR)", "");
+        String message = TextUtil.fastReplace(TextUtil.fastReplace(sb.toString(),
+                "CARDNAME", sa.getHostCard().toString()),
+                "(Targeting ERROR)", "");
         showMessage(message, sa.getView());
 
         // If reached Minimum targets, enable OK button

@@ -17,6 +17,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
+import forge.util.TextUtil;
 
 public class GameSimulator {
     public static boolean COPY_STACK = false;
@@ -136,7 +137,7 @@ public class GameSimulator {
             System.err.println(sa.getDescription() + "->" + desc);
         }
         // FIXME: This is a hack that makes testManifest pass - figure out why it's needed.
-        desc = desc.replace("Unmanifest {0}", "Unmanifest no cost");
+        desc = TextUtil.fastReplace(desc, "Unmanifest {0}", "Unmanifest no cost");
         for (SpellAbility cSa : hostCard.getSpellAbilities()) {
             if (desc.equals(cSa.getDescription())) {
                 return cSa;

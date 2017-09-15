@@ -10,6 +10,7 @@ import forge.game.card.CardShields;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.util.TextUtil;
 
 import java.util.Iterator;
 import java.util.List;
@@ -69,11 +70,17 @@ public class RegenerateEffect extends SpellAbilityEffect {
             		if (sa.hasParam("ReplacePlayerName")) { // Soldevi Sentry
             			String def = sa.getParam("ReplacePlayerName");
             			List<Player> replaced = AbilityUtils.getDefinedPlayers(sourceCard, def, sa);
-            			abString = abString.replace(def, replaced.isEmpty() ? "" : replaced.get(0).getName());
+                        if(replaced.isEmpty())
+                            abString = TextUtil.fastReplace(abString, def, "");
+                        else
+                            abString = TextUtil.fastReplace(abString, def, replaced.get(0).getName());
             		} else if (sa.hasParam("ReplaceCardUID")) { // Debt of Loyalty
             			String def = sa.getParam("ReplaceCardUID");
             			List<Card> replaced = AbilityUtils.getDefinedCards(sourceCard, def, sa);
-            			abString = abString.replace(def, replaced.isEmpty() ? "" : Integer.toString(replaced.get(0).getId()));
+            			if(replaced.isEmpty())
+            			    abString = TextUtil.fastReplace(abString, def, "");
+            			else
+            			    abString = TextUtil.fastReplace(abString, def, Integer.toString(replaced.get(0).getId()));
             		}
             		triggerSA = AbilityFactory.getAbility(abString, sourceCard);
             		triggerSA.setActivatingPlayer(sa.getActivatingPlayer());

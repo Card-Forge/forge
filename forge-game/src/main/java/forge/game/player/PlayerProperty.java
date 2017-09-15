@@ -3,6 +3,7 @@ package forge.game.player;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.game.Game;
@@ -91,7 +92,7 @@ public class PlayerProperty {
             int count = 1;
             if (v.contains("_AtLeast")) {
                 count = Integer.parseInt(v.substring(v.indexOf("_AtLeast") + 8));
-                v = v.substring(0, v.indexOf("_AtLeast")).replace("Valid:", "Valid ");
+                v = TextUtil.fastReplace(v.substring(0, v.indexOf("_AtLeast")), "Valid:", "Valid ");
             }
 
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
@@ -110,7 +111,7 @@ public class PlayerProperty {
 
             if (v.contains("_AtLeast")) {
                 count = Integer.parseInt(v.substring(v.indexOf("_AtLeast") + 8));
-                v = v.substring(0, v.indexOf("_AtLeast")).replace("Valid:", "Valid ");
+                v = TextUtil.fastReplace(v.substring(0, v.indexOf("_AtLeast")), "Valid:", "Valid ");
             }
 
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
@@ -129,7 +130,7 @@ public class PlayerProperty {
             int count = 1;
             if (v.contains("_AtLeast")) {
                 count = Integer.parseInt(v.substring(v.indexOf("_AtLeast") + 8));
-                v = v.substring(0, v.indexOf("_AtLeast")).replace("Valid:", "Valid ");
+                v = TextUtil.fastReplace(v.substring(0, v.indexOf("_AtLeast")), "Valid:", "Valid ");
             }
 
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
@@ -300,7 +301,7 @@ public class PlayerProperty {
                 boolean checkOnly = false;
                 if (type.endsWith("Only")) {
                     checkOnly = true;
-                    type = type.replace("Only", "");
+                    type = TextUtil.fastReplace(type, "Only", "");
                 }
                 int typeNum = 0;
                 List<Player> controlmost = new ArrayList<Player>();

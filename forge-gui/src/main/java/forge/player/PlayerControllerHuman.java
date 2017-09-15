@@ -580,8 +580,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             // append trigger description unless prompt is compact or detailed
             // descriptions are on
             buildQuestion.append("\n(");
-            buildQuestion.append(
-                    triggerParams.get("TriggerDescription").replace("CARDNAME", regtrig.getHostCard().getName()));
+            buildQuestion.append(TextUtil.fastReplace(triggerParams.get("TriggerDescription"),
+                    "CARDNAME", regtrig.getHostCard().getName()));
             buildQuestion.append(")");
         }
         final Map<String, Object> tos = sa.getTriggeringObjects();

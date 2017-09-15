@@ -47,6 +47,7 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 
 
@@ -787,7 +788,7 @@ public class ComputerUtilCombat {
                 if (validBlocked.contains(".withLesserPower")) {
                     // Have to check this restriction here as triggering objects aren't set yet, so
                     // ValidBlocked$Creature.powerLTX where X:TriggeredBlocker$CardPower crashes with NPE
-                    validBlocked = validBlocked.replace(".withLesserPower", "");
+                    validBlocked = TextUtil.fastReplace(validBlocked, ".withLesserPower", "");
                     if (defender.getCurrentPower() <= attacker.getCurrentPower()) {
                         return false;
                     }
@@ -801,7 +802,7 @@ public class ComputerUtilCombat {
                 if (validBlocker.contains(".withLesserPower")) {
                     // Have to check this restriction here as triggering objects aren't set yet, so
                     // ValidCard$Creature.powerLTX where X:TriggeredAttacker$CardPower crashes with NPE
-                    validBlocker = validBlocker.replace(".withLesserPower", "");
+                    validBlocker = TextUtil.fastReplace(validBlocker, ".withLesserPower", "");
                     if (defender.getCurrentPower() >= attacker.getCurrentPower()) {
                         return false;
                     }
@@ -895,7 +896,7 @@ public class ComputerUtilCombat {
                 if (!params.containsKey("Affected") || !params.get("Affected").contains("blocking")) {
                     continue;
                 }
-                final String valid = params.get("Affected").replace("blocking", "Creature");
+                final String valid = TextUtil.fastReplace(params.get("Affected"), "blocking", "Creature");
                 if (!blocker.isValid(valid, card.getController(), card, null)) {
                     continue;
                 }
@@ -1236,7 +1237,7 @@ public class ComputerUtilCombat {
                     if (!params.containsKey("Affected") || !params.get("Affected").contains("attacking")) {
                         continue;
                     }
-                    final String valid = params.get("Affected").replace("attacking", "Creature");
+                    final String valid = TextUtil.fastReplace(params.get("Affected"), "attacking", "Creature");
                     if (!attacker.isValid(valid, card.getController(), card, null)) {
                         continue;
                     }
@@ -1316,13 +1317,13 @@ public class ComputerUtilCombat {
             } else {
                 String bonus = new String(source.getSVar(att));
                 if (bonus.contains("TriggerCount$NumBlockers")) {
-                    bonus = bonus.replace("TriggerCount$NumBlockers", "Number$1");
+                    bonus = TextUtil.fastReplace(bonus, "TriggerCount$NumBlockers", "Number$1");
                 } else if (bonus.contains("TriggeredPlayersDefenders$Amount")) { // for Melee
-                    bonus = bonus.replace("TriggeredPlayersDefenders$Amount", "Number$1");
+                    bonus = TextUtil.fastReplace(bonus, "TriggeredPlayersDefenders$Amount", "Number$1");
                 } else if (bonus.contains("TriggeredAttacker$CardPower")) { // e.g. Arahbo, Roar of the World
-                    bonus = bonus.replace("TriggeredAttacker$CardPower", "Number$" + attacker.getNetPower());
+                    bonus = TextUtil.fastReplace(bonus, "TriggeredAttacker$CardPower", TextUtil.concatNoSpace("Number$", String.valueOf(attacker.getNetPower())));
                 } else if (bonus.contains("TriggeredAttacker$CardToughness")) {
-                    bonus = bonus.replace("TriggeredAttacker$CardToughness", "Number$" + attacker.getNetToughness());
+                    bonus = TextUtil.fastReplace(bonus, "TriggeredAttacker$CardToughness", TextUtil.concatNoSpace("Number$", String.valueOf(attacker.getNetToughness())));
                 }
                 power += CardFactoryUtil.xCount(source, bonus);
 
@@ -1428,7 +1429,7 @@ public class ComputerUtilCombat {
                         continue;
                     }
                     if (params.containsKey("Affected") && params.get("Affected").contains("attacking")) {
-                        final String valid = params.get("Affected").replace("attacking", "Creature");
+                        final String valid = TextUtil.fastReplace(params.get("Affected"), "attacking", "Creature");
                         if (!attacker.isValid(valid, card.getController(), card, null)) {
                             continue;
                         }
@@ -1442,7 +1443,7 @@ public class ComputerUtilCombat {
                             }
                         }
                     } else if (params.containsKey("Affected") && params.get("Affected").contains("untapped")) {
-                        final String valid = params.get("Affected").replace("untapped", "Creature");
+                        final String valid = TextUtil.fastReplace(params.get("Affected"), "untapped", "Creature");
                         if (!attacker.isValid(valid, card.getController(), card, null)
                                 || attacker.hasKeyword("Vigilance")) {
                             continue;
@@ -1538,9 +1539,9 @@ public class ComputerUtilCombat {
             } else {
                 String bonus = new String(source.getSVar(def));
                 if (bonus.contains("TriggerCount$NumBlockers")) {
-                    bonus = bonus.replace("TriggerCount$NumBlockers", "Number$1");
+                    bonus = TextUtil.fastReplace(bonus, "TriggerCount$NumBlockers", "Number$1");
                 } else if (bonus.contains("TriggeredPlayersDefenders$Amount")) { // for Melee
-                    bonus = bonus.replace("TriggeredPlayersDefenders$Amount", "Number$1");
+                    bonus = TextUtil.fastReplace(bonus, "TriggeredPlayersDefenders$Amount", "Number$1");
                 }
                 toughness += CardFactoryUtil.xCount(source, bonus);
             }

@@ -3,6 +3,7 @@ package forge;
 import forge.item.*;
 import forge.util.FileUtil;
 import forge.util.ImageUtil;
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -104,17 +105,17 @@ public final class ImageKeys {
         // AE -> Ae and Ae -> AE for older cards with different file names 
         // on case-sensitive file systems
         if (filename.contains("Ae")) {
-            file = findFile(dir, filename.replace("Ae", "AE"));
+            file = findFile(dir, TextUtil.fastReplace(filename, "Ae", "AE"));
             if (file != null) { return file; }
         } else if (filename.contains("AE")) {
-            file = findFile(dir, filename.replace("AE", "Ae"));
+            file = findFile(dir, TextUtil.fastReplace(filename, "AE", "Ae"));
             if (file != null) { return file; }
         }
 
         // some S00 cards are really part of 6ED
         String s2kAlias = getSetFolder("S00");
         if (filename.startsWith(s2kAlias)) {
-            file = findFile(dir, filename.replace(s2kAlias, getSetFolder("6ED")));
+            file = findFile(dir, TextUtil.fastReplace(filename, s2kAlias, getSetFolder("6ED")));
             if (file != null) { return file; }
         }
 

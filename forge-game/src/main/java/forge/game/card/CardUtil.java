@@ -40,6 +40,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 
 public final class CardUtil {
@@ -333,7 +334,7 @@ public final class CardUtil {
 
         // Reuse AF_Defined in a slightly different way
         if (validCard.startsWith("Defined.")) {
-            cards = AbilityUtils.getDefinedCards(card, validCard.replace("Defined.", ""), abMana);
+            cards = AbilityUtils.getDefinedCards(card, TextUtil.fastReplace(validCard, "Defined.", ""), abMana);
         } else {
             if (sa.getActivatingPlayer() == null) {
                 sa.setActivatingPlayer(sa.getHostCard().getController());

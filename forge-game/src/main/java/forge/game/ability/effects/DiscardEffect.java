@@ -222,7 +222,8 @@ public class DiscardEffect extends SpellAbilityEffect {
                     String valid = sa.hasParam("DiscardValid") ? sa.getParam("DiscardValid") : "Card";
 
                     if (valid.contains("X")) {
-                        valid = valid.replace("X", Integer.toString(AbilityUtils.calculateAmount(source, "X", sa)));
+                        valid = TextUtil.fastReplace(valid,
+                                "X", Integer.toString(AbilityUtils.calculateAmount(source, "X", sa)));
                     }
 
                     List<Card> dPChHand = CardLists.getValidCards(dPHand, valid.split(","), source.getController(), source, sa);

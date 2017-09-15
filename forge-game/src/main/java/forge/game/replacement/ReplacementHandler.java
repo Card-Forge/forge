@@ -167,7 +167,7 @@ public class ReplacementHandler {
         String message = chosenRE.toString();
         if ( !StringUtils.isEmpty(message))
         	if (chosenRE.getHostCard() != null) {
-        		message = message.replaceAll("CARDNAME", chosenRE.getHostCard().getName());
+        		message = TextUtil.fastReplace(message, "CARDNAME", chosenRE.getHostCard().getName());
         	}
             game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, message);
         return res;
@@ -240,7 +240,7 @@ public class ReplacementHandler {
             }
 
             Card cardForUi = host.getCardForUi();
-            String effectDesc = replacementEffect.toString().replace("CARDNAME", cardForUi.getName());
+            String effectDesc = TextUtil.fastReplace(replacementEffect.toString(), "CARDNAME", cardForUi.getName());
             final String question = replacementEffect instanceof ReplaceDiscard
                 ? TextUtil.concatWithSpace("Apply replacement effect of", cardForUi.toString(), "to", TextUtil.addSuffix(runParams.get("Card").toString(),"?\r\n"), TextUtil.enclosedParen(effectDesc))
                 : TextUtil.concatWithSpace("Apply replacement effect of", TextUtil.addSuffix(cardForUi.toString(),"?\r\n"), TextUtil.enclosedParen(effectDesc));
@@ -266,7 +266,7 @@ public class ReplacementHandler {
             final Card repHost = host;
             String repType = repHost.getSVar(mapParams.get("ManaReplacement"));
             if (repType.contains("Chosen") && repHost.hasChosenColor()) {
-                repType = repType.replace("Chosen", MagicColor.toShortString(repHost.getChosenColor()));
+                repType = TextUtil.fastReplace(repType, "Chosen", MagicColor.toShortString(repHost.getChosenColor()));
             }
             manaAb.getManaPart().setManaReplaceType(repType);
             manaAb.getManaPart().produceMana(rep, player1, manaAb);

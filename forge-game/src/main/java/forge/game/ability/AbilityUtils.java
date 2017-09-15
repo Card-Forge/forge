@@ -25,6 +25,7 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.*;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 
@@ -796,16 +797,16 @@ public class AbilityUtils {
 
             source = (Card) (o);
             if (type.contains("TriggeredCard")) {
-                type = type.replace("TriggeredCard", "Card");
+                type = TextUtil.fastReplace(type, "TriggeredCard", "Card");
             }
             else if (type.contains("TriggeredAttacker")) {
-                type = type.replace("TriggeredAttacker", "Card");
+                type = TextUtil.fastReplace(type, "TriggeredAttacker", "Card");
             }
             else if (type.contains("TriggeredBlocker")) {
-                type = type.replace("TriggeredBlocker", "Card");
+                type = TextUtil.fastReplace(type, "TriggeredBlocker", "Card");
             }
             else {
-                type = type.replace("Triggered", "Card");
+                type = TextUtil.fastReplace(type, "Triggered", "Card");
             }
         }
         else if (type.startsWith("Targeted")) {
@@ -819,10 +820,10 @@ public class AbilityUtils {
             }
 
             if (type.startsWith("TargetedCard")) {
-                type = type.replace("TargetedCard", "Card");
+                type = TextUtil.fastReplace(type, "TargetedCard", "Card");
             }
             else {
-                type = type.replace("Targeted", "Card");
+                type = TextUtil.fastReplace(type, "Targeted", "Card");
             }
         }
         else if (type.startsWith("Remembered")) {
@@ -831,7 +832,8 @@ public class AbilityUtils {
                 if (object instanceof Card) {
                     hasRememberedCard = true;
                     source = (Card) object;
-                    type = type.replace("Remembered", "Card");
+                    type = TextUtil.fastReplace(type, "Remembered", "Card");
+
                     break;
                 }
             }
@@ -841,11 +843,11 @@ public class AbilityUtils {
             }
         }
         else if (type.startsWith("Imprinted")) {
-            type = type.replace("Imprinted", "Card");
+            type = TextUtil.fastReplace(type, "Imprinted", "Card");
         }
         else if (type.equals("Card.AttachedBy")) {
             source = source.getEnchantingCard();
-            type = type.replace("Card.AttachedBy", "Card.Self");
+            type = TextUtil.fastReplace(type, "Card.AttachedBy", "Card.Self");
         }
 
         String valid = type;
@@ -857,14 +859,15 @@ public class AbilityUtils {
                 if (Character.isLetter(reference)) {
                     String varName = valid.split(",")[0].split(t)[1].split("\\+")[0];
                     if (!sa.getSVar(varName).isEmpty() || source.hasSVar(varName)) {
-                        valid = valid.replace(t + varName, t + Integer.toString(calculateAmount(source, varName, sa)));
+                        valid = TextUtil.fastReplace(valid, TextUtil.concatNoSpace(t, varName),
+                                TextUtil.concatNoSpace(t, Integer.toString(calculateAmount(source, varName, sa))));
                     }
                 }
             }
         }
         if (sa.hasParam("AbilityCount")) { // replace specific string other than "EQ" cases
         	String var = sa.getParam("AbilityCount");
-        	valid = valid.replace(var, Integer.toString(calculateAmount(source, var, sa)));
+        	valid = TextUtil.fastReplace(valid, var, Integer.toString(calculateAmount(source, var, sa)));
         }
         return CardLists.getValidCards(list, valid.split(","), sa.getActivatingPlayer(), source, sa);
     }
@@ -1391,7 +1394,8 @@ public class AbilityUtils {
         }
         else if (!StringUtils.isBlank(sa.getSVar(unlessCost)) || !StringUtils.isBlank(source.getSVar(unlessCost))) {
             // check for X costs (stored in SVars
-            int xCost = calculateAmount(source, sa.getParam("UnlessCost").replace(" ", ""), sa);
+            int xCost = calculateAmount(source, TextUtil.fastReplace(sa.getParam("UnlessCost"),
+                    " ", ""), sa);
             //Check for XColor
             ManaCostBeingPaid toPay = new ManaCostBeingPaid(ManaCost.ZERO);
             byte xColor = ManaAtom.fromName(sa.hasParam("UnlessXColor") ? sa.getParam("UnlessXColor") : "1");

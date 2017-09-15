@@ -13,6 +13,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+import forge.util.TextUtil;
 
 import java.util.Random;
 
@@ -35,7 +36,7 @@ public class SacrificeAllAi extends SpellAbilityAi {
             // Set PayX here to maximum value.
             final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(xPay));
-            valid = valid.replace("X", Integer.toString(xPay));
+            valid = TextUtil.fastReplace(valid, "X", Integer.toString(xPay));
         }
 
         CardCollection humanlist =

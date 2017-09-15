@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import forge.card.CardStateName;
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
@@ -38,7 +39,7 @@ public class CardProperty {
 
         // by name can also have color names, so needs to happen before colors.
         if (property.startsWith("named")) {
-            String name = property.substring(5).replace(";", ","); // for some legendary cards
+            String name = TextUtil.fastReplace(property.substring(5), ";", ","); // for some legendary cards
             if (!card.sharesNameWith(name)) {
                 return false;
             }   

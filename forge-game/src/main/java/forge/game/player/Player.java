@@ -27,6 +27,7 @@ import java.util.Random;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 
+import forge.util.TextUtil;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import com.google.common.base.Function;
@@ -774,8 +775,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             //Set up ability
             SpellAbility shieldSA = null;
             String effectAbString = shieldMap.get(shieldSource).get("EffectString");
-            effectAbString = effectAbString.replace("PreventedDamage", Integer.toString(dmgToBePrevented));
-            effectAbString = effectAbString.replace("ShieldEffectTarget", shieldMap.get(shieldSource).get("ShieldEffectTarget"));
+            effectAbString = TextUtil.fastReplace(effectAbString, "PreventedDamage", Integer.toString(dmgToBePrevented));
+            effectAbString = TextUtil.fastReplace(effectAbString, "ShieldEffectTarget", shieldMap.get(shieldSource).get("ShieldEffectTarget"));
             if (DEBUGShieldsWithEffects) {
                 System.out.println("Final shield ability string: " + effectAbString);
             }

@@ -367,7 +367,7 @@ public class ComputerUtilCost {
                     final int vehicleValue = ComputerUtilCard.evaluateCreature(vehicle);
                     String type = part.getType();
                     String totalP = type.split("withTotalPowerGE")[1];
-                    type = type.replace("+withTotalPowerGE" + totalP, "");
+                    type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalPowerGE", totalP), "");
                     CardCollection exclude = CardLists.getValidCards(
                             new CardCollection(ai.getCardsIn(ZoneType.Battlefield)), type.split(";"),
                             source.getController(), source, sa);

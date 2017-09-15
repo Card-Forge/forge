@@ -43,6 +43,7 @@ import java.util.Set;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import forge.util.TextUtil;
 
 /**
  * The Class StaticAbility.
@@ -184,11 +185,11 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
     public final String toString() {
         if (hasParam("Description") && !this.isSuppressed()) {
             String desc = getParam("Description");
-            desc = desc.replace("CARDNAME", this.hostCard.getName());
+            desc = TextUtil.fastReplace(desc, "CARDNAME", this.hostCard.getName());
 
             if (desc.contains("ORIGINALTEXTONLY:")) {
                 // Only display the description if the text of the card is not changed via GainTextOf.
-                desc = desc.replace("ORIGINALTEXTONLY:", "");
+                desc = TextUtil.fastReplace(desc, "ORIGINALTEXTONLY", "");
 
                 boolean hasOrigText = this.hostCard.getStates().contains(CardStateName.OriginalText);
                 if (hasOrigText) {

@@ -25,6 +25,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityCondition;
 import forge.game.zone.ZoneType;
+import forge.util.TextUtil;
 
 public class SpellAbilityPicker {
     private Game game;
@@ -285,7 +286,7 @@ public class SpellAbilityPicker {
             saString = sa.toString();
             String cardName = sa.getHostCard().getName();
             if (!cardName.isEmpty()) {
-                saString = saString.replace(cardName, "<$>");
+                saString = TextUtil.fastReplace(saString, cardName, "<$>");
             }
             if (saString.length() > 40) {
                 saString = saString.substring(0, 40) + "...";

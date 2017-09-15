@@ -18,6 +18,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
+import forge.util.TextUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -97,7 +98,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             final String targets = Lang.joinHomogenous(cards);
             final String message;
             if (sa.hasParam("OptionQuestion")) {
-            	message = sa.getParam("OptionQuestion").replace("TARGETS", targets); 
+            	message = TextUtil.fastReplace(sa.getParam("OptionQuestion"), "TARGETS", targets);
             } else {
             	final StringBuilder sb = new StringBuilder();
 

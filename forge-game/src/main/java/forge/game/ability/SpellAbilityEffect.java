@@ -78,7 +78,8 @@ public abstract class SpellAbilityEffect {
         if (stackDesc != null) {
             if ("SpellDescription".equalsIgnoreCase(stackDesc)) { // by typing "none" they want to suppress output
                 if (params.get("SpellDescription") != null) {
-                    sb.append(params.get("SpellDescription").replace("CARDNAME", sa.getHostCard().getName()));
+                    sb.append(TextUtil.fastReplace(params.get("SpellDescription"),
+                            "CARDNAME", sa.getHostCard().getName()));
                 }
                 if (sa.getTargets() != null && !sa.getTargets().getTargets().isEmpty()) {
                     sb.append(" (Targeting: " + sa.getTargets().getTargets() + ")");
@@ -145,7 +146,7 @@ public abstract class SpellAbilityEffect {
             if ("}".equals(t)) { isPlainText = true; continue; }
 
             if (isPlainText) {
-                sb.append(t.replace("CARDNAME", sa.getHostCard().getName()));
+                sb.append(TextUtil.fastReplace(t, "CARDNAME", sa.getHostCard().getName()));
             } else {
                 final List<? extends GameObject> objs;
                 if (t.startsWith("p:")) {

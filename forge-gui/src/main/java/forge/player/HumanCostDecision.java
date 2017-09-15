@@ -116,7 +116,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.card(Aggregates.random(hand, c, new CardCollection()));
         }
         if (discardType.contains("+WithSameName")) {
-            final String type = discardType.replace("+WithSameName", "");
+            final String type = TextUtil.fastReplace(discardType, "+WithSameName", "");
             hand = CardLists.getValidCards(hand, type.split(";"), player, source, ability);
             final CardCollectionView landList2 = hand;
             hand = CardLists.filter(hand, new Predicate<Card>() {
@@ -225,7 +225,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         String type = cost.getType();
         boolean fromTopGrave = false;
         if (type.contains("FromTopGrave")) {
-            type = type.replace("FromTopGrave", "");
+            type = TextUtil.fastReplace(type, "FromTopGrave", "");
             fromTopGrave = true;
         }
 
@@ -1136,7 +1136,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         boolean sameType = false;
         if (type.contains(".sharesCreatureTypeWith")) {
             sameType = true;
-            type = type.replace(".sharesCreatureTypeWith", "");
+            type = TextUtil.fastReplace(type, ".sharesCreatureTypeWith", "");
         }
 
         boolean totalPower = false;
@@ -1144,7 +1144,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (type.contains("+withTotalPowerGE")) {
             totalPower = true;
             totalP = type.split("withTotalPowerGE")[1];
-            type = type.replace("+withTotalPowerGE" + totalP, "");
+            type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalPowerGE", totalP), "");
         }
 
         CardCollection typeList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), player,

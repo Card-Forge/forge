@@ -1395,8 +1395,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                 for (final Entry<String, String> e : textChanges) {
                     final String value = e.getValue();
                     if (keyword.contains(value)) {
-                        keyword = keyword.replace(value,
-                                "<strike>" + e.getKey() + "</strike> " + value);
+                        keyword = TextUtil.fastReplace(keyword, value,
+                                TextUtil.concatNoSpace("<strike>", e.getKey(), "</strike> ", value));
                         // assume (for now) max one change per keyword
                         break;
                     }
@@ -1426,10 +1426,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             } else if (keyword.startsWith("Enchant")) {
                 String k = keyword;
-                k = k.replace("Curse", "");
+                k = TextUtil.fastReplace(k, "Curse", "");
                 sbLong.append(k).append("\r\n");
             } else if (keyword.startsWith("Ripple")) {
-                sbLong.append(keyword.replace(":", " ")).append("\r\n");
+                sbLong.append(TextUtil.fastReplace(keyword, ":", " ")).append("\r\n");
             } else if (keyword.startsWith("Madness")) {
                 String[] parts = keyword.split(":");
                 // If no colon exists in Madness keyword, it must have been granted and assumed the cost from host
@@ -1475,7 +1475,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 final String magnitude = ampParams[1];
                 sbLong.append(magnitude);
                 sbLong.append(" (As this creature enters the battlefield, put a +1/+1 counter on it for each ");
-                sbLong.append(ampParams[2].replace(",", " and/or ")).append(" card you reveal in your hand.)");
+                sbLong.append(TextUtil.fastReplace(ampParams[2], ",", " and/or ")).append(" card you reveal in your hand.)");
                 sbLong.append("\r\n");
             }  else if (keyword.startsWith("Alternative Cost")) {
                 sbLong.append("Has alternative cost.");
@@ -1691,7 +1691,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                         creatures = StringUtils.capitalize(Lang.getPlural(part)) + (creatures == null ? "" : " or " + creatures);
                     }
                     // Kor Castigator and other similar creatures with composite subtype Eldrazi Scion in their text
-                    creatures = creatures.replace("Scions or Eldrazis", "Eldrazi Scions");
+                    creatures = TextUtil.fastReplace(creatures, "Scions or Eldrazis", "Eldrazi Scions");
                 } else {
                     prependedAdjectives.add(Pair.of(positive, part.toLowerCase()));
                 }
@@ -1766,7 +1766,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
             }
 
-            return sb.toString().replaceAll("CARDNAME", state.getName());
+            return TextUtil.fastReplace(sb.toString(), "CARDNAME", state.getName());
         }
 
         if (monstrous) {
@@ -1909,9 +1909,9 @@ public class Card extends GameEntity implements Comparable<Card> {
             sb.replace(start, start + 4, "\r\n");
         }
 
-        String desc = sb.toString().replaceAll("CARDNAME", state.getName());
+        String desc = TextUtil.fastReplace(sb.toString(), "CARDNAME", state.getName());
         if (getEffectSource() != null) {
-            desc = desc.replace("EFFECTSOURCE", getEffectSource().getName());
+            desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", getEffectSource().getName());
         }
 
         return desc.trim();
@@ -1973,7 +1973,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     //|| (keyword.startsWith("Dredge") && !sb.toString().contains("Dredge")) | Replaced with
                     // keyword.startsWith("Dredge") Hopefully that doesn't break anything. -Indigo Dragon 8/9/2017
                     || (keyword.startsWith("CARDNAME is ") && !sb.toString().contains("CARDNAME is "))) {
-                sb.append(keyword.replace(":", " ")).append("\r\n");
+                sb.append(TextUtil.fastReplace(keyword, ":", " ")).append("\r\n");
             } else if (keyword.startsWith("Madness")
                     || (keyword.startsWith("Recover") && !sb.toString().contains("Recover"))
                     || (keyword.startsWith("Miracle") && !sb.toString().contains("Miracle"))) {
@@ -4394,8 +4394,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             //Set up ability
             SpellAbility shieldSA;
             String effectAbString = shieldMap.get(shieldSource).get("EffectString");
-            effectAbString = effectAbString.replace("PreventedDamage", Integer.toString(dmgToBePrevented));
-            effectAbString = effectAbString.replace("ShieldEffectTarget", shieldMap.get(shieldSource).get("ShieldEffectTarget"));
+            effectAbString = TextUtil.fastReplace(effectAbString, "PreventedDamage", Integer.toString(dmgToBePrevented));
+            effectAbString = TextUtil.fastReplace(effectAbString, "ShieldEffectTarget", shieldMap.get(shieldSource).get("ShieldEffectTarget"));
             if (DEBUGShieldsWithEffects) {
                 System.out.println("Final shield ability string: " + effectAbString);
             }

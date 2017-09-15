@@ -560,7 +560,7 @@ public class CombatUtil {
             } else if (keyword.equals("Snow landwalk")) {
                 walkTypes.add("Land.Snow");
             } else if (keyword.endsWith("walk")) {
-                final String landtype = keyword.replace("walk", "");
+                final String landtype = TextUtil.fastReplace(keyword, "walk", "");
                 if (landtype.startsWith("Snow ")) {
                     walkTypes.add(landtype.substring(5) + ".Snow");
                 } else if (CardType.isALandType(landtype)) {

@@ -25,6 +25,7 @@ import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 import forge.item.PaperToken;
 import forge.util.MyRandom;
+import forge.util.TextUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -427,7 +428,7 @@ public class TokenAi extends SpellAbilityAi {
         
         final List<String> imageNames = new ArrayList<String>(1);
         if (tokenImage.equals("")) {
-            imageNames.add(PaperToken.makeTokenFileName(colorDesc.replace(" ", ""), tokenPower, tokenToughness, tokenName));
+            imageNames.add(PaperToken.makeTokenFileName(TextUtil.fastReplace(colorDesc, " ", ""), tokenPower, tokenToughness, tokenName));
         } else {
             imageNames.add(0, tokenImage);
         }

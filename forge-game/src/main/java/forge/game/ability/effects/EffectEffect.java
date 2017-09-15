@@ -21,6 +21,7 @@ import forge.game.zone.ZoneType;
 import java.util.List;
 
 import com.google.common.collect.Lists;
+import forge.util.TextUtil;
 
 public class EffectEffect extends SpellAbilityEffect {
 
@@ -105,7 +106,12 @@ public class EffectEffect extends SpellAbilityEffect {
         if (sa.hasParam("Image")) {
             image = ImageKeys.getTokenKey(sa.getParam("Image"));
         } else if (name.startsWith("Emblem")) { // try to get the image from name
-            image = ImageKeys.getTokenKey(name.toLowerCase().replace(" - ", "_").replace(",", "").replace(" ", "_").toLowerCase());
+            image = ImageKeys.getTokenKey(
+            TextUtil.fastReplace(
+                TextUtil.fastReplace(
+                    TextUtil.fastReplace(name.toLowerCase(), " - ", "_"),
+                        ",", ""),
+                    " ", "_").toLowerCase());
         } else { // use host image
             image = hostCard.getImageKey();
         }
