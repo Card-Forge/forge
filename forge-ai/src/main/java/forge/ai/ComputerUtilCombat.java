@@ -17,14 +17,10 @@
  */
 package forge.ai;
 
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -49,6 +45,9 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
+
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -861,9 +860,12 @@ public class ComputerUtilCombat {
     public static int predictPowerBonusOfBlocker(final Card attacker, final Card blocker, boolean withoutAbilities) {
         int power = 0;
 
+        // Apparently, Flanking is predicted below from a trigger, so using the code below results in double
+        // application of power bonus. A bit more testing may be needed though, so commenting out for now.
+        /*
         if (attacker.hasKeyword("Flanking") && !blocker.hasKeyword("Flanking")) {
             power -= attacker.getAmountOfKeyword("Flanking");
-        }
+        }*/
         
         // Serene Master switches power with attacker
         if (blocker.getName().equals("Serene Master")) {
