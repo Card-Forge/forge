@@ -18,20 +18,18 @@
 
 package forge.item;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Function;
-
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.item.generation.BoosterGenerator;
 import forge.util.TextUtil;
 import forge.util.storage.StorageReaderFile;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FatPack extends BoxedProduct {
     public static final Function<CardEdition, FatPack> FN_FROM_SET = new Function<CardEdition, FatPack>() {
@@ -57,7 +55,10 @@ public class FatPack extends BoxedProduct {
 
     @Override
     public final String getItemType() {
-        return "Fat Pack";
+        boolean isBundle = StaticData.instance().getEditions().get(fpData.getEdition()).getDate().getTime() >=
+                StaticData.instance().getEditions().get("KLD").getDate().getTime();
+
+        return isBundle ? "Bundle" : "Fat Pack";
     }
     
     @Override
