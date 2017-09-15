@@ -228,6 +228,7 @@ Thalakos:Thalakoses
 Thopter:Thopters
 Thrull:Thrulls
 Treefolk:Treefolks
+Trilobite:Trilobites
 Triskelavite:Triskelavites
 Troll:Trolls
 Turtle:Turtles
