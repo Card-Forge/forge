@@ -1,0 +1,10 @@
+Name:Fleet Swallower
+ManaCost:5 U U
+Types:Creature Fish
+PT:6/6
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME attacks, target player puts the top half of his or her library, rounded up, into his or her graveyard.
+SVar:TrigMill:DB$ Mill | NumCards$ X | References$ X | ValidTgts$ Player | TgtPrompt$ Select target player
+SVar:X:TargetedPlayer$CardsInLibrary/HalfUp
+SVar:HasAttackEffect:TRUE 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fleet_swallower.jpg
+Oracle:Whenever Fleet Swallower attacks, target player puts the top half of his or her library, rounded up, into his or her graveyard.

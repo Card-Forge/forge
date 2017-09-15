@@ -17215,6 +17215,7 @@ forge-gui/res/cardsfolder/u/utvara_scalper.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/u/uyo_silent_prophet.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/upcoming/adanto_vanguard.txt -text
 forge-gui/res/cardsfolder/upcoming/admiral_beckett_brass.txt -text
+forge-gui/res/cardsfolder/upcoming/ancient_brontodon.txt -text
 forge-gui/res/cardsfolder/upcoming/angraths_marauders.txt -text
 forge-gui/res/cardsfolder/upcoming/arcane_adaptation.txt -text
 forge-gui/res/cardsfolder/upcoming/arguels_blood_fast_temple_of_aclazotz.txt -text
@@ -17262,6 +17263,7 @@ forge-gui/res/cardsfolder/upcoming/entrancing_melody.txt -text
 forge-gui/res/cardsfolder/upcoming/fathom_fleet_captain.txt -text
 forge-gui/res/cardsfolder/upcoming/fell_flagship.txt -text
 forge-gui/res/cardsfolder/upcoming/field_of_ruin.txt -text
+forge-gui/res/cardsfolder/upcoming/fleet_swallower.txt -text
 forge-gui/res/cardsfolder/upcoming/gishath_suns_avatar.txt -text
 forge-gui/res/cardsfolder/upcoming/goring_ceratops.txt -text
 forge-gui/res/cardsfolder/upcoming/grasping_current.txt -text
@@ -17288,6 +17290,7 @@ forge-gui/res/cardsfolder/upcoming/legion_conquistador.txt -text
 forge-gui/res/cardsfolder/upcoming/legions_landing_adanto_the_first_fort.txt -text
 forge-gui/res/cardsfolder/upcoming/lightning_rig_crew.txt -text
 forge-gui/res/cardsfolder/upcoming/lookouts_dispersal.txt -text
+forge-gui/res/cardsfolder/upcoming/looming_altisaur.txt -text
 forge-gui/res/cardsfolder/upcoming/lurking_chupacabra.txt -text
 forge-gui/res/cardsfolder/upcoming/makeshift_munitions.txt -text
 forge-gui/res/cardsfolder/upcoming/marauding_looter.txt -text
@@ -17337,6 +17340,7 @@ forge-gui/res/cardsfolder/upcoming/sleek_schooner.txt -text
 forge-gui/res/cardsfolder/upcoming/snapping_sailback.txt -text
 forge-gui/res/cardsfolder/upcoming/sorcerous_spyglass.txt -text
 forge-gui/res/cardsfolder/upcoming/spell_swindle.txt -text
+forge-gui/res/cardsfolder/upcoming/spike_tailed_ceratops.txt -text
 forge-gui/res/cardsfolder/upcoming/star_of_extinction.txt -text
 forge-gui/res/cardsfolder/upcoming/storm_fleet_aerialist.txt -text
 forge-gui/res/cardsfolder/upcoming/storm_fleet_arsonist.txt -text
