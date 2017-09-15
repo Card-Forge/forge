@@ -3,8 +3,9 @@ ManaCost:4 G
 Types:Creature Plant Hydra
 PT:0/2
 K:Defender
-T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigCopy | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME is dealt damage, you may create a token that's a copy of Sprouting CARDNAME.
-SVar:TrigCopy:AB$CopyPermanent | Cost$ 0 | Defined$ Self
+T:Mode$ DamageDone | CombatDamage$ False | ValidTarget$ Card.Self | Execute$ TrigCopy | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME is dealt damage, you may create a token that's a copy of Sprouting CARDNAME.
+T:Mode$ CombatDamageDoneOnce | Secondary$ True | ValidTarget$ Card.Self | Execute$ TrigCopy | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME is dealt damage, you may create a token that's a copy of Sprouting CARDNAME.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ Self
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sprouting_phytohydra.jpg
 Oracle:Defender (This creature can't attack.)\nWhenever Sprouting Phytohydra is dealt damage, you may create a token that's a copy of Sprouting Phytohydra.

@@ -2,8 +2,9 @@ Name:Mogg Maniac
 ManaCost:1 R
 Types:Creature Goblin
 PT:1/1
-T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to target opponent.
-SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ X | References$ X
+T:Mode$ DamageDone | CombatDamage$ False | ValidTarget$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to target opponent.
+T:Mode$ CombatDamageDoneOnce | Secondary$ True | ValidTarget$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to target opponent.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_maniac.jpg

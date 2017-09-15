@@ -3,8 +3,8 @@ ManaCost:W B B
 Types:Creature Spirit
 PT:0/4
 K:Defender
-T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigGain | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME is dealt combat damage, you gain that much life and attacking player loses that much life.
-SVar:TrigGain:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | SubAbility$ DBDrain
+T:Mode$ CombatDamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigGain | TriggerDescription$ Whenever CARDNAME is dealt combat damage, you gain that much life and attacking player loses that much life.
+SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBDrain
 SVar:DBDrain:DB$ LoseLife | Defined$ AttackingPlayer | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE

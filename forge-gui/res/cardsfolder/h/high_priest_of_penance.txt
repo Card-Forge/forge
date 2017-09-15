@@ -2,8 +2,9 @@ Name:High Priest of Penance
 ManaCost:W B
 Types:Creature Human Cleric
 PT:1/1
-T:Mode$ DamageDone | ValidTarget$ Card.Self | OptionalDecider$ You | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME is dealt damage, you may destroy target nonland permanent.
-SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent
+T:Mode$ DamageDone | CombatDamage$ False | ValidTarget$ Card.Self | OptionalDecider$ You | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME is dealt damage, you may destroy target nonland permanent.
+T:Mode$ CombatDamageDoneOnce | Secondary$ True | ValidTarget$ Card.Self | OptionalDecider$ You | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME is dealt damage, you may destroy target nonland permanent.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/high_priest_of_penance.jpg
 Oracle:Whenever High Priest of Penance is dealt damage, you may destroy target nonland permanent.

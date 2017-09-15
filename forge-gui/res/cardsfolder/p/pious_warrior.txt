@@ -2,8 +2,8 @@ Name:Pious Warrior
 ManaCost:3 W
 Types:Creature Human Rebel Warrior
 PT:2/3
-T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigGain | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME is dealt combat damage, you gain that much life.
-SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
+T:Mode$ CombatDamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigGain | TriggerDescription$ Whenever CARDNAME is dealt combat damage, you gain that much life.
+SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pious_warrior.jpg
