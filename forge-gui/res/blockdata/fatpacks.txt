@@ -65,3 +65,4 @@ KLD: 10 Boosters, 80 BasicLands
 AER: 10 Boosters, 80 BasicLands KLD
 AKH: 10 Boosters, 80 BasicLands
 HOU: 10 Boosters, 80 BasicLands
+XLN: 10 Boosters, 80 BasicLands
