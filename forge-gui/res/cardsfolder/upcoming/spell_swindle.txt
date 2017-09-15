@@ -2,8 +2,7 @@ Name:Spell Swindle
 ManaCost:3 U U
 Types:Instant
 A:SP$ Counter | Cost$ 3 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | RememberCounteredCMC$ True | SubAbility$ DBTreasureTokens | SpellDescription$ Counter target spell. Create X colorless Treasure artifact tokens, where X is that spell's converted mana cost. They have "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
-# TODO: How many Treasure tokens are there? (with different art)
-SVar:DBTreasureTokens:DB$ Token | TokenAmount$ X | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAbilities$ ABTreasureMana | TokenAltImages$ c_treasure2,c_treasure3 | References$ X | SubAbility$ DBCleanup
+SVar:DBTreasureTokens:DB$ Token | TokenAmount$ X | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAbilities$ ABTreasureMana | TokenAltImages$ c_treasure2,c_treasure3,c_treasure4 | References$ X | SubAbility$ DBCleanup
 SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedNumber
