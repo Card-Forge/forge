@@ -207,6 +207,26 @@ public class SpecialCardAi {
         }
     }
 
+    // Deathgorge Scavenger
+    public static class DeathgorgeScavenger {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            final Card worstCreat = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES));
+            final Card worstNonCreat = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), Predicates.not(CardPredicates.Presets.CREATURES)));
+
+            sa.resetTargets();
+            if (worstCreat != null && ai.getLife() <= ai.getStartingLife() / 4) {
+                sa.getTargets().add(worstCreat);
+            } else if (worstNonCreat != null && ai.getGame().getCombat() != null
+                    && ai.getGame().getCombat().isAttacking(sa.getHostCard())) {
+                sa.getTargets().add(worstNonCreat);
+            } else if (worstCreat != null) {
+                sa.getTargets().add(worstCreat);
+            }
+
+            return sa.getTargets().getNumTargeted() > 0;
+        }
+    }
+
     // Desecration Demon
     public static class DesecrationDemon {
         private static final int demonSacThreshold = Integer.MAX_VALUE; // if we're in dire conditions, sac everything from worst to best hoping to find an answer
