@@ -64,6 +64,19 @@ public class SetStateAi extends SpellAbilityAi {
     }
 
     @Override
+    protected boolean checkAiLogic(final Player aiPlayer, final SpellAbility sa, final String aiLogic) {
+        final Card source = sa.getHostCard();
+
+        if (aiLogic.equals("CheckCondition")) {
+            SpellAbility saCopy = sa.copy();
+            saCopy.setActivatingPlayer(aiPlayer);
+            return saCopy.getConditions().areMet(saCopy);
+        }
+
+        return super.checkAiLogic(aiPlayer, sa, aiLogic);
+    }
+
+    @Override
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         // Gross generalization, but this always considers alternate
         // states more powerful
