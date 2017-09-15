@@ -286,7 +286,7 @@ MciCode=xln
 277 L Forest
 278 L Forest
 279 L Forest
-280 M Jace, Ingenious Mind-mage
+280 M Jace, Ingenious Mind-Mage
 281 C Castaway's Despair
 282 R Grasping Current
 283 U Jace's Sentinel
