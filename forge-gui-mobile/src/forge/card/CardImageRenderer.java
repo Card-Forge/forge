@@ -3,6 +3,7 @@ package forge.card;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import org.apache.commons.lang3.StringUtils;
@@ -327,18 +328,12 @@ public class CardImageRenderer {
 
     public static void drawZoom(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h, float dispW, float dispH, boolean isCurrentCard) {
         final Texture image = ImageCache.getImage(card.getState(altState).getImageKey(MatchController.instance.getLocalPlayers()), true);
-        ForgePreferences prefs = new ForgePreferences();
-        //rotate plane or phenomenon...
-        boolean rotateZoomDisplay = prefs != null
-                && prefs.getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
-                && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane());
-        boolean hideEffectCardImage = prefs != null
-                && prefs.getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_IMAGES_EFFECT_CARDS);
         if (image == null) { //draw details if can't draw zoom
             drawDetails(g, card, gameView, altState, x, y, w, h);
             return;
         }
-        if(card.isToken() && card.getCurrentState().getType().hasSubtype("Effect") && hideEffectCardImage){
+        if(card.isToken() && card.getCurrentState().getType().hasSubtype("Effect")
+                && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_IMAGES_EFFECT_CARDS)){
             drawDetails(g, card, gameView, altState, x, y, w, h);
             return;
         }
@@ -351,7 +346,8 @@ public class CardImageRenderer {
             float new_h = h*wh_Adj;
             float new_x = ForgeConstants.isGdxPortLandscape && isCurrentCard ? (dispW - new_w) / 2:x;
             float new_y = ForgeConstants.isGdxPortLandscape && isCurrentCard ? (dispH - new_h) / 2:y;
-            if(rotateZoomDisplay)
+            if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
+                    && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane()))
                 g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
             else
                 g.drawImage(image, x, y, w, h);

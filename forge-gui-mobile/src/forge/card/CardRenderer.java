@@ -364,19 +364,14 @@ public class CardRenderer {
     }
 
     public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate) {
-        ForgePreferences prefs = new ForgePreferences();
-        //rotate plane or phenomenon...
-        boolean rotateDisplay = prefs != null
-                && prefs.getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
-                && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane());
-
         Texture image = ImageCache.getImage(card);
         if (image != null) {
             if (image == ImageCache.defaultImage) {
                 CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos);
             }
             else {
-                if(rotateDisplay && rotate)
+                if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
+                        && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane()) && rotate)
                     g.drawRotatedImage(image, x, y, w, h, x + w / 2, y + h / 2, -90);
                 else
                     g.drawImage(image, x, y, w, h);
