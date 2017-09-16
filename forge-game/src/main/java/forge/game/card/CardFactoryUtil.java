@@ -138,7 +138,7 @@ public class CardFactoryUtil {
         costDesc = costDesc.substring(0, costDesc.length() - 2);
 
         if (!cost.isOnlyManaCost()) {
-            costDesc = "- " + costDesc;
+            costDesc = "—" + costDesc;
         }
 
         String ab = "ST$ SetState | Cost$ " + costStr + " | CostDesc$ Morph " + costDesc
@@ -2325,7 +2325,7 @@ public class CardFactoryUtil {
                 abilityStr.append("| PrecostDesc$ Fortify ");
                 Cost cost = new Cost(equipCost, true);
                 if (!cost.isOnlyManaCost()) { //Something other than a mana cost
-                    abilityStr.append("- ");
+                    abilityStr.append("—");
                 }
                 abilityStr.append("| CostDesc$ " + cost.toSimpleString() + " ");
                 abilityStr.append("| SpellDescription$ (" + cost.toSimpleString() + ": Attach to target land you control. Fortify only as a sorcery.)");
@@ -2604,7 +2604,7 @@ public class CardFactoryUtil {
             String costDesc = cost.toSimpleString();
 
             if (!cost.isOnlyManaCost()) {
-                costDesc = "- " + costDesc;
+                costDesc = "—" + costDesc;
             }
 
             String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield " +
@@ -3773,7 +3773,7 @@ public class CardFactoryUtil {
             abilityStr.append("| PrecostDesc$ Equip ");
             Cost cost = new Cost(equipCost, true);
             if (!cost.isOnlyManaCost()) { //Something other than a mana cost
-                abilityStr.append("- ");
+                abilityStr.append("—");
             }
             abilityStr.append("| CostDesc$ " + cost.toSimpleString() + " ");
             abilityStr.append("| SpellDescription$ (" + cost.toSimpleString() + ": Attach to target creature you control. Equip only as a sorcery.)");
@@ -3798,7 +3798,7 @@ public class CardFactoryUtil {
 
             sb.append(" | PrecostDesc$ Eternalize ");
             if (!cost.isOnlyManaCost()) { //Something other than a mana cost
-                sb.append("- ");
+                sb.append("—");
             }
             // don't use SimpleString there because it does has "and" between cost i dont want that
             costStr = cost.toString();
@@ -3958,7 +3958,7 @@ public class CardFactoryUtil {
             abilityStr.append("| PrecostDesc$ Outlast ");
             Cost cost = new Cost(manacost, true);
             if (!cost.isOnlyManaCost()) { //Something other than a mana cost
-                abilityStr.append("- ");
+                abilityStr.append("—");
             }
             abilityStr.append("| CostDesc$ " + cost.toSimpleString() + " ");
             abilityStr.append("| SpellDescription$ (" + Keyword.getInstance(keyword).getReminderText() + ")");
@@ -4200,7 +4200,7 @@ public class CardFactoryUtil {
 
             StringBuilder sb = new StringBuilder("Escalate ");
             if (!cost.isOnlyManaCost()) {
-                sb.append("- ");
+                sb.append("—");
             }
             sb.append(cost.toSimpleString());
 
