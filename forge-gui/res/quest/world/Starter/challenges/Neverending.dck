@@ -1,7 +1,7 @@
 [quest]
 id=Neverending
 OpponentName=Neverending Assault
-AILife=80
+AILife=42
 Repeat=true
 Wins=20
 Card Reward=3 white rare;booster pack PTK;booster pack PTK
@@ -12,7 +12,7 @@ HumanExtras=
 [metadata]
 Title=Neverending Assault
 Icon=Dungeon Crawling White.jpg
-Difficulty=medium
+Difficulty=hard
 Description="Sooo...are you going to deck out or not? Make up your mind!"
 Deck Type=constructed
 Name=Neverending
