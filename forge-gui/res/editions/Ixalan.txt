@@ -206,7 +206,7 @@ Booster=10 Common:!fromSheet("XLN Planeswalker Decks and Toolkit"), 3 Uncommon:!
 195 C Jungle Delver
 196 U Kumena's Speaker
 197 U Merfolk Branchwalker
-198 U New Horizons
+198 C New Horizons
 199 R Old-Growth Dryads
 200 C Pounce
 201 U Ranging Raptors
