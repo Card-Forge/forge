@@ -18,6 +18,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -181,7 +182,20 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     if (sa.hasParam("Tribute")) {
                         String message = "Do you want to put " + counterAmount + " +1/+1 counters on " + tgtCard + " ?";
                         Player chooser = pc.chooseSingleEntityForEffect(activator.getOpponents(), sa, "Choose an opponent");
-                        if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.Tribute, message)) {
+
+                        // Check for effects like Solemnity
+                        boolean cantPayTribute = false;
+                        for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
+                            for (StaticAbility stAb : c.getStaticAbilities()) {
+                                if (stAb.getParam("AddKeyword") != null && stAb.getParam("Affected") != null
+                                        && stAb.getParam("AddKeyword").contains("CARDNAME can't have counters put on it.")
+                                        && card.isValid(stAb.getParam("Affected").split(","), activator, card, sa)) {
+                                    cantPayTribute = true;
+                                }
+                            }
+                        }
+
+                        if (!cantPayTribute && chooser.getController().confirmAction(sa, PlayerActionConfirmMode.Tribute, message)) {
                             tgtCard.setTributed(true);
                         } else {
                             continue;
