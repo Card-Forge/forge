@@ -820,7 +820,7 @@ public class Combat {
             ge.getGame().getTriggerHandler().runTrigger(TriggerType.CombatDamageDoneOnce, runParams, false);
 
             // also fire DamageDone with the same runParams but with OnlyOnce applied
-            // for triggers that are interested in such triggers
+            // for cards that are interested in such triggers
             runParams.put("IsCombatDamage", true);
             runParams.put("CombatDamageOnce", true);
             ge.getGame().getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
@@ -849,7 +849,7 @@ public class Combat {
             damageSource.getGame().getTriggerHandler().runTrigger(TriggerType.DealtCombatDamageOnce, runParams, false);
 
             // also fire DamageDone with the same runParams but with OnlyOnce applied
-            // for triggers that are interested in such triggers
+            // for cards that are interested in such triggers
             runParams.put("IsCombatDamage", true);
             runParams.put("CombatDamageOnce", true);
 
