@@ -1090,9 +1090,9 @@ public class AiController {
         });
 
         if (!playBeforeLand.isEmpty()) {
-            SpellAbility wantToPlay = chooseSpellAbilityToPlayFromList(ComputerUtilAbility.getSpellAbilities(playBeforeLand, player), false);
-            if (wantToPlay != null) {
-                return singleSpellAbilityList(wantToPlay);
+            SpellAbility wantToPlayBeforeLand = chooseSpellAbilityToPlayFromList(ComputerUtilAbility.getSpellAbilities(playBeforeLand, player), false);
+            if (wantToPlayBeforeLand != null) {
+                return singleSpellAbilityList(wantToPlayBeforeLand);
             }
         }
 
