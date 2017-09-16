@@ -689,12 +689,21 @@ public class ComputerUtilCombat {
      */
     public static boolean attackerWouldBeDestroyed(Player ai, final Card attacker, Combat combat) {
         final List<Card> blockers = combat.getBlockers(attacker);
+        int firstStrikeBlockerDmg = 0;
 
         for (final Card defender : blockers) {
             if (ComputerUtilCombat.canDestroyAttacker(ai, attacker, defender, combat, true)
                     && !(defender.hasKeyword("Wither") || defender.hasKeyword("Infect"))) {
                 return true;
             }
+            if (defender.hasKeyword("First Strike") || defender.hasKeyword("Double Strike")) {
+                firstStrikeBlockerDmg += defender.getNetCombatDamage();
+            }
+        }
+
+        // Consider first strike and double strike
+        if (attacker.hasKeyword("First Strike") || attacker.hasKeyword("Double Strike")) {
+            return firstStrikeBlockerDmg >= ComputerUtilCombat.getDamageToKill(attacker);
         }
 
         return ComputerUtilCombat.totalDamageOfBlockers(attacker, blockers) >= ComputerUtilCombat.getDamageToKill(attacker);
