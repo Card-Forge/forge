@@ -1,0 +1,8 @@
+Name:Depths of Desire
+ManaCost:2 U
+Types:Instant
+A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBTreasure | SpellDescription$ Return target creature to its owner's hand. Create a colorless Treasure token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+SVar:DBTreasure:DB$ Token | TokenAmount$ 1 | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAbilities$ ABTreasureMana | TokenAltImages$ c_treasure2,c_treasure3,c_treasure4
+SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color to your mana pool.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/depths_of_desire.jpg
+Oracle:Return target creature to its owner's hand. Create a colorless Treasure token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
