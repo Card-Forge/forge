@@ -536,6 +536,11 @@ public class AiBlockController {
         }
 
         attackersLeft = (new ArrayList<>(currentAttackers));
+    }
+
+    private void makeGangNonLethalBlocks(final Combat combat) {
+        List<Card> currentAttackers = new ArrayList<>(attackersLeft);
+        List<Card> blockers;
 
         // Try to block a Menace attacker with two blockers, neither of which will die
         for (final Card attacker : attackersLeft) {
@@ -579,7 +584,6 @@ public class AiBlockController {
         }
 
         attackersLeft = (new ArrayList<>(currentAttackers));
-
     }
 
     // Bad Trade Blocks (should only be made if life is in danger)
@@ -1168,6 +1172,10 @@ public class AiBlockController {
         if (ai.getController().isAI() && !ComputerUtilCombat.lifeInDanger(ai, combat)) {
             makeChumpBlocksToSavePW(combat);
         }
+
+        // if there are still blockers left, see if it's possible to block Menace creatures with
+        // non-lethal blockers that won't kill the attacker but won't die to it as well
+        makeGangNonLethalBlocks(combat);
 
         //Check for validity of blocks in case something slipped through
         for (Card attacker : attackers) {
