@@ -361,9 +361,9 @@ public class AiBlockController {
                 final List<Card> firstStrikeBlockers = new ArrayList<>();
                 final List<Card> blockGang = new ArrayList<>();
                 for (Card blocker : blockers) {
-                	if (ComputerUtilCombat.canDestroyBlockerBeforeFirstStrike(blocker, attacker, false)) {
-                		continue;
-                	}
+                    if (ComputerUtilCombat.canDestroyBlockerBeforeFirstStrike(blocker, attacker, false)) {
+                        continue;
+                    }
                     if (blocker.hasFirstStrike() || blocker.hasDoubleStrike()) {
                         firstStrikeBlockers.add(blocker);
                     }
@@ -457,9 +457,9 @@ public class AiBlockController {
                         // The attacker will be killed
                         && (absorbedDamage2 + absorbedDamage > attacker.getNetCombatDamage()
                         // only one blocker can be killed
-                        	|| currentValue + addedValue - 50 <= evalAttackerValue
+                        || currentValue + addedValue - 50 <= evalAttackerValue
                         // or attacker is worth more
-                        	|| (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)))
+                        || (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)))
                         // or life is in danger
                         && CombatUtil.canBlock(attacker, blocker, combat)) {
                     // this is needed for attackers that can't be blocked by
@@ -509,7 +509,7 @@ public class AiBlockController {
                             && !(damageNeeded > currentDamage + additionalDamage2 + additionalDamage3)
                             // The attacker will be killed
                             && ((absorbedDamage2 + absorbedDamage > netCombatDamage && absorbedDamage3 + absorbedDamage > netCombatDamage
-                               && absorbedDamage3 + absorbedDamage2 > netCombatDamage)
+                            && absorbedDamage3 + absorbedDamage2 > netCombatDamage)
                             // only one blocker can be killed
                             || currentValue + addedValue2 + addedValue3 - 50 <= evalAttackerValue
                             // or attacker is worth more
@@ -536,6 +536,50 @@ public class AiBlockController {
         }
 
         attackersLeft = (new ArrayList<>(currentAttackers));
+
+        // Try to block a Menace attacker with two blockers, neither of which will die
+        for (final Card attacker : attackersLeft) {
+            if (!attacker.hasKeyword("Menace") && !attacker.hasStartOfKeyword("CantBeBlockedByAmount LT2")) {
+                continue;
+            }
+
+            blockers = getPossibleBlockers(combat, attacker, blockersLeft, false);
+            List<Card> usableBlockers;
+            final List<Card> blockGang = new ArrayList<>();
+            int absorbedDamage; // The amount of damage needed to kill the first blocker
+
+            usableBlockers = CardLists.filter(blockers, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    return c.getNetToughness() > attacker.getNetCombatDamage();
+                }
+            });
+            if (usableBlockers.size() < 2) {
+                return;
+            }
+
+            final Card leader = ComputerUtilCard.getBestCreatureAI(usableBlockers);
+            blockGang.add(leader);
+            usableBlockers.remove(leader);
+            absorbedDamage = ComputerUtilCombat.getEnoughDamageToKill(leader, attacker.getNetCombatDamage(), attacker, true);
+
+            // consider a double block
+            for (final Card blocker : usableBlockers) {
+                final int absorbedDamage2 = ComputerUtilCombat.getEnoughDamageToKill(blocker, attacker.getNetCombatDamage(), attacker, true);
+                // only do it if neither blocking creature will die
+                if (absorbedDamage > attacker.getNetCombatDamage() && absorbedDamage2 > attacker.getNetCombatDamage()) {
+                    currentAttackers.remove(attacker);
+                    combat.addBlocker(attacker, blocker);
+                    if (CombatUtil.canBlock(attacker, leader, combat)) {
+                        combat.addBlocker(attacker, leader);
+                    }
+                    break;
+                }
+            }
+        }
+
+        attackersLeft = (new ArrayList<>(currentAttackers));
+
     }
 
     // Bad Trade Blocks (should only be made if life is in danger)
