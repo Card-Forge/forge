@@ -558,7 +558,7 @@ public class AiBlockController {
                 return;
             }
 
-            final Card leader = ComputerUtilCard.getBestCreatureAI(usableBlockers);
+            final Card leader = ComputerUtilCard.getWorstCreatureAI(usableBlockers);
             blockGang.add(leader);
             usableBlockers.remove(leader);
             absorbedDamage = ComputerUtilCombat.getEnoughDamageToKill(leader, attacker.getNetCombatDamage(), attacker, true);
