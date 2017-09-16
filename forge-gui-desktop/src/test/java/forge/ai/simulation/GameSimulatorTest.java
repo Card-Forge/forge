@@ -1,9 +1,6 @@
 package forge.ai.simulation;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
-
 import forge.ai.ComputerUtilAbility;
 import forge.card.CardStateName;
 import forge.card.MagicColor;
@@ -15,6 +12,8 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.List;
 
 public class GameSimulatorTest extends SimulationTestCase {
 
@@ -184,7 +183,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         GameSimulator sim = createSimulator(game, p);
         Game simGame = sim.getSimulatedGameState();
 
-        SpellAbility unmorphSA = findSAWithPrefix(ripper, "Morph - Reveal a black card");
+        SpellAbility unmorphSA = findSAWithPrefix(ripper, "Morph —Reveal a black card");
         assertNotNull(unmorphSA);
         sim.simulateSpellAbility(unmorphSA);
         assertEquals(18, simGame.getPlayers().get(0).getLife());
