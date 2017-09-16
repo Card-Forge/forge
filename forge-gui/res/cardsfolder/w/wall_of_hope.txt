@@ -3,8 +3,7 @@ ManaCost:W
 Types:Creature Wall
 PT:0/3
 K:Defender
-T:Mode$ DamageDone | CombatDamage$ False | DamageSource$ Any | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME is dealt damage, you gain that much life.
-T:Mode$ CombatDamageDoneOnce | Secondary$ True | DamageSource$ Any | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME is dealt damage, you gain that much life.
+T:Mode$ DamageDone | OnlyOnce$ True | DamageSource$ Any | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME is dealt damage, you gain that much life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE

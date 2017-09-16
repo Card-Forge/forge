@@ -3,8 +3,7 @@ ManaCost:4 U
 Types:Creature Cat Illusion
 PT:4/1
 K:Flash
-T:Mode$ DamageDone | CombatDamage$ False | Execute$ TrigDraw | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, draw that many cards.
-T:Mode$ CombatDamageDoneOnce | Secondary$ True | Execute$ TrigDraw | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, draw that many cards.
+T:Mode$ DamageDone | OnlyOnce$ True | Execute$ TrigDraw | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, draw that many cards.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE

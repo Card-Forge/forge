@@ -3,12 +3,11 @@ ManaCost:1 W
 Types:Enchantment Aura
 K:Enchant creature you control
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ Pump
-T:Mode$ DamageDone | CombatDamage$ False | ValidSource$ Card.AttachedBy | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals damage, you gain that much life.
-T:Mode$ DealtCombatDamageOnce | Secondary$ True | ValidSource$ Card.AttachedBy | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals damage, you gain that much life.
-SVar:TrigGain:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
+T:Mode$ DamageDone | OnlyOnce$ True | ValidSource$ Card.AttachedBy | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals damage, you gain that much life.
+SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
-SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredCard
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredCard
 SVar:SacMe:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_loop.jpg
 Oracle:Enchant creature you control\nWhenever enchanted creature deals damage, you gain that much life.\nWhen Spirit Loop is put into a graveyard from the battlefield, return Spirit Loop to its owner's hand.

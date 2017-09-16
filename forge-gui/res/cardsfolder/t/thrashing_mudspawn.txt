@@ -2,8 +2,7 @@ Name:Thrashing Mudspawn
 ManaCost:3 B B
 Types:Creature Beast
 PT:4/4
-T:Mode$ DamageDone | CombatDamage$ False | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME is dealt damage, you lose that much life.
-T:Mode$ CombatDamageDoneOnce | Secondary$ True | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME is dealt damage, you lose that much life.
+T:Mode$ DamageDone | OnlyOnce$ True | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME is dealt damage, you lose that much life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 K:Morph:1 B B

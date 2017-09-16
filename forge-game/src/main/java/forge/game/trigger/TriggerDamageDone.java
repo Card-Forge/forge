@@ -23,6 +23,8 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.util.Expressions;
 
+import java.util.Set;
+
 /**
  * <p>
  * Trigger_DamageDone class.
@@ -55,16 +57,63 @@ public class TriggerDamageDone extends Trigger {
         final Card src = (Card) runParams2.get("DamageSource");
         final Object tgt = runParams2.get("DamageTarget");
 
-        if (this.mapParams.containsKey("ValidSource")) {
-            if (!src.isValid(this.mapParams.get("ValidSource").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
+        // DamageDone with OnlyOnce$ True is interested in counting the damage only once, e.g. for all creatures in
+        // combat.
+        if (runParams2.containsKey("CombatDamageOnce")) {
+            if (!this.mapParams.containsKey("OnlyOnce")) {
+                // We're not interested in additional OnlyOnce triggers, only in standard DamageDone
                 return false;
+            }
+        }
+        if (this.mapParams.containsKey("OnlyOnce")) {
+            // This currently only works for combat damage. Feel free to improve.
+            if (runParams2.containsKey("IsCombatDamage") && ((Boolean) runParams2.get("IsCombatDamage")) && !runParams2.containsKey("CombatDamageOnce")) {
+                return false;
+            }
+            // Ensure that the trigger doesn't run twice if we're only interested from damage from a ValidSource or to
+            // a ValidTarget but not both (since otherwise the trigger will fire twice: once when testing the trigger
+            // from source to target(s), and once when testing it from source(s) to target
+            if (!(this.mapParams.containsKey("ValidSource") && this.mapParams.containsKey("ValidTarget"))) {
+                if (this.mapParams.containsKey("ValidSource") && src == null) {
+                    return false;
+                }
+                if (this.mapParams.containsKey("ValidTarget") && tgt == null) {
+                    return false;
+                }
+            }
+        }
+
+        if (this.mapParams.containsKey("ValidSource")) {
+            if (src != null) {
+                if (!src.isValid(this.mapParams.get("ValidSource").split(","), this.getHostCard().getController(),
+                        this.getHostCard(), null)) {
+                    return false;
+                }
+            } else if (runParams2.containsKey("DamageSources")) { // OnlyOnce$ True
+                boolean hasValidSrc = false;
+                for (Card srcs : (Set<Card>)runParams2.get("DamageSources")) {
+                    if (srcs.isValid(this.mapParams.get("ValidSource").split(","), this.getHostCard().getController(),
+                            this.getHostCard(), null)) {
+                        hasValidSrc = true;
+                    }
+                }
+                if (!hasValidSrc) { return false; }
             }
         }
 
         if (this.mapParams.containsKey("ValidTarget")) {
-            if (!matchesValid(tgt, this.mapParams.get("ValidTarget").split(","), this.getHostCard())) {
-                return false;
+            if (tgt != null) {
+                if (!matchesValid(tgt, this.mapParams.get("ValidTarget").split(","), this.getHostCard())) {
+                    return false;
+                }
+            } else if (runParams2.containsKey("DamageTargets")) { // OnlyOnce$ True
+                boolean hasValidTgt = false;
+                for (Object tgts : (Set<Card>)runParams2.get("DamageTargets")) {
+                    if (matchesValid(tgt, this.mapParams.get("ValidTarget").split(","), this.getHostCard())) {
+                        hasValidTgt = true;
+                    }
+                }
+                if (!hasValidTgt) { return false; }
             }
         }
 
@@ -118,8 +167,12 @@ public class TriggerDamageDone extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Source", CardUtil.getLKICopy((Card)this.getRunParams().get("DamageSource")));
-        sa.setTriggeringObject("Target", this.getRunParams().get("DamageTarget"));
+        if (this.getRunParams().containsKey("DamageSource")) {
+            sa.setTriggeringObject("Source", CardUtil.getLKICopy((Card) this.getRunParams().get("DamageSource")));
+        }
+        if (this.getRunParams().containsKey("DamageTarget")) {
+            sa.setTriggeringObject("Target", this.getRunParams().get("DamageTarget"));
+        }
         sa.setTriggeringObject("DamageAmount", this.getRunParams().get("DamageAmount"));
         // This parameter is here because LKI information related to combat doesn't work properly
         sa.setTriggeringObject("DefendingPlayer", this.getRunParams().get("DefendingPlayer"));
@@ -128,8 +181,12 @@ public class TriggerDamageDone extends Trigger {
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Damage Source: ").append(sa.getTriggeringObject("Source")).append(", ");
-        sb.append("Damaged: ").append(sa.getTriggeringObject("Target")).append(", ");
+        if (sa.getTriggeringObject("Source") != null) {
+            sb.append("Damage Source: ").append(sa.getTriggeringObject("Source")).append(", ");
+        }
+        if (sa.getTriggeringObject("Target") != null) {
+            sb.append("Damaged: ").append(sa.getTriggeringObject("Target")).append(", ");
+        }
         sb.append("Amount: ").append(sa.getTriggeringObject("DamageAmount"));
         return sb.toString();
     }

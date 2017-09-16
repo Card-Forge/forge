@@ -2,9 +2,8 @@ Name:Filthy Cur
 ManaCost:1 B
 Types:Creature Hound
 PT:2/2
-T:Mode$ DamageDone | CombatDamage$ False | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME is dealt damage, you lose that much life.
-T:Mode$ CombatDamageDoneOnce | Secondary$ True | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME is dealt damage, you lose that much life.
-SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
+T:Mode$ DamageDone | OnlyOnce$ True | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME is dealt damage, you lose that much life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/filthy_cur.jpg
 Oracle:Whenever Filthy Cur is dealt damage, you lose that much life.

@@ -3,8 +3,7 @@ ManaCost:1 G
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Pump
-T:Mode$ DamageDone | CombatDamage$ False | ValidTarget$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever enchanted creature is dealt damage, its controller creates that many 1/1 green Squirrel creature tokens.
-T:Mode$ CombatDamageDoneOnce | Secondary$ True | ValidTarget$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever enchanted creature is dealt damage, its controller creates that many 1/1 green Squirrel creature tokens.
+T:Mode$ DamageDone | OnlyOnce$ True | ValidTarget$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever enchanted creature is dealt damage, its controller creates that many 1/1 green Squirrel creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenName$ Squirrel | TokenTypes$ Creature,Squirrel | TokenOwner$ TriggeredTargetController | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/druids_call.jpg
