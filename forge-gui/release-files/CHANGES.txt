@@ -1,3 +1,6 @@
+- Ixalan Pre-Release -
+All 279 cards of the Ixalan set are available in this release. These cards are brand new, so expect some issues with them, and don't hesitate to report any inconsistencies and erroneous behavior that you see.
+
 - Emblem File Name Convention Change -
 Emblem token file names have been standardized (and this is a change from the previous version): instead of having "_emblem" appended to the end of the file name, now they have "emblem_" prepended to the beginning, so that instead of gideon_ally_of_zendikar_emblem.jpg, you have emblem_gideon_ally_of_zendikar.jpg. This will require you to locally rename the emblem picture files to match this new naming scheme. You can use any of the batch renaming tools available to you to simplify this task (Advanced Renamer, Unix/Linux rename, etc.). We apologize for the inconvenience.
 
