@@ -17,28 +17,14 @@
  */
 package forge.game.card;
 
-import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-
 import forge.GameCommand;
-import forge.card.CardStateName;
-import forge.card.CardType;
-import forge.card.ColorSet;
-import forge.card.ICardFace;
-import forge.card.MagicColor;
+import forge.card.*;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
@@ -58,13 +44,7 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
-import forge.game.spellability.AbilityStatic;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.OptionalCost;
-import forge.game.spellability.Spell;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityRestriction;
-import forge.game.spellability.TargetRestrictions;
+import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
@@ -74,6 +54,10 @@ import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * <p>
@@ -141,7 +125,7 @@ public class CardFactoryUtil {
             costDesc = "—" + costDesc;
         }
 
-        String ab = "ST$ SetState | Cost$ " + costStr + " | CostDesc$ Morph " + costDesc
+        String ab = "ST$ SetState | Cost$ " + costStr + " | CostDesc$ Morph" + costDesc
                 + " | MorphUp$ True"
                 + " | ConditionDefined$ Self | ConditionPresent$ Card.faceDown"
                 + " | Mode$ TurnFace | SpellDescription$ (Turn this face up any time for its morph cost.)";
@@ -2322,10 +2306,12 @@ public class CardFactoryUtil {
                 if (equipExtras != null) {
                     abilityStr.append("| ").append(equipExtras[1]).append(" ");
                 }
-                abilityStr.append("| PrecostDesc$ Fortify ");
+                abilityStr.append("| PrecostDesc$ Fortify");
                 Cost cost = new Cost(equipCost, true);
                 if (!cost.isOnlyManaCost()) { //Something other than a mana cost
                     abilityStr.append("—");
+                } else {
+                    abilityStr.append(" ");
                 }
                 abilityStr.append("| CostDesc$ " + cost.toSimpleString() + " ");
                 abilityStr.append("| SpellDescription$ (" + cost.toSimpleString() + ": Attach to target land you control. Fortify only as a sorcery.)");
@@ -3770,10 +3756,12 @@ public class CardFactoryUtil {
             if (equipExtras != null) {
                 abilityStr.append("| ").append(equipExtras[1]).append(" ");
             }
-            abilityStr.append("| PrecostDesc$ Equip ");
+            abilityStr.append("| PrecostDesc$ Equip");
             Cost cost = new Cost(equipCost, true);
             if (!cost.isOnlyManaCost()) { //Something other than a mana cost
                 abilityStr.append("—");
+            } else {
+                abilityStr.append(" ");
             }
             abilityStr.append("| CostDesc$ " + cost.toSimpleString() + " ");
             abilityStr.append("| SpellDescription$ (" + cost.toSimpleString() + ": Attach to target creature you control. Equip only as a sorcery.)");
@@ -3796,9 +3784,11 @@ public class CardFactoryUtil {
             sb.append("AB$ CopyPermanent | Cost$ ").append(costStr).append(" ExileFromGrave<1/CARDNAME>")
             .append(" | Defined$ Self | ActivationZone$ Graveyard | SorcerySpeed$ True | Eternalize$ True");
 
-            sb.append(" | PrecostDesc$ Eternalize ");
+            sb.append(" | PrecostDesc$ Eternalize");
             if (!cost.isOnlyManaCost()) { //Something other than a mana cost
                 sb.append("—");
+            } else {
+                sb.append(" ");
             }
             // don't use SimpleString there because it does has "and" between cost i dont want that
             costStr = cost.toString();
@@ -3955,10 +3945,12 @@ public class CardFactoryUtil {
             abilityStr.append(manacost);
             abilityStr.append(" T | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 ");
             abilityStr.append("| SorcerySpeed$ True | Outlast$ True ");
-            abilityStr.append("| PrecostDesc$ Outlast ");
+            abilityStr.append("| PrecostDesc$ Outlast");
             Cost cost = new Cost(manacost, true);
             if (!cost.isOnlyManaCost()) { //Something other than a mana cost
                 abilityStr.append("—");
+            } else {
+                abilityStr.append(" ");
             }
             abilityStr.append("| CostDesc$ " + cost.toSimpleString() + " ");
             abilityStr.append("| SpellDescription$ (" + Keyword.getInstance(keyword).getReminderText() + ")");
@@ -4198,9 +4190,11 @@ public class CardFactoryUtil {
             final String manacost = k[1];
             final Cost cost = new Cost(manacost, false);
 
-            StringBuilder sb = new StringBuilder("Escalate ");
+            StringBuilder sb = new StringBuilder("Escalate");
             if (!cost.isOnlyManaCost()) {
                 sb.append("—");
+            } else {
+                sb.append(" ");
             }
             sb.append(cost.toSimpleString());
 
