@@ -1,7 +1,7 @@
 Name:Gishath, Sun's Avatar
 ManaCost:5 R G W
 Types:Legendary Creature Dinosaur Avatar
-PT:7/7
+PT:7/6
 K:Trample
 K:Vigilance
 K:Haste
