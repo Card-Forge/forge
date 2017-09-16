@@ -6,7 +6,8 @@ SVar:DBRememberPirate:DB$ StoreSVar | SVar$ WasPirate | Type$ Number | Expressio
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ ParentTarget | Origin$ Battlefield | Destination$ Exile | ForgetOtherRemembered$ True | RememberChanged$ True | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | GainControl$ True | SubAbility$ DBPirateDraw
 SVar:DBPirateDraw:DB$ Draw | NumCards$ 1 | ConditionCheckSVar$ WasPirate | ConditionSVarCompare$ EQ1 | References$ WasPirate | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBReinitialize
+SVar:DBReinitialize:DB$ StoreSVar | SVar$ WasPirate | Type$ Number | Expression$ 0
 SVar:WasPirate:Number$0
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sirens_ruse.jpg
