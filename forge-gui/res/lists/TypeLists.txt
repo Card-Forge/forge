@@ -230,7 +230,6 @@ Thrull:Thrulls
 Treefolk:Treefolks
 Trilobite:Trilobites
 Triskelavite:Triskelavites
-Trilobite:Trilobites
 Troll:Trolls
 Turtle:Turtles
 Unicorn:Unicorns
