@@ -583,6 +583,7 @@ public class AiBlockController {
     }
 
     // Bad Trade Blocks (should only be made if life is in danger)
+    // Random Trade Blocks (performed randomly if enabled in profile and only when in favorable conditions)
     /**
      * <p>
      * makeTradeBlocks.
