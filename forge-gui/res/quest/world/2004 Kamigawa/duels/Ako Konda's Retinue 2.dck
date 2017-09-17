@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ako Konda's Retinue 2
+Title=Konda's Retinue
+Difficulty=medium
+Description=The hound sniffied the air and let slip a low growl. General Takeno looked down at the faithful Isamaru and calmed him with a touch. "Alert the men. The kami are coming."
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+2 Araba Mothrider|SOK
+3 Cage of Hands|CHK
+1 Eiganjo Castle|CHK
+1 Hold the Line|CHK
+2 Indebted Samurai|BOK
+3 Inner-Chamber Guard|SOK
+4 Isamaru, Hound of Konda|CHK
+2 Kitsune Blademaster|CHK
+2 Konda's Banner|CHK
+2 Konda's Hatamoto|CHK
+1 Konda, Lord of Eiganjo|CHK
+1 Mirror Gallery|BOK
+1 Nagao, Bound by Honor|CHK
+2 No-Dachi|CHK
+2 Oathkeeper, Takeno's Daisho|CHK
+1 Opal-Eye, Konda's Yojimbo|BOK
+7 Plains|CHK|1
+6 Plains|CHK|2
+8 Plains|CHK|4
+1 Reciprocate|CHK
+2 Sensei Golden-Tail|CHK
+3 Shuko|BOK
+2 Takeno, Samurai General|CHK
+1 That Which Was Taken|BOK
+1 Untaidake, the Cloud Keeper|CHK
+[Sideboard]
+

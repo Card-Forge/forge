@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Ako Black Hand 4
+Title=Black Hand
+Difficulty=very hard
+Description=Monoblack aggro Black Hand deck from GP 2005.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Distress|CHK
+4 Hand of Cruelty|SOK
+2 Ink-Eyes, Servant of Oni|BOK
+3 Kiku, Night's Flower|CHK
+4 Nezumi Cutthroat|CHK
+4 Nezumi Graverobber|CHK
+4 Ogre Marauder|BOK
+2 Razorjaw Oni|SOK
+4 Rend Flesh|CHK
+1 Shizo, Death's Storehouse|CHK
+3 Sickening Shoal|BOK
+1 Swamp|CHK|1
+10 Swamp|CHK|2
+6 Swamp|CHK|3
+3 Swamp|CHK|4
+1 Tomb of Urami|SOK
+4 Umezawa's Jitte|BOK
+[Sideboard]
+

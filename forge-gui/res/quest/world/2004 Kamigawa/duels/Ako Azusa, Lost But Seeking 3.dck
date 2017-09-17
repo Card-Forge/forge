@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Ako Azusa, Lost But Seeking 3
+Title=Heaven and Earth
+Difficulty=hard
+Description="It is true that we monks hold the key to paradise, but most don't understand that the paradise we guard is the one within." -- Diary of Azusa
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Azusa, Lost but Seeking|CHK
+2 Forest|CHK|1
+1 Forest|CHK|3
+2 Forest|CHK|4
+1 Forest|SHM|3
+3 Forest|SHM|4
+2 Gifts Ungiven|CHK
+7 Island|CHK|1
+4 Island|CHK|2
+2 Island|CHK|3
+1 Island|SHM|3
+2 Kaijin of the Vanishing Touch|BOK
+3 Kodama's Reach|CHK
+4 Manriki-Gusari|SOK
+3 Meloku the Clouded Mirror|CHK
+1 Minamo, School at Water's Edge|CHK
+2 Mirror Gallery|BOK
+1 Okina, Temple to the Grandfathers|CHK
+4 Sakashima the Impostor|SOK
+4 Sakura-Tribe Elder|CHK
+1 Seek the Horizon|SOK
+4 Shape Stealer|SOK
+2 Tenza, Godo's Maul|CHK
+1 Time of Need|CHK
+[Sideboard]
+

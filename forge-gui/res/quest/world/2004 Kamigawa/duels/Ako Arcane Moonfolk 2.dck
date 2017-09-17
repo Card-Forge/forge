@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Ako Arcane Moonfolk 2
+Title=Meloku's Procession
+Difficulty=medium
+Description=He loved his cities in the clouds. When he traveled to the lands below, he brought many reminders of his home.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+3 Evermind|SOK
+4 Eye of Nowhere|CHK
+3 Floating-Dream Zubera|CHK
+1 Gifts Ungiven|CHK
+1 Honor-Worn Shaku|CHK
+4 Island|CHK|1
+6 Island|CHK|2
+5 Island|CHK|3
+6 Island|CHK|4
+1 Keiga, the Tide Star|CHK
+2 Long-Forgotten Gohei|CHK
+3 Meloku the Clouded Mirror|CHK
+1 Minamo, School at Water's Edge|CHK
+1 Miren, the Moaning Well|SOK
+2 Mystic Restraints|CHK
+2 Patron of the Moon|BOK
+3 Reach Through Mists|CHK
+3 River Kaijin|CHK
+3 Rushing-Tide Zubera|SOK
+2 Sakashima the Impostor|SOK
+4 Shape Stealer|SOK
+1 Untaidake, the Cloud Keeper|CHK
+[Sideboard]

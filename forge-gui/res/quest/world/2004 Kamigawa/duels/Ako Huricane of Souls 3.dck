@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Ako Hurricane of Souls 3
+Title=Hurricane of Souls
+Difficulty=hard
+Description=One thorn to warn, ten thorns to defend, a hundred thorns to destroy.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+1 Arashi, the Sky Asunder|SOK
+1 Azusa, Lost but Seeking|CHK
+1 Bounteous Kirin|SOK
+4 Elder Pine of Jukai|SOK
+1 Forest|CHK|1
+7 Forest|CHK|2
+11 Forest|CHK|3
+3 Haru-Onna|SOK
+2 Kodama of the Center Tree|BOK
+3 Kodama's Might|CHK
+2 Kodama's Reach|CHK
+4 Long-Forgotten Gohei|CHK
+2 Sakura-Tribe Elder|CHK
+2 Sakura-Tribe Scout|SOK
+1 Sekki, Seasons' Guide|SOK
+2 Stampeding Serow|SOK
+2 Strength of Cedars|CHK
+1 Swamp|CHK|2
+1 Swamp|CHK|4
+2 Tendo Ice Bridge|BOK
+4 Thief of Hope|CHK
+4 Traproot Kami|BOK
+[Sideboard]
+

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Ako Michiko, Truth Seeker 3
+Title=Michiko, Truth Seeker
+Difficulty=hard
+Description="Watch over my father. Tell him I'm safe, but I won't come home until I find out how to bring him back to his senses, and Kamigawa is again at peace." --Michiko Konda, last letter to General Takeno
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Cage of Hands|CHK
+3 Candles' Glow|CHK
+4 Cloudcrest Lake|CHK
+2 Curtain of Light|SOK
+1 Eiganjo Castle|CHK
+3 Genju of the Fields|BOK
+2 Hinder|CHK
+4 Honden of Cleansing Fire|CHK
+2 Island|CHK|1
+2 Island|CHK|2
+4 Island|CHK|3
+2 Island|CHK|4
+4 Kira, Great Glass-Spinner|BOK
+1 Meishin, the Mind Cage|SOK
+4 Michiko Konda, Truth Seeker|SOK
+1 Mirror Gallery|BOK
+1 Overwhelming Intellect|SOK
+2 Plains|CHK|2
+4 Plains|CHK|3
+3 Plains|CHK|4
+4 Reciprocate|CHK
+1 Reverse the Sands|CHK
+4 Shape Stealer|SOK
+1 Untaidake, the Cloud Keeper|CHK
+[Sideboard]
+

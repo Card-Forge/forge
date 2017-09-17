@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Ako The Tale of Tobita 2
+Title=The Tale of Tobita
+Difficulty=medium
+Description=Many kami could fly, which put some warriors at a distinct disadvantage. The mages of Minamo took it upon themselves to correct that imbalance.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+1 Ayumi, the Last Visitor|SOK
+2 Dosan the Falling Leaf|CHK
+2 Forest|CHK|1
+2 Forest|CHK|3
+5 Forest|CHK|4
+4 Genju of the Cedars|BOK
+4 Guardian of Solitude|CHK
+2 Island|CHK|1
+1 Island|CHK|2
+4 Island|CHK|3
+4 Island|CHK|4
+3 Iwamori of the Open Fist|BOK
+1 Mark of Sakiko|BOK
+3 Matsu-Tribe Sniper|BOK
+1 Mikokoro, Center of the Sea|SOK
+1 Mirror Gallery|BOK
+4 Phantom Wings|BOK
+4 Sakura-Tribe Elder|CHK
+1 Seshiro the Anointed|CHK
+3 Shinen of Flight's Wings|SOK
+2 Soratami Cloud Chariot|SOK
+4 Student of Elements|CHK
+3 Tendo Ice Bridge|BOK
+[Sideboard]
+

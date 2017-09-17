@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Ako The Tale of Kenzo 2
+Title=The Tale of Kenzo
+Difficulty=medium
+Description="As I died, I rejoiced. I would see my family again. But then I woke up back on the battlefield. Back in Kamigawa. Back in hell." --Kenzo the Hardhearted
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+[Main]
+3 Blessing of Leeches|BOK
+4 Bushi Tenderfoot|CHK
+4 Commune with Nature|CHK
+1 Eiganjo Castle|CHK
+3 Empty-Shrine Kannushi|BOK
+4 Forbidden Orchard|CHK
+2 Forest|CHK|1
+2 Forest|CHK|4
+4 Hold the Line|CHK
+1 Honden of Cleansing Fire|CHK
+1 Honden of Life's Web|CHK
+1 Indomitable Will|CHK
+4 Kodama's Might|CHK
+3 Otherworldly Journey|CHK
+1 Plains|CHK|2
+5 Plains|CHK|3
+1 Plains|CHK|4
+1 Swamp|CHK|3
+4 Tallowisp|BOK
+1 Tatsumasa, the Dragon's Fang|CHK
+4 Tendo Ice Bridge|BOK
+4 Tranquil Garden|CHK
+3 Umezawa's Jitte|BOK
+[Sideboard]
+

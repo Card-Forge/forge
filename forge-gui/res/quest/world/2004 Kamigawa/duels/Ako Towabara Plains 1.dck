@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Ako Towabara Plains 1
+Title=The Towabara Plains
+Difficulty=easy
+Description="Put a spear in a peasant's hands, and you have an expandable troop. Put a purpose in his heart, and you win a warrior." -- Sensei Golden-Tail
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+3 Blinding Powder|BOK
+3 Devoted Retainer|CHK
+1 Harsh Deceiver|CHK
+1 Hold the Line|CHK
+1 Kami of Old Stone|CHK
+1 Kami of the Painted Road|CHK
+1 Kami of the Palace Fields|CHK
+1 Kataki, War's Wage|SOK
+1 Kitsune Bonesetter|SOK
+1 Kitsune Dawnblade|SOK
+3 Kitsune Healer|CHK
+4 Kitsune Loreweaver|SOK
+5 Plains|CHK|1
+6 Plains|CHK|2
+8 Plains|CHK|3
+5 Plains|CHK|4
+4 Presence of the Wise|SOK
+1 Quiet Purity|CHK
+4 Samurai of the Pale Curtain|CHK
+3 Shinen of Stars' Light|SOK
+2 Silent-Chant Zubera|CHK
+1 Takeno's Cavalry|BOK
+1 Torii Watchward|SOK
+[Sideboard]
+

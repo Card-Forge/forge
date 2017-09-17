@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Ako The Tale of Tok-Tok 2
+Title=The Tale of Tok-Tok
+Difficulty=medium
+Description=The most powerful of akki fire spells were developed at the cost of blood, soil, tears, sweat, and usually a nose or two.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+3 Akki Lavarunner|CHK
+2 Akki Underminer|CHK
+1 Dance of Shadows|CHK
+3 Ghost-Lit Raider|SOK
+4 Glacial Ray|CHK
+4 Hanabi Blast|CHK
+3 Horobi's Whisper|BOK
+2 Horobi, Death's Wail|CHK
+4 Ire of Kaminari|BOK
+2 Kami of the Waning Moon|CHK
+3 Lantern-Lit Graveyard|CHK
+1 Mikokoro, Center of the Sea|SOK
+4 Mountain|CHK|1
+2 Mountain|CHK|2
+2 Mountain|CHK|3
+2 Mountain|CHK|4
+4 Rend Flesh|CHK
+1 Shizo, Death's Storehouse|CHK
+1 Soulless Revival|CHK
+1 Swamp|CHK|1
+4 Swamp|CHK|2
+4 Swamp|CHK|4
+1 Tendo Ice Bridge|BOK
+3 Toshiro Umezawa|BOK
+[Sideboard]
+

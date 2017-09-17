@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Ako Araba Air Assault 3
+Title=Araba Air Raid
+Difficulty=hard
+Description="My finest creations are fashioned after the moths of Eiganjo. They fly higher, faster, and more gracefully than any of my own designs." -- Noboru, master kitemaker
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Araba Mothrider|SOK
+4 Cage of Hands|CHK
+1 Eiganjo Castle|CHK
+4 Indomitable Will|CHK
+1 Kami of the Honored Dead|BOK
+1 Michiko Konda, Truth Seeker|SOK
+4 Moonwing Moth|SOK
+3 Mothrider Samurai|CHK
+1 No-Dachi|CHK
+2 O-Naginata|SOK
+1 Oathkeeper, Takeno's Daisho|CHK
+3 Plains|CHK|1
+7 Plains|CHK|2
+5 Plains|CHK|3
+7 Plains|CHK|4
+4 Reciprocate|CHK
+4 Shuko|BOK
+1 Takeno, Samurai General|CHK
+1 Tatsumasa, the Dragon's Fang|CHK
+1 Untaidake, the Cloud Keeper|CHK
+2 Yosei, the Morning Star|CHK
+[Sideboard]
+

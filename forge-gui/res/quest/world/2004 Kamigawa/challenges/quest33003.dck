@@ -1,0 +1,36 @@
+[quest]
+id=33003
+OpponentName=Hidetsugu
+AILife=20
+Repeat=true
+Wins=30
+Card Reward=Tamiyo, Field Researcher;2 random rares
+Credit Reward=2000
+AIExtras=Blood Clock
+HumanExtras=Blood Clock
+[metadata]
+Name=quest33003
+Title=Pay To Play
+Difficulty=hard
+Description=Hidetsugu doesn't play with casuals.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[main]
+2 Akki Avalanchers|CHK
+4 Akki Underling|SOK
+4 Battle-Mad Ronin|CHK
+4 Flames of the Blood Hand|BOK
+4 Glacial Ray|CHK
+1 Hall of the Bandit Lord|CHK
+4 Heartless Hidetsugu|BOK
+4 Hidetsugu's Second Rite|SOK
+2 Honden of Infinite Rage|CHK
+4 Lava Spike|CHK
+5 Mountain|CHK|1
+6 Mountain|CHK|2
+5 Mountain|CHK|3
+7 Mountain|CHK|4
+1 Shinka, the Bloodsoaked Keep|CHK
+4 Zo-Zu the Punisher|CHK
+[Sideboard]
+

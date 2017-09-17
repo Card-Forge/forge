@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Ako Akki Revelry 1
+Title=Akki Revelry
+Difficulty=easy
+Description="It remains unclear whether the akki shamans could in fact create storms or merely predicted them." -- The History of Kamigawa
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+3 Akki Blizzard-Herder|BOK
+4 Akki Raider|BOK
+3 Barrel Down Sokenzan|SOK
+3 Blood Clock|SOK
+4 Crack the Earth|BOK
+4 Ember-Fist Zubera|CHK
+4 Gods' Eye, Gate to the Reikai|BOK
+2 Honden of Infinite Rage|CHK
+3 Honor-Worn Shaku|CHK
+2 Lava Spike|CHK
+8 Mountain|CHK|1
+6 Mountain|CHK|2
+2 Mountain|CHK|3
+4 Mountain|CHK|4
+1 Patron of the Akki|BOK
+4 Stone Rain|CHK
+3 Thoughts of Ruin|SOK
+1 Untaidake, the Cloud Keeper|CHK
+[Sideboard]
+

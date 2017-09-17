@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Ako Kamigawa White Weenie 4
+Title=Kamigawa White Weenie
+Difficulty=very hard
+Description=A classic White Weenie deck from the Kamigawa block.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Cage of Hands|CHK
+2 Charge Across the Araba|SOK
+1 Eiganjo Castle|CHK
+4 Hand of Honor|SOK
+3 Hokori, Dust Drinker|BOK
+3 Isamaru, Hound of Konda|CHK
+4 Kitsune Blademaster|CHK
+4 Lantern Kami|CHK
+3 Manriki-Gusari|SOK
+4 Otherworldly Journey|CHK
+3 Plains|CHK|1
+9 Plains|CHK|2
+5 Plains|CHK|3
+4 Plains|CHK|4
+4 Samurai of the Pale Curtain|CHK
+4 Umezawa's Jitte|BOK
+[Sideboard]
+

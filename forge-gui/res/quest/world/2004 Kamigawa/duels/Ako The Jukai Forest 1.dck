@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Ako The Jukai Forest 1
+Title=The Jukai Forest
+Difficulty=easy
+Description=Jukai Forest was known for its secrets, which drew in many wayfarers and wizards. But it was those same secrets that kept most of those seekers from ever being heard from again.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+1 Ayumi, the Last Visitor|SOK
+2 Dense Canopy|SOK
+2 Dosan the Falling Leaf|CHK
+4 Dripping-Tongue Zubera|CHK
+3 Forest|CHK|1
+5 Forest|CHK|2
+7 Forest|CHK|3
+8 Forest|CHK|4
+1 Forest|ROE|4
+2 Ghost-Lit Nourisher|SOK
+1 Glimpse of Nature|CHK
+4 Hana Kami|CHK
+2 Heartbeat of Spring|CHK
+4 Humble Budoka|CHK
+4 Jukai Messenger|CHK
+2 Kami of the Hunt|CHK
+2 Kashi-Tribe Reaver|CHK
+1 Kashi-Tribe Warriors|CHK
+4 Lifegift|BOK
+1 Seek the Horizon|SOK
+1 Uproot|BOK
+[Sideboard]
+

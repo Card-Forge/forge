@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Ako Mono Blue Control 4
+Title=Mono Blue Control
+Difficulty=very hard
+Description=Kamigawa monoblue control, winner of GP 2005.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+3 Azami, Lady of Scrolls|CHK
+3 Consuming Vortex|CHK
+4 Hinder|CHK
+6 Island|CHK|1
+4 Island|CHK|2
+4 Island|CHK|3
+7 Island|CHK|4
+4 Jushi Apprentice|CHK
+4 Keiga, the Tide Star|CHK
+3 Kira, Great Glass-Spinner|BOK
+3 Meloku the Clouded Mirror|CHK
+1 Mikokoro, Center of the Sea|SOK
+2 Minamo Scrollkeeper|SOK
+1 Minamo, School at Water's Edge|CHK
+1 Miren, the Moaning Well|SOK
+1 Oboro, Palace in the Clouds|SOK
+2 Oppressive Will|SOK
+4 Quash|BOK
+3 Threads of Disloyalty|BOK
+[Sideboard]
+

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Ako Spiritcrack 2
+Title=Spiritcrack
+Difficulty=hard
+Description="As the war progressed, the destruction the kami caused became more widespread and less predictable." -- Observations of the Kami War
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Akki Blizzard-Herder|BOK
+2 Baku Altar|BOK
+3 Cage of Hands|CHK
+2 Clash of Realities|BOK
+3 Cowed by Wisdom|SOK
+4 Crack the Earth|BOK
+4 Glacial Ray|CHK
+3 Gods' Eye, Gate to the Reikai|BOK
+2 Journeyer's Kite|CHK
+1 Kiki-Jiki, Mirror Breaker|CHK
+7 Mountain|CHK|1
+2 Mountain|CHK|3
+1 Myojin of Infinite Rage|CHK
+3 Plains|CHK|1
+1 Plains|CHK|2
+1 Plains|CHK|3
+4 Plains|CHK|4
+2 Promise of Bunrei|SOK
+4 Spiritual Visit|SOK
+3 Tallowisp|BOK
+4 Tendo Ice Bridge|BOK
+1 Thoughts of Ruin|SOK
+[Sideboard]
+

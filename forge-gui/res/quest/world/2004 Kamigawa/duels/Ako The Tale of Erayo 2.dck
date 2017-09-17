@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Ako The Tale of Erayo 2
+Title=The Tale of Erayo
+Difficulty=medium
+Description="Wisdom is not the counting of all the drops in the waterfall. Wisom is learning why the water seeks the earth."
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Dreamcatcher|SOK
+4 Erayo, Soratami Ascendant|SOK
+2 Eternal Dominion|SOK
+4 Genju of the Falls|BOK
+6 Island|CHK|1
+6 Island|CHK|2
+6 Island|CHK|3
+1 Island|CHK|4
+1 Island|SOM|2
+3 Kaijin of the Vanishing Touch|BOK
+1 Mikokoro, Center of the Sea|SOK
+1 Minamo, School at Water's Edge|CHK
+1 Myojin of Seeing Winds|CHK
+4 Reach Through Mists|CHK
+4 Sensei's Divining Top|CHK
+4 Shuko|BOK
+1 Sire of the Storm|CHK
+4 Trusted Advisor|SOK
+4 Wandering Ones|CHK
+[Sideboard]
+

@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Ako Sokenzan Mountain Range 1
+Title=The Sokenzan Mountain Range
+Difficulty=easy
+Description="We camped near the Sokenzan Mountains. Though I know its inhabitants are sparse, I hear cries coming from the highest peaks every night, as if the mountains themselves bellow for vengeance." -- Lost Battalion, message to General Takeno
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+3 Battle-Mad Ronin|CHK
+4 Genju of the Spires|BOK
+2 Glitterfang|SOK
+4 Goblin Cohort|BOK
+2 Godo's Irregulars|SOK
+6 Mountain|CHK|1
+3 Mountain|CHK|2
+6 Mountain|CHK|3
+9 Mountain|CHK|4
+1 Ogre Recluse|BOK
+4 Path of Anger's Flame|SOK
+3 Ronin Houndmaster|CHK
+4 Shinen of Fury's Fire|SOK
+1 Shinka, the Bloodsoaked Keep|CHK
+3 Sokenzan Renegade|SOK
+3 Tide of War|CHK
+3 Yuki-Onna|SOK
+[Sideboard]
+

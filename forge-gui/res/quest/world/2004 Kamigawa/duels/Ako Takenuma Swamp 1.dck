@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Ako Takenuma Swamp 1
+Title=The Takenuma Swamp
+Difficulty=easy
+Description="Although nowhere on Kamigawa was safe during the war, the Takenuma Swamp was the most horrifying. The rotting bamboo itself rebelled against its mortal inhabitants, pulling them into unmarked graves." -- Observations of the Kami War
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Ashen-Skin Zubera|CHK
+1 Cursed Ronin|CHK
+1 Deathcurse Ogre|CHK
+3 Deathmask Nezumi|SOK
+4 Gnat Miser|SOK
+1 Hired Muscle|BOK
+2 Honden of Night's Reach|CHK
+1 Kami of Lunacy|CHK
+3 Kami of the Waning Moon|CHK
+1 Kemuri-Onna|SOK
+2 Kuro's Taken|SOK
+1 Locust Miser|SOK
+4 Numai Outcast|CHK
+1 Pain's Reward|SOK
+2 Raving Oni-Slave|SOK
+3 Rend Flesh|CHK
+2 Skullmane Baku|BOK
+7 Swamp|CHK|1
+9 Swamp|CHK|2
+4 Swamp|CHK|3
+5 Swamp|CHK|4
+[Sideboard]
+

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Ako The Tale of Sasaya 2
+Title=The Tale of Sasaya
+Difficulty=medium
+Description="Without the kami to speak to nature on our behalf, we must beg help from nature directly."
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+4 Elder Pine of Jukai|SOK
+4 Forest|CHK|1
+5 Forest|CHK|3
+4 Forest|CHK|4
+2 Hana Kami|CHK
+1 Iname as One|SOK
+1 Island|CHK|1
+1 Island|CHK|3
+1 Island|CHK|4
+4 Kodama's Reach|CHK
+1 Kuro, Pitlord|CHK
+1 Maga, Traitor to Mortals|SOK
+4 Meloku the Clouded Mirror|CHK
+1 Mikokoro, Center of the Sea|SOK
+1 Myojin of Night's Reach|CHK
+2 Sakura-Tribe Elder|CHK
+2 Sasaya, Orochi Ascendant|SOK
+4 Seek the Horizon|SOK
+1 Shizuko, Caller of Autumn|BOK
+4 Swallowing Plague|CHK
+1 Swamp|CHK|1
+1 Swamp|CHK|2
+4 Swamp|CHK|3
+2 Time of Need|CHK
+2 Traproot Kami|BOK
+2 Waterveil Cavern|CHK
+[Sideboard]
+
