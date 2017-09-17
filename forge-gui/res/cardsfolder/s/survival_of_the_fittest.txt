@@ -4,5 +4,7 @@ Types:Enchantment
 A:AB$ ChangeZone | Cost$ G Discard<1/Creature> | Origin$ Library | Destination$ Hand | ChangeType$ Creature | ChangeNum$ 1 | AILogic$ SurvivalOfTheFittest | SpellDescription$ Search your library for a Creature card and put it into your hand. Then shuffle your library.
 SVar:RemRandomDeck:True
 SVar:AIPreference:DiscardCost$Special:SurvivalOfTheFittest
+SVar:NeedsToPlayVar:Z EQ0
+SVar:Z:Count$Valid Card.YouCtrl+namedSurvival of the Fittest+inZoneBattlefield
 SVar:Picture:http://www.wizards.com/global/images/magic/general/survival_of_the_fittest.jpg
 Oracle:{G}, Discard a creature card: Search your library for a creature card, reveal that card, and put it into your hand. Then shuffle your library.
