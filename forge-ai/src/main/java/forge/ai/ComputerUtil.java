@@ -2736,4 +2736,21 @@ public class ComputerUtil {
 
         return count;
     }
+
+    public static boolean isPlayingReanimator(final Player ai) {
+        CardCollectionView inHand = ai.getCardsIn(ZoneType.Hand);
+        CardCollectionView inDeck = ai.getCardsIn(new ZoneType[] {ZoneType.Hand, ZoneType.Library});
+
+        Predicate<Card> markedAsReanimator = new Predicate<Card>() {
+            @Override
+            public boolean apply(Card card) {
+                return "true".equalsIgnoreCase(card.getSVar("IsReanimatorCard"));
+            }
+        };
+
+        int numInHand = CardLists.filter(inHand, markedAsReanimator).size();
+        int numInDeck = CardLists.filter(inDeck, markedAsReanimator).size();
+
+        return numInHand > 0 || numInDeck >= 3;
+    }
 }
