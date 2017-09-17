@@ -1176,7 +1176,8 @@ public class AiController {
                     Map<String, String> params = t.getMapParams();
                     if ("ChangesZone".equals(params.get("Mode"))
                             && params.containsKey("ValidCard")
-                            && ((params.get("ValidCard").contains("Land")) || (params.get("ValidCard").contains("Permanent")) && !params.get("ValidCard").contains("nonLand"))
+                            && !params.get("ValidCard").contains("nonLand")
+                            && ((params.get("ValidCard").contains("Land")) || (params.get("ValidCard").contains("Permanent")))
                             && "Battlefield".equals(params.get("Destination"))) {
                         // Landfall and other similar triggers
                         return true;
