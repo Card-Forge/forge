@@ -151,4 +151,4 @@ CONSERVATIVE_ENERGY_PAYMENT_ONLY_DEFENSIVELY=false
 # -- Experimental feature toggles which only exist until the testing procedure for the relevant --
 # -- features is over. These toggles will be removed later, or may be reintroduced under a --
 # -- different name if necessary --
-EXPERIMENTAL_AVOID_ST_ATK_BONUS_2X_COUNT=true
+# <-- There are currently no experimental options here -->

@@ -83,17 +83,10 @@ public class AiBlockController {
     private List<Card> getSafeBlockers(final Combat combat, final Card attacker, final List<Card> blockersLeft) {
         final List<Card> blockers = new ArrayList<>();
 
-        // -- Experimental feature in testing (set withoutAttackerStaticAbilities to "true" after extensive testing --
-        // -- and remove the following block of conditional code and the related AI profile preference) --
-        // -- We don't check attacker static abilities at this point since the attackers have already attacked and, thus, --
-        // -- their P/T modifiers are active and are counted as a part of getNetPower/getNetToughness --
-        boolean withoutStAbs = false;
-        if (ai.getController().isAI()) {
-            withoutStAbs = ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.EXPERIMENTAL_AVOID_ST_ATK_BONUS_2X_COUNT);
-        }
-
+        // We don't check attacker static abilities at this point since the attackers have already attacked and, thus,
+        // their P/T modifiers are active and are counted as a part of getNetPower/getNetToughness
         for (final Card b : blockersLeft) {
-            if (!ComputerUtilCombat.canDestroyBlocker(ai, b, attacker, combat, false, withoutStAbs)) {
+            if (!ComputerUtilCombat.canDestroyBlocker(ai, b, attacker, combat, false, true)) {
                 blockers.add(b);
             }
         }
@@ -105,17 +98,10 @@ public class AiBlockController {
     private List<Card> getKillingBlockers(final Combat combat, final Card attacker, final List<Card> blockersLeft) {
         final List<Card> blockers = new ArrayList<>();
 
-        // -- Experimental feature in testing (set withoutAttackerStaticAbilities to "true" after extensive testing --
-        // -- and remove the following block of conditional code and the related AI profile preference) --
-        // -- We don't check attacker static abilities at this point since the attackers have already attacked and, thus, --
-        // -- their P/T modifiers are active and are counted as a part of getNetPower/getNetToughness --
-        boolean withoutStAbs = false;
-        if (ai.getController().isAI()) {
-            withoutStAbs = ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.EXPERIMENTAL_AVOID_ST_ATK_BONUS_2X_COUNT);
-        }
-
+        // We don't check attacker static abilities at this point since the attackers have already attacked and, thus,
+        // their P/T modifiers are active and are counted as a part of getNetPower/getNetToughness
         for (final Card b : blockersLeft) {
-            if (ComputerUtilCombat.canDestroyAttacker(ai, attacker, b, combat, false, withoutStAbs)) {
+            if (ComputerUtilCombat.canDestroyAttacker(ai, attacker, b, combat, false, true)) {
                 blockers.add(b);
             }
         }
