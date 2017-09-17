@@ -1143,12 +1143,14 @@ public class AiController {
         int predictedMana = ComputerUtilMana.getAvailableManaEstimate(player, true);
 
         boolean canCastWithLandDrop = (predictedMana + 1 >= minCMCInHand) && !isTapLand;
+        boolean cantCastAnythingNow = predictedMana < minCMCInHand;
 
         boolean hasRelevantAbsOTB = !CardLists.filter(otb, new Predicate<Card>() {
             @Override
             public boolean apply(Card card) {
                 boolean isTapLand = false;
                 for (ReplacementEffect repl : card.getReplacementEffects()) {
+                    // TODO: improve the detection of taplands
                     if (repl.getParamOrDefault("Description", "").equals("CARDNAME enters the battlefield tapped.")) {
                         isTapLand = true;
                     }
@@ -1177,7 +1179,6 @@ public class AiController {
                             && ((params.get("ValidCard").contains("Land")) || (params.get("ValidCard").contains("Permanent")) && !params.get("ValidCard").contains("nonLand"))
                             && "Battlefield".equals(params.get("Destination"))) {
                         // Landfall and other similar triggers
-                        System.out.println("LANDFALL: " + card);
                         return true;
                     }
                 }
@@ -1185,7 +1186,8 @@ public class AiController {
             }
         }).isEmpty();
 
-        if (!canCastWithLandDrop && !hasLandfall && (!hasRelevantAbsOTB || isTapLand)) {
+        // TODO: add prediction for effects that will untap a tapland as it enters the battlefield
+        if (!canCastWithLandDrop && cantCastAnythingNow && !hasLandfall && (!hasRelevantAbsOTB || isTapLand)) {
             // Hopefully there's not much to do with the extra mana immediately, can wait for Main 2
             return true;
         }
