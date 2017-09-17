@@ -26,6 +26,9 @@ This release features a new quest world designed by Seravy, called "The Gates of
 This release features a new quest world designed by Xyx, called "The Three Kingdoms", based on the set Portal: Three Kingdoms and consisting of 52 duels and 13 challenges. Here's the author's description of the world:
 The story of Portal Three Kingdoms retells the Three Kingdoms period of Chinese history, a romanticized version of events that unfolded in third and fourth century China. The set was specifically designed to introduce Magic to the Asian market and was not sold in North America. The artwork was produced entirely by Chinese artists in order to give it an authentic feel. It is arguably the strongest flavored set in all of Magic. In this world you will get to meet famous heroes, re-enact historical battles, and finally block a creature with horsemanship!
 
+- New Quest World: Kamigawa -
+This release features a new quest world designed by daitokujibiko, called "Kamigawa" and based on the block of the same name. This world contains 37 duels and 5 challenges built from all three Kamigawa sets, all tested by the author of the quest world.
+
 - AI improvements -
 The AI has learned some new tricks in this version of the game. You may witness some new, hopefully unexpected and fun twists in the behavior of your computer opponents.
 
