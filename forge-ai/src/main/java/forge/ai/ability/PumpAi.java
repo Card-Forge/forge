@@ -801,7 +801,11 @@ public class PumpAi extends PumpAiBase {
                 final boolean defTappedOut = ComputerUtilMana.getAvailableManaEstimate(defPlayer) == 0;
 
                 final boolean isInfect = source.hasKeyword("Infect"); // Flesh-Eater Imp
-                final int lethalDmg = isInfect ? 10 - defPlayer.getPoisonCounters() : defPlayer.getLife();
+                int lethalDmg = isInfect ? 10 - defPlayer.getPoisonCounters() : defPlayer.getLife();
+
+                if (isInfect && !combat.getDefenderByAttacker(source).canReceiveCounters(CounterType.POISON)) {
+                    lethalDmg = Integer.MAX_VALUE; // won't be able to deal poison damage to kill the opponent
+                }
 
                 final int numCreatsToSac = (lethalDmg - source.getNetCombatDamage()) / powerBonus;
 
