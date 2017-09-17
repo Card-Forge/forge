@@ -44,7 +44,7 @@ public class DigUntilAi extends SpellAbilityAi {
             }
             if (!CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS_PRODUCING_MANA).isEmpty()
                 || ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
-                // Either we already have a mana-producing land in hand, or we can mana-lock ourself, so bail
+                // Either we already have a mana-producing land in hand, or we can mana-lock ourselves, so bail
                 return false;
             }
         }
