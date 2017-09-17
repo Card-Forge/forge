@@ -1117,11 +1117,11 @@ public class AiController {
     }
 
     private boolean isSafeToHoldLandDropForMain2(Card landToPlay) {
-        if (!getBooleanProperty(AiProps.HOLD_LAND_DROP_FOR_MAIN2_IF_UNUSED)) {
-            // the AI profile specifies that this option should not be used
+        if (!MyRandom.percentTrue(getIntProperty(AiProps.HOLD_LAND_DROP_FOR_MAIN2_IF_UNUSED))) {
+            // check against the chance specified in the profile
             return false;
         }
-        if (game.getPhaseHandler().getTurn() < 2) {
+        if (game.getPhaseHandler().getTurn() <= 2) {
             // too obvious when doing it on the very first turn of the game
             return false;
         }
