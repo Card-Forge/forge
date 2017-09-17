@@ -2738,6 +2738,8 @@ public class ComputerUtil {
     }
 
     public static boolean isPlayingReanimator(final Player ai) {
+        // TODO: either add SVars to other reanimator cards, or improve the prediction so that it avoids using a SVar
+        // at all but detects this effect from SA parameters (preferred, but difficult)
         CardCollectionView inHand = ai.getCardsIn(ZoneType.Hand);
         CardCollectionView inDeck = ai.getCardsIn(new ZoneType[] {ZoneType.Hand, ZoneType.Library});
 
