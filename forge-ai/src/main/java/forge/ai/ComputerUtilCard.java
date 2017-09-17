@@ -1364,9 +1364,11 @@ public class ComputerUtilCard {
                         pumpedDmg = 0;
                     }
                 }
-                if ( (!c.hasKeyword("Infect") && pumpedDmg > dmg && pumpedDmg >= opp.getLife())
-                        || (c.hasKeyword("Infect") && pumpedDmg > dmg && pumpedDmg >= opp.getPoisonCounters()) ) {
-                    return true;
+                if (pumpedDmg > dmg) {
+                    if ((!c.hasKeyword("Infect") && pumpedDmg >= opp.getLife())
+                            || (c.hasKeyword("Infect") && pumpedDmg >= opp.getPoisonCounters())) {
+                        return true;
+                    }
                 }
                 // try to determine if pumping a creature for more power will give lethal on board
                 // considering all unblocked creatures after the blockers are already declared
