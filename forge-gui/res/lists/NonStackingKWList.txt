@@ -28,6 +28,7 @@ Infect
 Intimidate
 Islandwalk
 Lifelink
+Menace
 Mountainwalk
 Persist
 Phasing
