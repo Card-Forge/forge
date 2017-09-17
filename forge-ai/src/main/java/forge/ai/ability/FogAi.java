@@ -5,9 +5,12 @@ import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
+import forge.game.card.Card;
+import forge.game.card.CardPredicates;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.Aggregates;
 
 public class FogAi extends SpellAbilityAi {
 
@@ -33,6 +36,25 @@ public class FogAi extends SpellAbilityAi {
         // Don't cast it, if the effect is already in place
         if (game.getPhaseHandler().isPreventCombatDamageThisTurn()) {
             return false;
+        }
+
+        if ("SeriousDamage".equals(sa.getParam("AILogic")) && game.getCombat() != null) {
+            int dmg = 0;
+            for (Card atk : game.getCombat().getAttackersOf(ai)) {
+                if (game.getCombat().isUnblocked(atk)) {
+                    dmg += atk.getNetCombatDamage();
+                } else if (atk.hasKeyword("Trample")) {
+                    dmg += atk.getNetCombatDamage() - Aggregates.sum(game.getCombat().getBlockers(atk), CardPredicates.Accessors.fnGetNetToughness);
+                }
+            }
+
+            if (dmg > ai.getLife() / 4) {
+                return true;
+            } else if (dmg >= 5) {
+                return true;
+            } else if (ai.getLife() < ai.getStartingLife() / 3) {
+                return true;
+            }
         }
 
         // Cast it if life is in danger
