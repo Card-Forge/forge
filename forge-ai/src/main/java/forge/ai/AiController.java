@@ -1103,15 +1103,98 @@ public class AiController {
                 Card land = chooseBestLandToPlay(landsWannaPlay);
                 if (ComputerUtil.getDamageFromETB(player, land) < player.getLife() || !player.canLoseLife() 
                         || player.cantLoseForZeroOrLessLife() ) {
-                    game.PLAY_LAND_SURROGATE.setHostCard(land);
-                    final List<SpellAbility> abilities = Lists.newArrayList();
-                    abilities.add(game.PLAY_LAND_SURROGATE);
-                    return abilities;
+                    if (!game.getPhaseHandler().is(PhaseType.MAIN1) || !isSafeToHoldLandDropForMain2(land)) {
+                        game.PLAY_LAND_SURROGATE.setHostCard(land);
+                        final List<SpellAbility> abilities = Lists.newArrayList();
+                        abilities.add(game.PLAY_LAND_SURROGATE);
+                        return abilities;
+                    }
                 }
             }
         }
 
         return singleSpellAbilityList(getSpellAbilityToPlay());
+    }
+
+    private boolean isSafeToHoldLandDropForMain2(Card landToPlay) {
+        if (!getBooleanProperty(AiProps.HOLD_LAND_DROP_FOR_MAIN2_IF_UNUSED)) {
+            // the AI profile specifies that this option should not be used
+            return false;
+        }
+        if (game.getPhaseHandler().getTurn() < 2) {
+            // too obvious when doing it on the very first turn of the game
+            return false;
+        }
+
+        CardCollection inHand = CardLists.filter(player.getCardsIn(ZoneType.Hand),
+                Predicates.not(CardPredicates.Presets.LANDS));
+        CardCollectionView otb = player.getCardsIn(ZoneType.Battlefield);
+
+        // TODO: improve the detection of taplands
+        boolean isTapLand = false;
+        for (ReplacementEffect repl : landToPlay.getReplacementEffects()) {
+            if (repl.getParamOrDefault("Description", "").equals("CARDNAME enters the battlefield tapped.")) {
+                isTapLand = true;
+            }
+        }
+
+        int totalCMCInHand = Aggregates.sum(inHand, CardPredicates.Accessors.fnGetCmc);
+        int minCMCInHand = Aggregates.min(inHand, CardPredicates.Accessors.fnGetCmc);
+        int predictedMana = ComputerUtilMana.getAvailableManaEstimate(player, true);
+
+        boolean canCastWithLandDrop = (predictedMana + 1 >= minCMCInHand) && !isTapLand;
+
+        boolean hasRelevantAbsOTB = !CardLists.filter(otb, new Predicate<Card>() {
+            @Override
+            public boolean apply(Card card) {
+                boolean isTapLand = false;
+                for (ReplacementEffect repl : card.getReplacementEffects()) {
+                    if (repl.getParamOrDefault("Description", "").equals("CARDNAME enters the battlefield tapped.")) {
+                        isTapLand = true;
+                    }
+                }
+
+                for (SpellAbility sa : card.getSpellAbilities()) {
+                    if (sa.getPayCosts() != null && sa.isAbility()
+                            && sa.getPayCosts().getCostMana() != null
+                            && sa.getPayCosts().getCostMana().getMana().getCMC() > 0
+                            && (!sa.getPayCosts().hasTapCost() || !isTapLand)
+                            && (!sa.hasParam("ActivationZone") || sa.getParam("ActivationZone").contains("Battlefield"))) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }).isEmpty();
+
+        boolean hasLandfall = !CardLists.filter(otb, new Predicate<Card>() {
+            @Override
+            public boolean apply(Card card) {
+                for (Trigger t : card.getTriggers()) {
+                    Map<String, String> params = t.getMapParams();
+                    if ("ChangesZone".equals(params.get("Mode"))
+                            && params.containsKey("ValidCard")
+                            && ((params.get("ValidCard").contains("Land")) || (params.get("ValidCard").contains("Permanent")) && !params.get("ValidCard").contains("nonLand"))
+                            && "Battlefield".equals(params.get("Destination"))) {
+                        // Landfall and other similar triggers
+                        System.out.println("LANDFALL: " + card);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }).isEmpty();
+
+        if (!canCastWithLandDrop && !hasLandfall && (!hasRelevantAbsOTB || isTapLand)) {
+            // Hopefully there's not much to do with the extra mana immediately, can wait for Main 2
+            return true;
+        }
+        if ((predictedMana < totalCMCInHand && canCastWithLandDrop) || (hasRelevantAbsOTB && !isTapLand) || hasLandfall) {
+            // Might need an extra land to cast something or to use an activated ability on the battlefield
+            return false;
+        }
+
+        return true;
     }
 
     private final SpellAbility getSpellAbilityToPlay() {

@@ -62,6 +62,10 @@ THRESHOLD_CHUMP_TO_SAVE_PLANESWALKER=-1
 # Only works when AI cheating is enabled in preferences, otherwise does nothing
 CHEAT_WITH_MANA_ON_SHUFFLE=true
 
+# If enabled, the AI will attempt to hold land drops until Main 2 when it's safe and when it has nothing to potentially do
+# with the extra mana
+HOLD_LAND_DROP_FOR_MAIN2_IF_UNUSED=false
+
 # Planechase logic
 DEFAULT_MAX_PLANAR_DIE_ROLLS_PER_TURN=1
 DEFAULT_MIN_TURN_TO_ROLL_PLANAR_DIE=3

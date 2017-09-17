@@ -29,6 +29,7 @@ public enum AiProps { /** */
     DEFAULT_PLANAR_DIE_ROLL_CHANCE ("50"), /** */
     MULLIGAN_THRESHOLD ("5"), /** */
     PLANAR_DIE_ROLL_HESITATION_CHANCE ("10"),
+    HOLD_LAND_DROP_FOR_MAIN2_IF_UNUSED ("false"), /** */
     CHEAT_WITH_MANA_ON_SHUFFLE ("false"),
     MOVE_EQUIPMENT_TO_BETTER_CREATURES ("from_useless_only"),
     MOVE_EQUIPMENT_CREATURE_EVAL_THRESHOLD ("60"),
@@ -52,7 +53,7 @@ public enum AiProps { /** */
     MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK ("70"), /** */
     CHANCE_TO_TRADE_TO_SAVE_PLANESWALKER ("70"), /** */
     CHANCE_TO_TRADE_DOWN_TO_SAVE_PLANESWALKER ("0"), /** */
-    THRESHOLD_CHUMP_TO_SAVE_PLANESWALKER ("-1"), /** */
+    THRESHOLD_CHUMP_TO_SAVE_PLANESWALKER ("110"), /** */
     MIN_SPELL_CMC_TO_COUNTER ("0"), /** */
     CHANCE_TO_COUNTER_CMC_1 ("50"), /** */
     CHANCE_TO_COUNTER_CMC_2 ("75"), /** */
@@ -64,7 +65,7 @@ public enum AiProps { /** */
     ALWAYS_COUNTER_PUMP_SPELLS ("true"), /** */
     ALWAYS_COUNTER_AURAS ("true"), /** */
     ALWAYS_COUNTER_SPELLS_FROM_NAMED_CARDS (""), /** */
-    ACTIVELY_DESTROY_ARTS_AND_NONAURA_ENCHS ("false"), /** */
+    ACTIVELY_DESTROY_ARTS_AND_NONAURA_ENCHS ("true"), /** */
     PRIORITY_REDUCTION_FOR_STORM_SPELLS ("0"), /** */
     USE_BERSERK_AGGRESSIVELY ("false"), /** */
     MIN_COUNT_FOR_STORM_SPELLS ("0"), /** */
