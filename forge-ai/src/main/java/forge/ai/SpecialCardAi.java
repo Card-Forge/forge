@@ -892,7 +892,7 @@ public class SpecialCardAi {
             }
             // We appear to be playing Reanimator (or we have a reanimator card in hand already), so it's
             // worth to fill the graveyard now
-            if (ComputerUtil.isPlayingReanimator(ai)) {
+            if (ComputerUtil.isPlayingReanimator(ai) && !creatsInLib.isEmpty()) {
                 CardCollection creatsInHandByCMC = new CardCollection(creatsInHand);
                 Collections.sort(creatsInHandByCMC, CardLists.CmcComparatorInv);
                 return creatsInHandByCMC.getFirst();
