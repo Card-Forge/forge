@@ -1,19 +1,11 @@
 package forge.ai.ability;
 
-import java.util.Collections;
-import java.util.Random;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -22,6 +14,9 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+
+import java.util.Collections;
+import java.util.Random;
 
 public class ChangeZoneAllAi extends SpellAbilityAi {
     @Override
@@ -136,13 +131,23 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 }
                 computerType = new CardCollection();
             }
+            // mass zone change for creatures: if in dire danger, do it; otherwise, only do it if the opponent's
+            // creatures are better in value
             if ((CardLists.getNotType(oppType, "Creature").size() == 0)
                     && (CardLists.getNotType(computerType, "Creature").size() == 0)) {
+                if (game.getCombat() != null && ComputerUtilCombat.lifeInSeriousDanger(ai, game.getCombat())) {
+                    if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                            && game.getPhaseHandler().getPlayerTurn().isOpponentOf(ai)) {
+                        // Life is in serious danger, return all creatures from the battlefield to wherever
+                        // so they don't deal lethal damage
+                        return true;
+                    }
+                }
                 if ((ComputerUtilCard.evaluateCreatureList(computerType) + 200) >= ComputerUtilCard
                         .evaluateCreatureList(oppType)) {
                     return false;
                 }
-            } // otherwise evaluate both lists by CMC and pass only if human
+            } // mass zone change for non-creatures: evaluate both lists by CMC and pass only if human
               // permanents are more valuable
             else if ((ComputerUtilCard.evaluatePermanentList(computerType) + 3) >= ComputerUtilCard
                     .evaluatePermanentList(oppType)) {
