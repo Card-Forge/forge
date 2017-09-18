@@ -6,7 +6,6 @@ import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.AbilitySub;
@@ -42,9 +41,9 @@ public class DigUntilAi extends SpellAbilityAi {
             if (ai.getCardsIn(ZoneType.Library).size() < 20) {
                 return false;
             }
-            if (!CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS_PRODUCING_MANA).isEmpty()
-                || ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
-                // Either we already have a mana-producing land in hand, or we can mana-lock ourselves, so bail
+            if ("Land.Basic".equals(sa.getParam("Valid"))
+                    && !CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS_PRODUCING_MANA).isEmpty()) {
+                // We already have a mana-producing land in hand, so bail
                 return false;
             }
         }
