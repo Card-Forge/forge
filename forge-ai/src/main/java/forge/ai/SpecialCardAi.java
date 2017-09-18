@@ -454,6 +454,7 @@ public class SpecialCardAi {
             return Pair.of(power, toughness);
         }
     }
+
     // Force of Will
     public static class ForceOfWill {
         public static boolean consider(final Player ai, final SpellAbility sa) {

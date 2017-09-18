@@ -1,21 +1,13 @@
 package forge.ai.ability;
 
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.ai.*;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -27,6 +19,9 @@ import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+
+import java.util.List;
+import java.util.Map;
 
 public class DamageDealAi extends DamageAiBase {
     @Override
@@ -98,6 +93,29 @@ public class DamageDealAi extends DamageAiBase {
                 source.setSVar("PayX", Integer.toString(dmg));
             } else if (sa.getSVar(damage).equals("Count$CardsInYourHand") && source.getZone().is(ZoneType.Hand)) {
                 dmg--; // the card will be spent casting the spell, so actual damage is 1 less
+            } else if (sa.getSVar(damage).equals("TargetedPlayer$CardsInHand")) {
+                // cards that deal damage by the number of cards in target player's hand, e.g. Sudden Impact
+                if (sa.getTargetRestrictions().canTgtPlayer()) {
+                    int maxDmg = 0;
+                    Player maxDamaged = null;
+                    for (Player p : ai.getOpponents()) {
+                        if (p.canBeTargetedBy(sa)) {
+                            if (p.getCardsIn(ZoneType.Hand).size() > maxDmg) {
+                                maxDmg = p.getCardsIn(ZoneType.Hand).size();
+                                maxDamaged = p;
+                            }
+                        }
+                    }
+                    if (maxDmg > 0 && maxDamaged != null) {
+                        if (shouldTgtP(ai, sa, maxDmg, false)) {
+                            sa.resetTargets();
+                            sa.getTargets().add(maxDamaged);
+                            return true;
+                        }
+                    } else {
+                        return false;
+                    }
+                }
             }
         }
 
@@ -346,7 +364,7 @@ public class DamageDealAi extends DamageAiBase {
         final boolean oppTargetsChoice = sa.hasParam("TargetingPlayer");
 
         Player enemy = ComputerUtil.getOpponentFor(ai);
-        
+
         if ("PowerDmg".equals(sa.getParam("AILogic"))) {
             // check if it is better to target the player instead, the original target is already set in PumpAi.pumpTgtAI()
             if (tgt.canTgtCreatureAndPlayer() && this.shouldTgtP(ai, sa, dmg, noPrevention)){

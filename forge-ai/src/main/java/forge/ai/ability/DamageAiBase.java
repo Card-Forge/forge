@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
-
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
@@ -19,7 +18,14 @@ public abstract class DamageAiBase extends SpellAbilityAi {
     protected boolean shouldTgtP(final Player comp, final SpellAbility sa, final int d, final boolean noPrevention) {
         int restDamage = d;
         final Game game = comp.getGame();
-        final Player enemy = ComputerUtil.getOpponentFor(comp);
+        Player enemy = ComputerUtil.getOpponentFor(comp);
+        boolean dmgByCardsInHand = false;
+
+        if ("X".equals(sa.getParam("NumDmg")) && sa.getHostCard() != null && sa.hasSVar(sa.getParam("NumDmg")) &&
+                sa.getHostCard().getSVar(sa.getParam("NumDmg")).equals("TargetedPlayer$CardsInHand")) {
+            dmgByCardsInHand = true;
+        }
+
         if (!sa.canTarget(enemy)) {
             return false;
         }
@@ -71,8 +77,11 @@ public abstract class DamageAiBase extends SpellAbilityAi {
                         value = 1.0f * restDamage / enemy.getLife();
                     }
                 } else {
-                    if (phase.isPlayerTurn(enemy) && phase.is(PhaseType.END_OF_TURN)) {
-                        value = 1.5f * restDamage / enemy.getLife();
+                    if (phase.isPlayerTurn(enemy)) {
+                        if (phase.is(PhaseType.END_OF_TURN)
+                                || ((dmgByCardsInHand && phase.getPhase().isAfter(PhaseType.UPKEEP)))) {
+                            value = 1.5f * restDamage / enemy.getLife();
+                        }
                     }
                 }
                 if (value > 0) {    //more likely to burn with larger hand
