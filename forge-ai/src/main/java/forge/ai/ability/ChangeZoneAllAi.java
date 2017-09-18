@@ -131,6 +131,20 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 }
                 computerType = new CardCollection();
             }
+
+            int creatureEvalThreshold = 200; // value difference (in evaluateCreatureList units)
+            int nonCreatureEvalThreshold = 3; // CMC difference
+            if (ai.getController().isAI()) {
+                AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+                if (destination == ZoneType.Hand) {
+                    creatureEvalThreshold = aic.getIntProperty(AiProps.BOUNCE_ALL_TO_HAND_CREAT_EVAL_DIFF);
+                    nonCreatureEvalThreshold = aic.getIntProperty(AiProps.BOUNCE_ALL_TO_HAND_NONCREAT_EVAL_DIFF);
+                } else {
+                    creatureEvalThreshold = aic.getIntProperty(AiProps.BOUNCE_ALL_ELSEWHERE_CREAT_EVAL_DIFF);
+                    nonCreatureEvalThreshold = aic.getIntProperty(AiProps.BOUNCE_ALL_ELSEWHERE_NONCREAT_EVAL_DIFF);
+                }
+            }
+
             // mass zone change for creatures: if in dire danger, do it; otherwise, only do it if the opponent's
             // creatures are better in value
             if ((CardLists.getNotType(oppType, "Creature").size() == 0)
@@ -143,13 +157,13 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                         return true;
                     }
                 }
-                if ((ComputerUtilCard.evaluateCreatureList(computerType) + 200) >= ComputerUtilCard
+                if ((ComputerUtilCard.evaluateCreatureList(computerType) + creatureEvalThreshold) >= ComputerUtilCard
                         .evaluateCreatureList(oppType)) {
                     return false;
                 }
             } // mass zone change for non-creatures: evaluate both lists by CMC and pass only if human
               // permanents are more valuable
-            else if ((ComputerUtilCard.evaluatePermanentList(computerType) + 3) >= ComputerUtilCard
+            else if ((ComputerUtilCard.evaluatePermanentList(computerType) + nonCreatureEvalThreshold) >= ComputerUtilCard
                     .evaluatePermanentList(oppType)) {
                 return false;
             }
@@ -250,8 +264,8 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
      * </p>
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
+     * @param aiPlayer
+     *            a {@link forge.game.player.Player} object.
      * 
      * @return a boolean.
      */

@@ -892,20 +892,50 @@ public class AiBlockController {
     }
 
     private void makeChumpBlocksToSavePW(Combat combat) {
-        final int evalThreshold = ((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.THRESHOLD_CHUMP_TO_SAVE_PLANESWALKER);
-        if (evalThreshold > 0) {
+        if (ComputerUtilCombat.lifeInDanger(ai, combat) || ai.getLife() <= ai.getStartingLife() / 5) {
+            // most likely not worth trying to protect planeswalkers when at threateningly low life or in
+            // dangerous combat which threatens lethal or severe damage to face
+            return;
+        }
+
+        AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+        final int evalThresholdToken = aic.getIntProperty(AiProps.THRESHOLD_TOKEN_CHUMP_TO_SAVE_PLANESWALKER);
+        final int evalThresholdNonToken = aic.getIntProperty(AiProps.THRESHOLD_TOKEN_CHUMP_TO_SAVE_PLANESWALKER);
+        final boolean onlyIfLethal = aic.getBooleanProperty(AiProps.CHUMP_TO_SAVE_PLANESWALKER_ONLY_ON_LETHAL);
+
+        if (evalThresholdToken > 0 || evalThresholdNonToken > 0) {
+            // detect how much damage is threatened to each of the planeswalkers, see which ones would be
+            // worth protecting according to the AI profile properties
+            CardCollection threatenedPWs = new CardCollection();
+            for (final Card attacker : attackers) {
+                GameEntity def = combat.getDefenderByAttacker(attacker);
+                if (def instanceof Card) {
+                    int damageToPW = 0;
+                    for (final Card pwatkr : combat.getAttackersOf(def)) {
+                        if (!combat.isBlocked(pwatkr)) {
+                            damageToPW += ComputerUtilCombat.predictDamageTo((Card)def, pwatkr.getNetCombatDamage(), pwatkr, true);
+                        }
+                    }
+                    if (!onlyIfLethal || damageToPW >= ((Card)def).getCounters(CounterType.LOYALTY)) {
+                        threatenedPWs.add((Card)def);
+                    }
+                }
+            }
+
             CardCollection pwsWithChumpBlocks = new CardCollection();
             CardCollection chosenChumpBlockers = new CardCollection();
             CardCollection chumpPWDefenders = CardLists.filter(new CardCollection(this.blockersLeft), new Predicate<Card>() {
                 @Override
                 public boolean apply(Card card) {
-                    return ComputerUtilCard.evaluateCreature(card) <= evalThreshold;
+                    return ComputerUtilCard.evaluateCreature(card) <= (card.isToken() ? evalThresholdToken
+                            : evalThresholdNonToken);
                 }
             });
             CardLists.sortByPowerAsc(chumpPWDefenders);
             if (!chumpPWDefenders.isEmpty()) {
                 for (final Card attacker : attackers) {
-                    if (combat.getDefenderByAttacker(attacker) instanceof Card) {
+                    GameEntity def = combat.getDefenderByAttacker(attacker);
+                    if (def instanceof Card && threatenedPWs.contains((Card)def)) {
                         if (attacker.hasKeyword("Trample")) {
                             // don't bother trying to chump a trampling creature
                             continue;

@@ -56,8 +56,12 @@ CHANCE_TO_TRADE_TO_SAVE_PLANESWALKER=80
 CHANCE_TO_TRADE_DOWN_TO_SAVE_PLANESWALKER=0
 # Creature evaluation threshold for which creatures to consider good candidates for chump blocking to protect a
 # planeswalker (135 is about the level of a 1/2 nontoken creature with no abilities or a 2/2 token with no abilities)
-# Set to -1 to disable chump blocking to save planeswalkers.
-THRESHOLD_CHUMP_TO_SAVE_PLANESWALKER=-1
+# There is a separate option for evaluating token and nontoken creatures. Set both to -1 to disable chump blocking
+# to protect planeswalkers.
+THRESHOLD_NONTOKEN_CHUMP_TO_SAVE_PLANESWALKER=130
+THRESHOLD_TOKEN_CHUMP_TO_SAVE_PLANESWALKER=135
+# If enabled, the AI will not bother chump blocking to protect a planeswalker unless lethal damage is threatened to it
+CHUMP_TO_SAVE_PLANESWALKER_ONLY_ON_LETHAL=true
 
 # Only works when AI cheating is enabled in preferences, otherwise does nothing
 CHEAT_WITH_MANA_ON_SHUFFLE=true
@@ -151,3 +155,12 @@ CONSERVATIVE_ENERGY_PAYMENT_ONLY_IN_COMBAT=false
 # If true, the conservative energy payment will not be used when the creature is attacking,
 # only when it's blocking (for more controlling AIs)
 CONSERVATIVE_ENERGY_PAYMENT_ONLY_DEFENSIVELY=false
+
+# How big of a value difference there should be for the AI to consider mass bouncing all creature permanents
+# on both sides of the battlefield in a non-lethal situation
+BOUNCE_ALL_TO_HAND_CREAT_EVAL_DIFF=200
+BOUNCE_ALL_ELSEWHERE_CREAT_EVAL_DIFF=200
+# How big of a CMC difference there should be for the AI to consider mass bouncing all noncreature permanents
+# on both side of the battlefield
+BOUNCE_ALL_TO_HAND_NONCREAT_EVAL_DIFF=3
+BOUNCE_ALL_ELSEWHERE_NONCREAT_EVAL_DIFF=3

@@ -53,7 +53,9 @@ public enum AiProps { /** */
     MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK ("70"), /** */
     CHANCE_TO_TRADE_TO_SAVE_PLANESWALKER ("70"), /** */
     CHANCE_TO_TRADE_DOWN_TO_SAVE_PLANESWALKER ("0"), /** */
-    THRESHOLD_CHUMP_TO_SAVE_PLANESWALKER ("110"), /** */
+    THRESHOLD_TOKEN_CHUMP_TO_SAVE_PLANESWALKER ("135"), /** */
+    THRESHOLD_NONTOKEN_CHUMP_TO_SAVE_PLANESWALKER ("110"), /** */
+    CHUMP_TO_SAVE_PLANESWALKER_ONLY_ON_LETHAL ("true"), /** */
     MIN_SPELL_CMC_TO_COUNTER ("0"), /** */
     CHANCE_TO_COUNTER_CMC_1 ("50"), /** */
     CHANCE_TO_COUNTER_CMC_2 ("75"), /** */
@@ -74,7 +76,7 @@ public enum AiProps { /** */
     STRIPMINE_MIN_LANDS_OTB_FOR_NO_TEMPO_CHECK ("6"), /** */
     STRIPMINE_MAX_LANDS_TO_ATTEMPT_MANALOCKING ("3"), /** */
     STRIPMINE_HIGH_PRIORITY_ON_SKIPPED_LANDDROP ("false"),
-    TOKEN_GENERATION_ABILITY_CHANCE ("100"), /** */
+    TOKEN_GENERATION_ABILITY_CHANCE ("80"), /** */
     TOKEN_GENERATION_ALWAYS_IF_FROM_PLANESWALKER ("true"), /** */
     TOKEN_GENERATION_ALWAYS_IF_OPP_ATTACKS ("true"), /** */
     SCRY_NUM_LANDS_TO_STILL_NEED_MORE ("4"), /** */
@@ -88,9 +90,13 @@ public enum AiProps { /** */
     COMBAT_ASSAULT_ATTACK_EVASION_PREDICTION ("true"), /** */
     COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION ("true"), /** */
     CONSERVATIVE_ENERGY_PAYMENT_ONLY_IN_COMBAT ("true"), /** */
-    CONSERVATIVE_ENERGY_PAYMENT_ONLY_DEFENSIVELY ("true"); /** */
+    CONSERVATIVE_ENERGY_PAYMENT_ONLY_DEFENSIVELY ("true"), /** */
+    BOUNCE_ALL_TO_HAND_CREAT_EVAL_DIFF ("200"), /** */
+    BOUNCE_ALL_ELSEWHERE_CREAT_EVAL_DIFF ("200"), /** */
+    BOUNCE_ALL_TO_HAND_NONCREAT_EVAL_DIFF ("3"), /** */
+    BOUNCE_ALL_ELSEWHERE_NONCREAT_EVAL_DIFF ("3"); /** */
     // Experimental features, must be removed after extensive testing and, ideally, defaulting
-    // <-- there are currently no options here -->
+    // <-- there are currently no experimental options here -->
 
     private final String strDefaultVal;
 
