@@ -923,6 +923,13 @@ public class SpecialCardAi {
 
             Card bestInLib = atTargetCMCInLib != null ? atTargetCMCInLib.getFirst() : null;
 
+            if (bestInLib == null && ComputerUtil.isPlayingReanimator(ai)) {
+                // For Reanimator, we don't mind grabbing the biggest thing possible to recycle it again with SotF later.
+                CardCollection creatsInLibByCMC = new CardCollection(creatsInLib);
+                Collections.sort(creatsInLibByCMC, CardLists.CmcComparatorInv);
+                return creatsInLibByCMC.getFirst();
+            }
+
             return bestInLib;
         }
     }
