@@ -8,6 +8,7 @@ import java.util.Map;
 import com.google.common.collect.ForwardingTable;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.common.collect.Table;
 
 import forge.game.GameEntity;
@@ -48,6 +49,24 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
         }
     }
 
+    public void triggerDamageDoneOnce(boolean isCombat) {
+        for (Map.Entry<GameEntity, Map<Card, Integer>> e : this.columnMap().entrySet()) {
+            int sum = 0;
+            for (final int i : e.getValue().values()) {
+                sum += i;
+            }
+            if (sum > 0) {
+                final GameEntity ge = e.getKey();
+                final Map<String, Object> runParams = Maps.newHashMap();
+                runParams.put("DamageTarget", ge);
+                runParams.put("DamageSources", Sets.newHashSet(e.getValue().keySet()));
+                runParams.put("DamageAmount", sum);
+                runParams.put("IsCombatDamage", isCombat);
+                
+                ge.getGame().getTriggerHandler().runTrigger(TriggerType.DamageDoneOnce, runParams, false);
+            }
+        }
+    }
     /**
      * special put logic, sum the values
      */

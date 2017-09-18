@@ -117,77 +117,80 @@ public class DamageDealEffect extends DamageBaseEffect {
 
         final boolean remember = sa.hasParam("RememberDamaged");
 
-        final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DamageSource"), sa);
-        if (definedSources == null || definedSources.isEmpty()) {
-            return;
-        }
-        final Card source = definedSources.get(0);
-        final Card sourceLKI = sa.getHostCard().getGame().getChangeZoneLKIInfo(definedSources.get(0));
 
         // make a new damage map, combat damage will be applied later into combat map
         CardDamageMap damageMap = new CardDamageMap();
         CardDamageMap preventMap = new CardDamageMap();
+
         
-        if (divideOnResolution) {
-            // Dividing Damage up to multiple targets using combat damage box
-            // Currently only used for Master of the Wild Hunt
-            List<Player> players = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("DividerOnResolution"), sa);
-            if (players.isEmpty()) {
-                return;
-            }
-
-            CardCollection assigneeCards = new CardCollection();
-            // Do we have a way of doing this in a better fashion?
-            for (GameObject obj : tgts) {
-                if (obj instanceof Card) {
-                    assigneeCards.add((Card)obj);
-                }
-            }
-
-            Player assigningPlayer = players.get(0);
-            Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(sourceLKI, assigneeCards, dmg, null, true);
-            for (Entry<Card, Integer> dt : map.entrySet()) {
-                dt.getKey().addDamage(dt.getValue(), sourceLKI, damageMap, preventMap);
-            }
-
-            // transport combat damage back into combat damage map
-            if (combatDmg) {
-                game.getCombat().getDamageMap().putAll(damageMap);
-            } else {
-                preventMap.triggerPreventDamage(false);
-                // non combat damage cause lifegain there
-                damageMap.dealLifelinkDamage();
-                replaceDying(sa);
-            }
+        final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DamageSource"), sa);
+        if (definedSources == null || definedSources.isEmpty()) {
             return;
         }
         
-        for (final Object o : tgts) {
-            dmg = (sa.usesTargeting() && sa.hasParam("DividedAsYouChoose")) ? sa.getTargetRestrictions().getDividedValue(o) : dmg;
-            if (o instanceof Card) {
-                final Card c = (Card) o;
-                if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {
-                    if (removeDamage) {
-                        c.setDamage(0);
-                        c.setHasBeenDealtDeathtouchDamage(false);
-                        c.clearAssignedDamage();
-                    }
-                    else {
-                        c.addDamage(dmg, sourceLKI, combatDmg, noPrevention, damageMap, preventMap);
+        for (Card source : definedSources) {
+            final Card sourceLKI = sa.getHostCard().getGame().getChangeZoneLKIInfo(source);
+        
+            if (divideOnResolution) {
+                // Dividing Damage up to multiple targets using combat damage box
+                // Currently only used for Master of the Wild Hunt
+                List<Player> players = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("DividerOnResolution"), sa);
+                if (players.isEmpty()) {
+                    return;
+                }
+    
+                CardCollection assigneeCards = new CardCollection();
+                // Do we have a way of doing this in a better fashion?
+                for (GameObject obj : tgts) {
+                    if (obj instanceof Card) {
+                        assigneeCards.add((Card)obj);
                     }
                 }
-            } else if (o instanceof Player) {
-                final Player p = (Player) o;
-                if (!targeted || p.canBeTargetedBy(sa)) {
-                    p.addDamage(dmg, sourceLKI, combatDmg, noPrevention, damageMap, preventMap);
+    
+                Player assigningPlayer = players.get(0);
+                Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(sourceLKI, assigneeCards, dmg, null, true);
+                for (Entry<Card, Integer> dt : map.entrySet()) {
+                    dt.getKey().addDamage(dt.getValue(), sourceLKI, damageMap, preventMap);
+                }
+    
+                // transport combat damage back into combat damage map
+                if (combatDmg) {
+                    game.getCombat().getDamageMap().putAll(damageMap);
+                } else {
+                    preventMap.triggerPreventDamage(false);
+                    // non combat damage cause lifegain there
+                    damageMap.dealLifelinkDamage();
+                    replaceDying(sa);
+                }
+                return;
+            }
+            
+            for (final Object o : tgts) {
+                dmg = (sa.usesTargeting() && sa.hasParam("DividedAsYouChoose")) ? sa.getTargetRestrictions().getDividedValue(o) : dmg;
+                if (o instanceof Card) {
+                    final Card c = (Card) o;
+                    if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {
+                        if (removeDamage) {
+                            c.setDamage(0);
+                            c.setHasBeenDealtDeathtouchDamage(false);
+                            c.clearAssignedDamage();
+                        }
+                        else {
+                            c.addDamage(dmg, sourceLKI, combatDmg, noPrevention, damageMap, preventMap);
+                        }
+                    }
+                } else if (o instanceof Player) {
+                    final Player p = (Player) o;
+                    if (!targeted || p.canBeTargetedBy(sa)) {
+                        p.addDamage(dmg, sourceLKI, combatDmg, noPrevention, damageMap, preventMap);
+                    }
                 }
             }
+    
+            if (remember) {
+                source.addRemembered(damageMap.row(sourceLKI).keySet());
+            }
         }
-
-        if (remember) {
-            source.addRemembered(damageMap.row(sourceLKI).keySet());
-        }
-
         // transport combat damage back into combat damage map
         if (combatDmg) {
             game.getCombat().getDamageMap().putAll(damageMap);
@@ -195,6 +198,7 @@ public class DamageDealEffect extends DamageBaseEffect {
             preventMap.triggerPreventDamage(false);
             // non combat damage cause lifegain there
             damageMap.dealLifelinkDamage();
+            damageMap.triggerDamageDoneOnce(false);
         }
 
         replaceDying(sa);
