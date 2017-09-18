@@ -177,9 +177,31 @@ public class PermanentAi extends SpellAbilityAi {
                     if (!hasCard) {
                         dontCast = true;
                     }
-                } else if (param.equals("MaxControlled")) {
-                    // Only cast unless there are X or more cards like this on the battlefield under AI control already
-                    int numControlled = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(card.getName())).size();
+                } else if (param.startsWith("MaxControlled")) {
+                    // Only cast unless there are X or more cards like this on the battlefield under AI control already,
+                    CardCollection ctrld = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(card.getName()));
+
+                    int numControlled = 0;
+                    if (param.endsWith("WithoutOppAuras")) {
+                        // Check that the permanet does not have any auras attached to it by the opponent (this assumes that if
+                        // the opponent cast an aura on the opposing permanent, it's not with good intentions, and thus it might
+                        // be better to have a pristine copy of the card - might not always be a correct assumption, but sounds
+                        // like a reasonable default for some cards).
+                        for (Card c : ctrld) {
+                            if (c.getEnchantedBy(false).isEmpty()) {
+                                numControlled++;
+                            } else {
+                                for (Card att : c.getEnchantedBy(false)) {
+                                    if (!att.getController().isOpponentOf(ai)) {
+                                        numControlled++;
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        numControlled = ctrld.size();
+                    }
+
                     if (numControlled >= Integer.parseInt(value)) {
                         dontCast = true;
                     }
