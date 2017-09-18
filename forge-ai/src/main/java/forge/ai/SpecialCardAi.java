@@ -893,9 +893,9 @@ public class SpecialCardAi {
             // We appear to be playing Reanimator (or we have a reanimator card in hand already), so it's
             // worth to fill the graveyard now
             if (ComputerUtil.isPlayingReanimator(ai)) {
-                CardCollection creatsInLibByCMC = new CardCollection(creatsInLib);
-                Collections.sort(creatsInLibByCMC, CardLists.CmcComparatorInv);
-                return creatsInLibByCMC.getFirst();
+                CardCollection creatsInHandByCMC = new CardCollection(creatsInHand);
+                Collections.sort(creatsInHandByCMC, CardLists.CmcComparatorInv);
+                return creatsInHandByCMC.getFirst();
             }
 
             // probably nothing that is worth changing, so bail
@@ -922,13 +922,6 @@ public class SpecialCardAi {
             Collections.sort(atTargetCMCInLib, CardLists.CmcComparatorInv);
 
             Card bestInLib = atTargetCMCInLib != null ? atTargetCMCInLib.getFirst() : null;
-
-            if (bestInLib == null && ComputerUtil.isPlayingReanimator(ai)) {
-                // For Reanimator, we don't mind grabbing the biggest thing possible to recycle it again with SotF later.
-                CardCollection creatsInLibByCMC = new CardCollection(creatsInLib);
-                Collections.sort(creatsInLibByCMC, CardLists.CmcComparatorInv);
-                return creatsInLibByCMC.getFirst();
-            }
 
             return bestInLib;
         }
