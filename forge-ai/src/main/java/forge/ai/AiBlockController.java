@@ -916,7 +916,7 @@ public class AiBlockController {
                             damageToPW += ComputerUtilCombat.predictDamageTo((Card)def, pwatkr.getNetCombatDamage(), pwatkr, true);
                         }
                     }
-                    if (!onlyIfLethal || damageToPW >= ((Card)def).getCounters(CounterType.LOYALTY)) {
+                    if ((!onlyIfLethal && damageToPW > 0) || damageToPW >= ((Card)def).getCounters(CounterType.LOYALTY)) {
                         threatenedPWs.add((Card)def);
                     }
                 }
