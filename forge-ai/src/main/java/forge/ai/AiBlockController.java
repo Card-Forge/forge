@@ -910,14 +910,18 @@ public class AiBlockController {
             for (final Card attacker : attackers) {
                 GameEntity def = combat.getDefenderByAttacker(attacker);
                 if (def instanceof Card) {
-                    int damageToPW = 0;
-                    for (final Card pwatkr : combat.getAttackersOf(def)) {
-                        if (!combat.isBlocked(pwatkr)) {
-                            damageToPW += ComputerUtilCombat.predictDamageTo((Card)def, pwatkr.getNetCombatDamage(), pwatkr, true);
+                    if (!onlyIfLethal) {
+                        threatenedPWs.add((Card) def);
+                    } else {
+                        int damageToPW = 0;
+                        for (final Card pwatkr : combat.getAttackersOf(def)) {
+                            if (!combat.isBlocked(pwatkr)) {
+                                damageToPW += ComputerUtilCombat.predictDamageTo((Card) def, pwatkr.getNetCombatDamage(), pwatkr, true);
+                            }
                         }
-                    }
-                    if ((!onlyIfLethal && damageToPW > 0) || damageToPW >= ((Card)def).getCounters(CounterType.LOYALTY)) {
-                        threatenedPWs.add((Card)def);
+                        if ((!onlyIfLethal && damageToPW > 0) || damageToPW >= ((Card) def).getCounters(CounterType.LOYALTY)) {
+                            threatenedPWs.add((Card) def);
+                        }
                     }
                 }
             }
@@ -935,7 +939,7 @@ public class AiBlockController {
             if (!chumpPWDefenders.isEmpty()) {
                 for (final Card attacker : attackers) {
                     GameEntity def = combat.getDefenderByAttacker(attacker);
-                    if (def instanceof Card && threatenedPWs.contains((Card)def)) {
+                    if (def instanceof Card && threatenedPWs.contains((Card) def)) {
                         if (attacker.hasKeyword("Trample")) {
                             // don't bother trying to chump a trampling creature
                             continue;
@@ -970,7 +974,7 @@ public class AiBlockController {
                                 pwDefenders.addAll(combat.getBlockers(pwAtk));
                             } else {
                                 isFullyBlocked = false;
-                                damageToPW += pwAtk.getNetCombatDamage();
+                                damageToPW += ComputerUtilCombat.predictDamageTo((Card) pw, pwAtk.getNetCombatDamage(), pwAtk, true);
                             }
                         }
                         if (!isFullyBlocked && damageToPW >= pw.getCounters(CounterType.LOYALTY)) {
