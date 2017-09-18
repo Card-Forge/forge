@@ -672,6 +672,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
+        String aiLogic = sa.getParamOrDefault("AILogic", "");
+
+        if (aiLogic.equals("SurvivalOfTheFittest")) {
+            return ph.getNextTurn().equals(ai) && ph.is(PhaseType.END_OF_TURN);
+        }
+
         if (isHidden(sa)) {
             return true;
         }
