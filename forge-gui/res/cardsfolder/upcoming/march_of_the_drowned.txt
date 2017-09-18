@@ -6,4 +6,4 @@ SVar:DBChangeZone1:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Mand
 SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Mandatory$ True | TgtPrompt$ Select two target Pirate cards in your graveyard | ValidTgts$ Pirate.YouOwn | TargetMin$ 2 | TargetMax$ 2 | SpellDescription$ Return two target Pirate cards from your graveyard to your hand.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/march_of_the_drowned.jpg
-Oracle:Choose one —\n• Return target creature card from your graveyard to your hand.\n• Return two target Pirate cards from your graveyard to your hand.
+Oracle:Choose one â€”\nâ€¢ Return target creature card from your graveyard to your hand.\nâ€¢ Return two target Pirate cards from your graveyard to your hand.

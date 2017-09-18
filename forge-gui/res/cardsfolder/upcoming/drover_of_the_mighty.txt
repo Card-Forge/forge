@@ -7,4 +7,4 @@ A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any col
 SVar:Y:Count$Valid Dinosaur.Other+YouCtrl
 SVar:BuffedBy:Dinosaur
 SVar:Picture:http://mythicspoiler.com/ixa/cards/droverofthemighty.jpg
-Oracle:Drover of the Mighty gets +2/+2 as long as you control a Dinosaur./n{T}: Add one mana of any color to your mana pool.
+Oracle:Drover of the Mighty gets +2/+2 as long as you control a Dinosaur.\n{T}: Add one mana of any color to your mana pool.

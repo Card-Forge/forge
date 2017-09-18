@@ -5,4 +5,4 @@ PT:2/3
 K:Flying
 S:Mode$ ETBTapped | ValidCard$ Creature.OppCtrl | Description$ Creatures your opponents control enter the battlefield tapped.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kinjallis_sunwing.jpg
-Oracle:Creatures your opponents control enter the battlefield tapped.
+Oracle:Flying\nCreatures your opponents control enter the battlefield tapped.
