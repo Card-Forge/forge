@@ -176,6 +176,7 @@ https://downloads.cardforge.org/images/icons/Green%20Lantern.jpg
 https://downloads.cardforge.org/images/icons/Grumpy.jpg
 https://downloads.cardforge.org/images/icons/Gruul-precon.jpg
 https://downloads.cardforge.org/images/icons/Gunnery%20Sergeant%20Hartman.jpg
+https://downloads.cardforge.org/images/icons/Guybrush%20Threepwood.jpg
 https://downloads.cardforge.org/images/icons/Hagrid.jpg
 https://downloads.cardforge.org/images/icons/Hameln.jpg
 https://downloads.cardforge.org/images/icons/Han%20Solo.jpg
@@ -275,6 +276,7 @@ https://downloads.cardforge.org/images/icons/Mines%20of%20Kazum%20Durl.jpg
 https://downloads.cardforge.org/images/icons/Mister%20Fantastic.jpg
 https://downloads.cardforge.org/images/icons/Momir.jpg
 https://downloads.cardforge.org/images/icons/Montgomery%20Burns.jpg
+https://downloads.cardforge.org/images/icons/Morkus%20Rex.jpg
 https://downloads.cardforge.org/images/icons/Morpheus.jpg
 https://downloads.cardforge.org/images/icons/Mortivore.jpg
 https://downloads.cardforge.org/images/icons/Mr%20Slate.jpg

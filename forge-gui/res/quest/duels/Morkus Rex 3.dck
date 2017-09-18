@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Morkus Rex 3
+Title=Morkus Rex
+Difficulty=hard
+Description=WRG Dinosaur ramp deck with Carnage Tyrant and Gishath, Sun's Avatar
+Icon=Morkus Rex.jpg
+Deck Type=constructed
+[main]
+1 Black Lotus
+3 Carnage Tyrant
+1 Chrome Mox|MPS_KLD
+4 Commune with Dinosaurs
+4 Drover of the Mighty
+2 Forest|XLN
+3 Gishath, Sun's Avatar
+2 Inspiring Vantage
+2 Mountain|XLN
+1 Mox Emerald
+1 Mox Pearl
+1 Mox Ruby
+4 Otepec Huntmaster
+1 Plains|XLN
+4 Raging Swordtooth
+3 Ranging Raptors
+3 Regisaur Alpha
+4 Ripjaw Raptor
+3 Rootbound Crag
+4 Savage Stomp
+2 Sunpetal Grove
+3 Timber Gorge
+4 Unclaimed Territory
+[sideboard]
