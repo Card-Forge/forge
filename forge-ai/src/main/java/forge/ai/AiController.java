@@ -1192,8 +1192,9 @@ public class AiController {
             // Hopefully there's not much to do with the extra mana immediately, can wait for Main 2
             return true;
         }
-        if ((predictedMana < totalCMCInHand && canCastWithLandDrop) || (hasRelevantAbsOTB && !isTapLand) || hasLandfall) {
-            // Might need an extra land to cast something or to use an activated ability on the battlefield
+        if ((predictedMana <= totalCMCInHand && canCastWithLandDrop) || (hasRelevantAbsOTB && !isTapLand) || hasLandfall) {
+            // Might need an extra land to cast something, or for some kind of an ETB ability with a cost or an
+            // alternative cost (if we cast it in Main 1), or to use an activated ability on the battlefield
             return false;
         }
 
