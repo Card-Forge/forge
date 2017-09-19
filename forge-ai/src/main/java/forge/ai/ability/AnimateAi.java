@@ -1,28 +1,15 @@
 package forge.ai.ability;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import forge.ai.AiCardMemory;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -37,6 +24,10 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollectionView;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -186,8 +177,18 @@ public class AnimateAi extends SpellAbilityAi {
                             && !ComputerUtilCard.doesSpecifiedCreatureBlock(aiPlayer, animatedCopy)) {
                         return false;
                     }
-                    this.rememberAnimatedThisTurn(aiPlayer, c);
+                    // also check if maybe there are static effects applied to the animated copy that would matter
+                    // (e.g. Myth Realized)
+                    if (animatedCopy.getCurrentPower() + animatedCopy.getCurrentToughness() >
+                            c.getCurrentPower() + c.getCurrentToughness()) {
+                        if (!isAnimatedThisTurn(aiPlayer, sa.getHostCard())) {
+                            bFlag = true;
+                        }
+                    }
                 }
+            }
+            if (bFlag) {
+                this.rememberAnimatedThisTurn(aiPlayer, sa.getHostCard());
             }
             return bFlag; // All of the defined stuff is animated, not very useful
         } else {
