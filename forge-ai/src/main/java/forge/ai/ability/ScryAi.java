@@ -1,14 +1,11 @@
 package forge.ai.ability;
 
+import com.google.common.base.Predicates;
 import forge.ai.SpellAbilityAi;
-import forge.game.card.Card;
+import forge.game.card.*;
 import forge.game.card.Card.SplitCMCMode;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
@@ -17,8 +14,6 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 import java.util.Random;
-
-import com.google.common.base.Predicates;
 
 public class ScryAi extends SpellAbilityAi {
 
@@ -49,6 +44,18 @@ public class ScryAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
+        // if the Scry ability requires tapping and has a mana cost, it's best done at the end of opponent's turn
+        // and right before the beginning of AI's turn, if possible, to avoid mana locking the AI and also to
+        // try to scry right before drawing a card. Also, avoid tapping creatures in the AI's turn, if possible,
+        // even if there's no mana cost.
+        if (sa.getPayCosts() != null) {
+            if (sa.getPayCosts().hasTapCost()
+                    && (sa.getPayCosts().hasManaCost() || (sa.getHostCard() != null && sa.getHostCard().isCreature()))
+                    && !SpellAbilityAi.isSorcerySpeed(sa)) {
+                return ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN);
+            }
+        }
+
         // in the playerturn Scry should only be done in Main1 or in upkeep if able
         if (ph.isPlayerTurn(ai)) {
             if (SpellAbilityAi.isSorcerySpeed(sa)) {
