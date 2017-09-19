@@ -168,4 +168,8 @@ BOUNCE_ALL_ELSEWHERE_NONCREAT_EVAL_DIFF=5
 # -- Experimental feature toggles which only exist until the testing procedure for the relevant --
 # -- features is over. These toggles will be removed later, or may be reintroduced under a --
 # -- different name if necessary --
-# <-- There are currently no experimental options here -->
+
+# Experimental logic for Intuition that makes it work better in reanimator decks, combo decks like Trix,
+# and generally tries to either grab cards that are also good to put in the graveyard or that are available
+# in multiples in the deck.
+INTUITION_SPECIAL_LOGIC=true

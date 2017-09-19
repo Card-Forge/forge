@@ -25,6 +25,7 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
@@ -38,8 +39,12 @@ import forge.game.player.Player;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
+import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.TextUtil;
+import forge.util.maps.LinkedHashMapToAmount;
+import forge.util.maps.MapToAmount;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Arrays;
@@ -520,7 +525,134 @@ public class SpecialCardAi {
             return chosen;
         }
     }
-    
+
+    // Intuition (and any other card that might potentially let you pick N cards from the library,
+    // one of which will then be picked for you by the opponent)
+    public static class Intuition {
+        public static CardCollection considerMultiple(final Player ai, final SpellAbility sa) {
+            if (ai.getController().isAI()) {
+                if (!((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.INTUITION_SPECIAL_LOGIC)) {
+                    return new CardCollection(); // fall back to standard ChangeZoneAi considerations
+                }
+            }
+
+            int changeNum = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("ChangeNum"), sa);
+            CardCollection lib = CardLists.filter(ai.getCardsIn(ZoneType.Library),
+                    Predicates.not(CardPredicates.nameEquals(sa.getHostCard().getName())));
+            Collections.sort(lib, CardLists.CmcComparatorInv);
+
+            // Additional cards which are difficult to auto-classify but which are generally good to Intuition for
+            List<String> highPriorityNamedCards = Lists.newArrayList("Accumulated Knowledge");
+
+            // figure out how many of each card we have in deck
+            MapToAmount<String> cardAmount = new LinkedHashMapToAmount<>();
+            for (Card c : lib) {
+                cardAmount.add(c.getName());
+            }
+
+            // Trix: see if we can complete the combo
+            int numIllusionsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals("Illusions of Grandeur")).size();
+            int numDonateInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals("Donate")).size();
+            int numIllusionsInLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.nameEquals("Illusions of Grandeur")).size();
+            int numIllusionsOTB = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Illusions of Grandeur")).size();
+            int numDonateInLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.nameEquals("Donate")).size();
+            CardCollection comboList = new CardCollection();
+            if ((numIllusionsInHand > 0 || numIllusionsOTB > 0) && numDonateInHand == 0 && numDonateInLib >= 3) {
+                for (Card c : lib) {
+                    if (c.getName().equals("Donate")) {
+                        comboList.add(c);
+                    }
+                }
+                return comboList;
+            } else if (numDonateInHand > 0 && numIllusionsInHand == 0 && numIllusionsInLib >= 3) {
+                for (Card c : lib) {
+                    if (c.getName().equals("Illusions of Grandeur")) {
+                        comboList.add(c);
+                    }
+                }
+                return comboList;
+            }
+
+            // Create a priority list for cards that we have no more than 4 of and that are not lands
+            CardCollection libPriorityList = new CardCollection();
+            CardCollection libHighPriorityList = new CardCollection();
+            CardCollection libLowPriorityList = new CardCollection();
+            List<String> processed = Lists.newArrayList();
+            for (int i = 4; i > 0; i--) {
+                for (Card c : lib) {
+                    if (cardAmount.get(c.getName()) == i && !c.isLand() && !processed.contains(c.getName())) {
+                        // if it's a card that is generally good to place in the graveyard, also add it
+                        // to the mix
+                        boolean canRetFromGrave = false;
+                        String name = c.getName().replace(',', ';');
+                        for (Trigger t : c.getTriggers()) {
+                            SpellAbility ab = null;
+                            if (t.hasParam("Execute")) {
+                                ab = AbilityFactory.getAbility(c.getSVar(t.getParam("Execute")), c);
+                            }
+                            if (ab == null) { continue; }
+
+                            if (ab.getApi() == ApiType.ChangeZone
+                                    && "Self".equals(ab.getParam("Defined"))
+                                    && "Graveyard".equals(ab.getParam("Origin"))
+                                    && "Battlefield".equals(ab.getParam("Destination"))) {
+                                canRetFromGrave = true;
+                            }
+                            if (ab.getApi() == ApiType.ChangeZoneAll
+                                    && TextUtil.concatNoSpace("Creature.named", name).equals(ab.getParam("ChangeType"))
+                                    && "Graveyard".equals(ab.getParam("Origin"))
+                                    && "Battlefield".equals(ab.getParam("Destination"))) {
+                                canRetFromGrave = true;
+                            }
+                        }
+                        boolean isGoodToPutInGrave = c.hasSVar("DiscardMe") || canRetFromGrave
+                                || (ComputerUtil.isPlayingReanimator(ai) && c.isCreature());
+
+                        for (Card c1 : lib) {
+                            if (c1.getName().equals(c.getName())) {
+                                if (CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(c1.getName())).isEmpty()
+                                        && ComputerUtilMana.hasEnoughManaSourcesToCast(c1.getFirstSpellAbility(), ai)) {
+                                    // Try not to search for things we already have in hand or that we can't cast
+                                    libPriorityList.add(c1);
+                                } else {
+                                    libLowPriorityList.add(c1);
+                                }
+                                if (isGoodToPutInGrave || highPriorityNamedCards.contains(c.getName())) {
+                                    libHighPriorityList.add(c1);
+                                }
+                            }
+                        }
+                        processed.add(c.getName());
+                    }
+                }
+            }
+
+            // If we're playing Reanimator, we're really interested just in the highest CMC spells, not the
+            // ones we necessarily have multiples of
+            if (ComputerUtil.isPlayingReanimator(ai)) {
+                Collections.sort(libHighPriorityList, CardLists.CmcComparatorInv);
+            }
+
+            // Otherwise, try to grab something that is hopefully decent to grab, in priority order
+            CardCollection chosen = new CardCollection();
+            if (libHighPriorityList.size() >= changeNum) {
+                for (int i = 0; i < changeNum; i++) {
+                    chosen.add(libHighPriorityList.get(i));
+                }
+            } else if (libPriorityList.size() >= changeNum) {
+                for (int i = 0; i < changeNum; i++) {
+                    chosen.add(libPriorityList.get(i));
+                }
+            } else if (libLowPriorityList.size() >= changeNum) {
+                for (int i = 0; i < changeNum; i++) {
+                    chosen.add(libLowPriorityList.get(i));
+                }
+            }
+
+            return chosen;
+        }
+    }
+
     // Living Death (and possibly other similar cards using AILogic LivingDeath)
     public static class LivingDeath {
         public static boolean consider(final Player ai, final SpellAbility sa) {

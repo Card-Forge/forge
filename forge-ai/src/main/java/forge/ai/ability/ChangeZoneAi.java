@@ -37,7 +37,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * idea to re-factor ChangeZoneAi into more specific effects since it is really doing
      * too much: blink/bounce/exile/tutor/Raise Dead/Surgical Extraction/......
      */
-    
+
+    // multipleCardsToChoose is used by Intuition and can be adapted to be used by other
+    // cards where multiple cards are fetched at once and they need to be coordinated
+    private static CardCollection multipleCardsToChoose = new CardCollection();
+
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         if (sa.getHostCard() != null && sa.getHostCard().hasSVar("AIPreferenceOverride")) {
@@ -60,6 +64,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
     @Override
     protected boolean checkApiLogic(Player aiPlayer, SpellAbility sa) {
         // Checks for "return true" unlike checkAiLogic()
+
+        multipleCardsToChoose.clear();
         String aiLogic = sa.getParam("AILogic");
         if (aiLogic != null) {
             if (aiLogic.equals("Always")) {
@@ -70,8 +76,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return this.doSacAndReturnFromGraveLogic(aiPlayer, sa);
             } else if (aiLogic.equals("Necropotence")) {
                 return SpecialCardAi.Necropotence.consider(aiPlayer, sa);
-            } else if (aiLogic.equals("SameName")) {   // Declaration in Stone
+            } else if (aiLogic.equals("SameName")) { // Declaration in Stone
                 return this.doSameNameLogic(aiPlayer, sa);
+            } else if (aiLogic.equals("Intuition")) {
+                // This logic only fills the multiple cards array, the decision to play is made
+                // separately in hiddenOriginCanPlayAI later.
+                multipleCardsToChoose = SpecialCardAi.Intuition.considerMultiple(aiPlayer, sa);
             }
         }
         if (isHidden(sa)) {
@@ -1343,6 +1353,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return SpecialCardAi.MairsilThePretender.considerCardFromList(fetchList);
             } else if ("SurvivalOfTheFittest".equals(logic)) {
                 return SpecialCardAi.SurvivalOfTheFittest.considerCardToGet(decider, sa);
+            } else if ("Intuition".equals(logic)) {
+                if (!multipleCardsToChoose.isEmpty()) {
+                    Card choice = multipleCardsToChoose.get(0);
+                    multipleCardsToChoose.remove(0);
+                    return choice;
+                }
             }
         }
         if (fetchList.isEmpty()) {
