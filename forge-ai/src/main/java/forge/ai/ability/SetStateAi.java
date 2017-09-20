@@ -87,6 +87,7 @@ public class SetStateAi extends SpellAbilityAi {
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
         final String mode = sa.getParam("Mode");
         final Card source = sa.getHostCard();
+        final String logic = sa.getParamOrDefault("AILogic", "");
         final Game game = source.getGame();
 
         if("Transform".equals(mode)) {
@@ -95,7 +96,7 @@ public class SetStateAi extends SpellAbilityAi {
                 if (source.hasKeyword("CARDNAME can't transform")) {
                     return false;
                 }
-                return shouldTransformCard(source, ai, ph);
+                return shouldTransformCard(source, ai, ph) || "Always".equals(logic);
             } else {
                 final TargetRestrictions tgt = sa.getTargetRestrictions();
                 sa.resetTargets();
@@ -117,7 +118,7 @@ public class SetStateAi extends SpellAbilityAi {
                 }
 
                 for (final Card c : list) {
-                    if (shouldTransformCard(c, ai, ph)) {
+                    if (shouldTransformCard(c, ai, ph) || "Always".equals(logic)) {
                         sa.getTargets().add(c);
                         if (sa.getTargets().getNumTargeted() == tgt.getMaxTargets(source, sa)) {
                             break;
@@ -135,7 +136,7 @@ public class SetStateAi extends SpellAbilityAi {
                 if (list.isEmpty()) {
                     return false;
                 }
-                return shouldTurnFace(list.get(0), ai, ph);
+                return shouldTurnFace(list.get(0), ai, ph) || "Always".equals(logic);
             } else {
                 final TargetRestrictions tgt = sa.getTargetRestrictions();
                 sa.resetTargets();
@@ -148,7 +149,7 @@ public class SetStateAi extends SpellAbilityAi {
                 }
 
                 for (final Card c : list) {
-                    if (shouldTurnFace(c, ai, ph)) {
+                    if (shouldTurnFace(c, ai, ph) || "Always".equals(logic)) {
                         sa.getTargets().add(c);
                         if (sa.getTargets().getNumTargeted() == tgt.getMaxTargets(source, sa)) {
                             break;
@@ -174,7 +175,9 @@ public class SetStateAi extends SpellAbilityAi {
         Card transformed = CardUtil.getLKICopy(card);
         transformed.getCurrentState().copyFrom(card, card.getAlternateState());
         transformed.updateStateForView();
-        
+
+        // TODO: compareCards assumes that a creature will transform into a creature. Need to improve this
+        // for other things potentially transforming.
         return compareCards(card, transformed, ai, ph);
 
     }
