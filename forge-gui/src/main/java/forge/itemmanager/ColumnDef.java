@@ -19,9 +19,9 @@ package forge.itemmanager;
 
 import com.google.common.base.Function;
 import forge.card.*;
+import forge.card.mana.ManaCost;
 import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
-import forge.card.mana.ManaCost;
 import forge.game.GameFormat;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
@@ -33,7 +33,6 @@ import forge.model.FModel;
 
 import java.math.BigDecimal;
 import java.util.Map.Entry;
-import java.util.regex.Pattern;
 
 public enum ColumnDef {
     STRING("", "", 0, false, SortState.ASC,
@@ -59,8 +58,7 @@ public enum ColumnDef {
             new Function<Entry<? extends InventoryItem, Integer>, Object>() {
                 @Override
                 public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    final String name = from.getKey().getName();
-                    return name.contains("AE") ? AE_FINDER.matcher(name).replaceAll("\u00C6") : name;
+                    return from.getKey().getName();
                 }
             }),
     TYPE("Type", "Type", 100, false, SortState.ASC,
@@ -403,8 +401,6 @@ public enum ColumnDef {
     public String toString() {
         return this.longName;
     }
-
-    private static final Pattern AE_FINDER = Pattern.compile("AE", Pattern.LITERAL);
 
     private static String toType(final InventoryItem i) {
         return i instanceof IPaperCard ? ((IPaperCard)i).getRules().getType().toString() : i.getItemType();
