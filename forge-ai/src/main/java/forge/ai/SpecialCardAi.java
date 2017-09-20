@@ -215,8 +215,14 @@ public class SpecialCardAi {
     // Deathgorge Scavenger
     public static class DeathgorgeScavenger {
         public static boolean consider(final Player ai, final SpellAbility sa) {
-            final Card worstCreat = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES));
-            final Card worstNonCreat = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), Predicates.not(CardPredicates.Presets.CREATURES)));
+            Card worstCreat = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES));
+            Card worstNonCreat = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Graveyard), Predicates.not(CardPredicates.Presets.CREATURES)));
+            if (worstCreat == null) {
+                worstCreat = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES));
+            }
+            if (worstNonCreat == null) {
+                worstNonCreat = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), Predicates.not(CardPredicates.Presets.CREATURES)));
+            }
 
             sa.resetTargets();
             if (worstCreat != null && ai.getLife() <= ai.getStartingLife() / 4) {
