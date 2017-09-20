@@ -1,24 +1,10 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
-import forge.ai.AiController;
-import forge.ai.AiProps;
-
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostSacrifice;
@@ -78,6 +64,11 @@ public class DestroyAi extends SpellAbilityAi {
             }
             if ("MadSarkhanDragon".equals(logic)) {
                 return SpecialCardAi.SarkhanTheMad.considerMakeDragon(ai, sa);
+            } else if (logic != null && logic.startsWith("MinLoyalty.")) {
+                int minLoyalty = Integer.parseInt(logic.substring(logic.indexOf(".") + 1));
+                if (source.getCounters(CounterType.LOYALTY) < minLoyalty) {
+                    return false;
+                }
             } else if ("Polymorph".equals(logic)) {
                 list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
                 if (list.isEmpty()) {
