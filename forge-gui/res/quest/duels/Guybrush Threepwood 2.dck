@@ -3,7 +3,7 @@
 Name=Guybrush Threepwood 2
 Title=Guybrush Threepwood
 Difficulty=medium
-Description=UBR Ixalan Pirates deck with Hostage Taker, Treasure tokens and Revel in Riches
+Description=UBR Ixalan Pirates deck with Hostage Taker, Vraska, the Relic Seeker, Treasure tokens and Revel in Riches
 Icon=Guybrush Threepwood.jpg
 Deck Type=constructed
 [main]
@@ -22,12 +22,13 @@ Deck Type=constructed
 2 Mountain|XLN
 2 Pirate's Cutlass|XLN
 2 Prosperous Pirates|XLN
-2 Prying Blade|XLN
-3 Revel in Riches|XLN
+1 Prying Blade|XLN
+2 Revel in Riches|XLN
 4 Sailor of Means|XLN
 1 Sleek Schooner|XLN
 3 Swamp|XLN
 2 Treasure Map|XLN
 2 Trove of Temptation|XLN
 4 Unclaimed Territory|XLN
+2 Vraska, Relic Seeker|XLN
 [sideboard]
