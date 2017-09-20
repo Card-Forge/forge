@@ -1,50 +1,16 @@
 package forge.player;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
-
-import forge.game.ability.AbilityFactory;
-import forge.game.ability.ApiType;
-import forge.game.keyword.Keyword;
-import org.apache.commons.lang3.Range;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Sets;
-
+import com.google.common.collect.*;
 import forge.FThreads;
 import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.achievement.AchievementCollection;
 import forge.ai.GameState;
 import forge.assets.FSkinProp;
-import forge.card.CardDb;
-import forge.card.CardType;
-import forge.card.ColorSet;
-import forge.card.ICardFace;
-import forge.card.MagicColor;
+import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.control.FControlGamePlayback;
@@ -52,42 +18,22 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.events.UiEventNextGameDecision;
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameEntityView;
-import forge.game.GameLogEntryType;
-import forge.game.GameObject;
-import forge.game.GameType;
-import forge.game.PlanarDice;
+import forge.game.*;
+import forge.game.ability.AbilityFactory;
+import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardShields;
-import forge.game.card.CardView;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
+import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
-import forge.game.player.DelayedReveal;
-import forge.game.player.Player;
-import forge.game.player.PlayerActionConfirmMode;
-import forge.game.player.PlayerController;
-import forge.game.player.PlayerView;
+import forge.game.player.*;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementLayer;
-import forge.game.spellability.AbilityManaPart;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.OptionalCostValue;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.spellability.SpellAbilityView;
-import forge.game.spellability.TargetChoices;
+import forge.game.spellability.*;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.MagicStack;
@@ -101,30 +47,25 @@ import forge.interfaces.IMacroSystem;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.match.NextGameDecision;
-import forge.match.input.Input;
-import forge.match.input.InputAttack;
-import forge.match.input.InputBlock;
-import forge.match.input.InputConfirm;
-import forge.match.input.InputConfirmMulligan;
-import forge.match.input.InputPassPriority;
-import forge.match.input.InputPayMana;
-import forge.match.input.InputProliferate;
-import forge.match.input.InputProxy;
-import forge.match.input.InputQueue;
-import forge.match.input.InputSelectCardsForConvokeOrImprovise;
-import forge.match.input.InputSelectCardsFromList;
-import forge.match.input.InputSelectEntitiesFromList;
+import forge.match.input.*;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences.FPref;
-import forge.util.collect.FCollection;
-import forge.util.collect.FCollectionView;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
 import forge.util.MessageUtil;
 import forge.util.TextUtil;
+import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 import forge.util.gui.SOptionPane;
-import java.util.Arrays;
+import org.apache.commons.lang3.Range;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.io.*;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * A prototype for player controller class
@@ -541,6 +482,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      */
     @Override
     public boolean confirmAction(final SpellAbility sa, final PlayerActionConfirmMode mode, final String message) {
+        if (sa != null && sa.getHostCard() != null && sa.hasParam("ShowRememberedInPrompt")) {
+            Card remembered = (Card)sa.getHostCard().getFirstRemembered();
+            if (sa != null) {
+                tempShowCard(remembered);
+                boolean result = InputConfirm.confirm(this, ((Card) sa.getHostCard().getFirstRemembered()).getView(), message);
+                endTempShowCards();
+                return result;
+            }
+        }
+
         return InputConfirm.confirm(this, sa, message);
     }
 
