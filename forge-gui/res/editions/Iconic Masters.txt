@@ -105,7 +105,7 @@ FoilChanceInBooster=100
 94 U Indulgent Tormentor
 95 R Kokusho, the Evening Star
 96 R Lord of the Pit
-97 U Mer-ek Nightblade
+97 U Mer-Ek Nightblade
 98 M Necropotence
 99 R Night of Souls' Betrayal
 100 U Noxious Dragon
