@@ -908,14 +908,23 @@ public class ComputerUtil {
         		return true;
         	} else if (card.getSVar("PlayMain1").equals("OPPONENTCREATURES")) {
         		//Only play these main1 when the opponent has creatures (stealing and giving them haste)
-        		if (!ComputerUtil.getOpponentFor(card.getController()).getCreaturesInPlay().isEmpty()) {
+        		if (!ai.getOpponents().getCreaturesInPlay().isEmpty()) {
         			return true;
         		}
         	} else if (!card.getController().getCreaturesInPlay().isEmpty()) {
         		return true;
         	}
         }
-        
+
+        // try not to cast Raid creatures in main 1 if an attack is likely
+        if ("Count$AttackersDeclared".equals(card.getSVar("RaidTest")) && !card.hasKeyword("Haste")) {
+            for (Card potentialAtkr: ai.getCreaturesInPlay()) {
+                if (ComputerUtilCard.doesCreatureAttackAI(ai, potentialAtkr)) {
+                    return false;
+                }
+            }
+        }
+
         if (card.getManaCost().isZero()) {
         	return true;
         }
