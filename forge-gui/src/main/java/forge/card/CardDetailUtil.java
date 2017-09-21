@@ -265,7 +265,12 @@ public class CardDetailUtil {
 
         // Token
         if (card.isToken()) {
-            area.append("Token");
+            if(card.getCurrentState().getType().hasSubtype("Effect"))
+                area.append("Effect");
+            else if(card.getCurrentState().getType().isEmblem())
+                area.append("Emblem");
+            else
+                area.append("Token");
         }
 
         // card text

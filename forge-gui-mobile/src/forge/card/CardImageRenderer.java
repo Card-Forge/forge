@@ -349,6 +349,8 @@ public class CardImageRenderer {
             if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
                     && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane()))
                 g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
+            else if(isCurrentCard && card.isSplitCard())
+                g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, card.getText().contains("Aftermath") ? 90:-90);
             else
                 g.drawImage(image, x, y, w, h);
         }
