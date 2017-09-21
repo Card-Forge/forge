@@ -1169,7 +1169,7 @@ public class AiController {
             }
         }).isEmpty();
 
-        boolean hasLandfall = !CardLists.filter(otb, new Predicate<Card>() {
+        boolean hasLandBasedEffect = !CardLists.filter(otb, new Predicate<Card>() {
             @Override
             public boolean apply(Card card) {
                 for (Trigger t : card.getTriggers()) {
@@ -1183,16 +1183,28 @@ public class AiController {
                         return true;
                     }
                 }
+                for (String sv : card.getSVars().keySet()) {
+                    String varValue = card.getSVar(sv);
+                    if (varValue.startsWith("Count$Valid") || sv.equals("BuffedBy")) {
+                        if (varValue.contains("Land") || varValue.contains("Plains") || varValue.contains("Forest")
+                                || varValue.contains("Mountain") || varValue.contains("Island") || varValue.contains("Swamp")
+                                || varValue.contains("Wastes")) {
+                            // In presence of various cards that get buffs like "equal to the number of lands you control",
+                            // safer for our AI model to just play the land earlier rather than make a blunder
+                            return true;
+                        }
+                    }
+                }
                 return false;
             }
         }).isEmpty();
 
         // TODO: add prediction for effects that will untap a tapland as it enters the battlefield
-        if (!canCastWithLandDrop && cantCastAnythingNow && !hasLandfall && (!hasRelevantAbsOTB || isTapLand)) {
+        if (!canCastWithLandDrop && cantCastAnythingNow && !hasLandBasedEffect && (!hasRelevantAbsOTB || isTapLand)) {
             // Hopefully there's not much to do with the extra mana immediately, can wait for Main 2
             return true;
         }
-        if ((predictedMana <= totalCMCInHand && canCastWithLandDrop) || (hasRelevantAbsOTB && !isTapLand) || hasLandfall) {
+        if ((predictedMana <= totalCMCInHand && canCastWithLandDrop) || (hasRelevantAbsOTB && !isTapLand) || hasLandBasedEffect) {
             // Might need an extra land to cast something, or for some kind of an ETB ability with a cost or an
             // alternative cost (if we cast it in Main 1), or to use an activated ability on the battlefield
             return false;
