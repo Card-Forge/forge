@@ -17,11 +17,11 @@
  */
 package forge.game.replacement;
 
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.ability.AbilityUtils;
 import forge.util.Expressions;
 
 import java.util.Map;
@@ -81,6 +81,10 @@ public class ReplaceDamage extends ReplacementEffect {
             if (!Expressions.compare((Integer) runParams.get("DamageAmount"), operator, intoperand)) {
                 return false;
             }
+        }
+        if (((Integer) runParams.get("DamageAmount")) == 0) {
+            // If no actual damage is dealt, there is nothing to replace
+            return false;
         }
         if (hasParam("IsCombat")) {
             if (getParam("IsCombat").equals("True")) {
