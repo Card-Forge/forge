@@ -67,6 +67,10 @@ public class ReplaceDamage extends ReplacementEffect {
                 return false;
             }
         }
+        if (((Integer) runParams.get("DamageAmount")) == 0) {
+            // If no actual damage is dealt, there is nothing to replace
+            return false;
+        }
         if (hasParam("DamageAmount")) {
             String full = getParam("DamageAmount");
             String operator = full.substring(0, 2);
@@ -81,10 +85,6 @@ public class ReplaceDamage extends ReplacementEffect {
             if (!Expressions.compare((Integer) runParams.get("DamageAmount"), operator, intoperand)) {
                 return false;
             }
-        }
-        if (((Integer) runParams.get("DamageAmount")) == 0) {
-            // If no actual damage is dealt, there is nothing to replace
-            return false;
         }
         if (hasParam("IsCombat")) {
             if (getParam("IsCombat").equals("True")) {
