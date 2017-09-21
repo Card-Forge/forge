@@ -43,11 +43,12 @@ public class DeckgenUtil {
 
     public static Deck buildCardGenDeck(GameFormat format, boolean isForAI){
         Random random    = new Random();
-        List<String> keys      = new ArrayList<>(CardRelationMatrixGenerator.cardPools.get(format).keySet());
-        String       randomKey = keys.get( random.nextInt(keys.size()) );
-        Predicate<PaperCard> cardFilter = Predicates.and(format.getFilterPrinted(),PaperCard.Predicates.name(randomKey));
-        PaperCard keyCard = FModel.getMagicDb().getCommonCards().getAllCards(cardFilter).get(0);
         try {
+            List<String> keys      = new ArrayList<>(CardRelationMatrixGenerator.cardPools.get(format).keySet());
+            String       randomKey = keys.get( random.nextInt(keys.size()) );
+            Predicate<PaperCard> cardFilter = Predicates.and(format.getFilterPrinted(),PaperCard.Predicates.name(randomKey));
+            PaperCard keyCard = FModel.getMagicDb().getCommonCards().getAllCards(cardFilter).get(0);
+
             return buildCardGenDeck(keyCard,format,isForAI);
         }catch (Exception e){
             e.printStackTrace();
