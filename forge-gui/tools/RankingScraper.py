@@ -116,7 +116,7 @@ if __name__ == "__main__":
 	result = parser.parse_args()
 
 	if len(result.setcode) < 4:
-		bestiaireRanking(result.setcode, result.name)
+		draftsimRankings(result.setcode, result.name)
 
 	else:
 		smdsRankings(result.setcode, result.name)
