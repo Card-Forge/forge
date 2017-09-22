@@ -1,7 +1,9 @@
 package forge.game.trigger;
 
 import java.util.Map;
+import java.util.Set;
 
+import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -12,15 +14,11 @@ public class TriggerDamageDoneOnce extends Trigger {
 
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public boolean performTest(Map<String, Object> runParams2) {
-        final Object tgt = runParams2.get("DamageTarget");
-        if (this.mapParams.containsKey("ValidTarget")) {
-            if (!matchesValid(tgt, this.mapParams.get("ValidTarget").split(","), this.getHostCard())) {
-                return false;
-            }
-        }
-        
+        final Set<Card> srcs = (Set<Card>) runParams2.get("DamageSources");
+        final GameEntity tgt = (GameEntity) runParams2.get("DamageTarget");
 
         if (this.mapParams.containsKey("CombatDamage")) {
             if (this.mapParams.get("CombatDamage").equals("True")) {
@@ -34,14 +32,36 @@ public class TriggerDamageDoneOnce extends Trigger {
             }
         }
         
+        if (this.mapParams.containsKey("ValidSource")) {
+            boolean valid = false;
+            for (Card c : srcs) {
+                if (c.isValid(this.mapParams.get("ValidSource").split(","), this.getHostCard().getController(),this.getHostCard(), null)) {
+                    valid = true;
+                }
+            }
+            if (!valid) {
+                return false;
+            }
+        }
+        
+        if (this.mapParams.containsKey("ValidTarget")) {
+            if (!matchesValid(tgt, this.mapParams.get("ValidTarget").split(","), this.getHostCard())) {
+                return false;
+            }
+        }
+        
+
+        
         return true;
     }
 
     @Override
     public void setTriggeringObjects(SpellAbility sa) {
-
         if (this.getRunParams().containsKey("DamageTarget")) {
             sa.setTriggeringObject("Target", this.getRunParams().get("DamageTarget"));
+        }
+        if (this.getRunParams().containsKey("DamageSources")) {
+            sa.setTriggeringObject("Sources", this.getRunParams().get("DamageSources"));
         }
         sa.setTriggeringObject("DamageAmount", this.getRunParams().get("DamageAmount"));
         

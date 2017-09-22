@@ -719,6 +719,7 @@ forge-game/src/main/java/forge/game/trigger/TriggerCounterRemoved.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerCountered.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerCrewed.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerCycled.java svneol=native#text/plain
+forge-game/src/main/java/forge/game/trigger/TriggerDamageDealtOnce.java -text svneol=unset#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerDamageDone.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerDamageDoneOnce.java -text svneol=unset#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerDamagePrevented.java -text svneol=unset#text/plain

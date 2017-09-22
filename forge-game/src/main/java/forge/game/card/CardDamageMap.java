@@ -50,6 +50,24 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
     }
 
     public void triggerDamageDoneOnce(boolean isCombat) {
+        // Source -> Targets
+        for (Map.Entry<Card, Map<GameEntity, Integer>> e : this.rowMap().entrySet()) {
+            int sum = 0;
+            for (final Integer i : e.getValue().values()) {
+                sum += i;
+            }
+            if (sum > 0) {
+                final GameEntity ge = e.getKey();
+                final Map<String, Object> runParams = Maps.newHashMap();
+                runParams.put("DamageSource", ge);
+                runParams.put("DamageTargets", Sets.newHashSet(e.getValue().keySet()));
+                runParams.put("DamageAmount", sum);
+                runParams.put("IsCombatDamage", isCombat);
+                
+                ge.getGame().getTriggerHandler().runTrigger(TriggerType.DamageDealtOnce, runParams, false);
+            }
+        }
+        // Targets -> Source
         for (Map.Entry<GameEntity, Map<Card, Integer>> e : this.columnMap().entrySet()) {
             int sum = 0;
             for (final int i : e.getValue().values()) {
