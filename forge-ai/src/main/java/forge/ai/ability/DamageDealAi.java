@@ -123,9 +123,20 @@ public class DamageDealAi extends DamageAiBase {
             dmg += 2;
         }
         
-        String logic = sa.getParam("AILogic");
+        String logic = sa.getParamOrDefault("AILogic", "");
         if ("DiscardLands".equals(logic)) {
             dmg = 2;
+        } else if (logic.startsWith("ProcRaid.")) {
+            if (ai.getGame().getPhaseHandler().isPlayerTurn(ai) && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                for (Card potentialAtkr : ai.getCreaturesInPlay()) {
+                    if (ComputerUtilCard.doesCreatureAttackAI(ai, potentialAtkr)) {
+                        return false;
+                    }
+                }
+            }
+            if (ai.getAttackedWithCreatureThisTurn()) {
+                dmg = Integer.parseInt(logic.substring(logic.indexOf(".") + 1));
+            }
         } else if ("WildHunt".equals(logic)) {
             // This dummy ability will just deal 0 damage, but holds the logic for the AI for Master of Wild Hunt
             List<Card> wolves = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), "Creature.Wolf+untapped+YouCtrl+Other", ai, source);
