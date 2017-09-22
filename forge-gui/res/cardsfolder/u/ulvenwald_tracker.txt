@@ -6,4 +6,4 @@ A:AB$ Pump | Cost$ 1 G T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose targe
 SVar:TrackerFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature | TargetUnique$ True | TgtPrompt$ Choose target creature to fight the first target
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ulvenwald_tracker.jpg
-Oracle:{1}{G}, {T}: Target creature you control fights another target creature. (Each deals damage equal to its power to the other.)
+Oracle:{1}{G}, {T}: Target creature you control fights another target creature.
