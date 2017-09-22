@@ -407,7 +407,11 @@ public class ComputerUtilCombat {
 
             if (blockers.isEmpty()) {
                 if (!attacker.getSVar("MustBeBlocked").equals("")) {
-                    return true;
+                    boolean cond = !"attackingplayer".equalsIgnoreCase(attacker.getSVar("MustBeBlocked"))
+                            || combat.getDefenderByAttacker(attacker) instanceof Player;
+                    if (cond) {
+                        return true;
+                    }
                 }
             }
             if (threateningCommanders.contains(attacker)) {
@@ -2543,9 +2547,12 @@ public class ComputerUtilCombat {
                 if (exec != null) {
                     if (exec.getApi() == ApiType.Clone && "Self".equals(exec.getParam("CloneTarget"))
                             && exec.hasParam("ValidTgts") && exec.getParam("ValidTgts").contains("Creature")
-                            && exec.getParam("ValidTgts").contains("+attacking")) {
+                            && exec.getParam("ValidTgts").contains("attacking")) {
                         // Tilonalli's Skinshifter and potentially other similar cards that can clone other stuff
                         // while attacking
+                        if (exec.getParam("ValidTgts").contains("nonLegendary") && attacker.getType().isLegendary()) {
+                            continue;
+                        }
                         int maxPwr = 0;
                         for (Card c : attacker.getController().getCreaturesInPlay()) {
                             if (c.getNetPower() > maxPwr || (c.getNetPower() == maxPwr && ComputerUtilCard.evaluateCreature(c) > ComputerUtilCard.evaluateCreature(attackerAfterTrigs))) {
