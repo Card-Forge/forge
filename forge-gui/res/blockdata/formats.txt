@@ -1,5 +1,5 @@
 [Standard]
-Sets:W16, KLD, AER, AKH, W17, HOU, XLN
+Sets:KLD, AER, AKH, W17, HOU, XLN
 Banned: Emrakul, the Promised End; Smuggler's Copter; Reflector Mage; Aetherworks Marvel; Felidar Guardian
 
 [Extended]
