@@ -548,7 +548,7 @@ public class SpecialCardAi {
             Collections.sort(lib, CardLists.CmcComparatorInv);
 
             // Additional cards which are difficult to auto-classify but which are generally good to Intuition for
-            List<String> highPriorityNamedCards = Lists.newArrayList("Accumulated Knowledge");
+            List<String> highPriorityNamedCards = Lists.newArrayList("Accumulated Knowledge", "Take Inventory");
 
             // figure out how many of each card we have in deck
             MapToAmount<String> cardAmount = new LinkedHashMapToAmount<>();
@@ -556,27 +556,31 @@ public class SpecialCardAi {
                 cardAmount.add(c.getName());
             }
 
-            // Trix: see if we can complete the combo
-            int numIllusionsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals("Illusions of Grandeur")).size();
-            int numDonateInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals("Donate")).size();
-            int numIllusionsInLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.nameEquals("Illusions of Grandeur")).size();
-            int numIllusionsOTB = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Illusions of Grandeur")).size();
-            int numDonateInLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.nameEquals("Donate")).size();
-            CardCollection comboList = new CardCollection();
-            if ((numIllusionsInHand > 0 || numIllusionsOTB > 0) && numDonateInHand == 0 && numDonateInLib >= 3) {
-                for (Card c : lib) {
-                    if (c.getName().equals("Donate")) {
-                        comboList.add(c);
+            // Trix: see if we can complete the combo (if it looks like we might win shortly)
+            boolean donateComboMightWin = false;
+            if (ai.getOpponentsSmallestLifeTotal() <= 20) {
+                donateComboMightWin = true;
+                int numIllusionsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals("Illusions of Grandeur")).size();
+                int numDonateInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals("Donate")).size();
+                int numIllusionsInLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.nameEquals("Illusions of Grandeur")).size();
+                int numIllusionsOTB = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Illusions of Grandeur")).size();
+                int numDonateInLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.nameEquals("Donate")).size();
+                CardCollection comboList = new CardCollection();
+                if ((numIllusionsInHand > 0 || numIllusionsOTB > 0) && numDonateInHand == 0 && numDonateInLib >= 3) {
+                    for (Card c : lib) {
+                        if (c.getName().equals("Donate")) {
+                            comboList.add(c);
+                        }
                     }
-                }
-                return comboList;
-            } else if (numDonateInHand > 0 && numIllusionsInHand == 0 && numIllusionsInLib >= 3) {
-                for (Card c : lib) {
-                    if (c.getName().equals("Illusions of Grandeur")) {
-                        comboList.add(c);
+                    return comboList;
+                } else if (numDonateInHand > 0 && numIllusionsInHand == 0 && numIllusionsInLib >= 3) {
+                    for (Card c : lib) {
+                        if (c.getName().equals("Illusions of Grandeur")) {
+                            comboList.add(c);
+                        }
                     }
+                    return comboList;
                 }
-                return comboList;
             }
 
             // Create a priority list for cards that we have no more than 4 of and that are not lands
@@ -586,6 +590,11 @@ public class SpecialCardAi {
             List<String> processed = Lists.newArrayList();
             for (int i = 4; i > 0; i--) {
                 for (Card c : lib) {
+                    if (!donateComboMightWin && (c.getName().equals("Illusions of Grandeur") || c.getName().equals("Donate"))) {
+                        // Probably not worth putting two of the combo pieces into the graveyard
+                        // since one Illusions-Donate is likely to not be enough
+                        continue;
+                    }
                     if (cardAmount.get(c.getName()) == i && !c.isLand() && !processed.contains(c.getName())) {
                         // if it's a card that is generally good to place in the graveyard, also add it
                         // to the mix
