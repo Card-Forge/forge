@@ -2527,6 +2527,38 @@ public class ComputerUtilCombat {
 
         return categorizedAttackers;
     }
+
+    public static Card applyPotentialAttackCloneTriggers(Card attacker) {
+        // This method returns the potentially cloned card if the creature turns into something else during the attack
+        // (currently looks for the creature with maximum raw power since that's what the AI usually judges by when
+        // deciding whether the creature is worth blocking).
+        // If the creature doesn't change into anything, returns the original creature.
+        Card attackerAfterTrigs = attacker;
+
+        // Test for some special triggers that can change the creature in combat
+        for (Trigger t : attacker.getTriggers()) {
+            if (t.getMode() == TriggerType.Attacks && t.hasParam("Execute")) {
+                SpellAbility exec = AbilityFactory.getAbility(attacker, t.getParam("Execute"));
+                if (exec != null) {
+                    if (exec.getApi() == ApiType.Clone && "Self".equals(exec.getParam("CloneTarget"))
+                            && exec.hasParam("ValidTgts") && exec.getParam("ValidTgts").contains("Creature")
+                            && exec.getParam("ValidTgts").contains("+attacking")) {
+                        // Tilonalli's Skinshifter and potentially other similar cards that can clone other stuff
+                        // while attacking
+                        int maxPwr = 0;
+                        for (Card c : attacker.getController().getCreaturesInPlay()) {
+                            if (c.getNetPower() > maxPwr) {
+                                maxPwr = c.getNetPower();
+                                attackerAfterTrigs = c;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return attackerAfterTrigs;
+    }
 }
 
 

@@ -17,19 +17,13 @@
  */
 package forge.ai;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
-
 import forge.ai.ability.AnimateAi;
 import forge.card.CardTypeView;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
-import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.ProtectEffect;
 import forge.game.card.*;
@@ -44,6 +38,10 @@ import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 
 //doesHumanAttackAndWin() uses the global variable AllZone.getComputerPlayer()
@@ -377,8 +375,12 @@ public class AiAttackController {
                 blockersLeft--;
                 continue;
             }
-            totalAttack += ComputerUtilCombat.damageIfUnblocked(attacker, ai, null, false);
-            totalPoison += ComputerUtilCombat.poisonIfUnblocked(attacker, ai);
+
+            // Test for some special triggers that can change the creature in combat
+            Card effectiveAttacker = ComputerUtilCombat.applyPotentialAttackCloneTriggers(attacker);
+
+            totalAttack += ComputerUtilCombat.damageIfUnblocked(effectiveAttacker, ai, null, false);
+            totalPoison += ComputerUtilCombat.poisonIfUnblocked(effectiveAttacker, ai);
         }
 
         if (totalAttack > 0 && ai.getLife() <= totalAttack && !ai.cantLoseForZeroOrLessLife()) {
