@@ -1,5 +1,7 @@
 package forge.game.ability.effects;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import forge.GameCommand;
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -10,6 +12,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.Lang;
+import forge.util.TextUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -121,6 +124,11 @@ public class ProtectEffect extends SpellAbilityEffect {
             }
         }
 
+        List<String> gainsKWList = Lists.newArrayList();
+        for (String color : gains) {
+            gainsKWList.add(TextUtil.concatWithSpace("Protection from", color));
+        }
+
         final List<Card> untargetedCards = new ArrayList<Card>();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
@@ -131,6 +139,8 @@ public class ProtectEffect extends SpellAbilityEffect {
             }
         }
 
+
+        final long timestamp = game.getNextTimestamp();
 
         for (final Card tgtC : tgtCards) {
             // only pump things in play
@@ -143,10 +153,7 @@ public class ProtectEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            for (final String gain : gains) {
-                tgtC.addExtrinsicKeyword("Protection from " + gain);
-                tgtC.updateKeywords();
-            }
+            tgtC.addChangedCardKeywords(gainsKWList, ImmutableList.<String>of(), false, timestamp, true);
 
             if (!sa.hasParam("Permanent")) {
                 // If not Permanent, remove protection at EOT
@@ -156,9 +163,7 @@ public class ProtectEffect extends SpellAbilityEffect {
                     @Override
                     public void run() {
                         if (tgtC.isInPlay()) {
-                            for (final String gain : gains) {
-                                tgtC.removeExtrinsicKeyword("Protection from " + gain);
-                            }
+                            tgtC.removeChangedCardKeywords(timestamp, true);
                         }
                     }
                 };
@@ -176,10 +181,7 @@ public class ProtectEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            for (final String gain : gains) {
-                unTgtC.addExtrinsicKeyword("Protection from " + gain);
-                unTgtC.updateKeywords();
-            }
+            unTgtC.addChangedCardKeywords(gainsKWList, ImmutableList.<String>of(), false, timestamp, true);
 
             if (!sa.hasParam("Permanent")) {
                 // If not Permanent, remove protection at EOT
@@ -189,9 +191,7 @@ public class ProtectEffect extends SpellAbilityEffect {
                     @Override
                     public void run() {
                         if (unTgtC.isInPlay()) {
-                            for (final String gain : gains) {
-                                unTgtC.removeExtrinsicKeyword("Protection from " + gain);
-                            }
+                            unTgtC.removeChangedCardKeywords(timestamp, true);
                         }
                     }
                 };

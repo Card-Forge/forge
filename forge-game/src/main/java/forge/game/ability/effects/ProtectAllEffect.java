@@ -1,5 +1,7 @@
 package forge.game.ability.effects;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import forge.GameCommand;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -14,11 +16,10 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
+import forge.util.TextUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.google.common.collect.ImmutableList;
 
 public class ProtectAllEffect extends SpellAbilityEffect {
 
@@ -73,6 +74,11 @@ public class ProtectAllEffect extends SpellAbilityEffect {
             }
         }
 
+        List<String> gainsKWList = Lists.newArrayList();
+        for (String color : gains) {
+            gainsKWList.add(TextUtil.concatWithSpace("Protection from", color));
+        }
+
         // Deal with permanents
         String valid = "";
         if (sa.hasParam("ValidCards")) {
@@ -84,10 +90,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
 
             for (final Card tgtC : list) {
                 if (tgtC.isInPlay()) {
-                    for (final String gain : gains) {
-                        tgtC.addExtrinsicKeyword("Protection from " + gain);
-                        tgtC.updateKeywords();
-                    }
+                    tgtC.addChangedCardKeywords(gainsKWList, ImmutableList.<String>of(), false, timestamp, true);
 
                     if (!sa.hasParam("Permanent")) {
                         // If not Permanent, remove protection at EOT
@@ -97,9 +100,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
                             @Override
                             public void run() {
                                 if (tgtC.isInPlay()) {
-                                    for (final String gain : gains) {
-                                        tgtC.removeExtrinsicKeyword("Protection from " + gain);
-                                    }
+                                    tgtC.removeChangedCardKeywords(timestamp, true);
                                 }
                             }
                         };
