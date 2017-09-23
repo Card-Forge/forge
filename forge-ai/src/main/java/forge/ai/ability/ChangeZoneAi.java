@@ -57,7 +57,21 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
             }
+        } else if (aiLogic.equals("PriorityOptionalCost")) {
+            boolean highPriority = false;
+            // if we have more than one of these in hand, might not be worth waiting for optional cost payment on the additional copy
+            highPriority |= CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(sa.getHostCard().getName())).size() > 1;
+            // if we are in danger in combat, no need to wait to pay the optional cost
+            highPriority |= ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                    && ai.getGame().getCombat() != null && ComputerUtilCombat.lifeInDanger(ai, ai.getGame().getCombat());
+
+            if (!highPriority) {
+                if (Iterables.isEmpty(sa.getOptionalCosts())) {
+                    return false;
+                }
+            }
         }
+
         return super.checkAiLogic(ai, sa, aiLogic);
     }
 
