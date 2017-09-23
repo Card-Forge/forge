@@ -170,7 +170,7 @@ public class DigEffect extends SpellAbilityEffect {
                     // TODO: until Explore is written as a separate effect, this param can be used to emulate "X Explores"
                     // by firing the relevant trigger. Once Explores is a separate effect, this code can be removed.
                     final Map<String, Object> runParams = Maps.newHashMap();
-                    runParams.put("Explorer", sa.getHostCard());
+                    runParams.put("Card", sa.getHostCard());
                     game.getTriggerHandler().runTrigger(TriggerType.Explores, runParams, false);
                 }
 
