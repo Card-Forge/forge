@@ -1896,7 +1896,8 @@ public class ComputerUtil {
         int numCards = allCreatures.size();
 
         if (landsOTB.size() < maxLandsToScryLandsToTop && landsInHand.isEmpty()) {
-            if ((!c.isLand() && !manaArts.contains(c.getName())) || c.getManaAbilities().isEmpty()) {
+            if ((!c.isLand() && !manaArts.contains(c.getName()))
+                    || (c.getManaAbilities().isEmpty() && !c.hasABasicLandType())) {
                 // scry away non-lands and non-manaproducing lands in situations when the land count
                 // on the battlefield is low, to try to improve the mana base early
                 bottom = true;
