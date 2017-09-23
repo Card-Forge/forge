@@ -350,7 +350,12 @@ public class ComputerUtilCard {
         }
     
         if (hasEnchantmants || hasArtifacts) {
-            final List<Card> ae = CardLists.filter(list, Predicates.<Card>or(CardPredicates.Presets.ARTIFACTS, CardPredicates.Presets.ENCHANTMENTS));
+            final List<Card> ae = CardLists.filter(list, Predicates.and(Predicates.<Card>or(CardPredicates.Presets.ARTIFACTS, CardPredicates.Presets.ENCHANTMENTS), new Predicate<Card>() {
+                @Override
+                public boolean apply(Card card) {
+                    return !card.hasSVar("DoNotDiscardIfAble");
+                }
+            }));
             return getCheapestPermanentAI(ae, null, false);
         }
     
@@ -361,6 +366,28 @@ public class ComputerUtilCard {
         // Planeswalkers fall through to here, lands will fall through if there
         // aren't very many
         return getCheapestPermanentAI(list, null, false);
+    }
+
+    public static final Card getCheapestSpellAI(final Iterable<Card> list) {
+        if (!Iterables.isEmpty(list)) {
+            CardCollection cc = CardLists.filter(new CardCollection(list),
+                    Predicates.or(CardPredicates.isType("Instant"), CardPredicates.isType("Sorcery")));
+            Collections.sort(cc, CardLists.CmcComparatorInv);
+
+            Card cheapest = cc.getLast();
+            if (cheapest.hasSVar("DoNotDiscardIfAble")) {
+                for (int i = cc.size() - 1; i >= 0; i--) {
+                    if (!cc.get(i).hasSVar("DoNotDiscardIfAble")) {
+                        cheapest = cc.get(i);
+                        break;
+                    }
+                }
+            }
+
+            return cheapest;
+        }
+
+        return null;
     }
 
     public static final Comparator<Card> EvaluateCreatureComparator = new Comparator<Card>() {

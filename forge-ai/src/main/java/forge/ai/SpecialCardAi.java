@@ -537,7 +537,7 @@ public class SpecialCardAi {
     public static class Intuition {
         public static CardCollection considerMultiple(final Player ai, final SpellAbility sa) {
             if (ai.getController().isAI()) {
-                if (!((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.INTUITION_SPECIAL_LOGIC)) {
+                if (!((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.INTUITION_ALTERNATIVE_LOGIC)) {
                     return new CardCollection(); // fall back to standard ChangeZoneAi considerations
                 }
             }
@@ -556,14 +556,14 @@ public class SpecialCardAi {
                 cardAmount.add(c.getName());
             }
 
-            // Trix: see if we can complete the combo (if it looks like we might win shortly)
+            // Trix: see if we can complete the combo (if it looks like we might win shortly or if we need to get a Donate stat)
             boolean donateComboMightWin = false;
-            if (ai.getOpponentsSmallestLifeTotal() <= 20) {
+            int numIllusionsOTB = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Illusions of Grandeur")).size();
+            if (ai.getOpponentsSmallestLifeTotal() < 20 || numIllusionsOTB > 0) {
                 donateComboMightWin = true;
                 int numIllusionsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals("Illusions of Grandeur")).size();
                 int numDonateInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals("Donate")).size();
                 int numIllusionsInLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.nameEquals("Illusions of Grandeur")).size();
-                int numIllusionsOTB = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Illusions of Grandeur")).size();
                 int numDonateInLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.nameEquals("Donate")).size();
                 CardCollection comboList = new CardCollection();
                 if ((numIllusionsInHand > 0 || numIllusionsOTB > 0) && numDonateInHand == 0 && numDonateInLib >= 3) {

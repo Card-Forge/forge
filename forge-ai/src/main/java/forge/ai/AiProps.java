@@ -94,9 +94,10 @@ public enum AiProps { /** */
     BOUNCE_ALL_TO_HAND_CREAT_EVAL_DIFF ("200"), /** */
     BOUNCE_ALL_ELSEWHERE_CREAT_EVAL_DIFF ("200"), /** */
     BOUNCE_ALL_TO_HAND_NONCREAT_EVAL_DIFF ("3"), /** */
-    BOUNCE_ALL_ELSEWHERE_NONCREAT_EVAL_DIFF ("3"), /** */
+    BOUNCE_ALL_ELSEWHERE_NONCREAT_EVAL_DIFF ("3"),
+    INTUITION_ALTERNATIVE_LOGIC ("false"); /** */
     // Experimental features, must be removed after extensive testing and, ideally, defaulting
-    INTUITION_SPECIAL_LOGIC ("false"); /** */
+    // <-- There are no experimental options here -->
 
     private final String strDefaultVal;
 

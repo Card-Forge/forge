@@ -165,11 +165,14 @@ BOUNCE_ALL_ELSEWHERE_CREAT_EVAL_DIFF=400
 BOUNCE_ALL_TO_HAND_NONCREAT_EVAL_DIFF=5
 BOUNCE_ALL_ELSEWHERE_NONCREAT_EVAL_DIFF=5
 
+# If enabled, the AI will try to pair up cards to present to the opponent so that a specific card may be picked,
+# it'll also try to grab Accumulated Knowledge and Take Inventory more actively, as well as interact with the Trix
+# combo deck more appropriately. In Reanimator decks, this logic will make the AI pick the fattest threats in the
+# library to put some into the graveyard.
+INTUITION_ALTERNATIVE_LOGIC=true
+
 # -- Experimental feature toggles which only exist until the testing procedure for the relevant --
 # -- features is over. These toggles will be removed later, or may be reintroduced under a --
 # -- different name if necessary --
 
-# Experimental logic for Intuition that makes it work better in reanimator decks, combo decks like Trix,
-# and generally tries to either grab cards that are also good to put in the graveyard or that are available
-# in multiples in the deck.
-INTUITION_SPECIAL_LOGIC=true
+# <-- there are no options here at the moment -->

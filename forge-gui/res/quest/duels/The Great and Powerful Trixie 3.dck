@@ -3,25 +3,19 @@
 Name=The Great and Powerful Trixie 3
 Title=The Great and Powerful Trixie
 Difficulty=hard
-Description=U splash W Trix combo deck with Illusions of Grandeur and Donate
+Description=Mono U Trix combo deck with Illusions of Grandeur and Donate
 Icon=The Great and Powerful Trixie.jpg
 Deck Type=constructed
 [main]
-1 Ancestral Recall
-4 Arcane Denial
-1 Black Lotus
-4 Counterspell
-3 Disdainful Stroke
+4 Accumulated Knowledge
+4 Capsize
 4 Donate
-3 Essence Scatter
-4 Glacial Fortress
+4 Frantic Search
+4 Helm of Awakening
+2 Hoodwink
 4 Illusions of Grandeur
-10 Island
-1 Mox Pearl
-1 Mox Sapphire
+4 Intuition
+21 Island
+1 Merchant Scroll
 4 Sapphire Medallion
-1 Timetwister
-4 Tundra
-3 Unsummon
-4 Vapor Snag
-4 Wrath of God
+4 Stroke of Genius

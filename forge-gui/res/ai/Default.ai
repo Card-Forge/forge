@@ -165,3 +165,8 @@ BOUNCE_ALL_ELSEWHERE_CREAT_EVAL_DIFF=200
 BOUNCE_ALL_TO_HAND_NONCREAT_EVAL_DIFF=3
 BOUNCE_ALL_ELSEWHERE_NONCREAT_EVAL_DIFF=3
 
+# If enabled, the AI will try to pair up cards to present to the opponent so that a specific card may be picked,
+# it'll also try to grab Accumulated Knowledge and Take Inventory more actively, as well as interact with the Trix
+# combo deck more appropriately. In Reanimator decks, this logic will make the AI pick the fattest threats in the
+# library to put some into the graveyard.
+INTUITION_ALTERNATIVE_LOGIC=true

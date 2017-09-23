@@ -881,6 +881,9 @@ public class AiController {
             }
             if (prefCard == null) {
                 prefCard = ComputerUtil.getCardPreference(player, sourceCard, "DiscardCost", validCards);
+                if (prefCard != null && prefCard.hasSVar("DoNotDiscardIfAble")) {
+                    prefCard = null;
+                }
             }
             if (prefCard != null) {
                 discardList.add(prefCard);
@@ -917,13 +920,29 @@ public class AiController {
                 if (numLandsInHand > 0) {
                     numLandsAvailable++;
                 }
+
                 //Discard unplayable card
-                if (validCards.get(0).getCMC() > numLandsAvailable) {
-                    discardList.add(validCards.get(0));
-                    validCards.remove(validCards.get(0));
+                boolean discardedUnplayable = false;
+                for (int j = 0; j < validCards.size(); j++) {
+                    if (validCards.get(j).getCMC() > numLandsAvailable && !validCards.get(j).hasSVar("DoNotDiscardIfAble")) {
+                        discardList.add(validCards.get(j));
+                        validCards.remove(validCards.get(j));
+                        discardedUnplayable = true;
+                        break;
+                    } else if (validCards.get(j).getCMC() <= numLandsAvailable) {
+                        // cut short to avoid looping over cards which are guaranteed not to fit the criteria
+                        break;
+                    }
                 }
-                else { //Discard worst card
+
+                if (!discardedUnplayable) {
+                    // discard worst card
                     Card worst = ComputerUtilCard.getWorstAI(validCards);
+                    if (worst == null) {
+                        // there were only instants and sorceries, and maybe cards that are not good to discard, so look
+                        // for more discard options
+                        worst = ComputerUtilCard.getCheapestSpellAI(validCards);
+                    }
                     discardList.add(worst);
                     validCards.remove(worst);
                 }
