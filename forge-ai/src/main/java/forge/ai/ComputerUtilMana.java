@@ -244,8 +244,10 @@ public class ComputerUtilMana {
                 } else if (toPay == ManaCostShard.GENERIC || toPay == ManaCostShard.X) {
                     for (SpellAbility ab : saList) {
                         if (ab.isManaAbility() && ab.getManaPart().isAnyMana() && ab.hasParam("AddsNoCounter")) {
-                            paymentChoice = ab;
-                            break;
+                            if (!ab.getHostCard().isTapped()) {
+                                paymentChoice = ab;
+                                break;
+                            }
                         }
                     }
                 }
