@@ -1,15 +1,10 @@
 package forge;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
-
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Clipboard;
-
 import forge.animation.ForgeAnimation;
 import forge.assets.AssetsDownloader;
 import forge.assets.FSkin;
@@ -29,17 +24,17 @@ import forge.screens.home.NewGameMenu;
 import forge.screens.match.MatchController;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
-import forge.toolbox.FContainer;
-import forge.toolbox.FDisplayObject;
-import forge.toolbox.FGestureAdapter;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.FOverlay;
+import forge.toolbox.*;
 import forge.util.Callback;
 import forge.util.FileUtil;
 import forge.util.Utils;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.6.2.007";
+    public static final String CURRENT_VERSION = "1.6.3.001";
 
     private static final ApplicationListener app = new Forge();
     private static Clipboard clipboard;
