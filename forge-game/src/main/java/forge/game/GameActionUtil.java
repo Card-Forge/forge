@@ -20,7 +20,6 @@ package forge.game;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostParser;
 import forge.game.ability.AbilityFactory;
@@ -35,7 +34,6 @@ import forge.game.player.Player;
 import forge.game.spellability.*;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
-
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -149,7 +147,7 @@ public final class GameActionUtil {
                     newSA.setPayCosts(newSA.getPayCosts().copyWithDefinedMana(o.getAltManaCost()));
                     changedManaCost = true;
                     if (host.hasSVar("AsForetoldSplitCMCHack")) {
-                        // FIXME: A temporary workaround for As Foretold interaction with split cards, better solution needed.
+                        // TODO: This is a temporary workaround for As Foretold interaction with split cards, better solution needed.
                         if (sa.isLeftSplit()) {
                             int leftCMC = sa.getHostCard().getCMC(Card.SplitCMCMode.LeftSplitCMC);
                             if (leftCMC > host.getCounters(CounterType.TIME)) {
