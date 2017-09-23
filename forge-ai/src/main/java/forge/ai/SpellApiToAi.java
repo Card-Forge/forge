@@ -72,6 +72,7 @@ public enum SpellApiToAi {
             .put(ApiType.ExchangeControlVariant, CannotPlayAi.class)
             .put(ApiType.ExchangePower, PowerExchangeAi.class)
             .put(ApiType.ExchangeZone, ZoneExchangeAi.class)
+            .put(ApiType.Explore, AlwaysPlayAi.class)
             .put(ApiType.Fight, FightAi.class)
             .put(ApiType.FlipACoin, FlipACoinAi.class)
             .put(ApiType.Fog, FogAi.class)
