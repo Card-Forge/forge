@@ -1010,18 +1010,21 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return false;
             }
 
-            list = CardLists.filterControlledBy(list, ai.getOpponents());
-            list = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    for (Card aura : c.getEnchantedBy(false)) {
-                        if (c.getOwner().isOpponentOf(ai) && aura.getController().equals(ai)) {
-                            return false;
+
+            if (!sa.hasParam("AITgts") || sa.getParam("AITgts").contains("OppCtrl")) {
+                list = CardLists.filterControlledBy(list, ai.getOpponents());
+                list = CardLists.filter(list, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        for (Card aura : c.getEnchantedBy(false)) {
+                            if (c.getOwner().isOpponentOf(ai) && aura.getController().equals(ai)) {
+                                return false;
+                            }
                         }
+                        return true;
                     }
-                    return true;
-                }
-            });
+                });
+            }
         }
 
         // Only care about combatants during combat
@@ -1117,7 +1120,16 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     return false;
                 } else {
                     if (!sa.isTrigger() && !ComputerUtil.shouldCastLessThanMax(ai, source)) {
-                        return false;
+                        boolean aiTgtsOK = false;
+                        if (sa.hasParam("AIMinTgts")) {
+                            int minTgts = Integer.parseInt(sa.getParam("AIMinTgts"));
+                            if (sa.getTargets().getNumTargeted() >= minTgts) {
+                                aiTgtsOK = true;
+                            }
+                        }
+                        if (!aiTgtsOK) {
+                            return false;
+                        }
                     }
                     break;
                 }
