@@ -943,6 +943,29 @@ public class AiController {
                         // for more discard options
                         worst = ComputerUtilCard.getCheapestSpellAI(validCards);
                     }
+                    if (worst == null && !validCards.isEmpty()) {
+                        // still nothing chosen, so choose the first thing that works, trying not to make DoNotDiscardIfAble
+                        // discards
+                        for (Card c : validCards) {
+                            if (!c.hasSVar("DoNotDiscardIfAble")) {
+                                worst = c;
+                                break;
+                            }
+                        }
+                        // Only DoNotDiscardIfAble cards? If we have a duplicate for something, discard it
+                        if (worst == null) {
+                            for (Card c : validCards) {
+                                if (CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(c.getName())).size() > 1) {
+                                    worst = c;
+                                    break;
+                                }
+                            }
+                            if (worst == null) {
+                                // Otherwise just grab a random card and discard it
+                                worst = Aggregates.random(validCards);
+                            }
+                        }
+                    }
                     discardList.add(worst);
                     validCards.remove(worst);
                 }

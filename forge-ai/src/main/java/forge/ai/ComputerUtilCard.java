@@ -374,6 +374,10 @@ public class ComputerUtilCard {
                     Predicates.or(CardPredicates.isType("Instant"), CardPredicates.isType("Sorcery")));
             Collections.sort(cc, CardLists.CmcComparatorInv);
 
+            if (cc.isEmpty()) {
+                return null;
+            }
+
             Card cheapest = cc.getLast();
             if (cheapest.hasSVar("DoNotDiscardIfAble")) {
                 for (int i = cc.size() - 1; i >= 0; i--) {
