@@ -1011,7 +1011,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
 
 
-            if (!sa.hasParam("AITgts") || sa.getParam("AITgts").contains("OppCtrl")) {
+            if (!sa.hasParam("AITgtOwnCards")) {
                 list = CardLists.filterControlledBy(list, ai.getOpponents());
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
