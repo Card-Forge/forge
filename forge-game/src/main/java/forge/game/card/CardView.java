@@ -585,9 +585,9 @@ public class CardView extends GameEntityView {
             final StringBuilder ab = new StringBuilder();
             ab.append("CARDNAME can block an additional ");
             ab.append(blockAdditional);
-            ab.append(" creatures.");
-            nonAbilityText = nonAbilityText.replaceFirst("CARDNAME can block an additional creature.", ab.toString());
-            nonAbilityText = nonAbilityText.replaceAll("CARDNAME can block an additional creature.", "");
+            ab.append(" creatures each combat.");
+            nonAbilityText = nonAbilityText.replaceFirst("CARDNAME can block an additional creature each combat.", ab.toString());
+            nonAbilityText = nonAbilityText.replaceAll("CARDNAME can block an additional creature each combat.", "");
             nonAbilityText = nonAbilityText.replaceAll("\r\n\r\n\r\n", "");
         }
         if (!nonAbilityText.isEmpty()) {
@@ -982,7 +982,7 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.HasInfect, c.hasKeyword("Infect", state));
             set(TrackableProperty.HasStorm, c.hasKeyword("Storm", state));
             set(TrackableProperty.HasTrample, c.hasKeyword("Trample", state));
-            set(TrackableProperty.BlockAdditional, c.getAmountOfKeyword("CARDNAME can block an additional creature.", state));
+            set(TrackableProperty.BlockAdditional, c.getAmountOfKeyword("CARDNAME can block an additional creature each combat.", state));
             updateAbilityText(c, state);
         }
 

@@ -1275,9 +1275,9 @@ public class AttachAi extends SpellAbilityAi {
             if (card.hasKeyword("Flying") || !CombatUtil.canBlock(card, true)) {
                 return false;
             }
-        } else if (keyword.endsWith("CARDNAME can block an additional creature.")) {
+        } else if (keyword.endsWith("CARDNAME can block an additional creature each combat.")) {
             if (!CombatUtil.canBlock(card, true) || card.hasKeyword("CARDNAME can block any number of creatures.")
-                    || card.hasKeyword("CARDNAME can block an additional ninety-nine creatures.")) {
+                    || card.hasKeyword("CARDNAME can block an additional ninety-nine creatures each combat.")) {
                 return false;
             }
         } else if (keyword.equals("CARDNAME can attack as though it didn't have defender.")) {

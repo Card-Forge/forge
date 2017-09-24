@@ -445,7 +445,7 @@ public class CombatUtil {
 
     public static int numberOfAdditionalCreaturesCanBlock(final Card blocker) {
         // If Wizards makes a few more of these, we should really just make a generic version
-        return blocker.getAmountOfKeyword("CARDNAME can block an additional creature.") +
+        return blocker.getAmountOfKeyword("CARDNAME can block an additional creature each combat.") +
                 blocker.getAmountOfKeyword("CARDNAME can block an additional ninety-nine creatures.") * 99 +
                 blocker.getAmountOfKeyword("CARDNAME can block an additional seven creatures each combat.") * 7;
     }

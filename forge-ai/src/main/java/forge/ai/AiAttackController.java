@@ -479,7 +479,7 @@ public class AiAttackController {
 
         for (Card blocker : this.blockers) {
             if (blocker.hasKeyword("CARDNAME can block any number of creatures.")
-                    || blocker.hasKeyword("CARDNAME can block an additional ninety-nine creatures.")) {
+                    || blocker.hasKeyword("CARDNAME can block an additional ninety-nine creatures each combat.")) {
                 for (Card attacker : this.attackers) {
                     if (CombatUtil.canBlock(attacker, blocker)) {
                         remainingAttackers.remove(attacker);
@@ -495,7 +495,7 @@ public class AiAttackController {
             if (remainingAttackers.isEmpty() || maxBlockersAfterCrew == 0) {
                 break;
             }
-            if (blocker.hasKeyword("CARDNAME can block an additional creature.")) {
+            if (blocker.hasKeyword("CARDNAME can block an additional creature each combat.")) {
                 blockedAttackers.add(remainingAttackers.get(0));
                 remainingAttackers.remove(0);
                 maxBlockersAfterCrew--;

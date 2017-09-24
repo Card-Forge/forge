@@ -6,7 +6,7 @@ Types:Creature Werewolf Horror
 
 PT:2/4
 
-K:CARDNAME can block an additional creature.
+K:CARDNAME can block an additional creature each combat.
 
 A:AB$SetState | Cost$ 6 G | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
 
@@ -34,9 +34,8 @@ K:Vigilance
 
 K:CARDNAME must be blocked if able.
 
-K:CARDNAME can block an additional creature.
+K:CARDNAME can block an additional creature each combat.
 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fibrous_entangler.jpg
 
 Oracle:Vigilance\nFibrous Entangler must be blocked if able.\nFibrous Entangler can block an additional creature each combat.
-

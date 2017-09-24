@@ -384,7 +384,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                     || !CombatUtil.canBlock(card)) {
                 return false;
             }
-        } else if (keyword.endsWith("CARDNAME can block an additional creature.")) {
+        } else if (keyword.endsWith("CARDNAME can block an additional creature each combat.")) {
             if (ph.isPlayerTurn(ai)
                     || !ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
