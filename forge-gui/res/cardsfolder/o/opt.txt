@@ -1,8 +1,8 @@
 Name:Opt
 ManaCost:U
 Types:Instant
-A:SP$ Scry | Cost$ U | ScryNum$ 1 | SubAbility$ DBDraw | SpellDescription$ Scry 1. Draw a card.
-SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 1
+A:SP$ Scry | Cost$ U | ScryNum$ 1 | SubAbility$ DBDraw | SpellDescription$ Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
+SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opt.jpg
 Oracle:Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)\nDraw a card.
