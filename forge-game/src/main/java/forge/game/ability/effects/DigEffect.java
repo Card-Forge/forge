@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import com.google.common.collect.Maps;
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -14,7 +13,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
@@ -164,14 +162,6 @@ public class DigEffect extends SpellAbilityEffect {
                     for (final Card one : top) {
                         host.addRemembered(one);
                     }
-                }
-
-                if (noMove && sa.hasParam("Explore")) {
-                    // TODO: until Explore is written as a separate effect, this param can be used to emulate "X Explores"
-                    // by firing the relevant trigger. Once Explores is a separate effect, this code can be removed.
-                    final Map<String, Object> runParams = Maps.newHashMap();
-                    runParams.put("Card", sa.getHostCard());
-                    game.getTriggerHandler().runTrigger(TriggerType.Explores, runParams, false);
                 }
 
                 if (!noMove) {
