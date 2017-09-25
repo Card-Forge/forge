@@ -24,23 +24,23 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
+import forge.gui.framework.DragCell;
+import forge.gui.framework.FScreen;
+import forge.item.PaperCard;
+import forge.itemmanager.CardManager;
+import forge.itemmanager.ItemManagerConfig;
+import forge.limited.BoosterDraft;
+import forge.limited.IBoosterDraft;
+import forge.limited.WinstonDraft;
 import forge.model.FModel;
+import forge.properties.ForgePreferences.FPref;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
-import forge.gui.framework.DragCell;
-import forge.gui.framework.FScreen;
 import forge.screens.home.sanctioned.CSubmenuWinston;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FOptionPane;
-import forge.itemmanager.CardManager;
-import forge.itemmanager.ItemManagerConfig;
-import forge.item.PaperCard;
-import forge.limited.BoosterDraft;
-import forge.limited.IBoosterDraft;
-import forge.limited.WinstonDraft;
-import forge.properties.ForgePreferences.FPref;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
 
@@ -78,8 +78,8 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
     public CEditorWinstonProcess(final CDetailPicture cDetailPicture) {
         super(FScreen.DRAFTING_PROCESS, cDetailPicture);
 
-        final CardManager catalogManager = new CardManager(cDetailPicture, false);
-        final CardManager deckManager = new CardManager(cDetailPicture, false);
+        final CardManager catalogManager = new CardManager(cDetailPicture, false, false);
+        final CardManager deckManager = new CardManager(cDetailPicture, false, false);
 
         //hide filters and options panel so more of pack is visible by default
         catalogManager.setHideViewOptions(1, true);

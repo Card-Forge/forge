@@ -50,10 +50,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
@@ -199,6 +196,11 @@ public class QuestDataIO {
         }
 
         if (saveVersion < 11) {
+            // clear player star ratings on cards - no card has been rated yet
+            QuestDataIO.setFinalField(QuestData.class, "Ratings", newData, new HashSet<StarRating>());
+            newData.Ratings.clear();
+        }
+        if (saveVersion < 12) {
             // Migrate DraftTournaments to use new Tournament class
         }
 
@@ -378,7 +380,7 @@ public class QuestDataIO {
             //Copy the save file in case the save fails
             FileUtil.copyFile(f + ".dat", f + ".dat.bak");
             QuestDataIO.savePacked(f + ".dat", xStream, qd);
-            // QuestDataIO.saveUnpacked(f + ".xml", xStream, qd);
+            //QuestDataIO.saveUnpacked(f + ".xml", xStream, qd);
         }
         catch (final Exception ex) {
             //BugReporter.reportException(ex, "Error saving Quest Data.");

@@ -915,6 +915,7 @@ forge-gui-desktop/src/main/java/forge/itemmanager/filters/CardFoilFilter.java -t
 forge-gui-desktop/src/main/java/forge/itemmanager/filters/CardFormatFilter.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/filters/CardPowerFilter.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/filters/CardQuestWorldFilter.java -text
+forge-gui-desktop/src/main/java/forge/itemmanager/filters/CardRatingFilter.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/filters/CardSearchFilter.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/filters/CardSetFilter.java -text
 forge-gui-desktop/src/main/java/forge/itemmanager/filters/CardToughnessFilter.java -text
@@ -21812,6 +21813,7 @@ forge-gui/res/skins/default/font1.ttf -text
 forge-gui/res/skins/default/grid_icons.png -text
 forge-gui/res/skins/default/loader.gif -text
 forge-gui/res/skins/default/sprite_avatars.png -text
+forge-gui/res/skins/default/sprite_favicons.png -text
 forge-gui/res/skins/default/sprite_foils.png -text
 forge-gui/res/skins/default/sprite_icons.png -text
 forge-gui/res/skins/default/sprite_old_foils.png -text
@@ -22238,6 +22240,7 @@ forge-gui/src/main/java/forge/quest/data/QuestData.java svneol=native#text/plain
 forge-gui/src/main/java/forge/quest/data/QuestEventDraftContainer.java -text
 forge-gui/src/main/java/forge/quest/data/QuestItemCondition.java -text
 forge-gui/src/main/java/forge/quest/data/QuestPreferences.java svneol=native#text/plain
+forge-gui/src/main/java/forge/quest/data/StarRating.java -text
 forge-gui/src/main/java/forge/quest/data/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/quest/io/QuestChallengeReader.java -text
 forge-gui/src/main/java/forge/quest/io/QuestDataIO.java svneol=native#text/plain

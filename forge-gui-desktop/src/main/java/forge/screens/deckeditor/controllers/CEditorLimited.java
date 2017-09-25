@@ -18,7 +18,6 @@
 package forge.screens.deckeditor.controllers;
 
 import com.google.common.base.Supplier;
-
 import forge.UiCommand;
 import forge.card.CardEdition;
 import forge.deck.CardPool;
@@ -43,7 +42,6 @@ import forge.util.storage.IStorage;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -74,8 +72,8 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
     public CEditorLimited(final IStorage<DeckGroup> deckMap0, final FScreen screen0, final CDetailPicture cDetailPicture) {
         super(screen0, cDetailPicture);
 
-        final CardManager catalogManager = new CardManager(getCDetailPicture(), false);
-        final CardManager deckManager = new CardManager(getCDetailPicture(), false);
+        final CardManager catalogManager = new CardManager(getCDetailPicture(), false, false);
+        final CardManager deckManager = new CardManager(getCDetailPicture(), false, false);
 
         catalogManager.setCaption("Sideboard");
 

@@ -19,7 +19,6 @@ package forge.screens.deckeditor.controllers;
 
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
-
 import forge.UiCommand;
 import forge.card.CardRulesPredicates;
 import forge.deck.CardPool;
@@ -78,8 +77,8 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         schemePool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)), PaperCard.class);
         conspiracyPool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_CONSPIRACY, PaperCard.FN_GET_RULES)), PaperCard.class);
 
-        CardManager catalogManager = new CardManager(getCDetailPicture(), false); // TODO: restore the functionality of the "want uniques only" toggle
-        CardManager deckManager = new CardManager(getCDetailPicture(), false); // IMPORTANT: must *always* show all cards in the deck, otherwise cards with different art get ignored!
+        CardManager catalogManager = new CardManager(getCDetailPicture(), false, false); // TODO: restore the functionality of the "want uniques only" toggle
+        CardManager deckManager = new CardManager(getCDetailPicture(), false, false); // IMPORTANT: must *always* show all cards in the deck, otherwise cards with different art get ignored!
 
         catalogManager.setCaption("Catalog");
 

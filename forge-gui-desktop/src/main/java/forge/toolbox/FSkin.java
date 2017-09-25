@@ -1006,7 +1006,7 @@ public class FSkin {
     private static int currentSkinIndex;
     private static String preferredDir;
     private static String preferredName;
-    private static BufferedImage bimDefaultSprite, bimPreferredSprite, bimFoils, bimQuestDraftDeck,
+    private static BufferedImage bimDefaultSprite, bimFavIcon, bimPreferredSprite, bimFoils, bimQuestDraftDeck,
     bimOldFoils, bimDefaultAvatars, bimPreferredAvatars, bimTrophies;
     private static int x0, y0, w0, h0, newW, newH, preferredW, preferredH;
     private static int[] tempCoords;
@@ -1125,7 +1125,7 @@ public class FSkin {
             if (preferredName.isEmpty()) { loadLight("default", true); }
         }
 
-        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Processing image sprites: ", 7);
+        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Processing image sprites: ", 8);
 
         // Grab and test various sprite files.
         final String defaultDir = ForgeConstants.DEFAULT_SKINS_DIR;
@@ -1137,6 +1137,7 @@ public class FSkin {
         final File f6 = new File(defaultDir + ForgeConstants.SPRITE_OLD_FOILS_FILE);
         final File f7 = new File(defaultDir + ForgeConstants.SPRITE_TROPHIES_FILE);
         final File f8 = new File(defaultDir + ForgeConstants.DRAFT_DECK_IMG_FILE);
+        final File f9 = new File(defaultDir + ForgeConstants.SPRITE_FAVICONS_FILE);
 
         try {
             int p = 0;
@@ -1153,6 +1154,8 @@ public class FSkin {
             bimTrophies = ImageIO.read(f7);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimQuestDraftDeck = ImageIO.read(f8);
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
+            bimFavIcon = ImageIO.read(f9);
 
             if (f5.exists()) { bimPreferredAvatars = ImageIO.read(f5); }
 
@@ -1199,6 +1202,9 @@ public class FSkin {
                     break;
                 case TROPHY:
                     setImage(prop, bimTrophies);
+                    break;
+                case FAVICON:
+                    setImage(prop, bimFavIcon);
                     break;
                 default:
                     break;

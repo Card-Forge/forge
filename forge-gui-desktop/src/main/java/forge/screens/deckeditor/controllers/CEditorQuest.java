@@ -17,18 +17,13 @@
  */
 package forge.screens.deckeditor.controllers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.google.common.base.Function;
 import com.google.common.base.Supplier;
 import forge.UiCommand;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
+import forge.gui.GuiUtils;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.InventoryItem;
@@ -48,6 +43,13 @@ import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.home.quest.CSubmenuQuestDecks;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.ItemPool;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Child controller for quest deck editor UI.
@@ -100,8 +102,8 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
 
         this.questData = questData0;
 
-        final CardManager catalogManager = new CardManager(cDetailPicture, false);
-        final CardManager deckManager = new CardManager(cDetailPicture, false);
+        final CardManager catalogManager = new CardManager(cDetailPicture, false, true);
+        final CardManager deckManager = new CardManager(cDetailPicture, false, true);
 
         catalogManager.setCaption("Quest Inventory");
 
@@ -180,6 +182,41 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
     @Override
     protected void buildAddContextMenu(final EditorContextMenuBuilder cmb) {
         CEditorConstructed.buildAddContextMenu(cmb, sectionMode);
+        AddRatingItem(cmb, 1);
+        AddRatingItem(cmb, 2);
+        AddRatingItem(cmb, 3);
+        AddRatingItem(cmb, 4);
+        AddRatingItem(cmb, 5);
+        AddRatingItem(cmb, 0);
+    }
+
+    public void AddRatingItem(final EditorContextMenuBuilder cmb, final int n) {
+        if (n == 1) {
+            cmb.getMenu().addSeparator();
+        }
+        String s;
+        if (n == 0) {
+            s = "Remove custom rating";
+        } else {
+            s = "Rate this card as " + Integer.toString(n) + " stars";
+        }
+        GuiUtils.addMenuItem(cmb.getMenu(), s,
+                KeyStroke.getKeyStroke(48 + n, 0),
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        SetRatingStars(n,cmb);
+                    }
+                });
+    }
+
+    public void SetRatingStars(int n, EditorContextMenuBuilder cmb) {
+        ItemPool<PaperCard> selected = cmb.getItemManager().getSelectedItemPool();
+
+        for (final Entry<PaperCard, Integer> itemEntry : selected) {
+            // the card: itemEntry.getKey()
+            questData.SetRating(itemEntry.getKey().getName(), itemEntry.getKey().getEdition(), n);
+        }
     }
 
     /* (non-Javadoc)
@@ -188,6 +225,12 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
     @Override
     protected void buildRemoveContextMenu(final EditorContextMenuBuilder cmb) {
         CEditorConstructed.buildRemoveContextMenu(cmb, sectionMode);
+        AddRatingItem(cmb, 1);
+        AddRatingItem(cmb, 2);
+        AddRatingItem(cmb, 3);
+        AddRatingItem(cmb, 4);
+        AddRatingItem(cmb, 5);
+        AddRatingItem(cmb, 0);
     }
 
     /*

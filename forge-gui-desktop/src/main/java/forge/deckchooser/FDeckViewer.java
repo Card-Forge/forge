@@ -1,21 +1,5 @@
 package forge.deckchooser;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map.Entry;
-
-import javax.swing.JPanel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import forge.model.FModel;
-import forge.properties.ForgePreferences;
-import net.miginfocom.swing.MigLayout;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -29,9 +13,23 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerContainer;
 import forge.itemmanager.ItemManagerModel;
 import forge.itemmanager.views.ImageView;
+import forge.model.FModel;
+import forge.properties.ForgePreferences;
 import forge.toolbox.FButton;
 import forge.toolbox.FOptionPane;
 import forge.view.FDialog;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map.Entry;
 
 @SuppressWarnings("serial")
 public class FDeckViewer extends FDialog {
@@ -57,7 +55,7 @@ public class FDeckViewer extends FDialog {
     private FDeckViewer(final Deck deck0) {
         this.deck = deck0;
         this.setTitle(deck.getName());
-        this.cardManager = new CardManager(null, false) {
+        this.cardManager = new CardManager(null, false, false) {
             @Override //show hovered card in Image View in dialog instead of main Detail/Picture panes
             protected ImageView<PaperCard> createImageView(final ItemManagerModel<PaperCard> model0) {
                 return new ImageView<PaperCard>(this, model0) {

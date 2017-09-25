@@ -17,15 +17,8 @@
  */
 package forge.screens.deckeditor.controllers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.google.common.base.Function;
 import com.google.common.base.Supplier;
-
 import forge.UiCommand;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -48,6 +41,12 @@ import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.home.quest.CSubmenuQuestDecks;
 import forge.screens.match.controllers.CDetailPicture;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Child controller for quest deck editor UI.
@@ -100,8 +99,8 @@ public final class CEditorQuestLimited extends ACEditorBase<PaperCard, DeckGroup
 
         this.questData = questData0;
 
-        final CardManager catalogManager = new CardManager(cDetailPicture, false);
-        final CardManager deckManager = new CardManager(cDetailPicture, false);
+        final CardManager catalogManager = new CardManager(cDetailPicture, false, true);
+        final CardManager deckManager = new CardManager(cDetailPicture, false, true);
 
         catalogManager.setCaption("Sideboard");
 

@@ -10,7 +10,6 @@ import forge.screens.home.quest.DialogChooseSets;
 import forge.screens.match.controllers.CDetailPicture;
 
 import javax.swing.*;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -21,8 +20,12 @@ import java.util.Map.Entry;
  */
 @SuppressWarnings("serial")
 public class CardManager extends ItemManager<PaperCard> {
-    public CardManager(final CDetailPicture cDetailPicture, final boolean wantUnique0) {
+    
+    private boolean QuestMode;
+
+    public CardManager(final CDetailPicture cDetailPicture, final boolean wantUnique0, final boolean qm) {
         super(PaperCard.class, cDetailPicture, wantUnique0);
+        QuestMode = qm;
     }
 
     @Override
@@ -66,7 +69,7 @@ public class CardManager extends ItemManager<PaperCard> {
         return new CardSearchFilter(itemManager);
     }
 
-    public static void buildAddFilterMenu(JMenu menu, final ItemManager<? super PaperCard> itemManager) {
+    public void buildAddFilterMenu(JMenu menu, final ItemManager<? super PaperCard> itemManager) {
         GuiUtils.addSeparator(menu); //separate from current search item
 
         JMenu fmt = GuiUtils.createMenu("Format");
@@ -163,6 +166,15 @@ public class CardManager extends ItemManager<PaperCard> {
                 itemManager.addFilter(new CardFoilFilter(itemManager));
             }
         }, itemManager.getFilter(CardFoilFilter.class) == null);
+
+        if (QuestMode) {
+            GuiUtils.addMenuItem(menu, "Personal Rating", null, new Runnable() {
+                @Override
+                public void run() {
+                    itemManager.addFilter(new CardRatingFilter(itemManager));
+                }
+            }, itemManager.getFilter(CardRatingFilter.class) == null);
+        }
 
         GuiUtils.addSeparator(menu);
 

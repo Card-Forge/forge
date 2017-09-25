@@ -20,7 +20,6 @@ package forge.screens.deckeditor.controllers;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
-
 import forge.UiCommand;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -69,8 +68,8 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
         this.cardPoolCondition = poolCondition;
         this.sectionMode = deckSection0;
 
-        final CardManager catalogManager = new CardManager(cDetailPicture, true);
-        final CardManager deckManager = new CardManager(cDetailPicture, true);
+        final CardManager catalogManager = new CardManager(cDetailPicture, true, false);
+        final CardManager deckManager = new CardManager(cDetailPicture, true, false);
 
         catalogManager.setCaption("Catalog");
 

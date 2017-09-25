@@ -1,13 +1,6 @@
 package forge.screens.workshop.views;
 
-import javax.swing.JPanel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import net.miginfocom.swing.MigLayout;
-
 import com.google.common.collect.Iterables;
-
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -20,6 +13,11 @@ import forge.screens.match.controllers.CDetailPicture;
 import forge.screens.workshop.controllers.CCardScript;
 import forge.screens.workshop.controllers.CWorkshopCatalog;
 import forge.util.ItemPool;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  * Assembles Swing components of card catalog in workshop.
@@ -39,7 +37,7 @@ public enum VWorkshopCatalog implements IVDoc<CWorkshopCatalog> {
 
     //========== Constructor
     private VWorkshopCatalog() {
-        this.cardManager = new CardManager(cDetailPicture, true);
+        this.cardManager = new CardManager(cDetailPicture, true, false);
         this.cardManager.setCaption("Catalog");
         final Iterable<PaperCard> allCards = Iterables.concat(FModel.getMagicDb().getCommonCards(), FModel.getMagicDb().getVariantCards());
         this.cardManager.setPool(ItemPool.createFrom(allCards, PaperCard.class), true);

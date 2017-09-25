@@ -283,7 +283,14 @@ public enum FSkinProp {
     IMG_BTN_DISABLED_LEFT   (new int[] {80, 200, 40, 40}, PropType.ICON),
     IMG_BTN_DISABLED_CENTER (new int[] {120, 200, 1, 40}, PropType.ICON),
     IMG_BTN_DISABLED_RIGHT  (new int[] {160, 200, 40, 40}, PropType.ICON),
-    
+
+    IMG_FAV1    (new int[] {0, 0, 100, 100}, PropType.FAVICON),
+    IMG_FAV2    (new int[] {100, 0, 100, 100}, PropType.FAVICON),
+    IMG_FAV3    (new int[] {200, 0, 100, 100}, PropType.FAVICON),
+    IMG_FAV4    (new int[] {300, 0, 100, 100}, PropType.FAVICON),
+    IMG_FAV5    (new int[] {400, 0, 100, 100}, PropType.FAVICON),
+    IMG_FAVNONE (new int[] {500, 0, 100, 100}, PropType.FAVICON),
+ 
     IMG_QUEST_DRAFT_DECK (new int[] {0, 0, 680, 475}, PropType.IMAGE);
     
     private int[] coords;
@@ -317,6 +324,7 @@ public enum FSkinProp {
         FOIL,
         OLD_FOIL,
         TROPHY,
-        PLANAR_CONQUEST
+        PLANAR_CONQUEST,
+        FAVICON
     }
 }

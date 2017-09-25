@@ -32,10 +32,7 @@ import forge.properties.ForgeConstants;
 import forge.quest.bazaar.QuestBazaarManager;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.bazaar.QuestPetStorage;
-import forge.quest.data.GameFormatQuest;
-import forge.quest.data.QuestAchievements;
-import forge.quest.data.QuestAssets;
-import forge.quest.data.QuestData;
+import forge.quest.data.*;
 import forge.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestChallengeReader;
@@ -137,6 +134,22 @@ public class QuestController {
         return this.myCards;
     }
 
+    // Set the card's custom rating to N stars
+    public void SetRating(String name, String edition, int n) {
+        StarRating r = new StarRating();
+        r.Name = name;
+        r.Edition = edition;
+        for (int i = 0; i < 6; i++) {
+            r.rating = i;
+            model.Ratings.remove(r);
+        }
+
+        r.rating = n;
+        if (n != 0) {
+            model.Ratings.add(r);
+        }
+    }
+    
     /**
      * Gets the my decks.
      *
@@ -425,6 +438,10 @@ public class QuestController {
         }
 
         this.duelManager = new QuestEventDuelManager(new File(path));
+    }
+
+    public HashSet<StarRating> GetRating() {
+        return model.Ratings;
     }
 
     /**

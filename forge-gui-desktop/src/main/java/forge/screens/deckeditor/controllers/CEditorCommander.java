@@ -19,7 +19,6 @@ package forge.screens.deckeditor.controllers;
 
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
-
 import forge.UiCommand;
 import forge.card.CardRulesPredicates;
 import forge.deck.Deck;
@@ -75,8 +74,8 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.CAN_BE_COMMANDER, PaperCard.FN_GET_RULES)),PaperCard.class);
         normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
 
-        CardManager catalogManager = new CardManager(getCDetailPicture(), true);
-        CardManager deckManager = new CardManager(getCDetailPicture(), true);
+        CardManager catalogManager = new CardManager(getCDetailPicture(), true, false);
+        CardManager deckManager = new CardManager(getCDetailPicture(), true, false);
 
         catalogManager.setCaption("Catalog");
 

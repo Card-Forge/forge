@@ -1,13 +1,6 @@
 package forge.itemmanager;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map.Entry;
-
 import com.google.common.base.Predicate;
-
 import forge.assets.FSkinProp;
 import forge.assets.IHasSkinProp;
 import forge.card.CardRules;
@@ -16,6 +9,12 @@ import forge.deck.DeckProxy;
 import forge.interfaces.IComboBox;
 import forge.item.InventoryItem;
 import forge.util.ComparableOp;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  * Static methods for working with top-level editor methods,
@@ -62,10 +61,17 @@ public final class SItemManagerUtil {
         DECK_COLORLESS  (FSkinProp.IMG_MANA_COLORLESS, null, "Colorless decks"),
         DECK_MULTICOLOR (FSkinProp.IMG_MULTI,          null, "Multicolor decks"),
     	
-        FOIL_OLD  (FSkinProp.FOIL_11,      null, "Old style Foil cards"),
-        FOIL_NEW   (FSkinProp.FOIL_01,     null, "New style Foil cards"),
-        FOIL_NONE   (FSkinProp.ICO_CLOSE,  null, "non-Foil cards");
-    	    	
+        FOIL_OLD  (FSkinProp.FOIL_11,   null, "Old style Foil cards"),
+        FOIL_NEW  (FSkinProp.FOIL_01,   null, "New style Foil cards"),
+        FOIL_NONE (FSkinProp.ICO_CLOSE, null, "Non-Foil cards"),
+
+        RATE_NONE (FSkinProp.IMG_FAVNONE, null, "Unrated cards"),
+        RATE_1    (FSkinProp.IMG_FAV1,    null, "1 star cards"),
+        RATE_2    (FSkinProp.IMG_FAV2,    null, "2 star cards"),
+        RATE_3    (FSkinProp.IMG_FAV3,    null, "3 star cards"),
+        RATE_4    (FSkinProp.IMG_FAV4,    null, "4 star cards"),
+        RATE_5    (FSkinProp.IMG_FAV5,    null, "5 star cards");
+
 
         public final FSkinProp skinProp;
         public final Predicate<CardRules> predicate;

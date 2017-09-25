@@ -19,32 +19,12 @@ package forge.screens.deckeditor.controllers;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import java.awt.Toolkit;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map.Entry;
-
-import javax.swing.JMenu;
-import javax.swing.JPopupMenu;
-import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
-
 import forge.UiCommand;
 import forge.assets.FSkinProp;
-import forge.deck.CardPool;
-import forge.deck.Deck;
-import forge.deck.DeckBase;
-import forge.deck.DeckGroup;
-import forge.deck.DeckSection;
+import forge.deck.*;
 import forge.gui.GuiChoose;
 import forge.gui.GuiUtils;
-import forge.gui.framework.DragCell;
-import forge.gui.framework.FScreen;
-import forge.gui.framework.ICDoc;
-import forge.gui.framework.IVDoc;
-import forge.gui.framework.SRearrangingUtil;
+import forge.gui.framework.*;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.ItemManager;
@@ -63,6 +43,14 @@ import forge.toolbox.FSkin;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.view.FView;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  * Maintains a generically typed architecture for various editing
@@ -431,7 +419,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             isAddContextMenu = isAddContextMenu0;
         }
 
-        private ItemManager<TItem> getItemManager() {
+        public ItemManager<TItem> getItemManager() {
             return isAddContextMenu ? catalogManager : deckManager;
         }
 
@@ -439,6 +427,10 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             return isAddContextMenu ? deckManager : catalogManager;
         }
 
+        public JPopupMenu getMenu() {
+            return menu;
+        }
+        
         @Override
         public void buildContextMenu(final JPopupMenu menu) {
             this.menu = menu; //cache menu while controller populates menu

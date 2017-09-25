@@ -2,13 +2,8 @@ package forge.itemmanager;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-
 import forge.StaticData;
-import forge.card.CardEdition;
-import forge.card.CardRules;
-import forge.card.CardRulesPredicates;
-import forge.card.ColorSet;
-import forge.card.MagicColor;
+import forge.card.*;
 import forge.deck.DeckProxy;
 import forge.game.GameFormat;
 import forge.interfaces.IButton;
@@ -17,13 +12,11 @@ import forge.item.PaperCard;
 import forge.itemmanager.SItemManagerUtil.StatTypes;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
+import forge.quest.data.StarRating;
 import forge.util.BinaryUtil;
 import forge.util.PredicateString.StringOp;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /** 
  * Static factory; holds blocks of form elements and predicates
@@ -141,9 +134,56 @@ public class SFilterUtil {
         }
     }
 
-    public static Predicate<PaperCard> buildFoilFilter(Map<SItemManagerUtil.StatTypes, ? extends IButton> buttonMap) {
+    public static Predicate<PaperCard> buildStarRatingFilter(Map<SItemManagerUtil.StatTypes, ? extends IButton> buttonMap, final HashSet<StarRating> QuestRatings) {
+        final Map<SItemManagerUtil.StatTypes, ? extends IButton> buttonMap2 = buttonMap;
+        return new Predicate<PaperCard>() {
+            @Override
+            public boolean apply(PaperCard card) {
 
-        //		final Map<StatTypes, ? extends IButton> buttonMap2 =buttonMap;
+                StarRating r = new StarRating();
+                r.Name = card.getName();
+                r.Edition = card.getEdition();
+                int j = 0;
+                for (int i = 1; i < 6; i++) {
+                    r.rating = i;
+                    if (QuestRatings.contains(r)) {
+                        j = i;
+                    }
+                }
+                boolean result = true;
+
+                if (j == 0) {
+                    if (!buttonMap2.get(StatTypes.RATE_NONE).isSelected()) {
+                        result = false;
+                    }
+                } else if (j == 1) {
+                    if (!buttonMap2.get(StatTypes.RATE_1).isSelected()) {
+                        result = false;
+                    }
+                } else if (j == 2) {
+                    if (!buttonMap2.get(StatTypes.RATE_2).isSelected()) {
+                        result = false;
+                    }
+                } else if (j == 3) {
+                    if (!buttonMap2.get(StatTypes.RATE_3).isSelected()) {
+                        result = false;
+                    }
+                } else if (j == 4) {
+                    if (!buttonMap2.get(StatTypes.RATE_4).isSelected()) {
+                        result = false;
+                    }
+                } else if (j == 5) {
+                    if (!buttonMap2.get(StatTypes.RATE_5).isSelected()) {
+                        result = false;
+                    }
+                }
+                return result;
+
+            }
+        };
+    }
+
+    public static Predicate<PaperCard> buildFoilFilter(Map<SItemManagerUtil.StatTypes, ? extends IButton> buttonMap) {
         final int Foil = (((buttonMap.get(StatTypes.FOIL_OLD).isSelected()) ? 1 : 0)
                 + ((buttonMap.get(StatTypes.FOIL_NEW).isSelected()) ? 2 : 0)
                 + ((buttonMap.get(StatTypes.FOIL_NONE).isSelected()) ? 4 : 0));
