@@ -3,7 +3,7 @@ ManaCost:3 G
 Types:Creature Fungus Sliver
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Sliver | AddTrigger$ OnDmg | AddSVar$ FungusSliverCounters | Description$ All Sliver creatures have "Whenever this creature is dealt damage, put a +1/+1 counter on it." (The damage is dealt before the counter is put on.)
-SVar:OnDmg:Mode$ DamageDone | OnlyOnce$ True | ValidTarget$ Card.Self | Execute$ FungusSliverCounters | TriggerDescription$ Whenever CARDNAME is dealt damage, put a +1/+1 counter on it.
+SVar:OnDmg:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ FungusSliverCounters | TriggerDescription$ Whenever CARDNAME is dealt damage, put a +1/+1 counter on it.
 SVar:FungusSliverCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:PlayMain1:TRUE
 SVar:HasCombatEffect:TRUE

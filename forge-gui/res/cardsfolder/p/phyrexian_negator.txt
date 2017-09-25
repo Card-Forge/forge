@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Horror
 PT:5/5
 K:Trample
-T:Mode$ DamageDone | OnlyOnce$ True | ValidTarget$ Card.Self | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, sacrifice that many permanents.
+T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, sacrifice that many permanents.
 SVar:TrigSac:DB$ Sacrifice | Amount$ X | SacValid$ Permanent | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:RemAIDeck:True

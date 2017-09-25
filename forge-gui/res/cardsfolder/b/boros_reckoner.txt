@@ -2,7 +2,7 @@ Name:Boros Reckoner
 ManaCost:RW RW RW
 Types:Creature Minotaur Wizard
 PT:3/3
-T:Mode$ DamageDone | OnlyOnce$ True | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to target creature or player.
+T:Mode$ DamageDoneOnce | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to target creature or player.
 SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | References$ X | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player
 A:AB$ Pump | Cost$ RW | KW$ First Strike | Defined$ Self | SpellDescription$ CARDNAME gains first strike until end of turn.
 SVar:X:TriggerCount$DamageAmount

@@ -4,7 +4,7 @@ Types:Creature Giant Warrior
 PT:7/7
 K:CARDNAME enters the battlefield tapped.
 K:CARDNAME doesn't untap during your untap step.
-T:Mode$ DamageDone | OnlyOnce$ True | ValidTarget$ Card.Self | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME is dealt damage, untap it.
+T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME is dealt damage, untap it.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deep_slumber_titan.jpg

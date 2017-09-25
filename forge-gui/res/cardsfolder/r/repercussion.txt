@@ -1,7 +1,7 @@
 Name:Repercussion
 ManaCost:1 R R
 Types:Enchantment
-T:Mode$ DamageDone | OnlyOnce$ True | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature is dealt damage, CARDNAME deals that much damage to that creature's controller.
+T:Mode$ DamageDoneOnce | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature is dealt damage, CARDNAME deals that much damage to that creature's controller.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredTargetController | NumDmg$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:RemRandomDeck:True

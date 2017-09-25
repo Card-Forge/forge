@@ -5,7 +5,7 @@ PT:4/4
 K:Flying
 K:Trample
 K:CARDNAME attacks each turn if able.
-T:Mode$ DamageDone | OnlyOnce$ True | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME deals damage, you lose that much life.
+T:Mode$ DamageDoneOnce | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME deals damage, you lose that much life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:RemAIDeck:True

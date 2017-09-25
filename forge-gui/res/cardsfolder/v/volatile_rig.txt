@@ -4,7 +4,7 @@ Types:Artifact Creature Construct
 PT:4/4
 K:Trample
 K:CARDNAME attacks each turn if able.
-T:Mode$ DamageDone | OnlyOnce$ True | Execute$ TrigFlipSac | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, flip a coin. If you lose the flip, sacrifice CARDNAME.
+T:Mode$ DamageDoneOnce | Execute$ TrigFlipSac | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, flip a coin. If you lose the flip, sacrifice CARDNAME.
 SVar:TrigFlipSac:DB$ FlipACoin | LoseSubAbility$ DBSacrifice
 SVar:DBSacrifice:DB$ Sacrifice | Defined$ Self
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigFlipDamage | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, flip a coin. If you lose the flip, it deals 4 damage to each creature and each player.

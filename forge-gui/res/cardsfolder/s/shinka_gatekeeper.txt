@@ -2,7 +2,7 @@ Name:Shinka Gatekeeper
 ManaCost:2 R
 Types:Creature Ogre Warrior
 PT:3/2
-T:Mode$ DamageDone | OnlyOnce$ True | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to you.
+T:Mode$ DamageDoneOnce | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to you.
 SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | Defined$ You | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shinka_gatekeeper.jpg
