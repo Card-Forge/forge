@@ -25,6 +25,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.ai.ability.ChangeZoneAi;
+import forge.ai.ability.ExploreAi;
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -1749,7 +1750,11 @@ public class AiController {
         if (useSimulation) {
             return simPicker.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player2, decider);
         }
-        return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player2, decider);
+        if (sa.getApi() == ApiType.Explore) {
+            return ExploreAi.shouldPutInGraveyard(fetchList, decider);
+        } else {
+            return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player2, decider);
+        }
     }
 
     public List<SpellAbility> orderPlaySa(List<SpellAbility> activePlayerSAs) {

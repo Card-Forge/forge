@@ -95,6 +95,7 @@ forge-ai/src/main/java/forge/ai/ability/DrawAi.java svneol=native#text/plain
 forge-ai/src/main/java/forge/ai/ability/EffectAi.java -text
 forge-ai/src/main/java/forge/ai/ability/EncodeAi.java -text
 forge-ai/src/main/java/forge/ai/ability/EndTurnAi.java -text
+forge-ai/src/main/java/forge/ai/ability/ExploreAi.java -text
 forge-ai/src/main/java/forge/ai/ability/FightAi.java -text
 forge-ai/src/main/java/forge/ai/ability/FlipACoinAi.java -text
 forge-ai/src/main/java/forge/ai/ability/FogAi.java -text

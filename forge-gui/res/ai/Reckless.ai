@@ -170,3 +170,10 @@ BOUNCE_ALL_ELSEWHERE_NONCREAT_EVAL_DIFF=3
 # combo deck more appropriately. In Reanimator decks, this logic will make the AI pick the fattest threats in the
 # library to put some into the graveyard.
 INTUITION_ALTERNATIVE_LOGIC=true
+
+# How big of a difference is allowed between the revealed card CMC and the currently castable CMC to still put the
+# card on top of the library
+EXPLORE_MAX_CMC_DIFF_TO_PUT_IN_GRAVEYARD=1
+# The number of lands on the battlefield when the AI would use Explore to put non-land cards in graveyard if it
+# doesn't have a land in hand
+EXPLORE_NUM_LANDS_TO_STILL_NEED_MORE=2

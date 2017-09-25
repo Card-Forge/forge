@@ -1,22 +1,16 @@
 package forge.ai.simulation;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ability.ChangeZoneAi;
+import forge.ai.ability.ExploreAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
+import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -26,6 +20,10 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityCondition;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class SpellAbilityPicker {
     private Game game;
@@ -432,7 +430,11 @@ public class SpellAbilityPicker {
                 return card;
             }
         }
-        return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player2, decider);
+        if (sa.getApi() == ApiType.Explore) {
+            return ExploreAi.shouldPutInGraveyard(fetchList, decider);
+        } else {
+            return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player2, decider);
+        }
     }
 
     public CardCollectionView chooseSacrificeType(String type, SpellAbility ability, int amount) {

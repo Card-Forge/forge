@@ -94,8 +94,10 @@ public enum AiProps { /** */
     BOUNCE_ALL_TO_HAND_CREAT_EVAL_DIFF ("200"), /** */
     BOUNCE_ALL_ELSEWHERE_CREAT_EVAL_DIFF ("200"), /** */
     BOUNCE_ALL_TO_HAND_NONCREAT_EVAL_DIFF ("3"), /** */
-    BOUNCE_ALL_ELSEWHERE_NONCREAT_EVAL_DIFF ("3"),
-    INTUITION_ALTERNATIVE_LOGIC ("false"); /** */
+    BOUNCE_ALL_ELSEWHERE_NONCREAT_EVAL_DIFF ("3"), /** */
+    INTUITION_ALTERNATIVE_LOGIC ("false"), /** */
+    EXPLORE_MAX_CMC_DIFF_TO_PUT_IN_GRAVEYARD ("2"),
+    EXPLORE_NUM_LANDS_TO_STILL_NEED_MORE ("2"); /** */
     // Experimental features, must be removed after extensive testing and, ideally, defaulting
     // <-- There are no experimental options here -->
 
