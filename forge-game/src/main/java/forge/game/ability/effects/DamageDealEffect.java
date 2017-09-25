@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import com.google.common.collect.Iterables;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
@@ -14,8 +15,6 @@ import forge.util.Lang;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import com.google.common.collect.Iterables;
 
 public class DamageDealEffect extends DamageBaseEffect {
 
@@ -197,7 +196,6 @@ public class DamageDealEffect extends DamageBaseEffect {
         } else {
             preventMap.triggerPreventDamage(false);
             // non combat damage cause lifegain there
-            damageMap.dealLifelinkDamage();
             damageMap.triggerDamageDoneOnce(false);
         }
 
