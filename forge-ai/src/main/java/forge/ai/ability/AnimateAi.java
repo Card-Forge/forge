@@ -163,7 +163,9 @@ public class AnimateAi extends SpellAbilityAi {
                         }
                     }
                     if (power + toughness > c.getCurrentPower() + c.getCurrentToughness()) {
-                        bFlag = true;
+                        if (!c.isTapped() || (game.getCombat() != null && game.getCombat().isAttacking(c))) {
+                            bFlag = true;
+                        }
                     }
                 }
 
@@ -182,7 +184,9 @@ public class AnimateAi extends SpellAbilityAi {
                     if (animatedCopy.getCurrentPower() + animatedCopy.getCurrentToughness() >
                             c.getCurrentPower() + c.getCurrentToughness()) {
                         if (!isAnimatedThisTurn(aiPlayer, sa.getHostCard())) {
-                            bFlag = true;
+                            if (!sa.getHostCard().isTapped() || (game.getCombat() != null && game.getCombat().isAttacking(sa.getHostCard()))) {
+                                bFlag = true;
+                            }
                         }
                     }
                 }
