@@ -1,11 +1,7 @@
 package forge.game.ability.effects;
 
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -16,6 +12,9 @@ import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+
+import java.util.List;
+import java.util.Map;
 
 public class ExploreEffect extends SpellAbilityEffect {
 
@@ -47,7 +46,7 @@ public class ExploreEffect extends SpellAbilityEffect {
             boolean revealedLand = false;
             CardCollection top = pl.getTopXCardsFromLibrary(1);
             if (!top.isEmpty()) {
-                pl.getController().reveal(top, ZoneType.Library, pl, "Revealed for Explore");
+                game.getAction().reveal(top, pl, false, "Revealed for Explore - ");
                 final Card r = top.getFirst();
                 if (r.isLand()) {
                     game.getAction().moveTo(ZoneType.Hand, r, sa);
@@ -56,13 +55,13 @@ public class ExploreEffect extends SpellAbilityEffect {
                     // TODO find better way to choose optional send away
                     final Card choosen = pc.chooseSingleCardForZoneChange(
                             ZoneType.Graveyard, Lists.newArrayList(ZoneType.Library), sa, top, null,
-                            "send to graveyard?", true, pl);
+                            "Put this card in your graveyard?", true, pl);
                     if (choosen != null) {
                         game.getAction().moveTo(ZoneType.Graveyard, choosen, sa);
                     }
                 }
             }
-            if (revealedLand) {
+            if (!revealedLand) {
                 // TODO need to check if card didn't blick while that was happening,
                 // probably need strictlySelf in the Defined
                 if (game.getZoneOf(c).is(ZoneType.Battlefield)) {
