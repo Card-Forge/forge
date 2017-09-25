@@ -17,21 +17,9 @@
  */
 package forge.deck;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import forge.util.TextUtil;
-import org.apache.commons.lang3.Range;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSet;
-
 import forge.StaticData;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
@@ -43,6 +31,12 @@ import forge.deck.generation.IDeckGenPool;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
+import forge.util.TextUtil;
+import org.apache.commons.lang3.Range;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * GameType is an enum to determine the type of current game. :)
@@ -427,5 +421,13 @@ public enum DeckFormat {
             cmdCI |= p.getRules().getColorIdentity().getColor();
         }
         return Predicates.compose(CardRulesPredicates.hasColorIdentity(cmdCI), PaperCard.FN_GET_RULES);
+    }
+
+    public Predicate<PaperCard> isLegalCardForCommanderOrLegalPartnerPredicate(List<PaperCard> commanders) {
+        byte cmdCI = 0;
+        for (final PaperCard p : commanders) {
+            cmdCI |= p.getRules().getColorIdentity().getColor();
+        }
+        return Predicates.compose(Predicates.or(CardRulesPredicates.hasColorIdentity(cmdCI), CardRulesPredicates.hasKeyword("Partner")), PaperCard.FN_GET_RULES);
     }
 }

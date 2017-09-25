@@ -1,36 +1,20 @@
 package forge.planarconquest;
 
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-
 import forge.assets.FSkinProp;
 import forge.assets.IHasSkinProp;
-import forge.card.CardRarity;
-import forge.card.CardRules;
-import forge.card.CardType;
+import forge.card.*;
 import forge.card.CardType.CoreType;
 import forge.card.mana.ManaCostShard;
-import forge.card.ColorSet;
-import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
-import forge.deck.generation.DeckGenerator2Color;
-import forge.deck.generation.DeckGenerator3Color;
-import forge.deck.generation.DeckGenerator5Color;
-import forge.deck.generation.DeckGeneratorBase;
-import forge.deck.generation.DeckGeneratorMonoColor;
-import forge.deck.generation.IDeckGenPool;
+import forge.deck.generation.*;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.planarconquest.ConquestPreferences.CQPref;
@@ -39,6 +23,12 @@ import forge.quest.QuestUtil;
 import forge.util.FileUtil;
 import forge.util.MyRandom;
 import forge.util.gui.SOptionPane;
+
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 public class ConquestUtil {
     private ConquestUtil() {}
@@ -153,7 +143,7 @@ public class ConquestUtil {
 
         //remove any cards that aren't allowed in deck due to color identity
         if (colorIdentity != MagicColor.ALL_COLORS) {
-            Predicate<PaperCard> pred = DeckFormat.Commander.isLegalCardForCommanderPredicate(deck.getCommanders());
+            Predicate<PaperCard> pred = DeckFormat.Commander.isLegalCardForCommanderOrLegalPartnerPredicate(deck.getCommanders());
 
             availableCards.retainAll(Lists.newArrayList(Iterables.filter(availableCards, pred)));
         }

@@ -7,10 +7,9 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
-
 import forge.Forge;
-import forge.Graphics;
 import forge.Forge.KeyInputAdapter;
+import forge.Graphics;
 import forge.assets.*;
 import forge.card.CardDb;
 import forge.card.CardEdition;
@@ -43,16 +42,10 @@ import forge.util.ItemPool;
 import forge.util.Lang;
 import forge.util.Utils;
 import forge.util.storage.IStorage;
-
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
 public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     public static FSkinImage MAIN_DECK_ICON = FSkinImage.DECKLIST;
@@ -214,7 +207,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         case PlanarConquest:
             return new DeckEditorPage[] {
                     new CatalogPage(ItemManagerConfig.CONQUEST_COLLECTION, "Collection", FSkinImage.SPELLBOOK),
-                    new DeckSectionPage(DeckSection.Main, ItemManagerConfig.CONQUEST_DECK_EDITOR, "Deck", FSkinImage.DECKLIST)
+                    new DeckSectionPage(DeckSection.Main, ItemManagerConfig.CONQUEST_DECK_EDITOR, "Deck", FSkinImage.DECKLIST),
+                    new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION)
             };
         }
     }
@@ -924,7 +918,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 }
                 else {
                     //if a commander has been set, only show cards that match its color identity
-                    additionalFilter = DeckFormat.Commander.isLegalCardForCommanderPredicate(commanders);
+                    additionalFilter = DeckFormat.Commander.isLegalCardForCommanderOrLegalPartnerPredicate(commanders);
                     cardManager.setCaption("Cards");
                 }
                 //fall through to below
@@ -941,6 +935,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         @Override
         protected void onCardActivated(PaperCard card) {
+            if (canOnlyBePartnerCommander(card)) {
+                return; // don't auto-change commander unexpectedly
+            }
             if (needsCommander()) {
                 setCommander(card); //handle special case of setting commander
                 return;
@@ -955,6 +952,24 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             return parentScreen.getCommanderPage() != null && parentScreen.getDeck().getCommanders().isEmpty();
         }
 
+        private boolean canHavePartnerCommander() {
+            return parentScreen.getCommanderPage() != null && parentScreen.getDeck().getCommanders().size() == 1
+                    && parentScreen.getDeck().getCommanders().get(0).getRules().canBePartnerCommander();
+        }
+
+        private boolean canOnlyBePartnerCommander(final PaperCard card) {
+            if (parentScreen.getCommanderPage() == null) {
+                return false;
+            }
+
+            byte cmdCI = 0;
+            for (final PaperCard p : parentScreen.getDeck().getCommanders()) {
+                cmdCI |= p.getRules().getColorIdentity().getColor();
+            }
+
+            return !card.getRules().getColorIdentity().hasNoColorsExcept(cmdCI);
+        }
+
         private void setCommander(PaperCard card) {
             if (!cardManager.isInfinite()) {
                 removeCard(card);
@@ -965,9 +980,17 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             refresh(); //refresh so cards shown that match commander's color identity
         }
 
+        private void setPartnerCommander(PaperCard card) {
+            if (!cardManager.isInfinite()) {
+                removeCard(card);
+            }
+            parentScreen.getCommanderPage().addCard(card, 1);
+            refresh(); //refresh so cards shown that match commander's color identity
+        }
+
         @Override
         protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
-            if (!needsCommander()) {
+            if (!needsCommander() && !canOnlyBePartnerCommander(card)) {
                 addItem(menu, "Add", "to " + parentScreen.getMainDeckPage().cardManager.getCaption(), parentScreen.getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
@@ -994,12 +1017,21 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 }
             }
             if (parentScreen.getCommanderPage() != null) {
-                if (DeckFormat.Commander.isLegalCommander(card.getRules()) && !parentScreen.getCommanderPage().cardManager.getPool().contains(card)) {
+                if (parentScreen.editorType != EditorType.PlanarConquest && DeckFormat.Commander.isLegalCommander(card.getRules()) && !parentScreen.getCommanderPage().cardManager.getPool().contains(card)) {
                     addItem(menu, "Set", "as Commander", parentScreen.getCommanderPage().getIcon(), true, true, new Callback<Integer>() {
                         @Override
                         public void run(Integer result) {
                             if (result == null || result <= 0) { return; }
                             setCommander(card);
+                        }
+                    });
+                }
+                if (canHavePartnerCommander() && card.getRules().canBePartnerCommander()) {
+                    addItem(menu, "Set", "as Partner Commander", parentScreen.getCommanderPage().getIcon(), true, true, new Callback<Integer>() {
+                        @Override
+                        public void run(Integer result) {
+                            if (result == null || result <= 0) { return; }
+                            setPartnerCommander(card);
                         }
                     });
                 }
@@ -1257,16 +1289,20 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 });
                 break;
             case Commander:
-                addItem(menu, "Remove", null, FSkinImage.MINUS, false, false, new Callback<Integer>() {
-                    @Override
-                    public void run(Integer result) {
-                        if (result == null || result <= 0) { return; }
+                if (parentScreen.editorType != EditorType.PlanarConquest || isPartnerCommander(card)) {
+                    addItem(menu, "Remove", null, FSkinImage.MINUS, false, false, new Callback<Integer>() {
+                        @Override
+                        public void run(Integer result) {
+                            if (result == null || result <= 0) {
+                                return;
+                            }
 
-                        removeCard(card, result);
-                        parentScreen.getCatalogPage().refresh(); //refresh so commander options shown again
-                        parentScreen.setSelectedPage(parentScreen.getCatalogPage());
-                    }
-                });
+                            removeCard(card, result);
+                            parentScreen.getCatalogPage().refresh(); //refresh so commander options shown again
+                            parentScreen.setSelectedPage(parentScreen.getCatalogPage());
+                        }
+                    });
+                }
                 break;
             case Avatar:
                 addItem(menu, "Remove", null, FSkinImage.MINUS, false, false, new Callback<Integer>() {
@@ -1316,7 +1352,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 break;
             }
 
-            if (parentScreen.getCommanderPage() != null && deckSection != DeckSection.Commander) {
+            if (parentScreen.editorType != EditorType.PlanarConquest && parentScreen.getCommanderPage() != null && deckSection != DeckSection.Commander) {
                 if (card.getRules().getType().isLegendary() && card.getRules().getType().isCreature() && !parentScreen.getCommanderPage().cardManager.getPool().contains(card)) {
                     addItem(menu, "Set", "as Commander", parentScreen.getCommanderPage().getIcon(), false, false, new Callback<Integer>() {
                         @Override
@@ -1334,6 +1370,16 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 }
             }
         }
+
+        private boolean isPartnerCommander(final PaperCard card) {
+            if (parentScreen.getCommanderPage() == null || parentScreen.getDeck().getCommanders().isEmpty()) {
+                return false;
+            }
+
+            PaperCard firstCmdr = parentScreen.getDeck().getCommanders().get(0);
+            return !card.getName().equals(firstCmdr.getName());
+        }
+
     }
 
     private static class DraftPackPage extends CatalogPage {
