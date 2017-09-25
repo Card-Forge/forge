@@ -204,9 +204,10 @@ public class ComputerUtilMana {
                     }
 
                     // If a manland was previously animated this turn, do not tap it to animate another manland
+                    // Also, don't animate a land that is already tapped (not very useful)
                     if (sa.getHostCard().isLand() && ma.getHostCard().isLand()
                             && ai.getController().isAI()
-                            && AnimateAi.isAnimatedThisTurn(ai, ma.getHostCard())) {
+                            && (AnimateAi.isAnimatedThisTurn(ai, ma.getHostCard())) || sa.getHostCard().isTapped()) {
                         continue;
                     }
                 } else if (sa.getApi() == ApiType.Pump) {
