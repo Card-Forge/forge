@@ -818,12 +818,6 @@ public class Combat {
             runParams.put("DamageAmount", totalDmg);
             runParams.put("DamageTarget", ge);
             ge.getGame().getTriggerHandler().runTrigger(TriggerType.CombatDamageDoneOnce, runParams, false);
-
-            // also fire DamageDone with the same runParams but with OnlyOnce applied
-            // for cards that are interested in such triggers
-            runParams.put("IsCombatDamage", true);
-            runParams.put("CombatDamageOnce", true);
-            ge.getGame().getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
         }
 
         preventMap.triggerPreventDamage(true);
@@ -847,11 +841,6 @@ public class Combat {
             runParams.put("DamageTargets", row.keySet());
             runParams.put("DamageAmount", dealtDamage);
             damageSource.getGame().getTriggerHandler().runTrigger(TriggerType.DealtCombatDamageOnce, runParams, false);
-
-            // also fire DamageDone with the same runParams but with OnlyOnce applied
-            // for cards that are interested in such triggers
-            runParams.put("IsCombatDamage", true);
-            runParams.put("CombatDamageOnce", true);
 
             damageSource.getGame().getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
         }
