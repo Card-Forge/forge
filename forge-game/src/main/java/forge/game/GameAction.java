@@ -18,30 +18,14 @@
 package forge.game;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ComparisonChain;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Sets;
-
+import com.google.common.collect.*;
 import forge.GameCommand;
 import forge.card.CardStateName;
-import forge.card.CardType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.AttachEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactory;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.event.*;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
@@ -59,24 +43,14 @@ import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
-import forge.util.Aggregates;
-import forge.util.CollectionSuppliers;
-import forge.util.Expressions;
+import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
-import forge.util.ThreadUtil;
-import forge.util.Visitor;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
 /**
  * Methods for common actions performed during a game.
@@ -489,6 +463,7 @@ public class GameAction {
             if (zoneFrom.is(ZoneType.Graveyard)) {
                 // fizzle all "damage done" triggers for cards returning to battlefield from graveyard
                 game.getStack().fizzleTriggersOnStackTargeting(copied, TriggerType.DamageDone);
+                game.getStack().fizzleTriggersOnStackTargeting(copied, TriggerType.DamageDoneOnce);
             }
         } else if (zoneTo.is(ZoneType.Graveyard)
         		|| zoneTo.is(ZoneType.Hand)
