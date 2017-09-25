@@ -2543,6 +2543,9 @@ public class ComputerUtilCombat {
         // Test for some special triggers that can change the creature in combat
         for (Trigger t : attacker.getTriggers()) {
             if (t.getMode() == TriggerType.Attacks && t.hasParam("Execute")) {
+                if (!attacker.hasSVar(t.getParam("Execute"))) {
+                    continue;
+                }
                 SpellAbility exec = AbilityFactory.getAbility(attacker, t.getParam("Execute"));
                 if (exec != null) {
                     if (exec.getApi() == ApiType.Clone && "Self".equals(exec.getParam("CloneTarget"))
