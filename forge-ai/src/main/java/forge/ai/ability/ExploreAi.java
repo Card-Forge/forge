@@ -38,7 +38,7 @@ public class ExploreAi extends SpellAbilityAi {
                 // We need more lands to improve our mana base, explore away the non-lands
                 return topCard;
             }
-            if (topCard.getCMC() - maxCMCDiff >= predictedMana) {
+            if (topCard.getCMC() - maxCMCDiff >= predictedMana && !topCard.hasSVar("DoNotDiscardIfAble")) {
                 // We're not casting this in foreseeable future, put it in the graveyard
                 return topCard;
             }
