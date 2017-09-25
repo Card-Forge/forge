@@ -121,7 +121,7 @@ public class DamageEachEffect extends DamageBaseEffect {
         }
         preventMap.triggerPreventDamage(false);
 
-        damageMap.dealLifelinkDamage();
+        damageMap.triggerDamageDoneOnce(false);
 
         replaceDying(sa);
     }

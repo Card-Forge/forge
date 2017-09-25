@@ -67,7 +67,7 @@ public class CostDamage extends CostPart {
         payer.addDamage(decision.c, source, damageMap, preventMap);
 
         preventMap.triggerPreventDamage(false);
-        damageMap.dealLifelinkDamage();
+        damageMap.triggerDamageDoneOnce(false);
 
         return decision.c > 0;
     }

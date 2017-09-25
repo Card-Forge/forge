@@ -830,7 +830,7 @@ public class Combat {
         // This was deeper before, but that resulted in the stack entry acting like before.
 
         // LifeLink for Combat Damage at this place
-        dealtDamageTo.dealLifelinkDamage();
+        dealtDamageTo.triggerDamageDoneOnce(true);
 
         // when ... deals combat damage to one or more
         for (final Card damageSource : dealtDamageTo.rowKeySet()) {
