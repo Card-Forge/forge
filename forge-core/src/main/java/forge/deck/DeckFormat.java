@@ -63,7 +63,8 @@ public enum DeckFormat {
         @Override
         public boolean apply(CardRules rules) {
             if (bannedCards.contains(rules.getName())) {
-                return false;}
+                return false;
+            }
             return true;
         }
     }),
