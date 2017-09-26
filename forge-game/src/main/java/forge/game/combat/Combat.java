@@ -841,8 +841,6 @@ public class Combat {
             runParams.put("DamageTargets", row.keySet());
             runParams.put("DamageAmount", dealtDamage);
             damageSource.getGame().getTriggerHandler().runTrigger(TriggerType.DealtCombatDamageOnce, runParams, false);
-
-            damageSource.getGame().getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
         }
 
         dealtDamageTo.clear();
