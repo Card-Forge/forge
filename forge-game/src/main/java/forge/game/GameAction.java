@@ -203,6 +203,8 @@ public class GameAction {
                     }
                     if (c.getStates().contains(CardStateName.OriginalText)) {
                         c.clearStates(CardStateName.OriginalText, false);
+                        c.removeSVar("GainingTextFrom");
+                        c.removeSVar("GainingTextFromTimestamp");
                     }
                     c.updateStateForView();
                 } else if (c.getStates().contains(CardStateName.OriginalText)) {
@@ -210,6 +212,8 @@ public class GameAction {
                     CardFactory.copyState(c, CardStateName.OriginalText, c, CardStateName.Original, false);
                     c.setState(CardStateName.Original, false);
                     c.clearStates(CardStateName.OriginalText, false);
+                    c.removeSVar("GainingTextFrom");
+                    c.removeSVar("GainingTextFromTimestamp");
                     c.updateStateForView();
                 }
 

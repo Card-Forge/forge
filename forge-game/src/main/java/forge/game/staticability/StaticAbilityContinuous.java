@@ -17,21 +17,10 @@
  */
 package forge.game.staticability;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import forge.card.CardStateName;
-import forge.game.card.*;
-import forge.util.TextUtil;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.GameCommand;
+import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
@@ -40,6 +29,7 @@ import forge.game.StaticEffects;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
+import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -50,6 +40,10 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
+import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
 
 /**
  * The Class StaticAbility_Continuous.
@@ -477,55 +471,74 @@ public final class StaticAbilityContinuous {
 
             // Gain text from another card
             if (layer == StaticAbilityLayer.TEXT) {
-                // Restore the original text in case it was remembered before
-                if (affectedCard.getStates().contains(CardStateName.OriginalText)) {
-                    affectedCard.clearTriggersNew();
-                    List<SpellAbility> saToRemove = Lists.newArrayList();
-                    for (SpellAbility saTemp : affectedCard.getSpellAbilities()) {
-                        if (saTemp.isTemporary()) {
-                            saToRemove.add(saTemp);
-                        }
-                    }
-                    for (SpellAbility saRem : saToRemove) {
-                        affectedCard.removeSpellAbility(saRem);
-                    }
-                    CardFactory.copyState(affectedCard, CardStateName.OriginalText, affectedCard, CardStateName.Original, false);
+                // Make no changes in case the target for the ability is still the same as before
+                boolean noChange = false;
+                if (gainTextSource != null && affectedCard.hasSVar("GainingTextFrom") && affectedCard.hasSVar("GainingTextFromTimestamp")
+                        && gainTextSource.getName() == affectedCard.getSVar("GainingTextFrom")
+                        && gainTextSource.getTimestamp() == Long.parseLong(affectedCard.getSVar("GainingTextFromTimestamp"))) {
+                    noChange = true;
                 }
 
-                if (gainTextSource != null) {
-                    if (!affectedCard.getStates().contains(CardStateName.OriginalText)) {
-                        // Remember the original text first in case it hasn't been done yet
-                        CardFactory.copyState(affectedCard, CardStateName.Original, affectedCard, CardStateName.OriginalText, false);
-                    }
-
-                    CardFactory.copyState(gainTextSource, CardStateName.Original, affectedCard, CardStateName.Original, false);
-
-                    // Do not clone the set code and rarity from the target card
-                    affectedCard.getState(CardStateName.Original).setSetCode(affectedCard.getState(CardStateName.OriginalText).getSetCode());
-                    affectedCard.getState(CardStateName.Original).setRarity(affectedCard.getState(CardStateName.OriginalText).getRarity());
-
-                    // Enable this in case Volrath's original image is to be used
-                    affectedCard.getState(CardStateName.Original).setImageKey(affectedCard.getState(CardStateName.OriginalText).getImageKey());
-
-                    // Activated abilities (statics and repleffects are apparently copied vis copyState?)
-                    for (SpellAbility sa : gainTextSource.getSpellAbilities()) {
-                        if (sa instanceof AbilityActivated) {
-                            SpellAbility newSA = ((AbilityActivated) sa).getCopy();
-                            newSA.setOriginalHost(gainTextSource);
-                            newSA.setIntrinsic(false);
-                            newSA.setTemporary(true);
-                            newSA.setHostCard(affectedCard);
-                            affectedCard.addSpellAbility(newSA);
+                if (!noChange) {
+                    // Restore the original text in case it was remembered before
+                    if (affectedCard.getStates().contains(CardStateName.OriginalText)) {
+                        affectedCard.clearTriggersNew();
+                        List<SpellAbility> saToRemove = Lists.newArrayList();
+                        for (SpellAbility saTemp : affectedCard.getSpellAbilities()) {
+                            if (saTemp.isTemporary()) {
+                                saToRemove.add(saTemp);
+                            }
                         }
-                    }
-                    // Triggered abilities
-                    for (Trigger t: gainTextSource.getTriggers()) {
-                        affectedCard.addTrigger(t.getCopyForHostCard(affectedCard));
+                        for (SpellAbility saRem : saToRemove) {
+                            affectedCard.removeSpellAbility(saRem);
+                        }
+                        CardFactory.copyState(affectedCard, CardStateName.OriginalText, affectedCard, CardStateName.Original, false);
                     }
 
-                    // Volrath's Shapeshifter shapeshifting ability needs to be added onto the new text
-                    if (params.containsKey("GainedTextHasThisStaticAbility")) {
-                        affectedCard.getCurrentState().addStaticAbility(stAb);
+                    // TODO: find a better way to ascertain that the card will essentially try to copy its exact duplicate
+                    // (e.g. Volrath's Shapeshifter copying the text of another pristine Volrath's Shapeshifter), since the
+                    // check by name may fail in case one of the cards is modified in some way while the other is not
+                    // (probably not very relevant for Volrath's Shapeshifter itself since it copies text on cards in GY).
+                    if (gainTextSource != null && !gainTextSource.getCurrentState().getName().equals(affectedCard.getCurrentState().getName())) {
+                        if (!affectedCard.getStates().contains(CardStateName.OriginalText)) {
+                            // Remember the original text first in case it hasn't been done yet
+                            CardFactory.copyState(affectedCard, CardStateName.Original, affectedCard, CardStateName.OriginalText, false);
+                        }
+
+                        CardFactory.copyState(gainTextSource, CardStateName.Original, affectedCard, CardStateName.Original, false);
+
+                        // Do not clone the set code and rarity from the target card
+                        affectedCard.getState(CardStateName.Original).setSetCode(affectedCard.getState(CardStateName.OriginalText).getSetCode());
+                        affectedCard.getState(CardStateName.Original).setRarity(affectedCard.getState(CardStateName.OriginalText).getRarity());
+
+                        // Enable this in case Volrath's original image is to be used
+                        affectedCard.getState(CardStateName.Original).setImageKey(affectedCard.getState(CardStateName.OriginalText).getImageKey());
+
+                        // Activated abilities (statics and repleffects are apparently copied via copyState?)
+                        for (SpellAbility sa : gainTextSource.getSpellAbilities()) {
+                            if (sa instanceof AbilityActivated) {
+                                SpellAbility newSA = ((AbilityActivated) sa).getCopy();
+                                newSA.setOriginalHost(gainTextSource);
+                                newSA.setIntrinsic(false);
+                                newSA.setTemporary(true);
+                                newSA.setHostCard(affectedCard);
+                                affectedCard.addSpellAbility(newSA);
+                            }
+                        }
+                        // Triggered abilities
+                        for (Trigger t : gainTextSource.getTriggers()) {
+                            affectedCard.addTrigger(t.getCopyForHostCard(affectedCard));
+                        }
+
+                        // Volrath's Shapeshifter shapeshifting ability needs to be added onto the new text
+                        if (params.containsKey("GainedTextHasThisStaticAbility")) {
+                            affectedCard.getCurrentState().addStaticAbility(stAb);
+                        }
+
+                        // Remember the name and the timestamp of the card we're gaining text from, so we don't modify
+                        // the card too aggressively when unnecessary
+                        affectedCard.setSVar("GainingTextFrom", String.valueOf(gainTextSource.getName()));
+                        affectedCard.setSVar("GainingTextFromTimestamp", String.valueOf(gainTextSource.getTimestamp()));
                     }
                 }
             }
