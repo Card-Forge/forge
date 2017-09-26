@@ -1,3 +1,6 @@
+- Ixalan -
+All 279 cards of the newly released Ixalan set are available in Forge. We've done our best to fix ths issues that you reported with the cards in the pre-release version. If you still see anything wrong with the new cards, don't hesitate to report!
+
 - Desktop Forge: Personal Card Ratings in Quest Mode -
 In Desktop Forge, it is now possible to assign personal ratings (from 1 star to 5 stars) to cards in Quest Mode by right clicking them and choosing the relevant context menu entry. It is then possible to filter cards by rating in both the deck editor and the quest shop, which should simplify managing bigger inventories. This patch was provided by Seravy.
 
