@@ -17,8 +17,6 @@
  */
 package forge.game;
 
-import java.util.*;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ArrayListMultimap;
@@ -26,16 +24,10 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.eventbus.EventBus;
-
 import forge.card.CardRarity;
+import forge.card.CardStateName;
 import forge.card.CardType.Supertype;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
-import forge.game.card.CardView;
+import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.event.Event;
@@ -44,11 +36,7 @@ import forge.game.phase.Phase;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.phase.Untap;
-import forge.game.player.IGameEntitiesFactory;
-import forge.game.player.Player;
-import forge.game.player.PlayerCollection;
-import forge.game.player.PlayerView;
-import forge.game.player.RegisteredPlayer;
+import forge.game.player.*;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
@@ -56,10 +44,15 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
-import forge.game.zone.*;
+import forge.game.zone.CostPaymentStack;
+import forge.game.zone.MagicStack;
+import forge.game.zone.Zone;
+import forge.game.zone.ZoneType;
 import forge.trackable.Tracker;
 import forge.util.Aggregates;
 import forge.util.Visitor;
+
+import java.util.*;
 
 /**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
@@ -107,6 +100,8 @@ public class Game {
 
     private final GameView view; 
     private final Tracker tracker = new Tracker();
+
+    private Map<Player, Boolean> orderedGraveyardMap = new HashMap<>();
 
     public Player getMonarch() {
         return monarch;
@@ -876,5 +871,33 @@ public class Game {
         spabCache.clear();
         cardCache.clear();
         //playerCache.clear();
+    }
+
+    public boolean isGraveyardOrdered() {
+        boolean ordered = false;
+        for (Player p : getPlayers()) {
+            ordered |= isGraveyardOrdered(p);
+        }
+        return ordered;
+    }
+
+    public boolean isGraveyardOrdered(final Player p) {
+        if (orderedGraveyardMap.containsKey(p)) {
+            return orderedGraveyardMap.get(p);
+        }
+        for (Card c : p.getAllCards()) {
+            if (c.hasSVar("NeedsOrderedGraveyard")) {
+                orderedGraveyardMap.put(p, true);
+                return true;
+            }
+            if (c.getStates().contains(CardStateName.OriginalText)) {
+                if (c.getState(CardStateName.OriginalText).hasSVar("NeedsOrderedGraveyard")) {
+                    orderedGraveyardMap.put(p, true);
+                    return true;
+                }
+            }
+        }
+        orderedGraveyardMap.put(p, false);
+        return false;
     }
 }

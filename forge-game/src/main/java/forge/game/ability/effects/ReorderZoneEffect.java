@@ -38,7 +38,7 @@ public class ReorderZoneEffect extends SpellAbilityEffect {
                     p.getZone(zone).setCards(list);
                 }
                 else {
-                    p.getController().orderMoveToZoneList(list, zone);
+                    p.getController().orderMoveToZoneList(list, zone, sa);
                 }
             }
         }

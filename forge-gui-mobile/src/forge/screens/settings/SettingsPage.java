@@ -1,7 +1,6 @@
 package forge.screens.settings;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.ai.AiProfileUtil;
@@ -133,6 +132,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_PRESELECT_PREVIOUS_ABILITY_ORDER,
                 "Preselect Last Order of Abilities",
                 "When enabled, preselects the last defined simultaneous ability order in the ordering dialog."),
+                1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED,
+                "Allow Ordering Graveyard if Needed",
+                "When enabled, allows to order cards going to graveyard when playing with cards for which it matters."),
                 1);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_AUTO_YIELD_MODE,
                 "Auto-Yield",

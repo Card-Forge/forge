@@ -861,6 +861,8 @@ public class GameAction {
         checkGameOverCondition();
 
         // do this multiple times, sometimes creatures/permanents will survive when they shouldn't
+        boolean orderedDesCreats = false;
+        boolean orderedNoRegCreats = false;
         for (int q = 0; q < 9; q++) {
             checkStaticAbilities(false, affectedCards);
             boolean checkAgain = false;
@@ -877,14 +879,14 @@ public class GameAction {
                     }
                 }
             }
-            List<Card> noRegCreats = null;
-            List<Card> desCreats = null;
+            CardCollection noRegCreats = null;
+            CardCollection desCreats = null;
             for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
                 if (c.isCreature()) {
                     // Rule 704.5f - Put into grave (no regeneration) for toughness <= 0
                     if (c.getNetToughness() <= 0) {
                         if (noRegCreats == null) {
-                            noRegCreats = Lists.newLinkedList();
+                            noRegCreats = new CardCollection();
                         }
                         noRegCreats.add(c);
                         checkAgain = true;
@@ -892,7 +894,7 @@ public class GameAction {
                         for (final Integer dmg : c.getReceivedDamageFromThisTurn().values()) {
                             if (c.getNetToughness() <= dmg.intValue()) {
                                 if (desCreats == null) {
-                                    desCreats = Lists.newLinkedList();
+                                    desCreats = new CardCollection();
                                 }
                                 desCreats.add(c);
                                 checkAgain = true;
@@ -904,7 +906,7 @@ public class GameAction {
                     // Rule 704.5h - Destroy due to deathtouch
                     else if (c.getNetToughness() <= c.getDamage() || c.hasBeenDealtDeathtouchDamage()) {
                         if (desCreats == null) {
-                            desCreats = Lists.newLinkedList();
+                            desCreats = new CardCollection();
                         }
                         desCreats.add(c);
                         c.setHasBeenDealtDeathtouchDamage(false);
@@ -931,12 +933,29 @@ public class GameAction {
             // only check static abilities once after destroying all the creatures
             // (e.g. helpful for Erebos's Titan and another creature dealing lethal damage to each other simultaneously)
             setHoldCheckingStaticAbilities(true);
+
             if (noRegCreats != null) {
+                if (noRegCreats.size() > 1 && game.isGraveyardOrdered() && !orderedNoRegCreats) {
+                    noRegCreats = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, noRegCreats, ZoneType.Graveyard);
+                    orderedNoRegCreats = true;
+                }
                 for (Card c : noRegCreats) {
                     sacrificeDestroy(c, null);
                 }
             }
             if (desCreats != null) {
+                if (desCreats.size() > 1 && game.isGraveyardOrdered() && !orderedDesCreats) {
+                    desCreats = CardLists.filter(desCreats, new Predicate<Card>() {
+                        @Override
+                        public boolean apply(Card card) {
+                            return card.canBeDestroyed();
+                        }
+                    });
+                    if (!desCreats.isEmpty()) {
+                        desCreats = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, desCreats, ZoneType.Graveyard);
+                    }
+                    orderedDesCreats = true;
+                }
                 for (Card c : desCreats) {
                     destroy(c, null);
                 }

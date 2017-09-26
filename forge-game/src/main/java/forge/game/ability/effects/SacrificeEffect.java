@@ -1,16 +1,12 @@
 package forge.game.ability.effects;
 
+import com.google.common.collect.Maps;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
@@ -18,13 +14,10 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.Maps;
 
 public class SacrificeEffect extends SpellAbilityEffect {
 
@@ -134,6 +127,10 @@ public class SacrificeEffect extends SpellAbilityEffect {
                     } else {
                         choosenToSacrifice = CardCollection.EMPTY;
                     }
+                }
+
+                if (choosenToSacrifice.size() > 1 && game.isGraveyardOrdered()) {
+                    choosenToSacrifice = GameActionUtil.orderCardsByTheirOwners(game, choosenToSacrifice, ZoneType.Graveyard);
                 }
 
                 for (Card sac : choosenToSacrifice) {

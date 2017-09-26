@@ -1,13 +1,15 @@
 package forge.game.ability.effects;
 
 import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.zone.ZoneType;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -72,8 +74,8 @@ public class DestroyEffect extends SpellAbilityEffect {
         final boolean noRegen = sa.hasParam("NoRegen");
         final boolean sac = sa.hasParam("Sacrifice");
 
-        final List<Card> tgtCards = getTargetCards(sa);
-        final List<Card> untargetedCards = new ArrayList<Card>();
+        CardCollection tgtCards = getTargetCards(sa);
+        CardCollection untargetedCards = new CardCollection();
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
@@ -82,6 +84,10 @@ public class DestroyEffect extends SpellAbilityEffect {
                     sa.getParam("ValidTgts").split(","))) {
                 untargetedCards.add(c);
             }
+        }
+
+        if (tgtCards.size() > 1 && game.isGraveyardOrdered()) {
+            tgtCards = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, tgtCards, ZoneType.Graveyard);
         }
 
         for (final Card tgtC : tgtCards) {
@@ -107,6 +113,10 @@ public class DestroyEffect extends SpellAbilityEffect {
                     card.addRemembered(lki);
                 }
             }
+        }
+
+        if (untargetedCards.size() > 1 && game.isGraveyardOrdered()) {
+            untargetedCards = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, untargetedCards, ZoneType.Graveyard);
         }
 
         for (final Card unTgtC : untargetedCards) {

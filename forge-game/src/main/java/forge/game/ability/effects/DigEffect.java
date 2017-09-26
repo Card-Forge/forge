@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import forge.card.CardStateName;
 import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -337,13 +338,18 @@ public class DigEffect extends SpellAbilityEffect {
                     }
 
                     // now, move the rest to destZone2
-                    if (destZone2 == ZoneType.Library || destZone2 == ZoneType.PlanarDeck || destZone2 == ZoneType.SchemeDeck) {
+                    if (destZone2 == ZoneType.Library || destZone2 == ZoneType.PlanarDeck || destZone2 == ZoneType.SchemeDeck
+                            || (destZone2 == ZoneType.Graveyard && game.isGraveyardOrdered())) {
                         CardCollection afterOrder = rest;
                         if (sa.hasParam("RestRandomOrder")) {
                             CardLists.shuffle(afterOrder);
                         }
                         else if (!skipReorder && rest.size() > 1) {
-                            afterOrder = (CardCollection)chooser.getController().orderMoveToZoneList(rest, destZone2);
+                            if (destZone2 == ZoneType.Graveyard) {
+                                afterOrder = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, rest, destZone2);
+                            } else {
+                                afterOrder = (CardCollection) chooser.getController().orderMoveToZoneList(rest, destZone2);
+                            }
                         }
                         if (libraryPosition2 != -1) {
                             // Closest to top

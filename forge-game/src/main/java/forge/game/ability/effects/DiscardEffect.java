@@ -2,14 +2,10 @@ package forge.game.ability.effects;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
+import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -17,7 +13,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -138,7 +133,12 @@ public class DiscardEffect extends SpellAbilityEffect {
                     boolean runDiscard = !sa.hasParam("Optional") 
                     		|| p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, sa.getParam("DiscardMessage"));
                     if (runDiscard) {
-                        final List<Card> toDiscard = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
+                        CardCollectionView toDiscard = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
+
+                        if (toDiscard.size() > 1 && p.getGame().isGraveyardOrdered()) {
+                            toDiscard = GameActionUtil.orderCardsByTheirOwners(p.getGame(), toDiscard, ZoneType.Graveyard);
+                        }
+
                         for (final Card c : toDiscard) {
                             boolean hasDiscarded = p.discard(c, sa) != null;
                             if (hasDiscarded) {
@@ -157,7 +157,13 @@ public class DiscardEffect extends SpellAbilityEffect {
 
                 if (mode.equals("Hand")) {
                     boolean shouldRemember = sa.hasParam("RememberDiscarded");
-                    for(Card c : Lists.newArrayList(p.getCardsIn(ZoneType.Hand))) { // without copying will get concurrent modification exception
+                    CardCollectionView toDiscard = new CardCollection(Lists.newArrayList(p.getCardsIn(ZoneType.Hand)));
+
+                    if (toDiscard.size() > 1 && p.getGame().isGraveyardOrdered()) {
+                        toDiscard = GameActionUtil.orderCardsByTheirOwners(p.getGame(), toDiscard, ZoneType.Graveyard);
+                    }
+
+                    for(Card c : toDiscard) { // without copying will get concurrent modification exception
                         boolean hasDiscarded = p.discard(c, sa) != null;
                         if( hasDiscarded && shouldRemember )
                             source.addRemembered(c);
@@ -166,7 +172,11 @@ public class DiscardEffect extends SpellAbilityEffect {
                 }
 
                 if (mode.equals("NotRemembered")) {
-                    final List<Card> dPHand = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), "Card.IsNotRemembered", p, source);
+                    CardCollectionView dPHand = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), "Card.IsNotRemembered", p, source);
+                    if (dPHand.size() > 1 && p.getGame().isGraveyardOrdered()) {
+                        dPHand = GameActionUtil.orderCardsByTheirOwners(p.getGame(), dPHand, ZoneType.Graveyard);
+                    }
+
                     for (final Card c : dPHand) {
                         p.discard(c, sa);
                         discarded.add(c);
@@ -190,14 +200,25 @@ public class DiscardEffect extends SpellAbilityEffect {
                         final String valid = sa.hasParam("DiscardValid") ? sa.getParam("DiscardValid") : "Card";
                         List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), valid, source.getController(), source);
                         list = CardLists.filter(list, Presets.NON_TOKEN);
+                        CardCollection toDiscard = new CardCollection();
                         for (int i = 0; i < numCards; i++) {
                             if (list.isEmpty())
                                 break;
-                                
+
                             final Card disc = Aggregates.random(list);
-                            if (p.discard(disc, sa) != null) 
-                                discarded.add(disc);
+                            toDiscard.add(disc);
                             list.remove(disc);
+                        }
+
+                        CardCollectionView toDiscardView = toDiscard;
+                        if (toDiscard.size() > 1 && p.getGame().isGraveyardOrdered()) {
+                            toDiscardView = GameActionUtil.orderCardsByTheirOwners(p.getGame(), toDiscard, ZoneType.Graveyard);
+                        }
+
+                        for (Card c : toDiscardView) {
+                            if (p.discard(c, sa) != null) {
+                                discarded.add(c);
+                            }
                         }
                     }
                 }
@@ -206,6 +227,11 @@ public class DiscardEffect extends SpellAbilityEffect {
                         CardCollectionView hand = p.getCardsIn(ZoneType.Hand);
                         hand = CardLists.filter(hand, Presets.NON_TOKEN);
                         CardCollectionView toDiscard = p.getController().chooseCardsToDiscardUnlessType(Math.min(numCards, numCardsInHand), hand, sa.getParam("UnlessType"), sa);
+
+                        if (toDiscard.size() > 1 && p.getGame().isGraveyardOrdered()) {
+                            toDiscard = GameActionUtil.orderCardsByTheirOwners(p.getGame(), toDiscard, ZoneType.Graveyard);
+                        }
+
                         for (Card c : toDiscard) {
                             c.getController().discard(c, sa);
                         }
@@ -226,8 +252,12 @@ public class DiscardEffect extends SpellAbilityEffect {
                                 "X", Integer.toString(AbilityUtils.calculateAmount(source, "X", sa)));
                     }
 
-                    List<Card> dPChHand = CardLists.getValidCards(dPHand, valid.split(","), source.getController(), source, sa);
+                    CardCollectionView dPChHand = CardLists.getValidCards(dPHand, valid.split(","), source.getController(), source, sa);
                     dPChHand = CardLists.filter(dPChHand, Presets.NON_TOKEN);
+                    if (dPChHand.size() > 1 && p.getGame().isGraveyardOrdered()) {
+                        dPChHand = GameActionUtil.orderCardsByTheirOwners(p.getGame(), dPChHand, ZoneType.Graveyard);
+                    }
+
                     // Reveal cards that will be discarded?
                     for (final Card c : dPChHand) {
                         p.discard(c, sa);
@@ -262,6 +292,10 @@ public class DiscardEffect extends SpellAbilityEffect {
                     int max = sa.hasParam("AnyNumber") ? validCards.size() : Math.min(validCards.size(), numCards);
 
                     CardCollectionView toBeDiscarded = validCards.isEmpty() ? null : chooser.getController().chooseCardsToDiscardFrom(p, sa, validCards, min, max);
+
+                    if (toBeDiscarded.size() > 1 && p.getGame().isGraveyardOrdered()) {
+                        toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(p.getGame(), toBeDiscarded, ZoneType.Graveyard);
+                    }
 
                     if (toBeDiscarded != null) {
                         if (mode.startsWith("Reveal") ) {

@@ -538,4 +538,23 @@ public final class GameActionUtil {
         }
         return sb.toString();
     }
+
+    public static CardCollectionView orderCardsByTheirOwners(Game game, CardCollectionView list, ZoneType dest) {
+        CardCollection completeList = new CardCollection();
+        for (Player p : game.getPlayers()) {
+            CardCollection subList = new CardCollection();
+            for (Card c : list) {
+                if (c.getOwner().equals(p)) {
+                    subList.add(c);
+                }
+            }
+            CardCollectionView subListView = subList;
+            if (subList.size() > 1) {
+                subListView = p.getController().orderMoveToZoneList(subList, dest);
+            }
+            completeList.addAll(subListView);
+        }
+        return completeList;
+    }
+
 } // end class GameActionUtil

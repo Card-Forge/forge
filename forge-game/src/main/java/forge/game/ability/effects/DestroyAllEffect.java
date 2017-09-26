@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import com.google.common.base.Predicate;
 import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -79,6 +80,10 @@ public class DestroyAllEffect extends SpellAbilityEffect {
                 return card.canBeDestroyed();
             }
         });
+
+        if (list.size() > 1 && game.isGraveyardOrdered()) {
+            list = GameActionUtil.orderCardsByTheirOwners(game, list, ZoneType.Graveyard);
+        }
 
         if (noRegen) {
             for (Card c : list) {

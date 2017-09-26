@@ -2,16 +2,12 @@ package forge.game.ability.effects;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
-
 import forge.card.CardStateName;
 import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
@@ -134,6 +130,10 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         		&& !sa.hasParam("Shuffle") && cards.size() >= 2 && !random) {
             Player p = AbilityUtils.getDefinedPlayers(source, sa.getParamOrDefault("DefinedPlayer", "You"), sa).get(0);
             cards = (CardCollection) p.getController().orderMoveToZoneList(cards, destination);
+        }
+
+        if (destination == ZoneType.Graveyard && game.isGraveyardOrdered()) {
+            cards = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, cards, ZoneType.Graveyard);
         }
 
         if (destination.equals(ZoneType.Library) && random) {

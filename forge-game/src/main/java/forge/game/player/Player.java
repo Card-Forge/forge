@@ -17,60 +17,19 @@
  */
 package forge.game.player;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Random;
-import java.util.TreeMap;
-import java.util.concurrent.ConcurrentSkipListMap;
-
-import forge.util.TextUtil;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
+import com.google.common.collect.*;
 import forge.LobbyPlayer;
 import forge.card.MagicColor;
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameLogEntryType;
-import forge.game.GameStage;
-import forge.game.GameType;
-import forge.game.GlobalRuleChange;
+import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.DetachedCardEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardDamageMap;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterType;
-import forge.game.event.GameEventCardSacrificed;
-import forge.game.event.GameEventLandPlayed;
-import forge.game.event.GameEventMulligan;
-import forge.game.event.GameEventPlayerControl;
-import forge.game.event.GameEventPlayerCounters;
-import forge.game.event.GameEventPlayerDamaged;
-import forge.game.event.GameEventPlayerLivesChanged;
-import forge.game.event.GameEventPlayerPoisoned;
-import forge.game.event.GameEventPlayerStatsChanged;
-import forge.game.event.GameEventScry;
-import forge.game.event.GameEventShuffle;
+import forge.game.event.*;
 import forge.game.keyword.KeywordCollection;
 import forge.game.keyword.KeywordCollection.KeywordCollectionView;
 import forge.game.keyword.KeywordsChange;
@@ -93,8 +52,14 @@ import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.MyRandom;
+import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentSkipListMap;
 
 /**
  * <p>
@@ -1591,12 +1556,22 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         for (int i = 0; i < max; i++) {
             if (bottom) {
-                milled.add(game.getAction().moveTo(destination, lib.getLast(), null));
+                milled.add(lib.get(lib.size() - i - 1));
             }
             else {
-                milled.add(game.getAction().moveTo(destination, lib.getFirst(), null));
+                milled.add(lib.get(i));
             }
         }
+
+        CardCollectionView milledView = milled;
+        if (destination == ZoneType.Graveyard && milled.size() > 1 && game.isGraveyardOrdered()) {
+            milledView = GameActionUtil.orderCardsByTheirOwners(game, milled, ZoneType.Graveyard);
+        }
+
+        for (Card m : milledView) {
+            game.getAction().moveTo(destination, m, null);
+        }
+
         return milled;
     }
 

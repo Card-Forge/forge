@@ -1,13 +1,10 @@
 package forge.game.ability.effects;
 
 import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -60,6 +57,10 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
         final boolean remSacrificed = sa.hasParam("RememberSacrificed");
         if (remSacrificed) {
             card.clearRemembered();
+        }
+
+        if (list.size() > 1 && game.isGraveyardOrdered()) {
+            list = GameActionUtil.orderCardsByTheirOwners(game, list, ZoneType.Graveyard);
         }
 
         for (Card sac : list) {

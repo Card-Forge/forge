@@ -687,7 +687,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public CardCollectionView orderMoveToZoneList(final CardCollectionView cards, final ZoneType destinationZone) {
+    public CardCollectionView orderMoveToZoneList(final CardCollectionView cards, final ZoneType destinationZone, final SpellAbility source) {
+        if (source == null || source.getApi() != ApiType.ReorderZone) {
+            if (destinationZone == ZoneType.Graveyard
+                    && !FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED) || !game.isGraveyardOrdered()) {
+                // Ordering not necessary
+                return cards;
+            }
+        }
+
         List<CardView> choices;
         tempShowCards(cards);
         switch (destinationZone) {
