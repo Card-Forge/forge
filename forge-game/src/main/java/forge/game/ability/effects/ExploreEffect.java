@@ -62,15 +62,17 @@ public class ExploreEffect extends SpellAbilityEffect {
                 }
             }
             if (!revealedLand) {
-                // TODO need to check if card didn't blick while that was happening,
-                // probably need strictlySelf in the Defined
-                if (game.getZoneOf(c).is(ZoneType.Battlefield)) {
+                // currently the timestamp check only works for if the card itself explore,
+                // if something else can make it explore that need to be updated
+                if (game.getZoneOf(c).is(ZoneType.Battlefield) && card.getTimestamp() == c.getTimestamp()) {
                     c.addCounter(CounterType.P1P1, 1, card, true);
-                    final Map<String, Object> runParams = Maps.newHashMap();
-                    runParams.put("Card", c);
-                    game.getTriggerHandler().runTrigger(TriggerType.Explores, runParams, false);
                 }
             }
+
+            // a creature does explore even if it isn't on the battlefield anymore
+            final Map<String, Object> runParams = Maps.newHashMap();
+            runParams.put("Card", c);
+            game.getTriggerHandler().runTrigger(TriggerType.Explores, runParams, false);
         }
     }
 
