@@ -415,7 +415,8 @@ public class AiBlockController {
                             && !ComputerUtilCombat.dealsFirstStrikeDamage(c, false, combat)) {
                         return false;
                     }
-                    return lifeInDanger || ComputerUtilCard.evaluateCreature(c) + diff < ComputerUtilCard.evaluateCreature(attacker);
+                    final boolean randomTrade = wouldLikeToRandomlyTrade(attacker, c, combat);
+                    return lifeInDanger || ComputerUtilCard.evaluateCreature(c) + diff < ComputerUtilCard.evaluateCreature(attacker) || randomTrade;
                 }
             });
             if (usableBlockers.size() < 2) {
@@ -586,39 +587,6 @@ public class AiBlockController {
         List<Card> currentAttackers = new ArrayList<>(attackersLeft);
         List<Card> killingBlockers;
 
-        // Parameters related to randomly trading when blocking (need to be enabled in the AI profile)
-        boolean enableRandomTrades = false;
-        boolean randomTradeIfBehindOnBoard = false;
-        boolean randomTradeIfCreatInHand = false;
-        int chanceToTradeToSaveWalker = 0;
-        int chanceToTradeDownToSaveWalker = 0;
-        int minRandomTradeChance = 0;
-        int maxRandomTradeChance = 0;
-        int maxCreatDiff = 0;
-        int maxCreatDiffWithRepl = 0;
-        int aiCreatureCount = 0;
-        int oppCreatureCount = 0;
-        if (ai.getController().isAI()) {
-            AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-            enableRandomTrades = aic.getBooleanProperty(AiProps.ENABLE_RANDOM_FAVORABLE_TRADES_ON_BLOCK);
-            randomTradeIfBehindOnBoard = aic.getBooleanProperty(AiProps.RANDOMLY_TRADE_EVEN_WHEN_HAVE_LESS_CREATS);
-            randomTradeIfCreatInHand = aic.getBooleanProperty(AiProps.ALSO_TRADE_WHEN_HAVE_A_REPLACEMENT_CREAT);
-            minRandomTradeChance = aic.getIntProperty(AiProps.MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
-            maxRandomTradeChance = aic.getIntProperty(AiProps.MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
-            maxCreatDiff = aic.getIntProperty(AiProps.MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE);
-            maxCreatDiffWithRepl = aic.getIntProperty(AiProps.MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE_WITH_REPL);
-            chanceToTradeToSaveWalker = aic.getIntProperty(AiProps.CHANCE_TO_TRADE_TO_SAVE_PLANESWALKER);
-            chanceToTradeDownToSaveWalker = aic.getIntProperty(AiProps.CHANCE_TO_TRADE_DOWN_TO_SAVE_PLANESWALKER);
-        }
-
-        if (enableRandomTrades) {
-            aiCreatureCount = ComputerUtil.countUsefulCreatures(ai);
-
-            if (!attackersLeft.isEmpty()) {
-                oppCreatureCount = ComputerUtil.countUsefulCreatures(attackersLeft.get(0).getController());
-            }
-        }
-
         for (final Card attacker : attackersLeft) {
 
             if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")
@@ -640,47 +608,9 @@ public class AiBlockController {
                 if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
                     // Always trade when life in danger
                     doTrade = true;
-                } else if (enableRandomTrades) {
+                } else {
                     // Randomly trade creatures with lower power and [hopefully] worse abilities, if enabled in profile
-
-                    if (attacker.getOwner().equals(ai) && "6".equals(attacker.getSVar("SacMe"))) {
-                        // Temporarily controlled object - don't trade with it
-                        // TODO: find a more reliable way to figure out that control will be reestablished next turn
-                        continue;
-                    }
-
-                    int numSteps = ai.getStartingLife() - 5; // e.g. 15 steps between 5 life and 20 life
-                    float chanceStep = (maxRandomTradeChance - minRandomTradeChance) / numSteps;
-                    int chance = (int)Math.max(minRandomTradeChance, (maxRandomTradeChance - (Math.max(5, ai.getLife() - 5)) * chanceStep));
-                    if (chance > maxRandomTradeChance) {
-                        chance = maxRandomTradeChance;
-                    }
-
-                    int evalAtk = ComputerUtilCard.evaluateCreature(attacker, false, false);
-                    int evalBlk = ComputerUtilCard.evaluateCreature(blocker, false, false);
-                    if (blocker.isFaceDown() && blocker.getState(CardStateName.Original).getType().isCreature()) {
-                        // if the blocker is a face-down creature (e.g. cast via Morph, Manifest), evaluate it
-                        // in relation to the original state, not to the Morph state
-                        evalBlk = ComputerUtilCard.evaluateCreature(Card.fromPaperCard(blocker.getPaperCard(), ai), false, true);
-                    }
-                    int chanceToSavePW = chanceToTradeDownToSaveWalker > 0 && evalAtk + 1 < evalBlk ? chanceToTradeDownToSaveWalker : chanceToTradeToSaveWalker;
-                    boolean powerParityOrHigher = blocker.getNetPower() <= attacker.getNetPower();
-                    boolean creatureParityOrAllowedDiff = aiCreatureCount
-                            + (randomTradeIfBehindOnBoard ? maxCreatDiff : 0) >= oppCreatureCount;
-                    boolean wantToTradeWithCreatInHand = randomTradeIfCreatInHand
-                            && !CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.CREATURES).isEmpty()
-                            && aiCreatureCount + maxCreatDiffWithRepl >= oppCreatureCount;
-                    boolean wantToSavePlaneswalker = MyRandom.percentTrue(chanceToSavePW)
-                            && combat.getDefenderByAttacker(attacker) instanceof Card
-                            && ((Card) combat.getDefenderByAttacker(attacker)).isPlaneswalker();
-                    boolean wantToTradeDownToSavePW = chanceToTradeDownToSaveWalker > 0;
-
-                    if (((evalBlk <= evalAtk + 1) || (wantToSavePlaneswalker && wantToTradeDownToSavePW)) // "1" accounts for tapped.
-                            && powerParityOrHigher
-                            && (creatureParityOrAllowedDiff || wantToTradeWithCreatInHand)
-                            && (MyRandom.percentTrue(chance) || wantToSavePlaneswalker)) {
-                        doTrade = true;
-                    }
+                    doTrade = wouldLikeToRandomlyTrade(attacker, blocker, combat);
                 }
 
                 if (doTrade) {
@@ -1297,4 +1227,81 @@ public class AiBlockController {
         return first;
     }
 
+    private boolean wouldLikeToRandomlyTrade(Card attacker, Card blocker, Combat combat) {
+        // Determines if the AI would like to randomly trade its blocker for the attacker in given combat
+        boolean enableRandomTrades = false;
+        boolean randomTradeIfBehindOnBoard = false;
+        boolean randomTradeIfCreatInHand = false;
+        int chanceToTradeToSaveWalker = 0;
+        int chanceToTradeDownToSaveWalker = 0;
+        int minRandomTradeChance = 0;
+        int maxRandomTradeChance = 0;
+        int maxCreatDiff = 0;
+        int maxCreatDiffWithRepl = 0;
+        int aiCreatureCount = 0;
+        int oppCreatureCount = 0;
+        if (ai.getController().isAI()) {
+            AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+            enableRandomTrades = aic.getBooleanProperty(AiProps.ENABLE_RANDOM_FAVORABLE_TRADES_ON_BLOCK);
+            randomTradeIfBehindOnBoard = aic.getBooleanProperty(AiProps.RANDOMLY_TRADE_EVEN_WHEN_HAVE_LESS_CREATS);
+            randomTradeIfCreatInHand = aic.getBooleanProperty(AiProps.ALSO_TRADE_WHEN_HAVE_A_REPLACEMENT_CREAT);
+            minRandomTradeChance = aic.getIntProperty(AiProps.MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
+            maxRandomTradeChance = aic.getIntProperty(AiProps.MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
+            maxCreatDiff = aic.getIntProperty(AiProps.MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE);
+            maxCreatDiffWithRepl = aic.getIntProperty(AiProps.MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE_WITH_REPL);
+            chanceToTradeToSaveWalker = aic.getIntProperty(AiProps.CHANCE_TO_TRADE_TO_SAVE_PLANESWALKER);
+            chanceToTradeDownToSaveWalker = aic.getIntProperty(AiProps.CHANCE_TO_TRADE_DOWN_TO_SAVE_PLANESWALKER);
+        }
+
+        if (!enableRandomTrades) {
+            return false;
+        }
+
+        aiCreatureCount = ComputerUtil.countUsefulCreatures(ai);
+
+        if (!attackersLeft.isEmpty()) {
+            oppCreatureCount = ComputerUtil.countUsefulCreatures(attackersLeft.get(0).getController());
+        }
+
+        if (attacker.getOwner().equals(ai) && "6".equals(attacker.getSVar("SacMe"))) {
+            // Temporarily controlled object - don't trade with it
+            // TODO: find a more reliable way to figure out that control will be reestablished next turn
+            return false;
+        }
+
+        int numSteps = ai.getStartingLife() - 5; // e.g. 15 steps between 5 life and 20 life
+        float chanceStep = (maxRandomTradeChance - minRandomTradeChance) / numSteps;
+        int chance = (int)Math.max(minRandomTradeChance, (maxRandomTradeChance - (Math.max(5, ai.getLife() - 5)) * chanceStep));
+        if (chance > maxRandomTradeChance) {
+            chance = maxRandomTradeChance;
+        }
+
+        int evalAtk = ComputerUtilCard.evaluateCreature(attacker, true, false);
+        int evalBlk = ComputerUtilCard.evaluateCreature(blocker, true, false);
+        if (blocker.isFaceDown() && blocker.getState(CardStateName.Original).getType().isCreature()) {
+            // if the blocker is a face-down creature (e.g. cast via Morph, Manifest), evaluate it
+            // in relation to the original state, not to the Morph state
+            evalBlk = ComputerUtilCard.evaluateCreature(Card.fromPaperCard(blocker.getPaperCard(), ai), false, true);
+        }
+        int chanceToSavePW = chanceToTradeDownToSaveWalker > 0 && evalAtk + 1 < evalBlk ? chanceToTradeDownToSaveWalker : chanceToTradeToSaveWalker;
+        boolean powerParityOrHigher = blocker.getNetPower() <= attacker.getNetPower();
+        boolean creatureParityOrAllowedDiff = aiCreatureCount
+                + (randomTradeIfBehindOnBoard ? maxCreatDiff : 0) >= oppCreatureCount;
+        boolean wantToTradeWithCreatInHand = randomTradeIfCreatInHand
+                && !CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.CREATURES).isEmpty()
+                && aiCreatureCount + maxCreatDiffWithRepl >= oppCreatureCount;
+        boolean wantToSavePlaneswalker = MyRandom.percentTrue(chanceToSavePW)
+                && combat.getDefenderByAttacker(attacker) instanceof Card
+                && ((Card) combat.getDefenderByAttacker(attacker)).isPlaneswalker();
+        boolean wantToTradeDownToSavePW = chanceToTradeDownToSaveWalker > 0;
+
+        if (((evalBlk <= evalAtk + 1) || (wantToSavePlaneswalker && wantToTradeDownToSavePW)) // "1" accounts for tapped.
+                && powerParityOrHigher
+                && (creatureParityOrAllowedDiff || wantToTradeWithCreatInHand)
+                && (MyRandom.percentTrue(chance) || wantToSavePlaneswalker)) {
+            return true;
+        }
+
+        return false;
+    }
 }
