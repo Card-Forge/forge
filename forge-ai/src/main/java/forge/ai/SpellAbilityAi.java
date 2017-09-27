@@ -1,12 +1,7 @@
 package forge.ai;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.card.ICardFace;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
@@ -24,6 +19,10 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityCondition;
 import forge.util.MyRandom;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Base class for API-specific AI logic
@@ -103,6 +102,12 @@ public abstract class SpellAbilityAi {
      * Checks if the AI will play a SpellAbility with the specified AiLogic
      */
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
+        if (aiLogic.equals("CheckCondition")) {
+            SpellAbility saCopy = sa.copy();
+            saCopy.setActivatingPlayer(ai);
+            return saCopy.getConditions().areMet(saCopy);
+        }
+
         return !("Never".equals(aiLogic));
     }
 
