@@ -293,7 +293,42 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public CardCollectionView orderMoveToZoneList(CardCollectionView cards, ZoneType destinationZone, SpellAbility source) {
-        //TODO Add logic for AI ordering here
+        //TODO Add more logic for AI ordering here
+
+        // In presence of Volrath's Shapeshifter in deck, try to place the best creature on top of the graveyard
+        if (destinationZone == ZoneType.Graveyard && game.isGraveyardOrdered()) {
+            if (!CardLists.filter(game.getCardsInGame(), new Predicate<Card>() {
+                @Override
+                public boolean apply(Card card) {
+                    // need a custom predicate here since Volrath's Shapeshifter may have a different name OTB
+                    return card.getName().equals("Volrath's Shapeshifter")
+                            || card.getStates().contains(CardStateName.OriginalText) && card.getState(CardStateName.OriginalText).getName().equals("Volrath's Shapeshifter");
+                }
+            }).isEmpty()) {
+                int bestValue = 0;
+                Card bestCreature = null;
+                for (Card c : cards) {
+                    int curValue = ComputerUtilCard.evaluateCreature(c);
+                    if (c.isCreature() && curValue > bestValue) {
+                        bestValue = curValue;
+                        bestCreature = c;
+                    }
+                }
+
+                if (bestCreature != null) {
+                    CardCollection reordered = new CardCollection();
+                    for (Card c : cards) {
+                        if (!c.equals(bestCreature)) {
+                            reordered.add(c);
+                        }
+                    }
+                    reordered.add(bestCreature);
+                    return reordered;
+                }
+            }
+        }
+
+        // Default: return with the same order as was passed into this method
         return cards;
     }
 
