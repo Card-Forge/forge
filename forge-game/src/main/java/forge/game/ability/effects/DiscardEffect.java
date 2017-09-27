@@ -293,11 +293,11 @@ public class DiscardEffect extends SpellAbilityEffect {
 
                     CardCollectionView toBeDiscarded = validCards.isEmpty() ? null : chooser.getController().chooseCardsToDiscardFrom(p, sa, validCards, min, max);
 
-                    if (toBeDiscarded.size() > 1) {
-                        toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(p.getGame(), toBeDiscarded, ZoneType.Graveyard);
-                    }
-
                     if (toBeDiscarded != null) {
+                        if (toBeDiscarded.size() > 1) {
+                            toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(p.getGame(), toBeDiscarded, ZoneType.Graveyard);
+                        }
+
                         if (mode.startsWith("Reveal") ) {
                             p.getController().reveal(toBeDiscarded, ZoneType.Hand, p,
                                     chooser + " has chosen " + (toBeDiscarded.size() == 1 ? "this card" : "these cards")  + " from ");
