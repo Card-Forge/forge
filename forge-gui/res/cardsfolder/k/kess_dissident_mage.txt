@@ -7,6 +7,8 @@ S:Mode$ Continuous | Affected$ Instant.YouCtrl,Sorcery.YouCtrl | Condition$ Play
 T:Mode$ ChangesZone | ValidCard$ Instant.YouCtrl,Sorcery.YouCtrl | Origin$ Graveyard | Destination$ Stack | TriggerZones$ Battlefield | Execute$ RememberCastFromGrave | Static$ True
 T:Mode$ ChangesZone | ValidCard$ Instant.YouCtrl+IsRemembered,Sorcery.YouCtrl+IsRemembered | Origin$ Stack | Destination$ Hand,Library,Exile | TriggerZones$ Battlefield | Execute$ DBCleanup | Static$ True
 SVar:RememberCastFromGrave:DB$ Pump | RememberObjects$ TriggeredCard
+# TODO: find a better way to check "card cast this way" to interact properly with other cards that allow you to cast cards from graveyard
+# but not exile them (also relevant for Bosium Strip)
 R:Event$ Moved | ValidCard$ Instant.YouCtrl+IsRemembered,Sorcery.YouCtrl+IsRemembered | Origin$ Stack | Destination$ Graveyard | ReplaceWith$ MoveExile
 SVar:MoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

@@ -3194,6 +3194,7 @@ forge-gui/res/cardsfolder/b/borrowing_the_east_wind.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/boseiju_who_shelters_all.txt -text
 forge-gui/res/cardsfolder/b/bosh_iron_golem.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/bosh_iron_golem_avatar.txt -text
+forge-gui/res/cardsfolder/b/bosium_strip.txt -text
 forge-gui/res/cardsfolder/b/bosk_banneret.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/botanical_sanctum.txt -text
 forge-gui/res/cardsfolder/b/bottle_gnomes.txt svneol=native#text/plain
