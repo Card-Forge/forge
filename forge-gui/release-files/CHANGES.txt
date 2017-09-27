@@ -8,7 +8,7 @@ A new option is available in Forge that makes the game determine when to offer y
 In Desktop Forge, it is now possible to assign personal ratings (from 1 star to 5 stars) to cards in Quest Mode by right clicking them and choosing the relevant context menu entry. It is then possible to filter cards by rating in both the deck editor and the quest shop, which should simplify managing bigger inventories. This patch was provided by Seravy.
 
 - Mobile Forge: Partner Commander support -
-It is now possible to set partner commanders through the user interface in mobile Forge, both in Constructed EDH and in Planar Conquest. When you have a commander that can be a legal partner to your current commander, you will have a new option "Set as Partner Commander" available to you in the dropdown menu that you get when you tap the card in the deck editor.
+It is now possible to set partner commanders through the user interface in mobile Forge, both in Constructed EDH and in Planar Conquest. When you have a commander that can be a legal partner for your current commander, you will have a new option "Set as Partner Commander" available to you in the dropdown menu that you get when you tap the card in the deck editor.
 
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.
