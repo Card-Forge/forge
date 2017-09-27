@@ -97,7 +97,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ROTATE_PLANE_OR_PHENOMENON("false"),
         UI_DYNAMIC_PLANECHASE_BG("false"),
         UI_DISABLE_IMAGES_EFFECT_CARDS("false"),
-        UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED ("never"),
+        UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED ("Never"),
 
         UI_FOR_TOUCHSCREN("false"),
 
