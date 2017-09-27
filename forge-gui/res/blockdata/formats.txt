@@ -2,7 +2,6 @@
 Sets:KLD, AER, AKH, W17, HOU, XLN
 Banned: Emrakul, the Promised End; Smuggler's Copter; Reflector Mage; Aetherworks Marvel; Felidar Guardian
 
-RIP Extended July 1997 - August 2013
 [Extended]
 Sets:SOM, MBS, NPH, M12, ISD, DKA, AVR, M13, RTR, GTC, DGM, M14, THS, BNG, JOU, M15
 Banned:Ponder; Mental Misstep
