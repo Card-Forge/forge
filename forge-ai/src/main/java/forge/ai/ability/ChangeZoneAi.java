@@ -70,6 +70,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     return false;
                 }
             }
+        } else if (aiLogic.equals("RaidOnly")) {
+            return ai.getAttackedWithCreatureThisTurn();
         }
 
         return super.checkAiLogic(ai, sa, aiLogic);
