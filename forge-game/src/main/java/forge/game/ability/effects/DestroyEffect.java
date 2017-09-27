@@ -86,7 +86,7 @@ public class DestroyEffect extends SpellAbilityEffect {
             }
         }
 
-        if (tgtCards.size() > 1 && game.isGraveyardOrdered()) {
+        if (tgtCards.size() > 1) {
             tgtCards = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, tgtCards, ZoneType.Graveyard);
         }
 
@@ -115,7 +115,7 @@ public class DestroyEffect extends SpellAbilityEffect {
             }
         }
 
-        if (untargetedCards.size() > 1 && game.isGraveyardOrdered()) {
+        if (untargetedCards.size() > 1) {
             untargetedCards = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, untargetedCards, ZoneType.Graveyard);
         }
 

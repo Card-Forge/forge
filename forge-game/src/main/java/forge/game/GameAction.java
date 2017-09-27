@@ -935,7 +935,7 @@ public class GameAction {
             setHoldCheckingStaticAbilities(true);
 
             if (noRegCreats != null) {
-                if (noRegCreats.size() > 1 && game.isGraveyardOrdered() && !orderedNoRegCreats) {
+                if (noRegCreats.size() > 1 && !orderedNoRegCreats) {
                     noRegCreats = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, noRegCreats, ZoneType.Graveyard);
                     orderedNoRegCreats = true;
                 }
@@ -944,7 +944,7 @@ public class GameAction {
                 }
             }
             if (desCreats != null) {
-                if (desCreats.size() > 1 && game.isGraveyardOrdered() && !orderedDesCreats) {
+                if (desCreats.size() > 1 && !orderedDesCreats) {
                     desCreats = CardLists.filter(desCreats, new Predicate<Card>() {
                         @Override
                         public boolean apply(Card card) {

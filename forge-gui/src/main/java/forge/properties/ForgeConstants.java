@@ -289,6 +289,11 @@ public final class ForgeConstants {
     public static final String AUTO_YIELD_PER_CARD = "Per Card (Each Game)";
     public static final String AUTO_YIELD_PER_ABILITY = "Per Ability (Each Match)";
 
+    // Constants for Graveyard Ordering
+    public static final String GRAVEYARD_ORDERING_NEVER = "Never";
+    public static final String GRAVEYARD_ORDERING_OWN_CARDS = "With Relevant Cards";
+    public static final String GRAVEYARD_ORDERING_ALWAYS = "Always";
+
     // Set boolean constant for landscape mode for gdx port
     public static final boolean isGdxPortLandscape = FileUtil.doesFileExist(ASSETS_DIR + "switch_orientation.ini") ? true : false;
 

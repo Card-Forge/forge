@@ -87,7 +87,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbCompactPrompt = new OptionsCheckBox("Compact Prompt");
     private final JCheckBox cbEscapeEndsTurn = new OptionsCheckBox("Use Escape Key to End Turn");
     private final JCheckBox cbPreselectPrevAbOrder = new OptionsCheckBox("Preselect Last Order of Abilities");
-    private final JCheckBox cbAllowOrderingGraveyard = new OptionsCheckBox("Allow Ordering Graveyard if Needed");
     private final JCheckBox cbHideReminderText = new OptionsCheckBox("Hide Reminder Text");
     private final JCheckBox cbOpenPacksIndiv = new OptionsCheckBox("Open Packs Individually");
     private final JCheckBox cbTokensInSeparateRow = new OptionsCheckBox("Display Tokens in a Separate Row");
@@ -105,6 +104,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FComboBoxPanel<String> cbpAutoYieldMode = new FComboBoxPanel<>("Auto-Yield:");
     private final FComboBoxPanel<String> cbpCounterDisplayType = new FComboBoxPanel<>("Counter Display Type:");
     private final FComboBoxPanel<String> cbpCounterDisplayLocation = new FComboBoxPanel<>("Counter Display Location:");
+    private final FComboBoxPanel<String> cbpGraveyardOrdering = new FComboBoxPanel<>("Allow Ordering Cards Put in Graveyard:");
 
     /**
      * Constructor.
@@ -189,8 +189,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbPreselectPrevAbOrder, titleConstraints);
         pnlPrefs.add(new NoteLabel("When enabled, preselects the last defined simultaneous ability order in the ordering dialog."), descriptionConstraints);
 
-        pnlPrefs.add(cbAllowOrderingGraveyard, titleConstraints);
-        pnlPrefs.add(new NoteLabel("When enabled, allows to choose the order of cards going to graveyard when playing with cards for which it matters (for example, Volrath's Shapeshifter)."), descriptionConstraints);
+        pnlPrefs.add(cbpGraveyardOrdering, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel("Determines when to let the player choose the order of cards simultaneously put in graveyard (never, always, or only when playing with cards for which it matters, for example, Volrath's Shapeshifter)."), descriptionConstraints);
 
         pnlPrefs.add(cbpAutoYieldMode, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel("Defines the granularity level of auto-yields (per unique ability or per unique card)."), descriptionConstraints);
@@ -688,8 +688,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbPreselectPrevAbOrder;
     }
 
-    public final JCheckBox getCbAllowOrderingGraveyard() {
-        return cbAllowOrderingGraveyard;
+    public final FComboBoxPanel<String> getCbpGraveyardOrdering() {
+        return cbpGraveyardOrdering;
     }
 
     /** @return {@link forge.toolbox.FLabel} */

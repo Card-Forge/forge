@@ -296,7 +296,7 @@ public class PlayerControllerAi extends PlayerController {
         //TODO Add more logic for AI ordering here
 
         // In presence of Volrath's Shapeshifter in deck, try to place the best creature on top of the graveyard
-        if (destinationZone == ZoneType.Graveyard && game.isGraveyardOrdered()) {
+        if (destinationZone == ZoneType.Graveyard) {
             if (!CardLists.filter(game.getCardsInGame(), new Predicate<Card>() {
                 @Override
                 public boolean apply(Card card) {

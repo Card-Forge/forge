@@ -689,10 +689,24 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public CardCollectionView orderMoveToZoneList(final CardCollectionView cards, final ZoneType destinationZone, final SpellAbility source) {
         if (source == null || source.getApi() != ApiType.ReorderZone) {
-            if (destinationZone == ZoneType.Graveyard
-                    && (!FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED) || !game.isGraveyardOrdered())) {
-                // Ordering not necessary
-                return cards;
+            if (destinationZone == ZoneType.Graveyard) {
+                switch (FModel.getPreferences().getPref(FPref.UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED)) {
+                    case ForgeConstants.GRAVEYARD_ORDERING_NEVER:
+                        // No ordering is ever performed by the player except when done by effect (AF ReorderZone)
+                        return cards;
+                    case ForgeConstants.GRAVEYARD_ORDERING_OWN_CARDS:
+                        // Order only if the relevant cards controlled by the player determine the potential necessity for it
+                        if (!game.isGraveyardOrdered(player)) {
+                            return cards;
+                        }
+                        break;
+                    case ForgeConstants.GRAVEYARD_ORDERING_ALWAYS:
+                        // Always order cards, no matter if there is a determined case for it or not
+                        break;
+                    default:
+                        // By default, assume no special ordering necessary (but should not get here unless the preference file is borked)
+                        return cards;
+                }
             }
         }
 

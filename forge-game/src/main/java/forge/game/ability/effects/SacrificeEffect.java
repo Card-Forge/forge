@@ -129,7 +129,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
                     }
                 }
 
-                if (choosenToSacrifice.size() > 1 && game.isGraveyardOrdered()) {
+                if (choosenToSacrifice.size() > 1) {
                     choosenToSacrifice = GameActionUtil.orderCardsByTheirOwners(game, choosenToSacrifice, ZoneType.Graveyard);
                 }
 

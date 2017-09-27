@@ -133,9 +133,12 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 "Preselect Last Order of Abilities",
                 "When enabled, preselects the last defined simultaneous ability order in the ordering dialog."),
                 1);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED,
-                "Allow Ordering Graveyard if Needed",
-                "When enabled, allows to order cards going to graveyard when playing with cards for which it matters."),
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED,
+                "Allow Ordering Cards Put in Graveyard",
+                "Determines when to allow to order cards going to graveyard (never/always/only with relevant cards).",
+                        new String[]{
+                                ForgeConstants.GRAVEYARD_ORDERING_NEVER, ForgeConstants.GRAVEYARD_ORDERING_OWN_CARDS,
+                                ForgeConstants.GRAVEYARD_ORDERING_ALWAYS}),
                 1);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_AUTO_YIELD_MODE,
                 "Auto-Yield",

@@ -132,7 +132,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             cards = (CardCollection) p.getController().orderMoveToZoneList(cards, destination);
         }
 
-        if (destination == ZoneType.Graveyard && game.isGraveyardOrdered()) {
+        if (destination == ZoneType.Graveyard) {
             cards = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, cards, ZoneType.Graveyard);
         }
 

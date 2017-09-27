@@ -120,7 +120,6 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbEscapeEndsTurn(), FPref.UI_ALLOW_ESC_TO_END_TURN));
         lstControls.add(Pair.of(view.getCbDetailedPaymentDesc(), FPref.UI_DETAILED_SPELLDESC_IN_PROMPT));
         lstControls.add(Pair.of(view.getCbPreselectPrevAbOrder(), FPref.UI_PRESELECT_PREVIOUS_ABILITY_ORDER));
-        lstControls.add(Pair.of(view.getCbAllowOrderingGraveyard(), FPref.UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED));
         lstControls.add(Pair.of(view.getCbShowStormCount(), FPref.UI_SHOW_STORM_COUNT_IN_PROMPT));
 
         lstControls.add(Pair.of(view.getCbFilterLandsByColorId(), FPref.UI_FILTER_LANDS_BY_COLOR_IDENTITY));
@@ -197,6 +196,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeAutoYieldModeComboBox();
         initializeCounterDisplayTypeComboBox();
         initializeCounterDisplayLocationComboBox();
+        initializeGraveyardOrderingComboBox();
         initializePlayerNameButton();
     }
 
@@ -338,6 +338,16 @@ public enum CSubmenuPreferences implements ICDoc {
         final String[] elems = {ForgeConstants.AUTO_YIELD_PER_ABILITY, ForgeConstants.AUTO_YIELD_PER_CARD};
         final FPref userSetting = FPref.UI_AUTO_YIELD_MODE;
         final FComboBoxPanel<String> panel = this.view.getAutoYieldModeComboBoxPanel();
+        final FComboBox<String> comboBox = createComboBox(elems, userSetting);
+        final String selectedItem = this.prefs.getPref(userSetting);
+        panel.setComboBox(comboBox, selectedItem);
+    }
+
+    private void initializeGraveyardOrderingComboBox() {
+        final String[] elems = {ForgeConstants.GRAVEYARD_ORDERING_NEVER, ForgeConstants.GRAVEYARD_ORDERING_OWN_CARDS,
+                ForgeConstants.GRAVEYARD_ORDERING_ALWAYS};
+        final FPref userSetting = FPref.UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED;
+        final FComboBoxPanel<String> panel = this.view.getCbpGraveyardOrdering();
         final FComboBox<String> comboBox = createComboBox(elems, userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);

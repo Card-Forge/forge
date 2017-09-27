@@ -81,7 +81,7 @@ public class DestroyAllEffect extends SpellAbilityEffect {
             }
         });
 
-        if (list.size() > 1 && game.isGraveyardOrdered()) {
+        if (list.size() > 1) {
             list = GameActionUtil.orderCardsByTheirOwners(game, list, ZoneType.Graveyard);
         }
 

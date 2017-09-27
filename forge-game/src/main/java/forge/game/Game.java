@@ -101,8 +101,6 @@ public class Game {
     private final GameView view; 
     private final Tracker tracker = new Tracker();
 
-    private Map<Player, Boolean> orderedGraveyardMap = new HashMap<>();
-
     public Player getMonarch() {
         return monarch;
     }
@@ -873,31 +871,17 @@ public class Game {
         //playerCache.clear();
     }
 
-    public boolean isGraveyardOrdered() {
-        boolean ordered = false;
-        for (Player p : getPlayers()) {
-            ordered |= isGraveyardOrdered(p);
-        }
-        return ordered;
-    }
-
+    // Does the player control any cards that care about the order of cards in the graveyard?
     public boolean isGraveyardOrdered(final Player p) {
-        if (orderedGraveyardMap.containsKey(p)) {
-            return orderedGraveyardMap.get(p);
-        }
         for (Card c : p.getAllCards()) {
             if (c.hasSVar("NeedsOrderedGraveyard")) {
-                orderedGraveyardMap.put(p, true);
                 return true;
-            }
-            if (c.getStates().contains(CardStateName.OriginalText)) {
+            } else if (c.getStates().contains(CardStateName.OriginalText)) {
                 if (c.getState(CardStateName.OriginalText).hasSVar("NeedsOrderedGraveyard")) {
-                    orderedGraveyardMap.put(p, true);
                     return true;
                 }
             }
         }
-        orderedGraveyardMap.put(p, false);
         return false;
     }
 }

@@ -339,7 +339,7 @@ public class DigEffect extends SpellAbilityEffect {
 
                     // now, move the rest to destZone2
                     if (destZone2 == ZoneType.Library || destZone2 == ZoneType.PlanarDeck || destZone2 == ZoneType.SchemeDeck
-                            || (destZone2 == ZoneType.Graveyard && game.isGraveyardOrdered())) {
+                            || destZone2 == ZoneType.Graveyard) {
                         CardCollection afterOrder = rest;
                         if (sa.hasParam("RestRandomOrder")) {
                             CardLists.shuffle(afterOrder);
