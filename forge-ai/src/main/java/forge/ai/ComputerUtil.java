@@ -74,14 +74,19 @@ public class ComputerUtil {
         final Card source = sa.getHostCard();
 
         if (sa.isSpell() && !source.isCopiedSpell()) {
+            if (source.getType().hasStringType("Arcane")) {
+                sa = AbilityUtils.addSpliceEffects(sa);
+                AiPlayDecision postSpliceDecision = ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(sa);
+                if (postSpliceDecision != AiPlayDecision.WillPlay) {
+                    // for whatever reason the AI doesn't want to play the thing with the subs at this time
+                    return false;
+                }
+            }
+
             source.setCastSA(sa);
             sa.setLastStateBattlefield(game.getLastStateBattlefield());
             sa.setLastStateGraveyard(game.getLastStateGraveyard());
             sa.setHostCard(game.getAction().moveToStack(source, sa));
-
-            if (source.getType().hasStringType("Arcane")) {
-                sa = AbilityUtils.addSpliceEffects(sa);
-            }
         }
 
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
