@@ -24,6 +24,7 @@ import forge.card.MagicColor;
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameStage;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -577,6 +578,15 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
             if (!Expressions.compare(left, compare, right)) {
                 return false;
             }
+        }
+
+        if (hasParam("GameStage")) {
+            String[] stageDefs = TextUtil.split(getParam("GameStage"), ',');
+            boolean isRelevantStage = false;
+            for (String stage : stageDefs) {
+                isRelevantStage |= (game.getAge() == GameStage.valueOf(stage));
+            }
+            return isRelevantStage;
         }
 
         if (hasParam("Presence")) {
