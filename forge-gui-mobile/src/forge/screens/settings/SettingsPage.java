@@ -134,7 +134,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 "When enabled, preselects the last defined simultaneous ability order in the ordering dialog."),
                 1);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED,
-                "Allow Ordering Cards Put in Graveyard",
+                "Order Graveyard",
                 "Determines when to allow to order cards going to graveyard (never/always/only with relevant cards).",
                         new String[]{
                                 ForgeConstants.GRAVEYARD_ORDERING_NEVER, ForgeConstants.GRAVEYARD_ORDERING_OWN_CARDS,
