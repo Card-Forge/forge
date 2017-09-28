@@ -17,6 +17,7 @@
  */
 package forge.card;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import forge.Graphics;
 import forge.assets.FSkinImage;
 import forge.card.mana.ManaCost;
@@ -148,7 +149,7 @@ public class CardFaceSymbols {
         }
     }
 
-    public static void drawOther(final Graphics g, String s, float x, final float y, final float w, final float h) {
+    public static void drawOther(final Graphics g, String s, float x, final float y, final float w, final float h, boolean rotate) {
         if (s.length() == 0) {
             return;
         }
@@ -163,7 +164,13 @@ public class CardFaceSymbols {
                 BugReporter.reportBug("Symbol not recognized \"" + symbol + "\" in string: " + s);
                 continue;
             }
-            g.drawImage(image, x, y, w, h);
+
+            if(rotate) {
+                g.drawRotatedImage(image.getTextureRegion(), x, y, w, h, x+w /2, y+h /2,90);
+            }
+            else
+                g.drawImage(image, x, y, w, h);
+
             x += dx;
         }
     }

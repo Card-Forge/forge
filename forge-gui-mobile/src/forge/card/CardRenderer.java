@@ -668,7 +668,7 @@ public class CardRenderer {
         if (isPreferenceEnabled(FPref.UI_OVERLAY_FOIL_EFFECT) && MatchController.instance.mayView(card)) {
             int foil = card.getCurrentState().getFoilIndex();
             if (foil > 0) {
-                CardFaceSymbols.drawOther(g, String.format("foil%02d", foil), x, y, w, h);
+                CardFaceSymbols.drawOther(g, String.format("foil%02d", foil), x, y, w, h, card.isSplitCard());
             }
         }
     }
