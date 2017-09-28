@@ -5306,6 +5306,7 @@ forge-gui/res/cardsfolder/d/divert.txt -text
 forge-gui/res/cardsfolder/d/divination.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/divine_congregation.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/divine_favor.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/d/divine_intervention.txt -text
 forge-gui/res/cardsfolder/d/divine_light.txt -text
 forge-gui/res/cardsfolder/d/divine_offering.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/divine_presence.txt svneol=native#text/plain
