@@ -1196,6 +1196,8 @@ public class ComputerUtilCard {
         final PhaseHandler phase = game.getPhaseHandler();
         final Combat combat = phase.getCombat();
         final boolean isBerserk = "Berserk".equals(sa.getParam("AILogic"));
+        final boolean loseCardAtEOT = "Sacrifice".equals(sa.getParam("AtEOT")) || "Exile".equals(sa.getParam("AtEOT"))
+                || "Destroy".equals(sa.getParam("AtEOT")) || "ExileCombat".equals(sa.getParam("AtEOT"));
 
         boolean combatTrick = false;
         boolean holdCombatTricks = false;
@@ -1236,8 +1238,8 @@ public class ComputerUtilCard {
             return true;
         }
 
-        // buff attacker/blocker using triggered pump
-        if (immediately && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+        // buff attacker/blocker using triggered pump (unless it's lethal and we don't want to be reckless)
+        if (immediately && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && !loseCardAtEOT) {
             if (phase.isPlayerTurn(ai)) {
                 if (CombatUtil.canAttack(c)) {
                     return true;
@@ -1315,7 +1317,7 @@ public class ComputerUtilCard {
             boolean pumpedWillDie = false;
             final boolean isAttacking = combat.isAttacking(c);
 
-            if (isBerserk && isAttacking) { pumpedWillDie = true; }
+            if ((isBerserk && isAttacking) || loseCardAtEOT) { pumpedWillDie = true; }
 
             if (isAttacking) {
                 pumpedCombat.addAttacker(pumped, opp);
