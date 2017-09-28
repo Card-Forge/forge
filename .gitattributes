@@ -415,6 +415,7 @@ forge-game/src/main/java/forge/game/ability/effects/ExploreEffect.java -text svn
 forge-game/src/main/java/forge/game/ability/effects/FightEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/FlipCoinEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/FogEffect.java -text
+forge-game/src/main/java/forge/game/ability/effects/GameDrawEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/GameLossEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/GameWinEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/GoadEffect.java -text svneol=unset#text/plain
@@ -3678,6 +3679,7 @@ forge-gui/res/cardsfolder/c/ceaseless_searblades.txt -text
 forge-gui/res/cardsfolder/c/celestial_ancient.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/celestial_archon.txt -text
 forge-gui/res/cardsfolder/c/celestial_colonnade.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/c/celestial_convergence.txt -text
 forge-gui/res/cardsfolder/c/celestial_crusader.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/celestial_dawn.txt -text
 forge-gui/res/cardsfolder/c/celestial_flare.txt -text

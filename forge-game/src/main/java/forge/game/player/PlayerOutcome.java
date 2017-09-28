@@ -17,11 +17,14 @@ public class PlayerOutcome {
 
     /**
      * TODO: Write javadoc for this method.
-     * @param sourceName
      * @return
      */
     public static PlayerOutcome win() {
         return new PlayerOutcome(null, null, null);
+    }
+
+    public static PlayerOutcome draw() {
+        return new PlayerOutcome(null, GameLossReason.IntentionalDraw, null);
     }
 
     public static PlayerOutcome altWin(String sourceName) {
@@ -69,6 +72,7 @@ public class PlayerOutcome {
             case OpponentWon: return "lost because an opponent has won by spell '" + loseConditionSpell + "'";
             case SpellEffect: return "lost due to effect of spell '" + loseConditionSpell + "'";
             case CommanderDamage: return "lost due to accumulation of 21 damage from generals";
+            case IntentionalDraw: return "accepted that the game is a draw";
         }
         return "lost for unknown reason (this is a bug)";
     }

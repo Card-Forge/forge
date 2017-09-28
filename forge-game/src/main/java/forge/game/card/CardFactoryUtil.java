@@ -467,6 +467,39 @@ public class CardFactoryUtil {
             return doXMath(n, m, source);
         }
 
+        if (l[0].startsWith("TiedForHighestLife")) {
+            int maxLife = Integer.MIN_VALUE;
+            for (final Player player : players) {
+                int highestTotal = playerXProperty(player, "LifeTotal", source);
+                if (highestTotal > maxLife) {
+                    maxLife = highestTotal;
+                }
+            }
+            int numTied = 0;
+            for (final Player player : players) {
+                if (player.getLife() == maxLife) {
+                    numTied++;
+                }
+            }
+            return doXMath(numTied, m, source);
+        }
+
+        if (l[0].startsWith("TiedForLowestLife")) {
+            int minLife = Integer.MAX_VALUE;
+            for (final Player player : players) {
+                int lowestTotal = playerXProperty(player, "LifeTotal", source);
+                if (lowestTotal < minLife) {
+                    minLife = lowestTotal;
+                }
+            }
+            int numTied = 0;
+            for (final Player player : players) {
+                if (player.getLife() == minLife) {
+                    numTied++;
+                }
+            }
+            return doXMath(numTied, m, source);
+        }
 
         final String[] sq;
         sq = l[0].split("\\.");

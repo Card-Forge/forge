@@ -1807,6 +1807,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         setOutcome(PlayerOutcome.concede());
     }
 
+    public final void intentionalDraw() {
+        setOutcome(PlayerOutcome.draw());
+    }
+
     public final boolean cantLose() {
         if (getOutcome() != null && getOutcome().lossState == GameLossReason.Conceded) {
             return false;

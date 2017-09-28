@@ -1,12 +1,11 @@
 package forge.game.ability;
 
 
+import com.google.common.collect.Maps;
 import forge.game.ability.effects.*;
 import forge.util.ReflectionUtil;
 
 import java.util.Map;
-
-import com.google.common.collect.Maps;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -76,6 +75,7 @@ public enum ApiType {
     GainControl (ControlGainEffect.class),
     GainLife (LifeGainEffect.class),
     GainOwnership (OwnershipGainEffect.class),
+    GameDrawn (GameDrawEffect.class),
     GenericChoice (ChooseGenericEffect.class),
     Goad (GoadEffect.class),
     Haunt (HauntEffect.class),
