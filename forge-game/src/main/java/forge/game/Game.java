@@ -884,7 +884,7 @@ public class Game {
         }
         for (Card c : p.getOpponents().getCardsIn(ZoneType.Battlefield)) {
             // Bone Dancer is important when an opponent has it active on the battlefield
-            if (c.hasSVar("NeedsOrderedGraveyard") && c.getName().equals("Bone Dancer")) {
+            if ("OPPONENT".equals(c.getSVar("NeedsOrderedGraveyard"))) {
                 return true;
             }
         }
