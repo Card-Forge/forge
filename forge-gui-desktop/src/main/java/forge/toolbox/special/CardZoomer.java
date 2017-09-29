@@ -19,20 +19,6 @@
 package forge.toolbox.special;
 
 import forge.StaticData;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
-import java.awt.image.BufferedImage;
-
-import javax.swing.JPanel;
-import javax.swing.Timer;
-
-import net.miginfocom.swing.MigLayout;
 import forge.assets.FSkinProp;
 import forge.game.card.Card;
 import forge.game.card.CardView.CardStateView;
@@ -44,6 +30,11 @@ import forge.toolbox.FSkin.SkinnedLabel;
 import forge.toolbox.imaging.FImagePanel;
 import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.toolbox.imaging.FImageUtil;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Displays card image at its original size and correct orientation.
@@ -66,6 +57,7 @@ public enum CardZoomer {
     // Details about the current card being displayed.
     private CardStateView thisCard;
     private boolean mayFlip, isInAltState;
+    private boolean isSplitRotated = false;
 
     // The zoomer is in button mode when it is activated by holding down the
     // middle mouse button or left and right mouse buttons simultaneously.
@@ -240,7 +232,7 @@ public enum CardZoomer {
             PaperCard pc = StaticData.instance().getCommonCards().getCard(cardName);
             boolean isAftermath = pc != null && Card.getCardForUi(pc).hasKeyword("Aftermath");
 
-            return thisCard.getCard().isFaceDown() ? 0 : isAftermath ? 270 : 90; // rotate Aftermath splits the other way to correctly show the right split (graveyard) half
+            return thisCard.getCard().isFaceDown() || isSplitRotated ? 0 : isAftermath ? 270 : 90; // rotate Aftermath splits the other way to correctly show the right split (graveyard) half
         }
 
         return thisCard.getType().isPlane() || thisCard.getType().isPhenomenon() ? 90 : 0;
@@ -298,8 +290,12 @@ public enum CardZoomer {
      * Toggles between primary and alternate image associated with card if applicable.
      */
     private void toggleCardImage() {
-        if (thisCard != null && mayFlip) {
-            toggleFlipCard();
+        if (thisCard != null) {
+            if (mayFlip) {
+                toggleFlipCard();
+            } else if (thisCard.getCard().isSplitCard()) {
+                toggleSplitCardRotation();
+            }
         }
     }
 
@@ -313,6 +309,14 @@ public enum CardZoomer {
         isInAltState = !isInAltState;
         thisCard = thisCard.getCard().getState(isInAltState);
         imagePanel.setRotation(thisCard.getCard().isFlipCard() && isInAltState ? 180 : 0);
+        setImage();
+    }
+
+    /**
+     * Controls the rotation of a split card.
+     */
+    private void toggleSplitCardRotation() {
+        isSplitRotated = !isSplitRotated;
         setImage();
     }
 
