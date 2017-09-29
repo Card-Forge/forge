@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 import forge.Graphics;
 import forge.assets.*;
 import forge.card.CardDetailUtil.DetailColors;
@@ -13,7 +12,6 @@ import forge.card.mana.ManaCost;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
-import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
@@ -332,7 +330,7 @@ public class CardImageRenderer {
             return;
         }
 
-        boolean canLook = card.getController() != null && card.canBeShownToAny(Lists.<PlayerView>newArrayList(card.getController()));
+        boolean canLook = MatchController.instance.mayView(card);
 
         if (image == ImageCache.defaultImage) { //support drawing card image manually if card image not found
             drawCardImage(g, card, altState, x, y, w, h, CardStackPosition.Top);
@@ -345,12 +343,15 @@ public class CardImageRenderer {
             float new_y = ForgeConstants.isGdxPortLandscape && isCurrentCard ? (dispH - new_h) / 2:y;
             boolean rotateSplit = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_SPLIT_CARDS);
             boolean rotatePlane = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON);
-            if (rotatePlane && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane()))
+            if (rotatePlane && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane())) {
                 g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
-            else if (rotateSplit && isCurrentCard && card.isSplitCard() && canLook)
-                g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, card.getText().contains("Aftermath") || card.getAlternateState().getOracleText().contains("Aftermath") ? 90:-90);
-            else
+            } else if (rotateSplit && isCurrentCard && card.isSplitCard() && canLook) {
+                boolean isAftermath = card.getText().contains("Aftermath") || card.getAlternateState().getOracleText().contains("Aftermath");
+                g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
+            }
+            else {
                 g.drawImage(image, x, y, w, h);
+            }
         }
         CardRenderer.drawFoilEffect(g, card, x, y, w, h, isCurrentCard && canLook);
     }
