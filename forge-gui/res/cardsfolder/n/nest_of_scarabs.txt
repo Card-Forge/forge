@@ -2,7 +2,7 @@ Name:Nest of Scarabs
 ManaCost:2 B
 Types:Enchantment
 T:Mode$ CounterAddedOnce | ValidCard$ Creature | ValidSource$ Card.YouCtrl | CounterType$ M1M1 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you put one or more -1/-1 counters on a creature, create that many 1/1 black Insect creature tokens.
-SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenName$ Insect | TokenTypes$ Creature,Insect | TokenOwner$ You | TokenColors$ Black | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ b 1 1 insect AKH
+SVar:TrigToken:DB$ Token | TokenAmount$ X | References$ X | TokenName$ Insect | TokenTypes$ Creature,Insect | TokenOwner$ You | TokenColors$ Black | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ b 1 1 insect AKH
 SVar:X:TriggerCount$Amount
 DeckHints:Ability$Counters
 DeckHas:Ability$Token
