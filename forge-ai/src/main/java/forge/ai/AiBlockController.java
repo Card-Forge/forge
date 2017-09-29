@@ -1232,6 +1232,7 @@ public class AiBlockController {
         boolean enableRandomTrades = false;
         boolean randomTradeIfBehindOnBoard = false;
         boolean randomTradeIfCreatInHand = false;
+        int chanceModForEmbalm = 0;
         int chanceToTradeToSaveWalker = 0;
         int chanceToTradeDownToSaveWalker = 0;
         int minRandomTradeChance = 0;
@@ -1247,6 +1248,7 @@ public class AiBlockController {
             randomTradeIfCreatInHand = aic.getBooleanProperty(AiProps.ALSO_TRADE_WHEN_HAVE_A_REPLACEMENT_CREAT);
             minRandomTradeChance = aic.getIntProperty(AiProps.MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
             maxRandomTradeChance = aic.getIntProperty(AiProps.MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
+            chanceModForEmbalm = aic.getIntProperty(AiProps.CHANCE_DECREASE_TO_TRADE_VS_EMBALM);
             maxCreatDiff = aic.getIntProperty(AiProps.MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE);
             maxCreatDiffWithRepl = aic.getIntProperty(AiProps.MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE_WITH_REPL);
             chanceToTradeToSaveWalker = aic.getIntProperty(AiProps.CHANCE_TO_TRADE_TO_SAVE_PLANESWALKER);
@@ -1278,6 +1280,14 @@ public class AiBlockController {
 
         int evalAtk = ComputerUtilCard.evaluateCreature(attacker, true, false);
         int evalBlk = ComputerUtilCard.evaluateCreature(blocker, true, false);
+        boolean atkEmbalm = (attacker.hasStartOfKeyword("Embalm") || attacker.hasStartOfKeyword("Eternalize")) && !attacker.isToken();
+        boolean blkEmbalm = (blocker.hasStartOfKeyword("Embalm") || blocker.hasStartOfKeyword("Eternalize")) && !blocker.isToken();
+
+        if (atkEmbalm && !blkEmbalm) {
+            // The opponent will eventually get his creature back, while the AI won't
+            chance = Math.min(0, chance - chanceModForEmbalm);
+        }
+
         if (blocker.isFaceDown() && blocker.getState(CardStateName.Original).getType().isCreature()) {
             // if the blocker is a face-down creature (e.g. cast via Morph, Manifest), evaluate it
             // in relation to the original state, not to the Morph state

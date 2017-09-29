@@ -47,6 +47,9 @@ MAX_DIFF_IN_CREATURE_COUNT_TO_TRADE_WITH_REPL=1
 # Min and max chance to randomly aggressively trade when blocking (note that it will become 100 if the AI is in danger)
 MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK=0
 MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK=50
+# The decrease amount for the trade chance when trading against a non-token Embalm/Eternalize creature with a non-token
+# creature that does not have Embalm/Eternalize
+CHANCE_DECREASE_TO_TRADE_VS_EMBALM=10
 
 # Options to save / preserve loyalty of planeswalkers
 # Chance to trade a (worse or roughly equal) creature in order to save a planeswalker or preserve its loyalty
@@ -68,7 +71,7 @@ CHEAT_WITH_MANA_ON_SHUFFLE=true
 
 # The chance for the AI to attempt to hold land drops until Main 2 when it's safe and when it has nothing to potentially
 # do with the extra mana
-HOLD_LAND_DROP_FOR_MAIN2_IF_UNUSED=0
+HOLD_LAND_DROP_FOR_MAIN2_IF_UNUSED=30
 
 # Planechase logic
 DEFAULT_MAX_PLANAR_DIE_ROLLS_PER_TURN=1
