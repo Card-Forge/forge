@@ -896,8 +896,6 @@ public class ComputerUtilCombat {
             power -= attacker.getNetCombatDamage();
         }
 
-        // power += blocker.getKeywordMagnitude("Bushido"); // This is apparently accounted for in the combat trigs below
-
         final Game game = attacker.getGame();
         // look out for continuous static abilities that only care for blocking
         // creatures
@@ -1046,7 +1044,6 @@ public class ComputerUtilCombat {
             toughness += attacker.getNetToughness() - blocker.getNetToughness();
         } 
 
-        // toughness += blocker.getKeywordMagnitude("Bushido"); // Apparently, this is already accounted for in the combat triggers below
         final Game game = attacker.getGame();
         final FCollection<Trigger> theTriggers = new FCollection<Trigger>();
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
@@ -1204,7 +1201,6 @@ public class ComputerUtilCombat {
     public static int predictPowerBonusOfAttacker(final Card attacker, final Card blocker, final Combat combat, boolean withoutAbilities, boolean withoutCombatStaticAbilities) {
         int power = 0;
 
-        // power += attacker.getKeywordMagnitude("Bushido"); // This is apparently accounted for in the combat trigs below
         //check Exalted only for the first attacker
         if (combat != null && combat.getAttackers().isEmpty()) {
             for (Card card : attacker.getController().getCardsIn(ZoneType.Battlefield)) {
@@ -1429,7 +1425,6 @@ public class ComputerUtilCombat {
             theTriggers.addAll(card.getTriggers());
         }
         if (blocker != null) {
-            // toughness += attacker.getKeywordMagnitude("Bushido"); // This is apparently accounted for in the combat trigs below
             theTriggers.addAll(blocker.getTriggers());
         }
 
