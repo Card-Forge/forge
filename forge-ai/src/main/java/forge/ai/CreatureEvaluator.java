@@ -1,6 +1,7 @@
 package forge.ai;
 
 import com.google.common.base.Function;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
@@ -221,6 +222,12 @@ public class CreatureEvaluator implements Function<Card, Integer> {
 
         if (!c.getEncodedCards().isEmpty()) {
             value += addValue(24, "encoded");
+        }
+
+        // card-specific evaluation modifier
+        if (c.hasSVar("AIEvaluationModifier")) {
+            int mod = AbilityUtils.calculateAmount(c, c.getSVar("AIEvaluationModifier"), null);
+            value += mod;
         }
 
         return value;
