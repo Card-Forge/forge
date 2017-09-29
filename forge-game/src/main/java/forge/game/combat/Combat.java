@@ -804,45 +804,12 @@ public class Combat {
             c.clearAssignedDamage();
         }
 
-        // Run triggers
-        for (final GameEntity ge : dealtDamageTo.columnKeySet()) {
-
-            // TODO find better way to get the sum (use streams once Java 8 is OK on Android?)
-            int totalDmg = 0;
-            for (Integer dmgEntry : dealtDamageTo.column(ge).values()) {
-                totalDmg += dmgEntry;
-            }
-
-            final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("DamageSources", dealtDamageTo.column(ge).keySet());
-            runParams.put("DamageAmount", totalDmg);
-            runParams.put("DamageTarget", ge);
-            ge.getGame().getTriggerHandler().runTrigger(TriggerType.CombatDamageDoneOnce, runParams, false);
-        }
-
         preventMap.triggerPreventDamage(true);
         // This was deeper before, but that resulted in the stack entry acting like before.
 
+        // Run the trigger to deal combat damage once
         // LifeLink for Combat Damage at this place
         dealtDamageTo.triggerDamageDoneOnce(true);
-
-        // when ... deals combat damage to one or more
-        for (final Card damageSource : dealtDamageTo.rowKeySet()) {
-            final Map<String, Object> runParams = Maps.newHashMap();
-            Map<GameEntity, Integer> row = dealtDamageTo.row(damageSource);
-
-            // TODO find better way to get the sum
-            int dealtDamage = 0;
-            for (Integer i : row.values()) {
-                dealtDamage += i;
-            }
-
-            runParams.put("DamageSource", damageSource);
-            runParams.put("DamageTargets", row.keySet());
-            runParams.put("DamageAmount", dealtDamage);
-            damageSource.getGame().getTriggerHandler().runTrigger(TriggerType.DealtCombatDamageOnce, runParams, false);
-        }
-
         dealtDamageTo.clear();
     }
 
