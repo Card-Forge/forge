@@ -8,8 +8,8 @@ import forge.game.spellability.SpellAbility;
 public class GameDrawEffect extends SpellAbilityEffect {
 
     /* (non-Javadoc)
-         * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
-         */
+     * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
+     */
     @Override
     protected String getStackDescription(SpellAbility sa) {
         return "The game is a draw.";
