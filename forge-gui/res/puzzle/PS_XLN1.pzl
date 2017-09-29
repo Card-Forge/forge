@@ -9,11 +9,11 @@ Description:Win this turn. Your Gonti, Lord of Luxury will exile the opponent's 
 humanlife=20
 ailife=8
 activeplayer=human
-activephase=UPKEEP
+activephase=MAIN1
 humanhand=Never // Return;Tattered Mummy;Hostage Taker
 humanlibrary=
 humangraveyard=
-humanbattlefield=Gonti, Lord of Luxury|Id:7|ExecuteScript:TrigDig->AI;Herald of Secret Streams;Bontu's Monument;Kefnet's Monument;Drowned Catacomb;Drowned Catacomb;Drowned Catacomb;Drowned Catacomb;Island|Set:XLN;Island|Set:XLN;Island|Set:XLN;Hostage Taker|Id:6
+humanbattlefield=Gonti, Lord of Luxury|Id:7|ExecuteScript:TrigDig->AI;Herald of Secret Streams;Bontu's Monument;Kefnet's Monument;Drowned Catacomb|XLN;Drowned Catacomb|XLN;Drowned Catacomb|XLN;Drowned Catacomb|XLN;Island|Set:XLN;Island|Set:XLN;Island|Set:XLN;Hostage Taker|Id:6
 humanexile=
 humancommand=
 aihand=

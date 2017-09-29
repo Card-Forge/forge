@@ -9,7 +9,7 @@ Description:Win this turn.
 humanlife=20
 ailife=6
 activeplayer=human
-activephase=UPKEEP
+activephase=MAIN1
 humanhand=Harnessed Lightning|Set:KLD;Harnessed Lightning|Set:KLD;Burning Sun's Avatar|Set:XLN;Noxious Gearhulk|Set:KLD;Shock|Set:AER
 humanlibrary=
 humangraveyard=
