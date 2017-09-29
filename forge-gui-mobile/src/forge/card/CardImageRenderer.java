@@ -1,26 +1,11 @@
 package forge.card;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.properties.ForgePreferences;
-import org.apache.commons.lang3.StringUtils;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.google.common.collect.ImmutableList;
-
 import forge.Graphics;
-import forge.assets.FBufferedImage;
-import forge.assets.FSkinColor;
-import forge.assets.FSkinFont;
-import forge.assets.FSkinImage;
-import forge.assets.FSkinTexture;
-import forge.assets.ImageCache;
-import forge.assets.TextRenderer;
+import forge.assets.*;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.card.mana.ManaCost;
@@ -28,9 +13,16 @@ import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.zone.ZoneType;
+import forge.model.FModel;
+import forge.properties.ForgeConstants;
+import forge.properties.ForgePreferences;
 import forge.screens.FScreen;
 import forge.screens.match.MatchController;
 import forge.util.Utils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CardImageRenderer {
     private static final float BASE_IMAGE_WIDTH = 360;
@@ -346,15 +338,16 @@ public class CardImageRenderer {
             float new_h = h*wh_Adj;
             float new_x = ForgeConstants.isGdxPortLandscape && isCurrentCard ? (dispW - new_w) / 2:x;
             float new_y = ForgeConstants.isGdxPortLandscape && isCurrentCard ? (dispH - new_h) / 2:y;
-            if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
-                    && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane()))
+            boolean rotateSplit = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_SPLIT_CARDS);
+            boolean rotatePlane = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON);
+            if (rotatePlane && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane()))
                 g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
-            else if(isCurrentCard && card.isSplitCard())
+            else if (rotateSplit && isCurrentCard && card.isSplitCard())
                 g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, card.getText().contains("Aftermath") ? 90:-90);
             else
                 g.drawImage(image, x, y, w, h);
         }
-        CardRenderer.drawFoilEffect(g, card, x, y, w, h);
+        CardRenderer.drawFoilEffect(g, card, x, y, w, h, true);
     }
 
     public static void drawDetails(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h) {

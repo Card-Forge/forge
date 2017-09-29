@@ -95,6 +95,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_CARD_COUNTER_DISPLAY_LOCATION(ForgeConstants.CounterDisplayLocation.TOP.getName()),
         UI_ANDROID_MINIMIZE_ON_SCRLOCK("false"),
         UI_ROTATE_PLANE_OR_PHENOMENON("false"),
+        UI_ROTATE_SPLIT_CARDS("true"),
         UI_DYNAMIC_PLANECHASE_BG("false"),
         UI_DISABLE_IMAGES_EFFECT_CARDS("false"),
         UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED ("Never"),

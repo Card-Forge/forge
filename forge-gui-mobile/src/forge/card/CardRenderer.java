@@ -355,7 +355,7 @@ public class CardRenderer {
                 if (card.getCurrentState().getFoilIndex() == 0) { //if foil finish not yet established, assign a random one
                     card.getCurrentState().setFoilIndexOverride(-1);
                 }
-                drawFoilEffect(g, card, x, y, w, h);
+                drawFoilEffect(g, card, x, y, w, h, false);
             }
         }
         else { //draw cards without textures as just a black rectangle
@@ -376,7 +376,7 @@ public class CardRenderer {
                 else
                     g.drawImage(image, x, y, w, h);
             }
-            drawFoilEffect(g, card, x, y, w, h);
+            drawFoilEffect(g, card, x, y, w, h, false);
         }
         else { //draw cards without textures as just a black rectangle
             g.fillRect(Color.BLACK, x, y, w, h);
@@ -664,11 +664,12 @@ public class CardRenderer {
         CardFaceSymbols.drawManaCost(g, cost, x + (w - manaCostWidth) / 2, y + (h - manaSymbolSize) / 2, manaSymbolSize);
     }
 
-    public static void drawFoilEffect(Graphics g, CardView card, float x, float y, float w, float h) {
+    public static void drawFoilEffect(Graphics g, CardView card, float x, float y, float w, float h, boolean inZoomer) {
         if (isPreferenceEnabled(FPref.UI_OVERLAY_FOIL_EFFECT) && MatchController.instance.mayView(card)) {
+            boolean rotateSplit = isPreferenceEnabled(FPref.UI_ROTATE_SPLIT_CARDS) && card.isSplitCard() && inZoomer;
             int foil = card.getCurrentState().getFoilIndex();
             if (foil > 0) {
-                CardFaceSymbols.drawOther(g, String.format("foil%02d", foil), x, y, w, h, card.isSplitCard());
+                CardFaceSymbols.drawOther(g, String.format("foil%02d", foil), x, y, w, h, rotateSplit);
             }
         }
     }

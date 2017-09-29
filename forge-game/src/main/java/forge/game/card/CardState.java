@@ -17,19 +17,11 @@
  */
 package forge.game.card;
 
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
-import forge.card.CardEdition;
-import forge.card.CardRarity;
-import forge.card.CardType;
-import forge.card.CardTypeView;
-import forge.card.MagicColor;
+import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.ForgeScript;
@@ -42,6 +34,9 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+
+import java.util.List;
+import java.util.Map;
 
 public class CardState extends GameObject {
     private String name = "";
@@ -328,12 +323,12 @@ public class CardState extends GameObject {
     }
     public final void setSVar(final String var, final String str) {
         sVars.put(var, str);
-        view.updateFoilIndex(this);
+        view.updateFoilIndex(card.getState(CardStateName.Original));
     }
     public final void setSVars(final Map<String, String> newSVars) {
         sVars = Maps.newTreeMap();
         sVars.putAll(newSVars);
-        view.updateFoilIndex(this);
+        view.updateFoilIndex(card.getState(CardStateName.Original));
     }
     public final void removeSVar(final String var) {
         if (sVars.containsKey(var)) {

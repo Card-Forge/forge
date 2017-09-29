@@ -232,8 +232,12 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     ForgeConstants.DISP_CURRENT_COLORS_CHANGED, ForgeConstants.DISP_CURRENT_COLORS_MULTI_OR_CHANGED,
                     ForgeConstants.DISP_CURRENT_COLORS_ALWAYS}),
                 4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ROTATE_SPLIT_CARDS,
+                        "Rotate Zoom Image of Split Cards",
+                        "Rotates the zoomed image of split cards."),
+                4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ROTATE_PLANE_OR_PHENOMENON,
-                        "Rotate Zoom Image of Planes/Phenomenon",
+                        "Rotate Zoom Image of Planes/Phenomena",
                         "Rotates the zoomed image of Plane or Phenomenon cards."),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_DYNAMIC_PLANECHASE_BG,
