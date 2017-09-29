@@ -142,7 +142,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (ability.isSpell()) {
             final Card source = ability.getHostCard();
             if (!source.isCopiedSpell() && !source.isInZone(ZoneType.Stack)) {
-                ability.setHostCard(game.getAction().moveToStack(source, ability));
+                ability.setHostCard(game.getAction().moveToStack(source, ability, Maps.newHashMap()));
             }
         }
 
@@ -535,11 +535,13 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     private final void finishResolving(final SpellAbility sa, final boolean fizzle) {
-        // remove SA and card from the stack
-        removeCardFromStack(sa, fizzle);
+
         // SpellAbility is removed from the stack here
         // temporarily removed removing SA after resolution
         final SpellAbilityStackInstance si = getInstanceFromSpellAbility(sa);
+
+        // remove SA and card from the stack
+        removeCardFromStack(sa, si, fizzle);
         
         if (si != null) {
             remove(si);
@@ -571,7 +573,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // sa.getHostCard().setXManaCostPaid(0);
     }
 
-    private final void removeCardFromStack(final SpellAbility sa, final boolean fizzle) {
+    private final void removeCardFromStack(final SpellAbility sa, final SpellAbilityStackInstance si, final boolean fizzle) {
         Card source = sa.getHostCard();
 
         // need to update active trigger
@@ -584,14 +586,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             // Handle cards that need to be moved differently
             // TODO: replacement effects: Rebound, Buyback and Soulfire Grand Master
             source.removeAllExtrinsicKeyword("Move CARDNAME to your hand as it resolves");
-            game.getAction().moveToHand(source, sa);
+            game.getAction().moveToHand(source, sa, Maps.newHashMap());
         }
         else if (sa.isFlashBackAbility()) {
-            game.getAction().exile(source, sa);
+            game.getAction().exile(source, sa, Maps.newHashMap());
             sa.setFlashBackAbility(false);
         }
         else if (sa.isAftermath()) {
-            game.getAction().exile(source, sa);
+            game.getAction().exile(source, sa, Maps.newHashMap());
         }
         else if (source.hasKeyword("Rebound")
                 && !fizzle
@@ -600,7 +602,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 && source.getOwner().equals(source.getController())) //"If you cast this spell from your hand"
         {
             //Move rebounding card to exile
-            source = game.getAction().exile(source, null);
+            source = game.getAction().exile(source, null, Maps.newHashMap());
 
             source.setSVar("ReboundAbilityTrigger", "DB$ Play | Defined$ Self "
                     + "| WithoutManaCost$ True | Optional$ True");
@@ -617,7 +619,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 (source.isInstant() || source.isSorcery() || fizzle) &&
                 source.isInZone(ZoneType.Stack)) {
             // If Spell and still on the Stack then let it goto the graveyard or replace its own movement
-            game.getAction().moveToGraveyard(source, null);
+            Map<String, Object> params = Maps.newHashMap();
+            params.put("StackSa", sa);
+            params.put("StackSi", si);
+            params.put("Fizzle", fizzle);
+            game.getAction().moveToGraveyard(source, null, params);
         }
     }
 
