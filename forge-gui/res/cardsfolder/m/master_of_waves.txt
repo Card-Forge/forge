@@ -9,4 +9,4 @@ SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ X | TokenName$ Elemental | Tok
 SVar:X:Count$Devotion.Blue
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_waves.jpg
-Oracle:Protection from red\nElemental creatures you control get +1/+1.\nWhen Master of Waves enters the battlefield, , create a number of 1/0 blue Elemental creature tokens equal to your devotion to blue. (Each {U} in the mana costs of permanents you control counts toward your devotion to blue.)
+Oracle:Protection from red\nElemental creatures you control get +1/+1.\nWhen Master of Waves enters the battlefield, create a number of 1/0 blue Elemental creature tokens equal to your devotion to blue. (Each {U} in the mana costs of permanents you control counts toward your devotion to blue.)
