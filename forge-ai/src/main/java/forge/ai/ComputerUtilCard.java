@@ -1722,7 +1722,7 @@ public class ComputerUtilCard {
         return maxEnergyCost;
     }
 
-    public static CardCollection prioritizeCreaturesWorthRemovingNow(final Player ai, final CardCollection oppCards) {
+    public static CardCollection prioritizeCreaturesWorthRemovingNow(final Player ai, CardCollection oppCards, final boolean temporary) {
         if (!CardLists.getNotType(oppCards, "Creature").isEmpty()) {
             // non-creatures were passed, nothing to do here
             return oppCards;
@@ -1746,6 +1746,10 @@ public class ComputerUtilCard {
         }
 
         CardCollection aiCreats = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+        if (temporary) {
+            // Pump effects that add "CARDNAME can't attack" and similar things. Only do it if something is untapped.
+            oppCards = CardLists.filter(oppCards, CardPredicates.Presets.UNTAPPED);
+        }
 
         CardCollection priorityCards = new CardCollection();
         for (Card atk : oppCards) {

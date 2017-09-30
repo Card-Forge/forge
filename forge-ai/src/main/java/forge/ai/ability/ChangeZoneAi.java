@@ -1029,7 +1029,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // See if maybe there's a special priority applicable for this, in case the opponent
             // has dangerous unblockables in play
             if (CardLists.getNotType(list, "Creature").isEmpty()) {
-                list = ComputerUtilCard.prioritizeCreaturesWorthRemovingNow(ai, list);
+                list = ComputerUtilCard.prioritizeCreaturesWorthRemovingNow(ai, list, false);
             }
         }
 

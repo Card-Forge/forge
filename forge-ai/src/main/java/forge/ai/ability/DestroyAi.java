@@ -116,7 +116,7 @@ public class DestroyAi extends SpellAbilityAi {
             }
             list = CardLists.getNotKeyword(list, "Indestructible");
             if (CardLists.getNotType(list, "Creature").isEmpty()) {
-                list = ComputerUtilCard.prioritizeCreaturesWorthRemovingNow(ai, list);
+                list = ComputerUtilCard.prioritizeCreaturesWorthRemovingNow(ai, list, false);
             }
             if (!SpellAbilityAi.playReusable(ai, sa)) {
                 list = CardLists.filter(list, new Predicate<Card>() {
@@ -295,7 +295,7 @@ public class DestroyAi extends SpellAbilityAi {
             CardCollection preferred = CardLists.getNotKeyword(list, "Indestructible");
             preferred = CardLists.filterControlledBy(preferred, ai.getOpponents());
             if (CardLists.getNotType(preferred, "Creature").isEmpty()) {
-                preferred = ComputerUtilCard.prioritizeCreaturesWorthRemovingNow(ai, preferred);
+                preferred = ComputerUtilCard.prioritizeCreaturesWorthRemovingNow(ai, preferred, false);
             }
 
             // If NoRegen is not set, filter out creatures that have a
