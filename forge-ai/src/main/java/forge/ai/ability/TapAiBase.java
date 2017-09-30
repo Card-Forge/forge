@@ -3,6 +3,7 @@ package forge.ai.ability;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -17,7 +18,6 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
@@ -158,30 +158,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
 
         //try to exclude things that will already be tapped due to something on stack or because something is
         //already targeted in a parent or sub SA
-        CardCollection toExclude = new CardCollection();
-        SpellAbility saSub = sa.getRootAbility();
-        while (saSub != null) {
-            for (Card c : tapList) {
-                if (saSub.getApi() == ApiType.Tap) {
-                    if (saSub.getTargets() != null && saSub.getTargets().getTargetCards().contains(c)) {
-                        // Was already targeted in a parent or sub SA
-                        toExclude.add(c);
-                    }
-                }
-            }
-            saSub = saSub.getSubAbility();
-        }
-        for (SpellAbilityStackInstance si : game.getStack()) {
-            SpellAbility ab = si.getSpellAbility(false);
-            if (ab != null && ab.getApi() == ApiType.Tap) {
-                for (Card c : tapList) {
-                    // TODO: somehow ensure that the tapping SA won't be countered
-                    if (si.getTargetChoices() != null && si.getTargetChoices().getTargetCards().contains(c)) {
-                        toExclude.add(c);
-                    }
-                }
-            }
-        }
+        CardCollection toExclude = ComputerUtilAbility.getCardsTargetedWithApi(ai, tapList, sa, ApiType.Tap);
         tapList.removeAll(toExclude);
 
         if (tapList.isEmpty()) {

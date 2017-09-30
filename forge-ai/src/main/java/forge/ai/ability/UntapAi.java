@@ -1,9 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -16,7 +13,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
@@ -170,30 +166,7 @@ public class UntapAi extends SpellAbilityAi {
 
         //try to exclude things that will already be untapped due to something on stack or because something is
         //already targeted in a parent or sub SA
-        CardCollection toExclude = new CardCollection();
-        SpellAbility saSub = sa.getRootAbility();
-        while (saSub != null) {
-            for (Card c : untapList) {
-                if (saSub.getApi() == ApiType.Untap) {
-                    if (saSub.getTargets() != null && saSub.getTargets().getTargetCards().contains(c)) {
-                        // Was already targeted in a parent or sub SA
-                        toExclude.add(c);
-                    }
-                }
-            }
-            saSub = saSub.getSubAbility();
-        }
-        for (SpellAbilityStackInstance si : ai.getGame().getStack()) {
-            SpellAbility ab = si.getSpellAbility(false);
-            if (ab != null && ab.getApi() == ApiType.Tap) {
-                for (Card c : untapList) {
-                    // TODO: somehow ensure that the untapping SA won't be countered
-                    if (si.getTargetChoices() != null && si.getTargetChoices().getTargetCards().contains(c)) {
-                        toExclude.add(c);
-                    }
-                }
-            }
-        }
+        CardCollection toExclude = ComputerUtilAbility.getCardsTargetedWithApi(ai, untapList, sa, ApiType.Untap);
         untapList.removeAll(toExclude);
 
         sa.resetTargets();

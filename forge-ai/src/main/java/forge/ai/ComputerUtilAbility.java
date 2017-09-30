@@ -1,13 +1,10 @@
 package forge.ai;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.common.base.Predicate;
-
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -17,7 +14,10 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
+
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class ComputerUtilAbility {
     public static CardCollection getAvailableLandsToPlay(final Game game, final Player player) {
@@ -133,5 +133,40 @@ public class ComputerUtilAbility {
 
     public static String getAbilitySourceName(SpellAbility sa) {
         return sa.getOriginalHost() != null ? sa.getOriginalHost().getName() : sa.getHostCard() != null ? sa.getHostCard().getName() : "";
+    }
+
+    public static CardCollection getCardsTargetedWithApi(Player ai, CardCollection cardList, SpellAbility sa, ApiType api) {
+        // Returns a collection of cards which have already been targeted with the given API either in the parent ability,
+        // in the sub ability, or by something on stack. If "sa" is specified, the parent and sub abilities of this SA will
+        // be checked for targets. If "sa" is null, only the stack instances will be checked.
+        CardCollection targeted = new CardCollection();
+        if (sa != null) {
+            SpellAbility saSub = sa.getRootAbility();
+            while (saSub != null) {
+                for (Card c : cardList) {
+                    if (saSub.getApi() == api) {
+                        if (saSub.getTargets() != null && saSub.getTargets().getTargetCards().contains(c)) {
+                            // Was already targeted with this API in a parent or sub SA
+                            targeted.add(c);
+                        }
+                    }
+                }
+                saSub = saSub.getSubAbility();
+            }
+        }
+        for (SpellAbilityStackInstance si : ai.getGame().getStack()) {
+            SpellAbility ab = si.getSpellAbility(false);
+            if (ab != null && ab.getApi() == api) {
+                for (Card c : cardList) {
+                    // TODO: somehow ensure that the detected SA won't be countered
+                    if (si.getTargetChoices() != null && si.getTargetChoices().getTargetCards().contains(c)) {
+                        // Was already targeted by a spell ability instance on stack
+                        targeted.add(c);
+                    }
+                }
+            }
+        }
+
+        return targeted;
     }
 }
