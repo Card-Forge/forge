@@ -1,6 +1,11 @@
 package forge.ai;
 
+import java.util.Iterator;
+import java.util.List;
+
 import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
+
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameActionUtil;
@@ -14,10 +19,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class ComputerUtilAbility {
     public static CardCollection getAvailableLandsToPlay(final Game game, final Player player) {
@@ -78,7 +79,7 @@ public class ComputerUtilAbility {
     }
 
     public static List<SpellAbility> getSpellAbilities(final CardCollectionView l, final Player player) {
-        final List<SpellAbility> spellAbilities = new ArrayList<SpellAbility>();
+        final List<SpellAbility> spellAbilities = Lists.newArrayList();
         for (final Card c : l) {
             for (final SpellAbility sa : c.getSpellAbilities()) {
                 spellAbilities.add(sa);
@@ -93,7 +94,7 @@ public class ComputerUtilAbility {
     }
 
     public static List<SpellAbility> getOriginalAndAltCostAbilities(final List<SpellAbility> originList, final Player player) {
-        final List<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
+        final List<SpellAbility> newAbilities = Lists.newArrayList();
         for (SpellAbility sa : originList) {
             sa.setActivatingPlayer(player);
             //add alternative costs as additional spell abilities
@@ -101,7 +102,7 @@ public class ComputerUtilAbility {
             newAbilities.addAll(GameActionUtil.getAlternativeCosts(sa, player));
         }
     
-        final List<SpellAbility> result = new ArrayList<SpellAbility>();
+        final List<SpellAbility> result = Lists.newArrayList();
         for (SpellAbility sa : newAbilities) {
             sa.setActivatingPlayer(player);
             result.addAll(GameActionUtil.getOptionalCosts(sa));
@@ -132,7 +133,8 @@ public class ComputerUtilAbility {
     }
 
     public static String getAbilitySourceName(SpellAbility sa) {
-        return sa.getOriginalHost() != null ? sa.getOriginalHost().getName() : sa.getHostCard() != null ? sa.getHostCard().getName() : "";
+        final Card c = getAbilitySource(sa);
+        return c != null ? c.getName() : "";
     }
 
     public static CardCollection getCardsTargetedWithApi(Player ai, CardCollection cardList, SpellAbility sa, ApiType api) {
@@ -143,9 +145,9 @@ public class ComputerUtilAbility {
         if (sa != null) {
             SpellAbility saSub = sa.getRootAbility();
             while (saSub != null) {
-                for (Card c : cardList) {
-                    if (saSub.getApi() == api) {
-                        if (saSub.getTargets() != null && saSub.getTargets().getTargetCards().contains(c)) {
+                if (saSub.getApi() == api && saSub.getTargets() != null) {
+                    for (Card c : cardList) {
+                        if (saSub.getTargets().getTargetCards().contains(c)) {
                             // Was already targeted with this API in a parent or sub SA
                             targeted.add(c);
                         }
@@ -156,10 +158,10 @@ public class ComputerUtilAbility {
         }
         for (SpellAbilityStackInstance si : ai.getGame().getStack()) {
             SpellAbility ab = si.getSpellAbility(false);
-            if (ab != null && ab.getApi() == api) {
+            if (ab != null && ab.getApi() == api && si.getTargetChoices() != null) {
                 for (Card c : cardList) {
                     // TODO: somehow ensure that the detected SA won't be countered
-                    if (si.getTargetChoices() != null && si.getTargetChoices().getTargetCards().contains(c)) {
+                    if (si.getTargetChoices().getTargetCards().contains(c)) {
                         // Was already targeted by a spell ability instance on stack
                         targeted.add(c);
                     }
