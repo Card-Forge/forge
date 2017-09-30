@@ -5,6 +5,7 @@ import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
+import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostSacrifice;
@@ -115,6 +116,9 @@ public class DestroyAi extends SpellAbilityAi {
                 }
             }
             list = CardLists.getNotKeyword(list, "Indestructible");
+            if (CardLists.getNotType(list, "Creature").isEmpty()) {
+                list = prioritizeCreaturesWorthDestroyingNow(ai, list);
+            }
             if (!SpellAbilityAi.playReusable(ai, sa)) {
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
@@ -291,6 +295,9 @@ public class DestroyAi extends SpellAbilityAi {
 
             CardCollection preferred = CardLists.getNotKeyword(list, "Indestructible");
             preferred = CardLists.filterControlledBy(preferred, ai.getOpponents());
+            if (CardLists.getNotType(preferred, "Creature").isEmpty()) {
+                preferred = prioritizeCreaturesWorthDestroyingNow(ai, preferred);
+            }
 
             // If NoRegen is not set, filter out creatures that have a
             // regeneration shield
@@ -443,5 +450,52 @@ public class DestroyAi extends SpellAbilityAi {
         } else {
             return tempoCheck;
         }
+    }
+
+    public static CardCollection prioritizeCreaturesWorthDestroyingNow(final Player ai, final CardCollection oppCards) {
+        if (!CardLists.getNotType(oppCards, "Creature").isEmpty()) {
+            // non-creatures were passed, nothing to do here
+            return oppCards;
+        }
+
+        boolean enablePriorityRemoval = false;
+        boolean priorityRemovalOnlyInDanger = false;
+        int priorityRemovalThreshold = 0;
+        int lifeInDanger = 5;
+        if (ai.getController().isAI()) {
+            AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+            enablePriorityRemoval = aic.getBooleanProperty(AiProps.ACTIVELY_DESTROY_IMMEDIATELY_UNBLOCKABLE);
+            priorityRemovalThreshold = aic.getIntProperty(AiProps.DESTROY_IMMEDIATELY_UNBLOCKABLE_THRESHOLD);
+            priorityRemovalOnlyInDanger = aic.getBooleanProperty(AiProps.DESTROY_IMMEDIATELY_UNBLOCKABLE_ONLY_IN_DNGR);
+            lifeInDanger = aic.getIntProperty(AiProps.DESTROY_IMMEDIATELY_UNBLOCKABLE_LIFE_IN_DNGR);
+        }
+
+        if (!enablePriorityRemoval) {
+            // Nothing to do here, the profile does not allow prioritizing
+            return oppCards;
+        }
+
+        CardCollection aiCreats = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+
+        CardCollection priorityCards = new CardCollection();
+        for (Card atk : oppCards) {
+            if (ComputerUtilCard.isUselessCreature(atk.getController(), atk)) {
+                continue;
+            }
+            for (Card blk : aiCreats) {
+                if (!CombatUtil.canBlock(atk, blk, true)) {
+                    boolean threat = atk.getNetCombatDamage() >= ai.getLife() - lifeInDanger;
+                    if (!priorityRemovalOnlyInDanger || threat) {
+                        priorityCards.add(atk);
+                    }
+                }
+            }
+        }
+
+        if (!priorityCards.isEmpty() && priorityCards.size() <= priorityRemovalThreshold) {
+            return priorityCards;
+        }
+
+        return oppCards;
     }
 }

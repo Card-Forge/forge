@@ -91,6 +91,18 @@ RESERVE_MANA_FOR_MAIN2_CHANCE=100
 # If enabled, the AI will target artifacts and non-aura enchantments with removal aggressively
 ACTIVELY_DESTROY_ARTS_AND_NONAURA_ENCHS=true
 
+# If enabled, the AI will prioritize removing creatures that it can't block at all (e.g. Flying in absence of flying
+# blockers). This is a master toggle. If disabled, the following three options do nothing.
+ACTIVELY_DESTROY_IMMEDIATELY_UNBLOCKABLE=false
+# How many unblockable creatures can there be when the AI should still consider prioritizing something (when there are
+# too many, probably it's just worth going for the biggest threat overall instead)
+DESTROY_IMMEDIATELY_UNBLOCKABLE_THRESHOLD=2
+# Only consider prioritizing the destruction of immediately unblockable creatures if life is in danger
+DESTROY_IMMEDIATELY_UNBLOCKABLE_ONLY_IN_DNGR=true
+# How much life can there remain after a swing of the immediately unblockable creature for it to be considered dangerous
+# for the purpose of previous option
+DESTROY_IMMEDIATELY_UNBLOCKABLE_LIFE_IN_DNGR=5
+
 # Permission timings
 MIN_SPELL_CMC_TO_COUNTER=0
 CHANCE_TO_COUNTER_CMC_1=30

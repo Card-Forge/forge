@@ -29,7 +29,7 @@ USE_BERSERK_AGGRESSIVELY=true
 TRY_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK=true
 # Chance to hold combat tricks until blockers are declared. If -1 is specified, this chance is not used, and the standard
 # evaluation for offensive pump buff is used instead.
-CHANCE_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK=65
+CHANCE_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK=75
 
 # Trade blocking preferences (enabling these will make the AI trade more aggressively when considering blocks,
 # but only with creatures that are worse in abilities and have lower or the same power as the attacker). Note
@@ -90,6 +90,18 @@ RESERVE_MANA_FOR_MAIN2_CHANCE=100
 
 # If enabled, the AI will target artifacts and non-aura enchantments with removal aggressively
 ACTIVELY_DESTROY_ARTS_AND_NONAURA_ENCHS=true
+
+# If enabled, the AI will prioritize removing creatures that it can't block at all (e.g. Flying in absence of flying
+# blockers). This is a master toggle. If disabled, the following three options do nothing.
+ACTIVELY_DESTROY_IMMEDIATELY_UNBLOCKABLE=true
+# How many unblockable creatures can there be when the AI should still consider prioritizing something (when there are
+# too many, probably it's just worth going for the biggest threat overall instead)
+DESTROY_IMMEDIATELY_UNBLOCKABLE_THRESHOLD=3
+# Only consider prioritizing the destruction of immediately unblockable creatures if life is in danger
+DESTROY_IMMEDIATELY_UNBLOCKABLE_ONLY_IN_DNGR=false
+# How much life can there remain after a swing of the immediately unblockable creature for it to be considered dangerous
+# for the purpose of previous option
+DESTROY_IMMEDIATELY_UNBLOCKABLE_LIFE_IN_DNGR=5
 
 # Permission timings
 MIN_SPELL_CMC_TO_COUNTER=2
