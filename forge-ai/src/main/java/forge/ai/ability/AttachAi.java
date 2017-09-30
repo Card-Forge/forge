@@ -2,13 +2,13 @@ package forge.ai.ability;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-
 import forge.ai.*;
 import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
+import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
@@ -24,7 +24,10 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public class AttachAi extends SpellAbilityAi {
 
@@ -500,6 +503,44 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         return chosen;
+    }
+
+    private static Card attachAIInstantReequipPreference(final SpellAbility sa, final Card attachSource) {
+        // e.g. Cranial Plating
+        PhaseHandler ph = attachSource.getGame().getPhaseHandler();
+        Combat combat = attachSource.getGame().getCombat();
+        Card equipped = sa.getHostCard().getEquipping();
+        if (equipped == null) {
+            return null;
+        }
+
+        int powerBuff = 0;
+        for (StaticAbility stAb : sa.getHostCard().getStaticAbilities()) {
+            if ("Card.EquippedBy".equals(stAb.getParam("Affected")) && stAb.hasParam("AddPower")) {
+                powerBuff = AbilityUtils.calculateAmount(sa.getHostCard(), stAb.getParam("AddPower"), null);
+            }
+        }
+        if (combat != null && combat.isAttacking(equipped) && ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS, sa.getActivatingPlayer())) {
+            int damage = 0;
+            for (Card c : combat.getUnblockedAttackers()) {
+                damage += ComputerUtilCombat.predictDamageTo(combat.getDefenderPlayerByAttacker(equipped), c.getNetCombatDamage(), c, true);
+            }
+            if (combat.isBlocked(equipped)) {
+                for (Card atk : combat.getAttackers()) {
+                    if (!combat.isBlocked(atk) && !ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), null).contains(atk)) {
+                        if (ComputerUtilCombat.predictDamageTo(combat.getDefenderPlayerByAttacker(atk),
+                                atk.getNetCombatDamage(), atk, true) > 0) {
+                            if (damage + powerBuff >= combat.getDefenderPlayerByAttacker(atk).getLife()) {
+                                sa.resetTargets(); // this is needed to avoid bugs with adding two targets to a single SA
+                                return atk; // lethal damage, we can win right now, so why not?
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return null;
     }
 
     // Should generalize this code a bit since they all have similar structures
@@ -1049,6 +1090,10 @@ public class AttachAi extends SpellAbilityAi {
                 return null;
             }
 
+            if ("InstantReequipPowerBuff".equals(sa.getParam("AILogic"))) {
+                return c;
+            }
+
             boolean uselessCreature = ComputerUtilCard.isUselessCreature(aiPlayer, attachSource.getEquipping());
 
             if (aic.getProperty(AiProps.MOVE_EQUIPMENT_TO_BETTER_CREATURES).equals("never")) {
@@ -1123,6 +1168,12 @@ public class AttachAi extends SpellAbilityAi {
             prefList = list;
         } else {
             prefList = CardLists.filterControlledBy(list, prefPlayer);
+        }
+
+        // AI logic types that do not require a prefList and that evaluate the
+        // usefulness of attach action autonomously
+        if ("InstantReequipPowerBuff".equals(logic)) {
+            return attachAIInstantReequipPreference(sa, attachSource);
         }
 
         // If there are no preferred cards, and not mandatory bail out
