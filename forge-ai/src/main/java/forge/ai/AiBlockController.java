@@ -1285,7 +1285,7 @@ public class AiBlockController {
 
         if (atkEmbalm && !blkEmbalm) {
             // The opponent will eventually get his creature back, while the AI won't
-            chance = Math.min(0, chance - chanceModForEmbalm);
+            chance = Math.max(0, chance - chanceModForEmbalm);
         }
 
         if (blocker.isFaceDown() && blocker.getState(CardStateName.Original).getType().isCreature()) {
