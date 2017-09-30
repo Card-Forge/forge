@@ -156,8 +156,21 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             });
         }
 
-        //try to exclude things that will already be tapped due to something on stack
+        //try to exclude things that will already be tapped due to something on stack or because something is
+        //already targeted in a parent or sub SA
         CardCollection toExclude = new CardCollection();
+        SpellAbility saSub = sa.getRootAbility();
+        while (saSub != null) {
+            for (Card c : tapList) {
+                if (saSub.getApi() == ApiType.Tap) {
+                    if (saSub.getTargets() != null && saSub.getTargets().getTargetCards().contains(c)) {
+                        // Was already targeted in a parent or sub SA
+                        toExclude.add(c);
+                    }
+                }
+            }
+            saSub = saSub.getSubAbility();
+        }
         for (SpellAbilityStackInstance si : game.getStack()) {
             SpellAbility ab = si.getSpellAbility(false);
             if (ab != null && ab.getApi() == ApiType.Tap) {

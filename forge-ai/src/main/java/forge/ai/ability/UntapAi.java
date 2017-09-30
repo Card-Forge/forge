@@ -16,6 +16,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
@@ -166,6 +167,34 @@ public class UntapAi extends SpellAbilityAi {
             }
             untapList.removeAll(toRemove);
         }
+
+        //try to exclude things that will already be untapped due to something on stack or because something is
+        //already targeted in a parent or sub SA
+        CardCollection toExclude = new CardCollection();
+        SpellAbility saSub = sa.getRootAbility();
+        while (saSub != null) {
+            for (Card c : untapList) {
+                if (saSub.getApi() == ApiType.Untap) {
+                    if (saSub.getTargets() != null && saSub.getTargets().getTargetCards().contains(c)) {
+                        // Was already targeted in a parent or sub SA
+                        toExclude.add(c);
+                    }
+                }
+            }
+            saSub = saSub.getSubAbility();
+        }
+        for (SpellAbilityStackInstance si : ai.getGame().getStack()) {
+            SpellAbility ab = si.getSpellAbility(false);
+            if (ab != null && ab.getApi() == ApiType.Tap) {
+                for (Card c : untapList) {
+                    // TODO: somehow ensure that the untapping SA won't be countered
+                    if (si.getTargetChoices() != null && si.getTargetChoices().getTargetCards().contains(c)) {
+                        toExclude.add(c);
+                    }
+                }
+            }
+        }
+        untapList.removeAll(toExclude);
 
         sa.resetTargets();
         while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
