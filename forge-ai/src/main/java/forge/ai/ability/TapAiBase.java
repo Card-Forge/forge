@@ -2,11 +2,11 @@ package forge.ai.ability;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
@@ -17,6 +17,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
@@ -154,7 +155,22 @@ public abstract class TapAiBase extends SpellAbilityAi  {
                 }
             });
         }
-        
+
+        //try to exclude things that will already be tapped due to something on stack
+        CardCollection toExclude = new CardCollection();
+        for (SpellAbilityStackInstance si : game.getStack()) {
+            SpellAbility ab = si.getSpellAbility(false);
+            if (ab != null && ab.getApi() == ApiType.Tap) {
+                for (Card c : tapList) {
+                    // TODO: somehow ensure that the tapping SA won't be countered
+                    if (si.getTargetChoices() != null && si.getTargetChoices().getTargetCards().contains(c)) {
+                        toExclude.add(c);
+                    }
+                }
+            }
+        }
+        tapList.removeAll(toExclude);
+
         if (tapList.isEmpty()) {
         	return false;
         }
