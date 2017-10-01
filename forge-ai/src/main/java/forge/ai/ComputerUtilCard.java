@@ -1467,7 +1467,7 @@ public class ComputerUtilCard {
             // (other similar cards with AILogic$ Berserk that do not die only when attacking are excluded from consideration)
             if (ai.getController() instanceof PlayerControllerAi) {
                 boolean aggr = ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.USE_BERSERK_AGGRESSIVELY)
-                        || (sa.getHostCard() != null && !sa.getHostCard().getName().equals("Berserk"));
+                        || sa.hasParam("AtEOT");
                 if (!aggr) {
                     return false;
                 }
@@ -1532,9 +1532,16 @@ public class ComputerUtilCard {
             }
         }
 
-        // Berserk
+        // Berserk (and other similar cards)
         final boolean isBerserk = "Berserk".equals(sa.getParam("AILogic"));
-        final int berserkPower = isBerserk ? c.getCurrentPower() : 0;
+        int berserkPower = 0;
+        if (isBerserk && sa.hasSVar("X")) {
+            if ("Targeted$CardPower".equals(sa.getSVar("X"))) {
+                berserkPower = c.getCurrentPower();
+            } else {
+                berserkPower = AbilityUtils.calculateAmount(sa.getHostCard(), "X", sa);
+            }
+        }
 
         // Electrostatic Pummeler
         for (SpellAbility ab : c.getSpellAbilities()) {

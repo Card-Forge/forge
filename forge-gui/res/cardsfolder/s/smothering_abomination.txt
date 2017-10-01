@@ -7,7 +7,9 @@ K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature | SacMessage$ Creature
 T:Mode$ Sacrificed | ValidCard$ Creature.YouCtrl | Execute$ TrigDrawCard | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a creature, draw a card.
-SVar:TrigDrawCard:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
-SVar:RemAIDeck:True
+SVar:TrigDrawCard:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:RemRandomDeck:True
+SVar:NeedsToPlayVar:Z GE2
+SVar:Z:Count$Valid Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smothering_abomination.jpg
 Oracle:Devoid (This card has no color.)\nFlying\nAt the beginning of your upkeep, sacrifice a creature.\nWhenever you sacrifice a creature, draw a card.

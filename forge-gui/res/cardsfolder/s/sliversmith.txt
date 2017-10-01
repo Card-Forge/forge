@@ -3,7 +3,8 @@ ManaCost:2
 Types:Artifact Creature Spellshaper
 PT:1/1
 A:AB$ Token | Cost$ 1 T Discard<1/Card> | TokenAmount$ 1 | TokenName$ Metallic Sliver | TokenTypes$ Artifact,Creature,Sliver | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Create a 1/1 colorless Sliver artifact creature token named Metallic Sliver.
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:AIPreference:DiscardCost$Card
 DeckHints:Type$Sliver
 DeckHas:Ability$Discard & Ability$Token
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130329.jpg

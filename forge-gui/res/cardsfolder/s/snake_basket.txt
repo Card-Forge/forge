@@ -3,6 +3,5 @@ ManaCost:4
 Types:Artifact
 A:AB$ Token | Cost$ X Sac<1/CARDNAME> | TokenOwner$ You | TokenAmount$ X | References$ X | TokenName$ Snake | TokenTypes$ Creature,Snake | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SorcerySpeed$ True | SpellDescription$ Create X 1/1 green Snake creature tokens. Activate this ability only any time you could cast a sorcery.
 SVar:X:Count$xPaid
-SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snake_basket.jpg
 Oracle:{X}, Sacrifice Snake Basket: Create X 1/1 green Snake creature tokens. Activate this ability only any time you could cast a sorcery.
