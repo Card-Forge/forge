@@ -17,15 +17,15 @@
  */
 package forge.game.cost;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 
 import java.util.List;
 import java.util.Map;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 /**
  * <p>
@@ -169,6 +169,33 @@ public class CostPayment {
         // Set all of the decisions before attempting to pay anything
 
         final Game game = decisionMaker.getPlayer().getGame();
+
+        // FIXME: This is a hack which is necessary to make the AI pay the Cumulative Upkeep with "Exile a card from
+        // the top of your library" (Thought Lash) without cheating. Otherwise the AI pays only one card, no matter
+        // the age counters. We need a better solution here.
+        int nExileLib = 0;
+        List<CostPart> partsToChange = Lists.newArrayList();
+        CostExile primeExile = null;
+        for (final CostPart part : parts) {
+            if (part instanceof CostExile) {
+                CostExile exile = (CostExile) part;
+                if (exile.from == ZoneType.Library) {
+                    nExileLib += exile.convertAmount();
+                    if (nExileLib == 1) {
+                        primeExile = exile;
+                    } else {
+                        partsToChange.add(exile);
+                    }
+                }
+            }
+        }
+        if (nExileLib > 1 && primeExile != null) {
+            parts.removeAll(partsToChange);
+            primeExile.setAmount(String.valueOf(nExileLib));
+        }
+        // - End of hack for Cumulative Upkeep: Exile a card from the top of your library -
+
+
         for (final CostPart part : parts) {
             PaymentDecision decision = part.accept(decisionMaker);
             if (null == decision) return false;
