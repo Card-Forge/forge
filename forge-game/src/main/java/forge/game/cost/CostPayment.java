@@ -195,7 +195,6 @@ public class CostPayment {
         }
         // - End of hack for Cumulative Upkeep: Exile a card from the top of your library -
 
-
         for (final CostPart part : parts) {
             PaymentDecision decision = part.accept(decisionMaker);
             if (null == decision) return false;
