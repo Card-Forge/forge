@@ -17,6 +17,12 @@ public class RemoveFromCombatAi extends SpellAbilityAi {
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         // AI should only activate this during Human's turn
 
+        if ("RemoveBestAttacker".equals(sa.getParam("AILogic"))) {
+            if (aiPlayer.getGame().getCombat() != null && aiPlayer.getGame().getCombat().getDefenders().contains(aiPlayer)) {
+                return true;
+            }
+        }
+
         // TODO - implement AI
         return false;
     }

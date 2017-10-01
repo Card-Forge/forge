@@ -140,7 +140,16 @@ public class UntapAi extends SpellAbilityAi {
             return false;
         }
 
-        CardCollection untapList = CardLists.filter(list, Presets.TAPPED);
+        // For some abilities, it may be worth to target even an untapped card if we're targeting mostly for the subability
+        boolean targetUntapped = false;
+        if (sa.getSubAbility() != null) {
+            SpellAbility subSa = sa.getSubAbility();
+            if (subSa.getApi() == ApiType.RemoveFromCombat && "RemoveBestAttacker".equals(subSa.getParam("AILogic"))) {
+                targetUntapped = true;
+            }
+        }
+
+        CardCollection untapList = targetUntapped ? list : CardLists.filter(list, Presets.TAPPED);
         // filter out enchantments and planeswalkers, their tapped state doesn't
         // matter.
         final String[] tappablePermanents = {"Creature", "Land", "Artifact"};
