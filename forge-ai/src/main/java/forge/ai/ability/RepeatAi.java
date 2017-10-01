@@ -1,11 +1,7 @@
 package forge.ai.ability;
 
 
-import forge.ai.AiController;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilMana;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -63,7 +59,7 @@ public class RepeatAi extends SpellAbilityAi {
         final SpellAbility repeat = sa.getAdditonalAbility("RepeatSubAbility");
 
         if (repeat == null) {
-        	return false;
+        	return mandatory;
         }
 
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
