@@ -2,7 +2,7 @@ Name:Juggernaut
 ManaCost:4
 Types:Artifact Creature Juggernaut
 PT:5/3
-K:CARDNAME attacks each turn if able.
+K:CARDNAME attacks each combat if able.
 K:CantBeBlockedBy Creature.Wall
 SVar:Picture:http://www.wizards.com/global/images/magic/general/juggernaut.jpg
-Oracle:Juggernaut attacks each turn if able.\nJuggernaut can't be blocked by Walls.
+Oracle:Juggernaut attacks each combat if able.\nJuggernaut can't be blocked by Walls.

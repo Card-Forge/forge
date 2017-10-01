@@ -1086,6 +1086,7 @@ public class AiBlockController {
 
         // assign blockers that have to block
         chumpBlockers = CardLists.getKeyword(blockersLeft, "CARDNAME blocks each turn if able.");
+        chumpBlockers.addAll(CardLists.getKeyword(blockersLeft, "CARDNAME blocks each combat if able."));
         // if an attacker with lure attacks - all that can block
         for (final Card blocker : blockersLeft) {
             if (CombatUtil.mustBlockAnAttacker(blocker, combat)) {
@@ -1099,7 +1100,8 @@ public class AiBlockController {
                 for (final Card blocker : blockers) {
                     if (CombatUtil.canBlock(attacker, blocker, combat) && blockersLeft.contains(blocker)
                             && (CombatUtil.mustBlockAnAttacker(blocker, combat)
-                                    || blocker.hasKeyword("CARDNAME blocks each turn if able."))) {
+                                    || blocker.hasKeyword("CARDNAME blocks each turn if able.")
+                                    || blocker.hasKeyword("CARDNAME blocks each combat if able."))) {
                         combat.addBlocker(attacker, blocker);
                         if (blocker.getMustBlockCards() != null) {
                             int mustBlockAmt = blocker.getMustBlockCards().size();

@@ -17,29 +17,17 @@
  */
 package forge.game.combat;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GlobalRuleChange;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -49,10 +37,15 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
-import forge.util.TextUtil;
 import forge.util.maps.MapToAmount;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -702,8 +695,8 @@ public class CombatUtil {
                 return TextUtil.concatWithSpace(blocker.toString(),"must block an attacker, but has not been assigned to block any.");
             }
 
-            // "CARDNAME blocks each turn if able."
-            if (!blockers.contains(blocker) && blocker.hasKeyword("CARDNAME blocks each turn if able.")) {
+            // "CARDNAME blocks each turn/combat if able."
+            if (!blockers.contains(blocker) && (blocker.hasKeyword("CARDNAME blocks each turn if able.") || blocker.hasKeyword("CARDNAME blocks each combat if able."))) {
                 for (final Card attacker : attackers) {
                     if (CombatUtil.canBlock(attacker, blocker, combat)) {
                         boolean must = true;
@@ -715,7 +708,8 @@ public class CombatUtil {
                             }
                         }
                         if (must) {
-                            return TextUtil.concatWithSpace(blocker.toString(),"must block each turn, but was not assigned to block any attacker now.");
+                            String unit = blocker.hasKeyword("CARDNAME blocks each combat if able.") ? "combat," : "turn,";
+                            return TextUtil.concatWithSpace(blocker.toString(),"must block each", unit, "but was not assigned to block any attacker now.");
                         }
                     }
                 }

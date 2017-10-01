@@ -38,7 +38,7 @@ PT:4/5
 
 A:AB$ Effect | Cost$ 6 | StaticAbilities$ MustAttack | References$ MustAttack | SpellDescription$ Creatures your opponents control attack this turn if able.
 
-SVar:MustAttack:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.OppCtrl | AddHiddenKeyword$ CARDNAME attacks each turn if able. | Description$ Creatures your opponents control attack this turn if able. 
+SVar:MustAttack:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.OppCtrl | AddHiddenKeyword$ CARDNAME attacks each combat if able. | Description$ Creatures your opponents control attack this turn if able.
 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grisly_anglerfish.jpg
 

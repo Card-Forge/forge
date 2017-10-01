@@ -1,7 +1,7 @@
 Name:Culling Mark
 ManaCost:2 G
 Types:Sorcery
-A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME blocks each turn if able. | IsCurse$ True | SpellDescription$ Target creature blocks this turn if able.
+A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME blocks each combat if able. | IsCurse$ True | SpellDescription$ Target creature blocks this turn if able.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/culling_mark.jpg
 Oracle:Target creature blocks this turn if able.

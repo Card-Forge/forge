@@ -3,6 +3,6 @@ ManaCost:2 R
 Types:Creature Ogre Warrior
 PT:3/1
 K:Haste
-K:CARDNAME attacks each turn if able.
+K:CARDNAME attacks each combat if able.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_brute.jpg
-Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)\nReckless Brute attacks each turn if able.
+Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)\nReckless Brute attacks each combat if able.

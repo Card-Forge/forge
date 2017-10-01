@@ -3,6 +3,6 @@ ManaCost:5 R
 Types:Creature Hellion
 PT:5/4
 K:Haste
-K:CARDNAME attacks each turn if able.
+K:CARDNAME attacks each combat if able.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flameborn_hellion.jpg
-Oracle:Haste\nFlameborn Hellion attacks each turn if able.
+Oracle:Haste\nFlameborn Hellion attacks each combat if able.
