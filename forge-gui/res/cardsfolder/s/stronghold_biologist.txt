@@ -2,7 +2,7 @@ Name:Stronghold Biologist
 ManaCost:2 U
 Types:Creature Human Spellshaper
 PT:1/1
-A:AB$ Counter | Cost$ U U T Discard<1/Card> | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Card.Creature | SpellDescription$ Counter target creature spell.
-SVar:RemAIDeck:True
+A:AB$ Counter | Cost$ U U T Discard<1/Card> | AILogic$ MinCMC.4 | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Card.Creature | SpellDescription$ Counter target creature spell.
+SVar:AIPreference:DiscardCost$Card.cmcEQ0,Card.cmcEQ1,DiscardCost$Card.cmcEQ1,DiscardCost$Card.cmcEQ2,DiscardCost$Card.cmcEQ3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_biologist.jpg
 Oracle:{U}{U}, {T}, Discard a card: Counter target creature spell.

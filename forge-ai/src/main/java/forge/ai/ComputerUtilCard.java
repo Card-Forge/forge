@@ -1464,8 +1464,10 @@ public class ComputerUtilCard {
         
         if (isBerserk) {
             // if we got here, Berserk will result in the pumped creature dying at EOT and the opponent will not lose
+            // (other similar cards with AILogic$ Berserk that do not die only when attacking are excluded from consideration)
             if (ai.getController() instanceof PlayerControllerAi) {
-                boolean aggr = ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.USE_BERSERK_AGGRESSIVELY);
+                boolean aggr = ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.USE_BERSERK_AGGRESSIVELY)
+                        || (sa.getHostCard() != null && !sa.getHostCard().getName().equals("Berserk"));
                 if (!aggr) {
                     return false;
                 }
