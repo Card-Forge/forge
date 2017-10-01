@@ -1771,6 +1771,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         private Player lastAddedPlayer;
         private SpellAbility lastAddedSA;
         private boolean lastTrigs;
+        private boolean lastSummoningSickness;
 
         private DevModeCheats() {
         }
@@ -2162,7 +2163,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     } else {
                         if (noTriggers) {
                             if (forgeCard.isPermanent() && !forgeCard.isAura()) {
+                                if (forgeCard.isCreature()) {
+                                    if (!repeatLast) {
+                                        lastSummoningSickness = getGui().confirm(forgeCard.getView(), "Should " + forgeCard + " be affected with Summoning Sickness?");
+                                    }
+                                }
                                 game.getAction().moveTo(targetZone, forgeCard, null);
+                                if (forgeCard.isCreature()) {
+                                    forgeCard.setSickness(lastSummoningSickness);
+                                }
                             } else {
                                 getGui().message("The chosen card is not a permanent or can't exist independently on the battlefield.\nIf you'd like to cast a non-permanent spell, or if you'd like to cast a permanent spell and place it on stack, please use the Cast Spell/Play Land button.", "Error");
                                 return;
