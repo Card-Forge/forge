@@ -170,6 +170,10 @@ public class AnimateAi extends SpellAbilityAi {
                 }
 
                 if (!SpellAbilityAi.isSorcerySpeed(sa) && !sa.hasParam("Permanent")) {
+                    if (sa.hasParam("Crew") && c.isCreature()) {
+                        // Do not try to crew a vehicle which is already a creature
+                        return false;
+                    }
                     Card animatedCopy = becomeAnimated(c, sa);
                     if (ph.isPlayerTurn(aiPlayer)
                             && !ComputerUtilCard.doesSpecifiedCreatureAttackAI(aiPlayer, animatedCopy)) {
