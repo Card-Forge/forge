@@ -3,6 +3,7 @@ ManaCost:2 R
 Types:Sorcery
 A:SP$ Discard | Cost$ 2 R | Mode$ Hand | Defined$ Player | SubAbility$ DBEachDraw | SpellDescription$ Each player discards his or her hand, then draws seven cards.
 SVar:DBEachDraw:DB$Draw | Defined$ Player | NumCards$ 7
-SVar:RemAIDeck:True
+SVar:NeedsToPlayVar:Y LE2
+SVar:Y:Count$InYourHand.notNamedWheel of Fortune
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wheel_of_fortune.jpg
 Oracle:Each player discards his or her hand, then draws seven cards.

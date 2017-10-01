@@ -5,6 +5,7 @@ Colors:red
 K:Suspend:4:1 R
 A:SP$ Discard | Cost$ 0 | Mode$ Hand | Defined$ Player | SubAbility$ DBDraw | SpellDescription$ Each player discards his or her hand, then draws seven cards.
 SVar:DBDraw:DB$Draw | Defined$ Player | NumCards$ 7
-SVar:RemAIDeck:True
+SVar:NeedsToPlayVar:Y LE3
+SVar:Y:Count$InYourHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wheel_of_fate.jpg
 Oracle:Suspend 4—{1}{R} (Rather than cast this card from your hand, pay {1}{R} and exile it with four time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)\nEach player discards his or her hand, then draws seven cards.
