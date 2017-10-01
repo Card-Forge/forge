@@ -2165,7 +2165,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                             if (forgeCard.isPermanent() && !forgeCard.isAura()) {
                                 if (forgeCard.isCreature()) {
                                     if (!repeatLast) {
-                                        lastSummoningSickness = getGui().confirm(forgeCard.getView(), "Should " + forgeCard + " be affected with Summoning Sickness?");
+                                        lastSummoningSickness = getGui().confirm(forgeCard.getView(),
+                                                TextUtil.concatWithSpace("Should", forgeCard.toString(), "be affected with Summoning Sickness?"));
                                     }
                                 }
                                 game.getAction().moveTo(targetZone, forgeCard, null);
