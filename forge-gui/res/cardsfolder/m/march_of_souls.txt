@@ -6,7 +6,6 @@ SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ X | References$ X | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ Player.IsRemembered | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ They can't be regenerated. For each creature destroyed this way, its controller creates a 1/1 white Spirit creature token with flying.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$FilterControlledByRemembered_Number$1
-SVar:RemAIDeck:True
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/march_of_souls.jpg
 Oracle:Destroy all creatures. They can't be regenerated. For each creature destroyed this way, its controller creates a 1/1 white Spirit creature token with flying.

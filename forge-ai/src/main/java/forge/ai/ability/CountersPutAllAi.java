@@ -1,7 +1,7 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
-
+import com.google.common.collect.Lists;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
@@ -61,6 +61,10 @@ public class CountersPutAllAi extends SpellAbilityAi {
 
         if (logic.equals("AtEOTOrBlock")) {
             if (!ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && !ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                return false;
+            }
+        } else if (logic.equals("AtOppEOT")) {
+            if (!(ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && ai.getGame().getPhaseHandler().getNextTurn() == ai)) {
                 return false;
             }
         }
@@ -148,5 +152,32 @@ public class CountersPutAllAi extends SpellAbilityAi {
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         return player.getCreaturesInPlay().size() >= ComputerUtil.getOpponentFor(player).getCreaturesInPlay().size();
+    }
+
+    @Override
+    protected boolean doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
+        if (sa.usesTargeting()) {
+            List<Player> players = Lists.newArrayList();
+            if (!sa.isCurse()) {
+                players.add(aiPlayer);
+            }
+            players.addAll(aiPlayer.getOpponents());
+            players.addAll(aiPlayer.getAllies());
+            if (sa.isCurse()) {
+                players.add(aiPlayer);
+            }
+
+            for (final Player p : players) {
+                if (p.canBeTargetedBy(sa) && sa.canTarget(p)) {
+                    boolean preferred = false;
+                    preferred = (sa.isCurse() && p.isOpponentOf(aiPlayer)) || (!sa.isCurse() && p == aiPlayer);
+                    sa.resetTargets();
+                    sa.getTargets().add(p);
+                    return preferred || mandatory;
+                }
+            }
+        }
+
+        return mandatory;
     }
 }
