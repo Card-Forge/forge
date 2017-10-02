@@ -2,6 +2,6 @@ Name:Voltaic Key
 ManaCost:1
 Types:Artifact
 A:AB$ Untap | Cost$ 1 T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Untap target artifact.
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voltaic_key.jpg
 Oracle:{1}, {T}: Untap target artifact.

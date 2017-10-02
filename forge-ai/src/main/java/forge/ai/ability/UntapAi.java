@@ -195,17 +195,13 @@ public class UntapAi extends SpellAbilityAi {
                     break;
                 }
             } else {
-                //Untap Time Vault? - Yes please!
-                for (Card c : untapList) {
-                    if (c.getName().equals("Time Vault")) {
-                        choice = c;
-                        break;
-                    }
-                }
+                choice = detectPriorityUntapTargets(untapList); // untap Time Vault or another broken card? - Yes please!
+
                 if (choice == null) {
                     if (CardLists.getNotType(untapList, "Creature").isEmpty()) {
                         choice = ComputerUtilCard.getBestCreatureAI(untapList); // if only creatures take the best
-                    } else if (!sa.getPayCosts().hasManaCost() || sa.getRootAbility().isTrigger()) {
+                    } else if (!sa.getPayCosts().hasManaCost() || sa.getRootAbility().isTrigger()
+                            || "Always".equals(sa.getParam("AILogic"))) {
                         choice = ComputerUtilCard.getMostExpensivePermanentAI(untapList, sa, false);
                     }
                 }
@@ -329,5 +325,17 @@ public class UntapAi extends SpellAbilityAi {
         pl.add(ai);
         pl.addAll(ai.getAllies());
         return ComputerUtilCard.getBestAI(CardLists.filterControlledBy(list, pl));
+    }
+
+    private static Card detectPriorityUntapTargets(final List<Card> untapList) {
+        String[] priorityList = {"Time Vault", "Mana Vault", "Icy Manipulator", "Steel Overseer", "Grindclock", "Prototype Portal"};
+        for (String name : priorityList) {
+            for (Card c : untapList) {
+                if (c.getName().equals(name)) {
+                    return c;
+                }
+            }
+        }
+        return null;
     }
 }
