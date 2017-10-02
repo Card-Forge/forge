@@ -8,13 +8,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardState;
-import forge.game.card.CardFactory;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -335,7 +329,13 @@ public class CloneEffect extends SpellAbilityEffect {
                 shortColors = CardUtil.getShortColorsString(Arrays.asList(colors.split(",")));
             }
         }
-        tgtCard.addColor(shortColors, !sa.hasParam("OverwriteColors"), tgtCard.getTimestamp());
+        if (sa.hasParam("OverwriteColors")) {
+            tgtCard.setColor(shortColors);
+        } else {
+            // TODO: this actually doesn't work for some reason (and fiddling with timestamps doesn't seem to fix it).
+            // No cards currently use this, but if some ever do, this code will require tweaking.
+            tgtCard.addColor(shortColors, true, tgtCard.getTimestamp());
+        }
 
         if (sa.hasParam("Embalm") && tgtCard.isEmbalmed()) {
             tgtCard.addType("Zombie");
