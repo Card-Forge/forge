@@ -712,10 +712,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return additionalAbilities;
     }
     public AbilitySub getAdditonalAbility(final String name) {
-        if (additionalAbilities.containsKey(name)) {
+        if (hasAdditonalAbility(name)) {
             return additionalAbilities.get(name);
         }
         return null;
+    }
+    
+    public boolean hasAdditonalAbility(final String name) {
+        return additionalAbilities.containsKey(name);
     }
 
     public void setAdditionalAbility(final String name, final AbilitySub sa) {
