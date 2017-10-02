@@ -36,14 +36,14 @@ public class ClashEffect extends SpellAbilityEffect {
 
         if (victory) {
 
-            AbilitySub sub = sa.getAdditonalAbility("WinSubAbility");
+            AbilitySub sub = sa.getAdditionalAbility("WinSubAbility");
             if (sub != null) {
                 AbilityUtils.resolve(sub);
             }
 
             runParams.put("Won", "True");
         } else {
-            AbilitySub sub = sa.getAdditonalAbility("OtherwiseSubAbility");
+            AbilitySub sub = sa.getAdditionalAbility("OtherwiseSubAbility");
             if (sub != null) {
                 AbilityUtils.resolve(sub);
             }

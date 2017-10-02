@@ -123,7 +123,7 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                         card.addRemembered(z);
                     }
 
-                    AbilitySub sub = sa.getAdditonalAbility("ChosenPile");
+                    AbilitySub sub = sa.getAdditionalAbility("ChosenPile");
                     if (sub != null) {
                         AbilityUtils.resolve(sub);
                     }
@@ -136,7 +136,7 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                         card.addRemembered(z);
                     }
                     
-                    AbilitySub sub = sa.getAdditonalAbility("UnchosenPile");
+                    AbilitySub sub = sa.getAdditionalAbility("UnchosenPile");
                     if (sub != null) {
                         AbilityUtils.resolve(sub);
                     }

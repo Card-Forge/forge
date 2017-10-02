@@ -56,7 +56,7 @@ public class RepeatAi extends SpellAbilityAi {
          }
 
     	// setup subability to repeat
-        final SpellAbility repeat = sa.getAdditonalAbility("RepeatSubAbility");
+        final SpellAbility repeat = sa.getAdditionalAbility("RepeatSubAbility");
 
         if (repeat == null) {
         	return mandatory;

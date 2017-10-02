@@ -1,5 +1,7 @@
 package forge.game.ability.effects;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -11,10 +13,6 @@ import forge.game.spellability.TargetRestrictions;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
 import java.util.Random;
 
 public class ChooseNumberEffect extends SpellAbilityEffect {
@@ -107,7 +105,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
             }
             card.getGame().getAction().nofityOfValue(sa, card, sb.toString(), null);
             if (sa.hasParam("ChooseNumberSubAbility")) {
-                AbilitySub sub = sa.getAdditonalAbility("ChooseNumberSubAbility");
+                AbilitySub sub = sa.getAdditionalAbility("ChooseNumberSubAbility");
                 
                 for (Player p : chooseMap.keySet()) {
                     card.addRemembered(p);
@@ -118,7 +116,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
             }
             
             if (sa.hasParam("Lowest")) {
-                AbilitySub sub = sa.getAdditonalAbility("Lowest");
+                AbilitySub sub = sa.getAdditionalAbility("Lowest");
 
                 for (Player p : lowestNum) {
                     card.addRemembered(p);
@@ -128,7 +126,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                 }
             }
             if (sa.hasParam("Highest")) {
-                AbilitySub sub = sa.getAdditonalAbility("Highest");
+                AbilitySub sub = sa.getAdditionalAbility("Highest");
 
                 for (Player p : highestNum) {
                     card.addRemembered(p);

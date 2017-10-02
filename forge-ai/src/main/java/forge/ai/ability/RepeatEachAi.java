@@ -1,9 +1,6 @@
 package forge.ai.ability;
 
-import java.util.List;
-
 import com.google.common.base.Predicate;
-
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
@@ -16,6 +13,8 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
+
+import java.util.List;
 
 
 public class RepeatEachAi extends SpellAbilityAi {
@@ -82,7 +81,7 @@ public class RepeatEachAi extends SpellAbilityAi {
             return false;
         } else if ("AllPlayerLoseLife".equals(logic)) {
             final Card source = sa.getHostCard();
-            AbilitySub repeat = sa.getAdditonalAbility("RepeatSubAbility");
+            AbilitySub repeat = sa.getAdditionalAbility("RepeatSubAbility");
 
             String svar = repeat.getSVar(repeat.getParam("LifeAmount"));
             // replace RememberedPlayerCtrl with YouCtrl

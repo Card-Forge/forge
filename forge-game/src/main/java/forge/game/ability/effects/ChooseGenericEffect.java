@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import com.google.common.collect.Lists;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -10,8 +11,6 @@ import forge.game.spellability.TargetRestrictions;
 import forge.util.MyRandom;
 
 import java.util.List;
-
-import com.google.common.collect.Lists;
 
 public class ChooseGenericEffect extends SpellAbilityEffect {
 
@@ -32,7 +31,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
 
         final List<SpellAbility> abilities = Lists.<SpellAbility>newArrayList(sa.getAdditionalAbilityList("Choices"));
-        final SpellAbility fallback = sa.getAdditonalAbility("FallbackAbility");
+        final SpellAbility fallback = sa.getAdditionalAbility("FallbackAbility");
         
         final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
         final TargetRestrictions tgt = sa.getTargetRestrictions();

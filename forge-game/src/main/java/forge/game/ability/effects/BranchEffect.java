@@ -26,9 +26,9 @@ public class BranchEffect extends SpellAbilityEffect {
 
         AbilitySub sub = null;
         if (Expressions.compare(svarValue, operator, operandValue)) {
-            sub = sa.getAdditonalAbility("TrueSubAbility");
+            sub = sa.getAdditionalAbility("TrueSubAbility");
         } else {
-            sub = sa.getAdditonalAbility("FalseSubAbility");
+            sub = sa.getAdditionalAbility("FalseSubAbility");
         }
         if (sub != null) {
             AbilityUtils.resolve(sub);

@@ -1702,7 +1702,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 // A blink effect implemented using ChangeZone API
                 return false;
             } else if (subApi == ApiType.DelayedTrigger) {
-                SpellAbility exec = causeSub.getAdditonalAbility("Execute");
+                SpellAbility exec = causeSub.getAdditionalAbility("Execute");
                 if (exec != null && exec.getApi() == ApiType.ChangeZone) {
                     if ("Exile".equals(exec.getParam("Origin")) && "Battlefield".equals(exec.getParam("Destination"))) {
                         // A blink effect implemented using a delayed trigger

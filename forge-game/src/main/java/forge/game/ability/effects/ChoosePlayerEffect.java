@@ -62,7 +62,7 @@ public class ChoosePlayerEffect extends SpellAbilityEffect {
                     }
 
                     // SubAbility that only fires if a player is chosen
-                    AbilitySub chosenSA = sa.getAdditonalAbility("ChooseSubAbility");
+                    AbilitySub chosenSA = sa.getAdditionalAbility("ChooseSubAbility");
                     if (chosenSA != null) {
                         if (!chosenSA.getHostCard().equals(sa.getHostCard())) {
                             System.out.println("Warning: ChooseSubAbility had the wrong host set (potentially after cloning the root SA), attempting to correct...");
@@ -72,7 +72,7 @@ public class ChoosePlayerEffect extends SpellAbilityEffect {
                     }
                 } else {
                     // SubAbility that only fires if a player is not chosen
-                    AbilitySub notChosenSA = sa.getAdditonalAbility("CantChooseSubAbility");
+                    AbilitySub notChosenSA = sa.getAdditionalAbility("CantChooseSubAbility");
                     if (notChosenSA != null) {
                         if (!notChosenSA.getHostCard().equals(sa.getHostCard())) {
                             System.out.println("Warning: CantChooseSubAbility had the wrong host set (potentially after cloning the root SA), attempting to correct...");

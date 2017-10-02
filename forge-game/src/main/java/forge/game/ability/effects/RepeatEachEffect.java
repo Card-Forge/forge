@@ -1,26 +1,21 @@
 package forge.game.ability.effects;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.collect.FCollection;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class RepeatEachEffect extends SpellAbilityEffect {
 
@@ -31,7 +26,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         Card source = sa.getHostCard();
 
-        AbilitySub repeat = sa.getAdditonalAbility("RepeatSubAbility");        
+        AbilitySub repeat = sa.getAdditionalAbility("RepeatSubAbility");
 
         if (repeat != null && !repeat.getHostCard().equals(source)) {
             // TODO: for some reason, the host card of the original additional SA is set to the cloned card when

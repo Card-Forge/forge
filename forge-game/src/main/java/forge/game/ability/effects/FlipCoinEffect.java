@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import com.google.common.collect.Maps;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -16,8 +17,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import com.google.common.collect.Maps;
 
 public class FlipCoinEffect extends SpellAbilityEffect {
 
@@ -78,12 +77,12 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                 }
 
                 if (resultIsHeads) {
-                    AbilitySub sub = sa.getAdditonalAbility("HeadsSubAbility");
+                    AbilitySub sub = sa.getAdditionalAbility("HeadsSubAbility");
                     if (sub != null) {
                         AbilityUtils.resolve(sub);
                     }
                 } else {
-                    AbilitySub sub = sa.getAdditonalAbility("TailsSubAbility");
+                    AbilitySub sub = sa.getAdditionalAbility("TailsSubAbility");
                     if (sub != null) {
                         AbilityUtils.resolve(sub);
                     }
@@ -93,7 +92,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                     if (sa.getParam("RememberWinner") != null) {
                         host.addRemembered(host);
                     }
-                    AbilitySub sub = sa.getAdditonalAbility("WinSubAbility");
+                    AbilitySub sub = sa.getAdditionalAbility("WinSubAbility");
                     if (sub != null) {
                         AbilityUtils.resolve(sub);
                     }
@@ -103,7 +102,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                         host.addRemembered(host);
                     }
 
-                    AbilitySub sub = sa.getAdditonalAbility("LoseSubAbility");
+                    AbilitySub sub = sa.getAdditionalAbility("LoseSubAbility");
                     if (sub != null) {
                         AbilityUtils.resolve(sub);
                     }
@@ -143,7 +142,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         } while (sa.hasParam("FlipUntilYouLose") && result != false);
         
         if (sa.hasParam("FlipUntilYouLose")) {
-            sa.getAdditonalAbility("LoseSubAbility").setSVar(sa.hasParam("SaveNumFlipsToSVar") ? sa.getParam("SaveNumFlipsToSVar") : "X", "Number$" + numSuccesses);
+            sa.getAdditionalAbility("LoseSubAbility").setSVar(sa.hasParam("SaveNumFlipsToSVar") ? sa.getParam("SaveNumFlipsToSVar") : "X", "Number$" + numSuccesses);
         }
 
         return result;
@@ -188,7 +187,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         } while (sa.hasParam("FlipUntilYouLose") && wonFlip);
         
         if (sa.hasParam("FlipUntilYouLose")) {
-            sa.getAdditonalAbility("LoseSubAbility").setSVar(sa.hasParam("SaveNumFlipsToSVar") ? sa.getParam("SaveNumFlipsToSVar") : "X", "Number$" + numSuccesses);
+            sa.getAdditionalAbility("LoseSubAbility").setSVar(sa.hasParam("SaveNumFlipsToSVar") ? sa.getParam("SaveNumFlipsToSVar") : "X", "Number$" + numSuccesses);
         }
 
         return wonFlip;

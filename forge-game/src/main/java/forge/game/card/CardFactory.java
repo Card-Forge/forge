@@ -17,24 +17,15 @@
  */
 package forge.game.card;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.ImageKeys;
 import forge.StaticData;
-import forge.card.CardRules;
-import forge.card.CardSplitType;
-import forge.card.CardStateName;
-import forge.card.CardType;
+import forge.card.*;
 import forge.card.CardType.CoreType;
-import forge.card.ICardFace;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
@@ -52,6 +43,10 @@ import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * <p>
@@ -667,7 +662,7 @@ public class CardFactory {
         if (from.getSubAbility() != null) {
             to.setSubAbility(from.getSubAbility().getCopy());
         }
-        for (Map.Entry<String, AbilitySub> e : from.getAdditonalAbilities().entrySet()) {
+        for (Map.Entry<String, AbilitySub> e : from.getAdditionalAbilities().entrySet()) {
             to.setAdditionalAbility(e.getKey(), e.getValue().getCopy());
         }
         for (Map.Entry<String, List<AbilitySub>> e : from.getAdditionalAbilityLists().entrySet()) {

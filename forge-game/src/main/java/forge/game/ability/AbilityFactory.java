@@ -17,6 +17,9 @@
  */
 package forge.game.ability;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import forge.card.CardStateName;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
@@ -27,10 +30,6 @@ import forge.util.FileSection;
 
 import java.util.List;
 import java.util.Map;
-
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 /**
  * <p>
@@ -221,7 +220,7 @@ public final class AbilityFactory {
             SpellAbility p = parent;
             AbilitySub sub = null;
             while (p != null) {
-                sub = p.getAdditonalAbility(name);
+                sub = p.getAdditionalAbility(name);
                 if (sub != null) {
                     break;
                 }
@@ -235,7 +234,7 @@ public final class AbilityFactory {
         }
 
         for (final String key : additionalAbilityKeys) {
-            if (mapParams.containsKey(key) && spellAbility.getAdditonalAbility(key) == null) {
+            if (mapParams.containsKey(key) && spellAbility.getAdditionalAbility(key) == null) {
                 spellAbility.setAdditionalAbility(key, getSubAbility(hostCard, mapParams.get(key), spellAbility));
             }
         }

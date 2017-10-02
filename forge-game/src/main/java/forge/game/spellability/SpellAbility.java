@@ -21,15 +21,8 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.card.mana.ManaCost;
-import forge.game.CardTraitBase;
-import forge.game.ForgeScript;
-import forge.game.Game;
-import forge.game.GameActionUtil;
-import forge.game.GameEntity;
-import forge.game.GameObject;
-import forge.game.IIdentifiable;
+import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -48,7 +41,6 @@ import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
 import forge.util.Expressions;
 import forge.util.TextUtil;
-
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -708,17 +700,17 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         view.updateDescription(this); //description changes when sub-abilities change
     }
     
-    public Map<String, AbilitySub> getAdditonalAbilities() {
+    public Map<String, AbilitySub> getAdditionalAbilities() {
         return additionalAbilities;
     }
-    public AbilitySub getAdditonalAbility(final String name) {
-        if (hasAdditonalAbility(name)) {
+    public AbilitySub getAdditionalAbility(final String name) {
+        if (hasAdditionalAbility(name)) {
             return additionalAbilities.get(name);
         }
         return null;
     }
     
-    public boolean hasAdditonalAbility(final String name) {
+    public boolean hasAdditionalAbility(final String name) {
         return additionalAbilities.containsKey(name);
     }
 

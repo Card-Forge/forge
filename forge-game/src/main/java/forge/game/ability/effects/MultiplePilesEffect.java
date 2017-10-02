@@ -3,7 +3,6 @@ package forge.game.ability.effects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -104,7 +103,7 @@ public class MultiplePilesEffect extends SpellAbilityEffect {
                 }
             }
 
-            AbilitySub sub = sa.getAdditonalAbility("ChosenPile");
+            AbilitySub sub = sa.getAdditionalAbility("ChosenPile");
             if (sub != null) {
                 AbilityUtils.resolve(sub);
             }
