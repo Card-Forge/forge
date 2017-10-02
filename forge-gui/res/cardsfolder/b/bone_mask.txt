@@ -8,6 +8,5 @@ SVar:ExileFromLibInstead:DB$ Mill | Defined$ You | Destination$ Exile | NumCards
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:X:ReplaceCount$DamageAmount
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_mask.jpg
 Oracle:{2}, {T}: The next time a source of your choice would deal damage to you this turn, prevent that damage. Exile cards from the top of your library equal to the damage prevented this way.
