@@ -71,7 +71,7 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
             }
         }
 
-        if (mapParams.containsKey("Execute")) {
+        if (mapParams.containsKey("Execute") || sa.hasAdditonalAbility("Execute")) {
             SpellAbility overridingSA = sa.getAdditonalAbility("Execute");
             overridingSA.setActivatingPlayer(sa.getActivatingPlayer());
             overridingSA.setDeltrigActivatingPlayer(sa.getActivatingPlayer()); // ensure that the original activator can be restored later

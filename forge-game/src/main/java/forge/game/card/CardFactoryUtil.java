@@ -2195,6 +2195,9 @@ public class CardFactoryUtil {
             else if (keyword.equals("Persist")) {
                 addTriggerAbility(keyword, card, null);
             }
+            else if (keyword.equals("Rebound")) {
+                addReplacementEffect(keyword, card, null);
+            }
             else if (keyword.equals("Undying")) {
                 addTriggerAbility(keyword, card, null);
             }
@@ -3496,6 +3499,42 @@ public class CardFactoryUtil {
 
             if (!intrinsic) {
                 kws.addReplacement(re);
+            }
+        } else if (keyword.equals("Rebound")) {
+            String repeffstr = "Event$ Moved | ValidCard$ Card.Self+wasCastFromHand+YouOwn+YouCtrl "
+            + " | Origin$ Stack | Destination$ Graveyard | Fizzle$ False "
+            + " | Description$ " + Keyword.REBOUND.getDescription();
+
+            String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile";
+            String delTrig = "DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You " + 
+            " | OptionalDecider$ You | RememberObjects$ Self | TriggerDescription$"
+            + " At the beginning of your next upkeep, you may cast " + card.toString() + " without paying it's manacost.";
+            // TODO add check for still in exile
+            String abPlay = "DB$ Play | Defined$ Self | WithoutManaCost$ True | Optional$ True";
+
+            SpellAbility saExile = AbilityFactory.getAbility(abExile, card);
+
+            final AbilitySub delsub = (AbilitySub) AbilityFactory.getAbility(delTrig, card);
+
+            final AbilitySub saPlay = (AbilitySub) AbilityFactory.getAbility(abPlay, card);
+
+            delsub.setAdditionalAbility("Execute", saPlay);
+
+            saExile.setSubAbility(delsub);
+
+            if (!intrinsic) {
+                saExile.setIntrinsic(false);
+            }
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
+            re.setLayer(ReplacementLayer.Other);
+
+            re.setOverridingAbility(saExile);
+
+            ReplacementEffect cardre = card.addReplacementEffect(re);
+
+            if (!intrinsic) {
+                kws.addReplacement(cardre);
             }
         } else if (keyword.equals("Unleash")) {
             String effect = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Unleash (" + Keyword.getInstance(keyword).getReminderText() + ")";

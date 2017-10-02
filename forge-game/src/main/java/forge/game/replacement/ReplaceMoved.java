@@ -84,6 +84,17 @@ public class ReplaceMoved extends ReplacementEffect {
             }
         }
         
+        if (hasParam("Fizzle")) {
+            // if Replacement look for Fizzle
+            if (!runParams.containsKey("Fizzle")) {
+                return false;
+            }
+            Boolean val = (Boolean) runParams.get("Fizzle");
+            if ("True".equals(getParam("Fizzle")) != val) {
+                return false;
+            }
+        }
+
         if (hasParam("Cause")) {
             if (!runParams.containsKey("Cause")) {
                 return false;

@@ -2124,7 +2124,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
                 }
                 sb.append("Remove CARDNAME from your deck before playing if you're not playing for ante.\r\n");
-            } else if (keyword.equals("Rebound") || keyword.equals("Retrace") || keyword.equals("Changeling")) {
+            } else if (keyword.equals("Retrace") || keyword.equals("Changeling")) {
                 sb.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
             } else if (keyword.startsWith("Presence")) {
                 sb.append(Keyword.getInstance(keyword).getReminderText());

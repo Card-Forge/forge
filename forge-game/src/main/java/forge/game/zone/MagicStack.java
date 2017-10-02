@@ -595,26 +595,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         else if (sa.isAftermath()) {
             game.getAction().exile(source, sa, Maps.newHashMap());
         }
-        else if (source.hasKeyword("Rebound")
-                && !fizzle
-                && source.getCastFrom() == ZoneType.Hand
-                && game.getZoneOf(source).is(ZoneType.Stack)
-                && source.getOwner().equals(source.getController())) //"If you cast this spell from your hand"
-        {
-            //Move rebounding card to exile
-            source = game.getAction().exile(source, null, Maps.newHashMap());
-
-            source.setSVar("ReboundAbilityTrigger", "DB$ Play | Defined$ Self "
-                    + "| WithoutManaCost$ True | Optional$ True");
-
-            //Setup a Rebound-trigger
-            final Trigger reboundTrigger = forge.game.trigger.TriggerHandler.parseTrigger("Mode$ Phase "
-                    + "| Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | Execute$ ReboundAbilityTrigger "
-                    + "| TriggerDescription$ At the beginning of your next upkeep, you may cast " + source.toString()
-                    + " without paying it's manacost.", source, true);
-
-            game.getTriggerHandler().registerDelayedTrigger(reboundTrigger);
-        }
         else if (!source.isCopiedSpell() &&
                 (source.isInstant() || source.isSorcery() || fizzle) &&
                 source.isInZone(ZoneType.Stack)) {
