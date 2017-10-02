@@ -10,6 +10,5 @@ SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Sele
 
 SVar:DBDamage2:DB$ DealDamage | TargetingPlayer$ Player.Opponent | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature the caster of this spell don't control | NumDmg$ 7
 
-SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_offering.jpg
 Oracle:Destroy target nonbasic land you don't control and target nonbasic land of an opponent's choice you don't control.\nVolcanic Offering deals 7 damage to target creature you don't control and 7 damage to target creature of an opponent's choice you don't control.
