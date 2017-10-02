@@ -170,38 +170,15 @@ public class CostPayment {
 
         final Game game = decisionMaker.getPlayer().getGame();
 
-        // FIXME: This is a hack which is necessary to make the AI pay the Cumulative Upkeep with "Exile a card from
-        // the top of your library" (Thought Lash) without cheating. Otherwise the AI pays only one card, no matter
-        // the age counters. We need a better solution here.
-        int nExileLib = 0;
-        List<CostPart> partsToChange = Lists.newArrayList();
-        CostExile primeExile = null;
-        for (final CostPart part : parts) {
-            if (part instanceof CostExile) {
-                CostExile exile = (CostExile) part;
-                if (exile.from == ZoneType.Library) {
-                    nExileLib += exile.convertAmount();
-                    if (nExileLib == 1) {
-                        primeExile = exile;
-                    } else {
-                        partsToChange.add(exile);
-                    }
-                }
-            }
-        }
-        if (nExileLib > 1 && primeExile != null) {
-            parts.removeAll(partsToChange);
-            primeExile.setAmount(String.valueOf(nExileLib));
-        }
-        // - End of hack for Cumulative Upkeep: Exile a card from the top of your library -
-
         for (final CostPart part : parts) {
             PaymentDecision decision = part.accept(decisionMaker);
+            // the AI will try to exile the same card repeatedly unless it does it immediately
+            final boolean payImmediately = part instanceof CostExile && ((CostExile) part).from == ZoneType.Library;
             if (null == decision) return false;
 
             // wrap the payment and push onto the cost stack
             game.costPaymentStack.push(part, this);
-            if (decisionMaker.paysRightAfterDecision() && !part.payAsDecided(decisionMaker.getPlayer(), decision, ability)) {
+            if ((decisionMaker.paysRightAfterDecision() || payImmediately) && !part.payAsDecided(decisionMaker.getPlayer(), decision, ability)) {
                 game.costPaymentStack.pop(); // cost is resolved
                 return false;
             }

@@ -465,8 +465,8 @@ public class PlayerControllerAi extends PlayerController {
         ability.setActivatingPlayer(c.getController());
 
         // FIXME: This is a hack to check if the AI can play the "exile from library" pay costs (Cumulative Upkeep,
-        // e.g. Thought Lash). We have to do it early since the cost will later be reconsolidated into a single
-        // payment for the AI, to avoid cheating (otherwise the AI repeatedly "exiles" the same card multiple times)
+        // e.g. Thought Lash). We have to do it and bail early if the AI can't pay, because otherwise the AI will
+        // pay the cost partially, which should not be possible
         int nExileLib = 0;
         List<CostPart> parts = CostAdjustment.adjust(cost, sa).getCostParts();
         for (final CostPart part : parts) {
