@@ -414,7 +414,7 @@ public class ComputerUtilCombat {
                     cond |= "true".equalsIgnoreCase(condVal);
                     cond |= "attackingplayer".equalsIgnoreCase(condVal) && isAttackingPlayer;
                     cond |= "attackingplayerconservative".equalsIgnoreCase(condVal) && isAttackingPlayer
-                            && ai.getCreaturesInPlay().size() >= 3 && ai.getCreaturesInPlay().size() > combat.getDefendingPlayerRelatedTo(attacker).getCreaturesInPlay().size();
+                            && ai.getCreaturesInPlay().size() >= 3 && ai.getCreaturesInPlay().size() > attacker.getController().getCreaturesInPlay().size();
 
                     if (cond) {
                         return true;
