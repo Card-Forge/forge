@@ -2018,6 +2018,9 @@ public class CardFactoryUtil {
             else if (keyword.startsWith("Dash")) {
                 addSpellAbility(keyword, card, null);
             }
+            else if (keyword.startsWith("Buyback")) {
+                addReplacementEffect(keyword, card, null);
+            }
             else if (keyword.startsWith("Awaken")) {
                 addSpellAbility(keyword, card, null);
             }
@@ -3401,6 +3404,45 @@ public class CardFactoryUtil {
 
             if (!intrinsic) {
                 kws.addReplacement(re);
+            }
+        } else if (keyword.startsWith("Buyback")) {
+            final Cost cost = new Cost(keyword.substring(8), false);
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | Destination$ Graveyard | Fizzle$ False ");
+            sb.append("ValidStackSa$ Spell.Buyback  | Description$ Buyback");
+
+            sb.append( cost.isOnlyManaCost() ? " " : "—");
+
+            sb.append(cost.toSimpleString());
+
+            if (!cost.isOnlyManaCost()) {
+                sb.append(".");
+            }
+
+            sb.append(" (");
+            sb.append(Keyword.getInstance(keyword).getReminderText());
+            sb.append(")");
+
+            String repeffstr = sb.toString();
+
+            String abReturn = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Hand";
+
+            SpellAbility saReturn = AbilityFactory.getAbility(abReturn, card);
+
+            if (!intrinsic) {
+                saReturn.setIntrinsic(false);
+            }
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
+            re.setLayer(ReplacementLayer.Other);
+
+            re.setOverridingAbility(saReturn);
+
+            ReplacementEffect cardre = card.addReplacementEffect(re);
+
+            if (!intrinsic) {
+                kws.addReplacement(cardre);
             }
         } else if (keyword.startsWith("Devour")) {
 

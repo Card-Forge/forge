@@ -2020,11 +2020,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                 final Cost cost = new Cost(n[2], false);
                 sb.append("Splice onto ").append(n[1]).append(" ").append(cost.toSimpleString());
                 sb.append(" (" + Keyword.getInstance(keyword).getReminderText() + ")").append("\r\n");
-            } else if (keyword.startsWith("Buyback")) {
-                final Cost cost = new Cost(keyword.substring(8), false);
-                sb.append("Buyback ").append(cost.toSimpleString());
-                sb.append(" (You may pay an additional cost as you cast CARDNAME. If you do, put CARDNAME back into your hand as it resolves.)");
-                sb.append("\r\n");
             } else if (keyword.startsWith("Entwine")) {
                 final String[] n = keyword.split(":");
                 final Cost cost = new Cost(n[1], false);
