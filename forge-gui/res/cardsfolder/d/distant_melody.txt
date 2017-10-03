@@ -4,7 +4,7 @@ Types:Sorcery
 A:SP$ ChooseType | Cost$ 3 U | Defined$ You | Type$ Creature | SubAbility$ DBDraw | AILogic$ MostProminentComputerControls | SpellDescription$ Choose a creature type. Draw a card for each permanent you control of that type.
 SVar:DBDraw:DB$ Draw | NumCards$ X | References$ X
 SVar:X:Count$Valid Permanent.ChosenType+YouCtrl
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:NeedsToPlay:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/distant_melody.jpg
 Oracle:Choose a creature type. Draw a card for each permanent you control of that type.

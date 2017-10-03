@@ -4,6 +4,5 @@ Types:Sorcery
 A:SP$ ChangeZone | Cost$ X U U U | Origin$ Battlefield | Destination$ Hand | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | References$ X,MaxTgts | SpellDescription$ Return X target nonland permanents to their owners' hands.
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Permanent.nonLand
-SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/distorting_wake.jpg
 Oracle:Return X target nonland permanents to their owners' hands.

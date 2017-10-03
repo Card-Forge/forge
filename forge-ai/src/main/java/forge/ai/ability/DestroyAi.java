@@ -50,6 +50,13 @@ public class DestroyAi extends SpellAbilityAi {
             hasXCost = abCost.getCostMana() != null ? abCost.getCostMana().getAmountOfX() > 0 : false;
         }
 
+        if ("AtOpponentsCombatOrAfter".equals(sa.getParam("AILogic"))) {
+            PhaseHandler ph = ai.getGame().getPhaseHandler();
+            if (ph.getPlayerTurn() == ai || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                return false;
+            }
+        }
+
         if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;
         }

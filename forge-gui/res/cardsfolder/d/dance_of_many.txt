@@ -9,6 +9,6 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ TrigSac | TriggerDescription$ When the token leaves the battlefield, sacrifice CARDNAME.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBCleanup
 K:UpkeepCost:U U
-SVar:RemAIDeck:True
+SVar:NeedsToPlay:Creature.inZoneBattlefield
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dance_of_many.jpg
 Oracle:When Dance of Many enters the battlefield, create a token that's a copy of target nontoken creature.\nWhen Dance of Many leaves the battlefield, exile the token.\nWhen the token leaves the battlefield, sacrifice Dance of Many.\nAt the beginning of your upkeep, sacrifice Dance of Many unless you pay {U}{U}.
