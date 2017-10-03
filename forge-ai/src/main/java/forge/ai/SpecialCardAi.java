@@ -762,7 +762,11 @@ public class SpecialCardAi {
                 return false;
             }
 
-            return ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, exiledWith);
+            // We want to either be able to attack with the creature, or keep it until our opponent's end of turn as a
+            // potential blocker
+            return ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, exiledWith)
+                    || (ai.getGame().getPhaseHandler().getPlayerTurn().isOpponentOf(ai) && ai.getGame().getCombat() != null
+                    && !ai.getGame().getCombat().getAttackers().isEmpty());
         }
     }
 
