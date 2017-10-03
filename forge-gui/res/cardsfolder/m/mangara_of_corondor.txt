@@ -3,7 +3,6 @@ ManaCost:1 W W
 Types:Legendary Creature Human Wizard
 PT:1/1
 A:AB$ ChangeZone | Cost$ T | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent | SubAbility$ DBChange | SpellDescription$ Exile CARDNAME and target permanent.
-SVar:DBChange:DB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Exile
-SVar:RemAIDeck:True
+SVar:DBChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mangara_of_corondor.jpg
 Oracle:{T}: Exile Mangara of Corondor and target permanent.

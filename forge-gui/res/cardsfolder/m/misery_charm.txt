@@ -5,7 +5,6 @@ A:SP$ Charm | Cost$ B | Choices$ DBDestroy,DBChangeZone,DBLoseLife | CharmNum$ 1
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.Cleric | TgtPrompt$ Select target cleric. | SpellDescription$ Destroy target Cleric.
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Creature.Cleric | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target Cleric card from your graveyard to your hand.
 SVar:DBLoseLife:DB$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select a player to lose 2 life | LifeAmount$ 2 | SpellDescription$ Target player loses 2 life.
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+DeckNeeds:Type$Cleric
 SVar:Picture:http://www.wizards.com/global/images/magic/general/misery_charm.jpg
 Oracle:Choose one —\n• Destroy target Cleric.\n• Return target Cleric card from your graveyard to your hand.\n• Target player loses 2 life.

@@ -742,6 +742,29 @@ public class SpecialCardAi {
         }
     }
 
+    // Mimic Vat
+    public static class MimicVat {
+        public static boolean considerExile(final Player ai, final SpellAbility sa) {
+            final Card source = sa.getHostCard();
+            final Card exiledWith = source.getImprintedCards().isEmpty() ? null : source.getImprintedCards().getFirst();
+            final List<Card> defined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+            final Card tgt = defined.isEmpty() ? null : defined.get(0);
+
+            return exiledWith == null || (tgt != null && ComputerUtilCard.evaluateCreature(tgt) > ComputerUtilCard.evaluateCreature(exiledWith));
+        }
+
+        public static boolean considerCopy(final Player ai, final SpellAbility sa) {
+            final Card source = sa.getHostCard();
+            final Card exiledWith = source.getImprintedCards().isEmpty() ? null : source.getImprintedCards().getFirst();
+
+            if (exiledWith == null) {
+                return false;
+            }
+
+            return ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, exiledWith);
+        }
+    }
+
     // Momir Vig, Simic Visionary Avatar
     public static class MomirVigAvatar {
         public static boolean consider(final Player ai, final SpellAbility sa) {

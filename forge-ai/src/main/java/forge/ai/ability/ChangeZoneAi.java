@@ -756,6 +756,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @return a boolean.
      */
     private static boolean knownOriginPlayDrawbackAI(final Player aiPlayer, final SpellAbility sa) {
+        if ("MimicVat".equals(sa.getParam("AILogic"))) {
+            return SpecialCardAi.MimicVat.considerExile(aiPlayer, sa);
+        }
+
         if (!sa.usesTargeting()) {
             return true;
         }

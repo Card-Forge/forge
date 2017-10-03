@@ -1,26 +1,22 @@
 package forge.ai.ability;
 
-import java.util.List;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
+import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CardUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
+
+import java.util.List;
 
 public class CopyPermanentAi extends SpellAbilityAi {
     @Override
@@ -30,6 +26,10 @@ public class CopyPermanentAi extends SpellAbilityAi {
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;
+        }
+
+        if ("MimicVat".equals(sa.getParam("AILogic"))) {
+            return SpecialCardAi.MimicVat.considerCopy(aiPlayer, sa);
         }
 
         if (sa.hasParam("AtEOT") && !aiPlayer.getGame().getPhaseHandler().is(PhaseType.MAIN1)) {
