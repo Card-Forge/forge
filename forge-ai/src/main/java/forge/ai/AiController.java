@@ -1173,6 +1173,12 @@ public class AiController {
                 Predicates.not(CardPredicates.Presets.LANDS));
         CardCollectionView otb = player.getCardsIn(ZoneType.Battlefield);
 
+        if (getBooleanProperty(AiProps.HOLD_LAND_DROP_ONLY_IF_HAVE_OTHER_PERMS)) {
+            if (CardLists.filter(otb, Predicates.not(CardPredicates.Presets.LANDS)).isEmpty()) {
+                return false;
+            }
+        }
+
         // TODO: improve the detection of taplands
         boolean isTapLand = false;
         for (ReplacementEffect repl : landToPlay.getReplacementEffects()) {

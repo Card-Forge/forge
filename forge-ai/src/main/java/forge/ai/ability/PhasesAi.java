@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicates;
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -33,6 +34,10 @@ public class PhasesAi extends SpellAbilityAi {
             tgtCards = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
             if (tgtCards.contains(source)) {
                 // Protect it from something
+                final boolean isThreatened = ComputerUtil.predictThreatenedObjects(aiPlayer, null, true).contains(source);
+                if (isThreatened) {
+                    return true;
+                }
             } else {
                 // Card def = tgtCards.get(0);
                 // Phase this out if it might attack me, or before it can be
