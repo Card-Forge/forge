@@ -407,6 +407,15 @@ public class ComputerUtilCombat {
 
             if (blockers.isEmpty()) {
                 if (!attacker.getSVar("MustBeBlocked").equals("")) {
+                    boolean cond = false;
+                    String condVal = attacker.getSVar("MustBeBlocked");
+                    boolean isAttackingPlayer = combat.getDefenderByAttacker(attacker) instanceof Player;
+
+                    cond |= "true".equalsIgnoreCase(condVal);
+                    cond |= "attackingplayer".equalsIgnoreCase(condVal) && isAttackingPlayer;
+                    cond |= "attackingplayerconservative".equalsIgnoreCase(condVal) && isAttackingPlayer
+                            && ai.getCreaturesInPlay().size() >= 3 && ai.getCreaturesInPlay().size() > combat.getDefendingPlayerRelatedTo(attacker).getCreaturesInPlay().size();
+
                     boolean cond = !"attackingplayer".equalsIgnoreCase(attacker.getSVar("MustBeBlocked"))
                             || combat.getDefenderByAttacker(attacker) instanceof Player;
                     if (cond) {
