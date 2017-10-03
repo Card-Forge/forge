@@ -149,13 +149,13 @@ public class GlobalAttackRestrictions {
         final PlayerCollection mustBeAttacked = new PlayerCollection();
         final Game game = attackingPlayer.getGame();
 
-        if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyOneAttackerATurn)) {
+        /* if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyOneAttackerATurn)) {
             if (attackingPlayer.getAttackedWithCreatureThisTurn()) {
                 max = 0;
             } else {
                 max = 1;
             }
-        }
+        } */
 
         if (max == -1 && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyOneAttackerACombat)) {
             max = 1;
