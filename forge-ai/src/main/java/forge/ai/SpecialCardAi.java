@@ -38,6 +38,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
@@ -1265,11 +1266,15 @@ public class SpecialCardAi {
         }
     }
     
-    // Yawgmoth's Will (can potentially be expanded for other broadly similar effects too)
+    // Yawgmoth's Will and other cards with similar effect, e.g. Magus of the Will
     public static class YawgmothsWill {
         public static boolean consider(final Player ai, final SpellAbility sa) {
             CardCollectionView cardsInGY = ai.getCardsIn(ZoneType.Graveyard);
             if (cardsInGY.size() == 0) {
+                return false;
+            } else if (ai.getGame().getPhaseHandler().getPlayerTurn() != ai) {
+                // The AI is not very good at deciding for what to viably do during the opp's turn when this
+                // comes from an instant speed effect (e.g. Magus of the Will)
                 return false;
             }
 
@@ -1287,8 +1292,8 @@ public class SpecialCardAi {
                     continue;
                 }
 
-                if (ComputerUtilAbility.getAbilitySourceName(ab).equals(ComputerUtilAbility.getAbilitySourceName(sa))
-                        || ab.hasParam("AINoRecursiveCheck")) {
+                if ((ComputerUtilAbility.getAbilitySourceName(ab).equals(ComputerUtilAbility.getAbilitySourceName(sa))
+                        && !(ab instanceof SpellPermanent)) || ab.hasParam("AINoRecursiveCheck")) {
                     // prevent infinitely recursing abilities that are susceptible to reentry
                     continue;
                 }

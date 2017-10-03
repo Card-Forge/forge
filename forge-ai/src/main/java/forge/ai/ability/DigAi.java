@@ -1,11 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilMana;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -46,6 +41,8 @@ public class DigAi extends SpellAbilityAi {
 
         if ("Never".equals(sa.getParam("AILogic"))) {
             return false;
+        } else if ("AtOppEndOfTurn".equals(sa.getParam("AILogic"))) {
+            return game.getPhaseHandler().getNextTurn() == ai && game.getPhaseHandler().is(PhaseType.END_OF_TURN);
         }
 
         // don't deck yourself

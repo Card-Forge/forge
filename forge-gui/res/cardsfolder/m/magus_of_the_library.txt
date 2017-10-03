@@ -4,6 +4,6 @@ Types:Creature Human Wizard
 PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
 A:AB$ Draw | Cost$ T | NumCards$ 1 | ActivationCardsInHand$ 7 | SpellDescription$ Draw a card. Activate this ability only if you have exactly seven cards in hand.
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card134741.jpg
 Oracle:{T}: Add {C} to your mana pool.\n{T}: Draw a card. Activate this ability only if you have exactly seven cards in hand.

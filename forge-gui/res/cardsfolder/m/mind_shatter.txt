@@ -3,6 +3,5 @@ ManaCost:X B B
 Types:Sorcery
 A:SP$ Discard | Cost$ X B B | ValidTgts$ Player | NumCards$ X | References$ X | Mode$ Random | SpellDescription$ Target player discards X cards at random.
 SVar:X:Count$xPaid
-SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_shatter.jpg
 Oracle:Target player discards X cards at random.
