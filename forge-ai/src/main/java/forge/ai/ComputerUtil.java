@@ -302,38 +302,39 @@ public class ComputerUtil {
             for (String prefGroup : prefGroups) {
                 final String[] prefValid = prefGroup.trim().split("\\$");
                 if (prefValid[0].equals(pref) && !prefValid[1].startsWith("Special:")) {
-                    final CardCollection prefList = CardLists.getValidCards(typeList, prefValid[1].split(","), activate.getController(), activate, null);
                     CardCollection overrideList = null;
-
                     if (activate.hasSVar("AIPreferenceOverride")) {
                         overrideList = CardLists.getValidCards(typeList, activate.getSVar("AIPreferenceOverride"), activate.getController(), activate, null);
                     }
 
-                    int threshold = getAIPreferenceParameter(activate, "CreatureEvalThreshold");
-                    int minNeeded = getAIPreferenceParameter(activate, "MinCreaturesBelowThreshold");
+                    for (String validItem : prefValid[1].split(",")) {
+                        final CardCollection prefList = CardLists.getValidCards(typeList, validItem, activate.getController(), activate, null);
+                        int threshold = getAIPreferenceParameter(activate, "CreatureEvalThreshold");
+                        int minNeeded = getAIPreferenceParameter(activate, "MinCreaturesBelowThreshold");
 
-                    if (threshold != -1) {
-                        List<Card> toRemove = Lists.newArrayList();
-                        for (Card c : prefList) {
-                            if (c.isCreature()) {
-                                if (ComputerUtilCard.isUselessCreature(ai, c) || ComputerUtilCard.evaluateCreature(c) <= threshold) {
-                                    continue;
-                                } else if (ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
-                                    continue;
+                        if (threshold != -1) {
+                            List<Card> toRemove = Lists.newArrayList();
+                            for (Card c : prefList) {
+                                if (c.isCreature()) {
+                                    if (ComputerUtilCard.isUselessCreature(ai, c) || ComputerUtilCard.evaluateCreature(c) <= threshold) {
+                                        continue;
+                                    } else if (ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
+                                        continue;
+                                    }
+                                    toRemove.add(c);
                                 }
-                                toRemove.add(c);
+                            }
+                            prefList.removeAll(toRemove);
+                        }
+                        if (minNeeded != -1) {
+                            if (prefList.size() < minNeeded) {
+                                return null;
                             }
                         }
-                        prefList.removeAll(toRemove);
-                    }
-                    if (minNeeded != -1) {
-                        if (prefList.size() < minNeeded) {
-                            return null;
-                        }
-                    }
 
-                    if (!prefList.isEmpty()) {
-                        return ComputerUtilCard.getWorstAI(overrideList == null ? prefList : overrideList);
+                        if (!prefList.isEmpty()) {
+                            return ComputerUtilCard.getWorstAI(overrideList == null ? prefList : overrideList);
+                        }
                     }
                 }
             }
