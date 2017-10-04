@@ -332,7 +332,7 @@ public class ComputerUtil {
                             }
                         }
 
-                        if (!prefList.isEmpty()) {
+                        if (!prefList.isEmpty() || (overrideList != null && !overrideList.isEmpty())) {
                             return ComputerUtilCard.getWorstAI(overrideList == null ? prefList : overrideList);
                         }
                     }
