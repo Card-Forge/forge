@@ -76,6 +76,8 @@ public class PumpAi extends PumpAiBase {
             }
         } else if ("Aristocrat".equals(aiLogic)) {
             return doAristocratLogic(sa, ai);
+        } else if (aiLogic.startsWith("AristocratCounters")) {
+            return doAristocratWithCountersLogic(sa, ai);
         }
 
         return super.checkAiLogic(ai, sa, aiLogic);
@@ -102,7 +104,7 @@ public class PumpAi extends PumpAiBase {
         }
         return super.checkPhaseRestrictions(ai, sa, ph);
     }
-    
+
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
         final Game game = ai.getGame();
@@ -123,7 +125,7 @@ public class PumpAi extends PumpAiBase {
         }
         return true;
     }
-    
+
     @Override
     protected boolean checkApiLogic(Player ai, SpellAbility sa) {
         final Game game = ai.getGame();
@@ -134,13 +136,15 @@ public class PumpAi extends PumpAiBase {
         final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
         final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
 
-        final String aiLogic = sa.getParam("AILogic");
+        final String aiLogic = sa.getParamOrDefault("AILogic", "");
 
         final boolean isFight = "Fight".equals(aiLogic) || "PowerDmg".equals(aiLogic);
         final boolean isBerserk = "Berserk".equals(aiLogic);
 
         if ("Pummeler".equals(aiLogic)) {
             return SpecialCardAi.ElectrostaticPummeler.consider(ai, sa);
+        } else if (aiLogic.startsWith("AristocratCounters")) {
+            return true; // the preconditions to this are already tested in checkAiLogic
         } else if ("MoveCounter".equals(aiLogic)) {
             final SpellAbility moveSA = sa.findSubAbilityByType(ApiType.MoveCounter);
 
@@ -150,7 +154,7 @@ public class PumpAi extends PumpAiBase {
 
             final String counterType = moveSA.getParam("CounterType");
             final CounterType cType = "Any".equals(counterType) ? null : CounterType.valueOf(counterType);
-            
+
             final PhaseHandler ph = game.getPhaseHandler();
             if (ph.inCombat() && ph.getPlayerTurn().isOpponentOf(ai)) {
                 CardCollection attr = ph.getCombat().getAttackers();
@@ -401,14 +405,14 @@ public class PumpAi extends PumpAiBase {
         return true;
     } // pumpPlayAI()
 
-    private boolean pumpTgtAI(final Player ai, final SpellAbility sa, final int defense, final int attack, final boolean mandatory, 
+    private boolean pumpTgtAI(final Player ai, final SpellAbility sa, final int defense, final int attack, final boolean mandatory,
     		boolean immediately) {
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & "))
                 : Lists.<String>newArrayList();
         final Game game = ai.getGame();
         final Card source = sa.getHostCard();
         final boolean isFight = "Fight".equals(sa.getParam("AILogic")) || "PowerDmg".equals(sa.getParam("AILogic"));
-        
+
         immediately |= ComputerUtil.playImmediately(ai, sa);
 
         if (!mandatory
@@ -515,13 +519,13 @@ public class PumpAi extends PumpAiBase {
             // Don't target cards that will die.
             list = ComputerUtil.getSafeTargets(ai, sa, list);
         }
-        
+
         if ("Snapcaster".equals(sa.getParam("AILogic"))) {
             if (!ComputerUtil.targetPlayableSpellCard(ai, list, sa, false)) {
                 return false;
             }
         }
-        
+
         while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
             Card t = null;
             // boolean goodt = false;
@@ -543,7 +547,7 @@ public class PumpAi extends PumpAiBase {
             t = ComputerUtilCard.getBestAI(list);
             //option to hold removal instead only applies for single targeted removal
             if (!immediately && tgt.getMaxTargets(source, sa) == 1 && sa.isCurse() && defense < 0) {
-                if (!ComputerUtilCard.useRemovalNow(sa, t, -defense, ZoneType.Graveyard) 
+                if (!ComputerUtilCard.useRemovalNow(sa, t, -defense, ZoneType.Graveyard)
                         && !ComputerUtil.activateForCost(sa, ai)) {
                     return false;
                 }
@@ -697,7 +701,7 @@ public class PumpAi extends PumpAiBase {
             }
             return false;
         }
-        
+
         int defense;
         if (numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             defense = Integer.parseInt(source.getSVar("PayX"));
@@ -754,6 +758,7 @@ public class PumpAi extends PumpAiBase {
         final int numOtherCreats = Math.max(0, ai.getCreaturesInPlay().size() - 1);
         final int powerBonus = sa.hasParam("NumAtt") ? AbilityUtils.calculateAmount(source, sa.getParam("NumAtt"), sa) : 0;
         final int toughnessBonus = sa.hasParam("NumDef") ? AbilityUtils.calculateAmount(source, sa.getParam("NumDef"), sa) : 0;
+        final boolean indestructible = sa.hasParam("KW") && sa.getParam("KW").contains("Indestructible");
         final int selfEval = ComputerUtilCard.evaluateCreature(source);
         final boolean isThreatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(source);
 
@@ -762,18 +767,18 @@ public class PumpAi extends PumpAiBase {
         }
 
         // Try to save the card from death by pumping it if it's threatened with a damage spell
-        if (isThreatened && toughnessBonus > 0) {
+        if (isThreatened && (toughnessBonus > 0 || indestructible)) {
             SpellAbility saTop = game.getStack().peekAbility();
 
             if (saTop.getApi() == ApiType.DealDamage || saTop.getApi() == ApiType.DamageAll) {
                 int dmg = AbilityUtils.calculateAmount(saTop.getHostCard(), saTop.getParam("NumDmg"), saTop) + source.getDamage();
-                final int numCreatsToSac = Math.max(1, (int)Math.ceil((dmg - source.getNetToughness() + 1) / toughnessBonus));
+                final int numCreatsToSac = indestructible ? 1 : Math.max(1, (int)Math.ceil((dmg - source.getNetToughness() + 1) / toughnessBonus));
 
                 if (numCreatsToSac > 1) { // probably not worth sacrificing too much
                     return false;
                 }
 
-                if (source.getNetToughness() <= dmg && source.getNetToughness() + toughnessBonus * numCreatsToSac > dmg) {
+                if (indestructible || (source.getNetToughness() <= dmg && source.getNetToughness() + toughnessBonus * numCreatsToSac > dmg)) {
                     final CardCollection sacFodder = CardLists.filter(ai.getCreaturesInPlay(),
                             new Predicate<Card>() {
                                 @Override
@@ -816,7 +821,7 @@ public class PumpAi extends PumpAiBase {
                     lethalDmg = Integer.MAX_VALUE; // won't be able to deal poison damage to kill the opponent
                 }
 
-                final int numCreatsToSac = (lethalDmg - source.getNetCombatDamage()) / powerBonus;
+                final int numCreatsToSac = indestructible ? 1 : (lethalDmg - source.getNetCombatDamage()) / powerBonus;
 
                 if (defTappedOut || numCreatsToSac < numOtherCreats / 2) {
                     return source.getNetCombatDamage() < lethalDmg
@@ -842,7 +847,7 @@ public class PumpAi extends PumpAiBase {
                 }
 
                 final int minDefT = Aggregates.min(combat.getBlockers(source), CardPredicates.Accessors.fnGetNetToughness);
-                final int DefP = Aggregates.sum(combat.getBlockers(source), CardPredicates.Accessors.fnGetNetPower);
+                final int DefP = indestructible ? 0 : Aggregates.sum(combat.getBlockers(source), CardPredicates.Accessors.fnGetNetPower);
 
                 // Make sure we don't over-sacrifice, only sac until we can survive and kill a creature
                 return source.getNetToughness() - source.getDamage() <= DefP || source.getNetCombatDamage() < minDefT;
@@ -864,4 +869,128 @@ public class PumpAi extends PumpAiBase {
         }
     }
 
+    public boolean doAristocratWithCountersLogic(final SpellAbility sa, final Player ai) {
+        // A logic for cards that say "Sacrifice a creature: put X +1/+1 counters on CARDNAME" (e.g. Falkenrath Aristocrat)
+        final Card source = sa.getHostCard();
+        final String logic = sa.getParam("AILogic"); // should not even get here unless there's an Aristocrats logic applied
+        final boolean isDeclareBlockers = ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS);
+
+        final int numOtherCreats = Math.max(0, ai.getCreaturesInPlay().size() - 1);
+        if (numOtherCreats == 0) {
+            // Cut short if there's nothing to sac at all
+            return false;
+        }
+
+        // Check if the standard Aristocrats logic applies first (if in the right conditions for it)
+        final boolean isThreatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(source);
+        if (isDeclareBlockers || isThreatened) {
+            if (doAristocratLogic(sa, ai)) {
+                return true;
+            }
+        }
+
+        // Check if anything is to be gained from the PutCounter subability
+        if (sa.getSubAbility() == null || sa.getSubAbility().getApi() != ApiType.PutCounter) {
+            // Shouldn't get here if there is no PutCounter subability (wrong AI logic specified?)
+            System.err.println("Warning: AILogic AristocratCounters was specified on " + source + ", but there was no PutCounter subability!");
+            return false;
+        }
+
+        final Game game = ai.getGame();
+        final Combat combat = game.getCombat();
+        final int selfEval = ComputerUtilCard.evaluateCreature(source);
+
+        String typeToGainCtr = "";
+        if (logic.contains(".")) {
+            typeToGainCtr = logic.substring(logic.indexOf(".") + 1);
+        }
+        CardCollection relevantCreats = typeToGainCtr.isEmpty() ? ai.getCreaturesInPlay()
+                : CardLists.filter(ai.getCreaturesInPlay(), CardPredicates.isType(typeToGainCtr));
+        relevantCreats.remove(source);
+        if (relevantCreats.isEmpty()) {
+            // No relevant creatures to sac
+            return false;
+        }
+
+        int numCtrs = AbilityUtils.calculateAmount(source, sa.getSubAbility().getParam("CounterNum"), sa.getSubAbility());
+
+        if (combat != null && combat.isAttacking(source) && isDeclareBlockers) {
+            if (combat.getBlockers(source).isEmpty()) {
+                // Unblocked. Check if we can deal lethal after receiving counters.
+                final Player defPlayer = combat.getDefendingPlayerRelatedTo(source);
+                final boolean defTappedOut = ComputerUtilMana.getAvailableManaEstimate(defPlayer) == 0;
+
+                final boolean isInfect = source.hasKeyword("Infect");
+                int lethalDmg = isInfect ? 10 - defPlayer.getPoisonCounters() : defPlayer.getLife();
+
+                if (isInfect && !combat.getDefenderByAttacker(source).canReceiveCounters(CounterType.POISON)) {
+                    lethalDmg = Integer.MAX_VALUE; // won't be able to deal poison damage to kill the opponent
+                }
+
+                // Check if there's anything that will die anyway that can be eaten to gain a perma-bonus
+                final CardCollection forcedSacTgts = CardLists.filter(relevantCreats,
+                        new Predicate<Card>() {
+                            @Override
+                            public boolean apply(Card card) {
+                                return ComputerUtil.predictThreatenedObjects(ai, null, true).contains(card)
+                                        || (combat.isAttacking(card) && combat.isBlocked(card) && ComputerUtilCombat.combatantWouldBeDestroyed(ai, card, combat));
+                            }
+                        }
+                );
+                if (!forcedSacTgts.isEmpty()) {
+                    return true;
+                }
+
+                final int numCreatsToSac = Math.max(0, (lethalDmg - source.getNetCombatDamage()) / numCtrs);
+
+                if (defTappedOut || numCreatsToSac < relevantCreats.size() / 2) {
+                    return source.getNetCombatDamage() < lethalDmg
+                            && source.getNetCombatDamage() + relevantCreats.size() * numCtrs >= lethalDmg;
+                } else {
+                    return false;
+                }
+            } else {
+                // We have already attacked. Thus, see if we have a creature to sac that is worse to lose
+                // than the card we attacked with. Since we're getting a permanent bonus, consider sacrificing
+                // things that are also threatened to be destroyed anyway.
+                final CardCollection sacTgts = CardLists.filter(relevantCreats,
+                        new Predicate<Card>() {
+                            @Override
+                            public boolean apply(Card card) {
+                                return ComputerUtilCard.isUselessCreature(ai, card)
+                                        || ComputerUtilCard.evaluateCreature(card) < selfEval
+                                        || ComputerUtil.predictThreatenedObjects(ai, null, true).contains(card);
+                            }
+                        }
+                );
+
+                if (sacTgts.isEmpty()) {
+                    return false;
+                }
+
+                final boolean sourceCantDie = ComputerUtilCombat.attackerCantBeDestroyedInCombat(ai, source);
+                final int minDefT = Aggregates.min(combat.getBlockers(source), CardPredicates.Accessors.fnGetNetToughness);
+                final int DefP = sourceCantDie ? 0 : Aggregates.sum(combat.getBlockers(source), CardPredicates.Accessors.fnGetNetPower);
+
+                // Make sure we don't over-sacrifice, only sac until we can survive and kill a creature
+                return source.getNetToughness() - source.getDamage() <= DefP || source.getNetCombatDamage() < minDefT;
+            }
+        } else {
+            // We can't deal lethal, check if there's any sac fodder than can be used for other circumstances
+            final boolean isBlocking = combat != null && combat.isBlocking(source);
+            final CardCollection sacFodder = CardLists.filter(relevantCreats,
+                    new Predicate<Card>() {
+                        @Override
+                        public boolean apply(Card card) {
+                            return ComputerUtilCard.isUselessCreature(ai, card)
+                                    || card.hasSVar("SacMe")
+                                    || (isBlocking && ComputerUtilCard.evaluateCreature(card) < selfEval)
+                                    || ComputerUtil.predictThreatenedObjects(ai, null, true).contains(card);
+                        }
+                    }
+            );
+
+            return !sacFodder.isEmpty();
+        }
+    }
 }
