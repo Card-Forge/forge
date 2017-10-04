@@ -1112,7 +1112,7 @@ public class ComputerUtil {
         final Card source = sa.getHostCard();
         final SpellAbility sub = sa.getSubAbility();
 
-        if ("AlwaysCastInMain1".equals(sa.getParam("AILogic"))) {
+        if (source != null && "ALWAYS".equals(source.getSVar("PlayMain1"))) {
             return true;
         }
 
