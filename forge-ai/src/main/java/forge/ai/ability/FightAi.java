@@ -1,14 +1,6 @@
 package forge.ai.ability;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -21,6 +13,10 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.util.MyRandom;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 public class FightAi extends SpellAbilityAi {
     @Override
@@ -101,6 +97,11 @@ public class FightAi extends SpellAbilityAi {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean chkAIDrawback(final SpellAbility sa, final Player aiPlayer) {
+        return checkApiLogic(aiPlayer, sa);
     }
 
     @Override

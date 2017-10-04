@@ -1,15 +1,7 @@
 package forge.ai.ability;
 
-import java.util.List;
-import java.util.Random;
-
 import com.google.common.collect.Lists;
-
-import forge.ai.AiController;
-import forge.ai.AiPlayDecision;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
@@ -17,6 +9,9 @@ import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.collect.FCollection;
+
+import java.util.List;
+import java.util.Random;
 
 public class CharmAi extends SpellAbilityAi {
     @Override
@@ -124,6 +119,8 @@ public class CharmAi extends SpellAbilityAi {
 
     private List<AbilitySub> chooseTriskaidekaphobia(List<AbilitySub> choices, final Player ai) {
         List<AbilitySub> chosenList = Lists.newArrayList();
+        if (choices == null || choices.isEmpty()) { return chosenList; }
+
         AbilitySub gain = choices.get(0);
         AbilitySub lose = choices.get(1);
         FCollection<Player> opponents = ai.getOpponents();
