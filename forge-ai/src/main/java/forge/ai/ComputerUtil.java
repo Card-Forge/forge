@@ -1112,6 +1112,10 @@ public class ComputerUtil {
         final Card source = sa.getHostCard();
         final SpellAbility sub = sa.getSubAbility();
 
+        if ("AlwaysCastInMain1".equals(sa.getParam("AILogic"))) {
+            return true;
+        }
+
         // Cipher spells
         if (sub != null) {
             final ApiType api = sub.getApi();

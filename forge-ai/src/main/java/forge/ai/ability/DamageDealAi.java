@@ -279,14 +279,37 @@ public class DamageDealAi extends DamageAiBase {
         }
         hPlay = CardLists.getTargetableCards(hPlay, sa);
 
-        final List<Card> killables = CardLists.filter(hPlay, new Predicate<Card>() {
+        List<Card> killables = CardLists.filter(hPlay, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return c.getSVar("Targeting").equals("Dies") 
-                        || (ComputerUtilCombat.getEnoughDamageToKill(c, d, source, false, noPrevention) <= d) && !ComputerUtil.canRegenerate(ai, c)
-                            && !(c.getSVar("SacMe").length() > 0);
+                return c.getSVar("Targeting").equals("Dies")
+                        || (ComputerUtilCombat.getEnoughDamageToKill(c, d, source, false, noPrevention) <= d)
+                        && !ComputerUtil.canRegenerate(ai, c)
+                        && !(c.getSVar("SacMe").length() > 0);
             }
         });
+
+        if (sa.hasParam("AITgts")) {
+            if (sa.getParam("AITgts").equals("BetterThanSource")) {
+                int value = ComputerUtilCard.evaluateCreature(source);
+                if (source.isEnchanted()) {
+                    for (Card enc : source.getEnchantedBy(false)) {
+                        if (enc.getController().equals(ai)) {
+                            value += 100; // is 100 per AI's own aura enough?
+                        }
+                    }
+                }
+                final int totalValue = value;
+                killables = CardLists.filter(killables, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        return ComputerUtilCard.evaluateCreature(c) > totalValue + 30;
+                    }
+                });
+            } else {
+                killables = CardLists.getValidCards(killables, sa.getParam("AITgts"), sa.getActivatingPlayer(), source);
+            }
+        }
 
         Card targetCard = null;
         if (pl.isOpponentOf(ai) && activator.equals(ai) && !killables.isEmpty()) {

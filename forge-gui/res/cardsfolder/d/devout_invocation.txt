@@ -7,6 +7,7 @@ SVar:DBToken:DB$ Token | TokenAmount$ Y | TokenName$ Angel | TokenTypes$ Creatur
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:Y:Remembered$Amount
-SVar:RemAIDeck:True
+SVar:NeedsToPlay:Creature.YouCtrl+inZoneBattlefield+untapped
+SVar:PlayMain1:ALWAYS
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devout_invocation.jpg
 Oracle:Tap any number of untapped creatures you control. Create a 4/4 white Angel creature token with flying for each creature tapped this way.

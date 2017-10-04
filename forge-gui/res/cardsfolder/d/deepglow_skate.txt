@@ -5,6 +5,5 @@ PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDoubleCounters | TriggerDescription$ When CARDNAME enters the battlefield, double the number of each kind of counter on any number of target permanents.
 SVar:TrigDoubleCounters:DB$ MultiplyCounter | ValidTgts$ Permanent | TargetMin$ 0 | TargetMax$ X | Multiplier$ 2 | References$ X
 SVar:X:Count$Valid Permanent
-SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deepglow_skate.jpg
 Oracle:When Deepglow Skate enters the battlefield, double the number of each kind of counter on any number of target permanents.
