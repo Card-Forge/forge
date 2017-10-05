@@ -4,6 +4,6 @@ Types:Creature Dragon
 PT:4/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 4/4 red Dragon creature token with flying.
-SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Dragon | TokenTypes$ Creature,Dragon | TokenOwner$ You | TokenColors$ Red | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Dragon | TokenTypes$ Creature,Dragon | TokenOwner$ You | TokenColors$ Red | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/broodmate_dragon.jpg
 Oracle:Flying\nWhen Broodmate Dragon enters the battlefield, create a 4/4 red Dragon creature token with flying.
