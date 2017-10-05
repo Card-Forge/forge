@@ -669,7 +669,7 @@ public class SpecialCardAi {
         }
     }
 
-    // Living Death (and possibly other similar cards using AILogic LivingDeath)
+    // Living Death (and other similar cards using AILogic LivingDeath or AILogic ReanimateAll)
     public static class LivingDeath {
         public static boolean consider(final Player ai, final SpellAbility sa) {
             int aiBattlefieldPower = 0, aiGraveyardPower = 0;

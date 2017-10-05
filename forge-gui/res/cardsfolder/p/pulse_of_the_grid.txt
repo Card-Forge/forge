@@ -6,6 +6,5 @@ SVar:DBDiscard:DB$Discard | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ TrigRetu
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Hand | ConditionCheckSVar$ X | ConditionSVarCompare$ GTY | References$ X,Y
 SVar:Y:Count$CardsInYourHand
 SVar:X:PlayerCountOpponents$HighestCardsInHand
-SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pulse_of_the_grid.jpg
 Oracle:Draw two cards, then discard a card. Then if an opponent has more cards in hand than you, return Pulse of the Grid to its owner's hand.

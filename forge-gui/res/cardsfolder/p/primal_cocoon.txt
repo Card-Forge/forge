@@ -4,10 +4,10 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on enchanted creature.
-SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Enchanted | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Enchanted | CounterType$ P1P1 | CounterNum$ 1
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigSac | TriggerDescription$ When enchanted creature attacks or blocks, sacrifice Primal Cocoon.
 T:Mode$ Blocks | ValidCard$ Card.AttachedBy | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When enchanted creature attacks or blocks, sacrifice Primal Cocoon.
-SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_cocoon.jpg
 Oracle:Enchant creature\nAt the beginning of your upkeep, put a +1/+1 counter on enchanted creature.\nWhen enchanted creature attacks or blocks, sacrifice Primal Cocoon.

@@ -3,6 +3,6 @@ ManaCost:1 B G
 Types:Enchantment
 A:AB$ DestroyAll | Cost$ X Sac<1/CARDNAME> | ValidCards$ Artifact.cmcLEX,Creature.cmcLEX,Enchantment.cmcLEX | References$ X | SpellDescription$ Destroy each artifact, creature, and enchantment with converted mana cost X or less.
 SVar:X:Count$xPaid
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pernicious_deed.jpg
 Oracle:{X}, Sacrifice Pernicious Deed: Destroy each artifact, creature, and enchantment with converted mana cost X or less.

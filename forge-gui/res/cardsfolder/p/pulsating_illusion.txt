@@ -4,6 +4,7 @@ Types:Creature Illusion
 PT:0/1
 K:Flying
 A:AB$ Pump | Cost$ Discard<1/Card> | NumAtt$ +4 | NumDef$ +4 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +4/+4 until end of turn. Activate this ability only once each turn.
-SVar:RemAIDeck:True
+SVar:AIPreference:DiscardCost$Card
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pulsating_illusion.jpg
 Oracle:Flying\nDiscard a card: Pulsating Illusion gets +4/+4 until end of turn. Activate this ability only once each turn.

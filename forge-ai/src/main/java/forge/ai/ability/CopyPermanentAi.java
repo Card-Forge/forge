@@ -10,6 +10,7 @@ import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -24,12 +25,19 @@ public class CopyPermanentAi extends SpellAbilityAi {
         // Card source = sa.getHostCard();
         // TODO - I'm sure someone can do this AI better
 
+        PhaseHandler ph = aiPlayer.getGame().getPhaseHandler();
+        String aiLogic = sa.getParamOrDefault("AILogic", "");
+
         if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;
         }
 
-        if ("MimicVat".equals(sa.getParam("AILogic"))) {
+        if ("MimicVat".equals(aiLogic)) {
             return SpecialCardAi.MimicVat.considerCopy(aiPlayer, sa);
+        } else if ("AtEOT".equals(aiLogic)) {
+            return ph.is(PhaseType.END_OF_TURN);
+        } else if ("AtOppEOT".equals(aiLogic)) {
+            return ph.is(PhaseType.END_OF_TURN) && ph.getPlayerTurn() != aiPlayer;
         }
 
         if (sa.hasParam("AtEOT") && !aiPlayer.getGame().getPhaseHandler().is(PhaseType.MAIN1)) {
