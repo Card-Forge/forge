@@ -554,7 +554,33 @@ public class PlayerControllerAi extends PlayerController {
     public boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice, Boolean defaultVal) {
         switch(kindOfChoice) {
             case TapOrUntap: return true;
-            case UntapOrLeaveTapped: return defaultVal != null && defaultVal.booleanValue();
+            case UntapOrLeaveTapped:
+                Card source = sa.getHostCard();
+                if (source != null && source.hasSVar("AIUntapPreference")) {
+                    switch (source.getSVar("AIUntapPreference")) {
+                        case "Always":
+                            return true;
+                        case "Never":
+                            return false;
+                        case "BetterTgtThanRemembered":
+                            if (source.getRememberedCount() > 0) {
+                                Card rem = (Card) source.getFirstRemembered();
+                                if (!rem.getZone().is(ZoneType.Battlefield)) {
+                                    return true;
+                                }
+                                for (Card c : source.getController().getCreaturesInPlay()) {
+                                    if (c != rem && ComputerUtilCard.evaluateCreature(c) > ComputerUtilCard.evaluateCreature(rem) + 30) {
+                                        return true;
+                                    }
+                                }
+                                return false;
+                            }
+                        default:
+                            // The default is to always untap
+                            return true;
+                    }
+                }
+                return defaultVal != null && defaultVal.booleanValue();
             case UntapTimeVault: return false; // TODO Should AI skip his turn for time vault?
             case LeftOrRight: return brains.chooseDirection(sa);
             default:

@@ -21,6 +21,7 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import org.apache.commons.lang3.StringUtils;
@@ -337,6 +338,20 @@ public class PumpAi extends PumpAiBase {
             attack = AbilityUtils.calculateAmount(sa.getHostCard(), numAttack, sa);
         }
 
+        if ("ContinuousBonus".equals(aiLogic)) {
+            // P/T bonus in a continuous static ability
+            for (StaticAbility stAb : source.getStaticAbilities()) {
+                if ("Continuous".equals(stAb.getParam("Mode"))) {
+                    if (stAb.hasParam("AddPower")) {
+                        attack += AbilityUtils.calculateAmount(source, stAb.getParam("AddPower"), stAb);
+                    }
+                    if (stAb.hasParam("AddToughness")) {
+                        defense += AbilityUtils.calculateAmount(source, stAb.getParam("AddToughness"), stAb);
+                    }
+                }
+            }
+        }
+
         if ((numDefense.contains("X") && defense == 0) || (numAttack.contains("X") && attack == 0 && !isBerserk)) {
             return false;
         }
@@ -436,7 +451,7 @@ public class PumpAi extends PumpAiBase {
 
         CardCollection list;
         if (sa.hasParam("AILogic")) {
-            if (sa.getParam("AILogic").equals("HighestPower")) {
+            if (sa.getParam("AILogic").equals("HighestPower") || sa.getParam("AILogic").equals("ContinuousBonus")) {
                 list = CardLists.getValidCards(CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES), tgt.getValidTgts(), ai, source, sa);
                 list = CardLists.getTargetableCards(list, sa);
                 CardLists.sortByPowerDesc(list);
