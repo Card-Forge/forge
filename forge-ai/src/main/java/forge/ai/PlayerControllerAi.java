@@ -576,8 +576,7 @@ public class PlayerControllerAi extends PlayerController {
                                 return false;
                             }
                         default:
-                            // The default is to always untap
-                            return true;
+                            break;
                     }
                 }
                 return defaultVal != null && defaultVal.booleanValue();
