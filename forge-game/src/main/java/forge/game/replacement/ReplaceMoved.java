@@ -94,6 +94,15 @@ public class ReplaceMoved extends ReplacementEffect {
                 return false;
             }
         }
+        
+        if (hasParam("ValidStackSa")) {
+            if (!runParams.containsKey("StackSa")) {
+                return false;
+            }
+            if (!matchesValid(runParams.get("StackSa"), getParam("ValidStackSa").split(","), getHostCard())) {
+                return false;
+            }
+        }
 
         if (hasParam("Cause")) {
             if (!runParams.containsKey("Cause")) {
