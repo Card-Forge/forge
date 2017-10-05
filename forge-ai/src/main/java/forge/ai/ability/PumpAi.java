@@ -348,6 +348,9 @@ public class PumpAi extends PumpAiBase {
                     if (stAb.hasParam("AddToughness")) {
                         defense += AbilityUtils.calculateAmount(source, stAb.getParam("AddToughness"), stAb);
                     }
+                    if (stAb.hasParam("AddKeyword")) {
+                        keywords.addAll(Lists.newArrayList(stAb.getParam("AddKeyword").split(" & ")));
+                    }
                 }
             }
         }

@@ -3,11 +3,11 @@ ManaCost:2 U
 Types:Creature Human Wizard
 PT:2/1
 K:You may choose not to untap CARDNAME during your untap step.
-A:AB$ Pump | Cost$ 2 U T | ValidTgts$ Creature.Wizard | TgtPrompt$ Select target Wizard creature | RememberTargets$ True | SpellDescription$ Target Wizard creature gets +2/+2 and has shroud for as long as CARDNAME remains tapped. (It can't be the target of spells or abilities.) | StackDescription$ SpellDescription
+A:AB$ Pump | Cost$ 2 U T | ValidTgts$ Creature.Wizard | TgtPrompt$ Select target Wizard creature | RememberTargets$ True | AILogic$ ContinuousBonus | SpellDescription$ Target Wizard creature gets +2/+2 and has shroud for as long as CARDNAME remains tapped. (It can't be the target of spells or abilities.) | StackDescription$ SpellDescription
 S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Shroud
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ ClearRemembered | Static$ True
 SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+DeckNeeds:Type$Wizard
+SVar:AIUntapPreference:BetterTgtThanRemembered
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghosthelm_courier.jpg
 Oracle:You may choose not to untap Ghosthelm Courier during your untap step.\n{2}{U}, {T}: Target Wizard creature gets +2/+2 and has shroud for as long as Ghosthelm Courier remains tapped. (It can't be the target of spells or abilities.)
