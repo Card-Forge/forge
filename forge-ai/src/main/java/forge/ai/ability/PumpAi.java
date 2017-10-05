@@ -458,6 +458,17 @@ public class PumpAi extends PumpAiBase {
                 list = CardLists.getValidCards(CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES), tgt.getValidTgts(), ai, source, sa);
                 list = CardLists.getTargetableCards(list, sa);
                 CardLists.sortByPowerDesc(list);
+
+                // Try not to kill own creatures with this pump
+                CardCollection canDieToPump = new CardCollection();
+                for (Card c : list) {
+                    if (c.isCreature() && c.getController() == ai
+                            && c.getNetToughness() - c.getTempToughnessBoost() + defense <= 0) {
+                        canDieToPump.add(c);
+                    }
+                }
+                list.removeAll(canDieToPump);
+
                 if (!list.isEmpty()) {
                     sa.getTargets().add(list.get(0));
                     return true;
