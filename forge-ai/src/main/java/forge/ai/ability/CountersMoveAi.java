@@ -1,21 +1,13 @@
 package forge.ai.ability;
 
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -23,6 +15,9 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.collect.FCollection;
+
+import java.util.List;
+import java.util.Map;
 
 public class CountersMoveAi extends SpellAbilityAi {
     @Override
@@ -109,6 +104,12 @@ public class CountersMoveAi extends SpellAbilityAi {
             if (!ph.getNextTurn().equals(ai) || ph.getPhase().isBefore(PhaseType.END_OF_TURN)) {
                 return false;
             }
+            // Make sure that removing the last counter doesn't kill the creature
+            if ("Self".equals(sa.getParam("Source"))) {
+                if (host != null && host.getNetToughness() - 1 <= 0) {
+                    return false;
+                }
+            }
         }
         return true;
     }
@@ -187,6 +188,13 @@ public class CountersMoveAi extends SpellAbilityAi {
 
                 if (newEval < oldEval) {
                     return false;
+                }
+
+                // check for some specific AI preferences
+                if (src.hasStartOfKeyword("Graft") && "DontMoveCounterIfLethal".equals(src.getSVar("AIGraftPreference"))) {
+                    if (cType == CounterType.P1P1 && src.getNetToughness() - src.getTempToughnessBoost() - 1 <= 0) {
+                        return false;
+                    }
                 }
             }
             // no target

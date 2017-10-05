@@ -549,6 +549,17 @@ public class PumpAi extends PumpAiBase {
             list = ComputerUtil.getSafeTargets(ai, sa, list);
         }
 
+        if ("BetterCreatureThanSource".equals(sa.getParam("AILogic"))) {
+            // Don't target cards that are not better in value than the targeting card
+            final int sourceValue = ComputerUtilCard.evaluateCreature(source);
+            list = CardLists.filter(list, new Predicate<Card>() {
+                @Override
+                public boolean apply(Card card) {
+                    return card.isCreature() && ComputerUtilCard.evaluateCreature(card) > sourceValue + 30;
+                }
+            });
+        }
+
         if ("Snapcaster".equals(sa.getParam("AILogic"))) {
             if (!ComputerUtil.targetPlayableSpellCard(ai, list, sa, false)) {
                 return false;

@@ -5,6 +5,7 @@ A:SP$ Charm | Cost$ W | Choices$ DetroyAura,PumpSoldier,PumpVigilance | CharmNum
 SVar:DetroyAura:DB$ Destroy | Cost$ 0 | ValidTgts$ Aura.AttachedTo Creature | TgtPrompt$ Select target Aura attached to a creature | SpellDescription$ Destroy target Aura attached to a creature.
 SVar:PumpSoldier:DB$ Pump | Cost$ 0 | NumAtt$ +2 | NumDef$ +2 | ValidTgts$ Creature.Soldier | TgtPrompt$ Select target Soldier creature | SpellDescription$ Target Soldier creature gets +2/+2 until end of turn.
 SVar:PumpVigilance:DB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | KW$ Vigilance | SpellDescription$ Creatures you control gain vigilance until end of turn.
-SVar:RemAIDeck:True
+DeckHints:Type$Soldier
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/piety_charm.jpg
 Oracle:Choose one —\n• Destroy target Aura attached to a creature.\n• Target Soldier creature gets +2/+2 until end of turn.\n• Creatures you control gain vigilance until end of turn.

@@ -11,6 +11,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -66,6 +67,12 @@ public class CounterAi extends SpellAbilityAi {
 
             if (sa.hasParam("CounterNoManaSpell") && topSA.getTotalManaSpent() > 0) {
                 return false;
+            }
+
+            if ("OppDiscardsHand".equals(sa.getParam("AILogic"))) {
+                if (topSA.getActivatingPlayer().getCardsIn(ZoneType.Hand).size() < 2) {
+                    return false;
+                }
             }
 
             sa.resetTargets();

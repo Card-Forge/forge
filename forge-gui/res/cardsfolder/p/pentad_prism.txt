@@ -3,6 +3,7 @@ ManaCost:2
 Types:Artifact
 K:Sunburst
 A:AB$ Mana | Cost$ SubCounter<1/CHARGE> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
+#TODO: The AI will use this, but only once a turn, it seems. May be improved before RemAIDeck is removed. Also, Sunburst logic could be improved at the same time a bit.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pentad_prism.jpg
 Oracle:Sunburst (This enters the battlefield with a charge counter on it for each color of mana spent to cast it.)\nRemove a charge counter from Pentad Prism: Add one mana of any color to your mana pool.

@@ -4,6 +4,8 @@ Types:Sorcery
 A:SP$ Vote | Cost$ 3 U | Defined$ Player | VoteTime$ DBAddTurn | VoteKnowledge$ DBDrawThree | Tied$ DBDrawThree | VoteType$ Time,Knowledge | AILogic$ Always | SpellDescription$ Will of the Council — Starting with you, each player votes for time or knowledge. If time gets more votes, take an extra turn after this one. If knowledge gets more votes or the vote is tied, draw three cards.
 SVar:DBAddTurn:DB$ AddTurn | NumTurns$ 1 | Defined$ You
 SVar:DBDrawThree:DB$ Draw | Defined$ You | NumCards$ 3
-SVar:RemAIDeck:True
+SVar:NeedsToPlayVar:Z LE6
+SVar:Z:Count$InYourHand
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plea_for_power.jpg
 Oracle:Will of the council — Starting with you, each player votes for time or knowledge. If time gets more votes, take an extra turn after this one. If knowledge gets more votes or the vote is tied, draw three cards.

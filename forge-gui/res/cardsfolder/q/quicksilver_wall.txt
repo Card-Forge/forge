@@ -4,6 +4,5 @@ Types:Creature Wall
 PT:1/6
 A:AB$ ChangeZone | Cost$ 4 | Origin$ Battlefield | Destination$ Hand | AnyPlayer$ True | SpellDescription$ Return CARDNAME to its owner's hand. Any player may activate this ability.
 K:Defender
-SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quicksilver_wall.jpg
 Oracle:Defender (This creature can't attack.)\n{4}: Return Quicksilver Wall to its owner's hand. Any player may activate this ability.

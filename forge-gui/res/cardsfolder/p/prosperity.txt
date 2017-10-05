@@ -3,6 +3,6 @@ ManaCost:X U
 Types:Sorcery
 A:SP$ Draw | Cost$ X U | Defined$ Player | NumCards$ X | References$ X | SpellDescription$ Each player draws X cards.
 SVar:X:Count$xPaid
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prosperity.jpg
 Oracle:Each player draws X cards.
