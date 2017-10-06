@@ -6,6 +6,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
 import forge.game.cost.CostTap;
@@ -183,7 +184,7 @@ public class UntapAi extends SpellAbilityAi {
             Card choice = null;
 
             if (untapList.isEmpty()) {
-                // Animate untapped lands (Koth of the Hamer)
+                // Animate untapped lands (Koth of the Hammer)
                 if (sa.getSubAbility() != null && sa.getSubAbility().getApi() == ApiType.Animate && !list.isEmpty()
                         && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                     choice = ComputerUtilCard.getWorstPermanentAI(list, false, false, false, false);
@@ -195,7 +196,7 @@ public class UntapAi extends SpellAbilityAi {
                     break;
                 }
             } else {
-                choice = detectPriorityUntapTargets(untapList); // untap Time Vault or another broken card? - Yes please!
+                choice = detectPriorityUntapTargets(untapList);
 
                 if (choice == null) {
                     if (CardLists.getNotType(untapList, "Creature").isEmpty()) {
@@ -328,6 +329,7 @@ public class UntapAi extends SpellAbilityAi {
     }
 
     private static Card detectPriorityUntapTargets(final List<Card> untapList) {
+        // untap Time Vault or another broken card? - Yes please!
         String[] priorityList = {"Time Vault", "Mana Vault", "Icy Manipulator", "Steel Overseer", "Grindclock", "Prototype Portal"};
         for (String name : priorityList) {
             for (Card c : untapList) {
@@ -336,6 +338,13 @@ public class UntapAi extends SpellAbilityAi {
                 }
             }
         }
+
+        // See if there's anything to untap that is tapped and that doesn't untap during the next untap step by itself
+        CardCollection noAutoUntap = CardLists.filter(untapList, CardPredicates.hasKeyword("CARDNAME doesn't untap during your untap step."));
+        if (!noAutoUntap.isEmpty()) {
+            return ComputerUtilCard.getBestAI(noAutoUntap);
+        }
+
         return null;
     }
 }

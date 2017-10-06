@@ -3,8 +3,12 @@ ManaCost:1 R
 Types:Creature Goblin
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, search your library for any number of Goblin cards and reveal those cards. Shuffle your library, then put them on top of it in any order.
-SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | ChangeNum$ X | ChangeType$ Goblin | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | References$ X
+SVar:TrigChangeZone:DB$ ChangeZone | ChangeNum$ X | ChangeType$ Goblin | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | References$ X
 SVar:X:Count$InYourLibrary.Goblin
+DeckNeeds:Type$Goblin
+#TODO: The AI generally is able to use this card, but will basically place all of its goblins on top of the library in no specific order, which is not very smart. Might need some improvement before RemAIDeck is removed. Currently adding a restriction to at least only play it if the AI has enough lands out on the battlefield already.
 SVar:RemAIDeck:True
+SVar:NeedsToPlayVar:Z GE4
+SVar:Z:Count$Valid Land.YouCtrl+inZoneBattlefield
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_recruiter.jpg
 Oracle:When Goblin Recruiter enters the battlefield, search your library for any number of Goblin cards and reveal those cards. Shuffle your library, then put them on top of it in any order.

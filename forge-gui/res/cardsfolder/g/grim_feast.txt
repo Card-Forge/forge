@@ -3,9 +3,10 @@ ManaCost:1 B G
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 1 damage to you.
 T:Mode$ ChangesZone | ValidCard$ Creature.OppOwn | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature is put into an opponent's graveyard from the battlefield, you gain life equal to its toughness.
-SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 1
-SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
+SVar:TrigDamage:DB$ DealDamage | Defined$ You | NumDmg$ 1
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggeredCard$CardToughness
-SVar:RemAIDeck:True
+SVar:AICastPreference:MaxControlled$ 1 | NeverCastIfLifeBelow$ 5
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grim_feast.jpg
 Oracle:At the beginning of your upkeep, Grim Feast deals 1 damage to you.\nWhenever a creature is put into an opponent's graveyard from the battlefield, you gain life equal to its toughness.

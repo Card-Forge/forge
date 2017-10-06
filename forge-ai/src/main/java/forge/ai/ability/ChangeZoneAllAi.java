@@ -10,6 +10,7 @@ import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -82,13 +83,36 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 }
             }
             return false;
+        } else if ("ManifestCreatsFromGraveyard".equals(sa.getParam("AILogic"))) {
+            PlayerCollection players = new PlayerCollection();
+            players.addAll(ai.getOpponents());
+            players.add(ai);
+            int maxSize = 1;
+            for (Player player : players) {
+                Player bestTgt = null;
+                if (player.canBeTargetedBy(sa)) {
+                    CardCollectionView cardsGY = CardLists.filter(player.getCardsIn(ZoneType.Graveyard),
+                            CardPredicates.Presets.CREATURES);
+                    if (cardsGY.size() > maxSize) {
+                        maxSize = cardsGY.size();
+                        bestTgt = player;
+                    }
+                }
+
+                if (bestTgt != null) {
+                    sa.resetTargets();
+                    sa.getTargets().add(bestTgt);
+                    return true;
+                }
+            }
+            return false;
         }
 
         // TODO improve restrictions on when the AI would want to use this
         // spBounceAll has some AI we can compare to.
         if (origin.equals(ZoneType.Hand) || origin.equals(ZoneType.Library)) {
             if (!sa.usesTargeting()) {
-                // TODO: improve logic for non-targeted SAs of this type (most are currently RemAIDeck, e.g. Memory Jar, Timetwister)
+                // TODO: improve logic for non-targeted SAs of this type (most are currently RemAIDeck, e.g. Memory Jar)
                 return true;
             } else {
                 // search targetable Opponents
