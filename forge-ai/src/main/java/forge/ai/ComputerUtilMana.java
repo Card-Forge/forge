@@ -513,6 +513,21 @@ public class ComputerUtilMana {
 //                    extraMana, sa.getHostCard(), sa.toUnsuppressedString(), StringUtils.join(paymentPlan, "\n\t"));
 //        }
 
+        // See if it's possible to pay with something that was left in the mana pool in corner cases,
+        // e.g. Gemstone Caverns with a Luck counter on it generating colored mana (which fails to be
+        // processed correctly on a per-ability basis, leaving floating mana in the pool)
+        if (!cost.isPaid() && !manapool.isEmpty()) {
+            for (ManaCostShard shard : cost.getDistinctShards()) {
+                for (byte color : MagicColor.WUBRGC) {
+                    manapool.tryPayCostWithColor(color, sa, cost);
+                }
+                if (cost.isPaid()) {
+                    break;
+                }
+            }
+        }
+
+        // The cost is still unpaid, so refund the mana and report
         if (!cost.isPaid()) {
             refundMana(manaSpentToPay, ai, sa);
             if (test) {
