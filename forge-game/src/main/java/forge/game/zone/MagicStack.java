@@ -581,13 +581,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (source.isCopiedSpell() || sa.isAbility()) {
             // do nothing
         }
-        else if (sa.isFlashBackAbility()) {
-            game.getAction().exile(source, sa, Maps.newHashMap());
-            sa.setFlashBackAbility(false);
-        }
-        else if (sa.isAftermath()) {
-            game.getAction().exile(source, sa, Maps.newHashMap());
-        }
         else if ((source.isInstant() || source.isSorcery() || fizzle) &&
                 source.isInZone(ZoneType.Stack)) {
             // If Spell and still on the Stack then let it goto the graveyard or replace its own movement

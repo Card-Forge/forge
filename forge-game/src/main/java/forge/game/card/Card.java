@@ -1998,23 +1998,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             } else if (keyword.equals("You may cast CARDNAME as though it had flash if you pay {2} more to cast it.")) {
                 sb.append(keyword).append("\r\n");
-            } else if (keyword.startsWith("Flashback")) {
-                sb.append("Flashback");
-                if (keyword.contains(" ")) {
-                    final Cost fbCost = new Cost(keyword.substring(10), true);
-                    if (!fbCost.isOnlyManaCost()) {
-                        sb.append("—");
-                    }
-                    if (fbCost.isOnlyManaCost()) {
-                        sb.append(" ");
-                    }
-                    sb.append(fbCost.toString()).delete(sb.length() - 2, sb.length());
-                    if (!fbCost.isOnlyManaCost()) {
-                        sb.append(".");
-                    }
-                    sb.append(" (You may cast this card from your graveyard for its flashback cost. Then exile it.)");
-                }
-                sb.append("\r\n");
             } else if (keyword.startsWith("Splice")) {
                 final String[] n = keyword.split(":");
                 final Cost cost = new Cost(n[2], false);

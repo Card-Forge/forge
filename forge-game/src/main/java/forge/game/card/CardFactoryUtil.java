@@ -2008,6 +2008,9 @@ public class CardFactoryUtil {
             else if (keyword.startsWith("Replicate")) {
                 card.getFirstSpellAbility().addAnnounceVar("Replicate");
             }
+            else if (keyword.startsWith("Flashback")) {
+                addReplacementEffect(keyword, card, null);
+            }
             else if (keyword.startsWith("Fuse")) {
                 card.getState(CardStateName.Original).addNonManaAbility(AbilityFactory.buildFusedAbility(card));
             }
@@ -2167,6 +2170,7 @@ public class CardFactoryUtil {
             }
             else if (keyword.equals("Aftermath")) {
                 addSpellAbility(keyword, card, null);
+                addReplacementEffect(keyword, card, null);
             }
             else if (keyword.equals("Epic")) {
                 addSpellAbility(keyword, card, null);
@@ -3386,7 +3390,38 @@ public class CardFactoryUtil {
     public static void addReplacementEffect(final String keyword, final Card card, final KeywordsChange kws) {
 
         final boolean intrinsic = kws == null;
-        if (keyword.startsWith("Bloodthirst")) {
+        if (keyword.equals("Aftermath")) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
+            sb.append("| ValidStackSa$ Spell.Aftermath | Description$ Aftermath");
+
+            sb.append(" (");
+            sb.append(Keyword.getInstance(keyword).getReminderText());
+            sb.append(")");
+
+            String repeffstr = sb.toString();
+
+            String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile";
+
+            SpellAbility saExile = AbilityFactory.getAbility(abExile, card);
+
+            if (!intrinsic) {
+                saExile.setIntrinsic(false);
+            }
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
+            re.setLayer(ReplacementLayer.Other);
+
+            re.setOverridingAbility(saExile);
+
+            // Aftermath only on Rightsplit
+            // doesn't make a copy with it
+            card.getState(CardStateName.RightSplit).addReplacementEffect(re);
+
+            if (!intrinsic) {
+                kws.addReplacement(re);
+            }
+        } else if (keyword.startsWith("Bloodthirst")) {
             final String numCounters = keyword.split(":")[1];
 
             String desc;
@@ -3410,7 +3445,7 @@ public class CardFactoryUtil {
 
             StringBuilder sb = new StringBuilder();
             sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | Destination$ Graveyard | Fizzle$ False ");
-            sb.append("ValidStackSa$ Spell.Buyback  | Description$ Buyback");
+            sb.append("| ValidStackSa$ Spell.Buyback | Description$ Buyback");
 
             sb.append( cost.isOnlyManaCost() ? " " : "—");
 
@@ -3490,6 +3525,46 @@ public class CardFactoryUtil {
 
             if (!intrinsic) {
                 kws.addReplacement(re);
+            }
+        } else if (keyword.startsWith("Flashback")) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
+            sb.append("| ValidStackSa$ Spell.Flashback | Description$ Flashback");
+
+            if (keyword.contains(" ")) {
+                final Cost cost = new Cost(keyword.substring(10), false);
+                sb.append( cost.isOnlyManaCost() ? " " : "—");
+    
+                sb.append(cost.toSimpleString());
+    
+                if (!cost.isOnlyManaCost()) {
+                    sb.append(".");
+                }
+            }
+
+            sb.append(" (");
+            sb.append(Keyword.getInstance(keyword).getReminderText());
+            sb.append(")");
+
+            String repeffstr = sb.toString();
+
+            String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile";
+
+            SpellAbility saExile = AbilityFactory.getAbility(abExile, card);
+
+            if (!intrinsic) {
+                saExile.setIntrinsic(false);
+            }
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
+            re.setLayer(ReplacementLayer.Other);
+
+            re.setOverridingAbility(saExile);
+
+            ReplacementEffect cardre = card.addReplacementEffect(re);
+
+            if (!intrinsic) {
+                kws.addReplacement(cardre);
             }
         } else if (keyword.startsWith("Graft")) {
             final String[] k = keyword.split(":");
