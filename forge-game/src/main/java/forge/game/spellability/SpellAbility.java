@@ -541,7 +541,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public SpellAbility getTriggeringAbility() {
-        return this.isTrigger() ? this : this.getRootAbility();
+        SpellAbility sa = this;
+        while (sa.getParent() != null && !sa.isTrigger()) {
+            sa = sa.getParent();
+        }
+        return sa;
     }
 
     public Map<String, Object> getTriggeringObjects() {
