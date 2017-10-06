@@ -4,7 +4,7 @@ Types:Creature Elf Knight
 PT:4/4
 K:First Strike
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a green or white creature you control to its owner's hand.
-SVar:TrigChange:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 0 | Hidden$ True | Mandatory$ True | ChangeType$ Creature.White+YouCtrl,Creature.Green+YouCtrl
-SVar:NeedsToPlay:Creature.White+YouCtrl+cmcLE3+inZoneBattlefield,Creature.Green+YouCtrl+cmcLE3+inZoneBattlefield
+SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.White+YouCtrl,Creature.Green+YouCtrl | AILogic$ NeverBounceItself
+SVar:NeedsToPlay:Creature.White+YouCtrl+cmcLE4+inZoneBattlefield,Creature.Green+YouCtrl+cmcLE4+inZoneBattlefield
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steel_leaf_paladin.jpg
 Oracle:First strike\nWhen Steel Leaf Paladin enters the battlefield, return a green or white creature you control to its owner's hand.

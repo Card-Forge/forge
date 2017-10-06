@@ -700,6 +700,8 @@ public class ComputerUtil {
                 return sacrificed; // sacrifice none
             }
         }
+        boolean exceptSelf = "ExceptSelf".equals(source.getParam("AILogic"));
+        boolean removedSelf = false;
 
         if (isOptional && source.hasParam("Devour") || source.hasParam("Exploit") || considerSacLogic) {
         	if (source.hasParam("Exploit")) {
@@ -757,11 +759,22 @@ public class ComputerUtil {
 
         final int max = Math.min(remaining.size(), amount);
 
+        if (exceptSelf) {
+            removedSelf = remaining.remove(source.getHostCard());
+        }
+
         for (int i = 0; i < max; i++) {
             Card c = chooseCardToSacrifice(remaining, ai, destroy);
             remaining.remove(c);
-            sacrificed.add(c);
+            if (c != null) {
+                sacrificed.add(c);
+            }
         }
+
+        if (sacrificed.isEmpty() && removedSelf) {
+            sacrificed.add(source.getHostCard());
+        }
+
         return sacrificed;
     }
 

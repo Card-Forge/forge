@@ -5,10 +5,9 @@ PT:3/2
 K:Flash
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a creature you control to its owner's hand.
-SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouCtrl | ChangeNum$ 1
+SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouCtrl | ChangeNum$ 1 | AILogic$ NeverBounceItself
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange2 | TriggerDescription$ When CARDNAME enters the battlefield, exile target card from a graveyard.
-SVar:TrigChange2:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TgtPrompt$ Select target card from any graveyard
-SVar:NeedsToPlay:Creature.YouCtrl+cmcLE2+inZoneBattlefield
-SVar:RemRandomDeck:True
+SVar:TrigChange2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TgtPrompt$ Select target card from any graveyard
+SVar:NeedsToPlay:Creature.YouCtrl+cmcLE3+inZoneBattlefield
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonecloaker.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying\nWhen Stonecloaker enters the battlefield, return a creature you control to its owner's hand.\nWhen Stonecloaker enters the battlefield, exile target card from a graveyard.
