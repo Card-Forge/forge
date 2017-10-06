@@ -3416,7 +3416,7 @@ public class CardFactoryUtil {
 
             // Aftermath only on Rightsplit
             // doesn't make a copy with it
-            card.getState(CardStateName.RightSplit).addReplacementEffect(re);
+            card.addReplacementEffect(re);
 
             if (!intrinsic) {
                 kws.addReplacement(re);

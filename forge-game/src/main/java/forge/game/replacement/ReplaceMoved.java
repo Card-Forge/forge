@@ -99,7 +99,7 @@ public class ReplaceMoved extends ReplacementEffect {
             if (!runParams.containsKey("StackSa")) {
                 return false;
             }
-            if (!matchesValid(runParams.get("StackSa"), getParam("ValidStackSa").split(","), getHostCard())) {
+            if (!((SpellAbility)runParams.get("StackSa")).isValid(getParam("ValidStackSa").split(","), getHostCard().getController(), getHostCard(), null)) {
                 return false;
             }
         }

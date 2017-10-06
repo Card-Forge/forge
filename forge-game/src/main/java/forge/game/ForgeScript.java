@@ -167,6 +167,10 @@ public class ForgeScript {
             if (!sa.isFlashBackAbility()) {
                 return false;
             }
+        } else if (property.equals("Aftermath")) {
+            if (!sa.isAftermath()) {
+                return false;
+            }
         } else if (property.equals("MorphUp")) {
             if (!sa.isMorphUp()) {
                 return false;
