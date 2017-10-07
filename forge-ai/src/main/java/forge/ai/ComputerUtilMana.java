@@ -517,13 +517,8 @@ public class ComputerUtilMana {
         // e.g. Gemstone Caverns with a Luck counter on it generating colored mana (which fails to be
         // processed correctly on a per-ability basis, leaving floating mana in the pool)
         if (!cost.isPaid() && !manapool.isEmpty()) {
-            for (ManaCostShard shard : cost.getDistinctShards()) {
-                for (byte color : MagicColor.WUBRGC) {
-                    manapool.tryPayCostWithColor(color, sa, cost);
-                }
-                if (cost.isPaid()) {
-                    break;
-                }
+            for (byte color : MagicColor.WUBRGC) {
+                manapool.tryPayCostWithColor(color, sa, cost);
             }
         }
 
