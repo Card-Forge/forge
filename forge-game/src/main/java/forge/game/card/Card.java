@@ -1447,7 +1447,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                         sbLong.append("—");
                     }
                     if (mCost.isOnlyManaCost()) {
-                        sb.append(" ");
+                        sbLong.append(" ");
                     }
                     sbLong.append(mCost.toString()).delete(sbLong.length() - 2, sbLong.length());
                     if (!mCost.isOnlyManaCost()) {
