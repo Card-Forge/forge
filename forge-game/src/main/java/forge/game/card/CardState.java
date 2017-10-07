@@ -163,7 +163,7 @@ public class CardState extends GameObject {
         boolean changed = false;
         for (String k : keywords) {
             if (addIntrinsicKeyword(k)) {
-                changed = false;
+                changed = true;
             }
         }
         return changed;

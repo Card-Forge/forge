@@ -424,8 +424,8 @@ public class CardFactory {
     }
 
     private static void readCardFace(Card c, ICardFace face) {
+        c.addIntrinsicKeywords(face.getKeywords());
 
-        for (String k : face.getKeywords())                  c.addIntrinsicKeyword(k);
         for (String r : face.getReplacements())              c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true));
         for (String s : face.getStaticAbilities())           c.addStaticAbility(s);
         for (String t : face.getTriggers())                  c.addTrigger(TriggerHandler.parseTrigger(t, c, true));
