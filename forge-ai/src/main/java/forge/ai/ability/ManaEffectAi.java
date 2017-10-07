@@ -1,13 +1,7 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicates;
-import forge.ai.AiPlayDecision;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -20,6 +14,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -170,6 +165,9 @@ public class ManaEffectAi extends SpellAbilityAi {
             }
 
             SpellAbility testSaNoCost = testSa.copyWithNoManaCost();
+            if (testSaNoCost == null) {
+                continue;
+            }
             testSaNoCost.setActivatingPlayer(ai);
             if (((PlayerControllerAi)ai.getController()).getAi().canPlaySa(testSaNoCost) == AiPlayDecision.WillPlay) {
                 if (testSa.getHostCard().isPermanent() && !testSa.getHostCard().hasKeyword("Haste") 
