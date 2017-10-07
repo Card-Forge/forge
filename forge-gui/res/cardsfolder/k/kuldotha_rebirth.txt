@@ -2,6 +2,7 @@ Name:Kuldotha Rebirth
 ManaCost:R
 Types:Sorcery
 A:SP$ Token | Cost$ R Sac<1/Artifact> | TokenAmount$ 3 | TokenOwner$ You | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ r 1 1 goblin SOM | SpellDescription$ Create three 1/1 red Goblin creature tokens.
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:AIPreference:SacCost$Artifact.token,Artifact.cmcEQ1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kuldotha_rebirth.jpg
 Oracle:As an additional cost to cast Kuldotha Rebirth, sacrifice an artifact.\nCreate three 1/1 red Goblin creature tokens.

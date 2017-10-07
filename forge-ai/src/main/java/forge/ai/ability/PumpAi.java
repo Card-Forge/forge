@@ -537,6 +537,10 @@ public class PumpAi extends PumpAiBase {
             }));
         }
 
+        if (sa.hasParam("AITgts")) {
+            list = CardLists.getValidCards(list, sa.getParam("AITgts"), sa.getActivatingPlayer(), source);
+        }
+
         if (list.isEmpty()) {
             if (ComputerUtil.activateForCost(sa, ai)) {
                 return pumpMandatoryTarget(ai, sa);

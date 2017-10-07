@@ -700,7 +700,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
         String aiLogic = sa.getParamOrDefault("AILogic", "");
 
-        if (aiLogic.equals("SurvivalOfTheFittest")) {
+        if (aiLogic.equals("SurvivalOfTheFittest") || aiLogic.equals("AtOppEOT")) {
             return ph.getNextTurn().equals(ai) && ph.is(PhaseType.END_OF_TURN);
         }
 
@@ -808,6 +808,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
         list = CardLists.getTargetableCards(list, sa);
         if (sa.hasParam("AITgts")) {
             list = CardLists.getValidCards(list, sa.getParam("AITgts"), ai, source);
+        }
+        if (sa.hasParam("AITgtsOnlyBetterThanSelf")) {
+            list = CardLists.filter(list, new Predicate<Card>() {
+                @Override
+                public boolean apply(Card card) {
+                    return ComputerUtilCard.evaluateCreature(card) > ComputerUtilCard.evaluateCreature(source) + 30;
+                }
+            });
         }
         if (source.isInZone(ZoneType.Hand)) {
             list = CardLists.filter(list, Predicates.not(CardPredicates.nameEquals(source.getName()))); // Don't get the same card back.
@@ -1381,7 +1389,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             String logic = sa.getParam("AILogic");
             if ("NeverBounceItself".equals(logic)) {
                 Card source = sa.getHostCard();
-                if (fetchList.contains(source) && fetchList.size() > 1) {
+                if (fetchList.contains(source) && (fetchList.size() > 1 || sa.getTriggeringAbility().isMandatory())) {
                     // For cards that should never be bounced back to hand with their own [e.g. triggered] abilities, such as guild lands.
                     fetchList.remove(source);
                 }

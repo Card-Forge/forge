@@ -1,14 +1,6 @@
 package forge.game.card;
 
-import java.util.Collections;
-import java.util.List;
-
-import forge.card.CardStateName;
-import forge.util.TextUtil;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Iterables;
-
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.game.Direction;
@@ -25,7 +17,12 @@ import forge.game.trigger.Trigger;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Collections;
+import java.util.List;
 
 public class CardProperty {
 
@@ -848,6 +845,14 @@ public class CardProperty {
             if (!card.canProduceSameManaTypeWith(source)) {
                 return false;
             }
+        } else if (property.startsWith("canProduceManaColor")) {
+            final String color = property.split("canProduceManaColor ")[1];
+            for (SpellAbility ma : card.getManaAbilities()) {
+                if (ma.getManaPart().canProduce(MagicColor.toShortString(color))) {
+                    return true;
+                }
+            }
+            return false;
         } else if (property.startsWith("sharesNameWith")) {
             if (property.equals("sharesNameWith")) {
                 if (!card.sharesNameWith(source)) {
@@ -1289,6 +1294,10 @@ public class CardProperty {
             }
         } else if (property.startsWith("equipping")) {
             if (!card.isEquipping()) {
+                return false;
+            }
+        } else if (property.startsWith("notEquipping")) {
+            if (card.isEquipping()) {
                 return false;
             }
         } else if (property.startsWith("token")) {
