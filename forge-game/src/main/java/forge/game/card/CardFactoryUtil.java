@@ -1401,14 +1401,17 @@ public class CardFactoryUtil {
             return doXMath(n, m, c);
         }
         if (sq[0].startsWith("UniqueManaColorsProduced")) {
+            boolean untappedOnly = sq[0].contains("ByUntappedSources");
             int uniqueColors = 0;
             CardCollectionView otb = cc.getCardsIn(ZoneType.Battlefield);
             outer: for (byte color : MagicColor.WUBRG) {
                 for (Card card : otb) {
-                    for (SpellAbility ma : card.getManaAbilities()) {
-                        if (ma.getManaPart().canProduce(MagicColor.toShortString(color))) {
-                            uniqueColors++;
-                            continue outer;
+                    if (!card.isTapped() || !untappedOnly) {
+                        for (SpellAbility ma : card.getManaAbilities()) {
+                            if (ma.getManaPart().canProduce(MagicColor.toShortString(color))) {
+                                uniqueColors++;
+                                continue outer;
+                            }
                         }
                     }
                 }
