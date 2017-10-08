@@ -493,7 +493,9 @@ public class AttachAi extends SpellAbilityAi {
         if ("Guilty Conscience".equals(sourceName)) {
             chosen = SpecialCardAi.GuiltyConscience.getBestAttachTarget(ai, sa, list);
         } else if ("Bonds of Faith".equals(sourceName)) {
-            chosen = SpecialCardAi.BondsOfFaith.getBestAttachTarget(ai, sa, list);
+            chosen = doPumpOrCurseAILogic(ai, sa, list, "Human");
+        } else if ("Clutch of Undeath".equals(sourceName)) {
+            chosen = doPumpOrCurseAILogic(ai, sa, list, "Zombie");
         }
 
         // If Mandatory (brought directly into play without casting) gotta
@@ -1423,6 +1425,43 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         return true;
+    }
+
+    public static Card doPumpOrCurseAILogic(final Player ai, final SpellAbility sa, final List<Card> list, final String type) {
+        Card chosen = null;
+
+        List<Card> aiType = CardLists.filter(list, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                // Don't buff opponent's creatures of given type
+                if (!c.getController().equals(ai)) {
+                    return false;
+                }
+                return c.getType().hasCreatureType(type);
+            }
+        });
+        List<Card> oppNonType = CardLists.filter(list, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                // Don't debuff AI's own creatures not of given type
+                if (c.getController().equals(ai)) {
+                    return false;
+                }
+                return !c.getType().hasCreatureType(type) && !ComputerUtilCard.isUselessCreature(ai, c);
+            }
+        });
+
+        if (!aiType.isEmpty() && !oppNonType.isEmpty()) {
+            Card bestAi = ComputerUtilCard.getBestCreatureAI(aiType);
+            Card bestOpp = ComputerUtilCard.getBestCreatureAI(oppNonType);
+            chosen = ComputerUtilCard.evaluateCreature(bestAi) > ComputerUtilCard.evaluateCreature(bestOpp) ? bestAi : bestOpp;
+        } else if (!aiType.isEmpty()) {
+            chosen = ComputerUtilCard.getBestCreatureAI(aiType);
+        } else if (!oppNonType.isEmpty()) {
+            chosen = ComputerUtilCard.getBestCreatureAI(oppNonType);
+        }
+
+        return chosen;
     }
 
     @Override

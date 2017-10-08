@@ -103,46 +103,6 @@ public class SpecialCardAi {
         }
     }
 
-    // Bonds of Faith
-    public static class BondsOfFaith {
-        public static Card getBestAttachTarget(final Player ai, final SpellAbility sa, final List<Card> list) {
-            Card chosen = null;
-            
-            List<Card> aiHumans = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    // Don't buff opponent's humans
-                    if (!c.getController().equals(ai)) {
-                        return false;
-                    }
-                    return c.getType().hasCreatureType("Human");
-                }
-            });
-            List<Card> oppNonHumans = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    // Don't debuff AI's own non-humans
-                    if (c.getController().equals(ai)) {
-                        return false;
-                    }
-                    return !c.getType().hasCreatureType("Human") && !ComputerUtilCard.isUselessCreature(ai, c);
-                }
-            });
-
-            if (!aiHumans.isEmpty() && !oppNonHumans.isEmpty()) {
-                Card bestAi = ComputerUtilCard.getBestCreatureAI(aiHumans);
-                Card bestOpp = ComputerUtilCard.getBestCreatureAI(oppNonHumans);
-                chosen = ComputerUtilCard.evaluateCreature(bestAi) > ComputerUtilCard.evaluateCreature(bestOpp) ? bestAi : bestOpp;
-            } else if (!aiHumans.isEmpty()) {
-                chosen = ComputerUtilCard.getBestCreatureAI(aiHumans);
-            } else if (!oppNonHumans.isEmpty()) {
-                chosen = ComputerUtilCard.getBestCreatureAI(oppNonHumans);
-            }
-            
-            return chosen;
-        }
-    }
-
     // Chain of Acid
     public static class ChainOfAcid {
         public static boolean consider(final Player ai, final SpellAbility sa) {

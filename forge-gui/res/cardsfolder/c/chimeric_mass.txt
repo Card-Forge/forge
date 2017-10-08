@@ -7,6 +7,8 @@ SVar:X:Count$xPaid
 A:AB$ Animate | Cost$ 1 | Defined$ Self | Types$ Artifact,Creature,Construct | staticAbilities$ Static | SpellDescription$ Until end of turn, CARDNAME becomes a Construct artifact creature with "This creature's power and toughness are each equal to the number of charge counters on it."
 SVar:Static:Mode$ Continuous | EffectZone$ Battlefield | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | Description$ This creature's power and toughness are each equal to the number of charge counters on it.
 SVar:Y:Count$CardCounters.CHARGE
-SVar:RemAIDeck:True
+SVar:NeedsToPlayVar:Z GE4
+SVar:Z:Count$Valid Land.YouCtrl+inZoneBattlefield+untapped
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chimeric_mass.jpg
 Oracle:Chimeric Mass enters the battlefield with X charge counters on it.\n{1}: Until end of turn, Chimeric Mass becomes a Construct artifact creature with "This creature's power and toughness are each equal to the number of charge counters on it."

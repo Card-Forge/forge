@@ -1,14 +1,8 @@
 package forge.ai.ability;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.ai.*;
 import forge.card.CardStateName;
 import forge.game.Game;
@@ -32,6 +26,11 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 public class CountersPutAi extends SpellAbilityAi {
 
@@ -303,26 +302,37 @@ public class CountersPutAi extends SpellAbilityAi {
             return FightAi.canFightAi(ai, sa, nPump, nPump);
         }
         
-        if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
-            // By default, set PayX here to maximum value (used for most SAs of this type).
-            amount = ComputerUtilMana.determineLeftoverMana(sa, ai);
+        if (amountStr.equals("X")) {
+            if (source.getSVar(amountStr).equals("Count$xPaid")) {
+                // By default, set PayX here to maximum value (used for most SAs of this type).
+                amount = ComputerUtilMana.determineLeftoverMana(sa, ai);
 
-            if (isClockwork) {
-                // Clockwork Avian and other similar cards: do not tap all mana for X,
-                // instead only rewind to max allowed value when the power gets low enough.
-                int curCtrs = source.getCounters(CounterType.P1P0);
-                int maxCtrs = Integer.parseInt(sa.getParam("MaxFromEffect"));
+                if (isClockwork) {
+                    // Clockwork Avian and other similar cards: do not tap all mana for X,
+                    // instead only rewind to max allowed value when the power gets low enough.
+                    int curCtrs = source.getCounters(CounterType.P1P0);
+                    int maxCtrs = Integer.parseInt(sa.getParam("MaxFromEffect"));
 
-                // This will "rewind" clockwork cards when they fall to 50% power or below, consider improving
-                if (curCtrs > Math.ceil(maxCtrs / 2.0)) {
-                    return false;
+                    // This will "rewind" clockwork cards when they fall to 50% power or below, consider improving
+                    if (curCtrs > Math.ceil(maxCtrs / 2.0)) {
+                        return false;
+                    }
+
+                    amount = Math.min(amount, maxCtrs - curCtrs);
+                    if (amount <= 0) {
+                        return false;
+                    }
                 }
 
-                amount = Math.min(amount, maxCtrs - curCtrs);
-                if (amount <= 0) { return false; }
+                source.setSVar("PayX", Integer.toString(amount));
+            } else if ("ExiledCreatureFromGraveCMC".equals(sa.getParam("AILogic"))) {
+                // e.g. Necropolis
+                amount = Aggregates.max(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES), CardPredicates.Accessors.fnGetCmc);
+                if (amount > 0 && ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)) {
+                    sa.resetPaidHash(); // TODO: the AI won't auto-reset its paid hash for ExileFromGrave for some reason, needs investigation.
+                    return true;
+                }
             }
-
-            source.setSVar("PayX", Integer.toString(amount));
         }
 
         // don't use it if no counters to add
