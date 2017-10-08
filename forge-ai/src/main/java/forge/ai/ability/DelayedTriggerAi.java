@@ -18,8 +18,12 @@ public class DelayedTriggerAi extends SpellAbilityAi {
             // TODO: improve ai
             return true;
         }
-        final String svarName = sa.getParam("Execute");
-        final SpellAbility trigsa = AbilityFactory.getAbility(sa.getHostCard().getSVar(svarName), sa.getHostCard());
+        SpellAbility trigsa = null;
+        if (sa.hasAdditionalAbility("Execute")) {
+            trigsa = sa.getAdditionalAbility("Execute");
+        } else {
+            trigsa = AbilityFactory.getAbility(sa.getHostCard(), sa.getParam("Execute"));
+        }
         trigsa.setActivatingPlayer(ai);
 
         if (trigsa instanceof AbilitySub) {
@@ -31,8 +35,12 @@ public class DelayedTriggerAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final String svarName = sa.getParam("Execute");
-        final SpellAbility trigsa = AbilityFactory.getAbility(sa.getHostCard().getSVar(svarName), sa.getHostCard());
+        SpellAbility trigsa = null;
+        if (sa.hasAdditionalAbility("Execute")) {
+            trigsa = sa.getAdditionalAbility("Execute");
+        } else {
+            trigsa = AbilityFactory.getAbility(sa.getHostCard(), sa.getParam("Execute"));
+        }
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
         trigsa.setActivatingPlayer(ai);
 
@@ -45,8 +53,12 @@ public class DelayedTriggerAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final String svarName = sa.getParam("Execute");
-        final SpellAbility trigsa = AbilityFactory.getAbility(sa.getSVar(svarName), sa.getHostCard());
+        SpellAbility trigsa = null;
+        if (sa.hasAdditionalAbility("Execute")) {
+            trigsa = sa.getAdditionalAbility("Execute");
+        } else {
+            trigsa = AbilityFactory.getAbility(sa.getHostCard(), sa.getParam("Execute"));
+        }
         trigsa.setActivatingPlayer(ai);
         return AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(trigsa);
     }
