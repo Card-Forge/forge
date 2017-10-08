@@ -3,6 +3,9 @@ package forge.ai.ability;
 import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -98,7 +101,35 @@ public class DiscardAi extends SpellAbilityAi {
             }
         }
 
-        // TODO: Implement support for Discard AI for cards with AnyNumber set to true.
+        // TODO: Improve support for Discard AI for cards with AnyNumber set to true.
+        if (sa.hasParam("AnyNumber")) {
+            if ("DiscardUncastableAndExcess".equals(aiLogic)) {
+                final CardCollectionView inHand = ai.getCardsIn(ZoneType.Hand);
+                final int numLandsOTB = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS).size();
+                int numDiscard = 0;
+                int numOppInHand = 0;
+                for (Player p : ai.getGame().getPlayers()) {
+                    if (p.getCardsIn(ZoneType.Hand).size() > numOppInHand) {
+                        numOppInHand = p.getCardsIn(ZoneType.Hand).size();
+                    }
+                }
+                for (Card c : inHand) {
+                    if (c.equals(sa.getHostCard())) { continue; }
+                    if (c.hasSVar("DoNotDiscardIfAble") || c.hasSVar("IsReanimatorCard")) { continue; }
+                    if (c.isCreature() && !ComputerUtilMana.hasEnoughManaSourcesToCast(c.getSpellPermanent(), ai)) {
+                        numDiscard++;
+                    }
+                    if ((c.isLand() && numLandsOTB >= 5) || (c.getFirstSpellAbility() != null && !ComputerUtilMana.hasEnoughManaSourcesToCast(c.getFirstSpellAbility(), ai))) {
+                        if (numDiscard + 1 <= numOppInHand) {
+                            numDiscard++;
+                        }
+                    }
+                }
+                if (numDiscard == 0) {
+                    return false;
+                }
+            }
+        }
 
         // Don't use draw abilities before main 2 if possible
         if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)

@@ -865,6 +865,36 @@ public class AiController {
             } else if ("VolrathsShapeshifter".equals(sa.getParam("AILogic"))) {
                 return SpecialCardAi.VolrathsShapeshifter.targetBestCreature(player, sa);
             }
+
+            if (sa.hasParam("AnyNumber")) {
+                if ("DiscardUncastableAndExcess".equals(sa.getParam("AILogic"))) {
+                    // Note that at this point, there is no guarantee that the AI will discard specific cards found here,
+                    // but since the AI generally discards things it doesn't need / can't immediately use, it's a relatively
+                    // safe assumption that the follow-up discard action will be in line with what is considered here.
+                    CardCollection discards = new CardCollection();
+                    final CardCollectionView inHand = player.getCardsIn(ZoneType.Hand);
+                    final int numLandsOTB = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS).size();
+                    int numOppInHand = 0;
+                    for (Player p : player.getGame().getPlayers()) {
+                        if (p.getCardsIn(ZoneType.Hand).size() > numOppInHand) {
+                            numOppInHand = p.getCardsIn(ZoneType.Hand).size();
+                        }
+                    }
+                    for (Card c : inHand) {
+                        if (c.hasSVar("DoNotDiscardIfAble") || c.hasSVar("IsReanimatorCard")) { continue; }
+                        if (c.isCreature() && !ComputerUtilMana.hasEnoughManaSourcesToCast(c.getSpellPermanent(), player)) {
+                            discards.add(c);
+                        }
+                        if ((c.isLand() && numLandsOTB >= 5) || (c.getFirstSpellAbility() != null && !ComputerUtilMana.hasEnoughManaSourcesToCast(c.getFirstSpellAbility(), player))) {
+                            if (discards.size() + 1 <= numOppInHand) {
+                                discards.add(c);
+                            }
+                        }
+                    }
+                    return discards;
+                }
+            }
+
         }
 
         // look for good discards
