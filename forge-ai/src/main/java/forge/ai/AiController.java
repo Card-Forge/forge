@@ -868,9 +868,6 @@ public class AiController {
 
             if (sa.hasParam("AnyNumber")) {
                 if ("DiscardUncastableAndExcess".equals(sa.getParam("AILogic"))) {
-                    // Note that at this point, there is no guarantee that the AI will discard specific cards found here,
-                    // but since the AI generally discards things it doesn't need / can't immediately use, it's a relatively
-                    // safe assumption that the follow-up discard action will be in line with what is considered here.
                     CardCollection discards = new CardCollection();
                     final CardCollectionView inHand = player.getCardsIn(ZoneType.Hand);
                     final int numLandsOTB = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS).size();
