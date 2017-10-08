@@ -1,6 +1,6 @@
 - AI Improvements -
 The AI has learned some new tricks in this version, which may be subtle but will hopefully surprise the player and make the game more exciting and challenging.
-There is an ongoing effort to revise and update the AI playability status for the older cards supported by Forge. Many card scripts have been developed 5 or more years ago, when our artificial intelligence was a lot simpler and could not do many of the things it can do now. Therefore, many cards which are marked as "AI-unplayable" are, in fact, playable with the current engine. We aim to reevaluate the creature scripts and mark the cards that are now playable by the artificial intelligence.
+There is an ongoing effort to revise and update the AI playability status for the older cards supported by Forge. Many card scripts have been developed 5 or more years ago, when our artificial intelligence was a lot simpler and could not do many of the things it can do now. Therefore, many cards which are marked as "AI-unplayable" are, in fact, playable with the current engine. We aim to reevaluate the card scripts and mark the cards that are now playable by the artificial intelligence.
 
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.
