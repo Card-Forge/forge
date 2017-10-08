@@ -1400,6 +1400,21 @@ public class CardFactoryUtil {
             }
             return doXMath(n, m, c);
         }
+        if (sq[0].startsWith("UniqueManaColorsProduced")) {
+            int uniqueColors = 0;
+            CardCollectionView otb = cc.getCardsIn(ZoneType.Battlefield);
+            outer: for (byte color : MagicColor.WUBRG) {
+                for (Card card : otb) {
+                    for (SpellAbility ma : card.getManaAbilities()) {
+                        if (ma.getManaPart().canProduce(MagicColor.toShortString(color))) {
+                            uniqueColors++;
+                            continue outer;
+                        }
+                    }
+                }
+            }
+            return doXMath(uniqueColors, m, c);
+        }
         // Count$Converge
         if (sq[0].contains("Converge")) {
             return doXMath(c.getSunburstValue(), m, c);
