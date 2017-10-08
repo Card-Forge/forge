@@ -329,7 +329,6 @@ public class CountersPutAi extends SpellAbilityAi {
                 // e.g. Necropolis
                 amount = Aggregates.max(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES), CardPredicates.Accessors.fnGetCmc);
                 if (amount > 0 && ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)) {
-                    sa.resetPaidHash(); // TODO: the AI won't auto-reset its paid hash for ExileFromGrave for some reason, needs investigation.
                     return true;
                 }
             }
