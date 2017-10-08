@@ -3624,10 +3624,11 @@ public class CardFactoryUtil {
 
             String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile";
             String delTrig = "DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You " + 
-            " | OptionalDecider$ You | RememberObjects$ Self | TriggerDescription$"
+            " | OptionalDecider$ You | RememberObjects$ Self | Execute$ ReboundPlay | TriggerDescription$"
             + " At the beginning of your next upkeep, you may cast " + card.toString() + " without paying it's manacost.";
             // TODO add check for still in exile
             String abPlay = "DB$ Play | Defined$ Self | WithoutManaCost$ True | Optional$ True";
+            card.setSVar("ReboundPlay", abPlay);
 
             SpellAbility saExile = AbilityFactory.getAbility(abExile, card);
 
