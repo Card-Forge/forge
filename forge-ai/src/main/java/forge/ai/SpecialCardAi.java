@@ -427,6 +427,46 @@ public class SpecialCardAi {
         }
     }
 
+    // Extraplanar Lens
+    public static class ExtraplanarLens {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            Card bestBasic = null;
+            Card bestBasicSelfOnly = null;
+
+            CardCollection aiLands = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA);
+            CardCollection oppLands = CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield),
+                    CardPredicates.Presets.LANDS_PRODUCING_MANA);
+
+            int bestCount = 0;
+            int bestSelfOnlyCount = 0;
+            for (String landType : MagicColor.Constant.BASIC_LANDS) {
+                CardCollection landsOfType = CardLists.filter(aiLands, CardPredicates.nameEquals(landType));
+                CardCollection oppLandsOfType = CardLists.filter(oppLands, CardPredicates.nameEquals(landType));
+
+                int numCtrl = CardLists.filter(aiLands, CardPredicates.nameEquals(landType)).size();
+                if (numCtrl > bestCount) {
+                    bestCount = numCtrl;
+                    bestBasic = ComputerUtilCard.getWorstLand(landsOfType);
+                }
+                if (numCtrl > bestSelfOnlyCount && numCtrl > 1 && oppLandsOfType.isEmpty() && bestBasicSelfOnly == null) {
+                    bestSelfOnlyCount = numCtrl;
+                    bestBasicSelfOnly = ComputerUtilCard.getWorstLand(landsOfType);
+                }
+            }
+
+            sa.resetTargets();
+            if (bestBasicSelfOnly != null) {
+                sa.getTargets().add(bestBasicSelfOnly);
+                return true;
+            } else if (bestBasic != null) {
+                sa.getTargets().add(bestBasic);
+                return true;
+            }
+
+            return false;
+        }
+    }
+
     // Force of Will
     public static class ForceOfWill {
         public static boolean consider(final Player ai, final SpellAbility sa) {

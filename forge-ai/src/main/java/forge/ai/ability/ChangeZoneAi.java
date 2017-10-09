@@ -1373,6 +1373,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
     private static boolean knownOriginTriggerAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
         if ("DeathgorgeScavenger".equals(sa.getParam("AILogic"))) {
             return SpecialCardAi.DeathgorgeScavenger.consider(ai, sa);
+        } else if ("ExtraplanarLens".equals(sa.getParam("AILogic"))) {
+            return SpecialCardAi.ExtraplanarLens.consider(ai, sa);
         }
 
         if (sa.getTargetRestrictions() == null) {
