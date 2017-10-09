@@ -4,8 +4,9 @@ Types:Instant
 A:SP$ GainControl | Cost$ 5 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | AddKWs$ Haste | LoseControl$ EOT | Untap$ True | SubAbility$ DBAnimate | SpellDescription$ Untap target creature and gain control of it until end of turn. That creature gains haste until end of turn. If {W} was spent to cast CARDNAME, the creature gains "Whenever this creature deals combat damage, you gain that much life" until end of turn.
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Triggers$ TrigDamage | sVars$ GainLife,X | ConditionManaSpent$ W
 SVar:TrigDamage:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Card.Self | Execute$ GainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage, you gain that much life.
-SVar:GainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ X | References$ X
+SVar:GainLife:DB$ GainLife | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
-SVar:RemAIDeck:True
+DeckHints:Color$White
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flash_conscription.jpg
 Oracle:Untap target creature and gain control of it until end of turn. That creature gains haste until end of turn. If {W} was spent to cast Flash Conscription, the creature gains "Whenever this creature deals combat damage, you gain that much life" until end of turn.
