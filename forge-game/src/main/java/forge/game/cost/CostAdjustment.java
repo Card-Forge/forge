@@ -1,14 +1,7 @@
 package forge.game.cost;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.card.CardStateName;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
@@ -16,12 +9,7 @@ import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityActivated;
@@ -31,6 +19,11 @@ import forge.game.spellability.TargetChoices;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class CostAdjustment {
 
@@ -520,11 +513,15 @@ public class CostAdjustment {
             if (!sa.usesTargeting()) {
                 return false;
             }
+            SpellAbility curSa = sa;
             boolean targetValid = false;
-            for (GameObject target : sa.getTargets().getTargets()) {
-                if (target.isValid(params.get("ValidTarget").split(","), hostCard.getController(), hostCard, sa)) {
-                    targetValid = true;
+            outer: while (curSa != null) {
+                for (GameObject target : curSa.getTargets().getTargets()) {
+                    if (target.isValid(params.get("ValidTarget").split(","), hostCard.getController(), hostCard, curSa)) {
+                        targetValid = true;
+                    }
                 }
+                curSa = curSa.getSubAbility();
             }
             if (!targetValid) {
                 return false;
@@ -534,13 +531,17 @@ public class CostAdjustment {
             if (!sa.usesTargeting()) {
                 return false;
             }
+            SpellAbility curSa = sa;
             boolean targetValid = false;
-            for (SpellAbility target : sa.getTargets().getTargetSpells()) {
-                Card targetCard = target.getHostCard();
-                if (targetCard.isValid(params.get("ValidSpellTarget").split(","), hostCard.getController(), hostCard, sa)) {
-                    targetValid = true;
-                    break;
+            outer: while (curSa != null) {
+                for (SpellAbility target : curSa.getTargets().getTargetSpells()) {
+                    Card targetCard = target.getHostCard();
+                    if (targetCard.isValid(params.get("ValidSpellTarget").split(","), hostCard.getController(), hostCard, curSa)) {
+                        targetValid = true;
+                        break outer;
+                    }
                 }
+                curSa = curSa.getSubAbility();
             }
             if (!targetValid) {
                 return false;
