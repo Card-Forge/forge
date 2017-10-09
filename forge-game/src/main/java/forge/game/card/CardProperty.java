@@ -853,6 +853,8 @@ public class CardProperty {
                 }
             }
             return false;
+        } else if (property.equals("canProduceMana")) {
+            return !card.getManaAbilities().isEmpty();
         } else if (property.startsWith("sharesNameWith")) {
             if (property.equals("sharesNameWith")) {
                 if (!card.sharesNameWith(source)) {
