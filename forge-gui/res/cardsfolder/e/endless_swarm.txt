@@ -4,6 +4,7 @@ Types:Sorcery
 K:Epic
 A:SP$ Token | Cost$ 5 G G G | TokenAmount$ X | TokenName$ Snake | TokenTypes$ Creature,Snake | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 snake CHK | References$ X | SpellDescription$ Create a 1/1 green Snake creature token for each card in your hand.
 SVar:X:Count$InYourHand
-SVar:RemAIDeck:True
+#NOTE: The AI will not stop making land drops after casting this spell (so, random decks may also utilize manlands and other cards with activation cost already on the battlefield to the maximum effect)
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/endless_swarm.jpg
 Oracle:Create a 1/1 green Snake creature token for each card in your hand.\nEpic (For the rest of the game, you can't cast spells. At the beginning of each of your upkeeps, copy this spell except for its epic ability.)

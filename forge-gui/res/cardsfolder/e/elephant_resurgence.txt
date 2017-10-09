@@ -2,9 +2,13 @@ Name:Elephant Resurgence
 ManaCost:1 G
 Types:Sorcery
 A:SP$ RepeatEach | Cost$ 1 G | RepeatPlayers$ Player | RepeatSubAbility$ DBToken | SpellDescription$ Each player creates a green Elephant creature token. Those creatures have "This creature's power and toughness are each equal to the number of creature cards in its controller's graveyard."
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Elephant | TokenTypes$ Creature,Elephant | TokenOwner$ Player.IsRemembered | TokenColors$ Green | TokenStaticAbilities$ Static | TokenSVars$ ResurgenceX | References$ ResurgenceX
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Elephant | TokenTypes$ Creature,Elephant | TokenOwner$ Player.IsRemembered | TokenColors$ Green | TokenStaticAbilities$ Static | TokenSVars$ ResurgenceX | TokenImage$ g x x elephant | References$ ResurgenceX
 SVar:Static:Mode$ Continuous | SetPower$ ResurgenceX | SetToughness$ ResurgenceX | EffectZone$ Battlefield | CharacteristicDefining$ True | Description$ CARDNAME's power and toughness are each equal to the number of creature cards in its controller's graveyard. | References$ ResurgenceX
 SVar:ResurgenceX:Count$TypeInYourYard.Creature
-SVar:RemAIDeck:True
+SVar:NeedsToPlayVar:Z GE2
+SVar:Z:SVar$Z1/Minus.Z2
+SVar:Z1:Count$ValidGraveyard Creature.YouOwn
+SVar:Z2:Count$ValidGraveyard Creature.OppOwn
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elephant_resurgence.jpg
 Oracle:Each player creates a green Elephant creature token. Those creatures have "This creature's power and toughness are each equal to the number of creature cards in its controller's graveyard."
