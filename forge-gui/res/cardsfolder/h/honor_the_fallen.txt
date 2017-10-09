@@ -4,6 +4,7 @@ Types:Instant
 A:SP$ ChangeZoneAll | Cost$ 1 W | ChangeType$ Creature | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBGainLife | SpellDescription$ Exile all creature cards from all graveyards. You gain 1 life for each card exiled this way.
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Remembered$Amount
-SVar:RemAIDeck:True
+SVar:NeedsToPlayVar:Z GE2
+SVar:Count$ValidGraveyard Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/honor_the_fallen.jpg
 Oracle:Exile all creature cards from all graveyards. You gain 1 life for each card exiled this way.

@@ -150,6 +150,21 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return doReturnCommanderLogic(sa, aiPlayer);
         }
 
+        if ("IfNotBuffed".equals(sa.getParam("AILogic"))) {
+            if (ComputerUtilCard.isUselessCreature(aiPlayer, sa.getHostCard())) {
+                return true; // debuffed by opponent's auras to the level that it becomes useless
+            }
+            int delta = 0;
+            for (Card enc : sa.getHostCard().getEnchantedBy(false)) {
+                if (enc.getController().isOpponentOf(aiPlayer)) {
+                    delta--;
+                } else {
+                    delta++;
+                }
+            }
+            return delta <= 0;
+        }
+
         if (isHidden(sa)) {
             return hiddenTriggerAI(aiPlayer, sa, mandatory);
         }
