@@ -5,11 +5,11 @@ PT:6/6
 K:Flying
 K:ETBReplacement:Other:ChooseEach
 SVar:ChooseEach:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoice | SpellDescription$ As CARDNAME enters the battlefield, each player chooses war or peace. Creatures controlled by players who chose war get +3/+0. Creatures controlled by players who chose peace get +0/+3.
-SVar:DBChoice:DB$ GenericChoice | Cost$ 0 | Defined$ Player.IsRemembered | Choices$ WarChoice,PeaceChoice
+SVar:DBChoice:DB$ GenericChoice | Defined$ Player.IsRemembered | Choices$ WarChoice,PeaceChoice
 SVar:WarChoice:DB$ Effect | Name$ Archangel War Effect | StaticAbilities$ WarPump | SpellDescription$ War | EffectOwner$ Player.IsRemembered | Duration$ UntilHostLeavesPlay
 SVar:PeaceChoice:DB$ Effect | Name$ Archangel Peace Effect | StaticAbilities$ PeacePump | SpellDescription$ Peace | EffectOwner$ Player.IsRemembered | Duration$ UntilHostLeavesPlay
 SVar:WarPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddPower$ 3 | Description$ Creatures you control get +3/+0.
 SVar:PeacePump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddToughness$ 3 | Description$ Creatures you control get +0/+3.
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archangel_of_strife.jpg
 Oracle:Flying\nAs Archangel of Strife enters the battlefield, each player chooses war or peace.\nCreatures controlled by players who chose war get +3/+0.\nCreatures controlled by players who chose peace get +0/+3.
