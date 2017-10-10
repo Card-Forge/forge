@@ -1,24 +1,24 @@
 [metadata]
 Name:Possibility Storm - Ixalan #02
-URL:https://i.redd.it/uy6terwly1oz.jpg
+URL:http://www.possibilitystorm.com/wp-content/uploads/2017/10/W_XLN02.jpg
 Goal:Win
 Turns:1
-Difficulty:Hard
+Difficulty:Medium
 Description:Win this turn.
 [state]
-humanlife=20
-ailife=6
+humanlife=2
+ailife=9
 activeplayer=human
 activephase=MAIN1
-humanhand=Harnessed Lightning|Set:KLD;Harnessed Lightning|Set:KLD;Burning Sun's Avatar|Set:XLN;Noxious Gearhulk|Set:KLD;Shock|Set:AER
+humanhand=Savage Stomp;Regisaur Alpha;Verdant Sun's Avatar;Dinosaur Stampede
 humanlibrary=
 humangraveyard=
-humanbattlefield=Revel in Riches;Reckless Fireweaver;Dragonskull Summit|Set:XLN;Dragonskull Summit|Set:XLN;Dragonskull Summit|Set:XLN;Dragonskull Summit|Set:XLN;Mountain|Set:XLN;Mountain|Set:XLN;t:Zombie,P:2,T:2,Cost:no cost,Types:Creature-Zombie,Keywords:,Image:b_2_2_zombie_akh;t:Zombie,P:2,T:2,Cost:no cost,Types:Creature-Zombie,Keywords:,Image:b_2_2_zombie_akh;t:Zombie,P:2,T:2,Cost:no cost,Types:Creature-Zombie,Keywords:,Image:b_2_2_zombie_akh
+humanbattlefield=t:Dinosaur,P:3,T:3,Cost:no cost,Types:Creature-Dinosaur,Keywords:Trample,Image:g_3_3_dinosaur;Huatli, Warrior Poet|Counters:LOYALTY=1;Drover of the Mighty;Kinjalli's Caller;Sheltered Thicket|Set:AKH;Sheltered Thicket|Set:AKH;Sheltered Thicket|Set:AKH;Rootbound Crag|Set:XLN;Rootbound Crag|Set:XLN;Rootbound Crag|Set:XLN
 humanexile=
 humancommand=
 aihand=
 ailibrary=
 aigraveyard=
-aibattlefield=Verdurous Gearhulk|Counters:P1P1=1|Set:KLD;Deeproot Champion|Counters:P1P1=3;Waker of the Wilds|Counters:P1P1=2;Kujar Seedsculptor|Counters:P1P1=2
+aibattlefield=Sun-Crowned Hunters;Sun-Crowned Hunters
 aiexile=
 aicommand=

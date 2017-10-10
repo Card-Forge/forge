@@ -1,0 +1,24 @@
+[metadata]
+Name:Possibility Storm - Ixalan #00a (Preview Puzzle 1)
+URL:https://images1.mtggoldfish.com/uploads/bf8fe028-cc5a-49be-9649-d43086c8a821/possibility-storm-1-ixalan.jpg
+Goal:Win
+Turns:1
+Difficulty:Medium
+Description:Win this turn. Your Gonti, Lord of Luxury will exile the opponent's Waker of the Wilds in the beginning of the puzzle. This action is assumed to have taken place earlier in the game (Gonti, Lord of Luxury does not have summoning sickness at the moment).
+[state]
+humanlife=20
+ailife=8
+activeplayer=human
+activephase=MAIN1
+humanhand=Never // Return;Tattered Mummy;Hostage Taker
+humanlibrary=
+humangraveyard=
+humanbattlefield=Gonti, Lord of Luxury|Id:7|ExecuteScript:TrigDig->AI;Herald of Secret Streams;Bontu's Monument;Kefnet's Monument;Drowned Catacomb|Set:XLN;Drowned Catacomb|Set:XLN;Drowned Catacomb|Set:XLN;Drowned Catacomb|Set:XLN;Island|Set:XLN;Island|Set:XLN;Island|Set:XLN;Hostage Taker|Id:6
+humanexile=
+humancommand=
+aihand=
+ailibrary=Waker of the Wilds
+aigraveyard=
+aibattlefield=Bishop of Rebirth;Kujar Seedsculptor;Fairgrounds Warden|Id:4|ExecuteScript:TrigExile->6
+aiexile=
+aicommand=
