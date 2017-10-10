@@ -20,6 +20,7 @@ package forge.game.ability.effects;
 import java.util.Arrays;
 import java.util.List;
 
+import forge.game.card.token.TokenInfo;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -273,9 +274,9 @@ public class TokenEffect extends SpellAbilityEffect {
             final Game game = controller.getGame();
             for (int i = 0; i < finalAmount; i++) {
                 final String imageName = imageNames.get(MyRandom.getRandom().nextInt(imageNames.size()));
-                final CardFactory.TokenInfo tokenInfo = new CardFactory.TokenInfo(substitutedName, imageName,
+                final TokenInfo tokenInfo = new TokenInfo(substitutedName, imageName,
                         cost, substitutedTypes, this.tokenKeywords, finalPower, finalToughness);
-                final List<Card> tokens = CardFactory.makeToken(tokenInfo, controller, cause != null);
+                final List<Card> tokens = tokenInfo.makeTokenWithMultiplier(controller, cause != null);
                 
                 // Grant rule changes
                 if (this.tokenHiddenKeywords != null) {

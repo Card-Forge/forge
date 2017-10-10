@@ -29,6 +29,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactory;
 import forge.game.card.CounterType;
+import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.event.GameEventAttackersDeclared;
@@ -217,7 +218,7 @@ public abstract class GameState {
             newText.append(";");
         }
         if (c.isToken()) {
-            newText.append("t:" + new CardFactory.TokenInfo(c).toString());
+            newText.append("t:" + new TokenInfo(c).toString());
         } else {
             if (c.getPaperCard() == null) {
                 return;
@@ -944,8 +945,9 @@ public abstract class GameState {
             Card c;
             boolean hasSetCurSet = false;
             if (cardinfo[0].startsWith("t:")) {
+                // TODO Make sure Game State conversion works with new tokens
                 String tokenStr = cardinfo[0].substring(2);
-                c = CardFactory.makeOneToken(CardFactory.TokenInfo.fromString(tokenStr), player);
+                c = new TokenInfo(tokenStr).makeOneToken(player);
             } else {
                 PaperCard pc = StaticData.instance().getCommonCards().getCard(cardinfo[0], setCode);
                 if (pc == null) {

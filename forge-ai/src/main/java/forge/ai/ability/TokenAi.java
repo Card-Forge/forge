@@ -9,6 +9,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
+import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPutCounter;
@@ -450,9 +451,9 @@ public class TokenAi extends SpellAbilityAi {
         }
         final String substitutedName = tokenName.equals("ChosenType") ? host.getChosenType() : tokenName;
         final String imageName = imageNames.get(MyRandom.getRandom().nextInt(imageNames.size()));
-        final CardFactory.TokenInfo tokenInfo = new CardFactory.TokenInfo(substitutedName, imageName,
+        final TokenInfo tokenInfo = new TokenInfo(substitutedName, imageName,
                 cost, substitutedTypes, tokenKeywords, finalPower, finalToughness);
-        Card token = CardFactory.makeOneToken(tokenInfo, ai);
+        Card token = tokenInfo.makeOneToken(ai);
 
         if (token == null) {
             return null;
