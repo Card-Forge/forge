@@ -160,6 +160,18 @@ public class DamageDealAi extends DamageAiBase {
             } else {
                 return false;
             }
+        } else if ("NinThePainArtist".equals(logic)) {
+            // Make sure not to mana lock ourselves + make the opponent draw cards into an immediate discard
+            if (ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)) {
+                boolean doTarget = damageTargetAI(ai, sa, dmg, true);
+                if (doTarget) {
+                    Card tgt = sa.getTargets().getFirstTargetedCard();
+                    if (tgt != null) {
+                        return ai.getGame().getPhaseHandler().getPlayerTurn() == tgt.getController();
+                    }
+                }
+            }
+            return false;
         }
         
         if (sourceName.equals("Sorin, Grim Nemesis")) {

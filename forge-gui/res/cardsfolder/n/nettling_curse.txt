@@ -6,8 +6,8 @@ A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Curse
 A:AB$ Pump | Cost$ 1 R | Defined$ Enchanted | KW$ HIDDEN CARDNAME attacks each combat if able. | IsCurse$ True | SpellDescription$ Enchanted creature attacks this turn if able.
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigLoseLifeAttack | TriggerDescription$ Whenever enchanted creature attacks or blocks, its controller loses 3 life.
 T:Mode$ Blocks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigLoseLifeBlock | Secondary$ True | TriggerDescription$ Whenever enchanted creature attacks or blocks, its controller loses 3 life.
-SVar:TrigLoseLifeAttack:AB$LoseLife | Cost$ 0 | LifeAmount$ 3 | Defined$ TriggeredAttackerController
-SVar:TrigLoseLifeBlock:AB$LoseLife | Cost$ 0 | LifeAmount$ 3 | Defined$ TriggeredBlockerController
-SVar:RemAIDeck:True
+SVar:TrigLoseLifeAttack:DB$ LoseLife | LifeAmount$ 3 | Defined$ TriggeredAttackerController
+SVar:TrigLoseLifeBlock:DB$ LoseLife | LifeAmount$ 3 | Defined$ TriggeredBlockerController
+DeckNeeds:Color$Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nettling_curse.jpg
 Oracle:Enchant creature\nWhenever enchanted creature attacks or blocks, its controller loses 3 life.\n{1}{R}: Enchanted creature attacks this turn if able.
