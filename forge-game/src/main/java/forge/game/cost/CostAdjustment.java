@@ -510,12 +510,13 @@ public class CostAdjustment {
             }
         }
         if (params.containsKey("ValidTarget")) {
-            if (!sa.usesTargeting()) {
-                return false;
-            }
             SpellAbility curSa = sa;
             boolean targetValid = false;
             outer: while (curSa != null) {
+                if (!curSa.usesTargeting()) {
+                    curSa = curSa.getSubAbility();
+                    continue;
+                }
                 for (GameObject target : curSa.getTargets().getTargets()) {
                     if (target.isValid(params.get("ValidTarget").split(","), hostCard.getController(), hostCard, curSa)) {
                         targetValid = true;
@@ -528,12 +529,13 @@ public class CostAdjustment {
             }
         }
         if (params.containsKey("ValidSpellTarget")) {
-            if (!sa.usesTargeting()) {
-                return false;
-            }
             SpellAbility curSa = sa;
             boolean targetValid = false;
             outer: while (curSa != null) {
+                if (!curSa.usesTargeting()) {
+                    curSa = curSa.getSubAbility();
+                    continue;
+                }
                 for (SpellAbility target : curSa.getTargets().getTargetSpells()) {
                     Card targetCard = target.getHostCard();
                     if (targetCard.isValid(params.get("ValidSpellTarget").split(","), hostCard.getController(), hostCard, curSa)) {
