@@ -128,7 +128,7 @@ public enum Keyword {
     STRIVE(KeywordWithCost.class, false, "CARDNAME costs %s more to cast for each target beyond the first."),
     SUNBURST(SimpleKeyword.class, false, "This enters the battlefield with either a +1/+1 or charge counter on it for each color of mana spent to cast it based on whether it's a creature."),
     SURGE(KeywordWithCost.class, true, "You may cast this spell for its surge cost if you or a teammate has cast another spell this turn."),
-    SUSPEND(KeywordWithCostAndAmount.class, false, "Rather than cast this card from your hand, you may pay %s and exile it with %d time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost."),
+    SUSPEND(KeywordWithCostAndAmount.class, false, "Rather than cast this card from your hand, you may pay %s and exile it with {%d:time counter} on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost."),
     TOTEM_ARMOR(SimpleKeyword.class, true, "If enchanted permanent would be destroyed, instead remove all damage marked on it and destroy this Aura."),
     TRAMPLE(SimpleKeyword.class, true, "If this creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker."),
     TRANSFIGURE(KeywordWithCost.class, false, "%s, Sacrifice this creature: Search your library for a creature card with the same converted mana cost as this creature and put that card onto the battlefield. Then shuffle your library. Transfigure only as a sorcery."),

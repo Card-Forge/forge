@@ -192,66 +192,6 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * abilitySuspendStatic.
-     * </p>
-     * 
-     * @param sourceCard
-     *            a {@link forge.game.card.Card} object.
-     * @param suspendCost
-     *            a {@link java.lang.String} object.
-     * @param timeCounters
-     *            a int.
-     * @return a {@link forge.game.spellability.SpellAbility} object.
-     */
-    public static SpellAbility abilitySuspendStatic(final Card sourceCard, final String suspendCost, final String timeCounters) {
-        // be careful with Suspend ability, it will not hit the stack
-        Cost cost = new Cost(suspendCost, true);
-        final SpellAbility suspend = new AbilityStatic(sourceCard, cost, null) {
-            @Override
-            public boolean canPlay() {
-                if (!(this.getRestrictions().canPlay(sourceCard, this))) {
-                    return false;
-                }
-
-                if (sourceCard.isInstant() || sourceCard.hasKeyword("Flash")) {
-                    return true;
-                }
-
-                return sourceCard.getOwner().canCastSorcery();
-            }
-
-            @Override
-            public void resolve() {
-                final Game game = sourceCard.getGame();
-                final Card c = game.getAction().exile(sourceCard, this);
-
-                int counters = AbilityUtils.calculateAmount(c, timeCounters, this);
-                c.addCounter(CounterType.TIME, counters, c, true);
-                
-                String sb = TextUtil.concatWithSpace(this.getActivatingPlayer().toString(),"has suspended", c.getName(), "with", String.valueOf(counters),"time counters on it.");
-                game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
-            }
-        };
-        final StringBuilder sbDesc = new StringBuilder();
-        sbDesc.append("Suspend ").append(timeCounters).append("—").append(cost.toSimpleString());
-        sbDesc.append(" (Rather than cast CARDNAME from your hand, you may pay ").append(cost.toSimpleString());
-        sbDesc.append(" and exile it with ").append(timeCounters);
-        sbDesc.append(" time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)");
-        suspend.setDescription(sbDesc.toString());
-
-        String svar = "X"; // emulate "References X" here
-        suspend.setSVar(svar, sourceCard.getSVar(svar));
-
-        final StringBuilder sbStack = new StringBuilder();
-        sbStack.append(sourceCard.getName()).append(" suspending for ").append(timeCounters).append(" turns.)");
-        suspend.setStackDescription(sbStack.toString());
-
-        suspend.getRestrictions().setZone(ZoneType.Hand);
-        return suspend;
-    } // abilitySuspendStatic()
-
-    /**
-     * <p>
      * isTargetStillValid.
      * </p>
      * 
@@ -2147,13 +2087,7 @@ public class CardFactoryUtil {
                 addTriggerAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Suspend")) {
-                card.setSuspend(true);
-                final String[] k = keyword.split(":");
-
-                final String timeCounters = k[1];
-                final String cost = k[2];
-                card.addSpellAbility(abilitySuspendStatic(card, cost, timeCounters));
-
+                addSpellAbility(keyword, card, null);
                 addTriggerAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Fading")) {
@@ -4218,6 +4152,64 @@ public class CardFactoryUtil {
                 kws.addSpellAbility(newSA);
             }
             card.addSpellAbility(newSA);
+        } else if (keyword.startsWith("Suspend") && !keyword.equals("Suspend")) {
+            // really needed?
+            card.setSuspend(true);
+            // only add it if suspend has counter and cost
+            final String[] k = keyword.split(":");
+
+            // be careful with Suspend ability, it will not hit the stack
+            Cost cost = new Cost(k[2], true);
+            final SpellAbility suspend = new AbilityStatic(card, cost, null) {
+                @Override
+                public boolean canPlay() {
+                    if (!(this.getRestrictions().canPlay(card, this))) {
+                        return false;
+                    }
+
+                    if (card.isInstant() || card.hasKeyword("Flash")) {
+                        return true;
+                    }
+
+                    return card.getOwner().canCastSorcery();
+                }
+
+                @Override
+                public void resolve() {
+                    final Game game = card.getGame();
+                    final Card c = game.getAction().exile(card, this);
+                    // better check?
+                    c.setSuspend(true);
+
+                    int counters = AbilityUtils.calculateAmount(c, k[1], this);
+                    c.addCounter(CounterType.TIME, counters, c, true);
+                    
+                    String sb = TextUtil.concatWithSpace(this.getActivatingPlayer().toString(),"has suspended", c.getName(), "with", String.valueOf(counters),"time counters on it.");
+                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                }
+            };
+            final StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("Suspend ").append(k[1]).append("—").append(cost.toSimpleString());
+            sbDesc.append(" (").append(Keyword.getInstance(keyword).getReminderText()).append(")");
+            suspend.setDescription(sbDesc.toString());
+
+            String svar = "X"; // emulate "References X" here
+            suspend.setSVar(svar, card.getSVar(svar));
+
+            final StringBuilder sbStack = new StringBuilder();
+            sbStack.append(card.getName()).append(" suspending for ");
+            sbStack.append(Lang.nounWithNumeral(k[1], "turn")).append(".)");
+            suspend.setStackDescription(sbStack.toString());
+
+            suspend.getRestrictions().setZone(ZoneType.Hand);
+
+            if (!intrinsic) {
+                suspend.setTemporary(true);
+                //sa.setOriginalHost(hostCard);
+                kws.addSpellAbility(suspend);
+            }
+
+            card.addSpellAbility(suspend);
         } else if (keyword.startsWith("Transmute")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
