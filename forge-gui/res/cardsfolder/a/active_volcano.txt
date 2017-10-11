@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Charm | Cost$ R | Choices$ DBDestroy,DBChangeZone
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Permanent.Blue | TgtPrompt$ Select target blue permanent | SpellDescription$ Destroy target blue permanent.
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Island | TgtPrompt$ Select target Island | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target Island to its owner's hand.
-SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/active_volcano.jpg
 Oracle:Choose one —\n• Destroy target blue permanent.\n• Return target Island to its owner's hand.

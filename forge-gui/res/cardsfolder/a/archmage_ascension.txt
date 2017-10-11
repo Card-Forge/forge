@@ -6,7 +6,7 @@ R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ Tutor
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
 SVar:Tutor:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ValidCard$ Card.YouOwn
 SVar:X:Count$YouDrewThisTurn
-SVar:RemAIDeck:True
+#TODO: improve AI tutoring logic
 SVar:RemRandomDeck:True
 SVar:MaxQuestEffect:6
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archmage_ascension.jpg

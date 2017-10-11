@@ -310,8 +310,9 @@ public class AnimateAi extends SpellAbilityAi {
                 // if its player turn,
                 // check if its Permanent or that creature would attack
                 if (ph.isPlayerTurn(ai)) {
-                    if (!sa.hasParam("Permanent") && 
-                            !ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animatedCopy)) {
+                    if (!sa.hasParam("Permanent")
+                            && !ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animatedCopy)
+                            && !sa.hasParam("UntilHostLeavesPlay")) {
                         continue;
                     }
                 }

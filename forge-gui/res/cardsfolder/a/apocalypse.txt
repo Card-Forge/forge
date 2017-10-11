@@ -3,6 +3,6 @@ ManaCost:2 R R R
 Types:Sorcery
 A:SP$ ChangeZoneAll | Cost$ 2 R R R | ChangeType$ Permanent | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBDiscard | SpellDescription$ Exile all permanents. You discard your hand.
 SVar:DBDiscard:DB$ Discard | Mode$ Hand
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apocalypse.jpg
 Oracle:Exile all permanents. You discard your hand.
