@@ -2349,37 +2349,7 @@ public class CardFactoryUtil {
                 addSpellAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Fortify")) {
-                final String equipString = keyword.substring(7);
-                final String[] equipExtras = equipString.contains("|") ? equipString.split("\\|", 2) : null;
-                // Get cost string
-                String equipCost = "";
-                if (equipExtras != null) {
-                    equipCost = equipExtras[0].trim();
-                } else {
-                    equipCost = equipString.trim();
-                }
-                // Create attach ability string
-                final StringBuilder abilityStr = new StringBuilder();
-                abilityStr.append("AB$ Attach | Cost$ ");
-                abilityStr.append(equipCost);
-                abilityStr.append(" | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control ");
-                abilityStr.append("| SorcerySpeed$ True | AILogic$ Pump | IsPresent$ Card.Self+nonCreature ");
-                if (equipExtras != null) {
-                    abilityStr.append("| ").append(equipExtras[1]).append(" ");
-                }
-                abilityStr.append("| PrecostDesc$ Fortify");
-                Cost cost = new Cost(equipCost, true);
-                if (!cost.isOnlyManaCost()) { //Something other than a mana cost
-                    abilityStr.append("—");
-                } else {
-                    abilityStr.append(" ");
-                }
-                abilityStr.append("| CostDesc$ " + cost.toSimpleString() + " ");
-                abilityStr.append("| SpellDescription$ (" + cost.toSimpleString() + ": Attach to target land you control. Fortify only as a sorcery.)");
-     
-                // instantiate attach ability
-                final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
-                card.addSpellAbility(sa);
+                addSpellAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Bestow")) {
                 addSpellAbility(keyword, card, null);
@@ -3642,11 +3612,10 @@ public class CardFactoryUtil {
 
             String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile";
             String delTrig = "DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You " + 
-            " | OptionalDecider$ You | RememberObjects$ Self | Execute$ ReboundPlay | TriggerDescription$"
+            " | OptionalDecider$ You | RememberObjects$ Self | TriggerDescription$"
             + " At the beginning of your next upkeep, you may cast " + card.toString() + " without paying it's manacost.";
             // TODO add check for still in exile
             String abPlay = "DB$ Play | Defined$ Self | WithoutManaCost$ True | Optional$ True";
-            card.setSVar("ReboundPlay", abPlay);
 
             SpellAbility saExile = AbilityFactory.getAbility(abExile, card);
 
@@ -4045,6 +4014,41 @@ public class CardFactoryUtil {
             }
 
             card.addSpellAbility(newSA);
+        } else if (keyword.startsWith("Fortify")) {
+            final String equipString = keyword.substring(7);
+            final String[] equipExtras = equipString.contains("|") ? equipString.split("\\|", 2) : null;
+            // Get cost string
+            String equipCost = "";
+            if (equipExtras != null) {
+                equipCost = equipExtras[0].trim();
+            } else {
+                equipCost = equipString.trim();
+            }
+            // Create attach ability string
+            final StringBuilder abilityStr = new StringBuilder();
+            abilityStr.append("AB$ Attach | Cost$ ");
+            abilityStr.append(equipCost);
+            abilityStr.append(" | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control ");
+            abilityStr.append("| SorcerySpeed$ True | AILogic$ Pump | IsPresent$ Card.Self+nonCreature ");
+            if (equipExtras != null) {
+                abilityStr.append("| ").append(equipExtras[1]).append(" ");
+            }
+            abilityStr.append("| PrecostDesc$ Fortify");
+            Cost cost = new Cost(equipCost, true);
+            abilityStr.append(cost.isOnlyManaCost() ? " " : "—");
+            abilityStr.append("| CostDesc$ " + cost.toSimpleString() + " ");
+            abilityStr.append("| SpellDescription$ (");
+            abilityStr.append(Keyword.getInstance(keyword).getReminderText()).append(")");
+ 
+            // instantiate attach ability
+            final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
+
+            if (!intrinsic) {
+                sa.setTemporary(true);
+                kws.addSpellAbility(sa);
+            }
+
+            card.addSpellAbility(sa);
         } else if (keyword.startsWith("Haunt")) {            
             if (!card.isCreature() && intrinsic) {
                 final String[] k = keyword.split(":");
