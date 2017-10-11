@@ -13,5 +13,4 @@ ManaCost:2 R
 Types:Instant
 A:SP$ Effect | Cost$ 2 R | Name$ Chaos Effect | StaticAbilities$ KWPump | AILogic$ Evasion | SpellDescription$ Creatures can't block this turn.
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures can't block this turn.
-SVar:RemAIDeck:True
 Oracle:Creatures can't block this turn.

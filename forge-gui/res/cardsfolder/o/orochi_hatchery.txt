@@ -5,6 +5,7 @@ K:etbCounter:CHARGE:X
 A:AB$ Token | Cost$ 5 T | TokenAmount$ Y | References$ Y | TokenController$ You | TokenName$ Snake | TokenTypes$ Creature,Snake | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 snake CHK | SpellDescription$ Create a 1/1 green Snake creature token for each charge counter on CARDNAME.
 SVar:X:Count$xPaid
 SVar:Y:Count$CardCounters.CHARGE
-SVar:RemAIDeck:True
+SVar:NeedsToPlayVar:Z GE4
+SVar:Z:Count$Valid Card.canProduceMana
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orochi_hatchery.jpg
 Oracle:Orochi Hatchery enters the battlefield with X charge counters on it.\n{5}, {T}: Create a 1/1 green Snake creature token for each charge counter on Orochi Hatchery.

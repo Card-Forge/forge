@@ -7,8 +7,6 @@ SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Triggers$ OpenIntoWonderTrigger
 SVar:OpenIntoWonderTrigger:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ OpenIntoWonderDraw | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to a player, draw a card.
 SVar:OpenIntoWonderDraw:DB$Draw | NumCards$ 1
 SVar:X:Targeted$Amount
-
-SVar:MaxTgts:Count$Valid Creature 
-SVar:RemAIDeck:True
+SVar:MaxTgts:Count$Valid Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/open_into_wonder.jpg
 Oracle:X target creatures can't be blocked this turn. Until end of turn, those creatures gain "Whenever this creature deals combat damage to a player, draw a card."
