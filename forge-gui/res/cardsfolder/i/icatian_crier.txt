@@ -3,6 +3,7 @@ ManaCost:2 W
 Types:Creature Human Spellshaper
 PT:1/1
 A:AB$ Token | Cost$ 1 W T Discard<1/Card> | TokenAmount$ 2 | TokenName$ Citizen | TokenTypes$ Creature,Citizen | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Create two 1/1 white Citizen creature tokens.
-SVar:RemAIDeck:True
+SVar:AIPreference:DiscardCost$Card.cmcLE1
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/icatian_crier.jpg
 Oracle:{1}{W}, {T}, Discard a card: Create two 1/1 white Citizen creature tokens.
