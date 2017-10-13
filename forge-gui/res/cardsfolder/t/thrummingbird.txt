@@ -4,6 +4,8 @@ Types:Creature Bird Horror
 PT:1/1
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigProliferate | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, proliferate.
-SVar:TrigProliferate:AB$Proliferate | Cost$ 0
+SVar:TrigProliferate:DB$ Proliferate
+DeckHas:Ability$Proliferate
+DeckHints:Ability$Counter
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thrummingbird.jpg
 Oracle:Flying\nWhenever Thrummingbird deals combat damage to a player, proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)
