@@ -3,6 +3,6 @@ ManaCost:3 G
 Types:Creature Crocodile
 PT:3/2
 A:AB$ Regenerate | Cost$ Sac<1/Forest> | SpellDescription$ Regenerate CARDNAME.
-SVar:RemAIDeck:True
+SVar:AIPreference:SacCost$Forest.Basic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rootwater_alligator.jpg
 Oracle:Sacrifice a Forest: Regenerate Rootwater Alligator.

@@ -4,7 +4,7 @@ Types:Creature Demon
 PT:6/6
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromHand+Self | Destination$ Battlefield | Execute$ TrigDestroyAll | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, destroy all nonartifact, nonblack creatures. They can't be regenerated.
-SVar:TrigDestroyAll:AB$DestroyAll | Cost$ 0 | ValidCards$ Creature.nonArtifact+nonBlack | NoRegen$ True
-SVar:RemAIDeck:True
+SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Creature.nonArtifact+nonBlack | NoRegen$ True
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reiver_demon.jpg
 Oracle:Flying\nWhen Reiver Demon enters the battlefield, if you cast it from your hand, destroy all nonartifact, nonblack creatures. They can't be regenerated.

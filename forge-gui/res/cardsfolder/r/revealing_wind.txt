@@ -7,6 +7,6 @@ SVar:DBCleanLoop:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBChoose
 SVar:DBChoose:DB$ ChooseCard | Choices$ Creature.faceDown+attacking,Creature.faceDown+blocking | RememberChosen$ True | ChoiceTitle$ Choose an face-down attacking or blocking creature | SubAbility$ DBLook
 SVar:DBLook:DB$ LookAt | Defined$ Remembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/revealing_wind.jpg
 Oracle:Prevent all combat damage that would be dealt this turn. You may look at each face-down creature that's attacking or blocking.
