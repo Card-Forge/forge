@@ -4,6 +4,6 @@ Types:Instant
 A:SP$ PutCounter | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True | SubAbility$ DBAnimate | SpellDescription$ Put a -1/-1 counter on target creature. When that creature dies this turn, its controller gets a poison counter.
 SVar:DBAnimate:DB$ Animate | Triggers$ VirulentDies | sVars$ PoisonController | Defined$ Targeted
 SVar:VirulentDies:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | TriggerController$ TriggeredCardController | Execute$ PoisonController | TriggerDescription$ When CARDNAME dies this turn, its controller gets a poison counter.
-SVar:PoisonController:AB$ Poison | Cost$ 0 | Defined$ TriggeredCardController | Num$ 1
+SVar:PoisonController:DB$ Poison | Defined$ TriggeredCardController | Num$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/virulent_wound.jpg
 Oracle:Put a -1/-1 counter on target creature. When that creature dies this turn, its controller gets a poison counter.

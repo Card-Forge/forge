@@ -38,7 +38,7 @@ K:Flying
 
 T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigSacrifice | TriggerDescription$ When this creature transforms into CARDNAME, target opponent sacrifices three creatures.
 
-SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0 | ValidTgts$ Opponent | SacValid$ Creature | Amount$ 3 | SacMessage$ Creature
+SVar:TrigSacrifice:DB$ Sacrifice | ValidTgts$ Opponent | SacValid$ Creature | Amount$ 3 | SacMessage$ Creature
 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abolisher_of_bloodlines.jpg
 

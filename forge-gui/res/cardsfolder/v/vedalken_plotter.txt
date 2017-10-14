@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Creature Vedalken Wizard
 PT:1/1
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTarget | TriggerDescription$ When CARDNAME enters the battlefield, exchange control of target land you control and target land an opponent controls.
-SVar:TrigTarget:AB$ Pump | Cost$ 0 | ValidTgts$ Land.YouCtrl | TgtPrompt$ Choose target land you control | SubAbility$ DBExchange | SpellDescription$ Exchange control of target land you control and target land an opponent controls.
+SVar:TrigTarget:DB$ Pump | ValidTgts$ Land.YouCtrl | TgtPrompt$ Choose target land you control | SubAbility$ DBExchange | SpellDescription$ Exchange control of target land you control and target land an opponent controls.
 SVar:DBExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Land.OppCtrl | TgtPrompt$ Choose target land an opponent controls
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_plotter.jpg

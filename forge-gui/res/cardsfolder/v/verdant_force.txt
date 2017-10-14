@@ -3,7 +3,7 @@ ManaCost:5 G G G
 Types:Creature Elemental
 PT:7/7
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of each upkeep, create a 1/1 green Saproling creature token.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenColors$ Green | TokenImage$ g 1 1 saproling 10E
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenColors$ Green | TokenImage$ g 1 1 saproling 10E
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/verdant_force.jpg
 Oracle:At the beginning of each upkeep, create a 1/1 green Saproling creature token.

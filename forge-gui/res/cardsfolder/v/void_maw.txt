@@ -4,7 +4,7 @@ Types:Creature Horror
 PT:4/5
 K:Trample
 R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | ReplaceWith$ Exile | Description$ If another creature would die, exile it instead.
-SVar:Exile:AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard | SubAbility$ DBRemember
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard | SubAbility$ DBRemember
 SVar:DBRemember:DB$ Pump | RememberObjects$ ReplacedCard | ConditionDefined$ ReplacedCard | ConditionPresent$ Card.inZoneExile | ConditionCompare$ GE1
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
 SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard

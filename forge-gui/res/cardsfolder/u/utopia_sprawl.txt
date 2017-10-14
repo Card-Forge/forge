@@ -6,7 +6,7 @@ A:SP$ Attach | Cost$ G | ValidTgts$ Forest | TgtPrompt$ Select target Forest | A
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
 T:Mode$ TapsForMana | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever enchanted Forest is tapped for mana, its controller adds one mana of the chosen color to his or her mana pool.
-SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ Chosen | Defined$ TriggeredCardController
+SVar:TrigMana:DB$ Mana | Produced$ Chosen | Defined$ TriggeredCardController
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/utopia_sprawl.jpg
 Oracle:Enchant Forest\nAs Utopia Sprawl enters the battlefield, choose a color.\nWhenever enchanted Forest is tapped for mana, its controller adds one mana of the chosen color to his or her mana pool (in addition to the mana the land produces).

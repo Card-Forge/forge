@@ -5,7 +5,7 @@ K:Enchant Creature
 A:SP$ Attach | Cost$ 3 G G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | AddTrigger$ VerdantTrig | AddSVar$ VerdantToken | Description$ Enchanted creature gets +3/+3 and has "At the beginning of each upkeep, create a 1/1 green Saproling creature token."
 SVar:VerdantTrig:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ VerdantToken | TriggerDescription$ At the beginning of each upkeep, create a 1/1 green Saproling creature token.
-SVar:VerdantToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 saproling TSP | TokenColors$ Green
+SVar:VerdantToken:DB$ Token | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 saproling TSP | TokenColors$ Green
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/verdant_embrace.jpg
 Oracle:Enchant creature\nEnchanted creature gets +3/+3 and has "At the beginning of each upkeep, create a 1/1 green Saproling creature token."
