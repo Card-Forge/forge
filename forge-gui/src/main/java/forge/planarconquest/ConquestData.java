@@ -17,6 +17,7 @@
  */
 package forge.planarconquest;
 
+import com.google.common.base.Function;
 import forge.achievement.PlaneswalkerAchievements;
 import forge.assets.ISkinImage;
 import forge.card.CardDb;
@@ -34,16 +35,8 @@ import forge.util.XmlWriter;
 import forge.util.gui.SOptionPane;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-
-import com.google.common.base.Function;
 
 public final class ConquestData {
     private static final String XML_FILE = "data.xml";
@@ -469,6 +462,9 @@ public final class ConquestData {
         }
         else {
             for (ConquestPlane p : FModel.getPlanes()) {
+                if (p.isUnreachable()) {
+                    continue;
+                }
                 ConquestPlaneData planeData = planeDataMap.get(p.getName());
                 if (planeData != null) {
                     wins += planeData.getTotalWins();
