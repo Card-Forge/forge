@@ -2,11 +2,11 @@ Name:Icy Prison
 ManaCost:U U
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature.
-SVar:TrigExile:DB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ForgetOtherRemembered$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ForgetOtherRemembered$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Battlefield | Defined$ Remembered
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ Remembered
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless any player pays {3}.
-SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self | UnlessCost$ 3 | UnlessPayer$ Player | UnlessAI$ OnlyOwn
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self | UnlessCost$ 3 | UnlessPayer$ Player | UnlessAI$ OnlyOwn
 SVar:PlayMain1:TRUE
 SVar:NeedsToPlayVar:Y GE3
 SVar:Y:Count$Valid Land.YouCtrl

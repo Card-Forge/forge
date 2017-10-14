@@ -2,7 +2,7 @@ Name:Imprison This Insolent Wretch
 ManaCost:no cost
 Types:Ongoing Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ ChooseTheWretch | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, choose an opponent.
-SVar:ChooseTheWretch:AB$ ChoosePlayer | Cost$ 0 | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse
+SVar:ChooseTheWretch:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Permanent.ChosenCtrl | AffectedZone$ Battlefield | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Permanents the chosen player controls don't untap during his or her untap step.
 T:Mode$ Attacks | ValidCard$ Card | Attacked$ Player.Chosen | Execute$ Abandon | TriggerZones$ Command | TriggerDescription$ When the chosen player is attacked or becomes the target of a spell or ability, abandon this scheme.
 T:Mode$ BecomesTarget | ValidTarget$ Player.Chosen | TriggerZones$ Command | Execute$ Abandon | Secondary$ True | TriggerDescription$ When the chosen player is attacked or becomes the target of a spell or ability, abandon this scheme.

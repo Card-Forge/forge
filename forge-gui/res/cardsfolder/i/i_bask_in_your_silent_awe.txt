@@ -9,8 +9,8 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ Abandon | TriggerZon
 T:Mode$ SpellCast | ValidActivatingPlayer$ Player.Opponent | Execute$ DBCount | TriggerZones$ Command | Static$ True
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ DBReset | TriggerZones$ Command | Static$ True
 
-SVar:DBCount:AB$ StoreSVar | Cost$ 0 | SVar$ X | Type$ CountSVar | Expression$ X/Plus.1
-SVar:DBReset:AB$ StoreSVar | Cost$ 0 | SVar$ X | Type$ Number | Expression$ 0
+SVar:DBCount:DB$ StoreSVar | SVar$ X | Type$ CountSVar | Expression$ X/Plus.1
+SVar:DBReset:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 0
 
 SVar:Abandon:AB$ Abandon | Cost$ 0
 SVar:X:Number$0

@@ -2,6 +2,6 @@ Name:Ignite the Cloneforge!
 ManaCost:no cost
 Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DarkEffect | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, put a token onto the battlefield that's a copy of target permanent an opponent controls.
-SVar:DarkEffect:AB$ CopyPermanent | Cost$ 0 | ValidTgts$ Permanent.OppCtrl | TgtPrompt$ Select target permanent an opponent controls
+SVar:DarkEffect:DB$ CopyPermanent | ValidTgts$ Permanent.OppCtrl | TgtPrompt$ Select target permanent an opponent controls
 SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/Ignite the Cloneforge!.full.jpg
 Oracle:When you set this scheme in motion, put a token onto the battlefield that's a copy of target permanent an opponent controls.
