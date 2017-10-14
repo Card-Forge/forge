@@ -4,9 +4,9 @@ Types:Enchantment
 K:ETBReplacement:Other:ChooseP
 SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemove | TriggerDescription$ At the beginning of your upkeep, remove all vortex counters from CARDNAME.
-SVar:TrigRemove:AB$ RemoveCounter | Cost$ 0 | CounterType$ VORTEX | CounterNum$ All
+SVar:TrigRemove:DB$ RemoveCounter | CounterType$ VORTEX | CounterNum$ All
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.Chosen | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the chosen player's upkeep, CARDNAME deals 3 damage to that player unless he or she pays {1} for each vortex counter on CARDNAME.
-SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ ChosenPlayer | NumDmg$ 3 | UnlessCost$ Y | UnlessPayer$ ChosenPlayer | References$ Y
+SVar:TrigDamage:DB$ DealDamage | Defined$ ChosenPlayer | NumDmg$ 3 | UnlessCost$ Y | UnlessPayer$ ChosenPlayer | References$ Y
 A:AB$ PutCounter | Cost$ X | CounterType$ VORTEX | CounterNum$ X | References$ X | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ Put X vortex counters on CARDNAME. Activate this ability only during your upkeep.
 SVar:X:Count$xPaid
 SVar:Y:Count$CardCounters.VORTEX

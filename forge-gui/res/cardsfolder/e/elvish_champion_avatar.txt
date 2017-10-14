@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+0/-5
 T:Mode$ NewGame | TriggerZones$ Command | Execute$ TrigToken | Static$ True | TriggerDescription$ You begin the game with a 1/1 green Elf creature token on the battlefield. It has "{T}: Add {G} to your mana pool."
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Elf | TokenTypes$ Creature,Elf | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenAbilities$ DBMana
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Elf | TokenTypes$ Creature,Elf | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenAbilities$ DBMana
 SVar:DBMana:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G} to your mana pool.
 SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Elvish Champion Avatar.full.jpg
 Oracle:Hand +0, life -5\nYou begin the game with a 1/1 green Elf creature token on the battlefield. It has "{T}: Add {G} to your mana pool."

@@ -8,7 +8,7 @@ PT:2/2
 
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, draw a card.
 
-SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1 | Defined$ TriggeredCardController
+SVar:TrigDraw:DB$Draw | NumCards$ 1 | Defined$ TriggeredCardController
 
 SVar:SacMe:1
 

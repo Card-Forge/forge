@@ -5,7 +5,7 @@ PT:0/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, you may sacrifice another permanent. If you do, create a 3/2 colorless Eldrazi Horror creature token.
 SVar:TrigToken:AB$ Token | Cost$ Sac<1/Permanent.Other/another permanent> | TokenAmount$ 1 | TokenName$ Eldrazi Horror | TokenTypes$ Creature,Eldrazi,Horror | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 3 | TokenToughness$ 2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Delirium$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ Delirium — At the beginning of your upkeep, if there are four or more card types among cards in your graveyard, transform CARDNAME.
-SVar:TrigTransform:AB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:AIPreference:SacCost$Creature.token
 DeckHints:Ability$Graveyard & Type$Eldrazi|Horror
 DeckHas:Ability$Token & Ability$Delirium
