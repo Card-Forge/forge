@@ -3,7 +3,7 @@ ManaCost:3 G G W W
 Types:Legendary Creature Angel
 PT:4/4
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChoice | TriggerDescription$ At the beginning of your upkeep, choose flying, first strike, trample, or rampage 3. CARDNAME gains that ability until your next upkeep.
-SVar:TrigChoice:AB$ GenericChoice | Cost$ 0 | Defined$ You | Choices$ SVar1,SVar2,SVar3,SVar4
+SVar:TrigChoice:DB$ GenericChoice | Defined$ You | Choices$ SVar1,SVar2,SVar3,SVar4
 SVar:SVar1:DB$ Pump | Defined$ Self | KW$ Flying | UntilYourNextUpkeep$ True | SpellDescription$ Flying
 SVar:SVar2:DB$ Pump | Defined$ Self | KW$ First Strike | UntilYourNextUpkeep$ True | SpellDescription$ First strike
 SVar:SVar3:DB$ Pump | Defined$ Self | KW$ Trample | UntilYourNextUpkeep$ True | SpellDescription$ Trample

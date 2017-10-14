@@ -4,7 +4,7 @@ Types:Creature Goblin Rogue
 PT:2/1
 K:First Strike
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of each opponent's end step, that player creates a 1/1 red Goblin creature token with "Creatures you control attack each combat if able."
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenOwner$ TriggeredPlayer | TokenPower$ 1 | TokenToughness$ 1 | TokenStaticAbilities$ STAttack | TokenColors$ Red | TokenImage$ r 1 1 goblin C16
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenOwner$ TriggeredPlayer | TokenPower$ 1 | TokenToughness$ 1 | TokenStaticAbilities$ STAttack | TokenColors$ Red | TokenImage$ r 1 1 goblin C16
 SVar:STAttack:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME attacks each combat if able. | Description$ Creatures you control attack each combat if able.
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_spymaster.jpg

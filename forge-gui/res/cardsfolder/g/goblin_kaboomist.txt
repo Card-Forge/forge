@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Goblin Warrior
 PT:1/2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a colorless artifact token named Land Mine with "{R}, Sacrifice this artifact: This artifact deals 2 damage to target attacking creature without flying." Then flip a coin. If you lose the flip, CARDNAME deals 2 damage to itself.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Land Mine | TokenTypes$ Artifact | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c land_mine | TokenAbilities$ KaboomistMine | SubAbility$ DBFlip
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Land Mine | TokenTypes$ Artifact | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c land_mine | TokenAbilities$ KaboomistMine | SubAbility$ DBFlip
 SVar:KaboomistMine:AB$ DealDamage | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Creature.attacking+withoutFlying | TgtPrompt$ Select target attacking creature without flying | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target attacking creature without flying.
 SVar:DBFlip:DB$ FlipACoin | Caller$ You | LoseSubAbility$ DmgSelf
 SVar:DmgSelf:DB$ DealDamage | Defined$ Self | NumDmg$ 2

@@ -4,6 +4,6 @@ Types:Creature Insect Horror
 PT:6/6
 K:Trample
 T:Mode$Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of your end step, return to your hand all creature cards in your graveyard that were put there from the battlefield this turn.
-SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | Defined$ ThisTurnEntered_Graveyard_from_Battlefield_Card.Creature+YouCtrl
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ ThisTurnEntered_Graveyard_from_Battlefield_Card.Creature+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gleancrawler.jpg
 Oracle:Trample\nAt the beginning of your end step, return to your hand all creature cards in your graveyard that were put there from the battlefield this turn.

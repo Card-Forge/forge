@@ -5,7 +5,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ AttackTrigger | AddSVar$ TrigTapUnTap | Description$ Enchanted creature has "Whenever this creature attacks, you may tap or untap target permanent.
 SVar:AttackTrigger:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTapUnTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may tap or untap target permanent.
-SVar:TrigTapUnTap:AB$ TapOrUntap | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
+SVar:TrigTapUnTap:DB$ TapOrUntap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostly_touch.jpg
 Oracle:Enchant creature\nEnchanted creature has "Whenever this creature attacks, you may tap or untap target permanent."

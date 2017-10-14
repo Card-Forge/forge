@@ -7,7 +7,7 @@ A:AB$ DealDamage | Cost$ AddCounter<0/LOYALTY> | ValidTgts$ Creature | TgtPrompt
 A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | TokenAmount$ 1 | TokenName$ Wolf | TokenColors$ Green | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ g 2 2 wolf ISD | Planeswalker$ True | References$ Y | SpellDescription$ Create a 2/2 green Wolf creature token.
 SVar:DamageThis:DB$ DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y | References$ Y
 SVar:Y:Targeted$CardPower
-SVar:TrigTransform:AB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/garruk_relentless.jpg
 Oracle:When Garruk Relentless has two or fewer loyalty counters on him, transform him.\n[0]: Garruk Relentless deals 3 damage to target creature. That creature deals damage equal to its power to him.\n[0]: Create a 2/2 green Wolf creature token.

@@ -2,7 +2,7 @@ Name:Golgari Germination
 ManaCost:1 B G
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+nonToken | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a nontoken creature you control dies, create a 1/1 green Saproling creature token.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 saproling RAV
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 saproling RAV
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golgari_germination.jpg
 Oracle:Whenever a nontoken creature you control dies, create a 1/1 green Saproling creature token.

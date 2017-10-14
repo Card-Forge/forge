@@ -3,7 +3,7 @@ ManaCost:G
 Types:Creature Ogre
 PT:2/2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | APlayerHasMoreLifeThanEachOther$ True | Execute$ TrigOppControl | TriggerDescription$ At the beginning of your upkeep, if a player has more life than each other player, the player with the most life gains control of CARDNAME.
-SVar:TrigOppControl:AB$ GainControl | Cost$ 0 | Defined$ Self | NewController$ Player.withMostLife
+SVar:TrigOppControl:DB$ GainControl | Defined$ Self | NewController$ Player.withMostLife
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghazban_ogre.jpg
 Oracle:At the beginning of your upkeep, if a player has more life than each other player, the player with the most life gains control of Ghazban Ogre.

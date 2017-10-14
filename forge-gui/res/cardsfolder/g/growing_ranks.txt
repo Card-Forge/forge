@@ -2,7 +2,7 @@ Name:Growing Ranks
 ManaCost:2 GW GW
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigChoose | TriggerDescription$ At the beginning of your upkeep, populate. (Create a token that's a copy of a creature token you control.)
-SVar:TrigChoose:AB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.token+YouCtrl | SubAbility$ DBCopy | Mandatory$ True | AILogic$ Clone
+SVar:TrigChoose:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature.token+YouCtrl | SubAbility$ DBCopy | Mandatory$ True | AILogic$ Clone
 SVar:DBCopy:DB$ CopyPermanent | Defined$ ChosenCard | NumCopies$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 DeckNeeds:Ability$Token

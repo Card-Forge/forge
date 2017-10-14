@@ -6,7 +6,7 @@ SVar:OssuaryCounters:DB$ PutCounter | ValidTgts$ Creature | TargetsWithDefinedCo
 SVar:OssuaryX:TriggeredCard$CardPower
 SVar:MaxTgts:TriggeredCardController$Valid Creature.YouCtrl
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, each player exiles all creatures he or she controls and creates X 1/1 green Saproling creature tokens, where X is the total power of the creatures he or she exiled this way. Then planeswalk.
-SVar:RolledChaos:AB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Creature | Imprint$ True | Origin$ Battlefield | Destination$ Exile | SubAbility$ OssuaryRepeat
+SVar:RolledChaos:DB$ ChangeZoneAll | ChangeType$ Creature | Imprint$ True | Origin$ Battlefield | Destination$ Exile | SubAbility$ OssuaryRepeat
 SVar:OssuaryRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ OssuaryTokens | SubAbility$ WalkAway
 SVar:OssuaryTokens:DB$ Token | TokenAmount$ OsX | References$ OsX | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ Player.IsRemembered | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 SVar:WalkAway:DB$ Planeswalk | SubAbility$ ClearImprinted

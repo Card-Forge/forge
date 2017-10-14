@@ -4,7 +4,7 @@ Types:Enchantment Creature Ox
 PT:5/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, target creature must be blocked this turn if able.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, target creature must be blocked this turn if able.
-SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME must be blocked if able. | AILogic$ Pump
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME must be blocked if able. | AILogic$ Pump
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Enchantment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goldenhide_ox.jpg

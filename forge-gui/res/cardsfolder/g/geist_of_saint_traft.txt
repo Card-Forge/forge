@@ -4,7 +4,7 @@ Types:Legendary Creature Spirit Cleric
 PT:2/2
 K:Hexproof
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create a 4/4 white Angel creature token with flying that's tapped and attacking. Exile that token at end of combat.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ w 4 4 angel ISD | TokenAmount$ 1 | TokenName$ Angel | TokenTypes$ Creature,Angel | TokenOwner$ You | TokenColors$ White | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying | TokenTapped$ True | TokenAttacking$ True | TokenSVars$ SaintTraftEOT | AtEOT$ ExileCombat
+SVar:TrigToken:DB$ Token | TokenImage$ w 4 4 angel ISD | TokenAmount$ 1 | TokenName$ Angel | TokenTypes$ Creature,Angel | TokenOwner$ You | TokenColors$ White | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying | TokenTapped$ True | TokenAttacking$ True | TokenSVars$ SaintTraftEOT | AtEOT$ ExileCombat
 SVar:HasAttackEffect:TRUE
 SVar:SaintTraftEOT:SVar:EndOfTurnLeavePlay:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/geist_of_saint_traft.jpg

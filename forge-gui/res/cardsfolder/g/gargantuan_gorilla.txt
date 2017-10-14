@@ -3,7 +3,7 @@ ManaCost:4 G G G
 Types:Creature Ape
 PT:7/7
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may sacrifice a Forest. If you sacrifice a snow Forest this way, CARDNAME gains trample until end of turn. If you don't sacrifice a Forest, sacrifice CARDNAME and it deals 7 damage to you.
-SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0 | Optional$ True | SacValid$ Forest | Amount$ 1 | RememberSacrificed$ True | SubAbility$ DBPump
+SVar:TrigSacrifice:DB$ Sacrifice | Optional$ True | SacValid$ Forest | Amount$ 1 | RememberSacrificed$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Trample | ConditionDefined$ Remembered | ConditionPresent$ Forest.Snow | ConditionCompare$ EQ1 | SubAbility$ DBSacMe
 SVar:DBSacMe:DB$ Sacrifice | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Forest | ConditionCompare$ EQ0 | SubAbility$ DBRageDamage
 SVar:DBRageDamage:DB$ DealDamage | Defined$ You | NumDmg$ 7 | ConditionDefined$ Remembered | ConditionPresent$ Forest | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
