@@ -8,7 +8,7 @@ SVar:X:XChoice
 SVar:LifePaidOnNewGame:Number$0
 S:Mode$ Continuous | EffectZone$ Command | Affected$ You | AddKeyword$ You can't draw cards. | Description$ You can't draw cards.
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigDig | TriggerDescription$ At the beginning of your draw step, look at the top X cards of your library, where X is the amount of life paid with CARDNAME. Put one of them into your hand, then shuffle your library.
-SVar:TrigDig:AB$ Dig | Cost$ 0 | DigNum$ LifePaidOnNewGame | References$ LifePaidOnNewGame | ChangeNum$ 1 | LibraryPosition$ 0 | SubAbility$ DBShuffle
+SVar:TrigDig:DB$ Dig | DigNum$ LifePaidOnNewGame | References$ LifePaidOnNewGame | ChangeNum$ 1 | LibraryPosition$ 0 | SubAbility$ DBShuffle
 SVar:DBShuffle:DB$ Shuffle | Defined$ You
 SVar:RemAIDeck:True
 SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Maralen of the Mornsong Avatar.full.jpg

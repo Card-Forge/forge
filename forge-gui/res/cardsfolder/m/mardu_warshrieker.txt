@@ -4,6 +4,6 @@ Types:Creature Orc Shaman
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ RaidTest | Execute$ ABMana | TriggerDescription$ Raid — When CARDNAME enters the battlefield, if you attacked with a creature this turn, add {R}{W}{B} to your mana pool.
 SVar:RaidTest:Count$AttackersDeclared
-SVar:ABMana:AB$ Mana | Cost$ 0 | Produced$ R W B
+SVar:ABMana:DB$ Mana | Produced$ R W B
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mardu_warshrieker.jpg
 Oracle:Raid — When Mardu Warshrieker enters the battlefield, if you attacked with a creature this turn, add {R}{W}{B} to your mana pool.

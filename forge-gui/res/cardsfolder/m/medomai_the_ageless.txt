@@ -5,7 +5,7 @@ PT:4/4
 K:Flying
 K:CARDNAME can't attack during extra turns.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigAddTurn | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, take an extra turn after this one.
-SVar:TrigAddTurn:AB$ AddTurn | Cost$ 0 | NumTurns$ 1
+SVar:TrigAddTurn:DB$ AddTurn | NumTurns$ 1
 SVar:MustBeBlocked:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/medomai_the_ageless.jpg
 Oracle:Flying\nWhenever Medomai the Ageless deals combat damage to a player, take an extra turn after this one.\nMedomai the Ageless can't attack during extra turns.

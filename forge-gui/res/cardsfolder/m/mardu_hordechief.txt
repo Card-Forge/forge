@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Creature Human Warrior
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ RaidTest | Execute$ TrigToken | TriggerDescription$ Raid — When CARDNAME enters the battlefield, if you attacked with a creature this turn, create a 1/1 white Warrior creature token.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Warrior | TokenTypes$ Creature,Warrior | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ w_1_1_warrior2
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Warrior | TokenTypes$ Creature,Warrior | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ w_1_1_warrior2
 SVar:RaidTest:Count$AttackersDeclared
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mardu_hordechief.jpg
 Oracle:Raid — When Mardu Hordechief enters the battlefield, if you attacked with a creature this turn, create a 1/1 white Warrior creature token.

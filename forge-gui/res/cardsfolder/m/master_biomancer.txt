@@ -3,7 +3,7 @@ ManaCost:2 G U
 Types:Creature Elf Wizard
 PT:2/4
 R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+Other | ReplaceWith$ AddExtraCounter | Description$ Each other creature you control enters the battlefield with a number of additional +1/+1 counters on it equal to CARDNAME's power and as a Mutant in addition to its other types.
-SVar:AddExtraCounter:AB$ PutCounter | Cost$ 0 | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ X | References$ X | SubAbility$ DBAnimate
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ X | References$ X | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Types$ Mutant | Permanent$ True | Defined$ ReplacedCard | SubAbility$ MoveToBattlefield
 SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
 SVar:X:Count$CardPower

@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+0/+30
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, you lose 1 life for each permanent you control.
-SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ Ouch
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ Ouch
 SVar:Ouch:Count$Valid Permanent.YouCtrl
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True

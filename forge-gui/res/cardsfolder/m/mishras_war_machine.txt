@@ -4,7 +4,7 @@ Types:Artifact Creature Juggernaut
 PT:5/5
 K:Banding
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 3 damage to you unless you discard a card. If CARDNAME deals damage to you this way, tap it.
-SVar:TrigDealDamage:AB$ DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 3 | UnlessPayer$ You | UnlessCost$ Discard<1/Card> | RememberDamaged$ True | SubAbility$ DBTap
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 3 | UnlessPayer$ You | UnlessCost$ Discard<1/Card> | RememberDamaged$ True | SubAbility$ DBTap
 SVar:DBTap:DB$ Tap | ConditionPlayerDefined$ Remembered | ConditionPlayerContains$ You | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mishras_war_machine.jpg

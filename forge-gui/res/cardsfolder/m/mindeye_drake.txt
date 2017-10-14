@@ -4,6 +4,6 @@ Types:Creature Drake
 PT:2/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigMill | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, target player puts the top five cards of his or her library into his or her graveyard.
-SVar:TrigMill:AB$ Mill | Cost$ 0 | NumCards$ 5 | ValidTgts$ Player | TgtPrompt$ Select target player
+SVar:TrigMill:DB$ Mill | NumCards$ 5 | ValidTgts$ Player | TgtPrompt$ Select target player
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindeye_drake.jpg
 Oracle:Flying\nWhen Mindeye Drake dies, target player puts the top five cards of his or her library into his or her graveyard.

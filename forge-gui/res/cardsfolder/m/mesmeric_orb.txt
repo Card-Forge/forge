@@ -2,7 +2,7 @@ Name:Mesmeric Orb
 ManaCost:2
 Types:Artifact
 T:Mode$ Untaps | ValidCard$ Card | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever a permanent becomes untapped, that permanent's controller puts the top card of his or her library into his or her graveyard.
-SVar:TrigMill:AB$ Mill | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 1 | NoReveal$ True
+SVar:TrigMill:DB$ Mill | Defined$ TriggeredCardController | NumCards$ 1 | NoReveal$ True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mesmeric_orb.jpg
 Oracle:Whenever a permanent becomes untapped, that permanent's controller puts the top card of his or her library into his or her graveyard.

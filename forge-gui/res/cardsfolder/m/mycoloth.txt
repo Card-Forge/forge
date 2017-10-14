@@ -4,7 +4,7 @@ Types:Creature Fungus
 PT:4/4
 K:Devour:2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a 1/1 green Saproling creature token for each +1/+1 counter on CARDNAME.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ X | References$ X | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenColors$ Green | TokenImage$ g 1 1 saproling ALA
+SVar:TrigToken:DB$ Token | TokenAmount$ X | References$ X | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenColors$ Green | TokenImage$ g 1 1 saproling ALA
 SVar:X:Count$CardCounters.P1P1
 DeckHas:Ability$Counters & Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mycoloth.jpg

@@ -3,7 +3,7 @@ ManaCost:6
 Types:Artifact Creature Golem
 PT:3/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Imprint — When CARDNAME enters the battlefield, you may exile target card from a graveyard.
-SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | Imprint$ True
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | Imprint$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection from creatures | CheckSVar$ CheckCreature | SVarCompare$ GE1 | Description$ CARDNAME has protection from each of the exiled card's card types. (Artifact, creature, enchantment, instant, land, planeswalker, sorcery, and tribal are card types.)

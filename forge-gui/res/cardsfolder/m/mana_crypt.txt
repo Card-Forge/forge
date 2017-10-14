@@ -2,7 +2,7 @@ Name:Mana Crypt
 ManaCost:0
 Types:Artifact
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigFlip | TriggerDescription$ At the beginning of your upkeep, flip a coin. If you lose the flip, CARDNAME deals 3 damage to you.
-SVar:TrigFlip:AB$ FlipACoin | Cost$ 0 | Defined$ You | LoseSubAbility$ DBDamage
+SVar:TrigFlip:DB$ FlipACoin | Defined$ You | LoseSubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | Defined$ You | NumDmg$ 3
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C} to your mana pool.
 SVar:RemRandomDeck:True
