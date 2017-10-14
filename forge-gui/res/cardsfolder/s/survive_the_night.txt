@@ -7,4 +7,3 @@ SVar:ABDraw:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$
 DeckHas:Ability$Investigate & Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/survive_the_night.jpg
 Oracle:Target creature gets +1/+0 and gains indestructible until end of turn.\nInvestigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
-

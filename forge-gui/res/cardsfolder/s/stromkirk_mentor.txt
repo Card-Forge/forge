@@ -7,4 +7,3 @@ SVar:TrigPut:DB$PutCounter | ValidTgts$ Vampire.Other+YouCtrl | TgtPrompt$ Selec
 DeckHints:Type$Vampire
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stromkirk_mentor.jpg
 Oracle:When Stromkirk Mentor enters the battlefield, put a +1/+1 counter on another target Vampire you control.
-

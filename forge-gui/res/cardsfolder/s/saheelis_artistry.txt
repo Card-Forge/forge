@@ -6,4 +6,3 @@ SVar:DBCopy1:DB$ CopyPermanent | ValidTgts$ Artifact | TgtPrompt$ Select target 
 SVar:DBCopy2:DB$ CopyPermanent | ValidTgts$ Creature | TgtPrompt$ Select target creature. | AddTypes$ Artifact | SpellDescription$ Create a token that's a copy of target creature, except it's an artifact in addition to its other types.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/saheelis_artistry.jpg
 Oracle:Choose one or both —\n• Create a token that's a copy of target artifact.\n• Create a token that's a copy of target creature, except it's an artifact in addition to its other types.
-

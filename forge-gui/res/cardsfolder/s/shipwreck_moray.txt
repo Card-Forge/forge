@@ -7,4 +7,3 @@ SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum
 A:AB$ Pump | Cost$ PayEnergy<1> | NumAtt$ +2 | NumDef$ -2 | SpellDescription$ CARDNAME gets +2/-2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shipwreck_moray.jpg
 Oracle:When Shipwreck Moray enters the battlefield, you get {E}{E}{E}{E} (four energy counters).\nPay {E}: Shipwreck Moray gets +2/-2 until end of turn.
-

@@ -2,12 +2,9 @@ Name:Thriving Ibex
 ManaCost:3 W
 Types:Creature Goat
 PT:2/4
-
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E}{E}.
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
-
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME attacks, you may pay {E}{E}. If you do, put a +1/+1 counter on it.
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ PayEnergy<2> | CounterType$ P1P1 | CounterNum$ 1
-
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thriving_ibex.jpg
 Oracle:When Thriving Ibex enters the battlefield, you get {E}{E} (two energy counters).\nWhenever Thriving Ibex attacks, you may pay {E}{E}. If you do, put a +1/+1 counter on it.

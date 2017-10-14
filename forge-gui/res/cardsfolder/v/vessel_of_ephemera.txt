@@ -5,4 +5,3 @@ A:AB$ Token | Cost$ 2 W Sac<1/CARDNAME> | TokenOwner$ You | TokenAmount$ 2 | Tok
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vessel_of_ephemera.jpg
 Oracle:{2}{W}, Sacrifice Vessel of Ephemera: Create two 1/1 white Spirit creature tokens with flying.
-

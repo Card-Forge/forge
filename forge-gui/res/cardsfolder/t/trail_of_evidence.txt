@@ -7,4 +7,3 @@ SVar:ABDraw:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$
 DeckNeeds:Type$Instant|Sorcery
 DeckHas:Ability$Investigate & Ability$Token
 Oracle:Whenever you cast an instant or sorcery spell, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
-

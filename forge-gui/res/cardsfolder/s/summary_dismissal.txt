@@ -6,4 +6,3 @@ SVar:DBCounter: DB$ Counter | AllType$ Activated,Triggered | AllValid$ Card
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/summary_dismissal.jpg
 Oracle:Exile all other spells and counter all abilities.
-

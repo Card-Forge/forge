@@ -6,4 +6,3 @@ SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Human Soldier | TokenTypes$ 
 DeckHints:Type$Equipment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_of_arms.jpg
 Oracle:Target creature gets +2/+2 until end of turn. If you control an Equipment, create a 1/1 white Human Soldier creature token.
-

@@ -5,4 +5,3 @@ A:SP$ Token | Cost$ 2 W W | TokenAmount$ 3 | TokenName$ Servo | TokenTypes$ Arti
 SVar:DBPlay:DB$ Play | Valid$ Card.nonLand+YouOwn+cmcLE3 | ValidZone$ Hand | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/srams_expertise.jpg
 Oracle:Create three 1/1 colorless Servo artifact creature tokens.\nYou may cast a card with converted mana cost 3 or less from your hand without paying its mana cost.
-

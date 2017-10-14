@@ -5,10 +5,8 @@ A:SP$ PutCounter | Cost$ 2 B B | ValidTgts$ Creature | TgtPrompt$ Select target 
 SVar:DBGenericChoice:DB$ GenericChoice | Choices$ PaySac,PayDiscard | Defined$ TargetedController | FallbackAbility$ LoseLifeFallback | AILogic$ PayUnlessCost | SubAbility$ DBCleanup
 SVar:PaySac:DB$ LoseLife | LifeAmount$ 3 | Defined$ TargetedController | UnlessCost$ Sac<1/Permanent.IsNotRemembered+nonland/another nonland permanent> | UnlessPayer$ TargetedController | UnlessAI$ LifeLE3 | SpellDescription$ You lose 3 life unless you sacrifice another nonland permanent
 SVar:PayDiscard:DB$ LoseLife | LifeAmount$ 3 | Defined$ TargetedController | UnlessCost$ Discard<1/Card> | UnlessPayer$ TargetedController | UnlessAI$ LifeLE3 | SpellDescription$ You lose 3 life unless you discard a card
-
 # TODO: Most likely the ChooseGenericEffect code can be simplified somehow to avoid the necessity of having a dedicated fallback ability
 SVar:LoseLifeFallback:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ 3
-
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Counters
 SVar:AIPreference:SacCost$Permanent.nonLand | DiscardCost$Card

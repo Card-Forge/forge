@@ -8,4 +8,3 @@ SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Wolf | TokenTypes$ Creature
 DeckHints:Type$Wolf & Type$Werewolf
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silverfur_partisan.jpg
 Oracle:Trample\nWhenever a Wolf or Werewolf you control becomes the target of an instant or sorcery spell, create a 2/2 green Wolf creature token.
-

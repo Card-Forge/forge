@@ -13,4 +13,3 @@ A:AB$ Token | Cost$ SubCounter<9/LOYALTY> | Planeswalker$ True | TokenAmount$ Z 
 SVar:Z:PlayerCountPlayers$HighestLifeTotal 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sorin_grim_nemesis.jpg
 Oracle:[+1]: Reveal the top card of your library and put that card into your hand. Each opponent loses life equal to its converted mana cost.\n[-X]: Sorin, Grim Nemesis deals X damage to target creature or planeswalker and you gain X life.\n[-9]: Create a number of 1/1 black Vampire Knight creature tokens with lifelink equal to the highest life total among all players.
-

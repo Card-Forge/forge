@@ -5,4 +5,3 @@ A:SP$ ChangeZone | Cost$ 3 R | ValidTgts$ Artifact,Land | TgtPrompt$ Select targ
 SVar:DBDealDamage:DB$DealDamage | Defined$ TargetedController | NumDmg$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/structural_distortion.jpg
 Oracle:Exile target artifact or land. Structural Distortion deals 2 damage to that permanent's controller.
-

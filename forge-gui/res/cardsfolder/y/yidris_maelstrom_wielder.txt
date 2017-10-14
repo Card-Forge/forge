@@ -8,7 +8,3 @@ SVar:TrigCascade:DB$ Effect | StaticAbilities$ GrantCascade
 SVar:GrantCascade:Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouCtrl+YouOwn | AffectedZone$ Hand | AddKeyword$ Cascade | Description$ As you cast spells from your hand this turn, they gain cascade.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yidris_maelstrom_wielder.jpg
 Oracle:Trample\nWhenever Yidris, Maelstrom Wielder deals combat damage to a player, as you cast spells from your hand this turn, they gain cascade. (When you cast the spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)
-
-
-
-

@@ -9,4 +9,3 @@ DeckHints:Ability$Graveyard & Ability$Discard
 DeckHas:Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_swallower.jpg
 Oracle:Trample\nDelirium — At the beginning of your upkeep, if there are four or more card types among cards in your graveyard, put three +1/+1 counters on Soul Swallower.
-

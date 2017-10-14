@@ -5,4 +5,3 @@ A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenName$ Thopter | TokenTypes$ Arti
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whirlermaker.jpg
 DeckHas:Ability$Token
 Oracle:{4}, {T}: Create a 1/1 colorless Thopter artifact creature token with flying.
-

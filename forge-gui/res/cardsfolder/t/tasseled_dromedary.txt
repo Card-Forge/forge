@@ -4,4 +4,3 @@ Types:Creature Camel
 PT:0/4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tasseled_dromedary.jpg
 Oracle:
-

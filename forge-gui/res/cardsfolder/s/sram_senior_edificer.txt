@@ -8,4 +8,3 @@ SVar:RemRandomDeck:True
 DeckNeeds:Type$Enchantment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sram_senior_edificer.jpg
 Oracle:Whenever you cast an Aura, Equipment, or Vehicle spell, draw a card.
-

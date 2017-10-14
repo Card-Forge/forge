@@ -6,4 +6,3 @@ SVar:DBClone:DB$ CopyPermanent | Defined$ Remembered
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/second_harvest.jpg
 Oracle:For each token you control, create a token that's a copy of that permanent.
-

@@ -6,10 +6,8 @@ SVar:RepeatTorment:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ 
 SVar:DBChoose:DB$ GenericChoice | Defined$ Player.IsRemembered | Choices$ SacNonland,Discard | FallbackAbility$ LoseLifeFallback | AILogic$ PayUnlessCost
 SVar:Discard:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ 3 | UnlessCost$ Discard<1/Card> | UnlessPayer$ Player.IsRemembered | SpellDescription$ You lose 3 life unless you discard a card
 SVar:SacNonland:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ 3 | UnlessCost$ Sac<1/Permanent.nonLand/nonland permanent> | UnlessPayer$ Player.IsRemembered | SpellDescription$ You lose 3 life unless you sacrifice a nonland permanent
-
 # TODO: Most likely the ChooseGenericEffect code can be simplified somehow to avoid the necessity of having a dedicated fallback ability
 SVar:LoseLifeFallback:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ 3
-
 SVar:X:Count$xPaid
 SVar:AIPreference:SacCost$Permanent.nonLand | DiscardCost$Card
 SVar:Picture:http://www.wizards.com/global/images/magic/general/torment_of_hailfire.jpg

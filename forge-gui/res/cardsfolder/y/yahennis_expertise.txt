@@ -5,4 +5,3 @@ A:SP$ PumpAll | Cost$ 2 B B | ValidCards$ Creature | NumAtt$ -3 | NumDef$ -3 | I
 SVar:DBPlay:DB$Play | Valid$ Card.nonLand+YouOwn+cmcLE3 | ValidZone$ Hand | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yahennis_expertise.jpg
 Oracle:All creatures get -3/-3 until end of turn.\nYou may cast a card with converted mana cost 3 or less from your hand without paying its mana cost.
-

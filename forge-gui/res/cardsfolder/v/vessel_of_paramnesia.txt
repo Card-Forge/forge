@@ -5,4 +5,3 @@ A:AB$ Mill | Cost$ U Sac<1/CARDNAME> | NumCards$ 3 | ValidTgts$ Player | SubAbil
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vessel_of_paramnesia.jpg
 Oracle:{U}, Sacrifice Vessel of Paramnesia: Target player puts the top three cards of his or her library into his or her graveyard. Draw a card.
-

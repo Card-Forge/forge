@@ -6,4 +6,3 @@ DeckHints:Ability$Delirium & Keyword$Madness
 DeckHas:Ability$Graveyard & Ability$Discard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sinister_concoction.jpg
 Oracle:{B}, Pay 1 life, Put the top card of your library into your graveyard, Discard a card, Sacrifice Sinister Concoction: Destroy target creature.
-

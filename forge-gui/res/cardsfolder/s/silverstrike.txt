@@ -5,4 +5,3 @@ A:SP$ Destroy | Cost$ 3 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select ta
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silverstrike.jpg
 Oracle:Destroy target attacking creature. You gain 3 life.
-

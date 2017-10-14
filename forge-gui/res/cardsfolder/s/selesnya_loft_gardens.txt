@@ -1,7 +1,6 @@
 Name:Selesnya Loft Gardens
 ManaCost:no cost
 Types:Plane Ravnica
-
 R:Event$ CreateToken | ActiveZones$ Command | ReplaceWith$ DoubleToken | EffectOnly$ True | Description$ If an effect would create one or more tokens, it creates twice that many of those tokens instead.
 SVar:DoubleToken:DB$ ReplaceEffect | VarName$ TokenNum | VarValue$ Y | References$ Y
 R:Event$ AddCounter | ActiveZones$ Command | ValidCard$ Permanent | EffectOnly$ True | ReplaceWith$ DoubleCounters | Description$ If an effect would put one or more counters on a permanent, it puts twice that many of those counters on that permanent instead.

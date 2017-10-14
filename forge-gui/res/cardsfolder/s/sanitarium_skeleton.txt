@@ -7,4 +7,3 @@ SVar:DiscardMe:2
 SVar:SacMe:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanitarium_skeleton.jpg
 Oracle:{2}{B}: Return Sanitarium Skeleton from your graveyard to your hand.
-

@@ -9,4 +9,3 @@ T:Mode$ ChangesZone | ValidCard$ Land.YouOwn | OncePerEffect$ True | Origin$ Any
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_gitrog_monster.jpg
 Oracle:Deathtouch\nAt the beginning of your upkeep, sacrifice The Gitrog Monster unless you sacrifice a land.\nYou may play an additional land on each of your turns.\nWhenever one or more land cards are put into your graveyard from anywhere, draw a card. 
-

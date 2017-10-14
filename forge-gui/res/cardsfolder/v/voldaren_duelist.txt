@@ -8,4 +8,3 @@ SVar:TrigCanNotBlock:DB$ Pump | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voldaren_duelist.jpg
 Oracle:Haste\nWhen Voldaren Duelist enters the battlefield, target creature can't block this turn.
-

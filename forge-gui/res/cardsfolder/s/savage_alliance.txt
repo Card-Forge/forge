@@ -8,4 +8,3 @@ SVar:DBDamage1:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target c
 SVar:DBDamage2:DB$ DamageAll | NumDmg$ 1 | ValidTgts$ Opponent | TgtPrompt$ Select an opponent to deal 1 damage to each creature controlled | ValidCards$ Creature | ValidDescription$ each creature the opponent controls. | SpellDescription$ CARDNAME deals 1 damage to each creature target opponent controls. 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_alliance.jpg
 Oracle:Escalate {1} (Pay this cost for each mode chosen beyond the first.)\nChoose one or more —\n• Creatures target player controls gain trample until end of turn.\n• Savage Alliance deals 2 damage to target creature.\n• Savage Alliance deals 1 damage to each creature target opponent controls.
-

@@ -7,4 +7,3 @@ SVar:X:Count$ThisTurnCast_Card.nonCreature+YouCtrl
 SVar:BuffedBy:Card.nonCreature+nonLand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silburlind_snapper.jpg
 Oracle:Silburlind Snapper can't attack unless you've cast a noncreature spell this turn.
-

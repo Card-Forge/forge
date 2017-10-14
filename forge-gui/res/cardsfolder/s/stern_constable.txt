@@ -7,4 +7,3 @@ DeckHas:Ability$Discard
 DeckHints:Keyword$Madness & Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stern_constable.jpg
 Oracle:{T}, Discard a card: Tap target creature.
-

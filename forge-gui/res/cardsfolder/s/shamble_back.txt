@@ -6,4 +6,3 @@ SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creatu
 SVar:DBGainLife:DB$GainLife | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shamble_back.jpg
 Oracle:Exile target creature card from a graveyard. Create a 2/2 black Zombie creature token. You gain 2 life.
-

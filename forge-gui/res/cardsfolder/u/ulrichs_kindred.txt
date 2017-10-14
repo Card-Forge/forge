@@ -7,4 +7,3 @@ A:AB$ Pump | Cost$ 3 G | ValidTgts$ Wolf.attacking,Werewolf.attacking | TgtPromp
 DeckHints:Type$Wolf & Type$Werewolf
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ulrichs_kindred.jpg
 Oracle:Trample\n{3}{G}: Target attacking Wolf or Werewolf gains indestructible until end of turn.
-
