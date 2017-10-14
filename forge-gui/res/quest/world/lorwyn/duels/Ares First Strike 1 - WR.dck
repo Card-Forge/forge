@@ -1,0 +1,38 @@
+[duel]
+
+[metadata]
+Name=Ares' First Strike 1
+Title=Ares
+Icon=Ares.jpg
+Difficulty=easy
+Description=[W/R] Preconstructed
+Deck Type=constructed
+
+[main]
+13 Mountain|SHM
+11 Plains|SHM
+
+1 Revelsong Horn|SHM
+1 Balefire Liege|EVE
+2 Ballynock Cohort|SHM
+2 Ballynock Trapper|EVE
+2 Battlegate Mimic|EVE
+2 Belligerent Hatchling|EVE
+2 Duergar Assailant|EVE
+3 Duergar Mine-Captain|EVE
+1 Hatchet Bully|EVE
+1 Hateflayer|EVE
+3 Hearthfire Hobgoblin|EVE
+2 Kithkin Spellduster|EVE
+2 Outrage Shaman|EVE
+1 Patrol Signaler|EVE
+1 Safehold Sentry|SHM
+2 Power of Fire|SHM
+2 Scourge of the Nobilis|EVE
+2 Niveous Wisps|SHM
+2 Puncture Blast|EVE
+2 Puncture Bolt|SHM
+
+[sideboard]
+[planes]
+[schemes]

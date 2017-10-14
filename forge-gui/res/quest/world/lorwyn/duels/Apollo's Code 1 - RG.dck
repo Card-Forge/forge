@@ -1,0 +1,39 @@
+[duel]
+
+[metadata]
+Name=Apollo's Code 1
+Title=Apollo
+Icon=Apollo.jpg
+Difficulty=easy
+Description=[R/G] Preconstructed.
+Deck Type=constructed
+
+[main]
+14 Forest|LRW
+10 Mountain|LRW
+
+2 Ambassador Oak|MOR
+1 Axegrinder Giant|LRW
+1 Boldwyr Heavyweights|MOR
+1 Boldwyr Intimidator|MOR
+2 Bramblewood Paragon|MOR
+3 Brighthearth Banneret|MOR
+2 Changeling Berserker|LRW
+2 Cloudcrown Oak|LRW
+2 Elvish Warrior|MOR
+1 Fistful of Force|LRW
+1 Heal the Scars|LRW
+1 Incremental Growth|LRW
+2 Kindled Fury|MOR
+2 Lunk Errant|MOR
+2 Mudbutton Clanger|MOR
+3 Obsidian Battle-Axe|MOR
+2 Recross the Paths|MOR
+2 Release the Ants|MOR
+1 Roar of the Crowd|MOR
+1 Unstoppable Ash|MOR
+2 Winnower Patrol|MOR
+
+[Sideboard]
+[Planes]
+[Schemes]

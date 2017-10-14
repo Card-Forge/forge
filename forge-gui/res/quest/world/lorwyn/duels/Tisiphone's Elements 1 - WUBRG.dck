@@ -1,0 +1,47 @@
+[duel]
+
+[metadata]
+Name=Tisiphone's Elements 1
+Title=Tisiphone
+Icon=Tisiphone.jpg
+Difficulty=easy
+Description=[W/U/B/R/G] Preconstructed.
+Deck Type=constructed
+
+[main]
+1  Forest|LRW
+2  Island|LRW
+12  Mountain|LRW
+1  Plains|LRW
+2  Shimmering Grotto|LRW
+2  Swamp|LRW
+1  Vivid Crag|LRW
+
+2  AEthersnipe|LRW
+1  Briarhorn|LRW
+2  Ceaseless Searblades|LRW
+2  Changeling Berserker|LRW
+1  Changeling Titan|LRW
+1  Dawnfluke|LRW
+1  Faultgrinder|LRW
+1  Flamekin Bladewhirl|LRW
+2  Flamekin Brawler|LRW
+2  Flamekin Harbinger|LRW
+1  Horde of Notions|LRW
+1  Incandescent Soulstoke|LRW
+1  Inner-Flame Acolyte|LRW
+2  Inner-Flame Igniter|LRW
+2  Mournwhelk|LRW
+1  Mulldrifter|LRW
+1  Shriekmaw|LRW
+3  Smokebraider|LRW
+3  Soulbright Flamekin|LRW
+1  Wispmare|LRW
+
+3  Consuming Bonfire|LRW
+2  Springleaf Drum|LRW
+3  Wanderer's Twig|LRW
+
+[sideboard]
+[planes]
+[schemes]

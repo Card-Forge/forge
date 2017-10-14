@@ -1,0 +1,41 @@
+[duel]
+
+[metadata]
+Name=Phoebes
+Title=Phoebe's Ire 1
+Icon=Phoebe.jpg
+Difficulty=easy
+Description=[W/B] Preconstructed
+Deck Type=constructed
+
+[Main]
+2 Apothecary Initiate|SHM
+1 Archon of Justice|EVE
+1 Batwing Brume|EVE
+1 Beckon Apparition|EVE
+1 Divinity of Pride|EVE
+1 Endure|EVE
+1 Flickerwisp|EVE
+1 Goldenglow Moth|SHM
+2 Gwyllion Hedge-Mage|EVE
+2 Kithkin Zealot|EVE
+3 Nip Gwyllion|EVE
+14 Plains|SHM
+10 Swamp|SHM
+2 Recumbent Bliss|EVE
+1 Resplendent Mentor|SHM
+1 Restless Apparition|EVE
+1 Rite of Consumption|SHM
+2 Safehold Sentry|SHM
+2 Smolder Initiate|SHM
+2 Soul Reap|EVE
+1 Soul Snuffers|EVE
+1 Suture Spirit|EVE
+2 Syphon Life|EVE
+2 Unmake|EVE
+2 Voracious Hatchling|EVE
+1 Woeleecher|SHM
+
+[sideboard]
+[planes]
+[schemes]

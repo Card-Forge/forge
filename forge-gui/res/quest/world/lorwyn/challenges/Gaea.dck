@@ -1,0 +1,45 @@
+[quest]
+id=5000
+OpponentName=Gaea
+AILife=30
+Repeat=true
+Wins=20
+Card Reward=3 rares;33% 1 blue rare; 33% Flooded Grove|EVE
+Credit Reward=200
+HumanExtras=
+AIExtras=Dolmen Gate|Merrow Commerce
+
+[metadata]
+Name=quest5000
+Title=Gaea
+Difficulty=hard
+Description=The spirit of the Earth has wrapped around you and will not let go!
+Icon=Gaea.jpg
+Deck Type=constructed
+
+[main]
+
+4  Flooded Grove|EVE
+2  Mutavault|MOR
+3  Reflecting Pool|SHM
+3  Secluded Glen|LRW
+4  Vivid Creek|LRW
+3  Vivid Grove|LRW
+4  Wanderwine Hub|LRW
+
+4  Chameleon Colossus|MOR
+4  Merrow Reejerey|LRW
+4  Silvergill Adept|LRW
+3  Sower of Temptation|LRW
+4  Stonybrook Banneret|MOR
+2  Sygg, River Guide|LRW
+2  Vendilion Clique|MOR
+
+2  Crib Swap|LRW
+4  Cryptic Command|LRW
+4  Nameless Inversion|LRW
+4  Sage's Dousing|MOR
+
+[sideboard]
+[planes]
+[schemes]

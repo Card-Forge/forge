@@ -1,0 +1,39 @@
+[quest]
+id=5001
+OpponentName=Apollo
+AILife=30
+Repeat=true
+Wins=20
+Card Reward=3 rares;33% 1 red rare; 33% Figure of Destiny|EVE
+Credit Reward=200
+HumanExtras=
+AIExtras=Taurean Mauler
+
+[metadata]
+Name=quest5001
+Title=Apollo
+Difficulty=hard
+Description=The sun god wants to show you the light!
+Icon=Apollo.jpg
+Deck Type=constructed
+
+[main]
+24  Mountain|LRW
+
+4  Ashenmoor Gouger|SHM
+2  Balefire Liege|EVE
+4  Boggart Ram-Gang|SHM
+4  Demigod of Revenge|SHM
+4  Figure of Destiny|EVE
+2  Stigma Lasher|EVE
+
+2  Flame Jab|EVE
+4  Flame Javelin|SHM
+1  Jaws of Stone|SHM
+4  Puncture Blast|EVE
+4  Tarfire|LRW
+1  Unwilling Recruit|EVE
+
+[sideboard]
+[planes]
+[schemes]

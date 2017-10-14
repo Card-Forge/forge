@@ -1,0 +1,29 @@
+[duel]
+
+[metadata]
+Name=Poseidon's Will 4
+Title=Poseidon
+Icon=Poseidon.jpg
+Difficulty=very hard
+Description=[U] Merfolk aggro.
+Deck Type=constructed
+
+[Main]
+19 Island|LRW
+4 Mutavault|MOR
+
+4 Aquitect's Will|LRW
+4 Cryptic Command|LRW
+2 Mirrorweave|SHM
+4 Ponder|M10
+4 Sage's Dousing|MOR
+
+3 Wistful Selkie|EVE
+4 Cursecatcher|SHM
+4 Merrow Reejerey|LRW
+4 Silvergill Adept|LRW
+4 Stonybrook Banneret|MOR
+
+[sideboard]
+[planes]
+[schemes]

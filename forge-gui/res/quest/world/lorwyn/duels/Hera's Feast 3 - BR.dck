@@ -1,0 +1,29 @@
+[duel]
+
+[metadata]
+Name=Hera's Feast 3
+Title=Hera
+Icon=Hera.jpg
+Difficulty=hard
+Description=[B/R] Tribal Goblins.
+Deck Type=constructed
+
+[Main]
+4 Auntie's Hovel|LRW
+4 Boggart Ram-Gang|SHM
+4 Goblin King|10E
+4 Hearthfire Hobgoblin|EVE
+4 Mad Auntie|LRW
+4 Mogg Fanatic|10E
+8 Mountain|LRW
+2 Mutavault|MOR
+4 Prickly Boggart|MOR
+4 Raging Goblin|10E
+3 Rise of the Hobgoblins|EVE
+4 Squee, Goblin Nabob|10E
+10 Swamp|LRW
+1 Wort, Boggart Auntie|LRW
+
+[sideboard]
+[planes]
+[schemes]

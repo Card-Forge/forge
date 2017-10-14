@@ -1,0 +1,36 @@
+[duel]
+
+[metadata]
+Name=Daphne's Elves 3
+Title=Daphne
+Icon=Daphne.jpg
+Difficulty=hard
+Description=[B/G] Tibal Elves.
+Deck Type=constructed
+
+[Main]
+10 Forest|LRW
+8 Swamp|LRW
+1 Terramorphic Expanse|10E
+4 Gilt-Leaf Palace|LRW
+
+2 Elvish Harbinger|LRW
+2 Elvish Promenade|LRW
+2 Eyeblight's Ending|LRW
+1 Hunter of Eyeblights|LRW
+2 Immaculate Magistrate|LRW
+4 Imperious Perfect|LRW
+2 Jagged-Scar Archers|LRW
+3 Joiner Adept|10E
+4 Llanowar Elves|10E
+2 Lys Alana Huntmaster|LRW
+2 Moonglove Winnower|LRW
+1 Nath of the Gilt-Leaf|LRW
+2 Nurturer Initiate|SHM
+2 Prowess of the Fair|LRW
+4 Twinblade Slasher|EVE
+2 Winnower Patrol|MOR
+
+[sideboard]
+[planes]
+[schemes]

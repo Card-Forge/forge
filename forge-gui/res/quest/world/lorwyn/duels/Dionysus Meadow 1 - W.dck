@@ -1,0 +1,38 @@
+[duel]
+
+[metadata]
+Name=Dionysus Meadow 1
+Title=Dionysus
+Icon=Dionysus.jpg
+Difficulty=easy
+Description=[W] Preconsructed (Tribal Kithkin)
+Deck Type=constructed
+
+[main]
+24 Plains|LRW
+
+3 Goldmeadow Harrier|LRW
+1 Kithkin Harbinger|LRW
+2 Kinsbaile Balloonist|LRW
+1 Shields of Velis Vel|LRW
+3 Oblivion Ring|LRW
+1 Runed Stalactite|LRW
+2 Cloudgoat Ranger|LRW
+1 Goldmeadow Stalwart|LRW
+1 Knight of Meadowgrain|LRW
+2 Wizened Cenn|LRW
+1 Thoughtweft Trio|LRW
+1 Brigid, Hero of Kinsbaile|LRW
+1 Goldmeadow Dodger|LRW
+1 Cenn's Heir|LRW
+2 Crib Swap|LRW
+3 Surge of Thoughtweft|LRW
+2 Avian Changeling|LRW
+1 Pollen Lullaby|LRW
+2 Changeling Hero|LRW
+1 Battle Mastery|LRW
+4 Kithkin Greatheart|LRW
+
+[sideboard]
+[Planes]
+[Schemes]

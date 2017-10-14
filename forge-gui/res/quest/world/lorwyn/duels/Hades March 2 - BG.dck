@@ -1,0 +1,32 @@
+[duel]
+
+[metadata]
+Name=Hades' March 2
+Title=Hades
+Icon=Hades.jpg
+Difficulty=medium
+Description=[B/G] Beatdown
+Deck Type=constructed
+
+[Main]
+12 Swamp|SHM
+12 Forest|SHM
+
+4 Cankerous Thirst|EVE
+2 Creakwood Liege|EVE
+2 Desecrator Hag|EVE
+1 Doomgape|EVE
+2 Gift of the Deity|EVE
+2 Gleeful Sabotage|SHM
+2 Noxious Hatchling|EVE
+4 Odious Trow|EVE
+2 Quillspike|EVE
+3 Rendclaw Trow|EVE
+2 Roughshod Mentor|SHM
+2 Soul Reap|EVE
+4 Stalker Hag|EVE
+4 Woodlurker Mimic|EVE
+
+[sideboard]
+[planes]
+[schemes]

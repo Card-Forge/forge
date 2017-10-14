@@ -1,0 +1,38 @@
+[duel]
+
+[metadata]
+Name=River of Oceanus 1
+Title=Oceanus
+Icon=Oceanus.jpg
+Difficulty=easy
+Description=[W/U] Preconsructed
+Deck Type=constructed
+
+[main]
+3 Judge of Currents|LRW
+2 Harpoon Sniper|LRW
+3 Oblivion Ring|LRW
+1 Merrow Harbinger|LRW
+3 Streambed Aquitects|LRW
+2 Springleaf Drum|LRW
+1 Ponder|LRW
+1 Merrow Commerce|LRW
+2 Silvergill Adept|LRW
+2 Merrow Reejerey|LRW
+1 Sygg, River Guide|LRW
+1 Wanderwine Prophets|LRW
+3 Silvergill Douser|LRW
+2 Stonybrook Angler|LRW
+2 Tideshaper Mystic|LRW
+9 Plains|LRW
+13 Island|LRW
+2 Summon the School|LRW
+1 Fallowsage|LRW
+2 Avian Changeling|LRW
+1 Whirlpool Whelm|LRW
+2 Drowner of Secrets|LRW
+1 Broken Ambitions|LRW
+
+[sideboard]
+[Planes]
+[Schemes]

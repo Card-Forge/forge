@@ -1,0 +1,28 @@
+[duel]
+
+[metadata]
+Name=Apollo Prime 3
+Title=Apollo
+Icon=Apollo.jpg
+Difficulty=hard
+Description=[R/G] Aggro-Control with Ramp
+Deck Type=constructed
+
+[Main]
+18 Forest|LRW
+2 Plains|LRW
+4 Brushland|10E
+
+4 Birds of Paradise|10E
+4 Deus of Calamity|SHM
+4 Farhaven Elf|SHM
+4 Manamorphose|SHM
+4 Oblivion Ring|LRW
+4 Rampant Growth|10E
+4 Sylvan Scrying|10E
+4 Woodfall Primus|SHM
+4 Wrath of God|10E
+
+[Sideboard]
+[Planes]
+[Schemes]

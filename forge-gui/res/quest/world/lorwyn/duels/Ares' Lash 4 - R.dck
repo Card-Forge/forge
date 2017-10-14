@@ -1,0 +1,27 @@
+[duel]
+
+[metadata]
+Name=Ares' Lash 4
+Title=Ares
+Icon=Ares.jpg
+Difficulty=very hard
+Description= [R] Aggro/Burn
+Deck Type=constructed
+
+[main]
+24  Mountain|LRW
+
+4  Boggart Ram-Gang|SHM
+4  Demigod of Revenge|SHM
+4  Figure of Destiny|EVE
+4  Stigma Lasher|EVE
+4  Vexing Shusher|SHM
+
+4  Flame Javelin|SHM
+4  Lash Out|LRW
+4  Puncture Blast|EVE
+4  Tarfire|LRW
+
+[sideboard]
+[Planes]
+[Schemes]

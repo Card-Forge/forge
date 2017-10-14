@@ -1,0 +1,40 @@
+[duel]
+
+[metadata]
+Name=Poseidon's Tinkering 1
+Title=Poseidon
+Icon=Poseidon.jpg
+Difficulty=easy
+Description=[U/R] Preconstructed
+Deck Type=constructed
+
+
+[Main]
+11 Island|SHM
+14 Mountain|SHM
+
+1 Merrow Levitator|EVE
+1 Hatchet Bully|EVE
+1 Outrage Shaman|EVE
+2 Stream Hopper|EVE
+3 Riverfall Mimic|EVE
+2 Noggle Hedge-Mage|EVE
+3 Noggle Bandit|EVE
+1 Crag Puca|EVE
+3 Shrewd Hatchling|EVE
+2 Noggle Bridgebreaker|EVE
+1 Dominus of Fealty|EVE
+2 Nucklavee|EVE
+1 Mindwrack Liege|EVE
+1 Spell Syphon|SHM
+1 Oona's Grace|EVE
+1 Flame Jab|EVE
+2 Burn Trail|SHM
+1 Jaws of Stone|SHM
+2 Unwilling Recruit|EVE
+3 Clout of the Dominus|EVE
+1 Inside Out|EVE
+
+[sideboard]
+[planes]
+[schemes]

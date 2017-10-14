@@ -1,0 +1,38 @@
+[duel]
+
+[metadata]
+Name=Artemis Rush 1
+Title=Artemis
+Icon=Artemis.jpg
+Difficulty=easy
+Description=[R/G] Preconsructed
+Deck Type=constructed
+
+[main]
+14  Forest|SHM
+10  Mountain|SHM
+
+1  Boggart Ram-Gang|SHM
+3  Farhaven Elf|SHM
+2  Juvenile Gloomwidow|SHM
+1  Mossbridge Troll|SHM
+2  Mudbrawler Raiders|SHM
+2  Scuttlemutt|SHM
+2  Scuzzback Scrapper|SHM
+2  Tattermunge Duo|SHM
+
+4  Elsewhere Flask|SHM
+2  Flame Javelin|SHM
+2  Fossil Find|SHM
+1  Gleeful Sabotage|SHM
+3  Howl of the Night Pack|SHM
+1  Illuminated Folio|SHM
+3  Jaws of Stone|SHM
+1  Prismatic Omen|SHM
+2  Puncture Bolt|SHM
+1  Runes of the Deus|SHM
+1  Tower Above|SHM
+
+[sideboard]
+[planes]
+[schemes]

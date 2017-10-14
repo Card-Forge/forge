@@ -1,0 +1,37 @@
+[duel]
+
+[metadata]
+Name=Artemis Rush 3
+Title=Artemis
+Icon=Artemis.jpg
+Difficulty=hard
+Description=[R/G] Creature Rush/Burn. (Haste)
+Deck Type=constructed
+
+[Main]
+14 Forest|SHM
+10 Mountain|SHM
+
+3 Boggart Ram-Gang|SHM
+1 Deathrender|LRW
+1 Deus of Calamity|SHM
+1 Dolmen Gate|LRW
+3 Farhaven Elf|SHM
+2 Flame Javelin|SHM
+1 Gleeful Sabotage|SHM
+2 Howl of the Night Pack|SHM
+2 Jaws of Stone|SHM
+2 Juvenile Gloomwidow|SHM
+4 Manamorphose|SHM
+2 Mudbrawler Raiders|SHM
+1 Prismatic Omen|SHM
+1 Runes of the Deus|SHM
+2 Scuttlemutt|SHM
+2 Scuzzback Scrapper|SHM
+4 Shock|10E
+1 Tower Above|SHM
+1 Woodfall Primus|SHM
+
+[sideboard]
+[planes]
+[schemes]

@@ -1,0 +1,44 @@
+[duel]
+
+[metadata]
+Name=Prometheus' Ruse 1
+Title=Prometheus
+Icon=Prometheus.jpg
+Difficulty=easy
+Description=[U/B] Preconstructed
+Deck Type=constructed
+
+[main]
+10  Island|LRW
+13  Swamp|LRW
+
+1  Auntie's Snitch|MOR
+1  Dewdrop Spy|MOR
+3  Frogtosser Banneret|MOR
+2  Ghostly Changeling|LRW
+2  Latchkey Faerie|MOR
+1  Marsh Flitter|LRW
+1  Mothdust Changeling|MOR
+1  Nightshade Stinger|LRW
+2  Oona's Blackguard|MOR
+1  Paperfin Rascal|LRW
+2  Pestermite|LRW
+2  Prickly Boggart|MOR
+1  Stinkdrinker Bandit|MOR
+
+1  Cloak and Dagger|MOR
+1  Ego Erasure|LRW
+2  Familiar's Ruse|LRW
+1  Hoarder's Greed|LRW
+2  Morsel Theft|MOR
+1  Nameless Inversion|LRW
+1  Notorious Throng|MOR
+2  Peppersmoke|LRW
+1  Protective Bubble|LRW
+2  Thieves' Fortune|MOR
+2  Violet Pall|MOR
+1  Whirlpool Whelm|LRW
+
+[sideboard]
+[planes]
+[schemes]

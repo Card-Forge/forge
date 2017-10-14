@@ -1,0 +1,33 @@
+[duel]
+
+[metadata]
+Name=Athena's Dominion 3
+Title=Athena
+Icon=Athena.jpg
+Difficulty=hard
+Description=[U/B] Tribal Faeries Control.
+Deck Type=constructed
+
+[Main]
+4 Bitterblossom|MOR
+3 Cryptic Command|LRW
+4 Disperse|MOR
+2 Faerie Conclave|10E
+2 Familiar's Ruse|LRW
+2 Glen Elendra Archmage|EVE
+3 Island|LRW
+2 Mistbind Clique|LRW
+4 Mutavault|MOR
+4 Oona's Gatewarden|SHM
+4 Scion of Oona|LRW
+4 Secluded Glen|LRW
+4 Sower of Temptation|LRW
+4 Spellstutter Sprite|LRW
+4 Sunken Ruins|SHM
+2 Swamp|LRW
+4 Underground River|10E
+4 Unsummon|10E
+
+[Sideboard]
+[Planes]
+[Schemes]

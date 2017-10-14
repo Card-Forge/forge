@@ -1,0 +1,29 @@
+[duel]
+
+[metadata]
+Name=Gaea's Reclamation 3
+Title=Gaea
+Icon=Gaea.jpg
+Difficulty=hard
+Description=[G] Ramp
+Deck Type=constructed
+
+[Main]
+24 Forest|LRW
+
+4 Elvish Harbinger|LRW
+4 Farhaven Elf|SHM
+4 Gilt-Leaf Archdruid|MOR
+4 Joiner Adept|10E
+4 Leaf Gilder|LRW
+4 Llanowar Elves|10E
+1 Oversoul of Dusk|SHM
+4 Primal Command|LRW
+1 Primalcrux|EVE
+1 Regal Force|EVE
+1 Vigor|LRW
+4 Woodfall Primus|SHM
+
+[Sideboard]
+[Planes]
+[Schemes]

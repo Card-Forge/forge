@@ -1,0 +1,37 @@
+[duel]
+
+[metadata]
+Name=Artemis Rush 2
+Title=Artemis
+Icon=Artemis.jpg
+Difficulty=medium
+Description=[R/G] Aggro Rush/Burn. (Haste)
+Deck Type=constructed
+
+[Main]
+10 Mountain|SHM
+14 Forest|SHM
+
+3 Boggart Ram-Gang|SHM
+1 Deus of Calamity|SHM
+3 Farhaven Elf|SHM
+2 Flame Javelin|SHM
+2 Fossil Find|SHM
+1 Gleeful Sabotage|SHM
+2 Howl of the Night Pack|SHM
+2 Jaws of Stone|SHM
+2 Juvenile Gloomwidow|SHM
+4 Manamorphose|SHM
+2 Mudbrawler Raiders|SHM
+1 Prismatic Omen|SHM
+2 Puncture Bolt|SHM
+1 Runes of the Deus|SHM
+2 Scuttlemutt|SHM
+2 Scuzzback Scrapper|SHM
+2 Tattermunge Duo|SHM
+1 Tower Above|SHM
+1 Woodfall Primus|SHM
+
+[sideboard]
+[planes]
+[schemes]
