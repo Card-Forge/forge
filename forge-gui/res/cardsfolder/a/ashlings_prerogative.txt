@@ -2,7 +2,7 @@ Name:Ashling's Prerogative
 ManaCost:1 R
 Types:Enchantment
 K:ETBReplacement:Other:ChooseMode
-SVar:ChooseMode:DB$ ChooseNumber | Cost$ 0 | Defined$ You | Min$ 0 | Max$ 1 | ListTitle$ Choose ODD or EVEN (0=Even; 1=Odd) | SpellDescription$ As CARDNAME enters the battlefield, choose odd or even. (Zero is even.)
+SVar:ChooseMode:DB$ ChooseNumber | Defined$ You | Min$ 0 | Max$ 1 | ListTitle$ Choose ODD or EVEN (0=Even; 1=Odd) | SpellDescription$ As CARDNAME enters the battlefield, choose odd or even. (Zero is even.)
 S:Mode$ Continuous | Affected$ Creature.cmcM2X | AddKeyword$ Haste | Description$ Each creature with converted mana cost of the chosen value has haste.
 S:Mode$ ETBTapped | ValidCard$ Creature.cmcM2Y | Description$ Each creature without converted mana cost of the chosen value enters the battlefield tapped.
 # The next 2 static abilities add text to the card panel for convenience indicating choice.

@@ -5,7 +5,7 @@ PT:5/4
 K:Flash
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromHand+Self | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, exile all attacking creatures.
-SVar:TrigExile:AB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Creature.attacking | Origin$ Battlefield | Destination$ Exile
+SVar:TrigExile:DB$ ChangeZoneAll | ChangeType$ Creature.attacking | Origin$ Battlefield | Destination$ Exile
 SVar:AmbushAI:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angel_of_the_dire_hour.jpg
 Oracle:Flash\nFlying\nWhen Angel of the Dire Hour enters the battlefield, if you cast it from your hand, exile all attacking creatures.

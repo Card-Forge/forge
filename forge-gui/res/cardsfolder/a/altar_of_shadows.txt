@@ -2,9 +2,9 @@ Name:Altar of Shadows
 ManaCost:7
 Types:Artifact
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGetMana | TriggerDescription$ At the beginning of your precombat main phase, add {B} to your mana pool for each charge counter on CARDNAME.
-SVar:TrigGetMana:AB$ Mana | Cost$ 0 | Produced$ B | Amount$ X | References$ X | SpellDescription$ Add {X}{B} to your mana pool
+SVar:TrigGetMana:DB$ Mana | Produced$ B | Amount$ X | References$ X | SpellDescription$ Add {X}{B} to your mana pool
 A:AB$ Destroy | Cost$ 7 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPutCounter | SpellDescription$ Destroy target creature. Then put a charge counter on CARDNAME.
-SVar:DBPutCounter:DB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
+SVar:DBPutCounter:DB$PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
 SVar:X:Count$CardCounters.CHARGE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/altar_of_shadows.jpg
 Oracle:At the beginning of your precombat main phase, add {B} to your mana pool for each charge counter on Altar of Shadows.\n{7}, {T}: Destroy target creature. Then put a charge counter on Altar of Shadows.

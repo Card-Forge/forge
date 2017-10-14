@@ -11,7 +11,7 @@ SVar:AshlingNum:Number$0
 SVar:X:Count$RememberedSize
 T:Mode$ Phase | Phase$ Cleanup | Execute$ TrigReset | Static$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReset | Static$ True
-SVar:TrigReset:AB$ StoreSVar | Cost$ 0 | SVar$ AshlingNum | Type$ Number | Expression$ 0
+SVar:TrigReset:DB$ StoreSVar | SVar$ AshlingNum | Type$ Number | Expression$ 0
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashling_the_pilgrim.jpg
 Oracle:{1}{R}: Put a +1/+1 counter on Ashling the Pilgrim. If this is the third time this ability has resolved this turn, remove all +1/+1 counters from Ashling the Pilgrim, and it deals that much damage to each creature and each player.

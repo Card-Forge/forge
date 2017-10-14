@@ -2,7 +2,7 @@ Name:Ancient Runes
 ManaCost:2 R
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, CARDNAME deals damage to that player equal to the number of artifacts he or she controls.
-SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ X | References$ X
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ X | References$ X
 SVar:X:Count$Valid Artifact.ActivePlayerCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_runes.jpg
