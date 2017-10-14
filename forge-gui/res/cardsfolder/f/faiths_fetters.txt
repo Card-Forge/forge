@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant permanent
 A:SP$ Attach | Cost$ 3 W | ValidTgts$ Permanent | AITgts$ Creature | AILogic$ Curse
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 4 life.
-SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 4
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 4
 S:Mode$ CantBeActivated | ValidCard$ Card.EnchantedBy | NonMana$ True | Description$ Enchanted permanent can't attack or block, and its activated abilities can't be activated unless they're mana abilities.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faiths_fetters.jpg

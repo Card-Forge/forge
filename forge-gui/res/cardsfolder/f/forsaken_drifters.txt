@@ -3,6 +3,6 @@ ManaCost:3 B
 Types:Creature Zombie
 PT:4/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerController$ TriggeredCardController | Execute$ TrigMill | TriggerDescription$ When CARDNAME dies, put the top four cards of your library into your graveyard.
-SVar:TrigMill:AB$ Mill | Cost$ 0 | NumCards$ 4 | Defined$ You
+SVar:TrigMill:DB$ Mill | NumCards$ 4 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forsaken_drifters.jpg
 Oracle:When Forsaken Drifters dies, put the top four cards of your library into your graveyard.

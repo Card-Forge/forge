@@ -5,9 +5,9 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:SiegeChoice:DB$ GenericChoice | Choices$ Khans,Dragons | Defined$ You | SetChosenMode$ True | AILogic$ Khans | ShowChoice$ ExceptSelf
 SVar:Khans:DB$ Animate | Defined$ Self | Triggers$ KhansTrigger | Permanent$ True | SpellDescription$ Khans
 SVar:KhansTrigger:Mode$ Phase | Phase$ Main1,Main2 | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ ManaGain | TriggerDescription$ At the beginning of each of your main phases, add {G}{G} to your mana pool.
-SVar:ManaGain:AB$ Mana | Cost$ 0 | Produced$ G G
+SVar:ManaGain:DB$ Mana | Produced$ G G
 SVar:Dragons:DB$ Animate | Defined$ Self | Triggers$ DragonsTrigger | Permanent$ True | SpellDescription$ Dragons
 SVar:DragonsTrigger:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+withFlying | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ AirFight | TriggerDescription$ Whenever a creature with flying enters the battlefield under your control, you may have it fight target creature you don't control.
-SVar:AirFight:AB$ Fight | Cost$ 0 | Defined$ TriggeredCard | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control | ConditionDefined$ TriggeredCard | ConditionPresent$ Creature
+SVar:AirFight:DB$ Fight | Defined$ TriggeredCard | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control | ConditionDefined$ TriggeredCard | ConditionPresent$ Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frontier_siege.jpg
 Oracle:As Frontier Siege enters the battlefield, choose Khans or Dragons.\n• Khans — At the beginning of each of your main phases, add {G}{G} to your mana pool.\n• Dragons — Whenever a creature with flying enters the battlefield under your control, you may have it fight target creature you don't control.

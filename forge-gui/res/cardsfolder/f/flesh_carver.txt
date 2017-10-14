@@ -5,7 +5,7 @@ PT:2/2
 K:Intimidate
 A:AB$ PutCounter | Cost$ 1 B Sac<1/Creature.Other/another creature> | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on CARDNAME.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, create an X/X black Horror creature token, where X is CARDNAME's power.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | References$ X | TokenName$ Horror | TokenTypes$ Creature,Horror | TokenOwner$ You | TokenColors$ Black | TokenPower$ X | TokenToughness$ X
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | References$ X | TokenName$ Horror | TokenTypes$ Creature,Horror | TokenOwner$ You | TokenColors$ Black | TokenPower$ X | TokenToughness$ X
 SVar:X:TriggeredCard$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flesh_carver.jpg
 Oracle:Intimidate\n{1}{B}, Sacrifice another creature: Put two +1/+1 counters on Flesh Carver.\nWhen Flesh Carver dies, create an X/X black Horror creature token, where X is Flesh Carver's power.

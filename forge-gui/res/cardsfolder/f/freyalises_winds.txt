@@ -2,9 +2,9 @@ Name:Freyalise's Winds
 ManaCost:2 G G
 Types:Enchantment
 T:Mode$ Taps | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a permanent becomes tapped, put a wind counter on it.
-SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ TriggeredCard | CounterType$ WIND | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCard | CounterType$ WIND | CounterNum$ 1
 R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Permanent.counters_GE1_WIND | ReplaceWith$ RepRemoveCounter | UntapStep$ True | Description$ If a permanent with a wind counter on it would untap during its controller's untap step, remove all wind counters from it instead.
-SVar:RepRemoveCounter:AB$ RemoveCounter | Cost$ 0 | Defined$ ReplacedCard | CounterType$ WIND | CounterNum$ All
+SVar:RepRemoveCounter:DB$ RemoveCounter | Defined$ ReplacedCard | CounterType$ WIND | CounterNum$ All
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/freyalises_winds.jpg
 Oracle:Whenever a permanent becomes tapped, put a wind counter on it.\nIf a permanent with a wind counter on it would untap during its controller's untap step, remove all wind counters from it instead.

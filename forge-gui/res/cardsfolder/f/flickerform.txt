@@ -8,7 +8,7 @@ SVar:DBRemAura:DB$ PumpAll | ValidCards$ Card.IsImprinted,Aura.AttachedTo Creatu
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Card.IsRemembered | SubAbility$ DelayedEffect
 SVar:DelayedEffect:DB$ Effect | Name$ Flickerform Effect | Triggers$ TrigEOT | SVars$ FlickerformReturn,FlickerformAttach,DBAllAuraAttach,FlickerformCleanup,ClearImprint | RememberObjects$ Remembered | ImprintCards$ Imprinted | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:TrigEOT:Mode$ Phase | Phase$ End of Turn | Execute$ FlickerformReturn | TriggerZones$ Command | TriggerDescription$ At the beginning of the next end step, return that card to the battlefield under its owner's control.
-SVar:FlickerformReturn:AB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Card.IsRemembered+IsImprinted | Origin$ Exile | Destination$ Battlefield | SubAbility$ ClearImprint
+SVar:FlickerformReturn:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered+IsImprinted | Origin$ Exile | Destination$ Battlefield | SubAbility$ ClearImprint
 SVar:ClearImprint:DB$ Cleanup | ClearImprinted$ True | SubAbility$ FlickerformAttach
 SVar:FlickerformAttach:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Aura.IsRemembered | Zone$ Exile | RepeatSubAbility$ DBAllAuraAttach | SubAbility$ FlickerformCleanup
 SVar:DBAllAuraAttach:DB$ ChangeZone | Defined$ Imprinted | Origin$ Exile | Destination$ Battlefield | AttachedTo$ Valid Creature.IsRemembered

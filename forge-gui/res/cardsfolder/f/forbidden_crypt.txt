@@ -6,7 +6,7 @@ SVar:CheckLoseCondition:DB$ LosesGame | Defined$ You | ConditionCheckSVar$ Cards
 SVar:ForbiddenPractice:DB$ ChangeZone | Hidden$ True | Mandatory$ True | ChangeType$ Card.YouOwn | ChangeNum$ 1 | Origin$ Graveyard | Destination$ Hand
 SVar:CardsInGrave:Count$InYourYard
 R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Graveyard | ValidCard$ Card.nonToken+YouOwn | ReplaceWith$ CryptExile | Description$ If a card would be put into your graveyard from anywhere, exile that card instead.
-SVar:CryptExile:AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+SVar:CryptExile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
 SVar:NonStackingEffect:True
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
