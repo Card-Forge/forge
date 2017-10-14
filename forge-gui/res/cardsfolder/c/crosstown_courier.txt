@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Creature Vedalken
 PT:2/1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player puts that many cards from the top of his or her library into his or her graveyard.
-SVar:TrigMill:AB$ Mill | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ X | References$ X
+SVar:TrigMill:DB$ Mill | Defined$ TriggeredTarget | NumCards$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crosstown_courier.jpg
 Oracle:Whenever Crosstown Courier deals combat damage to a player, that player puts that many cards from the top of his or her library into his or her graveyard.

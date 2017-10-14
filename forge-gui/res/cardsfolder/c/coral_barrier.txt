@@ -4,6 +4,6 @@ Types:Creature Wall
 PT:1/3
 K:Defender
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 blue Squid creature token with islandwalk.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Squid | TokenTypes$ Creature,Squid | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Islandwalk
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Squid | TokenTypes$ Creature,Squid | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Islandwalk
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coral_barrier.jpg
 Oracle:Defender (This creature can't attack.)\nWhen Coral Barrier enters the battlefield, create a 1/1 blue Squid creature token with islandwalk. (It can't be blocked as long as defending player controls an Island.)

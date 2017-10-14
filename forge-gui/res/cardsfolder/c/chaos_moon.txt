@@ -2,10 +2,10 @@ Name:Chaos Moon
 ManaCost:3 R
 Types:Enchantment
 T:Mode$Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigCount | TriggerDescription$ At the beginning of each upkeep, count the number of permanents. If the number is odd, until end of turn, red creatures get +1/+1 and whenever a player taps a Mountain for mana, that player adds R to his or her mana pool (in addition to the mana the land produces). If the number is even, until end of turn, red creatures get -1/-1 and if a player taps a Mountain for mana, that Mountain produces colorless mana instead of any other type.
-SVar:TrigCount:AB$ Effect | Cost$ 0 | Triggers$ TrigRamp | SVars$ TrigMana | StaticAbilities$ STPump | ConditionCheckSVar$ X | ConditionSVarCompare$ M21 | SubAbility$ DBEffect
+SVar:TrigCount:DB$ Effect | Triggers$ TrigRamp | SVars$ TrigMana | StaticAbilities$ STPump | ConditionCheckSVar$ X | ConditionSVarCompare$ M21 | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RepCurse | SVars$ ProduceColorless | StaticAbilities$ STCurse | ConditionCheckSVar$ X | ConditionSVarCompare$ M20
 SVar:TrigRamp:Mode$ TapsForMana | ValidCard$ Mountain | Execute$ TrigMana | Static$ True | TriggerZones$ Command | TriggerDescription$ Whenever a player taps a Mountain for mana, that player adds {R} to his or her mana pool.
-SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ R | Amount$ 1 | Defined$ TriggeredCardController
+SVar:TrigMana:DB$ Mana | Produced$ R | Amount$ 1 | Defined$ TriggeredCardController
 SVar:STPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.Red | AddPower$ 1 | AddToughness$ 1
 SVar:RepCurse:Event$ ProduceMana | ActiveZones$ Command | ValidCard$ Mountain | ManaReplacement$ ProduceColorless | Description$ If a player taps a Mountain for mana, that Mountain produces colorless mana instead of any other type.
 SVar:ProduceColorless:R->1 & B->1 & U->1 & G->1 & W->1

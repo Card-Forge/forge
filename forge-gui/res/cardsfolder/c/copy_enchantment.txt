@@ -2,7 +2,7 @@ Name:Copy Enchantment
 ManaCost:2 U
 Types:Enchantment
 K:ETBReplacement:Copy:ChooseEnchantment:Optional
-SVar:ChooseEnchantment:AB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Enchantment.Other | SubAbility$ DBCopy | RememberChosen$ True | AILogic$ Clone | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any enchantment on the battlefield.
+SVar:ChooseEnchantment:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Enchantment.Other | SubAbility$ DBCopy | RememberChosen$ True | AILogic$ Clone | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any enchantment on the battlefield.
 SVar:DBCopy:DB$ Clone | Defined$ Remembered
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/copy_enchantment.jpg

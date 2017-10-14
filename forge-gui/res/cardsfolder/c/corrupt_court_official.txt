@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Creature Human Advisor
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, target opponent discards a card.
-SVar:TrigDiscard:AB$ Discard | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select an opponent | NumCards$ 1 | Mode$ TgtChoose
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | TgtPrompt$ Select an opponent | NumCards$ 1 | Mode$ TgtChoose
 SVar:HasAttackEffect:Blocked
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corrupt_court_official.jpg
 Oracle:When Corrupt Court Official enters the battlefield, target opponent discards a card.

@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Creature Human Druid
 PT:3/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put three -1/-1 counters on target creature you control.
-SVar:TrigPutCounter:DB$ PutCounter | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ M1M1 | IsCurse$ True | CounterNum$ 3
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ M1M1 | IsCurse$ True | CounterNum$ 3
 A:AB$ Mana | Cost$ T SubCounter<1/M1M1> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/channeler_initiate.jpg
 Oracle:When Channeler Initiate enters the battlefield, put three -1/-1 counters on target creature you control.\n{T}, Remove a -1/-1 counter from Channeler Initiate: Add one mana of any color to your mana pool.

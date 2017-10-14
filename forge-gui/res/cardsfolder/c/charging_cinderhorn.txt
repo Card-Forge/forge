@@ -4,7 +4,7 @@ Types:Creature Elemental Ox
 PT:4/2
 K:Haste
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | CheckSVar$ AttackedThisTurn | References$ AttackedThisTurn | SVarCompare$ EQ0 | TriggerDescription$ At the beginning of each player's end step, if no creatures attacked this turn, put a fury counter on CARDNAME. Then CARDNAME deals damage equal to the number of fury counters on it to that player. 
-SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ FURY | CounterNum$ 1 | SubAbility$ DBDealDamage
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ FURY | CounterNum$ 1 | SubAbility$ DBDealDamage
 SVar:DBDealDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ X | References$ X
 SVar:X:Count$CardCounters.FURY
 T:Mode$ AttackersDeclared | Execute$ TrigStoreSVar | Static$ True

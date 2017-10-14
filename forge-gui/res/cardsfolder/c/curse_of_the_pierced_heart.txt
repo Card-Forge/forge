@@ -4,6 +4,6 @@ Types:Enchantment Aura Curse
 K:Enchant player
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Player | AILogic$ Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of enchanted player's upkeep, CARDNAME deals 1 damage to that player.
-SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ Player.EnchantedBy | NumDmg$ 1
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.EnchantedBy | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_the_pierced_heart.jpg
 Oracle:Enchant player\nAt the beginning of enchanted player's upkeep, Curse of the Pierced Heart deals 1 damage to that player.

@@ -4,7 +4,7 @@ Types:Creature Crab Beast
 PT:3/3
 K:Morph:4 U
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigFaceUp | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ When CARDNAME is turned face up, you may exchange control of target creature you control and target creature an opponent controls.
-SVar:TrigFaceUp:AB$ Pump | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | SubAbility$ CrabExchange
+SVar:TrigFaceUp:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | SubAbility$ CrabExchange
 SVar:CrabExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls | SpellDescription$ Exchange control of target creature you control and target creature an opponent controls.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chromeshell_crab.jpg

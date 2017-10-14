@@ -2,7 +2,7 @@ Name:Crumbling Sanctuary
 ManaCost:5
 Types:Artifact
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Player | ReplaceWith$ ExileTop | PreventionEffect$ True | Description$ If damage would be dealt to a player, that player exiles that many cards from the top of his or her library instead.
-SVar:ExileTop:AB$ Mill | Cost$ 0 | Defined$ ReplacedTarget | NumCards$ X | Destination$ Exile | References$ X
+SVar:ExileTop:DB$ Mill | Defined$ ReplacedTarget | NumCards$ X | Destination$ Exile | References$ X
 SVar:X:ReplaceCount$DamageAmount
 SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True

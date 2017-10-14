@@ -4,7 +4,7 @@ Types:Creature Elf Artificer
 PT:1/1
 K:Fabricate:2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may have other attacking creatures get +X/+X until end of turn, where X is CARDNAME's power.
-SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.attacking+Other | NumAtt$ X | NumDef$ X | References$ X
+SVar:TrigPumpAll:DB$PumpAll | ValidCards$ Creature.attacking+Other | NumAtt$ X | NumDef$ X | References$ X
 SVar:X:Count$CardPower
 DeckHas:Ability$Counters & Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cultivator_of_blades.jpg

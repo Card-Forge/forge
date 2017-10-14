@@ -4,8 +4,8 @@ Types:Creature Human Scout
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life and draw two cards.
-SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 2 | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 2
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2
 DeckHas:Ability$LifeGain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudblazer.jpg
 Oracle:Flying\nWhen Cloudblazer enters the battlefield, you gain 2 life and draw two cards.

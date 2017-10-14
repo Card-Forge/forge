@@ -5,9 +5,9 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:SiegeChoice:DB$ GenericChoice | Choices$ Khans,Dragons | Defined$ You | SetChosenMode$ True | AILogic$ Dragons | ShowChoice$ ExceptSelf
 SVar:Khans:DB$ Animate | Defined$ Self | Triggers$ KhansTrigger | Permanent$ True | SpellDescription$ Khans
 SVar:KhansTrigger:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ Boost | TriggerDescription$ At the beginning of combat on your turn, put two +1/+1 counters on target creature you control.
-SVar:Boost:AB$ PutCounter | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 2
+SVar:Boost:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 2
 SVar:Dragons:DB$ Animate | Defined$ Self | Triggers$ DragonsTrigger | Permanent$ True | SpellDescription$ Dragons
 SVar:DragonsTrigger:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | ValidPlayer$ Opponent | Execute$ TapCreature | TriggerDescription$ At the beginning of combat on each opponent's turn, tap target creature that player controls.
-SVar:TapCreature:AB$ Tap | Cost$ 0 | ValidTgts$ Creature.ActivePlayerCtrl | TgtPrompt$ Choose target creature the active player controls.
+SVar:TapCreature:DB$ Tap | ValidTgts$ Creature.ActivePlayerCtrl | TgtPrompt$ Choose target creature the active player controls.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/citadel_siege.jpg
 Oracle:As Citadel Siege enters the battlefield, choose Khans or Dragons.\n• Khans — At the beginning of combat on your turn, put two +1/+1 counters on target creature you control.\n• Dragons — At the beginning of combat on each opponent's turn, tap target creature that player controls.

@@ -4,8 +4,8 @@ Types:Creature Human Advisor
 PT:0/1
 A:AB$ Draw | Cost$ T | NumCards$ 1 | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card. If a creature card is discarded this way, untap CARDNAME, then transform it.
 SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | RememberDiscarded$ True | SubAbility$ DBTransform
-SVar:DBTransform:DB$ SetState | Cost$ 0 | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | ConditionCompare$ EQ1 | SubAbility$ DBUntap | Mode$ Transform
-SVar:DBUntap:DB$ Untap | Cost$ 0 | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBTransform:DB$ SetState | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | ConditionCompare$ EQ1 | SubAbility$ DBUntap | Mode$ Transform
+SVar:DBUntap:DB$ Untap | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 AlternateMode:DoubleFaced
@@ -20,7 +20,7 @@ Colors:red
 Types:Creature Human Mutant
 PT:5/1
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | IsPresent$ Card.notAttackedThisTurn+Self | TriggerDescription$ At the beginning of your end step, if CARDNAME didn't attack this turn, tap CARDNAME, then transform it.
-SVar:TrigTap:AB$ Tap | Cost$ 0 | Defined$ Self | SubAbility$ DBTransform2
-SVar:DBTransform2:DB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
+SVar:TrigTap:DB$ Tap | Defined$ Self | SubAbility$ DBTransform2
+SVar:DBTransform2:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homicidal_brute.jpg
 Oracle:At the beginning of your end step, if Homicidal Brute didn't attack this turn, tap Homicidal Brute, then transform it.

@@ -5,9 +5,9 @@ PT:2/2
 K:Double Strike
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, each player puts a creature card with converted mana cost 3 or less from his or her graveyard onto the battlefield.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | ManaNotSpent$ R | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless {R} was spent to cast it.
-SVar:TrigChangeZone:AB$ RepeatEach | RepeatPlayers$ Player | Cost$ 0 | RepeatSubAbility$ DBChangeZone
+SVar:TrigChangeZone:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.RememberedPlayerCtrl+cmcLE3 | ChangeNum$ 1 | Hidden$ True | DefinedPlayer$ Player.IsRemembered | Chooser$ Player.IsRemembered
-SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:ManaNeededToAvoidNegativeEffect:red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_champion.jpg
 Oracle:Double strike\nWhen Crypt Champion enters the battlefield, each player puts a creature card with converted mana cost 3 or less from his or her graveyard onto the battlefield.\nWhen Crypt Champion enters the battlefield, sacrifice it unless {R} was spent to cast it.
