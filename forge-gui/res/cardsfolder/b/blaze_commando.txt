@@ -3,7 +3,7 @@ ManaCost:3 R W
 Types:Creature Minotaur Soldier
 PT:5/3
 T:Mode$ DamageDone | ValidSource$ Instant.YouCtrl,Sorcery.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an instant or sorcery spell you control deals damage, create two 1/1 red and white Soldier creature tokens with haste.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 2 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ Red,White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Haste
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ Red,White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Haste
 DeckHas:Ability$Token
 DeckHints:Type$Instant|Sorcery
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blaze_commando.jpg

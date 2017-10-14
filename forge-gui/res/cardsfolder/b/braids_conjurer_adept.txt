@@ -3,7 +3,7 @@ ManaCost:2 U U
 Types:Legendary Creature Human Wizard
 PT:2/2
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of each player's upkeep, that player may put an artifact, creature, or land card from his or her hand onto the battlefield.
-SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature,Artifact,Land | DefinedPlayer$ TriggeredPlayer | ChangeNum$ 1
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature,Artifact,Land | DefinedPlayer$ TriggeredPlayer | ChangeNum$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/braids_conjurer_adept.jpg
 Oracle:At the beginning of each player's upkeep, that player may put an artifact, creature, or land card from his or her hand onto the battlefield.

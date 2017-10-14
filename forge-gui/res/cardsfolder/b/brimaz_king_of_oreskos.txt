@@ -4,9 +4,9 @@ Types:Legendary Creature Cat Soldier
 PT:3/4
 K:Vigilance
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTokenAttacking | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, create a 1/1 white Cat Soldier creature token with vigilance that's attacking.
-SVar:TrigTokenAttacking:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Cat Soldier | TokenTypes$ Creature,Cat,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Vigilance | TokenAttacking$ True
+SVar:TrigTokenAttacking:DB$ Token | TokenAmount$ 1 | TokenName$ Cat Soldier | TokenTypes$ Creature,Cat,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Vigilance | TokenAttacking$ True
 T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigTokenBlocking | TriggerDescription$ Whenever CARDNAME blocks a creature, create a 1/1 white Cat Soldier creature token with vigilance that's blocking that creature.
-SVar:TrigTokenBlocking:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Cat Soldier | TokenTypes$ Creature,Cat,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Vigilance | TokenBlocking$ TriggeredAttacker
+SVar:TrigTokenBlocking:DB$ Token | TokenAmount$ 1 | TokenName$ Cat Soldier | TokenTypes$ Creature,Cat,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Vigilance | TokenBlocking$ TriggeredAttacker
 SVar:HasAttackEffect:TRUE
 SVar:HasBlockEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brimaz_king_of_oreskos.jpg

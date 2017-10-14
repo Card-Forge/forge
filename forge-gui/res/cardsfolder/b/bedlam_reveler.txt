@@ -12,7 +12,7 @@ K:Prowess
 
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, discard your hand, then draw three cards.
 
-SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Mode$ Hand | SubAbility$ DBDraw
+SVar:TrigDiscard:DB$ Discard | Mode$ Hand | SubAbility$ DBDraw
 
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 3 
 

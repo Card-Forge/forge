@@ -3,7 +3,7 @@ ManaCost:2 G G
 Types:Creature Lizard
 PT:4/4
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigGainControl | TriggerDescription$ At the beginning of each end step, each player gains control of all nontoken permanents he or she owns.
-SVar:TrigGainControl:AB$ RepeatEach | Cost$ 0 | RepeatPlayers$ Player | RepeatSubAbility$ DBGainControl
+SVar:TrigGainControl:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBGainControl
 SVar:DBGainControl:DB$ GainControl | AllValid$ Permanent.nonToken+RememberedPlayerOwn | NewController$ Player.IsRemembered
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brooding_saurian.jpg
 Oracle:At the beginning of each end step, each player gains control of all nontoken permanents he or she owns.

@@ -10,7 +10,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 
 T:Mode$ Attacks | ValidCard$ Card.Self | IsPresent$ Card.YouCtrl | PresentZone$ Hand | PresentCompare$ EQ0 | Execute$ TrigDamage | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, if you have no cards in hand, Bloodhall Priest deals 2 damage to target creature or player.
 
-SVar:TrigDamage:AB$ DealDamage | Cost$ 0| ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2
 
 SVar:HasAttackEffect:TRUE
 

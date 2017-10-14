@@ -3,6 +3,6 @@ ManaCost:2 R R
 Types:Creature Zubera Spirit
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | DamageReceivedCondition$ GE4 | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME dies, if 4 or more damage was dealt to it this turn, CARDNAME deals 3 damage to target creature or player.
-SVar:TrigDealDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 3
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burning_eye_zubera.jpg
 Oracle:When Burning-Eye Zubera dies, if 4 or more damage was dealt to it this turn, Burning-Eye Zubera deals 3 damage to target creature or player.

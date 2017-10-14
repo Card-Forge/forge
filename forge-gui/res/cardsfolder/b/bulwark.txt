@@ -2,7 +2,7 @@ Name:Bulwark
 ManaCost:3 R R
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ PsychicSlap | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals X damage to target opponent, where X is the number of cards in your hand minus the number of cards in that player's hand.
-SVar:PsychicSlap:AB$ DealDamage | Cost$ 0 | ValidTgts$ Opponent | NumDmg$ X
+SVar:PsychicSlap:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ X
 SVar:A:Count$InYourHand
 SVar:B:Count$InOppHand
 SVar:X:SVar$A/Minus.B

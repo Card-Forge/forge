@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Creature Human Shaman
 PT:2/3
 T:Mode$ Attached | ValidSource$ Aura | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an Aura becomes attached to CARDNAME, create a 2/2 red Dragon creature token with flying. It has "{R}: This creature gets +1/+0 until end of turn."
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Dragon | TokenTypes$ Creature,Dragon | TokenOwner$ You | TokenColors$ Red | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ r 2 2 dragon M15 | TokenKeywords$ Flying | TokenAbilities$ BroodPump
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Dragon | TokenTypes$ Creature,Dragon | TokenOwner$ You | TokenColors$ Red | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ r 2 2 dragon M15 | TokenKeywords$ Flying | TokenAbilities$ BroodPump
 SVar:BroodPump:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:EnchantMe:Multiple
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brood_keeper.jpg
