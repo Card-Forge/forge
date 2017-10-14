@@ -7,4 +7,3 @@ SVar:TrigMill:DB$Mill | NumCards$ 4 | Defined$ You
 S:Mode$ Continuous | Affected$ Zombie.YouCtrl | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Battlefield | AffectedZone$ Graveyard | Description$ During each of your turns, you may cast a Zombie creature card from your graveyard.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gisa_and_geralf.jpg
 Oracle:When Gisa and Geralf enters the battlefield, put the top four cards of your library into your graveyard.\nDuring each of your turns, you may cast a Zombie creature card from your graveyard.
-

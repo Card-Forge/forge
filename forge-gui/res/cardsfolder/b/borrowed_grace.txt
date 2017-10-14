@@ -7,4 +7,3 @@ SVar:DBPumpPower:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | Spell
 SVar:DBPumpToughness:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumDef$ +2 | SpellDescription$ Creatures you control get +0/+2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/borrowed_grace.jpg
 Oracle:Escalate {1}{W} (Pay this cost for each mode chosen beyond the first.)\nChoose one or both —\n• Creatures you control get +2/+0 until end of turn.\n• Creatures you control get +0/+2 until end of turn.
-

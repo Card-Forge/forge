@@ -11,4 +11,3 @@ SVar:DBDamage1:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target c
 SVar:DBDamage2:DB$ DealDamage | ValidTgts$ Opponent | AILogic$ ChoiceBurn | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target opponent.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/collective_defiance.jpg
 Oracle:Escalate {1} (Pay this cost for each mode chosen beyond the first.)\nChoose one or more —\n• Target player discards all the cards in his or her hand, then draws that many cards.\n• Collective Defiance deals 4 damage to target creature.\n• Collective Defiance deals 3 damage to target opponent.
-

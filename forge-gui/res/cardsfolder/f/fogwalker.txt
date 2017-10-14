@@ -8,4 +8,3 @@ SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fogwalker.jpg
 Oracle:Skulk (This creature can't be blocked by creatures with greater power.)\nWhen Fogwalker enters the battlefield, target creature an opponent controls doesn't untap during its controller's next untap step.
-

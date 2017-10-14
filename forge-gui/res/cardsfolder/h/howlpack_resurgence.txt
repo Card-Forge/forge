@@ -7,4 +7,3 @@ SVar:RemRandomDeck:True
 DeckHints:Type$Wolf & Type$Werewolf
 SVar:Picture:Picture:http://www.wizards.com/global/images/magic/general/howlpack_resurgence.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEach creature you control that's a Wolf or a Werewolf gets +1/+1 and has trample.
-

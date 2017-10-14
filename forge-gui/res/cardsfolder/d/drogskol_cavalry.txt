@@ -10,4 +10,3 @@ DeckHints:Type$Spirit
 DeckHas:Ability$Token & Ability$LifeGain
 SVar:Picture:Picture:http://www.wizards.com/global/images/magic/general/drogskol_cavalry.jpg
 Oracle:Flying\nWhenever another Spirit enters the battlefield under your control, you gain 2 life.\n{3}{W}: Create a 1/1 white Spirit creature token with flying.
-

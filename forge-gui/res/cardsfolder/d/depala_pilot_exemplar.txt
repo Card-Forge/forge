@@ -9,4 +9,3 @@ SVar:TrigDig:AB$Dig | Cost$ X | DigNum$ X | References$ X | Reveal$ True | Chang
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/depala_pilot_exemplar.jpg
 Oracle:Other Dwarves you control get +1/+1.\nEach Vehicle you control gets +1/+1 as long as it's a creature.\nWhenever Depala, Pilot Exemplar becomes tapped, you may pay {X}. If you do, reveal the top X cards of your library, put all Dwarf and Vehicle cards from among them into your hand, then put the rest on the bottom of your library in a random order. 
-

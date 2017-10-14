@@ -10,4 +10,3 @@ DeckHas:Ability$Token
 SVar:AIPreference:SacCost$Creature.token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emrakuls_evangel.jpg
 Oracle:{T}, Sacrifice Emrakul's Evangel and any number of other non-Eldrazi creatures: Create a 3/2 colorless Eldrazi Horror creature token for each creature sacrificed this way.
-

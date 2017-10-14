@@ -6,4 +6,3 @@ SVar:DBCopy:DB$ CopySpellAbility | Defined$ Parent | Controller$ TargetedPlayer 
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chain_of_smog.jpg
 Oracle:Target player discards two cards. That player may copy this spell and may choose a new target for that copy.
-

@@ -9,4 +9,3 @@ DeckHints:Ability$Graveyard & Ability$Discard
 DeckHas:Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathcap_cultivator.jpg
 Oracle:{T}: Add {B} or {G} to your mana pool.\nDelirium — Deathcap Cultivator has deathtouch as long as there are four or more card types among cards in your graveyard.
-

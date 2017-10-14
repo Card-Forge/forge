@@ -7,4 +7,3 @@ T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ Card.OppCtrl | Tri
 SVar:TrigChangeZone:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eternal_scourge.jpg
 Oracle:You may cast Eternal Scourge from exile.\nWhen Eternal Scourge becomes the target of a spell or ability an opponent controls, exile Eternal Scourge.
-

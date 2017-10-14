@@ -11,4 +11,3 @@ DeckHas:Ability$Token
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptbreaker.jpg
 Oracle:{1}{B}, {T}, Discard a card: Create a 2/2 black Zombie creature token.\nTap three untapped Zombies you control: You draw a card and you lose 1 life.
-

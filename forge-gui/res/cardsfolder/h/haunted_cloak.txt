@@ -5,4 +5,3 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Vigilance & Tra
 K:Equip 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haunted_cloak.jpg
 Oracle:Equipped creature has vigilance, trample, and haste.\nEquip {1}
-

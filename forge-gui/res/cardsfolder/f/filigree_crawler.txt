@@ -8,4 +8,3 @@ DeckHas:Ability$Token
 SVar:SacMe:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/filigree_crawler.jpg
 Oracle:When Filigree Crawler dies, create a 1/1 colorless Thopter artifact creature token with flying.
-

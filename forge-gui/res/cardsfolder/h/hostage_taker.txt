@@ -15,4 +15,3 @@ SVar:PlayMain1:TRUE
 SVar:NeedsToPlay:Artifact.OppCtrl,Creature.OppCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hostage_taker.jpg
 Oracle:When Hostage Taker enters the battlefield, exile target artifact or creature until Hostage Taker leaves the battlefield. You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any type to cast that spell.
-

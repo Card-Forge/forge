@@ -9,4 +9,3 @@ SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emissary_of_the_sleepless.jpg
 Oracle:Flying\nWhen Emissary of the Sleepless enters the battlefield, if a creature died this turn, create a 1/1 white Spirit creature token with flying.
-

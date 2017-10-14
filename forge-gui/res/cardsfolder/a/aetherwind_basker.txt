@@ -11,4 +11,3 @@ A:AB$ Pump | Cost$ PayEnergy<1> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CA
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aetherwind_basker.jpg
 Oracle:Trample\nWhenever Aetherwind Basker enters the battlefield or attacks, you get {E} (an energy counter) for each creature you control.\nPay {E}: Aetherwind Basker gets +1/+1 until end of turn.
-

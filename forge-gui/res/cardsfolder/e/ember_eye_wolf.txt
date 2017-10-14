@@ -6,4 +6,3 @@ K:Haste
 A:AB$ Pump | Cost$ 1 R | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ember_eye_wolf.jpg
 Oracle:Haste\n{1}{R}: Ember-Eye Wolf gets +2/+0 until end of turn.
-

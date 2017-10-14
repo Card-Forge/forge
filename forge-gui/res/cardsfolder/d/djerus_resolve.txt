@@ -6,4 +6,3 @@ SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Prevent all damage that would be 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/djerus_resolve.jpg
 K:Cycling:2
 Oracle:Untap target creature. Prevent all damage that would be dealt to it this turn.\nCycling {2} ({2}, Discard this card: Draw a card.)
-

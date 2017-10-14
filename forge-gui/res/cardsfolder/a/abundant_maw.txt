@@ -8,4 +8,3 @@ SVar:TrigDrain:DB$LoseLife | ValidTgts$ Opponent | LifeAmount$ 3 | SubAbility$ D
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abundant_maw.jpg
 Oracle:Emerge {6}{B} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's converted mana cost.)\nWhen you cast Abundant Maw, target opponent loses 3 life and you gain 3 life.
-

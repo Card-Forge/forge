@@ -7,4 +7,3 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription
 SVar:TrigUntap:DB$ Untap | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauntless_aven.jpg
 Oracle:Flying\nWhenever Dauntless Aven attacks, untap target creature you control.
-

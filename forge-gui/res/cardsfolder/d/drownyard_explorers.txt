@@ -8,4 +8,3 @@ SVar:ABDraw:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$
 DeckHas:Ability$Investigate & Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drownyard_explorers.jpg
 Oracle:When Drownyard Explorers enters the battlefield, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
-

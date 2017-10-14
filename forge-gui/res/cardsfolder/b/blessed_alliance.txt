@@ -8,4 +8,3 @@ SVar:DBUntap:DB$ Untap | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | Tgt
 SVar:DBSacrifice:DB$ Sacrifice | ValidTgts$ Opponent | TgtPrompt$ Select target player (to sacrifice an attacking creature) | SacValid$ Creature.attacking | SacMessage$ Creature | SpellDescription$ Target opponent sacrifices an attacking creature. 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blessed_alliance.jpg
 Oracle:Escalate {2} (Pay this cost for each mode chosen beyond the first.)\nChoose one or more —\n• Target player gains 4 life.\n• Untap up to two target creatures.\n• Target opponent sacrifices an attacking creature.
-

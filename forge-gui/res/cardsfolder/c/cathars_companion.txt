@@ -7,4 +7,3 @@ SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Indestructible | SpellDescription$ 
 SVar:BuffedBy:Card.nonLand+nonCreature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cathars_companion.jpg
 Oracle:Whenever you cast a noncreature spell, Cathar's Companion gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
-

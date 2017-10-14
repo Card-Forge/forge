@@ -8,4 +8,3 @@ A:AB$ Pump | Cost$ 2 B | ValidTgts$ Zombie | TgtPrompt$ Select target Zombie | K
 DeckHints:Type$Zombie
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drunau_corpse_trawler.jpg
 Oracle:When Drunau Corpse Trawler enters the battlefield, create a 2/2 black Zombie creature token.\n{2}{B}: Target Zombie gains deathtouch until end of turn.
-

@@ -4,4 +4,3 @@ Types:Instant
 A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target colorless spell | ValidTgts$ Card.Colorless | SpellDescription$ Counter target colorless spell.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ceremonial_rejection.jpg
 Oracle:Counter target colorless spell.
-

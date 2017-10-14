@@ -4,4 +4,3 @@ Types:Creature Devil
 PT:5/2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hulking_devil.jpg
 Oracle:
-

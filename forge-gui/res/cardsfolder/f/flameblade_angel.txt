@@ -7,4 +7,3 @@ T:Mode$ DamageDone | ValidSource$ Card.OppCtrl | ValidTarget$ You,Permanent.YouC
 SVar:TrigDealDamage:DB$DealDamage | Defined$ TriggeredSourceController | NumDmg$ 1 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flameblade_angel.jpg
 Oracle:Flying\nWhenever a source an opponent controls deals damage to you or a permanent you control, you may have Flameblade Angel deal 1 damage to that source's controller.
-

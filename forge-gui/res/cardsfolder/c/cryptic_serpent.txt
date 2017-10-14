@@ -7,4 +7,3 @@ SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
 DeckHints:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptic_serpent.jpg
 Oracle:Cryptic Serpent costs {1} less to cast for each instant and sorcery card in your graveyard.
-

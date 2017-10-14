@@ -10,4 +10,3 @@ DeckHints:Ability$Investigate
 DeckHas:Ability$Investigate & Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fleeting_memories.jpg
 Oracle:When Fleeting Memories enters the battlefield, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")\nWhenever you sacrifice a Clue, target player puts the top three cards of his or her library into his or her graveyard.
-
