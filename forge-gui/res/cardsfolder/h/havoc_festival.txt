@@ -3,7 +3,7 @@ ManaCost:4 B R
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Player | AddKeyword$ You can't gain life. | Description$ Players can't gain life.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of each player's upkeep, that player loses half his or her life, rounded up.
-SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount$ HavocX
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredPlayer | LifeAmount$ HavocX
 SVar:HavocX:TriggeredPlayer$LifeTotal/HalfUp
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/havoc_festival.jpg

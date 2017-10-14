@@ -4,10 +4,10 @@ Types:Creature Human Werewolf
 PT:2/2
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TokenAndLife | TriggerDescription$ Whenever this creature enters the battlefield or transforms into CARDNAME, create a 2/2 green Wolf creature token and you gain 2 life.
 T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TokenAndLife | Secondary$ True | TriggerDescription$ Whenever this creature enters the battlefield or transforms into CARDNAME, create a 2/2 green Wolf creature token and you gain 2 life.
-SVar:TokenAndLife:AB$ Token | Cost$ 0 | TokenOwner$ You | TokenName$ Wolf | TokenColors$ Green | TokenTypes$ Creature,Wolf | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ g 2 2 wolf ISD | TokenAmount$ 1 | SubAbility$ Life
+SVar:TokenAndLife:DB$ Token | TokenOwner$ You | TokenName$ Wolf | TokenColors$ Green | TokenTypes$ Creature,Wolf | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ g 2 2 wolf ISD | TokenAmount$ 1 | SubAbility$ Life
 SVar:Life:DB$ GainLife | Defined$ You | LifeAmount$ 2
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
-SVar:TrigTransform:AB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/huntmaster_of_the_fells.jpg
 Oracle:Whenever this creature enters the battlefield or transforms into Huntmaster of the Fells, create a 2/2 green Wolf creature token and you gain 2 life.\nAt the beginning of each upkeep, if no spells were cast last turn, transform Huntmaster of the Fells.
@@ -21,9 +21,9 @@ Types:Creature Werewolf
 PT:4/4
 K:Trample
 T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ DamageAndMoreDamage | TriggerDescription$ Whenever this creature transforms into CARDNAME, it deals 2 damage to target opponent and 2 damage to up to one target creature that player controls.
-SVar:DamageAndMoreDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Opponent | NumDmg$ 2 | SubAbility$ MoreDamage
+SVar:DamageAndMoreDamage:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ 2 | SubAbility$ MoreDamage
 SVar:MoreDamage:DB$ DealDamage | ValidTgts$ Creature | TargetsWithDefinedController$ ParentTarget | NumDmg$ 2 | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature opponent controls
 T:Mode$ Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
-SVar:TrigTransform:AB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravager_of_the_fells.jpg
 Oracle:Trample\nWhenever this creature transforms into Ravager of the Fells, it deals 2 damage to target opponent and 2 damage to up to one target creature that player controls.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Ravager of the Fells.

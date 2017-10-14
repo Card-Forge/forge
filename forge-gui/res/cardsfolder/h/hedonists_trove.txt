@@ -3,7 +3,7 @@ ManaCost:5 B B
 Types:Enchantment
 
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile all cards from target opponent's graveyard.
-SVar:TrigExile:AB$ ChangeZoneAll | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select target Opponent | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | IsCurse$ True | RememberChanged$ True
+SVar:TrigExile:DB$ ChangeZoneAll | ValidTgts$ Opponent | TgtPrompt$ Select target Opponent | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | IsCurse$ True | RememberChanged$ True
 
 S:Mode$ Continuous | MayPlay$ True | Affected$ Land.IsRemembered+ExiledWithSource | AffectedZone$ Exile | Description$ You may play land cards exiled with CARDNAME.
 

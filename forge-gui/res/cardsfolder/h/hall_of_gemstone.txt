@@ -2,7 +2,7 @@ Name:Hall of Gemstone
 ManaCost:1 G G
 Types:World Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player chooses a color. Until end of turn, lands tapped for mana produce mana of the chosen color instead of any other color.
-SVar:TrigChoose:AB$ ChooseColor | Cost$ 0 | Defined$ TriggeredPlayer | AILogic$ MostProminentInActivePlayerHand | SubAbility$ DBEffect
+SVar:TrigChoose:DB$ ChooseColor | Defined$ TriggeredPlayer | AILogic$ MostProminentInActivePlayerHand | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ ReplaceChosen | SVars$ ProduceChosen
 SVar:ReplaceChosen:Event$ ProduceMana | ActiveZones$ Command | ValidCard$ Land | ManaReplacement$ ProduceChosen | Description$ Lands tapped for mana produce mana of the chosen color instead of any other color.
 SVar:ProduceChosen:C->Chosen & U->Chosen & B->Chosen & R->Chosen & G->Chosen & W->Chosen

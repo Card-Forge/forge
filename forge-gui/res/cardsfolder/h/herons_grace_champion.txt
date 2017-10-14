@@ -12,7 +12,7 @@ K:Lifelink
 
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, other Humans you control get +1/+1 and gain lifelink until end of turn.
 
-SVar:TrigPump:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.Human+Other+YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Lifelink
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.Human+Other+YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Lifelink
 
 DeckHints:Type$Human
 

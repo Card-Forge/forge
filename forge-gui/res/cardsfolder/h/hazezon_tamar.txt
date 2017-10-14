@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | ValidCard$ Creature.Self | Origin$ Any | Destination$ Batt
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigTokens | TriggerController$ TriggeredCardController | RememberObjects$ TriggeredCardController | TriggerDescription$ Create a 1/1 Sand Warrior creature token that are red, green, and white for each land you control.
 SVar:TrigTokens:DB$ Token | TokenAmount$ X | TokenName$ Sand Warrior | TokenTypes$ Creature,Sand,Warrior | TokenOwner$ DelayTriggerRemembered | TokenColors$ Green,Red,White | TokenPower$ 1 | TokenToughness$ 1 | References$ X
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigExile | TriggerDescription$ When Hazezon leaves the battlefield, exile all Sand Warriors.
-SVar:TrigExile:AB$ ChangeZoneAll | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | ChangeType$ Sand.Warrior
+SVar:TrigExile:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Sand.Warrior
 SVar:X:Count$Valid Land.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hazezon_tamar.jpg
 Oracle:When Hazezon Tamar enters the battlefield, create X 1/1 Sand Warrior creature tokens that are red, green, and white at the beginning of your next upkeep, where X is the number of lands you control at that time.\nWhen Hazezon leaves the battlefield, exile all Sand Warriors.
