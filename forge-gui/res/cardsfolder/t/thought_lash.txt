@@ -3,7 +3,7 @@ ManaCost:2 U U
 Types:Enchantment
 K:Cumulative upkeep:ExileFromTop<1/Card>:Exile the top card of your library.
 T:Mode$ PayCumulativeUpkeep | ValidCard$ Card.Self | Paid$ False | Execute$ TrigExileAll | TriggerDescription$ When a player doesn't pay CARDNAME's cumulative upkeep, that player exiles all cards from his or her library.
-SVar:TrigExileAll:AB$ ChangeZoneAll | Cost$ 0 | Origin$ Library | Destination$ Exile | ChangeType$ Card.YouCtrl
+SVar:TrigExileAll:DB$ ChangeZoneAll | Origin$ Library | Destination$ Exile | ChangeType$ Card.YouCtrl
 A:AB$ PreventDamage | Cost$ ExileFromTop<1/Card> | Defined$ You | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to you this turn.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True

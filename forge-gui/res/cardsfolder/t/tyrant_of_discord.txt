@@ -3,7 +3,7 @@ ManaCost:4 R R R
 Types:Creature Elemental
 PT:7/7
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigRepeat | TriggerDescription$ When CARDNAME enters the battlefield, target opponent chooses a permanent he or she controls at random and sacrifices it. If a nonland permanent is sacrificed this way, repeat this process.
-SVar:TrigRepeat:AB$ Repeat | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | RepeatSubAbility$ DBClear | RepeatDefined$ Remembered | RepeatPresent$ Permanent.nonland | RepeatCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:TrigRepeat:DB$ Repeat | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | RepeatSubAbility$ DBClear | RepeatDefined$ Remembered | RepeatPresent$ Permanent.nonland | RepeatCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBClear:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBSac
 SVar:DBSac:DB$Sacrifice | Defined$ Targeted | SacValid$ Permanent | Amount$ 1 | RememberSacrificed$ True | Random$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

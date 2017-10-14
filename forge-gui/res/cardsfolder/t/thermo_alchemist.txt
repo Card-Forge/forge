@@ -12,7 +12,7 @@ A:AB$ DealDamage | Cost$ T | Defined$ Player.Opponent | NumDmg$ 1 | SpellDescrip
 
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you cast an instant or sorcery spell, untap CARDNAME.
 
-SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
+SVar:TrigUntap:DB$Untap | Defined$ Self
 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thermo_alchemist.jpg
 

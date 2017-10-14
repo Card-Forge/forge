@@ -6,7 +6,7 @@ K:Indestructible
 S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | RemoveCreatureTypes$ True | CheckSVar$ X | SVarCompare$ LT5 | References$ X | Description$ As long as your devotion to blue is less than 5, CARDNAME isn't a creature. (Each {U} in the mana costs of permanents you control counts towards your devotion to blue.)
 SVar:X:Count$Devotion.Blue
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ At the beginning of your upkeep, scry 1.
-SVar:TrigScry:AB$ Scry | Cost$ 0 | ScryNum$ 1
+SVar:TrigScry:DB$ Scry | ScryNum$ 1
 A:AB$ Pump | Cost$ 1 U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ HIDDEN Unblockable | SpellDescription$ Target creature you control can't be blocked this turn.
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Permanent.Blue

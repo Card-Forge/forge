@@ -5,5 +5,5 @@ PT:4/4
 K:You may exert CARDNAME as it attacks.
 T:Mode$ Exerted | ValidCard$ Creature.YouCtrl | Execute$ TrigPumpAll | TriggerZones$ Battlefield | TriggerDescription$ Whenever you exert a creature, creatures you control get +1/+0 until end of turn.
 // This code presumes that you are only ever allowed to exert creatures you control. If this is changed in the future, it will need an update.
-SVar:TrigPumpAll:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | NumAtt$ +1
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1
 Oracle:You may exert Trueheart Twins as it attacks. (It won't untap during your next untap step.)\nWhenever you exert a creature, creatures you control get +1/+0 until end of turn.

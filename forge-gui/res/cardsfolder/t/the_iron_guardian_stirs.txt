@@ -2,6 +2,6 @@ Name:The Iron Guardian Stirs
 ManaCost:no cost
 Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DarkEffect | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, put a 4/6 colorless Golem creature token onto the battlefield.
-SVar:DarkEffect:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Golem | TokenTypes$ Artifact,Creature,Golem | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 4 | TokenToughness$ 6
+SVar:DarkEffect:DB$ Token | TokenAmount$ 1 | TokenName$ Golem | TokenTypes$ Artifact,Creature,Golem | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 4 | TokenToughness$ 6
 SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/The Iron Guardian Stirs.full.jpg
 Oracle:When you set this scheme in motion, put a 4/6 colorless Golem artifact creature token onto the battlefield.

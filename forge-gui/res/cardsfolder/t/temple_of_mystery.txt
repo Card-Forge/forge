@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 1.
-SVar:TrigScry:AB$ Scry | Cost$ 0 | ScryNum$ 1
+SVar:TrigScry:DB$ Scry | ScryNum$ 1
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U} to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G} to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temple_of_mystery.jpg

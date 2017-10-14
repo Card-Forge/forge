@@ -2,7 +2,7 @@ Name:Tainted Aether
 ManaCost:2 B B
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature enters the battlefield, its controller sacrifices a creature or land.
-SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0 | SacValid$ Creature,Land | Defined$ TriggeredCardController
+SVar:TrigSacrifice:DB$ Sacrifice | SacValid$ Creature,Land | Defined$ TriggeredCardController
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tainted_aether.jpg

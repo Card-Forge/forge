@@ -4,7 +4,7 @@ Types:Creature Thalakos Wizard
 PT:1/1
 K:Shadow
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ TrigSacrifice | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may sacrifice it. If you do, gain control of target creature. (This effect lasts indefinitely.)
-SVar:TrigSacrifice:AB$ SacrificeAll | Cost$ 0 | ValidCards$ Card.Self | RememberSacrificed$ True | SubAbility$ DBGainControl
+SVar:TrigSacrifice:DB$ SacrificeAll | ValidCards$ Card.Self | RememberSacrificed$ True | SubAbility$ DBGainControl
 SVar:DBGainControl:DB$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
