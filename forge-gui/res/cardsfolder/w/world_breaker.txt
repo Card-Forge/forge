@@ -4,7 +4,7 @@ Types:Creature Eldrazi
 PT:5/7
 K:Devoid
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When you cast CARDNAME, exile target artifact, enchantment, or land.
-SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Artifact,Enchantment,Land | Origin$ Battlefield | Destination$ Exile
+SVar:TrigChange:DB$ ChangeZone | ValidTgts$ Artifact,Enchantment,Land | Origin$ Battlefield | Destination$ Exile
 K:Reach
 A:AB$ ChangeZone | Cost$ 2 C Sac<1/Land> | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
 SVar:DiscardMe:1

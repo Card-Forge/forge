@@ -4,7 +4,7 @@ Types:Creature Horror
 PT:4/4
 K:Swampwalk
 A:AB$ Mana | Cost$ T | Produced$ B | Amount$ 4 | SubAbility$ ChangeControl | SpellDescription$ Add {B}{B}{B}{B} to your mana pool.
-SVar:ChangeControl:DB$GainControl | Cost$ 0 | Defined$ Self | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ RemCombat | SpellDescription$ Target opponent gains control of CARDNAME.
+SVar:ChangeControl:DB$GainControl | Defined$ Self | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ RemCombat | SpellDescription$ Target opponent gains control of CARDNAME.
 SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Self
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/witch_engine.jpg

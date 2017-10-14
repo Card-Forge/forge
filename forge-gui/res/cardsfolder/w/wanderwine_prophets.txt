@@ -4,7 +4,7 @@ Types:Creature Merfolk Wizard
 PT:4/4
 K:Champion:Merfolk
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSacrifice | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may sacrifice a Merfolk. If you do, take an extra turn after this one.
-SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0 | SacValid$ Merfolk | RememberSacrificedSVar$ NumSacrificed | SubAbility$ DBAddTurn
+SVar:TrigSacrifice:DB$ Sacrifice | SacValid$ Merfolk | RememberSacrificedSVar$ NumSacrificed | SubAbility$ DBAddTurn
 SVar:DBAddTurn:DB$ AddTurn | NumTurns$ 1 | ConditionCheckSVar$ NumSacrificed | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ StoreSVar | SVar$ NumSacrificed | Type$ Number | Expression$ 0
 SVar:NumSacrificed:0

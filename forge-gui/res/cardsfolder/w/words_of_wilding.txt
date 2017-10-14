@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Enchantment
 A:AB$ Effect | Cost$ 1 | Name$ Words of Wilding Effect | ReplacementEffects$ DrawReplace | SVars$ ExileEffect,WildToken | SpellDescription$ The next time you would draw a card this turn, create a 2/2 green Bear creature token instead.
 SVar:DrawReplace:Event$ Draw | ValidPlayer$ You | ReplaceWith$ WildToken | Description$ The next time you would draw a card this turn, create a 2/2 green Bear creature token instead.
-SVar:WildToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenOwner$ You | TokenName$ Bear | TokenTypes$ Creature,Bear | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ g 2 2 bear ONS | SubAbility$ ExileEffect
+SVar:WildToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenName$ Bear | TokenTypes$ Creature,Bear | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ g 2 2 bear ONS | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/words_of_wilding.jpg

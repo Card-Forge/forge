@@ -5,9 +5,9 @@ PT:3/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ RaidTest | Execute$ TrigToken | TriggerDescription$ Raid — When CARDNAME enters the battlefield, if you attacked with a creature this turn, create a 3/4 white Bird creature token with flying.
 SVar:RaidTest:Count$AttackersDeclared
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenName$ Bird | TokenColors$ White | TokenPower$ 3 | TokenToughness$ 4 | TokenTypes$ Creature,Bird | TokenKeywords$ Flying | TokenAmount$ 1 | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenName$ Bird | TokenColors$ White | TokenPower$ 3 | TokenToughness$ 4 | TokenTypes$ Creature,Bird | TokenKeywords$ Flying | TokenAmount$ 1 | TokenOwner$ You
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME attacks, you gain 1 life for each attacking creature.
-SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Count$Valid Creature.attacking
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wingmate_roc.jpg

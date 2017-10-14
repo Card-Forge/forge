@@ -3,7 +3,7 @@ ManaCost:R R
 Types:Sorcery
 A:SP$ AddTurn | Cost$ R R | NumTurns$ 1 | ExtraTurnDelayedTrigger$ DBDelTrig | ExtraTurnDelayedTriggerExcute$ TrigLose | References$ DBDelTrig,TrigLose | SpellDescription$ Take an extra turn after this one. At the beginning of that turn's end step, you lose the game.
 SVar:DBDelTrig:ThisTurn$ True | Mode$ Phase | Phase$ End of Turn | Execute$ TrigLose | TriggerDescription$ At the beginning of that turn's end step, you lose the game.
-SVar:TrigLose:AB$ LosesGame | Cost$ 0 | Defined$ You
+SVar:TrigLose:DB$ LosesGame | Defined$ You
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warriors_oath.jpg
 Oracle:Take an extra turn after this one. At the beginning of that turn's end step, you lose the game.

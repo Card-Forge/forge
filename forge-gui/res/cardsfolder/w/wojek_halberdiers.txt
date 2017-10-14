@@ -3,7 +3,7 @@ ManaCost:R W
 Types:Creature Human Soldier
 PT:3/2
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | CheckSVar$ BattalionTest | NoResolvingCheck$ True | SVarCompare$ GE2 | Execute$ TrigBattalionPump | TriggerDescription$ Battalion — Whenever CARDNAME and at least two other creatures attack, CARDNAME gains first strike until end of turn.
-SVar:TrigBattalionPump:AB$ Pump | Cost$ 0 | KW$ First Strike | Defined$ Self
+SVar:TrigBattalionPump:DB$ Pump | KW$ First Strike | Defined$ Self
 SVar:BattalionTest:Count$Valid Creature.attacking+Other
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wojek_halberdiers.jpg
 Oracle:Battalion — Whenever Wojek Halberdiers and at least two other creatures attack, Wojek Halberdiers gains first strike until end of turn.
