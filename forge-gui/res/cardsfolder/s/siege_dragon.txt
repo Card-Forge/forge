@@ -4,7 +4,7 @@ Types:Creature Dragon
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroyAll | TriggerDescription$ When CARDNAME enters the battlefield, destroy all Walls your opponents control.
-SVar:TrigDestroyAll:AB$ DestroyAll | Cost$ 0 | ValidCards$ Wall.OppCtrl
+SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Wall.OppCtrl
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDmg | IsPresent$ Wall.DefenderCtrl | PresentCompare$ EQ0 | TriggerDescription$ Whenever CARDNAME attacks, if defending player controls no Walls, it deals 2 damage to each creature without flying that player controls.
 SVar:TrigDmg:DB$ DamageAll | ValidCards$ Creature.withoutFlying+DefenderCtrl | NumDmg$ 2 | ValidDescription$ each creature without flying that player controls.
 SVar:HasAttackEffect:TRUE

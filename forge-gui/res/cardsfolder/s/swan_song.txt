@@ -2,7 +2,7 @@ Name:Swan Song
 ManaCost:U
 Types:Instant
 A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target enchantment, instant or sorcery spell | ValidTgts$ Enchantment,Instant,Sorcery | SubAbility$ DBToken | SpellDescription$ Counter target enchantment, instant or sorcery spell. Its controller creates a 2/2 blue Bird creature token with flying.
-SVar:DBToken:DB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenOwner$ TargetedController | TokenName$ Bird | TokenTypes$ Creature,Bird | TokenColors$ Blue | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Flying | TokenImage$ u_2_2_bird_ths
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ TargetedController | TokenName$ Bird | TokenTypes$ Creature,Bird | TokenColors$ Blue | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Flying | TokenImage$ u_2_2_bird_ths
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swan_song.jpg
 Oracle:Counter target enchantment, instant, or sorcery spell. Its controller creates a 2/2 blue Bird creature token with flying.

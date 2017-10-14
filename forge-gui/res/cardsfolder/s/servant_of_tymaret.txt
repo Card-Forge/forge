@@ -4,7 +4,7 @@ Types:Creature Zombie
 PT:1/3
 A:AB$ Regenerate | Cost$ 2 B | SpellDescription$ Regenerate CARDNAME.
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Inspired — Whenever CARDNAME becomes untapped, each opponent loses 1 life. You gain life equal to the life lost this way.
-SVar:TrigDrain:AB$ LoseLife | Cost$ 0 | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost
 SVar:AFLifeLost:Number$0
 #AFLifeLost will be set by LoseLife

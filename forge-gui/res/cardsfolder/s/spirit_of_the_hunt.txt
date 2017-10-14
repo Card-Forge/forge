@@ -10,7 +10,7 @@ K:Flash
 
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, each other creature you control that's a Wolf or Werewolf gets +0/+3 until end of turn. 
 
-SVar:TrigPump:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.Wolf+Other+YouCtrl,Creature.Werewolf+Other+YouCtrl | NumDef$ +3
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.Wolf+Other+YouCtrl,Creature.Werewolf+Other+YouCtrl | NumDef$ +3
 
 DeckHints:Type$Wolf & Type$Werewolf
 

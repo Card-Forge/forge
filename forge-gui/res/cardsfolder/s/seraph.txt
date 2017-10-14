@@ -11,7 +11,7 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | Va
 SVar:DBForget:DB$ Pump | Defined$ Card.Self | ForgetObjects$ TriggeredCard
 
 T:Mode$ ChangesController | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ Sacrifice | TriggerDescription$ Sacrifice the creature when you lose control of CARDNAME.
-SVar:Sacrifice:AB$ SacrificeAll | Cost$ 0 | ValidCards$ Card.IsRemembered | Controller$ You | SubAbility$ DBCleanup
+SVar:Sacrifice:DB$ SacrificeAll | ValidCards$ Card.IsRemembered | Controller$ You | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seraph.jpg

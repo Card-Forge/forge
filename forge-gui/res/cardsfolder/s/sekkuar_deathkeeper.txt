@@ -3,6 +3,6 @@ ManaCost:2 B R G
 Types:Legendary Creature Orc Shaman
 PT:4/3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken+Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever another nontoken creature you control dies, create a 3/1 black and red Graveborn creature token with haste.
-SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Graveborn | TokenTypes$ Creature,Graveborn | TokenOwner$ You | TokenColors$ Black,Red | TokenPower$ 3 | TokenToughness$ 1 | TokenKeywords$ Haste
+SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenName$ Graveborn | TokenTypes$ Creature,Graveborn | TokenOwner$ You | TokenColors$ Black,Red | TokenPower$ 3 | TokenToughness$ 1 | TokenKeywords$ Haste
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sekkuar_deathkeeper.jpg
 Oracle:Whenever another nontoken creature you control dies, create a 3/1 black and red Graveborn creature token with haste.

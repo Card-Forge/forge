@@ -6,7 +6,7 @@ A:SP$ ChooseSource | Cost$ 1 W | Choices$ Card | AILogic$ NeedsPrevention | SubA
 
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RepDmg | SVars$ GainLifeYou,RepDmg,X,Y | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1
 SVar:RepDmg:Event$ DamageDone | ValidTarget$ You | ValidSource$ Card.ChosenCard | ReplaceWith$ GainLifeYou | PreventionEffect$ True | Description$ Prevent all damage that would be dealt to you this turn by a source of your choice. Whenever damage from a black or red source is prevented this way this turn, you gain that much life.
-SVar:GainLifeYou:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X,Y | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1
+SVar:GainLifeYou:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X,Y | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1
 
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 

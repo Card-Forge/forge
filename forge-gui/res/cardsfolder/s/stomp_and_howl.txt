@@ -2,6 +2,6 @@ Name:Stomp and Howl
 ManaCost:2 G
 Types:Sorcery
 A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact and target enchantment. | SubAbility$ DestroyEnch
-SVar:DestroyEnch:DB$ Destroy | Cost$ 0 | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment
+SVar:DestroyEnch:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stomp_and_howl.jpg
 Oracle:Destroy target artifact and target enchantment.

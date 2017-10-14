@@ -4,7 +4,7 @@ Types:Enchantment
 
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ ChoosePlayer | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, separate all creatures defending player controls into two piles. Only creatures in the pile of that player's choice can block this turn.
 
-SVar:ChoosePlayer:AB$ ChoosePlayer | Cost$ 0 | Choices$ Opponent | Defined$ You | AILogic$ LeastCreatures | SubAbility$ DBTwoPiles
+SVar:ChoosePlayer:DB$ ChoosePlayer | Choices$ Opponent | Defined$ You | AILogic$ LeastCreatures | SubAbility$ DBTwoPiles
 
 SVar:DBTwoPiles:DB$ TwoPiles | Defined$ ChosenPlayer | Chooser$ ChosenPlayer | Zone$ Battlefield | ValidCards$ Creature.ChosenCtrl | Separator$ You | ChosenPile$ DBOnlyBlock | AILogic$ Best
 

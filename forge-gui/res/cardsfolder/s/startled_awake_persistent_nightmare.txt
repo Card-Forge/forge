@@ -16,6 +16,6 @@ Types:Creature Nightmare
 PT:1/1
 K:Skulk
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigBounce | TriggerDescription$ When CARDNAME deals combat damage to a player, return it to its owner's hand.
-SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Hand 
+SVar:TrigBounce:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/persistent_nightmare.jpg
 Oracle:Skulk (This creature can't be blocked by creatures with greater power.)\nWhen Persistent Nightmare deals combat damage to a player, return it to its owner's hand.

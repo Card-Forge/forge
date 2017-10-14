@@ -4,7 +4,7 @@ Types:Creature Gargoyle
 PT:2/1
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | ManaSpent$ B | TriggerDescription$ When CARDNAME enters the battlefield, if {B} was spent to cast it, target player discards a card.
-SVar:TrigDiscard:AB$ Discard | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ TgtChoose
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ TgtChoose
 SVar:ManaNeededToAvoidNegativeEffect:black
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Black

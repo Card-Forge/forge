@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Creature Zombie Mercenary
 PT:3/3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 3 damage to target creature you control.
-SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature | NumDmg$ 3
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature | NumDmg$ 3
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiteful_bully.jpg
 Oracle:At the beginning of your upkeep, Spiteful Bully deals 3 damage to target creature you control.

@@ -4,7 +4,7 @@ Types:Sorcery
 A:SP$ Token | Cost$ 4 B B | TokenImage$ b 2 2 zombie AKH | TokenAmount$ 3 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | SpellDescription$ Create three 2/2 black Zombie creature tokens.
 K:Cycling:3 B
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you cycle CARDNAME, create a 2/2 black Zombie creature token.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ b 2 2 zombie AKH | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2
+SVar:TrigToken:DB$ Token | TokenImage$ b 2 2 zombie AKH | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stir_the_sands.jpg
 Oracle:Create three 2/2 black Zombie creature tokens.\nCycling {3}{B} ({3}{B}, Discard this card: Draw a card.)\nWhen you cycle Stir the Sands, create a 2/2 black Zombie creature token.

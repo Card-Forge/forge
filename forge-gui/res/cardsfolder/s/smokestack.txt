@@ -3,8 +3,8 @@ ManaCost:4
 Types:Artifact
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices a permanent for each soot counter on CARDNAME
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put a soot counter on CARDNAME.
-SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0 | Defined$ TriggeredPlayer | Amount$ X | References$ X | SacValid$ Permanent | SacMessage$ Permanent
-SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ SOOT | CounterNum$ 1
+SVar:TrigSacrifice:DB$ Sacrifice | Defined$ TriggeredPlayer | Amount$ X | References$ X | SacValid$ Permanent | SacMessage$ Permanent
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ SOOT | CounterNum$ 1
 SVar:X:Count$CardCounters.SOOT
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smokestack.jpg

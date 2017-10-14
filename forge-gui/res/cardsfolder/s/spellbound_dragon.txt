@@ -4,7 +4,7 @@ Types:Creature Dragon
 PT:3/5
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, draw a card, then discard a card. CARDNAME gets +X/+0 until end of turn, where X is the discarded card's converted mana cost.
-SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | NumAtt$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Creature Kithkin Wizard
 PT:1/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Chroma — When CARDNAME enters the battlefield, create a 0/1 white Goat creature token for each white mana symbol in the mana costs of permanents you control.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ X | References$ X | TokenName$ Goat | TokenTypes$ Creature,Goat | TokenOwner$ You | TokenColors$ White | TokenPower$ 0 | TokenToughness$ 1
+SVar:TrigToken:DB$ Token | TokenAmount$ X | References$ X | TokenName$ Goat | TokenTypes$ Creature,Goat | TokenOwner$ You | TokenColors$ White | TokenPower$ 0 | TokenToughness$ 1
 SVar:X:Count$Chroma.White
 SVar:Picture:http://www.wizards.com/global/images/magic/general/springjack_shepherd.jpg
 Oracle:Chroma — When Springjack Shepherd enters the battlefield, create a 0/1 white Goat creature token for each white mana symbol in the mana costs of permanents you control.

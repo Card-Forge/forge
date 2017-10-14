@@ -4,7 +4,7 @@ Types:Enchantment Creature Zombie
 PT:1/1
 K:Bestow:3 B
 T:Mode$ Attacks | ValidCard$ Card.Self,Creature.EnchantedBy | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME or enchanted creature attacks, defending player loses 2 life.
-SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredDefendingPlayer | LifeAmount$ 2
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$ 2
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddSVar$ HasAttackEffect | Description$ Enchanted creature gets +1/+1.
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiteful_returned.jpg

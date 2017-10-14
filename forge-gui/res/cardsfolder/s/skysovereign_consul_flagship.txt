@@ -5,7 +5,7 @@ PT:6/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBDmg | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, it deals 3 damage to target creature or planeswalker an opponent controls.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBDmg | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, it deals 3 damage to target creature or planeswalker an opponent controls.
-SVar:DBDmg:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select target creature or planeswalker an opponent controls | NumDmg$ 3
+SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select target creature or planeswalker an opponent controls | NumDmg$ 3
 SVar:HasAttackEffect:TRUE
 K:Crew:3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skysovereign_consul_flagship.jpg
