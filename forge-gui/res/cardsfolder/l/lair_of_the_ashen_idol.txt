@@ -2,7 +2,7 @@ Name:Lair of the Ashen Idol
 ManaCost:no cost
 Types:Plane Azgol
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ SacToIdol | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature. If you can't, planeswalk.
-SVar:SacToIdol:AB$ Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature | SubAbility$ IdolWalk | RememberSacrificed$ True
+SVar:SacToIdol:DB$ Sacrifice | Defined$ You | SacValid$ Creature | SubAbility$ IdolWalk | RememberSacrificed$ True
 SVar:IdolWalk:DB$ Planeswalk | ConditionCheckSVar$ IdolX | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup | References$ IdolX
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:IdolX:Remembered$Amount

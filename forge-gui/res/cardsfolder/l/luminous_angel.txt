@@ -4,7 +4,7 @@ Types:Creature Angel
 PT:4/4
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, you may create a 1/1 white Spirit creature token with flying.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ w 1 1 spirit MRD | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
+SVar:TrigToken:DB$ Token | TokenImage$ w 1 1 spirit MRD | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/luminous_angel.jpg
 Oracle:Flying\nAt the beginning of your upkeep, you may create a 1/1 white Spirit creature token with flying.

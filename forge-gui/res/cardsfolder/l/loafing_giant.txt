@@ -4,7 +4,7 @@ Types:Creature Giant
 PT:4/6
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks or blocks, put the top card of your library into your graveyard. If that card is a land card, prevent all combat damage CARDNAME would deal this turn.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, put the top card of your library into your graveyard. If that card is a land card, prevent all combat damage CARDNAME would deal this turn.
-SVar:TrigMill:AB$ Mill | Cost$ 0 | Defined$ You | NumCards$ 1 | RememberMilled$ True | SubAbility$ DBPump
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 1 | RememberMilled$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Prevent all combat damage that would be dealt by CARDNAME. | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loafing_giant.jpg

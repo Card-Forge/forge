@@ -2,7 +2,7 @@ Name:Limited Resources
 ManaCost:W
 Types:Enchantment
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBRepeatResources | TriggerDescription$ When CARDNAME enters the battlefield, each player chooses five lands he or she controls and sacrifices the rest.
-SVar:DBRepeatResources:AB$ RepeatEach | Cost$ 0 | RepeatPlayers$ Player | RepeatSubAbility$ CardChoice
+SVar:DBRepeatResources:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ CardChoice
 SVar:CardChoice:DB$ ChooseCard | Defined$ Remembered | Amount$ 5 | Choices$ Land.RememberedPlayerCtrl | ChoiceTitle$ Choose a land | RememberChosen$ True | SubAbility$ SacRest
 SVar:SacRest:DB$ SacrificeAll | ValidCards$ Land.RememberedPlayerCtrl+IsNotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

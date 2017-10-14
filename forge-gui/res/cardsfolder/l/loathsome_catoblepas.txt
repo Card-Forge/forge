@@ -4,7 +4,7 @@ Types:Creature Beast
 PT:3/3
 A:AB$ Pump | Cost$ 2 G | KW$ HIDDEN CARDNAME must be blocked if able. | AILogic$ Pump | SpellDescription$ CARDNAME must be blocked this turn if able.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPump | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, target creature an opponent controls gets -3/-3 until end of turn.
-SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Green
 SVar:RemAIDeck:True

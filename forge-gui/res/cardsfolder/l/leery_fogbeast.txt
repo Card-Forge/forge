@@ -3,6 +3,6 @@ ManaCost:2 G
 Types:Creature Beast
 PT:4/2
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigFog | TriggerDescription$ Whenever CARDNAME becomes blocked, prevent all combat damage that would be dealt this turn.
-SVar:TrigFog:AB$ Fog | Cost$ 0 | SpellDescription$ Prevent all combat damage that would be dealt this turn.
+SVar:TrigFog:DB$ Fog | SpellDescription$ Prevent all combat damage that would be dealt this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leery_fogbeast.jpg
 Oracle:Whenever Leery Fogbeast becomes blocked, prevent all combat damage that would be dealt this turn.

@@ -2,6 +2,6 @@ Name:Look Skyward and Despair
 ManaCost:no cost
 Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DarkEffect | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, put a 5/5 red Dragon creature token with flying onto the battlefield.
-SVar:DarkEffect:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Dragon | TokenTypes$ Creature,Dragon | TokenOwner$ You | TokenColors$ Red | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Flying
+SVar:DarkEffect:DB$ Token | TokenAmount$ 1 | TokenName$ Dragon | TokenTypes$ Creature,Dragon | TokenOwner$ You | TokenColors$ Red | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Flying
 SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/Look Skyward and Despair.full.jpg
 Oracle:When you set this scheme in motion, put a 5/5 red Dragon creature token with flying onto the battlefield.

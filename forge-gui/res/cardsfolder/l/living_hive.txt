@@ -4,7 +4,7 @@ Types:Creature Elemental Insect
 PT:6/6
 K:Trample
 T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigToken | ValidTarget$ Player | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, create that many 1/1 green Insect creature tokens.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ X | TokenName$ Insect | TokenTypes$ Creature,Insect | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 insect MRD | References$ X
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenName$ Insect | TokenTypes$ Creature,Insect | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 insect MRD | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_hive.jpg
 Oracle:Trample\nWhenever Living Hive deals combat damage to a player, create that many 1/1 green Insect creature tokens.
