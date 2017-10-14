@@ -8,7 +8,5 @@ SVar:DelTrig:DB$DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ Tri
 SVar:TrigBounce:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRemembered
 SVar:DBClone:DB$Clone | Defined$ RememberedLKI | CloneTarget$ Self | Duration$ UntilEndOfTurn | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
-
 SVar:Picture:http://www.wizards.com/global/images/magic/general/identity_thief.jpg
 Oracle:Whenever Identity Thief attacks, you may exile another target nontoken creature. If you do, Identity Thief becomes a copy of that creature until end of turn. Return the exiled card to the battlefield under its owner’s control at the beginning of the next end step.
-

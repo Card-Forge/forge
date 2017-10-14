@@ -8,4 +8,3 @@ SVar:BuffedBy:Equipment
 DeckHints:Type$Equipment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/militant_inquisitor.jpg
 Oracle:Militant Inquisitor gets +1/+0 for each Equipment you control.
-

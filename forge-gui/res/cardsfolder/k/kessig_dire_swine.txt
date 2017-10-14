@@ -7,4 +7,3 @@ DeckHints:Ability$Graveyard & Ability$Discard
 DeckHas:Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kessig_dire_swine.jpg
 Oracle:Delirium — Kessig Dire Swine has trample as long as there are four or more card types among cards in your graveyard.
-

@@ -7,4 +7,3 @@ A:AB$ DealDamage | Cost$ 1 R | ValidTgts$ Creature.blocking | TgtPrompt$ Select 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nahiris_machinations.jpg
 Oracle:At the beginning of combat on your turn, target creature you control gains indestructible until end of turn.\n{1}{R}: Nahiri's Machinations deals 1 damage to target blocking creature.
-

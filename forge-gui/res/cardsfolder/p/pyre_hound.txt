@@ -8,4 +8,3 @@ SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNu
 SVar:BuffedBy:Instant,Sorcery
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyre_hound.jpg
 Oracle:Trample\nWhenever you cast an instant or sorcery spell, put a +1/+1 counter on Pyre Hound.
-

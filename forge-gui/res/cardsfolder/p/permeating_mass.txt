@@ -6,4 +6,3 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDama
 SVar:TrigCopy:DB$Clone | Defined$ TriggeredSourceLKICopy | CloneZone$ Battlefield | CloneTarget$ TriggeredTarget
 SVar:Picture:http://www.wizards.com/global/images/magic/general/permeating_mass.jpg
 Oracle:Whenever Permeating Mass deals combat damage to a creature, that creature becomes a copy of Permeating Mass.
-

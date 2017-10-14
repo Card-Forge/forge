@@ -12,4 +12,3 @@ SVar:EndOfTurnLeavePlay:True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/impetuous_devils.jpg
 Oracle:Trample, haste\nWhen Impetuous Devils attacks, up to one target creature defending player controls blocks it this combat if able.\nAt the beginning of the end step, sacrifice Impetuous Devils.
-

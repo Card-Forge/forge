@@ -7,4 +7,3 @@ SVar:DBReturn:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Dest
 SVar:BuffedBy:Permanent.White,Permanent.Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pias_revolution.jpg
 Oracle:Whenever a nontoken artifact is put into your graveyard from the battlefield, return that card to your hand unless target opponent has Pia's Revolution deal 3 damage to him or her.
-

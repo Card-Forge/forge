@@ -8,4 +8,3 @@ DeckHas:Ability$Discard
 DeckHints:Keyword$Madness & Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/insolent_neonate.jpg
 Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nDiscard a card, Sacrifice Insolent Neonate: Draw a card.
-

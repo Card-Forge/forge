@@ -7,4 +7,3 @@ A:AB$ Token | Cost$ 2 W ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard |
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nearheath_chaplain.jpg
 Oracle:Lifelink\n{2}{W}, Exile Nearheath Chaplain from your graveyard: Create two 1/1 white Spirit creature tokens with flying. Activate this ability only any time you could cast a sorcery.
-

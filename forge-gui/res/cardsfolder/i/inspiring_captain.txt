@@ -7,4 +7,3 @@ SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDe
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inspiring_captain.jpg
 Oracle:When Inspiring Captain enters the battlefield, creatures you control get +1/+1 until end of turn.
-

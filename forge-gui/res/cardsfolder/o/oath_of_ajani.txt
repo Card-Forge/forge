@@ -8,4 +8,3 @@ SVar:PlayMain1:TRUE
 DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oath_of_ajani.jpg
 Oracle:When Oath of Ajani enters the battlefield, put a +1/+1 counter on each creature you control.\nPlaneswalker spells you cast cost {1} less to cast.
-

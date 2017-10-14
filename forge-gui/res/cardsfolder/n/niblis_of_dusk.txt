@@ -6,4 +6,3 @@ K:Flying
 K:Prowess
 SVar:Picture:http://www.wizards.com/global/images/magic/general/niblis_of_dusk.jpg
 Oracle:Flying\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
-

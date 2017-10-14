@@ -6,4 +6,3 @@ SVar:RemAIDeck:True
 DeckHints:Ability$Discard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ruthless_disposal.jpg
 Oracle:As an additional cost to cast Ruthless Disposal, discard a card and sacrifice a creature.\nTwo target creatures each get -13/-13 until end of turn.
-

@@ -5,4 +5,3 @@ A:SP$ Draw | Cost$ 2 B Sac<1/Creature;Land/creature or land> | NumCards$ 2 | Spe
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merciless_resolve.jpg
 Oracle:As an additional cost to cast Merciless Resolve, sacrifice a creature or land.\nDraw two cards.
-

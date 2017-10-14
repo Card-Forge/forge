@@ -6,4 +6,3 @@ SVar:X:Count$GreatestPower_Creature.YouCtrl
 SVar:DBPlay:DB$ Play | Valid$ Card.nonLand+YouOwn+cmcLE5 | ValidZone$ Hand | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rishkars_expertise.jpg
 Oracle:Draw cards equal to the greatest power among creatures you control.\nYou may cast a card with converted mana cost 5 or less from your hand without paying its mana cost.
-

@@ -7,4 +7,3 @@ SVar:CastCard:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | Optional$
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minds_dilation.jpg
 Oracle:Whenever an opponent casts his or her first spell each turn, that player exiles the top card of his or her library. If it's a nonland card, you may cast it without paying it's mana cost.
-

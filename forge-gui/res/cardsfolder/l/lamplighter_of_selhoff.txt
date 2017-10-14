@@ -8,4 +8,3 @@ SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 DeckHints:Type$Zombie
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lamplighter_of_selhoff.jpg
 Oracle:When Lamplighter of Selhoff enters the battlefield, if you control another Zombie, you may draw a card. If you do, discard a card.
-

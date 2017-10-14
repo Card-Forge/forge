@@ -8,4 +8,3 @@ DeckHas:Ability$Discard
 DeckHints:Keyword$Madness & Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/markov_dreadknight.jpg
 Oracle:Flying\n{2}{B}, Discard a card: Put two +1/+1 counters on Markov Dreadknight.
-

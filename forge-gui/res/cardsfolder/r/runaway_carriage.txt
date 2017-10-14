@@ -10,4 +10,3 @@ SVar:TrigSacrifice:DB$Sacrifice | Defined$ Self
 SVar:SacrificeEndCombat:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runaway_carriage.jpg
 Oracle:Trample\nWhen Runaway Carriage attacks or blocks, sacrifice it at end of combat.
-

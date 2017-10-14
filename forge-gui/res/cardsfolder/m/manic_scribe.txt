@@ -10,4 +10,3 @@ DeckHints:Ability$Graveyard & Ability$Discard
 DeckHas:Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/manic_scribe.jpg
 Oracle:When Manic Scribe enters the battlefield, each opponent puts the top three cards of his or her library into his or her graveyard.\nDelirium — At the beginning of each opponent's upkeep, if you have four or more card types among cards in your graveyard, that player puts the top three cards of his or her library into his or her graveyard.
-

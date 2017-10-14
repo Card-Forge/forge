@@ -5,4 +5,3 @@ T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$
 SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Permanent.YouCtrl+nonLand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paradox_engine.jpg
 Oracle:Whenever you cast a spell, untap all nonland permanents you control.
-

@@ -8,4 +8,3 @@ SVar:MaxTgts:Count$Valid Artifact
 SVar:DBToken:DB$Token | TokenAmount$ X | TokenName$ Gremlin | TokenTypes$ Creature,Gremlin | TokenOwner$ You | TokenColors$ Red | TokenPower$ 2 | TokenToughness$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/release_the_gremlins.jpg
 Oracle:Destroy X target artifacts. Create X 2/2 red Gremlin creature tokens.
-

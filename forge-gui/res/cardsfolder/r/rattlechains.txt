@@ -10,4 +10,3 @@ S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Spirit.YouCtrl | AddHid
 DeckHints:Type$Spirit
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rattlechains.jpg
 Oracle:Flash\nFlying\nWhen Rattlechains enters the battlefield, target Spirit gains hexproof until end of turn.\nYou may cast Spirit spells as though they had flash.
-

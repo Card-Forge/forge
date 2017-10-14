@@ -9,4 +9,3 @@ A:AB$ PumpAll | Cost$ 4 U U ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveya
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nephalia_moondrakes.jpg
 Oracle:Flying\nWhen Nephalia Moondrakes enters the battlefield, target creature gains flying until end of turn.\n{4}{U}{U}, Exile Nephalia Moondrakes from your graveyard: Creatures you control gain flying until end of turn.
-
