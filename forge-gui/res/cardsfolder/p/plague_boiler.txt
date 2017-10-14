@@ -2,12 +2,12 @@ Name:Plague Boiler
 ManaCost:3
 Types:Artifact
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ PutPlagueCounter | TriggerDescription$ At the beginning of your upkeep, put a plague counter on CARDNAME.
-SVar:PutPlagueCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ PLAGUE | CounterNum$ 1
+SVar:PutPlagueCounter:DB$ PutCounter | Defined$ Self | CounterType$ PLAGUE | CounterNum$ 1
 A:AB$ GenericChoice | Cost$ 1 B G | Choices$ DBPutPlagueCounter,DBRemovePlagueCounter | SpellDescription$ Put a plague counter on CARDNAME or remove a plague counter from it.
 SVar:DBRemovePlagueCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ PLAGUE | CounterNum$ 1 | SpellDescription$ Remove a plague counter on this card.
 SVar:DBPutPlagueCounter:DB$ PutCounter | Defined$ Self | CounterType$ PLAGUE | CounterNum$ 1 | SpellDescription$ Put a plague counter on this card.
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE3_PLAGUE | Execute$ TrigSac | TriggerDescription$ When CARDNAME has three or more plague counters on it, sacrifice it. If you do, destroy all nonland permanents.
-SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self | RememberSacrificed$ True | SubAbility$ DBDestroyAll
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self | RememberSacrificed$ True | SubAbility$ DBDestroyAll
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Permanent.nonLand | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True

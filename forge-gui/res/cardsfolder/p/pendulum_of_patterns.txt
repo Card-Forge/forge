@@ -2,7 +2,7 @@ Name:Pendulum of Patterns
 ManaCost:2
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
-SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 3
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
 A:AB$ Draw | Cost$ 5 T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pendulum_of_patterns.jpg
 Oracle:When Arashin Cleric enters the battlefield, you gain 3 life.\n{5}, {T}, Sacrifice Pendulum of Patters: Draw a card.

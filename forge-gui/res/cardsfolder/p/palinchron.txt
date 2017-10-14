@@ -4,7 +4,7 @@ Types:Creature Illusion
 PT:4/5
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, untap up to seven lands.
-SVar:TrigUntap:AB$ Untap | Cost$ 0 | UntapUpTo$ True | UntapType$ Land | Amount$ 7
+SVar:TrigUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land | Amount$ 7
 A:AB$ ChangeZone | Cost$ 2 U U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:FreeSpellAI:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/palinchron.jpg

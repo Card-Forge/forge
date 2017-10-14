@@ -4,7 +4,7 @@ Types:Creature Demon Spirit
 PT:5/4
 K:Fear
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature if you don't control an Ogre.
-SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Creature | Defined$ You | ConditionPresent$ Ogre.YouCtrl | ConditionCompare$ EQ0
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Creature | Defined$ You | ConditionPresent$ Ogre.YouCtrl | ConditionCompare$ EQ0
 SVar:RemRandomDeck:True
 SVar:NeedsToPlay:Ogre.YouCtrl
 DeckHints:Type$Ogre

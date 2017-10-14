@@ -4,7 +4,7 @@ Types:Creature Wall
 PT:0/3
 K:Defender
 T:Mode$ Blocks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME blocks, you may draw a card.
-SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:HasBlockEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_membrane.jpg
 Oracle:Defender (This creature can't attack.)\nWhenever Psychic Membrane blocks, you may draw a card.

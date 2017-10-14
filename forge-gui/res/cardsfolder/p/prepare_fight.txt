@@ -3,7 +3,7 @@ ManaCost:1 W
 AlternateMode: Split
 Types:Instant
 A:SP$ Untap | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPump | SpellDescription$ Untap target creature. It gets +2/+2 and gains lifelink until end of turn.
-SVar:DBPump:DB$ Pump | Cost$ 0 | Defined$ Targeted | NumAtt$ +2 | NumDef$ +2 | KW$ Lifelink
+SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +2 | NumDef$ +2 | KW$ Lifelink
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prepare_fight.jpg
 Oracle:Untap target creature. It gets +2/+2 and gains lifelink until end of turn.
 

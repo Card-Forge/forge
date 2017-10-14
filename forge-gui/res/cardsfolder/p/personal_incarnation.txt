@@ -6,7 +6,7 @@ A:AB$ Effect | Cost$ 0 | Name$ Personal Incarnation Redirection | ReplacementEff
 SVar:RedirectDamage:Event$ DamageDone | ValidTarget$ Creature.EffectSource | ReplaceWith$ RedirectDmg | DamageTarget$ You | Description$ The next 1 damage that would be dealt to EFFECTSOURCE this turn is dealt to its owner instead. Only EFFECTSOURCE's owner may activate this ability.
 SVar:RedirectDmg:DB$ ReplaceSplitDamage | DamageTarget$ You
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, its owner loses half his or her life, rounded up.
-SVar:TrigLoseLife:AB$ Pump | Cost$ 0 | RememberObjects$ TriggeredCardOwner | SubAbility$ DBLoseLife
+SVar:TrigLoseLife:DB$ Pump | RememberObjects$ TriggeredCardOwner | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Remembered | LifeAmount$ HavocX | References$ HavocX | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:HavocX:PlayerCountRemembered$LifeTotal/HalfUp

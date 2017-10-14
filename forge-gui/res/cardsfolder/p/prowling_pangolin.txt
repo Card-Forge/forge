@@ -3,7 +3,7 @@ ManaCost:3 B B
 Types:Creature Beast
 PT:6/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, any player may sacrifice two creatures. If a player does, sacrifice CARDNAME.
-SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self | UnlessCost$ Sac<2/Creature> | UnlessPayer$ Player | UnlessSwitched$ True
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self | UnlessCost$ Sac<2/Creature> | UnlessPayer$ Player | UnlessSwitched$ True
 SVar:AIPreference:SacCost$Creature.token,Creature
 SVar:AIPreferenceParams:CreatureEvalThreshold$ 150 | MinCreaturesBelowThreshold$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prowling_pangolin.jpg

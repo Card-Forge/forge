@@ -4,7 +4,7 @@ Types:Creature Dragon
 PT:6/4
 K:Flying
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a noncreature spell, untap CARDNAME. It gains protection from the color of your choice until end of turn.
-SVar:TrigUntap:AB$ Untap | Cost$ 0 | Defined$ Self | SubAbility$ DBProtection
+SVar:TrigUntap:DB$ Untap | Defined$ Self | SubAbility$ DBProtection
 SVar:DBProtection:DB$ Protection | Defined$ Self | Gains$ Choice | Choices$ AnyColor
 SVar:BuffedBy:Card.nonLand+nonCreature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pristine_skywise.jpg

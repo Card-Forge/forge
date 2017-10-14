@@ -3,7 +3,7 @@ ManaCost:G U
 Types:Creature Hippo
 PT:2/2
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ TrigActivateManaAbility | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may have defending player activate a mana ability of each land he or she controls and empty his or her mana pool. If you do, CARDNAME assigns no combat damage this turn and at the beginning of your postcombat main phase, you add an amount of {C} to your mana pool equal to the amount of mana emptied from defending player's mana pool this way.
-SVar:TrigActivateManaAbility:AB$ ActivateAbility | Cost$ 0 | Defined$ DefendingPlayer | Type$ Land | ManaAbility$ True | SubAbility$ DBEmptyPool
+SVar:TrigActivateManaAbility:DB$ ActivateAbility | Defined$ DefendingPlayer | Type$ Land | ManaAbility$ True | SubAbility$ DBEmptyPool
 SVar:DBEmptyPool:DB$ DrainMana | Defined$ DefendingPlayer | SubAbility$ DBPump | RememberDrainedMana$ True
 SVar:DBPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage | SubAbility$ DBDelTrig
 SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Main2 | Execute$ TrigAddMana | TriggerDescription$ At the beginning of your postcombat main phase, you add an amount of {C} to your mana pool equal to the amount of mana emptied from defending player's mana pool this way | SubAbility$ DBCleanup | RememberNumber$ True
