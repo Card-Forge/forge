@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Creature Human Druid
 PT:2/2
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigToken | IsPresent$ Card.Self+enchanted | TriggerDescription$ At the beginning of each upkeep, if CARDNAME is enchanted, create a 1/1 green Saproling creature token.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 SVar:EnchantMe:Once
 DeckHints:Type$Fungus
 DeckHas:Ability$Token

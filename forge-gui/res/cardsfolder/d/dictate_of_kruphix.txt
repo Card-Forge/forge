@@ -3,6 +3,6 @@ ManaCost:1 U U
 Types:Enchantment
 K:Flash
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of each player's draw step, that player draws an additional card.
-SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1 | Defined$ TriggeredPlayer
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredPlayer
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dictate_of_kruphix.jpg
 Oracle:Flash\nAt the beginning of each player's draw step, that player draws an additional card.

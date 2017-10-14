@@ -2,8 +2,8 @@ Name:Decimate
 ManaCost:2 R G
 Types:Sorcery
 A:SP$ Destroy | Cost$ 2 R G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ DestroyCreature | SpellDescription$ Destroy target artifact, target creature, target enchantment, and target land.
-SVar:DestroyCreature:DB$ Destroy | Cost$ 0 | ValidTgts$ Creature | SubAbility$ DestroyEnch | TgtPrompt$ Select target creature
-SVar:DestroyEnch:DB$ Destroy | Cost$ 0 | ValidTgts$ Enchantment | SubAbility$ DestroyLand | TgtPrompt$ Select target enchantment
-SVar:DestroyLand:DB$ Destroy | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Select target land
+SVar:DestroyCreature:DB$ Destroy | ValidTgts$ Creature | SubAbility$ DestroyEnch | TgtPrompt$ Select target creature
+SVar:DestroyEnch:DB$ Destroy | ValidTgts$ Enchantment | SubAbility$ DestroyLand | TgtPrompt$ Select target enchantment
+SVar:DestroyLand:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/decimate.jpg
 Oracle:Destroy target artifact, target creature, target enchantment, and target land.

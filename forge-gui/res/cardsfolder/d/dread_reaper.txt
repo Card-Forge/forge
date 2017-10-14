@@ -4,6 +4,6 @@ Types:Creature Horror
 PT:6/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, you lose 5 life.
-SVar:TrigLoseLife:DB$ LoseLife | Cost$ 0 | LifeAmount$ 5
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_reaper.jpg
 Oracle:Flying\nWhen Dread Reaper enters the battlefield, you lose 5 life.

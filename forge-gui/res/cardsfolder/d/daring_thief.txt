@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Creature Human Rogue
 PT:2/3
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExchangeControl | OptionalDecider$ You | TriggerDescription$ Inspired — Whenever CARDNAME becomes untapped, you may exchange control of target nonland permanent you control and target permanent an opponent controls that shares a card type with it.
-SVar:TrigExchangeControl:AB$ Pump | Cost$ 0 | ValidTgts$ Permanent.YouCtrl+nonLand | TgtPrompt$ Select target nonland permanent you control | SubAbility$ DBExchange
+SVar:TrigExchangeControl:DB$ Pump | ValidTgts$ Permanent.YouCtrl+nonLand | TgtPrompt$ Select target nonland permanent you control | SubAbility$ DBExchange
 SVar:DBExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Permanent.OppCtrl | TgtPrompt$ Select target permanent an opponent controls that shares a card type with it | TargetsWithSharedTypes$ Creature,Artifact,Enchantment,Planeswalker,Tribal
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True

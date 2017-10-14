@@ -6,7 +6,7 @@ K:Flying
 
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBChooseCard | TriggerDescription$ At the beginning of your end step, choose a creature card in an opponent's graveyard, then that player chooses a creature card in your graveyard. You may return those cards to the battlefield under their owners' control.
 
-SVar:DBChooseCard:AB$ ChooseCard | Cost$ 0 | Choices$ Creature.OppCtrl | ChoiceZone$ Graveyard | AILogic$ WorstCard | Mandatory$ True | Defined$ You | RememberChosen$ True | SubAbility$ DBChoosePlayer
+SVar:DBChooseCard:DB$ ChooseCard | Choices$ Creature.OppCtrl | ChoiceZone$ Graveyard | AILogic$ WorstCard | Mandatory$ True | Defined$ You | RememberChosen$ True | SubAbility$ DBChoosePlayer
 
 SVar:DBChoosePlayer:DB$ ChoosePlayer | Choices$ Player.Opponent | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | AILogic$ LeastCreatures | SubAbility$ DBChoosePlayer2
 

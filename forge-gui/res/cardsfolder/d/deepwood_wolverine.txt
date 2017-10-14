@@ -3,6 +3,6 @@ ManaCost:G
 Types:Creature Wolverine
 PT:1/1
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked, it gets +2/+0 until end of turn.
-SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2
+SVar:TrigPump:DB$Pump | Defined$ Self | NumAtt$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deepwood_wolverine.jpg
 Oracle:Whenever Deepwood Wolverine becomes blocked, it gets +2/+0 until end of turn.

@@ -4,7 +4,7 @@ Types:Artifact Equipment
 K:Equip 2
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Creature.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever equipped creature blocks or becomes blocked by a creature, destroy both creatures.
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature.AttachedBy | ValidBlocker$ Creature | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever equipped creature blocks or becomes blocked by a creature, destroy both creatures.
-SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredAttacker | SubAbility$ DBDestroy
+SVar:TrigDestroy:DB$Destroy | Defined$ TriggeredAttacker | SubAbility$ DBDestroy
 SVar:DBDestroy:DB$Destroy | Defined$ TriggeredBlocker
 SVar:RemAIDeck:True
 SVar:NonStackingAttachEffect:True
