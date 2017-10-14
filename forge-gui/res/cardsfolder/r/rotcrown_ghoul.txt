@@ -3,6 +3,6 @@ ManaCost:4 U
 Types:Creature Zombie
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME dies, target player puts the top five cards of his or her library into his or her graveyard.
-SVar:TrigMill:AB$ Mill | Cost$ 0 | NumCards$ 5 | ValidTgts$ Player | TgtPrompt$ Select target player
+SVar:TrigMill:DB$ Mill | NumCards$ 5 | ValidTgts$ Player | TgtPrompt$ Select target player
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rotcrown_ghoul.jpg
 Oracle:When Rotcrown Ghoul dies, target player puts the top five cards of his or her library into his or her graveyard.

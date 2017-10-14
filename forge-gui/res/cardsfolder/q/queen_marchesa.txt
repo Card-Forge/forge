@@ -7,6 +7,6 @@ K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
 SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckDefinedPlayer$ Opponent.isMonarch | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, if an opponent is the monarch, create a 1/1 black Assassin creature token with deathtouch and haste.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Assassin | TokenTypes$ Creature,Assassin | TokenOwner$ You | TokenColors$ Black | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ b 1 1 assassin CN2 | TokenKeywords$ Deathtouch<>Haste
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Assassin | TokenTypes$ Creature,Assassin | TokenOwner$ You | TokenColors$ Black | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ b 1 1 assassin CN2 | TokenKeywords$ Deathtouch<>Haste
 SVar:Picture:http://www.wizards.com/global/images/magic/general/queen_marchesa.jpg
 Oracle:Deathtouch, haste\nWhen Queen Marchesa enters the battlefield, you become the monarch.\nAt the beginning of your upkeep, if an opponent is the monarch, create a 1/1 black Assassin creature token with deathtouch and haste.

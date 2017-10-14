@@ -3,6 +3,6 @@ ManaCost:2 G G
 Types:Enchantment
 K:Reveal the first card you draw each turn
 T:Mode$ Drawn | ValidCard$ Land.Basic+YouCtrl | TriggerZones$ Battlefield | Number$ 1 | Execute$ TrigDraw | TriggerDescription$ Whenever you reveal a basic land card this way, draw a card.
-SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1
+SVar:TrigDraw:DB$Draw | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rowen.jpg
 Oracle:Reveal the first card you draw each turn. Whenever you reveal a basic land card this way, draw a card.

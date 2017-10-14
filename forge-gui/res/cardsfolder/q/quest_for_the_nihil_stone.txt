@@ -3,8 +3,8 @@ ManaCost:B
 Types:Enchantment
 T:Mode$ Discarded | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever an opponent discards a card, you may put a quest counter on CARDNAME.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | CheckSVar$ CardsInHand | SVarCompare$ EQ0 | IsPresent$ Card.Self+counters_GE2_QUEST | Execute$ TrigLoseLife | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of each opponent's upkeep, if that player has no cards in hand and CARDNAME has two or more quest counters on it, you may have that player lose 5 life.
-SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
-SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount$ 5
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredPlayer | LifeAmount$ 5
 SVar:CardsInHand:Count$ValidHand Card.ActivePlayerCtrl
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True

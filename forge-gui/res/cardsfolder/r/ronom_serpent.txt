@@ -4,7 +4,7 @@ Types:Snow Creature Serpent
 PT:5/6
 S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Land.Snow | Description$ CARDNAME can't attack unless defending player controls a snow land.
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Land.Snow+YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no snow lands, sacrifice Ronom Serpent.
-SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:NeedsToPlay:Land.Snow+YouCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ronom_serpent.jpg

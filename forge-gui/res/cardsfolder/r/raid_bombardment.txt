@@ -2,7 +2,7 @@ Name:Raid Bombardment
 ManaCost:2 R
 Types:Enchantment
 T:Mode$ Attacks | ValidCard$ Creature.powerLE2+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature you control with power 2 or less attacks, CARDNAME deals 1 damage to defending player.
-SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredDefendingPlayer | NumDmg$ 1
+SVar:TrigDamage:DB$DealDamage | Defined$ TriggeredDefendingPlayer | NumDmg$ 1
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raid_bombardment.jpg
 Oracle:Whenever a creature you control with power 2 or less attacks, Raid Bombardment deals 1 damage to defending player.

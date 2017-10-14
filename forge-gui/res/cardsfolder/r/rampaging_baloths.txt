@@ -4,6 +4,6 @@ Types:Creature Beast
 PT:6/6
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, you may create a 4/4 green Beast creature token.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ Green | TokenPower$ 4 | TokenToughness$ 4 | TokenImage$ g 4 4 beast ZEN
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ Green | TokenPower$ 4 | TokenToughness$ 4 | TokenImage$ g 4 4 beast ZEN
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rampaging_baloths.jpg
 Oracle:Trample\nLandfall — Whenever a land enters the battlefield under your control, you may create a 4/4 green Beast creature token.

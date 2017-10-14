@@ -3,7 +3,7 @@ ManaCost:2 B B R R
 Types:Legendary Creature Kobold
 PT:5/5
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ At the beginning of your upkeep, you may pay {R}{R}{R}. If you don't, tap CARDNAME and all creatures named Kobolds of Kher Keep, then an opponent gains control of them.
-SVar:TrigTap:AB$ StoreSVar | Cost$ 0 | SVar$ RohgahhPaid | Type$ CountSVar | Expression$ RohgahhPaid/Plus.1 | UnlessCost$ R R R | UnlessPayer$ You | SubAbility$ DBTapAll
+SVar:TrigTap:DB$ StoreSVar | SVar$ RohgahhPaid | Type$ CountSVar | Expression$ RohgahhPaid/Plus.1 | UnlessCost$ R R R | UnlessPayer$ You | SubAbility$ DBTapAll
 SVar:DBTapAll:DB$ TapAll | ValidCards$ Card.Self,Creature.YouCtrl+namedKobolds of Kher Keep | ConditionCheckSVar$ RohgahhPaid | ConditionSVarCompare$ EQ1 | SubAbility$ DBGainControl
 SVar:DBGainControl:DB$ GainControl | ValidTgts$ Opponent | TgtPrompt$ Select target opponent to gain control Rohgahh of Kher Keep and creatures named Kobolds of Kher Keep | AllValid$ Card.Self,Creature.YouCtrl+namedKobolds of Kher Keep | NewController$ Targeted | ConditionCheckSVar$ RohgahhPaid | ConditionSVarCompare$ EQ1 | SubAbility$ DBReset
 SVar:DBReset:DB$ StoreSVar | SVar$ RohgahhPaid | Type$ Number | Expression$ 0
