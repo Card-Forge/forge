@@ -2,7 +2,7 @@ Name:Necromancer's Covenant
 ManaCost:3 W B B
 Types:Enchantment
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, exile all creature cards from target player's graveyard, then create a 2/2 black Zombie creature token for each card exiled this way.
-SVar:TrigChange:DB$ ChangeZoneAll | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Creature | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBToken
+SVar:TrigChange:DB$ ChangeZoneAll | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Creature | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenImage$ b 2 2 zombie ALA | TokenName$ Zombie | TokenColors$ Black | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenOwner$ You | TokenAmount$ X | References$ X | SubAbility$ DBClearRemember
 S:Mode$ Continuous | Affected$ Zombie.YouCtrl | AddKeyword$ Lifelink | Description$ Zombies you control have lifelink.
 SVar:DBClearRemember:DB$ Cleanup | ClearRemembered$ True

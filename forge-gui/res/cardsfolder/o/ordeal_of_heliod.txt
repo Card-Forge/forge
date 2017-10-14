@@ -4,11 +4,11 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more +1/+1 counters on it, sacrifice CARDNAME.
-SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Enchanted | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBSac
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Enchanted | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBSac
 SVar:DBSac:DB$ Sacrifice | SacValid$ Self | ConditionCheckSVar$ EnchantedCounters | ConditionSVarCompare$ GE3 | References$ EnchantedCounters
 SVar:EnchantedCounters:Enchanted$CardCounters.P1P1
 T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When you sacrifice CARDNAME, you gain 10 life.
-SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 10
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 10
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddSVar$ AE
 SVar:AE:SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ordeal_of_heliod.jpg

@@ -3,7 +3,7 @@ ManaCost:1
 Types:Artifact Equipment
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
 T:Mode$ Transformed | ValidCard$ Creature.EquippedBy | Execute$ TrigTransform | TriggerDescription$ When equipped creature transforms, transform CARDNAME.
-SVar:TrigTransform:AB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 K:Equip 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/neglected_heirloom.jpg
 AlternateMode:DoubleFaced

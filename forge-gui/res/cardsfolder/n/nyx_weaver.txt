@@ -4,7 +4,7 @@ Types:Enchantment Creature Spider
 PT:2/3
 K:Reach
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your upkeep, put the top two cards of your library into your graveyard.
-SVar:TrigMill:AB$ Mill | Cost$ 0 | Defined$ You | NumCards$ 2
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 2
 A:AB$ ChangeZone | Cost$ 1 B G Exile<1/CARDNAME> | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl | SpellDescription$ Return target card from your graveyard to your hand.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nyx_weaver.jpg

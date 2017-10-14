@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Zombie
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target enchantment creature card from your graveyard to your hand.
-SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Enchantment.Creature+YouCtrl
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Enchantment.Creature+YouCtrl
 A:AB$ ChangeZone | Cost$ W Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Enchantment.Creature+YouCtrl | TgtPrompt$ Select target enchantment creature card from your graveyard | SpellDescription$ Return target enchantment creature card from your graveyard to your hand.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True

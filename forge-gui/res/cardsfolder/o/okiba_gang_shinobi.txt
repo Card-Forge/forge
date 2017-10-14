@@ -4,6 +4,6 @@ Types:Creature Rat Ninja
 PT:3/2
 K:Ninjutsu:3 B
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDiscard | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player discards two cards.
-SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 2 | Mode$ TgtChoose
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 2 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/okiba_gang_shinobi.jpg
 Oracle:Ninjutsu {3}{B} ({3}{B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever Okiba-Gang Shinobi deals combat damage to a player, that player discards two cards.

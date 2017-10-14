@@ -2,7 +2,7 @@ Name:Nature Demands an Offering
 ManaCost:no cost
 Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ ChooseCreature | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, target opponent chooses a creature you don't control and puts it on top of its owner's library, then repeats this process for an artifact, an enchantment, and a land. Then the owner of each permanent chosen this way shuffles his or her library.
-SVar:ChooseCreature:AB$ ChooseCard | ValidTgts$ Opponent | Cost$ 0 | Choices$ Creature.YouDontCtrl | Mandatory$ True | SubAbility$ BounceCreature
+SVar:ChooseCreature:DB$ ChooseCard | ValidTgts$ Opponent | Choices$ Creature.YouDontCtrl | Mandatory$ True | SubAbility$ BounceCreature
 SVar:BounceCreature:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Library | Imprint$ True | UnImprint$ True | LibraryPosition$ 0 | SubAbility$ DBRemember1
 SVar:DBRemember1:DB$ Pump | RememberObjects$ ImprintedOwner | SubAbility$ ChooseArtifact
 SVar:ChooseArtifact:DB$ ChooseCard | Defined$ ParentTarget | Choices$ Artifact.YouDontCtrl | Mandatory$ True | SubAbility$ BounceArtifact

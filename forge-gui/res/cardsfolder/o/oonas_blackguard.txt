@@ -4,10 +4,10 @@ Types:Creature Faerie Rogue
 PT:1/1
 K:Flying
 R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Battlefield | ValidCard$ Creature.Rogue+YouCtrl+Other | ReplaceWith$ AddExtraCounter | Description$ Each other Rogue creature you control enters the battlefield with an additional +1/+1 counter on it.
-SVar:AddExtraCounter:AB$ PutCounter | Cost$ 0 | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ MoveToBattlefield
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ MoveToBattlefield
 SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
 T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl+counters_GE1_P1P1 | ValidTarget$ Player | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ TrigDiscardOpp | TriggerDescription$ Whenever a creature you control with a +1/+1 counter on it deals combat damage to a player, that player discards a card.
-SVar:TrigDiscardOpp:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
+SVar:TrigDiscardOpp:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oonas_blackguard.jpg
 Oracle:Flying\nEach other Rogue creature you control enters the battlefield with an additional +1/+1 counter on it.\nWhenever a creature you control with a +1/+1 counter on it deals combat damage to a player, that player discards a card.

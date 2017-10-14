@@ -7,9 +7,9 @@ T:Mode$ Attached | ValidSource$ Card.Self | ValidTarget$ Creature | TriggerZones
 SVar:TrigRemember:DB$ Cleanup | ClearRemembered$ True | SubAbility$ RememberNew
 SVar:RememberNew:DB$ Pump | RememberObjects$ Equipped
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+equipping | Execute$ TrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, exile equipped creature.
-SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | Defined$ Remembered
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Remembered
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.EquippedBy | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ Whenever equipped creature dies, return that card to the battlefield under your control if it's a Samurai card.
-SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredCard | GainControl$ True | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.Samurai | ConditionCompare$ GE1
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredCard | GainControl$ True | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.Samurai | ConditionCompare$ GE1
 SVar:RemRandomDeck:True
 DeckNeeds:Type$Samurai
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oathkeeper_takenos_daisho.jpg

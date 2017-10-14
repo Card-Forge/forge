@@ -3,7 +3,7 @@ ManaCost:3 B B
 Types:Creature Zombie Warrior
 PT:4/2
 T:Mode$ DamageDone | ValidTarget$ Creature.Self | Execute$ TrigZombie | TriggerDescription$ Whenever a source deals damage to CARDNAME, create a 2/2 black Zombie creature token.
-SVar:TrigZombie:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ b 2 2 zombie MBS
+SVar:TrigZombie:DB$ Token | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ b 2 2 zombie MBS
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nested_ghoul.jpg
 Oracle:Whenever a source deals damage to Nested Ghoul, create a 2/2 black Zombie creature token.
