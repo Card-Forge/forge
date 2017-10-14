@@ -4,7 +4,7 @@ Types:Legendary Creature Dragon
 PT:4/5
 K:Flying
 T:Mode$ Attacks | ValidCard$ Dragon.YouCtrl | Execute$ TrigPumpAll | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Dragon you control attacks, creatures you control get +1/+0 until end of turn.
-SVar:TrigPumpAll:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | NumAtt$ +1
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1
 K:Dash:3 B R
 DeckHints:Type$Dragon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kolaghan_the_storms_fury.jpg

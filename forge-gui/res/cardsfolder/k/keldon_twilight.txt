@@ -2,7 +2,7 @@ Name:Keldon Twilight
 ManaCost:1 B R
 Types:Enchantment
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSac | CheckSVar$ AttackedThisTurn | References$ AttackedThisTurn | SVarCompare$ EQ0 | TriggerDescription$ At the beginning of each player's end step, if no creatures attacked this turn, that player sacrifices a creature he or she controlled since the beginning of the turn.
-SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ TriggeredPlayer | SacValid$ Creature.notFirstTurnControlled
+SVar:TrigSac:DB$ Sacrifice | Defined$ TriggeredPlayer | SacValid$ Creature.notFirstTurnControlled
 T:Mode$ AttackersDeclared | Execute$ TrigStoreSVar | Static$ True
 SVar:TrigStoreSVar:DB$ StoreSVar | SVar$ AttackedThisTurn | Type$ Number | Expression$ 1
 SVar:AttackedThisTurn:Number$0

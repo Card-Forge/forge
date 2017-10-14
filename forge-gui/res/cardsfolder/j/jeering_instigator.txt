@@ -4,7 +4,7 @@ Types:Creature Goblin Rogue
 PT:2/1
 K:Morph:2 R
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | PlayerTurn$ True | TriggerDescription$ When CARDNAME is turned face up, if it's your turn, gain control of another target creature until end of turn. Untap it. That creature gains haste until end of turn.
-SVar:TrigPump:AB$ GainControl | Cost$ 0 | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | Untap$ True | LoseControl$ EOT | SubAbility$ DBPump
+SVar:TrigPump:DB$ GainControl | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | Untap$ True | LoseControl$ EOT | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Haste
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jeering_instigator.jpg

@@ -6,7 +6,7 @@ T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | TriggerZones$ Command | Execute$
 
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Command | Execute$ PutCounter | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your precombat main phase, put a charge counter on CARDNAME, then add {R} to your mana pool for each charge counter on it.
 
-SVar:PutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1 | SubAbility$ DBMana
+SVar:PutCounter:DB$PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1 | SubAbility$ DBMana
 
 SVar:DBMana:DB$ Mana | Produced$ R | Amount$ Y | References$ Y
 

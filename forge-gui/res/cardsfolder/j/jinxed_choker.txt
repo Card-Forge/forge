@@ -2,7 +2,7 @@ Name:Jinxed Choker
 ManaCost:3
 Types:Artifact
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ ChangeControl | TriggerDescription$ At the beginning of your end step, target opponent gains control of CARDNAME and puts a charge counter on it.
-SVar:ChangeControl:AB$ GainControl | Cost$ 0 | Defined$ Self | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ PutCounter | SpellDescription$ Target opponent gains control of CARDNAME.
+SVar:ChangeControl:DB$ GainControl | Defined$ Self | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ PutCounter | SpellDescription$ Target opponent gains control of CARDNAME.
 SVar:PutCounter:DB$ PutCounter | Cost$ 3 | CounterType$ CHARGE | CounterNum$ 1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals damage to you equal to the number of charge counters on it.
 SVar:TrigDamage:DB$ DealDamage | Defined$ You | NumDmg$ X | References$ X
