@@ -301,27 +301,8 @@ public class DamageDealAi extends DamageAiBase {
             }
         });
 
-        if (sa.hasParam("AITgts")) {
-            if (sa.getParam("AITgts").equals("BetterThanSource")) {
-                int value = ComputerUtilCard.evaluateCreature(source);
-                if (source.isEnchanted()) {
-                    for (Card enc : source.getEnchantedBy(false)) {
-                        if (enc.getController().equals(ai)) {
-                            value += 100; // is 100 per AI's own aura enough?
-                        }
-                    }
-                }
-                final int totalValue = value;
-                killables = CardLists.filter(killables, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        return ComputerUtilCard.evaluateCreature(c) > totalValue + 30;
-                    }
-                });
-            } else {
-                killables = CardLists.getValidCards(killables, sa.getParam("AITgts"), sa.getActivatingPlayer(), source);
-            }
-        }
+        // Filter AI-specific targets if provided
+        killables = ComputerUtil.filterAITgts(sa, ai, new CardCollection(killables), true);
 
         Card targetCard = null;
         if (pl.isOpponentOf(ai) && activator.equals(ai) && !killables.isEmpty()) {

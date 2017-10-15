@@ -260,13 +260,8 @@ public class AnimateAi extends SpellAbilityAi {
             // need to targetable
             list = CardLists.getTargetableCards(list, sa);
 
-            // try to look for AI targets if able
-            if (sa.hasParam("AITgts")) {
-                CardCollection prefList = CardLists.getValidCards(list, sa.getParam("AITgts").split(","), ai, source, sa);
-                if(!prefList.isEmpty() || sa.hasParam("AITgtsStrict")) {
-                    list = prefList;
-                }
-            }
+            // Filter AI-specific targets if provided
+            list = ComputerUtil.filterAITgts(sa, ai, (CardCollection)list, false);
 
             // list is empty, no possible targets
             if (list.isEmpty()) {

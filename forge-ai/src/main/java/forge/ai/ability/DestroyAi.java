@@ -112,25 +112,10 @@ public class DestroyAi extends SpellAbilityAi {
                 final int cmcMax = ai.hasRevolt() ? 4 : 2;
                 list = CardLists.filter(list, CardPredicates.lessCMC(cmcMax));
             }
-            if (sa.hasParam("AITgts")) {
-                if (sa.getParam("AITgts").equals("BetterThanSource")) {
-                    if (source.isEnchanted()) {
-                        if (source.getEnchantedBy(false).get(0).getController().equals(ai)) {
-                            return false;
-                        }
-                    } else {
-                        final int value = ComputerUtilCard.evaluateCreature(source);
-                        list = CardLists.filter(list, new Predicate<Card>() {
-                            @Override
-                            public boolean apply(final Card c) {
-                                return ComputerUtilCard.evaluateCreature(c) > value + 30;
-                            }
-                        });
-                    }
-                } else {
-                    list = CardLists.getValidCards(list, sa.getParam("AITgts"), sa.getActivatingPlayer(), source);
-                }
-            }
+
+            // Filter AI-specific targets if provided
+            list = ComputerUtil.filterAITgts(sa, ai, (CardCollection)list, true);
+
             list = CardLists.getNotKeyword(list, "Indestructible");
             if (CardLists.getNotType(list, "Creature").isEmpty()) {
                 list = ComputerUtilCard.prioritizeCreaturesWorthRemovingNow(ai, list, false);
@@ -328,25 +313,8 @@ public class DestroyAi extends SpellAbilityAi {
                 });
             }
 
-            if (sa.hasParam("AITgts")) {
-            	if (sa.getParam("AITgts").equals("BetterThanSource")) {
-            		if (source.isEnchanted()) {
-            			if (source.getEnchantedBy(false).get(0).getController().equals(ai)) {
-            				preferred.clear();
-            			}
-            		} else {
-            			final int value = ComputerUtilCard.evaluateCreature(source);
-            			preferred = CardLists.filter(preferred, new Predicate<Card>() {
-                            @Override
-                            public boolean apply(final Card c) {
-                                return ComputerUtilCard.evaluateCreature(c) > value + 30;
-                            }
-                        });
-            		}
-            	} else {
-            		preferred = CardLists.getValidCards(preferred, sa.getParam("AITgts"), sa.getActivatingPlayer(), source);
-            	}
-            }
+            // Filter AI-specific targets if provided
+            preferred = ComputerUtil.filterAITgts(sa, ai, (CardCollection)preferred, true);
 
             for (final Card c : preferred) {
                 list.remove(c);

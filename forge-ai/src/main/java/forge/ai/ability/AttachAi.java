@@ -1077,9 +1077,9 @@ public class AttachAi extends SpellAbilityAi {
             return null;
         }
         CardCollection prefList = list;
-        if (sa.hasParam("AITgts")) {
-            prefList = CardLists.getValidCards(list, sa.getParam("AITgts"), sa.getActivatingPlayer(), attachSource);
-        }
+
+        // Filter AI-specific targets if provided
+        prefList = ComputerUtil.filterAITgts(sa, aiPlayer, (CardCollection)list, true);
 
         Card c = attachGeneralAI(aiPlayer, sa, prefList, mandatory, attachSource, sa.getParam("AILogic"));
 

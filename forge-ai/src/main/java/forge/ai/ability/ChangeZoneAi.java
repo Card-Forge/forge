@@ -821,9 +821,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
         sa.resetTargets();
         CardCollection list = CardLists.getValidCards(game.getCardsIn(origin), tgt.getValidTgts(), ai, source, sa);
         list = CardLists.getTargetableCards(list, sa);
-        if (sa.hasParam("AITgts")) {
-            list = CardLists.getValidCards(list, sa.getParam("AITgts"), ai, source);
-        }
+
+        // Filter AI-specific targets if provided
+        list = ComputerUtil.filterAITgts(sa, ai, (CardCollection)list, true);
         if (sa.hasParam("AITgtsOnlyBetterThanSelf")) {
             list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
@@ -832,6 +832,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             });
         }
+
         if (source.isInZone(ZoneType.Hand)) {
             list = CardLists.filter(list, Predicates.not(CardPredicates.nameEquals(source.getName()))); // Don't get the same card back.
         }

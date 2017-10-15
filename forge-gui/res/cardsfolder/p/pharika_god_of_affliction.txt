@@ -5,7 +5,7 @@ PT:5/5
 K:Indestructible
 S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | RemoveCreatureTypes$ True | CheckSVar$ X | SVarCompare$ LT7 | References$ X | Description$ As long as your devotion to black and green is less than seven, CARDNAME isn't a creature.
 SVar:X:Count$DevotionDual.Black.Green
-A:AB$ ChangeZone | Cost$ B G | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | AITgts$ Card.YouOwn | SubAbility$ DBToken | SpellDescription$ Exile target creature card from a graveyard. Its owner creates a 1/1 black and green Snake enchantment creature token with deathtouch.
+A:AB$ ChangeZone | Cost$ B G | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | AITgts$ Card.YouOwn | AILogic$ AtOppEOT | AITgtOwnCards$ True | SubAbility$ DBToken | SpellDescription$ Exile target creature card from a graveyard. Its owner creates a 1/1 black and green Snake enchantment creature token with deathtouch.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Snake | TokenTypes$ Enchantment,Creature,Snake | TokenOwner$ TargetedController | TokenColors$ Black,Green | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Deathtouch
 SVar:BuffedBy:Permanent.Green,Permanent.Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pharika_god_of_affliction.jpg

@@ -98,13 +98,8 @@ public class CountersRemoveAi extends SpellAbilityAi {
             return false;
         }
 
-        if (sa.hasParam("AITgts")) {
-            String aiTgts = sa.getParam("AITgts");
-            CardCollection prefList = CardLists.getValidCards(list, aiTgts.split(","), ai, source, sa);
-            if (!prefList.isEmpty() || sa.hasParam("AITgtsStrict")) {
-                list = prefList;
-            }
-        }
+        // Filter AI-specific targets if provided
+        list = ComputerUtil.filterAITgts(sa, ai, (CardCollection)list, false);
 
         boolean noLegendary = game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule);
 

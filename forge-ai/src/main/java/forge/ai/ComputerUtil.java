@@ -2795,4 +2795,40 @@ public class ComputerUtil {
 
         return numInHand > 0 || numInDeck >= 3;
     }
+
+    public static CardCollection filterAITgts(SpellAbility sa, Player ai, CardCollection srcList, boolean alwaysStrict) {
+        final Card source = sa.getHostCard();
+        if (source == null) { return srcList; }
+
+        if (sa.hasParam("AITgts")) {
+            CardCollection list;
+            if (sa.getParam("AITgts").equals("BetterThanSource")) {
+                int value = ComputerUtilCard.evaluateCreature(source);
+                if (source.isEnchanted()) {
+                    for (Card enc : source.getEnchantedBy(false)) {
+                        if (enc.getController().equals(ai)) {
+                            value += 100; // is 100 per AI's own aura enough?
+                        }
+                    }
+                }
+                final int totalValue = value;
+                list = CardLists.filter(srcList, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        return ComputerUtilCard.evaluateCreature(c) > totalValue + 30;
+                    }
+                });
+            } else {
+                list = CardLists.getValidCards(srcList, sa.getParam("AITgts"), sa.getActivatingPlayer(), source);
+            }
+
+            if (!list.isEmpty() || sa.hasParam("AITgtsStrict") || alwaysStrict) {
+                return list;
+            } else {
+                return srcList;
+            }
+        }
+
+        return srcList;
+    }
 }
