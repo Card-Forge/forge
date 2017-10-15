@@ -2005,6 +2005,9 @@ public class CardFactoryUtil {
             else if (keyword.startsWith("Ninjutsu")) {
                 addSpellAbility(keyword, card, null);
             }
+            else if (keyword.startsWith("Reinforce")) {
+                addSpellAbility(keyword, card, null);
+            }
             else if (keyword.startsWith("Scavenge")) {
                 addSpellAbility(keyword, card, null);
             }
@@ -4103,6 +4106,33 @@ public class CardFactoryUtil {
 
             final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
             sa.setIntrinsic(intrinsic);
+
+            if (!intrinsic) {
+                sa.setTemporary(true);
+                //sa.setOriginalHost(hostCard);
+                kws.addSpellAbility(sa);
+            }
+            card.addSpellAbility(sa);
+        } else if (keyword.startsWith("Reinforce")) {
+            final String[] k = keyword.split(":");
+            final String n = k[1];
+            final String manacost = k[2];
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("AB$ PutCounter | CounterType$ P1P1 | ActivationZone$ Hand");
+            sb.append("| ValidTgts$ Creature | TgtPrompt$ Select target creature");
+            sb.append("| Cost$ " + manacost + " Discard<1/CARDNAME>");
+            sb.append("| CounterNum$ ").append(n);
+            sb.append("| CostDesc$ " + ManaCostParser.parse(manacost)); // to hide the Discard from the cost
+            sb.append("| PrecostDesc$ Reinforce ").append(n).append("—");
+            sb.append("| SpellDescription$ (").append(Keyword.getInstance(keyword).getReminderText()).append(")");
+
+            final SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
+            sa.setIntrinsic(intrinsic);
+            
+            if (n.equals("X")) {
+                sa.setSVar("X", "Count$xPaid");
+            }
 
             if (!intrinsic) {
                 sa.setTemporary(true);
