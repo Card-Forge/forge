@@ -1145,9 +1145,13 @@ public class SpecialCardAi {
                 topGY = ai.getCardsIn(ZoneType.Graveyard).get(0);
             }
 
-            if ((topGY != null && !topGY.isCreature()) || creatHand != null) {
-                if (numCreatsInHand > 1 || !ComputerUtilMana.canPayManaCost(creatHand.getSpellPermanent(), ai, 0)) {
-                    return true;
+            if (creatHand != null) {
+                if (topGY == null
+                        || !topGY.isCreature()
+                        || ComputerUtilCard.evaluateCreature(creatHand) > ComputerUtilCard.evaluateCreature(topGY) + 80) {
+                    if (numCreatsInHand > 1 || !ComputerUtilMana.canPayManaCost(creatHand.getSpellPermanent(), ai, 0)) {
+                        return true;
+                    }
                 }
             }
 

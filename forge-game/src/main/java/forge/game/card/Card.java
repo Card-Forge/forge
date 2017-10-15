@@ -2232,8 +2232,12 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final FCollectionView<SpellAbility> getBasicSpells() {
+        return getBasicSpells(currentState);
+    }
+
+    public final FCollectionView<SpellAbility> getBasicSpells(CardState state) {
         final FCollection<SpellAbility> res = new FCollection<>();
-        for (final SpellAbility sa : currentState.getNonManaAbilities()) {
+        for (final SpellAbility sa : state.getNonManaAbilities()) {
             if (sa.isSpell() && sa.isBasicSpell()) {
                 res.add(sa);
             }
