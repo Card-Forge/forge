@@ -1,8 +1,10 @@
 Name:Burrenton Bombardier
 ManaCost:2 W
 Types:Creature Kithkin Soldier
-K:Flying
-A:AB$ PutCounter | Cost$ 2 W Discard<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | ActivationZone$ Hand | CounterNum$ 2 | CostDesc$ Reinforce 2—{2}{W} | SpellDescription$ ({2}{W}, Discard this card: Put two +1/+1 counters on target creature.)
 PT:2/2
+K:Flying
+K:Reinforce:2:2 W
+DeckHas:Ability$Counters
+DeckNeeds:Type$Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burrenton_bombardier.jpg
 Oracle:Flying\nReinforce 2—{2}{W} ({2}{W}, Discard this card: Put two +1/+1 counters on target creature.)
