@@ -66,15 +66,17 @@ public class UntapAi extends SpellAbilityAi {
         }
 
         if (source != null && source.isCreature() && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
-            // Voyaging Satyr and friends: only do it after attacking/blocking and not when in immediate danger
-            PhaseHandler ph = source.getGame().getPhaseHandler();
-            if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-                return false;
-            }
+            if (sa.getTargetRestrictions() != null && !sa.getTargetRestrictions().canTgtCreature()) {
+                // Voyaging Satyr and friends: only do it after attacking/blocking and not when in immediate danger
+                PhaseHandler ph = source.getGame().getPhaseHandler();
+                if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                    return false;
+                }
 
-            if (ai.getLife() < ai.getStartingLife() / 4
-                    && ((ai.getLifeLostLastTurn() > 0 || ai.getLifeLostThisTurn() > 0) && ph.getPlayerTurn().isOpponentOf(ai))) {
-                return false;
+                if (ai.getLife() < ai.getStartingLife() / 4
+                        && (ai.getLifeLostLastTurn() > 0 || ai.getLifeLostThisTurn() > 0 || ph.getPlayerTurn().isOpponentOf(ai))) {
+                    return false;
+                }
             }
         }
 
