@@ -60,6 +60,8 @@ public class CounterAi extends SpellAbilityAi {
                 // might as well check for player's friendliness
                 return false;
             }
+
+            // check if the top ability on the stack corresponds to the AI-specific targeting declaration, if provided
             if (sa.hasParam("AITgts") && (topSA.getHostCard() == null
                     || !topSA.getHostCard().isValid(sa.getParam("AITgts"), sa.getActivatingPlayer(), source, sa))) {
                 return false;
