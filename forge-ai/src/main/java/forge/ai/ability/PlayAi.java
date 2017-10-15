@@ -3,6 +3,7 @@ package forge.ai.ability;
 import com.google.common.base.Predicate;
 import forge.ai.*;
 import forge.card.CardStateName;
+import forge.card.CardTypeView;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -54,7 +55,17 @@ public class PlayAi extends SpellAbilityAi {
         if ("ReplaySpell".equals(logic)) {
             return ComputerUtil.targetPlayableSpellCard(ai, cards, sa, sa.hasParam("WithoutManaCost"));                
         }
-        
+
+        if (source != null && source.hasKeyword("Hideaway") && source.hasRemembered()) {
+            // AI is not very good at playing non-permanent spells this way, at least yet
+            // (might be possible to enable it for Sorceries in Main1/Main2 if target is available,
+            // but definitely not for most Instants)
+            Card rem = (Card) source.getFirstRemembered();
+            CardTypeView t = rem.getState(CardStateName.Original).getType();
+
+            return t.isPermanent() && !t.isLand();
+        }
+
         return true;
     }
     
