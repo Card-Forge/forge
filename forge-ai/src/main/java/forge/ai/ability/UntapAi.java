@@ -74,7 +74,8 @@ public class UntapAi extends SpellAbilityAi {
                 }
 
                 if (ai.getLife() < ai.getStartingLife() / 4
-                        && (ai.getLifeLostLastTurn() > 0 || ai.getLifeLostThisTurn() > 0 || ph.getPlayerTurn().isOpponentOf(ai))) {
+                        && (ai.getLifeLostLastTurn() > 0 || ai.getLifeLostThisTurn() > 0 ||
+                        (ph.getPlayerTurn().isOpponentOf(ai)) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
                     return false;
                 }
             }
