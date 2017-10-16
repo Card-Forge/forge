@@ -1,6 +1,10 @@
 package forge.ai.ability;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import forge.ai.*;
+import forge.card.mana.ManaCostShard;
+import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -10,6 +14,7 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
 import forge.game.cost.CostTap;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -24,9 +29,11 @@ public class UntapAi extends SpellAbilityAi {
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         final Card source = sa.getHostCard();
-        if ("EOT".equals(sa.getParam("AILogic")) && (source.getGame().getPhaseHandler().getNextTurn() != ai
+        if ("EOT".equals(aiLogic) && (source.getGame().getPhaseHandler().getNextTurn() != ai
                 || !source.getGame().getPhaseHandler().getPhase().equals(PhaseType.END_OF_TURN))) {
             return false;
+        } else if ("PoolExtraMana".equals(aiLogic)) {
+            return doPoolExtraManaLogic(ai, sa);
         }
 
         return !("Never".equals(aiLogic));
@@ -62,22 +69,6 @@ public class UntapAi extends SpellAbilityAi {
         } else {
             if (!untapPrefTargeting(ai, tgt, sa, false)) {
                 return false;
-            }
-        }
-
-        if (source != null && source.isCreature() && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
-            if (sa.getTargetRestrictions() != null && !sa.getTargetRestrictions().canTgtCreature()) {
-                // Voyaging Satyr and friends: only do it after attacking/blocking and not when in immediate danger
-                PhaseHandler ph = source.getGame().getPhaseHandler();
-                if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-                    return false;
-                }
-
-                if (ai.getLife() < ai.getStartingLife() / 4
-                        && (ai.getLifeLostLastTurn() > 0 || ai.getLifeLostThisTurn() > 0 ||
-                        (ph.getPlayerTurn().isOpponentOf(ai)) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
-                    return false;
-                }
             }
         }
 
@@ -364,4 +355,95 @@ public class UntapAi extends SpellAbilityAi {
 
         return null;
     }
+
+    private boolean doPoolExtraManaLogic(Player ai, SpellAbility sa) {
+        final Card source = sa.getHostCard();
+        final PhaseHandler ph = source.getGame().getPhaseHandler();
+        final Game game = ai.getGame();
+
+        if (sa.getHostCard().isTapped()) {
+            return true;
+        }
+
+        // Check if something is playable if we untap for an additional mana with this, then proceed
+        CardCollection inHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), Predicates.not(CardPredicates.Presets.LANDS));
+        // The AI is not very good at timing instants this way, so filter them out
+        CardCollection playable = CardLists.filter(inHand, Predicates.not(CardPredicates.isType("Instant")));
+
+        CardCollection untappingCards = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
+            @Override
+            public boolean apply(Card card) {
+                boolean hasUntapLandLogic = false;
+                for (SpellAbility sa : card.getSpellAbilities()) {
+                    if ("PoolExtraMana".equals(sa.getParam("AILogic"))) {
+                        hasUntapLandLogic = true;
+                        break;
+                    }
+                }
+                return hasUntapLandLogic && card.isUntapped();
+            }
+        });
+
+        // TODO: currently limited to Main 2, somehow improve to let the AI use this SA at other time?
+        if (ph.is(PhaseType.MAIN2, ai)) {
+            for (Card c : playable) {
+                for (SpellAbility ab : c.getBasicSpells()) {
+                    if (!ComputerUtilMana.hasEnoughManaSourcesToCast(ab, ai)) {
+                        // TODO: Currently limited to predicting something that can be paid with any color,
+                        // can ideally be improved to work by color.
+                        ManaCostBeingPaid reduced = new ManaCostBeingPaid(ab.getPayCosts().getCostMana().getManaCostFor(ab), ab.getPayCosts().getCostMana().getRestiction());
+                        reduced.decreaseShard(ManaCostShard.GENERIC, untappingCards.size());
+                        if (ComputerUtilMana.canPayManaCost(reduced, ab, ai)) {
+                            CardCollection manaLandsTapped = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
+                                    Predicates.and(Presets.LANDS_PRODUCING_MANA, Presets.TAPPED));
+                            manaLandsTapped = CardLists.filter(manaLandsTapped, new Predicate<Card>() {
+                                @Override
+                                public boolean apply(Card card) {
+                                    return card.isValid(sa.getParam("ValidTgts"), ai, source, null);
+                                }
+                            });
+
+                            if (!manaLandsTapped.isEmpty()) {
+                                // already have a tapped land, so agree to proceed with untapping it
+                                return true;
+                            }
+
+                            // pool one additional mana by tapping a land to try to ramp to something
+                            CardCollection manaLands = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
+                                    Predicates.and(Presets.LANDS_PRODUCING_MANA, Presets.UNTAPPED));
+                            manaLands = CardLists.filter(manaLands, new Predicate<Card>() {
+                                @Override
+                                public boolean apply(Card card) {
+                                    return card.isValid(sa.getParam("ValidTgts"), ai, source, null);
+                                }
+                            });
+
+                            if (manaLands.isEmpty()) {
+                                // nothing to untap
+                                return false;
+                            }
+
+                            Card landToPool = manaLands.getFirst();
+                            SpellAbility manaAb = landToPool.getManaAbilities().getFirst();
+
+                            ComputerUtil.playNoStack(ai, manaAb, game);
+
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        // no harm in doing this past declare blockers during the opponent's turn and right before our turn,
+        // maybe we'll serendipitously untap into something like a removal spell or burn spell that'll help
+        if (ph.getNextTurn() == ai
+                && (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
+            return true;
+        }
+
+        // haven't found any immediate playable options
+        return false;
+    }
+
 }
