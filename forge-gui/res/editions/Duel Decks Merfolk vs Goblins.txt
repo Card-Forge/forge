@@ -1,0 +1,68 @@
+[metadata]
+Code=DDT
+Date=2017-11-10
+Name=Duel Decks: Merfolk vs Goblins
+Code2=DDT
+MciCode=ddt
+Type=Duel_Decks
+1 M Master of Waves  
+2 C Aquitect's Will   
+3 C Claustrophobia   
+4 U Concentrate   
+5 R Engulf the Shore  
+6 C Essence Scatter
+7 R Harbinger of the Tides
+8 C Inkfathom Divers   
+9 R Master of the Pearl Trident
+10 U Merfolk Looter   
+11 R Merfolk Sovereign  
+12 U Merfolk Wayfinder  
+13 U Merrow Reejerey   
+14 R Mind Spring   
+15 R Misdirection   
+16 U Rootwater Hunter   
+17 C Scroll Thief   
+18 C Streambed Aquitects   
+19 U Tidal Courier   
+20 C Tidal Warrior   
+21 U Tidal Wave   
+22 R Tidebinder Mage   
+23 U Triton Tactics   
+24 R Wake Thrasher   
+25 R Cold-Eyed Selkie   
+26 U Blighted Cataract   
+27 C Lonely Sandbar   
+28 L Island    
+29 L Island    
+30 L Island    
+31 M Warren Instigator
+32 R Battle Squadron
+33 C Boggart Brute
+34 C Brute Strength
+35 U Cleaver Riot
+36 U Ember Hauler
+37 C Foundry Street Denizen
+38 U Gempalm Incinerator
+39 R Goblin Chieftain
+40 R Goblin Diplomats
+41 U Goblin Glory Chaser
+42 U Goblin Goon
+43 U Goblin Grenade
+44 R Goblin Rabblemaster
+45 R Goblin Razerunners
+46 U Goblin Ringleader
+47 C Goblin Tunneler
+48 U Goblin Wardriver
+49 U Hordeling Outburst
+50 R Krenko, Mob Boss
+51 C Krenko's Command
+52 R Relentless Assault
+53 C Tarfire  
+54 C Ghostfire  
+55 R Brittle Effigy
+56 R Goblin Charbelcher
+57 U Blighted Gorge
+58 C Forgotten Cave
+59 L Mountain  
+60 L Mountain  
+61 L Mountain
