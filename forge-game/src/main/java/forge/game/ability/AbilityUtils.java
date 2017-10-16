@@ -1148,6 +1148,9 @@ public class AbilityUtils {
                 players.add(p);
             }
         }
+        else if (defined.equals("CardController")) {
+            players.add(card.getController());
+        }
         else if (defined.equals("CardOwner")) {
             players.add(card.getOwner());
         }
