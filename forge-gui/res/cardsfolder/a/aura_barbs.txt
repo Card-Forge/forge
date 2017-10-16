@@ -1,12 +1,8 @@
 Name:Aura Barbs
 ManaCost:2 R
 Types:Instant Arcane
-A:SP$ RepeatEach | Cost$ 2 R | RepeatCards$ Enchantment | Zone$ Battlefield | RepeatSubAbility$ DBDmg | SubAbility$ DBRepeatDmg | SpellDescription$ Each enchantment deals 2 damage to its controller, then each Aura attached to a creature deals 2 damage to the creature it's attached to.
-SVar:DBDmg:DB$ DealDamage | NumDmg$ 2 | DamageSource$ Remembered | Defined$ RememberedController
-SVar:DBRepeatDmg:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Aura.AttachedTo Creature | Zone$ Battlefield | RepeatSubAbility$ DBDmgTarget
-SVar:DBDmgTarget:DB$ PumpAll | ValidCards$ Creature.EnchantedBy Imprinted| RememberAllPumped$ True | SubAbility$ DBAuraDmg
-SVar:DBAuraDmg:DB$ DealDamage | NumDmg$ 2 | DamageSource$ Imprinted | Defined$ Remembered | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:SP$ DealDamage | Cost$ 2 R | NumDmg$ 2 | DamageSource$ Valid Enchantment | Defined$ CardController | RelativeTarget$ True | SubAbility$ DBAuraDmg | StackDescription$ SpellDescription | SpellDescription$ Each enchantment deals 2 damage to its controller, then each Aura attached to a creature deals 2 damage to the creature it's attached to.
+SVar:DBAuraDmg:DB$ DealDamage | NumDmg$ 2 | DamageSource$ Valid Aura.AttachedTo Creature | Defined$ Enchanted | RelativeTarget$ True
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_barbs.jpg
