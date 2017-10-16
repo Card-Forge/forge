@@ -356,7 +356,7 @@ public class UntapAi extends SpellAbilityAi {
         return null;
     }
 
-    private boolean doPoolExtraManaLogic(Player ai, SpellAbility sa) {
+    private boolean doPoolExtraManaLogic(final Player ai, final SpellAbility sa) {
         final Card source = sa.getHostCard();
         final PhaseHandler ph = source.getGame().getPhaseHandler();
         final Game game = ai.getGame();
