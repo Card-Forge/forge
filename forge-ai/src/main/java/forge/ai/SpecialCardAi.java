@@ -1136,6 +1136,13 @@ public class SpecialCardAi {
     // Volrath's Shapeshifter
     public static class VolrathsShapeshifter {
         public static boolean consider(final Player ai, final SpellAbility sa) {
+            PhaseHandler ph = ai.getGame().getPhaseHandler();
+            if (ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
+                // try not to do this too early to at least attempt to avoid situations where the AI
+                // would cast a spell which would ruin the shapeshifting
+                return false;
+            }
+
             CardCollectionView aiGY = ai.getCardsIn(ZoneType.Graveyard);
             Card topGY = null;
             Card creatHand = ComputerUtilCard.getBestCreatureAI(ai.getCardsIn(ZoneType.Hand));
