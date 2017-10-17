@@ -18,14 +18,11 @@
 package forge.game.cost;
 
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.TextUtil;
 
 import java.util.Map;
 
@@ -134,6 +131,10 @@ public class CostRemoveAnyCounter extends CostPartWithList {
         Integer c = this.convertAmount();
         if (c == null) {
             c = AbilityUtils.calculateAmount(source, amount, ability);
+        }
+        if (decision.cards.isEmpty()) {
+            System.err.println(TextUtil.concatWithSpace("Warning: payment decision array was empty when paying CostRemoveAnyCounter for" + ability));
+            return false;
         }
         Card valid = decision.cards.get(0);
         counterType = decision.ct;
