@@ -1574,7 +1574,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || keyword.startsWith("Surge") || keyword.startsWith("Transmute") || keyword.startsWith("Suspend")
                     || keyword.equals("Undaunted") || keyword.startsWith("Monstrosity") || keyword.startsWith("Embalm")
                     || keyword.startsWith("Level up") || keyword.equals("Prowess") || keyword.startsWith("Eternalize")
-                    || keyword.startsWith("Reinforce")
+                    || keyword.startsWith("Reinforce") || keyword.startsWith("Champion")
                     || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")) {
                 // keyword parsing takes care of adding a proper description
             } else if (keyword.startsWith("CantBeBlockedBy")) {

@@ -2030,50 +2030,7 @@ public class CardFactoryUtil {
                 addTriggerAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Champion")) {
-                card.removeIntrinsicKeyword(keyword);
-
-                final String[] k = keyword.split(":");
-                final String[] valid = k[1].split(",");
-                String desc = k.length > 2 ? k[2] : k[1];
-                String article = Lang.startsWithVowel(desc) ? "an" : "a";
-                if (desc.equals("Creature")) {
-                    desc = "creature"; //use lowercase for "Champion a creature"
-                }
-
-                StringBuilder changeType = new StringBuilder();
-                for (String v : valid) {
-                    if (changeType.length() != 0) {
-                        changeType.append(",");
-                    }
-                    changeType.append(v).append(".YouCtrl+Other");
-                }
-
-                StringBuilder trig = new StringBuilder();
-                trig.append("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | ");
-                trig.append("Execute$ ChampionAbility | TriggerDescription$ Champion ").append(article + " ");
-                trig.append(desc).append(" (When this enters the battlefield, sacrifice it unless you exile another ");
-                trig.append(desc).append(" you control. When this leaves the battlefield, that card returns to the battlefield.)");
-
-                StringBuilder trigReturn = new StringBuilder();
-                trigReturn.append("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | ");
-                trigReturn.append("Execute$ ChampionReturn | Secondary$ True | TriggerDescription$ When this leaves the battlefield, that card returns to the battlefield.");
-
-                StringBuilder ab = new StringBuilder();
-                ab.append("DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | Champion$ True | ");
-                ab.append("Hidden$ True | Optional$ True | SubAbility$ ChampionSacrifice | ChangeType$ ").append(changeType);
-
-                StringBuilder subAb = new StringBuilder();
-                subAb.append("DB$ Sacrifice | Defined$ Card.Self | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0");
-
-                String returnChampion = "DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ ChampionCleanup";
-                final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig.toString(), card, true);
-                final Trigger parsedTrigReturn = TriggerHandler.parseTrigger(trigReturn.toString(), card, true);
-                card.addTrigger(parsedTrigger);
-                card.addTrigger(parsedTrigReturn);
-                card.setSVar("ChampionAbility", ab.toString());
-                card.setSVar("ChampionReturn", returnChampion);
-                card.setSVar("ChampionCleanup", "DB$ Cleanup | ClearRemembered$ True");
-                card.setSVar("ChampionSacrifice", subAb.toString());
+                addTriggerAbility(keyword, card, null);
             }
             else if (keyword.startsWith("If CARDNAME would be put into a graveyard "
                     + "from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.")) {
@@ -2540,6 +2497,67 @@ public class CardFactoryUtil {
             final Trigger cardTrigger = card.addTrigger(cascadeTrigger);
             if (!intrinsic) {
                 kws.addTrigger(cardTrigger);
+            }
+        } else if (keyword.startsWith("Champion")){
+
+            final String[] k = keyword.split(":");
+            final String[] valid = k[1].split(",");
+            String desc = Lang.joinHomogenous(Lists.newArrayList(valid), null, "or");
+            String article = Lang.startsWithVowel(desc) ? "an" : "a";
+            if (desc.equals("Creature")) {
+                desc = "creature"; //use lowercase for "Champion a creature"
+            }
+
+            StringBuilder changeType = new StringBuilder();
+            for (String v : valid) {
+                if (changeType.length() != 0) {
+                    changeType.append(",");
+                }
+                changeType.append(v).append(".YouCtrl+Other");
+            }
+
+            StringBuilder trig = new StringBuilder();
+            trig.append("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self");
+            trig.append(" | TriggerDescription$ Champion ").append(article + " ").append(desc);
+            trig.append(" (").append(Keyword.getInstance("Champion:"+desc).getReminderText()) .append(")");
+
+            StringBuilder trigReturn = new StringBuilder();
+            trigReturn.append("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self");
+            trigReturn.append(" | Secondary$ True | TriggerDescription$ When this leaves the battlefield, that card returns to the battlefield.");
+
+            StringBuilder ab = new StringBuilder();
+            ab.append("DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True ");
+            ab.append(" | Champion$ True | Hidden$ True | Optional$ True | ChangeType$ ").append(changeType);
+
+            StringBuilder subAb = new StringBuilder();
+            subAb.append("DB$ Sacrifice | Defined$ Card.Self");
+            subAb.append(" | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0");
+
+            String returnChampion = "DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield";
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig.toString(), card, intrinsic);
+            final Trigger parsedTrigReturn = TriggerHandler.parseTrigger(trigReturn.toString(), card, intrinsic);
+
+            SpellAbility sa = AbilityFactory.getAbility(ab.toString(), card);
+            AbilitySub sub = (AbilitySub) AbilityFactory.getAbility(subAb.toString(), card);
+
+            sa.setSubAbility(sub);
+            sa.setIntrinsic(intrinsic);
+
+            parsedTrigger.setOverridingAbility(sa);
+
+            SpellAbility saReturn = AbilityFactory.getAbility(returnChampion, card);
+            sub = (AbilitySub) AbilityFactory.getAbility("DB$ Cleanup | ClearRemembered$ True", card);
+            saReturn.setSubAbility(sub);
+            saReturn.setIntrinsic(intrinsic);
+
+            parsedTrigReturn.setOverridingAbility(saReturn);
+
+            final Trigger cardTrigger1 = card.addTrigger(parsedTrigger);
+            final Trigger cardTrigger2 = card.addTrigger(parsedTrigReturn);
+
+            if (!intrinsic) {
+                kws.addTrigger(cardTrigger1);
+                kws.addTrigger(cardTrigger2);
             }
         } else if (keyword.equals("Conspire")) {
             final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | Conspire$ True | Execute$ TrigConspire | Secondary$ True | TriggerDescription$ Copy CARDNAME if its conspire cost was paid";
