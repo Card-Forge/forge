@@ -3,7 +3,7 @@ ManaCost:3 G
 Types:Creature Treefolk Warrior
 PT:5/5
 K:Trample
-K:Champion:Treefolk,Warrior:Treefolk or Warrior
+K:Champion:Treefolk,Warrior
 T:Mode$ AttackerBlocked | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control becomes blocked, it gets +0/+5 until end of turn.
 SVar:TrigPump:DB$Pump | Defined$ TriggeredAttacker | NumDef$ +5
 SVar:RemRandomDeck:True
