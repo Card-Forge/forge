@@ -133,7 +133,7 @@ public class CostRemoveAnyCounter extends CostPartWithList {
             c = AbilityUtils.calculateAmount(source, amount, ability);
         }
         if (decision.cards.isEmpty()) {
-            System.err.println(TextUtil.concatWithSpace("Warning: payment decision array was empty when paying CostRemoveAnyCounter for" + ability));
+            System.err.println(TextUtil.concatWithSpace("Warning: payment decision array was empty when paying CostRemoveAnyCounter for" , ability.getDescription(), "from", ability.getHostCard().toString()));
             return false;
         }
         Card valid = decision.cards.get(0);
