@@ -344,7 +344,7 @@ public class AbilityUtils {
      * @param amount
      *            a {@link java.lang.String} object.
      * @param ability
-     *            a {@link forge.game.spellability.SpellAbility} object.
+     *            a {@link forge.game.CardTraitBase} object.
      * @return a int.
      */
     public static int calculateAmount(final Card card, String amount, final CardTraitBase ability) {
@@ -378,8 +378,8 @@ public class AbilityUtils {
         if (amount.indexOf('$') > 0) { // when there is a dollar sign, it's not a reference, it's a raw value!
             svarval = amount;
         }
-        else if (ability != null && ability instanceof SpellAbility) {
-            svarval = ((SpellAbility)ability).getSVar(amount);
+        else if (ability != null) {
+            svarval = ability.getSVar(amount);
         }
         if (StringUtils.isBlank(svarval)) {
             if ((ability != null) && (ability instanceof SpellAbility) && !(ability instanceof SpellPermanent)) {

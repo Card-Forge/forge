@@ -44,6 +44,8 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
     /** The temporarily suppressed. */
     protected boolean temporarilySuppressed = false;
 
+    private Map<String, String> sVars = Maps.newHashMap();
+
     /** Keys of descriptive (text) parameters. */
     private static final ImmutableList<String> descriptiveKeys = ImmutableList.<String>builder()
             .add("Description", "SpellDescription", "StackDescription", "TriggerDescription").build();
@@ -450,5 +452,44 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
     @Override
     public CardView getCardView() {
         return CardView.get(hostCard);
+    }
+
+    public String getSvarWithFallback(final String name) {
+        String var = sVars.get(name);
+        if (var == null) {
+            var = hostCard.getSVar(name);
+        }
+        return var;
+    }
+
+    public String getSVar(final String name) {
+        String var = sVars.get(name);
+        if (var == null) {
+            var = "";
+        }
+        return var;
+    }
+
+    public boolean hasSVar(final String name) {
+        return sVars.containsKey(name);
+    }
+
+    public Integer getSVarInt(final String name) {
+        String var = sVars.get(name);
+        if (var != null) {
+            try {
+                return Integer.parseInt(var);
+            }
+            catch (Exception e) {}
+        }
+        return null;
+    }
+
+    public final void setSVar(final String name, final String value) {
+        sVars.put(name, value);
+    }
+
+    public Set<String> getSVars() {
+        return sVars.keySet();
     }
 }
