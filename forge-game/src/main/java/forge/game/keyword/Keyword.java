@@ -14,7 +14,7 @@ public enum Keyword {
     AFFINITY(KeywordWithType.class, false, "This spell costs you {1} less to cast for each %s you control."),
     AFFLICT(KeywordWithAmount.class, false, "Whenever this creature becomes blocked, defending player loses %d life."),
     AFTERMATH(SimpleKeyword.class, false, "Cast this spell only from your graveyard. Then exile it."),
-    AMPLIFY(KeywordWithAmountAndType.class, false, "As this creature enters the battlefield, put %d +1/+1 counter on it for each %s card you reveal in your hand."),
+    AMPLIFY(KeywordWithAmountAndType.class, false, "As this creature enters the battlefield, put {%d:+1/+1 counter} on it for each %s card you reveal in your hand."),
     ANNIHILATOR(KeywordWithAmount.class, false, "Whenever this creature attacks, defending player sacrifices {%d:permanent}."),
     AURA_SWAP(KeywordWithCost.class, false, "%s: You may exchange this Aura with an Aura card in your hand."),
     AWAKEN(KeywordWithCostAndAmount.class, true, "If you cast this spell for %s, also put {%d:+1/+1 counter} on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land."),

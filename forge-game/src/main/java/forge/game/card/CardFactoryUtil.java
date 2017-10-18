@@ -2201,40 +2201,7 @@ public class CardFactoryUtil {
                 addTriggerAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Amplify")) {
-                // find position of Amplify keyword
-                final int ampPos = card.getKeywordPosition("Amplify");
-                final String[] ampString = card.getKeywords().get(ampPos).split(":");
-                final String amplifyMagnitude = ampString[1];
-                final String suffix = !amplifyMagnitude.equals("1") ? "s" : "";
-                final String ampTypes = ampString[2];
-                String[] refinedTypes = ampTypes.split(",");
-                final StringBuilder types = new StringBuilder();
-                for (int i = 0; i < refinedTypes.length; i++) {
-                    types.append("Card.").append(refinedTypes[i]).append("+YouCtrl");
-                    if (i + 1 != refinedTypes.length) {
-                        types.append(",");
-                    }
-                }
-                // Setup ETB replacement effects
-                final String actualRep = "Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self |"
-                        + " ReplaceWith$ AmplifyReveal | Secondary$ True | Description$ As this creature "
-                        + "enters the battlefield, put " + amplifyMagnitude + " +1/+1 counter" + suffix 
-                        + " on it for each " + TextUtil.fastReplace(ampTypes, ",", " and/or ")
-                        + " card you reveal in your hand.)";
-                final String abString = "DB$ Reveal | AnyNumber$ True | RevealValid$ "
-                        + types.toString() + " | RememberRevealed$ True | SubAbility$ Amplify";
-                final String dbString = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | "
-                        + "CounterNum$ AmpMagnitude | References$ Revealed,AmpMagnitude | SubAbility$"
-                        + " AmplifyMoveToPlay | ETB$ True";
-                final String moveToPlay = "DB$ ChangeZone | Origin$ All | Destination$ Battlefield | "
-                        + "Defined$ ReplacedCard | Hidden$ True | SubAbility$ DBCleanup";
-                card.addReplacementEffect(ReplacementHandler.parseReplacement(actualRep, card, true));
-                card.setSVar("AmplifyReveal", abString);
-                card.setSVar("AmplifyMoveToPlay", moveToPlay);
-                card.setSVar("Amplify", dbString);
-                card.setSVar("DBCleanup", "DB$ Cleanup | ClearRemembered$ True");
-                card.setSVar("AmpMagnitude", "SVar$Revealed/Times." + amplifyMagnitude);
-                card.setSVar("Revealed", "Remembered$Amount");
+                addReplacementEffect(keyword, card, null);
             }
             else if (keyword.startsWith("Equip")) {
                 addSpellAbility(keyword, card, null);
@@ -3363,6 +3330,59 @@ public class CardFactoryUtil {
 
             if (!intrinsic) {
                 kws.addReplacement(re);
+            }
+        } else if (keyword.startsWith("Amplify")) {
+            final String[] ampString = keyword.split(":");
+            final String amplifyMagnitude = ampString[1];
+            final String ampTypes = ampString[2];
+            String[] refinedTypes = ampTypes.split(",");
+            final StringBuilder types = new StringBuilder();
+            for (int i = 0; i < refinedTypes.length; i++) {
+                types.append("Card.").append(refinedTypes[i]).append("+YouCtrl");
+                if (i + 1 != refinedTypes.length) {
+                    types.append(",");
+                }
+            }
+
+            // Setup ETB replacement effects
+            final String actualRep = "Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self |"
+                    + " | Description$ Amplify " + amplifyMagnitude + " ("
+                    + Keyword.getInstance(keyword).getReminderText() + ")";
+
+            final String abString = "DB$ Reveal | AnyNumber$ True | RevealValid$ "
+                    + types.toString() + " | RememberRevealed$ True";
+
+            SpellAbility saReveal = AbilityFactory.getAbility(abString, card);
+
+            final String dbString = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | "
+                    + "CounterNum$ AmpMagnitude | ETB$ True";
+
+            AbilitySub saPut = (AbilitySub) AbilityFactory.getAbility(dbString, card);
+
+            saPut.setSVar("AmpMagnitude", "SVar$Revealed/Times." + amplifyMagnitude);
+            saPut.setSVar("Revealed", "Remembered$Amount");
+
+            String dbClean = "DB$ Cleanup | ClearRemembered$ True";
+            AbilitySub saCleanup = (AbilitySub) AbilityFactory.getAbility(dbClean, card);
+
+            saPut.setSubAbility(saCleanup);
+            setupETBReplacementAbility(saCleanup);
+
+            saReveal.setSubAbility(saPut);
+
+            if (!intrinsic) {
+                saReveal.setIntrinsic(false);
+            }
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(actualRep, card, intrinsic);
+
+            re.setLayer(ReplacementLayer.Other);
+
+            re.setOverridingAbility(saReveal);
+            ReplacementEffect cardre = card.addReplacementEffect(re);
+
+            if (!intrinsic) {
+                kws.addReplacement(cardre);
             }
         } else if (keyword.startsWith("Bloodthirst")) {
             final String numCounters = keyword.split(":")[1];

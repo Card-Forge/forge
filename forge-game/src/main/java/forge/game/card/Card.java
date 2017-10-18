@@ -1472,15 +1472,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 final String[] upkeepCostParams = keyword.split(":");
                 sbLong.append(upkeepCostParams.length > 2 ? "- " + upkeepCostParams[2] : ManaCostParser.parse(upkeepCostParams[1]));
                 sbLong.append("\r\n");
-            } else if (keyword.startsWith("Amplify")) {
-                sbLong.append("Amplify ");
-                final String[] ampParams = keyword.split(":");
-                final String magnitude = ampParams[1];
-                sbLong.append(magnitude);
-                sbLong.append(" (As this creature enters the battlefield, put a +1/+1 counter on it for each ");
-                sbLong.append(TextUtil.fastReplace(ampParams[2], ",", " and/or ")).append(" card you reveal in your hand.)");
-                sbLong.append("\r\n");
-            }  else if (keyword.startsWith("Alternative Cost")) {
+            } else if (keyword.startsWith("Alternative Cost")) {
                 sbLong.append("Has alternative cost.");
             } else if (keyword.startsWith("AlternateAdditionalCost")) {
                 final String costString1 = keyword.split(":")[1];
@@ -1569,12 +1561,13 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sbLong.append(keyword);
                 sbLong.append(" (" + Keyword.getInstance("Offering:"+ offeringType).getReminderText() + ")");
             } else if (keyword.startsWith("Equip") || keyword.startsWith("Fortify") || keyword.startsWith("Outlast")
-                    || keyword.startsWith("Unearth") || keyword.startsWith("Scavenge") || keyword.startsWith("Ninjutsu")
+                    || keyword.startsWith("Unearth") || keyword.startsWith("Scavenge")
                     || keyword.startsWith("Evoke") || keyword.startsWith("Bestow") || keyword.startsWith("Dash")
                     || keyword.startsWith("Surge") || keyword.startsWith("Transmute") || keyword.startsWith("Suspend")
                     || keyword.equals("Undaunted") || keyword.startsWith("Monstrosity") || keyword.startsWith("Embalm")
                     || keyword.startsWith("Level up") || keyword.equals("Prowess") || keyword.startsWith("Eternalize")
                     || keyword.startsWith("Reinforce") || keyword.startsWith("Champion")
+                    || keyword.startsWith("Amplify")  || keyword.startsWith("Ninjutsu")
                     || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")) {
                 // keyword parsing takes care of adding a proper description
             } else if (keyword.startsWith("CantBeBlockedBy")) {
