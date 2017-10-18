@@ -2201,7 +2201,7 @@ public class CardFactoryUtil {
                 addSpellAbility(keyword, card, null);
             }
             else if (keyword.equals("Hideaway")) {
-                card.getCurrentState().addIntrinsicKeyword("CARDNAME enters the battlefield tapped.");
+                addReplacementEffect(keyword, card, null);
 
                 final Trigger hideawayTrigger = TriggerHandler.parseTrigger("Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigHideawayDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.", card, true);
                 card.addTrigger(hideawayTrigger);
@@ -2216,6 +2216,14 @@ public class CardFactoryUtil {
                 card.addTrigger(changeZoneTrigger);
                 card.setSVar("DBHideawayRemember", "DB$ Animate | Defined$ Imprinted | RememberObjects$ Remembered | Permanent$ True");
                 card.setSVar("DBHideawayCleanup", "DB$ Cleanup | ClearRemembered$ True");
+            } else if (keyword.equals("CARDNAME enters the battlefield tapped.")) {
+                addReplacementEffect(keyword, card, null);
+            }
+            
+            if (keyword.startsWith("ETBReplacement")) {
+                addReplacementEffect(keyword, card, null);
+            } else if (keyword.startsWith("etbCounter")) {
+                addReplacementEffect(keyword, card, null);
             }
         }
 
@@ -2240,7 +2248,6 @@ public class CardFactoryUtil {
             }
         }
 
-        setupEtbKeywords(card);
     }
 
     private static ReplacementEffect createETBReplacement(final Card card, ReplacementLayer layer,
@@ -2272,33 +2279,6 @@ public class CardFactoryUtil {
         re.setOverridingAbility(repAb);
 
         return card.addReplacementEffect(re);
-    }
-    /**
-     * TODO: Write javadoc for this method.
-     * @param card
-     */
-    public static void setupEtbKeywords(final Card card) {
-        for (String kw : card.getKeywords()) {
-
-            if (kw.startsWith("ETBReplacement")) {
-                String[] splitkw = kw.split(":");
-                ReplacementLayer layer = ReplacementLayer.smartValueOf(splitkw[1]);
-                
-                final boolean optional = splitkw.length >= 4 && splitkw[3].contains("Optional");
-
-                final String valid = splitkw.length >= 6 ? splitkw[5] : "Card.Self";
-                final String zone = splitkw.length >= 5 ? splitkw[4] : "";
-                createETBReplacement(card, layer, card.getSVar(splitkw[2]), optional, false, true, valid, zone);
-            } else if (kw.startsWith("etbCounter")) {
-                makeEtbCounter(kw, card, true);
-            } else if (kw.equals("CARDNAME enters the battlefield tapped.")) {
-                card.removeIntrinsicKeyword(kw);
-
-                String effect = "DB$ Tap | Defined$ Self | ETB$ True | SpellDescription$ CARDNAME enters the battlefield tapped.";
-
-                createETBReplacement(card, ReplacementLayer.Other, effect, false, false, true, "Card.Self", "");
-            }
-        }
     }
 
 
@@ -3716,6 +3696,29 @@ public class CardFactoryUtil {
                     kws.addReplacement(cardre);
                 }
             }
+        }
+        
+        if (keyword.equals("CARDNAME enters the battlefield tapped.") || keyword.equals("Hideway")) {
+
+            String effect = "DB$ Tap | Defined$ Self | ETB$ True "
+                + " | SpellDescription$ CARDNAME enters the battlefield tapped.";
+
+            createETBReplacement(
+                card, ReplacementLayer.Other, effect, false, keyword.equals("Hideway"), intrinsic, "Card.Self", ""
+            );
+        }
+        
+        if (keyword.startsWith("ETBReplacement")) {
+            String[] splitkw = keyword.split(":");
+            ReplacementLayer layer = ReplacementLayer.smartValueOf(splitkw[1]);
+            
+            final boolean optional = splitkw.length >= 4 && splitkw[3].contains("Optional");
+
+            final String valid = splitkw.length >= 6 ? splitkw[5] : "Card.Self";
+            final String zone = splitkw.length >= 5 ? splitkw[4] : "";
+            createETBReplacement(card, layer, card.getSVar(splitkw[2]), optional, false, intrinsic, valid, zone);
+        } else if (keyword.startsWith("etbCounter")) {
+            makeEtbCounter(keyword, card, intrinsic);
         }
         
         // No finish yet, need card updates
