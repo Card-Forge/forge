@@ -2178,22 +2178,7 @@ public class CardFactoryUtil {
                 addTriggerAbility(keyword, card, null);
             }
             else if (keyword.startsWith("Dredge")) {
-                final int dredgeAmount = card.getKeywordMagnitude("Dredge");
-
-                final String actualRep = "Event$ Draw | ActiveZones$ Graveyard | ValidPlayer$ You | "
-                        + "ReplaceWith$ DredgeCards | Secondary$ True | Optional$ True | CheckSVar$ "
-                        + "DredgeCheckLib | SVarCompare$ GE" + dredgeAmount + " | References$ "
-                        + "DredgeCheckLib | AICheckDredge$ True | Description$ " + card.getName()
-                        +  " - Dredge " + dredgeAmount;
-                final String abString = "DB$ Mill | Defined$ You | NumCards$ " + dredgeAmount + " | "
-                        + "SubAbility$ DredgeMoveToPlay";
-                final String moveToPlay = "DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | "
-                        + "Defined$ Self";
-                final String checkSVar = "Count$ValidLibrary Card.YouOwn";
-                card.setSVar("DredgeCards", abString);
-                card.setSVar("DredgeMoveToPlay", moveToPlay);
-                card.setSVar("DredgeCheckLib", checkSVar);
-                card.addReplacementEffect(ReplacementHandler.parseReplacement(actualRep, card, true));
+                addReplacementEffect(keyword, card, null);
             } else if (keyword.startsWith("Prevent all") || keyword.startsWith("PreventAllDamageBy") ) {
                 addReplacementEffect(keyword, card, null);
             }else if (keyword.startsWith("Tribute")) {
@@ -3436,6 +3421,37 @@ public class CardFactoryUtil {
             re.setLayer(ReplacementLayer.Other);
 
             re.setOverridingAbility(saReturn);
+
+            ReplacementEffect cardre = card.addReplacementEffect(re);
+
+            if (!intrinsic) {
+                kws.addReplacement(cardre);
+            }
+        } else if (keyword.startsWith("Dredge")) {
+            final String dredgeAmount = keyword.split(" ")[1];
+
+            final String actualRep = "Event$ Draw | ActiveZones$ Graveyard | ValidPlayer$ You | "
+                    + "ReplaceWith$ DredgeCards | Secondary$ True | Optional$ True | CheckSVar$ "
+                    + "DredgeCheckLib | SVarCompare$ GE" + dredgeAmount
+                    + " | AICheckDredge$ True | Description$ " + card.getName()
+                    +  " - Dredge " + dredgeAmount;
+
+            final String abString = "DB$ Mill | Defined$ You | NumCards$ " + dredgeAmount;
+
+            final String moveToPlay = "DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ Self";
+
+            SpellAbility saMill = AbilityFactory.getAbility(abString, card);
+            AbilitySub saMove = (AbilitySub) AbilityFactory.getAbility(moveToPlay, card);
+            saMill.setSubAbility(saMove);
+
+            if (!intrinsic) {
+                saMill.setIntrinsic(false);
+            }
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(actualRep, card, intrinsic);
+            re.setLayer(ReplacementLayer.Other);
+
+            re.setSVar("DredgeCheckLib", "Count$ValidLibrary Card.YouOwn");
 
             ReplacementEffect cardre = card.addReplacementEffect(re);
 
