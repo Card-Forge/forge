@@ -1949,282 +1949,10 @@ public class CardFactoryUtil {
         // -1 means keyword "Cycling" not found
 
         for (String keyword : card.getKeywords()) {
-            if (keyword.startsWith("Absorb")) {
-                addStaticAbility(keyword, card, null);
-            } else if (keyword.equals("Cipher")) {
-                addStaticAbility(keyword, card, null);
-            } else if (keyword.startsWith("Multikicker")) {
-                final String[] n = keyword.split(":");
-                final SpellAbility sa = card.getFirstSpellAbility();
-                sa.setMultiKickerManaCost(new ManaCost(new ManaCostParser(n[1])));
-                if (keyword.endsWith("Generic")) {
-                    sa.addAnnounceVar("Pseudo-multikicker");
-                } else {
-                    sa.addAnnounceVar("Multikicker");
-                }
-            }
-            else if (keyword.startsWith("Replicate")) {
-                card.getFirstSpellAbility().addAnnounceVar("Replicate");
-            }
-            else if (keyword.startsWith("Flashback")) {
-                addReplacementEffect(keyword, card, null);
-            }
-            else if (keyword.startsWith("Fuse")) {
-                card.getState(CardStateName.Original).addNonManaAbility(AbilityFactory.buildFusedAbility(card));
-            }
-            else if (keyword.startsWith("Evoke")) {
-                addSpellAbility(keyword, card, null);
-                addTriggerAbility(keyword, card, null);                
-            }
-            else if (keyword.startsWith("Dash")) {
-                addSpellAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Buyback")) {
-                addReplacementEffect(keyword, card, null);
-            }
-            else if (keyword.startsWith("Awaken")) {
-                addSpellAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Surge")) {
-                addSpellAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Graft")) {
-                addReplacementEffect(keyword, card, null);
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.equals("Melee")) {
-                addTriggerAbility(keyword, card, null);                
-            }
-            else if (keyword.startsWith("Modular")) {
-                addReplacementEffect(keyword, card, null);
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Monstrosity")) {
-                addSpellAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Ninjutsu")) {
-                addSpellAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Reinforce")) {
-                addSpellAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Scavenge")) {
-                addSpellAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Unearth")) {
-                addSpellAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Level up")) {
-                addSpellAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Cycling")) {
-                addSpellAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("TypeCycling")) {
-                addSpellAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Transmute")) {
-                addSpellAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Soulshift")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Champion")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("If CARDNAME would be put into a graveyard "
-                    + "from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.")) {
-                String replacement = "Event$ Moved | Destination$ Graveyard | ValidCard$ Card.Self | ReplaceWith$ GraveyardToLibrary";
-                String ab =  "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Library | Defined$ ReplacedCard | Reveal$ True | Shuffle$ True";
-
-                card.addReplacementEffect(ReplacementHandler.parseReplacement(replacement, card, true));
-                card.setSVar("GraveyardToLibrary", ab);
-            }
-            else if (keyword.startsWith("Echo")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Cumulative upkeep")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Suspend")) {
-                addSpellAbility(keyword, card, null);
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Fading")) {
-                addTriggerAbility(keyword, card, null);
-                addReplacementEffect(keyword, card, null);
-            }
-            else if (keyword.startsWith("Renown")) {
-                addTriggerAbility(keyword, card, null); 
-            }
-            else if (keyword.startsWith("Vanishing")) {
-                addTriggerAbility(keyword, card, null);
-                addReplacementEffect(keyword, card, null);
-            }
-            else if (keyword.equals("Delve")) {
-                card.getSpellAbilities().getFirst().setDelve(true);
-            }
-            else if (keyword.startsWith("Haunt")) {
-                addSpellAbility(keyword, card, null);
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Annihilator")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.equals("Provoke")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.equals("Myriad")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.equals("Living Weapon")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.equals("Aftermath")) {
-                addSpellAbility(keyword, card, null);
-                addReplacementEffect(keyword, card, null);
-            }
-            else if (keyword.equals("Epic")) {
-                addSpellAbility(keyword, card, null);
-            }
-            else if (keyword.equals("Soulbond")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.equals("Conspire")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.equals("Exalted")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.equals("Exploit")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.equals("Extort")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.equals("Flanking")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.equals("Ingest")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Miracle")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.equals("Persist")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.equals("Rebound")) {
-                addReplacementEffect(keyword, card, null);
-            }
-            else if (keyword.equals("Undying")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.equals("Unleash")) {
-                addReplacementEffect(keyword, card, null);
-                addStaticAbility(keyword, card, null);
-            }
-            else if (keyword.equals("Changeling")) {
-                addStaticAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Emerge")) {
-                addSpellAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Embalm")) {
-                addSpellAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Escalate")) {
-                addStaticAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Eternalize")) {
-                addSpellAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Fabricate")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Rampage")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Afflict")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Strive")) {
-                addStaticAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Bushido")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.endsWith(" offering")) {
-                addSpellAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Presence")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Crew")) {
-                addSpellAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Retrace")) {
-                addSpellAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Undaunted")) {
-                addStaticAbility(keyword, card, null);
-            }
-            else if (keyword.equals("Prowess")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.equals("Evolve")) {
-                addTriggerAbility(keyword, card, null);
-            } else if (keyword.startsWith("UpkeepCost")) {
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Dredge")) {
-                addReplacementEffect(keyword, card, null);
-            } else if (keyword.startsWith("Prevent all") || keyword.startsWith("PreventAllDamageBy") ) {
-                addReplacementEffect(keyword, card, null);
-            }else if (keyword.startsWith("Tribute")) {
-                addReplacementEffect(keyword, card, null);
-                addTriggerAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Amplify")) {
-                addReplacementEffect(keyword, card, null);
-            }
-            else if (keyword.startsWith("Equip")) {
-                addSpellAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Outlast")) {
-                addSpellAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Fortify")) {
-                addSpellAbility(keyword, card, null);
-            }
-            else if (keyword.startsWith("Bestow")) {
-                addSpellAbility(keyword, card, null);
-            }
-            else if (keyword.equals("Hideaway")) {
-                addReplacementEffect(keyword, card, null);
-
-                final Trigger hideawayTrigger = TriggerHandler.parseTrigger("Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigHideawayDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.", card, true);
-                card.addTrigger(hideawayTrigger);
-                card.setSVar("TrigHideawayDig", "DB$ Dig | Defined$ You | DigNum$ 4 | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ DBHideawayEffect");
-                final Trigger gainControlTrigger = TriggerHandler.parseTrigger("Mode$ ChangesController | ValidCard$ Card.Self | Execute$ DBHideawayEffect | Static$ True", card, true);
-                card.addTrigger(gainControlTrigger);
-                card.setSVar("DBHideawayEffect", "DB$ Effect | StaticAbilities$ STHideawayEffectLookAtCard | Triggers$ THideawayEffectCleanup | SVars$ DBHideawayEffectExileSelf | ImprintOnHost$ True | Duration$ Permanent | SubAbility$ DBHideawayRemember");
-                card.setSVar("STHideawayEffectLookAtCard", "Mode$ Continuous | Affected$ Card.IsRemembered | MayLookAt$ True | EffectZone$ Command | AffectedZone$ Exile | Description$ You may look at the exiled card.");
-                card.setSVar("THideawayEffectCleanup", "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | TriggerZone$ Command | Execute$ DBHideawayEffectExileSelf | Static$ True");
-                card.setSVar("DBHideawayEffectExileSelf", "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile");
-                final Trigger changeZoneTrigger = TriggerHandler.parseTrigger("Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | TriggerZone$ Command | Execute$ DBHideawayCleanup | Static$ True", card, true);
-                card.addTrigger(changeZoneTrigger);
-                card.setSVar("DBHideawayRemember", "DB$ Animate | Defined$ Imprinted | RememberObjects$ Remembered | Permanent$ True");
-                card.setSVar("DBHideawayCleanup", "DB$ Cleanup | ClearRemembered$ True");
-            } else if (keyword.equals("CARDNAME enters the battlefield tapped.")) {
-                addReplacementEffect(keyword, card, null);
-            }
-            
-            if (keyword.startsWith("ETBReplacement")) {
-                addReplacementEffect(keyword, card, null);
-            } else if (keyword.startsWith("etbCounter")) {
-                addReplacementEffect(keyword, card, null);
-            }
+            addSpellAbility(keyword, card, null);
+            addTriggerAbility(keyword, card, null); 
+            addStaticAbility(keyword, card, null);
+            addReplacementEffect(keyword, card, null);
         }
 
         // AddCost
@@ -2797,6 +2525,32 @@ public class CardFactoryUtil {
 
             cardTriggers.add(card.addTrigger(hauntedDies));
 
+            if (!intrinsic) {
+                for (final Trigger cardTrigger : cardTriggers) {
+                    kws.addTrigger(cardTrigger);
+                }
+            }
+        } else if (keyword.equals("Hideaway")) {
+            List<Trigger> cardTriggers = Lists.newArrayList();
+            StringBuilder sb = new StringBuilder();
+            sb.append("Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigHideawayDig");
+            sb.append(" | TriggerDescription$ When CARDNAME enters the battlefield, ");
+            sb.append("look at the top four cards of your library, exile one face down");
+            sb.append(", then put the rest on the bottom of your library.");            
+            final Trigger hideawayTrigger = TriggerHandler.parseTrigger(sb.toString(), card, intrinsic);
+            cardTriggers.add(card.addTrigger(hideawayTrigger));
+            card.setSVar("TrigHideawayDig", "DB$ Dig | Defined$ You | DigNum$ 4 | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ DBHideawayEffect");
+            final Trigger gainControlTrigger = TriggerHandler.parseTrigger("Mode$ ChangesController | ValidCard$ Card.Self | Execute$ DBHideawayEffect | Static$ True", card, intrinsic);
+            cardTriggers.add(card.addTrigger(gainControlTrigger));
+            card.setSVar("DBHideawayEffect", "DB$ Effect | StaticAbilities$ STHideawayEffectLookAtCard | Triggers$ THideawayEffectCleanup | SVars$ DBHideawayEffectExileSelf | ImprintOnHost$ True | Duration$ Permanent | SubAbility$ DBHideawayRemember");
+            card.setSVar("STHideawayEffectLookAtCard", "Mode$ Continuous | Affected$ Card.IsRemembered | MayLookAt$ True | EffectZone$ Command | AffectedZone$ Exile | Description$ You may look at the exiled card.");
+            card.setSVar("THideawayEffectCleanup", "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | TriggerZone$ Command | Execute$ DBHideawayEffectExileSelf | Static$ True");
+            card.setSVar("DBHideawayEffectExileSelf", "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile");
+            final Trigger changeZoneTrigger = TriggerHandler.parseTrigger("Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | TriggerZone$ Command | Execute$ DBHideawayCleanup | Static$ True", card, intrinsic);
+            cardTriggers.add(card.addTrigger(changeZoneTrigger));
+            card.setSVar("DBHideawayRemember", "DB$ Animate | Defined$ Imprinted | RememberObjects$ Remembered | Permanent$ True");
+            card.setSVar("DBHideawayCleanup", "DB$ Cleanup | ClearRemembered$ True");
+            
             if (!intrinsic) {
                 for (final Trigger cardTrigger : cardTriggers) {
                     kws.addTrigger(cardTrigger);
@@ -3698,8 +3452,29 @@ public class CardFactoryUtil {
             }
         }
         
-        if (keyword.equals("CARDNAME enters the battlefield tapped.") || keyword.equals("Hideway")) {
+        else if (keyword.startsWith("If CARDNAME would be put into a graveyard "
+                + "from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.")) {
+            String repeffstr = "Event$ Moved | Destination$ Graveyard | ValidCard$ Card.Self ";
+            String ab =  "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Library | Defined$ ReplacedCard | Reveal$ True | Shuffle$ True";
 
+            SpellAbility sa = AbilityFactory.getAbility(ab, card);
+
+            if (!intrinsic) {
+                sa.setIntrinsic(false);
+            }
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
+            re.setLayer(ReplacementLayer.Other);
+
+            re.setOverridingAbility(sa);
+            ReplacementEffect cardre = card.addReplacementEffect(re);
+            
+            if (!intrinsic) {
+                kws.addReplacement(cardre);
+            }
+        }
+        
+        if (keyword.equals("CARDNAME enters the battlefield tapped.") || keyword.equals("Hideway")) {
             String effect = "DB$ Tap | Defined$ Self | ETB$ True "
                 + " | SpellDescription$ CARDNAME enters the battlefield tapped.";
 
@@ -4043,6 +3818,14 @@ public class CardFactoryUtil {
             }
 
             card.addSpellAbility(sa);
+        } else if (keyword.startsWith("Fuse")) {
+            final SpellAbility sa = AbilityFactory.buildFusedAbility(card);
+            card.getState(CardStateName.Original).addNonManaAbility(sa);
+
+            if (!intrinsic) {
+                sa.setTemporary(true);
+                kws.addSpellAbility(sa);
+            }
         } else if (keyword.startsWith("Haunt")) {            
             if (!card.isCreature() && intrinsic) {
                 final String[] k = keyword.split(":");
@@ -4121,6 +3904,15 @@ public class CardFactoryUtil {
                 kws.addSpellAbility(sa);
             }
             card.addSpellAbility(sa);
+        } else if (keyword.startsWith("Multikicker")) {
+            final String[] n = keyword.split(":");
+            final SpellAbility sa = card.getFirstSpellAbility();
+            sa.setMultiKickerManaCost(new ManaCost(new ManaCostParser(n[1])));
+            if (keyword.endsWith("Generic")) {
+                sa.addAnnounceVar("Pseudo-multikicker");
+            } else {
+                sa.addAnnounceVar("Multikicker");
+            }
         } else if (keyword.startsWith("Ninjutsu")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
@@ -4197,6 +3989,8 @@ public class CardFactoryUtil {
                 kws.addSpellAbility(sa);
             }
             card.addSpellAbility(sa);
+        } else if (keyword.startsWith("Replicate")) {
+            card.getFirstSpellAbility().addAnnounceVar("Replicate");
         } else if (keyword.startsWith("Scavenge")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];

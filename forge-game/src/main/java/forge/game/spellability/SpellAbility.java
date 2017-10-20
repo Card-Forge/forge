@@ -95,7 +95,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean flashBackAbility = false;
     private boolean aftermath = false;
     private boolean cycling = false;
-    private boolean delve = false;
     private boolean dash = false;
     private boolean evoke = false;
     private boolean offering = false;
@@ -970,13 +969,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     // is this a wrapping ability (used by trigger abilities)
     public boolean isWrapper() {
         return false;
-    }
-
-    public final boolean isDelve() {
-        return delve;
-    }
-    public final void setDelve(final boolean isDelve0) {
-        delve = isDelve0;
     }
 
     public final boolean isDash() {
