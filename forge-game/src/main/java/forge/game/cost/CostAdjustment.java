@@ -201,7 +201,7 @@ public class CostAdjustment {
         }
 
         if (sa.isSpell()) {
-            if (sa.isDelve()) {
+            if (sa.getHostCard().hasKeyword("Delve")) {
                 sa.getHostCard().clearDelved();
 
                 final CardCollection delved = new CardCollection();
@@ -214,7 +214,7 @@ public class CostAdjustment {
                         cardsToDelveOut.add(c);
                     } else if (!test) {
                         sa.getHostCard().addDelved(c);
-                        delved.add(game.getAction().exile(c, null));
+                        delved.add(game.getAction().exile(c, null, Maps.newHashMap()));
                     }
                 }
                 if (!delved.isEmpty()) {
@@ -520,6 +520,7 @@ public class CostAdjustment {
                 for (GameObject target : curSa.getTargets().getTargets()) {
                     if (target.isValid(params.get("ValidTarget").split(","), hostCard.getController(), hostCard, curSa)) {
                         targetValid = true;
+                        break outer;
                     }
                 }
                 curSa = curSa.getSubAbility();
