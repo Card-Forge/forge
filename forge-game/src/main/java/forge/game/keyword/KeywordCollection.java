@@ -1,20 +1,22 @@
 package forge.game.keyword;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.HashMap;
+
+import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Maps;
+import com.google.common.collect.MultimapBuilder;
 
 public class KeywordCollection implements Iterable<String>, Serializable {
     private static final long serialVersionUID = -2882986558147844702L;
 
     private transient KeywordCollectionView view;
-    private final EnumMap<Keyword, List<KeywordInstance<?>>> map = Maps.newEnumMap(Keyword.class);
+    private final Multimap<Keyword, KeywordInstance<?>> map = MultimapBuilder.enumKeys(Keyword.class)
+            .arrayListValues().build();
 
     public boolean contains(Keyword keyword) {
         return map.containsKey(keyword);
@@ -30,7 +32,7 @@ public class KeywordCollection implements Iterable<String>, Serializable {
 
     public int getAmount(Keyword keyword) {
         int amount = 0;
-        List<KeywordInstance<?>> instances = map.get(keyword);
+        Collection<KeywordInstance<?>> instances = map.get(keyword);
         if (instances != null) {
             for (KeywordInstance<?> inst : instances) {
                 amount += inst.getAmount();
@@ -39,24 +41,20 @@ public class KeywordCollection implements Iterable<String>, Serializable {
         return amount;
     }
 
-    public void add(String k) {
+    public boolean add(String k) {
         KeywordInstance<?> inst = Keyword.getInstance(k);
         Keyword keyword = inst.getKeyword();
-        List<KeywordInstance<?>> list = map.get(keyword);
-        if (list == null) {
-            list = new ArrayList<KeywordInstance<?>>();
-            list.add(inst);
-            map.put(keyword, list);
-            stringMap.put(k, inst.getAmount());
-        }
-        else if (!keyword.isMultipleRedundant) {
+        Collection<KeywordInstance<?>> list = map.get(keyword);
+        if (list.isEmpty() || !keyword.isMultipleRedundant) {
             list.add(inst);
             int amount = 0;
             for (KeywordInstance<?> i : list) {
                 amount += i.getAmount();
             }
             stringMap.put(k, amount);
+            return true;
         }
+        return false;
     }
 
     public void addAll(Iterable<String> keywords) {
@@ -65,10 +63,12 @@ public class KeywordCollection implements Iterable<String>, Serializable {
         }
     }
 
-    public void remove(String keyword) {
+    public boolean remove(String keyword) {
         int amount = getAmount(keyword);
+        boolean result = true;
         switch (amount) {
         case 0:
+            result = false;
             break;
         case 1:
             stringMap.remove(keyword);
@@ -76,6 +76,7 @@ public class KeywordCollection implements Iterable<String>, Serializable {
         default:
             stringMap.put(keyword, amount - 1);
         }
+        return result;
     }
 
     public void removeAll(Iterable<String> keywords) {
@@ -91,7 +92,7 @@ public class KeywordCollection implements Iterable<String>, Serializable {
 
     //Below is temporary code to mimic the current List<String>
     //TODO: Remove when keywords no longer implemented that way
-    private HashMap<String, Integer> stringMap = new HashMap<String, Integer>();
+    private Map<String, Integer> stringMap = Maps.newHashMap();
     public boolean contains(String keyword) {
         return stringMap.containsKey(keyword);
     }
