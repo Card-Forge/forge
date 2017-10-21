@@ -19,7 +19,6 @@ package forge.game.card;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.card.*;
 import forge.card.mana.ManaCost;
@@ -27,6 +26,7 @@ import forge.card.mana.ManaCostParser;
 import forge.game.ForgeScript;
 import forge.game.GameObject;
 import forge.game.card.CardView.CardStateView;
+import forge.game.keyword.KeywordCollection;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
@@ -35,7 +35,6 @@ import forge.game.trigger.Trigger;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 
-import java.util.List;
 import java.util.Map;
 
 public class CardState extends GameObject {
@@ -45,7 +44,8 @@ public class CardState extends GameObject {
     private byte color = MagicColor.COLORLESS;
     private int basePower = 0;
     private int baseToughness = 0;
-    private List<String> intrinsicKeywords = Lists.newArrayList();
+    private KeywordCollection intrinsicKeywords = new KeywordCollection();
+
     private final FCollection<SpellAbility> nonManaAbilities = new FCollection<SpellAbility>();
     private final FCollection<SpellAbility> manaAbilities = new FCollection<SpellAbility>();
     private FCollection<Trigger> triggers = new FCollection<Trigger>();
@@ -152,8 +152,9 @@ public class CardState extends GameObject {
     public final boolean hasIntrinsicKeyword(String k) {
         return intrinsicKeywords.contains(k);
     }
-    public final void setIntrinsicKeywords(final List<String> intrinsicKeyword0) {
-        intrinsicKeywords = intrinsicKeyword0;
+    public final void setIntrinsicKeywords(final Iterable<String> intrinsicKeyword0) {
+        intrinsicKeywords.clear();
+        intrinsicKeywords.addAll(intrinsicKeyword0);
     }
 
     public final boolean addIntrinsicKeyword(final String s) {
@@ -352,7 +353,7 @@ public class CardState extends GameObject {
         setColor(source.getColor());
         setBasePower(source.getBasePower());
         setBaseToughness(source.getBaseToughness());
-        intrinsicKeywords = Lists.newArrayList(source.intrinsicKeywords);
+        setIntrinsicKeywords(source.intrinsicKeywords);
         setImageKey(source.getImageKey());
         setRarity(source.rarity);
         setSetCode(source.setCode);
