@@ -32,7 +32,7 @@ public enum Keyword {
     CONVOKE(SimpleKeyword.class, true, "Your creatures can help cast this spell. Each creature you tap while playing this spell reduces its cost by {1} or by one mana of that creature's color."),
     CREW(KeywordWithAmount.class, true, "Tap any number of creatures you control with total power %1$d or more: This Vehicle becomes an artifact creature until end of turn."),
     CUMULATIVE_UPKEEP(KeywordWithCost.class, false, "At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it."),
-    CYCLING(Cycling.class, false, "%s, Discard this card: Draw a card."), //Typecycling reminder text handled by Cycling class
+    CYCLING(KeywordWithCost.class, false, "%s, Discard this card: Draw a card."), //Typecycling reminder text handled by Cycling class
     DASH(KeywordWithCost.class, true, "You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step."),
     DEATHTOUCH(SimpleKeyword.class, true, "Any amount of damage this deals to a creature is enough to destroy it."),
     DEFENDER(SimpleKeyword.class, true, "This creature can't attack."),
@@ -134,6 +134,7 @@ public enum Keyword {
     TRANSFIGURE(KeywordWithCost.class, false, "%s, Sacrifice this creature: Search your library for a creature card with the same converted mana cost as this creature and put that card onto the battlefield. Then shuffle your library. Transfigure only as a sorcery."),
     TRANSMUTE(KeywordWithCost.class, false, "%s, Discard this card: Search your library for a card with the same converted mana cost as this card, reveal it, and put it into your hand. Then shuffle your library. Transmute only as a sorcery."),
     TRIBUTE(KeywordWithAmount.class, false, "As this creature enters the battlefield, an opponent of your choice may put {%d:+1/+1 counter} on it."),
+    TYPECYCLING(KeywordWithCostAndType.class, false, "%s, Discard this card: Search your library for a %s card, reveal it, and put it into your hand. Then shuffle your library."),
     UNDAUNTED(SimpleKeyword.class, false, "This spell costs {1} less to cast for each opponent."),
     UNDYING(SimpleKeyword.class, true, "When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it."),
     UNEARTH(KeywordWithCost.class, false, "%s: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery."),
@@ -174,18 +175,7 @@ public enum Keyword {
             //check for special keywords that have a prefix before the keyword enum name
             int idx = k.indexOf(' ');
             String firstWord = idx == -1 ? enumName : enumName.substring(0, idx);
-            if (firstWord.endsWith("CYCLING")) {
-                //handle special case of Typecycling
-                idx = firstWord.length() + 1;
-                if (idx < k.length()) {
-                    details = k.substring(idx);
-                }
-                else {
-                    details = "";
-                }
-                return new Cycling(firstWord.substring(0, firstWord.length() - 7), details);
-            }
-            else if (firstWord.endsWith("WALK")) {
+            if (firstWord.endsWith("WALK")) {
                 keyword = Keyword.LANDWALK;
                 details = firstWord.substring(0, firstWord.length() - 4);
             }
@@ -209,7 +199,7 @@ public enum Keyword {
         catch (Exception e) {
             inst = new UndefinedKeyword();
         }
-        inst.initialize(keyword, details);
+        inst.initialize(k, keyword, details);
         return inst;
     }
 

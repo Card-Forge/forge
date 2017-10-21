@@ -7,7 +7,11 @@ import forge.util.Lang;
 
 public abstract class KeywordInstance<T extends KeywordInstance<?>> {
     private Keyword keyword;
+    private String original;
 
+    public String getOriginal() {
+        return original;
+    }
     public Keyword getKeyword() {
         return keyword;
     }
@@ -25,7 +29,8 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> {
     public int getAmount() {
         return 1;
     }
-    protected void initialize(Keyword keyword0, String details) {
+    protected void initialize(String original0, Keyword keyword0, String details) {
+        original = original0;
         keyword = keyword0;
         parse(details);
     }

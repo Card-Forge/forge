@@ -4,11 +4,8 @@ import java.io.Serializable;
 
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Maps;
 import com.google.common.collect.MultimapBuilder;
 
 public class KeywordCollection implements Iterable<String>, Serializable {
@@ -23,20 +20,17 @@ public class KeywordCollection implements Iterable<String>, Serializable {
     }
 
     public boolean isEmpty() {
-        return stringMap.isEmpty(); //TODO: Replace with map when stringMap goes away
+        return map.isEmpty();
     }
 
     public int size() {
-        return stringMap.size(); //TODO: Replace with map when stringMap goes away
+        return map.values().size();
     }
 
     public int getAmount(Keyword keyword) {
         int amount = 0;
-        Collection<KeywordInstance<?>> instances = map.get(keyword);
-        if (instances != null) {
-            for (KeywordInstance<?> inst : instances) {
-                amount += inst.getAmount();
-            }
+        for (KeywordInstance<?> inst : map.get(keyword)) {
+            amount += inst.getAmount();
         }
         return amount;
     }
@@ -47,11 +41,6 @@ public class KeywordCollection implements Iterable<String>, Serializable {
         Collection<KeywordInstance<?>> list = map.get(keyword);
         if (list.isEmpty() || !keyword.isMultipleRedundant) {
             list.add(inst);
-            int amount = 0;
-            for (KeywordInstance<?> i : list) {
-                amount += i.getAmount();
-            }
-            stringMap.put(k, amount);
             return true;
         }
         return false;
@@ -64,18 +53,17 @@ public class KeywordCollection implements Iterable<String>, Serializable {
     }
 
     public boolean remove(String keyword) {
-        int amount = getAmount(keyword);
-        boolean result = true;
-        switch (amount) {
-        case 0:
-            result = false;
-            break;
-        case 1:
-            stringMap.remove(keyword);
-            break;
-        default:
-            stringMap.put(keyword, amount - 1);
+        Iterator<KeywordInstance<?>> it = map.values().iterator();
+        
+        boolean result = false;
+        while (it.hasNext()) {
+            KeywordInstance<?> k = it.next();
+            if (keyword.equals(k.getOriginal())) {
+                it.remove();
+                result = true;
+            }
         }
+        
         return result;
     }
 
@@ -87,43 +75,42 @@ public class KeywordCollection implements Iterable<String>, Serializable {
 
     public void clear() {
         map.clear();
-        stringMap.clear();
     }
 
-    //Below is temporary code to mimic the current List<String>
-    //TODO: Remove when keywords no longer implemented that way
-    private Map<String, Integer> stringMap = Maps.newHashMap();
     public boolean contains(String keyword) {
-        return stringMap.containsKey(keyword);
+        for (KeywordInstance<?> inst : map.values()) {
+            if (keyword.equals(inst.getOriginal())) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public int getAmount(String keyword) {
-        Integer amount = stringMap.get(keyword);
-        return amount == null ? 0 : amount.intValue();
+    public int getAmount(String k) {
+        int amount = 0;
+        for (KeywordInstance<?> inst : map.values()) {
+            if (k.equals(inst.getOriginal())) {
+                amount++;
+            }
+        }
+        return amount;
     }
 
     @Override
     public Iterator<String> iterator() {
         return new Iterator<String>() {
-            private final Iterator<Entry<String, Integer>> iterator = stringMap.entrySet().iterator();
-            private String entryKey;
-            private int entryRemainder = 0;
+            private final Iterator<KeywordInstance<?>> iterator = map.values().iterator();
+            
 
             @Override
             public boolean hasNext() {
-                return entryRemainder > 0 || iterator.hasNext();
+                return iterator.hasNext();
             }
 
             @Override
             public String next() {
-                if (entryRemainder > 0) {
-                    entryRemainder--;
-                    return entryKey;
-                }
-                Entry<String, Integer> entry = iterator.next();
-                entryKey = entry.getKey();
-                entryRemainder = entry.getValue() - 1;
-                return entryKey;
+                KeywordInstance<?> entry = iterator.next();
+                return entry.getOriginal();
             }
 
             @Override
@@ -155,8 +142,7 @@ public class KeywordCollection implements Iterable<String>, Serializable {
         }
 
         public int getAmount(String keyword) {
-            Integer amount = stringMap.get(keyword);
-            return amount == null ? 0 : amount.intValue();
+            return KeywordCollection.this.getAmount(keyword);
         }
 
         public boolean contains(Keyword keyword) {
