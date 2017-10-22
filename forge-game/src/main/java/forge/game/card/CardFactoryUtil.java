@@ -38,7 +38,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
-import forge.game.keyword.KeywordsChange;
+import forge.game.keyword.KeywordInterface;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -1949,10 +1949,8 @@ public class CardFactoryUtil {
         // -1 means keyword "Cycling" not found
 
         for (String keyword : card.getKeywords()) {
-            addSpellAbility(keyword, card, null);
-            addTriggerAbility(keyword, card, null); 
-            addStaticAbility(keyword, card, null);
-            addReplacementEffect(keyword, card, null);
+            KeywordInterface inst = Keyword.getInstance(keyword);
+            inst.addKeywords(card, true);
         }
 
         // AddCost
@@ -2054,28 +2052,25 @@ public class CardFactoryUtil {
         return card.addReplacementEffect(re);
     }
     
-    public static void addTriggerAbility(final String keyword, final Card card, final KeywordsChange kws) {
-        final boolean intrinsic = kws == null;
+    public static void addTriggerAbility(final KeywordInterface inst, final Card card, final boolean intrinsic) {
+        String keyword = inst.getOriginal();
 
         if (keyword.startsWith("Afflict")) {
             final String[] k = keyword.split(" ");
             final String n = k[1];
 
             final String trigStr = "Mode$ AttackerBlocked | ValidCard$ Card.Self | TriggerZones$ Battlefield " +
-                    " | ValidBlocker$ Creature | Execute$ AfflictLoseLife | Secondary$ True " +
+                    " | ValidBlocker$ Creature | Secondary$ True " +
                     " | TriggerDescription$ Afflict " + n + " (" + Keyword.getInstance(keyword).getReminderText() + ")";
 
             final String abStringAfflict = "DB$ Loselife | Defined$ TriggeredDefendingPlayer" +
                     " | LifeAmount$ " + n;
 
             final Trigger afflictTrigger = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
+            afflictTrigger.setOverridingAbility(AbilityFactory.getAbility(abStringAfflict, card));
             final Trigger cardTrigger = card.addTrigger(afflictTrigger);
 
-            card.setSVar("AfflictLoseLife", abStringAfflict);
-
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.startsWith("Annihilator")) {
             final String[] k = keyword.split(":");
             final String n = k[1];
@@ -2084,15 +2079,13 @@ public class CardFactoryUtil {
                             + "TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ "
                             + "Annihilator " + n + " (" + Keyword.getInstance(keyword).getReminderText() + ")";
 
-            final String effect = "AB$ Sacrifice | Cost$ 0 | Defined$ DefendingPlayer | SacValid$ Permanent | Amount$ " + k[1];
+            final String effect = "DB$ Sacrifice | Defined$ DefendingPlayer | SacValid$ Permanent | Amount$ " + k[1];
             
             final Trigger trigger = TriggerHandler.parseTrigger(trig, card, intrinsic);
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
             final Trigger cardTrigger = card.addTrigger(trigger);
 
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.startsWith("Bushido")) {
             final String[] k = keyword.split(" ", 2);
             final String n = k[1];
@@ -2118,10 +2111,9 @@ public class CardFactoryUtil {
             final Trigger cardTrigger1 = card.addTrigger(bushidoTrigger1);
             final Trigger cardTrigger2 = card.addTrigger(bushidoTrigger2);
 
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger1);
-                kws.addTrigger(cardTrigger2);
-            }
+            
+            inst.addTrigger(cardTrigger1);
+            inst.addTrigger(cardTrigger2);
         } else if (keyword.equals("Cascade")) {
             final StringBuilder trigScript = new StringBuilder(
                     "Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCascade | Secondary$ " +
@@ -2155,9 +2147,8 @@ public class CardFactoryUtil {
             cascadeTrigger.setOverridingAbility(dig);
 
             final Trigger cardTrigger = card.addTrigger(cascadeTrigger);
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+
+            inst.addTrigger(cardTrigger);
         } else if (keyword.startsWith("Champion")){
 
             final String[] k = keyword.split(":");
@@ -2215,10 +2206,8 @@ public class CardFactoryUtil {
             final Trigger cardTrigger1 = card.addTrigger(parsedTrigger);
             final Trigger cardTrigger2 = card.addTrigger(parsedTrigReturn);
 
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger1);
-                kws.addTrigger(cardTrigger2);
-            }
+            inst.addTrigger(cardTrigger1);
+            inst.addTrigger(cardTrigger2);
         } else if (keyword.equals("Conspire")) {
             final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | Conspire$ True | Execute$ TrigConspire | Secondary$ True | TriggerDescription$ Copy CARDNAME if its conspire cost was paid";
             final String abString = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ 1";
@@ -2227,9 +2216,7 @@ public class CardFactoryUtil {
             final Trigger conspireTrigger = TriggerHandler.parseTrigger(trigScript, card, intrinsic);
 
             final Trigger cardTrigger = card.addTrigger(conspireTrigger);
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.startsWith("Cumulative upkeep")) {
             final String[] k = keyword.split(":");
             final Cost cost = new Cost(k[1], false);
@@ -2249,9 +2236,7 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
             final Trigger cardTrigger = card.addTrigger(trigger);
 
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.equals("Dethrone")) {
             final StringBuilder trigScript = new StringBuilder(
                     "Mode$ Attacks | ValidCard$ Card.Self | Attacked$ Player.withMostLife | Secondary$ True | "
@@ -2265,9 +2250,7 @@ public class CardFactoryUtil {
 
 
             final Trigger cardTrigger = card.addTrigger(dethroneTrigger);
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.startsWith("Echo")) {
             final String[] k = keyword.split(":");
             final String cost = k[1];
@@ -2284,9 +2267,7 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
             final Trigger cardTrigger = card.addTrigger(trigger);
 
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.startsWith("Evoke")) {
             final StringBuilder trigStr = new StringBuilder(
                     "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Secondary$ True | TriggerDescription$ "
@@ -2297,9 +2278,7 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
             final Trigger cardTrigger = card.addTrigger(trigger);
 
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.equals("Evolve")) {
             final String trigStr = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
                     + " ValidCard$ Creature.YouCtrl+Other | EvolveCondition$ True | "
@@ -2312,9 +2291,7 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
             final Trigger cardTrigger = card.addTrigger(trigger);
 
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.equals("Exalted")) {
             final String trig = "Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | "
                     + "Execute$ ExaltedPump | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ "
@@ -2324,9 +2301,8 @@ public class CardFactoryUtil {
             final Trigger trigger = TriggerHandler.parseTrigger(trig, card, intrinsic);
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
             final Trigger cardTrigger = card.addTrigger(trigger);
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+
+            inst.addTrigger(cardTrigger);
         } else if (keyword.equals("Exploit")) {
             final String trigStr = "Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Secondary$ True"
                     + " | TriggerDescription$ Exploit (" + Keyword.getInstance(keyword).getReminderText() + ")";
@@ -2337,9 +2313,7 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
             final Trigger cardTrigger = card.addTrigger(trigger);
 
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.equals("Extort")) {
             final String extortTrigger = "Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | "
                     + "TriggerZones$ Battlefield | Execute$ ExtortOpps | Secondary$ True"
@@ -2352,9 +2326,7 @@ public class CardFactoryUtil {
             card.setSVar("ExtortOpps", abString);
             card.setSVar("ExtortGainLife", dbString);
             card.setSVar("AFLifeLost", "Number$0");
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.startsWith("Fabricate")) {
             final String[] k = keyword.split(":");
             final String n = k[1];
@@ -2381,9 +2353,7 @@ public class CardFactoryUtil {
             card.setSVar("DB" + name + "Token", token);
             card.setSVar("DB" + name + "Token2", token + " | ConditionPresent$ Card.StrictlySelf | ConditionCompare$ EQ0");
 
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.startsWith("Fading")) {
             String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield " +
                     " | Execute$ TrigUpkeepFading | Secondary$ True | TriggerDescription$ At the beginning of " +
@@ -2398,9 +2368,7 @@ public class CardFactoryUtil {
             final Trigger trigger = TriggerHandler.parseTrigger(upkeepTrig, card, intrinsic);
             final Trigger cardTrigger = card.addTrigger(trigger);
             
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.equals("Flanking")) {
             final StringBuilder trigFlanking = new StringBuilder(
                     "Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature.withoutFlanking " +
@@ -2413,9 +2381,7 @@ public class CardFactoryUtil {
             final Trigger cardTrigger = card.addTrigger(flankingTrigger);
 
             card.setSVar("FlankingPump", abStringFlanking);
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.startsWith("Graft")) {
             final String abStr = "DB$ MoveCounter | Source$ Self | "
                     + "Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 1";
@@ -2434,7 +2400,7 @@ public class CardFactoryUtil {
             final Trigger cardTrigger = card.addTrigger(trigger);
 
             if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
+                inst.addTrigger(cardTrigger);
             }
         } else if (keyword.startsWith("Haunt")) {
             final String[] k = keyword.split(":");
@@ -2525,10 +2491,8 @@ public class CardFactoryUtil {
 
             cardTriggers.add(card.addTrigger(hauntedDies));
 
-            if (!intrinsic) {
-                for (final Trigger cardTrigger : cardTriggers) {
-                    kws.addTrigger(cardTrigger);
-                }
+            for (final Trigger cardTrigger : cardTriggers) {
+                inst.addTrigger(cardTrigger);
             }
         } else if (keyword.equals("Hideaway")) {
             List<Trigger> cardTriggers = Lists.newArrayList();
@@ -2551,10 +2515,8 @@ public class CardFactoryUtil {
             card.setSVar("DBHideawayRemember", "DB$ Animate | Defined$ Imprinted | RememberObjects$ Remembered | Permanent$ True");
             card.setSVar("DBHideawayCleanup", "DB$ Cleanup | ClearRemembered$ True");
             
-            if (!intrinsic) {
-                for (final Trigger cardTrigger : cardTriggers) {
-                    kws.addTrigger(cardTrigger);
-                }
+            for (final Trigger cardTrigger : cardTriggers) {
+                inst.addTrigger(cardTrigger);
             }
         } else if (keyword.equals("Ingest")) {
             final String trigStr = "Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True"
@@ -2569,9 +2531,7 @@ public class CardFactoryUtil {
 
             final Trigger cardTrigger = card.addTrigger(trigger);
 
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.equals("Living Weapon")) {
             final StringBuilder sbTrig = new StringBuilder();
             sbTrig.append("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ");
@@ -2598,10 +2558,8 @@ public class CardFactoryUtil {
 
             final Trigger cardTrigger = card.addTrigger(etbTrigger);
 
-            if (!intrinsic) {
-                saGerm.setIntrinsic(false);
-                kws.addTrigger(cardTrigger);
-            }
+            saGerm.setIntrinsic(intrinsic);
+            inst.addTrigger(cardTrigger);
         } else if (keyword.startsWith("Madness")) {
             // Set Madness Triggers
             final String[] k = keyword.split(":");
@@ -2626,9 +2584,7 @@ public class CardFactoryUtil {
             card.setSVar(trigPlay, playMadness);
             card.setSVar("DBWasNotPlayMadness", moveToYard);
             card.setSVar("DBMadnessCleanup", cleanUp);
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.equals("Melee")) {
             final String trigStr = "Mode$ Attacks | ValidCard$ Card.Self | Execute$ MeleePump | Secondary$ True " +
                     " | TriggerDescription$ Melee (" + Keyword.getInstance(keyword).getReminderText() + ")";
@@ -2638,9 +2594,7 @@ public class CardFactoryUtil {
             card.setSVar("MeleeX", "TriggeredPlayersDefenders$Amount");
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
             final Trigger cardTrigger = card.addTrigger(trigger);
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.startsWith("Miracle")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
@@ -2685,10 +2639,8 @@ public class CardFactoryUtil {
 
             final Trigger cardTriggerDrawn = card.addTrigger(triggerDrawn);
             final Trigger cardTriggerRevealed = card.addTrigger(triggerRevealed);
-            if (!intrinsic) {
-                kws.addTrigger(cardTriggerDrawn);
-                kws.addTrigger(cardTriggerRevealed);
-            }
+            inst.addTrigger(cardTriggerDrawn);
+            inst.addTrigger(cardTriggerRevealed);
         } else if (keyword.startsWith("Modular")) {
             final String abStr = "AB$ PutCounter | Cost$ 0 | ValidTgts$ Artifact.Creature | " +
                     "TgtPrompt$ Select target artifact creature | CounterType$ P1P1 | CounterNum$ ModularX";
@@ -2707,9 +2659,7 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(ab);
             
             final Trigger cardTrigger = card.addTrigger(trigger);
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.equals("Myriad")) {
             final String actualTrigger = "Mode$ Attacks | ValidCard$ Card.Self | Execute$ "
                     + "MyriadAbility | Secondary$ True | TriggerDescription$ Myriad ("
@@ -2734,9 +2684,7 @@ public class CardFactoryUtil {
             card.setSVar("MyriadCleanup", dbString4);
             
             final Trigger cardTrigger = card.addTrigger(parsedTrigger);
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.equals("Persist")) {
             final String trigStr = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OncePerEffect$ True " +
                     " | Execute$ PersistReturn | ValidCard$ Card.Self+counters_EQ0_M1M1 | Secondary$ True" + 
@@ -2747,9 +2695,7 @@ public class CardFactoryUtil {
             final Trigger cardTrigger = card.addTrigger(persistTrigger);
 
             card.setSVar("PersistReturn", effect);
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.startsWith("Poisonous")) {
             final String[] k = keyword.split(" ");
             final String n = k[1];
@@ -2761,9 +2707,7 @@ public class CardFactoryUtil {
             final String effect = "AB$ Poison | Cost$ 0 | Defined$ TriggeredTarget | Num$ " + n;
             parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
             final Trigger cardTrigger = card.addTrigger(parsedTrigger);
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.startsWith("Presence")) {
             final String[] k = keyword.split(":");
             card.addIntrinsicKeyword("Kicker:Reveal<1/" + k[1] + ">:Generic");
@@ -2781,9 +2725,7 @@ public class CardFactoryUtil {
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, intrinsic);
 
             final Trigger cardTrigger = card.addTrigger(parsedTrigger);
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.equals("Prowess")) {
             final String trigProwess = "Mode$ SpellCast | ValidCard$ Card.nonCreature" 
                     + " | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | TriggerDescription$ "
@@ -2795,9 +2737,7 @@ public class CardFactoryUtil {
             parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
 
             final Trigger cardTrigger = card.addTrigger(parsedTrigger);
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
 
             if (!card.hasSVar("BuffedBy")) {
                 card.setSVar("BuffedBy", "Card.nonCreature+nonLand"); // for the AI
@@ -2820,9 +2760,7 @@ public class CardFactoryUtil {
             card.setSVar("Rampage" + n, "SVar$RampageCount/Times." + n);
 
             card.setSVar("RampageCount", "TriggerCount$NumBlockers/Minus.1");
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.startsWith("Renown")) {
             final String[] k = keyword.split(":");
 
@@ -2837,9 +2775,7 @@ public class CardFactoryUtil {
             parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
             final Trigger cardTrigger = card.addTrigger(parsedTrigger);
 
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.equals("Soulbond")) {
             // Setup ETB trigger for card with Soulbond keyword
             final String actualTriggerSelf = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
@@ -2863,10 +2799,8 @@ public class CardFactoryUtil {
             parsedTriggerOther.setOverridingAbility(AbilityFactory.getAbility(abStringOther, card));
             final Trigger cardTriggerOther = card.addTrigger(parsedTriggerOther);
 
-            if (!intrinsic) {
-                kws.addTrigger(cardTriggerSelf);
-                kws.addTrigger(cardTriggerOther);
-            }
+            inst.addTrigger(cardTriggerSelf);
+            inst.addTrigger(cardTriggerOther);
         } else if (keyword.startsWith("Soulshift")) {
             final String[] k = keyword.split(":");
 
@@ -2886,9 +2820,7 @@ public class CardFactoryUtil {
             parsedTrigger.setOverridingAbility(sp);
             final Trigger cardTrigger = card.addTrigger(parsedTrigger);
 
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.startsWith("Suspend")) {
             //upkeep trigger
             StringBuilder upkeepTrig = new StringBuilder();;
@@ -2917,10 +2849,8 @@ public class CardFactoryUtil {
             parsedPlayTrigger.setOverridingAbility(AbilityFactory.getAbility(abPlay, card));
             final Trigger cardTriggerPlay = card.addTrigger(parsedPlayTrigger);
 
-            if (!intrinsic) {
-                kws.addTrigger(cardTriggerUpkeep);
-                kws.addTrigger(cardTriggerPlay);
-            }
+            inst.addTrigger(cardTriggerUpkeep);
+            inst.addTrigger(cardTriggerPlay);
         } else if (keyword.startsWith("Tribute")) {
             // use hardcoded ability name
             final String abStr = "TrigNotTribute";
@@ -2933,10 +2863,7 @@ public class CardFactoryUtil {
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
             final Trigger cardTrigger = card.addTrigger(parsedTrigger);
 
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
-
+            inst.addTrigger(cardTrigger);
         } else if (keyword.equals("Undying")) {
             final String trigStr = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OncePerEffect$ True " +
                     " | Execute$ UndyingReturn | ValidCard$ Card.Self+counters_EQ0_P1P1 | TriggerZones$ Battlefield | Secondary$ True" + 
@@ -2947,9 +2874,7 @@ public class CardFactoryUtil {
             parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
             final Trigger cardTrigger = card.addTrigger(parsedTrigger);
 
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.startsWith("UpkeepCost")) {
             final String[] k = keyword.split(":");
             final Cost cost = new Cost(k[1], true);
@@ -2977,9 +2902,7 @@ public class CardFactoryUtil {
             parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
             final Trigger cardTrigger = card.addTrigger(parsedTrigger);
 
-            if (!intrinsic) {
-                kws.addTrigger(cardTrigger);
-            }
+            inst.addTrigger(cardTrigger);
         } else if (keyword.startsWith("Vanishing")) {
             // Remove Time counter trigger
             final StringBuilder upkeepTrig = new StringBuilder("Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | " +
@@ -3009,16 +2932,14 @@ public class CardFactoryUtil {
             parsedSacTrigger.setOverridingAbility(AbilityFactory.getAbility(sac, card));
             final Trigger cardSacTrig = card.addTrigger(parsedSacTrigger);
 
-            if (!intrinsic) {
-                kws.addTrigger(cardUpkeepTrig);
-                kws.addTrigger(cardSacTrig);
-            }
+            inst.addTrigger(cardUpkeepTrig);
+            inst.addTrigger(cardSacTrig);
         }
     }
 
-    public static void addReplacementEffect(final String keyword, final Card card, final KeywordsChange kws) {
+    public static void addReplacementEffect(final KeywordInterface inst, final Card card, final boolean intrinsic) {
 
-        final boolean intrinsic = kws == null;
+        String keyword = inst.getOriginal();
         if (keyword.equals("Aftermath")) {
             StringBuilder sb = new StringBuilder();
             sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
@@ -3034,9 +2955,7 @@ public class CardFactoryUtil {
 
             SpellAbility saExile = AbilityFactory.getAbility(abExile, card);
 
-            if (!intrinsic) {
-                saExile.setIntrinsic(false);
-            }
+            saExile.setIntrinsic(intrinsic);
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
             re.setLayer(ReplacementLayer.Other);
@@ -3045,11 +2964,8 @@ public class CardFactoryUtil {
 
             // Aftermath only on Rightsplit
             // doesn't make a copy with it
-            card.addReplacementEffect(re);
-
-            if (!intrinsic) {
-                kws.addReplacement(re);
-            }
+            ReplacementEffect cardre = card.addReplacementEffect(re);
+            inst.addReplacement(cardre);
         } else if (keyword.startsWith("Amplify")) {
             final String[] ampString = keyword.split(":");
             final String amplifyMagnitude = ampString[1];
@@ -3089,9 +3005,7 @@ public class CardFactoryUtil {
 
             saReveal.setSubAbility(saPut);
 
-            if (!intrinsic) {
-                saReveal.setIntrinsic(false);
-            }
+            saReveal.setIntrinsic(intrinsic);
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(actualRep, card, intrinsic);
 
@@ -3100,9 +3014,7 @@ public class CardFactoryUtil {
             re.setOverridingAbility(saReveal);
             ReplacementEffect cardre = card.addReplacementEffect(re);
 
-            if (!intrinsic) {
-                kws.addReplacement(cardre);
-            }
+            inst.addReplacement(cardre);
         } else if (keyword.startsWith("Bloodthirst")) {
             final String numCounters = keyword.split(":")[1];
 
@@ -3119,9 +3031,7 @@ public class CardFactoryUtil {
 
             final ReplacementEffect re = makeEtbCounter(etbCounter, card, intrinsic);
 
-            if (!intrinsic) {
-                kws.addReplacement(re);
-            }
+            inst.addReplacement(re);
         } else if (keyword.startsWith("Buyback")) {
             final Cost cost = new Cost(keyword.substring(8), false);
 
@@ -3147,9 +3057,7 @@ public class CardFactoryUtil {
 
             SpellAbility saReturn = AbilityFactory.getAbility(abReturn, card);
 
-            if (!intrinsic) {
-                saReturn.setIntrinsic(false);
-            }
+                saReturn.setIntrinsic(intrinsic);
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
             re.setLayer(ReplacementLayer.Other);
@@ -3158,9 +3066,7 @@ public class CardFactoryUtil {
 
             ReplacementEffect cardre = card.addReplacementEffect(re);
 
-            if (!intrinsic) {
-                kws.addReplacement(cardre);
-            }
+            inst.addReplacement(cardre);
         } else if (keyword.startsWith("Dredge")) {
             final String dredgeAmount = keyword.split(" ")[1];
 
@@ -3189,9 +3095,7 @@ public class CardFactoryUtil {
 
             ReplacementEffect cardre = card.addReplacementEffect(re);
 
-            if (!intrinsic) {
-                kws.addReplacement(cardre);
-            }
+            inst.addReplacement(cardre);
         } else if (keyword.startsWith("Devour")) {
 
             final String[] k = keyword.split(":");
@@ -3221,9 +3125,7 @@ public class CardFactoryUtil {
             re.setLayer(ReplacementLayer.Other);
             ReplacementEffect cardre = card.addReplacementEffect(re);
 
-            if (!intrinsic) {
-                kws.addReplacement(cardre);
-            }
+            inst.addReplacement(cardre);
         } else if (keyword.startsWith("Fading")) {
             final String[] k = keyword.split(":");
             final String m = k[1];
@@ -3236,9 +3138,7 @@ public class CardFactoryUtil {
 
             final ReplacementEffect re = makeEtbCounter(sb.toString(), card, intrinsic);
 
-            if (!intrinsic) {
-                kws.addReplacement(re);
-            }
+            inst.addReplacement(re);
         } else if (keyword.startsWith("Flashback")) {
             StringBuilder sb = new StringBuilder();
             sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
@@ -3276,9 +3176,7 @@ public class CardFactoryUtil {
 
             ReplacementEffect cardre = card.addReplacementEffect(re);
 
-            if (!intrinsic) {
-                kws.addReplacement(cardre);
-            }
+            inst.addReplacement(cardre);
         } else if (keyword.startsWith("Graft")) {
             final String[] k = keyword.split(":");
             final String m = k[1];
@@ -3291,9 +3189,7 @@ public class CardFactoryUtil {
 
             final ReplacementEffect re = makeEtbCounter(sb.toString(), card, intrinsic);
 
-            if (!intrinsic) {
-                kws.addReplacement(re);
-            }
+            inst.addReplacement(re);
         } else if (keyword.startsWith("Madness")) {
             // Set Madness Replacement effects
             String repeffstr = "Event$ Discard | ActiveZones$ Hand | ValidCard$ Card.Self | " +
@@ -3305,9 +3201,7 @@ public class CardFactoryUtil {
                     " | Mode$ Defined | DefinedCards$ ReplacedCard | Madness$ True";
             card.setSVar("DiscardMadness", sVarMadness);
 
-            if (!intrinsic) {
-                kws.addReplacement(cardre);
-            }
+            inst.addReplacement(cardre);
         } else if (keyword.startsWith("Modular")) {
             final String[] k = keyword.split(":");
             final String m = k[1];
@@ -3327,9 +3221,7 @@ public class CardFactoryUtil {
 
             final ReplacementEffect re = makeEtbCounter(sb.toString(), card, intrinsic);
 
-            if (!intrinsic) {
-                kws.addReplacement(re);
-            }
+            inst.addReplacement(re);
         } else if (keyword.equals("Rebound")) {
             String repeffstr = "Event$ Moved | ValidCard$ Card.Self+wasCastFromHand+YouOwn+YouCtrl "
             + " | Origin$ Stack | Destination$ Graveyard | Fizzle$ False "
@@ -3363,17 +3255,13 @@ public class CardFactoryUtil {
 
             ReplacementEffect cardre = card.addReplacementEffect(re);
 
-            if (!intrinsic) {
-                kws.addReplacement(cardre);
-            }
+            inst.addReplacement(cardre);
         } else if (keyword.equals("Unleash")) {
             String effect = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Unleash (" + Keyword.getInstance(keyword).getReminderText() + ")";
 
             ReplacementEffect cardre = createETBReplacement(card, ReplacementLayer.Other, effect, true, true, intrinsic, "Card.Self", "");
 
-            if (!intrinsic) {
-                kws.addReplacement(cardre);
-            }
+            inst.addReplacement(cardre);
         } else if (keyword.startsWith("Tribute")) {
             final String[] k = keyword.split(":");
             final String tributeAmount = k[1];
@@ -3385,9 +3273,7 @@ public class CardFactoryUtil {
 
             ReplacementEffect cardre = createETBReplacement(card, ReplacementLayer.Other, effect, false, true, intrinsic, "Card.Self", "");
 
-            if (!intrinsic) {
-                kws.addReplacement(cardre);
-            }
+            inst.addReplacement(cardre);
         } else if (keyword.startsWith("Vanishing") && keyword.contains(":")) {
             // Vanishing could be added to a card, but this Effect should only be done when it has amount
             final String[] k = keyword.split(":");
@@ -3401,9 +3287,7 @@ public class CardFactoryUtil {
 
             final ReplacementEffect re = makeEtbCounter(sb.toString(), card, intrinsic);
 
-            if (!intrinsic) {
-                kws.addReplacement(re);
-            }
+            inst.addReplacement(re);
         }
         
         // extra part for the Damage Prevention keywords
@@ -3437,18 +3321,14 @@ public class CardFactoryUtil {
                 ReplacementEffect re = ReplacementHandler.parseReplacement(fromRep, card, intrinsic);
                 ReplacementEffect cardre = card.addReplacementEffect(re);
 
-                if (!intrinsic) {
-                    kws.addReplacement(cardre);
-                }
+                inst.addReplacement(cardre);
             }
             if (to) {
                 String toRep = rep + " | ValidTarget$ Card.Self";
                 ReplacementEffect re = ReplacementHandler.parseReplacement(toRep, card, intrinsic);
                 ReplacementEffect cardre = card.addReplacementEffect(re);
 
-                if (!intrinsic) {
-                    kws.addReplacement(cardre);
-                }
+                inst.addReplacement(cardre);
             }
         }
         
@@ -3469,9 +3349,7 @@ public class CardFactoryUtil {
             re.setOverridingAbility(sa);
             ReplacementEffect cardre = card.addReplacementEffect(re);
             
-            if (!intrinsic) {
-                kws.addReplacement(cardre);
-            }
+            inst.addReplacement(cardre);
         }
         
         if (keyword.equals("CARDNAME enters the battlefield tapped.") || keyword.equals("Hideway")) {
@@ -3510,14 +3388,12 @@ public class CardFactoryUtil {
             ReplacementEffect re = ReplacementHandler.parseReplacement(rep, card, intrinsic);
             ReplacementEffect cardre = card.addReplacementEffect(re);
 
-            if (!intrinsic) {
-                kws.addReplacement(cardre);
-            }
+            inst.addReplacement(cardre);
         }
     }
 
-    public static void addSpellAbility(final String keyword, final Card card, final KeywordsChange kws) {
-        final boolean intrinsic = kws == null;
+    public static void addSpellAbility(final KeywordInterface inst, final Card card, final boolean intrinsic) {
+        String keyword = inst.getOriginal();
         if (keyword.startsWith("Alternative Cost") && !card.isLand()) {
             final String[] kw = keyword.split(":");
             String costStr = kw[1];
@@ -3533,10 +3409,8 @@ public class CardFactoryUtil {
                 newSA.setDescription(sa.getDescription() + " (by paying " + cost.toSimpleString() + " instead of its mana cost)");
                 newSA.setIntrinsic(intrinsic);
 
-                if (!intrinsic) {
-                    newSA.setTemporary(true);
-                    kws.addSpellAbility(newSA);
-                }
+                newSA.setTemporary(intrinsic);
+                inst.addSpellAbility(newSA);
                 card.addSpellAbility(newSA);
             }
         } else if (keyword.equals("Aftermath")) {
@@ -3571,11 +3445,8 @@ public class CardFactoryUtil {
             awakenSpell.setPayCosts(awakenCost);
             awakenSpell.setIntrinsic(intrinsic);
 
-            if (!intrinsic) {
-                awakenSpell.setTemporary(true);
-                //sa.setOriginalHost(hostCard);
-                kws.addSpellAbility(awakenSpell);
-            }
+            awakenSpell.setTemporary(!intrinsic);
+            inst.addSpellAbility(awakenSpell);
             card.addSpellAbility(awakenSpell);
         } else if (keyword.startsWith("Bestow")) {
             final String[] params = keyword.split(":");
@@ -3594,11 +3465,8 @@ public class CardFactoryUtil {
             sa.setBasicSpell(false);
             sa.setIntrinsic(intrinsic);
 
-            if (!intrinsic) {
-                sa.setTemporary(true);
-                //sa.setOriginalHost(hostCard);
-                kws.addSpellAbility(sa);
-            }
+            sa.setTemporary(!intrinsic);
+            inst.addSpellAbility(sa);
             card.addSpellAbility(sa);
         } else if (keyword.startsWith("Dash")) {
             final String[] k = keyword.split(":");
@@ -3621,10 +3489,8 @@ public class CardFactoryUtil {
             newSA.setDash(true);
             newSA.setIntrinsic(intrinsic);
 
-            if (!intrinsic) {
-                newSA.setTemporary(true);
-                kws.addSpellAbility(newSA);
-            }
+            newSA.setTemporary(!intrinsic);
+            inst.addSpellAbility(newSA);
             card.addSpellAbility(newSA);
 
         } else if (keyword.startsWith("Emerge")) {
@@ -3642,10 +3508,8 @@ public class CardFactoryUtil {
             newSA.setDescription(sa.getDescription() + " (Emerge)");
             newSA.setIntrinsic(intrinsic);
 
-            if (!intrinsic) {
-                newSA.setTemporary(true);
-                kws.addSpellAbility(newSA);
-            }
+            newSA.setTemporary(!intrinsic);
+            inst.addSpellAbility(newSA);
             card.addSpellAbility(newSA);
         } else if (keyword.startsWith("Embalm")) {
             final String[] kw = keyword.split(":");
@@ -3659,11 +3523,8 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
 
-            if (!intrinsic) {
-                sa.setTemporary(true);
-                //sa.setOriginalHost(hostCard);
-                kws.addSpellAbility(sa);
-            }
+            sa.setTemporary(!intrinsic);
+            inst.addSpellAbility(sa);
             card.addSpellAbility(sa);
         } else if (keyword.equals("Epic")) {
             // Epic does modify existing SA, and does not add new one
@@ -3714,11 +3575,8 @@ public class CardFactoryUtil {
             // instantiate attach ability
             final SpellAbility newSA = AbilityFactory.getAbility(abilityStr.toString(), card);
             newSA.setIntrinsic(intrinsic);
-            if (!intrinsic) {
-                newSA.setTemporary(true);
-                // sa.setOriginalHost(hostCard);
-                kws.addSpellAbility(newSA);
-            }
+            newSA.setTemporary(!intrinsic);
+            inst.addSpellAbility(newSA);
             card.addSpellAbility(newSA);
         } else if (keyword.startsWith("Eternalize")) {
             final String[] kw = keyword.split(":");
@@ -3749,11 +3607,8 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
             sa.setIntrinsic(intrinsic);
 
-            if (!intrinsic) {
-                sa.setTemporary(true);
-                //sa.setOriginalHost(hostCard);
-                kws.addSpellAbility(sa);
-            }
+            sa.setTemporary(!intrinsic);
+            inst.addSpellAbility(sa);
             card.addSpellAbility(sa);
         } else if (keyword.startsWith("Evoke")) {
             final String[] k = keyword.split(":");
@@ -3777,10 +3632,8 @@ public class CardFactoryUtil {
             newSA.setEvoke(true);
             newSA.setIntrinsic(intrinsic);
 
-            if (!intrinsic) {
-                newSA.setTemporary(true);
-                kws.addSpellAbility(newSA);
-            }
+            newSA.setTemporary(!intrinsic);
+            inst.addSpellAbility(newSA);
 
             card.addSpellAbility(newSA);
         } else if (keyword.startsWith("Fortify")) {
@@ -3812,20 +3665,16 @@ public class CardFactoryUtil {
             // instantiate attach ability
             final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
 
-            if (!intrinsic) {
-                sa.setTemporary(true);
-                kws.addSpellAbility(sa);
-            }
+            sa.setTemporary(!intrinsic);
+            inst.addSpellAbility(sa);
 
             card.addSpellAbility(sa);
         } else if (keyword.startsWith("Fuse")) {
             final SpellAbility sa = AbilityFactory.buildFusedAbility(card);
             card.getState(CardStateName.Original).addNonManaAbility(sa);
 
-            if (!intrinsic) {
-                sa.setTemporary(true);
-                kws.addSpellAbility(sa);
-            }
+            sa.setTemporary(!intrinsic);
+            inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Haunt")) {            
             if (!card.isCreature() && intrinsic) {
                 final String[] k = keyword.split(":");
@@ -3858,10 +3707,8 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
             sa.setIntrinsic(intrinsic);
             
-            if (!intrinsic) {
-                sa.setTemporary(true);
-                kws.addSpellAbility(sa);
-            }
+            sa.setTemporary(!intrinsic);
+            inst.addSpellAbility(sa);
 
             card.addSpellAbility(sa);
         } else if (keyword.startsWith("Monstrosity")) {
@@ -3898,11 +3745,8 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
 
-            if (!intrinsic) {
-                sa.setTemporary(true);
-                // sa.setOriginalHost(hostCard);
-                kws.addSpellAbility(sa);
-            }
+            sa.setTemporary(!intrinsic);
+            inst.addSpellAbility(sa);
             card.addSpellAbility(sa);
         } else if (keyword.startsWith("Multikicker")) {
             final String[] n = keyword.split(":");
@@ -3927,11 +3771,8 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
 
-            if (!intrinsic) {
-                sa.setTemporary(true);
-                //sa.setOriginalHost(hostCard);
-                kws.addSpellAbility(sa);
-            }
+            sa.setTemporary(!intrinsic);
+            inst.addSpellAbility(sa);
             card.addSpellAbility(sa);
         } else if (keyword.startsWith("Outlast")) {
             final String[] k = keyword.split(":");
@@ -3956,11 +3797,8 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
             sa.setIntrinsic(intrinsic);
 
-            if (!intrinsic) {
-                sa.setTemporary(true);
-                //sa.setOriginalHost(hostCard);
-                kws.addSpellAbility(sa);
-            }
+            sa.setTemporary(!intrinsic);
+            inst.addSpellAbility(sa);
             card.addSpellAbility(sa);
         } else if (keyword.startsWith("Reinforce")) {
             final String[] k = keyword.split(":");
@@ -3983,11 +3821,8 @@ public class CardFactoryUtil {
                 sa.setSVar("X", "Count$xPaid");
             }
 
-            if (!intrinsic) {
-                sa.setTemporary(true);
-                //sa.setOriginalHost(hostCard);
-                kws.addSpellAbility(sa);
-            }
+            sa.setTemporary(!intrinsic);
+            inst.addSpellAbility(sa);
             card.addSpellAbility(sa);
         } else if (keyword.startsWith("Replicate")) {
             card.getFirstSpellAbility().addAnnounceVar("Replicate");
@@ -4006,11 +3841,8 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
 
-            if (!intrinsic) {
-                sa.setTemporary(true);
-                //sa.setOriginalHost(hostCard);
-                kws.addSpellAbility(sa);
-            }
+            sa.setTemporary(!intrinsic);
+            inst.addSpellAbility(sa);
             card.addSpellAbility(sa);
         } else if (keyword.startsWith("Surge")) {
             final String[] k = keyword.split(":");
@@ -4027,11 +3859,8 @@ public class CardFactoryUtil {
             
             newSA.setIntrinsic(intrinsic);
 
-            if (!intrinsic) {
-                newSA.setTemporary(true);
-                // sa.setOriginalHost(hostCard);
-                kws.addSpellAbility(newSA);
-            }
+            newSA.setTemporary(!intrinsic);
+            inst.addSpellAbility(newSA);
             card.addSpellAbility(newSA);
         } else if (keyword.startsWith("Suspend") && !keyword.equals("Suspend")) {
             // really needed?
@@ -4084,11 +3913,8 @@ public class CardFactoryUtil {
 
             suspend.getRestrictions().setZone(ZoneType.Hand);
 
-            if (!intrinsic) {
-                suspend.setTemporary(true);
-                //sa.setOriginalHost(hostCard);
-                kws.addSpellAbility(suspend);
-            }
+            suspend.setTemporary(!intrinsic);
+            inst.addSpellAbility(suspend);
 
             card.addSpellAbility(suspend);
         } else if (keyword.startsWith("Transmute")) {
@@ -4104,11 +3930,8 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
 
-            if (!intrinsic) {
-                sa.setTemporary(true);
-                //sa.setOriginalHost(hostCard);
-                kws.addSpellAbility(sa);
-            }
+            sa.setTemporary(!intrinsic);
+            inst.addSpellAbility(sa);
 
             card.addSpellAbility(sa);
         } else if (keyword.startsWith("Unearth")) {
@@ -4125,11 +3948,8 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
 
-            if (!intrinsic) {
-                sa.setTemporary(true);
-                //sa.setOriginalHost(hostCard);
-                kws.addSpellAbility(sa);
-            }
+            sa.setTemporary(!intrinsic);
+            inst.addSpellAbility(sa);
             card.addSpellAbility(sa);
         } else if (keyword.endsWith(" offering")) {
             final String offeringType = keyword.split(" ")[0];
@@ -4148,10 +3968,8 @@ public class CardFactoryUtil {
             newSA.setDescription(sa.getDescription() + " (" + offeringType + " offering)");
             newSA.setIntrinsic(intrinsic);
 
-            if (!intrinsic) {
-                newSA.setTemporary(true);
-                kws.addSpellAbility(newSA);
-            }
+            newSA.setTemporary(!intrinsic);
+            inst.addSpellAbility(newSA);
             card.addSpellAbility(newSA);
         } else if (keyword.startsWith("Crew")) {
             final String[] k = keyword.split(":");
@@ -4167,11 +3985,8 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
 
-            if (!intrinsic) {
-                sa.setTemporary(true);
-                //sa.setOriginalHost(hostCard);
-                kws.addSpellAbility(sa);
-            }
+            sa.setTemporary(!intrinsic);
+            inst.addSpellAbility(sa);
             card.addSpellAbility(sa);
         } else if (keyword.startsWith("Cycling")) {
             final String[] k = keyword.split(":");
@@ -4188,11 +4003,8 @@ public class CardFactoryUtil {
             sa.setIsCycling(true);
             sa.setIntrinsic(intrinsic);
 
-            if (!intrinsic) {
-                sa.setTemporary(true);
-                //sa.setOriginalHost(hostCard);
-                kws.addSpellAbility(sa);
-            }
+            sa.setTemporary(!intrinsic);
+            inst.addSpellAbility(sa);
             card.addSpellAbility(sa);
         } else if (keyword.startsWith("TypeCycling")) {
             final String[] k = keyword.split(":");
@@ -4219,17 +4031,14 @@ public class CardFactoryUtil {
             sa.setIsCycling(true);
             sa.setIntrinsic(intrinsic);
 
-            if (!intrinsic) {
-                sa.setTemporary(true);
-                //sa.setOriginalHost(hostCard);
-                kws.addSpellAbility(sa);
-            }
+            sa.setTemporary(!intrinsic);
+            inst.addSpellAbility(sa);
             card.addSpellAbility(sa);
         }
     }
 
-    public static void addStaticAbility(final String keyword, final Card card, final KeywordsChange kws) {
-        final boolean intrinsic = kws == null;
+    public static void addStaticAbility(final KeywordInterface inst, final Card card, final boolean intrinsic) {
+        String keyword = inst.getOriginal();
         String effect = null;
 
         if (keyword.startsWith("Absorb")) {
@@ -4301,9 +4110,7 @@ public class CardFactoryUtil {
         if (effect != null) {
             StaticAbility st = card.addStaticAbility(effect);
             st.setIntrinsic(intrinsic);
-            if (!intrinsic) {
-                kws.addStaticAbility(st);
-            }
+            inst.addStaticAbility(st);
         }
     }
 
@@ -4431,10 +4238,6 @@ public class CardFactoryUtil {
             card.addLeavesPlayCommand(sunburstLP);
         }
 
-        if (hasKeyword(card, "Devoid") != -1) {
-            addStaticAbility("Devoid", card, null);
-        }
-
         if (hasKeyword(card, "Morph") != -1) {
             final int n = hasKeyword(card, "Morph");
             if (n != -1) {
@@ -4474,28 +4277,6 @@ public class CardFactoryUtil {
             }
         } // Megamorph
 
-        final int madness = hasKeyword(card, "Madness");
-        if (madness != -1) {
-            final String parse = card.getKeywords().get(madness).toString();
-
-            addReplacementEffect(parse, card, null);
-            addTriggerAbility(parse, card, null);
-        } // madness
-
-        if (hasKeyword(card, "Devour") != -1) {
-            final int n = hasKeyword(card, "Devour");
-            addReplacementEffect(card.getKeywords().get(n), card, null);
-        } // Devour
-
-        /*
-         * WARNING: must keep this keyword processing before etbCounter keyword
-         * processing.
-         */
-
-        final int bloodthirst = hasKeyword(card, "Bloodthirst");
-        if (bloodthirst != -1) {
-            addReplacementEffect(card.getKeywords().get(bloodthirst), card, null);
-        } // bloodthirst
 
         final int storm = card.getAmountOfKeyword("Storm");
         for (int i = 0; i < storm; i++) {
@@ -4510,10 +4291,6 @@ public class CardFactoryUtil {
 
             card.addTrigger(stormTrigger);
         } // Storm
-
-        for (int i = 0; i < card.getAmountOfKeyword("Cascade"); i++) {
-            addTriggerAbility("Cascade", card, null);
-        } // Cascade
 
         if (hasKeyword(card, "Recover") != -1) {
             final String recoverCost = card.getKeywords().get(card.getKeywordPosition("Recover")).split(":")[1];
@@ -4567,10 +4344,6 @@ public class CardFactoryUtil {
             
             ripplePos = hasKeyword(card, "Ripple", n + 1);
         } // Ripple
-
-        for (int i = 0; i < card.getAmountOfKeyword("Dethrone"); i++) {
-            addTriggerAbility("Dethrone", card, null);
-        } // Dethrone
     }
 
     public final static void refreshTotemArmor(Card c) {

@@ -95,6 +95,10 @@ public class KeywordCollection implements Iterable<String>, Serializable {
         }
         return amount;
     }
+    
+    public Collection<KeywordInterface> getValues() {
+        return map.values();
+    }
 
     @Override
     public Iterator<String> iterator() {

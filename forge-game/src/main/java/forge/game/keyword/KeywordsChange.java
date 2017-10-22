@@ -37,14 +37,10 @@ import forge.game.trigger.Trigger;
  * @version $Id: KeywordsChange.java 27095 2014-08-17 07:32:24Z elcnesh $
  */
 public class KeywordsChange {
-    private final List<String> keywords;
+    private final KeywordCollection keywords = new KeywordCollection();
     private final List<String> removeKeywords;
     private final boolean removeAllKeywords;
 
-    private List<Trigger> triggers = Lists.<Trigger>newArrayList();
-    private List<ReplacementEffect> replacements = Lists.<ReplacementEffect>newArrayList();
-    private List<SpellAbility> abilities = Lists.<SpellAbility>newArrayList();
-    private List<StaticAbility> staticAbilities = Lists.<StaticAbility>newArrayList();
     /**
      * 
      * Construct a new {@link KeywordsChange}.
@@ -53,8 +49,11 @@ public class KeywordsChange {
      * @param removeKeywordList the list of keywords to remove.
      * @param removeAll whether to remove all keywords.
      */
-    public KeywordsChange(final List<String> keywordList, final List<String> removeKeywordList, final boolean removeAll) {
-        this.keywords = keywordList == null ? Lists.<String>newArrayList() : Lists.newArrayList(keywordList);
+    public KeywordsChange(final Iterable<String> keywordList, final List<String> removeKeywordList, final boolean removeAll) {
+        if (keywordList != null) {
+            this.keywords.addAll(keywordList);
+        }
+
         this.removeKeywords = removeKeywordList == null ? Lists.<String>newArrayList() : Lists.newArrayList(removeKeywordList);
         this.removeAllKeywords = removeAll;
     }
@@ -66,7 +65,7 @@ public class KeywordsChange {
      * @return ArrayList<String>
      */
     public final List<String> getKeywords() {
-        return this.keywords;
+        return Lists.newArrayList(this.keywords);
     }
 
     /**
@@ -99,41 +98,14 @@ public class KeywordsChange {
     }
 
     public final void addKeywordsToCard(final Card host) {
-        for (String k : keywords) {
-            CardFactoryUtil.addTriggerAbility(k, host, this);
-            CardFactoryUtil.addReplacementEffect(k, host, this);
-            CardFactoryUtil.addSpellAbility(k, host, this);
-            CardFactoryUtil.addStaticAbility(k, host, this);
+        for (KeywordInterface inst : keywords.getValues()) {
+            inst.addKeywords(host, false);
         }
     }
 
     public final void removeKeywords(final Card host) {
-        for (Trigger t : triggers) {
-            host.removeTrigger(t);
+        for (KeywordInterface inst : keywords.getValues()) {
+            inst.removeKeywords(host);
         }
-        for (ReplacementEffect r : replacements) {
-            host.removeReplacementEffect(r);
-        }
-        for (SpellAbility s : abilities) {
-            host.removeSpellAbility(s);
-        }
-        for (StaticAbility st : staticAbilities) {
-            host.removeStaticAbility(st);
-        }
-    }
-
-    public final void addTrigger(final Trigger trg) {
-        triggers.add(trg);
-    }
-    
-    public final void addReplacement(final ReplacementEffect trg) {
-        replacements.add(trg);
-    }
-
-    public final void addSpellAbility(final SpellAbility s) {
-        abilities.add(s);
-    }
-    public final void addStaticAbility(final StaticAbility st) {
-        staticAbilities.add(st);
     }
 }

@@ -10,6 +10,8 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.event.GameEventCardStatsChanged;
+import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
@@ -273,10 +275,10 @@ public class CloneEffect extends SpellAbilityEffect {
                 }
                 k = keywords.get(i);
                 tgtCard.addIntrinsicKeyword(k);
-
-                CardFactoryUtil.addTriggerAbility(k, tgtCard, null);
-                CardFactoryUtil.addReplacementEffect(k, tgtCard, null);
-                CardFactoryUtil.addSpellAbility(k, tgtCard, null);
+                
+                KeywordInterface inst = Keyword.getInstance(k);
+                
+                inst.addKeywords(tgtCard, true);
             }
         }
 
