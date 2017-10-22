@@ -293,10 +293,6 @@ public class CardFactory {
     private static void buildAbilities(final Card card) {
         final String cardName = card.getName();
 
-        // may have to change the spell
-
-        CardFactoryUtil.parseKeywords(card, cardName);
-
         for (final CardStateName state : card.getStates()) {
             if (card.isDoubleFaced() && state == CardStateName.FaceDown) {
                 continue; // Ignore FaceDown for DFC since they have none.

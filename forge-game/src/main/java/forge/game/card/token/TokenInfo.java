@@ -157,7 +157,6 @@ public class TokenInfo {
             }
             temp.setOwner(controller);
             temp.setToken(true);
-            CardFactoryUtil.parseKeywords(temp, temp.getName());
             CardFactoryUtil.setupKeywordedAbilities(temp);
             list.add(temp);
         }
@@ -174,7 +173,6 @@ public class TokenInfo {
 
         c.setOwner(controller);
         c.setToken(true);
-        CardFactoryUtil.parseKeywords(c, c.getName());
         CardFactoryUtil.setupKeywordedAbilities(c);
         return c;
     }
