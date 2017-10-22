@@ -5,16 +5,28 @@ import java.util.regex.Matcher;
 
 import forge.util.Lang;
 
-public abstract class KeywordInstance<T extends KeywordInstance<?>> {
+public abstract class KeywordInstance<T extends KeywordInstance<?>> implements KeywordInterface {
     private Keyword keyword;
     private String original;
 
+    /* (non-Javadoc)
+     * @see forge.game.keyword.KeywordInterface#getOriginal()
+     */
+    @Override
     public String getOriginal() {
         return original;
     }
+    /* (non-Javadoc)
+     * @see forge.game.keyword.KeywordInterface#getKeyword()
+     */
+    @Override
     public Keyword getKeyword() {
         return keyword;
     }
+    /* (non-Javadoc)
+     * @see forge.game.keyword.KeywordInterface#getReminderText()
+     */
+    @Override
     public String getReminderText() {
         String result = formatReminderText(keyword.reminderText);
         Matcher m = Pattern.compile("\\{(\\w):(.+?)\\}").matcher(result);
@@ -26,6 +38,10 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> {
         m.appendTail(sb);
         return sb.toString();
     }
+    /* (non-Javadoc)
+     * @see forge.game.keyword.KeywordInterface#getAmount()
+     */
+    @Override
     public int getAmount() {
         return 1;
     }

@@ -154,7 +154,7 @@ public enum Keyword {
         displayName = EnumUtil.getEnumDisplayName(this);
     }
 
-    public static KeywordInstance<?> getInstance(String k) {
+    public static KeywordInterface getInstance(String k) {
         Keyword keyword = Keyword.UNDEFINED;
         String details = k;
         String enumName = k.replace(' ', '_').toUpperCase();

@@ -12,7 +12,7 @@ public class KeywordCollection implements Iterable<String>, Serializable {
     private static final long serialVersionUID = -2882986558147844702L;
 
     private transient KeywordCollectionView view;
-    private final Multimap<Keyword, KeywordInstance<?>> map = MultimapBuilder.enumKeys(Keyword.class)
+    private final Multimap<Keyword, KeywordInterface> map = MultimapBuilder.enumKeys(Keyword.class)
             .arrayListValues().build();
 
     public boolean contains(Keyword keyword) {
@@ -29,16 +29,16 @@ public class KeywordCollection implements Iterable<String>, Serializable {
 
     public int getAmount(Keyword keyword) {
         int amount = 0;
-        for (KeywordInstance<?> inst : map.get(keyword)) {
+        for (KeywordInterface inst : map.get(keyword)) {
             amount += inst.getAmount();
         }
         return amount;
     }
 
     public boolean add(String k) {
-        KeywordInstance<?> inst = Keyword.getInstance(k);
+        KeywordInterface inst = Keyword.getInstance(k);
         Keyword keyword = inst.getKeyword();
-        Collection<KeywordInstance<?>> list = map.get(keyword);
+        Collection<KeywordInterface> list = map.get(keyword);
         if (list.isEmpty() || !keyword.isMultipleRedundant) {
             list.add(inst);
             return true;
@@ -53,11 +53,11 @@ public class KeywordCollection implements Iterable<String>, Serializable {
     }
 
     public boolean remove(String keyword) {
-        Iterator<KeywordInstance<?>> it = map.values().iterator();
+        Iterator<KeywordInterface> it = map.values().iterator();
         
         boolean result = false;
         while (it.hasNext()) {
-            KeywordInstance<?> k = it.next();
+            KeywordInterface k = it.next();
             if (keyword.equals(k.getOriginal())) {
                 it.remove();
                 result = true;
@@ -78,7 +78,7 @@ public class KeywordCollection implements Iterable<String>, Serializable {
     }
 
     public boolean contains(String keyword) {
-        for (KeywordInstance<?> inst : map.values()) {
+        for (KeywordInterface inst : map.values()) {
             if (keyword.equals(inst.getOriginal())) {
                 return true;
             }
@@ -88,7 +88,7 @@ public class KeywordCollection implements Iterable<String>, Serializable {
 
     public int getAmount(String k) {
         int amount = 0;
-        for (KeywordInstance<?> inst : map.values()) {
+        for (KeywordInterface inst : map.values()) {
             if (k.equals(inst.getOriginal())) {
                 amount++;
             }
@@ -99,7 +99,7 @@ public class KeywordCollection implements Iterable<String>, Serializable {
     @Override
     public Iterator<String> iterator() {
         return new Iterator<String>() {
-            private final Iterator<KeywordInstance<?>> iterator = map.values().iterator();
+            private final Iterator<KeywordInterface> iterator = map.values().iterator();
             
 
             @Override
@@ -109,7 +109,7 @@ public class KeywordCollection implements Iterable<String>, Serializable {
 
             @Override
             public String next() {
-                KeywordInstance<?> entry = iterator.next();
+                KeywordInterface entry = iterator.next();
                 return entry.getOriginal();
             }
 
