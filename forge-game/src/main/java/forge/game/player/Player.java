@@ -31,6 +31,7 @@ import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.event.*;
 import forge.game.keyword.KeywordCollection;
+import forge.game.keyword.KeywordInterface;
 import forge.game.keyword.KeywordCollection.KeywordCollectionView;
 import forge.game.keyword.KeywordsChange;
 import forge.game.mana.ManaPool;
@@ -236,7 +237,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         activeScheme = getZone(ZoneType.SchemeDeck).get(0);
         // gameAction moveTo ?
-        game.getAction().moveTo(ZoneType.Command, activeScheme, null);
+        game.getAction().moveTo(ZoneType.Command, activeScheme, null, Maps.newHashMap());
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
         // Run triggers
@@ -971,12 +972,10 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void addChangedKeywords(final List<String> addKeywords, final List<String> removeKeywords, final Long timestamp) {
         // if the key already exists - merge entries
         if (changedKeywords.containsKey(timestamp)) {
-            final List<String> kws = addKeywords == null ? Lists.<String>newArrayList() : Lists.newArrayList(addKeywords);
-            final List<String> rkws = removeKeywords == null ? Lists.<String>newArrayList() : Lists.newArrayList(removeKeywords);
             final KeywordsChange cks = changedKeywords.get(timestamp);
-            kws.addAll(cks.getKeywords());
-            rkws.addAll(cks.getRemoveKeywords());
-            changedKeywords.put(timestamp, new KeywordsChange(kws, rkws, cks.isRemoveAllKeywords()));
+            
+            ;
+            changedKeywords.put(timestamp, cks.merge(addKeywords, removeKeywords, cks.isRemoveAllKeywords()));
             updateKeywords();
             return;
         }
@@ -1011,8 +1010,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     private final void replaceAllKeywordInstances(final String oldKeyword, final String newKeyword) {
         boolean keywordReplaced = false;
         for (final KeywordsChange ck : changedKeywords.values()) {
-            if (ck.getKeywords().remove(oldKeyword)) {
-                ck.getKeywords().add(newKeyword);
+            if (ck.removeKeywordfromAdd(oldKeyword)) {
+                ck.addKeyword(newKeyword);
                 keywordReplaced = true;
             }
         }
@@ -1035,7 +1034,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         boolean keywordRemoved = false;
 
         for (final KeywordsChange ck : changedKeywords.values()) {
-            if (ck.getKeywords().remove(keyword)) {
+            if (ck.removeKeywordfromAdd(keyword)) {
                 keywordRemoved = true;
                 if (!allInstances) {
                 	break;
@@ -1074,7 +1073,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
 
             if (ck.getKeywords() != null) {
-                keywords.addAll(ck.getKeywords());
+                keywords.insertAll(ck.getKeywords());
             }
         }
         view.updateKeywords(this);
@@ -1202,7 +1201,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         if (toBottom != null) {
             for(Card c : toBottom) {
-                getGame().getAction().moveToBottomOfLibrary(c, null);
+                getGame().getAction().moveToBottomOfLibrary(c, null, Maps.newHashMap());
                 numToBottom++;
             }
         }
@@ -1210,7 +1209,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (toTop != null) {
             Collections.reverse(toTop); // the last card in list will become topmost in library, have to revert thus.
             for(Card c : toTop) {
-                getGame().getAction().moveToLibrary(c, null);
+                getGame().getAction().moveToLibrary(c, null, Maps.newHashMap());
                 numToTop++;
             }
         }
@@ -1283,7 +1282,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
             }
 
-            c = game.getAction().moveToHand(c, null);
+            c = game.getAction().moveToHand(c, null, Maps.newHashMap());
             drawn.add(c);
 
             if (topCardRevealed) {
@@ -1441,7 +1440,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     private static int getDredgeNumber(final Card c) {
-        for (final String s : c.getKeywords()) {
+        for (final KeywordInterface k : c.getKeywords()) {
+            final String s = k.getOriginal();
             if (s.startsWith("Dredge")) {
                 return Integer.parseInt("" + s.charAt(s.length() - 1));
             }
@@ -1492,16 +1492,16 @@ public class Player extends GameEntity implements Comparable<Player> {
         sb.append(this).append(" discards ").append(c);
         final Card newCard;
         if (discardToTopOfLibrary) {
-            newCard = game.getAction().moveToLibrary(c, 0, sa);
+            newCard = game.getAction().moveToLibrary(c, 0, sa, Maps.newHashMap());
             sb.append(" to the library");
             // Play the Discard sound
         }
         else if (discardMadness) {
-            newCard = game.getAction().exile(c, sa);
+            newCard = game.getAction().exile(c, sa, Maps.newHashMap());
             sb.append(" with Madness");
         }
         else {
-            newCard = game.getAction().moveToGraveyard(c, sa);
+            newCard = game.getAction().moveToGraveyard(c, sa, Maps.newHashMap());
             // Play the Discard sound
         }
         sb.append(".");
@@ -1569,7 +1569,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         for (Card m : milledView) {
-            game.getAction().moveTo(destination, m, null);
+            game.getAction().moveTo(destination, m, null, Maps.newHashMap());
         }
 
         return milled;
@@ -1637,7 +1637,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (land.isFaceDown()) {
                 land.turnFaceUp();
             }
-            game.getAction().moveTo(getZone(ZoneType.Battlefield), land, null);
+            game.getAction().moveTo(getZone(ZoneType.Battlefield), land, null, Maps.newHashMap());
 
             // play a sound
             game.fireEvent(new GameEventLandPlayed(this, land));
@@ -2419,7 +2419,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getView().updatePlanarPlayer(getView());
 
         for (Card c : currentPlanes) {
-            game.getAction().moveTo(ZoneType.Command,c, null);
+            game.getAction().moveTo(ZoneType.Command,c, null, Maps.newHashMap());
             //getZone(ZoneType.PlanarDeck).remove(c);
             //getZone(ZoneType.Command).add(c);
         }
@@ -2449,7 +2449,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             //game.getZoneOf(plane).remove(plane);
             plane.clearControllers();
             //getZone(ZoneType.PlanarDeck).add(plane);
-            game.getAction().moveTo(ZoneType.PlanarDeck, plane,-1, null);
+            game.getAction().moveTo(ZoneType.PlanarDeck, plane,-1, null, Maps.newHashMap());
         }
         currentPlanes.clear();
 

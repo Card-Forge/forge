@@ -27,6 +27,7 @@ import forge.game.ability.ApiType;
 import forge.game.ability.effects.AttachEffect;
 import forge.game.card.*;
 import forge.game.event.*;
+import forge.game.keyword.KeywordInterface;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -1824,7 +1825,8 @@ public class GameAction {
 
             // Select what can be activated from a given hand
             for (final Card c : takesAction.getCardsIn(ZoneType.Hand)) {
-                for (String kw : c.getKeywords()) {
+                for (KeywordInterface inst : c.getKeywords()) {
+                    String kw = inst.getOriginal();
                     if (kw.startsWith("MayEffectFromOpeningHand")) {
                         String[] split = kw.split(":");
                         final String effName = split[1];

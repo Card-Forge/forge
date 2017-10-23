@@ -1,11 +1,13 @@
 package forge.ai;
 
 import com.google.common.base.Function;
+
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.cost.CostPayEnergy;
+import forge.game.keyword.KeywordInterface;
 import forge.game.spellability.SpellAbility;
 
 public class CreatureEvaluator implements Function<Card, Integer> {
@@ -32,7 +34,8 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         }
         int power = getEffectivePower(c);
         final int toughness = getEffectiveToughness(c);
-        for (String keyword : c.getKeywords()) {
+        for (KeywordInterface kw : c.getKeywords()) {
+            String keyword = kw.getOriginal();
             if (keyword.equals("Prevent all combat damage that would be dealt by CARDNAME.")
                     || keyword.equals("Prevent all damage that would be dealt by CARDNAME.")
                     || keyword.equals("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")

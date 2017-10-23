@@ -18,6 +18,7 @@ import forge.game.GameObject;
 import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
+import forge.game.keyword.KeywordInterface;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -1823,7 +1824,8 @@ public class AbilityUtils {
 
     public static void addSpliceEffect(final SpellAbility sa, final Card c) {
         Cost spliceCost = null;
-        for (final String k : c.getKeywords()) {
+        for (final KeywordInterface inst : c.getKeywords()) {
+            final String k = inst.getOriginal();
             if (k.startsWith("Splice")) {
                 final String n[] = k.split(":");
                 spliceCost = new Cost(n[2], false);

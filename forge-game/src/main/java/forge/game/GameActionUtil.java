@@ -29,6 +29,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.card.CardPlayOption.PayManaCost;
 import forge.game.cost.Cost;
+import forge.game.keyword.KeywordInterface;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.*;
@@ -200,7 +201,8 @@ public final class GameActionUtil {
             alternatives.add(newSA);
         }
 
-        for (final String keyword : source.getKeywords()) {
+        for (final KeywordInterface inst : source.getKeywords()) {
+            final String keyword = inst.getOriginal();
             if (sa.isSpell() && keyword.startsWith("Flashback")) {
                 // if source has No Mana cost, and flashback doesn't have own one,
                 // flashback can't work
@@ -248,7 +250,8 @@ public final class GameActionUtil {
             return costs;
         }
         final Card source = sa.getHostCard();
-        for (String keyword : source.getKeywords()) {
+        for (KeywordInterface inst : source.getKeywords()) {
+            final String keyword = inst.getOriginal();
             if (keyword.startsWith("Buyback")) {
                 final Cost cost = new Cost(keyword.substring(8), false);
                 costs.add(new OptionalCostValue(OptionalCost.Buyback, cost));
@@ -319,7 +322,8 @@ public final class GameActionUtil {
             return abilities;
         }
         final Card source = sa.getHostCard();
-        for (String keyword : source.getKeywords()) {
+        for (KeywordInterface inst : source.getKeywords()) {
+            final String keyword = inst.getOriginal();
             if (keyword.startsWith("AlternateAdditionalCost")) {
                 final List<SpellAbility> newAbilities = Lists.newArrayList();
                 String[] costs = TextUtil.split(keyword, ':');
@@ -370,7 +374,8 @@ public final class GameActionUtil {
         }
 
         // Buyback, Kicker
-        for (String keyword : source.getKeywords()) {
+        for (KeywordInterface inst : source.getKeywords()) {
+            final String keyword = inst.getOriginal();
             if (keyword.startsWith("Buyback")) {
                 for (int i = 0; i < abilities.size(); i++) {
                     final SpellAbility newSA = abilities.get(i).copy();

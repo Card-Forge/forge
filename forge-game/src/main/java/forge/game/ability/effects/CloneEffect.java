@@ -274,11 +274,11 @@ public class CloneEffect extends SpellAbilityEffect {
                     keywords.remove(k);
                 }
                 k = keywords.get(i);
-                tgtCard.addIntrinsicKeyword(k);
                 
-                KeywordInterface inst = Keyword.getInstance(k);
-                
-                inst.addKeywords(tgtCard, true);
+                KeywordInterface inst = tgtCard.addIntrinsicKeyword(k);
+                if (inst != null) {
+                    inst.addKeywords(tgtCard, true);
+                }
             }
         }
 

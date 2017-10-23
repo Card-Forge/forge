@@ -10,10 +10,21 @@ import com.google.common.collect.MultimapBuilder;
 
 public class KeywordCollection implements Iterable<String>, Serializable {
     private static final long serialVersionUID = -2882986558147844702L;
+    
+    private boolean hidden = false;
 
     private transient KeywordCollectionView view;
     private final Multimap<Keyword, KeywordInterface> map = MultimapBuilder.enumKeys(Keyword.class)
             .arrayListValues().build();
+
+    public KeywordCollection() {
+        super();
+        this.hidden = false;
+    }
+    public KeywordCollection(boolean hidden) {
+        super();
+        this.hidden = hidden;
+    }
 
     public boolean contains(Keyword keyword) {
         return map.containsKey(keyword);
@@ -35,8 +46,15 @@ public class KeywordCollection implements Iterable<String>, Serializable {
         return amount;
     }
 
-    public boolean add(String k) {
+    public KeywordInterface add(String k) {
         KeywordInterface inst = Keyword.getInstance(k);
+        inst.setHidden(hidden);
+        if (insert(inst)) {
+            return inst;
+        }
+        return null;
+    }
+    public boolean insert(KeywordInterface inst) {
         Keyword keyword = inst.getKeyword();
         Collection<KeywordInterface> list = map.get(keyword);
         if (list.isEmpty() || !keyword.isMultipleRedundant) {
@@ -44,6 +62,7 @@ public class KeywordCollection implements Iterable<String>, Serializable {
             return true;
         }
         return false;
+        
     }
 
     public void addAll(Iterable<String> keywords) {
@@ -52,6 +71,16 @@ public class KeywordCollection implements Iterable<String>, Serializable {
         }
     }
 
+    public boolean insertAll(Iterable<KeywordInterface> inst) {
+        boolean result = false;
+        for (KeywordInterface k : inst) {
+            if (insert(k)) {
+                result = true;
+            }
+        }
+        return result;
+    }
+    
     public boolean remove(String keyword) {
         Iterator<KeywordInterface> it = map.values().iterator();
         
@@ -67,10 +96,14 @@ public class KeywordCollection implements Iterable<String>, Serializable {
         return result;
     }
 
-    public void removeAll(Iterable<String> keywords) {
+    public boolean removeAll(Iterable<String> keywords) {
+        boolean result = false;
         for (String k : keywords) {
-            remove(k);
+            if (remove(k)) {
+                result = true;
+            }
         }
+        return result;
     }
 
     public void clear() {

@@ -10,6 +10,7 @@ import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
+import forge.game.keyword.KeywordInterface;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityActivated;
@@ -266,7 +267,8 @@ public class CostAdjustment {
 
     private static void adjustCostByOffering(final ManaCostBeingPaid cost, final SpellAbility sa) {
         String offeringType = "";
-        for (String kw : sa.getHostCard().getKeywords()) {
+        for (KeywordInterface inst : sa.getHostCard().getKeywords()) {
+            final String kw = inst.getOriginal();
             if (kw.endsWith(" offering")) {
                 offeringType = kw.split(" ")[0];
                 break;

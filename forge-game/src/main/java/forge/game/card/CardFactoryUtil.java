@@ -1861,7 +1861,8 @@ public class CardFactoryUtil {
         final List<String> allkw = Lists.newArrayList();
 
         for (Card c : CardLists.getValidCards(cardlist, restrictions, p, host, null)) {
-            for (String k : c.getKeywords()) {
+            for (KeywordInterface inst : c.getKeywords()) {
+                final String k = inst.getOriginal();
                 if (k.endsWith("walk")) {
                     if (!landkw.contains(k)) {
                         landkw.add(k);
@@ -1948,8 +1949,7 @@ public class CardFactoryUtil {
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
 
-        for (String keyword : card.getKeywords()) {
-            KeywordInterface inst = Keyword.getInstance(keyword);
+        for (KeywordInterface inst : card.getKeywords()) {
             inst.addKeywords(card, true);
         }
 

@@ -17,9 +17,14 @@
  */
 package forge.ai;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
+
 import forge.ai.ability.AnimateAi;
 import forge.card.CardTypeView;
 import forge.game.GameEntity;
@@ -30,6 +35,7 @@ import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.combat.GlobalAttackRestrictions;
+import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
@@ -38,10 +44,6 @@ import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 
 //doesHumanAttackAndWin() uses the global variable AllZone.getComputerPlayer()
@@ -647,7 +649,8 @@ public class AiAttackController {
                     && isEffectiveAttacker(ai, attacker, combat)) {
                 mustAttack = true;
             } else {
-                for (String s : attacker.getKeywords()) {
+                for (KeywordInterface inst : attacker.getKeywords()) {
+                    String s = inst.getOriginal();
                     if (s.equals("CARDNAME attacks each turn if able.")
                             || s.startsWith("CARDNAME attacks specific player each combat if able")
                             || s.equals("CARDNAME attacks each combat if able.")) {
@@ -1089,7 +1092,8 @@ public class AiAttackController {
         boolean hasCombatEffect = attacker.getSVar("HasCombatEffect").equals("TRUE") 
         		|| "Blocked".equals(attacker.getSVar("HasAttackEffect"));
         if (!hasCombatEffect) {
-            for (String keyword : attacker.getKeywords()) {
+            for (KeywordInterface inst : attacker.getKeywords()) {
+                String keyword = inst.getOriginal();
                 if (keyword.equals("Wither") || keyword.equals("Infect")
                         || keyword.equals("Lifelink") || keyword.startsWith("Afflict")) {
                     hasCombatEffect = true;
@@ -1124,7 +1128,8 @@ public class AiAttackController {
                     if (defender.getSVar("HasCombatEffect").equals("TRUE") || defender.getSVar("HasBlockEffect").equals("TRUE")) {
                         canKillAllDangerous = false;
                     } else {
-                        for (String keyword : defender.getKeywords()) {
+                        for (KeywordInterface inst : defender.getKeywords()) {
+                            String keyword = inst.getOriginal();
                             if (keyword.equals("Wither") || keyword.equals("Infect") || keyword.equals("Lifelink")) {
                                 canKillAllDangerous = false;
                                 break;

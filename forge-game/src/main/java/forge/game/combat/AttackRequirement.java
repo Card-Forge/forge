@@ -8,6 +8,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollectionView;
@@ -49,7 +50,8 @@ public class AttackRequirement {
             nAttackAnything += attacker.getGoaded().size();
         }
 
-        for (final String keyword : attacker.getKeywords()) {
+        for (final KeywordInterface inst : attacker.getKeywords()) {
+            final String keyword = inst.getOriginal();
             if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
                 final String defined = keyword.split(":")[1];
                 final GameEntity mustAttack2 = AbilityUtils.getDefinedPlayers(attacker, defined, null).get(0);

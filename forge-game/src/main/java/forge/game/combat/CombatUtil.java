@@ -29,6 +29,7 @@ import forge.game.GameEntity;
 import forge.game.GlobalRuleChange;
 import forge.game.card.*;
 import forge.game.cost.Cost;
+import forge.game.keyword.KeywordInterface;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
@@ -201,8 +202,8 @@ public class CombatUtil {
 
         // Keywords
         final boolean canAttackWithDefender = attacker.hasKeyword("CARDNAME can attack as though it didn't have defender.");
-        for (final String keyword : attacker.getKeywords()) {
-            switch (keyword) {
+        for (final KeywordInterface keyword : attacker.getKeywords()) {
+            switch (keyword.getOriginal()) {
             case "CARDNAME can't attack.":
             case "CARDNAME can't attack or block.":
                 return false;
@@ -543,7 +544,8 @@ public class CombatUtil {
             }
         }
 
-        for (final String keyword : attacker.getKeywords()) {
+        for (final KeywordInterface inst : attacker.getKeywords()) {
+            String keyword = inst.getOriginal();
             if (keyword.equals("Legendary landwalk")) {
                 walkTypes.add("Land.Legendary");
             } else if (keyword.equals("Desertwalk")) {
@@ -779,7 +781,8 @@ public class CombatUtil {
                             && combat.getBlockers(attacker).isEmpty())) {
                 attackersWithLure.add(attacker);
             } else {
-                for (String keyword : attacker.getKeywords()) {
+                for (KeywordInterface inst : attacker.getKeywords()) {
+                    String keyword = inst.getOriginal();
                     // MustBeBlockedBy <valid>
                     if (keyword.startsWith("MustBeBlockedBy ")) {
                         final String valid = keyword.substring("MustBeBlockedBy ".length());
@@ -891,7 +894,8 @@ public class CombatUtil {
         }
 
         boolean mustBeBlockedBy = false;
-        for (String keyword : attacker.getKeywords()) {
+        for (KeywordInterface inst : attacker.getKeywords()) {
+            String keyword = inst.getOriginal();
             // MustBeBlockedBy <valid>
             if (keyword.startsWith("MustBeBlockedBy ")) {
                 final String valid = keyword.substring("MustBeBlockedBy ".length());
@@ -991,7 +995,8 @@ public class CombatUtil {
             return false;
         }
 
-        for (String k : attacker.getKeywords()) {
+        for (KeywordInterface inst1 : attacker.getKeywords()) {
+            String k = inst1.getOriginal();
             if (k.startsWith("CantBeBlockedBy ")) {
                 final String[] n = k.split(" ", 2);
                 final String[] restrictions = n[1].split(",");
@@ -999,7 +1004,8 @@ public class CombatUtil {
                     boolean stillblock = false;
                     //Dragon Hunter check
                     if (n[1].contains("withoutReach") && blocker.hasStartOfKeyword("IfReach")) {
-                        for (String k2 : blocker.getKeywords()) {
+                        for (KeywordInterface inst2 : blocker.getKeywords()) {
+                            String k2 = inst2.getOriginal();
                             if (k2.startsWith("IfReach")) {
                                 String n2[] = k2.split(":");
                                 if (attacker.getType().hasCreatureType(n2[1])) {
@@ -1015,7 +1021,8 @@ public class CombatUtil {
                 }
             }
         }
-        for (String keyword : blocker.getKeywords()) {
+        for (KeywordInterface inst : blocker.getKeywords()) {
+            String keyword = inst.getOriginal();
             if (keyword.startsWith("CantBlockCardUID")) {
                 final String[] k = keyword.split("_", 2);
                 if (attacker.getId() == Integer.parseInt(k[1])) {
@@ -1037,7 +1044,8 @@ public class CombatUtil {
 
         if (attacker.hasKeyword("Flying") && !blocker.hasKeyword("Flying") && !blocker.hasKeyword("Reach")) {
             boolean stillblock = false;
-            for (String k : blocker.getKeywords()) {
+            for (KeywordInterface inst : blocker.getKeywords()) {
+                String k = inst.getOriginal();
                 if (k.startsWith("IfReach")) {
                     String n[] = k.split(":");
                     if (attacker.getType().hasCreatureType(n[1])) {
@@ -1071,7 +1079,8 @@ public class CombatUtil {
             return false; // no block
 
         List<String> restrictions = Lists.newArrayList();
-        for (String kw : attacker.getKeywords()) {
+        for (KeywordInterface inst : attacker.getKeywords()) {
+            String kw = inst.getOriginal();
             if (kw.startsWith("CantBeBlockedByAmount")) {
                 restrictions.add(TextUtil.split(kw, ' ', 2)[1]);
             }
@@ -1108,7 +1117,8 @@ public class CombatUtil {
 
     public static int getMinNumBlockersForAttacker(Card attacker, Player defender) {
         List<String> restrictions = Lists.newArrayList();
-        for (String kw : attacker.getKeywords()) {
+        for (KeywordInterface inst : attacker.getKeywords()) {
+            String kw = inst.getOriginal();
             if (kw.startsWith("CantBeBlockedByAmount")) {
                 restrictions.add(TextUtil.split(kw, ' ', 2)[1]);
             }

@@ -40,6 +40,9 @@ import forge.game.event.*;
 import forge.game.event.GameEventCardAttachment.AttachMethod;
 import forge.game.event.GameEventCardDamaged.DamageType;
 import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordCollection;
+import forge.game.keyword.KeywordInstance;
+import forge.game.keyword.KeywordInterface;
 import forge.game.keyword.KeywordsChange;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -93,9 +96,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private final CardDamageHistory damageHistory = new CardDamageHistory();
     private Map<Card, Map<CounterType, Integer>> countersAddedBy = Maps.newTreeMap();
-    private List<String> extrinsicKeyword = Lists.newArrayList();
+    private KeywordCollection extrinsicKeyword = new KeywordCollection();
     // Hidden keywords won't be displayed on the card
-    private final CopyOnWriteArrayList<String> hiddenExtrinsicKeyword = new CopyOnWriteArrayList<>();
+    private final KeywordCollection hiddenExtrinsicKeyword = new KeywordCollection();
 
     // cards attached or otherwise linked to this card
     private CardCollection equippedBy, fortifiedBy, hauntedBy, devouredCards, delvedCards, imprintedCards, encodedCards;
@@ -122,7 +125,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final CardChangedWords changedTextColors = new CardChangedWords();
     private final CardChangedWords changedTextTypes = new CardChangedWords();
     /** List of the keywords that have been added by text changes. */
-    private final List<String> keywordsGrantedByTextChanges = Lists.newArrayList();
+    private final List<KeywordInterface> keywordsGrantedByTextChanges = Lists.newArrayList();
     /** Original values of SVars changed by text changes. */
     private Map<String, String> originalSVars = Maps.newHashMap();
 
@@ -1374,7 +1377,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     // convert a keyword list to the String that should be displayed in game
-    public final String keywordsToText(final List<String> keywords) {
+    public final String keywordsToText(final Collection<KeywordInterface> keywords) {
         final StringBuilder sb = new StringBuilder();
         final StringBuilder sbLong = new StringBuilder();
 
@@ -1382,8 +1385,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         final Set<Entry<String, String>> textChanges = Sets.union(
                 changedTextColors.toMap().entrySet(), changedTextTypes.toMap().entrySet());
 
-        for (int i = 0; i < keywords.size(); i++) {
-            String keyword = keywords.get(i);
+        int i = 0;
+        for (KeywordInterface inst : keywords) {
+            String keyword = inst.getOriginal();
             if (keyword.startsWith("PreventAllDamageBy")
                     || keyword.startsWith("CantEquip")
                     || keyword.startsWith("SpellCantTarget")) {
@@ -1391,7 +1395,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
             // format text changes
             if (CardUtil.isKeywordModifiable(keyword)
-                    && keywordsGrantedByTextChanges.contains(keyword)) {
+                    && keywordsGrantedByTextChanges.contains(inst)) {
                 for (final Entry<String, String> e : textChanges) {
                     final String value = e.getValue();
                     if (keyword.contains(value)) {
@@ -1453,13 +1457,13 @@ public class Card extends GameEntity implements Comparable<Card> {
                     if (!mCost.isOnlyManaCost()) {
                         sbLong.append(".");
                     }
-                    sbLong.append(" (" + Keyword.getInstance(keyword).getReminderText() + ")");
+                    sbLong.append(" (" + inst.getReminderText() + ")");
                     sbLong.append("\r\n");
                 }
             } else if (keyword.startsWith("Emerge")) {
                 final String[] k = keyword.split(":");
                 sbLong.append(k[0]).append(" ").append(ManaCostParser.parse(k[1]));
-                sbLong.append(" (" + Keyword.getInstance(keyword).getReminderText() + ")");
+                sbLong.append(" (" + inst.getReminderText() + ")");
                 sbLong.append("\r\n");
             } else if (keyword.startsWith("Echo")) {
                 sbLong.append("Echo ");
@@ -1490,7 +1494,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     final String[] n = keyword.split(":");
                     final Cost cost = new Cost(n[1], false);
                     sbLong.append("Multikicker ").append(cost.toSimpleString());
-                    sbLong.append(" (" + Keyword.getInstance(keyword).getReminderText() + ")").append("\r\n");
+                    sbLong.append(" (" + inst.getReminderText() + ")").append("\r\n");
                 }
             } else if (keyword.startsWith("Kicker")) {
                 if (!keyword.endsWith("Generic")) {
@@ -1504,13 +1508,13 @@ public class Card extends GameEntity implements Comparable<Card> {
                         final Cost cost2 = new Cost(n[2], false);
                         sbx.append(cost2.toSimpleString());
                     }
-                    sbx.append(" (" + Keyword.getInstance(keyword).getReminderText() + ")");
+                    sbx.append(" (" + inst.getReminderText() + ")");
                     sbLong.append(sbx).append("\r\n");
                 }
             } else if (keyword.endsWith(".") && !keyword.startsWith("Haunt")) {
                 sbLong.append(keyword).append("\r\n");
             } else if (keyword.startsWith("Presence")) {
-                sbLong.append(Keyword.getInstance(keyword).getReminderText());
+                sbLong.append(inst.getReminderText());
             } else if (keyword.contains("At the beginning of your upkeep, ")
                     && keyword.contains(" unless you pay")) {
                 sbLong.append(keyword).append("\r\n");
@@ -1524,14 +1528,14 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || keyword.equals("Changeling") || keyword.equals("Delve") || keyword.startsWith("Dredge")
                     || (keyword.startsWith("Split second") && !sb.toString().contains("Split second"))
                     || keyword.startsWith("Devoid")){
-                sbLong.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
+                sbLong.append(keyword + " (" + inst.getReminderText() + ")");
             } else if (keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst")
                     || keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift")
                     || keyword.startsWith("Crew") || keyword.startsWith("Tribute") || keyword.startsWith("Absorb")
                     || keyword.startsWith("Graft") || keyword.startsWith("Fading") || keyword.startsWith("Vanishing")
                     || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Devour")) {
                 final String[] k = keyword.split(":");
-                sbLong.append(k[0] + " " + k[1] + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
+                sbLong.append(k[0] + " " + k[1] + " (" + inst.getReminderText() + ")");
             } else if (keyword.contains("Haunt")) {
                 sb.append("\r\nHaunt (");
                 if (isCreature()) {
@@ -1553,7 +1557,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (sb.length() != 0) {
                     sb.append("\r\n");
                 }
-                sb.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
+                sb.append(keyword + " (" + inst.getReminderText() + ")");
             } else if (keyword.endsWith(" offering")) {
                 String offeringType = keyword.split(" ")[0];
                 if (sb.length() != 0) {
@@ -1609,6 +1613,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (sbLong.length() > 0) {
                 sbLong.append("\r\n");
             }
+            
+            i++;
         }
         if (sb.length() > 0) {
             sb.append("\r\n");
@@ -1937,9 +1943,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
 
-        // Add Keywords
-        final List<String> kw = getKeywords(state);
-
         // Triggered abilities
         for (final Trigger trig : state.getTriggers()) {
             if (!trig.isSecondary()) {
@@ -1966,7 +1969,8 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         // TODO A lot of these keywords should really show up before the SAs
         // keyword descriptions
-        for (final String keyword : kw) {
+        for (final KeywordInterface inst : getKeywords(state)) {
+            final String keyword = inst.getOriginal();
             if ((keyword.startsWith("Ripple") && !sb.toString().contains("Ripple"))
                     //|| (keyword.startsWith("Dredge") && !sb.toString().contains("Dredge")) | Replaced with
                     // keyword.startsWith("Dredge") Hopefully that doesn't break anything. -Indigo Dragon 8/9/2017
@@ -1977,11 +1981,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || (keyword.startsWith("Miracle") && !sb.toString().contains("Miracle"))) {
                 String[] parts = keyword.split(":");
                 sb.append(parts[0]).append(" ").append(ManaCostParser.parse(parts[1]))
-                    .append(" (").append(Keyword.getInstance(keyword).getReminderText()).append(")").append("\r\n");
+                    .append(" (").append(inst.getReminderText()).append(")").append("\r\n");
             } else if (keyword.equals("CARDNAME can't be countered.")) {
                 sb.append(keyword).append("\r\n");
             } else if (keyword.equals("Aftermath")) {
-                sb.append(Keyword.getInstance(keyword).getReminderText()).append("\r\n");
+                sb.append(inst.getReminderText()).append("\r\n");
             } else if (keyword.startsWith("Conspire") || keyword.startsWith("Dredge")
                     || keyword.startsWith("Cascade") || keyword.startsWith("Wither")
                     || (keyword.startsWith("Epic") && !sb.toString().contains("Epic"))
@@ -1989,7 +1993,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || (keyword.startsWith("Devoid"))) {
                 if (sb.length() != 0) {
                     sb.append("\r\n");
-                sb.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
+                sb.append(keyword + " (" + inst.getReminderText() + ")");
                 }
             } else if (keyword.equals("You may cast CARDNAME as though it had flash if you pay {2} more to cast it.")) {
                 sb.append(keyword).append("\r\n");
@@ -1997,7 +2001,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 final String[] n = keyword.split(":");
                 final Cost cost = new Cost(n[2], false);
                 sb.append("Splice onto ").append(n[1]).append(" ").append(cost.toSimpleString());
-                sb.append(" (" + Keyword.getInstance(keyword).getReminderText() + ")").append("\r\n");
+                sb.append(" (" + inst.getReminderText() + ")").append("\r\n");
             } else if (keyword.startsWith("Entwine")) {
                 final String[] n = keyword.split(":");
                 final Cost cost = new Cost(n[1], false);
@@ -2009,7 +2013,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     final String[] n = keyword.split(":");
                     final Cost cost = new Cost(n[1], false);
                     sb.append("Multikicker ").append(cost.toSimpleString());
-                    sb.append(" (" + Keyword.getInstance(keyword).getReminderText() + ")").append("\r\n");
+                    sb.append(" (" + inst.getReminderText() + ")").append("\r\n");
                 }
             } else if (keyword.startsWith("Kicker")) {
                 if (!keyword.endsWith("Generic")) {
@@ -2023,7 +2027,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 	    final Cost cost2 = new Cost(n[2], false);
                         sbx.append(cost2.toSimpleString());
                     }
-                    sbx.append(" (" + Keyword.getInstance(keyword).getReminderText() + ")");
+                    sbx.append(" (" + inst.getReminderText() + ")");
                     sb.append(sbx).append("\r\n");
                 }
             } else if (keyword.startsWith("AlternateAdditionalCost")) {
@@ -2098,9 +2102,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
                 sb.append("Remove CARDNAME from your deck before playing if you're not playing for ante.\r\n");
             } else if (keyword.equals("Retrace") || keyword.equals("Changeling")) {
-                sb.append(keyword + " (" + Keyword.getInstance(keyword).getReminderText() + ")");
+                sb.append(keyword + " (" + inst.getReminderText() + ")");
             } else if (keyword.startsWith("Presence")) {
-                sb.append(Keyword.getInstance(keyword).getReminderText());
+                sb.append(inst.getReminderText());
             }
         }
         return sb;
@@ -2569,10 +2573,13 @@ public class Card extends GameEntity implements Comparable<Card> {
             getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, "Trying to equip " + c.getName() + " but it can't be equipped.");
             return;
         }
-        if (hasStartOfKeyword("CantEquip")) {
-            final int keywordPosition = getKeywordPosition("CantEquip");
-            final String parse = getKeywords().get(keywordPosition);
-            final String[] k = parse.split(" ", 2);
+        
+        for(KeywordInterface inst : c.getKeywords()) {
+            String kw = inst.getOriginal();
+            if (!kw.startsWith("CantEquip")) {
+                continue;
+            }
+            final String[] k = kw.split(" ", 2);
             final String[] restrictions = k[1].split(",");
             if (c.isValid(restrictions, getController(), this, null)) {
                 getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, "Trying to equip " + c.getName() + " but it can't be equipped.");
@@ -3224,17 +3231,17 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     // keywords are like flying, fear, first strike, etc...
-    public final List<String> getKeywords() {
+    public final List<KeywordInterface> getKeywords() {
         return getKeywords(currentState);
     }
-    public final List<String> getKeywords(CardState state) {
+    public final List<KeywordInterface> getKeywords(CardState state) {
         ListKeywordVisitor visitor = new ListKeywordVisitor();
         visitKeywords(state, visitor);
         return visitor.getKeywords();
     }
     // Allows traversing the card's keywords without needing to concat a bunch
     // of lists. Optimizes common operations such as hasKeyword().
-    public final void visitKeywords(CardState state, Visitor<String> visitor) {
+    public final void visitKeywords(CardState state, Visitor<KeywordInterface> visitor) {
         visitUnhiddenKeywords(state, visitor);
         visitHiddenExtreinsicKeywords(visitor);
     }
@@ -3262,6 +3269,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             final boolean removeAllKeywords, final long timestamp) {
         addChangedCardKeywords(keywords, removeKeywords, removeAllKeywords, timestamp, true);
     }
+    
 
     public final void addChangedCardKeywords(final List<String> keywords, final List<String> removeKeywords,
             final boolean removeAllKeywords, final long timestamp, final boolean updateView) {
@@ -3269,14 +3277,32 @@ public class Card extends GameEntity implements Comparable<Card> {
         // if the key already exists - merge entries
         final KeywordsChange cks = changedCardKeywords.get(timestamp);
         if (cks != null) {
-        	cks.removeKeywords(this);
-            List<String> kws = Lists.newArrayList(keywords);
-            List<String> rkws = Lists.newArrayList(removeKeywords);
-            boolean remAll = removeAllKeywords;
-            kws.addAll(cks.getKeywords());
-            rkws.addAll(cks.getRemoveKeywords());
-            remAll |= cks.isRemoveAllKeywords();
-            final KeywordsChange newCks = new KeywordsChange(kws, rkws, remAll);
+            cks.removeKeywords(this);
+            final KeywordsChange newCks = cks.merge(keywords, removeKeywords, removeAllKeywords);
+            newCks.addKeywordsToCard(this);
+            changedCardKeywords.put(timestamp, newCks);
+        }
+        else {
+            final KeywordsChange newCks = new KeywordsChange(keywords, removeKeywords, removeAllKeywords);
+            newCks.addKeywordsToCard(this);
+            changedCardKeywords.put(timestamp, newCks);
+        }
+        
+        if (updateView) {
+            updateKeywords();
+        }
+    }
+    
+    public final void addChangedCardKeywordsInternal(final List<KeywordInterface> keywords, final List<KeywordInterface> removeKeywords,
+            final boolean removeAllKeywords, final long timestamp, final boolean updateView) {
+        KeywordCollection list = new KeywordCollection();
+        list.insertAll(keywords);
+        list.removeAll(getCantHaveOrGainKeyword());
+        // if the key already exists - merge entries
+        final KeywordsChange cks = changedCardKeywords.get(timestamp);
+        if (cks != null) {
+            cks.removeKeywords(this);
+            final KeywordsChange newCks = cks.merge(keywords, removeKeywords, removeAllKeywords);
             newCks.addKeywordsToCard(this);
             changedCardKeywords.put(timestamp, newCks);
         }
@@ -3322,13 +3348,16 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     // Hidden keywords will be left out
-    public final List<String> getUnhiddenKeywords() {
+    public final Collection<KeywordInterface> getUnhiddenKeywords() {
         return getUnhiddenKeywords(currentState);
     }
-    public final List<String> getUnhiddenKeywords(CardState state) {
-        final List<String> keywords = Lists.newArrayList();
-        Iterables.addAll(keywords, state.getIntrinsicKeywords());
-        keywords.addAll(extrinsicKeyword);
+    public final Collection<KeywordInterface> getUnhiddenKeywords(CardState state) {
+        KeywordCollection keywords = new KeywordCollection();
+        
+        //final List<KeywordInterface> keywords = Lists.newArrayList();
+        
+        keywords.insertAll(state.getIntrinsicKeywords());
+        keywords.insertAll(extrinsicKeyword.getValues());
 
         // see if keyword changes are in effect
         for (final KeywordsChange ck : changedCardKeywords.values()) {
@@ -3340,22 +3369,22 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
 
             if (ck.getKeywords() != null) {
-                keywords.addAll(ck.getKeywords());
+                keywords.insertAll(ck.getKeywords());
             }
         }
-        return keywords;
+        return keywords.getValues();
     }
-    private void visitUnhiddenKeywords(CardState state, Visitor<String> visitor) {
+    private void visitUnhiddenKeywords(CardState state, Visitor<KeywordInterface> visitor) {
         if (changedCardKeywords.isEmpty()) {
             // Fast path that doesn't involve temp allocations.
-            for (String kw : state.getIntrinsicKeywords()) {
+            for (KeywordInterface kw : state.getIntrinsicKeywords()) {
                 visitor.visit(kw);
             }
-            for (String kw : extrinsicKeyword) {
+            for (KeywordInterface kw : extrinsicKeyword.getValues()) {
                 visitor.visit(kw);
             }
         } else {
-            for (String kw : getUnhiddenKeywords()) {
+            for (KeywordInterface kw : getUnhiddenKeywords()) {
                 visitor.visit(kw);
             }
         }
@@ -3418,18 +3447,20 @@ public class Card extends GameEntity implements Comparable<Card> {
             return;
         }
 
-        final List<String> addKeywords = Lists.newArrayList();
-        final List<String> removeKeywords = Lists.newArrayList(keywordsGrantedByTextChanges);
+        final List<KeywordInterface> addKeywords = Lists.newArrayList();
+        final List<KeywordInterface> removeKeywords = Lists.newArrayList(keywordsGrantedByTextChanges);
 
-        for (final String kw : currentState.getIntrinsicKeywords()) {
-            final String newKw = AbilityUtils.applyKeywordTextChangeEffects(kw, this);
-            if (!newKw.equals(kw)) {
+        for (final KeywordInterface kw : currentState.getIntrinsicKeywords()) {
+            String oldtxt = kw.getOriginal();
+            final String newtxt = AbilityUtils.applyKeywordTextChangeEffects(oldtxt, this);
+            if (!newtxt.equals(oldtxt)) {
+                KeywordInterface newKw = Keyword.getInstance(newtxt); 
                 addKeywords.add(newKw);
                 removeKeywords.add(kw);
                 keywordsGrantedByTextChanges.add(newKw);
             }
         }
-        addChangedCardKeywords(addKeywords, removeKeywords, false, timestamp);
+        addChangedCardKeywordsInternal(addKeywords, removeKeywords, false, timestamp, true);
     }
 
     private void updateKeywordsOnRemoveChangedText(final KeywordsChange k) {
@@ -3497,10 +3528,12 @@ public class Card extends GameEntity implements Comparable<Card> {
         originalSVars.clear();
     }
 
-    public final void addIntrinsicKeyword(final String s) {
-        if (currentState.addIntrinsicKeyword(s)) {
+    public final KeywordInterface addIntrinsicKeyword(final String s) {
+        KeywordInterface inst = currentState.addIntrinsicKeyword(s);
+        if (inst != null) {
             currentState.getView().updateKeywords(this, currentState);
         }
+        return inst;
     }
 
     public final void addIntrinsicKeywords(final Iterable<String> s) {
@@ -3515,11 +3548,16 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
     }
 
-    public List<String> getExtrinsicKeyword() {
-        return extrinsicKeyword;
+    public Collection<KeywordInterface> getExtrinsicKeyword() {
+        return extrinsicKeyword.getValues();
     }
     public final void setExtrinsicKeyword(final List<String> a) {
-        extrinsicKeyword = Lists.newArrayList(a);
+        extrinsicKeyword.clear();
+        extrinsicKeyword.addAll(a);
+    }
+    public void setExtrinsicKeyword(Collection<KeywordInterface> extrinsicKeyword2) {
+        extrinsicKeyword.clear();
+        extrinsicKeyword.insertAll(extrinsicKeyword2);
     }
 
     public void addExtrinsicKeyword(final String s) {
@@ -3560,31 +3598,38 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     // Hidden Keywords will be returned without the indicator HIDDEN
-    public final List<String> getHiddenExtrinsicKeywords() {
+    public final List<KeywordInterface> getHiddenExtrinsicKeywords() {
         ListKeywordVisitor visitor = new ListKeywordVisitor();
         visitHiddenExtreinsicKeywords(visitor);
         return visitor.getKeywords();
     }
-    private void visitHiddenExtreinsicKeywords(Visitor<String> visitor) {
-        for (String keyword : hiddenExtrinsicKeyword) {
-            if (keyword == null) {
-                continue;
-            }
-            if (keyword.startsWith("HIDDEN")) {
-                keyword = keyword.substring(7);
-            }
-            visitor.visit(keyword);
+    private void visitHiddenExtreinsicKeywords(Visitor<KeywordInterface> visitor) {
+        for (KeywordInterface inst : hiddenExtrinsicKeyword.getValues()) {
+            visitor.visit(inst);
         }
     }
 
-    public final void addHiddenExtrinsicKeyword(final String s) {
-        if (hiddenExtrinsicKeyword.add(s)) {
+    public final void addHiddenExtrinsicKeyword(String s) {
+        if (s.startsWith("HIDDEN")) {
+            s = s.substring(7);
+        }
+        if (hiddenExtrinsicKeyword.add(s) != null) {
+            view.updateNonAbilityText(this);
+            currentState.getView().updateKeywords(this, currentState);
+        }
+    }
+    
+    public final void addHiddenExtrinsicKeyword(KeywordInterface k) {
+        if (hiddenExtrinsicKeyword.insert(k)) {
             view.updateNonAbilityText(this);
             currentState.getView().updateKeywords(this, currentState);
         }
     }
 
-    public final void removeHiddenExtrinsicKeyword(final String s) {
+    public final void removeHiddenExtrinsicKeyword(String s) {
+        if (s.startsWith("HIDDEN")) {
+            s = s.substring(7);
+        }
         if (hiddenExtrinsicKeyword.remove(s)) {
             view.updateNonAbilityText(this);
             currentState.getView().updateKeywords(this, currentState);
@@ -3817,19 +3862,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         return visitor.getCount() > 0;
     }
 
-    public final int getKeywordPosition(String k) {
-        return getKeywordPosition(k, currentState);
-    }
-    public final int getKeywordPosition(String k, CardState state) {
-        final List<String> a = getKeywords(state);
-        for (int i = 0; i < a.size(); i++) {
-            if (a.get(i).startsWith(k)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
     public final boolean hasAnyKeyword(final Iterable<String> keywords) {
         return hasAnyKeyword(keywords, currentState);
     }
@@ -3859,7 +3891,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public final int getKeywordMagnitude(final String k, CardState state) {
         int count = 0;
-        for (final String kw : getKeywords(state)) {
+        for (final KeywordInterface inst : getKeywords(state)) {
+            String kw = inst.getOriginal();
             if (kw.startsWith(k)) {
                 final String[] parse = kw.contains(":") ? kw.split(":") : kw.split(" ");
                 final String s = parse[1];
@@ -4331,7 +4364,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             return 0;
         }
 
-        for (String kw : getKeywords()) {
+        for (KeywordInterface inst : getKeywords()) {
+            String kw = inst.getOriginal();
             if (kw.startsWith("PreventAllDamageBy")) {
                 if (source.isValid(kw.split(" ", 2)[1].split(","), getController(), this, null)) {
                     return 0;
@@ -4837,93 +4871,91 @@ public class Card extends GameEntity implements Comparable<Card> {
             return true;
         }
 
-        final List<String> keywords = getKeywords();
-        if (keywords != null) {
-            final boolean colorlessDamage = damageSource && source.hasKeyword("Colorless Damage Source");
+        final boolean colorlessDamage = damageSource && source.hasKeyword("Colorless Damage Source");
 
-            for (final String kw : keywords) {
-                if (!kw.startsWith("Protection")) {
-                    continue;
-                }
-                if (kw.equals("Protection from white")) {
-                    if (source.isWhite() && !colorlessDamage) {
-                        return true;
-                    }
-                } else if (kw.equals("Protection from blue")) {
-                    if (source.isBlue() && !colorlessDamage) {
-                        return true;
-                    }
-                } else if (kw.equals("Protection from black")) {
-                    if (source.isBlack() && !colorlessDamage) {
-                        return true;
-                    }
-                } else if (kw.equals("Protection from red")) {
-                    if (source.isRed() && !colorlessDamage) {
-                        return true;
-                    }
-                } else if (kw.equals("Protection from green")) {
-                    if (source.isGreen() && !colorlessDamage) {
-                        return true;
-                    }
-                } else if (kw.equals("Protection from monocolored")) {
-                    if (CardUtil.getColors(source).isMonoColor() && !colorlessDamage) {
-                        return true;
-                    }
-                } else if (kw.equals("Protection from multicolored")) {
-                    if (CardUtil.getColors(source).isMulticolor() && !colorlessDamage) {
-                        return true;
-                    }
-                } else if (kw.equals("Protection from all colors")) {
-                    if (!source.isColorless() && !colorlessDamage) {
-                        return true;
-                    }
-                } else if (kw.equals("Protection from creatures")) {
-                    if (source.isCreature()) {
-                        return true;
-                    }
-                } else if (kw.equals("Protection from artifacts")) {
-                    if (source.isArtifact()) {
-                        return true;
-                    }
-                } else if (kw.equals("Protection from enchantments")) {
-                    if (source.isEnchantment()) {
-                        return true;
-                    }
-                } else if (kw.equals("Protection from everything")) {
+        for (final KeywordInterface inst : getKeywords()) {
+            String kw = inst.getOriginal();
+            if (!kw.startsWith("Protection")) {
+                continue;
+            }
+            if (kw.equals("Protection from white")) {
+                if (source.isWhite() && !colorlessDamage) {
                     return true;
-                } else if (kw.startsWith("Protection:")) { // uses isValid; Protection:characteristic:desc:exception
-                    final String[] kws = kw.split(":");
-                    String characteristic = kws[1];
+                }
+            } else if (kw.equals("Protection from blue")) {
+                if (source.isBlue() && !colorlessDamage) {
+                    return true;
+                }
+            } else if (kw.equals("Protection from black")) {
+                if (source.isBlack() && !colorlessDamage) {
+                    return true;
+                }
+            } else if (kw.equals("Protection from red")) {
+                if (source.isRed() && !colorlessDamage) {
+                    return true;
+                }
+            } else if (kw.equals("Protection from green")) {
+                if (source.isGreen() && !colorlessDamage) {
+                    return true;
+                }
+            } else if (kw.equals("Protection from monocolored")) {
+                if (CardUtil.getColors(source).isMonoColor() && !colorlessDamage) {
+                    return true;
+                }
+            } else if (kw.equals("Protection from multicolored")) {
+                if (CardUtil.getColors(source).isMulticolor() && !colorlessDamage) {
+                    return true;
+                }
+            } else if (kw.equals("Protection from all colors")) {
+                if (!source.isColorless() && !colorlessDamage) {
+                    return true;
+                }
+            } else if (kw.equals("Protection from creatures")) {
+                if (source.isCreature()) {
+                    return true;
+                }
+            } else if (kw.equals("Protection from artifacts")) {
+                if (source.isArtifact()) {
+                    return true;
+                }
+            } else if (kw.equals("Protection from enchantments")) {
+                if (source.isEnchantment()) {
+                    return true;
+                }
+            } else if (kw.equals("Protection from everything")) {
+                return true;
+            } else if (kw.startsWith("Protection:")) { // uses isValid; Protection:characteristic:desc:exception
+                final String[] kws = kw.split(":");
+                String characteristic = kws[1];
 
-                    // if colorlessDamage then it does only check damage color..
-                    if (colorlessDamage) {
-                        if (characteristic.endsWith("White") || characteristic.endsWith("Blue") 
-                            || characteristic.endsWith("Black") || characteristic.endsWith("Red") 
-                            || characteristic.endsWith("Green") || characteristic.endsWith("Colorless")
-                            || characteristic.endsWith("ChosenColor")) {
-                            characteristic += "Source"; 
-                        }
+                // if colorlessDamage then it does only check damage color..
+                if (colorlessDamage) {
+                    if (characteristic.endsWith("White") || characteristic.endsWith("Blue") 
+                        || characteristic.endsWith("Black") || characteristic.endsWith("Red") 
+                        || characteristic.endsWith("Green") || characteristic.endsWith("Colorless")
+                        || characteristic.endsWith("ChosenColor")) {
+                        characteristic += "Source"; 
                     }
+                }
 
-                    final String[] characteristics = characteristic.split(",");
-                    final String exception = kws.length > 3 ? kws[3] : null; // check "This effect cannot remove sth"
-                    if (source.isValid(characteristics, getController(), this, null)
-                            && (!checkSBA || exception == null || !source.isValid(exception, getController(), this, null))) {
-                        return true;
-                    }
-                } else if (kw.equals("Protection from colored spells")) {
-                    if (source.isSpell() && !source.isColorless()) {
-                        return true;
-                    }
-                } else if (kw.equals("Protection from the chosen player")) {
-                    if (source.getController().equals(chosenPlayer)) {
-                        return true;
-                    }
-                } else if (kw.startsWith("Protection from ")) {
-                    final String protectType = CardType.getSingularType(kw.substring("Protection from ".length()));
-                    if (source.getType().hasStringType(protectType)) {
-                        return true;
-                    }
+                final String[] characteristics = characteristic.split(",");
+                final String exception = kws.length > 3 ? kws[3] : null; // check "This effect cannot remove sth"
+                if (source.isValid(characteristics, getController(), this, null)
+                        && (!checkSBA || exception == null || !source.isValid(exception, getController(), this, null))) {
+                    return true;
+                }
+            } else if (kw.equals("Protection from colored spells")) {
+                if (source.isSpell() && !source.isColorless()) {
+                    return true;
+                }
+            } else if (kw.equals("Protection from the chosen player")) {
+                if (source.getController().equals(chosenPlayer)) {
+                    return true;
+                }
+            } else if (kw.startsWith("Protection from ")) {
+                final String protectType = CardType.getSingularType(kw.substring("Protection from ".length()));
+                if (source.getType().hasStringType(protectType)) {
+                    return true;
                 }
             }
         }
@@ -4983,13 +5015,13 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         final Card source = sa.getHostCard();
         final MutableBoolean result = new MutableBoolean(true);
-        visitKeywords(currentState, new Visitor<String>() {
+        visitKeywords(currentState, new Visitor<KeywordInterface>() {
             @Override
-            public void visit(String kw) {
+            public void visit(KeywordInterface kw) {
                 if (result.isFalse()) {
                     return;
                 }
-                switch (kw) {
+                switch (kw.getOriginal()) {
                     case "Shroud":
                         StringBuilder sb = new StringBuilder();
                         sb.append("Can target CardUID_").append(String.valueOf(getId()));
@@ -5031,13 +5063,17 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (result.isFalse()) {
             return false;
         }
-        if (sa.isSpell() && source.hasStartOfKeyword("SpellCantTarget")) {
-            final int keywordPosition = source.getKeywordPosition("SpellCantTarget");
-            final String parse = source.getKeywords().get(keywordPosition);
-            final String[] k = parse.split(":");
-            final String[] restrictions = k[1].split(",");
-            if (isValid(restrictions, source.getController(), source, null)) {
-                return false;
+        if (sa.isSpell()) {
+            for(KeywordInterface inst : source.getKeywords()) {
+                String kw = inst.getOriginal();
+                if(!kw.startsWith("SpellCantTarget")) {
+                    continue;
+                }
+                final String[] k = kw.split(":");
+                final String[] restrictions = k[1].split(",");
+                if (isValid(restrictions, source.getController(), source, null)) {
+                    return false;
+                }
             }
         }
         return true;
@@ -5066,10 +5102,12 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final boolean canBeEquippedBy(final Card equip) {
-        if (equip.hasStartOfKeyword("CantEquip")) {
-            final int keywordPosition = equip.getKeywordPosition("CantEquip");
-            final String parse = equip.getKeywords().get(keywordPosition);
-            final String[] k = parse.split(" ", 2);
+        for(KeywordInterface inst : equip.getKeywords()) {
+            String kw = inst.getOriginal();
+            if(!kw.startsWith("CantEquip")) {
+                continue;
+            }
+            final String[] k = kw.split(":");
             final String[] restrictions = k[1].split(",");
             if (isValid(restrictions, equip.getController(), equip, null)) {
                 return false;
@@ -5461,7 +5499,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     // Counts number of instances of a given keyword.
-    private static final class CountKeywordVisitor extends Visitor<String> {
+    private static final class CountKeywordVisitor extends Visitor<KeywordInterface> {
         private String keyword;
         private int count;
         private boolean startOf;
@@ -5478,7 +5516,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         @Override
-        public void visit(String kw) {
+        public void visit(KeywordInterface inst) {
+            final String kw = inst.getOriginal();
             if ((startOf && kw.startsWith(keyword)) || kw.equals(keyword)) {
                 count++;
             }
@@ -5490,15 +5529,15 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     // Collects all the keywords into a list.
-    private static final class ListKeywordVisitor extends Visitor<String> {
-        private List<String> keywords = Lists.newArrayList();
+    private static final class ListKeywordVisitor extends Visitor<KeywordInterface> {
+        private List<KeywordInterface> keywords = Lists.newArrayList();
 
         @Override
-        public void visit(String kw) {
+        public void visit(KeywordInterface kw) {
             keywords.add(kw);
         }
 
-        public List<String> getKeywords() {
+        public List<KeywordInterface> getKeywords() {
             return keywords;
         }
     }
@@ -5603,4 +5642,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         removeSVar("IsCastFromPlayEffect"); // Temporary SVar indicating that the spell is cast indirectly via AF Play
         setSunburstValue(0); // Sunburst
     }
+
+    
 }

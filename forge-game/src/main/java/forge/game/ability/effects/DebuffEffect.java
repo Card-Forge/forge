@@ -5,6 +5,7 @@ import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.keyword.KeywordInterface;
 import forge.game.spellability.SpellAbility;
 
 import java.util.Arrays;
@@ -73,7 +74,8 @@ public class DebuffEffect extends SpellAbilityEffect {
             if (tgtC.isInPlay() && tgtC.canBeTargetedBy(sa)) {
                 if (sa.hasParam("AllSuffixKeywords")) {
                     String suffix = sa.getParam("AllSuffixKeywords");
-                    for (final String keyword : tgtC.getKeywords()) {
+                    for (final KeywordInterface kw : tgtC.getKeywords()) {
+                        String keyword = kw.getOriginal();
                         if (keyword.endsWith(suffix)) {
                             kws.add(keyword);
                         }
@@ -81,7 +83,8 @@ public class DebuffEffect extends SpellAbilityEffect {
                 }
 
                 // special for Protection:Card.<color>:Protection from <color>:*             
-                for (final String keyword : tgtC.getKeywords()) {
+                for (final KeywordInterface inst : tgtC.getKeywords()) {
+                    String keyword = inst.getOriginal();
                     if (keyword.startsWith("Protection:")) {
                         for (final String kw : kws) {
                             if (keyword.matches("(?i).*:" + kw))

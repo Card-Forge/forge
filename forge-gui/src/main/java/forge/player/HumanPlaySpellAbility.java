@@ -37,6 +37,7 @@ import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.cost.CostPayment;
+import forge.game.keyword.KeywordInterface;
 import forge.game.mana.ManaPool;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
@@ -133,7 +134,8 @@ public class HumanPlaySpellAbility {
         	final Map<String, String> params = Maps.newHashMap();
         	params.put("ManaColorConversion", "Additive");
 
-            for (String keyword : c.getKeywords()) {
+            for (KeywordInterface inst : c.getKeywords()) {
+                String keyword = inst.getOriginal();
                 if (keyword.startsWith("ManaConvert")) {
                     final String[] k = keyword.split(":");
                     params.put(k[1] + "Conversion", k[2]);

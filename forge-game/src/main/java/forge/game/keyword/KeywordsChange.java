@@ -17,16 +17,12 @@
  */
 package forge.game.keyword;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.google.common.collect.Lists;
 
 import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
-import forge.game.replacement.ReplacementEffect;
-import forge.game.spellability.SpellAbility;
-import forge.game.staticability.StaticAbility;
-import forge.game.trigger.Trigger;
 
 /**
  * <p>
@@ -38,8 +34,9 @@ import forge.game.trigger.Trigger;
  */
 public class KeywordsChange {
     private final KeywordCollection keywords = new KeywordCollection();
-    private final List<String> removeKeywords;
-    private final boolean removeAllKeywords;
+    private final List<KeywordInterface> removeKeywordInterfaces = Lists.newArrayList(); 
+    private final List<String> removeKeywords = Lists.newArrayList();
+    private boolean removeAllKeywords;
 
     /**
      * 
@@ -49,12 +46,33 @@ public class KeywordsChange {
      * @param removeKeywordList the list of keywords to remove.
      * @param removeAll whether to remove all keywords.
      */
-    public KeywordsChange(final Iterable<String> keywordList, final List<String> removeKeywordList, final boolean removeAll) {
+    public KeywordsChange(
+            final Iterable<String> keywordList,
+            final Collection<String> removeKeywordList,
+            final boolean removeAll) {
         if (keywordList != null) {
             this.keywords.addAll(keywordList);
         }
 
-        this.removeKeywords = removeKeywordList == null ? Lists.<String>newArrayList() : Lists.newArrayList(removeKeywordList);
+        if (removeKeywordList != null) {
+            this.removeKeywords.addAll(removeKeywordList);
+        }
+
+        this.removeAllKeywords = removeAll;
+    }
+    
+    public KeywordsChange(
+            final Collection<KeywordInterface> keywordList,
+            final Collection<KeywordInterface> removeKeywordInterfaces,
+            final boolean removeAll) {
+        if (keywordList != null) {
+            this.keywords.insertAll(keywordList);
+        }
+
+        if (removeKeywordInterfaces != null) {
+            this.removeKeywordInterfaces.addAll(removeKeywordInterfaces);
+        }
+
         this.removeAllKeywords = removeAll;
     }
 
@@ -64,8 +82,8 @@ public class KeywordsChange {
      * 
      * @return ArrayList<String>
      */
-    public final List<String> getKeywords() {
-        return Lists.newArrayList(this.keywords);
+    public final Collection<KeywordInterface> getKeywords() {
+        return this.keywords.getValues();
     }
 
     /**
@@ -106,6 +124,41 @@ public class KeywordsChange {
     public final void removeKeywords(final Card host) {
         for (KeywordInterface inst : keywords.getValues()) {
             inst.removeKeywords(host);
+        }
+    }
+    
+    public final boolean removeKeywordfromAdd(final String keyword) {
+        return keywords.remove(keyword);
+    }
+    
+    public final void addKeyword(final String keyword) {
+        keywords.add(keyword);
+    }
+    
+    public final KeywordsChange merge(
+            final Collection<KeywordInterface> keywordList,
+            final Collection<KeywordInterface> removeKeywordList,
+            final boolean removeAll) {
+        KeywordsChange result = new KeywordsChange(keywordList, removeKeywordList, removeAll);
+        result.__merge(this);
+        return result;
+    }
+    
+    public final KeywordsChange merge(
+            final Iterable<String> keywordList,
+            final Collection<String> removeKeywordList,
+            final boolean removeAll) {
+        KeywordsChange result = new KeywordsChange(keywordList, removeKeywordList, removeAll);
+        result.__merge(this);
+        return result;
+    }
+    
+    private void __merge(KeywordsChange other) {
+        keywords.insertAll(other.getKeywords());
+        removeKeywords.addAll(other.removeKeywords);
+        removeKeywordInterfaces.addAll(other.removeKeywordInterfaces);
+        if (other.removeAllKeywords) {
+            removeAllKeywords = true;
         }
     }
 }

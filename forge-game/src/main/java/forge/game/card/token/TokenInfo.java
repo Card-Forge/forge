@@ -9,6 +9,7 @@ import forge.card.CardType;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
+import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 
 import java.util.List;
@@ -39,7 +40,13 @@ public class TokenInfo {
         this.imageName = ImageKeys.getTokenImageName(c.getImageKey());
         this.manaCost = c.getManaCost().toString();
         this.types = getCardTypes(c);
-        this.intrinsicKeywords   = c.getKeywords().toArray(new String[0]);
+        
+        List<String> list = Lists.newArrayList();
+        for (KeywordInterface inst : c.getKeywords()) {
+            list.add(inst.getOriginal());
+        }
+        
+        this.intrinsicKeywords   = list.toArray(new String[0]);
         this.basePower = c.getBasePower();
         this.baseToughness = c.getBaseToughness();
     }

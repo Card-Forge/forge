@@ -19,6 +19,7 @@ package forge.game.card;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.card.*;
 import forge.card.mana.ManaCost;
@@ -27,6 +28,7 @@ import forge.game.ForgeScript;
 import forge.game.GameObject;
 import forge.game.card.CardView.CardStateView;
 import forge.game.keyword.KeywordCollection;
+import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
@@ -35,6 +37,8 @@ import forge.game.trigger.Trigger;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 public class CardState extends GameObject {
@@ -146,8 +150,8 @@ public class CardState extends GameObject {
         view.updateToughness(this);
     }
 
-    public final Iterable<String> getIntrinsicKeywords() {
-        return intrinsicKeywords;
+    public final Collection<KeywordInterface> getIntrinsicKeywords() {
+        return intrinsicKeywords.getValues();
     }
     public final boolean hasIntrinsicKeyword(String k) {
         return intrinsicKeywords.contains(k);
@@ -157,13 +161,17 @@ public class CardState extends GameObject {
         intrinsicKeywords.addAll(intrinsicKeyword0);
     }
 
-    public final boolean addIntrinsicKeyword(final String s) {
-        return s.trim().length() != 0 && intrinsicKeywords.add(s);
+    public final KeywordInterface addIntrinsicKeyword(final String s) {
+        if (s.trim().length() == 0) {
+            return null;
+        }
+        
+        return intrinsicKeywords.add(s);
     }
     public final boolean addIntrinsicKeywords(final Iterable<String> keywords) {
         boolean changed = false;
         for (String k : keywords) {
-            if (addIntrinsicKeyword(k)) {
+            if (addIntrinsicKeyword(k) != null) {
                 changed = true;
             }
         }
@@ -399,6 +407,14 @@ public class CardState extends GameObject {
     @Override
     public boolean hasProperty(String property, Player sourceController, Card source, SpellAbility spellAbility) {
         return ForgeScript.cardStateHasProperty(this, property, sourceController, source, spellAbility);
+    }
+
+    public List<String> addIntrinsicKeywords(Collection<KeywordInterface> intrinsicKeywords2) {
+        List<String> names = Lists.newArrayList();
+        for (KeywordInterface inst : intrinsicKeywords2) {
+            names.add(inst.getOriginal());
+        }
+        return names;
     }
     
     

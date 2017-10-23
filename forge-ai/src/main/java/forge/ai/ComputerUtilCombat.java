@@ -17,10 +17,14 @@
  */
 package forge.ai;
 
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -32,6 +36,7 @@ import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.CostPayment;
+import forge.game.keyword.KeywordInterface;
 import forge.game.phase.Untap;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -45,9 +50,6 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
-
-import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -103,7 +105,8 @@ public class ComputerUtilCombat {
             return false;
         }
 
-        for (final String keyword : atacker.getKeywords()) {
+        for (final KeywordInterface inst : atacker.getKeywords()) {
+            final String keyword = inst.getOriginal();
             if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
                 final String defined = keyword.split(":")[1];
                 final Player player = AbilityUtils.getDefinedPlayers(atacker, defined, null).get(0);
@@ -2507,7 +2510,8 @@ public class ComputerUtilCombat {
 
         for (Card atk : attackers) {
             boolean hasProtection = false;
-            for (String kw : atk.getKeywords()) {
+            for (KeywordInterface inst : atk.getKeywords()) {
+                String kw = inst.getOriginal();
                 if (kw.startsWith("Protection")) {
                     hasProtection = true;
                     break;

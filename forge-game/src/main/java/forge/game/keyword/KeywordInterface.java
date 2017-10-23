@@ -16,6 +16,9 @@ public interface KeywordInterface {
 
     int getAmount();
     
+    boolean getHidden();
+    void setHidden(boolean val);
+    
     void addKeywords(final Card host, final boolean intrinsic);
     
     public void addTrigger(final Trigger trg);

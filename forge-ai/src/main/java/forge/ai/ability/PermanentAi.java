@@ -1,6 +1,9 @@
 package forge.ai.ability;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Predicates;
+
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
@@ -14,13 +17,13 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
+import forge.game.keyword.KeywordInterface;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import org.apache.commons.lang3.StringUtils;
 
 public class PermanentAi extends SpellAbilityAi {
 
@@ -144,7 +147,8 @@ public class PermanentAi extends SpellAbilityAi {
         }
 
         // don't play cards without being able to pay the upkeep for
-        for (String ability : card.getKeywords()) {
+        for (KeywordInterface inst : card.getKeywords()) {
+            String ability = inst.getOriginal();
             if (ability.startsWith("UpkeepCost")) {
                 final String[] k = ability.split(":");
                 final String costs = k[1];

@@ -17,7 +17,7 @@ public enum Keyword {
     AMPLIFY(KeywordWithAmountAndType.class, false, "As this creature enters the battlefield, put {%d:+1/+1 counter} on it for each %s card you reveal in your hand."),
     ANNIHILATOR(KeywordWithAmount.class, false, "Whenever this creature attacks, defending player sacrifices {%d:permanent}."),
     AURA_SWAP(KeywordWithCost.class, false, "%s: You may exchange this Aura with an Aura card in your hand."),
-    AWAKEN(KeywordWithCostAndAmount.class, true, "If you cast this spell for %s, also put {%d:+1/+1 counter} on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land."),
+    AWAKEN(KeywordWithCostAndAmount.class, false, "If you cast this spell for %s, also put {%d:+1/+1 counter} on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land."),
     BANDING(SimpleKeyword.class, true, "Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking."),
     BATTLE_CRY(SimpleKeyword.class, false, "Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn."),
     BESTOW(KeywordWithCost.class, true, "If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature."),
@@ -30,7 +30,7 @@ public enum Keyword {
     CIPHER(SimpleKeyword.class, true, "Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost."),
     CONSPIRE(SimpleKeyword.class, false, "As an additional cost to cast this spell, you may tap two untapped creatures you control that each share a color with it. If you do, copy it."),
     CONVOKE(SimpleKeyword.class, true, "Your creatures can help cast this spell. Each creature you tap while playing this spell reduces its cost by {1} or by one mana of that creature's color."),
-    CREW(KeywordWithAmount.class, true, "Tap any number of creatures you control with total power %1$d or more: This Vehicle becomes an artifact creature until end of turn."),
+    CREW(KeywordWithAmount.class, false, "Tap any number of creatures you control with total power %1$d or more: This Vehicle becomes an artifact creature until end of turn."),
     CUMULATIVE_UPKEEP(KeywordWithCost.class, false, "At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it."),
     CYCLING(KeywordWithCost.class, false, "%s, Discard this card: Draw a card."), //Typecycling reminder text handled by Cycling class
     DASH(KeywordWithCost.class, true, "You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step."),
@@ -38,7 +38,7 @@ public enum Keyword {
     DEFENDER(SimpleKeyword.class, true, "This creature can't attack."),
     DELVE(SimpleKeyword.class, true, "As an additional cost to cast this spell, you may exile any number of cards from your graveyard. Each card exiled this way reduces the cost to cast this spell by {1}."),
     DETHRONE(SimpleKeyword.class, false, "Whenever this creature attacks the player with the most life or tied for the most life, put a +1/+1 counter on it."),
-    DEVOUR(KeywordWithAmount.class, true, "As this creature enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with {%d:+1/+1 counter} on it for each creature sacrificed this way."),
+    DEVOUR(KeywordWithAmount.class, false, "As this creature enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with {%d:+1/+1 counter} on it for each creature sacrificed this way."),
     DEVOID(SimpleKeyword.class, true, "This card has no color."),
     DOUBLE_STRIKE(SimpleKeyword.class, true, "This creature deals both first-strike and regular combat damage."),
     DREDGE(KeywordWithAmount.class, true, "If you would draw a card, instead you may put exactly {%d:card} from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card."),
@@ -86,13 +86,13 @@ public enum Keyword {
     LIFELINK(SimpleKeyword.class, true, "Damage dealt by this creature also causes its controller to gain that much life."),
     LIVING_WEAPON(SimpleKeyword.class, true, "When this Equipment enters the battlefield, create a 0/0 black Germ creature token, then attach this Equipment to it."),
     MADNESS(KeywordWithCost.class, true, "If you discard this card, discard it into exile. When you do, cast it for %s  or put it into your graveyard."),
-    MELEE(SimpleKeyword.class, true, "Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked with a creature this combat."),
+    MELEE(SimpleKeyword.class, false, "Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked with a creature this combat."),
     MENACE(SimpleKeyword.class, true, "This creature can't be blocked except by two or more creatures."),
-    MEGAMORPH(KeywordWithCost.class, true, "You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it."),
+    MEGAMORPH(KeywordWithCost.class, false, "You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it."),
     MIRACLE(KeywordWithCost.class, false, "You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn."),
     MONSTROSITY(KeywordWithCostAndAmount.class, false, "If this creature isn't monstrous, put {%2$d:+1/+1 counter} on it and it becomes monstrous."),
     MODULAR(Modular.class, false, "This creature enters the battlefield with {%d:+1/+1 counter} on it. When it dies, you may put its +1/+1 counters on target artifact creature."),
-    MORPH(KeywordWithCost.class, true, "You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost."),
+    MORPH(KeywordWithCost.class, false, "You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost."),
     MULTIKICKER(KeywordWithCost.class, false, "You may pay an additional %s any number of times as you cast this spell."),
     MYRIAD(SimpleKeyword.class, false, "Whenever this creature attacks, for each opponent other than defending player, you may create a token that's a copy of this creature that's tapped and attacking that player or a planeswalker he or she controls. If one or more tokens are created this way, exile the tokens at end of combat."),
     NINJUTSU(KeywordWithCost.class, false, "%s, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking."),
@@ -228,9 +228,8 @@ public enum Keyword {
         Set<Keyword> keywordSet = cardKeywordSetLookup.get(key);
         if (keywordSet == null) {
             keywordSet = new HashSet<Keyword>();
-            List<String> keywords = Card.getCardForUi(card).getKeywords();
-            for (String k : keywords) {
-                Keyword keyword = Keyword.getInstance(k).getKeyword();
+            for (KeywordInterface inst : Card.getCardForUi(card).getKeywords()) {
+                final Keyword keyword = inst.getKeyword();
                 if (keyword != Keyword.UNDEFINED) {
                     keywordSet.add(keyword);
                 }

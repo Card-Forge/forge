@@ -5,6 +5,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -22,6 +23,8 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.CostPayEnergy;
 import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordCollection;
+import forge.game.keyword.KeywordInterface;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -41,7 +44,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.Map.Entry;
-
 
 public class ComputerUtilCard {
     public static Card getMostExpensivePermanentAI(final CardCollectionView list, final SpellAbility spell, final boolean targeted) {
@@ -1564,19 +1566,21 @@ public class ComputerUtilCard {
         if (c.isTapped()) {
             pumped.setTapped(true);
         }
-        final List<String> copiedKeywords = pumped.getKeywords();
-        List<String> toCopy = new ArrayList<String>();
-        for (String kw : c.getKeywords()) {
-            if (!copiedKeywords.contains(kw)) {
-                if (kw.startsWith("HIDDEN")) {
-                    pumped.addHiddenExtrinsicKeyword(kw);
+
+        KeywordCollection copiedKeywords = new KeywordCollection();
+        copiedKeywords.insertAll(pumped.getKeywords());
+        List<KeywordInterface> toCopy = Lists.newArrayList();
+        for (KeywordInterface k : c.getKeywords()) {
+            if (!copiedKeywords.contains(k.getOriginal())) {
+                if (k.getHidden()) {
+                    pumped.addHiddenExtrinsicKeyword(k);
                 } else {
-                    toCopy.add(kw);
+                    toCopy.add(k);
                 }
             }
         }
         final long timestamp2 = c.getGame().getNextTimestamp(); //is this necessary or can the timestamp be re-used?
-        pumped.addChangedCardKeywords(toCopy, new ArrayList<String>(), false, timestamp2);
+        pumped.addChangedCardKeywordsInternal(toCopy, Lists.<KeywordInterface>newArrayList(), false, timestamp2, true);
         ComputerUtilCard.applyStaticContPT(ai.getGame(), pumped, new CardCollection(c));
         return pumped;
     }

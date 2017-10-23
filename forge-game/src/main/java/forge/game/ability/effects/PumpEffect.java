@@ -9,6 +9,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardStatsChanged;
+import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -258,8 +259,8 @@ public class PumpEffect extends SpellAbilityEffect {
             List<String> choice = Lists.newArrayList();
             List<String> total = Lists.newArrayList(keywords);
             if (sa.hasParam("NoRepetition")) {
-                final List<String> tgtCardskws = tgtCards.get(0).getKeywords();
-                for (String kws : tgtCardskws) {
+                for (KeywordInterface inst : tgtCards.get(0).getKeywords()) {
+                    final String kws = inst.getOriginal();
                     if (total.contains(kws)) {
                         total.remove(kws);
                     }
