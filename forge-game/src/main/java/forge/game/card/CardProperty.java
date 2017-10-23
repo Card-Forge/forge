@@ -216,14 +216,38 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("TargetedPlayerCtrl")) {
+            boolean foundTargetingSA = false;
             for (final SpellAbility sa : source.getCurrentState().getNonManaAbilities()) {
                 final SpellAbility saTargeting = sa.getSATargetingPlayer();
                 if (saTargeting != null) {
+                    foundTargetingSA = true;
                     for (final Player p : saTargeting.getTargets().getTargetPlayers()) {
                         if (!controller.equals(p)) {
                             return false;
                         }
                     }
+                }
+            }
+            if (!foundTargetingSA) {
+                // FIXME: Something went wrong with detecting the SA that has a target, this can happen
+                // e.g. when activating a SA on a card from another player's hand (e.g. opponent's Chandra's Fury
+                // activated via Sen Triplets). Needs further investigation as to why this is happening, it might
+                // cause issues elsewhere too.
+                System.err.println("Warning: could not deduce a player target for TargetedPlayerCtrl for " + source + ", trying to locate it via CastSA...");
+                SpellAbility castSA = source.getCastSA();
+                while (castSA != null) {
+                    if (!Iterables.isEmpty(castSA.getTargets().getTargetPlayers())) {
+                        foundTargetingSA = true;
+                        for (final Player p : castSA.getTargets().getTargetPlayers()) {
+                            if (!controller.equals(p)) {
+                                return false;
+                            }
+                        }
+                    }
+                    castSA = castSA.getSubAbility();
+                }
+                if (!foundTargetingSA) {
+                    System.err.println("Warning: checking targets in CastSA did not yield any results as well, TargetedPlayerCtrl check failed.");
                 }
             }
         } else if (property.equals("TargetedControllerCtrl")) {
@@ -264,14 +288,35 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("TargetedPlayerOwn")) {
+            boolean foundTargetingSA = false;
             for (final SpellAbility sa : source.getCurrentState().getNonManaAbilities()) {
                 final SpellAbility saTargeting = sa.getSATargetingPlayer();
                 if (saTargeting != null) {
+                    foundTargetingSA = true;
                     for (final Player p : saTargeting.getTargets().getTargetPlayers()) {
                         if (!card.getOwner().equals(p)) {
                             return false;
                         }
                     }
+                }
+            }
+            if (!foundTargetingSA) {
+                // FIXME: Something went wrong with detecting the SA that has a target, needs investigation
+                System.err.println("Warning: could not deduce a player target for TargetedPlayerOwn for " + source + ", trying to locate it via CastSA...");
+                SpellAbility castSA = source.getCastSA();
+                while (castSA != null) {
+                    if (!Iterables.isEmpty(castSA.getTargets().getTargetPlayers())) {
+                        foundTargetingSA = true;
+                        for (final Player p : castSA.getTargets().getTargetPlayers()) {
+                            if (!card.getOwner().equals(p)) {
+                                return false;
+                            }
+                        }
+                    }
+                    castSA = castSA.getSubAbility();
+                }
+                if (!foundTargetingSA) {
+                    System.err.println("Warning: checking targets in CastSA did not yield any results as well, TargetedPlayerOwn check failed.");
                 }
             }
         } else if (property.startsWith("OwnedBy")) {
