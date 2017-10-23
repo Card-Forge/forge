@@ -18,14 +18,9 @@
 package forge.game.card;
 
 import com.google.common.base.Function;
-import com.google.common.base.Joiner;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.*;
-import forge.card.CardType.CoreType;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
@@ -291,7 +286,6 @@ public class CardFactory {
     }
 
     private static void buildAbilities(final Card card) {
-        final String cardName = card.getName();
 
         for (final CardStateName state : card.getStates()) {
             if (card.isDoubleFaced() && state == CardStateName.FaceDown) {
