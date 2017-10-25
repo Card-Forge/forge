@@ -469,6 +469,13 @@ public class PumpAi extends PumpAiBase {
                 }
                 list.removeAll(canDieToPump);
 
+                // Generally, don't pump anything that your opponents control
+                if ("ContinuousBonus".equals(sa.getParam("AILogic"))) {
+                    // TODO: make it possible for the AI to use this logic to kill opposing creatures
+                    // when a toughness debuff is applied
+                    list = CardLists.filter(list, CardPredicates.isController(ai));
+                }
+
                 if (!list.isEmpty()) {
                     sa.getTargets().add(list.get(0));
                     return true;
