@@ -10,7 +10,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.event.GameEventCardStatsChanged;
-import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -277,7 +276,7 @@ public class CloneEffect extends SpellAbilityEffect {
                 
                 KeywordInterface inst = tgtCard.addIntrinsicKeyword(k);
                 if (inst != null) {
-                    inst.addKeywords(tgtCard, true);
+                    inst.createTraits(tgtCard, true);
                 }
             }
         }
