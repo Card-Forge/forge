@@ -3377,6 +3377,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                 keywords.removeAll(ck.getRemoveKeywords());
             }
 
+            keywords.removeInstances(ck.getRemovedKeywordInstances());
+
             if (ck.getKeywords() != null) {
                 keywords.insertAll(ck.getKeywords());
             }

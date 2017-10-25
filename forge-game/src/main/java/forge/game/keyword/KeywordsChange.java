@@ -86,6 +86,9 @@ public class KeywordsChange {
         return this.keywords.getValues();
     }
 
+    public final Collection<KeywordInterface> getRemovedKeywordInstances() {
+        return this.removeKeywordInterfaces;
+    }
     /**
      * 
      * getRemoveKeywords.
