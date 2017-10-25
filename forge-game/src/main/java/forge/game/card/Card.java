@@ -41,7 +41,6 @@ import forge.game.event.GameEventCardAttachment.AttachMethod;
 import forge.game.event.GameEventCardDamaged.DamageType;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
-import forge.game.keyword.KeywordInstance;
 import forge.game.keyword.KeywordInterface;
 import forge.game.keyword.KeywordsChange;
 import forge.game.player.Player;
@@ -69,7 +68,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * <p>
@@ -846,6 +844,12 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public final void clearTriggersNew() {
         currentState.clearTriggers();
+    }
+    
+    public void updateTriggers(List<Trigger> list, CardState state) {
+        for (KeywordInterface kw : getUnhiddenKeywords(state)) {
+            list.addAll(kw.getTriggers());
+        }
     }
 
     public final Object getTriggeringObject(final String typeIn) {
@@ -2205,6 +2209,16 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final FCollectionView<SpellAbility> getNonManaAbilities() {
         return currentState.getNonManaAbilities();
     }
+    
+    public void updateSpellAbilities(List<SpellAbility> list, CardState state, Boolean mana) {
+        for (KeywordInterface kw : getUnhiddenKeywords(state)) {
+            for (SpellAbility sa : kw.getAbilities()) {
+                if (mana == null || mana == sa.isManaAbility()) {
+                    list.add(sa);
+                }
+            }
+        }
+    }
 
     public final FCollectionView<SpellAbility> getIntrinsicSpellAbilities() {
         return currentState.getIntrinsicSpellAbilities();
@@ -3277,7 +3291,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         // if the key already exists - merge entries
         final KeywordsChange cks = changedCardKeywords.get(timestamp);
         if (cks != null) {
-            cks.removeKeywords(this);
             final KeywordsChange newCks = cks.merge(keywords, removeKeywords, removeAllKeywords);
             newCks.addKeywordsToCard(this);
             changedCardKeywords.put(timestamp, newCks);
@@ -3301,7 +3314,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         // if the key already exists - merge entries
         final KeywordsChange cks = changedCardKeywords.get(timestamp);
         if (cks != null) {
-            cks.removeKeywords(this);
             final KeywordsChange newCks = cks.merge(keywords, removeKeywords, removeAllKeywords);
             newCks.addKeywordsToCard(this);
             changedCardKeywords.put(timestamp, newCks);
@@ -3338,11 +3350,8 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final KeywordsChange removeChangedCardKeywords(final long timestamp, final boolean updateView) {
         KeywordsChange change = changedCardKeywords.remove(timestamp);
-        if (change != null) {
-            change.removeKeywords(this);
-            if (updateView) {   
-                updateKeywords();
-            }
+        if (change != null && updateView) {   
+            updateKeywords();
         }
         return change;
     }
@@ -3673,6 +3682,12 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public final void removeStaticAbility(StaticAbility stAb) {
         currentState.removeStaticAbility(stAb);
+    }
+    
+    public void updateStaticAbilities(List<StaticAbility> list, CardState state) {
+        for (KeywordInterface kw : getUnhiddenKeywords(state)) {
+            list.addAll(kw.getStaticAbilities());
+        }
     }
 
     public final boolean isPermanent() {
@@ -5139,6 +5154,12 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public void removeReplacementEffect(ReplacementEffect replacementEffect) {
         currentState.removeReplacementEffect(replacementEffect);
+    }
+    
+    public void updateReplacementEffects(List<ReplacementEffect> list, CardState state) {
+        for (KeywordInterface kw : getUnhiddenKeywords(state)) {
+            list.addAll(kw.getReplacements());
+        }
     }
 
     /**

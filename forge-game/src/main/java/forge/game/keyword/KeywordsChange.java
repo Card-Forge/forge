@@ -117,13 +117,7 @@ public class KeywordsChange {
 
     public final void addKeywordsToCard(final Card host) {
         for (KeywordInterface inst : keywords.getValues()) {
-            inst.addKeywords(host, false);
-        }
-    }
-
-    public final void removeKeywords(final Card host) {
-        for (KeywordInterface inst : keywords.getValues()) {
-            inst.removeKeywords(host);
+            inst.createTraits(host, false, true);
         }
     }
     

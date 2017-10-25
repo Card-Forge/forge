@@ -1,5 +1,7 @@
 package forge.game.keyword;
 
+import java.util.Collection;
+
 import forge.game.card.Card;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
@@ -19,7 +21,8 @@ public interface KeywordInterface {
     boolean getHidden();
     void setHidden(boolean val);
     
-    void addKeywords(final Card host, final boolean intrinsic);
+    public void createTraits(final Card host, final boolean intrinsic);
+    void createTraits(final Card host, final boolean intrinsic, final boolean clear);
     
     public void addTrigger(final Trigger trg);
     
@@ -28,5 +31,21 @@ public interface KeywordInterface {
     public void addSpellAbility(final SpellAbility s);
     public void addStaticAbility(final StaticAbility st);
     
-    void removeKeywords(final Card host);
+
+    /**
+     * @return the triggers
+     */
+    public Collection<Trigger> getTriggers();
+    /**
+     * @return the replacements
+     */
+    public Collection<ReplacementEffect> getReplacements();
+    /**
+     * @return the abilities
+     */
+    public Collection<SpellAbility> getAbilities();
+    /**
+     * @return the staticAbilities
+     */
+    public Collection<StaticAbility> getStaticAbilities();
 }

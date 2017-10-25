@@ -1,5 +1,6 @@
 package forge.game.keyword;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -72,43 +73,64 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     protected abstract String formatReminderText(String reminderText);
     
 
-    public final void addKeywords(final Card host, final boolean intrinsic) {
+    /*
+     * (non-Javadoc)
+     * @see forge.game.keyword.KeywordInterface#createTraits(forge.game.card.Card, boolean)
+     */
+    public final void createTraits(final Card host, final boolean intrinsic) {
+        createTraits(host, intrinsic, false);
+    }
+    
+    /*
+     * (non-Javadoc)
+     * @see forge.game.keyword.KeywordInterface#createTraits(forge.game.card.Card, boolean, boolean)
+     */
+    public final void createTraits(final Card host, final boolean intrinsic, final boolean clear) {
+        if (clear) {
+            triggers.clear();
+            replacements.clear();
+            abilities.clear();
+            staticAbilities.clear();
+        }
         CardFactoryUtil.addTriggerAbility(this, host, intrinsic);
         CardFactoryUtil.addReplacementEffect(this, host, intrinsic);
         CardFactoryUtil.addSpellAbility(this, host, intrinsic);
         CardFactoryUtil.addStaticAbility(this, host, intrinsic);
     }
 
-    
+    /*
+     * (non-Javadoc)
+     * @see forge.game.keyword.KeywordInterface#addTrigger(forge.game.trigger.Trigger)
+     */
     public final void addTrigger(final Trigger trg) {
         triggers.add(trg);
     }
     
+    /*
+     * (non-Javadoc)
+     * @see forge.game.keyword.KeywordInterface#addReplacement(forge.game.replacement.ReplacementEffect)
+     */
     public final void addReplacement(final ReplacementEffect trg) {
         replacements.add(trg);
     }
 
+    /*
+     * (non-Javadoc)
+     * @see forge.game.keyword.KeywordInterface#addSpellAbility(forge.game.spellability.SpellAbility)
+     */
     public final void addSpellAbility(final SpellAbility s) {
         abilities.add(s);
     }
+    
+    /*
+     * (non-Javadoc)
+     * @see forge.game.keyword.KeywordInterface#addStaticAbility(forge.game.staticability.StaticAbility)
+     */
     public final void addStaticAbility(final StaticAbility st) {
         staticAbilities.add(st);
     }
     
-    public final void removeKeywords(final Card host) {
-        for (Trigger t : triggers) {
-            host.removeTrigger(t);
-        }
-        for (ReplacementEffect r : replacements) {
-            host.removeReplacementEffect(r);
-        }
-        for (SpellAbility s : abilities) {
-            host.removeSpellAbility(s);
-        }
-        for (StaticAbility st : staticAbilities) {
-            host.removeStaticAbility(st);
-        }
-    }
+    
     
     /* (non-Javadoc)
      * @see forge.game.keyword.KeywordInterface#getHidden()
@@ -123,5 +145,34 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     @Override
     public void setHidden(boolean val) {
         hidden = val;        
+    }
+    
+    /*
+     * (non-Javadoc)
+     * @see forge.game.keyword.KeywordInterface#getTriggers()
+     */
+    public Collection<Trigger> getTriggers() {
+        return triggers;
+    }
+    /*
+     * (non-Javadoc)
+     * @see forge.game.keyword.KeywordInterface#getReplacements()
+     */
+    public Collection<ReplacementEffect> getReplacements() {
+        return replacements;
+    }
+    /*
+     * (non-Javadoc)
+     * @see forge.game.keyword.KeywordInterface#getAbilities()
+     */
+    public Collection<SpellAbility> getAbilities() {
+        return abilities;
+    }
+    /*
+     * (non-Javadoc)
+     * @see forge.game.keyword.KeywordInterface#getStaticAbilities()
+     */
+    public Collection<StaticAbility> getStaticAbilities() {
+        return staticAbilities;
     }
 }

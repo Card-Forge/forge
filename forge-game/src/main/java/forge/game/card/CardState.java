@@ -17,7 +17,6 @@
  */
 package forge.game.card;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -32,6 +31,7 @@ import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.util.collect.FCollection;
@@ -183,30 +183,24 @@ public class CardState extends GameObject {
     }
 
     public final FCollectionView<SpellAbility> getSpellAbilities() {
-        if (manaAbilities.isEmpty()) {
-            return nonManaAbilities;
-        }
-        if (nonManaAbilities.isEmpty()) {
-            return manaAbilities;
-        }
         FCollection<SpellAbility> newCol = new FCollection<SpellAbility>(manaAbilities);
         newCol.addAll(nonManaAbilities);
+        card.updateSpellAbilities(newCol, this, null);
         return newCol;
     }
     public final FCollectionView<SpellAbility> getManaAbilities() {
-        return manaAbilities;
+        FCollection<SpellAbility> newCol = new FCollection<SpellAbility>(manaAbilities);
+        card.updateSpellAbilities(newCol, this, true);
+        return newCol;
     }
     public final FCollectionView<SpellAbility> getNonManaAbilities() {
-        return nonManaAbilities;
+        FCollection<SpellAbility> newCol = new FCollection<SpellAbility>(nonManaAbilities);
+        card.updateSpellAbilities(newCol, this, false);
+        return newCol;
     }
 
     public final FCollectionView<SpellAbility> getIntrinsicSpellAbilities() {
-        return new FCollection<SpellAbility>(Iterables.filter(getSpellAbilities(), new Predicate<SpellAbility>() {
-            @Override
-            public boolean apply(SpellAbility input) {
-                return input.isIntrinsic();
-            }
-        }));
+        return new FCollection<SpellAbility>(Iterables.filter(getSpellAbilities(), SpellAbilityPredicates.isIntrinsic()));
     }
 
     public final void setNonManaAbilities(SpellAbility sa) {
@@ -262,7 +256,9 @@ public class CardState extends GameObject {
     }
 
     public final FCollectionView<Trigger> getTriggers() {
-        return triggers;
+        FCollection<Trigger> result = new FCollection<>(triggers);
+        card.updateTriggers(result, this);
+        return result;
     }
     public final void setTriggers(final FCollection<Trigger> triggers0) {
         triggers = triggers0;
@@ -278,7 +274,9 @@ public class CardState extends GameObject {
     }
 
     public final FCollectionView<StaticAbility> getStaticAbilities() {
-        return staticAbilities;
+        FCollection<StaticAbility> result = new FCollection<>(staticAbilities);
+        card.updateStaticAbilities(result, this);
+        return result;
     }
     public final boolean addStaticAbility(StaticAbility stab) {
         return staticAbilities.add(stab);
@@ -302,7 +300,9 @@ public class CardState extends GameObject {
     }
 
     public FCollectionView<ReplacementEffect> getReplacementEffects() {
-        return replacementEffects;
+        FCollection<ReplacementEffect> result = new FCollection<>(replacementEffects);
+        card.updateReplacementEffects(result, this);
+        return result;
     }
     public boolean addReplacementEffect(final ReplacementEffect replacementEffect) {
         return replacementEffects.add(replacementEffect);
