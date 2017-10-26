@@ -1,5 +1,5 @@
 Name:Razia, Boros Archangel
-ManaCost:4 W W R R
+ManaCost:4 R R W W
 Types:Legendary Creature Angel
 PT:6/3
 K:Flying

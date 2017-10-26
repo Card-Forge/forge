@@ -1,5 +1,5 @@
 Name:Forerunner of Slaughter
-ManaCost:R B
+ManaCost:B R
 Types:Creature Eldrazi Drone
 PT:3/2
 K:Devoid
