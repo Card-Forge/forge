@@ -1949,10 +1949,6 @@ public class CardFactoryUtil {
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
 
-        for (KeywordInterface inst : card.getKeywords()) {
-            inst.createTraits(card, true);
-        }
-
         // AddCost
         if (card.hasSVar("FullCost")) {
             String k[] = card.getSVar("FullCost").split(":");

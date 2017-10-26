@@ -414,12 +414,15 @@ public class CardFactory {
     }
 
     private static void readCardFace(Card c, ICardFace face) {
-        c.addIntrinsicKeywords(face.getKeywords());
 
         for (String r : face.getReplacements())              c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true));
         for (String s : face.getStaticAbilities())           c.addStaticAbility(s);
         for (String t : face.getTriggers())                  c.addTrigger(TriggerHandler.parseTrigger(t, c, true));
+        
         for (Entry<String, String> v : face.getVariables())  c.setSVar(v.getKey(), v.getValue());
+
+        // keywords not before variables
+        c.addIntrinsicKeywords(face.getKeywords());
 
         c.setName(face.getName());
         c.setManaCost(face.getManaCost());
