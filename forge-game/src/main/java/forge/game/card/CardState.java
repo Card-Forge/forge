@@ -367,17 +367,28 @@ public class CardState extends GameObject {
         setColor(source.getColor());
         setBasePower(source.getBasePower());
         setBaseToughness(source.getBaseToughness());
+        setSVars(source.getSVars());
+
+        this.manaAbilities.clear();
+        for (SpellAbility sa : source.manaAbilities) {
+            this.manaAbilities.add(sa.copy());
+        }
+
+        this.nonManaAbilities.clear();
+        for (SpellAbility sa : source.nonManaAbilities) {
+            this.nonManaAbilities.add(sa.copy());
+        }
+
         setIntrinsicKeywords(source.intrinsicKeywords);
         setImageKey(source.getImageKey());
         setRarity(source.rarity);
         setSetCode(source.setCode);
-        setSVars(source.getSVars());
-        replacementEffects = new FCollection<ReplacementEffect>();
-        for (ReplacementEffect RE : source.getReplacementEffects()) {
+        replacementEffects.clear();
+        for (ReplacementEffect RE : source.replacementEffects) {
             replacementEffects.add(RE.getCopy());
         }
         this.staticAbilities.clear();
-        for (StaticAbility sa : source.getStaticAbilities()) {
+        for (StaticAbility sa : source.staticAbilities) {
             StaticAbility saCopy = new StaticAbility(sa, this.card);
             saCopy.setIntrinsic(sa.isIntrinsic());
             this.staticAbilities.add(saCopy);

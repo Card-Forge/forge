@@ -81,9 +81,9 @@ public class CardFactory {
             out.setToken(true);
 
             // add abilities
-            for (SpellAbility sa : in.getIntrinsicSpellAbilities()) {
-                out.addSpellAbility(sa);
-            }
+            //for (SpellAbility sa : in.getIntrinsicSpellAbilities()) {
+            //    out.addSpellAbility(sa);
+            //}
         }
 
         for (final CardStateName state : in.getStates()) {
