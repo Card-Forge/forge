@@ -8,7 +8,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 
-public interface KeywordInterface {
+public interface KeywordInterface extends Cloneable {
 
     String getOriginal();
 
@@ -48,4 +48,6 @@ public interface KeywordInterface {
      * @return the staticAbilities
      */
     public Collection<StaticAbility> getStaticAbilities();
+    
+    public KeywordInterface copy();
 }

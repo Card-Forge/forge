@@ -175,4 +175,38 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     public Collection<StaticAbility> getStaticAbilities() {
         return staticAbilities;
     }
+    
+    /*
+     * (non-Javadoc)
+     * @see forge.game.keyword.KeywordInterface#copy()
+     */
+    public KeywordInterface copy() {
+        try {
+            KeywordInstance<?> result = (KeywordInstance<?>) super.clone();
+            
+            result.abilities = Lists.newArrayList();
+            for (SpellAbility sa : this.abilities) {
+                result.abilities.add(sa.copy());    
+            }
+            
+            result.triggers = Lists.newArrayList();
+            for (Trigger tr : this.triggers) {
+                result.triggers.add(tr.getCopyForHostCard(tr.getHostCard()));
+            }
+            
+            result.replacements = Lists.newArrayList();
+            for (ReplacementEffect re : this.replacements) {
+                result.replacements.add(re.getCopy());
+            }
+            
+            result.staticAbilities = Lists.newArrayList();
+            for (StaticAbility sa : this.staticAbilities) {
+                result.staticAbilities.add(new StaticAbility(sa, sa.getHostCard()));
+            }
+            
+            return result;
+        } catch (final Exception ex) {
+            throw new RuntimeException("AbilityStatic : clone() error, " + ex);
+        }
+    }
 }

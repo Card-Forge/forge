@@ -156,9 +156,11 @@ public class CardState extends GameObject {
     public final boolean hasIntrinsicKeyword(String k) {
         return intrinsicKeywords.contains(k);
     }
-    public final void setIntrinsicKeywords(final Iterable<String> intrinsicKeyword0) {
+    public final void setIntrinsicKeywords(final Iterable<KeywordInterface> intrinsicKeyword0) {
         intrinsicKeywords.clear();
-        addIntrinsicKeywords(intrinsicKeyword0);
+        for (KeywordInterface k : intrinsicKeyword0) {
+            intrinsicKeywords.insert(k.copy());
+        }
     }
 
     public final KeywordInterface addIntrinsicKeyword(final String s, boolean initTraits) {
@@ -379,7 +381,7 @@ public class CardState extends GameObject {
             this.nonManaAbilities.add(sa.copy());
         }
 
-        setIntrinsicKeywords(source.intrinsicKeywords);
+        setIntrinsicKeywords(source.intrinsicKeywords.getValues());
         setImageKey(source.getImageKey());
         setRarity(source.rarity);
         setSetCode(source.setCode);
@@ -390,7 +392,6 @@ public class CardState extends GameObject {
         this.staticAbilities.clear();
         for (StaticAbility sa : source.staticAbilities) {
             StaticAbility saCopy = new StaticAbility(sa, this.card);
-            saCopy.setIntrinsic(sa.isIntrinsic());
             this.staticAbilities.add(saCopy);
         }
         view.updateKeywords(c, this);

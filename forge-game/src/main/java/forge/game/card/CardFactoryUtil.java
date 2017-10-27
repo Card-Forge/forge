@@ -3375,9 +3375,14 @@ public class CardFactoryUtil {
 
             final String valid = splitkw.length >= 6 ? splitkw[5] : "Card.Self";
             final String zone = splitkw.length >= 5 ? splitkw[4] : "";
-            createETBReplacement(card, layer, card.getSVar(splitkw[2]), optional, false, intrinsic, valid, zone);
+            final ReplacementEffect re = createETBReplacement(
+                    card, layer, card.getSVar(splitkw[2]), optional, false, intrinsic, valid, zone);
+
+            inst.addReplacement(re);
         } else if (keyword.startsWith("etbCounter")) {
-            makeEtbCounter(keyword, card, intrinsic);
+            final ReplacementEffect re = makeEtbCounter(keyword, card, intrinsic);
+
+            inst.addReplacement(re);
         }
         
         // No finish yet, need card updates

@@ -243,6 +243,7 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
         this.mapParams.putAll(stAb.mapParams);
         this.layers = this.generateLayer();
         this.hostCard = host;
+        this.intrinsic = stAb.intrinsic;
     }
 
     public final CardCollectionView applyContinuousAbility(final StaticAbilityLayer layer) {
