@@ -161,20 +161,23 @@ public class CardState extends GameObject {
         addIntrinsicKeywords(intrinsicKeyword0);
     }
 
-    public final KeywordInterface addIntrinsicKeyword(final String s) {
+    public final KeywordInterface addIntrinsicKeyword(final String s, boolean initTraits) {
         if (s.trim().length() == 0) {
             return null;
         }
         KeywordInterface inst = intrinsicKeywords.add(s); 
-        if (inst != null) {
+        if (inst != null && initTraits) {
             inst.createTraits(card, true);
         }
         return inst;
     }
     public final boolean addIntrinsicKeywords(final Iterable<String> keywords) {
+        return addIntrinsicKeywords(keywords, true);
+    }
+    public final boolean addIntrinsicKeywords(final Iterable<String> keywords, boolean initTraits) {
         boolean changed = false;
         for (String k : keywords) {
-            if (addIntrinsicKeyword(k) != null) {
+            if (addIntrinsicKeyword(k, initTraits) != null) {
                 changed = true;
             }
         }

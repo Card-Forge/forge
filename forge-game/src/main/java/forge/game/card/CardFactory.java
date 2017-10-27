@@ -422,7 +422,7 @@ public class CardFactory {
         for (Entry<String, String> v : face.getVariables())  c.setSVar(v.getKey(), v.getValue());
 
         // keywords not before variables
-        c.addIntrinsicKeywords(face.getKeywords());
+        c.addIntrinsicKeywords(face.getKeywords(), false);
 
         c.setName(face.getName());
         c.setManaCost(face.getManaCost());

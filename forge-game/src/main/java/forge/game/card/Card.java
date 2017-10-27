@@ -3540,7 +3540,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final KeywordInterface addIntrinsicKeyword(final String s) {
-        KeywordInterface inst = currentState.addIntrinsicKeyword(s);
+        KeywordInterface inst = currentState.addIntrinsicKeyword(s, true);
         if (inst != null) {
             currentState.getView().updateKeywords(this, currentState);
         }
@@ -3548,7 +3548,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final void addIntrinsicKeywords(final Iterable<String> s) {
-        if (currentState.addIntrinsicKeywords(s)) {
+        addIntrinsicKeywords(s, true);
+    }
+    public final void addIntrinsicKeywords(final Iterable<String> s, boolean initTraits) {
+        if (currentState.addIntrinsicKeywords(s, initTraits)) {
             currentState.getView().updateKeywords(this, currentState);
         }
     }
