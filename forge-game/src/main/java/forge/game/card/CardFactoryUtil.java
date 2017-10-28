@@ -3362,9 +3362,11 @@ public class CardFactoryUtil {
             String effect = "DB$ Tap | Defined$ Self | ETB$ True "
                 + " | SpellDescription$ CARDNAME enters the battlefield tapped.";
 
-            createETBReplacement(
+            final ReplacementEffect re = createETBReplacement(
                 card, ReplacementLayer.Other, effect, false, keyword.equals("Hideway"), intrinsic, "Card.Self", ""
             );
+
+            inst.addReplacement(re);
         }
         
         if (keyword.startsWith("ETBReplacement")) {
