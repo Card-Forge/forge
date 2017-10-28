@@ -3363,7 +3363,7 @@ public class CardFactoryUtil {
                 + " | SpellDescription$ CARDNAME enters the battlefield tapped.";
 
             final ReplacementEffect re = createETBReplacement(
-                card, ReplacementLayer.Other, effect, false, keyword.equals("Hideway"), intrinsic, "Card.Self", ""
+                card, ReplacementLayer.Other, effect, false, true, intrinsic, "Card.Self", ""
             );
 
             inst.addReplacement(re);
