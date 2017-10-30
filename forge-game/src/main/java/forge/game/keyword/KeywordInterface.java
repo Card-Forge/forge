@@ -49,5 +49,5 @@ public interface KeywordInterface extends Cloneable {
      */
     public Collection<StaticAbility> getStaticAbilities();
     
-    public KeywordInterface copy();
+    public KeywordInterface copy(final Card host);
 }

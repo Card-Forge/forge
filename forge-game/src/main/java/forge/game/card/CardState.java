@@ -159,7 +159,7 @@ public class CardState extends GameObject {
     public final void setIntrinsicKeywords(final Iterable<KeywordInterface> intrinsicKeyword0) {
         intrinsicKeywords.clear();
         for (KeywordInterface k : intrinsicKeyword0) {
-            intrinsicKeywords.insert(k.copy());
+            intrinsicKeywords.insert(k.copy(card));
         }
     }
 
@@ -371,28 +371,41 @@ public class CardState extends GameObject {
         setBaseToughness(source.getBaseToughness());
         setSVars(source.getSVars());
 
-        this.manaAbilities.clear();
+        manaAbilities.clear();
         for (SpellAbility sa : source.manaAbilities) {
-            this.manaAbilities.add(sa.copy());
+            SpellAbility saCopy = sa.copy();
+            saCopy.setHostCard(card); // update HostCard
+            manaAbilities.add(saCopy);
         }
 
-        this.nonManaAbilities.clear();
+        nonManaAbilities.clear();
         for (SpellAbility sa : source.nonManaAbilities) {
-            this.nonManaAbilities.add(sa.copy());
+            SpellAbility saCopy = sa.copy();
+            saCopy.setHostCard(card); // update HostCard
+            nonManaAbilities.add(saCopy);
         }
 
         setIntrinsicKeywords(source.intrinsicKeywords.getValues());
         setImageKey(source.getImageKey());
         setRarity(source.rarity);
         setSetCode(source.setCode);
-        replacementEffects.clear();
-        for (ReplacementEffect RE : source.replacementEffects) {
-            replacementEffects.add(RE.getCopy());
+
+        triggers.clear();
+        for (Trigger tr : source.triggers) {
+            triggers.add(tr.getCopyForHostCard(card));
         }
-        this.staticAbilities.clear();
+
+        replacementEffects.clear();
+        for (ReplacementEffect re : source.replacementEffects) {
+            ReplacementEffect reCopy = re.getCopy();
+            reCopy.setHostCard(card);
+            replacementEffects.add(reCopy);
+        }
+
+        staticAbilities.clear();
         for (StaticAbility sa : source.staticAbilities) {
             StaticAbility saCopy = new StaticAbility(sa, this.card);
-            this.staticAbilities.add(saCopy);
+            staticAbilities.add(saCopy);
         }
         view.updateKeywords(c, this);
     }
@@ -430,7 +443,10 @@ public class CardState extends GameObject {
     public List<String> addIntrinsicKeywords(Collection<KeywordInterface> intrinsicKeywords2) {
         List<String> names = Lists.newArrayList();
         for (KeywordInterface inst : intrinsicKeywords2) {
-            names.add(inst.getOriginal());
+            String o = inst.getOriginal();
+            if (addIntrinsicKeyword(o, false) != null) {
+                names.add(o);
+            }
         }
         return names;
     }

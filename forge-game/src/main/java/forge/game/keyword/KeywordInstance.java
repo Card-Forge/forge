@@ -180,28 +180,32 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
      * (non-Javadoc)
      * @see forge.game.keyword.KeywordInterface#copy()
      */
-    public KeywordInterface copy() {
+    public KeywordInterface copy(final Card host) {
         try {
             KeywordInstance<?> result = (KeywordInstance<?>) super.clone();
             
             result.abilities = Lists.newArrayList();
             for (SpellAbility sa : this.abilities) {
-                result.abilities.add(sa.copy());    
+                SpellAbility saCopy = sa.copy();
+                saCopy.setHostCard(host);
+                result.abilities.add(saCopy);    
             }
             
             result.triggers = Lists.newArrayList();
             for (Trigger tr : this.triggers) {
-                result.triggers.add(tr.getCopyForHostCard(tr.getHostCard()));
+                result.triggers.add(tr.getCopyForHostCard(host));
             }
             
             result.replacements = Lists.newArrayList();
             for (ReplacementEffect re : this.replacements) {
-                result.replacements.add(re.getCopy());
+                ReplacementEffect reCopy = re.getCopy();
+                reCopy.setHostCard(host);
+                result.replacements.add(reCopy);
             }
             
             result.staticAbilities = Lists.newArrayList();
             for (StaticAbility sa : this.staticAbilities) {
-                result.staticAbilities.add(new StaticAbility(sa, sa.getHostCard()));
+                result.staticAbilities.add(new StaticAbility(sa, host));
             }
             
             return result;

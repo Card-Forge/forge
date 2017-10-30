@@ -513,11 +513,15 @@ public abstract class Trigger extends TriggerReplacementBase {
             SpellAbility old = this.getOverridingAbility();
             SpellAbility sa = old;
             // try to copy it if newHost is not the wanted host
-            if (!newHost.equals(old.getHostCard())) {
-	            if (old instanceof AbilitySub) {
-	                sa = ((AbilitySub)old).getCopy();
-	                sa.setHostCard(newHost);
-	            }
+            final Card oldHost = old.getHostCard(); 
+            if (!newHost.equals(oldHost)) {
+                if (old instanceof AbilitySub) {
+                    sa = ((AbilitySub)old).getCopy();
+                    sa.setHostCard(newHost);
+                }
+            } else if (newHost != oldHost) {
+                //host would be the same, but different state?
+                sa.setHostCard(newHost);
             }
             copy.setOverridingAbility(sa);
         }
