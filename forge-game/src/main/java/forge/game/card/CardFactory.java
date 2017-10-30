@@ -349,12 +349,15 @@ public class CardFactory {
     }
 
     private static void buildPlaneswalkerAbilities(Card card) {
+        CardState state = card.getCurrentState();
     	// etbCounter only for Original Card
         if (card.getBaseLoyalty() > 0 && card.getCurrentStateName() == CardStateName.Original) {
             final String loyalty = Integer.toString(card.getBaseLoyalty());
-            card.addIntrinsicKeyword("etbCounter:LOYALTY:" + loyalty + ":no Condition:no desc");
+            // keyword need to be added to state directly, so init can be disabled
+            if (state.addIntrinsicKeyword("etbCounter:LOYALTY:" + loyalty + ":no Condition:no desc", false) != null) {
+                card.updateKeywords();
+            }
         }
-        CardState state = card.getCurrentState();
 
         //Planeswalker damage redirection
         String replacement = "Event$ DamageDone | ActiveZones$ Battlefield | IsCombat$ False | ValidSource$ Card.OppCtrl,Emblem.OppCtrl"
