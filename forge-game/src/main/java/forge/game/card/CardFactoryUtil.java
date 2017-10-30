@@ -3088,10 +3088,9 @@ public class CardFactoryUtil {
             final String dredgeAmount = keyword.split(" ")[1];
 
             final String actualRep = "Event$ Draw | ActiveZones$ Graveyard | ValidPlayer$ You | "
-                    + "ReplaceWith$ DredgeCards | Secondary$ True | Optional$ True | CheckSVar$ "
+                    + "Secondary$ True | Optional$ True | CheckSVar$ "
                     + "DredgeCheckLib | SVarCompare$ GE" + dredgeAmount
-                    + " | AICheckDredge$ True | Description$ " + card.getName()
-                    +  " - Dredge " + dredgeAmount;
+                    + " | AICheckDredge$ True | Description$ CARDNAME - Dredge " + dredgeAmount;
 
             final String abString = "DB$ Mill | Defined$ You | NumCards$ " + dredgeAmount;
 
@@ -3101,12 +3100,10 @@ public class CardFactoryUtil {
             AbilitySub saMove = (AbilitySub) AbilityFactory.getAbility(moveToPlay, card);
             saMill.setSubAbility(saMove);
 
-            if (!intrinsic) {
-                saMill.setIntrinsic(false);
-            }
+            saMill.setIntrinsic(intrinsic);
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(actualRep, card, intrinsic);
-            re.setLayer(ReplacementLayer.Other);
+            re.setOverridingAbility(saMill);
 
             re.setSVar("DredgeCheckLib", "Count$ValidLibrary Card.YouOwn");
 

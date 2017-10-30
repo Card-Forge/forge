@@ -152,6 +152,9 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         res.setActiveZone(validHostZones);
         res.setLayer(getLayer());
         res.setTemporary(isTemporary());
+        for (String key : getSVars()) {
+            res.setSVar(key, getSVar(key));
+        }
         return res;
     }
 
