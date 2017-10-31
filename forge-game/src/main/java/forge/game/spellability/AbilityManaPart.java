@@ -17,8 +17,6 @@
  */
 package forge.game.spellability;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -29,6 +27,9 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -66,9 +67,9 @@ public class AbilityManaPart implements java.io.Serializable {
     private final boolean persistentMana;
     private String manaReplaceType;
 
-    private transient List<Mana> lastManaProduced = new ArrayList<Mana>();
+    private transient List<Mana> lastManaProduced = Lists.newArrayList();
 
-    private final transient Card sourceCard;
+    private transient Card sourceCard;
 
 
     // Spells paid with this mana spell can't be countered.
@@ -123,7 +124,7 @@ public class AbilityManaPart implements java.io.Serializable {
         final Card source = this.getSourceCard();
         final ManaPool manaPool = player.getManaPool();
         String afterReplace = applyManaReplacement(sa, produced);
-        final HashMap<String, Object> repParams = new HashMap<String, Object>();
+        final Map<String, Object> repParams = Maps.newHashMap();
         repParams.put("Event", "ProduceMana");
         repParams.put("Mana", afterReplace);
         repParams.put("Affected", source);
@@ -163,7 +164,7 @@ public class AbilityManaPart implements java.io.Serializable {
         manaPool.add(this.lastManaProduced);
 
         // Run triggers
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        final Map<String, Object> runParams = Maps.newHashMap();
 
         runParams.put("Card", source);
         runParams.put("Player", player);
@@ -593,6 +594,10 @@ public class AbilityManaPart implements java.io.Serializable {
     public Card getSourceCard() {
         return sourceCard;
     }
+    
+    public void setSourceCard(final Card host) {
+        sourceCard = host;
+    }
 
     /**
      * <p>
@@ -625,7 +630,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * @return a String
      */
     public static String applyManaReplacement(final SpellAbility sa, final String original) {
-        final HashMap<String, String> repMap = new HashMap<String, String>();
+        final Map<String, String> repMap = Maps.newHashMap();
         final Player act = sa != null ? sa.getActivatingPlayer() : null;
         final String manaReplace = sa != null ? sa.getManaPart().getManaReplaceType(): "";
         if (manaReplace.isEmpty()) {

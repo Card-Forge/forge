@@ -205,6 +205,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             if (newGame != null) { newGame.addSpellAbility(this); }
         }
 
+        if (manaPart != null) {
+            manaPart.setSourceCard(c);
+        }
+
         if (subAbility != null) {
             subAbility.setHostCard(c);
         }
