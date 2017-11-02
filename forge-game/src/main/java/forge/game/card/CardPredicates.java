@@ -23,6 +23,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import forge.game.combat.CombatUtil;
+import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.collect.FCollectionView;
@@ -85,7 +86,12 @@ public final class CardPredicates {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return c.hasStartOfKeyword(keyword);
+                for (KeywordInterface k : c.getKeywords()) {
+                    if (k.getOriginal().startsWith(keyword)) {
+                        return true;
+                    }
+                }
+                return false;
                 //return Iterables.any(c.getKeywords(), PredicateString.contains(keyword));
             }
         };
