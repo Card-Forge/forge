@@ -4,7 +4,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
-
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -29,7 +28,6 @@ import forge.util.Expressions;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -1032,10 +1030,9 @@ public class AbilityUtils {
                 }
                 if (o instanceof List) {
                     final List<?> pList = (List<?>)o;
-                    if (!pList.isEmpty() && pList.get(0) instanceof Player) {
+                    if (!pList.isEmpty()) {
                         for (final Object p : pList) {
-                            if (!players.contains(p)) {
-                                // We now know each p in o to be an instance of Player, so cast is safe
+                            if (p instanceof Player && !players.contains(p)) {
                                 players.add((Player) p);
                             }
                         }
