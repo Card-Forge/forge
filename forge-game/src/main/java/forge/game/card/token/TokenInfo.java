@@ -157,15 +157,7 @@ public class TokenInfo {
         }
 
         for (int i = 0; i < multiplier; i++) {
-            Card temp = toCard(game);
-
-            for (final String kw : intrinsicKeywords) {
-                temp.addIntrinsicKeyword(kw);
-            }
-            temp.setOwner(controller);
-            temp.setToken(true);
-            CardFactoryUtil.setupKeywordedAbilities(temp);
-            list.add(temp);
+            list.add(makeOneToken(controller));
         }
         return list;
     }
@@ -174,13 +166,13 @@ public class TokenInfo {
         final Game game = controller.getGame();
         final Card c = toCard(game);
 
-        for (final String kw : intrinsicKeywords) {
-            c.addIntrinsicKeyword(kw);
-        }
-
         c.setOwner(controller);
         c.setToken(true);
         CardFactoryUtil.setupKeywordedAbilities(c);
+        // add them later to prevent setupKeywords from adding them multiple times
+        for (final String kw : intrinsicKeywords) {
+            c.addIntrinsicKeyword(kw);
+        }
         return c;
     }
 }
