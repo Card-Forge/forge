@@ -186,8 +186,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
             
             result.abilities = Lists.newArrayList();
             for (SpellAbility sa : this.abilities) {
-                SpellAbility saCopy = sa.copy();
-                saCopy.setHostCard(host);
+                SpellAbility saCopy = sa.copy(host);
                 result.abilities.add(saCopy);    
             }
             

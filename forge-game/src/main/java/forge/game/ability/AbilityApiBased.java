@@ -48,7 +48,7 @@ public class AbilityApiBased extends AbilityActivated {
     public AbilityActivated getCopy() {
         TargetRestrictions tgt = getTargetRestrictions() == null ? null : new TargetRestrictions(getTargetRestrictions());
         AbilityActivated res = new AbilityApiBased(api, getHostCard(), getPayCosts(), tgt, mapParams);
-        CardFactory.copySpellAbility(this, res);
+        CardFactory.copySpellAbility(this, res, getHostCard());
         return res;
     }
 

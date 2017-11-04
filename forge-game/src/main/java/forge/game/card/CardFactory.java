@@ -648,7 +648,7 @@ public class CardFactory {
         to.setState(oldToState, false);
     }
 
-    public static void copySpellAbility(SpellAbility from, SpellAbility to) {
+    public static void copySpellAbility(SpellAbility from, SpellAbility to, final Card host) {
         if (from.getActivatingPlayer() != null) {
             to.setActivatingPlayer(from.getActivatingPlayer());
         }
@@ -656,16 +656,16 @@ public class CardFactory {
         to.setStackDescription(from.getOriginalStackDescription());
     
         if (from.getSubAbility() != null) {
-            to.setSubAbility(from.getSubAbility().getCopy());
+            to.setSubAbility(from.getSubAbility().getCopy(host));
         }
         for (Map.Entry<String, AbilitySub> e : from.getAdditionalAbilities().entrySet()) {
-            to.setAdditionalAbility(e.getKey(), e.getValue().getCopy());
+            to.setAdditionalAbility(e.getKey(), e.getValue().getCopy(host));
         }
         for (Map.Entry<String, List<AbilitySub>> e : from.getAdditionalAbilityLists().entrySet()) {
             to.setAdditionalAbilityList(e.getKey(), Lists.transform(e.getValue(), new Function<AbilitySub, AbilitySub>() {
                 @Override
                 public AbilitySub apply(AbilitySub input) {
-                    return input.getCopy();
+                    return input.getCopy(host);
                 }
             }));
         }

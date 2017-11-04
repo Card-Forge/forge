@@ -5331,6 +5331,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void setLKICMC(final int cmc) {
         this.lkiCMC = cmc;
     }
+    
+    public final boolean isLKI() {
+        return this.lkiCMC >= 0;
+    }
 
     public final boolean canBeSacrificedBy(final SpellAbility source) {
         if (isImmutable()) {

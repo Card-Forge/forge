@@ -214,8 +214,13 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         // for Bestow need to check the animated State
         if (sa.isSpell() && sa.hasParam("Bestow")) {
-            cp = CardUtil.getLKICopy(c);
-            cp.animateBestow();
+            if (!c.isLKI()) {
+                cp = CardUtil.getLKICopy(c);
+            }
+
+            if (!cp.isBestowed()) {
+                cp.animateBestow();
+            }
         }
 
         if (cardZone == null || this.getZone() == null || !cardZone.is(this.getZone())) {

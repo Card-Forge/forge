@@ -103,9 +103,12 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
     }
 
     public AbilitySub getCopy() {
+        return getCopy(getHostCard());
+    }
+    public AbilitySub getCopy(Card host) {
         TargetRestrictions t = getTargetRestrictions() == null ? null : new TargetRestrictions(getTargetRestrictions());
-        AbilitySub res = new AbilitySub(api, getHostCard(), t, mapParams);
-        CardFactory.copySpellAbility(this, res);
+        AbilitySub res = new AbilitySub(api, host, t, mapParams);
+        CardFactory.copySpellAbility(this, res, host);
         return res;
     }
 
