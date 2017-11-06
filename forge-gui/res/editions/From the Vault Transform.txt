@@ -1,0 +1,23 @@
+[metadata]
+Code=V17
+Date=2017-11-24
+Name=From the Vault: Transform
+MciCode=v17
+Type=From_the_Vault
+
+[cards]
+1 M Archangel Avacyn
+2 M Arguel's Blood Fast
+3 M Arlinn Kord
+4 M Bloodline Keeper
+5 M Bruna, the Fading Light
+6 M Chandra, Fire of Kaladesh
+7 M Delver of Secrets
+8 M Elbrus, the Binding Blade
+9 M Garruk Relentless
+10 M Gisela, the Broken Blade
+11 M Huntmaster of the Fells
+12 M Jace, Vryn's Prodigy
+13 M Kytheon, Hero of Akros
+14 M Liliana, Heretical Healer
+15 M Nissa, Vastwood Seer
