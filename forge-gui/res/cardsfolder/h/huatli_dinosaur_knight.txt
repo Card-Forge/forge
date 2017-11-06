@@ -7,5 +7,7 @@ A:AB$ Pump | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creat
 SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | AILogic$ PowerDmg | NumDmg$ X | References$ X | DamageSource$ ParentTarget
 SVar:X:ParentTargeted$CardPower
 A:AB$ PumpAll | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Creature.Dinosaur+YouCtrl | NumAtt$ +4 | NumDef$ +4 | SpellDescription$ Dinosaurs you control get +4/+4 until end of turn.
+SVar:RemRandomDeck:True
+DeckNeeds:Type$Dinosaur
 SVar:Picture:http://www.wizards.com/global/images/magic/general/huatli_dinosaur_knight.jpg
 Oracle:[+2]: Put two +1/+1 counters on up to one target Dinosaur you control.\n[-3]: Target Dinosaur you control deals damage equal to its power to target creature you don't control.\n[-7]: Dinosaurs you control get +4/+4 until end of turn.
