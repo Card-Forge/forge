@@ -7,4 +7,4 @@ S:Mode$ Continuous | Affected$ Creature.Goblin+Other+YouCtrl | AddPower$ 1 | Add
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Goblin
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_chieftain.jpg
-Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)\nOther Goblin creatures you control get +1/+1 and have haste.
+Oracle:Haste\nOther Goblin creatures you control get +1/+1 and have haste.

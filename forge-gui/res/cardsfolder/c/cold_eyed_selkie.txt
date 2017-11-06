@@ -7,4 +7,4 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ Tri
 SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cold_eyed_selkie.jpg
-Oracle:Islandwalk\nWhenever Cold-Eyed Selkie deals combat damage to a player, you may draw that many cards.
+Oracle:Islandwalk (This creature can’t be blocked as long as defending player controls an Island.)\nWhenever Cold-Eyed Selkie deals combat damage to a player, you may draw that many cards.
