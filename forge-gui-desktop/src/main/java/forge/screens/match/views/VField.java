@@ -73,10 +73,11 @@ public class VField implements IVDoc<CField> {
     private final PlayerDetailsPanel detailsPanel;
 
     // Avatar area
-    private final FLabel lblAvatar = new FLabel.Builder().fontAlign(SwingConstants.CENTER).iconScaleFactor(1.0f).build();
-    private final FLabel lblLife   = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontStyle(Font.BOLD).build();
-    private final FLabel lblPoison = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontStyle(Font.BOLD).icon(FSkin.getImage(FSkinProp.IMG_ZONE_POISON)).iconInBackground().build();
-    private final FLabel lblEnergy = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontStyle(Font.BOLD).icon(FSkin.getImage(FSkinProp.IMG_ENERGY)).iconInBackground().build();
+    private final FLabel lblAvatar     = new FLabel.Builder().fontAlign(SwingConstants.CENTER).iconScaleFactor(1.0f).build();
+    private final FLabel lblLife       = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontStyle(Font.BOLD).build();
+    private final FLabel lblPoison     = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontStyle(Font.BOLD).icon(FSkin.getImage(FSkinProp.IMG_ZONE_POISON)).iconInBackground().build();
+    private final FLabel lblEnergy     = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontStyle(Font.BOLD).icon(FSkin.getImage(FSkinProp.IMG_ENERGY)).iconInBackground().build();
+    private final FLabel lblExperience = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontStyle(Font.BOLD).icon(FSkin.getImage(FSkinProp.IMG_EXPERIENCE)).iconInBackground().build();
 
     private final PhaseIndicator phaseIndicator = new PhaseIndicator();
 
@@ -110,6 +111,7 @@ public class VField implements IVDoc<CField> {
         lblLife.setFocusable(false);
         lblPoison.setFocusable(false);
         lblEnergy.setFocusable(false);
+        lblExperience.setFocusable(false);
 
         avatarArea.setOpaque(false);
         avatarArea.setBackground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
@@ -212,6 +214,28 @@ public class VField implements IVDoc<CField> {
         detailsPanel.updateZones();
     }
 
+    private void addLblExperience() {
+        if (lblExperience.isShowing() || lblEnergy.isShowing()) {
+            return; // energy takes precedence
+        }
+        if (lblExperience.isShowing() || lblPoison.isShowing()) {
+            return; // poison takes precedence
+        }
+        avatarArea.remove(lblLife);
+        lblLife.setIcon(FSkin.getImage(FSkinProp.ICO_QUEST_LIFE));
+        avatarArea.add(lblLife, "w 50%!, h 20px!, split 2");
+        avatarArea.add(lblExperience, "w 50%!, h 20px!, wrap");
+    }
+
+    private void removeLblExperience() {
+        if (!lblExperience.isShowing()) {
+            return;
+        }
+        avatarArea.remove(lblExperience);
+        avatarArea.remove(lblLife);
+        avatarArea.add(lblLife, "w 100%!, h 20px!, wrap");
+    }
+
     private void addLblEnergy() {
         if (lblEnergy.isShowing() || lblPoison.isShowing()) {
             return; // poison takes precedence
@@ -262,9 +286,11 @@ public class VField implements IVDoc<CField> {
         // Update poison and/or energy counters, poison counters take precedence
         final int poison = player.getCounters(CounterType.POISON);
         final int energy = player.getCounters(CounterType.ENERGY);
+        final int experience = player.getCounters(CounterType.EXPERIENCE);
 
         if (poison > 0) {
             removeLblEnergy();
+            removeLblExperience();
             addLblPoison();
             lblPoison.setText(String.valueOf(poison));
             if (poison < POISON_CRITICAL) {
@@ -277,12 +303,22 @@ public class VField implements IVDoc<CField> {
         }
 
         if (energy > 0) {
+            removeLblExperience();
             if (poison == 0) {
                 addLblEnergy();
                 lblEnergy.setText(String.valueOf(energy));
             }
         } else {
             removeLblEnergy();
+        }
+
+        if (experience > 0) {
+            if (poison == 0 && energy == 0) {
+                addLblExperience();
+                lblExperience.setText(String.valueOf(experience));
+            }
+        } else {
+            removeLblExperience();
         }
 
         final boolean highlighted = isHighlighted();

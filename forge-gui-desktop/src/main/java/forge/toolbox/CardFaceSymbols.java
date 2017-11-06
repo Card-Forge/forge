@@ -85,6 +85,7 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("S", FSkin.getImage(FSkinProp.IMG_MANA_SNOW, manaImageSize, manaImageSize));
         MANA_IMAGES.put("T", FSkin.getImage(FSkinProp.IMG_TAP, manaImageSize, manaImageSize));
         MANA_IMAGES.put("E", FSkin.getImage(FSkinProp.IMG_ENERGY, 40, 40));
+        MANA_IMAGES.put("EXPERIENCE", FSkin.getImage(FSkinProp.IMG_EXPERIENCE, 40, 30));
         MANA_IMAGES.put("slash", FSkin.getImage(FSkinProp.IMG_SLASH, manaImageSize, manaImageSize));
         MANA_IMAGES.put("attack", FSkin.getImage(FSkinProp.IMG_ATTACK, 32, 32));
         MANA_IMAGES.put("defend", FSkin.getImage(FSkinProp.IMG_DEFEND, 32, 32));

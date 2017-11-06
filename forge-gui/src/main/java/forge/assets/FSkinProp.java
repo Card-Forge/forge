@@ -130,6 +130,7 @@ public enum FSkinProp {
     IMG_COUNTERS3       (new int[] {80, 320, 80, 80}, PropType.IMAGE),
     IMG_COUNTERS_MULTI  (new int[] {80, 400, 80, 80}, PropType.IMAGE),
     IMG_ENERGY          (new int[] {320, 120, 40, 40}, PropType.IMAGE),
+    IMG_EXPERIENCE      (new int[] {280, 120, 40, 30}, PropType.IMAGE),
     
     //foils
     FOIL_01     (new int[] {0, 0, 400, 570}, PropType.FOIL),
