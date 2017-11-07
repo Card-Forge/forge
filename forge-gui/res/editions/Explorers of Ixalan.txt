@@ -1,0 +1,56 @@
+[metadata]
+Code=E02
+Date=2017-11-24
+Name=Explorers of Ixalan
+Code2=E02
+MciCode=E02
+Type=Other
+
+[cards]
+1 R Beacon of Immortality
+2 R Day of Judgment
+3 U Path to Exile
+4 R Shielded by Faith
+5 C Veteran's Reflexes
+6 U Vow of Duty
+7 R Aether Gale
+8 R Blatant Thievery
+9 U Concentrate
+10 R Merfolk Sovereign
+11 R Threads of Disloyalty
+12 M Time Warp
+13 C Unsummon
+14 U Vow of Flight
+15 U Bloodbond Vampire
+16 C Child of Night
+17 C Coat with Venom
+18 U Doom Blade
+19 C Innocent Blood
+20 M Necropolis Regent
+21 U Urge to Feed
+22 C Vampire Interloper
+23 U Vampire Nighthawk
+24 C Vampire Noble
+25 R Aggravated Assault
+26 R Disaster Radius
+27 R Mass Mutiny
+28 C Rush of Adrenaline
+29 R Shared Animosity
+30 U Vow of Lightning
+31 C Borderland Ranger
+32 C Giant Growth
+33 R Hunter's Prowess
+34 C Prey Upon
+35 U Rancor
+36 R Soul of the Harvest
+37 U Vow of Wildness
+38 U Jungle Barrier
+39 U Lightning Helix
+40 U Mortify
+41 U Zealous Persecution
+42 R Adaptive Automaton
+43 U Prismatic Lens
+44 R Quicksilver Amulet
+45 U Crumbling Necropolis
+46 U Jungle Shrine
+47 U Tainted Field
