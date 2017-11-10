@@ -3355,7 +3355,7 @@ public class CardFactoryUtil {
             inst.addReplacement(re);
         }
         
-        if (keyword.equals("CARDNAME enters the battlefield tapped.") || keyword.equals("Hideway")) {
+        if (keyword.equals("CARDNAME enters the battlefield tapped.") || keyword.equals("Hideaway")) {
             String effect = "DB$ Tap | Defined$ Self | ETB$ True "
                 + " | SpellDescription$ CARDNAME enters the battlefield tapped.";
 
