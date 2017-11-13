@@ -1836,7 +1836,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         // Triggered abilities
         for (final Trigger trig : state.getTriggers()) {
             if (!trig.isSecondary()) {
-                String trigStr = trig.replaceAbilityText(trig.toString(), null);
+                String trigStr = trig.replaceAbilityText(trig.toString(), null, state);
                 sb.append(trigStr.replaceAll("\\\\r\\\\n", "\r\n")).append("\r\n");
             }
         }
@@ -1950,7 +1950,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         // Triggered abilities
         for (final Trigger trig : state.getTriggers()) {
             if (!trig.isSecondary()) {
-                sb.append(trig.replaceAbilityText(trig.toString(), null)).append("\r\n");
+                sb.append(trig.replaceAbilityText(trig.toString(), null, state)).append("\r\n");
             }
         }
 

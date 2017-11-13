@@ -24,6 +24,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
+import forge.game.card.CardState;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -175,7 +176,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         }
     }
 
-    public final String replaceAbilityText(final String desc, SpellAbility sa) {
+    public final String replaceAbilityText(final String desc, SpellAbility sa, final CardState state) {
         String result = desc;
 
         // this function is for ABILITY
@@ -188,7 +189,11 @@ public abstract class Trigger extends TriggerReplacementBase {
             sa = getOverridingAbility();
         }
         if (sa == null && this.mapParams.containsKey("Execute")) {
-             sa = AbilityFactory.getAbility(hostCard, this.mapParams.get("Execute"));
+            if (state != null) {
+                sa = AbilityFactory.getAbility(state, this.mapParams.get("Execute"));
+            } else {
+                sa = AbilityFactory.getAbility(hostCard, this.mapParams.get("Execute"));
+            }
         }
         if (sa != null) {
             String saDesc;
