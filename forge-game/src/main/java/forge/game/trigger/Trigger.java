@@ -176,24 +176,30 @@ public abstract class Trigger extends TriggerReplacementBase {
         }
     }
 
-    public final String replaceAbilityText(final String desc, SpellAbility sa, final CardState state) {
+    public final String replaceAbilityText(final String desc, final CardState state) {
+        // this function is for ABILITY
+        if (!desc.contains("ABILITY")) {
+            return desc;
+        }
+        SpellAbility sa = getOverridingAbility();
+        if (sa == null && this.mapParams.containsKey("Execute")) {
+            sa = AbilityFactory.getAbility(state, this.mapParams.get("Execute"));
+            setOverridingAbility(sa);
+        }
+
+        return replaceAbilityText(desc, sa);
+        
+    }
+    
+    public final String replaceAbilityText(final String desc, SpellAbility sa) {
         String result = desc;
 
         // this function is for ABILITY
         if (!result.contains("ABILITY")) {
             return result;
         }
-
-        // it has already sa, used in WrappedAbility
         if (sa == null) {
             sa = getOverridingAbility();
-        }
-        if (sa == null && this.mapParams.containsKey("Execute")) {
-            if (state != null) {
-                sa = AbilityFactory.getAbility(state, this.mapParams.get("Execute"));
-            } else {
-                sa = AbilityFactory.getAbility(hostCard, this.mapParams.get("Execute"));
-            }
         }
         if (sa != null) {
             String saDesc;
@@ -222,6 +228,7 @@ public abstract class Trigger extends TriggerReplacementBase {
                 result = TextUtil.fastReplace(result, "ABILITY", saDesc);
             }
         }
+
         return result;
     }
 

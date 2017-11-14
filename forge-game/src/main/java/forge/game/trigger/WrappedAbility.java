@@ -217,7 +217,7 @@ public class WrappedAbility extends Ability {
 
     @Override
     public String getStackDescription() {
-        final StringBuilder sb = new StringBuilder(regtrig.replaceAbilityText(regtrig.toString(true), this, null));
+        final StringBuilder sb = new StringBuilder(regtrig.replaceAbilityText(regtrig.toString(true), this));
         if (usesTargeting()) {
             sb.append(" (Targeting ");
             for (final GameObject o : this.getTargets().getTargets()) {
