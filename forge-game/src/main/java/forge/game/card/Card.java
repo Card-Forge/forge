@@ -1531,6 +1531,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || keyword.equals("Living Weapon") || keyword.equals("Myriad") || keyword.equals("Exploit")
                     || keyword.equals("Changeling") || keyword.equals("Delve") || keyword.startsWith("Dredge")
                     || (keyword.startsWith("Split second") && !sb.toString().contains("Split second"))
+                    || keyword.equals("Suspend") // for the ones without amounnt
+                    || keyword.equals("Hideaway")
                     || keyword.startsWith("Devoid")){
                 sbLong.append(keyword + " (" + inst.getReminderText() + ")");
             } else if (keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst")
@@ -1994,7 +1996,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || keyword.startsWith("Cascade") || keyword.startsWith("Wither")
                     || (keyword.startsWith("Epic") && !sb.toString().contains("Epic"))
                     || (keyword.startsWith("Split second") && !sb.toString().contains("Split second"))
-                    || (keyword.startsWith("Devoid"))) {
+                    || keyword.startsWith("Devoid") || keyword.equals("Suspend")) {
                 if (sb.length() != 0) {
                     sb.append("\r\n");
                 sb.append(keyword + " (" + inst.getReminderText() + ")");
