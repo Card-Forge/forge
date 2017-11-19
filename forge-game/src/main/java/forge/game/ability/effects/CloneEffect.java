@@ -10,7 +10,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.event.GameEventCardStatsChanged;
-import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
@@ -136,9 +135,6 @@ public class CloneEffect extends SpellAbilityEffect {
 
         CardFactory.copyCopiableCharacteristics(cardToCopy, tgtCard);
 
-        // must copy abilities before first so cloned added abilities are handled correctly
-        CardFactory.copyCopiableAbilities(cardToCopy, tgtCard);
-        
         // add extra abilities as granted by the copy effect
         addExtraCharacteristics(tgtCard, sa, origSVars);
 
@@ -274,10 +270,7 @@ public class CloneEffect extends SpellAbilityEffect {
                 }
                 k = keywords.get(i);
                 
-                KeywordInterface inst = tgtCard.addIntrinsicKeyword(k);
-                if (inst != null) {
-                    inst.createTraits(tgtCard, true);
-                }
+                tgtCard.addIntrinsicKeyword(k);
             }
         }
 

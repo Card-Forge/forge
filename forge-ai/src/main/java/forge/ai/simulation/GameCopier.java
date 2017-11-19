@@ -240,7 +240,6 @@ public class GameCopier {
         if (c.isToken() && !c.isEmblem()) {
             Card result = new TokenInfo(c).makeOneToken(newOwner);
             CardFactory.copyCopiableCharacteristics(c, result);
-            CardFactory.copyCopiableAbilities(c, result);
             return result;
         }
         if (USE_FROM_PAPER_CARD && !c.isEmblem()) {
