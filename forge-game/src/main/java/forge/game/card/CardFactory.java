@@ -31,7 +31,6 @@ import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.*;
-import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.WrappedAbility;
@@ -509,37 +508,6 @@ public class CardFactory {
             copyState(from, from.getCurrentStateName(), to, to.getCurrentStateName());
         }
     }
-    
-    /**
-     * Copy the copiable abilities of one card to another, taking the states of
-     * both cards into account.
-     * 
-     * @param from the {@link Card} to copy from.
-     * @param to the {@link Card} to copy to.
-     */
-    public static void copyCopiableAbilities(final Card from, final Card to) {
-    	final boolean toIsFaceDown = to.isFaceDown();
-    	if (toIsFaceDown) {
-    		// If to is face down, copy to its front side
-    		to.setState(CardStateName.Original, false);
-    		copyCopiableAbilities(from, to);
-    		to.setState(CardStateName.FaceDown, false);
-    		return;
-    	}
-
-    	final boolean fromIsFlipCard = from.isFlipCard();
-        final boolean fromIsTransformedCard = from.getCurrentStateName() == CardStateName.Transformed || from.getCurrentStateName() == CardStateName.Meld;
-
-    	if (fromIsFlipCard) {
-    		copyAbilities(from, CardStateName.Original, to, to.getCurrentStateName());
-    		copyAbilities(from, CardStateName.Flipped, to, CardStateName.Flipped);
-        }
-        else if (fromIsTransformedCard) {
-    		copyAbilities(from, from.getCurrentStateName(), to, CardStateName.Original);
-    	} else {
-    		copyAbilities(from, from.getCurrentStateName(), to, to.getCurrentStateName());
-    	}
-    }
 
     /**
      * <p>
@@ -612,42 +580,6 @@ public class CardFactory {
         toCharacteristics.copyFrom(from, fromCharacteristics);
     }
     
-    /**
-     * Copy the abilities (including static abilities, triggers, and replacement
-     * effects) from one card to another.
-     * 
-     * @param from the {@link Card} to copy from.
-     * @param fromState the {@link CardStateName} of {@code from} to copy from.
-     * @param to the {@link Card} to copy to.
-     * @param toState the {@link CardStateName} of {@code to} to copy to.
-     */
-    private static void copyAbilities(final Card from, final CardStateName fromState, final Card to, final CardStateName toState) {
-        final CardState fromCharacteristics = from.getState(fromState);
-        final CardStateName oldToState = to.getCurrentStateName();
-        if (!to.getStates().contains(toState)) {
-            to.addAlternateState(toState, false);
-        }
-
-        to.setState(toState, false);
-        // handle triggers and replacement effect through Card class interface
-        to.setTriggers(fromCharacteristics.getTriggers(), true);
-        to.setReplacementEffects(fromCharacteristics.getReplacementEffects());
-        // add abilities
-        for (SpellAbility sa : fromCharacteristics.getIntrinsicSpellAbilities()) {
-            to.addSpellAbility(sa.copy());
-        }
-
-        // add static abilities
-        to.getCurrentState().clearStaticAbilities();
-        for (StaticAbility staticAbility : fromCharacteristics.getStaticAbilities()) {
-            if (staticAbility.isIntrinsic()) {
-                to.addStaticAbility(staticAbility, true);
-            }
-        }
-        // reset state
-        to.setState(oldToState, false);
-    }
-
     public static void copySpellAbility(SpellAbility from, SpellAbility to, final Card host) {
         if (from.getActivatingPlayer() != null) {
             to.setActivatingPlayer(from.getActivatingPlayer());
