@@ -174,6 +174,16 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
         return layers;
     }
 
+    private void buildCommonAttributes(Card host) {
+        if (mapParams.containsKey("References")) {
+            for (String svar : mapParams.get("References").split(",")) {
+                if (host.hasSVar(svar)) {
+                    this.setSVar(svar, host.getSVar(svar));
+                }
+            }
+        }
+    }
+
     /**
      * <p>
      * toString.
@@ -236,6 +246,7 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
         this.mapParams.putAll(params);
         this.layers = this.generateLayer();
         this.hostCard = host;
+        buildCommonAttributes(host);
     }
 
     public StaticAbility(StaticAbility stAb, Card host) {
@@ -244,6 +255,7 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
         this.layers = this.generateLayer();
         this.hostCard = host;
         this.intrinsic = stAb.intrinsic;
+        buildCommonAttributes(host);
     }
 
     public final CardCollectionView applyContinuousAbility(final StaticAbilityLayer layer) {
