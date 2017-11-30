@@ -16,7 +16,6 @@ import forge.util.RuntimeVersion;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -110,7 +109,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
         RuntimeVersion javaVersion = RuntimeVersion.of(System.getProperty("java.version"));
 
-        return javaVersion.getMajor() >= 1 && (javaVersion.getMinor() > 8 || (javaVersion.getMinor() == 8 && javaVersion.getUpdate() >= 101));
+        return javaVersion.getMajor() >= 9 || (javaVersion.getMajor() >= 1 && (javaVersion.getMinor() > 8 || (javaVersion.getMinor() == 8 && javaVersion.getUpdate() >= 101)));
 
     }
 

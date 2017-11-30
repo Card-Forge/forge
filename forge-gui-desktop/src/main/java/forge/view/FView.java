@@ -233,7 +233,7 @@ public enum FView {
 
 		RuntimeVersion javaVersion = RuntimeVersion.of(System.getProperty("java.version"));
 
-		if (javaVersion.getMinor() < 8 && !FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.DISABLE_DISPLAY_JAVA_8_UPDATE_WARNING)) {
+		if (javaVersion.getMajor() < 9 && javaVersion.getMinor() < 8 && !FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.DISABLE_DISPLAY_JAVA_8_UPDATE_WARNING)) {
 
 			JPanel updateWarningOverlay = FOverlay.SINGLETON_INSTANCE.getPanel();
 			updateWarningOverlay.setLayout(new GridBagLayout());
