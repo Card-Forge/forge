@@ -1,9 +1,2 @@
-- Quest World: Lorwyn -
-The quest world based on Lorwyn and created by Erazmus in 2013 has now been integrated. It contains 48 duels and 10 challenges to overcome.
-
-- AI Improvements -
-The AI has learned some new tricks in this version, which may be subtle but will hopefully surprise the player and make the game more exciting and challenging.
-Over 700 card scripts have been revised for AI playability. Most of these scripts were created many years ago, when our artificial intelligence was a lot simpler and could not do many of the things it can do now. Therefore, many cards which were marked as "AI-unplayable" are, in fact, playable with the current engine. These cards have now been properly marked as AI playable and their AI flags have been updated as necessary. Note that while tests have been run for every single card, some cards may have been marked erroneously because they may misbehave in corner cases or other unexpected situations. If cases like that are found out, we will try to patch up the AI to make it work correctly, but if it proves to be too difficult or impossible in short term perspective, we will mark those cards as unplayable again.
-
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.
