@@ -3969,8 +3969,6 @@ public class CardFactoryUtil {
 
             suspend.setTemporary(!intrinsic);
             inst.addSpellAbility(suspend);
-
-            card.addSpellAbility(suspend);
         } else if (keyword.startsWith("Transmute")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
