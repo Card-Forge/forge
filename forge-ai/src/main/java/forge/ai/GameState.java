@@ -1,23 +1,9 @@
 package forge.ai;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
-
 import forge.StaticData;
 import forge.card.CardStateName;
 import forge.game.Game;
@@ -27,7 +13,6 @@ import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactory;
 import forge.game.card.CounterType;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
@@ -45,6 +30,12 @@ import forge.item.PaperCard;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.StringUtils;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.*;
+import java.util.Map.Entry;
 
 public abstract class GameState {
     private static final Map<ZoneType, String> ZONES = new HashMap<ZoneType, String>();
@@ -74,6 +65,7 @@ public abstract class GameState {
     private final Map<Card, String> cardToChosenType = new HashMap<>();
     private final Map<Card, List<String>> cardToRememberedId = new HashMap<>();
     private final Map<Card, List<String>> cardToImprintedId = new HashMap<>();
+    private final Map<Card, String> cardToNamedCard = new HashMap<>();
     private final Map<Card, String> cardToExiledWithId = new HashMap<>();
     private final Map<Card, Card> cardAttackMap = new HashMap<>();
 
@@ -280,6 +272,9 @@ public abstract class GameState {
             }
             if (!c.getChosenType().isEmpty()) {
                 newText.append("|ChosenType:").append(c.getChosenType());
+            }
+            if (!c.getNamedCard().isEmpty()) {
+                newText.append("|NamedCard:").append(c.getNamedCard());
             }
 
             List<String> rememberedCardIds = Lists.newArrayList();
@@ -828,6 +823,12 @@ public abstract class GameState {
             Card c = entry.getKey();
             c.setChosenType(entry.getValue());
         }
+
+        // Named card
+        for (Entry<Card, String> entry : cardToNamedCard.entrySet()) {
+            Card c = entry.getKey();
+            c.setNamedCard(entry.getValue());
+        }
     }
 
     private void handleCardAttachments() {
@@ -1008,6 +1009,8 @@ public abstract class GameState {
                     cardToChosenClrs.put(c, Arrays.asList(info.substring(info.indexOf(':') + 1).split(",")));
                 } else if (info.startsWith("ChosenType:")) {
                     cardToChosenType.put(c, info.substring(info.indexOf(':') + 1));
+                } else if (info.startsWith("NamedCard:")) {
+                    cardToNamedCard.put(c, info.substring(info.indexOf(':') + 1));
                 } else if (info.startsWith("ExecuteScript:")) {
                     cardToScript.put(c, info.substring(info.indexOf(':') + 1));
                 } else if (info.startsWith("RememberedCards:")) {
