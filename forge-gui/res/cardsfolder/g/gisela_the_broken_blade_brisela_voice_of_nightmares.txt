@@ -7,6 +7,7 @@ K:First Strike
 K:Lifelink
 T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Card.Self+YouOwn | IsPresent2$ Creature.YouCtrl+YouOwn+namedBruna; the Fading Light | ValidPlayer$ You | Execute$ Meld | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, if you both own and control CARDNAME and a creature named Bruna, the Fading Light, exile them, then meld them into Brisela, Voice of Nightmares.
 SVar:Meld:DB$ Meld | Name$ Brisela, Voice of Nightmares | Primary$ Gisela, the Broken Blade | Secondary$ Bruna, the Fading Light
+DeckHints:Name$Bruna, the Fading Light
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gisela_the_broken_blade.jpg
 MeldPair:Bruna, the Fading Light
 AlternateMode:Meld

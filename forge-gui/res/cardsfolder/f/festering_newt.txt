@@ -6,6 +6,7 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | ConditionCheckSVar$ BogbrewWitchPresent | ConditionSVarCompare$ EQ0 | References$ BogbrewWitchPresent | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ ParentTarget | NumAtt$ -4 | NumDef$ -4 | ConditionCheckSVar$ BogbrewWitchPresent | ConditionSVarCompare$ GE1 | References$ BogbrewWitchPresent
 SVar:BogbrewWitchPresent:Count$Valid Creature.YouCtrl+namedBogbrew Witch
-DeckHints:Name$Bubbling Cauldron|Bogbrew Witch
+DeckNeeds:Name$Bogbrew Witch
+DeckHints:Name$Bubbling Cauldron
 SVar:Picture:http://www.wizards.com/global/images/magic/general/festering_newt.jpg
 Oracle:When Festering Newt dies, target creature an opponent controls gets -1/-1 until end of turn. That creature gets -4/-4 instead if you control a creature named Bogbrew Witch.

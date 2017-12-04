@@ -4,5 +4,6 @@ Types:Sorcery
 A:SP$ Token | Cost$ 2 G | TokenAmount$ 1 | TokenName$ Wolf | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenStaticAbilities$ StaticCall | TokenSVars$ CallCount | SpellDescription$ Create a 1/1 green Wolf creature token. It has "This creature gets +1/+1 for each card named Sound the Call in each graveyard."
 SVar:StaticCall:Mode$ Continuous | Affected$ Card.Self | AddPower$ CallCount | AddToughness$ CallCount | EffectZone$ Battlefield | Description$ This creature gets +1/+1 for each card named Sound the Call in each graveyard.
 SVar:CallCount:Count$ValidGraveyard Card.namedSound the Call
+DeckHints:Name$Sound the Call
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sound_the_call.jpg
 Oracle:Create a 1/1 green Wolf creature token. It has "This creature gets +1/+1 for each card named Sound the Call in each graveyard."

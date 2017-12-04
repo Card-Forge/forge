@@ -7,5 +7,6 @@ SVar:X:Count$Valid Creature.namedPlague Rats
 SVar:BuffedBy:Creature.namedPlague Rats
 SVar:RemRandomDeck:True
 SVar:NoZeroToughnessAI:True
+DeckHints:Name$Plague Rats
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plague_rats.jpg
 Oracle:Plague Rats's power and toughness are each equal to the number of creatures named Plague Rats on the battlefield.
