@@ -3,5 +3,6 @@ ManaCost:4 G G
 Types:Creature Elemental
 PT:6/6
 K:Trample
+DeckHints:Name$Nissa's Encouragement|Nissa, Genesis Mage|Forest
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brambleweft_behemoth.jpg
 Oracle:Trample (This creature can deal excess combat damage to defending player or planeswalker while attacking.)

@@ -5,5 +5,6 @@ PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 black Zombie creature token for each card named Undead Servant in your graveyard.
 SVar:TrigToken:DB$ Token | TokenAmount$ X | References$ X | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ b_2_2_zombie_ori
 SVar:X:Count$ValidGraveyard Card.YouOwn+namedUndead Servant
+DeckHints:Name$Undead Servant
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_servant.jpg
 Oracle:When Undead Servant enters the battlefield, create a 2/2 black Zombie creature token for each card named Undead Servant in your graveyard.

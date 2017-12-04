@@ -10,4 +10,5 @@ SVar:Reapproach:DB$ ChangeZone | Origin$ Stack | Destination$ Library | LibraryP
 SVar:Y:Count$ValidCommand Effect.YouCtrl+namedApproachingSuns/LimitMax.2
 SVar:Z:Count$ValidStack Card.wasCastFromHand+Self/LimitMax.1
 SVar:X:SVar$Y/Plus.Z
+DeckNeeds:Name$Approach of the Second Sun
 Oracle:If Approach of the Second Sun was cast from your hand and you've cast another spell named Approach of the Second Sun this game, you win the game. Otherwise, put Approach of the Second Sun into its owner's library seventh from the top and you gain 7 life.
