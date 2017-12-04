@@ -6,6 +6,5 @@ T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigDamage | TriggerDesc
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature defending player controls | NumDmg$ 1
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddSVar$ AE
 SVar:AE:SVar:HasAttackEffect:TRUE
-DeckHints:Name$Renowned Weaponsmith
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_piercer_bow.jpg
 Oracle:Whenever equipped creature attacks, Heart-Piercer Bow deals 1 damage to target creature defending player controls.\nEquip {1}
