@@ -198,7 +198,6 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      */
     @Override
     public String toString() {
-        String desc = this.getMapParams().get("Description");
         if (this.getMapParams().containsKey("Description") && !this.isSuppressed()) {
             return AbilityUtils.applyDescriptionTextChangeEffects(this.getMapParams().get("Description"), this);
         } else {
