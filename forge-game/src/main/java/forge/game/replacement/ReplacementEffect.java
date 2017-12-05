@@ -25,6 +25,7 @@ import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.util.TextUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -62,6 +63,12 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         originalMapParams.putAll(map);
         mapParams.putAll(map);
         this.setHostCard(host);
+
+        if (host != null && mapParams.get("Description").contains("CARDNAME")) {
+            String desc = TextUtil.fastReplace(mapParams.get("Description"), "CARDNAME", host.toString());
+            originalMapParams.put("Description", desc);
+            mapParams.put("Description", desc);
+        }
     }
 
     /**
@@ -191,6 +198,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      */
     @Override
     public String toString() {
+        String desc = this.getMapParams().get("Description");
         if (this.getMapParams().containsKey("Description") && !this.isSuppressed()) {
             return AbilityUtils.applyDescriptionTextChangeEffects(this.getMapParams().get("Description"), this);
         } else {
