@@ -1255,7 +1255,7 @@
 #1|Noxious Gearhulk|M|MPS_KLD
 #1|Combustible Gearhulk|M|MPS_KLD
 #1|Verdurous Gearhulk|M|MPS_KLD
-#1|AEther Vial|M|MPS_KLD
+#1|Aether Vial|M|MPS_KLD
 #1|Champion's Helm|M|MPS_KLD
 #1|Chromatic Lantern|M|MPS_KLD
 #1|Chrome Mox|M|MPS_KLD
@@ -1680,7 +1680,7 @@
 #187|Decoction Module|U|KLD
 #188|Fireforger's Puzzleknot|C|KLD
 #189|Self-Assembler|C|KLD
-#190|AEther Tradewinds|C|KLD
+#190|Aether Tradewinds|C|KLD
 #191|Disappearing Act|U|KLD
 #192|Era of Innovation|U|KLD
 #193|Fortuitous Find|C|KLD
@@ -2168,11 +2168,6 @@
 #203|Nephalia Academy|U|EMN
 #204|Thirsting Axe|U|EMN
 #205|Harmless Offering|R|EMN
-#206|Island|L|EMN
-#207|Forest|L|EMN
-#208|Swamp|L|EMN
-#209|Mountain|L|EMN
-#210|Plains|L|EMN
 //Rank|Name|Rarity|Set
 #1|Jace, the Mind Sculptor|M|EMA
 #2|Mana Crypt|M|EMA
@@ -2706,11 +2701,6 @@
 #280|Invasive Surgery|U|SOI
 #281|Runaway Carriage|U|SOI
 #282|Harness the Storm|R|SOI
-#283|Mountain|L|SOI
-#284|Island|L|SOI
-#285|Forest|L|SOI
-#286|Swamp|L|SOI
-#287|Plains|L|SOI
 //Rank|Name|Rarity|Set
 #1|Prairie Stream|M|EXP
 #1|Sunken Hollow|M|EXP
@@ -2756,6 +2746,7 @@
 #1|Mana Confluence|M|EXP
 #1|Forbidden Orchard|M|EXP
 #1|Fetid Heath|M|EXP
+#1|Horizon Canopy|M|EXP
 #100|Dummy Card|M|EXP
 //Rank|Name|Rarity|Set
 #1|Chandra, Flamecaller|M|OGW
@@ -2941,11 +2932,6 @@
 #181|Call the Gatewatch|R|OGW
 #182|Bonds of Mortality|U|OGW
 #183|Hedron Alignment|R|OGW
-#184|Forest|L|OGW
-#185|Plains|L|OGW
-#186|Mountain|L|OGW
-#187|Swamp|L|OGW
-#188|Island|L|OGW
 //Rank|Name|Rarity|Set
 #1|Gideon, Ally of Zendikar|M|BFZ
 #2|Ob Nixilis Reignited|M|BFZ
@@ -3196,11 +3182,6 @@
 #247|Crumble to Dust|U|BFZ
 #248|Pathway Arrows|U|BFZ
 #249|Prism Array|R|BFZ
-#250|Island|L|BFZ
-#251|Swamp|L|BFZ
-#252|Plains|L|BFZ
-#253|Forest|L|BFZ
-#254|Mountain|L|BFZ
 //Rank|Name|Rarity|Set
 #1|Archangel of Tithes|M|ORI
 #2|Woodland Bellower|M|ORI
@@ -3287,7 +3268,7 @@
 #83|Enthralling Victor|U|ORI
 #84|Sphinx's Tutelage|U|ORI
 #85|Dark Petition|R|ORI
-#86|Anchor to the AEther|U|ORI
+#86|Anchor to the Aether|U|ORI
 #87|Lightning Javelin|C|ORI
 #88|Displacement Wave|R|ORI
 #89|Leaf Gilder|C|ORI
@@ -3441,7 +3422,7 @@
 #237|Vine Snare|C|ORI
 #238|Reclaim|C|ORI
 #239|Demolish|C|ORI
-#240|Ghirapur AEther Grid|U|ORI
+#240|Ghirapur Aether Grid|U|ORI
 #241|Hallowed Moonlight|R|ORI
 #242|Alchemist's Vial|C|ORI
 #243|Jace's Sanctum|R|ORI
@@ -3454,11 +3435,6 @@
 #250|Mage-Ring Network|U|ORI
 #251|Prism Ring|U|ORI
 #252|Jayemdae Tome|U|ORI
-#253|Forest|L|ORI
-#254|Plains|L|ORI
-#255|Mountain|L|ORI
-#256|Swamp|L|ORI
-#257|Island|L|ORI
 //Rank|Name|Rarity|Set
 #1|Karn Liberated|M|MM2
 #2|Bitterblossom|M|MM2
@@ -3586,7 +3562,7 @@
 #124|Qumulox|U|MM2
 #125|Scion of the Wild|C|MM2
 #126|Etched Oracle|U|MM2
-#127|AEthersnipe|C|MM2
+#127|Aethersnipe|C|MM2
 #128|Ulamog's Crusher|C|MM2
 #129|Evolving Wilds|C|MM2
 #130|Orzhov Basilica|U|MM2
@@ -3835,7 +3811,7 @@
 #123|Dromoka's Gift|U|DTK
 #124|Great Teacher's Decree|U|DTK
 #125|Strongarm Monk|U|DTK
-#126|Obscuring AEther|R|DTK
+#126|Obscuring Aether|R|DTK
 #127|Marang River Skeleton|U|DTK
 #128|Dragon Tempest|R|DTK
 #129|Skywise Teachings|U|DTK
@@ -3959,11 +3935,6 @@
 #247|Keeper of the Lens|C|DTK
 #248|Gate Smasher|U|DTK
 #249|Tapestry of the Ages|U|DTK
-#250|Swamp|L|DTK
-#251|Plains|L|DTK
-#252|Forest|L|DTK
-#253|Island|L|DTK
-#254|Mountain|L|DTK
 //Rank|Name|Rarity|Set
 #1|Ugin the Spirit Dragon|M|FRF
 #2|Shaman of the Great Hunt|M|FRF
@@ -4140,6 +4111,33 @@
 #173|Dark Deal|U|FRF
 #174|Fascination|U|FRF
 #175|Goblin Boom Keg|U|FRF
+//Rank|Name|Rarity|Set
+#1|Ugin the Spirit Dragon|M|UGF
+#29|Ghostfire Blade|R|UGF
+#32|Mastery of the Unseen|R|UGF
+#34|Grim Haruspex|R|UGF
+#37|Wildcall|R|UGF
+#39|Jeskai Infiltrator|R|UGF
+#44|Jeering Instigator|R|UGF
+#46|Arc Lightning|U|UGF
+#75|Ruthless Ripper|U|UGF
+#77|Reality Shift|U|UGF
+#79|Sultai Emissary|C|UGF
+#89|Watcher of the Roost|U|UGF
+#94|Write into Being|C|UGF
+#104|Soul Summons|C|UGF
+#109|Debilitating Injury|C|UGF
+#112|Arashin War Beast|U|UGF
+#119|Mystic of the Hidden Way|C|UGF
+#130|Ugin's Construct|U|UGF
+#133|Formless Nurturing|C|UGF
+#137|Fierce Invocation|C|UGF
+#150|Smite the Monstrous|C|UGF
+#171|Dragonscale Boon|C|UGF
+#172|Hewed Stone Retainers|U|UGF
+#206|Ainok Tracker|C|UGF
+#244|Briber's Purse|U|UGF
+#245|Altar of the Brood|R|UGF
 //Rank|Name|Rarity|Set
 #1|Sarkhan the Dragonspeaker|M|KTK
 #2|Wingmate Roc|M|KTK
@@ -4390,11 +4388,6 @@
 #247|Tomb of the Spirit Dragon|U|KTK
 #248|Cranial Archive|U|KTK
 #249|Ugin's Nexus|M|KTK
-#250|Mountain|L|KTK
-#251|Plains|L|KTK
-#252|Forest|L|KTK
-#253|Island|L|KTK
-#254|Swamp|L|KTK
 //Rank|Name|Rarity|Set
 #1|Ajani Steadfast|M|M15
 #2|Soul of New Phyrexia|M|M15
@@ -4428,7 +4421,7 @@
 #30|Goblin Rabblemaster|R|M15
 #31|Spirit Bonds|R|M15
 #32|Burning Anger|R|M15
-#33|AEtherspouts|R|M15
+#33|Aetherspouts|R|M15
 #34|Hornet Nest|R|M15
 #35|Yisan the Wanderer Bard|R|M15
 #36|Chord of Calling|R|M15
@@ -4645,11 +4638,6 @@
 #247|Staff of the Death Magus|U|M15
 #248|Staff of the Flame Magus|U|M15
 #249|Staff of the Wild Magus|U|M15
-#250|Island|L|M15
-#251|Mountain|L|M15
-#252|Forest|L|M15
-#253|Swamp|L|M15
-#254|Plains|L|M15
 //Rank|Name|Rarity|Set
 #1|Legacys Allure|R|TPR
 #2|Flame Wave|R|TPR
@@ -4879,7 +4867,7 @@
 #226|Skyshaper|C|TPR
 #227|Goblin Bombardment|U|TPR
 #228|Corpse Dance|R|TPR
-#229|Death Pits pf Rath|R|TPR
+#229|Death Pits of Rath|R|TPR
 #230|Grindstone|M|TPR
 #231|Disenchant|C|TPR
 #232|Armored Pegasus|C|TPR
@@ -5001,7 +4989,7 @@
 #98|Hymn to Tourach|U|VMA
 #99|Blazing Specter|U|VMA
 #100|Simian Grunts|C|VMA
-#101|AEther Mutation|U|VMA
+#101|Aether Mutation|U|VMA
 #102|Genesis|R|VMA
 #103|Elephant Guide|C|VMA
 #104|Reign of the Pit|R|VMA
@@ -5392,11 +5380,6 @@
 #163|Godhunter Octopus|C|JOU
 #164|Desecration Plague|C|JOU
 #165|Deserters Quarters|U|JOU
-#166|Forest|L|JOU
-#167|Plains|L|JOU
-#168|Swamp|L|JOU
-#169|Mountain|L|JOU
-#170|Island|L|JOU
 //Rank|Name|Rarity|Set
 #1|Brimaz King of Oreskos|M|BNG
 #2|Kiora the Crashing Wave|M|BNG
@@ -5527,7 +5510,7 @@
 #127|Dawn to Dusk|U|BNG
 #128|Aspect of Hydra|C|BNG
 #129|Karametras Favor|C|BNG
-#130|Unravel the AEther|U|BNG
+#130|Unravel the Aether|U|BNG
 #131|Pillar of War|U|BNG
 #132|Astral Cornucopia|R|BNG
 #133|Impetuous Sunchaser|C|BNG
@@ -5563,11 +5546,6 @@
 #163|Plea for Guidance|R|BNG
 #164|Whims of the Fates|R|BNG
 #165|Heroes Podium|R|BNG
-#166|Forest|L|BNG
-#167|Plains|L|BNG
-#168|Mountain|L|BNG
-#169|Swamp|L|BNG
-#170|Island|L|BNG
 //Rank|Name|Rarity|Set
 #1|Elspeth Sun's Champion|M|THS
 #2|Stormbreath Dragon|M|THS
@@ -5798,11 +5776,6 @@
 #227|Peak Eruption|U|THS
 #228|Witches' Eye|U|THS
 #229|Pyxis of Pandemonium|R|THS
-#230|Island|L|THS
-#231|Mountain|L|THS
-#232|Plains|L|THS
-#233|Swamp|L|THS
-#234|Forest|L|THS
 //Rank|Name|Rarity|Set
 #1|Dack Fayden|M|CNS
 #2|Pristine Angel|M|CNS
@@ -5826,7 +5799,7 @@
 #20|Custodi Soulbinders|R|CNS
 #21|Reign of the Pit|R|CNS
 #22|Grenzo, Dungeon Warden|R|CNS
-#23|AEther Searcher|R|CNS
+#23|Aether Searcher|R|CNS
 #24|Edric, Spymaster of Trest|R|CNS
 #25|Backup Plan|R|CNS
 #26|Selvala, Explorer Returned|R|CNS
@@ -5976,7 +5949,7 @@
 #170|Enclave Elite|C|CNS
 #171|Heckling Fiends|U|CNS
 #172|Traveler's Cloak|C|CNS
-#173|AEther Tradewinds|C|CNS
+#173|Aether Tradewinds|C|CNS
 #174|Uncontrollable Anger|U|CNS
 #175|Scaled Wurm|C|CNS
 #176|Enraged Revolutionary|C|CNS
@@ -6244,11 +6217,6 @@
 #227|Staff of the Sun Magus|U|M14
 #228|Staff of the Wild Magus|U|M14
 #229|Staff of the Flame Magus|U|M14
-#230|Island|L|M14
-#231|Forest|L|M14
-#232|Swamp|L|M14
-#233|Mountain|L|M14
-#234|Plains|L|M14
 //Rank|Name|Rarity|Set
 #1|Sword of Fire and Ice|M|MMA
 #2|Sword of Light and Shadow|M|MMA
@@ -6299,7 +6267,7 @@
 #47|Greater Gargadon|R|MMA
 #48|Engineered Explosives|R|MMA
 #49|Eternal Witness|U|MMA
-#50|AEther Vial|R|MMA
+#50|Aether Vial|R|MMA
 #51|Tooth and Nail|R|MMA
 #52|Blinkmoth Nexus|R|MMA
 #53|Riftwing Cloudskate|U|MMA
@@ -6367,7 +6335,7 @@
 #115|Tromp the Domains|U|MMA
 #116|Vivid Marsh|U|MMA
 #117|Search for Tomorrow|C|MMA
-#118|AEther Spellbomb|C|MMA
+#118|Aether Spellbomb|C|MMA
 #119|Bridge from Below|R|MMA
 #120|Sanctum Gargoyle|C|MMA
 #121|Mogg War Marshal|C|MMA
@@ -6382,7 +6350,7 @@
 #130|Etched Oracle|U|MMA
 #131|War-Spike Changeling|C|MMA
 #132|Auntie's Snitch|U|MMA
-#133|AEthersnipe|C|MMA
+#133|Aethersnipe|C|MMA
 #134|Sporoloth Ancient|C|MMA
 #135|Veteran Armorer|C|MMA
 #136|Durkwood Baloth|C|MMA
@@ -6488,7 +6456,7 @@
 #6|Progenitor Mimic|M|DGM
 #7|Legion's Initiative|M|DGM
 #8|Deadbridge Chant|M|DGM
-#9|AEtherling|R|DGM
+#9|Aetherling|R|DGM
 #10|Advent of the Wurm|R|DGM
 #11|Tajic Blade of the Legion|R|DGM
 #12|Scion of Vitu-Ghazi|R|DGM
@@ -6765,7 +6733,7 @@
 #116|Slaughterhorn|C|GTC
 #117|Devour Flesh|C|GTC
 #118|Angelic Edict|C|GTC
-#119|AEtherize|U|GTC
+#119|Aetherize|U|GTC
 #120|Vizkopa Confessor|U|GTC
 #121|Ordruun Veteran|U|GTC
 #122|Simic Fluxmage|U|GTC
@@ -6896,11 +6864,6 @@
 #247|Dying Wish|U|GTC
 #248|Serene Remembrance|U|GTC
 #249|Enter the Infinite|M|GTC
-#250|Forest|L|GTC
-#251|Plains|L|GTC
-#252|Mountain|L|GTC
-#253|Swamp|L|GTC
-#254|Island|L|GTC
 //Rank|Name|Rarity|Set
 #1|Jace Architect of Thought|M|RTR
 #2|Angel of Serenity|M|RTR
@@ -7151,11 +7114,6 @@
 #247|Conjured Currency|R|RTR
 #248|Guild Feud|R|RTR
 #249|Search the City|R|RTR
-#250|Forest|L|RTR
-#251|Plains|L|RTR
-#252|Island|L|RTR
-#253|Mountain|L|RTR
-#254|Swamp|L|RTR
 //Rank|Name|Rarity|Set
 #1|Ajani Caller of the Pride|M|M13
 #2|Garruk Primal Hunter|M|M13
@@ -7386,11 +7344,6 @@
 #227|Door to Nothingness|R|M13
 #228|Battle of Wits|R|M13
 #229|Clock of Omens|U|M13
-#230|Island|L|M13
-#231|Swamp|L|M13
-#232|Forest|L|M13
-#233|Mountain|L|M13
-#234|Plains|L|M13
 //Rank|Name|Rarity|Set
 #1|Tamiyo the Moon Sage|M|AVR
 #2|Bonfire of the Damned|M|AVR
@@ -7621,11 +7574,6 @@
 #227|Rite of Ruin|R|AVR
 #228|Second Guess|U|AVR
 #229|Arcane Melee|R|AVR
-#230|Swamp|L|AVR
-#231|Forest|L|AVR
-#232|Island|L|AVR
-#233|Mountain|L|AVR
-#234|Plains|L|AVR
 //Rank|Name|Rarity|Set
 #1|Sorin, Lord of Innistrad|M|DKA
 #2|Havengul Lich|M|DKA
@@ -7781,15 +7729,10 @@
 #152|Lost in the Woods|R|DKA
 #153|Curse of Echoes|R|DKA
 #154|Shattered Perception|U|DKA
-#155|S?nce|R|DKA
+#155|Seance|R|DKA
 #156|Curse of Thirst|U|DKA
 #157|Curse of Exhaustion|U|DKA
 #158|Altar of the Lost|U|DKA
-#159|Forest|L|DKA
-#160|Island|L|DKA
-#161|Mountain|L|DKA
-#162|Swamp|L|DKA
-#163|Plains|L|DKA
 //Rank|Name|Rarity|Set
 #1|Garruk Relentless|M|ISD
 #2|Olivia Voldaren|M|ISD
@@ -8040,12 +7983,6 @@
 #247|Rooftop Storm|R|ISD
 #248|Graveyard Shovel|U|ISD
 #249|Stony Silence|R|ISD
-#250|Checklist|L|ISD
-#251|Forest|L|ISD
-#252|Island|L|ISD
-#253|Plains|L|ISD
-#254|Swamp|L|ISD
-#255|Mountain|L|ISD
 //Rank|Name|Rarity|Set
 #1|Gideon Jura|M|M12
 #2|Grave Titan|M|M12
@@ -8115,7 +8052,7 @@
 #66|Alabaster Mage|U|M12
 #67|Shock|C|M12
 #68|Lord of the Unreal|R|M12
-#69|AEther Adept|C|M12
+#69|Aether Adept|C|M12
 #70|Grand Abolisher|R|M12
 #71|Goblin Chieftain|R|M12
 #72|Gorehorn Minotaurs|C|M12
@@ -8276,11 +8213,6 @@
 #227|Angel's Feather|U|M12
 #228|Demon's Horn|U|M12
 #229|Kraken's Eye|U|M12
-#230|Forest|L|M12
-#231|Swamp|L|M12
-#232|Mountain|L|M12
-#233|Island|L|M12
-#234|Plains|L|M12
 //Rank|Name|Rarity|Set
 #1|Batterskull|M|NPH
 #2|Karn Liberated|M|NPH
@@ -8430,7 +8362,7 @@
 #146|Viridian Harvest|C|NPH
 #147|Evil Presence|C|NPH
 #148|Myr Superion|R|NPH
-#149|Arm with AEther|U|NPH
+#149|Arm with Aether|U|NPH
 #150|Shrine of Boundless Growth|U|NPH
 #151|Argent Mutation|U|NPH
 #152|Surge Node|U|NPH
@@ -8447,11 +8379,6 @@
 #163|Soul Conduit|R|NPH
 #164|Psychic Surgery|R|NPH
 #165|Omen Machine|R|NPH
-#166|Forest|L|NPH
-#167|Swamp|L|NPH
-#168|Plains|L|NPH
-#169|Mountain|L|NPH
-#170|Island|L|NPH
 //Rank|Name|Rarity|Set
 #1|Sword of Feast and Famine|M|MBS
 #2|Massacre Wurm|M|MBS
@@ -8598,11 +8525,6 @@
 #143|Mitotic Manipulation|R|MBS
 #144|Magnetic Mine|R|MBS
 #145|Knowledge Pool|R|MBS
-#146|Forest|L|MBS
-#147|Island|L|MBS
-#148|Plains|L|MBS
-#149|Mountain|L|MBS
-#150|Swamp|L|MBS
 //Rank|Name|Rarity|Set
 #1|Sword of Body and Mind|M|SOM
 #2|Wurmcoil Engine|M|SOM
@@ -8833,11 +8755,6 @@
 #227|Vigil for the Lost|U|SOM
 #228|Shape Anew|R|SOM
 #229|Molten Psyche|R|SOM
-#230|Island|L|SOM
-#231|Plains|L|SOM
-#232|Mountain|L|SOM
-#233|Swamp|L|SOM
-#234|Forest|L|SOM
 //Rank|Name|Rarity|Set
 #1|Baneslayer Angel|M|M11
 #2|Grave Titan|M|M11
@@ -8905,7 +8822,7 @@
 #64|Ember Hauler|U|M11
 #65|Birds of Paradise|R|M11
 #66|Fire Servant|U|M11
-#67|AEther Adept|C|M11
+#67|Aether Adept|C|M11
 #68|Knight Exemplar|R|M11
 #69|Foresee|C|M11
 #70|White Knight|U|M11
@@ -9068,14 +8985,6 @@
 #227|Angel's Feather|U|M11
 #228|Kraken's Eye|U|M11
 #229|Wild Evocation|R|M11
-#230|Mountain|L|M11
-#231|Swamp|L|M11
-#232|Mountain|L|M11
-#233|Island|L|M11
-#234|Plains|L|M11
-#235|Forest|L|M11
-#236|Mountain|L|M11
-#237|Mountain|L|M11
 //Rank|Name|Rarity|Set
 #1|Drana, Kalastria Bloodchief|R|ROE
 #2|Eldrazi Conscription|R|ROE
@@ -9305,11 +9214,6 @@
 #226|Not of This World|U|ROE
 #227|Repay in Kind|R|ROE
 #228|Near Death Experience|R|ROE
-#229|Mountain|L|ROE
-#230|Forest|L|ROE
-#231|Island|L|ROE
-#232|Plains|L|ROE
-#233|Swamp|L|ROE
 //Rank|Name|Rarity|Set
 #1|Basilisk Collar|R|WWK
 #2|Admonition Angel|M|WWK
@@ -9413,7 +9317,7 @@
 #100|Grotag Thrasher|C|WWK
 #101|Battle Hurda|C|WWK
 #102|Thada Adel, Acquisitor|R|WWK
-#103|AEther Tradewinds|C|WWK
+#103|Aether Tradewinds|C|WWK
 #104|Explore|C|WWK
 #105|Vastwood Zendikon|C|WWK
 #106|Halimar Depths|C|WWK
@@ -9456,11 +9360,6 @@
 #143|Selective Memory|R|WWK
 #144|Terra Eternal|R|WWK
 #145|Quest for Ula's Temple|R|WWK
-#146|Mountain|L|WWK
-#147|Plains|L|WWK
-#148|Forest|L|WWK
-#149|Island|L|WWK
-#150|Swamp|L|WWK
 //Rank|Name|Rarity|Set
 #1|Day of Judgment|R|ZEN
 #2|Hellkite Charger|R|ZEN
@@ -9546,7 +9445,7 @@
 #82|Heartstabber Mosquito|C|ZEN
 #83|Grazing Gladehart|C|ZEN
 #84|Steppe Lynx|C|ZEN
-#85|AEther Figment|U|ZEN
+#85|Aether Figment|U|ZEN
 #86|Hagra Diabolist|U|ZEN
 #87|Blade of the Bloodchief|R|ZEN
 #88|Vampire Lacerator|C|ZEN
@@ -9691,26 +9590,6 @@
 #227|Pyromancer Ascension|R|ZEN
 #228|Quest for Ancient Secrets|U|ZEN
 #229|Archmage Ascension|R|ZEN
-#230|Forest|L|ZEN
-#231|Swamp|L|ZEN
-#232|Mountain|L|ZEN
-#233|Forest|L|ZEN
-#234|Plains|L|ZEN
-#235|Plains|L|ZEN
-#236|Island|L|ZEN
-#237|Swamp|L|ZEN
-#238|Swamp|L|ZEN
-#239|Forest|L|ZEN
-#240|Mountain|L|ZEN
-#241|Mountain|L|ZEN
-#242|Island|L|ZEN
-#243|Mountain|L|ZEN
-#244|Plains|L|ZEN
-#245|Island|L|ZEN
-#246|Forest|L|ZEN
-#247|Plains|L|ZEN
-#248|Island|L|ZEN
-#249|Swamp|L|ZEN
 //Rank|Name|Rarity|Set
 #1|Captain of the Watch|R|M10
 #2|Shivan Dragon|R|M10
@@ -9941,26 +9820,6 @@
 #227|Kraken's Eye|U|M10
 #228|Mirror of Fate|R|M10
 #229|Spellbook|U|M10
-#230|Forest|L|M10
-#231|Island|L|M10
-#232|Swamp|L|M10
-#233|Mountain|L|M10
-#234|Island|L|M10
-#235|Swamp|L|M10
-#236|Swamp|L|M10
-#237|Plains|L|M10
-#238|Forest|L|M10
-#239|Island|L|M10
-#240|Swamp|L|M10
-#241|Plains|L|M10
-#242|Mountain|L|M10
-#243|Island|L|M10
-#244|Mountain|L|M10
-#245|Forest|L|M10
-#246|Forest|L|M10
-#247|Mountain|L|M10
-#248|Plains|L|M10
-#249|Plains|L|M10
 //Rank|Name|Rarity|Set
 #1|Lavalanche|R|ARB
 #2|Behemoth Sledge|U|ARB
@@ -10107,26 +9966,6 @@
 #143|Cloven Casting|R|ARB
 #144|Tainted Sigil|U|ARB
 #145|Dragon Appeasement|U|ARB
-#146|Mountain|L|ARB
-#147|Forest|L|ARB
-#148|Mountain|L|ARB
-#149|Plains|L|ARB
-#150|Swamp|L|ARB
-#151|Swamp|L|ARB
-#152|Island|L|ARB
-#153|Forest|L|ARB
-#154|Island|L|ARB
-#155|Mountain|L|ARB
-#156|Plains|L|ARB
-#157|Forest|L|ARB
-#158|Plains|L|ARB
-#159|Island|L|ARB
-#160|Forest|L|ARB
-#161|Island|L|ARB
-#162|Swamp|L|ARB
-#163|Mountain|L|ARB
-#164|Swamp|L|ARB
-#165|Plains|L|ARB
 //Rank|Name|Rarity|Set
 #1|Banefire|R|CFX
 #2|Obelisk of Alara|R|CFX
@@ -10259,7 +10098,7 @@
 #129|Wandering Goblins|C|CFX
 #130|Mana Cylix|C|CFX
 #131|Rotting Rats|C|CFX
-#132|Scornful AEther Lich|U|CFX
+#132|Scornful Aether Lich|U|CFX
 #133|Bone Saw|C|CFX
 #134|Constricting Tendrils|C|CFX
 #135|Infectious Horror|C|CFX
@@ -10273,26 +10112,6 @@
 #143|Font of Mythos|R|CFX
 #144|Corrupted Roots|U|CFX
 #145|Reliquary Tower|U|CFX
-#146|Forest|L|CFX
-#147|Forest|L|CFX
-#148|Swamp|L|CFX
-#149|Mountain|L|CFX
-#150|Plains|L|CFX
-#151|Island|L|CFX
-#152|Mountain|L|CFX
-#153|Plains|L|CFX
-#154|Swamp|L|CFX
-#155|Forest|L|CFX
-#156|Island|L|CFX
-#157|Forest|L|CFX
-#158|Plains|L|CFX
-#159|Mountain|L|CFX
-#160|Swamp|L|CFX
-#161|Swamp|L|CFX
-#162|Mountain|L|CFX
-#163|Plains|L|CFX
-#164|Island|L|CFX
-#165|Island|L|CFX
 //Rank|Name|Rarity|Set
 #1|Flameblast Dragon|R|ALA
 #2|Broodmate Dragon|R|ALA
@@ -10523,26 +10342,6 @@
 #227|Invincible Hymn|R|ALA
 #228|Immortal Coil|R|ALA
 #229|Mindlock Orb|R|ALA
-#230|Swamp|L|ALA
-#231|Island|L|ALA
-#232|Island|L|ALA
-#233|Plains|L|ALA
-#234|Mountain|L|ALA
-#235|Island|L|ALA
-#236|Plains|L|ALA
-#237|Forest|L|ALA
-#238|Mountain|L|ALA
-#239|Island|L|ALA
-#240|Mountain|L|ALA
-#241|Forest|L|ALA
-#242|Swamp|L|ALA
-#243|Plains|L|ALA
-#244|Mountain|L|ALA
-#245|Swamp|L|ALA
-#246|Swamp|L|ALA
-#247|Forest|L|ALA
-#248|Forest|L|ALA
-#249|Plains|L|ALA
 //Rank|Name|Rarity|Set
 #1|Creakwood Liege|R|EVE
 #2|Figure of Destiny|R|EVE
@@ -10625,7 +10424,7 @@
 #79|Harvest Gwyllion|C|EVE
 #80|Hag Hedge Mage|U|EVE
 #81|Inundate|R|EVE
-#82|Noggle Hedge mage|U|EVE
+#82|Noggle Hedge Mage|U|EVE
 #83|Duergar Hedge Mage|U|EVE
 #84|Loyal Gyrfalcon|U|EVE
 #85|Selkie Hedge Mage|U|EVE
@@ -10799,7 +10598,7 @@
 #72|Ballynock Cohort|C|SHM
 #73|Witherscale Wurm|R|SHM
 #74|Torrent of Souls|U|SHM
-#75|AEthertow|C|SHM
+#75|Aethertow|C|SHM
 #76|Woodfall Primus|R|SHM
 #77|Lurebound Scarecrow|U|SHM
 #78|Wicker Warcrawler|U|SHM
@@ -11242,7 +11041,7 @@
 #82|Jagged Scar Archers|U|LRW
 #83|Fallowsage|U|LRW
 #84|Hamletback Goliath|R|LRW
-#85|AEthersnipe|C|LRW
+#85|Aethersnipe|C|LRW
 #86|Merrow Harbinger|U|LRW
 #87|Warren Pilferers|C|LRW
 #88|Nova Chaser|R|LRW
@@ -11939,7 +11738,7 @@
 #133|Mystic Speculation|U|FUT
 #134|Intervention Pact|R|FUT
 #135|Rift Elemental|C|FUT
-#136|Vedalken AEthermage|C|FUT
+#136|Vedalken Aethermage|C|FUT
 #137|Saltskitter|C|FUT
 #138|Glittering Wish|R|FUT
 #139|Sliver Legion|R|FUT
@@ -12062,7 +11861,7 @@
 #75|Blightspeaker|C|PLC
 #76|Shade of Trokair|C|PLC
 #77|Fatal Frenzy|R|PLC
-#78|AEther Membrane|U|PLC
+#78|Aether Membrane|U|PLC
 #79|Kavu Predator|U|PLC
 #80|Saltfield Recluse|C|PLC
 #81|Dreamscape Artist|C|PLC
@@ -12147,7 +11946,7 @@
 #160|Retether|R|PLC
 #161|Dichotomancy|R|PLC
 #162|Spellshift|R|PLC
-#163|Frozen AEther|SU|PLC
+#163|Frozen Aether|SU|PLC
 #164|Shrouded Lore|SU|PLC
 #165|Mesa Enchantress|SR|PLC
 //Rank|Name|Rarity|Set
@@ -12450,7 +12249,7 @@
 #297|Tectonic Fiend|U|TSP
 #298|Assembly Worker|U|TSP
 #299|Drudge Reavers|C|TSP
-#300|AEtherflame Wall|C|TSP
+#300|Aetherflame Wall|C|TSP
 #301|Drifter il Dal|C|TSP
 #302|Sage of Epityr|C|TSP
 #303|Spell Burst|U|TSP
@@ -12460,7 +12259,7 @@
 #307|Ophidian Eye|C|TSP
 #308|Eternity Snare|C|TSP
 #309|Unyaro Bees|R|TSP
-#310|AEther Web|C|TSP
+#310|Aether Web|C|TSP
 #311|Ovinomancer|SR|TSP
 #312|Voidmage Husher|U|TSP
 #313|Safe Haven|SR|TSP
@@ -12589,6 +12388,7 @@
 #6|Prodigal Sorcerer|S|TSB
 #6|Serrated Arrows|S|TSB
 #6|Soltari Priest|S|TSB
+#6|Scragnoth|S|TSB
 #6|Dauthi Slayer|S|TSB
 #6|Thornscape Battlemage|S|TSB
 #6|Tribal Flames|S|TSB
@@ -12744,7 +12544,7 @@
 #65|Ursine Fylgja|U|CSP
 #66|Phyrexian Snowcrusher|U|CSP
 #67|Feast of Flesh|C|CSP
-#68|Surging AEther|C|CSP
+#68|Surging Aether|C|CSP
 #69|Magmatic Core|U|CSP
 #70|Deepfire Elemental|U|CSP
 #71|Dark Depths|R|CSP
@@ -12921,7 +12721,7 @@
 #86|Ogre Gatecrasher|C|DIS
 #87|Simic Growth Chamber|C|DIS
 #88|Riot Spikes|C|DIS
-#89|TransGuild Courier|U|DIS
+#89|Transguild Courier|U|DIS
 #90|Shielding Plax|C|DIS
 #91|Rakdos Signet|C|DIS
 #92|Azorius Signet|C|DIS
@@ -12954,7 +12754,7 @@
 #119|Entropic Eidolon|C|DIS
 #120|Bound Determined|R|DIS
 #121|Aurora Eidolon|C|DIS
-#122|AEthermage's Touch|R|DIS
+#122|Aethermage's Touch|R|DIS
 #123|Fertile Imagination|U|DIS
 #124|Overrule|C|DIS
 #125|Spell Snare|U|DIS
@@ -12991,7 +12791,7 @@
 #156|Vigean Intuition|U|DIS
 #157|Skullmead Cauldron|U|DIS
 #158|Azorius Ploy|U|DIS
-#159|Azorius AEthermage|U|DIS
+#159|Azorius Aethermage|U|DIS
 #160|Steeling Stance|C|DIS
 #161|Vision Skeins|C|DIS
 #162|Delirium Skeins|C|DIS
@@ -13160,7 +12960,7 @@
 #144|Mimeofacture|R|GPT
 #145|Martyred Rusalka|U|GPT
 #146|Gatherer of Graces|U|GPT
-#147|AEtherplasm|U|GPT
+#147|Aetherplasm|U|GPT
 #148|Shattering Spree|U|GPT
 #149|Starved Rusalka|U|GPT
 #150|Caustic Rain|U|GPT
@@ -13300,7 +13100,7 @@
 #118|Fiery Conclusion|C|RAV
 #119|Golgari Grave Troll|R|RAV
 #120|Overgrown Tomb|R|RAV
-#121|Flame kin Zealot|U|RAV
+#121|Flame Kin Zealot|U|RAV
 #122|Elves of Deep Shadow|C|RAV
 #123|Twisted Justice|U|RAV
 #124|Cloudstone Curio|R|RAV
@@ -13929,7 +13729,7 @@
 #120|Reki, the History of Kamigawa|R|SOK
 #121|Murmurs from Beyond|C|SOK
 #122|Inner Chamber Guard|U|SOK
-#123|AEther Shockwave|U|SOK
+#123|Aether Shockwave|U|SOK
 #124|Fiddlehead Kami|C|SOK
 #125|Locust Miser|U|SOK
 #126|Rending Vines|C|SOK
@@ -14429,7 +14229,7 @@
 #1|Razormane Masticore|R|5DN
 #2|Mephidross Vampire|R|5DN
 #3|Vedalken Shackles|R|5DN
-#4|Beacon Of Destruction|R|5DN
+#4|Beacon of Destruction|R|5DN
 #5|Grafted Wargear|U|5DN
 #6|Qumulox|U|5DN
 #7|Silent Arbiter|R|5DN
@@ -14438,19 +14238,19 @@
 #10|Furnace Whelp|U|5DN
 #11|Tornado Elemental|R|5DN
 #12|Magma Jet|U|5DN
-#13|Helm Of Kaldra|R|5DN
-#14|Teljilad Justice|U|5DN
-#15|Beacon Of Creation|R|5DN
+#13|Helm of Kaldra|R|5DN
+#14|Tel Jilad Justice|U|5DN
+#15|Beacon of Creation|R|5DN
 #16|Summoning Station|R|5DN
 #17|Engineered Explosives|R|5DN
-#18|Bringer Of The White Dawn|R|5DN
-#19|Bringer Of The Black Dawn|R|5DN
+#18|Bringer of the White Dawn|R|5DN
+#19|Bringer of the Black Dawn|R|5DN
 #20|Moriok Rigger|R|5DN
 #21|Guardian Idol|U|5DN
 #22|Relic Barrier|U|5DN
 #23|Etched Oracle|U|5DN
 #24|Night's Whisper|U|5DN
-#25|Bringer Of The Green Dawn|R|5DN
+#25|Bringer of the Green Dawn|R|5DN
 #26|Vulshok Sorcerer|C|5DN
 #27|Retaliate|R|5DN
 #28|Wayfarer's Bauble|C|5DN
@@ -14461,17 +14261,17 @@
 #33|Solarion|R|5DN
 #34|Ferropede|U|5DN
 #35|Rude Awakening|R|5DN
-#36|Staff Of Domination|R|5DN
+#36|Staff of Domination|R|5DN
 #37|Vedalken Mastermind|U|5DN
-#38|Bringer Of The Blue Dawn|R|5DN
+#38|Bringer of the Blue Dawn|R|5DN
 #39|Hoverguard Sweepers|R|5DN
 #40|Synod Centurion|U|5DN
 #41|Joiner Adept|R|5DN
-#42|Bringer Of The Red Dawn|R|5DN
+#42|Bringer of the Red Dawn|R|5DN
 #43|Viridian Lorebearers|U|5DN
 #44|Pentad Prism|C|5DN
 #45|Auriok Champion|R|5DN
-#46|Devour In Shadow|U|5DN
+#46|Devour in Shadow|U|5DN
 #47|Energy Chamber|U|5DN
 #48|Trinket Mage|C|5DN
 #49|Mycosynth Golem|R|5DN
@@ -14487,12 +14287,12 @@
 #59|Ebon Drake|U|5DN
 #60|Blind Creeper|C|5DN
 #61|Conjurer's Bauble|C|5DN
-#62|Beacon Of Unrest|R|5DN
+#62|Beacon of Unrest|R|5DN
 #63|Acquire|R|5DN
 #64|Granulate|R|5DN
 #65|Clearwater Goblet|R|5DN
 #66|Loxodon Stalwart|U|5DN
-#67|Beacon Of Immortality|R|5DN
+#67|Beacon of Immortality|R|5DN
 #68|Leonin Squire|C|5DN
 #69|Fangren Pathcutter|U|5DN
 #70|Healer's Headdress|C|5DN
@@ -14500,7 +14300,7 @@
 #72|Tangle Asp|C|5DN
 #73|Battered Golem|C|5DN
 #74|Ferocious Charge|C|5DN
-#75|Fill With Fright|C|5DN
+#75|Fill with Fright|C|5DN
 #76|Condescend|C|5DN
 #77|Suntouched Myr|C|5DN
 #78|Suncrusher|R|5DN
@@ -14519,10 +14319,10 @@
 #91|Tyrranax|C|5DN
 #92|Grinding Station|U|5DN
 #93|Composite Golem|U|5DN
-#94|Ironbarb Hellion|U|5DN
+#94|Iron Barb Hellion|U|5DN
 #95|Horned Helm|C|5DN
-#96|Baton Of Courage|C|5DN
-#97|Rain Of Rust|C|5DN
+#96|Baton of Courage|C|5DN
+#97|Rain of Rust|C|5DN
 #98|Fleshgrafter|C|5DN
 #99|Summoner's Egg|R|5DN
 #100|Goblin Cannon|U|5DN
@@ -14536,40 +14336,40 @@
 #108|Myr Servitor|C|5DN
 #109|Heliophial|C|5DN
 #110|Dawn's Reflection|C|5DN
-#111|Rite Of Passage|R|5DN
+#111|Rite of Passage|R|5DN
 #112|Thermal Navigator|C|5DN
 #113|Desecration Elemental|R|5DN
 #114|Arcbound Wanderer|U|5DN
 #115|Sawtooth Thresher|C|5DN
-#116|Beacon Of Tomorrows|R|5DN
+#116|Beacon of Tomorrows|R|5DN
 #117|Steelshaper's Gift|U|5DN
-#118|Krarkclan Engineers|U|5DN
+#118|Krark Clan Engineers|U|5DN
 #119|Shattered Dreams|U|5DN
-#120|Krarkclan Ogre|C|5DN
+#120|Krark Clan Ogre|C|5DN
 #121|Dross Crocodile|C|5DN
 #122|Avarice Totem|U|5DN
 #123|Chimeric Coils|U|5DN
-#124|Circle Of Protection: Artifacts|U|5DN
+#124|Circle of Protection: Artifacts|U|5DN
 #125|Feedback Bolt|U|5DN
 #126|Nim Grotesque|U|5DN
-#127|Fold Into AEther|U|5DN
-#128|Plunge Into Darkness|R|5DN
-#129|Teljilad Lifebreather|C|5DN
+#127|Fold into Aether|U|5DN
+#128|Plunge into Darkness|R|5DN
+#129|Tel Jilad Lifebreather|C|5DN
 #130|All Suns' Dawn|R|5DN
 #131|Sparring Collar|C|5DN
 #132|Neurok Stealthsuit|C|5DN
-#133|Roar Of Reclamation|R|5DN
-#134|Channel The Suns|U|5DN
-#135|Door To Nothingness|R|5DN
-#136|Krarkclan Ironworks|U|5DN
+#133|Roar of Reclamation|R|5DN
+#134|Channel the Suns|U|5DN
+#135|Door to Nothingness|R|5DN
+#136|Krark Clan Ironworks|U|5DN
 #137|Skullcage|U|5DN
-#138|Crucible Of Worlds|R|5DN
+#138|Crucible of Worlds|R|5DN
 #139|Artificer's Intuition|R|5DN
 #140|Spark Elemental|C|5DN
 #141|Razorgrass Screen|C|5DN
 #142|Disruption Aura|U|5DN
 #143|Doubling Cube|R|5DN
-#144|Lantern Of Insight|U|5DN
+#144|Lantern of Insight|U|5DN
 #145|Screaming Fury|C|5DN
 #146|Into Thin Air|C|5DN
 #147|Armed Response|C|5DN
@@ -14580,14 +14380,14 @@
 #152|Vedalken Orrery|R|5DN
 #153|Magnetic Theft|U|5DN
 #154|Spinal Parasite|U|5DN
-#155|Clock Of Omens|U|5DN
+#155|Clock of Omens|U|5DN
 #156|Early Frost|C|5DN
 #157|Endless Whispers|R|5DN
-#158|Reversal Of Fortune|R|5DN
-#159|Eyes Of The Watcher|U|5DN
+#158|Reversal of Fortune|R|5DN
+#159|Eyes of the Watcher|U|5DN
 #160|Mana Geyser|C|5DN
 #161|Possessed Portal|R|5DN
-#162|Fist Of Suns|R|5DN
+#162|Fist of Suns|R|5DN
 #163|Eon Hub|R|5DN
 #164|Spectral Shift|R|5DN
 #165|Blinkmoth Infusion|R|5DN
@@ -14644,7 +14444,7 @@
 #50|Stir the Pride|U|DST
 #51|Arcbound Slith|U|DST
 #52|Myr Matrix|R|DST
-#53|AEther Vial|U|DST
+#53|Aether Vial|U|DST
 #54|Steelshaper Apprentice|R|DST
 #55|Razor Golem|C|DST
 #56|Stand Together|U|DST
@@ -14748,7 +14548,7 @@
 #154|Hunger of the Nim|C|DST
 #155|Burden of Greed|C|DST
 #156|Hallow|C|DST
-#157|AEther Snap|R|DST
+#157|Aether Snap|R|DST
 #158|Crazed Goblin|C|DST
 #159|Dragon's Claw|U|DST
 #160|Demon's Horn|U|DST
@@ -14885,7 +14685,7 @@
 #125|Tel Jilad Chosen|C|MRD
 #126|Goblin Dirigible|U|MRD
 #127|Clockwork Vorrac|U|MRD
-#128|AEther Spellbomb|C|MRD
+#128|Aether Spellbomb|C|MRD
 #129|Moriok Scavenger|C|MRD
 #130|Raise the Alarm|C|MRD
 #131|Copperhoof Vorrac|R|MRD
@@ -15038,7 +14838,7 @@
 #278|Shared Fate|R|MRD
 #279|Fiery Gambit|R|MRD
 #280|Temporal Cascade|R|MRD
-#281|Gate to the AEther|R|MRD
+#281|Gate to the Aether|R|MRD
 #282|Spoils of the Vault|R|MRD
 #283|Spellweaver Helix|R|MRD
 #284|Psychogenic Probe|R|MRD
@@ -15844,7 +15644,7 @@
 #169|Feeding Frenzy|U|ONS
 #170|Airdrop Condor|U|ONS
 #171|Shepherd of Rot|C|ONS
-#172|AEther Charge|U|ONS
+#172|Aether Charge|U|ONS
 #173|Wretched Anurid|C|ONS
 #174|Screeching Buzzard|C|ONS
 #175|Forgotten Cave|C|ONS
@@ -16889,7 +16689,7 @@
 #264|Yawgmoth's Edict|U|7ED
 #265|Plague Beetle|C|7ED
 #266|Bereavement|U|7ED
-#267|AEther Flash|U|7ED
+#267|Aether Flash|U|7ED
 #268|Marble Diamond|U|7ED
 #269|Fog|C|7ED
 #270|Sea Monster|C|7ED
@@ -16978,7 +16778,7 @@
 #22|Illuminate|U|APC
 #23|Fire Ice|U|APC
 #24|Cetavolver|R|APC
-#25|AEther Mutation|U|APC
+#25|Aether Mutation|U|APC
 #26|Fungal Shambler|R|APC
 #27|Cromat|R|APC
 #28|Consume Strength|C|APC
@@ -17513,7 +17313,7 @@
 #269|Archaeological Dig|U|INV
 #270|Maniacal Rage|C|INV
 #271|Liberate|U|INV
-#272|AEther Rift|R|INV
+#272|Aether Rift|R|INV
 #273|Aura Shards|U|INV
 #274|Dromar's Attendant|U|INV
 #275|Bind|R|INV
@@ -18305,7 +18105,7 @@
 #111|Strands of Night|U|6ED
 #112|Dwarven Ruins|U|6ED
 #113|Reprisal|U|6ED
-#114|Evil Eye of Orms-By-Gore|U|6ED
+#114|Evil Eye of Orms by Gore|U|6ED
 #115|Thicket Basilisk|U|6ED
 #116|Wall of Air|U|6ED
 #117|Jayemdae Tome|R|6ED
@@ -18432,7 +18232,7 @@
 #238|Sunweb|R|6ED
 #239|Giant Strength|C|6ED
 #240|Grizzly Bears|C|6ED
-#241|AEther Flash|U|6ED
+#241|Aether Flash|U|6ED
 #242|Jade Monolith|R|6ED
 #243|Disenchant|C|6ED
 #244|Warrior's Honor|C|6ED
@@ -19387,7 +19187,7 @@
 #99|Mogg Bombers|C|STH
 #100|Conviction|C|STH
 #101|Seething Anger|C|STH
-#102|Brush With Death|C|STH
+#102|Brush with Death|C|STH
 #103|Morgue Thrull|C|STH
 #104|Intruder Alarm|R|STH
 #105|Torment|C|STH
@@ -19829,7 +19629,7 @@
 #66|Castle|U|5ED
 #67|Remove Soul|C|5ED
 #68|Colossus of Sardia|R|5ED
-#69|Evil Eye of Orms-By-Gore|U|5ED
+#69|Evil Eye of Orms by Gore|U|5ED
 #70|Serra Paladin|U|5ED
 #71|Mana Vault|R|5ED
 #72|Lord of the Pit|R|5ED
@@ -19982,7 +19782,7 @@
 #219|Icatian Phalanx|U|5ED
 #220|Crusade|R|5ED
 #221|Mountain Goat|C|5ED
-#222|AEther Storm|U|5ED
+#222|Aether Storm|U|5ED
 #223|Grapeshot Catapult|C|5ED
 #224|Fountain of Youth|U|5ED
 #225|Twiddle|C|5ED
@@ -20276,7 +20076,7 @@
 #83|Zombie Scavengers|C|WTH
 #84|Rogue Elephant|C|WTH
 #85|Benalish Infantry|C|WTH
-#86|AEther Flash|U|WTH
+#86|Aether Flash|U|WTH
 #87|Gaea's Blessing|U|WTH
 #88|Master of Arms|U|WTH
 #89|Familiar Ground|U|WTH
@@ -21084,7 +20884,7 @@
 #79|Orcish Mine|U|HML
 #80|Abbey Matron|C|HML
 #81|Merchant Scroll|C|HML
-#82|AEther Storm|U|HML
+#82|Aether Storm|U|HML
 #83|Anaba Ancestor|U|HML
 #84|Aysen Abbey|U|HML
 #85|Ironclaw Curse|U|HML
@@ -21588,7 +21388,7 @@
 #98|Zombie Master|R|4ED
 #99|Paralyze|C|4ED
 #100|Savannah Lions|R|4ED
-#101|Will-O'-The-Wisp|R|4ED
+#101|Will o' the Wisp|R|4ED
 #102|Channel|U|4ED
 #103|Fellwar Stone|U|4ED
 #104|Clay Statue|C|4ED
@@ -22089,7 +21889,7 @@
 #12|Sylvan Library|U|LEG
 #13|Tor Wauki|U|LEG
 #14|Lesser Werewolf|U|LEG
-#15|Evil Eye of Orms-By-Gore|U|LEG
+#15|Evil Eye of Orms by Gore|U|LEG
 #16|Sunastian Falconer|U|LEG
 #17|Hazezon Tamar|R|LEG
 #18|Beasts of Bogardan|U|LEG
@@ -22168,7 +21968,7 @@
 #91|Juxtapose|R|LEG
 #92|Azure Drake|U|LEG
 #93|Falling Star|R|LEG
-#94|The Tabernacle at Pendrell Val|R|LEG
+#94|The Tabernacle at Pendrell Vale|R|LEG
 #95|Ragnar|R|LEG
 #96|Elven Riders|R|LEG
 #97|Jedit Ojanen|U|LEG
@@ -22273,7 +22073,7 @@
 #196|Active Volcano|C|LEG
 #197|Kry Shield|U|LEG
 #198|Part Water|U|LEG
-#199|Torsten von Ursus|U|LEG
+#199|Torsten Von Ursus|U|LEG
 #200|Land's Edge|R|LEG
 #201|Cat Warriors|C|LEG
 #202|D'Avenant Archer|C|LEG
@@ -22282,7 +22082,7 @@
 #205|Takklemaggot|U|LEG
 #206|Emerald Dragonfly|C|LEG
 #207|Wood Elemental|R|LEG
-#208|AErathi Berserker|U|LEG
+#208|Aerathi Berserker|U|LEG
 #209|Energy Tap|C|LEG
 #210|Syphon Soul|C|LEG
 #211|Barbary Apes|C|LEG
@@ -22451,7 +22251,7 @@
 #63|Earth Elemental|U|3ED
 #64|Hurricane|U|3ED
 #65|Dragon Whelp|U|3ED
-#66|Will-O'-The-Wisp|R|3ED
+#66|Will o' the Wisp|R|3ED
 #67|Llanowar Elves|C|3ED
 #68|Primal Clay|R|3ED
 #69|Demonic Tutor|U|3ED
@@ -22801,7 +22601,7 @@
 #35|Aladdin|U|ARN
 #36|Island Fish Jasconius|U|ARN
 #37|King Suleiman|U|ARN
-#38|Abu Ja'Far|U|ARN
+#38|Abu Ja'far|U|ARN
 #39|City in a Bottle|U|ARN
 #40|Oasis|U|ARN
 #41|Bottle of Suleiman|U|ARN
@@ -22941,7 +22741,7 @@
 #97|Volcanic Eruption|R|2ED
 #98|Hurricane|U|2ED
 #99|Lich|R|2ED
-#100|Will-O'-The-Wisp|R|2ED
+#100|Will o' the Wisp|R|2ED
 #101|Uthden Troll|U|2ED
 #102|Pestilence|C|2ED
 #103|White Knight|U|2ED
@@ -23239,7 +23039,7 @@
 #108|Regrowth|U|LEB
 #109|Craw Wurm|C|LEB
 #110|Pestilence|C|LEB
-#111|Will-O'-The-Wisp|R|LEB
+#111|Will o' the Wisp|R|LEB
 #112|Water Elemental|U|LEB
 #113|Braingeyser|R|LEB
 #114|Gaea's Liege|R|LEB
@@ -23464,7 +23264,7 @@
 #46|Winter Orb|R|LEA
 #47|Volcanic Island|R|LEA
 #48|Two-Headed Giant of Foriys|R|LEA
-#49|Will-O'-The-Wisp|R|LEA
+#49|Will o' the Wisp|R|LEA
 #50|Granite Gargoyle|R|LEA
 #51|Lord of the Pit|R|LEA
 #52|Birds of Paradise|R|LEA
@@ -26634,7 +26434,7 @@
 #48|Ghazban Ogre|C|CHR
 #49|The Fallen|U|CHR
 #50|Marhault Elsdragon|C|CHR
-#51|Abu Ja'Far|U|CHR
+#51|Abu Ja'far|U|CHR
 #52|Voodoo Doll|U|CHR
 #53|Repentant Blacksmith|C|CHR
 #54|Rakalite|U|CHR
@@ -27251,7 +27051,7 @@
 #32|Archangel|R|PO2
 #33|Piracy|R|PO2
 #34|Return of the Nightstalkers|R|PO2
-#35|Brutal NIghtstalker|U|PO2
+#35|Brutal Nightstalker|U|PO2
 #36|Hand of Death|C|PO2
 #37|Deathcoil Wurm|R|PO2
 #38|Coastal Wizard|R|PO2
@@ -27548,11 +27348,6 @@
 #178|Dust to Dust|C|MED
 #179|Hallowed Ground|U|MED
 #180|Death Ward|C|MED
-#181|Plains|L|MED
-#182|Mountain|L|MED
-#183|Forest|L|MED
-#184|Swamp|L|MED
-#185|Island|L|MED
 //Rank|Name|Rarity|Set
 #1|Aeolipile|C|ME2
 #2|Wiitigo|R|ME2
@@ -28015,11 +27810,6 @@
 #213|Nova Pentacle|R|ME3
 #214|Call to Arms|U|ME3
 #215|Divine Intervention|R|ME3
-#216|Swamp|L|ME3
-#217|Plains|L|ME3
-#218|Island|L|ME3
-#219|Mountain|L|ME3
-#220|Forest|L|ME3
 //Rank|Name|Rarity|Set
 #1|Library of Alexandria|R|ME4
 #2|Talas Researcher|U|ME4
