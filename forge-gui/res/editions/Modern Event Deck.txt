@@ -1,0 +1,35 @@
+[metadata]
+Code=MD1
+Date=2014-05-30
+Name=Modern Event Deck
+Code2=MD1
+MciCode=md1
+Type=other
+
+[cards]
+1 C Soul Warden
+2 U Tidehollow Sculler
+3 U Path to Exile
+4 U Inquisition of Kozilek
+5 U Shrine of Loyal Legions
+6 R Honor of the Pure
+7 U Intangible Virtue
+8 C Raise the Alarm
+9 U Zealous Persecution
+10 M Sword of Feast and Famine
+11 U Lingering Souls
+12 U Spectral Procession
+13 M Elspeth, Knight-Errant
+14 R Caves of Koilos
+15 R City of Brass
+16 R Isolated Chapel
+17 R Vault of the Archangel
+18 R Windbrisk Heights
+19 L Plains
+20 L Swamp
+21 U Relic of Progenitus
+22 U Burrenton Forge-Tender
+23 C Duress
+24 R Kataki, War's Wage
+25 U Dismember
+26 U Ghost Quarter
