@@ -64,7 +64,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         mapParams.putAll(map);
         this.setHostCard(host);
 
-        if (host != null && mapParams.get("Description").contains("CARDNAME")) {
+        if (host != null && mapParams.containsKey("Description") && mapParams.get("Description").contains("CARDNAME")) {
             String desc = TextUtil.fastReplace(mapParams.get("Description"), "CARDNAME", host.toString());
             originalMapParams.put("Description", desc);
             mapParams.put("Description", desc);
