@@ -64,11 +64,6 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         mapParams.putAll(map);
         this.setHostCard(host);
 
-        if (host != null && mapParams.containsKey("Description") && mapParams.get("Description").contains("CARDNAME")) {
-            String desc = TextUtil.fastReplace(mapParams.get("Description"), "CARDNAME", host.toString());
-            originalMapParams.put("Description", desc);
-            mapParams.put("Description", desc);
-        }
     }
 
     /**
@@ -199,7 +194,11 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     @Override
     public String toString() {
         if (this.getMapParams().containsKey("Description") && !this.isSuppressed()) {
-            return AbilityUtils.applyDescriptionTextChangeEffects(this.getMapParams().get("Description"), this);
+            String desc = this.getMapParams().get("Description");
+            if (desc.contains("CARDNAME")) {
+                desc = TextUtil.fastReplace(this.getMapParams().get("Description"), "CARDNAME", getHostCard().toString());
+            }
+            return AbilityUtils.applyDescriptionTextChangeEffects(desc, this);
         } else {
             return "";
         }
