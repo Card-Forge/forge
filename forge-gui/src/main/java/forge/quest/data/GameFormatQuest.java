@@ -62,7 +62,8 @@ public final class GameFormatQuest extends GameFormat {
 	 * @param allowSetUnlocks
 	 */
 	public GameFormatQuest(final GameFormat toCopy, boolean allowSetUnlocks) {
-		super(toCopy.getName(), toCopy.getAllowedSetCodes(), toCopy.getBannedCardNames(), toCopy.getRestrictedCards(), toCopy.getIndex());
+		super(toCopy.getName(), toCopy.getAllowedSetCodes(), toCopy.getBannedCardNames(), toCopy.getRestrictedCards(),
+				toCopy.getAllowedRarities(), toCopy.getIndex());
 		allowUnlocks = allowSetUnlocks;
 	}
 

@@ -26,6 +26,7 @@ import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardEdition.CardInSet;
+import forge.card.CardRarity;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.item.IPaperCard;
@@ -43,7 +44,8 @@ public class GameFormat implements Comparable<GameFormat> {
     private final String name;
     // contains allowed sets, when empty allows all sets
 
-    protected final List<String> allowedSetCodes; // this is mutable to support quest mode set unlocks 
+    protected final List<String> allowedSetCodes; // this is mutable to support quest mode set unlocks
+    protected final List<CardRarity> allowedRarities;
     protected final List<String> bannedCardNames;
     protected final List<String> restrictedCardNames;
     
@@ -57,17 +59,19 @@ public class GameFormat implements Comparable<GameFormat> {
     private final int index;
 
     public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards) {
-        this(fName, sets, bannedCards, null, 0);
+        this(fName, sets, bannedCards, null, null, 0);
     }
     
-    public static final GameFormat NoFormat = new GameFormat("(none)", null, null, null, Integer.MAX_VALUE);
+    public static final GameFormat NoFormat = new GameFormat("(none)", null, null, null, null, Integer.MAX_VALUE);
     
-    public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards, final List<String> restrictedCards, int compareIdx) {
+    public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards,
+                      final List<String> restrictedCards, final List<CardRarity> rarities, int compareIdx) {
         this.index = compareIdx;
         this.name = fName;
         allowedSetCodes = sets == null ? new ArrayList<String>() : Lists.newArrayList(sets);
         bannedCardNames = bannedCards == null ? new ArrayList<String>() : Lists.newArrayList(bannedCards);
         restrictedCardNames = restrictedCards == null ? new ArrayList<String>() : Lists.newArrayList(restrictedCards);
+        allowedRarities = rarities == null ? Lists.newArrayList() : rarities;
 
         this.allowedSetCodes_ro = Collections.unmodifiableList(allowedSetCodes);
         this.bannedCardNames_ro = Collections.unmodifiableList(bannedCardNames);
@@ -76,21 +80,29 @@ public class GameFormat implements Comparable<GameFormat> {
         this.filterRules = this.buildFilterRules();
         this.filterPrinted = this.buildFilterPrinted();
     }
+    private Predicate<PaperCard> buildFilter(boolean printed) {
+        Predicate<PaperCard> p = Predicates.not(IPaperCard.Predicates.names(this.bannedCardNames_ro));
+        if (!this.allowedSetCodes_ro.isEmpty()) {
+            p = Predicates.and(p, printed ?
+                    IPaperCard.Predicates.printedInSets(this.allowedSetCodes_ro, printed) :
+                    StaticData.instance().getCommonCards().wasPrintedInSets(this.allowedSetCodes_ro));
+        }
+        if (!this.allowedRarities.isEmpty()) {
+            List<Predicate<? super PaperCard>> crp = Lists.newArrayList();
+            for (CardRarity cr: this.allowedRarities) {
+                crp.add(StaticData.instance().getCommonCards().wasPrintedAtRarity(cr));
+            }
+            p = Predicates.and(p, Predicates.or(crp));
+        }
+        return p;
+    }
 
     private Predicate<PaperCard> buildFilterPrinted() {
-        final Predicate<PaperCard> banNames = Predicates.not(IPaperCard.Predicates.names(this.bannedCardNames_ro));
-        if (this.allowedSetCodes_ro.isEmpty()) {
-            return banNames;
-        }
-        return Predicates.and(banNames, IPaperCard.Predicates.printedInSets(this.allowedSetCodes_ro, true));
+        return buildFilter(true);
     }
 
     private Predicate<PaperCard> buildFilterRules() {
-        final Predicate<PaperCard> banNames = Predicates.not(IPaperCard.Predicates.names(this.bannedCardNames_ro));
-        if (this.allowedSetCodes_ro.isEmpty()) {
-            return banNames;
-        }
-        return Predicates.and(banNames, StaticData.instance().getCommonCards().wasPrintedInSets(this.allowedSetCodes_ro));
+        return buildFilter(false);
     }
 
     public String getName() {
@@ -107,6 +119,9 @@ public class GameFormat implements Comparable<GameFormat> {
 
     public List<String> getRestrictedCards() {
         return restrictedCardNames_ro;
+    }
+    public List<CardRarity> getAllowedRarities() {
+        return allowedRarities;
     }
 
     public List<PaperCard> getAllCards() {
@@ -196,7 +211,7 @@ public class GameFormat implements Comparable<GameFormat> {
             List<String> sets = null; // default: all sets allowed
             List<String> bannedCards = null; // default: nothing banned
             List<String> restrictedCards = null; // default: nothing restricted
-
+            List<CardRarity> rarities = null;
             FileSection section = FileSection.parse(body, ":");
             String strSets = section.get("sets");
             if ( null != strSets ) {
@@ -212,7 +227,19 @@ public class GameFormat implements Comparable<GameFormat> {
                 restrictedCards = Arrays.asList(strCars.split("; "));
             }
 
-            GameFormat result = new GameFormat(title, sets, bannedCards, restrictedCards, 1 + idx); 
+            strCars = section.get("rarities");
+            if ( strCars != null ) {
+                CardRarity cr;
+                rarities = Lists.newArrayList();
+                for (String s: Arrays.asList(strCars.split(", "))) {
+                    cr = CardRarity.smartValueOf(s);
+                    if (cr.name() != "Unknown") {
+                        rarities.add(cr);
+                    }
+                }
+            }
+
+            GameFormat result = new GameFormat(title, sets, bannedCards, restrictedCards, rarities, 1 + idx);
             naturallyOrdered.add(result);
             return result;
         }

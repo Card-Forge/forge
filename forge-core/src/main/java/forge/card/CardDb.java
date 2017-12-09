@@ -582,6 +582,27 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             return false;
         }
     }
+    // This Predicate validates if a card was printed at [rarity], on any of its printings
+    public Predicate<? super PaperCard> wasPrintedAtRarity(CardRarity rarity) {
+        return new PredicatePrintedAtRarity(rarity);
+    }
+
+    private class PredicatePrintedAtRarity implements Predicate<PaperCard> {
+        private final Set<String> matchingCards;
+
+        public PredicatePrintedAtRarity(CardRarity rarity) {
+            this.matchingCards = new HashSet<>();
+            for (PaperCard c : getAllCards()) {
+                if (c.getRarity() == rarity) {
+                    this.matchingCards.add(c.getName());
+                }
+            }
+        }
+        @Override
+        public boolean apply(final PaperCard subject) {
+            return matchingCards.contains(subject.getName());
+        }
+    }
 
     public StringBuilder appendCardToStringBuilder(PaperCard card, StringBuilder sb) {
         final boolean hasBadSetInfo = "???".equals(card.getEdition()) || StringUtils.isBlank(card.getEdition());
