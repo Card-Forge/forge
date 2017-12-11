@@ -87,12 +87,11 @@ public final class CardPredicates {
             @Override
             public boolean apply(final Card c) {
                 for (KeywordInterface k : c.getKeywords()) {
-                    if (k.getOriginal().startsWith(keyword)) {
+                    if (k.getOriginal().contains(keyword)) {
                         return true;
                     }
                 }
                 return false;
-                //return Iterables.any(c.getKeywords(), PredicateString.contains(keyword));
             }
         };
     }
