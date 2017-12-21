@@ -74,6 +74,7 @@ public abstract class GameState {
     private final Map<String, String> abilityString = new HashMap<>();
 
     private final Set<Card> cardsReferencedByID = new HashSet<>();
+    private final Set<Card> cardsWithoutETBTrigs = new HashSet<>();
 
     private String tChangePlayer = "NONE";
     private String tChangePhase = "NONE";
@@ -765,12 +766,12 @@ public abstract class GameState {
 
         if (spellDef.contains(":")) {
             // targeting via -> will be handled in executeScript
-            scriptID = spellDef.substring(spellDef.indexOf(":") + 1);
-            spellDef = spellDef.substring(0, spellDef.indexOf(":"));
+            scriptID = spellDef.substring(spellDef.indexOf(":") + 1).trim();
+            spellDef = spellDef.substring(0, spellDef.indexOf(":")).trim();
         } else if (spellDef.contains("->")) {
-            String tgtDef = spellDef.substring(spellDef.indexOf("->") + 2);
+            String tgtDef = spellDef.substring(spellDef.indexOf("->") + 2).trim();
             tgtID = parseTargetInScript(tgtDef);
-            spellDef = spellDef.substring(0, spellDef.indexOf("->"));
+            spellDef = spellDef.substring(0, spellDef.indexOf("->")).trim();
         }
 
         PaperCard pc = StaticData.instance().getCommonCards().getCard(spellDef);
@@ -897,14 +898,16 @@ public abstract class GameState {
                     // Note: Not clearCounters() since we want to keep the counters
                     // var as-is.
                     c.setCounters(Maps.<CounterType, Integer>newEnumMap(CounterType.class));
-                    p.getZone(ZoneType.Hand).add(c);
                     if (c.isAura()) {
                         // dummy "enchanting" to indicate that the card will be force-attached elsewhere
                         // (will be overridden later, so the actual value shouldn't matter)
                         c.setEnchanting(c);
+                    }
 
-                        p.getGame().getAction().moveToPlay(c, null);
+                    if (cardsWithoutETBTrigs.contains(c)) {
+                        p.getGame().getAction().moveTo(ZoneType.Battlefield, c, null);
                     } else {
+                        p.getZone(ZoneType.Hand).add(c);
                         p.getGame().getAction().moveToPlay(c, null);
                     }
 
@@ -1026,6 +1029,8 @@ public abstract class GameState {
                     } else {
                         cardAttackMap.put(c, null);
                     }
+                } else if (info.equals("NoETBTrigs")) {
+                    cardsWithoutETBTrigs.add(c);
                 }
             }
 

@@ -1,0 +1,21 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 020216 - Zookeeper
+URL:http://www.gatheringmagic.com/seanuy-020216-zookeeper/
+Goal:Win
+Turns:1
+Difficulty:Hard
+Description: Win this turn.
+[state]
+ActivePlayer=Human
+ActivePhase=main1
+HumanLife=3
+AILife=7
+humanhand=Mortuary Mire|Set:BFZ; Bone Splinters|Set:BFZ; Visions of Brutality|Set:OGW; Unnatural Aggression|Set:BFZ; Flaying Tendrils|Set:OGW;
+humangraveyard=Baloth Pup|Set:OGW; Slaughter Drone|Set:OGW; Vampire Envoy|Set:OGW;
+humanlibrary=
+humanprecast=Abstruse Interference:DBToken; Abstruse Interference:DBToken;
+humanbattlefield=Swamp|Set:BFZ; Swamp|Set:BFZ; Swamp|Set:BFZ; Swamp|Set:BFZ; Forest|Set:BFZ; Forest|Set:BFZ; Forest|Set:BFZ; Wastes|Set:OGW; Sacred Foundry|Set:GTC|NoETBTrigs; Zulaport Cutthroat|Counters:P1P1=1|Set:BFZ; Lifespring Druid|Set:BFZ; Saddleback Lagac|Set:OGW; Malakir Soothsayer|Set:OGW; Seer's Lantern|Set:OGW;
+aibattlefield=Forest|Tapped|Set:BFZ; Copperline Gorge|Tapped|Set:SOM; Stomping Ground|Tapped|Set:GTC; Temple Garden|Tapped|Set:RTR; Temple Garden|Tapped|Set:RTR; Noble Hierarch; Wild Nacatl; Kird Ape; Kird Ape; Eidolon of the Great Revel; Qasali Pridemage; Voice of Resurgence; Voice of Resurgence; Loxodon Smiter;
+aigraveyard=
+ailibrary=
+aiexile=

@@ -1,0 +1,22 @@
+[metadata]
+Name:Perplexing Chimera (GatheringMagic.com) 012616 - Sucker Punch
+URL:http://www.gatheringmagic.com/seanuy-012616-sucker-punch/
+Goal:Win
+Turns:2
+Difficulty:Hard
+Description: Survive and win on your next turn.  Your Ruination Guide was stolen via Press Into Service.  Your opponent also used Immobilizer Eldrazi's ability.
+[state]
+ActivePlayer=AI
+ActivePhase=COMBAT_DECLARE_ATTACKERS
+HumanLife=1
+AILife=9
+humanhand=Dimensional Infiltrator|Set:OGW; Abstruse Interference|Set:OGW; Sweep Away|Set:OGW; Volcanic Upheaval|Set:BFZ;
+humangraveyard=
+humanlibrary=Mountain|Set:BFZ;
+#Grab the Reins:DBGainControl->422; 
+aiprecast=Preordain:CustomScript:AB$ PumpAll | Cost$ 2 C | ValidCards$ Creature.powerLTtoughness | KW$ HIDDEN CARDNAME can't block.; Grab the Reins:DBGainControl->422; 
+humanbattlefield=Island|Set:BFZ; Island|Set:BFZ; Island|Set:BFZ; Island|Set:BFZ; Mountain|Set:BFZ; Mountain|Set:BFZ; Mountain|Set:BFZ; Mountain|Tapped|Set:BFZ; Wastes|Set:OGW; Hedron Crawler|Set:OGW; Kozilek's Sentinel|Set:BFZ; Cultivator Drone|Set:OGW; Herald of Kozilek|Set:BFZ; Vestige of Emrakul|Set:BFZ; Ruination Guide|Set:BFZ|Tapped|Attacking|Id:422; 
+aibattlefield=Mountain|Tapped|Set:BFZ; Mountain|Tapped|Set:BFZ; Mountain|Tapped|Set:BFZ; Forest|Tapped|Set:BFZ; Forest|Tapped|Set:BFZ; Forest|Tapped|Set:BFZ; Wastes|Tapped|Set:OGW; Lifespring Druid|Set:BFZ|Tapped; Immobilizer Eldrazi|Set:OGW|Counters:P1P1=1|Tapped|Attacking; Embodiment of Fury|Set:OGW|Tapped|Attacking|ExecuteScript:TrigAnimate->420; Mountain|Set:BFZ|Id:420|Counters:P1P1=1|Attacking|Tapped;
+aigraveyard=Press Into Service|Set:OGW;
+ailibrary=
+aiexile=
