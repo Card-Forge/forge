@@ -316,6 +316,14 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
         return i;
     }
     
+    public boolean hasHybrid() {
+        for (ManaCostShard shard : shards) {
+            if (shard.isHybrid()) {
+                return true;
+            }
+        }
+        return false;
+    }
     /**
      * works for Phyrexian Mana and 2Half mana, not for Hybrid mana
      * @return

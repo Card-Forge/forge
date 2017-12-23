@@ -284,6 +284,10 @@ public enum ManaCostShard {
     public boolean isMonoColor() {
         return BinaryUtil.bitCount(this.shard & COLORS_SUPERPOSITION) == 1;
     }
+    
+    public boolean isHybrid() {
+        return BinaryUtil.bitCount(this.shard & COLORS_SUPERPOSITION) == 2;
+    }
 
     public boolean isOr2Generic() {
         return isOfKind(ManaAtom.OR_2_GENERIC);
