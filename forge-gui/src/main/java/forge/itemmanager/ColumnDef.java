@@ -52,13 +52,29 @@ public enum ColumnDef {
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return from.getKey().getName();
+                    return toSortableName(from.getKey().getName());
                 }
             },
             new Function<Entry<? extends InventoryItem, Integer>, Object>() {
                 @Override
                 public Object apply(final Entry<? extends InventoryItem, Integer> from) {
                     return from.getKey().getName();
+                }
+            }),
+            
+    //Sorts cards in the order that is used for assigning collector numbers.
+    //Appends a numeric prefix followed by the sortable name.
+    COLLECTOR_ORDER("CN", "Collector Number Order", 20, false, SortState.ASC,
+            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+                @Override
+                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+                    return toCollectorPrefix(from.getKey()) + " " + toSortableName(from.getKey().getName());
+                }
+            },
+            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+                @Override
+                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+                    return "";
                 }
             }),
     TYPE("Type", "Type", 100, false, SortState.ASC,
@@ -402,6 +418,37 @@ public enum ColumnDef {
         return this.longName;
     }
 
+    //Trim leading quotes, then move article last, then replace characters.
+    //Because An-Havva Constable.
+    //Ignore all punctuation marks: "Chandra, Flamecaller" before "Chandra's Firebird"
+    //Capitals and lowercase sorted as one: "my deck" before "Myr Retribution"
+    private static String toSortableName(String printedName) {
+      if (printedName.startsWith("\"")) printedName = printedName.substring(1);
+      return moveArticleToEnd(printedName).toLowerCase().replaceAll("[^a-z0-9\\s]","");
+    }
+    
+    /*For localization, simply overwrite this array with appropriate words.
+      Words in this list are used by the method String moveArticleToEnd(String), useful
+      for alphabetizing phrases, in particular card or other inventory object names.*/
+    private static final String[] ARTICLE_WORDS = {
+         "A",
+         "An",
+         "The"
+    };
+    
+    //Detects whether a string begins with an article word
+    private static String moveArticleToEnd(String str){
+      String articleWord;
+      for (int i = 0; i < ARTICLE_WORDS.length; i++){
+         articleWord = ARTICLE_WORDS[i];
+         if (str.startsWith(articleWord + " ")){
+            str = str.substring(articleWord.length()+1) + " " + articleWord;
+            return str;
+         }
+      }
+      return str;
+    }
+    
     private static String toType(final InventoryItem i) {
         return i instanceof IPaperCard ? ((IPaperCard)i).getRules().getType().toString() : i.getItemType();
     }
@@ -440,8 +487,8 @@ public enum ColumnDef {
     private static Integer toCMC(final InventoryItem i) {
         return i instanceof PaperCard ? ((IPaperCard) i).getRules().getManaCost().getCMC() : -1;
     }
-
-    private static CardRarity toRarity(final InventoryItem i) {
+    
+   private static CardRarity toRarity(final InventoryItem i) {
         return i instanceof PaperCard ? ((IPaperCard) i).getRarity() : CardRarity.Unknown;
     }
 
@@ -468,5 +515,160 @@ public enum ColumnDef {
     private static String toDeckFolder(final InventoryItem i) {
         return i instanceof DeckProxy ? ((DeckProxy) i).getPath() + "/" : null;
     }
+    
+    //START COLLECTOR-NUMBER-STYLE SORTING CODE//
+    //this is a multi-layer sort. coding it in layers to make it easier to manipulate.
+    private static String toCollectorPrefix(final InventoryItem i) {
+      //make sure it's a card. if not, pointless to proceed.
+      return i instanceof PaperCard ? toBasicLandsLast(i) : "";
+    }
+    
+    //lands after other cards
+    private static String toLandsLast(final InventoryItem i) {
+         //nonland?
+         return !(((IPaperCard) i).getRules().getType().isLand()) ?
+            "0" + toColorlessArtifactsLast(i)
+         //land
+         : "1";
+    }
+    
+    //colorless artifacts last
+    private static String toColorlessArtifactsLast(final InventoryItem i) {
+     return !(((IPaperCard) i).getRules().getType().isArtifact() && toColor(i).isColorless())
+            ? "0" + toSplitLast(i): "1";
+    }
+    
+    //split cards last
+    private static String toSplitLast(final InventoryItem i) {
+      return ((IPaperCard) i).getRules().getSplitType() != CardSplitType.Split ?
+            "0" + toColorlessFirst(i): "1" + toSplitCardSort(i);
+    }
+    
+    //colorless first, then colored.
+    private static String toColorlessFirst(final InventoryItem i) {
+      return toColor(i).isColorless() ?
+            "0" : "1" + toMonocolorFirst(i);
+    }
+    
+    //monocolor nonartifact nonland spells are first, then multicolored.
+    private static String toMonocolorFirst(final InventoryItem i) {
+      return toColor(i).isMonoColor() ?
+            "0" + toWubrgOrder(i): "1" + toGoldFirst(i);
+    }
+    
+    //gold cards first
+      private static String toGoldFirst(final InventoryItem i) {
+      forge.card.mana.ManaCost manaCost = ((IPaperCard) i).getRules().getManaCost();
+      
+      return !(manaCost.canBePaidWithAvaliable(MagicColor.WHITE) | manaCost.canBePaidWithAvaliable(MagicColor.BLUE) |
+            manaCost.canBePaidWithAvaliable(MagicColor.BLACK) | manaCost.canBePaidWithAvaliable(MagicColor.RED) |
+            manaCost.canBePaidWithAvaliable(MagicColor.GREEN)) ? "0" : "1";
+    }
+    
+    //Split card sorting is probably as complex as sorting gets.
+    //This method serves as an entry point only, separating the two card parts for convenience.
+    private static String toSplitCardSort(final InventoryItem i) {
+      CardRules rules = ((IPaperCard) i).getRules();
+      forge.card.ICardFace mainPart = rules.getMainPart();
+      forge.card.ICardFace otherPart = rules.getOtherPart();
+      return toSplitSort(mainPart, otherPart);
+    }
+    
+    //Split cards are sorted by color on both halves.
+      private static String toSplitSort(final ICardFace mainPart, final ICardFace otherPart) {
+      ColorSet mainPartColor = mainPart.getColor();
+      ColorSet otherPartColor = otherPart.getColor();
+      
+      return mainPartColor.isEqual(otherPartColor.getColor())
+      
+            ? //both halves match
+            
+            (mainPartColor.isEqual(MagicColor.WHITE) ? "01" :
+            mainPartColor.isEqual(MagicColor.BLUE) ? "02" :
+            mainPartColor.isEqual(MagicColor.BLACK) ? "03" :
+            mainPartColor.isEqual(MagicColor.RED) ? "04" :
+            mainPartColor.isEqual(MagicColor.GREEN) ? "05" : "00")
+            
+            : //halves don't match
+            
+            //both halves gold
+            mainPartColor.isMulticolor() && otherPartColor.isMulticolor() ? "06" :
+            
+            //second color is << 1
+            mainPartColor.isEqual(MagicColor.WHITE) && otherPartColor.isEqual(MagicColor.BLUE) ? "11" : 
+            mainPartColor.isEqual(MagicColor.BLUE) && otherPartColor.isEqual(MagicColor.BLACK) ? "12" :
+            mainPartColor.isEqual(MagicColor.BLACK) && otherPartColor.isEqual(MagicColor.RED) ? "13" :
+            mainPartColor.isEqual(MagicColor.RED) && otherPartColor.isEqual(MagicColor.GREEN) ? "14" :
+            mainPartColor.isEqual(MagicColor.GREEN) && otherPartColor.isEqual(MagicColor.WHITE) ? "15" :
+            
+            //second color is << 2
+            mainPartColor.isEqual(MagicColor.WHITE) && otherPartColor.isEqual(MagicColor.BLACK) ? "21" : 
+            mainPartColor.isEqual(MagicColor.BLUE) && otherPartColor.isEqual(MagicColor.RED) ? "22" :
+            mainPartColor.isEqual(MagicColor.BLACK) && otherPartColor.isEqual(MagicColor.GREEN) ? "23" :
+            mainPartColor.isEqual(MagicColor.RED) && otherPartColor.isEqual(MagicColor.WHITE) ? "24" :
+            mainPartColor.isEqual(MagicColor.GREEN) && otherPartColor.isEqual(MagicColor.BLUE) ? "25" :
+            
+            //second color is << 3            
+            mainPartColor.isEqual(MagicColor.WHITE) && otherPartColor.isEqual(MagicColor.RED) ? "31" :
+            mainPartColor.isEqual(MagicColor.BLUE) && otherPartColor.isEqual(MagicColor.GREEN) ? "32" :
+            mainPartColor.isEqual(MagicColor.BLACK) && otherPartColor.isEqual(MagicColor.WHITE) ? "33" :
+            mainPartColor.isEqual(MagicColor.RED) && otherPartColor.isEqual(MagicColor.BLUE) ? "34" :
+            mainPartColor.isEqual(MagicColor.GREEN) && otherPartColor.isEqual(MagicColor.BLACK) ? "35" :
+                        
+            //second color is << 4
+            mainPartColor.isEqual(MagicColor.WHITE) && otherPartColor.isEqual(MagicColor.GREEN) ? "41" :
+            mainPartColor.isEqual(MagicColor.BLUE) && otherPartColor.isEqual(MagicColor.WHITE) ? "42" :
+            mainPartColor.isEqual(MagicColor.BLACK) && otherPartColor.isEqual(MagicColor.BLUE) ? "43" :
+            mainPartColor.isEqual(MagicColor.RED) && otherPartColor.isEqual(MagicColor.BLACK) ? "44" :
+            mainPartColor.isEqual(MagicColor.GREEN) && otherPartColor.isEqual(MagicColor.RED) ? "45"
+            
+            ://No split cards have been printed that don't fall into one of these groups.
+            
+            "99";
+    }
+    
+    //sort by casting cost color
+    private static String toWubrgOrder(final InventoryItem i) {
+      ColorSet color = toColor(i);
+      return color.hasWhite() ? "0" : color.hasBlue() ? "1" : color.hasBlack() ? "2" :
+            color.hasRed() ? "3" : "4";
+    }
+    
+    //Contraptions are after all other cards except basic lands
+    private static String toContraptionsLast(final InventoryItem i) {
+      return !(((IPaperCard) i).getRules().getType().hasSubtype("Contraption")) ?
+            "0" + toLandsLast(i) : "1";
+    }
+    
+    //basic lands are after all other cards
+    private static String toBasicLandsLast(final InventoryItem i) {
+      return !(((IPaperCard) i).getRules().getType().isBasicLand())
+            ? "0" + toContraptionsLast(i)
+            : "1" + toFullArtFirst(i);
+    }
+    
+    //basic lands are sorted full-art, then normal art.
+    //Forge doesn't make this distinction. If it did, this prefix would be added just before
+    //the basic land type prefix.
+    private static String toFullArtFirst(final InventoryItem i) {
+      return toBasicLandSort(i);
+    }
+    
+    //Plains, Island, Swamp, Mountain, Forest.
+    //Not sure what to do with Wastes or Snow-Covered lands, so putting the typeless
+    //Wastes first and letting Snow-Covered lands fall in with their nonsnow friends.
+    //Full-art basic lands are supposed to come before all others, but Forge doesn't distinguish
+    //the two.
+    private static String toBasicLandSort(final InventoryItem i) {
+      CardType basicLandType = ((IPaperCard) i).getRules().getType();
+      return basicLandType.hasStringType("Plains") ? "1" : (
+         basicLandType.hasStringType("Island") ? "2" : (
+            basicLandType.hasStringType("Swamp") ? "3" : (
+               basicLandType.hasStringType("Mountain") ? "4" : (
+                  basicLandType.hasStringType("Forest") ? "5" : "0"
+               )
+            )
+         )
+      );
+    }
 }
-
