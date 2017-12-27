@@ -1,25 +1,42 @@
 [metadata]
-Name:Forge Puzzle Tutorial #01 - Out of Place
+
+Name:Forge Puzzle Tutorial #01 - Bypass Operation
 URL:https://www.cardforge.org
+
 Goal:Win
+
 Turns:1
+
 Difficulty:Easy
-Description:Magic puzzles may be tricky sometimes, but they're also tight. Most (if not all) of the cards in a puzzle are related to the solution in some way. If you see a card that has an interesting effect, ask yourself why the card is part of the puzzle.\n\nIn this puzzle, you want to win the game this turn. But some of the cards you have on the battlefield don't immediately make sense. Why do you have a Lightning Greaves, for example? It's not as though your opponent has any spells or abilities they can use. Why do you have an Undying Evil in your hand? And what is the purpose of the Abyssal Nocturnus?
+
+Description:Most Magic puzzles will require you to win by reducing your opponent's life total to zero. The most common way of doing this involves dealing damage to your opponent with one or more attacking creatures. As a result, you should look for any evasive abilities on the table - abilities like Flying, Shadow, Horsemanship, and even Trample can help you out.\n\nIn this puzzle, you have a clear source of damage in your hand. But you don't have the mana to cast it, and it wouldn't be enough to defeat your opponent by itself in any case. That means that you've got to attack in some way. With this in mind, how do you get past your opponent's blockers?
 [state]
-humanlife=9
+
+humanlife=7
 ailife=5
+
 activeplayer=human
+
 activephase=MAIN1
-humanhand=Undying Evil
+
+humanhand=Unstable Mutation|Set:4ED; Turn // Burn
+
+
 humanlibrary=
+
 humangraveyard=
-humanbattlefield=Mesmeric Fiend|Set:DDK|Id:5|RememberedCards:1;Abyssal Nocturnus|Set:GPT; Cinderhaze Wretch|Set:SHM; Viridian Longbow|Set:MRD; Lightning Greaves|Set:MRD; Swamp|Set:DTK; Swamp|Set:DTK; Swamp|Set:DTK; Swamp
-|Set:DTK
+
+humanbattlefield=Knight of Dawn|Set:TMP; Vedalken Mastermind|Set:10E; Mausoleum Guard|Set:ISD; Silver Knight|Set:SCG; Giant Crab|Set:TMP; Island|Set:ISD; Island|Set:ISD; Island|Set:ISD; Island|Set:ISD; Island|Set:ISD; Plains|Set:ISD; Plains|Set:ISD; Plains|Set:ISD; Plains|Set:ISD; Crumbling Vestige|Set:OGW
 humanexile=
+
 humancommand=
+
 aihand=
+
 ailibrary=
+
 aigraveyard=
-aibattlefield=Wall of Omens|Set:EMA;Wall of Omens|Set:EMA;Wall of Omens|Set:EMA
-aiexile=Wall of Omens|Set:EMA|Id:1|ExiledWith:5
+
+aibattlefield=Sylvan Caryatid|Set:THS; Willbender|Set:LGN; Minotaur Sureshot|Set:AKH; Steamcore Weird|Set:GPT; Giant Spider|Set:8ED; Assembled Alphas|Set:EMN
+aiexile=
 aicommand=

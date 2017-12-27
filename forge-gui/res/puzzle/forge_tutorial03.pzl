@@ -1,0 +1,45 @@
+[metadata]
+
+Name:Forge Puzzle Tutorial #03 - Out of Place
+URL:https://www.cardforge.org
+
+Goal:Win
+
+Turns:1
+
+Difficulty:Easy
+
+Description:Magic puzzles may be tricky sometimes, but they're also tight. Most (if not all) of the cards in a puzzle are related to the solution in some way. If you see a card that has an interesting effect, ask yourself why the card is part of the puzzle.\n\nIn this puzzle, you want to win the game this turn. But some of the cards you have on the battlefield don't immediately make sense. Why do you have a Lightning Greaves, for example? It's not as though your opponent has any spells or abilities they can use. Why do you have an Undying Evil in your hand? And what is the purpose of the Abyssal Nocturnus?
+[state]
+
+humanlife=9
+
+ailife=5
+
+activeplayer=human
+
+activephase=MAIN1
+
+humanhand=Undying Evil
+
+humanlibrary=
+
+humangraveyard=
+
+humanbattlefield=Mesmeric Fiend|Set:DDK|Id:5|RememberedCards:1;Abyssal Nocturnus|Set:GPT; Cinderhaze Wretch|Set:SHM; Viridian Longbow|Set:MRD; Lightning Greaves|Set:MRD; Swamp|Set:DTK; Swamp|Set:DTK; Swamp|Set:DTK; Swamp
+|Set:DTK
+humanexile=
+
+humancommand=
+
+aihand=
+
+ailibrary=
+
+aigraveyard=
+
+aibattlefield=Wall of Omens|Set:EMA;Wall of Omens|Set:EMA;Wall of Omens|Set:EMA
+
+aiexile=Wall of Omens|Set:EMA|Id:1|ExiledWith:5
+
+aicommand=
