@@ -1,2 +1,5 @@
+- Puzzle updates -
+There are several new puzzles to play in this version, including two brand new tutorial puzzles which should get you up to speed on how puzzles work and what you commonly need to think about.
+
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.
