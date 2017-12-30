@@ -469,6 +469,15 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             }
             return UNKNOWN;
         }
+
+        public Date getEarliestDateWithAllCards(CardPool cardPool) {
+            CardEdition earliestSet = StaticData.instance().getEditions().getEarliestEditionWithAllCards(cardPool);
+
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(earliestSet.getDate());
+            cal.add(Calendar.DATE, 1);
+            return cal.getTime();
+        }
     }
 
     public static class Predicates {

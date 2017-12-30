@@ -33,6 +33,7 @@ import forge.deck.DeckRecognizer;
 import forge.deck.DeckRecognizer.TokenType;
 import forge.item.InventoryItem;
 import forge.screens.deckeditor.controllers.ACEditorBase;
+import forge.screens.deckeditor.controllers.DeckController;
 import forge.toolbox.FButton;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
@@ -144,10 +145,15 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             @SuppressWarnings("unchecked")
             @Override
             public void actionPerformed(final ActionEvent e) {
-                final Deck toSet = controller.accept();
-                if (toSet == null) { return; }
+                final Deck deck = controller.accept();
+                if (deck == null) { return; }
 
-                DeckImport.this.host.getDeckController().setModel((TModel) toSet);
+                DeckController<TModel> controller = DeckImport.this.host.getDeckController();
+                TModel model = controller.getModel();
+
+                model.importDeck(deck);
+                controller.setModel(model);
+
                 DeckImport.this.processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING));
             }
         });
