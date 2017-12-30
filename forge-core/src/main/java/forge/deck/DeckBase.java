@@ -91,7 +91,7 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
     /**
      * Sets the comment.
      *
-     * @param comment the new comment
+     * @param comment0 the new comment
      */
     public void setComment(final String comment0) {
         comment = comment0;
@@ -148,4 +148,6 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
     }
 
     public abstract boolean isEmpty();
+
+    public abstract void importDeck(Deck deck);
 }

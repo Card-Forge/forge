@@ -189,6 +189,11 @@ public class CustomLimited extends DeckBase {
     }
 
     @Override
+    public void importDeck(Deck deck) {
+        throw new UnsupportedOperationException("CustomDraft does not support deck import");
+    }
+
+    @Override
     public String getImageKey(boolean altState) {
         return null;
     }

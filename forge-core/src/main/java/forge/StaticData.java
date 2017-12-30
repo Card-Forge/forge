@@ -13,14 +13,10 @@ import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 
- /**
+/**
  * The class holding game invariants, such as cards, editions, game formats. All that data, which is not supposed to be changed by player
  *
  * @author Max
@@ -164,5 +160,29 @@ public class StaticData {
 
     public CardDb getVariantCards() {
         return variantCards;
+    }
+
+    public PaperCard getCardByEditionDate(PaperCard card, Date editionDate) {
+
+        PaperCard c = this.getCommonCards().getCardFromEdition(card.getName(), editionDate, CardDb.SetPreference.LatestCoreExp, card.getArtIndex());
+
+        if (null != c) {
+            return c;
+        }
+
+        c = this.getCommonCards().getCardFromEdition(card.getName(), editionDate, CardDb.SetPreference.LatestCoreExp, -1);
+
+        if (null != c) {
+            return c;
+        }
+
+        c = this.getCommonCards().getCardFromEdition(card.getName(), editionDate, CardDb.SetPreference.Latest, -1);
+
+        if (null != c) {
+            return c;
+        }
+
+        // I give up!
+        return card;
     }
 }

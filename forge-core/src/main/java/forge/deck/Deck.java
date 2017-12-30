@@ -23,7 +23,6 @@ import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.CardDb.SetPreference;
 import forge.card.CardDb;
-import forge.card.CardEdition;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 
@@ -218,36 +217,27 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     }
 
     private void convertByXitaxMethod() {
-        CardEdition earliestSet = StaticData.instance().getEditions().getEarliestEditionWithAllCards(getAllCardsInASinglePool());
+        Date dateWithAllCards = StaticData.instance().getEditions().getEarliestDateWithAllCards(getAllCardsInASinglePool());
 
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(earliestSet.getDate());
-        cal.add(Calendar.DATE, 1);
-        Date dayAfterNewestSetRelease = cal.getTime();
-        
         for(Entry<DeckSection, CardPool> p : parts.entrySet()) {
             if( p.getKey() == DeckSection.Planes || p.getKey() == DeckSection.Schemes || p.getKey() == DeckSection.Avatar)
                 continue;
-            
+
             CardPool newPool = new CardPool();
-            
+
             for(Entry<PaperCard, Integer> cp : p.getValue()){
-                String cardName = cp.getKey().getName();
-                int artIndex = cp.getKey().getArtIndex();
-                
-                PaperCard c = StaticData.instance().getCommonCards().getCardFromEdition(cardName, dayAfterNewestSetRelease, SetPreference.LatestCoreExp, artIndex);
-                if( null == c ) {
-                    c = StaticData.instance().getCommonCards().getCardFromEdition(cardName, dayAfterNewestSetRelease, SetPreference.LatestCoreExp, -1);
-                    if( c == null)
-                        c = StaticData.instance().getCommonCards().getCardFromEdition(cardName, dayAfterNewestSetRelease, SetPreference.Latest, -1);
-                    
-                    if( c != null ) { 
-                        newPool.add(cardName, c.getEdition(), cp.getValue()); // this is to randomize art of all those cards
-                    } else // I give up!
-                        newPool.add(cp.getKey(), cp.getValue());
-                } else
-                    newPool.add(c, cp.getValue());
+                PaperCard card = cp.getKey();
+                int count = cp.getValue();
+
+                PaperCard replacementCard = StaticData.instance().getCardByEditionDate(card, dateWithAllCards);
+
+                if (replacementCard.getArtIndex() == card.getArtIndex()) {
+                    newPool.add(card, count);
+                } else {
+                    newPool.add(card.getName(), card.getEdition(), count); // this is to randomize art
+                }
             }
+
             parts.put(p.getKey(), newPool);
         }
     }
@@ -300,6 +290,15 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             }
         }
         return true;
+    }
+
+    @Override
+    public void importDeck(Deck deck) {
+        deck.loadDeferredSections();
+
+        for (DeckSection section: deck.parts.keySet()) {
+            this.putSection(section, deck.get(section));
+        }
     }
 
     @Override

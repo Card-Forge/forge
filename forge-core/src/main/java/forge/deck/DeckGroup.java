@@ -18,11 +18,10 @@
 package forge.deck;
 
 import com.google.common.base.Function;
+import forge.StaticData;
+import forge.item.PaperCard;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * TODO: Write javadoc for this type.
@@ -143,7 +142,7 @@ public class DeckGroup extends DeckBase {
             return arg1.getName();
         }
     };
-    
+
 
     public static final Function<DeckGroup, Deck> FN_HUMAN_DECK = new Function<DeckGroup, Deck>() {
         @Override
@@ -160,5 +159,101 @@ public class DeckGroup extends DeckBase {
     @Override
     public String getImageKey(boolean altState) {
         return null;
+    }
+
+
+    @Override
+    public void importDeck(Deck deck) {
+        CardPool draftedCards = this.getHumanDeck().getAllCardsInASinglePool(false);
+
+        this.getHumanDeck().putSection(DeckSection.Main, new CardPool());
+        this.getHumanDeck().putSection(DeckSection.Sideboard, new CardPool());
+
+        HashMap<String, Integer> countByName = getCountByName(deck);
+
+        addFromDraftedCardPool(countByName, draftedCards);
+        addBasicLands(deck, countByName, draftedCards);
+    }
+
+    private HashMap<String, Integer> getCountByName(Deck deck) {
+        HashMap<String, Integer> result = new HashMap<String, Integer>();
+
+        for (Map.Entry<PaperCard, Integer> entry: deck.getMain()) {
+            PaperCard importedCard = entry.getKey();
+
+            Integer previousCount = result.getOrDefault(importedCard.getName(), 0);
+            int countToAdd = entry.getValue();
+
+            result.put(importedCard.getName(), countToAdd + previousCount);
+        }
+
+        return result;
+    }
+
+    private void addFromDraftedCardPool(HashMap<String, Integer> countByName, CardPool availableCards) {
+        for (Map.Entry<PaperCard, Integer> entry: availableCards) {
+
+            PaperCard availableCard = entry.getKey();
+            Integer availableCount = entry.getValue();
+            int countToAdd = countByName.getOrDefault(availableCard.getName(), 0);
+
+            if (availableCard.getRules().getType().isBasicLand()) {
+                // basic lands are added regardless from drafted cards
+                continue;
+            }
+
+            int countMain = Math.min(availableCount, countToAdd);
+
+            if (countMain > 0) {
+                this.getHumanDeck().getMain().add(availableCard, countMain);
+                countByName.put(availableCard.getName(), countToAdd - countMain);
+            }
+
+            int countSideboard = availableCount - countMain;
+
+            if (countSideboard > 0) {
+                CardPool sideboard = this.getHumanDeck().getOrCreate(DeckSection.Sideboard);
+                sideboard.add(availableCard, countSideboard);
+            }
+        }
+    }
+
+    private void addBasicLands(Deck deck, HashMap<String, Integer> countByName, CardPool availableCards) {
+        HashMap<String, PaperCard> basicLandsByName = getBasicLandsByName(deck, countByName);
+
+        Date dateWithAllCards = StaticData.instance().getEditions().getEarliestDateWithAllCards(availableCards);
+        for (String cardName: countByName.keySet()) {
+
+            PaperCard card = basicLandsByName.getOrDefault(cardName, null);
+
+            if (card == null) {
+                continue;
+            }
+
+            int countToAdd = countByName.get(cardName);
+
+            card = StaticData.instance().getCardByEditionDate(card, dateWithAllCards);
+            this.getHumanDeck().getMain().add(card.getName(), card.getEdition(), countToAdd);
+        }
+    }
+
+    private HashMap<String, PaperCard> getBasicLandsByName(Deck deck, HashMap<String, Integer> countByName) {
+        HashMap<String, PaperCard> result = new HashMap<String, PaperCard>();
+
+        for (Map.Entry<PaperCard, Integer> entry: deck.getMain()) {
+            PaperCard card = entry.getKey();
+
+            if (!card.getRules().getType().isBasicLand()) {
+                continue;
+            }
+
+            if (result.containsKey(card.getName())) {
+                continue;
+            }
+
+            result.put(card.getName(), card);
+        }
+
+        return result;
     }
 }
