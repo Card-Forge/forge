@@ -86,6 +86,7 @@ public final class SColumnUtil {
         colDefs.add(ColumnDef.SET);
         colDefs.add(ColumnDef.AI);
         colDefs.add(ColumnDef.RANKING);
+        colDefs.add(ColumnDef.COLLECTOR_ORDER);
 
         Map<ColumnDef, ItemColumnConfig> columns = getColumns(colDefs);
         columns.get(ColumnDef.AI).setVisible(false);
