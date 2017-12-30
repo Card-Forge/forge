@@ -294,9 +294,10 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
     @Override
     public void importDeck(Deck deck) {
-        DeckSection[] sections = new DeckSection[] {DeckSection.Main, DeckSection.Sideboard};
-        for (DeckSection section: sections) {
-            this.putSection(section, deck.getOrCreate(section));
+        deck.loadDeferredSections();
+
+        for (DeckSection section: deck.parts.keySet()) {
+            this.putSection(section, deck.get(section));
         }
     }
 
