@@ -1,0 +1,14 @@
+[metadata]
+Code=UNH
+Date=2004-11-20
+Name=Unhinged
+Code2=UH
+MciCode=uh
+Type=Expansion
+
+[cards]
+136 L Plains
+137 L Island
+138 L Swamp
+139 L Mountain
+140 L Forest
