@@ -133,7 +133,7 @@ public class TokenInfo {
         return sb.toString();
     }
 
-    public List<Card> makeTokenWithMultiplier(final Player controller, final boolean applyMultiplier) {
+    public List<Card> makeTokenWithMultiplier(final Player controller, int amount, final boolean applyMultiplier) {
         final List<Card> list = Lists.newArrayList();
         final Game game = controller.getGame();
 
@@ -158,8 +158,8 @@ public class TokenInfo {
                 return list;
         }
 
-        for (int i = 0; i < multiplier; i++) {
-            list.add(makeOneToken(player));
+        for (int i = 0; i < multiplier * amount; i++) {
+            list.add(makeOneToken(controller));
         }
         return list;
     }
