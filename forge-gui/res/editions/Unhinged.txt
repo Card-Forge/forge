@@ -4,7 +4,7 @@ Date=2004-11-20
 Name=Unhinged
 Code2=UH
 MciCode=uh
-Type=Expansion
+Type=Other
 
 [cards]
 136 L Plains
