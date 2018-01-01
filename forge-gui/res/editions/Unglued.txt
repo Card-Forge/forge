@@ -1,0 +1,14 @@
+[metadata]
+Code=UGL
+Date=1998-08-11
+Name=Unglued
+Code2=UG
+MciCode=ug
+Type=Other
+
+[cards]
+84 L Plains
+85 L Island
+86 L Swamp
+87 L Mountain
+88 L Forest
