@@ -4,7 +4,7 @@ Date=1998-08-11
 Name=Unglued
 Code2=UG
 MciCode=ug
-Type=Expansion
+Type=Other
 
 [cards]
 84 L Plains
