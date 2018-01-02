@@ -9,10 +9,16 @@ BoosterCovers=5
 Booster=10 Common:!fromSheet("RIX Planeswalker Decks and Toolkit"), 3 Uncommon:!fromSheet("RIX Planeswalker Decks and Toolkit"), 1 RareMythic:!fromSheet("RIX Planeswalker Decks and Toolkit"), 1 BasicLand XLN
 
 [cards]
+30 R Zetalpa, Primal Dawn
+
+42 R Kumena's Awakening
+
 52 C Secrets of the Golden City
 53 U Silvergill Adept
 
 69 C Dusk Charger
+
+82 U Ravenous Chupacabra
 
 86 R Tetzimoc, Primal Death
 
@@ -20,6 +26,9 @@ Booster=10 Common:!fromSheet("RIX Planeswalker Decks and Toolkit"), 3 Uncommon:!
 
 94 R Brass's Bounty
 
+98 U Daring Buccaneer
+
+103 R Form of the Dinosaur
 104 C Frilled Deathspitter
 
 119 C Swaggering Corsair
@@ -28,9 +37,19 @@ Booster=10 Common:!fromSheet("RIX Planeswalker Decks and Toolkit"), 3 Uncommon:!
 
 130 R Ghalta, Primal Hunger
 
+136 R Jadelight Ranger
+
 147 R Tendershoot Dryad
 
+159 M Huatli, Radiant Champion
+160 R Journey to Eternity
+
+162 M Kumena, Tyrant of Orazca
+163 U Legion Lieutenant
+
 173 R Storm the Vault
+
+175 R Awakened Amalgam
 
 177 R Captain's Hook
 178 C Gleaming Barrier
