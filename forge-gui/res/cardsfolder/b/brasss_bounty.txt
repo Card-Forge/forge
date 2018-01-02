@@ -1,0 +1,8 @@
+Name:Brass's Bounty
+ManaCost:6 R
+Types:Sorcery
+A:SP$ Token | Cost$ 6 R | TokenAmount$ X | References$ X | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAltImages$ c_treasure2,c_treasure3,c_treasure4 | TokenAbilities$ ABMana | References$ ABMana | SpellDescription$ For each land you control, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
+SVar:X:Count$TypeYouCtrl.Land
+DeckHas:Ability$Token
+Oracle:For each land you control, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
