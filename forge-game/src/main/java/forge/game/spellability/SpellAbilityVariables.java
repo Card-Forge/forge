@@ -681,7 +681,7 @@ public class SpellAbilityVariables implements Cloneable {
     public final boolean isRevolt() {     return this.revolt;  }
 
     public final boolean isDesert() {     return this.desert;  }
-    public final boolean isBlessing() {     return this.desert;  }
+    public final boolean isBlessing() {     return this.blessing;  }
 
     public String getShareAllColors() {
         return shareAllColors;
