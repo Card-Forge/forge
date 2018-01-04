@@ -1,0 +1,21 @@
+[quest]
+id=THS Challenge: Prophetic Flamespeaker
+OpponentName=The Flamespeakers
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Name=THS Challenge: Prophetic Flamespeaker
+Title=The Flamespeakers
+Difficulty=easy
+Description=They specialize in self-fulfilling prophecies.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+30 Mountain|THS|1
+15 Ordeal of Purphoros|THS
+15 Prophetic Flamespeaker|JOU

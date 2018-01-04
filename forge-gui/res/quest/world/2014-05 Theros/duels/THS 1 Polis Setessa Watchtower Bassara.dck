@@ -1,0 +1,18 @@
+[metadata]
+Name=THS 1 Polis: Setessa: Watchtower: Bassara
+Title=Bassara Tower
+Difficulty=easy
+Description=The regiment stationed in this tower protects the Nistos Forest and watches for interlopers who enter without Nylea's permission. Bassara (fox) warriors are welcomed by Nylea and spend extended periods of time living among the ancient trees. During their training, they focus on archery and guerrilla warfare. Their leader is Niketa, a woman in her fifties who now spends most of her time in Setessa. She supervises archery training for the arkulli ("little bears"--the children of Setessa.)
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+4 Bassara Tower Archer|JOU
+4 Feral Invocation|THS
+24 Forest|THS|4
+4 Nylea's Presence|THS
+4 Nylea, God of the Hunt|THS
+4 Ordeal of Nylea|THS
+4 Reverent Hunter|THS
+4 Setessan Starbreaker|BNG
+4 Setessan Tactics|JOU
+4 Staunch-Hearted Warrior|THS

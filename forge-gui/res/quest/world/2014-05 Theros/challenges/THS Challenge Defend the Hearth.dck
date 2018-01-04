@@ -1,0 +1,20 @@
+[quest]
+id=THS Challenge: Defend the Hearth
+OpponentName=The Council
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=Bow of Nylea|Keranos, God of Storms
+HumanExtras=
+[metadata]
+Name=THS Challenge: Defend the Hearth
+Title=Karametra's Council of Warriors
+Difficulty=medium
+Description=The defenders said not a word. Their shields, spears, and stances were warning enough.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+30 Defend the Hearth|THS
+30 Forest|THS|2

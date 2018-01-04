@@ -1,0 +1,20 @@
+[quest]
+id=THS Challenge: Grim Guardian
+OpponentName=The Guardians
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Name=THS Challenge: Grim Guardian
+Title=Guardians of the Galaxy
+Difficulty=easy
+Description=Occasionally the living wander to the Rivers, but the wardens of Athreos ensure that only the dead pass.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+30 Grim Guardian|JOU
+30 Swamp|THS|1

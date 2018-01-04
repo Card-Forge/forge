@@ -1,0 +1,30 @@
+[metadata]
+Name=THS 3 Block: UB Control
+Title=UB Control
+Difficulty=hard
+Description=Block Constructed deck by an unknown deckbuilder.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+4 Ashiok, Nightmare Weaver|THS
+4 Bile Blight|BNG
+4 Dissolve|THS
+2 Divination|BNG
+1 Drown in Sorrow|BNG
+2 Font of Fortunes|JOU
+4 Hero's Downfall|THS
+3 Island|THS|1
+2 Island|THS|2
+2 Island|THS|3
+2 Island|THS|4
+2 Pharika's Cure|THS
+4 Prognostic Sphinx|THS
+1 Read the Bones|THS
+3 Silence the Believers|JOU
+3 Swamp|THS|1
+2 Swamp|THS|2
+3 Swamp|THS|3
+3 Swamp|THS|4
+4 Temple of Deceit|THS
+1 Temple of Silence|THS
+4 Thoughtseize|THS

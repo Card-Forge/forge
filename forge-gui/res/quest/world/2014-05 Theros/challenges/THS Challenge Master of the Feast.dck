@@ -1,0 +1,20 @@
+[quest]
+id=THS Challenge: Master of the Feast
+OpponentName=The Masters
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Name=THS Challenge: Master of the Feast
+Title=Masters of the Feast
+Difficulty=hard
+Description=First World Problems
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+30 Master of the Feast|JOU
+30 Swamp|THS|3

@@ -1,0 +1,25 @@
+[metadata]
+Name=THS 1 Tribe: Monsters
+Title=The Monsters
+Difficulty=easy
+Description=A cyclops has two moods: angry and asleep.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Arbor Colossus|THS
+2 Colossus of Akros|THS
+2 Ember Swallower|THS
+16 Forest|THS|1
+2 Gluttonous Cyclops|JOU
+2 Hydra Broodmaster|JOU
+2 Ill-Tempered Cyclops|THS
+14 Mountain|THS|4
+2 Nemesis of Mortals|THS
+2 Nessian Asp|THS
+2 Polis Crusher|THS
+2 Polukranos, World Eater|THS
+2 Ravenous Leucrocota|JOU
+2 Stoneshock Giant|THS
+2 Stormbreath Dragon|THS
+2 Swarmborn Giant|JOU
+2 Wildfire Cerberus|JOU

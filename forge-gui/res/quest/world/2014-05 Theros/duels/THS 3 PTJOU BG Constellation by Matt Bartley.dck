@@ -1,0 +1,33 @@
+[metadata]
+Name=THS 3 PTJOU: BG Constellation by Matt Bartley
+Title=BG Constellation
+Difficulty=hard
+Description=Block Constructed deck played at Pro Tour: Journey of the Gods by Matt Bartley.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+2 Abhorrent Overlord|THS
+4 Courser of Kruphix|BNG
+4 Doomwake Giant|JOU
+3 Eidolon of Blossoms|JOU
+2 Feast of Dreams|JOU
+12 Forest|THS|1
+2 Gild|BNG
+4 Hero's Downfall|THS
+4 Master of the Feast|JOU
+2 Reaper of the Wilds|THS
+2 Silence the Believers|JOU
+9 Swamp|THS|1
+4 Sylvan Caryatid|THS
+4 Temple of Malady|JOU
+2 Whip of Erebos|THS
+[Sideboard]
+3 Dark Betrayal|THS
+2 Drown in Sorrow|BNG
+1 Eidolon of Blossoms|JOU
+1 Erebos, God of the Dead|THS
+1 Feast of Dreams|JOU
+2 Reaper of the Wilds|THS
+3 Thoughtseize|THS
+1 Unravel the AEther|BNG
+1 Whip of Erebos|THS

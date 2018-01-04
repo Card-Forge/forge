@@ -1,0 +1,21 @@
+[quest]
+id=THS Challenge: Colossus of Akros
+OpponentName=The Colossus
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=Colossus of Akros
+HumanExtras=
+[metadata]
+Name=THS Challenge: Colossus of Akros
+Title=The Colossus
+Difficulty=easy
+Description="Don't make me angry. You wouldn't like me when I'm angry."\n-Bruce Banner
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+20 Font of Fertility|JOU
+20 Forest|THS|3
+20 Peregrination|BNG

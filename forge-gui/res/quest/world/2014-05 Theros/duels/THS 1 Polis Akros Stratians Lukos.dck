@@ -1,0 +1,18 @@
+[metadata]
+Name=THS 1 Polis: Akros: Stratians: Lukos
+Title=The Lukos
+Difficulty=easy
+Description=The Lukos (wolves) are the elite of the Akroan forces called in after the Alamon have spotted a target and have begun attacking it in their guerrilla style of assault. The Lukos march in and take over the village, capturing slaves to haul plunder back to the Kolophon.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+4 Akroan Conscriptor|BNG
+4 Akroan Crusader|THS
+4 Akroan Line Breaker|JOU
+4 Blinding Flare|JOU
+4 Coordinated Assault|THS
+4 Deserter's Quarters|JOU
+4 Harness by Force|JOU
+4 Impetuous Sunchaser|BNG
+24 Mountain|THS|2
+4 Twinflame|JOU

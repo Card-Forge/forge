@@ -1,0 +1,21 @@
+[quest]
+id=THS Challenge: Sunbond
+OpponentName=The Rams
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Name=THS Challenge: Sunbond
+Title=Ramming Speed!
+Difficulty=easy
+Description=The gods are fascinated by innocence, perhaps because it's a quality they themselves lack.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+20 Nyx-Fleece Ram|JOU
+20 Plains|THS|1
+20 Sunbond|BNG

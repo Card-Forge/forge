@@ -1,0 +1,18 @@
+[metadata]
+Name=THS 2 Heroic: 2 Blue
+Title=Heroes of Fortune
+Difficulty=medium
+Description="Thassa has blessed me with power and insight. I am careful not to disappoint her."
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Aqueous Form|THS
+4 Fate Foretold|THS
+4 Fated Infatuation|BNG
+24 Island|THS|3
+4 Ordeal of Thassa|THS
+4 Sage of Hours|JOU
+4 Stratus Walk|BNG
+4 Triton Fortune Hunter|THS
+4 War-Wing Siren|JOU
+4 Wavecrash Triton|THS

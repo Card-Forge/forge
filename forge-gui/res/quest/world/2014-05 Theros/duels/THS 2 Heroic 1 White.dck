@@ -1,0 +1,20 @@
+[metadata]
+Name=THS 2 Heroic: 1 White
+Title=Heroes of Light
+Difficulty=medium
+Description="Nyx may belong to the gods, but the skies of Theros are ours."
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Ajani's Presence|JOU
+4 Chosen by Heliod|THS
+4 Dawnbringer Charioteers|JOU
+4 Fabled Hero|THS
+4 Favored Hoplite|THS
+4 Gift of Immortality|THS
+1 Hero of Iroas|BNG
+4 Mortal Obstinacy|JOU
+4 Ordeal of Heliod|THS
+4 Phalanx Leader|THS
+22 Plains|THS|4
+1 Tethmos High Priest|JOU

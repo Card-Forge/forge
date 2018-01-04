@@ -1,0 +1,18 @@
+[metadata]
+Name=THS 1 Polis: Oreskos
+Title=Oreskos
+Difficulty=easy
+Description=This central domain of the leonin lies in a rocky river valley in a remote region of Theros. In Oreskos, a smattering of human culture remains from their time under the oppression of Agnomakhos, but the leonin are slowly reverting back to their original nature, abandoning the ideology and culture that have been imposed on them throughout their history. Tethmos is the primary leonin den, high in the mountains. Brimaz, the leonin king, is both a warrior and a spiritual leader for his people.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Ajani's Presence|JOU
+4 Brimaz, King of Oreskos|BNG
+4 Glare of Heresy|THS
+4 Leonin Iconoclast|JOU
+4 Leonin Snarecaster|THS
+4 Oreskos Sun Guide|BNG
+4 Oreskos Swiftclaw|JOU
+24 Plains|THS|1
+4 Tethmos High Priest|JOU
+4 Vanguard of Brimaz|BNG

@@ -1,0 +1,18 @@
+[metadata]
+Name=THS 1 Planeswalker: Elspeth
+Title=Elspeth, Sun's Champion
+Difficulty=easy
+Description=Elspeth came to Theros from a war-ravaged plane, hoping to find the one thing that eluded her: peace. In the wilderness between two city-states, Elspeth was attacked by a monstrous hydra that had been responsible for the deaths of countless warriors. Elspeth engaged the hydra alone and after a bitter fight emerged triumphant. Afterward, she wanted nothing more than to fade into anonymity, but her feat of heroism has captured the attention of Heliod, god of the sun, who seeks to make her his champion.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Deicide|JOU
+4 Elspeth, Sun's Champion|THS
+4 Gods Willing|THS
+4 Godsend|JOU
+4 Great Hart|BNG
+4 Hall of Triumph|JOU
+4 Heliod, God of the Sun|THS
+24 Plains|THS|2
+4 Sunbond|BNG
+4 Vanquish the Foul|THS

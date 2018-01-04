@@ -1,0 +1,33 @@
+[metadata]
+Name=THS 3 PTJOU: Bant Planeswalkers by Andrew Baekstrom
+Title=Bant Planeswalkers
+Difficulty=hard
+Description=Block Constructed deck played at Pro Tour: Journey of the Gods by Andrew Baekstrom.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+2 Ajani, Mentor of Heroes|JOU
+4 Banishing Light|JOU
+4 Courser of Kruphix|BNG
+4 Elspeth, Sun's Champion|THS
+8 Forest|THS|1
+4 Island|THS|1
+3 Kiora's Follower|BNG
+4 Kiora, the Crashing Wave|BNG
+1 Mana Confluence|JOU
+4 Prognostic Sphinx|THS
+2 Reprisal|JOU
+4 Sylvan Caryatid|THS
+4 Temple of Enlightenment|BNG
+4 Temple of Mystery|THS
+4 Temple of Plenty|BNG
+4 Unravel the AEther|BNG
+[Sideboard]
+1 Annul|THS
+2 Arbor Colossus|THS
+2 Deicide|JOU
+2 Dissolve|THS
+2 Glare of Heresy|THS
+1 Perplexing Chimera|BNG
+1 Reprisal|JOU
+4 Sedge Scorpion|THS

@@ -1,0 +1,20 @@
+[quest]
+id=THS Challenge: Titan of Eternal Fire
+OpponentName=The Titan
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=Titan of Eternal Fire
+HumanExtras=Guardians of Meletis
+[metadata]
+Name=THS Challenge: Titan of Eternal Fire
+Title=Attack on Titan
+Difficulty=easy
+Description="If you win, you live. If you lose, you die. If you don't fight, you can't win!"\n-Eren Yaeger, Attack on Titan
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+30 Akroan Crusader|THS
+30 Mountain|THS|1

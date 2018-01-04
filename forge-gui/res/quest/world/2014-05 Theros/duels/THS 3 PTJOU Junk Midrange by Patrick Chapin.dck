@@ -1,0 +1,37 @@
+[metadata]
+Name=THS 3 PTJOU: Junk Midrange by Patrick Chapin
+Title=Junk Midrange
+Difficulty=hard
+Description=The winning Block Constructed deck played at Pro Tour: Journey of the Gods by Patrick Chapin.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+1 Banishing Light|JOU
+4 Brimaz, King of Oreskos|BNG
+4 Courser of Kruphix|BNG
+4 Elspeth, Sun's Champion|THS
+4 Fleecemane Lion|THS
+4 Forest|THS|1
+4 Hero's Downfall|THS
+4 Mana Confluence|JOU
+2 Plains|THS|1
+2 Polukranos, World Eater|THS
+1 Read the Bones|THS
+4 Silence the Believers|JOU
+3 Swamp|THS|1
+4 Sylvan Caryatid|THS
+4 Temple of Malady|JOU
+4 Temple of Plenty|BNG
+4 Temple of Silence|THS
+3 Thoughtseize|THS
+[Sideboard]
+2 Arbor Colossus|THS
+1 Bile Blight|BNG
+2 Boon Satyr|THS
+2 Deicide|JOU
+2 Drown in Sorrow|BNG
+1 Feast of Dreams|JOU
+2 Glare of Heresy|THS
+1 Gods Willing|THS
+1 Read the Bones|THS
+1 Thoughtseize|THS

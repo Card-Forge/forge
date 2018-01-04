@@ -1,0 +1,18 @@
+[metadata]
+Name=THS 2 Tribute
+Title=Tribute
+Difficulty=medium
+Description="Couldn't remember The Greatest Song in the World, no, no.\nThis is a tribute, oh, to The Greatest Song in the World"\n-Tenacious D
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Boulderfall|THS
+4 Fanatic of Xenagos|BNG
+4 Flame-Wreathed Phoenix|BNG
+12 Forest|THS|4
+16 Mountain|THS|4
+4 Nessian Demolok|BNG
+4 Oracle of Bones|BNG
+4 Pharagax Giant|BNG
+4 Snake of the Golden Grove|BNG
+4 Thunder Brute|BNG

@@ -1,0 +1,20 @@
+[quest]
+id=THS Challenge: Blood-Toll Harpy
+OpponentName=The Harpies
+AILife=30
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=Athreos, God of Passage
+HumanExtras=
+[metadata]
+Name=THS Challenge: Blood-Toll Harpy
+Title=The Harpies
+Difficulty=easy
+Description=When harpies demand a toll to cross through their territory, consider yourself lucky if they permit payment in coin.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+30 Blood-Toll Harpy|THS
+30 Swamp|THS|2

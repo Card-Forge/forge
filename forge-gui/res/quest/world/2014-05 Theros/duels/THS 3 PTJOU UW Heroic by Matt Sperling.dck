@@ -1,0 +1,31 @@
+[metadata]
+Name=THS 3 PTJOU: UW Heroic by Matt Sperling
+Title=UW Heroic
+Difficulty=hard
+Description=Block Constructed deck played at Pro Tour: Journey of the Gods by Matt Sperling.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+4 Aqueous Form|THS
+4 Battlewise Hoplite|THS
+4 Eidolon of Countless Battles|BNG
+4 Fabled Hero|THS
+4 Favored Hoplite|THS
+4 Gods Willing|THS
+4 Hero of Iroas|BNG
+5 Island|THS|1
+4 Mana Confluence|JOU
+3 Ordeal of Heliod|THS
+4 Ordeal of Thassa|THS
+8 Plains|THS|1
+4 Stratus Walk|BNG
+4 Temple of Enlightenment|BNG
+[Sideboard]
+1 Ajani's Presence|JOU
+1 Banishing Light|JOU
+2 Deicide|JOU
+3 Fate Foretold|THS
+4 Glare of Heresy|THS
+1 Ordeal of Heliod|THS
+2 Swan Song|THS
+1 Voyage's End|THS

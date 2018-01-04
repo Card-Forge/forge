@@ -1,0 +1,19 @@
+[metadata]
+Name=THS 1 Wilderness: Nessian Wood
+Title=The Nessian Wood
+Difficulty=easy
+Description=Nylea's sacred lynx guards those who honor the Nessian Wood and hunts those who don't.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Consign to Dust|JOU
+4 Fade into Antiquity|THS
+4 Feral Invocation|THS
+4 Fleetfeather Cockatrice|JOU
+17 Forest|THS|2
+4 Horizon Chimera|THS
+7 Island|THS|1
+4 Nessian Asp|THS
+4 Nessian Demolok|BNG
+4 Nessian Game Warden|JOU
+4 Polukranos, World Eater|THS

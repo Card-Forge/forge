@@ -1,0 +1,18 @@
+[metadata]
+Name=THS 1 Polis: Setessa: Watchtower: Ophis
+Title=Ophis Tower
+Difficulty=easy
+Description=This tower is hidden in a wild space near the temple to Karametra. It serves as a base for wandering warriors and spies who travel incognito to gather information for the Council of Warriors. They search out routes for "peregrinations," including sympathetic households who will mentor young men at the beginning of their journeys. Ophis (serpent) warriors also seek lost and abandoned children and bring them back to Setessa. Their leader is Kallias, who was sold into slavery as a child. She lost an eye and several fingers before she was rescued by the Ophis and brought to Setessa.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Defend the Hearth|THS
+24 Forest|THS|4
+4 Karametra's Acolyte|THS
+4 Mortal's Resolve|BNG
+4 Nature's Panoply|JOU
+4 Peregrination|BNG
+4 Reverent Hunter|THS
+4 Setessan Oathsworn|BNG
+4 Setessan Starbreaker|BNG
+4 Staunch-Hearted Warrior|THS
