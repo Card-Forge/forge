@@ -146,6 +146,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int numManaConversion = 0;
 
     private Card monarchEffect = null;
+    private Card blessingEffect = null;
 
     private final AchievementTracker achievementTracker = new AchievementTracker();
     private final PlayerView view;
@@ -2739,5 +2740,36 @@ public class Player extends GameEntity implements Comparable<Player> {
             com.remove(monarchEffect);
             this.updateZoneForView(com);
         }
+    }
+    
+    public boolean hasBlessing() {
+        return blessingEffect != null;
+    }
+    
+    public void setBlessing(boolean bless) {
+        // no need to to change
+        if ((blessingEffect != null) == bless) {
+            return;
+        }
+
+        final PlayerZone com = getZone(ZoneType.Command);
+        
+        if(bless) {
+            blessingEffect = new Card(-1, game);
+            blessingEffect.setOwner(this);
+            blessingEffect.setImageKey("t:blessing");
+            blessingEffect.setName("The City's blessing");
+            blessingEffect.addType("Effect");
+            
+
+            blessingEffect.updateStateForView();
+
+            com.add(blessingEffect);
+        } else {
+            com.remove(blessingEffect);
+            blessingEffect = null;
+        }
+        
+        this.updateZoneForView(com);
     }
 }

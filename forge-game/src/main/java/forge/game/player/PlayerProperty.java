@@ -67,6 +67,10 @@ public class PlayerProperty {
             if (!player.equals(game.getMonarch())) {
                 return false;
             }
+        } else if (property.equals("hasBlessing")) {
+            if (!player.hasBlessing()) {
+                return false;
+            }
         } else if (property.startsWith("wasDealtCombatDamageThisCombatBy ")) {
             String v = property.split(" ")[1];
 

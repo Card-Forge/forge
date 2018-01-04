@@ -1083,6 +1083,9 @@ public class CardFactoryUtil {
         if (sq[0].contains("Landfall")) {
             return doXMath(Integer.parseInt(sq[cc.hasLandfall() ? 1 : 2]), m, c);
         }
+        if (sq[0].contains("Blessing")) {
+            return doXMath(Integer.parseInt(sq[cc.hasBlessing() ? 1 : 2]), m, c);
+        }
         if (sq[0].contains("Threshold")) {
             return doXMath(Integer.parseInt(sq[cc.hasThreshold() ? 1 : 2]), m, c);
         }

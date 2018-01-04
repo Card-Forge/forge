@@ -90,6 +90,9 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             if (value.equals("Desert")) {
                 this.setDesert(true);
             }
+            if (value.equals("Blessing")) {
+                this.setBlessing(true);
+            }
             if (value.startsWith("Prowl")) {
                 final List<String> prowlTypes = Lists.newArrayList();
                 prowlTypes.add("Rogue");
@@ -408,6 +411,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
         if (this.isDesert()) {
             if (!activator.hasDesert()) {
+                return false;
+            }
+        }
+        if (this.isBlessing()) {
+            if (!activator.hasBlessing()) {
                 return false;
             }
         }
