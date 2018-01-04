@@ -1,3 +1,6 @@
+- New Quest World: Theros -
+A new quest world by Xyx has been integrated into the game, based on the Theros block and featuring cards from Theros, Born of the Gods, and Journey into Nyx sets. To quote the author of the quest world: "Follow in the footsteps of Elspeth as she seeks to undo the chaos created after Xenagos discovers that there is more to the multiverse than Theros and its gods. Theros is the biggest quest world by far, featuring a massive 202 duels and 34 challenges. The first series of duels showcases the flavor of the Theros world, the second series highlights the various mechanics, and the final series pits you against decks that made the Pro Tour!"
+
 - Collector Number sort -
 There's a new column in the deck editor to allow sorting cards in the same order used for assigning collector numbers. The column currently appears blank, but that's because we've hidden the relatively cryptic values it uses to sort. (Perhaps in a future release we'll put some meaningful visuals in the column.) When sorted by collector number, you'll see colorless non-artifact spells at the top, basic lands at the bottom, and all the in-between sorting goodness.
 
