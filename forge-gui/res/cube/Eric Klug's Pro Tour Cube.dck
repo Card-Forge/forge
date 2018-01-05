@@ -5,13 +5,13 @@ Name=Eric Klug's Pro Tour Cube
 1 Absorb|INV
 1 Acidic Slime|M13
 1 Aeon Chronicler|PLC
-1 Aether Vial|MMA
+1 Aether Vial|IMA
 1 Agony Warp|MM3
 1 Ajani Vengeant|ALA
 1 Ajani, Mentor of Heroes|JOU
 1 Akroma's Blessing|ONS
 1 Akroma's Vengeance|ONS
-1 Ancient Tomb|EXP
+1 Ancient Tomb|VMA
 1 Angel of Despair|GPT
 1 Aquamoeba|VMA
 1 Arashi, the Sky Asunder|SOK
@@ -26,7 +26,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Atarka's Command|DTK
 1 Aura of Silence|10E
 1 Avenger of Zendikar|WWK
-1 Azorius Charm|RTR
+1 Azorius Charm|IMA
 1 Bad River|VMA
 1 Badlands|VMA
 1 Baneslayer Angel|M11
@@ -41,16 +41,16 @@ Name=Eric Klug's Pro Tour Cube
 1 Black Knight|M11
 1 Blazing Specter|VMA
 1 Blightning|ALA
-1 Blood Crypt|EXP
+1 Blood Crypt|RTR
 1 Bloodbraid Elf|EMA
-1 Bogardan Hellkite|M10
+1 Bogardan Hellkite|IMA
 1 Boreal Druid|CSP
 1 Boros Reckoner|MM3
 1 Boros Signet|MM3
 1 Bosh, Iron Golem|MRD
 1 Brainstorm|EMA
 1 Brave the Elements|M14
-1 Breeding Pool|EXP
+1 Breeding Pool|GTC
 1 Brimaz, King of Oreskos|BNG
 1 Broodmate Dragon|MM3
 1 Brushland|10E
@@ -59,8 +59,8 @@ Name=Eric Klug's Pro Tour Cube
 1 Canyon Wildcat|TPR
 1 Capsize|TPR
 1 Careful Consideration|MMA
-1 Carven Caryatid|RAV
-1 Cascade Bluffs|EXP
+1 Carven Caryatid|IMA
+1 Cascade Bluffs|EVE
 1 Cavern of Souls|MM3
 1 Caves of Koilos|ORI
 1 Celestial Colonnade|WWK
@@ -96,7 +96,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Creeping Tar Pit|WWK
 1 Cruel Ultimatum|MM3
 1 Crypt Angel|INV
-1 Cryptic Command|MM2
+1 Cryptic Command|IMA
 1 Cursed Scroll|TPR
 1 Cyclonic Rift|MM3
 1 Damnation|MM3
@@ -116,15 +116,15 @@ Name=Eric Klug's Pro Tour Cube
 1 Devil's Play|ISD
 1 Dimir Signet|MM3
 1 Disciple of the Vault|MRD
-1 Disenchant|TPR
+1 Disenchant|IMA
 1 Disfigure|ZEN
 1 Dismember|MM2
 1 Dispatch|MM2
 1 Dissipate|M15
-1 Dissolve|THS
+1 Dissolve|IMA
 1 Donate|UDS
-1 Doom Blade|M14
-1 Doomed Traveler|CNS
+1 Doom Blade|IMA
+1 Doomed Traveler|IMA
 1 Dragon Fodder|MM3
 1 Dragonstorm|MMA
 1 Drain Life|5ED
@@ -132,12 +132,12 @@ Name=Eric Klug's Pro Tour Cube
 1 Drowner of Hope|BFZ
 1 Dryad Militant|RTR
 1 Dryad Sophisticate|GPT
-1 Duress|EMA
+1 Duress|IMA
 1 Earthquake|M10
 1 Eldrazi Mimic|OGW
 1 Eldrazi Obligator|OGW
 1 Eldrazi Skyspawner|BFZ
-1 Electrolyze|MM2
+1 Electrolyze|IMA
 1 Elixir of Immortality|M14
 1 Elspeth, Knight-Errant|MMA
 1 Elspeth, Sun's Champion|THS
@@ -150,7 +150,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Eternal Witness|MMA
 1 Ethersworn Canonist|MMA
 1 Evolutionary Leap|ORI
-1 Evolving Wilds|AKH
+1 Evolving Wilds|IMA
 1 Exalted Angel|ONS
 1 Experiment One|GTC
 1 Explore|MM3
@@ -164,7 +164,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Figure of Destiny|MMA
 1 Fire // Ice|APC
 1 Fire Diamond|7ED
-1 Fireball|M12
+1 Fireball|IMA
 1 Fireslinger|TMP
 1 Firestorm|WTH
 1 Flame Slash|ROE
@@ -172,7 +172,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Flametongue Kavu|VMA
 1 Flayer Husk|MM2
 1 Flood Plain|VMA
-1 Flooded Strand|EXP
+1 Flooded Strand|KTK
 1 Force Spike|7ED
 1 Force of Will|EMA
 1 Foundry Street Denizen|M15
@@ -194,24 +194,24 @@ Name=Eric Klug's Pro Tour Cube
 1 Goblin Rabblemaster|M15
 1 Goblin Ruinblaster|ZEN
 1 Goblin Welder|ULG
-1 Godless Shrine|EXP
+1 Godless Shrine|GTC
 1 Grasp of Darkness|OGW
 1 Grave Titan|M12
 1 Great Furnace|MRD
 1 Green Sun's Zenith|EMA
 1 Grim Monolith|ULG
-1 Grove of the Burnwillows|FUT
-1 Hallowed Fountain|EXP
+1 Grove of the Burnwillows|IMA
+1 Hallowed Fountain|RTR
 1 Hallowed Moonlight|ORI
 1 Hangarback Walker|ORI
-1 Haunting Hymn|TSP
+1 Haunting Hymn|IMA
 1 Heritage Druid|EMA
 1 Hero of Bladehold|MBS
 1 Hero's Downfall|THS
 1 Hideous Laughter|CHK
 1 Honor of the Pure|M12
 1 Hordeling Outburst|KTK
-1 Horizon Canopy|FUT
+1 Horizon Canopy|IMA
 1 Horobi's Whisper|MMA
 1 Hunted Dragon|RAV
 1 Huntmaster of the Fells|DKA
@@ -239,11 +239,11 @@ Name=Eric Klug's Pro Tour Cube
 1 Kalitas, Traitor of Ghet|OGW
 1 Karn, Silver Golem|VMA
 1 Karplusan Forest|10E
-1 Kiki-Jiki, Mirror Breaker|MM2
+1 Kiki-Jiki, Mirror Breaker|IMA
 1 Kjeldoran Outpost|VMA
 1 Knight of Infamy|M13
 1 Knight of Stromgald|5ED
-1 Knight of the Reliquary|MMA
+1 Knight of the Reliquary|IMA
 1 Knight of the White Orchid|ORI
 1 Kodama of the North Tree|CHK
 1 Kodama's Reach|MMA
@@ -256,8 +256,8 @@ Name=Eric Klug's Pro Tour Cube
 1 Lightning Berserker|DTK
 1 Lightning Bolt|MM2
 1 Lightning Greaves|MRD
-1 Lightning Helix|MMA
-1 Lightning Strike|M15
+1 Lightning Helix|IMA
+1 Lightning Strike|XLN
 1 Liliana Vess|M15
 1 Liliana, the Last Hope|EMN
 1 Lingering Souls|MM3
@@ -266,11 +266,11 @@ Name=Eric Klug's Pro Tour Cube
 1 Llanowar Wastes|ORI
 1 Longbow Archer|7ED
 1 Lotus Bloom|MMA
-1 Lotus Cobra|ZEN
+1 Lotus Cobra|IMA
 1 Lotus Petal|TPR
 1 Maelstrom Pulse|MMA
 1 Man-o'-War|VIS
-1 Mana Leak|MM2
+1 Mana Leak|IMA
 1 Mana Tithe|PLC
 1 Mana Vault|VMA
 1 Marsh Flats|MM3
@@ -291,7 +291,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Mogg Raider|TMP
 1 Moldervine Cloak|MMA
 1 Moment's Peace|ODY
-1 Monastery Swiftspear|KTK
+1 Monastery Swiftspear|IMA
 1 Moroii|MM3
 1 Morphling|VMA
 1 Mortarpod|MM2
@@ -304,7 +304,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Myr Enforcer|MM2
 1 Mystical Teachings|MM3
 1 Nameless Inversion|MM2
-1 Necropotence|EMA
+1 Necropotence|IMA
 1 Nekrataal|EMA
 1 Nettle Sentinel|EVE
 1 Nevinyrral's Disk|EMA
@@ -323,7 +323,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Order of Leitbur|FEM
 1 Order of the Ebon Hand|FEM
 1 Order of the White Shield|5ED
-1 Overgrown Tomb|EXP
+1 Overgrown Tomb|RTR
 1 Parallax Wave|VMA
 1 Path to Exile|MM3
 1 Pentavus|M12
@@ -340,12 +340,12 @@ Name=Eric Klug's Pro Tour Cube
 1 Platinum Angel|M11
 1 Plow Under|8ED
 1 Plumeveil|MMA
-1 Polluted Delta|EXP
+1 Polluted Delta|KTK
 1 Polukranos, World Eater|THS
 1 Ponder|M12
 1 Powder Keg|UDS
 1 Preordain|M11
-1 Primeval Titan|MM2
+1 Primeval Titan|IMA
 1 Prismatic Lens|EMA
 1 Profane Command|MM2
 1 Psychatog|VMA
@@ -367,14 +367,14 @@ Name=Eric Klug's Pro Tour Cube
 1 Regal Force|EMA
 1 Reprisal|JOU
 1 Repulse|INV
-1 Restoration Angel|MM3
+1 Restoration Angel|IMA
 1 Ring of Gix|VMA
 1 Rishadan Port|MMQ
 1 Roar of the Wurm|EMA
 1 Rootborn Defenses|MM3
 1 Ruination Guide|BFZ
 1 Ruinous Path|BFZ
-1 Sacred Foundry|EXP
+1 Sacred Foundry|GTC
 1 Sakura-Tribe Elder|CNS
 1 Sandsteppe Citadel|KTK
 1 Savage Lands|MM3
@@ -393,7 +393,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Seething Song|9ED
 1 Sengir Vampire|M14
 1 Sensei's Divining Top|EMA
-1 Serra Angel|EMA
+1 Serra Angel|IMA
 1 Serrated Arrows|TSB
 1 Shadow Guildmage|TSB
 1 Shambling Vent|BFZ
@@ -407,13 +407,13 @@ Name=Eric Klug's Pro Tour Cube
 1 Silence the Believers|JOU
 1 Silverblade Paladin|AVR
 1 Simic Signet|MM3
-1 Simic Sky Swallower|MM3
+1 Simic Sky Swallower|IMA
 1 Skeletal Vampire|MMA
 1 Skirsdag High Priest|ISD
 1 Skizzik|INV
 1 Skyknight Legionnaire|MM3
 1 Slagstorm|MBS
-1 Smoldering Marsh|EXP
+1 Smoldering Marsh|BFZ
 1 Snapcaster Mage|MM3
 1 Solemn Simulacrum|M12
 1 Somber Hoverguard|MM2
@@ -432,25 +432,25 @@ Name=Eric Klug's Pro Tour Cube
 1 Squirrel Nest|CNS
 1 Starstorm|VMA
 1 Stasis Snare|BFZ
-1 Steam Vents|EXP
+1 Steam Vents|RTR
 1 Steppe Lynx|ZEN
 1 Stir the Grave|BOK
 1 Stoke the Flames|M15
-1 Stomping Ground|EXP
+1 Stomping Ground|GTC
 1 Stoneforge Mystic|WWK
 1 Stormscape Apprentice|INV
-1 Strip Mine|EXP
+1 Strip Mine|VMA
 1 Stroke of Genius|VMA
 1 Student of Warfare|ROE
 1 Stupor|TSB
 1 Sudden Death|TSP
 1 Sulfurous Springs|10E
 1 Summoner's Pact|MMA
-1 Supreme Verdict|RTR
+1 Supreme Verdict|IMA
 1 Survival of the Fittest|TPR
 1 Sword of Feast and Famine|MBS
 1 Sword of War and Peace|NPH
-1 Swords to Plowshares|EMA
+1 Swords to Plowshares|IMA
 1 Sylvan Advocate|OGW
 1 Sylvan Caryatid|THS
 1 Sylvan Library|EMA
@@ -458,8 +458,8 @@ Name=Eric Klug's Pro Tour Cube
 1 Tamiyo, the Moon Sage|AVR
 1 Tangle Wire|NMS
 1 Tarmogoyf|MM3
-1 Teferi, Mage of Zhalfir|TSP
-1 Temple Garden|EXP
+1 Teferi, Mage of Zhalfir|IMA
+1 Temple Garden|RTR
 1 Temple of Malady|JOU
 1 Temple of Triumph|THS
 1 Temporal Aperture|USG
@@ -473,9 +473,9 @@ Name=Eric Klug's Pro Tour Cube
 1 Thirst for Knowledge|MMA
 1 Thought-Knot Seer|OGW
 1 Thoughtcast|MM2
-1 Thoughtseize|THS
+1 Thoughtseize|IMA
 1 Thraben Inspector|SOI
-1 Thran Dynamo|UDS
+1 Thran Dynamo|IMA
 1 Thrull Surgeon|TPR
 1 Thrun, the Last Troll|MBS
 1 Tidebinder Mage|M14
@@ -514,11 +514,11 @@ Name=Eric Klug's Pro Tour Cube
 1 Voltaic Key|M11
 1 Wall of Blossoms|TPR
 1 Wall of Reverence|CFX
-1 Wall of Roots|TSB
+1 Wall of Roots|IMA
 1 Warden of the First Tree|FRF
 1 Wasteland|EMA
 1 Waterfront Bouncer|VMA
-1 Watery Grave|EXP
+1 Watery Grave|GTC
 1 Wax // Wane|INV
 1 Werebear|EMA
 1 Westvale Abbey|SOI
@@ -527,12 +527,12 @@ Name=Eric Klug's Pro Tour Cube
 1 Wild Nacatl|ALA
 1 Wild Slash|FRF
 1 Wildfire|MM2
-1 Windswept Heath|EXP
-1 Wing Shards|SCG
+1 Windswept Heath|KTK
+1 Wing Shards|IMA
 1 Wingmate Roc|KTK
 1 Wirewood Symbiote|EMA
 1 Wood Elves|9ED
-1 Wooded Foothills|EXP
+1 Wooded Foothills|KTK
 1 Worn Powerstone|EMA
 1 Wrath of God|EMA
 1 Wren's Run Vanquisher|LRW

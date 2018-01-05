@@ -8,6 +8,7 @@ Name=Adam Styborkski's Pauper Cube
 1 Aethersnipe|MM2
 1 Agony Warp|MM3
 1 Aim High|SOI
+1 Ambuscade|HOU
 1 Ambush Viper|ISD
 1 Angelic Purge|SOI
 1 Arachnus Web|MM3
@@ -18,18 +19,18 @@ Name=Adam Styborkski's Pauper Cube
 1 Ashes to Ashes|5ED
 1 Assault Zeppelid|DIS
 1 Attended Knight|MM3
-1 Augur of Bolas|MM3
 1 Auger Spree|MM3
+1 Augur of Bolas|MM3
 1 Aven Riftwatcher|EMA
 1 Aven Surveyor|FRF
 1 Azorius Guildgate|MM3
 1 Baleful Eidolon|THS
 1 Barbed Lightning|DST
-1 Barren Moor|VMA
 1 Basking Rootwalla|VMA
 1 Battle Screech|VMA
 1 Beetleback Chief|EMA
 1 Beetleform Mage|DGM
+1 Beneath the Sands|HOU
 1 Blastoderm|VMA
 1 Blazing Torch|ISD
 1 Blightning|ALA
@@ -39,9 +40,11 @@ Name=Adam Styborkski's Pauper Cube
 1 Bonded Construct|ORI
 1 Bonds of Faith|ISD
 1 Bonesplitter|MMA
-1 Borderland Marauder|EMA
+1 Borderland Marauder|IMA
 1 Boros Guildgate|MM3
+1 Borrowed Grace|EMN
 1 Branching Bolt|ALA
+1 Brazen Buccaneers|XLN
 1 Brazen Wolves|EMN
 1 Burning-Tree Emissary|MM3
 1 Burst Lightning|MM2
@@ -58,8 +61,9 @@ Name=Adam Styborkski's Pauper Cube
 1 Chain Lightning|EMA
 1 Chainer's Edict|TOR
 1 Chatter of the Squirrel|ODY
+1 Cinder Barrens|OGW
 1 Citanul Woodreaders|MMA
-1 Claustrophobia|ORI
+1 Claustrophobia|IMA
 1 Clay Statue|5ED
 1 Cloaked Siren|JOU
 1 Clutch of Currents|BFZ
@@ -67,25 +71,24 @@ Name=Adam Styborkski's Pauper Cube
 1 Compulsive Research|MM3
 1 Compulsory Rest|AKH
 1 Consume Strength|APC
-1 Corpse Churn|OGW
 1 Corrupted Zendikon|WWK
 1 Counterspell|EMA
 1 Crippling Fatigue|TOR
 1 Crow of Dark Tidings|SOI
 1 Crypt Rats|7ED
 1 Crystallization|ARB
-1 Cultist's Staff|EMN
-1 Cultivate|M11
 1 Cunning Strike|FRF
 1 Curse of Chains|SHM
 1 Custodi Squire|CNS
 1 Daring Skyjek|GTC
 1 Dauntless Cathar|SOI
-1 Dead Reveler|RTR
+1 Dead Reveler|IMA
 1 Dead Weight|SOI
+1 Deadeye Tormentor|XLN
 1 Death Denied|MM2
 1 Deep Analysis|EMA
 1 Deprive|ROE
+1 Depths of Desire|XLN
 1 Deputy of Acquittals|MM3
 1 Desert|TSB
 1 Desperate Sentry|EMN
@@ -93,11 +96,12 @@ Name=Adam Styborkski's Pauper Cube
 1 Diabolic Edict|TPR
 1 Dimir Guildgate|MM3
 1 Dinrova Horror|MM3
+1 Dire Fleet Hoarder|XLN
 1 Disfigure|ZEN
 1 Dismal Backwater|EMA
 1 Disowned Ancestor|KTK
-1 Doom Blade|M14
-1 Doomed Traveler|CNS
+1 Doom Blade|IMA
+1 Doomed Traveler|IMA
 1 Drag Under|EMN
 1 Dragon Fodder|MM3
 1 Dynacharge|MM3
@@ -111,20 +115,21 @@ Name=Adam Styborkski's Pauper Cube
 1 Epic Confrontation|DTK
 1 Errant Ephemeron|MMA
 1 Esper Cormorants|CFX
-1 Essence Scatter|AKH
 1 Evincar's Justice|TMP
-1 Evolving Wilds|AKH
+1 Evolving Wilds|IMA
 1 Faceless Butcher|TSB
 1 Faith's Fetters|EMA
+1 Falkenrath Noble|MM3
 1 Feeling of Dread|ISD
-1 Fertile Thicket|BFZ
 1 Fervent Cathar|EMA
 1 Firebolt|EMA
 1 Fireslinger|TMP
 1 Flayer Husk|MM2
 1 Flurry of Horns|JOU
 1 Forked Bolt|ROE
+1 Forsaken Sanctuary|SOI
 1 Fortify|MM2
+1 Foul Orchard|SOI
 1 Frilled Oculus|GTC
 1 Frostburn Weird|RTR
 1 Gathan Raiders|FUT
@@ -141,21 +146,22 @@ Name=Adam Styborkski's Pauper Cube
 1 Gods Willing|THS
 1 Goldmeadow Harrier|LRW
 1 Golgari Guildgate|MM3
-1 Grapple with the Past|EMN
 1 Gravedigger|AKH
 1 Gray Merchant of Asphodel|THS
+1 Grazing Whiptail|XLN
 1 Grim Contest|FRF
 1 Grisly Salvage|RTR
 1 Grixis Slavedriver|MM3
 1 Gruul Guildgate|MM3
 1 Gryff Vanguard|AVR
 1 Guardian Automaton|ORI
+1 Guardian Idol|IMA
 1 Guardian of the Guildpact|DIS
 1 Gurmag Angler|FRF
-1 Halimar Depths|WWK
 1 Halimar Wavewatch|ROE
 1 Harrow|TPR
 1 Harsh Sustenance|FRF
+1 Highland Lake|SOI
 1 Hissing Iguanar|ALA
 1 Hooting Mandrills|KTK
 1 Humble|EMA
@@ -165,6 +171,7 @@ Name=Adam Styborkski's Pauper Cube
 1 Insolent Neonate|SOI
 1 Into the Roil|ZEN
 1 Isolation Zone|OGW
+1 Ivy Elemental|IMA
 1 Izzet Chronarch|GPT
 1 Izzet Guildgate|MM3
 1 Jilt|APC
@@ -173,7 +180,6 @@ Name=Adam Styborkski's Pauper Cube
 1 Kabuto Moth|CHK
 1 Keldon Marauders|EMA
 1 Kingpin's Pet|GTC
-1 Kodama's Reach|MMA
 1 Kor Skyfisher|MM3
 1 Kozilek's Channeler|BFZ
 1 Krenko's Command|M13
@@ -181,32 +187,32 @@ Name=Adam Styborkski's Pauper Cube
 1 Kruin Striker|AVR
 1 Lash Out|LRW
 1 Last Gasp|RAV
-1 Lawless Broker|KLD
+1 Leave in the Dust|AER
 1 Leonin Bola|DST
-1 Leonin Scimitar|10E
+1 Lifecraft Cavalry|AER
 1 Lightning Bolt|MM2
 1 Liliana's Specter|CNS
-1 Looming Spires|BFZ
 1 Lotus Path Djinn|FRF
 1 Loyal Pegasus|BNG
 1 Magma Jet|MM3
 1 Makeshift Mauler|ISD
-1 Mana Leak|MM2
-1 Manticore of the Gauntlet|AKH
 1 Man-o'-War|VIS
+1 Mana Leak|IMA
+1 Manticore of the Gauntlet|AKH
 1 Mardu Hordechief|KTK
 1 Mardu Skullhunter|KTK
 1 Maul Splicer|NPH
-1 Maulfist Squad|KLD
 1 Maze of Ith|EMA
+1 Meandering River|OGW
 1 Mental Note|JUD
 1 Midnight Scavengers|EMN
-1 Mind Stone|10E
+1 Mind Stone|IMA
 1 Minotaur Skullcleaver|THS
 1 Miscalculation|ULG
 1 Mishra's Factory|EMA
 1 Mist Raven|MM3
 1 Mistral Charger|EMA
+1 Mobile Garrison|AER
 1 Mogg Fanatic|EMA
 1 Mogg Flunkies|MM3
 1 Mogg War Marshal|EMA
@@ -218,17 +224,17 @@ Name=Adam Styborkski's Pauper Cube
 1 Narcolepsy|MM2
 1 Necromancer's Assistant|M15
 1 Nessian Asp|THS
+1 Nest Robber|XLN
 1 Nezumi Cutthroat|CHK
 1 Night's Whisper|EMA
 1 Nightscape Familiar|VMA
 1 Ninja of the Deep Hours|BOK
 1 Oblivion Ring|MM2
 1 Oona's Grace|EMA
-1 Orcish Oriflamme|EMA
 1 Orzhov Guildgate|MM3
 1 Otherworldly Journey|MM2
 1 Pacifism|EMA
-1 Palace Sentinels
+1 Paladin of the Bloodstained|XLN
 1 Peema Outrider|KLD
 1 Penumbra Spider|MM3
 1 Peregrine Drake|EMA
@@ -236,21 +242,21 @@ Name=Adam Styborkski's Pauper Cube
 1 Pestermite|MMA
 1 Pestilence|6ED
 1 Phantom Nomad|VMA
-1 Phantom Tiger|JUD
+1 Phantom Tiger|IMA
 1 Pharika's Chosen|JOU
-1 Phyrexian Rager|EMA
+1 Phyrexian Rager|IMA
 1 Pillory of the Sleepless|MM2
 1 Pit Fight|GTC
 1 Pit Keeper|MM3
 1 Plated Geopede|ZEN
 1 Plover Knights|LRW
 1 Porcelain Legionnaire|NPH
-1 Pouncing Kavu|INV
+1 Pounce|XLN
 1 Predatory Nightstalker|VMA
 1 Preordain|M11
 1 Prey Upon|AER
 1 Prismatic Strands|JUD
-1 Pristine Talisman|NPH
+1 Pristine Talisman|IMA
 1 Prophetic Prism|KLD
 1 Pulse of Murasa|OGW
 1 Pursue Glory|AKH
@@ -271,29 +277,29 @@ Name=Adam Styborkski's Pauper Cube
 1 Rend Flesh|CHK
 1 Rendclaw Trow|EVE
 1 Renegade Freighter|KLD
-1 Rift Bolt|MMA
+1 Rift Bolt|IMA
 1 Rishadan Airship|MMQ
-1 River Serpent|AKH
 1 Ronin Houndmaster|CHK
 1 Rugged Highlands|EMA
-1 Runed Servitor|ORI
+1 Runed Servitor|IMA
 1 Rushing River|PLS
+1 Sailor of Means|XLN
 1 Sakura-Tribe Elder|CNS
 1 Sandsteppe Outcast|FRF
 1 Sangrite Backlash|ARB
 1 Sarkhan's Rage|DTK
 1 Savage Punch|KTK
-1 Savage Surge|THS
 1 Scatter the Seeds|MM2
-1 Scion of the Wild|MM2
 1 Scion Summoner|OGW
+1 Scion of the Wild|MM2
 1 Scoured Barrens|EMA
 1 Scourge Devil|MM3
 1 Screeching Skaab|EMA
 1 Scuzzback Marauders|SHM
+1 Search for Tomorrow|IMA
 1 Searing Blaze|WWK
 1 Seeker of Insight|AKH
-1 Sejiri Steppe|WWK
+1 Seeker of the Way|IMA
 1 Selesnya Guildgate|MM3
 1 Sentinel Spider|EMA
 1 Separatist Voidmage|ORI
@@ -306,7 +312,6 @@ Name=Adam Styborkski's Pauper Cube
 1 Sigil Blessing|MM2
 1 Silent Departure|EMA
 1 Simic Guildgate|MM3
-1 Skinthinner|LGN
 1 Skirk Marauder|LGN
 1 Skyknight Legionnaire|MM3
 1 Slash Panther|NPH
@@ -317,23 +322,23 @@ Name=Adam Styborkski's Pauper Cube
 1 Sphere of the Suns|MM2
 1 Spike Jester|MM3
 1 Spined Thopter|NPH
-1 Splatter Thug|RTR
-1 Staggershock|ROE
-1 Stave Off|CNS
+1 Splatter Thug|IMA
+1 Staggershock|IMA
+1 Star Compass|IMA
 1 Stitched Drake|ISD
+1 Stone Quarry|SOI
+1 Storm Fleet Pyromancer|XLN
 1 Stormfront Pegasus|M12
 1 Stormscape Apprentice|INV
-1 Strip Mine|EXP
+1 Strip Mine|VMA
+1 Striped Riverwinder|HOU
+1 Submerged Boneyard|OGW
 1 Sultai Scavenger|KTK
 1 Suppression Bonds|ORI
-1 Swift Spinner|EMN
 1 Swiftwater Cliffs|EMA
 1 Sylvan Might|EMA
 1 Sylvok Lifestaff|SOM
 1 Tah-Crop Elite|AKH
-1 Tajuru Pathwarden|OGW
-1 Talruum Minotaur|6ED
-1 Tandem Lookout|MM3
 1 Temporal Isolation|TSP
 1 Tenement Crasher|RTR
 1 Terminate|MM3
@@ -342,27 +347,28 @@ Name=Adam Styborkski's Pauper Cube
 1 Thorn of the Black Rose
 1 Thornweald Archer|EMA
 1 Thornwood Falls|EMA
-1 Thought Scour|DKA
+1 Thought Scour|IMA
 1 Thraben Inspector|SOI
+1 Thrill-Kill Assassin|IMA
 1 Thundering Giant|M15
 1 Thundering Tanadon|NPH
 1 Thunderous Wrath|MM3
+1 Timber Gorge|OGW
 1 Time to Feed|THS
 1 Tithe Drinker|DGM
 1 Totem-Guide Hartebeest|ORI
 1 Tragic Slip|EMA
 1 Tranquil Cove|EMA
+1 Tranquil Expanse|OGW
 1 Travel Preparations|ISD
 1 Treasure Cruise|KTK
 1 Triplicate Spirits|M15
-1 Tumble Magnet|MM2
 1 Typhoid Rats|FRF
 1 Ulamog's Crusher|MM2
 1 Ulvenwald Captive|EMN
 1 Undying Rage|EMA
 1 Unearth|ULG
 1 Unmake|EVE
-1 Unnatural Aggression|BFZ
 1 Vampire Interloper|ISD
 1 Vault Skirge|NPH
 1 Viashino Firstblade|DGM
@@ -373,7 +379,7 @@ Name=Adam Styborkski's Pauper Cube
 1 Vulturous Aven|DTK
 1 Wakedancer|EMA
 1 Walker of the Grove|MMA
-1 Wall of Roots|TSB
+1 Wall of Roots|IMA
 1 War Flare|FRF
 1 Warden of Evos Isle|EMA
 1 Warped Landscape|SOI
@@ -381,17 +387,17 @@ Name=Adam Styborkski's Pauper Cube
 1 Wasteland Scorpion|AKH
 1 Wayfarer's Bauble|MM2
 1 Werebear|EMA
-1 Whirlpool Whelm|LRW
 1 Whitemane Lion|EMA
 1 Wild Instincts|ORI
 1 Wild Mongrel|VMA
 1 Wild Nacatl|ALA
-1 Wildsize|GPT
+1 Wildsize|IMA
 1 Will-Forged Golem|M15
 1 Wind-Scarred Crag|EMA
 1 Winds of Rebuke|AKH
 1 Winged Coatl|ARB
 1 Wojek Halberdiers|GTC
+1 Woodland Stream|SOI
 1 Wrecking Ball|MM2
 1 Wretched Gryff|EMN
 1 Yavimaya Elder|VMA

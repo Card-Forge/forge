@@ -6,14 +6,14 @@ Name=Mono Blue Cube
 1 Aeolipile|FEM
 1 Aeon Chronicler|PLC
 1 Aether Spellbomb|MMA
-1 Aether Vial|MMA
+1 Aether Vial|IMA
 1 Aetherling|DGM
 1 All Is Dust|MM2
 1 Ambassador Laquatus|10E
 1 Amnesia|DRK
 1 Ancestral Recall|VMA
-1 Ancestral Vision|TSP
-1 Ancient Tomb|EXP
+1 Ancestral Vision|IMA
+1 Ancient Tomb|VMA
 1 Ankh of Mishra|VMA
 1 Annul|THS
 1 Arcanis the Omnipotent|EMA
@@ -46,7 +46,7 @@ Name=Mono Blue Cube
 1 Chalice of the Void|MMA
 1 Chancellor of the Spires|NPH
 1 Chronomaton|M13
-1 Claustrophobia|ORI
+1 Claustrophobia|IMA
 1 Cloud of Faeries|VMA
 1 Cloudfin Raptor|GTC
 1 Coalition Relic|FUT
@@ -56,7 +56,7 @@ Name=Mono Blue Cube
 1 Commandeer|CSP
 1 Complicate|ONS
 1 Compulsive Research|MM3
-1 Condescend|5DN
+1 Condescend|IMA
 1 Contested War Zone|MBS
 1 Control Magic|EMA
 1 Conundrum Sphinx|M11
@@ -64,7 +64,7 @@ Name=Mono Blue Cube
 1 Coralhelm Commander|ROE
 1 Counterspell|EMA
 1 Crippling Chill|MM3
-1 Cryptic Command|MM2
+1 Cryptic Command|IMA
 1 Cursecatcher|SHM
 1 Cyclonic Rift|MM3
 1 Darksteel Colossus|M10
@@ -80,7 +80,7 @@ Name=Mono Blue Cube
 1 Dispel|BFZ
 1 Disrupt|INV
 1 Dissipate|M15
-1 Dissolve|THS
+1 Dissolve|IMA
 1 Dizzy Spell|RAV
 1 Draining Whelk|TSP
 1 Dream Twist|EMA
@@ -104,7 +104,7 @@ Name=Mono Blue Cube
 1 Faerie Conclave|10E
 1 Faerie Harbinger|LRW
 1 Flash of Insight|JUD
-1 Flusterstorm|VMA
+1 Flusterstorm|IMA
 1 Foil|PCY
 1 Forbid|TPR
 1 Force of Will|EMA
@@ -130,7 +130,7 @@ Name=Mono Blue Cube
 1 Howling Mine|M10
 1 Ideas Unbound|SOK
 1 Illusionary Servant|M10
-1 Illusory Angel|M15
+1 Illusory Angel|IMA
 1 Impulse|VIS
 1 Increasing Confusion|DKA
 1 Inkfathom Infiltrator|SHM
@@ -164,8 +164,8 @@ Name=Mono Blue Cube
 1 Lotus Bloom|MMA
 1 Lullmage Mentor|ZEN
 1 Mana Crypt|EMA
-1 Mana Drain|VMA
-1 Mana Leak|MM2
+1 Mana Drain|IMA
+1 Mana Leak|IMA
 1 Mana Vault|VMA
 1 Master of the Pearl Trident|M13
 1 Master of Waves|THS
@@ -187,7 +187,7 @@ Name=Mono Blue Cube
 1 Metalworker|UDS
 1 Mind Over Matter|EXO
 1 Mind Sculpt|M15
-1 Mind Stone|10E
+1 Mind Stone|IMA
 1 Mind's Desire|SCG
 1 Mindslaver|SOM
 1 Minister of Impediments|DIS
@@ -210,7 +210,7 @@ Name=Mono Blue Cube
 1 Nightveil Specter|GTC
 1 Nimbus Naiad|THS
 1 Ninja of the Deep Hours|BOK
-1 Oblivion Stone|MRD
+1 Oblivion Stone|IMA
 1 Omniscience|M13
 1 Oona, Queen of the Fae|MMA
 1 Opportunity|MM3
@@ -253,7 +253,7 @@ Name=Mono Blue Cube
 1 Reliquary Tower|M13
 1 Remand|MM2
 1 Remote Isle|USG
-1 Repeal|MM2
+1 Repeal|IMA
 1 Rewind|MM3
 1 Riftwing Cloudskate|MMA
 1 Riptide Director|LGN
@@ -285,7 +285,7 @@ Name=Mono Blue Cube
 1 Snapcaster Mage|MM3
 1 Sol Ring|VMA
 1 Sower of Temptation|LRW
-1 Spell Pierce|MM3
+1 Spell Pierce|XLN
 1 Spell Snare|MMA
 1 Spellstutter Sprite|MMA
 1 Spiketail Drakeling|TSP
@@ -297,7 +297,7 @@ Name=Mono Blue Cube
 1 Stern Mentor|AVR
 1 Stonybrook Banneret|MOR
 1 Strata Scythe|SOM
-1 Strip Mine|EXP
+1 Strip Mine|VMA
 1 Stroke of Genius|VMA
 1 Swan Song|THS
 1 Sword of Body and Mind|SOM
@@ -306,7 +306,7 @@ Name=Mono Blue Cube
 1 Take Possession|MMA
 1 Talrand, Sky Summoner|M13
 1 Tangle Wire|NMS
-1 Teferi, Mage of Zhalfir|TSP
+1 Teferi, Mage of Zhalfir|IMA
 1 Telling Time|MM2
 1 Temporal Adept|9ED
 1 Temporal Fissure|VMA
@@ -316,8 +316,8 @@ Name=Mono Blue Cube
 1 The Tabernacle at Pendrell Vale
 1 Think Twice|ISD
 1 Thistledown Liege|SHM
-1 Thought Scour|DKA
-1 Thran Dynamo|UDS
+1 Thought Scour|IMA
+1 Thran Dynamo|IMA
 1 Thwart|MMQ
 1 Time Spiral|USG
 1 Time Stretch|10E
@@ -356,7 +356,7 @@ Name=Mono Blue Cube
 1 Waterfront Bouncer|VMA
 1 Welkin Tern|M15
 1 Wheel and Deal|ONS
-1 Windfall|USG
+1 Windfall|IMA
 1 Winter Orb|EMA
 1 Withdraw|PCY
 1 Worn Powerstone|EMA

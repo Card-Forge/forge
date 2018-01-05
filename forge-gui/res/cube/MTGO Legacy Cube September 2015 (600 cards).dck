@@ -4,26 +4,26 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Abbot of Keral Keep|ORI
 1 Abhorrent Overlord|THS
 1 Abrupt Decay|MM3
-1 Abyssal Persecutor|WWK
+1 Abyssal Persecutor|IMA
 1 Accorder Paladin|MBS
 1 Acidic Slime|M13
 1 Act of Aggression|NPH
 1 Adarkar Wastes|10E
-1 Aether Vial|MMA
+1 Aether Vial|IMA
 1 Ainok Survivalist|DTK
 1 Ajani Goldmane|M11
 1 Ajani Vengeant|ALA
 1 Ajani, Caller of the Pride|M14
 1 Akroma's Vengeance|ONS
-1 Ancestral Vision|TSP
-1 Ancient Tomb|EXP
+1 Ancestral Vision|IMA
+1 Ancient Tomb|VMA
 1 Angel of Serenity|RTR
 1 Angelic Destiny|M12
-1 Anger of the Gods|THS
+1 Anger of the Gods|IMA
 1 Animate Dead|EMA
 1 Arbor Elf|M13
 1 Arc Trail|SOM
-1 Archangel of Thune|M14
+1 Archangel of Thune|IMA
 1 Arid Mesa|MM3
 1 Armageddon|VMA
 1 Ashcloud Phoenix|KTK
@@ -53,12 +53,12 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Birthing Pod|NPH
 1 Bitterblossom|MM2
 1 Blade Splicer|MM3
-1 Blood Crypt|EXP
+1 Blood Crypt|RTR
 1 Bloodbraid Elf|EMA
-1 Bloodghast|ZEN
+1 Bloodghast|IMA
 1 Bloodsoaked Champion|KTK
-1 Bloodstained Mire|EXP
-1 Bogardan Hellkite|M10
+1 Bloodstained Mire|KTK
+1 Bogardan Hellkite|IMA
 1 Bone Shredder|ULG
 1 Bonesplitter|MMA
 1 Bonfire of the Damned|MM3
@@ -66,7 +66,7 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Boros Reckoner|MM3
 1 Brago, King Eternal|VMA
 1 Brainstorm|EMA
-1 Breeding Pool|EXP
+1 Breeding Pool|GTC
 1 Brimaz, King of Oreskos|BNG
 1 Brimstone Volley|CNS
 1 Brushland|10E
@@ -95,8 +95,8 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Collected Company|DTK
 1 Compulsive Research|MM3
 1 Condemn|M11
-1 Condescend|5DN
-1 Consecrated Sphinx|MBS
+1 Condescend|IMA
+1 Consecrated Sphinx|IMA
 1 Control Magic|EMA
 1 Corpse Dance|TPR
 1 Council's Judgment|CNS
@@ -106,7 +106,7 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Craterhoof Behemoth|MM3
 1 Crusade|6ED
 1 Crux of Fate|FRF
-1 Cryptic Command|MM2
+1 Cryptic Command|IMA
 1 Cultivate|M11
 1 Cunning Sparkmage|WWK
 1 Cursed Scroll|TPR
@@ -136,29 +136,29 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Dismember|MM2
 1 Dismiss|TPR
 1 Dissipate|M15
-1 Dissolve|THS
+1 Dissolve|IMA
 1 Divinity of Pride|MMA
 1 Domri Rade|MM3
-1 Doom Blade|M14
+1 Doom Blade|IMA
 1 Doomed Necromancer|10E
 1 Dragon Fodder|MM3
 1 Dragonlord Atarka|DTK
 1 Dragonlord Dromoka|DTK
 1 Dragonlord Ojutai|DTK
 1 Dragonlord Silumgar|DTK
-1 Dragonskull Summit|M13
+1 Dragonskull Summit|XLN
 1 Dread Return|TSP
 1 Dreadbore|RTR
 1 Dromoka's Command|DTK
-1 Drowned Catacomb|M13
+1 Drowned Catacomb|XLN
 1 Dualcaster Mage|EMA
 1 Dungeon Geists|DKA
 1 Duplicant|EMA
-1 Duress|EMA
+1 Duress|IMA
 1 Edric, Spymaster of Trest|VMA
 1 Eight-and-a-Half-Tails|EMA
-1 Electrolyze|MM2
-1 Elesh Norn, Grand Cenobite|MM2
+1 Electrolyze|IMA
+1 Elesh Norn, Grand Cenobite|IMA
 1 Elite Vanguard|EMA
 1 Elixir of Immortality|M14
 1 Elspeth Tirel|SOM
@@ -166,7 +166,7 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Elspeth, Sun's Champion|THS
 1 Elves of Deep Shadow|RAV
 1 Elvish Mystic|M15
-1 Emeria Angel|ZEN
+1 Emeria Angel|IMA
 1 Emrakul, the Aeons Torn|MM2
 1 Entomb|EMA
 1 Entreat the Angels|MM3
@@ -196,7 +196,7 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Flamewake Phoenix|FRF
 1 Fleecemane Lion|THS
 1 Flickerwisp|MM3
-1 Flooded Strand|EXP
+1 Flooded Strand|KTK
 1 Forbid|TPR
 1 Forbidden Alchemy|MM3
 1 Force of Will|EMA
@@ -217,7 +217,7 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Gatekeeper of Malakir|ZEN
 1 Gather the Townsfolk|DKA
 1 Geist of Saint Traft|ISD
-1 Genesis Wave|SOM
+1 Genesis Wave|IMA
 1 Geralf's Messenger|DKA
 1 Ghor-Clan Rampager|MM3
 1 Gideon Jura|M12
@@ -225,7 +225,7 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Gilded Lotus|M13
 1 Gilt-Leaf Winnower|ORI
 1 Gitaxian Probe|NPH
-1 Glacial Fortress|M13
+1 Glacial Fortress|XLN
 1 Glen Elendra Archmage|MMA
 1 Glorious Anthem|10E
 1 Go for the Throat|MBS
@@ -233,7 +233,7 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Goblin Glory Chaser|ORI
 1 Goblin Guide|MM3
 1 Goblin Rabblemaster|M15
-1 Godless Shrine|EXP
+1 Godless Shrine|GTC
 1 Gore-House Chainwalker|RTR
 1 Grafted Wargear|5DN
 1 Grave Titan|M12
@@ -244,7 +244,7 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Grim Lavamancer|M12
 1 Griselbrand|MM3
 1 Hall of Triumph|JOU
-1 Hallowed Fountain|EXP
+1 Hallowed Fountain|RTR
 1 Hallowed Spiritkeeper
 1 Hammer of Purphoros|THS
 1 Hangarback Walker|ORI
@@ -287,8 +287,8 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Karplusan Forest|10E
 1 Keiga, the Tide Star|MMA
 1 Keranos, God of Storms|JOU
-1 Kiki-Jiki, Mirror Breaker|MM2
-1 Kiln Fiend|ROE
+1 Kiki-Jiki, Mirror Breaker|IMA
+1 Kiln Fiend|IMA
 1 Kiora, the Crashing Wave|BNG
 1 Kiora's Follower|BNG
 1 Kira, Great Glass-Spinner|MMA
@@ -305,9 +305,9 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Leonin Relic-Warder|MBS
 1 Lightning Bolt|MM2
 1 Lightning Greaves|MRD
-1 Lightning Helix|MMA
+1 Lightning Helix|IMA
 1 Lightning Mauler|AVR
-1 Lightning Strike|M15
+1 Lightning Strike|XLN
 1 Liliana of the Veil|MM3
 1 Liliana Vess|M15
 1 Liliana, Heretical Healer|ORI
@@ -319,15 +319,15 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Llanowar Wastes|ORI
 1 Looter il-Kor|TSP
 1 Lotleth Troll|RTR
-1 Lotus Cobra|ZEN
+1 Lotus Cobra|IMA
 1 Loxodon Warhammer|10E
 1 Maelstrom Pulse|MMA
 1 Magma Jet|MM3
 1 Makeshift Mannequin|LRW
 1 Malicious Affliction|EMA
 1 Man-o'-War|VIS
-1 Mana Confluence|EXP
-1 Mana Leak|MM2
+1 Mana Confluence|JOU
+1 Mana Leak|IMA
 1 Mana Tithe|PLC
 1 Managorger Hydra|ORI
 1 Manic Vandal|M12
@@ -340,7 +340,7 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Mentor of the Meek|ISD
 1 Merfolk Looter|EMA
 1 Midnight Banshee|MM2
-1 Mind Stone|10E
+1 Mind Stone|IMA
 1 Mirari's Wake|CNS
 1 Mirran Crusader|MM2
 1 Miscalculation|ULG
@@ -351,7 +351,7 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Mogg War Marshal|EMA
 1 Mogis's Marauder|THS
 1 Monastery Mentor|FRF
-1 Monastery Swiftspear|KTK
+1 Monastery Swiftspear|IMA
 1 Mother of Runes|EMA
 1 Mox Diamond|TPR
 1 Mulldrifter|MM2
@@ -371,7 +371,7 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Noble Hierarch|MM2
 1 Nykthos, Shrine to Nyx|THS
 1 Oblivion Ring|MM2
-1 Obstinate Baloth|M11
+1 Obstinate Baloth|IMA
 1 Ohran Viper|CSP
 1 Old Man of the Sea|ARN
 1 Olivia Voldaren|MM3
@@ -381,8 +381,8 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Oracle of Mul Daya|ZEN
 1 Oust|ROE
 1 Outpost Siege|FRF
-1 Overgrown Battlement|ROE
-1 Overgrown Tomb|EXP
+1 Overgrown Battlement|IMA
+1 Overgrown Tomb|RTR
 1 Overrun|TPR
 1 Pack Rat|RTR
 1 Pact of Negation|MMA
@@ -394,9 +394,9 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Phyrexian Metamorph|NPH
 1 Phyrexian Obliterator|NPH
 1 Phyrexian Revoker|M15
-1 Pillar of Flame|AVR
+1 Pillar of Flame|IMA
 1 Plateau|VMA
-1 Polluted Delta|EXP
+1 Polluted Delta|KTK
 1 Polukranos, World Eater|THS
 1 Ponder|M12
 1 Porcelain Legionnaire|NPH
@@ -404,7 +404,7 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Precursor Golem|MM2
 1 Preordain|M11
 1 Primal Command|MM3
-1 Primeval Titan|MM2
+1 Primeval Titan|IMA
 1 Profane Command|MM2
 1 Progenitus|MMA
 1 Prophetic Bolt|VMA
@@ -415,7 +415,7 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Raise the Alarm|EMA
 1 Rakdos's Return|RTR
 1 Ral Zarek|DGM
-1 Rampaging Baloths|ZEN
+1 Rampaging Baloths|IMA
 1 Rampant Growth|MM2
 1 Ranger of Eos|MM3
 1 Ratchet Bomb|M14
@@ -428,18 +428,18 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Regrowth|VMA
 1 Remand|MM2
 1 Remove Soul|10E
-1 Repeal|MM2
-1 Restoration Angel|MM3
+1 Repeal|IMA
+1 Restoration Angel|IMA
 1 Reveillark|MMA
-1 Rift Bolt|MMA
+1 Rift Bolt|IMA
 1 Riftwing Cloudskate|MMA
 1 Rishadan Port|MMQ
 1 Roast|DTK
 1 Rofellos, Llanowar Emissary|VMA
-1 Rootbound Crag|M13
+1 Rootbound Crag|XLN
 1 Rotting Rats|CFX
-1 Rune-Scarred Demon|M12
-1 Sacred Foundry|EXP
+1 Rune-Scarred Demon|IMA
+1 Sacred Foundry|GTC
 1 Sakura-Tribe Elder|CNS
 1 Sarkhan, the Dragonspeaker|KTK
 1 Savannah|VMA
@@ -448,17 +448,17 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Scrubland|VMA
 1 Sea Gate Oracle|MM3
 1 Seal of Fire|DIS
-1 Search for Tomorrow|MMA
+1 Search for Tomorrow|IMA
 1 Searing Spear|M13
 1 Secure the Wastes|DTK
-1 Seeker of the Way|KTK
+1 Seeker of the Way|IMA
 1 Sensei's Divining Top|EMA
 1 Serendib Efreet|EMA
 1 Serum Visions|MM3
 1 Shadowmage Infiltrator|MM2
 1 Shallow Grave|MIR
 1 Shardless Agent|EMA
-1 Sheoldred, Whispering One|NPH
+1 Sheoldred, Whispering One|IMA
 1 Shivan Reef|ORI
 1 Show and Tell|USG
 1 Shriekmaw|LRW
@@ -482,15 +482,15 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Spear of Heliod|THS
 1 Spectral Procession|MM2
 1 Spellskite|MM2
-1 Spell Pierce|MM3
+1 Spell Pierce|XLN
 1 Sphere of the Suns|MM2
 1 Sphinx's Revelation|MM3
 1 Spikeshot Elder|MM2
 1 Splinter Twin|MM2
-1 Staggershock|ROE
-1 Steam Vents|EXP
+1 Staggershock|IMA
+1 Steam Vents|RTR
 1 Stoke the Flames|M15
-1 Stomping Ground|EXP
+1 Stomping Ground|GTC
 1 Stormbreath Dragon|THS
 1 Stormtide Leviathan|M15
 1 Stratus Dancer|DTK
@@ -503,10 +503,10 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Summoning Trap|MM3
 1 Sun Titan|M12
 1 Sundering Titan|DST
-1 Sunpetal Grove|M13
-1 Supreme Verdict|RTR
+1 Sunpetal Grove|XLN
+1 Supreme Verdict|IMA
 1 Surrak, the Hunt Caller|DTK
-1 Swords to Plowshares|EMA
+1 Swords to Plowshares|IMA
 1 Sylvan Caryatid|THS
 1 Sylvan Library|EMA
 1 Taiga|VMA
@@ -515,9 +515,9 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Tangle Wire|NMS
 1 Tarmogoyf|MM3
 1 Tasigur, the Golden Fang|FRF
-1 Tectonic Edge|EXP
-1 Teferi, Mage of Zhalfir|TSP
-1 Temple Garden|EXP
+1 Tectonic Edge|WWK
+1 Teferi, Mage of Zhalfir|IMA
+1 Temple Garden|RTR
 1 Temple of Abandon|THS
 1 Temple of Deceit|THS
 1 Temple of Enlightenment|BNG
@@ -535,13 +535,13 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Thalia, Guardian of Thraben|DKA
 1 Thassa, God of the Sea|THS
 1 Thespian's Stage|GTC
-1 Thoughtseize|THS
+1 Thoughtseize|IMA
 1 Thragtusk|MM3
-1 Thran Dynamo|UDS
+1 Thran Dynamo|IMA
 1 Through the Breach|CHK
 1 Thrun, the Last Troll|MBS
 1 Thunderbreak Regent|DTK
-1 Thundermaw Hellkite|M13
+1 Thundermaw Hellkite|IMA
 1 Tidehollow Sculler|MMA
 1 Time Warp|TPR
 1 Tooth and Nail|MMA
@@ -576,19 +576,19 @@ Name=MTGO Legacy Cube September 2015 (600 cards)
 1 Wake Thrasher|EVE
 1 Wall of Blossoms|TPR
 1 Wall of Omens|EMA
-1 Wall of Roots|TSB
+1 Wall of Roots|IMA
 1 Warleader's Helix|DGM
 1 Waterfront Bouncer|VMA
-1 Watery Grave|EXP
+1 Watery Grave|GTC
 1 Whip of Erebos|THS
 1 Whisperwood Elemental|FRF
 1 Wild Mongrel|VMA
 1 Windbrisk Heights|LRW
-1 Windswept Heath|EXP
+1 Windswept Heath|KTK
 1 Winter Orb|EMA
 1 Wolfir Silverheart|AVR
 1 Wood Elves|9ED
-1 Wooded Foothills|EXP
+1 Wooded Foothills|KTK
 1 Woodfall Primus|MMA
 1 Woodland Bellower|ORI
 1 Woodland Cemetery|ISD

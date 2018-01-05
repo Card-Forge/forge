@@ -4,18 +4,18 @@ Name=Sam Black's No Search Cube
 1 Abbot of Keral Keep|ORI
 1 Abrupt Decay|MM3
 1 Acidic Slime|M13
-1 Aether Vial|MMA
+1 Aether Vial|IMA
 1 Aetherling|DGM
 1 Ajani Vengeant|ALA
 1 Ajani, Caller of the Pride|M14
 1 Always Watching|SOI
 1 Anafenza, Kin-Tree Spirit|DTK
 1 Ancestral Recall|VMA
-1 Ancestral Vision|TSP
+1 Ancestral Vision|IMA
 1 Ancient Grudge|MM3
-1 Ancient Tomb|EXP
+1 Ancient Tomb|VMA
 1 Angel of Serenity|RTR
-1 Anger of the Gods|THS
+1 Anger of the Gods|IMA
 1 Animate Dead|EMA
 1 Arbor Elf|M13
 1 Arcane Sanctum|MM3
@@ -26,7 +26,7 @@ Name=Sam Black's No Search Cube
 1 Atarka's Command|DTK
 1 Avenger of Zendikar|WWK
 1 Ayli, Eternal Pilgrim|OGW
-1 Azorius Chancery|MM2
+1 Azorius Chancery|IMA
 1 Badlands|VMA
 1 Balance|EMA
 1 Baleful Strix|EMA
@@ -50,14 +50,14 @@ Name=Sam Black's No Search Cube
 1 Blade Splicer|MM3
 1 Blood Artist|EMA
 1 Bloodbraid Elf|EMA
-1 Bloodghast|ZEN
+1 Bloodghast|IMA
 1 Bloodthrone Vampire|MM2
 1 Blossoming Defense|KLD
 1 Bomat Courier|KLD
 1 Bone Shredder|ULG
 1 Bonfire of the Damned|MM3
 1 Boros Charm|GTC
-1 Boros Garrison|MM2
+1 Boros Garrison|IMA
 1 Braids, Cabal Minion|EMA
 1 Brimaz, King of Oreskos|BNG
 1 Brimstone Volley|CNS
@@ -74,7 +74,7 @@ Name=Sam Black's No Search Cube
 1 Chandra, Flamecaller|OGW
 1 Chandra, Pyromaster|M15
 1 Chandra, Torch of Defiance|KLD
-1 Channel|VMA
+1 Channel|IMA
 1 Chromatic Star|10E
 1 Chrome Mox|EMA
 1 City of Traitors|TPR
@@ -83,8 +83,8 @@ Name=Sam Black's No Search Cube
 1 Coldsteel Heart|CSP
 1 Compulsive Research|MM3
 1 Condemn|M11
-1 Condescend|5DN
-1 Consecrated Sphinx|MBS
+1 Condescend|IMA
+1 Consecrated Sphinx|IMA
 1 Contraband Kingpin|KLD
 1 Control Magic|EMA
 1 Corpse Dance|TPR
@@ -96,7 +96,7 @@ Name=Sam Black's No Search Cube
 1 Creeping Tar Pit|WWK
 1 Crumbling Necropolis|MM3
 1 Cryptbreaker|EMN
-1 Cryptic Command|MM2
+1 Cryptic Command|IMA
 1 Crystal Shard|MRD
 1 Cultivator's Caravan|KLD
 1 Dack Fayden|EMA
@@ -111,13 +111,13 @@ Name=Sam Black's No Search Cube
 1 Desecration Demon|MM3
 1 Desolate Lighthouse|AVR
 1 Dig Through Time|KTK
-1 Dimir Aqueduct|MM2
+1 Dimir Aqueduct|IMA
 1 Disciple of Bolas|M13
-1 Disenchant|TPR
+1 Disenchant|IMA
 1 Dismember|MM2
 1 Distended Mindbender|EMN
 1 Domri Rade|MM3
-1 Doom Blade|M14
+1 Doom Blade|IMA
 1 Dragonlord Atarka|DTK
 1 Dragonlord Dromoka|DTK
 1 Dragonlord Ojutai|DTK
@@ -133,8 +133,8 @@ Name=Sam Black's No Search Cube
 1 Eldrazi Displacer|OGW
 1 Eldrazi Skyspawner|BFZ
 1 Eldrazi Temple|MM2
-1 Electrolyze|MM2
-1 Elesh Norn, Grand Cenobite|MM2
+1 Electrolyze|IMA
+1 Elesh Norn, Grand Cenobite|IMA
 1 Elixir of Immortality|M14
 1 Elspeth, Sun's Champion|THS
 1 Elvish Visionary|ORI
@@ -168,7 +168,7 @@ Name=Sam Black's No Search Cube
 1 Fleecemane Lion|THS
 1 Fleetwheel Cruiser|KLD
 1 Flickerwisp|MM3
-1 Flooded Grove|EXP
+1 Flooded Grove|EVE
 1 Force of Will|EMA
 1 Forked Bolt|ROE
 1 Frantic Search|VMA
@@ -179,8 +179,8 @@ Name=Sam Black's No Search Cube
 1 Garza's Assassin|CSP
 1 Gavony Township|ISD
 1 Geist of Saint Traft|ISD
-1 Genesis Hydra|M15
-1 Genesis Wave|SOM
+1 Genesis Hydra|IMA
+1 Genesis Wave|IMA
 1 Ghor-Clan Rampager|MM3
 1 Gideon Jura|M12
 1 Gideon, Ally of Zendikar|BFZ
@@ -195,7 +195,7 @@ Name=Sam Black's No Search Cube
 1 Goblin Guide|MM3
 1 Goblin Rabblemaster|M15
 1 Goblin Welder|ULG
-1 Golgari Rot Farm|MM2
+1 Golgari Rot Farm|IMA
 1 Gonti, Lord of Luxury|KLD
 1 Grave Titan|M12
 1 Gray Merchant of Asphodel|THS
@@ -204,7 +204,7 @@ Name=Sam Black's No Search Cube
 1 Grim Lavamancer|M12
 1 Grim Monolith|ULG
 1 Griselbrand|MM3
-1 Gruul Turf|MM2
+1 Gruul Turf|IMA
 1 Hangarback Walker|ORI
 1 Hanweir Militia Captain|SOI
 1 Harbinger of the Tides|ORI
@@ -227,7 +227,7 @@ Name=Sam Black's No Search Cube
 1 Insolent Neonate|SOI
 1 Ishkanah, Grafwidow|EMN
 1 Ivory Tower|VMA
-1 Izzet Boilerworks|MM2
+1 Izzet Boilerworks|IMA
 1 Izzet Signet|MM3
 1 Jace Beleren|M11
 1 Jace, Vryn's Prodigy|ORI
@@ -243,7 +243,7 @@ Name=Sam Black's No Search Cube
 1 Kessig Wolf Run|ISD
 1 Key to the City|KLD
 1 Kher Keep|TSP
-1 Kiki-Jiki, Mirror Breaker|MM2
+1 Kiki-Jiki, Mirror Breaker|IMA
 1 Kiora's Follower|BNG
 1 Kiora, the Crashing Wave|BNG
 1 Kira, Great Glass-Spinner|MMA
@@ -263,7 +263,7 @@ Name=Sam Black's No Search Cube
 1 Lifebane Zombie|M14
 1 Lightning Berserker|DTK
 1 Lightning Bolt|MM2
-1 Lightning Helix|MMA
+1 Lightning Helix|IMA
 1 Lightning Mauler|AVR
 1 Liliana of the Veil|MM3
 1 Liliana, Heretical Healer|ORI
@@ -283,8 +283,8 @@ Name=Sam Black's No Search Cube
 1 Malicious Affliction|EMA
 1 Man-o'-War|VIS
 1 Mana Crypt|EMA
-1 Mana Drain|VMA
-1 Mana Leak|MM2
+1 Mana Drain|IMA
+1 Mana Leak|IMA
 1 Mana Tithe|PLC
 1 Mana Vault|VMA
 1 Managorger Hydra|ORI
@@ -298,7 +298,7 @@ Name=Sam Black's No Search Cube
 1 Maze of Ith|EMA
 1 Memory Jar|VMA
 1 Metalworker|UDS
-1 Mind Stone|10E
+1 Mind Stone|IMA
 1 Mind Twist|4ED
 1 Mindslaver|SOM
 1 Mindwrack Demon|SOI
@@ -310,7 +310,7 @@ Name=Sam Black's No Search Cube
 1 Mogg War Marshal|EMA
 1 Molten Rain|MM3
 1 Monastery Mentor|FRF
-1 Monastery Swiftspear|KTK
+1 Monastery Swiftspear|IMA
 1 Moorland Haunt|ISD
 1 Mother of Runes|EMA
 1 Mox Diamond|TPR
@@ -325,9 +325,9 @@ Name=Sam Black's No Search Cube
 1 Myr Battlesphere|SOM
 1 Mystic Monastery|KTK
 1 Nahiri, the Harbinger|SOI
-1 Nature's Claim|EMA
+1 Nature's Claim|IMA
 1 Necromancy|VIS
-1 Necropotence|EMA
+1 Necropotence|IMA
 1 Needle Spires|OGW
 1 Nephalia Drownyard|ISD
 1 Nest Invader|MM2
@@ -345,21 +345,21 @@ Name=Sam Black's No Search Cube
 1 Oath of Nissa|OGW
 1 Oblivion Ring|MM2
 1 Oblivion Sower|BFZ
-1 Oblivion Stone|MRD
-1 Obstinate Baloth|M11
+1 Oblivion Stone|IMA
+1 Obstinate Baloth|IMA
 1 Obzedat, Ghost Council|GTC
 1 Ohran Viper|CSP
 1 Ophiomancer
 1 Opposition|7ED
 1 Opulent Palace|KTK
 1 Oracle of Mul Daya|ZEN
-1 Orzhov Basilica|MM2
+1 Orzhov Basilica|IMA
 1 Outpost Siege|FRF
 1 Pack Rat|RTR
 1 Pact of Negation|MMA
 1 Painful Truths|BFZ
 1 Palinchron|VMA
-1 Palladium Myr|SOM
+1 Palladium Myr|IMA
 1 Pelakka Wurm|MM2
 1 Pentavus|M12
 1 Pernicious Deed|CNS
@@ -378,13 +378,13 @@ Name=Sam Black's No Search Cube
 1 Preordain|M11
 1 Price of Progress|EMA
 1 Prime Speaker Zegana|GTC
-1 Pristine Talisman|NPH
+1 Pristine Talisman|IMA
 1 Prophet of Kruphix|THS
 1 Puppeteer Clique|MM2
 1 Quarantine Field|BFZ
 1 Radiant Flames|BFZ
 1 Raging Ravine|WWK
-1 Rakdos Carnarium|MM2
+1 Rakdos Carnarium|IMA
 1 Rakdos's Return|RTR
 1 Rancor|EMA
 1 Ratchet Bomb|M14
@@ -397,10 +397,10 @@ Name=Sam Black's No Search Cube
 1 Regrowth|VMA
 1 Relic of Progenitus|EMA
 1 Remand|MM2
-1 Restoration Angel|MM3
+1 Restoration Angel|IMA
 1 Reveillark|MMA
 1 Ribbons of Night|RAV
-1 Rift Bolt|MMA
+1 Rift Bolt|IMA
 1 Riftwing Cloudskate|MMA
 1 Rishadan Port|MMQ
 1 Rofellos, Llanowar Emissary|VMA
@@ -419,8 +419,8 @@ Name=Sam Black's No Search Cube
 1 Seaside Citadel|MM3
 1 Seasons Past|SOI
 1 Secure the Wastes|DTK
-1 Seeker of the Way|KTK
-1 Selesnya Sanctuary|MM2
+1 Seeker of the Way|IMA
+1 Selesnya Sanctuary|IMA
 1 Selfless Spirit|EMN
 1 Setessan Tactics|JOU
 1 Shambling Vent|BFZ
@@ -431,7 +431,7 @@ Name=Sam Black's No Search Cube
 1 Shrine of Burning Rage|NPH
 1 Siege Rhino|KTK
 1 Siege-Gang Commander|EMA
-1 Simic Growth Chamber|MM2
+1 Simic Growth Chamber|IMA
 1 Sinkhole|EMA
 1 Skirsdag High Priest|ISD
 1 Skullclamp|VMA
@@ -451,7 +451,7 @@ Name=Sam Black's No Search Cube
 1 Sower of Temptation|LRW
 1 Spear of Heliod|THS
 1 Spectral Procession|MM2
-1 Spell Pierce|MM3
+1 Spell Pierce|XLN
 1 Spell Queller|EMN
 1 Spellskite|MM2
 1 Sphere of the Suns|MM2
@@ -462,16 +462,16 @@ Name=Sam Black's No Search Cube
 1 Stoke the Flames|M15
 1 Stormbreath Dragon|THS
 1 Stratus Dancer|DTK
-1 Strip Mine|EXP
+1 Strip Mine|VMA
 1 Student of Warfare|ROE
 1 Sublime Archangel|M13
 1 Sulfuric Vortex|EMA
 1 Sun Titan|M12
 1 Sundering Titan|DST
-1 Supreme Verdict|RTR
+1 Supreme Verdict|IMA
 1 Sword of Feast and Famine|MBS
 1 Sword of Fire and Ice|MMA
-1 Swords to Plowshares|EMA
+1 Swords to Plowshares|IMA
 1 Sylvan Advocate|OGW
 1 Sylvan Caryatid|THS
 1 Taiga|VMA
@@ -501,13 +501,13 @@ Name=Sam Black's No Search Cube
 1 Thirst for Knowledge|MMA
 1 Thopter Engineer|ORI
 1 Thought-Knot Seer|OGW
-1 Thoughtseize|THS
+1 Thoughtseize|IMA
 1 Thraben Inspector|SOI
 1 Thragtusk|MM3
-1 Thran Dynamo|UDS
+1 Thran Dynamo|IMA
 1 Thrun, the Last Troll|MBS
 1 Thunderbreak Regent|DTK
-1 Thundermaw Hellkite|M13
+1 Thundermaw Hellkite|IMA
 1 Tidebinder Mage|M14
 1 Time Spiral|USG
 1 Time Walk|VMA
@@ -516,7 +516,7 @@ Name=Sam Black's No Search Cube
 1 Tin Street Hooligan|GPT
 1 Tireless Tracker|SOI
 1 Tolarian Academy|VMA
-1 Tormenting Voice|AKH
+1 Tormenting Voice|IMA
 1 Torrential Gearhulk|KLD
 1 Toxic Deluge|EMA
 1 Tradewind Rider|TPR
@@ -528,7 +528,7 @@ Name=Sam Black's No Search Cube
 1 Tropical Island|VMA
 1 True-Name Nemesis
 1 Tundra|VMA
-1 Twilight Mire|EXP
+1 Twilight Mire|EVE
 1 Ugin, the Spirit Dragon|FRF
 1 Ulamog, the Ceaseless Hunger|BFZ
 1 Umezawa's Jitte|BOK
@@ -556,7 +556,7 @@ Name=Sam Black's No Search Cube
 1 Vraska the Unseen|RTR
 1 Wall of Blossoms|TPR
 1 Wall of Omens|EMA
-1 Wall of Roots|TSB
+1 Wall of Roots|IMA
 1 Wandering Fumarole|OGW
 1 Warden of the First Tree|FRF
 1 Wasteland|EMA
