@@ -4,5 +4,8 @@ There's a new column in the deck editor to allow sorting cards in the same order
 - Puzzle updates -
 There are several new puzzles to play in this version, including two brand new tutorial puzzles which should get you up to speed on how puzzles work and what you commonly need to think about.
 
+- Updated draft cubes -
+Draft cubes have been updated, and MTGO Vintage December 2017 cube has been added (ported over from XMage).
+
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.
