@@ -1,0 +1,9 @@
+Name:Dusk Legion Zealot
+ManaCost:1 B
+Types:Creature Vampire Soldier
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, you draw a card and you lose 1 life.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dusk_legion_zealot.jpg
+Oracle:When Dusk Legion Zealot enters the battlefield, you draw a card and you lose 1 life.
