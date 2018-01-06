@@ -98,3 +98,4 @@ MM3: 24 Boosters
 AKH: 36 Boosters
 HOU: 36 Boosters
 XLN: 36 Boosters
+RIX: 36 Boosters
