@@ -1,7 +1,7 @@
 [metadata]
 Name=Cube Tutor 360 Pauper
 [main]
-1 Doomed Traveler|CNS
+1 Doomed Traveler|IMA
 1 Gideon's Lawkeeper|MM3
 1 Goldmeadow Harrier|LRW
 1 Icatian Javelineers|TSB
@@ -77,7 +77,7 @@ Name=Cube Tutor 360 Pauper
 1 Ninja of the Deep Hours|BOK
 1 Shimmering Glasskite|BOK
 1 Gryff Vanguard|AVR
-1 Mnemonic Wall|THS
+1 Mnemonic Wall|IMA
 1 Mulldrifter|MM2
 1 Aethersnipe|MM2
 1 Errant Ephemeron|MMA
@@ -89,7 +89,7 @@ Name=Cube Tutor 360 Pauper
 1 Daze|EMA
 1 Into the Roil|ZEN
 1 Jilt|APC
-1 Mana Leak|MM2
+1 Mana Leak|IMA
 1 Miscalculation|ULG
 1 Remove Soul|10E
 1 Think Twice|ISD
@@ -100,7 +100,7 @@ Name=Cube Tutor 360 Pauper
 1 Repulse|INV
 1 Rushing River|PLS
 1 Ray of Command|5ED
-1 Condescend|5DN
+1 Condescend|IMA
 1 Ponder|M12
 1 Preordain|M11
 1 Silent Departure|EMA
@@ -110,7 +110,7 @@ Name=Cube Tutor 360 Pauper
 1 Deep Analysis|EMA
 1 Foresee|M11
 1 Narcolepsy|MM2
-1 Claustrophobia|ORI
+1 Claustrophobia|IMA
 1 Carnophage|TPR
 1 Fume Spitter|SOM
 1 Typhoid Rats|FRF
@@ -126,9 +126,9 @@ Name=Cube Tutor 360 Pauper
 1 Chittering Rats|DST
 1 Crypt Rats|7ED
 1 Dauthi Marauder|TPR
-1 Dead Reveler|RTR
+1 Dead Reveler|IMA
 1 Liliana's Specter|CNS
-1 Phyrexian Rager|EMA
+1 Phyrexian Rager|IMA
 1 Soulcage Fiend|AVR
 1 Driver of the Dead|AVR
 1 Faceless Butcher|TSB
@@ -145,7 +145,7 @@ Name=Cube Tutor 360 Pauper
 1 Vendetta|ROE
 1 Devour Flesh|GTC
 1 Diabolic Edict|TPR
-1 Doom Blade|M14
+1 Doom Blade|IMA
 1 Grim Harvest|CSP
 1 Last Gasp|RAV
 1 Nameless Inversion|MM2
@@ -153,7 +153,7 @@ Name=Cube Tutor 360 Pauper
 1 Rend Flesh|CHK
 1 Snuff Out|MMQ
 1 Death Denied|MM2
-1 Duress|EMA
+1 Duress|IMA
 1 Unearth|ULG
 1 Disturbed Burial|TMP
 1 Hymn to Tourach|EMA
@@ -181,7 +181,7 @@ Name=Cube Tutor 360 Pauper
 1 Fervent Cathar|EMA
 1 Ghitu Slinger|EMA
 1 Hanweir Lancer|MM3
-1 Splatter Thug|RTR
+1 Splatter Thug|IMA
 1 Vulshok Sorcerer|5DN
 1 Gorehorn Minotaurs|MM2
 1 Rubblebelt Maaka|MM3
@@ -196,7 +196,7 @@ Name=Cube Tutor 360 Pauper
 1 Searing Spear|M13
 1 Barbed Lightning|DST
 1 Brimstone Volley|CNS
-1 Staggershock|ROE
+1 Staggershock|IMA
 1 Fireblast|VMA
 1 Chain Lightning|EMA
 1 Faithless Looting|EMA
@@ -207,10 +207,10 @@ Name=Cube Tutor 360 Pauper
 1 Volcanic Hammer|9ED
 1 Act of Treason|ORI
 1 Arc Lightning|KTK
-1 Rift Bolt|MMA
+1 Rift Bolt|IMA
 1 Traitorous Instinct|MM3
 1 Pyrotechnics|FRF
-1 Fireball|M12
+1 Fireball|IMA
 1 Rolling Thunder|BFZ
 1 Madcap Skills|MM3
 1 Arbor Elf|M13
@@ -229,7 +229,7 @@ Name=Cube Tutor 360 Pauper
 1 Silhana Ledgewalker|GPT
 1 Thornweald Archer|EMA
 1 Viridian Emissary|MBS
-1 Wall of Roots|TSB
+1 Wall of Roots|IMA
 1 Wild Mongrel|VMA
 1 Citanul Woodreaders|MMA
 1 Crocanura|GTC
@@ -320,42 +320,42 @@ Name=Cube Tutor 360 Pauper
 1 Azorius Signet|MM3
 1 Dimir Signet|MM3
 1 Izzet Signet|MM3
-1 Mind Stone|10E
+1 Mind Stone|IMA
 1 Orzhov Signet|MM3
 1 Prismatic Lens|EMA
 1 Prophetic Prism|KLD
 1 Vulshok Morningstar|9ED
-1 Pristine Talisman|NPH
+1 Pristine Talisman|IMA
 1 Strider Harness|OGW
 1 Tumble Magnet|MM2
 1 Whispersilk Cloak|M11
 1 Serrated Arrows|TSB
-1 Azorius Chancery|MM2
+1 Azorius Chancery|IMA
 1 Azorius Guildgate|MM3
-1 Boros Garrison|MM2
+1 Boros Garrison|IMA
 1 Boros Guildgate|MM3
 1 Desert|TSB
-1 Dimir Aqueduct|MM2
+1 Dimir Aqueduct|IMA
 1 Dimir Guildgate|MM3
-1 Evolving Wilds|AKH
+1 Evolving Wilds|IMA
 1 Golgari Guildgate|MM3
-1 Golgari Rot Farm|MM2
+1 Golgari Rot Farm|IMA
 1 Gruul Guildgate|MM3
-1 Gruul Turf|MM2
+1 Gruul Turf|IMA
 1 Halimar Depths|WWK
 1 Haunted Fengraf|DKA
-1 Izzet Boilerworks|MM2
+1 Izzet Boilerworks|IMA
 1 Izzet Guildgate|MM3
 1 Khalni Garden|WWK
-1 Orzhov Basilica|MM2
+1 Orzhov Basilica|IMA
 1 Orzhov Guildgate|MM3
 1 Quicksand|CNS
-1 Rakdos Carnarium|MM2
+1 Rakdos Carnarium|IMA
 1 Rakdos Guildgate|MM3
 1 Rupture Spire|CFX
 1 Selesnya Guildgate|MM3
-1 Selesnya Sanctuary|MM2
-1 Simic Growth Chamber|MM2
+1 Selesnya Sanctuary|IMA
+1 Simic Growth Chamber|IMA
 1 Simic Guildgate|MM3
 1 Teetering Peaks|ZEN
 1 Terramorphic Expanse|MMA

@@ -39,10 +39,10 @@ Name=Cube Tutor 720
 1 Silverblade Paladin|AVR
 1 Soltari Champion|TPR
 1 Stonecloaker|PLC
-1 Emeria Angel|ZEN
+1 Emeria Angel|IMA
 1 Hero of Bladehold|MBS
 1 Ranger of Eos|MM3
-1 Restoration Angel|MM3
+1 Restoration Angel|IMA
 1 Sublime Archangel|M13
 1 Baneslayer Angel|M11
 1 Cloudgoat Ranger|MMA
@@ -54,7 +54,7 @@ Name=Cube Tutor 720
 1 Sun Titan|M12
 1 Yosei, the Morning Star|MMA
 1 Angel of Serenity|RTR
-1 Elesh Norn, Grand Cenobite|MM2
+1 Elesh Norn, Grand Cenobite|IMA
 1 Eternal Dragon|VMA
 1 Akroma, Angel of Wrath|TSB
 1 Ajani, Caller of the Pride|M14
@@ -68,8 +68,8 @@ Name=Cube Tutor 720
 1 Enlightened Tutor|EMA
 1 Mana Tithe|PLC
 1 Path to Exile|MM3
-1 Swords to Plowshares|EMA
-1 Disenchant|TPR
+1 Swords to Plowshares|IMA
+1 Disenchant|IMA
 1 Momentary Blink|MM3
 1 Balance|EMA
 1 Lingering Souls|MM3
@@ -122,9 +122,9 @@ Name=Cube Tutor 720
 1 Meloku the Clouded Mirror|MMA
 1 Mulldrifter|MM2
 1 Riftwing Cloudskate|MMA
-1 Teferi, Mage of Zhalfir|TSP
+1 Teferi, Mage of Zhalfir|IMA
 1 Aetherling|DGM
-1 Consecrated Sphinx|MBS
+1 Consecrated Sphinx|IMA
 1 Frost Titan|M12
 1 Keiga, the Tide Star|MMA
 1 Sphinx of Jwar Isle|ZEN
@@ -139,15 +139,15 @@ Name=Cube Tutor 720
 1 Brainstorm|EMA
 1 Force Spike|7ED
 1 Mystical Tutor|EMA
-1 Spell Pierce|MM3
+1 Spell Pierce|XLN
 1 Arcane Denial|ALL
 1 Counterspell|EMA
 1 Cyclonic Rift|MM3
 1 Daze|EMA
 1 Impulse|VIS
 1 Into the Roil|ZEN
-1 Mana Drain|VMA
-1 Mana Leak|MM2
+1 Mana Drain|IMA
+1 Mana Leak|IMA
 1 Memory Lapse|EMA
 1 Miscalculation|ULG
 1 Negate|AER
@@ -159,14 +159,14 @@ Name=Cube Tutor 720
 1 Frantic Search|VMA
 1 Psionic Blast|TSB
 1 Thirst for Knowledge|MMA
-1 Cryptic Command|MM2
+1 Cryptic Command|IMA
 1 Fact or Fiction|EMA
 1 Gifts Ungiven|MM3
 1 Force of Will|EMA
 1 Pact of Negation|MMA
-1 Condescend|5DN
-1 Repeal|MM2
-1 Ancestral Vision|TSP
+1 Condescend|IMA
+1 Repeal|IMA
+1 Ancestral Vision|IMA
 1 Ponder|M12
 1 Preordain|M11
 1 Time Walk|VMA
@@ -190,7 +190,7 @@ Name=Cube Tutor 720
 1 Vampire Lacerator|MM2
 1 Blood Artist|EMA
 1 Blood Scrivener|DGM
-1 Bloodghast|ZEN
+1 Bloodghast|IMA
 1 Dark Confidant|MM2
 1 Dauthi Horror|TPR
 1 Gatekeeper of Malakir|ZEN
@@ -205,9 +205,9 @@ Name=Cube Tutor 720
 1 Fleshbag Marauder|ORI
 1 Geralf's Messenger|DKA
 1 Hypnotic Specter|M10
-1 Phyrexian Rager|EMA
+1 Phyrexian Rager|IMA
 1 Vampire Nighthawk|MM3
-1 Abyssal Persecutor|WWK
+1 Abyssal Persecutor|IMA
 1 Bane of the Living|LGN
 1 Bloodline Keeper|ISD
 1 Braids, Cabal Minion|EMA
@@ -223,7 +223,7 @@ Name=Cube Tutor 720
 1 Ink-Eyes, Servant of Oni|BOK
 1 Kokusho, the Evening Star|MMA
 1 Massacre Wurm|MBS
-1 Sheoldred, Whispering One|NPH
+1 Sheoldred, Whispering One|IMA
 1 Griselbrand|MM3
 1 Tombstalker|MMA
 1 Liliana of the Veil|MM3
@@ -234,7 +234,7 @@ Name=Cube Tutor 720
 1 Tragic Slip|EMA
 1 Vampiric Tutor|EMA
 1 Diabolic Edict|TPR
-1 Doom Blade|M14
+1 Doom Blade|IMA
 1 Go for the Throat|MBS
 1 Ultimate Price|DTK
 1 Dismember|MM2
@@ -242,11 +242,11 @@ Name=Cube Tutor 720
 1 Slaughter Pact|MMA
 1 Makeshift Mannequin|LRW
 1 Snuff Out|MMQ
-1 Duress|EMA
+1 Duress|IMA
 1 Innocent Blood|EMA
 1 Inquisition of Kozilek|MM3
 1 Reanimate|TPR
-1 Thoughtseize|THS
+1 Thoughtseize|IMA
 1 Chainer's Edict|TOR
 1 Demonic Tutor|VMA
 1 Exhume|USG
@@ -269,7 +269,7 @@ Name=Cube Tutor 720
 1 Animate Dead|EMA
 1 Bitterblossom|MM2
 1 Necromancy|VIS
-1 Necropotence|EMA
+1 Necropotence|IMA
 1 Phyrexian Arena|9ED
 1 Recurring Nightmare|TPR
 1 Diabolic Servitude|USG
@@ -300,7 +300,7 @@ Name=Cube Tutor 720
 1 Chandra's Phoenix|M14
 1 Countryside Crusher|MMA
 1 Goblin Ruinblaster|ZEN
-1 Guttersnipe|RTR
+1 Guttersnipe|IMA
 1 Hell's Thunder|ALA
 1 Manic Vandal|M12
 1 Squee, Goblin Nabob|MMA
@@ -311,12 +311,12 @@ Name=Cube Tutor 720
 1 Hellrider|MM3
 1 Hero of Oxid Ridge|MBS
 1 Keldon Champion|EMA
-1 Kiki-Jiki, Mirror Breaker|MM2
+1 Kiki-Jiki, Mirror Breaker|IMA
 1 Siege-Gang Commander|EMA
-1 Thundermaw Hellkite|M13
+1 Thundermaw Hellkite|IMA
 1 Zealous Conscripts|MM3
 1 Inferno Titan|M12
-1 Bogardan Hellkite|M10
+1 Bogardan Hellkite|IMA
 1 Greater Gargadon|MMA
 1 Chandra, Pyromaster|M15
 1 Chandra, the Firebrand|M13
@@ -326,7 +326,7 @@ Name=Cube Tutor 720
 1 Lightning Bolt|MM2
 1 Ancient Grudge|MM3
 1 Incinerate|M12
-1 Lightning Strike|M15
+1 Lightning Strike|XLN
 1 Magma Jet|MM3
 1 Searing Blaze|WWK
 1 Searing Spear|M13
@@ -335,7 +335,7 @@ Name=Cube Tutor 720
 1 Chaos Warp|VMA
 1 Char|RAV
 1 Flame Javelin|SHM
-1 Staggershock|ROE
+1 Staggershock|IMA
 1 Fireblast|VMA
 1 Chain Lightning|EMA
 1 Faithless Looting|EMA
@@ -348,14 +348,14 @@ Name=Cube Tutor 720
 1 Flames of the Firebrand|M14
 1 Molten Rain|MM3
 1 Pillage|7ED
-1 Rift Bolt|MMA
+1 Rift Bolt|IMA
 1 Slagstorm|MBS
 1 Stone Rain|9ED
 1 Wheel of Fortune|VMA
 1 Banefire|MM2
 1 Devil's Play|ISD
 1 Earthquake|M10
-1 Fireball|M12
+1 Fireball|IMA
 1 Wildfire|MM2
 1 Bonfire of the Damned|MM3
 1 Sulfuric Vortex|EMA
@@ -373,7 +373,7 @@ Name=Cube Tutor 720
 1 Ulvenwald Tracker|MM3
 1 Wild Nacatl|ALA
 1 Fauna Shaman|M11
-1 Lotus Cobra|ZEN
+1 Lotus Cobra|IMA
 1 Mayor of Avabruck|ISD
 1 River Boa|ZEN
 1 Rofellos, Llanowar Emissary|VMA
@@ -383,7 +383,7 @@ Name=Cube Tutor 720
 1 Sylvan Caryatid|THS
 1 Tarmogoyf|MM3
 1 Wall of Blossoms|TPR
-1 Wall of Roots|TSB
+1 Wall of Roots|IMA
 1 Wild Mongrel|VMA
 1 Eternal Witness|MMA
 1 Ohran Viper|CSP
@@ -396,7 +396,7 @@ Name=Cube Tutor 720
 1 Chameleon Colossus|MOR
 1 Deadbridge Goliath|RTR
 1 Master of the Wild Hunt|M10
-1 Obstinate Baloth|M11
+1 Obstinate Baloth|IMA
 1 Oracle of Mul Daya|ZEN
 1 Polukranos, World Eater|THS
 1 Thrun, the Last Troll|MBS
@@ -410,8 +410,8 @@ Name=Cube Tutor 720
 1 Thragtusk|MM3
 1 Vorapede|DKA
 1 Wolfir Silverheart|AVR
-1 Primeval Titan|MM2
-1 Rampaging Baloths|ZEN
+1 Primeval Titan|IMA
+1 Rampaging Baloths|IMA
 1 Avenger of Zendikar|WWK
 1 Hornet Queen|M15
 1 Krosan Tusker|VMA
@@ -429,7 +429,7 @@ Name=Cube Tutor 720
 1 Beast Within|NPH
 1 Harrow|TPR
 1 Krosan Grip|MMA
-1 Channel|VMA
+1 Channel|IMA
 1 Explore|MM3
 1 Farseek|M13
 1 Life from the Loam|MMA
@@ -438,7 +438,7 @@ Name=Cube Tutor 720
 1 Call of the Herd|MM3
 1 Cultivate|M11
 1 Kodama's Reach|MMA
-1 Search for Tomorrow|MMA
+1 Search for Tomorrow|IMA
 1 Harmonize|MM3
 1 Natural Order|EMA
 1 Overrun|TPR
@@ -454,9 +454,9 @@ Name=Cube Tutor 720
 1 Geist of Saint Traft|ISD
 1 Grand Arbiter Augustin IV|MMA
 1 Venser, the Sojourner|SOM
-1 Azorius Charm|RTR
+1 Azorius Charm|IMA
 1 Sphinx's Revelation|MM3
-1 Supreme Verdict|RTR
+1 Supreme Verdict|IMA
 1 Detention Sphere|RTR
 1 Psychatog|VMA
 1 Shadowmage Infiltrator|MM2
@@ -486,7 +486,7 @@ Name=Cube Tutor 720
 1 Qasali Pridemage|ARB
 1 Voice of Resurgence|MM3
 1 Kitchen Finks|MMA
-1 Knight of the Reliquary|MMA
+1 Knight of the Reliquary|IMA
 1 Loxodon Smiter|RTR
 1 Armada Wurm|RTR
 1 Selesnya Charm|RTR
@@ -512,7 +512,7 @@ Name=Cube Tutor 720
 1 Trygon Predator|EMA
 1 Mystic Snake|MM2
 1 Prime Speaker Zegana|GTC
-1 Simic Sky Swallower|MM3
+1 Simic Sky Swallower|IMA
 1 Shardless Agent|EMA
 1 Simic Charm|GTC
 1 Niv-Mizzet, Dracogenius|RTR
@@ -520,14 +520,14 @@ Name=Cube Tutor 720
 1 Fire // Ice|APC
 1 Izzet Charm|MM3
 1 Turn // Burn|DGM
-1 Electrolyze|MM2
+1 Electrolyze|IMA
 1 Steam Augury|THS
 1 Prophetic Bolt|VMA
 1 Figure of Destiny|MMA
 1 Boros Reckoner|MM3
 1 Ajani Vengeant|ALA
 1 Boros Charm|GTC
-1 Lightning Helix|MMA
+1 Lightning Helix|IMA
 1 Assemble the Legion|GTC
 1 Sphinx of the Steel Wind|EMA
 1 Nicol Bolas, Planeswalker|M13
@@ -538,7 +538,7 @@ Name=Cube Tutor 720
 1 Perilous Myr|SOM
 1 Phyrexian Revoker|M15
 1 Spellskite|MM2
-1 Palladium Myr|SOM
+1 Palladium Myr|IMA
 1 Lodestone Golem|MM2
 1 Masticore|VMA
 1 Molten-Tail Masticore|SOM
@@ -562,7 +562,7 @@ Name=Cube Tutor 720
 1 Mox Pearl|VMA
 1 Mox Ruby|VMA
 1 Mox Sapphire|VMA
-1 Aether Vial|MMA
+1 Aether Vial|IMA
 1 Basilisk Collar|MM3
 1 Black Vise|4ED
 1 Bonesplitter|MMA
@@ -584,7 +584,7 @@ Name=Cube Tutor 720
 1 Isochron Scepter|EMA
 1 Izzet Signet|MM3
 1 Lightning Greaves|MRD
-1 Mind Stone|10E
+1 Mind Stone|IMA
 1 Mortarpod|MM2
 1 Orzhov Signet|MM3
 1 Rakdos Signet|MM3
@@ -605,7 +605,7 @@ Name=Cube Tutor 720
 1 Grafted Wargear|5DN
 1 Loxodon Warhammer|10E
 1 Mimic Vat|SOM
-1 Oblivion Stone|MRD
+1 Oblivion Stone|IMA
 1 Sword of Body and Mind|SOM
 1 Sword of Feast and Famine|MBS
 1 Sword of Fire and Ice|MMA
@@ -618,7 +618,7 @@ Name=Cube Tutor 720
 1 Icy Manipulator|10E
 1 Nevinyrral's Disk|EMA
 1 Smokestack|VMA
-1 Thran Dynamo|UDS
+1 Thran Dynamo|IMA
 1 Batterskull|NPH
 1 Engineered Explosives|MMA
 1 Gilded Lotus|M13
@@ -626,43 +626,43 @@ Name=Cube Tutor 720
 1 Mindslaver|SOM
 1 All Is Dust|MM2
 1 Academy Ruins|MMA
-1 Ancient Tomb|EXP
+1 Ancient Tomb|VMA
 1 Arcane Sanctum|MM3
 1 Arid Mesa|MM3
-1 Azorius Chancery|MM2
+1 Azorius Chancery|IMA
 1 Badlands|VMA
 1 Battlefield Forge|ORI
 1 Bayou|VMA
-1 Blood Crypt|EXP
-1 Bloodstained Mire|EXP
-1 Boros Garrison|MM2
-1 Breeding Pool|EXP
-1 Cascade Bluffs|EXP
+1 Blood Crypt|RTR
+1 Bloodstained Mire|KTK
+1 Boros Garrison|IMA
+1 Breeding Pool|GTC
+1 Cascade Bluffs|EVE
 1 Caves of Koilos|ORI
 1 Celestial Colonnade|WWK
 1 City of Brass|MMA
 1 Clifftop Retreat|ISD
 1 Creeping Tar Pit|WWK
 1 Crumbling Necropolis|MM3
-1 Dimir Aqueduct|MM2
-1 Dragonskull Summit|M13
-1 Drowned Catacomb|M13
-1 Evolving Wilds|AKH
+1 Dimir Aqueduct|IMA
+1 Dragonskull Summit|XLN
+1 Drowned Catacomb|XLN
+1 Evolving Wilds|IMA
 1 Faerie Conclave|10E
-1 Fetid Heath|EXP
-1 Flooded Strand|EXP
+1 Fetid Heath|EVE
+1 Flooded Strand|KTK
 1 Gaea's Cradle|USG
 1 Gavony Township|ISD
 1 Gemstone Mine|TSB
-1 Glacial Fortress|M13
-1 Godless Shrine|EXP
-1 Golgari Rot Farm|MM2
+1 Glacial Fortress|XLN
+1 Godless Shrine|GTC
+1 Golgari Rot Farm|IMA
 1 Grand Coliseum|VMA
-1 Gruul Turf|MM2
-1 Hallowed Fountain|EXP
+1 Gruul Turf|IMA
+1 Hallowed Fountain|RTR
 1 Hinterland Harbor|ISD
 1 Isolated Chapel|ISD
-1 Izzet Boilerworks|MM2
+1 Izzet Boilerworks|IMA
 1 Jungle Shrine|MM3
 1 Kessig Wolf Run|ISD
 1 Lavaclaw Reaches|WWK
@@ -673,39 +673,39 @@ Name=Cube Tutor 720
 1 Mishra's Factory|EMA
 1 Misty Rainforest|MM3
 1 Mutavault|M14
-1 Orzhov Basilica|MM2
-1 Overgrown Tomb|EXP
+1 Orzhov Basilica|IMA
+1 Overgrown Tomb|RTR
 1 Plateau|VMA
-1 Polluted Delta|EXP
+1 Polluted Delta|KTK
 1 Raging Ravine|WWK
-1 Rakdos Carnarium|MM2
+1 Rakdos Carnarium|IMA
 1 Reflecting Pool|CNS
 1 Rishadan Port|MMQ
-1 Rootbound Crag|M13
-1 Rugged Prairie|EXP
-1 Sacred Foundry|EXP
+1 Rootbound Crag|XLN
+1 Rugged Prairie|EVE
+1 Sacred Foundry|GTC
 1 Savage Lands|MM3
 1 Savannah|VMA
 1 Scalding Tarn|MM3
 1 Scrubland|VMA
 1 Seaside Citadel|MM3
-1 Selesnya Sanctuary|MM2
+1 Selesnya Sanctuary|IMA
 1 Shelldock Isle|LRW
-1 Simic Growth Chamber|MM2
-1 Steam Vents|EXP
+1 Simic Growth Chamber|IMA
+1 Steam Vents|RTR
 1 Stirring Wildwood|WWK
-1 Stomping Ground|EXP
-1 Strip Mine|EXP
+1 Stomping Ground|GTC
+1 Strip Mine|VMA
 1 Sulfur Falls|ISD
-1 Sunpetal Grove|M13
+1 Sunpetal Grove|XLN
 1 Taiga|VMA
-1 Tectonic Edge|EXP
-1 Temple Garden|EXP
+1 Tectonic Edge|WWK
+1 Temple Garden|RTR
 1 Terramorphic Expanse|MMA
 1 Treetop Village|10E
 1 Tropical Island|VMA
 1 Tundra|VMA
-1 Twilight Mire|EXP
+1 Twilight Mire|EVE
 1 Underground Sea|VMA
 1 Verdant Catacombs|MM3
 1 Vivid Crag|MMA
@@ -716,8 +716,8 @@ Name=Cube Tutor 720
 1 Volcanic Island|VMA
 1 Volrath's Stronghold|TPR
 1 Wasteland|EMA
-1 Watery Grave|EXP
-1 Windswept Heath|EXP
-1 Wooded Foothills|EXP
+1 Watery Grave|GTC
+1 Windswept Heath|KTK
+1 Wooded Foothills|KTK
 1 Woodland Cemetery|ISD
 1 Yavimaya Coast|ORI
