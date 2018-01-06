@@ -1,0 +1,6 @@
+Name:Vampire Revenant
+ManaCost:3 B
+Types:Creature Vampire Spirit
+K:Flying
+Oracle:Flying
+PT:3/1
