@@ -62,9 +62,13 @@ public class ExploreEffect extends SpellAbilityEffect {
                 }
             }
             if (!revealedLand) {
-                // currently the timestamp check only works for if the card itself explore,
-                // if something else can make it explore that need to be updated
-                if (game.getZoneOf(c).is(ZoneType.Battlefield) && card.getTimestamp() == c.getTimestamp()) {
+                // need to get newest game state to check
+                // if it is still on the battlefield
+                // and the timestamp didnt chamge
+                Card gamec = game.getCardState(c);
+                // if the card is not more in the game anymore
+                // this might still return true but its no problem
+                if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.getTimestamp() == c.getTimestamp()) {
                     c.addCounter(CounterType.P1P1, 1, card, true);
                 }
             }
