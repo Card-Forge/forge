@@ -1,0 +1,8 @@
+Name:Temple Altisaur
+ManaCost:4 W
+Types:Creature Dinosaur
+PT:3/4
+S:Mode$ PreventDamage | Target$ Permanent.Dinosaur+YouCtrl+Other | Amount$ X | References$ X | Description$ If a source would deal damage to another Dinosaur you control, prevent all but 1 of that damage.
+SVar:X:ReplaceCount$DamageAmount/Minus.1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/temple_altisaur.jpg
+Oracle:If a source would deal damage to another Dinosaur you control, prevent all but 1 of that damage.
