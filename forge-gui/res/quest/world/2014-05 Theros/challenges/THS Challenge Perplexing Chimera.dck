@@ -1,0 +1,20 @@
+[quest]
+id=THS Challenge: Perplexing Chimera
+OpponentName=The Chimeras
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=Nykthos, Shrine to Nyx|Spear of Heliod
+HumanExtras=
+[metadata]
+Name=THS Challenge: Perplexing Chimera
+Title=Perplexed!
+Difficulty=easy
+Description=Perplexing Chimera is perplexing.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+30 Island|THS|4
+30 Perplexing Chimera|BNG

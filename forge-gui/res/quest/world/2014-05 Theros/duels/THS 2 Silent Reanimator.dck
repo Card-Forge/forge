@@ -1,0 +1,25 @@
+[metadata]
+Name=THS 2 Silent Reanimator
+Title=Silent Reanimator
+Difficulty=medium
+Description=It serves a justice higher than the whims of the gods.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+2 Archetype of Endurance|BNG
+4 Ashen Rider|THS
+4 Commune with the Gods|THS
+4 Doomwake Giant|JOU
+1 Forest|THS|2
+4 Kruphix's Insight|JOU
+4 Mana Confluence|JOU
+4 Nyx Weaver|JOU
+1 Plains|THS|4
+4 Satyr Wayfinder|BNG
+4 Silent Sentinel|BNG
+6 Swamp|THS|2
+4 Temple of Malady|JOU
+4 Temple of Plenty|BNG
+4 Temple of Silence|THS
+2 Thoughtrender Lamia|JOU
+4 Whip of Erebos|THS

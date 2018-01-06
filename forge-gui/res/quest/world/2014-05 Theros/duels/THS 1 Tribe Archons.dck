@@ -1,0 +1,18 @@
+[metadata]
+Name=THS 1 Tribe: Archons
+Title=The Archons
+Difficulty=easy
+Description=Meletians know that the area that is now their city-state was once ruled by an archon--a hooded warlord who rode a great flying beast--called Agnomakhos. Agnomakhos ruled with an iron fist for centuries, apparently immortal, outliving the generations of leonin that he used as his soldiers and personal guard. Agnomakhos aggressively expanded his empire during his reign, spreading it as far as the forests to the north and the mountains to the east, imposing merciless order over the wilds wherever he went.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Ashen Rider|THS
+4 Bile Blight|BNG
+4 Celestial Archon|THS
+4 Feast of Dreams|JOU
+4 Ornitharch|BNG
+14 Plains|THS|3
+4 Read the Bones|THS
+4 Silence the Believers|JOU
+4 Silent Sentinel|BNG
+14 Swamp|THS|3

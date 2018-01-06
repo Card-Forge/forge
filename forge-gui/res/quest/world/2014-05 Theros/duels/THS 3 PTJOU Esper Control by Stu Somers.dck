@@ -1,0 +1,39 @@
+[metadata]
+Name=THS 3 PTJOU: Esper Control by Stu Somers
+Title=Esper Control
+Difficulty=hard
+Description=Block Constructed deck played at Pro Tour: Journey of the Gods by Stu Somers.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+3 Ashiok, Nightmare Weaver|THS
+3 Banishing Light|JOU
+3 Bile Blight|BNG
+1 Deicide|JOU
+2 Dissolve|THS
+3 Divination|BNG
+1 Drown in Sorrow|BNG
+4 Elspeth, Sun's Champion|THS
+4 Hero's Downfall|THS
+4 Island|THS|1
+1 Mana Confluence|JOU
+2 Plains|THS|1
+4 Prognostic Sphinx|THS
+1 Read the Bones|THS
+2 Silence the Believers|JOU
+8 Swamp|THS|1
+4 Temple of Deceit|THS
+3 Temple of Enlightenment|BNG
+4 Temple of Silence|THS
+3 Thoughtseize|THS
+[Sideboard]
+2 Annul|THS
+2 Dark Betrayal|THS
+3 Dissolve|THS
+2 Drown in Sorrow|BNG
+1 Fated Retribution|BNG
+1 Gainsay|THS
+1 Glare of Heresy|THS
+1 Pharika's Cure|THS
+1 Psychic Intrusion|THS
+1 Read the Bones|THS

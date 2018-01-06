@@ -1,0 +1,20 @@
+[metadata]
+Name=THS 1 Polis: Meletis: Oracles
+Title=The Oracles
+Difficulty=easy
+Description=Meletis is the polis of learning, magic, and progress. It is a city-state of progressive thinkers, pious thaumaturges, and wise oracles. The wise and ancient sphinx Medomai is not a consistent resident of Meletis. Instead, he appears a few times a year during moments of historical import, such as religious ceremonies, coronations, and the onset of wars. Medomai has been part of Meletis's history for many decades, seeming to possess cryptic knowledge of future events. His arrival is not necessarily seen as a good omen, as his predictions can be dire.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Aerie Worshippers|BNG
+4 Daxos of Meletis|THS
+4 Fate Foretold|THS
+4 Interpret the Signs|JOU
+15 Island|THS|3
+4 Medomai the Ageless|THS
+4 Omenspeaker|THS
+4 Oracle's Insight|BNG
+5 Plains|THS|2
+4 Plea for Guidance|BNG
+4 Rise of Eagles|JOU
+4 Temple of Enlightenment|BNG

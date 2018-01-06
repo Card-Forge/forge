@@ -1,0 +1,24 @@
+[metadata]
+Name=THS 3 PTJOU: Mono-Red Aggro by Mitchell Campbell
+Title=Mono-Red Aggro
+Difficulty=hard
+Description=Block Constructed deck played at Pro Tour: Journey of the Gods by Mitchell Campbell.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+4 Akroan Crusader|THS
+4 Dragon Mantle|THS
+4 Everflame Eidolon|BNG
+4 Firedrinker Satyr|THS
+4 Lightning Strike|THS
+4 Mogis's Warhound|JOU
+20 Mountain|THS|1
+4 Prophetic Flamespeaker|JOU
+4 Satyr Hoplite|JOU
+4 Searing Blood|BNG
+4 Titan's Strength|THS
+[Sideboard]
+4 Flame-Wreathed Phoenix|BNG
+3 Harness by Force|JOU
+4 Magma Spray|JOU
+4 Satyr Nyx-Smith|BNG

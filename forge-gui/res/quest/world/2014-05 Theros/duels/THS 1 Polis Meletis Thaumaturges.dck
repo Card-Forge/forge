@@ -1,0 +1,18 @@
+[metadata]
+Name=THS 1 Polis: Meletis: Thaumaturges
+Title=Thaumaturges, the Mage-Elite
+Difficulty=easy
+Description=Weaving magic is a time-honored tradition in Meletis; magic is seen as one of the greatest arts an artisan can master. The most accomplished mages are known as thaumaturges ("wonder workers"). Many Meletian mages received training at the Dekatia, including many thaumaturges, but one is not truly considered a thaumaturge until one has received a reward or other positive omen from the gods. For example, a mage might be considered a thaumaturge when Heliod, god of the sun, grants her a spear of sunlight, or when she is granted a wild creative vision by Keranos, god of storms.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Aqueous Form|THS
+4 Archetype of Imagination|BNG
+4 Battlefield Thaumaturge|JOU
+4 Curse of the Swine|THS
+4 Evanescent Intellect|BNG
+4 Fated Infatuation|BNG
+24 Island|THS|3
+4 Meletis Astronomer|BNG
+4 Sage of Hours|JOU
+4 Stratus Walk|BNG

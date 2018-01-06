@@ -1,0 +1,20 @@
+[metadata]
+Name=THS 1 Wilderness: Pharagax Bridge
+Title=Pharagax Bridge
+Difficulty=easy
+Description=The Stratians defend this huge stone bridge with all their might against any who would enter Akros without the king's permission. Some claim that the massive chasm it spans leads to the Underworld, and that foul creatures emerge from its depths.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+[Main]
+4 Doomwake Giant|JOU
+4 Ember Swallower|THS
+4 Marshmist Titan|BNG
+14 Mountain|THS|3
+4 Nighthowler|THS
+4 Pharagax Giant|BNG
+4 Stoneshock Giant|THS
+10 Swamp|THS|3
+4 Two-Headed Cerberus|THS
+4 Underworld Cerberus|THS
+4 Wildfire Cerberus|JOU

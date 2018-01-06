@@ -1,0 +1,21 @@
+[quest]
+id=THS Challenge: Labyrinth Champion
+OpponentName=The Champions
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=Nykthos, Shrine to Nyx
+HumanExtras=
+[metadata]
+Name=THS Challenge: Labyrinth Champion
+Title=We Are the Champions
+Difficulty=easy
+Description="It used to be a lair. Now it's just a tunnel."
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+20 Dragon Mantle|THS
+20 Labyrinth Champion|THS
+20 Mountain|THS|3

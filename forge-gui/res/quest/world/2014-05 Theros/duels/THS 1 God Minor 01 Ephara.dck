@@ -1,0 +1,20 @@
+[metadata]
+Name=THS 1 God: Minor: 01 Ephara
+Title=Ephara, God of the Polis
+Difficulty=easy
+Description=Ephara is the patron god of the city-state of Meletis. She presides over all aspects of civilization, including city-building, learning, industry, architecture, and philosophy. She believes in establishing stability without crushing imagination, and she recognizes that mortals can create wonders when they work together. Even in the troubled times that shake Theros, she stands firmly on the side of the humans. Ephara's presence is believed to keep at bay the forces of the wild. Statues of her abound in Meletis, depicting her with a great urn from which pour enlightenment and prosperity.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Divine Verdict|THS
+4 Ephara's Enlightenment|BNG
+4 Ephara's Radiance|BNG
+4 Ephara's Warden|THS
+4 Ephara, God of the Polis|BNG
+4 Font of Vigor|JOU
+7 Island|THS|4
+4 Meletis Astronomer|BNG
+13 Plains|THS|2
+4 Sage of Hours|JOU
+4 Stonewise Fortifier|JOU
+4 Temple of Enlightenment|BNG

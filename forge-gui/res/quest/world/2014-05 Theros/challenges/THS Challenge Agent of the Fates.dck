@@ -1,0 +1,21 @@
+[quest]
+id=THS Challenge: Agent of the Fates
+OpponentName=The Agents
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Name=THS Challenge: Agent of the Fates
+Title=The Agents
+Difficulty=easy
+Description="Human beings are a disease, a cancer of this planet. You're a plague and we are the cure."\n-Agent Smith, The Matrix
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+15 Agent of the Fates|THS
+15 Scourgemark|THS
+30 Swamp|THS|1

@@ -1,0 +1,22 @@
+[quest]
+id=THS Final Challenge: The Gods
+OpponentName=The Gods
+AILife=100
+Repeat=true
+Persistent=true
+WinMessage=Congratulations!\n\nYou have completed the ultimate challenge in this quest and have proven that you are strong enough to defeat the deadliest of opponents.\n\nYou are free to continue playing this quest for as long as you desire or start a new one and try proving yourself yet again.
+Wins=20
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=Ephara, God of the Polis|Erebos, God of the Dead|Heliod, God of the Sun|Keranos, God of Storms|Mogis, God of Slaughter|Nykthos, Shrine to Nyx|Purphoros, God of the Forge|Xenagos, God of Revels
+[metadata]
+Name=THS Final Challenge: The Gods
+Title=Defeat the Gods
+Difficulty=very hard
+Description=Because defeating one god is not enough.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+100 Plains|THS|2
+
+

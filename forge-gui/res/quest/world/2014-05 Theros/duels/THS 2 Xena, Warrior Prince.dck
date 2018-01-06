@@ -1,0 +1,22 @@
+[metadata]
+Name=THS 2 Xena, Warrior Prince
+Title=Xena, Warrior Prince
+Difficulty=medium
+Description="In a time of ancient gods, warlords and kings, a land in turmoil cried out for a hero. He was Xena, a mighty prince forged in the heat of revel. The power...the passion...the danger. His courage will change the world."
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+1 Archetype of Aggression|BNG
+4 Boon Satyr|THS
+4 Fanatic of Xenagos|BNG
+8 Forest|THS|1
+4 Golden Hind|JOU
+4 Hunter's Prowess|BNG
+4 Mana Confluence|JOU
+8 Mountain|THS|1
+4 Nyxborn Wolf|BNG
+4 Ordeal of Purphoros|THS
+4 Prophetic Flamespeaker|JOU
+3 Satyr Rambler|THS
+4 Temple of Abandon|THS
+4 Xenagos, God of Revels|BNG

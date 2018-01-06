@@ -1,0 +1,28 @@
+[metadata]
+Name=THS 3 PTJOU: Mono-White Aggro by Darwin Kastle
+Title=Mono-White Aggro
+Difficulty=hard
+Description=Block Constructed deck played at Pro Tour: Journey of the Gods by Darwin Kastle, with minor omissions for the AI.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[main]
+2 Ajani's Presence|JOU
+2 Banishing Light|JOU
+1 Brimaz, King of Oreskos|BNG
+4 Eidolon of Countless Battles|BNG
+4 Favored Hoplite|THS
+4 Gods Willing|THS
+4 Hero of Iroas|BNG
+4 Hopeful Eidolon|THS
+1 Lagonna-Band Trailblazer|JOU
+4 Ordeal of Heliod|THS
+4 Phalanx Leader|THS
+20 Plains|THS|1
+[Sideboard]
+1 Banishing Light|JOU
+4 Deicide|JOU
+2 Glare of Heresy|THS
+1 Glimpse the Sun God|BNG
+2 Lagonna-Band Trailblazer|JOU
+3 Last Breath|THS
+2 Reprisal|JOU

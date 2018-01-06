@@ -1,0 +1,19 @@
+[metadata]
+Name=THS 1 Polis: Setessa: Amatrophon
+Title=The Amatrophon
+Difficulty=easy
+Description=The Amatrophon is a safe haven and training ground for a diverse range of animals. These creatures occupy an honored place in society. The Amatrophon encompasses a large region of forest and grassland at the edge of Setessa. There are extensive stables for horses and combat training grounds for warriors and animals alike. Karametra values animals as natural protectors. Pegasuses, wolves, and even lions are all trained to accompany warriors in combat. They also wander freely through the polis, serving as free-ranging guards.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Charging Badger|BNG
+4 Fleecemane Lion|THS
+11 Forest|THS|2
+4 Great Hart|BNG
+4 Nyx-Fleece Ram|JOU
+4 Nyxborn Wolf|BNG
+13 Plains|THS|3
+4 Setessan Griffin|THS
+4 Supply-Line Cranes|JOU
+4 Vulpine Goliath|THS
+4 Yoked Ox|THS

@@ -1,0 +1,21 @@
+[quest]
+id=THS Challenge: Mistcutter Hydra
+OpponentName=The Hydra
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=Ephara, God of the Polis
+HumanExtras=
+[metadata]
+Name=THS Challenge: Mistcutter Hydra
+Title=Face the Hydra
+Difficulty=medium
+Description="The wilds are a garden tended by divine hands."
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+20 Forest|THS|1
+20 Karametra's Acolyte|THS
+20 Mistcutter Hydra|THS

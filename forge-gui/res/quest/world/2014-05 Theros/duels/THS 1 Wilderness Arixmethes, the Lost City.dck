@@ -1,0 +1,17 @@
+[metadata]
+Name=THS 1 Wilderness: Arixmethes, the Lost City
+Title=Arixmethes, the Lost City
+Difficulty=easy
+Description=Obscure legends say that Arixmethes was a major polis that once existed on Theros, and that Heliod smote this coastal city with Khrusor and cast into the sea. In fact, Arixmethes is a massive kraken with the entire city built upon it.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Breaching Hippocamp|THS
+4 Crystalline Nautilus|JOU
+4 Godhunter Octopus|JOU
+28 Island|THS|4
+4 Kraken of the Straits|BNG
+4 Scourge of Fleets|JOU
+4 Sealock Monster|THS
+4 Shipbreaker Kraken|THS
+4 Tromokratis|BNG

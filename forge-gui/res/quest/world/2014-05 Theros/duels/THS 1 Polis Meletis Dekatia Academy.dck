@@ -1,0 +1,20 @@
+[metadata]
+Name=THS 1 Polis: Meletis: Dekatia Academy
+Title=The Dekatia Academy
+Difficulty=easy
+Description=The Dekatia is the legendary academy at Meletis. There are many centers of learning in Meletis, but the most elite academy for philosophers and mages is the Dekatia. After receiving basic education elsewhere, the wisest and most promising thinkers and mages spend ten arduous years training at the Dekatia, apprenticing to master priests, thaumaturges, and military heroes. Those who make it through their apprenticeship are considered some of the wisest and bravest heroes in the land.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Eidolon of Rhetoric|JOU
+4 Ephara's Radiance|BNG
+9 Island|THS|3
+4 Lost in a Labyrinth|THS
+4 Mnemonic Wall|THS
+11 Plains|THS|2
+4 Pull from the Deep|JOU
+4 Revoke Existence|BNG
+4 Spirit of the Labyrinth|BNG
+4 Temple of Enlightenment|BNG
+4 Traveler's Amulet|THS
+4 Traveling Philosopher|THS

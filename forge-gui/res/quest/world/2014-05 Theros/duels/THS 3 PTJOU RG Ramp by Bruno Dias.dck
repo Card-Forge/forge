@@ -1,0 +1,35 @@
+[metadata]
+Name=THS 3 PTJOU: RG Ramp by Bruno Dias
+Title=RG Ramp
+Difficulty=hard
+Description=Block Constructed deck played at Pro Tour: Journey of the Gods by Bruno Dias.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+2 Anger of the Gods|THS
+2 Arbor Colossus|THS
+4 Courser of Kruphix|BNG
+2 Destructive Revelry|THS
+7 Forest|THS|1
+2 Golden Hind|JOU
+3 Lightning Strike|THS
+3 Magma Jet|THS
+2 Magma Spray|JOU
+2 Mana Confluence|JOU
+7 Mountain|THS|1
+4 Polis Crusher|THS
+4 Stormbreath Dragon|THS
+4 Sylvan Caryatid|THS
+4 Temple of Abandon|THS
+2 Temple of Plenty|BNG
+2 Temple of Triumph|THS
+4 Xenagos, the Reveler|THS
+[Sideboard]
+2 Ajani, Mentor of Heroes|JOU
+2 Anger of the Gods|THS
+1 Banishing Light|JOU
+2 Destructive Revelry|THS
+1 Harness by Force|JOU
+1 Magma Spray|JOU
+3 Pyxis of Pandemonium|THS
+3 Reprisal|JOU

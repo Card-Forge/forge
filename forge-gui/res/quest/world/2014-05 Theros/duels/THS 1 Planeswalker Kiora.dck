@@ -1,0 +1,19 @@
+[metadata]
+Name=THS 1 Planeswalker: Kiora
+Title=Kiora, the Crashing Wave
+Difficulty=easy
+Description=The merfolk Kiora is a native of Zendikar. Her home has been ravaged by the Eldrazi swarm, and she believes that only by summoning the fierce krakens, serpents, and other terrors of the deep can she defeat the titans who now rule Zendikar. Kiora has come to Theros in search of the immense sea creatures that dwell here. Shortly after she arrived, she raised up an enormous wave to call to the ocean beasts. The wave smashed against the shore near Meletis and caused considerable damage. Some tritons believe that Kiora is an avatar or herald of Thassa, god of the sea.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Floodtide Serpent|BNG
+8 Forest|THS|3
+4 Godhunter Octopus|JOU
+16 Island|THS|4
+4 Kiora's Dismissal|JOU
+4 Kiora's Follower|BNG
+4 Kiora, the Crashing Wave|BNG
+4 Scourge of Fleets|JOU
+4 Shipbreaker Kraken|THS
+4 Tromokratis|BNG
+4 Whelming Wave|BNG

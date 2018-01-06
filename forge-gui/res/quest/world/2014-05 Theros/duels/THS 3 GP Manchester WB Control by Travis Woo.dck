@@ -1,0 +1,32 @@
+[metadata]
+Name=THS 3 GP Manchester: WB Control by Travis Woo
+Title=WB Control
+Difficulty=hard
+Description=Block Constructed deck played by Travis Woo at GP Manchester, with minor adjustments.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+2 Ashen Rider|THS
+2 Banishing Light|JOU
+3 Brimaz, King of Oreskos|BNG
+4 Elspeth, Sun's Champion|THS
+3 Fated Retribution|BNG
+4 Gild|BNG
+4 Hero's Downfall|THS
+3 Nyx-Fleece Ram|JOU
+11 Plains|THS|1
+1 Quarry Colossus|JOU
+3 Read the Bones|THS
+12 Swamp|THS|1
+4 Temple of Silence|THS
+3 Thoughtseize|THS
+[Sideboard]
+2 Banishing Light|JOU
+4 Drown in Sorrow|BNG
+1 Extinguish All Hope|JOU
+2 Glare of Heresy|THS
+1 Heliod, God of the Sun|THS
+1 Nyx-Fleece Ram|JOU
+1 Psychic Intrusion|THS
+2 Silence the Believers|JOU
+1 Thoughtseize|THS

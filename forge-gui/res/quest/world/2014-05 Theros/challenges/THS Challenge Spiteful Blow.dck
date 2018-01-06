@@ -1,0 +1,20 @@
+[quest]
+id=THS Challenge: Spiteful Blow
+OpponentName=The Gods
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=Keranos, God of Storms
+HumanExtras=
+[metadata]
+Name=THS Challenge: Spiteful Blow
+Title=Come to Blows
+Difficulty=easy
+Description="Only a fool takes Phenax at his word. What do you expect from a god born of lies and betrayal?"\n-Verenes, priest of Iroas
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+30 Spiteful Blow|JOU
+30 Swamp|THS|2

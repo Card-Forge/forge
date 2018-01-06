@@ -1,0 +1,36 @@
+[metadata]
+Name=THS 3 GP Manchester: Jund Midrange by Juan Gonzalez
+Title=Jund Midrange
+Difficulty=hard
+Description=Block Constructed deck played by Juan Gonzalez at GP Manchester.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+4 Courser of Kruphix|BNG
+2 Destructive Revelry|THS
+6 Forest|THS|1
+4 Herald of Torment|BNG
+4 Hero's Downfall|THS
+3 Mana Confluence|JOU
+2 Mountain|THS|1
+3 Polis Crusher|THS
+4 Reaper of the Wilds|THS
+4 Stormbreath Dragon|THS
+2 Swamp|THS|1
+4 Sylvan Caryatid|THS
+4 Temple of Abandon|THS
+4 Temple of Malady|JOU
+3 Temple of Malice|BNG
+1 Unravel the AEther|BNG
+4 Voyaging Satyr|THS
+2 Xenagos, the Reveler|THS
+[Sideboard]
+3 Anger of the Gods|THS
+2 Destructive Revelry|THS
+2 Fated Conflagration|BNG
+1 Hammer of Purphoros|THS
+2 Hunt the Hunter|THS
+1 Pharika, God of Affliction|JOU
+1 Polis Crusher|THS
+1 Underworld Cerberus|THS
+2 Whip of Erebos|THS

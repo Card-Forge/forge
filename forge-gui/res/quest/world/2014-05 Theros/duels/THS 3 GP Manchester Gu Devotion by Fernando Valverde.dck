@@ -1,0 +1,33 @@
+[metadata]
+Name=THS 3 GP Manchester: Gu Devotion by Fernando Valverde
+Title=Gu Devotion
+Difficulty=hard
+Description=Block Constructed deck played by Fernando Valverde at GP Manchester.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+4 Arbor Colossus|THS
+4 Aspect of Hydra|BNG
+2 Bow of Nylea|THS
+4 Courser of Kruphix|BNG
+13 Forest|THS|1
+2 Hunter's Prowess|BNG
+4 Nykthos, Shrine to Nyx|THS
+2 Nylea's Disciple|THS
+2 Nylea, God of the Hunt|THS
+3 Polukranos, World Eater|THS
+2 Prophet of Kruphix|THS
+3 Reverent Hunter|THS
+3 Swordwise Centaur|BNG
+4 Sylvan Caryatid|THS
+4 Temple of Mystery|THS
+4 Voyaging Satyr|THS
+[Sideboard]
+2 Consign to Dust|JOU
+1 Hunt the Hunter|THS
+2 Hunter's Prowess|BNG
+3 Mistcutter Hydra|THS
+2 Nylea's Disciple|THS
+3 Setessan Tactics|JOU
+1 Swordwise Centaur|BNG
+1 Worst Fears|JOU

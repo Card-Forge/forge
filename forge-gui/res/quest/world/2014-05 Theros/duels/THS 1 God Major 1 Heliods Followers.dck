@@ -1,0 +1,18 @@
+[metadata]
+Name=THS 1 God: Major: 1 Heliod's Followers
+Title=The Evangels of Heliod
+Difficulty=easy
+Description=Heliod is the sun god, literally bringing the light of day to the world, so almost everyone on Theros pays at least tokenistic acknowledgment to him. Heliod's devoted worshippers are mainly humans and Laggona Band centaurs, who celebrate Heliod on the first clear-skied morning of every month. Temples to Heliod often feature stairs up to a rooftop courtyard, enabling sun worship. The largest holiday aligned with Heliod is the summer solstice, celebrated with three days of ceremonious feasting, weddings, and oaths of loyalty.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Armament of Nyx|JOU
+4 Chosen by Heliod|THS
+4 Dawn to Dusk|BNG
+4 Dictate of Heliod|JOU
+4 Evangel of Heliod|THS
+4 Glimpse the Sun God|BNG
+4 God-Favored General|BNG
+4 Great Hart|BNG
+4 Ordeal of Heliod|THS
+24 Plains|THS|1

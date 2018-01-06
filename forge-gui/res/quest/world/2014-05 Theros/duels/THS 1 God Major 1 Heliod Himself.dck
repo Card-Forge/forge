@@ -1,0 +1,18 @@
+[metadata]
+Name=THS 1 God: Major: 1 Heliod Himself
+Title=Heliod, God of the Sun
+Difficulty=easy
+Description=Heliod is the bringer of the day. With his spear, he causes the sun to rise at dawn and set at dusk. Heliod represents law, justice and the bonds of kinship. He presides over matters of family honor, questions of morality and virtue, speeches, marriages, and acts of protective bravery and personal sacrifice.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+4 Archetype of Courage|BNG
+4 Excoriate|BNG
+4 Fated Retribution|BNG
+4 Heliod's Emissary|THS
+4 Heliod, God of the Sun|THS
+4 Observant Alseid|THS
+4 Oppressive Rays|JOU
+24 Plains|THS|1
+4 Ray of Dissolution|THS
+4 Spear of Heliod|THS

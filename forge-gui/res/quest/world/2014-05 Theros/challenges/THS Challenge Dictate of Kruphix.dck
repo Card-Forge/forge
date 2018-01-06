@@ -1,0 +1,20 @@
+[quest]
+id=THS Challenge: Dictate of Kruphix
+OpponentName=Kruphix
+AILife=100
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Name=THS Challenge: Dictate of Kruphix
+Title=The Dictate of Kruphix
+Difficulty=medium
+Description="Knowledge is cruel. It will break your heart and test your allegiances. Are you certain you want this curse?"
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+60 Dictate of Kruphix|JOU
+40 Island|THS|1

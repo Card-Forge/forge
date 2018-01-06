@@ -1,0 +1,31 @@
+[metadata]
+Name=THS 3 PTJOU: UW Control by Luis Gutierrez
+Title=UW Control
+Difficulty=hard
+Description=Block Constructed deck played at Pro Tour: Journey of the Gods by Luis Gutierrez.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+4 Banishing Light|JOU
+4 Brimaz, King of Oreskos|BNG
+2 Deicide|JOU
+4 Dissolve|THS
+4 Elspeth, Sun's Champion|THS
+2 Fated Retribution|BNG
+4 Font of Fortunes|JOU
+10 Island|THS|1
+4 Last Breath|THS
+2 Nullify|BNG
+10 Plains|THS|1
+4 Prognostic Sphinx|THS
+1 Temple of Deceit|THS
+4 Temple of Enlightenment|BNG
+1 Temple of Silence|THS
+[Sideboard]
+2 Aegis of the Gods|JOU
+2 Deicide|JOU
+2 Gainsay|THS
+2 Glare of Heresy|THS
+4 Hopeful Eidolon|THS
+2 Pin to the Earth|JOU
+1 Reprisal|JOU

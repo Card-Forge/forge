@@ -1,0 +1,18 @@
+[metadata]
+Name=THS 1 God: Major: 2 Thassa's Followers
+Title=The Hand of Thassa
+Difficulty=easy
+Description=Tritons and the humans of Meletis comprise most of Thassa's worshippers, as well as all who venture out to sea, whether for exploration, commerce, or war. Although tritons exalt her above all other gods, she shows no favoritism toward them, seeming equally impassive to all mortals. She is worshipped with offerings of fish and salt by the poor, offerings of pearls and nacre by the rich, and with murmured prayers and quiet contemplation by all.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+[Main]
+4 Gainsay|THS
+4 Griptide|THS
+24 Island|THS|4
+4 Kraken of the Straits|BNG
+4 Nyxborn Triton|BNG
+4 Ordeal of Thassa|THS
+4 Stymied Hopes|THS
+4 Thassa's Bounty|THS
+4 Thassa's Rebuff|BNG
+4 Triton Fortune Hunter|THS

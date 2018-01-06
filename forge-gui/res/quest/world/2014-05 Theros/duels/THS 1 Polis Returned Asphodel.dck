@@ -1,0 +1,19 @@
+[metadata]
+Name=THS 1 Polis: Returned: Asphodel
+Title=Asphodel
+Difficulty=easy
+Description=The necropolis of Asphodel, situated in a sprawling, inland, coastal marsh, is home to those Returned who have a deep nostalgia for things they can no longer remember. It is, for the most part, a dull place, although it maintains a guard and an order of mages for defense. Its citizens seek to be left alone, venturing out only when seized by fugues of emotion, or when resources are needed or desired (often for unrecalled reasons). Asphodel is symbolically aligned with Erebos in that its residents accept their fate.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Asphodel Wanderer|THS
+4 Forsaken Drifters|BNG
+4 Gild|BNG
+4 Gray Merchant of Asphodel|THS
+6 Island|THS|3
+4 March of the Returned|THS
+4 Returned Centaur|THS
+4 Returned Phalanx|THS
+4 Returned Reveler|JOU
+4 Siren of the Silent Song|BNG
+18 Swamp|THS|2

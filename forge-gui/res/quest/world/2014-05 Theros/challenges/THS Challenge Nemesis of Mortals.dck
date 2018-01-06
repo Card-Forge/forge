@@ -1,0 +1,21 @@
+[quest]
+id=THS Challenge: Nemesis of Mortals
+OpponentName=Nemeses
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Name=THS Challenge: Nemesis of Mortals
+Title=Nemeses
+Difficulty=easy
+Description="Do you know what "nemesis" means? A righteous infliction of retribution manifested by an appropriate agent."\n-Brick Top, Snatch
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+[Main]
+20 Forest|THS|2
+20 Nemesis of Mortals|THS
+20 Satyr Wayfinder|BNG

@@ -1,0 +1,31 @@
+[metadata]
+Name=THS 3 Block: WB Constellation by FTW1987
+Title=WB Constellation
+Difficulty=hard
+Description=Block Constructed deck by FTW1987.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+2 Athreos, God of Passage|JOU
+4 Banishing Light|JOU
+4 Brain Maggot|JOU
+2 Doomwake Giant|JOU
+2 Erebos, God of the Dead|THS
+3 Fate Unraveler|BNG
+4 Grim Guardian|JOU
+1 Heliod, God of the Sun|THS
+3 Hero's Downfall|THS
+3 Mana Confluence|JOU
+3 Nyx-Fleece Ram|JOU
+7 Plains|THS|1
+10 Swamp|THS|1
+4 Temple of Silence|THS
+4 Thoughtseize|THS
+4 Underworld Coinsmith|JOU
+[Sideboard]
+3 Aegis of the Gods|JOU
+4 Agent of Erebos|JOU
+2 Deicide|JOU
+1 Nyx-Fleece Ram|JOU
+3 Oppressive Rays|JOU
+2 Silence the Believers|JOU

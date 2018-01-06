@@ -1,0 +1,20 @@
+[quest]
+id=THS Challenge: Gray Merchant of Asphodel
+OpponentName=Gary
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=Nykthos, Shrine to Nyx
+HumanExtras=
+[metadata]
+Name=THS Challenge: Gray Merchant of Asphodel
+Title=Gary, Merchant of Asphodel
+Difficulty=hard
+Description="The pound of flesh which I demand of him\nIs dearly bought: 'tis mine, and I will have it."\n-Shylock, Shakespeare's The Merchant of Venice
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+30 Gray Merchant of Asphodel|THS
+30 Swamp|THS|2

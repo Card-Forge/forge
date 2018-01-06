@@ -1,0 +1,18 @@
+[metadata]
+Name=THS 1 God: Major: 3 Erebos's Followers
+Title=The Cult of Erebos
+Difficulty=easy
+Description=The god of the underworld is worshipped by three distinct sets of mortal beings. The first group is the smallest but most dangerous; they seek to bring about a confrontation between Heliod and his shadow. The second group is largest. Because the dead leave their earthly wealth behind, Erebos has become associated with that wealth, as well as with the abundance of (to him, pretty but valueless) gold in his realm. The final group is closest to Erebos's heart—those who have been cast out and who seek peace with their fate.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+[Main]
+4 Agent of Erebos|JOU
+4 Claim of Erebos|BNG
+4 Dictate of Erebos|JOU
+4 Lash of the Whip|THS
+4 Marshmist Titan|BNG
+4 Ordeal of Erebos|THS
+4 Pain Seer|BNG
+4 Read the Bones|THS
+4 Scourgemark|THS
+24 Swamp|THS|1

@@ -1,0 +1,20 @@
+[metadata]
+Name=THS 1 God: Minor: 10 Kruphix
+Title=Kruphix, God of Horizons
+Difficulty=easy
+Description=The most enigmatic of the gods, Kruphix has dominion over the potential, the distant, and the unseen. He governs navigation, mystery, and the cycles of time. Kruphix speaks rarely and counts few worshippers. He often takes no real form but appears only as a Nyx-filled space in the sky. Mortals say that Kruphix is the most ancient of the pantheon, the keeper of mysteries that no others are meant to learn. He knows the truth of the origins of Theros and its deities, and he understands the price that must be paid for the power to slay a god.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[Main]
+4 Agent of Horizons|THS
+4 Courser of Kruphix|BNG
+4 Dictate of Kruphix|JOU
+10 Forest|THS|3
+4 Horizon Chimera|THS
+10 Island|THS|1
+4 Kruphix's Insight|JOU
+4 Kruphix, God of Horizons|JOU
+4 Prophet of Kruphix|THS
+4 Sigiled Starfish|JOU
+4 Temple of Mystery|THS
+4 Voyage's End|THS

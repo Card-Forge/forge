@@ -1,0 +1,20 @@
+[quest]
+id=THS Challenge: Nyxborn Rollicker
+OpponentName=The Rollickers
+AILife=100
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:THS,BNG,JOU
+Credit Reward=120
+AIExtras=Nylea, God of the Hunt
+HumanExtras=Master of the Feast
+[metadata]
+Name=THS Challenge: Nyxborn Rollicker
+Title=The Rollickers
+Difficulty=easy
+Description="Every now and then I fall apart."\n-Bonnie Tyler, Total Eclipse of the Heart
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+20 Mountain|THS|4
+40 Nyxborn Rollicker|BNG

@@ -1,0 +1,34 @@
+[metadata]
+Name=THS 3 GP Manchester: Junk Constellation by Robert Ferguson
+Title=Junk Constellation
+Difficulty=hard
+Description=Block Constructed deck played by Robert Ferguson at GP Manchester.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+[main]
+3 Banishing Light|JOU
+4 Commune with the Gods|THS
+4 Courser of Kruphix|BNG
+4 Eidolon of Blossoms|JOU
+7 Forest|THS|1
+1 Hero's Downfall|THS
+3 Mana Confluence|JOU
+2 Nykthos, Shrine to Nyx|THS
+3 Nylea, God of the Hunt|THS
+3 Nyx Weaver|JOU
+1 Pharika, God of Affliction|JOU
+4 Satyr Wayfinder|BNG
+4 Strength from the Fallen|JOU
+2 Swamp|THS|1
+4 Sylvan Caryatid|THS
+4 Temple of Malady|JOU
+3 Temple of Plenty|BNG
+2 Temple of Silence|THS
+2 Whip of Erebos|THS
+[Sideboard]
+4 Arbor Colossus|THS
+2 Brain Maggot|JOU
+1 Doomwake Giant|JOU
+3 Feast of Dreams|JOU
+3 Reaper of the Wilds|THS
+2 Silence the Believers|JOU
