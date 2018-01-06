@@ -71,5 +71,5 @@ Conspiracy Take the Crown, 3/6/ORI, CN2
 Kaladesh, 3/6/KLD, KLD AER
 Modern Masters 2017, 3/6/M15, MM3
 Amonkhet, 3/6/AKH, AKH HOU
-Ixalan, 3/6/XLN, XLN
+Ixalan, 3/6/XLN, XLN RIX
 Iconic Masters, 3/6/XLN, IMA
