@@ -35,8 +35,9 @@ public class ExploreEffect extends SpellAbilityEffect {
         }
 
         String explrs = TextUtil.join(tgtNames, ",");
+        String explrVerb = tgtNames.size() > 1 ? " explore." : " explores.";
 
-        return (explrs.isEmpty() ? host.getName() : explrs) + " explores.";
+        return (explrs.isEmpty() ? host.getName() : explrs) + explrVerb;
     }
 
     /* (non-Javadoc)
