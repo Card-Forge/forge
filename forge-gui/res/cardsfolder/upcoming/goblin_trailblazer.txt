@@ -1,0 +1,6 @@
+Name:Goblin Trailblazer
+ManaCost:1 R
+Types:Creature Goblin Pirate
+K:Menace
+Oracle:Menace
+PT:2/1
