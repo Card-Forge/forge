@@ -1,0 +1,9 @@
+Name:Jungleborn Pioneer
+ManaCost:2 G
+Types:Creature Merfolk Scout
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 blue Merfolk creature token with hexproof.
+SVar:TrigToken:DB$Token | TokenImage$ u 1 1 merfolk XLN | TokenAmount$ 1 | TokenName$ Merfolk | TokenTypes$ Creature,Merfolk | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Hexproof
+DeckHas:Ability$Token
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jungleborn_pioneer.jpg
+Oracle:When Jungleborn Pioneer enters the battlefield, create a 1/1 blue Merfolk creature token with hexproof. (It can't be the target of spells or abilities your opponents control.)
