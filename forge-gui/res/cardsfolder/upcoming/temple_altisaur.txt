@@ -1,0 +1,8 @@
+Name:Temple Altisaur
+ManaCost:4 W
+Types:Creature Dinosaur
+PT:3/4
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Permanent.Dinosaur+YouCtrl+Other | ReplaceWith$ DmgMinus1 | Description$ If a source would deal damage to another Dinosaur you control, prevent all but 1 of that damage.
+SVar:DmgMinus1:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/temple_altisaur.jpg
+Oracle:If a source would deal damage to another Dinosaur you control, prevent all but 1 of that damage.
