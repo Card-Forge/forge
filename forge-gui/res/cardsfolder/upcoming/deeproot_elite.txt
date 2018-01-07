@@ -1,0 +1,10 @@
+Name:Deeproot Elite
+ManaCost:1 G
+Types:Creature Merfolk Warrior
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Merfolk.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another Merfolk enters the battlefield under your control, put a +1/+1 counter on target Merfolk you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Merfolk.YouCtrl | TgtPrompt$ Select target Merfolk | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Merfolk
+DeckHas:Ability$Counters
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deeproot_elite.jpg
+Oracle:Whenever another Merfolk enters the battlefield under your control, put a +1/+1 counter on target Merfolk you control.
