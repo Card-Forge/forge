@@ -5,7 +5,7 @@ T:Mode$ Attacks | ValidCard$ Creature | Execute$ CoinFlip | TriggerZones$ Battle
 SVar:CoinFlip:DB$ FlipACoin | WinSubAbility$ CreateWinEffect | LoseSubAbility$ CreateLossEffect
 # Winning Effect
 SVar:CreateWinEffect:DB$ Effect | Name$ Impulsive Maneuvers Win Effect | ReplacementEffects$ EventWinDamageDone | SVars$ DmgTwice,WinX,ExileEffect | References$ EventWinDamageDone,DmgTwice,WinX | ImprintCards$ TriggeredAttacker
-SVar:EventWinDamageDone:Event$ DamageDone | ValidSource$ Card.IsImprinted | ReplaceWith$ DmgTwice | Description$ The next time creature would deal combat damage this turn, it deals double that damage instead.
+SVar:EventWinDamageDone:Event$ DamageDone | ValidSource$ Card.IsImprinted | IsCombat$ True | ReplaceWith$ DmgTwice | Description$ The next time creature would deal combat damage this turn, it deals double that damage instead.
 SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ WinX | References$ WinX | SubAbility$ ExileEffect
 SVar:WinX:ReplaceCount$DamageAmount/Twice
 # Losing Effect
