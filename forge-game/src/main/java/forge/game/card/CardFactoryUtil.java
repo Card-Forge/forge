@@ -2087,6 +2087,20 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
 
             inst.addTrigger(trigger);
+        } else if (keyword.equals("Ascend")) {
+            // Ascend trigger only for Permanent
+            if (card.isPermanent()) {
+                final String trig = "Mode$ Always | TriggerZones$ Battlefield | Secondary$ True"
+                        + " | Static$ True | Blessing$ False | IsPresent$ Permanent.YouCtrl | PresentCompare$ GE10 "
+                        + " | TriggerDescription$ Ascend (" + inst.getReminderText() + ")";
+    
+                final String effect = "DB$ Ascend | Defined$ You";
+                
+                final Trigger trigger = TriggerHandler.parseTrigger(trig, card, intrinsic);
+                trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+    
+                inst.addTrigger(trigger);
+            }
         } else if (keyword.startsWith("Bushido")) {
             final String[] k = keyword.split(" ", 2);
             final String n = k[1];
