@@ -1,0 +1,7 @@
+Name:River Darter
+ManaCost:2 U
+Types:Creature Merfolk Warrior
+PT:2/3
+K:CantBeBlockedBy Creature.Dinosaur
+SVar:Picture:http://www.wizards.com/global/images/magic/general/river_darter.jpg
+Oracle:River Darter can't be blocked by Dinosaurs.
