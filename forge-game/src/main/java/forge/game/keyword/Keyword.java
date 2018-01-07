@@ -16,6 +16,7 @@ public enum Keyword {
     AFTERMATH(SimpleKeyword.class, false, "Cast this spell only from your graveyard. Then exile it."),
     AMPLIFY(KeywordWithAmountAndType.class, false, "As this creature enters the battlefield, put {%d:+1/+1 counter} on it for each %s card you reveal in your hand."),
     ANNIHILATOR(KeywordWithAmount.class, false, "Whenever this creature attacks, defending player sacrifices {%d:permanent}."),
+    ASCEND(SimpleKeyword.class, true, "If you control ten or more permanents, you get the city's blessing for the rest of the game."),
     AURA_SWAP(KeywordWithCost.class, false, "%s: You may exchange this Aura with an Aura card in your hand."),
     AWAKEN(KeywordWithCostAndAmount.class, false, "If you cast this spell for %s, also put {%d:+1/+1 counter} on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land."),
     BANDING(SimpleKeyword.class, true, "Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking."),
