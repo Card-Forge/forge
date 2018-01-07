@@ -31,14 +31,10 @@ public class ExploreEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
 
         List<Card> tgt = getTargetCards(sa);
-        List<String> tgtNames = Lists.newArrayList();
-        for (Card c : tgt) {
-            tgtNames.add(c.getName());
-        }
 
-        sb.append(Lang.joinHomogenous(tgtNames));
+        sb.append(Lang.joinHomogenous(tgt));
         sb.append(" ");
-        sb.append(tgtNames.size() > 1 ? "explore" : "explores");
+        sb.append(tgt.size() > 1 ? "explore" : "explores");
         sb.append(". ");
 
         return sb.toString();
