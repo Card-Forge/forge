@@ -24,6 +24,7 @@ public enum SpellApiToAi {
             .put(ApiType.Animate, AnimateAi.class)
             .put(ApiType.AnimateAll, AnimateAllAi.class)
             .put(ApiType.Attach, AttachAi.class)
+            .put(ApiType.Ascend, AlwaysPlayAi.class)
             .put(ApiType.Balance, BalanceAi.class)
             .put(ApiType.BecomeMonarch, AlwaysPlayAi.class)
             .put(ApiType.BecomesBlocked, BecomesBlockedAi.class)
