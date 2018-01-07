@@ -13,4 +13,4 @@ SVar:DBExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gonti_lord_of_luxury.jpg
-Oracle:Deathtouch\nWhen Gonti, Lord of Luxury enters the battlefield, look at the top four cards of target opponent's library, exile one of them face down, then put the rest on the bottom of that library in a random order. For as long as that card remains exiled, you may look at it, you may cast it, and you may spend mana as though it were mana of any type to that spell.
+Oracle:Deathtouch\nWhen Gonti, Lord of Luxury enters the battlefield, look at the top four cards of target opponent's library, exile one of them face down, then put the rest on the bottom of that library in a random order. You may look at and cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any type to cast that spell.
