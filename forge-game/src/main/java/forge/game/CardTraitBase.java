@@ -215,15 +215,33 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
         final Player hostController = this.getHostCard().getController();
         final Game game = hostController.getGame();
         
-        if ("True".equalsIgnoreCase(params.get("Metalcraft")) && !hostController.hasMetalcraft()) return false;
-        if ("True".equalsIgnoreCase(params.get("Delirium")) && !hostController.hasDelirium()) return false;
-        if ("True".equalsIgnoreCase(params.get("Threshold")) && !hostController.hasThreshold()) return false;
-        if ("True".equalsIgnoreCase(params.get("Hellbent")) && !hostController.hasHellbent()) return false;
-        if ("True".equalsIgnoreCase(params.get("Bloodthirst")) && !hostController.hasBloodthirst()) return false;
-        if ("True".equalsIgnoreCase(params.get("FatefulHour")) && hostController.getLife() > 5) return false;
-        if ("True".equalsIgnoreCase(params.get("Revolt")) && !hostController.hasRevolt()) return false;
-        if ("True".equalsIgnoreCase(params.get("Desert")) && !hostController.hasDesert()) return false;
-        if ("True".equalsIgnoreCase(params.get("Blessing")) && !hostController.hasBlessing()) return false;
+        if (params.containsKey("Metalcraft")) {
+            if ("True".equalsIgnoreCase(params.get("Metalcraft")) != hostController.hasMetalcraft()) return false;
+        }
+        if (params.containsKey("Delirium")) {
+            if ("True".equalsIgnoreCase(params.get("Delirium")) != hostController.hasDelirium()) return false;
+        }
+        if (params.containsKey("Threshold")) {
+            if ("True".equalsIgnoreCase(params.get("Threshold")) != hostController.hasThreshold()) return false;
+        }
+        if (params.containsKey("Hellbent")) {
+            if ("True".equalsIgnoreCase(params.get("Hellbent")) != hostController.hasHellbent()) return false;
+        }
+        if (params.containsKey("Bloodthirst")) {
+            if ("True".equalsIgnoreCase(params.get("Bloodthirst")) != hostController.hasBloodthirst()) return false;
+        }
+        if (params.containsKey("FatefulHour")) {
+            if ("True".equalsIgnoreCase(params.get("FatefulHour")) != (hostController.getLife() > 5)) return false;
+        }
+        if (params.containsKey("Revolt")) {
+            if ("True".equalsIgnoreCase(params.get("Revolt")) != hostController.hasRevolt()) return false;
+        }
+        if (params.containsKey("Desert")) {
+            if ("True".equalsIgnoreCase(params.get("Desert")) != hostController.hasDesert()) return false;
+        }
+        if (params.containsKey("Blessing")) {
+            if ("True".equalsIgnoreCase(params.get("Blessing")) != hostController.hasBlessing()) return false;
+        }
 
         if (params.containsKey("Presence")) {
             if (hostCard.getCastFrom() == null || hostCard.getCastSA() == null)
