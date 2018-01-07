@@ -12,6 +12,7 @@ import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 import forge.util.TextUtil;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class ExploreEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final Card host = sa.getHostCard();
+        final StringBuilder sb = new StringBuilder();
 
         List<Card> tgt = getTargetCards(sa);
         List<String> tgtNames = Lists.newArrayList();
@@ -34,10 +36,12 @@ public class ExploreEffect extends SpellAbilityEffect {
             tgtNames.add(c.getName());
         }
 
-        String explrs = TextUtil.join(tgtNames, ",");
-        String explrVerb = tgtNames.size() > 1 ? "explore." : "explores.";
+        sb.append(Lang.joinHomogenous(tgtNames));
+        sb.append(" ");
+        sb.append(tgtNames.size() > 1 ? "explore" : "explores");
+        sb.append(". ");
 
-        return TextUtil.concatWithSpace(explrs.isEmpty() ? host.getName() : explrs, explrVerb);
+        return sb.toString();
     }
 
     /* (non-Javadoc)
