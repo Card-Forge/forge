@@ -1,0 +1,10 @@
+Name:Blood Sun
+ManaCost:2 R
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+S:Mode$ Continuous | Affected$ Land | RemoveAllAbilities$ True | ExceptManaAbilities$ True | Description$ All lands lose all abilities except mana abilities.
+SVar:NonStackingEffect:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_sun.jpg
+Oracle:When Blood Sun enters the battlefield, draw a card.\nAll lands lose all abilities except mana abilities.
