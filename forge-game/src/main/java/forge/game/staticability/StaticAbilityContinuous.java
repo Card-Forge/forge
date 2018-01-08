@@ -125,6 +125,7 @@ public final class StaticAbilityContinuous {
         String[] addStatics = null;
         List<SpellAbility> addFullAbs = null;
         boolean removeAllAbilities = false;
+        boolean removeNonMana = false;
         boolean removeSuperTypes = false;
         boolean removeCardTypes = false;
         boolean removeSubTypes = false;
@@ -245,6 +246,9 @@ public final class StaticAbilityContinuous {
 
         if (layer == StaticAbilityLayer.ABILITIES1 && params.containsKey("RemoveAllAbilities")) {
             removeAllAbilities = true;
+            if (params.containsKey("ExceptManaAbilities")) {
+                removeNonMana = true;
+            }
         }
 
         if (layer == StaticAbilityLayer.ABILITIES2 && params.containsKey("AddAbility")) {
@@ -726,9 +730,15 @@ public final class StaticAbilityContinuous {
 
             // remove activated and static abilities
             if (removeAllAbilities) {
-                for (final SpellAbility ab : affectedCard.getSpellAbilities()) {
-                    ab.setTemporarilySuppressed(true);
-                }
+                if (removeNonMana) { // Blood Sun
+            	    for (final SpellAbility mana : affectedCard.getNonManaAbilities()) {
+            		    mana.setTemporarilySuppressed(true);
+                    }
+                } else {
+                    for (final SpellAbility ab : affectedCard.getSpellAbilities()) {
+                        ab.setTemporarilySuppressed(true);
+                    }
+            	}
                 for (final StaticAbility stA : affectedCard.getStaticAbilities()) {
                     stA.setTemporarilySuppressed(true);
                 }
