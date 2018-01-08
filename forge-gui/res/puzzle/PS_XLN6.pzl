@@ -1,0 +1,22 @@
+[metadata]
+Name:Possibility Storm - Ixalan #06
+URL:http://www.possibilitystorm.com/036-ixalan-season-puzzle6/
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Your opponent has activated Gideon of the Trials ultimate (emblem-granting) ability earlier in the game.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=20
+AILife=12
+humanhand=Fell Flagship; Fiery Cannonade; Wily Goblin; Arcane Adaptation; Deadeye Tracker;
+humanprecast=
+humangraveyard=Demon of Dark Schemes; Admiral Beckett Brass; Dreamcaller Siren;
+humanlibrary=
+humanbattlefield=Terror of the Fairgrounds; The Scarab God; Sanctum Seeker; Lightning-Rig Crew; Ifnir Deadlands; Ifnir Deadlands; Spirebluff Canal|Set:KLD; Spirebluff Canal|Set:KLD; Spirebluff Canal|Set:KLD; Spirebluff Canal|Set:KLD; Dragonskull Summit|Set:XLN; Dragonskull Summit|Set:XLN; Dragonskull Summit|Set:XLN; Dragonskull Summit|Set:XLN; 
+aibattlefield=Gideon of the Trials|Counters:LOYALTY=4; Bishop of Rebirth; Skymarch Bloodletter;
+aiprecast=Gideon of the Trials:3;Queen's Commission;
+aigraveyard=
+ailibrary=
+aiexile=
