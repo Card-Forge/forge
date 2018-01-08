@@ -17,5 +17,5 @@ Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ B | Amount$ 1 | SpellDescription$ Add {B} to your mana pool.
 A:AB$ GainLife | Cost$ T Sac<1/Creature> | LifeAmount$ X | References$ X | SpellDescription$ You gain life equal to the sacrificed creature's toughness.
 SVar:X:Sacrificed$CardToughness
-SVar:Picture:http://www.wizards.com/global/images/magic/general/itlimoc_cradle_of_the_sun.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/temple_of_aclazotz.jpg
 Oracle:(Transforms from Arguel's Blood Fast.)\n{T}: Add {B} to your mana pool.\n{T}, Sacrifice a creature: You gain life equal to the sacrificed creature's toughness.
