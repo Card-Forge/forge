@@ -1,0 +1,22 @@
+[metadata]
+Name:Possibility Storm - Ixalan #05
+URL:http://www.possibilitystorm.com/035-ixalan-season-puzzle-5/
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. You have 2 copies of Snare Thopter in your library and no other artifacts.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=20
+AILife=13
+humanhand=Aether Tradewinds; Inventors' Fair; Tezzeret the Schemer; Marionette Master; Fatal Push;
+humanprecast=
+humangraveyard=
+humanlibrary=Snare Thopter; Snare Thopter;
+humanbattlefield=Revel in Riches; Ruthless Knave; Dire Fleet Hoarder; Festering Mummy; Tezzeret, Master of Metal|Counters:LOYALTY=5; Drowned Catacomb|Set:XLN; Drowned Catacomb|Set:XLN; Drowned Catacomb|Set:XLN; Drowned Catacomb|Set:XLN; Island|Set:XLN; Island|Set:XLN; Island|Set:XLN; Island|Set:XLN; 
+aibattlefield=Solemnity; Crested Sunmare; Sacred Cat;
+aiprecast=Crested Sunmare:TrigToken;
+aigraveyard=
+ailibrary=
+aiexile=

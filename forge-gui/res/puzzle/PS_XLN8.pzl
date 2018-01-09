@@ -1,0 +1,22 @@
+[metadata]
+Name:Possibility Storm - Ixalan #08
+URL:http://www.possibilitystorm.com/038-ixalan-season-puzzle-8/
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn.
+[state]
+ActivePlayer=human
+ActivePhase=main1
+HumanLife=20
+AILife=10
+humanhand=Bloodcrazed Paladin; Pirate's Cutlass; Consign // Oblivion; Crocodile of the Crossing;
+humanprecast=
+humangraveyard=
+humanlibrary=
+humanbattlefield=Rhonas's Monument; Fell Flagship; Skyship Plunderer; Fathom Fleet Captain; Slither Blade; Drowned Catacomb|Set:XLN; Drowned Catacomb|Set:XLN; Drowned Catacomb|Set:XLN; Drowned Catacomb|Set:XLN; Botanical Sanctum|Set:KLD; Botanical Sanctum|Set:KLD; Botanical Sanctum|Set:KLD; 
+aibattlefield=Scrapper Champion|Counters:P1P1=2; Dauntless Aven; Vizier of Remedies;
+aiprecast=Overwhelming Splendor;
+aigraveyard=
+ailibrary=
+aiexile=
