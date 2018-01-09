@@ -2,7 +2,8 @@ Name:Profane Procession
 ManaCost:1 W B
 Types:Legendary Enchantment
 A:AB$ ChangeZone | Cost$ 3 W B | ValidTgts$ Creature | TgtPrompt$ Choose target creature. | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | SubAbility$ DBTransform | SpellDescription$ Exile target creature. Then if there are three or more cards exiled with CARDNAME, transform it.
-SVar:DBTransform:DB$ SetState | ConditionPresent$ Card.IsRemembered+ExiledWithSource | ConditionCompare$ GE3 | Defined$ Self | Mode$ Transform
+SVar:DBTransform:DB$ SetState | ConditionDefined$ Remembered | ConditionPresent$ Card.ExiledWithSource | ConditionCompare$ GE3 | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/profane_procession.jpg
 Oracle:{3}{W}{B}: Exile target creature. Then if there are three or more cards exiled with Profane Procession, transform it.
 
