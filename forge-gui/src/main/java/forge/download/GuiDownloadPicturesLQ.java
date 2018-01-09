@@ -22,6 +22,7 @@ import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.util.ImageUtil;
 
+import java.io.File;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -53,15 +54,16 @@ public class GuiDownloadPicturesLQ extends GuiDownloadService {
     }
 
     private static void addDLObject(final PaperCard c, final Map<String, String> downloads, final boolean backFace) {
-        String[] result = ImageUtil.getDownloadUrlAndDestination(ForgeConstants.CACHE_CARD_PICS_DIR, c, backFace);
-        if (result == null) {
-            return;
-        }
-        final String urlToDownload = result[0];
-        final String destPath = result[1];
+        final String destPath = ForgeConstants.CACHE_CARD_PICS_DIR + ImageUtil.getImageKey(c, backFace, false);
         if (downloads.containsKey(destPath)) {
             return;
         }
-        downloads.put(destPath, urlToDownload);
+
+        File destFile = new File(destPath);
+        if (destFile.exists()) {
+            return;
+        }
+
+        downloads.put(destPath, ForgeConstants.URL_PIC_DOWNLOAD + ImageUtil.getDownloadUrl(c, backFace));
     }
 }
