@@ -6,5 +6,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAltImages$ c_treasure2,c_treasure3,c_treasure4 | TokenAbilities$ ABMana | References$ ABMana
 SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wily_goblin.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dire_fleet_hoarder.jpg
 Oracle:When Dire Fleet Hoarder dies, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."

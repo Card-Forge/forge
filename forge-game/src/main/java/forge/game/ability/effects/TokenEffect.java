@@ -287,6 +287,22 @@ public class TokenEffect extends SpellAbilityEffect {
                     }
                 }
 
+                // Grant SVars
+                if (this.tokenSVars != null) {
+                    for (final String s : this.tokenSVars) {
+                        String actualSVar = AbilityUtils.getSVar(root, s);
+                        String name = s;
+                        if (actualSVar.startsWith("SVar")) {
+                            actualSVar = actualSVar.split("SVar:")[1];
+                            name = actualSVar.split(":")[0];
+                            actualSVar = actualSVar.split(":")[1];
+                        }
+                        for (final Card c : tokens) {
+                            c.setSVar(name, actualSVar);
+                        }
+                    }
+                }
+
                 // Grant abilities
                 if (this.tokenAbilities != null) {
                     for (final String s : this.tokenAbilities) {
@@ -309,22 +325,6 @@ public class TokenEffect extends SpellAbilityEffect {
                             final String ability = AbilityUtils.getSVar(root, parsedTrigger.getMapParams().get("Execute"));
                             parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(ability, c));
                             c.addTrigger(parsedTrigger);
-                        }
-                    }
-                }
-
-                // Grant SVars
-                if (this.tokenSVars != null) {
-                    for (final String s : this.tokenSVars) {
-                        String actualSVar = AbilityUtils.getSVar(root, s);
-                        String name = s;
-                        if (actualSVar.startsWith("SVar")) {
-                            actualSVar = actualSVar.split("SVar:")[1];
-                            name = actualSVar.split(":")[0];
-                            actualSVar = actualSVar.split(":")[1];
-                        }
-                        for (final Card c : tokens) {
-                            c.setSVar(name, actualSVar);
                         }
                     }
                 }
