@@ -1662,6 +1662,14 @@ public class CardFactoryUtil {
 
         }
 
+        if (string.startsWith("DifferentCMC")) {
+            final Set<Integer> diffCMC = new HashSet<>();
+            for (final Card card : paidList) {
+                diffCMC.add(card.getCMC());
+            }
+            return diffCMC.size();
+        }
+
         if (string.startsWith("SumCMC")) {
             int sumCMC = 0;
             for(Card c : paidList) {
