@@ -2,6 +2,8 @@ package forge.game.ability.effects;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
+import forge.GameCommand;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -22,6 +24,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(forge.card.spellability.SpellAbility)
      */
+    @SuppressWarnings("serial")
     @Override
     public void resolve(SpellAbility sa) {
         Card source = sa.getHostCard();
@@ -105,6 +108,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                 source.clearRemembered();
             }
             boolean optional = sa.hasParam("RepeatOptionalForEachPlayer");
+            boolean nextTurn = sa.hasParam("NextTurnForEachPlayer");
             if (sa.hasParam("StartingWithActivator")) {
                 int size = repeatPlayers.size();
                 Player activator = sa.getActivatingPlayer();
@@ -116,9 +120,20 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                 if (optional && !p.getController().confirmAction(repeat, null, sa.getParam("RepeatOptionalMessage"))) {
                     continue;
                 }
-                source.addRemembered(p);
-                AbilityUtils.resolve(repeat);
-                source.removeRemembered(p);
+                if (nextTurn) {
+                    game.getUntap().addUntil(p, new GameCommand() {
+                        @Override
+                        public void run() {
+                            source.addRemembered(p);
+                            AbilityUtils.resolve(repeat);
+                            source.removeRemembered(p);
+                        }
+                    });
+                } else {
+                    source.addRemembered(p);
+                    AbilityUtils.resolve(repeat);
+                    source.removeRemembered(p);
+                }
             }
         }
 
