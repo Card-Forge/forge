@@ -4776,6 +4776,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void setTimestamp(final long t) {
         timestamp = t;
     }
+    public boolean equalsWithTimestamp(Card c) {
+        return c == this && c.getTimestamp() == timestamp;
+    }
 
     /**
      * Assign a random foil finish depending on the card edition.

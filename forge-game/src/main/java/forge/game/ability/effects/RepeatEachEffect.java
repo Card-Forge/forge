@@ -28,11 +28,11 @@ public class RepeatEachEffect extends SpellAbilityEffect {
 
         AbilitySub repeat = sa.getAdditionalAbility("RepeatSubAbility");
 
-        if (repeat != null && !repeat.getHostCard().equals(source)) {
+        if (repeat != null && !repeat.getHostCard().equalsWithTimestamp(source)) {
             // TODO: for some reason, the host card of the original additional SA is set to the cloned card when
             // the ability is copied (e.g. Clone Legion + Swarm Intelligence). Couldn't figure out why this happens,
             // so this hack is necessary for now to work around this issue.
-            System.out.println("Warning: RepeatSubAbility had the wrong host set (potentially after cloning the root SA), attempting to correct...");
+            System.out.println("Warning: RepeatSubAbility had the wrong host set (potentially after cloning the root SA or changing zones), attempting to correct...");
             repeat.setHostCard(source);
         }
 
