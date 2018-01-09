@@ -209,6 +209,8 @@ public enum CounterType {
 
     POLYP("POLYP", 236, 185, 198),
 
+    PREY("PREY", 240, 0, 0),
+
     PUPA("PUPA", 0, 223, 203),
 
     P0P1("+0/+1", "+0/+1", 96, 226, 23),
