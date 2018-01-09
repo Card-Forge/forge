@@ -1666,7 +1666,7 @@ public class CardFactoryUtil {
             final Set<Integer> diffCMC = new HashSet<>();
             for (final Card card : paidList) {
                 diffCMC.add(card.getCMC());
-            }System.out.println(diffCMC);
+            }
             return diffCMC.size();
         }
 
