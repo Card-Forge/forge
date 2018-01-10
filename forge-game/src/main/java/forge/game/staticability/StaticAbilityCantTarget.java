@@ -57,7 +57,8 @@ public class StaticAbilityCantTarget {
             }
         }
 
-        if (params.containsKey("Spell") && !spellAbility.isSpell()) {
+        if (params.containsKey("ValidSA")
+                && !spellAbility.isValid(params.get("ValidSA").split(","), hostCard.getController(), hostCard, spellAbility)) {
             return false;
         }
 
