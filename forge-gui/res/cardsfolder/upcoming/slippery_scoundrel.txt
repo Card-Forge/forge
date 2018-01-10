@@ -1,4 +1,4 @@
-Name:Skymarcher Aspirant
+Name:Slippery Scoundrel
 ManaCost:2 U
 Types:Creature Human Pirate
 PT:2/2
