@@ -2084,8 +2084,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
                 }
                 sb.append("Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\r\n");
-            } else if (keyword.equals("Improvise")) {
-                sb.append(Keyword.IMPROVISE.getDescription()).append("\r\n");
             } else if (keyword.equals("Delve")) {
                 if (sb.toString().endsWith("\r\n\r\n")) {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
@@ -2107,7 +2105,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
                 }
                 sb.append("Remove CARDNAME from your deck before playing if you're not playing for ante.\r\n");
-            } else if (keyword.equals("Retrace") || keyword.equals("Changeling")) {
+            } else if (keyword.equals("Ascend")  || keyword.equals("Changeling")
+                    || keyword.equals("Improvise") || keyword.equals("Retrace")) {
                 sb.append(keyword + " (" + inst.getReminderText() + ")");
             } else if (keyword.startsWith("Presence")) {
                 sb.append(inst.getReminderText());

@@ -2108,6 +2108,11 @@ public class CardFactoryUtil {
                 trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
     
                 inst.addTrigger(trigger);
+            } else {
+                SpellAbility sa = card.getFirstSpellAbility();
+                if (sa != null && sa.isSpell()) {
+                    sa.setBlessing(true);
+                }
             }
         } else if (keyword.startsWith("Bushido")) {
             final String[] k = keyword.split(" ", 2);
