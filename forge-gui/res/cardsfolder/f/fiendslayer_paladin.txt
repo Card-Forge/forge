@@ -4,6 +4,6 @@ Types:Creature Human Knight
 PT:2/2
 K:First Strike
 K:Lifelink
-S:Mode$ CantTarget | ValidCard$ Card.Self | ValidSource$ Card.Black,Card.Red | Spell$ True | Activator$ Opponent | Description$ CARDNAME can't be the target of black or red spells your opponents control.
+S:Mode$ CantTarget | ValidCard$ Card.Self | ValidSource$ Card.Black,Card.Red | ValidSA$ Spell | Activator$ Opponent | Description$ CARDNAME can't be the target of black or red spells your opponents control.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fiendslayer_paladin.jpg
 Oracle:First strike, lifelink\nFiendslayer Paladin can't be the target of black or red spells your opponents control.

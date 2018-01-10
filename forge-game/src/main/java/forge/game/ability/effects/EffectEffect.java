@@ -260,6 +260,16 @@ public class EffectEffect extends SpellAbilityEffect {
             else if (duration.equals("UntilEndOfCombat")) {
                 game.getEndOfCombat().addUntil(endEffect);
             }
+            else if (duration.equals("ThisTurnAndNextTurn")) {
+                game.getUntap().addAt(new GameCommand() {
+                    private static final long serialVersionUID = -5054153666503075717L;
+
+                    @Override
+                    public void run() {
+                        game.getEndOfTurn().addUntil(endEffect);
+                    }
+                });
+            }
         }
 
         if (imprintOnHost) {

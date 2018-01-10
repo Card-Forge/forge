@@ -39,6 +39,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementResult;
+import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
@@ -1121,7 +1122,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     @Override
     public final boolean canBeTargetedBy(final SpellAbility sa) {
         if (hasKeyword("Shroud") || (!equals(sa.getActivatingPlayer()) && hasKeyword("Hexproof"))
-                || hasProtectionFrom(sa.getHostCard())) {
+                || hasProtectionFrom(sa.getHostCard())
+                || (hasKeyword("You can't be the targets of spells or activated abilities") && (sa.isSpell() || (sa instanceof AbilityActivated)))) {
             return false;
         }
         return true;
