@@ -105,7 +105,7 @@ Booster=10 Common:!fromSheet("RIX Planeswalker Decks and Toolkit"), 3 Uncommon:!
 94 R Brass's Bounty
 95 C Brazen Freebooter
 96 C Buccaneer's Bravado
-97 Charging Tuskodon
+97 U Charging Tuskodon
 98 U Daring Buccaneer
 99 R Dire Fleet Daredevil
 100 R Etali, Primal Storm
