@@ -14,7 +14,6 @@ import forge.card.CardStateName;
 import forge.card.ICardFace;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
-import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;

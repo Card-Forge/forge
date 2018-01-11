@@ -34,7 +34,6 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardFactory;
 import forge.game.combat.Combat;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.event.GameEventTokenCreated;
