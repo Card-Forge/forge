@@ -5130,7 +5130,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             if(!kw.startsWith("CantEquip")) {
                 continue;
             }
-            final String[] k = kw.split(":");
+            final String[] k = kw.split(" ");
             final String[] restrictions = k[1].split(",");
             if (isValid(restrictions, equip.getController(), equip, null)) {
                 return false;
