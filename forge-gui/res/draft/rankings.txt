@@ -1,6 +1,6 @@
 //Rank|Name|Rarity|Set
 #1|Tetzimoc, Primal Death|R|RIX
-#2|Azor, The Lawbringer|M|RIX
+#2|Azor, the Lawbringer|M|RIX
 #3|Profane Procession|R|RIX
 #4|Rekindling Phoenix|M|RIX
 #5|Champion of Dusk|R|RIX
