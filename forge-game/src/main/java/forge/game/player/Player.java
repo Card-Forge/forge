@@ -2760,7 +2760,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             blessingEffect = new Card(-1, game);
             blessingEffect.setOwner(this);
             blessingEffect.setImageKey("t:blessing");
-            blessingEffect.setName("The City's blessing");
+            blessingEffect.setName("City's Blessing");
             blessingEffect.addType("Effect");
             
 
