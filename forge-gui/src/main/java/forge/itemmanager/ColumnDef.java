@@ -68,7 +68,7 @@ public enum ColumnDef {
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toCollectorPrefix(from.getKey()) + " " + toSortableName(from.getKey().getName());
+                    return toCollectorPrefix(from.getKey());
                 }
             },
             new Function<Entry<? extends InventoryItem, Integer>, Object>() {
@@ -520,7 +520,7 @@ public enum ColumnDef {
     //this is a multi-layer sort. coding it in layers to make it easier to manipulate.
     private static String toCollectorPrefix(final InventoryItem i) {
       //make sure it's a card. if not, pointless to proceed.
-      return i instanceof PaperCard ? toBasicLandsLast(i) : "";
+      return (i instanceof PaperCard ? ((IPaperCard) i).getCollectorIndex() + " ": "") + toSortableName(i.getName());
     }
     
     //lands after other cards
