@@ -541,7 +541,13 @@ public enum ColumnDef {
     //split cards last
     private static String toSplitLast(final InventoryItem i) {
       return ((IPaperCard) i).getRules().getSplitType() != CardSplitType.Split ?
-            "0" + toColorlessFirst(i): "1" + toSplitCardSort(i);
+            "0" + toConspiracyFirst(i): "1" + to SplitCardSort(i);
+    }
+    
+    //conspiracy first
+    private static String toConspiracyFirst(final InventoryItem i) {
+        return !(((IPaperCard) i).getRules().getType().hasType("Conspiracy")) ?
+            "0": "1" + toSplitCardSort(i);
     }
     
     //colorless first, then colored.
