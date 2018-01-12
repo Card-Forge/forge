@@ -541,7 +541,7 @@ public enum ColumnDef {
     //split cards last
     private static String toSplitLast(final InventoryItem i) {
       return ((IPaperCard) i).getRules().getSplitType() != CardSplitType.Split ?
-            "0" + toConspiracyFirst(i): "1" + to SplitCardSort(i);
+            "0" + toConspiracyFirst(i) : "1" + toSplitCardSort(i);
     }
     
     //conspiracy first
