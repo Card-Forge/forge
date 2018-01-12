@@ -547,7 +547,7 @@ public enum ColumnDef {
     //conspiracy first
     private static String toConspiracyFirst(final InventoryItem i) {
         return !(((IPaperCard) i).getRules().getType().hasType("Conspiracy")) ?
-            "0": "1" + toSplitCardSort(i);
+            "0": "1" + toColorlessFirst(i);
     }
     
     //colorless first, then colored.
