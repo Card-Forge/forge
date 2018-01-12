@@ -520,7 +520,7 @@ public enum ColumnDef {
     //this is a multi-layer sort. coding it in layers to make it easier to manipulate.
     private static String toCollectorPrefix(final InventoryItem i) {
       //make sure it's a card. if not, pointless to proceed.
-      return (i instanceof PaperCard ? ((IPaperCard) i).getCollectorIndex() + " ": "") + toSortableName(i.getName());
+      return (i instanceof PaperCard ? ((IPaperCard) i).getCollectorIndex() + " " : "") + toSortableName(i.getName());
     }
     
     //lands after other cards
@@ -535,7 +535,7 @@ public enum ColumnDef {
     //colorless artifacts last
     private static String toColorlessArtifactsLast(final InventoryItem i) {
      return !(((IPaperCard) i).getRules().getType().isArtifact() && toColor(i).isColorless())
-            ? "0" + toSplitLast(i): "1";
+            ? "0" + toSplitLast(i) : "1";
     }
     
     //split cards last
@@ -547,7 +547,7 @@ public enum ColumnDef {
     //conspiracy first
     private static String toConspiracyFirst(final InventoryItem i) {
         return !(((IPaperCard) i).getRules().getType().hasType("Conspiracy")) ?
-            "0": "1" + toColorlessFirst(i);
+            "0" : "1" + toColorlessFirst(i);
     }
     
     //colorless first, then colored.
@@ -559,7 +559,7 @@ public enum ColumnDef {
     //monocolor nonartifact nonland spells are first, then multicolored.
     private static String toMonocolorFirst(final InventoryItem i) {
       return toColor(i).isMonoColor() ?
-            "0" + toWubrgOrder(i): "1" + toGoldFirst(i);
+            "0" + toWubrgOrder(i) : "1" + toGoldFirst(i);
     }
     
     //gold cards first
