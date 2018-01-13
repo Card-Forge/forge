@@ -67,6 +67,15 @@ public class CardLists {
         });
     }
 
+    public static CardCollection filterLEPower(final Iterable<Card> in, final int lessthanPower) {
+        return CardLists.filter(in, new Predicate<Card>() {
+            @Override
+            public boolean apply(Card c) {
+                return c.getNetPower() <= lessthanPower;
+            }
+        });
+    }
+  
     public static final Comparator<Card> ToughnessComparator = new Comparator<Card>() {
         @Override
         public int compare(final Card a, final Card b) {
