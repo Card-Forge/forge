@@ -656,6 +656,10 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         final CardCollection list = CardLists.getValidCards(cost.sameZone ? player.getGame().getCardsIn(cost.getFrom()) :
                 player.getCardsIn(cost.getFrom()), cost.getType().split(";"), player, source, ability);
 
+        if (cost.payCostFromSource()) {
+            return source.getZone() == player.getZone(cost.from) && player.getController().confirmPayment(cost, "Put " + source.getName() + "to library?", ability) ? PaymentDecision.card(source) : null;
+        }
+
         if (cost.from == ZoneType.Hand) {
             final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, list, ability);
             inp.setMessage("Put %d card(s) from your " + cost.from);
