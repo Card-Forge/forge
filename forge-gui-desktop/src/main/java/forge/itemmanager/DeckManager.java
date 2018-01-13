@@ -5,11 +5,11 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.TreeSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
+import java.util.SortedSet;
 
 import javax.swing.JMenu;
 import javax.swing.JTable;
@@ -152,7 +152,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     protected void buildAddFilterMenu(final JMenu menu) {
         GuiUtils.addSeparator(menu); //separate from current search item
 
-        final Set<String> folders = new HashSet<String>();
+        final SortedSet<String> folders = new TreeSet<String>();
         for (final Entry<DeckProxy, Integer> deckEntry : getPool()) {
             final String path = deckEntry.getKey().getPath();
             if (StringUtils.isNotEmpty(path)) { //don't include root folder as option
