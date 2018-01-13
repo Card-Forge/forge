@@ -1,0 +1,10 @@
+Name:Slaughter the Strong
+ManaCost:1 W W
+Types:Sorcery
+A:SP$ RepeatEach | Cost$ 1 W W | RepeatPlayers$ Player | RepeatSubAbility$ ChooseCrtr | SubAbility$ SacAllOthers | SpellDescription$ Each player chooses any number of creatures he or she controls with total power 4 or less, then sacrifices all other creatures he or she controls.
+SVar:ChooseCrtr:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature.RememberedPlayerCtrl | WithTotalPower$ 4 | RememberChosen$ True | AILogic$ NegativePowerFirst
+SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Creature.IsNotRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/slaughter_the_strong.jpg
+Oracle:Each player chooses any number of creatures he or she controls with total power 4 or less, then sacrifices all other creatures he or she controls.

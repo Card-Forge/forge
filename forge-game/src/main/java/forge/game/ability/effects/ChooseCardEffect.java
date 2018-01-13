@@ -9,8 +9,10 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
@@ -87,6 +89,32 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                         }
                     }
                 }
+            } else if (sa.hasParam("WithTotalPower")){
+                final int totP = AbilityUtils.calculateAmount(host, sa.getParam("WithTotalPower"), sa);
+                CardCollection creature = new CardCollection(p.getCreaturesInPlay());
+                CardCollection chosenPool = new CardCollection();
+                int chosenP = 0;
+                while (!creature.isEmpty()) {
+                    if (Aggregates.min(creature, CardPredicates.Accessors.fnGetNetPower) + chosenP > totP) {
+                        break;
+                    }
+                    Card c = p.getController().chooseSingleEntityForEffect(creature, sa, 
+                            "Select a card\r\n(Selected:" + chosenPool + ")\r\n" + "(Total Power: " + chosenP + ")", true);
+                    if (c == null) {
+                        if (p.getController().confirmAction(sa, PlayerActionConfirmMode.OptionalChoose, "Cancel Choose?")) {
+                            break;
+                        }
+                    } else {
+                        chosenP += c.getNetPower();
+                        if (chosenP <= totP) {
+                            chosenPool.add(c);
+                            creature.remove(c);
+                        } else {
+                            break;
+                        }
+                    }
+                }
+                chosen.addAll(chosenPool);
             } else if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (sa.hasParam("AtRandom") && !choices.isEmpty()) {
                     Aggregates.random(choices, validAmount, chosen);
