@@ -91,27 +91,26 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 }
             } else if (sa.hasParam("WithTotalPower")){
                 final int totP = AbilityUtils.calculateAmount(host, sa.getParam("WithTotalPower"), sa);
-                CardCollection creature = new CardCollection(p.getCreaturesInPlay());
+                CardCollection negativeCreats = new CardCollection(CardLists.getValidCards(p.getCreaturesInPlay(), "Card.powerLT0", host.getController(), host));
+                int negativeNum = Aggregates.sum(negativeCreats, CardPredicates.Accessors.fnGetNetPower);
+                CardCollection creature = new CardCollection(CardLists.getValidCards(p.getCreaturesInPlay(), "Card.powerLE" + Integer.toString(totP - negativeNum), host.getController(), host));
                 CardCollection chosenPool = new CardCollection();
                 int chosenP = 0;
                 while (!creature.isEmpty()) {
-                    if (Aggregates.min(creature, CardPredicates.Accessors.fnGetNetPower) + chosenP > totP) {
-                        break;
-                    }
                     Card c = p.getController().chooseSingleEntityForEffect(creature, sa, 
-                            "Select a card\r\n(Selected:" + chosenPool + ")\r\n" + "(Total Power: " + chosenP + ")", true);
+                            "Select a creature with power less than or equal to " + Integer.toString(totP - chosenP - negativeNum)
+                            + "\r\n(Selected:" + chosenPool + ")\r\n" + "(Total Power: " + chosenP + ")", chosenP <= totP);
                     if (c == null) {
                         if (p.getController().confirmAction(sa, PlayerActionConfirmMode.OptionalChoose, "Cancel Choose?")) {
                             break;
                         }
                     } else {
                         chosenP += c.getNetPower();
-                        if (chosenP <= totP) {
-                            chosenPool.add(c);
-                            creature.remove(c);
-                        } else {
-                            break;
-                        }
+                        chosenPool.add(c);
+                        negativeCreats.remove(c);
+                        negativeNum = Aggregates.sum(negativeCreats, CardPredicates.Accessors.fnGetNetPower);
+                        creature = CardLists.filterLEPower(p.getCreaturesInPlay(), totP - chosenP - negativeNum);
+                        creature.removeAll(chosenPool);
                     }
                 }
                 chosen.addAll(chosenPool);
