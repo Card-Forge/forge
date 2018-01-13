@@ -73,15 +73,20 @@ public class CostPutCardToLib extends CostPartWithList {
         sb.append("Put ");
         
         final String desc = getTypeDescription() == null ? getType() : getTypeDescription();
-        sb.append(Cost.convertAmountTypeToWords(i, getAmount(), desc));
-
-        if (sameZone) {
-            sb.append(" from the same ");
+        if (this.payCostFromSource()) {
+            sb.append(this.getType());
         } else {
-            sb.append(" from your ");
+            sb.append(Cost.convertAmountTypeToWords(i, getAmount(), desc));
         }
 
-        sb.append(from).append(" on ");
+
+        if (sameZone) {
+            sb.append(" from the same ").append(from);
+        } else if (!this.payCostFromSource()) {
+            sb.append(" from your ").append(from);
+        }
+
+        sb.append(" on ");
         
         if (libPosition.equals("0")) {
             sb.append("top of");
@@ -91,6 +96,8 @@ public class CostPutCardToLib extends CostPartWithList {
         
         if (sameZone) {
             sb.append(" their owner's library");
+        } else if (this.payCostFromSource()) {
+            sb.append(" its owner's library");
         } else {
             sb.append(" your library");
         }
@@ -128,6 +135,10 @@ public class CostPutCardToLib extends CostPartWithList {
         }
         else {
             typeList = payer.getCardsIn(getFrom());
+        }
+
+        if (this.payCostFromSource()) {
+            return typeList.contains(source);
         }
 
         typeList = CardLists.getValidCards(typeList, getType().split(";"), payer, source, ability);

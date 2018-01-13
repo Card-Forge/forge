@@ -66,7 +66,7 @@ Booster=10 Common:!fromSheet("RIX Planeswalker Decks and Toolkit"), 3 Uncommon:!
 55 U Slippery Scoundrel
 56 C Soul of the Rapids
 57 C Spire Winder
-58 U Flood of Recollection
+58 U Sworn Guardian
 59 M Timestream Navigator
 60 R Warkite Marauder
 61 C Waterknot

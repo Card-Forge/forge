@@ -459,6 +459,12 @@ public class Cost {
             return new CostPutCardToLib(splitStr[0], splitStr[1], splitStr[2], description, ZoneType.Graveyard, true);
         }
 
+        if (parse.startsWith("PutCardToLibFromBattlefield<")) {
+            final String[] splitStr = abCostParse(parse, 4);
+            final String description = splitStr.length > 3 ? splitStr[3] : null;
+            return new CostPutCardToLib(splitStr[0], splitStr[1], splitStr[2], description, ZoneType.Battlefield);
+        }
+
         if (parse.startsWith("Exert<")) {
             final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
