@@ -638,8 +638,12 @@ public class Game {
 
     public int getPosition(Player player, Player startingPlayer) {
         int startPosition = ingamePlayers.indexOf(startingPlayer);
-        int position = (ingamePlayers.indexOf(player) + startPosition) % ingamePlayers.size() + 1;
-        return position;
+        int myPosition = ingamePlayers.indexOf(player);
+        if (startPosition > myPosition) {
+            myPosition += ingamePlayers.size();
+        }
+
+        return myPosition - startPosition + 1;
     }
 
     public void onPlayerLost(Player p) {
