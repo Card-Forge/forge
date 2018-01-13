@@ -373,6 +373,9 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostPutCardToLib cost) {
+        if (cost.payCostFromSource()) {
+            return PaymentDecision.card(source);
+        }
         Integer c = cost.convertAmount();
         final Game game = player.getGame();
         CardCollection chosen = new CardCollection();
