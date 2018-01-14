@@ -91,9 +91,9 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 }
             } else if (sa.hasParam("WithTotalPower")){
                 final int totP = AbilityUtils.calculateAmount(host, sa.getParam("WithTotalPower"), sa);
-                CardCollection negativeCreats = new CardCollection(CardLists.getValidCards(p.getCreaturesInPlay(), "Card.powerLT0", host.getController(), host));
+                CardCollection negativeCreats = CardLists.filterLEPower(p.getCreaturesInPlay(), -1);
                 int negativeNum = Aggregates.sum(negativeCreats, CardPredicates.Accessors.fnGetNetPower);
-                CardCollection creature = new CardCollection(CardLists.filterLEPower(p.getCreaturesInPlay(), totP - negativeNum));
+                CardCollection creature = CardLists.filterLEPower(p.getCreaturesInPlay(), totP - negativeNum);
                 CardCollection chosenPool = new CardCollection();
                 int chosenP = 0;
                 while (!creature.isEmpty()) {
