@@ -65,7 +65,7 @@ public class ImageFetcher {
                 }
                 final String editionMciCode = data.getEditions().getMciCodeByCode(paperCard.getEdition());
                 downloadUrls.add(String.format("https://img.scryfall.com/cards/normal/en/%s/%d%s.jpg", editionMciCode, cardNum, suffix));
-                downloadUrls.add(String.format("http://magiccards.info/scans/en/%s/%d%s.jpg", editionMciCode, cardNum, suffix));
+                downloadUrls.add(String.format("https://magiccards.info/scans/en/%s/%d%s.jpg", editionMciCode, cardNum, suffix));
             }
         } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
             if (tokenImages == null) {
