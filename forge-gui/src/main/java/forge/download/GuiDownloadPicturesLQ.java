@@ -23,6 +23,8 @@ import forge.properties.ForgeConstants;
 import forge.util.ImageUtil;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -36,15 +38,18 @@ public class GuiDownloadPicturesLQ extends GuiDownloadService {
     protected final Map<String, String> getNeededFiles() {
         final Map<String, String> downloads = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
+        File f = new File(ForgeConstants.CACHE_CARD_PICS_DIR);
+        ArrayList<String> existingImages = new ArrayList<String>(Arrays.asList(f.list()));
+
         for (final PaperCard c : FModel.getMagicDb().getCommonCards().getAllCards()) {
-            addDLObject(c, downloads, false);
+            addDLObject(c, downloads, false, existingImages);
             if (ImageUtil.hasBackFacePicture(c)) {
-                addDLObject(c, downloads, true);
+                addDLObject(c, downloads, true, existingImages);
             }
         }
 
         for (final PaperCard c : FModel.getMagicDb().getVariantCards().getAllCards()) {
-            addDLObject(c, downloads, false);
+            addDLObject(c, downloads, false, existingImages);
         }
 
         // Add missing tokens to the list of things to download.
@@ -53,14 +58,15 @@ public class GuiDownloadPicturesLQ extends GuiDownloadService {
         return downloads;
     }
 
-    private static void addDLObject(final PaperCard c, final Map<String, String> downloads, final boolean backFace) {
-        final String destPath = ForgeConstants.CACHE_CARD_PICS_DIR + ImageUtil.getImageKey(c, backFace, false);
-        if (downloads.containsKey(destPath)) {
+    private static void addDLObject(final PaperCard c, final Map<String, String> downloads, final boolean backFace, ArrayList<String> existingImages) {
+        final String imageKey = ImageUtil.getImageKey(c, backFace, false);
+        final String destPath = ForgeConstants.CACHE_CARD_PICS_DIR + imageKey;
+
+        if (existingImages.contains(imageKey)) {
             return;
         }
 
-        File destFile = new File(destPath);
-        if (destFile.exists()) {
+        if (downloads.containsKey(destPath)) {
             return;
         }
 
