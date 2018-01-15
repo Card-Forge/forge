@@ -9,8 +9,10 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
@@ -87,6 +89,31 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                         }
                     }
                 }
+            } else if (sa.hasParam("WithTotalPower")){
+                final int totP = AbilityUtils.calculateAmount(host, sa.getParam("WithTotalPower"), sa);
+                CardCollection negativeCreats = CardLists.filterLEPower(p.getCreaturesInPlay(), -1);
+                int negativeNum = Aggregates.sum(negativeCreats, CardPredicates.Accessors.fnGetNetPower);
+                CardCollection creature = CardLists.filterLEPower(p.getCreaturesInPlay(), totP - negativeNum);
+                CardCollection chosenPool = new CardCollection();
+                int chosenP = 0;
+                while (!creature.isEmpty()) {
+                    Card c = p.getController().chooseSingleEntityForEffect(creature, sa, 
+                            "Select creature(s) with total power less than or equal to " + Integer.toString(totP - chosenP - negativeNum)
+                            + "\r\n(Selected:" + chosenPool + ")\r\n" + "(Total Power: " + chosenP + ")", chosenP <= totP);
+                    if (c == null) {
+                        if (p.getController().confirmAction(sa, PlayerActionConfirmMode.OptionalChoose, "Cancel Choose?")) {
+                            break;
+                        }
+                    } else {
+                        chosenP += c.getNetPower();
+                        chosenPool.add(c);
+                        negativeCreats.remove(c);
+                        negativeNum = Aggregates.sum(negativeCreats, CardPredicates.Accessors.fnGetNetPower);
+                        creature = CardLists.filterLEPower(p.getCreaturesInPlay(), totP - chosenP - negativeNum);
+                        creature.removeAll(chosenPool);
+                    }
+                }
+                chosen.addAll(chosenPool);
             } else if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (sa.hasParam("AtRandom") && !choices.isEmpty()) {
                     Aggregates.random(choices, validAmount, chosen);

@@ -134,7 +134,7 @@ Lizard:Lizards
 Manticore:Manticores
 Masticore:Masticores
 Mercenary:Mercenaries
-Merfolk:Merfolks
+Merfolk:Merfolk
 Metathran:Metathrans
 Minion:Minions
 Minotaur:Minotaurs

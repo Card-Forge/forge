@@ -5,5 +5,7 @@ S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | AddKeyword$ Flash |
 A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return target creature to its owner's hand. Draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:X:Count$Valid Permanent.Merfolk+YouCtrl
+DeckHints:Type$Merfolk
+SVar:BuffedBy:Merfolk
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crashing_tide.jpg
 Oracle:Crashing Tide has flash as long as you control a Merfolk.\nReturn target creature to its owner's hand.\nDraw a card.

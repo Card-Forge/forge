@@ -218,30 +218,39 @@ public abstract class SpellAbilityEffect {
         boolean your = location.startsWith("Your");
         boolean combat = location.endsWith("Combat");
 
+        String desc = sa.hasParam("AtEOTDesc") ? sa.getParam("AtEOTDesc") : "";
+        
         if (your) {
             location = location.substring("Your".length());
         }
         if (combat) {
             location = location.substring(0, location.length() - "Combat".length());
         }
+        
+        if (desc.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(location).append(" ");
+            sb.append(Lang.joinHomogenous(crds));
+            sb.append(" at the ");
+            if (combat) {
+                sb.append("end of combat.");
+            } else {
+                sb.append("beginning of ");
+                sb.append(your ? "your" : "the");
+                sb.append(" next end step.");
+            }
+            desc = sb.toString();
+        }
 
         StringBuilder delTrig = new StringBuilder();
-            delTrig.append("Mode$ Phase | Phase$ ");
-            delTrig.append(combat ? "EndCombat "  : "End Of Turn ");
+        delTrig.append("Mode$ Phase | Phase$ ");
+        delTrig.append(combat ? "EndCombat "  : "End Of Turn ");
  
-            if (your) {
-                delTrig.append("| ValidPlayer$ You ");
-            }
-            delTrig.append("| TriggerDescription$ " + location + " ");
-            delTrig.append(Lang.joinHomogenous(crds));
-            delTrig.append(" at the ");
-            if (combat) {
-                delTrig.append("end of combat.");
-            } else {
-                delTrig.append("beginning of ");
-                delTrig.append(your ? "your" : "the");
-                delTrig.append(" next end step.");
-            }
+        if (your) {
+            delTrig.append("| ValidPlayer$ You ");
+        }
+        delTrig.append("| TriggerDescription$ " + desc);
+        
         final Trigger trig = TriggerHandler.parseTrigger(delTrig.toString(), sa.getHostCard(), intrinsic);
         for (final Card c : crds) {
             trig.addRemembered(c);
@@ -253,6 +262,10 @@ public abstract class SpellAbilityEffect {
             trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile";
         } else if (location.equals("Destroy")) {
             trigSA = "DB$ Destroy | Defined$ DelayTriggerRemembered";
+        }
+        if (sa.hasParam("AtEOTCondition")) {
+            String var = sa.getParam("AtEOTCondition");
+            trigSA += "| ConditionCheckSVar$ " + var + "| References$ " + var;
         }
         final SpellAbility newSa = AbilityFactory.getAbility(trigSA, sa.getHostCard());
         newSa.setIntrinsic(intrinsic);
