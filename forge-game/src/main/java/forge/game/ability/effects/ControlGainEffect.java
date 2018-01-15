@@ -213,6 +213,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
                     sb.append("  It can't be regenerated.");
                 }
                 ability.setStackDescription(sb.toString());
+                ability.setTrigger(true);
 
                 game.getStack().addSimultaneousStackEntry(ability);
             }
