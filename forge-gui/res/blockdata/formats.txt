@@ -1,6 +1,6 @@
 [Standard]
 Sets:KLD, AER, AKH, W17, HOU, XLN, RIX
-Banned: Smuggler's Copter; Reflector Mage; Aetherworks Marvel; Felidar Guardian
+Banned: Attune with Aether; Rogue Refiner; Rampaging Ferocidon; Ramunap Ruins; Smuggler's Copter; Reflector Mage; Aetherworks Marvel; Felidar Guardian
 
 [Extended]
 Sets:SOM, MBS, NPH, M12, ISD, DKA, AVR, M13, RTR, GTC, DGM, M14, THS, BNG, JOU, M15
