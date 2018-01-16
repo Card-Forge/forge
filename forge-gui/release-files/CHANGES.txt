@@ -1,3 +1,6 @@
+- Quest Mode: Foil planeswalkers in planeswalker decks -
+In Quest mode, planeswalkers provided in planeswalker decks will now be foil, as they are in their paper counterparts.
+
 - Download Pictures -
 Improvements to Download Pictures and Auto fetcher
 
