@@ -51,7 +51,11 @@ public class ImageFetcher {
             final String filename = ImageUtil.getImageKey(paperCard, backFace, true);
             destFile = new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + filename + ".jpg");
 
-            // First, try to fetch from magiccards.info, if we have the collector's number to generate a URL.
+            // First try to download the LQ Set URL, then fetch from scryfall/magiccards.info
+            StringBuilder setDownload = new StringBuilder(ForgeConstants.URL_PIC_DOWNLOAD);
+            setDownload.append(ImageUtil.getDownloadUrl(paperCard, backFace));
+            downloadUrls.add(setDownload.toString());
+
             final StaticData data = StaticData.instance();
             final int cardNum = data.getCommonCards().getCardCollectorNumber(paperCard.getName(), paperCard.getEdition());
             if (cardNum != -1)  {
@@ -60,13 +64,8 @@ public class ImageFetcher {
                     suffix = (backFace ? "b" : "a");
                 }
                 final String editionMciCode = data.getEditions().getMciCodeByCode(paperCard.getEdition());
-                downloadUrls.add(String.format("http://magiccards.info/scans/en/%s/%d%s.jpg", editionMciCode, cardNum, suffix));
-            }
-
-            // Otherwise, try the LQ image URL.
-            final String[] fallbackUrlParts = ImageUtil.getDownloadUrlAndDestination(ForgeConstants.CACHE_CARD_PICS_DIR, paperCard, backFace);
-            if (fallbackUrlParts != null) {
-                downloadUrls.add(fallbackUrlParts[0]);
+                downloadUrls.add(String.format("https://img.scryfall.com/cards/normal/en/%s/%d%s.jpg", editionMciCode, cardNum, suffix));
+                downloadUrls.add(String.format("https://magiccards.info/scans/en/%s/%d%s.jpg", editionMciCode, cardNum, suffix));
             }
         } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
             if (tokenImages == null) {

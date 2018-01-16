@@ -25,11 +25,14 @@ import forge.error.BugReporter;
 import forge.interfaces.IButton;
 import forge.interfaces.IProgressBar;
 import forge.interfaces.ITextField;
+import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
+import forge.util.HttpUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.*;
 import java.net.*;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -339,5 +342,28 @@ public abstract class GuiDownloadService implements Runnable {
                 list.put(f.getAbsolutePath(), nameUrlPair.getRight());
             }
         }
+    }
+
+    protected static HashSet<String> retrieveManifestDirectory() {
+        String manifestUrl = ForgeConstants.URL_PIC_DOWNLOAD;
+        HashSet<String> existingSets = new HashSet<>();
+
+        String response = HttpUtil.getURL(manifestUrl);
+
+        if (response == null)  return null;
+
+        String[] strings = response.split("<a href=\"");
+
+        for (String s : strings) {
+            int idx = s.indexOf('/');
+            if (!Character.isLetterOrDigit(s.charAt(0)) || idx > 4 || idx == -1) {
+                continue;
+            }
+
+            String set = s.substring(0, idx);
+            existingSets.add(set);
+        }
+
+        return existingSets;
     }
 }

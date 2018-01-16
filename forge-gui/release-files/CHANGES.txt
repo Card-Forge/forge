@@ -1,3 +1,6 @@
+- Download Pictures -
+Improvements to Download Pictures and Auto fetcher
+
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.
 

@@ -231,7 +231,11 @@ public final class CardRules implements ICardCharacteristics {
     // Downloadable image
     private String dlUrl;
     private String dlUrlOtherSide;
+
+    @Deprecated
     public String getPictureUrl(boolean backface ) { return backface ? dlUrlOtherSide : dlUrl; }
+
+    @Deprecated
     public void setDlUrls(String[] dlUrls) { this.dlUrl = dlUrls[0]; this.dlUrlOtherSide = dlUrls[1]; }
 
     public ColorSet getColorIdentity() {
