@@ -1,18 +1,3 @@
-- Rivals of Ixalan -
-Most cards for the upcoming set Rivals of Ixalan have been coded and are available for testing. The remaining cards should hopefully be coded within the next few weeks. Please note that this is the initial release of Rivals of Ixalan cards, so you may expect to see rule application issues and AI issues. You are welcome to report any problems you encounter with these new cards.
-
-- New Quest World: Theros -
-A new quest world by Xyx has been integrated into the game, based on the Theros block and featuring cards from Theros, Born of the Gods, and Journey into Nyx sets. To quote the author of the quest world: "Follow in the footsteps of Elspeth as she seeks to undo the chaos created after Xenagos discovers that there is more to the multiverse than Theros and its gods. Theros is the biggest quest world by far, featuring a massive 202 duels and 34 challenges. The first series of duels showcases the flavor of the Theros world, the second series highlights the various mechanics, and the final series pits you against decks that made the Pro Tour!"
-
-- Collector Number sort -
-There's a new column in the deck editor to allow sorting cards in the same order used for assigning collector numbers. The column currently appears blank, but that's because we've hidden the relatively cryptic values it uses to sort. (Perhaps in a future release we'll put some meaningful visuals in the column.) When sorted by collector number, you'll see colorless non-artifact spells at the top, basic lands at the bottom, and all the in-between sorting goodness.
-
-- Puzzle updates -
-There are several new puzzles to play in this version, including the entire Possibility Storm season for Ixalan and two brand new tutorial puzzles which should get you up to speed on how puzzles work and what you commonly need to think about.
-
-- Updated draft cubes -
-Draft cubes have been updated, and MTGO Vintage December 2017 cube has been added (ported over from XMage).
-
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.
 

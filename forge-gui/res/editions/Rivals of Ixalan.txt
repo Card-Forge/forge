@@ -6,7 +6,8 @@ Code2=RIX
 Type=Expansion
 MciCode=rix
 BoosterCovers=5
-Booster=10 Common:!fromSheet("RIX Planeswalker Decks and Toolkit"), 3 Uncommon:!fromSheet("RIX Planeswalker Decks and Toolkit"), 1 RareMythic:!fromSheet("RIX Planeswalker Decks and Toolkit"), 1 BasicLand RIX
+Booster=10 Common:!fromSheet("RIX Planeswalker Decks and Toolkit"), 3 Uncommon:!fromSheet("RIX Planeswalker Decks and Toolkit"), 1 RareMythic:!fromSheet("RIX Planeswalker Decks and Toolkit"), 1 BasicLand:fromSheet("RIX Basic Lands")
+TreatAsSmallSet=true
 
 [cards]
 1 U Baffling End

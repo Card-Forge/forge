@@ -12,7 +12,7 @@ Image=angrath_minotaur_pirate.jpg
 [Main]
 3 Angrath's Ambusher|RIX
 2 Angrath's Fury|RIX
-1 Angrath, Minotaur Pirate|RIX
+1 Angrath, Minotaur Pirate+|RIX
 4 Cinder Barrens|RIX
 1 Daring Buccaneer|RIX
 2 Dire Fleet Captain|XLN
@@ -25,11 +25,15 @@ Image=angrath_minotaur_pirate.jpg
 2 Headstrong Brute|XLN
 1 Impale|RIX
 2 Lightning Strike|XLN
-11 Mountain|RIX
+4 Mountain|RIX
+4 Mountain|XLN|3
+3 Mountain|XLN|4
 1 Repeating Barrage|XLN
 2 Storm Fleet Pyromancer|XLN
 3 Sure Strike|XLN
 4 Swab Goblin|RIX
 2 Swaggering Corsair|RIX
-9 Swamp|RIX
+3 Swamp|RIX
+3 Swamp|XLN|3
+3 Swamp|XLN|4
 1 Vanquisher's Banner|XLN
