@@ -7,4 +7,4 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Vigilance | CheckSVar$ X 
 SVar:X:Count$Valid Permanent.Dinosaur+YouCtrl+Other
 DeckHints:Type$Dinosaur
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sun_crested_pterodon.jpg
-Oracle:Sun-Crested Pterodon has vigilance as long as you control another Dinosaur.
+Oracle:Flying\nSun-Crested Pterodon has vigilance as long as you control another Dinosaur.
