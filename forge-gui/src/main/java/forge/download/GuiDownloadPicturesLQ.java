@@ -17,15 +17,20 @@
  */
 package forge.download;
 
+import forge.StaticData;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.util.ImageUtil;
 
-import java.util.Map;
-import java.util.TreeMap;
+import java.io.File;
+import java.util.*;
 
 public class GuiDownloadPicturesLQ extends GuiDownloadService {
+    final Map<String, String> downloads = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+    Set<String> existingSets;
+    ArrayList<String> existingImages;
+
     @Override
     public String getTitle() {
         return "Download LQ Card Pictures";
@@ -33,17 +38,19 @@ public class GuiDownloadPicturesLQ extends GuiDownloadService {
 
     @Override
     protected final Map<String, String> getNeededFiles() {
-        final Map<String, String> downloads = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        File f = new File(ForgeConstants.CACHE_CARD_PICS_DIR);
+        existingImages = new ArrayList<String>(Arrays.asList(f.list()));
+        existingSets = retrieveManifestDirectory();
 
         for (final PaperCard c : FModel.getMagicDb().getCommonCards().getAllCards()) {
-            addDLObject(c, downloads, false);
+            addDLObject(c, false);
             if (ImageUtil.hasBackFacePicture(c)) {
-                addDLObject(c, downloads, true);
+                addDLObject(c, true);
             }
         }
 
         for (final PaperCard c : FModel.getMagicDb().getVariantCards().getAllCards()) {
-            addDLObject(c, downloads, false);
+            addDLObject(c, false);
         }
 
         // Add missing tokens to the list of things to download.
@@ -52,16 +59,26 @@ public class GuiDownloadPicturesLQ extends GuiDownloadService {
         return downloads;
     }
 
-    private static void addDLObject(final PaperCard c, final Map<String, String> downloads, final boolean backFace) {
-        String[] result = ImageUtil.getDownloadUrlAndDestination(ForgeConstants.CACHE_CARD_PICS_DIR, c, backFace);
-        if (result == null) {
+    private void addDLObject(final PaperCard c, final boolean backFace) {
+        final String imageKey = ImageUtil.getImageKey(c, backFace, false);
+        final String destPath = ForgeConstants.CACHE_CARD_PICS_DIR + imageKey  + ".jpg";
+
+        if (existingImages.contains(imageKey + ".jpg")) {
             return;
         }
-        final String urlToDownload = result[0];
-        final String destPath = result[1];
+
         if (downloads.containsKey(destPath)) {
             return;
         }
-        downloads.put(destPath, urlToDownload);
+
+        final String setCode3 = c.getEdition();
+        final String setCode2 = StaticData.instance().getEditions().getCode2ByCode(setCode3);
+
+        if (!(existingSets.contains(setCode3) || existingSets.contains(setCode2))) {
+            // If set doesn't exist on server, don't try to download cards for it
+            return;
+        }
+
+        downloads.put(destPath, ForgeConstants.URL_PIC_DOWNLOAD + ImageUtil.getDownloadUrl(c, backFace));
     }
 }

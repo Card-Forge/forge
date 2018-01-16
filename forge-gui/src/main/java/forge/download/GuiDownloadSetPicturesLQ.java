@@ -23,7 +23,6 @@ import forge.card.CardEdition;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
-import forge.util.HttpUtil;
 import forge.util.ImageUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -86,28 +85,5 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloadService {
         if (!destFile.exists()) {
             downloads.put(destFile.getAbsolutePath(), ForgeConstants.URL_PIC_DOWNLOAD + urlPath);
         }
-    }
-
-    private HashSet<String> retrieveManifestDirectory() {
-        String manifestUrl = ForgeConstants.URL_PIC_DOWNLOAD;
-        HashSet<String> existingSets = new HashSet<>();
-
-        String response = HttpUtil.getURL(manifestUrl);
-
-        if (response == null)  return null;
-
-        String[] strings = response.split("<a href=\"");
-
-        for (String s : strings) {
-            int idx = s.indexOf('/');
-            if (!Character.isLetterOrDigit(s.charAt(0)) || idx > 4 || idx == -1) {
-                continue;
-            }
-
-            String set = s.substring(0, idx);
-            existingSets.add(set);
-        }
-
-        return existingSets;
     }
 }

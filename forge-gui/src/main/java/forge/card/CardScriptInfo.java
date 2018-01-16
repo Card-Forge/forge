@@ -68,14 +68,18 @@ public final class CardScriptInfo {
     public static CardScriptInfo getScriptFor(final String name) {
         CardScriptInfo script = allScripts.get(name);
         if (script == null) { //attempt to load script if not previously loaded
-            final String filename = name.toLowerCase().replace(' ', '_').replace('-', '_').replace("'", "").replace(",", "") + ".txt";
-            final File file = new File(ForgeConstants.CARD_DATA_DIR + filename.charAt(0) + File.separator + filename);
-            if (file.exists()) {
-                script = new CardScriptInfo(FileUtil.readFileToString(file), file);
-                allScripts.put(name, script);
+            final String filename = name.toLowerCase().replaceAll("[^-a-z0-9\\s]","").replaceAll("[-\\s]","_").replaceAll("__","_") + ".txt";
+            String[] folders = { String.valueOf(filename.charAt(0)), "upcoming"};
+            
+            for(String folder : folders){
+               final File file = new File(ForgeConstants.CARD_DATA_DIR + filename.charAt(0) + File.separator + filename);
+               if (file.exists()) {
+                   script = new CardScriptInfo(FileUtil.readFileToString(file), file);
+                   allScripts.put(name, script);
+                   break;
+               }
             }
         }
         return script;
     }
-
 }

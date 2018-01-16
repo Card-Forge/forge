@@ -118,37 +118,6 @@ public class ImageUtil {
     public static String getDownloadUrl(PaperCard cp, boolean backFace) {
         return getImageRelativePath(cp, backFace, true, true);
     }
-    
-    public static String[] getDownloadUrlAndDestination(String cacheCardPicsDir, PaperCard c, boolean backFace) {
-        final CardRules cardRules = c.getRules();
-        final String urls = cardRules.getPictureUrl(backFace);
-        if (StringUtils.isEmpty(urls)) {
-            return null;
-        }
-
-        String filename = ImageUtil.getImageKey(c, backFace, false);
-        final File destFile = new File(cacheCardPicsDir, filename + ".jpg");
-        if (destFile.exists()) {
-            return null;
-        }
-
-        filename = destFile.getAbsolutePath();
-
-        final String urlToDownload;
-        int urlIndex = 0;
-        int allUrlsLen = 1;
-        if (!urls.contains("\\")) {
-            urlToDownload = urls;
-        } else {
-            final String[] allUrls = urls.split("\\\\");
-            allUrlsLen = allUrls.length;
-            urlIndex = (c.getArtIndex()-1) % allUrlsLen;
-            urlToDownload = allUrls[urlIndex];
-        }
-        // System.out.println(c.getName() + "|" + c.getEdition() + " - " + c.getArtIndex() + " -> " + urlIndex + "/" + allUrlsLen + " === " + filename + " <<< " + urlToDownload);
-
-        return new String[] { urlToDownload, filename };
-    }
 
     public static String toMWSFilename(String in) {
         final StringBuilder out = new StringBuilder();
