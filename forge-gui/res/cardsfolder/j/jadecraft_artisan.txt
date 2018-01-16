@@ -7,4 +7,4 @@ SVar:TrigPump:DB$Pump | ValidTgts$ Creature | TgtPrompt$ Select target Creature 
 SVar:PlayMain1:TRUE
 DeckHints:Type$Merfolk
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jadecraft_artisan.jpg
-Oracle:Trample\nWhen Jadecraft Artisan enters the battlefield, target Creature gets +2/+2 until end of turn.
+Oracle:When Jadecraft Artisan enters the battlefield, target Creature gets +2/+2 until end of turn.
