@@ -188,21 +188,13 @@ public class CardProperty {
             Player p = property.endsWith("Ctrl") ? controller : card.getOwner();
             if (!source.hasRemembered()) {
                 final Card newCard = game.getCardState(source);
-                for (final Object o : newCard.getRemembered()) {
-                    if (o instanceof Player) {
-                        if (!p.equals(o)) {
-                            return false;
-                        }
-                    }
+                if (!newCard.isRemembered(p)) {
+                    return false;
                 }
             }
 
-            for (final Object o : source.getRemembered()) {
-                if (o instanceof Player) {
-                    if (!p.equals(o)) {
-                        return false;
-                    }
-                }
+            if (!source.isRemembered(p)) {
+                return false;
             }
         } else if (property.startsWith("nonRememberedPlayerCtrl")) {
             if (!source.hasRemembered()) {

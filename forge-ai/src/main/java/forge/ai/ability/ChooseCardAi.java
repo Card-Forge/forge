@@ -269,6 +269,10 @@ public class ChooseCardAi extends SpellAbilityAi {
 
             Card chosen = ComputerUtilCard.getBestCreatureAI(aiCreatures);
             return chosen;
+        } else if (logic.equals("OrzhovAdvokist")) {
+            if (ai.equals(sa.getActivatingPlayer())) {
+                choice = ComputerUtilCard.getBestAI(options);
+            } // TODO: improve ai
         } else {
             choice = ComputerUtilCard.getBestAI(options);
         }
