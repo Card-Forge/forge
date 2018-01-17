@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import forge.game.Game;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -38,18 +39,21 @@ public class RemoveFromCombatEffect extends SpellAbilityEffect {
         	final Combat combat = game.getPhaseHandler().getCombat();
             if (combat != null && (tgt == null || c.canBeTargetedBy(sa))) {
                 // Unblock creatures that were blocked only by this card (e.g. Ydwen Efreet)
-                if (sa.hasParam("UnblockCreaturesBlockedOnlyBySelf")) {
-                    CardCollection blockedBySelf = combat.getAttackersBlockedBy(sa.getHostCard());
-                    for (Card atk : blockedBySelf) {
-                        boolean blockedOnlyBySelf = true;
-                        for (Card blocker : combat.getBlockers(atk)) {
-                            if (!blocker.equals(sa.getHostCard())) {
-                                blockedOnlyBySelf = false;
-                                break;
+                if (sa.hasParam("UnblockCreaturesBlockedOnlyBy")) {
+                    CardCollection attackers = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("UnblockCreaturesBlockedOnlyBy"), sa);
+                    if (!attackers.isEmpty()) {
+                        CardCollection blockedByCard = combat.getAttackersBlockedBy(attackers.getFirst());
+                        for (Card atk : blockedByCard) {
+                            boolean blockedOnlyByCard = true;
+                            for (Card blocker : combat.getBlockers(atk)) {
+                                if (!blocker.equals(attackers.getFirst())) {
+                                    blockedOnlyByCard = false;
+                                    break;
+                                }
                             }
-                        }
-                        if (blockedOnlyBySelf) {
-                            combat.setBlocked(atk, false);
+                            if (blockedOnlyByCard) {
+                                combat.setBlocked(atk, false);
+                            }
                         }
                     }
                 }
