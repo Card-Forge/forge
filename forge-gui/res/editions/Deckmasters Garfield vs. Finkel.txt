@@ -1,0 +1,64 @@
+[metadata]
+Code=DKM
+Date=2001-12
+Name=Deckmasters: Garfield vs. Finkel
+MciCode=dm
+Type=Other
+
+[cards]
+1 U Abyssal Specter
+2 U Contagion
+3 C Dark Banishing
+4 C Dark Ritual
+5 C Foul Familiar
+6 C Lim-Dul's High Guard
+7 R Necropotence
+8 C Phantasmal Fiend
+9 C Soul Burn
+10 R Balduvian Horde
+11 U Death Spark
+12 U Goblin Mutant
+13 C Guerrilla Tactics
+14 C Incinerate
+15 R Jokulhaups
+16 C Lava Burst
+17 U Orcish Cannoneers
+18 U Pillage
+19 U Pyroclasm
+20 C Shatter
+21 C Storm Shaman
+22 C Balduvian Bears
+23 U Bounty of the Hunt
+24 U Elvish Bard
+25 C Folk of the Pines
+26 C Fyndhorn Elves
+27 C Giant Growth
+28 U Hurricane
+29 R Lhurgoyf
+30 C Woolly Spider
+31 C Yavimaya Ancients
+32 U Yavimaya Ants
+33 U Giant Trap Door Spider
+34 C Barbed Sextant
+35 R Elkin Bottle
+36 U Icy Manipulator
+37 C Phyrexian War Beast
+38 U Walking Wall
+39 R Karplusan Forest
+40 R Sulfurous Springs
+41 R Underground River
+42 L Swamp
+43 L Swamp
+44 L Swamp
+45 L Mountain
+46 L Mountain
+47 L Mountain
+48 L Forest
+49 L Forest
+50 L Forest
+51 C Lim-Dul's High Guard
+52 C Phantasmal Fiend
+53 C Guerrilla Tactics
+54 C Storm Shaman
+55 C Yavimaya Ancients
+56 C Phyrexian War Beast
