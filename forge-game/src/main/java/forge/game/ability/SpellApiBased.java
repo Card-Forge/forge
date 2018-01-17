@@ -54,14 +54,6 @@ public class SpellApiBased extends Spell {
      */
     @Override
     public void resolve() {
-        
-        if (isBlessing() && !getHostCard().isPermanent()) {
-            Player pl = this.getActivatingPlayer();
-            if (pl != null && pl.getZone(ZoneType.Battlefield).size() >= 10) {
-                pl.setBlessing(true);
-            }
-        }
-        
         effect.resolve(this);
         getActivatingPlayer().getAchievementTracker().onSpellResolve(this);
     }

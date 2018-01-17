@@ -1298,6 +1298,15 @@ public class AbilityUtils {
         if (sa == null) {
             return;
         }
+
+        // do blessing there before condition checks
+        if (sa.isSpell() && sa.isBlessing() && !sa.getHostCard().isPermanent()) {
+            Player pl = sa.getActivatingPlayer();
+            if (pl != null && pl.getZone(ZoneType.Battlefield).size() >= 10) {
+                pl.setBlessing(true);
+            }
+        }
+
         final ApiType api = sa.getApi();
         if (api == null) {
             sa.resolve();
