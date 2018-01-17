@@ -258,22 +258,13 @@ public class GameAction {
             }
             // check if something would be a land
             Card noLandLKI = CardUtil.getLKICopy(c);
+            // this check needs to check if this card would be on the battlefield
+            noLandLKI.setLastKnownZone(zoneTo);
             
-            //setZone is not enough
-            //noLandLKI.setZone(zoneTo);
-            noLandLKI.setImmutable(true); // immu doesn't trigger Zone
-            zoneTo.add(noLandLKI);
-            
-            noLandLKI.setImmutable(false); // but need to remove that or Static doesn't find it
-            checkStaticAbilities(false, Sets.newHashSet(noLandLKI));
+            CardCollection preList = new CardCollection(noLandLKI);
+            checkStaticAbilities(false, Sets.newHashSet(noLandLKI), preList);
 
-            boolean noLand = noLandLKI.isLand(); 
-            zoneTo.remove(noLandLKI);
-            
-            // reset static
-            checkStaticAbilities(false, Sets.newHashSet(noLandLKI));
-            
-            if(noLand) {
+            if(noLandLKI.isLand()) {
                 // if something would only be a land when entering the battlefield and not before
                 // put it into the graveyard instead
                 zoneTo = c.getOwner().getZone(ZoneType.Graveyard);
@@ -755,9 +746,9 @@ public class GameAction {
     }
 
     public final void checkStaticAbilities() {
-        checkStaticAbilities(true, Sets.<Card>newHashSet());
+        checkStaticAbilities(true, Sets.<Card>newHashSet(), CardCollection.EMPTY);
     }
-    public final void checkStaticAbilities(final boolean runEvents, final Set<Card> affectedCards) {
+    public final void checkStaticAbilities(final boolean runEvents, final Set<Card> affectedCards, final CardCollectionView preList) {
         if (isCheckingStaticAbilitiesOnHold()) {
             return;
         }
@@ -816,7 +807,7 @@ public class GameAction {
                 final CardCollectionView previouslyAffected = affectedPerAbility.get(stAb);
                 final CardCollectionView affectedHere;
                 if (previouslyAffected == null) {
-                    affectedHere = stAb.applyContinuousAbility(layer);
+                    affectedHere = stAb.applyContinuousAbilityBefore(layer, preList);
                     if (affectedHere != null) {
                         affectedPerAbility.put(stAb, affectedHere);
                     }
@@ -926,7 +917,7 @@ public class GameAction {
         boolean orderedDesCreats = false;
         boolean orderedNoRegCreats = false;
         for (int q = 0; q < 9; q++) {
-            checkStaticAbilities(false, affectedCards);
+            checkStaticAbilities(false, affectedCards, CardCollection.EMPTY);
             boolean checkAgain = false;
 
             for (final Player p : game.getPlayers()) {
@@ -1068,7 +1059,7 @@ public class GameAction {
         // if the legendary rule was invoked on a Thespian's Stage that just copied Dark Depths, the
         // trigger reset above will activate the copy's Always trigger, which needs to be triggered at
         // this point.
-        checkStaticAbilities(false, affectedCards);
+        checkStaticAbilities(false, affectedCards, CardCollection.EMPTY);
 
         if (!refreeze) {
             game.getStack().unfreezeStack();

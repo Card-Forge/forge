@@ -258,11 +258,11 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
         buildCommonAttributes(host);
     }
 
-    public final CardCollectionView applyContinuousAbility(final StaticAbilityLayer layer) {
+    public final CardCollectionView applyContinuousAbilityBefore(final StaticAbilityLayer layer, final CardCollectionView preList) {
         if (!shouldApplyContinuousAbility(layer, false)) {
             return null;
         }
-        return StaticAbilityContinuous.applyContinuousAbility(this, layer);
+        return StaticAbilityContinuous.applyContinuousAbility(this, layer, preList);
     }
 
     public final CardCollectionView applyContinuousAbility(final StaticAbilityLayer layer, final CardCollectionView affected) {

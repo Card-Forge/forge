@@ -41,6 +41,7 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -67,8 +68,8 @@ public final class StaticAbilityContinuous {
      * @see #applyContinuousAbility(StaticAbility, CardCollectionView,
      *      StaticAbilityLayer)
      */
-	public static CardCollectionView applyContinuousAbility(final StaticAbility stAb, final StaticAbilityLayer layer) {
-        final CardCollectionView affectedCards = getAffectedCards(stAb);
+	public static CardCollectionView applyContinuousAbility(final StaticAbility stAb, final StaticAbilityLayer layer, final CardCollectionView preList) {
+        final CardCollectionView affectedCards = getAffectedCards(stAb, preList);
         return applyContinuousAbility(stAb, affectedCards, layer);
     }
 
@@ -825,7 +826,7 @@ public final class StaticAbilityContinuous {
         return players;
     }
 
-    private static CardCollectionView getAffectedCards(final StaticAbility stAb) {
+    private static CardCollectionView getAffectedCards(final StaticAbility stAb, final CardCollectionView preList) {
         final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
         final Game game = hostCard.getGame();
@@ -837,10 +838,18 @@ public final class StaticAbilityContinuous {
 
         // non - CharacteristicDefining
         CardCollection affectedCards;
-        if (params.containsKey("AffectedZone")) {
-            affectedCards = new CardCollection(game.getCardsIn(ZoneType.listValueOf(params.get("AffectedZone"))));
+        if (preList.isEmpty()) {
+            if (params.containsKey("AffectedZone")) {
+                affectedCards = new CardCollection(game.getCardsIn(ZoneType.listValueOf(params.get("AffectedZone"))));
+            } else {
+                affectedCards = new CardCollection(game.getCardsIn(ZoneType.Battlefield));
+            }
         } else {
-            affectedCards = new CardCollection(game.getCardsIn(ZoneType.Battlefield));
+            if (params.containsKey("AffectedZone")) {
+                affectedCards = CardLists.filter(preList, CardPredicates.inZone(ZoneType.listValueOf(params.get("AffectedZone"))));
+            } else {
+                affectedCards = CardLists.filter(preList, CardPredicates.inZone(ZoneType.Battlefield));
+            }
         }
 
         if (params.containsKey("Affected") && !params.get("Affected").contains(",")) {
