@@ -1,0 +1,100 @@
+[metadata]
+Code=BTD
+Date=2000-10-01
+Name=Beatdown
+MciCode=bd
+Type=Other
+Border=White
+Foil=NotSupported
+
+[cards]
+1 U Air Elemental
+2 R Blizzard Elemental
+3 C Brainstorm
+4 U Cloud Djinn
+5 C Cloud Elemental
+6 C Counterspell
+7 C Fog Elemental
+8 C Gaseous Form
+9 C Giant Crab
+10 C Impulse
+11 U Killer Whale
+12 R Leviathan
+13 R Mahamoti Djinn
+14 C Power Sink
+15 C Snapping Drake
+16 C Tolarian Winds
+17 C Vigilant Drake
+18 C Wayward Soul
+19 C Bone Harvest
+20 C Coercion
+21 C Dark Ritual
+22 C Death Stroke
+23 C Diabolic Edict
+24 C Drain Life
+25 R Fallen Angel
+26 C Feral Shadow
+27 C Gravedigger
+28 C Hollow Dogs
+29 U Sengir Vampire
+30 C Skittering Horror
+31 C Skittering Skirge
+32 C Tar Pit Warrior
+33 C Terror
+34 R Balduvian Horde
+35 R Ball Lightning
+36 C Bloodrock Cyclops
+37 C Fireball
+38 U Hulking Cyclops
+39 C Kird Ape
+40 C Lava Axe
+41 C Lightning Bolt
+42 C Lowland Giant
+43 C Raging Goblin
+44 R Shivan Dragon
+45 C Shock
+46 C Sonic Burst
+47 C Talruum Minotaur
+48 C Thunderbolt
+49 U Thundering Giant
+50 C Viashino Warrior
+51 C Crash of Rhinos
+52 U Crashing Boars
+53 C Deadly Insect
+54 U Erhnam Djinn
+55 C Fog
+56 R Force of Nature
+57 C Giant Growth
+58 C Llanowar Elves
+59 C Plated Spider
+60 C Quirion Elves
+61 C Rampant Growth
+62 C Scaled Wurm
+63 C Shambling Strider
+64 C Wild Growth
+65 C Woolly Spider
+66 C Yavimaya Wurm
+67 U Diabolic Vision
+68 U Segmented Wurm
+69 C Clockwork Avian
+70 R Clockwork Beast
+71 U Dwarven Ruins
+72 U Ebon Stronghold
+73 U Havenwood Battleground
+74 C Polluted Mire
+75 C Remote Isle
+76 C Slippery Karst
+77 C Smoldering Crater
+78 U Svyelunite Temple
+79 L Island
+80 L Island
+81 L Island
+82 L Swamp
+83 L Swamp
+84 L Swamp
+85 L Mountain
+86 L Mountain
+87 L Mountain
+88 L Forest
+89 L Forest
+90 L Forest
