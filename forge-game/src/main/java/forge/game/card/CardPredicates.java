@@ -26,6 +26,8 @@ import forge.game.combat.CombatUtil;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.Zone;
+import forge.game.zone.ZoneType;
 import forge.util.collect.FCollectionView;
 
 
@@ -370,6 +372,33 @@ public final class CardPredicates {
             @Override
             public int compare(Card arg0, Card arg1) {
                 return Long.compare(arg0.getTimestamp(), arg1.getTimestamp());
+            }
+        };
+    }
+
+    public static final Predicate<Card> inZone(final ZoneType zt) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                Zone z = c.getLastKnownZone();
+                return z != null && z.is(zt);
+            }
+        };
+    }
+
+    public static final Predicate<Card> inZone(final Iterable<ZoneType> zt) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                Zone z = c.getLastKnownZone();
+                if (z != null) {
+                    for (ZoneType t : zt) {
+                        if (z.is(t)) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
             }
         };
     }
