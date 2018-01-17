@@ -2,7 +2,7 @@ Name:Awakening Zone
 ManaCost:2 G
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, you may create a 0/1 colorless Eldrazi Spawn creature token. It has "Sacrifice this creature: Add {C} to your mana pool."
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Eldrazi Spawn | TokenTypes$ Creature,Eldrazi,Spawn | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 0 | TokenToughness$ 1 | TokenAbilities$ ABMana | TokenImage$ c_0_1_eldrazi_spawn | TokenAltImages$ c_0_1_eldrazi_spawn2 | c_0_1_eldrazi_spawn_3
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Eldrazi Spawn | TokenTypes$ Creature,Eldrazi,Spawn | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 0 | TokenToughness$ 1 | TokenAbilities$ ABMana | TokenImage$ c_0_1_eldrazi_spawn_pca | TokenAltImages$ c_0_1_eldrazi_spawn2_pca | c_0_1_eldrazi_spawn3_pca
 SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ C | Amount$ 1 | SpellDescription$ Add {C} to your mana pool.
 DeckHints:Type$Eldrazi
 DeckHas:Ability$Mana.Colorless & Ability$Token
