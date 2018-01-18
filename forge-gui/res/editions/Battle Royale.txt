@@ -1,0 +1,146 @@
+[metadata]
+Code=BRB
+Date=1999-11-12
+Name=Battle Royale
+MciCode=br
+Type=Other
+Border=White
+Foil=NotSupported
+
+[cards]
+1 U Abyssal Specter
+2 C Advance Scout
+3 U Air Elemental
+4 C Angelic Page
+5 C Arc Lightning
+6 U Argothian Elder
+7 C Armored Pegasus
+8 U Azure Drake
+9 R Blinking Spirit
+10 C Broken Fall
+11 C Cackling Fiend
+12 R Catastrophe
+13 U Cinder Marsh
+14 U Control Magic
+15 C Counterspell
+16 U Crazed Skirge
+17 C Curfew
+18 C Dark Ritual
+19 R Dirtcowl Wurm
+20 U Disenchant
+21 C Disruptive Student
+22 C Drifting Meadow
+23 C Elvish Lyrist
+24 C Exhume
+25 U Fecundity
+26 C Fertile Ground
+27 U Fire Ants
+28 C Flood
+29 C Giant Growth
+30 C Gorilla Warrior
+31 C Healing Salve
+32 C Heat Ray
+33 R Hurricane
+34 C Infantry Veteran
+35 R Land Tax
+36 R Lhurgoyf
+37 C Lightning Elemental
+38 R Living Death
+39 C Llanowar Elves
+40 C Man-o'-War
+41 C Mana Leak
+42 U Maniacal Rage
+43 C Manta Riders
+44 C Master Decoy
+45 U Mogg Hollows
+46 U Nekrataal
+47 U Opportunity
+48 C Pacifism
+49 U Pestilence
+50 C Phyrexian Ghoul
+51 C Pincher Beetles
+52 U Plated Rootwalla
+53 C Polluted Mire
+54 C Prodigal Sorcerer
+55 C Raging Goblin
+56 C Ray of Command
+57 U Reanimate
+58 C Remote Isle
+59 U River Boa
+60 C Rolling Thunder
+61 C Sadistic Glee
+62 C Sanctum Custodian
+63 U Sanctum Guardian
+64 C Sandstorm
+65 U Scaled Wurm
+66 C Scryb Sprites
+67 U Seasoned Marshal
+68 C Seeker of Skybreak
+69 U Sengir Vampire
+70 C Sewer Rats
+71 C Shower of Sparks
+72 U Skyshroud Elite
+73 C Slippery Karst
+74 C Soltari Foot Soldier
+75 U Songstitcher
+76 U Soul Warden
+77 C Spike Colony
+78 U Spike Feeder
+79 R Spike Weaver
+80 C Spike Worker
+81 U Steam Blast
+82 R Subversion
+83 C Sun Clasp
+84 U Swords to Plowshares
+85 C Symbiosis
+86 C Syphon Soul
+87 C Terror
+88 U Thalakos Lowlands
+89 C Tranquility
+90 U Trumpeting Armodon
+91 C Unnerve
+92 U Uthden Troll
+93 U Vec Townships
+94 C Village Elder
+95 C Wall of Heat
+96 C Weakness
+97 U Wildfire Emissary
+98 C Wind Drake
+99 U Windfall
+100 R Wrath of God
+101 L Forest
+102 L Forest
+103 L Forest
+104 L Forest
+105 L Forest
+106 L Forest
+107 L Forest
+108 L Forest
+109 L Forest
+110 L Island
+111 L Island
+112 L Island
+113 L Island
+114 L Island
+115 L Mountain
+116 L Mountain
+117 L Mountain
+118 L Mountain
+119 L Mountain
+120 L Mountain
+121 L Mountain
+122 L Mountain
+123 L Mountain
+124 L Plains
+125 L Plains
+126 L Plains
+127 L Plains
+128 L Plains
+129 L Plains
+130 L Plains
+131 L Plains
+132 L Plains
+133 L Swamp
+134 L Swamp
+135 L Swamp
+136 L Swamp
