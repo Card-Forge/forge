@@ -1,6 +1,9 @@
 - Quest Mode: Foil planeswalkers in planeswalker decks -
 In Quest mode, planeswalkers provided in planeswalker decks will now be foil, as they are in their paper counterparts.
 
+- Boxed Set Support -
+Support for several boxed sets has been added, namely, Anthologies (ATH), Battle Royale (BRB), Beatdown (BTD), Deckmasters: Garfield vs. Finkel (DKM), and Duels of the Planeswalkers special decks set (DPA).
+
 - Download Pictures -
 Improvements to Download Pictures and Auto fetcher
 
