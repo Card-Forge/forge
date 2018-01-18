@@ -1,0 +1,95 @@
+[metadata]
+Code=ATH
+MciCode=at
+Date=1998-11
+Name=Anthologies
+Type=Other
+Border=White
+Foil=NotSupported
+
+[cards]
+1 R Nevinyrral's Disk
+2 R Goblin King
+3 R Goblin Warrens
+4 R Volcanic Dragon
+5 R Strip Mine
+6 C Lady Orca
+7 U Black Knight
+8 U Hypnotic Specter
+9 U Knight of Stromgald
+10 U Ihsan's Shade
+11 U Goblin Balloon Brigade
+12 U Goblin Mutant
+13 U Goblin Offensive
+14 C Goblin Recruiter
+15 U Goblin Snowman
+16 C Pyrokinesis
+17 U Uthden Troll
+19 C Aesthir Glider
+20 C Polluted Mire
+21 C Smoldering Crater
+22 C Cuombajj Witches
+23 C Feast of the Unicorn
+24 C Hymn to Tourach
+25 C Terror
+26 C Unholy Strength
+27 U Fireball
+28 C Goblin Digging Team
+29 C Goblin Grenade
+30 C Goblin Hero
+31 C Goblin Matron
+32 C Goblin Tinkerer
+33 C Goblin Vandal
+34 C Lightning Bolt
+35 C Mogg Fanatic
+36 C Mogg Flunkies
+37 C Mogg Raider
+38 C Pyrotechnics
+39 C Raging Goblin
+40 L Mountain
+41 L Mountain
+42 L Swamp
+43 L Swamp
+44 R Brushland
+45 R Mirri, Cat Warrior
+46 R Armageddon
+47 R Sacred Mesa
+48 U Pendelhaven
+49 R Jalum Tome
+50 U Ranger en-Vec
+51 U Erhnam Djinn
+52 U Hurricane
+53 U Spectral Bears
+54 U Overrun
+55 U Order of the White Shield
+56 C Pegasus Charger
+57 U Serra Angel
+58 U Swords to Plowshares
+59 U White Knight
+60 U Pegasus Stampede
+61 C Drifting Meadow
+62 C Slippery Karst
+63 U Serrated Arrows
+64 C Canopy Spider
+65 C Carnivorous Plant
+66 C Giant Growth
+67 C Giant Spider
+68 C Gorilla Chieftain
+69 C Llanowar Elves
+70 C Scavenger Folk
+71 U Woolly Spider
+72 C Armored Pegasus
+73 C Benalish Knight
+74 C Combat Medic
+75 C Disenchant
+76 C Freewind Falcon
+77 C Icatian Javelineers
+78 C Infantry Veteran
+79 C Pacifism
+81 C Samite Healer
+82 C Warrior's Honor
+83 C Youthful Knight
+84 L Forest
+85 L Forest
+86 L Plains
+87 L Plains
