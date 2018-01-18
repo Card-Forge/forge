@@ -1,7 +1,7 @@
 [metadata]
 Code=DDT
 Date=2017-11-10
-Name=Duel Decks: Merfolk vs Goblins
+Name=Duel Decks: Merfolk vs. Goblins
 Code2=DDT
 MciCode=ddt
 Type=Duel_Decks
