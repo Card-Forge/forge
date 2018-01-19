@@ -519,7 +519,7 @@ public final class StaticAbilityContinuous {
                         // Enable this in case Volrath's original image is to be used
                         affectedCard.getState(CardStateName.Original).setImageKey(affectedCard.getState(CardStateName.OriginalText).getImageKey());
 
-                        // Activated abilities (statics and repleffects are apparently copied via copyState?)
+                        // Activated abilities (statics and repleffects) and triggers are apparently copied via copyState?
                         for (SpellAbility sa : gainTextSource.getSpellAbilities()) {
                             if (sa instanceof AbilityActivated) {
                                 SpellAbility newSA = ((AbilityActivated) sa).getCopy();
@@ -531,22 +531,18 @@ public final class StaticAbilityContinuous {
                             }
                         }
 
-                        // Triggered abilities - apparently now copied elsewhere, so commenting out not to double them,
-                        // pending further testing
-                        /*
-                        for (Trigger t : gainTextSource.getTriggers()) {
-                            affectedCard.addTrigger(t.getCopyForHostCard(affectedCard));
-                        }*/
-
                         // Volrath's Shapeshifter shapeshifting ability needs to be added onto the new text
                         if (params.containsKey("GainedTextHasThisStaticAbility")) {
                             affectedCard.getCurrentState().addStaticAbility(stAb);
                         }
 
-                        // Add the ability "{2}: Discard a card"
-                        String abDiscard = "AB$ Discard | Cost$ 2 | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | AILogic$ VolrathsShapeshifter | SpellDescription$ Discard a card.";
-                        SpellAbility ab = AbilityFactory.getAbility(abDiscard, affectedCard);
-                        affectedCard.addSpellAbility(ab);
+                        // Gain additional abilities (e.g. such as Volrath's Shapeshifter {2}: Discard a card)
+                        if (params.containsKey("GainAbility")) {
+                            for (String svarDef : params.get("GainAbility").split(",")) {
+                                SpellAbility ab = AbilityFactory.getAbility(affectedCard.getState(CardStateName.OriginalText), svarDef);
+                                affectedCard.addSpellAbility(ab);
+                            }
+                        }
 
                         // Remember the name and the timestamp of the card we're gaining text from, so we don't modify
                         // the card too aggressively when unnecessary
