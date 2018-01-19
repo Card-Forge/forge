@@ -1,7 +1,7 @@
 Name:Arachnogenesis
 ManaCost:2 G
 Types:Instant
-A:SP$ Token | Cost$ 2 G | TokenAmount$ X | TokenName$ Spider | TokenTypes$ Creature,Spider | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 2 | TokenKeywords$ Reach | SubAbility$ DBCurseNonSpiders | References$ X | SpellDescription$ Create X 1/2 green Spider creature tokens with reach, where X is the number of creatures attacking you. Prevent all combat damage that would be dealt this turn by non-Spider creatures.
+A:SP$ Token | Cost$ 2 G | TokenAmount$ X | TokenName$ Spider | TokenTypes$ Creature,Spider | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 2 | TokenKeywords$ Reach | SubAbility$ DBCurseNonSpiders | References$ X | SpellDescription$ Create X 1/2 green Spider creature tokens with reach, where X is the number of creatures attacking you. Prevent all combat damage that would be dealt this turn by non-Spider creatures. | TokenImage$ g_1_2_spider_isd
 SVar:DBCurseNonSpiders:DB$ Effect | Name$ Arachnogenesis Effect | StaticAbilities$ Curse
 SVar:Curse:Mode$ PreventDamage | EffectZone$ Command | Source$ Creature.nonSpider | CombatDamage$ True | Description$ Prevent all combat damage that would be dealt this turn by non-Spider creatures.
 SVar:X:Count$Valid Creature.attackingYou

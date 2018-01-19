@@ -3,7 +3,7 @@ ManaCost:3 G
 AlternateMode: Split
 Types:Sorcery
 K:Fuse
-A:SP$ Token | Cost$ 3 G | TokenAmount$ 1 | TokenName$ Centaur | TokenTypes$ Creature,Centaur | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | TokenImage$ g 3 3 centaur rtr | SpellDescription$ Create a 3/3 green Centaur creature token.
+A:SP$ Token | Cost$ 3 G | TokenAmount$ 1 | TokenName$ Centaur | TokenTypes$ Creature,Centaur | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | TokenImage$ g 3 3 centaur rtr | TokenAltImages$ g_3_3_centaur2_rtr | SpellDescription$ Create a 3/3 green Centaur creature token.
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alive_well.jpg
 Oracle:Create a 3/3 green Centaur creature token.\nFuse (You may cast one or both halves of this card from your hand.)
