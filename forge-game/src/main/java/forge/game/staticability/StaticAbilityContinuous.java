@@ -530,15 +530,23 @@ public final class StaticAbilityContinuous {
                                 affectedCard.addSpellAbility(newSA);
                             }
                         }
-                        // Triggered abilities
+
+                        // Triggered abilities - apparently now copied elsewhere, so commenting out not to double them,
+                        // pending further testing
+                        /*
                         for (Trigger t : gainTextSource.getTriggers()) {
                             affectedCard.addTrigger(t.getCopyForHostCard(affectedCard));
-                        }
+                        }*/
 
                         // Volrath's Shapeshifter shapeshifting ability needs to be added onto the new text
                         if (params.containsKey("GainedTextHasThisStaticAbility")) {
                             affectedCard.getCurrentState().addStaticAbility(stAb);
                         }
+
+                        // Add the ability "{2}: Discard a card"
+                        String abDiscard = "AB$ Discard | Cost$ 2 | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | AILogic$ VolrathsShapeshifter | SpellDescription$ Discard a card.";
+                        SpellAbility ab = AbilityFactory.getAbility(abDiscard, affectedCard);
+                        affectedCard.addSpellAbility(ab);
 
                         // Remember the name and the timestamp of the card we're gaining text from, so we don't modify
                         // the card too aggressively when unnecessary
