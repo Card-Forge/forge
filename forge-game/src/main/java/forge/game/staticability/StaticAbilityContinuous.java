@@ -519,18 +519,6 @@ public final class StaticAbilityContinuous {
                         // Enable this in case Volrath's original image is to be used
                         affectedCard.getState(CardStateName.Original).setImageKey(affectedCard.getState(CardStateName.OriginalText).getImageKey());
 
-                        // Activated abilities (statics and repleffects) and triggers are apparently copied via copyState?
-                        for (SpellAbility sa : gainTextSource.getSpellAbilities()) {
-                            if (sa instanceof AbilityActivated) {
-                                SpellAbility newSA = ((AbilityActivated) sa).getCopy();
-                                newSA.setOriginalHost(gainTextSource);
-                                newSA.setIntrinsic(false);
-                                newSA.setTemporary(true);
-                                newSA.setHostCard(affectedCard);
-                                affectedCard.addSpellAbility(newSA);
-                            }
-                        }
-
                         // Volrath's Shapeshifter shapeshifting ability needs to be added onto the new text
                         if (params.containsKey("GainedTextHasThisStaticAbility")) {
                             affectedCard.getCurrentState().addStaticAbility(stAb);
