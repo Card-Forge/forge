@@ -524,12 +524,12 @@ public final class StaticAbilityContinuous {
                             affectedCard.getCurrentState().addStaticAbility(stAb);
                         }
 
-                        // Gain additional abilities (e.g. such as Volrath's Shapeshifter {2}: Discard a card)
-                        if (params.containsKey("GainAbility")) {
-                            for (String svarDef : params.get("GainAbility").split(",")) {
-                                SpellAbility ab = AbilityFactory.getAbility(affectedCard.getState(CardStateName.OriginalText), svarDef);
-                                affectedCard.addSpellAbility(ab);
-                            }
+                        // Add the ability "{2}: Discard a card" for Volrath's Shapeshifter
+                        // TODO: Make this generic so that other SAs can be added onto custom cards if need be
+                        if (params.containsKey("GainVolrathsDiscardAbility")) {
+                            String abDiscard = "AB$ Discard | Cost$ 2 | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | AILogic$ VolrathsShapeshifter | SpellDescription$ Discard a card.";
+                            SpellAbility ab = AbilityFactory.getAbility(abDiscard, affectedCard);
+                            affectedCard.addSpellAbility(ab);
                         }
 
                         // Remember the name and the timestamp of the card we're gaining text from, so we don't modify
