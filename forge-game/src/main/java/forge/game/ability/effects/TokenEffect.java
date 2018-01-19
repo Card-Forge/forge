@@ -93,7 +93,7 @@ public class TokenEffect extends SpellAbilityEffect {
         if (mapParams.hasParam("TokenAltImages")) {
             this.tokenAltImages = mapParams.getParam("TokenAltImages").split(",");
             for (int i = 0; i < tokenAltImages.length; i++) {
-            	this.tokenAltImages[i] = PaperToken.makeTokenFileName(this.tokenAltImages[i]);
+            	this.tokenAltImages[i] = PaperToken.makeTokenFileName(this.tokenAltImages[i].trim());
             }
         } else {
             this.tokenAltImages = null;
