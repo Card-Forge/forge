@@ -519,25 +519,17 @@ public final class StaticAbilityContinuous {
                         // Enable this in case Volrath's original image is to be used
                         affectedCard.getState(CardStateName.Original).setImageKey(affectedCard.getState(CardStateName.OriginalText).getImageKey());
 
-                        // Activated abilities (statics and repleffects are apparently copied via copyState?)
-                        for (SpellAbility sa : gainTextSource.getSpellAbilities()) {
-                            if (sa instanceof AbilityActivated) {
-                                SpellAbility newSA = ((AbilityActivated) sa).getCopy();
-                                newSA.setOriginalHost(gainTextSource);
-                                newSA.setIntrinsic(false);
-                                newSA.setTemporary(true);
-                                newSA.setHostCard(affectedCard);
-                                affectedCard.addSpellAbility(newSA);
-                            }
-                        }
-                        // Triggered abilities
-                        for (Trigger t : gainTextSource.getTriggers()) {
-                            affectedCard.addTrigger(t.getCopyForHostCard(affectedCard));
-                        }
-
                         // Volrath's Shapeshifter shapeshifting ability needs to be added onto the new text
                         if (params.containsKey("GainedTextHasThisStaticAbility")) {
                             affectedCard.getCurrentState().addStaticAbility(stAb);
+                        }
+
+                        // Add the ability "{2}: Discard a card" for Volrath's Shapeshifter
+                        // TODO: Make this generic so that other SAs can be added onto custom cards if need be
+                        if (params.containsKey("GainVolrathsDiscardAbility")) {
+                            String abDiscard = "AB$ Discard | Cost$ 2 | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | AILogic$ VolrathsShapeshifter | SpellDescription$ Discard a card.";
+                            SpellAbility ab = AbilityFactory.getAbility(abDiscard, affectedCard);
+                            affectedCard.addSpellAbility(ab);
                         }
 
                         // Remember the name and the timestamp of the card we're gaining text from, so we don't modify
