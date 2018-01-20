@@ -124,8 +124,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final CardChangedWords changedTextTypes = new CardChangedWords();
     /** List of the keywords that have been added by text changes. */
     private final List<KeywordInterface> keywordsGrantedByTextChanges = Lists.newArrayList();
-    
-    private final Map<CardStateName, List<KeywordInterface>> cachedKeywords = Maps.newEnumMap(CardStateName.class);
 
     /** Original values of SVars changed by text changes. */
     private Map<String, String> originalSVars = Maps.newHashMap();
@@ -3365,41 +3363,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         return getUnhiddenKeywords(currentState);
     }
     public final Collection<KeywordInterface> getUnhiddenKeywords(CardState state) {
-        CardStateName name = null;
-        for (Entry<CardStateName, CardState> entry : states.entrySet()) {
-            if (entry.getValue().equals(state)) {
-                name = entry.getKey();
-                break;
-            }
-        }
-        if (name == null) {
-            return Lists.newArrayList();
-        }
-        
-        if (!cachedKeywords.containsKey(name)) {
-            updateKeywordsCache(state);
-        }
-        return cachedKeywords.get(name);
+        return state.getCachedKeywords();
     }
     
     public final void updateKeywordsCache(final CardState state) {
-        CardStateName name = null;
-        for (Entry<CardStateName, CardState> entry : states.entrySet()) {
-            if (entry.getValue().equals(state)) {
-                name = entry.getKey();
-                break;
-            }
-        }
-        if (name == null) {
-            return;
-        }
-        
-        if (cachedKeywords.containsKey(name)) {
-            cachedKeywords.get(name).clear();
-        } else {
-            cachedKeywords.put(name, Lists.newArrayList());
-        }
-        
         KeywordCollection keywords = new KeywordCollection();
         
         //final List<KeywordInterface> keywords = Lists.newArrayList();
@@ -3422,7 +3389,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                 keywords.insertAll(ck.getKeywords());
             }
         }
-        cachedKeywords.get(name).addAll(keywords.getValues());
+
+        state.setCachedKeywords(keywords.getValues());
     }
     private void visitUnhiddenKeywords(CardState state, Visitor<KeywordInterface> visitor) {
         if (changedCardKeywords.isEmpty()) {
