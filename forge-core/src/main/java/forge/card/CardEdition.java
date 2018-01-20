@@ -303,7 +303,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                     enumType = Type.valueOf(type.toUpperCase(Locale.ENGLISH));
                 } catch (IllegalArgumentException ignored) {
                     // ignore; type will get UNKNOWN
-                    System.err.println(TextUtil.concatWithSpace("Ignoring unknown type in set definitions: name:", TextUtil.addSuffix(res.name, ";"), "type:", type));
+                    System.err.println("Ignoring unknown type in set definitions: name: " + res.name + "; type: " + type);
                 }
             }
             res.type = enumType;
@@ -389,7 +389,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         public CardEdition getEditionByCodeOrThrow(final String code) {
             final CardEdition set = this.get(code);
             if (null == set) {
-                throw new RuntimeException(TextUtil.concatWithSpace("Edition with code", TextUtil.enclosedSingleQuote(code), "not found"));
+                throw new RuntimeException("Edition with code '" + code + "' not found");
             }
             return set;
         }
