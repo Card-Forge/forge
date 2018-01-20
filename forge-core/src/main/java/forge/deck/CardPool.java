@@ -90,7 +90,7 @@ public class CardPool extends ItemPool<PaperCard> {
             cardName = paperCard.getName();
             artCount = isCommonCard ? StaticData.instance().getCommonCards().getArtCount(cardName, setCode) : 1;
         } else {
-            System.out.print("An unsupported card was requested: \"" + cardName + "\" from \"" + setCode + "\". ");
+            System.err.print("An unsupported card was requested: \"" + cardName + "\" from \"" + setCode + "\". ");
             paperCard = StaticData.instance().getCommonCards().createUnsupportedCard(cardName);
         }
 
