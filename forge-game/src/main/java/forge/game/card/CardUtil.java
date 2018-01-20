@@ -209,6 +209,8 @@ public final class CardUtil {
         // needed to ensure that the LKI object has correct CMC info no matter what state the original card was in
         // (e.g. Scrap Trawler + transformed Harvest Hand)
         newCopy.setLKICMC(in.getCMC()); 
+        // used for the purpose of cards that care about the zone the card was known to be in last
+        newCopy.setLastKnownZone(in.getLastKnownZone());
 
         if (in.isCloned()) {
             newCopy.addAlternateState(CardStateName.Cloner, false);
@@ -259,8 +261,6 @@ public final class CardUtil {
         newCopy.setChangedCardTypes(in.getChangedCardTypesMap());
 
         newCopy.setMeldedWith(in.getMeldedWith());
-
-        newCopy.setLastKnownZone(in.getZone()); // used for the purpose of cards that care about the zone the card was known to be in last
 
         return newCopy;
     }
