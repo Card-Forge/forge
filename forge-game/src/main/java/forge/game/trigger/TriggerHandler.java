@@ -570,6 +570,11 @@ public class TriggerHandler {
                 };
             }
             else {
+                if (!host.getCurrentState().hasSVar(triggerParams.get("Execute"))) {
+                    System.err.println("Warning: tried to run a trigger for card " + host + " referencing a SVar " + triggerParams.get("Execute") + " not present on the current state " + host.getCurrentState() + ". Aborting trigger execution to prevent a crash.");
+                    return;
+                }
+
                 sa = AbilityFactory.getAbility(host, triggerParams.get("Execute"));
             }
         } else {
