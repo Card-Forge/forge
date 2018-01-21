@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Trounce-O-Matic
-Description=Introducing the "Trounce-O-Matic" deck! It slices, it dices, it minces... your opponents. If you love win-win situations, this is your kind of deck. Its cheap creatures start out strong and only get stronger when you reach threshold.
+Description=Innocent little forest creatures become raging monstrosities when you cross the threshold. With the "Trounce-O-Matic" deck, your weenies morph into meanies with the help of deck-filtering cards that fill up your graveyard.
 Deck Type=constructed
 Set=ODY
 Image=trounce-o-matic.jpg
