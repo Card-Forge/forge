@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=The Swarm
-Description="The Swarm" is a Tempest green theme deck featuring elves.
+Description=From the shadow plane of Rath emerges "The Swarm," a preconstructed deck designed to engulf your opponents with a relentless army of creatures. Loaded with strategy and packed with new creatures, "The Swarm" is fast, furious, and fun.
 Set=TMP
 Image=the_swarm.jpg
 [main]
