@@ -124,6 +124,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final CardChangedWords changedTextTypes = new CardChangedWords();
     /** List of the keywords that have been added by text changes. */
     private final List<KeywordInterface> keywordsGrantedByTextChanges = Lists.newArrayList();
+
     /** Original values of SVars changed by text changes. */
     private Map<String, String> originalSVars = Maps.newHashMap();
 
@@ -3362,6 +3363,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         return getUnhiddenKeywords(currentState);
     }
     public final Collection<KeywordInterface> getUnhiddenKeywords(CardState state) {
+        return state.getCachedKeywords();
+    }
+    
+    public final void updateKeywordsCache(final CardState state) {
         KeywordCollection keywords = new KeywordCollection();
         
         //final List<KeywordInterface> keywords = Lists.newArrayList();
@@ -3384,7 +3389,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                 keywords.insertAll(ck.getKeywords());
             }
         }
-        return keywords.getValues();
+
+        state.setCachedKeywords(keywords.getValues());
     }
     private void visitUnhiddenKeywords(CardState state, Visitor<KeywordInterface> visitor) {
         if (changedCardKeywords.isEmpty()) {
@@ -3396,7 +3402,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 visitor.visit(kw);
             }
         } else {
-            for (KeywordInterface kw : getUnhiddenKeywords()) {
+            for (KeywordInterface kw : getUnhiddenKeywords(state)) {
                 visitor.visit(kw);
             }
         }

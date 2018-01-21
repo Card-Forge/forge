@@ -977,6 +977,7 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.AbilityText, c.getAbilityText(state));
         }
         void updateKeywords(Card c, CardState state) {
+            c.updateKeywordsCache(state);
             set(TrackableProperty.HasDeathtouch, c.hasKeyword("Deathtouch", state));
             set(TrackableProperty.HasHaste, c.hasKeyword("Haste", state));
             set(TrackableProperty.HasInfect, c.hasKeyword("Infect", state));

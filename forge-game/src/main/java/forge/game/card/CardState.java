@@ -58,6 +58,8 @@ public class CardState extends GameObject {
     private String imageKey = "";
     private Map<String, String> sVars = Maps.newTreeMap();
 
+    private List<KeywordInterface> cachedKeywords = Lists.newArrayList();
+    
     private CardRarity rarity = CardRarity.Unknown;
     private String setCode = CardEdition.UNKNOWN.getCode();
 
@@ -148,6 +150,15 @@ public class CardState extends GameObject {
         if (baseToughness == baseToughness0) { return; }
         baseToughness = baseToughness0;
         view.updateToughness(this);
+    }
+
+    public final Collection<KeywordInterface> getCachedKeywords() {
+        return cachedKeywords;
+    }
+
+    public final void setCachedKeywords(final Collection<KeywordInterface> col) {
+        cachedKeywords.clear();
+        cachedKeywords.addAll(col);
     }
 
     public final Collection<KeywordInterface> getIntrinsicKeywords() {
