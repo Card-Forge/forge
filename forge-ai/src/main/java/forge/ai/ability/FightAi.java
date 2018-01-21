@@ -55,6 +55,7 @@ public class FightAi extends SpellAbilityAi {
                     return true;
                 }
             }
+            return false; // bail at this point, otherwise the AI will overtarget and waste the activation
         }
 
         if (sa.hasParam("TargetsFromDifferentZone")) {
