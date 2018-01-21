@@ -36,7 +36,6 @@ import forge.screens.match.CMatchUI;
 import forge.toolbox.CardFaceSymbols;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.IDisposable;
-import forge.util.TextUtil;
 import forge.view.arcane.util.OutlinedLabel;
 
 import javax.swing.*;
@@ -683,14 +682,14 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final CardStateView state = card.getCurrentState();
         String sPt = "";
         if (state.isCreature() && state.isPlaneswalker()) {
-            sPt = TextUtil.transformPT(state.getPower(), state.getToughness()) +
+            sPt = state.getPower() + "/" + state.getToughness() +
                     " (" + String.valueOf(state.getLoyalty()) + ")";
         }
         else if (state.isCreature()) {
-            sPt = TextUtil.transformPT(state.getPower(), state.getToughness());
+            sPt = state.getPower() + "/" + state.getToughness();
         }
         else if (state.getType().hasSubtype("Vehicle")) {
-            sPt = "[" + TextUtil.transformPT(state.getPower(), state.getToughness()) + "]";
+            sPt = "[" + state.getPower() + "/" + state.getToughness() + "]";
         }
         else if (state.isPlaneswalker()) {
             sPt = String.valueOf(state.getLoyalty());
