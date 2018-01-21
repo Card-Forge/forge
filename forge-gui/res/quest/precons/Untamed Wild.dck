@@ -5,12 +5,12 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Untamed Wild
-Description=Eldritch Moon R/G Intro Deck
+Description=As the land of Innistrad warps and twists into a foul mockery of itself, it threatens the denizens of the wilds with a similar fate. But they will not go quietly, and you will wield their primal ferocity against your enemies.
 Deck Type=constructed
 Set=EMN
 Image=untamed_wild.jpg
 [Main]
-1 Assembled Alphas|EMN
+1 Assembled Alphas+|EMN
 2 Blood Mist|EMN
 2 Bold Impaler|EMN
 3 Brazen Wolves|EMN
