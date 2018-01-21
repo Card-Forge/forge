@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Unflinching Assault
-Description=Unflinching Assault Intro Deck
+Description=Marshal your armies on the battlefield, then use the bolster mechanic to enhance your creatures and hold your ground. Pressure your opponent with continuous offense, and demonstrate your supremacy in the art of war.
 Deck Type=constructed
 Set=FRF
 Image=unflinching_assault.jpg
@@ -18,7 +18,7 @@ Image=unflinching_assault.jpg
 1 Cruel Sadist|M15
 2 Debilitating Injury|KTK
 1 Diplomacy of the Wastes|FRF
-1 Dragonscale General|FRF
+1 Dragonscale General+|FRF
 1 Elite Scaleguard|FRF
 1 Gravedigger|M15
 2 Harsh Sustenance|FRF
