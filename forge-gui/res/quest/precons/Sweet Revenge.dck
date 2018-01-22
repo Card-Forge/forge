@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Sweet Revenge
-Description=The key card in this deck is Burning Vengeance, a 2R enchantment with the ability "Whenever you cast a spell from your graveyard, Burning Vengeance deals 2 damage to target creature or player."
+Description=Stoke the flames of the past with the "Sweet Revenge" deck. Just a few key creatures will distract your foes from your constant spellcasting escapades, while Burning Vengeance punishes them again with every flashback spell you cast.
 Deck Type=constructed
 Set=M13
 Image=sweet_revenge.jpg
