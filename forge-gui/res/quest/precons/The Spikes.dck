@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=The Spikes
-Description="The Spikes" deck introduces new creatures that sling +1/+1 counters from card to card, giving a player more control over the battlefield. As a starting point for more sophisticated decks using Spike creatures, this green and red deck is sure to be popular around gaming tables.
+Description=In the second episode of the Rath Cycle, Gerrard and the heroes of the Weatherlight confront perplexing powers inside Volrath's stronghold. "The Spikes" introduces new creatures that sling counters around the table, creating fresh strategies and unique situations.
 Deck Type=constructed
 Set=STH
 Image=the_spikes.jpg
