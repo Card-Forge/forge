@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=The Wilds and the Deep
-Description="The Wilds and the Deep" features the monstrosity ability, which allows you to pay a lump sum of mana to permanently increase a creature's power and toughness. Just when your opponent thinks everything is under control, your monstrosity creatures can grow to unfathomable size. Power out your large monsters early, and make them unstoppable late.  
+Description=Harness the power of the untamed places of the world and turn it upon those who stand against you. Savage lands and oceanic depths yield monstrosities that grow in ferocity as the game progresses.
 Deck Type=constructed
 Set=JOU
 Image=the_wilds_and_the_deep.jpg
@@ -17,7 +17,7 @@ Image=the_wilds_and_the_deep.jpg
 1 Cloaked Siren|JOU
 2 Fleetfeather Cockatrice|JOU
 2 Golden Hind|JOU
-1 Heroes' Bane|JOU
+1 Heroes' Bane+|JOU
 2 Kiora's Follower|BNG
 1 Nessian Asp|THS
 1 Nessian Courser|THS

@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Temur Avalanche
-Description=The Temur are a clan of hardy nomadic warriors living in the inhospitable northern territories of Tarkir. In those difficult conditions, under the banner of the dragon's claw, they defend their territory against outsiders by harnessing the savagery of nature itself.
+Description=The Temur embody the claws-out savagery of the wild frontier. Crush the weaker clans under a landslide of brutal warriors toughened by ice, meat, and ferocious magic.
 Deck Type=constructed
 Set=KTK
 Image=temur_avalanche.jpg

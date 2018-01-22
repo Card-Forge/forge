@@ -5,12 +5,12 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Take to the Sky
-Description=Magic Origins intro deck.
+Description=High in the air you have a unique view of the battlefield. Your army flies about the conflict, ready to strike your opponents as they scramble to take cover from your forces in the sky.
 Deck Type=constructed
 Set=ORI
 Image=take_to_the_sky.jpg
 [Main]
-1 Alhammarret, High Arbiter|ORI
+1 Alhammarret, High Arbiter+|ORI
 1 Aven Battle Priest|ORI
 1 Celestial Flare|ORI
 2 Charging Griffin|ORI

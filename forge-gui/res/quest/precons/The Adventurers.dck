@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=The Adventurers
-Description="The Adventurers" deck puts you in control of an intrepid party of adventurers who have banded together to explore their hostile and dangerous world. With them at your side, you'll overcome any obstacles your opponents can put in your path.
+Description=Use your Allies to grow in strength! Turntimber Ranger heads this deck full of adventurous creatures that gain powerful abilities whenever a similar creature enters the battlefield. And you'll also quest after enchantments that can be sacrificed for great effect.
 Deck Type=constructed
 Set=ZEN
 Image=the_adventurers.jpg
