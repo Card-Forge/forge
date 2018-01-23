@@ -13,6 +13,17 @@ public class ExploreAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+        // Explore with a target (e.g. Enter the Unknown)
+        if (sa.usesTargeting()) {
+            Card bestCreature = ComputerUtilCard.getBestCreatureAI(aiPlayer.getCardsIn(ZoneType.Battlefield));
+            if (bestCreature == null) {
+                return false;
+            }
+
+            sa.resetTargets();
+            sa.getTargets().add(bestCreature);
+        }
+
         return true;
     }
 
