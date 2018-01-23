@@ -56,6 +56,12 @@ public class ScryAi extends SpellAbilityAi {
             }
         }
 
+        if ("AtOpponentsCombatOrAfter".equals(sa.getParam("AILogic"))) {
+            if (ph.getPlayerTurn() == ai || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                return false;
+            }
+        }
+
         // in the playerturn Scry should only be done in Main1 or in upkeep if able
         if (ph.isPlayerTurn(ai)) {
             if (SpellAbilityAi.isSorcerySpeed(sa)) {
