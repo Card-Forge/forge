@@ -217,6 +217,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         // for Bestow need to check the animated State
         if (sa.isSpell() && sa.hasParam("Bestow")) {
+            // already bestowed or in battlefield, no need to check for spell
+            if (c.isBestowed() || c.isInZone(ZoneType.Battlefield)) {
+                return false;
+            }
+
             if (!c.isLKI()) {
                 cp = CardUtil.getLKICopy(c);
             }
