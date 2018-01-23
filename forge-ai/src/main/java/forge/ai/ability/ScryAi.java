@@ -48,17 +48,12 @@ public class ScryAi extends SpellAbilityAi {
         // and right before the beginning of AI's turn, if possible, to avoid mana locking the AI and also to
         // try to scry right before drawing a card. Also, avoid tapping creatures in the AI's turn, if possible,
         // even if there's no mana cost.
+        // This behavior is also forced using the AtOppEOT AI logic.
         if (sa.getPayCosts() != null) {
-            if (sa.getPayCosts().hasTapCost()
+            if ("AtOppEOT".equals(sa.getParam("AILogic")) || (sa.getPayCosts().hasTapCost()
                     && (sa.getPayCosts().hasManaCost() || (sa.getHostCard() != null && sa.getHostCard().isCreature()))
-                    && !SpellAbilityAi.isSorcerySpeed(sa)) {
+                    && !SpellAbilityAi.isSorcerySpeed(sa))) {
                 return ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN);
-            }
-        }
-
-        if ("AtOpponentsCombatOrAfter".equals(sa.getParam("AILogic"))) {
-            if (ph.getPlayerTurn() == ai || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-                return false;
             }
         }
 
