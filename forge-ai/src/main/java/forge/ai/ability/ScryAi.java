@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicates;
+import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
@@ -79,7 +80,9 @@ public class ScryAi extends SpellAbilityAi {
         boolean hasSomethingElse = false;
         for (Card c : CardLists.filter(ai.getCardsIn(ZoneType.Hand), Predicates.not(CardPredicates.Presets.LANDS))) {
             for (SpellAbility ab : c.getAllSpellAbilities()) {
-                if (ab.getPayCosts() != null && ab.getPayCosts().hasManaCost()) {
+                if (ab.getPayCosts() != null
+                        && ab.getPayCosts().hasManaCost()
+                        && ComputerUtilMana.hasEnoughManaSourcesToCast(ab, ai)) {
                     // TODO: currently looks for non-Scry cards, can most certainly be made smarter.
                     if (ab.getApi() != ApiType.Scry) {
                         hasSomethingElse = true;
@@ -89,7 +92,7 @@ public class ScryAi extends SpellAbilityAi {
             }
         }
 
-        return (hasSomethingElse && ph.getPlayerTurn() == ai && ph.getPhase().isAfter(PhaseType.DRAW))
+        return (!hasSomethingElse && ph.getPlayerTurn() == ai && ph.getPhase().isAfter(PhaseType.DRAW))
                 || (ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN));
     }
 
