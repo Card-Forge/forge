@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import com.google.common.base.Predicates;
 import forge.ai.SpellAbilityAi;
+import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.card.Card.SplitCMCMode;
 import forge.game.phase.PhaseHandler;
@@ -48,13 +49,18 @@ public class ScryAi extends SpellAbilityAi {
         // and right before the beginning of AI's turn, if possible, to avoid mana locking the AI and also to
         // try to scry right before drawing a card. Also, avoid tapping creatures in the AI's turn, if possible,
         // even if there's no mana cost.
-        // This behavior is also forced using the AtOppEOT AI logic.
         if (sa.getPayCosts() != null) {
-            if ("AtOppEOT".equals(sa.getParam("AILogic")) || (sa.getPayCosts().hasTapCost()
+            if (sa.getPayCosts().hasTapCost()
                     && (sa.getPayCosts().hasManaCost() || (sa.getHostCard() != null && sa.getHostCard().isCreature()))
-                    && !SpellAbilityAi.isSorcerySpeed(sa))) {
+                    && !SpellAbilityAi.isSorcerySpeed(sa)) {
                 return ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN);
             }
+        }
+
+        // AI logic to scry in Main 1 if there is no better option, otherwise scry at opponent's EOT
+        // (e.g. Glimmer of Genius)
+        if ("BestOpportunity".equals(sa.getParam("AILogic"))) {
+            return doBestOpportunityAILogic(ai, sa, ph);
         }
 
         // in the playerturn Scry should only be done in Main1 or in upkeep if able
@@ -67,7 +73,26 @@ public class ScryAi extends SpellAbilityAi {
         }
         return true;
     }
-    
+
+    private boolean doBestOpportunityAILogic(Player ai, SpellAbility sa, PhaseHandler ph) {
+        // Check to see if there are any cards in hand that may be worth casting
+        boolean hasSomethingElse = false;
+        for (Card c : CardLists.filter(ai.getCardsIn(ZoneType.Hand), Predicates.not(CardPredicates.Presets.LANDS))) {
+            for (SpellAbility ab : c.getAllSpellAbilities()) {
+                if (ab.getPayCosts() != null && ab.getPayCosts().hasManaCost()) {
+                    // TODO: currently looks for non-Scry cards, can most certainly be made smarter.
+                    if (ab.getApi() != ApiType.Scry) {
+                        hasSomethingElse = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        return (hasSomethingElse && ph.getPlayerTurn() == ai && ph.getPhase().isAfter(PhaseType.DRAW))
+                || (ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN));
+    }
+
     /**
      * Checks if the AI will play a SpellAbility with the specified AiLogic
      */
