@@ -61,7 +61,7 @@ public class ScryAi extends SpellAbilityAi {
         // AI logic to scry in Main 1 if there is no better option, otherwise scry at opponent's EOT
         // (e.g. Glimmer of Genius)
         if ("BestOpportunity".equals(sa.getParam("AILogic"))) {
-            return doBestOpportunityAILogic(ai, sa, ph);
+            return doBestOpportunityLogic(ai, sa, ph);
         }
 
         // in the playerturn Scry should only be done in Main1 or in upkeep if able
@@ -75,7 +75,7 @@ public class ScryAi extends SpellAbilityAi {
         return true;
     }
 
-    private boolean doBestOpportunityAILogic(Player ai, SpellAbility sa, PhaseHandler ph) {
+    private boolean doBestOpportunityLogic(Player ai, SpellAbility sa, PhaseHandler ph) {
         // Check to see if there are any cards in hand that may be worth casting
         boolean hasSomethingElse = false;
         for (Card c : CardLists.filter(ai.getCardsIn(ZoneType.Hand), Predicates.not(CardPredicates.Presets.LANDS))) {
