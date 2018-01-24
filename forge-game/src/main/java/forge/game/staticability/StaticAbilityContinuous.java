@@ -829,19 +829,23 @@ public final class StaticAbilityContinuous {
         }
 
         // non - CharacteristicDefining
-        CardCollection affectedCards;
-        if (preList.isEmpty()) {
+        CardCollection affectedCards = new CardCollection();
+
+        // add preList in addition to the normal affected cards
+        // need to add before game cards to have preference over them
+        if (!preList.isEmpty()) {
             if (params.containsKey("AffectedZone")) {
-                affectedCards = new CardCollection(game.getCardsIn(ZoneType.listValueOf(params.get("AffectedZone"))));
+                affectedCards.addAll(CardLists.filter(preList, CardPredicates.inZone(
+                        ZoneType.listValueOf(params.get("AffectedZone")))));
             } else {
-                affectedCards = new CardCollection(game.getCardsIn(ZoneType.Battlefield));
+                affectedCards.addAll(CardLists.filter(preList, CardPredicates.inZone(ZoneType.Battlefield)));
             }
+        }
+
+        if (params.containsKey("AffectedZone")) {
+            affectedCards.addAll(game.getCardsIn(ZoneType.listValueOf(params.get("AffectedZone"))));
         } else {
-            if (params.containsKey("AffectedZone")) {
-                affectedCards = CardLists.filter(preList, CardPredicates.inZone(ZoneType.listValueOf(params.get("AffectedZone"))));
-            } else {
-                affectedCards = CardLists.filter(preList, CardPredicates.inZone(ZoneType.Battlefield));
-            }
+            affectedCards.addAll(game.getCardsIn(ZoneType.Battlefield));
         }
 
         if (params.containsKey("Affected") && !params.get("Affected").contains(",")) {
