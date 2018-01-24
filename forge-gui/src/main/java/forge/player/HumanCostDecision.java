@@ -91,7 +91,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         if (discardType.equals("Hand")) {
-            if (ability.getActivatingPlayer() != null) {
+            if (hand.size() > 1 && ability.getActivatingPlayer() != null) {
                 hand = ability.getActivatingPlayer().getController().orderMoveToZoneList(hand, ZoneType.Graveyard);
             }
             return PaymentDecision.card(hand);
@@ -116,7 +116,11 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 }
             }
 
-            return PaymentDecision.card(Aggregates.random(hand, c, new CardCollection()));
+            CardCollectionView randomSubset = Aggregates.random(hand, c, new CardCollection());
+            if (randomSubset.size() > 1 && ability.getActivatingPlayer() != null) {
+                randomSubset = ability.getActivatingPlayer().getController().orderMoveToZoneList(randomSubset, ZoneType.Graveyard);
+            }
+            return PaymentDecision.card(randomSubset);
         }
         if (discardType.contains("+WithSameName")) {
             final String type = TextUtil.fastReplace(discardType, "+WithSameName", "");
