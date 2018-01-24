@@ -100,8 +100,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             lki.animateBestow(false);
 
             CardCollection preList = new CardCollection(lki);
-            // FIXME: make this work with preList so that it doesn't cause game state corruption with pump effects (see issue #131)
-            game.getAction().checkStaticAbilities(false, Sets.newHashSet(lki), /*preList*/new CardCollection());
+            game.getAction().checkStaticAbilities(false, Sets.newHashSet(lki), preList);
             
             flash = lki.hasKeyword("Flash");
             
