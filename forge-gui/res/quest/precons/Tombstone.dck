@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Tombstone
-Description=Blue/black/white is a powerful combination in this reanimator deck. Cycling allows you to get the cards you need when you need them!
+Description=In this black and blue deck, cycling cards give you options while reanimation cards bring back the pain. Over and over.
 Deck Type=constructed
 Set=USG
 Image=tombstone.jpg

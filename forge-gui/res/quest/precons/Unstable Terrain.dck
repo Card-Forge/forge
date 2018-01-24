@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Unstable Terrain
-Description=The "Unstable Terrain" deck lets you harness the primal energy of the indigenous wildlife of Zendikar. This dangerous plane's powerful beasts will run roughshod over your enemies.
+Description=Playing Land pays big with the "landfall" ability. Make a creature bigger, gain life, steal an opponent's creature, and more. Then swoop down for a deadly finish with the Sphinx of Jwar Isle, a 5/5 blue flier that can't be targeted.
 Deck Type=constructed
 Set=ZEN
 Image=unstable_terrain.jpg
@@ -21,7 +21,7 @@ Image=unstable_terrain.jpg
 1 Merfolk Wayfinder|ZEN
 1 Roil Elemental|ZEN
 2 Sage Owl|M10
-1 Sphinx of Jwar Isle|ZEN
+1 Sphinx of Jwar Isle+|ZEN
 1 Territorial Baloth|ZEN
 1 Turntimber Basilisk|ZEN
 2 Windrider Eel|ZEN

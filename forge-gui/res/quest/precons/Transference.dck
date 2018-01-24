@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Transference
-Description=What's the next best thing to creatures that can't be destroyed? How about creatures that pass along their power and toughness when they're destroyed? The "Transference" deck explores the Darksteel set's modular ability. It runs plenty of Arcbound creatures, all of which have modular, plus there's a little blue for faster mana (that's right, blue for mana!) and some other zany tricks.
+Description=If one of your modular creatures is destroyed, make your opponent pay dearly by using that creature's +1/+1 counters to pump up another artifact creature.
 Deck Type=constructed
 Set=DST
 Image=transference.jpg

@@ -3720,7 +3720,7 @@ public class CardFactoryUtil {
                 final SpellAbility sa = AbilityFactory.getAbility(abString, card);
                 sa.setPayCosts(new Cost(card.getManaCost(), false));
                 sa.setIntrinsic(intrinsic);
-                
+                inst.addSpellAbility(sa);
             }
         } else if (keyword.startsWith("Level up")) {
             final String[] k = keyword.split(":");

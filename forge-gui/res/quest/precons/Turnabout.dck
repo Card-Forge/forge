@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Turnabout
-Description=Normally, tapping your creatures leaves you defenseless. With the "Turnabout" deck, having a bunch of tapped creatures leaves you primed to strike! Safehold Sentry, Pale Wayfarer, and any creature equipped by Umbral Mantle have Untap abilities that let them untap to provide an awesome bonus
+Description=They'll never see it coming. Your tricky creatures can untap at a whim to create combat superiority or machine-gun combos. Use their untap abilities repeatedly to build up immense creatures or swarms of tokens—and leave your opponents wondering what hit them.
 Deck Type=constructed
 Set=SHM
 Image=turnabout.jpg

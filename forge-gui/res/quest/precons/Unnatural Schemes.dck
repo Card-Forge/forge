@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Unnatural Schemes
-Description=Your enemies will try to exploit every advantage they have over you - so you need to take those advantages away from them. Use the etherium artifacts of Esper and the necromancy of Grixis to conjure up a combined assault of the unnatural and the undead.
+Description=Your enemies will try to exploit every advantage they have over you - so you need to take those advantages away from them. Use the etherium artifacts of Esper and the necromancy of Grixis to conjure up a combined assault of the unnatural and the undead. Strip your opponents' hands of annoying spells, grind away their libraries, and shrivel up their creatures.
 Deck Type=constructed
 Set=ARB
 Image=unnatural_schemes.jpg
@@ -22,7 +22,7 @@ Image=unnatural_schemes.jpg
 3 Island|ALA|3
 2 Island|ALA|4
 2 Jhessian Zombies|ARB
-1 Lich Lord of Unx|ARB
+1 Lich Lord of Unx+|ARB
 2 Nantuko Husk|10E
 1 Nemesis of Reason|ARB
 1 Phantom Warrior|10E

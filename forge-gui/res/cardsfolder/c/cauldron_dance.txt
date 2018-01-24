@@ -1,14 +1,15 @@
 Name:Cauldron Dance
 ManaCost:4 B R
 Types:Instant
-A:SP$ ChangeZone | Cost$ 4 B R | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature from your graveyard | ActivationPhases$ BeginCombat->EndCombat | AILogic$ SurpriseBlock | SubAbility$ DBAnimate | SpellDescription$ Cast CARDNAME only during combat. Return target creature card from your graveyard to the battlefield. That creature gains haste. Return it to your hand at the beginning of the next end step. You may put a creature card from your hand onto the battlefield. That creature gains haste. Its controller sacrifices it at the beginning of the next end step.
-SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Keywords$ Haste | Triggers$ TrigBounce | sVars$ TrigReturn | SubAbility$ DBChangeZone
-SVar:TrigBounce:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of the next end step, return CARDNAME to its owner's hand.
-SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
+A:SP$ ChangeZone | Cost$ 4 B R | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature from your graveyard | ActivationPhases$ BeginCombat->EndCombat | RememberChanged$ True | AILogic$ SurpriseBlock | SubAbility$ DBAnimate | SpellDescription$ Cast CARDNAME only during combat. Return target creature card from your graveyard to the battlefield. That creature gains haste. Return it to your hand at the beginning of the next end step. You may put a creature card from your hand onto the battlefield. That creature gains haste. Its controller sacrifices it at the beginning of the next end step.
+SVar:DBAnimate:DB$ Animate | Keywords$ Haste | Permanent$ True | sVars$ SneakAttackEOT | Defined$ Remembered | SubAbility$ DelTrig 
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigBounce | RememberObjects$ Remembered | TriggerDescription$ Return the permanent to its owner's hand at the beginning of the next end step. | SubAbility$ DBChangeZone | AILogic$ Always | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:TrigBounce:DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Hand
+SVar:SneakAttackEOT:SVar:EndOfTurnLeavePlay:True
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Optional$ You | ChangeType$ Creature | ChangeNum$ 1 | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBAnimate2
-SVar:DBAnimate2:DB$ Animate | Defined$ Remembered | Keywords$ Haste | Triggers$ TrigSacrifice | sVars$ TrigSac
-SVar:TrigSacrifice:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of the next end step, sacrifice CARDNAME.
-SVar:TrigSac:DB$ Sacrifice | Defined$ Self | SubAbility$ DBCleanup
+SVar:DBAnimate2:DB$ Animate | Keywords$ Haste | Permanent$ True | sVars$ SneakAttackEOT | Defined$ Remembered | SubAbility$ DelTrig2 
+SVar:DelTrig2:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigSac | RememberObjects$ Remembered | TriggerDescription$ Its controller sacrifices it at the beginning of the next end step. | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:TrigSac:DB$ SacrificeAll | Defined$ DelayTriggerRemembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cauldron_dance.jpg
 Oracle:Cast Cauldron Dance only during combat.\nReturn target creature card from your graveyard to the battlefield. That creature gains haste. Return it to your hand at the beginning of the next end step.\nYou may put a creature card from your hand onto the battlefield. That creature gains haste. Its controller sacrifices it at the beginning of the next end step.
