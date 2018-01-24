@@ -63,8 +63,8 @@ public class AiCostDecision extends CostDecisionMakerBase {
     @Override
     public PaymentDecision visit(CostDiscard cost) {
         final String type = cost.getType();
+        CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
 
-        final CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
         if (type.equals("LastDrawn")) {
             if (!hand.contains(player.getLastDrawnCard())) {
                 return null;
@@ -79,6 +79,9 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.card(source);
         }
         else if (type.equals("Hand")) {
+            if (ability.getActivatingPlayer() != null) {
+                hand = ability.getActivatingPlayer().getController().orderMoveToZoneList(hand, ZoneType.Graveyard);
+            }
             return PaymentDecision.card(hand);
         }
 

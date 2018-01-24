@@ -91,6 +91,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         if (discardType.equals("Hand")) {
+            if (ability.getActivatingPlayer() != null) {
+                hand = ability.getActivatingPlayer().getController().orderMoveToZoneList(hand, ZoneType.Graveyard);
+            }
             return PaymentDecision.card(hand);
         }
 
