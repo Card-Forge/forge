@@ -5,14 +5,15 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Spectral Legions
-Description=You're in command of the afterlife. Spook your opponents with a cadre of flying ghosts blessed with divine powers. Your victory will haunt them for days!
+Description=Fill the skies with swirls of geists, then power up all your creatures of the spectral realms. Be sure to laugh maniacally as your enemies scramble to steam your swarm of horrifying haunts.
+Deck Type=constructed
 Deck Type=constructed
 Set=ISD
 Image=spectral_legions.jpg
 [main]
 10 Island|ISD
 14 Plains|ISD
-1 Angel of Flight Alabaster|ISD
+1 Angel of Flight Alabaster+|ISD
 1 Battleground Geist|ISD
 2 Chapel Geist|ISD
 2 Doomed Traveler|ISD
