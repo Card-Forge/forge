@@ -1,7 +1,9 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicates;
+import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
+import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.card.Card.SplitCMCMode;
 import forge.game.phase.PhaseHandler;
@@ -56,6 +58,12 @@ public class ScryAi extends SpellAbilityAi {
             }
         }
 
+        // AI logic to scry in Main 1 if there is no better option, otherwise scry at opponent's EOT
+        // (e.g. Glimmer of Genius)
+        if ("BestOpportunity".equals(sa.getParam("AILogic"))) {
+            return doBestOpportunityLogic(ai, sa, ph);
+        }
+
         // in the playerturn Scry should only be done in Main1 or in upkeep if able
         if (ph.isPlayerTurn(ai)) {
             if (SpellAbilityAi.isSorcerySpeed(sa)) {
@@ -66,7 +74,28 @@ public class ScryAi extends SpellAbilityAi {
         }
         return true;
     }
-    
+
+    private boolean doBestOpportunityLogic(Player ai, SpellAbility sa, PhaseHandler ph) {
+        // Check to see if there are any cards in hand that may be worth casting
+        boolean hasSomethingElse = false;
+        for (Card c : CardLists.filter(ai.getCardsIn(ZoneType.Hand), Predicates.not(CardPredicates.Presets.LANDS))) {
+            for (SpellAbility ab : c.getAllSpellAbilities()) {
+                if (ab.getPayCosts() != null
+                        && ab.getPayCosts().hasManaCost()
+                        && ComputerUtilMana.hasEnoughManaSourcesToCast(ab, ai)) {
+                    // TODO: currently looks for non-Scry cards, can most certainly be made smarter.
+                    if (ab.getApi() != ApiType.Scry) {
+                        hasSomethingElse = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        return (!hasSomethingElse && ph.getPlayerTurn() == ai && ph.getPhase().isAfter(PhaseType.DRAW))
+                || (ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN));
+    }
+
     /**
      * Checks if the AI will play a SpellAbility with the specified AiLogic
      */

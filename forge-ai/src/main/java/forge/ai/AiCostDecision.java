@@ -63,8 +63,8 @@ public class AiCostDecision extends CostDecisionMakerBase {
     @Override
     public PaymentDecision visit(CostDiscard cost) {
         final String type = cost.getType();
+        CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
 
-        final CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
         if (type.equals("LastDrawn")) {
             if (!hand.contains(player.getLastDrawnCard())) {
                 return null;
@@ -79,6 +79,9 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.card(source);
         }
         else if (type.equals("Hand")) {
+            if (hand.size() > 1 && ability.getActivatingPlayer() != null) {
+                hand = ability.getActivatingPlayer().getController().orderMoveToZoneList(hand, ZoneType.Graveyard);
+            }
             return PaymentDecision.card(hand);
         }
 
@@ -95,7 +98,11 @@ public class AiCostDecision extends CostDecisionMakerBase {
         }
 
         if (type.equals("Random")) {
-            return PaymentDecision.card(CardLists.getRandomSubList(new CardCollection(hand), c));
+            CardCollectionView randomSubset = CardLists.getRandomSubList(new CardCollection(hand), c);
+            if (randomSubset.size() > 1 && ability.getActivatingPlayer() != null) {
+                randomSubset = ability.getActivatingPlayer().getController().orderMoveToZoneList(randomSubset, ZoneType.Graveyard);
+            }
+            return PaymentDecision.card(randomSubset);
         }
         else {
             final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
