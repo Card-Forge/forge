@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Sole Domination
-Description=The "Sole Domination" deck focuses on creatures with the exalted ability. If you attack with exactly one creature, each of your creatures with exalted boosts that creature by giving it +1/+1 for the turn—and you'll still have the other creatures back on defense!
+Description=Choose a single fearsome attacker to lead the charge in this deck filled with exalted creatures led by the legendary demon Nefarox, Overlord of Grixis. Your other forces lend support and defense, ready for their turn to lead the attack.
 Deck Type=constructed
 Set=M13
 Image=sole_domination.jpg
@@ -14,7 +14,7 @@ Image=sole_domination.jpg
 1 Xathrid Gorgon|M13
 1 Veilborn Ghoul|M13
 2 Murder|M13
-1 Nefarox, Overlord of Grixis|M13
+1 Nefarox, Overlord of Grixis+|M13
 1 Ring of Xathrid|M13
 2 Bloodhunter Bat|M13
 2 Pacifism|M13
