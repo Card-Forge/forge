@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Stampede
-Description=One very good strategy is to pound your opponents into the ground before they're able to bring their artifacts out and use them, and the "Stampede" deck can help you achieve this goal.
+Description=h, the purity of good ol' red-green beatdown. The "Stampede" deck contains some of the Mirrodin block's finest face-stompers, all ready and waiting to apply hurt to your opponents.
 Deck Type=constructed
 Set=5DN
 Image=stampede.jpg
