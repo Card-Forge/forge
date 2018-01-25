@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Surge of Resistance
-Description=Oath of the Gatewatch U/R Intro Pack
+Description=Sometimes casting one spell just isn't enough. Your spells with surge get cheaper or better if you've already cast a spell this turn. Save up a handful of cards, then finish off your opponent in a flurry of spells.
 Deck Type=constructed
 Set=OGW
 Image=surge_of_resistance.jpg
@@ -30,7 +30,7 @@ Image=surge_of_resistance.jpg
 1 Roiling Waters|OGW
 1 Rolling Thunder|BFZ
 2 Stormchaser Mage|OGW
-1 Tyrant of Valakut|OGW
+1 Tyrant of Valakut+|OGW
 1 Ugin's Insight|BFZ
 3 Umara Entangler|OGW
 1 Windrider Patrol|BFZ
