@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Spiritcraft
-Description=Permanents with "spiritcraft" have abilities that trigger "whenever you play a Spirit or Arcane spell." Since nearly every nonland card in the "Spiritcraft" deck is either a Spirit or an Arcane spell, nearly every spell you play has the potential to generate two, three, or even more bonus effects for free!
+Description=Each kami in the spirit world is in tune with each other kami, their energies flowing together in an arcane magical dance. The "spiritcraft" and splice mechanics feed off that energy, generating mind-blowing effects for little cost.
 Deck Type=constructed
 Set=BOK
 Image=spiritcraft.jpg
