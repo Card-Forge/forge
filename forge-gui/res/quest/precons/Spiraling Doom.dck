@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Spiraling Doom
-Description=The "Spiraling Doom" deck is an extremely reactive deck: most of your decisions will depend on what your opponent is doing and how your opponent is trying to win the game. The key card in your deck is Birthing Pod, which lets you sacrifice a creature to go get a slightly more expensive creature out of your library.
+Description=Mock life and cheat death! This green and black deck is packed with hard-to-kill creatures, including those with the new undying ability, and many more ways to turn your smaller threats into larger ones.
 Deck Type=constructed
 Set=DKA
 Image=spiraling_doom.jpg
