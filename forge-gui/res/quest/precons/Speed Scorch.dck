@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Speed Scorch
-Description=The "Speed Scorch" deck is chock-full of everyone's favorite little red creatures. All but one of the deck's creatures are Goblins, and the last creature is the Goblin King! Your mission is clear: overrun your opponent with Goblins. While your opponent tries to fend off your horde, you can use your instants and sorceries to blow things up.
+Description=Size doesn't always count. But numbers do, and this deck proves it. Burn away enemy creatures and then swarm your opponent with this loaded deck of small, speedy Goblins.
 Deck Type=constructed
 Set=8ED
 Image=speed_scorch.jpg
