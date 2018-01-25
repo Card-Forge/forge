@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Surprise Attack
-Description=Surprise Attack Intro Deck
+Description=Keep your opponents guessing by concealing your creatures with morph until just the right moment. Use the manifest mechanic to bring cards from the top of your library into the battle. The element of surprise will give you the upper hand.
 Deck Type=constructed
 Set=FRF
 Image=surprise_attack.jpg
