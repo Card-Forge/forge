@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Sleeper
-Description=This mono white deck exploits the many sleeping enchantments in Urza's Saga that will awaken and transform into powerful creatures. 
+Description=Take control of the field with this innovative white creature deck. When the "Sleeper" awakens, your enchantments will transform into powerful creatures.
 Deck Type=constructed
 Set=USG
 Image=sleeper.jpg
