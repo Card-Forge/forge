@@ -90,7 +90,7 @@ final class CardFace implements ICardFace {
     void setPtText(String value) {
         final int slashPos = value.indexOf('/');
         if (slashPos == -1) {
-            throw new RuntimeException(TextUtil.concatWithSpace("Creature", TextUtil.enclosedSingleQuote(this.getName()),"has bad p/t stats"));
+            throw new RuntimeException("Creature '" + this.getName() + "' has bad p/t stats");
         }
         boolean negPower = value.charAt(0) == '-';
         boolean negToughness = value.charAt(slashPos + 1) == '-';
