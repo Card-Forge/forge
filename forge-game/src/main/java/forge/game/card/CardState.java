@@ -384,16 +384,20 @@ public class CardState extends GameObject {
 
         manaAbilities.clear();
         for (SpellAbility sa : source.manaAbilities) {
-            SpellAbility saCopy = sa.copy();
-            saCopy.setHostCard(card); // update HostCard
-            manaAbilities.add(saCopy);
+            if (sa.isIntrinsic()) {
+                SpellAbility saCopy = sa.copy();
+                saCopy.setHostCard(card); // update HostCard
+                manaAbilities.add(saCopy);
+            }
         }
 
         nonManaAbilities.clear();
         for (SpellAbility sa : source.nonManaAbilities) {
-            SpellAbility saCopy = sa.copy();
-            saCopy.setHostCard(card); // update HostCard
-            nonManaAbilities.add(saCopy);
+            if (sa.isIntrinsic()) {
+                SpellAbility saCopy = sa.copy();
+                saCopy.setHostCard(card); // update HostCard
+                nonManaAbilities.add(saCopy);
+            }
         }
 
         setIntrinsicKeywords(source.intrinsicKeywords.getValues());
