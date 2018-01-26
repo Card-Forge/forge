@@ -395,7 +395,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
                 calculatedType = StringUtils.join(getTypesBeforeDash(), ' ');
             }
             else {
-                calculatedType = TextUtil.concatWithSpace(StringUtils.join(getTypesBeforeDash(), ' '), "-", StringUtils.join(subtypes, " "));
+                calculatedType = StringUtils.join(getTypesBeforeDash(), ' ') + " - " + StringUtils.join(subtypes, " ");
             }
         }
         return calculatedType;

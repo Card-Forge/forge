@@ -222,7 +222,7 @@ public final class CardRules implements ICardCharacteristics {
     public void setVanguardProperties(String pt) {
         final int slashPos = pt == null ? -1 : pt.indexOf('/');
         if (slashPos == -1) {
-            throw new RuntimeException(TextUtil.concatWithSpace("Vanguard", TextUtil.enclosedSingleQuote(this.getName()), "has bad hand/life stats"));
+            throw new RuntimeException("Vanguard '" + this.getName() + "' has bad hand/life stats");
         }
         this.deltaHand = Integer.parseInt(TextUtil.fastReplace(pt.substring(0, slashPos), "+", ""));
         this.deltaLife = Integer.parseInt(TextUtil.fastReplace(pt.substring(slashPos+1), "+", ""));
