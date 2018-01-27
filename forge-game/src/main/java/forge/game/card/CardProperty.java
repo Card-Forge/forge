@@ -1549,21 +1549,23 @@ public class CardProperty {
             for (final Object o : source.getRemembered()) {
                 if (o instanceof Card) {
                     rememberedcard = (Card) o;
-                    if (!card.getBlockedThisTurn().contains(rememberedcard)) {
-                        return false;
+                    if (card.getBlockedThisTurn().contains(rememberedcard)) {
+                        return true;
                     }
                 }
             }
+            return false;
         } else if (property.startsWith("blockedByRemembered")) {
             Card rememberedcard;
             for (final Object o : source.getRemembered()) {
                 if (o instanceof Card) {
                     rememberedcard = (Card) o;
-                    if (!card.getBlockedByThisTurn().contains(rememberedcard)) {
-                        return false;
+                    if (card.getBlockedByThisTurn().contains(rememberedcard)) {
+                        return true;
                     }
                 }
             }
+            return false;
         } else if (property.startsWith("unblocked")) {
             if (combat == null || !combat.isUnblocked(card)) {
                 return false;
