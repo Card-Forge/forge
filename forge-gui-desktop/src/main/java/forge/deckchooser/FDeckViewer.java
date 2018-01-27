@@ -1,5 +1,6 @@
 package forge.deckchooser;
 
+import com.sun.prism.Graphics;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -123,10 +124,12 @@ public class FDeckViewer extends FDialog {
         if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_SMALL_DECK_VIEWER)){
             width = 800;
             height = 600;
-        }else{
-            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-            width = (int)(screenSize.width * 0.8);
-            height = (int)(screenSize.height * 0.9);
+        }
+        else {
+            GraphicsDevice gd = this.getGraphicsConfiguration().getDevice();
+
+            width = (int)(gd.getDisplayMode().getWidth() * 0.8);
+            height = (int)(gd.getDisplayMode().getHeight() * 0.9);
         }
 
         this.setPreferredSize(new Dimension(width, height));
