@@ -574,7 +574,7 @@ public class CountersPutAi extends SpellAbilityAi {
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
 
         final boolean isMandatoryTrigger = (sa.isTrigger() && !sa.isOptionalTrigger()) 
-                || (sa.getRootAbility().isTrigger() || !sa.getRootAbility().isOptionalTrigger());
+                || (sa.getRootAbility().isTrigger() && !sa.getRootAbility().isOptionalTrigger());
 
         if (sa.usesTargeting()) {
             CardCollection list = null;
