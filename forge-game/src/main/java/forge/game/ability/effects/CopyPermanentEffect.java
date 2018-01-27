@@ -343,7 +343,8 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                             ab.getRestrictions().resetTurnActivations();
                         }
                     }
-
+                    // set the controller before move to play: Crafty Cutpurse
+                    copy.setController(controller, 0);
                     copy.updateStateForView();
 
                     // Temporarily register triggers of an object created with CopyPermanent
@@ -351,7 +352,6 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     final Card copyInPlay = game.getAction().moveToPlay(copy, sa, Maps.newHashMap());
 
                     // when copying something stolen:
-                    copyInPlay.setController(controller, 0);
                     copyInPlay.setSetCode(c.getSetCode());
 
                     copyInPlay.setCloneOrigin(hostCard);
