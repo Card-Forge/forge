@@ -76,6 +76,16 @@ cardPicsDir=
 #   Ex: cardPicsSubDirs=LEA->Alpha|ROE->Rise of Eldrazi
 cardPicsSubDirs=
 
+# This is the top level directory that forge will use for storing and
+# locating decklists. The default value (for all plaforms) is:
+#   <the userDir defined above>/decks/
+decksDir=
+
+# This is where forge will look for your constructed format decklists.
+# The default value (for all plaforms) is:
+#   <the decksDir defined above>/constructed/
+decksConstructedDir=
+
 # Forge server port. Values under 1024 won't work on Mac OSX or on the various
 *nixes.
 serverPort=
