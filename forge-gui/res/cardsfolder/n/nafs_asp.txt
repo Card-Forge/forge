@@ -7,6 +7,6 @@ SVar:NafsEffect:DB$ Effect | Name$ Nafs Asp Effect | EffectOwner$ TriggeredTarge
 SVar:DrawTrig:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Command | Execute$ Bleed | TriggerDescription$ You lose 1 life at the beginning of your next draw step unless you pay {1} before that draw step.
 SVar:Bleed:DB$ LoseLife | Defined$ You | LifeAmount$ 1 | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:PayUp:AB$ ChangeZone | Cost$ 1 | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True | ActivationZone$ Command | AILogic$ Always | SpellDescription$ Pay 1 to remove this effect.
+SVar:PayUp:ST$ ChangeZone | Cost$ 1 | Defined$ Self | Origin$ Command | Destination$ Exile | ActivationZone$ Command | AILogic$ Always | SpellDescription$ Pay {1} to remove this effect.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nafs_asp.jpg
 Oracle:Whenever Nafs Asp deals damage to a player, that player loses 1 life at the beginning of his or her next draw step unless he or she pays {1} before that draw step.
