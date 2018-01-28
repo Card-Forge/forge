@@ -3263,7 +3263,7 @@ public class CardFactoryUtil {
         } else if (keyword.equals("Rebound")) {
             String repeffstr = "Event$ Moved | ValidCard$ Card.Self+wasCastFromHand+YouOwn+YouCtrl "
             + " | Origin$ Stack | Destination$ Graveyard | Fizzle$ False "
-            + " | Description$ " + Keyword.REBOUND.getDescription();
+            + " | Description$ Rebound (" + inst.getReminderText() + ")";
 
             String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile";
             String delTrig = "DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You " + 
@@ -3292,12 +3292,29 @@ public class CardFactoryUtil {
             re.setOverridingAbility(saExile);
 
             inst.addReplacement(re);
-        } else if (keyword.equals("Unleash")) {
-            String effect = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Unleash (" + inst.getReminderText() + ")";
+        } else if (keyword.equals("Totem armor")) {
+            String repeffstr = "Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.EnchantedBy"
+                    + " | Secondary$ True | TotemArmor$ True"
+                    + " | Description$ Totem armor (" + inst.getReminderText() + ")";
 
-            ReplacementEffect cardre = createETBReplacement(card, ReplacementLayer.Other, effect, true, true, intrinsic, "Card.Self", "");
+            String abprevDamage = "DB$ DealDamage | Defined$ ReplacedCard | Remove$ All ";
+            String abdestory = "DB$ Destroy | Defined$ Self";
 
-            inst.addReplacement(cardre);
+            SpellAbility sa = AbilityFactory.getAbility(abprevDamage, card);
+
+            final AbilitySub dessub = (AbilitySub) AbilityFactory.getAbility(abdestory, card);
+
+            sa.setSubAbility(dessub);
+
+            if (!intrinsic) {
+                sa.setIntrinsic(false);
+            }
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
+
+            re.setOverridingAbility(sa);
+
+            inst.addReplacement(re);
         } else if (keyword.startsWith("Tribute")) {
             final String[] k = keyword.split(":");
             final String tributeAmount = k[1];
@@ -3308,6 +3325,12 @@ public class CardFactoryUtil {
                     + " ("+ inst.getReminderText() + ")";
 
             ReplacementEffect cardre = createETBReplacement(card, ReplacementLayer.Other, effect, false, true, intrinsic, "Card.Self", "");
+
+            inst.addReplacement(cardre);
+        } else if (keyword.equals("Unleash")) {
+            String effect = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Unleash (" + inst.getReminderText() + ")";
+
+            ReplacementEffect cardre = createETBReplacement(card, ReplacementLayer.Other, effect, true, true, intrinsic, "Card.Self", "");
 
             inst.addReplacement(cardre);
         } else if (keyword.startsWith("Vanishing") && keyword.contains(":")) {
@@ -4237,27 +4260,5 @@ public class CardFactoryUtil {
         sa.appendSubAbility(as);
         return as;
         // ETBReplacementMove(sa.getHostCard(), null));
-    }
-
-    public final static void refreshTotemArmor(Card c) {
-        boolean hasKw = c.hasKeyword("Totem armor");
-
-        CardState state = c.getCurrentState();
-        FCollectionView<ReplacementEffect> res = state.getReplacementEffects();
-        for (int ix = 0; ix < res.size(); ix++) {
-            ReplacementEffect re = res.get(ix);
-            if (re.getMapParams().containsKey("TotemArmor")) {
-                if (hasKw) { return; } // has re and kw - nothing to do here
-                state.removeReplacementEffect(re);
-                ix--;
-            }
-        }
-
-        if (hasKw) { 
-            ReplacementEffect re = ReplacementHandler.parseReplacement("Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.EnchantedBy | ReplaceWith$ RegenTA | Secondary$ True | TotemArmor$ True | Description$ Totem armor - " + c, c, true);
-            c.getSVars().put("RegenTA", "AB$ DealDamage | Cost$ 0 | Defined$ ReplacedCard | Remove$ All | SubAbility$ DestroyMe");
-            c.getSVars().put("DestroyMe", "DB$ Destroy | Defined$ Self");
-            state.addReplacementEffect(re);
-        }
     }
 }

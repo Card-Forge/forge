@@ -1427,12 +1427,6 @@ public class GameAction {
             return false;
         }
 
-        if (c.isEnchanted()) {
-            for (Card e : c.getEnchantedBy(false)) {
-                CardFactoryUtil.refreshTotemArmor(e);
-            }
-        }
-
         // Replacement effects
         final Map<String, Object> repRunParams = Maps.newHashMap();
         repRunParams.put("Event", "Destroy");

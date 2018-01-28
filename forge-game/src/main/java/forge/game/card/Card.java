@@ -1542,6 +1542,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || (keyword.startsWith("Split second") && !sb.toString().contains("Split second"))
                     || keyword.equals("Suspend") // for the ones without amounnt
                     || keyword.equals("Hideaway") || keyword.equals("Ascend")
+                    || keyword.equals("Totem armor")
                     || keyword.equals("Devoid")){
                 sbLong.append(keyword + " (" + inst.getReminderText() + ")");
             } else if (keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst")
@@ -1566,7 +1567,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                      || keyword.equals("Exalted") || keyword.equals("Extort")|| keyword.equals("Flanking")
                      || keyword.equals("Horsemanship") || keyword.equals("Infect")|| keyword.equals("Persist")
                      || keyword.equals("Phasing") || keyword.equals("Shadow")|| keyword.equals("Skulk")
-                     || keyword.equals("Undying") || keyword.equals("Wither") || keyword.equals("Totem armor")
+                     || keyword.equals("Undying") || keyword.equals("Wither")
                      || keyword.startsWith ("Afflict") || keyword.startsWith("Bushido") || keyword.startsWith ("Poisonous")
                     || keyword.startsWith ("Rampage") || keyword.startsWith("Cascade")) {
                 if (sb.length() != 0) {
