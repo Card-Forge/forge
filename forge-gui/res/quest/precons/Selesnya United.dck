@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Selesnya United
-Description=The "Selesnya United" deck generates wave upon wave of creatures to drown your opponent under an ocean of Saprolings and their mighty friends! Token-making cards like Fists of Ironwood, Selesnya Evangel, and Scatter the Seeds can create a frenzy of Saprolings in no time. The convoke ability then lets you tap these creepy fungus monsters to help pay for gigantic creatures like Siege Wurm or crushing spells like Overwhelm.
+Description=The Selesnya guild values the life of each living thing-- and it will overwhelm anyone who doesn't. The convoke mechanic is just one way it produces new creatures at a massive rate, ensuring all enemies will soon be outnumbered.
 Deck Type=constructed
 Set=RAV
 Image=selesnya_united.jpg
