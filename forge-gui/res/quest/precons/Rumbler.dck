@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Rumbler
-Description=The most savage brutes from the jungle paradise of Naya and the volcanic wastes of Jund have assembled, awaiting your command. Burn away the flinching speed bumps your opponents shove in your way, or simply smash through them.
+Description=The most savage brutes from the jungle paradise of Naya and the volcanic wastes of Jund have assembled, awaiting your command. Burn away the flinching speed bumps your opponents shove in your way, or simply smash through them. Your robust monsters will ignore the strategies-- and then the pleas-- of enemy planeswalkers as you stomp your way to yet another big win.
 Deck Type=constructed
 Set=ARB
 Image=rumbler.jpg
@@ -30,7 +30,7 @@ Image=rumbler.jpg
 1 Rockslide Elemental|ALA
 1 Sangrite Surge|ALA
 2 Shock|10E
-1 Spellbreaker Behemoth|ARB
+1 Spellbreaker Behemoth+|ARB
 2 Terramorphic Expanse|10E
 1 Thunder-Thrash Elder|ALA
 1 Tukatongue Thallid|CFX
