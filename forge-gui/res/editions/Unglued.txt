@@ -2,7 +2,6 @@
 Code=UGL
 Date=1998-08-11
 Name=Unglued
-Code2=UG
 MciCode=ug
 Type=Other
 
