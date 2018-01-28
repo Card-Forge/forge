@@ -2,7 +2,6 @@
 Code=UNH
 Date=2004-11-20
 Name=Unhinged
-Code2=UH
 MciCode=uh
 Type=Other
 
