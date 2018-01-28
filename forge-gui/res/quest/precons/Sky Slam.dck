@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Sky Slam 
-DescriptionGround creatures can only stand by helplessly unable to block your soaring agents of destruction. With all its counters and bounce spells, this deck will make your opponent's head spin.
+Description=Ground creatures can only stand by helplessly unable to block your soaring agents of destruction. With all its counters and bounce spells, this deck will make your opponent's head spin.
 Deck Type=constructed
 Set=8ED
 Image=sky_slam.jpg
