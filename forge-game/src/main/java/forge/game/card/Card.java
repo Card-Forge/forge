@@ -847,6 +847,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         currentState.clearTriggers();
     }
     
+    public final boolean hasTrigger(final Trigger t) {
+       return currentState.hasTrigger(t);
+    }
+
+    public final boolean hasTrigger(final int id) {
+        return currentState.hasTrigger(id);
+    }
+
     public void updateTriggers(List<Trigger> list, CardState state) {
         for (KeywordInterface kw : getUnhiddenKeywords(state)) {
             list.addAll(kw.getTriggers());
@@ -2193,13 +2201,15 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final void addSpellAbility(final SpellAbility a) {
         a.setHostCard(this);
-        currentState.addSpellAbility(a);
-        currentState.getView().updateAbilityText(this, currentState);
+        if (currentState.addSpellAbility(a)) {
+            currentState.getView().updateAbilityText(this, currentState);
+        }
     }
 
     public final void removeSpellAbility(final SpellAbility a) {
-        currentState.removeSpellAbility(a);
-        currentState.getView().updateAbilityText(this, currentState);
+        if (currentState.removeSpellAbility(a)) {
+            currentState.getView().updateAbilityText(this, currentState);
+        }
     }
 
     public final FCollectionView<SpellAbility> getSpellAbilities() {
@@ -2212,6 +2222,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         return currentState.getNonManaAbilities();
     }
     
+    public final boolean hasSpellAbility(final SpellAbility sa) {
+        return currentState.hasSpellAbility(sa);
+    }
+
+    public final boolean hasSpellAbility(final int id) {
+        return currentState.hasSpellAbility(id);
+    }
+
     public void updateSpellAbilities(List<SpellAbility> list, CardState state, Boolean mana) {
         for (KeywordInterface kw : getUnhiddenKeywords(state)) {
             for (SpellAbility sa : kw.getAbilities()) {

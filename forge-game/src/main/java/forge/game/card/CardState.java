@@ -222,6 +222,19 @@ public class CardState extends GameObject {
         return new FCollection<SpellAbility>(Iterables.filter(getSpellAbilities(), SpellAbilityPredicates.isIntrinsic()));
     }
 
+    public final boolean hasSpellAbility(final SpellAbility sa) {
+        return getSpellAbilities().contains(sa);
+    }
+
+    public final boolean hasSpellAbility(final int id) {
+        for (SpellAbility sa : getSpellAbilities()) {
+            if (id == sa.getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public final void setNonManaAbilities(SpellAbility sa) {
     	nonManaAbilities.clear();
     	if (sa != null) {
@@ -279,6 +292,20 @@ public class CardState extends GameObject {
         card.updateTriggers(result, this);
         return result;
     }
+
+    public final boolean hasTrigger(final Trigger t) {
+        return getTriggers().contains(t);
+    }
+
+    public final boolean hasTrigger(final int id) {
+        for (final Trigger t : getTriggers()) {
+            if (id == t.getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public final void setTriggers(final FCollection<Trigger> triggers0) {
         triggers = triggers0;
     }
@@ -331,6 +358,10 @@ public class CardState extends GameObject {
     }
     public void clearReplacementEffects() {
         replacementEffects.clear();
+    }
+
+    public final boolean hasReplacementEffect(final ReplacementEffect re) {
+        return getReplacementEffects().contains(re);
     }
 
     public final Map<String, String> getSVars() {
