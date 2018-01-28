@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Sliver Shivers
-Description=They're back! It's been a few years, but Slivers make their long-awaited return in the Legions set, complete with some cool new abilities. The "Sliver Shivers" deck isn't the fastest deck on the planet, but what it lacks in speed it makes up for in strategy and great mid-game strength.
+Description=A fan favorite returns-- the Slivers are loose! Each Sliver splices its own ability onto all other Slivers in play. And now, some even power up Slivers in your hand. Team up and take down.
 Deck Type=constructed
 Set=LGN
 Image=sliver_shivers.jpg

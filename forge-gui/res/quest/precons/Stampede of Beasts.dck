@@ -8,7 +8,7 @@ Deck Type=constructed
 Set=M11
 Image=stampede_of_beasts.jpg
 Name=Stampede of Beasts
-Description=The "Stampede of Beasts" deck uses fearsome creatures to trample the opposition. Start the game off with Llanowar Elves and Sylvan Ranger. They'll help you get the mana you need to cast the large creatures that form the bulk of your offense.
+Description=Summon monstrous beasts, wurms, and hydras, and use them to stomp your opponent's forces like insects. Then cast Overwhelming Stampede to give your forces a lethal boost of power.
 [Main]
 1 Act of Treason|M11
 2 Awakener Druid|M11
@@ -28,7 +28,7 @@ Description=The "Stampede of Beasts" deck uses fearsome creatures to trample the
 2 Llanowar Elves|M11
 8 Mountain|M11
 1 Nature's Spiral|M11
-1 Overwhelming Stampede|M11
+1 Overwhelming Stampede+|M11
 1 Plummet|M11
 2 Prized Unicorn|M11
 1 Protean Hydra|M11

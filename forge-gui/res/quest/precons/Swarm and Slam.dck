@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Swarm and Slam
-Description=The "Swarm & Slam" deck wins by bringing out lots of creatures, then making them too tough to handle. Once you get started, you'll never stop producing creatures--except to improve on them. If you get a little time to build up, you'll have an overwhelming force.
+Description=Swarm your opponents with creatures and creature tokens, and then screw 'em up with a devastating Echoing Courage, which gives all same-named creatures a boost.
 Deck Type=constructed
 Set=DST
 Image=swarm_and_slam.jpg

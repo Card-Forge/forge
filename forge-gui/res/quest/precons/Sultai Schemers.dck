@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Sultai Schemers
-Description=The Sultai Brood - represented by the fang of the dragon - is ruthless and pitiless, seeking power and wealth in all forms. The Sultai think nothing of making a profitable pact with demons, nor using necromancy to crush their enemies with the power of the grave.
+Description=The Sultai seek to rule with ruthlessness and dark magic. Use the power of the graveyard to summon a legion of undead servants and subjugate the inferior clans.
 Deck Type=constructed
 Set=KTK
 Image=sultai_schemers.jpg
@@ -25,7 +25,7 @@ Image=sultai_schemers.jpg
 2 Necromancer's Assistant|M15
 1 Gravedigger|M15
 1 Rotfeaster Maggot|M15
-1 Rakshasa Vizier|KTK
+1 Rakshasa Vizier+|KTK
 1 Sultai Soothsayer|KTK
 2 Sultai Scavenger|KTK
 2 Hooting Mandrills|KTK

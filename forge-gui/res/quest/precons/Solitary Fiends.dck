@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Solitary Fiends
-Description=With the "Solitary Fiends" deck, your nefarious scheme is to have exactly one creature on the battlefield. Your most powerful threats thrive if you meet this condition.
+Description=Direct the theater of war and put a deadly force center stage. The "Solitary Fiends" deck contains spells that clear the way for your singular threats to dominate the scene. The battle is yours to control.
 Deck Type=constructed
 Set=AVR
 Image=solitary_fiends.jpg
@@ -19,7 +19,7 @@ Image=solitary_fiends.jpg
 1 Crypt Creeper|AVR
 2 Fettergeist|AVR
 1 Havengul Skaab|AVR
-1 Lone Revenant|AVR
+1 Lone Revenant+|AVR
 2 Marrow Bats|AVR
 2 Mist Raven|AVR
 2 Renegade Demon|AVR

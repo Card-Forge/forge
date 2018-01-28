@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Sunburst
-Description=One of the highlights of the Fifth Dawn set is the new sunburst mechanic. Artifacts with sunburst reward decks that play many colors of mana, and the "Sunburst" deck is set up to take full advantage. If you spend four or five different colors of mana on a card like Skyreach Manta, the results can be devastating.
+Description=Use mana-filtering cards to get the most from the Fifth Dawn set's sunburst cards. Pay for your artifacts with different colors of mana and sunburst artifacts reward you with raw power.
 Deck Type=constructed
 Set=5DN
 Image=sunburst.jpg

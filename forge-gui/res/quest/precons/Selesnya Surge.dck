@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Selesnya Surge
-Description=Unite together behind the banner of Selesnya, and take command of an army that adds to its ranks with every step. This deck centers around the Selesnya guild's populate mechanic, which allows you to make a copy of any creature token you control. That means your first order of business is getting a token onto the battlefield as quickly as possible.
+Description=The Selesnya Conclave relentlessly seeks to grow its ranks-- both outward and upward. Use the populate ability to multiply your largest token creatures, then go forth and spread the good word. Grow big or go home!
 Deck Type=constructed
 Set=RTR
 Image=selesnya_surge.jpg
@@ -26,7 +26,7 @@ Image=selesnya_surge.jpg
 2 Savage Surge|RTR
 1 Vitu-Ghazi Guildmage|RTR
 1 Phantom General|RTR
-1 Grove of the Guardian|RTR
+1 Grove of the Guardian+|RTR
 1 Selesnya Guildgate|RTR
 1 Healer of the Pride|M13
 2 Bountiful Harvest|M13

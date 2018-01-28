@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Sacrificial Bam
-Description=The "Sacrificial Bam" deck appeals to your self-destructive side - it encourages you to smash your own artifacts. The deck is filled with artifacts that sacrifice themselves for some cool effect, cards that get very happy when you feed them artifacts, and even ways to get those abused artifacts back from the graveyard.
+Description=Make an inhuman sacrifice and be rewarded. Send artifacts to your graveyard and pump up creatures, or make your opponent lose life and then lose it altogether.
 Deck Type=constructed
 Set=MRD
 Image=sacrificial_bam.jpg

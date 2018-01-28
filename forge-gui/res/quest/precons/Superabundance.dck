@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Superabundance
-Description=The "Superabundance" deck gives you more than you ask for... and gives your opponents more than they can handle. The deck is packed to the gills with abilities that trigger each time you play a blue spell or a green spell.
+Description=Start this deck's engine, and you'll go from zero to unstoppable in seconds. With each spell you cast, you'll trigger more and more rewards-- bigger creatures, more tokens, better cards-- and set yourself up to reap even more rewards the next turn.
 Deck Type=constructed
 Set=EVE
 Image=superabundance.jpg

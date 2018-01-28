@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Stampeding Hordes
-Description=Stampeding Hordes Intro Deck
+Description=Let the plains resound with the thunder of hooves! Use the dash mechanic to swell your attacking troops and launch an overwhelming assault. Crush your opponent's forces by powering up your creatures. Leave behind nothing but the dust and the defeated.
 Deck Type=constructed
 Set=FRF
 Image=stampeding_hordes.jpg
@@ -16,7 +16,7 @@ Image=stampeding_hordes.jpg
 1 Deflecting Palm|KTK
 1 Dragonrage|FRF
 2 Firehoof Cavalry|KTK
-1 Flamerush Rider|FRF
+1 Flamerush Rider+|FRF
 1 Geist of the Moors|M15
 2 Goblin Heelcutter|FRF
 2 Goblin Roughrider|M15

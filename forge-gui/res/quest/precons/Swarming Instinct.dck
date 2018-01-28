@@ -5,12 +5,12 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Swarming Instinct
-Description=Battle for Zendikar Colorless (Blue/Green Devoid) Intro Deck
+Description=The Eldrazi are loose on Zendikar in their twisted multitudes, and these monstrosities seek only to feed. Use your swarm of Eldrazi Scion tokens to overwhelm the enemy, or sacrifice them to call on even greater Eldrazi.
 Deck Type=constructed
 Set=BFZ
 Image=swarming_instinct.jpg
 [Main]
-1 Drowner of Hope|BFZ
+1 Drowner of Hope+|BFZ
 3 Blisterpod|BFZ
 2 Tide Drifter|BFZ
 1 Pilgrim's Eye|BFZ
