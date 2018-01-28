@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Simic Synthesis
-Description=The Simic Combine is always evolving Ñ literally! The evolve mechanic means your creatures are constantly growing into new and unusual forms. A creature with evolve gets a +1/+1 counter if a larger creature (meaning it has a greater power or a greater toughness) enters the battlefield under your control. After enough evolutions, even the smallest creature can sit on top of the food chain.
+Description=The Simic Combine uses bio-magic to hybridize strange creatures. Advance the state of the art with the "Simic Synthesis" deck, evolving larger and weirder life forms and using the adaptations to evolve yourself a victory.
 Deck Type=constructed
 Set=GTC
 Image=simic_synthesis.jpg
@@ -20,7 +20,7 @@ Image=simic_synthesis.jpg
 1  Crowned Ceratok|GTC
 2  Drakewing Krasis|GTC
 1  Elusive Krasis|GTC
-1  Fathom Mage|GTC
+1  Fathom Mage+|GTC
 1  Frilled Oculus|GTC
 1  Ivy Lane Denizen|GTC
 2  Kraken Hatchling|M13
