@@ -5,14 +5,14 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Sacred Assault
-Description=The nice thing about being a powerful Planeswalker is that you don't have to play by the rules. For example, you have the ability to custom-build your ideal creature, and that's exactly what the "Sacred Assault" deck lets you do!
+Description=Take to the air with an army of flying heroes! Enhance your deadly griffins with enchantments. While your enemies are fleeing for cover, have your hexproof troops moves in to clean up the battlefield.
 Deck Type=constructed
 Set=M12
 Image=sacred_assault.jpg
 [main]
 10 Forest|M12
 14 Plains|M12
-1 Aegis Angel|M12
+1 Aegis Angel+|M12
 2 Alabaster Mage|M12
 3 Assault Griffin|M12
 2 Auramancer|M12
