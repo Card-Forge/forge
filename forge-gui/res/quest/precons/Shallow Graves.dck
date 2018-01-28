@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Shallow Graves
-Description=Eldritch Moon U/B Intro Pack
+Description=Humanity clings to its last shreds of sanity as Innistrad falls under the attack of twisted monstrosities too terrible to fathom. But mind-warping horrors are no problem when you can send wave after wave of zombies to ensure your victory.
 Deck Type=constructed
 Set=EMN
 Image=shallow_graves.jpg
@@ -25,7 +25,7 @@ Image=shallow_graves.jpg
 2 Liliana's Elite|EMN
 1 Liliana's Indignation|SOI
 1 Murder|EMN
-1 Noosegraf Mob|EMN
+1 Noosegraf Mob+|EMN
 1 Reckless Scholar|SOI
 2 Seagraf Skaab|SOI
 2 Spontaneous Mutation|EMN
