@@ -2864,7 +2864,7 @@ public class CardFactoryUtil {
 
             inst.addTrigger(parsedTrigger);
         } else if (keyword.equals("Storm")) {
-            final String actualTrigger = "Mode$ SpellCast | ValidCard$ Card.Self"
+            final String actualTrigger = "Mode$ SpellCast | ValidCard$ Card.Self | Secondary$ True"
                     + "| TriggerDescription$ Storm (" + inst.getReminderText() + ")";
                             
             String effect = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ StormCount";
@@ -3081,13 +3081,14 @@ public class CardFactoryUtil {
 
             inst.addReplacement(re);
         } else if (keyword.startsWith("Buyback")) {
-            final Cost cost = new Cost(keyword.substring(8), false);
+            final String[] k = keyword.split(":");
+            final Cost cost = new Cost(k[1], false);
 
             StringBuilder sb = new StringBuilder();
             sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | Destination$ Graveyard | Fizzle$ False ");
-            sb.append("| ValidStackSa$ Spell.Buyback | Description$ Buyback");
+            sb.append("| Secondary$ True | ValidStackSa$ Spell.Buyback | Description$ Buyback");
 
-            sb.append( cost.isOnlyManaCost() ? " " : "—");
+            sb.append(cost.isOnlyManaCost() ? " " : "—");
 
             sb.append(cost.toSimpleString());
 
@@ -3105,13 +3106,12 @@ public class CardFactoryUtil {
 
             SpellAbility saReturn = AbilityFactory.getAbility(abReturn, card);
 
-                saReturn.setIntrinsic(intrinsic);
+            saReturn.setIntrinsic(intrinsic);
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
             re.setLayer(ReplacementLayer.Other);
 
             re.setOverridingAbility(saReturn);
-
 
             inst.addReplacement(re);
         } else if (keyword.startsWith("Dredge")) {
@@ -3915,7 +3915,7 @@ public class CardFactoryUtil {
                     "| ActivationZone$ Graveyard | ValidTgts$ Creature | CounterType$ P1P1 " +
                     "| CounterNum$ ScavengeX | SorcerySpeed$ True | References$ ScavengeX " + 
                     "| PrecostDesc$ Scavenge | CostDesc$ " + ManaCostParser.parse(manacost) + 
-                    "| SpellDescription$ (" + Keyword.getInstance("Scavenge:" + manacost).getReminderText() + ")";
+                    "| SpellDescription$ (" + inst.getReminderText() + ")";
 
             card.setSVar("ScavengeX", "Count$CardPower");
 
@@ -4197,8 +4197,9 @@ public class CardFactoryUtil {
             }
             sb.append(cost.toSimpleString());
 
-            effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Escalate | Cost$ "+ manacost +" | EffectZone$ All" +
-                    " | Description$ " + sb.toString() + " (" + inst.getReminderText() + ")";
+            effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Secondary$ True"
+                    + " | Amount$ Escalate | Cost$ "+ manacost +" | EffectZone$ All"
+                    + " | Description$ " + sb.toString() + " (" + inst.getReminderText() + ")";
         } else if (keyword.startsWith("Strive")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
@@ -4208,8 +4209,8 @@ public class CardFactoryUtil {
         } else if (keyword.equals("Unleash")) {
             effect = "Mode$ Continuous | Affected$ Card.Self+counters_GE1_P1P1 | AddHiddenKeyword$ CARDNAME can't block.";
         } else if (keyword.equals("Undaunted")) {
-            effect = "Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Undaunted | EffectZone$ All" +
-                    " | Description$ Undaunted (" + inst.getReminderText() + ")";
+            effect = "Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Secondary$ True"
+                    + "| Amount$ Undaunted | EffectZone$ All | Description$ Undaunted (" + inst.getReminderText() + ")";
         }
 
         if (effect != null) {
