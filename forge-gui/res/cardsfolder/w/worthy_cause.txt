@@ -1,7 +1,7 @@
 Name:Worthy Cause
 ManaCost:W
 Types:Instant
-K:Buyback 2
+K:Buyback:2
 A:SP$ GainLife | Cost$ W Sac<1/Creature> | LifeAmount$ X | SpellDescription$ You gain life equal to the sacrificed creature's toughness.
 SVar:X:Sacrificed$CardToughness
 SVar:RemAIDeck:True

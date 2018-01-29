@@ -2,7 +2,7 @@ Name:Sprout Swarm
 ManaCost:1 G
 Types:Instant
 K:Convoke
-K:Buyback 3
+K:Buyback:3
 A:SP$ Token | Cost$ 1 G | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 saproling TSP | SpellDescription$ Create a 1/1 green Saproling creature token.
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sprout_swarm.jpg
