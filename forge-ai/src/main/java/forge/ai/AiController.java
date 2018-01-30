@@ -662,6 +662,11 @@ public class AiController {
         if (sa instanceof SpellPermanent) {
             return canPlayFromEffectAI((SpellPermanent)sa, false, true);
         }
+        if (sa.usesTargeting()) {
+            if (!sa.getTargetRestrictions().hasCandidates(sa, true)) {
+                return AiPlayDecision.TargetingFailed;
+            }
+        }
         if (sa instanceof Spell) {
             if (ComputerUtil.getDamageForPlaying(player, sa) >= player.getLife() 
                     && !player.cantLoseForZeroOrLessLife() && player.canLoseLife()) {
