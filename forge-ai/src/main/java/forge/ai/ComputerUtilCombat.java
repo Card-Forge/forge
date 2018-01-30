@@ -997,7 +997,7 @@ public class ComputerUtilCombat {
             if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed") || ability.hasParam("ActivationZone")) {
                 continue;
             }
-            if (!ability.canTarget(blocker)) {
+            if (ability.usesTargeting() && !ability.canTarget(blocker)) {
                 continue;
             }
 
@@ -1161,7 +1161,7 @@ public class ComputerUtilCombat {
             if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed") || ability.hasParam("ActivationZone")) {
                 continue;
             }
-            if (!ability.canTarget(blocker)) {
+            if (ability.usesTargeting() && !ability.canTarget(blocker)) {
                 continue;
             }
 
@@ -1366,7 +1366,7 @@ public class ComputerUtilCombat {
             if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed") || ability.hasParam("ActivationZone")) {
                 continue;
             }
-            if (!ability.canTarget(attacker)) {
+            if (ability.usesTargeting() && !ability.canTarget(attacker)) {
                 continue;
             }
 
@@ -1586,7 +1586,7 @@ public class ComputerUtilCombat {
             if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed") || ability.hasParam("ActivationZone")) {
                 continue;
             }
-            if (!ability.canTarget(attacker)) {
+            if (ability.usesTargeting() && !ability.canTarget(attacker)) {
                 continue;
             }
 
