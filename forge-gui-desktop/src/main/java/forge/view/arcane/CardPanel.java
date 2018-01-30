@@ -364,7 +364,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         boolean noBorderPref = !isPreferenceEnabled(FPref.UI_RENDER_BLACK_BORDERS);
 
         // Borderless cards should be accounted for here
+        // Amonkhet Invocations
         boolean noBorderOnCard = getCard().getCurrentState().getSetCode().equalsIgnoreCase("MPS_AKH");
+        // Unstable basic lands
+        noBorderOnCard |= getCard().getCurrentState().isBasicLand() && getCard().getCurrentState().getSetCode().equalsIgnoreCase("UST");
+
         boolean cardImgHasAlpha = imagePanel != null && imagePanel.getSrcImage() != null && imagePanel.getSrcImage().getColorModel().hasAlpha();
 
         if (!noBorderPref && !(noBorderOnCard && cardImgHasAlpha)) {
