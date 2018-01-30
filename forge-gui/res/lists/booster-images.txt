@@ -169,6 +169,11 @@ https://downloads.cardforge.org/images/products/boosters/GTC_5.jpg
 https://downloads.cardforge.org/images/products/boosters/Green.jpg
 https://downloads.cardforge.org/images/products/boosters/HML.jpg
 https://downloads.cardforge.org/images/products/boosters/HML.png
+https://downloads.cardforge.org/images/products/boosters/HOU_1.jpg
+https://downloads.cardforge.org/images/products/boosters/HOU_2.jpg
+https://downloads.cardforge.org/images/products/boosters/HOU_3.jpg
+https://downloads.cardforge.org/images/products/boosters/HOU_4.jpg
+https://downloads.cardforge.org/images/products/boosters/HOU_5.jpg
 https://downloads.cardforge.org/images/products/boosters/ICE.png
 https://downloads.cardforge.org/images/products/boosters/ICE_1.jpg
 https://downloads.cardforge.org/images/products/boosters/ICE_2.jpg
@@ -343,6 +348,11 @@ https://downloads.cardforge.org/images/products/boosters/ROE_2.jpg
 https://downloads.cardforge.org/images/products/boosters/ROE_3.jpg
 https://downloads.cardforge.org/images/products/boosters/ROE_4.jpg
 https://downloads.cardforge.org/images/products/boosters/ROE_5.jpg
+https://downloads.cardforge.org/images/products/boosters/RIX_1.jpg
+https://downloads.cardforge.org/images/products/boosters/RIX_2.jpg
+https://downloads.cardforge.org/images/products/boosters/RIX_3.jpg
+https://downloads.cardforge.org/images/products/boosters/RIX_4.jpg
+https://downloads.cardforge.org/images/products/boosters/RIX_5.jpg
 https://downloads.cardforge.org/images/products/boosters/RTR.png
 https://downloads.cardforge.org/images/products/boosters/RTR_1.jpg
 https://downloads.cardforge.org/images/products/boosters/RTR_2.jpg
@@ -416,6 +426,11 @@ https://downloads.cardforge.org/images/products/boosters/WWK_1.jpg
 https://downloads.cardforge.org/images/products/boosters/WWK_2.jpg
 https://downloads.cardforge.org/images/products/boosters/WWK_3.jpg
 https://downloads.cardforge.org/images/products/boosters/White.jpg
+https://downloads.cardforge.org/images/products/boosters/XLN_1.jpg
+https://downloads.cardforge.org/images/products/boosters/XLN_2.jpg
+https://downloads.cardforge.org/images/products/boosters/XLN_3.jpg
+https://downloads.cardforge.org/images/products/boosters/XLN_4.jpg
+https://downloads.cardforge.org/images/products/boosters/XLN_5.jpg
 https://downloads.cardforge.org/images/products/boosters/ZEN.png
 https://downloads.cardforge.org/images/products/boosters/ZEN_1.jpg
 https://downloads.cardforge.org/images/products/boosters/ZEN_2.jpg

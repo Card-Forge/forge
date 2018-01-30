@@ -3,6 +3,7 @@ https://downloads.cardforge.org/images/products/precons/air_razers.jpg
 https://downloads.cardforge.org/images/products/precons/ajani_valiant_protector.jpg
 https://downloads.cardforge.org/images/products/precons/angelic_fury.jpg
 https://downloads.cardforge.org/images/products/precons/angelic_might.jpg
+https://downloads.cardforge.org/images/products/precons/angrath_minotaur_pirate.jpg
 https://downloads.cardforge.org/images/products/precons/anthousas_army.jpg
 https://downloads.cardforge.org/images/products/precons/arcaniss_guile.jpg
 https://downloads.cardforge.org/images/products/precons/armada.jpg
@@ -117,6 +118,7 @@ https://downloads.cardforge.org/images/products/precons/heavy_hitters.jpg
 https://downloads.cardforge.org/images/products/precons/hit_the_ground_running.jpg
 https://downloads.cardforge.org/images/products/precons/hold_the_line.jpg
 https://downloads.cardforge.org/images/products/precons/horrific_visions.jpg
+https://downloads.cardforge.org/images/products/precons/huatli_dinosaur_knight.jpg
 https://downloads.cardforge.org/images/products/precons/hunting_pack.jpg
 https://downloads.cardforge.org/images/products/precons/infect_and_defile.jpg
 https://downloads.cardforge.org/images/products/precons/infernal_intervention.jpg
@@ -126,6 +128,7 @@ https://downloads.cardforge.org/images/products/precons/into_the_breach.jpg
 https://downloads.cardforge.org/images/products/precons/invading_spawn.jpg
 https://downloads.cardforge.org/images/products/precons/izzet_gizmometry.jpg
 https://downloads.cardforge.org/images/products/precons/izzet_ingenuity.jpg
+https://downloads.cardforge.org/images/products/precons/jace_ingenious_mind_mage.jpg
 https://downloads.cardforge.org/images/products/precons/jeskai_monks.jpg
 https://downloads.cardforge.org/images/products/precons/jund_appetite_for_war.jpg
 https://downloads.cardforge.org/images/products/precons/kamahls_temper.jpg
@@ -162,8 +165,10 @@ https://downloads.cardforge.org/images/products/precons/mysterious_realms.jpg
 https://downloads.cardforge.org/images/products/precons/mystical_might.jpg
 https://downloads.cardforge.org/images/products/precons/naya_behemoths.jpg
 https://downloads.cardforge.org/images/products/precons/naya_domain.jpg
+https://downloads.cardforge.org/images/products/precons/nicol_bolas_the_deceiver.jpg
 https://downloads.cardforge.org/images/products/precons/ninjutsu.jpg
 https://downloads.cardforge.org/images/products/precons/nissa_natures_artisan.jpg
+https://downloads.cardforge.org/images/products/precons/nissa_genesis_mage.jpg
 https://downloads.cardforge.org/images/products/precons/orzhov_oppression.jpg
 https://downloads.cardforge.org/images/products/precons/orzhov_power.jpg
 https://downloads.cardforge.org/images/products/precons/overkill.jpg
@@ -258,6 +263,7 @@ https://downloads.cardforge.org/images/products/precons/vampire_onslaught.jpg
 https://downloads.cardforge.org/images/products/precons/vampiric_thirst.jpg
 https://downloads.cardforge.org/images/products/precons/vicious_cycle.jpg
 https://downloads.cardforge.org/images/products/precons/voracious_rage.jpg
+https://downloads.cardforge.org/images/products/precons/vraska_scheming_gorgon.jpg
 https://downloads.cardforge.org/images/products/precons/war_of_attrition.jpg
 https://downloads.cardforge.org/images/products/precons/warriors_code.jpg
 https://downloads.cardforge.org/images/products/precons/way_wild.jpg
