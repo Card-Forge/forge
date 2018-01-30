@@ -24,6 +24,7 @@ https://downloads.cardforge.org/images/products/fatpacks/FRF.jpg
 https://downloads.cardforge.org/images/products/fatpacks/FUT.jpg
 https://downloads.cardforge.org/images/products/fatpacks/GPT.jpg
 https://downloads.cardforge.org/images/products/fatpacks/GTC.jpg
+https://downloads.cardforge.org/images/products/fatpacks/HOU.jpg
 https://downloads.cardforge.org/images/products/fatpacks/INV.jpg
 https://downloads.cardforge.org/images/products/fatpacks/ISD.jpg
 https://downloads.cardforge.org/images/products/fatpacks/JOU.jpg
@@ -55,6 +56,7 @@ https://downloads.cardforge.org/images/products/fatpacks/PCY.jpg
 https://downloads.cardforge.org/images/products/fatpacks/PLC.jpg
 https://downloads.cardforge.org/images/products/fatpacks/PLS.jpg
 https://downloads.cardforge.org/images/products/fatpacks/RAV.jpg
+https://downloads.cardforge.org/images/products/fatpacks/RIX.jpg
 https://downloads.cardforge.org/images/products/fatpacks/ROE.jpg
 https://downloads.cardforge.org/images/products/fatpacks/RTR.jpg
 https://downloads.cardforge.org/images/products/fatpacks/SCG.jpg
@@ -66,4 +68,5 @@ https://downloads.cardforge.org/images/products/fatpacks/THS.jpg
 https://downloads.cardforge.org/images/products/fatpacks/TOR.jpg
 https://downloads.cardforge.org/images/products/fatpacks/TSP.jpg
 https://downloads.cardforge.org/images/products/fatpacks/WWK.jpg
+https://downloads.cardforge.org/images/products/fatpacks/XLN.jpg
 https://downloads.cardforge.org/images/products/fatpacks/ZEN.jpg

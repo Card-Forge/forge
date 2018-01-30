@@ -40,6 +40,7 @@ https://downloads.cardforge.org/images/products/boosterboxes/FUT.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/GPT.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/GTC.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/HML.jpg
+https://downloads.cardforge.org/images/products/boosterboxes/HOU.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/ICE.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/INV.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/ISD.jpg
@@ -77,6 +78,7 @@ https://downloads.cardforge.org/images/products/boosterboxes/PCY.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/PLC.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/PLS.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/RAV.jpg
+https://downloads.cardforge.org/images/products/boosterboxes/RIX.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/ROE.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/RTR.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/SCG.jpg
@@ -96,4 +98,5 @@ https://downloads.cardforge.org/images/products/boosterboxes/USG.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/VIS.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/WTH.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/WWK.jpg
+https://downloads.cardforge.org/images/products/boosterboxes/XLN.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/ZEN.jpg
