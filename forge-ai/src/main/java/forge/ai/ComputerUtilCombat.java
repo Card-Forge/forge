@@ -997,6 +997,9 @@ public class ComputerUtilCombat {
             if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed") || ability.hasParam("ActivationZone")) {
                 continue;
             }
+            if (!ability.canTarget(blocker)) {
+                continue;
+            }
 
             if (ability.getApi() == ApiType.Pump) {
                 if (!ability.hasParam("NumAtt")) {
@@ -1156,6 +1159,9 @@ public class ComputerUtilCombat {
             }
 
             if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed") || ability.hasParam("ActivationZone")) {
+                continue;
+            }
+            if (!ability.canTarget(blocker)) {
                 continue;
             }
 
@@ -1358,6 +1364,9 @@ public class ComputerUtilCombat {
                 continue;
             }
             if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed") || ability.hasParam("ActivationZone")) {
+                continue;
+            }
+            if (!ability.canTarget(attacker)) {
                 continue;
             }
 
@@ -1575,6 +1584,9 @@ public class ComputerUtilCombat {
             }
 
             if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed") || ability.hasParam("ActivationZone")) {
+                continue;
+            }
+            if (!ability.canTarget(attacker)) {
                 continue;
             }
 
