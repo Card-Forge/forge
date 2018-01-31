@@ -58,8 +58,8 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
     protected Predicate<CardRules> hasColor;
     protected final List<PaperCard> availableList;
     protected final List<PaperCard> aiPlayables;
-    protected final List<PaperCard> deckList = new ArrayList<PaperCard>();
-    protected final List<String> setsWithBasicLands = new ArrayList<String>();
+    protected final List<PaperCard> deckList = new ArrayList<>();
+    protected final List<String> setsWithBasicLands = new ArrayList<>();
     protected List<PaperCard> rankedColorList;
 
     // Views for aiPlayable
@@ -424,7 +424,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      * Find the sets that have basic lands for the available cards.
      */
     private void findBasicLandSets() {
-        final Set<String> sets = new HashSet<String>();
+        final Set<String> sets = new HashSet<>();
         for (final PaperCard cp : aiPlayables) {
             final CardEdition ee = FModel.getMagicDb().getEditions().get(cp.getEdition());
             if( !sets.contains(cp.getEdition()) && CardEdition.Predicates.hasBasicLands.apply(ee)) {
@@ -575,6 +575,13 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
                 // (a) dual-land of the correct two colors, or
                 // (b) a land that generates colorless mana and has some other
                 // beneficial effect.
+                if (!card.getRules().getColorIdentity().isColorless() && card.getRules().getColorIdentity().getSharedColors(colors).countColors()==0){
+                    //skip as does not match colours
+                    if (logToConsole) {
+                        System.out.println("Excluding NonBasicLand: " + card.getName());
+                    }
+                    continue;
+                }
                 if (!inverseDLands.contains(card.getName())&&!dLands.contains(card.getName())&&r.nextInt(100)<90) {
                     landsToAdd.add(card);
                     landsNeeded--;
