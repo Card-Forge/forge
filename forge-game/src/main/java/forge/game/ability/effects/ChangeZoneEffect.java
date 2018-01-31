@@ -1228,8 +1228,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final Game game = source.getGame();
         final TargetRestrictions tgt = attachEff.getTargetRestrictions();
 
+        Player attachEffCtrl = attachEff.getActivatingPlayer();
+        if (attachEffCtrl == null && attachEff.getHostCard() != null) {
+            attachEffCtrl = attachEff.getHostCard().getController();
+        }
+
         CardCollectionView list = game.getCardsIn(tgt.getZone());
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), attachEff.getActivatingPlayer(), source, attachEff);
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), attachEffCtrl, source, attachEff);
         return list.contains(target);
     }
 }
