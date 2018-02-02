@@ -4612,7 +4612,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (isPlaneswalker()) {
             subtractCounter(CounterType.LOYALTY, damageIn);
         }
-        else {
+        if (isCreature()) {
             final Game game = source.getGame();
 
             boolean wither = (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.alwaysWither)
