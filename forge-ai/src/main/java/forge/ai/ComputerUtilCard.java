@@ -37,6 +37,7 @@ import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
+import forge.util.Expressions;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.MutablePair;
@@ -1784,5 +1785,45 @@ public class ComputerUtilCard {
         }
 
         return oppCards;
+    }
+
+    public static AiPlayDecision checkNeedsToPlayReqs(final Card card, final SpellAbility sa) {
+        Game game = card.getGame();
+        boolean isRightSplit = sa != null && sa.isRightSplit();
+        String needsToPlayName = isRightSplit ? "SplitNeedsToPlay" : "NeedsToPlay";
+        String needsToPlayVarName = isRightSplit ? "SplitNeedsToPlayVar" : "NeedsToPlayVar";
+
+        if (card.hasSVar(needsToPlayName)) {
+            final String needsToPlay = card.getSVar(needsToPlayName);
+            CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
+
+            list = CardLists.getValidCards(list, needsToPlay.split(","), card.getController(), card, null);
+            if (list.isEmpty()) {
+                return AiPlayDecision.MissingNeededCards;
+            }
+        }
+        if (card.getSVar(needsToPlayVarName).length() > 0) {
+            final String needsToPlay = card.getSVar(needsToPlayVarName);
+            int x = 0;
+            int y = 0;
+            String sVar = needsToPlay.split(" ")[0];
+            String comparator = needsToPlay.split(" ")[1];
+            String compareTo = comparator.substring(2);
+            try {
+                x = Integer.parseInt(sVar);
+            } catch (final NumberFormatException e) {
+                x = CardFactoryUtil.xCount(card, card.getSVar(sVar));
+            }
+            try {
+                y = Integer.parseInt(compareTo);
+            } catch (final NumberFormatException e) {
+                y = CardFactoryUtil.xCount(card, card.getSVar(compareTo));
+            }
+            if (!Expressions.compare(x, comparator, y)) {
+                return AiPlayDecision.NeedsToPlayCriteriaNotMet;
+            }
+        }
+
+        return AiPlayDecision.WillPlay;
     }
 }

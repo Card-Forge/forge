@@ -678,43 +678,11 @@ public class AiController {
     }
 
     private AiPlayDecision canPlaySpellBasic(final Card card, final SpellAbility sa) {
-        boolean isRightSplit = sa != null && sa.isRightSplit();
-        String needsToPlayName = isRightSplit ? "SplitNeedsToPlay" : "NeedsToPlay";
-        String needsToPlayVarName = isRightSplit ? "SplitNeedsToPlayVar": "NeedsToPlayVar";
+        // add any other necessary logic to play a basic spell here
 
-        if (card.hasSVar(needsToPlayName)) {
-            final String needsToPlay = card.getSVar(needsToPlayName);
-            CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
-
-            list = CardLists.getValidCards(list, needsToPlay.split(","), card.getController(), card, null);
-            if (list.isEmpty()) {
-                return AiPlayDecision.MissingNeededCards;
-            }
-        }
-        if (card.getSVar(needsToPlayVarName).length() > 0) {
-            final String needsToPlay = card.getSVar(needsToPlayVarName);
-            int x = 0;
-            int y = 0;
-            String sVar = needsToPlay.split(" ")[0];
-            String comparator = needsToPlay.split(" ")[1];
-            String compareTo = comparator.substring(2);
-            try {
-                x = Integer.parseInt(sVar);
-            } catch (final NumberFormatException e) {
-                x = CardFactoryUtil.xCount(card, card.getSVar(sVar));
-            }
-            try {
-                y = Integer.parseInt(compareTo);
-            } catch (final NumberFormatException e) {
-                y = CardFactoryUtil.xCount(card, card.getSVar(compareTo));
-            }
-            if (!Expressions.compare(x, comparator, y)) {
-                return AiPlayDecision.NeedsToPlayCriteriaNotMet;
-            }
-        }
-        return AiPlayDecision.WillPlay;
+        return ComputerUtilCard.checkNeedsToPlayReqs(card, sa);
     }
-    
+
     // not sure "playing biggest spell" matters?
     private final static Comparator<SpellAbility> saComparator = new Comparator<SpellAbility>() {
         @Override

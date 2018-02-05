@@ -3,10 +3,7 @@ package forge.ai.ability;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
@@ -47,6 +44,13 @@ public class CopyPermanentAi extends SpellAbilityAi {
         if (sa.hasParam("Defined")) {
             // If there needs to be an imprinted card, don't activate the ability if nothing was imprinted yet (e.g. Mimic Vat)
             if (sa.getParam("Defined").equals("Imprinted.ExiledWithSource") && sa.getHostCard().getImprintedCards().isEmpty()) {
+                return false;
+            }
+        }
+
+        if (sa.hasParam("Embalm") || sa.hasParam("Eternalize")) {
+            // E.g. Vizier of Many Faces: check to make sure it makes sense to make the token now
+            if (ComputerUtilCard.checkNeedsToPlayReqs(sa.getHostCard(), sa) != AiPlayDecision.WillPlay) {
                 return false;
             }
         }
