@@ -567,11 +567,6 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public CardShields chooseRegenerationShield(Card c) {
-        return Iterables.getFirst(c.getShields(), null);
-    }
-
-    @Override
     public List<PaperCard> chooseCardsYouWonToAddToDeck(List<PaperCard> losses) {
         // TODO Auto-generated method stub
         return losses;

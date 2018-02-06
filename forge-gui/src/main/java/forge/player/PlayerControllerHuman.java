@@ -1570,18 +1570,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public CardShields chooseRegenerationShield(final Card c) {
-        if (c.getShieldCount() < 2) {
-            return Iterables.getFirst(c.getShields(), null);
-        }
-        final List<CardShields> shields = Lists.newArrayList();
-        for (final CardShields shield : c.getShields()) {
-            shields.add(shield);
-        }
-        return getGui().one("Choose a regeneration shield:", shields);
-    }
-
-    @Override
     public List<PaperCard> chooseCardsYouWonToAddToDeck(final List<PaperCard> losses) {
         return getGui().many("Select cards to add to your deck", "Add these to my deck", 0, losses.size(), losses,
                 null);

@@ -194,7 +194,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean hasBeenDealtDeathtouchDamage = false;
 
     // regeneration
-    private List<CardShields> shields = Lists.newArrayList();
+    private FCollection<Card> shields = new FCollection<>();
     private int regeneratedThisTurn = 0;
 
     private int turnInZone;
@@ -2275,22 +2275,20 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     // shield = regeneration
-    public final Iterable<CardShields> getShields() {
+    public final Iterable<Card> getShields() {
         return shields;
     }
     public final int getShieldCount() {
         return shields.size();
     }
 
-    public final void addShield(final CardShields shield) {
-        shields.add(shield);
-        view.updateShieldCount(this);
+    public final void addShield(final Card shield) {
+        if (shields.add(shield)) {
+            view.updateShieldCount(this);
+        }
     }
 
-    public final void subtractShield(CardShields shield) {
-        if (shield != null && shield.hasTrigger()) {
-            getGame().getStack().addSimultaneousStackEntry(shield.getTriggerSA());
-        }
+    public final void subtractShield(final Card shield) {
         if (shields.remove(shield)) {
             view.updateShieldCount(this);
         }

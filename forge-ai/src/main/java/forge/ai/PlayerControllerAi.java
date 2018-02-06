@@ -1,6 +1,6 @@
 package forge.ai;
 
-import com.esotericsoftware.minlog.Log;
+//import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -398,7 +398,7 @@ public class PlayerControllerAi extends PlayerController {
         if (StringUtils.isBlank(chosen) && !validTypes.isEmpty())
         {
             chosen = validTypes.get(0);
-            Log.warn("AI has no idea how to choose " + kindOfType +", defaulting to 1st element: chosen");
+            //Log.warn("AI has no idea how to choose " + kindOfType +", defaulting to 1st element: chosen");
         }
         game.getAction().nofityOfValue(sa, player, chosen, player);
         return chosen;
@@ -865,11 +865,6 @@ public class PlayerControllerAi extends PlayerController {
     public CardCollectionView cheatShuffle(CardCollectionView list) {
         return brains.getBooleanProperty(AiProps.CHEAT_WITH_MANA_ON_SHUFFLE) ? brains.cheatShuffle(list) : list;
     }
-
-	@Override
-	public CardShields chooseRegenerationShield(Card c) {
-		return Iterables.getFirst(c.getShields(), null);
-	}
 
     @Override
     public List<PaperCard> chooseCardsYouWonToAddToDeck(List<PaperCard> losses) {

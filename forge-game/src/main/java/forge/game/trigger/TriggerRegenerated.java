@@ -30,7 +30,7 @@ import forge.game.spellability.SpellAbility;
  * @author Forge
  * @version $Id: TriggerDestroyed.java 17802 2012-10-31 08:05:14Z Max mtg $
  */
-public class TriggerDestroyed extends Trigger {
+public class TriggerRegenerated extends Trigger {
 
     /**
      * <p>
@@ -44,15 +44,15 @@ public class TriggerDestroyed extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerDestroyed(final Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerRegenerated(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final Map<String, Object> runParams2) {
-        if (hasParam("ValidCauser")) {
-            if (!matchesValid(runParams2.get("Causer"), getParam("ValidCauser").split(","), getHostCard())) {
+        if (hasParam("ValidCause")) {
+            if (!matchesValid(runParams2.get("Cause"), getParam("ValidCause").split(","), getHostCard())) {
                 return false;
             }
         }
@@ -68,14 +68,14 @@ public class TriggerDestroyed extends Trigger {
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
-        sa.setTriggeringObject("Causer", this.getRunParams().get("Causer"));
+        sa.setTriggeringObject("Cause", this.getRunParams().get("Cause"));
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Destroyed: ").append(sa.getTriggeringObject("Card")).append(", ");
-        sb.append("Destroyer: ").append(sa.getTriggeringObject("Causer"));
+        sb.append("Regenerated: ").append(sa.getTriggeringObject("Card"));
+        //sb.append("Destroyer: ").append(sa.getTriggeringObject("Causer"));
         return sb.toString();
     }
 }
