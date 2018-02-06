@@ -5239,6 +5239,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         resetDealtDamageToPlayerThisTurn();
         getDamageHistory().newTurn();
         setRegeneratedThisTurn(0);
+        resetShield();
         setBecameTargetThisTurn(false);
         clearMustAttackEntity(turn);
         clearMustBlockCards();

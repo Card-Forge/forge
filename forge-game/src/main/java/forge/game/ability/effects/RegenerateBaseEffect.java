@@ -68,6 +68,10 @@ public abstract class RegenerateBaseEffect extends SpellAbilityEffect {
 
         eff.updateStateForView();
 
+        // add RegenEffect as Shield to the Affected Cards
+        for (final Card c : list) {
+            c.addShield(eff);
+        }
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         game.getAction().moveTo(ZoneType.Command, eff, sa);
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
