@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Relic Breaker
-Description=With the "Relic Breaker" deck, you'll punish your opponents who rely on the many artifact goodies in the Scars of Mirrodin set. The name of the game is beating your opponents down while blowing up virtually every card they play.
+Description=Destroy artifacts for fun and profit! And when you summon Hoard-Smelter Dragon and power it up with a meal of metal, it will be your opponent who's seeing red.
 Deck Type=constructed
 Set=SOM
 Image=relic_breaker.jpg
@@ -23,7 +23,7 @@ Image=relic_breaker.jpg
 2 Barrage Ogre|SOM
 1 Cudgel Troll|M11
 2 Flameborn Hellion|SOM
-1 Hoard-Smelter Dragon|SOM
+1 Hoard-Smelter Dragon+|SOM
 2 Molder Beast|SOM
 2 Oxidda Scrapmelter|SOM
 1 Prodigal Pyromancer|M11
