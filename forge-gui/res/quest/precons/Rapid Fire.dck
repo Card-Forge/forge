@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Rapid Fire
-Description=With the "Rapid Fire" deck, you'll crush the opposition under a sudden avalanche of creatures. By the time they know what hit them, they'll already be buried!
+Description=Swarm your opponent with creatures designed to deliver a quick victory. Every land you play triggers powerful landfall bonuses and gets you closer to casting the mighty Mordant Dragon, who will eliminate anything still standing in your way.
 Deck Type=constructed
 Set=WWK
 Image=rapid_fire.jpg
@@ -22,7 +22,7 @@ Image=rapid_fire.jpg
 1 Kor Cartographer|ZEN
 1 Kor Firewalker|WWK
 1 Kor Skyfisher|ZEN
-1 Mordant Dragon|WWK
+1 Mordant Dragon+|WWK
 1 Prodigal Pyromancer|M10
 1 Ruin Ghost|WWK
 1 Steppe Lynx|ZEN
