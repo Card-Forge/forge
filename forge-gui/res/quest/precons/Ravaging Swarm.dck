@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Ravaging Swarm
-Description=Even though the Phyrexian takeover of Mirrodin is at hand, not everyone has fallen prey to the Phyrexian contagion. That's where you come in! With the "Ravaging Swarm" deck, you'll spread the disease to anyone who would still dare to oppose you.
+Description=Get under your opponents' skin . . . and devour them from within! Command your virulent swarm of Phyrexians as they spread their foul infection. Once the poison takes hold, proliferate it. Foes will reel in horror as phyresis claims their feeble flesh.
 Deck Type=constructed
 Set=NPH
 Image=ravaging_swarm.jpg
@@ -28,7 +28,7 @@ Image=ravaging_swarm.jpg
 1 Blight Mamba|SOM
 2 Cystbearer|SOM
 1 Defensive Stance|NPH
-1 Phyrexian Swarmlord|NPH
+1 Phyrexian Swarmlord+|NPH
 1 Plaguemaw Beast|MBS
 1 Wall of Tanglecord|SOM
 2 Viridian Betrayers|NPH
