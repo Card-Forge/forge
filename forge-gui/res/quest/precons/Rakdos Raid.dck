@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Rakdos Raid
-Description=With the "Rakdos Raid" deck, you'll rein in the chaos of the Rakdos horde, and revel in the carnage of your enemy's downfall. At the core of the deck are creatures with the unleash ability. A creature with unleash can enter the battlefield with a +1/+1 counter on it - if it gives up the idea of playing defense. Get ready to start attacking your opponent and hit hard and fast.
+Description=The Cult of Rakdos has a flair for sadistic entertainment. Bring pain to all with the "Rakdos Raid" deck. While your unleashed creatures put the hurt on opponents, use the distraction to play a few well-placed dirty tricks.
 Deck Type=constructed
 Set=RTR
 Image=rakdos_raid.jpg
@@ -28,7 +28,7 @@ Image=rakdos_raid.jpg
 2 Gore-House Chainwalker|RTR
 1 Minotaur Aggressor|RTR
 1 Rakdos Guildgate|RTR
-1 Carnival Hellsteed|RTR
+1 Carnival Hellsteed+|RTR
 2 Zombie Goliath|M13
 1 Ravenous Rats|M13
 1 Blood Reckoning|M13
