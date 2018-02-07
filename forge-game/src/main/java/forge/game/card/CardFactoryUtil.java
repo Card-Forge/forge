@@ -3804,31 +3804,25 @@ public class CardFactoryUtil {
             inst.addSpellAbility(sa);
             
         } else if (keyword.startsWith("Morph")) {
-            Map<String, String> sVars = card.getSVars();
-
             final String[] k = keyword.split(":");
 
-            card.addSpellAbility(abilityMorphDown(card));
+            inst.addSpellAbility(abilityMorphDown(card));
 
-            card.setState(CardStateName.FaceDown, false);
-
-            card.addSpellAbility(abilityMorphUp(card, k[1], false));
-            card.setSVars(sVars); // for Warbreak Trumpeter.
-            card.setState(CardStateName.Original, false);
-            
+            CardState state = card.getState(CardStateName.FaceDown);
+            state.setSVars(card.getSVars());
+            KeywordInterface facedownKeyword = Keyword.getInstance("");
+            facedownKeyword.addSpellAbility(abilityMorphUp(card, k[1], false));
+            state.addIntrinsicKeywords(Lists.newArrayList(facedownKeyword));
         } else if (keyword.startsWith("Megamorph")){
-            Map<String, String> sVars = card.getSVars();
-
             final String[] k = keyword.split(":");
 
-            card.addSpellAbility(abilityMorphDown(card));
+            inst.addSpellAbility(abilityMorphDown(card));
 
-            card.setState(CardStateName.FaceDown, false);
-
-            card.addSpellAbility(abilityMorphUp(card, k[1], true));
-            card.setSVars(sVars);
-            card.setState(CardStateName.Original, false);
-            
+            CardState state = card.getState(CardStateName.FaceDown);
+            state.setSVars(card.getSVars());
+            KeywordInterface facedownKeyword = Keyword.getInstance("");
+            facedownKeyword.addSpellAbility(abilityMorphUp(card, k[1], true));
+            state.addIntrinsicKeywords(Lists.newArrayList(facedownKeyword));
         } else if (keyword.startsWith("Multikicker")) {
             final String[] n = keyword.split(":");
             final SpellAbility sa = card.getFirstSpellAbility();

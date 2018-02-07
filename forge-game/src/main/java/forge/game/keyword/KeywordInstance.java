@@ -209,7 +209,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
             
             return result;
         } catch (final Exception ex) {
-            throw new RuntimeException("AbilityStatic : clone() error, " + ex);
+            throw new RuntimeException("KeywordInstance : clone() error, " + ex);
         }
     }
 }

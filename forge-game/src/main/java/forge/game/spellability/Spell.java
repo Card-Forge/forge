@@ -116,7 +116,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
                || activator.hasKeyword("You may cast nonland cards as though they had flash.")
                || card.hasStartOfKeyword("You may cast CARDNAME as though it had flash.")
                || this.hasSVar("IsCastFromPlayEffect")
-               || (card.isFaceDown() && !card.getZone().is(ZoneType.Battlefield) && card.getState(CardStateName.Original).getType().isInstant()))) {
+               || (card.isFaceDown() && !card.getLastKnownZone().is(ZoneType.Battlefield) && card.getState(CardStateName.Original).getType().isInstant()))) {
             return false;
         }
 

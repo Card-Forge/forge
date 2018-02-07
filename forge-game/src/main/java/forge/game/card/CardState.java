@@ -164,6 +164,9 @@ public class CardState extends GameObject {
     public final Collection<KeywordInterface> getIntrinsicKeywords() {
         return intrinsicKeywords.getValues();
     }
+    public final Iterable<String> getIntrinsicKeywordStrings() {
+        return intrinsicKeywords;
+    }
     public final boolean hasIntrinsicKeyword(String k) {
         return intrinsicKeywords.contains(k);
     }
@@ -486,15 +489,10 @@ public class CardState extends GameObject {
         return ForgeScript.cardStateHasProperty(this, property, sourceController, source, spellAbility);
     }
 
-    public List<String> addIntrinsicKeywords(Collection<KeywordInterface> intrinsicKeywords2) {
-        List<String> names = Lists.newArrayList();
+    public void addIntrinsicKeywords(Collection<KeywordInterface> intrinsicKeywords2) {
         for (KeywordInterface inst : intrinsicKeywords2) {
-            String o = inst.getOriginal();
-            if (addIntrinsicKeyword(o, false) != null) {
-                names.add(o);
-            }
+            intrinsicKeywords.insert(inst);
         }
-        return names;
     }
     
     

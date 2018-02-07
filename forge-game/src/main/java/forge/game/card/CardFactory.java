@@ -85,6 +85,7 @@ public class CardFactory {
             //}
         }
 
+        out.setZone(in.getZone());
         for (final CardStateName state : in.getStates()) {
             CardFactory.copyState(in, state, out, state);
         }
@@ -99,7 +100,6 @@ public class CardFactory {
         out.setEnchanting(in.getEnchanting());
 
         out.setClones(in.getClones());
-        out.setZone(in.getZone());
         out.setCastSA(in.getCastSA());
         for (final Object o : in.getRemembered()) {
             out.addRemembered(o);
@@ -308,7 +308,7 @@ public class CardFactory {
                 }
                 final CardState original = card.getState(CardStateName.Original);
                 original.addNonManaAbilities(card.getCurrentState().getNonManaAbilities());
-                original.addIntrinsicKeywords(card.getCurrentState().getIntrinsicKeywords()); // Copy 'Fuse' to original side
+                original.addIntrinsicKeywords(card.getCurrentState().getIntrinsicKeywordStrings(), false); // Copy 'Fuse' to original side
                 original.getSVars().putAll(card.getCurrentState().getSVars()); // Unfortunately need to copy these to (Effect looks for sVars on execute)
             } else if (state != CardStateName.Original){
             	CardFactoryUtil.setupKeywordedAbilities(card);
