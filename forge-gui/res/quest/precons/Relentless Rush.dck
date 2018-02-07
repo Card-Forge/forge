@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Relentless Rush
-Description=Relentless Rush - Dragons of Tarkir R/B intro pack.
+Description=Strike with the speed of lightning! This deck lets you create a swift horde of unyielding attackers. Use the dash mechanic to hurl creatures into battle before your opponent can even get started. Hesitation is for the weak!
 Deck Type=constructed
 Set=DTK
 Image=relentless_rush.jpg
@@ -18,7 +18,7 @@ Image=relentless_rush.jpg
 2 Ambuscade Shaman|DTK
 2 Warbringer|DTK
 2 Sprinting Warbrute|DTK
-1 Boltwing Marauder|DTK
+1 Boltwing Marauder+|DTK
 2 Swift Warkite|DTK
 1 Duress|DTK
 1 Foul-Tongue Shriek|DTK
