@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Radiant's Revenge
-Description=Before Urza can complete the famed ship Weatherlight, the planeswalker must face the new ruler of Serra's realm, an archangel hell-bent on revenge. "Radiant's Revenge" is a time bomb that explodes with artifact and opportunity spells.
+Description=Before Urza can complete the famed ship Weatherlight, he must face the new ruler of Serra's realm, an archangel hell-bent on revenge. "Radiant's Revenge" is a time bomb that explodes with card-drawing and control cards.
 Deck Type=constructed
 Set=ULG
 Image=radiants_revenge.jpg
