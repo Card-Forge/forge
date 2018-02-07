@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Repel the Dark
-Description=In a world crawling with monsters, sometimes it takes everything you've got just to hold onto your humanity . . . but then again, sometimes humanity strikes back! 
+Description=Hideous night horrors attack from all sides, but your human forces are steeled by a common goal: survival. Ward off your foes long enough to build an army, then unleash your angry mob on the fields.
 Deck Type=constructed
 Set=ISD
 Image=repel_the_dark.jpg
@@ -18,7 +18,7 @@ Image=repel_the_dark.jpg
 1 Bramblecrush|ISD
 1 Butcher's Cleaver|ISD
 2 Elder Cathar|ISD
-1 Elder of Laurels|ISD
+1 Elder of Laurels+|ISD
 1 Elite Vanguard|M12
 1 Fiend Hunter|ISD
 10 Forest|ISD
