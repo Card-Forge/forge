@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Rallying Cry
-Description=Battle for Zendikar White/Red Intro Deck
+Description=Allies from all over the embattled plane of Zendikar gather to face the world-devouring Eldrazi. Every addition to your squad of Allies can trigger new benefits for all of them.
 Deck Type=constructed
 Set=BFZ
 Image=rallying_cry.jpg
@@ -19,7 +19,7 @@ Image=rallying_cry.jpg
 2 Firemantle Mage|BFZ
 1 Chasm Guide|BFZ
 1 Ondu Champion|BFZ
-1 Hero of Goma Fada|BFZ
+1 Hero of Goma Fada+|BFZ
 2 Kor Entanglers|BFZ
 2 Shatterskull Recruit|BFZ
 1 Angelic Captain|BFZ
