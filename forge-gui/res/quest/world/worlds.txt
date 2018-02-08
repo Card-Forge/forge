@@ -1,4 +1,5 @@
 Name:Main world
+Name:Amonkhet|Dir:Amonkhet|Sets:AKH, HOU
 Name:Jamuraa|Dir:jamuraa|Sets:5ED, ARN, MIR, VIS, WTH|Banned:Chaos Orb; Falling Star
 Name:Kamigawa|Dir:2004 Kamigawa|Sets:CHK, BOK, SOK
 Name:Lorwyn|Dir:lorwyn|Sets:SHM, EVE, LRW, MOR, 10E|Banned:Chaos Orb; Falling Star
