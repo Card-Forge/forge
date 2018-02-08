@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Rise of the Vampires
-Description=The "Rise of the Vampires" deck puts you in command of a relentless army of undead that's ready to drain the life out of your enemies.
+Description=Attack with a horde of the undead. Malakir Bloodwitch, a flying creature with protection from white, leads the way for your Vampires to drain away your opponent's life. Back them up with Zombies and other creatures of the night, then clear the path for victory.
 Deck Type=constructed
 Set=ZEN
 Image=rise_of_the_vampires.jpg
@@ -20,7 +20,7 @@ Image=rise_of_the_vampires.jpg
 2 Vampire Nighthawk|ZEN
 2 Feast of Blood|ZEN
 1 Rise from the Grave|M10
-1 Malakir Bloodwitch|ZEN
+1 Malakir Bloodwitch+|ZEN
 1 Diabolic Tutor|M10
 1 Zombie Goliath|M10
 2 Vampire Aristocrat|M10

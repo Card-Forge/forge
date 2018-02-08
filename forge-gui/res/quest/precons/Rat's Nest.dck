@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Rat's Nest
-Description=Beware the Rats of Takenuma! The quick creatures of the "Rats' Nest" deck will gnaw away your opponents' life totals while its powerful discard and destruction spells tear apart any defenses. With eleven creatures that cost one or two mana, you're sure to get off to a fast start. If your opponent gets some blockers out, you have Horobi's Whisper and Befoul to blow them away and keep attacking.
+Description=For years the ratfolk of the Takenuma Swamp have warred with neighboring realms; now their own kami-- Patron of the Nezumi-- has come to grant them newfound strength. Fast creatures and discard make sure you win the rat race!
 Deck Type=constructed
 Set=BOK
 Image=rats_nest.jpg

@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Relentless Dead
-Description=Whether you prefer raising zombies out of fresh graves or stitching them together in your dank, dark lab, your mindless minions will soon conquer all who oppose you!
+Description=Legions of shambling zombies await your command. Unleash your hordes to overwhelm your enemies, then raise an army of the dead with good old-fashioned necromancy.
 Deck Type=Constructed
 Set=DKA
 Image=relentless_dead.jpg
@@ -22,7 +22,7 @@ Image=relentless_dead.jpg
 2 Farbog Boneflinger|DKA
 2 Forbidden Alchemy|ISD
 1 Ghoulraiser|ISD
-1 Havengul Runebinder|DKA
+1 Havengul Runebinder+|DKA
 1 Headless Skaab|DKA
 10 Island|ISD
 1 Makeshift Mauler|ISD
