@@ -1,6 +1,5 @@
 package forge.limited;
 
-import com.esotericsoftware.minlog.Log;
 import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 
@@ -74,7 +73,7 @@ public class ReadDraftRankings {
                     setSizes.put(edition, rank);
                 }
             } catch (NumberFormatException nfe) {
-                Log.warn("NumberFormatException: " + nfe.getMessage());
+                System.err.println("NumberFormatException: " + nfe.getMessage());
             }
         }
 
