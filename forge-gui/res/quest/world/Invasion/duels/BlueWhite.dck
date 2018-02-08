@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Title=Meddling Mage
+Icon=Dungeon Crawling Gold.jpg
+Difficulty=easy
+Description=Blue - White deck with various cards
+Deck Type=constructed
+Name=BlueWhite
+[Main]
+4 Absorb|INV
+1 Angelic Shield|INV
+4 Coastal Tower|INV
+2 Dismantling Blow|INV
+1 Dodecapod|APC
+4 Fact or Fiction|INV
+4 Galina's Knight|INV
+2 Glimmering Angel|INV
+1 Hanna, Ship's Navigator|INV
+5 Island|INV|1
+3 Island|INV|2
+2 Island|INV|3
+2 Lashknife Barrier|PLS
+2 Meddling Mage|PLS
+5 Plains|INV|1
+3 Plains|INV|2
+2 Plains|INV|3
+2 Shackles|INV
+4 Teferi's Moat|INV
+1 Traveler's Cloak|INV
+4 Voice of All|PLS
+2 Wash Out|INV

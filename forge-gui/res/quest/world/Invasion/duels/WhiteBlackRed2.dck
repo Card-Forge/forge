@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Title=Blazing Specter
+Icon=Dungeon Crawling Gold.jpg
+Difficulty=medium
+Description=White - Red - Black deck with several discard effects and removal.
+Deck Type=constructed
+Name=WhiteBlackRed2
+[Main]
+3 Agonizing Demise|INV
+3 Battlefield Forge|APC
+4 Blazing Specter|INV
+3 Caves of Koilos|APC
+4 Death Grasp|APC
+1 Desolation Angel|APC
+4 Gerrard's Verdict|APC
+2 Ghitu Fire|INV
+2 Mountain|INV|1
+2 Orim's Thunder|APC
+3 Plains|INV|1
+2 Ravenous Rats|INV
+2 Spectral Lynx|APC
+4 Swamp|INV|1
+4 Swamp|INV|3
+1 Swamp|INV|4
+4 Terminate|PLS
+2 Trench Wurm|INV
+4 Urborg Volcano|INV
+4 Vindicate|APC
+2 Yawgmoth's Agenda|INV

@@ -1,0 +1,37 @@
+[quest]
+id=TheRift
+OpponentName=The Rift
+AILife=40
+Repeat=true
+Wins=30
+Card Reward=tournament pack INV;booster pack PLS;booster pack APC;booster pack PLS;booster pack APC
+Ticket Reward=true
+Credit Reward=1250
+AIExtras=Aether Rift|Aether Rift
+HumanExtras=Seashell Cameo
+[metadata]
+Title=The Rift
+Icon=Dungeon Crawling Gold.jpg
+Difficulty=very hard
+Description=This portal...isn't opening from Phyrexia, right?
+Deck Type=constructed
+Name=TheRift
+[Main]
+1 Cromat|APC
+1 Crosis, the Purger|INV
+1 Crypt Angel|INV
+1 Darigaaz, the Igniter|INV
+1 Desolation Angel|APC
+1 Devouring Strossus|INV
+1 Dromar, the Banisher|INV
+1 Gerrard Capashen|APC
+1 Lotus Guardian|INV
+1 Penumbra Wurm|APC
+1 Reya Dawnbringer|INV
+1 Rith, the Awakener|INV
+1 Sabertooth Nishoba|INV
+1 Spiritmonger|APC
+1 Tahngarth, Talruum Hero|PLS|2
+1 Treva, the Renewer|INV
+1 Tsabo Tavoc|INV
+1 Verdeloth the Ancient|INV

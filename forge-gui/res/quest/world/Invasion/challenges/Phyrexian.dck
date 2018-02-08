@@ -1,0 +1,32 @@
+[quest]
+id=Phyrexian
+OpponentName=Yawgmoth
+AILife=120
+Repeat=true
+Wins=60
+Card Reward=9 rares;3 tournament pack INV;duplicate card
+Credit Reward=5000
+Ticket Reward=true
+AIExtras=Phyrexian Arena|Phyrexian Arena|Swamp|Swamp
+HumanExtras=Planeswalker's Favor|Planeswalker's Fury|Planeswalker's Mirth|Planeswalker's Mischief|Planeswalker's Scorn
+[metadata]
+Title=The Phyrexian Invasion
+Icon=Dungeon Crawling Black.jpg
+Difficulty=very hard
+Description=Can the united planeswalkers stop the invasion?
+Deck Type=constructed
+Name=Phyrexian
+[Main]
+2 Phyrexian Arena|APC
+8 Phyrexian Battleflies|INV
+2 Phyrexian Bloodstock|PLS
+1 Phyrexian Delver|INV
+6 Phyrexian Gargantua|APC
+2 Phyrexian Infiltrator|INV
+4 Phyrexian Lens|INV
+2 Phyrexian Rager|APC
+2 Phyrexian Reaper|INV
+10 Phyrexian Scuta|PLS
+3 Phyrexian Slayer|INV
+3 Phyrexian Tyranny|PLS
+32 Swamp|INV

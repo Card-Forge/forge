@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Title=Skizzik
+Icon=Dungeon Crawling Red.jpg
+Difficulty=easy
+Description=Monored deck with various threats
+Deck Type=constructed
+Name=Red
+[Main]
+4 Firebrand Ranger|INV
+4 Flametongue Kavu|PLS
+4 Ghitu Fire|INV
+2 Halam Djinn|INV
+4 Kavu Runner|INV
+2 Mages' Contest|INV
+2 Maniacal Rage|INV
+6 Mountain|INV|1
+6 Mountain|INV|2
+6 Mountain|INV|3
+6 Mountain|INV|4
+4 Scorching Lava|INV
+4 Skizzik|INV
+2 Tahngarth, Talruum Hero|PLS|1
+4 Urza's Rage|INV

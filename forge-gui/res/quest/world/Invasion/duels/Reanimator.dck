@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Title=Dralnu
+Icon=Dungeon Crawling Black.jpg
+Difficulty=easy
+Description=Black - Blue reanimator with Twilight's Call
+Deck Type=constructed
+Name=Reanimator
+[Main]
+1 Crosis, the Purger|INV
+1 Devouring Strossus|INV
+4 Dralnu's Pet|PLS
+1 Dromar, the Banisher|INV
+4 Fact or Fiction|INV
+2 Fungal Shambler|APC
+7 Island|INV|1
+2 Island|INV|2
+2 Island|INV|3
+4 Life // Death|APC
+2 Penumbra Wurm|APC
+4 Probe|INV
+1 Reya Dawnbringer|INV
+1 Rith, the Awakener|INV
+1 Sabertooth Nishoba|INV
+4 Salt Marsh|INV
+2 Swamp|INV|1
+4 Swamp|INV|2
+2 Swamp|INV|3
+1 Swamp|INV|4
+1 Treva, the Renewer|INV
+1 Tsabo Tavoc|INV
+4 Twilight's Call|INV
+4 Vodalian Merchant|INV

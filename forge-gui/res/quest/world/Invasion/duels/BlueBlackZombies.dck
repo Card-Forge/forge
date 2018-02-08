@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Title=Sleeper
+Icon=Dungeon Crawling Black.jpg
+Difficulty=easy
+Description=Blue - Black zombies
+Deck Type=constructed
+Name=BlueBlackZombies
+[Main]
+1 Barrin's Spite|INV
+1 Doomsday Specter|PLS
+4 Hate Weaver|INV
+4 Island|INV|1
+4 Island|INV|2
+1 Island|INV|3
+2 Lobotomy|INV
+4 Lord of the Undead|PLS
+4 Nightscape Familiar|PLS
+1 Nightscape Master|INV
+2 Phyrexian Scuta|PLS
+4 Recoil|INV
+4 Salt Marsh|INV
+4 Sleeper's Robe|INV
+2 Spite // Malice|INV
+4 Swamp|INV|1
+3 Swamp|INV|2
+2 Swamp|INV|3
+4 Undermine|INV
+4 Vodalian Zombie|INV
+1 Wash Out|INV

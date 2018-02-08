@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Title=Lord of the Undead
+Icon=Dungeon Crawling Black.jpg
+Difficulty=easy
+Description=Mono black zombies
+Deck Type=constructed
+Name=Black
+[Main]
+1 Annihilate|INV
+1 Dark Suspicions|PLS
+2 Do or Die|INV
+4 Duskwalker|INV
+4 Hate Weaver|INV
+4 Lord of the Undead|PLS
+4 Maggot Carrier|PLS
+1 Marauding Knight|INV
+2 Nightscape Familiar|PLS
+3 Phyrexian Arena|APC
+1 Phyrexian Bloodstock|PLS
+4 Phyrexian Scuta|PLS
+4 Ravenous Rats|INV
+2 Sinister Strength|PLS
+5 Swamp|INV|1
+7 Swamp|INV|2
+6 Swamp|INV|3
+4 Swamp|INV|4
+1 Yawgmoth's Agenda|INV

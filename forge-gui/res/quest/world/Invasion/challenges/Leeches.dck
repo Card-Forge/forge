@@ -1,0 +1,27 @@
+[quest]
+id=Leeches
+OpponentName=The Monster Trader
+AILife=80
+Repeat=true
+Wins=50
+Card Reward=booster pack PLS;booster pack APC;booster pack PLS;booster pack APC;chosen card rarity:R sets:INV,PLS,APC
+Ticket Reward=true
+Credit Reward=1000
+AIExtras=Collective Restraint
+HumanExtras=Alabaster Leech|Andradite Leech|Jade Leech|Ruby Leech|Sapphire Leech
+[metadata]
+Title=The Monster Trader
+Icon=Dungeon Crawling Gold.jpg
+Difficulty=very hard
+Description=Sometimes "free" is the most expensive.
+Deck Type=constructed
+Name=Leeches
+[Main]
+6 Plains|INV
+6 Mountain|INV
+6 Swamp|INV
+6 Forest|INV
+6 Island|INV
+9 Draco|PLS
+3 Collective Restraint|INV
+3 Dueling Grounds|INV
