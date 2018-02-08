@@ -1,0 +1,35 @@
+[quest]
+id=7017
+OpponentName=The Locust God
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=The Locust God
+Credit Reward=200
+AIExtras=The Locust God|New Perspectives|Everlasting Torment
+HumanExtras=Wall of Denial|Wall of Denial|Wall of Denial|Wall of Denial
+[metadata]
+Name=The Locust God
+Title=The Locust God
+Difficulty=Hard
+Description=The Locust God has unleashed a plague of Locusts that threaten to breach the Hekma.
+Icon=Locust God.jpg
+[Main]
+4 Blasted Landscape|C15
+4 Canyon Slough|AKH
+4 Curse of Chaos|C13
+4 Desert of the Fervent|HOU
+4 Desert of the Mindful|HOU
+3 Everlasting Torment|C16
+4 Fetid Pools|AKH
+4 Irrigated Farmland|AKH
+4 Lay Waste|USG
+3 New Perspectives|AKH
+4 Open into Wonder|AKH
+4 Rise from the Tides|EMN
+4 Sheltered Thicket|AKH
+4 Swarm Intelligence|HOU
+4 Swarmyard|TSP
+3 The Locust God|HOU
+4 Windfall|C16
+
