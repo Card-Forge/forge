@@ -229,8 +229,17 @@ public class QuestWinLoseController {
         sb.append(StringUtils.capitalize(qEvent.getDifficulty().getTitle()));
         sb.append(" opponent: ").append(credBase).append(" credits.\n");
 
-        final int creditsForPreviousWins = (int) ((Double.parseDouble(FModel.getQuestPreferences()
-                .getPref(QPref.REWARDS_WINS_MULTIPLIER)) * qData.getAchievements().getWin()));
+        final int creditsForPreviousWins;
+        if (FModel.getQuestPreferences()
+                .getPrefInt(QPref.REWARDS_WINS_MULTIPLIER_MAX) > qData.getAchievements().getWin()) {
+            creditsForPreviousWins = (int) ((Double.parseDouble(FModel.getQuestPreferences()
+                    .getPref(QPref.REWARDS_WINS_MULTIPLIER)) * qData.getAchievements().getWin()));
+        } else {
+            creditsForPreviousWins = (int) ((Double.parseDouble(FModel.getQuestPreferences()
+                    .getPref(QPref.REWARDS_WINS_MULTIPLIER)) * FModel.getQuestPreferences()
+                    .getPrefInt(QPref.REWARDS_WINS_MULTIPLIER_MAX)));
+        }
+                
         credBase += creditsForPreviousWins;
 
         sb.append("Bonus for previous wins: ").append(creditsForPreviousWins).append(
