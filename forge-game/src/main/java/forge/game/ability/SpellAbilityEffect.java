@@ -292,9 +292,16 @@ public abstract class SpellAbilityEffect {
     
     protected static void addForgetOnMovedTrigger(final Card card, final String zone) {
         String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ " + zone + " | Destination$ Any | TriggerZones$ Command | Static$ True";
-        String effect = "DB$ Pump | ForgetObjects$ TriggeredCard";
+        String forgetEffect = "DB$ Pump | ForgetObjects$ TriggeredCard";
+        String exileEffect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"
+                + " | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0";
+        
+        SpellAbility saForget = AbilityFactory.getAbility(forgetEffect, card);
+        AbilitySub saExile = (AbilitySub) AbilityFactory.getAbility(exileEffect, card);
+        saForget.setSubAbility(saExile);
+        
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
-        parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+        parsedTrigger.setOverridingAbility(saForget);
         final Trigger addedTrigger = card.addTrigger(parsedTrigger);
         addedTrigger.setIntrinsic(true);
     }

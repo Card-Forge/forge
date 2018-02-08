@@ -196,7 +196,6 @@ public abstract class PlayerController {
     public abstract boolean confirmPayment(CostPart costPart, String string, SpellAbility sa);
     public abstract ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers, Map<String, Object> runParams);
     public abstract String chooseProtectionType(String string, SpellAbility sa, List<String> choices);
-    public abstract CardShields chooseRegenerationShield(Card c);
 
     // these 4 need some refining.
     public abstract boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, FCollectionView<Player> allPayers);

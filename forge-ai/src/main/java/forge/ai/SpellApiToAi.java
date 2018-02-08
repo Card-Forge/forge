@@ -117,6 +117,7 @@ public enum SpellApiToAi {
             .put(ApiType.RearrangeTopOfLibrary, RearrangeTopOfLibraryAi.class)
             .put(ApiType.Regenerate, RegenerateAi.class)
             .put(ApiType.RegenerateAll, RegenerateAllAi.class)
+            .put(ApiType.Regeneration, AlwaysPlayAi.class)
             .put(ApiType.RemoveCounter, CountersRemoveAi.class)
             .put(ApiType.RemoveCounterAll, CannotPlayAi.class)
             .put(ApiType.RemoveFromCombat, RemoveFromCombatAi.class)

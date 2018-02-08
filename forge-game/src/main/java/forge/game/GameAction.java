@@ -1402,26 +1402,13 @@ public class GameAction {
             return false;
         }
 
-        if (c.canBeShielded() && (!c.isCreature() || c.getNetToughness() > 0)
-                && (c.getShieldCount() > 0 || c.hasKeyword("If CARDNAME would be destroyed, regenerate it."))) {
-            c.subtractShield(c.getController().getController().chooseRegenerationShield(c));
-            c.setDamage(0);
-            c.setHasBeenDealtDeathtouchDamage(false);
-            c.tap();
-            c.addRegeneratedThisTurn();
-            if (game.getCombat() != null) {
-                game.getCombat().removeFromCombat(c);
-            }
-
-            // Play the Regen sound
-            game.fireEvent(new GameEventCardRegenerated());
-
-            return false;
-        }
-        return destroyNoRegeneration(c, sa);
+        return destroy(c, sa, true);
+    }
+    public final boolean destroyNoRegeneration(final Card c, final SpellAbility sa) {
+        return destroy(c, sa, false);
     }
 
-    public final boolean destroyNoRegeneration(final Card c, final SpellAbility sa) {
+    public final boolean destroy(final Card c, final SpellAbility sa, final boolean regenerate) {
         Player activator = null;
         if (!c.canBeDestroyed()) {
             return false;
@@ -1433,6 +1420,7 @@ public class GameAction {
         repRunParams.put("Source", sa);
         repRunParams.put("Card", c);
         repRunParams.put("Affected", c);
+        repRunParams.put("Regeneration", regenerate);
 
         if (game.getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
             return false;

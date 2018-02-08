@@ -3347,6 +3347,15 @@ public class CardFactoryUtil {
             final ReplacementEffect re = makeEtbCounter(sb.toString(), card, intrinsic);
 
             inst.addReplacement(re);
+        } else if (keyword.equals("If CARDNAME would be destroyed, regenerate it.")) {
+            String repeffstr = "Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.Self"
+                    + " | Secondary$ True | Regeneration$ True | Description$ " + keyword;
+            String effect = "DB$ Regeneration | Defined$ ReplacedCard";
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
+            SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            re.setOverridingAbility(sa);
+
+            inst.addReplacement(re);
         }
         
         // extra part for the Damage Prevention keywords

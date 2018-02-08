@@ -46,18 +46,35 @@ public class ReplaceDestroy extends ReplacementEffect {
         if (!runParams.get("Event").equals("Destroy")) {
             return false;
         }
-        if (this.getMapParams().containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams.get("Affected"), this.getMapParams().get("ValidPlayer").split(","), this.getHostCard())) {
+        if (hasParam("ValidPlayer")) {
+            if (!matchesValid(runParams.get("Affected"), getParam("ValidPlayer").split(","), getHostCard())) {
                 return false;
             }
         }
-        if (this.getMapParams().containsKey("ValidCard")) {
-            if (!matchesValid(runParams.get("Card"), this.getMapParams().get("ValidCard").split(","), this.getHostCard())) {
+        if (hasParam("ValidCard")) {
+            Card card = (Card)runParams.get("Card");
+            if (!matchesValid(card, getParam("ValidCard").split(","), getHostCard())) {
                 return false;
             }
+            // extra check for Regeneration
+            if (hasParam("Regeneration")) {
+                if (!runParams.containsKey("Regeneration")) {
+                    return false;
+                }
+                if (!(Boolean)runParams.get("Regeneration")) {
+                    return false;
+                }
+                if (!card.canBeShielded()) {
+                    return false;
+                }
+                if (card.isCreature()) {
+                    if (card.getNetToughness() <= 0)
+                        return false;
+                }
+            }
         }
-        if (this.getMapParams().containsKey("ValidSource")) {
-            if (!matchesValid(runParams.get("Source"), this.getMapParams().get("ValidSource").split(","), this.getHostCard())) {
+        if (hasParam("ValidSource")) {
+            if (!matchesValid(runParams.get("Source"), getParam("ValidSource").split(","), getHostCard())) {
                 return false;
             }
         }
