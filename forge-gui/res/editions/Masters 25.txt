@@ -12,4 +12,4 @@ FoilChanceInBooster=100
 
 62 M Jace, the Mind Sculptor
 
-161 M Azusa, Lost but Seeking
+161 R Azusa, Lost but Seeking
