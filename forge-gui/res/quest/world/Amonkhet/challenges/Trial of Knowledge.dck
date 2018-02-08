@@ -1,0 +1,66 @@
+[quest]
+id=7011
+OpponentName=Kefnet
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=Cartouche of Knowledge|AKH
+Credit Reward=20000
+AIExtras=Kefnet's Monument|Dream Halls|Orb of Dreams|Illusory Angel|Soul Net
+HumanExtras=Dismiss into Dream
+[metadata]
+Name=Trial of Knowledge
+Title=Trial of Knowledge
+Difficulty=Hard
+Description="No amount of strength can help you overcome my trial. You must be ready to forgo your body and favor your mind."
+Icon=Kefnet the Mindful.jpg
+Deck Type=constructed
+[Main]
+1 Brainstorm|EMA
+1 Broken Concentration|SOI
+1 Cancel|AKH
+1 Censor|AKH
+1 Commit // Memory|AKH
+1 Consecrated Sphinx|MPS_AKH
+1 Counterspell|MPS_AKH
+1 Cryptic Command|MPS_AKH
+1 Cryptic Serpent|AKH
+1 Daze|MPS_AKH
+2 Decision Paralysis|AKH
+1 Divert|MPS_AKH
+1 Drag Under|EMN
+1 Dream Cache|6ED
+1 Dream Fracture|CNS
+1 Dream Leash|RAV
+1 Dream Twist|EMA
+1 Emrakul, the Promised End|EMN
+1 Essence Scatter|AKH
+1 Eternal of Harsh Truths|HOU
+1 Fact or Fiction|EMA
+1 Force of Will|MPS_AKH
+1 Howling Mine|C16
+1 Illusory Angel|PCA
+1 Imaginary Threats|HOU
+5 Island|AKH|1
+5 Island|AKH|2
+5 Island|AKH|3
+5 Island|AKH|4
+4 Kefnet's Monument|AKH
+1 Labyrinth Guardian|AKH
+1 Memory Lapse|EMA
+1 Phantasmal Dragon|DDM
+1 Pull from Tomorrow|AKH
+1 Ribbon Snake|PCY
+1 Sacred Excavation|AKH
+1 Shimmer|MIR
+1 Sleep Paralysis|W17
+1 Spell Pierce|MPS_AKH
+1 Spellweaver Eternal|HOU
+1 Stifle|MPS_AKH
+1 Sway of the Stars|BOK
+1 Theft of Dreams|EXO
+1 Tolarian Drake|WTH
+1 Turbulent Dreams|TOR
+1 Turn Aside|EMN
+1 Unsubstantiate|EMN
+1 Winds of Rebuke|AKH
