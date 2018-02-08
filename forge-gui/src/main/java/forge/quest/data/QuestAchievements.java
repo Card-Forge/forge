@@ -236,11 +236,16 @@ public class QuestAchievements {
             draftsToGenerate = 1;
         }
 
+        // Draft too old, needs to rotate
         Set<QuestEventDraft> toRemove = new HashSet<>();
         for (QuestEventDraft draft : drafts) {
             if (draft.getAge() <= 0
                     && !(currentDraft != -1 && drafts.get(currentDraft) == draft)) {
+                // Remove and generate another
                 toRemove.add(draft);
+                if (FModel.getQuestPreferences().getPrefInt(QPref.DRAFT_ROTATION) != 0) {
+                    draftsToGenerate++;
+                }
                 break;
             }
         }

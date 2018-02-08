@@ -176,7 +176,8 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
 
         ITEM_LEVEL_RESTRICTION("1"),
 
-        SIMULATE_AI_VS_AI_RESULTS("0");
+        SIMULATE_AI_VS_AI_RESULTS("0"),
+        DRAFT_ROTATION("0");
 
         private final String strDefaultVal;
 
@@ -279,7 +280,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
                     return "Bias value too large (maximum 100).";
                 }
                 break;
-
+            case DRAFT_ROTATION:
             case SPECIAL_BOOSTERS:
             case ITEM_LEVEL_RESTRICTION:
                 if (val != 0 && val != 1) {
