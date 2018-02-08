@@ -54,7 +54,7 @@ public final class Main {
 
         // command line startup here
         String mode = args[0].toLowerCase();
-        
+
         switch(mode) {
             case "sim":
                 SimulateMatch.simulate(args);
