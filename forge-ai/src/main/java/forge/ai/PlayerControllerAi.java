@@ -1,6 +1,5 @@
 package forge.ai;
 
-//import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -398,7 +397,7 @@ public class PlayerControllerAi extends PlayerController {
         if (StringUtils.isBlank(chosen) && !validTypes.isEmpty())
         {
             chosen = validTypes.get(0);
-            //Log.warn("AI has no idea how to choose " + kindOfType +", defaulting to 1st element: chosen");
+            System.err.println("AI has no idea how to choose " + kindOfType +", defaulting to 1st element: chosen");
         }
         game.getAction().nofityOfValue(sa, player, chosen, player);
         return chosen;
