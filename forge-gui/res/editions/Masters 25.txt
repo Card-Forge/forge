@@ -9,3 +9,7 @@ Booster=11 Common, 3 Uncommon, 1 RareMythic
 FoilChanceInBooster=100
 
 [cards]
+
+62 M Jace, the Mind Sculptor
+
+161 M Azusa, Lost but Seeking
