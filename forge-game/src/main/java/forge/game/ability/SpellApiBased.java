@@ -8,11 +8,9 @@ import forge.game.ability.effects.ManaEffect;
 import forge.game.ability.effects.ManaReflectedEffect;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
-import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.Spell;
 import forge.game.spellability.TargetRestrictions;
-import forge.game.zone.ZoneType;
 
 public class SpellApiBased extends Spell {
     private static final long serialVersionUID = -6741797239508483250L;

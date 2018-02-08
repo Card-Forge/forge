@@ -362,6 +362,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         return null;
     }
     public CardState getState(final CardStateName state) {
+        if (!states.containsKey(state) && state == CardStateName.FaceDown) {
+            states.put(CardStateName.FaceDown, CardUtil.getFaceDownCharacteristic(this));
+        }
         return states.get(state);
     }
     public boolean setState(final CardStateName state, boolean updateView) {
