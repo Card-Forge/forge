@@ -1,0 +1,96 @@
+[metadata]
+Code=TD2
+Date=2013-01-11
+Name=Duel Decks: Mirrodin Pure vs. New Phyrexia
+MciCode=td2
+Type=Duel_Decks
+
+[cards]
+1 M Platinum Angel
+2 U Memnite
+3 C Steel Wall
+4 C Ardent Recruit
+5 C Vedalken Certarch
+6 C Gold Myr
+7 U Myr Retriever
+8 C Silver Myr
+9 U Trinket Mage
+10 R Grand Architect
+11 R Silent Arbiter
+12 U Glimmerpoint Stag
+13 R Argent Sphinx
+14 R Kuldotha Forgemaster
+15 C Spire Serpent
+16 U Darksteel Sentinel
+17 R Duplicant
+18 U Lumengrid Gargoyle
+19 U Darksteel Gargoyle
+20 C Bonesplitter
+21 C Slagwurm Armor
+22 U Condemn
+23 U Dispatch
+24 U Steelshaper's Gift
+25 C Neurok Stealthsuit
+26 U Talisman of Progress
+27 U Viridian Claw
+28 U Purge
+29 U Test of Faith
+30 C Turn the Tide
+31 U Thunderstaff
+32 C Arrest
+33 U Thirst for Knowledge
+34 C Stoic Rebuttal
+35 R White Sun's Zenith
+36 C Ancient Den
+37 R Blinkmoth Nexus
+38 U Coastal Tower
+39 U Forbidding Watchtower
+40 C Seat of the Synod
+41 C Terramorphic Expanse
+42 L Plains
+43 L Plains
+44 L Plains
+45 L Island
+46 L Island
+47 L Island
+48 M Phyrexian Plaguelord
+49 C Fume Spitter
+50 C Myr Sire
+51 U Plague Myr
+52 C Viridian Emissary
+53 C Phyrexian Ghoul
+54 C Rot Wolf
+55 R Necroskitter
+56 U Viridian Corrupter
+57 R Desecration Elemental
+58 U Flesh-Eater Imp
+59 C Symbiotic Elf
+60 U Soul Snuffers
+61 R Mitotic Slime
+62 U Plaguemaw Beast
+63 U Phyrexian Juggernaut
+64 U Drooling Groodion
+65 R Protean Hulk
+66 C Innocent Blood
+67 U Contagion Clasp
+68 U Mortarpod
+69 U Spawning Pit
+70 U Exhume
+71 R Phyrexian Altar
+72 C Morbid Plunder
+73 U Putrefy
+74 U Grafted Exoskeleton
+75 U Diabolic Servitude
+76 U Barter in Blood
+77 R Reprocess
+78 U Triumph of the Hordes
+79 C Spread the Sickness
+80 U One Dozen Eyes
+81 R Black Sun's Zenith
+82 U Tainted Wood
+83 L Swamp
+84 L Swamp
+85 L Swamp
+86 L Forest
+87 L Forest
+88 L Forest

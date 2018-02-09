@@ -1,0 +1,158 @@
+[metadata]
+Code=PZ1
+Date=2015-11-18
+Name=Legendary Cube
+Code2=PZ1
+MciCode=pz1
+Type=Other
+
+[cards]
+1 R Bastion Protector
+2 R Containment Priest
+3 R Dawnbreak Reclaimer
+4 U Ghostly Prison
+5 U Grasp of Fate
+6 U Herald of the Host
+7 R Kalemne's Captain
+8 R Loyal Retainers
+9 M Nahiri, the Lithomancer
+10 U Oreskos Explorer
+11 M Reya Dawnbringer
+12 R Righteous Confluence
+13 U Shielded by Faith
+14 U Spirit Mantle
+15 U Vow of Duty
+16 U Wall of Omens
+17 R Wrath of God
+18 R Aethersnatch
+19 U Brainstorm
+20 U Broodbirth Viper
+21 U Compulsive Research
+22 U Deceiver Exarch
+23 U Deep Analysis
+24 R Desertion
+25 U Fact or Fiction
+26 R Flusterstorm
+27 R Gigantoplasm
+28 R Illusory Ambusher
+29 R Mirror Match
+30 R Mystic Confluence
+31 U Propaganda
+32 R Rhystic Study
+33 R Synthetic Destiny
+34 M Teferi, Temporal Archmage
+35 M True-Name Nemesis
+36 U Vow of Flight
+37 U Wonder
+38 M Abyssal Persecutor
+39 U Banshee of the Dread Choir
+40 R Corpse Augur
+41 R Daxos's Torment
+42 R Deadly Tempest
+43 R Decree of Pain
+44 R Dread Summons
+45 M Ob Nixilis of the Black Oath
+46 R Scourge of Nel Toth
+47 R Thief of Blood
+48 R Toxic Deluge
+49 U Tragic Slip
+50 U Viscera Seer
+51 U Vow of Malice
+52 R Wretched Confluence
+53 U Anger
+54 R Awaken the Sky Tyrant
+55 R Chaos Warp
+56 M Daretti, Scrap Savant
+57 R Diaochan, Artful Beauty
+58 R Dream Pillager
+59 U Faithless Looting
+60 R Fiery Confluence
+61 U Flametongue Kavu
+62 R Goblin Sharpshooter
+63 R Magus of the Wheel
+64 R Meteor Blast
+65 R Mizzix's Mastery
+66 U Punishing Fire
+67 R Rite of the Raging Storm
+68 U Vow of Lightning
+69 U Warchief Giant
+70 U Arachnogenesis
+71 R Bloodspore Thrinax
+72 U Brawn
+73 U Caller of the Pack
+74 R Centaur Vinecrasher
+75 U Cultivate
+76 U Eternal Witness
+77 R Ezuri's Predation
+78 M Freyalise, Llanowar's Fury
+79 U Great Oak Guardian
+80 U Harmonize
+81 U Invigorate
+82 U Krosan Grip
+83 U Nest Invader
+84 R Pathbreaker Ibex
+85 U Rancor
+86 U Sakura-Tribe Elder
+87 U Skullwinder
+88 R Sylvan Library
+89 R Titania, Protector of Argoth
+90 R Verdant Confluence
+91 U Vow of Wildness
+92 U Wall of Blossoms
+93 M Animar, Soul of Elements
+94 R Anya, Merciless Angel
+95 R Arjun, the Shifting Flame
+96 U Behemoth Sledge
+97 M Dack Fayden
+98 R Daxos the Returned
+99 R Dragonlair Spider
+100 R Edric, Spymaster of Trest
+101 U Electrolyze
+102 R Ezuri, Claw of Progress
+103 U Firespout
+104 M Ghave, Guru of Spores
+105 U Hull Breach
+106 M Kaalia of the Vast
+107 R Kalemne, Disciple of Iroas
+108 R Karlov of the Ghost Council
+109 R Kaseto, Orochi Archmage
+110 M Maelstrom Wanderer
+111 M Marchesa, the Black Rose
+112 R Mazirek, Kraul Death Priest
+113 R Meren of Clan Nel Toth
+114 M The Mimeoplasm
+115 R Mirari's Wake
+116 R Mizzix of the Izmagnus
+117 R Shardless Agent
+118 R Vela the Night-Clad
+119 M Zedruu the Greathearted
+120 U Basalt Monolith
+121 U Blade of Selves
+122 R Duplicant
+123 U Lightning Greaves
+124 R Mind's Eye
+125 R Sandstone Oracle
+126 R Scroll Rack
+127 R Scytheclaw
+128 U Seal of the Guildpact
+129 U Sol Ring
+130 U Swiftfoot Boots
+131 U Thought Vessel
+132 U Thran Dynamo
+133 U Worn Powerstone
+134 U Arcane Sanctum
+135 U Bojuka Bog
+136 U Command Beacon
+137 U Command Tower
+138 U Crumbling Necropolis
+139 U Dreadship Reef
+140 U Fungal Reaches
+141 R Homeward Path
+142 U Jungle Shrine
+143 U Khalni Garden
+144 U Krosan Verge
+145 U Molten Slagheap
+146 U Saltcrusted Steppe
+147 U Savage Lands
+148 U Seaside Citadel
+149 R Temple of the False God

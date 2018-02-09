@@ -1,0 +1,81 @@
+[metadata]
+Code=PZ2
+Date=2016-11-16
+Name=Treasure Chests
+MciCode=pz2
+Type=Other
+
+[cards]
+1 C Throne Warden
+2 C Palace Sentinels
+3 U Orzhov Advokist
+4 U Palace Jailer
+5 R Recruiter of the Guard
+6 R Custodi Soulbinders
+7 R Selfless Squire
+8 R Protector of the Crown
+9 R Duelist's Heritage
+10 R Entrapment Maneuver
+11 M Sanctum Prelate
+12 U Grip of Phyresis
+13 R Stunt Double
+14 R Faerie Artisans
+15 R Keeper of Keys
+16 R Deepglow Skate
+17 C Garrulous Sycophant
+18 C Thorn of the Black Rose
+19 U Parting Thoughts
+20 U Marchesa's Decree
+21 R Magus of the Will
+22 R Custodi Lich
+23 R Curse of Vengeance
+24 U Frenzied Fugue
+25 R Goblin Spymaster
+26 R Charging Cinderhorn
+27 R Runehorn Hellkite
+28 R Skyline Despot
+29 R Grenzo, Havoc Raiser
+30 M Subterranean Tremors
+31 U Domesticated Hydra
+32 U Evolutionary Escalation
+33 R Primeval Protector
+34 R Splitting Slime
+35 R Stonehoof Chieftain
+36 R Benefactor's Draught
+37 M Selvala, Heart of the Wilds
+38 U Ancient Excavation
+39 U Sylvan Reclamation
+40 U Migratory Route
+41 U Grave Upheaval
+42 U Treacherous Terrain
+43 R Reyhan, Last of the Abzan
+44 R Tymna the Weaver
+45 R Adriana, Captain of the Guard
+46 R Kraum, Ludevic's Opus
+47 R Thrasios, Triton Hero
+48 R Akiri, Line-Slinger
+49 M Vial Smasher the Fierce
+50 M Queen Marchesa
+51 M Silas Renn, Seeker Adept
+52 M Ludevic, Necro-Alchemist
+53 M Kydele, Chosen of Kruphix
+54 M Sidar Kondo of Jamuraa
+55 M Tana, the Bloodsower
+56 M Bruse Tarl, Boorish Herder
+57 M Ishai, Ojutai Dragonspeaker
+58 M Ikra Shidiqi, the Usurper
+59 M Ravos, Soultender
+60 M Leovold, Emissary of Trest
+61 M Saskia the Unyielding
+62 M Atraxa, Praetors' Voice
+63 M Kynaios and Tiro of Meletis
+64 M Yidris, Maelstrom Wielder
+65 M Breya, Etherium Shaper
+66 M Daretti, Ingenious Iconoclast
+67 M Kaya, Ghost Assassin
+68 R Armory Automaton
+69 R Crystalline Crawler
+70 R Boompile
+71 R Prismatic Geoscope
+72 C Ash Barrens
+73 R Throne of the High City
