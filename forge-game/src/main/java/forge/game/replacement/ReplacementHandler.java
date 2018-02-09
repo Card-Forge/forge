@@ -53,7 +53,6 @@ public class ReplacementHandler {
         final Object affected = runParams.get("Affected");
         Player decider = null;
 
-        
         // Figure out who decides which of multiple replacements to apply
         // as well as whether or not to apply optional replacements.
         if (affected instanceof Player) {
@@ -62,29 +61,21 @@ public class ReplacementHandler {
             decider = ((Card) affected).getController();
         }
 
-        if (runParams.get("Event").equals("Moved")) {
-            ReplacementResult res = run(runParams, ReplacementLayer.Control, decider);
-            if (res != ReplacementResult.NotReplaced) {
-                return res;
-            }
-            res = run(runParams, ReplacementLayer.Copy, decider);
-            if (res != ReplacementResult.NotReplaced) {
-                return res;
-            }
-            res = run(runParams, ReplacementLayer.Other, decider);
-            if (res != ReplacementResult.NotReplaced) {
-                return res;
-            }
-            res = run(runParams, ReplacementLayer.None, decider);
-            if (res != ReplacementResult.NotReplaced) {
-                return res;
-            }
+        ReplacementResult res = run(runParams, ReplacementLayer.Control, decider);
+        if (res != ReplacementResult.NotReplaced) {
+            return res;
         }
-        else {
-            ReplacementResult res = run(runParams, ReplacementLayer.None, decider);
-            if (res != ReplacementResult.NotReplaced) {
-                return res;
-            }
+        res = run(runParams, ReplacementLayer.Copy, decider);
+        if (res != ReplacementResult.NotReplaced) {
+            return res;
+        }
+        res = run(runParams, ReplacementLayer.Other, decider);
+        if (res != ReplacementResult.NotReplaced) {
+            return res;
+        }
+        res = run(runParams, ReplacementLayer.None, decider);
+        if (res != ReplacementResult.NotReplaced) {
+            return res;
         }
 
         return ReplacementResult.NotReplaced;

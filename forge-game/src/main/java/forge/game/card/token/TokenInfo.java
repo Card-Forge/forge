@@ -138,10 +138,11 @@ public class TokenInfo {
         final Game game = controller.getGame();
 
         int multiplier = 1;
+        Player player = controller;
 
         final Map<String, Object> repParams = Maps.newHashMap();
         repParams.put("Event", "CreateToken");
-        repParams.put("Affected", controller);
+        repParams.put("Affected", player);
         repParams.put("TokenNum", multiplier);
         repParams.put("EffectOnly", applyMultiplier);
 
@@ -150,6 +151,7 @@ public class TokenInfo {
                 break;
             case Updated: {
                 multiplier = (int) repParams.get("TokenNum");
+                player = (Player) repParams.get("Affected");
                 break;
             }
             default:
@@ -157,7 +159,7 @@ public class TokenInfo {
         }
 
         for (int i = 0; i < multiplier; i++) {
-            list.add(makeOneToken(controller));
+            list.add(makeOneToken(player));
         }
         return list;
     }

@@ -63,7 +63,9 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         originalMapParams.putAll(map);
         mapParams.putAll(map);
         this.setHostCard(host);
-
+        if (map.containsKey("Layer")) {
+            this.setLayer(ReplacementLayer.smartValueOf(map.get("Layer")));
+        }
     }
 
     /**
