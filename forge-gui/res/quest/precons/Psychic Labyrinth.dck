@@ -8,7 +8,7 @@ Deck Type=constructed
 Set=M14
 Image=psychic_labyrinth.jpg
 Name=Psychic Labyrinth
-Description=This tactical deck focuses on controlling the flow of combat. Efficient flying creatures backed up by versatile support spells will allow you to sculpt your path to victory.
+Description=Pull your foes into a maze of uncertainty by manipulating their minds! If enemies dare to get in your way, send them back into the Æther while your army takes to the skies.
 [Main]
 2 Air Servant|M14
 1 Archaeomancer|M14
@@ -20,7 +20,7 @@ Description=This tactical deck focuses on controlling the flow of combat. Effici
 1 Glimpse the Future|M14
 2 Illusionary Armor|M14
 16 Island|M14
-1 Jace's Mindseeker|M14
+1 Jace's Mindseeker+|M14
 2 Master of Diversion|M14
 1 Messenger Drake|M14
 9 Plains|M14
