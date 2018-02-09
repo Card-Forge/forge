@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Gideon
+Title=Gideon Jura
+Difficulty=Medium
+Description="On every plane, there are those who run toward danger."
+Icon=Gideon Jura.jpg
+Deck Type=constructed
+[Main]
+1 Aegis Angel|E01
+2 Aerial Responder|E01
+2 Anointer of Champions|E01
+1 Doomed Traveler|E01
+2 Excoriate|E01
+2 Expedition Raptor|E01
+1 Fencing Ace|E01
+1 Fiendslayer Paladin|E01
+1 Flickerwisp|E01
+1 Gideon Jura|E01
+2 Gideon's Lawkeeper|E01
+1 Grand Abolisher|E01
+1 Grasp of the Hieromancer|E01
+1 Lightwielder Paladin|E01
+1 Mentor of the Meek|E01
+2 Moment of Heroism|E01
+1 Odric, Master Tactician|E01
+13 Plains|E01|1
+12 Plains|E01|2
+1 Precinct Captain|E01
+2 Relief Captain|E01
+2 Shoulder to Shoulder|E01
+1 Sparring Mummy|AKH
+1 Sun Titan|E01
+2 Those Who Serve|AKH
+2 Vizier of Deferment|AKH
+1 Youthful Knight|E01

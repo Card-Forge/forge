@@ -1,0 +1,35 @@
+[quest]
+id=7009
+OpponentName=Razaketh
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=Liliana, Death Wielder
+Credit Reward=200
+AIExtras=Razaketh, the Foulblooded|Grave Betrayal
+[metadata]
+Name=Razaketh
+Title=Razaketh, the Foulblooded
+Difficulty=Hard
+Description="Come to me."
+Icon=Razaketh, the Foulblooded.jpg
+Deck Type=archenemy
+[Main]
+4 Act of Aggression|C15
+4 Attrition|MPS_AKH
+4 Bloated Toad|ULG
+4 Cruel Reality|AKH
+4 Dark Ritual|MPS_AKH
+4 Diabolic Edict|MPS_AKH
+4 Diabolic Intent|MPS_AKH
+4 Gate to the Afterlife|AKH
+4 Grimoire of the Dead|ISD
+4 Ifnir Deadlands|HOU
+4 Rampaging Hippo|HOU
+4 Razaketh's Rite|HOU
+4 Sandbar Serpent|USG
+3 Swamp|E01|1
+3 Swamp|E01|2
+3 Swamp|HOU|1
+3 Swamp|HOU|2
+3 Swamp|HOU|3

@@ -1,0 +1,91 @@
+[quest]
+id=7012
+OpponentName=Rhonas
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=Cartouche of Strength|AKH
+Credit Reward=20000
+AIExtras=Rhonas's Monument|Vizier of the Menagerie
+HumanExtras=
+[metadata]
+Name=Trial of Strength
+Title=Trial of Strength
+Difficulty=Hard
+Description="Everything in the trial has teeth. You will overcome them, or you will feed them."
+Icon=Rhonas the Indomitable.jpg
+Deck Type=constructed
+[Main]
+1 Aerial Guide|HOU
+1 Ancient Crab|AKH
+1 Angler Drake|AKH
+1 Arachnus Spinner|MM3
+1 Arachnus Web|MM3
+1 Birds of Paradise|CN2
+1 Brindle Shoat|PCA
+1 Broodbirth Viper|C15
+1 Colossapede|AKH
+1 Coveted Peacock|CN2
+1 Crocodile of the Crossing|AKH
+1 Death-Hood Cobra|MM3
+1 Decimator Beetle|AKH
+1 Defiant Greatmaw|AKH
+1 Dense Foliage|WTH
+1 Dragonlair Spider|PCA
+1 Emerald Oryx|M10
+1 Emperor Crocodile|EMA
+1 Endless Swarm|SOK
+1 Enigma Drake|AKH
+10 Forest|AKH|1
+10 Forest|AKH|2
+10 Forest|AKH|3
+10 Forest|AKH|4
+1 Frilled Sandwalla|HOU
+1 Giant Mantis|BFZ
+1 Giant Scorpion|DDR
+1 Giant Spider|AKH
+1 Gilded Cerodon|HOU
+1 Gloomwidow|SOI
+1 Glorybringer|AKH
+1 Graceful Antelope|ODY
+1 Grazing Gladehart|DDP
+1 Hinterland Drake|AER
+1 Honored Hydra|AKH
+1 Hyena Pack|AKH
+1 Loam Larva|OGW
+1 Lorescale Coatl|C15
+1 Majestic Myriarch|HOU
+1 Manglehorn|AKH
+1 Manticore of the Gauntlet|AKH
+1 Mystic Snake|C15
+1 Netcaster Spider|CN2
+1 Nimble Mongoose|EMA
+1 Noose Constrictor|EMN
+1 Obelisk Spider|HOU
+1 Ornery Kudu|AKH
+1 Penumbra Spider|MM3
+1 Pouncing Cheetah|AKH
+1 Prowling Serpopard|AKH
+1 Rampaging Hippo|HOU
+1 Ramunap Hydra|HOU
+1 Regal Caracal|AKH
+3 Rhonas's Monument|AKH
+1 Scaled Behemoth|AKH
+1 Scythe Leopard|DDR
+1 Sentinel Spider|EMA
+1 Shefet Monitor|AKH
+1 Shimmerscale Drake|AKH
+1 Skyswirl Harrier|KLD
+1 Stingerfling Spider|C15
+1 Swift Spinner|EMN
+1 Tenacious Hunter|HOU
+1 Thorned Moloch|HOU
+1 Thresher Lizard|AKH
+1 Thriving Ibex|KLD
+1 Thriving Rhino|KLD
+3 Vizier of the Menagerie|AKH
+1 Wasteland Scorpion|AKH
+1 Watcher in the Web|SOI
+1 Whitemane Lion|EMA
+1 Wind Drake|KLD
+1 Winding Constrictor|AER

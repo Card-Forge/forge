@@ -1,0 +1,52 @@
+[quest]
+id=7010
+OpponentName=Bontu
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=Cartouche of Ambition|AKH
+Credit Reward=20000
+AIExtras=Bontu's Monument|Grave Pact|Swamp
+HumanExtras=Swamp
+[metadata]
+Name=Trial of Ambition
+Title=Trial of Ambition
+Difficulty=Hard
+Description="Only the strong will triumph. But strength is learned. None are born strong. You shall be next to face my Trial."
+Icon=Bontu the Glorified.jpg
+Deck Type=constructed
+[Main]
+1 Army of the Damned|C16
+1 Attrition|MPS_AKH
+1 Baleful Ammit|AKH
+1 Bog Serpent|PLC
+4 Bontu's Monument|AKH
+1 Carrion|MIR
+4 Cartouche of Ambition|AKH
+1 Certain Death|W17
+4 Cruel Reality|AKH
+1 Crypt Cobra|MIR
+1 Cursed Minotaur|AKH
+1 Dead Drop|KTK
+1 Desiccated Naga|AKH
+1 Diabolic Intent|MPS_AKH
+1 Entrails Feaster|ONS
+1 Festering Mummy|AKH
+3 Grave Pact|COM
+1 Gruesome Encore|MBS
+1 Ichor Slick|DDD
+1 Lay Bare the Heart|AKH
+1 Miasmic Mummy|AKH
+1 Nest of Scarabs|AKH
+1 Painful Lesson|AKH
+1 Razor Pendulum|MIR
+1 Rotting Fensnake|ISD
+1 Skeletal Crocodile|POR
+1 Soulstinger|AKH
+5 Swamp|AKH|1
+5 Swamp|AKH|2
+5 Swamp|AKH|3
+5 Swamp|AKH|4
+1 Tattered Mummy|AKH
+4 Trial of Ambition|AKH
+1 Wasteland Scorpion|AKH
