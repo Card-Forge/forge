@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Title=Plague Spitter
+Icon=Dungeon Crawling Black.jpg
+Difficulty=easy
+Description=Black - With deck with plaguespitter and healing
+Deck Type=constructed
+Name=BlackWhitePlagueSpitter
+[Main]
+2 Angel of Mercy|INV
+4 Caves of Koilos|APC
+4 Death Grasp|APC
+2 Gerrard Capashen|APC
+4 Lashknife Barrier|PLS
+2 Necravolver|APC
+4 Phyrexian Arena|APC
+3 Phyrexian Gargantua|APC
+4 Phyrexian Scuta|PLS
+4 Plague Spitter|INV
+3 Plains|INV|1
+2 Plains|INV|2
+3 Plains|INV|3
+2 Soul Link|APC
+4 Star Compass|PLS
+2 Swamp|INV|1
+3 Swamp|INV|2
+3 Swamp|INV|3
+3 Vindicate|APC
+2 Voice of All|PLS

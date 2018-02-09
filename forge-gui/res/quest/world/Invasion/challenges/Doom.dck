@@ -1,0 +1,22 @@
+[quest]
+id=Doom
+OpponentName=High Priest
+AILife=30
+HumanLife=25
+Repeat=true
+Wins=0
+Card Reward=duplicate card
+Credit Reward=400
+AIExtras=Mountain|Mountain|Mountain|Mountain|Ana Sanctuary|Ceta Sanctuary|Dega Sanctuary|Necra Sanctuary|Raka Sanctuary
+HumanExtras=
+[metadata]
+Title=The Sanctuaries of Doom
+Icon=Dungeon Crawling Gold.jpg
+Difficulty=medium
+Description=Something is wrong with this religion!
+Deck Type=constructed
+Name=Doom
+[Main]
+25 Obliterate|INV
+31 Mountain|INV
+4 Collapsing Borders|INV

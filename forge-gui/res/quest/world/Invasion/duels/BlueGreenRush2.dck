@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Title=Gaea's Skyfolk
+Icon=Dungeon Crawling Gold.jpg
+Difficulty=medium
+Description=Blue - Green aggro
+Deck Type=constructed
+Name=BlueGreenRush2
+[Main]
+4 Aether Mutation|APC
+1 Anavolver|APC
+4 Fact or Fiction|INV
+4 Faerie Squadron|INV
+5 Forest|INV|1
+2 Forest|INV|2
+1 Forest|INV|3
+2 Forest|INV|4
+4 Gaea's Skyfolk|APC
+4 Island|INV|1
+3 Island|INV|2
+2 Island|INV|3
+1 Island|INV|4
+2 Kavu Titan|INV
+2 Penumbra Bobcat|APC
+4 Quirion Dryad|PLS
+4 Repulse|INV
+4 Temporal Spring|APC
+3 Wash Out|INV
+4 Yavimaya Coast|APC

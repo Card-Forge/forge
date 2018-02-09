@@ -1,0 +1,25 @@
+[quest]
+id=Heaven
+OpponentName=Reya Dawnbringer
+AILife=40
+Repeat=true
+Wins=40
+Card Reward=tournament pack INV;booster pack PLS;booster pack APC
+Ticket Reward=true
+Credit Reward=500
+AIExtras=Island|Mountain|Reya Dawnbringer
+HumanExtras=
+[metadata]
+Title=Heaven's Call
+Icon=Dungeon Crawling White.jpg
+Difficulty=very hard
+Description=An invasion...from above?
+Deck Type=constructed
+Name=Heaven
+[Main]
+10 Angel of Mercy|INV
+10 Glimmering Angel|INV
+10 Lightning Angel|APC
+1 Reya Dawnbringer|INV
+10 Voice of All|PLS
+30 Plains|INV

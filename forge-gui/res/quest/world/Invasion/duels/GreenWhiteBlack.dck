@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Title=Necravolver
+Icon=Dungeon Crawling Gold.jpg
+Difficulty=easy
+Description=3 color deck with various threats
+Deck Type=constructed
+Name=GreenWhiteBlack
+[Main]
+3 Armadillo Cloak|INV
+1 Caves of Koilos|APC
+2 Death Grasp|APC
+4 Elfhame Palace|INV
+7 Forest|INV|1
+4 Harrow|INV
+1 Llanowar Wastes|APC
+4 Necravolver|APC
+4 Pernicious Deed|APC
+3 Plains|INV|1
+1 Plains|INV|3
+4 Primal Growth|PLS
+2 Restock|INV
+1 Reya Dawnbringer|INV
+4 Sabertooth Nishoba|INV
+4 Spiritmonger|APC
+3 Swamp|INV|1
+3 Swamp|INV|2
+1 Swamp|INV|4
+4 Vindicate|APC

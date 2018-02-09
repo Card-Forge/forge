@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Title=Anavolver
+Icon=Dungeon Crawling Gold.jpg
+Difficulty=easy
+Description=Blue-Black-Green multicolor deck
+Deck Type=constructed
+Name=BlueBlackGreen
+[Main]
+4 Anavolver|APC
+3 Doomsday Specter|PLS
+5 Forest|INV|1
+2 Fungal Shambler|APC
+2 Island|INV|1
+2 Island|INV|2
+1 Island|INV|3
+3 Jungle Barrier|APC
+4 Llanowar Wastes|APC
+4 Mystic Snake|APC
+4 Pernicious Deed|APC
+4 Salt Marsh|INV
+4 Spiritmonger|APC
+1 Swamp|INV|3
+1 Swamp|INV|4
+4 Temporal Spring|APC
+4 Undermine|INV
+4 Urborg Elf|APC
+4 Yavimaya Coast|APC

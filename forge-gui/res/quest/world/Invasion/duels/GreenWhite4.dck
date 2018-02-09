@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Title=Llanowar Knight
+Icon=Dungeon Crawling Gold.jpg
+Difficulty=very hard
+Description=Green White creature deck
+Deck Type=constructed
+Name=GreenWhite4
+[Main]
+2 Ancient Spider|PLS
+4 Armadillo Cloak|INV
+2 Aura Mutation|INV
+4 Aura Shards|INV
+4 Charging Troll|INV
+1 Eladamri's Call|PLS
+4 Elfhame Palace|INV
+5 Forest|INV|1
+1 Forest|INV|2
+2 Forest|INV|4
+2 Gerrard's Command|PLS
+4 Llanowar Knight|INV
+3 Noble Panther|INV
+4 Plains|INV|1
+2 Plains|INV|2
+2 Plains|INV|3
+4 Quirion Dryad|PLS
+3 Sabertooth Nishoba|INV
+4 Star Compass|PLS
+2 Voice of All|PLS
+1 Wax // Wane|INV

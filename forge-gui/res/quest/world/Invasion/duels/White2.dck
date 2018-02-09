@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Title=Reya Dawnbringer
+Icon=Dungeon Crawling White.jpg
+Difficulty=medium
+Description=Mono white deck with angels
+Deck Type=constructed
+Name=White2
+[Main]
+4 Angel of Mercy|INV
+1 Atalya, Samite Master|INV
+1 Benalish Lancer|INV
+1 Benalish Trapper|INV
+1 Crusading Knight|INV
+2 Dismantling Blow|INV
+2 Gerrard Capashen|APC
+4 Glimmering Angel|INV
+4 Lashknife Barrier|PLS
+2 Orim's Thunder|APC
+6 Plains|INV|1
+7 Plains|INV|2
+7 Plains|INV|3
+4 Plains|INV|4
+4 Razorfoot Griffin|INV
+2 Reya Dawnbringer|INV
+4 Rout|INV
+4 Voice of All|PLS

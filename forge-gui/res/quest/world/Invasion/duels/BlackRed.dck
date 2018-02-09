@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Title=Tsabo Tavoc
+Icon=Dungeon Crawling Gold.jpg
+Difficulty=easy
+Description=Black - Red deck with various threats
+Deck Type=constructed
+Name=BlackRed
+[Main]
+4 Agonizing Demise|INV
+4 Blazing Specter|INV
+4 Crypt Angel|INV
+1 Lava Zombie|PLS
+2 Mountain|INV|1
+2 Mountain|INV|2
+2 Mountain|INV|3
+2 Mountain|INV|4
+4 Shivan Zombie|INV
+4 Smoldering Tar|INV
+4 Star Compass|PLS
+2 Swamp|INV|1
+2 Swamp|INV|2
+2 Swamp|INV|3
+2 Swamp|INV|4
+4 Terminate|PLS
+4 Trench Wurm|INV
+2 Tsabo Tavoc|INV
+4 Urborg Volcano|INV
+4 Vicious Kavu|INV
+1 Yawgmoth's Agenda|INV

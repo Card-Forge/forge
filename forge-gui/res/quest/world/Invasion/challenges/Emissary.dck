@@ -1,0 +1,23 @@
+[quest]
+id=Emissary
+OpponentName=Emissary of the Domain
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=5 random rares
+Credit Reward=200
+AIExtras=Swamp|Plains|Mountain|Island|Forest
+HumanExtras=
+[metadata]
+Title=Emissary of the Domain
+Icon=Dungeon Crawling Gold.jpg
+Difficulty=medium
+Description=The emissaries are being sent to meet you!
+Deck Type=constructed
+Name=Emissary
+[Main]
+10 Benalish Emissary|INV
+10 Shivan Emissary|INV
+10 Tolarian Emissary|INV
+10 Urborg Emissary|INV
+10 Verduran Emissary|INV
