@@ -62,7 +62,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         REWARDS_ALTERNATIVE("100"),
 
         // Max Bonus for health difference
-        REWARDS_HEALTH_DIFF("750"),
+        REWARDS_HEALTH_DIFF_MAX("750"),
 
         // If you Mulligan to 0 to start a game
         REWARDS_MULLIGAN0("500"),
@@ -319,7 +319,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
             case REWARDS_ALTERNATIVE:
             case REWARDS_TURN5:
             case REWARDS_TURN1:
-            case REWARDS_HEALTH_DIFF:
+            case REWARDS_HEALTH_DIFF_MAX:
             case SHOP_MIN_PACKS:
             case SHOP_STARTING_PACKS:
             case SHOP_SINGLES_COMMON:

@@ -255,7 +255,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         pnlRewards.add(new PrefInput(QPref.REWARDS_TURN1, QuestPreferencesErrType.REWARDS), fieldConstraints);
 
         pnlRewards.add(new FLabel.Builder().text("Max Life Diff. Bonus").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
-        pnlRewards.add(new PrefInput(QPref.REWARDS_HEALTH_DIFF, QuestPreferencesErrType.REWARDS), fieldConstraints);
+        pnlRewards.add(new PrefInput(QPref.REWARDS_HEALTH_DIFF_MAX, QuestPreferencesErrType.REWARDS), fieldConstraints);
     }
 
     private void populateDifficulty() {

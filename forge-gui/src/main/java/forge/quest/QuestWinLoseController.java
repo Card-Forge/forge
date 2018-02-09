@@ -322,7 +322,7 @@ public class QuestWinLoseController {
             }
 
             if (game.getLifeDelta() >= 50) {
-                lifeDifferenceCredits += Math.max(Math.min((game.getLifeDelta() - 46) / 4, FModel.getQuestPreferences().getPrefInt(QPref.REWARDS_HEALTH_DIFF)), 0);
+                lifeDifferenceCredits += Math.max(Math.min((game.getLifeDelta() - 46) / 4, FModel.getQuestPreferences().getPrefInt(QPref.REWARDS_HEALTH_DIFF_MAX)), 0);
             }
 
         } // End for(game)
