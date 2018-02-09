@@ -242,14 +242,14 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         pnlRewards.add(new FLabel.Builder().text("Alternative Win").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
         pnlRewards.add(new PrefInput(QPref.REWARDS_ALTERNATIVE, QuestPreferencesErrType.REWARDS), fieldConstraints);
 
-        FLabel WinMulti = new FLabel.Builder().text("Bonus Multiplier per Win").fontAlign(SwingConstants.RIGHT).build();
-        WinMulti.setToolTipText("Each previous win increases your reward by this much after winning a match.");
-        pnlRewards.add(WinMulti, labelConstraints);
+        FLabel winMulti = new FLabel.Builder().text("Bonus Multiplier per Win").fontAlign(SwingConstants.RIGHT).build();
+        winMulti.setToolTipText("Each previous win increases your reward by this much after winning a match.");
+        pnlRewards.add(winMulti, labelConstraints);
         pnlRewards.add(new PrefInput(QPref.REWARDS_WINS_MULTIPLIER, QuestPreferencesErrType.REWARDS), fieldConstraints);
 
-        FLabel WinMultiMax = new FLabel.Builder().text("Max Wins for Multiplier").fontAlign(SwingConstants.RIGHT).build();
-        WinMultiMax.setToolTipText("Reward stops increasing after you have this many wins.");
-        pnlRewards.add(WinMultiMax, labelConstraints);
+        FLabel winMultiMax = new FLabel.Builder().text("Max Wins for Multiplier").fontAlign(SwingConstants.RIGHT).build();
+        winMultiMax.setToolTipText("Reward stops increasing after you have this many wins.");
+        pnlRewards.add(winMultiMax, labelConstraints);
         pnlRewards.add(new PrefInput(QPref.REWARDS_WINS_MULTIPLIER_MAX, QuestPreferencesErrType.REWARDS), fieldConstraints);
 
         pnlRewards.add(new FLabel.Builder().text("Win by Turn 15").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
