@@ -789,34 +789,18 @@ public class QuestEventDraft implements IQuestEvent {
         if (!allowedQuestSets.isEmpty()) {
             for (final CardBlock block : blocks) {
 
-                boolean blockAllowed = false;
-                boolean largeSetUnlocked = false;
-                int unlockedSets = 0;
-                final boolean allBlocksSanctioned = quest.getFormat().getAllowedSetCodes().isEmpty();
+                // New code : all sets must be unlocked
+                boolean blockAllowed = true;
 
-                for (final CardEdition set : block.getSets()) {
-                    if (!allowedQuestSets.contains(set) && !allBlocksSanctioned) {
-                        continue;
+                for (CardEdition set : block.getSets()) {
+                    if (!allowedQuestSets.contains(set)) {
+                        blockAllowed = false;
                     }
-                    unlockedSets++;
-                    if (set.isLargeSet()) {
-                        largeSetUnlocked = true;
-                    }
-                }
-
-                //Allow partially unlocked blocks if they contain at least one large and one small unlocked set.
-                if (largeSetUnlocked && unlockedSets > 1) {
-                    blockAllowed = true;
-                }
-
-                if (largeSetUnlocked && block.getSets().size() == 1) {
-                    blockAllowed = true;
-                    singleSets.add(block.getSets().get(0).getCode());
                 }
 
                 if (blockAllowed) {
                     possibleFormats.add(new QuestDraftFormat(block));
-                }
+                } 
 
             }
 
