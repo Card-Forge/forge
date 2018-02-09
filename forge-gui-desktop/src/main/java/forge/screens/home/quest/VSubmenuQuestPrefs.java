@@ -452,14 +452,14 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         pnlDraftTournaments.add(new FLabel.Builder().text("Wins for New Draft").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
         pnlDraftTournaments.add(new PrefInput(QPref.WINS_NEW_DRAFT, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
 
-        FLabel rotam = new FLabel.Builder().text("Wins per Draft Rotation").fontAlign(SwingConstants.RIGHT).build();
-        rotam.setToolTipText("If a Draft is not played for this many match wins, it will be removed or replaced.");
-        pnlDraftTournaments.add(rotam, labelConstraints);
+        FLabel rotationAmount = new FLabel.Builder().text("Wins per Draft Rotation").fontAlign(SwingConstants.RIGHT).build();
+        rotationAmount.setToolTipText("If a Draft is not played for this many match wins, it will be removed or replaced.");
+        pnlDraftTournaments.add(rotationAmount, labelConstraints);
         pnlDraftTournaments.add(new PrefInput(QPref.WINS_ROTATE_DRAFT, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
 
-        FLabel rottp = new FLabel.Builder().text("Rotation Type").fontAlign(SwingConstants.RIGHT).build();
-        rottp.setToolTipText("If set to 0, old drafts disappear, if set to 1, they are replaced with another one using different sets.");
-        pnlDraftTournaments.add(rottp, labelConstraints);
+        FLabel rotationType = new FLabel.Builder().text("Rotation Type").fontAlign(SwingConstants.RIGHT).build();
+        rotationType.setToolTipText("If set to 0, old drafts disappear, if set to 1, they are replaced with another one using different sets.");
+        pnlDraftTournaments.add(rotationType, labelConstraints);
         pnlDraftTournaments.add(new PrefInput(QPref.DRAFT_ROTATION, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
 
     }
