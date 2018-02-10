@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Naya Behemoths
-Description=The plane of Naya is a paradise of lush growth where elvish and leonin celebrants worship the gargantuan beasts that roam the world. These ancient behemoths are yours to command, an army massive enough to blot out the sun and shake the earth.
+Description=The plane of Naya is a paradise of lush growth where elvish and leonin celebrants worship the gargantuan beasts that roam the world. These ancient behemoths are yours to command, an army massive enough to blot out the sun and shake the earth. Other planeswalkers will tremble in your wake.
 Deck Type=constructed
 Set=ALA
 Image=naya_behemoths.jpg
@@ -17,7 +17,7 @@ Image=naya_behemoths.jpg
 1 Titanic Ultimatum|ALA
 1 Naturalize|ALA
 2 Druid of the Anima|ALA
-1 Spearbreaker Behemoth|ALA
+1 Spearbreaker Behemoth+|ALA
 4 Forest|ALA|1
 3 Forest|ALA|2
 2 Cylian Elf|ALA
