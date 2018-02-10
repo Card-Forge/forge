@@ -98,7 +98,7 @@ public abstract class StorageReaderFileSections<T> extends StorageReaderBase<T> 
             if( item != null ) {
                 String newKey = keySelector.apply(item);
                 if( result.containsKey(newKey))
-                    System.err.println("StorageReader: Overwriting an object with key " + newKey);
+                    System.err.println("StorageReaderFileSelections: Overwriting an object with key " + newKey);
 
                 result.put(newKey, item);
             }
