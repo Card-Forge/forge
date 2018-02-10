@@ -69,7 +69,7 @@ public class FModelTest {
     public final void test_getVersion() throws FileNotFoundException {
         final String version = BuildInfo.getVersionString();
 
-        Assert.assertEquals(version, "SVN", "version is default");
+        Assert.assertEquals(version, "GIT", "version is default");
     }
 
     /**
