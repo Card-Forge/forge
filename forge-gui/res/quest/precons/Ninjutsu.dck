@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Ninjutsu
-Description=The "Ninjutsu" deck focuses on the coolest creature type of all - Ninja. Ever wanted to draw extra cards every turn? Bounce every creature your opponents play right back to their hands? With Ninja at your command, you can do all that and more. Get your creatures past your opponents' defenses early and often so that you can use the ninjutsu ability to maximum effect.
+Description=Assassins, Spies, Saboteurs. By any name they are ninja, mysterious masters of concealment and infiltration. The deadly ninjutsu mechanic lets you slip them past enemy lines, and once they're through, the real havoc begins.
 Deck Type=constructed
 Set=BOK
 Image=ninjutsu.jpg

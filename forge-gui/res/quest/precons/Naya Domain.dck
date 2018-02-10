@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Naya Domain
-Description=This deck thrives on the power of all five colors of mana, centered in the world of Naya. Go to war against the other planes using the domain mechanic, powering up your creatures and spells with the strengths of all five types of lands.
+Description=This deck thrives on the power of all five colors of mana, centered in the world of Naya. Go to war against the other planes using the domain mechanic, powering up your creatures and spells with the strengths of all five types of lands. Once you max out your domain with land-search spells and artifacts, you'll crush your foes with the most diverse arsenal of spells available.
 Deck Type=constructed
 Set=CFX
 Image=naya_domain.jpg
@@ -25,7 +25,7 @@ Image=naya_domain.jpg
 1 Might of Alara|CFX
 3 Mountain|ALA|4
 1 Pacifism|10E
-1 Paleoloth|CFX
+1 Paleoloth+|CFX
 1 Path to Exile|CFX
 3 Plains|ALA|1
 2 Rampant Growth|10E

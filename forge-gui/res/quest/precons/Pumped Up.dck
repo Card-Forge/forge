@@ -6,7 +6,7 @@ MaxDifficulty=5
 
 [metadata]
 Name=Pumped Up
-Description=The "Pumped Up" deck lets you command the elemental power of fire and lightning. You'll leave a trail of ashes behind as you burn opposing players and their forces to a crisp.
+Description=Here's a kicker-- for your opponent. Pay some extra mana when you cast a spell and gain an added effect. Then send out some red Goblins, Elementals, and Minotaurs for a fast and furious assault. Top it off using the haste of the Hellkite Charger, which lets you attack twice!
 Deck Type=constructed
 Set=ZEN
 Image=pumped_up.jpg
@@ -20,7 +20,7 @@ Image=pumped_up.jpg
 1  Canyon Minotaur|M10
 1  Dragon Whelp|M10
 1  Goblin Piker|M10
-1  Hellkite Charger|ZEN
+1  Hellkite Charger+|ZEN
 2  Molten Ravager|ZEN
 1  Phantom Warrior|M10
 1  Prodigal Pyromancer|M10

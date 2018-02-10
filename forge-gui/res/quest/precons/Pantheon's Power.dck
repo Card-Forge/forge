@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Pantheon's Power
-Description=The "Pantheon's Power" deck is based around the constellation mechanic, an ability on enchantments that gives you a benefit every time an enchantment enters the battlefield under your control. Build up an array of constellation cards and watch their power amplify.
+Description=Those who question the power of the gods do so at their own peril. Your opponents will be punished for their hubris as you bring an unstoppable army of enchantment creatures to the battlefield.
 Deck Type=constructed
 Set=JOU
 Image=pantheon's_power.jpg
@@ -14,7 +14,7 @@ Image=pantheon's_power.jpg
 1 Archetype of Courage|BNG
 1 Archetype of Finality|BNG
 1 Brain Maggot|JOU
-1 Doomwake Giant|JOU
+1 Doomwake Giant+|JOU
 2 Dreadbringer Lampads|JOU
 1 Eagle of the Watch|JOU
 1 Fate Unraveler|BNG

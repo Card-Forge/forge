@@ -8,7 +8,7 @@ Deck Type=constructed
 Set=M11
 Image=power_of_prophecy.jpg
 Name=Power of Prophecy
-Description=With the "Power of Prophecy" deck, you'll correctly predict your opponent's downfall! Your flying creatures give you superiority in the air; they're your best route to victory.
+Description=Seize control of your opponents' forces, manipulate the flow of battle, and leave your opposition confused and disoriented. Gain knowledge of the future and use Conundrum Sphinx to hasten your foretold dominance.
 [Main]
 2 AEther Adept|M11
 2 Air Servant|M11
@@ -18,7 +18,7 @@ Description=With the "Power of Prophecy" deck, you'll correctly predict your opp
 1 Blinding Mage|M11
 2 Cloud Elemental|M11
 1 Condemn|M11
-1 Conundrum Sphinx|M11
+1 Conundrum Sphinx+|M11
 1 Crystal Ball|M11
 2 Foresee|M11
 1 Harbor Serpent|M11
