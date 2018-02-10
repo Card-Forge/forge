@@ -170,10 +170,10 @@ public class CardState extends GameObject {
     public final boolean hasIntrinsicKeyword(String k) {
         return intrinsicKeywords.contains(k);
     }
-    public final void setIntrinsicKeywords(final Iterable<KeywordInterface> intrinsicKeyword0) {
+    public final void setIntrinsicKeywords(final Iterable<KeywordInterface> intrinsicKeyword0, final boolean lki) {
         intrinsicKeywords.clear();
         for (KeywordInterface k : intrinsicKeyword0) {
-            intrinsicKeywords.insert(k.copy(card));
+            intrinsicKeywords.insert(k.copy(card, lki));
         }
     }
 
@@ -367,6 +367,24 @@ public class CardState extends GameObject {
         return getReplacementEffects().contains(re);
     }
 
+    public final boolean hasReplacementEffect(final int id) {
+        for (final ReplacementEffect r : getReplacementEffects()) {
+            if (id == r.getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public final ReplacementEffect getReplacementEffect(final int id) {
+        for (final ReplacementEffect r : getReplacementEffects()) {
+            if (id == r.getId()) {
+                return r;
+            }
+        }
+        return null;
+    }
+
     public final Map<String, String> getSVars() {
         return sVars;
     }
@@ -406,7 +424,7 @@ public class CardState extends GameObject {
         return 0;
     }
 
-    public final void copyFrom(final Card c, final CardState source) {
+    public final void copyFrom(final CardState source, final boolean lki) {
         // Makes a "deeper" copy of a CardState object
         setName(source.getName());
         setType(source.type);
@@ -419,36 +437,30 @@ public class CardState extends GameObject {
         manaAbilities.clear();
         for (SpellAbility sa : source.manaAbilities) {
             if (sa.isIntrinsic()) {
-                SpellAbility saCopy = sa.copy();
-                saCopy.setHostCard(card); // update HostCard
-                manaAbilities.add(saCopy);
+                manaAbilities.add(sa.copy(card, lki));
             }
         }
 
         nonManaAbilities.clear();
         for (SpellAbility sa : source.nonManaAbilities) {
             if (sa.isIntrinsic()) {
-                SpellAbility saCopy = sa.copy();
-                saCopy.setHostCard(card); // update HostCard
-                nonManaAbilities.add(saCopy);
+                nonManaAbilities.add(sa.copy(card, lki));
             }
         }
 
-        setIntrinsicKeywords(source.intrinsicKeywords.getValues());
+        setIntrinsicKeywords(source.intrinsicKeywords.getValues(), lki);
         setImageKey(source.getImageKey());
         setRarity(source.rarity);
         setSetCode(source.setCode);
 
         triggers.clear();
         for (Trigger tr : source.triggers) {
-            triggers.add(tr.getCopyForHostCard(card));
+            triggers.add(tr.copy(card, lki));
         }
 
         replacementEffects.clear();
         for (ReplacementEffect re : source.replacementEffects) {
-            ReplacementEffect reCopy = re.getCopy();
-            reCopy.setHostCard(card);
-            replacementEffects.add(reCopy);
+            replacementEffects.add(re.copy(card, lki));
         }
 
         staticAbilities.clear();
@@ -456,7 +468,6 @@ public class CardState extends GameObject {
             StaticAbility saCopy = new StaticAbility(sa, this.card);
             staticAbilities.add(saCopy);
         }
-        view.updateKeywords(c, this);
     }
 
     

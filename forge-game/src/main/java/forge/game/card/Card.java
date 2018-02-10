@@ -822,17 +822,18 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final FCollectionView<Trigger> getTriggers() {
         return currentState.getTriggers();
     }
+    // only used for LKI
     public final void setTriggers(final Iterable<Trigger> trigs, boolean intrinsicOnly) {
         final FCollection<Trigger> copyList = new FCollection<>();
         for (final Trigger t : trigs) {
             if (!intrinsicOnly || t.isIntrinsic()) {
-                copyList.add(t.getCopyForHostCard(this));
+                copyList.add(t.copy(this, true));
             }
         }
         currentState.setTriggers(copyList);
     }
     public final Trigger addTrigger(final Trigger t) {
-        final Trigger newtrig = t.getCopyForHostCard(this);
+        final Trigger newtrig = t.copy(this, false);
         currentState.addTrigger(newtrig);
         return newtrig;
     }
@@ -5171,16 +5172,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         currentState.clearReplacementEffects();
         for (final ReplacementEffect replacementEffect : res) {
             if (replacementEffect.isIntrinsic()) {
-                addReplacementEffect(replacementEffect);
+                addReplacementEffect(replacementEffect.copy(this, false));
             }
         }
     }
 
     public ReplacementEffect addReplacementEffect(final ReplacementEffect replacementEffect) {
-        final ReplacementEffect replacementEffectCopy = replacementEffect.getCopy(); // doubtful - every caller provides a newly parsed instance, why copy?
-        replacementEffectCopy.setHostCard(this);
-        currentState.addReplacementEffect(replacementEffectCopy);
-        return replacementEffectCopy;
+        currentState.addReplacementEffect(replacementEffect);
+        return replacementEffect;
     }
     public void removeReplacementEffect(ReplacementEffect replacementEffect) {
         currentState.removeReplacementEffect(replacementEffect);
@@ -5190,6 +5189,17 @@ public class Card extends GameEntity implements Comparable<Card> {
         for (KeywordInterface kw : getUnhiddenKeywords(state)) {
             list.addAll(kw.getReplacements());
         }
+    }
+
+    public boolean hasReplacementEffect(final ReplacementEffect re) {
+        return currentState.hasReplacementEffect(re);
+    }
+    public boolean hasReplacementEffect(final int id) {
+        return currentState.hasReplacementEffect(id);
+    }
+
+    public ReplacementEffect getReplacementEffect(final int id) {
+        return currentState.getReplacementEffect(id);
     }
 
     /**

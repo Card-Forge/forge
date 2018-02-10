@@ -141,6 +141,10 @@ public class PumpEffect extends SpellAbilityEffect {
         }
     }
 
+    /*
+     * (non-Javadoc)
+     * @see forge.game.ability.SpellAbilityEffect#getStackDescription(forge.game.spellability.SpellAbility)
+     */
     @Override
     protected String getStackDescription(final SpellAbility sa) {
 

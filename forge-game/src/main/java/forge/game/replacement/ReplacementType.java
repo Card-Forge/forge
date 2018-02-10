@@ -32,16 +32,6 @@ public enum ReplacementType {
         clasz = cls;
     }
 
-    public static ReplacementType getTypeFor(ReplacementEffect e) {
-        final Class<? extends ReplacementEffect> cls = e.getClass();
-        for (final ReplacementType v : ReplacementType.values()) {
-            if (v.clasz.equals(cls)) {
-                return v;
-            }
-        }
-        return null;
-    }
-
     public static ReplacementType smartValueOf(String value) {
         final String valToCompate = value.trim();
         for (final ReplacementType v : ReplacementType.values()) {

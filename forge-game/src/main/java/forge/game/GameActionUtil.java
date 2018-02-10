@@ -233,7 +233,7 @@ public final class GameActionUtil {
                 alternatives.add(newSA);
             }
             if (sa.hasParam("Equip") && sa instanceof AbilityActivated && keyword.equals("EquipInstantSpeed")) {
-                final SpellAbility newSA = ((AbilityActivated) sa).getCopy();
+                final SpellAbility newSA = sa.copy();
                 SpellAbilityRestriction sar = newSA.getRestrictions();
                 sar.setSorcerySpeed(false);
                 sar.setInstantSpeed(true);

@@ -167,6 +167,17 @@ public class KeywordCollection implements Iterable<String>, Serializable {
         };
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb  = new StringBuilder();
+
+        sb.append(map.values());
+        return sb.toString();
+    }
+
     public KeywordCollectionView getView() {
         if (view == null) {
             view = new KeywordCollectionView();

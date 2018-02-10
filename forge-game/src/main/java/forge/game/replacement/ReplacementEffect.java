@@ -19,11 +19,9 @@ package forge.game.replacement;
 
 import forge.game.Game;
 import forge.game.TriggerReplacementBase;
-import forge.game.ability.AbilityApiBased;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
-import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.util.TextUtil;
 
@@ -35,12 +33,37 @@ import java.util.Map;
  * 
  */
 public abstract class ReplacementEffect extends TriggerReplacementBase {
+    private static int maxId = 0;
+    private static int nextId() { return ++maxId; }
+
+    /** The ID. */
+    private int id;
 
     private ReplacementLayer layer = ReplacementLayer.None;
 
     /** The has run. */
     private boolean hasRun = false;
 
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     */
+    public int getId() {
+        return this.id;
+    }
+
+    /**
+     * <p>
+     * setID.
+     * </p>
+     *
+     * @param id
+     *            a int.
+     */
+    public final void setId(final int id) {
+        this.id = id;
+    }
     /**
      * Checks for run.
      * 
@@ -59,6 +82,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      *            the host
      */
     public ReplacementEffect(final Map<String, String> map, final Card host, final boolean intrinsic) {
+        this.id = nextId();
         this.intrinsic = intrinsic;
         originalMapParams.putAll(map);
         mapParams.putAll(map);
@@ -133,32 +157,27 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      * 
      * @return the copy
      */
-    public final ReplacementEffect getCopy() {
-        final ReplacementType rt = ReplacementType.getTypeFor(this);
-        final ReplacementEffect res = rt.createReplacement(mapParams, hostCard, intrinsic); 
-        final SpellAbility overridingAbility = this.getOverridingAbility();
-        if (overridingAbility != null) {
-        	final SpellAbility overridingAbilityCopy;
-        	if (overridingAbility instanceof AbilityApiBased) {
-        		overridingAbilityCopy = ((AbilityApiBased) overridingAbility).getCopy();
-        	} else if (overridingAbility instanceof AbilitySub) {
-        		overridingAbilityCopy = ((AbilitySub) overridingAbility).getCopy();
-        	} else {
-        		System.err.println("Overriding ability of " + hostCard + " of unexpected type " + overridingAbility.getClass());
-        		overridingAbilityCopy = null;
-        	}
-
-        	if (overridingAbilityCopy != null) {
-        		overridingAbilityCopy.setHostCard(hostCard);
-        		res.setOverridingAbility(overridingAbilityCopy);
-        	}
-        }
-        res.setActiveZone(validHostZones);
-        res.setLayer(getLayer());
-        res.setTemporary(isTemporary());
+    public final ReplacementEffect copy(final Card host, final boolean lki) {
+        final ReplacementEffect res = (ReplacementEffect) clone();
         for (String key : getSVars()) {
             res.setSVar(key, getSVar(key));
         }
+
+        final SpellAbility sa = this.getOverridingAbility();
+        if (sa != null) {
+            final SpellAbility overridingAbilityCopy = sa.copy(host, lki);
+            if (overridingAbilityCopy != null) {
+                res.setOverridingAbility(overridingAbilityCopy);
+            }
+        }
+
+        if (!lki) {
+            res.setId(nextId());
+        }
+
+        res.setActiveZone(validHostZones);
+        res.setLayer(getLayer());
+        res.setTemporary(isTemporary());
         return res;
     }
 
@@ -206,6 +225,29 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         }
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public final Object clone() {
+        try {
+            return super.clone();
+        } catch (final Exception ex) {
+            throw new RuntimeException("ReplacementEffect : clone() error, " + ex);
+        }
+    }
 
+    /** {@inheritDoc} */
+    @Override
+    public final boolean equals(final Object o) {
+        if (!(o instanceof ReplacementEffect)) {
+            return false;
+        }
 
+        return this.getId() == ((ReplacementEffect) o).getId();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode() {
+        return 42 * (42 + this.getId());
+    }
 }

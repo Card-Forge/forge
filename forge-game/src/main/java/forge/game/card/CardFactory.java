@@ -184,21 +184,10 @@ public class CardFactory {
         c.setCopiedSpell(true);
 
         final SpellAbility copySA;
-        if (sa instanceof AbilityActivated) {
-            copySA = ((AbilityActivated)sa).getCopy();
-            copySA.setHostCard(original);
-        }
-        else if (sa.isTrigger()) {
+        if (sa.isTrigger()) {
             copySA = getCopiedTriggeredAbility(sa);
-        }
-        else {
-            copySA = sa.copy();
-            AbilitySub subSA = copySA.getSubAbility();
-            while (subSA != null) {
-                subSA.setCopied(true);
-                subSA = subSA.getSubAbility();
-            }
-            copySA.setHostCard(c);
+        } else {
+            copySA = sa.copy(c, false);
         }
         c.getCurrentState().setNonManaAbilities(copySA);
         copySA.setCopied(true);
@@ -577,27 +566,28 @@ public class CardFactory {
             to.addAlternateState(toState, updateView);
         }
         final CardState toCharacteristics = to.getState(toState), fromCharacteristics = from.getState(fromState);
-        toCharacteristics.copyFrom(from, fromCharacteristics);
+        toCharacteristics.copyFrom(fromCharacteristics, false);
     }
-    
-    public static void copySpellAbility(SpellAbility from, SpellAbility to, final Card host) {
-        if (from.getActivatingPlayer() != null) {
-            to.setActivatingPlayer(from.getActivatingPlayer());
+
+    public static void copySpellAbility(SpellAbility from, SpellAbility to, final Card host, final boolean lki) {
+
+        if (from.getTargetRestrictions() != null) {
+            to.setTargetRestrictions(from.getTargetRestrictions());
         }
         to.setDescription(from.getOriginalDescription());
         to.setStackDescription(from.getOriginalStackDescription());
     
         if (from.getSubAbility() != null) {
-            to.setSubAbility(from.getSubAbility().getCopy(host));
+            to.setSubAbility((AbilitySub) from.getSubAbility().copy(host, lki));
         }
         for (Map.Entry<String, AbilitySub> e : from.getAdditionalAbilities().entrySet()) {
-            to.setAdditionalAbility(e.getKey(), e.getValue().getCopy(host));
+            to.setAdditionalAbility(e.getKey(), (AbilitySub) e.getValue().copy(host, lki));
         }
         for (Map.Entry<String, List<AbilitySub>> e : from.getAdditionalAbilityLists().entrySet()) {
             to.setAdditionalAbilityList(e.getKey(), Lists.transform(e.getValue(), new Function<AbilitySub, AbilitySub>() {
                 @Override
                 public AbilitySub apply(AbilitySub input) {
-                    return input.getCopy(host);
+                    return (AbilitySub) input.copy(host, lki);
                 }
             }));
         }
@@ -607,7 +597,12 @@ public class CardFactory {
         if (from.getConditions() != null) {
             to.setConditions((SpellAbilityCondition) from.getConditions().copy());
         }
-    
+
+        // do this after other abilties are copied
+        if (from.getActivatingPlayer() != null) {
+            to.setActivatingPlayer(from.getActivatingPlayer(), lki);
+        }
+
         for (String sVar : from.getSVars()) {
             to.setSVar(sVar, from.getSVar(sVar));
         }

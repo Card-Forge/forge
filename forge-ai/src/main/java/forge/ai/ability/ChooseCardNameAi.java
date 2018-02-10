@@ -88,9 +88,9 @@ public class ChooseCardNameAi extends SpellAbilityAi {
                 Card copy = CardUtil.getLKICopy(card);
                 // for calcing i need only one split side    
                 if (isOther) {
-                    copy.getCurrentState().copyFrom(card, card.getState(CardStateName.RightSplit));                    
+                    copy.getCurrentState().copyFrom(card.getState(CardStateName.RightSplit), true);
                 } else {
-                    copy.getCurrentState().copyFrom(card, card.getState(CardStateName.LeftSplit));
+                    copy.getCurrentState().copyFrom(card.getState(CardStateName.LeftSplit), true);
                 }
                 copy.updateStateForView();
 

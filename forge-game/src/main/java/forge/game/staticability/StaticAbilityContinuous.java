@@ -369,12 +369,12 @@ public final class StaticAbilityContinuous {
             cardsIGainedAbilitiesFrom = CardLists.getValidCards(cardsIGainedAbilitiesFrom, valids, hostCard.getController(), hostCard, null);
 
             if (cardsIGainedAbilitiesFrom.size() > 0) {
-                addFullAbs = new ArrayList<SpellAbility>();
+                addFullAbs = Lists.newArrayList();
 
                 for (Card c : cardsIGainedAbilitiesFrom) {
                     for (SpellAbility sa : c.getSpellAbilities()) {
                         if (sa instanceof AbilityActivated) {
-                            SpellAbility newSA = ((AbilityActivated) sa).getCopy();
+                            SpellAbility newSA = sa.copy(hostCard, false);
                             if (params.containsKey("GainsAbilitiesLimitPerTurn")) {
                                 newSA.setRestrictions(sa.getRestrictions());
                                 newSA.getRestrictions().setLimitToCheck(params.get("GainsAbilitiesLimitPerTurn"));
@@ -382,7 +382,6 @@ public final class StaticAbilityContinuous {
                             newSA.setOriginalHost(c);
                             newSA.setIntrinsic(false);
                             newSA.setTemporary(true);
-                            newSA.setHostCard(hostCard);
                             addFullAbs.add(newSA);
                         }
                     }
