@@ -6,5 +6,6 @@ SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library | AddType$ ChosenType | RemoveCreatureTypes$ True | Description$ Creatures you control are the chosen type. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
+SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conspiracy.jpg
 Oracle:As Conspiracy enters the battlefield, choose a creature type.\nCreatures you control are the chosen type. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.
