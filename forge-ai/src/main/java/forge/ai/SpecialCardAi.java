@@ -1109,6 +1109,23 @@ public class SpecialCardAi {
         }
     }
 
+    // The Scarab God
+    public static class TheScarabGod {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            Card bestOppCreat = ComputerUtilCard.getBestAI(CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES));
+            Card worstOwnCreat = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES));
+
+            sa.resetTargets();
+            if (bestOppCreat != null) {
+                sa.getTargets().add(bestOppCreat);
+            } else if (worstOwnCreat != null) {
+                sa.getTargets().add(worstOwnCreat);
+            }
+
+            return sa.getTargets().getNumTargeted() > 0;
+        }
+    }
+
     // Timetwister
     public static class Timetwister {
         public static boolean consider(final Player ai, final SpellAbility sa) {
