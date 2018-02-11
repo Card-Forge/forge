@@ -30,19 +30,19 @@ public class BuildInfo {
     /**
      * Get the current version of Forge.
      * 
-     * @return a String representing the version specifier, or "SVN" if unknown.
+     * @return a String representing the version specifier, or "GIT" if unknown.
      */
     public static final String getVersionString() {
         String version = BuildInfo.class.getPackage().getImplementationVersion();
         if (StringUtils.isEmpty(version)) {
-            return "SVN";
+            return "GIT";
         }
         return version;
     }
 
     public static boolean isDevelopmentVersion() {
         String forgeVersion = getVersionString();
-        return StringUtils.containsIgnoreCase(forgeVersion, "svn") ||
+        return StringUtils.containsIgnoreCase(forgeVersion, "git") ||
                 StringUtils.containsIgnoreCase(forgeVersion, "snapshot");
     }
 }

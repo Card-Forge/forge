@@ -92,9 +92,10 @@ public abstract class StorageReaderFolder<T> extends StorageReaderBase<T> {
                     final String msg = "An object stored in " + file.getPath() + " failed to load.\nPlease submit this as a bug with the mentioned file/directory attached.";
                     throw new RuntimeException(msg);
                 }
+
                 String newKey = keySelector.apply(newDeck);
                 if (result.containsKey(newKey)) {
-                    System.err.println("StorageReader: Overwriting an object with key " + newKey);
+                    System.err.println("StorageReaderFolder: Overwriting an object with key " + newKey);
                 }
                 result.put(newKey, newDeck);
             } catch (final NoSuchElementException ex) {

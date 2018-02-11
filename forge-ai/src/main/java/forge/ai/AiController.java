@@ -662,7 +662,7 @@ public class AiController {
         if (sa instanceof SpellPermanent) {
             return canPlayFromEffectAI((SpellPermanent)sa, false, true);
         }
-        if (sa.usesTargeting()) {
+        if (sa.usesTargeting() && !sa.isTargetNumberValid()) {
             if (!sa.getTargetRestrictions().hasCandidates(sa, true)) {
                 return AiPlayDecision.TargetingFailed;
             }

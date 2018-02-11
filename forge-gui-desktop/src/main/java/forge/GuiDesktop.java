@@ -59,7 +59,7 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public String getAssetsDir() {
-        return StringUtils.containsIgnoreCase(BuildInfo.getVersionString(), "svn") ?
+        return StringUtils.containsIgnoreCase(BuildInfo.getVersionString(), "git") ?
                 "../forge-gui/" : "";
     }
 
