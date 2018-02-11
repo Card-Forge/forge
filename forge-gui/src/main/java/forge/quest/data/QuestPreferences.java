@@ -55,6 +55,8 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         // For each of your previous wins gain a small multiplier
         // This is here to award long quests with more money for buying expensive cards
         REWARDS_WINS_MULTIPLIER("0.3"),
+        // Rewards stop increasing after this many wins
+        REWARDS_WINS_MULTIPLIER_MAX("300"),
 
         // Winning each game by other means "Poison", "Milling" or "Alternative" Win
         REWARDS_POISON("50"),
@@ -311,6 +313,8 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
             case STARTING_CREDITS_MEDIUM:
             case STARTING_CREDITS_HARD:
             case STARTING_CREDITS_EXPERT:
+            case REWARDS_WINS_MULTIPLIER:
+            case REWARDS_WINS_MULTIPLIER_MAX:
             case REWARDS_MILLED:
             case REWARDS_MULLIGAN0:
             case REWARDS_ALTERNATIVE:
