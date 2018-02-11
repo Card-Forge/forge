@@ -1092,18 +1092,12 @@ public class AiAttackController {
                 // Check if the card actually has an ability the AI can and wants to play, if not, attacking is fine!
                 boolean wantability = false;
                 for (SpellAbility sa : attacker.getSpellAbilities()) {
+                    // Do not attack if we can afford using the ability.
                     if (sa.isAbility()) {
-                        if (ai.getController().isAI()) {
-                            AiPlayDecision canplay = ((PlayerControllerAi) ai.getController()).getAi().canPlaySa(sa);
-                            switch (canplay) {
-                                case WillPlay:
-                                case WaitForMain2:
-                                case AnotherTime:
-                                    // Might be an ability that requires a target not present right now, like Ertai, Wizard Adept
-                                case TargetingFailed:
-                                    return false;
-                            }
+                        if (ComputerUtilCost.canPayCost(sa, ai)) {
+                            return false;
                         }
+                        // TODO Eventually The Ai will need to learn to predict if they have any use for the ability before next untap or not.
                     }
                 }
             }
