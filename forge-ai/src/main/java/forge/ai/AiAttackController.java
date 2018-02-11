@@ -1082,7 +1082,32 @@ public class AiAttackController {
         boolean isWorthLessThanAllKillers = true;
         boolean canBeBlocked = false;
         int numberOfPossibleBlockers = 0;
-        
+
+        // Is it a creature that has a more valuable ability with a tap cost than what it can do by attacking?
+        if (attacker.hasSVar("NonCombatPriority")) {
+            // For each level of priority, enemy has to have life as much as the creature's power
+            // so a priority of 4 means the creature will not attack unless it can defeat that player in 4 successful attacks.
+            // the lower the priroity, the less willing the AI is to use the creature for attacking.
+            if (attacker.getCurrentPower() < ai.getOpponentsSmallestLifeTotal() / Integer.parseInt(attacker.getSVar("NonCombatPriority"))) {
+                // Check if the card actually has an ability the AI can and wants to play, if not, attacking is fine!
+                boolean wantability = false;
+                for (SpellAbility sa : attacker.getSpellAbilities()) {
+                    if (sa.isAbility()) {
+                        if (ai.getController().isAI()) {
+                            AiPlayDecision canplay = ((PlayerControllerAi) ai.getController()).getAi().canPlaySa(sa);
+                            switch (canplay) {
+                                case WillPlay:
+                                case WaitForMain2:
+                                case AnotherTime:
+                                    // Might be an ability that requires a target not present right now, like Ertai, Wizard Adept
+                                case TargetingFailed:
+                                    return false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         if (!this.isEffectiveAttacker(ai, attacker, combat)) {
             return false;
