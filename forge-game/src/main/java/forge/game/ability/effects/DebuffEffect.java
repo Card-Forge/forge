@@ -68,7 +68,6 @@ public class DebuffEffect extends SpellAbilityEffect {
         final long timestamp = game.getNextTimestamp();
 
         for (final Card tgtC : getTargetCards(sa)) {
-            final List<String> hadIntrinsic = Lists.newArrayList();
             final List<String> addedKW = Lists.newArrayList();
             final List<String> removedKW = Lists.newArrayList();
             if (tgtC.isInPlay() && tgtC.canBeTargetedBy(sa)) {
@@ -104,12 +103,6 @@ public class DebuffEffect extends SpellAbilityEffect {
                             }
                         }
                     }
-
-                    if (tgtC.getCurrentState().hasIntrinsicKeyword(kw)) {
-                        hadIntrinsic.add(kw);
-                    }
-                    tgtC.removeIntrinsicKeyword(kw);
-                    tgtC.removeAllExtrinsicKeyword(kw);
                 }
 
                 // Split "Protection from all colors" into extra Protection from <color>
@@ -120,11 +113,6 @@ public class DebuffEffect extends SpellAbilityEffect {
                     for(byte col : MagicColor.WUBRG) {
                         allColorsProtect.add("Protection from " + MagicColor.toLongString(col).toLowerCase());
                     }
-                    if (tgtC.getCurrentState().hasIntrinsicKeyword(allColors)) {
-                        hadIntrinsic.add(allColors);
-                    }
-                    tgtC.removeIntrinsicKeyword(allColors);
-                    tgtC.removeAllExtrinsicKeyword(allColors);
                     allColorsProtect.removeAll(kws);
                     addedKW.addAll(allColorsProtect);
                     removedKW.add(allColors);
@@ -144,11 +132,6 @@ public class DebuffEffect extends SpellAbilityEffect {
                             );
                         }
                     }
-                    if (tgtC.getCurrentState().hasIntrinsicKeyword(allColors)) {
-                        hadIntrinsic.add(allColors);
-                    }
-                    tgtC.removeIntrinsicKeyword(allColors);
-                    tgtC.removeAllExtrinsicKeyword(allColors);
                     addedKW.addAll(allColorsProtect);
                     removedKW.add(allColors);
                 }
@@ -163,11 +146,6 @@ public class DebuffEffect extends SpellAbilityEffect {
                     @Override
                     public void run() {
                         tgtC.removeChangedCardKeywords(timestamp);
-                        if (tgtC.isInPlay()) {
-                            for (final String kw : hadIntrinsic) {
-                                tgtC.addIntrinsicKeyword(kw);
-                            }
-                        }
                     }
                 });
             }
