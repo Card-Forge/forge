@@ -1090,7 +1090,7 @@ public class AiAttackController {
             // so a priority of 4 means the creature will not attack unless it can defeat that player in 4 successful attacks.
             // the lower the priroity, the less willing the AI is to use the creature for attacking.
             // TODO Somehow subtract expected damage of other attacking creatures from enemy life total (how? other attackers not yet declared? Can the AI guesstimate which of their creatures will not get blocked?)
-            if (attacker.getCurrentPower() < ai.getOpponentsSmallestLifeTotal() / Integer.parseInt(attacker.getSVar("NonCombatPriority"))) {
+            if (attacker.getCurrentPower() * Integer.parseInt(attacker.getSVar("NonCombatPriority")) < ai.getOpponentsSmallestLifeTotal()) {
                 // Check if the card actually has an ability the AI can and wants to play, if not, attacking is fine!
                 boolean wantability = false;
                 for (SpellAbility sa : attacker.getSpellAbilities()) {
