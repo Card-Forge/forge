@@ -88,9 +88,6 @@ public enum CSubmenuQuestDecks implements ICDoc {
         if (deck != null) {
             view.getLstDecks().setSelectedItem(deck);
         }
-        else {
-            view.getLstDecks().setSelectedIndex(0);
-        }
 
         view.getLstDecks().setSelectCommand(cmdDeckSelect);
         view.getLstDecks().setDeleteCommand(cmdDeckDelete);
