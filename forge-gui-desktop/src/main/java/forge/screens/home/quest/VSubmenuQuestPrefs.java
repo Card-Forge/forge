@@ -339,12 +339,6 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         pnlDifficulty.add(new FLabel.Builder().text("Wins for New Challenge").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
         pnlDifficulty.add(new PrefInput(QPref.WINS_NEW_CHALLENGE, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
         
-        pnlDifficulty.add(new FLabel.Builder().text("Wins for New Draft").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
-        pnlDifficulty.add(new PrefInput(QPref.WINS_NEW_DRAFT, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
-
-        pnlDifficulty.add(new FLabel.Builder().text("Wins per Draft Rotation").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
-        pnlDifficulty.add(new PrefInput(QPref.WINS_ROTATE_DRAFT, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
-
         pnlDifficulty.add(new FLabel.Builder().text("Starting Snow Lands").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_SNOW_LANDS, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
 
@@ -464,6 +458,19 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         randomAIMatches.setToolTipText("If set to 1, AI vs. AI matches in draft tournaments will not be played and their outcome will be decided randomly instead.");
         pnlDraftTournaments.add(randomAIMatches, labelConstraints);
         pnlDraftTournaments.add(new PrefInput(QPref.SIMULATE_AI_VS_AI_RESULTS, QuestPreferencesErrType.DRAFT_TOURNAMENTS), fieldConstraints);
+
+        pnlDraftTournaments.add(new FLabel.Builder().text("Wins for New Draft").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
+        pnlDraftTournaments.add(new PrefInput(QPref.WINS_NEW_DRAFT, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
+
+        FLabel rotationAmount = new FLabel.Builder().text("Wins per Draft Rotation").fontAlign(SwingConstants.RIGHT).build();
+        rotationAmount.setToolTipText("If a Draft is not played for this many match wins, it will be removed or replaced.");
+        pnlDraftTournaments.add(rotationAmount, labelConstraints);
+        pnlDraftTournaments.add(new PrefInput(QPref.WINS_ROTATE_DRAFT, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
+
+        FLabel rotationType = new FLabel.Builder().text("Rotation Type").fontAlign(SwingConstants.RIGHT).build();
+        rotationType.setToolTipText("If set to 0, old drafts disappear, if set to 1, they are replaced with another one using different sets.");
+        pnlDraftTournaments.add(rotationType, labelConstraints);
+        pnlDraftTournaments.add(new PrefInput(QPref.DRAFT_ROTATION, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
 
     }
 
