@@ -6,7 +6,7 @@ Code2=PS
 MciCode=ps
 Type=Expansion
 BoosterCovers=1
-Booster=11 Common, 3 Uncommon, 1 Rare
+Booster=11 Common, 3 Uncommon, 1 Rare, 0 Special
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 
@@ -44,7 +44,7 @@ FoilAlwaysInCommonSlot=False
 106 R Eladamri's Call
 24 U Ertai's Trickery
 107 R Ertai, the Corrupted
-107 R Ertai, the Corrupted
+107 S Ertai, the Corrupted
 25 C Escape Routes
 43 U Exotic Disease
 79 C Falling Timber
@@ -125,7 +125,7 @@ FoilAlwaysInCommonSlot=False
 54 C Sinister Strength
 33 C Sisay's Ingenuity
 133 R Skyship Weatherlight
-133 R Skyship Weatherlight
+133 S Skyship Weatherlight
 92 U Skyshroud Blessing
 55 U Slay
 34 C Sleeping Potion
@@ -142,7 +142,7 @@ FoilAlwaysInCommonSlot=False
 16 U Sunscape Battlemage
 17 C Sunscape Familiar
 18 U Surprise Deployment
-74 R Tahngarth, Talruum Hero
+74 S Tahngarth, Talruum Hero
 74 R Tahngarth, Talruum Hero
 142 U Terminal Moraine
 128 C Terminate
