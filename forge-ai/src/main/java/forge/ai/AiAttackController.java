@@ -1085,7 +1085,7 @@ public class AiAttackController {
 
         // Is it a creature that has a more valuable ability with a tap cost than what it can do by attacking?
         if ((attacker.hasSVar("NonCombatPriority"))
-                && (attacker.hasKeyword("Vigilance"))) {
+                && (!attacker.hasKeyword("Vigilance"))) {
             // For each level of priority, enemy has to have life as much as the creature's power
             // so a priority of 4 means the creature will not attack unless it can defeat that player in 4 successful attacks.
             // the lower the priroity, the less willing the AI is to use the creature for attacking.
