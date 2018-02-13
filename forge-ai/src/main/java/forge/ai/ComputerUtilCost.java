@@ -17,6 +17,7 @@ import forge.game.cost.*;
 import forge.game.player.Player;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
@@ -148,6 +149,18 @@ public class ComputerUtilCost {
                 for (int i = 0; i < num; i++) {
                     Card pref = ComputerUtil.getCardPreference(ai, source, "DiscardCost", typeList);
                     if (pref == null) {
+                        // Dream Halls allows to discard 1 worthless card to cast 1 expensive for free
+                        // Do it even if nothing marked for discard in hand, if it's worth doing!
+                        int lands = ai.getCardsIn(ZoneType.Battlefield).size();
+                        // Don't do it for abilities on cards in play, we want it to play spells!
+                        if ((!source.isInPlay()
+                                // We can't pay for this spell even if we play another land
+                                && (source.getCMC() > lands + 1)
+                                // Don't discard more than 1 card
+                                && (num == 1)
+                        )) {
+                            return true;
+                        }
                         return false;
                     } else {
                         typeList.remove(pref);

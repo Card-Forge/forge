@@ -65,20 +65,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
         final String type = cost.getType();
         CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
 
-/*        // Dream Halls
-        if (type.equals("Card.SharesColorWith")) {
-        Card bestfound= null;
-        for (Card card : hand) {
-            if ((card.sharesColorWith(source))
-                && (!card.equals(source))) {
-            if (bestfound==null) { bestfound=card; }
-            if (card.getCMC()<bestfound.getCMC())  { bestfound=card; }
-            }
-        }
-        if (bestfound==null) { return null; } else
-        { return PaymentDecision.card(bestfound); }
-        } else */
-
         if (type.equals("LastDrawn")) {
             if (!hand.contains(player.getLastDrawnCard())) {
                 return null;
