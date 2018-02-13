@@ -249,8 +249,11 @@ public class DrawAi extends SpellAbilityAi {
             if (sa.getSVar(num).equals("Count$Converge")) {
                 numCards = ComputerUtilMana.getConvergeCount(sa, ai);
             }
+        }
+
+        if (num != null && num.equals("ChosenX")) {
             // Necrologia, Pay X Life : Draw X Cards
-            if (sa.getSVar(num).equals("XChoice")) {
+            if (sa.getSVar("X").equals("XChoice")) {
                 // Draw up to max hand size but leave at least 3 in library
                 numCards = Math.min(computerMaxHandSize - computerHandSize, computerLibrarySize - 3);
                 // But no more than what's "safe" and doesn't risk a near death experience
@@ -262,7 +265,6 @@ public class DrawAi extends SpellAbilityAi {
                 source.setSVar("ChosenX", Integer.toString(numCards));
             }
         }
-
         // Logic for cards that require special handling
         if ("YawgmothsBargain".equals(logic)) {
             return SpecialCardAi.YawgmothsBargain.consider(ai, sa);
