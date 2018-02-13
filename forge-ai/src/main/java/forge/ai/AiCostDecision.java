@@ -347,6 +347,9 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 if (source.getName().equals("Maralen of the Mornsong Avatar")) {
                     return PaymentDecision.number(2);
                 }
+                if (source.getName().equals("Necrologia")) {
+                    return PaymentDecision.number(Integer.parseInt(ability.getSVar("ChosenX")));
+                }
                 return null;
             } else {
                 c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);

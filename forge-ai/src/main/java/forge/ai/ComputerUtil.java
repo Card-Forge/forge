@@ -2831,4 +2831,33 @@ public class ComputerUtil {
 
         return srcList;
     }
+
+    // check if AI life is in dange/serious danger based on next expected combat
+    // assuming a loss of payment life
+    public static boolean aiLifeInDanger(Player ai, boolean serious, int payment) {
+        Player opponent = ComputerUtil.getOpponentFor(ai);
+        // test whether the human can kill the ai next turn
+        Combat combat = new Combat(opponent);
+        boolean containsAttacker = false;
+        for (Card att : opponent.getCreaturesInPlay()) {
+            if (ComputerUtilCombat.canAttackNextTurn(att, ai)) {
+                combat.addAttacker(att, ai);
+                containsAttacker = true;
+            }
+        }
+        if (!containsAttacker) {
+            return false;
+        }
+        AiBlockController block = new AiBlockController(ai);
+        block.assignBlockersForCombat(combat);
+
+        if ((serious) && (ComputerUtilCombat.lifeInSeriousDanger(ai, combat, payment))) {
+            return true;
+        }
+        if ((!serious) && (ComputerUtilCombat.lifeInDanger(ai, combat, payment))) {
+            return true;
+        }
+        return false;
+
+    }
 }

@@ -249,6 +249,18 @@ public class DrawAi extends SpellAbilityAi {
             if (sa.getSVar(num).equals("Count$Converge")) {
                 numCards = ComputerUtilMana.getConvergeCount(sa, ai);
             }
+            // Necrologia, Pay X Life : Draw X Cards
+            if (sa.getSVar(num).equals("XChoice")) {
+                // Draw up to max hand size but leave at least 3 in library
+                numCards = Math.min(computerMaxHandSize - computerHandSize, computerLibrarySize - 3);
+                // But no more than what's "safe" and doesn't risk a near death experience
+                // Maybe would be better to check for "serious danger" and take more risk?
+                while ((ComputerUtil.aiLifeInDanger(ai, false, numCards) && (numCards > 0))) {
+                    numCards--;
+                }
+                sa.setSVar("ChosenX", Integer.toString(numCards));
+                source.setSVar("ChosenX", Integer.toString(numCards));
+            }
         }
 
         // Logic for cards that require special handling
