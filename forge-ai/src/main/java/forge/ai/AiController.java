@@ -1046,17 +1046,32 @@ public class AiController {
                     numLandsAvailable++;
                 }
 
-                //Discard unplayable card
+                // Discard unplayable card
                 boolean discardedUnplayable = false;
-                for (int j = 0; j < validCards.size(); j++) {
-                    if (validCards.get(j).getCMC() > numLandsAvailable && !validCards.get(j).hasSVar("DoNotDiscardIfAble")) {
-                        discardList.add(validCards.get(j));
-                        validCards.remove(validCards.get(j));
-                        discardedUnplayable = true;
-                        break;
-                    } else if (validCards.get(j).getCMC() <= numLandsAvailable) {
-                        // cut short to avoid looping over cards which are guaranteed not to fit the criteria
-                        break;
+                // But check if there is a card in play that allows casting spells for free!
+                // if yes, nothing is unplayable, at least based on CMC
+                boolean dreamHalls = false;
+                for (Card cardInPlay : game.getCardsIn(ZoneType.Battlefield)) {
+                    if (cardInPlay.hasSVar("AllowFreeCast")) {
+                        if ("Everyone".equals((cardInPlay.getSVar("AllowFreeCast")))) {
+                            dreamHalls = true;
+                        } else if (("Owner".equals((cardInPlay.getSVar("AllowFreeCast"))))
+                                && (cardInPlay.getOwner().equals(player))) {
+                            dreamHalls = true;
+                        }
+                    }
+                }
+                if (!dreamHalls) {
+                    for (int j = 0; j < validCards.size(); j++) {
+                        if (validCards.get(j).getCMC() > numLandsAvailable && !validCards.get(j).hasSVar("DoNotDiscardIfAble")) {
+                            discardList.add(validCards.get(j));
+                            validCards.remove(validCards.get(j));
+                            discardedUnplayable = true;
+                            break;
+                        } else if (validCards.get(j).getCMC() <= numLandsAvailable) {
+                            // cut short to avoid looping over cards which are guaranteed not to fit the criteria
+                            break;
+                        }
                     }
                 }
 
