@@ -9,6 +9,7 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 T:Mode$ ChangesController | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExile | CheckSVar$ X | SVarCompare$ GE1 | Secondary$ True | TriggerDescription$ When you lose control of CARDNAME, exile creature controlled by CARDNAME.
 SVar:TrigExile:DB$ChangeZoneAll | ChangeType$ Creature.IsRemembered | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:AIUntapPreference:NothingRemembered
 # Clear tracking effect if the creature put onto the battlefield leaves the battlefield, as per Oracle ruling
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.IsRemembered | Execute$ DBCleanup | Secondary$ True | Static$ True | TriggerDescription$ Clear tracking effect if the creature put onto the battlefield leaves the battlefield, as per Oracle ruling.
 SVar:X:Remembered$Amount
