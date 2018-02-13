@@ -35,7 +35,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
             else {
                 FModel.getQuest().setCurrentDeck(QPref.CURRENT_DECK.getDefault());
             }
-            FModel.getQuestPreferences().save();
+            FModel.getQuest().save();
         }
     };
 

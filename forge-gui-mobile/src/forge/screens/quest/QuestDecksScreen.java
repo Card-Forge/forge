@@ -47,7 +47,7 @@ public class QuestDecksScreen extends FScreen {
             else {
                 FModel.getQuest().setCurrentDeck(QPref.CURRENT_DECK.getDefault());
             }
-            FModel.getQuestPreferences().save();
+            FModel.getQuest().save();
         }
     };
 
