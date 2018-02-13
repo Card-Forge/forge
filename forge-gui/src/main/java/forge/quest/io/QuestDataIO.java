@@ -17,6 +17,7 @@
  */
 package forge.quest.io;
 
+import forge.quest.data.QuestPreferences.QPref;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
@@ -201,6 +202,10 @@ public class QuestDataIO {
             newData.Ratings.clear();
         }
         if (saveVersion < 12) {
+            // Current Deck moved from preferences to quest data - it should not be global for all quests!!!
+            QuestDataIO.setFinalField(QuestData.class, "currentDeck", newData, FModel.getQuestPreferences().getPref(QPref.CURRENT_DECK));
+        }
+        if (saveVersion < 13) {
             // Migrate DraftTournaments to use new Tournament class
         }
 
