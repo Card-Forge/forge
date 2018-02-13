@@ -215,6 +215,16 @@ public class CounterAi extends SpellAbilityAi {
             dontCounter = false;
         }
 
+        // Null Brooch is special - it has a discard cost, but the AI will be
+        // discarding no cards, or is playing a deck where discarding is a benefit
+        // as defined in SpecialCardAi.NullBrooch
+        if (sa.hasParam("AILogic")) {
+            if ("NullBooch".equals(sa.getParam("AILogic"))) {
+                dontCounter = false;
+            }
+            ;
+        }
+
         if (dontCounter) {
             return false;
         }
