@@ -411,6 +411,11 @@ public class DamageDealAi extends DamageAiBase {
         // target loop
         TargetChoices tcs = sa.getTargets();
 
+        // Do not use if would kill self
+        if (("SelfDamage".equals(sa.getParam("AILogic"))) && (ai.getLife() <= Integer.parseInt(source.getSVar("SelfDamageAmount")))) {
+            return false;
+        }
+
         if ("ChoiceBurn".equals(sa.getParam("AILogic"))) {
             // do not waste burns on player if other choices are present
             if (this.shouldTgtP(ai, sa, dmg, noPrevention)) {
