@@ -101,6 +101,19 @@ public class DestroyAllAi extends SpellAbilityAi {
             }
         }
 
+        // If effect is destroying creatures and AI is about to lose, activate effect anyway no matter what!
+        if ((!CardLists.getType(opplist, "Creature").isEmpty()) && (ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS))
+                && (ai.getGame().getCombat() != null && ComputerUtilCombat.lifeInSeriousDanger(ai, ai.getGame().getCombat()))) {
+            return true;
+        }
+
+        // If effect is destroying creatures and AI is about to get low on life, activate effect anyway if difference in lost permanents not very much
+        if ((!CardLists.getType(opplist, "Creature").isEmpty()) && (ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS))
+                && (ai.getGame().getCombat() != null && ComputerUtilCombat.lifeInDanger(ai, ai.getGame().getCombat()))
+                && ((ComputerUtilCard.evaluatePermanentList(ailist) - 6) >= ComputerUtilCard.evaluatePermanentList(opplist))) {
+            return true;
+        }
+
         // if only creatures are affected evaluate both lists and pass only if
         // human creatures are more valuable
         if (CardLists.getNotType(opplist, "Creature").isEmpty() && CardLists.getNotType(ailist, "Creature").isEmpty()) {
