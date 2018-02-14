@@ -76,6 +76,10 @@ public class NetConnectUtil {
             public final void close() {
                 // NO-OP, server can't receive close message
             }
+            @Override
+            public ClientGameLobby getLobby() {
+                return null;
+            }
         });
         chatInterface.setGameClient(new IRemote() {
             @Override
@@ -127,6 +131,10 @@ public class NetConnectUtil {
             public final void close() {
                 SOptionPane.showMessageDialog("Your connection to the host (" + url + ") was interrupted.", "Error", FSkinProp.ICO_WARNING);
                 onlineLobby.setClient(null);
+            }
+            @Override
+            public ClientGameLobby getLobby() {
+                return lobby;
             }
         });
         view.setPlayerChangeListener(new IPlayerChangeListener() {
