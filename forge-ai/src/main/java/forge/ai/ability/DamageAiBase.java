@@ -25,6 +25,10 @@ public abstract class DamageAiBase extends SpellAbilityAi {
                 sa.getHostCard().getSVar(sa.getParam("NumDmg")).equals("TargetedPlayer$CardsInHand")) {
             dmgByCardsInHand = true;
         }
+        // Not sure if type choice implemented for the AI yet but it should at least recognize this spell hits harder on larger enemy hand size
+        if ("Blood Oath".equals(sa.getHostCard().getName())) {
+            dmgByCardsInHand = true;
+        }
 
         if (!sa.canTarget(enemy)) {
             return false;
@@ -67,7 +71,7 @@ public abstract class DamageAiBase extends SpellAbilityAi {
                     && phase.isPlayerTurn(comp) && (hand.size() > comp.getMaxHandSize())) {
                 return true;
             }
-            
+
             // chance to burn player based on current hand size
             if (hand.size() > 2) {
                 float value = 0;
@@ -77,8 +81,15 @@ public abstract class DamageAiBase extends SpellAbilityAi {
                         value = 1.0f * restDamage / enemy.getLife();
                     }
                 } else {
+                    // If Sudden Impact type spell, and can hit at least 3 cards during draw phase
+                    // have a 100% chance to go for it, enemy hand will only lose cards over time!
+                    // But if 3 or less cards, use normal rules, just in case enemy starts holding card or plays a draw spell or we need mana for other instants.
                     if (phase.isPlayerTurn(enemy)) {
-                        if (phase.is(PhaseType.END_OF_TURN)
+                        if ((phase.is(PhaseType.DRAW)) &&
+                                (enemy.getCardsIn(ZoneType.Hand).size() > 3)
+                                && dmgByCardsInHand) {
+                            value = 1;
+                        } else if (phase.is(PhaseType.END_OF_TURN)
                                 || ((dmgByCardsInHand && phase.getPhase().isAfter(PhaseType.UPKEEP)))) {
                             value = 1.5f * restDamage / enemy.getLife();
                         }
