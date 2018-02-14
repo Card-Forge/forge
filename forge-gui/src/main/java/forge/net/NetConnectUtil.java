@@ -124,7 +124,7 @@ public class NetConnectUtil {
             }
             @Override
             public final void close() {
-                SOptionPane.showMessageDialog("Connection to the host was interrupted.", "Error", FSkinProp.ICO_WARNING);
+                SOptionPane.showMessageDialog("Your connection to the host (" + url + ") was interrupted.", "Error", FSkinProp.ICO_WARNING);
                 onlineLobby.setClient(null);
             }
         });
