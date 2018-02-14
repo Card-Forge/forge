@@ -5,6 +5,5 @@ Text:Cast CARDNAME only during your end step.\r\n
 A:SP$ Draw | Cost$ 3 B B PayLife<X> | NumCards$ ChosenX | Defined$ You | ActivationPhases$ End of Turn | PlayerTurn$ True | References$ X | SpellDescription$ Draw X cards.
 SVar:X:XChoice
 #ChosenX SVar created by Cost payment
-SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necrologia.jpg
 Oracle:Cast Necrologia only during your end step.\nAs an additional cost to cast Necrologia, pay X life.\nDraw X cards.

@@ -2831,4 +2831,39 @@ public class ComputerUtil {
 
         return srcList;
     }
+
+    // Check if AI life is in danger/serious danger based on next expected combat
+    // assuming a loss of "payment" life
+    // call this to determine if it's safe to use a life payment spell
+    // or trigger "emergency" strategies such as holding mana for Spike Weaver of Counterspell.
+    public static boolean aiLifeInDanger(Player ai, boolean serious, int payment) {
+        Player opponent = ComputerUtil.getOpponentFor(ai);
+        // test whether the human can kill the ai next turn
+        Combat combat = new Combat(opponent);
+        boolean containsAttacker = false;
+        for (Card att : opponent.getCreaturesInPlay()) {
+            if (ComputerUtilCombat.canAttackNextTurn(att, ai)) {
+                combat.addAttacker(att, ai);
+                containsAttacker = true;
+            }
+        }
+        if (!containsAttacker) {
+            return false;
+        }
+        AiBlockController block = new AiBlockController(ai);
+        block.assignBlockersForCombat(combat);
+
+        // TODO predict other, noncombat sources of damage and add them to the "payment" variable.
+        // examples : Black Vise, The Rack, known direct damage spells in enemy hand, etc
+        // If added, might need a parameter to define whether we want to check all threats or combat threats.
+
+        if ((serious) && (ComputerUtilCombat.lifeInSeriousDanger(ai, combat, payment))) {
+            return true;
+        }
+        if ((!serious) && (ComputerUtilCombat.lifeInDanger(ai, combat, payment))) {
+            return true;
+        }
+        return false;
+
+    }
 }
