@@ -211,19 +211,18 @@ public final class CardUtil {
         // used for the purpose of cards that care about the zone the card was known to be in last
         newCopy.setLastKnownZone(in.getLastKnownZone());
 
-        newCopy.getCurrentState().copyFrom(in, in.getState(in.getCurrentStateName()));
+        newCopy.getCurrentState().copyFrom(in.getState(in.getCurrentStateName()), true);
 
         if (in.isCloned()) {
             newCopy.addAlternateState(CardStateName.Cloner, false);
-            newCopy.getState(CardStateName.Cloner).copyFrom(in, in.getState(CardStateName.Cloner));
+            newCopy.getState(CardStateName.Cloner).copyFrom(in.getState(CardStateName.Cloner), true);
         }
 
         newCopy.setType(new CardType(in.getType()));
         newCopy.setToken(in.isToken());
         newCopy.setTriggers(in.getTriggers(), false);
         for (SpellAbility sa : in.getSpellAbilities()) {
-            newCopy.addSpellAbility(sa);
-            sa.setHostCard(in);
+            newCopy.addSpellAbility(sa.copy(newCopy, true));
         }
 
         // lock in the current P/T without bonus from counters
@@ -262,6 +261,11 @@ public final class CardUtil {
         newCopy.setChangedCardTypes(in.getChangedCardTypesMap());
 
         newCopy.setMeldedWith(in.getMeldedWith());
+
+        // update keyword cache on all states
+        for (CardStateName s : newCopy.getStates()) {
+            newCopy.updateKeywordsCache(newCopy.getState(s));
+        }
 
         return newCopy;
     }

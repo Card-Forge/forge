@@ -313,24 +313,25 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return activatingPlayer;
     }
     public void setActivatingPlayer(final Player player) {
+        setActivatingPlayer(player, false);
+    }
+    public void setActivatingPlayer(final Player player, final boolean lki) {
         // trickle down activating player
         activatingPlayer = player;
         if (subAbility != null) {
-            subAbility.setActivatingPlayer(player);
+            subAbility.setActivatingPlayer(player, lki);
         }
         for (AbilitySub sa : additionalAbilities.values()) {
-            if (sa.getActivatingPlayer() != player) {
-                sa.setActivatingPlayer(player);
-            }
+            sa.setActivatingPlayer(player, lki);
         }
         for (List<AbilitySub> list : additionalAbilityLists.values()) {
             for (AbilitySub sa : list) {
-                if (sa.getActivatingPlayer() != player) {
-                    sa.setActivatingPlayer(player);
-                }
+                sa.setActivatingPlayer(player, lki);
             }
         }
-        view.updateCanPlay(this, false);
+        if (!lki) {
+            view.updateCanPlay(this, false);
+        }
     }
 
     public Player getDeltrigActivatingPlayer() {
@@ -789,17 +790,18 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public SpellAbility copy() {
-        return copy(hostCard);
+        return copy(hostCard, false);
     }
-    public SpellAbility copy(Card host) {
+    public SpellAbility copy(Card host, final boolean lki) {
         SpellAbility clone = null;
         try {
             clone = (SpellAbility) clone();
-            clone.id = nextId();
+            clone.id = lki ? id : nextId();
             clone.view = new SpellAbilityView(clone);
+
             // dont use setHostCard to not trigger the not copied parts yet
             clone.hostCard = host;
-            if (host != null && host.getGame() != null) {
+            if (!lki && host != null && host.getGame() != null) {
                 host.getGame().addSpellAbility(clone);
             }
             // need to clone the maps too so they can be changed
@@ -808,8 +810,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
             clone.triggeringObjects = Maps.newHashMap(this.triggeringObjects);
 
+            if (getPayCosts() != null) {
+                clone.setPayCosts(getPayCosts().copy());
+            }
             // run special copy Ability to make a deep copy
-            CardFactory.copySpellAbility(this, clone, host);
+            CardFactory.copySpellAbility(this, clone, host, lki);
         } catch (final CloneNotSupportedException e) {
             System.err.println(e);
         }
@@ -1109,6 +1114,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setCopied(boolean isCopied0) {
         isCopied = isCopied0;
+        if (this.getSubAbility() != null) {
+            this.getSubAbility().setCopied(isCopied0);
+        }
     }
 
     /**

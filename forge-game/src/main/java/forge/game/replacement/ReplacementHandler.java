@@ -61,21 +61,12 @@ public class ReplacementHandler {
             decider = ((Card) affected).getController();
         }
 
-        ReplacementResult res = run(runParams, ReplacementLayer.Control, decider);
-        if (res != ReplacementResult.NotReplaced) {
-            return res;
-        }
-        res = run(runParams, ReplacementLayer.Copy, decider);
-        if (res != ReplacementResult.NotReplaced) {
-            return res;
-        }
-        res = run(runParams, ReplacementLayer.Other, decider);
-        if (res != ReplacementResult.NotReplaced) {
-            return res;
-        }
-        res = run(runParams, ReplacementLayer.None, decider);
-        if (res != ReplacementResult.NotReplaced) {
-            return res;
+        // try out all layer
+        for (ReplacementLayer layer : ReplacementLayer.values()) {
+            ReplacementResult res = run(runParams, layer, decider);
+            if (res != ReplacementResult.NotReplaced) {
+                return res;
+            }
         }
 
         return ReplacementResult.NotReplaced;

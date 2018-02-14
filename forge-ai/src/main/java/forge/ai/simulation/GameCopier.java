@@ -29,7 +29,6 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
-import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -263,15 +262,8 @@ public class GameCopier {
             newCard.addStaticAbility(stAb);
         }
         for (SpellAbility sa : c.getSpellAbilities()) {
-            SpellAbility saCopy;
-
-            if (sa instanceof AbilityActivated) {
-                saCopy = ((AbilityActivated)sa).getCopy();
-            } else {
-                saCopy = sa.copy();
-            }
+            SpellAbility saCopy = sa.copy(newCard, true);
             if (saCopy != null) {
-                saCopy.setHostCard(newCard);
                 newCard.addSpellAbility(saCopy);
             } else {
                 System.err.println(sa.toString());

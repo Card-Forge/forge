@@ -167,7 +167,7 @@ public class SetStateAi extends SpellAbilityAi {
 
         // need a copy for evaluation
         Card transformed = CardUtil.getLKICopy(card);
-        transformed.getCurrentState().copyFrom(card, card.getAlternateState());
+        transformed.getCurrentState().copyFrom(card.getAlternateState(), true);
         transformed.updateStateForView();
 
         // TODO: compareCards assumes that a creature will transform into a creature. Need to improve this

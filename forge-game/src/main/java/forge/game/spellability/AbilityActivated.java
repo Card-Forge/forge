@@ -72,10 +72,6 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
         }
     }
 
-    public abstract AbilityActivated getCopy(); /* {
-        return null;
-    }
-
     /** {@inheritDoc} */
     @Override
     public boolean canPlay() {

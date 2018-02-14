@@ -86,11 +86,9 @@ public enum TriggerType {
     Untaps(TriggerUntaps.class),
     Vote(TriggerVote.class);
 
-    private final Class<? extends Trigger> classTrigger;
     private final Constructor<? extends Trigger> constructor;
 
     private TriggerType(Class<? extends Trigger> clasz) {
-        classTrigger = clasz;
         constructor = findConstructor(clasz);
     }
 
@@ -121,16 +119,6 @@ public enum TriggerType {
         }
 
         throw new RuntimeException("Element " + value + " not found in TriggerType enum");
-    }
-    
-    public static TriggerType getTypeFor(Trigger t) {
-        final Class<? extends Trigger> cls = t.getClass();
-        for (final TriggerType v : TriggerType.values()) {
-            if (v.classTrigger.equals(cls)) {
-                return v;
-            }
-        }
-        return null;
     }
 
     /**

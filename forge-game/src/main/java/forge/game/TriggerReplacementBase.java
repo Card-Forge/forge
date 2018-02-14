@@ -11,7 +11,7 @@ import forge.game.zone.ZoneType;
 /**
  * Created by Hellfish on 2014-02-09.
  */
-public abstract class TriggerReplacementBase extends CardTraitBase {
+public abstract class TriggerReplacementBase extends CardTraitBase implements IIdentifiable, Cloneable {
     protected EnumSet<ZoneType> validHostZones;
 
     /** The overriding ability. */

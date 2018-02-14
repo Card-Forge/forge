@@ -5,7 +5,6 @@ import forge.game.ability.effects.ChangeZoneEffect;
 import forge.game.ability.effects.ManaEffect;
 import forge.game.ability.effects.ManaReflectedEffect;
 import forge.game.card.Card;
-import forge.game.card.CardFactory;
 import forge.game.cost.Cost;
 import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.AbilityManaPart;
@@ -39,17 +38,6 @@ public class AbilityApiBased extends AbilityActivated {
     @Override
     public String getStackDescription() {
         return effect.getStackDescriptionWithSubs(mapParams, this);
-    }
-
-    /* (non-Javadoc)
-     * @see forge.card.spellability.AbilityActivated#getCopy()
-     */
-    @Override
-    public AbilityActivated getCopy() {
-        TargetRestrictions tgt = getTargetRestrictions() == null ? null : new TargetRestrictions(getTargetRestrictions());
-        AbilityActivated res = new AbilityApiBased(api, getHostCard(), getPayCosts(), tgt, mapParams);
-        CardFactory.copySpellAbility(this, res, getHostCard());
-        return res;
     }
 
     /* (non-Javadoc)
