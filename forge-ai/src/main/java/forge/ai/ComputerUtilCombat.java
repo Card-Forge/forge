@@ -382,6 +382,10 @@ public class ComputerUtilCombat {
      * @return a boolean.
      */
     public static boolean lifeInDanger(final Player ai, final Combat combat) {
+        return lifeInDanger(ai, combat, 0);
+    }
+
+    public static boolean lifeInDanger(final Player ai, final Combat combat, final int payment) {
         // life in danger only cares about the player's life. Not Planeswalkers' life
         if (ai.cantLose() || combat == null || combat.getAttackingPlayer() == ai) {
             return false;
@@ -401,12 +405,12 @@ public class ComputerUtilCombat {
 
         // check for creatures that must be blocked
         final List<Card> attackers = combat.getAttackersOf(ai);
-        
+
         final List<Card> threateningCommanders = getLifeThreateningCommanders(ai,combat);
 
         for (final Card attacker : attackers) {
 
-            final List<Card> blockers = combat.getBlockers(attacker);           
+            final List<Card> blockers = combat.getBlockers(attacker);
 
             if (blockers.isEmpty()) {
                 if (!attacker.getSVar("MustBeBlocked").equals("")) {
@@ -429,7 +433,7 @@ public class ComputerUtilCombat {
             }
         }
 
-        if (ComputerUtilCombat.lifeThatWouldRemain(ai, combat) < Math.min(4, ai.getLife())
+        if (ComputerUtilCombat.lifeThatWouldRemain(ai, combat) - payment < Math.min(4, ai.getLife())
                 && !ai.cantLoseForZeroOrLessLife()) {
             return true;
         }
@@ -463,12 +467,16 @@ public class ComputerUtilCombat {
      * @return a boolean.
      */
     public static boolean lifeInSeriousDanger(final Player ai, final Combat combat) {
+        return lifeInSeriousDanger(ai, combat, 0);
+    }
+
+    public static boolean lifeInSeriousDanger(final Player ai, final Combat combat, final int payment) {
         // life in danger only cares about the player's life. Not about a
         // Planeswalkers life
         if (ai.cantLose() || combat == null) {
             return false;
         }
-        
+
         final List<Card> threateningCommanders = ComputerUtilCombat.getLifeThreateningCommanders(ai, combat);
 
         // check for creatures that must be blocked
@@ -488,7 +496,7 @@ public class ComputerUtilCombat {
             }
         }
 
-        if (ComputerUtilCombat.lifeThatWouldRemain(ai, combat) < 1 && !ai.cantLoseForZeroOrLessLife()) {
+        if (ComputerUtilCombat.lifeThatWouldRemain(ai, combat) - payment < 1 && !ai.cantLoseForZeroOrLessLife()) {
             return true;
         }
 
