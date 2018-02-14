@@ -872,8 +872,8 @@ public class SpecialCardAi {
             }
 
             // Don't if we'd lose a larger percentage of our remaining life than enemy
-            if ((((double) ai.getLife()) / ailands) >
-                    (((double) ai.getOpponents().get(0).getLife()) / opplands)
+            if ((ailands / ((double) ai.getLife())) >
+                    (opplands / ((double) ai.getOpponents().get(0).getLife()))
                     ) {
                 return false;
             }
