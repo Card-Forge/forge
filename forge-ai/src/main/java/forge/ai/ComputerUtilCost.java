@@ -157,7 +157,7 @@ public class ComputerUtilCost {
                         if ((!source.isInPlay()
                                 // We can't pay for this spell even if we play another land, or have wrong colors
                                 // TODO this is ugly, is there a procedure that can determine available mana instead of land count? Otherwise this ignores moxes and other sources!
-                                && ((source.getCMC() > lands + 1) || (source.determineColor().hasNoColorsExcept(ColorSet.fromNames(getAvailableManaColors(ai, Lists.newArrayList())).getColor())))
+                                && ((source.getCMC() > lands + 1) || (!source.determineColor().hasNoColorsExcept(ColorSet.fromNames(getAvailableManaColors(ai, Lists.newArrayList())).getColor())))
                                 // Don't discard more than 1 card
                                 && (num == 1)
                         )) {
