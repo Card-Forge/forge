@@ -877,6 +877,17 @@ public class SpecialCardAi {
                     ) {
                 return false;
             }
+            // Don't if no enemy nonbasic lands
+            if (opplands == 0) {
+                return false;
+            }
+            // Don't if loss is equal in percentage but we lose more points
+            if (((ailands / ((double) ai.getLife())) ==
+                    (opplands / ((double) ai.getOpponents().get(0).getLife()))
+            ) && (ailands > opplands)) {
+                return false;
+            }
+
             // Don't play in early game - opponent likely still has lands to play
             if (ai.getGame().getPhaseHandler().getTurn() < 10) {
                 return false;
