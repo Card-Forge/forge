@@ -531,7 +531,7 @@ public class DamageDealAi extends DamageAiBase {
                     }
                 }
 
-                if (freePing && sa.canTarget(enemy)) {
+                if (freePing && sa.canTarget(enemy) && (!avoidTargetP(ai, sa))) {
                     tcs.add(enemy);
                     if (divided) {
                         tgt.addDividedAllocation(enemy, dmg);
