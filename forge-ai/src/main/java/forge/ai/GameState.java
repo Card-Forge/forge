@@ -82,6 +82,8 @@ public abstract class GameState {
     private String precastHuman = null;
     private String precastAI = null;
 
+    private int turn;
+
     // Targeting for precast spells in a game state (mostly used by Puzzle Mode game states)
     private final int TARGET_NONE = -1; // untargeted spell (e.g. Joraga Invocation)
     private final int TARGET_HUMAN = -2;
@@ -110,6 +112,7 @@ public abstract class GameState {
 
         sb.append(TextUtil.concatNoSpace("humanlife=", String.valueOf(humanLife), "\n"));
         sb.append(TextUtil.concatNoSpace("ailife=", String.valueOf(computerLife), "\n"));
+        sb.append(TextUtil.concatNoSpace("turn=", String.valueOf(turn), "\n"));
 
         if (!humanCounters.isEmpty()) {
             sb.append(TextUtil.concatNoSpace("humancounters=", humanCounters, "\n"));
@@ -149,6 +152,7 @@ public abstract class GameState {
 
         tChangePlayer = game.getPhaseHandler().getPlayerTurn() == ai ? "ai" : "human";
         tChangePhase = game.getPhaseHandler().getPhase().toString();
+        turn = game.getPhaseHandler().getTurn();
         aiCardTexts.clear();
         humanCardTexts.clear();
 
@@ -392,6 +396,9 @@ public abstract class GameState {
 
         boolean isHuman = categoryName.startsWith("human");
 
+        if (categoryName.endsWith("turn")) {
+            turn = Integer.parseInt(categoryValue);
+        }
         if (categoryName.endsWith("life")) {
             if (isHuman)
                 humanLife = Integer.parseInt(categoryValue);
@@ -499,7 +506,7 @@ public abstract class GameState {
             applyCountersToGameEntity(ai, computerCounters);
         }
 
-        game.getPhaseHandler().devModeSet(newPhase, newPlayerTurn);
+        game.getPhaseHandler().devModeSet(newPhase, newPlayerTurn, turn);
 
         game.getTriggerHandler().setSuppressAllTriggers(true);
 
@@ -530,7 +537,7 @@ public abstract class GameState {
     private void handleCombat(final Game game, final Player attackingPlayer, final Player defendingPlayer, final boolean toDeclareBlockers) {
         // First we need to ensure that all attackers are declared in the Declare Attackers step,
         // even if proceeding straight to Declare Blockers
-        game.getPhaseHandler().devModeSet(PhaseType.COMBAT_DECLARE_ATTACKERS, attackingPlayer);
+        game.getPhaseHandler().devModeSet(PhaseType.COMBAT_DECLARE_ATTACKERS, attackingPlayer, turn);
 
         if (game.getPhaseHandler().getCombat() == null) {
             game.getPhaseHandler().setCombat(new Combat(attackingPlayer));

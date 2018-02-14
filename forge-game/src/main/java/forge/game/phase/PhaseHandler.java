@@ -1054,13 +1054,14 @@ public class PhaseHandler implements java.io.Serializable {
 
     // this is a hack for the setup game state mode, do not use outside of devSetupGameState code
     // as it avoids calling any of the phase effects that may be necessary in a less enforced context
-    public final void devModeSet(final PhaseType phase0, final Player player0, boolean endCombat) {
+    public final void devModeSet(final PhaseType phase0, final Player player0, boolean endCombat, int cturn) {
         if (phase0 != null) {
             setPhase(phase0);
         }
         if (player0 != null) {
             setPlayerTurn(player0);
         }
+        turn = cturn;
 
         game.fireEvent(new GameEventTurnPhase(playerTurn, phase, ""));
         if (endCombat) {
@@ -1068,8 +1069,17 @@ public class PhaseHandler implements java.io.Serializable {
         }
     }
     public final void devModeSet(final PhaseType phase0, final Player player0) {
-        devModeSet(phase0, player0, true);
+        devModeSet(phase0, player0, true, 1);
     }
+
+    public final void devModeSet(final PhaseType phase0, final Player player0, int cturn) {
+        devModeSet(phase0, player0, true, cturn);
+    }
+
+    public final void devModeSet(final PhaseType phase0, final Player player0, boolean endCombat) {
+        devModeSet(phase0, player0, endCombat, 0);
+    }
+
 
     public final void endTurnByEffect() {
         endCombat();
