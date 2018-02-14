@@ -30,9 +30,16 @@ import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
+import java.net.DatagramSocket;
+import java.net.Inet4Address;
+import java.net.Inet6Address;
 import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.Map;
 
 import org.apache.log4j.PropertyConfigurator;
@@ -198,9 +205,35 @@ public final class FServerManager {
         return null;
     }
 
+    // inspired by:
+    //  https://stackoverflow.com/a/34873630
+    //  https://stackoverflow.com/a/901943
+    private String getRoutableAddress(boolean preferIpv4, boolean preferIPv6) throws SocketException, UnknownHostException {
+        DatagramSocket s = new DatagramSocket();
+        s.connect(InetAddress.getByAddress(new byte[]{8,8,8,8}), 0);
+        NetworkInterface n = NetworkInterface.getByInetAddress(s.getLocalAddress());
+        Enumeration en = n.getInetAddresses();
+        while (en.hasMoreElements()) {
+            InetAddress addr = (InetAddress) en.nextElement();
+            if (addr instanceof Inet4Address) {
+                if (preferIPv6) {
+                    continue;
+                }
+                return addr.getHostAddress();
+            }
+            if (addr instanceof Inet6Address) {
+                if (preferIpv4) {
+                    continue;
+                }
+                return addr.getHostAddress();
+            }
+        }
+        return null;
+    }
+
     public String getLocalAddress() {
         try {
-            return InetAddress.getLocalHost().getHostAddress();
+            return getRoutableAddress(true, false);
         }
         catch (final Exception e) {
             e.printStackTrace();
