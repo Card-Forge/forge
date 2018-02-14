@@ -573,10 +573,11 @@ public class DamageDealAi extends DamageAiBase {
             // TODO: Improve Damage, we shouldn't just target the player just
             // because we can
             else if (sa.canTarget(enemy)) {
-                if ((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
+                if (((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
                         || (SpellAbilityAi.isSorcerySpeed(sa) && phase.is(PhaseType.MAIN2))
                         || sa.getPayCosts() == null || immediately
-                        || this.shouldTgtP(ai, sa, dmg, noPrevention)) {
+                        || this.shouldTgtP(ai, sa, dmg, noPrevention)) &&
+                        (!avoidTargetP(ai, sa))) {
                 	tcs.add(enemy);
                     if (divided) {
                         tgt.addDividedAllocation(enemy, dmg);
