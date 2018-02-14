@@ -855,6 +855,7 @@ public class SpecialCardAi {
         public static boolean consider(final Player ai, final SpellAbility sa) {
             int ailands = 0;
             int opplands = 0;
+            boolean hasbridge = false;
             for (Card cardInPlay : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
                 if ((cardInPlay.isLand()) && !cardInPlay.isBasicLand()) {
                     if (cardInPlay.getController().equals(ai)) {
@@ -862,12 +863,34 @@ public class SpecialCardAi {
                     } else {
                         opplands++;
                     }
+                    // We want to empty hand as much as possible for this
+                    if (("Ensnaring Bridge".equals(cardInPlay.getName())) &&
+                            (cardInPlay.getController().equals(ai))) {
+                        hasbridge = true;
+                    }
+                    // We want to go down to 1 card for this
+                    if (("Cursed Scroll".equals(cardInPlay.getName())) &&
+                            (cardInPlay.getController().equals(ai))
+                            && (ai.getGame().getCardsIn(ZoneType.Hand).size() >= 2)) {
+                        hasbridge = true;
+                    }
+
                 }
             }
             // Always if enemy would die and we don't!
             // TODO : predict actual damage instead of assuming it'll be 2*lands
-            if ((((double) ai.getOpponents().get(0).getLife()) <= opplands * 2) &&
-                    ((((double) ai.getLife()) > ailands * 2))) {
+            // Don't if we lose, unless we lose anyway to unblocked creatures next turn
+            if ((ai.getLife() <= ailands * 2) &&
+                    (!(ComputerUtil.aiLifeInDanger(ai, true, 0)) && ((ai.getOpponents().get(0).getLife()) <= opplands * 2))) {
+                return false;
+            }
+            // Do if we can win
+            if ((ai.getOpponents().get(0).getLife()) <= opplands * 2) {
+                return true;
+            }
+            // Do if we need to lose cards to activate Ensnaring Bridge or Cursed Scroll
+            // even if suboptimal play, but don't waste the card too early even then!
+            if ((hasbridge) && (ai.getGame().getPhaseHandler().getTurn() < 10)) {
                 return true;
             }
 
