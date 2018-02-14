@@ -5,12 +5,15 @@ import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
+import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardPredicates;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerDamageDone;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
@@ -32,10 +35,30 @@ public abstract class DamageAiBase extends SpellAbilityAi {
         if (sa.getTargets() != null && sa.getTargets().getTargets().contains(enemy)) {
             return false;
         }
-        
+
+        // Benefits hitting players?
+        // If has triggered ability on dealing damage to an opponent, go for it!
+        Card hostcard = sa.getHostCard();
+        for (Trigger trig : hostcard.getTriggers()) {
+            if (trig instanceof TriggerDamageDone) {
+                if (("Opponent".equals(trig.getParam("ValidTarget")))
+                        && (!"True".equals(trig.getParam("CombatDamage")))) {
+                    return true;
+                }
+            }
+        }
+
         // burn Planeswalkers
         if (Iterables.any(enemy.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS)) {
             return true;
+        }
+
+        // Logic for cards that damage owner, like Fireslinger
+        // Do not target a player if they aren't below 75% of our health.
+        if ("SelfDamage".equals(sa.getParam("AILogic"))) {
+            if (comp.getLife() * 0.75 < enemy.getLife()) {
+                return false;
+            }
         }
 
         if (!noPrevention) {
