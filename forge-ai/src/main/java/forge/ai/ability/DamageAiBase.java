@@ -55,9 +55,21 @@ public abstract class DamageAiBase extends SpellAbilityAi {
 
         // Logic for cards that damage owner, like Fireslinger
         // Do not target a player if they aren't below 75% of our health.
+        // Unless Lifelink will cancel the damage to us
+        boolean lifelink = hostcard.hasKeyword("Lifelink");
+        for (Card ench : hostcard.getEnchantedBy(false)) {
+            // Treat cards enchanted by older cards with "when enchanted creature deals damage, gain life" as if they had lifelink.
+            if (ench.hasSVar("LikeLifeLink")) {
+                if ("True".equals(ench.getSVar("LikeLifeLink"))) {
+                    lifelink = true;
+                }
+            }
+        }
         if ("SelfDamage".equals(sa.getParam("AILogic"))) {
             if (comp.getLife() * 0.75 < enemy.getLife()) {
-                return false;
+                if (!lifelink) {
+                    return false;
+                }
             }
         }
 
