@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import com.google.common.base.Predicate;
 import forge.ai.ComputerUtilCard;
+import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -26,7 +27,9 @@ public class RepeatEachAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         String logic = sa.getParam("AILogic");
 
-        if ("Never".equals(logic)) {
+        if ("PriceOfProgress".equals(logic)) {
+            return SpecialCardAi.priceOfProgress.consider(aiPlayer, sa);
+        } else if ("Never".equals(logic)) {
             return false;
         } else if ("CloneMyTokens".equals(logic)) {
             if (CardLists.filter(aiPlayer.getCreaturesInPlay(), Presets.TOKEN).size() < 2) {
@@ -66,12 +69,12 @@ public class RepeatEachAi extends SpellAbilityAi {
                 }
             }
         } else if ("OpponentHasCreatures".equals(logic)) {
-        	for (Player opp : aiPlayer.getOpponents()) {
-        		if (!opp.getCreaturesInPlay().isEmpty()){
-        			return true;
-        		}
-        	}
-        	return false;
+            for (Player opp : aiPlayer.getOpponents()) {
+                if (!opp.getCreaturesInPlay().isEmpty()){
+                    return true;
+                }
+            }
+            return false;
         } else if ("OpponentHasMultipleCreatures".equals(logic)) {
             for (Player opp : aiPlayer.getOpponents()) {
                 if (opp.getCreaturesInPlay().size() > 1){
