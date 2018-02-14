@@ -561,6 +561,15 @@ public class PlayerControllerAi extends PlayerController {
                             return true;
                         case "Never":
                             return false;
+                        case "NothingRemembered":
+                            if (source.getRememberedCount() == 0) {
+                                return true;
+                            } else {
+                                Card rem = (Card) source.getFirstRemembered();
+                                if (!rem.getZone().is(ZoneType.Battlefield)) {
+                                    return true;
+                                }
+                            }
                         case "BetterTgtThanRemembered":
                             if (source.getRememberedCount() > 0) {
                                 Card rem = (Card) source.getFirstRemembered();
