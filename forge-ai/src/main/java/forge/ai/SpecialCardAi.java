@@ -863,6 +863,7 @@ public class SpecialCardAi {
                     } else {
                         opplands++;
                     }
+                }
                     // We want to empty hand as much as possible for this
                     if (("Ensnaring Bridge".equals(cardInPlay.getName())) &&
                             (cardInPlay.getController().equals(ai))) {
@@ -874,8 +875,6 @@ public class SpecialCardAi {
                             && (ai.getGame().getCardsIn(ZoneType.Hand).size() >= 2)) {
                         hasbridge = true;
                     }
-
-                }
             }
             // Always if enemy would die and we don't!
             // TODO : predict actual damage instead of assuming it'll be 2*lands
@@ -890,7 +889,7 @@ public class SpecialCardAi {
             }
             // Do if we need to lose cards to activate Ensnaring Bridge or Cursed Scroll
             // even if suboptimal play, but don't waste the card too early even then!
-            if ((hasbridge) && (ai.getGame().getPhaseHandler().getTurn() < 10)) {
+            if ((hasbridge) && (ai.getGame().getPhaseHandler().getTurn() >= 10)) {
                 return true;
             }
 
