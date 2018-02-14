@@ -1,5 +1,6 @@
 package forge.net;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.GuiBase;
@@ -149,7 +150,12 @@ public class NetConnectUtil {
             catch (Exception ex) {}
         }
 
-        client.connect(hostname, port);
+        try {
+            client.connect(hostname, port);
+        }
+        catch (Exception ex) {
+            return null;
+        }
 
         return new ChatMessage(null, String.format("Connected to %s:%d", hostname, port));
     }

@@ -86,9 +86,11 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
             @Override
             public void run() {
                 SOverlayUtils.hideOverlay();
-                FNetOverlay.SINGLETON_INSTANCE.show(result);
-                if (CHomeUI.SINGLETON_INSTANCE.getCurrentDocID() == EDocID.HOME_NETWORK) {
-                    VSubmenuOnlineLobby.SINGLETON_INSTANCE.populate();
+                if (result instanceof ChatMessage) {
+                    FNetOverlay.SINGLETON_INSTANCE.show(result);
+                    if (CHomeUI.SINGLETON_INSTANCE.getCurrentDocID() == EDocID.HOME_NETWORK) {
+                        VSubmenuOnlineLobby.SINGLETON_INSTANCE.populate();
+                    }
                 }
             }
         });
