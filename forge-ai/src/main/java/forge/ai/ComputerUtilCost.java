@@ -152,10 +152,12 @@ public class ComputerUtilCost {
                         // Dream Halls allows to discard 1 worthless card to cast 1 expensive for free
                         // Do it even if nothing marked for discard in hand, if it's worth doing!
                         int lands = ai.getCardsIn(ZoneType.Battlefield).size();
+
                         // Don't do it for abilities on cards in play, we want it to play spells!
                         if ((!source.isInPlay()
-                                // We can't pay for this spell even if we play another land
-                                && (source.getCMC() > lands + 1)
+                                // We can't pay for this spell even if we play another land, or have wrong colors
+                                // TODO this is ugly, is there a procedure that can determine available mana instead of land count? Otherwise this ignores moxes and other sources!
+                                && ((source.getCMC() > lands + 1) || (source.determineColor().hasNoColorsExcept(ColorSet.fromNames(getAvailableManaColors(ai, Lists.newArrayList())).getColor())))
                                 // Don't discard more than 1 card
                                 && (num == 1)
                         )) {
