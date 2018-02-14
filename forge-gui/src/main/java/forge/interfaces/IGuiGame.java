@@ -25,6 +25,7 @@ import forge.util.ITriggerEvent;
 
 public interface IGuiGame {
     void setGameView(GameView gameView);
+    GameView getGameView();
     void setOriginalGameController(PlayerView view, IGameController gameController);
     void setGameController(PlayerView player, IGameController gameController);
     void setSpectator(IGameController spectator);
