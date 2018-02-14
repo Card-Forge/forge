@@ -851,6 +851,42 @@ public class SpecialCardAi {
         }
     }
 
+    public static class priceOfProgress {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            int ailands = 0;
+            int opplands = 0;
+            for (Card cardInPlay : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
+                if ((cardInPlay.isLand()) && !cardInPlay.isBasicLand()) {
+                    if (cardInPlay.getController().equals(ai)) {
+                        ailands++;
+                    } else {
+                        opplands++;
+                    }
+                }
+            }
+            // Always if enemy would die and we don't!
+            // TODO : predict actual damage instead of assuming it'll be 2*lands
+            if ((((double) ai.getOpponents().get(0).getLife()) <= opplands * 2) &&
+                    ((((double) ai.getLife()) > ailands * 2))) {
+                return true;
+            }
+
+            // Don't if we'd lose a larger percentage of our remaining life than enemy
+            if ((((double) ai.getLife()) / ailands) >
+                    (((double) ai.getOpponents().get(0).getLife()) / opplands)
+                    ) {
+                return false;
+            }
+            // Don't play in early game - opponent likely still has lands to play
+            if (ai.getGame().getPhaseHandler().getTurn() < 10) {
+                return false;
+            }
+
+            return true;
+        }
+    }
+
+
     // Null Brooch
     public static class NullBrooch {
         public static boolean consider(final Player ai, final SpellAbility sa) {

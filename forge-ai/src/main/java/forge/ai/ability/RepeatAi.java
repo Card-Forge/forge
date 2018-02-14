@@ -25,6 +25,9 @@ public class RepeatAi extends SpellAbilityAi {
             sa.getTargets().add(opp);
         }
         String logic = sa.getParam("AILogic");
+        if ("PriceOfProgress".equals(logic)) {
+            return SpecialCardAi.priceOfProgress.consider(ai, sa);
+        }
         if ("MaxX".equals(logic) || "MaxXAtOppEOT".equals(logic)) {
             if ("MaxXAtOppEOT".equals(logic) && !(ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && ai.getGame().getPhaseHandler().getNextTurn() == ai)) {
                 return false;
