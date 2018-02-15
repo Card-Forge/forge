@@ -85,9 +85,9 @@ public abstract class DamageAiBase extends SpellAbilityAi {
                     // have a 100% chance to go for it, enemy hand will only lose cards over time!
                     // But if 3 or less cards, use normal rules, just in case enemy starts holding card or plays a draw spell or we need mana for other instants.
                     if (phase.isPlayerTurn(enemy)) {
-                        if ((phase.is(PhaseType.DRAW)) &&
-                                (enemy.getCardsIn(ZoneType.Hand).size() > 3)
-                                && dmgByCardsInHand) {
+                        if (dmgByCardsInHand &&
+                                (phase.is(PhaseType.DRAW))
+                                && (enemy.getCardsIn(ZoneType.Hand).size() > 3)) {
                             value = 1;
                         } else if (phase.is(PhaseType.END_OF_TURN)
                                 || ((dmgByCardsInHand && phase.getPhase().isAfter(PhaseType.UPKEEP)))) {
