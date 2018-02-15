@@ -851,7 +851,7 @@ public class SpecialCardAi {
         }
     }
 
-    public static class priceOfProgress {
+    public static class PriceOfProgress {
         public static boolean consider(final Player ai, final SpellAbility sa) {
             int ailands = 0;
             int opplands = 0;

@@ -28,7 +28,7 @@ public class RepeatEachAi extends SpellAbilityAi {
         String logic = sa.getParam("AILogic");
 
         if ("PriceOfProgress".equals(logic)) {
-            return SpecialCardAi.priceOfProgress.consider(aiPlayer, sa);
+            return SpecialCardAi.PriceOfProgress.consider(aiPlayer, sa);
         } else if ("Never".equals(logic)) {
             return false;
         } else if ("CloneMyTokens".equals(logic)) {
