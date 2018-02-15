@@ -182,8 +182,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         ITEM_LEVEL_RESTRICTION("1"),
 
         SIMULATE_AI_VS_AI_RESULTS("0"),
-        DRAFT_ROTATION("0");
-        SIMULATE_AI_VS_AI_RESULTS("0"),
+        DRAFT_ROTATION("0"),
         FOIL_FILTER_DEFAULT("0"),
         RATING_FILTER_DEFAULT("1");
 
