@@ -37,7 +37,7 @@ public class DestroyAi extends SpellAbilityAi {
         boolean havepact = false;
         for (Card cardInPlay : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
             if ((cardInPlay.getController().equals(ai))
-                    && ("Grave_Pact".equals(cardInPlay.getName()))) {
+                    && ("Grave Pact".equals(cardInPlay.getName()))) {
                 havepact = true;
             }
         }
