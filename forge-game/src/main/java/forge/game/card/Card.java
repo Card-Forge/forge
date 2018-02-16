@@ -1925,7 +1925,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                     final Card host = stAb.getHostCard();
                     if (isValid(stAb.getParam("ValidAttacker").split(","), host.getController(), host, null)) {
-                        sb.append(stAb.toString());
+                        String desc = stAb.toString();
+                        desc = TextUtil.fastReplace(desc, "CARDNAME", host.getName());
+                        if (host.getEffectSource() != null) {
+                            desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", host.getEffectSource().getName());
+                        }
+                        sb.append(desc);
                         sb.append("\r\n");
                     }
                 }
