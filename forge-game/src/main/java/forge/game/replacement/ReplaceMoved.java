@@ -36,9 +36,10 @@ public class ReplaceMoved extends ReplacementEffect {
             return false;
         }
         final Player controller = getHostCard().getController();
+        final Card affected = (Card) runParams.get("Affected");
 
         if (hasParam("ValidCard")) {
-            if (!matchesValid(runParams.get("Affected"), getParam("ValidCard").split(","), getHostCard())) {
+            if (!matchesValid(affected, getParam("ValidCard").split(","), getHostCard())) {
                 return false;
             }
         }
@@ -75,9 +76,9 @@ public class ReplaceMoved extends ReplacementEffect {
                 return false;
             }
 
-            if (zt.equals(ZoneType.Battlefield)) {
+            if (zt.equals(ZoneType.Battlefield) && getHostCard().equals(affected)) {
                 // would be an etb replacement effect that enters the battlefield
-                Card lki = CardUtil.getLKICopy((Card) runParams.get("Affected"));
+                Card lki = CardUtil.getLKICopy(affected);
                 lki.setLastKnownZone(lki.getController().getZone(zt));
 
                 CardCollection preList = new CardCollection(lki);
