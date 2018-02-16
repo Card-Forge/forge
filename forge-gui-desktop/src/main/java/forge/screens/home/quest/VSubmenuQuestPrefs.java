@@ -448,6 +448,12 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         pnlShop.add(new FLabel.Builder().text("Item Level Restriction").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
         pnlShop.add(new PrefInput(QPref.ITEM_LEVEL_RESTRICTION, QuestPreferencesErrType.SHOP), fieldConstraints);
 
+        pnlShop.add(new FLabel.Builder().text("Foil filter Always On").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
+        pnlShop.add(new PrefInput(QPref.FOIL_FILTER_DEFAULT, QuestPreferencesErrType.SHOP), fieldConstraints);
+
+        pnlShop.add(new FLabel.Builder().text("Ratings filter Always On").fontAlign(SwingConstants.RIGHT).build(), labelConstraints);
+        pnlShop.add(new PrefInput(QPref.RATING_FILTER_DEFAULT, QuestPreferencesErrType.SHOP), fieldConstraints);
+
     }
 
     private void populateDraftTournaments() {

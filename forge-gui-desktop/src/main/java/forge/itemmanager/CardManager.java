@@ -6,6 +6,7 @@ import forge.item.PaperCard;
 import forge.itemmanager.filters.*;
 import forge.model.FModel;
 import forge.quest.QuestWorld;
+import forge.quest.data.QuestPreferences;
 import forge.screens.home.quest.DialogChooseSets;
 import forge.screens.match.controllers.CDetailPicture;
 
@@ -63,6 +64,14 @@ public class CardManager extends ItemManager<PaperCard> {
         itemManager.addFilter(new CardColorFilter(itemManager));
         itemManager.addFilter(new CardTypeFilter(itemManager));
         itemManager.addFilter(new CardCMCFilter(itemManager));
+        if (FModel.getQuestPreferences()
+                .getPrefInt(QuestPreferences.QPref.FOIL_FILTER_DEFAULT) == 1) {
+            itemManager.addFilter(new CardFoilFilter(itemManager));
+        }
+        if (FModel.getQuestPreferences()
+                .getPrefInt(QuestPreferences.QPref.RATING_FILTER_DEFAULT) == 1) {
+            itemManager.addFilter(new CardRatingFilter(itemManager));
+        }
     }
 
     public static ItemFilter<PaperCard> createSearchFilter(final ItemManager<? super PaperCard> itemManager) {
