@@ -453,6 +453,8 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
 
         if (mode.equals("CantAttack")) {
             return StaticAbilityCantAttackBlock.applyCantAttackAbility(this, card, target);
+        } else if (mode.equals("CantBlockBy") && target instanceof Card) {
+            return StaticAbilityCantAttackBlock.applyCantBlockByAbility(this, card, (Card)target);
         }
 
         return false;

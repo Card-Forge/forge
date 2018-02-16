@@ -955,6 +955,7 @@ public class CombatUtil {
             return false;
         }
 
+        final Game game = attacker.getGame();
         if (!CombatUtil.canBlock(blocker, nextTurn)) {
             return false;
         }
@@ -995,6 +996,16 @@ public class CombatUtil {
             return false;
         }
 
+        // CantBlockBy static abilities
+        for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (stAb.applyAbility("CantBlockBy", attacker, blocker)) {
+                    return false;
+                }
+            }
+        }
+
+        // TODO remove it later to replace it with CantBlockBy above
         for (KeywordInterface inst1 : attacker.getKeywords()) {
             String k = inst1.getOriginal();
             if (k.startsWith("CantBeBlockedBy ")) {
@@ -1021,6 +1032,7 @@ public class CombatUtil {
                 }
             }
         }
+
         for (KeywordInterface inst : blocker.getKeywords()) {
             String keyword = inst.getOriginal();
             if (keyword.startsWith("CantBlockCardUID")) {
