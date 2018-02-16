@@ -55,6 +55,7 @@ import com.google.common.collect.Maps;
 public final class FServerManager {
     private static FServerManager instance = null;
 
+    private byte[] externalAddress = new byte[]{8,8,8,8};
     private boolean isHosting = false;
     private final EventLoopGroup bossGroup = new NioEventLoopGroup(1);
     private final EventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -210,7 +211,7 @@ public final class FServerManager {
     //  https://stackoverflow.com/a/901943
     private String getRoutableAddress(boolean preferIpv4, boolean preferIPv6) throws SocketException, UnknownHostException {
         DatagramSocket s = new DatagramSocket();
-        s.connect(InetAddress.getByAddress(new byte[]{8,8,8,8}), 0);
+        s.connect(InetAddress.getByAddress(this.externalAddress), 0);
         NetworkInterface n = NetworkInterface.getByInetAddress(s.getLocalAddress());
         Enumeration en = n.getInetAddresses();
         while (en.hasMoreElements()) {
