@@ -484,6 +484,10 @@ public class AttachAi extends SpellAbilityAi {
             if (card.hasKeyword("Menace")) {
                 thisprio += 10;
             }
+            // Avoid this for Sleepers Robe?
+            if (card.hasKeyword("Fear")) {
+                thisprio += 15;
+            }
             if (card.hasKeyword("Flying")) {
                 thisprio += 20;
             }
