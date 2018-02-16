@@ -268,6 +268,10 @@ public class GameAction {
                 // if something would only be a land when entering the battlefield and not before
                 // put it into the graveyard instead
                 zoneTo = c.getOwner().getZone(ZoneType.Graveyard);
+                // reset facedown
+                copied.setState(CardStateName.Original, false);
+                copied.setManifested(false);
+                copied.updateStateForView();
             }
         }
 

@@ -167,9 +167,9 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             Card movedCard = null;
             if (sa.hasParam("GainControl")) {
                 c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
-                movedCard = game.getAction().moveToPlay(c, sa.getActivatingPlayer(), null);
+                movedCard = game.getAction().moveToPlay(c, sa.getActivatingPlayer(), sa);
             } else {
-                movedCard = game.getAction().moveTo(destination, c, libraryPos, null);
+                movedCard = game.getAction().moveTo(destination, c, libraryPos, sa);
                 if (destination == ZoneType.Exile && !c.isToken()) {
                     Card host = sa.getOriginalHost();
                     if (host == null) {
