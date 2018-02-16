@@ -194,6 +194,7 @@ public class PlayerPanel extends FPanel {
         txtPlayerName.setEnabled(mayEdit);
         txtPlayerName.setText(type == LobbySlotType.OPEN ? StringUtils.EMPTY : playerName);
         nameRandomiser.setEnabled(mayEdit);
+        teamComboBox.setEnabled(mayEdit);
         deckLabel.setVisible(mayEdit);
         deckBtn.setVisible(mayEdit);
         chkReady.setVisible(type == LobbySlotType.LOCAL || type == LobbySlotType.REMOTE);

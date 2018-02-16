@@ -14,7 +14,7 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     private static final long serialVersionUID = 7386836745378571056L;
 
     private final int id;
-    protected final transient Tracker tracker;
+    protected transient Tracker tracker;
     private final Map<TrackableProperty, Object> props;
     private final Set<TrackableProperty> changedProps;
     private boolean copyingProps;
@@ -30,6 +30,11 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
         return id;
     }
 
+    // needed for multiplayer support
+    public void setTracker(Tracker tracker) {
+        this.tracker = tracker;
+    }
+
     public final Tracker getTracker() {
         return tracker;
     }
@@ -43,6 +48,11 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     public final boolean equals(final Object o) {
         if (o == null) { return false; }
         return o.hashCode() == id && o.getClass().equals(getClass());
+    }
+
+    // don't know if this is really needed, but don't know a better way
+    public <T> T getProps() {
+        return (T)props;
     }
 
     @SuppressWarnings("unchecked")

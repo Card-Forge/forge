@@ -1,5 +1,6 @@
 package forge.net;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.GuiBase;
@@ -75,6 +76,10 @@ public class NetConnectUtil {
             public final void close() {
                 // NO-OP, server can't receive close message
             }
+            @Override
+            public ClientGameLobby getLobby() {
+                return null;
+            }
         });
         chatInterface.setGameClient(new IRemote() {
             @Override
@@ -124,8 +129,12 @@ public class NetConnectUtil {
             }
             @Override
             public final void close() {
-                SOptionPane.showMessageDialog("Connection to the host was interrupted.", "Error", FSkinProp.ICO_WARNING);
+                SOptionPane.showMessageDialog("Your connection to the host (" + url + ") was interrupted.", "Error", FSkinProp.ICO_WARNING);
                 onlineLobby.setClient(null);
+            }
+            @Override
+            public ClientGameLobby getLobby() {
+                return lobby;
             }
         });
         view.setPlayerChangeListener(new IPlayerChangeListener() {
@@ -149,7 +158,12 @@ public class NetConnectUtil {
             catch (Exception ex) {}
         }
 
-        client.connect(hostname, port);
+        try {
+            client.connect(hostname, port);
+        }
+        catch (Exception ex) {
+            return null;
+        }
 
         return new ChatMessage(null, String.format("Connected to %s:%d", hostname, port));
     }

@@ -105,6 +105,10 @@ public class FGameClient implements IToServer {
         return replies.get(event.getId());
     }
 
+    List<ILobbyListener> getLobbyListeners() {
+        return lobbyListeners;
+    }
+
     public void addLobbyListener(final ILobbyListener listener) {
         lobbyListeners.add(listener);
     }
