@@ -1910,6 +1910,28 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
 
+        // CantBlockBy static abilities
+        if (game != null && isCreature() && isInZone(ZoneType.Battlefield)) {
+            for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+                if (equals(ca)) {
+                    continue;
+                }
+                for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                    if (stAb.isSecondary() ||
+                            !stAb.getParam("Mode").equals("CantBlockBy") ||
+                            stAb.isSuppressed() || !stAb.checkConditions() ||
+                            !stAb.hasParam("ValidAttacker")) {
+                        continue;
+                    }
+                    final Card host = stAb.getHostCard();
+                    if (isValid(stAb.getParam("ValidAttacker").split(","), host.getController(), host, null)) {
+                        sb.append(stAb.toString());
+                        sb.append("\r\n");
+                    }
+                }
+            }
+        }
+
         // NOTE:
         if (sb.toString().contains(" (NOTE: ")) {
             sb.insert(sb.indexOf("(NOTE: "), "\r\n");
