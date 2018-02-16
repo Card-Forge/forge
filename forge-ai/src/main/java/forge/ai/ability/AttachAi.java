@@ -470,6 +470,62 @@ public class AttachAi extends SpellAbilityAi {
         return c;
     }
 
+    // Cards that trigger on dealing damage
+    private static Card attachAICuriosityPreference(final SpellAbility sa, final List<Card> list, final boolean mandatory,
+                                                    final Card attachSource) {
+        Card chosen = null;
+        int prio = 0;
+        for (Card card : list) {
+            int thisprio = 0;
+            // Prefer Evasion
+            if (card.hasKeyword("Trample")) {
+                thisprio += 10;
+            }
+            if (card.hasKeyword("Menace")) {
+                thisprio += 10;
+            }
+            if (card.hasKeyword("Flying")) {
+                thisprio += 20;
+            }
+            if (card.hasKeyword("Shadow")) {
+                thisprio += 30;
+            }
+            if (card.hasKeyword("Horsemanship")) {
+                thisprio += 40;
+            }
+            if (card.hasKeyword("Unblockable")) {
+                thisprio += 50;
+            }
+            // Prefer "tap to deal damage"
+            // TODO : Skip this one if triggers on combat damage only?
+            for (SpellAbility sa2 : card.getSpellAbilities()) {
+                if ((sa2.getApi().equals(ApiType.DealDamage))
+                        && (sa2.getTargetRestrictions().canTgtPlayer())
+                        ) {
+                    thisprio += 100;
+                }
+            }
+            // Prefer stronger creatures, avoid if can't attack
+            thisprio += card.getCurrentToughness() * 2;
+            thisprio += card.getCurrentPower();
+            if (card.getCurrentPower() <= 0) {
+                thisprio = -100;
+            }
+            if (card.hasKeyword("Defender")) {
+                thisprio = -100;
+            }
+            if (card.hasKeyword("Indestructible")) {
+                thisprio += 15;
+            }
+            if (thisprio > prio) {
+                prio = thisprio;
+                chosen = card;
+            }
+        }
+
+
+        return chosen;
+    }
     /**
      * Attach ai specific card preference.
      * 
@@ -1158,7 +1214,7 @@ public class AttachAi extends SpellAbilityAi {
     private static Card attachGeneralAI(final Player ai, final SpellAbility sa, final List<Card> list, final boolean mandatory,
             final Card attachSource, final String logic) {
         Player prefPlayer = ai.getWeakestOpponent();
-        if ("Pump".equals(logic) || "Animate".equals(logic)) {
+        if ("Pump".equals(logic) || "Animate".equals(logic) || "Curiosity".equals(logic)) {
             prefPlayer = ai;
         }
         // Some ChangeType cards are beneficial, and PrefPlayer should be
@@ -1192,6 +1248,8 @@ public class AttachAi extends SpellAbilityAi {
             c = attachAICursePreference(sa, prefList, mandatory, attachSource);
         } else if ("Pump".equals(logic)) {
             c = attachAIPumpPreference(ai, sa, prefList, mandatory, attachSource);
+        } else if ("Curiosity".equals(logic)) {
+            c = attachAICuriosityPreference(sa, prefList, mandatory, attachSource);
         } else if ("ChangeType".equals(logic)) {
             c = attachAIChangeTypePreference(sa, prefList, mandatory, attachSource);
         } else if ("KeepTapped".equals(logic)) {
