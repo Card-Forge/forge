@@ -373,7 +373,14 @@ public class PlayerView extends GameEntityView {
     }
 
     public int getMana(final byte color) {
-        Integer count = getMana().get(color);
+        Integer count = null;
+        try {
+            count = getMana().get(color);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            count = null;
+        }
         return count != null ? count.intValue() : 0;
     }
     private Map<Byte, Integer> getMana() {
