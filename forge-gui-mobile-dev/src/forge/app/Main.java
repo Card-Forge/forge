@@ -11,6 +11,7 @@ import forge.util.FileUtil;
 import forge.util.OperatingSystem;
 import forge.util.RestartUtil;
 import forge.util.Utils;
+import org.apache.commons.cli.*;
 
 import java.awt.*;
 import java.io.File;
@@ -18,8 +19,28 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
+        Options options = new Options();
+        options.addOption("h","help", false, "Show help.");
+        options.addOption("f","fullscreen", false,"fullscreen mode");
+        options.addOption("l","landscape", false,"landscape mode");
+        options.addOption("r","resolution", true,"resolution (WxH)");
+
+        CommandLineParser parser = new DefaultParser();
+        HelpFormatter formatter = new HelpFormatter();
+        CommandLine cmd;
+
+        try {
+            cmd = parser.parse(options, args);
+        } catch (ParseException e) {
+            System.out.println(e.getMessage());
+            formatter.printHelp("forge-mobile-dev", options);
+
+            System.exit(1);
+            return;
+        }
+
         // Set this to "true" to make the mobile game port run as a full-screen desktop application
-        boolean desktopMode = false;
+        boolean desktopMode = cmd.hasOption("fullscreen");
         // Set this to the location where you want the mobile game port to look for assets when working as a full-screen desktop application
         // (uncomment the bottom version and comment the top one to load the res folder from the current folder the .jar is in if you would
         // like to make the game load from a desktop game folder configuration).
@@ -34,11 +55,19 @@ public class Main {
 
         // Place the file "switch_orientation.ini" to your assets folder to make the game switch to landscape orientation (unless desktopMode = true)
         String switchOrientationFile = assetsDir + "switch_orientation.ini";
-        boolean landscapeMode = FileUtil.doesFileExist(switchOrientationFile);
+        Boolean landscapeMode = FileUtil.doesFileExist(switchOrientationFile) || cmd.hasOption("landscape");
+        String[] res;
 
         // Width and height for standard smartphone/tablet mode (desktopMode = false)
         int screenWidth = landscapeMode ? (int)(Utils.BASE_HEIGHT * 16 / 9) : (int)Utils.BASE_WIDTH;
         int screenHeight = (int)Utils.BASE_HEIGHT;
+        if (cmd.hasOption("resolution")) {
+            res = cmd.getOptionValue("resolution").split("x");
+            if (res.length >= 2) {
+                screenWidth = Integer.parseInt(res[0].trim());
+                screenHeight = Integer.parseInt(res[1].trim());
+            }
+        }
 
         // Fullscreen width and height for desktop mode (desktopMode = true)
         // Can be specified inside the file fullscreen_resolution.ini to override default (in the format WxH, e.g. 1920x1080)
@@ -46,7 +75,7 @@ public class Main {
         int desktopScreenHeight = LwjglApplicationConfiguration.getDesktopDisplayMode().height;
         boolean fullscreenFlag = true;
         if (FileUtil.doesFileExist(desktopModeAssetsDir + "screen_resolution.ini")) {
-            String[] res = FileUtil.readFileToString(desktopModeAssetsDir + "screen_resolution.ini").split("x");
+            res = FileUtil.readFileToString(desktopModeAssetsDir + "screen_resolution.ini").split("x");
             fullscreenFlag = res.length == 3 ? Integer.parseInt(res[2].trim()) > 0 : true;
             if (res.length >= 2) {
                 desktopScreenWidth = Integer.parseInt(res[0].trim());
