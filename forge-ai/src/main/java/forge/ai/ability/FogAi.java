@@ -3,12 +3,15 @@ package forge.ai.ability;
 
 import forge.ai.*;
 import forge.game.Game;
+import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.card.CardPredicates;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
+
+import java.util.List;
 
 public class FogAi extends SpellAbilityAi {
 
@@ -18,6 +21,25 @@ public class FogAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Game game = ai.getGame();
+        final Card hostCard = sa.getHostCard();
+
+        // Don't cast it, if the effect is already in place
+        if (game.getPhaseHandler().isPreventCombatDamageThisTurn()) {
+            return false;
+        }
+
+        // if card would be destroyed, react and use immediately if it's not own turn
+        if ((AiCardMemory.isRememberedCard(ai, hostCard, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT))
+                && (!game.getStack().isEmpty()) &&
+                (!game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer()))
+                ) {
+            final List<GameObject> objects = ComputerUtil
+                    .predictThreatenedObjects(ai, sa);
+            if (objects.contains(hostCard)) {
+                AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK);
+                return true;
+            }
+        }
 
         // Reserve mana to cast this card if it will be likely needed
         if (((game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) ||
@@ -27,7 +49,7 @@ public class FogAi extends SpellAbilityAi {
                 ) {
             ((PlayerControllerAi) ai.getController()).getAi().reserveManaSources(sa, PhaseType.COMBAT_DECLARE_BLOCKERS, true);
 
-            AiCardMemory.rememberCard(ai, sa.getHostCard(), AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT);
+            AiCardMemory.rememberCard(ai, hostCard, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT);
 
         }
 
@@ -41,11 +63,6 @@ public class FogAi extends SpellAbilityAi {
 
         // Only cast when Stack is empty, so Human uses spells/abilities first
         if (!game.getStack().isEmpty()) {
-            return false;
-        }
-
-        // Don't cast it, if the effect is already in place
-        if (game.getPhaseHandler().isPreventCombatDamageThisTurn()) {
             return false;
         }
 

@@ -45,6 +45,8 @@ import forge.util.Expressions;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
 
+import static forge.ai.AiCardMemory.isMemorySetEmpty;
+
 
 //doesHumanAttackAndWin() uses the global variable AllZone.getComputerPlayer()
 /**
@@ -266,6 +268,14 @@ public class AiAttackController {
         final List<Card> vigilantes = new ArrayList<Card>();
         //check for time walks
         if (ai.getGame().getPhaseHandler().getNextTurn().equals(ai)) {
+            return attackers;
+        }
+        // no need to block is already holding mana to cast fog next turn
+        if (!isMemorySetEmpty(ai, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT)) {
+            // Don't send the card that'll do the fog effect to attack, it's unsafe!
+            if (attackers.contains(AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT)) {
+                attackers.remove(AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT);
+            }
             return attackers;
         }
         List<Card> opponentsAttackers = new ArrayList<Card>(oppList);
