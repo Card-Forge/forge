@@ -506,7 +506,7 @@ public class AttachAi extends SpellAbilityAi {
                 if ((sa2.getApi().equals(ApiType.DealDamage))
                         && (sa2.getTargetRestrictions().canTgtPlayer())
                         ) {
-                    thisprio += 100;
+                    thisprio += 300;
                 }
             }
             // Prefer stronger creatures, avoid if can't attack
