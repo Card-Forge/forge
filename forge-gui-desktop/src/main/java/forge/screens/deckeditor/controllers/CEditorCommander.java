@@ -134,7 +134,7 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
      */
     @Override
     protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
-        CEditorConstructed.buildRemoveContextMenu(cmb, sectionMode);
+        CEditorConstructed.buildRemoveContextMenu(cmb, sectionMode, true);
     }
 
     /*
