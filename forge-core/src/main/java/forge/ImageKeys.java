@@ -119,11 +119,15 @@ public final class ImageKeys {
             if (file != null) { return file; }
         }
 
-        // try without set name
         if (dir.equals(CACHE_TOKEN_PICS_DIR)) {
             int index = filename.lastIndexOf('_');
             if (index != -1) {
                 String setlessFilename = filename.substring(0, index);
+                String setCode = filename.substring(index + 1, filename.length());
+                // try with upper case set
+                file = findFile(dir, setlessFilename + "_" + setCode.toUpperCase());
+                if (file != null) { return file; }
+                // try without set name
                 file = findFile(dir, setlessFilename);
                 if (file != null) { return file; }
             }
