@@ -34,7 +34,7 @@ public class FogAi extends SpellAbilityAi {
                 (!game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer()))
                 ) {
             final List<GameObject> objects = ComputerUtil
-                    .predictThreatenedObjects(ai, sa);
+                    .predictThreatenedObjects(ai, null);
             if (objects.contains(hostCard)) {
                 AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK);
                 return true;
