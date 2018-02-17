@@ -48,6 +48,7 @@ public class AiCardMemory {
     private final Set<Card> memAnimatedThisTurn;
     private final Set<Card> memBouncedThisTurn;
     private final Set<Card> memActivatedThisTurn;
+    private final Set<Card> memChosenFogEffect;
 
     public AiCardMemory() {
         this.memMandatoryAttackers = new HashSet<>();
@@ -58,6 +59,7 @@ public class AiCardMemory {
         this.memBouncedThisTurn = new HashSet<>();
         this.memActivatedThisTurn = new HashSet<>();
         this.memTrickAttackers = new HashSet<>();
+        this.memChosenFogEffect = new HashSet<>();
     }
 
     /**
@@ -74,6 +76,7 @@ public class AiCardMemory {
         ANIMATED_THIS_TURN,
         BOUNCED_THIS_TURN,
         ACTIVATED_THIS_TURN,
+        CHOSEN_FOG_EFFECT,
         //REVEALED_CARDS // stub, not linked to AI code yet
     }
 
@@ -95,6 +98,8 @@ public class AiCardMemory {
                 return memBouncedThisTurn;
             case ACTIVATED_THIS_TURN:
                 return memActivatedThisTurn;
+            case CHOSEN_FOG_EFFECT:
+                return memChosenFogEffect;
             //case REVEALED_CARDS:
             //    return memRevealedCards;
             default:
@@ -271,6 +276,7 @@ public class AiCardMemory {
         clearMemorySet(MemorySet.ANIMATED_THIS_TURN);
         clearMemorySet(MemorySet.BOUNCED_THIS_TURN);
         clearMemorySet(MemorySet.ACTIVATED_THIS_TURN);
+        clearMemorySet(MemorySet.CHOSEN_FOG_EFFECT);
     }
 
     // Static functions to simplify access to AI card memory of a given AI player.

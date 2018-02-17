@@ -1,10 +1,7 @@
 package forge.ai.ability;
 
 
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardPredicates;
@@ -26,8 +23,12 @@ public class FogAi extends SpellAbilityAi {
         if ((ComputerUtil.aiLifeInDanger(ai, false, 0))
                 && ((game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) ||
                 (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)))
+                && (AiCardMemory.isMemorySetEmpty(ai, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT))
                 ) {
             ((PlayerControllerAi) ai.getController()).getAi().reserveManaSources(sa, PhaseType.COMBAT_DECLARE_BLOCKERS);
+
+            AiCardMemory.rememberCard(ai, sa.getHostCard(), AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT);
+
         }
 
         // AI should only activate this during Human's Declare Blockers phase
