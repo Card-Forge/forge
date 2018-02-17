@@ -52,24 +52,50 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
      * @return a {@link java.lang.String} object.
      */
     private static String generatedReflectedMana(final SpellAbility sa, final Collection<String> colors, final Player player) {
+
+
         // Calculate generated mana here for stack description and resolving
         final int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa) : 1;
 
         String baseMana;
 
-        if (colors.size() == 0) {
-            return "0";
-        } else if (colors.size() == 1) {
-            baseMana = MagicColor.toShortString(colors.iterator().next());
-        } else {
-            if (colors.contains("colorless")) {
-                baseMana = MagicColor.toShortString(player.getController().chooseColorAllowColorless("Select Mana to Produce", sa.getHostCard(), ColorSet.fromNames(colors)));
-            } else {
-                baseMana = MagicColor.toShortString(player.getController().chooseColor("Select Mana to Produce", sa, ColorSet.fromNames(colors)));
-            }
+        // Obey already made choice by AI
+        String colorsNeeded = sa.getManaPart().getExpressChoice();
+        String choice = "";
 
-
+        ColorSet colorMenu = null;
+        byte mask = 0;
+        //loop through colors to make menu
+        for (int nChar = 0; nChar < colorsNeeded.length(); nChar++) {
+            mask |= MagicColor.fromName(colorsNeeded.charAt(nChar));
         }
+
+        // AI wanted a "color" but result came up with no colors -> AI wanted Colorless!
+        // Is that a thing? I assume it is?
+        if ((mask == 0) && (!("".equals(sa.getManaPart().getExpressChoice()))) && (colors.contains("colorless"))) {
+            baseMana = MagicColor.toShortString(player.getController().chooseColorAllowColorless("Select Mana to Produce", sa.getHostCard(), ColorSet.fromMask(mask)));
+        } else
+            // Nothing set previously so ask player if needed
+            if (mask == 0) {
+                if (colors.size() == 0) {
+                    return "0";
+                } else if (colors.size() == 1) {
+                    baseMana = MagicColor.toShortString(colors.iterator().next());
+                } else {
+                    if (colors.contains("colorless")) {
+                        baseMana = MagicColor.toShortString(player.getController().chooseColorAllowColorless("Select Mana to Produce", sa.getHostCard(), ColorSet.fromNames(colors)));
+                    } else {
+                        baseMana = MagicColor.toShortString(player.getController().chooseColor("Select Mana to Produce", sa, ColorSet.fromNames(colors)));
+                    }
+            }
+            } else {
+                colorMenu = ColorSet.fromMask(mask);
+                byte val = sa.getActivatingPlayer().getController().chooseColor("Select Mana to Produce", sa, colorMenu);
+                if (0 == val) {
+                    throw new RuntimeException("ManaEffect::resolve() /*reflected mana*/ - " + sa.getActivatingPlayer() + " color mana choice is empty for " + sa.getHostCard().getName());
+                }
+                baseMana = MagicColor.toShortString(val);
+            }
 
         final StringBuilder sb = new StringBuilder();
         if (amount == 0) {
