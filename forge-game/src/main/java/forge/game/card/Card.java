@@ -18,7 +18,6 @@
 package forge.game.card;
 
 import com.esotericsoftware.minlog.Log;
-import com.google.common.base.Function;
 import com.google.common.collect.*;
 import forge.GameCommand;
 import forge.ImageKeys;
@@ -1537,6 +1536,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sbLong.append(keyword).append("\r\n");
             } else if (keyword.startsWith("Strive") || keyword.startsWith("Escalate")
                     || keyword.startsWith("ETBReplacement")
+                    || keyword.startsWith("CantBeBlockedBy ")
                     || keyword.equals("CARDNAME enters the battlefield tapped.")
                     || keyword.startsWith("UpkeepCost")) {
             } else if (keyword.startsWith("Provoke") || keyword.startsWith("Ingest") || keyword.equals("Unleash")
@@ -1595,12 +1595,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || keyword.startsWith("Amplify")  || keyword.startsWith("Ninjutsu")
                     || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")) {
                 // keyword parsing takes care of adding a proper description
-            } else if (keyword.startsWith("CantBeBlockedBy")) {
+            } else if (keyword.startsWith("CantBeBlockedByAmount")) {
                 sbLong.append(getName()).append(" can't be blocked ");
-                if (keyword.startsWith("CantBeBlockedByAmount"))
-                    sbLong.append(getTextForKwCantBeBlockedByAmount(keyword));
-                else
-                    sbLong.append(getTextForKwCantBeBlockedByType(keyword));
+                sbLong.append(getTextForKwCantBeBlockedByAmount(keyword));
             } else if (keyword.startsWith("CantBlock")) {
                 sbLong.append(getName()).append(" can't block ");
                 if (keyword.contains("CardUID")) {
@@ -1655,112 +1652,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         final String byClause = isLT ? "except by " : "by more than ";
         final int cnt = Integer.parseInt(restriction.substring(2));
         return byClause + Lang.nounWithNumeral(cnt, isLT ? "or more creature" : "creature");
-    }
-
-    private static String getTextForKwCantBeBlockedByType(final String keyword) {
-        boolean negative = true;
-        final List<String> subs = Lists.newArrayList(TextUtil.split(keyword.split(" ", 2)[1], ','));
-        final List<List<String>> subsAnd = Lists.newArrayList();
-        final List<String> orClauses = Lists.newArrayList();
-        for (final String expession : subs) {
-            final List<String> parts = Lists.newArrayList(expession.split("[.+]"));
-            for (int p = 0; p < parts.size(); p++) {
-                final String part = parts.get(p);
-                if (part.equalsIgnoreCase("creature")) {
-                    parts.remove(p--);
-                    continue;
-                }
-                // based on suppossition that each expression has at least 1 predicate except 'creature'
-                negative &= part.contains("non") || part.contains("without");
-            }
-            subsAnd.add(parts);
-        }
-
-        final boolean allNegative = negative;
-        final String byClause = allNegative ? "except by " : "by ";
-
-        final Function<Pair<Boolean, String>, String> withToString = new Function<Pair<Boolean, String>, String>() {
-            @Override
-            public String apply(Pair<Boolean, String> inp) {
-                boolean useNon = inp.getKey() == allNegative;
-                return (useNon ? "*NO* " : "") + inp.getRight();
-            }
-        };
-
-        for (final List<String> andOperands : subsAnd) {
-            final List<Pair<Boolean, String>> prependedAdjectives = Lists.newArrayList();
-            final List<Pair<Boolean, String>> postponedAdjectives = Lists.newArrayList();
-            String creatures = null;
-
-            for (String part : andOperands) {
-                boolean positive = true;
-                if (part.startsWith("non")) {
-                    part = part.substring(3);
-                    positive = false;
-                }
-                if (part.startsWith("with")) {
-                    positive = !part.startsWith("without");
-                    postponedAdjectives.add(Pair.of(positive, part.substring(positive ? 4 : 7)));
-                } else if (part.startsWith("powerLEX")) {// Kraken of the Straits
-                    postponedAdjectives.add(Pair.of(true, "power less than the number of islands you control"));
-                } else if (part.startsWith("power")) {
-                    int kwLength = 5;
-                    String opName = Expressions.operatorName(part.substring(kwLength, kwLength + 2));
-                    String operand = part.substring(kwLength + 2);
-                    postponedAdjectives.add(Pair.of(true, "power" + opName + operand));
-                } else if (CardType.isACreatureType(part)) {
-                    if (creatures != null && CardType.isACreatureType(creatures)) { // e.g. Kor Castigator
-                        creatures = StringUtils.capitalize(Lang.getPlural(part)) + creatures;
-                    } else {
-                        creatures = StringUtils.capitalize(Lang.getPlural(part)) + (creatures == null ? "" : " or " + creatures);
-                    }
-                    // Kor Castigator and other similar creatures with composite subtype Eldrazi Scion in their text
-                    creatures = TextUtil.fastReplace(creatures, "Scions or Eldrazis", "Eldrazi Scions");
-                } else {
-                    prependedAdjectives.add(Pair.of(positive, part.toLowerCase()));
-                }
-            }
-
-            StringBuilder sbShort = new StringBuilder();
-            if (allNegative) {
-                boolean isFirst = true;
-                for (Pair<Boolean, String> pre : prependedAdjectives) {
-                    if (isFirst) isFirst = false;
-                    else sbShort.append(" and/or ");
-
-                    boolean useNon = pre.getKey() == allNegative;
-                    if (useNon) sbShort.append("non-");
-                    sbShort.append(pre.getValue()).append(" ").append(creatures == null ? "creatures" : creatures);
-                }
-                if (prependedAdjectives.isEmpty())
-                    sbShort.append(creatures == null ? "creatures" : creatures);
-
-                if (!postponedAdjectives.isEmpty()) {
-                    if (!prependedAdjectives.isEmpty()) {
-                        sbShort.append(" and/or creatures");
-                    }
-
-                    sbShort.append(" with ");
-                    sbShort.append(Lang.joinHomogenous(postponedAdjectives, withToString, allNegative ? "or" : "and"));
-                }
-
-            } else {
-                for (Pair<Boolean, String> pre : prependedAdjectives) {
-                    boolean useNon = pre.getKey() == allNegative;
-                    if (useNon) sbShort.append("non-");
-                    sbShort.append(pre.getValue()).append(" ");
-                }
-                sbShort.append(creatures == null ? "creatures" : creatures);
-
-                if (!postponedAdjectives.isEmpty()) {
-                    sbShort.append(" with ");
-                    sbShort.append(Lang.joinHomogenous(postponedAdjectives, withToString, allNegative ? "or" : "and"));
-                }
-
-            }
-            orClauses.add(sbShort.toString());
-        }
-        return byClause + StringUtils.join(orClauses, " or ") + ".";
     }
 
     // get the text of the abilities of a card
