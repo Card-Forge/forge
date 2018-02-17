@@ -2114,6 +2114,18 @@ public class CardFactoryUtil {
                     sa.setBlessing(true);
                 }
             }
+        } else if (keyword.equals("Battle cry")) {
+            final String trig = "Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Secondary$ True "
+                    + " | TriggerDescription$ " + keyword + " (" + inst.getReminderText() + ")";
+            String pumpStr = "DB$ PumpAll | ValidCards$ Creature.attacking+Other | NumAtt$ 1";
+            SpellAbility sa = AbilityFactory.getAbility(pumpStr, card);
+
+            sa.setIntrinsic(intrinsic);
+
+            final Trigger trigger = TriggerHandler.parseTrigger(trig, card, intrinsic);
+            trigger.setOverridingAbility(sa);
+
+            inst.addTrigger(trigger);
         } else if (keyword.startsWith("Bushido")) {
             final String[] k = keyword.split(" ", 2);
             final String n = k[1];

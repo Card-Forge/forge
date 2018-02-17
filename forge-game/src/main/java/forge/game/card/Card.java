@@ -1546,7 +1546,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || (keyword.startsWith("Split second") && !sb.toString().contains("Split second"))
                     || keyword.equals("Suspend") // for the ones without amounnt
                     || keyword.equals("Hideaway") || keyword.equals("Ascend")
-                    || keyword.equals("Totem armor")
+                    || keyword.equals("Totem armor") || keyword.equals("Battle cry")
                     || keyword.equals("Devoid")){
                 sbLong.append(keyword + " (" + inst.getReminderText() + ")");
             } else if (keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst")
