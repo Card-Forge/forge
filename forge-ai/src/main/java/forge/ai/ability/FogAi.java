@@ -3,6 +3,7 @@ package forge.ai.ability;
 
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCombat;
+import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.card.Card;
@@ -20,6 +21,15 @@ public class FogAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Game game = ai.getGame();
+
+        // Reserve mana to cast this card if it will be likely needed
+        if ((ComputerUtil.aiLifeInDanger(ai, false, 0))
+                && ((game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) ||
+                (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)))
+                ) {
+            ((PlayerControllerAi) ai.getController()).getAi().reserveManaSources(sa, PhaseType.COMBAT_DECLARE_BLOCKERS);
+        }
+
         // AI should only activate this during Human's Declare Blockers phase
         if (game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
             return false;
