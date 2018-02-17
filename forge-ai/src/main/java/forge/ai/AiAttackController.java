@@ -278,6 +278,13 @@ public class AiAttackController {
             }
             return attackers;
         }
+        // no need to block if awakening in play
+        for (Card card : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
+            if ("Awakening".equals(card.getName())) {
+                return attackers;
+            }
+        }
+
         List<Card> opponentsAttackers = new ArrayList<Card>(oppList);
         opponentsAttackers = CardLists.filter(opponentsAttackers, new Predicate<Card>() {
             @Override
