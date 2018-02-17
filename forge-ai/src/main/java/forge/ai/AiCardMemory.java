@@ -44,6 +44,7 @@ public class AiCardMemory {
     private final Set<Card> memTrickAttackers;
     private final Set<Card> memHeldManaSources;
     private final Set<Card> memHeldManaSourcesForCombat;
+    private final Set<Card> memHeldManaSourcesForEnemyCombat;
     private final Set<Card> memAttachedThisTurn;
     private final Set<Card> memAnimatedThisTurn;
     private final Set<Card> memBouncedThisTurn;
@@ -54,6 +55,7 @@ public class AiCardMemory {
         this.memMandatoryAttackers = new HashSet<>();
         this.memHeldManaSources = new HashSet<>();
         this.memHeldManaSourcesForCombat = new HashSet<>();
+        this.memHeldManaSourcesForEnemyCombat = new HashSet<>();
         this.memAttachedThisTurn = new HashSet<>();
         this.memAnimatedThisTurn = new HashSet<>();
         this.memBouncedThisTurn = new HashSet<>();
@@ -72,6 +74,7 @@ public class AiCardMemory {
         TRICK_ATTACKERS,
         HELD_MANA_SOURCES_FOR_MAIN2,
         HELD_MANA_SOURCES_FOR_DECLBLK,
+        HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK,
         ATTACHED_THIS_TURN,
         ANIMATED_THIS_TURN,
         BOUNCED_THIS_TURN,
@@ -90,6 +93,8 @@ public class AiCardMemory {
                 return memHeldManaSources;
             case HELD_MANA_SOURCES_FOR_DECLBLK:
                 return memHeldManaSourcesForCombat;
+            case HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK:
+                return memHeldManaSourcesForEnemyCombat;
             case ATTACHED_THIS_TURN:
                 return memAttachedThisTurn;
             case ANIMATED_THIS_TURN:
@@ -272,6 +277,7 @@ public class AiCardMemory {
         clearMemorySet(MemorySet.TRICK_ATTACKERS);
         clearMemorySet(MemorySet.HELD_MANA_SOURCES_FOR_MAIN2);
         clearMemorySet(MemorySet.HELD_MANA_SOURCES_FOR_DECLBLK);
+        clearMemorySet(MemorySet.HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK);
         clearMemorySet(MemorySet.ATTACHED_THIS_TURN);
         clearMemorySet(MemorySet.ANIMATED_THIS_TURN);
         clearMemorySet(MemorySet.BOUNCED_THIS_TURN);
