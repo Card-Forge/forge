@@ -2,6 +2,6 @@ Name:Prowler's Helm
 ManaCost:2
 Types:Artifact Equipment
 K:Equip 2
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddHiddenKeyword$ CantBeBlockedBy Creature.nonWall | Description$ Equipped creature can't be blocked except by Walls.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.EquippedBy | ValidBlocker$ Creature.nonWall | Description$ Equipped creature can't be blocked except by Walls.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prowlers_helm.jpg
 Oracle:Equipped creature can't be blocked except by Walls.\nEquip {2}

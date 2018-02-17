@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CantBeBlockedBy Spirit | Description$ Enchanted creature can't be blocked by Spirits.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.EnchantedBy | ValidBlocker$ Creature.Spirit | Description$ Enchanted creature can't be blocked by Spirits.
 A:AB$ ChangeZone | Cost$ 1 U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:RemRandomDeck:True
 SVar:NonStackingAttachEffect:True

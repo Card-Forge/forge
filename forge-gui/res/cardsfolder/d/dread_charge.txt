@@ -1,7 +1,8 @@
 Name:Dread Charge
 ManaCost:3 B
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 3 B | ValidCards$ Creature.Black+YouCtrl | KW$ HIDDEN CantBeBlockedBy Creature.nonBlack | SpellDescription$ Black creatures you control can't be blocked this turn except by black creatures.
+A:SP$ Effect | Cost$ 3 B | Name$ Dread Charge Effect | StaticAbilities$ KWPump | SpellDescription$ Black creatures you control can't be blocked this turn except by black creatures.
+SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.Black+YouCtrl | ValidBlocker$ Creature.nonBlack | EffectZone$ Command | Description$ Black creatures you control can't be blocked this turn except by black creatures.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_charge.jpg
 Oracle:Black creatures you control can't be blocked this turn except by black creatures.

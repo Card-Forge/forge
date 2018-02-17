@@ -3,7 +3,7 @@ ManaCost:W
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddHiddenKeyword$ CantBeBlockedBy Creature.powerGE3 | Description$ Enchanted creature can't be blocked by creatures with power 3 or greater.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.EnchantedBy | ValidBlocker$ Creature.powerGE3 | Description$ Enchanted creature can't be blocked by creatures with power 3 or greater.
 T:Mode$ Attached | ValidSource$ Card.Self | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigImprint | Static$ True
 SVar:TrigImprint:DB$ Cleanup | ClearImprinted$ True | SubAbility$ ImprintNew
 SVar:ImprintNew:DB$ Pump | ImprintCards$ Enchanted
