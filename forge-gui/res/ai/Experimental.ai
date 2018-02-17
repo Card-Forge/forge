@@ -200,4 +200,11 @@ EXPLORE_NUM_LANDS_TO_STILL_NEED_MORE=3
 # -- features is over. These toggles will be removed later, or may be reintroduced under a --
 # -- different name if necessary --
 
+# If AI would drop to this amount of life in combat, it'll try to defend itself more actively
+AI_IN_DANGER_THRESHOLD=3
+# If set to the same value, AI will be predictable. If set to higher, AI will randomly pick a value between the two
+# for each evaluation, introducing some unpredictability.
+AI_IN_DANGER_MAX_THRESHOLD=12
+
+
 # <-- there are no options here at the moment -->

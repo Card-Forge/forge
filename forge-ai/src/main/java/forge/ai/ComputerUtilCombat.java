@@ -19,6 +19,7 @@ package forge.ai;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -433,7 +434,18 @@ public class ComputerUtilCombat {
             }
         }
 
-        if (ComputerUtilCombat.lifeThatWouldRemain(ai, combat) - payment < Math.min(4, ai.getLife())
+        int threshold = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD));
+        int maxTreshold = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_MAX_THRESHOLD)) - threshold;
+        Random rand = new Random();
+        int chance = rand.nextInt(80) + 5;
+        while (maxTreshold > 0) {
+            if (rand.nextInt(100) < chance) {
+                threshold++;
+            }
+            maxTreshold--;
+        }
+
+        if (ComputerUtilCombat.lifeThatWouldRemain(ai, combat) - payment < Math.min(threshold, ai.getLife())
                 && !ai.cantLoseForZeroOrLessLife()) {
             return true;
         }
