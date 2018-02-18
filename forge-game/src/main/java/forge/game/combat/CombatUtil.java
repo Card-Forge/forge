@@ -955,6 +955,7 @@ public class CombatUtil {
             return false;
         }
 
+        final Game game = attacker.getGame();
         if (!CombatUtil.canBlock(blocker, nextTurn)) {
             return false;
         }
@@ -995,32 +996,15 @@ public class CombatUtil {
             return false;
         }
 
-        for (KeywordInterface inst1 : attacker.getKeywords()) {
-            String k = inst1.getOriginal();
-            if (k.startsWith("CantBeBlockedBy ")) {
-                final String[] n = k.split(" ", 2);
-                final String[] restrictions = n[1].split(",");
-                if (blocker.isValid(restrictions, attacker.getController(), attacker, null)) {
-                    boolean stillblock = false;
-                    //Dragon Hunter check
-                    if (n[1].contains("withoutReach") && blocker.hasStartOfKeyword("IfReach")) {
-                        for (KeywordInterface inst2 : blocker.getKeywords()) {
-                            String k2 = inst2.getOriginal();
-                            if (k2.startsWith("IfReach")) {
-                                String n2[] = k2.split(":");
-                                if (attacker.getType().hasCreatureType(n2[1])) {
-                                    stillblock = true;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    if (!stillblock) {
-                        return false;
-                    }
+        // CantBlockBy static abilities
+        for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (stAb.applyAbility("CantBlockBy", attacker, blocker)) {
+                    return false;
                 }
             }
         }
+
         for (KeywordInterface inst : blocker.getKeywords()) {
             String keyword = inst.getOriginal();
             if (keyword.startsWith("CantBlockCardUID")) {

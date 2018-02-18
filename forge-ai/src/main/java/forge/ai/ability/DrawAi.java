@@ -132,7 +132,7 @@ public class DrawAi extends SpellAbilityAi {
             // LifeLessThan logic presupposes activation as soon as possible in an
             // attempt to save the AI from dying
             return true;
-        } else if (logic.equals("AtEndOfOppTurn")) {
+        } else if (logic.equals("AlwaysAtOppEOT")) {
             return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai);
         }
 

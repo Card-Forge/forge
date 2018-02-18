@@ -30,12 +30,12 @@ public enum CSubmenuQuestDecks implements ICDoc {
         public void run() {
             final DeckProxy deck = VSubmenuQuestDecks.SINGLETON_INSTANCE.getLstDecks().getSelectedItem();
             if (deck != null) {
-                FModel.getQuestPreferences().setPref(QPref.CURRENT_DECK, deck.toString());
+                FModel.getQuest().setCurrentDeck(deck.toString());
             }
             else {
-                FModel.getQuestPreferences().setPref(QPref.CURRENT_DECK, QPref.CURRENT_DECK.getDefault());
+                FModel.getQuest().setCurrentDeck(QPref.CURRENT_DECK.getDefault());
             }
-            FModel.getQuestPreferences().save();
+            FModel.getQuest().save();
         }
     };
 
@@ -84,12 +84,9 @@ public enum CSubmenuQuestDecks implements ICDoc {
         view.getLstDecks().setup(ItemManagerConfig.QUEST_DECKS);
 
         // Look through list for preferred deck from prefs
-        final DeckProxy deck = hasQuest ? view.getLstDecks().stringToItem(FModel.getQuestPreferences().getPref(QPref.CURRENT_DECK)) : null;
+        final DeckProxy deck = hasQuest ? view.getLstDecks().stringToItem(FModel.getQuest().getCurrentDeck()) : null;
         if (deck != null) {
             view.getLstDecks().setSelectedItem(deck);
-        }
-        else {
-            view.getLstDecks().setSelectedIndex(0);
         }
 
         view.getLstDecks().setSelectCommand(cmdDeckSelect);

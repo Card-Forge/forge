@@ -2,5 +2,6 @@ Name:Goblin Trenches
 ManaCost:1 R W
 Types:Enchantment
 A:AB$ Token | Cost$ 2 Sac<1/Land> | TokenAmount$ 2 | TokenName$ Goblin Soldier | TokenTypes$ Creature,Goblin,Soldier | TokenOwner$ You | TokenColors$ Red,White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Create two 1/1 red and white Goblin Soldier creature tokens.
+SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_trenches.jpg
 Oracle:{2}, Sacrifice a land: Create two 1/1 red and white Goblin Soldier creature tokens.

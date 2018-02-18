@@ -4,5 +4,6 @@ Types:Enchantment
 K:Cumulative upkeep:PayLife<2>:Pay 2 life.
 S:Mode$ PreventDamage | Target$ Creature.YouCtrl | Amount$ All | Description$ Prevent all damage that would be dealt to creatures you control.
 SVar:RemAIDeck:True
+SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inner_sanctum.jpg
 Oracle:Cumulative upkeep—Pay 2 life. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nPrevent all damage that would be dealt to creatures you control.

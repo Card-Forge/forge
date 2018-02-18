@@ -27,6 +27,7 @@ import forge.gui.GuiUtils;
 import forge.gui.framework.*;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
+import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.SItemManagerUtil;
 import forge.menus.IMenuProvider;
@@ -470,6 +471,65 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                     getItemManager().focusSearch();
                 }
             });
+        }
+
+        /**
+         * Add context menu entries for foiling cards
+         */
+        public void addMakeFoils() {
+            final int max = getMaxMoveQuantity();
+            if (max == 0) { return; }
+
+            addMakeFoil(1);
+            if (max == 1) { return; }
+
+            int qty = FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT);
+            if (qty > max) {
+                qty = max;
+            }
+
+            addMakeFoil(qty);
+            if (max == 2) { return; }
+
+            addMakeFoil(-max);
+        }
+
+        /**
+         * Adds the individual context menu entry for foiling the requested number of cards
+         *
+         * @param qty           a negative quantity will prompt the user for a number
+         */
+        private void addMakeFoil(int qty) {
+            final int shortcutModifiers = 0;
+            String label = "Foil " + SItemManagerUtil.getItemDisplayString(getItemManager().getSelectedItems(), qty, false);
+
+            GuiUtils.addMenuItem(menu, label, null, new Runnable() {
+                        @Override public void run() {
+                            Integer quantity = qty;
+                            if (quantity < 0) {
+                                quantity = GuiChoose.getInteger("Choose a value for X", 1, -quantity, 20);
+                                if (quantity == null) { return; }
+                            }
+                            // remove *quantity* instances of existing card
+                            CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, quantity);
+                            // get the currently selected card from the editor
+                            CardManager cardManager = (CardManager) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getCatalogManager();
+                            PaperCard existingCard = cardManager.getSelectedItem();
+                            // make a foiled version based on the original
+                            PaperCard foiledCard = new PaperCard(
+                                    existingCard.getRules(),
+                                    existingCard.getEdition(),
+                                    existingCard.getRarity(),
+                                    existingCard.getArtIndex(),
+                                    true);
+                            // bounce the new card through the inventory and *quantity* into the deck
+                            cardManager.addItem(foiledCard, 1);
+                            cardManager.setSelectedItem(foiledCard);
+                            CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(false, quantity);
+                            // clean up the inventory
+                            cardManager.removeItem(foiledCard, 1);
+                        }
+                    }, true, shortcutModifiers == 0);
         }
 
         private void addItem(final String verb, final String dest, final boolean toAlternate, final int qty, final int shortcutModifiers) {

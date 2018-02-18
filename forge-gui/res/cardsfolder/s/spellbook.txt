@@ -3,5 +3,6 @@ ManaCost:0
 Types:Artifact
 S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 SVar:RemRandomDeck:True
+SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spellbook.jpg
 Oracle:You have no maximum hand size.

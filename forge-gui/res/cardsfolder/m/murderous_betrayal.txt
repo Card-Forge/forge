@@ -4,5 +4,6 @@ Types:Enchantment
 A:AB$ Destroy | Cost$ B B PayLife<X> | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target non black creature | NoRegen$ True | CostDesc$ {B}{B}, Pay half your life, rounded up: | References$ X | SpellDescription$ Destroy target nonblack creature. It can't be regenerated.
 SVar:X:Count$YourLifeTotal/HalfUp
 SVar:RemAIDeck:True
+SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murderous_betrayal.jpg
 Oracle:{B}{B}, Pay half your life, rounded up: Destroy target nonblack creature. It can't be regenerated.

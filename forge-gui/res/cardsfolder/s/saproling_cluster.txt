@@ -3,6 +3,7 @@ ManaCost:1 G
 Types:Enchantment
 A:AB$ Token | Cost$ 1 Discard<1/Card> | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | AnyPlayer$ True | SpellDescription$ Create a 1/1 green Saproling creature token. Any player may activate this ability.
 SVar:RemAIDeck:True
+SVar:NonStackingEffect:True
 DeckHas:Ability$Discard & Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/saproling_cluster.jpg
 Oracle:{1}, Discard a card: Create a 1/1 green Saproling creature token. Any player may activate this ability.

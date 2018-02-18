@@ -224,7 +224,7 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
      */
     @Override
     protected void buildRemoveContextMenu(final EditorContextMenuBuilder cmb) {
-        CEditorConstructed.buildRemoveContextMenu(cmb, sectionMode);
+        CEditorConstructed.buildRemoveContextMenu(cmb, sectionMode, false);
         AddRatingItem(cmb, 1);
         AddRatingItem(cmb, 2);
         AddRatingItem(cmb, 3);

@@ -62,7 +62,7 @@ public class SEditorIO {
             VAllDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(deckStr);
             // Set current quest deck to selected
             if (Singletons.getControl().getCurrentScreen() == FScreen.DECK_EDITOR_QUEST) {
-                FModel.getQuestPreferences().setPref(QPref.CURRENT_DECK, name);
+                FModel.getQuest().setCurrentDeck(name);
             }
         }
 
