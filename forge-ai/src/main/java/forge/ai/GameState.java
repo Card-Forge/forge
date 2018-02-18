@@ -398,6 +398,8 @@ public abstract class GameState {
 
         if (categoryName.equals("turn")) {
             turn = Integer.parseInt(categoryValue);
+        } else {
+            turn = 1;
         }
         if (categoryName.endsWith("life")) {
             if (isHuman)
