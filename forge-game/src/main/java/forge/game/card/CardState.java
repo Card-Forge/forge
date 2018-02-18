@@ -455,18 +455,23 @@ public class CardState extends GameObject {
 
         triggers.clear();
         for (Trigger tr : source.triggers) {
-            triggers.add(tr.copy(card, lki));
+            if (tr.isIntrinsic()) {
+                triggers.add(tr.copy(card, lki));
+            }
         }
 
         replacementEffects.clear();
         for (ReplacementEffect re : source.replacementEffects) {
-            replacementEffects.add(re.copy(card, lki));
+            if (re.isIntrinsic()) {
+                replacementEffects.add(re.copy(card, lki));
+            }
         }
 
         staticAbilities.clear();
         for (StaticAbility sa : source.staticAbilities) {
-            StaticAbility saCopy = new StaticAbility(sa, this.card);
-            staticAbilities.add(saCopy);
+            if (sa.isIntrinsic()) {
+                staticAbilities.add(new StaticAbility(sa, this.card));
+            }
         }
     }
 

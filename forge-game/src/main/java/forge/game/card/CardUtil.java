@@ -35,10 +35,12 @@ import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
@@ -220,9 +222,22 @@ public final class CardUtil {
 
         newCopy.setType(new CardType(in.getType()));
         newCopy.setToken(in.isToken());
-        newCopy.setTriggers(in.getTriggers(), false);
+
+        // extra copy non Intrinsic traits
         for (SpellAbility sa : in.getSpellAbilities()) {
-            newCopy.addSpellAbility(sa.copy(newCopy, true));
+            if (!sa.isIntrinsic()) {
+                newCopy.addSpellAbility(sa.copy(newCopy, true));
+            }
+        }
+        for (Trigger tr : in.getTriggers()) {
+            if (!tr.isIntrinsic()) {
+                newCopy.addTrigger(tr.copy(newCopy, true));
+            }
+        }
+        for (ReplacementEffect re : in.getReplacementEffects()) {
+            if (!re.isIntrinsic()) {
+                newCopy.addReplacementEffect(re.copy(newCopy, true));
+            }
         }
 
         // lock in the current P/T without bonus from counters
