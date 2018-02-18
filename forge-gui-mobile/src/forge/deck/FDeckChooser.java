@@ -453,6 +453,8 @@ public class FDeckChooser extends FScreen {
             case TinyLeaders:
                 cmbDeckTypes.addItem(DeckType.CUSTOM_DECK);
                 cmbDeckTypes.addItem(DeckType.RANDOM_DECK);
+                cmbDeckTypes.addItem(DeckType.RANDOM_CARDGEN_COMMANDER_DECK);
+                cmbDeckTypes.addItem(DeckType.RANDOM_COMMANDER_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_DECK);
                 break;
             case DeckManager:
@@ -574,6 +576,14 @@ public class FDeckChooser extends FScreen {
         case TINY_LEADERS_DECKS:
             pool = DeckProxy.getAllTinyLeadersDecks();
             config = ItemManagerConfig.COMMANDER_DECKS;
+            break;
+        case RANDOM_COMMANDER_DECK:
+            pool = CommanderDeckGenerator.getCommanderDecks(lstDecks.getGameType().getDeckFormat(),isAi, false);
+            config = ItemManagerConfig.STRING_ONLY;
+            break;
+        case RANDOM_CARDGEN_COMMANDER_DECK:
+            pool = CommanderDeckGenerator.getCommanderDecks(lstDecks.getGameType().getDeckFormat(),isAi, true);
+            config = ItemManagerConfig.STRING_ONLY;
             break;
         case SCHEME_DECKS:
             pool = DeckProxy.getAllSchemeDecks();
