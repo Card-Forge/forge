@@ -209,9 +209,8 @@ public class CounterAi extends SpellAbilityAi {
         if (sa.isAbility()
                 && (!sa.getPayCosts().hasSpecificCostType(CostDiscard.class))
                 && (!sa.getPayCosts().hasSpecificCostType(CostSacrifice.class))
-                && (!sa.getPayCosts().hasSpecificCostType(CostExile.class))
-            // maybe also disallow CostPayLife?
-                ) {
+                && (!sa.getPayCosts().hasSpecificCostType(CostExile.class))) {
+            // TODO: maybe also disallow CostPayLife?
             dontCounter = false;
         }
 

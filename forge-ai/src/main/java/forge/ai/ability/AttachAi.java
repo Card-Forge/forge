@@ -504,8 +504,7 @@ public class AttachAi extends SpellAbilityAi {
             // TODO : Skip this one if triggers on combat damage only?
             for (SpellAbility sa2 : card.getSpellAbilities()) {
                 if ((sa2.getApi().equals(ApiType.DealDamage))
-                        && (sa2.getTargetRestrictions().canTgtPlayer())
-                        ) {
+                        && (sa2.getTargetRestrictions().canTgtPlayer())) {
                     thisprio += 300;
                 }
             }
