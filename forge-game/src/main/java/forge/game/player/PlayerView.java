@@ -3,7 +3,6 @@ package forge.game.player;
 import java.util.*;
 import java.util.Map.Entry;
 
-import com.google.common.base.MoreObjects;
 import forge.card.CardType;
 import forge.card.mana.ManaAtom;
 import forge.game.card.CounterType;
@@ -92,7 +91,7 @@ public class PlayerView extends GameEntityView {
     }
 
     public FCollectionView<PlayerView> getOpponents() {
-        return MoreObjects.firstNonNull(this.<FCollectionView<PlayerView>>get(TrackableProperty.Opponents), new FCollection<PlayerView>());
+        return Objects.firstNonNull(this.<FCollectionView<PlayerView>>get(TrackableProperty.Opponents), new FCollection<PlayerView>());
     }
     void updateOpponents(Player p) {
         set(TrackableProperty.Opponents, PlayerView.getCollection(p.getOpponents()));
