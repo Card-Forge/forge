@@ -728,10 +728,12 @@ public class AiController {
                 int neededMana = 0;
                 for (SpellAbility sa2 : GameActionUtil.getOptionalCosts(sa)) {
                     if (sa2.isOptionalCostPaid(OptionalCost.Buyback)) {
-                        neededMana = sa2.getPayCosts().getCostMana().getMana().getCMC();
-                        if (sa2.getPayCosts().hasSpecificCostType(CostPayLife.class)
-                                || (sa2.getPayCosts().hasSpecificCostType(CostDiscard.class)) ||
-                                (sa2.getPayCosts().hasSpecificCostType(CostSacrifice.class))
+                        Cost sac = sa2.getPayCosts();
+                        CostAdjustment.adjust(sac, sa2); // Does not recognize Memory Crystal anyway???
+                        neededMana = sac.getCostMana().getMana().getCMC();
+                        if (sac.hasSpecificCostType(CostPayLife.class)
+                                || (sac.hasSpecificCostType(CostDiscard.class)) ||
+                                (sac.hasSpecificCostType(CostSacrifice.class))
                                 ) {
                             neededMana = 999;
                         }
