@@ -499,7 +499,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
          *
          * @param qty           a negative quantity will prompt the user for a number
          */
-        private void addMakeFoil(int qty) {
+        private void addMakeFoil(final int qty) {
             final int shortcutModifiers = 0;
             String label = "Foil " + SItemManagerUtil.getItemDisplayString(getItemManager().getSelectedItems(), qty, false);
 
