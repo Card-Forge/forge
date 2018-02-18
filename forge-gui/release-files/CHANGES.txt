@@ -13,6 +13,9 @@ Support for several boxed sets has been added, namely, Anthologies (ATH), Battle
 - MTGO Sets -
 Five new sets are available which are indexed by Scryfall and which are MTGO exclusive are now supported in Forge: Commander Theme Decks (TD0), Magic Online Deck Series (TD1), Duel Decks: Mirrodin Pure vs. New Phyrexia (TD2), Legendary Cube (PZ1), and Treasure Chests (PZ2)
 
+- Option to foil cards in deck editor (Desktop Forge) -
+A new set of context menu commands has been added to the deck editor which allows to foil the cards in deck ("Foil card", "Foil 4 copies of card", "Foil X copies of card"). This option is currently only available in desktop Forge.
+
 - Download Pictures -
 Improvements to Download Pictures and Auto fetcher
 
