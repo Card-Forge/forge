@@ -139,6 +139,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int teamNumber = -1;
     private Card activeScheme = null;
     private List<Card> commanders = Lists.newArrayList();
+    private Map<Card, Integer> commanderCast = Maps.newHashMap();
     private final Game game;
     private boolean triedToDrawFromEmptyLibrary = false;
     private boolean isPlayingExtraTrun = false;
@@ -2552,6 +2553,15 @@ public class Player extends GameEntity implements Comparable<Player> {
         return damage == null ? 0 : damage.intValue();
     }
 
+    public int getCommanderCast(Card commander) {
+        Integer cast = commanderCast.get(commander);
+        return cast == null ? 0 : cast.intValue();
+    }
+
+    public void incCommanderCast(Card commander) {
+        commanderCast.put(commander, getCommanderCast(commander) + 1);
+    }
+
     public boolean isPlayingExtraTurn() {
         return isPlayingExtraTrun;
     }
@@ -2639,11 +2649,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         DetachedCardEffect eff = new DetachedCardEffect(commander, name);
 
         eff.setSVar("CommanderMoveReplacement", "DB$ ChangeZone | Origin$ Battlefield,Graveyard,Exile,Library,Hand | Destination$ Command | Defined$ ReplacedCard");
-        eff.setSVar("DBCommanderIncCast","DB$ StoreSVar | References$ CommanderCostRaise | SVar$ CommanderCostRaise | Type$ CountSVar | Expression$ CommanderCostRaise/Plus.2");
-        eff.setSVar("CommanderCostRaise","Number$0");
-
-        Trigger t = TriggerHandler.parseTrigger("Mode$ SpellCast | Static$ True | ValidCard$ Card.YouOwn+EffectSource+wasCastFromCommand | References$ CommanderCostRaise | Execute$ DBCommanderIncCast", eff, true);
-        eff.addTrigger(t);
 
         String moved = "Event$ Moved | ValidCard$ Card.EffectSource+YouOwn | Secondary$ True | Optional$ True | OptionalDecider$ You | ReplaceWith$ CommanderMoveReplacement "; 
         if (game.getRules().hasAppliedVariant(GameType.TinyLeaders)) {
@@ -2658,7 +2663,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             mayBePlayedAbility += " | MayPlayIgnoreColor$ True";
         }
         eff.addStaticAbility(mayBePlayedAbility);
-        eff.addStaticAbility("Mode$ RaiseCost | EffectZone$ Command | References$ CommanderCostRaise | Amount$ CommanderCostRaise | Type$ Spell | ValidCard$ Card.YouOwn+EffectSource+wasCastFromCommand | AffectedZone$ Command,Stack");
         return eff;
     }
 

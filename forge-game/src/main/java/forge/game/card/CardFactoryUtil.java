@@ -817,14 +817,8 @@ public class CardFactoryUtil {
         }
 
         if (l[0].startsWith("CommanderCastFromCommandZone")) {
-            // Read SVar CommanderCostRaise from Commander Effect
-            Card commeff = CardLists.filter(cc.getCardsIn(ZoneType.Command), new Predicate<Card>() {
-                @Override
-                public boolean apply(Card input) {
-                    return c.equals(input.getEffectSource()) && input.getName().endsWith("Commander Effect");
-                }
-            }).get(0);
-            return doXMath(xCount(commeff, commeff.getSVar("CommanderCostRaise")), "DivideEvenlyDown.2", c);
+            // only used by Opal Palace, and it does add the trigger to the card
+            return doXMath(cc.getCommanderCast(c), m, c);
         }
         
         if (l[0].startsWith("MostProminentCreatureType")) {

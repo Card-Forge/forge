@@ -33,7 +33,10 @@ import com.google.common.collect.Maps;
 
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.game.ability.AbilityFactory;
 import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
+import forge.game.card.CounterType;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaPool;
 import forge.game.player.Player;
@@ -245,25 +248,22 @@ public class AbilityManaPart implements java.io.Serializable {
         String[] parse = this.addsCounters.split("_");
         // Convert random SVars if there are other cards with this effect
         if (c.isValid(parse[0], c.getController(), c, null)) {
-            String abStr = "DB$ PutCounter | Defined$ Self | CounterType$ " + parse[1]
-                    + " | ETB$ True | CounterNum$ " + parse[2] + " | SubAbility$ ManaDBETBCounters";
-            String dbStr = "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield"
-                    + " | Defined$ ReplacedCard";
-            try {
-                Integer.parseInt(parse[2]);
-            } catch (NumberFormatException ignored) {
-                dbStr += " | References$ " + parse[2];
-                c.setSVar(parse[2], sourceCard.getSVar(parse[2]));
+            String abStr = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ " + parse[1]
+                    + " | ETB$ True | CounterNum$ " + parse[2];
+
+            SpellAbility sa = AbilityFactory.getAbility(abStr, c);
+            if (!StringUtils.isNumeric(parse[2])) {
+                sa.setSVar(parse[2], sourceCard.getSVar(parse[2]));
             }
-            c.setSVar("ManaETBCounters", abStr);
-            c.setSVar("ManaDBETBCounters", dbStr);
+            CardFactoryUtil.setupETBReplacementAbility(sa);
 
             String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield "
-                    + "| ReplaceWith$ ManaETBCounters | Secondary$ True | Description$ CARDNAME"
-                    + " enters the battlefield with " + parse[1] + " counters.";
+                    + " | Secondary$ True | Description$ CARDNAME"
+                    + " enters the battlefield with " + CounterType.valueOf(parse[1]).getName() + " counters.";
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, c, false);
             re.setLayer(ReplacementLayer.Other);
+            re.setOverridingAbility(sa);
 
             c.addReplacementEffect(re);
         }

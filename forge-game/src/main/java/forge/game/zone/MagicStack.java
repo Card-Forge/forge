@@ -364,6 +364,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
             // Run SpellCast triggers
             if (sp.isSpell()) {
+                if (source.isCommander()) {
+                    activator.incCommanderCast(source);
+                }
                 game.getTriggerHandler().runTrigger(TriggerType.SpellCast, runParams, true);
                 executeCastCommand(si.getSpellAbility(true).getHostCard());
             }
