@@ -510,10 +510,8 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                                 quantity = GuiChoose.getInteger("Choose a value for X", 1, -quantity, 20);
                                 if (quantity == null) { return; }
                             }
-                            // remove *quantity* instances of existing card
-                            CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, quantity);
                             // get the currently selected card from the editor
-                            CardManager cardManager = (CardManager) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getCatalogManager();
+                            CardManager cardManager = (CardManager) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckManager();
                             PaperCard existingCard = cardManager.getSelectedItem();
                             // make a foiled version based on the original
                             PaperCard foiledCard = new PaperCard(
@@ -522,12 +520,11 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                                     existingCard.getRarity(),
                                     existingCard.getArtIndex(),
                                     true);
-                            // bounce the new card through the inventory and *quantity* into the deck
-                            cardManager.addItem(foiledCard, 1);
+                            // remove *quantity* instances of existing card
+                            CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, quantity);
+                            // add *quantity* into the deck and set them as selected
+                            cardManager.addItem(foiledCard, quantity);
                             cardManager.setSelectedItem(foiledCard);
-                            CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(false, quantity);
-                            // clean up the inventory
-                            cardManager.removeItem(foiledCard, 1);
                         }
                     }, true, shortcutModifiers == 0);
         }
