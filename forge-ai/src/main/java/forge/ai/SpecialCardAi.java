@@ -864,17 +864,15 @@ public class SpecialCardAi {
                         opplands++;
                     }
                 }
-                    // We want to empty hand as much as possible for this
-                    if (("Ensnaring Bridge".equals(cardInPlay.getName())) &&
-                            (cardInPlay.getController().equals(ai))) {
+
+                // Do we have a card in play that makes us want to empty out hand?
+                if ((cardInPlay.hasSVar("PreferredHandSize")) &&
+                        (cardInPlay.getController().equals(ai))) {
+                    if (ai.getGame().getCardsIn(ZoneType.Hand).size() > Integer.parseInt(cardInPlay.getSVar("PreferredHandSize"))) {
                         hasbridge = true;
                     }
-                    // We want to go down to 1 card for this
-                    if (("Cursed Scroll".equals(cardInPlay.getName())) &&
-                            (cardInPlay.getController().equals(ai))
-                            && (ai.getGame().getCardsIn(ZoneType.Hand).size() >= 2)) {
-                        hasbridge = true;
-                    }
+                }
+
             }
             // Always if enemy would die and we don't!
             // TODO : predict actual damage instead of assuming it'll be 2*lands
