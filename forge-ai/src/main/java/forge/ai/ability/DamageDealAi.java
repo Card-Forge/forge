@@ -411,6 +411,11 @@ public class DamageDealAi extends DamageAiBase {
         // target loop
         TargetChoices tcs = sa.getTargets();
 
+        // Do not use if would kill self
+        if (("SelfDamage".equals(sa.getParam("AILogic"))) && (ai.getLife() <= Integer.parseInt(source.getSVar("SelfDamageAmount")))) {
+            return false;
+        }
+
         if ("ChoiceBurn".equals(sa.getParam("AILogic"))) {
             // do not waste burns on player if other choices are present
             if (this.shouldTgtP(ai, sa, dmg, noPrevention)) {
@@ -531,7 +536,7 @@ public class DamageDealAi extends DamageAiBase {
                     }
                 }
 
-                if (freePing && sa.canTarget(enemy)) {
+                if (freePing && sa.canTarget(enemy) && (!avoidTargetP(ai, sa))) {
                     tcs.add(enemy);
                     if (divided) {
                         tgt.addDividedAllocation(enemy, dmg);
@@ -573,10 +578,11 @@ public class DamageDealAi extends DamageAiBase {
             // TODO: Improve Damage, we shouldn't just target the player just
             // because we can
             else if (sa.canTarget(enemy)) {
-                if ((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
+                if (((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
                         || (SpellAbilityAi.isSorcerySpeed(sa) && phase.is(PhaseType.MAIN2))
                         || sa.getPayCosts() == null || immediately
-                        || this.shouldTgtP(ai, sa, dmg, noPrevention)) {
+                        || this.shouldTgtP(ai, sa, dmg, noPrevention)) &&
+                        (!avoidTargetP(ai, sa))) {
                 	tcs.add(enemy);
                     if (divided) {
                         tgt.addDividedAllocation(enemy, dmg);

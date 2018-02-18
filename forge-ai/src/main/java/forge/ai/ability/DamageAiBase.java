@@ -5,16 +5,44 @@ import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
+import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardPredicates;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerDamageDone;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 public abstract class DamageAiBase extends SpellAbilityAi {
+    protected boolean avoidTargetP(final Player comp, final SpellAbility sa) {
+        Player enemy = ComputerUtil.getOpponentFor(comp);
+        // Logic for cards that damage owner, like Fireslinger
+        // Do not target a player if they aren't below 75% of our health.
+        // Unless Lifelink will cancel the damage to us
+        Card hostcard = sa.getHostCard();
+        boolean lifelink = hostcard.hasKeyword("Lifelink");
+        for (Card ench : hostcard.getEnchantedBy(false)) {
+            // Treat cards enchanted by older cards with "when enchanted creature deals damage, gain life" as if they had lifelink.
+            if (ench.hasSVar("LikeLifeLink")) {
+                if ("True".equals(ench.getSVar("LikeLifeLink"))) {
+                    lifelink = true;
+                }
+            }
+        }
+        if ("SelfDamage".equals(sa.getParam("AILogic"))) {
+            if (comp.getLife() * 0.75 < enemy.getLife()) {
+                if (!lifelink) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     protected boolean shouldTgtP(final Player comp, final SpellAbility sa, final int d, final boolean noPrevention) {
         int restDamage = d;
         final Game game = comp.getGame();
@@ -36,10 +64,26 @@ public abstract class DamageAiBase extends SpellAbilityAi {
         if (sa.getTargets() != null && sa.getTargets().getTargets().contains(enemy)) {
             return false;
         }
-        
+
+        // Benefits hitting players?
+        // If has triggered ability on dealing damage to an opponent, go for it!
+        Card hostcard = sa.getHostCard();
+        for (Trigger trig : hostcard.getTriggers()) {
+            if (trig instanceof TriggerDamageDone) {
+                if (("Opponent".equals(trig.getParam("ValidTarget")))
+                        && (!"True".equals(trig.getParam("CombatDamage")))) {
+                    return true;
+                }
+            }
+        }
+
         // burn Planeswalkers
         if (Iterables.any(enemy.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS)) {
             return true;
+        }
+
+        if (avoidTargetP(comp, sa)) {
+            return false;
         }
 
         if (!noPrevention) {
