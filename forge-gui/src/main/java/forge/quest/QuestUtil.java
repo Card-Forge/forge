@@ -443,7 +443,7 @@ public class QuestUtil {
 
         if (FModel.getQuest().getAssets() != null) {
             d = FModel.getQuest().getMyDecks().get(
-                FModel.getQuestPreferences().getPref(QPref.CURRENT_DECK));
+                    FModel.getQuest().getCurrentDeck());
         }
 
         return d;

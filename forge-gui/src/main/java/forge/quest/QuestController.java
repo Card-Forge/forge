@@ -577,4 +577,12 @@ public class QuestController {
         CardEdition randomLandSet = CardEdition.Predicates.getRandomSetWithAllBasicLands(availableEditions);
         return randomLandSet == null ? FModel.getMagicDb().getEditions().get("ZEN") : randomLandSet;
     }
+
+    public String getCurrentDeck() {
+        return model.currentDeck;
+    }
+
+    public void setCurrentDeck(String s) {
+        model.currentDeck = s;
+    }
 }

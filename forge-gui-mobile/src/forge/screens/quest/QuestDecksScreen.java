@@ -42,12 +42,12 @@ public class QuestDecksScreen extends FScreen {
         public void handleEvent(FEvent e) {
             DeckProxy deck = lstDecks.getSelectedItem();
             if (deck != null) {
-                FModel.getQuestPreferences().setPref(QPref.CURRENT_DECK, deck.toString());
+                FModel.getQuest().setCurrentDeck(deck.toString());
             }
             else {
-                FModel.getQuestPreferences().setPref(QPref.CURRENT_DECK, QPref.CURRENT_DECK.getDefault());
+                FModel.getQuest().setCurrentDeck(QPref.CURRENT_DECK.getDefault());
             }
-            FModel.getQuestPreferences().save();
+            FModel.getQuest().save();
         }
     };
 
@@ -135,7 +135,7 @@ public class QuestDecksScreen extends FScreen {
         lstDecks.setup(ItemManagerConfig.QUEST_DECKS);
 
         // Look through list for preferred deck from prefs
-        final DeckProxy deck = hasQuest ? lstDecks.stringToItem(FModel.getQuestPreferences().getPref(QPref.CURRENT_DECK)) : null;
+        final DeckProxy deck = hasQuest ? lstDecks.stringToItem(FModel.getQuest().getCurrentDeck()) : null;
         if (deck != null) {
             lstDecks.setSelectedItem(deck);
         }

@@ -1620,11 +1620,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 DeckPreferences.setSealedDeck(deckStr);
                 break;
             case Quest:
-                FModel.getQuestPreferences().setPref(QPref.CURRENT_DECK, model.toString());
+                FModel.getQuest().setCurrentDeck(model.toString());
                 FModel.getQuest().save();
                 break;
             case QuestDraft:
-                FModel.getQuestPreferences().setPref(QPref.CURRENT_DECK, model.toString());
+                FModel.getQuest().setCurrentDeck(model.toString());
                 FModel.getQuest().save();
                 break;
             default:
