@@ -8,6 +8,7 @@ import javax.swing.SwingUtilities;
 
 import com.google.common.collect.Iterables;
 
+import forge.deck.CommanderDeckGenerator;
 import forge.deck.DeckProxy;
 import forge.deck.DeckType;
 import forge.deckchooser.DecksComboBoxEvent;
@@ -23,6 +24,7 @@ public class CLobby {
     private final VLobby view;
     public CLobby(final VLobby view) {
         this.view = view;
+        this.view.setForCommander(true);
     }
 
     private void addDecks(final Iterable<DeckProxy> commanderDecks, FList<Object> deckList, String... initialItems) {
@@ -56,8 +58,8 @@ public class CLobby {
                 final Iterable<DeckProxy> planarDecks = DeckProxy.getAllPlanarDecks();
 
                 for (int i = 0; i < VLobby.MAX_PLAYERS; i++) {
-                    addDecks(commanderDecks, view.getCommanderDeckLists().get(i));
-                    addDecks(tinyLeadersDecks, view.getTinyLeadersDeckLists().get(i));
+                    //addDecks(commanderDecks, view.getCommanderDeckLists().get(i));
+                    //addDecks(tinyLeadersDecks, view.getTinyLeadersDeckLists().get(i));
                     addDecks(schemeDecks, view.getSchemeDeckLists().get(i),
                             "Use deck's scheme section (random if unavailable)");
                     addDecks(planarDecks, view.getPlanarDeckLists().get(i),
@@ -76,7 +78,23 @@ public class CLobby {
             final FDeckChooser fdc = view.getDeckChooser(iSlot);
             fdc.initialize(FPref.CONSTRUCTED_DECK_STATES[iSlot], defaultDeckTypeForSlot(iSlot));
             fdc.populate();
-            fdc.getDecksComboBox().addListener(new IDecksComboBoxListener() {
+            /*fdc.getDecksComboBox().addListener(new IDecksComboBoxListener() {
+                @Override public final void deckTypeSelected(final DecksComboBoxEvent ev) {
+                    view.focusOnAvatar();
+                }
+            });*/
+            final FDeckChooser fdccom = view.getCommanderDeckChooser(iSlot);
+            fdccom.initialize(FPref.CONSTRUCTED_DECK_STATES[iSlot], defaultDeckTypeForSlot(iSlot));
+            fdccom.populate();
+            fdccom.getDecksComboBox().addListener(new IDecksComboBoxListener() {
+                @Override public final void deckTypeSelected(final DecksComboBoxEvent ev) {
+                    view.focusOnAvatar();
+                }
+            });
+            final FDeckChooser fdtlcom = view.getTinyLeaderDeckChooser(iSlot);
+            fdtlcom.initialize(FPref.CONSTRUCTED_DECK_STATES[iSlot], defaultDeckTypeForSlot(iSlot));
+            fdtlcom.populate();
+            fdtlcom.getDecksComboBox().addListener(new IDecksComboBoxListener() {
                 @Override public final void deckTypeSelected(final DecksComboBoxEvent ev) {
                     view.focusOnAvatar();
                 }
@@ -107,6 +125,6 @@ public class CLobby {
     }
 
     private static DeckType defaultDeckTypeForSlot(final int iSlot) {
-        return iSlot == 0 ? DeckType.PRECONSTRUCTED_DECK : DeckType.COLOR_DECK;
+        return iSlot == 0 ? DeckType.RANDOM_COMMANDER_DECK : DeckType.RANDOM_CARDGEN_COMMANDER_DECK;
     }
 }
