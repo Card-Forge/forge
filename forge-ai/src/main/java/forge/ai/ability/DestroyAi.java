@@ -169,6 +169,16 @@ public class DestroyAi extends SpellAbilityAi {
             if (hasXCost) {
                 // TODO: currently the AI will maximize mana spent on X, trying to maximize damage. This may need improvement.
                 maxTargets = Math.min(ComputerUtilMana.determineMaxAffordableX(ai, sa), abTgt.getMaxTargets(sa.getHostCard(), sa));
+                // X can't be more than the lands we have in our hand for "discard X lands"!
+                if ("ScorchedEarth".equals(logic)) {
+                    int lands = 0;
+                    for (Card c : ai.getCardsIn(ZoneType.Hand)) {
+                        if (c.isLand()) {
+                            lands++;
+                        }
+                    }
+                    maxTargets = Math.min(maxTargets, lands);
+                }
             }
             if (sa.hasParam("AIMaxTgtsCount")) {
                 // Cards that have confusing costs for the AI (e.g. Eliminate the Competition) can have forced max target constraints specified
