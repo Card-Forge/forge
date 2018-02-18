@@ -81,13 +81,9 @@ public class DestroyAi extends SpellAbilityAi {
             }
         }
         if (("Pactivator".equals(logic)) && (havepact)) {
-            if (
-                    (!ai.getGame().getPhaseHandler().isPlayerTurn(ai)) &&
-                            ((ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN))
-                                    || (ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)))
-                            &&
-                            (ai.getOpponents().get(0).getCreaturesInPlay().size() > 0)
-                    ) {
+            if ((!ai.getGame().getPhaseHandler().isPlayerTurn(ai))
+                    && ((ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)) || (ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)))
+                    && (ai.getOpponents().get(0).getCreaturesInPlay().size() > 0)) {
                 ai.getController().chooseTargetsFor(sa);
                 return true;
             }
