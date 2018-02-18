@@ -52,10 +52,14 @@ public class CLobby {
     public void update() {
         SwingUtilities.invokeLater(new Runnable() {
             @Override public final void run() {
+                final Iterable<DeckProxy> commanderDecks = DeckProxy.getAllCommanderDecks();
+                final Iterable<DeckProxy> tinyLeadersDecks = DeckProxy.getAllTinyLeadersDecks();
                 final Iterable<DeckProxy> schemeDecks = DeckProxy.getAllSchemeDecks();
                 final Iterable<DeckProxy> planarDecks = DeckProxy.getAllPlanarDecks();
 
                 for (int i = 0; i < VLobby.MAX_PLAYERS; i++) {
+                    //addDecks(commanderDecks, view.getCommanderDeckLists().get(i));
+                    //addDecks(tinyLeadersDecks, view.getTinyLeadersDeckLists().get(i));
                     addDecks(schemeDecks, view.getSchemeDeckLists().get(i),
                             "Use deck's scheme section (random if unavailable)");
                     addDecks(planarDecks, view.getPlanarDeckLists().get(i),
@@ -80,7 +84,7 @@ public class CLobby {
                 }
             });*/
             final FDeckChooser fdccom = view.getCommanderDeckChooser(iSlot);
-            fdccom.initialize(FPref.COMMANDER_DECK_STATES[iSlot], defaultDeckTypeForCommanderSlot(iSlot));
+            fdccom.initialize(FPref.CONSTRUCTED_DECK_STATES[iSlot], defaultDeckTypeForSlot(iSlot));
             fdccom.populate();
             fdccom.getDecksComboBox().addListener(new IDecksComboBoxListener() {
                 @Override public final void deckTypeSelected(final DecksComboBoxEvent ev) {
@@ -88,7 +92,7 @@ public class CLobby {
                 }
             });
             final FDeckChooser fdtlcom = view.getTinyLeaderDeckChooser(iSlot);
-            fdtlcom.initialize(FPref.TINY_LEADER_DECK_STATES[iSlot], defaultDeckTypeForTinyLeaderSlot(iSlot));
+            fdtlcom.initialize(FPref.CONSTRUCTED_DECK_STATES[iSlot], defaultDeckTypeForSlot(iSlot));
             fdtlcom.populate();
             fdtlcom.getDecksComboBox().addListener(new IDecksComboBoxListener() {
                 @Override public final void deckTypeSelected(final DecksComboBoxEvent ev) {
@@ -121,14 +125,6 @@ public class CLobby {
     }
 
     private static DeckType defaultDeckTypeForSlot(final int iSlot) {
-        return iSlot == 0 ? DeckType.PRECONSTRUCTED_DECK : DeckType.COLOR_DECK;
-    }
-
-    private static DeckType defaultDeckTypeForCommanderSlot(final int iSlot) {
-        return iSlot == 0 ? DeckType.COMMANDER_DECK : DeckType.RANDOM_CARDGEN_COMMANDER_DECK;
-    }
-
-    private static DeckType defaultDeckTypeForTinyLeaderSlot(final int iSlot) {
-        return iSlot == 0 ? DeckType.TINY_LEADERS_DECKS : DeckType.RANDOM_CARDGEN_COMMANDER_DECK;
+        return iSlot == 0 ? DeckType.RANDOM_COMMANDER_DECK : DeckType.RANDOM_CARDGEN_COMMANDER_DECK;
     }
 }

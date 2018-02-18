@@ -148,8 +148,7 @@ public class FDeckChooser extends FScreen {
             public void handleEvent(FEvent e) {
                 if (selectedDeckType != DeckType.STANDARD_COLOR_DECK && selectedDeckType != DeckType.STANDARD_CARDGEN_DECK
                         && selectedDeckType != DeckType.MODERN_CARDGEN_DECK && selectedDeckType != DeckType.MODERN_COLOR_DECK &&
-                        selectedDeckType != DeckType.COLOR_DECK && selectedDeckType != DeckType.THEME_DECK
-                        && selectedDeckType != DeckType.RANDOM_COMMANDER_DECK && selectedDeckType != DeckType.RANDOM_CARDGEN_COMMANDER_DECK) {
+                        selectedDeckType != DeckType.COLOR_DECK && selectedDeckType != DeckType.THEME_DECK) {
                     FDeckViewer.show(getDeck());
                 }
             }
@@ -270,8 +269,6 @@ public class FDeckChooser extends FScreen {
         case COLOR_DECK:
         case STANDARD_COLOR_DECK:
         case STANDARD_CARDGEN_DECK:
-        case RANDOM_CARDGEN_COMMANDER_DECK:
-        case RANDOM_COMMANDER_DECK:
         case MODERN_CARDGEN_DECK:
         case MODERN_COLOR_DECK:
         case THEME_DECK:
@@ -456,9 +453,7 @@ public class FDeckChooser extends FScreen {
             case TinyLeaders:
                 cmbDeckTypes.addItem(DeckType.CUSTOM_DECK);
                 cmbDeckTypes.addItem(DeckType.RANDOM_DECK);
-                if(!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY)) {
-                    cmbDeckTypes.addItem(DeckType.RANDOM_CARDGEN_COMMANDER_DECK);
-                }
+                cmbDeckTypes.addItem(DeckType.RANDOM_CARDGEN_COMMANDER_DECK);
                 cmbDeckTypes.addItem(DeckType.RANDOM_COMMANDER_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_DECK);
                 break;

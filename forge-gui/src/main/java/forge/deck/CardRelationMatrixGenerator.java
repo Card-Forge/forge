@@ -155,28 +155,20 @@ public final class CardRelationMatrixGenerator {
 
         for (PaperCard card:legends){
             for (Deck deck:decks){
-                if (deck.getCommanders().contains(card)){
+                if (deck.getCommanders().size()==1&&deck.getCommanders().contains(card)){
 
                     for (PaperCard pairCard:Iterables.filter(deck.getMain().toFlatList(),
                             Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND_NOT_WASTES), PaperCard.FN_GET_RULES))){
-                        if (!pairCard.getName().equals(card.getName())){
+                        if (!pairCard.getName().equals(card.getName())&&
+                                new DeckGeneratorBase.MatchColorIdentity(card.getRules().getColorIdentity()).apply(pairCard.getRules())){
                             try {
                                 int old = matrix[legendIntegerMap.get(card.getName())][cardIntegerMap.get(pairCard.getName())];
                                 matrix[legendIntegerMap.get(card.getName())][cardIntegerMap.get(pairCard.getName())] = old + 1;
                             }catch (NullPointerException ne){
                                 //Todo: Not sure what was failing here
-                                ne.printStackTrace();
                             }
                         }
 
-                    }
-                    if(deck.getCommanders().size()>1){//add partner commanders to matrix
-                        for(PaperCard commander:deck.getCommanders()){
-                            if(!commander.equals(card)){
-                                int old = matrix[legendIntegerMap.get(card.getName())][cardIntegerMap.get(commander.getName())];
-                                matrix[legendIntegerMap.get(card.getName())][cardIntegerMap.get(commander.getName())] = old + 1;
-                            }
-                        }
                     }
                 }
             }
@@ -188,13 +180,7 @@ public final class CardRelationMatrixGenerator {
             int[] distances = matrix[col];
             int max = (Integer) Collections.max(Arrays.asList(ArrayUtils.toObject(distances)));
             if (max>0) {
-                List<Map.Entry<PaperCard,Integer>> deckPool=new ArrayList<>();
-                for(int k=0;k<cardList.size(); k++){
-                    if(matrix[col][k]>0){
-                        deckPool.add(new AbstractMap.SimpleEntry<PaperCard, Integer>(integerCardMap.get(k),matrix[col][k]));
-                    }
-                }
-/*                ArrayIndexComparator comparator = new ArrayIndexComparator(ArrayUtils.toObject(distances));
+                ArrayIndexComparator comparator = new ArrayIndexComparator(ArrayUtils.toObject(distances));
                 Integer[] indices = comparator.createIndexArray();
                 Arrays.sort(indices, comparator);
                 List<Map.Entry<PaperCard,Integer>> deckPool=new ArrayList<>();
@@ -211,7 +197,7 @@ public final class CardRelationMatrixGenerator {
                     }
                     deckPool.add(new AbstractMap.SimpleEntry<PaperCard, Integer>(cardToAdd,distances[indices[cardList.size()-1-k]]));
                 };
-                *//*if(excludeThisCard){
+                /*if(excludeThisCard){
                     continue;
                 }*/
                 cardPools.put(card.getName(),deckPool);

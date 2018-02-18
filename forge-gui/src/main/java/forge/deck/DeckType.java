@@ -59,23 +59,13 @@ public enum DeckType {
         }
     }
     static {
-        if (!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY)) {
-            CommanderOptions = new DeckType[]{
-                    DeckType.COMMANDER_DECK,
-                    DeckType.RANDOM_COMMANDER_DECK,
-                    DeckType.RANDOM_CARDGEN_COMMANDER_DECK,
-                    DeckType.RANDOM_DECK,
-                    DeckType.NET_COMMANDER_DECK
-            };
-        }else{
-            CommanderOptions = new DeckType[]{
-                    DeckType.COMMANDER_DECK,
-                    DeckType.RANDOM_COMMANDER_DECK,
-                    DeckType.RANDOM_DECK,
-                    DeckType.NET_COMMANDER_DECK
-            };
-        }
-
+        CommanderOptions = new DeckType[]{
+                DeckType.COMMANDER_DECK,
+                DeckType.RANDOM_COMMANDER_DECK,
+                DeckType.RANDOM_CARDGEN_COMMANDER_DECK,
+                DeckType.RANDOM_DECK,
+                DeckType.NET_COMMANDER_DECK
+        };
     }
 
     private String value;
