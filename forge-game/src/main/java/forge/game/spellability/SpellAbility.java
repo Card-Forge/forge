@@ -813,6 +813,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             if (getPayCosts() != null) {
                 clone.setPayCosts(getPayCosts().copy());
             }
+            if (manaPart != null) {
+                clone.manaPart = new AbilityManaPart(host, mapParams);
+            }
             // run special copy Ability to make a deep copy
             CardFactory.copySpellAbility(this, clone, host, lki);
         } catch (final CloneNotSupportedException e) {
