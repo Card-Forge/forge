@@ -6,6 +6,6 @@ SVar:X:Count$InYourHand
 SVar:NonStackingEffect:True
 #NOTE: The AI will not play around this effect, so it's only good in properly designed decks that circumvent the necessity to worry about the detrimental effect.
 SVar:RemRandomDeck:True
-SVar:PreferredHandSize:1
+SVar:PreferredHandSize:0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ensnaring_bridge.jpg
 Oracle:Creatures with power greater than the number of cards in your hand can't attack.
