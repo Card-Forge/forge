@@ -1082,7 +1082,29 @@ public class AiAttackController {
         boolean isWorthLessThanAllKillers = true;
         boolean canBeBlocked = false;
         int numberOfPossibleBlockers = 0;
-        
+
+        // Is it a creature that has a more valuable ability with a tap cost than what it can do by attacking?
+        if ((attacker.hasSVar("NonCombatPriority"))
+                && (!attacker.hasKeyword("Vigilance"))) {
+            // For each level of priority, enemy has to have life as much as the creature's power
+            // so a priority of 4 means the creature will not attack unless it can defeat that player in 4 successful attacks.
+            // the lower the priroity, the less willing the AI is to use the creature for attacking.
+            // TODO Somehow subtract expected damage of other attacking creatures from enemy life total (how? other attackers not yet declared? Can the AI guesstimate which of their creatures will not get blocked?)
+            if (attacker.getCurrentPower() * Integer.parseInt(attacker.getSVar("NonCombatPriority")) < ai.getOpponentsSmallestLifeTotal()) {
+                // Check if the card actually has an ability the AI can and wants to play, if not, attacking is fine!
+                boolean wantability = false;
+                for (SpellAbility sa : attacker.getSpellAbilities()) {
+                    // Do not attack if we can afford using the ability.
+                    if (sa.isAbility()) {
+                        if (ComputerUtilCost.canPayCost(sa, ai)) {
+                            return false;
+                        }
+                        // TODO Eventually The Ai will need to learn to predict if they have any use for the ability before next untap or not.
+                        // TODO abilities that tap enemy creatures should probably only be saved if the enemy has nonzero creatures? Haste can be a threat though...
+                    }
+                }
+            }
+        }
 
         if (!this.isEffectiveAttacker(ai, attacker, combat)) {
             return false;
