@@ -703,6 +703,36 @@ public class AiController {
         if ("True".equals(card.getSVar("NonStackingEffect")) && isNonDisabledCardInPlay(card.getName())) {
             return AiPlayDecision.NeedsToPlayCriteriaNotMet;
         }
+        // Trying to play a card that has Buyback without a Buyback cost
+        if (card.hasKeyword("Buyback")) { // This line does not work?
+            if (!sa.isBuyBackAbility()) {
+                boolean wastebuybackallowed = false;
+                // About to lose game : allow
+                if (ComputerUtil.aiLifeInDanger(player, true, 0)) {
+                    wastebuybackallowed = true;
+                }
+                int copies = 0;
+                // Have two copies : allow
+                for (Card hand : player.getCardsIn(ZoneType.Hand)) {
+                    if (hand.getName().equals(card.getName())) {
+                        copies++;
+                    }
+                }
+                if (copies >= 2) {
+                    wastebuybackallowed = true;
+                }
+                // Won't be able to afford buyback any time soon
+              /*  if ( ComputerUtilMana.getAvailableManaEstimate(player) >=
+                        sa.
+
+
+                        ) { wastebuybackallowed = true; } */
+
+                // If Buyback cost includes sacrifice, life, discard
+
+                if (!wastebuybackallowed) return AiPlayDecision.NeedsToPlayCriteriaNotMet;
+            }
+        }
         // add any other necessary logic to play a basic spell here
         return ComputerUtilCard.checkNeedsToPlayReqs(card, sa);
     }
