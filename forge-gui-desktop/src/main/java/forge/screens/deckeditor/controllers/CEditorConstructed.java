@@ -218,11 +218,14 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         }
     }
 
-    public static void buildRemoveContextMenu(EditorContextMenuBuilder cmb, DeckSection sectionMode) {
+    public static void buildRemoveContextMenu(EditorContextMenuBuilder cmb, DeckSection sectionMode, boolean foilAvailable) {
         switch (sectionMode) {
         case Main:
             cmb.addMoveItems("Remove", "from deck");
             cmb.addMoveAlternateItems("Move", "to sideboard");
+            if (foilAvailable) {
+                cmb.addMakeFoils();
+            }
             break;
         case Sideboard:
             cmb.addMoveItems("Remove", "from sideboard");
@@ -259,7 +262,7 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
      */
     @Override
     protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
-        buildRemoveContextMenu(cmb, sectionMode);
+        buildRemoveContextMenu(cmb, sectionMode, true);
     }
 
     /*
