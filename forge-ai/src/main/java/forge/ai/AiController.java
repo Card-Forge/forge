@@ -704,7 +704,9 @@ public class AiController {
             return AiPlayDecision.NeedsToPlayCriteriaNotMet;
         }
         // Trying to play a card that has Buyback without a Buyback cost
-        if (card.hasKeyword("Buyback")) { // This line does not work?
+
+        if (card.hasStartOfKeyword("Buyback")) {
+            //if (card.getBuybackAbility()!=null) {
             if (!sa.isBuyBackAbility()) {
                 boolean wastebuybackallowed = false;
                 // About to lose game : allow
@@ -722,13 +724,23 @@ public class AiController {
                     wastebuybackallowed = true;
                 }
                 // Won't be able to afford buyback any time soon
-              /*  if ( ComputerUtilMana.getAvailableManaEstimate(player) >=
-                        sa.
-
-
-                        ) { wastebuybackallowed = true; } */
-
                 // If Buyback cost includes sacrifice, life, discard
+                int neededMana = 0;
+                for (SpellAbility sa2 : GameActionUtil.getOptionalCosts(sa)) {
+                    if (sa2.isOptionalCostPaid(OptionalCost.Buyback)) {
+                        neededMana = sa2.getPayCosts().getCostMana().getMana().getCMC();
+                        if (sa2.getPayCosts().hasSpecificCostType(CostPayLife.class)
+                                || (sa2.getPayCosts().hasSpecificCostType(CostDiscard.class)) ||
+                                (sa2.getPayCosts().hasSpecificCostType(CostSacrifice.class))
+                                ) {
+                            neededMana = 999;
+                        }
+                    }
+                }
+                int hasmana = ComputerUtilMana.getAvailableManaEstimate(player, false);
+                if (hasmana < neededMana - 1) {
+                    wastebuybackallowed = true;
+                }
 
                 if (!wastebuybackallowed) return AiPlayDecision.NeedsToPlayCriteriaNotMet;
             }
