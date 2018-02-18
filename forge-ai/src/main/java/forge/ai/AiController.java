@@ -677,9 +677,33 @@ public class AiController {
         return AiPlayDecision.WillPlay;
     }
 
-    private AiPlayDecision canPlaySpellBasic(final Card card, final SpellAbility sa) {
-        // add any other necessary logic to play a basic spell here
+    public boolean isNonDisabledCardInPlay(final String cardName) {
+        for (Card card : player.getCardsIn(ZoneType.Battlefield)) {
+            if (card.getName().equals(cardName)) {
+                // TODO - Better logic to detemine if a permanent is disabled by local effects
+                // currently assuming any permanent enchanted by another player
+                // is disabled and a second copy is necessary
+                // will need actual logic that determines if the enchantment is able
+                // to disable the permanent or it's still functional and a duplicate is unneeded.
+                boolean disabledByEnemy = false;
+                for (Card card2 : (card.getEnchantedBy(false))) {
+                    if (card2.getOwner() != player) {
+                        disabledByEnemy = true;
+                    }
+                }
+                if (!disabledByEnemy) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
+    private AiPlayDecision canPlaySpellBasic(final Card card, final SpellAbility sa) {
+        if ("True".equals(card.getSVar("NonStackingEffect")) && isNonDisabledCardInPlay(card.getName())) {
+            return AiPlayDecision.NeedsToPlayCriteriaNotMet;
+        }
+        // add any other necessary logic to play a basic spell here
         return ComputerUtilCard.checkNeedsToPlayReqs(card, sa);
     }
 
@@ -766,10 +790,6 @@ public class AiController {
                     if (sa.getMayPlay() != null && source.mayPlay(sa.getMayPlay()) != null) {
                         p += 50;
                     }
-                }
-                // artifacts and enchantments with effects that do not stack
-                if ("True".equals(source.getSVar("NonStackingEffect")) && ai.isCardInPlay(source.getName())) {
-                    p -= 9;
                 }
                 // if the profile specifies it, deprioritize Storm spells in an attempt to build up storm count
                 if (source.hasKeyword("Storm") && ai.getController() instanceof PlayerControllerAi) {

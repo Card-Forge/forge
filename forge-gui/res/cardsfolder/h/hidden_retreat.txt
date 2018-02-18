@@ -7,5 +7,6 @@ SVar:PreventDmg:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Stack | A
 SVar:TargetMoved:Mode$ ChangesZone | Origin$ Stack | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ ExileEffect | TriggerZones$ Command | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemRandomDeck:True
+SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hidden_retreat.jpg
 Oracle:Put a card from your hand on top of your library: Prevent all damage that would be dealt by target instant or sorcery spell this turn.

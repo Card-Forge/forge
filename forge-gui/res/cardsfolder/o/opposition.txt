@@ -3,5 +3,6 @@ ManaCost:2 U U
 Types:Enchantment
 A:AB$ Tap | Cost$ tapXType<1/Creature> | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature or land | SpellDescription$ Tap target artifact, creature or land.
 SVar:RemAIDeck:True
+SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opposition.jpg
 Oracle:Tap an untapped creature you control: Tap target artifact, creature, or land.

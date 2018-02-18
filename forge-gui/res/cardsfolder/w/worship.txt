@@ -2,6 +2,5 @@ Name:Worship
 ManaCost:3 W
 Types:Enchantment
 S:Mode$ Continuous | Affected$ You | AddKeyword$ DamageLifeThreshold:1 | IsPresent$ Creature.YouCtrl | Description$ If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead.
-SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/worship.jpg
 Oracle:If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead.

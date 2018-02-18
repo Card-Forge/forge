@@ -925,10 +925,6 @@ public class ComputerUtil {
     public static boolean castPermanentInMain1(final Player ai, final SpellAbility sa) {
         final Card card = sa.getHostCard();
 
-        if ("True".equals(card.getSVar("NonStackingEffect")) && card.getController().isCardInPlay(card.getName())) {
-            return false;
-        }
-
         if (card.hasSVar("PlayMain1")) {
         	if (card.getSVar("PlayMain1").equals("ALWAYS") || sa.getPayCosts().hasNoManaCost()) {
         		return true;
