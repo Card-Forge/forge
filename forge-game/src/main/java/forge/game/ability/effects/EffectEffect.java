@@ -229,6 +229,10 @@ public class EffectEffect extends SpellAbilityEffect {
             eff.copyChangedTextFrom(hostCard);
         }
 
+        if (sa.hasParam("AtEOT")) {
+            registerDelayedTrigger(sa, sa.getParam("AtEOT"), Lists.newArrayList(hostCard));
+        }
+
         // Duration
         final String duration = sa.getParam("Duration");
         if ((duration == null) || !duration.equals("Permanent")) {

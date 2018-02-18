@@ -23,6 +23,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
+import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -87,6 +88,46 @@ public class StaticAbilityCantAttackBlock {
         }
 
         return true;
+    }
+
+    /**
+     * returns true if attacker can be blocked by blocker
+     * @param stAb
+     * @param attacker
+     * @param blocker
+     * @return boolean
+     */
+    public static boolean applyCantBlockByAbility(final StaticAbility stAb, final Card attacker, final Card blocker) {
+        final Card host = stAb.getHostCard();
+        if (stAb.hasParam("ValidAttacker")) {
+            if (!attacker.isValid(stAb.getParam("ValidAttacker").split(","), host.getController(), host, null)) {
+                return false;
+            }
+        }
+        if (stAb.hasParam("ValidBlocker")) {
+            for (final String v : stAb.getParam("ValidBlocker").split(",")) {
+                if (blocker.isValid(v, host.getController(), host, null)) {
+                    boolean stillblock = false;
+                    //Dragon Hunter check
+                    if (v.contains("withoutReach") && blocker.hasStartOfKeyword("IfReach")) {
+                        for (KeywordInterface inst : blocker.getKeywords()) {
+                            String k = inst.getOriginal();
+                            if (k.startsWith("IfReach")) {
+                                String n[] = k.split(":");
+                                if (attacker.getType().hasCreatureType(n[1])) {
+                                    stillblock = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if (!stillblock) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     /**

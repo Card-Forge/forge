@@ -2,7 +2,7 @@ Name:Heat Wave
 ManaCost:2 R
 Types:Enchantment
 K:Cumulative upkeep:R
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CantBeBlockedBy Creature.Blue | Description$ Blue creatures can't block creatures you control.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.YouCtrl | ValidBlocker$ Creature.Blue | Description$ Blue creatures can't block creatures you control.
 S:Mode$ CantBlockUnless | ValidCard$ Creature.nonBlue | Attacker$ Creature.YouCtrl | Cost$ PayLife<1> | Description$ Nonblue creatures can't block creatures you control unless their controller pays 1 life for each blocking creature he or she controls.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heat_wave.jpg

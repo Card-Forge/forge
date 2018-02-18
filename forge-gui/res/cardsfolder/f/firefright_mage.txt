@@ -2,7 +2,8 @@ Name:Firefright Mage
 ManaCost:R
 Types:Creature Goblin Spellshaper
 PT:1/1
-A:AB$ Pump | Cost$ 1 R T Discard<1/Card> | KW$ HIDDEN CantBeBlockedBy Creature.nonArtifact+nonRed | ValidTgts$ Creature | SpellDescription$ Target creature can't be blocked this turn except by artifact creatures and/or red creatures.
+A:AB$ Effect | Cost$ 1 R T Discard<1/Card> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature | RememberObjects$ Targeted | Name$ Firefright Mage's Effect | StaticAbilities$ KWPump | SpellDescription$ Target creature can't be blocked this turn except by artifact creatures and/or red creatures.
+SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.Remembered | ValidBlocker$ Creature.nonArtifact+nonRed | EffectZone$ Command | Description$ Remembered creature can't be blocked this turn except by artifact creatures and/or red creatures.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firefright_mage.jpg
 Oracle:{1}{R}, {T}, Discard a card: Target creature can't be blocked this turn except by artifact creatures and/or red creatures.

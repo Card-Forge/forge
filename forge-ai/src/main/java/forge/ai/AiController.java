@@ -1802,6 +1802,10 @@ public class AiController {
 
         List<SpellAbility> evolve = filterList(putCounter, SpellAbilityPredicates.hasParam("Evolve"));
 
+        List<SpellAbility> token = filterListByApi(activePlayerSAs, ApiType.Token);
+        List<SpellAbility> pump = filterListByApi(activePlayerSAs, ApiType.Pump);
+        List<SpellAbility> pumpAll = filterListByApi(activePlayerSAs, ApiType.PumpAll);
+
         // do mandatory discard early if hand is empty or has DiscardMe card
         boolean discardEarly = false;
         CardCollectionView playerHand = player.getCardsIn(ZoneType.Hand);
@@ -1809,6 +1813,11 @@ public class AiController {
             discardEarly = true;
             result.addAll(mandatoryDiscard);
         }
+
+        // token should be added first so they might get the pump bonus
+        result.addAll(token);
+        result.addAll(pump);
+        result.addAll(pumpAll);
 
         // do Evolve Trigger before other PutCounter SpellAbilities
         // do putCounter before Draw/Discard because it can cause a Draw Trigger
@@ -1825,6 +1834,9 @@ public class AiController {
         }
 
         result.addAll(activePlayerSAs);
+
+        //need to reverse because of magic stack
+        Collections.reverse(result);
         return result;
     }
 
