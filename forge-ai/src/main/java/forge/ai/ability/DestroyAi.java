@@ -74,16 +74,15 @@ public class DestroyAi extends SpellAbilityAi {
         // Ability that's intended to destroy own useless token to trigger Grave Pacts
         // should be fired at end of turn or when under attack after blocking to make opponent sac something
         boolean havepact = false;
-        for (Card cardInPlay : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
-            if ((cardInPlay.getController().equals(ai))
-                    && ("Grave Pact".equals(cardInPlay.getName()))) {
-                havepact = true;
-            }
-        }
-        if (("Pactivator".equals(logic)) && (havepact)) {
+
+        // TODO replace it with look for a dies -> sacrifice trigger check
+        havepact |= ai.isCardInPlay("Grave Pact");
+        havepact |= ai.isCardInPlay("Butcher of Malakir");
+        havepact |= ai.isCardInPlay("Dictate of Erebos");
+        if ("Pactivator".equals(logic) && havepact) {
             if ((!ai.getGame().getPhaseHandler().isPlayerTurn(ai))
                     && ((ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)) || (ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)))
-                    && (ai.getOpponents().get(0).getCreaturesInPlay().size() > 0)) {
+                    && (ai.getOpponents().getCreaturesInPlay().size() > 0)) {
                 ai.getController().chooseTargetsFor(sa);
                 return true;
             }
