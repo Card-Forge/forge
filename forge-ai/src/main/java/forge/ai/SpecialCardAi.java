@@ -851,6 +851,73 @@ public class SpecialCardAi {
         }
     }
 
+    public static class PriceOfProgress {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            int ailands = 0;
+            int opplands = 0;
+            boolean hasbridge = false;
+            for (Card cardInPlay : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
+                if ((cardInPlay.isLand()) && !cardInPlay.isBasicLand()) {
+                    if (cardInPlay.getController().equals(ai)) {
+                        ailands++;
+                    } else {
+                        opplands++;
+                    }
+                }
+
+                // Do we have a card in play that makes us want to empty out hand?
+                if ((cardInPlay.hasSVar("PreferredHandSize")) &&
+                        (cardInPlay.getController().equals(ai))) {
+                    if (ai.getGame().getCardsIn(ZoneType.Hand).size() > Integer.parseInt(cardInPlay.getSVar("PreferredHandSize"))) {
+                        hasbridge = true;
+                    }
+                }
+
+            }
+            // Always if enemy would die and we don't!
+            // TODO : predict actual damage instead of assuming it'll be 2*lands
+            // Don't if we lose, unless we lose anyway to unblocked creatures next turn
+            if ((ai.getLife() <= ailands * 2) &&
+                    (!(ComputerUtil.aiLifeInDanger(ai, true, 0)) && ((ai.getOpponents().get(0).getLife()) <= opplands * 2))) {
+                return false;
+            }
+            // Do if we can win
+            if ((ai.getOpponents().get(0).getLife()) <= opplands * 2) {
+                return true;
+            }
+            // Do if we need to lose cards to activate Ensnaring Bridge or Cursed Scroll
+            // even if suboptimal play, but don't waste the card too early even then!
+            if ((hasbridge) && (ai.getGame().getPhaseHandler().getTurn() >= 10)) {
+                return true;
+            }
+
+            // Don't if we'd lose a larger percentage of our remaining life than enemy
+            if ((ailands / ((double) ai.getLife())) >
+                    (opplands / ((double) ai.getOpponents().get(0).getLife()))
+                    ) {
+                return false;
+            }
+            // Don't if no enemy nonbasic lands
+            if (opplands == 0) {
+                return false;
+            }
+            // Don't if loss is equal in percentage but we lose more points
+            if (((ailands / ((double) ai.getLife())) ==
+                    (opplands / ((double) ai.getOpponents().get(0).getLife()))
+            ) && (ailands > opplands)) {
+                return false;
+            }
+
+            // Don't play in early game - opponent likely still has lands to play
+            if (ai.getGame().getPhaseHandler().getTurn() < 10) {
+                return false;
+            }
+
+            return true;
+        }
+    }
+
+
     // Null Brooch
     public static class NullBrooch {
         public static boolean consider(final Player ai, final SpellAbility sa) {
