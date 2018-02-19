@@ -733,8 +733,8 @@ public class AiController {
                         }
                     }
                 }
-                int hasmana = ComputerUtilMana.getAvailableManaEstimate(player, false);
-                if (hasmana < neededMana - 1) {
+                int hasMana = ComputerUtilMana.getAvailableManaEstimate(player, false);
+                if (hasMana < neededMana - 1) {
                     wasteBuybackAllowed = true;
                 }
 
