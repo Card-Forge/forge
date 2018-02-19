@@ -733,8 +733,7 @@ public class AiController {
                         neededMana = sac.getCostMana().getMana().getCMC();
                         if (sac.hasSpecificCostType(CostPayLife.class)
                                 || (sac.hasSpecificCostType(CostDiscard.class)) ||
-                                (sac.hasSpecificCostType(CostSacrifice.class))
-                                ) {
+                                (sac.hasSpecificCostType(CostSacrifice.class))) {
                             neededMana = 999;
                         }
                     }
