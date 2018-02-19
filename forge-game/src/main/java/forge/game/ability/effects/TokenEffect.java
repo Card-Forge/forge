@@ -22,6 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import forge.StaticData;
 import forge.card.MagicColor;
 import forge.game.card.token.TokenInfo;
 import org.apache.commons.lang3.StringUtils;
@@ -71,10 +72,26 @@ public class TokenEffect extends SpellAbilityEffect {
     private String[] tokenKeywords;
     private String[] tokenHiddenKeywords;
 
-    private void readParameters(final SpellAbility mapParams) {
+    private void readMetaParams(final SpellAbility mapParams) {
+        this.tokenTapped = mapParams.getParamOrDefault("TokenTapped", "False").equalsIgnoreCase("True");
+        this.tokenAttacking = mapParams.getParamOrDefault("TokenAttacking", "False").equalsIgnoreCase("True");
+        this.tokenBlocking = mapParams.getParam("TokenBlocking");
+
+        this.tokenAmount = mapParams.getParamOrDefault("TokenAmount", "1");
+        this.tokenOwner = mapParams.getParamOrDefault("TokenOwner", "You");
+    }
+
+    private void readParameters(final SpellAbility mapParams, Card prototype) {
+        readMetaParams(mapParams);
+        if (prototype == null) {
+            readTokenParams(mapParams);
+        }
+    }
+
+    private void readTokenParams(final SpellAbility mapParams) {
         String image;
         String[] keywords;
-        
+
         if (mapParams.hasParam("TokenKeywords")) {
             // TODO: Change this Split to a semicolon or something else
             keywords = mapParams.getParam("TokenKeywords").split("<>");
@@ -101,9 +118,6 @@ public class TokenEffect extends SpellAbilityEffect {
             this.tokenAltImages = null;
         }
 
-        this.tokenTapped = mapParams.hasParam("TokenTapped") && mapParams.getParam("TokenTapped").equals("True");
-        this.tokenAttacking = mapParams.hasParam("TokenAttacking") && mapParams.getParam("TokenAttacking").equals("True");
-
         if (mapParams.hasParam("TokenAbilities")) {
             this.tokenAbilities = mapParams.getParam("TokenAbilities").split(",");
         } else {
@@ -124,8 +138,7 @@ public class TokenEffect extends SpellAbilityEffect {
         } else {
             this.tokenStaticAbilities = null;
         }
-        this.tokenBlocking = mapParams.getParam("TokenBlocking");
-        this.tokenAmount = mapParams.getParamOrDefault("TokenAmount", "1");
+
         this.tokenPower = mapParams.getParam("TokenPower");
         this.tokenToughness = mapParams.getParam("TokenToughness");
 
@@ -145,19 +158,19 @@ public class TokenEffect extends SpellAbilityEffect {
 
         this.tokenKeywords = keywords;
         this.tokenImage = image;
-        if (mapParams.hasParam("TokenOwner")) {
-            this.tokenOwner = mapParams.getParam("TokenOwner");
-        } else {
-            this.tokenOwner = "You";
-        }
     }
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final Card host = sa.getHostCard();
+        Card prototype = loadTokenPrototype(sa);
 
-        readParameters(sa);
+        if (prototype != null) {
+            return sa.getDescription();
+        }
+
+        readParameters(sa, prototype);
 
         final int finalPower = AbilityUtils.calculateAmount(host, this.tokenPower, sa);
         final int finalToughness = AbilityUtils.calculateAmount(host, this.tokenToughness, sa);
@@ -183,45 +196,32 @@ public class TokenEffect extends SpellAbilityEffect {
         return sb.toString();
     }
 
+    private Card loadTokenPrototype(SpellAbility sa) {
+        String script = sa.getParamOrDefault("TokenScript", null);
+
+        String edition = sa.getHostCard().getPaperCard().getEdition();
+
+        PaperToken token = StaticData.instance().getAllTokens().getToken(script, edition);
+        if (token != null) {
+            tokenName = token.getName();
+            return Card.fromPaperCard(token, null, sa.getHostCard().getGame());
+        }
+
+        return null;
+    }
+
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
         final SpellAbility root = sa.getRootAbility();
-        readParameters(sa);
-        
+
         // Cause of the Token Effect, in general it should be this
         // but if its a Replacement Effect, it might be something else or null
         SpellAbility cause = sa;
         if (root.isReplacementAbility() && root.hasReplacingObject("Cause")) {
             cause = (SpellAbility)root.getReplacingObject("Cause");
         }
-
-        String originalColorDesc = parseColorForImage();
-
-        final List<String> imageNames = Lists.newArrayListWithCapacity(1);
-        if (this.tokenImage.equals("")) {
-            imageNames.add(PaperToken.makeTokenFileName(originalColorDesc, tokenPower, tokenToughness, tokenOriginalName));
-        } else {
-            imageNames.add(0, this.tokenImage);
-        }
-        if (this.tokenAltImages != null) {
-        	imageNames.addAll(Arrays.asList(this.tokenAltImages));
-        }
-
-        String cost = determineTokenColor(host);
-
-        final int finalPower = AbilityUtils.calculateAmount(host, this.tokenPower, sa);
-        final int finalToughness = AbilityUtils.calculateAmount(host, this.tokenToughness, sa);
-        final int finalAmount = AbilityUtils.calculateAmount(host, this.tokenAmount, sa);
-
-        final String[] substitutedTypes = Arrays.copyOf(this.tokenTypes, this.tokenTypes.length);
-        for (int i = 0; i < substitutedTypes.length; i++) {
-            if (substitutedTypes[i].equals("ChosenType")) {
-                substitutedTypes[i] = host.getChosenType();
-            }
-        }
-        final String substitutedName = this.tokenName.equals("ChosenType") ? host.getChosenType() : this.tokenName;
 
         final boolean remember = sa.hasParam("RememberTokens");
         final boolean imprint = sa.hasParam("ImprintTokens");
@@ -230,17 +230,59 @@ public class TokenEffect extends SpellAbilityEffect {
         boolean combatChanged = false;
         boolean inCombat = game.getPhaseHandler().inCombat();
 
-        for (final Player controller : AbilityUtils.getDefinedPlayers(host, this.tokenOwner, sa)) {
-            final String imageName = imageNames.get(MyRandom.getRandom().nextInt(imageNames.size()));
-            final TokenInfo tokenInfo = new TokenInfo(substitutedName, imageName,
-                    cost, substitutedTypes, this.tokenKeywords, finalPower, finalToughness);
-            final List<Card> tokens = tokenInfo.makeTokenWithMultiplier(controller, finalAmount, cause != null);
+        Card prototype = loadTokenPrototype(sa);
 
-            grantHiddenKeywords(tokens);
-            grantAbilities(tokens, root);
-            grantTriggers(tokens, root);
-            grantSvars(tokens, root);
-            grantStatics(tokens, root);
+        readParameters(sa, prototype);
+        final int finalAmount = AbilityUtils.calculateAmount(host, this.tokenAmount, sa);
+
+        TokenInfo tokenInfo;
+
+        if (prototype == null) {
+            String originalColorDesc = parseColorForImage();
+
+            final List<String> imageNames = Lists.newArrayListWithCapacity(1);
+            if (this.tokenImage.equals("")) {
+                imageNames.add(PaperToken.makeTokenFileName(originalColorDesc, tokenPower, tokenToughness, tokenOriginalName));
+            } else {
+                imageNames.add(0, this.tokenImage);
+            }
+            if (this.tokenAltImages != null) {
+                imageNames.addAll(Arrays.asList(this.tokenAltImages));
+            }
+
+            String cost = determineTokenColor(host);
+
+            final int finalPower = AbilityUtils.calculateAmount(host, this.tokenPower, sa);
+            final int finalToughness = AbilityUtils.calculateAmount(host, this.tokenToughness, sa);
+
+            final String[] substitutedTypes = Arrays.copyOf(this.tokenTypes, this.tokenTypes.length);
+            for (int i = 0; i < substitutedTypes.length; i++) {
+                if (substitutedTypes[i].equals("ChosenType")) {
+                    substitutedTypes[i] = host.getChosenType();
+                }
+            }
+            final String substitutedName = this.tokenName.equals("ChosenType") ? host.getChosenType() : this.tokenName;
+
+            final String imageName = imageNames.get(MyRandom.getRandom().nextInt(imageNames.size()));
+            tokenInfo = new TokenInfo(substitutedName, imageName,
+                    cost, substitutedTypes, this.tokenKeywords, finalPower, finalToughness);
+        } else {
+            tokenInfo = new TokenInfo(prototype);
+        }
+
+        for (final Player controller : AbilityUtils.getDefinedPlayers(host, this.tokenOwner, sa)) {
+            List<Card> tokens;
+
+            if (prototype == null) {
+                tokens = tokenInfo.makeTokenWithMultiplier(controller, finalAmount, cause != null);
+                grantHiddenKeywords(tokens);
+                grantSvars(tokens, root);
+                grantAbilities(tokens, root);
+                grantTriggers(tokens, root);
+                grantStatics(tokens, root);
+            } else {
+                tokens = TokenInfo.makeTokensFromPrototype(prototype, controller, finalAmount, cause != null);
+            }
 
             for (Card tok : tokens) {
                 if (this.tokenTapped) {
@@ -277,7 +319,7 @@ public class TokenEffect extends SpellAbilityEffect {
                 }
                 allTokens.add(c);
             }
-            if (tokenName.equals("Clue")) { // investigate trigger
+            if ("Clue".equals(tokenName)) { // investigate trigger
                 controller.addInvestigatedThisTurn();
             }
         }

@@ -145,7 +145,9 @@ public final class FModel {
 
         final CardStorageReader reader = new CardStorageReader(ForgeConstants.CARD_DATA_DIR, progressBarBridge,
                 FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY));
-        magicDb = new StaticData(reader, ForgeConstants.EDITIONS_DIR, ForgeConstants.BLOCK_DATA_DIR);
+        final CardStorageReader tokenReader = new CardStorageReader(ForgeConstants.TOKEN_DATA_DIR, progressBarBridge,
+                FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY));
+        magicDb = new StaticData(reader, tokenReader, ForgeConstants.EDITIONS_DIR, ForgeConstants.BLOCK_DATA_DIR);
 
         //create profile dirs if they don't already exist
         for (final String dname : ForgeConstants.PROFILE_DIRS) {

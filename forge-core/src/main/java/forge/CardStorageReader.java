@@ -43,7 +43,7 @@ import java.util.zip.ZipFile;
 
 import forge.util.BuildInfo;
 import org.apache.commons.lang3.time.StopWatch;
-
+import com.google.common.io.Files;
 import forge.card.CardRules;
 import forge.util.FileUtil;
 import forge.util.Localizer;
@@ -71,6 +71,7 @@ public class CardStorageReader {
     }
 
     private static final String CARD_FILE_DOT_EXTENSION = ".txt";
+    private static final String UPCOMING = "upcoming";
 
     /** Default charset when loading from files. */
     public static final String DEFAULT_CHARSET_NAME = "UTF-8";
@@ -80,6 +81,7 @@ public class CardStorageReader {
 
     private final ProgressObserver progressObserver;
 
+    private final boolean loadingTokens;
     private transient File cardsfolder;
 
     private transient ZipFile zip;
@@ -91,6 +93,9 @@ public class CardStorageReader {
     public CardStorageReader(final String cardDataDir, final CardStorageReader.ProgressObserver progressObserver, boolean loadCardsLazily) {
         this.progressObserver = progressObserver != null ? progressObserver : CardStorageReader.ProgressObserver.emptyObserver;
         this.cardsfolder = new File(cardDataDir);
+
+        this.loadingTokens = cardDataDir.contains("token");
+
         this.loadCardsLazily = loadCardsLazily;
 
         // These read data for lightweight classes.
@@ -240,6 +245,9 @@ public class CardStorageReader {
         final Set<CardRules> result = new TreeSet<>(new Comparator<CardRules>() {
             @Override
             public int compare(final CardRules o1, final CardRules o2) {
+                if (loadingTokens) {
+                    return String.CASE_INSENSITIVE_ORDER.compare(o1.getNormalizedName(), o2.getNormalizedName());
+                }
                 return String.CASE_INSENSITIVE_ORDER.compare(o1.getName(), o2.getName());
             }
         });
@@ -252,7 +260,7 @@ public class CardStorageReader {
         if (!allFiles.isEmpty()) {
             int fileParts = zip == null ? NUMBER_OF_PARTS : 1 + NUMBER_OF_PARTS / 3;
             if (allFiles.size() < fileParts * 100) {
-                fileParts = allFiles.size() / 100; // to avoid creation of many threads for a dozen of files
+                fileParts = Math.max(1, allFiles.size() / 100); // to avoid creation of many threads for a dozen of files
             }
             final CountDownLatch cdlFiles = new CountDownLatch(fileParts);
             final List<Callable<List<CardRules>>> taskFiles = makeTaskListForFiles(allFiles, cdlFiles);
@@ -377,7 +385,7 @@ public class CardStorageReader {
                 continue;
             }
 
-            if (filename.equalsIgnoreCase("upcoming") && !BuildInfo.isDevelopmentVersion()) {
+            if (filename.equalsIgnoreCase(CardStorageReader.UPCOMING) && !BuildInfo.isDevelopmentVersion()) {
                 // If upcoming folder exits, only load these cards on development builds
                 continue;
             }
@@ -402,7 +410,7 @@ public class CardStorageReader {
             fileInputStream = new FileInputStream(file);
             reader.reset();
             final List<String> lines = readScript(fileInputStream);
-            return reader.readCard(lines);
+            return reader.readCard(lines, Files.getNameWithoutExtension(file.getName()));
         } catch (final FileNotFoundException ex) {
             throw new RuntimeException("CardReader : run error -- file not found: " + file.getPath(), ex);
         } finally {
@@ -430,7 +438,7 @@ public class CardStorageReader {
             zipInputStream = this.zip.getInputStream(entry);
             rulesReader.reset();
 
-            return rulesReader.readCard(readScript(zipInputStream));
+            return rulesReader.readCard(readScript(zipInputStream), Files.getNameWithoutExtension(entry.getName()));
         } catch (final IOException exn) {
             throw new RuntimeException(exn);
             // PM

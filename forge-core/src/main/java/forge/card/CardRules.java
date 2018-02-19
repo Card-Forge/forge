@@ -34,6 +34,7 @@ import java.util.StringTokenizer;
  * @version $Id: CardRules.java 9708 2011-08-09 19:34:12Z jendave $
  */
 public final class CardRules implements ICardCharacteristics {
+    private String normalizedName;
     private CardSplitType splitType;
     private ICardFace mainPart;
     private ICardFace otherPart;
@@ -124,6 +125,9 @@ public final class CardRules implements ICardCharacteristics {
         }
     }
 
+    public String getNormalizedName() { return normalizedName; }
+    public void setNormalizedName(String filename) { normalizedName = filename; }
+
     public CardAiHints getAiHints() {
         return aiHints;
     }
@@ -207,12 +211,6 @@ public final class CardRules implements ICardCharacteristics {
         return meldWith;
     }
 
-//    public Set<String> getSets() { return this.setsPrinted.keySet(); }
-//    public CardInSet getEditionInfo(final String setCode) {
-//        final CardInSet result = this.setsPrinted.get(setCode);
-//        return result; // if returns null, String.format("Card '%s' was never printed in set '%s'", this.getName(), setCode);
-//    }
-
     // vanguard card fields, they don't use sides.
     private int deltaHand;
     private int deltaLife;
@@ -260,6 +258,7 @@ public final class CardRules implements ICardCharacteristics {
         private CardSplitType altMode = CardSplitType.None;
         private String meldWith = "";
         private String handLife = null;
+        private String normalizedName = "";
 
         // fields to build CardAiHints
         private boolean removedFromAIDecks = false;
@@ -287,6 +286,7 @@ public final class CardRules implements ICardCharacteristics {
             this.hints = null;
             this.has = null;
             this.meldWith = "";
+            this.normalizedName = "";
         }
 
         /**
@@ -299,6 +299,8 @@ public final class CardRules implements ICardCharacteristics {
             faces[0].assignMissingFields();
             if (null != faces[1]) faces[1].assignMissingFields();
             final CardRules result = new CardRules(faces, altMode, cah);
+
+            result.setNormalizedName(this.normalizedName);
             result.meldWith = this.meldWith;
             result.setDlUrls(pictureUrl);
             if (StringUtils.isNotBlank(handLife))
@@ -306,7 +308,7 @@ public final class CardRules implements ICardCharacteristics {
             return result;
         }
 
-        public final CardRules readCard(final Iterable<String> script) {
+        public final CardRules readCard(final Iterable<String> script, String filename) {
             this.reset();
             for (String line : script) {
                 if (line.isEmpty() || line.charAt(0) == '#') {
@@ -314,7 +316,12 @@ public final class CardRules implements ICardCharacteristics {
                 }
                 this.parseLine(line);
             }
+            this.normalizedName = filename;
             return this.getCard();
+        }
+
+        public final CardRules readCard(final Iterable<String> script) {
+            return readCard(script, null);
         }
 
         /**

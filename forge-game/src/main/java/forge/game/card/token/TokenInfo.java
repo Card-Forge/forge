@@ -8,6 +8,7 @@ import forge.ImageKeys;
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
@@ -133,10 +134,7 @@ public class TokenInfo {
         return sb.toString();
     }
 
-    public List<Card> makeTokenWithMultiplier(final Player controller, int amount, final boolean applyMultiplier) {
-        final List<Card> list = Lists.newArrayList();
-        final Game game = controller.getGame();
-
+    static private int calculateMultiplier(final Game game, final Player controller, final boolean applyMultiplier) {
         int multiplier = 1;
         Player player = controller;
 
@@ -155,12 +153,38 @@ public class TokenInfo {
                 break;
             }
             default:
-                return list;
+                return 0;
         }
+        return multiplier;
+    }
+
+    public List<Card> makeTokenWithMultiplier(final Player controller, int amount, final boolean applyMultiplier) {
+        final List<Card> list = Lists.newArrayList();
+        final Game game = controller.getGame();
+
+        int multiplier = calculateMultiplier(game, controller, applyMultiplier);
 
         for (int i = 0; i < multiplier * amount; i++) {
             list.add(makeOneToken(controller));
         }
+        return list;
+    }
+
+    static public List<Card> makeTokensFromPrototype(Card prototype, final Player controller, int amount, final boolean applyMultiplier) {
+        final List<Card> list = Lists.newArrayList();
+        final Game game = controller.getGame();
+
+        int multiplier = calculateMultiplier(game, controller, applyMultiplier);
+        long timestamp = game.getNextTimestamp();
+        prototype.setController(controller, timestamp);
+        for (int i = 0; i < multiplier * amount; i++) {
+            Card copy = CardFactory.copyCard(prototype, true);
+            copy.setTimestamp(timestamp);
+            copy.setOwner(controller);
+            copy.setToken(true);
+            list.add(copy);
+        }
+
         return list;
     }
 

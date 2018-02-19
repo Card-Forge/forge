@@ -74,6 +74,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     // NO GETTERS/SETTERS HERE!
     public static class CardRequest {
+        // TODO Move Request to its own class
         public String cardName;
         public String edition;
         public int artIndex;
