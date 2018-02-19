@@ -853,18 +853,11 @@ public class SpecialCardAi {
 
     public static class PriceOfProgress {
         public static boolean consider(final Player ai, final SpellAbility sa) {
-            int ailands = 0;
-            int opplands = 0;
+            int ailands = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.Presets.LANDS, Predicates.not(CardPredicates.Presets.BASIC_LANDS))).size();
+            int opplands = CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.Presets.LANDS, Predicates.not(CardPredicates.Presets.BASIC_LANDS))).size();
+
             boolean hasbridge = false;
             for (Card cardInPlay : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
-                if ((cardInPlay.isLand()) && !cardInPlay.isBasicLand()) {
-                    if (cardInPlay.getController().equals(ai)) {
-                        ailands++;
-                    } else {
-                        opplands++;
-                    }
-                }
-
                 // Do we have a card in play that makes us want to empty out hand?
                 if ((cardInPlay.hasSVar("PreferredHandSize")) &&
                         (cardInPlay.getController().equals(ai))) {
@@ -878,11 +871,11 @@ public class SpecialCardAi {
             // TODO : predict actual damage instead of assuming it'll be 2*lands
             // Don't if we lose, unless we lose anyway to unblocked creatures next turn
             if ((ai.getLife() <= ailands * 2) &&
-                    (!(ComputerUtil.aiLifeInDanger(ai, true, 0)) && ((ai.getOpponents().get(0).getLife()) <= opplands * 2))) {
+                    (!(ComputerUtil.aiLifeInDanger(ai, true, 0)) && ((ai.getOpponentsSmallestLifeTotal()) <= opplands * 2))) {
                 return false;
             }
             // Do if we can win
-            if ((ai.getOpponents().get(0).getLife()) <= opplands * 2) {
+            if ((ai.getOpponentsSmallestLifeTotal()) <= opplands * 2) {
                 return true;
             }
             // Do if we need to lose cards to activate Ensnaring Bridge or Cursed Scroll
@@ -893,8 +886,7 @@ public class SpecialCardAi {
 
             // Don't if we'd lose a larger percentage of our remaining life than enemy
             if ((ailands / ((double) ai.getLife())) >
-                    (opplands / ((double) ai.getOpponents().get(0).getLife()))
-                    ) {
+                    (opplands / ((double) ai.getOpponentsSmallestLifeTotal()))) {
                 return false;
             }
             // Don't if no enemy nonbasic lands
@@ -902,9 +894,8 @@ public class SpecialCardAi {
                 return false;
             }
             // Don't if loss is equal in percentage but we lose more points
-            if (((ailands / ((double) ai.getLife())) ==
-                    (opplands / ((double) ai.getOpponents().get(0).getLife()))
-            ) && (ailands > opplands)) {
+            if (((ailands / ((double) ai.getLife())) == (opplands / ((double) ai.getOpponentsSmallestLifeTotal())))
+                    && (ailands > opplands)) {
                 return false;
             }
 

@@ -474,54 +474,54 @@ public class AttachAi extends SpellAbilityAi {
     private static Card attachAICuriosityPreference(final SpellAbility sa, final List<Card> list, final boolean mandatory,
                                                     final Card attachSource) {
         Card chosen = null;
-        int prio = 0;
+        int priority = 0;
         for (Card card : list) {
-            int thisprio = 0;
+            int cardPriority = 0;
             // Prefer Evasion
             if (card.hasKeyword("Trample")) {
-                thisprio += 10;
+                cardPriority += 10;
             }
             if (card.hasKeyword("Menace")) {
-                thisprio += 10;
+                cardPriority += 10;
             }
             // Avoid this for Sleepers Robe?
             if (card.hasKeyword("Fear")) {
-                thisprio += 15;
+                cardPriority += 15;
             }
             if (card.hasKeyword("Flying")) {
-                thisprio += 20;
+                cardPriority += 20;
             }
             if (card.hasKeyword("Shadow")) {
-                thisprio += 30;
+                cardPriority += 30;
             }
             if (card.hasKeyword("Horsemanship")) {
-                thisprio += 40;
+                cardPriority += 40;
             }
             if (card.hasKeyword("Unblockable")) {
-                thisprio += 50;
+                cardPriority += 50;
             }
             // Prefer "tap to deal damage"
             // TODO : Skip this one if triggers on combat damage only?
             for (SpellAbility sa2 : card.getSpellAbilities()) {
                 if ((sa2.getApi().equals(ApiType.DealDamage))
                         && (sa2.getTargetRestrictions().canTgtPlayer())) {
-                    thisprio += 300;
+                    cardPriority += 300;
                 }
             }
             // Prefer stronger creatures, avoid if can't attack
-            thisprio += card.getCurrentToughness() * 2;
-            thisprio += card.getCurrentPower();
+            cardPriority += card.getCurrentToughness() * 2;
+            cardPriority += card.getCurrentPower();
             if (card.getCurrentPower() <= 0) {
-                thisprio = -100;
+                cardPriority = -100;
             }
             if (card.hasKeyword("Defender")) {
-                thisprio = -100;
+                cardPriority = -100;
             }
             if (card.hasKeyword("Indestructible")) {
-                thisprio += 15;
+                cardPriority += 15;
             }
-            if (thisprio > prio) {
-                prio = thisprio;
+            if (cardPriority > priority) {
+                priority = cardPriority;
                 chosen = card;
             }
         }
