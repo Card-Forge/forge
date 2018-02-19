@@ -1311,6 +1311,19 @@ public class AttachAi extends SpellAbilityAi {
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
             return false;
         }
+
+        // Don't play if would choose a color the target is already protected from
+        if (card.hasSVar("ChosenProtection")) {
+            CardCollectionView oppAllCards = CardCollection.combine
+                    (ComputerUtil.getOpponentFor(ai).getCardsIn(ZoneType.Hand),
+                            ComputerUtil.getOpponentFor(ai).getCardsIn(ZoneType.Library),
+                            ComputerUtil.getOpponentFor(ai).getCardsIn(ZoneType.Battlefield));
+            String cc = ComputerUtilCard.getMostProminentColor(oppAllCards);
+            if (card.hasKeyword("Protection from " + cc.toLowerCase())) {
+                return false;
+            }
+        }
+
         final boolean evasive = (keyword.equals("Unblockable") || keyword.equals("Fear")
                 || keyword.equals("Intimidate") || keyword.equals("Shadow")
                 || keyword.equals("Flying") || keyword.equals("Horsemanship")
