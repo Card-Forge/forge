@@ -935,11 +935,6 @@ public class PlayerControllerAi extends PlayerController {
         if (sa.hasParam("AILogic")) {
             CardCollectionView aiLibrary = player.getCardsIn(ZoneType.Library);
             CardCollectionView oppLibrary = ComputerUtil.getOpponentFor(player).getCardsIn(ZoneType.Library);
-            CardCollectionView oppAllCards = CardCollection.combine
-                    (ComputerUtil.getOpponentFor(player).getCardsIn(ZoneType.Hand),
-                            ComputerUtil.getOpponentFor(player).getCardsIn(ZoneType.Library),
-                            ComputerUtil.getOpponentFor(player).getCardsIn(ZoneType.Battlefield));
-
             final Card source = sa.getHostCard();
             final String logic = sa.getParam("AILogic");
 
@@ -960,8 +955,6 @@ public class PlayerControllerAi extends PlayerController {
                 return ComputerUtilCard.getMostProminentCardName(aiLibrary);
             } else if (logic.equals("MostProminentInHumanDeck")) {
                 return ComputerUtilCard.getMostProminentCardName(oppLibrary);
-            } else if (logic.equals("MostProminentColorInHumanDeck")) {
-                return ComputerUtilCard.getMostProminentColor(oppAllCards);
             } else if (logic.equals("MostProminentCreatureInComputerDeck")) {
                 CardCollectionView cards = CardLists.getValidCards(aiLibrary, "Creature", player, sa.getHostCard());
                 return ComputerUtilCard.getMostProminentCardName(cards);

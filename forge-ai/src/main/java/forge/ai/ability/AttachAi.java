@@ -1313,11 +1313,9 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         // Don't play if would choose a color the target is already protected from
-        if (card.hasSVar("ChosenProtection")) {
+        if (sa.getHostCard().hasSVar("ChosenProtection")) {
             CardCollectionView oppAllCards = CardCollection.combine
-                    (ComputerUtil.getOpponentFor(ai).getCardsIn(ZoneType.Hand),
-                            ComputerUtil.getOpponentFor(ai).getCardsIn(ZoneType.Library),
-                            ComputerUtil.getOpponentFor(ai).getCardsIn(ZoneType.Battlefield));
+                    (ComputerUtil.getOpponentFor(ai).getAllCards());
             String cc = ComputerUtilCard.getMostProminentColor(oppAllCards);
             if (card.hasKeyword("Protection from " + cc.toLowerCase())) {
                 return false;
