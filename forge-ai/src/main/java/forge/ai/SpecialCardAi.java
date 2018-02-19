@@ -851,67 +851,6 @@ public class SpecialCardAi {
         }
     }
 
-    public static class PriceOfProgress {
-        public static boolean consider(final Player ai, final SpellAbility sa) {
-            // Don't play in early game - opponent likely still has lands to play
-            if (ai.getGame().getPhaseHandler().getTurn() < 10) {
-                return false;
-            }
-
-            int aiLands = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.Presets.LANDS, Predicates.not(CardPredicates.Presets.BASIC_LANDS))).size();
-
-            boolean hasBridge = false;
-            for (Card cardInPlay : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
-                // Do we have a card in play that makes us want to empty out hand?
-                if ((cardInPlay.hasSVar("PreferredHandSize")) &&
-                        (cardInPlay.getController().equals(ai))) {
-                    if (ai.getGame().getCardsIn(ZoneType.Hand).size() > Integer.parseInt(cardInPlay.getSVar("PreferredHandSize"))) {
-                        hasBridge = true;
-                    }
-                }
-
-            }
-
-            // Do if we need to lose cards to activate Ensnaring Bridge or Cursed Scroll
-            // even if suboptimal play, but don't waste the card too early even then!
-            if ((hasBridge) && (ai.getGame().getPhaseHandler().getTurn() >= 10)) {
-                return true;
-            }
-
-            for (Player opp : ai.getOpponents()) {
-                int oppLands = CardLists.filter(opp.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.Presets.LANDS, Predicates.not(CardPredicates.Presets.BASIC_LANDS))).size();
-                // Always if enemy would die and we don't!
-                // TODO : predict actual damage instead of assuming it'll be 2*lands
-                // Don't if we lose, unless we lose anyway to unblocked creatures next turn
-                if ((ai.getLife() <= aiLands * 2) &&
-                        (!(ComputerUtil.aiLifeInDanger(ai, true, 0)) && ((ai.getOpponentsSmallestLifeTotal()) <= oppLands * 2))) {
-                    return false;
-                }
-                // Do if we can win
-                if ((ai.getOpponentsSmallestLifeTotal()) <= oppLands * 2) {
-                    return true;
-                }
-                // Don't if we'd lose a larger percentage of our remaining life than enemy
-                if ((aiLands / ((double) ai.getLife())) >
-                        (oppLands / ((double) ai.getOpponentsSmallestLifeTotal()))) {
-                    return false;
-                }
-                // Don't if no enemy nonbasic lands
-                if (oppLands == 0) {
-                    return false;
-                }
-                // Don't if loss is equal in percentage but we lose more points
-                if (((aiLands / ((double) ai.getLife())) == (oppLands / ((double) ai.getOpponentsSmallestLifeTotal())))
-                        && (aiLands > oppLands)) {
-                    return false;
-                }
-
-            }
-            return true;
-        }
-    }
-
-
     // Null Brooch
     public static class NullBrooch {
         public static boolean consider(final Player ai, final SpellAbility sa) {
@@ -993,6 +932,64 @@ public class SpecialCardAi {
             }
 
             return false; // haven't found anything to play with the excess generated mana
+        }
+    }
+
+    // Price of Progress
+    public static class PriceOfProgress {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            // Don't play in early game - opponent likely still has lands to play
+            if (ai.getGame().getPhaseHandler().getTurn() < 10) {
+                return false;
+            }
+
+            int aiLands = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.Presets.LANDS, Predicates.not(CardPredicates.Presets.BASIC_LANDS))).size();
+
+            boolean hasBridge = false;
+            for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+                // Do we have a card in play that makes us want to empty out hand?
+                if (c.hasSVar("PreferredHandSize") && ai.getGame().getCardsIn(ZoneType.Hand).size() > Integer.parseInt(c.getSVar("PreferredHandSize"))) {
+                        hasBridge = true;
+                        break;
+                }
+            }
+
+            // Do if we need to lose cards to activate Ensnaring Bridge or Cursed Scroll
+            // even if suboptimal play, but don't waste the card too early even then!
+            if ((hasBridge) && (ai.getGame().getPhaseHandler().getTurn() >= 10)) {
+                return true;
+            }
+
+            for (Player opp : ai.getOpponents()) {
+                int oppLands = CardLists.filter(opp.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.Presets.LANDS, Predicates.not(CardPredicates.Presets.BASIC_LANDS))).size();
+                // Always if enemy would die and we don't!
+                // TODO : predict actual damage instead of assuming it'll be 2*lands
+                // Don't if we lose, unless we lose anyway to unblocked creatures next turn
+                if ((ai.getLife() <= aiLands * 2) &&
+                        (!(ComputerUtil.aiLifeInDanger(ai, true, 0)) && ((ai.getOpponentsSmallestLifeTotal()) <= oppLands * 2))) {
+                    return false;
+                }
+                // Do if we can win
+                if ((ai.getOpponentsSmallestLifeTotal()) <= oppLands * 2) {
+                    return true;
+                }
+                // Don't if we'd lose a larger percentage of our remaining life than enemy
+                if ((aiLands / ((double) ai.getLife())) >
+                        (oppLands / ((double) ai.getOpponentsSmallestLifeTotal()))) {
+                    return false;
+                }
+                // Don't if no enemy nonbasic lands
+                if (oppLands == 0) {
+                    return false;
+                }
+                // Don't if loss is equal in percentage but we lose more points
+                if (((aiLands / ((double) ai.getLife())) == (oppLands / ((double) ai.getOpponentsSmallestLifeTotal())))
+                        && (aiLands > oppLands)) {
+                    return false;
+                }
+
+            }
+            return true;
         }
     }
 
