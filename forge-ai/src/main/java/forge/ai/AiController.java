@@ -708,10 +708,10 @@ public class AiController {
         if (card.hasStartOfKeyword("Buyback")) {
             //if (card.getBuybackAbility()!=null) {
             if (!sa.isBuyBackAbility()) {
-                boolean wastebuybackallowed = false;
+                boolean wasteBuybackAllowed = false;
                 // About to lose game : allow
                 if (ComputerUtil.aiLifeInDanger(player, true, 0)) {
-                    wastebuybackallowed = true;
+                    wasteBuybackAllowed = true;
                 }
                 int copies = 0;
                 // Have two copies : allow
@@ -721,7 +721,7 @@ public class AiController {
                     }
                 }
                 if (copies >= 2) {
-                    wastebuybackallowed = true;
+                    wasteBuybackAllowed = true;
                 }
                 // Won't be able to afford buyback any time soon
                 // If Buyback cost includes sacrifice, life, discard
@@ -740,10 +740,10 @@ public class AiController {
                 }
                 int hasmana = ComputerUtilMana.getAvailableManaEstimate(player, false);
                 if (hasmana < neededMana - 1) {
-                    wastebuybackallowed = true;
+                    wasteBuybackAllowed = true;
                 }
 
-                if (!wastebuybackallowed) return AiPlayDecision.NeedsToPlayCriteriaNotMet;
+                if (!wasteBuybackAllowed) return AiPlayDecision.NeedsToPlayCriteriaNotMet;
             }
         }
         // add any other necessary logic to play a basic spell here
