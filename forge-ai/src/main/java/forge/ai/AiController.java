@@ -713,13 +713,8 @@ public class AiController {
                 if (ComputerUtil.aiLifeInDanger(player, true, 0)) {
                     wasteBuybackAllowed = true;
                 }
-                int copies = 0;
+                int copies = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(card.getName())).size();
                 // Have two copies : allow
-                for (Card hand : player.getCardsIn(ZoneType.Hand)) {
-                    if (hand.getName().equals(card.getName())) {
-                        copies++;
-                    }
-                }
                 if (copies >= 2) {
                     wasteBuybackAllowed = true;
                 }
