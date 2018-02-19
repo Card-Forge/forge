@@ -949,8 +949,8 @@ public class SpecialCardAi {
             for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
                 // Do we have a card in play that makes us want to empty out hand?
                 if (c.hasSVar("PreferredHandSize") && ai.getGame().getCardsIn(ZoneType.Hand).size() > Integer.parseInt(c.getSVar("PreferredHandSize"))) {
-                        hasBridge = true;
-                        break;
+                    hasBridge = true;
+                    break;
                 }
             }
 
