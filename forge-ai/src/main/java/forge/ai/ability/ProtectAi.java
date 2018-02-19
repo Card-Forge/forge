@@ -180,7 +180,7 @@ public class ProtectAi extends SpellAbilityAi {
             }
             // Affecting single card
             if (cards.size() == 1) {
-                if ((getProtectCreatures(ai, sa)).size() > 0) {
+                if ((getProtectCreatures(ai, sa)).contains(cards.get(0))) {
                     return true;
                 }
             }
