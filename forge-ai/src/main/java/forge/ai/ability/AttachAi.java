@@ -1320,6 +1320,14 @@ public class AttachAi extends SpellAbilityAi {
             if (card.hasKeyword("Protection from " + cc.toLowerCase())) {
                 return false;
             }
+            // Also don't play if it would destroy own Aura
+            for (Card c : card.getEnchantedBy(false)) {
+                if ((c.getController().equals(ai))
+                        && (c.isOfColor(cc))
+                        ) {
+                    return false;
+                }
+            }
         }
 
         final boolean evasive = (keyword.equals("Unblockable") || keyword.equals("Fear")
