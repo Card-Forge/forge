@@ -171,12 +171,7 @@ public class DestroyAi extends SpellAbilityAi {
                 maxTargets = Math.min(ComputerUtilMana.determineMaxAffordableX(ai, sa), abTgt.getMaxTargets(sa.getHostCard(), sa));
                 // X can't be more than the lands we have in our hand for "discard X lands"!
                 if ("ScorchedEarth".equals(logic)) {
-                    int lands = 0;
-                    for (Card c : ai.getCardsIn(ZoneType.Hand)) {
-                        if (c.isLand()) {
-                            lands++;
-                        }
-                    }
+                    int lands = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS).size();
                     maxTargets = Math.min(maxTargets, lands);
                 }
             }
