@@ -20,7 +20,11 @@ public final class RemoteClient implements IToClient {
     @Override
     public void send(final NetEvent event) {
         System.out.println("Sending event " + event + " to " + channel);
-        channel.writeAndFlush(event);
+        try {
+            channel.writeAndFlush(event).sync();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
