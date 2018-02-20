@@ -935,6 +935,30 @@ public class SpecialCardAi {
         }
     }
 
+    // Phyrexian Dreadnought
+    public static class PhyrexianDreadnought {
+        public static CardCollection reviseCreatureSacList(final Player ai, final SpellAbility sa, final CardCollection choices) {
+            choices.sort(Collections.reverseOrder(ComputerUtilCard.EvaluateCreatureComparator));
+            int power = 0;
+            List<Card> toKeep = Lists.newArrayList();
+            for (Card c : choices) {
+                if (c.getName().equals(ComputerUtilAbility.getAbilitySourceName(sa))) {
+                    continue; // not worth it sac'ing another Dreadnaught
+                }
+                if (c.getNetPower() < 1) {
+                    continue; // contributes nothing to Dreadnought requirements
+                }
+                if (power >= 12) {
+                    break;
+                }
+                toKeep.add(c);
+                power += c.getNetPower();
+            }
+
+            return new CardCollection(toKeep);
+        }
+    }
+
     // Price of Progress
     public static class PriceOfProgress {
         public static boolean consider(final Player ai, final SpellAbility sa) {
@@ -990,30 +1014,6 @@ public class SpecialCardAi {
 
             }
             return true;
-        }
-    }
-
-    // Phyrexian Dreadnought
-    public static class PhyrexianDreadnought {
-        public static CardCollection reviseCreatureSacList(final Player ai, final SpellAbility sa, final CardCollection choices) {
-            choices.sort(Collections.reverseOrder(ComputerUtilCard.EvaluateCreatureComparator));
-            int power = 0;
-            List<Card> toKeep = Lists.newArrayList();
-            for (Card c : choices) {
-                if (c.getName().equals(ComputerUtilAbility.getAbilitySourceName(sa))) {
-                    continue; // not worth it sac'ing another Dreadnaught
-                }
-                if (c.getNetPower() < 1) {
-                    continue; // contributes nothing to Dreadnought requirements
-                }
-                if (power >= 12) {
-                    break;
-                }
-                toKeep.add(c);
-                power += c.getNetPower();
-            }
-
-            return new CardCollection(toKeep);
         }
     }
 
