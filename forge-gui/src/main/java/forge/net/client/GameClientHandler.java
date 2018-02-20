@@ -27,6 +27,8 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
     private final FGameClient client;
     private final IGuiGame gui;
     private Tracker tracker;
+    private Match match;
+    private Game game;
 
     /**
      * Creates a client-side game handler.
@@ -36,6 +38,8 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
         this.client = client;
         this.gui = client.getGui();
         this.tracker = null;
+        this.match = null;
+        this.game = null;
     }
 
     @Override
@@ -58,32 +62,26 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
     protected void beforeCall(final ProtocolMethod protocolMethod, final Object[] args) {
         switch (protocolMethod) {
             case openView:
-                if (this.tracker == null) {
-                    int maxAttempts = 5;
-                    for (int numAttempts = 0; numAttempts < maxAttempts; numAttempts++) {
-                        try {
+                // only need one **match**
+                if (this.match == null) {
+                    this.match = createMatch();
+                }
 
-                            this.tracker = createTracker();
+                // openView is called **once** per game, for now create a new Game instance each time
+                this.game = createGame();
 
-                            for (PlayerView myPlayer : (TrackableCollection<PlayerView>) args[0]) {
-                                if (myPlayer.getTracker() == null) {
-                                    myPlayer.setTracker(this.tracker);
-                                }
-                            }
+                // get a tracker
+                this.tracker = createTracker();
 
-                            final TrackableCollection<PlayerView> myPlayers = (TrackableCollection<PlayerView>) args[0];
-                            client.setGameControllers(myPlayers);
-
-                        } catch (Exception e) {
-                            System.err.println("Failed: attempt number: " + numAttempts + " - " + e.toString());
-                            try {
-                                Thread.sleep(100);
-                            } catch (InterruptedException e1) {
-                                e1.printStackTrace();
-                            }
-                        }
+                for (PlayerView myPlayer : (TrackableCollection<PlayerView>) args[0]) {
+                    if (myPlayer.getTracker() == null) {
+                        myPlayer.setTracker(this.tracker);
                     }
                 }
+
+                final TrackableCollection<PlayerView> myPlayers = (TrackableCollection<PlayerView>) args[0];
+                client.setGameControllers(myPlayers);
+
                 break;
             default:
                 break;
@@ -108,19 +106,17 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
     }
 
     /**
-     * This method creates the necessary objects and state to retrieve a <b>Tracker</b> object.
-     *
-     * Near as I can tell, that means that we need to create a <b>Match</b>.
+     * This method retrieves enough of the existing (incomplete) game state to
+     * recreate a new viable Match object
      *
      * Creating a <b>Match</b> requires that we have:
      *  * <b>GameRules</b>
      *  * <b>RegisteredPlayers</b>
      *  * Title
      *
-     * @return Tracker
+     * @return Match
      */
-    private Tracker createTracker() {
-
+    private Match createMatch() {
         // retrieve what we can from the existing (but incomplete) state
         final IGuiGame gui = client.getGui();
         GameView gameView = gui.getGameView();
@@ -134,12 +130,24 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
 
         // create a valid match object and game
         Match match = new Match(gameRules, registeredPlayers, title);
-        Game game = match.createGame();
 
+        return match;
+    }
+
+    private Game createGame() {
+        this.tracker = null;
+        return this.match.createGame();
+    }
+
+    /**
+     * Ensure the stored GameView is correct and retrieve a <b>Tracker</b> object.
+     *
+     * @return Tracker
+     */
+    private Tracker createTracker() {
         // replace the existing incomplete GameView with the newly created one
         gui.setGameView(null);
         gui.setGameView(game.getView());
-
         return gui.getGameView().getTracker();
     }
 
