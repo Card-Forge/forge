@@ -2999,7 +2999,7 @@ public class CardFactoryUtil {
     public static void addReplacementEffect(final KeywordInterface inst, final Card card, final boolean intrinsic) {
 
         String keyword = inst.getOriginal();
-        if (keyword.equals("Aftermath")) {
+        if (keyword.equals("Aftermath") && card.getCurrentStateName().equals(CardStateName.RightSplit)) {
             StringBuilder sb = new StringBuilder();
             sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
             sb.append("| ValidStackSa$ Spell.Aftermath | Description$ Aftermath");
@@ -3021,8 +3021,6 @@ public class CardFactoryUtil {
 
             re.setOverridingAbility(saExile);
 
-            // Aftermath only on Rightsplit
-            // doesn't make a copy with it
             inst.addReplacement(re);
         } else if (keyword.startsWith("Amplify")) {
             final String[] ampString = keyword.split(":");
@@ -3493,11 +3491,11 @@ public class CardFactoryUtil {
                 inst.addSpellAbility(newSA);
                 
             }
-        } else if (keyword.equals("Aftermath")) {
+        } else if (keyword.equals("Aftermath") && card.getCurrentStateName().equals(CardStateName.RightSplit)) {
             // Aftermath does modify existing SA, and does not add new one
 
             // only target RightSplit of it
-            final SpellAbility origSA = card.getState(CardStateName.RightSplit).getFirstAbility();
+            final SpellAbility origSA = card.getFirstSpellAbility();
             origSA.setAftermath(true);
             origSA.getRestrictions().setZone(ZoneType.Graveyard);
             // The Exile part is done by the System itself
@@ -3742,9 +3740,9 @@ public class CardFactoryUtil {
             inst.addSpellAbility(sa);
 
             
-        } else if (keyword.startsWith("Fuse")) {
+        } else if (keyword.startsWith("Fuse") && card.getCurrentStateName().equals(CardStateName.Original)) {
             final SpellAbility sa = AbilityFactory.buildFusedAbility(card);
-            card.getState(CardStateName.Original).addNonManaAbility(sa);
+            card.addSpellAbility(sa);
 
             sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);

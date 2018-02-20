@@ -164,9 +164,6 @@ public class CardState extends GameObject {
     public final Collection<KeywordInterface> getIntrinsicKeywords() {
         return intrinsicKeywords.getValues();
     }
-    public final Iterable<String> getIntrinsicKeywordStrings() {
-        return intrinsicKeywords;
-    }
     public final boolean hasIntrinsicKeyword(String k) {
         return intrinsicKeywords.contains(k);
     }
