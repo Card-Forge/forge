@@ -3,11 +3,14 @@ package forge.match;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import forge.LobbyPlayer;
+import forge.interfaces.IGameController;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -55,6 +58,7 @@ public class HostedMatch {
     private Match match;
     private Game game;
     private String title;
+    public HashMap<LobbySlot, IGameController> gameControllers = null;
     private Runnable startGameHook = null;
     private final List<PlayerControllerHuman> humanControllers = Lists.newArrayList();
     private Map<RegisteredPlayer, IGuiGame> guis;
@@ -180,6 +184,12 @@ public class HostedMatch {
 
                 game.subscribeToEvents(new FControlGameEventHandler(humanController));
                 playersPerGui.add(gui, p.getView());
+
+                if (gameControllers != null ) {
+                    LobbySlot lobbySlot = getLobbySlot(p.getLobbyPlayer());
+                    gameControllers.put(lobbySlot, humanController);
+                }
+
                 humanControllers.add(humanController);
                 humanCount++;
             }
@@ -236,6 +246,18 @@ public class HostedMatch {
                 }
             }
         });
+    }
+
+    private LobbySlot getLobbySlot(LobbyPlayer lobbyPlayer) {
+        for (LobbySlot key: gameControllers.keySet()) {
+            IGameController value = gameControllers.get(key);
+            if (value instanceof PlayerControllerHuman) {
+                if (lobbyPlayer == ((PlayerControllerHuman) value).getLobbyPlayer()) {
+                    return key;
+                }
+            }
+        }
+        return null;
     }
 
     public void registerSpectator(final IGuiGame gui) {

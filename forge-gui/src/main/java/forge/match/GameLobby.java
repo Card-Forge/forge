@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -49,7 +51,7 @@ public abstract class GameLobby implements IHasGameType {
 
     private final boolean allowNetworking;
     private HostedMatch hostedMatch;
-    private final Map<LobbySlot, IGameController> gameControllers = Maps.newHashMap();
+    private final HashMap<LobbySlot, IGameController> gameControllers = Maps.newHashMap();
     protected GameLobby(final boolean allowNetworking) {
         this.allowNetworking = allowNetworking;
     }
@@ -480,6 +482,8 @@ public abstract class GameLobby implements IHasGameType {
                         gameControllers.put(slot, (IGameController) p.getController());
                     }
                 }
+
+                hostedMatch.gameControllers = gameControllers;
 
                 onGameStarted();
             }
