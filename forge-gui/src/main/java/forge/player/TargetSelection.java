@@ -29,6 +29,7 @@ import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
+import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -170,20 +171,20 @@ public class TargetSelection {
         // Send in a list of valid cards, and popup a choice box to target
         final Game game = ability.getActivatingPlayer().getGame();
 
-        final List<Card> crdsBattle  = Lists.newArrayList();
-        final List<Card> crdsExile   = Lists.newArrayList();
-        final List<Card> crdsGrave   = Lists.newArrayList();
-        final List<Card> crdsLibrary = Lists.newArrayList();
-        final List<Card> crdsStack   = Lists.newArrayList();
-        final List<Card> crdsAnte    = Lists.newArrayList();
+        final List<CardView> crdsBattle  = Lists.newArrayList();
+        final List<CardView> crdsExile   = Lists.newArrayList();
+        final List<CardView> crdsGrave   = Lists.newArrayList();
+        final List<CardView> crdsLibrary = Lists.newArrayList();
+        final List<CardView> crdsStack   = Lists.newArrayList();
+        final List<CardView> crdsAnte    = Lists.newArrayList();
         for (final Card inZone : choices) {
             Zone zz = game.getZoneOf(inZone);
-            if (zz.is(ZoneType.Battlefield))    crdsBattle.add(inZone);
-            else if (zz.is(ZoneType.Exile))     crdsExile.add(inZone);
-            else if (zz.is(ZoneType.Graveyard)) crdsGrave.add(inZone);
-            else if (zz.is(ZoneType.Library))   crdsLibrary.add(inZone);
-            else if (zz.is(ZoneType.Stack))     crdsStack.add(inZone);
-            else if (zz.is(ZoneType.Ante))      crdsAnte.add(inZone);
+            if (zz.is(ZoneType.Battlefield))    crdsBattle.add(CardView.get(inZone));
+            else if (zz.is(ZoneType.Exile))     crdsExile.add(CardView.get(inZone));
+            else if (zz.is(ZoneType.Graveyard)) crdsGrave.add(CardView.get(inZone));
+            else if (zz.is(ZoneType.Library))   crdsLibrary.add(CardView.get(inZone));
+            else if (zz.is(ZoneType.Stack))     crdsStack.add(CardView.get(inZone));
+            else if (zz.is(ZoneType.Ante))      crdsAnte.add(CardView.get(inZone));
         }
         List<Object> choicesFiltered = new ArrayList<Object>();
         if (!crdsBattle.isEmpty()) {
@@ -232,8 +233,8 @@ public class TargetSelection {
             return true;
         }
 
-        if (chosen instanceof Card) {
-            ability.getTargets().add((Card) chosen);
+        if (chosen instanceof CardView) {
+            ability.getTargets().add(game.getCard((CardView) chosen));
         }
         return true;
     }
