@@ -131,7 +131,13 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private void updateCustom() {
-        updateDecks(DeckProxy.getAllConstructedDecks(), ItemManagerConfig.CONSTRUCTED_DECKS);
+        if(lstDecks.getGameType().getDeckFormat().equals(DeckFormat.Commander)){
+            updateDecks(DeckProxy.getAllCommanderDecks(), ItemManagerConfig.COMMANDER_DECKS);
+        }else if(lstDecks.getGameType().getDeckFormat().equals(DeckFormat.TinyLeaders)){
+            updateDecks(DeckProxy.getAllTinyLeadersDecks(), ItemManagerConfig.COMMANDER_DECKS);
+        }else {
+            updateDecks(DeckProxy.getAllConstructedDecks(), ItemManagerConfig.CONSTRUCTED_DECKS);
+        }
     }
 
     private void updateColors(Predicate<PaperCard> formatFilter) {
@@ -237,9 +243,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     public Deck getDeck() {
-        /*if(selectedDeckType.equals(DeckType.STANDARD_CARDGEN_DECK)){
-            return DeckgenUtil.buildCardGenDeck(lstDecks.getSelectedItem().getName(),Predicate<PaperCard> formatFilter);
-        }*/
         final DeckProxy proxy = lstDecks.getSelectedItem();
         if (proxy == null) {
             return null;

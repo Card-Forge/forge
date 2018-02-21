@@ -149,8 +149,8 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         FThreads.invokeInBackgroundThread(new Runnable() {
             @Override
             public void run() {
-                playerPanels.get(0).initialize(FPref.CONSTRUCTED_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
-                playerPanels.get(1).initialize(FPref.CONSTRUCTED_P2_DECK_STATE, DeckType.COLOR_DECK);
+                playerPanels.get(0).initialize(FPref.CONSTRUCTED_P1_DECK_STATE, FPref.COMMANDER_P1_DECK_STATE, FPref.TINY_LEADER_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
+                playerPanels.get(1).initialize(FPref.CONSTRUCTED_P2_DECK_STATE, FPref.COMMANDER_P2_DECK_STATE, FPref.TINY_LEADER_P2_DECK_STATE, DeckType.COLOR_DECK);
                 /*playerPanels.get(2).initialize(FPref.CONSTRUCTED_P3_DECK_STATE, DeckType.COLOR_DECK);
                 playerPanels.get(3).initialize(FPref.CONSTRUCTED_P4_DECK_STATE, DeckType.COLOR_DECK);
                 playerPanels.get(4).initialize(FPref.CONSTRUCTED_P5_DECK_STATE, DeckType.COLOR_DECK);
@@ -475,12 +475,15 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         Deck deck;
         if (hasVariant(GameType.Commander)) {
             deck = playerPanel.getCommanderDeck();
+            playerPanel.getCommanderDeckChooser().saveState();
         }
         else if (hasVariant(GameType.TinyLeaders)) {
             deck = playerPanel.getTinyLeadersDeck();
+            playerPanel.getTinyLeadersDeckChooser().saveState();
         }
         else {
             deck = playerPanel.getDeck();
+            playerPanel.getDeckChooser().saveState();
         }
 
         Deck playerDeck = deck;
@@ -504,8 +507,6 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             avatarPool.add(playerPanel.getVanguardAvatar());
             playerDeck.putSection(DeckSection.Avatar, avatarPool);
         }
-
-        playerPanel.getDeckChooser().saveState();
 
         decks[playerIndex] = playerDeck;
         if (playerChangeListener != null) {
