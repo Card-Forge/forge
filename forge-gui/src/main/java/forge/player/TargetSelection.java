@@ -18,6 +18,7 @@
 package forge.player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +34,7 @@ import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.StackItemView;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -244,6 +246,7 @@ public class TargetSelection {
         final String message = tgt.getVTSelection();
         // Find what's targetable, then allow human to choose
         final List<Object> selectOptions = new ArrayList<Object>();
+        HashMap<StackItemView, SpellAbilityStackInstance> stackItemViewSpellAbilityHashMap = new HashMap<>();
 
         final Game game = ability.getActivatingPlayer().getGame();
         for (final SpellAbilityStackInstance si : game.getStack()) {
@@ -253,7 +256,8 @@ public class TargetSelection {
                 ability.resetTargets();
             }
             else if (ability.canTargetSpellAbility(abilityOnStack)) {
-                selectOptions.add(si);
+                stackItemViewSpellAbilityHashMap.put(si.getView(), si);
+                selectOptions.add(si.getView());
             }
         }
 
@@ -276,8 +280,8 @@ public class TargetSelection {
                 if (madeChoice == null) {
                     return false;
                 }
-                if (madeChoice instanceof SpellAbilityStackInstance) {
-                    ability.getTargets().add(((SpellAbilityStackInstance)madeChoice).getSpellAbility(true));
+                if (madeChoice instanceof StackItemView) {
+                    ability.getTargets().add(stackItemViewSpellAbilityHashMap.get(madeChoice).getSpellAbility(true));
                 }
                 else {// 'FINISH TARGETING' chosen 
                     bTargetingDone = true;
