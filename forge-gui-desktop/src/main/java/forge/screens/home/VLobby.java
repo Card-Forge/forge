@@ -216,6 +216,8 @@ public class VLobby implements ILobbyView {
             fdc.restoreSavedState();
             final FDeckChooser fdcom = getCommanderDeckChooser(iPlayer);
             fdcom.restoreSavedState();
+            final FDeckChooser fdtl = getTinyLeaderDeckChooser(iPlayer);
+            fdtl.restoreSavedState();
         }
     }
 

@@ -537,7 +537,13 @@ public class CardThemedCommanderDeckBuilder extends DeckGeneratorBase {
         final Iterable<PaperCard> lands = Iterables.filter(aiPlayables,
                 Predicates.compose(CardRulesPredicates.Presets.IS_NONBASIC_LAND, PaperCard.FN_GET_RULES));
         List<PaperCard> landsToAdd = new ArrayList<>();
-        int minBasics=Math.round(r.nextInt(6)+3)*targetSize/60;//Keep a minimum number of basics to ensure playable decks
+        int minBasics;//Keep a minimum number of basics to ensure playable decks
+        if(colors.isMonoColor()){
+            minBasics=Math.round((r.nextInt(15)+6)*targetSize/60);
+        }else{
+            minBasics=Math.round((r.nextInt(8)+6)*targetSize/60);
+        }
+
 
         for (final PaperCard card : lands) {
             if (landsNeeded > minBasics) {
