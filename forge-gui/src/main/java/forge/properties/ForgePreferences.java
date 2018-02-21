@@ -34,6 +34,22 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         CONSTRUCTED_P6_DECK_STATE(""),
         CONSTRUCTED_P7_DECK_STATE(""),
         CONSTRUCTED_P8_DECK_STATE(""),
+        COMMANDER_P1_DECK_STATE(""),
+        COMMANDER_P2_DECK_STATE(""),
+        COMMANDER_P3_DECK_STATE(""),
+        COMMANDER_P4_DECK_STATE(""),
+        COMMANDER_P5_DECK_STATE(""),
+        COMMANDER_P6_DECK_STATE(""),
+        COMMANDER_P7_DECK_STATE(""),
+        COMMANDER_P8_DECK_STATE(""),
+        TINY_LEADER_P1_DECK_STATE(""),
+        TINY_LEADER_P2_DECK_STATE(""),
+        TINY_LEADER_P3_DECK_STATE(""),
+        TINY_LEADER_P4_DECK_STATE(""),
+        TINY_LEADER_P5_DECK_STATE(""),
+        TINY_LEADER_P6_DECK_STATE(""),
+        TINY_LEADER_P7_DECK_STATE(""),
+        TINY_LEADER_P8_DECK_STATE(""),
         UI_LANDSCAPE_MODE ("false"),
         UI_COMPACT_MAIN_MENU ("false"),
         UI_USE_OLD ("false"),
@@ -210,6 +226,19 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
             CONSTRUCTED_P3_DECK_STATE, CONSTRUCTED_P4_DECK_STATE,
             CONSTRUCTED_P5_DECK_STATE, CONSTRUCTED_P6_DECK_STATE,
             CONSTRUCTED_P7_DECK_STATE, CONSTRUCTED_P8_DECK_STATE };
+
+        public static FPref[] COMMANDER_DECK_STATES = {
+                COMMANDER_P1_DECK_STATE, COMMANDER_P2_DECK_STATE,
+                COMMANDER_P3_DECK_STATE, COMMANDER_P4_DECK_STATE,
+                COMMANDER_P5_DECK_STATE, COMMANDER_P6_DECK_STATE,
+                COMMANDER_P7_DECK_STATE, COMMANDER_P8_DECK_STATE };
+
+        public static FPref[] TINY_LEADER_DECK_STATES = {
+                TINY_LEADER_P1_DECK_STATE, TINY_LEADER_P2_DECK_STATE,
+                TINY_LEADER_P3_DECK_STATE, TINY_LEADER_P4_DECK_STATE,
+                TINY_LEADER_P5_DECK_STATE, TINY_LEADER_P6_DECK_STATE,
+                TINY_LEADER_P7_DECK_STATE, TINY_LEADER_P8_DECK_STATE };
+
     }
 
     /** Instantiates a ForgePreferences object. */

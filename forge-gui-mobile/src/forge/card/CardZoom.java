@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinImage;
+import forge.deck.DeckProxy;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.item.IPaperCard;
@@ -122,6 +123,10 @@ public class CardZoom extends FOverlay {
         }
         if (item instanceof CardView) {
             return (CardView)item;
+        }
+        if (item instanceof DeckProxy) {
+            DeckProxy deck = ((DeckProxy)item);
+            return new CardView(-1, null, deck.getName(), null, deck.getImageKey(false));
         }
         if (item instanceof IPaperCard) {
             return CardView.getCardForUi((IPaperCard)item);

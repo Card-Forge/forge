@@ -190,7 +190,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         // extras.
         double avCMC=getAverageCMC(deckList);
         int maxCMC=getMaxCMC(deckList);
-        if (deckList.size() == numSpellsNeeded && avCMC < 4) {
+        if (deckList.size() >= numSpellsNeeded && avCMC < 4) {
             addLowCMCCard();
         }
         if (deckList.size() >= numSpellsNeeded && avCMC < 3 && maxCMC<6) {
