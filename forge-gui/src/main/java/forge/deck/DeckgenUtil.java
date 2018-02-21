@@ -539,33 +539,51 @@ public class DeckgenUtil {
         final Deck deck;
         IDeckGenPool cardDb;
         DeckGeneratorBase gen = null;
+        PaperCard selectedPartner=null;
         if(isCardGen){
             List<Map.Entry<PaperCard,Integer>> potentialCards = new ArrayList<>();
             potentialCards.addAll(CardRelationMatrixGenerator.cardPools.get(DeckFormat.Commander.toString()).get(commander.getName()));
-            Collections.shuffle(potentialCards);
-            //get second keycard
             Random r = new Random();
+            //Collections.shuffle(potentialCards, r);
             List<PaperCard> preSelectedCards = new ArrayList<>();
             for(Map.Entry<PaperCard,Integer> pair:potentialCards){
-                preSelectedCards.add(pair.getKey());
+                if(format.isLegalCard(pair.getKey())) {
+                    preSelectedCards.add(pair.getKey());
+                }
+            }
+            //check for partner commanders
+            List<PaperCard> partners=new ArrayList<>();
+            for(PaperCard c:preSelectedCards){
+                if(c.getRules().canBePartnerCommander()){
+                    partners.add(c);
+                }
+            }
+
+            if(partners.size()>0&&commander.getRules().canBePartnerCommander()){
+                selectedPartner=partners.get(MyRandom.getRandom().nextInt(partners.size()));
+                preSelectedCards.remove(selectedPartner);
             }
             //randomly remove cards
             int removeCount=0;
             int i=0;
             List<PaperCard> toRemove = new ArrayList<>();
             for(PaperCard c:preSelectedCards){
-                if(preSelectedCards.size()<80){
+                if(!format.isLegalCard(c)){
+                    toRemove.add(c);
+                    removeCount++;
+                }
+                if(preSelectedCards.size()<75){
                     break;
                 }
-                if(r.nextInt(100)>70+(15-(i/preSelectedCards.size())*preSelectedCards.size()) && removeCount<4 //randomly remove some cards - more likely as distance increases
-                        &&!c.getName().contains("Urza")){ //avoid breaking Tron decks
+                if(r.nextInt(100)>60+(15-(i/preSelectedCards.size())*preSelectedCards.size()) && removeCount<4 //randomly remove some cards - more likely as distance increases
+                        &&!c.getName().contains("Urza")&&!c.getName().contains("Wastes")){ //avoid breaking Tron decks
                     toRemove.add(c);
                     removeCount++;
                 }
                 ++i;
             }
             preSelectedCards.removeAll(toRemove);
-            gen = new CardThemedCommanderDeckBuilder(commander,preSelectedCards,forAi);
+            gen = new CardThemedCommanderDeckBuilder(commander, selectedPartner,preSelectedCards,forAi,format);
         }else{
             cardDb = FModel.getMagicDb().getCommonCards();
             ColorSet colorID;
@@ -598,10 +616,18 @@ public class DeckgenUtil {
         CardPool cards = gen.getDeck(format.getMainRange().getMaximum(), forAi);
 
         // After generating card lists, build deck.
-        deck = new Deck("Generated " + format.toString() + " deck (" + commander.getName() + ")");
+        if(selectedPartner!=null){
+            deck = new Deck("Generated " + format.toString() + " deck (" + commander.getName() +
+                    "--" + selectedPartner.getName() + ")");
+        }else{
+            deck = new Deck("Generated " + format.toString() + " deck (" + commander.getName() + ")");
+        }
         deck.setDirectory("generated/commander");
         deck.getMain().addAll(cards);
         deck.getOrCreate(DeckSection.Commander).add(commander);
+        if(selectedPartner!=null){
+            deck.getOrCreate(DeckSection.Commander).add(selectedPartner);
+        }
 
         return deck;
     }

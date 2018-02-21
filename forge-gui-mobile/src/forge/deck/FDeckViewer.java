@@ -1,6 +1,7 @@
 package forge.deck;
 
 import forge.Forge;
+import forge.GuiBase;
 import forge.assets.FImage;
 import forge.assets.FSkin;
 import forge.assets.FSkinImage;
