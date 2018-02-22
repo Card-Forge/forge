@@ -51,6 +51,7 @@ import forge.match.input.*;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences.FPref;
+import forge.trackable.TrackableObject;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
 import forge.util.MessageUtil;
@@ -251,7 +252,19 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             // Sideboard rules have changed for M14, just need to consider min
             // maindeck and max sideboard sizes
             // No longer need 1:1 sideboarding in non-limited formats
-            newMain = getGui().sideboard(sideboard, main);
+            Object resp = getGui().sideboard(sideboard, main);
+            if (resp instanceof List<?> &&
+                    !((List) resp).isEmpty() &&
+                    ((List) resp).get(0) instanceof PaperCard) {
+                newMain = (List) resp;
+            } else if (resp == null) {
+                // if we got here, the user took too long to reply
+                newMain = main.toFlatList();
+            } else {
+                System.err.println("PlayerControllerHuman.sideboard -- FAILED!");
+                System.err.println("resp instanceof " + resp.getClass().toString());
+                System.err.println("resp = " + resp.toString());
+            }
         } while (conform && (newMain.size() < deckMinSize || combinedDeckSize - newMain.size() > sbMax));
 
         return newMain;
@@ -468,9 +481,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // Show the card that asked for this choice
         getGui().setCard(CardView.get(sa.getHostCard()));
 
+        // create a mapping between a spell's view and the spell itself
+        HashMap<SpellAbilityView, SpellAbility> spellViewCache = new HashMap<>();
+        for (SpellAbility spellAbility : spells) {
+            spellViewCache.put(spellAbility.getView(), spellAbility);
+        }
+        List<TrackableObject> choices = new ArrayList<>();
+        choices.addAll(spellViewCache.keySet());
+        Object choice = getGui().one(title, choices);
+
         // Human is supposed to read the message and understand from it what to
         // choose
-        return getGui().one(title, spells);
+        return spellViewCache.get(choice);
     }
 
     /*

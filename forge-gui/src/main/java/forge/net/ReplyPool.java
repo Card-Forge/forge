@@ -34,7 +34,7 @@ public class ReplyPool {
             future = pool.get(Integer.valueOf(index));
         }
         try {
-            return future.get(1, TimeUnit.MINUTES);
+            return future.get(5, TimeUnit.MINUTES);
         } catch (final InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
