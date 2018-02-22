@@ -100,4 +100,8 @@ public class CommanderDeckGenerator extends DeckProxy implements Comparable<Comm
     public String getImageKey(boolean altState) {
         return legend.getImageKey(altState);
     }
+
+    public PaperCard getPaperCard(){
+        return legend;
+    }
 }
