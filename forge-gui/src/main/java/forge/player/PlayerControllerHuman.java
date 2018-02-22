@@ -51,6 +51,7 @@ import forge.match.input.*;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences.FPref;
+import forge.trackable.TrackableObject;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
 import forge.util.MessageUtil;
@@ -468,9 +469,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // Show the card that asked for this choice
         getGui().setCard(CardView.get(sa.getHostCard()));
 
+        // create a mapping between a spell's view and the spell itself
+        HashMap<SpellAbilityView, SpellAbility> spellViewCache = new HashMap<>();
+        for (SpellAbility spellAbility : spells) {
+            spellViewCache.put(spellAbility.getView(), spellAbility);
+        }
+        List<TrackableObject> choices = new ArrayList<>();
+        choices.addAll(spellViewCache.keySet());
+        Object choice = getGui().one(title, choices);
+
         // Human is supposed to read the message and understand from it what to
         // choose
-        return getGui().one(title, spells);
+        return spellViewCache.get(choice);
     }
 
     /*
