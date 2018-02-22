@@ -72,4 +72,8 @@ public class CardThemedDeckGenerator extends DeckProxy implements Comparable<Car
         return cards.get(cards.size()-1).getImageKey(altState);*/
         return FModel.getMagicDb().getCommonCards().getUniqueByName(name).getImageKey(altState);
     }
+
+    public PaperCard getPaperCard(){
+        return FModel.getMagicDb().getCommonCards().getUniqueByName(name);
+    }
 }
