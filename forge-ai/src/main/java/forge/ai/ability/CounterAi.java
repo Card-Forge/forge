@@ -218,10 +218,9 @@ public class CounterAi extends SpellAbilityAi {
         // discarding no cards, or is playing a deck where discarding is a benefit
         // as defined in SpecialCardAi.NullBrooch
         if (sa.hasParam("AILogic")) {
-            if ("NullBooch".equals(sa.getParam("AILogic"))) {
+            if ("NullBrooch".equals(sa.getParam("AILogic"))) {
                 dontCounter = false;
             }
-            ;
         }
 
         if (dontCounter) {

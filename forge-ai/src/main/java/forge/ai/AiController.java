@@ -686,7 +686,7 @@ public class AiController {
                 // will need actual logic that determines if the enchantment is able
                 // to disable the permanent or it's still functional and a duplicate is unneeded.
                 boolean disabledByEnemy = false;
-                for (Card card2 : (card.getEnchantedBy(false))) {
+                for (Card card2 : card.getEnchantedBy(false)) {
                     if (card2.getOwner() != player) {
                         disabledByEnemy = true;
                     }
