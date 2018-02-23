@@ -7,7 +7,7 @@ K:Haste
 K:Protection from white
 K:Monstrosity:3:5 R R
 T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ When CARDNAME becomes monstrous, it deals damage to each opponent equal to the number of cards in that player's hand.
-SVar:TrigDmg:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBDmg
+SVar:TrigDmg:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBDmg | DamageMap$ True
 SVar:DBDmg:DB$ DealDamage | Defined$ Player.IsRemembered | NumDmg$ X | References$ X
 SVar:X:Count$ValidHand Card.RememberedPlayerCtrl
 DeckHas:Ability$Counters
