@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Queue;
 
 import forge.game.GameActionUtil;
+import forge.game.spellability.SpellAbilityView;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -193,7 +194,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             return false;
         }
 
-        List<SpellAbility> abilities = new ArrayList<SpellAbility>();
+        HashMap<SpellAbilityView, SpellAbility> abilitiesMap = new HashMap<>();
         // you can't remove unneeded abilities inside a for (am:abilities) loop :(
 
         final String typeRes = manaCost.getSourceRestriction();
@@ -222,7 +223,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 }
             }
 
-            abilities.add(ma);
+            abilitiesMap.put(ma.getView(), ma);
 
             // skip express mana if the ability is not undoable or reusable
             if (!ma.isUndoable() || !ma.getPayCosts().isRenewableResource() || ma.getSubAbility() != null) {
@@ -230,7 +231,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             }
         }
 
-        if (abilities.isEmpty() || (chosenAbility != null && !abilities.contains(chosenAbility))) {
+        if (abilitiesMap.isEmpty() || (chosenAbility != null && !abilitiesMap.containsKey(chosenAbility))) {
             return false;
         }
 
@@ -263,10 +264,10 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 isPayingGeneric = true; // for further processing
             }
             else {
-                final List<SpellAbility> colorMatches = new ArrayList<SpellAbility>();
-                for (SpellAbility sa : abilities) {
+                final HashMap<SpellAbilityView, SpellAbility> colorMatches = new HashMap<>();
+                for (SpellAbility sa : abilitiesMap.values()) {
                     if (abilityProducesManaColor(sa, sa.getManaPartRecursive(), colorNeeded)) {
-                        colorMatches.add(sa);
+                        colorMatches.put(sa.getView(), sa);
                     }
                 }
 
@@ -275,9 +276,9 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                     // This is wrong. Sometimes all abilities aren't created equal
                     choice = false;
                 }
-                else if (colorMatches.size() < abilities.size()) {
+                else if (colorMatches.size() < abilitiesMap.size()) {
                     // leave behind only color matches
-                    abilities = colorMatches;
+                    abilitiesMap = colorMatches;
                 }
             }
         }
@@ -289,7 +290,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
         final SpellAbility chosen;
         if (chosenAbility == null) {
-            chosen = abilities.size() > 1 && choice ? getController().getGui().one("Choose mana ability", abilities) : abilities.get(0);
+            ArrayList<SpellAbilityView> choices = new ArrayList<>(abilitiesMap.keySet());
+            chosen = abilitiesMap.size() > 1 && choice ? abilitiesMap.get(getController().getGui().one("Choose mana ability",  choices)) : abilitiesMap.get(choices.get(0));
         } else {
             chosen = chosenAbility;
         }
