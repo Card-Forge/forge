@@ -155,6 +155,7 @@ public enum ApiType {
     WinsGame (GameWinEffect.class),
 
 
+    DamageResolve (DamageResolveEffect.class),
     InternalEtbReplacement (ETBReplacementEffect.class),
     InternalLegendaryRule (CharmEffect.class),
     InternalIgnoreEffect (CharmEffect.class);

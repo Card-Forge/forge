@@ -29,6 +29,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardDamageMap;
 import forge.game.card.CardFactory;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
@@ -150,6 +151,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private CardCollection lastStateBattlefield = null;
     private CardCollection lastStateGraveyard = null;
+    
+    private CardDamageMap damageMap = null;
+    private CardDamageMap preventMap = null;
 
     public CardCollection getLastStateBattlefield() {
         return lastStateBattlefield;
@@ -1718,5 +1722,30 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
 
         return score;
+    }
+    
+    public CardDamageMap getDamageMap() {
+        if (damageMap != null) {
+            return damageMap;
+        } else if (getParent() != null) {
+            return getParent().getDamageMap();            
+        }
+        return null;
+    }
+
+    public CardDamageMap getPreventMap() {
+        if (preventMap != null) {
+            return preventMap;
+        } else if (getParent() != null) {
+            return getParent().getPreventMap();            
+        }
+        return null;
+    }
+
+    public void setDamageMap(final CardDamageMap map) {
+        damageMap = map;
+    }
+    public void setPreventMap(final CardDamageMap map) {
+        preventMap = map;
     }
 }
