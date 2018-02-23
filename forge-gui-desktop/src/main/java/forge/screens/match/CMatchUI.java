@@ -59,10 +59,7 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
-import forge.gui.GuiDialog;
-import forge.gui.GuiUtils;
-import forge.gui.SOverlayUtils;
+import forge.gui.*;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
@@ -586,7 +583,7 @@ public final class CMatchUI
                 btn1.setFocusable(enable1 && focus1 );
                 btn2.setFocusable(enable2 && !focus1);
                 // ensure we don't steal focus from an overlay
-                if (toFocus != null) {
+                if (toFocus != null && !FNetOverlay.SINGLETON_INSTANCE.getTxtInput().hasFocus() ) {
                     toFocus.requestFocus();  // focus here even if another window has focus - shouldn't have to do it this way but some popups grab window focus
                 }
             }
