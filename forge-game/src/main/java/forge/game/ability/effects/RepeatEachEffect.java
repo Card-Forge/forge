@@ -211,8 +211,10 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         
         if(sa.hasParam("DamageMap")) {
             sa.getPreventMap().triggerPreventDamage(false);
+            sa.setPreventMap(null);
             // non combat damage cause lifegain there
             sa.getDamageMap().triggerDamageDoneOnce(false);
+            sa.setDamageMap(null);
         }
     }
 }
