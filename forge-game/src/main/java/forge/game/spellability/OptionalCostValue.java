@@ -2,7 +2,9 @@ package forge.game.spellability;
 
 import forge.game.cost.Cost;
 
-public class OptionalCostValue {
+import java.io.Serializable;
+
+public class OptionalCostValue implements Serializable {
     private OptionalCost type;
     private Cost cost;
 

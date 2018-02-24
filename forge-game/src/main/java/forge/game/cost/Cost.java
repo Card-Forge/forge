@@ -17,6 +17,7 @@
  */
 package forge.game.cost;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -45,7 +46,7 @@ import forge.util.TextUtil;
  * @author Forge
  * @version $Id$
  */
-public class Cost {
+public class Cost implements Serializable {
     private boolean isAbility = true;
     private final List<CostPart> costParts = Lists.newArrayList();
     private boolean isMandatory = false;
