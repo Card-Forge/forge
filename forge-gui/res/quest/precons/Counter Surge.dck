@@ -5,6 +5,10 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Counter Surge
+Description=BG Constrictor Challenger Deck
+Deck Type=constructed
+Set=RIX
+Image=counter_surge.jpg
 [Main]
 4 Aether Hub|KLD
 4 Blossoming Defense|KLD
