@@ -16,6 +16,9 @@ Five new sets are available which are indexed by Scryfall and which are MTGO exc
 - Option to foil cards in deck editor (Desktop Forge) -
 A new set of context menu commands has been added to the deck editor which allows to foil the cards in deck ("Foil card", "Foil 4 copies of card", "Foil X copies of card"). This option is currently only available in desktop Forge.
 
+- Online Multiplayer -
+Online Multiplayer is once again (mostly) functional.  We've successfully played mutliple games between both local network and remote (over the Internet) opponents.  However, that is not to say that it's completely bug free.  For a list of known issues and guidance on setting it up, please see: https://git.cardforge.org/core-developers/forge/wikis/Network-based-Multiplayer.
+
 - Download Pictures -
 Improvements to Download Pictures and Auto fetcher
 
