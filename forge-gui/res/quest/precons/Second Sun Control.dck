@@ -5,6 +5,10 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Second Sun Control
+Description=UW Sun Challenger Deck
+Deck Type=constructed
+Set=RIX
+Image=second_sun.jpg
 [Main]
 4 Aether Meltdown|KLD
 3 Approach of the Second Sun|AKH

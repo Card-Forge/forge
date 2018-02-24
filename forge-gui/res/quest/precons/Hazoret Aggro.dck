@@ -5,6 +5,10 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Hazoret Aggro
+Description=Mono Red Challenger Deck
+Deck Type=constructed
+Set=RIX
+Image=hazoret_aggro.jpg
 [Main]
 2 Abrade|HOU
 4 Ahn-Crop Crasher|AKH
