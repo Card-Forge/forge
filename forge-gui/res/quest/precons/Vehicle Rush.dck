@@ -5,6 +5,10 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Vehicle Rush
+Description=Mardu Vehicles Challenger Deck
+Deck Type=constructed
+Set=RIX
+Image=vehicle_rush.jpg
 [Main]
 3 Aether Hub|KLD
 1 Aethersphere Harvester|AER
