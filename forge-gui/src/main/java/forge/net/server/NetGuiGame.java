@@ -90,6 +90,9 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
+    public void alertUser() { send(ProtocolMethod.alertUser); }
+
+    @Override
     public void updatePhase() {
         updateGameView();
         send(ProtocolMethod.updatePhase);

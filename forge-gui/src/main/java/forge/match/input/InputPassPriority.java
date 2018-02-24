@@ -60,6 +60,8 @@ public class InputPassPriority extends InputSyncronizedBase {
         else { //otherwise allow ending turn with cancel button
             getController().getGui().updateButtons(getOwner(), "OK", "End Turn", true, true, true);
         }
+
+        getController().getGui().alertUser();
     }
 
     /** {@inheritDoc} */

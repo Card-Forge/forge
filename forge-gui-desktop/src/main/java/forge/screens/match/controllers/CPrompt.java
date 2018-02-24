@@ -37,6 +37,8 @@ import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
+import forge.model.FModel;
+import forge.properties.ForgePreferences;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FSkin;
@@ -167,6 +169,12 @@ public class CPrompt implements ICDoc {
      */
     public void remind() {
         SDisplayUtil.remind(view);
+    }
+
+    public void alert() {
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_REMIND_ON_PRIORITY)) {
+            SDisplayUtil.remind(view, 15, 30);
+        }
     }
 
     @Override

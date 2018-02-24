@@ -175,6 +175,10 @@ public class MatchController extends AbstractGuiGame {
     public void flashIncorrectAction() {
         //SDisplayUtil.remind(VPrompt.SINGLETON_INSTANCE); //TODO
     }
+    @Override
+    public void alertUser() {
+        //TODO
+    }
 
     @Override
     public void updatePhase() {

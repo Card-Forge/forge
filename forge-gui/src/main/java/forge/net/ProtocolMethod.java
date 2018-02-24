@@ -35,6 +35,7 @@ public enum ProtocolMethod {
     showPromptMessage   (Mode.SERVER, Void.TYPE, PlayerView.class, String.class),
     updateButtons       (Mode.SERVER, Void.TYPE, PlayerView.class, String.class, String.class, Boolean.TYPE, Boolean.TYPE, Boolean.TYPE),
     flashIncorrectAction(Mode.SERVER),
+    alertUser           (Mode.SERVER),
     updatePhase         (Mode.SERVER),
     updateTurn          (Mode.SERVER, Void.TYPE, PlayerView.class),
     updatePlayerControl (Mode.SERVER),

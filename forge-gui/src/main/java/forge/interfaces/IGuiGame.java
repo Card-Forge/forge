@@ -37,6 +37,7 @@ public interface IGuiGame {
     void updateButtons(PlayerView owner, boolean okEnabled, boolean cancelEnabled, boolean focusOk);
     void updateButtons(PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1);
     void flashIncorrectAction();
+    void alertUser();
     void updatePhase();
     void updateTurn(PlayerView player);
     void updatePlayerControl();

@@ -37,12 +37,15 @@ public class SDisplayUtil {
      * @param tab0 &emsp; {@link java.GuiBase.getInterface().framework.IVDoc}
      */
     public static void remind(final IVDoc<? extends ICDoc> tab0) {
-        showTab(tab0);
-        final JPanel pnl = tab0.getParentCell().getBody();
-
         // To adjust, only touch these two values.
         final int steps = 5;    // Number of delays
         final int delay = 80;  // Milliseconds between steps
+        remind(tab0, steps, delay);
+    }
+
+    public static void remind(final IVDoc<? extends ICDoc> tab0, final int steps, final int delay) {
+        showTab(tab0);
+        final JPanel pnl = tab0.getParentCell().getBody();
 
         if (remindIsRunning) { return; }
         if (pnl == null) { return; }
