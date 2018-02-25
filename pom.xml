@@ -174,8 +174,8 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:ssh://git.cardforge.org:core-developers/forge.git</connection>
-        <developerConnection>scm:git:ssh://git.cardforge.org:core-developers/forge.git</developerConnection>
+        <connection>scm:git:ssh://git.cardforge.org/core-developers/forge.git</connection>
+        <developerConnection>scm:git:ssh://git.cardforge.org/core-developers/forge.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
