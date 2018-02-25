@@ -1,6 +1,6 @@
 Images for the latest sets will be available soon.
 
-Online play is unfinished and is not fully operational. While several users have reported moderate success in getting a simple online match going, most users have experienced crashes and/or inability to start a server or connect to it. At the moment, we do not have a dedicated developer actively working on the online play feature, so we do not have an ETA as to when this feature will become finished. If you have working knowledge of Java that, you believe, is adequate to help seeing this feature through to completion, please consider offering your help in our Discord channel.
+Online multiplayer functionality has been restored, but is still a Work in Progress. We do have a dedicated developer actively working on the online multiplayer feature.
 
 At least two cards that have a clause that says "if a card cast this way would be put into a graveyard this turn, exile it instead" (Kess, Dissident Mage and Bosium Strip) will fail to interact correctly in corner cases where another card is allowing you to also cast cards from the graveyard at the same time, but allows you not to exile them. This needs a better implementation of a check that would allow to determine that the card is being cast via a MayPlay effect from a particular source.
 

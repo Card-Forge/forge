@@ -602,6 +602,11 @@ public final class CMatchUI
     }
 
     @Override
+    public void alertUser() {
+        getCPrompt().alert();
+    }
+
+    @Override
     public void updatePhase() {
         final PlayerView p = getGameView().getPlayerTurn();
         final PhaseType ph = getGameView().getPhase();

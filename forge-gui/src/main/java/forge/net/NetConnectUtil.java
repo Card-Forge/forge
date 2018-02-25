@@ -29,7 +29,7 @@ public class NetConnectUtil {
     private NetConnectUtil() { }
 
     public static String getServerUrl() {
-        final String url = SOptionPane.showInputDialog("Enter URL of server to join. Leave blank to host your own server.", "Connect to Server");
+        final String url = SOptionPane.showInputDialog("This feature is under active development.\nYou are likely to find bugs.\n\n - = * H E R E   B E   E L D R A Z I * = -\n\nEnter the URL of the server to join.\nLeave blank to host your own server.", "Connect to Server");
         if (url == null) { return null; }
 
         //prompt user for player one name if needed

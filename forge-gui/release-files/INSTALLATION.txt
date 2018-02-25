@@ -8,3 +8,7 @@ Once the Forge archive has been decompressed you should then be able to launch F
 
 - The Mac OS application version -
 We haven't been able to distribute the OS X Application version of Forge in sometime. We've recently automated our release tools, and will continue to look in the viability of creating this file now that things are autoamted.
+
+
+- Online Multiplayer -
+For local network play you should only need two systems running Forge.  One to host and one to join and play.  For remote (over the Internet) play you will need to ensure that the port used (36743 by default) is forwarded to the hosting machine.
