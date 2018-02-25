@@ -91,11 +91,12 @@ public class BoosterGenerator {
         // 7 Time Shifted
         // 8 VMA Special
         // 9 DFC
+        // 10 Planeshift alternate art foil
         // if result not valid for pack, reroll
         // Other special types of foil slots, add here
         CardRarity foilCard = CardRarity.Unknown;
         while (foilCard == CardRarity.Unknown) {
-            int randomNum = rand.nextInt(9) + 1;
+            int randomNum = rand.nextInt(10) + 1;
             switch (randomNum) {
                 case 1:
                     // Rare or Mythic
@@ -136,6 +137,19 @@ public class BoosterGenerator {
                         // every sixth foil - same as rares
                         if (template.hasSlot("dfc")) {
                             foilCard = CardRarity.Special;
+                        }
+                    }
+                    break;
+                case 10:
+                    if (edition != null) {
+                        if (edition.getName().equals("Planeshift")) {
+                            // Chance equals chance of getting the same card as non-alter foil rare.
+                            // so 3 out of the 53 rares in the set.
+                            // while information cannot be found, my personal (subjective) experience from that time was
+                            // that they were indeed similar chance, at least not significantly less.
+                            if (rand.nextInt(53) <= 3) {
+                                foilCard = CardRarity.Special;
+                            }
                         }
                     }
                     break;
@@ -223,6 +237,17 @@ public class BoosterGenerator {
             if ((!foilAtEndOfPack && foilInThisSlot)
                     || (foilAtEndOfPack && hasFoil && slotType.startsWith(BoosterSlots.COMMON))) {
                 numCards--;
+            }
+
+            // Planeshift foil alternate art replaces rare slot even though it comes from the
+            // special slot that normally has no cards!
+            if (edition != null) {
+                if ((edition.getName().equals("Planeshift")) &&
+                        (slotType.startsWith(BoosterSlots.RARE))
+                        && (foilSlot.startsWith(BoosterSlots.SPECIAL))
+                        ) {
+                    numCards--;
+                }
             }
 
             if (replaceCommon && slotType.startsWith(BoosterSlots.COMMON)) {
