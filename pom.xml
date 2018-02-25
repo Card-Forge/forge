@@ -174,9 +174,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:svn:http://svn.slightlymagic.net/forge/trunk</connection>
-        <developerConnection>scm:svn:http://svn.slightlymagic.net/forge/trunk</developerConnection>
-        <url>http://svn.slightlymagic.net/websvn/listing.php?repname=forge</url>
+        <connection>scm:git:ssh://git.cardforge.org:core-developers/forge.git</connection>
+        <developerConnection>scm:git:ssh://git.cardforge.org:core-developers/forge.git</developerConnection>
+        <tag>HEAD</tag>
     </scm>
 
     <prerequisites>
@@ -222,30 +222,6 @@
             <url>ftp://ftp.cardforge.org/maven/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
-
-    <repositories>
-        <repository>
-            <id>arcane-maven-repo</id>
-            <name>Arcane Maven Repository</name>
-            <layout>default</layout>
-            <url>http://arcane.googlecode.com/svn/trunk/repository</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>arcane-maven-repo</id>
-            <name>Arcane Maven Repository</name>
-            <layout>default</layout>
-            <url>http://arcane.googlecode.com/svn/trunk/repository</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
 
     <build>
         <extensions>
