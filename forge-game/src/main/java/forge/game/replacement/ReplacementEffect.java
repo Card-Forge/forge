@@ -174,6 +174,8 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         if (!lki) {
             res.setId(nextId());
         }
+        
+        res.setHostCard(host);
 
         res.setActiveZone(validHostZones);
         res.setLayer(getLayer());

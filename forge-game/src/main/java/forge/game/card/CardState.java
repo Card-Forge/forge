@@ -172,6 +172,7 @@ public class CardState extends GameObject {
         for (KeywordInterface k : intrinsicKeyword0) {
             intrinsicKeywords.insert(k.copy(card, lki));
         }
+        card.updateKeywordsCache(this);
     }
 
     public final KeywordInterface addIntrinsicKeyword(final String s, boolean initTraits) {
