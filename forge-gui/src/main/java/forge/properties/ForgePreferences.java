@@ -156,6 +156,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         DECKGEN_SINGLETONS ("false"),
         DECKGEN_ARTIFACTS ("false"),
         DECKGEN_NOSMALL ("false"),
+        DECKGEN_CARDBASED ("true"),
 
         PHASE_AI_UPKEEP ("false"),
         PHASE_AI_DRAW ("false"),

@@ -443,7 +443,7 @@ public class FDeckChooser extends FScreen {
                 cmbDeckTypes.addItem(DeckType.QUEST_OPPONENT_DECK);
                 cmbDeckTypes.addItem(DeckType.COLOR_DECK);
                 cmbDeckTypes.addItem(DeckType.STANDARD_COLOR_DECK);
-                if(!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY)) {
+                if(FModel.isdeckGenMatrixLoaded()) {
                     cmbDeckTypes.addItem(DeckType.STANDARD_CARDGEN_DECK);
                     cmbDeckTypes.addItem(DeckType.MODERN_CARDGEN_DECK);
                 }
@@ -456,7 +456,7 @@ public class FDeckChooser extends FScreen {
             case TinyLeaders:
                 cmbDeckTypes.addItem(DeckType.CUSTOM_DECK);
                 cmbDeckTypes.addItem(DeckType.RANDOM_DECK);
-                if(!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY)) {
+                if(FModel.isdeckGenMatrixLoaded()) {
                     cmbDeckTypes.addItem(DeckType.RANDOM_CARDGEN_COMMANDER_DECK);
                 }
                 cmbDeckTypes.addItem(DeckType.RANDOM_COMMANDER_DECK);
@@ -587,7 +587,10 @@ public class FDeckChooser extends FScreen {
             config = ItemManagerConfig.STRING_ONLY;
             break;
         case RANDOM_CARDGEN_COMMANDER_DECK:
-            pool = CommanderDeckGenerator.getCommanderDecks(lstDecks.getGameType().getDeckFormat(),isAi, true);
+            pool= new ArrayList<>();
+            if(FModel.isdeckGenMatrixLoaded()) {
+                pool = CommanderDeckGenerator.getCommanderDecks(lstDecks.getGameType().getDeckFormat(), isAi, true);
+            }
             config = ItemManagerConfig.STRING_ONLY;
             break;
         case SCHEME_DECKS:
@@ -618,12 +621,18 @@ public class FDeckChooser extends FScreen {
             break;
         case STANDARD_CARDGEN_DECK:
             maxSelections = 1;
-            pool = CardThemedDeckGenerator.getMatrixDecks(FModel.getFormats().getStandard(), isAi);
+            pool= new ArrayList<>();
+            if(FModel.isdeckGenMatrixLoaded()) {
+                pool = CardThemedDeckGenerator.getMatrixDecks(FModel.getFormats().getStandard(), isAi);
+            }
             config = ItemManagerConfig.STRING_ONLY;
             break;
         case MODERN_CARDGEN_DECK:
             maxSelections = 1;
-            pool = CardThemedDeckGenerator.getMatrixDecks(FModel.getFormats().getModern(), isAi);
+            pool= new ArrayList<>();
+            if(FModel.isdeckGenMatrixLoaded()) {
+                pool = CardThemedDeckGenerator.getMatrixDecks(FModel.getFormats().getModern(), isAi);
+            }
             config = ItemManagerConfig.STRING_ONLY;
             break;
         case MODERN_COLOR_DECK:
@@ -955,7 +964,7 @@ public class FDeckChooser extends FScreen {
             public void run(final Integer numOpponents) {
                 if (numOpponents == null) { return; }
                 List<DeckType> deckTypes=null;
-                if(!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY)) {
+                if(!FModel.isdeckGenMatrixLoaded()) {
                     deckTypes=Arrays.asList(new DeckType[] {
                             DeckType.CUSTOM_DECK,
                             DeckType.PRECONSTRUCTED_DECK,

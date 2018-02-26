@@ -27,6 +27,8 @@ import forge.ai.AiProfileUtil;
 import forge.card.CardPreferences;
 import forge.card.CardType;
 import forge.deck.CardRelationMatrixGenerator;
+import forge.deck.DeckFormat;
+import forge.deck.io.CardThemedMatrixIO;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
 import forge.game.GameType;
@@ -216,9 +218,16 @@ public final class FModel {
         AiProfileUtil.loadAllProfiles(ForgeConstants.AI_PROFILE_DIR);
 
         //generate Deck Gen matrix
-        if(!FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY)) {
-            CardRelationMatrixGenerator.initialize();
+        if(!FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY)
+                &&FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_CARDBASED)) {
+            deckGenMatrixLoaded=CardRelationMatrixGenerator.initialize();
         }
+    }
+
+    private static boolean deckGenMatrixLoaded=false;
+
+    public static boolean isdeckGenMatrixLoaded(){
+        return deckGenMatrixLoaded;
     }
 
     public static QuestController getQuest() {

@@ -61,6 +61,10 @@ public class CardThemedMatrixIO {
         return new File(ForgeConstants.DECK_GEN_DIR, name + SUFFIX_DATA);
     }
 
+    public static File getMatrixFolder(final String name) {
+        return new File(ForgeConstants.DECK_GEN_DIR, name);
+    }
+
     public static File getMatrixFile(final GameFormat gf) {
         return getMatrixFile(gf.getName());
     }

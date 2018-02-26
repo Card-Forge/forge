@@ -27,28 +27,38 @@ public final class CardRelationMatrixGenerator {
 
     public static HashMap<String,HashMap<String,List<Map.Entry<PaperCard,Integer>>>> cardPools = new HashMap<>();
 
-
-    public static void initialize(){
-        HashMap<String,List<Map.Entry<PaperCard,Integer>>> standardMap = CardThemedMatrixIO.loadMatrix(FModel.getFormats().getStandard().getName());
-        HashMap<String,List<Map.Entry<PaperCard,Integer>>> modernMap = CardThemedMatrixIO.loadMatrix(FModel.getFormats().getModern().getName());
-        HashMap<String,List<Map.Entry<PaperCard,Integer>>> commanderMap = CardThemedMatrixIO.loadMatrix(DeckFormat.Commander.toString());
-        if(standardMap==null || modernMap==null || commanderMap==null){
-            reInitialize();
-            return;
+    /** Try to load matrix .dat files, otherwise check for deck folders and build .dat, otherwise return false **/
+    public static boolean initialize(){
+        String format=FModel.getFormats().getStandard().getName();
+        HashMap<String,List<Map.Entry<PaperCard,Integer>>> standardMap = CardThemedMatrixIO.loadMatrix(format);
+        if(standardMap==null&&CardThemedMatrixIO.getMatrixFolder(format).exists()){
+            standardMap=initializeFormat(FModel.getFormats().getStandard());
+            CardThemedMatrixIO.saveMatrix(format,standardMap);
+        }else if(standardMap==null && !CardThemedMatrixIO.getMatrixFolder(format).exists()){
+            return false;
         }
-        cardPools.put(FModel.getFormats().getStandard().getName(),standardMap);
-        cardPools.put(FModel.getFormats().getModern().getName(),modernMap);
-        cardPools.put(DeckFormat.Commander.toString(),commanderMap);
-    }
+        cardPools.put(format,standardMap);
 
-    public static void reInitialize(){
-        cardPools.put(FModel.getFormats().getStandard().getName(),initializeFormat(FModel.getFormats().getStandard()));
-        cardPools.put(FModel.getFormats().getModern().getName(),initializeFormat(FModel.getFormats().getModern()));
-        cardPools.put(DeckFormat.Commander.toString(),initializeCommanderFormat());
-        for(String format:cardPools.keySet()){
-            HashMap<String,List<Map.Entry<PaperCard,Integer>>> map = cardPools.get(format);
-            CardThemedMatrixIO.saveMatrix(format,map);
+        format=FModel.getFormats().getModern().getName();
+        HashMap<String,List<Map.Entry<PaperCard,Integer>>> modernMap = CardThemedMatrixIO.loadMatrix(format);
+        if(modernMap==null&&CardThemedMatrixIO.getMatrixFolder(format).exists()){
+            modernMap=initializeFormat(FModel.getFormats().getModern());
+            CardThemedMatrixIO.saveMatrix(format,modernMap);
+        }else if (standardMap==null && !CardThemedMatrixIO.getMatrixFolder(format).exists()){
+            return false;
         }
+        cardPools.put(format,modernMap);
+
+        format=DeckFormat.Commander.toString();
+        HashMap<String,List<Map.Entry<PaperCard,Integer>>> commanderMap = CardThemedMatrixIO.loadMatrix(format);
+        if(commanderMap==null&&CardThemedMatrixIO.getMatrixFolder(format).exists()){
+            commanderMap=initializeCommanderFormat();
+            CardThemedMatrixIO.saveMatrix(format,commanderMap);
+        }else if(standardMap==null && !CardThemedMatrixIO.getMatrixFolder(format).exists()){
+            return false;
+        }
+        cardPools.put(format,commanderMap);
+        return true;
     }
 
     public static HashMap<String,List<Map.Entry<PaperCard,Integer>>> initializeFormat(GameFormat format){

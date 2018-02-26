@@ -30,7 +30,7 @@ public enum DeckType {
     public static DeckType[] CommanderOptions;
 
     static {
-        if (!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY)) {
+        if (FModel.isdeckGenMatrixLoaded()) {
             ConstructedOptions = new DeckType[]{
                     DeckType.CUSTOM_DECK,
                     DeckType.PRECONSTRUCTED_DECK,
@@ -59,7 +59,7 @@ public enum DeckType {
         }
     }
     static {
-        if (!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY)) {
+        if (FModel.isdeckGenMatrixLoaded()) {
             CommanderOptions = new DeckType[]{
                     DeckType.COMMANDER_DECK,
                     DeckType.RANDOM_COMMANDER_DECK,

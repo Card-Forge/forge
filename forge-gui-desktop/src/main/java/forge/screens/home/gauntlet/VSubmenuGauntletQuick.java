@@ -86,7 +86,7 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         boxThemeDecks.setSelected(true);
         boxColorDecks.setSelected(true);
         boxStandardColorDecks.setSelected(true);
-        if(!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY)) {
+        if(FModel.isdeckGenMatrixLoaded()) {
             boxStandardCardgenDecks.setSelected(true);
             boxModernCardgenDecks.setSelected(true);
         }else{
@@ -115,7 +115,7 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         pnlOptions.add(boxQuestDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
         pnlOptions.add(boxThemeDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
         pnlOptions.add(boxColorDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
-        if(!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY)) {
+        if(FModel.isdeckGenMatrixLoaded()) {
             pnlOptions.add(boxStandardCardgenDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
             pnlOptions.add(boxModernCardgenDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
         }
