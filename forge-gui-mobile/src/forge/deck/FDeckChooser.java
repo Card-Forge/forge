@@ -964,7 +964,7 @@ public class FDeckChooser extends FScreen {
             public void run(final Integer numOpponents) {
                 if (numOpponents == null) { return; }
                 List<DeckType> deckTypes=null;
-                if(!FModel.isdeckGenMatrixLoaded()) {
+                if(FModel.isdeckGenMatrixLoaded()) {
                     deckTypes=Arrays.asList(new DeckType[] {
                             DeckType.CUSTOM_DECK,
                             DeckType.PRECONSTRUCTED_DECK,

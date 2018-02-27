@@ -1,14 +1,10 @@
 package forge.deck;
 
 import forge.Forge;
-import forge.GuiBase;
 import forge.assets.FImage;
 import forge.assets.FSkin;
 import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
-import forge.deck.CardPool;
-import forge.deck.Deck;
-import forge.deck.DeckSection;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;

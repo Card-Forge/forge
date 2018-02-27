@@ -27,37 +27,39 @@ public final class CardRelationMatrixGenerator {
 
     public static HashMap<String,HashMap<String,List<Map.Entry<PaperCard,Integer>>>> cardPools = new HashMap<>();
 
-    /** Try to load matrix .dat files, otherwise check for deck folders and build .dat, otherwise return false **/
     public static boolean initialize(){
-        String format=FModel.getFormats().getStandard().getName();
-        HashMap<String,List<Map.Entry<PaperCard,Integer>>> standardMap = CardThemedMatrixIO.loadMatrix(format);
-        if(standardMap==null&&CardThemedMatrixIO.getMatrixFolder(format).exists()){
-            standardMap=initializeFormat(FModel.getFormats().getStandard());
-            CardThemedMatrixIO.saveMatrix(format,standardMap);
-        }else if(standardMap==null && !CardThemedMatrixIO.getMatrixFolder(format).exists()){
-            return false;
-        }
-        cardPools.put(format,standardMap);
+        List<String> formatStrings = new ArrayList<>();
+        formatStrings.add(FModel.getFormats().getStandard().getName());
+        formatStrings.add(FModel.getFormats().getModern().getName());
+        formatStrings.add(DeckFormat.Commander.toString());
 
-        format=FModel.getFormats().getModern().getName();
-        HashMap<String,List<Map.Entry<PaperCard,Integer>>> modernMap = CardThemedMatrixIO.loadMatrix(format);
-        if(modernMap==null&&CardThemedMatrixIO.getMatrixFolder(format).exists()){
-            modernMap=initializeFormat(FModel.getFormats().getModern());
-            CardThemedMatrixIO.saveMatrix(format,modernMap);
-        }else if (standardMap==null && !CardThemedMatrixIO.getMatrixFolder(format).exists()){
-            return false;
+        for (String formatString : formatStrings){
+            if(!initializeFormat(formatString)){
+                return false;
+            }
         }
-        cardPools.put(format,modernMap);
 
-        format=DeckFormat.Commander.toString();
-        HashMap<String,List<Map.Entry<PaperCard,Integer>>> commanderMap = CardThemedMatrixIO.loadMatrix(format);
-        if(commanderMap==null&&CardThemedMatrixIO.getMatrixFolder(format).exists()){
-            commanderMap=initializeCommanderFormat();
-            CardThemedMatrixIO.saveMatrix(format,commanderMap);
-        }else if(standardMap==null && !CardThemedMatrixIO.getMatrixFolder(format).exists()){
-            return false;
+        return true;
+    }
+
+    /** Try to load matrix .dat files, otherwise check for deck folders and build .dat, otherwise return false **/
+    public static boolean initializeFormat(String format){
+        HashMap<String,List<Map.Entry<PaperCard,Integer>>> formatMap = CardThemedMatrixIO.loadMatrix(format);
+        if(formatMap==null) {
+            if (CardThemedMatrixIO.getMatrixFolder(format).exists()) {
+                if(format.equals(FModel.getFormats().getStandard().getName())){
+                    formatMap=initializeFormat(FModel.getFormats().getStandard());
+                }else if(format.equals(FModel.getFormats().getModern().getName())){
+                    formatMap=initializeFormat(FModel.getFormats().getModern());
+                }else{
+                    formatMap=initializeCommanderFormat();
+                }
+                CardThemedMatrixIO.saveMatrix(format, formatMap);
+            } else {
+                return false;
+            }
         }
-        cardPools.put(format,commanderMap);
+        cardPools.put(format, formatMap);
         return true;
     }
 
@@ -74,8 +76,8 @@ public final class CardRelationMatrixGenerator {
         Map<String, Integer> cardIntegerMap = new HashMap<>();
         Map<Integer, PaperCard> integerCardMap = new HashMap<>();
         for (int i=0; i<cardList.size(); ++i){
-            cardIntegerMap.put(cardList.get(i).getName(),i);
-            integerCardMap.put(i,cardList.get(i));
+            cardIntegerMap.put(cardList.get(i).getName(), i);
+            integerCardMap.put(i, cardList.get(i));
         }
 
         int[][] matrix = new int[cardList.size()][cardList.size()];
@@ -124,7 +126,7 @@ public final class CardRelationMatrixGenerator {
                 if(excludeThisCard){
                     continue;
                 }
-                cardPools.put(card.getName(),deckPool);
+                cardPools.put(card.getName(), deckPool);
             }
         }
         return cardPools;
@@ -132,10 +134,12 @@ public final class CardRelationMatrixGenerator {
 
     public static HashMap<String,List<Map.Entry<PaperCard,Integer>>> initializeCommanderFormat(){
 
-        IStorage<Deck> decks = new StorageImmediatelySerialized<Deck>("Generator", new DeckStorage(new File(ForgeConstants.DECK_GEN_DIR+ForgeConstants.PATH_SEPARATOR+DeckFormat.Commander.toString()),
+        IStorage<Deck> decks = new StorageImmediatelySerialized<Deck>("Generator",
+                new DeckStorage(new File(ForgeConstants.DECK_GEN_DIR,DeckFormat.Commander.toString()),
                 ForgeConstants.DECK_GEN_DIR, false),
                 true);
 
+        //get all cards
         final Iterable<PaperCard> cards = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards()
                 , Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND_NOT_WASTES), PaperCard.FN_GET_RULES));
         List<PaperCard> cardList = Lists.newArrayList(cards);
@@ -144,11 +148,13 @@ public final class CardRelationMatrixGenerator {
         Map<Integer, PaperCard> integerCardMap = new HashMap<>();
         Map<String, Integer> legendIntegerMap = new HashMap<>();
         Map<Integer, PaperCard> integerLegendMap = new HashMap<>();
+        //generate lookups for cards to link card names to matrix columns
         for (int i=0; i<cardList.size(); ++i){
-            cardIntegerMap.put(cardList.get(i).getName(),i);
-            integerCardMap.put(i,cardList.get(i));
+            cardIntegerMap.put(cardList.get(i).getName(), i);
+            integerCardMap.put(i, cardList.get(i));
         }
 
+        //filter to just legal commanders
         List<PaperCard> legends = Lists.newArrayList(Iterables.filter(cardList,Predicates.compose(
                 new Predicate<CardRules>() {
                     @Override
@@ -157,41 +163,25 @@ public final class CardRelationMatrixGenerator {
                     }
                 }, PaperCard.FN_GET_RULES)));
 
+        //generate lookups for legends to link commander names to matrix rows
         for (int i=0; i<legends.size(); ++i){
-            legendIntegerMap.put(legends.get(i).getName(),i);
-            integerLegendMap.put(i,legends.get(i));
+            legendIntegerMap.put(legends.get(i).getName(), i);
+            integerLegendMap.put(i, legends.get(i));
         }
         int[][] matrix = new int[legends.size()][cardList.size()];
 
-        for (PaperCard card:legends){
+        //loop through commanders and decks
+        for (PaperCard legend:legends){
             for (Deck deck:decks){
-                if (deck.getCommanders().contains(card)){
-
-                    for (PaperCard pairCard:Iterables.filter(deck.getMain().toFlatList(),
-                            Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND_NOT_WASTES), PaperCard.FN_GET_RULES))){
-                        if (!pairCard.getName().equals(card.getName())){
-                            try {
-                                int old = matrix[legendIntegerMap.get(card.getName())][cardIntegerMap.get(pairCard.getName())];
-                                matrix[legendIntegerMap.get(card.getName())][cardIntegerMap.get(pairCard.getName())] = old + 1;
-                            }catch (NullPointerException ne){
-                                //Todo: Not sure what was failing here
-                                ne.printStackTrace();
-                            }
-                        }
-
-                    }
-                    if(deck.getCommanders().size()>1){//add partner commanders to matrix
-                        for(PaperCard commander:deck.getCommanders()){
-                            if(!commander.equals(card)){
-                                int old = matrix[legendIntegerMap.get(card.getName())][cardIntegerMap.get(commander.getName())];
-                                matrix[legendIntegerMap.get(card.getName())][cardIntegerMap.get(commander.getName())] = old + 1;
-                            }
-                        }
-                    }
+                //if the deck has the commander
+                if (deck.getCommanders().contains(legend)){
+                    //update the matrix by incrementing the connectivity count for each card in the deck
+                    updateLegendMatrix(deck, legend, cardIntegerMap, legendIntegerMap, matrix);
                 }
             }
         }
 
+        //convert the matrix into a map of pools for each commander
         HashMap<String,List<Map.Entry<PaperCard,Integer>>> cardPools = new HashMap<>();
         for (PaperCard card:legends){
             int col=legendIntegerMap.get(card.getName());
@@ -204,30 +194,37 @@ public final class CardRelationMatrixGenerator {
                         deckPool.add(new AbstractMap.SimpleEntry<PaperCard, Integer>(integerCardMap.get(k),matrix[col][k]));
                     }
                 }
-/*                ArrayIndexComparator comparator = new ArrayIndexComparator(ArrayUtils.toObject(distances));
-                Integer[] indices = comparator.createIndexArray();
-                Arrays.sort(indices, comparator);
-                List<Map.Entry<PaperCard,Integer>> deckPool=new ArrayList<>();
-                int k=0;
-                boolean excludeThisCard=false;//if there are too few cards with at least one connection
-                for (int j=0;j<56;++k){
-                    if(distances[indices[cardList.size()-1-k]]==0){
-                        excludeThisCard = true;
-                        break;
-                    }
-                    PaperCard cardToAdd=integerCardMap.get(indices[cardList.size()-1-k]);
-                    if(!cardToAdd.getRules().getMainPart().getType().isLand()){//need x non-land cards
-                        ++j;
-                    }
-                    deckPool.add(new AbstractMap.SimpleEntry<PaperCard, Integer>(cardToAdd,distances[indices[cardList.size()-1-k]]));
-                };
-                *//*if(excludeThisCard){
-                    continue;
-                }*/
-                cardPools.put(card.getName(),deckPool);
+                cardPools.put(card.getName(), deckPool);
             }
         }
         return cardPools;
+    }
+
+    //update the matrix by incrementing the connectivity count for each card in the deck
+    public static void updateLegendMatrix(Deck deck, PaperCard legend, Map<String, Integer> cardIntegerMap,
+                             Map<String, Integer> legendIntegerMap, int[][] matrix){
+        for (PaperCard pairCard:Iterables.filter(deck.getMain().toFlatList(),
+                Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND_NOT_WASTES), PaperCard.FN_GET_RULES))){
+            if (!pairCard.getName().equals(legend.getName())){
+                try {
+                    int old = matrix[legendIntegerMap.get(legend.getName())][cardIntegerMap.get(pairCard.getName())];
+                    matrix[legendIntegerMap.get(legend.getName())][cardIntegerMap.get(pairCard.getName())] = old + 1;
+                }catch (NullPointerException ne){
+                    //Todo: Not sure what was failing here
+                    ne.printStackTrace();
+                }
+            }
+
+        }
+        //add partner commanders to matrix
+        if(deck.getCommanders().size()>1){
+            for(PaperCard partner:deck.getCommanders()){
+                if(!partner.equals(legend)){
+                    int old = matrix[legendIntegerMap.get(legend.getName())][cardIntegerMap.get(partner.getName())];
+                    matrix[legendIntegerMap.get(legend.getName())][cardIntegerMap.get(partner.getName())] = old + 1;
+                }
+            }
+        }
     }
 
     public static class ArrayIndexComparator implements Comparator<Integer>
