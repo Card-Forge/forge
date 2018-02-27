@@ -26,6 +26,7 @@ public enum CardRarity {
     Rare("R", "Rare"),
     MythicRare("M", "Mythic Rare"),
     Special("S", "Special"), // Timeshifted
+    None("N", "None"),       // Tokens
     Unknown("?", "Unknown"); // In development
 
     public static final CardRarity[] FILTER_OPTIONS = new CardRarity[] {

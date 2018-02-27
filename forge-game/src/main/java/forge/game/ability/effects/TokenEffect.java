@@ -18,10 +18,13 @@
 package forge.game.ability.effects;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import forge.StaticData;
+import forge.card.MagicColor;
 import forge.game.card.token.TokenInfo;
-import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
@@ -69,10 +72,26 @@ public class TokenEffect extends SpellAbilityEffect {
     private String[] tokenKeywords;
     private String[] tokenHiddenKeywords;
 
-    private void readParameters(final SpellAbility mapParams) {
+    private void readMetaParams(final SpellAbility mapParams) {
+        this.tokenTapped = mapParams.getParamOrDefault("TokenTapped", "False").equalsIgnoreCase("True");
+        this.tokenAttacking = mapParams.getParamOrDefault("TokenAttacking", "False").equalsIgnoreCase("True");
+        this.tokenBlocking = mapParams.getParam("TokenBlocking");
+
+        this.tokenAmount = mapParams.getParamOrDefault("TokenAmount", "1");
+        this.tokenOwner = mapParams.getParamOrDefault("TokenOwner", "You");
+    }
+
+    private void readParameters(final SpellAbility mapParams, Card prototype) {
+        readMetaParams(mapParams);
+        if (prototype == null) {
+            readTokenParams(mapParams);
+        }
+    }
+
+    private void readTokenParams(final SpellAbility mapParams) {
         String image;
         String[] keywords;
-        
+
         if (mapParams.hasParam("TokenKeywords")) {
             // TODO: Change this Split to a semicolon or something else
             keywords = mapParams.getParam("TokenKeywords").split("<>");
@@ -99,9 +118,6 @@ public class TokenEffect extends SpellAbilityEffect {
             this.tokenAltImages = null;
         }
 
-        this.tokenTapped = mapParams.hasParam("TokenTapped") && mapParams.getParam("TokenTapped").equals("True");
-        this.tokenAttacking = mapParams.hasParam("TokenAttacking") && mapParams.getParam("TokenAttacking").equals("True");
-
         if (mapParams.hasParam("TokenAbilities")) {
             this.tokenAbilities = mapParams.getParam("TokenAbilities").split(",");
         } else {
@@ -122,8 +138,7 @@ public class TokenEffect extends SpellAbilityEffect {
         } else {
             this.tokenStaticAbilities = null;
         }
-        this.tokenBlocking = mapParams.getParam("TokenBlocking");
-        this.tokenAmount = mapParams.getParamOrDefault("TokenAmount", "1");
+
         this.tokenPower = mapParams.getParam("TokenPower");
         this.tokenToughness = mapParams.getParam("TokenToughness");
 
@@ -143,19 +158,19 @@ public class TokenEffect extends SpellAbilityEffect {
 
         this.tokenKeywords = keywords;
         this.tokenImage = image;
-        if (mapParams.hasParam("TokenOwner")) {
-            this.tokenOwner = mapParams.getParam("TokenOwner");
-        } else {
-            this.tokenOwner = "You";
-        }
     }
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final Card host = sa.getHostCard();
+        Card prototype = loadTokenPrototype(sa);
 
-        readParameters(sa);
+        if (prototype != null) {
+            return sa.getDescription();
+        }
+
+        readParameters(sa, prototype);
 
         final int finalPower = AbilityUtils.calculateAmount(host, this.tokenPower, sa);
         final int finalToughness = AbilityUtils.calculateAmount(host, this.tokenToughness, sa);
@@ -181,12 +196,26 @@ public class TokenEffect extends SpellAbilityEffect {
         return sb.toString();
     }
 
+    private Card loadTokenPrototype(SpellAbility sa) {
+        String script = sa.getParamOrDefault("TokenScript", null);
+
+        String edition = sa.getHostCard().getPaperCard().getEdition();
+
+        PaperToken token = StaticData.instance().getAllTokens().getToken(script, edition);
+        if (token != null) {
+            tokenName = token.getName();
+            return Card.fromPaperCard(token, null, sa.getHostCard().getGame());
+        }
+
+        return null;
+    }
+
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
+        final Game game = host.getGame();
         final SpellAbility root = sa.getRootAbility();
-        readParameters(sa);
-        
+
         // Cause of the Token Effect, in general it should be this
         // but if its a Replacement Effect, it might be something else or null
         SpellAbility cause = sa;
@@ -194,37 +223,131 @@ public class TokenEffect extends SpellAbilityEffect {
             cause = (SpellAbility)root.getReplacingObject("Cause");
         }
 
-        String cost = "";
+        final boolean remember = sa.hasParam("RememberTokens");
+        final boolean imprint = sa.hasParam("ImprintTokens");
+        final List<Card> allTokens = Lists.newArrayList();
 
-        // Construct original colors
-        String originalColorDesc = "";
-        for (final String col : this.tokenOriginalColors) {
-            if (col.equalsIgnoreCase("White")) {
-            	originalColorDesc += "W ";
-            } else if (col.equalsIgnoreCase("Blue")) {
-            	originalColorDesc += "U ";
-            } else if (col.equalsIgnoreCase("Black")) {
-            	originalColorDesc += "B ";
-            } else if (col.equalsIgnoreCase("Red")) {
-            	originalColorDesc += "R ";
-            } else if (col.equalsIgnoreCase("Green")) {
-            	originalColorDesc += "G ";
-            } else if (col.equalsIgnoreCase("Colorless")) {
-            	originalColorDesc = "C";
+        boolean combatChanged = false;
+        boolean inCombat = game.getPhaseHandler().inCombat();
+
+        Card prototype = loadTokenPrototype(sa);
+
+        readParameters(sa, prototype);
+        final int finalAmount = AbilityUtils.calculateAmount(host, this.tokenAmount, sa);
+
+        TokenInfo tokenInfo;
+
+        if (prototype == null) {
+            String originalColorDesc = parseColorForImage();
+
+            final List<String> imageNames = Lists.newArrayListWithCapacity(1);
+            if (this.tokenImage.equals("")) {
+                imageNames.add(PaperToken.makeTokenFileName(originalColorDesc, tokenPower, tokenToughness, tokenOriginalName));
+            } else {
+                imageNames.add(0, this.tokenImage);
+            }
+            if (this.tokenAltImages != null) {
+                imageNames.addAll(Arrays.asList(this.tokenAltImages));
+            }
+
+            String cost = determineTokenColor(host);
+
+            final int finalPower = AbilityUtils.calculateAmount(host, this.tokenPower, sa);
+            final int finalToughness = AbilityUtils.calculateAmount(host, this.tokenToughness, sa);
+
+            final String[] substitutedTypes = Arrays.copyOf(this.tokenTypes, this.tokenTypes.length);
+            for (int i = 0; i < substitutedTypes.length; i++) {
+                if (substitutedTypes[i].equals("ChosenType")) {
+                    substitutedTypes[i] = host.getChosenType();
+                }
+            }
+            final String substitutedName = this.tokenName.equals("ChosenType") ? host.getChosenType() : this.tokenName;
+
+            final String imageName = imageNames.get(MyRandom.getRandom().nextInt(imageNames.size()));
+            tokenInfo = new TokenInfo(substitutedName, imageName,
+                    cost, substitutedTypes, this.tokenKeywords, finalPower, finalToughness);
+        } else {
+            tokenInfo = new TokenInfo(prototype);
+        }
+
+        for (final Player controller : AbilityUtils.getDefinedPlayers(host, this.tokenOwner, sa)) {
+            List<Card> tokens;
+
+            if (prototype == null) {
+                tokens = tokenInfo.makeTokenWithMultiplier(controller, finalAmount, cause != null);
+                grantHiddenKeywords(tokens);
+                grantSvars(tokens, root);
+                grantAbilities(tokens, root);
+                grantTriggers(tokens, root);
+                grantStatics(tokens, root);
+            } else {
+                tokens = TokenInfo.makeTokensFromPrototype(prototype, controller, finalAmount, cause != null);
+            }
+
+            for (Card tok : tokens) {
+                if (this.tokenTapped) {
+                    tok.setTapped(true);
+                }
+                // Should this be catching the Card that's returned?
+                Card c = game.getAction().moveToPlay(tok, sa);
+
+                if (sa.hasParam("AtEOTTrig")) {
+                    addSelfTrigger(sa, sa.getParam("AtEOTTrig"), c);
+                }
+
+                if (inCombat) {
+                    combatChanged = addTokenToCombat(game, c, controller, sa, host) || combatChanged;
+                }
+
+                c.updateStateForView();
+
+                if (remember) {
+                    game.getCardState(sa.getHostCard()).addRemembered(c);
+                }
+                if (imprint) {
+                    game.getCardState(sa.getHostCard()).addImprintedCard(c);
+                }
+                if (sa.hasParam("RememberSource")) {
+                    game.getCardState(c).addRemembered(host);
+                }
+                if (sa.hasParam("TokenRemembered")) {
+                    final Card token = game.getCardState(c);
+                    final String remembered = sa.getParam("TokenRemembered");
+                    for (final Object o : AbilityUtils.getDefinedObjects(host, remembered, sa)) {
+                        token.addRemembered(o);
+                    }
+                }
+                allTokens.add(c);
+            }
+            if ("Clue".equals(tokenName)) { // investigate trigger
+                controller.addInvestigatedThisTurn();
             }
         }
 
-        final List<String> imageNames = Lists.newArrayListWithCapacity(1);
-        if (this.tokenImage.equals("")) {
-            imageNames.add(PaperToken.makeTokenFileName(TextUtil.fastReplace(originalColorDesc,
-                    " ", ""), tokenPower, tokenToughness, tokenOriginalName));
-        } else {
-            imageNames.add(0, this.tokenImage);
-        }
-        if (this.tokenAltImages != null) {
-        	imageNames.addAll(Arrays.asList(this.tokenAltImages));
-        }
+        game.fireEvent(new GameEventTokenCreated());
 
+        if (combatChanged) {
+            game.updateCombatForView();
+            game.fireEvent(new GameEventCombatChanged());
+        }
+        if (sa.hasParam("AtEOT")) {
+            registerDelayedTrigger(sa, sa.getParam("AtEOT"), allTokens);
+        }
+    }
+
+    private String parseColorForImage() {
+        String originalColorDesc = "";
+        for (final String col : this.tokenOriginalColors) {
+            originalColorDesc += MagicColor.toShortString(col);
+            if (originalColorDesc.equals("C")) {
+                return originalColorDesc;
+            }
+        }
+        return originalColorDesc;
+    }
+
+    private String determineTokenColor(Card host) {
+        Set<String> colorSet = new HashSet<>();
         final String[] substitutedColors = Arrays.copyOf(this.tokenColors, this.tokenColors.length);
         for (int i = 0; i < substitutedColors.length; i++) {
             if (substitutedColors[i].equals("ChosenColor")) {
@@ -232,183 +355,116 @@ public class TokenEffect extends SpellAbilityEffect {
                 substitutedColors[i] = host.getChosenColor();
             }
         }
-        String colorDesc = "";
+
+        StringBuilder sb = new StringBuilder();
         for (final String col : substitutedColors) {
-            if (col.equalsIgnoreCase("White")) {
-                colorDesc += "W ";
-            } else if (col.equalsIgnoreCase("Blue")) {
-                colorDesc += "U ";
-            } else if (col.equalsIgnoreCase("Black")) {
-                colorDesc += "B ";
-            } else if (col.equalsIgnoreCase("Red")) {
-                colorDesc += "R ";
-            } else if (col.equalsIgnoreCase("Green")) {
-                colorDesc += "G ";
-            } else if (col.equalsIgnoreCase("Colorless")) {
-                colorDesc = "C";
+            String str = MagicColor.toShortString(col);
+            if (str.equals("C")) {
+                return "1";
             }
+
+            sb.append(str).append(" ");
         }
-        for (final char c : colorDesc.toCharArray()) {
-            cost += c + ' ';
-        }
 
-        cost = colorDesc.replace('C', '1').trim();
+        return sb.toString().trim();
+    }
 
-        final int finalPower = AbilityUtils.calculateAmount(host, this.tokenPower, sa);
-        final int finalToughness = AbilityUtils.calculateAmount(host, this.tokenToughness, sa);
-        final int finalAmount = AbilityUtils.calculateAmount(host, this.tokenAmount, sa);
-
-        final String[] substitutedTypes = Arrays.copyOf(this.tokenTypes, this.tokenTypes.length);
-        for (int i = 0; i < substitutedTypes.length; i++) {
-            if (substitutedTypes[i].equals("ChosenType")) {
-                substitutedTypes[i] = host.getChosenType();
-            }
-        }
-        final String substitutedName = this.tokenName.equals("ChosenType") ? host.getChosenType() : this.tokenName;
-
-        final boolean remember = sa.hasParam("RememberTokens");
-        final boolean imprint = sa.hasParam("ImprintTokens");
-        final List<Card> allTokens = Lists.newArrayList();
-        for (final Player controller : AbilityUtils.getDefinedPlayers(host, this.tokenOwner, sa)) {
-            final Game game = controller.getGame();
-            for (int i = 0; i < finalAmount; i++) {
-                final String imageName = imageNames.get(MyRandom.getRandom().nextInt(imageNames.size()));
-                final TokenInfo tokenInfo = new TokenInfo(substitutedName, imageName,
-                        cost, substitutedTypes, this.tokenKeywords, finalPower, finalToughness);
-                final List<Card> tokens = tokenInfo.makeTokenWithMultiplier(controller, cause != null);
-                
-                // Grant rule changes
-                if (this.tokenHiddenKeywords != null) {
-                    for (final String s : this.tokenHiddenKeywords) {
-                        for (final Card c : tokens) {
-                            c.addHiddenExtrinsicKeyword(s);
-                        }
-                    }
-                }
-
-                // Grant SVars
-                if (this.tokenSVars != null) {
-                    for (final String s : this.tokenSVars) {
-                        String actualSVar = AbilityUtils.getSVar(root, s);
-                        String name = s;
-                        if (actualSVar.startsWith("SVar")) {
-                            actualSVar = actualSVar.split("SVar:")[1];
-                            name = actualSVar.split(":")[0];
-                            actualSVar = actualSVar.split(":")[1];
-                        }
-                        for (final Card c : tokens) {
-                            c.setSVar(name, actualSVar);
-                        }
-                    }
-                }
-
-                // Grant abilities
-                if (this.tokenAbilities != null) {
-                    for (final String s : this.tokenAbilities) {
-                        final String actualAbility = AbilityUtils.getSVar(root, s);
-                        for (final Card c : tokens) {
-                            final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, c);
-                            // Set intrinsic, so that effects like Clone will copy these.
-                            grantedAbility.setIntrinsic(true);
-                            c.addSpellAbility(grantedAbility);
-                        }
-                    }
-                }
-
-                // Grant triggers
-                if (this.tokenTriggers != null) {
-                    for (final String s : this.tokenTriggers) {
-                        final String actualTrigger = AbilityUtils.getSVar(root, s);
-                        for (final Card c : tokens) {
-                            final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c, true);
-                            final String ability = AbilityUtils.getSVar(root, parsedTrigger.getMapParams().get("Execute"));
-                            parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(ability, c));
-                            c.addTrigger(parsedTrigger);
-                        }
-                    }
-                }
-
-                // Grant static abilities
-                if (this.tokenStaticAbilities != null) {
-                    for (final String s : this.tokenStaticAbilities) {
-                        final String actualAbility = AbilityUtils.getSVar(root, s);
-                        for (final Card c : tokens) {
-                            c.addStaticAbility(actualAbility);
-                        }
-                    }
-                }
-
-                for (Card tok : tokens) {
-                    if (this.tokenTapped) {
-                        tok.setTapped(true);
-                    }
-                    game.getAction().moveToPlay(tok, sa);
-                }
-                game.fireEvent(new GameEventTokenCreated());
-
-                boolean combatChanged = false;
+    private void grantHiddenKeywords(List<Card> tokens) {
+        // Grant rule changes
+        if (this.tokenHiddenKeywords != null) {
+            for (final String s : this.tokenHiddenKeywords) {
                 for (final Card c : tokens) {
-                    if (sa.hasParam("AtEOTTrig")) {
-                        addSelfTrigger(sa, sa.getParam("AtEOTTrig"), c);
-                    }
-                    // To show the Abilities and Trigger on the Token
-                    c.updateStateForView();
-                    if (this.tokenAttacking && game.getPhaseHandler().inCombat()) {
-                        final Combat combat = game.getCombat();
-
-                        // into battlefield attacking only should work if you are the attacking player
-                        if (combat.getAttackingPlayer().equals(controller)) {
-                        final FCollectionView<GameEntity> defs = combat.getDefenders();
-                            final GameEntity defender = controller.getController().chooseSingleEntityForEffect(defs, sa, "Choose which defender to attack with " + c, false);
-                            combat.addAttacker(c, defender);
-                            combatChanged = true;
-                        }
-                    }
-                    if (this.tokenBlocking != null && game.getPhaseHandler().inCombat()) {
-                        final Combat combat = game.getPhaseHandler().getCombat();
-                        final Card attacker = Iterables.getFirst(AbilityUtils.getDefinedCards(host, this.tokenBlocking, sa), null);
-                        if (attacker != null) {
-                            final boolean wasBlocked = combat.isBlocked(attacker);
-                            combat.addBlocker(attacker, c);
-                            combat.orderAttackersForDamageAssignment(c);
-
-                            // Run triggers for new blocker and add it to damage assignment order
-                            if (!wasBlocked) {
-                                combat.setBlocked(attacker, true);
-                                combat.addBlockerToDamageAssignmentOrder(attacker, c);
-                            }
-                            combatChanged = true;
-                        }
-                    }
-                    if (remember) {
-                        game.getCardState(sa.getHostCard()).addRemembered(c);
-                    }
-                    if (imprint) {
-                        game.getCardState(sa.getHostCard()).addImprintedCard(c);
-                    }
-                    if (sa.hasParam("RememberSource")) {
-                        game.getCardState(c).addRemembered(host);
-                    }
-                    if (sa.hasParam("TokenRemembered")) {
-                        final Card token = game.getCardState(c);
-                        final String remembered = sa.getParam("TokenRemembered");
-                        for (final Object o : AbilityUtils.getDefinedObjects(host, remembered, sa)) {
-                            token.addRemembered(o);
-                        }
-                    }
+                    c.addHiddenExtrinsicKeyword(s);
                 }
-                if (tokenName.equals("Clue")) { // investigate trigger
-                    controller.addInvestigatedThisTurn();
-                }
-                if (combatChanged) {
-                    game.updateCombatForView();
-                    game.fireEvent(new GameEventCombatChanged());
-                }                
-                allTokens.addAll(tokens);
             }
         }
-        if (sa.hasParam("AtEOT")) {
-            registerDelayedTrigger(sa, sa.getParam("AtEOT"), allTokens);
+    }
+
+    private void grantAbilities(List<Card> tokens, SpellAbility root) {
+        if (this.tokenAbilities != null) {
+            for (final String s : this.tokenAbilities) {
+                final String actualAbility = AbilityUtils.getSVar(root, s);
+                for (final Card c : tokens) {
+                    final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, c);
+                    // Set intrinsic, so that effects like Clone will copy these.
+                    grantedAbility.setIntrinsic(true);
+                    c.addSpellAbility(grantedAbility);
+                }
+            }
         }
+    }
+
+    private void grantTriggers(List<Card> tokens, SpellAbility root) {
+        if (this.tokenTriggers != null) {
+            for (final String s : this.tokenTriggers) {
+                final String actualTrigger = AbilityUtils.getSVar(root, s);
+                for (final Card c : tokens) {
+                    final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c, true);
+                    final String ability = AbilityUtils.getSVar(root, parsedTrigger.getMapParams().get("Execute"));
+                    parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(ability, c));
+                    c.addTrigger(parsedTrigger);
+                }
+            }
+        }
+    }
+
+    private void grantSvars(List<Card> tokens, SpellAbility root) {
+        if (this.tokenSVars != null) {
+            for (final String s : this.tokenSVars) {
+                String actualSVar = AbilityUtils.getSVar(root, s);
+                String name = s;
+                if (actualSVar.startsWith("SVar")) {
+                    actualSVar = actualSVar.split("SVar:")[1];
+                    name = actualSVar.split(":")[0];
+                    actualSVar = actualSVar.split(":")[1];
+                }
+                for (final Card c : tokens) {
+                    c.setSVar(name, actualSVar);
+                }
+            }
+        }
+    }
+
+    private void grantStatics(List<Card> tokens, SpellAbility root) {
+        if (this.tokenStaticAbilities != null) {
+            for (final String s : this.tokenStaticAbilities) {
+                final String actualAbility = AbilityUtils.getSVar(root, s);
+                for (final Card c : tokens) {
+                    c.addStaticAbility(actualAbility);
+                }
+            }
+        }
+    }
+
+    private boolean addTokenToCombat(Game game, Card c, Player controller, SpellAbility sa, Card host) {
+        boolean combatChanged = false;
+        if (this.tokenAttacking) {
+            final Combat combat = game.getCombat();
+
+            // into battlefield attacking only should work if you are the attacking player
+            if (combat.getAttackingPlayer().equals(controller)) {
+                final FCollectionView<GameEntity> defs = combat.getDefenders();
+                final GameEntity defender = controller.getController().chooseSingleEntityForEffect(defs, sa, "Choose which defender to attack with " + c, false);
+                combat.addAttacker(c, defender);
+                combatChanged = true;
+            }
+        }
+        if (this.tokenBlocking != null) {
+            final Combat combat = game.getPhaseHandler().getCombat();
+            final Card attacker = Iterables.getFirst(AbilityUtils.getDefinedCards(host, this.tokenBlocking, sa), null);
+            if (attacker != null) {
+                final boolean wasBlocked = combat.isBlocked(attacker);
+                combat.addBlocker(attacker, c);
+                combat.orderAttackersForDamageAssignment(c);
+
+                // Run triggers for new blocker and add it to damage assignment order
+                if (!wasBlocked) {
+                    combat.setBlocked(attacker, true);
+                    combat.addBlockerToDamageAssignmentOrder(attacker, c);
+                }
+                combatChanged = true;
+            }
+        }
+        return combatChanged;
     }
 }
