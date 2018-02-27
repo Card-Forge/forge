@@ -621,7 +621,10 @@ public class FDeckChooser extends FScreen {
             break;
         case STANDARD_CARDGEN_DECK:
             maxSelections = 1;
-            pool = CardThemedDeckGenerator.getMatrixDecks(FModel.getFormats().getStandard(), isAi);
+            pool= new ArrayList<>();
+            if(FModel.isdeckGenMatrixLoaded()) {
+                pool = CardThemedDeckGenerator.getMatrixDecks(FModel.getFormats().getStandard(), isAi);
+            }
             config = ItemManagerConfig.STRING_ONLY;
             break;
         case MODERN_CARDGEN_DECK:
