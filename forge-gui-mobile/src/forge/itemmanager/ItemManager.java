@@ -983,6 +983,9 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         if (cbxSortOptions != null) {
             return cbxSortOptions.getWidth();
         }
+        if(filters.isEmpty()){
+            return 0f;
+        }
         return filters.get(filters.size() - 1).getWidget().getWidth();
     }
 }

@@ -3,9 +3,12 @@ package forge.view;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import forge.LobbyPlayer;
 import forge.deck.DeckGroup;
+import forge.game.*;
 import forge.properties.ForgeConstants;
 import forge.tournament.system.*;
 import forge.util.TextUtil;
@@ -15,12 +18,6 @@ import org.apache.commons.lang3.time.StopWatch;
 
 import forge.deck.Deck;
 import forge.deck.io.DeckSerializer;
-import forge.game.Game;
-import forge.game.GameLogEntry;
-import forge.game.GameRules;
-import forge.game.GameType;
-import forge.game.GameLogEntryType;
-import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -161,14 +158,38 @@ public class SimulateMatch {
         System.out.println("\tq - Quiet flag. Output just the game result, not the entire game log.");
     }
 
+
+
     private static void simulateSingleMatch(Match mc, int iGame, boolean outputGamelog) {
         StopWatch sw = new StopWatch();
         sw.start();
 
         Game g1 = mc.createGame();
         // will run match in the same thread
-        mc.startGame(g1);
-        sw.stop();
+
+        long startTime = System.currentTimeMillis();
+        try {
+            TimeLimitedCodeBlock.runWithTimeout(new Runnable() {
+                @Override
+                public void run() {
+                    mc.startGame(g1);
+                    sw.stop();
+                }
+            }, 120, TimeUnit.SECONDS);
+        }
+        catch (TimeoutException e) {
+            System.out.println("Stopping slow match as draw");
+            g1.setGameOver(GameEndReason.Draw);
+            sw.stop();
+        }catch (Exception e){
+            e.printStackTrace();
+            g1.setGameOver(GameEndReason.Draw);
+            sw.stop();
+        }catch(StackOverflowError e){
+            g1.setGameOver(GameEndReason.Draw);
+            sw.stop();
+        }
+
 
         List<GameLogEntry> log;
         if (outputGamelog) {

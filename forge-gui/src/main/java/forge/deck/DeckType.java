@@ -7,6 +7,8 @@ public enum DeckType {
     CUSTOM_DECK ("Custom User Decks"),
     CONSTRUCTED_DECK ("Constructed Decks"),
     COMMANDER_DECK ("Commander Decks"),
+    RANDOM_COMMANDER_DECK ("Random Commander Decks"),
+    RANDOM_CARDGEN_COMMANDER_DECK ("Random Commander Card-based Decks"),
     TINY_LEADERS_DECKS ("Tiny Leaders Decks"),
     SCHEME_DECKS ("Scheme Decks"),
     PLANAR_DECKS ("Planar Decks"),
@@ -25,9 +27,10 @@ public enum DeckType {
     NET_COMMANDER_DECK ("Net Commander Decks");
 
     public static DeckType[] ConstructedOptions;
+    public static DeckType[] CommanderOptions;
 
     static {
-        if (!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY)) {
+        if (FModel.isdeckGenMatrixLoaded()) {
             ConstructedOptions = new DeckType[]{
                     DeckType.CUSTOM_DECK,
                     DeckType.PRECONSTRUCTED_DECK,
@@ -54,6 +57,25 @@ public enum DeckType {
                     DeckType.NET_DECK
             };
         }
+    }
+    static {
+        if (FModel.isdeckGenMatrixLoaded()) {
+            CommanderOptions = new DeckType[]{
+                    DeckType.COMMANDER_DECK,
+                    DeckType.RANDOM_COMMANDER_DECK,
+                    DeckType.RANDOM_CARDGEN_COMMANDER_DECK,
+                    DeckType.RANDOM_DECK,
+                    DeckType.NET_COMMANDER_DECK
+            };
+        }else{
+            CommanderOptions = new DeckType[]{
+                    DeckType.COMMANDER_DECK,
+                    DeckType.RANDOM_COMMANDER_DECK,
+                    DeckType.RANDOM_DECK,
+                    DeckType.NET_COMMANDER_DECK
+            };
+        }
+
     }
 
     private String value;
