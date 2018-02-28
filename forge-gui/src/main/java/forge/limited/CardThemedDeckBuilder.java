@@ -663,9 +663,9 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         List<PaperCard> landsToAdd = new ArrayList<>();
         int minBasics;//Keep a minimum number of basics to ensure playable decks
         if(colors.isMonoColor()){
-            minBasics=Math.round((r.nextInt(15)+9)*new Float(targetSize)/new Float(60));
+            minBasics=Math.round((r.nextInt(15)+9)*((float) targetSize) / 60);
         }else{
-            minBasics=Math.round((r.nextInt(8)+6)*new Float(targetSize)/new Float(60));
+            minBasics=Math.round((r.nextInt(8)+6)*((float) targetSize) / 60);
         }
 
 
