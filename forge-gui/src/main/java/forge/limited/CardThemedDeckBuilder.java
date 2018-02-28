@@ -333,9 +333,9 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
         @Override
         public boolean apply(CardRules subject) {
-            ManaCost mc = subject.getManaCost();
-            boolean generic = mc.isPureGeneric();
-            return ((!generic && allowedColor.containsAllColorsFrom(subject.getColorIdentity().getColor()) || generic));
+            //ManaCost mc = subject.getManaCost();
+            //boolean generic = mc.isPureGeneric();
+            return (allowedColor.containsAllColorsFrom(subject.getColorIdentity().getColor()));
         }
     }
 
