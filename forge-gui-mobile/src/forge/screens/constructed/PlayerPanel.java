@@ -109,25 +109,43 @@ public class PlayerPanel extends FContainer {
         lstCommanderDecks = new FDeckChooser(GameType.Commander, isAi, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                btnCommanderDeck.setText("Commander Deck: " + ((DeckManager)e.getSource()).getSelectedItem().getName());
+                if( ((DeckManager)e.getSource()).getSelectedItem() != null) {
+                    btnCommanderDeck.setText("Commander Deck: " + ((DeckManager) e.getSource()).getSelectedItem().getName());
+                    lstCommanderDecks.saveState();
+                }else{
+                    btnCommanderDeck.setText("Commander Deck");
+                }
             }
         });
         lstTinyLeadersDecks = new FDeckChooser(GameType.TinyLeaders, isAi, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                btnTinyLeadersDeck.setText("Tiny Leaders Deck: " + ((DeckManager)e.getSource()).getSelectedItem().getName());
+                if( ((DeckManager)e.getSource()).getSelectedItem() != null) {
+                    btnTinyLeadersDeck.setText("Tiny Leaders Deck: " + ((DeckManager) e.getSource()).getSelectedItem().getName());
+                    lstTinyLeadersDecks.saveState();
+                }else{
+                    btnTinyLeadersDeck.setText("Tiny Leaders Deck");
+                }
             }
         });
         lstSchemeDecks = new FDeckChooser(GameType.Archenemy, isAi, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                btnSchemeDeck.setText("Scheme Deck: " + ((DeckManager)e.getSource()).getSelectedItem().getName());
+                if( ((DeckManager)e.getSource()).getSelectedItem() != null){
+                    btnSchemeDeck.setText("Scheme Deck: " + ((DeckManager)e.getSource()).getSelectedItem().getName());
+                }else{
+                    btnSchemeDeck.setText("Scheme Deck");
+                }
             }
         });
         lstPlanarDecks = new FDeckChooser(GameType.Planechase, isAi, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                btnPlanarDeck.setText("Planar Deck: " + ((DeckManager)e.getSource()).getSelectedItem().getName());
+                if( ((DeckManager)e.getSource()).getSelectedItem() != null){
+                    btnPlanarDeck.setText("Planar Deck: " + ((DeckManager)e.getSource()).getSelectedItem().getName());
+                }else{
+                    btnPlanarDeck.setText("Planar Deck");
+                }
             }
         });
         lstVanguardAvatars = new FVanguardChooser(isAi, new FEventHandler() {
@@ -217,10 +235,10 @@ public class PlayerPanel extends FContainer {
         cbTeam.setEnabled(false);
     }
 
-    public void initialize(FPref savedStateSetting, DeckType defaultDeckType) {
+    public void initialize(FPref savedStateSetting, FPref savedStateSettingCommander, FPref savedStateSettingTinyLeader, DeckType defaultDeckType) {
         deckChooser.initialize(savedStateSetting, defaultDeckType);
-        lstCommanderDecks.initialize(null, DeckType.RANDOM_DECK);
-        lstTinyLeadersDecks.initialize(null, DeckType.RANDOM_DECK);
+        lstCommanderDecks.initialize(savedStateSettingCommander, DeckType.COMMANDER_DECK);
+        lstTinyLeadersDecks.initialize(savedStateSettingTinyLeader, DeckType.TINY_LEADERS_DECKS);
         lstPlanarDecks.initialize(null, DeckType.RANDOM_DECK);
         lstSchemeDecks.initialize(null, DeckType.RANDOM_DECK);
     }
@@ -665,6 +683,15 @@ public class PlayerPanel extends FContainer {
     public FDeckChooser getDeckChooser() {
         return deckChooser;
     }
+
+    public FDeckChooser getCommanderDeckChooser() {
+        return lstCommanderDecks;
+    }
+
+    public FDeckChooser getTinyLeadersDeckChooser() {
+        return lstTinyLeadersDecks;
+    }
+
 
     public Deck getDeck() {
         return deckChooser.getDeck();

@@ -155,6 +155,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 "Remove Small Creatures",
                 "Disables 1/1 and 0/X creatures in generated decks."),
                 2);
+        lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_CARDBASED,
+                        "Include Card-based Deck Generation",
+                        "Builds more synergistic random decks"),
+                2);
         lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_SINGLETONS,
                 "Singleton Mode",
                 "Disables non-land duplicates in generated decks."),

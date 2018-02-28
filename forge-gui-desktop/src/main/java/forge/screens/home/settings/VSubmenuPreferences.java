@@ -55,6 +55,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FLabel btnPlayerName = new FLabel.Builder().opaque(true).hoverable(true).text("").build();
 
     private final JCheckBox cbRemoveSmall = new OptionsCheckBox("Remove Small Creatures");
+    private final JCheckBox cbCardBased = new OptionsCheckBox("Include Card-based Deck Generation");
     private final JCheckBox cbSingletons = new OptionsCheckBox("Singleton Mode");
     private final JCheckBox cbRemoveArtifacts = new OptionsCheckBox("Remove Artifacts");
     private final JCheckBox cbAnte = new OptionsCheckBox("Play for Ante");
@@ -210,6 +211,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbRemoveArtifacts, titleConstraints);
         pnlPrefs.add(new NoteLabel("Disables artifact cards in generated decks."), descriptionConstraints);
+
+        pnlPrefs.add(cbCardBased, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Builds more synergistic random decks (requires restart)."), descriptionConstraints);
 
         // Deck building options
         pnlPrefs.add(new SectionLabel("Deck Editor Options"), sectionConstraints);
@@ -490,6 +494,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public final JCheckBox getCbRemoveSmall() {
         return cbRemoveSmall;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public final JCheckBox getCbCardBased() {
+        return cbCardBased;
     }
 
     /** @return {@link javax.swing.JCheckBox} */

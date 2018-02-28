@@ -16,6 +16,7 @@ import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.item.PaperCard;
 import forge.itemmanager.IItemManager;
+import forge.limited.CardThemedCommanderDeckBuilder;
 import forge.limited.CardThemedDeckBuilder;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
@@ -44,7 +45,7 @@ public class DeckgenUtil {
     public static Deck buildCardGenDeck(GameFormat format, boolean isForAI){
         Random random    = new Random();
         try {
-            List<String> keys      = new ArrayList<>(CardRelationMatrixGenerator.cardPools.get(format).keySet());
+            List<String> keys      = new ArrayList<>(CardRelationMatrixGenerator.cardPools.get(format.getName()).keySet());
             String       randomKey = keys.get( random.nextInt(keys.size()) );
             Predicate<PaperCard> cardFilter = Predicates.and(format.getFilterPrinted(),PaperCard.Predicates.name(randomKey));
             PaperCard keyCard = FModel.getMagicDb().getCommonCards().getAllCards(cardFilter).get(0);
@@ -119,7 +120,7 @@ public class DeckgenUtil {
      */
     public static Deck buildCardGenDeck(PaperCard card, GameFormat format, boolean isForAI){
         List<Map.Entry<PaperCard,Integer>> potentialCards = new ArrayList<>();
-        potentialCards.addAll(CardRelationMatrixGenerator.cardPools.get(format).get(card.getName()));
+        potentialCards.addAll(CardRelationMatrixGenerator.cardPools.get(format.getName()).get(card.getName()));
         Collections.sort(potentialCards,new CardDistanceComparator());
         Collections.reverse(potentialCards);
         //get second keycard
@@ -146,7 +147,7 @@ public class DeckgenUtil {
             randMax=preSelectedCards.size();
         }
         PaperCard secondKeycard = preSelectedCards.get(r.nextInt(randMax));
-        List<Map.Entry<PaperCard,Integer>> potentialSecondCards = CardRelationMatrixGenerator.cardPools.get(format).get(secondKeycard.getName());
+        List<Map.Entry<PaperCard,Integer>> potentialSecondCards = CardRelationMatrixGenerator.cardPools.get(format.getName()).get(secondKeycard.getName());
 
         //combine card distances from second key card and re-sort
         if(potentialSecondCards !=null && potentialSecondCards.size()>0) {
@@ -486,7 +487,7 @@ public class DeckgenUtil {
         return res;
     }
 
-    /** Generate a 2-color Commander deck. */
+    /** Generate a 2-5-color Commander deck. */
     public static Deck generateCommanderDeck(boolean forAi, GameType gameType) {
         final Deck deck;
         IDeckGenPool cardDb = FModel.getMagicDb().getCommonCards();
@@ -504,7 +505,6 @@ public class DeckgenUtil {
                         return format.isLegalCommander(rules);
                     }
                 },
-                CardRulesPredicates.Presets.IS_MULTICOLOR,
                 canPlay), PaperCard.FN_GET_RULES));
 
         do {
@@ -530,6 +530,104 @@ public class DeckgenUtil {
         deck.setDirectory("generated/commander");
         deck.getMain().addAll(cards);
         deck.getOrCreate(DeckSection.Commander).add(commander);
+
+        return deck;
+    }
+
+    /** Generate a ramdom Commander deck. */
+    public static Deck generateRandomCommanderDeck(PaperCard commander, DeckFormat format, boolean forAi, boolean isCardGen) {
+        final Deck deck;
+        IDeckGenPool cardDb;
+        DeckGeneratorBase gen = null;
+        PaperCard selectedPartner=null;
+        if(isCardGen){
+            List<Map.Entry<PaperCard,Integer>> potentialCards = new ArrayList<>();
+            potentialCards.addAll(CardRelationMatrixGenerator.cardPools.get(DeckFormat.Commander.toString()).get(commander.getName()));
+            Random r = new Random();
+            //Collections.shuffle(potentialCards, r);
+            List<PaperCard> preSelectedCards = new ArrayList<>();
+            for(Map.Entry<PaperCard,Integer> pair:potentialCards){
+                if(format.isLegalCard(pair.getKey())) {
+                    preSelectedCards.add(pair.getKey());
+                }
+            }
+            //check for partner commanders
+            List<PaperCard> partners=new ArrayList<>();
+            for(PaperCard c:preSelectedCards){
+                if(c.getRules().canBePartnerCommander()){
+                    partners.add(c);
+                }
+            }
+
+            if(partners.size()>0&&commander.getRules().canBePartnerCommander()){
+                selectedPartner=partners.get(MyRandom.getRandom().nextInt(partners.size()));
+                preSelectedCards.remove(selectedPartner);
+            }
+            //randomly remove cards
+            int removeCount=0;
+            int i=0;
+            List<PaperCard> toRemove = new ArrayList<>();
+            for(PaperCard c:preSelectedCards){
+                if(!format.isLegalCard(c)){
+                    toRemove.add(c);
+                    removeCount++;
+                }
+                if(preSelectedCards.size()<75){
+                    break;
+                }
+                if(r.nextInt(100)>60+(15-(i/preSelectedCards.size())*preSelectedCards.size()) && removeCount<4 //randomly remove some cards - more likely as distance increases
+                        &&!c.getName().contains("Urza")&&!c.getName().contains("Wastes")){ //avoid breaking Tron decks
+                    toRemove.add(c);
+                    removeCount++;
+                }
+                ++i;
+            }
+            preSelectedCards.removeAll(toRemove);
+            gen = new CardThemedCommanderDeckBuilder(commander, selectedPartner,preSelectedCards,forAi,format);
+        }else{
+            cardDb = FModel.getMagicDb().getCommonCards();
+            ColorSet colorID;
+            colorID = commander.getRules().getColorIdentity();
+            List<String> comColors = new ArrayList<String>(2);
+            if (colorID.hasWhite()) { comColors.add("White"); }
+            if (colorID.hasBlue())  { comColors.add("Blue"); }
+            if (colorID.hasBlack()) { comColors.add("Black"); }
+            if (colorID.hasRed())   { comColors.add("Red"); }
+            if (colorID.hasGreen()) { comColors.add("Green"); }
+
+            if(comColors.size()==1){
+                gen = new DeckGeneratorMonoColor(cardDb, format, comColors.get(0));
+            }else if(comColors.size()==2){
+                gen = new DeckGenerator2Color(cardDb, format, comColors.get(0), comColors.get(1));
+            }else if(comColors.size()==3){
+                gen = new DeckGenerator3Color(cardDb, format, comColors.get(0), comColors.get(1), comColors.get(2));
+            }else if(comColors.size()==4){
+                gen = new DeckGenerator4Color(cardDb, format, comColors.get(0), comColors.get(1), comColors.get(2), comColors.get(3));
+            }else if(comColors.size()==5){
+                gen = new DeckGenerator5Color(cardDb, format);
+            }
+
+        }
+
+
+
+        gen.setSingleton(true);
+        gen.setUseArtifacts(!FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
+        CardPool cards = gen.getDeck(format.getMainRange().getMaximum(), forAi);
+
+        // After generating card lists, build deck.
+        if(selectedPartner!=null){
+            deck = new Deck("Generated " + format.toString() + " deck (" + commander.getName() +
+                    "--" + selectedPartner.getName() + ")");
+        }else{
+            deck = new Deck("Generated " + format.toString() + " deck (" + commander.getName() + ")");
+        }
+        deck.setDirectory("generated/commander");
+        deck.getMain().addAll(cards);
+        deck.getOrCreate(DeckSection.Commander).add(commander);
+        if(selectedPartner!=null){
+            deck.getOrCreate(DeckSection.Commander).add(selectedPartner);
+        }
 
         return deck;
     }

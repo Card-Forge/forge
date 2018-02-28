@@ -2,6 +2,7 @@ package forge.screens.home.gauntlet;
 
 import forge.deck.DeckType;
 import forge.deckchooser.FDeckChooser;
+import forge.game.GameType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -59,7 +60,7 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
     private final JCheckBox boxModernColorDecks = new FCheckBox(DeckType.MODERN_COLOR_DECK.toString());
     private final JCheckBox boxThemeDecks = new FCheckBox(DeckType.THEME_DECK.toString());
 
-    private final FDeckChooser lstDecks = new FDeckChooser(null, false);
+    private final FDeckChooser lstDecks = new FDeckChooser(null, false, GameType.Constructed, false);
 
     private final FLabel lblOptions = new FLabel.Builder().fontSize(16)
             .fontStyle(Font.BOLD).text("OPTIONS").fontAlign(SwingConstants.CENTER).build();
@@ -85,7 +86,7 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         boxThemeDecks.setSelected(true);
         boxColorDecks.setSelected(true);
         boxStandardColorDecks.setSelected(true);
-        if(!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY)) {
+        if(FModel.isdeckGenMatrixLoaded()) {
             boxStandardCardgenDecks.setSelected(true);
             boxModernCardgenDecks.setSelected(true);
         }else{
@@ -114,7 +115,7 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         pnlOptions.add(boxQuestDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
         pnlOptions.add(boxThemeDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
         pnlOptions.add(boxColorDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
-        if(!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY)) {
+        if(FModel.isdeckGenMatrixLoaded()) {
             pnlOptions.add(boxStandardCardgenDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
             pnlOptions.add(boxModernCardgenDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
         }

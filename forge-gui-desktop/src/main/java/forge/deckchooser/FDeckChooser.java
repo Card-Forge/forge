@@ -43,6 +43,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private ItemManagerContainer lstDecksContainer;
     private NetDeckCategory netDeckCategory;
     private boolean refreshingDeckType;
+    private boolean isForCommander;
 
     private final DeckManager lstDecks;
     private final FLabel btnViewDeck = new FLabel.ButtonBuilder().text("View Deck").fontSize(14).build();
@@ -56,7 +57,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     //Show dialog to select a deck
     public static Deck promptForDeck(final CDetailPicture cDetailPicture, final String title, final DeckType defaultDeckType, final boolean forAi) {
         FThreads.assertExecutedByEdt(true);
-        final FDeckChooser chooser = new FDeckChooser(cDetailPicture, forAi);
+        final FDeckChooser chooser = new FDeckChooser(cDetailPicture, forAi, GameType.Constructed, false);
         chooser.initialize(defaultDeckType);
         chooser.populate();
         final Dimension parentSize = JOptionPane.getRootFrame().getSize();
@@ -78,10 +79,11 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         return null;
     }
 
-    public FDeckChooser(final CDetailPicture cDetailPicture, final boolean forAi) {
-        lstDecks = new DeckManager(GameType.Constructed, cDetailPicture);
+    public FDeckChooser(final CDetailPicture cDetailPicture, final boolean forAi, GameType gameType, boolean forCommander) {
+        lstDecks = new DeckManager(gameType, cDetailPicture);
         setOpaque(false);
         isAi = forAi;
+        isForCommander = forCommander;
         final UiCommand cmdViewDeck = new UiCommand() {
             @Override public void run() {
                 if (selectedDeckType != DeckType.COLOR_DECK && selectedDeckType != DeckType.THEME_DECK) {
@@ -129,7 +131,14 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private void updateCustom() {
-        updateDecks(DeckProxy.getAllConstructedDecks(), ItemManagerConfig.CONSTRUCTED_DECKS);
+        DeckFormat deckFormat = lstDecks.getGameType().getDeckFormat();
+        if(deckFormat.equals(DeckFormat.Commander)){
+            updateDecks(DeckProxy.getAllCommanderDecks(), ItemManagerConfig.COMMANDER_DECKS);
+        }else if(deckFormat.equals(DeckFormat.TinyLeaders)){
+            updateDecks(DeckProxy.getAllTinyLeadersDecks(), ItemManagerConfig.COMMANDER_DECKS);
+        }else {
+            updateDecks(DeckProxy.getAllConstructedDecks(), ItemManagerConfig.CONSTRUCTED_DECKS);
+        }
     }
 
     private void updateColors(Predicate<PaperCard> formatFilter) {
@@ -168,6 +177,49 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setSelectedIndices(new Integer[]{0});
     }
 
+    private void updateRandomCommander() {
+        if((!lstDecks.getGameType().getDeckFormat().equals(DeckFormat.Commander)&&
+                !(lstDecks.getGameType().getDeckFormat().equals(DeckFormat.TinyLeaders)))){
+            return;
+        }
+        lstDecks.setAllowMultipleSelections(false);
+
+        lstDecks.setPool(CommanderDeckGenerator.getCommanderDecks(lstDecks.getGameType().getDeckFormat(), isAi, false));
+        lstDecks.setup(ItemManagerConfig.STRING_ONLY);
+
+        btnRandom.setText("Random");
+        btnRandom.setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                DeckgenUtil.randomSelect(lstDecks);
+            }
+        });
+
+        // default selection = basic two color deck
+        lstDecks.setSelectedIndices(new Integer[]{0});
+    }
+
+    private void updateRandomCardGenCommander() {
+        if((!lstDecks.getGameType().getDeckFormat().equals(DeckFormat.Commander)&&
+                !(lstDecks.getGameType().getDeckFormat().equals(DeckFormat.TinyLeaders)))){
+            return;
+        }
+        lstDecks.setAllowMultipleSelections(false);
+        lstDecks.setPool(CommanderDeckGenerator.getCommanderDecks(lstDecks.getGameType().getDeckFormat(), isAi, true));
+        lstDecks.setup(ItemManagerConfig.STRING_ONLY);
+
+        btnRandom.setText("Random");
+        btnRandom.setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                DeckgenUtil.randomSelect(lstDecks);
+            }
+        });
+
+        // default selection = basic two color deck
+        lstDecks.setSelectedIndices(new Integer[]{0});
+    }
+
     private void updateThemes() {
         updateDecks(DeckProxy.getAllThemeDecks(), ItemManagerConfig.STRING_ONLY);
     }
@@ -192,9 +244,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     public Deck getDeck() {
-        /*if(selectedDeckType.equals(DeckType.STANDARD_CARDGEN_DECK)){
-            return DeckgenUtil.buildCardGenDeck(lstDecks.getSelectedItem().getName(),Predicate<PaperCard> formatFilter);
-        }*/
         final DeckProxy proxy = lstDecks.getSelectedItem();
         if (proxy == null) {
             return null;
@@ -250,7 +299,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
     @Override
     public void deckTypeSelected(final DecksComboBoxEvent ev) {
-        if (ev.getDeckType() == DeckType.NET_DECK && !refreshingDeckType) {
+        if ((ev.getDeckType() == DeckType.NET_DECK || ev.getDeckType() == DeckType.NET_COMMANDER_DECK) && !refreshingDeckType) {
             FThreads.invokeInBackgroundThread(new Runnable() { //needed for loading net decks
                 @Override
                 public void run() {
@@ -268,7 +317,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                             }
 
                             netDeckCategory = category;
-                            refreshDecksList(DeckType.NET_DECK, true, ev);
+                            refreshDecksList(ev.getDeckType(), true, ev);
                         }
                     });
                 }
@@ -285,13 +334,16 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
         if (ev == null) {
             refreshingDeckType = true;
-            decksComboBox.refresh(deckType);
+            decksComboBox.refresh(deckType, isForCommander);
             refreshingDeckType = false;
         }
         lstDecks.setCaption(deckType.toString());
 
         switch (deckType) {
             case CUSTOM_DECK:
+                updateCustom();
+                break;
+            case COMMANDER_DECK:
                 updateCustom();
                 break;
             case COLOR_DECK:
@@ -304,10 +356,22 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 updateColors(FModel.getFormats().getModern().getFilterPrinted());
                 break;
             case STANDARD_CARDGEN_DECK:
-                updateMatrix(FModel.getFormats().getStandard());
+                if(FModel.isdeckGenMatrixLoaded()) {
+                    updateMatrix(FModel.getFormats().getStandard());
+                }
                 break;
             case MODERN_CARDGEN_DECK:
-                updateMatrix(FModel.getFormats().getModern());
+                if(FModel.isdeckGenMatrixLoaded()) {
+                    updateMatrix(FModel.getFormats().getModern());
+                }
+                break;
+            case RANDOM_COMMANDER_DECK:
+                updateRandomCommander();
+                break;
+            case RANDOM_CARDGEN_COMMANDER_DECK:
+                if(FModel.isdeckGenMatrixLoaded()) {
+                    updateRandomCardGenCommander();
+                }
                 break;
             case THEME_DECK:
                 updateThemes();
@@ -322,6 +386,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 updateRandom();
                 break;
             case NET_DECK:
+                updateNetDecks();
+                break;
+            case NET_COMMANDER_DECK:
                 updateNetDecks();
                 break;
             default:
