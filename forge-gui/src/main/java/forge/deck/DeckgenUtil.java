@@ -586,26 +586,14 @@ public class DeckgenUtil {
             gen = new CardThemedCommanderDeckBuilder(commander, selectedPartner,preSelectedCards,forAi,format);
         }else{
             cardDb = FModel.getMagicDb().getCommonCards();
-            ColorSet colorID;
-            colorID = commander.getRules().getColorIdentity();
-            List<String> comColors = new ArrayList<String>(2);
-            if (colorID.hasWhite()) { comColors.add("White"); }
-            if (colorID.hasBlue())  { comColors.add("Blue"); }
-            if (colorID.hasBlack()) { comColors.add("Black"); }
-            if (colorID.hasRed())   { comColors.add("Red"); }
-            if (colorID.hasGreen()) { comColors.add("Green"); }
-
-            if(comColors.size()==1){
-                gen = new DeckGeneratorMonoColor(cardDb, format, comColors.get(0));
-            }else if(comColors.size()==2){
-                gen = new DeckGenerator2Color(cardDb, format, comColors.get(0), comColors.get(1));
-            }else if(comColors.size()==3){
-                gen = new DeckGenerator3Color(cardDb, format, comColors.get(0), comColors.get(1), comColors.get(2));
-            }else if(comColors.size()==4){
-                gen = new DeckGenerator4Color(cardDb, format, comColors.get(0), comColors.get(1), comColors.get(2), comColors.get(3));
-            }else if(comColors.size()==5){
-                gen = new DeckGenerator5Color(cardDb, format);
-            }
+            //shuffle first 400 random cards
+            Iterable<PaperCard> colorList = Iterables.filter(format.getCardPool(cardDb).getAllCards(),
+                    Predicates.compose(Predicates.or(new CardThemedDeckBuilder.MatchColorIdentity(commander.getRules().getColorIdentity()),
+                            DeckGeneratorBase.COLORLESS_CARDS), PaperCard.FN_GET_RULES));
+            List<PaperCard> cardList = Lists.newArrayList(colorList);
+            Collections.shuffle(cardList, new Random());
+            List<PaperCard> shortList = cardList.subList(1, 400);
+            gen = new CardThemedCommanderDeckBuilder(commander, selectedPartner,shortList,forAi,format);
 
         }
 
