@@ -59,8 +59,8 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
     protected Iterable<PaperCard> onColorNonCreatures;
     protected Iterable<PaperCard> keyCards;
 
-    protected static final boolean logToConsole = false;
-    protected static final boolean logColorsToConsole = false;
+    protected static final boolean logToConsole = true;
+    protected static final boolean logColorsToConsole = true;
 
 
     public CardThemedDeckBuilder(IDeckGenPool pool, DeckFormat format){
@@ -614,10 +614,9 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      * Only adds wastes if present in the card pool but if present adds them all
      */
     private void addWastesIfRequired(){
-        Iterable<PaperCard> wastes = Iterables.filter(aiPlayables,PaperCard.Predicates.name("Wastes"));
-        if(wastes.iterator().hasNext()){
-            PaperCard waste = wastes.iterator().next();
-            while(landsNeeded>0) {
+        if(colors.isColorless()) {
+            PaperCard waste = FModel.getMagicDb().getCommonCards().getUniqueByName("Wastes");
+            while (landsNeeded > 0) {
                 deckList.add(waste);
                 landsNeeded--;
             }
@@ -662,7 +661,9 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
                 Predicates.compose(CardRulesPredicates.Presets.IS_NONBASIC_LAND, PaperCard.FN_GET_RULES));
         List<PaperCard> landsToAdd = new ArrayList<>();
         int minBasics;//Keep a minimum number of basics to ensure playable decks
-        if(colors.isMonoColor()){
+        if(colors.isColorless()){
+            minBasics=0;
+        }else if(colors.isMonoColor()){
             minBasics=Math.round((r.nextInt(15)+9)*((float) targetSize) / 60);
         }else{
             minBasics=Math.round((r.nextInt(8)+6)*((float) targetSize) / 60);
