@@ -112,7 +112,7 @@ public final class CardRelationMatrixGenerator {
                 List<Map.Entry<PaperCard,Integer>> deckPool=new ArrayList<>();
                 int k=0;
                 boolean excludeThisCard=false;//if there are too few cards with at least one connection
-                for (int j=0;j<20;++k){
+                for (int j=0;j<14;++k){
                     if(distances[indices[cardList.size()-1-k]]==0){
                         excludeThisCard = true;
                         break;
