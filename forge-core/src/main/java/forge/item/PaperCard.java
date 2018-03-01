@@ -212,9 +212,13 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         // default deserialization
         ois.defaultReadObject();
 
-        final IPaperCard pc = StaticData.instance().getAllCards().getCard(name, edition, artIndex);
+        IPaperCard pc = null;
+        pc = StaticData.instance().getCommonCards().getCard(name, edition, artIndex);
         if (pc == null) {
-            throw new IOException(TextUtil.concatWithSpace("Card", name, "not found"));
+            pc = StaticData.instance().getVariantCards().getCard(name, edition, artIndex);
+            if (pc == null) {
+                throw new IOException(TextUtil.concatWithSpace("Card", name, "not found"));
+            }
         }
         rules = pc.getRules();
         rarity = pc.getRarity();

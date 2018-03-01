@@ -93,7 +93,9 @@ public class VLobby implements ILobbyView {
     private final VariantCheckBox vntPlanechase = new VariantCheckBox(GameType.Planechase);
     private final VariantCheckBox vntArchenemy = new VariantCheckBox(GameType.Archenemy);
     private final VariantCheckBox vntArchenemyRumble = new VariantCheckBox(GameType.ArchenemyRumble);
-    private final ImmutableList<VariantCheckBox> vntBoxes =
+    private final ImmutableList<VariantCheckBox> vntBoxesLocal  =
+            ImmutableList.of(vntVanguard, vntMomirBasic, vntCommander, vntTinyLeaders, vntPlanechase, vntArchenemy, vntArchenemyRumble);
+    private final ImmutableList<VariantCheckBox> vntBoxesNetwork =
             ImmutableList.of(vntVanguard, vntMomirBasic, vntCommander, vntTinyLeaders /*, vntPlanechase, vntArchenemy, vntArchenemyRumble */);
 
     // Player frame elements
@@ -153,6 +155,12 @@ public class VLobby implements ILobbyView {
 
         ////////////////////////////////////////////////////////
         //////////////////// Variants Panel ////////////////////
+        ImmutableList<VariantCheckBox> vntBoxes = null;
+        if (lobby.isAllowNetworking()) {
+            vntBoxes = vntBoxesNetwork;
+        } else {
+            vntBoxes = vntBoxesLocal;
+        }
 
         variantsPanel.setOpaque(false);
         variantsPanel.add(newLabel("Variants:"));
@@ -230,12 +238,18 @@ public class VLobby implements ILobbyView {
         activePlayersNum = lobby.getNumberOfSlots();
         addPlayerBtn.setEnabled(activePlayersNum < MAX_PLAYERS);
 
+        final boolean allowNetworking = lobby.isAllowNetworking();
+        ImmutableList<VariantCheckBox> vntBoxes = null;
+        if (allowNetworking) {
+            vntBoxes = vntBoxesNetwork;
+        } else {
+            vntBoxes = vntBoxesLocal;
+        }
         for (final VariantCheckBox vcb : vntBoxes) {
             vcb.setSelected(hasVariant(vcb.variant));
             vcb.setEnabled(lobby.hasControl());
         }
 
-        final boolean allowNetworking = lobby.isAllowNetworking();
         for (int i = 0; i < MAX_PLAYERS; i++) {
             final boolean hasPanel = i < playerPanels.size();
             if (i < activePlayersNum) {

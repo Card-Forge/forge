@@ -29,7 +29,6 @@ public class StaticData {
     private final String blockDataFolder;
     private final CardDb commonCards;
     private final CardDb variantCards;
-    private final CardDb allCards;
     private final TokenDb allTokens;
     private final CardEdition.Collection editions;
 
@@ -55,7 +54,6 @@ public class StaticData {
         lastInstance = this;
 
         {
-            final Map<String, CardRules> allCardsMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
             final Map<String, CardRules> regularCards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
             final Map<String, CardRules> variantsCards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
@@ -63,7 +61,6 @@ public class StaticData {
                 if (null == card) continue;
 
                 final String cardName = card.getName();
-                allCardsMap.put(cardName, card);
                 if (card.isVariant()) {
                     variantsCards.put(cardName, card);
                 } else {
@@ -71,12 +68,10 @@ public class StaticData {
                 }
             }
 
-            allCards = new CardDb(allCardsMap, editions);
             commonCards = new CardDb(regularCards, editions);
             variantCards = new CardDb(variantsCards, editions);
 
             //must initialize after establish field values for the sake of card image logic
-            allCards.initialize(false, false);
             commonCards.initialize(false, false);
             variantCards.initialize(false, false);
         }
@@ -188,8 +183,6 @@ public class StaticData {
     public CardDb getVariantCards() {
         return variantCards;
     }
-
-    public CardDb getAllCards() { return allCards; }
 
     public TokenDb getAllTokens() { return allTokens; }
 
