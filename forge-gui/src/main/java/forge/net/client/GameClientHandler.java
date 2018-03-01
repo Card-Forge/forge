@@ -99,6 +99,8 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
     private GameRules createGameRules(GameType gameType, GameView gameView) {
         // FIXME: how do we know the rules are the same on each side???
         GameRules gameRules = new GameRules(gameType);
+        // is this always safe to do?
+        gameRules.setAppliedVariants(Collections.singleton(gameType));
         gameRules.setGamesPerMatch(gameView.getNumGamesInMatch());
         gameRules.setPoisonCountersToLose(gameView.getPoisonCountersToLose());
 
