@@ -199,9 +199,14 @@ public class TokenEffect extends SpellAbilityEffect {
     private Card loadTokenPrototype(SpellAbility sa) {
         String script = sa.getParamOrDefault("TokenScript", null);
 
-        String edition = sa.getHostCard().getPaperCard().getEdition();
-
-        PaperToken token = StaticData.instance().getAllTokens().getToken(script, edition);
+        PaperToken token = null;
+        try {
+            String edition = sa.getHostCard().getPaperCard().getEdition();
+            token = StaticData.instance().getAllTokens().getToken(script, edition);
+        } catch(NullPointerException e) {
+            // A non-PaperCard creates a new token. We probably want to delegate to the original creator
+            System.out.println("Token created by: " + sa.getHostCard() + " has no PaperCard associated to it.");
+        }
         if (token != null) {
             tokenName = token.getName();
             return Card.fromPaperCard(token, null, sa.getHostCard().getGame());
