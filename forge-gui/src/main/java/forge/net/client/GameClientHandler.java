@@ -7,7 +7,10 @@ import forge.game.player.RegisteredPlayer;
 import forge.interfaces.ILobbyListener;
 import forge.match.LobbySlot;
 import forge.player.LobbyPlayerHuman;
+import forge.player.PlayerZoneUpdate;
+import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableObject;
+import forge.trackable.TrackableTypes;
 import forge.trackable.Tracker;
 import io.netty.channel.ChannelHandlerContext;
 import forge.game.player.PlayerView;
@@ -88,6 +91,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
         }
         if (!(this.tracker == null)) {
             updateTrackers(args);
+            replicateProps(args);
         }
     }
 
@@ -243,6 +247,41 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
                 }
             }
         }
+    }
+
+    private void replicateProps(final Object[] objs) {
+        for (Object obj: objs) {
+            if (obj instanceof PlayerView) {
+                replicatePlayerView((PlayerView) obj);
+            }
+            else if (obj instanceof PlayerZoneUpdate) {
+                replicatePlayerView(((PlayerZoneUpdate) obj).getPlayer());
+            }
+            else if (obj instanceof PlayerZoneUpdates) {
+                Iterator itrPlayerZoneUpdates = ((PlayerZoneUpdates) obj).iterator();
+                while (itrPlayerZoneUpdates.hasNext()) {
+                    PlayerView newPlayerView = ((PlayerZoneUpdate)itrPlayerZoneUpdates.next()).getPlayer();
+                    /**
+                     * FIXME: this should be handled by the original call to updateTrackers
+                     * However, PlayerZoneUpdates aren't a TrackableCollection.
+                     * So, additional logic will be needed. Leaving here for now.
+                     */
+                    updateTrackers(new Object[]{newPlayerView});
+                    replicatePlayerView(newPlayerView);
+                }
+            }
+            /*
+            else {
+                System.err.println("replicateProps - did not handle : " + obj.getClass().toString());
+            }
+             */
+        }
+    }
+
+    private void replicatePlayerView(final PlayerView newPlayerView) {
+        PlayerView existingPlayerView = tracker.getObj(TrackableTypes.PlayerViewType, newPlayerView.getId());
+        existingPlayerView.copyChangedProps(newPlayerView);
+        System.err.println("replicated PlayerView properties - " + existingPlayerView.toString());
     }
 
     @Override
