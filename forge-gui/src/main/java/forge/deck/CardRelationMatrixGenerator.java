@@ -26,6 +26,11 @@ import java.util.*;
 public final class CardRelationMatrixGenerator {
 
     public static HashMap<String,HashMap<String,List<Map.Entry<PaperCard,Integer>>>> cardPools = new HashMap<>();
+    /**
+        To ensure that only cards with at least 14 connections (as 14*4+4=60) are included in the card based deck
+        generation pools
+    **/
+    public static final int MIN_REQUIRED_CONNECTIONS = 14;
 
     public static boolean initialize(){
         List<String> formatStrings = new ArrayList<>();
@@ -112,7 +117,7 @@ public final class CardRelationMatrixGenerator {
                 List<Map.Entry<PaperCard,Integer>> deckPool=new ArrayList<>();
                 int k=0;
                 boolean excludeThisCard=false;//if there are too few cards with at least one connection
-                for (int j=0;j<14;++k){
+                for (int j=0;j<MIN_REQUIRED_CONNECTIONS;++k){
                     if(distances[indices[cardList.size()-1-k]]==0){
                         excludeThisCard = true;
                         break;
