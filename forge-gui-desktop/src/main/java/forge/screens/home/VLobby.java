@@ -94,7 +94,7 @@ public class VLobby implements ILobbyView {
     private final VariantCheckBox vntArchenemy = new VariantCheckBox(GameType.Archenemy);
     private final VariantCheckBox vntArchenemyRumble = new VariantCheckBox(GameType.ArchenemyRumble);
     private final ImmutableList<VariantCheckBox> vntBoxes =
-            ImmutableList.of(vntVanguard, vntMomirBasic, vntCommander, vntTinyLeaders, vntPlanechase, vntArchenemy, vntArchenemyRumble);
+            ImmutableList.of(vntVanguard, vntMomirBasic, vntCommander, vntTinyLeaders /*, vntPlanechase, vntArchenemy, vntArchenemyRumble */);
 
     // Player frame elements
     private final JPanel playersFrame = new JPanel(new MigLayout("insets 0, gap 0 5, wrap, hidemode 3"));
@@ -302,7 +302,7 @@ public class VLobby implements ILobbyView {
     }
 
     void setReady(final int index, final boolean ready) {
-        if (ready && decks[index] == null) {
+        if (ready && decks[index] == null && !vntMomirBasic.isSelected()) {
             SOptionPane.showErrorDialog("Select a deck before readying!");
             update(false);
             return;
