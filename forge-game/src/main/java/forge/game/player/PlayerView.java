@@ -129,6 +129,12 @@ public class PlayerView extends GameEntityView {
         }
 
         final FCollectionView<PlayerView> opponents = getOpponents();
+        for (PlayerView opponent: opponents) {
+            if (opponent.getCommanders() == null) {
+                return Collections.emptyList();
+            }
+        }
+
         final List<String> info = Lists.newArrayListWithExpectedSize(opponents.size());
         info.add(TextUtil.concatWithSpace("Commanders:", Lang.joinHomogenous(commanders)));
         for (final PlayerView p : Iterables.concat(Collections.singleton(this), opponents)) {
