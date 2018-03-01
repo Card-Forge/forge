@@ -94,7 +94,7 @@ public class VLobby implements ILobbyView {
     private final VariantCheckBox vntArchenemy = new VariantCheckBox(GameType.Archenemy);
     private final VariantCheckBox vntArchenemyRumble = new VariantCheckBox(GameType.ArchenemyRumble);
     private final ImmutableList<VariantCheckBox> vntBoxes =
-            ImmutableList.of();
+            ImmutableList.of(vntCommander, vntTinyLeaders);
             // ImmutableList.of(vntVanguard, vntMomirBasic, vntCommander, vntTinyLeaders, vntPlanechase, vntArchenemy, vntArchenemyRumble);
 
     // Player frame elements
