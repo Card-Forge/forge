@@ -25,8 +25,8 @@ import forge.item.IPaperCard;
 
 public class DeckColors {
 
-    private ColorSet chosen;
-    private int colorMask;
+    protected ColorSet chosen;
+    protected int colorMask;
 
     public int MAX_COLORS = 2;
 
