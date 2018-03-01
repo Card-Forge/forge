@@ -106,6 +106,18 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
     }
 
     /**
+     * Retrieve the desired GameType from the Lobby
+     *
+     * @return GameType
+     */
+    private GameType getGameType() {
+        List<ILobbyListener> lobbyListeners = client.getLobbyListeners();
+        ILobbyListener lobbyListener = lobbyListeners.get(0);
+        ClientGameLobby myLobby = lobbyListener.getLobby();
+        return myLobby.getGameType();
+    }
+
+    /**
      * This method retrieves enough of the existing (incomplete) game state to
      * recreate a new viable Match object
      *
@@ -121,7 +133,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
         final IGuiGame gui = client.getGui();
         GameView gameView = gui.getGameView();
 
-        final GameType gameType = gameView.getGameType();
+        final GameType gameType = getGameType();
         final GameRules gameRules = createGameRules(gameType, gameView);
         final List<RegisteredPlayer> registeredPlayers = createRegisteredPlayers(gameType);
 
