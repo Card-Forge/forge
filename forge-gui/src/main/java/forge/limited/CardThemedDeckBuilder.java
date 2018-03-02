@@ -59,8 +59,8 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
     protected Iterable<PaperCard> onColorNonCreatures;
     protected Iterable<PaperCard> keyCards;
 
-    protected static final boolean logToConsole = false;
-    protected static final boolean logColorsToConsole = false;
+    protected static final boolean logToConsole = true;
+    protected static final boolean logColorsToConsole = true;
 
 
     public CardThemedDeckBuilder(IDeckGenPool pool, DeckFormat format){
@@ -313,6 +313,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             deckList.addAll(keyCardList);
             aiPlayables.removeAll(keyCardList);
             rankedColorList.removeAll(keyCardList);
+            landsNeeded--;
         }
         // Add the deck card
         if(secondKeyCard.getRules().getMainPart().getType().isLand()) {
@@ -321,6 +322,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             deckList.addAll(keyCardList);
             aiPlayables.removeAll(keyCardList);
             rankedColorList.removeAll(keyCardList);
+            landsNeeded--;
         }
     }
 
