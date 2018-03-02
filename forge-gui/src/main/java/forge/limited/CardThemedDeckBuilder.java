@@ -249,6 +249,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             addLands(clrCnts);
         }
         if (logToConsole) {
+            System.out.println("Lands needed : " + landsNeeded);
             System.out.println("Post Lands : " + deckList.size());
         }
         if (keyCard.getRules().getColorIdentity().isColorless()&&landsNeeded>0){
@@ -313,6 +314,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             deckList.addAll(keyCardList);
             aiPlayables.removeAll(keyCardList);
             rankedColorList.removeAll(keyCardList);
+            landsNeeded--;
         }
         // Add the deck card
         if(secondKeyCard.getRules().getMainPart().getType().isLand()) {
@@ -321,6 +323,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             deckList.addAll(keyCardList);
             aiPlayables.removeAll(keyCardList);
             rankedColorList.removeAll(keyCardList);
+            landsNeeded--;
         }
     }
 
@@ -647,6 +650,16 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
                     if ( shard.canBePaidWithManaOfColor(c) && colors.hasAnyColor(c)) {
                         clrCnts[i]++;
                     }
+                }
+            }
+        }
+        //check all colors have at least one count for each color in colors
+        for ( int i = 0 ; i < MagicColor.WUBRG.length; i++ ) {
+            final byte c = MagicColor.WUBRG[i];
+
+            if ( colors.hasAnyColor(c)) {
+                if(clrCnts[i] == 0 ) {
+                    clrCnts[i]++;
                 }
             }
         }
