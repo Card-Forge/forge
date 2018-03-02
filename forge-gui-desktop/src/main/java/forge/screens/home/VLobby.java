@@ -257,6 +257,7 @@ public class VLobby implements ILobbyView {
                 final LobbySlot slot = lobby.getSlot(i);
                 final FDeckChooser deckChooser = getDeckChooser(i);
                 final FDeckChooser commanderDeckChooser = getCommanderDeckChooser(i);
+                final FDeckChooser tinyLeaderDeckChooser = getTinyLeaderDeckChooser(i);
                 final PlayerPanel panel;
                 final boolean isNewPanel;
                 if (hasPanel) {
@@ -272,6 +273,7 @@ public class VLobby implements ILobbyView {
                     playersScroll.add(panel, constraints);
                     deckChooser.restoreSavedState();
                     commanderDeckChooser.restoreSavedState();
+                    tinyLeaderDeckChooser.restoreSavedState();
                     if (i == 0) {
                         changePlayerFocus(0);
                     }
@@ -292,6 +294,8 @@ public class VLobby implements ILobbyView {
                 panel.update();
 
                 deckChooser.setIsAi(slot.getType() == LobbySlotType.AI);
+                commanderDeckChooser.setIsAi(slot.getType() == LobbySlotType.AI);
+                tinyLeaderDeckChooser.setIsAi(slot.getType() == LobbySlotType.AI);
                 if (fullUpdate && (type == LobbySlotType.LOCAL || type == LobbySlotType.AI)) {
                     selectDeck(i);
                 }
@@ -363,7 +367,7 @@ public class VLobby implements ILobbyView {
     @SuppressWarnings("serial")
     private void buildDeckPanels(final int playerIndex) {
         // Main deck
-        final FDeckChooser mainChooser = new FDeckChooser(null, false, GameType.Constructed, false);
+        final FDeckChooser mainChooser = new FDeckChooser(null, isPlayerAI(playerIndex), GameType.Constructed, false);
         mainChooser.getLstDecks().setSelectCommand(new UiCommand() {
             @Override public final void run() {
                 selectMainDeck(playerIndex);
@@ -385,7 +389,7 @@ public class VLobby implements ILobbyView {
                 selectCommanderDeck(playerIndex);
             }
         });*/
-        final FDeckChooser commanderChooser = new FDeckChooser(null, false, GameType.Commander, true);
+        final FDeckChooser commanderChooser = new FDeckChooser(null, isPlayerAI(playerIndex), GameType.Commander, true);
         commanderChooser.getLstDecks().setSelectCommand(new UiCommand() {
             @Override public final void run() {
                 selectCommanderDeck(playerIndex);
@@ -394,7 +398,7 @@ public class VLobby implements ILobbyView {
         commanderChooser.initialize();
         commanderDeckChoosers.add(commanderChooser);
 
-        final FDeckChooser tinyLeaderChooser = new FDeckChooser(null, false, GameType.TinyLeaders, true);
+        final FDeckChooser tinyLeaderChooser = new FDeckChooser(null, isPlayerAI(playerIndex), GameType.TinyLeaders, true);
         tinyLeaderChooser.getLstDecks().setSelectCommand(new UiCommand() {
             @Override public final void run() {
                 selectTinyLeadersDeck(playerIndex);
