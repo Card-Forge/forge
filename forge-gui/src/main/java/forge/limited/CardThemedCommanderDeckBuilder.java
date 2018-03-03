@@ -62,6 +62,10 @@ public class CardThemedCommanderDeckBuilder extends CardThemedDeckBuilder {
         //do nothing as we cannot add extra colours beyond commanders
     }
 
+    @Override
+    protected void updateColors(){
+        //do nothing as we cannot deviate from commander colours
+    }
     /**
      * Generate a descriptive name.
      *

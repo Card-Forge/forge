@@ -133,6 +133,19 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         return buildDeck().getMain();
     }
 
+    protected void updateColors(){
+        //update colors
+        FullDeckColors finalDeckColors = new FullDeckColors();
+        for(PaperCard c:deckList){
+            if(finalDeckColors.canChoseMoreColors()){
+                finalDeckColors.addColorsOf(c);
+            }
+        }
+        colors = finalDeckColors.getChosenColors();
+        if (logColorsToConsole) {
+            System.out.println("Final Colors: " + colors.toEnumSet().toString());
+        }
+    }
     /**
      * <p>
      * buildDeck.
@@ -222,6 +235,8 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         if (logToConsole) {
             System.out.println("Post Randoms : " + deckList.size());
         }
+
+        updateColors();
 
         addLandKeyCards();
 
