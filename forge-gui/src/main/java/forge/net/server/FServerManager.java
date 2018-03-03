@@ -97,22 +97,22 @@ public final class FServerManager {
     public void startServer(final int port) {
         try {
             final ServerBootstrap b = new ServerBootstrap()
-            .group(bossGroup, workerGroup)
-            .channel(NioServerSocketChannel.class)
-            .handler(new LoggingHandler(LogLevel.INFO))
-            .childHandler(new ChannelInitializer<SocketChannel>() {
-                @Override public final void initChannel(final SocketChannel ch) {
-                    final ChannelPipeline p = ch.pipeline();
-                    p.addLast(
-                            new ObjectEncoder(),
-                            new ObjectDecoder(ClassResolvers.cacheDisabled(null)),
-                            new MessageHandler(),
-                            new RegisterClientHandler(),
-                            new LobbyInputHandler(),
-                            new DeregisterClientHandler(),
-                            new GameServerHandler());
-                }
-            });
+                    .group(bossGroup, workerGroup)
+                    .channel(NioServerSocketChannel.class)
+                    .handler(new LoggingHandler(LogLevel.INFO))
+                    .childHandler(new ChannelInitializer<SocketChannel>() {
+                        @Override public final void initChannel(final SocketChannel ch) {
+                            final ChannelPipeline p = ch.pipeline();
+                            p.addLast(
+                                    new ObjectEncoder(),
+                                    new ObjectDecoder(ClassResolvers.cacheDisabled(null)),
+                                    new MessageHandler(),
+                                    new RegisterClientHandler(),
+                                    new LobbyInputHandler(),
+                                    new DeregisterClientHandler(),
+                                    new GameServerHandler());
+                        }
+                    });
 
             // Bind and start to accept incoming connections.
             final ChannelFuture ch = b.bind(port).sync().channel().closeFuture();
