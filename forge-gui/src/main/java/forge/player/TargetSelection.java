@@ -181,12 +181,13 @@ public class TargetSelection {
         final List<CardView> crdsAnte    = Lists.newArrayList();
         for (final Card inZone : choices) {
             Zone zz = game.getZoneOf(inZone);
-            if (zz.is(ZoneType.Battlefield))    crdsBattle.add(CardView.get(inZone));
-            else if (zz.is(ZoneType.Exile))     crdsExile.add(CardView.get(inZone));
-            else if (zz.is(ZoneType.Graveyard)) crdsGrave.add(CardView.get(inZone));
-            else if (zz.is(ZoneType.Library))   crdsLibrary.add(CardView.get(inZone));
-            else if (zz.is(ZoneType.Stack))     crdsStack.add(CardView.get(inZone));
-            else if (zz.is(ZoneType.Ante))      crdsAnte.add(CardView.get(inZone));
+            CardView cardView = CardView.get(inZone);
+            if (zz.is(ZoneType.Battlefield))    crdsBattle.add(cardView);
+            else if (zz.is(ZoneType.Exile))     crdsExile.add(cardView);
+            else if (zz.is(ZoneType.Graveyard)) crdsGrave.add(cardView);
+            else if (zz.is(ZoneType.Library))   crdsLibrary.add(cardView);
+            else if (zz.is(ZoneType.Stack))     crdsStack.add(cardView);
+            else if (zz.is(ZoneType.Ante))      crdsAnte.add(cardView);
         }
         List<Object> choicesFiltered = new ArrayList<Object>();
         if (!crdsBattle.isEmpty()) {
@@ -246,7 +247,7 @@ public class TargetSelection {
         final String message = tgt.getVTSelection();
         // Find what's targetable, then allow human to choose
         final List<Object> selectOptions = new ArrayList<Object>();
-        HashMap<StackItemView, SpellAbilityStackInstance> stackItemViewSpellAbilityHashMap = new HashMap<>();
+        HashMap<StackItemView, SpellAbilityStackInstance> stackItemViewCache = new HashMap<>();
 
         final Game game = ability.getActivatingPlayer().getGame();
         for (final SpellAbilityStackInstance si : game.getStack()) {
@@ -256,7 +257,7 @@ public class TargetSelection {
                 ability.resetTargets();
             }
             else if (ability.canTargetSpellAbility(abilityOnStack)) {
-                stackItemViewSpellAbilityHashMap.put(si.getView(), si);
+                stackItemViewCache.put(si.getView(), si);
                 selectOptions.add(si.getView());
             }
         }
@@ -281,7 +282,7 @@ public class TargetSelection {
                     return false;
                 }
                 if (madeChoice instanceof StackItemView) {
-                    ability.getTargets().add(stackItemViewSpellAbilityHashMap.get(madeChoice).getSpellAbility(true));
+                    ability.getTargets().add(stackItemViewCache.get(madeChoice).getSpellAbility(true));
                 }
                 else {// 'FINISH TARGETING' chosen 
                     bTargetingDone = true;
