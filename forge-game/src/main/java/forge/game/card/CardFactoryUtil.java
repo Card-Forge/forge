@@ -2350,11 +2350,12 @@ public class CardFactoryUtil {
             final String name = StringUtils.join(k);
 
             final String trigStr = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield "
-                    + " | Execute$ " + name + "Choose | ValidCard$ Card.Self | Secondary$ True"
+                    + " | ValidCard$ Card.Self | Secondary$ True"
                     + " | TriggerDescription$ Fabricate " + n + " (" + inst.getReminderText() + ")";
 
-            final String choose = "DB$ GenericChoice | Choices$ DB" + name + "Counter,DB" + name + "Token | ConditionPresent$ Card.StrictlySelf | SubAbility$ DB" + name + "Token2 | AILogic$ " + name;
-            final String counter = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ " + n + " | SpellDescription$ Put "
+            final String choose = "DB$ GenericChoice | AILogic$ " + name;
+            final String counter = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ " + n +
+                    " | IsPresent$ Card.StrictlySelf | SpellDescription$ Put "
                     + Lang.nounWithNumeral(n, "+1/+1 counter") + " on it.";
             final String token = "DB$ Token | TokenAmount$ " + n + " | TokenName$ Servo | TokenTypes$ Artifact,Creature,Servo"
                     + " | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1"
@@ -2363,10 +2364,15 @@ public class CardFactoryUtil {
 
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
 
-            card.setSVar(name + "Choose", choose);
-            card.setSVar("DB" + name + "Counter", counter);
-            card.setSVar("DB" + name + "Token", token);
-            card.setSVar("DB" + name + "Token2", token + " | ConditionPresent$ Card.StrictlySelf | ConditionCompare$ EQ0");
+            SpellAbility saChoose = AbilityFactory.getAbility(choose, card);
+
+            List<AbilitySub> list = Lists.newArrayList();
+            list.add((AbilitySub)AbilityFactory.getAbility(counter, card));
+            list.add((AbilitySub)AbilityFactory.getAbility(token, card));
+            saChoose.setAdditionalAbilityList("Choices", list);
+            saChoose.setIntrinsic(intrinsic);
+
+            trigger.setOverridingAbility(saChoose);
 
             inst.addTrigger(trigger);
         } else if (keyword.startsWith("Fading")) {
@@ -3367,6 +3373,8 @@ public class CardFactoryUtil {
         
         // extra part for the Damage Prevention keywords
         if (keyword.startsWith("Prevent all ")) {
+            // TODO add intrinsic warning
+
             boolean isCombat = false;
             boolean from = false;
             boolean to = false;
