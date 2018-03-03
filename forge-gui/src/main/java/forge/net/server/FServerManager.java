@@ -159,6 +159,10 @@ public final class FServerManager {
     }
 
     public void broadcast(final NetEvent event) {
+        if (event instanceof MessageEvent) {
+            MessageEvent msgEvent = (MessageEvent) event;
+            lobbyListener.message(msgEvent.getSource(), msgEvent.getMessage());
+        }
         broadcastTo(event, clients.values());
     }
     public void broadcastExcept(final NetEvent event, final RemoteClient notTo) {
