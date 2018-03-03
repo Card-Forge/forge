@@ -57,8 +57,8 @@ public final class FServerManager {
 
     private byte[] externalAddress = new byte[]{8,8,8,8};
     private boolean isHosting = false;
-    private final EventLoopGroup bossGroup = new NioEventLoopGroup(1);
-    private final EventLoopGroup workerGroup = new NioEventLoopGroup();
+    private EventLoopGroup bossGroup = new NioEventLoopGroup(1);
+    private EventLoopGroup workerGroup = new NioEventLoopGroup();
     private UpnpService upnpService = null;
     private final Map<Channel, RemoteClient> clients = Maps.newTreeMap();
     private ServerGameLobby localLobby;
@@ -149,6 +149,9 @@ public final class FServerManager {
             Runtime.getRuntime().removeShutdownHook(shutdownHook);
         }
         isHosting = false;
+        // create new EventLoopGroups for potential restart
+        bossGroup = new NioEventLoopGroup(1);
+        workerGroup = new NioEventLoopGroup();
     }
 
     public boolean isHosting() {

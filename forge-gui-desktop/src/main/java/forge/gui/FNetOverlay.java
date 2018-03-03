@@ -131,6 +131,12 @@ public enum FNetOverlay implements IOnlineChatInterface {
         cmdSend.setCommand(new Runnable() { @Override public void run() { onSend.actionPerformed(null); } });
     }
 
+    public void reset() {
+        setGameClient(null);
+        txtLog.setText("");
+        hide();
+    }
+
     public void hide() {
         window.setVisible(false);
     }
