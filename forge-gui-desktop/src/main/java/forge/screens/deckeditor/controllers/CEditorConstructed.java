@@ -223,9 +223,6 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         case Main:
             cmb.addMoveItems("Remove", "from deck");
             cmb.addMoveAlternateItems("Move", "to sideboard");
-            if (foilAvailable) {
-                cmb.addMakeFoils();
-            }
             break;
         case Sideboard:
             cmb.addMoveItems("Remove", "from sideboard");
@@ -246,6 +243,9 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         case Conspiracy:
             cmb.addMoveItems("Remove", "from conspiracy deck");
             break;
+        }
+        if (foilAvailable) {
+            cmb.addMakeFoils();
         }
     }
 
