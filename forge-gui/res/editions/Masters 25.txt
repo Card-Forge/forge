@@ -4,12 +4,257 @@ Code=A25
 Date=2018-03-16
 MciCode=a25
 Type=Reprint
-#BoosterCovers=3
-#Booster=11 Common, 3 Uncommon, 1 RareMythic
-#FoilChanceInBooster=100
+BoosterCovers=3
+Booster=11 Common, 3 Uncommon, 1 RareMythic
+FoilChanceInBooster=100
 
 [cards]
-
+1 C Act of Heroism
+2 M Akroma, Angel of Wrath
+3 R Akroma's Vengeance
+4 U Angelic Page
+5 M Armageddon
+6 C Auramancer
+7 C Cloudshift
+8 C Congregate
+9 R Darien, King of Kjeldor
+10 C Dauntless Cathar
+11 R Decree of Justice
+12 C Disenchant
+13 C Fencing Ace
+14 U Fiend Hunter
+15 C Geist of the Moors
+16 C Gods Willing
+17 C Griffin Protector
+18 U Karona's Zealot
+19 C Knight of the Skyward Eye
+20 U Kongming, Sleeping Dragon
+21 U Kor Firewalker
+22 C Loyal Sentry
+23 R Luminarch Ascension
+24 C Lunarch Mantle
+25 C Noble Templar
+26 U Nyx-Fleece Ram
+27 U Ordeal of Heliod
+28 C Pacifism
+29 C Path of Peace
+30 U Promise of Bunrei
+31 C Renewed Faith
+32 R Rest in Peace
+33 C Savannah Lions
+34 C Squadron Hawk
+35 U Swords to Plowshares
+36 R Thalia, Guardian of Thraben
+37 U Urbis Protector
+38 U Valor in Akros
+39 C Whitemane Lion
+40 C Accumulated Knowledge
+41 C Arcane Denial
+42 R Bident of Thassa
+43 U Blue Elemental Blast
+44 R Blue Sun's Zenith
+45 C Borrowing 100,000 Arrows
+46 U Brainstorm
+47 U Brine Elemental
+48 C Choking Tethers
+49 C Coralhelm Guide
+50 C Counterspell
+51 C Court Hussar
+52 U Curiosity
+53 U Cursecatcher
+54 C Dragon's Eye Savants
+55 U Exclude
+56 C Fathom Seer
+57 R Flash
+58 U Freed from the Real
+59 U Genju of the Falls
+60 C Ghost Ship
+61 C Horseshoe Crab
 62 M Jace, the Mind Sculptor
-
+63 U Jalira, Master Polymorphist
+64 C Man-o'-War
+65 U Merfolk Looter
+66 U Murder of Crows
+67 C Mystic of the Hidden Way
+68 R Pact of Negation
+69 C Phantasmal Bear
+70 R Reef Worm
+71 C Retraction Helix
+72 C Shoreline Ranger
+73 C Sift
+74 C Totally Lost
+75 U Twisted Image
+76 M Vendilion Clique
+77 R Vesuvan Shapeshifter
+78 U Willbender
+79 U Ancient Craving
+80 C Bloodhunter Bat
+81 U Caustic Tar
+82 C Dark Ritual
+83 U Deadly Designs
+84 C Death's-Head Buzzard
+85 C Diabolic Edict
+86 C Dirge of Dread
+87 C Disfigure
+88 M Doomsday
+89 C Dusk Legion Zealot
+90 C Erg Raiders
+91 U Fallen Angel
+92 R Hell's Caretaker
+93 C Horror of the Broken Lands
+94 U Ihsan's Shade
+95 R Laquatus's Champion
+96 R Living Death
+97 U Mesmeric Fiend
+98 C Murder
+99 C Nezumi Cutthroat
+100 C Phyrexian Ghoul
+101 M Phyrexian Obliterator
+102 R Plague Wind
+103 R Ratcatcher
+104 U Ravenous Chupacabra
+105 C Relentless Rats
+106 C Returned Phalanx
+107 C Ruthless Ripper
+108 U Street Wraith
+109 C Supernatural Stamina
+110 R Triskaidekaphobia
+111 C Twisted Abomination
+112 U Undead Gladiator
+113 C Unearth
+114 C Vampire Lacerator
+115 U Will-o'-the-Wisp
+116 U Zombify
+117 U Zulaport Cutthroat
+118 C Act of Treason
+119 R Akroma, Angel of Fury
+120 C Balduvian Horde
+121 R Ball Lightning
+122 R Blood Moon
+123 U Browbeat
+124 C Chandra's Outrage
+125 C Chartooth Cougar
+126 C Cinder Storm
+127 C Crimson Mage
+128 R Eidolon of the Great Revel
+129 U Enthralling Victor
+130 R Fortune Thief
+131 C Frenzied Goblin
+132 U Genju of the Spires
+133 U Goblin War Drums
+134 C Hordeling Outburst
+135 U Humble Defector
+136 M Imperial Recruiter
+137 U Ire Shaman
+138 R Izzet Chemister
+139 C Jackal Pup
+140 C Kindle
+141 U Lightning Bolt
+142 R Magus of the Wheel
+143 C Mogg Flunkies
+144 C Pillage
+145 C Pyre Hound
+146 U Pyroclasm
+147 U Red Elemental Blast
+148 U Simian Spirit Guide
+149 C Skeletonize
+150 C Skirk Commando
+151 C Soulbright Flamekin
+152 U Spikeshot Goblin
+153 C Thresher Lizard
+154 C Trumpet Blast
+155 C Uncaged fury
+156 U Zada, Hedron Grinder
+157 C Ainok Survivalist
+158 C Ambassador Oak
+159 U Ancient Stirrings
+160 C Arbor Elf
 161 R Azusa, Lost but Seeking
+162 U Broodhatch Nantuko
+163 C Colossal Dreadmaw
+164 R Courser of Kruphix
+165 C Cultivate
+166 C Echoing Courage
+167 C Elvish Aberration
+168 R Elvish Piper
+169 C Ember Weaver
+170 C Epic Confrontation
+171 U Fierce Empath
+172 C Giant Growth
+173 U Invigorate
+174 U Iwamori of the Open Fist
+175 C Kavu Climber
+176 U Kavu Predator
+177 U Krosan Colossus
+178 U Krosan Tusker
+179 R Living Wish
+180 C Lull
+181 M Master of the Wild Hunt
+182 C Nettle Sentinel
+183 C Plummet
+184 C Presence of Gond
+185 R Protean Hulk
+186 U Rancor
+187 U Regrowth
+188 U Stampede Driver
+189 R Summoner's Pact
+190 C Timberpack Wolf
+191 M Tree of Redemption
+192 U Utopia Sprawl
+193 C Vessel of Nascency
+194 C Wildheart Invoker
+195 C Woolly Loxodon
+196 M Animar, Soul of Elements
+197 U Baloth Null
+198 U Blightning
+199 U Boros Charm
+200 R Brion Stoutarm
+201 U Cloudblazer
+202 M Conflux
+203 R Eladamri's Call
+204 M Gisela, Blade of Goldnight
+205 R Grenzo, Dungeon Warden
+206 R Hanna, Ship's Navigator
+207 U Lorescale Coatl
+208 R Mystic Snake
+209 R Nicol Bolas
+210 R Niv-Mizzet, the Firemind
+211 R Notion Thief
+212 R Pernicious Deed
+213 U Pillory of the Sleepless
+214 M Prossh, Skyraider of Kher
+215 U Quicksilver Dagger
+216 R Ruric Thar, the Unbowed
+217 U Shadowmage Infiltrator
+218 U Stangg
+219 R Vindicate
+220 U Watchwolf
+221 C Assembly-Worker
+222 M Chalice of the Void
+223 R Coalition Relic
+224 M Ensnaring Bridge
+225 U Heavy Arbalest
+226 C Nihil Spellbomb
+227 U Perilous Myr
+228 C Primal Clay
+229 C Prophetic Prism
+230 U Sai of the Shinobi
+231 C Self-Assembler
+232 R Strionic Resonator
+233 R Sundering Titan
+234 U Swiftfoot Boots
+235 U Treasure Keeper
+236 R Rishadan Port
+237 R Fetid Heath
+238 R Twilight Mire
+239 R Cascade Bluffs
+240 R Rugged Prairie
+241 R Flooded Grove
+242 R Mikokoro, Center of the Sea
+243 R Pendelhaven
+244 U Ash Barrens
+245 U Mishra's Factory
+246 C Haunted Fengraf
+247 U Myriad Landscape
+248 U Quicksand
+249 U Zoetic Cavern
