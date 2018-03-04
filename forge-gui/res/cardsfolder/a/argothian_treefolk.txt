@@ -2,6 +2,6 @@ Name:Argothian Treefolk
 ManaCost:3 G G
 Types:Creature Treefolk
 PT:3/5
-K:PreventAllDamageBy:Artifact:Prevent all damage that would be dealt to CARDNAME by artifact sources.
+R:Event$ DamageDone | Prevent$ True | ValidSource$ Artifact | ValidTarget$ Creature.Self | Description$ Prevent all damage that would be dealt to CARDNAME by artifact sources.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/argothian_treefolk.jpg
 Oracle:Prevent all damage that would be dealt to Argothian Treefolk by artifact sources.
