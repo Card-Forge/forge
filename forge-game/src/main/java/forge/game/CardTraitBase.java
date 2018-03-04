@@ -170,8 +170,8 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
      * @return a boolean.
      */
     public static boolean matchesValid(final Object o, final String[] valids, final Card srcCard) {
-        if (o instanceof GameEntity) {
-            final GameEntity c = (GameEntity) o;
+        if (o instanceof GameObject) {
+            final GameObject c = (GameObject) o;
             return c.isValid(valids, srcCard.getController(), srcCard, null);
         }
 
