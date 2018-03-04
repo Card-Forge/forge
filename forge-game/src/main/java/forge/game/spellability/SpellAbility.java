@@ -1491,19 +1491,20 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public final boolean isValid(final String restriction, final Player sourceController, final Card source, SpellAbility spellAbility) {
         // Inclusive restrictions are Card types
         final String[] incR = restriction.split("\\.", 2);
+        SpellAbility root = getRootAbility();
 
         if (incR[0].equals("Spell")) {
-            if (!isSpell()) {
+            if (!root.isSpell()) {
                 return false;
             }
         }
         else if (incR[0].equals("Triggered")) {
-            if (!isTrigger()) {
+            if (!root.isTrigger()) {
                 return false;
             }
         }
         else if (incR[0].equals("Activated")) {
-            if (!(this instanceof AbilityActivated)) {
+            if (!(this instanceof AbilityActivated) && !(root instanceof AbilityActivated)) {
                 return false;
             }
         }
