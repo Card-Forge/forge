@@ -66,7 +66,7 @@ public class SetStateEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            if ("Transform".equals(mode) && tgt.equals(host)) {
+            if ("Transform".equals(mode) && tgt.equals(host) && sa.hasSVar("StoredTransform")) {
                 // If want to Transform, and host is trying to transform self, skip if not in alignment
                 boolean skip = tgt.getTransformedTimestamp() != Long.parseLong(sa.getSVar("StoredTransform"));
                 // Clear SVar from SA so it doesn't get reused accidentally
