@@ -121,6 +121,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         }
     };
 
+
     public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0, final int artIndex0) {
         this(rules0, edition0, rarity0, artIndex0, false);
     }
@@ -228,4 +229,16 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         }
         return imageKey;
     }
+
+    // Return true if card is one of the five basic lands that can be added for free
+    public boolean isVeryBasicLand() {
+        if ((this.getName().equals("Swamp"))
+                || (this.getName().equals("Plains"))
+                || (this.getName().equals("Island"))
+                || (this.getName().equals("Forest"))
+                || (this.getName().equals("Mountain"))) {
+            return true;
+        } else return false;
+    }
 }
+
