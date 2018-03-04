@@ -179,6 +179,18 @@ public class ForgeScript {
             if (!sa.hasParam("Equip")) {
                 return false;
             }
+        } else if (property.startsWith("IsTargeting")) {
+            String k[] = property.split(" ", 2);
+            boolean found = false;
+            for (GameObject o : AbilityUtils.getDefinedObjects(source, k[1], spellAbility)) {
+                if (sa.isTargeting(o)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                return false;
+            }
         }
 
         return true;

@@ -816,6 +816,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             if (manaPart != null) {
                 clone.manaPart = new AbilityManaPart(host, mapParams);
             }
+
+            // clear maps for copy, the values will be added later
+            clone.additionalAbilities = Maps.newHashMap();
+            clone.additionalAbilityLists = Maps.newHashMap();
             // run special copy Ability to make a deep copy
             CardFactory.copySpellAbility(this, clone, host, lki);
         } catch (final CloneNotSupportedException e) {
@@ -1484,6 +1488,17 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
 
         return topSA.getHostCard().isValid(tgt.getValidTgts(), getActivatingPlayer(), getHostCard(), this);
+    }
+
+    public boolean isTargeting(GameObject o) {
+        if (getTargets().isTargeting(o)) {
+            return true;
+        }
+        SpellAbility p = getParent();
+        if (p != null) {
+            return p.isTargeting(o);
+        }
+        return false;
     }
 
     // Takes one argument like Permanent.Blue+withFlying
