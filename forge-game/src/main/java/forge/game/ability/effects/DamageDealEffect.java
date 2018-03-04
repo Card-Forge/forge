@@ -156,7 +156,7 @@ public class DamageDealEffect extends DamageBaseEffect {
                 Player assigningPlayer = players.get(0);
                 Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(sourceLKI, assigneeCards, dmg, null, true);
                 for (Entry<Card, Integer> dt : map.entrySet()) {
-                    dt.getKey().addDamage(dt.getValue(), sourceLKI, damageMap, preventMap);
+                    dt.getKey().addDamage(dt.getValue(), sourceLKI, damageMap, preventMap, sa);
                 }
 
                 if (!usedDamageMap) {
@@ -183,13 +183,13 @@ public class DamageDealEffect extends DamageBaseEffect {
                             c.clearAssignedDamage();
                         }
                         else {
-                            c.addDamage(dmg, sourceLKI, false, noPrevention, damageMap, preventMap);
+                            c.addDamage(dmg, sourceLKI, false, noPrevention, damageMap, preventMap, sa);
                         }
                     }
                 } else if (o instanceof Player) {
                     final Player p = (Player) o;
                     if (!targeted || p.canBeTargetedBy(sa)) {
-                        p.addDamage(dmg, sourceLKI, false, noPrevention, damageMap, preventMap);
+                        p.addDamage(dmg, sourceLKI, false, noPrevention, damageMap, preventMap, sa);
                     }
                 }
             }

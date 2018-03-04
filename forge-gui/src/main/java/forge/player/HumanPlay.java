@@ -424,7 +424,7 @@ public class HumanPlay {
                 CardDamageMap damageMap = new CardDamageMap();
                 CardDamageMap preventMap = new CardDamageMap();
 
-                p.addDamage(amount, source, damageMap, preventMap);
+                p.addDamage(amount, source, damageMap, preventMap, null);
 
                 preventMap.triggerPreventDamage(false);
                 damageMap.triggerDamageDoneOnce(false);

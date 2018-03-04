@@ -64,7 +64,7 @@ public class CostDamage extends CostPart {
         CardDamageMap damageMap = new CardDamageMap();
         CardDamageMap preventMap = new CardDamageMap();
 
-        payer.addDamage(decision.c, source, damageMap, preventMap);
+        payer.addDamage(decision.c, source, damageMap, preventMap, null);
 
         preventMap.triggerPreventDamage(false);
         damageMap.triggerDamageDoneOnce(false);

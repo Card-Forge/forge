@@ -24,6 +24,7 @@ import forge.game.card.CardDamageMap;
 import forge.game.card.CounterType;
 import forge.game.event.GameEventCardAttachment;
 import forge.game.event.GameEventCardAttachment.AttachMethod;
+import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.util.collect.FCollection;
 
@@ -58,22 +59,22 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
 
     public final int addDamage(final int damage, final Card source, boolean isCombat, boolean noPrevention,
-            final CardDamageMap damageMap, final CardDamageMap preventMap) {
+            final CardDamageMap damageMap, final CardDamageMap preventMap, final SpellAbility cause) {
         if (noPrevention) {
-            return addDamageWithoutPrevention(damage, source, damageMap, preventMap);
+            return addDamageWithoutPrevention(damage, source, damageMap, preventMap, cause);
         } else if (isCombat) {
             return addCombatDamage(damage, source, damageMap, preventMap);
         } else {
-            return addDamage(damage, source, damageMap, preventMap);
+            return addDamage(damage, source, damageMap, preventMap, cause);
         }
     }
 
     public int addDamage(final int damage, final Card source, final CardDamageMap damageMap,
-            final CardDamageMap preventMap) {
+            final CardDamageMap preventMap, final SpellAbility cause) {
         int damageToDo = damage;
 
-        damageToDo = replaceDamage(damageToDo, source, false, true, damageMap, preventMap);
-        damageToDo = preventDamage(damageToDo, source, false, preventMap);
+        damageToDo = replaceDamage(damageToDo, source, false, true, damageMap, preventMap, cause);
+        damageToDo = preventDamage(damageToDo, source, false, preventMap, cause);
 
         return addDamageAfterPrevention(damageToDo, source, false, damageMap);
     }
@@ -82,8 +83,8 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             final CardDamageMap preventMap) {
         int damageToDo = damage;
 
-        damageToDo = replaceDamage(damageToDo, source, true, true, damageMap, preventMap);
-        damageToDo = preventDamage(damageToDo, source, true, preventMap);
+        damageToDo = replaceDamage(damageToDo, source, true, true, damageMap, preventMap, null);
+        damageToDo = preventDamage(damageToDo, source, true, preventMap, null);
 
         if (damageToDo > 0) {
             source.getDamageHistory().registerCombatDamage(this);
@@ -97,13 +98,13 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
 
     public int addDamageWithoutPrevention(final int damage, final Card source, final CardDamageMap damageMap,
-            final CardDamageMap preventMap) {
-        int damageToDo = replaceDamage(damage, source, false, false, damageMap, preventMap);
+            final CardDamageMap preventMap, final SpellAbility cause) {
+        int damageToDo = replaceDamage(damage, source, false, false, damageMap, preventMap, cause);
         return addDamageAfterPrevention(damageToDo, source, false, damageMap);
     }
 
     public int replaceDamage(final int damage, final Card source, final boolean isCombat, final boolean prevention,
-            final CardDamageMap damageMap, final CardDamageMap preventMap) {
+            final CardDamageMap damageMap, final CardDamageMap preventMap, final SpellAbility cause) {
         // Replacement effects
         final Map<String, Object> repParams = Maps.newHashMap();
         repParams.put("Event", "DamageDone");
@@ -114,6 +115,9 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         repParams.put("NoPreventDamage", !prevention);
         repParams.put("DamageMap", damageMap);
         repParams.put("PreventMap", preventMap);
+        if (cause != null) {
+            repParams.put("Cause", cause);
+        }
 
         switch (getGame().getReplacementHandler().run(repParams)) {
         case NotReplaced:
@@ -126,7 +130,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
                 return newDamage;
             } else {
                 if (prevention) {
-                    newDamage = newTarget.preventDamage(newDamage, source, isCombat, preventMap);
+                    newDamage = newTarget.preventDamage(newDamage, source, isCombat, preventMap, cause);
                 }
                 newTarget.addDamageAfterPrevention(newDamage, source, isCombat, damageMap);
             }
@@ -146,7 +150,9 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     // not change the game state)
     public abstract int staticReplaceDamage(final int damage, final Card source, final boolean isCombat);
 
-    public final int preventDamage(final int damage, final Card source, final boolean isCombat, CardDamageMap preventMap) {
+    public final int preventDamage(
+            final int damage, final Card source, final boolean isCombat, CardDamageMap preventMap,
+            final SpellAbility cause) {
         if (getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)
                 || source.hasKeyword("Damage that would be dealt by CARDNAME can't be prevented.")) {
             return damage;
@@ -163,6 +169,9 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         repParams.put("IsCombat", isCombat);
         repParams.put("Prevention", true);
         repParams.put("PreventMap", preventMap);
+        if (cause != null) {
+            repParams.put("Cause", cause);
+        }
 
         switch (getGame().getReplacementHandler().run(repParams)) {
         case NotReplaced:

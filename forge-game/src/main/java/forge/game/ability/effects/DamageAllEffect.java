@@ -97,13 +97,13 @@ public class DamageAllEffect extends DamageBaseEffect {
         }
 
         for (final Card c : list) {
-            c.addDamage(dmg, sourceLKI, damageMap, preventMap);
+            c.addDamage(dmg, sourceLKI, damageMap, preventMap, sa);
         }
 
         if (!players.equals("")) {
             final List<Player> playerList = AbilityUtils.getDefinedPlayers(card, players, sa);
             for (final Player p : playerList) {
-                p.addDamage(dmg, sourceLKI, damageMap, preventMap);
+                p.addDamage(dmg, sourceLKI, damageMap, preventMap, sa);
             }
         }
 
