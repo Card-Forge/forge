@@ -160,11 +160,11 @@ public class SimulateMatch {
 
 
 
-    private static void simulateSingleMatch(Match mc, int iGame, boolean outputGamelog) {
-        StopWatch sw = new StopWatch();
+    private static void simulateSingleMatch(final Match mc, int iGame, boolean outputGamelog) {
+        final StopWatch sw = new StopWatch();
         sw.start();
 
-        Game g1 = mc.createGame();
+        final Game g1 = mc.createGame();
         // will run match in the same thread
 
         long startTime = System.currentTimeMillis();
