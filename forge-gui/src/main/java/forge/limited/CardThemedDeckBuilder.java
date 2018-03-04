@@ -102,11 +102,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             }
         }
         colors = deckColors.getChosenColors();
-        /*colors = keyCard.getRules().getColorIdentity();
-        colors = ColorSet.fromMask(colors.getColor() | keyCard.getRules().getColorIdentity().getColor());
-        if(secondKeyCard!=null) {
-            colors = ColorSet.fromMask(colors.getColor() | secondKeyCard.getRules().getColorIdentity().getColor());
-        }*/
+
         if (logColorsToConsole) {
             System.out.println(keyCard.getName());
             System.out.println("Pre Colors: " + colors.toEnumSet().toString());
@@ -240,6 +236,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
         addLandKeyCards();
 
+        // 10. Add non-basic lands
         List<String> duals = getDualLandList();
         addNonBasicLands();
         if (logToConsole) {
@@ -268,7 +265,6 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             System.out.println("Post Lands : " + deckList.size());
         }
         if (keyCard.getRules().getColorIdentity().isColorless()&&landsNeeded>0){
-            // 10. Add non-basic lands that were drafted.
             addWastesIfRequired();
         }
         fixDeckSize();
@@ -567,11 +563,6 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
                 numColors++;
             }
         }
-        /*if (totalColor == 0) {
-            for (int j = 0; j < nLand; j++) {
-                deckList.add(getBasicLand(i));
-            }
-        }*/
 
         // do not update landsNeeded until after the loop, because the
         // calculation involves landsNeeded
