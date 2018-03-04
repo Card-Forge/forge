@@ -198,7 +198,13 @@ public class QuestEventDraft implements IQuestEvent {
         final Deck tournamentDeck = FModel.getQuest().getDraftDecks().get(QuestEventDraft.DECK_NAME).getHumanDeck();
         final Deck deck = new Deck(deckName);
 
-        FModel.getQuest().getCards().addAllCards(tournamentDeck.getAllCardsInASinglePool().toFlatList());
+        // Add all cards except those added through "Add basic land" to quest inventory
+        List<PaperCard> cards = tournamentDeck.getAllCardsInASinglePool().toFlatList();
+        for (PaperCard c : cards) {
+            if ((!c.isVeryBasicLand()) || (c.isFoil())) {
+                FModel.getQuest().getCards().addSingleCard(c, 1);
+            }
+        }
 
         if (tournamentDeck.get(DeckSection.Main).countAll() > 0) {
             deck.getOrCreate(DeckSection.Main).addAll(tournamentDeck.get(DeckSection.Main));
