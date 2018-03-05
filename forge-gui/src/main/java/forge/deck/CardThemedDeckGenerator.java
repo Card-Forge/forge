@@ -17,6 +17,10 @@ public class CardThemedDeckGenerator extends DeckProxy implements Comparable<Car
     public static List<DeckProxy> getMatrixDecks(GameFormat format, boolean isForAi){
         final List<DeckProxy> decks = new ArrayList<DeckProxy>();
         for(String card: CardRelationMatrixGenerator.cardPools.get(format.getName()).keySet()) {
+            //exclude non AI playables as keycards for AI decks
+            if(isForAi&&FModel.getMagicDb().getCommonCards().getUniqueByName(card).getRules().getAiHints().getRemAIDecks()){
+                continue;
+            }
             decks.add(new CardThemedDeckGenerator(card, format, isForAi));
         }
         return decks;
