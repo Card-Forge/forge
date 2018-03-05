@@ -293,10 +293,12 @@ public class VLobby implements ILobbyView {
                 panel.setMayRemove(lobby.mayRemove(i));
                 panel.update();
 
-                deckChooser.setIsAi(slot.getType() == LobbySlotType.AI);
-                commanderDeckChooser.setIsAi(slot.getType() == LobbySlotType.AI);
-                tinyLeaderDeckChooser.setIsAi(slot.getType() == LobbySlotType.AI);
-                if (fullUpdate && (type == LobbySlotType.LOCAL || type == LobbySlotType.AI)) {
+                final boolean isSlotAI = slot.getType() == LobbySlotType.AI;
+
+                deckChooser.setIsAi(isSlotAI);
+                commanderDeckChooser.setIsAi(isSlotAI);
+                tinyLeaderDeckChooser.setIsAi(isSlotAI);
+                if (fullUpdate && (type == LobbySlotType.LOCAL || isSlotAI)) {
                     selectDeck(i);
                 }
                 if (isNewPanel) {
