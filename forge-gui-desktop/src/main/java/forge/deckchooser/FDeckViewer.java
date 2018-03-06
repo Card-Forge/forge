@@ -184,23 +184,18 @@ public class FDeckViewer extends FDialog {
             }
             deckList.append(s.toString()).append(": ");
             sectionCards = new TreeMap<>();
-            if (s.isSingleCard()) {
-                deckList.append(cp.get(0).getName()).append(nl);
+            deckList.append(nl);
+            for (final Entry<PaperCard, Integer> ev : cp) {
+                cardName = ev.getKey().toString();
+                if (sectionCards.containsKey(cardName)) {
+                    sectionCards.put(cardName, (int)sectionCards.get(cardName) + ev.getValue());
+                }
+                else {
+                    sectionCards.put(cardName, ev.getValue());
+                }
             }
-            else {
-                deckList.append(nl);
-                for (final Entry<PaperCard, Integer> ev : cp) {
-                    cardName = ev.getKey().toString();
-                    if (sectionCards.containsKey(cardName)) {
-                        sectionCards.put(cardName, (int)sectionCards.get(cardName) + ev.getValue());
-                    }
-                    else {
-                        sectionCards.put(cardName, ev.getValue());
-                    }
-                }
-                for (final Entry<String, Integer> ev: sectionCards.entrySet()) {
-                    deckList.append(ev.getValue()).append(" ").append(ev.getKey()).append(nl);
-                }
+            for (final Entry<String, Integer> ev: sectionCards.entrySet()) {
+                deckList.append(ev.getValue()).append(" ").append(ev.getKey()).append(nl);
             }
             deckList.append(nl);
         }
