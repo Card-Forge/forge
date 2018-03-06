@@ -73,3 +73,4 @@ Modern Masters 2017, 3/6/M15, MM3
 Amonkhet, 3/6/AKH, AKH HOU
 Ixalan, 3/6/XLN, XLN RIX
 Iconic Masters, 3/6/XLN, IMA
+Masters 25, 3/6/XLN, A25
