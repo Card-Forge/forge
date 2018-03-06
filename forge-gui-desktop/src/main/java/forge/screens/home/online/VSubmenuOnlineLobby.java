@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
+import forge.screens.home.*;
 import net.miginfocom.swing.MigLayout;
 import forge.deckchooser.DecksComboBoxEvent;
 import forge.deckchooser.FDeckChooser;
@@ -20,10 +21,6 @@ import forge.match.GameLobby;
 import forge.net.IOnlineLobby;
 import forge.net.client.FGameClient;
 import forge.net.server.FServerManager;
-import forge.screens.home.EMenuGroup;
-import forge.screens.home.IVSubmenu;
-import forge.screens.home.VHomeUI;
-import forge.screens.home.VLobby;
 import forge.toolbox.FButton;
 import forge.toolbox.FSkin;
 import forge.util.gui.SOptionPane;
@@ -36,6 +33,9 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
     private VLobby lobby;
     private FGameClient client;
 
+    private final JPanel pnlTitle = new JPanel(new MigLayout());
+    private final StopButton btnStop  = new StopButton();
+
     private VSubmenuOnlineLobby() {
     }
 
@@ -43,6 +43,13 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
         this.lobby = new VLobby(lobby);
         getLayoutControl().setLobby(this.lobby);
         return this.lobby;
+    }
+
+    public void reset() {
+        onClosing(null);
+        this.client = null;
+        this.lobby = null;
+        populate();
     }
 
     public void setClient(final FGameClient client) {
@@ -77,7 +84,28 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
         container.setLayout(new MigLayout("insets 0, gap 0, wrap 1, ax right"));
 
         lobby.getLblTitle().setText("Online Multiplayer: Lobby");
-        container.add(lobby.getLblTitle(), "w 80%, h 40px!, gap 0 0 15px 15px, span 2, al right, pushx");
+        pnlTitle.removeAll();
+        pnlTitle.setOpaque(false);
+        pnlTitle.add(lobby.getLblTitle(), "w 95%, h 40px!, gap 0 0 15px 15px, span 2");
+        pnlTitle.add(btnStop, "gap 10 10 0 0, align right");
+        container.add(pnlTitle,"w 80%, gap 0 0 0 0, al right, pushx");
+
+        // Stop button event handling
+        btnStop.addActionListener(new ActionListener() {
+            @Override
+            public final void actionPerformed(final ActionEvent arg0) {
+                Runnable stopGame = new Runnable() {
+                    @Override
+                    public void run() {
+                        // do the STOP needful here
+                        reset();
+                    }
+                };
+                if (stopGame != null) {
+                    stopGame.run();
+                }
+            }
+        });
 
         for (final FDeckChooser fdc : lobby.getDeckChoosers()) {
             fdc.populate();
@@ -156,7 +184,8 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
         final FServerManager server = FServerManager.getInstance();
         if (server.isHosting()) {
             if (SOptionPane.showConfirmDialog("Leave lobby? Doing so will shut down all connections and stop hosting.", "Leave")) {
-                FServerManager.getInstance().stopServer();
+                server.stopServer();
+                FNetOverlay.SINGLETON_INSTANCE.reset();
                 return true;
             }
         } else {
@@ -165,7 +194,7 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
                     client.close();
                     client = null;
                 }
-                FNetOverlay.SINGLETON_INSTANCE.setGameClient(null);
+                FNetOverlay.SINGLETON_INSTANCE.reset();
                 return true;
             }
         }
