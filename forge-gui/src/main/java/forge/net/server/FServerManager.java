@@ -57,8 +57,8 @@ public final class FServerManager {
 
     private byte[] externalAddress = new byte[]{8,8,8,8};
     private boolean isHosting = false;
-    private final EventLoopGroup bossGroup = new NioEventLoopGroup(1);
-    private final EventLoopGroup workerGroup = new NioEventLoopGroup();
+    private EventLoopGroup bossGroup = new NioEventLoopGroup(1);
+    private EventLoopGroup workerGroup = new NioEventLoopGroup();
     private UpnpService upnpService = null;
     private final Map<Channel, RemoteClient> clients = Maps.newTreeMap();
     private ServerGameLobby localLobby;
@@ -97,22 +97,22 @@ public final class FServerManager {
     public void startServer(final int port) {
         try {
             final ServerBootstrap b = new ServerBootstrap()
-            .group(bossGroup, workerGroup)
-            .channel(NioServerSocketChannel.class)
-            .handler(new LoggingHandler(LogLevel.INFO))
-            .childHandler(new ChannelInitializer<SocketChannel>() {
-                @Override public final void initChannel(final SocketChannel ch) {
-                    final ChannelPipeline p = ch.pipeline();
-                    p.addLast(
-                            new ObjectEncoder(),
-                            new ObjectDecoder(ClassResolvers.cacheDisabled(null)),
-                            new MessageHandler(),
-                            new RegisterClientHandler(),
-                            new LobbyInputHandler(),
-                            new DeregisterClientHandler(),
-                            new GameServerHandler());
-                }
-            });
+                    .group(bossGroup, workerGroup)
+                    .channel(NioServerSocketChannel.class)
+                    .handler(new LoggingHandler(LogLevel.INFO))
+                    .childHandler(new ChannelInitializer<SocketChannel>() {
+                        @Override public final void initChannel(final SocketChannel ch) {
+                            final ChannelPipeline p = ch.pipeline();
+                            p.addLast(
+                                    new ObjectEncoder(),
+                                    new ObjectDecoder(ClassResolvers.cacheDisabled(null)),
+                                    new MessageHandler(),
+                                    new RegisterClientHandler(),
+                                    new LobbyInputHandler(),
+                                    new DeregisterClientHandler(),
+                                    new GameServerHandler());
+                        }
+                    });
 
             // Bind and start to accept incoming connections.
             final ChannelFuture ch = b.bind(port).sync().channel().closeFuture();
@@ -149,6 +149,9 @@ public final class FServerManager {
             Runtime.getRuntime().removeShutdownHook(shutdownHook);
         }
         isHosting = false;
+        // create new EventLoopGroups for potential restart
+        bossGroup = new NioEventLoopGroup(1);
+        workerGroup = new NioEventLoopGroup();
     }
 
     public boolean isHosting() {
@@ -156,6 +159,10 @@ public final class FServerManager {
     }
 
     public void broadcast(final NetEvent event) {
+        if (event instanceof MessageEvent) {
+            MessageEvent msgEvent = (MessageEvent) event;
+            lobbyListener.message(msgEvent.getSource(), msgEvent.getMessage());
+        }
         broadcastTo(event, clients.values());
     }
     public void broadcastExcept(final NetEvent event, final RemoteClient notTo) {

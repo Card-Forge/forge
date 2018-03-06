@@ -99,3 +99,4 @@ AKH: 36 Boosters
 HOU: 36 Boosters
 XLN: 36 Boosters
 RIX: 36 Boosters
+A25: 24 Boosters
