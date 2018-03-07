@@ -18,9 +18,7 @@
 package forge.game.ability.effects;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import forge.StaticData;
 import forge.card.MagicColor;
@@ -281,10 +279,10 @@ public class TokenEffect extends SpellAbilityEffect {
             if (prototype == null) {
                 tokens = tokenInfo.makeTokenWithMultiplier(controller, finalAmount, cause != null);
                 grantHiddenKeywords(tokens);
-                grantSvars(tokens, root);
-                grantAbilities(tokens, root);
-                grantTriggers(tokens, root);
-                grantStatics(tokens, root);
+                grantSvars(tokens, sa);
+                grantAbilities(tokens, sa);
+                grantTriggers(tokens, sa);
+                grantStatics(tokens, sa);
             } else {
                 tokens = TokenInfo.makeTokensFromPrototype(prototype, controller, finalAmount, cause != null);
             }
@@ -352,7 +350,6 @@ public class TokenEffect extends SpellAbilityEffect {
     }
 
     private String determineTokenColor(Card host) {
-        Set<String> colorSet = new HashSet<>();
         final String[] substitutedColors = Arrays.copyOf(this.tokenColors, this.tokenColors.length);
         for (int i = 0; i < substitutedColors.length; i++) {
             if (substitutedColors[i].equals("ChosenColor")) {

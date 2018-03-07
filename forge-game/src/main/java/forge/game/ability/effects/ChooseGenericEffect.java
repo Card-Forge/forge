@@ -7,7 +7,6 @@ import forge.game.card.Card;
 import forge.game.event.GameEventCardModeChosen;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.util.MyRandom;
 
 import java.util.List;
@@ -34,14 +33,16 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
         final SpellAbility fallback = sa.getAdditionalAbility("FallbackAbility");
         
         final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         for (final Player p : tgtPlayers) {
             // determine if any of the choices are not valid
             List<SpellAbility> saToRemove = Lists.<SpellAbility>newArrayList();
             
             for (SpellAbility saChoice : abilities) {
-                if ("Player.IsRemembered".equals(saChoice.getParam("Defined")) && saChoice.hasParam("UnlessCost")) {
+                if (!saChoice.getRestrictions().checkOtherRestrictions(host, saChoice, sa.getActivatingPlayer()) ) {
+                    saToRemove.add(saChoice);
+                } else if (saChoice.hasParam("UnlessCost") &&
+                        "Player.IsRemembered".equals(saChoice.getParam("Defined"))) {
                     String unlessCost = saChoice.getParam("UnlessCost");
                     // Sac a permanent in presence of Sigarda, Host of Herons
                     // TODO: generalize this by testing if the unless cost can be paid
@@ -55,7 +56,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
             }
             abilities.removeAll(saToRemove);
         
-            if (tgt != null && sa.getTargets().isTargeting(p) && !p.canBeTargetedBy(sa)) {
+            if (sa.usesTargeting() && sa.getTargets().isTargeting(p) && !p.canBeTargetedBy(sa)) {
                 continue;
             }
 

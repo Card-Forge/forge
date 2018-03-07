@@ -1205,7 +1205,7 @@ public class AbilityUtils {
             final SpellAbility sa) {
         final FCollection<SpellAbility> sas = new FCollection<SpellAbility>();
         final String defined = (def == null) ? "Self" : applyAbilityTextChangeEffects(def, sa); // default to Self
-        final Game game = sa.getActivatingPlayer().getGame();
+        final Game game = card.getGame();
 
         SpellAbility s = null;
 

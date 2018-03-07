@@ -22,7 +22,7 @@ import java.util.Map;
  * Created by maustin on 09/05/2017.
  */
 public class CommanderDeckGenerator extends DeckProxy implements Comparable<CommanderDeckGenerator> {
-    public static List<DeckProxy> getCommanderDecks(DeckFormat format, boolean isForAi, boolean isCardGen){
+    public static List<DeckProxy> getCommanderDecks(final DeckFormat format, boolean isForAi, boolean isCardGen){
         ItemPool uniqueCards;
         if(isCardGen){
             uniqueCards = new ItemPool<PaperCard>(PaperCard.class);
