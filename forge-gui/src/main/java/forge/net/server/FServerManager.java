@@ -185,6 +185,10 @@ public final class FServerManager {
         this.localLobby = lobby;
     }
 
+    public boolean isMatchActive() {
+        return this.localLobby != null && this.localLobby.isMatchActive();
+    }
+
     public void setLobbyListener(final ILobbyListener listener) {
         this.lobbyListener = listener;
     }

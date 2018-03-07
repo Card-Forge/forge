@@ -10,7 +10,7 @@ import forge.deck.Deck;
 import forge.net.event.UpdateLobbyPlayerEvent;
 
 public final class LobbySlot implements Serializable {
-    private static final long serialVersionUID = 6918205436608794289L;
+    private static final long serialVersionUID = 9203252798721142264L;
 
     private LobbySlotType type;
     private String name;
@@ -18,6 +18,7 @@ public final class LobbySlot implements Serializable {
     private int team;
     private boolean isArchenemy;
     private boolean isReady;
+    private boolean isDevMode;
     private Deck deck;
     private ImmutableSet<AIOption> aiOptions;
 
@@ -28,6 +29,7 @@ public final class LobbySlot implements Serializable {
         this.team = team;
         this.isArchenemy = isArchenemy;
         this.isReady = isReady;
+        this.isDevMode = false;
         this.setAiOptions(aiOptions);
     }
 
@@ -55,6 +57,10 @@ public final class LobbySlot implements Serializable {
         }
         if (data.getReady() != null) {
             setIsReady(data.getReady().booleanValue());
+            changed = true;
+        }
+        if (data.getDevMode() != null) {
+            setIsDevMode(data.getDevMode().booleanValue());
             changed = true;
         }
         if (data.getAiOptions() != null) {
@@ -110,6 +116,13 @@ public final class LobbySlot implements Serializable {
     }
     public void setIsReady(final boolean isReady) {
         this.isReady = isReady;
+    }
+
+    public boolean isDevMode() {
+        return isDevMode;
+    }
+    public void setIsDevMode(final boolean isDevMode) {
+        this.isDevMode = isDevMode;
     }
 
     public Deck getDeck() {
