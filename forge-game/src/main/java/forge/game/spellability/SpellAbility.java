@@ -1495,10 +1495,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return true;
         }
         SpellAbility p = getParent();
-        if (p != null) {
-            return p.isTargeting(o);
-        }
-        return false;
+        return p != null && p.isTargeting(o);
     }
 
     // Takes one argument like Permanent.Blue+withFlying
@@ -1519,7 +1516,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
         }
         else if (incR[0].equals("Activated")) {
-            if (!(this instanceof AbilityActivated) && !(root instanceof AbilityActivated)) {
+            if (!(root instanceof AbilityActivated)) {
                 return false;
             }
         }
