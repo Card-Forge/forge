@@ -1,7 +1,7 @@
 #1|Jace, the Mind Sculptor|M|A25
 #2|Niv-Mizzet, the Firemind|R|A25
 #3|Gisela, Blade of Goldnight|M|A25
-#4|Akroma, Angel of Fury|R|A25
+#4|Akroma, Angel of Fury|M|A25
 #5|Laquatus's Champion|R|A25
 #6|Master of the Wild Hunt|M|A25
 #7|Prossh, Skyraider of Kher|M|A25
@@ -70,7 +70,7 @@
 #70|Regrowth|U|A25
 #71|Nicol Bolas|R|A25
 #72|Treasure Keeper|U|A25
-#73|Kongming, Sleeping Dragon|U|A25
+#73|Kongming, "Sleeping Dragon"|U|A25
 #74|Court Hussar|C|A25
 #75|Exclude|U|A25
 #76|Disfigure|C|A25
