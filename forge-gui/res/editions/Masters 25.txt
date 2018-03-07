@@ -28,7 +28,7 @@ FoilChanceInBooster=100
 17 C Griffin Protector
 18 U Karona's Zealot
 19 C Knight of the Skyward Eye
-20 U Kongming, Sleeping Dragon
+20 U Kongming, "Sleeping Dragon"
 21 U Kor Firewalker
 22 C Loyal Sentry
 23 R Luminarch Ascension
@@ -127,7 +127,7 @@ FoilChanceInBooster=100
 116 U Zombify
 117 U Zulaport Cutthroat
 118 C Act of Treason
-119 R Akroma, Angel of Fury
+119 M Akroma, Angel of Fury
 120 C Balduvian Horde
 121 R Ball Lightning
 122 R Blood Moon
