@@ -275,6 +275,7 @@ public class VLobby implements ILobbyView {
                     commanderDeckChooser.restoreSavedState();
                     tinyLeaderDeckChooser.restoreSavedState();
                     if (i == 0) {
+                        slot.setIsDevMode(prefs.getPrefBoolean(FPref.DEV_MODE_ENABLED));
                         changePlayerFocus(0);
                     }
                     isNewPanel = true;
@@ -286,6 +287,7 @@ public class VLobby implements ILobbyView {
                 panel.setAvatarIndex(slot.getAvatarIndex());
                 panel.setTeam(slot.getTeam());
                 panel.setIsReady(slot.isReady());
+                panel.setIsDevMode(slot.isDevMode());
                 panel.setIsArchenemy(slot.isArchenemy());
                 panel.setUseAiSimulation(slot.getAiOptions().contains(AIOption.USE_SIMULATION));
                 panel.setMayEdit(lobby.mayEdit(i));
@@ -331,6 +333,15 @@ public class VLobby implements ILobbyView {
         firePlayerChangeListener(index);
         changePlayerFocus(index);
     }
+    void setDevMode(final int index) {
+        // clear ready for everyone
+        for (int i = 0; i < activePlayersNum; i++) {
+            final PlayerPanel panel = playerPanels.get(i);
+            panel.setIsReady(false);
+            firePlayerChangeListener(i);
+        }
+        changePlayerFocus(index);
+    }
     void firePlayerChangeListener(final int index) {
         if (playerChangeListener != null) {
             playerChangeListener.update(index, getSlot(index));
@@ -361,7 +372,7 @@ public class VLobby implements ILobbyView {
 
     private UpdateLobbyPlayerEvent getSlot(final int index) {
         final PlayerPanel panel = playerPanels.get(index);
-        return UpdateLobbyPlayerEvent.create(panel.getType(), panel.getPlayerName(), panel.getAvatarIndex(), panel.getTeam(), panel.isArchenemy(), panel.isReady(), panel.getAiOptions());
+        return UpdateLobbyPlayerEvent.create(panel.getType(), panel.getPlayerName(), panel.getAvatarIndex(), panel.getTeam(), panel.isArchenemy(), panel.isReady(), panel.isDevMode(), panel.getAiOptions());
     }
 
     /** Builds the actual deck panel layouts for each player.

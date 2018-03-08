@@ -98,6 +98,10 @@ public class PlayerPanel extends FPanel {
     private final FLabel vgdSelectorBtn = new FLabel.ButtonBuilder().text("Select a Vanguard avatar").build();
     private final FLabel vgdLabel;
 
+    private FCheckBox chkDevMode;
+
+    private boolean allowNetworking;
+
     private final VLobby lobby;
     public PlayerPanel(final VLobby lobby, final boolean allowNetworking, final int index, final LobbySlot slot, final boolean mayEdit, final boolean mayControl) {
         super();
@@ -106,6 +110,7 @@ public class PlayerPanel extends FPanel {
         this.index = index;
         this.mayEdit = mayEdit;
         this.mayControl = mayControl;
+        this.allowNetworking = allowNetworking;
 
         this.deckLabel = lobby.newLabel("Deck:");
         this.scmLabel = lobby.newLabel("Scheme deck:");
@@ -179,11 +184,20 @@ public class PlayerPanel extends FPanel {
             }
         });
 
+        if (isNetworkHost()) {
+            createDevModeButton();
+            this.add(chkDevMode);
+        }
+
         this.type = slot == null ? LobbySlotType.LOCAL : slot.getType();
         this.setPlayerName(slot == null ? "" : slot.getName());
         this.setAvatarIndex(slot == null ? 0 : slot.getAvatarIndex());
 
         update();
+    }
+
+    boolean isNetworkHost() {
+        return this.allowNetworking && this.index == 0;
     }
 
     void update() {
@@ -199,6 +213,10 @@ public class PlayerPanel extends FPanel {
         deckBtn.setVisible(mayEdit);
         chkReady.setVisible(type == LobbySlotType.LOCAL || type == LobbySlotType.REMOTE);
         chkReady.setEnabled(mayEdit);
+
+        if (chkDevMode != null) {
+            chkDevMode.setEnabled(mayEdit);
+        }
 
         closeBtn.setVisible(mayRemove);
 
@@ -585,6 +603,23 @@ public class PlayerPanel extends FPanel {
         });
     }
 
+    private void createDevModeButton() {
+        chkDevMode = new FCheckBox("Dev Mode");
+
+        chkDevMode.addActionListener(new ActionListener() {
+            @Override public final void actionPerformed(final ActionEvent e) {
+                final boolean toggle = chkDevMode.isSelected();
+                prefs.setPref(FPref.DEV_MODE_ENABLED, String.valueOf(toggle));
+                ForgePreferences.DEV_MODE = toggle;
+
+                // ensure that preferences panel reflects the change
+                prefs.save();
+
+                lobby.setDevMode(index);
+            }
+        });
+    }
+
     /**
      * @param index
      */
@@ -745,6 +780,15 @@ public class PlayerPanel extends FPanel {
     }
     public void setIsReady(final boolean isReady) {
         chkReady.setSelected(isReady);
+    }
+
+    public boolean isDevMode() {
+        return chkDevMode != null && chkDevMode.isSelected();
+    }
+    public void setIsDevMode(final boolean isDevMode) {
+        if (chkDevMode != null) {
+            chkDevMode.setSelected(isDevMode);
+        }
     }
 
     public void setMayEdit(final boolean mayEdit) {
