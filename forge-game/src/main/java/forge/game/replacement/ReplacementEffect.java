@@ -173,6 +173,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
 
         if (!lki) {
             res.setId(nextId());
+            res.setHasRun(false);
         }
         
         res.setHostCard(host);
