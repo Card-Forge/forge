@@ -11,39 +11,76 @@ import forge.match.LobbySlotType;
 import forge.net.server.RemoteClient;
 
 public final class UpdateLobbyPlayerEvent implements NetEvent {
-    private static final long serialVersionUID = -5073305607515425968L;
+    private static final long serialVersionUID = -7354695008599789571L;
 
-    private final LobbySlotType type;
-    private final String name;
-    private final int avatarIndex;
-    private final int team;
-    private final Boolean isArchenemy;
-    private final Boolean isReady;
-    private final Deck deck;
-    private final DeckSection section;
-    private final CardPool cards;
-    private final Set<AIOption> aiOptions;
+    private LobbySlotType type = null;
+    private String name = null;
+    private int avatarIndex = -1;
+    private int team = -1;
+    private Boolean isArchenemy = null;
+    private Boolean isReady = null;
+    private Boolean isDevMode = null;
+    private Deck deck = null;
+    private DeckSection section = null;
+    private CardPool cards = null;
+    private Set<AIOption> aiOptions = null;
+
 
     public static UpdateLobbyPlayerEvent create(final LobbySlotType type, final String name, final int avatarIndex, final int team, final boolean isArchenemy, final boolean isReady, final Set<AIOption> aiOptions) {
-        return new UpdateLobbyPlayerEvent(type, name, avatarIndex, team, isArchenemy, isReady, null, null, null, aiOptions);
+        return new UpdateLobbyPlayerEvent(type, name, avatarIndex, team, isArchenemy, isReady, aiOptions);
+    }
+    public static UpdateLobbyPlayerEvent create(final LobbySlotType type, final String name, final int avatarIndex, final int team, final boolean isArchenemy, final boolean isReady, final boolean isDevMode, final Set<AIOption> aiOptions) {
+        return new UpdateLobbyPlayerEvent(type, name, avatarIndex, team, isArchenemy, isReady, isDevMode, aiOptions);
     }
     public static UpdateLobbyPlayerEvent deckUpdate(final Deck deck) {
-        return new UpdateLobbyPlayerEvent(null, null, -1, -1, null, null, deck, null, null, null);
+        return new UpdateLobbyPlayerEvent(deck);
     }
     public static UpdateLobbyPlayerEvent deckUpdate(final DeckSection section, final CardPool cards) {
-        return new UpdateLobbyPlayerEvent(null, null, -1, -1, null, null, null, section, cards, null);
+        return new UpdateLobbyPlayerEvent(section, cards);
     }
 
-    private UpdateLobbyPlayerEvent(final LobbySlotType type, final String name, final int avatarIndex, final int team, final Boolean isArchenemy, final Boolean isReady, final Deck deck, final DeckSection section, final CardPool cards, final Set<AIOption> aiOptions) {
+    private UpdateLobbyPlayerEvent(final Deck deck) {
+        this.deck = deck;
+    }
+
+    private UpdateLobbyPlayerEvent(final DeckSection section, final CardPool cards) {
+        this.section = section;
+        this.cards = cards;
+    }
+
+    private UpdateLobbyPlayerEvent(
+            final LobbySlotType type,
+            final String name,
+            final int avatarIndex,
+            final int team,
+            final boolean isArchenemy,
+            final boolean isReady,
+            final Set<AIOption> aiOptions) {
         this.type = type;
         this.name = name;
         this.avatarIndex = avatarIndex;
         this.team = team;
         this.isArchenemy = isArchenemy;
         this.isReady = isReady;
-        this.deck = deck;
-        this.section = section;
-        this.cards = cards;
+        this.aiOptions = aiOptions;
+    }
+
+    private UpdateLobbyPlayerEvent(
+            final LobbySlotType type,
+            final String name,
+            final int avatarIndex,
+            final int team,
+            final boolean isArchenemy,
+            final boolean isReady,
+            final boolean isDevMode,
+            final Set<AIOption> aiOptions) {
+        this.type = type;
+        this.name = name;
+        this.avatarIndex = avatarIndex;
+        this.team = team;
+        this.isArchenemy = isArchenemy;
+        this.isReady = isReady;
+        this.isDevMode = isDevMode;
         this.aiOptions = aiOptions;
     }
 
@@ -68,6 +105,9 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     }
     public Boolean getReady() {
         return isReady;
+    }
+    public Boolean getDevMode() {
+        return isDevMode;
     }
     public Deck getDeck() {
         return deck;

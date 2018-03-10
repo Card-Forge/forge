@@ -8,6 +8,7 @@ import forge.game.GameLogEntryType;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.model.FModel;
+import forge.net.server.FServerManager;
 import forge.player.GamePlayerUtil;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
@@ -63,6 +64,11 @@ public enum CSubmenuPreferences implements ICDoc {
             @Override
             public void itemStateChanged(final ItemEvent arg0) {
                 if (updating) { return; }
+                // prevent changing DEV_MODE while network game running
+                if (FServerManager.getInstance().isMatchActive()) {
+                    System.out.println("Can't change DEV_MODE while a network match is in progress!");
+                    return;
+                }
 
                 final boolean toggle = view.getCbDevMode().isSelected();
                 prefs.setPref(FPref.DEV_MODE_ENABLED, String.valueOf(toggle));

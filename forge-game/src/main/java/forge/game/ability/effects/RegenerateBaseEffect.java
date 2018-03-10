@@ -22,7 +22,7 @@ public abstract class RegenerateBaseEffect extends SpellAbilityEffect {
         final Game game = hostCard.getGame();
 
         // create Effect for Regeneration
-        Card eff = createEffect(
+        final Card eff = createEffect(
                 hostCard, sa.getActivatingPlayer(), hostCard.getName() + "'s Regeneration", hostCard.getImageKey());
         
         eff.addRemembered(list);

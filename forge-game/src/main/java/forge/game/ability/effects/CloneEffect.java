@@ -149,7 +149,7 @@ public class CloneEffect extends SpellAbilityEffect {
 
         // set the host card for copied spellabilities
         for (final SpellAbility newSa : tgtCard.getSpellAbilities()) {
-            newSa.setHostCard(cardToCopy);
+            newSa.setOriginalHost(cardToCopy);
         }
 
         // restore name if it should be unchanged

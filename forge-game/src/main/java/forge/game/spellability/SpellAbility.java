@@ -816,6 +816,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             if (manaPart != null) {
                 clone.manaPart = new AbilityManaPart(host, mapParams);
             }
+
+            // clear maps for copy, the values will be added later
+            clone.additionalAbilities = Maps.newHashMap();
+            clone.additionalAbilityLists = Maps.newHashMap();
             // run special copy Ability to make a deep copy
             CardFactory.copySpellAbility(this, clone, host, lki);
         } catch (final CloneNotSupportedException e) {
@@ -1486,24 +1490,33 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return topSA.getHostCard().isValid(tgt.getValidTgts(), getActivatingPlayer(), getHostCard(), this);
     }
 
+    public boolean isTargeting(GameObject o) {
+        if (getTargets().isTargeting(o)) {
+            return true;
+        }
+        SpellAbility p = getParent();
+        return p != null && p.isTargeting(o);
+    }
+
     // Takes one argument like Permanent.Blue+withFlying
     @Override
     public final boolean isValid(final String restriction, final Player sourceController, final Card source, SpellAbility spellAbility) {
         // Inclusive restrictions are Card types
         final String[] incR = restriction.split("\\.", 2);
+        SpellAbility root = getRootAbility();
 
         if (incR[0].equals("Spell")) {
-            if (!isSpell()) {
+            if (!root.isSpell()) {
                 return false;
             }
         }
         else if (incR[0].equals("Triggered")) {
-            if (!isTrigger()) {
+            if (!root.isTrigger()) {
                 return false;
             }
         }
         else if (incR[0].equals("Activated")) {
-            if (!(this instanceof AbilityActivated)) {
+            if (!(root instanceof AbilityActivated)) {
                 return false;
             }
         }

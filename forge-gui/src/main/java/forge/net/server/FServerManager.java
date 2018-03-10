@@ -185,6 +185,10 @@ public final class FServerManager {
         this.localLobby = lobby;
     }
 
+    public boolean isMatchActive() {
+        return this.localLobby != null && this.localLobby.isMatchActive();
+    }
+
     public void setLobbyListener(final ILobbyListener listener) {
         this.lobbyListener = listener;
     }
@@ -323,8 +327,10 @@ public final class FServerManager {
         @Override
         public void channelInactive(final ChannelHandlerContext ctx) throws Exception {
             final RemoteClient client = clients.remove(ctx.channel());
+            final String username = client.getUsername();
             localLobby.disconnectPlayer(client.getIndex());
-            broadcast(new LogoutEvent(client.getUsername()));
+            broadcast(new MessageEvent(String.format("%s left the room", username)));
+            broadcast(new LogoutEvent(username));
             super.channelInactive(ctx);
         }
     }
