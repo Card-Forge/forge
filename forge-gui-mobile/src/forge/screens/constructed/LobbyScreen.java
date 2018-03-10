@@ -2,6 +2,7 @@ package forge.screens.constructed;
 
 import java.util.*;
 
+import forge.deck.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Gdx;
@@ -14,10 +15,6 @@ import forge.Graphics;
 import forge.ai.AIOption;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
-import forge.deck.CardPool;
-import forge.deck.Deck;
-import forge.deck.DeckSection;
-import forge.deck.DeckType;
 import forge.game.GameType;
 import forge.interfaces.ILobbyView;
 import forge.interfaces.IPlayerChangeListener;
@@ -408,6 +405,43 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
     public boolean isPlayerArchenemy(final int playernum) {
         return playerPanels.get(playernum).isArchenemy();
+    }
+
+    @Override
+    public final void update(final int slot, final LobbySlotType type) {
+        final FDeckChooser deckChooser = playerPanels.get(slot).getDeckChooser();
+        DeckType selectedDeckType = deckChooser.getSelectedDeckType();
+        switch (selectedDeckType){
+            case STANDARD_CARDGEN_DECK:
+            case MODERN_CARDGEN_DECK:
+            case COLOR_DECK:
+            case STANDARD_COLOR_DECK:
+            case MODERN_COLOR_DECK:
+                deckChooser.refreshDeckListForAI();
+                break;
+            default:
+                break;
+        }
+        final FDeckChooser commanderDeckChooser = playerPanels.get(slot).getCommanderDeckChooser();
+        selectedDeckType = commanderDeckChooser.getSelectedDeckType();
+        switch (selectedDeckType){
+            case RANDOM_CARDGEN_COMMANDER_DECK:
+            case RANDOM_COMMANDER_DECK:
+                commanderDeckChooser.refreshDeckListForAI();
+                break;
+            default:
+                break;
+        }
+        final FDeckChooser tinyLeaderDeckChooser = playerPanels.get(slot).getTinyLeadersDeckChooser();
+        selectedDeckType = tinyLeaderDeckChooser.getSelectedDeckType();
+        switch (selectedDeckType){
+            case RANDOM_CARDGEN_COMMANDER_DECK:
+            case RANDOM_COMMANDER_DECK:
+                tinyLeaderDeckChooser.refreshDeckListForAI();
+                break;
+            default:
+                break;
+        }
     }
 
     @Override

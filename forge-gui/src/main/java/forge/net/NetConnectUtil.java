@@ -1,5 +1,6 @@
 package forge.net;
 
+import forge.match.LobbySlotType;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -54,6 +55,8 @@ public class NetConnectUtil {
                 view.update(fullUpdate);
                 server.updateLobbyState();
             }
+            @Override
+            public final void update(final int slot, final LobbySlotType type) {return;}
         });
         view.setPlayerChangeListener(new IPlayerChangeListener() {
             @Override

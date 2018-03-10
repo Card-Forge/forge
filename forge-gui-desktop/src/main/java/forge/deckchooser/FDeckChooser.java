@@ -327,6 +327,10 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         refreshDecksList(ev.getDeckType(), false, ev);
     }
 
+    public void refreshDeckListForAI(){
+        refreshDecksList(selectedDeckType,true,null);
+    }
+
     private void refreshDecksList(final DeckType deckType, final boolean forceRefresh, final DecksComboBoxEvent ev) {
         if (decksComboBox == null) { return; } // Not yet populated
         if (selectedDeckType == deckType && !forceRefresh) { return; }

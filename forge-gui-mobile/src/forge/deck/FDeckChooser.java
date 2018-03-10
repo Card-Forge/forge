@@ -530,6 +530,10 @@ public class FDeckChooser extends FScreen {
         }
     }
 
+    public void refreshDeckListForAI(){
+        refreshDecksList(selectedDeckType,true,null);
+    }
+
     private void refreshDecksList(DeckType deckType, boolean forceRefresh, FEvent e) {
         if (selectedDeckType == deckType && !forceRefresh) { return; }
         selectedDeckType = deckType;
