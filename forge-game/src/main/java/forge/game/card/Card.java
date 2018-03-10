@@ -3661,6 +3661,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean isPlaneswalker()   { return getType().isPlaneswalker(); }
     public final boolean isEnchantment()    { return getType().isEnchantment(); }
     public final boolean isAura()           { return getType().hasSubtype("Aura"); }
+    public final boolean isHistoric()   {return getType().isLegendary() || getType().isArtifact() || getType().hasSubtype("Saga");}
 
     public final boolean isScheme()     { return getType().isScheme(); }
     public final boolean isPhenomenon() { return getType().isPhenomenon(); }

@@ -74,6 +74,10 @@ public class CardProperty {
             if (card.isInstant() || card.isSorcery()) {
                 return false;
             }
+        } else if (property.equals("Historic")) {
+            if (!card.isHistoric()) {
+                return false;
+            }
         } else if (property.startsWith("CardUID_")) {// Protection with "doesn't remove effect"
             if (card.getId() != Integer.parseInt(property.split("CardUID_")[1])) {
                 return false;

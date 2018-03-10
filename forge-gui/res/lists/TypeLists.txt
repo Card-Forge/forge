@@ -259,6 +259,7 @@ Trap
 Aura
 Cartouche
 Curse
+Saga
 Shrine
 [ArtifactTypes]
 Clue
@@ -284,6 +285,7 @@ Garruk
 Gideon
 Huatli
 Jace
+Jaya
 Karn
 Kaya
 Kiora
