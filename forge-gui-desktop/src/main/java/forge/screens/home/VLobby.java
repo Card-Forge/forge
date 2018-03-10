@@ -19,6 +19,7 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import forge.deckchooser.DecksComboBoxEvent;
 import net.miginfocom.swing.MigLayout;
 
 import com.google.common.collect.ImmutableList;
@@ -234,6 +235,19 @@ public class VLobby implements ILobbyView {
     }
 
     @Override
+    public void update(final int slot, final LobbySlotType type){
+        final FDeckChooser deckChooser = getDeckChooser(slot);
+        final FDeckChooser commanderDeckChooser = getCommanderDeckChooser(slot);
+        final FDeckChooser tinyLeaderDeckChooser = getTinyLeaderDeckChooser(slot);
+        deckChooser.setIsAi(type==LobbySlotType.AI);
+        commanderDeckChooser.setIsAi(type==LobbySlotType.AI);
+        tinyLeaderDeckChooser.setIsAi(type==LobbySlotType.AI);
+        deckChooser.refreshDeckListForAI();
+        commanderDeckChooser.refreshDeckListForAI();
+        tinyLeaderDeckChooser.refreshDeckListForAI();
+    }
+
+    @Override
     public void update(final boolean fullUpdate) {
         activePlayersNum = lobby.getNumberOfSlots();
         addPlayerBtn.setEnabled(activePlayersNum < MAX_PLAYERS);
@@ -301,6 +315,10 @@ public class VLobby implements ILobbyView {
                 commanderDeckChooser.setIsAi(isSlotAI);
                 tinyLeaderDeckChooser.setIsAi(isSlotAI);
                 if (fullUpdate && (type == LobbySlotType.LOCAL || isSlotAI)) {
+                    //refresh decklists for AI/Human
+                    deckChooser.refreshDeckListForAI();
+                    commanderDeckChooser.refreshDeckListForAI();
+                    tinyLeaderDeckChooser.refreshDeckListForAI();
                     selectDeck(i);
                 }
                 if (isNewPanel) {
@@ -731,7 +749,10 @@ public class VLobby implements ILobbyView {
     }
 
     private boolean isPlayerAI(final int playernum) {
-        return playernum < activePlayersNum ? playerPanels.get(playernum).isAi() : false;
+        if(playernum < activePlayersNum){
+            return playerPanels.get(playernum).isAi();
+        }
+        return true;
     }
 
     public int getNumPlayers() {

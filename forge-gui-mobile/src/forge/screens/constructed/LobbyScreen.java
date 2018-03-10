@@ -411,6 +411,11 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     }
 
     @Override
+    public final void update(final int slot, final LobbySlotType type) {
+        return;
+    }
+
+    @Override
     public void update(final boolean fullUpdate) {
         int playerCount = lobby.getNumberOfSlots();
         cbPlayerCount.setSelectedItem(playerCount);
