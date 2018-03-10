@@ -453,6 +453,70 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return null;
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T extends GameEntity> List<T> chooseEntitiesForEffect(final FCollectionView<T> optionList,
+            final DelayedReveal delayedReveal, final SpellAbility sa, final String title, final Player targetedPlayer) {
+        // Human is supposed to read the message and understand from it what to
+        // choose
+        if (optionList.isEmpty()) {
+            if (delayedReveal != null) {
+                reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(),
+                        delayedReveal.getMessagePrefix());
+            }
+            return null;
+        }
+
+        boolean canUseSelectCardsInput = true;
+        for (final GameEntity c : optionList) {
+            if (c instanceof Player) {
+                continue;
+            }
+            final Zone cz = ((Card) c).getZone();
+            // can point at cards in own hand and anyone's battlefield
+            final boolean canUiPointAtCards = cz != null
+                    && (cz.is(ZoneType.Hand) && cz.getPlayer() == player || cz.is(ZoneType.Battlefield));
+            if (!canUiPointAtCards) {
+                canUseSelectCardsInput = false;
+                break;
+            }
+        }
+
+        if (canUseSelectCardsInput) {
+            if (delayedReveal != null) {
+                reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(),
+                        delayedReveal.getMessagePrefix());
+            }
+            final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<T>(this, 0, optionList.size(),
+                    optionList, sa);
+            input.setCancelAllowed(true);
+            input.setMessage(MessageUtil.formatMessage(title, player, targetedPlayer));
+            input.showAndWait();
+            return (List<T>) Iterables.getFirst(input.getSelected(), null);
+        }
+
+        tempShow(optionList);
+        if (delayedReveal != null) {
+            tempShow(delayedReveal.getCards());
+        }
+        final List<GameEntityView> chosen = getGui().chooseEntitiesForEffect(title,
+                GameEntityView.getEntityCollection(optionList), delayedReveal);
+        endTempShowCards();
+
+        List<T> results = new ArrayList<>();
+        if (chosen instanceof List && chosen.size() > 0) {
+            for (GameEntityView entry: chosen) {
+                if (entry instanceof CardView) {
+                    results.add((T)game.getCard((CardView) entry));
+                }
+                if (entry instanceof PlayerView) {
+                    results.add((T)game.getPlayer((PlayerView) entry));
+                }
+            }
+        }
+        return results;
+    }
+
     @Override
     public int chooseNumber(final SpellAbility sa, final String title, final int min, final int max) {
         if (min >= max) {
@@ -1631,6 +1695,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final SpellAbility sa, final CardCollection fetchList, final DelayedReveal delayedReveal,
             final String selectPrompt, final boolean isOptional, final Player decider) {
         return chooseSingleEntityForEffect(fetchList, delayedReveal, sa, selectPrompt, isOptional, decider);
+    }
+
+    public List<Card> chooseCardsForZoneChange(final ZoneType destination, final List<ZoneType> origin,
+            final SpellAbility sa, final CardCollection fetchList, final DelayedReveal delayedReveal,
+            final String selectPrompt, final Player decider) {
+        return chooseEntitiesForEffect(fetchList, delayedReveal, sa, selectPrompt, decider);
     }
 
     @Override

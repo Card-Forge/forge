@@ -864,74 +864,81 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         fetchList.sort();
 
         CardCollection chosenCards = new CardCollection();
-        for (int i = 0; i < changeNum && destination != null; i++) {
-            if (sa.hasParam("DifferentNames")) {
-                for (Card c : chosenCards) {
-                    fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.sharesNameWith(c)));
+        // only multi-select if player can select more than one
+        if (changeNum > 1 && allowMultiSelect(decider, sa)) {
+            for (Card card : decider.getController().chooseCardsForZoneChange(destination, origin, sa, fetchList, delayedReveal, selectPrompt, decider)) {
+                chosenCards.add(card);
+            };
+            // maybe prompt the user if they selected fewer than the maximum possible?
+        } else {
+            // one at a time
+            for (int i = 0; i < changeNum && destination != null; i++) {
+                if (sa.hasParam("DifferentNames")) {
+                    for (Card c : chosenCards) {
+                        fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.sharesNameWith(c)));
+                    }
                 }
-            }
-            if (sa.hasParam("DifferentCMC")) {
-                for (Card c: chosenCards) {
-                    fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.sharesCMCWith(c)));
+                if (sa.hasParam("DifferentCMC")) {
+                    for (Card c : chosenCards) {
+                        fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.sharesCMCWith(c)));
+                    }
                 }
-            }
-            if (sa.hasParam("ShareLandType")) {
-                // After the first card is chosen, check if the land type is shared
-                for (final Card card : chosenCards) {
-                    fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            return  c.sharesLandTypeWith(card);
-                        }
+                if (sa.hasParam("ShareLandType")) {
+                    // After the first card is chosen, check if the land type is shared
+                    for (final Card card : chosenCards) {
+                        fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
+                            @Override
+                            public boolean apply(final Card c) {
+                                return c.sharesLandTypeWith(card);
+                            }
 
-                    });
+                        });
+                    }
                 }
-            }
-            if (totalcmc != null) {
-                if (totcmc >= 0) {
-                    fetchList = CardLists.getValidCards(fetchList, "Card.cmcLE" + Integer.toString(totcmc), source.getController(), source);
+                if (totalcmc != null) {
+                    if (totcmc >= 0) {
+                        fetchList = CardLists.getValidCards(fetchList, "Card.cmcLE" + Integer.toString(totcmc), source.getController(), source);
+                    }
                 }
-            }
 
-            // If we're choosing multiple cards, only need to show the reveal dialog the first time through.
-            boolean shouldReveal = (i == 0);
-            Card c = null;
-            if (sa.hasParam("AtRandom")) {
-                if (shouldReveal && delayedReveal != null) {
-                    decider.getController().reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
+                // If we're choosing multiple cards, only need to show the reveal dialog the first time through.
+                boolean shouldReveal = (i == 0);
+                Card c = null;
+                if (sa.hasParam("AtRandom")) {
+                    if (shouldReveal && delayedReveal != null) {
+                        decider.getController().reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
+                    }
+                    c = Aggregates.random(fetchList);
+                } else if (defined && !sa.hasParam("ChooseFromDefined")) {
+                    c = Iterables.getFirst(fetchList, null);
+                } else {
+                    String title = selectPrompt;
+                    if (changeNum > 1) { //indicate progress if multiple cards being chosen
+                        title += " (" + (i + 1) + " / " + changeNum + ")";
+                    }
+                    c = decider.getController().chooseSingleCardForZoneChange(destination, origin, sa, fetchList, shouldReveal ? delayedReveal : null, title, !sa.hasParam("Mandatory"), decider);
                 }
-                c = Aggregates.random(fetchList);
-            }
-            else if (defined && !sa.hasParam("ChooseFromDefined")) {
-                c = Iterables.getFirst(fetchList, null);
-            }
-            else {
-                String title = selectPrompt;
-                if (changeNum > 1) { //indicate progress if multiple cards being chosen
-                    title += " (" + (i + 1) + " / " + changeNum + ")";
+
+                if (c == null) {
+                    final int num = Math.min(fetchList.size(), changeNum - i);
+                    String message = "Cancel Search? Up to " + num + " more card" + (num != 1 ? "s" : "") + " can be selected.";
+
+                    if (fetchList.isEmpty() || decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, message)) {
+                        break;
+                    }
+                    i--;
+                    continue;
                 }
-                c = decider.getController().chooseSingleCardForZoneChange(destination, origin, sa, fetchList, shouldReveal ? delayedReveal : null, title, !sa.hasParam("Mandatory"), decider);
-            }
 
-            if (c == null) {
-                final int num = Math.min(fetchList.size(), changeNum - i);
-                String message = "Cancel Search? Up to " + num + " more card" + (num != 1 ? "s" : "") + " can be selected.";
-
-                if (fetchList.isEmpty() || decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, message)) {
-                    break;
+                fetchList.remove(c);
+                if (delayedReveal != null) {
+                    delayedReveal.remove(CardView.get(c));
                 }
-                i--;
-                continue;
-            }
+                chosenCards.add(c);
 
-            fetchList.remove(c);
-            if (delayedReveal != null) {
-                delayedReveal.remove(CardView.get(c));
-            }
-            chosenCards.add(c);
-
-            if (totalcmc != null) {
-                totcmc -= c.getCMC();
+                if (totalcmc != null) {
+                    totcmc -= c.getCMC();
+                }
             }
         }
 
@@ -1157,6 +1164,17 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
         }
         
+    }
+
+    private static boolean allowMultiSelect(Player decider, SpellAbility sa) {
+        return decider.getController().isGuiPlayer()        // limit mass selection to human players for now
+                && !sa.hasParam("Mandatory")                // only handle optional decisions, for now
+                && !sa.hasParam("ShareLandType")
+                && !sa.hasParam("DifferentNames")
+                && !sa.hasParam("DifferentCMC")
+                && !sa.hasParam("AtRandom")
+                && (!sa.hasParam("Defined") || sa.hasParam("ChooseFromDefined"))
+                && sa.getParam("WithTotalCMC") == null;
     }
 
     /**
