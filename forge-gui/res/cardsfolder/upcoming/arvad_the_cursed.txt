@@ -1,0 +1,12 @@
+Name:Arvad the Cursed
+ManaCost:3 W B
+Types:Legendary Creature Vampire Knight
+PT:3/3
+K:Deathtouch
+K:Lifelink
+S:Mode$ Continuous | Affected$ Creature.Legendary+Other+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Other legendary creatures you control get +2/+2.
+SVar:RemRandomDeck:True
+SVar:PlayMain1:TRUE
+DeckHints:Type$Legendary
+SVar:Picture:http://www.wizards.com/global/images/magic/general/arvad_the_cursed.jpg
+Oracle:Deathtouch, lifelink\nOther legendary creatures you control get +2/+2.
