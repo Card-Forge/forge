@@ -245,9 +245,7 @@ public class VLobby implements ILobbyView {
             case COLOR_DECK:
             case STANDARD_COLOR_DECK:
             case MODERN_COLOR_DECK:
-                String selectedName = deckChooser.getLstDecks().getSelectedItem().getName();
                 deckChooser.refreshDeckListForAI();
-                deckChooser.restoreSavedState();
                 break;
             default:
                 break;
