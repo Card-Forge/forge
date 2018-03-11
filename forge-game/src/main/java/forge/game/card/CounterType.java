@@ -87,6 +87,8 @@ public enum CounterType {
 
     ECHO("ECHO", 225, 180, 255),
 
+    EGG("EGG", 255, 245, 195),
+
     ELIXIR("ELIXR", 81, 221, 175),
 
     EON("EON", 23, 194, 255),
