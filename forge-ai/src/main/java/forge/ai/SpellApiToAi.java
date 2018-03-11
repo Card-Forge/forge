@@ -68,6 +68,7 @@ public enum SpellApiToAi {
             .put(ApiType.Encode, EncodeAi.class)
             .put(ApiType.EndTurn, EndTurnAi.class)
             .put(ApiType.ExchangeLife, LifeExchangeAi.class)
+            .put(ApiType.ExchangeLifeVariant, LifeExchangeVariantAi.class)
             .put(ApiType.ExchangeControl, ControlExchangeAi.class)
             .put(ApiType.ExchangeControlVariant, CannotPlayAi.class)
             .put(ApiType.ExchangePower, PowerExchangeAi.class)
