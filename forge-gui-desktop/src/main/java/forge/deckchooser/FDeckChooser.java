@@ -328,7 +328,11 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     public void refreshDeckListForAI(){
+        //remember current deck by name, refresh decklist for AI/Human then reselect if possible
+        String currentName= lstDecks.getSelectedItem().getName();
         refreshDecksList(selectedDeckType,true,null);
+        lstDecks.setSelectedString(currentName);
+        saveState();
     }
 
     private void refreshDecksList(final DeckType deckType, final boolean forceRefresh, final DecksComboBoxEvent ev) {

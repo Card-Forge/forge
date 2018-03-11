@@ -531,7 +531,11 @@ public class FDeckChooser extends FScreen {
     }
 
     public void refreshDeckListForAI(){
+        //remember current deck by name, refresh decklist for AI/Human then reselect if possible
+        String currentName= lstDecks.getSelectedItem().getName();
         refreshDecksList(selectedDeckType,true,null);
+        lstDecks.setSelectedString(currentName);
+        saveState();
     }
 
     private void refreshDecksList(DeckType deckType, boolean forceRefresh, FEvent e) {
