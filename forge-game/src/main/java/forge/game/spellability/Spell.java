@@ -23,6 +23,7 @@ import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
@@ -111,6 +112,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             }
         }
 
+
         if (!(isInstant || activator.canCastSorcery() || flash
                || this.getRestrictions().isInstantSpeed()
                || activator.hasKeyword("You may cast nonland cards as though they had flash.")
@@ -134,7 +136,11 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
                 return false;
             }
         }
-
+        // legendary sorcery
+        if (card.isSorcery() && card.getType().isLegendary() &&
+                CardLists.getValidCards(activator.getCardsIn(ZoneType.Battlefield), "Creature.Legendary,Planeswalker.Legendary", card.getController(), card).isEmpty()) {
+            return false;
+        }
         return checkOtherRestrictions();
     } // canPlay()
     
