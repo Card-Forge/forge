@@ -239,6 +239,8 @@ public enum CounterType {
 
     SHRED("SHRED", 255, 165, 152),
 
+    SILVER("SILVER", 192, 192, 192),
+
     SLEEP("SLEEP", 178, 192, 255),
 
     SLEIGHT("SLGHT", 185, 174, 255),

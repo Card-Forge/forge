@@ -9,6 +9,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CounterType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -370,11 +371,14 @@ public class DigEffect extends SpellAbilityEffect {
                             Card c = rest.get(i);
                             final PlayerZone toZone = c.getOwner().getZone(destZone2);
                             c = game.getAction().moveTo(toZone, c, sa);
-                            if (destZone2.equals(ZoneType.Battlefield) && !keywords.isEmpty()) {
+                            if (destZone2 == ZoneType.Battlefield && !keywords.isEmpty()) {
                                 for (final String kw : keywords) {
                                     c.addExtrinsicKeyword(kw);
                                 }
-                            } else if (destZone2.equals(ZoneType.Exile)) {
+                            } else if (destZone2 == ZoneType.Exile) {
+                                if (sa.hasParam("ExileWithCounter")) {
+                                    c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")), 1, effectHost, false);
+                                }
                                 c.setExiledWith(effectHost);
                             }
                         }
