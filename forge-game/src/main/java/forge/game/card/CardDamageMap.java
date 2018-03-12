@@ -53,6 +53,7 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
                 sourceLKI.getGame().getTriggerHandler().runTrigger(TriggerType.DamageDealtOnce, runParams, false);
                 
                 if (sourceLKI.hasKeyword("Lifelink")) {
+                    // FIXME: add sourceSA to fix Firesong and Sunspeaker
                     sourceLKI.getController().gainLife(sum, sourceLKI);
                 }
             }
