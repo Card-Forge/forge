@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.ai.*;
 import forge.game.Game;
+import forge.game.GameLogEntryType;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
@@ -685,7 +686,7 @@ public class DamageDealAi extends DamageAiBase {
         final boolean noPrevention = sa.hasParam("NoPrevention");
         final boolean divided = sa.hasParam("DividedAsYouChoose");
         final Player opp = ComputerUtil.getOpponentFor(ai);
-        System.out.println("damageChooseRequiredTargets " + ai + " " + sa);
+        ai.getGame().getGameLog().add(GameLogEntryType.DAMAGE, "Choosing required targets: " + ai + " " + sa);
 
         while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             // TODO: Consider targeting the planeswalker
