@@ -61,6 +61,12 @@ public class TriggerLifeGained extends Trigger {
                 return false;
             }
         }
+        if (this.mapParams.containsKey("Spell")) {
+            final SpellAbility spellAbility = (SpellAbility) runParams2.get("SourceSA");
+            if (spellAbility == null || !spellAbility.isSpell()) {
+                return false;
+            }
+        }
 
         return true;
     }
