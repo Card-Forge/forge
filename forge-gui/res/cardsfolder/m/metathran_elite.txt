@@ -2,7 +2,7 @@ Name:Metathran Elite
 ManaCost:1 U U
 Types:Creature Metathran Soldier
 PT:2/3
-S:Mode$ Continuous | Affected$ Card.Self+enchanted | AddKeyword$ Unblockable | Description$ CARDNAME can't be blocked as long as it's enchanted.
+S:Mode$ Continuous | Affected$ Card.Self+enchanted | AddHiddenKeyword$ Unblockable | Description$ CARDNAME can't be blocked as long as it's enchanted.
 SVar:EnchantMe:Once
 SVar:Picture:http://www.wizards.com/global/images/magic/general/metathran_elite.jpg
 Oracle:Metathran Elite can't be blocked as long as it's enchanted.
