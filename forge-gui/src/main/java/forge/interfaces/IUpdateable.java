@@ -1,5 +1,8 @@
 package forge.interfaces;
 
-public interface IUpdateable {
+import forge.match.LobbySlotType;
+
+public interface IUpdateable{
     void update(boolean fullUpdate);
+    void update(int slot, LobbySlotType type);
 }

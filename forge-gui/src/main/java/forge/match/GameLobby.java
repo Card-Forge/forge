@@ -111,6 +111,7 @@ public abstract class GameLobby implements IHasGameType {
         final boolean archenemyRemoved = triesToChangeArchenemy && !event.getArchenemy().booleanValue();
         final boolean hasArchenemyChanged = triesToChangeArchenemy && slot.isArchenemy() != event.getArchenemy().booleanValue();
 
+
         final boolean changed = slot.apply(event) || hasArchenemyChanged;
 
         // Change archenemy teams
@@ -128,6 +129,12 @@ public abstract class GameLobby implements IHasGameType {
                 otherSlot.setIsArchenemy(becomesArchenemy);
             }
         }
+
+        if (event.getType() != null) {
+            //refresh decklist for slot
+            listener.update(index,event.getType());
+        }
+
 
         if (changed) {
             updateView(false);

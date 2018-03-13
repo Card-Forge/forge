@@ -339,6 +339,7 @@ public class PlayerPanel extends FContainer {
 
                 LobbySlot slot = screen.getLobby().getSlot(index);
                 slot.setType(type);
+                screen.update(index,type);
 
                 //update may edit in-case it changed as a result of the AI change
                 setMayEdit(screen.getLobby().mayEdit(index));
