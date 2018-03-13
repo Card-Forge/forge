@@ -1,0 +1,10 @@
+Name:Kazarov, Sengir Pureblood
+ManaCost:5 B B
+Types:Legendary Creature Vampire
+PT:4/4
+K:Flying
+T:Mode$ DamageDoneOnce | ValidTarget$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature an opponent controls is dealt damage, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ DealDamage | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kazarov_sengir_pureblood.jpg
+Oracle:Flying\nWhenever a creature an opponent controls is dealt damage, put a +1/+1 counter on Kazarov, Sengir Pureblood.\n{3}{R}: Kazarov deals 2 damage to target creature.
