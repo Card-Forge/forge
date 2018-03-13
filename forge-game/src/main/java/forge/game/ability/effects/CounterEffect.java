@@ -217,7 +217,7 @@ public class CounterEffect extends SpellAbilityEffect {
         
 
         if (!tgtSA.isAbility()) {
-        	game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, "Send countered spell to " + destination);
+            game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, "Send countered spell to " + destination);
         }
     }
 
