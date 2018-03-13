@@ -1,0 +1,13 @@
+Name:Grunn, the Lonely King
+ManaCost:4 G G
+Types:Legendary Creature Ape Warrior
+PT:5/5
+K:Kicker:3
+K:etbCounter:P1P1:5:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters the battlefield with five +1/+1 counters on it.
+SVar:WasKicked:Count$Kicked.1.0
+T:Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAMRE attacks alone, double its power and toughness until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X | NumDef$ +Y | References$ X,Y
+SVar:X:Count$CardPower
+SVar:Y:Count$CardToughness
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grunn_the_lonely_king.jpg
+Oracle:Kicker {3} (You may pay an additional {3} as you cast this spell.)\nIf Grunn, the Lonely King was kicked, it enters the battlefield with five +1/+1 counters on it.\nWhenever Grunn attacks alone, double its power and toughness until end of turn.
