@@ -19,6 +19,7 @@ import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostAdjustment;
 import forge.game.cost.CostPartMana;
+import forge.game.cost.CostPayEnergy;
 import forge.game.cost.CostPayment;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
@@ -360,6 +361,7 @@ public class ComputerUtilMana {
         adjustManaCostToAvoidNegEffects(cost, sa.getHostCard(), ai);
         List<Mana> manaSpentToPay = test ? new ArrayList<Mana>() : sa.getPayingMana();
         boolean purePhyrexian = cost.containsOnlyPhyrexianMana();
+        int testEnergyPool = ai.getCounters(CounterType.ENERGY);
 
         List<SpellAbility> paymentList = Lists.newArrayList();
 
@@ -458,6 +460,16 @@ public class ComputerUtilMana {
             setExpressColorChoice(sa, ai, cost, toPay, saPayment);
 
             if (test) {
+				// Check energy when testing
+				CostPayEnergy energyCost = saPayment.getPayCosts().getCostEnergy();
+				if (energyCost != null) {
+					testEnergyPool -= Integer.parseInt(energyCost.getAmount());
+					if (testEnergyPool < 0) {
+						// Can't pay energy cost
+						break;
+					}
+				}
+
                 String manaProduced = toPay.isSnow() ? "S" : GameActionUtil.generatedMana(saPayment);
                 manaProduced = AbilityManaPart.applyManaReplacement(saPayment, manaProduced);
                 //System.out.println(manaProduced);
