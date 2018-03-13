@@ -67,7 +67,7 @@ public class FightEffect extends DamageBaseEffect {
         dealDamage(fighters.get(1), fighters.get(0), dmg2, damageMap, preventMap, sa);
 
         preventMap.triggerPreventDamage(false);
-        damageMap.triggerDamageDoneOnce(false);
+        damageMap.triggerDamageDoneOnce(false, sa);
         
         replaceDying(sa);
 

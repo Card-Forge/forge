@@ -427,7 +427,7 @@ public class HumanPlay {
                 p.addDamage(amount, source, damageMap, preventMap, null);
 
                 preventMap.triggerPreventDamage(false);
-                damageMap.triggerDamageDoneOnce(false);
+                damageMap.triggerDamageDoneOnce(false, null);
             }
             else if (part instanceof CostPutCounter) {
                 CounterType counterType = ((CostPutCounter) part).getCounter();
