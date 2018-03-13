@@ -114,7 +114,7 @@ public class CostGainLife extends CostPart {
                 return false;
 
             playersLeft--;
-            opp.gainLife(c, null);
+            opp.gainLife(c, ability.getHostCard(), ability);
         }
         return true;
     }

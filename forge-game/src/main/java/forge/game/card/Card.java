@@ -5002,11 +5002,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                             }
                         }
                         break;
-                    case "CARDNAME can't be the target of Aura spells.":
-                        if (source.isAura() && sa.isSpell()) {
-                            result.setFalse();
-                        }
-                        break;
                     case "CARDNAME can't be enchanted.":
                         if (source.isAura()) {
                             result.setFalse();

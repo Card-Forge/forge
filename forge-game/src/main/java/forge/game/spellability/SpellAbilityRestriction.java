@@ -479,7 +479,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     && !activator.canCastSorcery()) {
                 return false;
             }
-            final int limits = c.getAmountOfKeyword("May activate CARDNAME's loyalty abilities once");
+
+            final int initialLimit = c.hasKeyword("CARDNAME's loyalty abilities can be activated twice each turn rather than only once") ? 1 : 0;
+            final int limits = c.getAmountOfKeyword("May activate CARDNAME's loyalty abilities once") + initialLimit;
+
             int numActivates = 0;
             for (final SpellAbility pwAbs : c.getAllSpellAbilities()) {
                 // check all abilities on card that have their planeswalker

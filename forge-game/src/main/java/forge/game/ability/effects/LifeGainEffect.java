@@ -46,7 +46,7 @@ public class LifeGainEffect extends SpellAbilityEffect {
 
         for (final Player p : tgtPlayers) {
             if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                p.gainLife(lifeAmount, sa.getHostCard());
+                p.gainLife(lifeAmount, sa.getHostCard(), sa);
             }
         }
     }

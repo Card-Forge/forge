@@ -360,6 +360,10 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean gainLife(int lifeGain, final Card source) {
+        return gainLife(lifeGain, source, null);
+    }
+
+    public final boolean gainLife(int lifeGain, final Card source, final SpellAbility sa) {
         
         // Run any applicable replacement effects.
         final Map<String, Object> repParams = Maps.newHashMap();
@@ -405,6 +409,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Player", this);
             runParams.put("LifeAmount", lifeGain);
+            runParams.put("Source", source);
+            runParams.put("SourceSA", sa);
             game.getTriggerHandler().runTrigger(TriggerType.LifeGained, runParams, false);
 
             game.fireEvent(new GameEventPlayerLivesChanged(this, oldLife, life));

@@ -87,6 +87,8 @@ public enum CounterType {
 
     ECHO("ECHO", 225, 180, 255),
 
+    EGG("EGG", 255, 245, 195),
+
     ELIXIR("ELIXR", 81, 221, 175),
 
     EON("EON", 23, 194, 255),
@@ -238,6 +240,8 @@ public enum CounterType {
     SHIELD("SHLD", 202, 198, 186),
 
     SHRED("SHRED", 255, 165, 152),
+
+    SILVER("SILVER", 192, 192, 192),
 
     SLEEP("SLEEP", 178, 192, 255),
 

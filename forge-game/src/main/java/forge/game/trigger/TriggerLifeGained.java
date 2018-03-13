@@ -55,6 +55,18 @@ public class TriggerLifeGained extends Trigger {
                 return false;
             }
         }
+        if (this.mapParams.containsKey("ValidSource")) {
+            if (!matchesValid(runParams2.get("Source"), this.mapParams.get("ValidSource").split(","),
+                    this.getHostCard())) {
+                return false;
+            }
+        }
+        if (this.mapParams.containsKey("Spell")) {
+            final SpellAbility spellAbility = (SpellAbility) runParams2.get("SourceSA");
+            if (spellAbility == null || !spellAbility.getRootAbility().isSpell()) {
+                return false;
+            }
+        }
 
         return true;
     }
