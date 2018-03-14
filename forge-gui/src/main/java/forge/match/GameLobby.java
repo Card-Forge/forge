@@ -177,7 +177,7 @@ public abstract class GameLobby implements IHasGameType {
             slot.setIsArchenemy(true);
             lastArchenemy = 0;
         }
-        updateView(false);
+        updateView(true);
     }
     private String randomName() {
         final List<String> names = Lists.newArrayListWithCapacity(MAX_PLAYERS);

@@ -70,7 +70,7 @@ public class MatchScreen extends FScreen {
     private final VDevMenu devMenu;
     private final FieldScroller scroller;
     private final VPrompt bottomPlayerPrompt, topPlayerPrompt;
-    private VPlayerPanel bottomPlayerPanel, topPlayerPanel;
+    private VPlayerPanel bottomPlayerPanel, bottomPlayerPanel2, topPlayerPanel, topPlayerPanel2;
     private AbilityEffect activeEffect;
 
     public MatchScreen(List<VPlayerPanel> playerPanels0) {
@@ -84,6 +84,14 @@ public class MatchScreen extends FScreen {
         bottomPlayerPanel = playerPanels0.get(0);
         topPlayerPanel = playerPanels0.get(1);
         topPlayerPanel.setFlipped(true);
+        if(is3Player()||is4Player()){
+            topPlayerPanel2 = playerPanels0.get(2);
+            topPlayerPanel2.setFlipped(true);
+        }
+        if(is4Player()){
+            bottomPlayerPanel2 = playerPanels0.get(3);
+        }
+
 
         bottomPlayerPrompt = add(new VPrompt("", "",
                 new FEventHandler() {
@@ -152,6 +160,14 @@ public class MatchScreen extends FScreen {
             log.setMenuTab(new HiddenMenuTab(log));
             devMenu.setMenuTab(new HiddenMenuTab(devMenu));
         }
+    }
+
+    private boolean is4Player(){
+        return playerPanels.keySet().size()==4;
+    }
+
+    private boolean is3Player(){
+        return playerPanels.keySet().size()==3;
     }
 
     private IGameController getGameController() {
@@ -547,9 +563,19 @@ public class MatchScreen extends FScreen {
                 topPlayerPanelHeight += VAvatar.HEIGHT;
                 bottomPlayerPanelHeight += VAvatar.HEIGHT;
             }
-
-            topPlayerPanel.setBounds(0, 0, visibleWidth, topPlayerPanelHeight);
-            bottomPlayerPanel.setBounds(0, totalHeight - bottomPlayerPanelHeight, visibleWidth, bottomPlayerPanelHeight);
+            if(is4Player()){
+                topPlayerPanel.setBounds(0, 0, visibleWidth / 2f, topPlayerPanelHeight);
+                bottomPlayerPanel.setBounds(0, totalHeight - bottomPlayerPanelHeight, visibleWidth / 2f, bottomPlayerPanelHeight);
+                topPlayerPanel2.setBounds(visibleWidth / 2f, 0, visibleWidth / 2f, topPlayerPanelHeight);
+                bottomPlayerPanel2.setBounds(visibleWidth / 2f, totalHeight - bottomPlayerPanelHeight, visibleWidth / 2f, bottomPlayerPanelHeight);
+            }else if(is3Player()){
+                topPlayerPanel.setBounds(0, 0, visibleWidth / 2f, topPlayerPanelHeight);
+                bottomPlayerPanel.setBounds(0, totalHeight - bottomPlayerPanelHeight, visibleWidth, bottomPlayerPanelHeight);
+                topPlayerPanel2.setBounds(visibleWidth / 2f, 0, visibleWidth / 2f, topPlayerPanelHeight);
+            }else{
+                topPlayerPanel.setBounds(0, 0, visibleWidth, topPlayerPanelHeight);
+                bottomPlayerPanel.setBounds(0, totalHeight - bottomPlayerPanelHeight, visibleWidth / 2f, bottomPlayerPanelHeight);
+            }
             return new ScrollBounds(visibleWidth, totalHeight);
         }
 

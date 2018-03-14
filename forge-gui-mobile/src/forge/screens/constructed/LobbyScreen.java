@@ -43,7 +43,7 @@ import forge.util.Utils;
 public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     private static final ForgePreferences prefs = FModel.getPreferences();
     private static final float PADDING = Utils.scale(5);
-    public static final int MAX_PLAYERS = 2; //8; //TODO: Support multiplayer
+    public static final int MAX_PLAYERS = 4; //8; //TODO: Support multiplayer
     private static final FSkinFont VARIANTS_FONT = FSkinFont.get(12);
 
     // General variables
@@ -84,8 +84,6 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     public LobbyScreen(String headerCaption, FPopupMenu menu, GameLobby lobby0) {
         super(headerCaption, menu);
 
-        initLobby(lobby0);
-
         btnStart.setEnabled(false); //disable start button until decks loaded
 
         add(lblPlayers);
@@ -99,12 +97,19 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             @Override
             public void handleEvent(FEvent e) {
                 int numPlayers = getNumPlayers();
+                while(lobby.getNumberOfSlots()<getNumPlayers()){
+                    lobby.addSlot();
+                }
                 for (int i = 0; i < MAX_PLAYERS; i++) {
-                    playerPanels.get(i).setVisible(i < numPlayers);
+                    if(i<playerPanels.size()) {
+                        playerPanels.get(i).setVisible(i < numPlayers);
+                    }
                 }
                 playersScroll.revalidate();
             }
         });
+
+        initLobby(lobby0);
 
         add(lblVariants);
         add(cbVariants);
@@ -148,9 +153,13 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             public void run() {
                 playerPanels.get(0).initialize(FPref.CONSTRUCTED_P1_DECK_STATE, FPref.COMMANDER_P1_DECK_STATE, FPref.TINY_LEADER_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
                 playerPanels.get(1).initialize(FPref.CONSTRUCTED_P2_DECK_STATE, FPref.COMMANDER_P2_DECK_STATE, FPref.TINY_LEADER_P2_DECK_STATE, DeckType.COLOR_DECK);
-                /*playerPanels.get(2).initialize(FPref.CONSTRUCTED_P3_DECK_STATE, DeckType.COLOR_DECK);
-                playerPanels.get(3).initialize(FPref.CONSTRUCTED_P4_DECK_STATE, DeckType.COLOR_DECK);
-                playerPanels.get(4).initialize(FPref.CONSTRUCTED_P5_DECK_STATE, DeckType.COLOR_DECK);
+                if(getNumPlayers()>2) {
+                    playerPanels.get(2).initialize(FPref.CONSTRUCTED_P3_DECK_STATE, FPref.COMMANDER_P3_DECK_STATE, FPref.TINY_LEADER_P3_DECK_STATE, DeckType.COLOR_DECK);
+                }
+                if(getNumPlayers()>3) {
+                    playerPanels.get(3).initialize(FPref.CONSTRUCTED_P4_DECK_STATE, FPref.COMMANDER_P4_DECK_STATE, FPref.TINY_LEADER_P4_DECK_STATE, DeckType.COLOR_DECK);
+                }
+                /*playerPanels.get(4).initialize(FPref.CONSTRUCTED_P5_DECK_STATE, DeckType.COLOR_DECK);
                 playerPanels.get(5).initialize(FPref.CONSTRUCTED_P6_DECK_STATE, DeckType.COLOR_DECK);
                 playerPanels.get(6).initialize(FPref.CONSTRUCTED_P7_DECK_STATE, DeckType.COLOR_DECK);
                 playerPanels.get(7).initialize(FPref.CONSTRUCTED_P8_DECK_STATE, DeckType.COLOR_DECK);*/ //TODO: Support multiplayer and improve performance of loading this screen by using background thread
@@ -165,8 +174,8 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         });
 
         //disable player count for now until multiplayer supported
-        lblPlayers.setEnabled(false);
-        cbPlayerCount.setEnabled(false);
+        lblPlayers.setEnabled(true);
+        cbPlayerCount.setEnabled(true);
     }
 
     public GameLobby getLobby() {
@@ -180,6 +189,9 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         btnStart.setEnabled(hasControl);
         lblVariants.setEnabled(hasControl);
         cbVariants.setEnabled(hasControl);
+        while(lobby.getNumberOfSlots()<getNumPlayers()){
+            lobby.addSlot();
+        }
     }
 
     private void updateVariantSelection() {
@@ -447,7 +459,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     @Override
     public void update(final boolean fullUpdate) {
         int playerCount = lobby.getNumberOfSlots();
-        cbPlayerCount.setSelectedItem(playerCount);
+        //cbPlayerCount.setSelectedItem(playerCount);
 
         updateVariantSelection();
 
@@ -465,6 +477,12 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 }
                 else {
                     panel = new PlayerPanel(this, allowNetworking, i, slot, lobby.mayEdit(i), lobby.hasControl());
+                    if(i==2) {
+                        panel.initialize(FPref.CONSTRUCTED_P3_DECK_STATE, FPref.COMMANDER_P3_DECK_STATE, FPref.TINY_LEADER_P3_DECK_STATE, DeckType.COLOR_DECK);
+                    }
+                    if(i==3) {
+                        panel.initialize(FPref.CONSTRUCTED_P4_DECK_STATE, FPref.COMMANDER_P4_DECK_STATE, FPref.TINY_LEADER_P4_DECK_STATE, DeckType.COLOR_DECK);
+                    }
                     playerPanels.add(panel);
                     playersScroll.add(panel);
                     isNewPanel = true;
