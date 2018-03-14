@@ -1,0 +1,9 @@
+Name:Demonic Vigor
+ManaCost:B
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigChangeZone | TriggerDescription$ When enchanted creature dies, return that card to its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Hand
+Oracle:Enchant creature\nEnchanted creature gets +1/+1.\nWhen enchanted creature dies, return that card to its owner's hand.

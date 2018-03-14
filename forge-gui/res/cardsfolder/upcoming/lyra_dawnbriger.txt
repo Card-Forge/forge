@@ -1,4 +1,4 @@
-Name:Lyra Dawnbriger
+Name:Lyra Dawnbringer
 ManaCost:3 W W
 Types:Legendary Creature Angel
 PT:5/5
@@ -8,5 +8,5 @@ K:Lifelink
 S:Mode$ Continuous | Affected$ Angel.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Lifelink | Description$ Other Angels you control get +1/+1 and have lifelink.
 SVar:BuffedBy:Angel
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lyra_dawnbriger.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lyra_dawnbringer.jpg
 Oracle:Flying, first strike, lifelink\nOther Angels you control get +1/+1 and have lifelink.

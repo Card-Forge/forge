@@ -300,7 +300,7 @@ public enum DeckFormat {
             //basic lands, Shadowborn Apostle and Relentless Rats
 
             final CardPool allCards = deck.getAllCardsInASinglePool(hasCommander());
-            final ImmutableSet<String> limitExceptions = ImmutableSet.of("Relentless Rats", "Shadowborn Apostle");
+            final ImmutableSet<String> limitExceptions = ImmutableSet.of("Relentless Rats", "Shadowborn Apostle", "Rat Colony");
 
             // should group all cards by name, so that different editions of same card are really counted as the same card
             for (final Entry<String, Integer> cp : Aggregates.groupSumBy(allCards, PaperCard.FN_GET_NAME)) {

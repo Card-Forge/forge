@@ -1,0 +1,6 @@
+Name:Thallid Soothsayer
+ManaCost:3 B
+Types:Creature Fungus
+PT:2/3
+A:AB$ Draw | Cost$ 2 Sac<1/Creature> | NumCards$ 1 | SpellDescription$ Draw a card.
+Oracle:{2}, Sacrifice a creature: Draw a card.
