@@ -79,6 +79,11 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         if (sa.hasParam("ClearRemembered")) {
             source.clearRemembered();
         }
+        
+        if (sa.hasParam("DamageMap")) {
+            sa.setDamageMap(new CardDamageMap());
+            sa.setPreventMap(new CardDamageMap());
+        }
 
         if (loopOverCards) {
             // TODO (ArsenalNut 22 Dec 2012) Add logic to order cards for AI
@@ -202,6 +207,14 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                 source.removeRemembered(entry.getKey());
                 source.removeImprintedCards(entry.getValue());
             }
+        }
+        
+        if(sa.hasParam("DamageMap")) {
+            sa.getPreventMap().triggerPreventDamage(false);
+            sa.setPreventMap(null);
+            // non combat damage cause lifegain there
+            sa.getDamageMap().triggerDamageDoneOnce(false, sa);
+            sa.setDamageMap(null);
         }
     }
 }

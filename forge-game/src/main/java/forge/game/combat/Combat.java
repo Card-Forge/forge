@@ -809,7 +809,7 @@ public class Combat {
 
         // Run the trigger to deal combat damage once
         // LifeLink for Combat Damage at this place
-        dealtDamageTo.triggerDamageDoneOnce(true);
+        dealtDamageTo.triggerDamageDoneOnce(true, null);
         dealtDamageTo.clear();
     }
 

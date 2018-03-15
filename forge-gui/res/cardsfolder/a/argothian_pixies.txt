@@ -2,7 +2,7 @@ Name:Argothian Pixies
 ManaCost:1 G
 Types:Creature Faerie
 PT:2/1
-K:PreventAllDamageBy:Artifact.Creature:Prevent all damage that would be dealt to CARDNAME by artifact creatures.
+R:Event$ DamageDone | Prevent$ True | ValidSource$ Artifact.Creature | ValidTarget$ Creature.Self | Description$ Prevent all damage that would be dealt to CARDNAME by artifact creatures.
 K:CantBeBlockedBy Artifact.Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/argothian_pixies.jpg
 Oracle:Argothian Pixies can't be blocked by artifact creatures.\nPrevent all damage that would be dealt to Argothian Pixies by artifact creatures.

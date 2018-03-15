@@ -3,7 +3,7 @@ ManaCost:1 B B
 Types:Creature Wall
 PT:0/1
 K:Defender
-K:PreventAllDamageBy:Creature.blockedBySource:Prevent all damage that would be dealt to CARDNAME by creatures it's blocking.
+R:Event$ DamageDone | Prevent$ True | ValidSource$ Creature.blockedBySource | ValidTarget$ Creature.Self | Description$ Prevent all damage that would be dealt to CARDNAME by creatures it's blocking.
 S:Mode$ CantTarget | ValidCard$ Card.Self | SourceCanOnlyTarget$ Wall | Description$ CARDNAME can't be the target of spells that can target only Walls or of abilities that can target only Walls.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_shadows.jpg

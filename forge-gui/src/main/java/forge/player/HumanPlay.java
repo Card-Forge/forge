@@ -424,10 +424,10 @@ public class HumanPlay {
                 CardDamageMap damageMap = new CardDamageMap();
                 CardDamageMap preventMap = new CardDamageMap();
 
-                p.addDamage(amount, source, damageMap, preventMap);
+                p.addDamage(amount, source, damageMap, preventMap, sourceAbility);
 
                 preventMap.triggerPreventDamage(false);
-                damageMap.triggerDamageDoneOnce(false);
+                damageMap.triggerDamageDoneOnce(false, sourceAbility);
             }
             else if (part instanceof CostPutCounter) {
                 CounterType counterType = ((CostPutCounter) part).getCounter();

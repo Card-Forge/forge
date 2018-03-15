@@ -3460,22 +3460,6 @@ public class CardFactoryUtil {
 
             inst.addReplacement(re);
         }
-        
-        // No finish yet, need card updates
-        if (keyword.startsWith("PreventAllDamageBy") && keyword.contains(":")) {
-            final String[] k = keyword.split(":");
-            String rep = "Event$ DamageDone | Prevent$ True | ValidTarget$ Card.Self | ValidSource$ " + k[1];
-            rep += "| Description$ ";
-            if (k.length > 2) {
-                rep += k[2];
-            } else {
-                rep += "Prevent all damage that would be dealt to CARDNAME by " + k[1];
-            }
-            
-            ReplacementEffect re = ReplacementHandler.parseReplacement(rep, card, intrinsic);
-
-            inst.addReplacement(re);
-        }
     }
 
     public static void addSpellAbility(final KeywordInterface inst, final Card card, final boolean intrinsic) {

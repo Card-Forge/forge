@@ -85,17 +85,25 @@ public class DamageAllEffect extends DamageBaseEffect {
 
         list = AbilityUtils.filterListByType(list, sa.getParam("ValidCards"), sa);
 
-        CardDamageMap damageMap = new CardDamageMap();
-        CardDamageMap preventMap = new CardDamageMap();
+        boolean usedDamageMap = true;
+        CardDamageMap damageMap = sa.getDamageMap();
+        CardDamageMap preventMap = sa.getPreventMap();
+
+        if (damageMap == null) {
+            // make a new damage map
+            damageMap = new CardDamageMap();
+            preventMap = new CardDamageMap();
+            usedDamageMap = false;
+        }
 
         for (final Card c : list) {
-            c.addDamage(dmg, sourceLKI, damageMap, preventMap);
+            c.addDamage(dmg, sourceLKI, damageMap, preventMap, sa);
         }
 
         if (!players.equals("")) {
             final List<Player> playerList = AbilityUtils.getDefinedPlayers(card, players, sa);
             for (final Player p : playerList) {
-                p.addDamage(dmg, sourceLKI, damageMap, preventMap);
+                p.addDamage(dmg, sourceLKI, damageMap, preventMap, sa);
             }
         }
 
@@ -110,8 +118,10 @@ public class DamageAllEffect extends DamageBaseEffect {
             }
         }
 
-        preventMap.triggerPreventDamage(false);
-        damageMap.triggerDamageDoneOnce(false);
+        if (!usedDamageMap) {
+            preventMap.triggerPreventDamage(false);
+            damageMap.triggerDamageDoneOnce(false, sa);
+        }
 
         replaceDying(sa);
     }

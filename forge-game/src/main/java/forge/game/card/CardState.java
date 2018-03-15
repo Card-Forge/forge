@@ -17,12 +17,14 @@
  */
 package forge.game.card;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
+import forge.game.CardTraitBase;
 import forge.game.ForgeScript;
 import forge.game.GameObject;
 import forge.game.card.CardView.CardStateView;
@@ -509,5 +511,18 @@ public class CardState extends GameObject {
         }
     }
     
-    
+    public void updateChangedText() {
+        final List<CardTraitBase> allAbs = ImmutableList.<CardTraitBase>builder()
+            .addAll(manaAbilities)
+            .addAll(nonManaAbilities)
+            .addAll(triggers)
+            .addAll(replacementEffects)
+            .addAll(staticAbilities)
+            .build();
+        for (final CardTraitBase ctb : allAbs) {
+            if (ctb.isIntrinsic()) {
+                ctb.changeText();
+            }
+        }
+    }
 }

@@ -1404,8 +1404,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         int i = 0;
         for (KeywordInterface inst : keywords) {
             String keyword = inst.getOriginal();
-            if (keyword.startsWith("PreventAllDamageBy")
-                    || keyword.startsWith("CantEquip")
+            if (keyword.startsWith("CantEquip")
                     || keyword.startsWith("SpellCantTarget")) {
                 continue;
             }
@@ -3427,17 +3426,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     private void updateChangedText() {
         resetChangedSVars();
-        final List<CardTraitBase> allAbs = ImmutableList.<CardTraitBase>builder()
-            .addAll(getSpellAbilities())
-            .addAll(getStaticAbilities())
-            .addAll(getReplacementEffects())
-            .addAll(getTriggers())
-            .build();
-        for (final CardTraitBase ctb : allAbs) {
-            if (ctb.isIntrinsic()) {
-                ctb.changeText();
-            }
-        }
+        currentState.updateChangedText();
         text = AbilityUtils.applyDescriptionTextChangeEffects(originalText, this);
 
         currentState.getView().updateAbilityText(this, currentState);
@@ -4324,15 +4313,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         if (hasProtectionFromDamage(source)) {
             return 0;
-        }
-
-        for (KeywordInterface inst : getKeywords()) {
-            String kw = inst.getOriginal();
-            if (kw.startsWith("PreventAllDamageBy")) {
-                if (source.isValid(kw.split(" ", 2)[1].split(","), getController(), this, null)) {
-                    return 0;
-                }
-            }
         }
 
         // Prevent Damage static abilities

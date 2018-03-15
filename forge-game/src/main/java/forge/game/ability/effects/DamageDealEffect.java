@@ -1,7 +1,6 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Iterables;
-import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -69,19 +68,17 @@ public class DamageDealEffect extends DamageBaseEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
-        final Game game = hostCard.getGame();
 
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
+        int dmg = AbilityUtils.calculateAmount(hostCard, damage, sa);
 
         final boolean noPrevention = sa.hasParam("NoPrevention");
-        final boolean combatDmg = "true".equalsIgnoreCase(sa.getParamOrDefault("CombatDamage", "false"));
         final boolean removeDamage = sa.hasParam("Remove");
         final boolean divideOnResolution = sa.hasParam("DividerOnResolution");
 
         List<GameObject> tgts = getTargets(sa);
         if (sa.hasParam("OptionalDecider")) {
-            Player decider = Iterables.getFirst(AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("OptionalDecider"), sa), null);
+            Player decider = Iterables.getFirst(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("OptionalDecider"), sa), null);
             if (decider != null && !decider.getController().confirmAction(sa, null, "Do you want to deal " + dmg + " damage to " + tgts + " ?")) {
                 return;
             }
@@ -107,7 +104,7 @@ public class DamageDealEffect extends DamageBaseEffect {
             }
             // Can't radiate from a player
             if (origin != null) {
-                for (final Card c : CardUtil.getRadiance(sa.getHostCard(), origin,
+                for (final Card c : CardUtil.getRadiance(hostCard, origin,
                         sa.getParam("ValidTgts").split(","))) {
                     tgts.add(c);
                 }
@@ -116,24 +113,34 @@ public class DamageDealEffect extends DamageBaseEffect {
 
         final boolean remember = sa.hasParam("RememberDamaged");
 
+        boolean usedDamageMap = true;
+        CardDamageMap damageMap = sa.getDamageMap();
+        CardDamageMap preventMap = sa.getPreventMap();
 
-        // make a new damage map, combat damage will be applied later into combat map
-        CardDamageMap damageMap = new CardDamageMap();
-        CardDamageMap preventMap = new CardDamageMap();
-
+        if (damageMap == null) {
+            // make a new damage map
+            damageMap = new CardDamageMap();
+            preventMap = new CardDamageMap();
+            usedDamageMap = false;
+        }
+        if (sa.hasParam("DamageMap")) {
+            sa.setDamageMap(damageMap);
+            sa.setPreventMap(preventMap);
+            usedDamageMap = true;
+        }
         
-        final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DamageSource"), sa);
+        final List<Card> definedSources = AbilityUtils.getDefinedCards(hostCard, sa.getParam("DamageSource"), sa);
         if (definedSources == null || definedSources.isEmpty()) {
             return;
         }
         
         for (Card source : definedSources) {
-            final Card sourceLKI = sa.getHostCard().getGame().getChangeZoneLKIInfo(source);
+            final Card sourceLKI = hostCard.getGame().getChangeZoneLKIInfo(source);
         
             if (divideOnResolution) {
                 // Dividing Damage up to multiple targets using combat damage box
                 // Currently only used for Master of the Wild Hunt
-                List<Player> players = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("DividerOnResolution"), sa);
+                List<Player> players = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("DividerOnResolution"), sa);
                 if (players.isEmpty()) {
                     return;
                 }
@@ -149,18 +156,15 @@ public class DamageDealEffect extends DamageBaseEffect {
                 Player assigningPlayer = players.get(0);
                 Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(sourceLKI, assigneeCards, dmg, null, true);
                 for (Entry<Card, Integer> dt : map.entrySet()) {
-                    dt.getKey().addDamage(dt.getValue(), sourceLKI, damageMap, preventMap);
+                    dt.getKey().addDamage(dt.getValue(), sourceLKI, damageMap, preventMap, sa);
                 }
-    
-                // transport combat damage back into combat damage map
-                if (combatDmg) {
-                    game.getCombat().getDamageMap().putAll(damageMap);
-                } else {
+
+                if (!usedDamageMap) {
                     preventMap.triggerPreventDamage(false);
                     // non combat damage cause lifegain there
-                    damageMap.triggerDamageDoneOnce(false);
-                    replaceDying(sa);
+                    damageMap.triggerDamageDoneOnce(false, sa);
                 }
+                replaceDying(sa);
                 return;
             }
 
@@ -179,13 +183,13 @@ public class DamageDealEffect extends DamageBaseEffect {
                             c.clearAssignedDamage();
                         }
                         else {
-                            c.addDamage(dmg, sourceLKI, combatDmg, noPrevention, damageMap, preventMap);
+                            c.addDamage(dmg, sourceLKI, false, noPrevention, damageMap, preventMap, sa);
                         }
                     }
                 } else if (o instanceof Player) {
                     final Player p = (Player) o;
                     if (!targeted || p.canBeTargetedBy(sa)) {
-                        p.addDamage(dmg, sourceLKI, combatDmg, noPrevention, damageMap, preventMap);
+                        p.addDamage(dmg, sourceLKI, false, noPrevention, damageMap, preventMap, sa);
                     }
                 }
             }
@@ -194,15 +198,11 @@ public class DamageDealEffect extends DamageBaseEffect {
                 source.addRemembered(damageMap.row(sourceLKI).keySet());
             }
         }
-        // transport combat damage back into combat damage map
-        if (combatDmg) {
-            game.getCombat().getDamageMap().putAll(damageMap);
-        } else {
+        if (!usedDamageMap) {
             preventMap.triggerPreventDamage(false);
             // non combat damage cause lifegain there
-            damageMap.triggerDamageDoneOnce(false);
+            damageMap.triggerDamageDoneOnce(false, sa);
         }
-
         replaceDying(sa);
     }
 }

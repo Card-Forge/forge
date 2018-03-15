@@ -12,6 +12,7 @@ import com.google.common.collect.Sets;
 import com.google.common.collect.Table;
 
 import forge.game.GameEntity;
+import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 
 public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
@@ -35,7 +36,7 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
         }
     }
 
-    public void triggerDamageDoneOnce(boolean isCombat) {
+    public void triggerDamageDoneOnce(boolean isCombat, final SpellAbility sa) {
         // Source -> Targets
         for (Map.Entry<Card, Map<GameEntity, Integer>> e : this.rowMap().entrySet()) {
             final Card sourceLKI = e.getKey();
@@ -53,8 +54,7 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
                 sourceLKI.getGame().getTriggerHandler().runTrigger(TriggerType.DamageDealtOnce, runParams, false);
                 
                 if (sourceLKI.hasKeyword("Lifelink")) {
-                    // FIXME: add sourceSA to fix Firesong and Sunspeaker
-                    sourceLKI.getController().gainLife(sum, sourceLKI);
+                    sourceLKI.getController().gainLife(sum, sourceLKI, sa);
                 }
             }
         }

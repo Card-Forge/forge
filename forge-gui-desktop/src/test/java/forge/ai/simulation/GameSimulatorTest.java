@@ -859,12 +859,12 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card simGiant = findCardWithName(simGame, giantCardName);
         Card simPridemate = findCardWithName(simGame, pridemateName);
 
-        // spell deals multiple damages to multiple targets, each of them causes lifegain
+        // spell deals multiple damages to multiple targets, only one cause of lifegain
         assertNotNull(simPridemate);
         assertTrue(simPridemate.hasCounters());
-        assertEquals(3, simPridemate.getCounters(CounterType.P1P1));
-        assertEquals(3, simPridemate.getToughnessBonusFromCounters());
-        assertEquals(3, simPridemate.getPowerBonusFromCounters());
+        assertEquals(1, simPridemate.getCounters(CounterType.P1P1));
+        assertEquals(1, simPridemate.getToughnessBonusFromCounters());
+        assertEquals(1, simPridemate.getPowerBonusFromCounters());
 
         assertNotNull(simBear);
         assertEquals(1, simBear.getDamage());
