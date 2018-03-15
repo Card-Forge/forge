@@ -43,7 +43,7 @@ import forge.util.Utils;
 public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     private static final ForgePreferences prefs = FModel.getPreferences();
     private static final float PADDING = Utils.scale(5);
-    public static final int MAX_PLAYERS = 4; //8; //TODO: Support multiplayer
+    public static final int MAX_PLAYERS = 4;
     private static final FSkinFont VARIANTS_FONT = FSkinFont.get(12);
 
     // General variables
@@ -97,8 +97,11 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             @Override
             public void handleEvent(FEvent e) {
                 int numPlayers = getNumPlayers();
-                while(lobby.getNumberOfSlots()<getNumPlayers()){
+                while(lobby.getNumberOfSlots() < getNumPlayers()){
                     lobby.addSlot();
+                }
+                while(lobby.getNumberOfSlots() > getNumPlayers()){
+                    lobby.removeSlot(lobby.getNumberOfSlots()-1);
                 }
                 for (int i = 0; i < MAX_PLAYERS; i++) {
                     if(i<playerPanels.size()) {

@@ -208,9 +208,13 @@ public class VPlayerPanel extends FContainer {
         }
 
         //layout for bottom panel by default
-        float x = VAvatar.WIDTH;
-        float w = width - VAvatar.WIDTH;
-        float h = phaseIndicator.getPreferredHeight(w);
+        float x = avatarHeight;
+        float w = width - avatarHeight;
+        float indicatorScale = 1f;
+        if(avatarHeight<VAvatar.HEIGHT){
+            indicatorScale = 0.6f;
+        }
+        float h = phaseIndicator.getPreferredHeight(w) * indicatorScale;
         phaseIndicator.setBounds(x, height - h, w, h);
 
         float y = height - avatarHeight;
@@ -223,7 +227,7 @@ public class VPlayerPanel extends FContainer {
         y = height - avatarHeight;
         avatar.setPosition(0, y);
 
-        float lifeLabelWidth = LIFE_FONT.getBounds("99").width * 1.2f; //make just wide enough for 2-digit life totals
+        float lifeLabelWidth = LIFE_FONT.getBounds("99").width * 1.2f * indicatorScale; //make just wide enough for 2-digit life totals
         float infoLabelHeight = avatarHeight - phaseIndicator.getHeight();
         lblLife.setBounds(x, y, lifeLabelWidth, infoLabelHeight);
         x += lifeLabelWidth;

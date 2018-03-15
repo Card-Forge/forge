@@ -1,10 +1,6 @@
 package forge.screens.match;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -63,6 +59,7 @@ public class MatchScreen extends FScreen {
     public static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
 
     private final Map<PlayerView, VPlayerPanel> playerPanels = Maps.newHashMap();
+    private List<VPlayerPanel> playerPanelsList;
     private final VGameMenu gameMenu;
     private final VPlayers players;
     private final VLog log;
@@ -95,6 +92,8 @@ public class MatchScreen extends FScreen {
                 bottomPlayerPanel2.setFlipped(true);
             }
         }
+        playerPanelsList=playerPanels0;
+        Collections.reverse(playerPanelsList);
 
 
         bottomPlayerPrompt = add(new VPrompt("", "",
@@ -527,18 +526,25 @@ public class MatchScreen extends FScreen {
 
             //field separator lines
             if (!Forge.isLandscapeMode()) {
-                if (topPlayerPanel.getSelectedTab() == null) {
-                    y++; //ensure border goes all the way across under avatar
+                for (VPlayerPanel playerPanel: playerPanelsList){
+                    midField = playerPanel.getTop();
+                    y = midField - playerPanel.getField().getHeight();
+                    if(playerPanel.getSelectedTab() == null) {
+                        y++;
+                    }
+                    g.drawLine(1, BORDER_COLOR, x, y, w, y);
                 }
-                g.drawLine(1, BORDER_COLOR, 0, y, w, y);
             }
 
-            y = midField - 0.5f;
-            g.drawLine(1, BORDER_COLOR, x, y, w, y);
+            for (VPlayerPanel playerPanel: playerPanelsList){
+                midField = playerPanel.getTop();
+                y = midField - 0.5f;
+                g.drawLine(1, BORDER_COLOR, x, y, w, y);
+            }
 
             if (!Forge.isLandscapeMode()) {
-                y = midField + bottomPlayerPanel.getField().getHeight();
-                g.drawLine(1, BORDER_COLOR, 0, y, w, y);
+                y = bottomPlayerPanel.getTop() + bottomPlayerPanel.getField().getHeight();
+                g.drawLine(1, BORDER_COLOR, x, y, w, y);
             }
         }
         @Override
@@ -568,46 +574,30 @@ public class MatchScreen extends FScreen {
             }
             else {
                 float cardRowsHeight = totalHeight - playercount * avatarHeight;
-                if (topPlayerPanel.getSelectedTab() == null) {
-                    if (bottomPlayerPanel.getSelectedTab() != null) {
-                        topPlayerPanelHeight = cardRowsHeight * 2f / (totalCardRows + 1f);
-                        bottomPlayerPanelHeight = cardRowsHeight * 3f / (totalCardRows + 1f);
+                totalCardRows=0;
+                for(VPlayerPanel playerPanel:playerPanelsList){
+                    if(playerPanel.getSelectedTab() != null){
+                        totalCardRows += 1;
                     }
-                    else {
-                        topPlayerPanelHeight = cardRowsHeight * 2f / totalCardRows;
-                        bottomPlayerPanelHeight = topPlayerPanelHeight;
+                    totalCardRows += 2;
+                }
+                float y=0;
+                for(VPlayerPanel playerPanel:playerPanelsList){
+                    float panelHeight;
+                    if(playerPanel.getSelectedTab() != null){
+                        panelHeight = cardRowsHeight * 3f / totalCardRows;
+                    }else{
+                        panelHeight = cardRowsHeight * 2f / totalCardRows;
                     }
+                    panelHeight += avatarHeight;
+                    playerPanel.setBounds(0, y, visibleWidth, panelHeight);
+                    y=y+panelHeight;
                 }
-                else if (bottomPlayerPanel.getSelectedTab() == null) {
-                    topPlayerPanelHeight = cardRowsHeight * 3f / (totalCardRows + 1f);
-                    bottomPlayerPanelHeight = cardRowsHeight * 2f / (totalCardRows + 1f);
-                }
-                else {
-                    topPlayerPanelHeight = cardRowsHeight * 2f / totalCardRows ;
-                    bottomPlayerPanelHeight = topPlayerPanelHeight;
-                }
-            }
-            if(is4Player()){
-                topPlayerPanelHeight += avatarHeight;
-                bottomPlayerPanelHeight += avatarHeight;
-                topPlayerPanel.setBounds(0, 0, visibleWidth, topPlayerPanelHeight);
-                bottomPlayerPanel.setBounds(0, totalHeight - bottomPlayerPanelHeight, visibleWidth, bottomPlayerPanelHeight);
-                topPlayerPanel2.setBounds(0, topPlayerPanelHeight , visibleWidth, topPlayerPanelHeight);
-                bottomPlayerPanel2.setBounds(0, topPlayerPanelHeight * 2f, visibleWidth, topPlayerPanelHeight);
-            }else if(is3Player()){
-                topPlayerPanelHeight += avatarHeight;
-                bottomPlayerPanelHeight += avatarHeight;
-                topPlayerPanel.setBounds(0, 0, visibleWidth, topPlayerPanelHeight);
-                bottomPlayerPanel.setBounds(0, totalHeight - bottomPlayerPanelHeight, visibleWidth, bottomPlayerPanelHeight);
-                topPlayerPanel2.setBounds(0, topPlayerPanelHeight, visibleWidth, topPlayerPanelHeight);
-            }else{
-                topPlayerPanelHeight += avatarHeight;
-                bottomPlayerPanelHeight += avatarHeight;
-                topPlayerPanel.setBounds(0, 0, visibleWidth, topPlayerPanelHeight);
-                bottomPlayerPanel.setBounds(0, totalHeight - bottomPlayerPanelHeight, visibleWidth, bottomPlayerPanelHeight);
+
             }
             return new ScrollBounds(visibleWidth, totalHeight);
         }
+
 
         protected ScrollBounds layoutAndGetScrollBoundsVertical(float visibleWidth, float visibleHeight) {
             float totalHeight = visibleHeight + extraHeight;
