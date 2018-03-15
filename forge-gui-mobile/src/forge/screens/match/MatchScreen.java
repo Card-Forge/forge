@@ -72,6 +72,7 @@ public class MatchScreen extends FScreen {
     private final VPrompt bottomPlayerPrompt, topPlayerPrompt;
     private VPlayerPanel bottomPlayerPanel, bottomPlayerPanel2, topPlayerPanel, topPlayerPanel2;
     private AbilityEffect activeEffect;
+    private final boolean horizontalMultiplayerLayout = true;
 
     public MatchScreen(List<VPlayerPanel> playerPanels0) {
         super(new FMenuBar());
@@ -90,6 +91,9 @@ public class MatchScreen extends FScreen {
         }
         if(is4Player()){
             bottomPlayerPanel2 = playerPanels0.get(3);
+            if(horizontalMultiplayerLayout){
+                bottomPlayerPanel2.setFlipped(true);
+            }
         }
 
 
@@ -282,8 +286,16 @@ public class MatchScreen extends FScreen {
         return topPlayerPanel;
     }
 
+    public VPlayerPanel getTopPlayerPanel2() {
+        return topPlayerPanel2;
+    }
+
     public VPlayerPanel getBottomPlayerPanel() {
         return bottomPlayerPanel;
+    }
+
+    public VPlayerPanel getBottomPlayerPanel2() {
+        return bottomPlayerPanel2;
     }
 
     public Map<PlayerView, VPlayerPanel> getPlayerPanels() {
@@ -529,9 +541,75 @@ public class MatchScreen extends FScreen {
                 g.drawLine(1, BORDER_COLOR, 0, y, w, y);
             }
         }
-
         @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+            if(horizontalMultiplayerLayout){
+                return layoutAndGetScrollBoundsHorizontal(visibleWidth,visibleHeight);
+            }else{
+                return layoutAndGetScrollBoundsVertical(visibleWidth,visibleHeight);
+            }
+        }
+
+        protected ScrollBounds layoutAndGetScrollBoundsHorizontal(float visibleWidth, float visibleHeight) {
+            float totalHeight = visibleHeight + extraHeight;
+            float avatarHeight = VAvatar.HEIGHT;
+            if(is4Player() || is3Player()){
+                avatarHeight *= 0.5f;
+            }
+            float playercount = getPlayerPanels().keySet().size();
+            float totalCardRows = playercount * 2f;
+
+
+            //determine player panel heights based on visibility of zone displays
+            float topPlayerPanelHeight, bottomPlayerPanelHeight;
+            if (Forge.isLandscapeMode()) {
+                topPlayerPanelHeight = totalHeight / 2;
+                bottomPlayerPanelHeight = topPlayerPanelHeight;
+            }
+            else {
+                float cardRowsHeight = totalHeight - playercount * avatarHeight;
+                if (topPlayerPanel.getSelectedTab() == null) {
+                    if (bottomPlayerPanel.getSelectedTab() != null) {
+                        topPlayerPanelHeight = cardRowsHeight * 2f / (totalCardRows + 1f);
+                        bottomPlayerPanelHeight = cardRowsHeight * 3f / (totalCardRows + 1f);
+                    }
+                    else {
+                        topPlayerPanelHeight = cardRowsHeight * 2f / totalCardRows;
+                        bottomPlayerPanelHeight = topPlayerPanelHeight;
+                    }
+                }
+                else if (bottomPlayerPanel.getSelectedTab() == null) {
+                    topPlayerPanelHeight = cardRowsHeight * 3f / (totalCardRows + 1f);
+                    bottomPlayerPanelHeight = cardRowsHeight * 2f / (totalCardRows + 1f);
+                }
+                else {
+                    topPlayerPanelHeight = cardRowsHeight * 2f / totalCardRows ;
+                    bottomPlayerPanelHeight = topPlayerPanelHeight;
+                }
+            }
+            if(is4Player()){
+                topPlayerPanelHeight += avatarHeight;
+                bottomPlayerPanelHeight += avatarHeight;
+                topPlayerPanel.setBounds(0, 0, visibleWidth, topPlayerPanelHeight);
+                bottomPlayerPanel.setBounds(0, totalHeight - bottomPlayerPanelHeight, visibleWidth, bottomPlayerPanelHeight);
+                topPlayerPanel2.setBounds(0, topPlayerPanelHeight , visibleWidth, topPlayerPanelHeight);
+                bottomPlayerPanel2.setBounds(0, topPlayerPanelHeight * 2f, visibleWidth, topPlayerPanelHeight);
+            }else if(is3Player()){
+                topPlayerPanelHeight += avatarHeight;
+                bottomPlayerPanelHeight += avatarHeight;
+                topPlayerPanel.setBounds(0, 0, visibleWidth, topPlayerPanelHeight);
+                bottomPlayerPanel.setBounds(0, totalHeight - bottomPlayerPanelHeight, visibleWidth, bottomPlayerPanelHeight);
+                topPlayerPanel2.setBounds(0, topPlayerPanelHeight, visibleWidth, topPlayerPanelHeight);
+            }else{
+                topPlayerPanelHeight += avatarHeight;
+                bottomPlayerPanelHeight += avatarHeight;
+                topPlayerPanel.setBounds(0, 0, visibleWidth, topPlayerPanelHeight);
+                bottomPlayerPanel.setBounds(0, totalHeight - bottomPlayerPanelHeight, visibleWidth, bottomPlayerPanelHeight);
+            }
+            return new ScrollBounds(visibleWidth, totalHeight);
+        }
+
+        protected ScrollBounds layoutAndGetScrollBoundsVertical(float visibleWidth, float visibleHeight) {
             float totalHeight = visibleHeight + extraHeight;
 
             //determine player panel heights based on visibility of zone displays
@@ -574,7 +652,7 @@ public class MatchScreen extends FScreen {
                 topPlayerPanel2.setBounds(visibleWidth / 2f, 0, visibleWidth / 2f, topPlayerPanelHeight);
             }else{
                 topPlayerPanel.setBounds(0, 0, visibleWidth, topPlayerPanelHeight);
-                bottomPlayerPanel.setBounds(0, totalHeight - bottomPlayerPanelHeight, visibleWidth / 2f, bottomPlayerPanelHeight);
+                bottomPlayerPanel.setBounds(0, totalHeight - bottomPlayerPanelHeight, visibleWidth, bottomPlayerPanelHeight);
             }
             return new ScrollBounds(visibleWidth, totalHeight);
         }

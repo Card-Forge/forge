@@ -45,13 +45,21 @@ public class VPlayerPanel extends FContainer {
     private final Map<ZoneType, InfoTab> zoneTabs = new HashMap<ZoneType, InfoTab>();
     private final List<InfoTab> tabs = new ArrayList<InfoTab>();
     private InfoTab selectedTab;
+    private float avatarHeight = VAvatar.HEIGHT;
+    private float displayAreaHeightFactor = 1.0f;
+    private boolean forMultiPlayer = false;
 
-    public VPlayerPanel(PlayerView player0, boolean showHand) {
+    public VPlayerPanel(PlayerView player0, boolean showHand, int playerCount) {
         player = player0;
         phaseIndicator = add(new VPhaseIndicator());
 
+        if(playerCount>2){
+            forMultiPlayer=true;
+            avatarHeight *= 0.5f;
+            //displayAreaHeightFactor *= 0.7f;
+        }
         field = add(new VField(player));
-        avatar = add(new VAvatar(player));
+        avatar = add(new VAvatar(player, avatarHeight));
         lblLife = add(new LifeLabel());
         addZoneDisplay(ZoneType.Hand, FSkinImage.HAND);
         addZoneDisplay(ZoneType.Graveyard, FSkinImage.GRAVEYARD);
@@ -205,18 +213,18 @@ public class VPlayerPanel extends FContainer {
         float h = phaseIndicator.getPreferredHeight(w);
         phaseIndicator.setBounds(x, height - h, w, h);
 
-        float y = height - VAvatar.HEIGHT;
-        float displayAreaHeight = y / 3;
+        float y = height - avatarHeight;
+        float displayAreaHeight = displayAreaHeightFactor * y / 3;
         y -= displayAreaHeight;
         for (InfoTab tab : tabs) {
             tab.displayArea.setBounds(0, y, width, displayAreaHeight);
         }
 
-        y = height - VAvatar.HEIGHT;
+        y = height - avatarHeight;
         avatar.setPosition(0, y);
 
         float lifeLabelWidth = LIFE_FONT.getBounds("99").width * 1.2f; //make just wide enough for 2-digit life totals
-        float infoLabelHeight = VAvatar.HEIGHT - phaseIndicator.getHeight();
+        float infoLabelHeight = avatarHeight - phaseIndicator.getHeight();
         lblLife.setBounds(x, y, lifeLabelWidth, infoLabelHeight);
         x += lifeLabelWidth;
 
@@ -461,9 +469,11 @@ public class VPlayerPanel extends FContainer {
                     else {
                         g.startClip(-1, y, w + 2, yAcross - y);
                     }
-                    g.drawLine(1, MatchScreen.BORDER_COLOR, 0, yAcross, w, yAcross);
-                    g.drawLine(1, MatchScreen.BORDER_COLOR, 0, y, 0, h);
-                    g.drawLine(1, MatchScreen.BORDER_COLOR, w, y, w, h);
+                    if(forMultiPlayer) {
+                        g.drawLine(1, MatchScreen.BORDER_COLOR, 0, yAcross, w, yAcross);
+                        g.drawLine(1, MatchScreen.BORDER_COLOR, 0, y, 0, h);
+                        g.drawLine(1, MatchScreen.BORDER_COLOR, w, y, w, h);
+                    }
                     g.endClip();
                 }
             }
