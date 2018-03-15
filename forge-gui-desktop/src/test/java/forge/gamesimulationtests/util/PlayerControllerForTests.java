@@ -172,6 +172,12 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
+    public <T extends GameEntity> List<T> chooseEntitiesForEffect(FCollectionView<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, Player relatedPlayer) {
+        // this isn't used
+        return null;
+    }
+
+    @Override
     public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         return true;
     }
@@ -608,6 +614,12 @@ public class PlayerControllerForTests extends PlayerController {
             reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
         }
         return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player, decider);
+    }
+
+    @Override
+    public List<Card> chooseCardsForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, DelayedReveal delayedReveal, String selectPrompt, Player decider) {
+        // this isn't used
+        return null;
     }
 
     @Override
