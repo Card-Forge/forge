@@ -297,7 +297,7 @@ public enum DeckFormat {
         if (maxCopies < Integer.MAX_VALUE) {
             //Must contain no more than 4 of the same card
             //shared among the main deck and sideboard, except
-            //basic lands, Shadowborn Apostle and Relentless Rats
+            //basic lands, Shadowborn Apostle, Relentless Rats and Rat Colony
 
             final CardPool allCards = deck.getAllCardsInASinglePool(hasCommander());
             final ImmutableSet<String> limitExceptions = ImmutableSet.of("Relentless Rats", "Shadowborn Apostle", "Rat Colony");
