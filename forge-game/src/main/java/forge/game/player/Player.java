@@ -1825,7 +1825,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (getOutcome() != null && getOutcome().lossState == GameLossReason.Conceded) {
             return false;
         }
-        return (hasKeyword("You can't lose the game.") || Iterables.any(getOpponents(), PlayerPredicates.CANT_WIN));
+        return hasKeyword("You can't lose the game.");
     }
 
     public final boolean cantLoseForZeroOrLessLife() {
