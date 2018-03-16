@@ -67,7 +67,7 @@ public class MatchScreen extends FScreen {
     private final VDevMenu devMenu;
     private final FieldScroller scroller;
     private final VPrompt bottomPlayerPrompt, topPlayerPrompt;
-    private VPlayerPanel bottomPlayerPanel, bottomPlayerPanel2, topPlayerPanel, topPlayerPanel2;
+    private VPlayerPanel bottomPlayerPanel, topPlayerPanel;
     private AbilityEffect activeEffect;
 
     public MatchScreen(List<VPlayerPanel> playerPanels0) {
@@ -77,20 +77,15 @@ public class MatchScreen extends FScreen {
 
         for (VPlayerPanel playerPanel : playerPanels0) {
             playerPanels.put(playerPanel.getPlayer(), scroller.add(playerPanel));
+            playerPanel.setFlipped(true);
         }
         bottomPlayerPanel = playerPanels0.get(0);
+        bottomPlayerPanel.setFlipped(false);
         topPlayerPanel = playerPanels0.get(1);
-        topPlayerPanel.setFlipped(true);
-        if(is3Player()||is4Player()){
-            topPlayerPanel2 = playerPanels0.get(2);
-            topPlayerPanel2.setFlipped(true);
-        }
-        if(is4Player()){
-            bottomPlayerPanel2 = playerPanels0.get(3);
-            bottomPlayerPanel2.setFlipped(true);
-        }
         playerPanelsList=playerPanels0;
-        Collections.reverse(playerPanelsList);
+        //reorder list so bottom player is at the end of the list ensuring top to bottom turn order
+        playerPanelsList.remove(bottomPlayerPanel);
+        playerPanelsList.add(bottomPlayerPanel);
 
 
         bottomPlayerPrompt = add(new VPrompt("", "",
@@ -282,20 +277,16 @@ public class MatchScreen extends FScreen {
         return topPlayerPanel;
     }
 
-    public VPlayerPanel getTopPlayerPanel2() {
-        return topPlayerPanel2;
-    }
-
     public VPlayerPanel getBottomPlayerPanel() {
         return bottomPlayerPanel;
     }
 
-    public VPlayerPanel getBottomPlayerPanel2() {
-        return bottomPlayerPanel2;
-    }
-
     public Map<PlayerView, VPlayerPanel> getPlayerPanels() {
         return playerPanels;
+    }
+
+    public List<VPlayerPanel> getPlayerPanelsList() {
+        return playerPanelsList;
     }
 
     @Override
@@ -516,9 +507,9 @@ public class MatchScreen extends FScreen {
 
         @Override
         public void drawOverlay(Graphics g) {
-            float midField = topPlayerPanel.getBottom();
+            float midField;
             float x = 0;
-            float y = midField - topPlayerPanel.getField().getHeight();
+            float y;
             float w = getWidth();
 
             //field separator lines

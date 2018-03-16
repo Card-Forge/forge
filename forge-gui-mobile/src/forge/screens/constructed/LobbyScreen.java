@@ -165,7 +165,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 /*playerPanels.get(4).initialize(FPref.CONSTRUCTED_P5_DECK_STATE, DeckType.COLOR_DECK);
                 playerPanels.get(5).initialize(FPref.CONSTRUCTED_P6_DECK_STATE, DeckType.COLOR_DECK);
                 playerPanels.get(6).initialize(FPref.CONSTRUCTED_P7_DECK_STATE, DeckType.COLOR_DECK);
-                playerPanels.get(7).initialize(FPref.CONSTRUCTED_P8_DECK_STATE, DeckType.COLOR_DECK);*/ //TODO: Support multiplayer and improve performance of loading this screen by using background thread
+                playerPanels.get(7).initialize(FPref.CONSTRUCTED_P8_DECK_STATE, DeckType.COLOR_DECK);*/ //TODO: Improve performance of loading this screen by using background thread
 
                 FThreads.invokeInEdtLater(new Runnable() {
                     @Override
@@ -176,7 +176,6 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             }
         });
 
-        //disable player count for now until multiplayer supported
         lblPlayers.setEnabled(true);
         cbPlayerCount.setEnabled(true);
     }
