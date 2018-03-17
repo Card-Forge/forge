@@ -1173,6 +1173,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 && !sa.hasParam("DifferentNames")
                 && !sa.hasParam("DifferentCMC")
                 && !sa.hasParam("AtRandom")
+                && !sa.hasParam("ChangeNum") // TODO: doesn't work with card number limits, e.g. Doomsday
                 && (!sa.hasParam("Defined") || sa.hasParam("ChooseFromDefined"))
                 && sa.getParam("WithTotalCMC") == null;
     }
