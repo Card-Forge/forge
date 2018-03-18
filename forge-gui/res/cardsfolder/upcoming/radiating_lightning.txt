@@ -1,0 +1,6 @@
+Name:Radiating Lightning
+ManaCost:3 R
+Types:Instant
+A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Player | NumDmg$ 3 | SubAbility$ DmgAll | SpellDescription$ CARDNAME deals 3 damage to target player and 1 damage to each creature that player controls.
+SVar:DmgAll:DB$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.TargetedPlayerCtrl
+Oracle:Radiating Lightning deals 3 damage to target player and 1 damage to each creature that player controls.
