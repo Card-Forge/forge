@@ -74,7 +74,7 @@ public enum Keyword {
     GRAVESTORM(SimpleKeyword.class, false, "When you cast this spell, copy it for each permanent that was put into a graveyard from the battlefield this turn. You may choose new targets for the copies."),
     HASTE(SimpleKeyword.class, true, "This creature can attack and {T} as soon as it comes under your control."),
     HAUNT(SimpleKeyword.class, false, "When this is put into a graveyard, exile it haunting target creature."),
-    HEXPROOF(SimpleKeyword.class, true, "This can't be the target of spells or abilities your opponents control."),
+    HEXPROOF(Hexproof.class, false, "This can't be the target of %s spells or abilities your opponents control."),
     HIDEAWAY(SimpleKeyword.class, false, "This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library."),
     HORSEMANSHIP(SimpleKeyword.class, true, "This creature can't be blocked except by creatures with horsemanship."),
     IMPROVISE(SimpleKeyword.class, true, "Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}."),

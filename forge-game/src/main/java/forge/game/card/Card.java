@@ -1526,6 +1526,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sbx.append(" (" + inst.getReminderText() + ")");
                     sbLong.append(sbx).append("\r\n");
                 }
+            } else if (keyword.startsWith("Hexproof:")) {
+                final String k[] = keyword.split(":");
+                sbLong.append("Hexproof from ").append(k[2])
+                    .append(" (").append(inst.getReminderText()).append(")").append("\r\n");
             } else if (keyword.endsWith(".") && !keyword.startsWith("Haunt")) {
                 sbLong.append(keyword).append("\r\n");
             } else if (keyword.startsWith("Presence")) {
@@ -4973,13 +4977,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                         sb.append(" with spells and abilities as though it didn't have shroud.");
                         if (!sa.getActivatingPlayer().hasKeyword(sb.toString())) {
                             result.setFalse();
-                        }
-                        break;
-                    case "Hexproof":
-                        if (sa.getActivatingPlayer().getOpponents().contains(getController())) {
-                            if (!sa.getActivatingPlayer().hasKeyword("Spells and abilities you control can target hexproof creatures")) {
-                                result.setFalse();
-                            }
                         }
                         break;
                     case "CARDNAME can't be enchanted.":
