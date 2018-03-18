@@ -84,6 +84,11 @@ public class StaticAbilityCantTarget {
             return false;
         }
 
+        if (params.containsKey("Hexproof") && (activator != null)) {
+            if (activator.hasKeyword("Spells and abilities you control can target hexproof creatures")) {
+                return false;
+            }
+        }
 
         return true;
     }

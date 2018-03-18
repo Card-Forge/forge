@@ -217,4 +217,12 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     public String toString() {
         return this.getOriginal();
     }
+
+    /* (non-Javadoc)
+     * @see forge.game.keyword.KeywordInterface#redundant(java.util.Collection)
+     */
+    @Override
+    public boolean redundant(Collection<KeywordInterface> list) {
+        return !list.isEmpty() && keyword.isMultipleRedundant;
+    }
 }

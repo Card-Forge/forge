@@ -1866,6 +1866,7 @@ public class CardFactoryUtil {
         CardCollectionView cardlist = p.getGame().getCardsIn(zones);
         final List<String> landkw = Lists.newArrayList();
         final List<String> protectionkw = Lists.newArrayList();
+        final List<String> hexproofkw = Lists.newArrayList();
         final List<String> allkw = Lists.newArrayList();
 
         for (Card c : CardLists.getValidCards(cardlist, restrictions, p, host, null)) {
@@ -1879,6 +1880,10 @@ public class CardFactoryUtil {
                     if (!protectionkw.contains(k)) {
                         protectionkw.add(k);
                     }
+                } else if (k.startsWith("Hexproof")) {
+                    if (!hexproofkw.contains(k)) {
+                        hexproofkw.add(k);
+                    }
                 }
                 if (!allkw.contains(k)) {
                     allkw.add(k);
@@ -1890,6 +1895,8 @@ public class CardFactoryUtil {
                 filteredkw.addAll(protectionkw);
             } else if (keyword.equals("Landwalk")) {
                 filteredkw.addAll(landkw);
+            } else if (keyword.equals("Hexproof")) {
+                filteredkw.addAll(hexproofkw);
             } else if (allkw.contains(keyword)) {
                 filteredkw.add(keyword);
             }
@@ -4202,6 +4209,21 @@ public class CardFactoryUtil {
             effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Secondary$ True"
                     + " | Amount$ Escalate | Cost$ "+ manacost +" | EffectZone$ All"
                     + " | Description$ " + sb.toString() + " (" + inst.getReminderText() + ")";
+        } else if (keyword.startsWith("Hexproof")) {
+            final StringBuilder sbDesc = new StringBuilder("Hexproof");
+            final StringBuilder sbValid = new StringBuilder();
+
+            if (!keyword.equals("Hexproof")) {
+                final String k[] = keyword.split(":");
+
+                sbDesc.append(" from ").append(k[2]);
+                sbValid.append("| ValidSource$ ").append(k[1]);
+            }
+
+            effect = "Mode$ CantTarget | Hexproof$ True | ValidCard$ Card.Self | Secondary$ True"
+                    + sbValid.toString() + " | Activator$ Opponent | Description$ "
+                    + sbDesc.toString() + " (" + inst.getReminderText() + ")";
+
         } else if (keyword.startsWith("Strive")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
