@@ -107,7 +107,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         String fetchPlayer = fetcherNames;
         if (chooserNames.equals(fetcherNames)) {
-            fetchPlayer = fetchers.size() > 1 ? "their" : "his/her";
+            fetchPlayer = "their";
         }
 
         String origin = "";
@@ -179,8 +179,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 sb.append(num).append(" of those ").append(type).append(" card(s)");
             } else {
                 sb.append(destination.equals("Exile") ? " exiles " : " puts ");
-                sb.append(num).append(" ").append(type).append(" card(s) from");
-                sb.append(fetchPlayer).append(" hand");
+                if (type == "Card") {
+                    sb.append(num);
+                } else {
+                    sb.append(num).append(" ").append(type);
+                }
+                sb.append(" card(s) from ").append(fetchPlayer).append(" hand");
             }
 
             if (destination.equals("Battlefield")) {
@@ -202,7 +206,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     sb.append(" on the bottom");
                 }
 
-                sb.append(" of ").append(fetchPlayer).append("'s library");
+                sb.append(" of ").append(fetchPlayer);
+                if (fetchPlayer != "their") {
+                    sb.append("'s");
+                }
+                sb.append(" library");
             }
 
             sb.append(".");
