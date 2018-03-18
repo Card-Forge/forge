@@ -82,7 +82,7 @@ public abstract class GameState {
     private String precastHuman = null;
     private String precastAI = null;
 
-    private int turn;
+    private int turn = 1;
 
     // Targeting for precast spells in a game state (mostly used by Puzzle Mode game states)
     private final int TARGET_NONE = -1; // untargeted spell (e.g. Joraga Invocation)
@@ -398,10 +398,9 @@ public abstract class GameState {
 
         if (categoryName.equals("turn")) {
             turn = Integer.parseInt(categoryValue);
-        } else {
-            turn = 1;
         }
-        if (categoryName.endsWith("life")) {
+
+        else if (categoryName.endsWith("life")) {
             if (isHuman)
                 humanLife = Integer.parseInt(categoryValue);
             else
