@@ -415,6 +415,13 @@ public final class QuestUtilCards {
 
         final int leftInPool = questAssets.getCardPool().count(card);
 
+        // If card is a nonfoil basic land of the "free" kind, do not remove from the deck
+        // but pretend as if it was added through "Add Basic Land".
+        if ((!card.isFoil())
+                && (card.isVeryBasicLand())) {
+            return;
+        }
+
         // remove sold cards from all decks:
         for (final Deck deck : questController.getMyDecks()) {
 
