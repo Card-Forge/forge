@@ -1,6 +1,6 @@
 Name:Whisper, Blood Liturgist
 ManaCost:3 B
-Types:Creature Horror
+Types:Legendary Creature Human Cleric
 PT:2/2
 A:AB$ ChangeZone | Cost$ T Sac<2/Creature> | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return target creature card from your graveyard to the battlefield.
 SVar:AIPreference:SacCost$Creature.cmcLE3
