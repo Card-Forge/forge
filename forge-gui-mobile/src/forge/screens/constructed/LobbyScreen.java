@@ -223,7 +223,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     }
 
     void updateLayoutForVariants() {
-        for (int i = 0; i < MAX_PLAYERS; i++) {
+        for (int i = 0; i < cbPlayerCount.getSelectedItem(); i++) {
             playerPanels.get(i).updateVariantControlsVisibility();
         }
         playersScroll.revalidate();
@@ -461,12 +461,11 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     @Override
     public void update(final boolean fullUpdate) {
         int playerCount = lobby.getNumberOfSlots();
-        //cbPlayerCount.setSelectedItem(playerCount);
 
         updateVariantSelection();
 
         final boolean allowNetworking = lobby.isAllowNetworking();
-        for (int i = 0; i < MAX_PLAYERS; i++) {
+        for (int i = 0; i < cbPlayerCount.getSelectedItem(); i++) {
             final boolean hasPanel = i < playerPanels.size();
             if (i < playerCount) {
                 // visible panels

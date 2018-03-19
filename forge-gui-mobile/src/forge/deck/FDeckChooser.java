@@ -815,6 +815,10 @@ public class FDeckChooser extends FScreen {
         /*if(selectedDeckType.equals(DeckType.STANDARD_CARDGEN_DECK)){
             return DeckgenUtil.buildCardGenDeck(lstDecks.getSelectedItem().getName());
         }*/
+        //ensure a deck is selected first
+        if(lstDecks.getSelectedIndex() == -1){
+            lstDecks.setSelectedIndex(0);
+        }
         DeckProxy proxy = lstDecks.getSelectedItem();
         if (proxy == null) { return null; }
         return proxy.getDeck();
