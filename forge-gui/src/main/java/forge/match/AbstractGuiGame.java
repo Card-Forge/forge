@@ -238,7 +238,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 // Don't immediately close, wait for win/lose screen
                 return false;
             } else {
-                return true;
+                for(PlayerView player: getLocalPlayers()){
+                    if(!player.isAI()){
+                        getGameController(player).nextGameDecision(NextGameDecision.QUIT);
+                    }
+                }
+                return false;
             }
         }
         else if (spectator == null) {
@@ -421,7 +426,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
      * @return null if choices is missing, empty, or if the users' choices are
      *         empty; otherwise, returns the first item in the List returned by
      *         getChoices.
-     * @see #getChoices(String, int, int, Object...)
+     * @see #getChoices(String, int, int, List)
      */
     @Override
     public <T> T oneOrNone(final String message, final List<T> choices) {
