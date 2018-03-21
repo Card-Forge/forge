@@ -27,6 +27,12 @@ public class VAvatar extends FDisplayObject {
         setSize(WIDTH, HEIGHT);
     }
 
+    public VAvatar(PlayerView player0, float size) {
+        player = player0;
+        image = MatchController.getPlayerAvatar(player);
+        setSize(size, size);
+    }
+
     @Override
     public boolean tap(float x, float y, int count) {
         ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread in case a dialog needs to be shown

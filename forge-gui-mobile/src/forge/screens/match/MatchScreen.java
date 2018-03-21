@@ -1,10 +1,6 @@
 package forge.screens.match;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -63,6 +59,7 @@ public class MatchScreen extends FScreen {
     public static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
 
     private final Map<PlayerView, VPlayerPanel> playerPanels = Maps.newHashMap();
+    private List<VPlayerPanel> playerPanelsList;
     private final VGameMenu gameMenu;
     private final VPlayers players;
     private final VLog log;
@@ -80,10 +77,16 @@ public class MatchScreen extends FScreen {
 
         for (VPlayerPanel playerPanel : playerPanels0) {
             playerPanels.put(playerPanel.getPlayer(), scroller.add(playerPanel));
+            playerPanel.setFlipped(true);
         }
         bottomPlayerPanel = playerPanels0.get(0);
+        bottomPlayerPanel.setFlipped(false);
         topPlayerPanel = playerPanels0.get(1);
-        topPlayerPanel.setFlipped(true);
+        playerPanelsList=playerPanels0;
+        //reorder list so bottom player is at the end of the list ensuring top to bottom turn order
+        playerPanelsList.remove(bottomPlayerPanel);
+        playerPanelsList.add(bottomPlayerPanel);
+
 
         bottomPlayerPrompt = add(new VPrompt("", "",
                 new FEventHandler() {
@@ -152,6 +155,14 @@ public class MatchScreen extends FScreen {
             log.setMenuTab(new HiddenMenuTab(log));
             devMenu.setMenuTab(new HiddenMenuTab(devMenu));
         }
+    }
+
+    private boolean is4Player(){
+        return playerPanels.keySet().size()==4;
+    }
+
+    private boolean is3Player(){
+        return playerPanels.keySet().size()==3;
     }
 
     private IGameController getGameController() {
@@ -272,6 +283,10 @@ public class MatchScreen extends FScreen {
 
     public Map<PlayerView, VPlayerPanel> getPlayerPanels() {
         return playerPanels;
+    }
+
+    public List<VPlayerPanel> getPlayerPanelsList() {
+        return playerPanelsList;
     }
 
     @Override
@@ -492,64 +507,64 @@ public class MatchScreen extends FScreen {
 
         @Override
         public void drawOverlay(Graphics g) {
-            float midField = topPlayerPanel.getBottom();
+            float midField;
             float x = 0;
-            float y = midField - topPlayerPanel.getField().getHeight();
+            float y;
             float w = getWidth();
 
             //field separator lines
             if (!Forge.isLandscapeMode()) {
-                if (topPlayerPanel.getSelectedTab() == null) {
-                    y++; //ensure border goes all the way across under avatar
+                for (VPlayerPanel playerPanel: playerPanelsList){
+                    midField = playerPanel.getTop();
+                    y = midField - playerPanel.getField().getHeight();
+                    if(playerPanel.getSelectedTab() == null) {
+                        y++;
+                    }
+                    g.drawLine(1, BORDER_COLOR, x, y, w, y);
                 }
-                g.drawLine(1, BORDER_COLOR, 0, y, w, y);
             }
 
-            y = midField - 0.5f;
-            g.drawLine(1, BORDER_COLOR, x, y, w, y);
+            for (VPlayerPanel playerPanel: playerPanelsList){
+                midField = playerPanel.getTop();
+                y = midField - 0.5f;
+                g.drawLine(1, BORDER_COLOR, x, y, w, y);
+            }
 
             if (!Forge.isLandscapeMode()) {
-                y = midField + bottomPlayerPanel.getField().getHeight();
-                g.drawLine(1, BORDER_COLOR, 0, y, w, y);
+                y = bottomPlayerPanel.getTop() + bottomPlayerPanel.getField().getHeight();
+                g.drawLine(1, BORDER_COLOR, x, y, w, y);
             }
         }
 
-        @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
             float totalHeight = visibleHeight + extraHeight;
+            float avatarHeight = VAvatar.HEIGHT;
+            if(is4Player() || is3Player()){
+                avatarHeight *= 0.5f;
+            }
+            float playerCount = getPlayerPanels().keySet().size();
 
             //determine player panel heights based on visibility of zone displays
-            float topPlayerPanelHeight, bottomPlayerPanelHeight;
-            if (Forge.isLandscapeMode()) {
-                topPlayerPanelHeight = totalHeight / 2;
-                bottomPlayerPanelHeight = topPlayerPanelHeight;
+            float cardRowsHeight = totalHeight - playerCount * avatarHeight;
+            float totalCardRows=0;
+            for(VPlayerPanel playerPanel:playerPanelsList){
+                if(playerPanel.getSelectedTab() != null){
+                    totalCardRows += 1;
+                }
+                totalCardRows += 2;
             }
-            else {
-                float cardRowsHeight = totalHeight - 2 * VAvatar.HEIGHT;
-                if (topPlayerPanel.getSelectedTab() == null) {
-                    if (bottomPlayerPanel.getSelectedTab() != null) {
-                        topPlayerPanelHeight = cardRowsHeight * 2f / 5f;
-                        bottomPlayerPanelHeight = cardRowsHeight * 3f / 5f;
-                    }
-                    else {
-                        topPlayerPanelHeight = cardRowsHeight / 2f;
-                        bottomPlayerPanelHeight = topPlayerPanelHeight;
-                    }
+            float y=0;
+            for(VPlayerPanel playerPanel:playerPanelsList){
+                float panelHeight;
+                if(playerPanel.getSelectedTab() != null){
+                    panelHeight = cardRowsHeight * 3f / totalCardRows;
+                }else{
+                    panelHeight = cardRowsHeight * 2f / totalCardRows;
                 }
-                else if (bottomPlayerPanel.getSelectedTab() == null) {
-                    topPlayerPanelHeight = cardRowsHeight * 3f / 5f;
-                    bottomPlayerPanelHeight = cardRowsHeight * 2f / 5f;
-                }
-                else {
-                    topPlayerPanelHeight = cardRowsHeight / 2f;
-                    bottomPlayerPanelHeight = topPlayerPanelHeight;
-                }
-                topPlayerPanelHeight += VAvatar.HEIGHT;
-                bottomPlayerPanelHeight += VAvatar.HEIGHT;
+                panelHeight += avatarHeight;
+                playerPanel.setBounds(0, y, visibleWidth, panelHeight);
+                y += panelHeight;
             }
-
-            topPlayerPanel.setBounds(0, 0, visibleWidth, topPlayerPanelHeight);
-            bottomPlayerPanel.setBounds(0, totalHeight - bottomPlayerPanelHeight, visibleWidth, bottomPlayerPanelHeight);
             return new ScrollBounds(visibleWidth, totalHeight);
         }
 

@@ -232,7 +232,7 @@ public class PlayerPanel extends FContainer {
         setMayControl(mayControl0);
 
         //disable team combo boxes for now
-        cbTeam.setEnabled(false);
+        cbTeam.setEnabled(true);
     }
 
     public void initialize(FPref savedStateSetting, FPref savedStateSettingCommander, FPref savedStateSettingTinyLeader, DeckType defaultDeckType) {
