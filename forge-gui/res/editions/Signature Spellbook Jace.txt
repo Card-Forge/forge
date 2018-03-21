@@ -1,0 +1,16 @@
+[metadata]
+Code=SS1
+Date=2018-06-15
+Name=Signature Spellbook: Jace
+MciCode=ss1
+Type=Reprint
+
+[cards]
+1 M Jace Beleren
+2 R Blue Elemental Blast
+3 R Brainstorm
+4 R Counterspell
+5 R Gifts Ungiven
+6 R Mystical Tutor
+7 R Negate
+8 R Threads of Disloyalty
