@@ -971,48 +971,58 @@ public class FDeckChooser extends FScreen {
             @Override
             public void run(final Integer numOpponents) {
                 if (numOpponents == null) { return; }
-                List<DeckType> deckTypes=null;
-                if(FModel.isdeckGenMatrixLoaded()) {
-                    deckTypes=Arrays.asList(new DeckType[] {
-                            DeckType.CUSTOM_DECK,
-                            DeckType.PRECONSTRUCTED_DECK,
-                            DeckType.QUEST_OPPONENT_DECK,
-                            DeckType.COLOR_DECK,
-                            DeckType.STANDARD_COLOR_DECK,
-                            DeckType.STANDARD_CARDGEN_DECK,
-                            DeckType.MODERN_COLOR_DECK,
-                            DeckType.MODERN_CARDGEN_DECK,
-                            DeckType.THEME_DECK
-                    });
-                }else{
-                    deckTypes=Arrays.asList(new DeckType[] {
-                            DeckType.CUSTOM_DECK,
-                            DeckType.PRECONSTRUCTED_DECK,
-                            DeckType.QUEST_OPPONENT_DECK,
-                            DeckType.COLOR_DECK,
-                            DeckType.STANDARD_COLOR_DECK,
-                            DeckType.MODERN_COLOR_DECK,
-                            DeckType.THEME_DECK
-                    });
+                List<DeckType> deckTypes = Arrays.asList(
+                        DeckType.CUSTOM_DECK,
+                        DeckType.PRECONSTRUCTED_DECK,
+                        DeckType.QUEST_OPPONENT_DECK,
+                        DeckType.COLOR_DECK,
+                        DeckType.STANDARD_COLOR_DECK,
+                        DeckType.STANDARD_CARDGEN_DECK,
+                        DeckType.MODERN_COLOR_DECK,
+                        DeckType.MODERN_CARDGEN_DECK,
+                        DeckType.THEME_DECK,
+                        DeckType.NET_DECK
+                );
+                if (!FModel.isdeckGenMatrixLoaded()) {
+                    deckTypes.remove(DeckType.STANDARD_CARDGEN_DECK);
+                    deckTypes.remove(DeckType.MODERN_CARDGEN_DECK);
                 }
+
                 ListChooser<DeckType> chooser = new ListChooser<DeckType>(
-                        "Choose allowed deck types for opponents", 0, 7, deckTypes, null, new Callback<List<DeckType>>() {
+                        "Choose allowed deck types for opponents", 0, deckTypes.size(), deckTypes, null, new Callback<List<DeckType>>() {
                     @Override
                     public void run(final List<DeckType> allowedDeckTypes) {
                         if (allowedDeckTypes == null || allowedDeckTypes.isEmpty()) { return; }
 
-                        LoadingOverlay.show("Loading new game...", new Runnable() {
+                        FThreads.invokeInBackgroundThread(new Runnable() { //needed for loading net decks
                             @Override
                             public void run() {
-                                GauntletData gauntlet = GauntletUtil.createQuickGauntlet(userDeck, numOpponents, allowedDeckTypes);
-                                FModel.setGauntletData(gauntlet);
+                                final NetDeckCategory netCat;
+                                if (allowedDeckTypes.contains(DeckType.NET_DECK)) {
+                                    netCat = NetDeckCategory.selectAndLoad(GameType.Constructed);
+                                } else {
+                                    netCat = null;
+                                }
 
-                                List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
-                                RegisteredPlayer humanPlayer = new RegisteredPlayer(userDeck).setPlayer(GamePlayerUtil.getGuiPlayer());
-                                players.add(humanPlayer);
-                                players.add(new RegisteredPlayer(gauntlet.getDecks().get(gauntlet.getCompleted())).setPlayer(GamePlayerUtil.createAiPlayer()));
+                                FThreads.invokeInEdtLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        LoadingOverlay.show("Loading new game...", new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                GauntletData gauntlet = GauntletUtil.createQuickGauntlet(userDeck, numOpponents, allowedDeckTypes, netCat);
+                                                FModel.setGauntletData(gauntlet);
 
-                                gauntlet.startRound(players, humanPlayer);
+                                                List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
+                                                RegisteredPlayer humanPlayer = new RegisteredPlayer(userDeck).setPlayer(GamePlayerUtil.getGuiPlayer());
+                                                players.add(humanPlayer);
+                                                players.add(new RegisteredPlayer(gauntlet.getDecks().get(gauntlet.getCompleted())).setPlayer(GamePlayerUtil.createAiPlayer()));
+
+                                                gauntlet.startRound(players, humanPlayer);
+                                            }
+                                        });
+                                    }
+                                });
                             }
                         });
                     }

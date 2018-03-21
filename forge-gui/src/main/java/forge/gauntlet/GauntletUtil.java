@@ -1,18 +1,16 @@
 package forge.gauntlet;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import forge.deck.Deck;
 import forge.deck.DeckType;
 import forge.deck.DeckgenUtil;
+import forge.deck.NetDeckCategory;
 import forge.model.FModel;
 
 public class GauntletUtil {
-    public static GauntletData createQuickGauntlet(final Deck userDeck, final int numOpponents, final List<DeckType> allowedDeckTypes) {
+    public static GauntletData createQuickGauntlet(final Deck userDeck, final int numOpponents, final List<DeckType> allowedDeckTypes, NetDeckCategory netDecks) {
         GauntletData gauntlet = new GauntletData();
         setDefaultGauntletName(gauntlet, GauntletIO.PREFIX_QUICK);
         FModel.setGauntletData(gauntlet);
@@ -21,6 +19,8 @@ public class GauntletUtil {
         Deck deck;
         final List<String> eventNames = new ArrayList<String>();
         final List<Deck> decks = new ArrayList<Deck>();
+
+        final Object[] netDeckNames = netDecks != null ? netDecks.getItemNames().toArray() : null;
 
         for (int i = 0; i < numOpponents; i++) {
             int randType = (int)Math.floor(Math.random() * allowedDeckTypes.size());
@@ -55,6 +55,11 @@ public class GauntletUtil {
                 break;
             case THEME_DECK:
                 deck = DeckgenUtil.getRandomThemeDeck();
+                eventNames.add(deck.getName());
+                break;
+            case NET_DECK:
+                int deckIndex = (int)Math.floor(Math.random() * netDeckNames.length);
+                deck = netDecks.get((String) netDeckNames[deckIndex]);
                 eventNames.add(deck.getName());
                 break;
             default:
