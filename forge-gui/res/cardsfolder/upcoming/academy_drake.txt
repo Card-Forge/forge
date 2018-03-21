@@ -1,0 +1,9 @@
+Name:Academy Drake
+ManaCost:2 U
+Types:Creature Drake
+PT:2/2
+K:Flying
+K:Kicker:4
+T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked | Origin$ Any | Destination$ Battlefield | Execute$ TrigPut | Static$ True | TriggerDescription$ If CARDNAME was kicked, it enters the battlefield with two +1/+1 counters on it.
+SVar:TrigPut:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
+Oracle:Flying\nKicker {4} (You may pay an additional {4} as you cast this spell.)\nIf Academy Drake was kicked, it enters the battlefield with two +1/+1 counters on it. 
