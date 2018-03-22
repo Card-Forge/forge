@@ -137,12 +137,16 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                 } else {
                     cnum = AbilityUtils.calculateAmount(host, counterNum, sa);
                 }
-                src.subtractCounter(cType, cnum);
-                csum += cnum;
+                if(cnum > 0) {
+                    src.subtractCounter(cType, cnum);
+                    game.updateLastStateForCard(src);
+                    csum += cnum;
+                }
             }
 
             if (csum > 0) {
                 dest.addCounter(cType, csum, host, true);
+                game.updateLastStateForCard(dest);
             }
             return;
         } else if (sa.hasParam("ValidDefined")) {
@@ -170,6 +174,8 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                         tgtCards, sa, sb.toString(), 0, tgtCards.size(), true);
             }
 
+            boolean updateSource = false;
+
             for (final Card dest : tgtCards) {
                 // rule 121.5: If the first and second objects are the same object, nothing happens
                 if (source.equals(dest)) {
@@ -193,8 +199,16 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                 sb.append("Put how many ").append(cType.getName()).append(" counters on ").append(dest).append("?");
                 int cnum = player.getController().chooseNumber(sa, sb.toString(), 0, source.getCounters(cType), params);
 
-                source.subtractCounter(cType, cnum);
-                dest.addCounter(cType, cnum, host, true);
+                if (cnum > 0) {
+                    source.subtractCounter(cType, cnum);
+                    dest.addCounter(cType, cnum, host, true);
+                    game.updateLastStateForCard(dest);
+                    updateSource = true;
+                }
+            }
+            if (updateSource) {
+                // update source
+                game.updateLastStateForCard(source);
             }
             return;
         }
@@ -249,6 +263,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                     if (source.getCounters(cType) >= cntToMove) {
                         source.subtractCounter(cType, cntToMove);
                         dest.addCounter(cType, cntToMove, host, true);
+                        game.updateLastStateForCard(dest);
                     }
                 } else {
                     // any counterType currently only Leech Bonder
@@ -280,11 +295,16 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                     int chosenAmount = pc.chooseNumber(
                             sa, sb.toString(), 0, Math.min(tgtCounters.get(chosenType), cntToMove), params);
 
-                    dest.addCounter(chosenType, chosenAmount, host, true);
-                    source.subtractCounter(chosenType, chosenAmount);
-                    cntToMove -= chosenAmount;
+                    if (chosenAmount > 0) {
+                        dest.addCounter(chosenType, chosenAmount, host, true);
+                        source.subtractCounter(chosenType, chosenAmount);
+                        game.updateLastStateForCard(dest);
+                        cntToMove -= chosenAmount;
+                    }
                 }
             }
         }
+        // update source
+        game.updateLastStateForCard(source);
     } // moveCounterResolve
 }
