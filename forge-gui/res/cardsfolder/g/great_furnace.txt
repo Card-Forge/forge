@@ -1,7 +1,6 @@
 Name:Great Furnace
 ManaCost:no cost
 Types:Artifact Land
-Text:(Great Furnace isn't a spell.)
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/great_furnace.jpg
-Oracle:{T}: Add {R} to your mana pool.
+Oracle:{T}: Add {R}.
