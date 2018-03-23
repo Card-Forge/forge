@@ -1,2 +1,5 @@
+- Multiplayer on Mobile Forge -
+Mobile Forge now supports 3 and 4 player multiplayer matches in Constructed mode, you can select the number of players from the dropdown menu on the Constructed tab. Please note that matches with more than two players are more taxing for the mobile device and thus require more powerful hardware for prolonged gameplay without considerable slowdowns.
+
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.
