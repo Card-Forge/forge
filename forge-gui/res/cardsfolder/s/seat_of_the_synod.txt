@@ -1,6 +1,6 @@
 Name:Seat of the Synod
 ManaCost:no cost
 Types:Artifact Land
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seat_of_the_synod.jpg
-Oracle:{T}: Add {U} to your mana pool.
+Oracle:{T}: Add {U}.

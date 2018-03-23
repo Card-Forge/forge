@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Creature Elf Warrior
 PT:4/3
 K:Trample
-S:Mode$ CantBeCast | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ EQ0 | EffectZone$ All | Description$ Cast CARDNAME only if you've cast another green spell this turn.
+S:Mode$ CantBeCast | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ EQ0 | EffectZone$ All | Description$ Cast this spell only if you've cast another green spell this turn.
 SVar:X:Count$ThisTurnCast_Card.Green+Other+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/talaras_battalion.jpg
-Oracle:Trample\nCast Talara's Battalion only if you've cast another green spell this turn.
+Oracle:Cast this spell only if you've cast another green spell this turn.\nTrample
