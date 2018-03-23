@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.Map;
 
+import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -35,6 +36,7 @@ public class CountersMultiplyEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
+        final Game game = host.getGame();
 
         final CounterType counterType = getCounterType(sa);
         final int n = Integer.valueOf(sa.getParamOrDefault("Multiplier", "2")) - 1; 
@@ -47,6 +49,7 @@ public class CountersMultiplyEffect extends SpellAbilityEffect {
                     tgtCard.addCounter(e.getKey(), e.getValue() * n, host, false);
                 }
             }
+            game.updateLastStateForCard(tgtCard);
         }
     }
 
