@@ -114,6 +114,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                     for (Map.Entry<CounterType, Integer> e : tgtCard.getCounters().entrySet()) {
                         tgtCard.subtractCounter(e.getKey(), e.getValue());
                     }
+                    game.updateLastStateForCard(tgtCard);
                     continue;
                 } else if (num.equals("All")) {
                     cntToRemove = tgtCard.getCounters(counterType);
@@ -139,13 +140,16 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                         params.put("CounterType", chosenType);
                         int chosenAmount = pc.chooseNumber(sa, prompt, 1, max, params);
 
-                        tgtCard.subtractCounter(chosenType, chosenAmount);
-                        if (rememberRemoved) {
-                            for (int i = 0; i < chosenAmount; i++) {
-                                card.addRemembered(Pair.of(chosenType, i));
+                        if (chosenAmount > 0) {
+                            tgtCard.subtractCounter(chosenType, chosenAmount);
+                            game.updateLastStateForCard(tgtCard);
+                            if (rememberRemoved) {
+                                for (int i = 0; i < chosenAmount; i++) {
+                                    card.addRemembered(Pair.of(chosenType, i));
+                                }
                             }
+                            cntToRemove -= chosenAmount;
                         }
-                        cntToRemove -= chosenAmount;
                     }
                 } else {
                     cntToRemove = Math.min(cntToRemove, tgtCard.getCounters(counterType));
@@ -160,12 +164,15 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                         }
                             
                     }
-                    if (rememberRemoved) {
-                        for (int i = 0; i < cntToRemove; i++) {
-                            card.addRemembered(Pair.of(counterType, i));
+                    if (cntToRemove > 0) {
+                        tgtCard.subtractCounter(counterType, cntToRemove);
+                        if (rememberRemoved) {
+                            for (int i = 0; i < cntToRemove; i++) {
+                                card.addRemembered(Pair.of(counterType, i));
+                            }
                         }
+                        game.updateLastStateForCard(tgtCard);
                     }
-                    tgtCard.subtractCounter(counterType, cntToRemove);
                 }
             }
         }

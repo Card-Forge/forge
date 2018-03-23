@@ -72,7 +72,10 @@ public class CountersRemoveAllEffect extends SpellAbilityEffect {
                 counterAmount = tgtCard.getCounters(CounterType.valueOf(type));
             }
 
-            tgtCard.subtractCounter(CounterType.valueOf(type), counterAmount);
+            if (counterAmount > 0) {
+                tgtCard.subtractCounter(CounterType.valueOf(type), counterAmount);
+                game.updateLastStateForCard(tgtCard);
+            }
         }
         if (sa.hasParam("RememberAmount")) {
             sa.getHostCard().setChosenNumber(numberRemoved);

@@ -44,6 +44,10 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         final ZoneType zone = sa.hasParam("ValidZone") ? ZoneType.smartValueOf(sa.getParam("ValidZone")) : ZoneType.Battlefield;
         final Game game = sa.getActivatingPlayer().getGame();
 
+        if (counterAmount <= 0) {
+            return;
+        }
+        
         CardCollectionView cards = game.getCardsIn(zone);
         cards = CardLists.getValidCards(cards, valid, sa.getHostCard().getController(), sa.getHostCard());
 
@@ -59,6 +63,7 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
                 // adding counters to something like re-suspend cards
                 tgtCard.addCounter(CounterType.valueOf(type), counterAmount, host, false);
             }
+            game.updateLastStateForCard(tgtCard);
         }
     }
 

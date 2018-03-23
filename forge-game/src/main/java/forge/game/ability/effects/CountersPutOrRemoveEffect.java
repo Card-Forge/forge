@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -43,8 +44,13 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
+        final Game game = source.getGame();
         final int counterAmount = AbilityUtils.calculateAmount(source, sa.getParam("CounterNum"), sa);
-        
+
+        if (counterAmount <= 0) {
+            return;
+        }
+
         CounterType ctype = null;
         if (sa.hasParam("CounterType")) {
             ctype = CounterType.valueOf(sa.getParam("CounterType"));
@@ -60,6 +66,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
                     } else {
                         addOrRemoveCounter(sa, tgtCard, ctype, counterAmount);
                     }
+                    game.updateLastStateForCard(tgtCard);
                 }
             }
         }
