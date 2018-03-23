@@ -102,7 +102,7 @@ public class NewGauntletScreen extends LaunchScreen {
                             public void run(Deck userDeck) {
                                 if (userDeck == null) { return; }
 
-                                GauntletData gauntlet = GauntletUtil.createQuickGauntlet(userDeck, numOpponents, allowedDeckTypes);
+                                GauntletData gauntlet = GauntletUtil.createQuickGauntlet(userDeck, numOpponents, allowedDeckTypes, null);
                                 launchGauntlet(gauntlet);
                             }
                         });
