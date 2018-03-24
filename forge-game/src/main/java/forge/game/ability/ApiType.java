@@ -1,10 +1,10 @@
 package forge.game.ability;
 
 
-import com.google.common.collect.Maps;
 import forge.game.ability.effects.*;
 import forge.util.ReflectionUtil;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /** 
@@ -164,7 +164,13 @@ public enum ApiType {
     private final SpellAbilityEffect instanceEffect;
     private final Class<? extends SpellAbilityEffect> clsEffect;
 
-    private static final Map<String, ApiType> allValues = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
+    private static final Map<String, ApiType> allValues = new HashMap<>();
+    
+    static {
+    	for(ApiType t : ApiType.values()) {
+    		allValues.put(t.name(), t);
+    	}
+    }
 
     ApiType(Class<? extends SpellAbilityEffect> clsEf) { this(clsEf, true); }
     ApiType(Class<? extends SpellAbilityEffect> clsEf, final boolean isStateLess) {
@@ -173,10 +179,6 @@ public enum ApiType {
     }
 
     public static ApiType smartValueOf(String value) {
-        if (allValues.isEmpty())
-            for(ApiType c : ApiType.values())
-                allValues.put(c.toString(), c);
-
         ApiType v = allValues.get(value);
         if ( v == null )
             throw new RuntimeException("Element " + value + " not found in ApiType enum");
