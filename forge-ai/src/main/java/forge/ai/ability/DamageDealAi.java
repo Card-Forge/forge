@@ -5,7 +5,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.ai.*;
 import forge.game.Game;
-import forge.game.GameLogEntryType;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
