@@ -43,10 +43,10 @@ public class CountersMultiplyEffect extends SpellAbilityEffect {
         
         for (final Card tgtCard : getTargetCards(sa)) {
             if (counterType != null) {
-                tgtCard.addCounter(counterType, tgtCard.getCounters(counterType) * n, host, false);
+                tgtCard.addCounter(counterType, tgtCard.getCounters(counterType) * n, host, true);
             } else {
                 for (Map.Entry<CounterType, Integer> e : tgtCard.getCounters().entrySet()) {
-                    tgtCard.addCounter(e.getKey(), e.getValue() * n, host, false);
+                    tgtCard.addCounter(e.getKey(), e.getValue() * n, host, true);
                 }
             }
             game.updateLastStateForCard(tgtCard);
