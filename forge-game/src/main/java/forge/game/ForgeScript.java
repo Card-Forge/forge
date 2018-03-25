@@ -7,6 +7,7 @@ import forge.game.card.Card;
 import forge.game.card.CardState;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
 import forge.util.Expressions;
 
 public class ForgeScript {
@@ -177,6 +178,14 @@ public class ForgeScript {
             }
         } else if (property.equals("Equip")) {
             if (!sa.hasParam("Equip")) {
+                return false;
+            }
+        } else if (property.equals("MayPlaySource")) {
+            StaticAbility m = sa.getMayPlay();
+            if (m == null) {
+                return false;
+            }
+            if (!source.equals(m.getHostCard())) {
                 return false;
             }
         } else if (property.startsWith("IsTargeting")) {
