@@ -168,7 +168,7 @@ public enum ApiType {
     
     static {
     	for(ApiType t : ApiType.values()) {
-    		allValues.put(t.name(), t);
+    		allValues.put(t.name().toLowerCase(), t);
     	}
     }
 
@@ -179,7 +179,7 @@ public enum ApiType {
     }
 
     public static ApiType smartValueOf(String value) {
-        ApiType v = allValues.get(value);
+        ApiType v = allValues.get(value.toLowerCase());
         if ( v == null )
             throw new RuntimeException("Element " + value + " not found in ApiType enum");
         return v;
