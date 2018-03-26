@@ -15,6 +15,7 @@ public class ConstructedAchievements extends AchievementCollection {
         add(new VariantWins(GameType.MomirBasic, 25, 50, 100));
         add(new VariantWins(GameType.Commander, 25, 50, 100));
         add(new VariantWins(GameType.TinyLeaders, 25, 50, 100));
+        add(new VariantWins(GameType.Brawl, 25, 50, 100));
         add(new VariantWins(GameType.Planechase, 25, 50, 100));
         add(new VariantWins(GameType.Archenemy, 25, 50, 100));
         add(new Poisoned(15, 25, 40));

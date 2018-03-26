@@ -183,6 +183,7 @@ public class FDeckChooser extends FScreen {
             break; //delay initialize for constructed until saved decks can be reloaded
         case Commander:
         case TinyLeaders:
+        case Brawl:
         case Gauntlet:
             initialize(null, DeckType.CUSTOM_DECK);
             break;
@@ -219,6 +220,9 @@ public class FDeckChooser extends FScreen {
                 break;
             case TinyLeaders:
                 lstDecks.setSelectedString(DeckPreferences.getTinyLeadersDeck());
+                break;
+            case Brawl:
+                lstDecks.setSelectedString(DeckPreferences.getBrawlDeck());
                 break;
             case Archenemy:
                 lstDecks.setSelectedString(DeckPreferences.getSchemeDeck());
@@ -389,6 +393,8 @@ public class FDeckChooser extends FScreen {
             return EditorType.Commander;
         case TinyLeaders:
             return EditorType.TinyLeaders;
+        case Brawl:
+            return EditorType.Brawl;
         case Archenemy:
             return EditorType.Archenemy;
         case Planechase:
@@ -454,6 +460,7 @@ public class FDeckChooser extends FScreen {
                 break;
             case Commander:
             case TinyLeaders:
+            case Brawl:
                 cmbDeckTypes.addItem(DeckType.CUSTOM_DECK);
                 cmbDeckTypes.addItem(DeckType.RANDOM_DECK);
                 if(FModel.isdeckGenMatrixLoaded()) {
@@ -562,6 +569,10 @@ public class FDeckChooser extends FScreen {
                 break;
             case TinyLeaders:
                 pool = DeckProxy.getAllTinyLeadersDecks();
+                config = ItemManagerConfig.COMMANDER_DECKS;
+                break;
+            case Brawl:
+                pool = DeckProxy.getAllBrawlDecks();
                 config = ItemManagerConfig.COMMANDER_DECKS;
                 break;
             case Archenemy:
@@ -968,6 +979,12 @@ public class FDeckChooser extends FScreen {
         if (selectedDeckType == DeckType.TINY_LEADERS_DECKS) {
             //cannot create gauntlet for tiny leaders decks, so just start single match
             testVariantDeck(userDeck, GameType.TinyLeaders);
+            return;
+        }
+
+        if (selectedDeckType == DeckType.BRAWL_DECKS) {
+            //cannot create gauntlet for tiny leaders decks, so just start single match
+            testVariantDeck(userDeck, GameType.Brawl);
             return;
         }
 

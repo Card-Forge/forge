@@ -162,7 +162,7 @@ public enum DeckFormat {
     }
 
     private boolean hasCommander() {
-        return this == Commander || this == TinyLeaders;
+        return this == Commander || this == TinyLeaders || this == Brawl;
     }
 
     /**

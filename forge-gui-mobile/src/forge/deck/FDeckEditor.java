@@ -89,6 +89,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 return new Deck();
             }
         }), DeckFormat.TinyLeaders.isLegalCardPredicate()),
+        Brawl(new DeckController<Deck>(FModel.getDecks().getCommander(), new Supplier<Deck>() {
+            @Override
+            public Deck get() {
+                return new Deck();
+            }
+        }), Predicates.and(DeckFormat.Brawl.isLegalCardPredicate(),FModel.getFormats().getStandard().getFilterPrinted())),//include standard format requirement
         Archenemy(new DeckController<Deck>(FModel.getDecks().getScheme(), new Supplier<Deck>() {
             @Override
             public Deck get() {

@@ -136,6 +136,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             updateDecks(DeckProxy.getAllCommanderDecks(), ItemManagerConfig.COMMANDER_DECKS);
         }else if(deckFormat.equals(DeckFormat.TinyLeaders)){
             updateDecks(DeckProxy.getAllTinyLeadersDecks(), ItemManagerConfig.COMMANDER_DECKS);
+        }else if(deckFormat.equals(DeckFormat.Brawl)){
+            updateDecks(DeckProxy.getAllBrawlDecks(), ItemManagerConfig.COMMANDER_DECKS);
         }else {
             updateDecks(DeckProxy.getAllConstructedDecks(), ItemManagerConfig.CONSTRUCTED_DECKS);
         }

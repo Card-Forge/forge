@@ -95,6 +95,14 @@ public class CLobby {
                     view.focusOnAvatar();
                 }
             });
+            final FDeckChooser fdbcom = view.getBrawlDeckChooser(iSlot);
+            fdbcom.initialize(FPref.BRAWL_DECK_STATES[iSlot], defaultDeckTypeForBrawlSlot(iSlot));
+            fdbcom.populate();
+            fdbcom.getDecksComboBox().addListener(new IDecksComboBoxListener() {
+                @Override public final void deckTypeSelected(final DecksComboBoxEvent ev) {
+                    view.focusOnAvatar();
+                }
+            });
         }
 
         final ForgePreferences prefs = FModel.getPreferences();
@@ -130,5 +138,9 @@ public class CLobby {
 
     private static DeckType defaultDeckTypeForTinyLeaderSlot(final int iSlot) {
         return iSlot == 0 ? DeckType.TINY_LEADERS_DECKS : DeckType.RANDOM_CARDGEN_COMMANDER_DECK;
+    }
+
+    private static DeckType defaultDeckTypeForBrawlSlot(final int iSlot) {
+        return iSlot == 0 ? DeckType.BRAWL_DECKS : DeckType.CUSTOM_DECK;
     }
 }

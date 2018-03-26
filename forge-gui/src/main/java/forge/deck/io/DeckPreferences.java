@@ -21,7 +21,7 @@ import org.w3c.dom.NodeList;
  *
  */
 public class DeckPreferences {
-    private static String currentDeck = "", draftDeck = "", sealedDeck = "", commanderDeck = "", tinyLeadersDeck = "", planarDeck = "", schemeDeck = "";
+    private static String currentDeck = "", draftDeck = "", sealedDeck = "", commanderDeck = "", tinyLeadersDeck = "", brawlDeck = "", planarDeck = "", schemeDeck = "";
     private static Map<String, DeckPreferences> allPrefs = new HashMap<String, DeckPreferences>();
 
     public static String getCurrentDeck() {
@@ -66,6 +66,15 @@ public class DeckPreferences {
     public static void setTinyLeadersDeck(String tinyLeadersDeck0) {
         if (tinyLeadersDeck.equals(tinyLeadersDeck0)) { return; }
         tinyLeadersDeck = tinyLeadersDeck0;
+        save();
+    }
+
+    public static String getBrawlDeck() {
+        return brawlDeck;
+    }
+    public static void setBrawlDeck(String brawlDeck0) {
+        if (brawlDeck.equals(brawlDeck0)) { return; }
+        brawlDeck = brawlDeck0;
         save();
     }
 

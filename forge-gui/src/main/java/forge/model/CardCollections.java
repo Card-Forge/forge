@@ -42,6 +42,7 @@ public class CardCollections {
     private IStorage<Deck> plane;
     private IStorage<Deck> commander;
     private IStorage<Deck> tinyLeaders;
+    private IStorage<Deck> brawl;
 
     public CardCollections() {
     }
@@ -117,5 +118,13 @@ public class CardCollections {
                     new DeckStorage(new File(ForgeConstants.DECK_TINY_LEADERS_DIR), ForgeConstants.DECK_BASE_DIR));
         }
         return tinyLeaders;
+    }
+
+    public IStorage<Deck> getBrawl() {
+        if (brawl == null) {
+            brawl = new StorageImmediatelySerialized<Deck>("Brawl decks",
+                    new DeckStorage(new File(ForgeConstants.DECK_BRAWL_DIR), ForgeConstants.DECK_BASE_DIR));
+        }
+        return brawl;
     }
 }
