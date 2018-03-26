@@ -207,6 +207,11 @@ public final class CardRules implements ICardCharacteristics {
         return canBeCommander() && Iterables.contains(mainPart.getKeywords(), "Partner");
     }
 
+    public boolean canBeBrawlCommander() {
+        CardType type = mainPart.getType();
+        return (type.isLegendary() && type.isCreature()) || type.isPlaneswalker();
+    }
+
     public String getMeldWith() {
         return meldWith;
     }

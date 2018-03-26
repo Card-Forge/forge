@@ -521,15 +521,15 @@ public class PlayerPanel extends FPanel {
                 if (lobby.hasVariant(GameType.TinyLeaders)) {
                     lobby.setCurrentGameMode(GameType.TinyLeaders);
                     Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_TINY_LEADERS);
-                    CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorCommander(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture(), true));
+                    CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorCommander(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture(), true, false));
                 } else if (lobby.hasVariant(GameType.Brawl)) {
                     lobby.setCurrentGameMode(GameType.Brawl);
                     Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_BRAWL);
-                    CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorCommander(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture(), true));
+                    CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorCommander(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture(), false, true));
                 } else {
                     lobby.setCurrentGameMode(GameType.Commander);
                     Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_COMMANDER);
-                    CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorCommander(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture(), false));
+                    CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorCommander(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture(), false, false));
                 }
             }
         });

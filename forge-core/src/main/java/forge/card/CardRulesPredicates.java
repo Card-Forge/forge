@@ -572,6 +572,8 @@ public final class CardRulesPredicates {
         public static final Predicate<CardRules> IS_NON_CREATURE_SPELL = Predicates.not(Predicates.or(Presets.IS_CREATURE, Presets.IS_LAND));
         public static final Predicate<CardRules> CAN_BE_COMMANDER = Predicates.or(CardRulesPredicates.rules(StringOp.CONTAINS_IC, "can be your commander"),
                 Predicates.and(Presets.IS_CREATURE, Presets.IS_LEGENDARY));
+        public static final Predicate<CardRules> CAN_BE_BRAWL_COMMANDER = Predicates.or(Presets.IS_PLANESWALKER,
+                Predicates.and(Presets.IS_CREATURE, Presets.IS_LEGENDARY));
 
         /** The Constant IS_NONCREATURE_SPELL_FOR_GENERATOR. **/
         @SuppressWarnings("unchecked")

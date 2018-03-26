@@ -421,6 +421,9 @@ public enum DeckFormat {
         if (cardPoolFilter != null && !cardPoolFilter.apply(rules)) {
             return false;
         }
+        if(this.equals(DeckFormat.Brawl)){
+            return rules.canBeBrawlCommander();
+        }
         return rules.canBeCommander();
     }
 
