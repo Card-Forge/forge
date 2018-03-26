@@ -685,7 +685,6 @@ public class DamageDealAi extends DamageAiBase {
         final boolean noPrevention = sa.hasParam("NoPrevention");
         final boolean divided = sa.hasParam("DividedAsYouChoose");
         final Player opp = ComputerUtil.getOpponentFor(ai);
-        System.out.println("damageChooseRequiredTargets " + ai + " " + sa);
 
         while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             // TODO: Consider targeting the planeswalker
