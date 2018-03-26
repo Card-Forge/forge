@@ -238,6 +238,9 @@ public class FDeckChooser extends FScreen {
                 case TINY_LEADERS_DECKS:
                     lstDecks.setSelectedString(DeckPreferences.getTinyLeadersDeck());
                     break;
+                case BRAWL_DECKS:
+                    lstDecks.setSelectedString(DeckPreferences.getBrawlDeck());
+                    break;
                 case SCHEME_DECKS:
                     lstDecks.setSelectedString(DeckPreferences.getSchemeDeck());
                     break;
@@ -307,6 +310,7 @@ public class FDeckChooser extends FScreen {
                         switch (selectedDeckType) {
                         case COMMANDER_DECK:
                         case TINY_LEADERS_DECKS:
+                        case BRAWL_DECKS:
                         case SCHEME_DECKS:
                         case PLANAR_DECKS:
                         case DRAFT_DECKS:
@@ -335,6 +339,7 @@ public class FDeckChooser extends FScreen {
         case CONSTRUCTED_DECK:
         case COMMANDER_DECK:
         case TINY_LEADERS_DECKS:
+        case BRAWL_DECKS:
         case SCHEME_DECKS:
         case PLANAR_DECKS:
         case DRAFT_DECKS:
@@ -378,6 +383,8 @@ public class FDeckChooser extends FScreen {
                 return EditorType.Commander;
             case TINY_LEADERS_DECKS:
                 return EditorType.TinyLeaders;
+            case BRAWL_DECKS:
+                return EditorType.Brawl;
             case SCHEME_DECKS:
                 return EditorType.Archenemy;
             case PLANAR_DECKS:
@@ -473,6 +480,7 @@ public class FDeckChooser extends FScreen {
                 cmbDeckTypes.addItem(DeckType.CONSTRUCTED_DECK);
                 cmbDeckTypes.addItem(DeckType.COMMANDER_DECK);
                 cmbDeckTypes.addItem(DeckType.TINY_LEADERS_DECKS);
+                cmbDeckTypes.addItem(DeckType.BRAWL_DECKS);
                 cmbDeckTypes.addItem(DeckType.SCHEME_DECKS);
                 cmbDeckTypes.addItem(DeckType.PLANAR_DECKS);
                 cmbDeckTypes.addItem(DeckType.DRAFT_DECKS);
@@ -599,6 +607,10 @@ public class FDeckChooser extends FScreen {
             break;
         case TINY_LEADERS_DECKS:
             pool = DeckProxy.getAllTinyLeadersDecks();
+            config = ItemManagerConfig.COMMANDER_DECKS;
+            break;
+        case BRAWL_DECKS:
+            pool = DeckProxy.getAllBrawlDecks();
             config = ItemManagerConfig.COMMANDER_DECKS;
             break;
         case RANDOM_COMMANDER_DECK:

@@ -73,13 +73,21 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         allSections.add(DeckSection.Sideboard);
         allSections.add(DeckSection.Commander);
 
-        Predicate<CardRules> commanderFilter = CardRulesPredicates.Presets.CAN_BE_COMMANDER ;
         if(brawl){
-            commanderFilter = CardRulesPredicates.Presets.CAN_BE_BRAWL_COMMANDER;
+            Predicate<CardRules> commanderFilter = CardRulesPredicates.Presets.CAN_BE_BRAWL_COMMANDER;
+            commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(Predicates.and(
+                    FModel.getFormats().getStandard().getFilterPrinted(),Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES))),PaperCard.class);
+        }else{
+            Predicate<CardRules> commanderFilter = CardRulesPredicates.Presets.CAN_BE_COMMANDER ;
+            commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)),PaperCard.class);
         }
 
-        commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)),PaperCard.class);
-        normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
+
+        if(brawl){
+            normalPool = ItemPool.createFrom(FModel.getFormats().getStandard().getAllCards(), PaperCard.class);
+        }else {
+            normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
+        }
 
         CardManager catalogManager = new CardManager(getCDetailPicture(), true, false);
         CardManager deckManager = new CardManager(getCDetailPicture(), true, false);

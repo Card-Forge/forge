@@ -458,6 +458,16 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             default:
                 break;
         }
+        final FDeckChooser brawlDeckChooser = playerPanels.get(slot).getBrawlDeckChooser();
+        selectedDeckType = brawlDeckChooser.getSelectedDeckType();
+        switch (selectedDeckType){
+            case RANDOM_CARDGEN_COMMANDER_DECK:
+            case RANDOM_COMMANDER_DECK:
+                brawlDeckChooser.refreshDeckListForAI();
+                break;
+            default:
+                break;
+        }
     }
 
     @Override

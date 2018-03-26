@@ -71,7 +71,7 @@ public class PlayerPanel extends FContainer {
     private final FLabel btnSchemeDeck      = new FLabel.ButtonBuilder().text("Scheme Deck: Random Generated Deck").build();
     private final FLabel btnCommanderDeck   = new FLabel.ButtonBuilder().text("Commander Deck: Random Generated Deck").build();
     private final FLabel btnTinyLeadersDeck = new FLabel.ButtonBuilder().text("Tiny Leaders Deck: Random Generated Deck").build();
-    private final FLabel btnBrawlDeck = new FLabel.ButtonBuilder().text("Brawl Deck: Random Generated Deck").build();
+    private final FLabel btnBrawlDeck       = new FLabel.ButtonBuilder().text("Brawl Deck: Random Generated Deck").build();
     private final FLabel btnPlanarDeck      = new FLabel.ButtonBuilder().text("Planar Deck: Random Generated Deck").build();
     private final FLabel btnVanguardAvatar  = new FLabel.ButtonBuilder().text("Vanguard Avatar: Random").build();
 
@@ -133,10 +133,10 @@ public class PlayerPanel extends FContainer {
             @Override
             public void handleEvent(FEvent e) {
                 if( ((DeckManager)e.getSource()).getSelectedItem() != null) {
-                    btnTinyLeadersDeck.setText("Brawl Deck: " + ((DeckManager) e.getSource()).getSelectedItem().getName());
-                    lstTinyLeadersDecks.saveState();
+                    btnBrawlDeck.setText("Brawl Deck: " + ((DeckManager) e.getSource()).getSelectedItem().getName());
+                    lstBrawlDecks.saveState();
                 }else{
-                    btnTinyLeadersDeck.setText("Brawl Deck");
+                    btnBrawlDeck.setText("Brawl Deck");
                 }
             }
         });
@@ -208,6 +208,14 @@ public class PlayerPanel extends FContainer {
             public void handleEvent(FEvent e) {
                 lstTinyLeadersDecks.setHeaderCaption("Select Tiny Leaders Deck for " + txtPlayerName.getText());
                 Forge.openScreen(lstTinyLeadersDecks);
+            }
+        });
+        add(btnBrawlDeck);
+        btnBrawlDeck.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                lstBrawlDecks.setHeaderCaption("Select Brawl Deck for " + txtPlayerName.getText());
+                Forge.openScreen(lstBrawlDecks);
             }
         });
         add(btnSchemeDeck);
@@ -295,6 +303,10 @@ public class PlayerPanel extends FContainer {
             btnTinyLeadersDeck.setBounds(x, y, w, fieldHeight);
             y += dy;
         }
+        else if (btnBrawlDeck.isVisible()) {
+            btnBrawlDeck.setBounds(x, y, w, fieldHeight);
+            y += dy;
+        }
         else if (btnDeck.isVisible()) {
             btnDeck.setBounds(x, y, w, fieldHeight);
             y += dy;
@@ -317,7 +329,7 @@ public class PlayerPanel extends FContainer {
         if (!btnDeck.isVisible()) {
             rows--;
         }
-        if (btnCommanderDeck.isVisible() || btnTinyLeadersDeck.isVisible()) {
+        if (btnCommanderDeck.isVisible() || btnTinyLeadersDeck.isVisible() || btnBrawlDeck.isVisible()) {
             rows++;
         }
         if (btnSchemeDeck.isVisible()) {
@@ -464,6 +476,7 @@ public class PlayerPanel extends FContainer {
         btnDeck.setVisible(isDeckBuildingAllowed);
         btnCommanderDeck.setVisible(isCommanderApplied && mayEdit);
         btnTinyLeadersDeck.setVisible(isTinyLeadersApplied && mayEdit);
+        btnBrawlDeck.setVisible(isBrawlApplied && mayEdit);
 
         btnSchemeDeck.setVisible(archenemyVisiblity && mayEdit);
 
