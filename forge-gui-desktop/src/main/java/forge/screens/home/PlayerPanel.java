@@ -347,7 +347,7 @@ public class PlayerPanel extends FPanel {
         deckLabel.setVisible(isDeckBuildingAllowed);
         deckBtn.setVisible(isDeckBuildingAllowed);
         cmdDeckSelectorBtn.setVisible(isCommanderApplied);            
-        cmdDeckEditor.setText(isTinyLeaders ? "TL Deck Editor" : "Commander Deck Editor");
+        cmdDeckEditor.setText(isTinyLeaders ? "TL Deck Editor" : isBrawl ? "Brawl Editor" : "Commander Deck Editor");
         cmdDeckEditor.setVisible(isCommanderApplied);
         cmdLabel.setVisible(isCommanderApplied);
 
