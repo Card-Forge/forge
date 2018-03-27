@@ -37,6 +37,7 @@ public class WrappedAbility extends Ability {
         regtrig = regtrig0;
         sa = sa0;
         decider = decider0;
+        sa.setDescription(this.getStackDescription());
     }
     
     public SpellAbility getWrappedAbility() { 
