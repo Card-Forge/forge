@@ -990,7 +990,7 @@ public class FSkin {
         //format mana symbols to display as icons
         pattern = "\\{([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}"; //fancy pattern needed so "/" can be omitted from replacement
         try {
-            replacement = "<img src='" + new File(ForgeConstants.CACHE_SYMBOLS_DIR + "/$1$2$3.png").toURI().toURL().toString() + "'>";
+            replacement = "<img src=\"" + new File(ForgeConstants.CACHE_SYMBOLS_DIR + "/$1$2$3.png").toURI().toURL().toString() + "\">";
             str = str.replaceAll(pattern, replacement);
         } catch (final MalformedURLException e) {
             e.printStackTrace();
