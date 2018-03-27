@@ -68,28 +68,7 @@ public enum DeckFormat {
             return true;
         }
     }),
-    Pauper      ( Range.is(60),                         Range.between(0, 10), 1, new Predicate<CardRules>() {
-        private final Set<String> bannedCards = new HashSet<String>(Arrays.asList(
-                "Adriana's Valor", "Advantageous Proclamation", "Amulet of Quoz", "Ancestral Recall", "Assemble the Rank and Vile",
-                "Backup Plan", "Balance", "Biorhythm", "Black Lotus", "Brago's Favor", "Braids, Cabal Minion", "Bronze Tablet",
-                "Channel", "Chaos Orb", "Coalition Victory", "Contract from Below", "Darkpact", "Demonic Attorney", "Double Stroke",
-                "Echoing Boon", "Emissary's Ploy", "Emrakul, the Aeons Torn", "Erayo, Soratami Ascendant", "Falling Star",
-                "Fastbond", "Gifts Ungiven", "Griselbrand", "Hired Heist", "Hold the Perimeter", "Hymn of the Wilds", "Immediate Action",
-                "Incendiary Dissent", "Iterative Analysis", "Jeweled Bird", "Karakas", "Leovold, Emissary of Trest", "Library of Alexandria",
-                "Limited Resources", "Mox Emerald", "Mox Jet", "Mox Pearl", "Mox Ruby", "Mox Sapphire", "Muzzio's Preparations",
-                "Natural Unity", "Painter's Servant", "Panoptic Mirror", "Power Play", "Primeval Titan", "Prophet of Kruphix",
-                "Rebirth", "Recurring Nightmare", "Rofellos, Llanowar Emissary", "Secret Summoning", "Secrets of Paradise",
-                "Sentinel Dispatch", "Shahrazad", "Sovereign's Realm", "Summoner's Bond", "Sundering Titan", "Sway of the Stars",
-                "Sylvan Primordial", "Tempest Efreet", "Time Vault", "Time Walk", "Timmerian Fiends", "Tinker", "Tolarian Academy",
-                "Trade Secrets", "Unexpected Potential", "Upheaval", "Weight Advantage", "Worldfire", "Worldknit", "Yawgmoth's Bargain"));
-        @Override
-        public boolean apply(CardRules rules) {
-            if (bannedCards.contains(rules.getName())) {
-                return false;
-            }
-            return true;
-        }
-    }),
+    Pauper      ( Range.is(60),                         Range.between(0, 10), 1),
     Brawl      ( Range.is(59), Range.between(0, 15), 1, new Predicate<CardRules>() {
         @Override
         public boolean apply(CardRules rules) {
@@ -420,6 +399,9 @@ public enum DeckFormat {
     public boolean isLegalCommander(CardRules rules) {
         if (cardPoolFilter != null && !cardPoolFilter.apply(rules)) {
             return false;
+        }
+        if(this.equals(DeckFormat.Brawl)) {
+            return rules.canBeBrawlCommander();
         }
         return rules.canBeCommander();
     }

@@ -1036,8 +1036,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             if (parentScreen.getCommanderPage() != null) {
                 boolean isLegalCommander;
                 if(parentScreen.editorType.equals(EditorType.Brawl)){
-                    CardType cardType = card.getRules().getType();
-                    isLegalCommander = cardType.isPlaneswalker() || (cardType.isCreature() && cardType.isLegendary());
+                    isLegalCommander = card.getRules().canBeBrawlCommander();
                 }else{
                     isLegalCommander = DeckFormat.Commander.isLegalCommander(card.getRules());
                 }

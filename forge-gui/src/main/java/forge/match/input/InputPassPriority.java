@@ -64,7 +64,7 @@ public class InputPassPriority extends InputSyncronizedBase {
         }
 
         getController().getGui().alertUser();
-        SoundSystem.instance.play(SoundEffectType.WinDuel, false);
+
     }
 
     /** {@inheritDoc} */
