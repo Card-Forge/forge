@@ -1,16 +1,10 @@
 Name:Bosium Strip
 ManaCost:3
 Types:Artifact
-A:AB$ Effect | Cost$ 3 T | Triggers$ TrigBosiumStrip1,TrigBosiumStrip2 | ReplacementEffects$ REBosiumStrip | StaticAbilities$ STBosiumStrip | SVars$ RememberCastFromGrave,MoveExile,DBCleanup | RememberObjects$ TriggeredCard | SpellDescription$ Until end of turn, if the top card of your graveyard is an instant or sorcery card, you may cast that card. If a card cast this way would be put into a graveyard this turn, exile it instead.
+A:AB$ Effect | Cost$ 3 T | ReplacementEffects$ REBosiumStrip | StaticAbilities$ STBosiumStrip | SVars$ MoveExile | SpellDescription$ Until end of turn, if the top card of your graveyard is an instant or sorcery card, you may cast that card. If a card cast this way would be put into a graveyard this turn, exile it instead.
 SVar:STBosiumStrip:Mode$ Continuous | Affected$ Card.TopGraveyard+Instant+YouCtrl,Card.TopGraveyard+Sorcery+YouCtrl | MayPlay$ True | EffectZone$ Command | AffectedZone$ Graveyard | Description$ Until end of turn, if the top card of your graveyard is an instant or sorcery card, you may cast that card. If a card cast this way would be put into a graveyard this turn, exile it instead.
-SVar:TrigBosiumStrip1:Mode$ ChangesZone | ValidCard$ Card.Instant+YouCtrl,Card.Sorcery+YouCtrl | Origin$ Graveyard | Destination$ Stack | TriggerZones$ Command | Execute$ RememberCastFromGrave | Static$ True
-SVar:TrigBosiumStrip2:Mode$ ChangesZone | ValidCard$ Instant.YouCtrl+IsRemembered,Sorcery.YouCtrl+IsRemembered | Origin$ Stack | Destination$ Hand,Library,Exile | TriggerZones$ Command | Execute$ DBCleanup | Static$ True
-SVar:RememberCastFromGrave:DB$ Pump | RememberObjects$ TriggeredCard
-# TODO: find a better way to check "card cast this way" to interact properly with other cards that allow you to cast cards from graveyard
-# but not exile them (also relevant for Kess, Dissident Mage)
-SVar:REBosiumStrip:Event$ Moved | ActiveZones$ Command | ValidCard$ Instant.YouCtrl+IsRemembered,Sorcery.YouCtrl+IsRemembered | Origin$ Stack | Destination$ Graveyard | ReplaceWith$ MoveExile
-SVar:MoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:REBosiumStrip:Event$ Moved | ValidCard$ Card.CastSa Spell.MayPlaySource | Origin$ Stack | Destination$ Graveyard | ReplaceWith$ MoveExile
+SVar:MoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile
 SVar:NeedsOrderedGraveyard:TRUE
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bosium_strip.jpg

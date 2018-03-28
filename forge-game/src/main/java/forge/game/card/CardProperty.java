@@ -1683,6 +1683,15 @@ public class CardProperty {
             if (card.hasCounters()) {
                 return false;
             }
+        } else if (property.startsWith("CastSa"))  {
+            SpellAbility castSA = card.getCastSA();
+            if (castSA == null) {
+                return false;
+            }
+            String v = property.substring(7);
+            if (!castSA.isValid(v, sourceController, source, spellAbility)) {
+                return false;
+            }
         } else if (property.equals("wasCast")) {
             if (null == card.getCastFrom()) {
                 return false;

@@ -4,11 +4,11 @@ Types:Artifact Creature Myr Construct
 PT:4/7
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create four 1/1 colorless Myr artifact creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 4 | TokenName$ Myr | TokenTypes$ Artifact,Creature,Myr | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ c 1 1 myr SOM
-T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, you may tap X untapped Myr you control. If you do, CARDNAME gets +X/+0 until end of turn and deals X damage to defending player.
+T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, you may tap X untapped Myr you control. If you do, CARDNAME gets +X/+0 until end of turn and deals X damage to the player or planeswalker it's attacking.
 SVar:TrigPump:AB$ Pump | Cost$ tapXType<X/Myr> | References$ X | NumAtt$ +ChosenX | NumDef$ +0 | SubAbility$ DBDealDamage
-SVar:DBDealDamage:DB$ DealDamage | Defined$ DefendingPlayer | NumDmg$ ChosenX | SubAbility$ DBCleanup
+SVar:DBDealDamage:DB$ DealDamage | Defined$ TriggeredDefender | NumDmg$ ChosenX | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenX$ True
 SVar:X:XChoice
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_battlesphere.jpg
-Oracle:When Myr Battlesphere enters the battlefield, create four 1/1 colorless Myr artifact creature tokens.\nWhenever Myr Battlesphere attacks, you may tap X untapped Myr you control. If you do, Myr Battlesphere gets +X/+0 until end of turn and deals X damage to defending player.
+Oracle:When Myr Battlesphere enters the battlefield, create four 1/1 colorless Myr artifact creature tokens.\nWhenever Myr Battlesphere attacks, you may tap X untapped Myr you control. If you do, Myr Battlesphere gets +X/+0 until end of turn and deals X damage to the player or planeswalker it's attacking.

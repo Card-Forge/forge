@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import forge.game.Game;
+import forge.game.GameLogEntryType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
@@ -216,7 +217,7 @@ public class CounterEffect extends SpellAbilityEffect {
         
 
         if (!tgtSA.isAbility()) {
-            System.out.println("Send countered spell to " + destination);
+            game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, "Send countered spell to " + destination);
         }
     }
 
