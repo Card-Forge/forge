@@ -387,7 +387,7 @@ public class DeckProxy implements InventoryItem {
                 return FModel.getFormats().getStandard().isDeckLegal(input);
             }
         }, filter);
-        addDecksRecursivelly("Tiny Leaders", GameType.Brawl, result, "", FModel.getDecks().getBrawl(), filter);
+        addDecksRecursivelly("Brawl", GameType.Brawl, result, "", FModel.getDecks().getBrawl(), filter);
         return result;
     }
 

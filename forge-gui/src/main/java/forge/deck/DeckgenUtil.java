@@ -542,7 +542,11 @@ public class DeckgenUtil {
         PaperCard selectedPartner=null;
         if(isCardGen){
             List<Map.Entry<PaperCard,Integer>> potentialCards = new ArrayList<>();
-            potentialCards.addAll(CardRelationMatrixGenerator.cardPools.get(DeckFormat.Commander.toString()).get(commander.getName()));
+            if(format.equals(DeckFormat.Brawl)){
+                potentialCards.addAll(CardRelationMatrixGenerator.cardPools.get(FModel.getFormats().getStandard().getName()).get(commander.getName()));
+            }else {
+                potentialCards.addAll(CardRelationMatrixGenerator.cardPools.get(DeckFormat.Commander.toString()).get(commander.getName()));
+            }
             Random r = new Random();
             //Collections.shuffle(potentialCards, r);
             List<PaperCard> preSelectedCards = new ArrayList<>();
@@ -590,9 +594,17 @@ public class DeckgenUtil {
             Iterable<PaperCard> colorList = Iterables.filter(format.getCardPool(cardDb).getAllCards(),
                     Predicates.compose(Predicates.or(new CardThemedDeckBuilder.MatchColorIdentity(commander.getRules().getColorIdentity()),
                             DeckGeneratorBase.COLORLESS_CARDS), PaperCard.FN_GET_RULES));
+            if(format.equals(DeckFormat.Brawl)){
+                Iterable<PaperCard> colorListFiltered = Iterables.filter(colorList,FModel.getFormats().getStandard().getFilterPrinted());
+                colorList=colorListFiltered;
+            }
             List<PaperCard> cardList = Lists.newArrayList(colorList);
             Collections.shuffle(cardList, new Random());
-            List<PaperCard> shortList = cardList.subList(1, 400);
+            int shortlistlength=400;
+            if(cardList.size()<400){
+                shortlistlength=cardList.size();
+            }
+            List<PaperCard> shortList = cardList.subList(1, shortlistlength);
             gen = new CardThemedCommanderDeckBuilder(commander, selectedPartner,shortList,forAi,format);
 
         }

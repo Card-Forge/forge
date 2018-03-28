@@ -180,8 +180,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private void updateRandomCommander() {
-        if((!lstDecks.getGameType().getDeckFormat().equals(DeckFormat.Commander)&&
-                !(lstDecks.getGameType().getDeckFormat().equals(DeckFormat.TinyLeaders)))){
+        if((!lstDecks.getGameType().getDeckFormat().equals(DeckFormat.Commander))&&
+                !(lstDecks.getGameType().getDeckFormat().equals(DeckFormat.TinyLeaders))&&
+                !(lstDecks.getGameType().getDeckFormat().equals(DeckFormat.Brawl))){
             return;
         }
         lstDecks.setAllowMultipleSelections(false);
@@ -202,8 +203,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private void updateRandomCardGenCommander() {
-        if((!lstDecks.getGameType().getDeckFormat().equals(DeckFormat.Commander)&&
-                !(lstDecks.getGameType().getDeckFormat().equals(DeckFormat.TinyLeaders)))){
+        if((!lstDecks.getGameType().getDeckFormat().equals(DeckFormat.Commander))&&
+                !(lstDecks.getGameType().getDeckFormat().equals(DeckFormat.TinyLeaders))&&
+                        !(lstDecks.getGameType().getDeckFormat().equals(DeckFormat.Brawl))){
             return;
         }
         lstDecks.setAllowMultipleSelections(false);
