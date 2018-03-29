@@ -2,6 +2,7 @@ package forge.gui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.FontMetrics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -21,6 +22,7 @@ import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import forge.Singletons;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
@@ -176,10 +178,6 @@ public class DualListBox<T> extends FDialog {
         rightPanel.add(new FScrollPane(destList, true), BorderLayout.CENTER);
         rightPanel.add(autoButton, BorderLayout.SOUTH);
 
-        add(leftPanel, "w 250, h 300");
-        add(centerPanel, "w 100, h 300");
-        add(rightPanel, "w 250, h 300");
-
         _addListListeners(sourceList);
         _addListListeners(destList);
 
@@ -205,6 +203,12 @@ public class DualListBox<T> extends FDialog {
             });
         }
 
+        int columnWidth = getColumnWidth();
+        String listConstraints = "w " + columnWidth + ", h 300";
+        add(leftPanel, listConstraints);
+        add(centerPanel, "w 100, h 300");
+        add(rightPanel, listConstraints);
+
         _setButtonState();
 
         if (remainingSourcesMin <= sourceElements.size() && remainingSourcesMax >= sourceElements.size()) {
@@ -216,6 +220,39 @@ public class DualListBox<T> extends FDialog {
                 }
             });
         }
+    }
+
+    private int getMaxElementWidth(UnsortedListModel<T> model) {
+        final FontMetrics metrics = this.getFontMetrics(this.getFont());
+        int width = 0;
+        for (int i = 0; i < model.getSize(); i++) {
+            final int itemWidth = metrics.stringWidth(model.getElementAt(i).toString());
+            if (itemWidth > width) {
+                width = itemWidth;
+            }
+        }
+        return width;
+    }
+
+    private int getColumnWidth() {
+        int width = 0;
+        int srcWidth = getMaxElementWidth(this.sourceListModel);
+        if (srcWidth > width) {
+            width = srcWidth;
+        }
+        int dstWidth = getMaxElementWidth(this.destListModel);
+        if (dstWidth > width) {
+            width = dstWidth;
+        }
+        final int minWidth = 250;
+        if (width < minWidth) {
+            width = minWidth;
+        }
+        final int maxWidth = (Singletons.getView().getFrame().getWidth()/2) - 100;
+        if (width > maxWidth) {
+            width = maxWidth;
+        }
+        return width;
     }
 
     public void setSecondColumnLabelText(String label) {

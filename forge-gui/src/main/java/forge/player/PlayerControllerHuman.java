@@ -1537,22 +1537,37 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             if (needPrompt) {
                 List<Integer> savedOrder = orderedSALookup.get(saLookupKey);
+                List<SpellAbilityView> orderedSAVs = Lists.newArrayList();
+
+                // create a mapping between a spell's view and the spell itself
+                HashMap<SpellAbilityView, SpellAbility> spellViewCache = new HashMap<>();
+                for (SpellAbility spellAbility : orderedSAs) {
+                    spellViewCache.put(spellAbility.getView(), spellAbility);
+                }
 
                 if (savedOrder != null) {
-                    orderedSAs = Lists.newArrayList();
+                    orderedSAVs = Lists.newArrayList();
                     for (Integer index : savedOrder) {
-                        orderedSAs.add(activePlayerSAs.get(index));
+                        orderedSAVs.add(activePlayerSAs.get(index).getView());
+                    }
+                } else {
+                    for (SpellAbility spellAbility : orderedSAs) {
+                        orderedSAVs.add(spellAbility.getView());
                     }
                 }
                 if (savedOrder != null) {
                     boolean preselect = FModel.getPreferences()
                             .getPrefBoolean(FPref.UI_PRESELECT_PREVIOUS_ABILITY_ORDER);
-                    orderedSAs = getGui().order("Reorder simultaneous abilities", "Resolve first", 0, 0,
-                            preselect ? Lists.<SpellAbility>newArrayList() : orderedSAs,
-                            preselect ? orderedSAs : Lists.<SpellAbility>newArrayList(), null, false);
+                    orderedSAVs = getGui().order("Reorder simultaneous abilities", "Resolve first", 0, 0,
+                            preselect ? Lists.<SpellAbilityView>newArrayList() : orderedSAVs,
+                            preselect ? orderedSAVs : Lists.<SpellAbilityView>newArrayList(), null, false);
                 } else {
-                    orderedSAs = getGui().order("Select order for simultaneous abilities", "Resolve first", orderedSAs,
+                    orderedSAVs = getGui().order("Select order for simultaneous abilities", "Resolve first", orderedSAVs,
                             null);
+                }
+                orderedSAs = Lists.newArrayList();
+                for (SpellAbilityView spellAbilityView : orderedSAVs) {
+                    orderedSAs.add(spellViewCache.get(spellAbilityView));
                 }
                 // save order to avoid needing to prompt a second time to order
                 // the same abilities

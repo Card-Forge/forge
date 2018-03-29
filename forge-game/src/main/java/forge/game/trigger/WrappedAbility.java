@@ -37,9 +37,10 @@ public class WrappedAbility extends Ability {
         regtrig = regtrig0;
         sa = sa0;
         decider = decider0;
+        sa.setDescription(this.getStackDescription());
     }
-    
-    public SpellAbility getWrappedAbility() { 
+
+    public SpellAbility getWrappedAbility() {
         return sa;
     }
 
@@ -48,7 +49,7 @@ public class WrappedAbility extends Ability {
         return true;
     }
 
-    public Trigger getTrigger(){
+    public Trigger getTrigger() {
         return regtrig;
     }
 
@@ -191,7 +192,7 @@ public class WrappedAbility extends Ability {
 
     // key for autoyield - if there is a trigger use its description as the wrapper now has triggering information in its description
     @Override
-    public String yieldKey() { 
+    public String yieldKey() {
         if (getTrigger() != null) {
             if (getHostCard() != null) {
                 return getHostCard().toString() + ": " + getTrigger().toString();
@@ -209,10 +210,10 @@ public class WrappedAbility extends Ability {
     @Override
     public String toUnsuppressedString() {
     	String desc = this.getStackDescription(); /* use augmented stack description as string for wrapped things */
-       	String card = getTrigger().getHostCard().toString(); 
+       	String card = getTrigger().getHostCard().toString();
         if ( !desc.contains(card) && desc.contains(" this ")) { /* a hack for Evolve and similar that don't have CARDNAME */
-        	return card + ": " + desc; 
-        } else return desc; 
+        	return card + ": " + desc;
+        } else return desc;
     }
 
     @Override
@@ -289,8 +290,6 @@ public class WrappedAbility extends Ability {
         return sa.isXCost();
     }
 
-    
-    
     @Override
     public String getSvarWithFallback(String name) {
         return sa.getSvarWithFallback(name);
@@ -426,7 +425,7 @@ public class WrappedAbility extends Ability {
                 return;
             }
         }
-        
+
         if (triggerParams.containsKey("ResolvingCheck")) {
             // rare cases: Hidden Predators (state trigger, but have "Intervening If" to check IsPresent2) etc.
             Map<String, String> recheck = new HashMap<String, String>();
@@ -472,7 +471,7 @@ public class WrappedAbility extends Ability {
             }
         }
         // TODO: CardCollection
-        
+
         getActivatingPlayer().getController().playSpellAbilityNoStack(sa, false);
 
         // Add eventual delayed trigger.
