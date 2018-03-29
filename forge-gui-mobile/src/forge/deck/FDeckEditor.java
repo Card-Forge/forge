@@ -92,7 +92,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             public Deck get() {
                 return new Deck();
             }
-        }), Predicates.and(DeckFormat.Brawl.isLegalCardPredicate(),FModel.getFormats().getStandard().getFilterPrinted())),//include standard format requirement
+        }), DeckFormat.Brawl.isLegalCardPredicate()),
         Archenemy(new DeckController<Deck>(FModel.getDecks().getScheme(), new Supplier<Deck>() {
             @Override
             public Deck get() {
@@ -920,21 +920,25 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 final List<PaperCard> commanders = parentScreen.getDeck().getCommanders();
                 if (commanders.isEmpty()) {
                     //if no commander set for deck, only show valid commanders
-                    additionalFilter = DeckFormat.Commander.isLegalCommanderPredicate();
-                    if(editorType.equals(EditorType.Brawl)){
-                        //brawl commander filter
-                        additionalFilter = Predicates.and(Predicates.compose(Predicates.or(CardRulesPredicates.Presets.IS_PLANESWALKER,Predicates.and(
-                                CardRulesPredicates.Presets.IS_CREATURE,CardRulesPredicates.Presets.IS_LEGENDARY)), PaperCard.FN_GET_RULES),
-                                FModel.getFormats().getStandard().getFilterPrinted());
+                    switch (editorType) {
+                        case TinyLeaders:
+                        case Commander:
+                            additionalFilter = DeckFormat.Commander.isLegalCommanderPredicate();
+                            break;
+                        case Brawl:
+                            additionalFilter = DeckFormat.Brawl.isLegalCommanderPredicate();
                     }
-
                     cardManager.setCaption("Commanders");
                 }
                 else {
                     //if a commander has been set, only show cards that match its color identity
-                    additionalFilter = DeckFormat.Commander.isLegalCardForCommanderOrLegalPartnerPredicate(commanders);
-                    if(editorType.equals(EditorType.Brawl)){
-                        additionalFilter = Predicates.and(additionalFilter,FModel.getFormats().getStandard().getFilterPrinted());
+                    switch (editorType) {
+                        case TinyLeaders:
+                        case Commander:
+                            additionalFilter = DeckFormat.Commander.isLegalCardForCommanderOrLegalPartnerPredicate(commanders);
+                            break;
+                        case Brawl:
+                            additionalFilter = DeckFormat.Brawl.isLegalCardForCommanderOrLegalPartnerPredicate(commanders);
                     }
                     cardManager.setCaption("Cards");
                 }

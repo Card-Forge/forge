@@ -381,12 +381,6 @@ public class DeckProxy implements InventoryItem {
         else {
             filter = Predicates.and(DeckFormat.Brawl.hasLegalCardsPredicate(), filter);
         }
-        filter = Predicates.and(new Predicate<Deck>() {
-            @Override
-            public boolean apply(Deck input) {
-                return FModel.getFormats().getStandard().isDeckLegal(input);
-            }
-        }, filter);
         addDecksRecursivelly("Brawl", GameType.Brawl, result, "", FModel.getDecks().getBrawl(), filter);
         return result;
     }

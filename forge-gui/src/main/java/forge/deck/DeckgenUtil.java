@@ -542,7 +542,7 @@ public class DeckgenUtil {
         PaperCard selectedPartner=null;
         if(isCardGen){
             List<Map.Entry<PaperCard,Integer>> potentialCards = new ArrayList<>();
-            if(format.equals(DeckFormat.Brawl)){
+            if(format.equals(DeckFormat.Brawl)){//TODO: replace with actual Brawl based data
                 potentialCards.addAll(CardRelationMatrixGenerator.cardPools.get(FModel.getFormats().getStandard().getName()).get(commander.getName()));
             }else {
                 potentialCards.addAll(CardRelationMatrixGenerator.cardPools.get(DeckFormat.Commander.toString()).get(commander.getName()));
