@@ -28,8 +28,6 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.player.PlayerControllerHuman;
 import forge.properties.ForgePreferences.FPref;
-import forge.sound.SoundEffectType;
-import forge.sound.SoundSystem;
 import forge.util.ITriggerEvent;
 import forge.util.ThreadUtil;
 
@@ -64,7 +62,6 @@ public class InputPassPriority extends InputSyncronizedBase {
         }
 
         getController().getGui().alertUser();
-
     }
 
     /** {@inheritDoc} */
