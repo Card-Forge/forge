@@ -33,15 +33,8 @@ public class StaticData {
     private final TokenDb allTokens;
     private final CardEdition.Collection editions;
 
-    public Predicate<PaperCard> getStandardPredicate() {
-        return standardPredicate;
-    }
-
-    public void setStandardPredicate(Predicate<PaperCard> standardPredicate) {
-        this.standardPredicate = standardPredicate;
-    }
-
     private Predicate<PaperCard> standardPredicate;
+    private Predicate<PaperCard> modernPredicate;
 
     // Loaded lazily:
     private IStorage<SealedProduct.Template> boosters;
@@ -196,6 +189,18 @@ public class StaticData {
     }
 
     public TokenDb getAllTokens() { return allTokens; }
+
+    public Predicate<PaperCard> getStandardPredicate() {
+        return standardPredicate;
+    }
+
+    public void setStandardPredicate(Predicate<PaperCard> standardPredicate) { this.standardPredicate = standardPredicate; }
+
+    public void setModernPredicate(Predicate<PaperCard> modernPredicate) { this.modernPredicate = standardPredicate; }
+
+    public Predicate<PaperCard> getModernPredicate() {
+        return modernPredicate;
+    }
 
     public PaperCard getCardByEditionDate(PaperCard card, Date editionDate) {
 

@@ -592,12 +592,13 @@ public class DeckgenUtil {
             cardDb = FModel.getMagicDb().getCommonCards();
             //shuffle first 400 random cards
             Iterable<PaperCard> colorList = Iterables.filter(format.getCardPool(cardDb).getAllCards(),
-                    Predicates.compose(Predicates.or(new CardThemedDeckBuilder.MatchColorIdentity(commander.getRules().getColorIdentity()),
-                            DeckGeneratorBase.COLORLESS_CARDS), PaperCard.FN_GET_RULES));
-            if(format.equals(DeckFormat.Brawl)){
+                    Predicates.and(format.isLegalCardPredicate(),Predicates.compose(Predicates.or(
+                            new CardThemedDeckBuilder.MatchColorIdentity(commander.getRules().getColorIdentity()),
+                            DeckGeneratorBase.COLORLESS_CARDS), PaperCard.FN_GET_RULES)));
+            /*if(format.equals(DeckFormat.Brawl)){
                 Iterable<PaperCard> colorListFiltered = Iterables.filter(colorList,FModel.getFormats().getStandard().getFilterPrinted());
                 colorList=colorListFiltered;
-            }
+            }*/
             List<PaperCard> cardList = Lists.newArrayList(colorList);
             Collections.shuffle(cardList, new Random());
             int shortlistlength=400;
@@ -605,6 +606,7 @@ public class DeckgenUtil {
                 shortlistlength=cardList.size();
             }
             List<PaperCard> shortList = cardList.subList(1, shortlistlength);
+            shortList.remove(commander);
             gen = new CardThemedCommanderDeckBuilder(commander, selectedPartner,shortList,forAi,format);
 
         }
