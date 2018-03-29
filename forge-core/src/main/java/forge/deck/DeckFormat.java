@@ -70,7 +70,7 @@ public enum DeckFormat {
         }
     }),
     Pauper      ( Range.is(60),                         Range.between(0, 10), 1),
-    Brawl      ( Range.is(59), Range.between(0, 15), 1, null, StaticData.instance().getStandardPredicate()),
+    Brawl      ( Range.is(59), Range.between(0, 15), 1, null, StaticData.instance() == null ? null : StaticData.instance().getStandardPredicate()),
     TinyLeaders    ( Range.is(49),                         Range.between(0, 10), 1, new Predicate<CardRules>() {
         private final Set<String> bannedCards = new HashSet<String>(Arrays.asList(
                 "Ancestral Recall", "Balance", "Black Lotus", "Black Vise", "Channel", "Chaos Orb", "Contract From Below", "Counterbalance", "Darkpact", "Demonic Attorney", "Demonic Tutor", "Earthcraft", "Edric, Spymaster of Trest", "Falling Star",
