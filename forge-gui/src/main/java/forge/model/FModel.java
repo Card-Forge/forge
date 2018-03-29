@@ -173,8 +173,8 @@ public final class FModel {
             formats.add(format);
         }
 
-        magicDb.setStandardPredicate(formats.getStandard().getFilterPrinted());
-        magicDb.setModernPredicate(formats.getModern().getFilterPrinted());
+        magicDb.setStandardPredicate(formats.getStandard().getFilterRules());
+        magicDb.setModernPredicate(formats.getModern().getFilterRules());
 
         blocks = new StorageBase<>("Block definitions", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "blocks.txt", magicDb.getEditions()));
         questPreferences = new QuestPreferences();

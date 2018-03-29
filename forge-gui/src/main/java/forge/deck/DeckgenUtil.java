@@ -573,14 +573,14 @@ public class DeckgenUtil {
                     Predicates.and(format.isLegalCardPredicate(),Predicates.compose(Predicates.or(
                             new CardThemedDeckBuilder.MatchColorIdentity(commander.getRules().getColorIdentity()),
                             DeckGeneratorBase.COLORLESS_CARDS), PaperCard.FN_GET_RULES)));
-            /*if(format.equals(DeckFormat.Brawl)){
+            if(format.equals(DeckFormat.Brawl)){//for Brawl - add additional filterprinted rule to remove old reprints for a consistent look
                 Iterable<PaperCard> colorListFiltered = Iterables.filter(colorList,FModel.getFormats().getStandard().getFilterPrinted());
                 colorList=colorListFiltered;
-            }*/
+            }
             List<PaperCard> cardList = Lists.newArrayList(colorList);
             Collections.shuffle(cardList, new Random());
             int shortlistlength=400;
-            if(cardList.size()<400){
+            if(cardList.size()<shortlistlength){
                 shortlistlength=cardList.size();
             }
             List<PaperCard> shortList = cardList.subList(1, shortlistlength);
