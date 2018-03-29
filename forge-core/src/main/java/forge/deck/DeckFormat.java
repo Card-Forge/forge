@@ -35,7 +35,6 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-import java.awt.print.Paper;
 import java.util.*;
 import java.util.Map.Entry;
 
