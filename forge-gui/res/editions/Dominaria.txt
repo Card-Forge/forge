@@ -1,0 +1,304 @@
+[metadata]
+Code=DOM
+Date=2018-04-27
+Name=Dominaria
+Type=Expansion
+MciCode=dom
+
+[cards]
+Karn, Scion of Urza
+
+Baird, Steward of Argive
+
+Benalish Marshal
+
+Charge
+
+12 U Danitha Capashen, Paragon
+
+Dauntless Bodyguard
+
+Dub
+
+Evra, Halcyon Witness
+
+18 R Fall of the Thran
+
+Healing Grace
+
+21 M History of Benalia
+22 Invoke the Divine
+23 U Knight of Grace
+
+Kwende, Pride of Femeref
+
+Lyra Dawnbringer
+
+On Serra's Wings
+
+Seal Away
+
+34 C Serra Disciple
+
+Teshar, Ancestor's Apostle
+
+38 U Triumph of Gerrard
+39 R Urza's Ruinous Blast
+40 C Academy Drake
+
+Academy Journeymage
+
+The Antiquities War
+
+Befuddle
+
+Blink of an Eye
+
+Curator's Ward
+
+Deep Freeze
+
+53 C Homarid Explorer
+54 In Bolas's Clutches
+55 Karn's Temporal Sundering
+56 U Merfolk Trickster
+57 R The Mirari Conjecture
+58 Naban, Dean of Iteration
+59 Naru Meha, Master Wizard
+60 C Opt
+
+Precognition Field
+
+Sentinel of the Pearl Trident
+
+Tempest Djinn
+
+Tetsuko Umezawa, Fugitive
+
+70 Time of Ice
+
+75 U Wizard's Retort
+76 R Zahid, Djinn of the Lamp
+
+81 U Cast Down
+
+Chainer's Torment
+
+Dark Bargain
+
+Demonic Vigor
+
+Demonlord Belzenlok
+
+Drudge Sentinel
+
+The Eldest Reborn
+
+Fungal Infection
+
+Kazarov, Sengir Pureblood
+
+Knight of Malice
+
+Lich's Mastery
+
+100 M Phyrexian Scriptures
+
+Rat Colony
+
+Settle the Score
+
+Thallid Soothsayer
+
+Torgaar, Famine Incarnate
+
+Urgoros, the Empty One
+
+110 C Vicious Offering
+
+Whisper, Blood Liturgist
+
+Bloodstone Goblin
+
+Fight with Fire
+
+Firefist Adept
+
+122 R The First Eruption
+123 U The Flame of Keld
+
+Ghitu Journeymage
+
+Ghitu Lavarunner
+
+Goblin Barrage
+
+Goblin Chainwhirler
+
+Goblin Warchief
+
+Haphazard Bombardment
+
+Jaya Ballard
+
+Jaya's Immolating Inferno
+
+134 C Keldon Overseer
+
+Keldon Warcaller
+
+Radiating Lightning
+
+Rampaging Cyclops
+
+Siege-Gang Commander
+
+Skizzik
+
+Squee, the Immortal
+
+Valduk, Keeper of the Flame
+
+Verix Bladewing
+
+Warcry Phoenix
+
+Warlord's Fury
+
+152 U Wizard's Lightning
+
+Ancient Animus
+
+Baloth Gorger
+
+Broken Bond
+
+Corrosive Ooze
+
+Gaea's Blessing
+
+Gaea's Protector
+
+Gift of Growth
+
+Grunn, the Lonely King
+
+Kamahl's Druidic Vow
+
+168 C Llanowar Elves
+
+Llanowar Scout
+
+Marwyn, the Nurturer
+
+Multani, Yavimaya's Avatar
+
+178 C Saproling Migration
+
+Song of Freyalise
+
+Sporecrown Thallid
+
+182 R Steel Leaf Champion
+
+Sylvan Awakening
+
+Territorial Allosaurus
+
+Thorn Elemental
+
+Verdant Force
+
+Adeliz, the Cinder Wind
+
+Arvad the Cursed
+
+Aryel, Knight of Windgrace
+
+Darigaaz Reincarnated
+
+Garna, the Bloodflame
+
+Grand Warlord Radha
+
+Hallar, the Firefletcher
+
+Jhoira, Weatherlight Captain
+
+Jodah, Archmage Eternal
+
+Muldrotha, the Gravetide
+
+Oath of Teferi
+
+Primevals' Glorious Rebirth
+
+Rona, Disciple of Gix
+
+204 U Shanna, Sisay's Legacy
+
+Slimefoot, the Stowaway
+
+Teferi, Hero of Dominaria
+
+Tiana, Ship's Caretaker
+
+Blackblade Reforged
+
+Damping Sphere
+
+Forebear's Blade
+
+216 C Guardians of Koilos
+
+Helm of the Host
+
+Howling Golem
+
+Icy Manipulator
+
+Jhoira's Familiar
+
+Juggernaut
+
+Mishra's Self-Replicator
+
+Mox Amber
+
+Navigator's Compass
+
+227 C Powerstone Shard
+
+Shield of the Realm
+
+Sorceror's Wand
+
+Sparring Construct
+
+Urza's Tome
+
+Voltaic Servant
+
+Clifftop Retreat
+
+Hinterland Harbor
+
+Isolated Chapel
+
+Sulfur Falls
+
+Woodland Cemetery
+
+249 U Zhalfirin Void
+
+270 M Teferi, Timebender
+271 C Temporal Machinations
+272 R Niambi, Faithful Healer
+273 U Teferi's Sentinel
+274 C Meandering River
+275 M Chandra, Bold Pyromancer
+276 R Chandra's Outburst
+277 U Karplusan Hound
+278 C Pyromantic Pilgrim
+279 C Timber Gorge
+280 R Firesong and Sunspeaker
