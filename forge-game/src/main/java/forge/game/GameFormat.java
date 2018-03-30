@@ -32,16 +32,20 @@ import forge.deck.Deck;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.FileSection;
+import forge.util.FileUtil;
 import forge.util.storage.StorageBase;
 import forge.util.storage.StorageReaderFileSections;
+import forge.util.storage.StorageReaderFolder;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.*;
 import java.util.Map.Entry;
 
 
 public class GameFormat implements Comparable<GameFormat> {
     private final String name;
+    private final Boolean isCore;
     // contains allowed sets, when empty allows all sets
 
     protected final List<String> allowedSetCodes; // this is mutable to support quest mode set unlocks
@@ -59,14 +63,15 @@ public class GameFormat implements Comparable<GameFormat> {
     private final int index;
 
     public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards) {
-        this(fName, sets, bannedCards, null, null, 0);
+        this(fName, sets, bannedCards, null, null, 0, false);
     }
     
-    public static final GameFormat NoFormat = new GameFormat("(none)", null, null, null, null, Integer.MAX_VALUE);
+    public static final GameFormat NoFormat = new GameFormat("(none)", null, null, null, null, Integer.MAX_VALUE, false);
     
     public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards,
-                      final List<String> restrictedCards, final List<CardRarity> rarities, int compareIdx) {
+                      final List<String> restrictedCards, final List<CardRarity> rarities, int compareIdx, Boolean isCore) {
         this.index = compareIdx;
+        this.isCore = isCore;
         this.name = fName;
         allowedSetCodes = sets == null ? new ArrayList<String>() : Lists.newArrayList(sets);
         bannedCardNames = bannedCards == null ? new ArrayList<String>() : Lists.newArrayList(bannedCards);
@@ -107,6 +112,10 @@ public class GameFormat implements Comparable<GameFormat> {
 
     public String getName() {
         return this.name;
+    }
+
+    public Boolean isCore() {
+        return this.isCore;
     }
 
     public List<String> getAllowedSetCodes() {
@@ -199,7 +208,7 @@ public class GameFormat implements Comparable<GameFormat> {
         return index;
     }
 
-    public static class Reader extends StorageReaderFileSections<GameFormat> {
+    public static class Reader extends StorageReaderFolder<GameFormat> {
         List<GameFormat> naturallyOrdered = new ArrayList<GameFormat>();
         
         public Reader(File file0) {
@@ -207,12 +216,16 @@ public class GameFormat implements Comparable<GameFormat> {
         }
 
         @Override
-        protected GameFormat read(String title, Iterable<String> body, int idx) {
+        protected GameFormat read(File file) {
+            final Map<String, List<String>> contents = FileSection.parseSections(FileUtil.readFile(file));
             List<String> sets = null; // default: all sets allowed
             List<String> bannedCards = null; // default: nothing banned
             List<String> restrictedCards = null; // default: nothing restricted
             List<CardRarity> rarities = null;
-            FileSection section = FileSection.parse(body, ":");
+            FileSection section = FileSection.parse(contents.get("format"), ":");
+            String title = section.get("name");
+            Boolean isCore = section.getBoolean("core");
+            Integer idx = section.getInt("order");
             String strSets = section.get("sets");
             if ( null != strSets ) {
                 sets = Arrays.asList(strSets.split(", "));
@@ -239,10 +252,22 @@ public class GameFormat implements Comparable<GameFormat> {
                 }
             }
 
-            GameFormat result = new GameFormat(title, sets, bannedCards, restrictedCards, rarities, 1 + idx);
+            GameFormat result = new GameFormat(title, sets, bannedCards, restrictedCards, rarities, idx, isCore);
             naturallyOrdered.add(result);
             return result;
         }
+
+        @Override
+        protected FilenameFilter getFileFilter() {
+            return TXT_FILE_FILTER;
+        }
+
+        public static final FilenameFilter TXT_FILE_FILTER = new FilenameFilter() {
+            @Override
+            public boolean accept(final File dir, final String name) {
+                return name.endsWith(".txt");
+            }
+        };
     }
 
     public static class Collection extends StorageBase<GameFormat> {
@@ -251,10 +276,21 @@ public class GameFormat implements Comparable<GameFormat> {
         public Collection(GameFormat.Reader reader) {
             super("Format collections", reader);
             naturallyOrdered = reader.naturallyOrdered;
+            Collections.sort(naturallyOrdered);
         }
 
         public Iterable<GameFormat> getOrderedList() {
             return naturallyOrdered;
+        }
+
+        public Iterable<GameFormat> getCoreList() {
+            List<GameFormat> coreList = new ArrayList<>();
+            for(GameFormat format: naturallyOrdered){
+                if(format.isCore()){
+                    coreList.add(format);
+                }
+            }
+            return coreList;
         }
 
         public GameFormat getStandard() {

@@ -1,2 +1,5 @@
-[Pauper]
+[format]
+Name:Pauper
+Order:108
+Core:true
 Rarities:L, C
