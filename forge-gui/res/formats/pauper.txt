@@ -1,0 +1,2 @@
+[Pauper]
+Rarities:L, C
