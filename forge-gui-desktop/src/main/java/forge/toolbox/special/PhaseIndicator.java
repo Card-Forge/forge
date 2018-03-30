@@ -79,32 +79,32 @@ public class PhaseIndicator extends JPanel {
     //========== Custom class handling
     public PhaseLabel getLabelFor(final PhaseType s) {
         switch (s) {
-        case UPKEEP:
-            return this.getLblUpkeep();
-        case DRAW:
-            return this.getLblDraw();
-        case MAIN1:
-            return this.getLblMain1();
-        case COMBAT_BEGIN:
-            return this.getLblBeginCombat();
-        case COMBAT_DECLARE_ATTACKERS:
-            return this.getLblDeclareAttackers();
-        case COMBAT_DECLARE_BLOCKERS:
-            return this.getLblDeclareBlockers();
-        case COMBAT_DAMAGE:
-            return this.getLblCombatDamage();
-        case COMBAT_FIRST_STRIKE_DAMAGE:
-            return this.getLblFirstStrike();
-        case COMBAT_END:
-            return this.getLblEndCombat();
-        case MAIN2:
-            return this.getLblMain2();
-        case END_OF_TURN:
-            return this.getLblEndTurn();
-        case CLEANUP:
-            return this.getLblCleanup();
-        default:
-            return null;
+            case UPKEEP:
+                return this.getLblUpkeep();
+            case DRAW:
+                return this.getLblDraw();
+            case MAIN1:
+                return this.getLblMain1();
+            case COMBAT_BEGIN:
+                return this.getLblBeginCombat();
+            case COMBAT_DECLARE_ATTACKERS:
+                return this.getLblDeclareAttackers();
+            case COMBAT_DECLARE_BLOCKERS:
+                return this.getLblDeclareBlockers();
+            case COMBAT_DAMAGE:
+                return this.getLblCombatDamage();
+            case COMBAT_FIRST_STRIKE_DAMAGE:
+                return this.getLblFirstStrike();
+            case COMBAT_END:
+                return this.getLblEndCombat();
+            case MAIN2:
+                return this.getLblMain2();
+            case END_OF_TURN:
+                return this.getLblEndTurn();
+            case CLEANUP:
+                return this.getLblCleanup();
+            default:
+                return null;
         }
     }
 
