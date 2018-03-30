@@ -1,0 +1,4 @@
+[Pauper]
+Rarities:L, C
+[Kaladesh_Standard]
+Sets:KLD, AER, EMN, SOI, BFZ, OGW

@@ -61,6 +61,7 @@ public final class ForgeConstants {
     public static final String TOKEN_DATA_DIR      = RES_DIR + "tokenscripts" + PATH_SEPARATOR;
     public static final String EDITIONS_DIR        = RES_DIR + "editions" + PATH_SEPARATOR;
     public static final String BLOCK_DATA_DIR      = RES_DIR + "blockdata" + PATH_SEPARATOR;
+    public static final String FORMATS_DATA_DIR    = RES_DIR + "formats" + PATH_SEPARATOR;
     public static final String DECK_CUBE_DIR       = RES_DIR + "cube" + PATH_SEPARATOR;
     public static final String AI_PROFILE_DIR      = RES_DIR + "ai" + PATH_SEPARATOR;
     public static final String SOUND_DIR           = RES_DIR + "sound" + PATH_SEPARATOR;
