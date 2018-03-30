@@ -53,6 +53,10 @@ public class ReplaceDamage extends ReplacementEffect {
         if (!(runParams.containsKey("Prevention") == (hasParam("PreventionEffect") || hasParam("Prevent")))) {
             return false;
         }
+        if (((Integer) runParams.get("DamageAmount")) == 0) {
+            // If no actual damage is dealt, there is nothing to replace
+            return false;
+        }
         if (hasParam("ValidSource")) {
             String validSource = getParam("ValidSource");
             validSource = AbilityUtils.applyAbilityTextChangeEffects(validSource, this);	
@@ -83,9 +87,13 @@ public class ReplaceDamage extends ReplacementEffect {
                 }
             }
         }
-        if (((Integer) runParams.get("DamageAmount")) == 0) {
-            // If no actual damage is dealt, there is nothing to replace
-            return false;
+        if (hasParam("RelativeToSource")) {
+            Card source = (Card) runParams.get("DamageSource");
+            String validRelative = getParam("RelativeToSource");
+            validRelative = AbilityUtils.applyAbilityTextChangeEffects(validRelative, this);
+            if (!matchesValid(runParams.get("DamageTarget"), validRelative.split(","), source)) {
+                return false;
+            }
         }
         if (hasParam("DamageAmount")) {
             String full = getParam("DamageAmount");

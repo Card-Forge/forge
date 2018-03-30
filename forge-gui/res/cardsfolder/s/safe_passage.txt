@@ -1,7 +1,7 @@
 Name:Safe Passage
 ManaCost:2 W
 Types:Instant
-A:SP$ Effect | Cost$ 2 W | Name$ Safe Passage Effect | StaticAbilities$ STPrevent | AILogic$ Fog | SpellDescription$ Prevent all damage that would be dealt to you and creatures you control this turn.
-SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Target$ You,Creature.YouCtrl | Description$ Prevent all damage that would be dealt to you and creatures you control this turn.
+A:SP$ Effect | Cost$ 2 W | Name$ Safe Passage Effect | ReplacementEffects$ RPrevent | AILogic$ Fog | SpellDescription$ Prevent all damage that would be dealt to you and creatures you control this turn.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ You,Creature.YouCtrl | Description$ Prevent all damage that would be dealt to you and creatures you control this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/safe_passage.jpg
 Oracle:Prevent all damage that would be dealt to you and creatures you control this turn.

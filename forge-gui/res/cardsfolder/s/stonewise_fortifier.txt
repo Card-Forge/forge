@@ -2,10 +2,8 @@ Name:Stonewise Fortifier
 ManaCost:1 W
 Types:Creature Human Wizard
 PT:2/2
-A:AB$ Effect | Cost$ 4 W | ValidTgts$ Creature | RememberObjects$ Targeted | ImprintCards$ Self | Triggers$ OutOfSight | SVars$ ExileSelf | StaticAbilities$ STPrevent | SpellDescription$ Prevent all damage that would be dealt to CARDNAME by target creature this turn.
-SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Target$ Card.IsImprinted | Source$ Creature.IsRemembered | Description$ Prevent all damage that would be dealt to CARDNAME by target creature this turn.
-SVar:OutOfSight:Mode$ ChangesZone | TriggerZones$ Command | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsRemembered,Card.IsImprinted | Execute$ ExileSelf | Static$ True
-SVar:ExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+A:AB$ Effect | Cost$ 4 W | ValidTgts$ Creature | RememberObjects$ Targeted | ImprintCards$ Self | ForgetOnMoved$ Battlefield | ReplacementEffects$ RPrevent | Duration$ HostLeavesOrEOT | SpellDescription$ Prevent all damage that would be dealt to CARDNAME by target creature this turn.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ActiveZones$ Command | ValidTarget$ Card.IsImprinted | ValidSource$ Creature.IsRemembered | Description$ Prevent all damage that would be dealt to CARDNAME by target creature this turn.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonewise_fortifier.jpg
 Oracle:{4}{W}: Prevent all damage that would be dealt to Stonewise Fortifier by target creature this turn.
