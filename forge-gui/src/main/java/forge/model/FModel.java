@@ -166,12 +166,10 @@ public final class FModel {
         ForgePreferences.DEV_MODE = preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
         ForgePreferences.UPLOAD_DRAFT = ForgePreferences.NET_CONN;
 
-
+        formats = new GameFormat.Collection(new GameFormat.Reader( new File(ForgeConstants.FORMATS_DATA_DIR + "coreformats.txt")));
         final File[] files = new File(ForgeConstants.FORMATS_DATA_DIR).listFiles();
         for (final File file : files) {
-            if(formats == null){
-                formats = new GameFormat.Collection(new GameFormat.Reader(file));
-            }else{
+            if (!file.getName().equals("coreformats.txt")){
                 GameFormat.Collection additionalformats = new GameFormat.Collection(new GameFormat.Reader(file));
                 for (GameFormat format:additionalformats) {
                     formats.add(format);
