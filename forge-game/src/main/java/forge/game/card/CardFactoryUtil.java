@@ -2078,7 +2078,7 @@ public class CardFactoryUtil {
                     " | ValidBlocker$ Creature | Secondary$ True " +
                     " | TriggerDescription$ Afflict " + n + " (" + inst.getReminderText() + ")";
 
-            final String abStringAfflict = "DB$ Loselife | Defined$ TriggeredDefendingPlayer" +
+            final String abStringAfflict = "DB$ LoseLife | Defined$ TriggeredDefendingPlayer" +
                     " | LifeAmount$ " + n;
 
             final Trigger afflictTrigger = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);

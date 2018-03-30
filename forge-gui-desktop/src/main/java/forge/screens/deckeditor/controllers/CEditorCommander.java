@@ -17,9 +17,11 @@
  */
 package forge.screens.deckeditor.controllers;
 
+import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
 import forge.UiCommand;
+import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -65,14 +67,27 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
      * all cards are available.
      */
     @SuppressWarnings("serial")
-    public CEditorCommander(final CDetailPicture cDetailPicture, boolean tinyLeaders) {
-        super(tinyLeaders ? FScreen.DECK_EDITOR_TINY_LEADERS : FScreen.DECK_EDITOR_COMMANDER, cDetailPicture);
+    public CEditorCommander(final CDetailPicture cDetailPicture, boolean tinyLeaders, boolean brawl) {
+        super(tinyLeaders ? FScreen.DECK_EDITOR_TINY_LEADERS : brawl ? FScreen.DECK_EDITOR_BRAWL : FScreen.DECK_EDITOR_COMMANDER, cDetailPicture);
         allSections.add(DeckSection.Main);
         allSections.add(DeckSection.Sideboard);
         allSections.add(DeckSection.Commander);
 
-        commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.CAN_BE_COMMANDER, PaperCard.FN_GET_RULES)),PaperCard.class);
-        normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
+        if(brawl){
+            Predicate<CardRules> commanderFilter = CardRulesPredicates.Presets.CAN_BE_BRAWL_COMMANDER;
+            commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(Predicates.and(
+                    FModel.getFormats().getStandard().getFilterPrinted(),Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES))),PaperCard.class);
+        }else{
+            Predicate<CardRules> commanderFilter = CardRulesPredicates.Presets.CAN_BE_COMMANDER ;
+            commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)),PaperCard.class);
+        }
+
+
+        if(brawl){
+            normalPool = ItemPool.createFrom(FModel.getFormats().getStandard().getAllCards(), PaperCard.class);
+        }else {
+            normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
+        }
 
         CardManager catalogManager = new CardManager(getCDetailPicture(), true, false);
         CardManager deckManager = new CardManager(getCDetailPicture(), true, false);
@@ -88,7 +103,7 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
                 return new Deck();
             }
         };
-        this.controller = new DeckController<Deck>(tinyLeaders ? FModel.getDecks().getTinyLeaders() :FModel.getDecks().getCommander(), this, newCreator);
+        this.controller = new DeckController<Deck>(tinyLeaders ? FModel.getDecks().getTinyLeaders() :brawl ? FModel.getDecks().getBrawl(): FModel.getDecks().getCommander(), this, newCreator);
 
         getBtnAddBasicLands().setCommand(new UiCommand() {
             @Override

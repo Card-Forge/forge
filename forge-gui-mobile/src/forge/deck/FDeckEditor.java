@@ -11,11 +11,9 @@ import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
 import forge.assets.*;
-import forge.card.CardDb;
-import forge.card.CardEdition;
-import forge.card.CardPreferences;
-import forge.card.CardRulesPredicates;
+import forge.card.*;
 import forge.deck.io.DeckPreferences;
+import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ColumnDef;
@@ -83,12 +81,18 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 return new Deck();
             }
         }), null),
-        TinyLeaders(new DeckController<Deck>(FModel.getDecks().getCommander(), new Supplier<Deck>() {
+        TinyLeaders(new DeckController<Deck>(FModel.getDecks().getTinyLeaders(), new Supplier<Deck>() {
             @Override
             public Deck get() {
                 return new Deck();
             }
         }), DeckFormat.TinyLeaders.isLegalCardPredicate()),
+        Brawl(new DeckController<Deck>(FModel.getDecks().getBrawl(), new Supplier<Deck>() {
+            @Override
+            public Deck get() {
+                return new Deck();
+            }
+        }), DeckFormat.Brawl.isLegalCardPredicate()),
         Archenemy(new DeckController<Deck>(FModel.getDecks().getScheme(), new Supplier<Deck>() {
             @Override
             public Deck get() {
@@ -176,6 +180,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             };
         case Commander:
         case TinyLeaders:
+        case Brawl:
             return new DeckEditorPage[] {
                     new CatalogPage(ItemManagerConfig.CARD_CATALOG),
                     new DeckSectionPage(DeckSection.Main),
@@ -507,6 +512,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             return CardLimit.None;
         case Commander:
         case TinyLeaders:
+        case Brawl:
         case PlanarConquest:
             return CardLimit.Singleton;
         }
@@ -910,15 +916,30 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 break;
             case Commander:
             case TinyLeaders:
+            case Brawl:
                 final List<PaperCard> commanders = parentScreen.getDeck().getCommanders();
                 if (commanders.isEmpty()) {
                     //if no commander set for deck, only show valid commanders
-                    additionalFilter = DeckFormat.Commander.isLegalCommanderPredicate();
+                    switch (editorType) {
+                        case TinyLeaders:
+                        case Commander:
+                            additionalFilter = DeckFormat.Commander.isLegalCommanderPredicate();
+                            break;
+                        case Brawl:
+                            additionalFilter = DeckFormat.Brawl.isLegalCommanderPredicate();
+                    }
                     cardManager.setCaption("Commanders");
                 }
                 else {
                     //if a commander has been set, only show cards that match its color identity
-                    additionalFilter = DeckFormat.Commander.isLegalCardForCommanderOrLegalPartnerPredicate(commanders);
+                    switch (editorType) {
+                        case TinyLeaders:
+                        case Commander:
+                            additionalFilter = DeckFormat.Commander.isLegalCardForCommanderOrLegalPartnerPredicate(commanders);
+                            break;
+                        case Brawl:
+                            additionalFilter = DeckFormat.Brawl.isLegalCardForCommanderOrLegalPartnerPredicate(commanders);
+                    }
                     cardManager.setCaption("Cards");
                 }
                 //fall through to below
@@ -1017,7 +1038,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 }
             }
             if (parentScreen.getCommanderPage() != null) {
-                if (parentScreen.editorType != EditorType.PlanarConquest && DeckFormat.Commander.isLegalCommander(card.getRules()) && !parentScreen.getCommanderPage().cardManager.getPool().contains(card)) {
+                boolean isLegalCommander;
+                if(parentScreen.editorType.equals(EditorType.Brawl)){
+                    isLegalCommander = card.getRules().canBeBrawlCommander();
+                }else{
+                    isLegalCommander = DeckFormat.Commander.isLegalCommander(card.getRules());
+                }
+                if (parentScreen.editorType != EditorType.PlanarConquest && isLegalCommander && !parentScreen.getCommanderPage().cardManager.getPool().contains(card)) {
                     addItem(menu, "Set", "as Commander", parentScreen.getCommanderPage().getIcon(), true, true, new Callback<Integer>() {
                         @Override
                         public void run(Integer result) {
@@ -1606,6 +1633,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 break;
             case TinyLeaders:
                 DeckPreferences.setTinyLeadersDeck(deckStr);
+                break;
+            case Brawl:
+                DeckPreferences.setBrawlDeck(deckStr);
                 break;
             case Archenemy:
                 DeckPreferences.setSchemeDeck(deckStr);

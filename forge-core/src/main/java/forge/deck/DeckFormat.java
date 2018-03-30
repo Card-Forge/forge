@@ -68,6 +68,8 @@ public enum DeckFormat {
             return true;
         }
     }),
+    Pauper      ( Range.is(60),                         Range.between(0, 10), 1),
+    Brawl      ( Range.is(59), Range.between(0, 15), 1, null, StaticData.instance() == null ? null : StaticData.instance().getStandardPredicate()),
     TinyLeaders    ( Range.is(49),                         Range.between(0, 10), 1, new Predicate<CardRules>() {
         private final Set<String> bannedCards = new HashSet<String>(Arrays.asList(
                 "Ancestral Recall", "Balance", "Black Lotus", "Black Vise", "Channel", "Chaos Orb", "Contract From Below", "Counterbalance", "Darkpact", "Demonic Attorney", "Demonic Tutor", "Earthcraft", "Edric, Spymaster of Trest", "Falling Star",
@@ -117,21 +119,36 @@ public enum DeckFormat {
     private final Range<Integer> sideRange; // null => no check
     private final int maxCardCopies;
     private final Predicate<CardRules> cardPoolFilter;
+    private final Predicate<PaperCard> paperCardPoolFilter;
     private final static String ADVPROCLAMATION = "Advantageous Proclamation";
     private final static String SOVREALM = "Sovereign's Realm";
 
-    private DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0) {
-        this(mainRange0, sideRange0, maxCardCopies0, null);
-    }
-    private DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0, Predicate<CardRules> cardPoolFilter0) {
+    private DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0, Predicate<CardRules> cardPoolFilter0, Predicate<PaperCard> paperCardPoolFilter0) {
         mainRange = mainRange0;
         sideRange = sideRange0;
         maxCardCopies = maxCardCopies0;
         cardPoolFilter = cardPoolFilter0;
+        paperCardPoolFilter = paperCardPoolFilter0;
+    }
+
+    private DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0, Predicate<CardRules> cardPoolFilter0) {
+        mainRange = mainRange0;
+        sideRange = sideRange0;
+        maxCardCopies = maxCardCopies0;
+        paperCardPoolFilter = null;
+        cardPoolFilter = cardPoolFilter0;
+    }
+
+    private DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0) {
+        mainRange = mainRange0;
+        sideRange = sideRange0;
+        maxCardCopies = maxCardCopies0;
+        paperCardPoolFilter = null;
+        cardPoolFilter = null;
     }
 
     private boolean hasCommander() {
-        return this == Commander || this == TinyLeaders;
+        return this == Commander || this == TinyLeaders || this == Brawl;
     }
 
     /**
@@ -364,7 +381,16 @@ public enum DeckFormat {
 
     public IDeckGenPool getCardPool(IDeckGenPool basePool) {
         if (cardPoolFilter == null) {
-            return basePool;
+            if (paperCardPoolFilter == null) {
+                return basePool;
+            }
+            DeckGenPool filteredPool = new DeckGenPool();
+            for (PaperCard pc : basePool.getAllCards()) {
+                if (paperCardPoolFilter.apply(pc)) {
+                    filteredPool.add(pc);
+                }
+            }
+            return filteredPool;
         }
         DeckGenPool filteredPool = new DeckGenPool();
         for (PaperCard pc : basePool.getAllCards()) {
@@ -381,7 +407,10 @@ public enum DeckFormat {
 
     public boolean isLegalCard(PaperCard pc) {
         if (cardPoolFilter == null) {
-            return true;
+            if (paperCardPoolFilter == null) {
+                return true;
+            }
+            return paperCardPoolFilter.apply(pc);
         }
         return cardPoolFilter.apply(pc.getRules());
     }
@@ -389,6 +418,9 @@ public enum DeckFormat {
     public boolean isLegalCommander(CardRules rules) {
         if (cardPoolFilter != null && !cardPoolFilter.apply(rules)) {
             return false;
+        }
+        if(this.equals(DeckFormat.Brawl)) {
+            return rules.canBeBrawlCommander();
         }
         return rules.canBeCommander();
     }
@@ -409,6 +441,13 @@ public enum DeckFormat {
                 if (cardPoolFilter != null) {
                     for (final Entry<PaperCard, Integer> cp : deck.getAllCardsInASinglePool()) {
                         if (!cardPoolFilter.apply(cp.getKey().getRules())) {
+                            return false;
+                        }
+                    }
+                }
+                if (paperCardPoolFilter != null) {
+                    for (final Entry<PaperCard, Integer> cp : deck.getAllCardsInASinglePool()) {
+                        if (!paperCardPoolFilter.apply(cp.getKey())) {
                             return false;
                         }
                     }

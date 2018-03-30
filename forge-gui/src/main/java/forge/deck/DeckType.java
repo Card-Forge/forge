@@ -10,6 +10,7 @@ public enum DeckType {
     RANDOM_COMMANDER_DECK ("Random Commander Decks"),
     RANDOM_CARDGEN_COMMANDER_DECK ("Random Commander Card-based Decks"),
     TINY_LEADERS_DECKS ("Tiny Leaders Decks"),
+    BRAWL_DECKS ("Brawl Decks"),
     SCHEME_DECKS ("Scheme Decks"),
     PLANAR_DECKS ("Planar Decks"),
     DRAFT_DECKS ("Draft Decks"),

@@ -136,6 +136,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             updateDecks(DeckProxy.getAllCommanderDecks(), ItemManagerConfig.COMMANDER_DECKS);
         }else if(deckFormat.equals(DeckFormat.TinyLeaders)){
             updateDecks(DeckProxy.getAllTinyLeadersDecks(), ItemManagerConfig.COMMANDER_DECKS);
+        }else if(deckFormat.equals(DeckFormat.Brawl)){
+            updateDecks(DeckProxy.getAllBrawlDecks(), ItemManagerConfig.COMMANDER_DECKS);
         }else {
             updateDecks(DeckProxy.getAllConstructedDecks(), ItemManagerConfig.CONSTRUCTED_DECKS);
         }
@@ -178,8 +180,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private void updateRandomCommander() {
-        if((!lstDecks.getGameType().getDeckFormat().equals(DeckFormat.Commander)&&
-                !(lstDecks.getGameType().getDeckFormat().equals(DeckFormat.TinyLeaders)))){
+        if((!lstDecks.getGameType().getDeckFormat().equals(DeckFormat.Commander))&&
+                !(lstDecks.getGameType().getDeckFormat().equals(DeckFormat.TinyLeaders))&&
+                !(lstDecks.getGameType().getDeckFormat().equals(DeckFormat.Brawl))){
             return;
         }
         lstDecks.setAllowMultipleSelections(false);
@@ -200,8 +203,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private void updateRandomCardGenCommander() {
-        if((!lstDecks.getGameType().getDeckFormat().equals(DeckFormat.Commander)&&
-                !(lstDecks.getGameType().getDeckFormat().equals(DeckFormat.TinyLeaders)))){
+        if((!lstDecks.getGameType().getDeckFormat().equals(DeckFormat.Commander))&&
+                !(lstDecks.getGameType().getDeckFormat().equals(DeckFormat.TinyLeaders))&&
+                        !(lstDecks.getGameType().getDeckFormat().equals(DeckFormat.Brawl))){
             return;
         }
         lstDecks.setAllowMultipleSelections(false);

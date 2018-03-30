@@ -91,13 +91,14 @@ public class VLobby implements ILobbyView {
     private final VariantCheckBox vntMomirBasic = new VariantCheckBox(GameType.MomirBasic);
     private final VariantCheckBox vntCommander = new VariantCheckBox(GameType.Commander);
     private final VariantCheckBox vntTinyLeaders = new VariantCheckBox(GameType.TinyLeaders);
+    private final VariantCheckBox vntBrawl = new VariantCheckBox(GameType.Brawl);
     private final VariantCheckBox vntPlanechase = new VariantCheckBox(GameType.Planechase);
     private final VariantCheckBox vntArchenemy = new VariantCheckBox(GameType.Archenemy);
     private final VariantCheckBox vntArchenemyRumble = new VariantCheckBox(GameType.ArchenemyRumble);
     private final ImmutableList<VariantCheckBox> vntBoxesLocal  =
-            ImmutableList.of(vntVanguard, vntMomirBasic, vntCommander, vntTinyLeaders, vntPlanechase, vntArchenemy, vntArchenemyRumble);
+            ImmutableList.of(vntVanguard, vntMomirBasic, vntCommander, vntTinyLeaders, vntBrawl, vntPlanechase, vntArchenemy, vntArchenemyRumble);
     private final ImmutableList<VariantCheckBox> vntBoxesNetwork =
-            ImmutableList.of(vntVanguard, vntMomirBasic, vntCommander, vntTinyLeaders /*, vntPlanechase, vntArchenemy, vntArchenemyRumble */);
+            ImmutableList.of(vntVanguard, vntMomirBasic, vntCommander, vntTinyLeaders, vntBrawl /*, vntPlanechase, vntArchenemy, vntArchenemyRumble */);
 
     // Player frame elements
     private final JPanel playersFrame = new JPanel(new MigLayout("insets 0, gap 0 5, wrap, hidemode 3"));
@@ -119,8 +120,13 @@ public class VLobby implements ILobbyView {
 
     private final List<FList<Object>> tinyLeadersDeckLists = new ArrayList<FList<Object>>();
     private final List<FPanel> tinyLeadersDeckPanels = new ArrayList<FPanel>(MAX_PLAYERS);
+
+    private final List<FList<Object>> brawlDeckLists = new ArrayList<FList<Object>>();
+    private final List<FPanel> brawlDeckPanels = new ArrayList<FPanel>(MAX_PLAYERS);
+
     private final List<FDeckChooser> commanderDeckChoosers = Lists.newArrayListWithCapacity(MAX_PLAYERS);
     private final List<FDeckChooser> tinyLeadersDeckChoosers = Lists.newArrayListWithCapacity(MAX_PLAYERS);
+    private final List<FDeckChooser> brawlDeckChoosers = Lists.newArrayListWithCapacity(MAX_PLAYERS);
 
     private final List<FList<Object>> schemeDeckLists = new ArrayList<FList<Object>>();
     private final List<FPanel> schemeDeckPanels = new ArrayList<FPanel>(MAX_PLAYERS);
@@ -227,6 +233,8 @@ public class VLobby implements ILobbyView {
             fdcom.restoreSavedState();
             final FDeckChooser fdtl = getTinyLeaderDeckChooser(iPlayer);
             fdtl.restoreSavedState();
+            final FDeckChooser fdbr = getBrawlDeckChooser(iPlayer);
+            fdbr.restoreSavedState();
         }
     }
 
@@ -272,6 +280,17 @@ public class VLobby implements ILobbyView {
             default:
                 break;
         }
+        final FDeckChooser brawlDeckChooser = getBrawlDeckChooser(slot);
+        brawlDeckChooser.setIsAi(type==LobbySlotType.AI);
+        selectedDeckType = brawlDeckChooser.getSelectedDeckType();
+        switch (selectedDeckType){
+            case RANDOM_CARDGEN_COMMANDER_DECK:
+            case RANDOM_COMMANDER_DECK:
+                brawlDeckChooser.refreshDeckListForAI();
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -299,6 +318,7 @@ public class VLobby implements ILobbyView {
                 final FDeckChooser deckChooser = getDeckChooser(i);
                 final FDeckChooser commanderDeckChooser = getCommanderDeckChooser(i);
                 final FDeckChooser tinyLeaderDeckChooser = getTinyLeaderDeckChooser(i);
+                final FDeckChooser brawlDeckChooser = getBrawlDeckChooser(i);
                 final PlayerPanel panel;
                 final boolean isNewPanel;
                 if (hasPanel) {
@@ -315,6 +335,7 @@ public class VLobby implements ILobbyView {
                     deckChooser.restoreSavedState();
                     commanderDeckChooser.restoreSavedState();
                     tinyLeaderDeckChooser.restoreSavedState();
+                    brawlDeckChooser.restoreSavedState();
                     if (i == 0) {
                         slot.setIsDevMode(prefs.getPrefBoolean(FPref.DEV_MODE_ENABLED));
                         changePlayerFocus(0);
@@ -341,6 +362,7 @@ public class VLobby implements ILobbyView {
                 deckChooser.setIsAi(isSlotAI);
                 commanderDeckChooser.setIsAi(isSlotAI);
                 tinyLeaderDeckChooser.setIsAi(isSlotAI);
+                brawlDeckChooser.setIsAi(isSlotAI);
                 if (fullUpdate && (type == LobbySlotType.LOCAL || isSlotAI)) {
                     selectDeck(i);
                 }
@@ -461,6 +483,15 @@ public class VLobby implements ILobbyView {
         tinyLeaderChooser.initialize();
         tinyLeadersDeckChoosers.add(tinyLeaderChooser);
 
+        final FDeckChooser brawlChooser = new FDeckChooser(null, isPlayerAI(playerIndex), GameType.Brawl, true);
+        brawlChooser.getLstDecks().setSelectCommand(new UiCommand() {
+            @Override public final void run() {
+                selectBrawlDeck(playerIndex);
+            }
+        });
+        brawlChooser.initialize();
+        brawlDeckChoosers.add(brawlChooser);
+
         
 /*        // Tiny Leaders deck list
         buildDeckPanel("Tiny Leaders Deck", playerIndex, tinyLeadersDeckLists, tinyLeadersDeckPanels, new ListSelectionListener() {
@@ -523,7 +554,7 @@ public class VLobby implements ILobbyView {
     }
 
     private void selectMainDeck(final int playerIndex) {
-        if (hasVariant(GameType.Commander) || hasVariant(GameType.TinyLeaders)) {
+        if (hasVariant(GameType.Commander) || hasVariant(GameType.TinyLeaders) || hasVariant(GameType.Brawl)) {
             // These game types use specific deck panel
             return;
         }
@@ -562,6 +593,23 @@ public class VLobby implements ILobbyView {
             return;
         }
         final FDeckChooser mainChooser = getTinyLeaderDeckChooser(playerIndex);
+        final DeckType type = mainChooser.getSelectedDeckType();
+        final Deck deck = mainChooser.getDeck();
+        final Collection<DeckProxy> selectedDecks = mainChooser.getLstDecks().getSelectedItems();
+        if (playerIndex < activePlayersNum && lobby.mayEdit(playerIndex)) {
+            final String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy.FN_GET_NAME);
+            playerPanels.get(playerIndex).setCommanderDeckSelectorButtonText(text);
+            fireDeckChangeListener(playerIndex, deck);
+        }
+        mainChooser.saveState();
+    }
+
+    private void selectBrawlDeck(final int playerIndex) {
+        if (!hasVariant(GameType.Brawl)) {
+            // Only these game types use this specific deck panel
+            return;
+        }
+        final FDeckChooser mainChooser = getBrawlDeckChooser(playerIndex);
         final DeckType type = mainChooser.getSelectedDeckType();
         final Deck deck = mainChooser.getDeck();
         final Collection<DeckProxy> selectedDecks = mainChooser.getLstDecks().getSelectedItems();
@@ -712,6 +760,9 @@ public class VLobby implements ILobbyView {
         case TinyLeaders:
             decksFrame.add(tinyLeadersDeckChoosers.get(playerWithFocus), "grow, push");
             break;
+        case Brawl:
+            decksFrame.add(brawlDeckChoosers.get(playerWithFocus), "grow, push");
+            break;
         case Planechase:
             decksFrame.add(planarDeckPanels.get(playerWithFocus), "grow, push");
             break;
@@ -761,6 +812,10 @@ public class VLobby implements ILobbyView {
 
     public final FDeckChooser getTinyLeaderDeckChooser(final int playernum) {
         return tinyLeadersDeckChoosers.get(playernum);
+    }
+
+    public final FDeckChooser getBrawlDeckChooser(final int playernum) {
+        return brawlDeckChoosers.get(playernum);
     }
 
     GameType getCurrentGameMode() {
@@ -919,6 +974,11 @@ public class VLobby implements ILobbyView {
     /** Gets the list of tiny leaders deck lists. */
     public List<FList<Object>> getTinyLeadersDeckLists() {
         return tinyLeadersDeckLists;
+    }
+
+    /** Gets the list of tiny leaders deck lists. */
+    public List<FList<Object>> getBrawlDeckLists() {
+        return brawlDeckLists;
     }
 
     /** Gets the list of scheme deck lists. */

@@ -550,8 +550,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
-        //Tiny Leaders ignore commander damage rule.
-        if (source.isCommander() && isCombat && this.getGame().getRules().getGameType() != GameType.TinyLeaders) {
+        //Tiny Leaders and Brawl ignore commander damage rule.
+        if (source.isCommander() && isCombat && this.getGame().getRules().getGameType() != GameType.TinyLeaders
+                && this.getGame().getRules().getGameType() != GameType.Brawl) {
             commanderDamage.put(source, getCommanderDamage(source) + amount);
             view.updateCommanderDamage(this);
         }

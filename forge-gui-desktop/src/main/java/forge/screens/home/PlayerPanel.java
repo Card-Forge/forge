@@ -335,7 +335,8 @@ public class PlayerPanel extends FPanel {
 
     private void updateVariantControlsVisibility() {
         final boolean isTinyLeaders = lobby.hasVariant(GameType.TinyLeaders);
-        final boolean isCommanderApplied = mayEdit && (lobby.hasVariant(GameType.Commander) || isTinyLeaders);
+        final boolean isBrawl = lobby.hasVariant(GameType.Brawl);
+        final boolean isCommanderApplied = mayEdit && (lobby.hasVariant(GameType.Commander) || isTinyLeaders || isBrawl);
         final boolean isPlanechaseApplied = mayEdit && lobby.hasVariant(GameType.Planechase);
         final boolean isVanguardApplied = mayEdit && lobby.hasVariant(GameType.Vanguard);
         final boolean isArchenemyApplied = mayEdit && lobby.hasVariant(GameType.Archenemy);
@@ -346,7 +347,7 @@ public class PlayerPanel extends FPanel {
         deckLabel.setVisible(isDeckBuildingAllowed);
         deckBtn.setVisible(isDeckBuildingAllowed);
         cmdDeckSelectorBtn.setVisible(isCommanderApplied);            
-        cmdDeckEditor.setText(isTinyLeaders ? "TL Deck Editor" : "Commander Deck Editor");
+        cmdDeckEditor.setText(isTinyLeaders ? "TL Deck Editor" : isBrawl ? "Brawl Editor" : "Commander Deck Editor");
         cmdDeckEditor.setVisible(isCommanderApplied);
         cmdLabel.setVisible(isCommanderApplied);
 
@@ -508,7 +509,7 @@ public class PlayerPanel extends FPanel {
         cmdDeckSelectorBtn.setCommand(new Runnable() {
             @Override
             public void run() {
-                lobby.setCurrentGameMode(lobby.hasVariant(GameType.TinyLeaders) ? GameType.TinyLeaders : GameType.Commander);
+                lobby.setCurrentGameMode(lobby.hasVariant(GameType.TinyLeaders) ? GameType.TinyLeaders : lobby.hasVariant(GameType.Brawl) ? GameType.Brawl : GameType.Commander);
                 cmdDeckSelectorBtn.requestFocusInWindow();
                 lobby.changePlayerFocus(index);
             }
@@ -520,11 +521,15 @@ public class PlayerPanel extends FPanel {
                 if (lobby.hasVariant(GameType.TinyLeaders)) {
                     lobby.setCurrentGameMode(GameType.TinyLeaders);
                     Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_TINY_LEADERS);
-                    CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorCommander(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture(), true));
+                    CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorCommander(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture(), true, false));
+                } else if (lobby.hasVariant(GameType.Brawl)) {
+                    lobby.setCurrentGameMode(GameType.Brawl);
+                    Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_BRAWL);
+                    CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorCommander(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture(), false, true));
                 } else {
                     lobby.setCurrentGameMode(GameType.Commander);
                     Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_COMMANDER);
-                    CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorCommander(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture(), false));
+                    CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorCommander(CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture(), false, false));
                 }
             }
         });

@@ -370,6 +370,21 @@ public class DeckProxy implements InventoryItem {
         return result;
     }
 
+    public static Iterable<DeckProxy> getAllBrawlDecks() {
+        return getAllBrawlDecks(null);
+    }
+    public static Iterable<DeckProxy> getAllBrawlDecks(Predicate<Deck> filter) {
+        final List<DeckProxy> result = new ArrayList<DeckProxy>();
+        if (filter == null) {
+            filter = DeckFormat.Brawl.hasLegalCardsPredicate();
+        }
+        else {
+            filter = Predicates.and(DeckFormat.Brawl.hasLegalCardsPredicate(), filter);
+        }
+        addDecksRecursivelly("Brawl", GameType.Brawl, result, "", FModel.getDecks().getBrawl(), filter);
+        return result;
+    }
+
     public static Iterable<DeckProxy> getAllSchemeDecks() {
         return getAllSchemeDecks(null);
     }

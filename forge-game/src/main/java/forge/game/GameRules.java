@@ -78,7 +78,8 @@ public class GameRules {
     }
 
     public boolean hasCommander() {
-        return appliedVariants.contains(GameType.Commander) || appliedVariants.contains(GameType.TinyLeaders);
+        return appliedVariants.contains(GameType.Commander) || appliedVariants.contains(GameType.TinyLeaders)
+                || appliedVariants.contains(GameType.Brawl);
     }
 
     public boolean canCloneUseTargetsImage() {

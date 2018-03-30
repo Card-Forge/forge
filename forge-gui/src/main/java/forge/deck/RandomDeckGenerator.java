@@ -80,6 +80,8 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
             return DeckgenUtil.generateCommanderDeck(isAi, GameType.Commander);
         case TinyLeaders:
             return DeckgenUtil.generateCommanderDeck(isAi, GameType.TinyLeaders);
+        case Brawl:
+            return DeckgenUtil.generateCommanderDeck(isAi, GameType.Brawl);
         case Archenemy:
             return DeckgenUtil.generateSchemeDeck();
         case Planechase:
@@ -134,6 +136,9 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
             break;
         case TinyLeaders:
             decks = DeckProxy.getAllTinyLeadersDecks(DeckFormat.TinyLeaders.isLegalDeckPredicate());
+            break;
+        case Brawl:
+            decks = DeckProxy.getAllBrawlDecks(DeckFormat.Brawl.isLegalDeckPredicate());
             break;
         case Archenemy:
             decks = DeckProxy.getAllSchemeDecks(DeckFormat.Archenemy.isLegalDeckPredicate());

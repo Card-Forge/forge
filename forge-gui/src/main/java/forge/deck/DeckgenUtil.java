@@ -498,40 +498,18 @@ public class DeckgenUtil {
         final DeckFormat format = gameType.getDeckFormat();
         Predicate<CardRules> canPlay = forAi ? DeckGeneratorBase.AI_CAN_PLAY : DeckGeneratorBase.HUMAN_CAN_PLAY;
         @SuppressWarnings("unchecked")
-        Iterable<PaperCard> legends = cardDb.getAllCards(Predicates.compose(Predicates.and(
+        Iterable<PaperCard> legends = cardDb.getAllCards(Predicates.and(format.isLegalCardPredicate(),
+                Predicates.compose(Predicates.and(
                 new Predicate<CardRules>() {
                     @Override
                     public boolean apply(CardRules rules) {
                         return format.isLegalCommander(rules);
                     }
                 },
-                canPlay), PaperCard.FN_GET_RULES));
+                canPlay), PaperCard.FN_GET_RULES)));
 
-        do {
-            commander = Aggregates.random(legends);
-            colorID = commander.getRules().getColorIdentity();
-        } while (colorID.countColors() != 2);
-
-        List<String> comColors = new ArrayList<String>(2);
-        if (colorID.hasWhite()) { comColors.add("White"); }
-        if (colorID.hasBlue())  { comColors.add("Blue"); }
-        if (colorID.hasBlack()) { comColors.add("Black"); }
-        if (colorID.hasRed())   { comColors.add("Red"); }
-        if (colorID.hasGreen()) { comColors.add("Green"); }
-
-        DeckGeneratorBase gen = null;
-        gen = new DeckGenerator2Color(cardDb, format, comColors.get(0), comColors.get(1));
-        gen.setSingleton(true);
-        gen.setUseArtifacts(!FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
-        CardPool cards = gen.getDeck(gameType.getDeckFormat().getMainRange().getMaximum(), forAi);
-
-        // After generating card lists, build deck.
-        deck = new Deck("Generated " + gameType.toString() + " deck (" + commander.getName() + ")");
-        deck.setDirectory("generated/commander");
-        deck.getMain().addAll(cards);
-        deck.getOrCreate(DeckSection.Commander).add(commander);
-
-        return deck;
+        commander = Aggregates.random(legends);
+        return generateRandomCommanderDeck(commander, format, forAi, false);
     }
 
     /** Generate a ramdom Commander deck. */
@@ -542,7 +520,11 @@ public class DeckgenUtil {
         PaperCard selectedPartner=null;
         if(isCardGen){
             List<Map.Entry<PaperCard,Integer>> potentialCards = new ArrayList<>();
-            potentialCards.addAll(CardRelationMatrixGenerator.cardPools.get(DeckFormat.Commander.toString()).get(commander.getName()));
+            if(format.equals(DeckFormat.Brawl)){//TODO: replace with actual Brawl based data
+                potentialCards.addAll(CardRelationMatrixGenerator.cardPools.get(FModel.getFormats().getStandard().getName()).get(commander.getName()));
+            }else {
+                potentialCards.addAll(CardRelationMatrixGenerator.cardPools.get(DeckFormat.Commander.toString()).get(commander.getName()));
+            }
             Random r = new Random();
             //Collections.shuffle(potentialCards, r);
             List<PaperCard> preSelectedCards = new ArrayList<>();
@@ -588,11 +570,21 @@ public class DeckgenUtil {
             cardDb = FModel.getMagicDb().getCommonCards();
             //shuffle first 400 random cards
             Iterable<PaperCard> colorList = Iterables.filter(format.getCardPool(cardDb).getAllCards(),
-                    Predicates.compose(Predicates.or(new CardThemedDeckBuilder.MatchColorIdentity(commander.getRules().getColorIdentity()),
-                            DeckGeneratorBase.COLORLESS_CARDS), PaperCard.FN_GET_RULES));
+                    Predicates.and(format.isLegalCardPredicate(),Predicates.compose(Predicates.or(
+                            new CardThemedDeckBuilder.MatchColorIdentity(commander.getRules().getColorIdentity()),
+                            DeckGeneratorBase.COLORLESS_CARDS), PaperCard.FN_GET_RULES)));
+            if(format.equals(DeckFormat.Brawl)){//for Brawl - add additional filterprinted rule to remove old reprints for a consistent look
+                Iterable<PaperCard> colorListFiltered = Iterables.filter(colorList,FModel.getFormats().getStandard().getFilterPrinted());
+                colorList=colorListFiltered;
+            }
             List<PaperCard> cardList = Lists.newArrayList(colorList);
             Collections.shuffle(cardList, new Random());
-            List<PaperCard> shortList = cardList.subList(1, 400);
+            int shortlistlength=400;
+            if(cardList.size()<shortlistlength){
+                shortlistlength=cardList.size();
+            }
+            List<PaperCard> shortList = cardList.subList(1, shortlistlength);
+            shortList.remove(commander);
             gen = new CardThemedCommanderDeckBuilder(commander, selectedPartner,shortList,forAi,format);
 
         }
