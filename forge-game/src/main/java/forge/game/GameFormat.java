@@ -45,8 +45,9 @@ import java.util.Map.Entry;
 
 public class GameFormat implements Comparable<GameFormat> {
     private final String name;
-    private final Boolean isCore;
+    public enum FormatType {Sanctioned, Casual, Historic, Custom}
     // contains allowed sets, when empty allows all sets
+    private FormatType formatType;
 
     protected final List<String> allowedSetCodes; // this is mutable to support quest mode set unlocks
     protected final List<CardRarity> allowedRarities;
@@ -63,15 +64,15 @@ public class GameFormat implements Comparable<GameFormat> {
     private final int index;
 
     public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards) {
-        this(fName, sets, bannedCards, null, null, 0, false);
+        this(fName, sets, bannedCards, null, null, 0, FormatType.Custom);
     }
     
-    public static final GameFormat NoFormat = new GameFormat("(none)", null, null, null, null, Integer.MAX_VALUE, false);
+    public static final GameFormat NoFormat = new GameFormat("(none)", null, null, null, null, Integer.MAX_VALUE, FormatType.Custom);
     
     public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards,
-                      final List<String> restrictedCards, final List<CardRarity> rarities, int compareIdx, Boolean isCore) {
+                      final List<String> restrictedCards, final List<CardRarity> rarities, int compareIdx, FormatType formatType) {
         this.index = compareIdx;
-        this.isCore = isCore;
+        this.formatType = formatType;
         this.name = fName;
         allowedSetCodes = sets == null ? new ArrayList<String>() : Lists.newArrayList(sets);
         bannedCardNames = bannedCards == null ? new ArrayList<String>() : Lists.newArrayList(bannedCards);
@@ -114,8 +115,8 @@ public class GameFormat implements Comparable<GameFormat> {
         return this.name;
     }
 
-    public Boolean isCore() {
-        return this.isCore;
+    public FormatType getFormatType() {
+        return this.formatType;
     }
 
     public List<String> getAllowedSetCodes() {
@@ -224,7 +225,12 @@ public class GameFormat implements Comparable<GameFormat> {
             List<CardRarity> rarities = null;
             FileSection section = FileSection.parse(contents.get("format"), ":");
             String title = section.get("name");
-            Boolean isCore = section.getBoolean("core");
+            FormatType formatType;
+            try {
+                formatType = FormatType.valueOf(section.get("type"));
+            } catch (IllegalArgumentException e) {
+                formatType = FormatType.Custom;
+            }
             Integer idx = section.getInt("order");
             String strSets = section.get("sets");
             if ( null != strSets ) {
@@ -252,7 +258,7 @@ public class GameFormat implements Comparable<GameFormat> {
                 }
             }
 
-            GameFormat result = new GameFormat(title, sets, bannedCards, restrictedCards, rarities, idx, isCore);
+            GameFormat result = new GameFormat(title, sets, bannedCards, restrictedCards, rarities, idx, formatType);
             naturallyOrdered.add(result);
             return result;
         }
@@ -283,10 +289,10 @@ public class GameFormat implements Comparable<GameFormat> {
             return naturallyOrdered;
         }
 
-        public Iterable<GameFormat> getCoreList() {
+        public Iterable<GameFormat> getSanctionedList() {
             List<GameFormat> coreList = new ArrayList<>();
             for(GameFormat format: naturallyOrdered){
-                if(format.isCore()){
+                if(format.getFormatType().equals(FormatType.Sanctioned)){
                     coreList.add(format);
                 }
             }
