@@ -1,5 +1,5 @@
 [format]
 Name:Pauper
 Order:108
-Core:true
+Type:Casual
 Rarities:L, C
