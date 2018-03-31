@@ -7,5 +7,8 @@ The new brawl format is now available on Forge - selectable as a variant via che
 - Deck generation tools -
 Random AI deck generation now supports commander variants as well as standard and modern - these modes all now correctly limit AI playable cards when generating decks for AI.  Commander/TinyLeader/Brawl decks can be generated for a specific commander if you choose the "Random Commander Card-based Decks"
 
+- Format file specification -
+Formats are now specified one-per-file in the res/formats folder - if you have your own custom formats, they should be moved into here following the same syntax
+
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.
