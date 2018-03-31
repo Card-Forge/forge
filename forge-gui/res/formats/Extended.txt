@@ -1,6 +1,0 @@
-[format]
-Name:Extended
-Order:107
-Core:true
-Sets:SOM, MBS, NPH, M12, ISD, DKA, AVR, M13, RTR, GTC, DGM, M14, THS, BNG, JOU, M15
-Banned:Ponder; Mental Misstep

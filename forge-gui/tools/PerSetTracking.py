@@ -15,7 +15,7 @@ pathToMtgData = os.path.join(toolsDir, "mtg-data.txt")
 
 def initializeFormats():
 	formats = {}
-	formatLocation = os.path.join(resDir, 'formats', 'coreformats.txt')
+	formatLocation = os.path.join(resDir, 'blockdata', 'formats.txt')
 	print "Looking for formats in ", formatLocation
 	with open(formatLocation) as formatFile:
 		while formatFile:

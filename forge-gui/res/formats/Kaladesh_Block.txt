@@ -1,5 +1,4 @@
 [format]
 Name:Kaladesh Block
 Order:109
-Core:true
 Sets:KLD, AER
