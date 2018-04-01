@@ -166,12 +166,7 @@ public final class FModel {
         ForgePreferences.DEV_MODE = preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
         ForgePreferences.UPLOAD_DRAFT = ForgePreferences.NET_CONN;
 
-        formats = new GameFormat.Collection(new GameFormat.Reader(new File(ForgeConstants.BLOCK_DATA_DIR + "formats.txt")));
-        //add user custom formats if file present
-        GameFormat.Collection customFormats = new GameFormat.Collection(new GameFormat.Reader(new File(ForgeConstants.USER_PREFS_DIR + "customformats.txt")));
-        for (GameFormat format:customFormats){
-            formats.add(format);
-        }
+        formats = new GameFormat.Collection(new GameFormat.Reader( new File(ForgeConstants.FORMATS_DATA_DIR)));
 
         magicDb.setStandardPredicate(formats.getStandard().getFilterRules());
         magicDb.setModernPredicate(formats.getModern().getFilterRules());
