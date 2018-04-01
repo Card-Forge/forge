@@ -1,7 +1,7 @@
 Name:Crackling Doom
 ManaCost:R W B
 Types:Instant
-A:SP$ DealDamage | Cost$ R B W | Defined$ Player.Opponent | NumDmg$ 2 | AILogic$ OpponentHasCreatures | SpellDescription$ CARDNAME deals 2 damage to each opponent. Each opponent sacrifices a creature with the greatest power among creatures he or she controls.
+A:SP$ DealDamage | Cost$ R B W | Defined$ Player.Opponent | NumDmg$ 2 | AILogic$ OpponentHasCreatures | SubAbility$ DBRepeat | SpellDescription$ CARDNAME deals 2 damage to each opponent. Each opponent sacrifices a creature with the greatest power among creatures he or she controls.
 SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBChooseCard
 SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature.greatestPowerControlledByRemembered | Mandatory$ True | SubAbility$ DBSac
 SVar:DBSac:DB$ Sacrifice | Defined$ Player.IsRemembered | SacValid$ Card.ChosenCard | SacMessage$ the creature with the highest power
