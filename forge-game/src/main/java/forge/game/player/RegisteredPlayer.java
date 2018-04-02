@@ -30,7 +30,7 @@ public class RegisteredPlayer {
     private Iterable<PaperCard> planes = null;
     private Iterable<PaperCard> conspiracies = null;
     private List<PaperCard> commanders = Lists.newArrayList();
-    private PaperCard vanguardAvatar = null;
+    private List<PaperCard> vanguardAvatars = null;
     private PaperCard planeswalker = null;
     private int teamNumber = -1; // members of teams with negative id will play FFA.
     private boolean randomFoil = false;
@@ -104,7 +104,7 @@ public class RegisteredPlayer {
     public static RegisteredPlayer forVariants(final int playerCount,
     		final Set<GameType> appliedVariants, final Deck deck,	              //General vars
     		final Iterable<PaperCard> schemes, final boolean playerIsArchenemy,   //Archenemy specific vars
-    		final Iterable<PaperCard> planes, final PaperCard vanguardAvatar) {   //Planechase and Vanguard
+    		final Iterable<PaperCard> planes, final CardPool vanguardAvatar) {   //Planechase and Vanguard
         
     	RegisteredPlayer start = new RegisteredPlayer(deck);
     	if (appliedVariants.contains(GameType.Archenemy) && playerIsArchenemy) {
@@ -131,8 +131,9 @@ public class RegisteredPlayer {
     	if (appliedVariants.contains(GameType.Planechase)) {
             start.planes = planes;
     	}
-        if (appliedVariants.contains(GameType.Vanguard) || appliedVariants.contains(GameType.MomirBasic)) {
-            start.setVanguardAvatar(vanguardAvatar);
+        if (appliedVariants.contains(GameType.Vanguard) || appliedVariants.contains(GameType.MomirBasic)
+                || appliedVariants.contains(GameType.MoJhoSto)) {
+            start.setVanguardAvatars(vanguardAvatar.toFlatList());
         }
     	return start;
     }
@@ -153,19 +154,21 @@ public class RegisteredPlayer {
     	commanders = currentDeck.getCommanders();
     }
 
-    public PaperCard getVanguardAvatar() {
-        return vanguardAvatar;
+    public List<PaperCard> getVanguardAvatars() {
+        return vanguardAvatars;
     }
     public void assignVanguardAvatar() {
         CardPool section = currentDeck.get(DeckSection.Avatar);
-        setVanguardAvatar(section == null ? null : section.get(0));
+        setVanguardAvatars(section == null ? null : section.toFlatList());
     }
-    private void setVanguardAvatar(PaperCard vanguardAvatar0) {
-        vanguardAvatar = vanguardAvatar0;
-        if (vanguardAvatar == null) { return; }
+    private void setVanguardAvatars(List<PaperCard> vanguardAvatars0) {
+        vanguardAvatars = vanguardAvatars0;
+        if (vanguardAvatars == null) { return; }
+        for(PaperCard avatar: vanguardAvatars){
+            setStartingLife(getStartingLife() + avatar.getRules().getLife());
+            setStartingHand(getStartingHand() + avatar.getRules().getHand());
+        }
 
-        setStartingLife(getStartingLife() + vanguardAvatar.getRules().getLife());
-        setStartingHand(getStartingHand() + vanguardAvatar.getRules().getHand());
     }
 
     public PaperCard getPlaneswalker() {

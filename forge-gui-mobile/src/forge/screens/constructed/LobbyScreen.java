@@ -120,6 +120,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         cbVariants.addItem("(None)");
         cbVariants.addItem(GameType.Vanguard);
         cbVariants.addItem(GameType.MomirBasic);
+        cbVariants.addItem(GameType.MoJhoSto);
         cbVariants.addItem(GameType.Commander);
         cbVariants.addItem(GameType.TinyLeaders);
         cbVariants.addItem(GameType.Brawl);
@@ -345,6 +346,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             lstVariants.setListItemRenderer(new VariantRenderer());
             lstVariants.addItem(new Variant(GameType.Vanguard));
             lstVariants.addItem(new Variant(GameType.MomirBasic));
+            lstVariants.addItem(new Variant(GameType.MoJhoSto));
             lstVariants.addItem(new Variant(GameType.Commander));
             lstVariants.addItem(new Variant(GameType.TinyLeaders));
             lstVariants.addItem(new Variant(GameType.Brawl));

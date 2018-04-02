@@ -2591,8 +2591,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         PlayerZone com = getZone(ZoneType.Command);
 
         // Vanguard
-        if (registeredPlayer.getVanguardAvatar() != null) {
-            com.add(Card.fromPaperCard(registeredPlayer.getVanguardAvatar(), this));
+        if (registeredPlayer.getVanguardAvatars() != null) {
+            for(PaperCard avatar:registeredPlayer.getVanguardAvatars()) {
+                com.add(Card.fromPaperCard(avatar, this));
+            }
         }
     
         // Schemes

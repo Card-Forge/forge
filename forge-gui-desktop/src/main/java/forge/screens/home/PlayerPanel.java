@@ -342,7 +342,8 @@ public class PlayerPanel extends FPanel {
         final boolean isArchenemyApplied = mayEdit && lobby.hasVariant(GameType.Archenemy);
         final boolean archenemyVisiblity = mayEdit && lobby.hasVariant(GameType.ArchenemyRumble) || (isArchenemyApplied && isArchenemy());
         // Commander deck building replaces normal one, so hide it
-        final boolean isDeckBuildingAllowed = mayEdit && !isCommanderApplied && !lobby.hasVariant(GameType.MomirBasic);
+        final boolean isDeckBuildingAllowed = mayEdit && !isCommanderApplied && !lobby.hasVariant(GameType.MomirBasic)
+                && !lobby.hasVariant(GameType.MoJhoSto);
 
         deckLabel.setVisible(isDeckBuildingAllowed);
         deckBtn.setVisible(isDeckBuildingAllowed);

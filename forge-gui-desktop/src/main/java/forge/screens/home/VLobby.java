@@ -89,6 +89,7 @@ public class VLobby implements ILobbyView {
     private final FPanel variantsPanel = new FPanel(new MigLayout("insets 10, gapx 10"));
     private final VariantCheckBox vntVanguard = new VariantCheckBox(GameType.Vanguard);
     private final VariantCheckBox vntMomirBasic = new VariantCheckBox(GameType.MomirBasic);
+    private final VariantCheckBox vntMoJhoSto = new VariantCheckBox(GameType.MoJhoSto);
     private final VariantCheckBox vntCommander = new VariantCheckBox(GameType.Commander);
     private final VariantCheckBox vntTinyLeaders = new VariantCheckBox(GameType.TinyLeaders);
     private final VariantCheckBox vntBrawl = new VariantCheckBox(GameType.Brawl);
@@ -96,9 +97,9 @@ public class VLobby implements ILobbyView {
     private final VariantCheckBox vntArchenemy = new VariantCheckBox(GameType.Archenemy);
     private final VariantCheckBox vntArchenemyRumble = new VariantCheckBox(GameType.ArchenemyRumble);
     private final ImmutableList<VariantCheckBox> vntBoxesLocal  =
-            ImmutableList.of(vntVanguard, vntMomirBasic, vntCommander, vntTinyLeaders, vntBrawl, vntPlanechase, vntArchenemy, vntArchenemyRumble);
+            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntTinyLeaders, vntBrawl, vntPlanechase, vntArchenemy, vntArchenemyRumble);
     private final ImmutableList<VariantCheckBox> vntBoxesNetwork =
-            ImmutableList.of(vntVanguard, vntMomirBasic, vntCommander, vntTinyLeaders, vntBrawl /*, vntPlanechase, vntArchenemy, vntArchenemyRumble */);
+            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntTinyLeaders, vntBrawl /*, vntPlanechase, vntArchenemy, vntArchenemyRumble */);
 
     // Player frame elements
     private final JPanel playersFrame = new JPanel(new MigLayout("insets 0, gap 0 5, wrap, hidemode 3"));
@@ -387,7 +388,7 @@ public class VLobby implements ILobbyView {
     }
 
     void setReady(final int index, final boolean ready) {
-        if (ready && decks[index] == null && !vntMomirBasic.isSelected()) {
+        if (ready && decks[index] == null && !vntMomirBasic.isSelected() && !vntMoJhoSto.isSelected()) {
             SOptionPane.showErrorDialog("Select a deck before readying!");
             update(false);
             return;
