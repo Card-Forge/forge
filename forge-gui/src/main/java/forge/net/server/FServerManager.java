@@ -279,8 +279,12 @@ public final class FServerManager {
             // Safeguard shutdown call, to prevent lingering port mappings
             upnpService.shutdown();
         }
-        upnpService = new UpnpServiceImpl(new PortMappingListener(portMapping));
-        upnpService.getControlPoint().search();
+        try {
+            upnpService = new UpnpServiceImpl(new PortMappingListener(portMapping));
+            upnpService.getControlPoint().search();
+        }catch (Error e){
+            e.printStackTrace();
+        }
     }
 
     private class MessageHandler extends ChannelInboundHandlerAdapter {
