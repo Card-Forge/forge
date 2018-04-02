@@ -521,7 +521,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         public static final Predicate<CardEdition> hasBasicLands = new Predicate<CardEdition>() {
             @Override
             public boolean apply(CardEdition ed) {
-                if(ed == null) {
+                if (ed == null) {
                     // Happens for new sets with "???" code
                     return false;
                 }
