@@ -283,6 +283,9 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
     public String getShortString() {
     	StringBuilder sb = new StringBuilder();
         int generic = getGenericCost();
+        if (this.isZero()) {
+            sb.append('0');
+        }
         if (generic > 0) {
             sb.append(generic);
         }
