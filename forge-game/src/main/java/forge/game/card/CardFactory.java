@@ -182,6 +182,8 @@ public class CardFactory {
         c.clearControllers();
         c.setOwner(controller);
         c.setCopiedSpell(true);
+        // set counters (e.g. Yisan, the Wanderer Bard)
+        c.setCounters(original.getCounters());
 
         final SpellAbility copySA;
         if (sa.isTrigger()) {
