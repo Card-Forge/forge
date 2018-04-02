@@ -521,6 +521,10 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         public static final Predicate<CardEdition> hasBasicLands = new Predicate<CardEdition>() {
             @Override
             public boolean apply(CardEdition ed) {
+            	if(ed == null) {
+            		// Happens for new sets with "???" code
+            		return false;
+            	}
                 for(String landName : MagicColor.Constant.BASIC_LANDS) {
                     if (null == StaticData.instance().getCommonCards().getCard(landName, ed.getCode(), 0))
                         return false;
