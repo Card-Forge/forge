@@ -601,7 +601,13 @@ public final class StaticAbilityContinuous {
                 if (addKeywords != null) {
                     newKeywords = Arrays.copyOf(addKeywords, addKeywords.length);
                     for (int j = 0; j < newKeywords.length; ++j) {
-                    	newKeywords[j] = newKeywords[j].replace("CardManaCost", affectedCard.getManaCost().getShortString());
+                        if (newKeywords[j].contains("CardManaCost")) {
+                            if (affectedCard.getManaCost().isNoCost()) {
+                                newKeywords[j] = ""; // prevent a crash (varolz the scar-striped + dryad arbor)
+                            } else {
+                                newKeywords[j] = newKeywords[j].replace("CardManaCost", affectedCard.getManaCost().getShortString());
+                            }
+                        }
                     }
                 }
 
