@@ -1,5 +1,5 @@
 [format]
 Name:Zendikar Block Constructed, Zendikar
 Type:Historic
-Order:1194
+Order:457
 Sets:ZEN

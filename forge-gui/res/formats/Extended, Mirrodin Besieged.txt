@@ -1,5 +1,5 @@
 [format]
 Name:Extended, Mirrodin Besieged
 Type:Historic
-Order:1274
+Order:486
 Sets:LRW, MOR, SHM, EVE, ALA, CFX, ARB, M10, ZEN, WWK, ROE, M11, SOM, MBS

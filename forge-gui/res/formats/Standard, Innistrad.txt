@@ -1,5 +1,5 @@
 [format]
 Name:Standard, Innistrad
 Type:Historic
-Order:1316
+Order:501
 Sets:SOM, MBS, NPH, M12, ISD

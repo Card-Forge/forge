@@ -1,5 +1,5 @@
 [format]
 Name:Onslaught Block Constructed, Onslaught
 Type:Historic
-Order:717
+Order:298
 Sets:ONS

@@ -1,6 +1,6 @@
 [format]
 Name:Standard, Apr 1999
 Type:Historic
-Order:495
+Order:225
 Sets:5ED, TMP, STH, EXO, USG, ULG
 Banned:Dream Halls, Earthcraft, Fluctuator, Lotus Petal, Memory Jar, Recurring Nightmare, Time Spiral, Tolarian Academy, Windfall

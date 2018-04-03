@@ -1,6 +1,6 @@
 [format]
 Name:Standard, Stronghold
 Type:Historic
-Order:426
+Order:202
 Sets:5ED, MIR, VIS, WTH, TMP, STH
 Banned:Timmerian Fiends

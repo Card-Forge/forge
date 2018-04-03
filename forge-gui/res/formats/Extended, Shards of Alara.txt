@@ -1,6 +1,6 @@
 [format]
 Name:Extended, Shards of Alara
 Type:Historic
-Order:1135
+Order:437
 Sets:ONS, LGN, SCG, 8ED, MRD, DST, 5DN, CHK, BOK, SOK, 9ED, RAV, GPT, DIS, CSP, TSP, TSB, PLC, FUT, 10E, LRW, MOR, SHM, EVE, ALA
 Banned:Aether Vial, Disciple of the Vault, Sensei's Divining Top, Skullclamp

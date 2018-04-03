@@ -1,5 +1,5 @@
 [format]
 Name:Standard, Future Sight
 Type:Historic
-Order:1022
+Order:399
 Sets:9ED, RAV, GPT, DIS, CSP, TSP, TSB, PLC, FUT

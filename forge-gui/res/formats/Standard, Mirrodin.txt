@@ -1,5 +1,5 @@
 [format]
 Name:Standard, Mirrodin
 Type:Historic
-Order:786
+Order:321
 Sets:8ED, ONS, LGN, SCG, MRD

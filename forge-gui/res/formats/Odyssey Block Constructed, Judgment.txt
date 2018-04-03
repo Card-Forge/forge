@@ -1,5 +1,5 @@
 [format]
 Name:Odyssey Block Constructed, Judgment
 Type:Historic
-Order:703
+Order:293
 Sets:ODY, TOR, JUD

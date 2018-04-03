@@ -1,6 +1,6 @@
 [format]
 Name:Ice Age Block
 Type:Historic
-Order:174
+Order:134
 Sets:CSP, ALL, ICE
 Banned:Amulet of Quoz; Thawing Glaciers; Zuran Orb

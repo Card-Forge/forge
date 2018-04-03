@@ -1,6 +1,6 @@
 [format]
 Name:Type 1.5, Mercadian Masques
 Type:Historic
-Order:565
+Order:247
 Sets:LEA, LEB, 2ED, ARN, DRC94, ATQ, 3ED, DRK, ARENA, FEM, WW, SHC, FS, 4ED, ICE, CHR, HML, ALL, MIR, VIS, 5ED, WTH, TMP, STH, EXO, USG, ULG, 6ED, UDS, MMQ
 Banned:Amulet of Quoz, Balance, Black Vise, Braingeyser, Bronze Tablet, Channel, Contract from Below, Crop Rotation, Darkpact, Demonic Attorney, Demonic Tutor, Doomsday, Dream Halls, Enlightened Tutor, Fastbond, Fork, Frantic Search, Grim Monolith, Hurkyl's Recall, Jeweled Bird, Lotus Petal, Mana Crypt, Mana Vault, Memory Jar, Mind Over Matter, Mind Twist, Mox Diamond, Mystical Tutor, Rebirth, Regrowth, Strip Mine, Stroke of Genius, Tempest Efreet, Time Spiral, Timmerian Fiends, Tinker, Tolarian Academy, Vampiric Tutor, Voltaic Key, Wheel of Fortune, Windfall, Yawgmoth's Bargain, Yawgmoth's Will, Zuran Orb

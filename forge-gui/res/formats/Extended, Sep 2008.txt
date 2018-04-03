@@ -1,6 +1,6 @@
 [format]
 Name:Extended, Sep 2008
 Type:Historic
-Order:1123
+Order:433
 Sets:INV, PLS, 7ED, APC, ODY, TOR, JUD, ONS, LGN, SCG, 8ED, MRD, DST, 5DN, CHK, BOK, SOK, 9ED, RAV, GPT, DIS, CSP, TSP, TSB, PLC, FUT, 10E, LRW, MOR, SHM, EVE
 Banned:Aether Vial, Disciple of the Vault, Entomb, Sensei's Divining Top, Skullclamp

@@ -1,5 +1,5 @@
 [format]
 Name:Ravnica Block Constructed, Dissension
 Type:Historic
-Order:965
+Order:380
 Sets:RAV, GPT, DIS

@@ -1,6 +1,6 @@
 [format]
 Name:Extended, Classic Sixth Edition
 Type:Historic
-Order:514
+Order:231
 Sets:2ED, 3ED, 4ED, CHR, 5ED, 6ED, DRK, ARENA, FEM, ICE, CHR, HML, ALL, MIR, VIS, WTH, TMP, STH, EXO, USG, ULG
 Banned:Amulet of Quoz, Balance, Black Vise, Bronze Tablet, Channel, Contract from Below, Darkpact, Demonic Attorney, Demonic Tutor, Fastbond, Hypnotic Specter, Ivory Tower, Jeweled Bird, Kird Ape, Mana Crypt, Maze of Ith, Memory Jar, Mind Twist, Rebirth, Regrowth, Serendib Efreet, Sol Ring, Strip Mine, Tempest Efreet, Timmerian Fiends, Tolarian Academy, Wheel of Fortune, Windfall, Zuran Orb

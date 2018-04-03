@@ -1,5 +1,5 @@
 [format]
 Name:Standard, Seventh Edition
 Type:Historic
-Order:640
+Order:272
 Sets:7ED, MMQ, NMS, PCY, INV, PLS

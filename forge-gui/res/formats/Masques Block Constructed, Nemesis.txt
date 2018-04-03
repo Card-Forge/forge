@@ -1,5 +1,5 @@
 [format]
 Name:Masques Block Constructed, Nemesis
 Type:Historic
-Order:574
+Order:250
 Sets:MMQ, NMS

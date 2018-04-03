@@ -1,5 +1,5 @@
 [format]
 Name:Standard, Morningtide
 Type:Historic
-Order:1077
+Order:417
 Sets:10E, CSP, TSP, TSB, PLC, FUT, LRW, MOR

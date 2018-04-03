@@ -1,6 +1,6 @@
 [format]
 Name:Standard, Magic 2012
 Type:Historic
-Order:1299
+Order:495
 Sets:ZEN, WWK, ROE, SOM, MBS, NPH, M12
 Banned:Jace, the Mind Sculptor; Stoneforge Mystic

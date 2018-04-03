@@ -1,5 +1,5 @@
 [format]
 Name:Invasion Block Constructed, Invasion
 Type:Historic
-Order:614
+Order:263
 Sets:INV

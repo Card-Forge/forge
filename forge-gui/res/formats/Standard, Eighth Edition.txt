@@ -1,5 +1,5 @@
 [format]
 Name:Standard, Eighth Edition
 Type:Historic
-Order:771
+Order:316
 Sets:8ED, ODY, TOR, JUD, ONS, LGN, SCG

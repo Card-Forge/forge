@@ -1,5 +1,5 @@
 [format]
 Name:Standard, Odyssey
 Type:Historic
-Order:666
+Order:280
 Sets:7ED, INV, PLS, APC, ODY

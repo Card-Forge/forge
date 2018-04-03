@@ -1,6 +1,6 @@
 [format]
 Name:Mirage Block
 Type:Historic
-Order:171
+Order:133
 Sets:VIS, WTH, MIR
 Banned:Squandered Resources

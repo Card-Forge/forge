@@ -1,5 +1,5 @@
 [format]
 Name:Shards of Alara Block Constructed, Alara Reborn
 Type:Historic
-Order:1173
+Order:450
 Sets:ALA, CFX, ARB

@@ -1,5 +1,5 @@
 [format]
 Name:Limited Edition Alpha
 Type:Historic
-Order:195
+Order:136
 Sets:LEA

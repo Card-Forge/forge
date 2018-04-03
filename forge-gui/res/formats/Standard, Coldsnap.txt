@@ -1,5 +1,5 @@
 [format]
 Name:Standard, Coldsnap
 Type:Historic
-Order:977
+Order:384
 Sets:9ED, CHK, BOK, SOK, RAV, GPT, DIS, CSP

@@ -1,7 +1,7 @@
 [format]
 Name:Invasion Block Constructed, Apocalypse
 Type:Historic
-Order:654
+Order:277
 Sets:INV, PLS, APC
 [Extended, Apocalypse
 Sets:3ED, 5ED, 6ED, 7ED, ICE, HML, ALL, MIR, VIS, WTH, TMP, STH, EXO, USG, ULG, UDS, MMQ, NMS, PCY, INV, PLS, APC
