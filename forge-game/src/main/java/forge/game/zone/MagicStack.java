@@ -583,6 +583,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         if (source.isCopiedSpell() || sa.isAbility()) {
             // do nothing
+
+            // if SA is last saga ability, sacrifice the host
+            if (sa.isLastSaga()) {
+                game.getAction().sacrifice(source, null);
+            }
         }
         else if ((source.isInstant() || source.isSorcery() || fizzle) &&
                 source.isInZone(ZoneType.Stack)) {

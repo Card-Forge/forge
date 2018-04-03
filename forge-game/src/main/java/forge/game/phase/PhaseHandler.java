@@ -27,6 +27,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CounterType;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -252,8 +253,16 @@ public class PhaseHandler implements java.io.Serializable {
                     break;
 
                 case MAIN1:
-                    if (playerTurn.isArchenemy() && isPreCombatMain()) {
-                        playerTurn.setSchemeInMotion();
+                    if (isPreCombatMain()) {
+                        if (playerTurn.isArchenemy()) {
+                            playerTurn.setSchemeInMotion();
+                        }
+                        // all Saga get Lore counter at the begin of pre combat
+                        for (Card c : playerTurn.getCardsIn(ZoneType.Battlefield)) {
+                            if (c.getType().hasSubtype("Saga")) {
+                                c.addCounter(CounterType.LORE, 1, null, false);
+                            }
+                        }
                     }
                     break;
 
