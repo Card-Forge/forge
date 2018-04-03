@@ -12,6 +12,8 @@ Baird, Steward of Argive
 
 Benalish Marshal
 
+8 U Board the Weatherlight
+
 Charge
 
 12 U Danitha Capashen, Paragon
@@ -80,6 +82,9 @@ Tetsuko Umezawa, Fugitive
 75 U Wizard's Retort
 76 R Zahid, Djinn of the Lamp
 
+78 C Cabal Evangel
+79 C Cabal Paladin
+80 C Caligo Skin-Witch
 81 U Cast Down
 
 Chainer's Torment
@@ -139,10 +144,8 @@ Goblin Warchief
 
 Haphazard Bombardment
 
-Jaya Ballard
-
-Jaya's Immolating Inferno
-
+132 M Jaya Ballard
+133 Jaya's Immolating Inferno
 134 C Keldon Overseer
 
 Keldon Warcaller
@@ -211,7 +214,7 @@ Verdant Force
 
 Adeliz, the Cinder Wind
 
-Arvad the Cursed
+191 U Arvad the Cursed
 
 Aryel, Knight of Windgrace
 
@@ -223,25 +226,19 @@ Grand Warlord Radha
 
 Hallar, the Firefletcher
 
-Jhoira, Weatherlight Captain
-
-Jodah, Archmage Eternal
-
-Muldrotha, the Gravetide
-
-Oath of Teferi
-
-Primevals' Glorious Rebirth
-
-Rona, Disciple of Gix
-
+197 M Jhoira, Weatherlight Captain
+198 Jodah, Archmage Eternal
+199 Muldrotha, the Gravetide
+200 Oath of Teferi
+201 Primevals' Glorious Rebirth
+202 U Raff Capashen, Ship's Mage
+203 Rona, Disciple of Gix
 204 U Shanna, Sisay's Legacy
-
-Slimefoot, the Stowaway
+205 U Slimefoot, the Stowaway
 
 Teferi, Hero of Dominaria
 
-Tiana, Ship's Caretaker
+208 U Tiana, Ship's Caretaker
 
 Blackblade Reforged
 
@@ -278,6 +275,8 @@ Sparring Construct
 Urza's Tome
 
 Voltaic Servant
+
+237 M Weatherlight
 
 Clifftop Retreat
 
