@@ -166,6 +166,7 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
             @Override
             public boolean tap(Integer index, GameFormat value, float x, float y, int count) {
                 selectedFormat=value;
+                Forge.back();
                 return true;
             }
 
