@@ -276,6 +276,11 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
+    public boolean isLastSaga() {
+        return sa.isLastSaga();
+    }
+
+    @Override
     public boolean isFlashBackAbility() {
         return sa.isFlashBackAbility();
     }

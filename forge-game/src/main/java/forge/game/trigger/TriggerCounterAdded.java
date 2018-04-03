@@ -23,6 +23,7 @@ import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.Expressions;
 
 /**
  * <p>
@@ -60,8 +61,8 @@ public class TriggerCounterAdded extends Trigger {
                 return false;
 
             final Card addedTo = (Card) runParams2.get("Card");
-            if (!addedTo.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
+            if (!addedTo.isValid(getParam("ValidCard").split(","), getHostCard().getController(),
+                    getHostCard(), null)) {
                 return false;
             }
         }
@@ -71,8 +72,8 @@ public class TriggerCounterAdded extends Trigger {
                 return false;
 
             final Player addedTo = (Player) runParams2.get("Player");
-            if (!addedTo.isValid(getParam("ValidPlayer").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
+            if (!addedTo.isValid(getParam("ValidPlayer").split(","), getHostCard().getController(),
+                    getHostCard(), null)) {
                 return false;
             }
         }
@@ -87,8 +88,8 @@ public class TriggerCounterAdded extends Trigger {
                 return false;
             }
 
-            if (!source.isValid(getParam("ValidSource").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
+            if (!source.isValid(getParam("ValidSource").split(","), getHostCard().getController(),
+                    getHostCard(), null)) {
                 return false;
             }
         }
@@ -96,6 +97,19 @@ public class TriggerCounterAdded extends Trigger {
         if (hasParam("CounterType")) {
             final String type = getParam("CounterType");
             if (!type.equals(addedType.toString())) {
+                return false;
+            }
+        }
+        if (hasParam("CounterAmount") && runParams2.containsKey("CounterAmount")) {
+            // this one is for Saga to trigger
+            // the right ability for the counters on the card
+            final String fullParam = getParam("CounterAmount");
+
+            final String operator = fullParam.substring(0, 2);
+            final int operand = Integer.parseInt(fullParam.substring(2));
+            final int actualAmount = (Integer) runParams2.get("CounterAmount");
+
+            if (!Expressions.compare(actualAmount, operator, operand)) {
                 return false;
             }
         }

@@ -20,6 +20,7 @@ package forge.game.card;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -2843,6 +2844,26 @@ public class CardFactoryUtil {
             parsedTrigger.setOverridingAbility(sa);
 
             inst.addTrigger(parsedTrigger);
+        } else if (keyword.startsWith("Saga")) {
+            final String[] k = keyword.split(":");
+            final String num = k[1];
+            final String[] abs = k[2].split(",");
+            final Integer max = Integer.valueOf(num);
+
+            int i = 1;
+            for (String ab : abs) {
+                SpellAbility sa = AbilityFactory.getAbility(card, ab);
+                if (i == max) {
+                    sa.setLastSaga(true);
+                }
+                String trigStr = "Mode$ CounterAdded | ValidCard$ Card.Self | TriggerZones$ Battlefield"
+                    + "| CounterType$ LORE | CounterAmount$ EQ" + i
+                    + "| TriggerDescription$ " + Strings.repeat("I", i) + " - "  + sa.getDescription();
+                final Trigger  t = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+                t.setOverridingAbility(sa);
+                inst.addTrigger(t);
+                ++i;
+            }
         } else if (keyword.equals("Soulbond")) {
             // Setup ETB trigger for card with Soulbond keyword
             final String actualTriggerSelf = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
@@ -3310,6 +3331,11 @@ public class CardFactoryUtil {
             re.setLayer(ReplacementLayer.Other);
 
             re.setOverridingAbility(saExile);
+
+            inst.addReplacement(re);
+        } else if (keyword.startsWith("Saga")) {
+            String sb = "etbCounter:LORE:1:no Condition:no desc";
+            final ReplacementEffect re = makeEtbCounter(sb, card, intrinsic);
 
             inst.addReplacement(re);
         } else if (keyword.equals("Totem armor")) {
