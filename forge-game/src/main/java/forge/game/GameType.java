@@ -42,6 +42,25 @@ public enum GameType {
                     .getCard("Momir Vig, Simic Visionary Avatar"), 1);
             return deck;
         }
+    }),
+    MoJhoSto      (DeckFormat.Constructed, false, false, false, "MoJhoSto", "Each player has a deck containing 60 basic lands and the Momir Vig, Jhoira of the Ghitu, and Stonehewer Giant avatars.", new Function<RegisteredPlayer, Deck>() {
+        @Override
+        public Deck apply(RegisteredPlayer player) {
+            Deck deck = new Deck();
+            CardPool mainDeck = deck.getMain();
+            mainDeck.add("Plains", 12);
+            mainDeck.add("Island", 12);
+            mainDeck.add("Swamp", 12);
+            mainDeck.add("Mountain", 12);
+            mainDeck.add("Forest", 12);
+            deck.getOrCreate(DeckSection.Avatar).add(StaticData.instance().getVariantCards()
+                    .getCard("Momir Vig, Simic Visionary Avatar"), 1);
+            deck.getOrCreate(DeckSection.Avatar).add(StaticData.instance().getVariantCards()
+                    .getCard("Jhoira of the Ghitu Avatar"), 1);
+            deck.getOrCreate(DeckSection.Avatar).add(StaticData.instance().getVariantCards()
+                    .getCard("Stonehewer Giant Avatar"), 1);
+            return deck;
+        }
     });
 
     private final DeckFormat deckFormat;

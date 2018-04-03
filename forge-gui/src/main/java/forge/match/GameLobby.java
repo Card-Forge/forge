@@ -234,25 +234,37 @@ public abstract class GameLobby implements IHasGameType {
             data.appliedVariants.remove(GameType.TinyLeaders);
             data.appliedVariants.remove(GameType.Brawl);
             data.appliedVariants.remove(GameType.MomirBasic);
+            data.appliedVariants.remove(GameType.MoJhoSto);
             break;
         case TinyLeaders:
             data.appliedVariants.remove(GameType.Commander);
             data.appliedVariants.remove(GameType.Brawl);
             data.appliedVariants.remove(GameType.MomirBasic);
+            data.appliedVariants.remove(GameType.MoJhoSto);
             break;
         case Brawl:
             data.appliedVariants.remove(GameType.Commander);
             data.appliedVariants.remove(GameType.TinyLeaders);
             data.appliedVariants.remove(GameType.MomirBasic);
+            data.appliedVariants.remove(GameType.MoJhoSto);
             break;
         case Vanguard:
             data.appliedVariants.remove(GameType.MomirBasic);
+            data.appliedVariants.remove(GameType.MoJhoSto);
             break;
         case MomirBasic:
             data.appliedVariants.remove(GameType.Commander);
             data.appliedVariants.remove(GameType.TinyLeaders);
             data.appliedVariants.remove(GameType.Brawl);
             data.appliedVariants.remove(GameType.Vanguard);
+            data.appliedVariants.remove(GameType.MoJhoSto);
+            break;
+        case MoJhoSto:
+            data.appliedVariants.remove(GameType.Commander);
+            data.appliedVariants.remove(GameType.TinyLeaders);
+            data.appliedVariants.remove(GameType.Brawl);
+            data.appliedVariants.remove(GameType.Vanguard);
+            data.appliedVariants.remove(GameType.MomirBasic);
             break;
         default:
             break;
@@ -413,7 +425,6 @@ public abstract class GameLobby implements IHasGameType {
                 players.add(rp.setPlayer(lobbyPlayer));
             }
             else {
-                PaperCard vanguardAvatar = null;
                 if (isCommanderMatch) {
                     final GameType commanderGameType = isTinyLeadersMatch ? GameType.TinyLeaders : isBrawlMatch ? GameType.Brawl : GameType.Commander;
                     if (checkLegality) {
@@ -438,9 +449,6 @@ public abstract class GameLobby implements IHasGameType {
                 deck = deck == null ? rp.getDeck() : deck;
 
                 final CardPool avatarPool = deck.get(DeckSection.Avatar);
-                if (avatarPool != null && (hasVariant(GameType.Vanguard) || hasVariant(GameType.MomirBasic))) {
-                    vanguardAvatar = avatarPool.get(0);
-                }
 
                 Iterable<PaperCard> schemes = null;
                 Iterable<PaperCard> planes = null;
@@ -474,14 +482,14 @@ public abstract class GameLobby implements IHasGameType {
 
                 //Vanguard
                 if (variantTypes.contains(GameType.Vanguard)) {
-                    if (vanguardAvatar == null) { //ERROR! null if avatar deselected on list
+                    if (avatarPool == null || avatarPool.countAll() == 0) { //ERROR! null if avatar deselected on list
                         SOptionPane.showMessageDialog("No Vanguard avatar selected for " + name
                                 + ". Please choose one or disable the Vanguard variant");
                         return null;
                     }
                 }
 
-                rp = RegisteredPlayer.forVariants(activeSlots.size(), variantTypes, deck, schemes, isArchenemy, planes, vanguardAvatar);
+                rp = RegisteredPlayer.forVariants(activeSlots.size(), variantTypes, deck, schemes, isArchenemy, planes, avatarPool);
                 rp.setTeamNumber(team);
                 players.add(rp.setPlayer(lobbyPlayer));
             }
