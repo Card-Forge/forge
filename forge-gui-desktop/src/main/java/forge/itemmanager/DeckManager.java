@@ -186,6 +186,17 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         }
         menu.add(fmt);
 
+        final JMenu fmtall = GuiUtils.createMenu("Historic Format");
+        for (final GameFormat f : FModel.getFormats().getHistoricList()) {
+            GuiUtils.addMenuItem(fmtall, f.getName(), null, new Runnable() {
+                @Override
+                public void run() {
+                    addFilter(new DeckFormatFilter(DeckManager.this, f));
+                }
+            }, FormatFilter.canAddFormat(f, getFilter(DeckFormatFilter.class)));
+        }
+        menu.add(fmtall);
+
         GuiUtils.addMenuItem(menu, "Sets...", null, new Runnable() {
             @Override public void run() {
                 final DeckSetFilter existingFilter = getFilter(DeckSetFilter.class);

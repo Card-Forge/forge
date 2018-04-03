@@ -92,6 +92,17 @@ public class CardManager extends ItemManager<PaperCard> {
         }
         menu.add(fmt);
 
+        JMenu fmthist = GuiUtils.createMenu("Historic Format");
+        for (final GameFormat f : FModel.getFormats().getHistoricList()) {
+            GuiUtils.addMenuItem(fmthist, f.getName(), null, new Runnable() {
+                @Override
+                public void run() {
+                    itemManager.addFilter(new CardFormatFilter(itemManager, f));
+                }
+            }, FormatFilter.canAddFormat(f, itemManager.getFilter(CardFormatFilter.class)));
+        }
+        menu.add(fmthist);
+
         GuiUtils.addMenuItem(menu, "Sets...", null, new Runnable() {
             @Override
             public void run() {
