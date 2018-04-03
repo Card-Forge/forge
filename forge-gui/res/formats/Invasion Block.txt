@@ -1,5 +1,5 @@
 [format]
 Name:Invasion Block
 Type:Historic
-Order:160
+Order:129
 Sets:APC, PLS, INV

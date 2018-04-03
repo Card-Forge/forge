@@ -1,6 +1,6 @@
 [format]
 Name:Standard, Ninth Edition
 Type:Historic
-Order:912
+Order:362
 Sets:9ED, MRD, DST, 5DN, CHK, BOK, SOK
 Banned:Arcbound Ravager, Ancient Den, Darksteel Citadel, Disciple of the Vault, Great Furnace, Seat of the Synod, Skullclamp, Tree of Tales, Vault of Whispers

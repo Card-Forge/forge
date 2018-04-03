@@ -1,5 +1,5 @@
 [format]
 Name:Standard, Alara Reborn
 Type:Historic
-Order:1161
+Order:446
 Sets:10E, LRW, MOR, SHM, EVE, ALA, CFX, ARB

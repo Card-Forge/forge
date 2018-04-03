@@ -1,5 +1,5 @@
 [format]
 Name:Standard, Eventide
 Type:Historic
-Order:1109
+Order:428
 Sets:10E, CSP, TSP, TSB, PLC, FUT, LRW, MOR, SHM, EVE

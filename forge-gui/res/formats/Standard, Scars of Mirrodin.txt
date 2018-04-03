@@ -1,5 +1,5 @@
 [format]
 Name:Standard, Scars of Mirrodin
 Type:Historic
-Order:1256
+Order:479
 Sets:ZEN, WWK, ROE, M11, SOM

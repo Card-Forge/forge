@@ -1,5 +1,5 @@
 [format]
 Name:Odyssey Block
 Type:Historic
-Order:158
+Order:128
 Sets:JUD, TOR, ODY

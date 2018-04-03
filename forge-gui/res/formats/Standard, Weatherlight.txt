@@ -1,6 +1,6 @@
 [format]
 Name:Standard, Weatherlight
 Type:Historic
-Order:386
+Order:189
 Sets:5ED, ICE, HML, ALL, MIR, VIS, WTH
 Banned:Amulet of Quoz, Timmerian Fiends, Zuran Orb

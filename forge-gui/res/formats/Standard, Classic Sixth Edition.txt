@@ -1,6 +1,6 @@
 [format]
 Name:Standard, Classic Sixth Edition
 Type:Historic
-Order:511
+Order:230
 Sets:6ED, TMP, STH, EXO, USG, ULG
 Banned:Dream Halls, Earthcraft, Fluctuator, Lotus Petal, Memory Jar, Recurring Nightmare, Time Spiral, Tolarian Academy, Windfall

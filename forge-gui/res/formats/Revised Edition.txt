@@ -1,7 +1,7 @@
 [format]
 Name:Revised Edition
 Type:Historic
-Order:219
+Order:144
 Sets:LEA, LEB, 2ED, ARN, DRC94, ATQ, 3ED
 Restricted:Ali from Cairo, Ancestral Recall, Berserk, Black Lotus, Braingeyser, Channel, Copy Artifact, Demonic Tutor, Dingus Egg, Gauntlet of Might, Mox Pearl, Mox Emerald, Mox Ruby, Mox Sapphire, Mox Jet, Regrowth, Sol Ring, Timetwister, Time Walk, Wheel of Fortune
 Banned:Contract from Below, Darkpact, Demonic Attorney, Jeweled Bird, Shahrazad, Time Vault

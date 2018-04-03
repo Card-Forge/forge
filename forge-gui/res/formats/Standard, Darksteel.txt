@@ -1,5 +1,5 @@
 [format]
 Name:Standard, Darksteel
 Type:Historic
-Order:810
+Order:329
 Sets:8ED, ONS, LGN, SCG, MRD, DST

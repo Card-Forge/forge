@@ -1,5 +1,5 @@
 [format]
 Name:Zendikar Block Constructed, Worldwake
 Type:Historic
-Order:1208
+Order:462
 Sets:ZEN, WWK

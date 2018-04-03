@@ -1,6 +1,6 @@
 [format]
 Name:Innistrad Block Constructed, Avacyn Restored
 Type:Historic
-Order:1363
+Order:517
 Sets:ISD, DKA, AVR
 Banned:Intangible Virtue; Lingering Souls

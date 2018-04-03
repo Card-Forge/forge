@@ -1,5 +1,5 @@
 [format]
 Name:Kamigawa Block
 Type:Historic
-Order:151
+Order:125
 Sets:SOK, BOK, CHK

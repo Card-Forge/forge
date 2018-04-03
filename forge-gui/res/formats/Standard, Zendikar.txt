@@ -1,5 +1,5 @@
 [format]
 Name:Standard, Zendikar
 Type:Historic
-Order:1196
+Order:458
 Sets:ALA, CFX, ARB, M10, ZEN

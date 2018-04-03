@@ -1,5 +1,5 @@
 [format]
 Name:Standard, Time Spiral
 Type:Historic
-Order:992
+Order:389
 Sets:9ED, RAV, GPT, DIS, CSP, TSP, TSB

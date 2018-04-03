@@ -1,5 +1,5 @@
 [format]
 Name:Lorwyn-Shadowmoor Block Constructed, Eventide
 Type:Historic
-Order:1121
+Order:432
 Sets:LRW, MOR, SHM, EVE

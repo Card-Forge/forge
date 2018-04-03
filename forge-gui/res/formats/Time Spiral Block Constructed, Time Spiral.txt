@@ -1,6 +1,6 @@
 [format]
 Name:Time Spiral Block Constructed, Time Spiral
 Type:Historic
-Order:994
+Order:390
 Sets:TSP, TSB
 Banned:Amulet of Quoz, Thawing Glaciers, Timmerian Fiends, Zuran Orb

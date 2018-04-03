@@ -1,6 +1,6 @@
 [format]
 Name:Standard, Jun 2004
 Type:Historic
-Order:824
+Order:334
 Sets:8ED, ONS, LGN, SCG, MRD, DST, 5DN
 Banned:Skullclamp

@@ -1,6 +1,6 @@
 [format]
 Name:Standard, Mercadian Masques
 Type:Historic
-Order:553
+Order:243
 Sets:6ED, USG, ULG, UDS, MMQ
 Banned:Fluctuator, Memory Jar, Time Spiral, Tolarian Academy, Windfall

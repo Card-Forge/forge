@@ -1,5 +1,5 @@
 [format]
 Name:Zendikar Block
 Type:Historic
-Order:141
+Order:120
 Sets:ROE, WWK, ZEN

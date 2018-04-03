@@ -1,5 +1,5 @@
 [format]
 Name:Scars of Mirrodin Block Constructed, New Phyrexia
 Type:Historic
-Order:1283
+Order:489
 Sets:SOM, MBS, NPH

@@ -1,5 +1,5 @@
 [format]
 Name:Standard, Torment
 Type:Historic
-Order:687
+Order:287
 Sets:7ED, INV, PLS, APC, ODY, TOR

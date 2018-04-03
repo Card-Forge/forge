@@ -1,5 +1,5 @@
 [format]
 Name:Return to Ravnica Block
 Type:Historic
-Order:134
+Order:117
 Sets:DGM, GTC, RTR

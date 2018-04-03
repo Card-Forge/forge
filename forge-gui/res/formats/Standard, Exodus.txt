@@ -1,6 +1,6 @@
 [format]
 Name:Standard, Exodus
 Type:Historic
-Order:441
+Order:207
 Sets:5ED, MIR, VIS, WTH, TMP, STH, EXO
 Banned:Timmerian Fiends

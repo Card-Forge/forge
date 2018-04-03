@@ -1,5 +1,5 @@
 [format]
 Name:Standard, Apocalypse
 Type:Historic
-Order:652
+Order:276
 Sets:7ED, MMQ, NMS, PCY, INV, PLS

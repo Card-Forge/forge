@@ -1,6 +1,6 @@
 [format]
 Name:Mirrodin Block Constructed, Jun 2004
 Type:Historic
-Order:827
+Order:335
 Sets:MRD
 Banned:Skullclamp

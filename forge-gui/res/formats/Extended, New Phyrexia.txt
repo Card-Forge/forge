@@ -1,5 +1,5 @@
 [format]
 Name:Extended, New Phyrexia
 Type:Historic
-Order:1287
+Order:491
 Sets:LRW, MOR, SHM, EVE, ALA, CFX, ARB, M10, ZEN, WWK, ROE, M11, SOM, MBS, NPH

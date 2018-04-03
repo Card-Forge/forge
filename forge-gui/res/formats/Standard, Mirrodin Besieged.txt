@@ -1,5 +1,5 @@
 [format]
 Name:Standard, Mirrodin Besieged
 Type:Historic
-Order:1272
+Order:485
 Sets:ZEN, WWK, ROE, M11, SOM, MBS
