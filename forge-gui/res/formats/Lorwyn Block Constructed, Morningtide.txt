@@ -1,0 +1,5 @@
+[format]
+Name:Lorwyn Block Constructed, Morningtide
+Type:Historic
+Order:1089
+Sets:LRW, MOR

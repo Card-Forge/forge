@@ -1,0 +1,5 @@
+[format]
+Name:Standard, Avacyn Restored
+Type:Historic
+Order:1366
+Sets:SOM, MBS, NPH, M12, ISD, DKA, AVR

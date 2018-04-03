@@ -1,0 +1,5 @@
+[format]
+Name:Onslaught Block
+Type:Historic
+Order:156
+Sets:SCG, LGN, ONS

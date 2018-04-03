@@ -1,0 +1,7 @@
+[format]
+Name:Type II, Alliances
+Type:Historic
+Order:322
+Sets:FEM, 4ED, ICE, CHR, HML, ALL
+Restricted:Balance, Black Vise, Ivory Tower, Zuran Orb
+Banned:Amulet of Quoz, Bronze Tablet, Channel, Mind Twist, Rebirth, Tempest Efreet

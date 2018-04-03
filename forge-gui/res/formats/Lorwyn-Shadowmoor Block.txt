@@ -1,0 +1,5 @@
+[format]
+Name:Lorwyn-Shadowmoor Block
+Type:Historic
+Order:145
+Sets:EVE, SHM, MOR, LRW

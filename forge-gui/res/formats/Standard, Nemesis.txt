@@ -1,0 +1,6 @@
+[format]
+Name:Standard, Nemesis
+Type:Historic
+Order:568
+Sets:6ED, USG, ULG, UDS, MMQ, NMS
+Banned:Fluctuator, Memory Jar, Time Spiral, Tolarian Academy, Windfall

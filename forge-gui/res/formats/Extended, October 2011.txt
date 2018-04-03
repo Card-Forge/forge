@@ -1,0 +1,6 @@
+[format]
+Name:Extended, October 2011
+Type:Historic
+Order:1333
+Sets:LRW, MOR, SHM, EVE, ALA, CFX, ARB, M10, ZEN, WWK, ROE, M11, SOM, MBS, NPH, M12, ISD
+Banned:Jace, the Mind Sculptor; Mental Misstep; Ponder; Stoneforge Mystic

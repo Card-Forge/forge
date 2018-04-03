@@ -1,0 +1,6 @@
+[format]
+Name:Extended, July 2010
+Type:Historic
+Order:1236
+Sets:TSP, TSB, PLC, FUT, 10E, LRW, MOR, SHM, EVE, ALA, CFX, ARB, M10, ZEN, WWK, ROE
+Banned:Hypergenesis, Sword of the Meek

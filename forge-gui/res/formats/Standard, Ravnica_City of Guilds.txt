@@ -1,0 +1,5 @@
+[format]
+Name:Standard, Ravnica:City of Guilds
+Type:Historic
+Order:932
+Sets:9ED, CHK, BOK, SOK, RAV

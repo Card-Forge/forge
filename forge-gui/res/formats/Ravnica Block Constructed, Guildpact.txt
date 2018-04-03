@@ -1,0 +1,5 @@
+[format]
+Name:Ravnica Block Constructed, Guildpact
+Type:Historic
+Order:948
+Sets:RAV, GPT

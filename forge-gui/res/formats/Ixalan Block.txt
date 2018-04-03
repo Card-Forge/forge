@@ -1,0 +1,5 @@
+[format]
+Name:Ixalan Block
+Type:Historic
+Order:120
+Sets:XLN

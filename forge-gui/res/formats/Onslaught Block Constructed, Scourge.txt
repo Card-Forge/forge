@@ -1,0 +1,5 @@
+[format]
+Name:Onslaught Block Constructed, Scourge
+Type:Historic
+Order:752
+Sets:ONS, LGN, SCG

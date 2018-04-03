@@ -1,0 +1,6 @@
+[format]
+Name:Time Spiral Block Constructed, Future Sight
+Type:Historic
+Order:1024
+Sets:TSP, TSB, PLC, FUT
+Banned:Amulet of Quoz, Thawing Glaciers, Timmerian Fiends, Zuran Orb

@@ -1,0 +1,5 @@
+[format]
+Name:Standard, Dark Ascension
+Type:Historic
+Order:1345
+Sets:SOM, MBS, NPH, M12, ISD, DKA

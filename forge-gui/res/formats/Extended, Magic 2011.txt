@@ -1,0 +1,6 @@
+[format]
+Name:Extended, Magic 2011
+Type:Historic
+Order:1244
+Sets:TSP, TSB, PLC, FUT, 10E, LRW, MOR, SHM, EVE, ALA, CFX, ARB, M10, ZEN, WWK, ROE, M11
+Banned:Hypergenesis, Sword of the Meek

@@ -1,0 +1,5 @@
+[format]
+Name:Unlimited Edition
+Type:Historic
+Order:199
+Sets:LEA, LEB, 2ED

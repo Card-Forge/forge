@@ -1,0 +1,5 @@
+[format]
+Name:Conspiracy
+Type:Historic
+Order:186
+Sets:CNS, CN2

@@ -1,0 +1,5 @@
+[format]
+Name:Duels
+Type:Historic
+Order:190
+Sets:ORI, BFZ, OGW, SOI, EMN, KLD, AER, AKH

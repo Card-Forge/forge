@@ -1,0 +1,5 @@
+[format]
+Name:Scars of Mirrodin Block Constructed, Mirrodin Besieged
+Type:Historic
+Order:1270
+Sets:SOM, MBS

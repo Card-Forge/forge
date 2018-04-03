@@ -1,0 +1,5 @@
+[format]
+Name:Standard, Lorwyn
+Type:Historic
+Order:1063
+Sets:10E, CSP, TSP, TSB, PLC, FUT, LRW

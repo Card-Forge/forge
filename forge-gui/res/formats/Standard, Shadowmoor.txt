@@ -1,0 +1,5 @@
+[format]
+Name:Standard, Shadowmoor
+Type:Historic
+Order:1091
+Sets:10E, CSP, TSP, TSB, PLC, FUT, LRW, MOR, SHM

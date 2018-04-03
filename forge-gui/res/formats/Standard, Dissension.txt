@@ -1,0 +1,5 @@
+[format]
+Name:Standard, Dissension
+Type:Historic
+Order:963
+Sets:9ED, CHK, BOK, SOK, RAV, GPT, DIS

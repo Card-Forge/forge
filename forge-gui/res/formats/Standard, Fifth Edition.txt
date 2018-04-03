@@ -1,0 +1,6 @@
+[format]
+Name:Standard, Fifth Edition
+Type:Historic
+Order:379
+Sets:5ED, MIR, ALL, VIS
+Banned:Rebirth, Timmerian Fiends

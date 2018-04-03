@@ -1,0 +1,5 @@
+[format]
+Name:Standard, Shards of Alara
+Type:Historic
+Order:1133
+Sets:10E, LRW, MOR, SHM, EVE, ALA

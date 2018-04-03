@@ -1,0 +1,5 @@
+[format]
+Name:Mirrodin Block Constructed, Mirrodin
+Type:Historic
+Order:788
+Sets:MRD

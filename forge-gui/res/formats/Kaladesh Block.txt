@@ -1,0 +1,5 @@
+[format]
+Name:Kaladesh Block
+Type:Historic
+Order:124
+Sets:AER, KLD

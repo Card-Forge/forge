@@ -1,0 +1,5 @@
+[format]
+Name:Ravnica Block Constructed, Ravnica: City of Guilds
+Type:Historic
+Order:934
+Sets:RAV

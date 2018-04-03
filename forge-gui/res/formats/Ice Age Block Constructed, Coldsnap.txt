@@ -1,0 +1,6 @@
+[format]
+Name:Ice Age Block Constructed, Coldsnap
+Type:Historic
+Order:979
+Sets:ICE, ALL, CSP
+Banned:Amulet of Quoz, Thawing Glaciers, Timmerian Fiends, Zuran Orb
