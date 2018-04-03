@@ -1,0 +1,5 @@
+[format]
+Name:Standard, Magic 2011
+Type:Historic
+Order:1242
+Sets:ALA, CFX, ARB, ZEN, WWK, ROE, M11

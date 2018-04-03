@@ -1,0 +1,6 @@
+[format]
+Name:Extended, Weatherlight
+Type:Historic
+Order:392
+Sets:2ED, 3ED, 4ED, CHR, 5ED, DRK, ARENA, FEM, ICE, CHR, HML, ALL, MIR, VIS, WTH
+Banned:Amulet of Quoz, Balance, Black Vise, Braingeyser, Bronze Tablet, Channel, Contract from Below, Darkpact, Demonic Attorney, Demonic Tutor, Fastbond, Ivory Tower, Jeweled Bird, Juggernaut, Kird Ape, Mana Crypt, Maze of Ith, Mind Twist, Rebirth, Regrowth, Serendib Efreet, Sol Ring, Strip Mine, Tempest Efreet, Timmerian Fiends, Wheel of Fortune, Zuran Orb

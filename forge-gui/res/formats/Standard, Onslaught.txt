@@ -1,0 +1,5 @@
+[format]
+Name:Standard, Onslaught
+Type:Historic
+Order:715
+Sets:7ED, ODY, TOR, JUD, ONS

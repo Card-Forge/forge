@@ -1,0 +1,5 @@
+[format]
+Name:Mirrodin Block Constructed, Darksteel
+Type:Historic
+Order:812
+Sets:MRD, DST

@@ -1,0 +1,6 @@
+[format]
+Name:Standard, Urza's Destiny
+Type:Historic
+Order:524
+Sets:6ED, TMP, STH, EXO, USG, ULG, UDS
+Banned:Dream Halls, Earthcraft, Fluctuator, Lotus Petal, Memory Jar, Mind Over Matter, Recurring Nightmare, Time Spiral, Tolarian Academy, Windfall

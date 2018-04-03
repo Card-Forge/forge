@@ -1,0 +1,5 @@
+[format]
+Name:Standard, Tenth Edition
+Type:Historic
+Order:1044
+Sets:10E, RAV, GPT, DIS, CSP, TSP, TSB, PLC, FUT

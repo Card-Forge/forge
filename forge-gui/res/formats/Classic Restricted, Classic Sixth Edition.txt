@@ -1,0 +1,6 @@
+[format]
+Name:Classic Restricted, Classic Sixth Edition
+Type:Historic
+Order:517
+Sets:LEA, LEB, 2ED, ARN, DRC94, ATQ, 3ED, DRK, ARENA, FEM, WW, SHC, FS, 4ED, ICE, CHR, HML, ALL, MIR, VIS, 5ED, WTH, TMP, STH, EXO, USG, ULG, 6ED
+Banned:Amulet of Quoz, Balance, Black Vise, Braingeyser, Bronze Tablet, Channel, Contract from Below, Darkpact, Demonic Attorney, Demonic Tutor, Fastbond, Fork, Ivory Tower, Jeweled Bird, Memory Jar, Mind Twist, Rebirth, Regrowth, Sol Ring, Strip Mine, Stroke of Genius, Tempest Efreet, Time Spiral, Timmerian Fiends, Tolarian Academy, Wheel of Fortune, Windfall, Zuran Orb

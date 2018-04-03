@@ -1,0 +1,5 @@
+[format]
+Name:Standard, Conflux
+Type:Historic
+Order:1147
+Sets:10E, LRW, MOR, SHM, EVE, ALA, CFX

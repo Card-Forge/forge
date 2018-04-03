@@ -1,0 +1,5 @@
+[format]
+Name:Limited Edition Alpha
+Type:Historic
+Order:195
+Sets:LEA

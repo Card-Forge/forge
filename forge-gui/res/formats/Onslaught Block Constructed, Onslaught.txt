@@ -1,0 +1,5 @@
+[format]
+Name:Onslaught Block Constructed, Onslaught
+Type:Historic
+Order:717
+Sets:ONS

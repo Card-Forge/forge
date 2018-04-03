@@ -1,0 +1,7 @@
+[format]
+Name:Type II, Homelands
+Type:Historic
+Order:292
+Sets:FEM, 4ED, ICE, CHR, HML
+Restricted:Balance, Feldon's Cane, Ivory Tower, Mind Twist, Zuran Orb
+Banned:Amulet of Quoz, Bronze Tablet, Channel, Rebirth, Tempest Efreet

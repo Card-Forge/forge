@@ -1,0 +1,6 @@
+[format]
+Name:Masques Block Constructed, Prophecy
+Type:Historic
+Order:592
+Sets:MMQ, NMS, PCY
+Banned:Lin Sivvi, Defiant Hero; Rishadan Port

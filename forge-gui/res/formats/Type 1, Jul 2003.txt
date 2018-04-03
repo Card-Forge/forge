@@ -1,0 +1,7 @@
+[format]
+Name:Type 1, Jul 2003
+Type:Historic
+Order:764
+Sets:LEA, LEB, 2ED, ARN, DRC94, ATQ, 3ED, LEG, DRK, ARENA, FEM, WW, SHC, FS, 4ED, ICE, CHR, HML, ALL, MIR, VIS, 5ED, WTH, TMP, STH, EXO, USG, ULG, 6ED, UDS, MMQ, NMS, PCY, INV, PLS, 7ED, APC, ODY, TOR, JUD, ONS, LGN, SCG
+Restricted:Ancestral Recall, Balance, Black Lotus, Black Vise, Braingeyser, Channel, Crop Rotation, Demonic Consultation, Demonic Tutor, Doomsday, Dream Halls, Earthcraft, Enlightened Tutor, Entomb, Fact or Fiction, Fastbond, Fork, Frantic Search, Grim Monolith, Gush, Library of Alexandria, Lotus Petal, Mana Crypt, Mana Vault, Mind Over Matter, Mind Twist, Mind's Desire, Mox Diamond, Mox Pearl, Mox Emerald, Mox Ruby, Mox Sapphire, Mox Jet, Mystical Tutor, Necropotence, Regrowth, Sol Ring, Stroke of Genius, Time Spiral, Timetwister, Time Walk, Tinker, Tolarian Academy, Vampiric Tutor, Voltaic Key, Wheel of Fortune, Windfall, Yawgmoth's Bargain, Yawgmoth's Will
+Banned:Amulet of Quoz, Bronze Tablet, Chaos Orb, Contract from Below, Darkpact, Demonic Attorney, Divine Intervention, Falling Star, Jeweled Bird, Rebirth, Tempest Efreet, Timmerian Fiends

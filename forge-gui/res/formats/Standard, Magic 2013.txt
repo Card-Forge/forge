@@ -1,0 +1,5 @@
+[format]
+Name:Standard, Magic 2013
+Type:Historic
+Order:1384
+Sets:SOM, MBS, NPH, ISD, DKA, AVR, M13

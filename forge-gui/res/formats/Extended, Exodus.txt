@@ -1,0 +1,6 @@
+[format]
+Name:Extended, Exodus
+Type:Historic
+Order:447
+Sets:2ED, 3ED, 4ED, CHR, 5ED, DRK, ARENA, FEM, ICE, CHR, HML, ALL, MIR, VIS, WTH, TMP, STH, EXO
+Banned:Amulet of Quoz, Balance, Black Vise, Braingeyser, Bronze Tablet, Channel, Contract from Below, Darkpact, Demonic Attorney, Demonic Tutor, Fastbond, Hypnotic Specter, Ivory Tower, Jeweled Bird, Kird Ape, Mana Crypt, Maze of Ith, Mind Twist, Rebirth, Regrowth, Serendib Efreet, Sol Ring, Strip Mine, Tempest Efreet, Timmerian Fiends, Wheel of Fortune, Zuran Orb

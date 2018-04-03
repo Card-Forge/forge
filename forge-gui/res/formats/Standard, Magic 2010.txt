@@ -1,0 +1,5 @@
+[format]
+Name:Standard, Magic 2010
+Type:Historic
+Order:1179
+Sets:LRW, MOR, SHM, EVE, ALA, CFX, ARB, M10

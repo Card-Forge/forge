@@ -1,0 +1,5 @@
+[format]
+Name:Standard, Planar Chaos
+Type:Historic
+Order:1007
+Sets:9ED, RAV, GPT, DIS, CSP, TSP, TSB, PLC

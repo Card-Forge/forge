@@ -1,0 +1,5 @@
+[format]
+Name:Shards of Alara Block
+Type:Historic
+Order:143
+Sets:ARB, CFX, ALA

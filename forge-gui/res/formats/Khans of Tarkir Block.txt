@@ -1,0 +1,5 @@
+[format]
+Name:Khans of Tarkir Block
+Type:Historic
+Order:130
+Sets:DTK, FRF, KTK

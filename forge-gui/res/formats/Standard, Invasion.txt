@@ -1,0 +1,5 @@
+[format]
+Name:Standard, Invasion
+Type:Historic
+Order:609
+Sets:6ED, MMQ, NMS, PCY, INV

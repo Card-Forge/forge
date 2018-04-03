@@ -1,0 +1,5 @@
+[format]
+Name:Limited Edition Beta
+Type:Historic
+Order:197
+Sets:LEA, LEB

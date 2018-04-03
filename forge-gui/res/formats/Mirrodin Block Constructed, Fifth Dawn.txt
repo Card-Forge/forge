@@ -1,0 +1,6 @@
+[format]
+Name:Mirrodin Block Constructed, Fifth Dawn
+Type:Historic
+Order:833
+Sets:MRD, DST, 5DN
+Banned:Skullclamp

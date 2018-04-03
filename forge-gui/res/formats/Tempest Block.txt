@@ -1,0 +1,6 @@
+[format]
+Name:Tempest Block
+Type:Historic
+Order:168
+Sets:EXO, STH, TMP
+Banned:Cursed Scroll

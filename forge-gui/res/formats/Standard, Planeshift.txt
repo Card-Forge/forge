@@ -1,0 +1,5 @@
+[format]
+Name:Standard, Planeshift
+Type:Historic
+Order:623
+Sets:6ED, MMQ, NMS, PCY, INV, PLS

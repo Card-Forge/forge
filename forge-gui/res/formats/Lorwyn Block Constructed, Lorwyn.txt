@@ -1,0 +1,5 @@
+[format]
+Name:Lorwyn Block Constructed, Lorwyn
+Type:Historic
+Order:1075
+Sets:LRW

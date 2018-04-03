@@ -1,0 +1,6 @@
+[format]
+Name:Innistrad Block Constructed, April 2012
+Type:Historic
+Order:1360
+Sets:ISD, DKA
+Banned:Intangible Virtue; Lingering Souls

@@ -1,0 +1,6 @@
+[format]
+Name:Time Spiral Block Constructed, Planar Chaos
+Type:Historic
+Order:1009
+Sets:TSP, TSB, PLC
+Banned:Amulet of Quoz, Thawing Glaciers, Timmerian Fiends, Zuran Orb

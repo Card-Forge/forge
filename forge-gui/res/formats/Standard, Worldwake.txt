@@ -1,0 +1,5 @@
+[format]
+Name:Standard, Worldwake
+Type:Historic
+Order:1210
+Sets:ALA, CFX, ARB, M10, ZEN, WWK

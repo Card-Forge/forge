@@ -1,0 +1,5 @@
+[format]
+Name:Theros Block
+Type:Historic
+Order:132
+Sets:JOU, BNG, THS
