@@ -176,7 +176,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         menu.add(folder);
 
         final JMenu fmt = GuiUtils.createMenu("Format");
-        for (final GameFormat f : FModel.getFormats().getOrderedList()) {
+        for (final GameFormat f : FModel.getFormats().getFilterList()) {
             GuiUtils.addMenuItem(fmt, f.getName(), null, new Runnable() {
                 @Override
                 public void run() {

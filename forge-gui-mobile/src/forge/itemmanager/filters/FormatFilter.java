@@ -42,7 +42,7 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
 
         cbxFormats.setFont(FSkinFont.get(12));
         cbxFormats.addItem("All Sets/Formats");
-        for (GameFormat format : FModel.getFormats().getOrderedList()) {
+        for (GameFormat format : FModel.getFormats().getFilterList()) {
             cbxFormats.addItem(format);
         }
         cbxFormats.addItem("Choose Sets...");

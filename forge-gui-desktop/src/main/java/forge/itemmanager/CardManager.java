@@ -82,7 +82,7 @@ public class CardManager extends ItemManager<PaperCard> {
         GuiUtils.addSeparator(menu); //separate from current search item
 
         JMenu fmt = GuiUtils.createMenu("Format");
-        for (final GameFormat f : FModel.getFormats().getOrderedList()) {
+        for (final GameFormat f : FModel.getFormats().getFilterList()) {
             GuiUtils.addMenuItem(fmt, f.getName(), null, new Runnable() {
                 @Override
                 public void run() {

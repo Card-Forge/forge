@@ -209,7 +209,7 @@ public class NewQuestScreen extends FScreen {
             }
         });
 
-        for (GameFormat gf : FModel.getFormats().getOrderedList()) {
+        for (GameFormat gf : FModel.getFormats().getSanctionedList()) {
             cbxFormat.addItem(gf);
             cbxPrizeFormat.addItem(gf);
         }

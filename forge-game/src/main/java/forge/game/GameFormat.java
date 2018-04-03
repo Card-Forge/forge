@@ -299,6 +299,16 @@ public class GameFormat implements Comparable<GameFormat> {
             return coreList;
         }
 
+        public Iterable<GameFormat> getFilterList() {
+            List<GameFormat> coreList = new ArrayList<>();
+            for(GameFormat format: naturallyOrdered){
+                if(!format.getFormatType().equals(FormatType.Historic)){
+                    coreList.add(format);
+                }
+            }
+            return coreList;
+        }
+
         public GameFormat getStandard() {
             return this.map.get("Standard");
         }
