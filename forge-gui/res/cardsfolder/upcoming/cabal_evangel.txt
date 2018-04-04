@@ -1,0 +1,5 @@
+Name:Cabal Evangel
+ManaCost:1 B
+Types:Creature Human Cleric
+PT:2/2
+Oracle:
