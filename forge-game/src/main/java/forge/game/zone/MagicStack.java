@@ -583,11 +583,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         if (source.isCopiedSpell() || sa.isAbility()) {
             // do nothing
-
-            // if SA is last saga ability, sacrifice the host
-            if (sa.isLastSaga()) {
-                game.getAction().sacrifice(source, null);
-            }
         }
         else if ((source.isInstant() || source.isSorcery() || fizzle) &&
                 source.isInZone(ZoneType.Stack)) {
@@ -694,7 +689,12 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         stack.remove(si);
         frozenStack.remove(si);
         game.updateStackForView();
-        game.fireEvent(new GameEventSpellRemovedFromStack(si.getSpellAbility(true)));
+        SpellAbility sa = si.getSpellAbility(true);
+        game.fireEvent(new GameEventSpellRemovedFromStack(sa));
+        if (sa.isLastSaga()) {
+            // if SA is last saga ability, sacrifice the host
+            game.getAction().sacrifice(si.getSourceCard(), null);
+        }
     }
 
     public final void remove(final Card c) {
