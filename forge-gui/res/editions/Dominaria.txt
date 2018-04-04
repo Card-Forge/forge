@@ -8,9 +8,9 @@ BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand DOM
 
 [cards]
-Karn, Scion of Urza
+1 M Karn, Scion of Urza
 
-Baird, Steward of Argive
+4 U Baird, Steward of Argive
 
 Benalish Marshal
 
@@ -65,7 +65,7 @@ Deep Freeze
 
 53 C Homarid Explorer
 54 In Bolas's Clutches
-55 Karn's Temporal Sundering
+55 R Karn's Temporal Sundering
 56 U Merfolk Trickster
 57 R The Mirari Conjecture
 58 R Naban, Dean of Iteration
@@ -74,13 +74,18 @@ Deep Freeze
 
 Precognition Field
 
+64 U Sage of Lat-Nam
+
 Sentinel of the Pearl Trident
+
+66 U Slinn Voda, the Rising Deep
 
 Tempest Djinn
 
 Tetsuko Umezawa, Fugitive
 
 70 U Time of Ice
+71 C Tolarian Scholar
 
 75 U Wizard's Retort
 76 R Zahid, Djinn of the Lamp
@@ -96,6 +101,7 @@ Dark Bargain
 Demonic Vigor
 
 86 M Demonlord Belzenlok
+87 C Divest
 
 Drudge Sentinel
 
@@ -136,18 +142,13 @@ Firefist Adept
 122 R The First Eruption
 123 U The Flame of Keld
 
-Ghitu Journeymage
-
-Ghitu Lavarunner
-
-Goblin Barrage
-
-Goblin Chainwhirler
-
-Goblin Warchief
-
-Haphazard Bombardment
-
+125 C Ghitu Chronicler
+126 Ghitu Journeymage
+127 Ghitu Lavarunner
+128 Goblin Barrage
+129 Goblin Chainwhirler
+130 U Goblin Warchief
+131 Haphazard Bombardment
 132 M Jaya Ballard
 133 R Jaya's Immolating Inferno
 134 C Keldon Overseer
@@ -163,7 +164,7 @@ Rampaging Cyclops
 Skizzik
 
 146 R Squee, the Immortal
-
+147 R Two-Headed Giant
 148 U Valduk, Keeper of the Flame
 149 Verix Bladewing
 150 Warcry Phoenix
@@ -184,8 +185,7 @@ Gaea's Protector
 
 Gift of Growth
 
-Grunn, the Lonely King
-
+165 U Grunn, the Lonely King
 166 R Kamahl's Druidic Vow
 
 168 C Llanowar Elves
@@ -209,18 +209,17 @@ Thorn Elemental
 
 Verdant Force
 
-Adeliz, the Cinder Wind
-
+190 U Adeliz, the Cinder Wind
 191 U Arvad the Cursed
 192 Aryel, Knight of Windgrace
-193 Darigaaz Reincarnated
+193 M Darigaaz Reincarnated
 194 Garna, the Bloodflame
 195 Grand Warlord Radha
 196 Hallar, the Firefletcher
 197 M Jhoira, Weatherlight Captain
-198 Jodah, Archmage Eternal
-199 Muldrotha, the Gravetide
-200 Oath of Teferi
+198 R Jodah, Archmage Eternal
+199 M Muldrotha, the Gravetide
+200 R Oath of Teferi
 201 Primevals' Glorious Rebirth
 202 U Raff Capashen, Ship's Mage
 203 U Rona, Disciple of Gix
