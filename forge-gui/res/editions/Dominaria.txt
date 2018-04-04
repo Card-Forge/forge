@@ -4,6 +4,8 @@ Date=2018-04-27
 Name=Dominaria
 Type=Expansion
 MciCode=dom
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand DOM
 
 [cards]
 Karn, Scion of Urza
@@ -18,7 +20,7 @@ Charge
 
 12 U Danitha Capashen, Paragon
 
-Dauntless Bodyguard
+14 U Dauntless Bodyguard
 
 Dub
 
@@ -34,15 +36,16 @@ Healing Grace
 
 Kwende, Pride of Femeref
 
-Lyra Dawnbringer
+26 M Lyra Dawnbringer
 
 On Serra's Wings
 
-Seal Away
+31 U Seal Away
 
+33 U Serra Angel
 34 C Serra Disciple
-
-Teshar, Ancestor's Apostle
+35 R Shalai, Voice of Plenty
+36 R Teshar, Ancestor's Apostle
 
 38 U Triumph of Gerrard
 39 R Urza's Ruinous Blast
@@ -65,7 +68,7 @@ Deep Freeze
 55 Karn's Temporal Sundering
 56 U Merfolk Trickster
 57 R The Mirari Conjecture
-58 Naban, Dean of Iteration
+58 R Naban, Dean of Iteration
 59 Naru Meha, Master Wizard
 60 C Opt
 
@@ -86,14 +89,13 @@ Tetsuko Umezawa, Fugitive
 79 C Cabal Paladin
 80 C Caligo Skin-Witch
 81 U Cast Down
-
-Chainer's Torment
+82 U Chainer's Torment
 
 Dark Bargain
 
 Demonic Vigor
 
-Demonlord Belzenlok
+86 M Demonlord Belzenlok
 
 Drudge Sentinel
 
@@ -103,7 +105,7 @@ Fungal Infection
 
 Kazarov, Sengir Pureblood
 
-Knight of Malice
+97 U Knight of Malice
 
 Lich's Mastery
 
@@ -122,6 +124,8 @@ Urgoros, the Empty One
 110 C Vicious Offering
 
 Whisper, Blood Liturgist
+
+114 R Yawgmoth's Vile Offering
 
 Bloodstone Goblin
 
@@ -145,7 +149,7 @@ Goblin Warchief
 Haphazard Bombardment
 
 132 M Jaya Ballard
-133 Jaya's Immolating Inferno
+133 R Jaya's Immolating Inferno
 134 C Keldon Overseer
 
 Keldon Warcaller
@@ -154,20 +158,16 @@ Radiating Lightning
 
 Rampaging Cyclops
 
-Siege-Gang Commander
+143 R Siege-Gang Commander
 
 Skizzik
 
-Squee, the Immortal
+146 R Squee, the Immortal
 
-Valduk, Keeper of the Flame
-
-Verix Bladewing
-
-Warcry Phoenix
-
-Warlord's Fury
-
+148 U Valduk, Keeper of the Flame
+149 Verix Bladewing
+150 Warcry Phoenix
+151 Warlord's Fury
 152 U Wizard's Lightning
 
 Ancient Animus
@@ -186,7 +186,7 @@ Gift of Growth
 
 Grunn, the Lonely King
 
-Kamahl's Druidic Vow
+166 R Kamahl's Druidic Vow
 
 168 C Llanowar Elves
 
@@ -197,16 +197,13 @@ Marwyn, the Nurturer
 Multani, Yavimaya's Avatar
 
 178 C Saproling Migration
-
-Song of Freyalise
+179 U Song of Freyalise
 
 Sporecrown Thallid
 
 182 R Steel Leaf Champion
-
-Sylvan Awakening
-
-Territorial Allosaurus
+183 Sylvan Awakening
+184 R Territorial Allosaurus
 
 Thorn Elemental
 
@@ -215,44 +212,34 @@ Verdant Force
 Adeliz, the Cinder Wind
 
 191 U Arvad the Cursed
-
-Aryel, Knight of Windgrace
-
-Darigaaz Reincarnated
-
-Garna, the Bloodflame
-
-Grand Warlord Radha
-
-Hallar, the Firefletcher
-
+192 Aryel, Knight of Windgrace
+193 Darigaaz Reincarnated
+194 Garna, the Bloodflame
+195 Grand Warlord Radha
+196 Hallar, the Firefletcher
 197 M Jhoira, Weatherlight Captain
 198 Jodah, Archmage Eternal
 199 Muldrotha, the Gravetide
 200 Oath of Teferi
 201 Primevals' Glorious Rebirth
 202 U Raff Capashen, Ship's Mage
-203 Rona, Disciple of Gix
+203 U Rona, Disciple of Gix
 204 U Shanna, Sisay's Legacy
 205 U Slimefoot, the Stowaway
-
-Teferi, Hero of Dominaria
-
+206 U Tatyova, Benthic Druid
+207 M Teferi, Hero of Dominaria
 208 U Tiana, Ship's Caretaker
 
 Blackblade Reforged
 
 Damping Sphere
 
-Forebear's Blade
+214 R Forebear's Blade
 
 216 C Guardians of Koilos
-
-Helm of the Host
-
-Howling Golem
-
-Icy Manipulator
+217 Helm of the Host
+218 Howling Golem
+219 U Icy Manipulator
 
 Jhoira's Familiar
 
@@ -260,7 +247,7 @@ Juggernaut
 
 Mishra's Self-Replicator
 
-Mox Amber
+224 M Mox Amber
 
 Navigator's Compass
 
@@ -284,10 +271,13 @@ Hinterland Harbor
 
 Isolated Chapel
 
-Sulfur Falls
-
-Woodland Cemetery
-
+242 U Memorial to Folly
+243 U Memorial to Genius
+244 U Memorial to Glory
+245 U Memorial to Unity
+246 U Memorial to War
+247 Sulfur Falls
+248 Woodland Cemetery
 249 U Zhalfirin Void
 
 270 M Teferi, Timebender
