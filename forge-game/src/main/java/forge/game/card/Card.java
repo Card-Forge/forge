@@ -18,6 +18,7 @@
 package forge.game.card;
 
 import com.esotericsoftware.minlog.Log;
+import com.google.common.base.Strings;
 import com.google.common.collect.*;
 import forge.GameCommand;
 import forge.ImageKeys;
@@ -1112,16 +1113,19 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
 
             // Run triggers
-            final Map<String, Object> runParams = Maps.newTreeMap();
+            final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("Card", this);
             runParams.put("Source", source);
             runParams.put("CounterType", counterType);
             for (int i = 0; i < addAmount; i++) {
-                getGame().getTriggerHandler().runTrigger(TriggerType.CounterAdded, runParams, false);
+                runParams.put("CounterAmount", oldValue + i + 1);
+                getGame().getTriggerHandler().runTrigger(
+                        TriggerType.CounterAdded, Maps.newHashMap(runParams), false);
             }
             if (addAmount > 0) {
                 runParams.put("CounterAmount", addAmount);
-                getGame().getTriggerHandler().runTrigger(TriggerType.CounterAddedOnce, runParams, false);
+                getGame().getTriggerHandler().runTrigger(
+                        TriggerType.CounterAddedOnce, Maps.newHashMap(runParams), false);
             }
         } else {
             setCounters(counterType, newValue);
@@ -1622,6 +1626,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 final String[] k = keyword.split(":");
                 // need to get SpellDescription from Svar
                 String desc = AbilityFactory.getMapParams(getSVar(k[1])).get("SpellDescription");
+                sbLong.append(desc);
+            } else if (keyword.startsWith("Saga")) {
+                String k[] = keyword.split(":");
+                String desc = "(As this Saga enters and after your draw step, "
+                    + " add a lore counter. Sacrifice after " + Strings.repeat("I", Integer.valueOf(k[1])) + ".)";
                 sbLong.append(desc);
             }
             else {
@@ -5274,7 +5283,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         if (source == null){
-            return false;
+            return true;
         }
 
         if (isCreature() && source.getActivatingPlayer().hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
