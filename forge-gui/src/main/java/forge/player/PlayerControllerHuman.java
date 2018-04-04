@@ -685,7 +685,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public List<Card> exertAttackers(List<Card> attackers) {
-        return getGui().order("Exert Attackers?", "Exerted", 0, attackers.size(), attackers, null, null, false);
+        HashMap<CardView, Card> mapCVtoC = new HashMap<>();
+        for (Card card : attackers) {
+            mapCVtoC.put(card.getView(), card);
+        }
+        List<CardView> chosen;
+        List<CardView> choices = new ArrayList<CardView>(mapCVtoC.keySet());
+        chosen = getGui().order("Exert Attackers?", "Exerted", 0, choices.size(), choices, null, null, false);
+        List<Card> chosenCards = new ArrayList<Card>();
+        for (CardView cardView : chosen) {
+            chosenCards.add(mapCVtoC.get(cardView));
+        }
+        return chosenCards;
     }
 
     @Override
