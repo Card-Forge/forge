@@ -2,7 +2,7 @@ Name:Eladamri, Lord of Leaves Avatar
 ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:-1/+2
-T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ Player | TriggerZones$ Command | Execute$ TrigAddMana | TriggerDescription$ At the beginning of each player's precombat main phase, that player adds {G}{G} to his or her mana pool.
+T:Mode$ Phase | Phase$ Main1 | PreCombatMain$ True | ValidPlayer$ Player | TriggerZones$ Command | Execute$ TrigAddMana | TriggerDescription$ At the beginning of each player's precombat main phase, that player adds {G}{G} to his or her mana pool.
 SVar:TrigAddMana:DB$ Mana | Produced$ G | Amount$ 2 | Defined$ TriggeredPlayer
 SVar:RemRandomDeck:True
 SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Eladamri, Lord of Leaves Avatar.full.jpg

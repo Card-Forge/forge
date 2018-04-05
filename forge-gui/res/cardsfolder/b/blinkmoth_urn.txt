@@ -1,7 +1,7 @@
 Name:Blinkmoth Urn
 ManaCost:5
 Types:Artifact
-T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ Player | TriggerZones$ Battlefield | IsPresent$ Card.Self+untapped | Execute$ TrigGetMana | TriggerDescription$ At the beginning of each player's precombat main phase, if CARDNAME is untapped, that player adds {C} to his or her mana pool for each artifact he or she controls.
+T:Mode$ Phase | Phase$ Main1 | PreCombatMain$ True | ValidPlayer$ Player | TriggerZones$ Battlefield | IsPresent$ Card.Self+untapped | Execute$ TrigGetMana | TriggerDescription$ At the beginning of each player's precombat main phase, if CARDNAME is untapped, that player adds {C} to his or her mana pool for each artifact he or she controls.
 SVar:TrigGetMana:DB$ Mana | Produced$ C | Amount$ X | References$ X | Defined$ TriggeredPlayer
 SVar:X:Count$Valid Artifact.ActivePlayerCtrl
 SVar:RemRandomDeck:True
