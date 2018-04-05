@@ -1422,41 +1422,41 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].contains("OppCtrl")) {
-                for (final Player p : opps) {
-                        someCards.addAll(p.getZone(ZoneType.Battlefield).getCards());
-                }
+            for (final Player p : opps) {
+                someCards.addAll(p.getZone(ZoneType.Battlefield).getCards());
+            }
         }
 
         if (sq[0].contains("InOppYard")) {
-                for (final Player p : opps) {
-                        someCards.addAll(p.getCardsIn(ZoneType.Graveyard));
-                }
+            for (final Player p : opps) {
+                someCards.addAll(p.getCardsIn(ZoneType.Graveyard));
+            }
         }
 
         if (sq[0].contains("InOppHand")) {
-                for (final Player p : opps) {
-                        someCards.addAll(p.getCardsIn(ZoneType.Hand));
-                }
+            for (final Player p : opps) {
+                someCards.addAll(p.getCardsIn(ZoneType.Hand));
+            }
         }
 
         if (sq[0].contains("InChosenHand")) {
-                if (c.getChosenPlayer() != null) {
-                        someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Hand));
-                }
+            if (c.getChosenPlayer() != null) {
+                someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Hand));
+            }
         }
 
         if (sq[0].contains("InChosenYard")) {
-                if (c.getChosenPlayer() != null) {
-                        someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Graveyard));
-                }
+            if (c.getChosenPlayer() != null) {
+                someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Graveyard));
+            }
         }
 
         if (sq[0].contains("OnBattlefield")) {
-                someCards.addAll(game.getCardsIn(ZoneType.Battlefield));
+            someCards.addAll(game.getCardsIn(ZoneType.Battlefield));
         }
 
         if (sq[0].contains("InAllYards")) {
-                someCards.addAll(game.getCardsIn(ZoneType.Graveyard));
+            someCards.addAll(game.getCardsIn(ZoneType.Graveyard));
         }
 
         if (sq[0].contains("SpellsOnStack")) {
@@ -1464,7 +1464,7 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].contains("InAllHands")) {
-                someCards.addAll(game.getCardsIn(ZoneType.Hand));
+            someCards.addAll(game.getCardsIn(ZoneType.Hand));
         }
 
         //  Count$InTargetedHand (targeted player's cards in hand)
