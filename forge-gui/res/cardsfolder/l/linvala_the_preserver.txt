@@ -5,10 +5,11 @@ PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigGainLife | CheckSVar$ X | SVarCompare$ GTZ | References$ X,Z | TriggerDescription$ When CARDNAME enters the battlefield, if an opponent has more life than you, you gain 5 life.
 SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ 5
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigToken | IsPresent$ Creature.OppCtrl | PresentCompare$ GTY | TriggerDescription$ When CARDNAME enters the battlefield, if an opponent controls more creatures than you, create a 3/3 white Angel creature token with flying.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigToken | CheckSVar$ W | SVarCompare$ GTY | TriggerDescription$ When CARDNAME enters the battlefield, if an opponent controls more creatures than you, create a 3/3 white Angel creature token with flying.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Angel | TokenTypes$ Creature,Angel | TokenOwner$ You | TokenColors$ White | TokenPower$ 3 | TokenToughness$ 3 | TokenKeywords$ Flying | TokenImage$ w 3 3 angel
 SVar:X:PlayerCountOpponents$HighestLifeTotal
 SVar:Y:Count$Valid Creature.YouCtrl
 SVar:Z:Count$YourLifeTotal
+SVar:W:PlayerCountOpponents$HighestValid Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/linvala_the_preserver.jpg
 Oracle:Flying\nWhen Linvala, the Preserver enters the battlefield, if an opponent has more life than you, you gain 5 life.\nWhen Linvala enters the battlefield, if an opponent controls more creatures than you, create a 3/3 white Angel creature token with flying.
