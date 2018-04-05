@@ -4131,12 +4131,14 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Cycling")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
+            final Cost cost = new Cost(manacost, true);
 
             StringBuilder sb = new StringBuilder();
             sb.append("AB$ Draw | Cost$ ");
             sb.append(manacost);
-            sb.append(" Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Cycling | CostDesc$ ");
-            sb.append(ManaCostParser.parse(manacost));
+            sb.append(" Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Cycling");
+            sb.append(cost.isOnlyManaCost() ? " " : "—");
+            sb.append("| CostDesc$ " + cost.toSimpleString() + " ");
             sb.append("| SpellDescription$ (").append(inst.getReminderText()).append(")");
 
             SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
