@@ -1,0 +1,6 @@
+Name:Mesa Unicorn
+ManaCost:1 W
+Types:Creature Unicorn
+PT:2/2
+K:Lifelink
+Oracle:Lifelink
