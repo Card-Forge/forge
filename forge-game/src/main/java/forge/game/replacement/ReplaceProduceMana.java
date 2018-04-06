@@ -1,9 +1,13 @@
 package forge.game.replacement;
 
 import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
 import forge.game.spellability.SpellAbility;
+import forge.util.Expressions;
 
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -33,6 +37,22 @@ public class ReplaceProduceMana extends ReplacementEffect {
         if (!mapParams.containsKey("NoTapCheck")) {
             final SpellAbility manaAbility = (SpellAbility) runParams.get("AbilityMana");
             if (manaAbility == null || manaAbility.getRootAbility().getPayCosts() == null || !manaAbility.getRootAbility().getPayCosts().hasTapCost()) {
+                return false;
+            }
+        }
+
+        if (hasParam("ManaAmount")) {
+            String full = getParam("ManaAmount");
+            String operator = full.substring(0, 2);
+            String operand = full.substring(2);
+            int intoperand = 0;
+            try {
+                intoperand = Integer.parseInt(operand);
+            } catch (NumberFormatException e) {
+                intoperand = CardFactoryUtil.xCount(getHostCard(), getHostCard().getSVar(operand));
+            }
+            int manaAmount = StringUtils.countMatches((String) runParams.get("Mana"), " ") + 1;
+            if (!Expressions.compare(manaAmount, operator, intoperand)) {
                 return false;
             }
         }
