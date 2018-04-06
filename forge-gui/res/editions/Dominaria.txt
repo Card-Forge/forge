@@ -11,11 +11,9 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand DOM
 1 M Karn, Scion of Urza
 
 4 U Baird, Steward of Argive
-
-Benalish Honor Guard
-
-Benalish Marshal
-
+5 C Benalish Honor Guard
+6 C Benalish Marshal
+7 C Blessed Light
 8 U Board the Weatherlight
 
 Charge
@@ -53,10 +51,8 @@ On Serra's Wings
 38 U Triumph of Gerrard
 39 R Urza's Ruinous Blast
 40 C Academy Drake
-
-Academy Journeymage
-
-The Antiquities War
+41 C Academy Journeymage
+42 R The Antiquities War
 
 Befuddle
 
@@ -83,7 +79,7 @@ Sentinel of the Pearl Trident
 66 U Slinn Voda, the Rising Deep
 67 C Syncopate
 68 Tempest Djinn
-69 Tetsuko Umezawa, Fugitive
+69 U Tetsuko Umezawa, Fugitive
 70 U Time of Ice
 71 C Tolarian Scholar
 72 C Unwind
@@ -105,20 +101,18 @@ Demonic Vigor
 87 C Divest
 
 89 C Drudge Sentinel
-
 90 U The Eldest Reborn
 
 Fungal Infection
 
-Kazarov, Sengir Pureblood
-
+95 R Josu Vess, Lich Knight
+96 Kazarov, Sengir Pureblood
 97 U Knight of Malice
 98 Lich's Mastery
 99 U Lingering Phantom
 100 M Phyrexian Scriptures
-
-Rat Colony
-
+101 Rat Colony
+102 R Rite of Belzenlok
 Settle the Score
 
 Thallid Soothsayer
@@ -192,7 +186,7 @@ Gift of Growth
 169 C Llanowar Envoy
 Llanowar Scout
 
-Marwyn, the Nurturer
+172 R Marwyn, the Nurturer
 
 Multani, Yavimaya's Avatar
 
@@ -219,7 +213,7 @@ Verdant Force
 198 R Jodah, Archmage Eternal
 199 M Muldrotha, the Gravetide
 200 R Oath of Teferi
-201 Primevals' Glorious Rebirth
+201 R Primevals' Glorious Rebirth
 202 U Raff Capashen, Ship's Mage
 203 U Rona, Disciple of Gix
 204 U Shanna, Sisay's Legacy
@@ -231,7 +225,6 @@ Verdant Force
 Blackblade Reforged
 
 213 U Damping Sphere
-
 214 R Forebear's Blade
 215 R Gilded Lotus
 216 C Guardians of Koilos
@@ -260,22 +253,33 @@ Urza's Tome
 Voltaic Servant
 
 237 M Weatherlight
-
-Clifftop Retreat
-
-Hinterland Harbor
-
-Isolated Chapel
-
+238 R Cabal Stronghold
+239 R Clifftop Retreat
+240 R Hinterland Harbor
+241 R Isolated Chapel
 242 U Memorial to Folly
 243 U Memorial to Genius
 244 U Memorial to Glory
 245 U Memorial to Unity
 246 U Memorial to War
-247 Sulfur Falls
-248 Woodland Cemetery
+247 R Sulfur Falls
+248 R Woodland Cemetery
 249 U Zhalfirin Void
+250 L Plains
 
+257 L Island
+
+259 L Swamp
+260 L Swamp
+
+262 L Mountain
+263 L Mountain
+264 L Mountain
+
+266 L Forest
+267 L Forest
+268 L Forest
+269 L Forest
 270 M Teferi, Timebender
 271 C Temporal Machinations
 272 R Niambi, Faithful Healer
