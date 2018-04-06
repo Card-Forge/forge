@@ -12,6 +12,8 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand DOM
 
 4 U Baird, Steward of Argive
 
+Benalish Honor Guard
+
 Benalish Marshal
 
 8 U Board the Weatherlight
@@ -19,7 +21,7 @@ Benalish Marshal
 Charge
 
 12 U Danitha Capashen, Paragon
-
+13 R Daring Archaeologist
 14 U Dauntless Bodyguard
 
 Dub
@@ -37,6 +39,7 @@ Healing Grace
 Kwende, Pride of Femeref
 
 26 M Lyra Dawnbringer
+27 C Mesa Unicorn
 
 On Serra's Wings
 
@@ -69,23 +72,21 @@ Deep Freeze
 56 U Merfolk Trickster
 57 R The Mirari Conjecture
 58 R Naban, Dean of Iteration
-59 Naru Meha, Master Wizard
+59 M Naru Meha, Master Wizard
 60 C Opt
-
-Precognition Field
+61 R Precognition Field
 
 64 U Sage of Lat-Nam
 
 Sentinel of the Pearl Trident
 
 66 U Slinn Voda, the Rising Deep
-
-Tempest Djinn
-
-Tetsuko Umezawa, Fugitive
-
+67 C Syncopate
+68 Tempest Djinn
+69 Tetsuko Umezawa, Fugitive
 70 U Time of Ice
 71 C Tolarian Scholar
+72 C Unwind
 
 75 U Wizard's Retort
 76 R Zahid, Djinn of the Lamp
@@ -103,18 +104,17 @@ Demonic Vigor
 86 M Demonlord Belzenlok
 87 C Divest
 
-Drudge Sentinel
+89 C Drudge Sentinel
 
-The Eldest Reborn
+90 U The Eldest Reborn
 
 Fungal Infection
 
 Kazarov, Sengir Pureblood
 
 97 U Knight of Malice
-
-Lich's Mastery
-
+98 Lich's Mastery
+99 U Lingering Phantom
 100 M Phyrexian Scriptures
 
 Rat Colony
@@ -125,8 +125,7 @@ Thallid Soothsayer
 
 Torgaar, Famine Incarnate
 
-Urgoros, the Empty One
-
+109 U Urgoros, the Empty One
 110 C Vicious Offering
 
 Whisper, Blood Liturgist
@@ -137,16 +136,16 @@ Bloodstone Goblin
 
 Fight with Fire
 
-Firefist Adept
-
+120 C Fire Elemental
+121 Firefist Adept
 122 R The First Eruption
 123 U The Flame of Keld
 
 125 C Ghitu Chronicler
-126 Ghitu Journeymage
+126 C Ghitu Journeymage
 127 Ghitu Lavarunner
 128 Goblin Barrage
-129 Goblin Chainwhirler
+129 R Goblin Chainwhirler
 130 U Goblin Warchief
 131 Haphazard Bombardment
 132 M Jaya Ballard
@@ -166,10 +165,11 @@ Skizzik
 146 R Squee, the Immortal
 147 R Two-Headed Giant
 148 U Valduk, Keeper of the Flame
-149 Verix Bladewing
+149 M Verix Bladewing
 150 Warcry Phoenix
 151 Warlord's Fury
 152 U Wizard's Lightning
+153 C Adventurous Impulse
 
 Ancient Animus
 
@@ -189,7 +189,7 @@ Gift of Growth
 166 R Kamahl's Druidic Vow
 
 168 C Llanowar Elves
-
+169 C Llanowar Envoy
 Llanowar Scout
 
 Marwyn, the Nurturer
@@ -204,8 +204,7 @@ Sporecrown Thallid
 182 R Steel Leaf Champion
 183 Sylvan Awakening
 184 R Territorial Allosaurus
-
-Thorn Elemental
+185 U Thorn Elemental
 
 Verdant Force
 
@@ -214,7 +213,7 @@ Verdant Force
 192 Aryel, Knight of Windgrace
 193 M Darigaaz Reincarnated
 194 Garna, the Bloodflame
-195 Grand Warlord Radha
+195 R Grand Warlord Radha
 196 Hallar, the Firefletcher
 197 M Jhoira, Weatherlight Captain
 198 R Jodah, Archmage Eternal
@@ -231,21 +230,19 @@ Verdant Force
 
 Blackblade Reforged
 
-Damping Sphere
+213 U Damping Sphere
 
 214 R Forebear's Blade
-
+215 R Gilded Lotus
 216 C Guardians of Koilos
-217 Helm of the Host
+217 R Helm of the Host
 218 Howling Golem
 219 U Icy Manipulator
 
 Jhoira's Familiar
 
-Juggernaut
-
-Mishra's Self-Replicator
-
+222 U Juggernaut
+223 Mishra's Self-Replicator
 224 M Mox Amber
 
 Navigator's Compass
