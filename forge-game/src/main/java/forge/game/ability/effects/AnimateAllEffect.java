@@ -257,6 +257,8 @@ public class AnimateAllEffect extends AnimateEffectBase {
             if (!permanent) {
                 if (sa.hasParam("UntilEndOfCombat")) {
                     game.getEndOfCombat().addUntil(unanimate);
+                } else if (sa.hasParam("UntilYourNextTurn")) {
+                    game.getCleanup().addUntil(host.getController(), unanimate);
                 } else {
                     game.getEndOfTurn().addUntil(unanimate);
                 }
