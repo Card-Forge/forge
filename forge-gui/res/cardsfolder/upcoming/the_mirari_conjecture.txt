@@ -7,5 +7,5 @@ SVar:DBChangeZoneI:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Vali
 SVar:DBChangeZoneII:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Sorcery.YouCtrl | SpellDescription$ Return target sorcery card from your graveyard to your hand.
 SVar:DBEffect:DB$ Effect | Name$ The Mirari Conjecture Effect | Triggers$ InstantSorceryCast | SVars$ TrigCopySpell | SpellDescription$ Whenever you cast a creature spell this turn, draw a card.
 SVar:InstantSorceryCast:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ TrigCopySpell | TriggerZones$ Command | TriggerDescription$ Until end of turn, whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy.
-SVar:TrigCopySpell:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | AILogic$ Always
+SVar:TrigCopySpell:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Return target instant card from your graveyard to your hand.\nII — Return target sorcery card from your graveyard to your hand.\nIII — Until end of turn, whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy.
