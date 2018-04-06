@@ -1,5 +1,5 @@
 Name:The First Eruption
-ManaCost:1 R
+ManaCost:2 R
 Types:Enchantment Saga
 K:Saga:3:TrigDamageAll,TrigMana,TrigSac
 SVar:TrigDamageAll:DB$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.withoutFlying | ValidDescription$ Each creature without flying. | SpellDescription$ CARDNAME deals 1 damage to each creature without flying.
