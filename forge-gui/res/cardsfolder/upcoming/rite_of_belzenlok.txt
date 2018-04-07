@@ -1,0 +1,13 @@
+Name:Rite of Belzenlok
+ManaCost:2 B B
+Types:Enchantment Saga
+K:Saga:3:TrigTokenCleric,TrigTokenCleric,TrigTokenDemon
+SVar:TrigTokenCleric:DB$ Token | TokenOwner$ You | TokenAmount$ 2 | TokenName$ Cleric | TokenTypes$ Creature,Cleric | TokenColors$ Black | TokenPower$ 0 | TokenToughness$ 1 | TokenImage$ b 0 1 cleric DOM | SpellDescription$ Create two 0/1 black Cleric creature tokens.
+SVar:TrigTokenDemon:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenName$ Demon | TokenTypes$ Creature,Demon | TokenColors$ Black | TokenPower$ 6 | TokenToughness$ 6 | TokenKeywords$ Flying<>Trample | TokenTriggers$ DemonUpkeepTrigger | TokenSVars$ DemonTrigSac,DemonDBDamage,DemonDBCleanup,X | TokenImage$ b 6 6 demon DOM | SpellDescription$ Create a 6/6 black Demon creature token with flying, trample, and "At the beginning of your upkeep, sacrifice another creature. If you can't, this creature deals 6 damage to you."
+SVar:DemonUpkeepTrigger:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DemonTrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice another creature. If you can't, this creature deals 6 damage to you.
+SVar:DemonTrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature.Other | SubAbility$ DemonDBDamage | RememberSacrificed$ True | 
+SVar:DemonDBDamage:DB$ DealDamage | Defined$ You | NumDmg$ 6 | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DemonDBCleanup | References$ X
+SVar:DemonDBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+SVar:RemRandomDeck:True
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II - Create two 0/1 black Cleric creature tokens.\nIII - Create a 6/6 black Demon creature token with flying, trample, and "At the beginning of your upkeep, sacrifice another creature. If you can't, this creature deals 6 damage to you."

@@ -1,0 +1,11 @@
+Name:Two-Headed Giant
+ManaCost:2 R R
+Types:Creature Giant Warrior
+PT:4/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBFlip | TriggerDescription$ Whenever CARDNAME attacks, flip two coins. If both come up heads, Two-Headed Giant gains double strike until end of turn. If both come up tails, Two-Headed Giant gains menace until end of turn.
+SVar:DBFlip:DB$ FlipACoin | NoCall$ True | HeadsSubAbility$ DBHeadsFlip | TailsSubAbility$ DBTailsFlip
+SVar:DBHeadsFlip:DB$ FlipACoin | NoCall$ True | HeadsSubAbility$ DBHeadsPump
+SVar:DBTailsFlip:DB$ FlipACoin | NoCall$ True | TailsSubAbility$ DBTailsPump
+SVar:DBHeadsPump:DB$ Pump | Defined$ Self | KW$ Double Strike
+SVar:DBTailsPump:DB$ Pump | Defined$ Self | KW$ Menace
+Oracle:Whenever Two-Headed Giant attacks, flip two coins. If both come up heads, Two-Headed Giant gains double strike until end of turn. If both come up tails, Two-Headed Giant gains menace until end of turn.
