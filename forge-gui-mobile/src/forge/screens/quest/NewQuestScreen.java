@@ -123,7 +123,7 @@ public class NewQuestScreen extends FScreen {
     private final FLabel lblPreconDeck = scroller.add(new FLabel.Builder().text("Starter/Event deck:").build());
     private final FComboBox<String> cbxPreconDeck = scroller.add(new FComboBox<String>());
 
-    private final FLabel lblFormat = scroller.add(new FLabel.Builder().text("Sanctioned format:").build());
+    private final FLabel lblFormat = scroller.add(new FLabel.Builder().text("Select format:").build());
     private final FComboBox<GameFormat> cbxFormat = scroller.add(new FComboBox<GameFormat>());
 
     private final FLabel lblCustomDeck = scroller.add(new FLabel.Builder().text("Custom deck:").build());
@@ -155,7 +155,7 @@ public class NewQuestScreen extends FScreen {
     private final FLabel lblPrizedCards = scroller.add(new FLabel.Builder().text("Prized cards:").build());
     private final FComboBox<Object> cbxPrizedCards = scroller.add(new FComboBox<>());
 
-    private final FLabel lblPrizeFormat = scroller.add(new FLabel.Builder().text("Sanctioned format:").build());
+    private final FLabel lblPrizeFormat = scroller.add(new FLabel.Builder().text("Defined format:").build());
     private final FComboBox<GameFormat> cbxPrizeFormat = scroller.add(new FComboBox<GameFormat>());
 
     private final FLabel lblPrizeUnrestricted = scroller.add(new FLabel.Builder().align(HAlignment.RIGHT).font(FSkinFont.get(12)).text("All cards will be available to win.").build());
@@ -209,7 +209,7 @@ public class NewQuestScreen extends FScreen {
             }
         });
 
-        for (GameFormat gf : FModel.getFormats().getSanctionedList()) {
+        for (GameFormat gf : FModel.getFormats().getOrderedList()) {
             cbxFormat.addItem(gf);
             cbxPrizeFormat.addItem(gf);
         }
@@ -277,7 +277,9 @@ public class NewQuestScreen extends FScreen {
 
         //TODO: Support defining custom format
         btnDefineCustomFormat.setEnabled(false);
+        btnDefineCustomFormat.setVisible(false);
         btnPrizeDefineCustomFormat.setEnabled(false);
+        btnPrizeDefineCustomFormat.setVisible(false);
 
         // disable the very powerful sets -- they can be unlocked later for a high price
         final List<String> unselectableSets = new ArrayList<>();
