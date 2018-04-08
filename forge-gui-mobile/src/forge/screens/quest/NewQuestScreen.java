@@ -183,7 +183,7 @@ public class NewQuestScreen extends FScreen {
         super(null, NewGameMenu.getMenu());
 
         cbxStartingPool.addItem(StartingPoolType.Complete);
-        cbxStartingPool.addItem(StartingPoolType.Rotating);
+        cbxStartingPool.addItem(StartingPoolType.Sanctioned);
         cbxStartingPool.addItem(StartingPoolType.CustomFormat);
         cbxStartingPool.addItem(StartingPoolType.Precon);
         cbxStartingPool.addItem(StartingPoolType.DraftDeck);
@@ -199,7 +199,7 @@ public class NewQuestScreen extends FScreen {
 
         cbxPrizedCards.addItem("Same as starting pool");
         cbxPrizedCards.addItem(StartingPoolType.Complete);
-        cbxPrizedCards.addItem(StartingPoolType.Rotating);
+        cbxPrizedCards.addItem(StartingPoolType.Sanctioned);
         cbxPrizedCards.addItem(StartingPoolType.CustomFormat);
         cbxPrizedCards.setChangedHandler(new FEventHandler() {
             @Override
@@ -331,8 +331,8 @@ public class NewQuestScreen extends FScreen {
         lblPreconDeck.setVisible(newVal == StartingPoolType.Precon);
         cbxPreconDeck.setVisible(newVal == StartingPoolType.Precon);
 
-        lblFormat.setVisible(newVal == StartingPoolType.Rotating);
-        cbxFormat.setVisible(newVal == StartingPoolType.Rotating);
+        lblFormat.setVisible(newVal == StartingPoolType.Sanctioned);
+        cbxFormat.setVisible(newVal == StartingPoolType.Sanctioned);
 
         btnDefineCustomFormat.setVisible(newVal == StartingPoolType.CustomFormat);
 
@@ -370,8 +370,8 @@ public class NewQuestScreen extends FScreen {
         lblPrizeUnrestricted.setVisible(newVal == StartingPoolType.Complete);
         cbAllowUnlocks.setVisible(newVal != StartingPoolType.Complete);
 
-        lblPrizeFormat.setVisible(newVal == StartingPoolType.Rotating);
-        cbxPrizeFormat.setVisible(newVal == StartingPoolType.Rotating);
+        lblPrizeFormat.setVisible(newVal == StartingPoolType.Sanctioned);
+        cbxPrizeFormat.setVisible(newVal == StartingPoolType.Sanctioned);
         btnPrizeDefineCustomFormat.setVisible(newVal == StartingPoolType.CustomFormat);
         lblPrizeSameAsStarting.setVisible(newVal == null);
 
@@ -505,7 +505,7 @@ public class NewQuestScreen extends FScreen {
 
         if (worldFormat == null) {
             switch(getStartingPoolType()) {
-            case Rotating:
+            case Sanctioned:
                 fmtStartPool = getRotatingFormat();
                 break;
 
@@ -578,7 +578,7 @@ public class NewQuestScreen extends FScreen {
                 }
                 fmtPrizes = customPrizeFormatCodes.isEmpty() ? null : new GameFormat("Custom Prizes", customPrizeFormatCodes, null); // chosen sets and no banned cards
                 break;
-            case Rotating:
+            case Sanctioned:
                 fmtPrizes = getPrizedRotatingFormat();
                 break;
             default:
