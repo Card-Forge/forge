@@ -2,7 +2,7 @@ Name:Orcish Squatters Avatar
 ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:-1/-1
-T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigGetMana | TriggerDescription$ At the beginning of your precombat main phase, add an amount of {C} to your mana pool equal to the number of lands target opponent controls.
+T:Mode$ Phase | Phase$ Main1 | PreCombatMain$ True | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigGetMana | TriggerDescription$ At the beginning of your precombat main phase, add an amount of {C} to your mana pool equal to the number of lands target opponent controls.
 SVar:TrigGetMana:DB$ Pump | ValidTgts$ Player | RememberObjects$ Targeted | SubAbility$ DBMana
 SVar:DBMana:DB$ Mana | Produced$ C | Amount$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

@@ -192,7 +192,7 @@ public class PhaseHandler implements java.io.Serializable {
         switch (phase) {
             case UNTAP:
                 if (playerTurn.hasKeyword("Skip your next untap step.")) {
-                    playerTurn.removeKeyword("Skip your next untap step.");
+                    playerTurn.removeKeyword("Skip your next untap step.", false); // Skipping your "next" untap step is cumulative.
                     return true;
                 }
                 return playerTurn.hasKeyword("Skip the untap step of this turn.") || playerTurn.hasKeyword("Skip your untap step.");

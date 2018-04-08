@@ -2,7 +2,7 @@ Name:Kilnspire District
 ManaCost:no cost
 Types:Plane Ravnica
 T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | TriggerZones$ Command | Execute$ PutCounter | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your precombat main phase, put a charge counter on CARDNAME, then add {R} to your mana pool for each charge counter on it.
-T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Command | Execute$ PutCounter | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your precombat main phase, put a charge counter on CARDNAME, then add {R} to your mana pool for each charge counter on it.
+T:Mode$ Phase | Phase$ Main1 | PreCombatMain$ True | ValidPlayer$ You | TriggerZones$ Command | Execute$ PutCounter | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your precombat main phase, put a charge counter on CARDNAME, then add {R} to your mana pool for each charge counter on it.
 SVar:PutCounter:DB$PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1 | SubAbility$ DBMana
 SVar:DBMana:DB$ Mana | Produced$ R | Amount$ Y | References$ Y
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ DBPay | TriggerDescription$ Whenever you roll {CHAOS}, you may pay {X}. If you do, CARDNAME deals X damage to target creature or player.
