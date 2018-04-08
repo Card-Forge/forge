@@ -1,0 +1,8 @@
+[metadata]
+Code=SHC
+Date=1995-01-27
+Name=Shattered Chains
+Type=Other
+
+[cards]
+C Giant Badger
