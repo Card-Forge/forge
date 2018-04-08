@@ -319,6 +319,20 @@ public class GameFormat implements Comparable<GameFormat> {
             return coreList;
         }
 
+        public Map<String, List<GameFormat>> getHistoricMap() {
+            Map<String, List<GameFormat>> coreList = new HashMap<>();
+            for(GameFormat format: naturallyOrdered){
+                if(format.getFormatType().equals(FormatType.Historic)){
+                    String alpha = format.getName().substring(0,1);
+                    if(!coreList.containsKey(alpha)){
+                        coreList.put(alpha,new ArrayList<>());
+                    }
+                    coreList.get(alpha).add(format);
+                }
+            }
+            return coreList;
+        }
+
         public GameFormat getStandard() {
             return this.map.get("Standard");
         }

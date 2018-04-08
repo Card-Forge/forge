@@ -58,7 +58,9 @@ public abstract class FormatFilter<T extends InventoryItem> extends ListLabelFil
                 }
 
                 CardEdition edition = editions.get(code);
-                tooltip.append(" ").append(edition.getName()).append(" (").append(code).append("),");
+                if(edition!=null) {
+                    tooltip.append(" ").append(edition.getName()).append(" (").append(code).append("),");
+                }
                 lineLen = tooltip.length() - lastLen;
             }
 
