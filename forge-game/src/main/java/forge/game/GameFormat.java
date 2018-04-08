@@ -74,7 +74,22 @@ public class GameFormat implements Comparable<GameFormat> {
         this.index = compareIdx;
         this.formatType = formatType;
         this.name = fName;
-        allowedSetCodes = sets == null ? new ArrayList<String>() : Lists.newArrayList(sets);
+
+        if(sets != null) {
+            Set<String> parsedSets = new HashSet<>();
+            for (String set : sets) {
+                if (StaticData.instance().getEditions().get(set) == null) {
+                    System.out.println("Set " + set + " in format " + fName + " does not match any valid editions!");
+                    continue;
+                }
+                parsedSets.add(set);
+
+            }
+            allowedSetCodes = Lists.newArrayList(parsedSets);
+        }else{
+            allowedSetCodes = new ArrayList<String>();
+        }
+
         bannedCardNames = bannedCards == null ? new ArrayList<String>() : Lists.newArrayList(bannedCards);
         restrictedCardNames = restrictedCards == null ? new ArrayList<String>() : Lists.newArrayList(restrictedCards);
         allowedRarities = rarities == null ? Lists.newArrayList() : rarities;
