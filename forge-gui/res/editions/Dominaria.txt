@@ -53,6 +53,7 @@ On Serra's Wings
 40 C Academy Drake
 41 C Academy Journeymage
 42 R The Antiquities War
+43 C Arcane Flight
 
 Befuddle
 
@@ -170,6 +171,8 @@ Ancient Animus
 Baloth Gorger
 
 Broken Bond
+
+C Colossal Dreadmaw
 
 Corrosive Ooze
 
