@@ -90,6 +90,24 @@ public enum CSubmenuQuestData implements ICDoc {
             }
         });
 
+        view.getBtnSelectFormat().setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                final DialogChooseFormats dialog = new DialogChooseFormats();
+                dialog.setOkCallback(new Runnable() {
+                    @Override
+                    public void run() {
+                        customFormatCodes.clear();
+                        Set<String> sets = new HashSet<String>();
+                        for(GameFormat format:dialog.getSelectedFormats()){
+                            sets.addAll(format.getAllowedSetCodes());
+                        }
+                        customFormatCodes.addAll(sets);
+                    }
+                });
+            }
+        });
+
         view.getBtnPrizeCustomFormat().setCommand(new UiCommand() {
             @Override
             public void run() {
@@ -99,6 +117,24 @@ public enum CSubmenuQuestData implements ICDoc {
                     public void run() {
                         customPrizeFormatCodes.clear();
                         customPrizeFormatCodes.addAll(dialog.getSelectedSets());
+                    }
+                });
+            }
+        });
+
+        view.getBtnPrizeSelectFormat().setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                final DialogChooseFormats dialog = new DialogChooseFormats();
+                dialog.setOkCallback(new Runnable() {
+                    @Override
+                    public void run() {
+                        customPrizeFormatCodes.clear();
+                        Set<String> sets = new HashSet<String>();
+                        for(GameFormat format:dialog.getSelectedFormats()){
+                            sets.addAll(format.getAllowedSetCodes());
+                        }
+                        customPrizeFormatCodes.addAll(sets);
                     }
                 });
             }
@@ -197,10 +233,11 @@ public enum CSubmenuQuestData implements ICDoc {
 
         if (worldFormat == null) {
             switch(view.getStartingPoolType()) {
-            case Rotating:
+            case Sanctioned:
                 fmtStartPool = view.getRotatingFormat();
                 break;
 
+            case Casual:
             case CustomFormat:
                 if (customFormatCodes.isEmpty()) {
                     if (!FOptionPane.showConfirmDialog("You have defined a custom format that doesn't contain any sets.\nThis will start a game without restriction.\n\nContinue?")) {
@@ -257,6 +294,7 @@ public enum CSubmenuQuestData implements ICDoc {
             case Complete:
                 fmtPrizes = null;
                 break;
+            case Casual:
             case CustomFormat:
                 if (customPrizeFormatCodes.isEmpty()) {
                     if (!FOptionPane.showConfirmDialog("You have defined custom format as containing no sets.\nThis will choose all editions without restriction as prizes.\n\nContinue?")) {
@@ -265,7 +303,7 @@ public enum CSubmenuQuestData implements ICDoc {
                 }
                 fmtPrizes = customPrizeFormatCodes.isEmpty() ? null : new GameFormat("Custom Prizes", customPrizeFormatCodes, null); // chosen sets and no banned cards
                 break;
-            case Rotating:
+            case Sanctioned:
                 fmtPrizes = view.getPrizedRotatingFormat();
                 break;
             default:
