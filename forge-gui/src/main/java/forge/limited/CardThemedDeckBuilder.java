@@ -506,6 +506,8 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
                         &&!card.getRules().getManaCost().isPureGeneric()
                         && colors.containsAllColorsFrom(card.getRules().getColorIdentity().getColor())
                         && !deckList.contains(card)
+                        && !keyCard.equals(card)
+                        && !secondKeyCard.equals(card)
                         &&!card.getRules().getAiHints().getRemAIDecks()
                         &&!card.getRules().getAiHints().getRemRandomDecks()
                         &&!card.getRules().getMainPart().getType().isLand();
