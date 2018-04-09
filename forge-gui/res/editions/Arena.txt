@@ -1,0 +1,9 @@
+[metadata]
+Code=ARENA
+Date=1994-09-26
+Name=Arena
+Type=Other
+
+[cards]
+C Arena
+C Sewers of Estark
