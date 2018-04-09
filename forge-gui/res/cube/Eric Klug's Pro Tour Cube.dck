@@ -10,7 +10,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Ajani Vengeant|ALA
 1 Ajani, Mentor of Heroes|JOU
 1 Akroma's Blessing|ONS
-1 Akroma's Vengeance|ONS
+1 Akroma's Vengeance|A25
 1 Ancient Tomb|VMA
 1 Angel of Despair|GPT
 1 Aquamoeba|VMA
@@ -21,7 +21,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Arcbound Worker|MMA
 1 Archangel Avacyn|SOI
 1 Arid Mesa|MM3
-1 Armageddon|VMA
+1 Armageddon|A25
 1 Arrogant Wurm|VMA
 1 Atarka's Command|DTK
 1 Aura of Silence|10E
@@ -34,13 +34,13 @@ Name=Eric Klug's Pro Tour Cube
 1 Barbed Lightning|DST
 1 Basking Rootwalla|VMA
 1 Become Immense|KTK
-1 Bident of Thassa|THS
+1 Bident of Thassa|A25
 1 Birds of Paradise|M12
 1 Bitterblossom|MM2
 1 Bituminous Blast|ARB
 1 Black Knight|M11
 1 Blazing Specter|VMA
-1 Blightning|ALA
+1 Blightning|A25
 1 Blood Crypt|RTR
 1 Bloodbraid Elf|EMA
 1 Bogardan Hellkite|IMA
@@ -48,7 +48,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Boros Reckoner|MM3
 1 Boros Signet|MM3
 1 Bosh, Iron Golem|MRD
-1 Brainstorm|EMA
+1 Brainstorm|A25
 1 Brave the Elements|M14
 1 Breeding Pool|GTC
 1 Brimaz, King of Oreskos|BNG
@@ -60,7 +60,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Capsize|TPR
 1 Careful Consideration|MMA
 1 Carven Caryatid|IMA
-1 Cascade Bluffs|EVE
+1 Cascade Bluffs|A25
 1 Cavern of Souls|MM3
 1 Caves of Koilos|ORI
 1 Celestial Colonnade|WWK
@@ -87,9 +87,9 @@ Name=Eric Klug's Pro Tour Cube
 1 Contagion|ALL
 1 Control Magic|EMA
 1 Convolute|EMN
-1 Counterspell|EMA
-1 Courser of Kruphix|BNG
-1 Court Hussar|DIS
+1 Counterspell|A25
+1 Courser of Kruphix|A25
+1 Court Hussar|A25
 1 Covetous Dragon|UDS
 1 Cranial Plating|MM2
 1 Crater Hellion|EMA
@@ -101,14 +101,14 @@ Name=Eric Klug's Pro Tour Cube
 1 Cyclonic Rift|MM3
 1 Damnation|MM3
 1 Dark Confidant|MM2
-1 Dark Ritual|TPR
+1 Dark Ritual|A25
 1 Darksteel Citadel|MM2
 1 Daru Sanctifier|LGN
 1 Day of Judgment|M12
 1 Daze|EMA
 1 Debtors' Knell|GPT
 1 Deceiver Exarch|NPH
-1 Decree of Justice|VMA
+1 Decree of Justice|A25
 1 Deep Analysis|EMA
 1 Demonfire|DIS
 1 Demonic Consultation|ICE
@@ -116,8 +116,8 @@ Name=Eric Klug's Pro Tour Cube
 1 Devil's Play|ISD
 1 Dimir Signet|MM3
 1 Disciple of the Vault|MRD
-1 Disenchant|IMA
-1 Disfigure|ZEN
+1 Disenchant|A25
+1 Disfigure|A25
 1 Dismember|MM2
 1 Dispatch|MM2
 1 Dissipate|M15
@@ -150,7 +150,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Eternal Witness|MMA
 1 Ethersworn Canonist|MMA
 1 Evolutionary Leap|ORI
-1 Evolving Wilds|IMA
+1 Evolving Wilds|RIX
 1 Exalted Angel|ONS
 1 Experiment One|GTC
 1 Explore|MM3
@@ -176,7 +176,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Force Spike|7ED
 1 Force of Will|EMA
 1 Foundry Street Denizen|M15
-1 Frenzied Goblin|M15
+1 Frenzied Goblin|A25
 1 Frogmite|MM2
 1 Frostburn Weird|RTR
 1 Fyndhorn Elves|VMA
@@ -184,7 +184,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Garruk Wildspeaker|M11
 1 Gempalm Incinerator|LGN
 1 Gemstone Mine|TSB
-1 Giant Growth|M14
+1 Giant Growth|A25
 1 Giant Solifuge|EMA
 1 Gideon Jura|M12
 1 Gideon, Ally of Zendikar|BFZ
@@ -210,7 +210,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Hero's Downfall|THS
 1 Hideous Laughter|CHK
 1 Honor of the Pure|M12
-1 Hordeling Outburst|KTK
+1 Hordeling Outburst|A25
 1 Horizon Canopy|IMA
 1 Horobi's Whisper|MMA
 1 Hunted Dragon|RAV
@@ -218,7 +218,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Hymn to Tourach|EMA
 1 Hypnotic Specter|M10
 1 Icy Manipulator|10E
-1 Ihsan's Shade|HML
+1 Ihsan's Shade|A25
 1 Illusions of Grandeur|ICE
 1 Imperious Perfect|EMA
 1 Impulse|VIS
@@ -230,7 +230,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Jace Beleren|M11
 1 Jace, Architect of Thought|RTR
 1 Jace, the Mind Sculptor|VMA
-1 Jackal Pup|TMP
+1 Jackal Pup|A25
 1 Jareth, Leonine Titan|VMA
 1 Jayemdae Tome|ORI
 1 Jokulhaups|6ED
@@ -254,7 +254,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Lavaclaw Reaches|WWK
 1 Leonin Relic-Warder|MBS
 1 Lightning Berserker|DTK
-1 Lightning Bolt|MM2
+1 Lightning Bolt|A25
 1 Lightning Greaves|MRD
 1 Lightning Helix|IMA
 1 Lightning Strike|XLN
@@ -269,7 +269,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Lotus Cobra|IMA
 1 Lotus Petal|TPR
 1 Maelstrom Pulse|MMA
-1 Man-o'-War|VIS
+1 Man-o'-War|A25
 1 Mana Leak|IMA
 1 Mana Tithe|PLC
 1 Mana Vault|VMA
@@ -284,7 +284,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Mindslaver|SOM
 1 Mirari|TSB
 1 Mirari's Wake|CNS
-1 Mishra's Factory|EMA
+1 Mishra's Factory|A25
 1 Misty Rainforest|MM3
 1 Mogg Conscripts|TPR
 1 Mogg Fanatic|EMA
@@ -306,7 +306,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Nameless Inversion|MM2
 1 Necropotence|IMA
 1 Nekrataal|EMA
-1 Nettle Sentinel|EVE
+1 Nettle Sentinel|A25
 1 Nevinyrral's Disk|EMA
 1 Nightscape Familiar|VMA
 1 Nightveil Specter|GTC
@@ -327,13 +327,13 @@ Name=Eric Klug's Pro Tour Cube
 1 Parallax Wave|VMA
 1 Path to Exile|MM3
 1 Pentavus|M12
-1 Pernicious Deed|CNS
+1 Pernicious Deed|A25
 1 Pestermite|MMA
 1 Phyrexian Colossus|8ED
 1 Phyrexian Processor|USG
 1 Phyrexian Scuta|PLS
 1 Phyrexian War Beast|ALL
-1 Pillage|7ED
+1 Pillage|A25
 1 Pithing Needle|RTR
 1 Plague Spitter|INV
 1 Planar Cleansing|M14
@@ -355,7 +355,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Putrefy|MM3
 1 Putrid Leech|ARB
 1 Pyrite Spellbomb|MMA
-1 Pyroclasm|MM3
+1 Pyroclasm|A25
 1 Raging Ravine|WWK
 1 Rakdos Guildmage|DIS
 1 Rampant Growth|MM2
@@ -369,7 +369,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Repulse|INV
 1 Restoration Angel|IMA
 1 Ring of Gix|VMA
-1 Rishadan Port|MMQ
+1 Rishadan Port|A25
 1 Roar of the Wurm|EMA
 1 Rootborn Defenses|MM3
 1 Ruination Guide|BFZ
@@ -379,7 +379,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Sandsteppe Citadel|KTK
 1 Savage Lands|MM3
 1 Savannah|VMA
-1 Savannah Lions|9ED
+1 Savannah Lions|A25
 1 Scab-Clan Mauler|GPT
 1 Scalding Tarn|MM3
 1 Scorched Rusalka|MM3
@@ -445,12 +445,12 @@ Name=Eric Klug's Pro Tour Cube
 1 Stupor|TSB
 1 Sudden Death|TSP
 1 Sulfurous Springs|10E
-1 Summoner's Pact|MMA
+1 Summoner's Pact|A25
 1 Supreme Verdict|IMA
 1 Survival of the Fittest|TPR
 1 Sword of Feast and Famine|MBS
 1 Sword of War and Peace|NPH
-1 Swords to Plowshares|IMA
+1 Swords to Plowshares|A25
 1 Sylvan Advocate|OGW
 1 Sylvan Caryatid|THS
 1 Sylvan Library|EMA
@@ -499,7 +499,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Vampiric Tutor|EMA
 1 Vault Skirge|NPH
 1 Vendetta|ROE
-1 Vendilion Clique|MM2
+1 Vendilion Clique|A25
 1 Vengeful Dreams|TOR
 1 Venser, Shaper Savant|MM3
 1 Verdant Catacombs|MM3

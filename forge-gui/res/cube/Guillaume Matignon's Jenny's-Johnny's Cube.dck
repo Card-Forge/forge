@@ -19,7 +19,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Angelic Destiny|M12
 1 Anguished Unmaking|SOI
 1 Aphetto Grifter|ONS
-1 Arbor Elf|M13
+1 Arbor Elf|A25
 1 Arcanis the Omnipotent|EMA
 1 Archangel of Thune|IMA
 1 Arid Mesa|MM3
@@ -54,9 +54,9 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Bosh, Iron Golem|MRD
 1 Brain Maggot|JOU
 1 Braingeyser|3ED
-1 Brainstorm|EMA
+1 Brainstorm|A25
 1 Breeding Pool|GTC
-1 Brion Stoutarm|LRW
+1 Brion Stoutarm|A25
 1 Brushland|10E
 1 Burning Vengeance|EMA
 1 Burst Lightning|MM2
@@ -88,7 +88,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Compulsion|TOR
 1 Compulsive Research|MM3
 1 Condescend|IMA
-1 Courser of Kruphix|BNG
+1 Courser of Kruphix|A25
 1 Cradle of Vitality|ALA
 1 Crippling Fatigue|TOR
 1 Crucible of Worlds|10E
@@ -161,7 +161,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Feldon of the Third Path
 1 Felidar Umbra
 1 Fertile Ground|LRW
-1 Fiend Hunter|ISD
+1 Fiend Hunter|A25
 1 Fiery Confluence
 1 Fire // Ice|APC
 1 Firebolt|EMA
@@ -173,7 +173,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Flux|WTH
 1 Foundry Street Denizen|M15
 1 Frantic Search|VMA
-1 Frenzied Goblin|M15
+1 Frenzied Goblin|A25
 1 Freyalise, Llanowar's Fury
 1 Fyndhorn Elves|VMA
 1 Gamble|EMA
@@ -237,7 +237,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 High Market|MMQ
 1 Hinterland Harbor|ISD
 1 Hopeful Eidolon|THS
-1 Hordeling Outburst|KTK
+1 Hordeling Outburst|A25
 1 Idyllic Tutor|MOR
 1 Immaculate Magistrate|LRW
 1 Imperious Perfect|EMA
@@ -269,7 +269,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Legacy's Allure|TMP
 1 Leonin Relic-Warder|MBS
 1 Life from the Loam|MMA
-1 Lightning Bolt|MM2
+1 Lightning Bolt|A25
 1 Lightning Greaves|MRD
 1 Lightning Helix|IMA
 1 Lightning Surge|JUD
@@ -319,14 +319,14 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Nearheath Pilgrim|AVR
 1 Necromancer's Stockpile|M15
 1 Necromancy|VIS
-1 Negate|AER
+1 Negate|RIX
 1 Nephalia Drownyard|ISD
 1 Nighthowler|THS
 1 Nissa, Vastwood Seer|ORI
 1 Noose Constrictor|EMN
 1 Norin the Wary|TSP
 1 Nullmage Shepherd|RAV
-1 Nyx-Fleece Ram|JOU
+1 Nyx-Fleece Ram|A25
 1 Obelisk of Urd|M15
 1 Obliterate|8ED
 1 Oblivion Ring|MM2
@@ -350,7 +350,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Phyrexian Metamorph|NPH
 1 Pia and Kiran Nalaar|ORI
 1 Pilgrim's Eye|EMA
-1 Pillage|7ED
+1 Pillage|A25
 1 Pious Evangel|SOI
 1 Plateau|VMA
 1 Polluted Delta|KTK
@@ -362,12 +362,12 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Pristine Talisman|IMA
 1 Prized Amalgam|SOI
 1 Prophetic Bolt|VMA
-1 Prophetic Prism|KLD
+1 Prophetic Prism|A25
 1 Psychic Spiral|RTR
 1 Punishing Fire|ZEN
 1 Purphoros, God of the Forge|THS
 1 Quiet Speculation|EMA
-1 Rancor|EMA
+1 Rancor|A25
 1 Ranger of Eos|MM3
 1 Raven's Crime|MMA
 1 Read the Bones|ORI
@@ -486,7 +486,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Traverse the Ulvenwald|SOI
 1 Tropical Island|VMA
 1 Tundra|VMA
-1 Twisted Abomination|EMA
+1 Twisted Abomination|A25
 1 Ulamog, the Infinite Gyre|MM2
 1 Ulvenwald Hydra|SOI
 1 Undead Alchemist|ISD
@@ -495,14 +495,14 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Underground Sea|VMA
 1 Underworld Coinsmith|JOU
 1 Unstable Obelisk
-1 Utopia Sprawl|DIS
+1 Utopia Sprawl|A25
 1 Vapor Snag|MM2
-1 Vendilion Clique|MM2
+1 Vendilion Clique|A25
 1 Vengevine|ROE
 1 Venser, Shaper Savant|MM3
 1 Verdant Catacombs|MM3
-1 Vessel of Nascency|SOI
-1 Vindicate|EMA
+1 Vessel of Nascency|A25
+1 Vindicate|A25
 1 Violent Eruption|TOR
 1 Viridian Zealot|DST
 1 Voidmage Prodigy|TSB

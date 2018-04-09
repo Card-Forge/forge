@@ -34,7 +34,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Beast Within|NPH
 1 Beastmaster Ascension|ZEN
 1 Become Immense|KTK
-1 Bident of Thassa|THS
+1 Bident of Thassa|A25
 1 Bitterblossom|MM2
 1 Blackcleave Cliffs|SOM
 1 Blasting Station|5DN
@@ -130,14 +130,14 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Enlightened Tutor|EMA
 1 Entomb|EMA
 1 Entomber Exarch|MM3
-1 Epic Confrontation|DTK
+1 Epic Confrontation|A25
 1 Epochrasite|MMA
 1 Equilibrium|7ED
 1 Eternal Dragon|VMA
 1 Eternal Witness|MMA
 1 Ethereal Armor|RTR
 1 Evangelize|TSP
-1 Evolving Wilds|IMA
+1 Evolving Wilds|RIX
 1 Executioner's Capsule|MMA
 1 Experiment One|GTC
 1 Faceless Butcher|TSB
@@ -149,7 +149,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Feldon of the Third Path
 1 Felidar Sovereign|BFZ
 1 Festering Goblin|MMA
-1 Fetid Heath|EVE
+1 Fetid Heath|A25
 1 Fire Diamond|7ED
 1 Fire-Lit Thicket|SHM
 1 Fireslinger|TMP
@@ -209,7 +209,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Hermit Druid|TPR
 1 Hollow Specter|LGN
 1 Hopeful Eidolon|THS
-1 Hordeling Outburst|KTK
+1 Hordeling Outburst|A25
 1 Horizon Canopy|IMA
 1 Huntmaster of the Fells|DKA
 1 Hypnotic Specter|M10
@@ -246,7 +246,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Leafcrown Dryad|THS
 1 Leonin Bola|DST
 1 Life from the Loam|MMA
-1 Lightning Bolt|MM2
+1 Lightning Bolt|A25
 1 Lightning Crafter|MOR
 1 Lignify|LRW
 1 Liliana of the Veil|MM3
@@ -255,7 +255,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Looter il-Kor|TSP
 1 Loyal Retainers|PTK
 1 Lumbering Falls|BFZ
-1 Luminarch Ascension|ZEN
+1 Luminarch Ascension|A25
 1 Magma Jet|MM3
 1 Magus of the Tabernacle|PLC
 1 Mana Confluence|JOU
@@ -275,13 +275,13 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Memory Lapse|EMA
 1 Meren of Clan Nel Toth
 1 Mesa Enchantress|EMA
-1 Mesmeric Fiend|VMA
+1 Mesmeric Fiend|A25
 1 Mesmeric Orb|MRD
 1 Military Intelligence|M15
 1 Mindslaver|SOM
 1 Miraculous Recovery|VIS
 1 Misdirection|CNS
-1 Mishra's Factory|EMA
+1 Mishra's Factory|A25
 1 Misty Rainforest|MM3
 1 Mogg Fanatic|EMA
 1 Mogg War Marshal|EMA
@@ -301,18 +301,18 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Necromancer's Stockpile|M15
 1 Needle Spires|OGW
 1 Nether Traitor|TSP
-1 Nettle Sentinel|EVE
+1 Nettle Sentinel|A25
 1 Nezumi Shortfang|CHK
 1 Niblis of Frost|EMN
 1 Nicol Bolas, Planeswalker|M13
 1 Nightveil Specter|GTC
 1 Ninja of the Deep Hours|BOK
-1 Niv-Mizzet, the Firemind|MM2
+1 Niv-Mizzet, the Firemind|A25
 1 Noose Constrictor|EMN
 1 Norn's Annex|NPH
 1 Nykthos, Shrine to Nyx|THS
 1 Nyx Weaver|JOU
-1 Nyx-Fleece Ram|JOU
+1 Nyx-Fleece Ram|A25
 1 Obliterate|8ED
 1 Oblivion Ring|MM2
 1 Obzedat, Ghost Council|GTC
@@ -330,12 +330,12 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Parallax Tide|NMS
 1 Patron Wizard|ODY
 1 Peace of Mind|EMN
-1 Phantasmal Bear|M12
+1 Phantasmal Bear|A25
 1 Phantasmal Image|MM3
 1 Phyrexian Revoker|M15
 1 Phyrexian Totem|TSP
 1 Pia and Kiran Nalaar|ORI
-1 Pillory of the Sleepless|MM2
+1 Pillory of the Sleepless|A25
 1 Plateau|VMA
 1 Platinum Emperion|SOM
 1 Polluted Delta|KTK
@@ -346,7 +346,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Prey Upon|AER
 1 Pristine Talisman|IMA
 1 Propaganda|TMP
-1 Prophetic Prism|KLD
+1 Prophetic Prism|A25
 1 Proteus Staff|MRD
 1 Psionic Blast|TSB
 1 Psychic Spiral|RTR
@@ -358,14 +358,14 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Rakdos Keyrune|RTR
 1 Rakdos Signet|MM3
 1 Rakdos's Return|RTR
-1 Rancor|EMA
+1 Rancor|A25
 1 Raven's Crime|MMA
 1 Ravenous Rats|M13
 1 Razorfin Hunter|APC
 1 Reassembling Skeleton|MM2
 1 Reclamation Sage|M15
 1 Recurring Nightmare|TPR
-1 Regrowth|VMA
+1 Regrowth|A25
 1 Relentless Dead|SOI
 1 Remand|MM2
 1 Replenish|UDS
@@ -398,7 +398,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Setessan Tactics|JOU
 1 Sever the Bloodline|MM3
 1 Sewer Nemesis
-1 Shadowmage Infiltrator|MM2
+1 Shadowmage Infiltrator|A25
 1 Shambling Vent|BFZ
 1 Shelldock Isle|LRW
 1 Sheoldred, Whispering One|IMA
@@ -448,7 +448,7 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Strip Mine|VMA
 1 Stronghold Assassin|TPR
 1 Sun Droplet|MRD
-1 Sundering Titan|DST
+1 Sundering Titan|A25
 1 Survival of the Fittest|TPR
 1 Sylvan Library|EMA
 1 Syndic of Tithes|GTC
@@ -478,13 +478,13 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Trash for Treasure|MRD
 1 Treetop Village|10E
 1 Trinket Mage|SOM
-1 Triskaidekaphobia|SOI
+1 Triskaidekaphobia|A25
 1 Troll Ascetic|10E
 1 Tropical Island|VMA
 1 Tuktuk the Explorer|ROE
 1 Tundra|VMA
 1 Turn Aside|EMN
-1 Twilight Mire|EVE
+1 Twilight Mire|A25
 1 Ugin, the Spirit Dragon|FRF
 1 Ulamog, the Ceaseless Hunger|BFZ
 1 Ulamog, the Infinite Gyre|MM2
@@ -499,11 +499,11 @@ Name=Timothee Simonot's Twisted Color Pie Cube
 1 Vapor Snag|MM2
 1 Varolz, the Scar-Striped|DGM
 1 Vedalken Mastermind|10E
-1 Vendilion Clique|MM2
+1 Vendilion Clique|A25
 1 Vengevine|ROE
 1 Venser, Shaper Savant|MM3
 1 Verdant Catacombs|MM3
-1 Vessel of Nascency|SOI
+1 Vessel of Nascency|A25
 1 Viridian Zealot|DST
 1 Visara the Dreadful|EMA
 1 Viscera Seer|M11

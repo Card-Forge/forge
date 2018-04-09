@@ -16,11 +16,11 @@ Name=MTGO Vintage Cube 2014
 1 Ancient Tomb|VMA
 1 Angel of Serenity|RTR
 1 Animate Dead|EMA
-1 Arbor Elf|M13
+1 Arbor Elf|A25
 1 Arc Trail|SOM
 1 Archangel of Thune|IMA
 1 Arid Mesa|MM3
-1 Armageddon|VMA
+1 Armageddon|A25
 1 Ashiok, Nightmare Weaver|THS
 1 Augur of Bolas|MM3
 1 Avacyn's Pilgrim|MM3
@@ -56,13 +56,13 @@ Name=MTGO Vintage Cube 2014
 1 Bone Shredder|ULG
 1 Bonfire of the Damned|MM3
 1 Borderland Marauder|IMA
-1 Boros Charm|GTC
+1 Boros Charm|A25
 1 Boros Reckoner|MM3
 1 Boros Signet|MM3
 1 Braids, Cabal Minion|EMA
 1 Brain Freeze|VMA
 1 Brain Maggot|JOU
-1 Brainstorm|EMA
+1 Brainstorm|A25
 1 Breeding Pool|GTC
 1 Bribery|8ED
 1 Brimaz, King of Oreskos|BNG
@@ -82,14 +82,14 @@ Name=MTGO Vintage Cube 2014
 1 Chrome Mox|EMA
 1 Clifftop Retreat|ISD
 1 Cloudgoat Ranger|MMA
-1 Coalition Relic|FUT
+1 Coalition Relic|A25
 1 Compulsive Research|MM3
 1 Consecrated Sphinx|IMA
 1 Containment Priest
 1 Control Magic|EMA
 1 Council's Judgment|CNS
-1 Counterspell|EMA
-1 Courser of Kruphix|BNG
+1 Counterspell|A25
+1 Courser of Kruphix|A25
 1 Crater's Claws|KTK
 1 Craterhoof Behemoth|MM3
 1 Crucible of Worlds|10E
@@ -99,7 +99,7 @@ Name=MTGO Vintage Cube 2014
 1 Damnation|MM3
 1 Daretti, Scrap Savant
 1 Dark Confidant|MM2
-1 Dark Ritual|TPR
+1 Dark Ritual|A25
 1 Day of Judgment|M12
 1 Daze|EMA
 1 Deceiver Exarch|NPH
@@ -108,11 +108,11 @@ Name=MTGO Vintage Cube 2014
 1 Deranged Hermit|VMA
 1 Desecration Demon|MM3
 1 Detention Sphere|RTR
-1 Diabolic Edict|TPR
+1 Diabolic Edict|A25
 1 Dimir Signet|MM3
 1 Diregraf Ghoul|ISD
-1 Disenchant|IMA
-1 Disfigure|ZEN
+1 Disenchant|A25
+1 Disfigure|A25
 1 Dismember|MM2
 1 Domri Rade|MM3
 1 Dragonskull Summit|XLN
@@ -122,7 +122,7 @@ Name=MTGO Vintage Cube 2014
 1 Dungeon Geists|DKA
 1 Duress|IMA
 1 Edric, Spymaster of Trest|VMA
-1 Eidolon of the Great Revel|JOU
+1 Eidolon of the Great Revel|A25
 1 Electrolyze|IMA
 1 Elesh Norn, Grand Cenobite|IMA
 1 Elite Vanguard|EMA
@@ -156,7 +156,7 @@ Name=MTGO Vintage Cube 2014
 1 Force of Will|EMA
 1 Force Spike|7ED
 1 Frantic Search|VMA
-1 Frenzied Goblin|M15
+1 Frenzied Goblin|A25
 1 Freyalise, Llanowar's Fury
 1 Frost Titan|M12
 1 Fyndhorn Elves|VMA
@@ -209,7 +209,7 @@ Name=MTGO Vintage Cube 2014
 1 Huntmaster of the Fells|DKA
 1 Hymn to Tourach|EMA
 1 Hypnotic Specter|M10
-1 Imperial Recruiter|PTK
+1 Imperial Recruiter|A25
 1 Imperial Seal|PTK
 1 Imposing Sovereign|M14
 1 Impulse|VIS
@@ -226,7 +226,7 @@ Name=MTGO Vintage Cube 2014
 1 Jace Beleren|M11
 1 Jace, Architect of Thought|RTR
 1 Jace, the Mind Sculptor|VMA
-1 Jackal Pup|TMP
+1 Jackal Pup|A25
 1 Joraga Treespeaker|ROE
 1 Journey to Nowhere|ZEN
 1 Kami of Ancient Law|MM2
@@ -248,7 +248,7 @@ Name=MTGO Vintage Cube 2014
 1 Library of Alexandria|VMA
 1 Life from the Loam|MMA
 1 Lifebane Zombie|M14
-1 Lightning Bolt|MM2
+1 Lightning Bolt|A25
 1 Lightning Greaves|MRD
 1 Lightning Helix|IMA
 1 Lightning Mauler|AVR
@@ -256,7 +256,7 @@ Name=MTGO Vintage Cube 2014
 1 Liliana of the Veil|MM3
 1 Lingering Souls|MM3
 1 Lion's Eye Diamond|MIR
-1 Living Death|TPR
+1 Living Death|A25
 1 Llanowar Elves|EMA
 1 Llanowar Wastes|ORI
 1 Lodestone Golem|MM2
@@ -276,19 +276,19 @@ Name=MTGO Vintage Cube 2014
 1 Marsh Flats|MM3
 1 Massacre Wurm|MBS
 1 Master of the Feast|JOU
-1 Master of the Wild Hunt|M10
+1 Master of the Wild Hunt|A25
 1 Masticore|VMA
 1 Maze of Ith|EMA
 1 Meloku the Clouded Mirror|MMA
 1 Memory Jar|VMA
 1 Memory Lapse|EMA
-1 Mesmeric Fiend|VMA
+1 Mesmeric Fiend|A25
 1 Metalworker|UDS
 1 Mind Twist|4ED
 1 Mind's Desire|SCG
 1 Mirari's Wake|CNS
 1 Mirran Crusader|MM2
-1 Mishra's Factory|EMA
+1 Mishra's Factory|A25
 1 Mishra's Workshop|ATQ
 1 Misty Rainforest|MM3
 1 Mizzium Mortars|MM3
@@ -337,12 +337,12 @@ Name=MTGO Vintage Cube 2014
 1 Path to Exile|MM3
 1 Pattern of Rebirth|UDS
 1 Pentad Prism|5DN
-1 Pernicious Deed|CNS
+1 Pernicious Deed|A25
 1 Pestermite|MMA
 1 Phantasmal Image|MM3
 1 Phyrexian Metamorph|NPH
 1 Phyrexian Negator|UDS
-1 Phyrexian Obliterator|NPH
+1 Phyrexian Obliterator|A25
 1 Phyrexian Revoker|M15
 1 Pithing Needle|RTR
 1 Plateau|VMA
@@ -361,13 +361,13 @@ Name=MTGO Vintage Cube 2014
 1 Rakdos Cackler|RTR
 1 Rakdos Signet|MM3
 1 Ral Zarek|DGM
-1 Rancor|EMA
+1 Rancor|A25
 1 Ranger of Eos|MM3
 1 Ravages of War|PTK
 1 Reanimate|TPR
 1 Reclamation Sage|M15
 1 Recurring Nightmare|TPR
-1 Regrowth|VMA
+1 Regrowth|A25
 1 Relic of Progenitus|EMA
 1 Remand|MM2
 1 Repeal|IMA
@@ -375,7 +375,7 @@ Name=MTGO Vintage Cube 2014
 1 Reveillark|MMA
 1 Rift Bolt|IMA
 1 Riftwing Cloudskate|MMA
-1 Rishadan Port|MMQ
+1 Rishadan Port|A25
 1 Rofellos, Llanowar Emissary|VMA
 1 Rootbound Crag|XLN
 1 Sacred Foundry|GTC
@@ -383,7 +383,7 @@ Name=MTGO Vintage Cube 2014
 1 Sarcomancy|TPR
 1 Sarkhan, the Dragonspeaker|KTK
 1 Savannah|VMA
-1 Savannah Lions|9ED
+1 Savannah Lions|A25
 1 Scalding Tarn|MM3
 1 Scavenging Ooze|MM3
 1 Scroll Rack|TMP
@@ -395,7 +395,7 @@ Name=MTGO Vintage Cube 2014
 1 Selesnya Signet|MM3
 1 Sensei's Divining Top|EMA
 1 Serendib Efreet|EMA
-1 Shadowmage Infiltrator|MM2
+1 Shadowmage Infiltrator|A25
 1 Shardless Agent|EMA
 1 Sheoldred, Whispering One|IMA
 1 Shivan Reef|ORI
@@ -438,7 +438,7 @@ Name=MTGO Vintage Cube 2014
 1 Sulfuric Vortex|EMA
 1 Sulfurous Springs|10E
 1 Sun Titan|M12
-1 Sundering Titan|DST
+1 Sundering Titan|A25
 1 Sunpetal Grove|XLN
 1 Supreme Verdict|IMA
 1 Survival of the Fittest|TPR
@@ -447,7 +447,7 @@ Name=MTGO Vintage Cube 2014
 1 Sword of Fire and Ice|MMA
 1 Sword of Light and Shadow|MMA
 1 Sword of War and Peace|NPH
-1 Swords to Plowshares|IMA
+1 Swords to Plowshares|A25
 1 Sylvan Caryatid|THS
 1 Sylvan Library|EMA
 1 Taiga|VMA
@@ -464,7 +464,7 @@ Name=MTGO Vintage Cube 2014
 1 Tezzeret the Seeker|MM2
 1 Tezzeret, Agent of Bolas|MBS
 1 Thada Adel, Acquisitor|WWK
-1 Thalia, Guardian of Thraben|DKA
+1 Thalia, Guardian of Thraben|A25
 1 The Abyss|LEG
 1 Thirst for Knowledge|MMA
 1 Thoughtseize|IMA
@@ -501,16 +501,16 @@ Name=MTGO Vintage Cube 2014
 1 Unexpectedly Absent|EMA
 1 Upheaval|VMA
 1 Urborg, Tomb of Yawgmoth|M15
-1 Vampire Lacerator|MM2
+1 Vampire Lacerator|A25
 1 Vampire Nighthawk|MM3
 1 Vampiric Tutor|EMA
 1 Vedalken Shackles|MMA
-1 Vendilion Clique|MM2
+1 Vendilion Clique|A25
 1 Vengevine|ROE
 1 Venser, Shaper Savant|MM3
 1 Venser, the Sojourner|SOM
 1 Verdant Catacombs|MM3
-1 Vindicate|EMA
+1 Vindicate|A25
 1 Voice of Resurgence|MM3
 1 Volcanic Island|VMA
 1 Volrath's Stronghold|TPR

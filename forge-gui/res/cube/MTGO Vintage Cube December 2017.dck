@@ -12,7 +12,7 @@ Name=MTGO Vintage Cube December 2017
 1 Grim Lavamancer|M12
 1 Fiery Confluence
 1 Mox Ruby|VMA
-1 Jackal Pup|TMP
+1 Jackal Pup|A25
 1 Stormbreath Dragon|THS
 1 Flametongue Kavu|VMA
 1 Chandra, Pyromaster|M15
@@ -32,7 +32,7 @@ Name=MTGO Vintage Cube December 2017
 1 Koth of the Hammer|SOM
 1 Firedrinker Satyr|THS
 1 Reckless Bushwhacker|OGW
-1 Eidolon of the Great Revel|JOU
+1 Eidolon of the Great Revel|A25
 1 Monastery Swiftspear|IMA
 1 Adanto Vanguard|XLN
 1 Angel of Sanctions|AKH
@@ -48,10 +48,10 @@ Name=MTGO Vintage Cube December 2017
 1 Angel of Invention|KLD
 1 Banisher Priest|M14
 1 Declaration in Stone|SOI
-1 Thalia, Guardian of Thraben|DKA
+1 Thalia, Guardian of Thraben|A25
 1 Linvala, Keeper of Silence|MM3
 1 Knight of the White Orchid|ORI
-1 Fiend Hunter|ISD
+1 Fiend Hunter|A25
 1 Emeria Angel|IMA
 1 Mother of Runes|EMA
 1 Brimaz, King of Oreskos|BNG
@@ -73,7 +73,7 @@ Name=MTGO Vintage Cube December 2017
 1 Lingering Souls|MM3
 1 Leonin Relic-Warder|MBS
 1 Parallax Wave|VMA
-1 Disenchant|IMA
+1 Disenchant|A25
 1 Awakening Zone|ROE
 1 Elesh Norn, Grand Cenobite|IMA
 1 Council's Judgment|CNS
@@ -83,7 +83,7 @@ Name=MTGO Vintage Cube December 2017
 1 Honor of the Pure|M12
 1 Bitterblossom|MM2
 1 Wrath of God|EMA
-1 Swords to Plowshares|IMA
+1 Swords to Plowshares|A25
 1 Spear of Heliod|THS
 1 Day of Judgment|M12
 1 Leyline of Sanctity|MM2
@@ -95,7 +95,7 @@ Name=MTGO Vintage Cube December 2017
 1 Zealous Conscripts|MM3
 1 Reveillark|MMA
 1 Unexpectedly Absent|EMA
-1 Armageddon|VMA
+1 Armageddon|A25
 1 Mana Tithe|PLC
 1 Ravages of War|PTK
 1 Angel of Serenity|RTR
@@ -134,10 +134,10 @@ Name=MTGO Vintage Cube December 2017
 1 Inkwell Leviathan|EMA
 1 Mana Drain|IMA
 1 Remand|MM2
-1 Counterspell|EMA
+1 Counterspell|A25
 1 Pestermite|MMA
 1 Mana Leak|IMA
-1 Vendilion Clique|MM2
+1 Vendilion Clique|A25
 1 Glen Elendra Archmage|MMA
 1 Daze|EMA
 1 Snapcaster Mage|MM3
@@ -146,7 +146,7 @@ Name=MTGO Vintage Cube December 2017
 1 True-Name Nemesis
 1 Vedalken Shackles|MMA
 1 Timetwister|VMA
-1 Brainstorm|EMA
+1 Brainstorm|A25
 1 Empty the Warrens|MMA
 1 Compulsive Research|MM3
 1 Time Walk|VMA
@@ -190,7 +190,7 @@ Name=MTGO Vintage Cube December 2017
 1 Liliana, Death's Majesty|AKH
 1 Kalitas, Traitor of Ghet|OGW
 1 Painful Truths|BFZ
-1 Diabolic Edict|TPR
+1 Diabolic Edict|A25
 1 Skinrender|SOM
 1 Toxic Deluge|EMA
 1 Ophiomancer
@@ -207,7 +207,7 @@ Name=MTGO Vintage Cube December 2017
 1 Inquisition of Kozilek|MM3
 1 Murderous Cut|KTK
 1 Hypnotic Specter|M10
-1 Mesmeric Fiend|VMA
+1 Mesmeric Fiend|A25
 1 Magus of the Will
 1 Dark Confidant|MM2
 1 Ultimate Price|DTK
@@ -219,7 +219,7 @@ Name=MTGO Vintage Cube December 2017
 1 Fatal Push|AER
 1 Hymn to Tourach|EMA
 1 Tendrils of Agony|VMA
-1 Rishadan Port|MMQ
+1 Rishadan Port|A25
 1 Grave Titan|M12
 1 Entomb|EMA
 1 Bazaar of Baghdad|VMA
@@ -229,8 +229,8 @@ Name=MTGO Vintage Cube December 2017
 1 Mox Jet|VMA
 1 Necropotence|IMA
 1 Looter il-Kor|TSP
-1 Living Death|TPR
-1 Dark Ritual|TPR
+1 Living Death|A25
+1 Dark Ritual|A25
 1 Sheoldred, Whispering One|IMA
 1 Terastodon|CNS
 1 Corpse Dance|TPR
@@ -271,7 +271,7 @@ Name=MTGO Vintage Cube December 2017
 1 Desperate Ritual|MMA
 1 Through the Breach|CHK
 1 Searing Spear|M13
-1 Lightning Bolt|MM2
+1 Lightning Bolt|A25
 1 Fireblast|VMA
 1 Incinerate|M12
 1 Hazoret the Fervent|AKH
@@ -286,7 +286,7 @@ Name=MTGO Vintage Cube December 2017
 1 Rift Bolt|IMA
 1 Chandra, Flamecaller|OGW
 1 Chandra, Torch of Defiance|KLD
-1 Imperial Recruiter|PTK
+1 Imperial Recruiter|A25
 1 Bonfire of the Damned|MM3
 1 Shrine of Burning Rage|NPH
 1 Lightning Strike|XLN
@@ -294,7 +294,7 @@ Name=MTGO Vintage Cube December 2017
 1 Search for Tomorrow|IMA
 1 Fyndhorn Elves|VMA
 1 Lotus Cobra|IMA
-1 Courser of Kruphix|BNG
+1 Courser of Kruphix|A25
 1 Managorger Hydra|ORI
 1 Primeval Titan|IMA
 1 Harmonize|MM3
@@ -311,14 +311,14 @@ Name=MTGO Vintage Cube December 2017
 1 Survival of the Fittest|TPR
 1 Noble Hierarch|MM2
 1 Dissenter's Deliverance|AKH
-1 Regrowth|VMA
+1 Regrowth|A25
 1 Natural Order|EMA
 1 Oath of Druids|TPR
 1 Sylvan Caryatid|THS
 1 Llanowar Elves|EMA
 1 Wall of Roots|IMA
 1 Green Sun's Zenith|EMA
-1 Arbor Elf|M13
+1 Arbor Elf|A25
 1 Elves of Deep Shadow|RAV
 1 Eureka|VMA
 1 Yavimaya Elder|VMA
@@ -333,7 +333,7 @@ Name=MTGO Vintage Cube December 2017
 1 Archangel of Thune|IMA
 1 Beast Within|NPH
 1 Manglehorn|AKH
-1 Master of the Wild Hunt|M10
+1 Master of the Wild Hunt|A25
 1 Avenger of Zendikar|WWK
 1 High Tide|VMA
 1 Wall of Blossoms|TPR
@@ -411,9 +411,9 @@ Name=MTGO Vintage Cube December 2017
 1 Celestial Colonnade|WWK
 1 Trygon Predator|EMA
 1 Boros Signet|MM3
-1 Mishra's Factory|EMA
+1 Mishra's Factory|A25
 1 Karn Liberated|MM2
-1 Boros Charm|GTC
+1 Boros Charm|A25
 1 Crucible of Worlds|10E
 1 Winter Orb|EMA
 1 Anguished Unmaking|SOI
@@ -431,14 +431,14 @@ Name=MTGO Vintage Cube December 2017
 1 Misty Rainforest|MM3
 1 Ajani Vengeant|ALA
 1 Sacred Foundry|GTC
-1 Mystic Snake|MM2
+1 Mystic Snake|A25
 1 Breeding Pool|GTC
 1 Arid Mesa|MM3
 1 Sword of Light and Shadow|MMA
 1 Orzhov Signet|MM3
 1 Scrubland|VMA
 1 Umezawa's Jitte|BOK
-1 Coalition Relic|FUT
+1 Coalition Relic|A25
 1 Huntmaster of the Fells|DKA
 1 Tidehollow Sculler|MMA
 1 Skullclamp|VMA
@@ -459,7 +459,7 @@ Name=MTGO Vintage Cube December 2017
 1 Taiga|VMA
 1 Marsh Flats|MM3
 1 Sword of Fire and Ice|MMA
-1 Vindicate|EMA
+1 Vindicate|A25
 1 Lightning Greaves|MRD
 1 Sword of Feast and Famine|MBS
 1 Sword of Body and Mind|SOM
@@ -507,7 +507,7 @@ Name=MTGO Vintage Cube December 2017
 1 Spirebluff Canal|KLD
 1 Golgari Signet|MM3
 1 Izzet Charm|MM3
-1 Sundering Titan|DST
+1 Sundering Titan|A25
 1 Kuldotha Forgemaster|SOM
 1 Deathrite Shaman|EMA
 1 Verdant Catacombs|MM3
@@ -517,7 +517,7 @@ Name=MTGO Vintage Cube December 2017
 1 Blooming Marsh|KLD
 1 Gilded Lotus|M13
 1 Worn Powerstone|EMA
-1 Pernicious Deed|CNS
+1 Pernicious Deed|A25
 1 Volcanic Island|VMA
 1 Smuggler's Copter|KLD
 1 God-Pharaoh's Gift|HOU
@@ -540,3 +540,4 @@ Name=MTGO Vintage Cube December 2017
 1 Sphinx of the Steel Wind|EMA
 1 Basalt Monolith|3ED
 1 Fire // Ice|APC
+1 Thran Dynamo|IMA
