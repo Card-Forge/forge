@@ -21,18 +21,18 @@ Name=Mono Blue Cube
 1 Archive Trap|ZEN
 1 Augur of Bolas|MM3
 1 Basalt Monolith|3ED
-1 Bident of Thassa|THS
+1 Bident of Thassa|A25
 1 Black Lotus|VMA
 1 Black Vise|4ED
 1 Blightsteel Colossus|MBS
 1 Blinkmoth Nexus|MM2
-1 Blue Sun's Zenith|MBS
+1 Blue Sun's Zenith|A25
 1 Bonesplitter|MMA
 1 Boomerang|10E
 1 Braids, Conjurer Adept|PLC
 1 Brain Freeze|VMA
 1 Braingeyser|3ED
-1 Brainstorm|EMA
+1 Brainstorm|A25
 1 Briarberry Cohort|SHM
 1 Brittle Effigy|M11
 1 Broken Ambitions|LRW
@@ -43,13 +43,13 @@ Name=Mono Blue Cube
 1 Capsize|TPR
 1 Careful Consideration|MMA
 1 Cavern of Souls|MM3
-1 Chalice of the Void|MMA
+1 Chalice of the Void|A25
 1 Chancellor of the Spires|NPH
 1 Chronomaton|M13
 1 Claustrophobia|IMA
 1 Cloud of Faeries|VMA
 1 Cloudfin Raptor|GTC
-1 Coalition Relic|FUT
+1 Coalition Relic|A25
 1 Coat of Arms|TPR
 1 Codex Shredder|RTR
 1 Cold-Eyed Selkie|MMA
@@ -62,10 +62,10 @@ Name=Mono Blue Cube
 1 Conundrum Sphinx|M11
 1 Copper Gnomes|USG
 1 Coralhelm Commander|ROE
-1 Counterspell|EMA
+1 Counterspell|A25
 1 Crippling Chill|MM3
 1 Cryptic Command|IMA
-1 Cursecatcher|SHM
+1 Cursecatcher|A25
 1 Cyclonic Rift|MM3
 1 Darksteel Colossus|M10
 1 Daze|EMA
@@ -96,7 +96,7 @@ Name=Mono Blue Cube
 1 Errant Ephemeron|MMA
 1 Ertai, Wizard Adept|EXO
 1 Evacuation|10E
-1 Exclude|INV
+1 Exclude|A25
 1 Extraplanar Lens|MRD
 1 Eye of the Storm|RAV
 1 Fabricate|M10
@@ -179,7 +179,7 @@ Name=Mono Blue Cube
 1 Memory Sluice|SHM
 1 Mental Misstep|NPH
 1 Merchant Scroll|8ED
-1 Merfolk Looter|EMA
+1 Merfolk Looter|A25
 1 Merfolk Mesmerist|M12
 1 Merfolk Sovereign|M11
 1 Merfolk Spy|M14
@@ -193,7 +193,7 @@ Name=Mono Blue Cube
 1 Minister of Impediments|DIS
 1 Miscalculation|ULG
 1 Misdirection|CNS
-1 Mishra's Factory|EMA
+1 Mishra's Factory|A25
 1 Mishra's Helix|USG
 1 Mishra's Workshop|ATQ
 1 Mortarpod|MM2
@@ -205,7 +205,7 @@ Name=Mono Blue Cube
 1 Mutavault|M14
 1 Myr Battlesphere|SOM
 1 Mystical Tutor|EMA
-1 Negate|AER
+1 Negate|RIX
 1 Nevinyrral's Disk|EMA
 1 Nightveil Specter|GTC
 1 Nimbus Naiad|THS
@@ -215,7 +215,7 @@ Name=Mono Blue Cube
 1 Oona, Queen of the Fae|MMA
 1 Opportunity|MM3
 1 Overtaker|MMQ
-1 Pact of Negation|MMA
+1 Pact of Negation|A25
 1 Painter's Servant|SHM
 1 Palinchron|VMA
 1 Patron Wizard|ODY
@@ -223,7 +223,7 @@ Name=Mono Blue Cube
 1 Peer Through Depths|MMA
 1 Personal Tutor|POR
 1 Pestermite|MMA
-1 Phantasmal Bear|M12
+1 Phantasmal Bear|A25
 1 Phantasmal Dragon|M12
 1 Phantasmal Image|MM3
 1 Phyrexian Ingester|EMA
@@ -243,7 +243,7 @@ Name=Mono Blue Cube
 1 Psionic Blast|TSB
 1 Psychic Barrier|NPH
 1 Puresight Merrow|SHM
-1 Quicksand|CNS
+1 Quicksand|A25
 1 Rapid Hybridization|GTC
 1 Ratchet Bomb|M14
 1 Rath's Edge|NMS
@@ -258,7 +258,7 @@ Name=Mono Blue Cube
 1 Riftwing Cloudskate|MMA
 1 Riptide Director|LGN
 1 Riptide Laboratory|ONS
-1 Rishadan Port|MMQ
+1 Rishadan Port|A25
 1 Runechanter's Pike|ISD
 1 Sage of Fables|MOR
 1 Sand Squid|MMQ
@@ -277,7 +277,7 @@ Name=Mono Blue Cube
 1 Shelldock Isle|LRW
 1 Show and Tell|USG
 1 Signal Pest|MBS
-1 Silvergill Adept|LRW
+1 Silvergill Adept|RIX
 1 Skullclamp|VMA
 1 Skywatcher Adept|ROE
 1 Sleight of Hand|9ED
@@ -341,9 +341,9 @@ Name=Mono Blue Cube
 1 Vedalken Aethermage|FUT
 1 Vedalken Shackles|MMA
 1 Veiled Serpent|USG
-1 Vendilion Clique|MM2
+1 Vendilion Clique|A25
 1 Venser, Shaper Savant|MM3
-1 Vesuvan Shapeshifter|TSP
+1 Vesuvan Shapeshifter|A25
 1 Vexing Sphinx|CSP
 1 Vision Charm|VIS
 1 Visions of Beyond|M12

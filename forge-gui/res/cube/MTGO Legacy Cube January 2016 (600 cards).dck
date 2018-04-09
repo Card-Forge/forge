@@ -9,7 +9,7 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 Acidic Slime|M13
 1 Act of Aggression|NPH
 1 Adarkar Wastes|10E
-1 Ainok Survivalist|DTK
+1 Ainok Survivalist|A25
 1 Ajani Goldmane|M11
 1 Ajani Vengeant|ALA
 1 Ajani, Caller of the Pride|M14
@@ -19,11 +19,11 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 Angel of Serenity|RTR
 1 Anger of the Gods|IMA
 1 Animate Dead|EMA
-1 Arbor Elf|M13
+1 Arbor Elf|A25
 1 Arc Trail|SOM
 1 Archangel of Thune|IMA
 1 Arid Mesa|MM3
-1 Armageddon|VMA
+1 Armageddon|A25
 1 Ashcloud Phoenix|KTK
 1 Ashen Rider|THS
 1 Ashenmoor Gouger|MM2
@@ -60,10 +60,10 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 Bone Shredder|ULG
 1 Bonesplitter|MMA
 1 Bonfire of the Damned|MM3
-1 Boros Charm|GTC
+1 Boros Charm|A25
 1 Boros Reckoner|MM3
 1 Brago, King Eternal|VMA
-1 Brainstorm|EMA
+1 Brainstorm|A25
 1 Breeding Pool|GTC
 1 Brimaz, King of Oreskos|BNG
 1 Brimstone Volley|CNS
@@ -98,14 +98,14 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 Control Magic|EMA
 1 Coralhelm Commander|ROE
 1 Council's Judgment|CNS
-1 Counterspell|EMA
-1 Courser of Kruphix|BNG
+1 Counterspell|A25
+1 Courser of Kruphix|A25
 1 Crater's Claws|KTK
 1 Craterhoof Behemoth|MM3
 1 Crusade|6ED
 1 Crux of Fate|FRF
 1 Cryptic Command|IMA
-1 Cultivate|M11
+1 Cultivate|A25
 1 Cunning Sparkmage|WWK
 1 Cursed Scroll|TPR
 1 Cyclonic Rift|MM3
@@ -114,7 +114,7 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 Dark Confidant|MM2
 1 Dark Depths|CSP
 1 Dark Petition|ORI
-1 Dark Ritual|TPR
+1 Dark Ritual|A25
 1 Day of Judgment|M12
 1 Daze|EMA
 1 Deathrite Shaman|EMA
@@ -128,7 +128,7 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 Diabolic Servitude|USG
 1 Dictate of Heliod|JOU
 1 Disciple of Bolas|M13
-1 Disfigure|ZEN
+1 Disfigure|A25
 1 Dismember|MM2
 1 Dismiss|TPR
 1 Dissipate|M15
@@ -172,7 +172,7 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 Eureka|VMA
 1 Evolutionary Leap|ORI
 1 Exalted Angel|ONS
-1 Exclude|INV
+1 Exclude|A25
 1 Exhume|USG
 1 Explore|MM3
 1 Exquisite Firecraft|ORI
@@ -182,7 +182,7 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 Farseek|M13
 1 Fauna Shaman|M11
 1 Fertile Ground|LRW
-1 Fiend Hunter|ISD
+1 Fiend Hunter|A25
 1 Fiery Confluence
 1 Fire // Ice|APC
 1 Firebolt|EMA
@@ -197,7 +197,7 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 Force of Will|EMA
 1 Force Spike|7ED
 1 Forked Bolt|ROE
-1 Frenzied Goblin|M15
+1 Frenzied Goblin|A25
 1 Freyalise, Llanowar's Fury
 1 From Beyond|BFZ
 1 Frontline Medic|GTC
@@ -256,19 +256,19 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 High Market|MMQ
 1 Hinterland Harbor|ISD
 1 Honor of the Pure|M12
-1 Hordeling Outburst|KTK
+1 Hordeling Outburst|A25
 1 Hornet Queen|M15
 1 Huntmaster of the Fells|DKA
 1 Hymn to Tourach|EMA
 1 Hypnotic Specter|M10
-1 Imperial Recruiter|PTK
+1 Imperial Recruiter|A25
 1 Impulse|VIS
 1 Incinerate|M12
 1 Indrik Stomphowler|DIS
 1 Inferno Titan|M12
 1 Inquisition of Kozilek|MM3
 1 Into the Roil|ZEN
-1 Ire Shaman|DTK
+1 Ire Shaman|A25
 1 Isamaru, Hound of Konda|CHK
 1 Isochron Scepter|EMA
 1 Isolated Chapel|ISD
@@ -277,7 +277,7 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 Jace, Architect of Thought|RTR
 1 Jace, the Mind Sculptor|VMA
 1 Jace, Vryn's Prodigy|ORI
-1 Jackal Pup|TMP
+1 Jackal Pup|A25
 1 Joraga Treespeaker|ROE
 1 Journey to Nowhere|ZEN
 1 Kami of Ancient Law|MM2
@@ -302,7 +302,7 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 Land Tax|4ED
 1 Legacy's Allure|TMP
 1 Leonin Relic-Warder|MBS
-1 Lightning Bolt|MM2
+1 Lightning Bolt|A25
 1 Lightning Greaves|MRD
 1 Lightning Helix|IMA
 1 Lightning Mauler|AVR
@@ -312,7 +312,7 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 Liliana, Heretical Healer|ORI
 1 Lingering Souls|MM3
 1 Linvala, Keeper of Silence|MM3
-1 Living Death|TPR
+1 Living Death|A25
 1 Llanowar Elves|EMA
 1 Llanowar Wastes|ORI
 1 Looter il-Kor|TSP
@@ -322,7 +322,7 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 Magma Jet|MM3
 1 Makeshift Mannequin|LRW
 1 Malicious Affliction|EMA
-1 Man-o'-War|VIS
+1 Man-o'-War|A25
 1 Mana Confluence|JOU
 1 Mana Tithe|PLC
 1 Managorger Hydra|ORI
@@ -330,17 +330,17 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 Marsh Flats|MM3
 1 Martial Coup|CFX
 1 Massacre Wurm|MBS
-1 Master of the Wild Hunt|M10
+1 Master of the Wild Hunt|A25
 1 Master of Waves|THS
 1 Meloku the Clouded Mirror|MMA
 1 Mentor of the Meek|ISD
-1 Merfolk Looter|EMA
+1 Merfolk Looter|A25
 1 Meteor Blast
 1 Mimic Vat|SOM
 1 Mirari's Wake|CNS
 1 Mirran Crusader|MM2
 1 Miscalculation|ULG
-1 Mishra's Factory|EMA
+1 Mishra's Factory|A25
 1 Misty Rainforest|MM3
 1 Mizzium Mortars|MM3
 1 Mogg War Marshal|EMA
@@ -353,12 +353,12 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 Mutavault|M14
 1 Myr Battlesphere|SOM
 1 Mystic Confluence
-1 Mystic Snake|MM2
+1 Mystic Snake|A25
 1 Nantuko Husk|ORI
 1 Natural Order|EMA
 1 Nature's Lore|5ED
 1 Necromancy|VIS
-1 Negate|AER
+1 Negate|RIX
 1 Nekrataal|EMA
 1 Nicol Bolas, Planeswalker|M13
 1 Nightveil Specter|GTC
@@ -382,7 +382,7 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 Overgrown Battlement|IMA
 1 Overgrown Tomb|RTR
 1 Pack Rat|RTR
-1 Pact of Negation|MMA
+1 Pact of Negation|A25
 1 Parallax Wave|VMA
 1 Part the Waterveil|BFZ
 1 Path to Exile|MM3
@@ -390,7 +390,7 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 Phantasmal Image|MM3
 1 Phyrexian Arena|9ED
 1 Phyrexian Metamorph|NPH
-1 Phyrexian Obliterator|NPH
+1 Phyrexian Obliterator|A25
 1 Phyrexian Revoker|M15
 1 Pia and Kiran Nalaar|ORI
 1 Pillar of Flame|IMA
@@ -424,7 +424,7 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 Reclamation Sage|M15
 1 Recurring Nightmare|TPR
 1 Reflecting Pool|CNS
-1 Regrowth|VMA
+1 Regrowth|A25
 1 Relic of Progenitus|EMA
 1 Remand|MM2
 1 Remove Soul|10E
@@ -434,7 +434,7 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 Rift Bolt|IMA
 1 Riftwing Cloudskate|MMA
 1 Righteous Confluence
-1 Rishadan Port|MMQ
+1 Rishadan Port|A25
 1 Roast|DTK
 1 Rofellos, Llanowar Emissary|VMA
 1 Rootbound Crag|XLN
@@ -456,7 +456,7 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 Sensei's Divining Top|EMA
 1 Serendib Efreet|EMA
 1 Serum Visions|MM3
-1 Shadowmage Infiltrator|MM2
+1 Shadowmage Infiltrator|A25
 1 Shaman of Forgotten Ways|DTK
 1 Shardless Agent|EMA
 1 Sheoldred, Whispering One|IMA
@@ -502,11 +502,11 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 Sulfurous Springs|10E
 1 Summoning Trap|MM3
 1 Sun Titan|M12
-1 Sundering Titan|DST
+1 Sundering Titan|A25
 1 Sunpetal Grove|XLN
 1 Supreme Verdict|IMA
 1 Surrak, the Hunt Caller|DTK
-1 Swords to Plowshares|IMA
+1 Swords to Plowshares|A25
 1 Sylvan Caryatid|THS
 1 Sylvan Library|EMA
 1 Taiga|VMA
@@ -531,7 +531,7 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 Terastodon|CNS
 1 Terminate|MM3
 1 Terminus|MM3
-1 Thalia, Guardian of Thraben|DKA
+1 Thalia, Guardian of Thraben|A25
 1 Thassa, God of the Sea|THS
 1 Thespian's Stage|GTC
 1 Thoughtseize|IMA
@@ -559,15 +559,15 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 Underworld Connections|RTR
 1 Unexpectedly Absent|EMA
 1 Upheaval|VMA
-1 Utopia Sprawl|DIS
+1 Utopia Sprawl|A25
 1 Vampire Hexmage|CNS
 1 Vampire Nighthawk|MM3
-1 Vendilion Clique|MM2
+1 Vendilion Clique|A25
 1 Vengevine|ROE
 1 Venser, Shaper Savant|MM3
 1 Venser, the Sojourner|SOM
 1 Verdant Catacombs|MM3
-1 Vindicate|EMA
+1 Vindicate|A25
 1 Viscera Seer|M11
 1 Volcanic Island|VMA
 1 Volrath's Stronghold|TPR
@@ -600,4 +600,4 @@ Name=MTGO Legacy Cube January 2016 (600 cards)
 1 Yosei, the Morning Star|MMA
 1 Young Pyromancer|EMA
 1 Zealous Conscripts|MM3
-1 Zulaport Cutthroat|BFZ
+1 Zulaport Cutthroat|A25

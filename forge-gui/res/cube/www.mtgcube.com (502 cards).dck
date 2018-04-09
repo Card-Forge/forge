@@ -11,13 +11,13 @@ Name=www.mtgcube.com (502 cards)
 1 Ancestral Recall|VMA
 1 Ancestral Vision|IMA
 1 Animate Dead|EMA
-1 Arbor Elf|M13
+1 Arbor Elf|A25
 1 Arc Lightning|KTK
 1 Arc Trail|SOM
-1 Arcane Denial|ALL
+1 Arcane Denial|A25
 1 Archangel of Thune|IMA
 1 Arid Mesa|MM3
-1 Armageddon|VMA
+1 Armageddon|A25
 1 Ash Zealot|RTR
 1 Augur of Bolas|MM3
 1 Avalanche Riders|TSB
@@ -39,7 +39,7 @@ Name=www.mtgcube.com (502 cards)
 1 Black Lotus|VMA
 1 Black Vise|4ED
 1 Blade Splicer|MM3
-1 Blightning|ALA
+1 Blightning|A25
 1 Blistering Firecat|ONS
 1 Blood Crypt|RTR
 1 Blood Scrivener|DGM
@@ -49,11 +49,11 @@ Name=www.mtgcube.com (502 cards)
 1 Bone Shredder|ULG
 1 Bonesplitter|MMA
 1 Bonfire of the Damned|MM3
-1 Boros Charm|GTC
+1 Boros Charm|A25
 1 Boros Reckoner|MM3
 1 Boros Signet|MM3
 1 Braids, Cabal Minion|EMA
-1 Brainstorm|EMA
+1 Brainstorm|A25
 1 Breeding Pool|GTC
 1 Bribery|8ED
 1 Broodmate Dragon|MM3
@@ -73,34 +73,34 @@ Name=www.mtgcube.com (502 cards)
 1 Chrome Mox|EMA
 1 City of Brass|MMA
 1 Cloudgoat Ranger|MMA
-1 Coalition Relic|FUT
+1 Coalition Relic|A25
 1 Coldsteel Heart|CSP
 1 Consecrated Sphinx|IMA
 1 Consuming Vapors|ROE
 1 Contagion|ALL
 1 Control Magic|EMA
-1 Counterspell|EMA
+1 Counterspell|A25
 1 Creakwood Liege|MM2
 1 Creeping Tar Pit|WWK
 1 Crucible of Worlds|10E
 1 Cryptic Command|IMA
 1 Crystal Shard|MRD
-1 Cultivate|M11
+1 Cultivate|A25
 1 Cursed Scroll|TPR
 1 Damnation|MM3
 1 Dance of the Dead|ICE
 1 Dark Confidant|MM2
-1 Dark Ritual|TPR
+1 Dark Ritual|A25
 1 Day of Judgment|M12
 1 Daze|EMA
 1 Deep Analysis|EMA
 1 Demonic Tutor|VMA
 1 Deranged Hermit|VMA
 1 Detention Sphere|RTR
-1 Diabolic Edict|TPR
+1 Diabolic Edict|A25
 1 Dimir Signet|MM3
 1 Diregraf Ghoul|ISD
-1 Disenchant|IMA
+1 Disenchant|A25
 1 Dismember|MM2
 1 Dreadbore|RTR
 1 Dryad Militant|RTR
@@ -124,7 +124,7 @@ Name=www.mtgcube.com (502 cards)
 1 Eternal Witness|MMA
 1 Eureka|VMA
 1 Everflowing Chalice|MM2
-1 Evolving Wilds|IMA
+1 Evolving Wilds|RIX
 1 Exalted Angel|ONS
 1 Exhume|USG
 1 Experiment One|GTC
@@ -208,7 +208,7 @@ Name=www.mtgcube.com (502 cards)
 1 Izzet Signet|MM3
 1 Jace Beleren|M11
 1 Jace, the Mind Sculptor|VMA
-1 Jackal Pup|TMP
+1 Jackal Pup|A25
 1 Joraga Treespeaker|ROE
 1 Journey to Nowhere|ZEN
 1 Jund Charm|ALA
@@ -233,7 +233,7 @@ Name=www.mtgcube.com (502 cards)
 1 Library of Alexandria|VMA
 1 Life from the Loam|MMA
 1 Lifebane Zombie|M14
-1 Lightning Bolt|MM2
+1 Lightning Bolt|A25
 1 Lightning Greaves|MRD
 1 Lightning Helix|IMA
 1 Lightning Mauler|AVR
@@ -246,10 +246,10 @@ Name=www.mtgcube.com (502 cards)
 1 Looter il-Kor|TSP
 1 Lotleth Troll|RTR
 1 Lotus Cobra|IMA
-1 Luminarch Ascension|ZEN
+1 Luminarch Ascension|A25
 1 Maelstrom Pulse|MMA
 1 Magma Jet|MM3
-1 Man-o'-War|VIS
+1 Man-o'-War|A25
 1 Mana Crypt|EMA
 1 Mana Drain|IMA
 1 Mana Leak|IMA
@@ -257,7 +257,7 @@ Name=www.mtgcube.com (502 cards)
 1 Mana Vault|VMA
 1 Manic Vandal|M12
 1 Marsh Flats|MM3
-1 Master of the Wild Hunt|M10
+1 Master of the Wild Hunt|A25
 1 Masticore|VMA
 1 Mayor of Avabruck|ISD
 1 Maze of Ith|EMA
@@ -271,7 +271,7 @@ Name=www.mtgcube.com (502 cards)
 1 Mirran Crusader|MM2
 1 Mirror Entity|MM2
 1 Miscalculation|ULG
-1 Mishra's Factory|EMA
+1 Mishra's Factory|A25
 1 Misty Rainforest|MM3
 1 Moat|LEG
 1 Mogg Fanatic|EMA
@@ -290,7 +290,7 @@ Name=www.mtgcube.com (502 cards)
 1 Murderous Redcap|MMA
 1 Mutavault|M14
 1 Myr Battlesphere|SOM
-1 Mystic Snake|MM2
+1 Mystic Snake|A25
 1 Mystical Tutor|EMA
 1 Nantuko Vigilante|LGN
 1 Natural Order|EMA
@@ -309,12 +309,12 @@ Name=www.mtgcube.com (502 cards)
 1 Overgrown Tomb|RTR
 1 Pack Rat|RTR
 1 Path to Exile|MM3
-1 Pernicious Deed|CNS
+1 Pernicious Deed|A25
 1 Phantasmal Image|MM3
 1 Phyrexian Arena|9ED
 1 Phyrexian Metamorph|NPH
 1 Phyrexian Revoker|M15
-1 Pillage|7ED
+1 Pillage|A25
 1 Pithing Needle|RTR
 1 Plateau|VMA
 1 Plated Geopede|ZEN
@@ -333,7 +333,7 @@ Name=www.mtgcube.com (502 cards)
 1 Rakdos Cackler|RTR
 1 Rakdos Signet|MM3
 1 Ral Zarek|DGM
-1 Rancor|EMA
+1 Rancor|A25
 1 Ranger of Eos|MM3
 1 Ratchet Bomb|M14
 1 Ravages of War|PTK
@@ -342,18 +342,18 @@ Name=www.mtgcube.com (502 cards)
 1 Reckless Waif|ISD
 1 Recurring Nightmare|TPR
 1 Reflecting Pool|CNS
-1 Regrowth|VMA
+1 Regrowth|A25
 1 Remand|MM2
 1 Restoration Angel|IMA
 1 Reveillark|MMA
-1 Rishadan Port|MMQ
+1 Rishadan Port|A25
 1 River Boa|ZEN
 1 Rolling Earthquake|PTK
 1 Sacred Foundry|GTC
 1 Sakura-Tribe Elder|CNS
 1 Sarkhan Vol|MMA
 1 Savannah|VMA
-1 Savannah Lions|9ED
+1 Savannah Lions|A25
 1 Scalding Tarn|MM3
 1 Scavenging Ooze|MM3
 1 Scroll Rack|TMP
@@ -364,7 +364,7 @@ Name=www.mtgcube.com (502 cards)
 1 Sensei's Divining Top|EMA
 1 Serendib Efreet|EMA
 1 Shadowborn Demon|M14
-1 Shadowmage Infiltrator|MM2
+1 Shadowmage Infiltrator|A25
 1 Show and Tell|USG
 1 Shriekmaw|LRW
 1 Siege-Gang Commander|EMA
@@ -411,7 +411,7 @@ Name=www.mtgcube.com (502 cards)
 1 Student of Warfare|ROE
 1 Sulfuric Vortex|EMA
 1 Sun Titan|M12
-1 Sundering Titan|DST
+1 Sundering Titan|A25
 1 Supreme Verdict|IMA
 1 Survival of the Fittest|TPR
 1 Sword of Body and Mind|SOM
@@ -419,7 +419,7 @@ Name=www.mtgcube.com (502 cards)
 1 Sword of Fire and Ice|MMA
 1 Sword of Light and Shadow|MMA
 1 Sword of War and Peace|NPH
-1 Swords to Plowshares|IMA
+1 Swords to Plowshares|A25
 1 Sylvan Caryatid|THS
 1 Sylvan Library|EMA
 1 Taiga|VMA
@@ -430,7 +430,7 @@ Name=www.mtgcube.com (502 cards)
 1 Terramorphic Expanse|MMA
 1 Tezzeret the Seeker|MM2
 1 Tezzeret, Agent of Bolas|MBS
-1 Thalia, Guardian of Thraben|DKA
+1 Thalia, Guardian of Thraben|A25
 1 Thassa, God of the Sea|THS
 1 The Abyss|LEG
 1 Thirst for Knowledge|MMA
@@ -462,16 +462,16 @@ Name=www.mtgcube.com (502 cards)
 1 Undiscovered Paradise|VIS
 1 Upheaval|VMA
 1 Vampire Hexmage|CNS
-1 Vampire Lacerator|MM2
+1 Vampire Lacerator|A25
 1 Vampire Nighthawk|MM3
 1 Vampiric Tutor|EMA
 1 Vedalken Shackles|MMA
-1 Vendilion Clique|MM2
+1 Vendilion Clique|A25
 1 Vengevine|ROE
 1 Venser, Shaper Savant|MM3
 1 Venser, the Sojourner|SOM
 1 Verdant Catacombs|MM3
-1 Vindicate|EMA
+1 Vindicate|A25
 1 Vinelasher Kudzu|RAV
 1 Viridian Shaman|10E
 1 Voice of Resurgence|MM3
@@ -488,7 +488,7 @@ Name=www.mtgcube.com (502 cards)
 1 Wild Mongrel|VMA
 1 Wild Nacatl|ALA
 1 Wildfire|MM2
-1 Willbender|TSB
+1 Willbender|A25
 1 Windswept Heath|KTK
 1 Winter Orb|EMA
 1 Wolfbitten Captive|DKA

@@ -20,7 +20,7 @@ Name=Modern Cube 2017
 1 Anger of the Gods|IMA
 1 Anguished Unmaking|SOI
 1 Anticipate|BFZ
-1 Arbor Elf|M13
+1 Arbor Elf|A25
 1 Arc Trail|SOM
 1 Archangel Avacyn|SOI
 1 Archangel of Thune|IMA
@@ -67,7 +67,7 @@ Name=Modern Cube 2017
 1 Bygone Bishop|SOI
 1 Canopy Vista|BFZ
 1 Careful Consideration|MMA
-1 Cascade Bluffs|EVE
+1 Cascade Bluffs|A25
 1 Caves of Koilos|ORI
 1 Celestial Colonnade|WWK
 1 Chained to the Rocks|THS
@@ -86,7 +86,7 @@ Name=Modern Cube 2017
 1 Clifftop Retreat|ISD
 1 Cloistered Youth|ISD
 1 Cloudgoat Ranger|MMA
-1 Coalition Relic|FUT
+1 Coalition Relic|A25
 1 Coldsteel Heart|CSP
 1 Collective Defiance|EMN
 1 Collective Effort|EMN
@@ -96,13 +96,13 @@ Name=Modern Cube 2017
 1 Confiscate|9ED
 1 Consecrated Sphinx|IMA
 1 Consuming Vapors|ROE
-1 Courser of Kruphix|BNG
+1 Courser of Kruphix|A25
 1 Craterhoof Behemoth|MM3
 1 Creeping Tar Pit|WWK
 1 Crypt Ghast|GTC
 1 Cryptic Command|IMA
 1 Crystal Shard|MRD
-1 Cultivate|M11
+1 Cultivate|A25
 1 Cyclonic Rift|MM3
 1 Damnation|MM3
 1 Dark Confidant|MM2
@@ -117,8 +117,8 @@ Name=Modern Cube 2017
 1 Devour Flesh|GTC
 1 Dictate of Heliod|JOU
 1 Disallow|AER
-1 Disenchant|IMA
-1 Disfigure|ZEN
+1 Disenchant|A25
+1 Disfigure|A25
 1 Dismember|MM2
 1 Dissipate|M15
 1 Dissolve|IMA
@@ -151,7 +151,7 @@ Name=Modern Cube 2017
 1 Eternal Witness|MMA
 1 Ever After|SOI
 1 Everflowing Chalice|MM2
-1 Evolving Wilds|IMA
+1 Evolving Wilds|RIX
 1 Exquisite Firecraft|ORI
 1 Faith's Fetters|EMA
 1 Falkenrath Aristocrat|MM3
@@ -161,7 +161,7 @@ Name=Modern Cube 2017
 1 Fatal Push|AER
 1 Felidar Guardian|AER
 1 Fertile Ground|LRW
-1 Fetid Heath|EVE
+1 Fetid Heath|A25
 1 Figure of Destiny|MMA
 1 Firedrinker Satyr|THS
 1 Flame Javelin|SHM
@@ -169,7 +169,7 @@ Name=Modern Cube 2017
 1 Fleecemane Lion|THS
 1 Flickerwisp|MM3
 1 Flinthoof Boar|EMA
-1 Flooded Grove|EVE
+1 Flooded Grove|A25
 1 Flooded Strand|KTK
 1 Frost Lynx|IMA
 1 Frost Titan|M12
@@ -179,7 +179,7 @@ Name=Modern Cube 2017
 1 Garruk, Apex Predator|M15
 1 Garruk, Primal Hunter|M13
 1 Geist of Saint Traft|ISD
-1 Genju of the Spires|BOK
+1 Genju of the Spires|A25
 1 Geralf's Messenger|DKA
 1 Gideon Jura|M12
 1 Gideon's Lawkeeper|MM3
@@ -230,7 +230,7 @@ Name=Modern Cube 2017
 1 Ink-Eyes, Servant of Oni|BOK
 1 Inquisition of Kozilek|MM3
 1 Into the Roil|ZEN
-1 Ire Shaman|DTK
+1 Ire Shaman|A25
 1 Isamaru, Hound of Konda|CHK
 1 Isolated Chapel|ISD
 1 Izzet Charm|MM3
@@ -260,7 +260,7 @@ Name=Modern Cube 2017
 1 Lash Out|LRW
 1 Lavaclaw Reaches|WWK
 1 Lifebane Zombie|M14
-1 Lightning Bolt|MM2
+1 Lightning Bolt|A25
 1 Lightning Helix|IMA
 1 Lightning Mauler|AVR
 1 Lightning Strike|XLN
@@ -284,7 +284,7 @@ Name=Modern Cube 2017
 1 Martial Coup|CFX
 1 Masked Admirers|MMA
 1 Massacre Wurm|MBS
-1 Master of the Wild Hunt|M10
+1 Master of the Wild Hunt|A25
 1 Mayor of Avabruck|ISD
 1 Meloku the Clouded Mirror|MMA
 1 Mikaeus, the Lunarch|ISD
@@ -303,7 +303,7 @@ Name=Modern Cube 2017
 1 Mutavault|M14
 1 Myr Battlesphere|SOM
 1 Nahiri, the Harbinger|SOI
-1 Negate|AER
+1 Negate|RIX
 1 Nest Invader|MM2
 1 Nicol Bolas, Planeswalker|M13
 1 Night's Whisper|EMA
@@ -326,16 +326,16 @@ Name=Modern Cube 2017
 1 Overgrown Tomb|RTR
 1 Overwhelming Stampede|MM2
 1 Pack Rat|RTR
-1 Pact of Negation|MMA
+1 Pact of Negation|A25
 1 Palladium Myr|IMA
 1 Path to Exile|MM3
-1 Perilous Myr|SOM
+1 Perilous Myr|A25
 1 Pestermite|MMA
-1 Phantasmal Bear|M12
+1 Phantasmal Bear|A25
 1 Phantasmal Image|MM3
 1 Phyrexian Arena|9ED
 1 Phyrexian Metamorph|NPH
-1 Phyrexian Obliterator|NPH
+1 Phyrexian Obliterator|A25
 1 Phyrexian Revoker|M15
 1 Pia and Kiran Nalaar|ORI
 1 Pilgrim's Eye|EMA
@@ -352,7 +352,7 @@ Name=Modern Cube 2017
 1 Prophet of Kruphix|THS
 1 Prophetic Flamespeaker|JOU
 1 Psionic Blast|TSB
-1 Pyroclasm|MM3
+1 Pyroclasm|A25
 1 Qasali Pridemage|ARB
 1 Quarantine Field|BFZ
 1 Rabid Bite|SOI
@@ -377,11 +377,11 @@ Name=Modern Cube 2017
 1 Rishkar's Expertise|AER
 1 Rishkar, Peema Renegade|AER
 1 Rootbound Crag|XLN
-1 Rugged Prairie|EVE
+1 Rugged Prairie|A25
 1 Ruinous Path|BFZ
 1 Rune Snag|CSP
 1 Rune-Scarred Demon|IMA
-1 Ruthless Ripper|KTK
+1 Ruthless Ripper|A25
 1 Sacred Foundry|GTC
 1 Saheeli Rai|KLD
 1 Sakura-Tribe Elder|CNS
@@ -397,7 +397,7 @@ Name=Modern Cube 2017
 1 Selesnya Charm|RTR
 1 Selfless Spirit|EMN
 1 Serum Visions|MM3
-1 Shadowmage Infiltrator|MM2
+1 Shadowmage Infiltrator|A25
 1 Shelldock Isle|LRW
 1 Sheoldred, Whispering One|IMA
 1 Shivan Reef|ORI
@@ -470,7 +470,7 @@ Name=Modern Cube 2017
 1 Temporal Mastery|MM3
 1 Terastodon|CNS
 1 Terramorphic Expanse|MMA
-1 Thalia, Guardian of Thraben|DKA
+1 Thalia, Guardian of Thraben|A25
 1 Thalia, Heretic Cathar|EMN
 1 Thirst for Knowledge|MMA
 1 Thoughtseize|IMA
@@ -489,7 +489,7 @@ Name=Modern Cube 2017
 1 Treetop Village|10E
 1 Trophy Mage|AER
 1 Trygon Predator|EMA
-1 Twilight Mire|EVE
+1 Twilight Mire|A25
 1 Ugin, the Spirit Dragon|FRF
 1 Ulamog, the Ceaseless Hunger|BFZ
 1 Ulcerate|IMA
@@ -497,17 +497,17 @@ Name=Modern Cube 2017
 1 Unburial Rites|MM3
 1 Underground River|10E
 1 Undergrowth Champion|BFZ
-1 Utopia Sprawl|DIS
+1 Utopia Sprawl|A25
 1 Valorous Stance|FRF
 1 Vampire Hexmage|CNS
 1 Vampire Nighthawk|MM3
 1 Vendetta|ROE
-1 Vendilion Clique|MM2
+1 Vendilion Clique|A25
 1 Vengevine|ROE
 1 Venser, Shaper Savant|MM3
 1 Verdant Catacombs|MM3
 1 Verdurous Gearhulk|KLD
-1 Vesuvan Shapeshifter|TSP
+1 Vesuvan Shapeshifter|A25
 1 Victim of Night|ISD
 1 Viridian Emissary|MBS
 1 Vivid Grove|MMA

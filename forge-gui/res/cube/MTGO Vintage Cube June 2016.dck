@@ -15,10 +15,10 @@ Name=MTGO Vintage Cube June 2016
 1 Anguished Unmaking|SOI
 1 Animate Dead|EMA
 1 Anticipate|BFZ
-1 Arbor Elf|M13
+1 Arbor Elf|A25
 1 Archangel of Thune|IMA
 1 Arid Mesa|MM3
-1 Armageddon|VMA
+1 Armageddon|A25
 1 Ashiok, Nightmare Weaver|THS
 1 Avacyn's Pilgrim|MM3
 1 Avalanche Riders|TSB
@@ -47,12 +47,12 @@ Name=MTGO Vintage Cube June 2016
 1 Bloodstained Mire|KTK
 1 Bone Shredder|ULG
 1 Bonfire of the Damned|MM3
-1 Boros Charm|GTC
+1 Boros Charm|A25
 1 Boros Signet|MM3
 1 Braids, Cabal Minion|EMA
 1 Brain Freeze|VMA
 1 Brain Maggot|JOU
-1 Brainstorm|EMA
+1 Brainstorm|A25
 1 Breeding Pool|GTC
 1 Bribery|8ED
 1 Brimaz, King of Oreskos|BNG
@@ -70,7 +70,7 @@ Name=MTGO Vintage Cube June 2016
 1 Char|RAV
 1 Channel|IMA
 1 Chrome Mox|EMA
-1 Coalition Relic|FUT
+1 Coalition Relic|A25
 1 Coercive Portal|VMA
 1 Compulsive Research|MM3
 1 Conclave Naturalists|ORI
@@ -78,8 +78,8 @@ Name=MTGO Vintage Cube June 2016
 1 Control Magic|EMA
 1 Corpse Dance|TPR
 1 Council's Judgment|CNS
-1 Counterspell|EMA
-1 Courser of Kruphix|BNG
+1 Counterspell|A25
+1 Courser of Kruphix|A25
 1 Crater's Claws|KTK
 1 Craterhoof Behemoth|MM3
 1 Creeping Tar Pit|WWK
@@ -90,7 +90,7 @@ Name=MTGO Vintage Cube June 2016
 1 Daretti, Scrap Savant
 1 Dark Confidant|MM2
 1 Dark Petition|ORI
-1 Dark Ritual|TPR
+1 Dark Ritual|A25
 1 Day of Judgment|M12
 1 Daze|EMA
 1 Deathrite Shaman|EMA
@@ -101,11 +101,11 @@ Name=MTGO Vintage Cube June 2016
 1 Den Protector|DTK
 1 Deranged Hermit|VMA
 1 Desecration Demon|MM3
-1 Diabolic Edict|TPR
+1 Diabolic Edict|A25
 1 Dig Through Time|KTK
 1 Dimir Signet|MM3
-1 Disenchant|IMA
-1 Disfigure|ZEN
+1 Disenchant|A25
+1 Disfigure|A25
 1 Dismember|MM2
 1 Dragonlord Atarka|DTK
 1 Dragonlord Dromoka|DTK
@@ -117,7 +117,7 @@ Name=MTGO Vintage Cube June 2016
 1 Duplicant|EMA
 1 Duress|IMA
 1 Edric, Spymaster of Trest|VMA
-1 Eidolon of the Great Revel|JOU
+1 Eidolon of the Great Revel|A25
 1 Electrolyze|IMA
 1 Elesh Norn, Grand Cenobite|IMA
 1 Elspeth, Knight-Errant|MMA
@@ -141,7 +141,7 @@ Name=MTGO Vintage Cube June 2016
 1 Falkenrath Gorger|SOI
 1 Fastbond|VMA
 1 Fauna Shaman|M11
-1 Fiend Hunter|ISD
+1 Fiend Hunter|A25
 1 Fiery Confluence
 1 Figure of Destiny|MMA
 1 Fire // Ice|APC
@@ -201,7 +201,7 @@ Name=MTGO Vintage Cube June 2016
 1 Huntmaster of the Fells|DKA
 1 Hymn to Tourach|EMA
 1 Hypnotic Specter|M10
-1 Imperial Recruiter|PTK
+1 Imperial Recruiter|A25
 1 Imperial Seal|PTK
 1 Impulse|VIS
 1 Incinerate|M12
@@ -217,7 +217,7 @@ Name=MTGO Vintage Cube June 2016
 1 Jace, Architect of Thought|RTR
 1 Jace, the Mind Sculptor|VMA
 1 Jace, Vryn's Prodigy|ORI
-1 Jackal Pup|TMP
+1 Jackal Pup|A25
 1 Joraga Treespeaker|ROE
 1 Kalitas, Traitor of Ghet|OGW
 1 Karakas|EMA
@@ -238,7 +238,7 @@ Name=MTGO Vintage Cube June 2016
 1 Leyline of Sanctity|MM2
 1 Library of Alexandria|VMA
 1 Lifebane Zombie|M14
-1 Lightning Bolt|MM2
+1 Lightning Bolt|A25
 1 Lightning Greaves|MRD
 1 Lightning Helix|IMA
 1 Lightning Mauler|AVR
@@ -248,7 +248,7 @@ Name=MTGO Vintage Cube June 2016
 1 Linvala, Keeper of Silence|MM3
 1 Linvala, the Preserver|OGW
 1 Lion's Eye Diamond|MIR
-1 Living Death|TPR
+1 Living Death|A25
 1 Llanowar Elves|EMA
 1 Lodestone Golem|MM2
 1 Looter il-Kor|TSP
@@ -258,7 +258,7 @@ Name=MTGO Vintage Cube June 2016
 1 Maelstrom Pulse|MMA
 1 Magma Jet|MM3
 1 Magus of the Moon|IMA
-1 Magus of the Wheel
+1 Magus of the Wheel|A25
 1 Makeshift Mannequin|LRW
 1 Managorger Hydra|ORI
 1 Mana Confluence|JOU
@@ -271,19 +271,19 @@ Name=MTGO Vintage Cube June 2016
 1 Mardu Woe-Reaper|FRF
 1 Marsh Flats|MM3
 1 Massacre Wurm|MBS
-1 Master of the Wild Hunt|M10
+1 Master of the Wild Hunt|A25
 1 Maze of Ith|EMA
 1 Meloku the Clouded Mirror|MMA
 1 Mental Misstep|NPH
 1 Memory Jar|VMA
-1 Mesmeric Fiend|VMA
+1 Mesmeric Fiend|A25
 1 Metalworker|UDS
 1 Mind Twist|4ED
 1 Mindslaver|SOM
 1 Mind's Desire|SCG
 1 Mirari's Wake|CNS
 1 Mirran Crusader|MM2
-1 Mishra's Factory|EMA
+1 Mishra's Factory|A25
 1 Mishra's Workshop|ATQ
 1 Misty Rainforest|MM3
 1 Mizzium Mortars|MM3
@@ -303,7 +303,7 @@ Name=MTGO Vintage Cube June 2016
 1 Myr Battlesphere|SOM
 1 Mystical Tutor|EMA
 1 Mystic Confluence
-1 Mystic Snake|MM2
+1 Mystic Snake|A25
 1 Nahiri, the Harbinger|SOI
 1 Natural Order|EMA
 1 Nature's Claim|IMA
@@ -335,7 +335,7 @@ Name=MTGO Vintage Cube June 2016
 1 Parallax Wave|VMA
 1 Path to Exile|MM3
 1 Pentad Prism|5DN
-1 Pernicious Deed|CNS
+1 Pernicious Deed|A25
 1 Pestermite|MMA
 1 Phantasmal Image|MM3
 1 Phyrexian Metamorph|NPH
@@ -364,14 +364,14 @@ Name=MTGO Vintage Cube June 2016
 1 Reclamation Sage|M15
 1 Recurring Nightmare|TPR
 1 Reflector Mage|OGW
-1 Regrowth|VMA
+1 Regrowth|A25
 1 Remand|MM2
 1 Repeal|IMA
 1 Restoration Angel|IMA
 1 Reveillark|MMA
 1 Rift Bolt|IMA
 1 Riftwing Cloudskate|MMA
-1 Rishadan Port|MMQ
+1 Rishadan Port|A25
 1 Roast|DTK
 1 Rofellos, Llanowar Emissary|VMA
 1 Sacred Foundry|GTC
@@ -390,7 +390,7 @@ Name=MTGO Vintage Cube June 2016
 1 Seething Song|9ED
 1 Selesnya Signet|MM3
 1 Sensei's Divining Top|EMA
-1 Shadowmage Infiltrator|MM2
+1 Shadowmage Infiltrator|A25
 1 Shallow Grave|MIR
 1 Shambling Vent|BFZ
 1 Shardless Agent|EMA
@@ -433,7 +433,7 @@ Name=MTGO Vintage Cube June 2016
 1 Student of Warfare|ROE
 1 Sulfuric Vortex|EMA
 1 Sun Titan|M12
-1 Sundering Titan|DST
+1 Sundering Titan|A25
 1 Supreme Verdict|IMA
 1 Survival of the Fittest|TPR
 1 Sword of Body and Mind|SOM
@@ -441,7 +441,7 @@ Name=MTGO Vintage Cube June 2016
 1 Sword of Fire and Ice|MMA
 1 Sword of Light and Shadow|MMA
 1 Sword of War and Peace|NPH
-1 Swords to Plowshares|IMA
+1 Swords to Plowshares|A25
 1 Sylvan Caryatid|THS
 1 Sylvan Library|EMA
 1 Taiga|VMA
@@ -466,7 +466,7 @@ Name=MTGO Vintage Cube June 2016
 1 Tezzeret the Seeker|MM2
 1 Tezzeret, Agent of Bolas|MBS
 1 Thada Adel, Acquisitor|WWK
-1 Thalia, Guardian of Thraben|DKA
+1 Thalia, Guardian of Thraben|A25
 1 The Abyss|LEG
 1 Thing in the Ice|SOI
 1 Thirst for Knowledge|MMA
@@ -508,11 +508,11 @@ Name=MTGO Vintage Cube June 2016
 1 Vampire Nighthawk|MM3
 1 Vampiric Tutor|EMA
 1 Vedalken Shackles|MMA
-1 Vendilion Clique|MM2
+1 Vendilion Clique|A25
 1 Venser, Shaper Savant|MM3
 1 Verdant Catacombs|MM3
 1 Villainous Wealth|KTK
-1 Vindicate|EMA
+1 Vindicate|A25
 1 Voice of Resurgence|MM3
 1 Volcanic Island|VMA
 1 Vryn Wingmare|ORI

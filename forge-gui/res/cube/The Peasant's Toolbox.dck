@@ -20,7 +20,7 @@ Name=The Peasant's Toolbox
 1 Alive // Well|DGM
 1 Altac Bloodseeker|M15
 1 Ambush Viper|ISD
-1 Ancient Stirrings|ROE
+1 Ancient Stirrings|A25
 1 Apex Hawks|CNS
 1 Aquastrand Spider|MM2
 1 Aqueous Form|THS
@@ -62,7 +62,7 @@ Name=The Peasant's Toolbox
 1 Bituminous Blast|ARB
 1 Blast of Genius|DGM
 1 Blessings of Nature|AVR
-1 Blightning|ALA
+1 Blightning|A25
 1 Blind Creeper|5DN
 1 Blind Hunter|GPT
 1 Blind Zealot|NPH
@@ -80,7 +80,7 @@ Name=The Peasant's Toolbox
 1 Bonds of Faith|ISD
 1 Bonds of Quicksilver|SOM
 1 Bonesplitter|MMA
-1 Boros Charm|GTC
+1 Boros Charm|A25
 1 Boros Elite|GTC
 1 Boros Garrison|IMA
 1 Boros Guildgate|MM3
@@ -134,7 +134,7 @@ Name=The Peasant's Toolbox
 1 Controvert|CSP
 1 Coordinated Assault|IMA
 1 Corpse Traders|AVR
-1 Court Hussar|DIS
+1 Court Hussar|A25
 1 Courtly Provocateur|M13
 1 Crackling Triton|THS
 1 Cradle to Grave|PLC
@@ -181,7 +181,7 @@ Name=The Peasant's Toolbox
 1 Disciple of Griselbrand|ISD
 1 Dispense Justice|SOM
 1 Dissolve|IMA
-1 Divine Verdict|THS
+1 Divine Verdict|RIX
 1 Domestication|M14
 1 Double Stroke|CNS
 1 Down // Dirty|DGM
@@ -231,7 +231,7 @@ Name=The Peasant's Toolbox
 1 Feral Invocation|THS
 1 Festerhide Boar|ISD
 1 Fettergeist|AVR
-1 Fiend Hunter|ISD
+1 Fiend Hunter|A25
 1 Fiery Fall|MM2
 1 Final-Sting Faerie|MOR
 1 Fire at Will|EVE
@@ -255,8 +255,8 @@ Name=The Peasant's Toolbox
 1 Foriysian Totem|TSP
 1 Forked Bolt|ROE
 1 Forlorn Pseudamma|BNG
-1 Freed from the Real|SOK
-1 Frenzied Goblin|M15
+1 Freed from the Real|A25
+1 Frenzied Goblin|A25
 1 Frilled Oculus|GTC
 1 Frontline Sage|CFX
 1 Frostburn Weird|RTR
@@ -268,10 +268,10 @@ Name=The Peasant's Toolbox
 1 Gelectrode|GPT
 1 Generator Servant|M15
 1 Genju of the Cedars|BOK
-1 Genju of the Falls|BOK
+1 Genju of the Falls|A25
 1 Genju of the Fens|BOK
 1 Genju of the Fields|BOK
-1 Genju of the Spires|BOK
+1 Genju of the Spires|A25
 1 Geyser Glider|ZEN
 1 Ghitu Encampment|10E
 1 Ghor-Clan Rampager|MM3
@@ -345,7 +345,7 @@ Name=The Peasant's Toolbox
 1 Horizon Chimera|THS
 1 Hour of Need|JOU
 1 Hunger of the Howlpack|CNS
-1 Hunt the Weak|IMA
+1 Hunt the Weak|RIX
 1 Hunting Triad|MOR
 1 Hyena Umbra|ROE
 1 Hypervolt Grasp|GPT
@@ -389,7 +389,7 @@ Name=The Peasant's Toolbox
 1 Knight of Cliffhaven|ROE
 1 Knight of Obligation|GTC
 1 Knight of the Holy Nimbus|TSP
-1 Knight of the Skyward Eye|ALA
+1 Knight of the Skyward Eye|A25
 1 Knightly Valor|ORI
 1 Kor Aeronaut|ZEN
 1 Kor Skyfisher|MM3
@@ -411,7 +411,7 @@ Name=The Peasant's Toolbox
 1 Llanowar Augur|FUT
 1 Logic Knot|MMA
 1 Looter il-Kor|TSP
-1 Lorescale Coatl|MM2
+1 Lorescale Coatl|A25
 1 Lost in the Mist|ISD
 1 Loyal Pegasus|BNG
 1 Lust for War|ROE
@@ -471,14 +471,14 @@ Name=The Peasant's Toolbox
 1 Nucklavee|EVE
 1 Nylea's Emissary|THS
 1 Nyx Weaver|JOU
-1 Nyx-Fleece Ram|JOU
+1 Nyx-Fleece Ram|A25
 1 Observant Alseid|THS
 1 Ocular Halo|DIS
 1 O-Naginata|SOK
 1 Onyx Mage|M12
 1 Oppressive Rays|M15
 1 Ordeal of Erebos|THS
-1 Ordeal of Heliod|THS
+1 Ordeal of Heliod|A25
 1 Ordeal of Nylea|THS
 1 Ordeal of Purphoros|THS
 1 Ordeal of Thassa|THS
@@ -520,14 +520,14 @@ Name=The Peasant's Toolbox
 1 Prismatic Lens|EMA
 1 Prized Elephant|M13
 1 Profit // Loss|DGM
-1 Prophetic Prism|KLD
+1 Prophetic Prism|A25
 1 Puncturing Light|SOI
 1 Purphoros's Emissary|THS
 1 Pursuit of Flight|RTR
 1 Putrid Leech|ARB
 1 Pyreheart Wolf|DKA
 1 Pyrite Spellbomb|MMA
-1 Pyroclasm|MM3
+1 Pyroclasm|A25
 1 Qasali Ambusher|ALA
 1 Qasali Pridemage|ARB
 1 Quest for the Gemblades|ZEN
@@ -547,7 +547,7 @@ Name=The Peasant's Toolbox
 1 Repel Intruders|SHM
 1 Resize|CSP
 1 Restless Apparition|MM2
-1 Returned Phalanx|THS
+1 Returned Phalanx|A25
 1 Revenant Patriarch|GPT
 1 Ribbons of Night|RAV
 1 Ridge Rannet|ALA
@@ -672,7 +672,7 @@ Name=The Peasant's Toolbox
 1 Strangling Soot|TSP
 1 Stratus Walk|ORI
 1 Street Spasm|RTR
-1 Strider Harness|OGW
+1 Strider Harness|RIX
 1 Stun Sniper|ARB
 1 Sunblade Elf|M15
 1 Sunhome Guildmage|MM3
@@ -719,7 +719,7 @@ Name=The Peasant's Toolbox
 1 Transguild Promenade|RTR
 1 Traumatic Visions|MMA
 1 Travel Preparations|ISD
-1 Traveler's Amulet|HOU
+1 Traveler's Amulet|RIX
 1 Treetop Village|10E
 1 Trestle Troll|RTR
 1 Triclopean Sight|LRW
@@ -734,7 +734,7 @@ Name=The Peasant's Toolbox
 1 Turntimber Basilisk|ZEN
 1 Twinblade Slasher|EVE
 1 Twinstrike|DIS
-1 Twisted Abomination|EMA
+1 Twisted Abomination|A25
 1 Ulvenwald Bear|DKA
 1 Unburial Rites|MM3
 1 Undercity Informer|GTC
