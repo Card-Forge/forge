@@ -115,6 +115,18 @@ public class CardState extends GameObject {
         view.updateType(this);
     }
 
+    public final void removeType(final CardType.Supertype st) {
+        if (type.remove(st)) {
+            view.updateType(this);
+        }
+    }
+    
+    public final void setCreatureTypes(Collection<String> ctypes) {
+        if (type.setCreatureTypes(ctypes)) {
+            view.updateType(this);
+        }
+    }
+
     public final ManaCost getManaCost() {
         return manaCost;
     }

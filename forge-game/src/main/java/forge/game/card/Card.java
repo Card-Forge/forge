@@ -2703,6 +2703,14 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addType(final String type0) {
         currentState.addType(type0);
     }
+    
+    public final void removeType(final CardType.Supertype st) {
+        currentState.removeType(st);
+    }
+    
+    public final void setCreatureTypes(Collection<String> ctypes) {
+        currentState.setCreatureTypes(ctypes);
+    }
 
     public final CardTypeView getType() {
         return getType(currentState);
