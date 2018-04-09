@@ -17,6 +17,7 @@
  */
 package forge.card;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Iterator;
@@ -24,9 +25,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import forge.util.TextUtil;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.base.Predicate;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
@@ -180,6 +182,20 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         supertypes.clear();
         subtypes.clear();
         calculatedType = null;
+    }
+    
+    public boolean remove(final Supertype st) {
+        return supertypes.remove(st);
+    }
+    
+    public boolean setCreatureTypes(Collection<String> ctypes) {
+        // if it isn't a creature then this has no effect
+        if (coreTypes.contains(CoreType.Creature)) {
+            return false;
+        }
+        boolean changed = Iterables.removeIf(subtypes, Predicates.IS_CREATURE_TYPE);
+        subtypes.addAll(ctypes);
+        return changed;
     }
 
     @Override
@@ -552,6 +568,15 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         // plural -> singular
         public static final BiMap<String,String> singularTypes = pluralTypes.inverse();
     }
+    public static class Predicates {
+        public static Predicate<String> IS_CREATURE_TYPE = new Predicate<String>() {
+            @Override
+            public boolean apply(String input) {
+                return CardType.isACreatureType(input);
+            }
+        };
+    }
+    
 
     ///////// Utility methods
     public static boolean isACardType(final String cardType) {

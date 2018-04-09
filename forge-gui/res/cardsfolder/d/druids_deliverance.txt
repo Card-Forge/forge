@@ -1,11 +1,9 @@
 Name:Druid's Deliverance
 ManaCost:1 G
 Types:Instant
-A:SP$ Effect | Cost$ 1 G | Name$ Druid's Deliverance Effect | StaticAbilities$ STPrevent | AILogic$ Fog | SubAbility$ DBChoose | SpellDescription$ Prevent all combat damage that would be dealt to you this turn. Populate. (Create a token that's a copy of a creature token you control.)
+A:SP$ Effect | Cost$ 1 G | Name$ Druid's Deliverance Effect | StaticAbilities$ STPrevent | AILogic$ Fog | SubAbility$ DBCopy | SpellDescription$ Prevent all combat damage that would be dealt to you this turn. Populate. (Create a token that's a copy of a creature token you control.)
 SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | CombatDamage$ True | Target$ You | Description$ Prevent all combat damage that would be dealt to you this turn.
-SVar:DBChoose:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature.token+YouCtrl | SubAbility$ DBCopy | Mandatory$ True | AILogic$ Clone
-SVar:DBCopy:DB$ CopyPermanent | Defined$ ChosenCard | NumCopies$ 1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+SVar:DBCopy:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True
 DeckHints:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/druids_deliverance.jpg
 Oracle:Prevent all combat damage that would be dealt to you this turn. Populate. (Create a token that's a copy of a creature token you control.)
