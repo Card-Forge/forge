@@ -4,4 +4,4 @@ Type:Historic
 Subtype:Eternal
 Order:155
 Sets:FEM, 4ED, ICE
-Restricted:Balance, Channel, Ivory Tower, Mind Twist
+Restricted:Balance; Channel; Ivory Tower; Mind Twist

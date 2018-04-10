@@ -4,4 +4,4 @@ Type:Historic
 Subtype:Rotating
 Order:248
 Sets:6ED, USG, ULG, UDS, MMQ, NMS
-Banned:Fluctuator, Memory Jar, Time Spiral, Tolarian Academy, Windfall
+Banned:Fluctuator; Memory Jar; Time Spiral; Tolarian Academy; Windfall

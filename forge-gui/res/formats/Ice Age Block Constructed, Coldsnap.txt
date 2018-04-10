@@ -4,4 +4,4 @@ Type:Historic
 Subtype:Block
 Order:385
 Sets:ICE, ALL, CSP
-Banned:Amulet of Quoz, Thawing Glaciers, Timmerian Fiends, Zuran Orb
+Banned:Amulet of Quoz; Thawing Glaciers; Timmerian Fiends; Zuran Orb

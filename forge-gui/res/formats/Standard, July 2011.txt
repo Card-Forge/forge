@@ -4,4 +4,4 @@ Type:Historic
 Subtype:Rotating
 Order:494
 Sets:ZEN, WWK, ROE, M11, SOM, MBS, NPH
-Banned:Jace, the Mind Sculptor; Stoneforge Mystic
+Banned:Jace; the Mind Sculptor; Stoneforge Mystic

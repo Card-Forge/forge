@@ -4,4 +4,4 @@ Type:Historic
 Subtype:Eternal
 Order:230
 Sets:6ED, TMP, STH, EXO, USG, ULG
-Banned:Dream Halls, Earthcraft, Fluctuator, Lotus Petal, Memory Jar, Recurring Nightmare, Time Spiral, Tolarian Academy, Windfall
+Banned:Dream Halls; Earthcraft; Fluctuator; Lotus Petal; Memory Jar; Recurring Nightmare; Time Spiral; Tolarian Academy; Windfall

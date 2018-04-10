@@ -4,4 +4,4 @@ Type:Historic
 Subtype:Eternal
 Order:153
 Sets:DRK, FEM, 4ED
-Restricted:Balance, Channel, Ivory Tower, Mind Twist
+Restricted:Balance; Channel; Ivory Tower; Mind Twist
