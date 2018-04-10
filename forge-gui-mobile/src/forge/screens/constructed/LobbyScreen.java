@@ -158,10 +158,10 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             public void run() {
                 playerPanels.get(0).initialize(FPref.CONSTRUCTED_P1_DECK_STATE, FPref.COMMANDER_P1_DECK_STATE, FPref.TINY_LEADER_P1_DECK_STATE, FPref.BRAWL_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
                 playerPanels.get(1).initialize(FPref.CONSTRUCTED_P2_DECK_STATE, FPref.COMMANDER_P2_DECK_STATE, FPref.TINY_LEADER_P2_DECK_STATE, FPref.BRAWL_P2_DECK_STATE, DeckType.COLOR_DECK);
-                if(getNumPlayers()>2) {
+                if (getNumPlayers() > 2) {
                     playerPanels.get(2).initialize(FPref.CONSTRUCTED_P3_DECK_STATE, FPref.COMMANDER_P3_DECK_STATE, FPref.TINY_LEADER_P3_DECK_STATE, FPref.BRAWL_P3_DECK_STATE, DeckType.COLOR_DECK);
                 }
-                if(getNumPlayers()>3) {
+                if (getNumPlayers() > 3) {
                     playerPanels.get(3).initialize(FPref.CONSTRUCTED_P4_DECK_STATE, FPref.COMMANDER_P4_DECK_STATE, FPref.TINY_LEADER_P4_DECK_STATE, FPref.BRAWL_P4_DECK_STATE, DeckType.COLOR_DECK);
                 }
                 /*playerPanels.get(4).initialize(FPref.CONSTRUCTED_P5_DECK_STATE, DeckType.COLOR_DECK);
@@ -193,7 +193,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         btnStart.setEnabled(hasControl);
         lblVariants.setEnabled(hasControl);
         cbVariants.setEnabled(hasControl);
-        while(lobby.getNumberOfSlots()<getNumPlayers()){
+        while (lobby.getNumberOfSlots() < getNumPlayers()){
             lobby.addSlot();
         }
     }
@@ -492,10 +492,9 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 }
                 else {
                     panel = new PlayerPanel(this, allowNetworking, i, slot, lobby.mayEdit(i), lobby.hasControl());
-                    if(i==2) {
+                    if (i == 2) {
                         panel.initialize(FPref.CONSTRUCTED_P3_DECK_STATE, FPref.COMMANDER_P3_DECK_STATE, FPref.TINY_LEADER_P3_DECK_STATE, FPref.BRAWL_P3_DECK_STATE, DeckType.COLOR_DECK);
-                    }
-                    if(i==3) {
+                    } else if (i == 3) {
                         panel.initialize(FPref.CONSTRUCTED_P4_DECK_STATE, FPref.COMMANDER_P4_DECK_STATE, FPref.TINY_LEADER_P4_DECK_STATE, FPref.BRAWL_P4_DECK_STATE, DeckType.COLOR_DECK);
                     }
                     playerPanels.add(panel);
