@@ -238,8 +238,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 // Don't immediately close, wait for win/lose screen
                 return false;
             } else {
-                for(PlayerView player: getLocalPlayers()){
-                    if(!player.isAI()){
+                for (PlayerView player : getLocalPlayers()){
+                    if (!player.isAI()){
                         getGameController(player).nextGameDecision(NextGameDecision.QUIT);
                     }
                 }

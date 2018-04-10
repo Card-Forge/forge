@@ -53,8 +53,8 @@ public class VPlayerPanel extends FContainer {
         player = player0;
         phaseIndicator = add(new VPhaseIndicator());
 
-        if(playerCount>2){
-            forMultiPlayer=true;
+        if(playerCount > 2){
+            forMultiPlayer = true;
             avatarHeight *= 0.5f;
             //displayAreaHeightFactor *= 0.7f;
         }
@@ -473,7 +473,7 @@ public class VPlayerPanel extends FContainer {
                     else {
                         g.startClip(-1, y, w + 2, yAcross - y);
                     }
-                    if(forMultiPlayer) {
+                    if (forMultiPlayer) {
                         g.drawLine(1, MatchScreen.BORDER_COLOR, 0, yAcross, w, yAcross);
                         g.drawLine(1, MatchScreen.BORDER_COLOR, 0, y, 0, h);
                         g.drawLine(1, MatchScreen.BORDER_COLOR, w, y, w, h);
