@@ -544,27 +544,36 @@ public class MatchScreen extends FScreen {
             }
             float playerCount = getPlayerPanels().keySet().size();
 
-            //determine player panel heights based on visibility of zone displays
-            float cardRowsHeight = totalHeight - playerCount * avatarHeight;
-            float totalCardRows = 0;
-            for (VPlayerPanel playerPanel : playerPanelsList){
-                if (playerPanel.getSelectedTab() != null){
-                    totalCardRows += 1;
+            if (Forge.isLandscapeMode() && playerCount == 2) {
+                // Ensure that players have equal player panel heights in two player Forge in Landscape mode
+                float topPlayerPanelHeight = totalHeight / 2;
+                float bottomPlayerPanelHeight = topPlayerPanelHeight;
+                topPlayerPanel.setBounds(0, 0, visibleWidth, topPlayerPanelHeight);
+                bottomPlayerPanel.setBounds(0, totalHeight - bottomPlayerPanelHeight, visibleWidth, bottomPlayerPanelHeight);
+            } else {
+                // Determine player panel heights based on visibility of zone displays
+                float cardRowsHeight = totalHeight - playerCount * avatarHeight;
+                float totalCardRows = 0;
+                for (VPlayerPanel playerPanel : playerPanelsList) {
+                    if (playerPanel.getSelectedTab() != null) {
+                        totalCardRows += 1;
+                    }
+                    totalCardRows += 2;
                 }
-                totalCardRows += 2;
-            }
-            float y = 0;
-            for (VPlayerPanel playerPanel : playerPanelsList){
-                float panelHeight;
-                if (playerPanel.getSelectedTab() != null) {
-                    panelHeight = cardRowsHeight * 3f / totalCardRows;
-                } else{
-                    panelHeight = cardRowsHeight * 2f / totalCardRows;
+                float y = 0;
+                for (VPlayerPanel playerPanel : playerPanelsList) {
+                    float panelHeight;
+                    if (playerPanel.getSelectedTab() != null) {
+                        panelHeight = cardRowsHeight * 3f / totalCardRows;
+                    } else {
+                        panelHeight = cardRowsHeight * 2f / totalCardRows;
+                    }
+                    panelHeight += avatarHeight;
+                    playerPanel.setBounds(0, y, visibleWidth, panelHeight);
+                    y += panelHeight;
                 }
-                panelHeight += avatarHeight;
-                playerPanel.setBounds(0, y, visibleWidth, panelHeight);
-                y += panelHeight;
             }
+
             return new ScrollBounds(visibleWidth, totalHeight);
         }
 
