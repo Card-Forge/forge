@@ -4,7 +4,7 @@ URL:http://www.possibilitystorm.com/wp-content/uploads/2018/02/RIX3-Feb-5.jpg
 Goal:Win
 Turns:1
 Difficulty:Uncommon
-Description:Win this turn.
+Description:Win this turn. Assume all remaining cards in your library are Forests.
 [state]
 humanlife=20
 ailife=2
