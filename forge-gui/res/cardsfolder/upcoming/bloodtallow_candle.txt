@@ -1,0 +1,5 @@
+Name:Bloodtallow Candle
+ManaCost:1
+Types:Artifact
+A:AB$ Pump | Cost$ 6 T Sac<1/CARDNAME> | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -5 | NumDef$ -5 | SpellDescription$ Target creature gets -5/-5 until end of turn.
+Oracle:{6}, {T}, Sacrifice Bloodtallow Candle: Target creature gets -5/-5 until end of turn.
