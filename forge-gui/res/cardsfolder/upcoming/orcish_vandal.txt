@@ -1,6 +1,6 @@
-Name:Barrage Ogre
+Name:Orcish Vandal
 ManaCost:1 R
-Types:Creature Ogre Warrior
+Types:Creature Orc Warrior
 PT:1/1
 A:AB$ DealDamage | Cost$ T Sac<1/Artifact> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target.
 SVar:AIPreference:SacCost$Artifact.token+nonCreature,Artifact.token+powerLE1,Artifact.cmcEQ1,Artifact.cmcEQ2
