@@ -35,6 +35,7 @@ import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.storage.StorageBase;
 import forge.util.storage.StorageReaderFolder;
+import forge.util.storage.StorageReaderRecursiveFolderWithUserFolder;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -252,11 +253,11 @@ public class GameFormat implements Comparable<GameFormat> {
         return index;
     }
 
-    public static class Reader extends StorageReaderFolder<GameFormat> {
+    public static class Reader extends StorageReaderRecursiveFolderWithUserFolder<GameFormat> {
         List<GameFormat> naturallyOrdered = new ArrayList<GameFormat>();
         
-        public Reader(File file0) {
-            super(file0, GameFormat.FN_GET_NAME);
+        public Reader(File forgeFormats, File customFormats) {
+            super(forgeFormats, customFormats, GameFormat.FN_GET_NAME);
         }
 
         @Override
@@ -326,7 +327,7 @@ public class GameFormat implements Comparable<GameFormat> {
         public static final FilenameFilter TXT_FILE_FILTER = new FilenameFilter() {
             @Override
             public boolean accept(final File dir, final String name) {
-                return name.endsWith(".txt");
+                return name.endsWith(".txt") || dir.isDirectory();
             }
         };
     }
