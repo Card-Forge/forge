@@ -166,7 +166,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     tgtCards.add(Card.fromPaperCard(cards.get(0), controller));
                 }
             }
-        } if (sa.hasParam("Choices")) {
+        } else if (sa.hasParam("Choices")) {
             CardCollectionView choices = game.getCardsIn(ZoneType.Battlefield);
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host);
             if (!choices.isEmpty()) {
