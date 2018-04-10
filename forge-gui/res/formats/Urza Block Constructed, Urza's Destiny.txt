@@ -1,6 +1,7 @@
 [format]
 Name:Urza Block Constructed, Urza's Destiny
 Type:Historic
+Subtype:Block
 Order:235
 Sets:USG, ULG, UDS
 Banned:Gaea's Cradle, Memory Jar, Serra's Sanctum, Time Spiral, Tolarian Academy, Voltaic Key, Windfall

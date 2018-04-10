@@ -1,6 +1,7 @@
 [format]
 Name:Extended, Avacyn Restored
 Type:Historic
+Subtype:Rotating
 Order:520
 Sets:LRW, MOR, SHM, EVE, ALA, CFX, ARB, M10, ZEN, WWK, ROE, M11, SOM, MBS, NPH, M12, ISD, DKA, AVR
 Banned:Jace, the Mind Sculptor; Mental Misstep; Ponder; Stoneforge Mystic

@@ -1,5 +1,6 @@
 [format]
 Name:Odyssey Block Constructed, Odyssey
 Type:Historic
+Subtype:Block
 Order:281
 Sets:ODY

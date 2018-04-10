@@ -1,5 +1,6 @@
 [format]
 Name:Standard, New Phyrexia
 Type:Historic
+Subtype:Rotating
 Order:490
 Sets:ZEN, WWK, ROE, M11, SOM, MBS, NPH

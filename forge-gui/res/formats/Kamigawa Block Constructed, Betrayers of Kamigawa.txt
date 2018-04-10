@@ -1,5 +1,6 @@
 [format]
 Name:Kamigawa Block Constructed, Betrayers of Kamigawa
 Type:Historic
+Subtype:Block
 Order:351
 Sets:CHK, BOK

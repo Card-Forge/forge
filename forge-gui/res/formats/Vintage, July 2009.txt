@@ -1,6 +1,7 @@
 [format]
 Name:Vintage, July 2009
 Type:Historic
+Subtype:Eternal
 Order:451
 Sets:LEA, LEB, 2ED, ARN, DRC94, ATQ, 3ED, LEG, DRK, ARENA, FEM, WW, SHC, FS, 4ED, ICE, CHR, HML, ALL, MIR, VIS, 5ED, WTH, TMP, STH, EXO, USG, ULG, 6ED, UDS, MMQ, NMS, PCY, INV, PLS, 7ED, APC, ODY, TOR, JUD, ONS, LGN, SCG, 8ED, MRD, DST, 5DN, CHK, BOK, SOK, 9ED, RAV, POR, PO2, PTK, S99, S00, GPT, DIS, CSP, TSP, TSB, PLC, FUT, 10E, LRW, MOR, SHM, EVE, ALA, CFX, ARB
 Restricted:Ancestral Recall, Balance, Black Lotus, Brainstorm, Burning Wish, Channel, Demonic Consultation, Demonic Tutor, Fact or Fiction, Fastbond, Flash, Frantic Search, Gifts Ungiven, Gush, Imperial Seal, Library of Alexandria, Lion's Eye Diamond, Lotus Petal, Mana Crypt, Mana Vault, Merchant Scroll, Mind's Desire, Mox Pearl, Mox Emerald, Mox Ruby, Mox Sapphire, Mox Jet, Mystical Tutor, Necropotence, Ponder, Regrowth, Sol Ring, Thirst for Knowledge, Timetwister, Time Vault, Time Walk, Tinker, Tolarian Academy, Trinisphere, Vampiric Tutor, Wheel of Fortune, Windfall, Yawgmoth's Bargain, Yawgmoth's Will

@@ -1,6 +1,7 @@
 [format]
 Name:Standard, Mirage
 Type:Historic
+Subtype:Rotating
 Order:179
 Sets:FEM, 4ED, ICE, CHR, HML, ALL, MIR
 Restricted:Balance, Black Vise, Hymn to Tourach, Ivory Tower, Land Tax, Strip Mine, Zuran Orb

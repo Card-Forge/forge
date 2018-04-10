@@ -1,6 +1,7 @@
 [format]
 Name:Invasion Block Constructed, Apocalypse
 Type:Historic
+Subtype:Block
 Order:277
 Sets:INV, PLS, APC
 [Extended, Apocalypse

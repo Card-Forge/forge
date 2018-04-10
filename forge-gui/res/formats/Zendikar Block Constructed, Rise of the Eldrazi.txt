@@ -1,5 +1,6 @@
 [format]
 Name:Zendikar Block Constructed, Rise of the Eldrazi
 Type:Historic
+Subtype:Block
 Order:467
 Sets:ZEN, WWK, ROE

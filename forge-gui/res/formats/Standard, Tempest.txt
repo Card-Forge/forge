@@ -1,6 +1,7 @@
 [format]
 Name:Standard, Tempest
 Type:Historic
+Subtype:Rotating
 Order:195
 Sets:5ED, MIR, VIS, WTH, TMP
 Banned:Timmerian Fiends

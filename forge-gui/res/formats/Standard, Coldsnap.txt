@@ -1,5 +1,6 @@
 [format]
 Name:Standard, Coldsnap
 Type:Historic
+Subtype:Rotating
 Order:384
 Sets:9ED, CHK, BOK, SOK, RAV, GPT, DIS, CSP

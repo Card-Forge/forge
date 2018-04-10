@@ -1,5 +1,6 @@
 [format]
 Name:Standard, Conflux
 Type:Historic
+Subtype:Rotating
 Order:441
 Sets:10E, LRW, MOR, SHM, EVE, ALA, CFX

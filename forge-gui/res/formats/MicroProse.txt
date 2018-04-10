@@ -1,6 +1,7 @@
 [format]
 Name:MicroProse
-Type:Historic
+Type:Digital
+Subtype:Videogame
 Order:113
 Sets:MTG, STA, AST, DOTP, MTG_R, STA_R, DOTP_R
 Banned:Channel; Mind Twist; Bronze Tablet; Contract from Below; Darkpact; Demonic Attorney; Jeweled Bird; Rebirth; Tempest Efreet

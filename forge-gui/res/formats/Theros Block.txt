@@ -1,5 +1,6 @@
 [format]
 Name:Theros Block
 Type:Historic
+Subtype:Block
 Order:116
 Sets:JOU, BNG, THS

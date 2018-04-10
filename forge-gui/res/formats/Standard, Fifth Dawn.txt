@@ -1,6 +1,7 @@
 [format]
 Name:Standard, Fifth Dawn
 Type:Historic
+Subtype:Rotating
 Order:336
 Sets:8ED, ONS, LGN, SCG, MRD, DST, 5DN
 Banned:Skullclamp

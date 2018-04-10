@@ -45,6 +45,7 @@ public class DialogChooseFormats {
 					break;
 				case Custom:
 				case Casual:
+				case Digital:
 				default:
 					casual.add(box);
 					break;
@@ -61,7 +62,7 @@ public class DialogChooseFormats {
 
 		String constraints = "aligny top";
 		panel.add(makeCheckBoxList(sanctioned, "Sanctioned", true), constraints);
-		panel.add(makeCheckBoxList(casual, "Casual", false), constraints);
+		panel.add(makeCheckBoxList(casual, "Other", false), constraints);
 		panel.add(makeCheckBoxList(historic, "Historic", false), constraints);
 
 		final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();

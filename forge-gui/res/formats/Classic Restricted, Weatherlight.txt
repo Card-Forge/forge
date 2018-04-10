@@ -1,6 +1,7 @@
 [format]
 Name:Classic Restricted, Weatherlight
 Type:Historic
+Subtype:Eternal
 Order:190
 Sets:LEA, LEB, 2ED, ARN, DRC94, ATQ, 3ED, LEG, DRK, ARENA, FEM, WW, SHC, FS, 4ED, ICE, CHR, HML, ALL, MIR, VIS, 5ED, WTH
 Banned:Amulet of Quoz, Balance, Black Vise, Braingeyser, Bronze Tablet, Channel, Contract from Below, Copy Artifact, Darkpact, Demonic Attorney, Demonic Tutor, Fastbond, Feldon's Cane, Fork, Ivory Tower, Jeweled Bird, Maze of Ith, Mind Twist, Rebirth, Regrowth, Sol Ring, Strip Mine, Tempest Efreet, Timmerian Fiends, Wheel of Fortune, Zuran Orb

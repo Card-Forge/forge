@@ -1,6 +1,7 @@
 [format]
 Name:Standard, Oct 1996
 Type:Historic
+Subtype:Rotating
 Order:174
 Sets:FEM, 4ED, ICE, CHR, HML, ALL
 Restricted:Balance, Black Vise, Hymn to Tourach, Ivory Tower, Land Tax, Strip Mine, Zuran Orb

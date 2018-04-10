@@ -1,6 +1,7 @@
 [format]
 Name:Ice Age-Only, Oct 1996
 Type:Historic
+Subtype:Custom
 Order:175
 Sets:ICE
 Restricted:Zuran Orb

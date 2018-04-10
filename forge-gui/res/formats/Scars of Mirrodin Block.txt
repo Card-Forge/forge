@@ -1,5 +1,6 @@
 [format]
 Name:Scars of Mirrodin Block
 Type:Historic
+Subtype:Block
 Order:119
 Sets:NPH, MBS, SOM

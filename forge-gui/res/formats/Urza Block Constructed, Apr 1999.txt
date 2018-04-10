@@ -1,6 +1,7 @@
 [format]
 Name:Urza Block Constructed, Apr 1999
 Type:Historic
+Subtype:Block
 Order:226
 Sets:USG, ULG
 Banned:Memory Jar, Time Spiral, Windfall

@@ -1,6 +1,7 @@
 [format]
 Name:Extended, Dark Ascension
 Type:Historic
+Subtype:Rotating
 Order:513
 Sets:LRW, MOR, SHM, EVE, ALA, CFX, ARB, M10, ZEN, WWK, ROE, M11, SOM, MBS, NPH, M12, ISD, DKA
 Banned:Jace, the Mind Sculptor; Mental Misstep; Ponder; Stoneforge Mystic

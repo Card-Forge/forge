@@ -1,5 +1,6 @@
 [format]
 Name:Lorwyn-Shadowmoor Block
 Type:Historic
+Subtype:Block
 Order:122
 Sets:EVE, SHM, MOR, LRW

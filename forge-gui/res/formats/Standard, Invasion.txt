@@ -1,5 +1,6 @@
 [format]
 Name:Standard, Invasion
 Type:Historic
+Subtype:Rotating
 Order:261
 Sets:6ED, MMQ, NMS, PCY, INV

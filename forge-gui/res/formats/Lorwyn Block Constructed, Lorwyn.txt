@@ -1,5 +1,6 @@
 [format]
 Name:Lorwyn Block Constructed, Lorwyn
 Type:Historic
+Subtype:Block
 Order:416
 Sets:LRW

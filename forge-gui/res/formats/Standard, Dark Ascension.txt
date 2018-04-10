@@ -1,5 +1,6 @@
 [format]
 Name:Standard, Dark Ascension
 Type:Historic
+Subtype:Rotating
 Order:511
 Sets:SOM, MBS, NPH, M12, ISD, DKA

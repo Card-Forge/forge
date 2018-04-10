@@ -1,5 +1,6 @@
 [format]
 Name:Kamigawa Block Constructed, Saviors of Kamigawa
 Type:Historic
+Subtype:Block
 Order:358
 Sets:CHK, BOK, SOK

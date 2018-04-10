@@ -1,6 +1,7 @@
 [format]
 Name:Standard, Fifth Edition
 Type:Historic
+Subtype:Rotating
 Order:187
 Sets:5ED, MIR, ALL, VIS
 Banned:Rebirth, Timmerian Fiends

@@ -135,8 +135,11 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
                     case Historic:
                         lstFormats.addItem(format, 2);
                         break;
-                    case Custom:
+                    case Digital:
                         lstFormats.addItem(format, 3);
+                        break;
+                    case Custom:
+                        lstFormats.addItem(format, 4);
                 }
             }
             lstFormats.setListItemRenderer(new FormatRenderer());

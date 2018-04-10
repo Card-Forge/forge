@@ -1,5 +1,6 @@
 [format]
 Name:Standard, Planeshift
 Type:Historic
+Subtype:Rotating
 Order:266
 Sets:6ED, MMQ, NMS, PCY, INV, PLS

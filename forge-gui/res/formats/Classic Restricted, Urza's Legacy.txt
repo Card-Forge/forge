@@ -1,6 +1,7 @@
 [format]
 Name:Classic Restricted, Urza's Legacy
 Type:Historic
+Subtype:Eternal
 Order:223
 Sets:LEA, LEB, 2ED, ARN, DRC94, ATQ, 3ED, DRK, ARENA, FEM, WW, SHC, FS, 4ED, ICE, CHR, HML, ALL, MIR, VIS, 5ED, WTH, TMP, STH, EXO, USG, ULG
 Banned:Amulet of Quoz, Balance, Black Vise, Braingeyser, Bronze Tablet, Channel, Contract from Below, Copy Artifact, Darkpact, Demonic Attorney, Demonic Tutor, Fastbond, Fork, Ivory Tower, Jeweled Bird, Maze of Ith, Mind Twist, Rebirth, Regrowth, Sol Ring, Strip Mine, Stroke of Genius, Tempest Efreet, Timmerian Fiends, Tolarian Academy, Wheel of Fortune, Windfall, Zuran Orb

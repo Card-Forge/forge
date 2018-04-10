@@ -1,5 +1,6 @@
 [format]
 Name:Standard, Guildpact
 Type:Historic
+Subtype:Rotating
 Order:373
 Sets:9ED, CHK, BOK, SOK, RAV, GPT

@@ -1,5 +1,6 @@
 [format]
 Name:Amonkhet Block
 Type:Historic
+Subtype:Block
 Order:111
 Sets:HOU, AKH

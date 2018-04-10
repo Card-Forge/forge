@@ -1,6 +1,7 @@
 [format]
 Name:Type 2, Chronicles
 Type:Historic
+Subtype:Eternal
 Order:157
 Sets:FEM, 4ED, ICE
 Restricted:Balance, Channel, Ivory Tower, Mind Twist

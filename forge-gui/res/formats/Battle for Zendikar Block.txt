@@ -1,5 +1,6 @@
 [format]
 Name:Battle for Zendikar Block
 Type:Historic
+Subtype:Block
 Order:114
 Sets:OGW, BFZ

@@ -1,5 +1,6 @@
 [format]
 Name:Khans of Tarkir Block
 Type:Historic
+Subtype:Block
 Order:115
 Sets:DTK, FRF, KTK

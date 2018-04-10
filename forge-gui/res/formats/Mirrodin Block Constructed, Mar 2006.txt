@@ -1,6 +1,7 @@
 [format]
 Name:Mirrodin Block Constructed, Mar 2006
 Type:Historic
+Subtype:Block
 Order:378
 Sets:MRD, DST, 5DN
 Banned:Aether Vial, Ancient Den, Arcbound Ravager, Darksteel Citadel, Disciple of the Vault, Great Furnace, Seat of the Synod, Skullclamp, Tree of Tales, Vault of Whispers

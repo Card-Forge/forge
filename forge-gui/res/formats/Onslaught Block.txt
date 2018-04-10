@@ -1,5 +1,6 @@
 [format]
 Name:Onslaught Block
 Type:Historic
+Subtype:Block
 Order:127
 Sets:SCG, LGN, ONS

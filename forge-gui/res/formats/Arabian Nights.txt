@@ -1,5 +1,6 @@
 [format]
 Name:Arabian Nights
 Type:Historic
+Subtype:Custom
 Order:139
 Sets:LEA, LEB, 2ED, ARN

@@ -34,7 +34,6 @@ import forge.item.PaperCard;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.storage.StorageBase;
-import forge.util.storage.StorageReaderFileSections;
 import forge.util.storage.StorageReaderFolder;
 
 import java.io.File;
@@ -45,18 +44,23 @@ import java.util.Map.Entry;
 
 public class GameFormat implements Comparable<GameFormat> {
     private final String name;
-    public enum FormatType {Sanctioned, Casual, Historic, Custom}
+    public enum FormatType {Sanctioned, Casual, Historic, Digital, Custom}
+    public enum FormatSubType {Rotating, Eternal, Commander, Planechase, Block, Videogame, MTGO, Custom}
+
     // contains allowed sets, when empty allows all sets
     private FormatType formatType;
+    private FormatSubType formatSubType;
 
     protected final List<String> allowedSetCodes; // this is mutable to support quest mode set unlocks
     protected final List<CardRarity> allowedRarities;
     protected final List<String> bannedCardNames;
     protected final List<String> restrictedCardNames;
+    protected final List<String> additionalCardNames; // for cards that are legal but not reprinted in any of the allowed Sets
     
     protected final transient List<String> allowedSetCodes_ro;
     protected final transient List<String> bannedCardNames_ro;
     protected final transient List<String> restrictedCardNames_ro;
+    protected final transient List<String> additionalCardNames_ro;
 
     protected final transient Predicate<PaperCard> filterRules;
     protected final transient Predicate<PaperCard> filterPrinted;
@@ -64,15 +68,17 @@ public class GameFormat implements Comparable<GameFormat> {
     private final int index;
 
     public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards) {
-        this(fName, sets, bannedCards, null, null, 0, FormatType.Custom);
+        this(fName, sets, bannedCards, null, null, null, 0, FormatType.Custom, FormatSubType.Custom);
     }
     
-    public static final GameFormat NoFormat = new GameFormat("(none)", null, null, null, null, Integer.MAX_VALUE, FormatType.Custom);
+    public static final GameFormat NoFormat = new GameFormat("(none)", null, null, null, null, null, Integer.MAX_VALUE, FormatType.Custom, FormatSubType.Custom);
     
     public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards,
-                      final List<String> restrictedCards, final List<CardRarity> rarities, int compareIdx, FormatType formatType) {
+                      final List<String> restrictedCards, final List<String> additionalCards,
+                      final List<CardRarity> rarities, int compareIdx, FormatType formatType, FormatSubType formatSubType) {
         this.index = compareIdx;
         this.formatType = formatType;
+        this.formatSubType = formatSubType;
         this.name = fName;
 
         if(sets != null) {
@@ -92,11 +98,13 @@ public class GameFormat implements Comparable<GameFormat> {
 
         bannedCardNames = bannedCards == null ? new ArrayList<String>() : Lists.newArrayList(bannedCards);
         restrictedCardNames = restrictedCards == null ? new ArrayList<String>() : Lists.newArrayList(restrictedCards);
+        additionalCardNames = additionalCards == null ? new ArrayList<String>() : Lists.newArrayList(additionalCards);
         allowedRarities = rarities == null ? Lists.newArrayList() : rarities;
 
         this.allowedSetCodes_ro = Collections.unmodifiableList(allowedSetCodes);
         this.bannedCardNames_ro = Collections.unmodifiableList(bannedCardNames);
         this.restrictedCardNames_ro = Collections.unmodifiableList(restrictedCardNames);
+        this.additionalCardNames_ro = Collections.unmodifiableList(additionalCardNames);
 
         this.filterRules = this.buildFilterRules();
         this.filterPrinted = this.buildFilterPrinted();
@@ -114,6 +122,9 @@ public class GameFormat implements Comparable<GameFormat> {
                 crp.add(StaticData.instance().getCommonCards().wasPrintedAtRarity(cr));
             }
             p = Predicates.and(p, Predicates.or(crp));
+        }
+        if (!this.additionalCardNames_ro.isEmpty() && !printed) {
+            p = Predicates.or(p, IPaperCard.Predicates.names(this.additionalCardNames_ro));
         }
         return p;
     }
@@ -134,6 +145,10 @@ public class GameFormat implements Comparable<GameFormat> {
         return this.formatType;
     }
 
+    public FormatSubType getFormatSubType() {
+        return this.formatSubType;
+    }
+
     public List<String> getAllowedSetCodes() {
         return this.allowedSetCodes_ro;
     }
@@ -145,6 +160,11 @@ public class GameFormat implements Comparable<GameFormat> {
     public List<String> getRestrictedCards() {
         return restrictedCardNames_ro;
     }
+
+    public List<String> getAdditionalCards() {
+        return additionalCardNames_ro;
+    }
+
     public List<CardRarity> getAllowedRarities() {
         return allowedRarities;
     }
@@ -217,7 +237,15 @@ public class GameFormat implements Comparable<GameFormat> {
         if (null == other) {
             return 1;
         }
-        return index - other.index;
+        if (other.formatType != formatType){
+            return formatType.compareTo(other.formatType);
+        }else{
+            if (other.formatSubType != formatSubType){
+                return formatSubType.compareTo(other.formatSubType);
+            }
+        }
+        return name.compareTo(other.name);
+        //return index - other.index;
     }
 
     public int getIndex() {
@@ -237,14 +265,21 @@ public class GameFormat implements Comparable<GameFormat> {
             List<String> sets = null; // default: all sets allowed
             List<String> bannedCards = null; // default: nothing banned
             List<String> restrictedCards = null; // default: nothing restricted
+            List<String> additionalCards = null; // default: nothing additional
             List<CardRarity> rarities = null;
             FileSection section = FileSection.parse(contents.get("format"), ":");
             String title = section.get("name");
             FormatType formatType;
             try {
                 formatType = FormatType.valueOf(section.get("type"));
-            } catch (IllegalArgumentException e) {
+            } catch (Exception e) {
                 formatType = FormatType.Custom;
+            }
+            FormatSubType formatsubType;
+            try {
+                formatsubType = FormatSubType.valueOf(section.get("subtype"));
+            } catch (Exception e) {
+                formatsubType = FormatSubType.Custom;
             }
             Integer idx = section.getInt("order");
             String strSets = section.get("sets");
@@ -261,6 +296,11 @@ public class GameFormat implements Comparable<GameFormat> {
                 restrictedCards = Arrays.asList(strCars.split("; "));
             }
 
+            strCars = section.get("additional");
+            if ( strCars != null ) {
+                additionalCards = Arrays.asList(strCars.split("; "));
+            }
+
             strCars = section.get("rarities");
             if ( strCars != null ) {
                 CardRarity cr;
@@ -273,7 +313,7 @@ public class GameFormat implements Comparable<GameFormat> {
                 }
             }
 
-            GameFormat result = new GameFormat(title, sets, bannedCards, restrictedCards, rarities, idx, formatType);
+            GameFormat result = new GameFormat(title, sets, bannedCards, restrictedCards, additionalCards, rarities, idx, formatType,formatsubType);
             naturallyOrdered.add(result);
             return result;
         }
@@ -317,7 +357,8 @@ public class GameFormat implements Comparable<GameFormat> {
         public Iterable<GameFormat> getFilterList() {
             List<GameFormat> coreList = new ArrayList<>();
             for(GameFormat format: naturallyOrdered){
-                if(!format.getFormatType().equals(FormatType.Historic)){
+                if(!format.getFormatType().equals(FormatType.Historic)
+                        &&!format.getFormatType().equals(FormatType.Digital)){
                     coreList.add(format);
                 }
             }

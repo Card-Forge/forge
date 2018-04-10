@@ -1,5 +1,6 @@
 [format]
 Name:Un-Sets
 Type:Historic
+Subtype:Custom
 Order:135
 Sets:UST, UNH, UGL

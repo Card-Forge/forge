@@ -1,5 +1,6 @@
 [format]
 Name:Standard, Darksteel
 Type:Historic
+Subtype:Rotating
 Order:329
 Sets:8ED, ONS, LGN, SCG, MRD, DST

@@ -1,6 +1,7 @@
 [format]
 Name:Classic, Fifth Edition
 Type:Historic
+Subtype:Eternal
 Order:185
 Sets:LEA, LEB, 2ED, ARN, DRC94, ATQ, 3ED, LEG, DRK, ARENA, FEM, WW, SHC, FS, 4ED, ICE, CHR, HML, ALL, MIR, VIS, 5ED
 Restricted:Ancestral Recall, Balance, Berserk, Black Lotus, Braingeyser, Candelabra of Tawnos, Copy Artifact, Demonic Tutor, Fastbond, Feldon's Cane, Fork, Ivory Tower, Library of Alexandria, Maze of Ith, Mirror Universe, Mishra's Workshop, Mox Pearl, Mox Emerald, Mox Ruby, Mox Sapphire, Mox Jet, Recall, Regrowth, Sol Ring, Timetwister, Time Walk, Underworld Dreams, Wheel of Fortune, Zuran Orb

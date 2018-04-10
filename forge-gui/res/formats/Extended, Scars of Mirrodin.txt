@@ -1,5 +1,6 @@
 [format]
 Name:Extended, Scars of Mirrodin
 Type:Historic
+Subtype:Rotating
 Order:480
 Sets:LRW, MOR, SHM, EVE, ALA, CFX, ARB, M10, ZEN, WWK, ROE, M11, SOM

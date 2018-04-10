@@ -1,6 +1,7 @@
 [format]
 Name:Type 1, Seventh Edition
 Type:Historic
+Subtype:Rotating
 Order:274
 Sets:LEA, LEB, 2ED, ARN, DRC94, ATQ, 3ED, LEG, DRK, ARENA, FEM, WW, SHC, FS, 4ED, ICE, CHR, HML, ALL, MIR, VIS, 5ED, WTH, TMP, STH, EXO, USG, ULG, 6ED, UDS, MMQ, NMS, PCY, INV, PLS, 7ED
 Restricted:Ancestral Recall, Balance, Berserk, Black Lotus, Black Vise, Braingeyser, Channel, Crop Rotation, Demonic Consultation, Demonic Tutor, Doomsday, Dream Halls, Enlightened Tutor, Fastbond, Fork, Frantic Search, Grim Monolith, Hurkyl's Recall, Library of Alexandria, Lotus Petal, Mana Crypt, Mana Vault, Mind Over Matter, Mind Twist, Mox Diamond, Mox Pearl, Mox Emerald, Mox Ruby, Mox Sapphire, Mox Jet, Mystical Tutor, Necropotence, Recall, Regrowth, Sol Ring, Stroke of Genius, Time Spiral, Timetwister, Time Walk, Tinker, Tolarian Academy, Vampiric Tutor, Voltaic Key, Wheel of Fortune, Windfall, Yawgmoth's Bargain, Yawgmoth's Will
