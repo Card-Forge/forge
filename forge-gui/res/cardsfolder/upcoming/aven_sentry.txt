@@ -1,0 +1,6 @@
+Name:Aven Sentry
+ManaCost:3 W
+Types:Creature Bird Soldier
+PT:3/2
+K:Flying
+Oracle:Flying
