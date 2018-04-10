@@ -2,7 +2,10 @@
 Mobile Forge now supports 3 and 4 player multiplayer matches in Constructed mode, you can select the number of players from the dropdown menu on the Constructed tab. Please note that matches with more than two players are more taxing for the mobile device and thus require more powerful hardware for prolonged gameplay without considerable slowdowns.
 
 - Brawl format -
-The new brawl format is now available on Forge - selectable as a variant via checkbox on Desktop and in the variant dropdown on mobile
+The new Brawl format is now available on Forge - selectable as a variant via checkbox on Desktop and in the variant dropdown on mobile
+
+- MoJhoSto format -
+The casual MoJhoSto format is now available on Forge. It's a variant of Momir Basic with three Vanguard avatars (Momir/Jhoira/Stonehewer).
 
 - Deck generation tools -
 Random AI deck generation now supports commander variants as well as standard and modern - these modes all now correctly limit AI playable cards when generating decks for AI.  Commander/TinyLeader/Brawl decks can be generated for a specific commander if you choose the "Random Commander Card-based Decks"
