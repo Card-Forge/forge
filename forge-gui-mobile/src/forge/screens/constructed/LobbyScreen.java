@@ -492,9 +492,9 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 }
                 else {
                     panel = new PlayerPanel(this, allowNetworking, i, slot, lobby.mayEdit(i), lobby.hasControl());
-                    if (i==2) {
+                    if (i == 2) {
                         panel.initialize(FPref.CONSTRUCTED_P3_DECK_STATE, FPref.COMMANDER_P3_DECK_STATE, FPref.TINY_LEADER_P3_DECK_STATE, FPref.BRAWL_P3_DECK_STATE, DeckType.COLOR_DECK);
-                    } else if (i==3) {
+                    } else if (i == 3) {
                         panel.initialize(FPref.CONSTRUCTED_P4_DECK_STATE, FPref.COMMANDER_P4_DECK_STATE, FPref.TINY_LEADER_P4_DECK_STATE, FPref.BRAWL_P4_DECK_STATE, DeckType.COLOR_DECK);
                     }
                     playerPanels.add(panel);
