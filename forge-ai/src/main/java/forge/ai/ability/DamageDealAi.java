@@ -533,7 +533,7 @@ public class DamageDealAi extends DamageAiBase {
             if (tgt.canTgtPlaneswalker()) {
                 // We can damage planeswalkers with this, consider targeting.
                 Card c = this.dealDamageChooseTgtPW(ai, sa, dmg, noPrevention, enemy, false);
-                if (c != null) {
+                if (c != null && !this.shouldTgtP(ai, sa, dmg, noPrevention, true)) {
                     tcs.add(c);
                     if (divided) {
                         final int assignedDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
