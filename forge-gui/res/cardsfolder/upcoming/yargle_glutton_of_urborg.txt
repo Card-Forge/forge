@@ -1,0 +1,5 @@
+Name:Yargle, Glutton of Urborg
+ManaCost:4 B
+Types:Legendary Creature Frog Spirit
+PT:9/3
+Oracle:
