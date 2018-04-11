@@ -271,25 +271,7 @@ public class DamageDealAi extends DamageAiBase {
         final Player activator = sa.getActivatingPlayer();
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
-        List<Card> hPlay = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), activator, source, sa);
-
-        if (activator.equals(ai)) {
-            hPlay = CardLists.filterControlledBy(hPlay, pl);
-        }
-
-        final List<GameObject> objects = Lists.newArrayList(sa.getTargets().getTargets());
-        if (sa.hasParam("TargetUnique")) {
-            objects.addAll(sa.getUniqueTargets());
-        }
-        for (final Object o : objects) {
-            if (o instanceof Card) {
-                final Card c = (Card) o;
-                if (hPlay.contains(c)) {
-                    hPlay.remove(c);
-                }
-            }
-        }
-        hPlay = CardLists.getTargetableCards(hPlay, sa);
+        List<Card> hPlay = getTargetableCards(ai, sa, pl, tgt, activator, source, game);
 
         List<Card> killables = CardLists.filter(hPlay, new Predicate<Card>() {
             @Override
@@ -336,6 +318,84 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         return null;
+    }
+
+    /**
+     * <p>
+     * dealDamageChooseTgtPW.
+     * </p>
+     *
+     * @param d
+     *            a int.
+     * @param noPrevention
+     *            a boolean.
+     * @param pl
+     *            a {@link forge.game.player.Player} object.
+     * @param mandatory
+     *            a boolean.
+     * @return a {@link forge.game.card.Card} object.
+     */
+    private Card dealDamageChooseTgtPW(final Player ai, final SpellAbility sa, final int d, final boolean noPrevention,
+                                       final Player pl, final boolean mandatory) {
+
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
+        final Player activator = sa.getActivatingPlayer();
+        final Card source = sa.getHostCard();
+        final Game game = source.getGame();
+        List<Card> hPlay = getTargetableCards(ai, sa, pl, tgt, activator, source, game);
+
+        List<Card> killables = CardLists.filter(hPlay, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.getSVar("Targeting").equals("Dies")
+                        || (ComputerUtilCombat.getEnoughDamageToKill(c, d, source, false, noPrevention) <= d)
+                        && !ComputerUtil.canRegenerate(ai, c)
+                        && !(c.getSVar("SacMe").length() > 0);
+            }
+        });
+
+        // Filter AI-specific targets if provided
+        killables = ComputerUtil.filterAITgts(sa, ai, new CardCollection(killables), true);
+
+        Card targetCard = null;
+        if (pl.isOpponentOf(ai) && activator.equals(ai) && !killables.isEmpty()) {
+            return ComputerUtilCard.getBestPlaneswalkerAI(killables);
+        }
+
+        if (!hPlay.isEmpty()) {
+            if (pl.isOpponentOf(ai) && activator.equals(ai)) {
+                return ComputerUtilCard.getBestPlaneswalkerAI(hPlay);
+            } else if (mandatory) {
+                return ComputerUtilCard.getWorstPlaneswalkerAI(hPlay);
+            }
+
+            return targetCard;
+        }
+
+        return null;
+    }
+
+    private List<Card> getTargetableCards(Player ai, SpellAbility sa, Player pl, TargetRestrictions tgt, Player activator, Card source, Game game) {
+        List<Card> hPlay = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), activator, source, sa);
+
+        if (activator.equals(ai)) {
+            hPlay = CardLists.filterControlledBy(hPlay, pl);
+        }
+
+        final List<GameObject> objects = Lists.newArrayList(sa.getTargets().getTargets());
+        if (sa.hasParam("TargetUnique")) {
+            objects.addAll(sa.getUniqueTargets());
+        }
+        for (final Object o : objects) {
+            if (o instanceof Card) {
+                final Card c = (Card) o;
+                if (hPlay.contains(c)) {
+                    hPlay.remove(c);
+                }
+            }
+        }
+        hPlay = CardLists.getTargetableCards(hPlay, sa);
+        return hPlay;
     }
 
     /**
@@ -475,7 +535,27 @@ public class DamageDealAi extends DamageAiBase {
                 return targetingPlayer.getController().chooseTargetsFor(sa);
             }
 
+            if (tgt.canTgtPlaneswalker()) {
+                // We can damage planeswalkers with this, consider targeting.
+                Card c = this.dealDamageChooseTgtPW(ai, sa, dmg, noPrevention, enemy, false);
+                if (c != null) {
+                    tcs.add(c);
+                    if (divided) {
+                        final int assignedDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
+                        if (assignedDamage <= dmg) {
+                            tgt.addDividedAllocation(c, assignedDamage);
+                        }
+                        dmg = dmg - assignedDamage;
+                        if (dmg <= 0) {
+                            break;
+                        }
+                    }
+                    continue;
+                }
+            }
+
             if (tgt.canTgtCreatureAndPlayer()) {
+                Card c = null;
 
                 if (this.shouldTgtP(ai, sa, dmg, noPrevention)) {
                     tcs.add(enemy);
@@ -489,7 +569,8 @@ public class DamageDealAi extends DamageAiBase {
                     dmg = dmg * sa.getTargets().getNumTargeted() / (sa.getTargets().getNumTargeted() +1);
                 }
 
-                final Card c = this.dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, false);
+                // look for creature targets; currently also catches planeswalkers that can be killed immediately
+                c = this.dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, false);
                 if (c != null) {
                     //option to hold removal instead only applies for single targeted removal
                     if (sa.isSpell() && !divided && !immediately && tgt.getMaxTargets(sa.getHostCard(), sa) == 1) {
