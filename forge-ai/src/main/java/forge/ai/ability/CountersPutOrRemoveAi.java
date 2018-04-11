@@ -112,7 +112,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
                 // with one touch
                 CardCollection planeswalkerList = CardLists.filter(
                         CardLists.filterControlledBy(countersList, ai.getOpponents()),
-                        CardPredicates.Presets.PLANEWALKERS,
+                        CardPredicates.Presets.PLANESWALKERS,
                         CardPredicates.hasLessCounter(CounterType.LOYALTY, amount));
 
                 if (!planeswalkerList.isEmpty()) {

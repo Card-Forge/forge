@@ -77,7 +77,7 @@ public class AttackRequirement {
             if (c.hasKeyword("Each opponent must attack you or a planeswalker you control with at least one creature each combat if able.")) {
                 if (attacker.getController().isOpponentOf(c.getController()) && !defenderOrPWSpecific.containsKey(c.getController())) {
                     defenderOrPWSpecific.put(c.getController(), 1);
-                    for (Card pw : CardLists.filter(c.getController().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS)) {
+                    for (Card pw : CardLists.filter(c.getController().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANESWALKERS)) {
                         // Add the attack alternatives that suffice (planeswalkers that can be attacked instead of the player)
                         if (!defenderSpecificAlternatives.containsKey(c.getController())) {
                             defenderSpecificAlternatives.put(c.getController(), Lists.<GameEntity>newArrayList());

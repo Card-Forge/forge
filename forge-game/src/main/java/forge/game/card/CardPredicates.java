@@ -587,7 +587,7 @@ public final class CardPredicates {
                 return c.isLand() && c.isSnow();
             }
         };
-        public static final Predicate<Card> PLANEWALKERS = new Predicate<Card>() {
+        public static final Predicate<Card> PLANESWALKERS = new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return c.isPlaneswalker();

@@ -180,7 +180,7 @@ public class DrawAi extends SpellAbilityAi {
 
             int numHand = ai.getCardsIn(ZoneType.Hand).size();
             if ("Jace, Vryn's Prodigy".equals(sourceName) && ai.getCardsIn(ZoneType.Graveyard).size() > 3) {
-                return CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS,
+                return CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANESWALKERS,
                         CardPredicates.isType("Jace")).size() <= 0;
             }
             if (source.isSpell() && ai.getCardsIn(ZoneType.Hand).contains(source)) {
