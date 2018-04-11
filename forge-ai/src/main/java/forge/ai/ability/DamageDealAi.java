@@ -357,7 +357,6 @@ public class DamageDealAi extends DamageAiBase {
         // Filter AI-specific targets if provided
         killables = ComputerUtil.filterAITgts(sa, ai, new CardCollection(killables), true);
 
-        Card targetCard = null;
         if (pl.isOpponentOf(ai) && activator.equals(ai) && !killables.isEmpty()) {
             return ComputerUtilCard.getBestPlaneswalkerAI(killables);
         }
@@ -365,11 +364,7 @@ public class DamageDealAi extends DamageAiBase {
         if (!hPlay.isEmpty()) {
             if (pl.isOpponentOf(ai) && activator.equals(ai)) {
                 return ComputerUtilCard.getBestPlaneswalkerAI(hPlay);
-            } else if (mandatory) {
-                return ComputerUtilCard.getWorstPlaneswalkerAI(hPlay);
             }
-
-            return targetCard;
         }
 
         return null;
@@ -768,7 +763,19 @@ public class DamageDealAi extends DamageAiBase {
         final Player opp = ComputerUtil.getOpponentFor(ai);
 
         while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
-            // TODO: Consider targeting the planeswalker
+            if (tgt.canTgtPlaneswalker()) {
+                final Card c = this.dealDamageChooseTgtPW(ai, sa, dmg, noPrevention, ai, mandatory);
+                if (c != null) {
+                    sa.getTargets().add(c);
+                    if (divided) {
+                        tgt.addDividedAllocation(c, dmg);
+                        break;
+                    }
+                    continue;
+                }
+            }
+
+            // TODO: This currently also catches planeswalkers that can be killed (still necessary? Or can be removed?)
             if (tgt.canTgtCreature()) {
                 final Card c = this.dealDamageChooseTgtC(ai, sa, dmg, noPrevention, ai, mandatory);
                 if (c != null) {
