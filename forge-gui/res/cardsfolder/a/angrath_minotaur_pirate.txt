@@ -3,7 +3,7 @@ ManaCost:4 B R
 Types:Legendary Planeswalker Angrath
 A:AB$ DamageAll | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | NumDmg$ 1 | ValidTgts$ Opponent | TgtPrompt$ Select an opponent | ValidCards$ Creature | ValidPlayers$ Targeted | ValidDescription$ target opponent and each creature he or she controls. | SpellDescription$ CARDNAME deals 1 damage to target opponent and each creature he or she controls.
 A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Card.Pirate+YouCtrl | TgtPrompt$ Select target Pirate card in your graveyard. | SpellDescription$ Return target Pirate card from your graveyard to the battlefield.
-A:AB$ DestroyAll | Cost$ SubCounter<11/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ValidCards$ Creature | ValidDescription$ all creatures targeted opponent controls | RememberDestroyed$ True | SubAbility$ DBDealDamage | SpellDescription$ Destroy all creatures target opponent controls. CARDNAME deals damage to that player equal to their total power.
+A:AB$ DestroyAll | Cost$ SubCounter<11/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ValidCards$ Creature | ValidDescription$ all creatures targeted opponent controls | RememberAllObjects$ True | SubAbility$ DBDealDamage | SpellDescription$ Destroy all creatures target opponent controls. CARDNAME deals damage to that player equal to their total power.
 SVar:DBDealDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | References$ X
 SVar:X:RememberedLKI$ CardPower
 SVar:Animate:DB$Animate | Defined$ Targeted | Types$ Zombie | Colors$ Black | Permanent$ True
