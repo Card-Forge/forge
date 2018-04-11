@@ -73,6 +73,10 @@ public class DestroyAllEffect extends SpellAbilityEffect {
             card.clearRemembered();
         }
 
+        if (sa.hasParam("RememberAllObjects")) {
+            card.addRemembered(list);
+        }
+
         // exclude cards that can't be destroyed at this moment
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
