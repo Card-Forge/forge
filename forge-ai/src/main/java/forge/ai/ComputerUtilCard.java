@@ -96,7 +96,7 @@ public class ComputerUtilCard {
      * @return best Planeswalker
      */
     public static Card getBestPlaneswalkerAI(final List<Card> list) {
-        List<Card> all = CardLists.filter(list, CardPredicates.Presets.PLANEWALKERS);
+        List<Card> all = CardLists.filter(list, CardPredicates.Presets.PLANESWALKERS);
         if (all.size() == 0) {
             return null;
         }
@@ -110,7 +110,7 @@ public class ComputerUtilCard {
      * @return best Planeswalker
      */
     public static Card getWorstPlaneswalkerAI(final List<Card> list) {
-        List<Card> all = CardLists.filter(list, CardPredicates.Presets.PLANEWALKERS);
+        List<Card> all = CardLists.filter(list, CardPredicates.Presets.PLANESWALKERS);
         if (all.size() == 0) {
             return null;
         }

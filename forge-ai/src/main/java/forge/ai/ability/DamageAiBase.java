@@ -78,7 +78,7 @@ public abstract class DamageAiBase extends SpellAbilityAi {
         }
 
         // burn Planeswalkers
-        if (Iterables.any(enemy.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS)) {
+        if (Iterables.any(enemy.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANESWALKERS)) {
             return true;
         }
 
