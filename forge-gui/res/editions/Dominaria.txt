@@ -10,9 +10,10 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand DOM
 [cards]
 1 M Karn, Scion of Urza
 
+3 C Aven Sentry
 4 U Baird, Steward of Argive
 5 C Benalish Honor Guard
-6 C Benalish Marshal
+6 R Benalish Marshal
 7 C Blessed Light
 8 U Board the Weatherlight
 
@@ -21,10 +22,8 @@ Charge
 12 U Danitha Capashen, Paragon
 13 R Daring Archaeologist
 14 U Dauntless Bodyguard
-
-Dub
-
-Evra, Halcyon Witness
+15 Dub
+16 R Evra, Halcyon Witness
 
 18 R Fall of the Thran
 
@@ -34,12 +33,11 @@ Healing Grace
 22 Invoke the Divine
 23 U Knight of Grace
 
-Kwende, Pride of Femeref
-
+25 U Kwende, Pride of Femeref
 26 M Lyra Dawnbringer
 27 C Mesa Unicorn
-
-On Serra's Wings
+28 C Pegasus Courser
+29 U On Serra's Wings
 
 31 U Seal Away
 
@@ -59,12 +57,15 @@ Befuddle
 
 Blink of an Eye
 
+47 C Cloudreader Sphinx
+
 Curator's Ward
 
 Deep Freeze
 
+52 C Divination
 53 C Homarid Explorer
-54 In Bolas's Clutches
+54 U In Bolas's Clutches
 55 R Karn's Temporal Sundering
 56 U Merfolk Trickster
 57 R The Mirari Conjecture
@@ -74,17 +75,16 @@ Deep Freeze
 61 R Precognition Field
 
 64 U Sage of Lat-Nam
-
-Sentinel of the Pearl Trident
-
+65 Sentinel of the Pearl Trident
 66 U Slinn Voda, the Rising Deep
 67 C Syncopate
-68 Tempest Djinn
+68 R Tempest Djinn
 69 U Tetsuko Umezawa, Fugitive
 70 U Time of Ice
 71 C Tolarian Scholar
 72 C Unwind
 
+74 U Weight of Memory
 75 U Wizard's Retort
 76 R Zahid, Djinn of the Lamp
 
@@ -100,12 +100,12 @@ Demonic Vigor
 
 86 M Demonlord Belzenlok
 87 C Divest
-
+88 R Dread Shade
 89 C Drudge Sentinel
 90 U The Eldest Reborn
 
-Fungal Infection
-
+93 U Final Parting
+94 Fungal Infection
 95 R Josu Vess, Lich Knight
 96 Kazarov, Sengir Pureblood
 97 U Knight of Malice
@@ -114,17 +114,16 @@ Fungal Infection
 100 M Phyrexian Scriptures
 101 Rat Colony
 102 R Rite of Belzenlok
-Settle the Score
+103 U Settle the Score
 
 Thallid Soothsayer
 
-Torgaar, Famine Incarnate
-
+108 R Torgaar, Famine Incarnate
 109 U Urgoros, the Empty One
 110 C Vicious Offering
+111 U Whisper, Blood Liturgist
 
-Whisper, Blood Liturgist
-
+113 U Yargle, Glutton of Urborg
 114 R Yawgmoth's Vile Offering
 
 Bloodstone Goblin
@@ -149,36 +148,33 @@ Fight with Fire
 
 Keldon Warcaller
 
+137 U Orcish Vandal
+
 Radiating Lightning
 
 Rampaging Cyclops
 
 143 R Siege-Gang Commander
-
-Skizzik
-
+144 C Skirk Prospector
+145 U Skizzik
 146 R Squee, the Immortal
 147 R Two-Headed Giant
 148 U Valduk, Keeper of the Flame
 149 M Verix Bladewing
-150 Warcry Phoenix
+150 U Warcry Phoenix
 151 Warlord's Fury
 152 U Wizard's Lightning
 153 C Adventurous Impulse
 
 Ancient Animus
 
-Baloth Gorger
-
-Broken Bond
-
-C Colossal Dreadmaw
-
-Corrosive Ooze
-
-Gaea's Blessing
-
-Gaea's Protector
+156 C Baloth Gorger
+157 Broken Bond
+158 Corrosive Ooze
+159 U Elfhame Druid
+160 U Fungus Field?
+161 U Gaea's Blessing
+162 C Gaea's Protector
 
 Gift of Growth
 
@@ -187,31 +183,32 @@ Gift of Growth
 
 168 C Llanowar Elves
 169 C Llanowar Envoy
-Llanowar Scout
+170 C Llanowar Scout
 
 172 R Marwyn, the Nurturer
+173 R The Mending of Dominaria
 
-Multani, Yavimaya's Avatar
+174 M Multani, Yavimaya's Avatar
 
 178 C Saproling Migration
 179 U Song of Freyalise
 
-Sporecrown Thallid
-
+181 U Sporecrown Thallid
 182 R Steel Leaf Champion
-183 Sylvan Awakening
+183 R Sylvan Awakening
 184 R Territorial Allosaurus
 185 U Thorn Elemental
+186 U Untamed Kavu
 
 Verdant Force
 
 190 U Adeliz, the Cinder Wind
 191 U Arvad the Cursed
-192 Aryel, Knight of Windgrace
+192 R Aryel, Knight of Windgrace
 193 M Darigaaz Reincarnated
-194 Garna, the Bloodflame
+194 U Garna, the Bloodflame
 195 R Grand Warlord Radha
-196 Hallar, the Firefletcher
+196 U Hallar, the Firefletcher
 197 M Jhoira, Weatherlight Captain
 198 R Jodah, Archmage Eternal
 199 M Muldrotha, the Gravetide
@@ -225,36 +222,36 @@ Verdant Force
 207 M Teferi, Hero of Dominaria
 208 U Tiana, Ship's Caretaker
 
-Blackblade Reforged
-
+211 R Blackblade Reforged
+212 C Bloodtallow Candle
 213 U Damping Sphere
 214 R Forebear's Blade
 215 R Gilded Lotus
 216 C Guardians of Koilos
 217 R Helm of the Host
-218 Howling Golem
+218 U Howling Golem
 219 U Icy Manipulator
-
-Jhoira's Familiar
+220 U Jhoira's Familiar
 
 222 U Juggernaut
-223 Mishra's Self-Replicator
+223 R Mishra's Self-Replicator
 224 M Mox Amber
-
-Navigator's Compass
+225 C Navigator's Compass
 
 227 C Powerstone Shard
 
 Shield of the Realm
 
-Sorceror's Wand
+230 C Skittering Surveyor
+
+Sorcerer's Wand
 
 Sparring Construct
 
-Urza's Tome
+233 R Thran Temporal Gateway
 
-Voltaic Servant
-
+235 U Urza's Tome
+236 Voltaic Servant
 237 M Weatherlight
 238 R Cabal Stronghold
 239 R Clifftop Retreat
