@@ -1,0 +1,6 @@
+Name:Mammoth Spider
+ManaCost:4 G
+Types:Creature Spider
+PT:3/5
+K:Reach
+Oracle:Reach (This creature can block creatures with flying.)
