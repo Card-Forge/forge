@@ -91,6 +91,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
 
     public void setupMaxPlayerHandSize(Game game, int maxHandSize) {
         for(Player p : game.getPlayers()) {
+            p.setStartingHandSize(maxHandSize);
             p.setMaxHandSize(maxHandSize);
         }
     }
