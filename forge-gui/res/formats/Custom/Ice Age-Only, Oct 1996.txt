@@ -1,0 +1,8 @@
+[format]
+Name:Ice Age-Only, Oct 1996
+Type:Historic
+Subtype:Custom
+Order:180
+Sets:ICE
+Restricted:Zuran Orb
+Banned:Amulet of Quoz

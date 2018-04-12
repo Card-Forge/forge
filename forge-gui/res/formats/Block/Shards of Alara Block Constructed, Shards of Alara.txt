@@ -1,0 +1,6 @@
+[format]
+Name:Shards of Alara Block Constructed, Shards of Alara
+Type:Historic
+Subtype:Block
+Order:445
+Sets:ALA

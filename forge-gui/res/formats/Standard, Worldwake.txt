@@ -1,6 +1,0 @@
-[format]
-Name:Standard, Worldwake
-Type:Historic
-Subtype:Rotating
-Order:463
-Sets:ALA, CFX, ARB, M10, ZEN, WWK

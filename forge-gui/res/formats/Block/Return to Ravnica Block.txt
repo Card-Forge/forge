@@ -1,0 +1,6 @@
+[format]
+Name:Return to Ravnica Block
+Type:Historic
+Subtype:Block
+Order:118
+Sets:DGM, GTC, RTR

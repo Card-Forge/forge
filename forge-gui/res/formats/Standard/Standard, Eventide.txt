@@ -1,0 +1,6 @@
+[format]
+Name:Standard, Eventide
+Type:Historic
+Subtype:Standard
+Order:433
+Sets:10E, CSP, TSP, TSB, PLC, FUT, LRW, MOR, SHM, EVE

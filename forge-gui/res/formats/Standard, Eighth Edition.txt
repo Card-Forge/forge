@@ -1,6 +1,0 @@
-[format]
-Name:Standard, Eighth Edition
-Type:Historic
-Subtype:Rotating
-Order:316
-Sets:8ED, ODY, TOR, JUD, ONS, LGN, SCG

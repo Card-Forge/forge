@@ -1,0 +1,6 @@
+[format]
+Name:Tempest-Stronghold-Exodus Block, Exodus
+Type:Historic
+Subtype:Block
+Order:215
+Sets:TMP, STH, EXO

@@ -1,6 +1,0 @@
-[format]
-Name:Shards of Alara Block
-Type:Historic
-Subtype:Block
-Order:121
-Sets:ARB, CFX, ALA

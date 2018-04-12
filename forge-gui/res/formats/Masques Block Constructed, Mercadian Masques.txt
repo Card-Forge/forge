@@ -1,6 +1,0 @@
-[format]
-Name:Masques Block Constructed, Mercadian Masques
-Type:Historic
-Subtype:Block
-Order:245
-Sets:MMQ

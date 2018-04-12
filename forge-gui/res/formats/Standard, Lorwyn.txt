@@ -1,6 +1,0 @@
-[format]
-Name:Standard, Lorwyn
-Type:Historic
-Subtype:Rotating
-Order:412
-Sets:10E, CSP, TSP, TSB, PLC, FUT, LRW

@@ -1,0 +1,6 @@
+[format]
+Name:Standard, Judgment
+Type:Historic
+Subtype:Standard
+Order:297
+Sets:INV, PLS, 7ED, APC, ODY, TOR, JUD

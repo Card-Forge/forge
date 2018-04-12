@@ -1,0 +1,8 @@
+[format]
+Name:Type II, Feb 1996
+Type:Historic
+Subtype:Vintage
+Order:170
+Sets:FEM, 4ED, ICE, CHR, HML
+Restricted:Balance; Black Vise; Feldon's Cane; Ivory Tower; Zuran Orb
+Banned:Amulet of Quoz; Bronze Tablet; Channel; Mind Twist; Rebirth; Tempest Efreet

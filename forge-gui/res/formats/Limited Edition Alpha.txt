@@ -1,6 +1,0 @@
-[format]
-Name:Limited Edition Alpha
-Type:Historic
-Subtype:Custom
-Order:136
-Sets:LEA

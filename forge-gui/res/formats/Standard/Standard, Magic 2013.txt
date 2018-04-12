@@ -1,0 +1,6 @@
+[format]
+Name:Standard, Magic 2013
+Type:Historic
+Subtype:Standard
+Order:529
+Sets:SOM, MBS, NPH, ISD, DKA, AVR, M13

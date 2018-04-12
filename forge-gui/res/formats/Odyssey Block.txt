@@ -1,6 +1,0 @@
-[format]
-Name:Odyssey Block
-Type:Historic
-Subtype:Block
-Order:128
-Sets:JUD, TOR, ODY

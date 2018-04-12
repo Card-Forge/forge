@@ -1,6 +1,0 @@
-[format]
-Name:Standard, Zendikar
-Type:Historic
-Subtype:Rotating
-Order:458
-Sets:ALA, CFX, ARB, M10, ZEN

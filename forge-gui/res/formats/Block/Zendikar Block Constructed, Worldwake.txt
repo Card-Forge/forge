@@ -1,0 +1,6 @@
+[format]
+Name:Zendikar Block Constructed, Worldwake
+Type:Historic
+Subtype:Block
+Order:467
+Sets:ZEN, WWK

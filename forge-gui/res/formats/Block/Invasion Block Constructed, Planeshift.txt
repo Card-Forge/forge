@@ -1,0 +1,6 @@
+[format]
+Name:Invasion Block Constructed, Planeshift
+Type:Historic
+Subtype:Block
+Order:273
+Sets:INV, PLS

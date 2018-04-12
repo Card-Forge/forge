@@ -1,0 +1,6 @@
+[format]
+Name:Standard, RavnicaCity of Guilds
+Type:Historic
+Subtype:Standard
+Order:373
+Sets:9ED, CHK, BOK, SOK, RAV

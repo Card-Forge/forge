@@ -1,6 +1,0 @@
-[format]
-Name:Standard, Apocalypse
-Type:Historic
-Subtype:Rotating
-Order:276
-Sets:7ED, MMQ, NMS, PCY, INV, PLS

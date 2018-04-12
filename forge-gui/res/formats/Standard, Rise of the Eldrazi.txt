@@ -1,6 +1,0 @@
-[format]
-Name:Standard, Rise of the Eldrazi
-Type:Historic
-Subtype:Rotating
-Order:468
-Sets:ALA, CFX, ARB, M10, ZEN, WWK, ROE

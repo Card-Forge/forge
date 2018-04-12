@@ -1,7 +1,0 @@
-[format]
-Name:Standard, Urza's Legacy
-Type:Historic
-Subtype:Eternal
-Order:220
-Sets:5ED, TMP, STH, EXO, USG, ULG
-Banned:Tolarian Academy; Windfall

@@ -1,7 +1,0 @@
-[format]
-Name:Standard, Exodus
-Type:Historic
-Subtype:Rotating
-Order:207
-Sets:5ED, MIR, VIS, WTH, TMP, STH, EXO
-Banned:Timmerian Fiends

@@ -1,6 +1,0 @@
-[format]
-Name:Standard, Magic 2010
-Type:Historic
-Subtype:Rotating
-Order:452
-Sets:LRW, MOR, SHM, EVE, ALA, CFX, ARB, M10

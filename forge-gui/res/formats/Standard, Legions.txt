@@ -1,6 +1,0 @@
-[format]
-Name:Standard, Legions
-Type:Historic
-Subtype:Rotating
-Order:302
-Sets:7ED, ODY, TOR, JUD, ONS, LGN

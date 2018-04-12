@@ -1,6 +1,0 @@
-[format]
-Name:Standard, Morningtide
-Type:Historic
-Subtype:Rotating
-Order:417
-Sets:10E, CSP, TSP, TSB, PLC, FUT, LRW, MOR

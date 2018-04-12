@@ -1,6 +1,0 @@
-[format]
-Name:Ixalan Block
-Type:Historic
-Subtype:Block
-Order:110
-Sets:XLN, RIX

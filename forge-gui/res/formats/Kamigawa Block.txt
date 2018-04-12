@@ -1,6 +1,0 @@
-[format]
-Name:Kamigawa Block
-Type:Historic
-Subtype:Block
-Order:125
-Sets:SOK, BOK, CHK

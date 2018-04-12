@@ -1,7 +1,0 @@
-[format]
-Name:Masques Block
-Type:Historic
-Subtype:Block
-Order:130
-Sets:PCY, NMS, MMA
-Banned:Lin Sivvi; Defiant Hero; Rishadan Port

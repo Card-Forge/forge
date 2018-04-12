@@ -1,0 +1,6 @@
+[format]
+Name:Standard, Coldsnap
+Type:Historic
+Subtype:Standard
+Order:389
+Sets:9ED, CHK, BOK, SOK, RAV, GPT, DIS, CSP

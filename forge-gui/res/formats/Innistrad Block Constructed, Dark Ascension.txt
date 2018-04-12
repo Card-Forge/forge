@@ -1,6 +1,0 @@
-[format]
-Name:Innistrad Block Constructed, Dark Ascension
-Type:Historic
-Subtype:Block
-Order:510
-Sets:ISD, DKA

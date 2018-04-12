@@ -1,6 +1,0 @@
-[format]
-Name:Tempest Block, Tempest
-Type:Historic
-Subtype:Block
-Order:198
-Sets:TMP

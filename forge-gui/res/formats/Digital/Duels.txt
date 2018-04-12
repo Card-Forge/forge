@@ -2,5 +2,5 @@
 Name:Duels
 Type:Digital
 Subtype:Videogame
-Order:190
+Order:140
 Sets:ORI, BFZ, OGW, SOI, EMN, KLD, AER, AKH

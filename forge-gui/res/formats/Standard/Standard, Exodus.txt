@@ -1,0 +1,6 @@
+[format]
+Name:Standard, Exodus
+Type:Historic
+Subtype:Standard
+Order:212
+Sets:MIR, VIS, 5ED, WTH, TMP, STH, EXO

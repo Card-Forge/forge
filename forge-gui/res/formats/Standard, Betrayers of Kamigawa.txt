@@ -1,7 +1,0 @@
-[format]
-Name:Standard, Betrayers of Kamigawa
-Type:Historic
-Subtype:Rotating
-Order:350
-Sets:8ED, MRD, DST, 5DN, CHK, BOK
-Banned:Skullclamp

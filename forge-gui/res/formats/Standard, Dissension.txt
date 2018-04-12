@@ -1,6 +1,0 @@
-[format]
-Name:Standard, Dissension
-Type:Historic
-Subtype:Rotating
-Order:379
-Sets:9ED, CHK, BOK, SOK, RAV, GPT, DIS

@@ -1,6 +1,0 @@
-[format]
-Name:Standard, Mirrodin
-Type:Historic
-Subtype:Rotating
-Order:321
-Sets:8ED, ONS, LGN, SCG, MRD

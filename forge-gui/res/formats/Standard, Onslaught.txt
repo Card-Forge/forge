@@ -1,6 +1,0 @@
-[format]
-Name:Standard, Onslaught
-Type:Historic
-Subtype:Rotating
-Order:297
-Sets:7ED, ODY, TOR, JUD, ONS

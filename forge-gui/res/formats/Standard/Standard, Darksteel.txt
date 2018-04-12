@@ -1,0 +1,6 @@
+[format]
+Name:Standard, Darksteel
+Type:Historic
+Subtype:Standard
+Order:334
+Sets:8ED, ONS, LGN, SCG, MRD, DST

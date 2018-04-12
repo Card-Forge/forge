@@ -1,6 +1,0 @@
-[format]
-Name:Limited Edition Beta
-Type:Historic
-Subtype:Custom
-Order:137
-Sets:LEA, LEB

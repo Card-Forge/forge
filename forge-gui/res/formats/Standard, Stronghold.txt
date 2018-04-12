@@ -1,7 +1,0 @@
-[format]
-Name:Standard, Stronghold
-Type:Historic
-Subtype:Rotating
-Order:202
-Sets:5ED, MIR, VIS, WTH, TMP, STH
-Banned:Timmerian Fiends

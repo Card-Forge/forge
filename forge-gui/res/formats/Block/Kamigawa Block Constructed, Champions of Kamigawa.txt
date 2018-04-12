@@ -1,0 +1,6 @@
+[format]
+Name:Kamigawa Block Constructed, Champions of Kamigawa
+Type:Historic
+Subtype:Block
+Order:350
+Sets:CHK

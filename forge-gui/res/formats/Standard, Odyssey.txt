@@ -1,6 +1,0 @@
-[format]
-Name:Standard, Odyssey
-Type:Historic
-Subtype:Rotating
-Order:280
-Sets:7ED, INV, PLS, APC, ODY

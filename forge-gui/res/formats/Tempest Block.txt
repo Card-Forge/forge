@@ -1,7 +1,0 @@
-[format]
-Name:Tempest Block
-Type:Historic
-Subtype:Block
-Order:132
-Sets:EXO, STH, TMP
-Banned:Cursed Scroll

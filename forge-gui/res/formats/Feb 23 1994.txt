@@ -1,8 +1,0 @@
-[format]
-Name:Feb 23 1994
-Type:Historic
-Subtype:Custom
-Order:141
-Sets:LEA, LEB, 2ED, ARN
-Restricted:Ali from Cairo; Ancestral Recall; Berserk; Black Lotus; Braingeyser; Dingus Egg; Gauntlet of Might; Icy Manipulator; Mox Pearl; Mox Emerald; Mox Ruby; Mox Sapphire; Mox Jet; Sol Ring; Timetwister; Time Vault; Time Walk
-Banned:Contract from Below; Darkpact; Demonic Attorney; Jeweled Bird; Shahrazad

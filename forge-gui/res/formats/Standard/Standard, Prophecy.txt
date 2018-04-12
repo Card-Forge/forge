@@ -1,0 +1,7 @@
+[format]
+Name:Standard, Prophecy
+Type:Historic
+Subtype:Standard
+Order:259
+Sets:USG, ULG, 6ED, UDS, MMQ, NMS, PCY
+Banned:Fluctuator; Memory Jar; Time Spiral; Tolarian Academy; Windfall

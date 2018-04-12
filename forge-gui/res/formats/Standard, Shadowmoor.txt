@@ -1,6 +1,0 @@
-[format]
-Name:Standard, Shadowmoor
-Type:Historic
-Subtype:Rotating
-Order:422
-Sets:10E, CSP, TSP, TSB, PLC, FUT, LRW, MOR, SHM

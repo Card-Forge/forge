@@ -1,0 +1,6 @@
+[format]
+Name:Unlimited Edition
+Type:Historic
+Subtype:Custom
+Order:143
+Sets:LEA, LEB, 2ED

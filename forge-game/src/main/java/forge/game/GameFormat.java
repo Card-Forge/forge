@@ -46,7 +46,7 @@ import java.util.Map.Entry;
 public class GameFormat implements Comparable<GameFormat> {
     private final String name;
     public enum FormatType {Sanctioned, Casual, Historic, Digital, Custom}
-    public enum FormatSubType {Rotating, Eternal, Commander, Planechase, Block, Videogame, MTGO, Custom}
+    public enum FormatSubType {Block, Standard, Extended, Modern, Legacy, Vintage, Commander, Planechase, Videogame, MTGO, Custom}
 
     // contains allowed sets, when empty allows all sets
     private FormatType formatType;

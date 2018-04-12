@@ -1,7 +1,0 @@
-[format]
-Name:Standard, Urza's Saga
-Type:Historic
-Subtype:Rotating
-Order:212
-Sets:5ED, TMP, STH, EXO, USG
-Banned:Timmerian Fiends

@@ -1,6 +1,0 @@
-[format]
-Name:Standard, Eventide
-Type:Historic
-Subtype:Rotating
-Order:428
-Sets:10E, CSP, TSP, TSB, PLC, FUT, LRW, MOR, SHM, EVE

@@ -1,0 +1,7 @@
+[format]
+Name:Type 2, Chronicles
+Type:Historic
+Subtype:Standard
+Order:162
+Sets:FEM, 4ED, ICE
+Restricted:Balance; Channel; Ivory Tower; Mind Twist

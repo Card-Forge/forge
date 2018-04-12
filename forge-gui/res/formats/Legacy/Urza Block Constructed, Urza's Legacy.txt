@@ -1,0 +1,6 @@
+[format]
+Name:Urza Block Constructed, Urza's Legacy
+Type:Historic
+Subtype:Legacy
+Order:227
+Sets:USG, ULG

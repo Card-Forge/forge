@@ -1,0 +1,7 @@
+[format]
+Name:Standard, Fifth Edition
+Type:Historic
+Subtype:Standard
+Order:192
+Sets:ALL, MIR, VIS, 5ED
+Banned:Rebirth

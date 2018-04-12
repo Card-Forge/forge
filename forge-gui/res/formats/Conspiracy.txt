@@ -1,6 +1,0 @@
-[format]
-Name:Conspiracy
-Type:Historic
-Subtype:Custom
-Order:186
-Sets:CNS, CN2

@@ -1,0 +1,6 @@
+[format]
+Name:Standard, Urza's Saga
+Type:Historic
+Subtype:Standard
+Order:217
+Sets:5ED, TMP, STH, EXO, USG

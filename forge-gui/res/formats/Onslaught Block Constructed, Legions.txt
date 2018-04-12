@@ -1,6 +1,0 @@
-[format]
-Name:Onslaught Block Constructed, Legions
-Type:Historic
-Subtype:Block
-Order:303
-Sets:ONS, LGN

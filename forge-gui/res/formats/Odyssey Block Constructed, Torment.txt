@@ -1,6 +1,0 @@
-[format]
-Name:Odyssey Block Constructed, Torment
-Type:Historic
-Subtype:Block
-Order:288
-Sets:ODY, TOR

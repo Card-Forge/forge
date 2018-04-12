@@ -1,6 +1,0 @@
-[format]
-Name:Scars of Mirrodin Block Constructed, Scars of Mirrodin
-Type:Historic
-Subtype:Block
-Order:478
-Sets:SOM

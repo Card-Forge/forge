@@ -1,0 +1,6 @@
+[format]
+Name:Standard, Innistrad
+Type:Historic
+Subtype:Standard
+Order:506
+Sets:SOM, MBS, NPH, M12, ISD

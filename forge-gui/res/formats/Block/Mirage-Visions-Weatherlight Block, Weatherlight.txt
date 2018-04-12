@@ -1,0 +1,7 @@
+[format]
+Name:Mirage-Visions-Weatherlight Block, Weatherlight
+Type:Historic
+Subtype:Block
+Order:198
+Sets:MIR, VIS, WTH
+Banned:Squandered Resources

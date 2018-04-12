@@ -1,0 +1,6 @@
+[format]
+Name:Standard, Odyssey
+Type:Historic
+Subtype:Standard
+Order:285
+Sets:INV, PLS, 7ED, APC, ODY

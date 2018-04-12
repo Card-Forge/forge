@@ -1,6 +1,0 @@
-[format]
-Name:Standard, Shards of Alara
-Type:Historic
-Subtype:Rotating
-Order:436
-Sets:10E, LRW, MOR, SHM, EVE, ALA

@@ -1,0 +1,7 @@
+[format]
+Name:Type 2, Fourth Edition
+Type:Historic
+Subtype:Standard
+Order:158
+Sets:DRK, FEM, 4ED
+Restricted:Balance; Channel; Ivory Tower; Mind Twist

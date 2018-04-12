@@ -1,6 +1,0 @@
-[format]
-Name:Kaladesh Block
-Type:Historic
-Subtype:Block
-Order:112
-Sets:AER, KLD

@@ -1,6 +1,0 @@
-[format]
-Name:Standard, Innistrad
-Type:Historic
-Subtype:Rotating
-Order:501
-Sets:SOM, MBS, NPH, M12, ISD

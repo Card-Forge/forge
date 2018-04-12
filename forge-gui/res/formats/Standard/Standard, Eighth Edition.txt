@@ -1,0 +1,6 @@
+[format]
+Name:Standard, Eighth Edition
+Type:Historic
+Subtype:Standard
+Order:321
+Sets:8ED, ODY, TOR, JUD, ONS, LGN, SCG

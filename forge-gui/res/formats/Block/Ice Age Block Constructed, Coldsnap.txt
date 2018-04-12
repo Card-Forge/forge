@@ -1,0 +1,7 @@
+[format]
+Name:Ice Age Block Constructed, Coldsnap
+Type:Historic
+Subtype:Block
+Order:390
+Sets:ICE, ALL, CSP
+Banned:Amulet of Quoz; Thawing Glaciers; Zuran Orb

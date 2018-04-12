@@ -1,0 +1,7 @@
+[format]
+Name:Standard, Champions of Kamigawa
+Type:Historic
+Subtype:Standard
+Order:349
+Sets:8ED, MRD, DST, 5DN, CHK
+Banned:Skullclamp
