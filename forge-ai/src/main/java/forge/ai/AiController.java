@@ -1180,6 +1180,13 @@ public class AiController {
     }
 
     private boolean isSafeToHoldLandDropForMain2(Card landToPlay) {
+        boolean hasMomir = !CardLists.filter(player.getCardsIn(ZoneType.Command),
+                CardPredicates.nameEquals("Momir Vig, Simic Visionary Avatar")).isEmpty();
+        if (hasMomir) {
+            // Don't do this in Momir variants since it messes with the AI decision making for the avatar.
+            return false;
+        }
+
         if (!MyRandom.percentTrue(getIntProperty(AiProps.HOLD_LAND_DROP_FOR_MAIN2_IF_UNUSED))) {
             // check against the chance specified in the profile
             return false;
