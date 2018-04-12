@@ -1,8 +1,8 @@
 Name:Al-abara's Carpet
 ManaCost:5
 Types:Artifact
-A:AB$ Effect | Cost$ 5 T | Name$ Al-abara's Carpet Effect | StaticAbilities$ STPrevent | SpellDescription$ Prevent all damage that would be dealt to you this turn by attacking creatures without flying.
-SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Target$ You | Source$ Creature.attacking+withoutFlying | Description$ Prevent all damage that would be dealt to you this turn by attacking creatures without flying.
+A:AB$ Effect | Cost$ 5 T | Name$ Al-abara's Carpet Effect | ReplacementEffects$ RPrevent | SpellDescription$ Prevent all damage that would be dealt to you this turn by attacking creatures without flying.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ Player | ValidSource$ Creature.attacking+withoutFlying | Description$ Prevent all damage that would be dealt to you this turn by attacking creatures without flying.
 SVar:RemAIDeck:True
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/al_abaras_carpet.jpg

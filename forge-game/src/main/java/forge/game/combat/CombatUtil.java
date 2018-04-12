@@ -775,8 +775,6 @@ public class CombatUtil {
         final CardCollection attackersWithLure = new CardCollection();
         for (final Card attacker : attackers) {
             if (attacker.hasStartOfKeyword("All creatures able to block CARDNAME do so.")
-                    || (attacker.hasStartOfKeyword("All Walls able to block CARDNAME do so.") && blocker.getType().hasSubtype("Wall"))
-                    || (attacker.hasStartOfKeyword("All creatures with flying able to block CARDNAME do so.") && blocker.hasKeyword("Flying"))
                     || (attacker.hasStartOfKeyword("CARDNAME must be blocked if able.")
                             && combat.getBlockers(attacker).isEmpty())) {
                 attackersWithLure.add(attacker);
@@ -788,6 +786,14 @@ public class CombatUtil {
                         final String valid = keyword.substring("MustBeBlockedBy ".length());
                         if (blocker.isValid(valid, null, null, null) &&
                                 CardLists.getValidCardCount(combat.getBlockers(attacker), valid, null, null) == 0) {
+                            attackersWithLure.add(attacker);
+                            break;
+                        }
+                    }
+                    // MustBeBlockedByAll:<valid>
+                    if (keyword.startsWith("MustBeBlockedByAll")) {
+                        final String valid = keyword.split(":")[1];
+                        if (blocker.isValid(valid, null, null, null)) {
                             attackersWithLure.add(attacker);
                             break;
                         }
@@ -905,13 +911,19 @@ public class CombatUtil {
                     break;
                 }
             }
+            // MustBeBlockedByAll:<valid>
+            if (keyword.startsWith("MustBeBlockedByAll")) {
+                final String valid = keyword.split(":")[1];
+                if (blocker.isValid(valid, null, null, null)) {
+                    mustBeBlockedBy = true;
+                    break;
+                }
+            }
         }
 
         // if the attacker has no lure effect, but the blocker can block another
         // attacker with lure, the blocker can't block the former
         if (!attacker.hasKeyword("All creatures able to block CARDNAME do so.")
-                && !(attacker.hasStartOfKeyword("All Walls able to block CARDNAME do so.") && blocker.getType().hasSubtype("Wall"))
-                && !(attacker.hasStartOfKeyword("All creatures with flying able to block CARDNAME do so.") && blocker.hasKeyword("Flying"))
                 && !(attacker.hasKeyword("CARDNAME must be blocked if able.") && combat.getBlockers(attacker).isEmpty())
                 && !(blocker.getMustBlockCards() != null && blocker.getMustBlockCards().contains(attacker))
                 && !mustBeBlockedBy

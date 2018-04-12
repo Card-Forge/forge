@@ -6,8 +6,8 @@ SVar:BuildPressure:DB$ PutCounter | Defined$ Self | CounterType$ PRESSURE | Coun
 T:Mode$ PlaneswalkedFrom | ValidCard$ Plane.Self | Execute$ Eruption | TriggerDescription$ When you planeswalk away from CARDNAME, it deals damage equal to the number of pressure counters on it to each creature and each planeswalker.
 SVar:Eruption:DB$ DamageAll | ValidCards$ Creature,Planeswalker | ValidDescription$ each creature and each planeswalker. | NumDmg$ KeraliaX | References$ KeraliaX
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, prevent all damage that planes named CARDNAME would deal this game to permanents you control.
-SVar:RolledChaos:DB$ Effect | Name$ Mount Keralia Effect | StaticAbilities$ KeraliaProtection | EffectOwner$ You | Duration$ Permanent | SpellDescription$ Prevent all damage that planes named CARDNAME would deal this game to permanents you control.
-SVar:KeraliaProtection:Mode$ PreventDamage | EffectZone$ Command | Target$ Permanent.YouCtrl | Source$ Plane.namedMount Keralia | Description$ Prevent all damage that planes named Mount Keralia would deal this game to permanents you control.
+SVar:RolledChaos:DB$ Effect | Name$ Mount Keralia Effect | ReplacementEffects$ RPrevent | EffectOwner$ You | Duration$ Permanent | SpellDescription$ Prevent all damage that planes named CARDNAME would deal this game to permanents you control.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ Permanent.YouCtrl | ValidSource$ Plane.namedMount Keralia | Description$ Prevent all damage that planes named Mount Keralia would deal this game to permanents you control.
 SVar:KeraliaX:TriggeredCard$CardCounters.PRESSURE
 SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mount_keralia.jpg

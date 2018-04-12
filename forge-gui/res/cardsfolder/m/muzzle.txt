@@ -3,6 +3,6 @@ ManaCost:1 W
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ PreventDamage | Source$ Creature.EnchantedBy | Description$ Prevent all damage that would be dealt by enchanted creature.
+R:Event$ DamageDone | Prevent$ True | ValidSource$ Creature.EnchantedBy | Description$ Prevent all damage that would be dealt by enchanted creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/muzzle.jpg
 Oracle:Enchant creature\nPrevent all damage that would be dealt by enchanted creature.

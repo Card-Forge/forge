@@ -2,6 +2,6 @@ Name:Enchanted Being
 ManaCost:1 W W
 Types:Creature Human
 PT:2/2
-S:Mode$ PreventDamage | Source$ Creature.enchanted | Target$ Card.Self | CombatDamage$ True | Description$ Prevent all combat damage that would be dealt to CARDNAME by enchanted creatures.
+R:Event$ DamageDone | Prevent$ True | ValidTarget$ Card.Self | ValidSource$ Creature.enchanted | IsCombat$ True | Description$ Prevent all combat damage that would be dealt to CARDNAME by enchanted creatures.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enchanted_being.jpg
 Oracle:Prevent all combat damage that would be dealt to Enchanted Being by enchanted creatures.

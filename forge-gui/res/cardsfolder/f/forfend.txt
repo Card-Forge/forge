@@ -1,8 +1,8 @@
 Name:Forfend
 ManaCost:1 W
 Types:Instant
-A:SP$ Effect | Cost$ 1 W | Name$ Forfend Effect | StaticAbilities$ STPrevent | SpellDescription$ Prevent all damage that would be dealt to creatures this turn.
-SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Target$ Creature | Description$ Prevent all damage that would be dealt to creatures this turn.
+A:SP$ Effect | Cost$ 1 W | Name$ Forfend Effect | ReplacementEffects$ RPrevent | SpellDescription$ Prevent all damage that would be dealt to creatures this turn.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ Creature | Description$ Prevent all damage that would be dealt to creatures this turn.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forfend.jpg
 Oracle:Prevent all damage that would be dealt to creatures this turn.
