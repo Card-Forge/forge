@@ -337,6 +337,10 @@ public class AbilityManaPart implements java.io.Serializable {
                 }
             }
 
+            if (sa.isValid(restriction, this.getSourceCard().getController(), this.getSourceCard(), null)) {
+                return true;
+            }
+
             if (sa.isAbility()) {
                 if (restriction.startsWith("Activated")) {
                     restriction = TextUtil.fastReplace(restriction, "Activated", "Card");
