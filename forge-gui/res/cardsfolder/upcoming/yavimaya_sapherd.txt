@@ -1,4 +1,4 @@
-Name:Yavimaya Shepherd
+Name:Yavimaya Sapherd
 ManaCost:2 G
 Types:Creature Fungus
 PT:2/2
@@ -6,4 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenImage$ g 1 1 saproling DOM | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 DeckHas:Ability$ Token
 DeckHints:Type$ Saproling|Fungus
-Oracle:When Yavimaya Shepherd enters the battlefield, create a 1/1 green Saproling creature token.
+Oracle:When Yavimaya Sapherd enters the battlefield, create a 1/1 green Saproling creature token.
