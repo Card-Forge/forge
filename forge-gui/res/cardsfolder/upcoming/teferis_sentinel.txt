@@ -1,4 +1,4 @@
-﻿Name:Teferi's Sentinel
+Name:Teferi's Sentinel
 ManaCost:5
 Types:Artifact Creature Golem
 PT:2/6
