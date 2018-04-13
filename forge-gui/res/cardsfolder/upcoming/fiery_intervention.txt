@@ -1,4 +1,4 @@
-﻿Name:Fiery Intervention
+Name:Fiery Intervention
 ManaCost:4 R
 Types:Sorcery
 A:SP$ Charm | Cost$ 4 R | Choices$ DBDmg,DBDestroy
