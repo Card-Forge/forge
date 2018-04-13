@@ -84,10 +84,9 @@ public abstract class DamageAiBase extends SpellAbilityAi {
 
         // burn Planeswalkers
         // TODO: Must be removed completely when the "planeswalker redirection" rule is removed.
-        if (!noPlaneswalkerRedirection) {
-            if (Iterables.any(enemy.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANESWALKERS)) {
-                return true;
-            }
+        if (!noPlaneswalkerRedirection
+                && Iterables.any(enemy.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANESWALKERS)) {
+            return true;
         }
 
         if (avoidTargetP(comp, sa)) {

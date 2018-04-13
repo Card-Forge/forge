@@ -361,10 +361,8 @@ public class DamageDealAi extends DamageAiBase {
             return ComputerUtilCard.getBestPlaneswalkerAI(killables);
         }
 
-        if (!hPlay.isEmpty()) {
-            if (pl.isOpponentOf(ai) && activator.equals(ai)) {
-                return ComputerUtilCard.getBestPlaneswalkerAI(hPlay);
-            }
+        if (!hPlay.isEmpty() && pl.isOpponentOf(ai) && activator.equals(ai)) {
+            return ComputerUtilCard.getBestPlaneswalkerAI(hPlay);
         }
 
         return null;
