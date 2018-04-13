@@ -5,7 +5,8 @@ Name=Dominaria
 Type=Expansion
 MciCode=dom
 BoosterCovers=5
-Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand DOM
+Booster=10 Common:!fromSheet("DOM Planeswalker Decks and Additional Promo"), 3 Uncommon:!fromSheet("DOM Planeswalker Decks and Additional Promo"), 1 RareMythic:!fromSheet("DOM Planeswalker Decks and Additional Promo"), 1 BasicLand DOM
+
 
 [cards]
 1 M Karn, Scion of Urza

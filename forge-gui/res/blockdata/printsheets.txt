@@ -1238,3 +1238,16 @@ Cinder Barrens
 1 Swamp|RIX
 1 Mountain|RIX
 1 Forest|RIX
+
+[DOM Planeswalker Decks and Additional Promo]
+Teferi, Timebender
+Temporal Machinations
+Niambi, Faithful Healer
+Teferi's Sentinel
+Meandering River
+Chandra, Bold Pyromancer
+Chandra's Outburst
+Karplusan Hound
+Pyromantic Pilgrim
+Timber Gorge
+Firesong and Sunspeaker
