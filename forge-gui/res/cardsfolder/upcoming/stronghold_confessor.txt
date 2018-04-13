@@ -1,0 +1,9 @@
+Name:Stronghold Confessor
+ManaCost:B
+Types:Creature Human Cleric
+PT:1/1
+K:Menace
+K:Kicker:3
+K:etbCounter:P1P1:2:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters the battlefield with two +1/+1 counters on it.
+SVar:WasKicked:Count$Kicked.1.0
+Oracle:Kicker {3} (You may pay an additional {3} as you cast this spell.)\nMenace\nIf Stronghold Confessor was kicked, it enters the battlefield with two +1/+1 counters on it.
