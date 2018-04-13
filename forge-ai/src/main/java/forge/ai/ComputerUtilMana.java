@@ -1090,7 +1090,7 @@ public class ComputerUtilMana {
         ZoneType castFromBackup = null;
         if (test && sa.isSpell()) {
             castFromBackup = card.getCastFrom();
-            sa.getHostCard().setCastFrom(card.getZone().getZoneType());
+            sa.getHostCard().setCastFrom(card.getZone() != null ? card.getZone().getZoneType() : null);
         }
 
         Cost payCosts = CostAdjustment.adjust(sa.getPayCosts(), sa);
