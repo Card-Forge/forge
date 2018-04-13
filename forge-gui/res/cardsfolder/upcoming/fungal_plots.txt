@@ -1,4 +1,4 @@
-Name:Fungus Field
+Name:Fungal Plots
 ManaCost:1 G
 Types:Enchantment
 A:AB$ Token | Cost$ 2 ExileFromGrave<1/Creature> | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 saproling DOM | SpellDescription$ Create a 1/1 green Saproling creature token.
