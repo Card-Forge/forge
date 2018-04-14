@@ -300,7 +300,11 @@ public class GameFormat implements Comparable<GameFormat> {
             Boolean restrictedLegendary = false;
             List<String> additionalCards = null; // default: nothing additional
             List<CardRarity> rarities = null;
-            FileSection section = FileSection.parse(contents.get("format"), ":");
+            List<String> formatStrings = contents.get("format");
+            if (formatStrings == null){
+                return null;
+            }
+            FileSection section = FileSection.parse(formatStrings, ":");
             String title = section.get("name");
             FormatType formatType;
             try {
@@ -315,10 +319,11 @@ public class GameFormat implements Comparable<GameFormat> {
                 formatsubType = FormatSubType.Custom;
             }
             Integer idx = section.getInt("order");
-            Date date = parseDate(section.get("effectivedate"));
-            if (date == null){
-                date = parseDate(DEFAULTDATE);
+            String dateStr = section.get("effectivedate");
+            if (dateStr == null){
+                dateStr = DEFAULTDATE;
             }
+            Date date = parseDate(dateStr);
             String strSets = section.get("sets");
             if ( null != strSets ) {
                 sets = Arrays.asList(strSets.split(", "));

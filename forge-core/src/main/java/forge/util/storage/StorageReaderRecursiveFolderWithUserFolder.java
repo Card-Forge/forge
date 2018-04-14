@@ -98,7 +98,7 @@ public abstract class StorageReaderRecursiveFolderWithUserFolder<T> extends Stor
                 final T newDeck = this.read(file);
                 if (null == newDeck) {
                     final String msg = "An object stored in " + file.getPath() + " failed to load.\nPlease submit this as a bug with the mentioned file/directory attached.";
-                    throw new RuntimeException(msg);
+                    continue;//skip format completely - perhaps non format file
                 }
 
                 String newKey = keySelector.apply(newDeck);
