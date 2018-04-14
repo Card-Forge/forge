@@ -1,5 +1,5 @@
 [format]
-Name:Type I, November 1, 1995
+Name:Type I, Homelands
 Type:Historic
 Subtype:Vintage
 Effective:1995-11-01

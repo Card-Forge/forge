@@ -1,5 +1,5 @@
 [format]
-Name:Type II, November 1, 1995
+Name:Type II, Homelands
 Type:Historic
 Subtype:Standard
 Effective:1995-11-01
