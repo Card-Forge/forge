@@ -34,7 +34,6 @@ import forge.item.PaperCard;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.storage.StorageBase;
-import forge.util.storage.StorageReaderFolder;
 import forge.util.storage.StorageReaderRecursiveFolderWithUserFolder;
 
 import java.io.File;
@@ -60,7 +59,7 @@ public class GameFormat implements Comparable<GameFormat> {
     protected final List<String> restrictedCardNames;
     protected final List<String> additionalCardNames; // for cards that are legal but not reprinted in any of the allowed Sets
     protected boolean restrictedLegendary = false;
-    private Date date;
+    private Date effectiveDate;
     private final static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     protected final transient List<String> allowedSetCodes_ro;
@@ -74,18 +73,20 @@ public class GameFormat implements Comparable<GameFormat> {
     private final int index;
 
     public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards) {
-        this(fName, sets, bannedCards, null, false, null, null, 0, FormatType.Custom, FormatSubType.Custom);
+        this(fName, parseDate("1990-01-01"), sets, bannedCards, null, false, null, null, 0, FormatType.Custom, FormatSubType.Custom);
     }
     
-    public static final GameFormat NoFormat = new GameFormat("(none)", null, null, null, false, null, null, Integer.MAX_VALUE, FormatType.Custom, FormatSubType.Custom);
+    public static final GameFormat NoFormat = new GameFormat("(none)", parseDate("1990-01-01") , null, null, null, false
+            , null, null, Integer.MAX_VALUE, FormatType.Custom, FormatSubType.Custom);
     
-    public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards,
+    public GameFormat(final String fName, final Date effectiveDate, final Iterable<String> sets, final List<String> bannedCards,
                       final List<String> restrictedCards, Boolean restrictedLegendary, final List<String> additionalCards,
                       final List<CardRarity> rarities, int compareIdx, FormatType formatType, FormatSubType formatSubType) {
         this.index = compareIdx;
         this.formatType = formatType;
         this.formatSubType = formatSubType;
         this.name = fName;
+        this.effectiveDate = effectiveDate;
 
         if(sets != null) {
             Set<String> parsedSets = new HashSet<>();
@@ -158,7 +159,7 @@ public class GameFormat implements Comparable<GameFormat> {
         }
     }
 
-    public Date getDate()  { return date;  }
+    public Date getEffectiveDate()  { return effectiveDate;  }
 
     public FormatType getFormatType() {
         return this.formatType;
@@ -269,6 +270,9 @@ public class GameFormat implements Comparable<GameFormat> {
                 return formatSubType.compareTo(other.formatSubType);
             }
         }
+        if (formatType.equals(FormatType.Historic)){
+            return effectiveDate.compareTo(other.effectiveDate);
+        }
         return name.compareTo(other.name);
         //return index - other.index;
     }
@@ -308,7 +312,7 @@ public class GameFormat implements Comparable<GameFormat> {
                 formatsubType = FormatSubType.Custom;
             }
             Integer idx = section.getInt("order");
-            Date date = parseDate(section.get("date"));
+            Date date = parseDate(section.get("effectivedate"));
             String strSets = section.get("sets");
             if ( null != strSets ) {
                 sets = Arrays.asList(strSets.split(", "));
@@ -345,7 +349,7 @@ public class GameFormat implements Comparable<GameFormat> {
                 }
             }
 
-            GameFormat result = new GameFormat(title, sets, bannedCards, restrictedCards, restrictedLegendary, additionalCards, rarities, idx, formatType,formatsubType);
+            GameFormat result = new GameFormat(title, date, sets, bannedCards, restrictedCards, restrictedLegendary, additionalCards, rarities, idx, formatType,formatsubType);
             naturallyOrdered.add(result);
             return result;
         }
