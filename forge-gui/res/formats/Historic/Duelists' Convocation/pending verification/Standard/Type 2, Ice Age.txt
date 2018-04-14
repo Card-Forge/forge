@@ -1,7 +1,0 @@
-[format]
-Name:Type 2, Ice Age
-Type:Historic
-Subtype:Standard
-Order:160
-Sets:FEM, 4ED, ICE
-Restricted:Balance; Channel; Ivory Tower; Mind Twist
