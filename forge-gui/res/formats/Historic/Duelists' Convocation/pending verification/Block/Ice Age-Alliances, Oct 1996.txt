@@ -1,8 +1,0 @@
-[format]
-Name:Ice Age-Alliances, Oct 1996
-Type:Historic
-Subtype:Custom
-Order:181
-Sets:ICE, ALL
-Restricted:Zuran Orb
-Banned:Amulet of Quoz
