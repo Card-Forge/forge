@@ -168,6 +168,10 @@ public class ForgeScript {
             if (!sa.isFlashBackAbility()) {
                 return false;
             }
+        } else if (property.equals("Kicked")) {
+            if (!sa.isKicked()) {
+                return false;
+            }
         } else if (property.equals("Aftermath")) {
             if (!sa.isAftermath()) {
                 return false;
