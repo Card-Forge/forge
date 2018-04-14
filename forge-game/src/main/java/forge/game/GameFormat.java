@@ -39,6 +39,8 @@ import forge.util.storage.StorageReaderRecursiveFolderWithUserFolder;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -58,7 +60,9 @@ public class GameFormat implements Comparable<GameFormat> {
     protected final List<String> restrictedCardNames;
     protected final List<String> additionalCardNames; // for cards that are legal but not reprinted in any of the allowed Sets
     protected boolean restrictedLegendary = false;
-    
+    private Date date;
+    private final static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
     protected final transient List<String> allowedSetCodes_ro;
     protected final transient List<String> bannedCardNames_ro;
     protected final transient List<String> restrictedCardNames_ro;
@@ -143,6 +147,18 @@ public class GameFormat implements Comparable<GameFormat> {
     public String getName() {
         return this.name;
     }
+
+    private static Date parseDate(String date) {
+        if( date.length() <= 7 )
+            date = date + "-01";
+        try {
+            return formatter.parse(date);
+        } catch (ParseException e) {
+            return new Date();
+        }
+    }
+
+    public Date getDate()  { return date;  }
 
     public FormatType getFormatType() {
         return this.formatType;
@@ -292,6 +308,7 @@ public class GameFormat implements Comparable<GameFormat> {
                 formatsubType = FormatSubType.Custom;
             }
             Integer idx = section.getInt("order");
+            Date date = parseDate(section.get("date"));
             String strSets = section.get("sets");
             if ( null != strSets ) {
                 sets = Arrays.asList(strSets.split(", "));
