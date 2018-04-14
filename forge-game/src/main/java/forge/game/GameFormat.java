@@ -217,7 +217,8 @@ public class GameFormat implements Comparable<GameFormat> {
         if(!restrictedCardNames_ro.isEmpty() || restrictedLegendary ) {
             for (Entry<PaperCard, Integer> poolEntry : allCards) {
                 if( poolEntry.getValue().intValue() > 1 && (restrictedCardNames_ro.contains(poolEntry.getKey().getName())
-                    || poolEntry.getKey().getRules().getType().isLegendary() && restrictedLegendary))
+                    || (poolEntry.getKey().getRules().getType().isLegendary()
+                        && !poolEntry.getKey().getRules().getType().isPlaneswalker() && restrictedLegendary)))
                     return false;
             }
         }
