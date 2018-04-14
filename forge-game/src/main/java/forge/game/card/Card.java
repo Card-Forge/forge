@@ -111,8 +111,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private GameEntity mustAttackEntity = null;
     private GameEntity mustAttackEntityThisTurn = null;
 
-    private final Map<StaticAbility, CardPlayOption> mayPlay = Maps.newTreeMap();
-    private int mayPlayTurn = 0;
+    private final Map<StaticAbility, CardPlayOption> mayPlay = Maps.newHashMap();
 
     // changes by AF animate and continuous static effects - timestamp is the key of maps
     private final Map<Long, CardChangedType> changedCardTypes = Maps.newTreeMap();
@@ -2459,16 +2458,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.mayPlay.remove(sta);
     }
 
-    public int getMayPlayTurn() {
-        return mayPlayTurn;
-    }
-
-    public void incMayPlayTurn() {
-        this.mayPlayTurn++;
-    }
-
     public void resetMayPlayTurn() {
-        this.mayPlayTurn = 0;
+        for (StaticAbility sta : getStaticAbilities()) {
+            sta.resetMayPlayTurn();
+        }
     }
 
     public final CardCollectionView getEquippedBy(boolean allowModify) {
