@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Teferi, Timebender
-Description=Planeswalker Deck
+Description=Teferi, Timebender - WU Dominaria Planeswalker Deck
 Deck Type=constructed
 Set=DOM
 Image=teferi_timebender.jpg
@@ -32,7 +32,7 @@ Image=teferi_timebender.jpg
 1 Serra Angel|DOM
 2 Sparring Construct|DOM
 1 Teferi, Timebender+|DOM
-3 Teferi’s Sentinel|DOM
+3 Teferi's Sentinel|DOM
 4 Temporal Machinations|DOM
 1 Tetsuko Umezawa, Fugitive|DOM
 1 Zahid, Djinn of the Lamp|DOM
