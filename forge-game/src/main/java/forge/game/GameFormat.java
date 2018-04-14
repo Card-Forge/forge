@@ -61,6 +61,7 @@ public class GameFormat implements Comparable<GameFormat> {
     protected boolean restrictedLegendary = false;
     private Date effectiveDate;
     private final static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    private final static String DEFAULTDATE = "1990-01-01";
 
     protected final transient List<String> allowedSetCodes_ro;
     protected final transient List<String> bannedCardNames_ro;
@@ -73,10 +74,10 @@ public class GameFormat implements Comparable<GameFormat> {
     private final int index;
 
     public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards) {
-        this(fName, parseDate("1990-01-01"), sets, bannedCards, null, false, null, null, 0, FormatType.Custom, FormatSubType.Custom);
+        this(fName, parseDate(DEFAULTDATE), sets, bannedCards, null, false, null, null, 0, FormatType.Custom, FormatSubType.Custom);
     }
     
-    public static final GameFormat NoFormat = new GameFormat("(none)", parseDate("1990-01-01") , null, null, null, false
+    public static final GameFormat NoFormat = new GameFormat("(none)", parseDate(DEFAULTDATE) , null, null, null, false
             , null, null, Integer.MAX_VALUE, FormatType.Custom, FormatSubType.Custom);
     
     public GameFormat(final String fName, final Date effectiveDate, final Iterable<String> sets, final List<String> bannedCards,
@@ -271,7 +272,9 @@ public class GameFormat implements Comparable<GameFormat> {
             }
         }
         if (formatType.equals(FormatType.Historic)){
-            return effectiveDate.compareTo(other.effectiveDate);
+            if(effectiveDate!=other.effectiveDate) {//for matching dates or default dates default to name sorting
+                return effectiveDate.compareTo(other.effectiveDate);
+            }
         }
         return name.compareTo(other.name);
         //return index - other.index;
@@ -313,6 +316,9 @@ public class GameFormat implements Comparable<GameFormat> {
             }
             Integer idx = section.getInt("order");
             Date date = parseDate(section.get("effectivedate"));
+            if (date == null){
+                date = parseDate(DEFAULTDATE);
+            }
             String strSets = section.get("sets");
             if ( null != strSets ) {
                 sets = Arrays.asList(strSets.split(", "));
