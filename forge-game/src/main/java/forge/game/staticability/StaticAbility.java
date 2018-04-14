@@ -53,6 +53,7 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
     private final Set<StaticAbilityLayer> layers;
     private CardCollectionView ignoreEffectCards = new CardCollection();
     private final List<Player> ignoreEffectPlayers = Lists.newArrayList();
+    private int mayPlayTurn = 0;
 
     /**
      * <p>
@@ -722,6 +723,19 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
      */
     public Set<StaticAbilityLayer> getLayers() {
         return layers;
+    }
+
+
+    public int getMayPlayTurn() {
+        return mayPlayTurn;
+    }
+
+    public void incMayPlayTurn() {
+        this.mayPlayTurn++;
+    }
+
+    public void resetMayPlayTurn() {
+        this.mayPlayTurn = 0;
     }
 
     @Override

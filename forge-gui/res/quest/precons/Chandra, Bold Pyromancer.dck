@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Chandra, Bold Pyromancer
-Description=Planeswalker Deck
+Description=Chandra, Bold Pyromancer - RG Dominaria Planeswalker Deck
 Deck Type=constructed
 Set=DOM
 Image=chandra_bold_pyromancer.jpg
