@@ -109,7 +109,7 @@ Booster=10 Common:!fromSheet("DOM Planeswalker Decks and Additional Promo"), 3 U
 98 R Lich's Mastery
 99 U Lingering Phantom
 100 M Phyrexian Scriptures
-101 Rat Colony
+101 C Rat Colony
 102 R Rite of Belzenlok
 103 U Settle the Score
 104 C Soul Salvage
@@ -244,7 +244,7 @@ Booster=10 Common:!fromSheet("DOM Planeswalker Decks and Additional Promo"), 3 U
 233 R Thran Temporal Gateway
 234 R Traxos, Scourge of Kroog
 235 U Urza's Tome
-236 Voltaic Servant
+236 C Voltaic Servant
 237 M Weatherlight
 238 R Cabal Stronghold
 239 R Clifftop Retreat
