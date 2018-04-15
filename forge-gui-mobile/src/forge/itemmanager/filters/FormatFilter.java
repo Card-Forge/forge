@@ -22,11 +22,7 @@ import forge.util.Callback;
 import forge.util.TextUtil;
 import forge.util.Utils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
@@ -119,10 +115,21 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
     private class HistoricFormatSelect extends FScreen {
         private GameFormat selectedFormat;
         private final FGroupList<GameFormat> lstFormats = add(new FGroupList<GameFormat>());
+        private final Set<GameFormat.FormatSubType> historicSubTypes = new HashSet<>(Arrays.asList(GameFormat.FormatSubType.Block,
+                GameFormat.FormatSubType.Standard,GameFormat.FormatSubType.Extended,GameFormat.FormatSubType.Modern,
+                GameFormat.FormatSubType.Legacy, GameFormat.FormatSubType.Vintage));
         private HistoricFormatSelect() {
             super("Choose Format");
             for (GameFormat.FormatType group:GameFormat.FormatType.values()){
-                lstFormats.addGroup(group.name());
+                if (group == GameFormat.FormatType.Historic){
+                    for (GameFormat.FormatSubType subgroup:GameFormat.FormatSubType.values()){
+                        if (historicSubTypes.contains(subgroup)){
+                            lstFormats.addGroup(group.name() + "-" + subgroup.name());
+                        }
+                    }
+                }else {
+                    lstFormats.addGroup(group.name());
+                }
             }
             for (GameFormat format: FModel.getFormats().getOrderedList()){
                 switch(format.getFormatType()){
@@ -133,13 +140,33 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
                         lstFormats.addItem(format, 1);
                         break;
                     case Historic:
-                        lstFormats.addItem(format, 2);
+                        switch (format.getFormatSubType()){
+                            case Block:
+                                lstFormats.addItem(format, 2);
+                                break;
+                            case Standard:
+                                lstFormats.addItem(format, 3);
+                                break;
+                            case Extended:
+                                lstFormats.addItem(format, 4);
+                                break;
+                            case Modern:
+                                lstFormats.addItem(format, 5);
+                                break;
+                            case Legacy:
+                                lstFormats.addItem(format, 6);
+                                break;
+                            case Vintage:
+                                lstFormats.addItem(format, 7);
+                                break;
+
+                        }
                         break;
                     case Digital:
-                        lstFormats.addItem(format, 3);
+                        lstFormats.addItem(format, 8);
                         break;
                     case Custom:
-                        lstFormats.addItem(format, 4);
+                        lstFormats.addItem(format, 9);
                 }
             }
             lstFormats.setListItemRenderer(new FormatRenderer());
