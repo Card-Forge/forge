@@ -421,7 +421,7 @@ public class AiAttackController {
             CardCollectionView oppBattlefield = c.getController().getCardsIn(ZoneType.Battlefield);
 
             if (c.getName().equals("Heart of Kiran")) {
-                if (!CardLists.filter(oppBattlefield, CardPredicates.Presets.PLANEWALKERS).isEmpty()) {
+                if (!CardLists.filter(oppBattlefield, CardPredicates.Presets.PLANESWALKERS).isEmpty()) {
                     // can be activated by removing a loyalty counter instead of tapping a creature
                     continue;
                 }

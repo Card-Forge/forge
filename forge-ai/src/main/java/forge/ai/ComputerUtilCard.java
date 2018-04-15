@@ -96,12 +96,26 @@ public class ComputerUtilCard {
      * @return best Planeswalker
      */
     public static Card getBestPlaneswalkerAI(final List<Card> list) {
-        List<Card> all = CardLists.filter(list, CardPredicates.Presets.PLANEWALKERS);
-        if (all.size() == 0) {
+        List<Card> all = CardLists.filter(list, CardPredicates.Presets.PLANESWALKERS);
+        if (all.isEmpty()) {
             return null;
         }
         // no AI logic, just return most expensive
         return Aggregates.itemWithMax(all, CardPredicates.Accessors.fnGetCmc);
+    }
+
+    /**
+     * Returns the worst Planeswalker from a given list
+     * @param list list of cards to evaluate
+     * @return best Planeswalker
+     */
+    public static Card getWorstPlaneswalkerAI(final List<Card> list) {
+        List<Card> all = CardLists.filter(list, CardPredicates.Presets.PLANESWALKERS);
+        if (all.isEmpty()) {
+            return null;
+        }
+        // no AI logic, just return least expensive
+        return Aggregates.itemWithMin(all, CardPredicates.Accessors.fnGetCmc);
     }
 
     // The AI doesn't really pick the best enchantment, just the most expensive.

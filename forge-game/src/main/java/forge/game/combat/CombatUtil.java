@@ -62,7 +62,7 @@ public class CombatUtil {
         final FCollection<GameEntity> defenders = new FCollection<GameEntity>();
         for (final Player defender : playerWhoAttacks.getOpponents()) {
             defenders.add(defender);
-            final CardCollection planeswalkers = CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
+            final CardCollection planeswalkers = CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANESWALKERS);
             defenders.addAll(planeswalkers);
         }
         return defenders;
