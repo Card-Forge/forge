@@ -1077,7 +1077,7 @@ public class AiAttackController {
         boolean canBeKilled = false; // indicates if the attacker can be killed
         boolean canBeKilledByOne = false; // indicates if the attacker can be killed by a single blocker
         boolean canKillAll = true; // indicates if the attacker can kill all single blockers
-        boolean canKillAllDangerous = true; // indicates if the attacker can kill all single blockers with wither, infect or deathtouch
+        boolean canKillAllDangerous = true; // indicates if the attacker can kill all single blockers with wither or infect
         boolean isWorthLessThanAllKillers = true;
         boolean canBeBlocked = false;
         int numberOfPossibleBlockers = 0;
