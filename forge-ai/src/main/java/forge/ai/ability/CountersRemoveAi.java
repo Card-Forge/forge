@@ -121,7 +121,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
             list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
             list = CardLists.filter(list, CardPredicates.isTargetableBy(sa));
 
-            CardCollection planeswalkerList = CardLists.filter(list, CardPredicates.Presets.PLANEWALKERS,
+            CardCollection planeswalkerList = CardLists.filter(list, CardPredicates.Presets.PLANESWALKERS,
                     CardPredicates.hasCounter(CounterType.LOYALTY, 5));
 
             if (!planeswalkerList.isEmpty()) {
@@ -169,7 +169,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
             list = CardLists.filter(list, CardPredicates.isTargetableBy(sa));
 
             CardCollection planeswalkerList = CardLists.filter(list,
-                    Predicates.and(CardPredicates.Presets.PLANEWALKERS, CardPredicates.isControlledByAnyOf(ai.getOpponents())),
+                    Predicates.and(CardPredicates.Presets.PLANESWALKERS, CardPredicates.isControlledByAnyOf(ai.getOpponents())),
                     CardPredicates.hasLessCounter(CounterType.LOYALTY, amount));
 
             if (!planeswalkerList.isEmpty()) {
