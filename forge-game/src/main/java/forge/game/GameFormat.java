@@ -482,11 +482,11 @@ public class GameFormat implements Comparable<GameFormat> {
                     //exclude Digital formats from lists for now
                     continue;
                 }
+                if (gf.getFormatType().equals(FormatType.Historic) && coveredTypes.contains(gf.getFormatSubType())){
+                    //exclude duplicate formats - only keep first of e.g. Standard historical
+                    continue;
+                }
                 if (gf.isPoolLegal(allCards)) {
-                    if (gf.getFormatType().equals(FormatType.Historic) && coveredTypes.contains(gf.getFormatSubType())){
-                        //exclude duplicate formats - only keep first of e.g. Standard historical
-                        continue;
-                    }
                     result.add(gf);
                     coveredTypes.add(gf.getFormatSubType());
                 }
