@@ -238,7 +238,7 @@ public class AdvancedSearch {
             }
             @Override
             protected Set<GameFormat> getItemValues(DeckProxy input) {
-                return input.getFormats();
+                return input.getExhaustiveFormats();
             }
         }),
         DECK_QUEST_WORLD("Quest World", DeckProxy.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<DeckProxy, QuestWorld>(ImmutableList.copyOf(FModel.getWorlds())) {

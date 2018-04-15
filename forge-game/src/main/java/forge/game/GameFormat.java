@@ -474,15 +474,20 @@ public class GameFormat implements Comparable<GameFormat> {
         }
 
         public Set<GameFormat> getAllFormatsOfDeck(Deck deck) {
+            return getAllFormatsOfDeck(deck, false);
+        }
+
+        public Set<GameFormat> getAllFormatsOfDeck(Deck deck, Boolean exhaustive) {
             SortedSet<GameFormat> result = new TreeSet<GameFormat>();
             Set<FormatSubType> coveredTypes = new HashSet<>();
             CardPool allCards = deck.getAllCardsInASinglePool();
             for(GameFormat gf : naturallyOrdered) {
-                if (gf.getFormatType().equals(FormatType.Digital)){
+                if (gf.getFormatType().equals(FormatType.Digital) && !exhaustive){
                     //exclude Digital formats from lists for now
                     continue;
                 }
-                if (gf.getFormatType().equals(FormatType.Historic) && coveredTypes.contains(gf.getFormatSubType())){
+                if (gf.getFormatType().equals(FormatType.Historic) && coveredTypes.contains(gf.getFormatSubType())
+                        && !exhaustive){
                     //exclude duplicate formats - only keep first of e.g. Standard historical
                     continue;
                 }
