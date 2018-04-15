@@ -1110,6 +1110,8 @@ public class AiAttackController {
             return false;
         }
         boolean hasAttackEffect = attacker.getSVar("HasAttackEffect").equals("TRUE") || attacker.hasStartOfKeyword("Annihilator");
+        // do not attack into certain death purely to trigger the attack effect because it's weak/temporary/etc.
+        boolean dontChumpAttackForEffect = attacker.getSVar("DontChumpAttackForEffect").equals("TRUE");
         // is there a gain in attacking even when the blocker is not killed (Lifelink, Wither,...)
         boolean hasCombatEffect = attacker.getSVar("HasCombatEffect").equals("TRUE") 
         		|| "Blocked".equals(attacker.getSVar("HasAttackEffect"));
@@ -1161,7 +1163,7 @@ public class AiAttackController {
                         }
 
                         if (canKillAllDangerous
-                                && !hasAttackEffect && !hasCombatEffect
+                                && (!hasAttackEffect || dontChumpAttackForEffect) && !hasCombatEffect
                                 && (this.attackers.size() <= defenders.size() || attacker.getNetPower() <= 0)) {
                             if (ai.getController().isAI()) {
                                 if (((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.TRY_TO_AVOID_ATTACKING_INTO_CERTAIN_BLOCK)) {
