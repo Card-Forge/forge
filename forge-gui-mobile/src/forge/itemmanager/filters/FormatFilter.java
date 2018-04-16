@@ -62,7 +62,16 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
                     preventHandling = true;
                     cbxFormats.setText(selectedFormat); //restore previous selection by default
                     preventHandling = false;
-                    Forge.openScreen(new HistoricFormatSelect());
+                    HistoricFormatSelect historicFormatSelect = new HistoricFormatSelect();
+                    historicFormatSelect.setOnCloseCallBack(new Runnable(){
+                        @Override
+                        public void run() {
+                            format = historicFormatSelect.getSelectedFormat();
+                            cbxFormats.setText(format.getName());
+                            applyChange();
+                        }
+                    });
+                    Forge.openScreen(historicFormatSelect);
                 }
                 else if (index == cbxFormats.getItemCount() - 1) {
                     preventHandling = true;
@@ -110,113 +119,6 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
     @Override
     protected void doWidgetLayout(float width, float height) {
         cbxFormats.setSize(width, height);
-    }
-
-    private class HistoricFormatSelect extends FScreen {
-        private GameFormat selectedFormat;
-        private final FGroupList<GameFormat> lstFormats = add(new FGroupList<GameFormat>());
-        private final Set<GameFormat.FormatSubType> historicSubTypes = new HashSet<>(Arrays.asList(GameFormat.FormatSubType.Block,
-                GameFormat.FormatSubType.Standard,GameFormat.FormatSubType.Extended,GameFormat.FormatSubType.Modern,
-                GameFormat.FormatSubType.Legacy, GameFormat.FormatSubType.Vintage));
-        private HistoricFormatSelect() {
-            super("Choose Format");
-            for (GameFormat.FormatType group:GameFormat.FormatType.values()){
-                if (group == GameFormat.FormatType.Historic){
-                    for (GameFormat.FormatSubType subgroup:GameFormat.FormatSubType.values()){
-                        if (historicSubTypes.contains(subgroup)){
-                            lstFormats.addGroup(group.name() + "-" + subgroup.name());
-                        }
-                    }
-                }else {
-                    lstFormats.addGroup(group.name());
-                }
-            }
-            for (GameFormat format: FModel.getFormats().getOrderedList()){
-                switch(format.getFormatType()){
-                    case Sanctioned:
-                        lstFormats.addItem(format, 0);
-                        break;
-                    case Casual:
-                        lstFormats.addItem(format, 1);
-                        break;
-                    case Historic:
-                        switch (format.getFormatSubType()){
-                            case Block:
-                                lstFormats.addItem(format, 2);
-                                break;
-                            case Standard:
-                                lstFormats.addItem(format, 3);
-                                break;
-                            case Extended:
-                                lstFormats.addItem(format, 4);
-                                break;
-                            case Modern:
-                                lstFormats.addItem(format, 5);
-                                break;
-                            case Legacy:
-                                lstFormats.addItem(format, 6);
-                                break;
-                            case Vintage:
-                                lstFormats.addItem(format, 7);
-                                break;
-
-                        }
-                        break;
-                    case Digital:
-                        lstFormats.addItem(format, 8);
-                        break;
-                    case Custom:
-                        lstFormats.addItem(format, 9);
-                }
-            }
-            lstFormats.setListItemRenderer(new FormatRenderer());
-        }
-
-        @Override
-        public void onClose(Callback<Boolean> canCloseCallback) {
-            if (selectedFormat != null) {
-                format = selectedFormat;
-                cbxFormats.setText(selectedFormat.getName());
-                applyChange();
-            }
-            super.onClose(canCloseCallback);
-        }
-
-        @Override
-        protected void doLayout(float startY, float width, float height) {
-            lstFormats.setBounds(0, startY, width, height - startY);
-        }
-
-        private class FormatRenderer extends FList.ListItemRenderer<GameFormat>{
-            @Override
-            public float getItemHeight() {
-                return Utils.AVG_FINGER_HEIGHT;
-            }
-
-            @Override
-            public boolean tap(Integer index, GameFormat value, float x, float y, int count) {
-                selectedFormat=value;
-                Forge.back();
-                return true;
-            }
-
-            @Override
-            public void drawValue(Graphics g, Integer index, GameFormat value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
-                float offset = SettingsScreen.getInsets(w) - FList.PADDING; //increase padding for settings items
-                x += offset;
-                y += offset;
-                w -= 2 * offset;
-                h -= 2 * offset;
-
-                float textHeight = h;
-                h *= 0.66f;
-
-                g.drawText(value.toString(), font, foreColor, x, y, w - h - FList.PADDING, textHeight, false, HAlignment.LEFT, true);
-
-                x += w - h;
-                y += (textHeight - h) / 2;
-            }
-        }
     }
 
     private class MultiSetSelect extends FScreen {

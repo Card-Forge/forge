@@ -3,6 +3,7 @@ package forge.screens.quest;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.FThreads;
+import forge.Forge;
 import forge.UiCommand;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -13,6 +14,7 @@ import forge.deck.DeckSection;
 import forge.game.GameFormat;
 import forge.item.PaperCard;
 import forge.item.PreconDeck;
+import forge.itemmanager.filters.HistoricFormatSelect;
 import forge.model.CardCollections;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
@@ -129,7 +131,7 @@ public class NewQuestScreen extends FScreen {
     private final FLabel lblCustomDeck = scroller.add(new FLabel.Builder().text("Custom deck:").build());
     private final FComboBox<Deck> cbxCustomDeck = scroller.add(new FComboBox<Deck>());
 
-    private final FLabel btnDefineCustomFormat = scroller.add(new FLabel.ButtonBuilder().text("Define custom format").build());
+    private final FLabel btnSelectFormat = scroller.add(new FLabel.ButtonBuilder().text("Choose format").build());
 
     private final FLabel lblPoolDistribution = scroller.add(new FLabel.Builder().text("Starting pool distribution:").build());
     private final FRadioButton radBalanced = scroller.add(new FRadioButton("Balanced"));
@@ -160,7 +162,7 @@ public class NewQuestScreen extends FScreen {
 
     private final FLabel lblPrizeUnrestricted = scroller.add(new FLabel.Builder().align(HAlignment.RIGHT).font(FSkinFont.get(12)).text("All cards will be available to win.").build());
     private final FLabel lblPrizeSameAsStarting = scroller.add(new FLabel.Builder().align(HAlignment.RIGHT).font(FSkinFont.get(12)).text("Only sets found in starting pool will be available.").build());
-    private final FLabel btnPrizeDefineCustomFormat = scroller.add(new FLabel.ButtonBuilder().text("Define custom format").build());
+    private final FLabel btnPrizeSelectFormat = scroller.add(new FLabel.ButtonBuilder().text("Choose format").build());
 
     private final FCheckBox cbAllowUnlocks = scroller.add(new FCheckBox("Allow unlock of additional editions"));
     private final FCheckBox cbFantasy = scroller.add(new FCheckBox("Fantasy Mode"));
@@ -184,7 +186,7 @@ public class NewQuestScreen extends FScreen {
 
         cbxStartingPool.addItem(StartingPoolType.Complete);
         cbxStartingPool.addItem(StartingPoolType.Sanctioned);
-        cbxStartingPool.addItem(StartingPoolType.CustomFormat);
+        cbxStartingPool.addItem(StartingPoolType.Casual);
         cbxStartingPool.addItem(StartingPoolType.Precon);
         cbxStartingPool.addItem(StartingPoolType.DraftDeck);
         cbxStartingPool.addItem(StartingPoolType.SealedDeck);
@@ -200,7 +202,7 @@ public class NewQuestScreen extends FScreen {
         cbxPrizedCards.addItem("Same as starting pool");
         cbxPrizedCards.addItem(StartingPoolType.Complete);
         cbxPrizedCards.addItem(StartingPoolType.Sanctioned);
-        cbxPrizedCards.addItem(StartingPoolType.CustomFormat);
+        cbxPrizedCards.addItem(StartingPoolType.Casual);
         cbxPrizedCards.setChangedHandler(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
@@ -209,7 +211,7 @@ public class NewQuestScreen extends FScreen {
             }
         });
 
-        for (GameFormat gf : FModel.getFormats().getOrderedList()) {
+        for (GameFormat gf : FModel.getFormats().getSanctionedList()) {
             cbxFormat.addItem(gf);
             cbxPrizeFormat.addItem(gf);
         }
@@ -275,12 +277,6 @@ public class NewQuestScreen extends FScreen {
             preconDescriptions.put(name, description);
         }
 
-        //TODO: Support defining custom format
-        btnDefineCustomFormat.setEnabled(false);
-        btnDefineCustomFormat.setVisible(false);
-        btnPrizeDefineCustomFormat.setEnabled(false);
-        btnPrizeDefineCustomFormat.setVisible(false);
-
         // disable the very powerful sets -- they can be unlocked later for a high price
         final List<String> unselectableSets = new ArrayList<>();
         unselectableSets.add("LEA");
@@ -290,31 +286,43 @@ public class NewQuestScreen extends FScreen {
         unselectableSets.add("ARC");
         unselectableSets.add("PC2");
 
-        btnDefineCustomFormat.setCommand(new FEventHandler() {
+        btnSelectFormat.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                /*final DialogChooseSets dialog = new DialogChooseSets(customFormatCodes, unselectableSets, false);
-                dialog.setOkCallback(new Runnable() {
+                HistoricFormatSelect historicFormatSelect = new HistoricFormatSelect();
+                historicFormatSelect.setOnCloseCallBack(new Runnable() {
                     @Override
                     public void run() {
                         customFormatCodes.clear();
-                        customFormatCodes.addAll(dialog.getSelectedSets());
+                        List<String> setsToAdd = historicFormatSelect.getSelectedFormat().getAllowedSetCodes();
+                        for (String setName:setsToAdd){
+                            if(!unselectableSets.contains(setName)){
+                                customFormatCodes.add(setName);
+                            }
+                        }
                     }
-                });*/
+                });
+                Forge.openScreen(historicFormatSelect);
             }
         });
 
-        btnPrizeDefineCustomFormat.setCommand(new FEventHandler() {
+        btnPrizeSelectFormat.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                /*final DialogChooseSets dialog = new DialogChooseSets(customPrizeFormatCodes, unselectableSets, false);
-                dialog.setOkCallback(new Runnable() {
+                HistoricFormatSelect historicFormatSelect = new HistoricFormatSelect();
+                historicFormatSelect.setOnCloseCallBack(new Runnable() {
                     @Override
                     public void run() {
                         customPrizeFormatCodes.clear();
-                        customPrizeFormatCodes.addAll(dialog.getSelectedSets());
+                        List<String> setsToAdd = historicFormatSelect.getSelectedFormat().getAllowedSetCodes();
+                        for (String setName:setsToAdd){
+                            if(!unselectableSets.contains(setName)){
+                                customPrizeFormatCodes.add(setName);
+                            }
+                        }
                     }
-                });*/
+                });
+                Forge.openScreen(historicFormatSelect);
             }
         });
 
@@ -334,7 +342,7 @@ public class NewQuestScreen extends FScreen {
         lblFormat.setVisible(newVal == StartingPoolType.Sanctioned);
         cbxFormat.setVisible(newVal == StartingPoolType.Sanctioned);
 
-        btnDefineCustomFormat.setVisible(newVal == StartingPoolType.CustomFormat);
+        btnSelectFormat.setVisible(newVal == StartingPoolType.Casual);
 
         boolean usesDeckList = newVal == StartingPoolType.SealedDeck || newVal == StartingPoolType.DraftDeck || newVal == StartingPoolType.Cube;
         lblCustomDeck.setVisible(usesDeckList);
@@ -372,7 +380,7 @@ public class NewQuestScreen extends FScreen {
 
         lblPrizeFormat.setVisible(newVal == StartingPoolType.Sanctioned);
         cbxPrizeFormat.setVisible(newVal == StartingPoolType.Sanctioned);
-        btnPrizeDefineCustomFormat.setVisible(newVal == StartingPoolType.CustomFormat);
+        btnPrizeSelectFormat.setVisible(newVal == StartingPoolType.Casual);
         lblPrizeSameAsStarting.setVisible(newVal == null);
 
         scroller.revalidate();
@@ -480,7 +488,7 @@ public class NewQuestScreen extends FScreen {
 
     }
 
-    public GameFormat getRotatingFormat() {
+    public GameFormat getSanctionedFormat() {
         return cbxFormat.getSelectedItem();
     }
 
@@ -506,9 +514,10 @@ public class NewQuestScreen extends FScreen {
         if (worldFormat == null) {
             switch(getStartingPoolType()) {
             case Sanctioned:
-                fmtStartPool = getRotatingFormat();
+                fmtStartPool = getSanctionedFormat();
                 break;
 
+            case Casual:
             case CustomFormat:
                 if (customFormatCodes.isEmpty()) {
                     if (!SOptionPane.showConfirmDialog(
@@ -569,6 +578,7 @@ public class NewQuestScreen extends FScreen {
             case Complete:
                 fmtPrizes = null;
                 break;
+            case Casual:
             case CustomFormat:
                 if (customPrizeFormatCodes.isEmpty()) {
                     if (!SOptionPane.showConfirmDialog(
