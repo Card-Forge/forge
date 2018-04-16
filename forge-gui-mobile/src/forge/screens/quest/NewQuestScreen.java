@@ -294,6 +294,7 @@ public class NewQuestScreen extends FScreen {
                     @Override
                     public void run() {
                         customFormatCodes.clear();
+                        btnSelectFormat.setText(historicFormatSelect.getSelectedFormat().getName());
                         List<String> setsToAdd = historicFormatSelect.getSelectedFormat().getAllowedSetCodes();
                         for (String setName:setsToAdd){
                             if(!unselectableSets.contains(setName)){
@@ -314,6 +315,7 @@ public class NewQuestScreen extends FScreen {
                     @Override
                     public void run() {
                         customPrizeFormatCodes.clear();
+                        btnPrizeSelectFormat.setText(historicFormatSelect.getSelectedFormat().getName());
                         List<String> setsToAdd = historicFormatSelect.getSelectedFormat().getAllowedSetCodes();
                         for (String setName:setsToAdd){
                             if(!unselectableSets.contains(setName)){
