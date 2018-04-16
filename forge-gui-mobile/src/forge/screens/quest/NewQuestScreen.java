@@ -397,6 +397,8 @@ public class NewQuestScreen extends FScreen {
             cbxStartingPool.setEnabled(qw.getFormat() == null);
             cbxFormat.setEnabled(qw.getFormat() == null);
             cbxCustomDeck.setEnabled(qw.getFormat() == null);
+            btnSelectFormat.setEnabled(qw.getFormat() == null);
+
             // Do NOT disable the following...
             // cbxPrizeFormat.setEnabled(qw.getFormat() == null);
             // cboAllowUnlocks.setEnabled(qw.getFormat() == null);
