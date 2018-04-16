@@ -9,6 +9,7 @@ import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.cost.Cost;
+import forge.game.cost.CostRemoveCounter;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -357,16 +358,53 @@ public class DamageDealAi extends DamageAiBase {
         // Filter AI-specific targets if provided
         killables = ComputerUtil.filterAITgts(sa, ai, new CardCollection(killables), true);
 
+        // We can kill a planeswalker, so go for it
         if (pl.isOpponentOf(ai) && activator.equals(ai) && !killables.isEmpty()) {
             return ComputerUtilCard.getBestPlaneswalkerAI(killables);
         }
 
+        // We can hurt a planeswalker, so rank the one which is the best target
         if (!hPlay.isEmpty() && pl.isOpponentOf(ai) && activator.equals(ai)) {
-            return ComputerUtilCard.getBestPlaneswalkerAI(hPlay);
+            return getBestPlaneswalkerToDamage(hPlay);
         }
 
         return null;
     }
+
+    private Card getBestPlaneswalkerToDamage(final List<Card> pws) {
+        Card bestTgt = null;
+
+        // As of right now, ranks planeswalkers by their Current Loyalty * 10 + Big buff if close to "Ultimate"
+        int bestScore = 0;
+        for (Card pw : pws) {
+            int curLoyalty = pw.getCounters(CounterType.LOYALTY);
+            int pwScore = curLoyalty * 10;
+
+            for (SpellAbility sa : pw.getSpellAbilities()) {
+                if (sa.hasParam("Ultimate")) {
+                    int loyaltyCost = 0;
+                    CostRemoveCounter remLoyalty = sa.getPayCosts().getCostPart(CostRemoveCounter.class);
+                    if (remLoyalty != null) {
+                        // if remLoyalty is null, generally there's an AddCounter<0/LOYALTY> cost, like for Gideon Jura.
+                        loyaltyCost = remLoyalty.convertAmount();
+                    }
+
+                    if (loyaltyCost != 0 && loyaltyCost - curLoyalty <= 1) {
+                        // Will ultimate soon
+                        pwScore += 10000;
+                    }
+
+                    if (pwScore > bestScore) {
+                        bestScore = pwScore;
+                        bestTgt = pw;
+                    }
+                }
+            }
+        }
+
+        return bestTgt;
+    }
+
 
     private List<Card> getTargetableCards(Player ai, SpellAbility sa, Player pl, TargetRestrictions tgt, Player activator, Card source, Game game) {
         List<Card> hPlay = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), activator, source, sa);
