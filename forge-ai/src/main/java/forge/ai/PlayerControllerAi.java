@@ -448,8 +448,10 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public void playChosenSpellAbility(SpellAbility sa) {
         // System.out.println("Playing sa: " + sa);
-        if (sa == sa.getHostCard().getGame().PLAY_LAND_SURROGATE) {
-            player.playLand(sa.getHostCard(), false);
+        if (sa instanceof LandAbility) {
+            if (sa.canPlay()) {
+                sa.resolve();
+            }
         } else {
             ComputerUtil.handlePlayingSpellAbility(player, sa, game);
         }

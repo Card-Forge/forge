@@ -11,11 +11,10 @@ import forge.game.Game;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.*;
-import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.spellability.Ability;
 import forge.game.spellability.AbilitySub;
+import forge.game.spellability.LandAbility;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityCondition;
 import forge.game.zone.ZoneType;
@@ -115,18 +114,10 @@ public class SpellAbilityPicker {
         printPhaseInfo();
         SpellAbility sa = getPlannedSpellAbility(origGameScore, candidateSAs);
         if (sa != null) {
-            return transformSA(sa);
+            return sa;
         }
         createNewPlan(origGameScore, candidateSAs);
-        return transformSA(getPlannedSpellAbility(origGameScore, candidateSAs));
-    }
-
-    private SpellAbility transformSA(SpellAbility sa) {
-        if (sa instanceof PlayLandAbility) {
-            game.PLAY_LAND_SURROGATE.setHostCard(sa.getHostCard());
-            return game.PLAY_LAND_SURROGATE;
-        }
-        return sa;
+        return getPlannedSpellAbility(origGameScore, candidateSAs);
     }
 
     private Plan formulatePlanWithPhase(Score origGameScore, List<SpellAbility> candidateSAs, PhaseType phase) {
@@ -456,20 +447,11 @@ public class SpellAbilityPicker {
         return ComputerUtil.chooseSacrificeType(player, type, ability, ability.getTargetCard(), amount);
     }
 
-    public static class PlayLandAbility extends Ability {
+    public static class PlayLandAbility extends LandAbility {
         public PlayLandAbility(Card land) {
-            super(null, (Cost) null);
-            setHostCard(land);
+            super(land);
         }
-   
-        @Override
-        public boolean canPlay() {
-            return true; //if this ability is added anywhere, it can be assumed that land can be played
-        }
-        @Override
-        public void resolve() {
-            throw new RuntimeException("This ability is intended to indicate \"land to play\" choice only");
-        }
+
         @Override
         public String toUnsuppressedString() { return "Play land " + (getHostCard() != null ? getHostCard().getName() : ""); }
     }

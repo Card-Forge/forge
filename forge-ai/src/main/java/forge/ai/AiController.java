@@ -1167,9 +1167,13 @@ public class AiController {
                 if (ComputerUtil.getDamageFromETB(player, land) < player.getLife() || !player.canLoseLife() 
                         || player.cantLoseForZeroOrLessLife() ) {
                     if (!game.getPhaseHandler().is(PhaseType.MAIN1) || !isSafeToHoldLandDropForMain2(land)) {
-                        game.PLAY_LAND_SURROGATE.setHostCard(land);
+
+                        // TODO fix logic for mayPlay land
+                        LandAbility la = new LandAbility(land);
                         final List<SpellAbility> abilities = Lists.newArrayList();
-                        abilities.add(game.PLAY_LAND_SURROGATE);
+                        if (la.canPlay()) {
+                            abilities.add(la);
+                        }
                         return abilities;
                     }
                 }
