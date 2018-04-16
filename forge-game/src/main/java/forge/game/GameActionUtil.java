@@ -20,6 +20,9 @@ package forge.game;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+
+import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostParser;
 import forge.game.ability.AbilityFactory;
@@ -119,9 +122,32 @@ public final class GameActionUtil {
     public static final List<SpellAbility> getAlternativeCosts(final SpellAbility sa, final Player activator) {
         final List<SpellAbility> alternatives = Lists.newArrayList();
 
-        final Card source = sa.getHostCard();
+        Card source = sa.getHostCard();
+        final Game game = source.getGame();
 
         if (sa.isSpell()) {
+            boolean lkicheck = false;
+            if (sa.hasParam("Bestow") && !source.isBestowed() && !source.isInZone(ZoneType.Battlefield)) {
+                if (!source.isLKI()) {
+                    source = CardUtil.getLKICopy(source);
+                }
+
+                source.animateBestow(false);
+                lkicheck = true;
+            } else if (((Spell) sa).isCastFaceDown()) {
+                // need a copy of the card to turn facedown without trigger anything
+                if (!source.isLKI()) {
+                    source = CardUtil.getLKICopy(source);
+                }
+                source.setState(CardStateName.FaceDown, false);
+                lkicheck = true;
+            }
+
+            if (lkicheck) {
+                CardCollection preList = new CardCollection(source);
+                game.getAction().checkStaticAbilities(false, Sets.newHashSet(source), preList);
+            }
+
             for (CardPlayOption o : source.mayPlay(activator)) {
                 // non basic are only allowed if PayManaCost is yes
                 if (!sa.isBasicSpell() && o.getPayManaCost() == PayManaCost.NO) {
@@ -185,6 +211,11 @@ public final class GameActionUtil {
                 sb.append(o.toString(false));
                 newSA.setDescription(sb.toString());
                 alternatives.add(newSA);
+            }
+
+            // reset static abilities
+            if (lkicheck) {
+                game.getAction().checkStaticAbilities(false, Sets.newHashSet(), CardCollection.EMPTY);
             }
         }
 
