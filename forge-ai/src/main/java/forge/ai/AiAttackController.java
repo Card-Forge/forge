@@ -17,14 +17,9 @@
  */
 package forge.ai;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
-
 import forge.ai.ability.AnimateAi;
 import forge.card.CardTypeView;
 import forge.game.GameEntity;
@@ -44,6 +39,10 @@ import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 
 //doesHumanAttackAndWin() uses the global variable AllZone.getComputerPlayer()
@@ -1113,6 +1112,9 @@ public class AiAttackController {
         // is there a gain in attacking even when the blocker is not killed (Lifelink, Wither,...)
         boolean hasCombatEffect = attacker.getSVar("HasCombatEffect").equals("TRUE") 
         		|| "Blocked".equals(attacker.getSVar("HasAttackEffect"));
+        // total power of the defending creatures, used in predicting whether a gang block can kill the attacker
+        int defPower = CardLists.getTotalPower(defenders, true);
+
         if (!hasCombatEffect) {
             for (KeywordInterface inst : attacker.getKeywords()) {
                 String keyword = inst.getOriginal();
@@ -1161,20 +1163,17 @@ public class AiAttackController {
                         }
 
                         if (canKillAllDangerous
-                                && !hasAttackEffect && !hasCombatEffect
-                                && (this.attackers.size() <= defenders.size() || attacker.getNetPower() <= 0)) {
-                            if (ai.getController().isAI()) {
-                                if (((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.TRY_TO_AVOID_ATTACKING_INTO_CERTAIN_BLOCK)) {
-                                    // We can't kill a blocker, there is no reason to attack unless we can cripple a
-                                    // blocker or gain life from attacking or we have some kind of another attack/combat effect,
-                                    // or if we can deal damage to the opponent via the sheer number of potential attackers
-                                    // (note that the AI will sometimes still miscount here, and thus attack into a block,
-                                    // because there is no way to check which attackers are actually guaranteed to attack at this point)
-                                    canKillAllDangerous = false;
-                                }
-                            }
+                                && ((!hasCombatEffect && !hasAttackEffect) || defPower >= attacker.getNetToughness())
+                                && (this.attackers.size() <= defenders.size() || attacker.getNetPower() <= 0)
+                                && ai.getController().isAI()
+                                && (((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.TRY_TO_AVOID_ATTACKING_INTO_CERTAIN_BLOCK))) {
+                            // We can't kill a blocker, there is no reason to attack unless we can cripple a
+                            // blocker or gain life from attacking or we have some kind of another combat effect,
+                            // or if we can deal damage to the opponent via the sheer number of potential attackers
+                            // (note that the AI will sometimes still miscount here, and thus attack into a block,
+                            // because there is no way to check which attackers are actually guaranteed to attack at this point)
+                            canKillAllDangerous = false;
                         }
-
                     }
                 }
             }
