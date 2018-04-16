@@ -383,7 +383,7 @@ public class DamageDealAi extends DamageAiBase {
             for (SpellAbility sa : pw.getSpellAbilities()) {
                 if (sa.hasParam("Ultimate")) {
                     int loyaltyCost = 0;
-                    CostRemoveCounter remLoyalty = sa.getPayCosts().getCostPart(CostRemoveCounter.class);
+                    CostRemoveCounter remLoyalty = sa.getPayCosts().getCostPartByType(CostRemoveCounter.class);
                     if (remLoyalty != null) {
                         // if remLoyalty is null, generally there's an AddCounter<0/LOYALTY> cost, like for Gideon Jura.
                         loyaltyCost = remLoyalty.convertAmount();

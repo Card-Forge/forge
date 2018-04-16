@@ -94,7 +94,7 @@ public class Cost implements Serializable {
         return true;
     }
 
-    public <T extends CostPart> T getCostPart(Class<T> costType) {
+    public <T extends CostPart> T getCostPartByType(Class<T> costType) {
         for (CostPart p : getCostParts()) {
             if (costType.isInstance(p)) {
                 return (T)p;
