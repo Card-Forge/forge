@@ -223,7 +223,7 @@ public class CostAdjustment {
                         cardsToDelveOut.add(c);
                     } else if (!test) {
                         sa.getHostCard().addDelved(c);
-                        delved.add(game.getAction().exile(c, null, Maps.newHashMap()));
+                        delved.add(game.getAction().exile(c, null, null));
                     }
                 }
                 if (!delved.isEmpty()) {
