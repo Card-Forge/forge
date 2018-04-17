@@ -6,8 +6,12 @@ upcoming = os.path.join(cardsfolder, 'upcoming')
 
 for dirName, subdirList, fileList in os.walk(upcoming):
 	for filename in fileList:
-		if filename.startswith(".")
+		if filename.startswith("."):
 			continue
 		curLocation = os.path.join(upcoming, filename)
 		newFile = os.path.join(cardsfolder, filename[0], filename)
-		subprocess.call('git mv %s %s' % (curLocation, newFile), shell=True)
+
+		if os.path.exists(newFile):
+		    subprocess.call('git rm %s' % (newFile), shell=True)
+		else:
+	        subprocess.call('git mv %s %s' % (curLocation, newFile), shell=True)
