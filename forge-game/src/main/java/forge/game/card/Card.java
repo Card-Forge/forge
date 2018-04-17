@@ -5377,9 +5377,19 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         abilities.removeAll(toRemove);
 
-        if (getState(CardStateName.Original).getType().isLand() && player.canPlayLand(this)) {
-            game.PLAY_LAND_SURROGATE.setHostCard(this);
-            abilities.add(game.PLAY_LAND_SURROGATE);
+        if (getState(CardStateName.Original).getType().isLand()) {
+            LandAbility la = new LandAbility(this, player, null);
+            if (la.canPlay()) {
+                abilities.add(la);
+            }
+
+            // extra for MayPlay
+            for (CardPlayOption o : this.mayPlay(player)) {
+                la = new LandAbility(this, player, o.getAbility());
+                if (la.canPlay()) {
+                    abilities.add(la);
+                }
+            }
         }
 
         return abilities;

@@ -17,7 +17,6 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 import java.util.Collections;
-import java.util.Random;
 
 public class ChangeZoneAllAi extends SpellAbilityAi {
     @Override
@@ -45,9 +44,8 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             }
         }
 
-        final Random r = MyRandom.getRandom();
         // prevent run-away activations - first time will always return true
-        boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
+        boolean chance = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         // TODO targeting with ChangeZoneAll
         // really two types of targeting.
@@ -283,7 +281,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             }
         }
 
-        return (((r.nextFloat() < .8) || sa.isTrigger()) && chance);
+        return (((MyRandom.getRandom().nextFloat() < .8) || sa.isTrigger()) && chance);
     }
 
     /**

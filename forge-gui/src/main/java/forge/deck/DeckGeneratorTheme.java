@@ -27,7 +27,6 @@ import forge.util.MyRandom;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * <p>
@@ -120,7 +119,6 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
         final List<Grp> groups = readGroups(lines);
 
         // begin assigning cards to the deck
-        final Random r = MyRandom.getRandom();
 
         for (int i = 0; i < groups.size(); i++) {
             final Grp g = groups.get(i);
@@ -130,14 +128,14 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
             errorBuilder.append("Group" + i + ":" + grpCnt + "\n");
 
             for (int j = 0; j < grpCnt; j++) {
-                s = g.cardnames.get(r.nextInt(cnSize));
+                s = g.cardnames.get(MyRandom.getRandom().nextInt(cnSize));
                 ss = s.split("\\|");
                 
                 int lc = 0;
                 while ((cardCounts.get(ss[0]) >= g.maxCnt) || (lc > 999)) {
                     // looping
                     // forever
-                    s = g.cardnames.get(r.nextInt(cnSize));
+                    s = g.cardnames.get(MyRandom.getRandom().nextInt(cnSize));
                     ss = s.split("\\|");
                     lc++;
                 }

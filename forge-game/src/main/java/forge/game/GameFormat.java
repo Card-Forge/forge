@@ -106,9 +106,9 @@ public class GameFormat implements Comparable<GameFormat> {
 
         bannedCardNames = bannedCards == null ? new ArrayList<String>() : Lists.newArrayList(bannedCards);
         restrictedCardNames = restrictedCards == null ? new ArrayList<String>() : Lists.newArrayList(restrictedCards);
+        allowedRarities = rarities == null ? new ArrayList<CardRarity>() : rarities;
         this.restrictedLegendary = restrictedLegendary;
         additionalCardNames = additionalCards == null ? new ArrayList<String>() : Lists.newArrayList(additionalCards);
-        allowedRarities = rarities == null ? Lists.newArrayList() : rarities;
 
         this.allowedSetCodes_ro = Collections.unmodifiableList(allowedSetCodes);
         this.bannedCardNames_ro = Collections.unmodifiableList(bannedCardNames);
@@ -123,7 +123,7 @@ public class GameFormat implements Comparable<GameFormat> {
         if (!this.allowedSetCodes_ro.isEmpty()) {
             p = Predicates.and(p, printed ?
                     IPaperCard.Predicates.printedInSets(this.allowedSetCodes_ro, printed) :
-                    StaticData.instance().getCommonCards().wasPrintedInSets(this.allowedSetCodes_ro));
+                    (Predicate<PaperCard>)(StaticData.instance().getCommonCards().wasPrintedInSets(this.allowedSetCodes_ro)));
         }
         if (!this.allowedRarities.isEmpty()) {
             List<Predicate<? super PaperCard>> crp = Lists.newArrayList();

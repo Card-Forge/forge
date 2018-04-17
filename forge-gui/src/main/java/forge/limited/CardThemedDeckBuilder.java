@@ -514,7 +514,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             }
         };
         List<PaperCard> randomPool = Lists.newArrayList(pool.getAllCards(possibleFromFullPool));
-        Collections.shuffle(randomPool,new Random());
+        Collections.shuffle(randomPool, MyRandom.getRandom());
         Iterator<PaperCard> iRandomPool=randomPool.iterator();
         while (deckList.size() < targetSize) {
             if (logToConsole) {
@@ -685,9 +685,9 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         if(colors.isColorless()){
             minBasics=0;
         }else if(colors.isMonoColor()){
-            minBasics=Math.round((r.nextInt(15)+9)*((float) targetSize) / 60);
+            minBasics=Math.round((MyRandom.getRandom().nextInt(15)+9)*((float) targetSize) / 60);
         }else{
-            minBasics=Math.round((r.nextInt(8)+6)*((float) targetSize) / 60);
+            minBasics=Math.round((MyRandom.getRandom().nextInt(8)+6)*((float) targetSize) / 60);
         }
 
 
@@ -706,7 +706,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
                     }
                     continue;
                 }
-                if (!inverseDLands.contains(card.getName())&&!dLands.contains(card.getName())&&r.nextInt(100)<90) {
+                if (!inverseDLands.contains(card.getName())&&!dLands.contains(card.getName())&&MyRandom.getRandom().nextInt(100)<90) {
                     landsToAdd.add(card);
                     landsNeeded--;
                     if (logToConsole) {
@@ -741,7 +741,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             }
         };
         List<PaperCard> randomPool = Lists.newArrayList(pool.getAllCards(possibleFromFullPool));
-        Collections.shuffle(randomPool,new Random());
+        Collections.shuffle(randomPool, MyRandom.getRandom());
         Iterator<PaperCard> iRandomPool=randomPool.iterator();
         for(int i=0;i<num;++i){
             PaperCard randomCard=iRandomPool.next();
@@ -801,12 +801,12 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             rankedColorList.removeAll(keyCardList);
         }*/
         final Map<Integer,Integer> targetCMCs = new HashMap<>();
-        targetCMCs.put(1,Math.round((r.nextInt(4)+2)*targetSize/60));//2
-        targetCMCs.put(2,Math.round((r.nextInt(5)+5)*targetSize/60));//6
-        targetCMCs.put(3,Math.round((r.nextInt(5)+6)*targetSize/60));//7
-        targetCMCs.put(4,Math.round((r.nextInt(3)+3)*targetSize/60));//4
-        targetCMCs.put(5,Math.round((r.nextInt(3)+3)*targetSize/60));//3
-        targetCMCs.put(6,Math.round((r.nextInt(3)+1)*targetSize/60));//2
+        targetCMCs.put(1,Math.round((MyRandom.getRandom().nextInt(4)+2)*targetSize/60));//2
+        targetCMCs.put(2,Math.round((MyRandom.getRandom().nextInt(5)+5)*targetSize/60));//6
+        targetCMCs.put(3,Math.round((MyRandom.getRandom().nextInt(5)+6)*targetSize/60));//7
+        targetCMCs.put(4,Math.round((MyRandom.getRandom().nextInt(3)+3)*targetSize/60));//4
+        targetCMCs.put(5,Math.round((MyRandom.getRandom().nextInt(3)+3)*targetSize/60));//3
+        targetCMCs.put(6,Math.round((MyRandom.getRandom().nextInt(3)+1)*targetSize/60));//2
 
 
         final Map<Integer, Integer> creatureCosts = new HashMap<Integer, Integer>();

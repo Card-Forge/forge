@@ -83,7 +83,6 @@ public class BoosterGenerator {
                 && edition.getFoilType() != FoilType.NOT_SUPPORTED;
         boolean foilAtEndOfPack = hasFoil && edition.getFoilAlwaysInCommonSlot();
 
-        Random rand = new Random();
         // Foil chances
         // 1 Rare or Mythic rare (distribution ratio same as nonfoils)
         // 2-3 Uncommons
@@ -96,7 +95,7 @@ public class BoosterGenerator {
         // Other special types of foil slots, add here
         CardRarity foilCard = CardRarity.Unknown;
         while (foilCard == CardRarity.Unknown) {
-            int randomNum = rand.nextInt(10) + 1;
+            int randomNum = MyRandom.getRandom().nextInt(10) + 1;
             switch (randomNum) {
                 case 1:
                     // Rare or Mythic
@@ -126,7 +125,7 @@ public class BoosterGenerator {
                         if (edition.getName().equals("Vintage Masters")) {
                             // 1 in 53 packs, with 7 possibilities for the slot itself in VMA
                             // (1 RareMythic, 2 Uncommon, 3 Common, 1 Special)
-                            if (rand.nextInt(53) <= 7) {
+                            if (MyRandom.getRandom().nextInt(53) <= 7) {
                                 foilCard = CardRarity.Special;
                             }
                         }
@@ -147,7 +146,7 @@ public class BoosterGenerator {
                             // so 3 out of the 53 rares in the set.
                             // while information cannot be found, my personal (subjective) experience from that time was
                             // that they were indeed similar chance, at least not significantly less.
-                            if (rand.nextInt(53) <= 3) {
+                            if (MyRandom.getRandom().nextInt(53) <= 3) {
                                 foilCard = CardRarity.Special;
                             }
                         }
@@ -200,7 +199,7 @@ public class BoosterGenerator {
                         // According to information I found, Basic Lands
                         // are on the common foil sheet, each type appearing once.
                         // Large Sets usually have 110 commons and 20 lands.
-                        if (rand.nextInt(130) <= 20) {
+                        if (MyRandom.getRandom().nextInt(130) <= 20) {
                             foilSlot = BoosterSlots.BASIC_LAND;
                         }
                     }
@@ -307,7 +306,7 @@ public class BoosterGenerator {
                                 // 1 out of ~30 normal and mythic rares are foil,
                                 // match that.
                                 // If not special card, make it always foil.
-                                if ((rand.nextInt(30) == 1) || (foilSlot != BoosterSlots.SPECIAL)) {
+                                if ((MyRandom.getRandom().nextInt(30) == 1) || (foilSlot != BoosterSlots.SPECIAL)) {
                                     foilCardGeneratedAndHeld.add(generateFoilCard(ps));
                                 } else {
                                     // Otherwise it's not foil (even though this is the

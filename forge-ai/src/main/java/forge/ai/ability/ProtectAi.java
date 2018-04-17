@@ -2,7 +2,6 @@ package forge.ai.ability;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import com.google.common.base.Predicate;
 
@@ -151,8 +150,7 @@ public class ProtectAi extends SpellAbilityAi {
                         Combat combat = ai.getGame().getCombat();
                         int dmg = ComputerUtilCombat.damageIfUnblocked(c, opponent, combat, true);
                         float ratio = 1.0f * dmg / opponent.getLife();
-                        Random r = MyRandom.getRandom();
-                        return r.nextFloat() < ratio;
+                        return MyRandom.getRandom().nextFloat() < ratio;
                     }
                 }
                 return false;

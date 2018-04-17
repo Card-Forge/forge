@@ -240,7 +240,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         activeScheme = getZone(ZoneType.SchemeDeck).get(0);
         // gameAction moveTo ?
-        game.getAction().moveTo(ZoneType.Command, activeScheme, null, Maps.newHashMap());
+        game.getAction().moveTo(ZoneType.Command, activeScheme, null, null);
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
         // Run triggers
@@ -1212,7 +1212,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         if (toBottom != null) {
             for(Card c : toBottom) {
-                getGame().getAction().moveToBottomOfLibrary(c, null, Maps.newHashMap());
+                getGame().getAction().moveToBottomOfLibrary(c, null, null);
                 numToBottom++;
             }
         }
@@ -1220,7 +1220,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (toTop != null) {
             Collections.reverse(toTop); // the last card in list will become topmost in library, have to revert thus.
             for(Card c : toTop) {
-                getGame().getAction().moveToLibrary(c, null, Maps.newHashMap());
+                getGame().getAction().moveToLibrary(c, null, null);
                 numToTop++;
             }
         }
@@ -1293,7 +1293,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
             }
 
-            c = game.getAction().moveToHand(c, null, Maps.newHashMap());
+            c = game.getAction().moveToHand(c, null, null);
             drawn.add(c);
 
             if (topCardRevealed) {
@@ -1503,16 +1503,16 @@ public class Player extends GameEntity implements Comparable<Player> {
         sb.append(this).append(" discards ").append(c);
         final Card newCard;
         if (discardToTopOfLibrary) {
-            newCard = game.getAction().moveToLibrary(c, 0, sa, Maps.newHashMap());
+            newCard = game.getAction().moveToLibrary(c, 0, sa, null);
             sb.append(" to the library");
             // Play the Discard sound
         }
         else if (discardMadness) {
-            newCard = game.getAction().exile(c, sa, Maps.newHashMap());
+            newCard = game.getAction().exile(c, sa, null);
             sb.append(" with Madness");
         }
         else {
-            newCard = game.getAction().moveToGraveyard(c, sa, Maps.newHashMap());
+            newCard = game.getAction().moveToGraveyard(c, sa, null);
             // Play the Discard sound
         }
         sb.append(".");
@@ -1580,7 +1580,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         for (Card m : milledView) {
-            game.getAction().moveTo(destination, m, null, Maps.newHashMap());
+            game.getAction().moveTo(destination, m, null, null);
         }
 
         return milled;
@@ -1608,26 +1608,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             return;
         }
 
-        // overdone but wanted to make sure it was really random
-        final Random random = MyRandom.getRandom();
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-
-        int s = list.size();
-        for (int i = 0; i < s; i++) {
-            list.add(random.nextInt(s - 1), list.remove(random.nextInt(s)));
-        }
-
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
+        // Note: Shuffling once is sufficient.
+        Collections.shuffle(list, MyRandom.getRandom());
 
         getZone(ZoneType.Library).setCards(getController().cheatShuffle(list));
 
@@ -1644,26 +1626,30 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final boolean playLand(final Card land, final boolean ignoreZoneAndTiming) {
         // Dakkon Blackblade Avatar will use a similar effect
         if (canPlayLand(land, ignoreZoneAndTiming)) {
-            land.setController(this, 0);
-            if (land.isFaceDown()) {
-                land.turnFaceUp();
-            }
-            game.getAction().moveTo(getZone(ZoneType.Battlefield), land, null, Maps.newHashMap());
-
-            // play a sound
-            game.fireEvent(new GameEventLandPlayed(this, land));
-
-            // Run triggers
-            final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("Card", land);
-            game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, runParams, false);
-            game.getStack().unfreezeStack();
-            addLandPlayedThisTurn();
+            this.playLandNoCheck(land);
             return true;
         }
 
         game.getStack().unfreezeStack();
         return false;
+    }
+
+    public final void playLandNoCheck(final Card land) {
+        land.setController(this, 0);
+        if (land.isFaceDown()) {
+            land.turnFaceUp();
+        }
+        game.getAction().moveTo(getZone(ZoneType.Battlefield), land, null, new HashMap<String, Object>());
+
+        // play a sound
+        game.fireEvent(new GameEventLandPlayed(this, land));
+
+        // Run triggers
+        final Map<String, Object> runParams = Maps.newHashMap();
+        runParams.put("Card", land);
+        game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, runParams, false);
+        game.getStack().unfreezeStack();
+        addLandPlayedThisTurn();
     }
 
     public final boolean canPlayLand(final Card land) {
@@ -2430,7 +2416,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getView().updatePlanarPlayer(getView());
 
         for (Card c : currentPlanes) {
-            game.getAction().moveTo(ZoneType.Command,c, null, Maps.newHashMap());
+            game.getAction().moveTo(ZoneType.Command,c, null, null);
             //getZone(ZoneType.PlanarDeck).remove(c);
             //getZone(ZoneType.Command).add(c);
         }
@@ -2460,7 +2446,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             //game.getZoneOf(plane).remove(plane);
             plane.clearControllers();
             //getZone(ZoneType.PlanarDeck).add(plane);
-            game.getAction().moveTo(ZoneType.PlanarDeck, plane,-1, null, Maps.newHashMap());
+            game.getAction().moveTo(ZoneType.PlanarDeck, plane,-1, null, null);
         }
         currentPlanes.clear();
 

@@ -15,8 +15,6 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-import java.util.Random;
-
 public class  DamageAllAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
@@ -25,8 +23,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
 
         // prevent run-away activations - first time will always return true
-        final Random r = MyRandom.getRandom();
-        if (r.nextFloat() > Math.pow(.9, sa.getActivationsThisTurn())) {
+        if (MyRandom.getRandom().nextFloat() > Math.pow(.9, sa.getActivationsThisTurn())) {
             return false;
         }
         // abCost stuff that should probably be centralized...

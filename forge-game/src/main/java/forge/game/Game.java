@@ -29,7 +29,6 @@ import forge.card.CardStateName;
 import forge.card.CardType.Supertype;
 import forge.game.card.*;
 import forge.game.combat.Combat;
-import forge.game.cost.Cost;
 import forge.game.event.Event;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.phase.Phase;
@@ -38,7 +37,6 @@ import forge.game.phase.PhaseType;
 import forge.game.phase.Untap;
 import forge.game.player.*;
 import forge.game.replacement.ReplacementHandler;
-import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.SpellAbilityView;
@@ -50,6 +48,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.trackable.Tracker;
 import forge.util.Aggregates;
+import forge.util.MyRandom;
 import forge.util.Visitor;
 
 import java.util.*;
@@ -170,19 +169,6 @@ public class Game {
         }
     }
 
-    public final Ability PLAY_LAND_SURROGATE = new Ability(null, (Cost) null) {
-        @Override
-        public boolean canPlay() {
-            return true; //if this ability is added anywhere, it can be assumed that land can be played
-        }
-        @Override
-        public void resolve() {
-            throw new RuntimeException("This ability is intended to indicate \"land to play\" choice only");
-        }
-        @Override
-        public String toUnsuppressedString() { return "Play land"; }
-    };
-
     private final GameEntityCache<Player, PlayerView> playerCache = new GameEntityCache<>();
     public Player getPlayer(PlayerView playerView) {
         return playerCache.get(playerView);
@@ -246,8 +232,6 @@ public class Game {
     public Game(List<RegisteredPlayer> players0, GameRules rules0, Match match0) { /* no more zones to map here */
         rules = rules0;
         match = match0;
-
-        spabCache.put(PLAY_LAND_SURROGATE.getId(), PLAY_LAND_SURROGATE);
 
         int highestTeam = -1;
         for (RegisteredPlayer psc : players0) {
@@ -797,7 +781,7 @@ public class Game {
                 onePlayerHasTimeShifted = false;
             }
             
-            CardRarity anteRarity = validRarities.get(new Random().nextInt(validRarities.size()));
+            CardRarity anteRarity = validRarities.get(MyRandom.getRandom().nextInt(validRarities.size()));
             
             System.out.println("Rarity chosen for ante: " + anteRarity.name());
             
@@ -827,7 +811,7 @@ public class Game {
                 library.removeAll((Collection<?>)toRemove);
                 
                 if (library.size() > 0) { //Make sure that matches were found. If not, use the original method to choose antes
-                    Card ante = library.get(new Random().nextInt(library.size()));
+                    Card ante = library.get(MyRandom.getRandom().nextInt(library.size()));
                     anteed.put(player, ante);
                 } else {
                     chooseRandomCardsForAnte(player, anteed);

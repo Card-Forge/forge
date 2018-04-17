@@ -16,7 +16,6 @@ import forge.util.MyRandom;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class UnattachAllAi extends SpellAbilityAi {
 
@@ -25,7 +24,6 @@ public class UnattachAllAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
 
@@ -34,7 +32,7 @@ public class UnattachAllAi extends SpellAbilityAi {
         }
 
         // prevent run-away activations - first time will always return true
-        boolean chance = r.nextFloat() <= .9;
+        boolean chance = MyRandom.getRandom().nextFloat() <= .9;
 
         // Attach spells always have a target
         final TargetRestrictions tgt = sa.getTargetRestrictions();

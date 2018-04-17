@@ -141,7 +141,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (ability.isSpell()) {
             final Card source = ability.getHostCard();
             if (!source.isCopiedSpell() && !source.isInZone(ZoneType.Stack)) {
-                ability.setHostCard(game.getAction().moveToStack(source, ability, Maps.newHashMap()));
+                ability.setHostCard(game.getAction().moveToStack(source, ability, null));
             }
         }
 

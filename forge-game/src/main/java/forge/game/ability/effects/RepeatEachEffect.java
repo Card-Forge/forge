@@ -27,9 +27,9 @@ public class RepeatEachEffect extends SpellAbilityEffect {
     @SuppressWarnings("serial")
     @Override
     public void resolve(SpellAbility sa) {
-        Card source = sa.getHostCard();
+        final Card source = sa.getHostCard();
 
-        AbilitySub repeat = sa.getAdditionalAbility("RepeatSubAbility");
+        final AbilitySub repeat = sa.getAdditionalAbility("RepeatSubAbility");
 
         if (repeat != null && !repeat.getHostCard().equalsWithTimestamp(source)) {
             // TODO: for some reason, the host card of the original additional SA is set to the cloned card when
@@ -121,7 +121,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                     repeatPlayers.add(size - 1, repeatPlayers.remove(0));
                 }
             }
-            for (Player p : repeatPlayers) {
+            for (final Player p : repeatPlayers) {
                 if (optional && !p.getController().confirmAction(repeat, null, sa.getParam("RepeatOptionalMessage"))) {
                     continue;
                 }

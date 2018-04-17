@@ -1,7 +1,5 @@
 package forge.ai.ability;
 
-import java.util.Random;
-
 import forge.ai.AiPlayDecision;
 import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
@@ -23,8 +21,7 @@ public class RevealAi extends RevealAiBase {
             return false;
         }
 
-        final Random r = MyRandom.getRandom();
-        boolean randomReturn = r.nextFloat() <= Math.pow(.667, sa.getActivationsThisTurn() + 1);
+        boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(.667, sa.getActivationsThisTurn() + 1);
 
         if (SpellAbilityAi.playReusable(ai, sa)) {
             randomReturn = true;
@@ -34,7 +31,7 @@ public class RevealAi extends RevealAiBase {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        // logic to see if it should reveal Mircacle Card
+        // logic to see if it should reveal Miracle Card
         if (sa.hasParam("MiracleCost")) {
             final Card c = sa.getHostCard();
             for (SpellAbility s : c.getBasicSpells()) {

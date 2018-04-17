@@ -111,7 +111,7 @@ public class ManaCostBeingPaid {
 
     // holds Mana_Part objects
     // ManaPartColor is stored before ManaPartGeneric
-    private final Map<ManaCostShard, ShardCount> unpaidShards = Maps.newHashMap();
+    private final Map<ManaCostShard, ShardCount> unpaidShards = new HashMap<ManaCostShard, ShardCount>();
     private Map<String, Integer> xManaCostPaidByColor;
     private final String sourceRestriction;
     private byte sunburstMap = 0;

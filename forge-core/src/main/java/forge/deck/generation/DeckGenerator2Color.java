@@ -26,6 +26,8 @@ import forge.deck.CardPool;
 import forge.deck.DeckFormat;
 
 import forge.item.PaperCard;
+import forge.util.MyRandom;
+
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.Arrays;
@@ -85,13 +87,13 @@ public class DeckGenerator2Color extends DeckGeneratorBase {
         format0.adjustCMCLevels(cmcLevels);
 
         if( c1 == 0 && c2 == 0) {
-            int color1 = r.nextInt(5);
-            int color2 = (color1 + 1 + r.nextInt(4)) % 5;
+            int color1 = MyRandom.getRandom().nextInt(5);
+            int color2 = (color1 + 1 + MyRandom.getRandom().nextInt(4)) % 5;
             colors = ColorSet.fromMask(MagicColor.WHITE << color1 | MagicColor.WHITE << color2);
         } else if ( c1 == 0 || c2 == 0 ) {
             byte knownColor = (byte) (c1 | c2);
             int color1 = Arrays.binarySearch(MagicColor.WUBRG, knownColor);
-            int color2 = (color1 + 1 + r.nextInt(4)) % 5;
+            int color2 = (color1 + 1 + MyRandom.getRandom().nextInt(4)) % 5;
             colors = ColorSet.fromMask(MagicColor.WHITE << color1 | MagicColor.WHITE << color2);
         } else {
             colors = ColorSet.fromMask(c1 | c2);
