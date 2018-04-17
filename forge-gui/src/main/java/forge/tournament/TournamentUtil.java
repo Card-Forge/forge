@@ -4,6 +4,7 @@ import forge.deck.Deck;
 import forge.deck.DeckType;
 import forge.deck.DeckgenUtil;
 import forge.model.FModel;
+import forge.util.MyRandom;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -8,6 +8,7 @@ import forge.deck.DeckType;
 import forge.deck.DeckgenUtil;
 import forge.deck.NetDeckCategory;
 import forge.model.FModel;
+import forge.util.MyRandom;
 
 public class GauntletUtil {
     public static GauntletData createQuickGauntlet(final Deck userDeck, final int numOpponents, final List<DeckType> allowedDeckTypes, NetDeckCategory netDecks) {

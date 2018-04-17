@@ -36,6 +36,7 @@ import forge.quest.io.ReadPriceList;
 import forge.tournament.system.TournamentBracket;
 import forge.tournament.system.TournamentPairing;
 import forge.tournament.system.TournamentPlayer;
+import forge.util.MyRandom;
 import forge.util.NameGenerator;
 import forge.util.TextUtil;
 import forge.util.storage.IStorage;

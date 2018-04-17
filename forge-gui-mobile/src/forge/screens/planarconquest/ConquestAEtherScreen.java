@@ -43,6 +43,7 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.util.Aggregates;
 import forge.util.Callback;
+import forge.util.MyRandom;
 import forge.util.Utils;
 
 public class ConquestAEtherScreen extends FScreen {
