@@ -478,7 +478,7 @@ public class QuestEventDraft implements IQuestEvent {
         int attempts = 25;
 
         while (promo == null && attempts-- > 0) {
-            randomCard = cardsInEdition.get((int) (Math.random() * cardsInEdition.size()));
+            randomCard = cardsInEdition.get((int) (MyRandom.getRandom().nextDouble() * cardsInEdition.size()));
             promo = FModel.getMagicDb().getCommonCards().getCard(randomCard.name, randomEdition.getCode());
         }
 
@@ -497,7 +497,7 @@ public class QuestEventDraft implements IQuestEvent {
             editions.add(FModel.getMagicDb().getEditions().get(booster));
         }
 
-        return editions.get((int) (Math.random() * editions.size()));
+        return editions.get((int) (MyRandom.getRandom().nextDouble() * editions.size()));
 
     }
 
@@ -925,7 +925,7 @@ public class QuestEventDraft implements IQuestEvent {
             int attempts = 50;
 
             do {
-                icon = (int) Math.floor(Math.random() * numberOfIcons);
+                icon = (int) Math.floor(MyRandom.getRandom().nextDouble() * numberOfIcons);
             } while ((icon < 0 || usedIcons.contains(icon)) && attempts-- > 0);
 
             event.aiIcons[i] = icon;

@@ -209,7 +209,7 @@ public final class BoosterUtils {
 
                 case RANDOM_BALANCED:
                     preferredColors.clear();
-                    int numberOfColors = COLOR_COUNT_PROBABILITIES[(int) (Math.random() * COLOR_COUNT_PROBABILITIES.length)];
+                    int numberOfColors = COLOR_COUNT_PROBABILITIES[(int) (MyRandom.getRandom().nextDouble() * COLOR_COUNT_PROBABILITIES.length)];
                     if (numberOfColors < 6) {
                         Collections.shuffle(possibleColors);
                         for (int i = 0; i < numberOfColors; i++) {
@@ -218,7 +218,7 @@ public final class BoosterUtils {
                     } else {
                         preferredColors.addAll(possibleColors);
                     }
-                    includeArtifacts = Math.random() < 0.5;
+                    includeArtifacts = MyRandom.getRandom().nextDouble() < 0.5;
                 case BALANCED:
                     populateBalancedFilters(colorFilters, preferredColors, cardPool, includeArtifacts);
                     break;
@@ -238,13 +238,13 @@ public final class BoosterUtils {
 
         for (int i = 0; i < MAX_BIAS; i++) {
             Predicate<CardRules> predicate;
-            byte color = possibleColors.get((int) (Math.random() * 6));
-            if (Math.random() < 0.6) {
+            byte color = possibleColors.get((int) (MyRandom.getRandom().nextDouble() * 6));
+            if (MyRandom.getRandom().nextDouble() < 0.6) {
                 predicate = CardRulesPredicates.isMonoColor(color);
             } else {
                 predicate = CardRulesPredicates.hasColor(color);
             }
-            if (Math.random() < 0.1) {
+            if (MyRandom.getRandom().nextDouble() < 0.1) {
                 predicate = Predicates.and(predicate, CardRulesPredicates.Presets.IS_MULTICOLOR);
             }
             colorFilters.add(predicate);

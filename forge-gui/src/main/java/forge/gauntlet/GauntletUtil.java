@@ -23,7 +23,7 @@ public class GauntletUtil {
         final Object[] netDeckNames = netDecks != null ? netDecks.getItemNames().toArray() : null;
 
         for (int i = 0; i < numOpponents; i++) {
-            int randType = (int)Math.floor(Math.random() * allowedDeckTypes.size());
+            int randType = (int)Math.floor(MyRandom.getRandom().nextDouble() * allowedDeckTypes.size());
             switch (allowedDeckTypes.get(randType)) {
             case COLOR_DECK:
                 deck = DeckgenUtil.getRandomColorDeck(true);
@@ -58,7 +58,7 @@ public class GauntletUtil {
                 eventNames.add(deck.getName());
                 break;
             case NET_DECK:
-                int deckIndex = (int)Math.floor(Math.random() * netDeckNames.length);
+                int deckIndex = (int)Math.floor(MyRandom.getRandom().nextDouble() * netDeckNames.length);
                 deck = netDecks.get((String) netDeckNames[deckIndex]);
                 eventNames.add(deck.getName());
                 break;

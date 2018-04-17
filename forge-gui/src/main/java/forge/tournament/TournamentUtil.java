@@ -23,7 +23,7 @@ public class TournamentUtil {
         final List<Deck> decks = new ArrayList<Deck>();
 
         for (int i = 0; i < numOpponents; i++) {
-            int randType = (int)Math.floor(Math.random() * allowedDeckTypes.size());
+            int randType = (int)Math.floor(MyRandom.getRandom().nextDouble() * allowedDeckTypes.size());
             switch (allowedDeckTypes.get(randType)) {
                 case COLOR_DECK:
                     deck = DeckgenUtil.getRandomColorDeck(true);

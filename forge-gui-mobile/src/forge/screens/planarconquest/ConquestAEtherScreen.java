@@ -148,7 +148,7 @@ public class ConquestAEtherScreen extends FScreen {
         //determine final pool to pull from based on rarity odds
         Iterable<PaperCard> rewardPool;
         CardRarity minRarity = btnRarityFilter.selectedOption.getRarity();
-        CardRarity rarity = btnRarityFilter.selectedOption.getRarity(Math.random());
+        CardRarity rarity = btnRarityFilter.selectedOption.getRarity(MyRandom.getRandom().nextDouble());
         while (true) {
             final CardRarity allowedRarity = rarity;
             rewardPool = Iterables.filter(filteredPool, new Predicate<PaperCard>() {
