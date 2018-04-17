@@ -26,6 +26,8 @@ import forge.deck.CardPool;
 import forge.deck.DeckFormat;
 
 import forge.item.PaperCard;
+import forge.util.MyRandom;
+
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.List;
@@ -79,7 +81,7 @@ public class DeckGeneratorMonoColor extends DeckGeneratorBase {
 
     public void initialize(final String clr1){
         if (MagicColor.fromName(clr1) == 0) {
-            int color1 = r.nextInt(5);
+            int color1 = MyRandom.getRandom().nextInt(5);
             colors = ColorSet.fromMask(MagicColor.WHITE << color1);
         } else {
             colors = ColorSet.fromNames(clr1);

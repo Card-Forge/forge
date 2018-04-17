@@ -11,7 +11,6 @@ import forge.util.MyRandom;
 import forge.util.collect.FCollection;
 
 import java.util.List;
-import java.util.Random;
 
 public class CharmAi extends SpellAbilityAi {
     @Override
@@ -19,9 +18,7 @@ public class CharmAi extends SpellAbilityAi {
         // sa is Entwined, no need for extra logic
         if (sa.isEntwine()) {
             return true;
-        }
-
-        final Random r = MyRandom.getRandom();
+        } 
 
         final int num = Integer.parseInt(sa.hasParam("CharmNum") ? sa.getParam("CharmNum") : "1");
         final int min = sa.hasParam("MinCharmNum") ? Integer.parseInt(sa.getParam("MinCharmNum")) : num;
@@ -65,7 +62,7 @@ public class CharmAi extends SpellAbilityAi {
         sa.setChosenList(chosenList);
 
         // prevent run-away activations - first time will always return true
-        return r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
+        return MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
     }
 
     private List<AbilitySub> chooseOptionsAi(List<AbilitySub> choices, final Player ai, boolean isTrigger, int num,

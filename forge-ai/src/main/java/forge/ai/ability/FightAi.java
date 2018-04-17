@@ -16,7 +16,6 @@ import forge.util.MyRandom;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 public class FightAi extends SpellAbilityAi {
     @Override
@@ -240,8 +239,7 @@ public class FightAi extends SpellAbilityAi {
     		if (!canKill(opponent, fighter, -pumpDefense)) {	// can survive
     			return true;
     		} else {
-    			final Random r = MyRandom.getRandom();
-    			if (r.nextInt(20)<(opponent.getCMC() - fighter.getCMC())) {	// trade
+    			if (MyRandom.getRandom().nextInt(20)<(opponent.getCMC() - fighter.getCMC())) {	// trade
     				return true;
     			}
     		}

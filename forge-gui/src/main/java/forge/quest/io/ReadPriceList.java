@@ -25,7 +25,6 @@ import forge.util.MyRandom;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * <p>
@@ -73,7 +72,6 @@ public class ReadPriceList {
     private Map<String, Integer> readFile(final String file) {
 
         final Map<String, Integer> map = new HashMap<>();
-        final Random r = MyRandom.getRandom();
 
         final List<String> lines = FileUtil.readFile(file);
         for (final String line : lines) {
@@ -96,15 +94,15 @@ public class ReadPriceList {
 
                 if (!(MagicColor.Constant.BASIC_LANDS.contains(name) || MagicColor.Constant.SNOW_LANDS.contains(name)) && !ForgeConstants.PRICES_BOOSTER_FILE.equals(file)) {
                     float ff;
-                    if (r.nextInt(100) < 90) {
-                        ff = r.nextInt(10) * (float) .01;
+                    if (MyRandom.getRandom().nextInt(100) < 90) {
+                        ff = MyRandom.getRandom().nextInt(10) * (float) .01;
                     }
                     else {
                         // +/- 50%
-                        ff = r.nextInt(50) * (float) .01;
+                        ff = MyRandom.getRandom().nextInt(50) * (float) .01;
                     }
 
-                    if (r.nextInt(100) < 50) {
+                    if (MyRandom.getRandom().nextInt(100) < 50) {
                         val = (int) (val * (1 - ff));
                     } else {
                         // +ff%

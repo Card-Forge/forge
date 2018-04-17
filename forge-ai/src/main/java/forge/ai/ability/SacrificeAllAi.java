@@ -15,15 +15,12 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 
-import java.util.Random;
-
 public class SacrificeAllAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the expected targets could be
-        final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
         String valid = "";
@@ -52,7 +49,7 @@ public class SacrificeAllAi extends SpellAbilityAi {
         }
 
         // prevent run-away activations - first time will always return true
-        boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
+        boolean chance = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         // if only creatures are affected evaluate both lists and pass only if
         // human creatures are more valuable
@@ -74,7 +71,7 @@ public class SacrificeAllAi extends SpellAbilityAi {
             return false;
         }
 
-        return ((r.nextFloat() < .9667) && chance);
+        return ((MyRandom.getRandom().nextFloat() < .9667) && chance);
     }
 
     @Override

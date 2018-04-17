@@ -43,10 +43,9 @@ import java.util.*;
 public class DeckgenUtil {
 
     public static Deck buildCardGenDeck(GameFormat format, boolean isForAI){
-        Random random    = new Random();
         try {
             List<String> keys      = new ArrayList<>(CardRelationMatrixGenerator.cardPools.get(format.getName()).keySet());
-            String       randomKey = keys.get( random.nextInt(keys.size()) );
+            String       randomKey = keys.get( MyRandom.getRandom().nextInt(keys.size()) );
             Predicate<PaperCard> cardFilter = Predicates.and(format.getFilterPrinted(),PaperCard.Predicates.name(randomKey));
             PaperCard keyCard = FModel.getMagicDb().getCommonCards().getAllCards(cardFilter).get(0);
 
@@ -124,7 +123,6 @@ public class DeckgenUtil {
         Collections.sort(potentialCards,new CardDistanceComparator());
         Collections.reverse(potentialCards);
         //get second keycard
-        Random r = new Random();
         List<PaperCard> preSelectedCards = new ArrayList<>();
         for(Map.Entry<PaperCard,Integer> pair:potentialCards){
             preSelectedCards.add(pair.getKey());
@@ -146,7 +144,7 @@ public class DeckgenUtil {
         if(preSelectedCards.size()<randMax){
             randMax=preSelectedCards.size();
         }
-        PaperCard secondKeycard = preSelectedCards.get(r.nextInt(randMax));
+        PaperCard secondKeycard = preSelectedCards.get(MyRandom.getRandom().nextInt(randMax));
         List<Map.Entry<PaperCard,Integer>> potentialSecondCards = CardRelationMatrixGenerator.cardPools.get(format.getName()).get(secondKeycard.getName());
 
         //combine card distances from second key card and re-sort
@@ -166,7 +164,7 @@ public class DeckgenUtil {
         int removeCount=0;
         int i=0;
         for(PaperCard c:selectedCards){
-            if(r.nextInt(100)>70+(15-(i/selectedCards.size())*selectedCards.size()) && removeCount<4 //randomly remove some cards - more likely as distance increases
+            if(MyRandom.getRandom().nextInt(100)>70+(15-(i/selectedCards.size())*selectedCards.size()) && removeCount<4 //randomly remove some cards - more likely as distance increases
                     &&!c.getName().contains("Urza")){ //avoid breaking Tron decks
                 toRemove.add(c);
                 removeCount++;
@@ -184,9 +182,9 @@ public class DeckgenUtil {
         List<PaperCard> playsetList = new ArrayList<>();
         int keyCardCount=4;
         if(card.getRules().getMainPart().getManaCost().getCMC()>7){
-            keyCardCount=1+r.nextInt(4);
+            keyCardCount=1+MyRandom.getRandom().nextInt(4);
         }else if(card.getRules().getMainPart().getManaCost().getCMC()>5){
-            keyCardCount=2+r.nextInt(3);
+            keyCardCount=2+MyRandom.getRandom().nextInt(3);
         }
         for(int j=0;j<keyCardCount;++j) {
             playsetList.add(card);
@@ -194,16 +192,16 @@ public class DeckgenUtil {
         //Add 2nd keycard
         int keyCard2Count=4;
         if(card.getRules().getMainPart().getManaCost().getCMC()>7){
-            keyCard2Count=1+r.nextInt(4);
+            keyCard2Count=1+MyRandom.getRandom().nextInt(4);
         }else if(card.getRules().getMainPart().getManaCost().getCMC()>5){
-            keyCard2Count=2+r.nextInt(3);
+            keyCard2Count=2+MyRandom.getRandom().nextInt(3);
         }
         for(int j=0;j<keyCard2Count;++j) {
             playsetList.add(secondKeycard);
         }
         for (PaperCard c:selectedCards){
             for(int j=0;j<4;++j) {
-                if(r.nextInt(100)<90) {
+                if(MyRandom.getRandom().nextInt(100)<90) {
                     playsetList.add(c);
                 }
             }
@@ -525,7 +523,6 @@ public class DeckgenUtil {
             }else {
                 potentialCards.addAll(CardRelationMatrixGenerator.cardPools.get(DeckFormat.Commander.toString()).get(commander.getName()));
             }
-            Random r = new Random();
             //Collections.shuffle(potentialCards, r);
             List<PaperCard> preSelectedCards = new ArrayList<>();
             for(Map.Entry<PaperCard,Integer> pair:potentialCards){
@@ -557,7 +554,7 @@ public class DeckgenUtil {
                 if(preSelectedCards.size()<75){
                     break;
                 }
-                if(r.nextInt(100)>60+(15-(i/preSelectedCards.size())*preSelectedCards.size()) && removeCount<4 //randomly remove some cards - more likely as distance increases
+                if(MyRandom.getRandom().nextInt(100)>60+(15-(i/preSelectedCards.size())*preSelectedCards.size()) && removeCount<4 //randomly remove some cards - more likely as distance increases
                         &&!c.getName().contains("Urza")&&!c.getName().contains("Wastes")){ //avoid breaking Tron decks
                     toRemove.add(c);
                     removeCount++;
@@ -578,7 +575,7 @@ public class DeckgenUtil {
                 colorList=colorListFiltered;
             }
             List<PaperCard> cardList = Lists.newArrayList(colorList);
-            Collections.shuffle(cardList, new Random());
+            Collections.shuffle(cardList, MyRandom.getRandom());
             int shortlistlength=400;
             if(cardList.size()<shortlistlength){
                 shortlistlength=cardList.size();

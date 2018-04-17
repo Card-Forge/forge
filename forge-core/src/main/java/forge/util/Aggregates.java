@@ -101,21 +101,20 @@ public class Aggregates {
     public static final <T> T random(final Iterable<T> source) {
         if (source == null) { return null; }
 
-        Random rnd = MyRandom.getRandom(); 
         if (source instanceof List<?>) {
             List<T> src = (List<T>)source;
             int len = src.size();
             switch(len) {
                 case 0: return null;
                 case 1: return src.get(0);
-                default: return src.get(rnd.nextInt(len));
+                default: return src.get(MyRandom.getRandom().nextInt(len));
             }
         }
         
         T candidate = null;
         int lowest = Integer.MAX_VALUE;
         for (final T item : source) {
-            int next = rnd.nextInt();
+            int next = MyRandom.getRandom().nextInt();
             if(next < lowest) {
                 lowest = next;
                 candidate = item;
@@ -129,7 +128,6 @@ public class Aggregates {
     }
     public static final <T, L extends List<T>> L random(final Iterable<T> source, final int count, final L list) {
         // Using Reservoir Sampling to grab X random values from source
-        Random rnd = MyRandom.getRandom();
         int i = 0;
         for (T item : source) {
             i++;
@@ -138,7 +136,7 @@ public class Aggregates {
                 list.add(item);
             } else {
                 // Progressively reduce odds of item > count to get added into the reservoir
-                int j = rnd.nextInt(i);
+                int j = MyRandom.getRandom().nextInt(i);
                 if (j < count) {
                     list.set(j, item);
                 }
@@ -161,8 +159,7 @@ public class Aggregates {
     }
 
     public static int randomInt(int min, int max) {
-        Random rnd = MyRandom.getRandom();
-        return rnd.nextInt(max - min + 1) + min;
+        return MyRandom.getRandom().nextInt(max - min + 1) + min;
     }
 
     public static final <K, U> Iterable<U> uniqueByLast(final Iterable<U> source, final Function<U, K> fnUniqueKey) { // this might be exotic

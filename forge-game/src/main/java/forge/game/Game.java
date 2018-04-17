@@ -48,6 +48,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.trackable.Tracker;
 import forge.util.Aggregates;
+import forge.util.MyRandom;
 import forge.util.Visitor;
 
 import java.util.*;
@@ -780,7 +781,7 @@ public class Game {
                 onePlayerHasTimeShifted = false;
             }
             
-            CardRarity anteRarity = validRarities.get(new Random().nextInt(validRarities.size()));
+            CardRarity anteRarity = validRarities.get(MyRandom.getRandom().nextInt(validRarities.size()));
             
             System.out.println("Rarity chosen for ante: " + anteRarity.name());
             
@@ -810,7 +811,7 @@ public class Game {
                 library.removeAll((Collection<?>)toRemove);
                 
                 if (library.size() > 0) { //Make sure that matches were found. If not, use the original method to choose antes
-                    Card ante = library.get(new Random().nextInt(library.size()));
+                    Card ante = library.get(MyRandom.getRandom().nextInt(library.size()));
                     anteed.put(player, ante);
                 } else {
                     chooseRandomCardsForAnte(player, anteed);

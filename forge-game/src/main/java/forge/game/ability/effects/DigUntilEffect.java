@@ -179,8 +179,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     }
                 }
                 if (sa.hasParam("RevealRandomOrder")) {
-                    final Random random = MyRandom.getRandom();
-                    Collections.shuffle(revealed, random);
+                    Collections.shuffle(revealed, MyRandom.getRandom());
                 }
 
                 if (sa.hasParam("NoneFoundDestination") && found.size() < untilAmount) {

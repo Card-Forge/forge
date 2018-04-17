@@ -6,7 +6,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 /**
  * @author Marc
@@ -202,8 +201,8 @@ public final class NameGenerator {
 
 	/** Generates a single name that doesn't match the specified name. 
 	 * 
-	 * @param gender        String specifying the desired gender. Recognises "Male", "Female" and "Any".
-	 * @param type          String specifying the desired type. Recognises "Fantasy", "Generic" and "Any".
+	 * @param gender        String specifying the desired gender. Recognizes "Male", "Female" and "Any".
+	 * @param type          String specifying the desired type. Recognizes "Fantasy", "Generic" and "Any".
 	 * @param excludeNames  A list of names already being used.
 	 * @return              Returns the generated name string.
 	 */
@@ -211,33 +210,32 @@ public final class NameGenerator {
 		usedNames = excludeNames;
 		String name = "";
 
-        Random seed = MyRandom.getRandom();
         boolean useMoniker = false;
 
         switch (type + gender) {
-        case "GenericMale":		{ sourceList = genericMales;	useMoniker = seed.nextFloat() <= 0.03f;		break;}
-        case "GenericFemale":	{ sourceList = genericFemales;	useMoniker = seed.nextFloat() <= 0.02f;		break;}
-        case "FantasyMale":		{ sourceList = fantasyMales;	useMoniker = seed.nextFloat() <= 0.10f;		break;}
-        case "FantasyFemale":	{ sourceList = fantasyFemales;	useMoniker = seed.nextFloat() <= 0.08f;		break;}
+        case "GenericMale":		{ sourceList = genericMales;	useMoniker = MyRandom.getRandom().nextFloat() <= 0.03f;		break;}
+        case "GenericFemale":	{ sourceList = genericFemales;	useMoniker = MyRandom.getRandom().nextFloat() <= 0.02f;		break;}
+        case "FantasyMale":		{ sourceList = fantasyMales;	useMoniker = MyRandom.getRandom().nextFloat() <= 0.10f;		break;}
+        case "FantasyFemale":	{ sourceList = fantasyFemales;	useMoniker = MyRandom.getRandom().nextFloat() <= 0.08f;		break;}
 
         case "AnyMale":
         	sourceList = getCombinedLists(genericMales, fantasyMales);
-        	useMoniker = seed.nextFloat() <= 0.06f;
+        	useMoniker = MyRandom.getRandom().nextFloat() <= 0.06f;
         	break;
         
         case "AnyFemale":
         	sourceList = getCombinedLists(genericFemales, fantasyFemales);
-        	useMoniker = seed.nextFloat() <= 0.025f;
+        	useMoniker = MyRandom.getRandom().nextFloat() <= 0.025f;
         	break;
         
         case "GenericAny":
         	sourceList = getCombinedLists(genericMales, genericFemales);
-        	useMoniker = seed.nextFloat() <= 0.015f;
+        	useMoniker = MyRandom.getRandom().nextFloat() <= 0.015f;
         	break;
 
         case "FantasyAny":
         	sourceList = getCombinedLists(fantasyMales, fantasyFemales);
-        	useMoniker = seed.nextFloat() <= 0.06f;
+        	useMoniker = MyRandom.getRandom().nextFloat() <= 0.06f;
         	break;
 
         default:
@@ -248,12 +246,12 @@ public final class NameGenerator {
         	Collections.addAll(all, genericFemales);
         	Collections.addAll(all, fantasyFemales);
         	sourceList = all.toArray(new String[all.size()]);
-        	useMoniker = seed.nextFloat() <= 0.04f;
+        	useMoniker = MyRandom.getRandom().nextFloat() <= 0.04f;
         	break;
         }
 
         do {
-        	name = sourceList[seed.nextInt(sourceList.length)];
+        	name = sourceList[MyRandom.getRandom().nextInt(sourceList.length)];
         } while (excludeNames.contains(name));
 
         usedNames.add(name); // add base name to used names list
@@ -261,7 +259,7 @@ public final class NameGenerator {
         if (useMoniker) {
         	String moniker = "";
         	do {
-        		moniker = monikers[seed.nextInt(monikers.length)];
+        		moniker = monikers[MyRandom.getRandom().nextInt(monikers.length)];
         	} while (usedMonikers.contains(moniker));
 
     		usedMonikers.add(moniker);

@@ -51,7 +51,6 @@ import java.util.regex.Pattern;
  */
 public abstract class DeckGeneratorBase {
     protected final DebugTrace trace = new DebugTrace();
-    protected final Random r = MyRandom.getRandom();
     protected final Map<String, Integer> cardCounts = new HashMap<String, Integer>();
     protected int maxDuplicates = 4;
     protected boolean useArtifacts = true;
@@ -133,7 +132,7 @@ public abstract class DeckGeneratorBase {
 
         int res = 0;
         while (res < cnt) {
-            PaperCard cp = source.get(r.nextInt(srcLen));
+            PaperCard cp = source.get(MyRandom.getRandom().nextInt(srcLen));
             int newCount = cardCounts.get(cp.getName()) + 1;
 
             //add card to deck if not already maxed out on card
@@ -166,7 +165,7 @@ public abstract class DeckGeneratorBase {
 
         int res = 0;
         while (res < cnt) {
-            String s = source.get(r.nextInt(srcLen));
+            String s = source.get(MyRandom.getRandom().nextInt(srcLen));
             int newCount = cardCounts.get(s) + 1;
 
             //add card to deck if not already maxed out on card

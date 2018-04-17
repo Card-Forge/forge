@@ -1608,26 +1608,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             return;
         }
 
-        // overdone but wanted to make sure it was really random
-        final Random random = MyRandom.getRandom();
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-
-        int s = list.size();
-        for (int i = 0; i < s; i++) {
-            list.add(random.nextInt(s - 1), list.remove(random.nextInt(s)));
-        }
-
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
+        // Note: Shuffling once is sufficient.
+        Collections.shuffle(list, MyRandom.getRandom());
 
         getZone(ZoneType.Library).setCards(getController().cheatShuffle(list));
 

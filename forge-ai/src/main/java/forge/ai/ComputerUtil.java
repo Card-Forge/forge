@@ -1186,16 +1186,14 @@ public class ComputerUtil {
         int activations = sa.getRestrictions().getNumberTurnActivations();
 
         if (sa.isTemporary()) {
-        	final Random r = MyRandom.getRandom();
-        	return r.nextFloat() >= .95; // Abilities created by static abilities have no memory
+        	return MyRandom.getRandom().nextFloat() >= .95; // Abilities created by static abilities have no memory
         }
 
         if (activations < 10) { //10 activations per turn should still be acceptable
             return false;
         }
 
-        final Random r = MyRandom.getRandom();
-        return r.nextFloat() >= Math.pow(.95, activations);
+        return MyRandom.getRandom().nextFloat() >= Math.pow(.95, activations);
     }
 
     public static boolean activateForCost(SpellAbility sa, final Player ai) {

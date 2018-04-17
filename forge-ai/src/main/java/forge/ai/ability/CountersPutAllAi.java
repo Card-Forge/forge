@@ -21,7 +21,6 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 import java.util.List;
-import java.util.Random;
 
 public class CountersPutAllAi extends SpellAbilityAi {
     @Override
@@ -29,7 +28,6 @@ public class CountersPutAllAi extends SpellAbilityAi {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what
         // the expected targets could be
-        final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
         List<Card> hList;
@@ -89,7 +87,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
         }
 
         // prevent run-away activations - first time will always return true
-        boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
+        boolean chance = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         if (curse) {
             if (type.equals("M1M1")) {
@@ -139,7 +137,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
             return chance;
         }
 
-        return ((r.nextFloat() < .6667) && chance);
+        return ((MyRandom.getRandom().nextFloat() < .6667) && chance);
     }
 
     @Override

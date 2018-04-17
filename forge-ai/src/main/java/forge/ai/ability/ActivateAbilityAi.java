@@ -12,7 +12,6 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 import java.util.List;
-import java.util.Random;
 
 public class ActivateAbilityAi extends SpellAbilityAi {
 
@@ -23,8 +22,7 @@ public class ActivateAbilityAi extends SpellAbilityAi {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
         final Player opp = ComputerUtil.getOpponentFor(ai);
-        final Random r = MyRandom.getRandom();
-        boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
+        boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         List<Card> list = CardLists.getType(opp.getCardsIn(ZoneType.Battlefield), sa.getParamOrDefault("Type", "Card"));
         if (list.isEmpty()) {

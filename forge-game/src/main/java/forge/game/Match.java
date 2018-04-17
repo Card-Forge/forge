@@ -179,7 +179,7 @@ public class Match {
         return myRemovedAnteCards;
     }
 
-    private static void preparePlayerLibrary(Player player, final ZoneType zoneType, CardPool section, boolean canRandomFoil, Random generator) {
+    private static void preparePlayerLibrary(Player player, final ZoneType zoneType, CardPool section, boolean canRandomFoil) {
         PlayerZone library = player.getZone(zoneType);
         List<Card> newLibrary = new ArrayList<Card>();
         for (final Entry<PaperCard, Integer> stackOfCards : section) {
@@ -245,11 +245,9 @@ public class Match {
                 }
             }
 
-            Random generator = MyRandom.getRandom();
-
-            preparePlayerLibrary(player, ZoneType.Library, myDeck.getMain(), psc.useRandomFoil(), generator);
+            preparePlayerLibrary(player, ZoneType.Library, myDeck.getMain(), psc.useRandomFoil());
             if (myDeck.has(DeckSection.Sideboard)) {
-                preparePlayerLibrary(player, ZoneType.Sideboard, myDeck.get(DeckSection.Sideboard), psc.useRandomFoil(), generator);
+                preparePlayerLibrary(player, ZoneType.Sideboard, myDeck.get(DeckSection.Sideboard), psc.useRandomFoil());
             }
 
             player.initVariantsZones(psc);

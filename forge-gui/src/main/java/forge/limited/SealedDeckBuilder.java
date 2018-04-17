@@ -11,7 +11,6 @@ import forge.util.MyRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Deck builder for Sealed Deck Format.
@@ -67,17 +66,16 @@ public class SealedDeckBuilder extends LimitedDeckBuilder {
 
         String color1;
         String color2;
-        final Random r = MyRandom.getRandom();
         if (maxColors.size() > 1) {
-            int n = r.nextInt(maxColors.size());
+            int n = MyRandom.getRandom().nextInt(maxColors.size());
             color1 = maxColors.get(n);
             maxColors.remove(n);
-            n = r.nextInt(maxColors.size());
+            n = MyRandom.getRandom().nextInt(maxColors.size());
             color2 = maxColors.get(n);
         } else {
             color1 = maxColors.get(0);
             if (secondColors.size() > 1) {
-                color2 = secondColors.get(r.nextInt(secondColors.size()));
+                color2 = secondColors.get(MyRandom.getRandom().nextInt(secondColors.size()));
             } else {
                 color2 = secondColors.get(0);
             }

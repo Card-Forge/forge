@@ -15,8 +15,6 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-import java.util.Random;
-
 public class ScryAi extends SpellAbilityAi {
 
     /* (non-Javadoc)
@@ -171,8 +169,7 @@ public class ScryAi extends SpellAbilityAi {
             chance = .667; // 66.7% chance for sorcery speed (since it will
                            // never activate EOT)
         }
-        final Random r = MyRandom.getRandom();
-        boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
+        boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
         if (SpellAbilityAi.playReusable(ai, sa)) {
             randomReturn = true;

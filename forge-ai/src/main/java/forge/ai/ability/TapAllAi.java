@@ -21,7 +21,6 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 import java.util.List;
-import java.util.Random;
 
 public class TapAllAi extends SpellAbilityAi {
     @Override
@@ -64,8 +63,7 @@ public class TapAllAi extends SpellAbilityAi {
             }
         }
 
-        final Random r = MyRandom.getRandom();
-        if (r.nextFloat() > Math.pow(.6667, sa.getActivationsThisTurn())) {
+        if (MyRandom.getRandom().nextFloat() > Math.pow(.6667, sa.getActivationsThisTurn())) {
             return false;
         }
 
@@ -135,9 +133,8 @@ public class TapAllAi extends SpellAbilityAi {
             return true;
         }
 
-        final Random r = MyRandom.getRandom();
         boolean rr = false;
-        if (r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn())) {
+        if (MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn())) {
             rr = true;
         }
 

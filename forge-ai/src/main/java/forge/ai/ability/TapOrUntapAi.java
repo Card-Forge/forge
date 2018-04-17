@@ -8,7 +8,6 @@ import forge.game.spellability.TargetRestrictions;
 import forge.util.MyRandom;
 
 import java.util.List;
-import java.util.Random;
 
 public class TapOrUntapAi extends TapAiBase {
 
@@ -20,8 +19,7 @@ public class TapOrUntapAi extends TapAiBase {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
 
-        final Random r = MyRandom.getRandom();
-        boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
+        boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         if (tgt == null) {
             // assume we are looking to tap human's stuff

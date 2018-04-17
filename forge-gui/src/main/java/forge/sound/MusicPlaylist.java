@@ -2,9 +2,9 @@ package forge.sound;
 
 import java.io.File;
 import java.io.FilenameFilter;
-import java.util.Random;
 
 import forge.properties.ForgeConstants;
+import forge.util.MyRandom;
 
 public enum MusicPlaylist {
     MENUS("menus/"),
@@ -13,7 +13,6 @@ public enum MusicPlaylist {
     private final String subDir;
     private int mostRecentTrackIdx = -1;
     private String[] filenames;
-    private final Random randomGenerator = new Random();
 
     private MusicPlaylist(String subDir0) {
         subDir = subDir0;
@@ -44,7 +43,7 @@ public enum MusicPlaylist {
         else { //determine filename randomly from playlist
             int newIndex;
             do {
-                newIndex = randomGenerator.nextInt(filenames.length);
+                newIndex = MyRandom.getRandom().nextInt(filenames.length);
             } while (newIndex == mostRecentTrackIdx); //ensure a different track is chosen than the last one
 
             mostRecentTrackIdx = newIndex;
