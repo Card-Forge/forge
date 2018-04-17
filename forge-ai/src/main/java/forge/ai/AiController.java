@@ -1145,15 +1145,14 @@ public class AiController {
         }
 
         CardCollection landsWannaPlay = ComputerUtilAbility.getAvailableLandsToPlay(game, player);
-        CardCollection playBeforeLand = CardLists.filter(player.getCardsIn(ZoneType.Hand), new Predicate<Card>() {
-            @Override
-            public boolean apply(Card card) {
-                return "true".equalsIgnoreCase(card.getSVar("PlayBeforeLandDrop"));
-            }
-        });
+        CardCollection playBeforeLand = CardLists.filter(
+            player.getCardsIn(ZoneType.Hand), CardPredicates.hasSVar("PlayBeforeLandDrop")
+        );
 
         if (!playBeforeLand.isEmpty()) {
-            SpellAbility wantToPlayBeforeLand = chooseSpellAbilityToPlayFromList(ComputerUtilAbility.getSpellAbilities(playBeforeLand, player), false);
+            SpellAbility wantToPlayBeforeLand = chooseSpellAbilityToPlayFromList(
+                ComputerUtilAbility.getSpellAbilities(playBeforeLand, player), false
+            );
             if (wantToPlayBeforeLand != null) {
                 return singleSpellAbilityList(wantToPlayBeforeLand);
             }
@@ -1163,14 +1162,28 @@ public class AiController {
             landsWannaPlay = filterLandsToPlay(landsWannaPlay);
             Log.debug("Computer " + game.getPhaseHandler().getPhase().nameForUi);
             if (landsWannaPlay != null && !landsWannaPlay.isEmpty() && player.canPlayLand(null)) {
+                // TODO search for other land it might want to play?
                 Card land = chooseBestLandToPlay(landsWannaPlay);
                 if (ComputerUtil.getDamageFromETB(player, land) < player.getLife() || !player.canLoseLife() 
                         || player.cantLoseForZeroOrLessLife() ) {
                     if (!game.getPhaseHandler().is(PhaseType.MAIN1) || !isSafeToHoldLandDropForMain2(land)) {
-                        game.PLAY_LAND_SURROGATE.setHostCard(land);
                         final List<SpellAbility> abilities = Lists.newArrayList();
-                        abilities.add(game.PLAY_LAND_SURROGATE);
-                        return abilities;
+
+                        LandAbility la = new LandAbility(land, player, null);
+                        if (la.canPlay()) {
+                            abilities.add(la);
+                        }
+
+                        // add mayPlay option
+                        for (CardPlayOption o : land.mayPlay(player)) {
+                            la = new LandAbility(land, player, o.getAbility());
+                            if (la.canPlay()) {
+                                abilities.add(la);
+                            }
+                        }
+                        if (!abilities.isEmpty()) {
+                            return abilities;
+                        }
                     }
                 }
             }

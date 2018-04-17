@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.game.cost.*;
+import forge.game.spellability.LandAbility;
 import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.Spell;
 import forge.util.TextUtil;
@@ -66,8 +67,11 @@ public class HumanPlay {
     public final static boolean playSpellAbility(final PlayerControllerHuman controller, final Player p, SpellAbility sa) {
         FThreads.assertExecutedByEdt(false);
 
-        if (sa == controller.getGame().PLAY_LAND_SURROGATE) {
-            p.playLand(sa.getHostCard(), false);
+        if (sa instanceof LandAbility) {
+            sa.setActivatingPlayer(p);
+            if (sa.canPlay()) {
+                sa.resolve();
+            }
             return false;
         }
 

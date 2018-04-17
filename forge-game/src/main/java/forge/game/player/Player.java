@@ -1644,26 +1644,30 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final boolean playLand(final Card land, final boolean ignoreZoneAndTiming) {
         // Dakkon Blackblade Avatar will use a similar effect
         if (canPlayLand(land, ignoreZoneAndTiming)) {
-            land.setController(this, 0);
-            if (land.isFaceDown()) {
-                land.turnFaceUp();
-            }
-            game.getAction().moveTo(getZone(ZoneType.Battlefield), land, null, new HashMap<String, Object>());
-
-            // play a sound
-            game.fireEvent(new GameEventLandPlayed(this, land));
-
-            // Run triggers
-            final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("Card", land);
-            game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, runParams, false);
-            game.getStack().unfreezeStack();
-            addLandPlayedThisTurn();
+            this.playLandNoCheck(land);
             return true;
         }
 
         game.getStack().unfreezeStack();
         return false;
+    }
+
+    public final void playLandNoCheck(final Card land) {
+        land.setController(this, 0);
+        if (land.isFaceDown()) {
+            land.turnFaceUp();
+        }
+        game.getAction().moveTo(getZone(ZoneType.Battlefield), land, null, new HashMap<String, Object>());
+
+        // play a sound
+        game.fireEvent(new GameEventLandPlayed(this, land));
+
+        // Run triggers
+        final Map<String, Object> runParams = Maps.newHashMap();
+        runParams.put("Card", land);
+        game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, runParams, false);
+        game.getStack().unfreezeStack();
+        addLandPlayedThisTurn();
     }
 
     public final boolean canPlayLand(final Card land) {
