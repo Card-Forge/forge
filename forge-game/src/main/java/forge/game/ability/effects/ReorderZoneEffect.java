@@ -11,7 +11,6 @@ import forge.util.MyRandom;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class ReorderZoneEffect extends SpellAbilityEffect {
     @Override
@@ -33,8 +32,7 @@ public class ReorderZoneEffect extends SpellAbilityEffect {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 CardCollection list = new CardCollection(p.getCardsIn(zone));
                 if (shuffle) {
-                    final Random ran = MyRandom.getRandom();
-                    Collections.shuffle(list, ran);
+                    Collections.shuffle(list, MyRandom.getRandom());
                     p.getZone(zone).setCards(list);
                 }
                 else {

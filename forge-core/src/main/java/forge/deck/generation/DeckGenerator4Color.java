@@ -86,8 +86,8 @@ public class DeckGenerator4Color extends DeckGeneratorBase {
                 return;
 
             case 0:
-                int color1 = r.nextInt(5);
-                int color2 = (color1 + 1 + r.nextInt(4)) % 5;
+                int color1 = MyRandom.getRandom().nextInt(5);
+                int color2 = (color1 + 1 + MyRandom.getRandom().nextInt(4)) % 5;
                 colors = ColorSet.fromMask(MagicColor.WHITE << color1 | MagicColor.WHITE << color2).inverse();
                 return;
 

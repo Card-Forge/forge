@@ -26,7 +26,6 @@ import forge.util.gui.SGuiChoose;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /** 
  * This type extends UnOpenedProduct to support booster choice or random boosters
@@ -43,7 +42,6 @@ public class UnOpenedMeta implements IUnOpenedProduct {
 
     private final List<MetaSet> metaSets;
     private final JoinOperation operation;
-    private final Random generator = MyRandom.getRandom();
 
     /**
      * Constructor for UnOpenedMeta.
@@ -104,7 +102,7 @@ public class UnOpenedMeta implements IUnOpenedProduct {
 
             //$FALL-THROUGH$
             case RandomOne: // AI should fall though here from the case above
-                int selected = generator.nextInt(metaSets.size());
+                int selected = MyRandom.getRandom().nextInt(metaSets.size());
                 final IUnOpenedProduct newBooster = metaSets.get(selected).getBooster();
                 return newBooster.get();
 
