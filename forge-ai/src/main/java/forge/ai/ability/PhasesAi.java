@@ -17,7 +17,6 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 import java.util.List;
-import java.util.Random;
 
 public class PhasesAi extends SpellAbilityAi {
     @Override
@@ -26,8 +25,7 @@ public class PhasesAi extends SpellAbilityAi {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
 
-        final Random r = MyRandom.getRandom();
-        boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
+        boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         List<Card> tgtCards;
         if (tgt == null) {

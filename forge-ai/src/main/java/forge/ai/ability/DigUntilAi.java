@@ -15,7 +15,6 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 import java.util.List;
-import java.util.Random;
 
 public class DigUntilAi extends SpellAbilityAi {
 
@@ -34,8 +33,7 @@ public class DigUntilAi extends SpellAbilityAi {
             chance = 1;
         }
 
-        final Random r = MyRandom.getRandom();
-        final boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
+        final boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
         Player libraryOwner = ai;
         Player opp = ComputerUtil.getOpponentFor(ai);

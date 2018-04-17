@@ -16,7 +16,6 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 import java.util.List;
-import java.util.Random;
 
 public class DiscardAi extends SpellAbilityAi {
 
@@ -142,8 +141,7 @@ public class DiscardAi extends SpellAbilityAi {
             return false;
         }
 
-        final Random r = MyRandom.getRandom();
-        boolean randomReturn = r.nextFloat() <= Math.pow(0.9, sa.getActivationsThisTurn());
+        boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(0.9, sa.getActivationsThisTurn());
 
         // some other variables here, like handsize vs. maxHandSize
 

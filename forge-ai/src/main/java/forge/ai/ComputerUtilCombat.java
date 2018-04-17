@@ -19,7 +19,6 @@ package forge.ai;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -49,6 +48,7 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 
@@ -436,10 +436,10 @@ public class ComputerUtilCombat {
 
         int threshold = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD));
         int maxTreshold = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_MAX_THRESHOLD)) - threshold;
-        Random rand = new Random();
-        int chance = rand.nextInt(80) + 5;
+        
+        int chance = MyRandom.getRandom().nextInt(80) + 5;
         while (maxTreshold > 0) {
-            if (rand.nextInt(100) < chance) {
+            if (MyRandom.getRandom().nextInt(100) < chance) {
                 threshold++;
             }
             maxTreshold--;

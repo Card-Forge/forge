@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import java.util.List;
-import java.util.Random;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -31,8 +30,7 @@ public class EffectAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(final Player ai,final SpellAbility sa) {
         final Game game = ai.getGame();
-        final Random r = MyRandom.getRandom();
-        boolean randomReturn = r.nextFloat() <= .6667;
+        boolean randomReturn = MyRandom.getRandom().nextFloat() <= .6667;
         String logic = "";
 
         if (sa.hasParam("AILogic")) {

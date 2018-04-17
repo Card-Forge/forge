@@ -13,13 +13,10 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.MyRandom;
 
-import java.util.Random;
-
 public class LifeSetAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Random r = MyRandom.getRandom();
         // Ability_Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
         final int myLife = ai.getLife();
@@ -56,7 +53,7 @@ public class LifeSetAi extends SpellAbilityAi {
         }
 
         // prevent run-away activations - first time will always return true
-        final boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
+        final boolean chance = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
@@ -104,7 +101,7 @@ public class LifeSetAi extends SpellAbilityAi {
             return true;
         }
 
-        return ((r.nextFloat() < .6667) && chance);
+        return ((MyRandom.getRandom().nextFloat() < .6667) && chance);
     }
 
     @Override

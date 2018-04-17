@@ -7,8 +7,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.MyRandom;
 
-import java.util.Random;
-
 public class LifeExchangeAi extends SpellAbilityAi {
 
     /*
@@ -21,7 +19,6 @@ public class LifeExchangeAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        final Random r = MyRandom.getRandom();
         final int myLife = aiPlayer.getLife();
         Player opponent = ComputerUtil.getOpponentFor(aiPlayer);
         final int hLife = opponent.getLife();
@@ -31,7 +28,7 @@ public class LifeExchangeAi extends SpellAbilityAi {
         }
 
         // prevent run-away activations - first time will always return true
-        boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
+        boolean chance = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         /*
          * TODO - There is one card that takes two targets (Soul Conduit)
@@ -58,7 +55,7 @@ public class LifeExchangeAi extends SpellAbilityAi {
         // cost includes sacrifice probably, so make sure it's worth it
         chance &= (hLife > (myLife + 8));
 
-        return ((r.nextFloat() < .6667) && chance);
+        return ((MyRandom.getRandom().nextFloat() < .6667) && chance);
     }
 
     /**

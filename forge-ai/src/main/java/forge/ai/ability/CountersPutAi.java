@@ -30,7 +30,6 @@ import forge.util.MyRandom;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 public class CountersPutAi extends SpellAbilityAi {
 
@@ -118,7 +117,6 @@ public class CountersPutAi extends SpellAbilityAi {
     protected boolean checkApiLogic(Player ai, final SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the expected targets could be
-        final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
@@ -514,7 +512,7 @@ public class CountersPutAi extends SpellAbilityAi {
             }
         } else {
             final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
-            // Don't activate Curse abilities on my cards and non-curse abilites
+            // Don't activate Curse abilities on my cards and non-curse abilities
             // on my opponents
             if (cards.isEmpty() || (cards.get(0).getController().isOpponentOf(ai) && !sa.isCurse())) {
                 return false;
@@ -524,7 +522,7 @@ public class CountersPutAi extends SpellAbilityAi {
             // each non +1/+1 counter on the card is a 10% chance of not
             // activating this ability.
 
-            if (!(type.equals("P1P1") || type.equals("M1M1") || type.equals("ICE")) && (r.nextFloat() < (.1 * currCounters))) {
+            if (!(type.equals("P1P1") || type.equals("M1M1") || type.equals("ICE")) && (MyRandom.getRandom().nextFloat() < (.1 * currCounters))) {
                 return false;
             }
             // Instant +1/+1
