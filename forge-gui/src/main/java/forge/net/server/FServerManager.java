@@ -221,22 +221,25 @@ public final class FServerManager {
         DatagramSocket s = new DatagramSocket();
         s.connect(InetAddress.getByAddress(this.externalAddress), 0);
         NetworkInterface n = NetworkInterface.getByInetAddress(s.getLocalAddress());
-        Enumeration en = n.getInetAddresses();
+        Enumeration<InetAddress> en = n.getInetAddresses();
         while (en.hasMoreElements()) {
             InetAddress addr = (InetAddress) en.nextElement();
             if (addr instanceof Inet4Address) {
                 if (preferIPv6) {
                     continue;
                 }
+                s.close();
                 return addr.getHostAddress();
             }
             if (addr instanceof Inet6Address) {
                 if (preferIpv4) {
                     continue;
                 }
+                s.close();
                 return addr.getHostAddress();
             }
         }
+        s.close();
         return null;
     }
 
