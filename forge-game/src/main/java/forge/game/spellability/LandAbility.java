@@ -17,17 +17,11 @@
  */
 package forge.game.spellability;
 
-import java.util.Map;
-
-import com.google.common.collect.Maps;
-
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
-import forge.game.event.GameEventLandPlayed;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
-import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 
@@ -93,25 +87,7 @@ public class LandAbility extends Ability {
     }
     @Override
     public void resolve() {
-        final Card land = this.getHostCard();
-        final Player p = this.getActivatingPlayer();
-        final Game game = p.getGame();
-        
-        land.setController(p, 0);
-        if (land.isFaceDown()) {
-            land.turnFaceUp();
-        }
-        game.getAction().moveTo(p.getZone(ZoneType.Battlefield), land, null, Maps.newHashMap());
-
-        // play a sound
-        game.fireEvent(new GameEventLandPlayed(p, land));
-
-        // Run triggers
-        final Map<String, Object> runParams = Maps.newHashMap();
-        runParams.put("Card", land);
-        game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, runParams, false);
-        game.getStack().unfreezeStack();
-        p.addLandPlayedThisTurn();
+        getActivatingPlayer().playLandNoCheck(getHostCard());
 
         // increase mayplay used
         if (getMayPlay() != null) {
