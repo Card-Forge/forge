@@ -36,6 +36,10 @@ public class CostPutCardToLib extends CostPartWithList {
     // PutCardToLibFromSameGrave<Num/LibPos/Type{/TypeDescription}>
     // PutCardToLibFromGrave<Num/LibPos/Type{/TypeDescription}>
 
+    /**
+     * Serializables need a version ID.
+     */
+    private static final long serialVersionUID = 1L;
     public final ZoneType from;
     public final boolean sameZone;
     private String libPosition = "0";

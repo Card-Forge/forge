@@ -925,6 +925,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             break;
                         case Brawl:
                             additionalFilter = DeckFormat.Brawl.isLegalCommanderPredicate();
+                            break;
+                        default:
+                            // Do nothing
                     }
                     cardManager.setCaption("Commanders");
                 }
@@ -937,10 +940,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             break;
                         case Brawl:
                             additionalFilter = DeckFormat.Brawl.isLegalCardForCommanderOrLegalPartnerPredicate(commanders);
+                            break;
+                        default:
+                            // Do nothing
                     }
                     cardManager.setCaption("Cards");
                 }
-                //fall through to below
+                // fall through to below
             default:
                 if (cardManager.getWantUnique()) {
                     cardManager.setPool(editorType.applyCardFilter(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCards(), PaperCard.class), additionalFilter), true);

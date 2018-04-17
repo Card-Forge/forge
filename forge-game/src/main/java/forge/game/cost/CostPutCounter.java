@@ -32,7 +32,11 @@ import java.util.List;
  * The Class CostPutCounter.
  */
 public class CostPutCounter extends CostPartWithList {
-     // Put Counter doesn't really have a "Valid" portion of the cost
+     /**
+     * Serializables need a version ID.
+     */
+    private static final long serialVersionUID = 1L;
+    // Put Counter doesn't really have a "Valid" portion of the cost
     private final CounterType counter;
     private int lastPaidAmount = 0;
 

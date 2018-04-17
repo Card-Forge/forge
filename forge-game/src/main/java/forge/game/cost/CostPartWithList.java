@@ -28,6 +28,10 @@ import forge.game.spellability.SpellAbility;
  * The Class CostPartWithList.
  */
 public abstract class CostPartWithList extends CostPart {
+    /**
+     * Serializables need a version ID.
+     */
+    private static final long serialVersionUID = 1L;
     /** The lists: one for LKI, one for the actual cards. */
     private final CardCollection lkiList = new CardCollection();
     protected final CardCollection cardList = new CardCollection();

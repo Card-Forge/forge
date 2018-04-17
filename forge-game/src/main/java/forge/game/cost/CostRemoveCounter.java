@@ -40,6 +40,10 @@ public class CostRemoveCounter extends CostPartWithList {
     // Quillspike, Rift Elemental, Sage of Fables, Spike Rogue
 
 
+    /**
+     * Serializables need a version ID.
+     */
+    private static final long serialVersionUID = 1L;
     public final CounterType counter;
     public final ZoneType zone;
     private int cntRemoved;

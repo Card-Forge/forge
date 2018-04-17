@@ -35,6 +35,11 @@ public class CostDiscard extends CostPartWithList {
     // Inputs
 
     /**
+     * Serializables need a version ID.
+     */
+    private static final long serialVersionUID = 1L;
+
+    /**
      * Instantiates a new cost discard.
      * 
      * @param amount

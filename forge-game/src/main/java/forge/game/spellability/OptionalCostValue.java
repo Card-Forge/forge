@@ -5,6 +5,10 @@ import forge.game.cost.Cost;
 import java.io.Serializable;
 
 public class OptionalCostValue implements Serializable {
+    /**
+     * Serializables need a version ID.
+     */
+    private static final long serialVersionUID = 1L;
     private OptionalCost type;
     private Cost cost;
 

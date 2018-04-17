@@ -26,6 +26,10 @@ import forge.game.spellability.SpellAbility;
  * The Class CostPayLife.
  */
 public class CostPayLife extends CostPart {
+    /**
+     * Serializables need a version ID.
+     */
+    private static final long serialVersionUID = 1L;
     int paidAmount = 0;
 
     /**

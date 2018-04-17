@@ -30,6 +30,10 @@ import java.util.Map;
  * The Class CostRemoveAnyCounter.
  */
 public class CostRemoveAnyCounter extends CostPartWithList {
+    /**
+     * Serializables need a version ID.
+     */
+    private static final long serialVersionUID = 1L;
     // RemoveAnyCounter<Num/Type/{TypeDescription}>
     // Power Conduit and Chisei, Heart of Oceans
     // Both cards have "Remove a counter from a permanent you control"

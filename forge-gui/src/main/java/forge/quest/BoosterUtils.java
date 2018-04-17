@@ -219,12 +219,15 @@ public final class BoosterUtils {
                         preferredColors.addAll(possibleColors);
                     }
                     includeArtifacts = MyRandom.getRandom().nextDouble() < 0.5;
+                    // Fall through
                 case BALANCED:
                     populateBalancedFilters(colorFilters, preferredColors, cardPool, includeArtifacts);
                     break;
                 case RANDOM:
                     populateRandomFilters(colorFilters);
                     break;
+                default:
+                    // Do nothing
 
             }
 

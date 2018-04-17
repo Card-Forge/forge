@@ -29,6 +29,11 @@ import java.util.List;
  */
 public class CostDraw extends CostPart {
     /**
+     * Serializables need a version ID.
+     */
+    private static final long serialVersionUID = 1L;
+
+    /**
      * CostDraw.
      * @param amount
      * @param playerSelector
