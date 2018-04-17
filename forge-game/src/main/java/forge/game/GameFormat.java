@@ -34,7 +34,6 @@ import forge.item.PaperCard;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.storage.StorageBase;
-import forge.util.storage.StorageReaderFileSections;
 import forge.util.storage.StorageReaderFolder;
 
 import java.io.File;

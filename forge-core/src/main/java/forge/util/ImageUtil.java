@@ -7,8 +7,6 @@ import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.item.PaperCard;
 
-import java.io.File;
-
 import org.apache.commons.lang3.StringUtils;
 
 public class ImageUtil {

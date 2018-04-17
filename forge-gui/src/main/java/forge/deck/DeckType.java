@@ -1,7 +1,6 @@
 package forge.deck;
 
 import forge.model.FModel;
-import forge.properties.ForgePreferences;
 
 public enum DeckType {
     CUSTOM_DECK ("Custom User Decks"),

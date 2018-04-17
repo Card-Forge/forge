@@ -22,8 +22,6 @@ import forge.card.mana.ManaCostShard;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
-import java.io.Serializable;
-
 /**
  * The mana component of any spell or ability cost
  */

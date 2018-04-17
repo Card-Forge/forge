@@ -17,7 +17,6 @@
  */
 package forge.card;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import forge.Graphics;
 import forge.assets.FSkinImage;
 import forge.card.mana.ManaCost;

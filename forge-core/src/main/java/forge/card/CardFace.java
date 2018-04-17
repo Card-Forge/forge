@@ -1,7 +1,6 @@
 package forge.card;
 
 import forge.card.mana.ManaCost;
-import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
