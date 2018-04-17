@@ -381,7 +381,7 @@ public class DamageDealAi extends DamageAiBase {
             int pwScore = curLoyalty * 10;
 
             for (SpellAbility sa : pw.getSpellAbilities()) {
-                if (sa.hasParam("Ultimate")) {
+                if (sa.hasParam("Ultimate") && sa.getPayCosts() != null) {
                     int loyaltyCost = 0;
                     CostRemoveCounter remLoyalty = sa.getPayCosts().getCostPartByType(CostRemoveCounter.class);
                     if (remLoyalty != null) {
