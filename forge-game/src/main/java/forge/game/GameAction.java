@@ -80,7 +80,7 @@ public class GameAction {
     }
 
     public Card changeZone(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position, SpellAbility cause) {
-        return changeZone(zoneFrom, zoneTo, c, position, cause, Maps.newHashMap());
+        return changeZone(zoneFrom, zoneTo, c, position, cause, null);
     }
     
     public Card changeZone(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position, SpellAbility cause, Map<String, Object> params) {
@@ -287,8 +287,10 @@ public class GameAction {
             repParams.put("Cause", cause);
             repParams.put("Origin", zoneFrom != null ? zoneFrom.getZoneType() : null);
             repParams.put("Destination", zoneTo.getZoneType());
-            
-            repParams.putAll(params);
+
+            if (params != null) {
+                repParams.putAll(params);
+            }
 
             ReplacementResult repres = game.getReplacementHandler().run(repParams);
             if (repres != ReplacementResult.NotReplaced) {
@@ -387,13 +389,19 @@ public class GameAction {
         runParams.put("Destination", zoneTo.getZoneType().name());
         runParams.put("SpellAbilityStackInstance", game.stack.peek());
         runParams.put("IndividualCostPaymentInstance", game.costPaymentStack.peek());
-        runParams.putAll(params);
+
+        if (params != null) {
+            runParams.putAll(params);
+        }
+
         game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, true);
         if (zoneFrom != null && zoneFrom.is(ZoneType.Battlefield)) {
             final Map<String, Object> runParams2 = Maps.newHashMap();
             runParams2.put("Card", lastKnownInfo);
             runParams2.put("OriginalController", zoneFrom.getPlayer());
-            runParams2.putAll(params);
+            if(params != null) {
+                runParams2.putAll(params);
+            }
             game.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams2, false);
         }
         // AllZone.getStack().chooseOrderOfSimultaneousStackEntryAll();
@@ -535,7 +543,7 @@ public class GameAction {
     }
 
     public final Card moveTo(final Zone zoneTo, Card c, SpellAbility cause) {
-        return moveTo(zoneTo, c, cause, Maps.newHashMap());
+        return moveTo(zoneTo, c, cause, null);
     }
     
     public final Card moveTo(final Zone zoneTo, Card c, SpellAbility cause, Map<String, Object> params) {
@@ -545,7 +553,7 @@ public class GameAction {
     }
 
     public final Card moveTo(final Zone zoneTo, Card c, Integer position, SpellAbility cause) {
-        return moveTo(zoneTo, c, position, cause, Maps.newHashMap());
+        return moveTo(zoneTo, c, position, cause, null);
     }
     
     public final Card moveTo(final Zone zoneTo, Card c, Integer position, SpellAbility cause, Map<String, Object> params) {
@@ -621,7 +629,7 @@ public class GameAction {
     }
 
     public final Card moveToStack(final Card c, SpellAbility cause) {
-        return moveToStack(c, cause, Maps.newHashMap());
+        return moveToStack(c, cause, null);
     }
     public final Card moveToStack(final Card c, SpellAbility cause, Map<String, Object> params) {
         final Zone stack = game.getStackZone();
@@ -629,7 +637,7 @@ public class GameAction {
     }
 
     public final Card moveToGraveyard(final Card c, SpellAbility cause) {
-        return moveToGraveyard(c, cause, Maps.newHashMap());
+        return moveToGraveyard(c, cause, null);
     }
     public final Card moveToGraveyard(final Card c, SpellAbility cause, Map<String, Object> params) {
         final PlayerZone grave = c.getOwner().getZone(ZoneType.Graveyard);
@@ -638,7 +646,7 @@ public class GameAction {
     }
 
     public final Card moveToHand(final Card c, SpellAbility cause) {
-        return moveToHand(c, cause, Maps.newHashMap());
+        return moveToHand(c, cause, null);
     }
     
     public final Card moveToHand(final Card c, SpellAbility cause, Map<String, Object> params) {
@@ -647,7 +655,7 @@ public class GameAction {
     }
 
     public final Card moveToPlay(final Card c, SpellAbility cause) {
-        return moveToPlay(c, cause, Maps.newHashMap());
+        return moveToPlay(c, cause, null);
     }
     
     public final Card moveToPlay(final Card c, SpellAbility cause, Map<String, Object> params) {
@@ -656,7 +664,7 @@ public class GameAction {
     }
 
     public final Card moveToPlay(final Card c, final Player p, SpellAbility cause) {
-        return moveToPlay(c, p, cause, Maps.newHashMap());
+        return moveToPlay(c, p, cause, null);
     }
     
     public final Card moveToPlay(final Card c, final Player p, SpellAbility cause, Map<String, Object> params) {
@@ -666,7 +674,7 @@ public class GameAction {
     }
 
     public final Card moveToBottomOfLibrary(final Card c, SpellAbility cause) {
-        return moveToBottomOfLibrary(c, cause, Maps.newHashMap());
+        return moveToBottomOfLibrary(c, cause, null);
     }
     
     public final Card moveToBottomOfLibrary(final Card c, SpellAbility cause, Map<String, Object> params) {
@@ -674,7 +682,7 @@ public class GameAction {
     }
 
     public final Card moveToLibrary(final Card c, SpellAbility cause) {
-        return moveToLibrary(c, cause, Maps.newHashMap());
+        return moveToLibrary(c, cause, null);
     }
     
     public final Card moveToLibrary(final Card c, SpellAbility cause, Map<String, Object> params) {
@@ -682,7 +690,7 @@ public class GameAction {
     }
 
     public final Card moveToLibrary(Card c, int libPosition, SpellAbility cause) {
-        return moveToLibrary(c, libPosition, cause, Maps.newHashMap());
+        return moveToLibrary(c, libPosition, cause, null);
     }
     
     public final Card moveToLibrary(Card c, int libPosition, SpellAbility cause, Map<String, Object> params) {
@@ -694,7 +702,7 @@ public class GameAction {
     }
 
     public final Card moveToVariantDeck(Card c, ZoneType zone, int deckPosition, SpellAbility cause) {
-        return moveToVariantDeck(c, zone, deckPosition, cause, Maps.newHashMap());
+        return moveToVariantDeck(c, zone, deckPosition, cause, null);
     }
     
     public final Card moveToVariantDeck(Card c, ZoneType zone, int deckPosition, SpellAbility cause, Map<String, Object> params) {
@@ -706,7 +714,7 @@ public class GameAction {
     }
 
     public final Card exile(final Card c, SpellAbility cause) {
-        return exile(c, cause, Maps.newHashMap());
+        return exile(c, cause, null);
     }
     public final Card exile(final Card c, SpellAbility cause, Map<String, Object> params) {
         if (game.isCardExiled(c)) {
@@ -717,7 +725,7 @@ public class GameAction {
     }
 
     public final Card moveTo(final ZoneType name, final Card c, SpellAbility cause) {
-        return moveTo(name, c, cause, Maps.newHashMap());
+        return moveTo(name, c, cause, null);
     }
     
     public final Card moveTo(final ZoneType name, final Card c, SpellAbility cause, Map<String, Object> params) {
@@ -725,7 +733,7 @@ public class GameAction {
     }
     
     public final Card moveTo(final ZoneType name, final Card c, final int libPosition, SpellAbility cause) {
-        return moveTo(name, c, libPosition, cause, Maps.newHashMap());
+        return moveTo(name, c, libPosition, cause, null);
     }
 
     public final Card moveTo(final ZoneType name, final Card c, final int libPosition, SpellAbility cause, Map<String, Object> params) {
@@ -1095,7 +1103,7 @@ public class GameAction {
 
             if (!perm.isInZone(tgtZone) || !perm.canBeEnchantedBy(c, true) || (perm.isPhasedOut() && !c.isPhasedOut())) {
                 c.unEnchantEntity(perm);
-                moveToGraveyard(c, null, Maps.newHashMap());
+                moveToGraveyard(c, null, null);
                 checkAgain = true;
             }
         } else if (entity instanceof Player) {
@@ -1113,13 +1121,13 @@ public class GameAction {
             }
             if (invalid) {
                 c.unEnchantEntity(pl);
-                moveToGraveyard(c, null, Maps.newHashMap());
+                moveToGraveyard(c, null, null);
                 checkAgain = true;
             }
         }
 
         if (c.isInPlay() && !c.isEnchanting()) {
-            moveToGraveyard(c, null, Maps.newHashMap());
+            moveToGraveyard(c, null, null);
             checkAgain = true;
         }
         return checkAgain;
@@ -1310,7 +1318,7 @@ public class GameAction {
 
         for (Card c : list) {
             if (c.getCounters(CounterType.LOYALTY) <= 0) {
-                moveToGraveyard(c, null, Maps.newHashMap());
+                moveToGraveyard(c, null, null);
                 // Play the Destroy sound
                 game.fireEvent(new GameEventCardDestroyed());
                 recheck = true;
@@ -1517,7 +1525,7 @@ public class GameAction {
             return null;
         }
 
-        final Card newCard = moveToGraveyard(c, cause, Maps.newHashMap());
+        final Card newCard = moveToGraveyard(c, cause, null);
 
         return newCard;
     }
@@ -1739,7 +1747,7 @@ public class GameAction {
                     if (!isCommander) {
                         toMulligan = new CardCollection(p.getCardsIn(ZoneType.Hand));
                         for (final Card c : toMulligan) {
-                            moveToLibrary(c, null, Maps.newHashMap());
+                            moveToLibrary(c, null, null);
                         }
                         try {
                             Thread.sleep(100); //delay for a tiny bit to give UI a chance catch up
@@ -1751,7 +1759,7 @@ public class GameAction {
                     } else {
                         List<Card> toExile = Lists.newArrayList(toMulligan);
                         for (Card c : toExile) {
-                            exile(c, null, Maps.newHashMap());
+                            exile(c, null, null);
                         }
                         exiledDuringMulligans.addAll(p, toExile);
                         try {
@@ -1777,7 +1785,7 @@ public class GameAction {
                 Player p = kv.getKey();
                 Collection<Card> cc = kv.getValue();
                 for (Card c : cc) {
-                    moveToLibrary(c, null, Maps.newHashMap());
+                    moveToLibrary(c, null, null);
                 }
                 p.shuffle(null);
             }
