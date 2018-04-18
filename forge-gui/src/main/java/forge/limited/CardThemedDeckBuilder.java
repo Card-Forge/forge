@@ -152,7 +152,6 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      *
      * @return the new Deck.
      */
-    @SuppressWarnings("unused")
     public Deck buildDeck() {
         // 1. Prepare
         hasColor = Predicates.or(new MatchColorIdentity(colors), COLORLESS_CARDS);

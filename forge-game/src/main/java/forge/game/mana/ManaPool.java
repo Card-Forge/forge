@@ -314,7 +314,7 @@ public class ManaPool implements Iterable<Mana> {
         }
 
         // When is it legitimate for all the mana not to be accountable?
-        // Does this condition really indicate an bug in Forge?
+        // TODO: Does this condition really indicate an bug in Forge?
         if (manaNotAccountedFor) {
             return false;
         }
