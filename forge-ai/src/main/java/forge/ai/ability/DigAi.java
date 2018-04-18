@@ -124,11 +124,11 @@ public class DigAi extends SpellAbilityAi {
     
     @Override
     public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> valid, boolean isOptional, Player relatedPlayer) {
-        Card chosen = ComputerUtilCard.getBestAI(valid);
         if (sa.getActivatingPlayer().isOpponentOf(ai) && relatedPlayer.isOpponentOf(ai)) {
-            return ComputerUtilCard.getWorstAI(valid);
+            return ComputerUtilCard.getWorstPermanentAI(valid, false, true, false, false);
+        } else {
+            return ComputerUtilCard.getBestAI(valid);
         }
-        return chosen;
     }
 
     /* (non-Javadoc)
