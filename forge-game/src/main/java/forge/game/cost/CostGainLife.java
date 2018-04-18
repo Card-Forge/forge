@@ -28,6 +28,10 @@ import java.util.List;
  * The Class CostGainLife.
  */
 public class CostGainLife extends CostPart {
+    /**
+     * Serializables need a version ID.
+     */
+    private static final long serialVersionUID = 1L;
     private final int cntPlayers; // MAX_VALUE means ALL/EACH PLAYERS
 
     /**

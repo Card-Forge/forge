@@ -47,6 +47,10 @@ import forge.util.TextUtil;
  * @version $Id$
  */
 public class Cost implements Serializable {
+    /**
+     * Serializables need a version ID.
+     */
+    private static final long serialVersionUID = 1L;
     private boolean isAbility = true;
     private final List<CostPart> costParts = Lists.newArrayList();
     private boolean isMandatory = false;

@@ -27,8 +27,6 @@ import forge.ai.AiProfileUtil;
 import forge.card.CardPreferences;
 import forge.card.CardType;
 import forge.deck.CardRelationMatrixGenerator;
-import forge.deck.DeckFormat;
-import forge.deck.io.CardThemedMatrixIO;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
 import forge.game.GameType;

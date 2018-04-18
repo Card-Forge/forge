@@ -28,6 +28,11 @@ import forge.game.spellability.SpellAbility;
 public class CostFlipCoin extends CostPartWithList {
 
     /**
+     * Serializables need a version ID.
+     */
+    private static final long serialVersionUID = 1L;
+
+    /**
      * Instantiates a new cost FlipCoin.
      * 
      * @param amount

@@ -1,7 +1,5 @@
 package forge.deck;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import forge.card.CardEdition;
 import forge.game.GameFormat;
 import forge.item.PaperCard;

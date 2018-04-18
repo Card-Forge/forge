@@ -4,7 +4,6 @@ import com.google.common.collect.Sets;
 import forge.card.mana.ManaCostShard;
 import forge.game.GameView;
 import forge.game.card.Card;
-import forge.game.card.CardUtil;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.card.CounterType;

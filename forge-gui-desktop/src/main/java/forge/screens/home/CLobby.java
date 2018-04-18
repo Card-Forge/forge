@@ -8,7 +8,6 @@ import javax.swing.SwingUtilities;
 
 import com.google.common.collect.Iterables;
 
-import forge.deck.CommanderDeckGenerator;
 import forge.deck.DeckProxy;
 import forge.deck.DeckType;
 import forge.deckchooser.DecksComboBoxEvent;

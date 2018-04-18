@@ -27,6 +27,11 @@ import forge.game.spellability.SpellAbility;
  */
 public class CostDamage extends CostPart {
 
+    /**
+     * Serializables need a version ID.
+     */
+    private static final long serialVersionUID = 1L;
+
     public CostDamage(final String amount) {
         this.setAmount(amount);
     }

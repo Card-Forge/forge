@@ -33,6 +33,12 @@ public class CostUnattach extends CostPartWithList {
     // Unattach<Card.Attached+namedHeartseeker/Equipped Heartseeker> if equipped creature has the ability
 
     /**
+     * Serializables need a version ID.
+     */
+    private static final long serialVersionUID = 1L;
+
+
+    /**
      * Instantiates a new cost unattach.
      */
     public CostUnattach(final String type, final String desc) {

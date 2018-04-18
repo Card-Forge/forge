@@ -610,7 +610,7 @@ public final class QuestUtilCards {
 	    }
 
 	    if (!temp.isEmpty()) {
-		    toAddTo.add(temp.get((int) (Math.random() * temp.size())));
+		    toAddTo.add(temp.get((int) (MyRandom.getRandom().nextDouble() * temp.size())));
 		    return amount - 1;
 	    }
 
