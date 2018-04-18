@@ -4,6 +4,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import forge.StaticData;
 import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -503,17 +504,22 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             @Override
             public boolean apply(PaperCard card) {
                 return format.isLegalCard(card)
-                        &&!card.getRules().getManaCost().isPureGeneric()
+                        && !card.getRules().getManaCost().isPureGeneric()
                         && colors.containsAllColorsFrom(card.getRules().getColorIdentity().getColor())
                         && !deckList.contains(card)
-                        && (keyCard == null || !keyCard.equals(card))
-                        && (secondKeyCard==null || !secondKeyCard.equals(card))
-                        &&!card.getRules().getAiHints().getRemAIDecks()
-                        &&!card.getRules().getAiHints().getRemRandomDecks()
-                        &&!card.getRules().getMainPart().getType().isLand();
+                        && !card.getRules().getAiHints().getRemAIDecks()
+                        && !card.getRules().getAiHints().getRemRandomDecks()
+                        && !card.getRules().getMainPart().getType().isLand();
             }
         };
         List<PaperCard> randomPool = Lists.newArrayList(pool.getAllCards(possibleFromFullPool));
+        //ensure we do not add more keycards in case they are commanders
+        if (keyCard != null) {
+            randomPool.removeAll(StaticData.instance().getCommonCards().getAllCards(keyCard.getName()));
+        }
+        if (secondKeyCard != null) {
+            randomPool.removeAll(StaticData.instance().getCommonCards().getAllCards(secondKeyCard.getName()));
+        }
         Collections.shuffle(randomPool, MyRandom.getRandom());
         Iterator<PaperCard> iRandomPool=randomPool.iterator();
         while (deckList.size() < targetSize) {

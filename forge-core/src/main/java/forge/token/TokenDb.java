@@ -3,7 +3,6 @@ package forge.token;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
 import forge.card.*;
-import forge.item.PaperCard;
 import forge.item.PaperToken;
 
 import java.util.*;

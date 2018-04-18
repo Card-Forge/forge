@@ -7,16 +7,12 @@ import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.deck.generation.DeckGeneratorBase;
-import forge.deck.generation.IDeckGenPool;
-import forge.game.GameFormat;
-import forge.game.GameType;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.util.ItemPool;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by maustin on 09/05/2017.

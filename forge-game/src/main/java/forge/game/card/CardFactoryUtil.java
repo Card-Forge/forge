@@ -552,6 +552,10 @@ public class CardFactoryUtil {
             return doXMath(player.getCardsIn(ZoneType.Battlefield).size(), m, source);
         }
 
+        if (value.contains("StartingLife")) {
+            return doXMath(player.getStartingLife(), m, source);
+        }
+
         if (value.contains("LifeTotal")) {
             return doXMath(player.getLife(), m, source);
         }

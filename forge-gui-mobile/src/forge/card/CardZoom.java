@@ -13,7 +13,6 @@ import forge.assets.FSkinImage;
 import forge.deck.CardThemedDeckGenerator;
 import forge.deck.CommanderDeckGenerator;
 import forge.deck.DeckProxy;
-import forge.deck.FDeckViewer;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.item.IPaperCard;

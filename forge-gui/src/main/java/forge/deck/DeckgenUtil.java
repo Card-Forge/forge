@@ -5,6 +5,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import com.google.common.collect.Lists;
+import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
@@ -322,7 +323,7 @@ public class DeckgenUtil {
     /** @return {@link forge.deck.Deck} */
     public static Deck getRandomCustomDeck() {
         final IStorage<Deck> allDecks = FModel.getDecks().getConstructed();
-        final int rand = (int) (Math.floor(Math.random() * allDecks.size()));
+        final int rand = (int) (Math.floor(MyRandom.getRandom().nextDouble() * allDecks.size()));
         final String name = allDecks.getItemNames().toArray(new String[0])[rand];
         return allDecks.get(name);
     }
@@ -330,14 +331,14 @@ public class DeckgenUtil {
     /** @return {@link forge.deck.Deck} */
     public static Deck getRandomPreconDeck() {
         final List<DeckProxy> allDecks = DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons());
-        final int rand = (int) (Math.floor(Math.random() * allDecks.size()));
+        final int rand = (int) (Math.floor(MyRandom.getRandom().nextDouble() * allDecks.size()));
         return allDecks.get(rand).getDeck();
     }
 
     /** @return {@link forge.deck.Deck} */
     public static Deck getRandomThemeDeck() {
         final List<DeckProxy> allDecks = DeckProxy.getAllThemeDecks();
-        final int rand = (int) (Math.floor(Math.random() * allDecks.size()));
+        final int rand = (int) (Math.floor(MyRandom.getRandom().nextDouble() * allDecks.size()));
         return allDecks.get(rand).getDeck();
     }
 
@@ -353,7 +354,7 @@ public class DeckgenUtil {
             allQuestDecks.add(e.getEventDeck());
         }
 
-        final int rand = (int) (Math.floor(Math.random() * allQuestDecks.size()));
+        final int rand = (int) (Math.floor(MyRandom.getRandom().nextDouble() * allQuestDecks.size()));
         return allQuestDecks.get(rand);
     }
 
@@ -540,7 +541,7 @@ public class DeckgenUtil {
 
             if(partners.size()>0&&commander.getRules().canBePartnerCommander()){
                 selectedPartner=partners.get(MyRandom.getRandom().nextInt(partners.size()));
-                preSelectedCards.remove(selectedPartner);
+                preSelectedCards.removeAll(StaticData.instance().getCommonCards().getAllCards(selectedPartner.getName()));
             }
             //randomly remove cards
             int removeCount=0;
@@ -562,6 +563,7 @@ public class DeckgenUtil {
                 ++i;
             }
             preSelectedCards.removeAll(toRemove);
+            preSelectedCards.removeAll(StaticData.instance().getCommonCards().getAllCards(commander.getName()));
             gen = new CardThemedCommanderDeckBuilder(commander, selectedPartner,preSelectedCards,forAi,format);
         }else{
             cardDb = FModel.getMagicDb().getCommonCards();
@@ -582,6 +584,7 @@ public class DeckgenUtil {
             }
             List<PaperCard> shortList = cardList.subList(1, shortlistlength);
             shortList.remove(commander);
+            shortList.removeAll(StaticData.instance().getCommonCards().getAllCards(commander.getName()));
             gen = new CardThemedCommanderDeckBuilder(commander, selectedPartner,shortList,forAi,format);
 
         }

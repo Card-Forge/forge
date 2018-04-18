@@ -126,7 +126,7 @@ public class QuestEventDuelManager {
             }
         }
 
-        QuestEventDuel randomOpponent = possibleDuels.get(((int) (possibleDuels.size() * Math.random())));
+        QuestEventDuel randomOpponent = possibleDuels.get(((int) (possibleDuels.size() * MyRandom.getRandom().nextDouble())));
 
         duel.setTitle("Random Opponent");
         duel.setIconImageKey(randomOpponent.getIconImageKey());
@@ -183,7 +183,7 @@ public class QuestEventDuelManager {
         } else {
             addDuel(duelOpponents, QuestEventDifficulty.HARD, 2);
             addDuel(duelOpponents, QuestEventDifficulty.EXPERT, 1);
-            if (Math.random() * 3 < 2) {
+            if (MyRandom.getRandom().nextDouble() * 3 < 2) {
                 randomDuelDifficulty = QuestEventDifficulty.HARD;
             } else {
                 randomDuelDifficulty = QuestEventDifficulty.EXPERT;

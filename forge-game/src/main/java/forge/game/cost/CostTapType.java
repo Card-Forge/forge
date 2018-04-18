@@ -32,6 +32,10 @@ import forge.util.TextUtil;
  */
 public class CostTapType extends CostPartWithList {
 
+    /**
+     * Serializables need a version ID.
+     */
+    private static final long serialVersionUID = 1L;
     public final boolean canTapSource;
 
     /**

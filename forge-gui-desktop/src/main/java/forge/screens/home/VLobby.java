@@ -19,7 +19,6 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import forge.deckchooser.DecksComboBoxEvent;
 import net.miginfocom.swing.MigLayout;
 
 import com.google.common.collect.ImmutableList;

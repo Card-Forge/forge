@@ -29,6 +29,10 @@ import forge.game.zone.ZoneType;
  * The Class CostUntapType.
  */
 public class CostUntapType extends CostPartWithList {
+    /**
+     * Serializables need a version ID.
+     */
+    private static final long serialVersionUID = 1L;
     public final boolean canUntapSource;
 
     public CostUntapType(final String amount, final String type, final String description, boolean hasUntapInPrice) {

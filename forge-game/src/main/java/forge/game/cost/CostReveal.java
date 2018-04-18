@@ -33,6 +33,11 @@ import forge.game.zone.ZoneType;
 public class CostReveal extends CostPartWithList {
     // Reveal<Num/Type/TypeDescription>
 
+    /**
+     * Serializables need a version ID.
+     */
+    private static final long serialVersionUID = 1L;
+
     public CostReveal(final String amount, final String type, final String description) {
         super(amount, type, description);
     }

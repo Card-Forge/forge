@@ -31,6 +31,12 @@ public class CostReturn extends CostPartWithList {
     // Return<Num/Type{/TypeDescription}>
 
     /**
+     * Serializables need a version ID.
+     */
+    private static final long serialVersionUID = 1L;
+
+
+    /**
      * Instantiates a new cost return.
      * 
      * @param amount
