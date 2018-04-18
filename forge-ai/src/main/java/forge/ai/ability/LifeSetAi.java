@@ -126,10 +126,9 @@ public class LifeSetAi extends SpellAbilityAi {
 
         // special cases when amount can't be calculated without targeting first
         if (amount == 0 && "TargetedPlayer$StartingLife/HalfDown".equals(source.getSVar(amountStr))) {
-            // TODO: this assumes equal starting life for all players, which is not true e.g. for Archenemy
-            amount = ai.getStartingLife() / 2;
+            // e.g. Torgaar, Famine Incarnate
+            return doHalfStartingLifeLogic(ai, opponent, sa);
         }
-
 
         if (sourceName.equals("Eternity Vessel")
                 && (opponent.isCardInPlay("Vampire Hexmage") || (source.getCounters(CounterType.CHARGE) == 0))) {
@@ -150,6 +149,38 @@ public class LifeSetAi extends SpellAbilityAi {
                 } else if (hlife > amount) {
                     sa.getTargets().add(opponent);
                 } else if (amount > myLife) {
+                    sa.getTargets().add(ai);
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private boolean doHalfStartingLifeLogic(Player ai, Player opponent, SpellAbility sa) {
+        int aiAmount = ai.getStartingLife() / 2;
+        int oppAmount = opponent.getStartingLife() / 2;
+        int aiLife = ai.getLife();
+        int oppLife = opponent.getLife();
+
+        sa.resetTargets();
+
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
+        if (tgt != null) {
+            if (tgt.canOnlyTgtOpponent()) {
+                if (oppLife > oppAmount) {
+                    sa.getTargets().add(opponent);
+                } else {
+                    return false;
+                }
+            } else {
+                if (aiAmount > ai.getLife() && aiLife <= 10) {
+                    sa.getTargets().add(ai);
+                } else if (oppLife > oppAmount) {
+                    sa.getTargets().add(opponent);
+                } else if (aiAmount > aiLife) {
                     sa.getTargets().add(ai);
                 } else {
                     return false;
