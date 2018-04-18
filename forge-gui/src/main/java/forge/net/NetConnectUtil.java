@@ -1,7 +1,6 @@
 package forge.net;
 
 import forge.match.LobbySlotType;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.GuiBase;

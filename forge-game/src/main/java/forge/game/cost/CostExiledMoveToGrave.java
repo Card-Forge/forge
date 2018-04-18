@@ -29,6 +29,11 @@ import forge.game.zone.ZoneType;
  * This is for the "ExiledMoveToGrave" Cost.
  */
 public class CostExiledMoveToGrave extends CostPartWithList {
+    /**
+     * Serializables need a version ID.
+     */
+    private static final long serialVersionUID = 1L;
+
     // ExiledMoveToGrave<Num/Type{/TypeDescription}>
     public CostExiledMoveToGrave(final String amount, final String type, final String description) {
         super(amount, type, description);

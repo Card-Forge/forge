@@ -34,6 +34,11 @@ public class CostExileFromStack extends CostPart {
 
 
     /**
+     * Serializables need a version ID.
+     */
+    private static final long serialVersionUID = 1L;
+
+    /**
      * Instantiates a new cost exile.
      * 
      * @param amount

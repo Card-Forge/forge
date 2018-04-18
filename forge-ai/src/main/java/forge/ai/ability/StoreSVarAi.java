@@ -1,7 +1,5 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCombat;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;

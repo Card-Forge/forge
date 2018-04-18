@@ -22,8 +22,6 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
-import forge.model.FModel;
-import forge.properties.ForgePreferences;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.toolbox.FDisplayObject;
 import forge.util.Utils;

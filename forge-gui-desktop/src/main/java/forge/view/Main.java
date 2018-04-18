@@ -28,7 +28,7 @@ import forge.error.ExceptionHandler;
  */
 public final class Main {
     /**
-     * Main entrypoint for Forge
+     * Main entry point for Forge
      */
     public static void main(final String[] args) {
         // HACK - temporary solution to "Comparison method violates it's general contract!" crash

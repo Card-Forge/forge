@@ -40,6 +40,7 @@ import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -215,7 +216,7 @@ public final class GameActionUtil {
 
             // reset static abilities
             if (lkicheck) {
-                game.getAction().checkStaticAbilities(false, Sets.newHashSet(), CardCollection.EMPTY);
+                game.getAction().checkStaticAbilities(false, new HashSet<Card>(), CardCollection.EMPTY);
             }
         }
 

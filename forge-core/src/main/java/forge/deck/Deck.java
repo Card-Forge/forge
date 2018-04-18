@@ -21,7 +21,6 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 import forge.StaticData;
-import forge.card.CardDb.SetPreference;
 import forge.card.CardDb;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;

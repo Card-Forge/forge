@@ -22,12 +22,14 @@ import forge.card.mana.ManaCostShard;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
-import java.io.Serializable;
-
 /**
  * The mana component of any spell or ability cost
  */
 public class CostPartMana extends CostPart {
+    /**
+     * Serializables need a version ID.
+     */
+    private static final long serialVersionUID = 1L;
     // "Leftover"
     private final ManaCost cost;
     private boolean xCantBe0 = false;

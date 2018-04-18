@@ -14,7 +14,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableList;
 import forge.model.FModel;
-import forge.quest.data.QuestPreferences.QPref;
 
 /** 
  * Handles editor preferences saving and loading.

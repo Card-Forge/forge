@@ -322,7 +322,7 @@ public class DeckgenUtil {
     /** @return {@link forge.deck.Deck} */
     public static Deck getRandomCustomDeck() {
         final IStorage<Deck> allDecks = FModel.getDecks().getConstructed();
-        final int rand = (int) (Math.floor(Math.random() * allDecks.size()));
+        final int rand = (int) (Math.floor(MyRandom.getRandom().nextDouble() * allDecks.size()));
         final String name = allDecks.getItemNames().toArray(new String[0])[rand];
         return allDecks.get(name);
     }
@@ -330,14 +330,14 @@ public class DeckgenUtil {
     /** @return {@link forge.deck.Deck} */
     public static Deck getRandomPreconDeck() {
         final List<DeckProxy> allDecks = DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons());
-        final int rand = (int) (Math.floor(Math.random() * allDecks.size()));
+        final int rand = (int) (Math.floor(MyRandom.getRandom().nextDouble() * allDecks.size()));
         return allDecks.get(rand).getDeck();
     }
 
     /** @return {@link forge.deck.Deck} */
     public static Deck getRandomThemeDeck() {
         final List<DeckProxy> allDecks = DeckProxy.getAllThemeDecks();
-        final int rand = (int) (Math.floor(Math.random() * allDecks.size()));
+        final int rand = (int) (Math.floor(MyRandom.getRandom().nextDouble() * allDecks.size()));
         return allDecks.get(rand).getDeck();
     }
 
@@ -353,7 +353,7 @@ public class DeckgenUtil {
             allQuestDecks.add(e.getEventDeck());
         }
 
-        final int rand = (int) (Math.floor(Math.random() * allQuestDecks.size()));
+        final int rand = (int) (Math.floor(MyRandom.getRandom().nextDouble() * allQuestDecks.size()));
         return allQuestDecks.get(rand);
     }
 
