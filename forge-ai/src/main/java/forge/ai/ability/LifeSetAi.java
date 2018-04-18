@@ -176,7 +176,7 @@ public class LifeSetAi extends SpellAbilityAi {
                     return false;
                 }
             } else {
-                if (aiAmount > ai.getLife() && aiLife <= 10) {
+                if (aiAmount > ai.getLife() && aiLife < 5) {
                     sa.getTargets().add(ai);
                 } else if (oppLife > oppAmount) {
                     sa.getTargets().add(opponent);
