@@ -1,5 +1,5 @@
 - Dominaria -
-This version of Forge features the initial implementation of the upcoming Dominaria set. Currently, all the cards except two are scripted, and the remaining cards are planned to be coded in the upcoming release. Please consider this early implementation of the set beta quality and be sure to report the issues you encounter while playing with the new cards.
+This version of Forge features the initial implementation of the upcoming Dominaria set. All the cards are scripted. Please consider this early implementation of the set beta quality and be sure to report the issues you encounter while playing with the new cards.
 
 - Multiplayer on Mobile Forge -
 Mobile Forge now supports 3 and 4 player multiplayer matches in Constructed mode, you can select the number of players from the dropdown menu on the Constructed tab. Please note that matches with more than two players are more taxing for the mobile device and thus require more powerful hardware for prolonged gameplay without considerable slowdowns.
