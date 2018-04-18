@@ -124,6 +124,13 @@ public class LifeSetAi extends SpellAbilityAi {
             amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
         }
 
+        // special cases when amount can't be calculated without targeting first
+        if (amount == 0 && "TargetedPlayer$StartingLife/HalfDown".equals(source.getSVar(amountStr))) {
+            // TODO: this assumes equal starting life for all players, which is not true e.g. for Archenemy
+            amount = ai.getStartingLife() / 2;
+        }
+
+
         if (sourceName.equals("Eternity Vessel")
                 && (opponent.isCardInPlay("Vampire Hexmage") || (source.getCounters(CounterType.CHARGE) == 0))) {
             return false;
@@ -131,8 +138,7 @@ public class LifeSetAi extends SpellAbilityAi {
 
         // If the Target is gaining life, target self.
         // if the Target is modifying how much life is gained, this needs to
-        // be
-        // handled better
+        // be handled better
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             sa.resetTargets();
