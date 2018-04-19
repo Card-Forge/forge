@@ -273,7 +273,7 @@ public class GameFormat implements Comparable<GameFormat> {
         }
         if (formatType.equals(FormatType.Historic)){
             if(effectiveDate!=other.effectiveDate) {//for matching dates or default dates default to name sorting
-                return effectiveDate.compareTo(other.effectiveDate);
+                return other.effectiveDate.compareTo(effectiveDate);
             }
         }
         return name.compareTo(other.name);
@@ -319,7 +319,7 @@ public class GameFormat implements Comparable<GameFormat> {
                 formatsubType = FormatSubType.Custom;
             }
             Integer idx = section.getInt("order");
-            String dateStr = section.get("effectivedate");
+            String dateStr = section.get("effective");
             if (dateStr == null){
                 dateStr = DEFAULTDATE;
             }
