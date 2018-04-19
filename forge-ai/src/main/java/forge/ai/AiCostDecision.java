@@ -510,6 +510,15 @@ public class AiCostDecision extends CostDecisionMakerBase {
         Integer c = cost.convertAmount();
         if (c == null) {
             if (ability.getSVar(cost.getAmount()).equals("XChoice")) {
+                if ("SacToReduceCost".equals(ability.getParam("AILogic"))) {
+                    // e.g. Torgaar, Famine Incarnate
+                    // TODO: currently returns an empty list, so the AI doesn't sacrifice anything. Trying to make
+                    // the AI decide on creatures to sac makes the AI sacrifice them, but the cost is not reduced and the
+                    // AI pays the full mana cost anyway (despite sacrificing creatures).
+                    return PaymentDecision.card(new CardCollection());
+                }
+
+                // Other cards are assumed to be flagged RemAIDeck for now
                 return null;
             }
 
