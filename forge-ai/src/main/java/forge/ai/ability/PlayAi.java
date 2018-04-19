@@ -5,6 +5,7 @@ import forge.ai.*;
 import forge.card.CardStateName;
 import forge.card.CardTypeView;
 import forge.game.Game;
+import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -16,6 +17,7 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+import forge.util.MyRandom;
 
 import java.util.List;
 
@@ -54,6 +56,14 @@ public class PlayAi extends SpellAbilityAi {
         
         if ("ReplaySpell".equals(logic)) {
             return ComputerUtil.targetPlayableSpellCard(ai, cards, sa, sa.hasParam("WithoutManaCost"));                
+        } else if ("JhoiraAvatarInstant".equals(logic)) {
+            if (game.getRules().hasAppliedVariant(GameType.MoJhoSto)) {
+                // Some additional logic for MoJhoSto: don't spam activate the Instant copying ability all the time
+                // Can probably be improved, but as random as MoJhoSto already is, probably not a huge deal for now
+                if (MyRandom.percentTrue(80)) {
+                    return false;
+                }
+            }
         }
 
         if (source != null && source.hasKeyword("Hideaway") && source.hasRemembered()) {
