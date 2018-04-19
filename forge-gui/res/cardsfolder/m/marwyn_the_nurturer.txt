@@ -6,6 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Elf.Ot
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | References$ X | SpellDescription$ Add an amount of {G} equal to CARDNAME's power.
 SVar:X:Count$CardPower
-DeckHints:Type$Eldrazi
+DeckHints:Type$Elf
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marwyn_the_nurturer.jpg
 Oracle:Whenever another Elf enters the battlefield under your control, put a +1/+1 counter on Marwyn, the Nurturer.\n{T}: Add an amount of {G} equal to Marwyn's power.

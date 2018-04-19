@@ -11,6 +11,7 @@ Arlinn, Embraced by the Moon|Arlinn's Hunt|Fair fight? What fair fight?
 Ashiok, Nightmare Weaver|Ashiok's Identity|I subscribe to the theory of blank slate!
 Chandra Ablaze|Chandra's Bargain|I feel like I've seen those before...
 Chandra Nalaar|Chandra's Rage|Feel the power of my wrath!
+Chandra, Bold Pyromancer|Chandra's Flame Wave|Let's have a campfire!
 Chandra, Flamecaller|Chandra's Sea of Flames|You didn't activate this for 0 just to get the achievement, did you?
 Chandra, Pyrogenius|Chandra's Warm Embrace|Did I say 'warm'? I meant 'red hot'.
 Chandra, Pyromaster|Chandra's Vengeance|Please file in triplicate!
@@ -49,6 +50,7 @@ Jace, Telepath Unbound|Jace's Erasure|First empty your mind and then... nope, th
 Jace, the Living Guildpact|Jace's Timetwister|Symmetry? What symmetry?
 Jace, the Mind Sculptor|Jace's Lobotomy|What do you mean, "overpowered"?
 Jace, Unraveler of Secrets|Jace's Perfect Plan|So, I've read about this neat guy named Erayo...
+Jaya Ballard|Jaya's Flashback|Fire is easily rekindled.
 Karn Liberated|Karn's Reset|Let's do this again!
 Kaya, Ghost Assassin|Kaya's Syphon|You don't MIND, do you?
 Kiora, Master of the Depths|Kiora's Fight Club|First rule is not to talk about the sucker punches
@@ -90,7 +92,9 @@ Sorin, Lord of Innistrad|Sorin's Recruitment|My favorite game is Shogi!
 Sorin, Solemn Visitor|Sorin's Abyss|Don't get so close to the edge!
 Tamiyo, Field Researcher|Tamiyo's Omniscience|I know exactly how your story ends...
 Tamiyo, the Moon Sage|Tamiyo's Recycling|Wash, rinse, repeat!
+Teferi, Hero of Dominaria|Teferi's Oblivion|Don't worry. It's just a phase.
 Teferi, Temporal Archmage|Teferi's Time Slip|Let's speed this up a bit!
+Teferi, Timebender|Teferi's Time Warp|Let's do that again!
 Tezzeret the Schemer|Tezzeret's Assembly Line|Smashing, isn't it?
 Tezzeret the Seeker|Tezzeret's Robots|You can't stop the progress!
 Tezzeret, Agent of Bolas|Tezzeret's Drain|Technological superiority for the win!
