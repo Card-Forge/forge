@@ -76,7 +76,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      *            Cards to build the deck from.
      */
     public CardThemedDeckBuilder(PaperCard keyCard0, PaperCard secondKeyCard0, final List<PaperCard> dList, GameFormat format, boolean isForAI) {
-        super(FModel.getMagicDb().getCommonCards(), DeckFormat.Constructed, format.getFilterPrinted());
+        super(new DeckGenPool(FModel.getMagicDb().getCommonCards().getUniqueCards()), DeckFormat.Constructed, format.getFilterPrinted());
         this.availableList = dList;
         keyCard=keyCard0;
         secondKeyCard=secondKeyCard0;
