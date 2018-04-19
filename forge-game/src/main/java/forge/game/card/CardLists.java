@@ -192,10 +192,6 @@ public class CardLists {
     }
 
     public static void shuffle(List<Card> list) {
-        // reseed Random each time we want to Shuffle
-        // MyRandom.random = MyRandom.random;
-        Collections.shuffle(list, MyRandom.getRandom());
-        Collections.shuffle(list, MyRandom.getRandom());
         Collections.shuffle(list, MyRandom.getRandom());
     }
 
