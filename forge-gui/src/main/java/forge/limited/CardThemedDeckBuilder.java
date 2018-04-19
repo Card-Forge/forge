@@ -479,6 +479,14 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         }
     }
 
+    private Set<String> getDeckListNames(){
+        Set<String> deckListNames = new HashSet<>();
+        for(PaperCard card:deckList){
+            deckListNames.add(card.getName());
+        }
+        return deckListNames;
+    }
+
     /**
      * If the deck does not have 40 cards, fix it. This method should not be
      * called if the stuff above it is working correctly.
@@ -501,25 +509,27 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         }
 
         Predicate<PaperCard> possibleFromFullPool = new Predicate<PaperCard>() {
+            Set deckListNames = getDeckListNames();
             @Override
             public boolean apply(PaperCard card) {
                 return format.isLegalCard(card)
                         && !card.getRules().getManaCost().isPureGeneric()
                         && colors.containsAllColorsFrom(card.getRules().getColorIdentity().getColor())
-                        && !deckList.contains(card)
+                        && !deckListNames.contains(card.getName())
                         && !card.getRules().getAiHints().getRemAIDecks()
                         && !card.getRules().getAiHints().getRemRandomDecks()
                         && !card.getRules().getMainPart().getType().isLand();
             }
         };
-        List<PaperCard> randomPool = Lists.newArrayList(pool.getAllCards(possibleFromFullPool));
+        List<PaperCard> possibleList = Lists.newArrayList(pool.getAllCards(possibleFromFullPool));
         //ensure we do not add more keycards in case they are commanders
         if (keyCard != null) {
-            randomPool.removeAll(StaticData.instance().getCommonCards().getAllCards(keyCard.getName()));
+            possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(keyCard.getName()));
         }
         if (secondKeyCard != null) {
-            randomPool.removeAll(StaticData.instance().getCommonCards().getAllCards(secondKeyCard.getName()));
+            possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(secondKeyCard.getName()));
         }
+        List<PaperCard> randomPool = CardRanker.rankCardsInDeck(possibleList).subList(0,new Float(possibleList.size()*0.25).intValue());
         Collections.shuffle(randomPool, MyRandom.getRandom());
         Iterator<PaperCard> iRandomPool=randomPool.iterator();
         while (deckList.size() < targetSize) {
@@ -734,20 +744,29 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      *           number to add
      */
     private void addRandomCards(int num) {
+        Set deckListNames = getDeckListNames();
         Predicate<PaperCard> possibleFromFullPool = new Predicate<PaperCard>() {
             @Override
             public boolean apply(PaperCard card) {
                 return format.isLegalCard(card)
                         &&!card.getRules().getManaCost().isPureGeneric()
                         && colors.containsAllColorsFrom(card.getRules().getColorIdentity().getColor())
-                        && !deckList.contains(card)
+                        && !deckListNames.contains(card.getName())
                         &&!card.getRules().getAiHints().getRemAIDecks()
                         &&!card.getRules().getAiHints().getRemRandomDecks()
                         &&!card.getRules().getMainPart().getType().isLand();
             }
         };
-        List<PaperCard> randomPool = Lists.newArrayList(pool.getAllCards(possibleFromFullPool));
-        Collections.shuffle(randomPool, MyRandom.getRandom());
+        List<PaperCard> possibleList = Lists.newArrayList(pool.getAllCards(possibleFromFullPool));
+        //ensure we do not add more keycards in case they are commanders
+        if (keyCard != null) {
+            possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(keyCard.getName()));
+        }
+        if (secondKeyCard != null) {
+            possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(secondKeyCard.getName()));
+        }
+        List<PaperCard> randomPool = CardRanker.rankCardsInDeck(possibleList).subList(0,new Float(possibleList.size()*0.25).intValue());
+        Collections.shuffle(randomPool);
         Iterator<PaperCard> iRandomPool=randomPool.iterator();
         for(int i=0;i<num;++i){
             PaperCard randomCard=iRandomPool.next();
