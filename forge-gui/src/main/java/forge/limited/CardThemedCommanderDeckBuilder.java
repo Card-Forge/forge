@@ -6,6 +6,7 @@ import com.google.common.collect.Lists;
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
 import forge.deck.DeckFormat;
+import forge.deck.generation.DeckGenPool;
 import forge.item.PaperCard;
 import forge.model.FModel;
 
@@ -17,7 +18,7 @@ import java.util.List;
 public class CardThemedCommanderDeckBuilder extends CardThemedDeckBuilder {
 
     public CardThemedCommanderDeckBuilder(PaperCard commanderCard0, PaperCard partner0, final List<PaperCard> dList, boolean isForAI, DeckFormat format) {
-        super(FModel.getMagicDb().getCommonCards(), format);
+        super(new DeckGenPool(FModel.getMagicDb().getCommonCards().getUniqueCards()), format);
         this.availableList = dList;
         keyCard = commanderCard0;
         secondKeyCard = partner0;
