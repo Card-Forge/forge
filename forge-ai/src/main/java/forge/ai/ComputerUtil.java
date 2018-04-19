@@ -2216,7 +2216,10 @@ public class ComputerUtil {
                     }
                 return ComputerUtilCard.getBestAI(list);
             } else {
-                return Iterables.getFirst(votes.keySet(), null);
+        	// TODO: This is just picking randomly amongst already picked things. It should probably pick the worst instead.
+        	List<Object> a = Arrays.asList(votes.keySet().toArray());
+        	Collections.shuffle(a, MyRandom.getRandom());
+                return a.get(0);
             }
         case "Protection":
             if (votes.isEmpty()) {

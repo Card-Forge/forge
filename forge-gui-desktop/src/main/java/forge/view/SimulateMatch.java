@@ -22,6 +22,7 @@ import forge.game.player.RegisteredPlayer;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.Lang;
+import forge.util.MyRandom;
 
 public class SimulateMatch {
     public static void simulate(String[] args) {
@@ -55,6 +56,7 @@ public class SimulateMatch {
             }
             else {
                 System.err.println("Illegal parameter usage");
+                argumentHelp();
                 return;
             }
         }
@@ -78,6 +80,10 @@ public class SimulateMatch {
             type = GameType.valueOf(WordUtils.capitalize(params.get("f").get(0)));
         }
 
+        if (params.containsKey("s")) {
+            MyRandom.setSeed(Integer.parseInt(params.get("s").get(0)));
+        }
+        
         GameRules rules = new GameRules(type);
         rules.setAppliedVariants(EnumSet.of(type));
 
@@ -145,7 +151,7 @@ public class SimulateMatch {
     }
 
     private static void argumentHelp() {
-        System.out.println("Syntax: forge.exe sim -d <deck1[.dck]> ... <deckX[.dck]> -D [D] -n [N] -m [M] -t [T] -p [P] -f [F] -q");
+        System.out.println("Syntax: forge.exe sim -d <deck1[.dck]> ... <deckX[.dck]> -D [D] -n [N] -m [M] -t [T] -p [P] -f [F] -s [S] -q");
         System.out.println("\tsim - stands for simulation mode");
         System.out.println("\tdeck1 (or deck2,...,X) - constructed deck name or filename (has to be quoted when contains multiple words)");
         System.out.println("\tdeck is treated as file if it ends with a dot followed by three numbers or letters");
@@ -155,6 +161,7 @@ public class SimulateMatch {
         System.out.println("\tT - Type of tournament to run with all provided decks (Bracket, RoundRobin, Swiss)");
         System.out.println("\tP - Amount of players per match (used only with Tournaments, defaults to 2)");
         System.out.println("\tF - format of games, defaults to constructed");
+        System.out.println("\ts - Set the RNG seed. Use if you want to play the same game twice.");
         System.out.println("\tq - Quiet flag. Output just the game result, not the entire game log.");
     }
 
@@ -167,7 +174,6 @@ public class SimulateMatch {
         final Game g1 = mc.createGame();
         // will run match in the same thread
 
-        long startTime = System.currentTimeMillis();
         try {
             TimeLimitedCodeBlock.runWithTimeout(new Runnable() {
                 @Override

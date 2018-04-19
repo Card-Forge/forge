@@ -29,12 +29,14 @@ import forge.item.IPaperCard;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.MyRandom;
 import junit.framework.TestCase;
 
 public class SimulationTestCase extends TestCase {
     private static boolean initialized = false;
 
     protected Game initAndCreateGame() {
+	MyRandom.setSeed(0); // Initialize the random seed to create predictable tests.
         List<RegisteredPlayer> players = Lists.newArrayList();
         Deck d1 = new Deck();
         players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p2", null)));

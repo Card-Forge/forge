@@ -134,7 +134,8 @@ public class ComputerUtilMana {
         Collections.sort(orderedCards, new Comparator<Card>() {
             @Override
             public int compare(final Card card1, final Card card2) {
-                return Integer.compare(manaCardMap.get(card1), manaCardMap.get(card2));
+        	int result = Integer.compare(manaCardMap.get(card1), manaCardMap.get(card2));
+                return result != 0 ? result : Float.compare(card1.getTimestamp(), card2.getTimestamp()); 
             }
         });
 
@@ -308,7 +309,7 @@ public class ComputerUtilMana {
         }
 
         // select which abilities may be used for each shard
-        Multimap<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
+        ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
 
         sortManaAbilities(sourcesForShards);
 
@@ -858,7 +859,6 @@ public class ComputerUtilMana {
         }
 
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-        int chanceToReserve = aic.getIntProperty(AiProps.RESERVE_MANA_FOR_MAIN2_CHANCE);
 
         PhaseType curPhase = ai.getGame().getPhaseHandler().getPhase();
 
@@ -877,7 +877,8 @@ public class ComputerUtilMana {
         // obey mana reservations for Main 2; otherwise, obey mana reservations depending on the "chance to reserve"
         // AI profile variable.
         if (sa.getSVar("LowPriorityAI").equals("")) {
-            if (chanceToReserve == 0 || MyRandom.getRandom().nextInt(100) >= chanceToReserve) {
+            float chanceToReserve = aic.getFloatProperty(AiProps.RESERVE_MANA_FOR_MAIN2_CHANCE);
+            if (MyRandom.getRandom().nextDouble() >= chanceToReserve) {
                 return false;
             }
         }
@@ -1005,7 +1006,7 @@ public class ComputerUtilMana {
      * @return a boolean.
      */
     private static String payMultipleMana(ManaCostBeingPaid testCost, String mana, final Player p) {
-        List<String> unused = new ArrayList<>(4);
+        List<String> unused = new ArrayList<String>(4);
         for (String manaPart : TextUtil.split(mana, ' ')) {
             if (StringUtils.isNumeric(manaPart)) {
                 for (int i = Integer.parseInt(manaPart); i > 0; i--) {
