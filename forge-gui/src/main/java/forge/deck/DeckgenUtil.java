@@ -5,6 +5,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import com.google.common.collect.Lists;
+import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
@@ -540,7 +541,7 @@ public class DeckgenUtil {
 
             if(partners.size()>0&&commander.getRules().canBePartnerCommander()){
                 selectedPartner=partners.get(MyRandom.getRandom().nextInt(partners.size()));
-                preSelectedCards.remove(selectedPartner);
+                preSelectedCards.removeAll(StaticData.instance().getCommonCards().getAllCards(selectedPartner.getName()));
             }
             //randomly remove cards
             int removeCount=0;
@@ -562,6 +563,7 @@ public class DeckgenUtil {
                 ++i;
             }
             preSelectedCards.removeAll(toRemove);
+            preSelectedCards.removeAll(StaticData.instance().getCommonCards().getAllCards(commander.getName()));
             gen = new CardThemedCommanderDeckBuilder(commander, selectedPartner,preSelectedCards,forAi,format);
         }else{
             cardDb = FModel.getMagicDb().getCommonCards();
@@ -582,6 +584,7 @@ public class DeckgenUtil {
             }
             List<PaperCard> shortList = cardList.subList(1, shortlistlength);
             shortList.remove(commander);
+            shortList.removeAll(StaticData.instance().getCommonCards().getAllCards(commander.getName()));
             gen = new CardThemedCommanderDeckBuilder(commander, selectedPartner,shortList,forAi,format);
 
         }
