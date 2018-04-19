@@ -368,9 +368,6 @@ public class QuestDraftUtils {
                     // Update dialog with winner
                 }
 
-                RegisteredPlayer regPlayer = mc.getWinner();
-                //draft.setWinner(regPlayer.getPlayer().getName());
-                //FModel.getQuest().save();
                 gui.finishGame();
             } else {
                 final HostedMatch newMatch = GuiBase.getInterface().hostMatch();
