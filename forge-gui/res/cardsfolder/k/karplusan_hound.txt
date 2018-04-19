@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Creature Hound
 PT:3/3
 T:Mode$ Attacks | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE1 | Execute$ DBDealDamage | TriggerDescription$ Whenever CARDNAME attacks, if you control a Chandra planeswalker, this creature deals 2 damage to any target.
-SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | NumDmg$ 2 | TgtPrompt$ Select target player or planeswalker
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | NumDmg$ 2 | TgtPrompt$ Select target creature, player or planeswalker
 SVar:X:Count$Valid Planeswalker.Chandra+YouCtrl
 SVar:BuffedBy:Chandra
 Oracle:Whenever Karplusan Hound attacks, if you control a Chandra planeswalker, this creature deals 2 damage to any target.
