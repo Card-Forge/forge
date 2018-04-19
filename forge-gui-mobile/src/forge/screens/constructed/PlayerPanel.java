@@ -377,6 +377,8 @@ public class PlayerPanel extends FContainer {
     private void onIsAiChanged(boolean isAi) {
         deckChooser.setIsAi(isAi);
         lstCommanderDecks.setIsAi(isAi);
+        lstTinyLeadersDecks.setIsAi(isAi);
+        lstBrawlDecks.setIsAi(isAi);
         lstPlanarDecks.setIsAi(isAi);
         lstSchemeDecks.setIsAi(isAi);
         lstVanguardAvatars.setIsAi(isAi);
