@@ -1,18 +1,8 @@
-Images for the latest sets will be available soon.
+
+ Images for the latest sets will be available soon.
 
 Online multiplayer functionality has been restored, but is still a Work in Progress. We do have a dedicated developer actively working on the online multiplayer feature.
 
-At least two cards that have a clause that says "if a card cast this way would be put into a graveyard this turn, exile it instead" (Kess, Dissident Mage and Bosium Strip) will fail to interact correctly in corner cases where another card is allowing you to also cast cards from the graveyard at the same time, but allows you not to exile them. This needs a better implementation of a check that would allow to determine that the card is being cast via a MayPlay effect from a particular source.
+Other known issues are here: https://git.cardforge.org/core-developers/forge/issues
 
-There is a known issue with the cost reduction for cards that have color-locked X in their mana cost (e.g. Drain Life, Soul Burn). Cost reduction will not apply correctly to these cards if the amount by which the cost is reduced is greater than the amount of colorless mana in the mana cost specified on the card (e.g. 1 for Drain Life, 2 for Soul Burn). Fixing this issue likely requires rewriting the way announced color-locked X is interpreted and paid (most likely it has to be represented with colorless mana shards but still locked to the colors required by the card).
-
-Currently Improvise is implemented as a "clone" of Convoke keyword, which does not work correctly in corner cases (for example, together with an instance of Convoke or Delve). This is planned to be addressed soon.
-
-Replacement effects that happen when a card moves from zone to zone (e.g. ETB replacement effect of Essence of the Wild; Kalitas, Traitor of Ghet replacement effect for a dying creature) need some rework to allow all of them to work in a rule-exact way without the need for special exclusions and hacks (see ReplacementHandler.java:120).
-
-Several people have noticed that the cards displayed on the battlefield will fail to be displayed when the number of cards on the battlefield increases. Maximizing the human panel can help to re-display the cards.
-
-Some time was spent turning the static ETB triggers into the proper ETB replacement effects they should be, mainly to interact correctly with each other. This work is not yet finished. As a result there is currently some inconsistencies with "Enters the battlefield with counters" (Not incredibly noticeable).
-
-A recent contribution to the code base should fix some of the bugs that people noticed with cloning type abilities. At this time there is one remaining issue that we hope will be addressed in the near future:
-Copies of cards that setup Zone Change triggers via addComesIntoPlayCommand and addLeavesPlayCommand will not function correctly.
+Feel free to report your own there if you have any.
