@@ -55,7 +55,12 @@ public class PlayAi extends SpellAbilityAi {
         }
 
         if (game.getRules().hasAppliedVariant(GameType.MoJhoSto) && source.getName().equals("Jhoira of the Ghitu Avatar")) {
-            // Some additional logic for MoJhoSto: don't spam activate the Instant copying ability all the time
+            // Additional logic for MoJhoSto:
+            // Do not activate Jhoira too early, usually there are few good targets
+            if (ai.getLandsInPlay().size() < 5) {
+                return false;
+            }
+            // Don't spam activate the Instant copying ability all the time to give the AI a chance to use other abilities
             // Can probably be improved, but as random as MoJhoSto already is, probably not a huge deal for now
             if ("Instant".equals(sa.getParam("AnySupportedCard")) && MyRandom.percentTrue(80)) {
                 return false;
