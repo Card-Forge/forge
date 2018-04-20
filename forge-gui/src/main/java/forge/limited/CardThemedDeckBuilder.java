@@ -60,7 +60,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
     protected Iterable<PaperCard> onColorNonCreatures;
     protected Iterable<PaperCard> keyCards;
 
-    protected static final boolean logToConsole = true;
+    protected static final boolean logToConsole = false;
     protected static final boolean logColorsToConsole = false;
 
     protected Map<Integer,Integer> targetCMCs;
