@@ -509,7 +509,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         }
 
         Predicate<PaperCard> possibleFromFullPool = new Predicate<PaperCard>() {
-            Set deckListNames = getDeckListNames();
+            final Set<String> deckListNames = getDeckListNames();
             @Override
             public boolean apply(PaperCard card) {
                 return format.isLegalCard(card)
@@ -617,7 +617,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
         deckList.addAll(snowLands);
         aiPlayables.removeAll(snowLands);
-        rankedColorList.remove(snowLands);
+        rankedColorList.removeAll(snowLands);
     }
 
     /**
@@ -744,7 +744,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      *           number to add
      */
     private void addRandomCards(int num) {
-        Set deckListNames = getDeckListNames();
+        final Set<String> deckListNames = getDeckListNames();
         Predicate<PaperCard> possibleFromFullPool = new Predicate<PaperCard>() {
             @Override
             public boolean apply(PaperCard card) {
