@@ -1710,8 +1710,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final PaperCard cp = FModel.getMagicDb().getCommonCards().getCard(cardFace.getName());
             // the Card instance for test needs a game to be tested
             final Card instanceForPlayer = Card.fromPaperCard(cp, player);
+            // TODO need the valid check be done against the CardFace?
             if (instanceForPlayer.isValid(valid, sa.getHostCard().getController(), sa.getHostCard(), sa)) {
-                return cp.getName();
+                // it need to return name for card face
+                return cardFace.getName();
             }
         }
     }
