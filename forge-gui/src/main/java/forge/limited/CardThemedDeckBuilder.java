@@ -749,8 +749,9 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             @Override
             public boolean apply(PaperCard card) {
                 return format.isLegalCard(card)
-                        &&!card.getRules().getManaCost().isPureGeneric()
-                        && colors.containsAllColorsFrom(card.getRules().getColorIdentity().getColor())
+                        &&((!card.getRules().getManaCost().isPureGeneric()
+                        && colors.containsAllColorsFrom(card.getRules().getColorIdentity().getColor()))||
+                            card.getRules().getManaCost().isPureGeneric())
                         && !deckListNames.contains(card.getName())
                         &&!card.getRules().getAiHints().getRemAIDecks()
                         &&!card.getRules().getAiHints().getRemRandomDecks()
@@ -765,7 +766,9 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         if (secondKeyCard != null) {
             possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(secondKeyCard.getName()));
         }
-        List<PaperCard> randomPool = CardRanker.rankCardsInDeck(possibleList).subList(0,new Float(possibleList.size()*0.25).intValue());
+        //reduce pool to more powerful cards to use as filler
+        int poolSize = new Float(possibleList.size()*0.25).intValue();
+        List<PaperCard> randomPool = CardRanker.rankCardsInDeck(possibleList).subList(0,poolSize);
         Collections.shuffle(randomPool);
         Iterator<PaperCard> iRandomPool=randomPool.iterator();
         for(int i=0;i<num;++i){
