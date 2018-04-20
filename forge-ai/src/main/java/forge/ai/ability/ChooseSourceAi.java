@@ -3,6 +3,8 @@ package forge.ai.ability;
 import java.util.List;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.ai.ComputerUtil;
@@ -17,6 +19,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
@@ -25,6 +28,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 
 public class ChooseSourceAi extends SpellAbilityAi {
 
@@ -133,9 +137,9 @@ public class ChooseSourceAi extends SpellAbilityAi {
             final Player ai = sa.getActivatingPlayer();
             final Game game = ai.getGame();
             if (!game.getStack().isEmpty()) {
-                Card choseCard = chooseCardOnStack(sa, ai, game);
-                if (choseCard != null) {
-                    return choseCard;
+                Card chosenCard = chooseCardOnStack(sa, ai, game);
+                if (chosenCard != null) {
+                    return chosenCard;
                 }
             }
 
@@ -151,8 +155,38 @@ public class ChooseSourceAi extends SpellAbilityAi {
                     return ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) > 0;
                 }
             });
-            return ComputerUtilCard.getBestCreatureAI(permanentSources);
-            
+
+            // Try to choose the best creature for damage prevention.
+            Card bestCreature = ComputerUtilCard.getBestCreatureAI(permanentSources);
+            if (bestCreature != null) {
+                return bestCreature;
+            } else {
+                // No optimal creature was found above, so try to broaden the choice.
+                if (!Iterables.isEmpty(options)) {
+                    List<Card> oppCreatures = CardLists.filter(options, Predicates.and(CardPredicates.Presets.CREATURES,
+                            Predicates.not(CardPredicates.isOwner(aiChoser))));
+                    List<Card> aiNonCreatures = CardLists.filter(options, Predicates.and(Predicates.not(CardPredicates.Presets.CREATURES),
+                            CardPredicates.Presets.PERMANENTS, CardPredicates.isOwner(aiChoser)));
+
+                    if (!oppCreatures.isEmpty()) {
+                        return ComputerUtilCard.getBestCreatureAI(oppCreatures);
+                    } else if (!aiNonCreatures.isEmpty()) {
+                        return Aggregates.random(aiNonCreatures);
+                    } else {
+                        return Aggregates.random(options);
+                    }
+                } else if (!game.getStack().isEmpty()) {
+                    // No permanent for the AI to choose. Should normally not happen unless using dev mode or something,
+                    // but when it does happen, choose the top card on stack if possible (generally it'll be the SA
+                    // source) in order to choose at least something, or the game will hang.
+                    return game.getStack().peekAbility().getHostCard();
+                }
+            }
+
+            // Should never get here
+            System.err.println("Unexpected behavior: The AI was unable to choose anything for AF ChooseSource in "
+                    + sa.getHostCard() + ", the game will likely hang.");
+            return null;
         } else {
             return ComputerUtilCard.getBestAI(options);
         }
