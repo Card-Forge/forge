@@ -25,6 +25,7 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
+import forge.game.GameType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -43,6 +44,7 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.maps.LinkedHashMapToAmount;
 import forge.util.maps.MapToAmount;
@@ -778,6 +780,14 @@ public class SpecialCardAi {
             if (source.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN1)) {
                 return false;
             }
+
+            // In MoJhoSto, prefer Jhoira sorcery ability from time to time
+            if (source.getGame().getRules().hasAppliedVariant(GameType.MoJhoSto)
+                    && CardLists.filter(ai.getLandsInPlay(), CardPredicates.Presets.UNTAPPED).size() >= 3
+                    && MyRandom.percentTrue(50)) {
+                return false;
+            }
+
             // Set PayX here to maximum value.
             int tokenSize = ComputerUtilMana.determineLeftoverMana(sa, ai);
 
