@@ -78,7 +78,9 @@ public class PlayEffect extends SpellAbilityEffect {
             if (sa.hasParam("ValidZone")) {
                 zone = ZoneType.smartValueOf(sa.getParam("ValidZone"));
             }
-            tgtCards = (CardCollection)AbilityUtils.filterListByType(game.getCardsIn(zone), sa.getParam("Valid"), sa);
+            tgtCards = new CardCollection(
+                AbilityUtils.filterListByType(game.getCardsIn(zone), sa.getParam("Valid"), sa)
+            );
         }
         else if (sa.hasParam("AnySupportedCard")) {
             List<PaperCard> cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
@@ -110,7 +112,11 @@ public class PlayEffect extends SpellAbilityEffect {
                 }
                 if (sa.hasParam("ChoiceNum")) {
                     final int choicenum = AbilityUtils.calculateAmount(source, sa.getParam("ChoiceNum"), sa);
-                    tgtCards = (CardCollection)activator.getController().chooseCardsForEffect(choice, sa, source + " - Choose up to " + Lang.nounWithNumeral(choicenum, "card"), 0, choicenum, true);
+                    tgtCards = new CardCollection(
+                        activator.getController().chooseCardsForEffect(choice, sa,
+                            source + " - Choose up to " + Lang.nounWithNumeral(choicenum, "card"), 0, choicenum, true
+                        )
+                    );
                 }
                 else {
                     tgtCards = choice;

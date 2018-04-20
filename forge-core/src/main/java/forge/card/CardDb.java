@@ -130,7 +130,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             if (main.getAltName() != null) {
                 alternateName.put(main.getAltName(), main.getName());
             }
-            final ICardFace other = rule.getMainPart();
+            final ICardFace other = rule.getOtherPart();
             if (other != null) {
                 facesByName.put(other.getName(), other);
                 if (other.getAltName() != null) {
