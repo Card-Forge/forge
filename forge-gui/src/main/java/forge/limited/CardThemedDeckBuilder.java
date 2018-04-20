@@ -529,9 +529,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         if (secondKeyCard != null) {
             possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(secondKeyCard.getName()));
         }
-        List<PaperCard> randomPool = CardRanker.rankCardsInDeck(possibleList).subList(0,new Float(possibleList.size()*0.25).intValue());
-        Collections.shuffle(randomPool, MyRandom.getRandom());
-        Iterator<PaperCard> iRandomPool=randomPool.iterator();
+        Iterator<PaperCard> iRandomPool=possibleList.iterator();
         while (deckList.size() < targetSize) {
             if (logToConsole) {
                 System.out.println("WARNING: Fixing deck size, currently " + deckList.size() + " cards.");
@@ -766,11 +764,8 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         if (secondKeyCard != null) {
             possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(secondKeyCard.getName()));
         }
-        //reduce pool to more powerful cards to use as filler
-        int poolSize = new Float(possibleList.size()*0.25).intValue();
-        List<PaperCard> randomPool = CardRanker.rankCardsInDeck(possibleList).subList(0,poolSize);
-        Collections.shuffle(randomPool);
-        Iterator<PaperCard> iRandomPool=randomPool.iterator();
+        Collections.shuffle(possibleList);
+        Iterator<PaperCard> iRandomPool=possibleList.iterator();
         for(int i=0;i<num;++i){
             PaperCard randomCard=iRandomPool.next();
             deckList.add(randomCard);
