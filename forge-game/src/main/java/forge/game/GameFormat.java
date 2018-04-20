@@ -380,15 +380,22 @@ public class GameFormat implements Comparable<GameFormat> {
 
     public static class Collection extends StorageBase<GameFormat> {
         private List<GameFormat> naturallyOrdered;
+        private List<GameFormat> reverseDateOrdered;
         
         public Collection(GameFormat.Reader reader) {
             super("Format collections", reader);
             naturallyOrdered = reader.naturallyOrdered;
+            reverseDateOrdered = new ArrayList<>(naturallyOrdered);
             Collections.sort(naturallyOrdered);
+            Collections.sort(reverseDateOrdered, new InverseDateComparator());
         }
 
         public Iterable<GameFormat> getOrderedList() {
             return naturallyOrdered;
+        }
+
+        public Iterable<GameFormat> getReverseDateOrderedList() {
+            return reverseDateOrdered;
         }
 
         public Iterable<GameFormat> getSanctionedList() {
@@ -453,7 +460,7 @@ public class GameFormat implements Comparable<GameFormat> {
         }
 
         public GameFormat getFormatOfDeck(Deck deck) {
-            for(GameFormat gf : naturallyOrdered) {
+            for(GameFormat gf : reverseDateOrdered) {
                 if ( gf.isDeckLegal(deck) )
                     return gf;
             }
@@ -481,7 +488,7 @@ public class GameFormat implements Comparable<GameFormat> {
             SortedSet<GameFormat> result = new TreeSet<GameFormat>();
             Set<FormatSubType> coveredTypes = new HashSet<>();
             CardPool allCards = deck.getAllCardsInASinglePool();
-            for(GameFormat gf : naturallyOrdered) {
+            for(GameFormat gf : reverseDateOrdered) {
                 if (gf.getFormatType().equals(FormatType.Digital) && !exhaustive){
                     //exclude Digital formats from lists for now
                     continue;
@@ -505,6 +512,27 @@ public class GameFormat implements Comparable<GameFormat> {
         @Override
         public void add(GameFormat item) {
             naturallyOrdered.add(item);
+        }
+    }
+
+    public static class InverseDateComparator implements Comparator<GameFormat> {
+        public int compare(GameFormat gf1, GameFormat gf2){
+            if ((null == gf1) || (null == gf2)) {
+                return 1;
+            }
+            if (gf2.formatType != gf1.formatType){
+                return gf1.formatType.compareTo(gf2.formatType);
+            }else{
+                if (gf2.formatSubType != gf1.formatSubType){
+                    return gf1.formatSubType.compareTo(gf2.formatSubType);
+                }
+            }
+            if (gf1.formatType.equals(FormatType.Historic)){
+                if(gf1.effectiveDate!=gf2.effectiveDate) {//for matching dates or default dates default to name sorting
+                    return gf1.effectiveDate.compareTo(gf2.effectiveDate);
+                }
+            }
+            return gf1.name.compareTo(gf2.name);
         }
     }
 
