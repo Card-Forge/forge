@@ -1,6 +1,0 @@
-[format]
-Name:Standard, New_Phyrexia
-Type:Historic
-Subtype:Standard
-Order:119
-Sets:NPH, MBS, SOM, M11
