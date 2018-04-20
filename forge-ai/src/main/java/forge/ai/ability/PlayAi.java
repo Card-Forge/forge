@@ -53,17 +53,17 @@ public class PlayAi extends SpellAbilityAi {
                 return false;
             }
         }
-        
+
+        if (game.getRules().hasAppliedVariant(GameType.MoJhoSto) && source.getName().equals("Jhoira of the Ghitu Avatar")) {
+            // Some additional logic for MoJhoSto: don't spam activate the Instant copying ability all the time
+            // Can probably be improved, but as random as MoJhoSto already is, probably not a huge deal for now
+            if ("Instant".equals(sa.getParam("AnySupportedCard")) && MyRandom.percentTrue(80)) {
+                return false;
+            }
+        }
+
         if ("ReplaySpell".equals(logic)) {
             return ComputerUtil.targetPlayableSpellCard(ai, cards, sa, sa.hasParam("WithoutManaCost"));                
-        } else if ("JhoiraAvatarInstant".equals(logic)) {
-            if (game.getRules().hasAppliedVariant(GameType.MoJhoSto)) {
-                // Some additional logic for MoJhoSto: don't spam activate the Instant copying ability all the time
-                // Can probably be improved, but as random as MoJhoSto already is, probably not a huge deal for now
-                if (MyRandom.percentTrue(80)) {
-                    return false;
-                }
-            }
         }
 
         if (source != null && source.hasKeyword("Hideaway") && source.hasRemembered()) {

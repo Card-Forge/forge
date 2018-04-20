@@ -783,7 +783,8 @@ public class SpecialCardAi {
 
             // In MoJhoSto, prefer Jhoira sorcery ability from time to time
             if (source.getGame().getRules().hasAppliedVariant(GameType.MoJhoSto)
-                    && ai.getLandsInPlay().size() >= 3 && MyRandom.percentTrue(50)) {
+                    && CardLists.filter(ai.getLandsInPlay(), CardPredicates.Presets.UNTAPPED).size() >= 3
+                    && MyRandom.percentTrue(50)) {
                 return false;
             }
 
