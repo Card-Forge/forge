@@ -747,7 +747,6 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             public boolean apply(PaperCard card) {
                 return format.isLegalCard(card)
                         && card.getRules().getColorIdentity().hasNoColorsExcept(colors)
-                        && colors.containsAllColorsFrom(card.getRules().getColorIdentity().getColor())
                         && !deckListNames.contains(card.getName())
                         &&!card.getRules().getAiHints().getRemAIDecks()
                         &&!card.getRules().getAiHints().getRemRandomDecks()
