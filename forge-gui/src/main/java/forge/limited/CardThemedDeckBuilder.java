@@ -513,8 +513,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             @Override
             public boolean apply(PaperCard card) {
                 return format.isLegalCard(card)
-                        && !card.getRules().getManaCost().isPureGeneric()
-                        && colors.containsAllColorsFrom(card.getRules().getColorIdentity().getColor())
+                        && card.getRules().getColorIdentity().hasNoColorsExcept(colors)
                         && !deckListNames.contains(card.getName())
                         && !card.getRules().getAiHints().getRemAIDecks()
                         && !card.getRules().getAiHints().getRemRandomDecks()
@@ -529,9 +528,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         if (secondKeyCard != null) {
             possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(secondKeyCard.getName()));
         }
-        List<PaperCard> randomPool = CardRanker.rankCardsInDeck(possibleList).subList(0,new Float(possibleList.size()*0.25).intValue());
-        Collections.shuffle(randomPool, MyRandom.getRandom());
-        Iterator<PaperCard> iRandomPool=randomPool.iterator();
+        Iterator<PaperCard> iRandomPool=possibleList.iterator();
         while (deckList.size() < targetSize) {
             if (logToConsole) {
                 System.out.println("WARNING: Fixing deck size, currently " + deckList.size() + " cards.");
@@ -749,8 +746,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             @Override
             public boolean apply(PaperCard card) {
                 return format.isLegalCard(card)
-                        &&!card.getRules().getManaCost().isPureGeneric()
-                        && colors.containsAllColorsFrom(card.getRules().getColorIdentity().getColor())
+                        && card.getRules().getColorIdentity().hasNoColorsExcept(colors)
                         && !deckListNames.contains(card.getName())
                         &&!card.getRules().getAiHints().getRemAIDecks()
                         &&!card.getRules().getAiHints().getRemRandomDecks()
@@ -765,9 +761,8 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         if (secondKeyCard != null) {
             possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(secondKeyCard.getName()));
         }
-        List<PaperCard> randomPool = CardRanker.rankCardsInDeck(possibleList).subList(0,new Float(possibleList.size()*0.25).intValue());
-        Collections.shuffle(randomPool);
-        Iterator<PaperCard> iRandomPool=randomPool.iterator();
+        Collections.shuffle(possibleList);
+        Iterator<PaperCard> iRandomPool=possibleList.iterator();
         for(int i=0;i<num;++i){
             PaperCard randomCard=iRandomPool.next();
             deckList.add(randomCard);
