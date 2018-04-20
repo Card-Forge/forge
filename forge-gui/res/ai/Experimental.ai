@@ -206,5 +206,7 @@ AI_IN_DANGER_THRESHOLD=3
 # for each evaluation, introducing some unpredictability.
 AI_IN_DANGER_MAX_THRESHOLD=12
 
+# How many lands the AI needs to have on the battlefield to begin considering activating Jhoira in MoJhoSto
+MOJHOSTO_NUM_LANDS_TO_ACTIVATE_JHOIRA=4
 
 # <-- there are no options here at the moment -->

@@ -195,3 +195,7 @@ EXPLORE_MAX_CMC_DIFF_TO_PUT_IN_GRAVEYARD=2
 # The number of lands on the battlefield when the AI would use Explore to put non-land cards in graveyard if it
 # doesn't have a land in hand
 EXPLORE_NUM_LANDS_TO_STILL_NEED_MORE=2
+
+# How many lands the AI needs to have on the battlefield to begin considering activating Jhoira in MoJhoSto
+MOJHOSTO_NUM_LANDS_TO_ACTIVATE_JHOIRA=5
+

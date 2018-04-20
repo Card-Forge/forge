@@ -57,7 +57,8 @@ public class PlayAi extends SpellAbilityAi {
         if (game.getRules().hasAppliedVariant(GameType.MoJhoSto) && source.getName().equals("Jhoira of the Ghitu Avatar")) {
             // Additional logic for MoJhoSto:
             // Do not activate Jhoira too early, usually there are few good targets
-            if (ai.getLandsInPlay().size() < 5) {
+            int numLandsForJhoira = (((PlayerControllerAi)ai.getController())).getAi().getIntProperty(AiProps.MOJHOSTO_NUM_LANDS_TO_ACTIVATE_JHOIRA);
+            if (ai.getLandsInPlay().size() < numLandsForJhoira) {
                 return false;
             }
             // Don't spam activate the Instant copying ability all the time to give the AI a chance to use other abilities

@@ -104,6 +104,7 @@ public enum AiProps { /** */
     INTUITION_ALTERNATIVE_LOGIC ("false"), /** */
     EXPLORE_MAX_CMC_DIFF_TO_PUT_IN_GRAVEYARD ("2"),
     EXPLORE_NUM_LANDS_TO_STILL_NEED_MORE("2"), /** */
+    MOJHOSTO_NUM_LANDS_TO_ACTIVATE_JHOIRA("5"), /** */
     // Experimental features, must be removed after extensive testing and, ideally, defaulting
     // <-- There are no experimental options here -->
     AI_IN_DANGER_THRESHOLD("4"),
