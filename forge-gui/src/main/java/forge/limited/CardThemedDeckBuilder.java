@@ -60,8 +60,10 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
     protected Iterable<PaperCard> onColorNonCreatures;
     protected Iterable<PaperCard> keyCards;
 
-    protected static final boolean logToConsole = false;
+    protected static final boolean logToConsole = true;
     protected static final boolean logColorsToConsole = false;
+
+    protected Map<Integer,Integer> targetCMCs;
 
 
     public CardThemedDeckBuilder(IDeckGenPool pool, DeckFormat format){
@@ -168,6 +170,8 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         // Guava iterables do not copy the collection contents, instead they act
         // as filters and iterate over _source_ collection each time. So even if
         // aiPlayable has changed, there is no need to create a new iterable.
+
+        generateTargetCMCs();
 
         // 2. Add keycards
 
@@ -297,6 +301,29 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         }
         return result;
 
+    }
+
+    protected void generateTargetCMCs(){
+        targetCMCs = new HashMap<>();
+        targetCMCs.put(1,Math.round((MyRandom.getRandom().nextInt(4)+2)*targetSize/60));//2
+        targetCMCs.put(2,Math.round((MyRandom.getRandom().nextInt(5)+5)*targetSize/60));//6
+        targetCMCs.put(3,Math.round((MyRandom.getRandom().nextInt(5)+6)*targetSize/60));//7
+        targetCMCs.put(4,Math.round((MyRandom.getRandom().nextInt(3)+3)*targetSize/60));//4
+        targetCMCs.put(5,Math.round((MyRandom.getRandom().nextInt(3)+3)*targetSize/60));//3
+        targetCMCs.put(6,Math.round((MyRandom.getRandom().nextInt(3)+1)*targetSize/60));//2
+
+        while(sumMapValues(targetCMCs) < numSpellsNeeded){
+            int randomKey = MyRandom.getRandom().nextInt(6)+1;
+            targetCMCs.put(randomKey,targetCMCs.get(randomKey) + 1);
+        }
+    }
+
+    private int sumMapValues(Map<Integer, Integer> integerMap){
+        int sum = 0;
+        for (float f : integerMap.values()) {
+            sum += f;
+        }
+        return sum;
     }
 
     protected void addKeyCards(){
@@ -528,7 +555,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         if (secondKeyCard != null) {
             possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(secondKeyCard.getName()));
         }
-        Iterator<PaperCard> iRandomPool=possibleList.iterator();
+        Iterator<PaperCard> iRandomPool = CardRanker.rankCardsInDeck(possibleList.subList(0, targetSize <= possibleList.size() ? targetSize : possibleList.size())).iterator();
         while (deckList.size() < targetSize) {
             if (logToConsole) {
                 System.out.println("WARNING: Fixing deck size, currently " + deckList.size() + " cards.");
@@ -762,14 +789,16 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(secondKeyCard.getName()));
         }
         Collections.shuffle(possibleList);
-        Iterator<PaperCard> iRandomPool=possibleList.iterator();
-        for(int i=0;i<num;++i){
+        addManaCurveCards(CardRanker.rankCardsInDeck(possibleList.subList(0, targetSize*3 <= possibleList.size() ? targetSize*3 : possibleList.size())),
+                num, "Random Card");
+
+        /*for(int i=0;i<num;++i){
             PaperCard randomCard=iRandomPool.next();
             deckList.add(randomCard);
             if(logToConsole) {
                 System.out.println("Random Card[" + i + "]:" + randomCard.getName() + " (" + randomCard.getRules().getManaCost() + ")");
             }
-        }
+        }*/
     }
 
     /**
@@ -820,13 +849,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             aiPlayables.removeAll(keyCardList);
             rankedColorList.removeAll(keyCardList);
         }*/
-        final Map<Integer,Integer> targetCMCs = new HashMap<>();
-        targetCMCs.put(1,Math.round((MyRandom.getRandom().nextInt(4)+2)*targetSize/60));//2
-        targetCMCs.put(2,Math.round((MyRandom.getRandom().nextInt(5)+5)*targetSize/60));//6
-        targetCMCs.put(3,Math.round((MyRandom.getRandom().nextInt(5)+6)*targetSize/60));//7
-        targetCMCs.put(4,Math.round((MyRandom.getRandom().nextInt(3)+3)*targetSize/60));//4
-        targetCMCs.put(5,Math.round((MyRandom.getRandom().nextInt(3)+3)*targetSize/60));//3
-        targetCMCs.put(6,Math.round((MyRandom.getRandom().nextInt(3)+1)*targetSize/60));//2
+
 
 
         final Map<Integer, Integer> creatureCosts = new HashMap<Integer, Integer>();
