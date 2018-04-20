@@ -513,8 +513,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             @Override
             public boolean apply(PaperCard card) {
                 return format.isLegalCard(card)
-                        && !card.getRules().getManaCost().isPureGeneric()
-                        && colors.containsAllColorsFrom(card.getRules().getColorIdentity().getColor())
+                        && card.getRules().getColorIdentity().hasNoColorsExcept(colors)
                         && !deckListNames.contains(card.getName())
                         && !card.getRules().getAiHints().getRemAIDecks()
                         && !card.getRules().getAiHints().getRemRandomDecks()
@@ -747,9 +746,8 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             @Override
             public boolean apply(PaperCard card) {
                 return format.isLegalCard(card)
-                        &&((!card.getRules().getManaCost().isPureGeneric()
-                        && colors.containsAllColorsFrom(card.getRules().getColorIdentity().getColor()))||
-                            card.getRules().getManaCost().isPureGeneric())
+                        && card.getRules().getColorIdentity().hasNoColorsExcept(colors)
+                        && colors.containsAllColorsFrom(card.getRules().getColorIdentity().getColor())
                         && !deckListNames.contains(card.getName())
                         &&!card.getRules().getAiHints().getRemAIDecks()
                         &&!card.getRules().getAiHints().getRemRandomDecks()
