@@ -4985,7 +4985,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                         StringBuilder sb = new StringBuilder();
                         sb.append("Can target CardUID_").append(String.valueOf(getId()));
                         sb.append(" with spells and abilities as though it didn't have shroud.");
-                        if (!sa.getActivatingPlayer().hasKeyword(sb.toString())) {
+                        if (sa.getActivatingPlayer() == null) {
+                            System.err.println("Unexpected behavior: SA activator was null when trying to determine if the activating player could target a card with Shroud. SA host card = " + source + ", SA = " + sa);
+                            result.setFalse(); // FIXME: maybe this should check by SA host card controller at this point instead?
+                        } else if (!sa.getActivatingPlayer().hasKeyword(sb.toString())) {
                             result.setFalse();
                         }
                         break;
