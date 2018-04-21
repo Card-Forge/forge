@@ -82,7 +82,6 @@ public class BoosterGenerator {
                 && MyRandom.getRandom().nextDouble() < edition.getFoilChanceInBooster()
                 && edition.getFoilType() != FoilType.NOT_SUPPORTED;
         boolean foilAtEndOfPack = hasFoil && edition.getFoilAlwaysInCommonSlot();
-        String boosterMustContain = edition.getBoosterMustContain();
 
         // Foil chances
         // 1 Rare or Mythic rare (distribution ratio same as nonfoils)
@@ -328,11 +327,37 @@ public class BoosterGenerator {
         }
 
         // Guaranteed cards, e.g. Dominaria guaranteed legendary creatures
+        String boosterMustContain = edition.getBoosterMustContain();
         if (!boosterMustContain.isEmpty()) {
-            // First, see if there's already a card of the given type
-            String[] types = TextUtil.split(boosterMustContain, ' ');
-            boolean alreadyHaveCard = false;
-            for (PaperCard pc : result) {
+            ensureGuaranteedCardInBooster(result, edition, boosterMustContain);
+        }
+
+        return result;
+    }
+
+    private static void ensureGuaranteedCardInBooster(List<PaperCard> result, CardEdition edition, String boosterMustContain) {
+        // First, see if there's already a card of the given type
+        String[] types = TextUtil.split(boosterMustContain, ' ');
+        boolean alreadyHaveCard = false;
+        for (PaperCard pc : result) {
+            boolean cardHasAllTypes = true;
+            for (String type : types) {
+                if (!pc.getRules().getType().hasStringType(type)) {
+                    cardHasAllTypes = false;
+                    break;
+                }
+            }
+            if (cardHasAllTypes) {
+                alreadyHaveCard = true;
+                break;
+            }
+        }
+
+        if (!alreadyHaveCard) {
+            // Create a list of all cards that match the criteria
+            List<PaperCard> possibleCards = Lists.newArrayList();
+            for (CardEdition.CardInSet card : edition.getCards()) {
+                PaperCard pc = StaticData.instance().getCommonCards().getCard(card.name, edition.getCode());
                 boolean cardHasAllTypes = true;
                 for (String type : types) {
                     if (!pc.getRules().getType().hasStringType(type)) {
@@ -341,52 +366,31 @@ public class BoosterGenerator {
                     }
                 }
                 if (cardHasAllTypes) {
-                    alreadyHaveCard = true;
-                    break;
+                    possibleCards.add(pc);
                 }
             }
 
-            if (!alreadyHaveCard) {
-                // Create a list of all cards that match the criteria
-                List<PaperCard> possibleCards = Lists.newArrayList();
-                for (CardEdition.CardInSet card : edition.getCards()) {
-                    PaperCard pc = StaticData.instance().getCommonCards().getCard(card.name, edition.getCode());
-                    boolean cardHasAllTypes = true;
-                    for (String type : types) {
-                        if (!pc.getRules().getType().hasStringType(type)) {
-                            cardHasAllTypes = false;
-                            break;
-                        }
-                    }
-                    if (cardHasAllTypes) {
-                        possibleCards.add(pc);
+            if (!possibleCards.isEmpty()) {
+                PaperCard toAdd = Aggregates.random(possibleCards);
+                PaperCard toRepl = null;
+                CardRarity tgtRarity = toAdd.getRarity();
+
+                // remove the first card of the same rarity, replace it with toAdd. Keep the foil state.
+                for (PaperCard repl : result) {
+                    if (repl.getRarity() == tgtRarity) {
+                        toRepl = repl;
+                        break;
                     }
                 }
-
-                if (!possibleCards.isEmpty()) {
-                    PaperCard toAdd = Aggregates.random(possibleCards);
-                    PaperCard toRepl = null;
-                    CardRarity tgtRarity = toAdd.getRarity();
-
-                    // remove the first card of the same rarity, replace it with toAdd. Keep the foil state.
-                    for (PaperCard repl : result) {
-                        if (repl.getRarity() == tgtRarity) {
-                            toRepl = repl;
-                            break;
-                        }
+                if (toRepl != null) {
+                    if (toRepl.isFoil()) {
+                        toAdd = StaticData.instance().getCommonCards().getFoiled(toAdd);
                     }
-                    if (toRepl != null) {
-                        if (toRepl.isFoil()) {
-                            toAdd = StaticData.instance().getCommonCards().getFoiled(toAdd);
-                        }
-                        result.remove(toRepl);
-                        result.add(toAdd);
-                    }
+                    result.remove(toRepl);
+                    result.add(toAdd);
                 }
             }
         }
-
-        return result;
     }
 
     public static void addCardsFromExtraSheet(List<PaperCard> dest, String printSheetKey) {
