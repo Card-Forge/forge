@@ -791,14 +791,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         Collections.shuffle(possibleList);
         addManaCurveCards(CardRanker.rankCardsInDeck(possibleList.subList(0, targetSize*3 <= possibleList.size() ? targetSize*3 : possibleList.size())),
                 num, "Random Card");
-
-        /*for(int i=0;i<num;++i){
-            PaperCard randomCard=iRandomPool.next();
-            deckList.add(randomCard);
-            if(logToConsole) {
-                System.out.println("Random Card[" + i + "]:" + randomCard.getName() + " (" + randomCard.getRules().getManaCost() + ")");
-            }
-        }*/
+        
     }
 
     /**
