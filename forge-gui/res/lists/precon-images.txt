@@ -37,6 +37,7 @@ https://downloads.cardforge.org/images/products/precons/brute_force.jpg
 https://downloads.cardforge.org/images/products/precons/call_of_blood.jpg
 https://downloads.cardforge.org/images/products/precons/carnival_of_blood.jpg
 https://downloads.cardforge.org/images/products/precons/chandra_pyrogenius.jpg
+https://downloads.cardforge.org/images/products/precons/chandra_bold_pyromancer.jpg
 https://downloads.cardforge.org/images/products/precons/cho-mannos_resolve.jpg
 https://downloads.cardforge.org/images/products/precons/code_of_the_orzhov.jpg
 https://downloads.cardforge.org/images/products/precons/concerted_effort.jpg
@@ -238,6 +239,7 @@ https://downloads.cardforge.org/images/products/precons/swarming_instinct.jpg
 https://downloads.cardforge.org/images/products/precons/sweet_revenge.jpg
 https://downloads.cardforge.org/images/products/precons/swift_justice.jpg
 https://downloads.cardforge.org/images/products/precons/take_to_the_sky.jpg
+https://downloads.cardforge.org/images/products/precons/teferi_timebender.jpg
 https://downloads.cardforge.org/images/products/precons/temur_avalanche.jpg
 https://downloads.cardforge.org/images/products/precons/tezzeret_master_of_metal.jpg
 https://downloads.cardforge.org/images/products/precons/the_adventurers.jpg

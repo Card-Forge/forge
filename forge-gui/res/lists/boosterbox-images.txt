@@ -28,6 +28,7 @@ https://downloads.cardforge.org/images/products/boosterboxes/CSP.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/DGM.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/DIS.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/DKA.jpg
+https://downloads.cardforge.org/images/products/boosterboxes/DOM.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/DRK.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/DST.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/DTK.jpg
