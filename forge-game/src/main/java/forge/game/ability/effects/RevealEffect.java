@@ -109,7 +109,7 @@ public class RevealEffect extends SpellAbilityEffect {
             if (sa.hasParam("Random")) {
                 sb.append("at random ");
             }
-            sb.append("from his or her hand.");
+            sb.append("from their hand.");
         } else {
             sb.append("Error - no target players for RevealHand. ");
         }
