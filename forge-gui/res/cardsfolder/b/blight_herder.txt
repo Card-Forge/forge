@@ -8,4 +8,4 @@ SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ C | Amount$ 1 | SpellDe
 DeckHints:Keyword$Ingest & Type$Eldrazi
 DeckHas:Ability$Mana.Colorless & Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blight_herder.jpg
-Oracle:When you cast Blight Herder, you may put two cards your opponents own from exile into their owners' graveyards. If you do, create three 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: Add {C}."
+Oracle:When you cast this spell, you may put two cards your opponents own from exile into their owners' graveyards. If you do, create three 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: Add {C}."

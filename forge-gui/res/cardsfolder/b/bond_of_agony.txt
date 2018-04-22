@@ -5,4 +5,4 @@ A:SP$ LoseLife | Cost$ X B PayLife<X> | Defined$ Player.Other | LifeAmount$ X | 
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bond_of_agony.jpg
-Oracle:As an additional cost to cast Bond of Agony, pay X life.\nEach other player loses X life.
+Oracle:As an additional cost to cast this spell, pay X life.\nEach other player loses X life.
