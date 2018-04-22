@@ -190,7 +190,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     
     public boolean setCreatureTypes(Collection<String> ctypes) {
         // if it isn't a creature then this has no effect
-        if (coreTypes.contains(CoreType.Creature)) {
+        if (!coreTypes.contains(CoreType.Creature)) {
             return false;
         }
         boolean changed = Iterables.removeIf(subtypes, Predicates.IS_CREATURE_TYPE);
