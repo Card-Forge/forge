@@ -15,11 +15,14 @@ public class SpellAbilityPickerTest extends SimulationTestCase {
     public void testPickingLethalDamage() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
-
+        p.setTeam(0);
+        
         addCard("Mountain", p);
         addCardToZone("Shock", p, ZoneType.Hand);
 
         Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        
         addCard("Runeclaw Bear", opponent);
         opponent.setLife(2, null);
 

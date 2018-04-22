@@ -1686,7 +1686,7 @@ public class GameAction {
             goesFirst = Aggregates.random(game.getPlayers());
         } else {
             for (Player p : game.getPlayers()) {
-                if (!lastGameOutcome.isWinner(p.getLobbyPlayer())) {
+                if (!lastGameOutcome.isWinner(p.getRegisteredPlayer())) {
                     goesFirst = p;
                     break;
                 }
