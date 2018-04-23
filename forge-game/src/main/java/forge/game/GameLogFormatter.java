@@ -117,13 +117,16 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         // Calculate total games each player has won.
         for (final GameOutcome game : gamesPlayed) {
             RegisteredPlayer player = game.getWinningPlayer();
-            //winCount.put(player, winCount.getOrDefault(player, 0) + 1);
-            winCount.merge(player, 1, Integer::sum);
+
+            int amount = winCount.containsKey(player) ? winCount.get(player) : 0;
+            winCount.put(player, amount + 1);
         }
 
         final StringBuilder sb = new StringBuilder();
         for (Entry<RegisteredPlayer, String> entry : players.entrySet()) {
-            sb.append(entry.getValue()).append(": ").append(winCount.getOrDefault(entry.getKey(), 0)).append(" ");
+            int amount = winCount.containsKey(entry.getKey()) ? winCount.get(entry.getKey()) : 0;
+
+            sb.append(entry.getValue()).append(": ").append(amount).append(" ");
         }
 
         return new GameLogEntry(GameLogEntryType.MATCH_RESULTS, sb.toString());
