@@ -357,10 +357,6 @@ public class GameAction {
         zoneTo.add(copied, position, c); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
         c.setZone(zoneTo);
 
-        // TODO: The card cache in Game is never updated, and that makes Suspend cards not function correctly after
-        // they ETB. Probably there's a better way.
-        game.updateCachedCardZone(c.getView(), zoneTo);
-
         if (fromBattlefield) {
             c.setDamage(0); //clear damage after a card leaves the battlefield
             c.setHasBeenDealtDeathtouchDamage(false);

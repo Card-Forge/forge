@@ -184,9 +184,6 @@ public class Game {
     public void addCard(int id, Card card) {
         cardCache.put(Integer.valueOf(id), card);
     }
-    public void updateCachedCardZone(CardView cardView, Zone zone) {
-        cardCache.get(cardView).setZone(zone);
-    }
     public CardCollection getCardList(Iterable<CardView> cardViews) {
         CardCollection list = new CardCollection();
         cardCache.addToList(cardViews, list);
