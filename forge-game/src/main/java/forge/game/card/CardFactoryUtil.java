@@ -4019,21 +4019,21 @@ public class CardFactoryUtil {
             final SpellAbility suspend = new AbilityStatic(card, cost, null) {
                 @Override
                 public boolean canPlay() {
-                    if (!(this.getRestrictions().canPlay(card, this))) {
+                    if (!(this.getRestrictions().canPlay(this.getHostCard(), this))) {
                         return false;
                     }
 
-                    if (card.isInstant() || card.hasKeyword("Flash")) {
+                    if (this.getHostCard().isInstant() || this.getHostCard().hasKeyword("Flash")) {
                         return true;
                     }
 
-                    return card.getOwner().canCastSorcery();
+                    return this.getHostCard().getOwner().canCastSorcery();
                 }
 
                 @Override
                 public void resolve() {
                     final Game game = card.getGame();
-                    final Card c = game.getAction().exile(card, this);
+                    final Card c = game.getAction().exile(this.getHostCard(), this);
                     // better check?
                     c.setSuspend(true);
 
