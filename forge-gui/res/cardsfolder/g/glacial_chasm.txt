@@ -5,7 +5,7 @@ K:Cumulative upkeep:PayLife<2>:Pay 2 life.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice a land.
 SVar:TrigSac:DB$Sacrifice | SacValid$ Land | ChangeNum$ 1
 S:Mode$ CantAttack | ValidCard$ Creature.YouCtrl | Description$ Creatures you control can't attack.
-R:Event$ DamageDone | Prevent$ True | ValidTarget$ You | Description$ Prevent all damage that would be dealt to you.
+R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ You | Description$ Prevent all damage that would be dealt to you.
 SVar:RemAIDeck:True
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glacial_chasm.jpg
