@@ -719,7 +719,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected abstract void buildMenu(final FDropDownMenu menu, final PaperCard card);
 
         private static final List<String> limitExceptions = Arrays.asList(
-                new String[]{"Relentless Rats", "Shadowborn Apostle"});
+                new String[]{"Relentless Rats", "Shadowborn Apostle", "Rat Colony"});
 
         private ItemPool<PaperCard> getAllowedAdditions(Iterable<Entry<PaperCard, Integer>> itemsToAdd, boolean isAddSource) {
             ItemPool<PaperCard> additions = new ItemPool<PaperCard>(cardManager.getGenericType());

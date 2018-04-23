@@ -179,7 +179,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     }
 
     private static final List<String> limitExceptions = Arrays.asList(
-            new String[]{"Relentless Rats", "Shadowborn Apostle"});
+            new String[]{"Relentless Rats", "Shadowborn Apostle", "Rat Colony"});
 
     /**
      * @return pool of additions allowed to deck

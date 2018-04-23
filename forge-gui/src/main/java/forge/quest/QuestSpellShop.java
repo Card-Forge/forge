@@ -345,7 +345,8 @@ public class QuestSpellShop {
             PaperCard card = (PaperCard)item.getKey();
             int numToKeep = card.getRules().getType().isBasic() ?
                     FModel.getQuestPreferences().getPrefInt(QPref.PLAYSET_BASIC_LAND_SIZE) : FModel.getQuestPreferences().getPrefInt(QPref.PLAYSET_SIZE);
-            if (card.getName().equals("Relentless Rats") || card.getName().equals("Shadowborn Apostle")) {
+            if (card.getName().equals("Relentless Rats") || card.getName().equals("Shadowborn Apostle")
+                    || card.getName().equals("Rat Colony")) {
                 numToKeep = FModel.getQuestPreferences().getPrefInt(QPref.PLAYSET_ANY_NUMBER_SIZE);
             }
             if (numToKeep < item.getValue()) {
