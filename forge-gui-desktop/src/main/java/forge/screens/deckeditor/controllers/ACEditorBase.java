@@ -178,9 +178,6 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         None
     }
 
-    private static final List<String> limitExceptions = Arrays.asList(
-            new String[]{"Relentless Rats", "Shadowborn Apostle"});
-
     /**
      * @return pool of additions allowed to deck
      */
@@ -212,7 +209,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
 
             int max;
             if (deck == null || card == null || card.getRules().getType().isBasic() ||
-                    limit == CardLimit.None || limitExceptions.contains(card.getName())) {
+                    limit == CardLimit.None || DeckFormat.getLimitExceptions().contains(card.getName())) {
                 max = Integer.MAX_VALUE;
             }
             else {

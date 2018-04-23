@@ -123,6 +123,13 @@ public enum DeckFormat {
     private final static String ADVPROCLAMATION = "Advantageous Proclamation";
     private final static String SOVREALM = "Sovereign's Realm";
 
+    private static final List<String> limitExceptions = Arrays.asList(
+            new String[]{"Relentless Rats", "Shadowborn Apostle", "Rat Colony"});
+
+    public static List<String> getLimitExceptions(){
+        return limitExceptions;
+    }
+
     private DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0, Predicate<CardRules> cardPoolFilter0, Predicate<PaperCard> paperCardPoolFilter0) {
         mainRange = mainRange0;
         sideRange = sideRange0;

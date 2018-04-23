@@ -441,7 +441,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         pnlShop.add(new PrefInput(QPref.PLAYSET_BASIC_LAND_SIZE, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
 
         FLabel infiniteToKeep = new FLabel.Builder().text("Playset Size: Any Number").fontAlign(SwingConstants.RIGHT).build();
-        infiniteToKeep.setToolTipText("The number of copies of Relentless Rats or Shadowborn Apostles to keep before selling extras.");
+        infiniteToKeep.setToolTipText("The number of copies of Relentless Rats or other similar cards with no limit to keep before selling extras.");
         pnlShop.add(infiniteToKeep, labelConstraints);
         pnlShop.add(new PrefInput(QPref.PLAYSET_ANY_NUMBER_SIZE, QuestPreferencesErrType.DIFFICULTY), fieldConstraints + ", wrap");
 
