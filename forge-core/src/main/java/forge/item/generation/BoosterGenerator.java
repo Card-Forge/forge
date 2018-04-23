@@ -329,13 +329,13 @@ public class BoosterGenerator {
         // Guaranteed cards, e.g. Dominaria guaranteed legendary creatures
         String boosterMustContain = edition.getBoosterMustContain();
         if (!boosterMustContain.isEmpty()) {
-            ensureGuaranteedCardInBooster(result, edition, boosterMustContain);
+            ensureGuaranteedCardInBooster(result, template, boosterMustContain);
         }
 
         return result;
     }
 
-    private static void ensureGuaranteedCardInBooster(List<PaperCard> result, CardEdition edition, String boosterMustContain) {
+    private static void ensureGuaranteedCardInBooster(List<PaperCard> result, SealedProduct.Template template, String boosterMustContain) {
         // First, see if there's already a card of the given type
         String[] types = TextUtil.split(boosterMustContain, ' ');
         boolean alreadyHaveCard = false;
@@ -356,17 +356,26 @@ public class BoosterGenerator {
         if (!alreadyHaveCard) {
             // Create a list of all cards that match the criteria
             List<PaperCard> possibleCards = Lists.newArrayList();
-            for (CardEdition.CardInSet card : edition.getCards()) {
-                PaperCard pc = StaticData.instance().getCommonCards().getCard(card.name, edition.getCode());
-                boolean cardHasAllTypes = true;
-                for (String type : types) {
-                    if (!pc.getRules().getType().hasStringType(type)) {
-                        cardHasAllTypes = false;
-                        break;
+            for (Pair<String, Integer> slot : template.getSlots()) {
+                String slotType = slot.getLeft();
+                String setCode = template.getEdition();
+                String sheetKey = StaticData.instance().getEditions().contains(setCode) ? slotType.trim() + " " + setCode
+                        : slotType.trim();
+
+                PrintSheet ps = getPrintSheet(sheetKey);
+                List<PaperCard> cardsInSlot = Lists.newArrayList(ps.toFlatList());
+
+                for (PaperCard pc : cardsInSlot) {
+                    boolean cardHasAllTypes = true;
+                    for (String type : types) {
+                        if (!pc.getRules().getType().hasStringType(type)) {
+                            cardHasAllTypes = false;
+                            break;
+                        }
                     }
-                }
-                if (cardHasAllTypes) {
-                    possibleCards.add(pc);
+                    if (cardHasAllTypes && !possibleCards.contains(pc)) {
+                        possibleCards.add(pc);
+                    }
                 }
             }
 
