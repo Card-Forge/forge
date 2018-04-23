@@ -1,7 +1,7 @@
 Name:Bubble Matrix
 ManaCost:4
 Types:Artifact
-R:Event$ DamageDone | Prevent$ True | ValidTarget$ Creature | Description$ Prevent all damage that would be dealt to creatures.
+R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Creature | Description$ Prevent all damage that would be dealt to creatures.
 SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bubble_matrix.jpg
