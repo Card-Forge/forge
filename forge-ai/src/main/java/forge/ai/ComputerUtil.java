@@ -1389,9 +1389,9 @@ public class ComputerUtil {
                 for (final Trigger t : c.getTriggers()) {
                     if ("Attacks".equals(t.getParam("Mode")) && t.hasParam("Execute")) {
                         SpellAbility trigSa = AbilityFactory.getAbility(c.getSVar(t.getParam("Execute")), c);
-                        trigSa.setHostCard(c);
                         if (trigSa != null && trigSa.getApi() == ApiType.LoseLife
                                 && trigSa.getParamOrDefault("Defined", "").contains("Opponent")) {
+                            trigSa.setHostCard(c);
                             damage += AbilityUtils.calculateAmount(trigSa.getHostCard(), trigSa.getParam("LifeAmount"), trigSa);
                         }
                     }
