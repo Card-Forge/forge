@@ -1360,6 +1360,11 @@ public class ComputerUtil {
                 if (sa.getApi() != ApiType.DealDamage) {
                     continue;
                 }
+                if (c.getZone().getZoneType() == ZoneType.Hand
+                        && c.isPermanent()
+                        && !ComputerUtilMana.canPayManaCost(c.getSpellPermanent(), ai, 0)) {
+                    continue;
+                }
                 final String numDam = sa.getParam("NumDmg");
                 int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), numDam, sa);
                 if (dmg <= damage) {
@@ -1378,7 +1383,23 @@ public class ComputerUtil {
                 }
                 damage = dmg;
             }
+
+            // Triggered abilities
+            if (c.isCreature() && c.isInZone(ZoneType.Battlefield) && CombatUtil.canAttack(c)) {
+                for (final Trigger t : c.getTriggers()) {
+                    if ("Attacks".equals(t.getParam("Mode")) && t.hasParam("Execute")) {
+                        SpellAbility trigSa = AbilityFactory.getAbility(c.getSVar(t.getParam("Execute")), c);
+                        trigSa.setHostCard(c);
+                        if (trigSa != null && trigSa.getApi() == ApiType.LoseLife
+                                && trigSa.getParamOrDefault("Defined", "").contains("Opponent")) {
+                            damage += AbilityUtils.calculateAmount(trigSa.getHostCard(), trigSa.getParam("LifeAmount"), trigSa);
+                        }
+                    }
+                }
+            }
+
         }
+
         return damage;
     }
 
