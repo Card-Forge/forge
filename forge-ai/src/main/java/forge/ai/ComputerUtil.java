@@ -1353,16 +1353,11 @@ public class ComputerUtil {
         int damage = 0;
         final CardCollection all = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
         all.addAll(ai.getCardsActivableInExternalZones(true));
-        all.addAll(ai.getCardsIn(ZoneType.Hand));
+        all.addAll(CardLists.filter(ai.getCardsIn(ZoneType.Hand), Predicates.not(Presets.PERMANENTS)));
     
         for (final Card c : all) {
             for (final SpellAbility sa : c.getSpellAbilities()) {
                 if (sa.getApi() != ApiType.DealDamage) {
-                    continue;
-                }
-                if (c.getZone().getZoneType() == ZoneType.Hand
-                        && c.isPermanent()
-                        && !ComputerUtilMana.canPayManaCost(c.getSpellPermanent(), ai, 0)) {
                     continue;
                 }
                 final String numDam = sa.getParam("NumDmg");
