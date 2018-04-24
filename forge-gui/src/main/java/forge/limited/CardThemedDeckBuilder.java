@@ -70,6 +70,11 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         super(pool,format);
     }
 
+    public CardThemedDeckBuilder(PaperCard keyCard0, PaperCard secondKeyCard0, final List<PaperCard> dList, GameFormat format, boolean isForAI){
+        this(keyCard0,secondKeyCard0, dList, format, isForAI, DeckFormat.Constructed);
+    }
+
+
     /**
      *
      * Constructor.
@@ -77,7 +82,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      * @param dList
      *            Cards to build the deck from.
      */
-    public CardThemedDeckBuilder(PaperCard keyCard0, PaperCard secondKeyCard0, final List<PaperCard> dList, GameFormat format, boolean isForAI) {
+    public CardThemedDeckBuilder(PaperCard keyCard0, PaperCard secondKeyCard0, final List<PaperCard> dList, GameFormat format, boolean isForAI, DeckFormat deckFormat) {
         super(new DeckGenPool(FModel.getMagicDb().getCommonCards().getUniqueCards()), DeckFormat.Constructed, format.getFilterPrinted());
         this.availableList = dList;
         keyCard=keyCard0;
@@ -91,16 +96,20 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             this.aiPlayables = Lists.newArrayList(availableList);
         }
         this.availableList.removeAll(aiPlayables);
-        targetSize=DeckFormat.Constructed.getMainRange().getMinimum();
+        targetSize=deckFormat.getMainRange().getMinimum();
         FullDeckColors deckColors = new FullDeckColors();
         int cardCount=0;
-        //get colours for first 20 cards
+        int colourCheckAmount = 20;
+        if (targetSize < 60){
+            colourCheckAmount = 10;//lower amount for planar decks
+        }
+        //get colours for first few cards
         for(PaperCard c:getAiPlayables()){
             if(deckColors.canChoseMoreColors()){
                 deckColors.addColorsOf(c);
                 cardCount++;
             }
-            if(cardCount>20){
+            if(cardCount > colourCheckAmount){
                 break;
             }
         }
