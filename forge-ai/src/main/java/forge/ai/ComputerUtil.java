@@ -1353,7 +1353,7 @@ public class ComputerUtil {
         int damage = 0;
         final CardCollection all = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
         all.addAll(ai.getCardsActivableInExternalZones(true));
-        all.addAll(ai.getCardsIn(ZoneType.Hand));
+        all.addAll(CardLists.filter(ai.getCardsIn(ZoneType.Hand), Predicates.not(Presets.PERMANENTS)));
     
         for (final Card c : all) {
             for (final SpellAbility sa : c.getSpellAbilities()) {
@@ -1378,7 +1378,23 @@ public class ComputerUtil {
                 }
                 damage = dmg;
             }
+
+            // Triggered abilities
+            if (c.isCreature() && c.isInZone(ZoneType.Battlefield) && CombatUtil.canAttack(c)) {
+                for (final Trigger t : c.getTriggers()) {
+                    if ("Attacks".equals(t.getParam("Mode")) && t.hasParam("Execute")) {
+                        SpellAbility trigSa = AbilityFactory.getAbility(c.getSVar(t.getParam("Execute")), c);
+                        if (trigSa != null && trigSa.getApi() == ApiType.LoseLife
+                                && trigSa.getParamOrDefault("Defined", "").contains("Opponent")) {
+                            trigSa.setHostCard(c);
+                            damage += AbilityUtils.calculateAmount(trigSa.getHostCard(), trigSa.getParam("LifeAmount"), trigSa);
+                        }
+                    }
+                }
+            }
+
         }
+
         return damage;
     }
 

@@ -272,7 +272,7 @@ public class DamageDealAi extends DamageAiBase {
         final Player activator = sa.getActivatingPlayer();
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
-        List<Card> hPlay = CardLists.filter(getTargetableCards(ai, sa, pl, tgt, activator, source, game), CardPredicates.Presets.PLANESWALKERS);
+        List<Card> hPlay = getTargetableCards(ai, sa, pl, tgt, activator, source, game);
 
         List<Card> killables = CardLists.filter(hPlay, new Predicate<Card>() {
             @Override

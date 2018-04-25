@@ -525,13 +525,15 @@ public class AiAttackController {
             }
         }
 
-        if (ComputerUtilCombat.sumDamageIfUnblocked(unblockedAttackers, opp) + ComputerUtil.possibleNonCombatDamage(ai) 
-                + trampleDamage >= opp.getLife()
+        int totalCombatDamage = ComputerUtilCombat.sumDamageIfUnblocked(unblockedAttackers, opp) + trampleDamage;
+        int totalPoisonDamage = ComputerUtilCombat.sumPoisonIfUnblocked(unblockedAttackers, opp);
+
+        if (totalCombatDamage + ComputerUtil.possibleNonCombatDamage(ai) >= opp.getLife()
                 && !((opp.cantLoseForZeroOrLessLife() || ai.cantWin()) && opp.getLife() < 1)) {
             return true;
         }
 
-        if (ComputerUtilCombat.sumPoisonIfUnblocked(unblockedAttackers, opp) >= 10 - opp.getPoisonCounters()) {
+        if (totalPoisonDamage >= 10 - opp.getPoisonCounters()) {
             return true;
         }
 
