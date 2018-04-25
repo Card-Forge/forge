@@ -327,9 +327,11 @@ public class BoosterGenerator {
         }
 
         // Guaranteed cards, e.g. Dominaria guaranteed legendary creatures
-        String boosterMustContain = edition.getBoosterMustContain();
-        if (!boosterMustContain.isEmpty()) {
-            ensureGuaranteedCardInBooster(result, template, boosterMustContain);
+        if (edition != null) {
+            String boosterMustContain = edition.getBoosterMustContain();
+            if (!boosterMustContain.isEmpty()) {
+                ensureGuaranteedCardInBooster(result, template, boosterMustContain);
+            }
         }
 
         return result;
