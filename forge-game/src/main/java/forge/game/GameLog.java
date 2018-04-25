@@ -37,6 +37,8 @@ public class GameLog extends Observable implements Serializable {
     private final List<GameLogEntry> log = new ArrayList<GameLogEntry>();
 
     private final transient GameLogFormatter formatter = new GameLogFormatter(this);
+    
+    private final boolean quiet = false;
 
     /** Logging level:
      * 0 - Turn
@@ -54,6 +56,8 @@ public class GameLog extends Observable implements Serializable {
     }
 
     void add(GameLogEntry entry) {
+        if (quiet) return;
+
         log.add(entry);
         this.setChanged();
         this.notifyObservers();

@@ -8,10 +8,7 @@ import forge.game.GameEndReason;
 import forge.game.GameFormat;
 import forge.game.GameOutcome;
 import forge.game.GameView;
-import forge.game.player.GameLossReason;
-import forge.game.player.PlayerOutcome;
-import forge.game.player.PlayerStatistics;
-import forge.game.player.PlayerView;
+import forge.game.player.*;
 import forge.interfaces.IButton;
 import forge.interfaces.IWinLoseView;
 import forge.item.*;
@@ -252,8 +249,8 @@ public class QuestWinLoseController {
 
             // final PlayerStatistics aiRating = game.getStatistics(computer.getName());
             PlayerStatistics humanRating = null;
-            for (final Entry<LobbyPlayer, PlayerStatistics> kvRating : game) {
-                if (kvRating.getKey().equals(localHuman)) {
+            for (final Entry<RegisteredPlayer, PlayerStatistics> kvRating : game) {
+                if (kvRating.getKey().getPlayer().equals(localHuman)) {
                     humanRating = kvRating.getValue();
                     continue;
                 }

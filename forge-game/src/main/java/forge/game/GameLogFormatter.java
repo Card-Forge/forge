@@ -1,6 +1,7 @@
 package forge.game;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -27,6 +28,7 @@ import forge.game.event.GameEventTurnBegan;
 import forge.game.event.GameEventTurnPhase;
 import forge.game.event.IGameEventVisitor;
 import forge.game.player.Player;
+import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
@@ -41,8 +43,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventGameOutcome ev) {
-        for (Player p : ev.result.getPlayers()) {
-            String outcome = p.getName() + " has " + p.getOutcome().toString();
+        for(String outcome : ev.result.getOutcomeStrings()) {
             log.add(GameLogEntryType.GAME_OUTCOME, outcome);
         }
         return generateSummary(ev.history);
@@ -110,27 +111,24 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     private static GameLogEntry generateSummary(final List<GameOutcome> gamesPlayed) {
         final GameOutcome outcome1 = gamesPlayed.get(0);
-        final List<Player> players = outcome1.getPlayers();
-
-        final int[] wins = new int[players.size()];
+        final HashMap<RegisteredPlayer, String> players = outcome1.getPlayerNames();
+        final HashMap<RegisteredPlayer, Integer> winCount = new HashMap<RegisteredPlayer, Integer>();
 
         // Calculate total games each player has won.
         for (final GameOutcome game : gamesPlayed) {
-            int i = 0;
-            for (Player p : game.getPlayers()) {
-                if (p.getOutcome().hasWon()) {
-                    wins[i]++;
-                }
-                i++;
-            }
+            RegisteredPlayer player = game.getWinningPlayer();
+
+            int amount = winCount.containsKey(player) ? winCount.get(player) : 0;
+            winCount.put(player, amount + 1);
         }
 
         final StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < wins.length; i++) {
-            final Player player = players.get(i);
-            final String playerName = player.getName();
-            sb.append(playerName).append(": ").append(wins[i]).append(" ");
+        for (Entry<RegisteredPlayer, String> entry : players.entrySet()) {
+            int amount = winCount.containsKey(entry.getKey()) ? winCount.get(entry.getKey()) : 0;
+
+            sb.append(entry.getValue()).append(": ").append(amount).append(" ");
         }
+
         return new GameLogEntry(GameLogEntryType.MATCH_RESULTS, sb.toString());
     }
 
