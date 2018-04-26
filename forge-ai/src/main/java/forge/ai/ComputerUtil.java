@@ -1383,11 +1383,14 @@ public class ComputerUtil {
             if (c.isCreature() && c.isInZone(ZoneType.Battlefield) && CombatUtil.canAttack(c)) {
                 for (final Trigger t : c.getTriggers()) {
                     if ("Attacks".equals(t.getParam("Mode")) && t.hasParam("Execute")) {
-                        SpellAbility trigSa = AbilityFactory.getAbility(c.getSVar(t.getParam("Execute")), c);
-                        if (trigSa != null && trigSa.getApi() == ApiType.LoseLife
-                                && trigSa.getParamOrDefault("Defined", "").contains("Opponent")) {
-                            trigSa.setHostCard(c);
-                            damage += AbilityUtils.calculateAmount(trigSa.getHostCard(), trigSa.getParam("LifeAmount"), trigSa);
+                        String exec = c.getSVar(t.getParam("Execute"));
+                        if (!exec.isEmpty()) {
+                            SpellAbility trigSa = AbilityFactory.getAbility(exec, c);
+                            if (trigSa != null && trigSa.getApi() == ApiType.LoseLife
+                                    && trigSa.getParamOrDefault("Defined", "").contains("Opponent")) {
+                                trigSa.setHostCard(c);
+                                damage += AbilityUtils.calculateAmount(trigSa.getHostCard(), trigSa.getParam("LifeAmount"), trigSa);
+                            }
                         }
                     }
                 }
