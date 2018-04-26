@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Teferi, Timebender
-Description=Teferi, Timebender - WU Dominaria Planeswalker Deck
+Description=Teferi is a master of temporal magic. Use his powers to manipuluate time and accelerate your deck to certain victory.
 Deck Type=constructed
 Set=DOM
 Image=teferi_timebender.jpg
