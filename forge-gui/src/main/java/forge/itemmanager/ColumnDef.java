@@ -420,12 +420,14 @@ public enum ColumnDef {
 
     //Trim leading quotes, then move article last, then replace characters.
     //Because An-Havva Constable.
-    //Ignore all punctuation marks: "Chandra, Flamecaller" before "Chandra's Firebird"
     //Capitals and lowercase sorted as one: "my deck" before "Myr Retribution"
+    //Apostrophes matter, though: "D'Avenant" before "Danitha"
+    //TO DO: Commas before apostrophes: "Rakdos, Lord of Riots" before "Rakdos's Return"
     private static String toSortableName(String printedName) {
       if (printedName.startsWith("\"")) printedName = printedName.substring(1);
-      return moveArticleToEnd(printedName).toLowerCase().replaceAll("[^a-z0-9\\s]","");
+      return moveArticleToEnd(printedName).toLowerCase().replaceAll("[^\\s'0-9a-z]","");
     }
+
     
     /*For localization, simply overwrite this array with appropriate words.
       Words in this list are used by the method String moveArticleToEnd(String), useful
