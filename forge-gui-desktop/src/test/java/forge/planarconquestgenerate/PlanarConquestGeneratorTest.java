@@ -110,6 +110,114 @@ public class PlanarConquestGeneratorTest {
     }
 
     @Test
+    public void generateBestDecksGA() {
+
+        GuiBase.setInterface(new GuiDesktop());
+        FModel.initialize(null, new Function<ForgePreferences, Void>()  {
+            @Override
+            public Void apply(ForgePreferences preferences) {
+                preferences.setPref(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
+                return null;
+            }
+        });
+        int cardsToUse=40;
+        GameFormat format = FModel.getFormats().getStandard();
+        GameRules rules = new GameRules(GameType.Constructed);
+        standardMap = CardRelationMatrixGenerator.cardPools.get(format.getName());
+        List<String> cardNames = new ArrayList<>(standardMap.keySet());
+        List<PaperCard> cards = new ArrayList<>();
+        for(String cardName:cardNames){
+            cards.add(StaticData.instance().getCommonCards().getUniqueByName(cardName));
+        }
+        List<PaperCard> rankedList = CardRanker.rankCardsInDeck(cards);
+        List<String> sets = new ArrayList<>();
+        sets.add("XLN");
+        sets.add("RIX");
+        DeckStorage storage = new DeckStorage(new File(ForgeConstants.DECK_CONSTRUCTED_DIR), ForgeConstants.DECK_BASE_DIR);
+        GameFormat planarConquestFormat = new GameFormat("conquest",sets,null);
+        DeckFormat deckFormat = DeckFormat.PlanarConquest;
+
+        Iterable<PaperCard> filtered= Iterables.filter(rankedList, Predicates.and(
+                Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, PaperCard.FN_GET_RULES),
+                Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, PaperCard.FN_GET_RULES),
+                planarConquestFormat.getFilterPrinted()));
+
+        List<PaperCard> filteredList = Lists.newArrayList(filtered);
+
+        DeckGroup deckGroup = new DeckGroup("SimulatedTournament");
+        List<TournamentPlayer> players = new ArrayList<>();
+        int numPlayers=0;
+        for(PaperCard card: filteredList.subList(0,cardsToUse)){
+                System.out.println(card.getName());
+
+
+                for( int i=0; i<4;i++){
+                    Deck genDeck = DeckgenUtil.buildPlanarConquestDeck(card, planarConquestFormat, deckFormat);
+                    Deck d = new Deck(genDeck,genDeck.getName()+"_"+i+"_"+0);
+                    deckGroup.addAiDeck(d);
+                    players.add(new TournamentPlayer(GamePlayerUtil.createAiPlayer(d.getName(), 0), numPlayers));
+                    numPlayers++;
+                }
+        }
+
+        TournamentSwiss tourney = null;
+        for (int m=1;m<10;++m) {
+
+            //get best decks in population
+            tourney = new TournamentSwiss(players, 2);
+            tourney = runTournament(tourney, rules, numPlayers, deckGroup);
+            players = new ArrayList<>();
+            DeckGroup newDeckGroup = new DeckGroup("SimulatedTournament"+m);
+            numPlayers=0;
+            int winnerCount = new Float(tourney.getAllPlayers().size()* .5f).intValue();
+            for (int k = 0; k < winnerCount; k++) {
+                String deckName = tourney.getAllPlayers().get(k).getPlayer().getName();
+                for (Deck winningDeck : deckGroup.getAiDecks()) {
+                    if (winningDeck.getName().equals(deckName)) {
+                        newDeckGroup.addAiDeck(winningDeck);
+                        players.add(new TournamentPlayer(GamePlayerUtil.createAiPlayer(winningDeck.getName(), 0), numPlayers));
+                        numPlayers++;
+                        break;
+                    }
+                }
+            }
+            deckGroup = newDeckGroup;
+
+            //add random decks
+            for(PaperCard card: filteredList.subList(0,cardsToUse)){
+                    System.out.println(card.getName());
+                    for( int i=0; i<2;i++){
+                        Deck genDeck = DeckgenUtil.buildPlanarConquestDeck(card, planarConquestFormat, deckFormat);
+                        Deck d = new Deck(genDeck,genDeck.getName()+"_"+i+"_"+m);
+                        deckGroup.addAiDeck(d);
+                        players.add(new TournamentPlayer(GamePlayerUtil.createAiPlayer(d.getName(), 0), numPlayers));
+                        numPlayers++;
+                    }
+            }
+        }
+
+        tourney = new TournamentSwiss(players, 2);
+        tourney = runTournament(tourney, rules, numPlayers, deckGroup);
+
+        int winnerCount = new Float(tourney.getAllPlayers().size()* 0.25f).intValue();
+        for (int k = 0; k < winnerCount; k++) {
+            String deckName = tourney.getAllPlayers().get(k).getPlayer().getName();
+            Deck winningDeck;
+            for(Deck deck:deckGroup.getAiDecks()){
+                if(deck.getName().equals(deckName)){
+                    winningDeck=deck;
+                    storage.save(winningDeck);
+                    System.out.println(winningDeck.getName());
+                    System.out.println(winningDeck.getAllCardsInASinglePool().toString());
+                    break;
+                }
+            }
+        }
+
+
+    }
+
+    @Test
     public void generatePlanarConquestCommanderDecks() {
 
         GuiBase.setInterface(new GuiDesktop());
@@ -155,7 +263,7 @@ public class PlanarConquestGeneratorTest {
                 DeckGroup deckGroup = new DeckGroup("SimulatedTournament");
                 List<TournamentPlayer> players = new ArrayList<>();
                 int numPlayers=0;
-                for( int i=0; i<2;i++){
+                for( int i=0; i<16;i++){
                     Deck genDeck = DeckgenUtil.buildPlanarConquestCommanderDeck(card, planarConquestFormat, deckFormat);
                     Deck d = new Deck(genDeck,genDeck.getName()+"_"+i);
                     deckGroup.addAiDeck(d);
