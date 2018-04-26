@@ -2325,7 +2325,7 @@ public class CardFactoryUtil {
             inst.addTrigger(trigger);
         } else if (keyword.equals("Exalted")) {
             final String trig = "Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | "
-                    + "Execute$ ExaltedPump | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ "
+                    + "TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ "
                     + "Exalted (" + inst.getReminderText() + ")";
 
             final String effect = "DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +1 | NumDef$ +1";
