@@ -199,10 +199,10 @@ public class SimulateMatch {
         }
         Collections.reverse(log);
         for(GameLogEntry l : log) {
-            System.out.println(l);
+            //System.out.println(l);
         }
 
-        System.out.println(String.format("\nGame %d ended in %d ms. %s has won!\n", 1+iGame, sw.getTime(), g1.getOutcome().getWinningLobbyPlayer().getName()));
+        //System.out.println(String.format("\nGame %d ended in %d ms. %s has won!\n", 1+iGame, sw.getTime(), g1.getOutcome().getWinningLobbyPlayer().getName()));
     }
 
     private static void simulateTournament(Map<String, List<String>> params, GameRules rules, boolean outputGamelog) {

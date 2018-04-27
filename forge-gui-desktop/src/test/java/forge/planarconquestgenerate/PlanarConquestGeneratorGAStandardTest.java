@@ -2,22 +2,14 @@ package forge.planarconquestgenerate;
 
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import forge.GuiBase;
 import forge.GuiDesktop;
-import forge.StaticData;
-import forge.card.CardRulesPredicates;
-import forge.deck.CardRelationMatrixGenerator;
 import forge.deck.Deck;
 import forge.deck.DeckFormat;
 import forge.deck.io.DeckStorage;
 import forge.game.GameFormat;
 import forge.game.GameRules;
 import forge.game.GameType;
-import forge.item.PaperCard;
-import forge.limited.CardRanker;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
@@ -26,10 +18,9 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Test
-public class PlanarConquestGeneratorGATest {
+public class PlanarConquestGeneratorGAStandardTest {
 
 
     @Test
@@ -43,16 +34,13 @@ public class PlanarConquestGeneratorGATest {
                 return null;
             }
         });
-        List<String> sets = new ArrayList<>();
-        sets.add("XLN");
-        sets.add("RIX");
 
-        PlanarConquestGeneraterGA ga = new PlanarConquestGeneraterGA(new GameRules(GameType.Constructed),
-                new GameFormat("conquest",sets,null),
-                DeckFormat.PlanarConquest,
-                10,
-                2,
-                5);
+        PlanarConquestGeneraterGA ga = new PlanarConquestGeneraterGAStandard(new GameRules(GameType.Constructed),
+                FModel.getFormats().getStandard(),
+                DeckFormat.Constructed,
+                40,
+                4,
+                10);
         ga.run();
         List<Deck> winners = ga.listFinalPopulation();
 
