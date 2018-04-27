@@ -1,8 +1,8 @@
 Name:Cradle of the Accursed
 ManaCost:no cost
 Types:Land Desert
-A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Token | Cost$ 3 T Sac<1/CARDNAME> | SorcerySpeed$ True | TokenOwner$ You | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ b 2 2 zombie AKH | SpellDescription$ Create a 2/2 black Zombie creature token. Activate this ability only any time you could cast a sorcery.
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cradle_of_the_accursed.jpg
-Oracle:{T}: Add {C} to your mana pool.\n{3}, {T}, Sacrifice Cradle of the Accursed: Create a 2/2 black Zombie creature token. Activate this ability only any time you could cast a sorcery.
+Oracle:{T}: Add {C}.\n{3}, {T}, Sacrifice Cradle of the Accursed: Create a 2/2 black Zombie creature token. Activate this ability only any time you could cast a sorcery.

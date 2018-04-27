@@ -20,10 +20,10 @@ ALTERNATE
 Name:Conqueror's Foothold
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 1 | SpellDescription$ Add {C} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 1 | SpellDescription$ Add {C}.
 A:AB$ Draw | Cost$ 2 T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 A:AB$ Draw | Cost$ 4 T | NumCards$ 1 | SpellDescription$ Draw a card.
 A:AB$ ChangeZone | Cost$ 6 T | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Card.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target card from your graveyard to your hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conquerors_foothold.jpg
-Oracle:(Transforms from Conqueror's Galleon.)\n{T}: Add {C} to your mana pool.\n{2}, {T}: Draw a card, then discard a card.\n{4}, {T}: Draw a card.\n{6}, {T}: Return target card from your graveyard to your hand.
+Oracle:(Transforms from Conqueror's Galleon.)\n{T}: Add {C}.\n{2}, {T}: Draw a card, then discard a card.\n{4}, {T}: Draw a card.\n{6}, {T}: Return target card from your graveyard to your hand.

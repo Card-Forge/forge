@@ -2,8 +2,8 @@ Name:Svyelunite Temple
 ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U} to your mana pool.
-A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ U | Amount$ 2 | SpellDescription$ Add {U}{U} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ U | Amount$ 2 | SpellDescription$ Add {U}{U}.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/svyelunite_temple.jpg
-Oracle:Svyelunite Temple enters the battlefield tapped.\n{T}: Add {U} to your mana pool.\n{T}, Sacrifice Svyelunite Temple: Add {U}{U} to your mana pool.
+Oracle:Svyelunite Temple enters the battlefield tapped.\n{T}: Add {U}.\n{T}, Sacrifice Svyelunite Temple: Add {U}{U}.

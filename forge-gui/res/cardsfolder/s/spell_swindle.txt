@@ -1,11 +1,11 @@
 Name:Spell Swindle
 ManaCost:3 U U
 Types:Instant
-A:SP$ Counter | Cost$ 3 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | RememberCounteredCMC$ True | SubAbility$ DBTreasureTokens | SpellDescription$ Counter target spell. Create X colorless Treasure artifact tokens, where X is that spell's converted mana cost. They have "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+A:SP$ Counter | Cost$ 3 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | RememberCounteredCMC$ True | SubAbility$ DBTreasureTokens | SpellDescription$ Counter target spell. Create X colorless Treasure artifact tokens, where X is that spell's converted mana cost. They have "{T}, Sacrifice this artifact: Add one mana of any color."
 SVar:DBTreasureTokens:DB$ Token | TokenAmount$ X | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAbilities$ ABTreasureMana | TokenAltImages$ c_treasure2,c_treasure3,c_treasure4 | References$ X | SubAbility$ DBCleanup
-SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color to your mana pool.
+SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedNumber
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_swindle.jpg
-Oracle:Counter target spell. Create X colorless Treasure artifact tokens, where X is that spell's converted mana cost. They have "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+Oracle:Counter target spell. Create X colorless Treasure artifact tokens, where X is that spell's converted mana cost. They have "{T}, Sacrifice this artifact: Add one mana of any color."

@@ -2,9 +2,9 @@ Name:Pitiless Plunderer
 ManaCost:3 B
 Types:Creature Human Pirate
 PT:1/4
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever another creature you control dies, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever another creature you control dies, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAltImages$ c_treasure2,c_treasure3,c_treasure4 | TokenAbilities$ ABMana | References$ ABMana
-SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
+SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color.
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pitiless_plunderer.jpg
-Oracle:Whenever another creature you control dies, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+Oracle:Whenever another creature you control dies, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."

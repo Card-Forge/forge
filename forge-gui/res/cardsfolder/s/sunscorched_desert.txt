@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Land Desert
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to target player.
 SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1 
-A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunscorched_desert.jpg
-Oracle:When Sunscorched Desert enters the battlefield, it deals 1 damage to target player.\n{T}: Add {C} to your mana pool.
+Oracle:When Sunscorched Desert enters the battlefield, it deals 1 damage to target player.\n{T}: Add {C}.

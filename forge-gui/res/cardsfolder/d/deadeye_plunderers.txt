@@ -3,11 +3,11 @@ ManaCost:3 U B
 Types:Creature Human Pirate
 PT:3/3
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each artifact you control.
-A:AB$ Token | Cost$ 2 U B | TokenAmount$ 1 | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAbilities$ ABTreasureMana | TokenAltImages$ c_treasure2,c_treasure3 | SpellDescription$ Create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
-SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color to your mana pool.
+A:AB$ Token | Cost$ 2 U B | TokenAmount$ 1 | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAbilities$ ABTreasureMana | TokenAltImages$ c_treasure2,c_treasure3 | SpellDescription$ Create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."
+SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:BuffedBy:Artifact
 DeckHas:Ability$Token
 DeckHints:Type$Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deadeye_plunderers.jpg
-Oracle:Deadeye Plunderers gets +1/+1 for each artifact you control.\n{2}{U}{B}: Create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+Oracle:Deadeye Plunderers gets +1/+1 for each artifact you control.\n{2}{U}{B}: Create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."

@@ -2,4 +2,4 @@ Name:Plateau
 ManaCost:no cost
 Types:Land Mountain Plains
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plateau.jpg
-Oracle:({T}: Add {R} or {W} to your mana pool.)
+Oracle:({T}: Add {R} or {W}.)

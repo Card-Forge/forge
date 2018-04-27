@@ -2,8 +2,8 @@ Name:Geothermal Crevice
 ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R} to your mana pool.
-A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ B G | SpellDescription$ Add {B}{G} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ B G | SpellDescription$ Add {B}{G}.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/geothermal_crevice.jpg
-Oracle:Geothermal Crevice enters the battlefield tapped.\n{T}: Add {R} to your mana pool.\n{T}, Sacrifice Geothermal Crevice: Add {B}{G} to your mana pool.
+Oracle:Geothermal Crevice enters the battlefield tapped.\n{T}: Add {R}.\n{T}, Sacrifice Geothermal Crevice: Add {B}{G}.

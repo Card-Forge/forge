@@ -4,9 +4,9 @@ Types:Land
 K:ETBReplacement:Other:LandTapped
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | SubAbility$ DBAddCounter | SpellDescription$ CARDNAME enters the battlefield tapped with two depletion counters on it.
 SVar:DBAddCounter:DB$ PutCounter | Defined$ Self | ETB$ True | CounterType$ DEPLETION | CounterNum$ 2
-A:AB$ Mana | Cost$ T SubCounter<1/DEPLETION> | Produced$ B | SubAbility$ DBSac | Amount$ 2 | SpellDescription$ Add {B}{B} to your mana pool. If there are no depletion counters on CARDNAME, sacrifice it.
+A:AB$ Mana | Cost$ T SubCounter<1/DEPLETION> | Produced$ B | SubAbility$ DBSac | Amount$ 2 | SpellDescription$ Add {B}{B}. If there are no depletion counters on CARDNAME, sacrifice it.
 SVar:DBSac:DB$ Sacrifice | SacValid$ Self | ConditionPresent$ Card.Self+counters_EQ0_DEPLETION
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://wizards.com/global/images/magic/general/peat_bog.jpg
-Oracle:Peat Bog enters the battlefield tapped with two depletion counters on it.\n{T}, Remove a depletion counter from Peat Bog: Add {B}{B} to your mana pool. If there are no depletion counters on Peat Bog, sacrifice it.
+Oracle:Peat Bog enters the battlefield tapped with two depletion counters on it.\n{T}, Remove a depletion counter from Peat Bog: Add {B}{B}. If there are no depletion counters on Peat Bog, sacrifice it.

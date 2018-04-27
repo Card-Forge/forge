@@ -1,9 +1,9 @@
 Name:Sungrass Egg
 ManaCost:1
 Types:Artifact
-A:AB$ Mana | Cost$ 2 T Sac<1/CARDNAME> | Produced$ G W | SubAbility$ DBDraw | SpellDescription$ Add {G}{W} to your mana pool. Draw a card.
+A:AB$ Mana | Cost$ 2 T Sac<1/CARDNAME> | Produced$ G W | SubAbility$ DBDraw | SpellDescription$ Add {G}{W}. Draw a card.
 SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sungrass_egg.jpg
-Oracle:{2}, {T}, Sacrifice Sungrass Egg: Add {G}{W} to your mana pool. Draw a card.
+Oracle:{2}, {T}, Sacrifice Sungrass Egg: Add {G}{W}. Draw a card.

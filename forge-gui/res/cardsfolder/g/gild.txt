@@ -1,8 +1,8 @@
 Name:Gild
 ManaCost:3 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBToken | SpellDescription$ Exile target creature. Create a colorless artifact token named Gold. It has "Sacrifice this artifact: Add one mana of any color to your mana pool."
+A:SP$ ChangeZone | Cost$ 3 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBToken | SpellDescription$ Exile target creature. Create a colorless artifact token named Gold. It has "Sacrifice this artifact: Add one mana of any color."
 SVar:DBToken:DB$ Token | TokenName$ Gold | TokenTypes$ Artifact | TokenColors$ Colorless | TokenOwner$ You | TokenAmount$ 1 | TokenImage$ c gold | TokenAbilities$ ABMana | References$ ABMana
-SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
+SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gild.jpg
-Oracle:Exile target creature. Create a colorless artifact token named Gold. It has "Sacrifice this artifact: Add one mana of any color to your mana pool."
+Oracle:Exile target creature. Create a colorless artifact token named Gold. It has "Sacrifice this artifact: Add one mana of any color."

@@ -3,9 +3,9 @@ ManaCost:R
 Types:Enchantment Aura Curse
 K:Enchant player
 A:SP$ Attach | Cost$ R | ValidTgts$ Player | AILogic$ Curse
-T:Mode$ AttackersDeclared | ValidCard$ Creature | AttackedTarget$ Player.EnchantedBy | Execute$ TrigRepeat | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted player is attacked, create a colorless artifact token named Gold. It has "Sacrifice this artifact: Add one mana of any color to your mana pool." Each opponent attacking that player does the same.
+T:Mode$ AttackersDeclared | ValidCard$ Creature | AttackedTarget$ Player.EnchantedBy | Execute$ TrigRepeat | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted player is attacked, create a colorless artifact token named Gold. It has "Sacrifice this artifact: Add one mana of any color." Each opponent attacking that player does the same.
 SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ TriggeredAttackingPlayerAndYou | RepeatSubAbility$ TrigToken
 SVar:TrigToken:DB$ Token | TokenName$ Gold | TokenTypes$ Artifact | TokenColors$ Colorless | TokenOwner$ Player.IsRemembered | TokenAmount$ 1 | TokenImage$ c gold C17 | TokenAbilities$ ABMana | References$ ABMana
-SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
+SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_vitality.jpg
-Oracle:Enchant player\nWhenever enchanted player is attacked, create a colorless artifact token named Gold. It has "Sacrifice this artifact: Add one mana of any color to your mana pool." Each opponent attacking that player does the same.
+Oracle:Enchant player\nWhenever enchanted player is attacked, create a colorless artifact token named Gold. It has "Sacrifice this artifact: Add one mana of any color." Each opponent attacking that player does the same.

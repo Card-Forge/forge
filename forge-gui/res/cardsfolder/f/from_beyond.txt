@@ -2,11 +2,11 @@ Name:From Beyond
 ManaCost:3 G
 Types:Enchantment
 K:Devoid
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C} to your mana pool."
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Eldrazi Scion | TokenTypes$ Creature,Eldrazi,Scion | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenAltImages$ c_1_1_eldrazi_scion2,c_1_1_eldrazi_scion3,c_1_1_eldrazi_scion4,c_1_1_eldrazi_scion5,c_1_1_eldrazi_scion6 | TokenAbilities$ ABMana
-SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ C | Amount$ 1 | SpellDescription$ Add {C} to your mana pool.
+SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ C | Amount$ 1 | SpellDescription$ Add {C}.
 A:AB$ ChangeZone | Cost$ 1 G Sac<1/CARDNAME> | Origin$ Library | Destination$ Hand | ChangeType$ Eldrazi | ChangeNum$ 1 | SpellDescription$ Search your library for an Eldrazi card, reveal it, put it into your hand, then shuffle your library.
 DeckHints:Type$Eldrazi
 DeckHas:Ability$Mana.Colorless & Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/from_beyond.jpg
-Oracle:Devoid (This card has no color.)\nAt the beginning of your upkeep, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C} to your mana pool."\n{1}{G}, Sacrifice From Beyond: Search your library for an Eldrazi card, reveal it, put it into your hand, then shuffle your library.
+Oracle:Devoid (This card has no color.)\nAt the beginning of your upkeep, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."\n{1}{G}, Sacrifice From Beyond: Search your library for an Eldrazi card, reveal it, put it into your hand, then shuffle your library.

@@ -1,7 +1,7 @@
 Name:Doubling Cube
 ManaCost:2
 Types:Artifact
-A:AB$ Mana | Cost$ 3 T | DoubleManaInPool$ True | ProduceNoOtherMana$ True | SpellDescription$ Double the amount of each type of mana in your mana pool.
+A:AB$ Mana | Cost$ 3 T | DoubleManaInPool$ True | ProduceNoOtherMana$ True | SpellDescription$ Double the amount of each type of unspent mana you have.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/doubling_cube.jpg
-Oracle:{3}, {T}: Double the amount of each type of mana in your mana pool.
+Oracle:{3}, {T}: Double the amount of each type of unspent mana you have.

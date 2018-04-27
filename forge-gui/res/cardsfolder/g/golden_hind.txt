@@ -2,6 +2,6 @@ Name:Golden Hind
 ManaCost:1 G
 Types:Creature Elk
 PT:2/1
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golden_hind.jpg
-Oracle:{T}: Add {G} to your mana pool.
+Oracle:{T}: Add {G}.

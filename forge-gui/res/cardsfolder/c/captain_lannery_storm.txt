@@ -3,10 +3,10 @@ ManaCost:2 R
 Types:Creature Legendary Human Pirate
 PT:2/2
 K:Haste
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAltImages$ c_treasure2,c_treasure3,c_treasure4 | TokenAbilities$ ABMana | References$ ABMana
-SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
+SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color.
 T:Mode$ Sacrificed | ValidCard$ Treasure.YouCtrl | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a treasure, CARDNAME gets +1/+0 until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 0
 SVar:Picture:http://media.wizards.com/2017/xln/en_P9FMMTi6df.png
-Oracle:Haste\nWhenever Captain Lannery Storm attacks, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."\nWhenever you sacrifice a treasure, Captain Lannery Storm gets +1/+0 until end of turn.
+Oracle:Haste\nWhenever Captain Lannery Storm attacks, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."\nWhenever you sacrifice a treasure, Captain Lannery Storm gets +1/+0 until end of turn.
