@@ -53,12 +53,13 @@ public class ConquestRegion {
             if (pc == null) {
                 pc = FModel.getMagicDb().getCommonCards().getCard(artCardName);
                 if (!pc.getName().equals(artCardName) && Card.fromPaperCard(pc, null).hasAlternateState()) {
-                    return GuiBase.getInterface().getCardArt(pc, true);
+                    art = GuiBase.getInterface().getCardArt(pc, true);
                 }
+            } else {
+                art = GuiBase.getInterface().getCardArt(pc);
             }
-
-            art = GuiBase.getInterface().getCardArt(pc);
         }
+
         return art;
     }
 
