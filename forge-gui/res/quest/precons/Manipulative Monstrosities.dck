@@ -8,7 +8,7 @@ Deck Type=constructed
 Set=THS
 Image=manipulative_monstrosities.jpg
 Name=Manipulative Monstrosities
-Description=With the "Manipulative Monstrosities" deck, you can command colossal Krakens, gargantuan Giants, and the forces of nature itself to smash your opponent into submission.
+Description=Release the kraken and other monstrous creatures that will blow your opponents away! Grow larger-than-life creatures of myth to conquer your foes with sheer size.
 [Main]
 2 Archaeomancer|M14
 1 Burnished Hart|THS
@@ -29,7 +29,7 @@ Description=With the "Manipulative Monstrosities" deck, you can command colossal
 2 Rage of Purphoros|THS
 1 Sea God's Revenge|THS
 2 Sealock Monster|THS
-1 Shipbreaker Kraken|THS
+1 Shipbreaker Kraken+|THS
 2 Shock|M14
 2 Stoneshock Giant|THS
 1 Volcanic Geyser|M14
