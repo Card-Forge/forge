@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Chandra, Bold Pyromancer
-Description=Chandra, Bold Pyromancer - RG Dominaria Planeswalker Deck
+Description=Chandra is an expert pyromancer. Use her flames to incinerate the opposition before finishing them with massive creatures.
 Deck Type=constructed
 Set=DOM
 Image=chandra_bold_pyromancer.jpg

@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Mystical Might
-Description=Attack early, attack often! That's the motto of the "Mystical Might" deck, which seeks to overwhelm your opponents with elusive - and illusory - creatures before they can mount a defense.
+Description=Use the powers of illusion to beat down your adversaries! Fill the skies with your own special blend of creatures, both real and imagined, to rain down punishment, leaving your enemies wondering which were fact and which were fantasy.
 Deck Type=constructed
 Set=M12
 Image=mystical_might.jpg
@@ -24,7 +24,7 @@ Image=mystical_might.jpg
 1 Serra Angel|M12
 1 Siege Mastodon|M12
 3 Skywinder Drake|M12
-1 Sphinx of Uthuun|M12
+1 Sphinx of Uthuun+|M12
 2 Stormfront Pegasus|M12
 2 Cancel|M12
 2 Elixir of Immortality|M12
