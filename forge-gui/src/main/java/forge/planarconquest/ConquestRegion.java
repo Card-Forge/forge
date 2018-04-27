@@ -48,7 +48,6 @@ public class ConquestRegion {
     public ISkinImage getArt() {
         if (art == null) {
             PaperCard pc = cardPool.getCard(artCardName);
-            boolean transformed = false;
 
             if (pc == null) {
                 pc = FModel.getMagicDb().getCommonCards().getCard(artCardName);
