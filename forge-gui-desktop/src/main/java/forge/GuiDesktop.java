@@ -114,6 +114,11 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
+    public ISkinImage getCardArt(final PaperCard card, final boolean backFace) {
+        return null; //TODO
+    }
+
+    @Override
     public ISkinImage createLayeredImage(final FSkinProp background, final String overlayFilename, final float opacity) {
         final BufferedImage image = new BufferedImage(background.getWidth(), background.getHeight(), BufferedImage.TYPE_INT_ARGB);
         final Graphics2D g = image.createGraphics();

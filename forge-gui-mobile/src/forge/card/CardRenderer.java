@@ -107,8 +107,12 @@ public class CardRenderer {
 
     //extract card art from the given card
     public static FImageComplex getCardArt(IPaperCard pc) {
+        return getCardArt(pc, false);
+    }
+
+    public static FImageComplex getCardArt(IPaperCard pc, boolean backFace) {
         CardType type = pc.getRules().getType();
-        return getCardArt(pc.getImageKey(false), pc.getRules().getSplitType() == CardSplitType.Split, type.isPlane() || type.isPhenomenon(),pc.getRules().getOracleText().contains("Aftermath"));
+        return getCardArt(pc.getImageKey(backFace), pc.getRules().getSplitType() == CardSplitType.Split, type.isPlane() || type.isPhenomenon(),pc.getRules().getOracleText().contains("Aftermath"));
     }
 
     public static FImageComplex getCardArt(CardView card) {
