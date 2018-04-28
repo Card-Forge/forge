@@ -603,7 +603,9 @@ public class TriggerHandler {
 
         if (regtrig.isIntrinsic()) {
             sa.setIntrinsic(true);
-            sa.changeText();
+            if (regtrig.getOverridingAbility() == null) {
+                sa.changeText();
+            }
         }
 
         sa.setStackDescription(sa.toString());
