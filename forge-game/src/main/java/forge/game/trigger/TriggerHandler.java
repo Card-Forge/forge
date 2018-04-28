@@ -601,7 +601,7 @@ public class TriggerHandler {
             host.addRemembered(sa.getActivatingPlayer());
         }
 
-        if (regtrig.isIntrinsic()) {
+        if (regtrig.isIntrinsic() && regtrig.getOverridingAbility() == null) {
             sa.setIntrinsic(true);
             sa.changeText();
         }

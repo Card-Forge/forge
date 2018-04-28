@@ -613,7 +613,7 @@ public class CardFactory {
         for (String sVar : from.getSVars()) {
             to.setSVar(sVar, from.getSVar(sVar));
         }
-        to.changeText();
+        //to.changeText();
     }
 
     /**
