@@ -63,7 +63,7 @@ public final class GameActionUtil {
         for (int i = 0; i < MagicColor.WUBRG.length; i++ ) {
             String color = MagicColor.toShortString(MagicColor.WUBRG[i]);
             String abString  = "AB$ Mana | Cost$ T | Produced$ " + color +
-                    " | SpellDescription$ Add {" + color + "} to your mana pool.";
+                    " | SpellDescription$ Add {" + color + "}.";
             Map<String, String> mapParams = AbilityFactory.getMapParams(abString);
             BASIC_LAND_ABILITIES_PARAMS[i] = mapParams;
             BASIC_LAND_ABILITIES_TYPES[i] = AbilityRecordType.getRecordType(mapParams);
