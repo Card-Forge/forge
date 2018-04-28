@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Angelic Fury
-Description=Angelic Fury - Shadows over Innistrad W/R intro pack.
+Description=Violence and destruction sweep across the land. While horrors emerge from smoldering chasms and angels turn on humanity, the people of Innistrad are caught up in the fires of vengeance. Fueled by the flames, your creatures will sweep over their enemies to claim victory.
 Deck Type=constructed
 Set=SOI
 Image=angelic_fury.jpg
@@ -19,7 +19,7 @@ Image=angelic_fury.jpg
 2 Pyre Hound|SOI
 1 Runaway Carriage|SOI
 2 Inspiring Captain|SOI
-1 Flameblade Angel|SOI
+1 Flameblade Angel+|SOI
 1 Magmatic Chasm|SOI
 1 Angelic Purge|SOI
 1 Devils' Playground|SOI
