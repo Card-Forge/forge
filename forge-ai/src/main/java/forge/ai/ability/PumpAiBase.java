@@ -450,6 +450,10 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                     || card.isTapped() || newPower <= 0) {
                 return false;
             }
+        } else if (keyword.equals("Prevent all combat damage that would be dealt to CARDNAME.")) {
+            if (combat == null || !(combat.isBlocking(card) || combat.isBlocked(card))) {
+                return false;
+            }
         }
         return true;
     }
