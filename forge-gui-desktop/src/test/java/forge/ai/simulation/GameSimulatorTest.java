@@ -596,7 +596,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertEquals(1, scion.getNetPower());
         assertEquals(1, scion.getNetToughness());
         assertTrue(scion.isSick());
-        assertNotNull(findSAWithPrefix(scion, "Sacrifice CARDNAME: Add {C} to your mana pool."));
+        assertNotNull(findSAWithPrefix(scion, "Sacrifice CARDNAME: Add {C}."));
 
         GameCopier copier = new GameCopier(simGame);
         Game copy = copier.makeCopy();
@@ -605,7 +605,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertEquals(1, scionCopy.getNetPower());
         assertEquals(1, scionCopy.getNetToughness());
         assertTrue(scionCopy.isSick());
-        assertNotNull(findSAWithPrefix(scionCopy, "Sacrifice CARDNAME: Add {C} to your mana pool."));
+        assertNotNull(findSAWithPrefix(scionCopy, "Sacrifice CARDNAME: Add {C}."));
     }
 
     public void testMarkedDamage() {
