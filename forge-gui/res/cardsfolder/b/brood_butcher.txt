@@ -3,12 +3,12 @@ ManaCost:3 B G
 Types:Creature Eldrazi Drone
 PT:3/3
 K:Devoid
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C} to your mana pool."
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Eldrazi Scion | TokenTypes$ Creature,Eldrazi,Scion | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenAltImages$ c_1_1_eldrazi_scion2,c_1_1_eldrazi_scion3,c_1_1_eldrazi_scion4,c_1_1_eldrazi_scion5,c_1_1_eldrazi_scion6 | TokenAbilities$ ABMana
-SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ C | Amount$ 1 | SpellDescription$ Add {C} to your mana pool.
+SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ C | Amount$ 1 | SpellDescription$ Add {C}.
 A:AB$ Pump | Cost$ B G Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn.
 DeckHints:Type$Eldrazi
 DeckHas:Ability$Mana.Colorless & Ability$Token
 SVar:AIPreference:SacCost$Creature.token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brood_butcher.jpg
-Oracle:Devoid (This card has no color.)\nWhen Brood Butcher enters the battlefield, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C} to your mana pool."\n{B}{G}, Sacrifice a creature: Target creature gets -2/-2 until end of turn.
+Oracle:Devoid (This card has no color.)\nWhen Brood Butcher enters the battlefield, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."\n{B}{G}, Sacrifice a creature: Target creature gets -2/-2 until end of turn.

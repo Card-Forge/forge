@@ -16,6 +16,6 @@ ALTERNATE
 Name:Lost Vale
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 3 | SpellDescription$ Add three mana of any one color to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 3 | SpellDescription$ Add three mana of any one color.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lost_vale.jpg
-Oracle:(Transforms from Dowsing Dagger.)\n{T}: Add three mana of any one color to your mana pool.
+Oracle:(Transforms from Dowsing Dagger.)\n{T}: Add three mana of any one color.

@@ -1,10 +1,10 @@
 Name:Pirate's Pillage
 ManaCost:3 R
 Types:Sorcery
-A:SP$ Draw | Cost$ 3 R Discard<1/Card> | CostDesc$ As an additional cost to cast CARDNAME, discard a card. | NumCards$ 2 | Defined$ You | SubAbility$ DBToken | SpellDescription$ Draw two cards and create two colorless Treasure artifacts with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+A:SP$ Draw | Cost$ 3 R Discard<1/Card> | CostDesc$ As an additional cost to cast CARDNAME, discard a card. | NumCards$ 2 | Defined$ You | SubAbility$ DBToken | SpellDescription$ Draw two cards and create two colorless Treasure artifacts with "{T}, Sacrifice this artifact: Add one mana of any color."
 SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAbilities$ ABTreasureMana | TokenAltImages$ c_treasure2,c_treasure3,c_treasure4
-SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color to your mana pool. 
+SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
 DeckHas:Ability$Discard
 DeckHints:Keyword$Madness & Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pirates_pillage.jpg
-Oracle:As an additional cost to cast Pirate's Pillage, discard a card.\nDraw two cards and create two colorless Treasure artifacts with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+Oracle:As an additional cost to cast Pirate's Pillage, discard a card.\nDraw two cards and create two colorless Treasure artifacts with "{T}, Sacrifice this artifact: Add one mana of any color."

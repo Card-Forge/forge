@@ -1,6 +1,6 @@
 Name:Pyretic Ritual
 ManaCost:1 R
 Types:Instant
-A:SP$ Mana | Cost$ 1 R | Produced$ R | Amount$ 3 | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {R}{R}{R} to your mana pool.
+A:SP$ Mana | Cost$ 1 R | Produced$ R | Amount$ 3 | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {R}{R}{R}.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyretic_ritual.jpg
-Oracle:Add {R}{R}{R} to your mana pool.
+Oracle:Add {R}{R}{R}.

@@ -1,8 +1,8 @@
 Name:Heart of Ramos
 ManaCost:3
 Types:Artifact
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R} to your mana pool.
-A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ R | SpellDescription$ Add {R} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ R | SpellDescription$ Add {R}.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_of_ramos.jpg
-Oracle:{T}: Add {R} to your mana pool.\nSacrifice Heart of Ramos: Add {R} to your mana pool.
+Oracle:{T}: Add {R}.\nSacrifice Heart of Ramos: Add {R}.

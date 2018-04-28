@@ -13,8 +13,8 @@ ALTERNATE
 Name:Spires of Orazca
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 1 | SpellDescription$ Add {C} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 1 | SpellDescription$ Add {C}.
 A:AB$ Untap | Cost$ T | ValidTgts$ Creature.attacking+OppCtrl | IsCurse$ True | TgtPrompt$ Select target attacking creature an opponent controls | SubAbility$ RemCombat | SpellDescription$ Untap target attacking creature an opponent controls and remove it from combat.
 SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Targeted | AILogic$ RemoveBestAttacker
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spires_of_orazca.jpg
-Oracle:(Transforms from Thaumatic Compass.)\n{T}: Add {C} to your mana pool.\n{T}: Untap target attacking creature an opponent controls and remove it from combat.
+Oracle:(Transforms from Thaumatic Compass.)\n{T}: Add {C}.\n{T}: Untap target attacking creature an opponent controls and remove it from combat.

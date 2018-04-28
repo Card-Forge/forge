@@ -1,7 +1,7 @@
 Name:Skull of Ramos
 ManaCost:3
 Types:Artifact
-A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B} to your mana pool.
-A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ B | SpellDescription$ Add {B} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ B | SpellDescription$ Add {B}.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skull_of_ramos.jpg
-Oracle:{T}: Add {B} to your mana pool.\nSacrifice Skull of Ramos: Add {B} to your mana pool.
+Oracle:{T}: Add {B}.\nSacrifice Skull of Ramos: Add {B}.

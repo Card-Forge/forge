@@ -1,7 +1,7 @@
 Name:Golgari Signet
 ManaCost:2
 Types:Artifact
-A:AB$ Mana | Cost$ 1 T | Produced$ B G | SpellDescription$ Add {B}{G} to your mana pool.
+A:AB$ Mana | Cost$ 1 T | Produced$ B G | SpellDescription$ Add {B}{G}.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golgari_signet.jpg
-Oracle:{1}, {T}: Add {B}{G} to your mana pool.
+Oracle:{1}, {T}: Add {B}{G}.

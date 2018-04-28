@@ -2,8 +2,8 @@ Name:Basal Sliver
 ManaCost:2 B
 Types:Creature Sliver
 PT:2/2
-S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Mana | Description$ All Slivers have "Sacrifice this permanent: Add {B}{B} to your mana pool."
-SVar:Mana:AB$Mana | Cost$ Sac<1/CARDNAME> | Produced$ B | Amount$ 2 | SpellDescription$ Add {B}{B} to your mana pool.
+S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Mana | Description$ All Slivers have "Sacrifice this permanent: Add {B}{B}."
+SVar:Mana:AB$Mana | Cost$ Sac<1/CARDNAME> | Produced$ B | Amount$ 2 | SpellDescription$ Add {B}{B}.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/basal_sliver.jpg
-Oracle:All Slivers have "Sacrifice this permanent: Add {B}{B} to your mana pool."
+Oracle:All Slivers have "Sacrifice this permanent: Add {B}{B}."

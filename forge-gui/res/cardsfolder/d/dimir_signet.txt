@@ -1,7 +1,7 @@
 Name:Dimir Signet
 ManaCost:2
 Types:Artifact
-A:AB$ Mana | Cost$ 1 T | Produced$ U B | SpellDescription$ Add {U}{B} to your mana pool.
+A:AB$ Mana | Cost$ 1 T | Produced$ U B | SpellDescription$ Add {U}{B}.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dimir_signet.jpg
-Oracle:{1}, {T}: Add {U}{B} to your mana pool.
+Oracle:{1}, {T}: Add {U}{B}.

@@ -1,7 +1,7 @@
 Name:Channel the Suns
 ManaCost:3 G
 Types:Sorcery
-A:SP$ Mana | Cost$ 3 G | Produced$ W U B R G | SpellDescription$ Add {W}{U}{B}{R}{G} to your mana pool.
+A:SP$ Mana | Cost$ 3 G | Produced$ W U B R G | SpellDescription$ Add {W}{U}{B}{R}{G}.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/channel_the_suns.jpg
-Oracle:Add {W}{U}{B}{R}{G} to your mana pool.
+Oracle:Add {W}{U}{B}{R}{G}.

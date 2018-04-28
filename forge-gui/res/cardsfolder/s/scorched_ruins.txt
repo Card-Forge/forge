@@ -1,7 +1,7 @@
 Name:Scorched Ruins
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 4 | SpellDescription$ Add {C}{C}{C}{C} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 4 | SpellDescription$ Add {C}{C}{C}{C}.
 R:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ PayBeforeETB | Description$ If CARDNAME would enter the battlefield, sacrifice two untapped lands instead. If you do, put CARDNAME onto the battlefield. If you don't, put it into its owner's graveyard.
 SVar:PayBeforeETB:DB$ Sacrifice | SacValid$ Land.untapped | Defined$ You | RememberSacrificed$ True | Amount$ 2 | StrictAmount$ True | SubAbility$ MoveToGraveyard
 SVar:MoveToGraveyard:DB$ ChangeZone | Origin$ All | Destination$ Graveyard | Defined$ ReplacedCard | ConditionCheckSVar$ X | References$ X | ConditionSVarCompare$ LT2 | SubAbility$ MoveToBattlefield
@@ -12,4 +12,4 @@ SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$Valid Land.YouCtrl+untapped
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scorched_ruins.jpg
-Oracle:If Scorched Ruins would enter the battlefield, sacrifice two untapped lands instead. If you do, put Scorched Ruins onto the battlefield. If you don't, put it into its owner's graveyard.\n{T}: Add {C}{C}{C}{C} to your mana pool.
+Oracle:If Scorched Ruins would enter the battlefield, sacrifice two untapped lands instead. If you do, put Scorched Ruins onto the battlefield. If you don't, put it into its owner's graveyard.\n{T}: Add {C}{C}{C}{C}.

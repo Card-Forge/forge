@@ -1,8 +1,8 @@
 Name:Vitu-Ghazi, the City-Tree
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Token | Cost$ 2 G W T | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 saproling RAV | SpellDescription$ Create a 1/1 green Saproling creature token.
 DeckHas:Ability$Mana.Colorless & Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vitu_ghazi_the_city_tree.jpg
-Oracle:{T}: Add {C} to your mana pool.\n{2}{G}{W}, {T}: Create a 1/1 green Saproling creature token.
+Oracle:{T}: Add {C}.\n{2}{G}{W}, {T}: Create a 1/1 green Saproling creature token.

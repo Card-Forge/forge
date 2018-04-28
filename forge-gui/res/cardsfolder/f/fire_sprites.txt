@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Creature Faerie
 PT:1/1
 K:Flying
-A:AB$ Mana | Cost$ G T | Produced$ R | SpellDescription$ Add {R} to your mana pool.
+A:AB$ Mana | Cost$ G T | Produced$ R | SpellDescription$ Add {R}.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_sprites.jpg
-Oracle:Flying\n{G}, {T}: Add {R} to your mana pool.
+Oracle:Flying\n{G}, {T}: Add {R}.

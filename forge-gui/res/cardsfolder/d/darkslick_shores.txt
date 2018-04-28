@@ -5,7 +5,7 @@ R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ 
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar2 | ConditionSVarCompare$ GT2 | References$ ETBCheckSVar2 | SubAbility$ MoveToPlay
 SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
 SVar:ETBCheckSVar2:Count$LastStateBattlefield Land.YouCtrl
-A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B} to your mana pool.
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darkslick_shores.jpg
-Oracle:Darkslick Shores enters the battlefield tapped unless you control two or fewer other lands.\n{T}: Add {U} or {B} to your mana pool.
+Oracle:Darkslick Shores enters the battlefield tapped unless you control two or fewer other lands.\n{T}: Add {U} or {B}.

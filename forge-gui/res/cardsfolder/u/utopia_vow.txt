@@ -3,10 +3,10 @@ ManaCost:1 G
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | AddAbility$ AnyMana | Description$ Enchanted creature can't attack or block. Enchanted creature has "{T}: Add one mana of any color to your mana pool."
-SVar:AnyMana:AB$Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | AddAbility$ AnyMana | Description$ Enchanted creature can't attack or block. Enchanted creature has "{T}: Add one mana of any color."
+SVar:AnyMana:AB$Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 SVar:NonStackingAttachEffect:True
 #TODO: For AI, this acts as a curse spell to lock the opponent's creature while giving the opponent mana advantage (similar to Path to Exile). Could probably be improved to be used on own useless creatures instead when possible.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/utopia_vow.jpg
-Oracle:Enchant creature\nEnchanted creature can't attack or block.\nEnchanted creature has "{T}: Add one mana of any color to your mana pool."
+Oracle:Enchant creature\nEnchanted creature can't attack or block.\nEnchanted creature has "{T}: Add one mana of any color."

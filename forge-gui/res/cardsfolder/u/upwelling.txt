@@ -1,8 +1,8 @@
 Name:Upwelling
 ManaCost:3 G
 Types:Enchantment
-S:Mode$ Continuous | GlobalRule$ Mana pools don't empty as steps and phases end. | Description$ Mana pools don't empty as steps and phases end.
+S:Mode$ Continuous | GlobalRule$ Mana pools don't empty as steps and phases end. | Description$ Players don't lose unspent mana as steps and phases end.
 SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/upwelling.jpg
-Oracle:Mana pools don't empty as steps and phases end.
+Oracle:Players don't lose unspent mana as steps and phases end.
