@@ -891,7 +891,11 @@ public class AbilityUtils {
 
         final Player player = sa == null ? card.getController() : sa.getActivatingPlayer();
 
-        if (defined.equals("Targeted") || defined.equals("TargetedPlayer")) {
+        if (defined.equals("TargetedOrController")) {
+            players.addAll(getDefinedPlayers(card, "Targeted", sa));
+            players.addAll(getDefinedPlayers(card, "TargetedController", sa));
+        }
+        else if (defined.equals("Targeted") || defined.equals("TargetedPlayer")) {
             final SpellAbility saTargeting = sa.getSATargetingPlayer();
             if (saTargeting != null) {
                 players.addAll(saTargeting.getTargets().getTargetPlayers());

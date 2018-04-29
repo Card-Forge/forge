@@ -318,12 +318,18 @@ public class CardProperty {
         } else if (property.startsWith("OwnedBy")) {
             final String valid = property.substring(8);
             if (!card.getOwner().isValid(valid, sourceController, source, spellAbility)) {
-                return false;
+                final List<Player> lp = AbilityUtils.getDefinedPlayers(source, valid, spellAbility);
+                if (!lp.contains(card.getOwner())) {
+                    return false;
+                }
             }
         } else if (property.startsWith("ControlledBy")) {
             final String valid = property.substring(13);
             if (!controller.isValid(valid, sourceController, source, spellAbility)) {
-                return false;
+                final List<Player> lp = AbilityUtils.getDefinedPlayers(source, valid, spellAbility);
+                if (!lp.contains(controller)) {
+                    return false;
+                }
             }
         } else if (property.startsWith("OwnerDoesntControl")) {
             if (card.getOwner().equals(controller)) {
