@@ -34,6 +34,7 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementResult;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityLayer;
@@ -983,6 +984,7 @@ public class GameAction {
                     }
                 }
 
+                checkAgain |= stateBasedAction_Saga(c);
                 checkAgain |= stateBasedAction704_5n(c); // Auras attached to illegal or not attached go to graveyard
                 checkAgain |= stateBasedAction704_5p(c); // Equipment and Fortifications
 
@@ -1080,6 +1082,22 @@ public class GameAction {
         if (!refreeze) {
             game.getStack().unfreezeStack();
         }
+    }
+
+    private boolean stateBasedAction_Saga(Card c) {
+        boolean checkAgain = false;
+        if (!c.getType().hasSubtype("Saga")) {
+            return false;
+        }
+        if (c.getCounters(CounterType.LORE) < c.getFinalChapterNr()) {
+            return false;
+        }
+        if (!game.getStack().hasSimultaneousStackEntries() &&
+                !game.getStack().hasSourceOnStack(c, SpellAbilityPredicates.isChapter())) {
+            sacrifice(c, null);
+            checkAgain = true;
+        }
+        return checkAgain;
     }
 
     private boolean stateBasedAction704_5n(Card c) {

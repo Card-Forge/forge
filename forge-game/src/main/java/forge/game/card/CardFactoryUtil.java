@@ -2849,17 +2849,17 @@ public class CardFactoryUtil {
 
             inst.addTrigger(parsedTrigger);
         } else if (keyword.startsWith("Saga")) {
+            // Saga there doesn't need Max value anymore?
             final String[] k = keyword.split(":");
-            final String num = k[1];
             final String[] abs = k[2].split(",");
-            final Integer max = Integer.valueOf(num);
 
             int i = 1;
             for (String ab : abs) {
                 SpellAbility sa = AbilityFactory.getAbility(card, ab);
-                if (i == max) {
-                    sa.setLastSaga(true);
-                }
+                sa.setChapter(i);
+
+                // TODO better logic for Roman numbers
+                // In the Description try to merge Chapter trigger with the Same Effect
                 String trigStr = "Mode$ CounterAdded | ValidCard$ Card.Self | TriggerZones$ Battlefield"
                     + "| CounterType$ LORE | CounterAmount$ EQ" + i
                     + "| TriggerDescription$ " + Strings.repeat("I", i) + " - "  + sa.getDescription();

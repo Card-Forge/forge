@@ -27,6 +27,7 @@ import java.util.Stack;
 import java.util.concurrent.LinkedBlockingDeque;
 
 import com.esotericsoftware.minlog.Log;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -691,10 +692,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         game.updateStackForView();
         SpellAbility sa = si.getSpellAbility(true);
         game.fireEvent(new GameEventSpellRemovedFromStack(sa));
-        if (sa.isLastSaga()) {
-            // if SA is last saga ability, sacrifice the host
-            game.getAction().sacrifice(si.getSourceCard(), null);
-        }
     }
 
     public final void remove(final Card c) {
@@ -877,6 +874,24 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return false;
         }
         return c.equals(curResolvingCard);
+    }
+
+    public final boolean hasSourceOnStack(final Card source, final Predicate<SpellAbility> pred) {
+        if (source == null) {
+            return false;
+        }
+        for (SpellAbilityStackInstance si : stack) {
+            if (si.isTrigger() && si.getSourceCard().equals(source)) {
+                if (pred == null) {
+                    return true;
+                }
+                SpellAbility sa = si.getSpellAbility(false);
+                if (pred.apply(sa)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
