@@ -92,8 +92,8 @@ public final class GameOutcome implements Iterable<Entry<RegisteredPlayer, Playe
             this.playerRating.put(p.getRegisteredPlayer(), p.getStats());
             this.playerNames.put(p.getRegisteredPlayer(), p.getName());
 
-            if (p.getOutcome().hasWon() &&
-                    (winCondition == GameEndReason.AllOpponentsLost || winCondition == GameEndReason.AllOpposingTeamsLost)) {
+            if (p.getOutcome().hasWon() && winCondition == GameEndReason.AllOpposingTeamsLost) {
+                // Only mark the WinningTeam when "Team mode" is on.
                 winningTeam = p.getTeam();
             }
         }
