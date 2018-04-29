@@ -7,4 +7,4 @@ A:AB$ Animate | Cost$ 2 R | Defined$ Self | Power$ 8 | CheckSVar$ FormidableTest
 SVar:FormidableTest:Count$SumPower_Creature.YouCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crater_elemental.jpg
-Oracle:{R}, {T}, Sacrifice Crater Elemental: Crater Elemental deals 4 damage to target creature.\nFormidable — {2}{R}: Crater Elemental has base power 8 until end of turn. Activate this ability only if creatures you control have total power 8 or greater.
+Oracle:{R}, {T}, Sacrifice Crater Elemental: It deals 4 damage to target creature.\nFormidable — {2}{R}: Crater Elemental has base power 8 until end of turn. Activate this ability only if creatures you control have total power 8 or greater.

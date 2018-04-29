@@ -6,4 +6,4 @@ SVar:DBChooseTargets:DB$ ChangeTargets | Defined$ Targeted | Optional$ True
 SVar:AltCost:Cost$ ExileFromHand<2/Card.Blue> | Description$ You may exile two blue cards from your hand rather than pay CARDNAME's mana cost.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/commandeer.jpg
-Oracle:You may exile two blue cards from your hand rather than pay Commandeer's mana cost.\nGain control of target noncreature spell. You may choose new targets for it. (If that spell is an artifact, enchantment, or planeswalker, the permanent enters the battlefield under your control.)
+Oracle:You may exile two blue cards from your hand rather than pay this spell's mana cost.\nGain control of target noncreature spell. You may choose new targets for it. (If that spell is an artifact, enchantment, or planeswalker, the permanent enters the battlefield under your control.)
