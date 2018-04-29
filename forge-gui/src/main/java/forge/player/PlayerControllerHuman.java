@@ -2052,7 +2052,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         /*
          * (non-Javadoc)
          *
-         * @see forge.player.IDevModeCheats#addCountersToPermanent()
+         * @see forge.player.IDevModeCheats#removeCountersToPermanent()
          */
         @Override
         public void removeCountersFromPermanent() {
