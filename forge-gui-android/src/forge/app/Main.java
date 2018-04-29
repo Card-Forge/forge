@@ -207,14 +207,10 @@ public class Main extends AndroidApplication {
 
         @Override
         public void exit() {
-            // Replace the current task with one that is excluded from the recent
-            // apps and that will finish itself immediately. It's critical that this
-            // activity get launched in the task that you want to hide.
-            final Intent relaunch = new Intent(getApplicationContext(), Exiter.class)
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK // CLEAR_TASK requires this
-                            | Intent.FLAG_ACTIVITY_CLEAR_TASK // finish everything else in the task
-                            | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS); // hide (remove, in this case) task from recents
-            startActivity(relaunch);
+            finish();
+
+            //ensure process fully killed
+            System.exit(0);
         }
 
         @Override
