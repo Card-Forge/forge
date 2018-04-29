@@ -2068,7 +2068,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 return;
             }
 
-            final CounterType counter = getGui().oneOrNone("Which type of counter?", CounterType.values);
+            final ImmutableList<CounterType> counters = subtract ? ImmutableList.copyOf(card.getCounters().keySet())
+                : CounterType.values;
+
+            final CounterType counter = getGui().oneOrNone("Which type of counter?", counters);
             if (counter == null) {
                 return;
             }
