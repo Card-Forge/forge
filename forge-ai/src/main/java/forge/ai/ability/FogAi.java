@@ -30,11 +30,9 @@ public class FogAi extends SpellAbilityAi {
 
         // if card would be destroyed, react and use immediately if it's not own turn
         if ((AiCardMemory.isRememberedCard(ai, hostCard, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT))
-                && (!game.getStack().isEmpty()) &&
-                (!game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer()))
-                ) {
-            final List<GameObject> objects = ComputerUtil
-                    .predictThreatenedObjects(ai, null);
+                && (!game.getStack().isEmpty())
+                && (!game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer()))) {
+            final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(ai, null);
             if (objects.contains(hostCard)) {
                 AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK);
                 return true;
@@ -42,15 +40,12 @@ public class FogAi extends SpellAbilityAi {
         }
 
         // Reserve mana to cast this card if it will be likely needed
-        if (((game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) ||
-                (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)))
+        if (((game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer()))
+                || (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)))
                 && (AiCardMemory.isMemorySetEmpty(ai, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT))
-                && (ComputerUtil.aiLifeInDanger(ai, false, 0))
-                ) {
+                && (ComputerUtil.aiLifeInDanger(ai, false, 0))) {
             ((PlayerControllerAi) ai.getController()).getAi().reserveManaSources(sa, PhaseType.COMBAT_DECLARE_BLOCKERS, true);
-
             AiCardMemory.rememberCard(ai, hostCard, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT);
-
         }
 
         // AI should only activate this during Human's Declare Blockers phase

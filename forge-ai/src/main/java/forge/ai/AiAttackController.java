@@ -40,8 +40,6 @@ import forge.util.Expressions;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
 
-import static forge.ai.AiCardMemory.isMemorySetEmpty;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -265,8 +263,8 @@ public class AiAttackController {
         if (ai.getGame().getPhaseHandler().getNextTurn().equals(ai)) {
             return attackers;
         }
-        // no need to block is already holding mana to cast fog next turn
-        if (!isMemorySetEmpty(ai, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT)) {
+        // no need to block (already holding mana to cast fog next turn)
+        if (!AiCardMemory.isMemorySetEmpty(ai, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT)) {
             // Don't send the card that'll do the fog effect to attack, it's unsafe!
             if (attackers.contains(AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT)) {
                 attackers.remove(AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT);
