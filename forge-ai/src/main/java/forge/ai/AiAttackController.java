@@ -42,7 +42,6 @@ import forge.util.collect.FCollectionView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 
 //doesHumanAttackAndWin() uses the global variable AllZone.getComputerPlayer()
@@ -59,9 +58,6 @@ public class AiAttackController {
     // possible attackers and blockers
     private final List<Card> attackers;
     private final List<Card> blockers;
-
-    private final static Random random = new Random();
-    private final static int randomInt = random.nextInt();
 
     private List<Card> oppList; // holds human player creatures
     private List<Card> myList; // holds computer creatures
@@ -105,7 +101,7 @@ public class AiAttackController {
     } // overloaded constructor to evaluate single specified attacker
     
     public static List<Card> getOpponentCreatures(final Player defender) {
-        List<Card> defenders = Lists.newArrayList();
+        List<Card> defenders = new ArrayList<Card>();
         defenders.addAll(defender.getCreaturesInPlay());
         Predicate<Card> canAnimate = new Predicate<Card>() {
             @Override
@@ -586,13 +582,6 @@ public class AiAttackController {
      * @return a {@link forge.game.combat.Combat} object.
      */
     public final void declareAttackers(final Combat combat) {
-        // if this method is called multiple times during a turn,
-        // it will always return the same value
-        // randomInt is used so that the computer doesn't always
-        // do the same thing on turn 3 if he had the same creatures in play
-        // I know this is a little confusing
-        
-        random.setSeed(ai.getGame().getPhaseHandler().getTurn() + AiAttackController.randomInt);
 
         if (this.attackers.isEmpty()) {
             return;
@@ -1334,7 +1323,7 @@ public class AiAttackController {
                 }
             }
 
-            if (!shouldExert && random.nextBoolean()) {
+            if (!shouldExert && MyRandom.getRandom().nextBoolean()) {
                 // TODO Improve when the AI wants to use Exert powers
                 shouldExert = true;
             }

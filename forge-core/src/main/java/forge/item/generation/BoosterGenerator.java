@@ -64,7 +64,7 @@ public class BoosterGenerator {
     }
 
     private static PaperCard generateFoilCard(List<PaperCard> cardList) {
-        Collections.shuffle(cardList);
+        Collections.shuffle(cardList, MyRandom.getRandom());
         return StaticData.instance().getCommonCards().getFoiled(cardList.get(0));
     }
 

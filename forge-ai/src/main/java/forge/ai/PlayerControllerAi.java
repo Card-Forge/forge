@@ -287,7 +287,7 @@ public class PlayerControllerAi extends PlayerController {
         }
 
         // put the rest on top in random order
-        Collections.shuffle(toTop);
+        Collections.shuffle(toTop, MyRandom.getRandom());
         return ImmutablePair.of(toTop, toBottom);
     }
 

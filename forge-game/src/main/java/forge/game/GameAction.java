@@ -1676,7 +1676,7 @@ public class GameAction {
 
         if (!powerPlayers.isEmpty()) {
             List<Player> players = Lists.newArrayList(powerPlayers);
-            Collections.shuffle(players);
+            Collections.shuffle(players, MyRandom.getRandom());
             return players.get(0);
         }
 
