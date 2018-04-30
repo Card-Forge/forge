@@ -60,7 +60,8 @@ public class VDev implements IVDoc<CDev>, IDevListener {
     private final DevLabel lblSetupGame = new DevLabel("Setup Game State");
     private final DevLabel lblDumpGame = new DevLabel("Dump Game State");
     private final DevLabel lblTutor = new DevLabel("Tutor for Card");
-    private final DevLabel lblCounterPermanent = new DevLabel("Add Counters to Permanent");
+    private final DevLabel lblAddCounterPermanent = new DevLabel("Add Counters to Card");
+    private final DevLabel lblSubCounterPermanent = new DevLabel("Sub Counters from Card");
     private final DevLabel lblTapPermanent = new DevLabel("Tap Permanents");
     private final DevLabel lblUntapPermanent = new DevLabel("Untap Permanents");
     private final DevLabel lblSetLife = new DevLabel("Set Player Life");
@@ -106,7 +107,8 @@ public class VDev implements IVDoc<CDev>, IDevListener {
         viewport.add(this.lblExileFromPlay, halfConstraints);
         viewport.add(this.lblSetLife, halfConstraintsLeft);
         viewport.add(this.lblWinGame, halfConstraints);
-        viewport.add(this.lblCounterPermanent, constraints);
+        viewport.add(this.lblAddCounterPermanent, halfConstraintsLeft);
+        viewport.add(this.lblSubCounterPermanent, halfConstraints);
         viewport.add(this.lblSetupGame, halfConstraintsLeft);
         viewport.add(this.lblDumpGame, halfConstraints);
         viewport.add(this.lblTapPermanent, halfConstraintsLeft);
@@ -244,8 +246,13 @@ public class VDev implements IVDoc<CDev>, IDevListener {
     }
 
     /** @return {@link forge.screens.match.views.VDev.DevLabel} */
-    public DevLabel getLblCounterPermanent() {
-        return this.lblCounterPermanent;
+    public DevLabel getLblAddCounterPermanent() {
+        return this.lblAddCounterPermanent;
+    }
+
+    /** @return {@link forge.screens.match.views.VDev.DevLabel} */
+    public DevLabel getLblSubCounterPermanent() {
+        return this.lblSubCounterPermanent;
     }
 
     /** @return {@link forge.screens.match.views.VDev.DevLabel} */

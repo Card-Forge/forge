@@ -204,13 +204,24 @@ public class VDevMenu extends FDropDownMenu {
                 MatchController.instance.getGameController().cheat().setViewAllCards(!viewAll);
             }
         }));
-        addItem(new FMenuItem("Add Counters to Permanent", new FEventHandler() {
+        addItem(new FMenuItem("Add Counters to Card", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
                         MatchController.instance.getGameController().cheat().addCountersToPermanent();
+                    }
+                });
+            }
+        }));
+        addItem(new FMenuItem("Sub Counters from Card", new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                ThreadUtil.invokeInGameThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        MatchController.instance.getGameController().cheat().removeCountersFromPermanent();
                     }
                 });
             }
