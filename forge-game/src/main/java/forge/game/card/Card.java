@@ -5626,5 +5626,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         setSunburstValue(0); // Sunburst
     }
 
-    
+    public final int getFinalChapterNr() {
+        int n = 0;
+        for (final Trigger t : getTriggers()) {
+            SpellAbility sa = t.getOverridingAbility();
+            if (sa != null && sa.isChapter()) {
+                n = Integer.max(n, sa.getChapter());
+            }
+        }
+        return n;
+    }
 }

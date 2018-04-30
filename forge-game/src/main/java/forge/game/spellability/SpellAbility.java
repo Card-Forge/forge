@@ -105,7 +105,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean cumulativeupkeep = false;
     private boolean outlast = false;
     private boolean blessing = false;
-    private boolean lastSaga = false;
+    private Integer chapter = null;
 
     private SplitSide splitSide = null;
     enum SplitSide { LEFT, RIGHT };
@@ -773,12 +773,16 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         blessing = blessing0;
     }
 
-    public boolean isLastSaga() {
-        return lastSaga;
+    public boolean isChapter() {
+        return chapter != null;
     }
 
-    public void setLastSaga(boolean lastSaga0) {
-        lastSaga = lastSaga0;
+    public Integer getChapter() {
+        return chapter;
+    }
+
+    public void setChapter(int val) {
+        chapter = val;
     }
 
     public StaticAbility getMayPlay() {
