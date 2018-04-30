@@ -1314,17 +1314,14 @@ public class AttachAi extends SpellAbilityAi {
 
         // Don't play if would choose a color the target is already protected from
         if (sa.getHostCard().hasSVar("ChosenProtection")) {
-            CardCollectionView oppAllCards = CardCollection.combine
-                    (ComputerUtil.getOpponentFor(ai).getAllCards());
+            CardCollectionView oppAllCards = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
             String cc = ComputerUtilCard.getMostProminentColor(oppAllCards);
             if (card.hasKeyword("Protection from " + cc.toLowerCase())) {
                 return false;
             }
             // Also don't play if it would destroy own Aura
             for (Card c : card.getEnchantedBy(false)) {
-                if ((c.getController().equals(ai))
-                        && (c.isOfColor(cc))
-                        ) {
+                if ((c.getController().equals(ai)) && (c.isOfColor(cc))) {
                     return false;
                 }
             }
