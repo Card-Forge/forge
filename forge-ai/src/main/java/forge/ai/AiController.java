@@ -581,10 +581,10 @@ public class AiController {
     }
 
     public void reserveManaSources(SpellAbility sa) {
-        reserveManaSources(sa, PhaseType.MAIN2);
+        reserveManaSources(sa, PhaseType.MAIN2, false);
     }
 
-    public void reserveManaSources(SpellAbility sa, PhaseType phaseType) {
+    public void reserveManaSources(SpellAbility sa, PhaseType phaseType, boolean enemy) {
         ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, true, 0);
         CardCollection manaSources = ComputerUtilMana.getManaSourcesToPayCost(cost, sa, player);
 
@@ -596,6 +596,9 @@ public class AiController {
                 break;
             case COMBAT_DECLARE_BLOCKERS:
                 memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_DECLBLK;
+                if (enemy) {
+                    memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK;
+                }
                 break;
             default:
                 System.out.println("Warning: unsupported mana reservation phase specified for reserveManaSources: "
