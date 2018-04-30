@@ -595,10 +595,8 @@ public class AiController {
                 memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2;
                 break;
             case COMBAT_DECLARE_BLOCKERS:
-                memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_DECLBLK;
-                if (enemy) {
-                    memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK;
-                }
+                memSet = enemy ? AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK
+                    : AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_DECLBLK;
                 break;
             default:
                 System.out.println("Warning: unsupported mana reservation phase specified for reserveManaSources: "
