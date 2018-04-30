@@ -275,9 +275,17 @@ public class WrappedAbility extends Ability {
         return sa.isCycling();
     }
 
-    @Override
-    public boolean isLastSaga() {
-        return sa.isLastSaga();
+
+    public boolean isChapter() {
+        return sa.isChapter();
+    }
+
+    public Integer getChapter() {
+        return sa.getChapter();
+    }
+
+    public void setChapter(int val) {
+        sa.setChapter(val);
     }
 
     @Override
