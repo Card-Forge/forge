@@ -1089,6 +1089,9 @@ public class GameAction {
         if (!c.getType().hasSubtype("Saga")) {
             return false;
         }
+        if (!c.canBeSacrificed()) {
+            return false;
+        }
         if (c.getCounters(CounterType.LORE) < c.getFinalChapterNr()) {
             return false;
         }
