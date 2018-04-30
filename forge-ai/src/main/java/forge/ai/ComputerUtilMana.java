@@ -135,7 +135,10 @@ public class ComputerUtilMana {
             @Override
             public int compare(final Card card1, final Card card2) {
         	int result = Integer.compare(manaCardMap.get(card1), manaCardMap.get(card2));
-                return result != 0 ? result : Float.compare(card1.getTimestamp(), card2.getTimestamp()); 
+        	if(result == 0) {
+        	    result = Float.compare(card1.getTimestamp(), card2.getTimestamp()); 
+        	}
+                return result;
             }
         });
 
@@ -1006,7 +1009,7 @@ public class ComputerUtilMana {
      * @return a boolean.
      */
     private static String payMultipleMana(ManaCostBeingPaid testCost, String mana, final Player p) {
-        List<String> unused = new ArrayList<String>(4);
+        List<String> unused = new ArrayList<>(4);
         for (String manaPart : TextUtil.split(mana, ' ')) {
             if (StringUtils.isNumeric(manaPart)) {
                 for (int i = Integer.parseInt(manaPart); i > 0; i--) {

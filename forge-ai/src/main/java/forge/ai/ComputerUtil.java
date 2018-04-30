@@ -2218,8 +2218,7 @@ public class ComputerUtil {
             } else {
         	// TODO: This is just picking randomly amongst already picked things. It should probably pick the worst instead.
         	List<Object> a = Arrays.asList(votes.keySet().toArray());
-        	Collections.shuffle(a, MyRandom.getRandom());
-                return a.get(0);
+        	return a.get(MyRandom.getRandom().nextInt(a.size()));
             }
         case "Protection":
             if (votes.isEmpty()) {
