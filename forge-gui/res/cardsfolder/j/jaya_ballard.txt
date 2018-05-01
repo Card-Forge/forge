@@ -12,4 +12,5 @@ SVar:STJaya:Mode$ Continuous | EffectZone$ Command | Affected$ Instant.YouCtrl,S
 SVar:JayaReplace:Event$ Moved | EffectZone$ Command | ValidCard$ Card.CastSa Spell.MayPlaySource | Origin$ Stack | Destination$ Graveyard | ReplaceWith$ JayaMoveExile
 SVar:JayaMoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile
 SVar:PlayMain1:ALWAYS
+DeckHints:Type$Instant|Sorcery
 Oracle:[+1]: Add {R}{R}{R}. Spend this mana only to cast instant or sorcery spells.\n[+1]: Discard up to three cards, then draw that many cards.\n[−8]: You get an emblem with "You may cast instant and sorcery cards from your graveyard. If a card cast this way would be put into your graveyard, exile it instead."
