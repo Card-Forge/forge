@@ -3,31 +3,35 @@
 Name=Morkus Rex 3
 Title=Morkus Rex
 Difficulty=hard
-Description=WRG Ixalan Dinosaurs Vintage-legal ramp deck with Carnage Tyrant and Gishath, Sun's Avatar
+Description=WRG Ixalan Dinosaurs Vintage-legal ramp deck with Carnage Tyrant, Polyraptor, Gishath, Sun's Avatar, and Zetalpa, Primal Dawn.
 Icon=Morkus Rex.jpg
 Deck Type=constructed
 [main]
 1 Black Lotus
-3 Carnage Tyrant
-1 Chrome Mox|MPS_KLD
+2 Carnage Tyrant
 4 Commune with Dinosaurs
-4 Drover of the Mighty
-2 Forest|XLN
+3 Drover of the Mighty
+1 Forest|XLN
+1 Forest|RIX
 3 Gishath, Sun's Avatar
-2 Mountain|XLN
+3 Knight of the Stampede
+1 Mountain|XLN
+1 Mountain|RIX
 1 Mox Emerald
 1 Mox Pearl
 1 Mox Ruby
-4 Otepec Huntmaster
-1 Plains|XLN
-2 Plateau
-4 Raging Swordtooth
+3 Otepec Huntmaster
+1 Plains|RIX
+3 Plateau
+3 Polyraptor
+3 Raging Swordtooth
 3 Ranging Raptors
 3 Regisaur Alpha
-4 Ripjaw Raptor
+2 Ripjaw Raptor
 2 Rootbound Crag
-4 Savage Stomp
-2 Savannah
-4 Taiga
+2 Savage Stomp
+3 Savannah
+3 Taiga
 4 Unclaimed Territory
+2 Zetalpa, Primal Dawn
 [sideboard]
