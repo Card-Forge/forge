@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
-
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
