@@ -35,7 +35,7 @@ public class KeywordCollection implements Iterable<String>, Serializable {
     }
 
     public int size() {
-        return map.values().size();
+        return map.size();
     }
 
     public int getAmount(Keyword keyword) {

@@ -34,21 +34,26 @@ public class MyRandom {
     private static Random random = new SecureRandom();
 
     /**
-     * <p>
-     * percentTrue.<br>
-     * If percent is like 30, then 30% of the time it will be true.
-     * </p>
-     * 
-     * @param percent
-     *            a int.
-     * @return a boolean.
+     * Changes into a non-CSPRNG, which can be seeded for use in tests/repeatable experiments.
      */
-    public static boolean percentTrue(final int percent) {
-        return percent > MyRandom.getRandom().nextInt(100);
+    public static void setSeed(int seed) {
+	System.out.println("Setting the RNG seed to: " + seed);
+	random = new Random(seed);
+    }
+    
+    /**
+     * Returns True with Percent probability.
+     * 
+     * TODO: My guess is no one is passing in a number scaled to 100. This API should probably be cut.
+     */
+    public static boolean percentTrue(final long percent) {
+        return percent > MyRandom.getRandom().nextDouble() * 100;
     }
 
     /**
      * Gets the random.
+     * 
+     * TODO: Make this private, and instead add a robust set of APIs here.
      * 
      * @return the random
      */
@@ -60,7 +65,7 @@ public class MyRandom {
         int[] groups = new int[numGroups];
         
         for (int i = 0; i < value; i++) {
-            groups[random.nextInt(numGroups)]++;
+            groups[MyRandom.getRandom().nextInt(numGroups)]++;
         }
 
         return groups;
