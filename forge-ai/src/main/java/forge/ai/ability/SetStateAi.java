@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
-
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.card.CardSplitType;

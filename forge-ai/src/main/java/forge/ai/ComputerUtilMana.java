@@ -134,11 +134,7 @@ public class ComputerUtilMana {
         Collections.sort(orderedCards, new Comparator<Card>() {
             @Override
             public int compare(final Card card1, final Card card2) {
-        	int result = Integer.compare(manaCardMap.get(card1), manaCardMap.get(card2));
-        	if(result == 0) {
-        	    result = Float.compare(card1.getTimestamp(), card2.getTimestamp()); 
-        	}
-                return result;
+                return Integer.compare(manaCardMap.get(card1), manaCardMap.get(card2));
             }
         });
 
@@ -312,7 +308,7 @@ public class ComputerUtilMana {
         }
 
         // select which abilities may be used for each shard
-        ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
+        Multimap<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
 
         sortManaAbilities(sourcesForShards);
 
@@ -862,6 +858,7 @@ public class ComputerUtilMana {
         }
 
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+        int chanceToReserve = aic.getIntProperty(AiProps.RESERVE_MANA_FOR_MAIN2_CHANCE);
 
         PhaseType curPhase = ai.getGame().getPhaseHandler().getPhase();
 
@@ -880,8 +877,7 @@ public class ComputerUtilMana {
         // obey mana reservations for Main 2; otherwise, obey mana reservations depending on the "chance to reserve"
         // AI profile variable.
         if (sa.getSVar("LowPriorityAI").equals("")) {
-            float chanceToReserve = aic.getFloatProperty(AiProps.RESERVE_MANA_FOR_MAIN2_CHANCE);
-            if (MyRandom.getRandom().nextDouble() >= chanceToReserve) {
+            if (chanceToReserve == 0 || MyRandom.getRandom().nextInt(100) >= chanceToReserve) {
                 return false;
             }
         }
