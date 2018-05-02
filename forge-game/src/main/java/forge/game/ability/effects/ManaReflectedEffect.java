@@ -87,7 +87,7 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
                 colorMenu = ColorSet.fromMask(mask);
                 byte val = sa.getActivatingPlayer().getController().chooseColor("Select Mana to Produce", sa, colorMenu);
                 if (val == 0) {
-                    throw new RuntimeException("ManaEffect::resolve() /*reflected mana*/ - " + sa.getActivatingPlayer() + " color mana choice is empty for " + sa.getHostCard().getName());
+                    System.err.println("Unexpected behavior in ManaReflectedEffect: " + sa.getActivatingPlayer() + " - color mana choice is empty for " + sa.getHostCard().getName());
                 }
                 baseMana = MagicColor.toShortString(val);
             }
