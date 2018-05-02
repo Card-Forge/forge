@@ -58,25 +58,24 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
 
         String baseMana;
 
-        // Obey already made choice by AI
+        // TODO: This effect explicitly obeys express color choice as set by auto payment and AI routines in order
+        // to avoid misplays. Perhaps a better solution is possible?
         String colorsNeeded = sa.getManaPart().getExpressChoice();
         String choice = "";
 
         ColorSet colorMenu = null;
         byte mask = 0;
-        //loop through colors to make menu
+        // loop through colors to make menu
         for (int nChar = 0; nChar < colorsNeeded.length(); nChar++) {
             mask |= MagicColor.fromName(colorsNeeded.charAt(nChar));
         }
 
-        // AI wanted a "color" but result came up with no colors -> AI wanted Colorless!
-        // Is that a thing? I assume it is?
         if ((mask == 0) && (!("".equals(sa.getManaPart().getExpressChoice()))) && (colors.contains("colorless"))) {
             baseMana = MagicColor.toShortString(player.getController().chooseColorAllowColorless("Select Mana to Produce", sa.getHostCard(), ColorSet.fromMask(mask)));
-        } else
+        } else {
             // Nothing set previously so ask player if needed
             if (mask == 0) {
-                if (colors.size() == 0) {
+                if (colors.isEmpty()) {
                     return "0";
                 } else if (colors.size() == 1) {
                     baseMana = MagicColor.toShortString(colors.iterator().next());
@@ -86,15 +85,16 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
                     } else {
                         baseMana = MagicColor.toShortString(player.getController().chooseColor("Select Mana to Produce", sa, ColorSet.fromNames(colors)));
                     }
-            }
+                }
             } else {
                 colorMenu = ColorSet.fromMask(mask);
                 byte val = sa.getActivatingPlayer().getController().chooseColor("Select Mana to Produce", sa, colorMenu);
-                if (0 == val) {
+                if (val == 0) {
                     throw new RuntimeException("ManaEffect::resolve() /*reflected mana*/ - " + sa.getActivatingPlayer() + " color mana choice is empty for " + sa.getHostCard().getName());
                 }
                 baseMana = MagicColor.toShortString(val);
             }
+        }
 
         final StringBuilder sb = new StringBuilder();
         if (amount == 0) {
