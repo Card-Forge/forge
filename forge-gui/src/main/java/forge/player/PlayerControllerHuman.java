@@ -1450,14 +1450,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             colorNamesBuilder.add(MagicColor.toLongString(b.byteValue()));
         }
         final ImmutableList<String> colorNames = colorNamesBuilder.build();
-        if (colorNames.size() > 2) {
             return MagicColor.fromName(getGui().one(message, colorNames));
-        }
 
-        boolean confirmed = false;
-        confirmed = InputConfirm.confirm(this, CardView.get(c), message, true, colorNames);
-        final int idxChosen = confirmed ? 0 : 1;
-        return MagicColor.fromName(colorNames.get(idxChosen));
     }
 
     @Override
