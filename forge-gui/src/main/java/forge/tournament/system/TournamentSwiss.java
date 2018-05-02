@@ -17,7 +17,7 @@ public class TournamentSwiss extends AbstractTournament {
 
     public TournamentSwiss(List<TournamentPlayer> allPlayers, int pairingAmount) {
         // Technically not 100% correct for huge tournaments, but yknow.. close enough.
-        super((int)Math.ceil(Math.log(allPlayers.size())/Math.log(2)), allPlayers);
+        super((int)Math.ceil(Math.log(allPlayers.size())/Math.log(2))*2, allPlayers);
         this.playersInPairing = pairingAmount;
     }
 

@@ -15,6 +15,8 @@ public abstract class AbstractGeneticAlgorithm<T> {
 
     protected abstract void evaluateFitness();
 
+    protected abstract T expandPool();
+
     public void pruneWeakest(){
         population = population.subList(0, new Float(population.size()*pruneRatio).intValue());
     }
@@ -23,15 +25,24 @@ public abstract class AbstractGeneticAlgorithm<T> {
         int prunedSize = population.size();
         while(population.size()<targetPopulationSize){
             int randomIndex = new Double(prunedSize*Math.pow(MyRandom.getRandom().nextDouble(), 0.25)/2d).intValue();
-            if(MyRandom.getRandom().nextBoolean()){
-                population.add(mutateObject(population.get(randomIndex)));
-            }else{
+            float rand = MyRandom.getRandom().nextFloat();
+            if(rand>0.85f){
+                T child = mutateObject(population.get(randomIndex));
+                if(child != null) {
+                    population.add(child);
+                }
+            }else if(rand>0.70f){
                 int secondIndex = randomIndex;
                 while(secondIndex != randomIndex){
                     secondIndex = new Double(prunedSize*Math.pow(MyRandom.getRandom().nextDouble(), 0.25)/2d).intValue();
                 }
-                population.add(createChild(population.get(randomIndex)
-                        , population.get(secondIndex)));
+                T child = createChild(population.get(randomIndex)
+                        , population.get(secondIndex));
+                if(child != null) {
+                    population.add(child);
+                }
+            }else{
+                population.add(expandPool());
             }
         }
     }
