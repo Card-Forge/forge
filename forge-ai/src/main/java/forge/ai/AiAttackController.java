@@ -38,6 +38,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.MyRandom;
+import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 
 import java.util.ArrayList;
@@ -271,10 +272,21 @@ public class AiAttackController {
             }
             return attackers;
         }
-        // no need to block if awakening in play
+
+        // no need to block if an effect is in play which untaps all creatures (pseudo-Vigilance akin to
+        // Awakening or Prophet of Kruphix)
         for (Card card : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
-            if ("Awakening".equals(card.getName())) {
-                return attackers;
+            boolean untapsEachTurn = card.hasSVar("UntapsEachTurn");
+            boolean untapsEachOtherTurn = card.hasSVar("UntapsEachOtherPlayerTurn");
+
+            if (untapsEachTurn || untapsEachOtherTurn) {
+                String affected = untapsEachTurn ? card.getSVar("UntapsEachTurn")
+                        : card.getSVar("UntapsEachOtherPlayerTurn");
+                for (String aff : TextUtil.split(affected, ',')) {
+                    if (aff.equals("Creature") && (untapsEachTurn || (untapsEachOtherTurn && ai.equals(card.getController())))) {
+                        return attackers;
+                    }
+                }
             }
         }
 
