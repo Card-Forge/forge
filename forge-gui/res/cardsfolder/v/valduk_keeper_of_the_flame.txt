@@ -7,5 +7,6 @@ SVar:TrigToken:DB$ Token | TokenAmount$ X | References$ X | TokenName$ Elemental
 SVar:AkoumEOT:SVar:EndOfTurnLeavePlay:True
 SVar:X:Count$Valid Equipment.Attached,Aura.Attached
 DeckHints:Type$Equipment|Aura
+DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/valduk_keeper_of_the_flame.jpg
 Oracle:At the beginning of combat on your turn, for each Aura and Equipment attached to Valduk, Keeper of the Flame, create a 3/1 red Elemental creature token with trample and haste. Exile those tokens at the beginning of the next end step.
