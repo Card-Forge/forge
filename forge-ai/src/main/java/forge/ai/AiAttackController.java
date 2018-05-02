@@ -282,8 +282,10 @@ public class AiAttackController {
             if (untapsEachTurn || untapsEachOtherTurn) {
                 String affected = untapsEachTurn ? card.getSVar("UntapsEachTurn")
                         : card.getSVar("UntapsEachOtherPlayerTurn");
+
                 for (String aff : TextUtil.split(affected, ',')) {
-                    if (aff.equals("Creature") && (untapsEachTurn || (untapsEachOtherTurn && ai.equals(card.getController())))) {
+                    if (aff.equals("Creature")
+                            && (untapsEachTurn || (untapsEachOtherTurn && ai.equals(card.getController())))) {
                         return attackers;
                     }
                 }
