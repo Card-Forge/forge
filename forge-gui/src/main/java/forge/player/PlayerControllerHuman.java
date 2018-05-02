@@ -1449,7 +1449,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         for (final Byte b : colors) {
             colorNamesBuilder.add(MagicColor.toLongString(b.byteValue()));
         }
-
         final ImmutableList<String> colorNames = colorNamesBuilder.build();
         if (colorNames.size() > 2) {
             return MagicColor.fromName(getGui().one(message, colorNames));
