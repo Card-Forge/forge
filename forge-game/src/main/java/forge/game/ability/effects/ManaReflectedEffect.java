@@ -59,14 +59,12 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
 
         // TODO: This effect explicitly obeys express color choice as set by auto payment and AI routines in order
         // to avoid misplays. Perhaps a better solution is possible?
-        String colorsNeeded = sa.getManaPart().getExpressChoice();
-        String choice = "";
-
+        String expressChoiceColors = sa.getManaPart().getExpressChoice();
         ColorSet colorMenu = null;
         byte mask = 0;
         // loop through colors to make menu
-        for (int nChar = 0; nChar < colorsNeeded.length(); nChar++) {
-            mask |= MagicColor.fromName(colorsNeeded.charAt(nChar));
+        for (int nChar = 0; nChar < expressChoiceColors.length(); nChar++) {
+            mask |= MagicColor.fromName(expressChoiceColors.charAt(nChar));
         }
 
         if ((mask == 0) && (!("".equals(sa.getManaPart().getExpressChoice()))) && (colors.contains("colorless"))) {
