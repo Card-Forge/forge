@@ -67,7 +67,7 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
             mask |= MagicColor.fromName(expressChoiceColors.charAt(nChar));
         }
 
-        if ((mask == 0) && (!("".equals(sa.getManaPart().getExpressChoice()))) && (colors.contains("colorless"))) {
+        if (mask == 0 && !expressChoiceColors.isEmpty() && colors.contains("colorless")) {
             baseMana = MagicColor.toShortString(player.getController().chooseColorAllowColorless("Select Mana to Produce", sa.getHostCard(), ColorSet.fromMask(mask)));
         } else {
             // Nothing set previously so ask player if needed
@@ -85,11 +85,11 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
                 }
             } else {
                 colorMenu = ColorSet.fromMask(mask);
-                byte val = sa.getActivatingPlayer().getController().chooseColor("Select Mana to Produce", sa, colorMenu);
-                if (val == 0) {
+                byte color = sa.getActivatingPlayer().getController().chooseColor("Select Mana to Produce", sa, colorMenu);
+                if (color == 0) {
                     System.err.println("Unexpected behavior in ManaReflectedEffect: " + sa.getActivatingPlayer() + " - color mana choice is empty for " + sa.getHostCard().getName());
                 }
-                baseMana = MagicColor.toShortString(val);
+                baseMana = MagicColor.toShortString(color);
             }
         }
 
