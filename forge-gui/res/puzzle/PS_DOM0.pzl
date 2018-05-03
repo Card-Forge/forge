@@ -12,15 +12,6 @@ turn=1
 activeplayer=human
 activephase=MAIN1
 humanhand=Giant Spectacle;Plummet;Overcome;Gift of Strength
-humanlibrary=
-humangraveyard=
 humanbattlefield=Gaea's Protector|Id:4;Cartouche of Knowledge|Attaching:4;Ghalta, Primal Hunger;Frontline Devastator;Island|Set:XLN;Mountain|Set:XLN;Mountain|Set:XLN;Forest|Set:XLN;Forest|Set:XLN
-humanexile=
-humancommand=
-aihand=
-ailibrary=
-aigraveyard=
 aibattlefield=Ancient Brontodon;Rekindling Phoenix;Renegade Wheelsmith
-aiexile=
-aicommand=
 
