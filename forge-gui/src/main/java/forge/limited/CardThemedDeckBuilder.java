@@ -231,7 +231,9 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
         // 9. If there are still less than 22 non-land cards add off-color
         // cards. This should be avoided.
-        addRandomCards(numSpellsNeeded - deckList.size());
+        int stillNeeds = numSpellsNeeded - deckList.size();
+        if(stillNeeds>0)
+            addRandomCards(stillNeeds);
         if (logToConsole) {
             System.out.println("Post Randoms : " + deckList.size());
         }
