@@ -4,6 +4,6 @@ Types:Legendary Artifact Equipment
 K:Equip 7
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ X | AddToughness$ X | References$ X | Description$ Equipped creature gets +1/+1 for each land you control.
 # TODO: extend Equip to allow this to be build as Keyword
-A:AB$ Attach | Cost$ 3 | PrecostDesc$ Equip legendary creature | CostDesc$ {3} | ValidTgts$ Creature.YouCtrl+Legendary | TgtPrompt$ Select target legendary creature you control | SorcerySpeed$ True | Equip$ True | AILogic$ Pump | IsPresent$ Card.Self+nonCreature | SpellDescription$ ({3}: Attach to target legendary creature you control. Equip only as a sorcery.)
+A:AB$ Attach | Cost$ 3 | PrecostDesc$ Equip legendary creature | CostDesc$ {3} | ValidTgts$ Creature.YouCtrl+Legendary | TgtPrompt$ Select target legendary creature you control | SorcerySpeed$ True | Equip$ True | AILogic$ Pump | IsPresent$ Equipment.Self+nonCreature | SpellDescription$ ({3}: Attach to target legendary creature you control. Equip only as a sorcery.)
 SVar:X:Count$Valid Land.YouCtrl
 Oracle:Equipped creature gets +1/+1 for each land you control.\nEquip legendary creature {3}\nEquip {7}
