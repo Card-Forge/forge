@@ -38,6 +38,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.MyRandom;
+import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 
 import java.util.ArrayList;
@@ -263,6 +264,34 @@ public class AiAttackController {
         if (ai.getGame().getPhaseHandler().getNextTurn().equals(ai)) {
             return attackers;
         }
+        // no need to block (already holding mana to cast fog next turn)
+        if (!AiCardMemory.isMemorySetEmpty(ai, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT)) {
+            // Don't send the card that'll do the fog effect to attack, it's unsafe!
+            if (attackers.contains(AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT)) {
+                attackers.remove(AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT);
+            }
+            return attackers;
+        }
+
+        // no need to block if an effect is in play which untaps all creatures (pseudo-Vigilance akin to
+        // Awakening or Prophet of Kruphix)
+        for (Card card : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
+            boolean untapsEachTurn = card.hasSVar("UntapsEachTurn");
+            boolean untapsEachOtherTurn = card.hasSVar("UntapsEachOtherPlayerTurn");
+
+            if (untapsEachTurn || untapsEachOtherTurn) {
+                String affected = untapsEachTurn ? card.getSVar("UntapsEachTurn")
+                        : card.getSVar("UntapsEachOtherPlayerTurn");
+
+                for (String aff : TextUtil.split(affected, ',')) {
+                    if (aff.equals("Creature")
+                            && (untapsEachTurn || (untapsEachOtherTurn && ai.equals(card.getController())))) {
+                        return attackers;
+                    }
+                }
+            }
+        }
+
         List<Card> opponentsAttackers = new ArrayList<Card>(oppList);
         opponentsAttackers = CardLists.filter(opponentsAttackers, new Predicate<Card>() {
             @Override
