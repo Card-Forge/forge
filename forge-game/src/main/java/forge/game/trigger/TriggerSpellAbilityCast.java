@@ -34,6 +34,7 @@ import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
+import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
@@ -209,16 +210,13 @@ public class TriggerSpellAbilityCast extends Trigger {
                 if (getHostCard().getController().couldCastSorcery(spellAbility)) {
                     return false;
                 }
-                if (getHostCard().hasKeyword("You may cast CARDNAME as though it had flash. If you cast it any time a "
-                        + "sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning"
-                        + " of the next cleanup step.")) {
-                    // for these cards the trigger must only fire if using their own ability to cast at instant speed
-                    if (getHostCard().hasKeyword("Flash")
-                            || getHostCard().getController().hasKeyword("You may cast nonland cards as though they had flash.")) {
-                        return false;
-                    }
+                
+                // TODO do we need check if it could have been cast with normal Flash?
+
+                StaticAbility sta = spellAbility.getMayPlay();
+                if (sta == null || !getHostCard().equals(sta.getHostCard())) {
+                    return false;
                 }
-                return true;
             }
         }
 

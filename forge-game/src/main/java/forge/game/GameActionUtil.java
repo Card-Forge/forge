@@ -22,7 +22,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostParser;
 import forge.game.ability.AbilityFactory;
@@ -33,14 +32,12 @@ import forge.game.card.*;
 import forge.game.card.CardPlayOption.PayManaCost;
 import forge.game.cost.Cost;
 import forge.game.keyword.KeywordInterface;
-import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.*;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -135,12 +132,12 @@ public final class GameActionUtil {
 
                 source.animateBestow(false);
                 lkicheck = true;
-            } else if (((Spell) sa).isCastFaceDown()) {
+            } else if (sa.isCastFaceDown()) {
                 // need a copy of the card to turn facedown without trigger anything
                 if (!source.isLKI()) {
                     source = CardUtil.getLKICopy(source);
                 }
-                source.setState(CardStateName.FaceDown, false);
+                source.turnFaceDownNoUpdate();
                 lkicheck = true;
             }
 
@@ -156,7 +153,7 @@ public final class GameActionUtil {
                 }
                 final Card host = o.getHost();
 
-                final SpellAbility newSA = sa.copy();
+                final SpellAbility newSA = sa.copy(activator);
                 final SpellAbilityRestriction sar = newSA.getRestrictions();
                 if (o.isWithFlash()) {
                 	sar.setInstantSpeed(true);
@@ -216,7 +213,7 @@ public final class GameActionUtil {
 
             // reset static abilities
             if (lkicheck) {
-                game.getAction().checkStaticAbilities(false, new HashSet<Card>(), CardCollection.EMPTY);
+                game.getAction().checkStaticAbilities(false);
             }
         }
 
@@ -246,7 +243,7 @@ public final class GameActionUtil {
                     continue;
                 }
 
-                final SpellAbility flashback = sa.copy();
+                final SpellAbility flashback = sa.copy(activator);
                 flashback.setFlashBackAbility(true);
 
                 flashback.getRestrictions().setZone(ZoneType.Graveyard);
@@ -257,19 +254,9 @@ public final class GameActionUtil {
                 }
                 alternatives.add(flashback);
             }
-            if (sa.isSpell() && keyword.equals("You may cast CARDNAME as though it had flash if you pay {2} more to cast it.")) {
-                final SpellAbility newSA = sa.copy();
-                newSA.setBasicSpell(false);
-                ManaCostBeingPaid newCost = new ManaCostBeingPaid(source.getManaCost());
-                newCost.increaseGenericMana(2);
-                final Cost actualcost = new Cost(newCost.toManaCost(), false);
-                newSA.setPayCosts(actualcost);
-                newSA.getRestrictions().setInstantSpeed(true);
-                newSA.setDescription(sa.getDescription() + " (by paying " + actualcost.toSimpleString() + " instead of its mana cost)");
-                alternatives.add(newSA);
-            }
+
             if (sa.hasParam("Equip") && sa instanceof AbilityActivated && keyword.equals("EquipInstantSpeed")) {
-                final SpellAbility newSA = sa.copy();
+                final SpellAbility newSA = sa.copy(activator);
                 SpellAbilityRestriction sar = newSA.getRestrictions();
                 sar.setSorcerySpeed(false);
                 sar.setInstantSpeed(true);
@@ -320,6 +307,10 @@ public final class GameActionUtil {
                     final Cost cost = new Cost("Discard<1/Land>", false);
                     costs.add(new OptionalCostValue(OptionalCost.Retrace, cost));
                 }
+            } else if (keyword.startsWith("MayFlashCost")) {
+                String[] k = keyword.split(":");
+                final Cost cost = new Cost(k[1], false);
+                costs.add(new OptionalCostValue(OptionalCost.Flash, cost));
             }
             
             // Surge while having OptionalCost is none of them
@@ -345,6 +336,8 @@ public final class GameActionUtil {
             case Retrace:
                 result.getRestrictions().setZone(ZoneType.Graveyard);
                 break;
+            case Flash:
+                result.getRestrictions().setInstantSpeed(true);
             default:
                 break;
             }
@@ -399,6 +392,8 @@ public final class GameActionUtil {
      * @param original
      *            the original sa
      * @return an ArrayList<SpellAbility>.
+     * 
+     * @deprecated only used by AI, replace it with new functions in AI
      */
     public static List<SpellAbility> getOptionalCosts(final SpellAbility original) {
         final List<SpellAbility> abilities = getAdditionalCostSpell(original);

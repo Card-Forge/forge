@@ -133,6 +133,7 @@ public final class StaticAbilityContinuous {
         boolean removeCreatureTypes = false;
 
         List<Player> mayLookAt = null;
+        List<Player> withFlash = null;
 
         boolean controllerMayPlay = false, mayPlayWithoutManaCost = false, mayPlayWithFlash = false;
         String mayPlayAltManaCost = null;
@@ -414,6 +415,9 @@ public final class StaticAbilityContinuous {
                 if (params.containsKey("MayPlayDontGrantZonePermissions")) {
                     mayPlayGrantZonePermissions = false;
                 }
+            }
+            if (params.containsKey("WithFlash")) {
+                withFlash = AbilityUtils.getDefinedPlayers(hostCard, params.get("WithFlash"), null);
             }
 
             if (params.containsKey("IgnoreEffectCost")) {
@@ -750,6 +754,10 @@ public final class StaticAbilityContinuous {
                     affectedCard.setMayLookAt(p, true);
                 }
             }
+            if (withFlash != null) {
+                affectedCard.addWithFlash(se.getTimestamp(), withFlash);
+            }
+            
             if (controllerMayPlay && (mayPlayLimit == null || stAb.getMayPlayTurn() < mayPlayLimit)) {
                 Player mayPlayController = params.containsKey("MayPlayCardOwner") ? affectedCard.getOwner() : controller;
                 affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost, mayPlayAltManaCost, mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);

@@ -321,23 +321,28 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public void setActivatingPlayer(final Player player) {
         setActivatingPlayer(player, false);
     }
-    public void setActivatingPlayer(final Player player, final boolean lki) {
+    public boolean setActivatingPlayer(final Player player, final boolean lki) {
         // trickle down activating player
-        activatingPlayer = player;
+        boolean updated = false;
+        if (player == null || !player.equals(activatingPlayer)) {
+            activatingPlayer = player;
+            updated = true;
+        }
         if (subAbility != null) {
-            subAbility.setActivatingPlayer(player, lki);
+            updated |= subAbility.setActivatingPlayer(player, lki);
         }
         for (AbilitySub sa : additionalAbilities.values()) {
-            sa.setActivatingPlayer(player, lki);
+            updated |= sa.setActivatingPlayer(player, lki);
         }
         for (List<AbilitySub> list : additionalAbilityLists.values()) {
             for (AbilitySub sa : list) {
-                sa.setActivatingPlayer(player, lki);
+                updated |= sa.setActivatingPlayer(player, lki);
             }
         }
-        if (!lki) {
+        if (!lki && updated) {
             view.updateCanPlay(this, false);
         }
+        return updated;
     }
 
     public Player getDeltrigActivatingPlayer() {
@@ -360,6 +365,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean isMorphUp() {
         return morphup;
     }
+
+    public boolean isCastFaceDown() {
+        return false;
+    }
+
     public final void setIsMorphUp(final boolean b) {
         morphup = b;
     }
@@ -811,7 +821,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public SpellAbility copy() {
         return copy(hostCard, false);
     }
+    public SpellAbility copy(Player activ) {
+        return copy(hostCard, activ, false);
+    }
     public SpellAbility copy(Card host, final boolean lki) {
+        return copy(host, this.getActivatingPlayer(), lki);
+    }
+    public SpellAbility copy(Card host, Player activ, final boolean lki) {
         SpellAbility clone = null;
         try {
             clone = (SpellAbility) clone();
@@ -840,7 +856,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             clone.additionalAbilities = Maps.newHashMap();
             clone.additionalAbilityLists = Maps.newHashMap();
             // run special copy Ability to make a deep copy
-            CardFactory.copySpellAbility(this, clone, host, lki);
+            CardFactory.copySpellAbility(this, clone, host, activ, lki);
         } catch (final CloneNotSupportedException e) {
             System.err.println(e);
         }
@@ -848,7 +864,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public SpellAbility copyWithNoManaCost() {
-        final SpellAbility newSA = copy();
+        return copyWithNoManaCost(getActivatingPlayer());
+    }
+
+    public SpellAbility copyWithNoManaCost(Player active) {
+        final SpellAbility newSA = copy(active);
         if (newSA == null) {
             return null; // the ability was not copyable, e.g. a Suspend SA may get here
         }

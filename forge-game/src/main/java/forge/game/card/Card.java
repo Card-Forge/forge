@@ -65,7 +65,6 @@ import forge.util.maps.MapOfLists;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.apache.commons.lang3.tuple.Pair;
-
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -112,6 +111,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private GameEntity mustAttackEntityThisTurn = null;
 
     private final Map<StaticAbility, CardPlayOption> mayPlay = Maps.newHashMap();
+
+    private final Multimap<Long, Player> withFlash = HashMultimap.<Long, Player>create();
 
     // changes by AF animate and continuous static effects - timestamp is the key of maps
     private final Map<Long, CardChangedType> changedCardTypes = Maps.newTreeMap();
@@ -568,9 +569,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         return false;
     }
 
-	public boolean turnFaceUp() {
-		return turnFaceUp(false, true);
-	}
+    public boolean turnFaceDownNoUpdate() {
+        preFaceDownState = currentStateName;
+        return setState(CardStateName.FaceDown, false);
+    }
+
+    public boolean turnFaceUp() {
+        return turnFaceUp(false, true);
+    }
 
     public boolean turnFaceUp(boolean manifestPaid, boolean runTriggers) {
         if (currentStateName == CardStateName.FaceDown) {
@@ -1535,7 +1541,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                     .append(" (").append(inst.getReminderText()).append(")").append("\r\n");
             } else if (keyword.endsWith(".") && !keyword.startsWith("Haunt")) {
                 sbLong.append(keyword).append("\r\n");
-            } else if (keyword.startsWith("Presence")) {
+            } else if (keyword.startsWith("Presence") || keyword.startsWith("MayFlash")) {
+                // Pseudo keywords, only print Reminder
                 sbLong.append(inst.getReminderText());
             } else if (keyword.contains("At the beginning of your upkeep, ")
                     && keyword.contains(" unless you pay")) {
@@ -1783,7 +1790,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
 
             // should not print Spelldescription for Morph
-            if (sa instanceof Spell && ((Spell) sa).isCastFaceDown()) {
+            if (sa.isCastFaceDown()) {
                 continue;
             }
 
@@ -1964,7 +1971,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                         .append(" or pay ")
                         .append(cost2.toSimpleString())
                         .append(".\r\n");
-            } else if (keyword.startsWith("Presence")) {
+            } else if (keyword.startsWith("Presence") || keyword.startsWith("MayFlash")) {
+                // Pseudo keywords, only print Reminder
                 sbBefore.append(inst.getReminderText());
                 sbBefore.append("\r\n");
             } else if (keyword.startsWith("Entwine") || keyword.startsWith("Madness")
@@ -1982,7 +1990,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sbAfter.append(sbCost + " (" + inst.getReminderText() + ")");
                 sbAfter.append("\r\n");
             } else if (keyword.equals("CARDNAME can't be countered.") ||
-                    keyword.equals("You may cast CARDNAME as though it had flash if you pay {2} more to cast it.") ||
                     keyword.equals("Remove CARDNAME from your deck before playing if you're not playing for ante.")) {
                 sbBefore.append(keyword);
             } else if (keyword.startsWith("Haunt")) {
@@ -5635,5 +5642,23 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
         return n;
+    }
+
+    public boolean withFlash(Player p) {
+        if (hasKeyword("Flash")) {
+            return true;
+        }
+        if (withFlash.containsValue(p)) {
+            return true;
+        }
+        return false;
+    }
+
+    public void addWithFlash(Long timestamp, Iterable<Player> players) {
+        withFlash.putAll(timestamp, players);
+    }
+
+    public void removeWithFlash(Long timestamp) {
+        withFlash.removeAll(timestamp);
     }
 }

@@ -329,7 +329,7 @@ public class AbilityManaPart implements java.io.Serializable {
                 continue;
             }
             if (restriction.equals("MorphOrManifest")) {
-                if ((sa.isSpell() && sa.getHostCard().isCreature() && ((Spell) sa).isCastFaceDown())
+                if ((sa.isSpell() && sa.getHostCard().isCreature() && sa.isCastFaceDown())
                         || sa.isManifestUp() || sa.isMorphUp()) {
                     return true;
                 } else {

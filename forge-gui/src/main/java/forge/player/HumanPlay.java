@@ -75,7 +75,7 @@ public class HumanPlay {
             return false;
         }
 
-        boolean castFaceDown = sa instanceof Spell && ((Spell)sa).isCastFaceDown();
+        boolean castFaceDown = sa.isCastFaceDown();
 
         sa.setActivatingPlayer(p);
         Card source = sa.getHostCard();
