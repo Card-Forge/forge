@@ -42,7 +42,7 @@ public class Example {
         });
         Dataset dataset = new Dataset(FModel.getFormats().getStandard());
         
-        final int numTopics = 100;
+        final int numTopics = 50;
         LDA lda = new LDA(0.1, 0.1, numTopics, dataset, CGS);
         lda.run();
         System.out.println(lda.computePerplexity(dataset));
@@ -50,8 +50,8 @@ public class Example {
         for (int t = 0; t < numTopics; ++t) {
             List<Pair<String, Double>> highRankVocabs = lda.getVocabsSortedByPhi(t);
             System.out.print("t" + t + ": ");
-            for (int i = 0; i < 5; ++i) {
-                System.out.print("[" + highRankVocabs.get(i).getLeft() + "," + highRankVocabs.get(i).getRight() + "],");
+            for (int i = 0; i < 20; ++i) {
+                System.out.println("[" + highRankVocabs.get(i).getLeft() + "," + highRankVocabs.get(i).getRight() + "],");
             }
             System.out.println();
         }

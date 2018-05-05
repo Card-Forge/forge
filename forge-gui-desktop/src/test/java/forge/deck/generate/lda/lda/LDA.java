@@ -71,7 +71,7 @@ public class LDA {
      * @throws IllegalArgumentException vocabID <= 0 || the number of vocabularies < vocabID
      */
     public String getVocab(int vocabID) {
-        if (vocabID <= 0 || dataset.getNumVocabs() < vocabID) {
+        if (vocabID < 0 || dataset.getNumVocabs() < vocabID) {
             throw new IllegalArgumentException();
         }
         return dataset.get(vocabID).toString();
@@ -94,7 +94,7 @@ public class LDA {
      * @throws ArrayIndexOutOfBoundsException topic < 0 || #topics <= topic
      */
     public double getAlpha(final int topic) {
-        if (topic < 0 || numTopics <= topic) {
+        if (topic < 0 || numTopics < topic) {
             throw new ArrayIndexOutOfBoundsException(topic);
         }
         return hyperparameters.alpha(topic);
@@ -125,8 +125,8 @@ public class LDA {
      * @throws IllegalStateException call this method when the inference has not been finished yet
      */
     public double getTheta(final int docID, final int topicID) {
-        if (docID <= 0 || dataset.getNumDocs() < docID
-                || topicID < 0 || numTopics <= topicID) {
+        if (docID < 0 || dataset.getNumDocs() < docID
+                || topicID < 0 || numTopics < topicID) {
             throw new IllegalArgumentException();
         }
         if (!trained) {
@@ -145,7 +145,7 @@ public class LDA {
      * @throws IllegalStateException call this method when the inference has not been finished yet
      */
     public double getPhi(final int topicID, final int vocabID) {
-        if (topicID < 0 || numTopics <= topicID || vocabID <= 0) {
+        if (topicID < 0 || numTopics < topicID || vocabID < 0) {
             throw new IllegalArgumentException();
         }
         if (!trained) {
@@ -170,7 +170,7 @@ public class LDA {
      */
     public double computePerplexity(Dataset testDataset) {
         double loglikelihood = 0.0;
-        for (int d = 1; d <= testDataset.getNumDocs(); ++d) {
+        for (int d = 0; d < testDataset.getNumDocs(); ++d) {
             for (Integer w : testDataset.getWords(d)) {
                 double sum = 0.0;
                 for (int t = 0; t < getNumTopics(); ++t) {
