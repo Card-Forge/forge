@@ -150,11 +150,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
                 return false;
             }
         }
-        // legendary sorcery
-        if (card.isSorcery() && card.getType().isLegendary() &&
-                CardLists.getValidCards(activator.getCardsIn(ZoneType.Battlefield), "Creature.Legendary,Planeswalker.Legendary", card.getController(), card).isEmpty()) {
-            return false;
-        }
+
         return checkOtherRestrictions();
     } // canPlay()
     

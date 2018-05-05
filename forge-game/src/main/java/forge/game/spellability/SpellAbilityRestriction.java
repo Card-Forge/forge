@@ -212,7 +212,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
     public final boolean checkZoneRestrictions(final Card c, final SpellAbility sa) {
 
         final Player activator = sa.getActivatingPlayer();
-        final Zone cardZone = activator.getGame().getZoneOf(c);
+        final Zone cardZone = c.getLastKnownZone();
         Card cp = c;
 
         // for Bestow need to check the animated State
@@ -377,6 +377,12 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
     
     public final boolean checkOtherRestrictions(final Card c, final SpellAbility sa, final Player activator) {
         final Game game = activator.getGame();
+
+        // legendary sorcery
+        if (c.isSorcery() && c.getType().isLegendary() &&
+                CardLists.getValidCards(activator.getCardsIn(ZoneType.Battlefield), "Creature.Legendary,Planeswalker.Legendary", c.getController(), c).isEmpty()) {
+            return false;
+        }
 
         if (this.getCardsInHand() != -1) {
             if (activator.getCardsIn(ZoneType.Hand).size() != this.getCardsInHand()) {
