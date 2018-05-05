@@ -3042,6 +3042,7 @@ public class CardFactoryUtil {
             SpellAbility saDelay = AbilityFactory.getAbility(strDelay, card);
             saDelay.setAdditionalAbility("Execute", (AbilitySub) AbilityFactory.getAbility(strSac, card));
             final Trigger trigger = TriggerHandler.parseTrigger(strTrig.toString(), card, intrinsic);
+            trigger.setOverridingAbility(saDelay);
             inst.addTrigger(trigger);
         }
     }
@@ -4285,9 +4286,9 @@ public class CardFactoryUtil {
             effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ " + k[1]
                     + " | Description$ CARDNAME can't be blocked " + getTextForKwCantBeBlockedByType(keyword);
         } else if (keyword.equals("MayFlashSac")) {
-            effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self "
-                    + " | MayPlay$ True | MayPlayWithFlash$ True | AffectedZone$ Exile,Graveyard,Hand,Library,Stack "
-                    + " | Description$ " + inst.getReminderText();
+            effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | Secondary$ True"
+                + " | MayPlay$ True | MayPlayWithFlash$ True | MayPlayText$ Sacrifice at the next cleanup step"
+                + " | AffectedZone$ Exile,Graveyard,Hand,Library,Stack | Description$ " + inst.getReminderText();
         }
 
         if (effect != null) {

@@ -201,10 +201,9 @@ public final class GameActionUtil {
                     } else {
                         sb.append(host);
                     }
-
-                    if (o.getAbility().hasParam("MayPlayText")) {
-                        sb.append(" (").append(o.getAbility().getParam("MayPlayText")).append(")");
-                    }
+                }
+                if (o.getAbility().hasParam("MayPlayText")) {
+                    sb.append(" (").append(o.getAbility().getParam("MayPlayText")).append(")");
                 }
                 sb.append(o.toString(false));
                 newSA.setDescription(sb.toString());
