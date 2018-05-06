@@ -423,6 +423,10 @@ public final class GameActionUtil {
                     }
                 }
             } else if (keyword.startsWith("MayFlashCost")) {
+                // this is there for the AI
+                if ( source.getGame().getPhaseHandler().isPlayerTurn(source.getController())) {
+                    continue; // don't cast it with additional flash cost during AI's own turn, commonly a waste of mana
+                }
                 final String[] k = keyword.split(":");
                 for (int i = 0; i < abilities.size(); i++) {
                     final SpellAbility newSA = abilities.get(i).copy();
