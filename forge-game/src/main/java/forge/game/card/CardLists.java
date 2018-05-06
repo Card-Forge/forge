@@ -26,6 +26,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.collect.FCollectionView;
@@ -244,6 +245,13 @@ public class CardLists {
     }
 
     public static int getAmountOfKeyword(final Iterable<Card> cardList, final String keyword) {
+        int nKeyword = 0;
+        for (final Card c : cardList) {
+            nKeyword += c.getAmountOfKeyword(keyword);
+        }
+        return nKeyword;
+    }
+    public static int getAmountOfKeyword(final Iterable<Card> cardList, final Keyword keyword) {
         int nKeyword = 0;
         for (final Card c : cardList) {
             nKeyword += c.getAmountOfKeyword(keyword);

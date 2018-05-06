@@ -29,6 +29,7 @@ import forge.game.GameEntity;
 import forge.game.GlobalRuleChange;
 import forge.game.card.*;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -985,17 +986,17 @@ public class CombatUtil {
         }
 
         // rare case:
-        if (blocker.hasKeyword("Shadow")
+        if (blocker.hasKeyword(Keyword.SHADOW)
                 && blocker.hasKeyword("CARDNAME can block creatures with shadow as though they didn't have shadow.")) {
             return false;
         }
 
-        if (attacker.hasKeyword("Shadow") && !blocker.hasKeyword("Shadow")
+        if (attacker.hasKeyword(Keyword.SHADOW) && !blocker.hasKeyword(Keyword.SHADOW)
                 && !blocker.hasKeyword("CARDNAME can block creatures with shadow as though they didn't have shadow.")) {
             return false;
         }
 
-        if (!attacker.hasKeyword("Shadow") && blocker.hasKeyword("Shadow")) {
+        if (!attacker.hasKeyword(Keyword.SHADOW) && blocker.hasKeyword(Keyword.SHADOW)) {
             return false;
         }
 
@@ -1034,11 +1035,11 @@ public class CombatUtil {
             }
         }
 
-        if (blocker.hasKeyword("CARDNAME can block only creatures with flying.") && !attacker.hasKeyword("Flying")) {
+        if (blocker.hasKeyword("CARDNAME can block only creatures with flying.") && !attacker.hasKeyword(Keyword.FLYING)) {
             return false;
         }
 
-        if (attacker.hasKeyword("Flying") && !blocker.hasKeyword("Flying") && !blocker.hasKeyword("Reach")) {
+        if (attacker.hasKeyword(Keyword.FLYING) && !blocker.hasKeyword(Keyword.FLYING) && !blocker.hasKeyword(Keyword.REACH)) {
             boolean stillblock = false;
             for (KeywordInterface inst : blocker.getKeywords()) {
                 String k = inst.getOriginal();
@@ -1055,15 +1056,16 @@ public class CombatUtil {
             }
         }
 
-        if (attacker.hasKeyword("Horsemanship") && !blocker.hasKeyword("Horsemanship")) {
+        if (attacker.hasKeyword(Keyword.HORSEMANSHIP) && !blocker.hasKeyword(Keyword.HORSEMANSHIP)) {
             return false;
         }
 
-        if (attacker.hasKeyword("Fear") && !blocker.isArtifact() && !blocker.isBlack()) {
+        // color is hardcoded there
+        if (attacker.hasKeyword(Keyword.FEAR) && !blocker.isArtifact() && !blocker.isBlack()) {
             return false;
         }
 
-        if (attacker.hasKeyword("Intimidate") && !blocker.isArtifact() && !blocker.sharesColorWith(attacker)) {
+        if (attacker.hasKeyword(Keyword.INTIMIDATE) && !blocker.isArtifact() && !blocker.sharesColorWith(attacker)) {
             return false;
         }
 

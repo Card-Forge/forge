@@ -553,8 +553,9 @@ public class Game {
         final CardCollection all = new CardCollection();
         Visitor<Card> visitor = new Visitor<Card>() {
             @Override
-            public void visit(Card card) {
+            public boolean visit(Card card) {
                 all.add(card);
+                return true;
             }
         };
         forEachCardInGame(visitor);

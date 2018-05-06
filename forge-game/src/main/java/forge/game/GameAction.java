@@ -792,7 +792,7 @@ public class GameAction {
 
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
-            public void visit(final Card c) {
+            public boolean visit(final Card c) {
                 // need to get Card from preList if able
                 final Card co = preList.get(c);
                 for (int i = 0; i < co.getStaticAbilities().size(); i++) {
@@ -808,6 +808,7 @@ public class GameAction {
                  if (!co.getStaticCommandList().isEmpty()) {
                      staticList.add(co);
                  }
+                 return true;
             }
         });
 

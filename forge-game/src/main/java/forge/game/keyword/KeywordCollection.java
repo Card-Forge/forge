@@ -143,6 +143,10 @@ public class KeywordCollection implements Iterable<String>, Serializable {
         return map.values();
     }
 
+    public Collection<KeywordInterface> getValues(final Keyword keyword) {
+        return map.get(keyword);
+    }
+
     @Override
     public Iterator<String> iterator() {
         return new Iterator<String>() {

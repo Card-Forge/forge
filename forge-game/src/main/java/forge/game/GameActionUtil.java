@@ -31,6 +31,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.card.CardPlayOption.PayManaCost;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.*;
@@ -482,8 +483,8 @@ public final class GameActionUtil {
             }
         }
 
-        if (source.hasKeyword("Conspire")) {
-            int amount = source.getAmountOfKeyword("Conspire");
+        if (source.hasKeyword(Keyword.CONSPIRE)) {
+            int amount = source.getAmountOfKeyword(Keyword.CONSPIRE);
             for (int kwInstance = 1; kwInstance <= amount; kwInstance++) {
                 for (int i = 0; i < abilities.size(); i++) {
                     final SpellAbility newSA = abilities.get(i).copy();

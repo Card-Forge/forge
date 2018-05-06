@@ -358,7 +358,7 @@ public class AiAttackController {
         // In addition, if the computer guesses it needs no blockers, make sure
         // that
         // it won't be surprised by Exalted
-        final int humanExaltedBonus = countExaltedBonus(opp);
+        final int humanExaltedBonus = opp.countExaltedBonus();
 
         if (humanExaltedBonus > 0) {
             final boolean finestHour = opp.isCardInPlay("Finest Hour");
@@ -1048,24 +1048,6 @@ public class AiAttackController {
             }
         }
     } // getAttackers()
-
-    /**
-     * <p>
-     * countExaltedBonus.
-     * </p>
-     * 
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     * @return a int.
-     */
-    public final static int countExaltedBonus(final Player player) {
-        int bonus = 0;
-        for (Card c : player.getCardsIn(ZoneType.Battlefield)) {
-            bonus += c.getAmountOfKeyword("Exalted");
-        }
-
-        return bonus;
-    }
 
     /**
      * <p>
