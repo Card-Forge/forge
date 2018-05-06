@@ -424,6 +424,16 @@ public class WrappedAbility extends Ability {
         return sa.getAdditionalAbility(ability);
     }
 
+    public Map<String, List<AbilitySub>> getAdditionalAbilityLists() {
+        return sa.getAdditionalAbilityLists();
+    }
+    public List<AbilitySub> getAdditionalAbilityList(final String name) {
+        return sa.getAdditionalAbilityList(name);
+    }
+    public void setAdditionalAbilityList(final String name, final List<AbilitySub> list) {
+        sa.setAdditionalAbilityList(name, list);
+    }
+
     @Override
     public void resetTargets() {
         sa.resetTargets();
