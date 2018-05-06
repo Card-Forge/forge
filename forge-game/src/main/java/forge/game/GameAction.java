@@ -763,7 +763,10 @@ public class GameAction {
     }
 
     public final void checkStaticAbilities() {
-        checkStaticAbilities(true, Sets.<Card>newHashSet(), CardCollection.EMPTY);
+        checkStaticAbilities(true);
+    }
+    public final void checkStaticAbilities(final boolean runEvents) {
+        checkStaticAbilities(runEvents, Sets.<Card>newHashSet(), CardCollection.EMPTY);
     }
     public final void checkStaticAbilities(final boolean runEvents, final Set<Card> affectedCards, final CardCollectionView preList) {
         if (isCheckingStaticAbilitiesOnHold()) {
@@ -790,18 +793,20 @@ public class GameAction {
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
             public void visit(final Card c) {
-                for (int i = 0; i < c.getStaticAbilities().size(); i++) {
-                    final StaticAbility stAb = c.getStaticAbilities().get(i);
+                // need to get Card from preList if able
+                final Card co = preList.get(c);
+                for (int i = 0; i < co.getStaticAbilities().size(); i++) {
+                    final StaticAbility stAb = co.getStaticAbilities().get(i);
                     if (stAb.getMapParams().get("Mode").equals("Continuous")) {
                         staticAbilities.add(stAb);
                     }
                     if (stAb.isTemporary()) {
-                        c.removeStaticAbility(stAb);
+                        co.removeStaticAbility(stAb);
                         i--;
                     }
                  }
-                 if (!c.getStaticCommandList().isEmpty()) {
-                     staticList.add(c);
+                 if (!co.getStaticCommandList().isEmpty()) {
+                     staticList.add(co);
                  }
             }
         });
@@ -1193,7 +1198,8 @@ public class GameAction {
         if (c.isFortifying()) {
             final Card fortifiedLand = c.getFortifying();
             if (!fortifiedLand.isLand() || !fortifiedLand.isInPlay()
-                    || (fortifiedLand.isPhasedOut() && !c.isPhasedOut())) {
+                    || (fortifiedLand.isPhasedOut() && !c.isPhasedOut())
+                    || !c.isFortification()) {
                 c.unFortifyCard(fortifiedLand);
                 checkAgain = true;
             }

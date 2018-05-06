@@ -143,7 +143,13 @@ public enum Keyword {
     UNLEASH(SimpleKeyword.class, true, "You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it."),
     VANISHING(KeywordWithAmount.class, false, "This permanent enters the battlefield with {%d:time counter} on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it."),
     VIGILANCE(SimpleKeyword.class, true, "Attacking doesn't cause this creature to tap."),
-    WITHER(SimpleKeyword.class, true, "This deals damage to creatures in the form of -1/-1 counters.");
+    WITHER(SimpleKeyword.class, true, "This deals damage to creatures in the form of -1/-1 counters."),
+
+    // mayflash additional cast
+    MAYFLASHCOST(KeywordWithCost.class, false, "You may cast CARDNAME as though it had flash if you pay %s more to cast it."),
+    MAYFLASHSAC(SimpleKeyword.class, false, "You may cast CARDNAME as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step."),
+
+    ;
 
     protected final Class<? extends KeywordInstance<?>> type;
     protected final boolean isMultipleRedundant;

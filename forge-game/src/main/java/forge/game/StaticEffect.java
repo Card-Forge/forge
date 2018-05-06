@@ -889,6 +889,7 @@ public class StaticEffect {
         String[] addHiddenKeywords = null;
         String addColors = null;
         boolean removeMayPlay = false;
+        boolean removeWithFlash = false;
 
         List<Player> mayLookAt = null;
 
@@ -962,6 +963,9 @@ public class StaticEffect {
         }
         if (params.containsKey("MayPlay")) {
             removeMayPlay = true;
+        }
+        if (params.containsKey("WithFlash")) {
+            removeWithFlash = true;
         }
 
         if (params.containsKey("IgnoreEffectCost")) {
@@ -1064,6 +1068,9 @@ public class StaticEffect {
             }
             if (removeMayPlay) {
                 affectedCard.removeMayPlay(ability);
+            }
+            if (removeWithFlash) {
+                affectedCard.removeWithFlash(getTimestamp());
             }
 
             affectedCard.updateAbilityTextForView(); // only update keywords and text for view to avoid flickering

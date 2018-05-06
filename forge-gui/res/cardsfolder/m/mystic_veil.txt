@@ -1,11 +1,8 @@
 Name:Mystic Veil
 ManaCost:1 U
 Types:Enchantment Aura
-K:You may cast CARDNAME as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
+K:MayFlashSac
 K:Enchant creature
-T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ CleanupTrig | Static$ True | Secondary$ True | SpellSpeed$ NotSorcerySpeed | TriggerDescription$ If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
-SVar:CleanupTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Cleanup | Execute$ Sac | TriggerDescription$ At the beginning of the next cleanup step, sacrifice CARDNAME.
-SVar:Sac:DB$ SacrificeAll | Defined$ Self
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Shroud | Description$ Enchanted creature has shroud. (It can't be the target of spells or abilities.)
 SVar:RemAIDeck:True

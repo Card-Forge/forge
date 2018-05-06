@@ -39,6 +39,12 @@ public class AttachAi extends SpellAbilityAi {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
 
+        // TODO: improve this so that the AI can use a flash aura buff as a means of killing opposing creatures
+        // and gaining card advantage
+        if (source.hasKeyword("MayFlashSac") && !ai.couldCastSorcery(sa)) {
+            return false;
+        }
+
         if (abCost != null) {
             // AI currently disabled for these costs
             if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa)) {

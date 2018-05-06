@@ -3031,6 +3031,19 @@ public class CardFactoryUtil {
 
             inst.addTrigger(parsedUpkeepTrig);
             inst.addTrigger(parsedSacTrigger);
+        } else if (keyword.equals("MayFlashSac")) {
+            String strTrig = "Mode$ SpellCast | ValidCard$ Card.Self | ValidSA$ Spell.MayPlaySource | Static$ True | Secondary$ True "
+                    + " | TriggerDescription$ If you cast it any time a sorcery couldn't have been cast, "
+                    + " the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.";
+            
+            final String strDelay = "DB$ DelayedTrigger | Mode$ Phase | Phase$ Cleanup | TriggerDescription$ At the beginning of the next cleanup step, sacrifice CARDNAME.";
+            final String strSac = "DB$ SacrificeAll | Defined$ Self";
+            
+            SpellAbility saDelay = AbilityFactory.getAbility(strDelay, card);
+            saDelay.setAdditionalAbility("Execute", (AbilitySub) AbilityFactory.getAbility(strSac, card));
+            final Trigger trigger = TriggerHandler.parseTrigger(strTrig.toString(), card, intrinsic);
+            trigger.setOverridingAbility(saDelay);
+            inst.addTrigger(trigger);
         }
     }
 
@@ -3660,7 +3673,7 @@ public class CardFactoryUtil {
             abilityStr.append("AB$ Attach | Cost$ ");
             abilityStr.append(equipCost);
             abilityStr.append(" | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control ");
-            abilityStr.append("| SorcerySpeed$ True | Equip$ True | AILogic$ Pump | IsPresent$ Card.Self+nonCreature ");
+            abilityStr.append("| SorcerySpeed$ True | Equip$ True | AILogic$ Pump | IsPresent$ Equipment.Self+nonCreature ");
             if (equipExtras != null) {
                 abilityStr.append("| ").append(equipExtras[1]).append(" ");
             }
@@ -3672,7 +3685,7 @@ public class CardFactoryUtil {
                 abilityStr.append(" ");
             }
             abilityStr.append("| CostDesc$ " + cost.toSimpleString() + " ");
-            abilityStr.append("| SpellDescription$ (" + cost.toSimpleString() + ": Attach to target creature you control. Equip only as a sorcery.)");
+            abilityStr.append("| SpellDescription$ (" + inst.getReminderText() + ")");
             // instantiate attach ability
             final SpellAbility newSA = AbilityFactory.getAbility(abilityStr.toString(), card);
             newSA.setIntrinsic(intrinsic);
@@ -3751,7 +3764,7 @@ public class CardFactoryUtil {
             abilityStr.append("AB$ Attach | Cost$ ");
             abilityStr.append(equipCost);
             abilityStr.append(" | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control ");
-            abilityStr.append("| SorcerySpeed$ True | AILogic$ Pump | IsPresent$ Card.Self+nonCreature ");
+            abilityStr.append("| SorcerySpeed$ True | AILogic$ Pump | IsPresent$ Fortification.Self+nonCreature ");
             if (equipExtras != null) {
                 abilityStr.append("| ").append(equipExtras[1]).append(" ");
             }
@@ -4272,6 +4285,10 @@ public class CardFactoryUtil {
 
             effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ " + k[1]
                     + " | Description$ CARDNAME can't be blocked " + getTextForKwCantBeBlockedByType(keyword);
+        } else if (keyword.equals("MayFlashSac")) {
+            effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | Secondary$ True | MayPlay$ True"
+                + " | MayPlayNotSorcerySpeed$ True | MayPlayWithFlash$ True | MayPlayText$ Sacrifice at the next cleanup step"
+                + " | AffectedZone$ Exile,Graveyard,Hand,Library,Stack | Description$ " + inst.getReminderText();
         }
 
         if (effect != null) {

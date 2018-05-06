@@ -23,7 +23,6 @@ import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
@@ -68,7 +67,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     /** {@inheritDoc} */
     @Override
     public boolean canPlay() {
-        final Card card = this.getHostCard();
+        Card card = this.getHostCard();
         Player activator = this.getActivatingPlayer();
         if (activator == null) {
             activator = card.getController();
@@ -89,34 +88,46 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             isInstant = card.getState(name).getType().isInstant();
         }
 
-        boolean flash = card.hasKeyword("Flash");
+        boolean lkicheck = false;
+        boolean flash = false;
 
-        if (this.hasParam("Bestow") && !card.isBestowed() && !card.isInZone(ZoneType.Battlefield)) {
+        if (activator != null && !card.getController().equals(activator)) {
+            // always make a lki copy in this case?
+            card = CardUtil.getLKICopy(card);
+            card.setController(activator, 0);
+            lkicheck = true;
+        }
+
+        if (hasParam("Bestow") && !card.isBestowed() && !card.isInZone(ZoneType.Battlefield)) {
             // Rule 601.3: cast Bestow with Flash
             // for the check the card does need to be animated
             // otherwise the StaticAbility will not found them
-            
-            Card lki = card.isLKI() ? card : CardUtil.getLKICopy(card);
-            
-            lki.animateBestow(false);
-
-            CardCollection preList = new CardCollection(lki);
-            game.getAction().checkStaticAbilities(false, Sets.newHashSet(lki), preList);
-            
-            flash = lki.hasKeyword("Flash");
-            
-            // need to check again to reset the Keywords and other effects
-            if (card.isLKI()) {
-                lki.unanimateBestow(false);
-                game.getAction().checkStaticAbilities(false, Sets.newHashSet(lki), preList);
+            if (!card.isLKI()) {
+                card = CardUtil.getLKICopy(card);
             }
+            card.animateBestow(false);
+            lkicheck = true;
+        } else if (isCastFaceDown()) {
+            // need a copy of the card to turn facedown without trigger anything
+            if (!card.isLKI()) {
+                card = CardUtil.getLKICopy(card);
+            }
+            card.turnFaceDownNoUpdate();
+            lkicheck = true;
         }
 
+        if (lkicheck) {
+            game.getAction().checkStaticAbilities(false, Sets.newHashSet(card), new CardCollection(card));
+        }
 
-        if (!(isInstant || activator.canCastSorcery() || flash
-               || this.getRestrictions().isInstantSpeed()
-               || activator.hasKeyword("You may cast nonland cards as though they had flash.")
-               || card.hasStartOfKeyword("You may cast CARDNAME as though it had flash.")
+        flash = card.withFlash(activator);
+
+        // reset static abilities
+        if (lkicheck) {
+            game.getAction().checkStaticAbilities(false);
+        }
+
+        if (!(isInstant || activator.canCastSorcery() || flash || getRestrictions().isInstantSpeed()
                || this.hasSVar("IsCastFromPlayEffect")
                || (card.isFaceDown() && !card.getLastKnownZone().is(ZoneType.Battlefield) && card.getState(CardStateName.Original).getType().isInstant()))) {
             return false;
@@ -136,11 +147,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
                 return false;
             }
         }
-        // legendary sorcery
-        if (card.isSorcery() && card.getType().isLegendary() &&
-                CardLists.getValidCards(activator.getCardsIn(ZoneType.Battlefield), "Creature.Legendary,Planeswalker.Legendary", card.getController(), card).isEmpty()) {
-            return false;
-        }
+
         return checkOtherRestrictions();
     } // canPlay()
     
@@ -181,6 +188,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     /**
      * @return the castFaceDown
      */
+    @Override
     public boolean isCastFaceDown() {
         return castFaceDown;
     }
