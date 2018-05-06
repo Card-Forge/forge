@@ -415,6 +415,16 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
+    public boolean hasAdditionalAbility(String ability) {
+        return sa.hasAdditionalAbility(ability);
+    }
+
+    @Override
+    public AbilitySub getAdditionalAbility(String ability) {
+        return sa.getAdditionalAbility(ability);
+    }
+
+    @Override
     public void resetTargets() {
         sa.resetTargets();
     }
