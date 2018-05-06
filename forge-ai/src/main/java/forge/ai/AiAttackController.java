@@ -267,9 +267,15 @@ public class AiAttackController {
         // no need to block (already holding mana to cast fog next turn)
         if (!AiCardMemory.isMemorySetEmpty(ai, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT)) {
             // Don't send the card that'll do the fog effect to attack, it's unsafe!
-            if (attackers.contains(AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT)) {
-                attackers.remove(AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT);
+
+            List<Card> toRemove = Lists.newArrayList();
+            for(Card c : attackers) {
+                if (AiCardMemory.isRememberedCard(ai, c, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT)) {
+                    toRemove.add(c);
+                }
             }
+            attackers.removeAll(toRemove);
+
             return attackers;
         }
 
