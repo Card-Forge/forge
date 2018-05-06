@@ -127,9 +127,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             game.getAction().checkStaticAbilities(false);
         }
 
-        if (!(isInstant || activator.canCastSorcery() || flash
-               || getRestrictions().isInstantSpeed()
-               || card.hasStartOfKeyword("You may cast CARDNAME as though it had flash.")
+        if (!(isInstant || activator.canCastSorcery() || flash || getRestrictions().isInstantSpeed()
                || this.hasSVar("IsCastFromPlayEffect")
                || (card.isFaceDown() && !card.getLastKnownZone().is(ZoneType.Battlefield) && card.getState(CardStateName.Original).getType().isInstant()))) {
             return false;

@@ -3032,7 +3032,7 @@ public class CardFactoryUtil {
             inst.addTrigger(parsedUpkeepTrig);
             inst.addTrigger(parsedSacTrigger);
         } else if (keyword.equals("MayFlashSac")) {
-            String strTrig = "Mode$ SpellCast | ValidCard$ Card.Self | Static$ True | Secondary$ True | SpellSpeed$ NotSorcerySpeed"
+            String strTrig = "Mode$ SpellCast | ValidCard$ Card.Self | ValidSA$ Spell.MayPlaySource | Static$ True | Secondary$ True "
                     + " | TriggerDescription$ If you cast it any time a sorcery couldn't have been cast, "
                     + " the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.";
             
@@ -4286,8 +4286,8 @@ public class CardFactoryUtil {
             effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ " + k[1]
                     + " | Description$ CARDNAME can't be blocked " + getTextForKwCantBeBlockedByType(keyword);
         } else if (keyword.equals("MayFlashSac")) {
-            effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | Secondary$ True"
-                + " | MayPlay$ True | MayPlayWithFlash$ True | MayPlayText$ Sacrifice at the next cleanup step"
+            effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | Secondary$ True | MayPlay$ True"
+                + " | MayPlayNotSorcerySpeed$ True | MayPlayWithFlash$ True | MayPlayText$ Sacrifice at the next cleanup step"
                 + " | AffectedZone$ Exile,Graveyard,Hand,Library,Stack | Description$ " + inst.getReminderText();
         }
 

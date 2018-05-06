@@ -147,6 +147,10 @@ public final class GameActionUtil {
             }
 
             for (CardPlayOption o : source.mayPlay(activator)) {
+                // do not appear if it can be cast with SorcerySpeed
+                if (o.getAbility().hasParam("MayPlayNotSorcerySpeed") && activator.couldCastSorcery(sa)) {
+                    continue;
+                }
                 // non basic are only allowed if PayManaCost is yes
                 if (!sa.isBasicSpell() && o.getPayManaCost() == PayManaCost.NO) {
                     continue;
@@ -413,6 +417,19 @@ public final class GameActionUtil {
                     newSA.setPayCosts(new Cost(keyword.substring(8), false).add(newSA.getPayCosts()));
                     newSA.setDescription(newSA.getDescription() + " (with Buyback)");
                     newSA.addOptionalCost(OptionalCost.Buyback);
+                    if (newSA.canPlay()) {
+                        abilities.add(i, newSA);
+                        i++;
+                    }
+                }
+            } else if (keyword.startsWith("MayFlashCost")) {
+                final String[] k = keyword.split(":");
+                for (int i = 0; i < abilities.size(); i++) {
+                    final SpellAbility newSA = abilities.get(i).copy();
+                    newSA.setBasicSpell(false);
+                    newSA.setPayCosts(new Cost(k[1], false).add(newSA.getPayCosts()));
+                    newSA.setDescription(newSA.getDescription() + " (as though it had flash)");
+                    newSA.getRestrictions().setInstantSpeed(true);
                     if (newSA.canPlay()) {
                         abilities.add(i, newSA);
                         i++;

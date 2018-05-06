@@ -35,7 +35,7 @@ public class PermanentAi extends SpellAbilityAi {
 
         final Card card = sa.getHostCard();
 
-        if (card.hasStartOfKeyword("You may cast CARDNAME as though it had flash. If") && !ai.couldCastSorcery(sa)) {
+        if (card.hasKeyword("MayFlashSac") && !ai.couldCastSorcery(sa)) {
             // AiPlayDecision.AnotherTime
             return false;
         }

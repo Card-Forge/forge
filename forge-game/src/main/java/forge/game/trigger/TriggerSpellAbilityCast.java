@@ -124,6 +124,11 @@ public class TriggerSpellAbilityCast extends Trigger {
                 return false;
             }
         }
+        if (hasParam("ValidSA")) {
+            if (!matchesValid(spellAbility, getParam("ValidSA").split(","), getHostCard())) {
+                return false;
+            }
+        }
 
         if (hasParam("TargetsValid")) {
             SpellAbility sa = spellAbility;
@@ -202,21 +207,6 @@ public class TriggerSpellAbilityCast extends Trigger {
             }
             if (targets.size() != 1) {
                 return false;
-            }
-        }
-
-        if (hasParam("SpellSpeed")) {
-            if (getParam("SpellSpeed").equals("NotSorcerySpeed")) {
-                if (getHostCard().getController().couldCastSorcery(spellAbility)) {
-                    return false;
-                }
-                
-                // TODO do we need check if it could have been cast with normal Flash?
-
-                StaticAbility sta = spellAbility.getMayPlay();
-                if (sta == null || !getHostCard().equals(sta.getHostCard())) {
-                    return false;
-                }
             }
         }
 
