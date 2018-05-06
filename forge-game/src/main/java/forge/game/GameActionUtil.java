@@ -418,6 +418,22 @@ public final class GameActionUtil {
                         i++;
                     }
                 }
+            } else if (keyword.startsWith("MayFlashCost")) {
+                if (source.getGame().getPhaseHandler().isPlayerTurn(source.getController())) {
+                    continue; // don't cast it with additional flash cost during AI's own turn, commonly a waste of mana
+                }
+                for (int i = 0; i < abilities.size(); i++) {
+                    final SpellAbility newSA = abilities.get(i).copy();
+                    newSA.setBasicSpell(false);
+                    newSA.setPayCosts(new Cost(keyword.substring(13), false).add(newSA.getPayCosts()));
+                    newSA.setDescription(newSA.getDescription() + " (as though it had flash)");
+                    newSA.addOptionalCost(OptionalCost.Flash);
+                    newSA.getRestrictions().setInstantSpeed(true);
+                    if (newSA.canPlay()) {
+                        abilities.add(i, newSA);
+                        i++;
+                    }
+                }
             } else if (keyword.startsWith("Kicker")) {
             	String[] sCosts = TextUtil.split(keyword.substring(6), ':');
             	boolean generic = "Generic".equals(sCosts[sCosts.length - 1]);
