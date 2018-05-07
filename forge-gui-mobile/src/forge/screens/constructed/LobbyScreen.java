@@ -556,25 +556,27 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         }
 
         Deck playerDeck = deck;
-        if (hasVariant(GameType.Archenemy) || hasVariant(GameType.ArchenemyRumble)) {
-            if (playerDeck == deck) {
-                playerDeck = new Deck(deck); //create copy that can be modified
+        if (deck != null) {
+            if (hasVariant(GameType.Archenemy) || hasVariant(GameType.ArchenemyRumble)) {
+                if (playerDeck == deck) {
+                    playerDeck = new Deck(deck); //create copy that can be modified
+                }
+                playerDeck.putSection(DeckSection.Schemes, playerPanel.getSchemeDeck().get(DeckSection.Schemes));
             }
-            playerDeck.putSection(DeckSection.Schemes, playerPanel.getSchemeDeck().get(DeckSection.Schemes));
-        }
-        if (hasVariant(GameType.Planechase)) {
-            if (playerDeck == deck) {
-                playerDeck = new Deck(deck); //create copy that can be modified
+            if (hasVariant(GameType.Planechase)) {
+                if (playerDeck == deck) {
+                    playerDeck = new Deck(deck); //create copy that can be modified
+                }
+                playerDeck.putSection(DeckSection.Planes, playerPanel.getPlanarDeck().get(DeckSection.Planes));
             }
-            playerDeck.putSection(DeckSection.Planes, playerPanel.getPlanarDeck().get(DeckSection.Planes));
-        }
-        if (hasVariant(GameType.Vanguard)) {
-            if (playerDeck == deck) {
-                playerDeck = new Deck(deck); //create copy that can be modified
+            if (hasVariant(GameType.Vanguard)) {
+                if (playerDeck == deck) {
+                    playerDeck = new Deck(deck); //create copy that can be modified
+                }
+                CardPool avatarPool = new CardPool();
+                avatarPool.add(playerPanel.getVanguardAvatar());
+                playerDeck.putSection(DeckSection.Avatar, avatarPool);
             }
-            CardPool avatarPool = new CardPool();
-            avatarPool.add(playerPanel.getVanguardAvatar());
-            playerDeck.putSection(DeckSection.Avatar, avatarPool);
         }
 
         decks[playerIndex] = playerDeck;
