@@ -206,6 +206,6 @@ public class GameView extends TrackableObject {
     }
 
     public AnteResult getAnteResult(PlayerView player) {
-        return game.getPlayer(player).getController().getAnteResult();
+        return game.getOutcome().anteResult.get(game.getPlayer(player).getRegisteredPlayer());
     }
 }
