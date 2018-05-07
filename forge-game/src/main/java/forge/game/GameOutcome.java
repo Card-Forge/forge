@@ -78,7 +78,7 @@ public final class GameOutcome implements Iterable<Entry<RegisteredPlayer, Playe
     private final HashMap<RegisteredPlayer, PlayerStatistics> playerRating  = new HashMap<>();
     private final HashMap<RegisteredPlayer, String> playerNames = new HashMap<>();
 
-    public final Map<RegisteredPlayer, AnteResult> anteResult = new TreeMap<>();
+    public final Map<RegisteredPlayer, AnteResult> anteResult = new HashMap<>();
     private GameEndReason winCondition;
 
     public GameOutcome(GameEndReason reason, final Iterable<Player> players) {
