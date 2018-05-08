@@ -64,9 +64,14 @@ public class DestroyAllAi extends SpellAbilityAi {
 
     public boolean doMassRemovalLogic(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
+        final String logic = sa.getParamOrDefault("AILogic", "");
         Player opponent = ComputerUtil.getOpponentFor(ai); // TODO: how should this AI logic work for multiplayer and getOpponents()?
 
         final int CREATURE_EVAL_THRESHOLD = 200;
+
+        if (logic.equals("Always")) {
+            return true; // e.g. Tetzimoc, Primal Death, where we want to cast the permanent even if the removal trigger does nothing
+        }
 
         String valid = "";
         if (sa.hasParam("ValidCards")) {
