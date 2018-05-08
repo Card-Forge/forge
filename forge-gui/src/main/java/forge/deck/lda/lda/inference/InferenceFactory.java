@@ -14,24 +14,24 @@
 * limitations under the License.
 */
 
-package forge.deck.generate.lda.dataset;
+package forge.deck.lda.lda.inference;
 
-public class Vocabulary {
-    private final int id;
-    private String vocabulary;
-    
-    public Vocabulary(int id, String vocabulary) {
-        if (vocabulary == null) throw new NullPointerException(); 
-        this.id         = id;
-        this.vocabulary = vocabulary;
-    }
-    
-    public int id() {
-        return id;
-    }
 
-    @Override
-    public String toString() {
-        return vocabulary;
+public class InferenceFactory {
+    private InferenceFactory() {}
+
+    /**
+     * Get the LDAInference instance specified by the argument
+     * @param method
+     * @return the instance which implements LDAInference
+     */
+    public static Inference getInstance(InferenceMethod method) {
+        Inference clazz = null;
+        try {
+            clazz = (Inference)Class.forName(method.toString()).newInstance();
+        } catch (ReflectiveOperationException roe) {
+            roe.printStackTrace();
+        }
+        return clazz;
     }
 }

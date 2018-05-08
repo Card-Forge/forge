@@ -14,33 +14,32 @@
 * limitations under the License.
 */
 
-package forge.deck.generate.lda.lda;
+package forge.deck.lda.dataset;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-class Alpha {
-    private List<Double> alphas;
+public class Vocabularies {
+    private List<Vocabulary> vocabs;
     
-    Alpha(double alpha, int numTopics) {
-        if (alpha <= 0.0 || numTopics <= 0) {
-            throw new IllegalArgumentException();
-        }
-        this.alphas = Stream.generate(() -> alpha)
-                            .limit(numTopics)
-                            .collect(Collectors.toList());
-    }
-
-    double get(int i) {
-        return alphas.get(i);
+    public Vocabularies(List<Vocabulary> vocabs) {
+        this.vocabs = vocabs;
     }
     
-    void set(int i, double value) {
-        alphas.set(i, value);
+    public Vocabulary get(int id) {
+        return vocabs.get(id);
     }
-
-    double sum() {
-        return alphas.stream().reduce(Double::sum).get();
+    
+    public int size() {
+        return vocabs.size();
+    }
+    
+    public List<Vocabulary> getVocabularyList() {
+        return Collections.unmodifiableList(vocabs);
     }
 }

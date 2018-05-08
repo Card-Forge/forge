@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package forge.deck.generate.lda.dataset;
+package forge.deck.lda.dataset;
 
 import forge.game.GameFormat;
 import forge.model.FModel;

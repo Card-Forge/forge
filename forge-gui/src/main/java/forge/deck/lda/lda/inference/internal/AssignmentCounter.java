@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package forge.deck.generate.lda.lda.inference.internal;
+package forge.deck.lda.lda.inference.internal;
 
 import java.util.List;
 import java.util.stream.Collectors;

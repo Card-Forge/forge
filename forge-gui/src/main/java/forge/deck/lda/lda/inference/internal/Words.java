@@ -14,12 +14,12 @@
 * limitations under the License.
 */
 
-package forge.deck.generate.lda.lda.inference.internal;
+package forge.deck.lda.lda.inference.internal;
 
 import java.util.Collections;
 import java.util.List;
 
-import forge.deck.generate.lda.dataset.Vocabulary;
+import forge.deck.lda.dataset.Vocabulary;
 
 class Words {
     private List<Vocabulary> words;

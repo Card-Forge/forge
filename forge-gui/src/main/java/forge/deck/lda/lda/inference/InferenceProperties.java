@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package forge.deck.generate.lda.lda.inference;
+package forge.deck.lda.lda.inference;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

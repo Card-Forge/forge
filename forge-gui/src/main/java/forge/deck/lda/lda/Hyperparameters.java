@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package forge.deck.generate.lda.lda;
+package forge.deck.lda.lda;
 
 class Hyperparameters {
     private Alpha alpha;

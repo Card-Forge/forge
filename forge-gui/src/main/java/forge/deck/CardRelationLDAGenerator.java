@@ -4,11 +4,14 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import forge.StaticData;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.deck.io.CardThemedLDAIO;
 import forge.deck.io.CardThemedMatrixIO;
 import forge.deck.io.DeckStorage;
+import forge.deck.lda.dataset.Dataset;
+import forge.deck.lda.lda.LDA;
 import forge.game.GameFormat;
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -16,16 +19,17 @@ import forge.properties.ForgeConstants;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageImmediatelySerialized;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.File;
 import java.util.*;
 
+import static forge.deck.lda.lda.inference.InferenceMethod.CGS;
+
 /**
  * Created by maustin on 09/05/2017.
  */
-public final class CardRelationMatrixGenerator {
-
-    public static HashMap<String,HashMap<String,List<Map.Entry<PaperCard,Integer>>>> cardPools = new HashMap<>();
+public final class CardRelationLDAGenerator {
 
     public static Map<String, Map<String,List<List<String>>>> ldaPools = new HashMap();
     /**
@@ -37,7 +41,6 @@ public final class CardRelationMatrixGenerator {
     public static boolean initialize(){
         List<String> formatStrings = new ArrayList<>();
         formatStrings.add(FModel.getFormats().getStandard().getName());
-        ldaPools.put(FModel.getFormats().getStandard().getName(),CardThemedLDAIO.loadLDA(FModel.getFormats().getStandard().getName()));
         formatStrings.add(FModel.getFormats().getModern().getName());
         formatStrings.add(DeckFormat.Commander.toString());
 
@@ -52,92 +55,72 @@ public final class CardRelationMatrixGenerator {
 
     /** Try to load matrix .dat files, otherwise check for deck folders and build .dat, otherwise return false **/
     public static boolean initializeFormat(String format){
-        HashMap<String,List<Map.Entry<PaperCard,Integer>>> formatMap = CardThemedMatrixIO.loadMatrix(format);
+        Map<String,List<List<String>>> formatMap = CardThemedLDAIO.loadLDA(format);
         if(formatMap==null) {
-            if (CardThemedMatrixIO.getMatrixFolder(format).exists()) {
-                if(format.equals(FModel.getFormats().getStandard().getName())){
-                    formatMap=initializeFormat(FModel.getFormats().getStandard());
-                }else if(format.equals(FModel.getFormats().getModern().getName())){
-                    formatMap=initializeFormat(FModel.getFormats().getModern());
-                }else{
-                    formatMap=initializeCommanderFormat();
+            try {
+                if (CardThemedLDAIO.getMatrixFolder(format).exists()) {
+                    if (format.equals(FModel.getFormats().getStandard().getName())) {
+                        formatMap = initializeFormat(FModel.getFormats().getStandard());
+                    } else if (format.equals(FModel.getFormats().getModern().getName())) {
+                        formatMap = initializeFormat(FModel.getFormats().getModern());
+                    } else {
+                        //formatMap = initializeCommanderFormat();
+                    }
+                    CardThemedLDAIO.saveLDA(format, formatMap);
+                } else {
+                    return false;
                 }
-                CardThemedMatrixIO.saveMatrix(format, formatMap);
-            } else {
+            }catch (Exception e){
+                e.printStackTrace();
                 return false;
             }
         }
-        cardPools.put(format, formatMap);
+        ldaPools.put(format, formatMap);
         return true;
     }
 
-    public static HashMap<String,List<Map.Entry<PaperCard,Integer>>> initializeFormat(GameFormat format){
+    public static Map<String,List<List<String>>> initializeFormat(GameFormat format) throws Exception{
+        Dataset dataset = new Dataset(format);
 
-        IStorage<Deck> decks = new StorageImmediatelySerialized<Deck>("Generator", new DeckStorage(new File(ForgeConstants.DECK_GEN_DIR+ForgeConstants.PATH_SEPARATOR+format.getName()),
-                ForgeConstants.DECK_GEN_DIR, false),
-                true);
-
-        final Iterable<PaperCard> cards = Iterables.filter(format.getAllCards()
-                , Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND_NOT_WASTES), PaperCard.FN_GET_RULES));
-        List<PaperCard> cardList = Lists.newArrayList(cards);
-        cardList.add(FModel.getMagicDb().getCommonCards().getCard("Wastes"));
-        Map<String, Integer> cardIntegerMap = new HashMap<>();
-        Map<Integer, PaperCard> integerCardMap = new HashMap<>();
-        for (int i=0; i<cardList.size(); ++i){
-            cardIntegerMap.put(cardList.get(i).getName(), i);
-            integerCardMap.put(i, cardList.get(i));
-        }
-
-        int[][] matrix = new int[cardList.size()][cardList.size()];
-
-        for (PaperCard card:cardList){
-            for (Deck deck:decks){
-                if (deck.getMain().contains(card)){
-                    for (PaperCard pairCard:Iterables.filter(deck.getMain().toFlatList(),
-                            Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND_NOT_WASTES), PaperCard.FN_GET_RULES))){
-                        if (!pairCard.getName().equals(card.getName())){
-                            try {
-                                int old = matrix[cardIntegerMap.get(card.getName())][cardIntegerMap.get(pairCard.getName())];
-                                matrix[cardIntegerMap.get(card.getName())][cardIntegerMap.get(pairCard.getName())] = old + 1;
-                            }catch (NullPointerException ne){
-                                //Todo: Not sure what was failing here
-                            }
-                        }
-
+        final int numTopics = dataset.getNumDocs()/50;
+        LDA lda = new LDA(0.1, 0.1, numTopics, dataset, CGS);
+        lda.run();
+        System.out.println(lda.computePerplexity(dataset));
+        List<List<String>> topics = new ArrayList<>();
+        Set<String> cards = new HashSet<String>();
+        for (int t = 0; t < numTopics; ++t) {
+            List<String> topic = new ArrayList<>();
+            List<Pair<String, Double>> highRankVocabs = lda.getVocabsSortedByPhi(t);
+            if (highRankVocabs.get(0).getRight()<=0.001d){
+                continue;
+            }
+            System.out.print("t" + t + ": ");
+            int i = 0;
+            while (topic.size()<=40) {
+                String cardName = highRankVocabs.get(i).getLeft();;
+                if(!StaticData.instance().getCommonCards().getUniqueByName(cardName).getRules().getType().isBasicLand()){
+                    if(highRankVocabs.get(i).getRight()>=0.0005d){
+                        cards.add(cardName);
                     }
+                    System.out.println("[" + highRankVocabs.get(i).getLeft() + "," + highRankVocabs.get(i).getRight() + "],");
+                    topic.add(highRankVocabs.get(i).getLeft());
+                }
+                i++;
+            }
+            System.out.println();
+            topics.add(topic);
+        }
+        Map<String,List<List<String>>> cardTopicMap = new HashMap<>();
+        for (String card:cards){
+            List<List<String>>  cardTopics = new ArrayList<>();
+            for( List<String> topic:topics){
+                if(topic.contains(card)){
+                    cardTopics.add(topic);
                 }
             }
+            cardTopicMap.put(card,cardTopics);
         }
-        HashMap<String,List<Map.Entry<PaperCard,Integer>>> cardPools = new HashMap<>();
-        for (PaperCard card:cardList){
-            int col=cardIntegerMap.get(card.getName());
-            int[] distances = matrix[col];
-            int max = (Integer) Collections.max(Arrays.asList(ArrayUtils.toObject(distances)));
-            if (max>0) {
-                ArrayIndexComparator comparator = new ArrayIndexComparator(ArrayUtils.toObject(distances));
-                Integer[] indices = comparator.createIndexArray();
-                Arrays.sort(indices, comparator);
-                List<Map.Entry<PaperCard,Integer>> deckPool=new ArrayList<>();
-                int k=0;
-                boolean excludeThisCard=false;//if there are too few cards with at least one connection
-                for (int j=0;j<MIN_REQUIRED_CONNECTIONS;++k){
-                    if(distances[indices[cardList.size()-1-k]]==0){
-                        excludeThisCard = true;
-                        break;
-                    }
-                    PaperCard cardToAdd=integerCardMap.get(indices[cardList.size()-1-k]);
-                    if(!cardToAdd.getRules().getMainPart().getType().isLand()){//need x non-land cards
-                        ++j;
-                    }
-                    deckPool.add(new AbstractMap.SimpleEntry<PaperCard, Integer>(cardToAdd,distances[indices[cardList.size()-1-k]]));
-                };
-                if(excludeThisCard){
-                    continue;
-                }
-                cardPools.put(card.getName(), deckPool);
-            }
-        }
-        return cardPools;
+        return cardTopicMap;
     }
 
     public static HashMap<String,List<Map.Entry<PaperCard,Integer>>> initializeCommanderFormat(){

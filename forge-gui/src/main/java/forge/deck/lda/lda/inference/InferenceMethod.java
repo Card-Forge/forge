@@ -14,10 +14,10 @@
 * limitations under the License.
 */
 
-package forge.deck.generate.lda.lda.inference;
+package forge.deck.lda.lda.inference;
 
 public enum InferenceMethod {
-    CGS("forge.deck.generate.lda.lda.inference.internal.CollapsedGibbsSampler"),
+    CGS("forge.deck.lda.lda.inference.internal.CollapsedGibbsSampler"),
     // more
     ;
 

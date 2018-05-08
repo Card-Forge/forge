@@ -18,6 +18,7 @@ import forge.game.GameType;
 import forge.item.PaperCard;
 import forge.itemmanager.IItemManager;
 import forge.limited.CardThemedCommanderDeckBuilder;
+import forge.limited.CardThemedConquestDeckBuilder;
 import forge.limited.CardThemedDeckBuilder;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
@@ -31,6 +32,7 @@ import forge.util.MyRandom;
 import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
 
+import java.awt.print.Paper;
 import java.util.*;
 
 /** 
@@ -45,7 +47,7 @@ public class DeckgenUtil {
 
     public static Deck buildCardGenDeck(GameFormat format, boolean isForAI){
         try {
-            List<String> keys      = new ArrayList<>(CardRelationMatrixGenerator.cardPools.get(format.getName()).keySet());
+            List<String> keys      = new ArrayList<>(CardRelationLDAGenerator.ldaPools.get(format.getName()).keySet());
             String       randomKey = keys.get( MyRandom.getRandom().nextInt(keys.size()) );
             Predicate<PaperCard> cardFilter = Predicates.and(format.getFilterPrinted(),PaperCard.Predicates.name(randomKey));
             PaperCard keyCard = FModel.getMagicDb().getCommonCards().getAllCards(cardFilter).get(0);
@@ -110,6 +112,98 @@ public class DeckgenUtil {
         }
     }
 
+    public static Deck buildPlanarConquestDeck(PaperCard card, GameFormat format, DeckFormat deckFormat){
+        return buildPlanarConquestDeck(card, null, format, deckFormat, false);
+    }
+
+    public static Deck buildPlanarConquestCommanderDeck(PaperCard card, GameFormat format, DeckFormat deckFormat){
+        Deck deck = buildPlanarConquestDeck(card, null, format, deckFormat, true);
+        deck.getMain().removeAll(card);
+        deck.getOrCreate(DeckSection.Commander).add(card);
+        return deck;
+    }
+
+    public static Deck buildPlanarConquestCommanderDeck(PaperCard card, PaperCard secondKeycard, GameFormat format, DeckFormat deckFormat){
+        Deck deck = buildPlanarConquestDeck(card, secondKeycard, format, deckFormat, true);
+        deck.getMain().removeAll(card);
+        deck.getOrCreate(DeckSection.Commander).add(card);
+        return deck;
+    }
+
+    public static Deck buildPlanarConquestDeck(PaperCard card, PaperCard secondKeycard, GameFormat format, DeckFormat deckFormat, boolean forCommander){
+        final boolean isForAI = true;
+        Set<String> uniqueCards = new HashSet<>();
+        List<PaperCard> selectedCards = new ArrayList<>();
+        List<List<String>> cardArchetypes = CardRelationLDAGenerator.ldaPools.get(FModel.getFormats().getStandard().getName()).get(card.getName());
+        for(List<String> archetype:cardArchetypes){
+            for(String cardName:archetype){
+                uniqueCards.add(cardName);
+            }
+        }
+        for(String cardName:uniqueCards){
+            selectedCards.add(StaticData.instance().getCommonCards().getUniqueByName(cardName));
+        }
+        /*
+        if(secondKeycard == null){
+            //get second keycard
+            for(Map.Entry<PaperCard,Integer> pair:potentialCards){
+                preSelectedCards.add(pair.getKey());
+            }
+            //filter out land cards and if for AI non-playable cards as potential second key cards and remove cards not legal in format
+            Iterable<PaperCard> preSelectedNonLandCards;
+            preSelectedNonLandCards=Iterables.filter(preSelectedCards,Predicates.and(
+                        Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, PaperCard.FN_GET_RULES),
+                        Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, PaperCard.FN_GET_RULES),
+                        format.getFilterPrinted()));
+
+            preSelectedCards= Lists.newArrayList(preSelectedNonLandCards);
+
+            //choose a second card randomly from the top 8 cards if possible
+            int randMax=4;
+            if(preSelectedCards.size()<randMax){
+                randMax=preSelectedCards.size();
+            }
+            secondKeycard = preSelectedCards.get(MyRandom.getRandom().nextInt(randMax));
+        }
+
+        List<Map.Entry<PaperCard,Integer>> potentialSecondCards = CardRelationMatrixGenerator.cardPools.get(FModel.getFormats().getStandard().getName()).get(secondKeycard.getName());
+
+        //combine card distances from second key card and re-sort
+        if(potentialSecondCards !=null && potentialSecondCards.size()>0) {
+            combineDistances(potentialCards, potentialSecondCards);
+            Collections.sort(potentialCards, new CardDistanceComparator());
+            Collections.reverse(potentialCards);
+        }
+
+        List<PaperCard> selectedCards = new ArrayList<>();
+        selectedCards.add(card);
+        selectedCards.add(secondKeycard);
+        for(Map.Entry<PaperCard,Integer> pair:potentialCards){
+            PaperCard potentialCard = pair.getKey();
+            if (!potentialCard.getName().equals(card.getName())
+                    && (forCommander || !potentialCard.getName().equals(secondKeycard.getName()))
+                    && format.getFilterPrinted().apply(potentialCard)) {
+                selectedCards.add(pair.getKey());
+            }
+        }*/
+
+        //build deck from combined list
+        CardThemedDeckBuilder dBuilder;
+
+        if(forCommander){
+            dBuilder = new CardThemedConquestDeckBuilder(card, selectedCards, format ,isForAI, deckFormat);
+        }else{
+            dBuilder = new CardThemedDeckBuilder(card,secondKeycard, selectedCards,format,isForAI, deckFormat);
+        }
+
+        Deck deck = dBuilder.buildDeck();
+        return deck;
+    }
+
+    public static Deck buildCardGenDeck(PaperCard card, GameFormat format, boolean isForAI){
+        return buildCardGenDeck(card, null, format, isForAI);
+    }
+
     /**
      * Build a deck based on the chosen card.
      *
@@ -118,9 +212,12 @@ public class DeckgenUtil {
      * @param isForAI
      * @return
      */
-    public static Deck buildCardGenDeck(PaperCard card, GameFormat format, boolean isForAI){
-        List<Map.Entry<PaperCard,Integer>> potentialCards = new ArrayList<>();
-        potentialCards.addAll(CardRelationMatrixGenerator.cardPools.get(format.getName()).get(card.getName()));
+    public static Deck buildCardGenDeck(PaperCard card, PaperCard secondKeycard, GameFormat format, boolean isForAI){
+
+            return buildLDACardGenDeck(card, format, isForAI);
+
+                /*List<Map.Entry<PaperCard,Integer>> potentialCards = new ArrayList<>();
+        potentialCards.addAll(CardRelationLDAGenerator.ldaPools.get(format.getName()).get(card.getName()));
         Collections.sort(potentialCards,new CardDistanceComparator());
         Collections.reverse(potentialCards);
         //get second keycard
@@ -141,11 +238,14 @@ public class DeckgenUtil {
         preSelectedCards= Lists.newArrayList(preSelectedNonLandCards);
 
         //choose a second card randomly from the top 8 cards if possible
-        int randMax=8;
-        if(preSelectedCards.size()<randMax){
-            randMax=preSelectedCards.size();
+        if(secondKeycard == null) {
+            int randMax = 8;
+            if (preSelectedCards.size() < randMax) {
+                randMax = preSelectedCards.size();
+            }
+            secondKeycard = preSelectedCards.get(MyRandom.getRandom().nextInt(randMax));
         }
-        PaperCard secondKeycard = preSelectedCards.get(MyRandom.getRandom().nextInt(randMax));
+
         List<Map.Entry<PaperCard,Integer>> potentialSecondCards = CardRelationMatrixGenerator.cardPools.get(format.getName()).get(secondKeycard.getName());
 
         //combine card distances from second key card and re-sort
@@ -159,7 +259,19 @@ public class DeckgenUtil {
         for(Map.Entry<PaperCard,Integer> pair:potentialCards){
             selectedCards.add(pair.getKey());
         }
-        List<PaperCard> toRemove = new ArrayList<>();
+        */
+        /*List<PaperCard> toRemove = new ArrayList<>();
+        Set<String> uniqueCards = new HashSet<>();
+        List<PaperCard> selectedCards = new ArrayList<>();
+        List<List<String>> cardArchetypes = CardRelationLDAGenerator.ldaPools.get(FModel.getFormats().getStandard().getName()).get(card.getName());
+        for(List<String> archetype:cardArchetypes){
+            for(String cardName:archetype){
+                uniqueCards.add(cardName);
+            }
+        }
+        for(String cardName:uniqueCards){
+            selectedCards.add(StaticData.instance().getCommonCards().getUniqueByName(cardName));
+        }
 
         //randomly remove cards
         int removeCount=0;
@@ -210,6 +322,82 @@ public class DeckgenUtil {
 
         //build deck from combined list
         CardThemedDeckBuilder dBuilder = new CardThemedDeckBuilder(card,secondKeycard, playsetList,format,isForAI);
+        Deck deck = dBuilder.buildDeck();
+        if(deck.getMain().countAll()!=60){
+            System.out.println(deck.getMain().countAll());
+            System.out.println("Wrong card count "+deck.getMain().countAll());
+            deck=buildCardGenDeck(format,isForAI);
+        }
+        if(deck.getMain().countAll(Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard.FN_GET_RULES))>27){
+            System.out.println("Too many lands "+deck.getMain().countAll(Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard.FN_GET_RULES)));
+            deck=buildCardGenDeck(format,isForAI);
+        }
+        while(deck.get(DeckSection.Sideboard).countAll()>15){
+            deck.get(DeckSection.Sideboard).remove(deck.get(DeckSection.Sideboard).get(0));
+        }
+        return deck;*/
+    }
+
+    /**
+     * Build a deck based on the chosen card.
+     *
+     * @param card
+     * @param format
+     * @param isForAI
+     * @return
+     */
+    public static Deck buildLDACardGenDeck(PaperCard card,GameFormat format, boolean isForAI){
+
+        List<List<String>> preSelectedCardLists = CardRelationLDAGenerator.ldaPools.get(format.getName()).get(card.getName());
+        List<String> preSelectedCardNames = preSelectedCardLists.get(MyRandom.getRandom().nextInt(preSelectedCardLists.size()));
+        List<PaperCard> selectedCards = new ArrayList<>();
+        for(String name:preSelectedCardNames){
+            PaperCard cardToAdd = StaticData.instance().getCommonCards().getUniqueByName(name);
+            //for(int i=0; i<1;++i) {
+                if(!cardToAdd.getName().equals(card.getName())) {
+                    selectedCards.add(cardToAdd);
+                }
+            //}
+        }
+
+        List<PaperCard> toRemove = new ArrayList<>();
+
+        //randomly remove cards
+        int removeCount=0;
+        int i=0;
+        for(PaperCard c:selectedCards){
+            if(MyRandom.getRandom().nextInt(100)>70+(15-(i/selectedCards.size())*selectedCards.size()) && removeCount<4 //randomly remove some cards - more likely as distance increases
+                    &&!c.getName().contains("Urza")){ //avoid breaking Tron decks
+                toRemove.add(c);
+                removeCount++;
+            }
+            if(c.getName().equals(card.getName())){//may have been added in secondary list
+                toRemove.add(c);
+            }
+            ++i;
+        }
+        selectedCards.removeAll(toRemove);
+        //Add keycard
+        List<PaperCard> playsetList = new ArrayList<>();
+        int keyCardCount=4;
+        if(card.getRules().getMainPart().getManaCost().getCMC()>7){
+            keyCardCount=1+MyRandom.getRandom().nextInt(4);
+        }else if(card.getRules().getMainPart().getManaCost().getCMC()>5){
+            keyCardCount=2+MyRandom.getRandom().nextInt(3);
+        }
+        for(int j=0;j<keyCardCount;++j) {
+            playsetList.add(card);
+        }
+        for (PaperCard c:selectedCards){
+            for(int j=0;j<4;++j) {
+                if(MyRandom.getRandom().nextInt(100)<90) {
+                    playsetList.add(c);
+                }
+            }
+        }
+
+        //build deck from combined list
+        CardThemedDeckBuilder dBuilder = new CardThemedDeckBuilder(card,null, playsetList,format,isForAI);
         Deck deck = dBuilder.buildDeck();
         if(deck.getMain().countAll()!=60){
             System.out.println(deck.getMain().countAll());
@@ -517,20 +705,31 @@ public class DeckgenUtil {
         IDeckGenPool cardDb;
         DeckGeneratorBase gen = null;
         PaperCard selectedPartner=null;
+        List<PaperCard> preSelectedCards = new ArrayList<>();
         if(isCardGen){
-            List<Map.Entry<PaperCard,Integer>> potentialCards = new ArrayList<>();
             if(format.equals(DeckFormat.Brawl)){//TODO: replace with actual Brawl based data
-                potentialCards.addAll(CardRelationMatrixGenerator.cardPools.get(FModel.getFormats().getStandard().getName()).get(commander.getName()));
+                Set<String> uniqueCards = new HashSet<>();
+                List<List<String>> cardArchetypes = CardRelationLDAGenerator.ldaPools.get(FModel.getFormats().getStandard().getName()).get(commander.getName());
+                for(List<String> archetype:cardArchetypes){
+                    for(String cardName:archetype){
+                        uniqueCards.add(cardName);
+                    }
+                }
+                for(String card:uniqueCards){
+                    preSelectedCards.add(StaticData.instance().getCommonCards().getUniqueByName(card));
+                }
             }else {
+                List<Map.Entry<PaperCard,Integer>> potentialCards = new ArrayList<>();
                 potentialCards.addAll(CardRelationMatrixGenerator.cardPools.get(DeckFormat.Commander.toString()).get(commander.getName()));
-            }
-            //Collections.shuffle(potentialCards, r);
-            List<PaperCard> preSelectedCards = new ArrayList<>();
-            for(Map.Entry<PaperCard,Integer> pair:potentialCards){
-                if(format.isLegalCard(pair.getKey())) {
-                    preSelectedCards.add(pair.getKey());
+                for(Map.Entry<PaperCard,Integer> pair:potentialCards){
+                    if(format.isLegalCard(pair.getKey())) {
+                        preSelectedCards.add(pair.getKey());
+                    }
                 }
             }
+            //Collections.shuffle(potentialCards, r);
+
+
             //check for partner commanders
             List<PaperCard> partners=new ArrayList<>();
             for(PaperCard c:preSelectedCards){

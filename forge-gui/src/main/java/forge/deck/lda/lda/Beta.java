@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package forge.deck.generate.lda.lda;
+package forge.deck.lda.lda;
 
 import java.util.Arrays;
 import java.util.List;

@@ -60,7 +60,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
     protected Iterable<PaperCard> onColorNonCreatures;
     protected Iterable<PaperCard> keyCards;
 
-    protected static final boolean logToConsole = false;
+    protected static final boolean logToConsole = true;
     protected static final boolean logColorsToConsole = false;
 
     protected Map<Integer,Integer> targetCMCs;
@@ -113,8 +113,10 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         if(!colors.hasAllColors(keyCard.getRules().getColorIdentity().getColor())){
             colors = ColorSet.fromMask(colors.getColor() | keyCard.getRules().getColorIdentity().getColor());
         }
-        if(!colors.hasAllColors(secondKeyCard.getRules().getColorIdentity().getColor())){
-            colors = ColorSet.fromMask(colors.getColor() | secondKeyCard.getRules().getColorIdentity().getColor());
+        if(secondKeyCard!=null) {
+            if (!colors.hasAllColors(secondKeyCard.getRules().getColorIdentity().getColor())) {
+                colors = ColorSet.fromMask(colors.getColor() | secondKeyCard.getRules().getColorIdentity().getColor());
+            }
         }
         numSpellsNeeded = ((Double)Math.floor(targetSize*(getCreaturePercentage()+getSpellPercentage()))).intValue();
         numCreaturesToStart = ((Double)Math.ceil(targetSize*(getCreaturePercentage()))).intValue();
@@ -337,7 +339,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             rankedColorList.removeAll(keyCardList);
         }
         // Add the second keycard if not land
-        if(!secondKeyCard.getRules().getMainPart().getType().isLand()) {
+        if(secondKeyCard!=null && !secondKeyCard.getRules().getMainPart().getType().isLand()) {
             Iterable<PaperCard> secondKeyCards = Iterables.filter(aiPlayables,PaperCard.Predicates.name(secondKeyCard.getName()));
             final List<PaperCard> keyCardList = Lists.newArrayList(secondKeyCards);
             deckList.addAll(keyCardList);
@@ -357,7 +359,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             landsNeeded--;
         }
         // Add the deck card
-        if(secondKeyCard.getRules().getMainPart().getType().isLand()) {
+        if(secondKeyCard!=null && secondKeyCard.getRules().getMainPart().getType().isLand()) {
             Iterable<PaperCard> secondKeyCards = Iterables.filter(aiPlayables,PaperCard.Predicates.name(secondKeyCard.getName()));
             final List<PaperCard> keyCardList = Lists.newArrayList(secondKeyCards);
             deckList.addAll(keyCardList);
@@ -480,7 +482,11 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      * @return name
      */
     protected String generateName() {
-        return keyCard.getName() + " - " + secondKeyCard.getName() +" based deck";
+        if(secondKeyCard!=null ) {
+            return keyCard.getName() + " - " + secondKeyCard.getName() + " based deck";
+        }else{
+            return keyCard.getName() + " based deck";
+        }
     }
 
     /**
