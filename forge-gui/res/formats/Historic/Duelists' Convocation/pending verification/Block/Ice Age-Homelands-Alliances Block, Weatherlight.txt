@@ -1,7 +1,0 @@
-[format]
-Name:Ice Age-Homelands-Alliances Block, Weatherlight
-Type:Historic
-Subtype:Block
-Order:197
-Sets:ICE, HML, ALL
-Banned:Amulet of Quoz; Thawing Glaciers; Timmerian Fiends; Zuran Orb
