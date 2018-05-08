@@ -3,7 +3,7 @@ Name:Captain Lannery Storm|Deck:Captain Lannery Storm_1.dck|Variant:Commander|Av
 Name:Hostage Taker|Deck:Hostage Taker_2.dck|Variant:None|Avatar:Hostage Taker|Desc:
 Name:Siren Stormtamer|Deck:Siren Stormtamer_3.dck|Variant:None|Avatar:Siren Stormtamer|Desc:
 Name:Siren Stormtamer|Deck:Siren Stormtamer_7.dck|Variant:None|Avatar:Siren Stormtamer|Desc:
-Name:Fanatical Firebrand|Deck:Fanatical Firebrand_9.dck|Variant:None|Avatar:Fanatical Firebrand|Desc:
+Name:Angrath, Minotaur Pirate|Deck:Angrath Planeswalker.dck|Variant:Planeswalker|Avatar:Angrath, Minotaur Pirate|Desc:
 Name:Dire Fleet Daredevil|Deck:Dire Fleet Daredevil_11.dck|Variant:None|Avatar:Dire Fleet Daredevil|Desc:
 Name:Tetzimoc, Primal Death|Deck:Tetzimoc, Primal Death_15.dck|Variant:Commander|Avatar:Tetzimoc, Primal Death|Desc:
 Name:Ruin Raider|Deck:Ruin Raider_6.dck|Variant:None|Avatar:Ruin Raider|Desc:
