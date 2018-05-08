@@ -1,0 +1,10 @@
+Name:Dire Fleet Poisoner|Deck:Dire Fleet Poisoner_8.dck|Variant:None|Avatar:Dire Fleet Poisoner|Desc:
+Name:Captain Lannery Storm|Deck:Captain Lannery Storm_5.dck|Variant:Commander|Avatar:Captain Lannery Storm|Desc:
+Name:Hostage Taker|Deck:Hostage Taker_4.dck|Variant:None|Avatar:Hostage Taker|Desc:
+Name:Regisaur Alpha|Deck:Regisaur Alpha_8.dck|Variant:None|Avatar:Regisaur Alpha|Desc:
+Name:Ripjaw Raptor|Deck:Ripjaw Raptor_11.dck|Variant:None|Avatar:Ripjaw Raptor|Desc:
+Name:Kumena, Tyrant of Orazca|Deck:Kumena, Tyrant of Orazca_3.dck|Variant:Commander|Avatar:Kumena, Tyrant of Orazca|Desc:
+Name:Duskborne Skymarcher|Deck:Duskborne Skymarcher_8.dck|Variant:None|Avatar:Duskborne Skymarcher|Desc:
+Name:Elenda, the Dusk Rose|Deck:Elenda, the Dusk Rose_12.dck|Variant:Commander|Avatar:Elenda, the Dusk Rose|Desc:
+Name:Legion Lieutenant|Deck:Legion Lieutenant_13.dck|Variant:None|Avatar:Legion Lieutenant|Desc:
+Name:Vona, Butcher of Magan|Deck:Vona, Butcher of Magan_14.dck|Variant:Commander|Avatar:Vona, Butcher of Magan|Desc:
