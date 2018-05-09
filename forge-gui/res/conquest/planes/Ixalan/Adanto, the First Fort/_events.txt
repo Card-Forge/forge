@@ -1,0 +1,12 @@
+Name:Mavren Fein, Dusk Apostle|Deck:Mavren Fein, Dusk Apostle_10.dck|Variant:None|Avatar:Mavren Fein, Dusk Apostle|Desc:
+Name:Legion Lieutenant|Deck:Legion Lieutenant_1.dck|Variant:None|Avatar:Legion Lieutenant|Desc:
+Name:Champion of Dusk|Deck:Champion of Dusk_2.dck|Variant:None|Avatar:Champion of Dusk|Desc:
+Name:Elenda, the Dusk Rose|Deck:Elenda, the Dusk Rose_6.dck|Variant:Commander|Avatar:Elenda, the Dusk Rose|Desc:
+Name:Sadistic Skymarcher|Deck:Sadistic Skymarcher_4.dck|Variant:None|Avatar:Sadistic Skymarcher|Desc:
+Name:Sanctum Seeker|Deck:Sanctum Seeker_15.dck|Variant:None|Avatar:Sanctum Seeker|Desc:
+Name:Elenda, the Dusk Rose|Deck:Elenda, the Dusk Rose_16.dck|Variant:None|Avatar:Elenda, the Dusk Rose|Desc:
+Name:Champion of Dusk|Deck:Champion of Dusk_17.dck|Variant:None|Avatar:Champion of Dusk|Desc:
+Name:Paladin of Atonement|Deck:Paladin of Atonement_18.dck|Variant:None|Avatar:Paladin of Atonement|Desc:
+Name:Vona, Butcher of Magan|Deck:Vona, Butcher of Magan_19.dck|Variant:Commander|Avatar:Vona, Butcher of Magan|Desc:
+
+
