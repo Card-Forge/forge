@@ -273,7 +273,8 @@ public class CountersPutAi extends SpellAbilityAi {
             }
 
             CardCollection oppCreats = CardLists.filter(ai.getOpponents().getCreaturesInPlay(),
-                    Predicates.not(CardPredicates.hasCounter(CounterType.getType(type))));
+                    Predicates.and(Predicates.not(CardPredicates.hasCounter(CounterType.getType(type))),
+                            CardPredicates.isTargetableBy(sa)));
 
             if (!oppCreats.isEmpty()) {
                 Card bestCreat = ComputerUtilCard.getBestCreatureAI(oppCreats);
