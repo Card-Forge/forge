@@ -102,7 +102,7 @@ public class CollapsedGibbsSampler implements Inference {
         }
 
         for (int i = 1; i <= numIteration; ++i) {
-            System.out.println("Iteraion " + i + ".");
+            System.out.println("Iteration " + i + ".");
             runSampling();
         }
     }

@@ -40,6 +40,7 @@ public class Example {
                 return null;
             }
         });*/
+/*
         GameFormat format = FModel.getFormats().getStandard();
         Dataset dataset = new Dataset(format);
         
@@ -82,6 +83,7 @@ public class Example {
         Map<String,List<List<String>>> cardTopicMapIn =CardThemedLDAIO.loadLDA(format.getName());
         System.out.println(cardTopicMapIn.get(cardTopicMapIn.keySet().iterator().next()).get(0).toString());
 
+*/
 
     }
 }

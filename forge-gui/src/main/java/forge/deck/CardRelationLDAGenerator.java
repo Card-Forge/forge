@@ -31,7 +31,7 @@ import static forge.deck.lda.lda.inference.InferenceMethod.CGS;
  */
 public final class CardRelationLDAGenerator {
 
-    public static Map<String, Map<String,List<List<String>>>> ldaPools = new HashMap();
+    public static Map<String, Map<String,List<List<Pair<String, Double>>>>> ldaPools = new HashMap();
     /**
         To ensure that only cards with at least 14 connections (as 14*4+4=60) are included in the card based deck
         generation pools
@@ -55,21 +55,32 @@ public final class CardRelationLDAGenerator {
 
     /** Try to load matrix .dat files, otherwise check for deck folders and build .dat, otherwise return false **/
     public static boolean initializeFormat(String format){
-        Map<String,List<List<String>>> formatMap = CardThemedLDAIO.loadLDA(format);
+        Map<String,List<List<Pair<String, Double>>>> formatMap = CardThemedLDAIO.loadLDA(format);
         if(formatMap==null) {
             try {
-                if (CardThemedLDAIO.getMatrixFolder(format).exists()) {
-                    if (format.equals(FModel.getFormats().getStandard().getName())) {
-                        formatMap = initializeFormat(FModel.getFormats().getStandard());
-                    } else if (format.equals(FModel.getFormats().getModern().getName())) {
-                        formatMap = initializeFormat(FModel.getFormats().getModern());
+                List<List<Pair<String, Double>>> lda = CardThemedLDAIO.loadRawLDA(format);
+                if(lda==null) {
+                    if (CardThemedLDAIO.getMatrixFolder(format).exists()) {
+                        if (format.equals(FModel.getFormats().getStandard().getName())) {
+                            lda = initializeFormat(FModel.getFormats().getStandard());
+                        } else if (format.equals(FModel.getFormats().getModern().getName())) {
+                            lda = initializeFormat(FModel.getFormats().getModern());
+                        } else {
+                            //formatMap = initializeCommanderFormat();
+                        }
+                        CardThemedLDAIO.saveRawLDA(format, lda);
                     } else {
-                        //formatMap = initializeCommanderFormat();
+                        return false;
                     }
-                    CardThemedLDAIO.saveLDA(format, formatMap);
-                } else {
-                    return false;
                 }
+                if (format.equals(FModel.getFormats().getStandard().getName())) {
+                    formatMap = loadFormat(FModel.getFormats().getStandard(), lda);
+                } else if (format.equals(FModel.getFormats().getModern().getName())) {
+                    formatMap = loadFormat(FModel.getFormats().getModern(), lda);
+                } else {
+                    //formatMap = initializeCommanderFormat();
+                }
+                CardThemedLDAIO.saveLDA(format, formatMap);
             }catch (Exception e){
                 e.printStackTrace();
                 return false;
@@ -79,19 +90,15 @@ public final class CardRelationLDAGenerator {
         return true;
     }
 
-    public static Map<String,List<List<String>>> initializeFormat(GameFormat format) throws Exception{
-        Dataset dataset = new Dataset(format);
+    public static Map<String,List<List<Pair<String, Double>>>> loadFormat(GameFormat format,List<List<Pair<String, Double>>> lda) throws Exception{
 
-        final int numTopics = dataset.getNumDocs()/50;
-        LDA lda = new LDA(0.1, 0.1, numTopics, dataset, CGS);
-        lda.run();
-        System.out.println(lda.computePerplexity(dataset));
-        List<List<String>> topics = new ArrayList<>();
+        List<List<Pair<String, Double>>> topics = new ArrayList<>();
         Set<String> cards = new HashSet<String>();
-        for (int t = 0; t < numTopics; ++t) {
-            List<String> topic = new ArrayList<>();
-            List<Pair<String, Double>> highRankVocabs = lda.getVocabsSortedByPhi(t);
-            if (highRankVocabs.get(0).getRight()<=0.001d){
+        for (int t = 0; t < lda.size(); ++t) {
+            List<Pair<String, Double>> topic = new ArrayList<>();
+            Set<String> topicCards = new HashSet<>();
+            List<Pair<String, Double>> highRankVocabs = lda.get(t);
+            if (highRankVocabs.get(0).getRight()<=0.02d){
                 continue;
             }
             System.out.print("t" + t + ": ");
@@ -99,28 +106,63 @@ public final class CardRelationLDAGenerator {
             while (topic.size()<=40) {
                 String cardName = highRankVocabs.get(i).getLeft();;
                 if(!StaticData.instance().getCommonCards().getUniqueByName(cardName).getRules().getType().isBasicLand()){
-                    if(highRankVocabs.get(i).getRight()>=0.0005d){
-                        cards.add(cardName);
+                    if(highRankVocabs.get(i).getRight()>=0.01d) {
+                        topicCards.add(cardName);
                     }
-                    System.out.println("[" + highRankVocabs.get(i).getLeft() + "," + highRankVocabs.get(i).getRight() + "],");
-                    topic.add(highRankVocabs.get(i).getLeft());
+                    if(highRankVocabs.get(i).getRight()>=0.005d){
+                        System.out.println("[" + highRankVocabs.get(i).getLeft() + "," + highRankVocabs.get(i).getRight() + "],");
+                        topic.add(highRankVocabs.get(i));
+                    }else{
+                        i++;
+                        break;
+                    }
+
                 }
                 i++;
             }
             System.out.println();
-            topics.add(topic);
+            if(topic.size()>18) {
+                cards.addAll(topicCards);
+                topics.add(topic);
+            }
         }
-        Map<String,List<List<String>>> cardTopicMap = new HashMap<>();
+        Map<String,List<List<Pair<String, Double>>>> cardTopicMap = new HashMap<>();
         for (String card:cards){
-            List<List<String>>  cardTopics = new ArrayList<>();
-            for( List<String> topic:topics){
-                if(topic.contains(card)){
+            List<List<Pair<String, Double>>>  cardTopics = new ArrayList<>();
+            for( List<Pair<String, Double>> topic:topics){
+                if(topicContains(card,topic)){
                     cardTopics.add(topic);
                 }
             }
             cardTopicMap.put(card,cardTopics);
         }
         return cardTopicMap;
+    }
+
+    public static List<List<Pair<String, Double>>> initializeFormat(GameFormat format) throws Exception{
+        Dataset dataset = new Dataset(format);
+
+        final int numTopics = dataset.getNumDocs()/30;
+        LDA lda = new LDA(0.1, 0.1, numTopics, dataset, CGS);
+        lda.run();
+        System.out.println(lda.computePerplexity(dataset));
+        List<List<Pair<String, Double>>> unfilteredTopics = new ArrayList<>();
+        for (int t = 0; t < lda.getNumTopics(); ++t) {
+            List<Pair<String, Double>> topic = new ArrayList<>();
+            Set<String> topicCards = new HashSet<>();
+            List<Pair<String, Double>> highRankVocabs = lda.getVocabsSortedByPhi(t);
+            unfilteredTopics.add(highRankVocabs);
+        }
+        return unfilteredTopics;
+    }
+
+    public static boolean topicContains(String card, List<Pair<String, Double>> topic){
+        for(Pair<String,Double> pair:topic){
+            if(pair.getLeft().equals(card)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public static HashMap<String,List<Map.Entry<PaperCard,Integer>>> initializeCommanderFormat(){

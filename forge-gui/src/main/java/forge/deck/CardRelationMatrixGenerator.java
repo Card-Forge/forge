@@ -36,9 +36,8 @@ public final class CardRelationMatrixGenerator {
 
     public static boolean initialize(){
         List<String> formatStrings = new ArrayList<>();
-        formatStrings.add(FModel.getFormats().getStandard().getName());
-        ldaPools.put(FModel.getFormats().getStandard().getName(),CardThemedLDAIO.loadLDA(FModel.getFormats().getStandard().getName()));
-        formatStrings.add(FModel.getFormats().getModern().getName());
+/*        formatStrings.add(FModel.getFormats().getStandard().getName());
+        formatStrings.add(FModel.getFormats().getModern().getName());*/
         formatStrings.add(DeckFormat.Commander.toString());
 
         for (String formatString : formatStrings){
@@ -46,7 +45,6 @@ public final class CardRelationMatrixGenerator {
                 return false;
             }
         }
-
         return true;
     }
 

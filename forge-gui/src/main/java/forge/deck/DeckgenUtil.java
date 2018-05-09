@@ -31,6 +31,7 @@ import forge.util.Lang;
 import forge.util.MyRandom;
 import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.awt.print.Paper;
 import java.util.*;
@@ -134,9 +135,10 @@ public class DeckgenUtil {
         final boolean isForAI = true;
         Set<String> uniqueCards = new HashSet<>();
         List<PaperCard> selectedCards = new ArrayList<>();
-        List<List<String>> cardArchetypes = CardRelationLDAGenerator.ldaPools.get(FModel.getFormats().getStandard().getName()).get(card.getName());
-        for(List<String> archetype:cardArchetypes){
-            for(String cardName:archetype){
+        List<List<Pair<String, Double>>> cardArchetypes = CardRelationLDAGenerator.ldaPools.get(FModel.getFormats().getStandard().getName()).get(card.getName());
+        for(List<Pair<String, Double>> archetype:cardArchetypes){
+            for(Pair<String, Double> cardPair:archetype){
+                String cardName = cardPair.getLeft();
                 uniqueCards.add(cardName);
             }
         }
@@ -347,11 +349,11 @@ public class DeckgenUtil {
      * @return
      */
     public static Deck buildLDACardGenDeck(PaperCard card,GameFormat format, boolean isForAI){
-
-        List<List<String>> preSelectedCardLists = CardRelationLDAGenerator.ldaPools.get(format.getName()).get(card.getName());
-        List<String> preSelectedCardNames = preSelectedCardLists.get(MyRandom.getRandom().nextInt(preSelectedCardLists.size()));
+        List<List<Pair<String, Double>>> preSelectedCardLists = CardRelationLDAGenerator.ldaPools.get(format.getName()).get(card.getName());
+        List<Pair<String, Double>> preSelectedCardNames = preSelectedCardLists.get(MyRandom.getRandom().nextInt(preSelectedCardLists.size()));
         List<PaperCard> selectedCards = new ArrayList<>();
-        for(String name:preSelectedCardNames){
+        for(Pair<String, Double> pair:preSelectedCardNames){
+            String name = pair.getLeft();
             PaperCard cardToAdd = StaticData.instance().getCommonCards().getUniqueByName(name);
             //for(int i=0; i<1;++i) {
                 if(!cardToAdd.getName().equals(card.getName())) {
@@ -709,9 +711,10 @@ public class DeckgenUtil {
         if(isCardGen){
             if(format.equals(DeckFormat.Brawl)){//TODO: replace with actual Brawl based data
                 Set<String> uniqueCards = new HashSet<>();
-                List<List<String>> cardArchetypes = CardRelationLDAGenerator.ldaPools.get(FModel.getFormats().getStandard().getName()).get(commander.getName());
-                for(List<String> archetype:cardArchetypes){
-                    for(String cardName:archetype){
+                List<List<Pair<String, Double>>> cardArchetypes = CardRelationLDAGenerator.ldaPools.get(FModel.getFormats().getStandard().getName()).get(commander.getName());
+                for(List<Pair<String, Double>> archetype:cardArchetypes){
+                    for(Pair<String, Double> cardPair:archetype){
+                        String cardName = cardPair.getLeft();
                         uniqueCards.add(cardName);
                     }
                 }

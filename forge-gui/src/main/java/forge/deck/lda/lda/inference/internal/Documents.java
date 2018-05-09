@@ -42,8 +42,8 @@ class Documents {
     
     List<Vocabulary> getVocabularyList(int docID, BagOfWords bow, Vocabularies vocabs) {
         assert docID > 0 && bow != null && vocabs != null;
-        System.out.println(docID);
-        System.out.println(bow.getWords(docID).toString());
+        //System.out.println(docID);
+        //System.out.println(bow.getWords(docID).toString());
         return bow.getWords(docID).stream()
                                   .map(id -> vocabs.get(id))
                                   .collect(Collectors.toList());

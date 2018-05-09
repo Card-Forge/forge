@@ -201,7 +201,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         // extras.
         double avCMC=getAverageCMC(deckList);
         int maxCMC=getMaxCMC(deckList);
-        if (deckList.size() == numSpellsNeeded && avCMC < 4) {
+        if (deckList.size() <= numSpellsNeeded && avCMC < 4) {
             addLowCMCCard();
             if(targetSize>60){
                 addLowCMCCard();
@@ -308,12 +308,12 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
     protected void generateTargetCMCs(){
         targetCMCs = new HashMap<>();
-        targetCMCs.put(1,Math.round((MyRandom.getRandom().nextInt(4)+2)*targetSize/60));//2
-        targetCMCs.put(2,Math.round((MyRandom.getRandom().nextInt(5)+5)*targetSize/60));//6
-        targetCMCs.put(3,Math.round((MyRandom.getRandom().nextInt(5)+6)*targetSize/60));//7
-        targetCMCs.put(4,Math.round((MyRandom.getRandom().nextInt(3)+3)*targetSize/60));//4
-        targetCMCs.put(5,Math.round((MyRandom.getRandom().nextInt(3)+3)*targetSize/60));//3
-        targetCMCs.put(6,Math.round((MyRandom.getRandom().nextInt(3)+1)*targetSize/60));//2
+        targetCMCs.put(1,Math.round((MyRandom.getRandom().nextInt(8)+2)*targetSize/60));//2
+        targetCMCs.put(2,Math.round((MyRandom.getRandom().nextInt(12)+5)*targetSize/60));//6
+        targetCMCs.put(3,Math.round((MyRandom.getRandom().nextInt(8)+6)*targetSize/60));//7
+        targetCMCs.put(4,Math.round((MyRandom.getRandom().nextInt(5)+3)*targetSize/60));//4
+        targetCMCs.put(5,Math.round((MyRandom.getRandom().nextInt(4)+3)*targetSize/60));//3
+        targetCMCs.put(6,Math.round((MyRandom.getRandom().nextInt(4)+1)*targetSize/60));//2
 
         while(sumMapValues(targetCMCs) < numSpellsNeeded){
             int randomKey = MyRandom.getRandom().nextInt(6)+1;
