@@ -1,2 +1,5 @@
+- Planar Conquest: Ixalan -
+A new plane is available in Planar Conquest mode which is supported on mobile Forge. This plane is contributed by Austinio and is based on the Ixalan block. It consists of 45 non-variant, Commander, and Planeswalker events and contains cards from Ixalan and Rivals of Ixalan. This is our first plane which was created using AI-assisted deck generation and optimization.
+
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.
