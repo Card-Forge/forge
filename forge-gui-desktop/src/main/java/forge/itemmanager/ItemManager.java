@@ -719,6 +719,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
      */
     @Override
     public void addItem(final T item, final int qty) {
+        if (this.isInfinite()) {
+            return;
+        }
         this.pool.add(item, qty);
         if (this.isUnfiltered()) {
             this.model.addItem(item, qty);
@@ -736,6 +739,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
      */
     @Override
     public void addItems(final Iterable<Entry<T, Integer>> itemsToAdd) {
+        if (this.isInfinite()) {
+            return;
+        }
         this.pool.addAll(itemsToAdd);
         if (this.isUnfiltered()) {
             this.model.addItems(itemsToAdd);
