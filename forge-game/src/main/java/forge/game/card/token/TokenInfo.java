@@ -117,11 +117,7 @@ public class TokenInfo {
 
         // TODO - most tokens mana cost is 0, this needs to be fixed
         // c.setManaCost(manaCost);
-        if (!color.isEmpty()) {
-            c.setColor(color); // ideally, the token color would be explicitly set at this point
-        } else {
-            c.setColor(manaCost); // FIXME: otherwise, try to deduce from mana cost? Does this ever work for tokens?
-        }
+        c.setColor(color.isEmpty() ? manaCost : color);
         c.setToken(true);
 
         for (final String t : types) {
