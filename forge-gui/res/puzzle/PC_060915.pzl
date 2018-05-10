@@ -11,7 +11,7 @@ ActivePhase=Main1
 HumanLife=9
 AILife=6
 humanhand=Mountain|Set:M15; Bone Splinters|Set:MM2; Brute Force|Set:MM2; Stormblood Berserker|Set:MM2; Goblin War Paint|Set:MM2; Chimeric Mass|Set:MM2
-humanbattlefield=Swamp|Set:M15; Swamp|Set:M15; Mountain|Set:M15; Mountain|Set:M15|Tapped; Rakdos Carnarium; Mortarpod|Attaching:420|Set:MM2; t:Germ,P:0,T:0,Cost:no cost,Types:Creature-Germ,Keywords:,Image:b_0_0_germ|Id:420; Sickle Ripper|Set:MM2; Necroskitter|Set:MM2
+humanbattlefield=Swamp|Set:M15; Swamp|Set:M15; Mountain|Set:M15; Mountain|Set:M15|Tapped; Rakdos Carnarium; Mortarpod|Attaching:420|Set:MM2; t:Germ,P:0,T:0,Cost:no cost,Color:B,Types:Creature-Germ,Keywords:,Image:b_0_0_germ|Id:420; Sickle Ripper|Set:MM2; Necroskitter|Set:MM2
 
 humangraveyard=
 humanlibrary=
