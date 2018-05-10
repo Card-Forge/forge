@@ -447,7 +447,7 @@ public class ComputerUtilCost {
         // Check for stuff like Nether Void
         int extraManaNeeded = 0;
         if (sa instanceof Spell) {
-            final boolean cannotBeCountered = CardFactoryUtil.isCounterable(sa.getHostCard());
+            final boolean cannotBeCountered = !CardFactoryUtil.isCounterable(sa.getHostCard());
             for (Card c : player.getGame().getCardsIn(ZoneType.Battlefield)) {
                 final String snem = c.getSVar("AI_SpellsNeedExtraMana");
                 if (!StringUtils.isBlank(snem)) {
