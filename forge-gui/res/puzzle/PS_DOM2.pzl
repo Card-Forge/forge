@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Dominaria #02
+URL:http://www.possibilitystorm.com/wp-content/uploads/2018/05/061.DOM2_.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Your opponent has no cards in hand and no mana available, but can activate available creature abilities otherwise.
+[state]
+humanlife=20
+ailife=3
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Consuming Fervor;Caught in the Brights;Giant Spectacle;Danitha Capashen, Paragon;Frenzied Rage
+humanbattlefield=Valduk, Keeper of the Flame;Champion of the Flame;Mountain|Set:DOM;Mountain|Set:DOM;Mountain|Set:DOM;Plains|Set:DOM;Plains|Set:DOM
+aibattlefield=Headwater Sentries;Merfolk Mistbinder;t:Merfolk,P:1,T:1,Cost:no cost,Color:U,Types:Creature-Merfolk,Keywords:Hexproof,Image:u_1_1_merfolk_xln;t:Merfolk,P:1,T:1,Cost:no cost,Types:Creature-Merfolk,Color:U,Keywords:Hexproof,Image:u_1_1_merfolk_xln;Kumena, Tyrant of Orazca
