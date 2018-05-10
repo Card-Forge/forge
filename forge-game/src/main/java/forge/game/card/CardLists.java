@@ -236,11 +236,19 @@ public class CardLists {
         return CardLists.filter(cardList, CardPredicates.isTargetableBy(source));
     }
 
-    public static CardCollection getKeyword(Iterable<Card> cardList, String keyword) {
+    public static CardCollection getKeyword(Iterable<Card> cardList, final String keyword) {
+        return CardLists.filter(cardList, CardPredicates.hasKeyword(keyword));
+    }
+
+    public static CardCollection getKeyword(Iterable<Card> cardList, final Keyword keyword) {
         return CardLists.filter(cardList, CardPredicates.hasKeyword(keyword));
     }
 
     public static CardCollection getNotKeyword(Iterable<Card> cardList, String keyword) {
+        return CardLists.filter(cardList, Predicates.not(CardPredicates.hasKeyword(keyword)));
+    }
+
+    public static CardCollection getNotKeyword(Iterable<Card> cardList, final Keyword keyword) {
         return CardLists.filter(cardList, Predicates.not(CardPredicates.hasKeyword(keyword)));
     }
 

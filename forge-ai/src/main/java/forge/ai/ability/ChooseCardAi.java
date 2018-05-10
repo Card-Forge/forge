@@ -22,6 +22,7 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerPredicates;
@@ -126,8 +127,8 @@ public class ChooseCardAi extends SpellAbilityAi {
         } else if (aiLogic.equals("Duneblast")) {
             CardCollection aiCreatures = ai.getCreaturesInPlay();
             CardCollection oppCreatures = ComputerUtil.getOpponentFor(ai).getCreaturesInPlay();
-            aiCreatures = CardLists.getNotKeyword(aiCreatures, "Indestructible");
-            oppCreatures = CardLists.getNotKeyword(oppCreatures, "Indestructible");
+            aiCreatures = CardLists.getNotKeyword(aiCreatures, Keyword.INDESTRUCTIBLE);
+            oppCreatures = CardLists.getNotKeyword(oppCreatures, Keyword.INDESTRUCTIBLE);
 
             // Use it as a wrath, when the human creatures threat the ai's life
             if (aiCreatures.isEmpty() && ComputerUtilCombat.sumDamageIfUnblocked(oppCreatures, ai) >= ai.getLife()) {
@@ -261,7 +262,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             }
         } else if (logic.equals("Duneblast")) {
             CardCollectionView aiCreatures = ai.getCreaturesInPlay();
-            aiCreatures = CardLists.getNotKeyword(aiCreatures, "Indestructible");
+            aiCreatures = CardLists.getNotKeyword(aiCreatures, Keyword.INDESTRUCTIBLE);
 
             if (aiCreatures.isEmpty()) {
                 return null;

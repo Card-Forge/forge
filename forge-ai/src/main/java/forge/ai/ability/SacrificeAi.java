@@ -8,6 +8,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
@@ -82,7 +83,7 @@ public class SacrificeAi extends SpellAbilityAi {
             if (!destroy) {
                 list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(sa));
             } else {
-                if (!CardLists.getKeyword(list, "Indestructible").isEmpty()) {
+                if (!CardLists.getKeyword(list, Keyword.INDESTRUCTIBLE).isEmpty()) {
                     // human can choose to destroy indestructibles
                     return false;
                 }

@@ -84,7 +84,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         if (power > 0) {
             if (c.hasKeyword(Keyword.DOUBLE_STRIKE)) {
                 value += addValue(10 + (power * 15), "ds");
-            } else if (c.hasKeyword("First Strike")) {
+            } else if (c.hasKeyword(Keyword.FIRST_STRIKE)) {
                 value += addValue(10 + (power * 5), "fs");
             }
             if (c.hasKeyword(Keyword.DEATHTOUCH)) {
@@ -116,7 +116,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         value += addValue(c.getKeywordMagnitude(Keyword.ABSORB) * 11, "absorb");
 
         // Keywords that may produce temporary or permanent buffs over time
-        if (c.hasKeyword("Prowess")) {
+        if (c.hasKeyword(Keyword.PROWESS)) {
             value += addValue(5, "prowess");
         }
         if (c.hasKeyword(Keyword.OUTLAST)) {
@@ -145,7 +145,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         } else if (c.hasKeyword(Keyword.SHROUD)) {
             value += addValue(30, "shroud");
         }
-        if (c.hasStartOfKeyword("Protection")) {
+        if (c.hasKeyword(Keyword.PROTECTION)) {
             value += addValue(20, "protection");
         }
 
@@ -186,7 +186,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value -= subValue(30, "cupkeep");
         } else if (c.hasStartOfKeyword("UpkeepCost")) {
             value -= subValue(20, "sac-unless");
-        } else if (c.hasStartOfKeyword("Echo") && c.cameUnderControlSinceLastUpkeep()) {
+        } else if (c.hasKeyword(Keyword.ECHO) && c.cameUnderControlSinceLastUpkeep()) {
             value -= subValue(10, "echo-unpaid");
         }
     

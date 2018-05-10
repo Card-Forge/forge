@@ -659,7 +659,7 @@ public class CombatUtil {
             return 0;
         }
         // TODO: remove CantBeBlockedByAmount LT2
-        if (attacker.hasKeyword("CantBeBlockedByAmount LT2") || attacker.hasKeyword("Menace")) {
+        if (attacker.hasKeyword("CantBeBlockedByAmount LT2") || attacker.hasKeyword(Keyword.MENACE)) {
             return 2;
         } else if (attacker.hasKeyword("CantBeBlockedByAmount LT3")) {
             return 3;
@@ -703,7 +703,7 @@ public class CombatUtil {
                 for (final Card attacker : attackers) {
                     if (CombatUtil.canBlock(attacker, blocker, combat)) {
                         boolean must = true;
-                        if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") || attacker.hasKeyword("Menace")) {
+                        if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") || attacker.hasKeyword(Keyword.MENACE)) {
                             final List<Card> possibleBlockers = Lists.newArrayList(defendersArmy);
                             possibleBlockers.remove(blocker);
                             if (!CombatUtil.canBeBlocked(attacker, possibleBlockers, combat)) {
@@ -807,7 +807,7 @@ public class CombatUtil {
         for (final Card attacker : attackersWithLure) {
             if (CombatUtil.canBeBlocked(attacker, combat, defender) && CombatUtil.canBlock(attacker, blocker)) {
                 boolean canBe = true;
-                if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") || attacker.hasKeyword("Menace")) {
+                if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") || attacker.hasKeyword(Keyword.MENACE)) {
                     final List<Card> blockers = combat.getDefenderPlayerByAttacker(attacker).getCreaturesInPlay();
                     blockers.remove(blocker);
                     if (!CombatUtil.canBeBlocked(attacker, blockers, combat)) {
@@ -825,7 +825,7 @@ public class CombatUtil {
                 if (CombatUtil.canBeBlocked(attacker, combat, defender) && CombatUtil.canBlock(attacker, blocker)
                         && combat.isAttacking(attacker)) {
                     boolean canBe = true;
-                    if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") || attacker.hasKeyword("Menace")) {
+                    if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") || attacker.hasKeyword(Keyword.MENACE)) {
                         final List<Card> blockers = combat.getDefenderPlayerByAttacker(attacker).getCreaturesInPlay();
                         blockers.remove(blocker);
                         if (!CombatUtil.canBeBlocked(attacker, blockers, combat)) {
@@ -1004,7 +1004,7 @@ public class CombatUtil {
             return false;
         }
 
-        if ((attacker.hasKeyword("Creatures with power greater than CARDNAME's power can't block it.") || attacker.hasKeyword("Skulk"))
+        if ((attacker.hasKeyword("Creatures with power greater than CARDNAME's power can't block it.") || attacker.hasKeyword(Keyword.SKULK))
             && attacker.getNetPower() < blocker.getNetPower()) {
             return false;
         }

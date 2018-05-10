@@ -9,6 +9,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostRemoveCounter;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -170,7 +171,7 @@ public class ManaEffectAi extends SpellAbilityAi {
             }
             testSaNoCost.setActivatingPlayer(ai);
             if (((PlayerControllerAi)ai.getController()).getAi().canPlaySa(testSaNoCost) == AiPlayDecision.WillPlay) {
-                if (testSa.getHostCard().isPermanent() && !testSa.getHostCard().hasKeyword("Haste") 
+                if (testSa.getHostCard().isPermanent() && !testSa.getHostCard().hasKeyword(Keyword.HASTE)
                     && !ai.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
                     // AI will waste a ritual in Main 1 unless the casted permanent is a haste creature
                     continue;

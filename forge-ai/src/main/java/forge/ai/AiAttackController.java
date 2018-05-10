@@ -30,6 +30,7 @@ import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.combat.GlobalAttackRestrictions;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -201,8 +202,11 @@ public class AiAttackController {
         if (ComputerUtilCombat.poisonIfUnblocked(attacker, opp) > 0) {
             return true;
         }
-        if (this.attackers.size() == 1 && attacker.hasKeyword("Exalted") 
-        		&& ComputerUtilCombat.predictDamageTo(opp, 1, attacker, true) > 0) {
+
+        // TODO check if that makes sense
+        int exalted = ai.countExaltedBonus();
+        if (this.attackers.size() == 1 && exalted > 0
+                && ComputerUtilCombat.predictDamageTo(opp, exalted, attacker, true) > 0) {
             return true;
         }
 
@@ -316,7 +320,7 @@ public class AiAttackController {
                 }
                 continue;
             }
-            if (c.hasKeyword("Vigilance")) {
+            if (c.hasKeyword(Keyword.VIGILANCE)) {
                 vigilantes.add(c);
                 notNeededAsBlockers.remove(c); // they will be re-added later
                 if (canBlockAnAttacker(c, opponentsAttackers, false)) {
@@ -543,7 +547,7 @@ public class AiAttackController {
         
         int trampleDamage = 0;
         for (Card attacker : blockedAttackers) {
-            if (attacker.hasKeyword("Trample")) {
+            if (attacker.hasKeyword(Keyword.TRAMPLE)) {
                 int damage = ComputerUtilCombat.getAttack(attacker);
                 for (Card blocker : this.blockers) {
                     if (CombatUtil.canBlock(attacker, blocker)) {
@@ -729,20 +733,15 @@ public class AiAttackController {
         
         // Exalted
         if (combat.getAttackers().isEmpty()) {
-            boolean exalted = false;
-            int exaltedCount = 0;
-            for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
-                if (c.getName().equals("Rafiq of the Many") || c.getName().equals("Battlegrace Angel")) {
-                    exalted = true;
-                    break;
-                }
-                if (c.getName().equals("Finest Hour") && ai.getGame().getPhaseHandler().isFirstCombat()) {
-                    exalted = true;
-                    break;
-                }
-                if (c.hasKeyword("Exalted")) {
-                    exaltedCount++;
-                    if (exaltedCount > 2) {
+            boolean exalted = ai.countExaltedBonus() > 2;
+
+            if (!exalted) {
+                for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+                    if (c.getName().equals("Rafiq of the Many") || c.getName().equals("Battlegrace Angel")) {
+                        exalted = true;
+                        break;
+                    }
+                    if (c.getName().equals("Finest Hour") && ai.getGame().getPhaseHandler().isFirstCombat()) {
                         exalted = true;
                         break;
                     }
@@ -1061,7 +1060,7 @@ public class AiAttackController {
     public final static int getAttack(final Card c) {
         int n = c.getNetCombatDamage();
 
-        if (c.hasKeyword("Double Strike")) {
+        if (c.hasKeyword(Keyword.DOUBLE_STRIKE)) {
             n *= 2;
         }
 
@@ -1092,7 +1091,7 @@ public class AiAttackController {
 
         // Is it a creature that has a more valuable ability with a tap cost than what it can do by attacking?
         if ((attacker.hasSVar("NonCombatPriority"))
-                && (!attacker.hasKeyword("Vigilance"))) {
+                && (!attacker.hasKeyword(Keyword.VIGILANCE))) {
             // For each level of priority, enemy has to have life as much as the creature's power
             // so a priority of 4 means the creature will not attack unless it can defeat that player in 4 successful attacks.
             // the lower the priroity, the less willing the AI is to use the creature for attacking.
@@ -1144,7 +1143,7 @@ public class AiAttackController {
                     && CombatUtil.canBlock(attacker, defender)) {
                 numberOfPossibleBlockers += 1;
                 if (isWorthLessThanAllKillers && ComputerUtilCombat.canDestroyAttacker(ai, attacker, defender, combat, false)
-                        && !(attacker.hasKeyword("Undying") && attacker.getCounters(CounterType.P1P1) == 0)) {
+                        && !(attacker.hasKeyword(Keyword.UNDYING) && attacker.getCounters(CounterType.P1P1) == 0)) {
                     canBeKilledByOne = true; // there is a single creature on the battlefield that can kill the creature
                     // see if the defending creature is of higher or lower
                     // value. We don't want to attack only to lose value
@@ -1160,14 +1159,11 @@ public class AiAttackController {
                     if (defender.getSVar("HasCombatEffect").equals("TRUE") || defender.getSVar("HasBlockEffect").equals("TRUE")) {
                         canKillAllDangerous = false;
                     } else {
-                        for (KeywordInterface inst : defender.getKeywords()) {
-                            String keyword = inst.getOriginal();
-                            if (keyword.equals("Wither") || keyword.equals("Infect") || keyword.equals("Lifelink")) {
-                                canKillAllDangerous = false;
-                                break;
-                                // there is a creature that can survive an attack from this creature
-                                // and combat will have negative effects
-                            }
+                        if (defender.hasKeyword(Keyword.WITHER) || defender.hasKeyword(Keyword.INFECT)
+                                || defender.hasKeyword(Keyword.LIFELINK)) {
+                            canKillAllDangerous = false;
+                            // there is a creature that can survive an attack from this creature
+                            // and combat will have negative effects
                         }
 
                         // Check if maybe we are too reckless in adding this attacker
@@ -1191,7 +1187,7 @@ public class AiAttackController {
             }
         }
         
-        if (!attacker.hasKeyword("Vigilance") && ComputerUtilCard.canBeKilledByRoyalAssassin(ai, attacker)) {
+        if (!attacker.hasKeyword(Keyword.VIGILANCE) && ComputerUtilCard.canBeKilledByRoyalAssassin(ai, attacker)) {
             canKillAllDangerous = false;
             canBeKilled = true;
             canBeKilledByOne = true;
@@ -1277,7 +1273,7 @@ public class AiAttackController {
                 // creature would leave the battlefield
                 // no pain in exerting it
                 shouldExert = true;
-            } else if (c.hasKeyword("Vigilance")) {
+            } else if (c.hasKeyword(Keyword.VIGILANCE)) {
                 // Free exert - why not?
                 shouldExert = true;
             }

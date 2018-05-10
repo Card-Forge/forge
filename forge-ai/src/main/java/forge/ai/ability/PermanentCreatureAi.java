@@ -80,7 +80,7 @@ public class PermanentCreatureAi extends PermanentAi {
         }
 
         // save cards with flash for surprise blocking
-        if (card.hasKeyword("Flash")
+        if (card.withFlash(ai)
                 && (ai.isUnlimitedHandSize() || ai.getCardsIn(ZoneType.Hand).size() <= ai.getMaxHandSize()
                         || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
                 && ai.getManaPool().totalMana() <= 0

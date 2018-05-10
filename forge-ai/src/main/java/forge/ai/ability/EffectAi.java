@@ -17,6 +17,7 @@ import forge.game.GlobalRuleChange;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.combat.CombatUtil;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -138,7 +139,8 @@ public class EffectAi extends SpellAbilityAi {
             	final int count = CardLists.count(ai.getCardsIn(ZoneType.Hand), new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        return (c.isInstant() || c.isSorcery()) && !c.hasKeyword("Rebound") && ComputerUtil.hasReasonToPlayCardThisTurn(ai, c);
+                        return (c.isInstant() || c.isSorcery()) && !c.hasKeyword(Keyword.REBOUND)
+                                && ComputerUtil.hasReasonToPlayCardThisTurn(ai, c);
                     }
                 });
 

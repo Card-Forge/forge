@@ -530,7 +530,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         //String additionalLog = "";
         source.addDealtDamageToPlayerThisTurn(getName(), amount);
 
-        boolean infect = source.hasKeyword("Infect")
+        boolean infect = source.hasKeyword(Keyword.INFECT)
                 || hasKeyword("All damage is dealt to you as though its source had infect.");
 
         if (infect) {

@@ -42,6 +42,7 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
+import forge.game.keyword.Keyword;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -159,15 +160,15 @@ public class AiController {
                 if ("NonActive".equals(curse) && !player.equals(game.getPhaseHandler().getPlayerTurn())) {
                     return true;
                 } else if ("DestroyCreature".equals(curse) && sa.isSpell() && host.isCreature()
-                        && !sa.getHostCard().hasKeyword("Indestructible")) {
+                        && !sa.getHostCard().hasKeyword(Keyword.INDESTRUCTIBLE)) {
                     return true;
                 } else if ("CounterEnchantment".equals(curse) && sa.isSpell() && host.isEnchantment()
-                        && !sa.getHostCard().hasKeyword("CARDNAME can't be countered.")) {
+                        && CardFactoryUtil.isCounterable(host)) {
                     return true;
-                } else if ("ChaliceOfTheVoid".equals(curse) && sa.isSpell() && !host.hasKeyword("CARDNAME can't be countered.")
+                } else if ("ChaliceOfTheVoid".equals(curse) && sa.isSpell() && CardFactoryUtil.isCounterable(host)
                         && host.getCMC() == c.getCounters(CounterType.CHARGE)) {
                     return true;
-                }  else if ("BazaarOfWonders".equals(curse) && sa.isSpell() && !host.hasKeyword("CARDNAME can't be countered.")) {
+                }  else if ("BazaarOfWonders".equals(curse) && sa.isSpell() && CardFactoryUtil.isCounterable(host)) {
                     for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
                         if (!card.isToken() && card.getName().equals(host.getName())) {
                             return true;
@@ -793,7 +794,7 @@ public class AiController {
                     }
                 }
                 // if the profile specifies it, deprioritize Storm spells in an attempt to build up storm count
-                if (source.hasKeyword("Storm") && ai.getController() instanceof PlayerControllerAi) {
+                if (source.hasKeyword(Keyword.STORM) && ai.getController() instanceof PlayerControllerAi) {
                     p -= (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.PRIORITY_REDUCTION_FOR_STORM_SPELLS));
                 }
             }
@@ -1335,7 +1336,7 @@ public class AiController {
                 continue;
             }
 
-            if (sa.getHostCard().hasKeyword("Storm") 
+            if (sa.getHostCard().hasKeyword(Keyword.STORM)
                     && sa.getApi() != ApiType.Counter // AI would suck at trying to deliberately proc a Storm counterspell
                     && CardLists.filter(player.getCardsIn(ZoneType.Hand), Predicates.not(Predicates.or(CardPredicates.Presets.LANDS, CardPredicates.hasKeyword("Storm")))).size() > 0) {
                 if (game.getView().getStormCount() < this.getIntProperty(AiProps.MIN_COUNT_FOR_STORM_SPELLS)) {
@@ -1563,11 +1564,11 @@ public class AiController {
                 // and exaclty one counter of the specifice type gets high priority to keep the card
                 if (allies.contains(crd.getController())) {
                     // except if its a Chronozoa, because it WANTS to be removed to make more
-                    if (crd.hasKeyword("Vanishing") && !"Chronozoa".equals(crd.getName())) {
+                    if (crd.hasKeyword(Keyword.VANISHING) && !"Chronozoa".equals(crd.getName())) {
                         if (crd.getCounters(CounterType.TIME) == 1) {
                             return CounterType.TIME;
                         }
-                    } else if (crd.hasKeyword("Fading")) {
+                    } else if (crd.hasKeyword(Keyword.FADING)) {
                         if (crd.getCounters(CounterType.FADE) == 1) {
                             return CounterType.FADE;
                         }

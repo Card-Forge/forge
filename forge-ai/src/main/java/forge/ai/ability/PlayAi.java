@@ -11,6 +11,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.Spell;
@@ -74,7 +75,7 @@ public class PlayAi extends SpellAbilityAi {
             return ComputerUtil.targetPlayableSpellCard(ai, cards, sa, sa.hasParam("WithoutManaCost"));                
         }
 
-        if (source != null && source.hasKeyword("Hideaway") && source.hasRemembered()) {
+        if (source != null && source.hasKeyword(Keyword.HIDEAWAY) && source.hasRemembered()) {
             // AI is not very good at playing non-permanent spells this way, at least yet
             // (might be possible to enable it for Sorceries in Main1/Main2 if target is available,
             // but definitely not for most Instants)

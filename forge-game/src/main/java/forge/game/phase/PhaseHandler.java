@@ -33,6 +33,7 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.event.*;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
@@ -507,7 +508,7 @@ public class PhaseHandler implements java.io.Serializable {
                 }
 
                 for (final Card attacker : combat.getAttackers()) {
-                    final boolean shouldTapForAttack = !attacker.hasKeyword("Vigilance") && !attacker.hasKeyword("Attacking doesn't cause CARDNAME to tap.");
+                    final boolean shouldTapForAttack = !attacker.hasKeyword(Keyword.VIGILANCE) && !attacker.hasKeyword("Attacking doesn't cause CARDNAME to tap.");
                     if (shouldTapForAttack) {
                         // set tapped to true without firing triggers because it may affect propaganda costs
                         attacker.setTapped(true);
