@@ -21,6 +21,6 @@ humanprecast=Pirate's Prize:DBTreasure
 aihand=
 ailibrary=
 aigraveyard=
-aibattlefield=Sun-Crowned Hunters;Sun-Crowned Hunters;t:Merfolk,P:1,T:1,Cost:no cost,Types:Creature-Merfolk,Keywords:Hexproof,Image:u_1_1_merfolk_xln
+aibattlefield=Sun-Crowned Hunters;Sun-Crowned Hunters;t:Merfolk,P:1,T:1,Cost:no cost,Color:U,Types:Creature-Merfolk,Keywords:Hexproof,Image:u_1_1_merfolk_xln
 aiexile=
 aicommand=

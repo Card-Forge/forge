@@ -11,4 +11,4 @@ HumanLife=2
 AILife=14
 humanhand=Wings of Velis Vel;Ebony Charm;Shrivel;Twin Bolt
 humanbattlefield=Thornbow Archer|Id:5;Crown of Suspicion|Attaching:5;Mountain;Mountain;Island;Island;Swamp;Swamp;Swamp;Plague Witch;Scarred Vinebreeder
-aibattlefield=Slippery Bogle;Silhana Ledgewalker;t:Plant,P:0,T:1,Cost:no cost,Types:Creature-Plant,Keywords:,Image:g_0_1_plant;Valeron Outlander
+aibattlefield=Slippery Bogle;Silhana Ledgewalker;t:Plant,P:0,T:1,Cost:no cost,Color:G,Types:Creature-Plant,Keywords:,Image:g_0_1_plant;Valeron Outlander
