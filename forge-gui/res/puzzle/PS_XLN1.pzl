@@ -19,6 +19,6 @@ humancommand=
 aihand=
 ailibrary=
 aigraveyard=
-aibattlefield=Oketra the True;Adorned Pouncer;Adorned Pouncer;t:Warrior,P:1,T:1,Cost:no cost,Types:Creature-Warrior,Keywords:Vigilance,Image:w_1_1_warrior_akh
+aibattlefield=Oketra the True;Adorned Pouncer;Adorned Pouncer;t:Warrior,P:1,T:1,Cost:no cost,Color:W,Types:Creature-Warrior,Keywords:Vigilance,Image:w_1_1_warrior_akh
 aiexile=
 aicommand=
