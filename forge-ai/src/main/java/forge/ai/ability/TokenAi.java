@@ -14,6 +14,7 @@ import forge.game.combat.Combat;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPutCounter;
 import forge.game.cost.CostRemoveCounter;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -200,29 +201,29 @@ public class TokenAi extends SpellAbilityAi {
                 if (sa.canTarget(ai)) {
                     sa.getTargets().add(ai);
                 } else {
-                	//Flash Foliage
-        	        CardCollection list = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponents());
-        	        list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source, sa);
-        	        list = CardLists.getTargetableCards(list, sa);
-        	        CardCollection betterList = CardLists.filter(list, new Predicate<Card>() {
-        	            @Override
-        	            public boolean apply(Card c) {
-        	                return c.getLethalDamage() == 1;
-        	            }
-        	        });
-        	        if (!betterList.isEmpty()) {
-        	        	list = betterList;
-        	        }
-        	        betterList = CardLists.getNotKeyword(list, "Trample");
-        	        if (!betterList.isEmpty()) {
-        	        	list = betterList;
-        	        }
-        	        if (!list.isEmpty()) {
-        	        	sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(list));
-        	        } else {
-        	        	return false;
-        	        }
-                    
+                    // Flash Foliage
+                    CardCollection list = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield),
+                            ai.getOpponents());
+                    list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source, sa);
+                    list = CardLists.getTargetableCards(list, sa);
+                    CardCollection betterList = CardLists.filter(list, new Predicate<Card>() {
+                        @Override
+                        public boolean apply(Card c) {
+                            return c.getLethalDamage() == 1;
+                        }
+                    });
+                    if (!betterList.isEmpty()) {
+                        list = betterList;
+                    }
+                    betterList = CardLists.getNotKeyword(list, Keyword.TRAMPLE);
+                    if (!betterList.isEmpty()) {
+                        list = betterList;
+                    }
+                    if (!list.isEmpty()) {
+                        sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(list));
+                    } else {
+                        return false;
+                    }
                 }
             }
         }

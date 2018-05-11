@@ -1196,7 +1196,7 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].contains("BushidoPoint")) {
-            return doXMath(c.getKeywordMagnitude("Bushido"), m, c);
+            return doXMath(c.getKeywordMagnitude(Keyword.BUSHIDO), m, c);
         }
         if (sq[0].contains("TimesKicked")) {
             return doXMath(c.getKickerMagnitude(), m, c);
@@ -4036,7 +4036,7 @@ public class CardFactoryUtil {
                         return false;
                     }
 
-                    if (this.getHostCard().isInstant() || this.getHostCard().hasKeyword("Flash")) {
+                    if (this.getHostCard().isInstant() || this.getHostCard().hasKeyword(Keyword.FLASH)) {
                         return true;
                     }
 

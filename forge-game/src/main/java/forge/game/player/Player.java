@@ -30,6 +30,7 @@ import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.event.*;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
 import forge.game.keyword.KeywordInterface;
 import forge.game.keyword.KeywordCollection.KeywordCollectionView;
@@ -529,7 +530,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         //String additionalLog = "";
         source.addDealtDamageToPlayerThisTurn(getName(), amount);
 
-        boolean infect = source.hasKeyword("Infect")
+        boolean infect = source.hasKeyword(Keyword.INFECT)
                 || hasKeyword("All damage is dealt to you as though its source had infect.");
 
         if (infect) {
@@ -1067,6 +1068,11 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     @Override
     public final boolean hasKeyword(final String keyword) {
+        return keywords.contains(keyword);
+    }
+
+    @Override
+    public final boolean hasKeyword(final Keyword keyword) {
         return keywords.contains(keyword);
     }
 
@@ -2772,5 +2778,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         
         this.updateZoneForView(com);
+    }
+
+    public final int countExaltedBonus() {
+        return CardLists.getAmountOfKeyword(this.getCardsIn(ZoneType.Battlefield), Keyword.EXALTED);
     }
 }

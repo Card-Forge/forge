@@ -23,6 +23,7 @@ import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.card.*;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
@@ -56,7 +57,6 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
     }
 
     private boolean doTgt(Player ai, SpellAbility sa, boolean mandatory) {
-        final Card source = sa.getHostCard();
         final Game game = ai.getGame();
 
         final int amount = Integer.valueOf(sa.getParam("CounterNum"));
@@ -71,7 +71,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
         }
 
         // Filter AI-specific targets if provided
-        list = ComputerUtil.filterAITgts(sa, ai, (CardCollection)list, false);
+        list = ComputerUtil.filterAITgts(sa, ai, list, false);
 
         if (sa.hasParam("CounterType")) {
             // currently only Jhoira's Timebug
@@ -125,7 +125,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
 
                 CardCollection aiM1M1List = CardLists.filter(aiList, CardPredicates.hasCounter(CounterType.M1M1));
 
-                CardCollection aiPersistList = CardLists.getKeyword(aiM1M1List, "Persist");
+                CardCollection aiPersistList = CardLists.getKeyword(aiM1M1List, Keyword.PERSIST);
                 if (!aiPersistList.isEmpty()) {
                     aiM1M1List = aiPersistList;
                 }
@@ -137,7 +137,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
 
                 // do as P1P1 part
                 CardCollection aiP1P1List = CardLists.filter(aiList, CardPredicates.hasCounter(CounterType.P1P1));
-                CardCollection aiUndyingList = CardLists.getKeyword(aiM1M1List, "Undying");
+                CardCollection aiUndyingList = CardLists.getKeyword(aiM1M1List, Keyword.UNDYING);
 
                 if (!aiUndyingList.isEmpty()) {
                     aiP1P1List = aiUndyingList;
@@ -226,9 +226,9 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
                     if (!ai.isCardInPlay("Marit Lage") || noLegendary) {
                         return CounterType.ICE;
                     }
-                } else if (tgt.hasKeyword("Undying") && options.contains(CounterType.P1P1)) {
+                } else if (tgt.hasKeyword(Keyword.UNDYING) && options.contains(CounterType.P1P1)) {
                     return CounterType.P1P1;
-                } else if (tgt.hasKeyword("Persist") && options.contains(CounterType.M1M1)) {
+                } else if (tgt.hasKeyword(Keyword.PERSIST) && options.contains(CounterType.M1M1)) {
                     return CounterType.M1M1;
                 }
 
@@ -272,9 +272,9 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
                     if (!ai.isCardInPlay("Marit Lage") || noLegendary) {
                         return false;
                     }
-                } else if (type.equals(CounterType.M1M1) && tgt.hasKeyword("Persist")) {
+                } else if (type.equals(CounterType.M1M1) && tgt.hasKeyword(Keyword.PERSIST)) {
                     return false;
-                } else if (type.equals(CounterType.P1P1) && tgt.hasKeyword("Undying")) {
+                } else if (type.equals(CounterType.P1P1) && tgt.hasKeyword(Keyword.UNDYING)) {
                     return false;
                 }
 

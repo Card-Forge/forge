@@ -51,6 +51,7 @@ import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventZone;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.replacement.ReplacementEffect;
@@ -119,7 +120,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     public final boolean isSplitSecondOnStack() {
         for(SpellAbilityStackInstance si : stack) {
-            if (si.isSpell() && si.getSourceCard().hasKeyword("Split second")) {
+            if (si.isSpell() && si.getSourceCard().hasKeyword(Keyword.SPLIT_SECOND)) {
                 return true;
             }
         }

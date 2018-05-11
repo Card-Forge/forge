@@ -14,6 +14,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -85,7 +86,7 @@ public class PumpAllAi extends PumpAiBase {
                         if (c.getNetToughness() <= -defense) {
                             return true; // can kill indestructible creatures
                         }
-                        return ((ComputerUtilCombat.getDamageToKill(c) <= -defense) && !c.hasKeyword("Indestructible"));
+                        return ((ComputerUtilCombat.getDamageToKill(c) <= -defense) && !c.hasKeyword(Keyword.INDESTRUCTIBLE));
                     }
                 }); // leaves all creatures that will be destroyed
                 human = CardLists.filter(human, new Predicate<Card>() {
@@ -94,7 +95,7 @@ public class PumpAllAi extends PumpAiBase {
                         if (c.getNetToughness() <= -defense) {
                             return true; // can kill indestructible creatures
                         }
-                        return ((ComputerUtilCombat.getDamageToKill(c) <= -defense) && !c.hasKeyword("Indestructible"));
+                        return ((ComputerUtilCombat.getDamageToKill(c) <= -defense) && !c.hasKeyword(Keyword.INDESTRUCTIBLE));
                     }
                 }); // leaves all creatures that will be destroyed
             } // -X/-X end

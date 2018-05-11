@@ -27,6 +27,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardDamageMap;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.TriggerType;
@@ -692,7 +693,7 @@ public class Combat {
                 continue;
             }
 
-            boolean trampler = attacker.hasKeyword("Trample");
+            boolean trampler = attacker.hasKeyword(Keyword.TRAMPLE);
             orderedBlockers = blockersOrderedForDamageAssignment.get(attacker);
             assignedDamage = true;
             // If the Attacker is unblocked, or it's a trampler and has 0 blockers, deal damage to defender

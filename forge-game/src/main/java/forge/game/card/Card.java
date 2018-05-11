@@ -1007,11 +1007,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final boolean hasFirstStrike() {
-        return hasKeyword("First Strike");
+        return hasKeyword(Keyword.FIRST_STRIKE);
     }
 
     public final boolean hasDoubleStrike() {
-        return hasKeyword("Double Strike");
+        return hasKeyword(Keyword.DOUBLE_STRIKE);
     }
 
     public final boolean hasSecondStrike() {
@@ -2338,11 +2338,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final boolean hasSickness() {
-        return sickness && !hasKeyword("Haste");
+        return sickness && !hasKeyword(Keyword.HASTE);
     }
 
     public final boolean isSick() {
-        return sickness && isCreature() && !hasKeyword("Haste");
+        return sickness && isCreature() && !hasKeyword(Keyword.HASTE);
     }
 
     public boolean hasBecomeTargetThisTurn() {
@@ -3218,6 +3218,15 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     @Override
+    public final boolean hasKeyword(Keyword keyword) {
+        return hasKeyword(keyword, currentState);
+    }
+
+    public final boolean hasKeyword(Keyword key, CardState state) {
+        return state.hasKeyword(key);
+    }
+
+    @Override
     public final boolean hasKeyword(String keyword) {
         return hasKeyword(keyword, currentState);
     }
@@ -3227,9 +3236,9 @@ public class Card extends GameEntity implements Comparable<Card> {
             keyword = keyword.substring(7);
         }
 
-        CountKeywordVisitor visitor = new CountKeywordVisitor(keyword);
+        HasKeywordVisitor visitor = new HasKeywordVisitor(keyword, false);
         visitKeywords(state, visitor);
-        return visitor.getCount() > 0;
+        return visitor.getResult();
     }
 
     public final void updateKeywords() {
@@ -3345,20 +3354,26 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
 
-        state.setCachedKeywords(keywords.getValues());
+        state.setCachedKeywords(keywords);
     }
     private void visitUnhiddenKeywords(CardState state, Visitor<KeywordInterface> visitor) {
         if (changedCardKeywords.isEmpty()) {
             // Fast path that doesn't involve temp allocations.
             for (KeywordInterface kw : state.getIntrinsicKeywords()) {
-                visitor.visit(kw);
+                if (!visitor.visit(kw)) {
+                    return;
+                }
             }
             for (KeywordInterface kw : extrinsicKeyword.getValues()) {
-                visitor.visit(kw);
+                if (!visitor.visit(kw)) {
+                    return;
+                }
             }
         } else {
             for (KeywordInterface kw : getUnhiddenKeywords(state)) {
-                visitor.visit(kw);
+                if (!visitor.visit(kw)) {
+                    return;
+                }
             }
         }
     }
@@ -3571,7 +3586,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     private void visitHiddenExtreinsicKeywords(Visitor<KeywordInterface> visitor) {
         for (KeywordInterface inst : hiddenExtrinsicKeyword.getValues()) {
-            visitor.visit(inst);
+            if (!visitor.visit(inst)) {
+                return;
+            }
         }
     }
 
@@ -3820,18 +3837,18 @@ public class Card extends GameEntity implements Comparable<Card> {
         return hasStartOfKeyword(keyword, currentState);
     }
     public final boolean hasStartOfKeyword(String keyword, CardState state) {
-        CountKeywordVisitor visitor = new CountKeywordVisitor(keyword, true);
+        HasKeywordVisitor visitor = new HasKeywordVisitor(keyword, true);
         visitKeywords(state, visitor);
-        return visitor.getCount() > 0;
+        return visitor.getResult();
     }
 
     public final boolean hasStartOfUnHiddenKeyword(String keyword) {
         return hasStartOfUnHiddenKeyword(keyword, currentState);
     }
     public final boolean hasStartOfUnHiddenKeyword(String keyword, CardState state) {
-        CountKeywordVisitor visitor = new CountKeywordVisitor(keyword, true);
+        HasKeywordVisitor visitor = new HasKeywordVisitor(keyword, true);
         visitUnhiddenKeywords(state, visitor);
-        return visitor.getCount() > 0;
+        return visitor.getResult();
     }
 
     public final boolean hasAnyKeyword(final Iterable<String> keywords) {
@@ -3856,25 +3873,42 @@ public class Card extends GameEntity implements Comparable<Card> {
         return visitor.getCount();
     }
 
+    public final int getAmountOfKeyword(final Keyword k) {
+        return getAmountOfKeyword(k, currentState);
+    }
+    public final int getAmountOfKeyword(final Keyword k, CardState state) {
+        return state.getCachedKeyword(k).size();
+    }
+
     // This is for keywords with a number like Bushido, Annihilator and Rampage.
     // It returns the total.
-    public final int getKeywordMagnitude(final String k) {
+    public final int getKeywordMagnitude(final Keyword k) {
         return getKeywordMagnitude(k, currentState);
     }
-    public final int getKeywordMagnitude(final String k, CardState state) {
+
+    /**
+     * use it only for real keywords and not with hidden ones
+     *
+     * @param Keyword k
+     * @param CardState state
+     * @return Int
+     */
+    public final int getKeywordMagnitude(final Keyword k, CardState state) {
         int count = 0;
-        for (final KeywordInterface inst : getKeywords(state)) {
+        for (final KeywordInterface inst : state.getCachedKeyword(k)) {
             String kw = inst.getOriginal();
-            if (kw.startsWith(k)) {
-                final String[] parse = kw.contains(":") ? kw.split(":") : kw.split(" ");
-                final String s = parse[1];
-                if (StringUtils.isNumeric(s)) {
-                   count += Integer.parseInt(s);
-                } else {
-                    String svar = StringUtils.join(parse);
-                    if (state.hasSVar(svar)) {
-                        count += AbilityUtils.calculateAmount(this, state.getSVar(svar), null);
-                    }
+            // this can't be used yet for everything because of X values in Bushido X
+            // KeywordInterface#getAmount
+            // KeywordCollection#getAmount
+
+            final String[] parse = kw.contains(":") ? kw.split(":") : kw.split(" ");
+            final String s = parse[1];
+            if (StringUtils.isNumeric(s)) {
+               count += Integer.parseInt(s);
+            } else {
+                String svar = StringUtils.join(parse);
+                if (state.hasSVar(svar)) {
+                    count += AbilityUtils.calculateAmount(this, state.getSVar(svar), null);
                 }
             }
         }
@@ -4538,7 +4572,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             final Game game = source.getGame();
 
             boolean wither = (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.alwaysWither)
-                    || source.hasKeyword("Wither") || source.hasKeyword("Infect"));
+                    || source.hasKeyword(Keyword.WITHER) || source.hasKeyword(Keyword.INFECT));
 
             if (isInPlay()) {
                 if (wither) {
@@ -4551,7 +4585,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
 
-            if (source.hasKeyword("Deathtouch") && isCreature()) {
+            if (source.hasKeyword(Keyword.DEATHTOUCH) && isCreature()) {
                 setHasBeenDealtDeathtouchDamage(true);
                 damageType = DamageType.Deathtouch;
             }
@@ -4943,7 +4977,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final boolean canBeDestroyed() {
-        return isInPlay() && (!hasKeyword("Indestructible") || (isCreature() && getNetToughness() <= 0));
+        return isInPlay() && (!hasKeyword(Keyword.INDESTRUCTIBLE) || (isCreature() && getNetToughness() <= 0));
     }
 
     public final boolean canBeSacrificed() {
@@ -4983,10 +5017,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         final MutableBoolean result = new MutableBoolean(true);
         visitKeywords(currentState, new Visitor<KeywordInterface>() {
             @Override
-            public void visit(KeywordInterface kw) {
-                if (result.isFalse()) {
-                    return;
-                }
+            public boolean visit(KeywordInterface kw) {
                 switch (kw.getOriginal()) {
                     case "Shroud":
                         StringBuilder sb = new StringBuilder();
@@ -5015,6 +5046,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                         }
                         break;
                 }
+                return result.isTrue();
             }
         });
         if (result.isFalse()) {
@@ -5506,15 +5538,40 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         @Override
-        public void visit(KeywordInterface inst) {
+        public boolean visit(KeywordInterface inst) {
             final String kw = inst.getOriginal();
             if ((startOf && kw.startsWith(keyword)) || kw.equals(keyword)) {
                 count++;
             }
+            return true;
         }
 
         public int getCount() {
             return count;
+        }
+    }
+
+    private static final class HasKeywordVisitor extends Visitor<KeywordInterface> {
+        private String keyword;
+        private final MutableBoolean result = new MutableBoolean(false);
+
+        private boolean startOf;
+        private HasKeywordVisitor(String keyword, boolean startOf) {
+            this.keyword = keyword;
+            this.startOf = startOf;
+        }
+
+        @Override
+        public boolean visit(KeywordInterface inst) {
+            final String kw = inst.getOriginal();
+            if ((startOf && kw.startsWith(keyword)) || kw.equals(keyword)) {
+                result.setTrue();
+            }
+            return result.isFalse();
+        }
+
+        public boolean getResult() {
+            return result.isTrue();
         }
     }
 
@@ -5523,8 +5580,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         private List<KeywordInterface> keywords = Lists.newArrayList();
 
         @Override
-        public void visit(KeywordInterface kw) {
+        public boolean visit(KeywordInterface kw) {
             keywords.add(kw);
+            return true;
         }
 
         public List<KeywordInterface> getKeywords() {
@@ -5645,7 +5703,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public boolean withFlash(Player p) {
-        if (hasKeyword("Flash")) {
+        if (hasKeyword(Keyword.FLASH)) {
             return true;
         }
         if (withFlash.containsValue(p)) {

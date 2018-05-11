@@ -7,6 +7,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -18,7 +19,7 @@ public class DestroyAllAi extends SpellAbilityAi {
     private static final Predicate<Card> predicate = new Predicate<Card>() {
         @Override
         public boolean apply(final Card c) {
-            return !(c.hasKeyword("Indestructible") || c.getSVar("SacMe").length() > 0);
+            return !(c.hasKeyword(Keyword.INDESTRUCTIBLE) || c.getSVar("SacMe").length() > 0);
         }
     };
 

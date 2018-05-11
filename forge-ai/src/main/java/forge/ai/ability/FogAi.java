@@ -6,6 +6,7 @@ import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.card.CardPredicates;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -66,7 +67,7 @@ public class FogAi extends SpellAbilityAi {
             for (Card atk : game.getCombat().getAttackersOf(ai)) {
                 if (game.getCombat().isUnblocked(atk)) {
                     dmg += atk.getNetCombatDamage();
-                } else if (atk.hasKeyword("Trample")) {
+                } else if (atk.hasKeyword(Keyword.TRAMPLE)) {
                     dmg += atk.getNetCombatDamage() - Aggregates.sum(game.getCombat().getBlockers(atk), CardPredicates.Accessors.fnGetNetToughness);
                 }
             }

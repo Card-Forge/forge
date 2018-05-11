@@ -12,6 +12,7 @@ import com.google.common.collect.Sets;
 import com.google.common.collect.Table;
 
 import forge.game.GameEntity;
+import forge.game.keyword.Keyword;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 
@@ -53,7 +54,7 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
                 
                 sourceLKI.getGame().getTriggerHandler().runTrigger(TriggerType.DamageDealtOnce, runParams, false);
                 
-                if (sourceLKI.hasKeyword("Lifelink")) {
+                if (sourceLKI.hasKeyword(Keyword.LIFELINK)) {
                     sourceLKI.getController().gainLife(sum, sourceLKI, sa);
                 }
             }

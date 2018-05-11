@@ -35,6 +35,7 @@ import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.cost.CostRemoveCounter;
+import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
@@ -1606,7 +1607,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean tracksManaSpent() {
         if (hostCard == null || hostCard.getRules() == null) { return false; }
 
-        if (hostCard.hasKeyword("Sunburst")) {
+        if (hostCard.hasKeyword(Keyword.SUNBURST)) {
             return true;
         }
         String text = hostCard.getRules().getOracleText();

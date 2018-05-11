@@ -280,7 +280,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             map.put(null, damageDealt);
         } else {
             final List<CardView> vBlockers = CardView.getCollection(blockers);
-            if ((attacker.hasKeyword("Trample") && defender != null) || (blockers.size() > 1)) {
+            if ((attacker.hasKeyword(Keyword.TRAMPLE) && defender != null) || (blockers.size() > 1)) {
                 final CardView vAttacker = CardView.get(attacker);
                 final GameEntityView vDefender = GameEntityView.get(defender);
                 final Map<CardView, Integer> result = getGui().assignDamage(vAttacker, vBlockers, damageDealt,
@@ -2296,7 +2296,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                             if (forgeCard.isPermanent() && !forgeCard.isAura()) {
                                 if (forgeCard.isCreature()) {
                                     if (!repeatLast) {
-                                        if (forgeCard.hasKeyword("Haste")) {
+                                        if (forgeCard.hasKeyword(Keyword.HASTE)) {
                                             lastSummoningSickness = true;
                                         } else {
                                             lastSummoningSickness = getGui().confirm(forgeCard.getView(),

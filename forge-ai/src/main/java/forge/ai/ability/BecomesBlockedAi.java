@@ -7,6 +7,7 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -30,7 +31,7 @@ public class BecomesBlockedAi extends SpellAbilityAi {
 	        CardCollection list = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), aiPlayer.getOpponents());
 	        list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source, sa);
 	        list = CardLists.getTargetableCards(list, sa);
-	        list = CardLists.getNotKeyword(list, "Trample");
+	        list = CardLists.getNotKeyword(list, Keyword.TRAMPLE);
 	
 	        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
 	            Card choice = null;

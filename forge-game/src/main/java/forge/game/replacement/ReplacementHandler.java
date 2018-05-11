@@ -86,7 +86,7 @@ public class ReplacementHandler {
         // Round up Static replacement effects
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
-            public void visit(Card crd) {
+            public boolean visit(Card crd) {
                 for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
 
                     // Use "CheckLKIZone" parameter to test for effects that care abut where the card was last (e.g. Kalitas, Traitor of Ghet
@@ -111,6 +111,7 @@ public class ReplacementHandler {
                         possibleReplacers.add(replacementEffect);
                     }
                 }
+                return true;
             }
             
         });
@@ -307,7 +308,7 @@ public class ReplacementHandler {
     public void cleanUpTemporaryReplacements() {
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
-            public void visit(Card c) {
+            public boolean visit(Card c) {
                 for (int i = 0; i < c.getReplacementEffects().size(); i++) {
                     ReplacementEffect rep = c.getReplacementEffects().get(i);
                     if (rep.isTemporary()) {
@@ -315,14 +316,16 @@ public class ReplacementHandler {
                         i--;
                     }
                 }
+                return true;
             }
         });
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
-            public void visit(Card c) {
+            public boolean visit(Card c) {
                 for (int i = 0; i < c.getReplacementEffects().size(); i++) {
                     c.getReplacementEffects().get(i).setTemporarilySuppressed(false);
                 }
+                return true;
             }
         });
     }

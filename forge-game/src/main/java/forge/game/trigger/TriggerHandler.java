@@ -61,7 +61,7 @@ public class TriggerHandler {
     public final void cleanUpTemporaryTriggers() {
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
-            public void visit(Card c) {
+            public boolean visit(Card c) {
                 boolean changed = false;
                 for (int i = 0; i < c.getTriggers().size(); i++) {
                     Trigger trigger = c.getTriggers().get(i);
@@ -74,11 +74,12 @@ public class TriggerHandler {
                 if (changed) {
                     c.updateStateForView();
                 }
+                return true;
             }
         });
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
-            public void visit(Card c) {
+            public boolean visit(Card c) {
                 boolean changed = false;
                 for (int i = 0; i < c.getTriggers().size(); i++) {
                     if (c.getTriggers().get(i).isSuppressed()) {
@@ -89,6 +90,7 @@ public class TriggerHandler {
                 if (changed) {
                     c.updateStateForView();
                 }
+                return true;
             }
         });
     }
@@ -226,12 +228,13 @@ public class TriggerHandler {
         activeTriggers.clear();
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
-            public void visit(Card c) {
+            public boolean visit(Card c) {
                 for (final Trigger t : c.getTriggers()) {
                     if (isTriggerActive(t)) {
                         activeTriggers.add(t);
                     }
                 }
+                return true;
             }
         });
     }

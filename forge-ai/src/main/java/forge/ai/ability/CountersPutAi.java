@@ -16,6 +16,7 @@ import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostRemoveCounter;
 import forge.game.cost.CostSacrifice;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -157,7 +158,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     // receive counters, execpt it has undying
                     CardCollection oppCreat = CardLists.getTargetableCards(ai.getOpponents().getCreaturesInPlay(), sa);
                     CardCollection oppCreatM1 = CardLists.filter(oppCreat, CardPredicates.hasCounter(CounterType.M1M1));
-                    oppCreatM1 = CardLists.getNotKeyword(oppCreatM1, "Undying");
+                    oppCreatM1 = CardLists.getNotKeyword(oppCreatM1, Keyword.UNDYING);
 
                     oppCreatM1 = CardLists.filter(oppCreatM1, new Predicate<Card>() {
                         @Override
@@ -359,14 +360,8 @@ public class CountersPutAi extends SpellAbilityAi {
 
         if ("Polukranos".equals(logic)) {
 
-            CardCollection humCreatures = CardLists.getTargetableCards(ai.getOpponents().getCreaturesInPlay(), sa);
+            CardCollection targets = CardLists.getTargetableCards(ai.getOpponents().getCreaturesInPlay(), sa);
 
-            final CardCollection targets = CardLists.filter(humCreatures, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return !(c.hasProtectionFrom(source) || c.hasKeyword("Shroud") || c.hasKeyword("Hexproof"));
-                }
-            });
             if (!targets.isEmpty()){
                 boolean canSurvive = false;
                 for (Card humanCreature : targets) {
@@ -811,12 +806,12 @@ public class CountersPutAi extends SpellAbilityAi {
             final List<Card> creats = player.getCreaturesInPlay();
             final int tributeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
 
-            final boolean isHaste = source.hasKeyword("Haste");
+            final boolean isHaste = source.hasKeyword(Keyword.HASTE);
             List<Card> threatening = CardLists.filter(creats, new Predicate<Card>() {
                 @Override
                 public boolean apply(Card c) {
                     return CombatUtil.canBlock(source, c, !isHaste) 
-                            && (c.getNetToughness() > source.getNetPower() + tributeAmount || c.hasKeyword("DeathTouch"));
+                            && (c.getNetToughness() > source.getNetPower() + tributeAmount || c.hasKeyword(Keyword.DEATHTOUCH));
                 }
             });
             if (!threatening.isEmpty()) {
@@ -833,7 +828,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     List<Card> canBlock = CardLists.filter(creats, new Predicate<Card>() {
                         @Override
                         public boolean apply(Card c) {
-                            return CombatUtil.canBlock(source, c) && (c.getNetToughness() > source.getNetPower() || c.hasKeyword("DeathTouch"));
+                            return CombatUtil.canBlock(source, c) && (c.getNetToughness() > source.getNetPower() || c.hasKeyword(Keyword.DEATHTOUCH));
                         }
                     });
                     if (!canBlock.isEmpty()) {
@@ -926,7 +921,7 @@ public class CountersPutAi extends SpellAbilityAi {
             final CardCollection persist = CardLists.filter(filtered, new Predicate<Card>() {
                 @Override
                 public boolean apply(Card input) {
-                    if (!input.hasKeyword("Persist"))
+                    if (!input.hasKeyword(Keyword.PERSIST))
                         return false;
                     return input.getCounters(CounterType.M1M1) <= amount;
                 }
@@ -939,7 +934,7 @@ public class CountersPutAi extends SpellAbilityAi {
             final CardCollection undying = CardLists.filter(filtered, new Predicate<Card>() {
                 @Override
                 public boolean apply(Card input) {
-                    if (!input.hasKeyword("Undying"))
+                    if (!input.hasKeyword(Keyword.UNDYING))
                         return false;
                     return input.getCounters(CounterType.P1P1) <= amount && input.getNetToughness() > amount;
                 }
@@ -964,7 +959,7 @@ public class CountersPutAi extends SpellAbilityAi {
         if (e instanceof Card) {
             Card c = (Card) e;
             if (c.getController().isOpponentOf(ai)) {
-                if (options.contains(CounterType.M1M1) && !c.hasKeyword("Undying")) {
+                if (options.contains(CounterType.M1M1) && !c.hasKeyword(Keyword.UNDYING)) {
                     return CounterType.M1M1;
                 }
                 for (CounterType type : options) {

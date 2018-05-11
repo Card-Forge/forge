@@ -26,6 +26,7 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
@@ -313,7 +314,7 @@ public class InputAttack extends InputSyncronizedBase {
     private boolean isBandingPossible() {
         final CardCollectionView possibleAttackers = playerAttacks.getCardsIn(ZoneType.Battlefield);
         for (final Card c : possibleAttackers) {
-            if ((c.hasKeyword("Banding") || c.hasStartOfKeyword("Bands with Other")) &&
+            if ((c.hasKeyword(Keyword.BANDING) || c.hasStartOfKeyword("Bands with Other")) &&
                     CombatUtil.canAttack(c, currentDefender)) {
                 return true;
             }

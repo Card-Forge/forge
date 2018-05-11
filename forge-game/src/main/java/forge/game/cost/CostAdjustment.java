@@ -10,6 +10,7 @@ import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
@@ -210,7 +211,7 @@ public class CostAdjustment {
         }
 
         if (sa.isSpell()) {
-            if (sa.getHostCard().hasKeyword("Delve")) {
+            if (sa.getHostCard().hasKeyword(Keyword.DELVE)) {
                 sa.getHostCard().clearDelved();
 
                 final CardCollection delved = new CardCollection();
@@ -235,10 +236,10 @@ public class CostAdjustment {
                     game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
                 }
             }
-            if (sa.getHostCard().hasKeyword("Convoke")) {
+            if (sa.getHostCard().hasKeyword(Keyword.CONVOKE)) {
                 adjustCostByConvokeOrImprovise(cost, sa, false, test);
             }
-            if (sa.getHostCard().hasKeyword("Improvise")) {
+            if (sa.getHostCard().hasKeyword(Keyword.IMPROVISE)) {
                 adjustCostByConvokeOrImprovise(cost, sa, true, test);
             }
         } // isSpell
