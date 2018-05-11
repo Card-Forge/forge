@@ -21,8 +21,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.io.File;
 import java.util.*;
 
-import static forge.deck.lda.lda.inference.InferenceMethod.CGS;
-
 /**
  * Created by maustin on 09/05/2017.
  */
