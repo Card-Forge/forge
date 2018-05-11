@@ -6,6 +6,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.ImageKeys;
 import forge.card.CardType;
+import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
@@ -24,12 +25,14 @@ public class TokenInfo {
     final String[] intrinsicKeywords;
     final int basePower;
     final int baseToughness;
+    final String color;
 
     public TokenInfo(String name, String imageName, String manaCost, String[] types,
                      String[] intrinsicKeywords, int basePower, int baseToughness) {
         this.name = name;
         this.imageName = imageName;
         this.manaCost = manaCost;
+        this.color = manaCost; // FIXME: somehow ensure that color and mana cost are completely differentiated
         this.types = types;
         this.intrinsicKeywords = intrinsicKeywords;
         this.basePower = basePower;
@@ -40,6 +43,7 @@ public class TokenInfo {
         this.name = c.getName();
         this.imageName = ImageKeys.getTokenImageName(c.getImageKey());
         this.manaCost = c.getManaCost().toString();
+        this.color = MagicColor.toShortString(c.getCurrentState().getColor());
         this.types = getCardTypes(c);
         
         List<String> list = Lists.newArrayList();
@@ -60,6 +64,7 @@ public class TokenInfo {
         String[] types = null;
         String[] keywords = null;
         String imageName = null;
+        String color = "";
         for (String info : tokenInfo) {
             int index = info.indexOf(':');
             if (index == -1) {
@@ -78,6 +83,8 @@ public class TokenInfo {
                 keywords = remainder.split("-");
             } else if (info.startsWith("Image:")) {
                 imageName = remainder;
+            } else if (info.startsWith("Color:")) {
+                color = remainder;
             }
         }
 
@@ -88,6 +95,7 @@ public class TokenInfo {
         this.intrinsicKeywords = keywords;
         this.basePower = power;
         this.baseToughness = toughness;
+        this.color = color;
     }
 
     private static String[] getCardTypes(Card c) {
@@ -109,7 +117,7 @@ public class TokenInfo {
 
         // TODO - most tokens mana cost is 0, this needs to be fixed
         // c.setManaCost(manaCost);
-        c.setColor(manaCost);
+        c.setColor(color.isEmpty() ? manaCost : color);
         c.setToken(true);
 
         for (final String t : types) {
@@ -128,6 +136,7 @@ public class TokenInfo {
         sb.append("P:").append(basePower).append(',');
         sb.append("T:").append(baseToughness).append(',');
         sb.append("Cost:").append(manaCost).append(',');
+        sb.append("Color:").append(color).append(",");
         sb.append("Types:").append(Joiner.on('-').join(types)).append(',');
         sb.append("Keywords:").append(Joiner.on('-').join(intrinsicKeywords)).append(',');
         sb.append("Image:").append(imageName);

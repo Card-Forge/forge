@@ -14,7 +14,7 @@ humanhand=
 humangraveyard=
 humanlibrary=
 humanbattlefield=Swamp|Set:ZEN; Swamp|Set:ZEN; Swamp|Set:ZEN; Swamp|Set:ZEN; Mountain|Set:ZEN; Mountain|Set:ZEN; Mountain|Set:ZEN; Mountain|Set:ZEN; Coffin Queen; Silverskin Armor|Attaching:420; Krark-Clan Stoker|Id:420; Dross Scorpion; Firemaw Kavu; Liquimetal Coating
-aibattlefield=Forest|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Plains|Set:ZEN|Tapped; Plains|Set:ZEN|Tapped; Plains|Set:ZEN|Tapped; Llanowar Elves|Tapped; Beacon Hawk|Tapped; Canopy Cover|Attaching:422; Scavenging Ooze|Id:422|Counters:P1P1=5|Tapped; Blessed Orator; t:Rhino,P:4,T:4,Cost:no cost,Types:Creature-Rhino,Keywords:Trample,Image:g_4_4_rhino_rtr; t:Rhino,P:4,T:4,Cost:no cost,Types:Creature-Rhino,Keywords:Trample,Image:g_4_4_rhino_rtr
+aibattlefield=Forest|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Plains|Set:ZEN|Tapped; Plains|Set:ZEN|Tapped; Plains|Set:ZEN|Tapped; Llanowar Elves|Tapped; Beacon Hawk|Tapped; Canopy Cover|Attaching:422; Scavenging Ooze|Id:422|Counters:P1P1=5|Tapped; Blessed Orator; t:Rhino,P:4,T:4,Cost:no cost,Color:G,Types:Creature-Rhino,Keywords:Trample,Image:g_4_4_rhino_rtr; t:Rhino,P:4,T:4,Cost:no cost,Color:G,Types:Creature-Rhino,Keywords:Trample,Image:g_4_4_rhino_rtr
 aihand=
 aigraveyard=
 ailibrary=
