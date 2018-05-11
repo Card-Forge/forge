@@ -30,6 +30,7 @@ import forge.util.AbstractGeneticAlgorithm;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.view.SimulateMatch;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -41,9 +42,8 @@ public class PlanarConquestGeneraterGA extends AbstractGeneticAlgorithm<Deck> {
     private DeckGroup deckGroup;
     private List<TournamentPlayer> players = new ArrayList<>();
     private TournamentSwiss tourney = null;
-    protected Map<String,List<Map.Entry<PaperCard,Integer>>> standardMap;
+    protected Map<String,List<List<Pair<String, Double>>>> standardMap;
     private GameRules rules;
-    protected GameFormat format = FModel.getFormats().getStandard();
     protected int generations;
     protected GameFormat gameFormat;
     protected DeckFormat deckFormat;
@@ -89,7 +89,7 @@ public class PlanarConquestGeneraterGA extends AbstractGeneticAlgorithm<Deck> {
 
     public PlanarConquestGeneraterGA(GameRules rules, GameFormat gameFormat, DeckFormat deckFormat, int cardsToUse, int decksPerCard, int generations){
         this.rules = rules;
-        rules.setGamesPerMatch(7);
+        rules.setGamesPerMatch(3);
         this.gameFormat = gameFormat;
         this.deckFormat = deckFormat;
         this.cardsToUse = cardsToUse;
@@ -100,7 +100,7 @@ public class PlanarConquestGeneraterGA extends AbstractGeneticAlgorithm<Deck> {
 
 
     protected void initializeCards(){
-        standardMap = CardRelationMatrixGenerator.cardPools.get(format.getName());
+        standardMap = CardArchetypeLDAGenerator.ldaPools.get(gameFormat.getName());
         List<String> cardNames = new ArrayList<>(standardMap.keySet());
         List<PaperCard> cards = new ArrayList<>();
         for(String cardName:cardNames){

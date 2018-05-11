@@ -48,7 +48,7 @@ public class DeckgenUtil {
 
     public static Deck buildCardGenDeck(GameFormat format, boolean isForAI){
         try {
-            List<String> keys      = new ArrayList<>(CardRelationLDAGenerator.ldaPools.get(format.getName()).keySet());
+            List<String> keys      = new ArrayList<>(CardArchetypeLDAGenerator.ldaPools.get(format.getName()).keySet());
             String       randomKey = keys.get( MyRandom.getRandom().nextInt(keys.size()) );
             Predicate<PaperCard> cardFilter = Predicates.and(format.getFilterPrinted(),PaperCard.Predicates.name(randomKey));
             PaperCard keyCard = FModel.getMagicDb().getCommonCards().getAllCards(cardFilter).get(0);
@@ -135,7 +135,7 @@ public class DeckgenUtil {
         final boolean isForAI = true;
         Set<String> uniqueCards = new HashSet<>();
         List<PaperCard> selectedCards = new ArrayList<>();
-        List<List<Pair<String, Double>>> cardArchetypes = CardRelationLDAGenerator.ldaPools.get(FModel.getFormats().getStandard().getName()).get(card.getName());
+        List<List<Pair<String, Double>>> cardArchetypes = CardArchetypeLDAGenerator.ldaPools.get(FModel.getFormats().getStandard().getName()).get(card.getName());
         for(List<Pair<String, Double>> archetype:cardArchetypes){
             for(Pair<String, Double> cardPair:archetype){
                 String cardName = cardPair.getLeft();
@@ -349,7 +349,7 @@ public class DeckgenUtil {
      * @return
      */
     public static Deck buildLDACardGenDeck(PaperCard card,GameFormat format, boolean isForAI){
-        List<List<Pair<String, Double>>> preSelectedCardLists = CardRelationLDAGenerator.ldaPools.get(format.getName()).get(card.getName());
+        List<List<Pair<String, Double>>> preSelectedCardLists = CardArchetypeLDAGenerator.ldaPools.get(format.getName()).get(card.getName());
         List<Pair<String, Double>> preSelectedCardNames = preSelectedCardLists.get(MyRandom.getRandom().nextInt(preSelectedCardLists.size()));
         List<PaperCard> selectedCards = new ArrayList<>();
         for(Pair<String, Double> pair:preSelectedCardNames){
@@ -711,7 +711,7 @@ public class DeckgenUtil {
         if(isCardGen){
             if(format.equals(DeckFormat.Brawl)){//TODO: replace with actual Brawl based data
                 Set<String> uniqueCards = new HashSet<>();
-                List<List<Pair<String, Double>>> cardArchetypes = CardRelationLDAGenerator.ldaPools.get(FModel.getFormats().getStandard().getName()).get(commander.getName());
+                List<List<Pair<String, Double>>> cardArchetypes = CardArchetypeLDAGenerator.ldaPools.get(FModel.getFormats().getStandard().getName()).get(commander.getName());
                 for(List<Pair<String, Double>> archetype:cardArchetypes){
                     for(Pair<String, Double> cardPair:archetype){
                         String cardName = cardPair.getLeft();

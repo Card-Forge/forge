@@ -6,7 +6,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.GuiBase;
 import forge.GuiDesktop;
-import forge.LobbyPlayer;
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
 import forge.deck.*;
@@ -14,32 +13,18 @@ import forge.deck.io.DeckStorage;
 import forge.game.GameFormat;
 import forge.game.GameRules;
 import forge.game.GameType;
-import forge.game.Match;
-import forge.game.player.RegisteredPlayer;
 import forge.item.PaperCard;
 import forge.limited.CardRanker;
 import forge.model.FModel;
-import forge.player.GamePlayerUtil;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
-import forge.tournament.system.AbstractTournament;
-import forge.tournament.system.TournamentPairing;
-import forge.tournament.system.TournamentPlayer;
-import forge.tournament.system.TournamentSwiss;
-import forge.util.AbstractGeneticAlgorithm;
-import forge.util.MyRandom;
-import forge.util.TextUtil;
-import forge.view.SimulateMatch;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-public class PlanarConquestCommanderGeneraterGA extends PlanarConquestGeneraterGA {
+public class PlanarConquestTribalGeneraterGA extends PlanarConquestGeneraterGA {
 
-
-    private int deckCount = 0;
 
     public static void main(String[] args){
         test();
@@ -59,12 +44,12 @@ public class PlanarConquestCommanderGeneraterGA extends PlanarConquestGeneraterG
         sets.add("XLN");
         sets.add("RIX");
 
-        PlanarConquestCommanderGeneraterGA ga = new PlanarConquestCommanderGeneraterGA(new GameRules(GameType.Constructed),
+        PlanarConquestTribalGeneraterGA ga = new PlanarConquestTribalGeneraterGA(new GameRules(GameType.Constructed),
                 new GameFormat("conquest",sets,null),
                 DeckFormat.PlanarConquest,
-                4,
                 12,
-                16);
+                4,
+                10);
         ga.run();
         List<Deck> winners = ga.listFinalPopulation();
 
@@ -76,26 +61,31 @@ public class PlanarConquestCommanderGeneraterGA extends PlanarConquestGeneraterG
         }
     }
 
-    public PlanarConquestCommanderGeneraterGA(GameRules rules, GameFormat gameFormat, DeckFormat deckFormat, int cardsToUse, int decksPerCard, int generations){
+    private int deckCount = 0;
+
+    private List<PaperCard> rankedListTribe;
+
+    public PlanarConquestTribalGeneraterGA(GameRules rules, GameFormat gameFormat, DeckFormat deckFormat, int cardsToUse, int decksPerCard, int generations){
         super(rules,gameFormat,deckFormat,cardsToUse,decksPerCard,generations);
     }
 
     @Override
     protected void initializeCards(){
-        List<String> cardNames = new ArrayList<>(CardRelationMatrixGenerator.cardPools.get(gameFormat.getName()).keySet());
+        standardMap = CardArchetypeLDAGenerator.ldaPools.get(gameFormat.getName());
+        List<String> cardNames = new ArrayList<>(standardMap.keySet());
         List<PaperCard> cards = new ArrayList<>();
         for(String cardName:cardNames){
             cards.add(StaticData.instance().getCommonCards().getUniqueByName(cardName));
         }
 
-        Iterable<PaperCard> filtered= Iterables.filter(cards, Predicates.and(
+        Iterable<PaperCard> filteredTribe= Iterables.filter(cards, Predicates.and(
                 Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, PaperCard.FN_GET_RULES),
-                Predicates.compose(CardRulesPredicates.Presets.IS_PLANESWALKER, PaperCard.FN_GET_RULES),
-                //Predicates.compose(CardRulesPredicates.Presets.IS_LEGENDARY, PaperCard.FN_GET_RULES),
+                Predicates.compose(CardRulesPredicates.hasCreatureType("Pirate"), PaperCard.FN_GET_RULES),
+                Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES),
                 gameFormat.getFilterPrinted()));
 
-        List<PaperCard> filteredList = Lists.newArrayList(filtered);
-        rankedList = CardRanker.rankCardsInDeck(filteredList);
+        List<PaperCard> filteredListTribe = Lists.newArrayList(filteredTribe);
+        rankedList = CardRanker.rankCardsInDeck(filteredListTribe);
         List<Deck> decks = new ArrayList<>();
         for(PaperCard card: rankedList.subList(0,cardsToUse)){
             System.out.println(card.getName());
@@ -104,34 +94,6 @@ public class PlanarConquestCommanderGeneraterGA extends PlanarConquestGeneraterG
             }
         }
         initializePopulation(decks);
-    }
-
-    @Override
-    protected Deck getDeckForCard(PaperCard card){
-        Deck genDeck =  DeckgenUtil.buildPlanarConquestCommanderDeck(card, gameFormat, deckFormat);
-        Deck d = new Deck(genDeck,genDeck.getName()+"_"+deckCount+"_"+generationCount);
-        deckCount++;
-        return d;
-    }
-
-    @Override
-    protected Deck getDeckForCard(PaperCard card, PaperCard card2){
-        return getDeckForCard(card);
-    }
-
-    @Override
-    protected Deck mutateObject(Deck parent1) {
-        PaperCard allele = parent1.getCommanders().get(0);
-        if(!standardMap.keySet().contains(allele.getName())){
-            return null;
-        }
-        return getDeckForCard(allele);
-    }
-
-    @Override
-    protected Deck createChild(Deck parent1, Deck parent2) {
-        PaperCard allele = parent1.getCommanders().get(0);
-        return getDeckForCard(allele);
     }
 
 

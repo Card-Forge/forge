@@ -8,10 +8,7 @@ import forge.StaticData;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.deck.io.CardThemedLDAIO;
-import forge.deck.io.CardThemedMatrixIO;
 import forge.deck.io.DeckStorage;
-import forge.deck.lda.dataset.Dataset;
-import forge.deck.lda.lda.LDA;
 import forge.game.GameFormat;
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -29,7 +26,7 @@ import static forge.deck.lda.lda.inference.InferenceMethod.CGS;
 /**
  * Created by maustin on 09/05/2017.
  */
-public final class CardRelationLDAGenerator {
+public final class CardArchetypeLDAGenerator {
 
     public static Map<String, Map<String,List<List<Pair<String, Double>>>>> ldaPools = new HashMap();
     /**
@@ -59,20 +56,6 @@ public final class CardRelationLDAGenerator {
         if(formatMap==null) {
             try {
                 List<List<Pair<String, Double>>> lda = CardThemedLDAIO.loadRawLDA(format);
-                if(lda==null) {
-                    if (CardThemedLDAIO.getMatrixFolder(format).exists()) {
-                        if (format.equals(FModel.getFormats().getStandard().getName())) {
-                            lda = initializeFormat(FModel.getFormats().getStandard());
-                        } else if (format.equals(FModel.getFormats().getModern().getName())) {
-                            lda = initializeFormat(FModel.getFormats().getModern());
-                        } else {
-                            //formatMap = initializeCommanderFormat();
-                        }
-                        CardThemedLDAIO.saveRawLDA(format, lda);
-                    } else {
-                        return false;
-                    }
-                }
                 if (format.equals(FModel.getFormats().getStandard().getName())) {
                     formatMap = loadFormat(FModel.getFormats().getStandard(), lda);
                 } else if (format.equals(FModel.getFormats().getModern().getName())) {
@@ -137,23 +120,6 @@ public final class CardRelationLDAGenerator {
             cardTopicMap.put(card,cardTopics);
         }
         return cardTopicMap;
-    }
-
-    public static List<List<Pair<String, Double>>> initializeFormat(GameFormat format) throws Exception{
-        Dataset dataset = new Dataset(format);
-
-        final int numTopics = dataset.getNumDocs()/30;
-        LDA lda = new LDA(0.1, 0.1, numTopics, dataset, CGS);
-        lda.run();
-        System.out.println(lda.computePerplexity(dataset));
-        List<List<Pair<String, Double>>> unfilteredTopics = new ArrayList<>();
-        for (int t = 0; t < lda.getNumTopics(); ++t) {
-            List<Pair<String, Double>> topic = new ArrayList<>();
-            Set<String> topicCards = new HashSet<>();
-            List<Pair<String, Double>> highRankVocabs = lda.getVocabsSortedByPhi(t);
-            unfilteredTopics.add(highRankVocabs);
-        }
-        return unfilteredTopics;
     }
 
     public static boolean topicContains(String card, List<Pair<String, Double>> topic){
