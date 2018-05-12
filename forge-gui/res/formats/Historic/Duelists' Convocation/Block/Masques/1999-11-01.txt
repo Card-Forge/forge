@@ -1,0 +1,6 @@
+[format]
+Name:Masques Block, Mercadian Masques
+Type:Historic
+Subtype:Block
+Effective:1999-11-01
+Sets:MMQ

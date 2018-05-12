@@ -1,6 +1,0 @@
-[format]
-Name:Onslaught Block Constructed, Onslaught
-Type:Historic
-Subtype:Block
-Order:303
-Sets:ONS

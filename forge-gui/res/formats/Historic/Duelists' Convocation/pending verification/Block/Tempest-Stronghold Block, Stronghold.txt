@@ -1,6 +1,0 @@
-[format]
-Name:Tempest-Stronghold Block, Stronghold
-Type:Historic
-Subtype:Block
-Order:210
-Sets:TMP, STH

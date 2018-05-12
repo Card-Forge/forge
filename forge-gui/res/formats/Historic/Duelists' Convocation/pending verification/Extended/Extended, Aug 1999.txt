@@ -1,7 +1,0 @@
-[format]
-Name:Extended, Aug 1999
-Type:Historic
-Subtype:Extended
-Order:244
-Sets:3ED, DRK, ARENA, FEM, WW, SHC, FS, 4ED, ICE, CHR, HML, ALL, MIR, VIS, 5ED, WTH, TMP, STH, EXO, USG, ULG, 6ED, UDS
-Banned:Amulet of Quoz; Balance; Basalt Monolith; Black Vise; Braingeyser; Bronze Tablet; Channel; Clone; Contract from Below; Copy Artifact; Darkpact; Demonic Attorney; Demonic Tutor; Dwarven Weaponsmith; Earthbind; Farmstead; Fork; Granite Gargoyle; Hypnotic Specter; Ivory Tower; Jandor's Ring; Jeweled Bird; Juggernaut; Kird Ape; Kudzu; Lance; Mana Crypt; Maze of Ith; Memory Jar; Mijae Djinn; Mind Twist; Nettling Imp; Rebirth; Reconstruction; Regrowth; Resurrection; Reverse Polarity; Roc of Kher Ridges; Rock Hydra; Rocket Launcher; Sacrifice; Sedge Troll; Serendib Efreet; Sol Ring; Strip Mine; Tempest Efreet; Time Spiral; Timmerian Fiends; Tolarian Academy; Vesuvan Doppelganger; Veteran Bodyguard; Wheel of Fortune; Windfall; Yawgmoth's Bargain; Zuran Orb

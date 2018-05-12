@@ -1,6 +1,0 @@
-[format]
-Name:Standard, Seventh Edition
-Type:Historic
-Subtype:Standard
-Order:277
-Sets:MMQ, NMS, PCY, INV, PLS, 7ED

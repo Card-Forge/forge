@@ -1,7 +1,0 @@
-[format]
-Name:Standard, Jan 1999
-Type:Historic
-Subtype:Standard
-Order:222
-Sets:5ED, TMP, STH, EXO, USG
-Banned:Tolarian Academy; Windfall

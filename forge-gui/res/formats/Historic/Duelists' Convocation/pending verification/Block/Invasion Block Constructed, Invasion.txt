@@ -1,6 +1,0 @@
-[format]
-Name:Invasion Block Constructed, Invasion
-Type:Historic
-Subtype:Block
-Order:268
-Sets:INV

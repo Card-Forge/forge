@@ -1,0 +1,6 @@
+[format]
+Name:Standard, Odyssey
+Type:Historic
+Subtype:Standard
+Effective:2001-11-01
+Sets:INV, PLS, 7ED, APC, ODY

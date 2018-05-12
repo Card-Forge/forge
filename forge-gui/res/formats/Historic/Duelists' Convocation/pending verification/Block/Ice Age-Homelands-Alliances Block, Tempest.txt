@@ -1,7 +1,0 @@
-[format]
-Name:Ice Age-Homelands-Alliances Block, Tempest
-Type:Historic
-Subtype:Block
-Order:204
-Sets:ICE, HML, ALL
-Banned:Amulet of Quoz; Thawing Glaciers; Timmerian Fiends; Zuran Orb
