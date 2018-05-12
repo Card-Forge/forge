@@ -131,6 +131,7 @@ public final class StaticAbilityContinuous {
         boolean removeCardTypes = false;
         boolean removeSubTypes = false;
         boolean removeCreatureTypes = false;
+        boolean removeArtifactTypes = false;
 
         List<Player> mayLookAt = null;
         List<Player> withFlash = null;
@@ -311,6 +312,9 @@ public final class StaticAbilityContinuous {
 
             if (params.containsKey("RemoveCreatureTypes")) {
                 removeCreatureTypes = true;
+            }
+            if (params.containsKey("RemoveArtifactTypes")) {
+                removeArtifactTypes = true;
             }
         }
 
@@ -611,6 +615,9 @@ public final class StaticAbilityContinuous {
                             } else {
                                 newKeywords[j] = newKeywords[j].replace("CardManaCost", affectedCard.getManaCost().getShortString());
                             }
+                        } else if (newKeywords[j].contains("ConvertedManaCost")) {
+                            final String costcmc = Integer.toString(affectedCard.getCMC());
+                            newKeywords[j] = newKeywords[j].replace("ConvertedManaCost", costcmc);
                         }
                     }
                 }
@@ -679,7 +686,7 @@ public final class StaticAbilityContinuous {
             // add Types
             if ((addTypes != null) || (removeTypes != null)) {
                 affectedCard.addChangedCardTypes(addTypes, removeTypes, removeSuperTypes, removeCardTypes,
-                        removeSubTypes, removeCreatureTypes, hostCard.getTimestamp());
+                        removeSubTypes, removeCreatureTypes, removeArtifactTypes, hostCard.getTimestamp());
             }
 
             // add colors

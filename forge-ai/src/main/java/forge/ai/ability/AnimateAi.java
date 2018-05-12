@@ -458,12 +458,14 @@ public class AnimateAi extends SpellAbilityAi {
         boolean removeCardTypes = false;
         boolean removeSubTypes = false;
         boolean removeCreatureTypes = false;
+        boolean removeArtifactTypes = false;
 
         if (sa.hasParam("OverwriteTypes")) {
             removeSuperTypes = true;
             removeCardTypes = true;
             removeSubTypes = true;
             removeCreatureTypes = true;
+            removeArtifactTypes = true;
         }
 
         if (sa.hasParam("KeepSupertypes")) {
@@ -490,13 +492,17 @@ public class AnimateAi extends SpellAbilityAi {
             removeCreatureTypes = true;
         }
 
+        if (sa.hasParam("RemoveArtifactTypes")) {
+            removeArtifactTypes = true;
+        }
+
         if ((power != -1) || (toughness != -1)) {
             card.addNewPT(power, toughness, timestamp);
         }
 
         if (!types.isEmpty() || !removeTypes.isEmpty() || removeCreatureTypes) {
             card.addChangedCardTypes(types, removeTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
-                    removeCreatureTypes, timestamp);
+                    removeCreatureTypes, removeArtifactTypes, timestamp);
         }
 
         card.addChangedCardKeywords(keywords, removeKeywords, sa.hasParam("RemoveAllAbilities"), timestamp);
