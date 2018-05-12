@@ -1,6 +1,0 @@
-[format]
-Name:Standard, Torment
-Type:Historic
-Subtype:Standard
-Order:292
-Sets:INV, PLS, 7ED, APC, ODY, TOR

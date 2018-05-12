@@ -1,7 +1,0 @@
-[format]
-Name:Ice Age Constructed, 05/01/97
-Type:Historic
-Subtype:Block
-Effective:1997-05-01
-Sets:ICE
-Banned:Amulet of Quoz, Thawing Glaciers, Zuran Orb
