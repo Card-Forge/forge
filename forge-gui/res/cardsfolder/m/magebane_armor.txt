@@ -1,7 +1,7 @@
 Name:Magebane Armor
 ManaCost:3
 Types:Artifact Equipment
-K:Equip 2
+K:Equip:2
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 2 | AddToughness$ 4 | RemoveKeyword$ Flying | Description$ Equipped creature gets +2/+4 and loses flying.
 R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Card.EquippedBy | IsCombat$ False | Description$ Prevent all noncombat damage that would be dealt to equipped creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magebane_armor.jpg

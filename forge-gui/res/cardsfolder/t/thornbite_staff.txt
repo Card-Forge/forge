@@ -1,13 +1,13 @@
 Name:Thornbite Staff
 ManaCost:2
 Types:Tribal Artifact Shaman Equipment
-K:Equip 4
-S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ Damage | AddTrigger$ TrigChangeZone | AddSVar$ ThornbiteTrigUntap | Description$ Equipped creature has "{2}, {T}: This creature deals 1 damage to target creature or player" and "Whenever a creature dies, untap this creature."
+K:Equip:4
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ Damage | AddTrigger$ TrigChangeZone | AddSVar$ ThornbiteTrigUntap | Description$ Equipped creature has "{2}, {T}: This creature deals 1 damage to any target" and "Whenever a creature dies, untap this creature."
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Shaman | TriggerZones$ Battlefield | Execute$ TrigAttach | OptionalDecider$ You | TriggerDescription$ Whenever a Shaman creature enters the battlefield, you may attach CARDNAME to it.
-SVar:Damage:AB$DealDamage | Cost$ 2 T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
+SVar:Damage:AB$DealDamage | Cost$ 2 T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 SVar:TrigChangeZone:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ ThornbiteTrigUntap | TriggerDescription$ Whenever a creature dies, untap equipped creature.
-SVar:ThornbiteTrigUntap:AB$Untap | Cost$ 0
+SVar:ThornbiteTrigUntap:DB$Untap
 SVar:TrigAttach:DB$ Attach | Defined$ TriggeredCard
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thornbite_staff.jpg
-Oracle:Equipped creature has "{2}, {T}: This creature deals 1 damage to target creature or player" and "Whenever a creature dies, untap this creature."\nWhenever a Shaman creature enters the battlefield, you may attach Thornbite Staff to it.\nEquip {4}
+Oracle:Equipped creature has "{2}, {T}: This creature deals 1 damage to any target" and "Whenever a creature dies, untap this creature."\nWhenever a Shaman creature enters the battlefield, you may attach Thornbite Staff to it.\nEquip {4}

@@ -1,7 +1,7 @@
 Name:Deathrender
 ManaCost:4
 Types:Artifact Equipment
-K:Equip 2
+K:Equip:2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Equipped creature gets +2/+2.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ CleanTheBlade | OptionalDecider$ You | TriggerDescription$ Whenever equipped creature dies, you may put a creature card from your hand onto the battlefield and attach CARDNAME to it.
 SVar:CleanTheBlade:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DeathrendersCall
