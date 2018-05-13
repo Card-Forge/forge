@@ -1,0 +1,6 @@
+[format]
+Name:Standard, Mirrodin
+Type:Historic
+Subtype:Standard
+Effective:2003-11-01
+Sets:ONS, LGN, SCG, 8ED, MRD

@@ -1,0 +1,7 @@
+[format]
+Name:Type I.5 Alpha, 11/08/96
+Type:Historic
+Subtype:Legacy
+Effective:1996-11-08
+Sets:LEA
+Banned:Ancestral Recall, Balance, Berserk, Black Lotus, Black Vise, Braingeyser, Channel, Chaos Orb, Contract from Below, Copy Artifact, Darkpact, Demonic Attorney, Demonic Tutor, Fastbond, Fork, Mind Twist, Mox Emerald, Mox Pearl, Mox Ruby, Mox Sapphire, Mox Jet, Regrowth, Sol Ring, Time Walk, Timetwister, Wheel of Fortune

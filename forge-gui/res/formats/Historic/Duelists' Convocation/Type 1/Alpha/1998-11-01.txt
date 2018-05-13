@@ -1,5 +1,5 @@
 [format]
-Name:Type I, 11/01/98 Alpha
+Name:Classic Alpha, 11/01/98
 Type:Historic
 Subtype:Vintage
 Effective:1998-11-01
