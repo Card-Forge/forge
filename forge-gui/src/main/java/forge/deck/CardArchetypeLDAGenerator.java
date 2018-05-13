@@ -1,21 +1,9 @@
 package forge.deck;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import forge.StaticData;
-import forge.card.CardRules;
-import forge.card.CardRulesPredicates;
 import forge.deck.io.CardThemedLDAIO;
-import forge.deck.io.DeckStorage;
 import forge.game.GameFormat;
-import forge.item.PaperCard;
 import forge.model.FModel;
-import forge.properties.ForgeConstants;
-import forge.util.storage.IStorage;
-import forge.util.storage.StorageImmediatelySerialized;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.File;
@@ -27,11 +15,7 @@ import java.util.*;
 public final class CardArchetypeLDAGenerator {
 
     public static Map<String, Map<String,List<List<Pair<String, Double>>>>> ldaPools = new HashMap();
-    /**
-        To ensure that only cards with at least 14 connections (as 14*4+4=60) are included in the card based deck
-        generation pools
-    **/
-    public static final int MIN_REQUIRED_CONNECTIONS = 14;
+
 
     public static boolean initialize(){
         List<String> formatStrings = new ArrayList<>();
@@ -53,11 +37,7 @@ public final class CardArchetypeLDAGenerator {
         if(formatMap==null) {
             try {
                 List<List<Pair<String, Double>>> lda = CardThemedLDAIO.loadRawLDA(format);
-                if (format.equals(FModel.getFormats().getStandard().getName())) {
-                    formatMap = loadFormat(FModel.getFormats().getStandard(), lda);
-                } else if (format.equals(FModel.getFormats().getModern().getName())) {
-                    formatMap = loadFormat(FModel.getFormats().getModern(), lda);
-                }
+                formatMap = loadFormat(lda);
                 CardThemedLDAIO.saveLDA(format, formatMap);
             }catch (Exception e){
                 e.printStackTrace();
@@ -68,7 +48,7 @@ public final class CardArchetypeLDAGenerator {
         return true;
     }
 
-    public static Map<String,List<List<Pair<String, Double>>>> loadFormat(GameFormat format,List<List<Pair<String, Double>>> lda) throws Exception{
+    public static Map<String,List<List<Pair<String, Double>>>> loadFormat(List<List<Pair<String, Double>>> lda) throws Exception{
 
         List<List<Pair<String, Double>>> topics = new ArrayList<>();
         Set<String> cards = new HashSet<String>();
