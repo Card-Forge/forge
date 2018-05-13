@@ -1,0 +1,6 @@
+[format]
+Name:Urza Block, 04/01/99
+Type:Historic
+Subtype:Block
+Effective:1999-04-01
+Banned:Memory Jar, Time Spiral, Windfall

@@ -1,0 +1,5 @@
+[format]
+Name:Extended, 10/01/03
+Subtype:Extended
+Effective:2003-10-01
+Banned:Dark Ritual, Dream Halls, Earthcraft, Entomb, Frantic Search, Goblin Lackey, Lotus Petal, Memory Jar, Mind Over Matter, Replenish, Survival of the Fittest, Time Spiral, Tolarian Academy, Windfall, Yawgmoth's Bargain, Yawgmoth's Will

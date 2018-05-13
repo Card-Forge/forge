@@ -1,0 +1,6 @@
+[format]
+Name:Tempest/Stronghold/Exodus Block, Exodus
+Type:Historic
+Subtype:Block
+Effective:1998-07-01
+Banned:Cursed Scroll
