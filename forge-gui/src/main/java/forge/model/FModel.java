@@ -26,6 +26,7 @@ import forge.achievement.*;
 import forge.ai.AiProfileUtil;
 import forge.card.CardPreferences;
 import forge.card.CardType;
+import forge.deck.CardArchetypeLDAGenerator;
 import forge.deck.CardRelationMatrixGenerator;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
@@ -218,7 +219,11 @@ public final class FModel {
         //generate Deck Gen matrix
         if(!FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY)
                 &&FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_CARDBASED)) {
-            deckGenMatrixLoaded=CardRelationMatrixGenerator.initialize();
+            boolean commanderDeckGenMatrixLoaded=CardRelationMatrixGenerator.initialize();
+            deckGenMatrixLoaded=CardArchetypeLDAGenerator.initialize();
+            if(!commanderDeckGenMatrixLoaded){
+                deckGenMatrixLoaded=false;
+            }
         }
     }
 

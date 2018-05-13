@@ -70,6 +70,11 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         super(pool,format);
     }
 
+    public CardThemedDeckBuilder(PaperCard keyCard0, PaperCard secondKeyCard0, final List<PaperCard> dList, GameFormat format, boolean isForAI){
+        this(keyCard0,secondKeyCard0, dList, format, isForAI, DeckFormat.Constructed);
+    }
+
+
     /**
      *
      * Constructor.
@@ -77,7 +82,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      * @param dList
      *            Cards to build the deck from.
      */
-    public CardThemedDeckBuilder(PaperCard keyCard0, PaperCard secondKeyCard0, final List<PaperCard> dList, GameFormat format, boolean isForAI) {
+    public CardThemedDeckBuilder(PaperCard keyCard0, PaperCard secondKeyCard0, final List<PaperCard> dList, GameFormat format, boolean isForAI, DeckFormat deckFormat) {
         super(new DeckGenPool(FModel.getMagicDb().getCommonCards().getUniqueCards()), DeckFormat.Constructed, format.getFilterPrinted());
         this.availableList = dList;
         keyCard=keyCard0;
@@ -91,16 +96,20 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             this.aiPlayables = Lists.newArrayList(availableList);
         }
         this.availableList.removeAll(aiPlayables);
-        targetSize=DeckFormat.Constructed.getMainRange().getMinimum();
+        targetSize=deckFormat.getMainRange().getMinimum();
         FullDeckColors deckColors = new FullDeckColors();
         int cardCount=0;
-        //get colours for first 20 cards
+        int colourCheckAmount = 20;
+        if (targetSize < 60){
+            colourCheckAmount = 10;//lower amount for planar decks
+        }
+        //get colours for first few cards
         for(PaperCard c:getAiPlayables()){
             if(deckColors.canChoseMoreColors()){
                 deckColors.addColorsOf(c);
                 cardCount++;
             }
-            if(cardCount>20){
+            if(cardCount > colourCheckAmount){
                 break;
             }
         }
@@ -113,8 +122,10 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         if(!colors.hasAllColors(keyCard.getRules().getColorIdentity().getColor())){
             colors = ColorSet.fromMask(colors.getColor() | keyCard.getRules().getColorIdentity().getColor());
         }
-        if(!colors.hasAllColors(secondKeyCard.getRules().getColorIdentity().getColor())){
-            colors = ColorSet.fromMask(colors.getColor() | secondKeyCard.getRules().getColorIdentity().getColor());
+        if(secondKeyCard!=null) {
+            if (!colors.hasAllColors(secondKeyCard.getRules().getColorIdentity().getColor())) {
+                colors = ColorSet.fromMask(colors.getColor() | secondKeyCard.getRules().getColorIdentity().getColor());
+            }
         }
         numSpellsNeeded = ((Double)Math.floor(targetSize*(getCreaturePercentage()+getSpellPercentage()))).intValue();
         numCreaturesToStart = ((Double)Math.ceil(targetSize*(getCreaturePercentage()))).intValue();
@@ -199,7 +210,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         // extras.
         double avCMC=getAverageCMC(deckList);
         int maxCMC=getMaxCMC(deckList);
-        if (deckList.size() == numSpellsNeeded && avCMC < 4) {
+        if (deckList.size() <= numSpellsNeeded && avCMC < 4) {
             addLowCMCCard();
             if(targetSize>60){
                 addLowCMCCard();
@@ -306,12 +317,12 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
     protected void generateTargetCMCs(){
         targetCMCs = new HashMap<>();
-        targetCMCs.put(1,Math.round((MyRandom.getRandom().nextInt(4)+2)*targetSize/60));//2
-        targetCMCs.put(2,Math.round((MyRandom.getRandom().nextInt(5)+5)*targetSize/60));//6
-        targetCMCs.put(3,Math.round((MyRandom.getRandom().nextInt(5)+6)*targetSize/60));//7
-        targetCMCs.put(4,Math.round((MyRandom.getRandom().nextInt(3)+3)*targetSize/60));//4
-        targetCMCs.put(5,Math.round((MyRandom.getRandom().nextInt(3)+3)*targetSize/60));//3
-        targetCMCs.put(6,Math.round((MyRandom.getRandom().nextInt(3)+1)*targetSize/60));//2
+        targetCMCs.put(1,Math.round((MyRandom.getRandom().nextInt(8)+2)*targetSize/60));//2
+        targetCMCs.put(2,Math.round((MyRandom.getRandom().nextInt(12)+5)*targetSize/60));//6
+        targetCMCs.put(3,Math.round((MyRandom.getRandom().nextInt(8)+6)*targetSize/60));//7
+        targetCMCs.put(4,Math.round((MyRandom.getRandom().nextInt(5)+3)*targetSize/60));//4
+        targetCMCs.put(5,Math.round((MyRandom.getRandom().nextInt(4)+3)*targetSize/60));//3
+        targetCMCs.put(6,Math.round((MyRandom.getRandom().nextInt(4)+1)*targetSize/60));//2
 
         while(sumMapValues(targetCMCs) < numSpellsNeeded){
             int randomKey = MyRandom.getRandom().nextInt(6)+1;
@@ -337,7 +348,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             rankedColorList.removeAll(keyCardList);
         }
         // Add the second keycard if not land
-        if(!secondKeyCard.getRules().getMainPart().getType().isLand()) {
+        if(secondKeyCard!=null && !secondKeyCard.getRules().getMainPart().getType().isLand()) {
             Iterable<PaperCard> secondKeyCards = Iterables.filter(aiPlayables,PaperCard.Predicates.name(secondKeyCard.getName()));
             final List<PaperCard> keyCardList = Lists.newArrayList(secondKeyCards);
             deckList.addAll(keyCardList);
@@ -357,7 +368,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             landsNeeded--;
         }
         // Add the deck card
-        if(secondKeyCard.getRules().getMainPart().getType().isLand()) {
+        if(secondKeyCard!=null && secondKeyCard.getRules().getMainPart().getType().isLand()) {
             Iterable<PaperCard> secondKeyCards = Iterables.filter(aiPlayables,PaperCard.Predicates.name(secondKeyCard.getName()));
             final List<PaperCard> keyCardList = Lists.newArrayList(secondKeyCards);
             deckList.addAll(keyCardList);
@@ -480,7 +491,11 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      * @return name
      */
     protected String generateName() {
-        return keyCard.getName() + " - " + secondKeyCard.getName() +" based deck";
+        if(secondKeyCard!=null ) {
+            return keyCard.getName() + " - " + secondKeyCard.getName() + " based deck";
+        }else{
+            return keyCard.getName() + " based deck";
+        }
     }
 
     /**
@@ -556,7 +571,8 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         if (secondKeyCard != null) {
             possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(secondKeyCard.getName()));
         }
-        Iterator<PaperCard> iRandomPool = CardRanker.rankCardsInDeck(possibleList.subList(0, targetSize <= possibleList.size() ? targetSize : possibleList.size())).iterator();
+        //Iterator<PaperCard> iRandomPool = CardRanker.rankCardsInDeck(possibleList.subList(0, targetSize <= possibleList.size() ? targetSize : possibleList.size())).iterator();
+        Iterator<PaperCard> iRandomPool = possibleList.iterator();
         while (deckList.size() < targetSize) {
             if (logToConsole) {
                 System.out.println("WARNING: Fixing deck size, currently " + deckList.size() + " cards.");
@@ -790,7 +806,9 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(secondKeyCard.getName()));
         }
         Collections.shuffle(possibleList);
-        addManaCurveCards(CardRanker.rankCardsInDeck(possibleList.subList(0, targetSize*3 <= possibleList.size() ? targetSize*3 : possibleList.size())),
+        //addManaCurveCards(CardRanker.rankCardsInDeck(possibleList.subList(0, targetSize*3 <= possibleList.size() ? targetSize*3 : possibleList.size())),
+                //num, "Random Card");
+        addManaCurveCards(possibleList,
                 num, "Random Card");
         
     }
