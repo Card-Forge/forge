@@ -2,5 +2,5 @@
 Name:Standard, Mirrodin
 Type:Historic
 Subtype:Standard
-Effective:2003-11-01
+Effective:2003-10-20
 Sets:ONS, LGN, SCG, 8ED, MRD

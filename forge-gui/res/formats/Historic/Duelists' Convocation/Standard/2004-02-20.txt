@@ -2,5 +2,5 @@
 Name:Standard, Darksteel
 Type:Historic
 Subtype:Standard
-Order:334
-Sets:8ED, ONS, LGN, SCG, MRD, DST
+Effective:2004-02-20
+Sets:ONS, LGN, SCG, 8ED, MRD, DST

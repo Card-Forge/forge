@@ -1,7 +1,0 @@
-[format]
-Name:Standard, Fifth Dawn
-Type:Historic
-Subtype:Standard
-Order:341
-Sets:8ED, ONS, LGN, SCG, MRD, DST, 5DN
-Banned:Skullclamp
