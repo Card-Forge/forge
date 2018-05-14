@@ -7,8 +7,8 @@ Type=Other
 [cards]
 1 M The Mimeoplasm
 2 M Damia, Sage of Stone
-
 3 R Vorosh, the Hunter
+4 M Daretti, Scrap Savant
 5 R Bosh, Iron Golem
 6 M Feldon of the Third Path
 7 M Kalemne, Disciple of Iroas
