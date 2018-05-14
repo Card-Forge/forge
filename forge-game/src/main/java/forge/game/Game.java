@@ -544,7 +544,7 @@ public class Game {
         }
 
         public Card getFound() {
-            return found == null ? found : old;
+            return found == null ? old : found;
         }
     }
 
