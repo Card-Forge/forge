@@ -65,6 +65,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbManaLostPrompt = new OptionsCheckBox("Prompt Mana Pool Emptying");
     private final JCheckBox cbDevMode = new OptionsCheckBox("Developer Mode");
     private final JCheckBox cbLoadCardsLazily = new OptionsCheckBox("Load Card Scripts Lazily");
+    private final JCheckBox cbLoadHistoricFormats = new OptionsCheckBox("Load Historic Formats");
     private final JCheckBox cbWorkshopSyntax = new OptionsCheckBox("Workshop Syntax Checker");
     private final JCheckBox cbEnforceDeckLegality = new OptionsCheckBox("Deck Conformance");
     private final JCheckBox cbImageFetcher = new OptionsCheckBox("Automatically Download Missing Card Art");
@@ -238,6 +239,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbLoadCardsLazily, titleConstraints);
         pnlPrefs.add(new NoteLabel("If turned on, Forge will load card scripts as they're needed instead of at start up. (Warning: Experimental)"), descriptionConstraints);
+
+        pnlPrefs.add(cbLoadHistoricFormats, titleConstraints);
+        pnlPrefs.add(new NoteLabel("If turned on, Forge will load all historic format definitions, this may take slightly longer to load at startup."), descriptionConstraints);
 
         // Graphic Options
         pnlPrefs.add(new SectionLabel("Graphic Options"), sectionConstraints + ", gaptop 2%");
@@ -584,6 +588,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbLoadCardsLazily() {
         return cbLoadCardsLazily;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbLoadHistoricFormats() {
+        return cbLoadHistoricFormats;
     }
 
     public JCheckBox getCbWorkshopSyntax() {

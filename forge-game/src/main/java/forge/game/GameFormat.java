@@ -286,13 +286,27 @@ public class GameFormat implements Comparable<GameFormat> {
 
     public static class Reader extends StorageReaderRecursiveFolderWithUserFolder<GameFormat> {
         List<GameFormat> naturallyOrdered = new ArrayList<GameFormat>();
+        boolean includeHistoric;
+        private List<String> coreFormats = new ArrayList<>();
+        {
+            coreFormats.add("Standard.txt");
+            coreFormats.add("Modern.txt");
+            coreFormats.add("Legacy.txt");
+            coreFormats.add("Vintage.txt");
+            coreFormats.add("Commander.txt");
+
+        }
         
-        public Reader(File forgeFormats, File customFormats) {
+        public Reader(File forgeFormats, File customFormats, boolean includeHistoric) {
             super(forgeFormats, customFormats, GameFormat.FN_GET_NAME);
+            this.includeHistoric=includeHistoric;
         }
 
         @Override
         protected GameFormat read(File file) {
+            if(!includeHistoric && !coreFormats.contains(file.getName())){
+                return null;
+            }
             final Map<String, List<String>> contents = FileSection.parseSections(FileUtil.readFile(file));
             List<String> sets = null; // default: all sets allowed
             List<String> bannedCards = null; // default: nothing banned
