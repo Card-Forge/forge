@@ -1,7 +1,7 @@
 Name:Strata Scythe
 ManaCost:3
 Types:Artifact Equipment
-K:Equip 3
+K:Equip:3
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ Imprint — When CARDNAME enters the battlefield, search your library for a land card, exile it, then shuffle your library.
 SVar:TrigExile:DB$ ChangeZone | Imprint$ True | Origin$ Library | Destination$ Exile | ChangeType$ Land | ChangeNum$ 1
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | References$ X | Description$ Equipped creature gets +1/+1 for each land on the battlefield with the same name as the exiled card.

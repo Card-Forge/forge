@@ -1,7 +1,7 @@
 Name:Thirsting Axe
 ManaCost:3
 Types:Artifact Equipment
-K:Equip 2
+K:Equip:2
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 4 | Description$ Equipped creature gets +4/+0.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | IsPresent$ Card.EquippedBy+notDealtCombatDamageThisTurn Creature | TriggerZone$ Battlefield | Execute$ SacrificeEquippee | TriggerDescription$ At the beginning of your end step, if equipped creature didn't deal combat damage to a creature this turn, sacrifice it.
 SVar:SacrificeEquippee:DB$ SacrificeAll | Defined$ Equipped

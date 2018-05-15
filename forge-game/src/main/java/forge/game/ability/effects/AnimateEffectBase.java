@@ -37,12 +37,14 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         boolean removeCardTypes = false;
         boolean removeSubTypes = false;
         boolean removeCreatureTypes = false;
+        boolean removeArtifactTypes = false;
 
         if (sa.hasParam("OverwriteTypes")) {
             removeSuperTypes = true;
             removeCardTypes = true;
             removeSubTypes = true;
             removeCreatureTypes = true;
+            removeArtifactTypes = true;
         }
 
         if (sa.hasParam("KeepSupertypes")) {
@@ -73,13 +75,16 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             removeCreatureTypes = true;
         }
 
+        if (sa.hasParam("RemoveArtifactTypes")) {
+            removeArtifactTypes = true;
+        }
         if ((power != null) || (toughness != null)) {
             c.addNewPT(power, toughness, timestamp);
         }
 
         if (!addType.isEmpty() || !removeType.isEmpty() || removeCreatureTypes) {
             c.addChangedCardTypes(addType, removeType, removeSuperTypes, removeCardTypes, removeSubTypes,
-                    removeCreatureTypes, timestamp);
+                    removeCreatureTypes, removeArtifactTypes, timestamp);
         }
 
         c.addChangedCardKeywords(keywords, removeKeywords, sa.hasParam("RemoveAllAbilities"), timestamp);
@@ -128,7 +133,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("Types") || sa.hasParam("RemoveTypes")
-                || sa.hasParam("RemoveCreatureTypes")) {
+                || sa.hasParam("RemoveCreatureTypes") || sa.hasParam("RemoveArtifactTypes")) {
             c.removeChangedCardTypes(timestamp);
         }
 

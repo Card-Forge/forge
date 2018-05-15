@@ -6,7 +6,7 @@ A:AB$ ChangeZone | Cost$ R W Unattach<CARDNAME/CARDNAME> | ChangeType$ Instant.W
 SVar:CastFound:DB$ Play | Defined$ Remembered | Controller$ You | WithoutManaCost$ True | SubAbility$ YouShuffle | StackDescription$ None
 SVar:YouShuffle:DB$ Shuffle | Defined$ You | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-K:Equip 3
+K:Equip:3
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Red|White
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunforger.jpg
