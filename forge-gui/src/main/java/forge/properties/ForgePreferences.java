@@ -153,6 +153,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SUBMENU_UTILITIES ("false"),
 
         ENFORCE_DECK_LEGALITY ("true"),
+        PERFORMANCE_MODE ("false"),
 
         DEV_MODE_ENABLED ("false"),
         DEV_WORKSHOP_SYNTAX ("false"),

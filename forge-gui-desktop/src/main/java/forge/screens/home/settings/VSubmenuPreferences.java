@@ -67,6 +67,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbLoadCardsLazily = new OptionsCheckBox("Load Card Scripts Lazily");
     private final JCheckBox cbWorkshopSyntax = new OptionsCheckBox("Workshop Syntax Checker");
     private final JCheckBox cbEnforceDeckLegality = new OptionsCheckBox("Deck Conformance");
+    private final JCheckBox cbPerformanceMode = new OptionsCheckBox("Performance Mode");
     private final JCheckBox cbImageFetcher = new OptionsCheckBox("Automatically Download Missing Card Art");
     private final JCheckBox cbCloneImgSource = new OptionsCheckBox("Clones Use Original Card Art");
     private final JCheckBox cbScaleLarger = new OptionsCheckBox("Scale Image Larger");
@@ -169,6 +170,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbEnforceDeckLegality, titleConstraints);
         pnlPrefs.add(new NoteLabel("Enforces deck legality relevant to each environment (minimum deck sizes, max card count etc)."), descriptionConstraints);
+
+        pnlPrefs.add(cbPerformanceMode, titleConstraints);
+        pnlPrefs.add(new NoteLabel("Disables additional static abilities checks to speed up the game engine. (Warning: breaks some 'as if had flash' scenarios when casting cards owned by opponents)."), descriptionConstraints);
 
         pnlPrefs.add(cbCloneImgSource, titleConstraints);
         pnlPrefs.add(new NoteLabel("When enabled clones will use their original art instead of the cloned card's art."), descriptionConstraints);
@@ -621,6 +625,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbEnforceDeckLegality() {
         return cbEnforceDeckLegality;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbPerformanceMode() {
+        return cbPerformanceMode;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
