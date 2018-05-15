@@ -1,6 +1,0 @@
-[format]
-Name:Type I.5, 10/01/96
-Type:Historic
-Subtype:Legacy
-Effective:1996-10-01
-Banned:Amulet of Quoz, Ancestral Recall, Balance, Berserk, Black Lotus, Black Vise, Bronze Tablet, Candelabra of Tawnos, Channel, Chaos Orb, Contract from Below, Copy Artifact, Darkpact, Demonic Attorney, Demonic Tutor, Divine Intervention, Falling Star, Fastbond, Feldon's Cane, Fork, Hymn to Tourach, Ivory Tower, Jeweled Bird, Land Tax, Library of Alexandria, Maze of Ith, Mind Twist, Mirror Universe, Mishra's Workshop, Mox Emerald, Mox Pearl, Mox Ruby, Mox Sapphire, Mox Jet, Rebirth, Recall, Regrowth, Shahrazad, Sol Ring, Strip Mine, Tempest Efreet, Time Walk, Timetwister, Timmerian Fiends, Underworld Dreams, Wheel of Fortune, Zuran Orb

@@ -1,8 +1,0 @@
-[format]
-Name:Classic Alpha, 11/01/98
-Type:Historic
-Subtype:Vintage
-Effective:1998-11-01
-Sets:LEA
-Restricted:Ancestral Recall, Balance, Berserk, Black Lotus, Black Vise, Braingeyser, Demonic Tutor, Fastbond, Fork, Mox Emerald, Mox Pearl, Mox Ruby, Mox Sapphire, Mox Jet, Regrowth, Sol Ring, Timetwister, Time Walk, Wheel of Fortune
-Banned:Channel, Chaos Orb, Contract from Below, Darkpact, Demonic Attorney, Mind Twist
