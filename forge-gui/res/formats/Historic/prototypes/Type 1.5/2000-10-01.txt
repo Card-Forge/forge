@@ -1,6 +1,0 @@
-[format]
-Name:Type 1.5, 10/01/00
-Type:Historic
-Subtype:Legacy
-Effective:2000-10-01
-Banned:Amulet of Quoz, Ancestral Recall, Balance, Berserk, Black Lotus, Braingeyser, Bronze Tablet, Channel, Chaos Orb, Contract from Below, Crop Rotation, Darkpact, Demonic Attorney, Demonic Consultation, Demonic Tutor, Doomsday, Dream Halls, Enlightened Tutor, Falling Star, Fastbond, Fork, Frantic Search, Grim Monolith, Hurkyl's Recall, Jeweled Bird, Library of Alexandria, Lotus Petal, Mana Crypt, Mana Vault, Memory Jar, Mind Over Matter, Mind Twist, Mox Diamond, Mox Emerald, Mox Pearl, Mox Ruby, Mox Sapphire, Mox Jet, Mystical Tutor, Necropotence, Rebirth, Recall, Regrowth, Sol Ring, Strip Mine, Stroke of Genius, Tempest Efreet, Time Spiral, Time Walk, Timetwister, Timmerian Fiends, Tinker, Tolarian Academy, Vampiric Tutor, Voltaic Key, Wheel of Fortune, Windfall, Yawgmoth's Bargain, Yawgmoth's Will, Zuran Orb
