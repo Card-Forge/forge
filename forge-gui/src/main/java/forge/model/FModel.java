@@ -32,6 +32,7 @@ import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.game.card.CardUtil;
+import forge.game.spellability.Spell;
 import forge.gauntlet.GauntletData;
 import forge.interfaces.IProgressBar;
 import forge.itemmanager.ItemManagerConfig;
@@ -183,6 +184,8 @@ public final class FModel {
         }
         standardWorlds.putAll(customWorlds);
         worlds = new StorageBase<>("Quest worlds", null, standardWorlds);
+
+        Spell.setPerformanceMode(preferences.getPrefBoolean(FPref.PERFORMANCE_MODE));
 
         loadDynamicGamedata();
 
