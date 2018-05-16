@@ -1,0 +1,5 @@
+[format]
+Name:Extended, 01/01/04
+Subtype:Extended
+Effective:2004-01-01
+Banned:Ancient Tomb, Dark Ritual, Dream Halls, Earthcraft, Entomb, Frantic Search, Goblin Lackey, Goblin Recruiter, Grim Monolith, Hermit Druid, Lotus Petal, Memory Jar, Mind Over Matter, Oath of Druids, Replenish, Survival of the Fittest, Time Spiral, Tinker, Tolarian Academy, Windfall, Yawgmoth's Bargain, Yawgmoth's Will

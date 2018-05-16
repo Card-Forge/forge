@@ -1,0 +1,5 @@
+[format]
+Name:Onslaught Block, Onslaught
+Type:Historic
+Subtype:Block
+Effective:2002-11-01

@@ -1,0 +1,7 @@
+[format]
+Name:Standard, July 2011
+Type:Historic
+Subtype:Standard
+Order:499
+Sets:ZEN, WWK, ROE, M11, SOM, MBS, NPH
+Banned:Jace, the Mind Sculptor; Stoneforge Mystic

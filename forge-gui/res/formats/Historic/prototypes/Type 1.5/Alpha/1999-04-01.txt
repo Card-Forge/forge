@@ -1,0 +1,7 @@
+[format]
+Name:Classic-Restricted Alpha, 04/01/99
+Type:Historic
+Subtype:Legacy
+Effective:1999-04-01
+Sets:LEA
+Banned:Ancestral Recall, Balance, Berserk, Black Lotus, Braingeyser, Channel, Chaos Orb, Contract from Below, Darkpact, Demonic Attorney, Demonic Tutor, Fastbond, Fork, Mind Twist, Mox Emerald, Mox Pearl, Mox Ruby, Mox Sapphire, Mox Jet, Regrowth, Sol Ring, Time Walk, Timetwister, Wheel of Fortune

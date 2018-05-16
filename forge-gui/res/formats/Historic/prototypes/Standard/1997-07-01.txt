@@ -1,0 +1,6 @@
+[format]
+Name:Standard, Weatherlight
+Type:Historic
+Subtype:Standard
+Effective:1997-07-01
+Banned:Amulet of Quoz, Timmerian Fiends, Zuran Orb

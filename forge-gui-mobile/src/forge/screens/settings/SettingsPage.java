@@ -187,6 +187,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.LOAD_CARD_SCRIPTS_LAZILY,
                 "Load Card Scripts Lazily",
                 "If turned on, Forge will load card scripts as they're needed instead of at start up. (Warning: Experimental)"), 3);
+        lstSettings.addItem(new BooleanSetting(FPref.LOAD_HISTORIC_FORMATS,
+                "Load Historic Formats",
+                "If turned on, Forge will load all historic format definitions, this may take slightly longer to load at startup."), 3);
 
         //Graphic Options
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_FOIL_EFFECT,

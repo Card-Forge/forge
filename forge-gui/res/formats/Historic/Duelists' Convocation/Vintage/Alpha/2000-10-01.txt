@@ -1,0 +1,8 @@
+[format]
+Name:Type 1 Alpha, 10/01/00
+Type:Historic
+Subtype:Vintage
+Effective:2000-10-01
+Sets:LEA
+Restricted:Ancestral Recall, Balance, Berserk, Black Lotus, Black Vise, Braingeyser, Channel, Demonic Tutor, Fastbond, Fork, Mind Twist, Mox Emerald, Mox Pearl, Mox Ruby, Mox Sapphire, Mox Jet, Regrowth, Sol Ring, Timetwister, Time Walk, Wheel of Fortune
+Banned:Chaos Orb, Contract from Below, Darkpact, Demonic Attorney

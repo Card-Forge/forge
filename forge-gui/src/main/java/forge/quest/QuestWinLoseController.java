@@ -501,7 +501,7 @@ public class QuestWinLoseController {
             final String preferredFormat = FModel.getQuestPreferences().getPref(QPref.BOOSTER_FORMAT);
 
             GameFormat pref = null;
-            for (final GameFormat f : FModel.getFormats().getOrderedList()) {
+            for (final GameFormat f : FModel.getFormats().getSanctionedList()) {
                 formats.add(f);
                 if (f.toString().equals(preferredFormat)) {
                     pref = f;

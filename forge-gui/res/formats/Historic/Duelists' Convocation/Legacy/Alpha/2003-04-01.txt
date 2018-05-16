@@ -1,0 +1,7 @@
+[format]
+Name:Type 1.5 Alpha, 04/01/03
+Type:Historic
+Subtype:Legacy
+Effective:2003-04-01
+Sets:LEA
+Banned:Ancestral Recall, Balance, Black Lotus, Braingeyser, Channel, Chaos Orb, Contract from Below, Darkpact, Demonic Attorney, Demonic Tutor, Fastbond, Fork, Mana Vault, Mind Twist, Mox Emerald, Mox Pearl, Mox Ruby, Mox Sapphire, Mox Jet, Regrowth, Sol Ring, Time Walk, Timetwister, Wheel of Fortune

@@ -1,0 +1,6 @@
+[format]
+Name:Kamigawa Block, Champions of Kamigawa
+Type:Historic
+Subtype:Block
+Effective:2004-10-20
+Sets:CHK

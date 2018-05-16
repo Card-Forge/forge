@@ -65,7 +65,7 @@ public class AdvancedSearch {
                 return FModel.getMagicDb().getEditions().get(input.getEdition());
             }
         }),
-        CARD_FORMAT("Format", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, GameFormat>((List<GameFormat>)FModel.getFormats().getOrderedList()) {
+        CARD_FORMAT("Format", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, GameFormat>((List<GameFormat>)FModel.getFormats().getFilterList()) {
             @Override
             protected GameFormat getItemValue(PaperCard input) {
                 throw new RuntimeException("getItemValues should be called instead");
@@ -231,14 +231,14 @@ public class AdvancedSearch {
                 return input.isFavoriteDeck();
             }
         }),
-        DECK_FORMAT("Format", DeckProxy.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<DeckProxy, GameFormat>((List<GameFormat>)FModel.getFormats().getOrderedList()) {
+        DECK_FORMAT("Format", DeckProxy.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<DeckProxy, GameFormat>((List<GameFormat>)FModel.getFormats().getFilterList()) {
             @Override
             protected GameFormat getItemValue(DeckProxy input) {
                 throw new RuntimeException("getItemValues should be called instead");
             }
             @Override
             protected Set<GameFormat> getItemValues(DeckProxy input) {
-                return input.getFormats();
+                return input.getExhaustiveFormats();
             }
         }),
         DECK_QUEST_WORLD("Quest World", DeckProxy.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<DeckProxy, QuestWorld>(ImmutableList.copyOf(FModel.getWorlds())) {

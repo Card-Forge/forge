@@ -1,0 +1,7 @@
+[format]
+Name:Type II, 02/01/96
+Type:Historic
+Subtype:Standard
+Effective:1996-02-01
+Restricted:Balance, Black Vise, Feldon's Cane, Ivory Tower, Recall, Zuran Orb
+Banned:Amulet of Quoz, Bronze Tablet, Channel, Mind Twist, Rebirth, Tempest Efreet

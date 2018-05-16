@@ -334,7 +334,7 @@ public enum ColumnDef {
                     if (deck == null) {
                         return -1;
                     }
-                    Iterable<GameFormat> all = deck.getFormats();
+                    Iterable<GameFormat> all = deck.getExhaustiveFormats();
                     int acc = 0;
                     for(GameFormat gf : all) {
                         int ix = gf.getIndex();

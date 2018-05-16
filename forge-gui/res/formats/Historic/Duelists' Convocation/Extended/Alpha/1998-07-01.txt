@@ -1,0 +1,7 @@
+[format]
+Name:Extended Alpha, Exodus
+Type:Historic
+Subtype:Extended
+Effective:1998-07-01
+Sets:LEA
+Banned:Ancestral Recall, Balance, Berserk, Black Lotus, Black Vise, Blaze of Glory, Braingeyser, Channel, Chaos Orb, Consecrate Land, Contract from Below, Copper Tablet, Counterspell, Cyclopean Tomb, Darkpact, Demonic Attorney, Demonic Tutor, Dwarven Demolition Team, Fastbond, Forcefield, Gauntlet of Might, Hypnotic Specter, Ice Storm, Invisibility, Jade Statue, Lich, Mind Twist, Mox Emerald, Mox Jet, Mox Pearl, Mox Ruby, Mox Sapphire, Natural Selection, Psionic Blast, Regrowth, Sinkhole, Sol Ring, Time Vault, Time Walk, Timetwister, Two-Headed Giant of Foriys, Wheel of Fortune

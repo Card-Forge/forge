@@ -27,6 +27,7 @@ public abstract class FormatFilter<T extends InventoryItem> extends ListLabelFil
     protected String getTooltip() {
         Set<String> sets = new HashSet<String>();
         Set<String> bannedCards = new HashSet<String>();
+        Set<String> additionalCards = new HashSet<>();
 
         for (GameFormat format : this.formats) {
             List<String> formatSets = format.getAllowedSetCodes();
@@ -36,6 +37,10 @@ public abstract class FormatFilter<T extends InventoryItem> extends ListLabelFil
             List<String> formatBannedCards = format.getBannedCardNames();
             if (formatBannedCards != null) {
                 bannedCards.addAll(formatBannedCards);
+            }
+            List<String> formatAdditionalCards = format.getAdditionalCards();
+            if (formatAdditionalCards != null) {
+                additionalCards.addAll(formatAdditionalCards);
             }
         }
 
@@ -58,7 +63,9 @@ public abstract class FormatFilter<T extends InventoryItem> extends ListLabelFil
                 }
 
                 CardEdition edition = editions.get(code);
-                tooltip.append(" ").append(edition.getName()).append(" (").append(code).append("),");
+                if(edition!=null) {
+                    tooltip.append(" ").append(edition.getName()).append(" (").append(code).append("),");
+                }
                 lineLen = tooltip.length() - lastLen;
             }
 
@@ -76,6 +83,27 @@ public abstract class FormatFilter<T extends InventoryItem> extends ListLabelFil
             lineLen = 0;
 
             for (String cardName : bannedCards) {
+                // don't let a single line get too long
+                if (50 < lineLen) {
+                    tooltip.append("<br>");
+                    lastLen += lineLen;
+                    lineLen = 0;
+                }
+
+                tooltip.append(" ").append(cardName).append(";");
+                lineLen = tooltip.length() - lastLen;
+            }
+
+            // chop off last semicolon
+            tooltip.delete(tooltip.length() - 1, tooltip.length());
+        }
+
+        if (!additionalCards.isEmpty()) {
+            tooltip.append("<br><br>Additional:");
+            lastLen += lineLen;
+            lineLen = 0;
+
+            for (String cardName : additionalCards) {
                 // don't let a single line get too long
                 if (50 < lineLen) {
                     tooltip.append("<br>");

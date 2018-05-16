@@ -6,6 +6,7 @@ import forge.game.GameFormat;
 import forge.deck.DeckProxy;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.SFilterUtil;
+import forge.screens.home.quest.DialogChooseFormats;
 
 
 public class DeckFormatFilter extends FormatFilter<DeckProxy> {
@@ -26,5 +27,17 @@ public class DeckFormatFilter extends FormatFilter<DeckProxy> {
     @Override
     protected final Predicate<DeckProxy> buildPredicate() {
         return DeckProxy.createPredicate(SFilterUtil.buildFormatFilter(this.formats, this.allowReprints));
+    }
+
+    public void edit() {
+        final DialogChooseFormats dialog = new DialogChooseFormats(this.formats);
+        dialog.setOkCallback(new Runnable() {
+            @Override
+            public void run() {
+                allowReprints = dialog.getWantReprints();
+                formats.clear();
+                formats.addAll(dialog.getSelectedFormats());
+            }
+        });
     }
 }

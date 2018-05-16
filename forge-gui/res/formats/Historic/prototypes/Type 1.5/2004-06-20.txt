@@ -1,0 +1,6 @@
+[format]
+Name:Type 1.5, Fifth Dawn
+Type:Historic
+Subtype:Legacy
+Effective:2004-06-20
+Banned:Amulet of Quoz, Ancestral Recall, Balance, Black Lotus, Braingeyser, Bronze Tablet, Burning Wish, Channel, Chaos Orb, Chrome Mox, Contract from Below, Crop Rotation, Darkpact, Demonic Attorney, Demonic Consultation, Demonic Tutor, Doomsday, Dream Halls, Earthcraft, Enlightened Tutor, Entomb, Fact or Fiction, Falling Star, Fastbond, Fork, Frantic Search, Grim Monolith, Gush, Jeweled Bird, Library of Alexandria, Lion's Eye Diamond, Lotus Petal, Mana Crypt, Mana Vault, Memory Jar, Mind Over Matter, Mind Twist, Mind's Desire, Mox Diamond, Mox Emerald, Mox Pearl, Mox Ruby, Mox Sapphire, Mox Jet, Mystical Tutor, Necropotence, Rebirth, Regrowth, Sol Ring, Strip Mine, Stroke of Genius, Tempest Efreet, Time Spiral, Time Walk, Timetwister, Timmerian Fiends, Tinker, Tolarian Academy, Vampiric Tutor, Voltaic Key, Wheel of Fortune, Windfall, Yawgmoth's Bargain, Yawgmoth's Will, Zuran Orb

@@ -1,0 +1,6 @@
+[format]
+Name:Kamigawa Block, Saviors of Kamigawa
+Type:Historic
+Subtype:Block
+Effective:2005-06-20
+Sets:CHK, BOK, SOK

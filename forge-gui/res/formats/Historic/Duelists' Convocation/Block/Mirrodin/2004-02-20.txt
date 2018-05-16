@@ -1,0 +1,6 @@
+[format]
+Name:Mirrodin Block, Darksteel
+Type:Historic
+Subtype:Block
+Effective:2004-02-20
+Sets:MRD, DST
