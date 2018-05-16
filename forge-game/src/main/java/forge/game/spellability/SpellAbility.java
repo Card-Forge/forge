@@ -80,8 +80,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private Player deltrigActivatingPlayer = null; // used by delayed triggers to ensure the original activator can be restored
     private Player targetingPlayer = null;
 
-    private boolean basicLandAbility; // granted by basic land type
-
     private Card grantorCard = null; // card which grants the ability (equipment or owner of static ability that gave this one)
     private SpellAbility mayPlayOriginal = null;
 
@@ -1200,14 +1198,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean isXCost() {
         CostPartMana cm = payCosts != null ? getPayCosts().getCostMana() : null;
         return cm != null && cm.getAmountOfX() > 0;
-    }
-
-    public boolean isBasicLandAbility() {
-        return basicLandAbility;
-    }
-
-    public void setBasicLandAbility(boolean basicLandAbility0) {
-        basicLandAbility = basicLandAbility0;
     }
 
     @Override

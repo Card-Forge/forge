@@ -22,10 +22,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-import forge.card.MagicColor;
 import forge.card.mana.ManaCostParser;
-import forge.game.ability.AbilityFactory;
-import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
@@ -40,7 +37,6 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -52,58 +48,10 @@ import java.util.Map;
  * @version $Id$
  */
 public final class GameActionUtil {
-    // Cache these instead of generating them on the fly, to avoid excessive allocations every time
-    // static abilities are checked.
-    @SuppressWarnings("unchecked")
-    private static final Map<String, String>[] BASIC_LAND_ABILITIES_PARAMS = new Map[MagicColor.WUBRG.length];
-    private static final AbilityRecordType[] BASIC_LAND_ABILITIES_TYPES = new AbilityRecordType[MagicColor.WUBRG.length];
-    static {
-        for (int i = 0; i < MagicColor.WUBRG.length; i++ ) {
-            String color = MagicColor.toShortString(MagicColor.WUBRG[i]);
-            String abString  = "AB$ Mana | Cost$ T | Produced$ " + color +
-                    " | SpellDescription$ Add {" + color + "}.";
-            Map<String, String> mapParams = AbilityFactory.getMapParams(abString);
-            BASIC_LAND_ABILITIES_PARAMS[i] = mapParams;
-            BASIC_LAND_ABILITIES_TYPES[i] = AbilityRecordType.getRecordType(mapParams);
-        }
-    }
 
     private GameActionUtil() {
         throw new AssertionError();
     }
-
-    /**
-     * Gets the st land mana abilities.
-     * @param game
-     * 
-     * @return the stLandManaAbilities
-     */
-    public static void grantBasicLandsManaAbilities(List<Card> lands) {
-        // remove all abilities granted by this Command
-        for (final Card land : lands) {
-            List<SpellAbility> origManaAbs = Lists.newArrayList(land.getManaAbilities());
-            // will get comodification exception without a different list
-            for (final SpellAbility sa : origManaAbs) {
-                if (sa.isBasicLandAbility()) {
-                    land.getCurrentState().removeManaAbility(sa);
-                }
-            }
-        }
-
-        // add all appropriate mana abilities based on current types
-        for (int i = 0; i < MagicColor.WUBRG.length; i++ ) {
-            String landType = MagicColor.Constant.BASIC_LANDS.get(i);
-            Map<String, String> mapParams = BASIC_LAND_ABILITIES_PARAMS[i];
-            AbilityRecordType type = BASIC_LAND_ABILITIES_TYPES[i];
-            for (final Card land : lands) {
-                if (land.getType().hasSubtype(landType)) {
-                    final SpellAbility sa = AbilityFactory.getAbility(mapParams, type, land, null);
-                    sa.setBasicLandAbility(true);
-                    land.getCurrentState().addManaAbility(sa);
-                }
-            }
-        }
-    } // stLandManaAbilities
 
     /**
      * <p>

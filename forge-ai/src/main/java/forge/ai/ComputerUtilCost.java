@@ -608,7 +608,6 @@ public class ComputerUtilCost {
         Set<String> colorsAvailable = Sets.newHashSet();
 
         if (additionalLands != null) {
-            GameActionUtil.grantBasicLandsManaAbilities(additionalLands);
             cardsToConsider.addAll(additionalLands);
         }
 

@@ -769,8 +769,6 @@ public final class StaticAbilityContinuous {
                 Player mayPlayController = params.containsKey("MayPlayCardOwner") ? affectedCard.getOwner() : controller;
                 affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost, mayPlayAltManaCost, mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);
             }
-
-            affectedCard.updateAbilityTextForView(); // only update keywords and text for view to avoid flickering
         }
 
         return affectedCards;
