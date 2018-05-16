@@ -1,5 +1,0 @@
-[format]
-Name:Mirrodin Block, Mirrodin
-Type:Historic
-Subtype:Block
-Effective:2003-10-20

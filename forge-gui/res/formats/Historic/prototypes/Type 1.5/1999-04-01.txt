@@ -1,6 +1,0 @@
-[format]
-Name:Classic-Restricted, 04/01/99
-Type:Historic
-Subtype:Legacy
-Effective:1999-04-01
-Banned:Amulet of Quoz, Ancestral Recall, Balance, Berserk, Black Lotus, Braingeyser, Bronze Tablet, Channel, Chaos Orb, Contract from Below, Darkpact, Demonic Attorney, Demonic Tutor, Divine Intervention, Falling Star, Fastbond, Fork, Ivory Tower, Jeweled Bird, Library of Alexandria, Memory Jar, Mind Twist, Mirror Universe, Mox Emerald, Mox Pearl, Mox Ruby, Mox Sapphire, Mox Jet, Rebirth, Recall, Regrowth, Shahrazad, Sol Ring, Strip Mine, Stroke of Genius, Tempest Efreet, Time Spiral, Time Walk, Timetwister, Timmerian Fiends, Tolarian Academy, Underworld Dreams, Wheel of Fortune, Windfall, Zuran Orb

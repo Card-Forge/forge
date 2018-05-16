@@ -1,6 +1,0 @@
-[format]
-Name:Standard, Fifth Dawn
-Type:Historic
-Subtype:Standard
-Effective:2004-06-20
-Banned:Skullclamp

@@ -1,6 +1,0 @@
-[format]
-Name:Standard, Urza's Destiny
-Type:Historic
-Subtype:Standard
-Effective:1999-07-01
-Banned:Dream Halls, Earthcraft, Fluctuator, Lotus Petal, Memory Jar, Mind Over Matter, Recurring Nightmare, Time Spiral, Tolarian Academy, Windfall

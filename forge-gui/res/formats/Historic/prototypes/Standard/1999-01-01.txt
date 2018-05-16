@@ -1,6 +1,0 @@
-[format]
-Name:Standard, 01/01/99
-Type:Historic
-Subtype:Standard
-Effective:1999-01-01
-Banned:Tolarian Academy, Windfall
