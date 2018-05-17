@@ -2139,14 +2139,21 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final void addSpellAbility(final SpellAbility a) {
+        addSpellAbility(a, true);
+    }
+    public final void addSpellAbility(final SpellAbility a, final boolean updateView) {
         a.setHostCard(this);
-        if (currentState.addSpellAbility(a)) {
+        if (currentState.addSpellAbility(a) && updateView) {
             currentState.getView().updateAbilityText(this, currentState);
         }
     }
 
     public final void removeSpellAbility(final SpellAbility a) {
-        if (currentState.removeSpellAbility(a)) {
+        removeSpellAbility(a, true);
+    }
+
+    public final void removeSpellAbility(final SpellAbility a, final boolean updateView) {
+        if (currentState.removeSpellAbility(a) && updateView) {
             currentState.getView().updateAbilityText(this, currentState);
         }
     }
@@ -5740,5 +5747,26 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public void removeWithFlash(Long timestamp) {
         withFlash.removeAll(timestamp);
+    }
+
+    public void unSuppressCardTraits() {
+        // specially reset basic land abilities
+        for (final SpellAbility ab : basicLandAbilities) {
+            if (ab != null) {
+                ab.setTemporarilySuppressed(false);
+            }
+        }
+        for (final SpellAbility ab : getSpellAbilities()) {
+            ab.setTemporarilySuppressed(false);
+        }
+        for (final Trigger t : getTriggers()) {
+            t.setTemporarilySuppressed(false);
+        }
+        for (final StaticAbility stA : getStaticAbilities()) {
+            stA.setTemporarilySuppressed(false);
+        }
+        for (final ReplacementEffect rE : getReplacementEffects()) {
+            rE.setTemporarilySuppressed(false);
+        }
     }
 }
