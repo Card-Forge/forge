@@ -97,7 +97,8 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         boolean lkicheck = false;
         boolean flash = false;
 
-        if (activator != null && !card.getController().equals(activator)) {
+        // do performanceMode only for cases where the activator is different than controller
+        if (!Spell.performanceMode && activator != null && !card.getController().equals(activator)) {
             // always make a lki copy in this case?
             card = CardUtil.getLKICopy(card);
             card.setController(activator, 0);
@@ -122,7 +123,8 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             lkicheck = true;
         }
 
-        if (!Spell.performanceMode && lkicheck) {
+
+        if (lkicheck) {
             game.getTracker().freeze(); //prevent views flickering during while updating for state-based effects
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(card), new CardCollection(card));
         }
@@ -130,7 +132,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         flash = card.withFlash(activator);
 
         // reset static abilities
-        if (!Spell.performanceMode && lkicheck) {
+        if (lkicheck) {
             game.getAction().checkStaticAbilities(false);
             game.getTracker().unfreeze();
         }
