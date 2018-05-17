@@ -1,6 +1,0 @@
-[format]
-Name:Standard, Guildpact
-Type:Historic
-Subtype:Standard
-Order:378
-Sets:9ED, CHK, BOK, SOK, RAV, GPT

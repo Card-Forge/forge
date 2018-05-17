@@ -276,3 +276,27 @@ Legal=2005-08-20
 
 [RAV]
 Legal=2005-10-20
+
+[GPT]
+Legal=2006=02=20
+
+[DIS]
+Legal=2006-05-20
+
+[CSP]
+Legal=2006-08-20
+
+[TSP]
+Legal=2006-10-20
+
+[TSB]
+Legal=2006-10-20
+
+[PLC]
+Legal=2007-02-20
+
+[FUT]
+Legal=2007-05-20
+
+[10E]
+Legal=2007-07-20
