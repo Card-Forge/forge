@@ -1995,6 +1995,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 fstream.close();
             } catch (final FileNotFoundException fnfe) {
                 SOptionPane.showErrorDialog("File not found: " + filename);
+                return;
             } catch (final Exception e) {
                 SOptionPane.showErrorDialog("Error loading battle setup file!");
                 return;
