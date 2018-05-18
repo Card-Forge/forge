@@ -68,6 +68,8 @@ public class Main {
                 screenHeight = Integer.parseInt(res[1].trim());
             }
         }
+        screenWidth=500;
+        screenHeight=900;
 
         // Fullscreen width and height for desktop mode (desktopMode = true)
         // Can be specified inside the file fullscreen_resolution.ini to override default (in the format WxH, e.g. 1920x1080)

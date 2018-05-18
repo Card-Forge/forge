@@ -1,0 +1,6 @@
+[format]
+Name:Urza's Saga/Urza's Legacy Standalone, Urza's Legacy
+Type:Historic
+Subtype:Block
+Effective:1999-03-01
+Sets:USG, ULG

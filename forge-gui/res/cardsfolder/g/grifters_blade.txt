@@ -1,7 +1,7 @@
 Name:Grifter's Blade
 ManaCost:3
 Types:Artifact Equipment
-K:Equip 1
+K:Equip:1
 K:Flash
 K:ETBReplacement:Other:ChooseC
 SVar:ChooseC:DB$ ChooseCard | Defined$ You | Choices$ Creature.YouCtrl+CanBeEquippedBy | Amount$ 1 | Mandatory$ True | SubAbility$ DBAttach | SpellDescription$ As CARDNAME enters the battlefield, choose a creature you control it could be attached to. If you do, it enters the battlefield attached to that creature.

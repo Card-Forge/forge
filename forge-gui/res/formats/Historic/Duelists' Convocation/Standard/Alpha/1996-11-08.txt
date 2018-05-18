@@ -1,0 +1,8 @@
+[format]
+Name:Type II Alpha, Mirage
+Type:Historic
+Subtype:Standard
+Effective:1996-11-08
+Sets:LEA
+Restricted:Balance, Black Vise
+Banned:Ancestral Recall, Badlands, Basalt Monolith, Bayou, Berserk, Black Lotus, Blaze of Glory, Braingeyser, Camouflage, Channel, Chaos Orb, Clone, Consecrate Land, Contract from Below, Copper Tablet, Copy Artifact, Cyclopean Tomb, Darkpact, Demonic Attorney, Demonic Hordes, Demonic Tutor, Dwarven Demolition Team, Earthbind, False Orders, Farmstead, Fastbond, Forcefield, Fork, Gauntlet of Might, Granite Gargoyle, Guardian Angel, Ice Storm, Illusionary Mask, Invisibility, Jade Statue, Juggernaut, Kudzu, Lance, Lich, Living Wall, Mind Twist, Mox Emerald, Mox Jet, Mox Pearl, Mox Ruby, Mox Sapphire, Natural Selection, Nettling Imp, Plateau, Psionic Blast, Raging River, Regrowth, Resurrection, Rock Hydra, Roc of Kher Ridges, Sacrifice, Savannah, Scrubland, Sedge Troll, Sinkhole, Sol Ring, Taiga, Timetwister, Time Vault, Time Walk, Tropical Island, Tundra, Two-Headed Giant of Foriys, Underground Sea, Vesuvan Doppelganger, Veteran Bodyguard, Wheel of Fortune, Word of Command

@@ -44,6 +44,12 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     /** Constant <code>serialVersionUID=-7930920571482203460L</code>. */
     private static final long serialVersionUID = -7930920571482203460L;
 
+    private static boolean performanceMode = false;
+
+    public static void setPerformanceMode(boolean performanceMode){
+        Spell.performanceMode=performanceMode;
+    }
+
     private boolean castFaceDown = false;
 
     /**
@@ -117,14 +123,15 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         }
 
         if (lkicheck) {
-            game.getTracker().freeze(); //prevent views flickering during while updating for state-based effects
+        if (!Spell.performanceMode && lkicheck) {
+			game.getTracker().freeze(); //prevent views flickering during while updating for state-based effects
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(card), new CardCollection(card));
         }
 
         flash = card.withFlash(activator);
 
         // reset static abilities
-        if (lkicheck) {
+        if (!Spell.performanceMode && lkicheck) {
             game.getAction().checkStaticAbilities(false);
             game.getTracker().unfreeze();
         }

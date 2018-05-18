@@ -5,7 +5,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Equipment+Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigAttach | OptionalDecider$ You | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Equipment enters the battlefield under your control, that Equipment to target creature you control.
 SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Target creature you control | Object$ TriggeredCard
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ Indestructible | Description$ Equipped creature gets +2/+0 and has indestructible.
-K:Equip 4
+K:Equip:4
 DeckHints:Type$Equipment
 DeckHints:Name$Nazahn, Revered Bladesmith
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hammer_of_nazahn.jpg

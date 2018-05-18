@@ -153,12 +153,14 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SUBMENU_UTILITIES ("false"),
 
         ENFORCE_DECK_LEGALITY ("true"),
+        PERFORMANCE_MODE ("false"),
 
         DEV_MODE_ENABLED ("false"),
         DEV_WORKSHOP_SYNTAX ("false"),
         DEV_LOG_ENTRY_TYPE (GameLogEntryType.DAMAGE.toString()),
 
         LOAD_CARD_SCRIPTS_LAZILY ("false"),
+        LOAD_HISTORIC_FORMATS ("false"),
 
         DECK_DEFAULT_CARD_LIMIT ("4"),
         DECKGEN_SINGLETONS ("false"),

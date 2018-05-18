@@ -1,0 +1,6 @@
+[format]
+Name:Time Spiral Block Constructed, Planar Chaos
+Type:Historic
+Subtype:Block
+Order:400
+Sets:TSP, TSB, PLC

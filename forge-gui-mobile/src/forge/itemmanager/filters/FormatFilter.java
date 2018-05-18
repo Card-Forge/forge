@@ -22,11 +22,7 @@ import forge.util.Callback;
 import forge.util.TextUtil;
 import forge.util.Utils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
@@ -42,9 +38,10 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
 
         cbxFormats.setFont(FSkinFont.get(12));
         cbxFormats.addItem("All Sets/Formats");
-        for (GameFormat format : FModel.getFormats().getOrderedList()) {
+        for (GameFormat format : FModel.getFormats().getFilterList()) {
             cbxFormats.addItem(format);
         }
+        cbxFormats.addItem("Other Formats...");
         cbxFormats.addItem("Choose Sets...");
         selectedFormat = cbxFormats.getText();
 
@@ -60,6 +57,21 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
                 else if (index == 0) {
                     format = null;
                     applyChange();
+                }
+                else if (index == cbxFormats.getItemCount() - 2) {
+                    preventHandling = true;
+                    cbxFormats.setText(selectedFormat); //restore previous selection by default
+                    preventHandling = false;
+                    HistoricFormatSelect historicFormatSelect = new HistoricFormatSelect();
+                    historicFormatSelect.setOnCloseCallBack(new Runnable(){
+                        @Override
+                        public void run() {
+                            format = historicFormatSelect.getSelectedFormat();
+                            cbxFormats.setText(format.getName());
+                            applyChange();
+                        }
+                    });
+                    Forge.openScreen(historicFormatSelect);
                 }
                 else if (index == cbxFormats.getItemCount() - 1) {
                     preventHandling = true;

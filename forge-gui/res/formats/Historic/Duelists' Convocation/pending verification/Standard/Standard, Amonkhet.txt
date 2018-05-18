@@ -1,0 +1,7 @@
+[format]
+Name:Standard, Amonkhet
+Type:Historic
+Subtype:Standard
+Effective:2017-04-28
+Sets:BFZ, OGW, SOI, EMN, KLD, AER, AKH
+Banned: Emrakul, the Promised End; Reflector Mage; Smuggler's Copter; Felidar Guardian

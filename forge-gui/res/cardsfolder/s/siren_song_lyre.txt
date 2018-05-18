@@ -1,7 +1,7 @@
 Name:Siren Song Lyre
 ManaCost:2
 Types:Artifact Equipment
-K:Equip 2
+K:Equip:2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddAbility$ SirenSongTap | Description$ Equipped creature has "2, {T}: Tap target creature."
 SVar:SirenSongTap:AB$ Tap | Cost$ 2 T | ValidTgts$ Creature | SpellDescription$ Tap target creature.
 SVar:RemAIDeck:True

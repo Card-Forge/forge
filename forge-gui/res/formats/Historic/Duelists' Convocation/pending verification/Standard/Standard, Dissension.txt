@@ -1,0 +1,6 @@
+[format]
+Name:Standard, Dissension
+Type:Historic
+Subtype:Standard
+Order:384
+Sets:9ED, CHK, BOK, SOK, RAV, GPT, DIS

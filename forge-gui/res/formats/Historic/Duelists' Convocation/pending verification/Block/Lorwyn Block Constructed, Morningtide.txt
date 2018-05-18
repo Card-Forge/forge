@@ -1,0 +1,6 @@
+[format]
+Name:Lorwyn Block Constructed, Morningtide
+Type:Historic
+Subtype:Block
+Order:426
+Sets:LRW, MOR

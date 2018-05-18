@@ -1,7 +1,7 @@
 Name:Paradise Mantle
 ManaCost:0
 Types:Artifact Equipment
-K:Equip 1
+K:Equip:1
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ AnyMana | Description$ Equipped creature has "{T}: Add one mana of any color."
 SVar:AnyMana:AB$Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 SVar:NonStackingAttachEffect:True

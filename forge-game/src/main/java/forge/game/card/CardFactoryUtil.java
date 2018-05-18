@@ -3658,26 +3658,26 @@ public class CardFactoryUtil {
             // append to original SA
             origSA.appendSubAbility(newSA);            
         } else if (keyword.startsWith("Equip")) {
-            // Check for additional params such as preferred AI targets
-            final String equipString = keyword.substring(5);
-            final String[] equipExtras = equipString.contains("|") ? equipString.split("\\|", 2) : null;
+            String[] k = keyword.split(":");
             // Get cost string
-            String equipCost = "";
-            if (equipExtras != null) {
-                equipCost = equipExtras[0].trim();
-            } else {
-                equipCost = equipString.trim();
-            }
+            String equipCost = k[1];
+            String valid = k.length > 2 ? k[2] : "Creature.YouCtrl";
+            String vstr = k.length > 3 ? k[3] : "creature";
             // Create attach ability string
             final StringBuilder abilityStr = new StringBuilder();
             abilityStr.append("AB$ Attach | Cost$ ");
             abilityStr.append(equipCost);
-            abilityStr.append(" | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control ");
+            abilityStr.append("| ValidTgts$ ").append(valid);
+            abilityStr.append("| TgtPrompt$ Select target ").append(vstr).append(" you control ");
             abilityStr.append("| SorcerySpeed$ True | Equip$ True | AILogic$ Pump | IsPresent$ Equipment.Self+nonCreature ");
-            if (equipExtras != null) {
-                abilityStr.append("| ").append(equipExtras[1]).append(" ");
+            // add AttachAi for some special cards
+            if (card.hasSVar("AttachAi")) {
+                abilityStr.append("| ").append(card.getSVar("AttachAi"));
             }
             abilityStr.append("| PrecostDesc$ Equip");
+            if (k.length > 3) {
+                abilityStr.append(" ").append(vstr);
+            }
             Cost cost = new Cost(equipCost, true);
             if (!cost.isOnlyManaCost()) { //Something other than a mana cost
                 abilityStr.append("—");

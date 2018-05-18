@@ -2,7 +2,7 @@ Name:Bonehoard
 ManaCost:4
 Types:Artifact Equipment
 K:Living Weapon
-K:Equip 2
+K:Equip:2
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +X/+X, where X is the number of creature cards in all graveyards.
 SVar:X:Count$TypeInAllYards.Creature
 SVar:NeedsToPlayVar:X GE1

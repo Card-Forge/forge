@@ -4,18 +4,15 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
-import java.util.HashMap;
-import java.util.TreeSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.SortedSet;
 
 import javax.swing.JMenu;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import forge.screens.home.quest.DialogChooseFormats;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
@@ -176,7 +173,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         menu.add(folder);
 
         final JMenu fmt = GuiUtils.createMenu("Format");
-        for (final GameFormat f : FModel.getFormats().getOrderedList()) {
+        for (final GameFormat f : FModel.getFormats().getFilterList()) {
             GuiUtils.addMenuItem(fmt, f.getName(), null, new Runnable() {
                 @Override
                 public void run() {
@@ -185,6 +182,29 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
             }, FormatFilter.canAddFormat(f, getFilter(DeckFormatFilter.class)));
         }
         menu.add(fmt);
+
+
+        GuiUtils.addMenuItem(menu, "Formats...", null, new Runnable() {
+            @Override public void run() {
+                final DeckFormatFilter existingFilter = getFilter(DeckFormatFilter.class);
+                if (existingFilter != null) {
+                    existingFilter.edit();
+                } else {
+                    final DialogChooseFormats dialog = new DialogChooseFormats();
+                    dialog.setOkCallback(new Runnable() {
+                        @Override public void run() {
+                            final List<GameFormat> formats = dialog.getSelectedFormats();
+                            if (!formats.isEmpty()) {
+                                for(GameFormat format: formats) {
+                                    addFilter(new DeckFormatFilter(DeckManager.this, format));
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
 
         GuiUtils.addMenuItem(menu, "Sets...", null, new Runnable() {
             @Override public void run() {

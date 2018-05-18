@@ -1,0 +1,6 @@
+[format]
+Name:Extended, Magic 2012
+Type:Historic
+Subtype:Extended
+Order:501
+Sets:LRW, MOR, SHM, EVE, ALA, CFX, ARB, M10, ZEN, WWK, ROE, M11, SOM, MBS, NPH, M12

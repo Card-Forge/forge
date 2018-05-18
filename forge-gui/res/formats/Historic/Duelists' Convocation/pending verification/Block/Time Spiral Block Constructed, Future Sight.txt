@@ -1,0 +1,6 @@
+[format]
+Name:Time Spiral Block Constructed, Future Sight
+Type:Historic
+Subtype:Block
+Order:405
+Sets:TSP, TSB, PLC, FUT

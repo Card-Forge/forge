@@ -1,6 +1,6 @@
 Name:Shield of the Realm
 ManaCost:2
 Types:Artifact Equipment
-K:Equip 1
+K:Equip:1
 S:Mode$ PreventDamage | Target$ Creature.EquippedBy | Amount$ 2 | Description$ If a source would deal damage to equipped creature, prevent 2 of that damage.
-Oracle:If a source would deal damage to equipped creature, prevent 2 of that damage.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
+Oracle:If a source would deal damage to equipped creature, prevent 2 of that damage.\nEquip {1}

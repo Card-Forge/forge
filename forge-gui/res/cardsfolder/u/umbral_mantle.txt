@@ -1,7 +1,7 @@
 Name:Umbral Mantle
 ManaCost:3
 Types:Artifact Equipment
-K:Equip 0
+K:Equip:0
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ UmbralPump | Description$ Equipped creature has "{3}, {Q}: This creature gets +2/+2 until end of turn.".
 SVar:UmbralPump:AB$ Pump | Cost$ 3 Q | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/umbral_mantle.jpg

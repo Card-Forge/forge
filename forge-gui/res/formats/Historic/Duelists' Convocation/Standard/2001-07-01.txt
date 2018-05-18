@@ -1,0 +1,6 @@
+[format]
+Name:Standard, Apocalypse
+Type:Historic
+Subtype:Standard
+Effective:2001-07-01
+Sets:MMQ, NMS, PCY, INV, PLS, 7ED, APC

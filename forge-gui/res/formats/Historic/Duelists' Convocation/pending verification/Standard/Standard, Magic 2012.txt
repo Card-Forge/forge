@@ -1,0 +1,7 @@
+[format]
+Name:Standard, Magic 2012
+Type:Historic
+Subtype:Standard
+Order:500
+Sets:ZEN, WWK, ROE, SOM, MBS, NPH, M12
+Banned:Jace, the Mind Sculptor; Stoneforge Mystic
