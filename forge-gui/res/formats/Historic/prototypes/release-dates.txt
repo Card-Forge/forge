@@ -184,46 +184,57 @@ OutOfExtended=2005-10-20
 [INV]
 Legal=2000-11-01
 OutOfStandard=2002-11-01
+OutOfExtended=2008-10-03
 
 [PLS]
 Legal=2001-03-01
 OutOfStandard=2002-11-01
+OutOfExtended=2008-10-03
 
 [7ED]
 Legal=2001-05-01
 OutOfStandard=2003-09-01
+OutOfExtended=2008-10-03
 
 [APC]
 Legal=2001-07-01
 OutOfStandard=2002-11-01
+OutOfExtended=2008-10-03
 
 [ODY]
 Legal=2001-11-01
 OutOfStandard=2003-10-20
+OutOfExtended=2008-10-03
 
 [TOR]
 Legal=2002-03-01
 OutOfStandard=2003-10-20
+OutOfExtended=2008-10-03
 
 [JUD]
 Legal=2002-07-01
 OutOfStandard=2003-10-20
+OutOfExtended=2008-10-03
 
 [ONS]
 Legal=2002-11-01
 OutOfStandard=2004-10-20
+OutOfExtended=2009-10-02
 
 [LGN]
 Legal=2003-03-01
 OutOfStandard=2004-10-20
+OutOfExtended=2009-10-02
 
 [SCG]
 Legal=2003-07-01
 OutOfStandard=2004-10-20
+OutOfExtended=2009-10-02
 
 [8ED]
 Legal=2003-09-01
 OutOfStandard=2005-08-20
+OutOfExtended=2009-10-02
 
 [MRD]
 Legal=2003-10-20
@@ -239,9 +250,11 @@ OutOfStandard=2005-10-20
 
 [CHK]
 Legal=2004-10-20
+OutOfStandard=2006-10-20
 
 [BOK]
 Legal=2005-02-20
+OutOfStandard=2006-10-20
 
 [POR]
 Legal=2005-10-20
@@ -270,33 +283,75 @@ NeverExtended=True
 
 [SOK]
 Legal=2005-06-20
+OutOfStandard=2006-10-20
 
 [9ED]
 Legal=2005-08-20
+OutOfStandard=2007-07-20
 
 [RAV]
 Legal=2005-10-20
+OutOfStandard=2007-10-20
 
 [GPT]
 Legal=2006=02=20
+OutOfStandard=2007-10-20
 
 [DIS]
 Legal=2006-05-20
+OutOfStandard=2007-10-20
 
 [CSP]
 Legal=2006-08-20
+OutOfStandard=2008-10-03
 
 [TSP]
 Legal=2006-10-20
+OutOfStandard=2008-10-03
 
 [TSB]
 Legal=2006-10-20
+OutOfStandard=2008-10-03
 
 [PLC]
 Legal=2007-02-20
+OutOfStandard=2008-10-03
 
 [FUT]
 Legal=2007-05-20
+OutOfStandard=2008-10-03
 
 [10E]
 Legal=2007-07-20
+OutOfStandard=2009-07-17
+
+[LRW]
+Legal=2007-10-20
+OutOfStandard=2009-10-02
+
+[MOR]
+Legal=2008-02-01
+OutOfStandard=2009-10-02
+
+[SHM]
+Legal=2008-05-02
+OutOfStandard=2009-10-02
+
+[EVE]
+Legal=2008-07-25
+OutOfStandard=2009-10-02
+
+[ALA]
+Legal=2008-10-03
+
+[CFX]
+Legal=2009-02-06
+
+[ARB]
+Legal=2009-04-30
+
+[M10]
+Legal=2009-07-17
+
+[ZEN]
+Legal=2009-10-02
