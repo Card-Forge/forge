@@ -57,7 +57,7 @@ public enum TrackableProperty {
     Haunting(TrackableTypes.CardViewType),
     MustBlockCards(TrackableTypes.CardViewCollectionType),
     PairedWith(TrackableTypes.CardViewType),
-    CurrentState(TrackableTypes.CardStateViewType, false), //can't respect freeze, otherwise card constructor can crash
+    CurrentState(TrackableTypes.CardStateViewType),
     AlternateState(TrackableTypes.CardStateViewType),
     HiddenId(TrackableTypes.IntegerType),
     ExertedThisTurn(TrackableTypes.BooleanType),

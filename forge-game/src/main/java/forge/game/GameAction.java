@@ -775,6 +775,7 @@ public class GameAction {
         if (game.isGameOver()) {
             return;
         }
+        game.getTracker().freeze(); //prevent views flickering during while updating for state-based effects
 
         // remove old effects
         game.getStaticEffects().clearStaticEffects(affectedCards);
@@ -907,6 +908,7 @@ public class GameAction {
         if (runEvents && !affectedCards.isEmpty()) {
             game.fireEvent(new GameEventCardStatsChanged(affectedCards));
         }
+        game.getTracker().unfreeze();
     }
 
     public final void checkStateEffects(final boolean runEvents) {
