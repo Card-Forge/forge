@@ -34,6 +34,7 @@ public class StaticData {
     private final CardEdition.Collection editions;
 
     private Predicate<PaperCard> standardPredicate;
+    private Predicate<PaperCard> brawlPredicate;
     private Predicate<PaperCard> modernPredicate;
 
     // Loaded lazily:
@@ -196,10 +197,16 @@ public class StaticData {
 
     public void setStandardPredicate(Predicate<PaperCard> standardPredicate) { this.standardPredicate = standardPredicate; }
 
+    public void setBrawlPredicate(Predicate<PaperCard> brawlPredicate) { this.brawlPredicate = brawlPredicate; }
+
     public void setModernPredicate(Predicate<PaperCard> modernPredicate) { this.modernPredicate = standardPredicate; }
 
     public Predicate<PaperCard> getModernPredicate() {
         return modernPredicate;
+    }
+
+    public Predicate<PaperCard> getBrawlPredicate() {
+        return brawlPredicate;
     }
 
     public PaperCard getCardByEditionDate(PaperCard card, Date editionDate) {

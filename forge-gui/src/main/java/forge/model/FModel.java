@@ -170,6 +170,7 @@ public final class FModel {
                 new File(ForgeConstants.USER_FORMATS_DIR), preferences.getPrefBoolean(FPref.LOAD_HISTORIC_FORMATS)));
 
         magicDb.setStandardPredicate(formats.getStandard().getFilterRules());
+        magicDb.setBrawlPredicate(formats.get("Brawl").getFilterRules());
         magicDb.setModernPredicate(formats.getModern().getFilterRules());
 
         blocks = new StorageBase<>("Block definitions", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "blocks.txt", magicDb.getEditions()));
