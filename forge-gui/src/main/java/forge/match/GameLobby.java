@@ -498,6 +498,12 @@ public abstract class GameLobby implements IHasGameType {
             if (!isAI) {
                 guis.put(rp, gui);
             }
+            //override starting life for 1v1 Brawl
+            if (hasVariant(GameType.Brawl) && activeSlots.size() == 2){
+                for (RegisteredPlayer player : players){
+                    player.setStartingLife(20);
+                }
+            }
             playerToSlot.put(rp, slot);
         }
 

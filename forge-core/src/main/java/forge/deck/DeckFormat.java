@@ -69,7 +69,25 @@ public enum DeckFormat {
         }
     }),
     Pauper      ( Range.is(60),                         Range.between(0, 10), 1),
-    Brawl      ( Range.is(59), Range.between(0, 15), 1, null, StaticData.instance() == null ? null : StaticData.instance().getStandardPredicate()),
+    Brawl      ( Range.is(59), Range.between(0, 15), 1, null, new Predicate<PaperCard>() {
+        private final Set<String> bannedCards = new HashSet<String>(Arrays.asList(
+                "Baral, Chief of Compliance","Smuggler's Copter","Sorcerous Spyglass"));
+        @Override
+        public boolean apply(PaperCard card) {
+            //why do we need to hard code the bannings here - they are defined in the GameFormat predicate used below
+            if (bannedCards.contains(card.getName())) {
+                return false;
+            }
+            return StaticData.instance() == null ? false : StaticData.instance().getBrawlPredicate().apply(card);
+        }
+    }) {
+        private final ImmutableSet<String> bannedCommanders = ImmutableSet.of("Baral, Chief of Compliance");
+
+        @Override
+        public boolean isLegalCommander(CardRules rules) {
+            return super.isLegalCommander(rules) && !bannedCommanders.contains(rules.getName());
+        }
+        },
     TinyLeaders    ( Range.is(49),                         Range.between(0, 10), 1, new Predicate<CardRules>() {
         private final Set<String> bannedCards = new HashSet<String>(Arrays.asList(
                 "Ancestral Recall", "Balance", "Black Lotus", "Black Vise", "Channel", "Chaos Orb", "Contract From Below", "Counterbalance", "Darkpact", "Demonic Attorney", "Demonic Tutor", "Earthcraft", "Edric, Spymaster of Trest", "Falling Star",
@@ -267,7 +285,15 @@ public enum DeckFormat {
 
             final List<PaperCard> erroneousCI = new ArrayList<PaperCard>();
 
+            Set<String> basicLandNames = new HashSet<>();
             for (final Entry<PaperCard, Integer> cp : deck.get(DeckSection.Main)) {
+                //If colourless commander allow one type of basic land
+                if (cmdCI == 0 && cp.getKey().getRules().getType().isBasicLand()){
+                    basicLandNames.add(cp.getKey().getName());
+                    if(basicLandNames.size() < 2){
+                        continue;
+                    }
+                }
                 if (!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI)) {
                     erroneousCI.add(cp.getKey());
                 }
