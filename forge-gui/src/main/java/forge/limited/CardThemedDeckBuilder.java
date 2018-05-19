@@ -83,7 +83,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      *            Cards to build the deck from.
      */
     public CardThemedDeckBuilder(PaperCard keyCard0, PaperCard secondKeyCard0, final List<PaperCard> dList, GameFormat format, boolean isForAI, DeckFormat deckFormat) {
-        super(new DeckGenPool(FModel.getMagicDb().getCommonCards().getUniqueCards()), DeckFormat.Constructed, format.getFilterPrinted());
+        super(new DeckGenPool(FModel.getMagicDb().getCommonCards().getUniqueCards()), deckFormat, format.getFilterPrinted());
         this.availableList = dList;
         keyCard=keyCard0;
         secondKeyCard=secondKeyCard0;
@@ -281,9 +281,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             System.out.println("Lands needed : " + landsNeeded);
             System.out.println("Post Lands : " + deckList.size());
         }
-        if (keyCard.getRules().getColorIdentity().isColorless()&&landsNeeded>0){
-            addWastesIfRequired();
-        }
+        addWastesIfRequired();
         fixDeckSize();
         if (logToConsole) {
             System.out.println("Post Size fix : " + deckList.size());
@@ -682,14 +680,15 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      * Only adds wastes if present in the card pool but if present adds them all
      */
     private void addWastesIfRequired(){
-        if(colors.isColorless()) {
-            PaperCard waste = FModel.getMagicDb().getCommonCards().getUniqueByName("Wastes");
+        PaperCard waste = FModel.getMagicDb().getCommonCards().getUniqueByName("Wastes");
+        if(colors.isColorless()&& keyCard.getRules().getColorIdentity().isColorless()
+                && format.isLegalCard(waste)) {
             while (landsNeeded > 0) {
                 deckList.add(waste);
                 landsNeeded--;
+                aiPlayables.remove(waste);
+                rankedColorList.remove(waste);
             }
-            aiPlayables.remove(waste);
-            rankedColorList.remove(waste);
         }
     }
 
@@ -703,6 +702,11 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      */
     private int[] calculateLandNeeds() {
         final int[] clrCnts = { 0,0,0,0,0 };
+        //Brawl allows colourless commanders to have any number of one basic land to fill out the deck..
+        if (format.equals(DeckFormat.Brawl) && keyCard.getRules().getColorIdentity().isColorless()){
+            clrCnts[MyRandom.getRandom().nextInt(5)] = 1;
+            return clrCnts;
+        }
         // count each card color using mana costs
         for (final PaperCard cp : deckList) {
             final ManaCost mc = cp.getRules().getManaCost();
