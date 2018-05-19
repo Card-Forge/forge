@@ -1,0 +1,4 @@
+[format]
+Name:Extended, Mirrodin Besieged
+Effective:2011-02-04
+Sets:LRW, MOR, SHM, EVE, ALA, CFX, ARB, M10, ZEN, WWK, ROE, M11, SOM, MBS

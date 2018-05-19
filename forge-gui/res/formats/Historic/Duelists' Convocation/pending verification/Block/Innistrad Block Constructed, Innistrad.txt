@@ -1,6 +1,0 @@
-[format]
-Name:Innistrad Block Constructed, Innistrad
-Type:Historic
-Subtype:Block
-Order:505
-Sets:ISD

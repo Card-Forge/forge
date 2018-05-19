@@ -1,0 +1,6 @@
+[format]
+Name:Scars of Mirrodin Block, Mirrodin Besieged
+Type:Historic
+Subtype:Block
+Effective:2011-02-04
+Sets:SOM, MBS

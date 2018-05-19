@@ -7,83 +7,98 @@ Legal=1994-01-25
 IllegalInNonAlpha=1996-10-01
 NeverStandard=True
 NeverExtended=True
+NeverModern=True
 
 [LEB]
 Legal=1994-01-25
 NeverStandard=True
 NeverExtended=True
+NeverModern=True
 
 [2ED]
 Legal=1994-01-25
 NeverStandard=True
 NeverExtended=True
+NeverModern=True
 
 [ARN]
 Legal=1994-01-25
 OutOfStandard=1995-01-10
 NeverExtended=True
+NeverModern=True
 
 [DRC94]
 Legal=1994-03-04
 #check this date
 NeverStandard=True
 NeverExtended=True
+NeverModern=True
 
 [ATQ]
 Legal=1994-03-04
 NeverStandard=True
 NeverExtended=True
+NeverModern=True
 
 [3ED]
 Legal=1994-05-01
 OutOfStandard=1995-01-20
 #check this date
 OutofExtended=1999-10-01
+NeverModern=True
 
 [LEG]
 Legal=1994-06-10
 NeverStandard=True
 NeverExtended=True
+NeverModern=True
 
 [DRK]
 Legal=1994-08-10
 OutOfStandard=1995-06-01
 #check date
 OutOfExtended=1999-10-01
+NeverModern=True
 
 [ARENA]
 Legal=1994-11-15
 #check date
 NeverStandard=True
 OutOfExtended=1999-10-01
+NeverModern=True
 
 [FEM]
 Legal=1994-11-15
 OutOfStandard=1997-01-01
 OutOfExtended=1999-10-01
+NeverModern=True
 
 [WW]
 Legal=1995-04-19
 #check date
 NeverStandard=True
 OutOfExtended=1999-10-01
+NeverModern=True
 
 [SHC]
 Legal=1995-04-19
 #check date
 NeverStandard=True
 OutOfExtended=1999-10-01
+NeverModern=True
 
 [FS]
 Legal=1995-04-19
 #check date
 NeverStandard=True
 OutOfExtended=1999-10-01
+NeverModern=True
 
 [4ED]
 Legal=1995-04-19
 OutOfStandard=1997-04-24
 OutOfExtended=1999-10-01
+NeverModern=True
 
 [ICE]
 Legal=1995-06
@@ -91,12 +106,14 @@ OutOfStandard=1997-01-01
 Standard2=1997-07-01
 OutOfStandard2=1997-11-01
 OutOfExtended=2002-11-01
+NeverModern=True
 
 [CHR]
 Legal=1995-07-13
 OutOfStandard=1997-04-24
 OutOfExtended=2002-11-01
 OutOfExtended=1999-10-01
+NeverModern=True
 
 [HML]
 Legal=1995-11-13
@@ -104,132 +121,158 @@ OutOfStandard=1997-03-03
 Standard2=1997-07-01
 OutOfStandard2=1997-11-01
 OutOfExtended=2002-11-01
+NeverModern=True
 
 [ALL]
 Legal=1996-07-10
 Standard2=1997-07-01
 OutOfStandard=1997-11-01
 OutOfExtended=2002-11-01
+NeverModern=True
 
 [MIR]
 Legal=1996-11-08
 OutOfStandard=1998-11-01
 OutOfExtended=2002-11-01
+NeverModern=True
 
 [VIS]
 Legal=1997-03-03
 OutOfStandard=1998-11-01
 OutOfExtended=2002-11-01
+NeverModern=True
 
 [5ED]
 Legal=1997-04-24
 OutOfStandard=1999-06-01
 OutOfExtended=2002-11-01
+NeverModern=True
 
 [WTH]
 Legal=1997-07-01
 OutOfStandard=1998-11-01
 OutOfExtended=2002-11-01
+NeverModern=True
 
 [TMP]
 Legal=1997-11-01
 OutOfStandard=1999-11-01
 OutOfExtended=2005-10-20
+NeverModern=True
 
 [STH]
 Legal=1998-04-01
 OutOfStandard=1999-11-01
 OutOfExtended=2005-10-20
+NeverModern=True
 
 [EXO]
 Legal=1998-07-01
 OutOfStandard=1999-11-01
 OutOfExtended=2005-10-20
+NeverModern=True
 
 [USG]
 Legal=1998-11-01
 OutOfStandard=2000-11-01
 OutOfExtended=2005-10-20
+NeverModern=True
 
 [ULG]
 Legal=1999-03-01
 OutOfStandard=2000-11-01
 OutOfExtended=2005-10-20
+NeverModern=True
 
 [6ED]
 Legal=1999-06-01
 OutOfStandard=2001-05-01
 OutOfExtended=2005-10-20
+NeverModern=True
 
 [UDS]
 Legal=1999-07-01
 OutOfStandard=2000-11-01
 OutOfExtended=2005-10-20
+NeverModern=True
 
 [MMQ]
 Legal=1999-10-01
 OutOfStandard=2001-11-01
 OutOfExtended=2005-10-20
+NeverModern=True
 
 [NMS]
 Legal=2000-03-01
 OutOfStandard=2001-11-01
 OutOfExtended=2005-10-20
+NeverModern=True
 
 [PCY]
 Legal=2000-07-01
 OutOfStandard=2001-11-01
 OutOfExtended=2005-10-20
+NeverModern=True
 
 [INV]
 Legal=2000-11-01
 OutOfStandard=2002-11-01
 OutOfExtended=2008-10-03
+NeverModern=True
 
 [PLS]
 Legal=2001-03-01
 OutOfStandard=2002-11-01
 OutOfExtended=2008-10-03
+NeverModern=True
 
 [7ED]
 Legal=2001-05-01
 OutOfStandard=2003-09-01
 OutOfExtended=2008-10-03
+NeverModern=True
 
 [APC]
 Legal=2001-07-01
 OutOfStandard=2002-11-01
 OutOfExtended=2008-10-03
+NeverModern=True
 
 [ODY]
 Legal=2001-11-01
 OutOfStandard=2003-10-20
 OutOfExtended=2008-10-03
+NeverModern=True
 
 [TOR]
 Legal=2002-03-01
 OutOfStandard=2003-10-20
 OutOfExtended=2008-10-03
+NeverModern=True
 
 [JUD]
 Legal=2002-07-01
 OutOfStandard=2003-10-20
 OutOfExtended=2008-10-03
+NeverModern=True
 
 [ONS]
 Legal=2002-11-01
 OutOfStandard=2004-10-20
 OutOfExtended=2009-10-02
+NeverModern=True
 
 [LGN]
 Legal=2003-03-01
 OutOfStandard=2004-10-20
 OutOfExtended=2009-10-02
+NeverModern=True
 
 [SCG]
 Legal=2003-07-01
 OutOfStandard=2004-10-20
 OutOfExtended=2009-10-02
+NeverModern=True
 
 [8ED]
 Legal=2003-09-01
@@ -239,22 +282,27 @@ OutOfExtended=2009-10-02
 [MRD]
 Legal=2003-10-20
 OutOfStandard=2005-10-20
+OutOfExtended=2010-07-01
 
 [DST]
 Legal=2004-02-20
 OutOfStandard=2005-10-20
+OutOfExtended=2010-07-01
 
 [5DN]
 Legal=2004-06-20
 OutOfStandard=2005-10-20
+OutOfExtended=2010-07-01
 
 [CHK]
 Legal=2004-10-20
 OutOfStandard=2006-10-20
+OutOfExtended=2010-07-01
 
 [BOK]
 Legal=2005-02-20
 OutOfStandard=2006-10-20
+OutOfExtended=2010-07-01
 
 [POR]
 Legal=2005-10-20
@@ -284,74 +332,121 @@ NeverExtended=True
 [SOK]
 Legal=2005-06-20
 OutOfStandard=2006-10-20
+OutOfExtended=2010-07-01
 
 [9ED]
 Legal=2005-08-20
 OutOfStandard=2007-07-20
+OutOfExtended=2010-07-01
 
 [RAV]
 Legal=2005-10-20
 OutOfStandard=2007-10-20
+OutOfExtended=2010-07-01
 
 [GPT]
 Legal=2006=02=20
 OutOfStandard=2007-10-20
+OutOfExtended=2010-07-01
 
 [DIS]
 Legal=2006-05-20
 OutOfStandard=2007-10-20
+OutOfExtended=2010-07-01
 
 [CSP]
 Legal=2006-08-20
 OutOfStandard=2008-10-03
+OutOfExtended=2010-07-01
 
 [TSP]
 Legal=2006-10-20
 OutOfStandard=2008-10-03
+OutOfExtended=2010-10-01
 
 [TSB]
 Legal=2006-10-20
 OutOfStandard=2008-10-03
+OutOfExtended=2010-10-01
 
 [PLC]
 Legal=2007-02-20
 OutOfStandard=2008-10-03
+OutOfExtended=2010-10-01
 
 [FUT]
 Legal=2007-05-20
 OutOfStandard=2008-10-03
+OutOfExtended=2010-10-01
 
 [10E]
 Legal=2007-07-20
 OutOfStandard=2009-07-17
+OutOfExtended=2010-10-01
 
 [LRW]
 Legal=2007-10-20
 OutOfStandard=2009-10-02
+OutOfExtended=2011-09-30
 
 [MOR]
 Legal=2008-02-01
 OutOfStandard=2009-10-02
+OutOfExtended=2011-09-30
 
 [SHM]
 Legal=2008-05-02
 OutOfStandard=2009-10-02
+OutOfExtended=2011-09-30
 
 [EVE]
 Legal=2008-07-25
 OutOfStandard=2009-10-02
+OutOfExtended=2011-09-30
 
 [ALA]
 Legal=2008-10-03
+OutOfStandard=2010-10-01
 
 [CFX]
 Legal=2009-02-06
+OutOfStandard=2010-10-01
 
 [ARB]
 Legal=2009-04-30
+OutOfStandard=2010-10-01
 
 [M10]
 Legal=2009-07-17
+OutOfStandard=2010-10-01
 
 [ZEN]
 Legal=2009-10-02
+OutOfStandard=2011-09-30
+
+[WWK]
+Legal=2010-02-05
+OutOfStandard=2011-09-30
+
+[ROE]
+Legal=2010-04-23
+OutOfStandard=2011-09-30
+
+[M11]
+Legal=2010-07-16
+OutOfStandard=2011-09-30
+
+[SOM]
+Legal=2010-10-01
+
+[MBS]
+Legal=2011-02-04
+
+[NPH]
+Legal=2011-05-13
+
+[M12]
+Legal=2011-07-15
+
+[ISD]
+Legal=2011-09-30
