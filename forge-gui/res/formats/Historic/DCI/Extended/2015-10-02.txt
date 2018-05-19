@@ -1,0 +1,6 @@
+[format]
+Name:Extended, Battle for Zendikar
+Type:Historic
+Subtype:Extended
+Effective:2015-10-02
+Sets:RTR, GTC, DGM, M14, THS, BNG, JOU, M15, KTK, FRF, DTK, ORI, BFZ

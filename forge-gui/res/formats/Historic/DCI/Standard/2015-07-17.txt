@@ -1,0 +1,6 @@
+[format]
+Name:Standard, Magic Origins
+Type:Historic
+Subtype:Standard
+Effective:2015-07-17
+Sets:THS, BNG, JOU, M15, KTK, FRF, DTK, ORI

@@ -1,0 +1,6 @@
+[format]
+Name:Extended, Dragons of Tarkir
+Type:Historic
+Subtype:Extended
+Effective:2015-03-27
+Sets:ISD, DKA, AVR, M13, RTR, GTC, DGM, M14, THS, BNG, JOU, M15, KTK, FRF, DTK
