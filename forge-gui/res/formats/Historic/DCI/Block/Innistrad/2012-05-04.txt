@@ -1,0 +1,7 @@
+[format]
+Name:Innistrad Block, Avacyn Restored
+Type:Historic
+Subtype:Block
+Effective:2012-05-04
+Sets:ISD, DKA, AVR
+Banned:Intangible Virtue; Lingering Souls

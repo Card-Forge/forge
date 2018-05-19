@@ -407,18 +407,22 @@ OutOfExtended=2011-09-30
 [ALA]
 Legal=2008-10-03
 OutOfStandard=2010-10-01
+OutOfExtended=2012-10-05
 
 [CFX]
 Legal=2009-02-06
 OutOfStandard=2010-10-01
+OutOfExtended=2012-10-05
 
 [ARB]
 Legal=2009-04-30
 OutOfStandard=2010-10-01
+OutOfExtended=2012-10-05
 
 [M10]
 Legal=2009-07-17
 OutOfStandard=2010-10-01
+OutOfExtended=2012-10-05
 
 [ZEN]
 Legal=2009-10-02
@@ -438,15 +442,31 @@ OutOfStandard=2011-09-30
 
 [SOM]
 Legal=2010-10-01
+OutOfStandard=2012-10-05
 
 [MBS]
 Legal=2011-02-04
+OutOfStandard=2012-10-05
 
 [NPH]
 Legal=2011-05-13
+OutOfStandard=2012-10-05
 
 [M12]
 Legal=2011-07-15
+OutOfStandard=2012-10-05
 
 [ISD]
 Legal=2011-09-30
+
+[DKA]
+Legal=2012-02-03
+
+[AVR]
+Legal=2012-05-04
+
+[M13]
+Legal=2012-07-13
+
+[RTR]
+Legal=2012-10-05
