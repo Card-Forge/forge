@@ -1,6 +1,0 @@
-[format]
-Name:Extended, Magic Origins
-Type:Historic
-Subtype:Extended
-Effective:2015-07-17
-Sets:ISD, DKA, AVR, M13, RTR, GTC, DGM, M14, THS, BNG, JOU, M15, KTK, FRF, DTK, ORI

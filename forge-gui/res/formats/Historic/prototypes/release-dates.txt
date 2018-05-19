@@ -447,42 +447,34 @@ OutOfExtended=2013-09-23
 [SOM]
 Legal=2010-10-01
 OutOfStandard=2012-10-05
-OutOfExtended=2014-09-26
 
 [MBS]
 Legal=2011-02-04
 OutOfStandard=2012-10-05
-OutOfExtended=2014-09-26
 
 [NPH]
 Legal=2011-05-13
 OutOfStandard=2012-10-05
-OutOfExtended=2014-09-26
 
 [M12]
 Legal=2011-07-15
 OutOfStandard=2012-10-05
-OutOfExtended=2014-09-26
 
 [ISD]
 Legal=2011-09-30
 OutOfStandard=2013-09-23
-OutOfExtended=2015-10-02
 
 [DKA]
 Legal=2012-02-03
 OutOfStandard=2013-09-23
-OutOfExtended=2015-10-02
 
 [AVR]
 Legal=2012-05-04
 OutOfStandard=2013-09-23
-OutOfExtended=2015-10-02
 
 [M13]
 Legal=2012-07-13
 OutOfStandard=2013-09-23
-OutOfExtended=2015-10-02
 
 [RTR]
 Legal=2012-10-05
@@ -518,9 +510,11 @@ OutOfStandard=2015-10-02
 
 [KTK]
 Legal=2014-09-26
+OutOfStandard=2016-04-08
 
 [FRF]
 Legal=2015-01-23
+OutOfStandard=2016-04-08
 
 [DTK]
 Legal=2015-03-27
@@ -530,3 +524,12 @@ Legal=2015-07-17
 
 [BFZ]
 Legal=2015-10-02
+
+[OGW]
+Legal=2016-01-22
+
+[W16]
+Legal=2016-04-08
+
+[SOI]
+Legal=2016-04-08

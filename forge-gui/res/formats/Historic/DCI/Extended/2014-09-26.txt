@@ -1,6 +1,0 @@
-[format]
-Name:Extended, Khans of Tarkir
-Type:Historic
-Subtype:Extended
-Effective:2014-09-26
-Sets:ISD, DKA, AVR, M13, RTR, GTC, DGM, M14, THS, BNG, JOU, M15, KTK

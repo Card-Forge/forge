@@ -1,7 +1,7 @@
 [format]
 Name:Ice Age, 10/01/95
 Type:Historic
-Subtype:Block
+Subtype:Ice Age
 Effective:1995-10-01
 Sets:ICE
 Restricted:Zuran Orb
