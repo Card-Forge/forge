@@ -1,5 +1,6 @@
 [format]
 Name:Extended, Fifth Dawn
+Type:Historic
 Subtype:Extended
 Effective:2004-06-20
 Sets:TMP, STH, EXO, USG, ULG, 6ED, UDS, MMQ, NMS, PCY, INV, PLS, 7ED, APC, ODY, TOR, JUD, ONS, LGN, SCG, 8ED, MRD, DST, 5DN

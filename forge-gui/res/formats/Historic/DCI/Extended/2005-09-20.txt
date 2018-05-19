@@ -1,5 +1,6 @@
 [format]
 Name:Extended, 09/20/05
+Type:Historic
 Subtype:Extended
 Effective:2005-09-20
 Sets:TMP, STH, EXO, USG, ULG, 6ED, UDS, MMQ, NMS, PCY, INV, PLS, 7ED, APC, ODY, TOR, JUD, ONS, LGN, SCG, 8ED, MRD, DST, 5DN, CHK, BOK, SOK, 9ED

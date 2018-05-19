@@ -1,0 +1,7 @@
+[format]
+Name:Extended, Born of the Gods
+Type:Historic
+Subtype:Extended
+Effective:2014-02-07
+Sets:SOM, MBS, NPH, M12, ISD, DKA, AVR, M13, RTR, GTC, DGM, M14, THS, BNG
+Banned:Mental Misstep; Ponder

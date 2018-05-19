@@ -427,58 +427,86 @@ OutOfExtended=2012-10-05
 [ZEN]
 Legal=2009-10-02
 OutOfStandard=2011-09-30
+OutOfExtended=2013-09-23
 
 [WWK]
 Legal=2010-02-05
 OutOfStandard=2011-09-30
+OutOfExtended=2013-09-23
 
 [ROE]
 Legal=2010-04-23
 OutOfStandard=2011-09-30
+OutOfExtended=2013-09-23
 
 [M11]
 Legal=2010-07-16
 OutOfStandard=2011-09-30
+OutOfExtended=2013-09-23
 
 [SOM]
 Legal=2010-10-01
 OutOfStandard=2012-10-05
+OutOfExtended=2014-09-26
 
 [MBS]
 Legal=2011-02-04
 OutOfStandard=2012-10-05
+OutOfExtended=2014-09-26
 
 [NPH]
 Legal=2011-05-13
 OutOfStandard=2012-10-05
+OutOfExtended=2014-09-26
 
 [M12]
 Legal=2011-07-15
 OutOfStandard=2012-10-05
+OutOfExtended=2014-09-26
 
 [ISD]
 Legal=2011-09-30
+OutOfStandard=2013-09-23
 
 [DKA]
 Legal=2012-02-03
+OutOfStandard=2013-09-23
 
 [AVR]
 Legal=2012-05-04
+OutOfStandard=2013-09-23
 
 [M13]
 Legal=2012-07-13
+OutOfStandard=2013-09-23
 
 [RTR]
 Legal=2012-10-05
+OutOfStandard=2014-09-26
 
 [GTC]
 Legal=2013-02-01
+OutOfStandard=2014-09-26
 
 [DGM]
 Legal=2013-05-03
+OutOfStandard=2014-09-26
 
 [M14]
 Legal=2013-07-19
+OutOfStandard=2014-09-26
 
 [THS]
 Legal=2013-09-23
+
+[BNG]
+Legal=2014-02-07
+
+[JOU]
+Legal=2014-05-02
+
+[M15]
+Legal=2014-07-18
+
+[KTK]
+Legal=2014-09-26

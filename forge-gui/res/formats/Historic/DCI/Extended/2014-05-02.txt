@@ -1,0 +1,7 @@
+[format]
+Name:Extended, Journey into Nyx
+Type:Historic
+Subtype:Extended
+Effective:2014-05-02
+Sets:SOM, MBS, NPH, M12, ISD, DKA, AVR, M13, RTR, GTC, DGM, M14, THS, BNG, JOU
+Banned:Mental Misstep; Ponder
