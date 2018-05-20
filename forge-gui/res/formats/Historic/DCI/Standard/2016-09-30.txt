@@ -3,4 +3,4 @@ Name:Standard, Kaladesh
 Type:Historic
 Subtype:Standard
 Effective:2016-09-30
-Sets:DTK, ORI, BFZ, OGW, W16, SOI, EMN, KLD
+Sets:BFZ, OGW, W16, SOI, EMN, KLD

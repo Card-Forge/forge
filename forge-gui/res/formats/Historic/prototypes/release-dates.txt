@@ -526,21 +526,38 @@ OutOfStandard=2016-09-30
 
 [BFZ]
 Legal=2015-10-02
+OutOfStandard=2017-09-29
 
 [OGW]
 Legal=2016-01-22
+OutOfStandard=2017-09-29
 
 [W16]
 Legal=2016-04-08
+OutOfStandard=2017-09-29
 
 [SOI]
 Legal=2016-04-08
+OutOfStandard=2017-09-29
 
 [EMN]
 Legal=2016-07-22
+OutOfStandard=2017-09-29
 
 [KLD]
 Legal=2016-09-30
 
 [AER]
 Legal=2017-01-20
+
+[W17]
+Legal=2017-04-28
+
+[AKH]
+Legal=2017-04-28
+
+[HOU]
+Legal=2017-07-14
+
+[XLN]
+Legal=2017-09-29
