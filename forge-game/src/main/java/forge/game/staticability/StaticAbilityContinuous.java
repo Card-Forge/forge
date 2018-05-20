@@ -651,7 +651,7 @@ public final class StaticAbilityContinuous {
 
             if (addFullAbs != null) {
                 for (final SpellAbility ab : addFullAbs) {
-                    affectedCard.addSpellAbility(ab);
+                    affectedCard.addSpellAbility(ab, false);
                 }
             }
 
@@ -669,7 +669,7 @@ public final class StaticAbilityContinuous {
                         sa.setTemporary(true);
                         sa.setIntrinsic(false);
                         sa.setOriginalHost(hostCard);
-                        affectedCard.addSpellAbility(sa);
+                        affectedCard.addSpellAbility(sa, false);
                     }
                 }
             }
@@ -769,8 +769,6 @@ public final class StaticAbilityContinuous {
                 Player mayPlayController = params.containsKey("MayPlayCardOwner") ? affectedCard.getOwner() : controller;
                 affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost, mayPlayAltManaCost, mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);
             }
-
-            affectedCard.updateAbilityTextForView(); // only update keywords and text for view to avoid flickering
         }
 
         return affectedCards;

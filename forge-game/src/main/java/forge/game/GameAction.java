@@ -848,9 +848,6 @@ public class GameAction {
             }
         }
 
-        final CardCollection lands = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS);
-        GameActionUtil.grantBasicLandsManaAbilities(lands);
-
         for (final Card c : staticList) {
             for (int i = 0; i < c.getStaticCommandList().size(); i++) {
                 final Object[] staticCheck = c.getStaticCommandList().get(i);
@@ -896,13 +893,16 @@ public class GameAction {
             }
         }
 
-        final Map<String, Object> runParams = Maps.newHashMap();
-        game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
+        if (runEvents) {
+            final Map<String, Object> runParams = Maps.newHashMap();
+            game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
+        }
 
         // Update P/T and type in the view only once after all the cards have been processed, to avoid flickering
         for (Card c : affectedCards) {
             c.updatePowerToughnessForView();
             c.updateTypesForView();
+            c.updateAbilityTextForView(); // only update keywords and text for view to avoid flickering
         }
 
         if (runEvents && !affectedCards.isEmpty()) {

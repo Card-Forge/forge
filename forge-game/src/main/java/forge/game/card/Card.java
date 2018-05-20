@@ -254,6 +254,8 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private Table<Card, CounterType, Integer> etbCounters = HashBasedTable.create();
 
+    private SpellAbility[] basicLandAbilities = new SpellAbility[MagicColor.WUBRG.length];
+
     // Enumeration for CMC request types
     public enum SplitCMCMode {
         CurrentSideCMC,
@@ -2137,14 +2139,21 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final void addSpellAbility(final SpellAbility a) {
+        addSpellAbility(a, true);
+    }
+    public final void addSpellAbility(final SpellAbility a, final boolean updateView) {
         a.setHostCard(this);
-        if (currentState.addSpellAbility(a)) {
+        if (currentState.addSpellAbility(a) && updateView) {
             currentState.getView().updateAbilityText(this, currentState);
         }
     }
 
     public final void removeSpellAbility(final SpellAbility a) {
-        if (currentState.removeSpellAbility(a)) {
+        removeSpellAbility(a, true);
+    }
+
+    public final void removeSpellAbility(final SpellAbility a, final boolean updateView) {
+        if (currentState.removeSpellAbility(a) && updateView) {
             currentState.getView().updateAbilityText(this, currentState);
         }
     }
@@ -2168,11 +2177,40 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public void updateSpellAbilities(List<SpellAbility> list, CardState state, Boolean mana) {
+        // do Basic Land Abilities there
+        if (mana == null || mana == true) {
+            updateBasicLandAbilities(list, state);
+        }
+
         for (KeywordInterface kw : getUnhiddenKeywords(state)) {
             for (SpellAbility sa : kw.getAbilities()) {
                 if (mana == null || mana == sa.isManaAbility()) {
                     list.add(sa);
                 }
+            }
+        }
+    }
+
+    private void updateBasicLandAbilities(List<SpellAbility> list, CardState state) {
+        final CardTypeView type = state.getTypeWithChanges();
+
+        if (!type.isLand()) {
+            // no land, do nothing there
+            return;
+        }
+
+        for (int i = 0; i < MagicColor.WUBRG.length; i++ ) {
+            byte c = MagicColor.WUBRG[i];
+            if (type.hasSubtype(MagicColor.Constant.BASIC_LANDS.get(i))) {
+                SpellAbility sa = basicLandAbilities[i];
+
+                // no Ability for this type yet, make a new one
+                if (sa == null) {
+                    sa = CardFactoryUtil.buildBasicLandAbility(state, c);
+                    basicLandAbilities[i] = sa;
+                }
+
+                list.add(sa);
             }
         }
     }
@@ -2785,19 +2823,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final void removeChangedCardTypes(final long timestamp, final boolean updateView) {
-        CardChangedType changed = changedCardTypes.remove(timestamp);
-        if (updateView) {
+        if (changedCardTypes.remove(timestamp) != null && updateView) {
             currentState.getView().updateType(currentState);
-        }
-
-        // if it stops being a land, the abilities does need to be removed
-        if (changed != null && changed.getAddType() != null && changed.getAddType().isLand()) {
-            for (final String s : changed.getAddType().getSubtypes()) {
-                if(CardType.isABasicLandType(s)) {
-                    GameActionUtil.grantBasicLandsManaAbilities(ImmutableList.of(this));
-                    break;
-        	    }
-            }
         }
     }
 
@@ -5720,5 +5747,26 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public void removeWithFlash(Long timestamp) {
         withFlash.removeAll(timestamp);
+    }
+
+    public void unSuppressCardTraits() {
+        // specially reset basic land abilities
+        for (final SpellAbility ab : basicLandAbilities) {
+            if (ab != null) {
+                ab.setTemporarilySuppressed(false);
+            }
+        }
+        for (final SpellAbility ab : getSpellAbilities()) {
+            ab.setTemporarilySuppressed(false);
+        }
+        for (final Trigger t : getTriggers()) {
+            t.setTemporarilySuppressed(false);
+        }
+        for (final StaticAbility stA : getStaticAbilities()) {
+            stA.setTemporarilySuppressed(false);
+        }
+        for (final ReplacementEffect rE : getReplacementEffects()) {
+            rE.setTemporarilySuppressed(false);
+        }
     }
 }

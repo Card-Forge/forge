@@ -73,6 +73,15 @@ import java.util.Map.Entry;
  */
 public class CardFactoryUtil {
 
+    public static SpellAbility buildBasicLandAbility(final CardState state, byte color) {
+        String strcolor = MagicColor.toShortString(color);
+        String abString  = "AB$ Mana | Cost$ T | Produced$ " + strcolor +
+                " | SpellDescription$ Add {" + strcolor + "}.";
+        SpellAbility sa = AbilityFactory.getAbility(abString, state);
+        sa.setIntrinsic(true); // always intristic
+        return sa;
+    }
+
     /**
      * <p>
      * abilityMorphDown.
