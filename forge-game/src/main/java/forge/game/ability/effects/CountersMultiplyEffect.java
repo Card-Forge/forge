@@ -42,14 +42,21 @@ public class CountersMultiplyEffect extends SpellAbilityEffect {
         final int n = Integer.valueOf(sa.getParamOrDefault("Multiplier", "2")) - 1; 
         
         for (final Card tgtCard : getTargetCards(sa)) {
+            Card gameCard = game.getCardState(tgtCard, null);
+            // gameCard is LKI in that case, the card is not in game anymore
+            // or the timestamp did change
+            // this should check Self too
+            if (gameCard == null || !tgtCard.equalsWithTimestamp(gameCard)) {
+                continue;
+            }
             if (counterType != null) {
-                tgtCard.addCounter(counterType, tgtCard.getCounters(counterType) * n, host, true);
+                gameCard.addCounter(counterType, gameCard.getCounters(counterType) * n, host, true);
             } else {
-                for (Map.Entry<CounterType, Integer> e : tgtCard.getCounters().entrySet()) {
-                    tgtCard.addCounter(e.getKey(), e.getValue() * n, host, true);
+                for (Map.Entry<CounterType, Integer> e : gameCard.getCounters().entrySet()) {
+                    gameCard.addCounter(e.getKey(), e.getValue() * n, host, true);
                 }
             }
-            game.updateLastStateForCard(tgtCard);
+            game.updateLastStateForCard(gameCard);
         }
     }
 

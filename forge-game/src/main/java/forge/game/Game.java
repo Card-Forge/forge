@@ -543,15 +543,19 @@ public class Game {
             return found == null;
         }
 
-        public Card getFound() {
-            return found == null ? old : found;
+        public Card getFound(final Card notFound) {
+            return found == null ? notFound : found;
         }
     }
 
     public Card getCardState(final Card card) {
+        return getCardState(card, card);
+    }
+
+    public Card getCardState(final Card card, final Card notFound) {
         CardStateVisitor visit = new CardStateVisitor(card);
         this.forEachCardInGame(visit);
-        return visit.getFound();
+        return visit.getFound(notFound);
     }
 
     // Allows visiting cards in game without allocating a temporary list.
