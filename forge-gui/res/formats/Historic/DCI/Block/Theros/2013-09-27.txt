@@ -1,0 +1,6 @@
+[format]
+Name:Theros Block, Theros
+Type:Historic
+Subtype:Block
+Effective:2013-09-23
+Sets:THS

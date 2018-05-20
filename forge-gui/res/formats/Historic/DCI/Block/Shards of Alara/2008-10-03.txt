@@ -1,0 +1,6 @@
+[format]
+Name:Shards of Alara Block, Shards of Alara
+Type:Historic
+Subtype:Block
+Effective:2008-10-03
+Sets:ALA

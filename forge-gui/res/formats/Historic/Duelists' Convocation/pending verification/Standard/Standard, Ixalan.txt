@@ -1,7 +1,0 @@
-[format]
-Name:Standard, Ixalan
-Type:Historic
-Subtype:Standard
-Effective:2017-09-29
-Sets:KLD, AER, AKH, W17, HOU, XLN
-Banned: Attune with Aether; Rogue Refiner; Rampaging Ferocidon; Ramunap Ruins; Smuggler's Copter; Aetherworks Marvel; Felidar Guardian

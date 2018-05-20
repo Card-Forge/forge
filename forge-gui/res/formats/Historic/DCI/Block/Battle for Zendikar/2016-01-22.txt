@@ -1,0 +1,6 @@
+[format]
+Name:Battle for Zendikar Block, Oath of the Gatewatch
+Type:Historic
+Subtype:Block
+Effective:2016-01-22
+Sets:BFZ, OGW

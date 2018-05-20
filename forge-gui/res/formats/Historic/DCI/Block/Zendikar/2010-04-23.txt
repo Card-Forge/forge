@@ -1,0 +1,6 @@
+[format]
+Name:Zendikar Block, Rise of the Eldrazi
+Type:Historic
+Subtype:Block
+Effective:2010-04-23
+Sets:ZEN, WWK, ROE

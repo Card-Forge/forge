@@ -1,7 +1,0 @@
-[format]
-Name:Modern, August 2011
-Type:Historic
-Subtype:Modern
-Order:504
-Sets:8ED, 9ED, 10E, M10, M11, M12, MRD, DST, 5DN, CHK, BOK, SOK, RAV, POR, PO2, PTK, S99, S00, GPT, DIS, CSP, TSP, TSB, PLC, FUT, LRW, MOR, SHM, EVE, ALA, CFX, ARB, ZEN, WWK, ROE, SOM, MBS, NPH
-Banned:Ancestral Vision; Ancient Den; Bitterblossom; Chrome Mox; Dark Depths; Dread Return; Glimpse of Nature; Golgari Grave-Troll; Great Furnace; Hypergenesis; Jace, the Mind Sculptor; Mental Misstep; Seat of the Synod; Sensei's Divining Top; Skullclamp; Stoneforge Mystic; Sword of the Meek; Tree of Tales; Umezawa's Jitte; Valakut, the Molten Pinnacle; Vault of Whispers

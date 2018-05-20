@@ -1,6 +1,0 @@
-[format]
-Name:Lorwyn-Shadowmoor Block Constructed, Shadowmoor
-Type:Historic
-Subtype:Block
-Order:431
-Sets:LRW, MOR, SHM

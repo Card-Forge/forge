@@ -1,0 +1,7 @@
+[format]
+Name:Legacy Alpha, Battle for Zendikar
+Type:Historic
+Subtype:Legacy
+Effective:2015-10-02
+Sets:LEA
+Banned:Ancestral Recall, Balance, Black Lotus, Channel, Chaos Orb, Contract from Below, Darkpact, Demonic Attorney, Demonic Tutor, Fastbond, Mana Vault, Mind Twist, Mox Emerald, Mox Pearl, Mox Ruby, Mox Sapphire, Mox Jet, Sol Ring, Time Vault, Time Walk, Timetwister, Wheel of Fortune
