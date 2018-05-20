@@ -518,9 +518,11 @@ OutOfStandard=2016-04-08
 
 [DTK]
 Legal=2015-03-27
+OutOfStandard=2016-09-30
 
 [ORI]
 Legal=2015-07-17
+OutOfStandard=2016-09-30
 
 [BFZ]
 Legal=2015-10-02
@@ -533,3 +535,12 @@ Legal=2016-04-08
 
 [SOI]
 Legal=2016-04-08
+
+[EMN]
+Legal=2016-07-22
+
+[KLD]
+Legal=2016-09-30
+
+[AER]
+Legal=2017-01-20

@@ -1,0 +1,6 @@
+[format]
+Name:Shadows over Innistrad Block, Eldritch Moon
+Type:Historic
+Subtype:Block
+Effective:2016-07-22
+Sets:SOI, EMN
