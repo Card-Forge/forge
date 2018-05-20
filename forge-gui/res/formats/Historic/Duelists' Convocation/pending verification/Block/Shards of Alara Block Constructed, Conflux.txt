@@ -1,6 +1,0 @@
-[format]
-Name:Shards of Alara Block Constructed, Conflux
-Type:Historic
-Subtype:Block
-Order:450
-Sets:ALA, CFX

@@ -1,0 +1,7 @@
+[format]
+Name:Mirrodin Block, 03/20/06
+Type:Historic
+Subtype:Block
+Effective:2006-03-20
+Sets:MRD, DST, 5DN
+Banned:Aether Vial, Ancient Den, Arcbound Ravager, Darksteel Citadel, Disciple of the Vault, Great Furnace, Seat of the Synod, Skullclamp, Tree of Tales, Vault of Whispers

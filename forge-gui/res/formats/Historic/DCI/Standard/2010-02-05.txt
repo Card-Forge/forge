@@ -1,0 +1,6 @@
+[format]
+Name:Standard, Worldwake
+Type:Historic
+Subtype:Standard
+Effective:2010-02-05
+Sets:ALA, CFX, ARB, M10, ZEN, WWK

@@ -1,0 +1,8 @@
+[format]
+Name:Vintage Alpha, 06/20/06
+Type:Historic
+Subtype:Vintage
+Effective:2007-06-20
+Sets:LEA
+Restricted:Ancestral Recall, Balance, Black Lotus, Channel, Demonic Tutor, Fastbond, Mox Emerald, Mox Pearl, Mox Ruby, Mox Sapphire, Mox Jet, Regrowth, Sol Ring, Timetwister, Time Walk, Wheel of Fortune
+Banned:Chaos Orb, Contract from Below, Darkpact, Demonic Attorney

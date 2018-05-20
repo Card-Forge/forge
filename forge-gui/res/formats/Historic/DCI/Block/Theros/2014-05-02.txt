@@ -1,0 +1,6 @@
+[format]
+Name:Theros Block, Journey into Nyx
+Type:Historic
+Subtype:Block
+Effective:2014-05-02
+Sets:THS, BNG, JOU
