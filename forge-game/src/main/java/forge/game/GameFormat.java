@@ -294,6 +294,7 @@ public class GameFormat implements Comparable<GameFormat> {
             coreFormats.add("Legacy.txt");
             coreFormats.add("Vintage.txt");
             coreFormats.add("Commander.txt");
+            coreFormats.add("Extended.txt");
             coreFormats.add("Brawl.txt");
 
         }
