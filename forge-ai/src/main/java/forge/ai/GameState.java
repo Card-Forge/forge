@@ -241,8 +241,7 @@ public abstract class GameState {
                 newText.append("|Renowned");
             }
             if (c.isMonstrous()) {
-                newText.append("|Monstrous:");
-                newText.append(c.getMonstrosityNum());
+                newText.append("|Monstrous");
             }
             if (c.isPhasedOut()) {
                 newText.append("|PhasedOut");
@@ -979,9 +978,8 @@ public abstract class GameState {
                     c.tap();
                 } else if (info.startsWith("Renowned")) {
                     c.setRenowned(true);
-                } else if (info.startsWith("Monstrous:")) {
+                } else if (info.startsWith("Monstrous")) {
                     c.setMonstrous(true);
-                    c.setMonstrosityNum(Integer.parseInt(info.substring((info.indexOf(':') + 1))));
                 } else if (info.startsWith("PhasedOut")) {
                     c.setPhasedOut(true);
                 } else if (info.startsWith("Counters:")) {

@@ -1017,11 +1017,6 @@ public class CardFactoryUtil {
             return 0;
         }
 
-        // Count$MonstrosityMagnitude
-        if (sq[0].contains("MonstrosityMagnitude")) {
-            return doXMath(c.getMonstrosityNum(), m, c);
-        }
-
         // Count$Chroma.<color name>
         // Count$Devotion.<color name>
         if (sq[0].contains("Chroma") || sq[0].equals("Devotion")) {

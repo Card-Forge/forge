@@ -57,6 +57,13 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
         }
         
         for (final Card tgtCard : getDefinedCardsOrTargeted(sa)) {
+            Card gameCard = game.getCardState(tgtCard, null);
+            // gameCard is LKI in that case, the card is not in game anymore
+            // or the timestamp did change
+            // this should check Self too
+            if (gameCard == null || !tgtCard.equalsWithTimestamp(gameCard)) {
+                continue;
+            }
             if (!sa.usesTargeting() || tgtCard.canBeTargetedBy(sa)) {
                 if (tgtCard.hasCounters()) {
                     if (sa.hasParam("EachExistingCounter")) {

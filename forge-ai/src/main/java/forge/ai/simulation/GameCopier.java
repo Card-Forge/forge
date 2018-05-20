@@ -318,7 +318,6 @@ public class GameCopier {
             }
             if (c.isMonstrous()) {
                 newCard.setMonstrous(true);
-                newCard.setMonstrosityNum(c.getMonstrosityNum());
             }
             if (c.isRenowned()) {
                 newCard.setRenowned(true);

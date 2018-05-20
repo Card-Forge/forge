@@ -154,7 +154,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean unearthed;
 
     private boolean monstrous = false;
-    private int monstrosityNum = 0;
 
     private boolean renowned = false;
 
@@ -4723,13 +4722,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public final void setMonstrous(final boolean monstrous0) {
         monstrous = monstrous0;
-    }
-
-    public final int getMonstrosityNum() {
-        return monstrosityNum;
-    }
-    public final void setMonstrosityNum(final int num) {
-        monstrosityNum = num;
     }
 
     public final boolean isRenowned() {
