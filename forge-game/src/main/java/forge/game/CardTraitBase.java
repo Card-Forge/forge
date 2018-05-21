@@ -44,7 +44,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
     /** The temporarily suppressed. */
     protected boolean temporarilySuppressed = false;
 
-    private Map<String, String> sVars = Maps.newHashMap();
+    protected Map<String, String> sVars = Maps.newHashMap();
 
     /** Keys of descriptive (text) parameters. */
     private static final ImmutableList<String> descriptiveKeys = ImmutableList.<String>builder()
