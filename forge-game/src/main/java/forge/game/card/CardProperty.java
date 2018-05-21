@@ -1357,8 +1357,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("suspended")) {
-            if (!card.hasSuspend() || !game.isCardExiled(card)
-                    || !(card.getCounters(CounterType.TIME) >= 1)) {
+            if (!card.hasSuspend()) {
                 return false;
             }
         } else if (property.startsWith("delved")) {

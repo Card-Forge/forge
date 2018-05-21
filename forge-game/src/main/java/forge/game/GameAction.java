@@ -105,10 +105,6 @@ public class GameAction {
         boolean fromBattlefield = zoneFrom != null && zoneFrom.is(ZoneType.Battlefield);
         boolean toHand = zoneTo.is(ZoneType.Hand);
 
-        // TODO: part of a workaround for suspend-cast creaturs bounced to hand
-        boolean zoneChangedEarly = false;
-        Zone originalZone = c.getZone();
-
         //Rule 110.5g: A token that has left the battlefield can't move to another zone
         if (c.isToken() && zoneFrom != null && !fromBattlefield && !zoneFrom.is(ZoneType.Command)) {
             return c;
@@ -156,13 +152,6 @@ public class GameAction {
         // up on the wrong card state etc.).
         if (zoneTo.is(ZoneType.Hand) && zoneFrom.is(ZoneType.Exile) && c.isFaceDown()) {
             c.setState(CardStateName.Original, true);
-        }
-
-        if (fromBattlefield && toHand && c.wasSuspendCast()) {
-            // TODO: This has to be set early for suspend-cast creatures bounced to hand, otherwise they
-            // end up in a state when they are considered on the battlefield. There should be a better solution.
-            c.setZone(zoneTo);
-            zoneChangedEarly = true;
         }
 
         // Clean up the temporary Dash SVar when the Dashed card leaves the battlefield
@@ -295,10 +284,6 @@ public class GameAction {
 
             ReplacementResult repres = game.getReplacementHandler().run(repParams);
             if (repres != ReplacementResult.NotReplaced) {
-                if (zoneChangedEarly) {
-                    c.setZone(originalZone); // TODO: part of a workaround for bounced suspend-cast cards 
-                }
-
                 // reset failed manifested Cards back to original
                 if (c.isManifested()) {
                     c.turnFaceUp(false, false);
@@ -314,10 +299,6 @@ public class GameAction {
         }
 
         copied.getOwner().removeInboundToken(copied);
-
-        if (c.wasSuspendCast()) {
-            copied = GameAction.addSuspendTriggers(copied);
-        }
 
         if (suppress) {
             game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
@@ -396,7 +377,7 @@ public class GameAction {
         }
 
         game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, true);
-        if (zoneFrom != null && zoneFrom.is(ZoneType.Battlefield)) {
+        if (zoneFrom != null && zoneFrom.is(ZoneType.Battlefield) && !zoneFrom.getPlayer().equals(zoneTo.getPlayer())) {
             final Map<String, Object> runParams2 = Maps.newHashMap();
             runParams2.put("Card", lastKnownInfo);
             runParams2.put("OriginalController", zoneFrom.getPlayer());
@@ -436,7 +417,6 @@ public class GameAction {
 
         if (fromBattlefield) {
             if (!c.isToken()) {
-                copied.setSuspendCast(false);
                 copied.setState(CardStateName.Original, true);
             }
             // Soulbond unpairing
@@ -1506,44 +1486,6 @@ public class GameAction {
 
         final Card sacrificed = sacrificeDestroy(c, sa);
         return sacrificed != null;
-    }
-
-    private static Card addSuspendTriggers(final Card c) {
-        if (c.getSVar("HasteFromSuspend").equals("True")) {
-            return c;
-        }
-        c.setSVar("HasteFromSuspend", "True");
-
-        final GameCommand intoPlay = new GameCommand() {
-            private static final long serialVersionUID = -4514610171270596654L;
-
-            @Override
-            public void run() {
-                if (c.isInPlay() && c.isCreature()) {
-                    c.addExtrinsicKeyword("Haste");
-                    c.updateStateForView();
-                }
-            } // execute()
-        };
-
-        c.addComesIntoPlayCommand(intoPlay);
-
-        final GameCommand loseControl = new GameCommand() {
-            private static final long serialVersionUID = -4514610171270596654L;
-
-            @Override
-            public void run() {
-                if (c.getSVar("HasteFromSuspend").equals("True")) {
-                    c.setSVar("HasteFromSuspend", "False");
-                    c.removeExtrinsicKeyword("Haste");
-                    c.updateStateForView();
-                }
-            } // execute()
-        };
-
-        c.addChangeControllerCommand(loseControl);
-        c.addLeavesPlayCommand(loseControl);
-        return c;
     }
 
     /**
