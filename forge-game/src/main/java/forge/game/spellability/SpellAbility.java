@@ -854,6 +854,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             // clear maps for copy, the values will be added later
             clone.additionalAbilities = Maps.newHashMap();
             clone.additionalAbilityLists = Maps.newHashMap();
+            clone.sVars = Maps.newHashMap();
             // run special copy Ability to make a deep copy
             CardFactory.copySpellAbility(this, clone, host, activ, lki);
         } catch (final CloneNotSupportedException e) {

@@ -161,8 +161,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private long bestowTimestamp = -1;
     private long transformedTimestamp = 0;
-    private boolean suspendCast = false;
-    private boolean suspend = false;
     private boolean tributed = false;
     private boolean embalmed = false;
     private boolean eternalized = false;
@@ -3754,17 +3752,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final boolean hasSuspend() {
-        return suspend;
-    }
-    public final void setSuspend(final boolean b) {
-        suspend = b;
-    }
-
-    public final boolean wasSuspendCast() {
-        return suspendCast;
-    }
-    public final void setSuspendCast(final boolean b) {
-        suspendCast = b;
+        return hasKeyword(Keyword.SUSPEND) && getLastKnownZone().is(ZoneType.Exile)
+                && getCounters(CounterType.TIME) >= 1;
     }
 
     public final boolean isPhasedOut() {

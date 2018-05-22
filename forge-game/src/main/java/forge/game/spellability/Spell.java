@@ -138,7 +138,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         }
 
         if (!(isInstant || activator.canCastSorcery() || flash || getRestrictions().isInstantSpeed()
-               || this.hasSVar("IsCastFromPlayEffect")
+               || hasSVar("IsCastFromPlayEffect")
                || (card.isFaceDown() && !card.getLastKnownZone().is(ZoneType.Battlefield) && card.getState(CardStateName.Original).getType().isInstant()))) {
             return false;
         }
@@ -148,7 +148,11 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         }
 
         // for uncastables like lotus bloom, check if manaCost is blank (except for morph spells)
-        if (!isCastFaceDown() && isBasicSpell() && card.getState(card.isFaceDown() ? CardStateName.Original : card.getCurrentStateName()).getManaCost().isNoCost()) {
+        // but ignore if it comes from PlayEffect
+        if (!isCastFaceDown()
+                && !hasSVar("IsCastFromPlayEffect")
+                && isBasicSpell()
+                && card.getState(card.isFaceDown() ? CardStateName.Original : card.getCurrentStateName()).getManaCost().isNoCost()) {
             return false;
         }
 

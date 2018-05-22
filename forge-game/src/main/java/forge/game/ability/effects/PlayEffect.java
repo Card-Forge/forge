@@ -185,10 +185,6 @@ public class PlayEffect extends SpellAbilityEffect {
                 }
             }
 
-            if(sa.hasParam("SuspendCast")) {
-                tgtCard.setSuspendCast(true);
-            }
-
             // lands will be played
             if (tgtCard.isLand()) {
                 if (controller.playLand(tgtCard, true)) {

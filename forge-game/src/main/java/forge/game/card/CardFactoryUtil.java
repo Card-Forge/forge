@@ -2950,10 +2950,27 @@ public class CardFactoryUtil {
             playTrig.append(" | TriggerDescription$ When the last time counter is removed from this card, if it's exiled, play it without paying its mana cost if able.  ");
             playTrig.append("If you can't, it remains exiled. If you cast a creature spell this way, it gains haste until you lose control of the spell or the permanent it becomes.");
 
-            final String abPlay = "DB$ Play | Defined$ Self | WithoutManaCost$ True | SuspendCast$ True";
+            String abPlay = "DB$ Play | Defined$ Self | WithoutManaCost$ True | SuspendCast$ True";
+            if (card.isPermanent()) {
+                abPlay += "| RememberPlayed$ True";
+            }
+
+            final SpellAbility saPlay = AbilityFactory.getAbility(abPlay, card);
+
+            if (card.isPermanent()) {
+                final String abPump = "DB$ Pump | Defined$ Remembered | KW$ Haste | PumpZone$ Stack "
+                        + "| ConditionDefined$ Remembered | ConditionPresent$ Creature | UntilLoseControlOfHost$ True";
+                final AbilitySub saPump = (AbilitySub)AbilityFactory.getAbility(abPump, card);
+
+                String dbClean = "DB$ Cleanup | ClearRemembered$ True";
+                final AbilitySub saCleanup = (AbilitySub) AbilityFactory.getAbility(dbClean, card);
+                saPump.setSubAbility(saCleanup);
+
+                saPlay.setSubAbility(saPump);
+            }
 
             final Trigger parsedPlayTrigger = TriggerHandler.parseTrigger(playTrig.toString(), card, intrinsic);
-            parsedPlayTrigger.setOverridingAbility(AbilityFactory.getAbility(abPlay, card));
+            parsedPlayTrigger.setOverridingAbility(saPlay);
 
             inst.addTrigger(parsedUpkeepTrig);
             inst.addTrigger(parsedPlayTrigger);
@@ -4026,8 +4043,6 @@ public class CardFactoryUtil {
             inst.addSpellAbility(newSA);
             
         } else if (keyword.startsWith("Suspend") && !keyword.equals("Suspend")) {
-            // really needed?
-            card.setSuspend(true);
             // only add it if suspend has counter and cost
             final String[] k = keyword.split(":");
 
@@ -4051,8 +4066,6 @@ public class CardFactoryUtil {
                 public void resolve() {
                     final Game game = card.getGame();
                     final Card c = game.getAction().exile(this.getHostCard(), this);
-                    // better check?
-                    c.setSuspend(true);
 
                     int counters = AbilityUtils.calculateAmount(c, k[1], this);
                     c.addCounter(CounterType.TIME, counters, c, true);
