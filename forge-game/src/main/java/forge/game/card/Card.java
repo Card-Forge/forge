@@ -5706,7 +5706,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         for (final Trigger t : getTriggers()) {
             SpellAbility sa = t.getOverridingAbility();
             if (sa != null && sa.isChapter()) {
-                n = Integer.max(n, sa.getChapter());
+                n = Math.max(n, sa.getChapter());
             }
         }
         return n;
