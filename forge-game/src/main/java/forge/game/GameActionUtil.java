@@ -347,7 +347,7 @@ public final class GameActionUtil {
      * 
      * @deprecated only used by AI, replace it with new functions in AI
      */
-    public static List<SpellAbility> getOptionalCosts(final SpellAbility original) {
+    @Deprecated public static List<SpellAbility> getOptionalCosts(final SpellAbility original) {
         final List<SpellAbility> abilities = getAdditionalCostSpell(original);
 
         final Card source = original.getHostCard();
