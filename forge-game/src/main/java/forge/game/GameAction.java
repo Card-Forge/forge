@@ -1562,6 +1562,51 @@ public class GameAction {
         }
     }
 
+    private void drawStartingHand(Player p1){
+        
+        //copy starting hand/lib
+        List<Card> lib = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards().threadSafeIterable());
+        List<Card> hand = Lists.newArrayList(p1.getZone(ZoneType.Hand).getCards().threadSafeIterable());
+
+        //draw initial hand
+        p1.drawCards(p1.getMaxHandSize());
+        List<Card> lib1 = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards().threadSafeIterable());
+        List<Card> hand1 = Lists.newArrayList(p1.getZone(ZoneType.Hand).getCards().threadSafeIterable());
+        System.out.println("Hand 1: " + hand1.toString());
+
+        //reset, shuffle
+        p1.getZone(ZoneType.Library).setCards(lib);
+        p1.getZone(ZoneType.Hand).setCards(hand);
+        List shuffledCards = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards().threadSafeIterable());
+        Collections.shuffle(shuffledCards);
+        p1.getZone(ZoneType.Library).setCards(shuffledCards);
+
+        //draw a second hand
+        p1.drawCards(p1.getMaxHandSize());
+        List<Card> lib2 = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards().threadSafeIterable());
+        List<Card> hand2 = Lists.newArrayList(p1.getZone(ZoneType.Hand).getCards().threadSafeIterable());
+        System.out.println("Hand 2: " + hand2.toString());
+
+        //choose better hand according to land count
+        if(getHandScore(hand1)<=getHandScore(hand2)){
+            p1.getZone(ZoneType.Library).setCards(lib1);
+            p1.getZone(ZoneType.Hand).setCards(hand1);
+        }else{
+            p1.getZone(ZoneType.Library).setCards(lib2);
+            p1.getZone(ZoneType.Hand).setCards(hand2);
+        }
+    }
+
+    private int getHandScore(List<Card> hand){
+        int landCount = 0;
+        for(Card c:hand){
+            if(c.isLand()){
+                landCount++;
+            }
+        }
+        return Math.abs(3-landCount);
+    }
+
     public void startGame(GameOutcome lastGameOutcome) {
         startGame(lastGameOutcome, null);
     }
@@ -1582,7 +1627,8 @@ public class GameAction {
 
             game.setAge(GameStage.Mulligan);
             for (final Player p1 : game.getPlayers()) {
-                p1.drawCards(p1.getMaxHandSize());
+
+                drawStartingHand(p1);
 
                 // If pl has Backup Plan as a Conspiracy draw that many extra hands
 
