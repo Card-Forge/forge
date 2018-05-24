@@ -11,8 +11,8 @@ Name:Riches
 ManaCost:5 U U
 Types:Sorcery
 K:Aftermath
-A:SP$ RepeatEach | Cost$ 5 U U | AILogic$ OpponentHasCreatures | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ ChooseCreature | SubAbility$ StealChosen | SpellDescription$ Each opponent chooses a creature he or she controls. You gain control of those creatures.
+A:SP$ RepeatEach | Cost$ 5 U U | AILogic$ OpponentHasCreatures | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ ChooseCreature | SubAbility$ StealChosen | SpellDescription$ Each opponent chooses a creature they control. You gain control of those creatures.
 SVar:ChooseCreature:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creature.RememberedPlayerCtrl | ChoiceTitle$ Choose a creature to be stolen | AILogic$ WorstCard | RememberChosen$ True | Mandatory$ True
 SVar:StealChosen:DB$ GainControl | AllValid$ Permanent.IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosen$ True
-Oracle:Aftermath (Cast this spell only from your graveyard, then exile it.)\nEach opponent chooses a creature he or she controls. You gain control of those creatures.
+Oracle:Aftermath (Cast this spell only from your graveyard, then exile it.)\nEach opponent chooses a creature they control. You gain control of those creatures.
