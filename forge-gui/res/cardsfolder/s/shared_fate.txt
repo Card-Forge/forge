@@ -1,7 +1,7 @@
 Name:Shared Fate
 ManaCost:4 U
 Types:Enchantment
-Text:If a player would draw a card, that player exiles the top card of an opponent's library face down instead. Each player may look at and play cards he or she exiled with CARDNAME.
+Text:If a player would draw a card, that player exiles the top card of an opponent's library face down instead. Each player may look at and play cards they exiled with CARDNAME.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffects | Static$ True
 #Create an effect for each player. The effect contains both Shared Fate's abilities.
 SVar:TrigEffects:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBEffect
@@ -15,4 +15,4 @@ SVar:DBCleanup:DB$ Cleanup | ForgetDefined$ TriggeredCard
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shared_fate.jpg
-Oracle:If a player would draw a card, that player exiles the top card of an opponent's library face down instead.\nEach player may look at and play cards he or she exiled with Shared Fate.
+Oracle:If a player would draw a card, that player exiles the top card of an opponent's library face down instead.\nEach player may look at and play cards they exiled with Shared Fate.
