@@ -3,7 +3,7 @@ ManaCost:2 B B B
 Types:Enchantment
 S:Mode$ CantPlayLand | Description$ Players can't play lands.
 S:Mode$ Continuous | EffectZone$ Battlefield | GlobalRule$ Lands can't enter the battlefield. | Description$ Lands can't enter the battlefield.
-T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ RepeatAbility | TriggerDescription$ At the beginning of each upkeep, any player may sacrifice two lands or have CARDNAME deal 5 damage to him or her. If a player does either, destroy CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ RepeatAbility | TriggerDescription$ At the beginning of each upkeep, any player may sacrifice two lands or have CARDNAME deal 5 damage to that player. If a player does either, destroy CARDNAME.
 SVar:RepeatAbility:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose
 SVar:DBChoose:DB$ GenericChoice | Defined$ Player.IsRemembered | Choices$ SacTwoLands,DealDmg | AILogic$ PayUnlessCost
 SVar:DealDmg:DB$ Destroy | Defined$ Self | UnlessCost$ DamageYou<5> | UnlessPayer$ Player.IsRemembered | UnlessSwitched$ True | SpellDescription$ Have CARDNAME deal 5 damage to you and destroy CARDNAME.
@@ -12,4 +12,4 @@ SVar:AIPreference:SacCost$Land.Basic,Land
 SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/worms_of_the_earth.jpg
-Oracle: Players can't play lands.\nLands can't enter the battlefield.\nAt the beginning of each upkeep, any player may sacrifice two lands or have Worms of the Earth deal 5 damage to him or her. If a player does either, destroy Worms of the Earth.
+Oracle: Players can't play lands.\nLands can't enter the battlefield.\nAt the beginning of each upkeep, any player may sacrifice two lands or have Worms of the Earth deal 5 damage to that player. If a player does either, destroy Worms of the Earth.
