@@ -1,8 +1,8 @@
 Name:Aether Barrier
 ManaCost:2 U
 Types:Enchantment
-T:Mode$ SpellCast | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever a player casts a creature spell, that player sacrifices a permanent unless he or she pays {1}.
+T:Mode$ SpellCast | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever a player casts a creature spell, that player sacrifices a permanent unless they pay {1}.
 SVar:TrigSac:DB$ Sacrifice | UnlessCost$ 1 | UnlessPayer$ TriggeredActivator | Defined$ TriggeredActivator | SacValid$ Permanent
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_barrier.jpg
-Oracle:Whenever a player casts a creature spell, that player sacrifices a permanent unless he or she pays {1}.
+Oracle:Whenever a player casts a creature spell, that player sacrifices a permanent unless they pay {1}.
