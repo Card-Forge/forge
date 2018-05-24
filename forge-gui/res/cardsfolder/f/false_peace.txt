@@ -1,7 +1,7 @@
 Name:False Peace
 ManaCost:W
 Types:Sorcery
-A:SP$ Pump | Cost$ W | ValidTgts$ Player | TgtPrompt$ Select target player | KW$ Skip all combat phases of your next turn. | Permanent$ True | SpellDescription$ Target player skips all combat phases of his or her next turn.
+A:SP$ Pump | Cost$ W | ValidTgts$ Player | TgtPrompt$ Select target player | KW$ Skip all combat phases of your next turn. | Permanent$ True | SpellDescription$ Target player skips all combat phases of their next turn.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/false_peace.jpg
-Oracle:Target player skips all combat phases of his or her next turn.
+Oracle:Target player skips all combat phases of their next turn.

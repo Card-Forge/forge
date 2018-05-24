@@ -1,7 +1,7 @@
 Name:Moment of Silence
 ManaCost:W
 Types:Instant
-A:SP$ Pump | Cost$ W | ValidTgts$ Player | TgtPrompt$ Select target player | KW$ Skip your next combat phase. | SpellDescription$ Target player skips his or her next combat phase this turn.
+A:SP$ Pump | Cost$ W | ValidTgts$ Player | TgtPrompt$ Select target player | KW$ Skip your next combat phase. | SpellDescription$ Target player skips their next combat phase this turn.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moment_of_silence.jpg
-Oracle:Target player skips his or her next combat phase this turn.
+Oracle:Target player skips their next combat phase this turn.
