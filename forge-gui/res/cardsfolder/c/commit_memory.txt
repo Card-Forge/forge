@@ -16,4 +16,4 @@ K:Aftermath
 A:SP$ ChangeZoneAll | Cost$ 4 U U | ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | Random$ True | SubAbility$ DBDraw | UseAllOriginZones$ True | AILogic$ TimeTwister | SpellDescription$ Each player shuffles his or her graveyard and hand into their library, then draws seven cards.
 
 SVar:DBDraw:DB$ Draw | NumCards$ 7 | Defined$ Player
-Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nEach player shuffles his or her hand and graveyard into their library, then draws seven cards.
+Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nEach player shuffles their hand and graveyard into their library, then draws seven cards.
