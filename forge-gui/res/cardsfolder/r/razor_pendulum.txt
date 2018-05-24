@@ -1,8 +1,8 @@
 Name:Razor Pendulum
 ManaCost:4
 Types:Artifact
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDamage | LifeTotal$ ActivePlayer | LifeAmount$ LE5 | TriggerDescription$ At the beginning of each player's end step, if that player has 5 or less life, CARDNAME deals 2 damage to him or her.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDamage | LifeTotal$ ActivePlayer | LifeAmount$ LE5 | TriggerDescription$ At the beginning of each player's end step, if that player has 5 or less life, CARDNAME deals 2 damage to them.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 2
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razor_pendulum.jpg
-Oracle:At the beginning of each player's end step, if that player has 5 or less life, Razor Pendulum deals 2 damage to him or her.
+Oracle:At the beginning of each player's end step, if that player has 5 or less life, Razor Pendulum deals 2 damage to them.
