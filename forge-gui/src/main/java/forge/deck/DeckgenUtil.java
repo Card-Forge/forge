@@ -554,7 +554,10 @@ public class DeckgenUtil {
                     }
                 }
                 for(String card:uniqueCards){
-                    preSelectedCards.add(StaticData.instance().getCommonCards().getUniqueByName(card));
+                    PaperCard paperCard = StaticData.instance().getCommonCards().getUniqueByName(card);
+                    if(format.isLegalCard(paperCard)) {
+                        preSelectedCards.add(paperCard);
+                    }
                 }
             }else {
                 List<Map.Entry<PaperCard,Integer>> potentialCards = new ArrayList<>();
