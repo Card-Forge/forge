@@ -2,7 +2,7 @@ Name:Baloth Cage Trap
 ManaCost:3 G G
 Types:Instant Trap
 A:SP$ Token | Cost$ 3 G G | TokenAmount$ 1 | TokenName$ Beast | TokenOwner$ You | TokenTypes$ Creature,Beast | TokenColors$ Green | TokenPower$ 4 | TokenToughness$ 4 | TokenImage$ g 4 4 beast ZEN | SpellDescription$ Create a 4/4 green Beast creature token.
-A:SP$ Token | Cost$ 1 G | CheckSVar$ ArtifactsEntered | TokenAmount$ 1 | TokenName$ Beast | TokenOwner$ You | TokenTypes$ Creature,Beast | TokenColors$ Green | TokenPower$ 4 | TokenToughness$ 4 | TokenImage$ g 4 4 beast ZEN | SpellDescription$ If an opponent had an artifact enter the battlefield under his or her control this turn, you may pay {1}{G} rather than pay Baloth Cage Trap's mana cost.
+A:SP$ Token | Cost$ 1 G | CheckSVar$ ArtifactsEntered | TokenAmount$ 1 | TokenName$ Beast | TokenOwner$ You | TokenTypes$ Creature,Beast | TokenColors$ Green | TokenPower$ 4 | TokenToughness$ 4 | TokenImage$ g 4 4 beast ZEN | SpellDescription$ If an opponent had an artifact enter the battlefield under their control this turn, you may pay {1}{G} rather than pay Baloth Cage Trap's mana cost.
 SVar:ArtifactsEntered:Count$ThisTurnEntered_Battlefield_Artifact.OppCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/baloth_cage_trap.jpg
-Oracle:If an opponent had an artifact enter the battlefield under his or her control this turn, you may pay {1}{G} rather than pay Baloth Cage Trap's mana cost.\nCreate a 4/4 green Beast creature token.
+Oracle:If an opponent had an artifact enter the battlefield under their control this turn, you may pay {1}{G} rather than pay Baloth Cage Trap's mana cost.\nCreate a 4/4 green Beast creature token.
