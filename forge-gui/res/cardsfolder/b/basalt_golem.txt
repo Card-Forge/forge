@@ -3,10 +3,10 @@ ManaCost:5
 Types:Artifact Creature Golem
 PT:2/4
 K:CantBeBlockedBy Artifact.Creature
-T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigEndCombat | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, that creature's controller sacrifices it at end of combat. If the player does, he or she creates a 0/2 colorless Wall artifact creature token with defender.
-SVar:TrigEndCombat:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | Execute$ TrigSacBlocker | RememberObjects$ TriggeredBlocker | TriggerDescription$ At end of combat, the controller of the creature that blocked CARDNAME sacrifices that creature. If the player does, he or she creates a 0/2 colorless Wall artifact creature token with defender.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigEndCombat | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, that creature's controller sacrifices it at end of combat. If the player does, they create a 0/2 colorless Wall artifact creature token with defender.
+SVar:TrigEndCombat:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | Execute$ TrigSacBlocker | RememberObjects$ TriggeredBlocker | TriggerDescription$ At end of combat, the controller of the creature that blocked CARDNAME sacrifices that creature. If the player does, they create a 0/2 colorless Wall artifact creature token with defender.
 SVar:TrigSacBlocker:DB$Destroy | Defined$ DelayTriggerRemembered | Sacrifice$ True | SubAbility$ DBToken | RememberDestroyed$ True
 SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Wall | TokenTypes$ Artifact,Creature,Wall | TokenOwner$ DelayTriggerRememberedController | TokenColors$ Colorless | TokenPower$ 0 | TokenToughness$ 2 | TokenKeywords$ Defender | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/basalt_golem.jpg
-Oracle:Basalt Golem can't be blocked by artifact creatures.\nWhenever Basalt Golem becomes blocked by a creature, that creature's controller sacrifices it at end of combat. If the player does, he or she creates a 0/2 colorless Wall artifact creature token with defender.
+Oracle:Basalt Golem can't be blocked by artifact creatures.\nWhenever Basalt Golem becomes blocked by a creature, that creature's controller sacrifices it at end of combat. If the player does, they create a 0/2 colorless Wall artifact creature token with defender.
