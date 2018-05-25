@@ -2,10 +2,10 @@ Name:Rishadan Footpad
 ManaCost:3 U
 Types:Creature Human Pirate
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ RepeatEachOpp | TriggerDescription$ When CARDNAME enters the battlefield, each opponent sacrifices a permanent unless he or she pays {2}.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ RepeatEachOpp | TriggerDescription$ When CARDNAME enters the battlefield, each opponent sacrifices a permanent unless they pay {2}.
 SVar:RepeatEachOpp:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ TrigSac
 SVar:TrigSac:DB$ Sacrifice | Defined$ Remembered | SacValid$ Permanent | SacMessage$ Permanent | UnlessCost$ 2 | UnlessPayer$ Remembered
 SVar:NeedsToPlayVar:Z LE1
 SVar:Z:Count$Valid Card.canProduceMana+OppCtrl+untapped
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rishadan_footpad.jpg
-Oracle:When Rishadan Footpad enters the battlefield, each opponent sacrifices a permanent unless he or she pays {2}.
+Oracle:When Rishadan Footpad enters the battlefield, each opponent sacrifices a permanent unless they pay {2}.

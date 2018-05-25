@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Creature Spirit
 PT:1/1
 K:Flying
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player puts the top two cards of his or her library into his or her graveyard.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player puts the top two cards of their library into their graveyard.
 SVar:TrigMill:DB$Mill | Defined$ TriggeredTarget | NumCards$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shriekgeist.jpg
-Oracle:Flying\nWhenever Shriekgeist deals combat damage to a player, that player puts the top two cards of his or her library into his or her graveyard.
+Oracle:Flying\nWhenever Shriekgeist deals combat damage to a player, that player puts the top two cards of their library into their graveyard.

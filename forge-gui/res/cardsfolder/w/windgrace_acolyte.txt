@@ -3,8 +3,8 @@ ManaCost:4 B
 Types:Creature Cat Warrior
 PT:3/2
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, target player puts the top four cards of his or her library into their graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, put the top three cards of your library into your graveyard and you gain 3 life.
 SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
 DeckHas:Ability$Graveyard
-Oracle:Flying\nWhen Windgrace Acolyte enters the battlefield, put the top three cards of your library into your graveyard and you gain 3 life. 
+Oracle:Flying\nWhen Windgrace Acolyte enters the battlefield, put the top three cards of your library into your graveyard and you gain 3 life.

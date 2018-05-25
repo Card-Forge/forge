@@ -1,8 +1,8 @@
 Name:Cranial Archive
 ManaCost:2
 Types:Artifact
-A:AB$ ChangeZoneAll | Cost$ 2 Exile<1/CARDNAME> | ValidTgts$ Player | Origin$ Graveyard | Destination$ Library | Shuffle$ True | SubAbility$ DBDraw | SpellDescription$ Target player shuffles his or her graveyard into his or her library. Draw a card.
+A:AB$ ChangeZoneAll | Cost$ 2 Exile<1/CARDNAME> | ValidTgts$ Player | Origin$ Graveyard | Destination$ Library | Shuffle$ True | SubAbility$ DBDraw | SpellDescription$ Target player shuffles their graveyard into their library. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cranial_archive.jpg
-Oracle:{2}, Exile Cranial Archive: Target player shuffles his or her graveyard into his or her library. Draw a card.
+Oracle:{2}, Exile Cranial Archive: Target player shuffles their graveyard into their library. Draw a card.

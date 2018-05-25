@@ -1,7 +1,7 @@
 Name:Ghoulcaller's Bell
 ManaCost:1
 Types:Artifact
-A:AB$ Mill | Cost$ T | NumCards$ 1 | Defined$ Player | SpellDescription$ Each player puts the top card of his or her library into his or her graveyard.
+A:AB$ Mill | Cost$ T | NumCards$ 1 | Defined$ Player | SpellDescription$ Each player puts the top card of their library into their graveyard.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghoulcallers_bell.jpg
-Oracle:{T}: Each player puts the top card of his or her library into his or her graveyard.
+Oracle:{T}: Each player puts the top card of their library into their graveyard.

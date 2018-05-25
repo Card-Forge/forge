@@ -1,7 +1,7 @@
 Name:Limited Resources
 ManaCost:W
 Types:Enchantment
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBRepeatResources | TriggerDescription$ When CARDNAME enters the battlefield, each player chooses five lands he or she controls and sacrifices the rest.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBRepeatResources | TriggerDescription$ When CARDNAME enters the battlefield, each player chooses five lands they control and sacrifices the rest.
 SVar:DBRepeatResources:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ CardChoice
 SVar:CardChoice:DB$ ChooseCard | Defined$ Remembered | Amount$ 5 | Choices$ Land.RememberedPlayerCtrl | ChoiceTitle$ Choose a land | RememberChosen$ True | SubAbility$ SacRest
 SVar:SacRest:DB$ SacrificeAll | ValidCards$ Land.RememberedPlayerCtrl+IsNotRemembered | SubAbility$ DBCleanup
@@ -12,4 +12,4 @@ SVar:NonStackingEffect:True
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/limited_resources.jpg
-Oracle:When Limited Resources enters the battlefield, each player chooses five lands he or she controls and sacrifices the rest.\nPlayers can't play lands as long as ten or more lands are on the battlefield.
+Oracle:When Limited Resources enters the battlefield, each player chooses five lands they control and sacrifices the rest.\nPlayers can't play lands as long as ten or more lands are on the battlefield.

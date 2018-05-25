@@ -2,8 +2,8 @@ Name:Wu Spy
 ManaCost:1 U
 Types:Creature Human Soldier Rogue
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top two cards of target player's library. Put one of them into his or her graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top two cards of target player's library. Put one of them into their graveyard.
 SVar:TrigDig:DB$Dig | ValidTgts$ Player | DestinationZone$ Graveyard | DigNum$ 2 | LibraryPosition2$ 0
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wu_spy.jpg
-Oracle:When Wu Spy enters the battlefield, look at the top two cards of target player's library. Put one of them into his or her graveyard.
+Oracle:When Wu Spy enters the battlefield, look at the top two cards of target player's library. Put one of them into their graveyard.

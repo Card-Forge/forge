@@ -5,6 +5,6 @@ PT:5/2
 T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromHand+Self | Destination$ Battlefield | Static$ True | Execute$ ETBCounter | TriggerDescription$ CARDNAME enters the battlefield with a divinity counter on it if you cast it from your hand.
 SVar:ETBCounter:DB$PutCounter | Defined$ Self | CounterType$ DIVINITY | CounterNum$ 1
 S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_DIVINITY | AddKeyword$ Indestructible | Description$ CARDNAME has indestructible as long as it has a divinity counter on it.
-A:AB$ Discard | Cost$ SubCounter<1/DIVINITY> | Defined$ Player.Opponent | Mode$ Hand | SpellDescription$ Each opponent discards his or her hand.
+A:AB$ Discard | Cost$ SubCounter<1/DIVINITY> | Defined$ Player.Opponent | Mode$ Hand | SpellDescription$ Each opponent discards their hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myojin_of_nights_reach.jpg
-Oracle:Myojin of Night's Reach enters the battlefield with a divinity counter on it if you cast it from your hand.\nMyojin of Night's Reach has indestructible as long as it has a divinity counter on it.\nRemove a divinity counter from Myojin of Night's Reach: Each opponent discards his or her hand.
+Oracle:Myojin of Night's Reach enters the battlefield with a divinity counter on it if you cast it from your hand.\nMyojin of Night's Reach has indestructible as long as it has a divinity counter on it.\nRemove a divinity counter from Myojin of Night's Reach: Each opponent discards their hand.

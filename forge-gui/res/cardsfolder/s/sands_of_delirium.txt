@@ -1,7 +1,7 @@
 Name:Sands of Delirium
 ManaCost:3
 Types:Artifact
-A:AB$ Mill | Cost$ X T | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Select target player | References$ X | AILogic$ EndOfOppTurn | SpellDescription$ Target player puts the top X cards of his or her library into his or her graveyard.
+A:AB$ Mill | Cost$ X T | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Select target player | References$ X | AILogic$ EndOfOppTurn | SpellDescription$ Target player puts the top X cards of their library into their graveyard.
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sands_of_delirium.jpg
-Oracle:{X}, {T}: Target player puts the top X cards of his or her library into his or her graveyard.
+Oracle:{X}, {T}: Target player puts the top X cards of their library into their graveyard.

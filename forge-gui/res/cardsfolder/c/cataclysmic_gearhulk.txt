@@ -3,7 +3,7 @@ ManaCost:3 W W
 Types:Artifact Creature Construct
 PT:4/5
 K:Vigilance
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCataclysm | TriggerDescription$ When CARDNAME enters the battlefield, each player chooses an artifact, a creature, an enchantment, and a planeswalker from among the nonland permanents he or she controls, then sacrifices the rest.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCataclysm | TriggerDescription$ When CARDNAME enters the battlefield, each player chooses an artifact, a creature, an enchantment, and a planeswalker from among the nonland permanents they control, then sacrifices the rest.
 SVar:TrigCataclysm:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseArtf | SubAbility$ SacAllOthers
 SVar:ChooseArtf:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Artifact.nonLand+RememberedPlayerCtrl | ChoiceTitle$ Choose an artifact to keep | SubAbility$ ChooseCrtr | RememberChosen$ True | Mandatory$ True
 SVar:ChooseCrtr:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creature.nonLand+RememberedPlayerCtrl | ChoiceTitle$ Choose a creature to keep | SubAbility$ ChooseEnch | RememberChosen$ True | Mandatory$ True
@@ -13,4 +13,4 @@ SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Permanent.nonLand+IsNotRemember
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cataclysmic_gearhulk.jpg
-Oracle:Vigilance\nWhen Cataclysmic Gearhulk enters the battlefield, each player chooses an artifact, a creature, an enchantment, and a planeswalker from among the nonland permanents he or she controls, then sacrifices the rest.
+Oracle:Vigilance\nWhen Cataclysmic Gearhulk enters the battlefield, each player chooses an artifact, a creature, an enchantment, and a planeswalker from among the nonland permanents they control, then sacrifices the rest.

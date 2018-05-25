@@ -3,7 +3,7 @@ ManaCost:5 R
 Types:Creature Dragon
 PT:5/5
 K:Flying
-A:AB$ Discard | Cost$ 5 R ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | Defined$ Player | Mode$ Hand | SubAbility$ DBDraw | SpellDescription$ Each player discards his or her hand, then draws seven cards.
+A:AB$ Discard | Cost$ 5 R ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | Defined$ Player | Mode$ Hand | SubAbility$ DBDraw | SpellDescription$ Each player discards their hand, then draws seven cards.
 SVar:DBDraw:DB$ Draw | Defined$ Player | NumCards$ 7
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runehorn_hellkite.jpg
-Oracle:Flying\n{5}{R}, Exile Runehorn Hellkite from your graveyard: Each player discards his or her hand, then draws seven cards.
+Oracle:Flying\n{5}{R}, Exile Runehorn Hellkite from your graveyard: Each player discards their hand, then draws seven cards.

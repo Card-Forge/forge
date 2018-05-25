@@ -1,9 +1,9 @@
 Name:Acidic Soil
 ManaCost:2 R
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 2 R | RepeatPlayers$ Player | RepeatSubAbility$ DBDamage | DamageMap$ True | SpellDescription$ CARDNAME deals damage to each player equal to the number of lands he or she controls.
+A:SP$ RepeatEach | Cost$ 2 R | RepeatPlayers$ Player | RepeatSubAbility$ DBDamage | DamageMap$ True | SpellDescription$ CARDNAME deals damage to each player equal to the number of lands they control.
 SVar:DBDamage:DB$ DealDamage | Defined$ Remembered | NumDmg$ X | References$ X
 SVar:X:Count$Valid Land.RememberedPlayerCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acidic_soil.jpg
-Oracle:Acidic Soil deals damage to each player equal to the number of lands he or she controls.
+Oracle:Acidic Soil deals damage to each player equal to the number of lands they control.

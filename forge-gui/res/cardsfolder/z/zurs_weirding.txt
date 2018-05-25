@@ -2,7 +2,7 @@ Name:Zur's Weirding
 ManaCost:3 U
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Player | AddKeyword$ Play with your hand revealed. | Description$ Players play with their hands revealed.
-R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ Player | ReplaceWith$ RevealTop | Description$ If a player would draw a card, he or she reveals it instead. Then any other player may pay 2 life. If a player does, put that card into its owner's graveyard. Otherwise, that player draws a card.
+R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ Player | ReplaceWith$ RevealTop | Description$ If a player would draw a card, they reveal it instead. Then any other player may pay 2 life. If a player does, put that card into its owner's graveyard. Otherwise, that player draws a card.
 SVar:RevealTop:DB$ Dig | Defined$ ReplacedPlayer | DigNum$ 1 | NoMove$ True | Reveal$ True | SubAbility$ DBCheck
 SVar:DBCheck:DB$ StoreSVar | SVar$ ZurCheck | Type$ Number | Expression$ 1 | UnlessPayer$ NonReplacedPlayer | UnlessCost$ PayLife<2> | SubAbility$ DBMill | StackDescription$ None
 SVar:DBMill:DB$ Mill | Defined$ ReplacedPlayer | NumCards$ 1 | SubAbility$ DBDraw | ConditionCheckSVar$ ZurCheck | ConditionSVarCompare$ EQ0 | StackDescription$ None
@@ -13,4 +13,4 @@ SVar:NonStackingEffect:True
 SVar:RemAIDeck:True
 SVar:RemMultiplayer:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zurs_weirding.jpg
-Oracle:Players play with their hands revealed.\nIf a player would draw a card, he or she reveals it instead. Then any other player may pay 2 life. If a player does, put that card into its owner's graveyard. Otherwise, that player draws a card.
+Oracle:Players play with their hands revealed.\nIf a player would draw a card, they reveal it instead. Then any other player may pay 2 life. If a player does, put that card into its owner's graveyard. Otherwise, that player draws a card.

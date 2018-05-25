@@ -3,9 +3,9 @@ ManaCost:1 U B
 Types:Creature Zombie Wizard
 PT:2/2
 A:AB$ Token | Cost$ U B T | TokenAmount$ 1 | TokenName$ Zombie Wizard | TokenTypes$ Creature,Zombie,Wizard | TokenOwner$ You | TokenColors$ Blue,Black | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Create a 1/1 blue and black Zombie Wizard creature token.
-A:AB$ Mill | Cost$ U U B B | ValidTgts$ Player | TgtPrompt$ Select a player | NumCards$ X | SubAbility$ DBLoseLife | References$ X | SpellDescription$ Target player loses X life and puts the top X cards of his or her library into his or her graveyard, where X is the number of Zombies you control.
+A:AB$ Mill | Cost$ U U B B | ValidTgts$ Player | TgtPrompt$ Select a player | NumCards$ X | SubAbility$ DBLoseLife | References$ X | SpellDescription$ Target player loses X life and puts the top X cards of their library into their graveyard, where X is the number of Zombies you control.
 SVar:DBLoseLife:DB$LoseLife | LifeAmount$ X | Defined$ Targeted | References$ X
 SVar:X:Count$Valid Zombie.YouCtrl
 SVar:NonCombatPriority:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lich_lord_of_unx.jpg
-Oracle:{U}{B}, {T}: Create a 1/1 blue and black Zombie Wizard creature token.\n{U}{U}{B}{B}: Target player loses X life and puts the top X cards of his or her library into his or her graveyard, where X is the number of Zombies you control.
+Oracle:{U}{B}, {T}: Create a 1/1 blue and black Zombie Wizard creature token.\n{U}{U}{B}{B}: Target player loses X life and puts the top X cards of their library into their graveyard, where X is the number of Zombies you control.

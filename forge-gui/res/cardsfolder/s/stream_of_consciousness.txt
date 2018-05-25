@@ -1,8 +1,8 @@
 Name:Stream of Consciousness
 ManaCost:1 U
 Types:Instant Arcane
-A:SP$ Pump | Cost$ 1 U | ValidTgts$ Player | TgtPrompt$ Select target Player | SubAbility$ DBChangeZone | IsCurse$ True | SpellDescription$ Target player shuffles up to four target cards from his or her graveyard into his or her library.
+A:SP$ Pump | Cost$ 1 U | ValidTgts$ Player | TgtPrompt$ Select target Player | SubAbility$ DBChangeZone | IsCurse$ True | SpellDescription$ Target player shuffles up to four target cards from their graveyard into their library.
 SVar:DBChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 4 | TargetsWithDefinedController$ ParentTarget | Origin$ Graveyard | Destination$ Library | Shuffle$ True | TgtPrompt$ Choose target card | ValidTgts$ Card
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stream_of_consciousness.jpg
-Oracle:Target player shuffles up to four target cards from his or her graveyard into his or her library.
+Oracle:Target player shuffles up to four target cards from their graveyard into their library.

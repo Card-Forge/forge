@@ -1,8 +1,8 @@
 Name:Polymorph
 ManaCost:3 U
 Types:Sorcery
-A:SP$ Destroy | Cost$ 3 U | NoRegen$ True | ValidTgts$ Creature | AILogic$ Polymorph | RememberLKI$ True | TgtPrompt$ Select target creature | SubAbility$ DBDig | SpellDescription$ Destroy target creature. It can't be regenerated. Its controller reveals cards from the top of his or her library until he or she reveals a creature card. The player puts that card onto the battlefield, then shuffles all other cards revealed this way into his or her library.
+A:SP$ Destroy | Cost$ 3 U | NoRegen$ True | ValidTgts$ Creature | AILogic$ Polymorph | RememberLKI$ True | TgtPrompt$ Select target creature | SubAbility$ DBDig | SpellDescription$ Destroy target creature. It can't be regenerated. Its controller reveals cards from the top of their library until they reveal a creature card. The player puts that card onto the battlefield, then shuffles all other cards revealed this way into their library.
 SVar:DBDig:DB$ DigUntil | Defined$ RememberedController | Valid$ Creature | ValidDescription$ creature | FoundDestination$ Battlefield | RevealedDestination$ Library | Shuffle$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/polymorph.jpg
-Oracle:Destroy target creature. It can't be regenerated. Its controller reveals cards from the top of his or her library until he or she reveals a creature card. The player puts that card onto the battlefield, then shuffles all other cards revealed this way into his or her library.
+Oracle:Destroy target creature. It can't be regenerated. Its controller reveals cards from the top of their library until they reveal a creature card. The player puts that card onto the battlefield, then shuffles all other cards revealed this way into their library.

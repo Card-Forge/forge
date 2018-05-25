@@ -12,7 +12,7 @@ ALTERNATE
 Name:Fall
 ManaCost:B R
 Types:Sorcery
-A:SP$ Reveal | Cost$ B R | ValidTgts$ Player | IsCurse$ True | Random$ True | NumCards$ 2 | RememberRevealed$ True | SubAbility$ DBDiscard | SpellDescription$ Target player reveals two cards at random from his or her hand, then discards each nonland card revealed this way.
+A:SP$ Reveal | Cost$ B R | ValidTgts$ Player | IsCurse$ True | Random$ True | NumCards$ 2 | RememberRevealed$ True | SubAbility$ DBDiscard | SpellDescription$ Target player reveals two cards at random from their hand, then discards each nonland card revealed this way.
 SVar:DBDiscard:DB$ Discard | Mode$ Defined | Defined$ Targeted | DefinedCards$ ValidHand Card.nonLand+IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:Target player reveals two cards at random from his or her hand, then discards each nonland card revealed this way.
+Oracle:Target player reveals two cards at random from their hand, then discards each nonland card revealed this way.

@@ -2,8 +2,8 @@ Name:Demonic Attorney
 ManaCost:1 B B
 Types:Sorcery
 K:Remove CARDNAME from your deck before playing if you're not playing for ante.
-A:SP$ Mill | Cost$ 1 B B | Defined$ Player | NumCards$ 1 | Destination$ Ante | SpellDescription$ Each player antes the top card of his or her library.
+A:SP$ Mill | Cost$ 1 B B | Defined$ Player | NumCards$ 1 | Destination$ Ante | SpellDescription$ Each player antes the top card of their library.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonic_attorney.jpg
-Oracle:Remove Demonic Attorney from your deck before playing if you're not playing for ante.\nEach player antes the top card of his or her library.
+Oracle:Remove Demonic Attorney from your deck before playing if you're not playing for ante.\nEach player antes the top card of their library.
