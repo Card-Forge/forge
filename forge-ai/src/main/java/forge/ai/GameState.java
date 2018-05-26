@@ -6,6 +6,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import forge.StaticData;
 import forge.card.CardStateName;
+import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
@@ -19,8 +20,10 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.event.GameEventAttackersDeclared;
 import forge.game.event.GameEventCombatChanged;
+import forge.game.mana.ManaPool;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
@@ -52,6 +55,8 @@ public abstract class GameState {
     private int computerLife = -1;
     private String humanCounters = "";
     private String computerCounters = "";
+    private String humanManaPool = "";
+    private String computerManaPool = "";
 
     private boolean puzzleCreatorState = false;
 
@@ -122,6 +127,13 @@ public abstract class GameState {
             sb.append(TextUtil.concatNoSpace("aicounters=", computerCounters, "\n"));
         }
 
+        if (!humanManaPool.isEmpty()) {
+            sb.append(TextUtil.concatNoSpace("humanmanapool=", humanManaPool, "\n"));
+        }
+        if (!computerManaPool.isEmpty()) {
+            sb.append(TextUtil.concatNoSpace("aimanapool=", humanManaPool, "\n"));
+        }
+
         sb.append(TextUtil.concatNoSpace("activeplayer=", tChangePlayer, "\n"));
         sb.append(TextUtil.concatNoSpace("activephase=", tChangePhase, "\n"));
         appendCards(humanCardTexts, "human", sb);
@@ -150,6 +162,8 @@ public abstract class GameState {
         computerLife = ai.getLife();
         humanCounters = countersToString(human.getCounters());
         computerCounters = countersToString(ai.getCounters());
+        humanManaPool = processManaPool(human.getManaPool());
+        computerManaPool = processManaPool(ai.getManaPool());
 
         tChangePlayer = game.getPhaseHandler().getPlayerTurn() == ai ? "ai" : "human";
         tChangePhase = game.getPhaseHandler().getPhase().toString();
@@ -207,6 +221,37 @@ public abstract class GameState {
                 }
                 addCard(zone, card.getOwner() == ai ? aiCardTexts : humanCardTexts, card);
             }
+        }
+    }
+
+    private String processManaPool(ManaPool manaPool) {
+        String mana = "";
+        for (final byte c : MagicColor.WUBRGC) {
+            int amount = manaPool.getAmountOfColor(c);
+            for (int i = 0; i < amount; i++) {
+                mana += MagicColor.toShortString(c) + " ";
+            }
+        }
+
+        return mana.trim();
+    }
+
+    private void updateManaPool(Player p, String manaDef) {
+        Game game = p.getGame();
+        p.getManaPool().clearPool(false);
+
+        if (!manaDef.isEmpty()) {
+            final Card dummy = new Card(-777777, game);
+            dummy.setOwner(p);
+            final Map<String, String> produced = Maps.newHashMap();
+            produced.put("Produced", manaDef);
+            final AbilityManaPart abMana = new AbilityManaPart(dummy, produced);
+            game.getAction().invoke(new Runnable() {
+                @Override
+                public void run() {
+                    abMana.produceMana(null);
+                }
+            });
         }
     }
 
@@ -472,6 +517,14 @@ public abstract class GameState {
             else
                 precastAI = categoryValue;
         }
+
+        else if (categoryName.endsWith("manapool")) {
+            if (isHuman)
+                humanManaPool = categoryValue;
+            else
+                computerManaPool = categoryValue;
+        }
+
         else {
             System.out.println("Unknown key: " + categoryName);
         }
@@ -506,6 +559,9 @@ public abstract class GameState {
 
         // Set stack to resolving so things won't trigger/effects be checked right away
         game.getStack().setResolving(true);
+
+        updateManaPool(human, humanManaPool);
+        updateManaPool(ai, computerManaPool);
 
         if (!humanCounters.isEmpty()) {
             applyCountersToGameEntity(human, humanCounters);
