@@ -299,7 +299,7 @@ public class TokenEffect extends SpellAbilityEffect {
                 }
 
                 if (inCombat) {
-                    combatChanged = addTokenToCombat(game, c, controller, sa, host) || combatChanged;
+                    combatChanged = addTokenToCombat(game, c, tok.getController(), sa, host) || combatChanged;
                 }
 
                 c.updateStateForView();
