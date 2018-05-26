@@ -224,37 +224,6 @@ public abstract class GameState {
         }
     }
 
-    private String processManaPool(ManaPool manaPool) {
-        String mana = "";
-        for (final byte c : MagicColor.WUBRGC) {
-            int amount = manaPool.getAmountOfColor(c);
-            for (int i = 0; i < amount; i++) {
-                mana += MagicColor.toShortString(c) + " ";
-            }
-        }
-
-        return mana.trim();
-    }
-
-    private void updateManaPool(Player p, String manaDef) {
-        Game game = p.getGame();
-        p.getManaPool().clearPool(false);
-
-        if (!manaDef.isEmpty()) {
-            final Card dummy = new Card(-777777, game);
-            dummy.setOwner(p);
-            final Map<String, String> produced = Maps.newHashMap();
-            produced.put("Produced", manaDef);
-            final AbilityManaPart abMana = new AbilityManaPart(dummy, produced);
-            game.getAction().invoke(new Runnable() {
-                @Override
-                public void run() {
-                    abMana.produceMana(null);
-                }
-            });
-        }
-    }
-
     private void addCard(ZoneType zoneType, Map<ZoneType, String> cardTexts, Card c) {
         StringBuilder newText = new StringBuilder(cardTexts.get(zoneType));
         if (newText.length() > 0) {
@@ -596,6 +565,37 @@ public abstract class GameState {
         game.getStack().setResolving(false);
 
         game.getAction().checkStateEffects(true); //ensure state based effects and triggers are updated
+    }
+
+    private String processManaPool(ManaPool manaPool) {
+        String mana = "";
+        for (final byte c : MagicColor.WUBRGC) {
+            int amount = manaPool.getAmountOfColor(c);
+            for (int i = 0; i < amount; i++) {
+                mana += MagicColor.toShortString(c) + " ";
+            }
+        }
+
+        return mana.trim();
+    }
+
+    private void updateManaPool(Player p, String manaDef) {
+        Game game = p.getGame();
+        p.getManaPool().clearPool(false);
+
+        if (!manaDef.isEmpty()) {
+            final Card dummy = new Card(-777777, game);
+            dummy.setOwner(p);
+            final Map<String, String> produced = Maps.newHashMap();
+            produced.put("Produced", manaDef);
+            final AbilityManaPart abMana = new AbilityManaPart(dummy, produced);
+            game.getAction().invoke(new Runnable() {
+                @Override
+                public void run() {
+                    abMana.produceMana(null);
+                }
+            });
+        }
     }
 
     private void handleCombat(final Game game, final Player attackingPlayer, final Player defendingPlayer, final boolean toDeclareBlockers) {
