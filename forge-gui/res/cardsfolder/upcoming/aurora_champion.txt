@@ -1,0 +1,8 @@
+Name:Aurora Champion
+ManaCost:2 W
+Types:Creature Elf Warrior
+PT:3/2
+T:Mode$ Attacks | ValidCard$ Card.Self | IsPresent$ Warrior.Other+YourTeamCtrl | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME attacks, if your team controls another Warrior, tap target creature.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature
+SVar:BuffedBy:Warrior
+Oracle:Whenever Aurora Champion attacks, if your team controls another Warrior, tap target creature.
