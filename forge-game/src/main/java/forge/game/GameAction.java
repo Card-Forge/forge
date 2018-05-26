@@ -1563,38 +1563,23 @@ public class GameAction {
     }
 
     private void drawStartingHand(Player p1){
-        
-        //copy starting hand/lib
-        List<Card> lib = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards().threadSafeIterable());
-        List<Card> hand = Lists.newArrayList(p1.getZone(ZoneType.Hand).getCards().threadSafeIterable());
 
-        //draw initial hand
-        p1.drawCards(p1.getMaxHandSize());
+        //check initial hand
         List<Card> lib1 = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards().threadSafeIterable());
-        List<Card> hand1 = Lists.newArrayList(p1.getZone(ZoneType.Hand).getCards().threadSafeIterable());
-        System.out.println("Hand 1: " + hand1.toString());
+        List<Card> hand1 = lib1.subList(0,p1.getMaxHandSize());
 
-        //reset, shuffle
-        p1.getZone(ZoneType.Library).setCards(lib);
-        p1.getZone(ZoneType.Hand).setCards(hand);
+        //shuffle
         List shuffledCards = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards().threadSafeIterable());
         Collections.shuffle(shuffledCards);
-        p1.getZone(ZoneType.Library).setCards(shuffledCards);
 
-        //draw a second hand
-        p1.drawCards(p1.getMaxHandSize());
-        List<Card> lib2 = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards().threadSafeIterable());
-        List<Card> hand2 = Lists.newArrayList(p1.getZone(ZoneType.Hand).getCards().threadSafeIterable());
-        System.out.println("Hand 2: " + hand2.toString());
+        //check a second hand
+        List<Card> hand2 = shuffledCards.subList(0,p1.getMaxHandSize());
 
         //choose better hand according to land count
-        if(getHandScore(hand1)<=getHandScore(hand2)){
-            p1.getZone(ZoneType.Library).setCards(lib1);
-            p1.getZone(ZoneType.Hand).setCards(hand1);
-        }else{
-            p1.getZone(ZoneType.Library).setCards(lib2);
-            p1.getZone(ZoneType.Hand).setCards(hand2);
+        if(getHandScore(hand1)>getHandScore(hand2)){
+            p1.getZone(ZoneType.Library).setCards(shuffledCards);
         }
+        p1.drawCards(p1.getMaxHandSize());
     }
 
     private int getHandScore(List<Card> hand){
