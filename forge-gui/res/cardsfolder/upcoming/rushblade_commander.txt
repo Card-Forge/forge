@@ -1,4 +1,4 @@
-Name:Rushblade CommanderRushblade Commander
+Name:Rushblade Commander
 ManaCost:B R
 Types:Creature Azra Warrior
 PT:2/2
