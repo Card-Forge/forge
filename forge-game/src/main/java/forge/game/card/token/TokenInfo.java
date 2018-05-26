@@ -17,6 +17,8 @@ import forge.game.player.Player;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 public class TokenInfo {
     final String name;
     final String imageName;
@@ -143,8 +145,9 @@ public class TokenInfo {
         return sb.toString();
     }
 
-    static private int calculateMultiplier(final Game game, final Player controller, final boolean applyMultiplier) {
-        int multiplier = 1;
+    public static Pair<Player, Integer> calculateMultiplier(final Game game, final Player controller,
+            final boolean applyMultiplier, final int num) {
+        int multiplier = num;
         Player player = controller;
 
         final Map<String, Object> repParams = Maps.newHashMap();
@@ -162,19 +165,20 @@ public class TokenInfo {
                 break;
             }
             default:
-                return 0;
+                multiplier = 0;
+                break;
         }
-        return multiplier;
+        return Pair.of(player, multiplier);
     }
 
     public List<Card> makeTokenWithMultiplier(final Player controller, int amount, final boolean applyMultiplier) {
         final List<Card> list = Lists.newArrayList();
         final Game game = controller.getGame();
 
-        int multiplier = calculateMultiplier(game, controller, applyMultiplier);
+        Pair<Player, Integer> result = calculateMultiplier(game, controller, applyMultiplier, amount);
 
-        for (int i = 0; i < multiplier * amount; i++) {
-            list.add(makeOneToken(controller));
+        for (int i = 0; i < result.getRight(); i++) {
+            list.add(makeOneToken(result.getLeft()));
         }
         return list;
     }
@@ -183,13 +187,13 @@ public class TokenInfo {
         final List<Card> list = Lists.newArrayList();
         final Game game = controller.getGame();
 
-        int multiplier = calculateMultiplier(game, controller, applyMultiplier);
+        Pair<Player, Integer> result = calculateMultiplier(game, controller, applyMultiplier, amount);
         long timestamp = game.getNextTimestamp();
-        prototype.setController(controller, timestamp);
-        for (int i = 0; i < multiplier * amount; i++) {
+        prototype.setController(result.getLeft(), timestamp);
+        for (int i = 0; i < result.getRight(); i++) {
             Card copy = CardFactory.copyCard(prototype, true);
             copy.setTimestamp(timestamp);
-            copy.setOwner(controller);
+            copy.setOwner(result.getLeft());
             copy.setToken(true);
             list.add(copy);
         }
