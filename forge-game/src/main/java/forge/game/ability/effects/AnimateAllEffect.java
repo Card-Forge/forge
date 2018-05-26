@@ -25,6 +25,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.ImmutableList;
+
 public class AnimateAllEffect extends AnimateEffectBase {
 
     @Override
@@ -144,6 +146,9 @@ public class AnimateAllEffect extends AnimateEffectBase {
 
         list = CardLists.getValidCards(list, valid.split(","), host.getController(), host, sa);
 
+        boolean removeAll = sa.hasParam("RemoveAllAbilities");
+        boolean removeIntrinsic = sa.hasParam("RemoveIntrinsicAbilities");
+
         for (final Card c : list) {
             doAnimate(c, sa, power, toughness, types, removeTypes, finalDesc,
                     keywords, removeKeywords, hiddenKeywords, timestamp);
@@ -161,11 +166,14 @@ public class AnimateAllEffect extends AnimateEffectBase {
 
             // remove abilities
             final List<SpellAbility> removedAbilities = new ArrayList<SpellAbility>();
-            if (sa.hasParam("OverwriteAbilities") || sa.hasParam("RemoveAllAbilities")) {
+            if (sa.hasParam("OverwriteAbilities") || removeAll || removeIntrinsic) {
                 for (final SpellAbility ab : c.getSpellAbilities()) {
                     if (ab.isAbility()) {
-                        c.removeSpellAbility(ab);
-                        removedAbilities.add(ab);
+                        if (removeAll
+                                || (ab.isIntrinsic() && removeIntrinsic && !ab.isBasicLandAbility())) {
+                            ab.setTemporarilySuppressed(true);
+                            removedAbilities.add(ab);
+                        }
                     }
                 }
             }
@@ -190,19 +198,24 @@ public class AnimateAllEffect extends AnimateEffectBase {
 
             // suppress triggers from the animated card
             final List<Trigger> removedTriggers = new ArrayList<Trigger>();
-            if (sa.hasParam("OverwriteTriggers") || sa.hasParam("RemoveAllAbilities")) {
+            if (sa.hasParam("OverwriteTriggers") || removeAll || removeIntrinsic) {
                 final FCollectionView<Trigger> triggersToRemove = c.getTriggers();
                 for (final Trigger trigger : triggersToRemove) {
-                    trigger.setSuppressed(true);
+                    if (removeIntrinsic && !trigger.isIntrinsic()) {
+                        continue;
+                    }
+                    trigger.setSuppressed(true); // why this not TemporarilySuppressed?
                     removedTriggers.add(trigger);
                 }
             }
 
             // suppress static abilities from the animated card
             final List<StaticAbility> removedStatics = new ArrayList<StaticAbility>();
-            if (sa.hasParam("OverwriteStatics") || sa.hasParam("RemoveAllAbilities")) {
-                final FCollectionView<StaticAbility> staticsToRemove = c.getStaticAbilities();
-                for (final StaticAbility stAb : staticsToRemove) {
+            if (sa.hasParam("OverwriteStatics") || removeAll || removeIntrinsic) {
+                for (final StaticAbility stAb : c.getStaticAbilities()) {
+                    if (removeIntrinsic && !stAb.isIntrinsic()) {
+                        continue;
+                    }
                     stAb.setTemporarilySuppressed(true);
                     removedStatics.add(stAb);
                 }
@@ -210,9 +223,11 @@ public class AnimateAllEffect extends AnimateEffectBase {
 
             // suppress static abilities from the animated card
             final List<ReplacementEffect> removedReplacements = new ArrayList<ReplacementEffect>();
-            if (sa.hasParam("OverwriteReplacements") || sa.hasParam("RemoveAllAbilities")) {
-                final FCollectionView<ReplacementEffect> replacementsToRemove = c.getReplacementEffects();
-                for (final ReplacementEffect re : replacementsToRemove) {
+            if (sa.hasParam("OverwriteReplacements") || removeAll || removeIntrinsic) {
+                for (final ReplacementEffect re : c.getReplacementEffects()) {
+                    if (removeIntrinsic && !re.isIntrinsic()) {
+                        continue;
+                    }
                     re.setTemporarilySuppressed(true);
                     removedReplacements.add(re);
                 }
@@ -234,8 +249,11 @@ public class AnimateAllEffect extends AnimateEffectBase {
                 public void run() {
                     doUnanimate(c, sa, finalDesc, hiddenKeywords,
                             addedAbilities, addedTriggers, addedReplacements,
-                            false, removedAbilities, timestamp);
+                            ImmutableList.of(), timestamp);
 
+                    for (final SpellAbility sa : removedAbilities) {
+                        sa.setTemporarilySuppressed(false);
+                    }
                     // give back suppressed triggers
                     for (final Trigger t : removedTriggers) {
                         t.setSuppressed(false);

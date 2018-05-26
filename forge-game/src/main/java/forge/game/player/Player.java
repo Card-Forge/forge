@@ -986,12 +986,13 @@ public class Player extends GameEntity implements Comparable<Player> {
             final KeywordsChange cks = changedKeywords.get(timestamp);
             
             ;
-            changedKeywords.put(timestamp, cks.merge(addKeywords, removeKeywords, cks.isRemoveAllKeywords()));
+            changedKeywords.put(timestamp, cks.merge(addKeywords, removeKeywords,
+                    cks.isRemoveAllKeywords(), cks.isRemoveIntrinsicKeywords()));
             updateKeywords();
             return;
         }
 
-        changedKeywords.put(timestamp, new KeywordsChange(addKeywords, removeKeywords, false));
+        changedKeywords.put(timestamp, new KeywordsChange(addKeywords, removeKeywords, false, false));
         updateKeywords();
         game.fireEvent(new GameEventPlayerStatsChanged(this));
     }

@@ -52,7 +52,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
         applyTo.addTempPowerBoost(a);
         applyTo.addTempToughnessBoost(d);
-        applyTo.addChangedCardKeywords(kws, Lists.<String>newArrayList(), false, timestamp);
+        applyTo.addChangedCardKeywords(kws, Lists.<String>newArrayList(), false, false, timestamp);
         if (redrawPT)           {     applyTo.updatePowerToughnessForView();     }
         
         if (sa.hasParam("LeaveBattlefield")) {
@@ -251,7 +251,7 @@ public class PumpEffect extends SpellAbilityEffect {
             final String landtype = sa.getParam("DefinedLandwalk");
             final Card c = AbilityUtils.getDefinedCards(host, landtype, sa).get(0);
             for (String type : c.getType()) {
-                if (CardType.isALandType(type) || CardType.isABasicLandType(type)) {
+                if (CardType.isALandType(type)) {
                     keywords.add(type + "walk");
                 }
             }

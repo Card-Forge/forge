@@ -90,7 +90,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
 
             for (final Card tgtC : list) {
                 if (tgtC.isInPlay()) {
-                    tgtC.addChangedCardKeywords(gainsKWList, ImmutableList.<String>of(), false, timestamp, true);
+                    tgtC.addChangedCardKeywords(gainsKWList, null, false, false, timestamp, true);
 
                     if (!sa.hasParam("Permanent")) {
                         // If not Permanent, remove protection at EOT
