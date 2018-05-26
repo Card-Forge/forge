@@ -1,0 +1,7 @@
+Name:Last One Standing
+ManaCost:1 B R
+Types:Sorcery
+A:SP$ ChooseCard | Cost$ 1 B R | Defined$ You | Amount$ 1 | Choices$ Creature | AtRandom$ True | SubAbility$ DBDestroyAll | RememberChosen$ True | SpellDescription$ Choose a creature at random, then destroy the rest.
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.IsNotRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Choose a creature at random, then destroy the rest.
