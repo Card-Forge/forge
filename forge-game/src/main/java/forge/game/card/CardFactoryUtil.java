@@ -79,6 +79,7 @@ public class CardFactoryUtil {
                 " | SpellDescription$ Add {" + strcolor + "}.";
         SpellAbility sa = AbilityFactory.getAbility(abString, state);
         sa.setIntrinsic(true); // always intristic
+        sa.setBasicLandAbility(true); // to exclude it from other suspress effects
         return sa;
     }
 
@@ -4153,8 +4154,8 @@ public class CardFactoryUtil {
             // So adding redundant YouCtrl to simplify matters even though its unnecessary
             String effect = "AB$ Animate | Cost$ tapXType<Any/Creature.YouCtrl+withTotalPowerGE" + power +
                     "> | CostDesc$ Crew " + power + " (Tap any number of creatures you control with total power " + power +
-                    " or more: | Crew$ True | Secondary$ True | Defined$ Self | Types$ Creature,Artifact | OverwriteTypes$ True | " +
-                    "KeepSubtypes$ True | KeepSupertypes$ True | SpellDescription$ CARDNAME becomes an artifact creature until end of turn.)";
+                    " or more: | Crew$ True | Secondary$ True | Defined$ Self | Types$ Creature,Artifact | RemoveCardTypes$ True" +
+                    " | SpellDescription$ CARDNAME becomes an artifact creature until end of turn.)";
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);

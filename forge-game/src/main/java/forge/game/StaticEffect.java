@@ -1036,7 +1036,7 @@ public class StaticEffect {
             }
 
             // remove abilities
-            if (params.containsKey("RemoveAllAbilities")) {
+            if (params.containsKey("RemoveAllAbilities") || params.containsKey("RemoveIntrinsicAbilities")) {
                 affectedCard.unSuppressCardTraits();
             }
 

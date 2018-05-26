@@ -132,6 +132,10 @@ public class CardProperty {
             if (!controller.equals(sourceController)) {
                 return false;
             }
+        } else if (property.startsWith("YourTeamCtrl")) {
+            if (controller.getTeam() != sourceController.getTeam()) {
+                return false;
+            }
         } else if (property.startsWith("YouDontCtrl")) {
             if (controller.equals(sourceController)) {
                 return false;
