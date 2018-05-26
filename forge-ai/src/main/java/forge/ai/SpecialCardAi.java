@@ -25,6 +25,7 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
+import forge.game.GameType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -32,6 +33,7 @@ import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.CostPart;
+import forge.game.keyword.Keyword;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -43,6 +45,7 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.maps.LinkedHashMapToAmount;
 import forge.util.maps.MapToAmount;
@@ -204,7 +207,9 @@ public class SpecialCardAi {
         private static final int demonSacThreshold = Integer.MAX_VALUE; // if we're in dire conditions, sac everything from worst to best hoping to find an answer
 
         public static boolean considerSacrificingCreature(final Player ai, final SpellAbility sa) {
-            CardCollection flyingCreatures = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.Presets.UNTAPPED, Predicates.or(CardPredicates.hasKeyword("Flying"), CardPredicates.hasKeyword("Reach"))));
+            CardCollection flyingCreatures = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
+                    Predicates.and(CardPredicates.Presets.UNTAPPED, Predicates.or(
+                            CardPredicates.hasKeyword(Keyword.FLYING), CardPredicates.hasKeyword(Keyword.REACH))));
             boolean hasUsefulBlocker = false;
 
             for (Card c : flyingCreatures) {
@@ -327,7 +332,7 @@ public class SpecialCardAi {
             boolean oppHasFirstStrike = false;
             boolean oppCantDie = true;
             boolean unblocked = opposition.isEmpty();
-            boolean canTrample = source.hasKeyword("Trample");
+            boolean canTrample = source.hasKeyword(Keyword.TRAMPLE);
 
             if (!isBlocking && combat.getDefenderByAttacker(source) instanceof Card) {
                 int loyalty = ((Card)combat.getDefenderByAttacker(source)).getCounters(CounterType.LOYALTY);
@@ -349,7 +354,7 @@ public class SpecialCardAi {
             }
 
             for (Card c : opposition) {
-                if (c.hasKeyword("First Strike") || c.hasKeyword("Double Strike")) {
+                if (c.hasKeyword(Keyword.FIRST_STRIKE) || c.hasKeyword(Keyword.DOUBLE_STRIKE)) {
                     oppHasFirstStrike = true;
                 }
                 if (!ComputerUtilCombat.attackerCantBeDestroyedInCombat(c.getController(), c)) {
@@ -380,8 +385,8 @@ public class SpecialCardAi {
                 // Already enough to kill the blockers and survive, don't overpump
                 return false;
             }
-            if (oppCantDie && !source.hasKeyword("Trample") && !source.hasKeyword("Wither")
-                    && !source.hasKeyword("Infect") && predictedPT.getLeft() <= oppT) {
+            if (oppCantDie && !source.hasKeyword(Keyword.TRAMPLE) && !source.hasKeyword(Keyword.WITHER)
+                    && !source.hasKeyword(Keyword.INFECT) && predictedPT.getLeft() <= oppT) {
                 // Can't kill or cripple anyone, as well as can't Trample over, so don't pump
                 return false;
             }
@@ -398,7 +403,7 @@ public class SpecialCardAi {
             CardCollection potentialBlockers = new CardCollection();
 
             for (Card b : oppInPlay) {
-                if (CombatUtil.canBlock(sa.getHostCard(), b)) {
+                if (CombatUtil.canBlock(source, b)) {
                     potentialBlockers.add(b);
                 }
             }
@@ -406,7 +411,7 @@ public class SpecialCardAi {
             Pair<Integer, Integer> predictedPT = getPumpedPT(ai, source.getNetCombatDamage(), source.getNetToughness());
             int oppT = Aggregates.sum(potentialBlockers, CardPredicates.Accessors.fnGetNetToughness);
 
-            if (potentialBlockers.isEmpty() || (sa.getHostCard().hasKeyword("Trample") && predictedPT.getLeft() - oppT >= oppLife)) {
+            if (potentialBlockers.isEmpty() || (source.hasKeyword(Keyword.TRAMPLE) && predictedPT.getLeft() - oppT >= oppLife)) {
                 return true;
             }
 
@@ -778,6 +783,19 @@ public class SpecialCardAi {
             if (source.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN1)) {
                 return false;
             }
+
+            // In MoJhoSto, prefer Jhoira sorcery ability from time to time
+            if (source.getGame().getRules().hasAppliedVariant(GameType.MoJhoSto)
+                    && CardLists.filter(ai.getLandsInPlay(), CardPredicates.Presets.UNTAPPED).size() >= 3) {
+                AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+                int chanceToPrefJhoira = aic.getIntProperty(AiProps.MOJHOSTO_CHANCE_TO_PREFER_JHOIRA_OVER_MOMIR);
+                int numLandsForJhoira = aic.getIntProperty(AiProps.MOJHOSTO_NUM_LANDS_TO_ACTIVATE_JHOIRA);
+
+                if (ai.getLandsInPlay().size() >= numLandsForJhoira && MyRandom.percentTrue(chanceToPrefJhoira)) {
+                    return false;
+                }
+            }
+
             // Set PayX here to maximum value.
             int tokenSize = ComputerUtilMana.determineLeftoverMana(sa, ai);
 

@@ -1,11 +1,11 @@
 Name:Infernal Genesis
 ManaCost:4 B B
 Types:Enchantment
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of each player's upkeep, that player puts the top card of his or her library into his or her graveyard. Then he or she creates X 1/1 black Minion creature tokens, where X is that card's converted mana cost.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of each player's upkeep, that player puts the top card of their library into their graveyard. Then they create X 1/1 black Minion creature tokens, where X is that card's converted mana cost.
 SVar:TrigMill:DB$ Mill | Defined$ TriggeredPlayer | NumCards$ 1 | RememberMilled$ True | SubAbility$ TrigToken
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenName$ Minion | TokenTypes$ Creature,Minion | TokenOwner$ TriggeredPlayer | TokenColors$ Black | TokenPower$ 1 | TokenToughness$ 1 | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infernal_genesis.jpg
-Oracle:At the beginning of each player's upkeep, that player puts the top card of his or her library into his or her graveyard. Then he or she creates X 1/1 black Minion creature tokens, where X is that card's converted mana cost. 
+Oracle:At the beginning of each player's upkeep, that player puts the top card of their library into their graveyard. Then they create X 1/1 black Minion creature tokens, where X is that card's converted mana cost. 

@@ -2,12 +2,12 @@ Name:Scorned Villager
 ManaCost:1 G
 Types:Creature Human Werewolf
 PT:1/1
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
 SVar:TrigTransform:DB$SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scorned_villager.jpg
-Oracle:{T}: Add {G} to your mana pool.\nAt the beginning of each upkeep, if no spells were cast last turn, transform Scorned Villager.
+Oracle:{T}: Add {G}.\nAt the beginning of each upkeep, if no spells were cast last turn, transform Scorned Villager.
 
 ALTERNATE
 
@@ -17,8 +17,8 @@ Colors:green
 Types:Creature Werewolf
 PT:2/2
 K:Vigilance
-A:AB$ Mana | Cost$ T | Produced$ G | Amount$ 2 | SpellDescription$ Add {G}{G} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ 2 | SpellDescription$ Add {G}{G}.
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
 SVar:TrigTransform:DB$SetState | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonscarred_werewolf.jpg
-Oracle:Vigilance\n{T}: Add {G}{G} to your mana pool.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Moonscarred Werewolf.
+Oracle:Vigilance\n{T}: Add {G}{G}.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Moonscarred Werewolf.

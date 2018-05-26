@@ -17,6 +17,8 @@
  */
 package forge.game.trigger;
 
+import java.util.Map;
+
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
@@ -42,15 +44,15 @@ public class TriggerBecomeMonstrous extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerBecomeMonstrous(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerBecomeMonstrous(Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        if (this.mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(runParams2.get("Card"), this.mapParams.get("ValidCard").split(","),
+    public final boolean performTest(Map<String, Object> runParams2) {
+        if (hasParam("ValidCard")) {
+            if (!matchesValid(runParams2.get("Card"), getParam("ValidCard").split(","),
                     this.getHostCard())) {
                 return false;
             }
@@ -62,7 +64,8 @@ public class TriggerBecomeMonstrous extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
+        sa.setTriggeringObject("Card", getRunParams().get("Card"));
+        sa.setTriggeringObject("MonstrosityAmount", getRunParams().get("MonstrosityAmount"));
     }
 
     @Override

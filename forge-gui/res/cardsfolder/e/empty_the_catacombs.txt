@@ -1,7 +1,7 @@
 Name:Empty the Catacombs
 ManaCost:3 B
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 3 B | ChangeType$ Creature | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Each player returns all creature cards from his or her graveyard to his or her hand.
+A:SP$ ChangeZoneAll | Cost$ 3 B | ChangeType$ Creature | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Each player returns all creature cards from their graveyard to their hand.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/empty_the_catacombs.jpg
-Oracle:Each player returns all creature cards from his or her graveyard to his or her hand.
+Oracle:Each player returns all creature cards from their graveyard to their hand.

@@ -1,7 +1,7 @@
 Name:Springleaf Drum
 ManaCost:1
 Types:Artifact
-A:AB$ Mana | Cost$ T tapXType<1/Creature> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
+A:AB$ Mana | Cost$ T tapXType<1/Creature> | Produced$ Any | SpellDescription$ Add one mana of any color.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/springleaf_drum.jpg
-Oracle:{T}, Tap an untapped creature you control: Add one mana of any color to your mana pool.
+Oracle:{T}, Tap an untapped creature you control: Add one mana of any color.

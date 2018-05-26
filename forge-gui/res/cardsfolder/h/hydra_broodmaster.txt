@@ -6,7 +6,7 @@ K:Monstrosity:X:X X G
 T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME becomes monstrous, create X X/X green Hydra creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ MonstrosityX | TokenName$ Hydra | TokenTypes$ Creature,Hydra | TokenOwner$ You | TokenColors$ Green | TokenPower$ MonstrosityX | TokenToughness$ MonstrosityX | TokenImage$ g x x hydra | References$ MonstrosityX
 SVar:X:Count$xPaid
-SVar:MonstrosityX:Count$MonstrosityMagnitude
+SVar:MonstrosityX:TriggerCount$MonstrosityAmount
 DeckHas:Ability$Counters & Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hydra_broodmaster.jpg
 Oracle:{X}{X}{G}: Monstrosity X. (If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstrous.)\nWhen Hydra Broodmaster becomes monstrous, create X X/X green Hydra creature tokens.

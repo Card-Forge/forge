@@ -1,7 +1,7 @@
 Name:Boros Signet
 ManaCost:2
 Types:Artifact
-A:AB$ Mana | Cost$ 1 T | Produced$ R W | SpellDescription$ Add {R}{W} to your mana pool.
+A:AB$ Mana | Cost$ 1 T | Produced$ R W | SpellDescription$ Add {R}{W}.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_signet.jpg
-Oracle:{1}, {T}: Add {R}{W} to your mana pool.
+Oracle:{1}, {T}: Add {R}{W}.

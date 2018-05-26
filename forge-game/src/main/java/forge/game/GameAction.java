@@ -34,6 +34,7 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementResult;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityLayer;
@@ -104,10 +105,6 @@ public class GameAction {
         boolean fromBattlefield = zoneFrom != null && zoneFrom.is(ZoneType.Battlefield);
         boolean toHand = zoneTo.is(ZoneType.Hand);
 
-        // TODO: part of a workaround for suspend-cast creaturs bounced to hand
-        boolean zoneChangedEarly = false;
-        Zone originalZone = c.getZone();
-
         //Rule 110.5g: A token that has left the battlefield can't move to another zone
         if (c.isToken() && zoneFrom != null && !fromBattlefield && !zoneFrom.is(ZoneType.Command)) {
             return c;
@@ -155,13 +152,6 @@ public class GameAction {
         // up on the wrong card state etc.).
         if (zoneTo.is(ZoneType.Hand) && zoneFrom.is(ZoneType.Exile) && c.isFaceDown()) {
             c.setState(CardStateName.Original, true);
-        }
-
-        if (fromBattlefield && toHand && c.wasSuspendCast()) {
-            // TODO: This has to be set early for suspend-cast creatures bounced to hand, otherwise they
-            // end up in a state when they are considered on the battlefield. There should be a better solution.
-            c.setZone(zoneTo);
-            zoneChangedEarly = true;
         }
 
         // Clean up the temporary Dash SVar when the Dashed card leaves the battlefield
@@ -294,10 +284,6 @@ public class GameAction {
 
             ReplacementResult repres = game.getReplacementHandler().run(repParams);
             if (repres != ReplacementResult.NotReplaced) {
-                if (zoneChangedEarly) {
-                    c.setZone(originalZone); // TODO: part of a workaround for bounced suspend-cast cards 
-                }
-
                 // reset failed manifested Cards back to original
                 if (c.isManifested()) {
                     c.turnFaceUp(false, false);
@@ -313,10 +299,6 @@ public class GameAction {
         }
 
         copied.getOwner().removeInboundToken(copied);
-
-        if (c.wasSuspendCast()) {
-            copied = GameAction.addSuspendTriggers(copied);
-        }
 
         if (suppress) {
             game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
@@ -395,7 +377,7 @@ public class GameAction {
         }
 
         game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, true);
-        if (zoneFrom != null && zoneFrom.is(ZoneType.Battlefield)) {
+        if (zoneFrom != null && zoneFrom.is(ZoneType.Battlefield) && !zoneFrom.getPlayer().equals(zoneTo.getPlayer())) {
             final Map<String, Object> runParams2 = Maps.newHashMap();
             runParams2.put("Card", lastKnownInfo);
             runParams2.put("OriginalController", zoneFrom.getPlayer());
@@ -435,7 +417,6 @@ public class GameAction {
 
         if (fromBattlefield) {
             if (!c.isToken()) {
-                copied.setSuspendCast(false);
                 copied.setState(CardStateName.Original, true);
             }
             // Soulbond unpairing
@@ -762,7 +743,10 @@ public class GameAction {
     }
 
     public final void checkStaticAbilities() {
-        checkStaticAbilities(true, Sets.<Card>newHashSet(), CardCollection.EMPTY);
+        checkStaticAbilities(true);
+    }
+    public final void checkStaticAbilities(final boolean runEvents) {
+        checkStaticAbilities(runEvents, Sets.<Card>newHashSet(), CardCollection.EMPTY);
     }
     public final void checkStaticAbilities(final boolean runEvents, final Set<Card> affectedCards, final CardCollectionView preList) {
         if (isCheckingStaticAbilitiesOnHold()) {
@@ -771,6 +755,7 @@ public class GameAction {
         if (game.isGameOver()) {
             return;
         }
+        game.getTracker().freeze(); //prevent views flickering during while updating for state-based effects
 
         // remove old effects
         game.getStaticEffects().clearStaticEffects(affectedCards);
@@ -788,20 +773,23 @@ public class GameAction {
 
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
-            public void visit(final Card c) {
-                for (int i = 0; i < c.getStaticAbilities().size(); i++) {
-                    final StaticAbility stAb = c.getStaticAbilities().get(i);
+            public boolean visit(final Card c) {
+                // need to get Card from preList if able
+                final Card co = preList.get(c);
+                for (int i = 0; i < co.getStaticAbilities().size(); i++) {
+                    final StaticAbility stAb = co.getStaticAbilities().get(i);
                     if (stAb.getMapParams().get("Mode").equals("Continuous")) {
                         staticAbilities.add(stAb);
                     }
                     if (stAb.isTemporary()) {
-                        c.removeStaticAbility(stAb);
+                        co.removeStaticAbility(stAb);
                         i--;
                     }
                  }
-                 if (!c.getStaticCommandList().isEmpty()) {
-                     staticList.add(c);
+                 if (!co.getStaticCommandList().isEmpty()) {
+                     staticList.add(co);
                  }
+                 return true;
             }
         });
 
@@ -839,9 +827,6 @@ public class GameAction {
                 Iterables.addAll(affectedCards, affected);
             }
         }
-
-        final CardCollection lands = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS);
-        GameActionUtil.grantBasicLandsManaAbilities(lands);
 
         for (final Card c : staticList) {
             for (int i = 0; i < c.getStaticCommandList().size(); i++) {
@@ -888,18 +873,22 @@ public class GameAction {
             }
         }
 
-        final Map<String, Object> runParams = Maps.newHashMap();
-        game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
+        if (runEvents) {
+            final Map<String, Object> runParams = Maps.newHashMap();
+            game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
+        }
 
         // Update P/T and type in the view only once after all the cards have been processed, to avoid flickering
         for (Card c : affectedCards) {
             c.updatePowerToughnessForView();
             c.updateTypesForView();
+            c.updateAbilityTextForView(); // only update keywords and text for view to avoid flickering
         }
 
         if (runEvents && !affectedCards.isEmpty()) {
             game.fireEvent(new GameEventCardStatsChanged(affectedCards));
         }
+        game.getTracker().unfreeze();
     }
 
     public final void checkStateEffects(final boolean runEvents) {
@@ -983,6 +972,7 @@ public class GameAction {
                     }
                 }
 
+                checkAgain |= stateBasedAction_Saga(c);
                 checkAgain |= stateBasedAction704_5n(c); // Auras attached to illegal or not attached go to graveyard
                 checkAgain |= stateBasedAction704_5p(c); // Equipment and Fortifications
 
@@ -1082,6 +1072,25 @@ public class GameAction {
         }
     }
 
+    private boolean stateBasedAction_Saga(Card c) {
+        boolean checkAgain = false;
+        if (!c.getType().hasSubtype("Saga")) {
+            return false;
+        }
+        if (!c.canBeSacrificed()) {
+            return false;
+        }
+        if (c.getCounters(CounterType.LORE) < c.getFinalChapterNr()) {
+            return false;
+        }
+        if (!game.getStack().hasSimultaneousStackEntries() &&
+                !game.getStack().hasSourceOnStack(c, SpellAbilityPredicates.isChapter())) {
+            sacrifice(c, null);
+            checkAgain = true;
+        }
+        return checkAgain;
+    }
+
     private boolean stateBasedAction704_5n(Card c) {
         boolean checkAgain = false;
         if (!c.isAura()) {
@@ -1172,7 +1181,8 @@ public class GameAction {
         if (c.isFortifying()) {
             final Card fortifiedLand = c.getFortifying();
             if (!fortifiedLand.isLand() || !fortifiedLand.isInPlay()
-                    || (fortifiedLand.isPhasedOut() && !c.isPhasedOut())) {
+                    || (fortifiedLand.isPhasedOut() && !c.isPhasedOut())
+                    || !c.isFortification()) {
                 c.unFortifyCard(fortifiedLand);
                 checkAgain = true;
             }
@@ -1478,44 +1488,6 @@ public class GameAction {
         return sacrificed != null;
     }
 
-    private static Card addSuspendTriggers(final Card c) {
-        if (c.getSVar("HasteFromSuspend").equals("True")) {
-            return c;
-        }
-        c.setSVar("HasteFromSuspend", "True");
-
-        final GameCommand intoPlay = new GameCommand() {
-            private static final long serialVersionUID = -4514610171270596654L;
-
-            @Override
-            public void run() {
-                if (c.isInPlay() && c.isCreature()) {
-                    c.addExtrinsicKeyword("Haste");
-                    c.updateStateForView();
-                }
-            } // execute()
-        };
-
-        c.addComesIntoPlayCommand(intoPlay);
-
-        final GameCommand loseControl = new GameCommand() {
-            private static final long serialVersionUID = -4514610171270596654L;
-
-            @Override
-            public void run() {
-                if (c.getSVar("HasteFromSuspend").equals("True")) {
-                    c.setSVar("HasteFromSuspend", "False");
-                    c.removeExtrinsicKeyword("Haste");
-                    c.updateStateForView();
-                }
-            } // execute()
-        };
-
-        c.addChangeControllerCommand(loseControl);
-        c.addLeavesPlayCommand(loseControl);
-        return c;
-    }
-
     /**
      * @return the sacrificed Card in its new location, or {@code null} if the
      * sacrifice wasn't successful.
@@ -1676,7 +1648,7 @@ public class GameAction {
 
         if (!powerPlayers.isEmpty()) {
             List<Player> players = Lists.newArrayList(powerPlayers);
-            Collections.shuffle(players);
+            Collections.shuffle(players, MyRandom.getRandom());
             return players.get(0);
         }
 
@@ -1686,7 +1658,7 @@ public class GameAction {
             goesFirst = Aggregates.random(game.getPlayers());
         } else {
             for (Player p : game.getPlayers()) {
-                if (!lastGameOutcome.isWinner(p.getLobbyPlayer())) {
+                if (!lastGameOutcome.isWinner(p.getRegisteredPlayer())) {
                     goesFirst = p;
                     break;
                 }

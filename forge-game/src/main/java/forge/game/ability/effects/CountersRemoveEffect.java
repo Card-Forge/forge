@@ -108,8 +108,15 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
         }
 
         for (final Card tgtCard : getTargetCards(sa)) {
+            Card gameCard = game.getCardState(tgtCard, null);
+            // gameCard is LKI in that case, the card is not in game anymore
+            // or the timestamp did change
+            // this should check Self too
+            if (gameCard == null || !tgtCard.equalsWithTimestamp(gameCard)) {
+                continue;
+            }
             if (!sa.usesTargeting() || tgtCard.canBeTargetedBy(sa)) {
-                final Zone zone = game.getZoneOf(tgtCard);
+                final Zone zone = game.getZoneOf(gameCard);
                 if (type.equals("All")) {
                     for (Map.Entry<CounterType, Integer> e : tgtCard.getCounters().entrySet()) {
                         tgtCard.subtractCounter(e.getKey(), e.getValue());

@@ -2,11 +2,11 @@ Name:Rustic Clachan
 ManaCost:no cost
 Types:Land
 K:Reinforce:1:1 W
-A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
 K:ETBReplacement:Other:DBTap
 SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Kithkin> | UnlessPayer$ You | StackDescription$ enters the battlefield tapped. | SpellDescription$ As CARDNAME enters the battlefield, you may reveal a Kithkin card from your hand. If you don't, CARDNAME enters the battlefield tapped.
 DeckHints:Type$Kithkin
 DeckHas:Ability$Counters
 DeckNeeds:Type$Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rustic_clachan.jpg
-Oracle:As Rustic Clachan enters the battlefield, you may reveal a Kithkin card from your hand. If you don't, Rustic Clachan enters the battlefield tapped.\n{T}: Add {W} to your mana pool.\nReinforce 1—{1}{W} ({1}{W}, Discard this card: Put a +1/+1 counter on target creature.)
+Oracle:As Rustic Clachan enters the battlefield, you may reveal a Kithkin card from your hand. If you don't, Rustic Clachan enters the battlefield tapped.\n{T}: Add {W}.\nReinforce 1—{1}{W} ({1}{W}, Discard this card: Put a +1/+1 counter on target creature.)

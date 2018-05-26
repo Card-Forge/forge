@@ -3,7 +3,7 @@ ManaCost:4 U U
 Types:Creature Dragon
 PT:4/4
 K:Flying
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to an opponent, target player puts the top four cards of his or her library into his or her graveyard.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to an opponent, target player puts the top four cards of their library into their graveyard.
 SVar:TrigMill:DB$ Mill | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindscour_dragon.jpg
-Oracle:Flying\nWhenever Mindscour Dragon deals combat damage to an opponent, target player puts the top four cards of his or her library into his or her graveyard.
+Oracle:Flying\nWhenever Mindscour Dragon deals combat damage to an opponent, target player puts the top four cards of their library into their graveyard.

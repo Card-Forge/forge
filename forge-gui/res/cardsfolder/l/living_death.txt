@@ -1,11 +1,11 @@
 Name:Living Death
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 3 B B | ChangeType$ Creature | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBSacrifice | AILogic$ LivingDeath | SpellDescription$ Each player exiles all creature cards from his or her graveyard, then sacrifices all creatures he or she controls, then puts all cards he or she exiled this way onto the battlefield.
+A:SP$ ChangeZoneAll | Cost$ 3 B B | ChangeType$ Creature | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBSacrifice | AILogic$ LivingDeath | SpellDescription$ Each player exiles all creature cards from their graveyard, then sacrifices all creatures they control, then puts all cards they exiled this way onto the battlefield.
 SVar:DBSacrifice:DB$SacrificeAll | ValidCards$ Creature | SubAbility$ DBReturn
 SVar:DBReturn:DB$ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:RemRandomDeck:True
 SVar:IsReanimatorCard:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_death.jpg
-Oracle:Each player exiles all creature cards from his or her graveyard, then sacrifices all creatures he or she controls, then puts all cards he or she exiled this way onto the battlefield.
+Oracle:Each player exiles all creature cards from their graveyard, then sacrifices all creatures they control, then puts all cards they exiled this way onto the battlefield.

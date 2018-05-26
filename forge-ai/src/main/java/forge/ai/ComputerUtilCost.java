@@ -9,6 +9,7 @@ import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CounterType;
@@ -446,13 +447,13 @@ public class ComputerUtilCost {
         // Check for stuff like Nether Void
         int extraManaNeeded = 0;
         if (sa instanceof Spell) {
-        	final boolean cannotBeCountered = sa.getHostCard().hasKeyword("CARDNAME can't be countered.");
+            final boolean cannotBeCountered = !CardFactoryUtil.isCounterable(sa.getHostCard());
             for (Card c : player.getGame().getCardsIn(ZoneType.Battlefield)) {
                 final String snem = c.getSVar("AI_SpellsNeedExtraMana");
                 if (!StringUtils.isBlank(snem)) {
-                	if (cannotBeCountered && c.getName().equals("Nether Void")) {
-                		continue;
-                	}
+                    if (cannotBeCountered && c.getName().equals("Nether Void")) {
+                        continue;
+                    }
                     String[] parts = TextUtil.split(snem, ' ');
                     boolean meetsRestriction = parts.length == 1 || player.isValid(parts[1], c.getController(), c, sa);
                     if(!meetsRestriction)
@@ -467,7 +468,7 @@ public class ComputerUtilCost {
             }
             for (Card c : player.getCardsIn(ZoneType.Command)) {
             	if (cannotBeCountered) {
-            		continue;
+            	    continue;
             	}
                 final String snem = c.getSVar("SpellsNeedExtraManaEffect");
                 if (!StringUtils.isBlank(snem)) {
@@ -607,7 +608,6 @@ public class ComputerUtilCost {
         Set<String> colorsAvailable = Sets.newHashSet();
 
         if (additionalLands != null) {
-            GameActionUtil.grantBasicLandsManaAbilities(additionalLands);
             cardsToConsider.addAll(additionalLands);
         }
 

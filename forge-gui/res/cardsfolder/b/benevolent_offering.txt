@@ -1,7 +1,7 @@
 Name:Benevolent Offering
 ManaCost:3 W
 Types:Instant
-A:SP$ ChoosePlayer | Cost$ 3 W | Defined$ You | Choices$ Player.Opponent | SubAbility$ DBToken | SpellDescription$ Choose an opponent. You and that player each create three 1/1 white Spirit creature tokens with flying. Choose an opponent. You gain 2 life for each creature you control and that player gains 2 life for each creature he or she controls.
+A:SP$ ChoosePlayer | Cost$ 3 W | Defined$ You | Choices$ Player.Opponent | SubAbility$ DBToken | SpellDescription$ Choose an opponent. You and that player each create three 1/1 white Spirit creature tokens with flying. Choose an opponent. You gain 2 life for each creature you control and that player gains 2 life for each creature they control.
 SVar:DBToken:DB$ Token | TokenAmount$ 3 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ ChosenAndYou | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ w 1 1 spirit C14 | TokenKeywords$ Flying | SubAbility$ DBChoose
 SVar:DBChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | SubAbility$ DBGainLifeYou
 SVar:DBGainLifeYou:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X | SubAbility$ DBGainLifeOpp
@@ -12,4 +12,4 @@ SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/benevolent_offering.jpg
-Oracle:Choose an opponent. You and that player each create three 1/1 white Spirit creature tokens with flying.\nChoose an opponent. You gain 2 life for each creature you control and that player gains 2 life for each creature he or she controls.
+Oracle:Choose an opponent. You and that player each create three 1/1 white Spirit creature tokens with flying.\nChoose an opponent. You gain 2 life for each creature you control and that player gains 2 life for each creature they control.

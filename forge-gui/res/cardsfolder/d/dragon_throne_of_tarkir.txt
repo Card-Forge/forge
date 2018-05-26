@@ -1,7 +1,7 @@
 Name:Dragon Throne of Tarkir
 ManaCost:4
 Types:Legendary Artifact Equipment
-K:Equip 3
+K:Equip:3
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddKeyword$ Defender | AddAbility$ ThroneTarkir | AddSVar$ ThroneTarkirX | Description$ Equipped creature has defender and "{2}, {T}: Other creatures you control gain trample and get +X/+X until end of turn, where X is this creature's power."
 SVar:ThroneTarkir:AB$ PumpAll | Cost$ 2 T | ValidCards$ Creature.Other+YouCtrl | NumAtt$ ThroneTarkirX | NumDef$ ThroneTarkirX | KW$ Trample | References$ ThroneTarkirX | SpellDescription$ Other creatures you control gain trample and get +X/+X until end of turn, where X is CARDNAME's power.
 SVar:ThroneTarkirX:Count$CardPower

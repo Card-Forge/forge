@@ -2,8 +2,8 @@ Name:Magus of the Abyss
 ManaCost:3 B
 Types:Creature Human Wizard
 PT:4/3
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, destroy target nonartifact creature that player controls of his or her choice. It can't be regenerated.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, destroy target nonartifact creature that player controls of their choice. It can't be regenerated.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.nonArtifact+ActivePlayerCtrl | TgtPrompt$ Choose target nonartifact creature. | NoRegen$ True | TargetingPlayer$ TriggeredPlayer
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_abyss.jpg
-Oracle:At the beginning of each player's upkeep, destroy target nonartifact creature that player controls of his or her choice. It can't be regenerated.
+Oracle:At the beginning of each player's upkeep, destroy target nonartifact creature that player controls of their choice. It can't be regenerated.

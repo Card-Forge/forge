@@ -718,9 +718,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected abstract void onCardActivated(PaperCard card);
         protected abstract void buildMenu(final FDropDownMenu menu, final PaperCard card);
 
-        private static final List<String> limitExceptions = Arrays.asList(
-                new String[]{"Relentless Rats", "Shadowborn Apostle"});
-
         private ItemPool<PaperCard> getAllowedAdditions(Iterable<Entry<PaperCard, Integer>> itemsToAdd, boolean isAddSource) {
             ItemPool<PaperCard> additions = new ItemPool<PaperCard>(cardManager.getGenericType());
             CardLimit limit = parentScreen.getCardLimit();
@@ -733,7 +730,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 if (deck == null || card == null) {
                     max = Integer.MAX_VALUE;
                 }
-                else if (limit == CardLimit.None || card.getRules().getType().isBasic() || limitExceptions.contains(card.getName())) {
+                else if (limit == CardLimit.None || card.getRules().getType().isBasic() || DeckFormat.getLimitExceptions().contains(card.getName())) {
                     max = Integer.MAX_VALUE;
                     if (parentScreen.isLimitedEditor() && !isAddSource) {
                         //prevent adding more than is in other pool when editing limited decks

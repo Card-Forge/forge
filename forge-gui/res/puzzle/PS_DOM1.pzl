@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Dominaria #01
+URL:http://www.possibilitystorm.com/wp-content/uploads/2018/04/W_060.-DOM1.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Your opponent has no cards in hand and no mana available. Assume you have many cards in your library and that any that you could draw are not relevant to the puzzle.
+[state]
+humanlife=20
+ailife=4
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Supernatural Stamina;Illusionist's Stratagem;Hostage Taker;Vicious Offering
+humanlibrary=The Mending of Dominaria;The Mending of Dominaria;The Mending of Dominaria;The Mending of Dominaria;The Mending of Dominaria;The Mending of Dominaria;The Mending of Dominaria;The Mending of Dominaria;The Mending of Dominaria;The Mending of Dominaria;The Mending of Dominaria;The Mending of Dominaria;The Mending of Dominaria;The Mending of Dominaria;The Mending of Dominaria;The Mending of Dominaria;The Mending of Dominaria;The Mending of Dominaria;The Mending of Dominaria;The Mending of Dominaria
+humanbattlefield=Naru Meha, Master Wizard;Academy Journeymage;Academy Journeymage;Vodalian Arcanist;Island|Set:DOM;Island|Set:DOM;Island|Set:DOM;Swamp|Set:DOM;Swamp|Set:DOM;Swamp|Set:DOM
+aibattlefield=Benalish Marshal;Benalish Marshal;History of Benalia|Counters:LORE=2;t:Knight,P:2,T:2,Cost:no cost,Color:W,Types:Creature-Knight,Keywords:Vigilance,Image:w_2_2_knight_dom;t:Knight,P:2,T:2,Cost:no cost,Color:W,Types:Creature-Knight,Keywords:Vigilance,Image:w_2_2_knight_dom;t:Knight,P:2,T:2,Cost:no cost,Color:W,Types:Creature-Knight,Keywords:Vigilance,Image:w_2_2_knight_dom

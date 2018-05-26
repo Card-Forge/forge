@@ -1,7 +1,7 @@
 Name:Simic Signet
 ManaCost:2
 Types:Artifact
-A:AB$ Mana | Cost$ 1 T | Produced$ G U | SpellDescription$ Add {G}{U} to your mana pool.
+A:AB$ Mana | Cost$ 1 T | Produced$ G U | SpellDescription$ Add {G}{U}.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simic_signet.jpg
-Oracle:{1}, {T}: Add {G}{U} to your mana pool.
+Oracle:{1}, {T}: Add {G}{U}.

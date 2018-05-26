@@ -1,7 +1,7 @@
 Name:Sphinx's Tutelage
 ManaCost:2 U
 Types:Enchantment
-T:Mode$ Drawn | ValidCard$ Card.YouOwn | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever you draw a card, target opponent puts the top two cards of his or her library into his or her graveyard. If they're both nonland cards that share a color, repeat this process.
+T:Mode$ Drawn | ValidCard$ Card.YouOwn | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever you draw a card, target opponent puts the top two cards of their library into their graveyard. If they're both nonland cards that share a color, repeat this process.
 SVar:TrigMill:DB$ Repeat | ValidTgts$ Opponent | IsCurse$ True | RepeatSubAbility$ DBCleanAndGrind | MaxRepeat$ MaxRepeats | RepeatCheckSVar$ MilledSharesColor | References$ MilledSharesColor,MaxRepeats | RepeatSVarCompare$ EQ2 | SubAbility$ DBCleanup
 SVar:DBCleanAndGrind:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBPeek
 SVar:DBPeek:DB$ PeekAndReveal | Defined$ Targeted | PeekAmount$ 2 | NoPeek$ True | NoReveal$ True | RememberPeeked$ True | SubAbility$ DBGrind
@@ -12,4 +12,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Draw | Cost$ 5 U | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinxs_tutelage.jpg
-Oracle:Whenever you draw a card, target opponent puts the top two cards of his or her library into his or her graveyard. If they're both nonland cards that share a color, repeat this process.\n{5}{U}: Draw a card, then discard a card.
+Oracle:Whenever you draw a card, target opponent puts the top two cards of their library into their graveyard. If they're both nonland cards that share a color, repeat this process.\n{5}{U}: Draw a card, then discard a card.

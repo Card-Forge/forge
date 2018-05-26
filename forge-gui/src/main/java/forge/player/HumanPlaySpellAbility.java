@@ -109,7 +109,7 @@ public class HumanPlaySpellAbility {
             }
             // This is should happen earlier, before the Modal spell is chosen
             // Turn face-down card face up (except case of morph spell)
-            if (ability instanceof Spell && !((Spell) ability).isCastFaceDown() && fromState == CardStateName.FaceDown) {
+            if (ability.isSpell() && !ability.isCastFaceDown() && fromState == CardStateName.FaceDown) {
                 c.turnFaceUp();
             }
             c.setCastSA(ability);

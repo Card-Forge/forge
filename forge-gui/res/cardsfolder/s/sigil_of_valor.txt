@@ -1,7 +1,7 @@
 Name:Sigil of Valor
 ManaCost:2
 Types:Artifact Equipment
-K:Equip 1
+K:Equip:1
 T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Alone$ True | Execute$ TrigPump | TriggerDescription$ Whenever equipped creature attacks alone, it gets +1/+1 until end of turn for each other creature you control.
 SVar:TrigPump:DB$ Pump | RememberObjects$ TriggeredAttacker | SubAbility$ TrigPump2
 SVar:TrigPump2:DB$ Pump | Defined$ Remembered | NumAtt$ X | NumDef$ X | References$ X | SubAbility$ DBCleanup

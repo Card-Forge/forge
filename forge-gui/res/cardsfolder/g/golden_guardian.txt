@@ -21,7 +21,7 @@ ALTERNATE
 Name:Gold-Forge Garrison
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 2 | SpellDescription$ Add two mana of any one color to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 2 | SpellDescription$ Add two mana of any one color.
 A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenName$ Golem | TokenTypes$ Artifact,Creature,Golem | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 4 | TokenToughness$ 4 | TokenImage$ c 4 4 golem RIX | SpellDescription$ Create a 4/4 colorless Golem artifact creature token.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gold-forge_garrison.jpg
-Oracle:{T}: Add two mana of any one color to your mana pool.\n{4}, {T}: Create a 4/4 colorless Golem artifact creature token.
+Oracle:{T}: Add two mana of any one color.\n{4}, {T}: Create a 4/4 colorless Golem artifact creature token.

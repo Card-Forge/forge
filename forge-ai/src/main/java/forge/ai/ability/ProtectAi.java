@@ -175,6 +175,11 @@ public class ProtectAi extends SpellAbilityAi {
             final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
             if (cards.size() == 0) {
                 return false;
+            } else if (cards.size() == 1) {
+                // Affecting single card
+                if ((getProtectCreatures(ai, sa)).contains(cards.get(0))) {
+                    return true;
+                }
             }
             /*
              * when this happens we need to expand AI to consider if its ok

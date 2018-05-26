@@ -1,7 +1,7 @@
 Name:Reset
 ManaCost:U U
 Types:Instant
-A:SP$ UntapAll | Cost$ U U | ValidCards$ Land.YouCtrl | OpponentTurn$ True | ActivationPhases$ Draw-> | SpellDescription$ Cast Reset only during an opponent's turn after his or her upkeep step. Untap all lands you control.
+A:SP$ UntapAll | Cost$ U U | ValidCards$ Land.YouCtrl | OpponentTurn$ True | ActivationPhases$ Draw-> | SpellDescription$ Cast Reset only during an opponent's turn after their upkeep step. Untap all lands you control.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reset.jpg
-Oracle:Cast Reset only during an opponent's turn after his or her upkeep step.\nUntap all lands you control.
+Oracle:Cast Reset only during an opponent's turn after their upkeep step.\nUntap all lands you control.

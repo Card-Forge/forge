@@ -1,7 +1,7 @@
 Name:Kamahl's Summons
 ManaCost:3 G
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 3 G | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose | StackDescription$ SpellDescription | SubAbility$ DBRepeatToken | SpellDescription$ Each player may reveal any number of creature cards from his or her hand. Then each player creates a 2/2 green Bear creature token for each card he or she revealed this way.
+A:SP$ RepeatEach | Cost$ 3 G | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose | StackDescription$ SpellDescription | SubAbility$ DBRepeatToken | SpellDescription$ Each player may reveal any number of creature cards from their hand. Then each player creates a 2/2 green Bear creature token for each card they revealed this way.
 SVar:DBChoose:DB$ Reveal | Defined$ Player.IsRemembered | AnyNumber$ True | RevealValid$ Creature | RememberRevealed$ True
 SVar:DBRepeatToken:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBToken | SubAbility$ DBCleanup
 SVar:DBToken:DB$ Token | TokenAmount$ X | References$ X | TokenName$ Bear | TokenImage$ g 2 2 bear ONS | TokenTypes$ Creature,Bear | TokenOwner$ Player.IsRemembered | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2
@@ -11,4 +11,4 @@ SVar:NeedsToPlayVar:Y GE3
 SVar:Y:Count$ValidHand Creature.YouCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kamahls_summons.jpg
-Oracle:Each player may reveal any number of creature cards from his or her hand. Then each player creates a 2/2 green Bear creature token for each card he or she revealed this way.
+Oracle:Each player may reveal any number of creature cards from their hand. Then each player creates a 2/2 green Bear creature token for each card they revealed this way.

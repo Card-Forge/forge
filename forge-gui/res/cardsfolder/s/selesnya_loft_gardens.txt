@@ -7,10 +7,10 @@ R:Event$ AddCounter | ActiveZones$ Command | ValidCard$ Permanent | EffectOnly$ 
 SVar:DoubleCounters:DB$ ReplaceEffect | VarName$ CounterNum | VarValue$ Z | References$ Z
 SVar:Y:ReplaceCount$TokenNum/Twice
 SVar:Z:ReplaceCount$CounterNum/Twice
-T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, until end of turn, whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, until end of turn, whenever you tap a land for mana, add one mana of any type that land produced.
 SVar:RolledChaos:DB$ Effect | AILogic$ Always | Triggers$ TrigTapForMana | SVars$ TrigMana
-SVar:TrigTapForMana:Mode$ TapsForMana | TriggerZones$ Command | ValidCard$ Land.YouCtrl | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.
+SVar:TrigTapForMana:Mode$ TapsForMana | TriggerZones$ Command | ValidCard$ Land.YouCtrl | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever you tap a land for mana, add one mana of any type that land produced.
 SVar:TrigMana:DB$ ManaReflected | ColorOrType$ Type | Valid$ Defined.Triggered | ReflectProperty$ Produced | Defined$ TriggeredPlayer
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selesnya_loft_gardens.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | MinTurn$ 1 | RollInMain1$ True
-Oracle:If an effect would create one or more tokens, it creates twice that many of those tokens instead.\nIf an effect would put one or more counters on a permanent, it puts twice that many of those counters on that permanent instead.\nWhenever you roll {CHAOS}, until end of turn, whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.
+Oracle:If an effect would create one or more tokens, it creates twice that many of those tokens instead.\nIf an effect would put one or more counters on a permanent, it puts twice that many of those counters on that permanent instead.\nWhenever you roll {CHAOS}, until end of turn, whenever you tap a land for mana, add one mana of any type that land produced.

@@ -19,7 +19,7 @@ humancommand=
 aihand=
 ailibrary=
 aigraveyard=
-aibattlefield=Kalitas, Traitor of Ghet;Ammit Eternal;Liliana, the Last Hope|Counters:LOYALTY=3;t:Zombie,P:2,T:2,Cost:no,Types:Creature-Zombie,Keywords:,Image:b_2_2_zombie_OGW;t:Zombie,P:2,T:2,Cost:no,Types:Creature-Zombie,Keywords:,Image:b_2_2_zombie_OGW;t:Zombie,P:2,T:2,Cost:no,Types:Creature-Zombie,Keywords:,Image:b_2_2_zombie_OGW;t:Zombie,P:2,T:2,Cost:no,Types:Creature-Zombie,Keywords:,Image:b_2_2_zombie_OGW;t:Zombie,P:2,T:2,Cost:no,Types:Creature-Zombie,Keywords:,Image:b_2_2_zombie_OGW;
+aibattlefield=Kalitas, Traitor of Ghet;Ammit Eternal;Liliana, the Last Hope|Counters:LOYALTY=3;t:Zombie,P:2,T:2,Cost:no cost,Color:B,Types:Creature-Zombie,Keywords:,Image:b_2_2_zombie_OGW;t:Zombie,P:2,T:2,Cost:no cost,Color:B,Types:Creature-Zombie,Keywords:,Image:b_2_2_zombie_OGW;t:Zombie,P:2,T:2,Cost:no cost,Color:B,Types:Creature-Zombie,Keywords:,Image:b_2_2_zombie_OGW;t:Zombie,P:2,T:2,Cost:no cost,Color:B,Types:Creature-Zombie,Keywords:,Image:b_2_2_zombie_OGW;t:Zombie,P:2,T:2,Cost:no cost,Color:B,Types:Creature-Zombie,Keywords:,Image:b_2_2_zombie_OGW;
 aiprecast=Liliana, the Last Hope:1->420
 aiexile=
 aicommand=

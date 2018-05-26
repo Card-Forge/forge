@@ -6,7 +6,7 @@
         <packaging.type>jar</packaging.type>
         <build.min.memory>-Xms128m</build.min.memory>
         <build.max.memory>-Xmx1024m</build.max.memory>
-        <alpha-version>1.6.8.001</alpha-version>
+        <alpha-version>1.6.10.001</alpha-version>
         <sign.keystore>keystore</sign.keystore>
         <sign.alias>alias</sign.alias>
         <sign.storepass>storepass</sign.storepass>
@@ -19,7 +19,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.9-SNAPSHOT</version>
+        <version>1.6.11-SNAPSHOT</version>
     </parent>
 
     <artifactId>forge-gui-android</artifactId>
@@ -81,7 +81,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>16.0.1</version>
+            <version>24.1-android</version>
         </dependency>
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>

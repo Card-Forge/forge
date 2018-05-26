@@ -128,6 +128,18 @@ public class CountersPutEffect extends SpellAbilityEffect {
         }
 
         for (final GameObject obj : tgtObjects) {
+            // check if the object is still in game or if it was moved
+            if (obj instanceof Card) {
+                Card tgtCard = (Card) obj;
+                Card gameCard = game.getCardState(tgtCard, null);
+                // gameCard is LKI in that case, the card is not in game anymore
+                // or the timestamp did change
+                // this should check Self too
+                if (gameCard == null || !tgtCard.equalsWithTimestamp(gameCard)) {
+                    continue;
+                }
+            }
+
             if (existingCounter) {
                 final List<CounterType> choices = Lists.newArrayList();
                 if (obj instanceof GameEntity) {
@@ -186,11 +198,22 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         // this check needs to check if this card would be on the battlefield
                         noTributeLKI.setLastKnownZone(activator.getZone(ZoneType.Battlefield));
 
+                        // double freeze tracker, so it doesn't update view
+                        game.getTracker().freeze();
+
                         CardCollection preList = new CardCollection(noTributeLKI);
                         game.getAction().checkStaticAbilities(false, Sets.newHashSet(noTributeLKI), preList);
 
+                        boolean abort = !noTributeLKI.canReceiveCounters(counterType);
+
+                        game.getAction().checkStaticAbilities(false);
+                        // clear delayed changes, this check should not have updated the view
+                        game.getTracker().clearDelayed();
+                        // need to unfreeze tracker
+                        game.getTracker().unfreeze();
+
                         // check if it can recive the Tribute
-                        if (!noTributeLKI.canReceiveCounters(counterType)) {
+                        if (abort) {
                             continue;
                         }
 
@@ -225,9 +248,9 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         }
                         if (sa.hasParam("Monstrosity")) {
                             tgtCard.setMonstrous(true);
-                            tgtCard.setMonstrosityNum(counterAmount);
                             final Map<String, Object> runParams = Maps.newHashMap();
                             runParams.put("Card", tgtCard);
+                            runParams.put("MonstrosityAmount", counterAmount);
                             game.getTriggerHandler().runTrigger(TriggerType.BecomeMonstrous, runParams, false);
                         }
                         if (sa.hasParam("Renown")) {

@@ -1,11 +1,8 @@
 Name:Armor of Thorns
 ManaCost:1 G
 Types:Enchantment Aura
-K:You may cast CARDNAME as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
+K:MayFlashSac
 K:Enchant nonblack creature
-T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ CleanupTrig | Static$ True | Secondary$ True | SpellSpeed$ NotSorcerySpeed | TriggerDescription$ If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
-SVar:CleanupTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Cleanup | Execute$ Sac | TriggerDescription$ At the beginning of the next cleanup step, sacrifice CARDNAME.
-SVar:Sac:DB$ SacrificeAll | Defined$ Self
 A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2.
 SVar:RemAIDeck:True

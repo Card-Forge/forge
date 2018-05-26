@@ -1,8 +1,8 @@
 Name:Spectral Searchlight
 ManaCost:3
 Types:Artifact
-A:AB$ ChoosePlayer | Cost$ T | Defined$ You | Choices$ Player | ChoiceTitle$ Choose an player | SubAbility$ DBMana | SpellDescription$ Choose a player. That player adds one mana of any color he or she chooses to his or her mana pool.
+A:AB$ ChoosePlayer | Cost$ T | Defined$ You | Choices$ Player | ChoiceTitle$ Choose a player | SubAbility$ DBMana | SpellDescription$ Choose a player. That player adds one mana of any color they choose.
 SVar:DBMana:DB$ Mana | Produced$ Any | Defined$ ChosenPlayer
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_searchlight.jpg
-Oracle:{T}: Choose a player. That player adds one mana of any color he or she chooses to his or her mana pool.
+Oracle:{T}: Choose a player. That player adds one mana of any color they choose.

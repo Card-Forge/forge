@@ -42,7 +42,8 @@ public final class CDev implements ICDoc {
         view.getLblCardToExile().addMouseListener(madCardToExile);
         view.getLblCastSpell().addMouseListener(madCastASpell);
         view.getLblRepeatAddCard().addMouseListener(madRepeatAddCard);
-        view.getLblCounterPermanent().addMouseListener(madCounter);
+        view.getLblAddCounterPermanent().addMouseListener(madAddCounter);
+        view.getLblSubCounterPermanent().addMouseListener(madSubCounter);
         view.getLblTapPermanent().addMouseListener(madTap);
         view.getLblUntapPermanent().addMouseListener(madUntap);
         view.getLblSetLife().addMouseListener(madLife);
@@ -198,7 +199,7 @@ public final class CDev implements ICDoc {
         getController().cheat().exileCardsFromHand();;
     }
 
-    private final MouseListener madCounter = new MouseAdapter() {
+    private final MouseListener madAddCounter = new MouseAdapter() {
         @Override
         public void mousePressed(final MouseEvent e) {
             addCounterToPermanent();
@@ -206,6 +207,16 @@ public final class CDev implements ICDoc {
     };
     public void addCounterToPermanent() {
         getController().cheat().addCountersToPermanent();
+    }
+
+    private final MouseListener madSubCounter = new MouseAdapter() {
+        @Override
+        public void mousePressed(final MouseEvent e) {
+            removeCountersFromPermanent();
+        }
+    };
+    public void removeCountersFromPermanent() {
+        getController().cheat().removeCountersFromPermanent();
     }
 
     private final MouseListener madTap = new MouseAdapter() {

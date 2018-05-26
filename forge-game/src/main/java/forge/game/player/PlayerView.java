@@ -10,6 +10,7 @@ import forge.game.card.CounterType;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableMultiset;
 import com.google.common.collect.Iterables;
@@ -91,7 +92,7 @@ public class PlayerView extends GameEntityView {
     }
 
     public FCollectionView<PlayerView> getOpponents() {
-        return Objects.firstNonNull(this.<FCollectionView<PlayerView>>get(TrackableProperty.Opponents), new FCollection<PlayerView>());
+        return MoreObjects.firstNonNull(this.<FCollectionView<PlayerView>>get(TrackableProperty.Opponents), new FCollection<PlayerView>());
     }
     void updateOpponents(Player p) {
         set(TrackableProperty.Opponents, PlayerView.getCollection(p.getOpponents()));

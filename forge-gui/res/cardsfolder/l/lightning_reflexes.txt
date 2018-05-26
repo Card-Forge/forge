@@ -1,11 +1,8 @@
 Name:Lightning Reflexes
 ManaCost:1 R
 Types:Enchantment Aura
-K:You may cast CARDNAME as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
+K:MayFlashSac
 K:Enchant creature
-T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ CleanupTrig | Static$ True | Secondary$ True | SpellSpeed$ NotSorcerySpeed | TriggerDescription$ If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
-SVar:CleanupTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Cleanup | Execute$ Sac | TriggerDescription$ At the beginning of the next cleanup step, sacrifice CARDNAME.
-SVar:Sac:DB$ SacrificeAll | Defined$ Self
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddKeyword$ First Strike | Description$ Enchanted creature gets +1/+0 and has first strike.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_reflexes.jpg

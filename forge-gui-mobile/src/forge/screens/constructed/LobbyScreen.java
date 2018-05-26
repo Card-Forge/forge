@@ -541,18 +541,30 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         Deck deck;
         if (hasVariant(GameType.Commander)) {
             deck = playerPanel.getCommanderDeck();
-            playerPanel.getCommanderDeckChooser().saveState();
+            if (deck != null) {
+                playerPanel.getCommanderDeckChooser().saveState();
+            }
         }
         else if (hasVariant(GameType.TinyLeaders)) {
             deck = playerPanel.getTinyLeadersDeck();
-            playerPanel.getTinyLeadersDeckChooser().saveState();
+            if (deck != null) {
+                playerPanel.getTinyLeadersDeckChooser().saveState();
+            }
         }
         else if (hasVariant(GameType.Brawl)) {
             deck = playerPanel.getBrawlDeck();
-            playerPanel.getBrawlDeckChooser().saveState();
+            if (deck != null) {
+                playerPanel.getBrawlDeckChooser().saveState();
+            }
         }else {
             deck = playerPanel.getDeck();
-            playerPanel.getDeckChooser().saveState();
+            if (deck != null) {
+                playerPanel.getDeckChooser().saveState();
+            }
+        }
+
+        if (deck == null) {
+            return;
         }
 
         Deck playerDeck = deck;

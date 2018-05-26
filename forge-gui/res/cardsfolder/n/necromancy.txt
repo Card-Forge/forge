@@ -1,10 +1,7 @@
 Name:Necromancy
 ManaCost:2 B
 Types:Enchantment
-K:You may cast CARDNAME as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
-T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ CleanupTrig | Static$ True | Secondary$ True | SpellSpeed$ NotSorcerySpeed | TriggerDescription$ If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
-SVar:CleanupTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Cleanup | Execute$ Sac | TriggerDescription$ At the beginning of the next cleanup step, sacrifice CARDNAME.
-SVar:Sac:DB$ SacrificeAll | Defined$ Self
+K:MayFlashSac
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ RaiseDead | TriggerDescription$ When CARDNAME enters the battlefield, if it's on the battlefield, it becomes an Aura with "enchant creature put onto the battlefield with CARDNAME." Put target creature card from a graveyard onto the battlefield under your control and attach CARDNAME to it
 SVar:RaiseDead:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | RememberChanged$ True | TgtPrompt$ Select target creature card in a graveyard | ValidTgts$ Creature | ChangeNum$ 1 | SubAbility$ Aurify
 SVar:Aurify:DB$ Animate | IsPresent$ Card.Self | Types$ Aura | OverwriteSpells$ True | Abilities$ NewAttach | Keywords$ Enchant creature put onto the battlefield with CARDNAME | Permanent$ True | SubAbility$ NecromAttach

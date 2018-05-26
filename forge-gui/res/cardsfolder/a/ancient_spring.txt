@@ -2,8 +2,8 @@ Name:Ancient Spring
 ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U} to your mana pool.
-A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ W B | SpellDescription$ Add {W}{B} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ W B | SpellDescription$ Add {W}{B}.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_spring.jpg
-Oracle:Ancient Spring enters the battlefield tapped.\n{T}: Add {U} to your mana pool.\n{T}, Sacrifice Ancient Spring: Add {W}{B} to your mana pool.
+Oracle:Ancient Spring enters the battlefield tapped.\n{T}: Add {U}.\n{T}, Sacrifice Ancient Spring: Add {W}{B}.

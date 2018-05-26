@@ -23,6 +23,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import forge.game.combat.CombatUtil;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -61,7 +62,7 @@ public final class CardPredicates {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return c.getOwner().equals(p);
+                return p.equals(c.getOwner());
             }
         };
     }
@@ -76,6 +77,15 @@ public final class CardPredicates {
     }
 
     public static final Predicate<Card> hasKeyword(final String keyword) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.hasKeyword(keyword);
+            }
+        };
+    }
+
+    public static final Predicate<Card> hasKeyword(final Keyword keyword) {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {

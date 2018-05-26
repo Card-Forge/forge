@@ -13,9 +13,10 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import com.google.common.collect.Lists;
 
 public class PumpAllEffect extends SpellAbilityEffect {
     private static void applyPumpAll(final SpellAbility sa,
@@ -24,23 +25,18 @@ public class PumpAllEffect extends SpellAbilityEffect {
         
         final Game game = sa.getActivatingPlayer().getGame();
         final long timestamp = game.getNextTimestamp();
-        final List<String> kws = new ArrayList<String>();
-        final List<String> hiddenkws = new ArrayList<String>();
-        boolean suspend = false;
+        final List<String> kws = Lists.newArrayList();
+        final List<String> hiddenkws = Lists.newArrayList();
         
         for (String kw : keywords) {
             if (kw.startsWith("HIDDEN")) {
                 hiddenkws.add(kw);
             } else {
                 kws.add(kw);
-                if (kw.equals("Suspend")) {
-                    suspend = true;
-                }
             }
         }
         
         for (final Card tgtC : list) {
-
             // only pump things in the affected zones.
             boolean found = false;
             for (final ZoneType z : affectedZones) {
@@ -55,13 +51,10 @@ public class PumpAllEffect extends SpellAbilityEffect {
 
             tgtC.addTempPowerBoost(a);
             tgtC.addTempToughnessBoost(d);
-            tgtC.addChangedCardKeywords(kws, new ArrayList<String>(), false, timestamp);
+            tgtC.addChangedCardKeywords(kws, null, false, false, timestamp);
 
             for (String kw : hiddenkws) {
                 tgtC.addHiddenExtrinsicKeyword(kw);
-            }
-            if (suspend && !tgtC.hasSuspend()) {
-                tgtC.setSuspend(true);
             }
 
             if (sa.hasParam("RememberAllPumped")) {
@@ -121,13 +114,11 @@ public class PumpAllEffect extends SpellAbilityEffect {
     @Override
     public void resolve(final SpellAbility sa) {
         final List<Player> tgtPlayers = getTargetPlayers(sa);
-        final List<ZoneType> affectedZones = new ArrayList<ZoneType>();
+        final List<ZoneType> affectedZones = Lists.newArrayList();
         final Game game = sa.getActivatingPlayer().getGame();
 
         if (sa.hasParam("PumpZone")) {
-            for (final String zone : sa.getParam("PumpZone").split(",")) {
-                affectedZones.add(ZoneType.valueOf(zone));
-            }
+            affectedZones.addAll(ZoneType.listValueOf(sa.getParam("PumpZone")));
         } else {
             affectedZones.add(ZoneType.Battlefield);
         }
@@ -152,7 +143,10 @@ public class PumpAllEffect extends SpellAbilityEffect {
 
         list = (CardCollection)AbilityUtils.filterListByType(list, valid, sa);
 
-        List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
+        List<String> keywords = Lists.newArrayList();
+        if (sa.hasParam("KW")) {
+            keywords.addAll(Arrays.asList(sa.getParam("KW").split(" & ")));
+        }
         final int a = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumAtt"), sa, true);
         final int d = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumDef"), sa, true);
         

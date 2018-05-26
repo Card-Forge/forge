@@ -36,7 +36,7 @@ public class ManaEffect extends SpellAbilityEffect {
         final boolean optional = sa.hasParam("Optional");
         final Game game = sa.getActivatingPlayer().getGame();
 
-        if (optional && !sa.getActivatingPlayer().getController().confirmAction(sa, null, "Do you want to add mana to your mana pool?")) {
+        if (optional && !sa.getActivatingPlayer().getController().confirmAction(sa, null, "Do you want to add mana?")) {
             return;
         }
 
@@ -205,7 +205,7 @@ public class ManaEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
         String mana = !sa.hasParam("Amount") || StringUtils.isNumeric(sa.getParam("Amount"))
                 ? GameActionUtil.generatedMana(sa) : "mana";
-        sb.append("Add ").append(mana).append(" to your mana pool.");
+        sb.append("Add ").append(mana).append(".");
         return sb.toString();
     }
 }

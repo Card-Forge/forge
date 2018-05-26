@@ -24,11 +24,10 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AnimateEffectBase extends SpellAbilityEffect {
-    void doAnimate(final Card c, final SpellAbility sa, final Integer power, final Integer toughness,
+    public static void doAnimate(final Card c, final SpellAbility sa, final Integer power, final Integer toughness,
             final CardType addType, final CardType removeType, final String colors,
             final List<String> keywords, final List<String> removeKeywords,
             final List<String> hiddenKeywords, final long timestamp) {
@@ -36,13 +35,19 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         boolean removeSuperTypes = false;
         boolean removeCardTypes = false;
         boolean removeSubTypes = false;
+        boolean removeLandTypes = false;
         boolean removeCreatureTypes = false;
+        boolean removeArtifactTypes = false;
+        boolean removeEnchantmentTypes = false;
 
         if (sa.hasParam("OverwriteTypes")) {
             removeSuperTypes = true;
             removeCardTypes = true;
             removeSubTypes = true;
+            removeLandTypes = true;
             removeCreatureTypes = true;
+            removeArtifactTypes = true;
+            removeEnchantmentTypes = true;
         }
 
         if (sa.hasParam("KeepSupertypes")) {
@@ -55,6 +60,10 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         if (sa.hasParam("KeepSubtypes")) {
             removeSubTypes = false;
+            removeLandTypes = false;
+            removeCreatureTypes = false;
+            removeArtifactTypes = false;
+            removeEnchantmentTypes = false;
         }
 
         if (sa.hasParam("RemoveSuperTypes")) {
@@ -69,8 +78,17 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             removeSubTypes = true;
         }
 
+        if (sa.hasParam("RemoveLandTypes")) {
+            removeCreatureTypes = true;
+        }
         if (sa.hasParam("RemoveCreatureTypes")) {
             removeCreatureTypes = true;
+        }
+        if (sa.hasParam("RemoveArtifactTypes")) {
+            removeArtifactTypes = true;
+        }
+        if (sa.hasParam("RemoveEnchantmentTypes")) {
+            removeEnchantmentTypes = true;
         }
 
         if ((power != null) || (toughness != null)) {
@@ -79,10 +97,11 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         if (!addType.isEmpty() || !removeType.isEmpty() || removeCreatureTypes) {
             c.addChangedCardTypes(addType, removeType, removeSuperTypes, removeCardTypes, removeSubTypes,
-                    removeCreatureTypes, timestamp);
+                    removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes, timestamp);
         }
 
-        c.addChangedCardKeywords(keywords, removeKeywords, sa.hasParam("RemoveAllAbilities"), timestamp);
+        c.addChangedCardKeywords(keywords, removeKeywords,
+                sa.hasParam("RemoveAllAbilities"), sa.hasParam("RemoveIntrinsicAbilities"), timestamp);
 
         for (final String k : hiddenKeywords) {
             c.addHiddenExtrinsicKeyword(k);
@@ -109,10 +128,10 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
      * @param timestamp
      *            a long.
      */
-    void doUnanimate(final Card c, SpellAbility sa, final String colorDesc,
+    static void doUnanimate(final Card c, SpellAbility sa, final String colorDesc,
             final List<String> hiddenKeywords, final List<SpellAbility> addedAbilities,
             final List<Trigger> addedTriggers, final List<ReplacementEffect> addedReplacements, 
-            final boolean givesStAbs, final List<SpellAbility> removedAbilities, final long timestamp) {
+            final List<StaticAbility> addedStaticAbilities, final long timestamp) {
 
         if (sa.hasParam("LastsIndefinitely")) {
             return;
@@ -122,16 +141,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         c.removeChangedCardKeywords(timestamp);
 
-        // remove all static abilities
-        if (givesStAbs) {
-            c.setStaticAbilities(new ArrayList<StaticAbility>());
-        }
-
-        if (sa.hasParam("Types") || sa.hasParam("RemoveTypes")
-                || sa.hasParam("RemoveCreatureTypes")) {
-            c.removeChangedCardTypes(timestamp);
-        }
-
+        c.removeChangedCardTypes(timestamp);
         c.removeColor(timestamp);
 
         for (final String k : hiddenKeywords) {
@@ -142,16 +152,16 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             c.removeSpellAbility(saAdd);
         }
 
-        for (final SpellAbility saRem : removedAbilities) {
-            c.addSpellAbility(saRem);
-        }
-
         for (final Trigger t : addedTriggers) {
             c.removeTrigger(t);
         }
 
         for (final ReplacementEffect rep : addedReplacements) {
             c.removeReplacementEffect(rep);
+        }
+
+        for (final StaticAbility stAb : addedStaticAbilities) {
+            c.removeStaticAbility(stAb);
         }
 
         // any other unanimate cleanup

@@ -1,8 +1,8 @@
 Name:Cellar Door
 ManaCost:2
 Types:Artifact
-A:AB$ Mill | Cost$ 3 T | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | FromBottom$ True | RememberMilled$ True | SubAbility$ DBToken | SpellDescription$ Target player puts the bottom card of his or her library into his or her graveyard. If it's a creature card, you create a 2/2 black Zombie creature token.
+A:AB$ Mill | Cost$ 3 T | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | FromBottom$ True | RememberMilled$ True | SubAbility$ DBToken | SpellDescription$ Target player puts the bottom card of their library into their graveyard. If it's a creature card, you create a 2/2 black Zombie creature token.
 SVar:DBToken:DB$ Token | TokenImage$ b 2 2 zombie ISD | TokenAltImages$ b_2_2_zombie2_ISD,b_2_2_zombie3_ISD | TokenName$ Zombie | TokenColors$ Black | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenOwner$ You | TokenAmount$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cellar_door.jpg
-Oracle:{3}, {T}: Target player puts the bottom card of his or her library into his or her graveyard. If it's a creature card, create a 2/2 black Zombie creature token.
+Oracle:{3}, {T}: Target player puts the bottom card of their library into their graveyard. If it's a creature card, create a 2/2 black Zombie creature token.

@@ -47,7 +47,12 @@ public class GameStateEvaluator {
     }
 
     private Score getScoreForGameOver(Game game, Player aiPlayer) {
-        return game.getOutcome().getWinningPlayer() == aiPlayer ? new Score(Integer.MAX_VALUE) : new Score(Integer.MIN_VALUE);
+        if (game.getOutcome().getWinningTeam() == aiPlayer.getTeam() ||
+                game.getOutcome().isWinner(aiPlayer.getRegisteredPlayer())) {
+            return new Score(Integer.MAX_VALUE);
+        }
+
+        return new Score(Integer.MIN_VALUE);
     }
     
     public Score getScoreForGameState(Game game, Player aiPlayer) {

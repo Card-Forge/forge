@@ -2,9 +2,9 @@ Name:Prying Blade
 ManaCost:1
 Types:Artifact Equipment
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | Description$ Equipped creature gets +1/+0.
-T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigTreasure | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigTreasure | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."
 SVar:TrigTreasure:DB$ Token | TokenAmount$ 1 | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAbilities$ ABTreasureMana | TokenAltImages$ c_treasure2,c_treasure3,c_treasure4
-SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color to your mana pool.
-K:Equip 2
+SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+K:Equip:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prying_blade.jpg
-Oracle:Equipped creature gets +1/+0.\nWhenever equipped creature deals combat damage to a player, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
+Oracle:Equipped creature gets +1/+0.\nWhenever equipped creature deals combat damage to a player, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

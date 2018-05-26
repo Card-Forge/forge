@@ -75,7 +75,7 @@ public class HumanPlay {
             return false;
         }
 
-        boolean castFaceDown = sa instanceof Spell && ((Spell)sa).isCastFaceDown();
+        boolean castFaceDown = sa.isCastFaceDown();
 
         sa.setActivatingPlayer(p);
         Card source = sa.getHostCard();
@@ -89,16 +89,7 @@ public class HumanPlay {
 
         // extra play check
         if (sa.isSpell() && !sa.canPlay()) {
-            // Exceptional cases where canPlay should not run
-            boolean exemptFromCheck = false;
-            if (source.hasSuspend() && p.getGame().isCardExiled(source) && source.getCounters(CounterType.TIME) == 0) {
-                // A card is about to ETB from Suspend
-                exemptFromCheck = true;
-            }
-
-            if (!exemptFromCheck) {
-                return false;
-            }
+            return false;
         }
 
         if (flippedToCast && !castFaceDown) {

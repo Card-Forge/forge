@@ -74,4 +74,6 @@ public interface FCollectionView<T> extends Iterable<T> {
      * {@link Iterator#remove()}), as such an operation would have no meaning.
      */
     Iterable<T> threadSafeIterable();
+
+    T get(final T obj);
 }

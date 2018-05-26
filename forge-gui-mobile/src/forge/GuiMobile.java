@@ -123,6 +123,11 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
+    public ISkinImage getCardArt(final PaperCard card, final boolean backFace) {
+        return CardRenderer.getCardArt(card, backFace);
+    }
+
+    @Override
     public ISkinImage createLayeredImage(final FSkinProp background, final String overlayFilename, final float opacity) {
         return new FBufferedImage(background.getWidth(), background.getHeight(), opacity) {
             @Override

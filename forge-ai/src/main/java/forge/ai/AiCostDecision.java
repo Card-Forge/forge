@@ -467,6 +467,10 @@ public class AiCostDecision extends CostDecisionMakerBase {
                                 ability.getActivatingPlayer(), ability.getHostCard(), ability);
                 typeList = CardLists.filter(typeList, Presets.UNTAPPED);
                 c = typeList.size();
+                // account for the fact that the activated card may be tapped in the process
+                if (ability.getPayCosts().hasTapCost() && typeList.contains(ability.getHostCard())) {
+                    c--;
+                }
                 source.setSVar("ChosenX", "Number$" + Integer.toString(c));
             } else {
                 if (!isVehicle) {

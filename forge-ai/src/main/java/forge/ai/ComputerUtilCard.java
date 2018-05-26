@@ -1081,7 +1081,7 @@ public class ComputerUtilCard {
             valueTempo *= 2;    //deal with annoying things
         }
         if (!destination.equals(ZoneType.Graveyard) &&  //TODO:boat-load of "when blah dies" triggers
-                c.hasKeyword("Persist") || c.hasKeyword("Undying") || c.hasKeyword("Modular")) {
+                c.hasKeyword(Keyword.PERSIST) || c.hasKeyword(Keyword.UNDYING) || c.hasKeyword(Keyword.MODULAR)) {
             valueTempo *= 2;
         }
         if (destination.equals(ZoneType.Hand) && !c.isToken()) {
@@ -1358,8 +1358,9 @@ public class ComputerUtilCard {
             
             //1. save combatant
             if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) && !pumpedWillDie 
-                    && !c.hasKeyword("Indestructible")) {   // hack because attackerWouldBeDestroyed() does not
-                                                            // check for Indestructible when computing lethal damage
+                    && !c.hasKeyword(Keyword.INDESTRUCTIBLE)) {
+                // hack because attackerWouldBeDestroyed()
+                // does not check for Indestructible when computing lethal damage
                 return true;
             }
             
@@ -1396,17 +1397,17 @@ public class ComputerUtilCard {
                 int poisonPumped = opp.canReceiveCounters(CounterType.POISON) ? ComputerUtilCombat.poisonIfUnblocked(pumped, ai) : 0;
 
                 // predict Infect
-                if (pumpedDmg == 0 && c.hasKeyword("Infect")) {
+                if (pumpedDmg == 0 && c.hasKeyword(Keyword.INFECT)) {
                     if (poisonPumped > poisonOrig) {
                         pumpedDmg = poisonPumped;
                     }
                 }
 
                 if (combat.isBlocked(c)) {
-                    if (!c.hasKeyword("Trample")) {
+                    if (!c.hasKeyword(Keyword.TRAMPLE)) {
                         dmg = 0;
                     }
-                    if (c.hasKeyword("Trample") || keywords.contains("Trample")) {
+                    if (c.hasKeyword(Keyword.TRAMPLE) || keywords.contains("Trample")) {
                        for (Card b : combat.getBlockers(c)) {
                            pumpedDmg -= ComputerUtilCombat.getDamageToKill(b);
                        }
@@ -1415,8 +1416,8 @@ public class ComputerUtilCard {
                     }
                 }
                 if (pumpedDmg > dmg) {
-                    if ((!c.hasKeyword("Infect") && pumpedDmg >= opp.getLife())
-                            || (c.hasKeyword("Infect") && opp.canReceiveCounters(CounterType.POISON) && pumpedDmg >= opp.getPoisonCounters())) {
+                    if ((!c.hasKeyword(Keyword.INFECT) && pumpedDmg >= opp.getLife())
+                            || (c.hasKeyword(Keyword.INFECT) && opp.canReceiveCounters(CounterType.POISON) && pumpedDmg >= opp.getPoisonCounters())) {
                         return true;
                     }
                 }
@@ -1425,7 +1426,7 @@ public class ComputerUtilCard {
                 if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && pumpedDmg > dmg) {
                     int totalPowerUnblocked = 0;
                     for (Card atk : combat.getAttackers()) {
-                        if (combat.isBlocked(atk) && !atk.hasKeyword("Trample")) {
+                        if (combat.isBlocked(atk) && !atk.hasKeyword(Keyword.TRAMPLE)) {
                             continue;
                         }
                         if (atk == c) {
@@ -1458,7 +1459,7 @@ public class ComputerUtilCard {
             }
             
             //4. lifelink
-            if (ai.canGainLife() && ai.getLife() > 0 && !c.hasKeyword("Lifelink") && keywords.contains("Lifelink")
+            if (ai.canGainLife() && ai.getLife() > 0 && !c.hasKeyword(Keyword.LIFELINK) && keywords.contains("Lifelink")
                     && (combat.isAttacking(c) || combat.isBlocking(c))) {
                 int dmg = pumped.getNetCombatDamage();
                 //The actual dmg inflicted should be the sum of ComputerUtilCombat.predictDamageTo() for opposing creature
@@ -1471,7 +1472,7 @@ public class ComputerUtilCard {
                 List<Card> blockedBy = combat.getAttackersBlockedBy(c);
                 boolean attackerHasTrample = false;
                 for (Card b : blockedBy) {
-                    attackerHasTrample |= b.hasKeyword("Trample");
+                    attackerHasTrample |= b.hasKeyword(Keyword.TRAMPLE);
                 }
                 if (attackerHasTrample && (sa.isAbility() || ComputerUtilCombat.lifeInDanger(ai, combat))) {
                     return true;
@@ -1512,7 +1513,7 @@ public class ComputerUtilCard {
                // Reserve the mana until Declare Blockers such that the AI doesn't tap out before having a chance to use
                // the combat trick
                if (ai.getController().isAI()) {
-                   ((PlayerControllerAi) ai.getController()).getAi().reserveManaSources(sa, PhaseType.COMBAT_DECLARE_BLOCKERS);
+                   ((PlayerControllerAi) ai.getController()).getAi().reserveManaSources(sa, PhaseType.COMBAT_DECLARE_BLOCKERS, false);
                }
                return false;
            } else {
@@ -1572,7 +1573,7 @@ public class ComputerUtilCard {
         pumped.addNewPT(c.getCurrentPower(), c.getCurrentToughness(), timestamp);
         pumped.addTempPowerBoost(c.getTempPowerBoost() + power + berserkPower);
         pumped.addTempToughnessBoost(c.getTempToughnessBoost() + toughness);
-        pumped.addChangedCardKeywords(kws, new ArrayList<String>(), false, timestamp);
+        pumped.addChangedCardKeywords(kws, null, false, false, timestamp);
         Set<CounterType> types = c.getCounters().keySet();
         for(CounterType ct : types) {
             pumped.addCounterFireNoEvents(ct, c.getCounters(ct), c, true);
@@ -1595,7 +1596,7 @@ public class ComputerUtilCard {
             }
         }
         final long timestamp2 = c.getGame().getNextTimestamp(); //is this necessary or can the timestamp be re-used?
-        pumped.addChangedCardKeywordsInternal(toCopy, Lists.<KeywordInterface>newArrayList(), false, timestamp2, true);
+        pumped.addChangedCardKeywordsInternal(toCopy, null, false, false, timestamp2, true);
         ComputerUtilCard.applyStaticContPT(ai.getGame(), pumped, new CardCollection(c));
         return pumped;
     }
@@ -1713,10 +1714,10 @@ public class ComputerUtilCard {
     }
 
     public static boolean hasActiveUndyingOrPersist(final Card c) {
-        if (c.hasKeyword("Undying") && c.getCounters(CounterType.P1P1) == 0) {
+        if (c.hasKeyword(Keyword.UNDYING) && c.getCounters(CounterType.P1P1) == 0) {
             return true;
         }
-        if (c.hasKeyword("Persist") && c.getCounters(CounterType.M1M1) == 0) {
+        if (c.hasKeyword(Keyword.PERSIST) && c.getCounters(CounterType.M1M1) == 0) {
             return true;
         }
         return false;

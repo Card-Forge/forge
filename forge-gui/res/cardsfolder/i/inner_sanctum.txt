@@ -2,7 +2,7 @@ Name:Inner Sanctum
 ManaCost:1 W W
 Types:Enchantment
 K:Cumulative upkeep:PayLife<2>:Pay 2 life.
-R:Event$ DamageDone | Prevent$ True | ValidTarget$ Creature.YouCtrl | Description$ Prevent all damage that would be dealt to creatures you control.
+R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Creature.YouCtrl | Description$ Prevent all damage that would be dealt to creatures you control.
 SVar:RemAIDeck:True
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inner_sanctum.jpg

@@ -2,8 +2,8 @@ Name:Sailor of Means
 ManaCost:2 U
 Types:Creature Human Pirate
 PT:1/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTreasure | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME enters the battlefield, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTreasure | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME enters the battlefield, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."
 SVar:TrigTreasure:DB$ Token | TokenAmount$ 1 | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAbilities$ ABTreasureMana | TokenAltImages$ c_treasure2,c_treasure3,c_treasure4
-SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color to your mana pool.
+SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sailor_of_means.jpg
-Oracle:When Sailor of Means enters the battlefield, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+Oracle:When Sailor of Means enters the battlefield, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."

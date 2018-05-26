@@ -5,17 +5,20 @@ import forge.ai.*;
 import forge.card.CardStateName;
 import forge.card.CardTypeView;
 import forge.game.Game;
+import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+import forge.util.MyRandom;
 
 import java.util.List;
 
@@ -51,12 +54,28 @@ public class PlayAi extends SpellAbilityAi {
                 return false;
             }
         }
-        
+
+        if (game.getRules().hasAppliedVariant(GameType.MoJhoSto) && source.getName().equals("Jhoira of the Ghitu Avatar")) {
+            // Additional logic for MoJhoSto:
+            // Do not activate Jhoira too early, usually there are few good targets
+            AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+            int numLandsForJhoira = aic.getIntProperty(AiProps.MOJHOSTO_NUM_LANDS_TO_ACTIVATE_JHOIRA);
+            int chanceToActivateInst = 100 - aic.getIntProperty(AiProps.MOJHOSTO_CHANCE_TO_USE_JHOIRA_COPY_INSTANT);
+            if (ai.getLandsInPlay().size() < numLandsForJhoira) {
+                return false;
+            }
+            // Don't spam activate the Instant copying ability all the time to give the AI a chance to use other abilities
+            // Can probably be improved, but as random as MoJhoSto already is, probably not a huge deal for now
+            if ("Instant".equals(sa.getParam("AnySupportedCard")) && MyRandom.percentTrue(chanceToActivateInst)) {
+                return false;
+            }
+        }
+
         if ("ReplaySpell".equals(logic)) {
             return ComputerUtil.targetPlayableSpellCard(ai, cards, sa, sa.hasParam("WithoutManaCost"));                
         }
 
-        if (source != null && source.hasKeyword("Hideaway") && source.hasRemembered()) {
+        if (source != null && source.hasKeyword(Keyword.HIDEAWAY) && source.hasRemembered()) {
             // AI is not very good at playing non-permanent spells this way, at least yet
             // (might be possible to enable it for Sorceries in Main1/Main2 if target is available,
             // but definitely not for most Instants)

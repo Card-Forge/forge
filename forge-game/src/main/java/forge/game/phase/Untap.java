@@ -36,6 +36,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
@@ -257,7 +258,7 @@ public class Untap extends Phase {
 
             @Override
             public boolean apply(final Card c) {
-                return ((c.isPhasedOut() && c.isDirectlyPhasedOut()) || c.hasKeyword("Phasing"));
+                return ((c.isPhasedOut() && c.isDirectlyPhasedOut()) || c.hasKeyword(Keyword.PHASING));
             }
         });
 
@@ -268,7 +269,7 @@ public class Untap extends Phase {
         for (final Card c : list) {
             if (c.isPhasedOut()) {
                 c.phase();
-            } else if (c.hasKeyword("Phasing")) {
+            } else if (c.hasKeyword(Keyword.PHASING)) {
                 // 702.23g If an object would simultaneously phase out directly
                 // and indirectly, it just phases out indirectly.
                 if (c.isAura()) {

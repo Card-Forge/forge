@@ -195,3 +195,13 @@ EXPLORE_MAX_CMC_DIFF_TO_PUT_IN_GRAVEYARD=2
 # The number of lands on the battlefield when the AI would use Explore to put non-land cards in graveyard if it
 # doesn't have a land in hand
 EXPLORE_NUM_LANDS_TO_STILL_NEED_MORE=2
+
+# MoJhoSto casual variant properties
+# How many lands the AI needs to have on the battlefield to begin considering activating Jhoira in MoJhoSto
+MOJHOSTO_NUM_LANDS_TO_ACTIVATE_JHOIRA=5
+# The chance that the AI will activate Jhoira instead of activating Momir
+MOJHOSTO_CHANCE_TO_PREFER_JHOIRA_OVER_MOMIR=50
+# The chance that the AI will activate Jhoira's copy random instant ability (per phase, the AI will generally
+# attempt this either in its upkeep or its draw phase or main 1).
+MOJHOSTO_CHANCE_TO_USE_JHOIRA_COPY_INSTANT=15
+

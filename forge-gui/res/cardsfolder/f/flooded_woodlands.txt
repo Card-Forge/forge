@@ -1,7 +1,7 @@
 Name:Flooded Woodlands
 ManaCost:2 U B
 Types:Enchantment
-S:Mode$ CantAttackUnless | ValidCard$ Creature.Green | Target$ Player,Planeswalker | Cost$ Sac<1/Land> | Description$ Green creatures can't attack unless their controller sacrifices a land for each green creature he or she controls that's attacking. (This cost is paid as attackers are declared.)
+S:Mode$ CantAttackUnless | ValidCard$ Creature.Green | Target$ Player,Planeswalker | Cost$ Sac<1/Land> | Description$ Green creatures can't attack unless their controller sacrifices a land for each green creature they control that's attacking. (This cost is paid as attackers are declared.)
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flooded_woodlands.jpg
-Oracle:Green creatures can't attack unless their controller sacrifices a land for each green creature he or she controls that's attacking. (This cost is paid as attackers are declared.)
+Oracle:Green creatures can't attack unless their controller sacrifices a land for each green creature they control that's attacking. (This cost is paid as attackers are declared.)

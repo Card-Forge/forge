@@ -1,9 +1,9 @@
 Name:Blinkmoth Urn
 ManaCost:5
 Types:Artifact
-T:Mode$ Phase | Phase$ Main1 | PreCombatMain$ True | ValidPlayer$ Player | TriggerZones$ Battlefield | IsPresent$ Card.Self+untapped | Execute$ TrigGetMana | TriggerDescription$ At the beginning of each player's precombat main phase, if CARDNAME is untapped, that player adds {C} to his or her mana pool for each artifact he or she controls.
+T:Mode$ Phase | Phase$ Main1 | PreCombatMain$ True | ValidPlayer$ Player | TriggerZones$ Battlefield | IsPresent$ Card.Self+untapped | Execute$ TrigGetMana | TriggerDescription$ At the beginning of each player's precombat main phase, if CARDNAME is untapped, that player adds {C} for each artifact they control.
 SVar:TrigGetMana:DB$ Mana | Produced$ C | Amount$ X | References$ X | Defined$ TriggeredPlayer
 SVar:X:Count$Valid Artifact.ActivePlayerCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinkmoth_urn.jpg
-Oracle:At the beginning of each player's precombat main phase, if Blinkmoth Urn is untapped, that player adds {C} to his or her mana pool for each artifact he or she controls.
+Oracle:At the beginning of each player's precombat main phase, if Blinkmoth Urn is untapped, that player adds {C} for each artifact they control.

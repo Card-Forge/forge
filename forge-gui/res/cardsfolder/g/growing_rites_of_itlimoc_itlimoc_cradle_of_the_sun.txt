@@ -15,8 +15,8 @@ ALTERNATE
 Name:Itlimoc, Cradle of the Sun
 ManaCost:no cost
 Types:Legendary Land
-A:AB$ Mana | Cost$ T | Produced$ G | Amount$ 1 | SpellDescription$ Add {G} to your mana pool.
-A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | References$ X | SpellDescription$ Add {G} to your mana pool for each creature you control.
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ 1 | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | References$ X | SpellDescription$ Add {G} for each creature you control.
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/itlimoc_cradle_of_the_sun.jpg
-Oracle:(Transforms from Growing Rites of Itlimoc.)\n{T}: Add {G} to your mana pool.\n{T}: Add {G} to your mana pool for each creature you control.
+Oracle:(Transforms from Growing Rites of Itlimoc.)\n{T}: Add {G}.\n{T}: Add {G} for each creature you control.

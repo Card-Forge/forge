@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 T:Mode$ LandPlayed | ValidCard$ Land.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When you play another land, sacrifice CARDNAME.
 SVar:TrigSac:DB$Sacrifice | Defined$ Self
-A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/city_of_traitors.jpg
-Oracle:When you play another land, sacrifice City of Traitors.\n{T}: Add {C}{C} to your mana pool.
+Oracle:When you play another land, sacrifice City of Traitors.\n{T}: Add {C}{C}.

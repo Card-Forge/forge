@@ -1,25 +1,25 @@
 Name:Treasure Map
 ManaCost:2
 Types:Artifact
-A:AB$ Scry | Cost$ 1 T | ScryNum$ 1 | SubAbility$ DBLandmark | SpellDescription$ Scry 1. Put a landmark counter on CARDNAME. Then if there are three or more landmark counters on it, remove those counters, transform CARDNAME, and create three colorless Treasure artifact tokens with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+A:AB$ Scry | Cost$ 1 T | ScryNum$ 1 | SubAbility$ DBLandmark | SpellDescription$ Scry 1. Put a landmark counter on CARDNAME. Then if there are three or more landmark counters on it, remove those counters, transform CARDNAME, and create three colorless Treasure artifact tokens with "{T}, Sacrifice this artifact: Add one mana of any color."
 SVar:DBLandmark:DB$ PutCounter | Defined$ Self | CounterType$ LANDMARK | CounterNum$ 1 | SubAbility$ DBBranch
 SVar:DBBranch:DB$ Branch | BranchConditionSVar$ XMarksTheSpot | References$ XMarksTheSpot | TrueSubAbility$ DBRemoveCtrs
 SVar:DBRemoveCtrs:DB$ RemoveCounter | Defined$ Self | CounterType$ LANDMARK | CounterNum$ All | SubAbility$ DBTransform
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform  | SubAbility$ DBTreasureTokens
 SVar:DBTreasureTokens:DB$ Token | TokenAmount$ 3 | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAbilities$ ABTreasureMana | TokenAltImages$ c_treasure2,c_treasure3,c_treasure4 | References$ ABTreasureMana
-SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color to your mana pool.
+SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
 SVar:XMarksTheSpot:Count$Valid Card.Self+counters_GE3_LANDMARK
 AlternateMode:DoubleFaced
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treasure_map.jpg
-Oracle:{1}, {T}: Scry 1. Put a landmark counter on Treasure Map. Then if there are three or more landmark counters on it, remove those counters, transform Treasure Map, and create three colorless Treasure artifact tokens with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+Oracle:{1}, {T}: Scry 1. Put a landmark counter on Treasure Map. Then if there are three or more landmark counters on it, remove those counters, transform Treasure Map, and create three colorless Treasure artifact tokens with "{T}, Sacrifice this artifact: Add one mana of any color."
 
 ALTERNATE
 
 Name:Treasure Cove
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Draw | Cost$ T Sac<1/Treasure> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treasure_cove.jpg
-Oracle:(Transforms from Treasure Map.)\n{T}: Add {C} to your mana pool.\n{T}, Sacrifice a Treasure: Draw a card.
+Oracle:(Transforms from Treasure Map.)\n{T}: Add {C}.\n{T}, Sacrifice a Treasure: Draw a card.

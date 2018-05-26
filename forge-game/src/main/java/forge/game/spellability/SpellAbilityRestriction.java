@@ -212,22 +212,25 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
     public final boolean checkZoneRestrictions(final Card c, final SpellAbility sa) {
 
         final Player activator = sa.getActivatingPlayer();
-        final Zone cardZone = activator.getGame().getZoneOf(c);
+        final Zone cardZone = c.getLastKnownZone();
         Card cp = c;
 
         // for Bestow need to check the animated State
         if (sa.isSpell() && sa.hasParam("Bestow")) {
             // already bestowed or in battlefield, no need to check for spell
-            if (c.isBestowed() || c.isInZone(ZoneType.Battlefield)) {
+            if (c.isInZone(ZoneType.Battlefield)) {
                 return false;
             }
 
-            if (!c.isLKI()) {
-                cp = CardUtil.getLKICopy(c);
-            }
+            // if card is lki and bestowed, then do nothing there, it got already animated
+            if (!(c.isLKI() && c.isBestowed())) {
+                if (!c.isLKI()) {
+                    cp = CardUtil.getLKICopy(c);
+                }
 
-            if (!cp.isBestowed()) {
-                cp.animateBestow();
+                if (!cp.isBestowed()) {
+                    cp.animateBestow(!cp.isLKI());
+                }
             }
         }
 
@@ -377,6 +380,12 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
     
     public final boolean checkOtherRestrictions(final Card c, final SpellAbility sa, final Player activator) {
         final Game game = activator.getGame();
+
+        // legendary sorcery
+        if (c.isSorcery() && c.getType().isLegendary() &&
+                CardLists.getValidCards(activator.getCardsIn(ZoneType.Battlefield), "Creature.Legendary,Planeswalker.Legendary", c.getController(), c).isEmpty()) {
+            return false;
+        }
 
         if (this.getCardsInHand() != -1) {
             if (activator.getCardsIn(ZoneType.Hand).size() != this.getCardsInHand()) {

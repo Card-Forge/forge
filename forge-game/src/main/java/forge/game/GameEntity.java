@@ -24,6 +24,7 @@ import forge.game.card.CardDamageMap;
 import forge.game.card.CounterType;
 import forge.game.event.GameEventCardAttachment;
 import forge.game.event.GameEventCardAttachment.AttachMethod;
+import forge.game.keyword.Keyword;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.util.collect.FCollection;
@@ -275,6 +276,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
 
     public abstract boolean hasKeyword(final String keyword);
+    public abstract boolean hasKeyword(final Keyword keyword);
 
     // GameEntities can now be Enchanted
     public final CardCollectionView getEnchantedBy(boolean allowModify) {

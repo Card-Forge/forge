@@ -6,6 +6,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
+import forge.deck.io.CardThemedLDAIO;
 import forge.deck.io.CardThemedMatrixIO;
 import forge.deck.io.DeckStorage;
 import forge.game.GameFormat;
@@ -25,6 +26,8 @@ import java.util.*;
 public final class CardRelationMatrixGenerator {
 
     public static HashMap<String,HashMap<String,List<Map.Entry<PaperCard,Integer>>>> cardPools = new HashMap<>();
+
+    public static Map<String, Map<String,List<List<String>>>> ldaPools = new HashMap();
     /**
         To ensure that only cards with at least 14 connections (as 14*4+4=60) are included in the card based deck
         generation pools
@@ -33,8 +36,8 @@ public final class CardRelationMatrixGenerator {
 
     public static boolean initialize(){
         List<String> formatStrings = new ArrayList<>();
-        formatStrings.add(FModel.getFormats().getStandard().getName());
-        formatStrings.add(FModel.getFormats().getModern().getName());
+/*        formatStrings.add(FModel.getFormats().getStandard().getName());
+        formatStrings.add(FModel.getFormats().getModern().getName());*/
         formatStrings.add(DeckFormat.Commander.toString());
 
         for (String formatString : formatStrings){
@@ -42,7 +45,6 @@ public final class CardRelationMatrixGenerator {
                 return false;
             }
         }
-
         return true;
     }
 

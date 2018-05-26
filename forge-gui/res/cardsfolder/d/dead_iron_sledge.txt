@@ -1,7 +1,7 @@
 Name:Dead-Iron Sledge
 ManaCost:1
 Types:Artifact Equipment
-K:Equip 2
+K:Equip:2
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Creature.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever equipped creature blocks or becomes blocked by a creature, destroy both creatures.
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature.AttachedBy | ValidBlocker$ Creature | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever equipped creature blocks or becomes blocked by a creature, destroy both creatures.
 SVar:TrigDestroy:DB$Destroy | Defined$ TriggeredAttacker | SubAbility$ DBDestroy
@@ -9,4 +9,4 @@ SVar:DBDestroy:DB$Destroy | Defined$ TriggeredBlocker
 SVar:RemAIDeck:True
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dead_iron_sledge.jpg
-Oracle:Whenever equipped creature blocks or becomes blocked by a creature, destroy both creatures.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
+Oracle:Whenever equipped creature blocks or becomes blocked by a creature, destroy both creatures.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)

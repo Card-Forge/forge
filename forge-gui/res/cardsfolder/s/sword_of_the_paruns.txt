@@ -1,7 +1,7 @@
 Name:Sword of the Paruns
 ManaCost:4
 Types:Artifact Equipment
-K:Equip 3
+K:Equip:3
 S:Mode$ Continuous | Affected$ Creature.tapped+YouCtrl | AddPower$ 2 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ As long as equipped creature is tapped, tapped creatures you control get +2/+0.
 S:Mode$ Continuous | Affected$ Creature.untapped+YouCtrl | AddToughness$ 2 | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ As long as equipped creature is untapped, untapped creatures you control get +0/+2.
 A:AB$ TapOrUntap | Cost$ 3 | Defined$ Equipped | IsPresent$ Card.EquippedBy | SpellDescription$ You may tap or untap equipped creature.

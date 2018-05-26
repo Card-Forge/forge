@@ -113,6 +113,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 "Deck Conformance",
                 "Enforces deck legality relevant to each environment (minimum deck sizes, max card count etc)."),
                 1);
+        lstSettings.addItem(new BooleanSetting(FPref.PERFORMANCE_MODE,
+                        "Performance Mode",
+                        "Disables additional static abilities checks to speed up the game engine. (Warning: breaks some 'as if had flash' scenarios when casting cards owned by opponents)."),
+                1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_CLONE_MODE_SOURCE,
                 "Clones Use Original Card Art",
                 "When enabled clones will use their original art instead of the cloned card's art."),

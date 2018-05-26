@@ -8,6 +8,7 @@ import forge.card.mana.ManaCost;
 import forge.game.Direction;
 import forge.game.GameEntityView;
 import forge.game.combat.Combat;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
@@ -978,11 +979,11 @@ public class CardView extends GameEntityView {
         }
         void updateKeywords(Card c, CardState state) {
             c.updateKeywordsCache(state);
-            set(TrackableProperty.HasDeathtouch, c.hasKeyword("Deathtouch", state));
-            set(TrackableProperty.HasHaste, c.hasKeyword("Haste", state));
-            set(TrackableProperty.HasInfect, c.hasKeyword("Infect", state));
-            set(TrackableProperty.HasStorm, c.hasKeyword("Storm", state));
-            set(TrackableProperty.HasTrample, c.hasKeyword("Trample", state));
+            set(TrackableProperty.HasDeathtouch, c.hasKeyword(Keyword.DEATHTOUCH, state));
+            set(TrackableProperty.HasHaste, c.hasKeyword(Keyword.HASTE, state));
+            set(TrackableProperty.HasInfect, c.hasKeyword(Keyword.INFECT, state));
+            set(TrackableProperty.HasStorm, c.hasKeyword(Keyword.STORM, state));
+            set(TrackableProperty.HasTrample, c.hasKeyword(Keyword.TRAMPLE, state));
             set(TrackableProperty.BlockAdditional, c.getAmountOfKeyword("CARDNAME can block an additional creature each combat.", state));
             updateAbilityText(c, state);
         }

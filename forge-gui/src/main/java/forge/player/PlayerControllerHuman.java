@@ -280,7 +280,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             map.put(null, damageDealt);
         } else {
             final List<CardView> vBlockers = CardView.getCollection(blockers);
-            if ((attacker.hasKeyword("Trample") && defender != null) || (blockers.size() > 1)) {
+            if ((attacker.hasKeyword(Keyword.TRAMPLE) && defender != null) || (blockers.size() > 1)) {
                 final CardView vAttacker = CardView.get(attacker);
                 final GameEntityView vDefender = GameEntityView.get(defender);
                 final Map<CardView, Integer> result = getGui().assignDamage(vAttacker, vBlockers, damageDealt,
@@ -1710,8 +1710,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final PaperCard cp = FModel.getMagicDb().getCommonCards().getCard(cardFace.getName());
             // the Card instance for test needs a game to be tested
             final Card instanceForPlayer = Card.fromPaperCard(cp, player);
+            // TODO need the valid check be done against the CardFace?
             if (instanceForPlayer.isValid(valid, sa.getHostCard().getController(), sa.getHostCard(), sa)) {
-                return cp.getName();
+                // it need to return name for card face
+                return cardFace.getName();
             }
         }
     }
@@ -1993,6 +1995,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 fstream.close();
             } catch (final FileNotFoundException fnfe) {
                 SOptionPane.showErrorDialog("File not found: " + filename);
+                return;
             } catch (final Exception e) {
                 SOptionPane.showErrorDialog("Error loading battle setup file!");
                 return;
@@ -2044,14 +2047,32 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
          */
         @Override
         public void addCountersToPermanent() {
+            modifyCountersOnPermanent(false);
+        }
+
+        /*
+         * (non-Javadoc)
+         *
+         * @see forge.player.IDevModeCheats#removeCountersToPermanent()
+         */
+        @Override
+        public void removeCountersFromPermanent() {
+            modifyCountersOnPermanent(true);
+        }
+
+        public void modifyCountersOnPermanent(boolean subtract) {
+            final String titleMsg = subtract ? "Remove counters from which card?" : "Add counters to which card?";
             final CardCollectionView cards = game.getCardsIn(ZoneType.Battlefield);
             final Card card = game
-                    .getCard(getGui().oneOrNone("Add counters to which card?", CardView.getCollection(cards)));
+                    .getCard(getGui().oneOrNone(titleMsg, CardView.getCollection(cards)));
             if (card == null) {
                 return;
             }
 
-            final CounterType counter = getGui().oneOrNone("Which type of counter?", CounterType.values);
+            final ImmutableList<CounterType> counters = subtract ? ImmutableList.copyOf(card.getCounters().keySet())
+                : CounterType.values;
+
+            final CounterType counter = getGui().oneOrNone("Which type of counter?", counters);
             if (counter == null) {
                 return;
             }
@@ -2061,7 +2082,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 return;
             }
 
-            card.addCounter(counter, count, card, false);
+            if (subtract) {
+                card.subtractCounter(counter, count);
+            } else {
+                card.addCounter(counter, count, card, false);
+            }
+
         }
 
         /*
@@ -2271,7 +2297,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                             if (forgeCard.isPermanent() && !forgeCard.isAura()) {
                                 if (forgeCard.isCreature()) {
                                     if (!repeatLast) {
-                                        if (forgeCard.hasKeyword("Haste")) {
+                                        if (forgeCard.hasKeyword(Keyword.HASTE)) {
                                             lastSummoningSickness = true;
                                         } else {
                                             lastSummoningSickness = getGui().confirm(forgeCard.getView(),

@@ -13,6 +13,7 @@ import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostSacrifice;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -38,6 +39,12 @@ public class AttachAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
+
+        // TODO: improve this so that the AI can use a flash aura buff as a means of killing opposing creatures
+        // and gaining card advantage
+        if (source.hasKeyword("MayFlashSac") && !ai.couldCastSorcery(sa)) {
+            return false;
+        }
 
         if (abCost != null) {
             // AI currently disabled for these costs
@@ -88,7 +95,7 @@ public class AttachAi extends SpellAbilityAi {
             final CardCollection targets = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return !(c.hasProtectionFrom(source) || c.hasKeyword("Shroud") || c.hasKeyword("Hexproof"));
+                    return !(c.hasProtectionFrom(source) || c.hasKeyword(Keyword.SHROUD) || c.hasKeyword(Keyword.HEXPROOF));
                 }
             });
             if (targets.isEmpty()) {
@@ -249,7 +256,7 @@ public class AttachAi extends SpellAbilityAi {
             @Override
             public boolean apply(final Card c) {
                 // Don't do Untapped Vigilance cards
-                if (c.isCreature() && c.hasKeyword("Vigilance") && c.isUntapped()) {
+                if (c.isCreature() && c.hasKeyword(Keyword.VIGILANCE) && c.isUntapped()) {
                     return false;
                 }
 
@@ -391,7 +398,7 @@ public class AttachAi extends SpellAbilityAi {
         	List<Card> evenBetterList = CardLists.filter(betterList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return c.hasKeyword("Indestructible") || c.hasKeyword("Hexproof");
+                    return c.hasKeyword(Keyword.INDESTRUCTIBLE) || c.hasKeyword(Keyword.HEXPROOF);
                 }
             });
         	if (!evenBetterList.isEmpty()) {
@@ -478,23 +485,23 @@ public class AttachAi extends SpellAbilityAi {
         for (Card card : list) {
             int cardPriority = 0;
             // Prefer Evasion
-            if (card.hasKeyword("Trample")) {
+            if (card.hasKeyword(Keyword.TRAMPLE)) {
                 cardPriority += 10;
             }
-            if (card.hasKeyword("Menace")) {
+            if (card.hasKeyword(Keyword.MENACE)) {
                 cardPriority += 10;
             }
             // Avoid this for Sleepers Robe?
-            if (card.hasKeyword("Fear")) {
+            if (card.hasKeyword(Keyword.FEAR)) {
                 cardPriority += 15;
             }
-            if (card.hasKeyword("Flying")) {
+            if (card.hasKeyword(Keyword.FLYING)) {
                 cardPriority += 20;
             }
-            if (card.hasKeyword("Shadow")) {
+            if (card.hasKeyword(Keyword.SHADOW)) {
                 cardPriority += 30;
             }
-            if (card.hasKeyword("Horsemanship")) {
+            if (card.hasKeyword(Keyword.HORSEMANSHIP)) {
                 cardPriority += 40;
             }
             if (card.hasKeyword("Unblockable")) {
@@ -514,10 +521,10 @@ public class AttachAi extends SpellAbilityAi {
             if (card.getCurrentPower() <= 0) {
                 cardPriority = -100;
             }
-            if (card.hasKeyword("Defender")) {
+            if (card.hasKeyword(Keyword.DEFENDER)) {
                 cardPriority = -100;
             }
-            if (card.hasKeyword("Indestructible")) {
+            if (card.hasKeyword(Keyword.INDESTRUCTIBLE)) {
                 cardPriority += 15;
             }
             if (cardPriority > priority) {
@@ -719,7 +726,7 @@ public class AttachAi extends SpellAbilityAi {
             prefList = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    if (!c.hasKeyword("Indestructible") && (c.getLethalDamage() <= Math.abs(tgh))) {
+                    if (!c.hasKeyword(Keyword.INDESTRUCTIBLE) && (c.getLethalDamage() <= Math.abs(tgh))) {
                         return true;
                     }
 
@@ -1006,7 +1013,7 @@ public class AttachAi extends SpellAbilityAi {
                         if (isUsefulAttachKeyword(keyword, c, sa, pow)) {
                             return true;
                         }
-                        if (c.hasKeyword("Infect") && pow >= 2) {
+                        if (c.hasKeyword(Keyword.INFECT) && pow >= 2) {
                             // consider +2 power a significant bonus on Infect creatures
                             return true;
                         }
@@ -1034,7 +1041,7 @@ public class AttachAi extends SpellAbilityAi {
 	            prefList = CardLists.filter(prefList, new Predicate<Card>() {
 	                @Override
 	                public boolean apply(final Card c) {
-	                    return !c.isEnchanted() || c.hasKeyword("Hexproof");
+	                    return !c.isEnchanted() || c.hasKeyword(Keyword.HEXPROOF);
 	                }
 	            });
         	}
@@ -1311,6 +1318,22 @@ public class AttachAi extends SpellAbilityAi {
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
             return false;
         }
+
+        // Don't play if would choose a color the target is already protected from
+        if (sa.getHostCard().hasSVar("ChosenProtection")) {
+            CardCollectionView oppAllCards = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
+            String cc = ComputerUtilCard.getMostProminentColor(oppAllCards);
+            if (card.hasKeyword("Protection from " + cc.toLowerCase())) {
+                return false;
+            }
+            // Also don't play if it would destroy own Aura
+            for (Card c : card.getEnchantedBy(false)) {
+                if ((c.getController().equals(ai)) && (c.isOfColor(cc))) {
+                    return false;
+                }
+            }
+        }
+
         final boolean evasive = (keyword.equals("Unblockable") || keyword.equals("Fear")
                 || keyword.equals("Intimidate") || keyword.equals("Shadow")
                 || keyword.equals("Flying") || keyword.equals("Horsemanship")
@@ -1353,7 +1376,7 @@ public class AttachAi extends SpellAbilityAi {
                 return false;
             }
         } else if (keyword.equals("First Strike")) {
-            if (card.getNetCombatDamage() + powerBonus <= 0 || card.hasKeyword("Double Strike")
+            if (card.getNetCombatDamage() + powerBonus <= 0 || card.hasKeyword(Keyword.DOUBLE_STRIKE)
             		|| (!ComputerUtilCombat.canAttackNextTurn(card) && !CombatUtil.canBlock(card, true))) {
                 return false;
             }
@@ -1386,7 +1409,7 @@ public class AttachAi extends SpellAbilityAi {
                 return false;
             }
         } else if (keyword.equals("Reach")) {
-            if (card.hasKeyword("Flying") || !CombatUtil.canBlock(card, true)) {
+            if (card.hasKeyword(Keyword.FLYING) || !CombatUtil.canBlock(card, true)) {
                 return false;
             }
         } else if (keyword.endsWith("CARDNAME can block an additional creature each combat.")) {
@@ -1395,11 +1418,11 @@ public class AttachAi extends SpellAbilityAi {
                 return false;
             }
         } else if (keyword.equals("CARDNAME can attack as though it didn't have defender.")) {
-            if (!card.hasKeyword("Defender") || card.getNetCombatDamage() + powerBonus <= 0) {
+            if (!card.hasKeyword(Keyword.DEFENDER) || card.getNetCombatDamage() + powerBonus <= 0) {
                 return false;
             }
         } else if (keyword.equals("Shroud") || keyword.equals("Hexproof")) {
-            if (card.hasKeyword("Shroud") || card.hasKeyword("Hexproof")) {
+            if (card.hasKeyword(Keyword.SHROUD) || card.hasKeyword(Keyword.HEXPROOF)) {
                 return false;
             }
         } else if (keyword.equals("Defender")) {

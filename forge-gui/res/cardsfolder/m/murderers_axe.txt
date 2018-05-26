@@ -2,7 +2,7 @@ Name:Murderer's Axe
 ManaCost:4
 Types:Artifact Equipment
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Equipped creature gets +2/+2.
-K:Equip Discard<1/Card>
+K:Equip:Discard<1/Card>
 SVar:AIPreference:DiscardCost$Card
 SVar:RemRandomDeck:True
 DeckHas:Ability$Discard

@@ -23,7 +23,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
-import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
@@ -889,6 +888,7 @@ public class StaticEffect {
         String[] addHiddenKeywords = null;
         String addColors = null;
         boolean removeMayPlay = false;
+        boolean removeWithFlash = false;
 
         List<Player> mayLookAt = null;
 
@@ -963,6 +963,9 @@ public class StaticEffect {
         if (params.containsKey("MayPlay")) {
             removeMayPlay = true;
         }
+        if (params.containsKey("WithFlash")) {
+            removeWithFlash = true;
+        }
 
         if (params.containsKey("IgnoreEffectCost")) {
             for (final SpellAbility s : getSource().getSpellAbilities()) {
@@ -1019,7 +1022,7 @@ public class StaticEffect {
             if (params.containsKey("AddAbility") || params.containsKey("GainsAbilitiesOf")) {
                 for (final SpellAbility s : affectedCard.getSpellAbilities().threadSafeIterable()) {
                     if (s.isTemporary()) {
-                        affectedCard.removeSpellAbility(s);
+                        affectedCard.removeSpellAbility(s, false);
                     }
                 }
             }
@@ -1033,16 +1036,8 @@ public class StaticEffect {
             }
 
             // remove abilities
-            if (params.containsKey("RemoveAllAbilities")) {
-                for (final SpellAbility ab : affectedCard.getSpellAbilities()) {
-                    ab.setTemporarilySuppressed(false);
-                }
-                for (final StaticAbility stA : affectedCard.getStaticAbilities()) {
-                    stA.setTemporarilySuppressed(false);
-                }
-                for (final ReplacementEffect rE : affectedCard.getReplacementEffects()) {
-                    rE.setTemporarilySuppressed(false);
-                }
+            if (params.containsKey("RemoveAllAbilities") || params.containsKey("RemoveIntrinsicAbilities")) {
+                affectedCard.unSuppressCardTraits();
             }
 
             // remove Types
@@ -1064,6 +1059,9 @@ public class StaticEffect {
             }
             if (removeMayPlay) {
                 affectedCard.removeMayPlay(ability);
+            }
+            if (removeWithFlash) {
+                affectedCard.removeWithFlash(getTimestamp());
             }
 
             affectedCard.updateAbilityTextForView(); // only update keywords and text for view to avoid flickering

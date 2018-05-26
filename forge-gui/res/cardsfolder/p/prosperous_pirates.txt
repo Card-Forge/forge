@@ -2,9 +2,9 @@ Name:Prosperous Pirates
 ManaCost:4 U
 Types:Creature Human Pirate
 PT:3/4
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBTreasureTokens | TriggerDescription$ When CARDNAME enters the battlefield, create two colorless Treasure artifact tokens with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBTreasureTokens | TriggerDescription$ When CARDNAME enters the battlefield, create two colorless Treasure artifact tokens with "{T}, Sacrifice this artifact: Add one mana of any color."
 SVar:DBTreasureTokens:DB$ Token | TokenAmount$ 2 | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAbilities$ ABTreasureMana | TokenAltImages$ c_treasure2,c_treasure3,c_treasure4
-SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color to your mana pool.
+SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prosperous_pirates.jpg
 DeckHas:Ability$Token
-Oracle:When Prosperous Pirates enters the battlefield, create two colorless Treasure artifact tokens with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+Oracle:When Prosperous Pirates enters the battlefield, create two colorless Treasure artifact tokens with "{T}, Sacrifice this artifact: Add one mana of any color."

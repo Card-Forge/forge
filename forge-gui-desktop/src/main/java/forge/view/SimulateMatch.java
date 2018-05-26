@@ -160,7 +160,7 @@ public class SimulateMatch {
 
 
 
-    private static void simulateSingleMatch(final Match mc, int iGame, boolean outputGamelog) {
+    public static void simulateSingleMatch(final Match mc, int iGame, boolean outputGamelog) {
         final StopWatch sw = new StopWatch();
         sw.start();
 

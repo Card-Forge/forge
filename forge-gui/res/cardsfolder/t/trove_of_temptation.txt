@@ -2,9 +2,9 @@ Name:Trove of Temptation
 ManaCost:3 R
 Types:Enchantment
 K:Each opponent must attack you or a planeswalker you control with at least one creature each combat if able.
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBTreasureToken | TriggerDescription$ At the beginning of your end step, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBTreasureToken | TriggerDescription$ At the beginning of your end step, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color.
 SVar:DBTreasureToken:DB$ Token | TokenAmount$ 1 | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAbilities$ ABTreasureMana | TokenAltImages$ c_treasure2,c_treasure3,c_treasure4
-SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color to your mana pool.
+SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trove_of_temptation.jpg
-Oracle:Each opponent must attack you or a planeswalker you control with at least one creature each combat if able.\nAt the beginning of your end step, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool.
+Oracle:Each opponent must attack you or a planeswalker you control with at least one creature each combat if able.\nAt the beginning of your end step, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color.

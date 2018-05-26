@@ -865,9 +865,12 @@ public class ComputerUtilMana {
         // For combat tricks, always obey mana reservation
         if (curPhase == PhaseType.COMBAT_DECLARE_BLOCKERS || curPhase == PhaseType.CLEANUP) {
             AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_DECLBLK);
-        }
-        else {
-            if (AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_DECLBLK)) {
+        } else if (!(ai.getGame().getPhaseHandler().isPlayerTurn(ai)) && (curPhase == PhaseType.COMBAT_DECLARE_BLOCKERS || curPhase == PhaseType.CLEANUP)) {
+            AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK);
+            AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT);
+        } else {
+            if ((AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_DECLBLK)) ||
+                    (AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK))) {
                 // This mana source is held elsewhere for a combat trick.
                 return true;
             }
@@ -1115,7 +1118,9 @@ public class ComputerUtilMana {
                 final String xSvar = card.getSVar("X").startsWith("Count$xPaid") ? "PayX" : "X";
                 if (!sa.getSVar(xSvar).isEmpty() || card.hasSVar(xSvar)) {
                     if (xSvar.equals("PayX") && card.hasSVar(xSvar)) {
-                        manaToAdd = Integer.parseInt(card.getSVar(xSvar)) * cost.getXcounter(); // X
+                         // X SVar may end up being an empty string when copying a spell with no cost (e.g. Jhoira Avatar)
+                        String xValue = card.getSVar(xSvar);
+                        manaToAdd = xValue.isEmpty() ? 0 : Integer.parseInt(card.getSVar(xSvar)) * cost.getXcounter(); // X
                     } else {
                         manaToAdd = AbilityUtils.calculateAmount(card, xSvar, sa) * cost.getXcounter();
                     }

@@ -2,6 +2,6 @@ Name:Soldier of Fortune
 ManaCost:R
 Types:Creature Human Mercenary
 PT:1/1
-A:AB$ Shuffle | Cost$ R T | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player shuffles his or her library.
+A:AB$ Shuffle | Cost$ R T | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player shuffles their library.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldier_of_fortune.jpg
-Oracle:{R}, {T}: Target player shuffles his or her library.
+Oracle:{R}, {T}: Target player shuffles their library.

@@ -1,11 +1,11 @@
 Name:Temur Banner
 ManaCost:3
 Types:Artifact
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G} to your mana pool.
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U} to your mana pool.
-A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R} to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
 A:AB$ Draw | Cost$ G U R T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Green|Blue|Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temur_banner.jpg
-Oracle:{T}: Add {G}, {U}, or {R} to your mana pool.\n{G}{U}{R}, {T}, Sacrifice Temur Banner: Draw a card.
+Oracle:{T}: Add {G}, {U}, or {R}.\n{G}{U}{R}, {T}, Sacrifice Temur Banner: Draw a card.

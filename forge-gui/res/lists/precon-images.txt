@@ -37,10 +37,12 @@ https://downloads.cardforge.org/images/products/precons/brute_force.jpg
 https://downloads.cardforge.org/images/products/precons/call_of_blood.jpg
 https://downloads.cardforge.org/images/products/precons/carnival_of_blood.jpg
 https://downloads.cardforge.org/images/products/precons/chandra_pyrogenius.jpg
+https://downloads.cardforge.org/images/products/precons/chandra_bold_pyromancer.jpg
 https://downloads.cardforge.org/images/products/precons/cho-mannos_resolve.jpg
 https://downloads.cardforge.org/images/products/precons/code_of_the_orzhov.jpg
 https://downloads.cardforge.org/images/products/precons/concerted_effort.jpg
 https://downloads.cardforge.org/images/products/precons/conquering_hordes.jpg
+https://downloads.cardforge.org/images/products/precons/counter_surge.jpg
 https://downloads.cardforge.org/images/products/precons/critical_mass.jpg
 https://downloads.cardforge.org/images/products/precons/cruel_plots.jpg
 https://downloads.cardforge.org/images/products/precons/crusher.jpg
@@ -114,6 +116,7 @@ https://downloads.cardforge.org/images/products/precons/groundbreaker.jpg
 https://downloads.cardforge.org/images/products/precons/gruul_goliaths.jpg
 https://downloads.cardforge.org/images/products/precons/gruul_siege.jpg
 https://downloads.cardforge.org/images/products/precons/gruul_wilding.jpg
+https://downloads.cardforge.org/images/products/precons/hazoret_aggro.jpg
 https://downloads.cardforge.org/images/products/precons/heavy_hitters.jpg
 https://downloads.cardforge.org/images/products/precons/hit_the_ground_running.jpg
 https://downloads.cardforge.org/images/products/precons/hold_the_line.jpg
@@ -205,6 +208,7 @@ https://downloads.cardforge.org/images/products/precons/rot_from_within.jpg
 https://downloads.cardforge.org/images/products/precons/rumbler.jpg
 https://downloads.cardforge.org/images/products/precons/sacred_assault.jpg
 https://downloads.cardforge.org/images/products/precons/sacrificial_bam.jpg
+https://downloads.cardforge.org/images/products/precons/second_sun_control.jpg
 https://downloads.cardforge.org/images/products/precons/selesnya_surge.jpg
 https://downloads.cardforge.org/images/products/precons/selesnya_united.jpg
 https://downloads.cardforge.org/images/products/precons/shallow_graves.jpg
@@ -238,6 +242,7 @@ https://downloads.cardforge.org/images/products/precons/swarming_instinct.jpg
 https://downloads.cardforge.org/images/products/precons/sweet_revenge.jpg
 https://downloads.cardforge.org/images/products/precons/swift_justice.jpg
 https://downloads.cardforge.org/images/products/precons/take_to_the_sky.jpg
+https://downloads.cardforge.org/images/products/precons/teferi_timebender.jpg
 https://downloads.cardforge.org/images/products/precons/temur_avalanche.jpg
 https://downloads.cardforge.org/images/products/precons/tezzeret_master_of_metal.jpg
 https://downloads.cardforge.org/images/products/precons/the_adventurers.jpg
@@ -261,6 +266,7 @@ https://downloads.cardforge.org/images/products/precons/unstable_terrain.jpg
 https://downloads.cardforge.org/images/products/precons/untamed_wild.jpg
 https://downloads.cardforge.org/images/products/precons/vampire_onslaught.jpg
 https://downloads.cardforge.org/images/products/precons/vampiric_thirst.jpg
+https://downloads.cardforge.org/images/products/precons/vehicle_rush.jpg
 https://downloads.cardforge.org/images/products/precons/vicious_cycle.jpg
 https://downloads.cardforge.org/images/products/precons/voracious_rage.jpg
 https://downloads.cardforge.org/images/products/precons/vraska_scheming_gorgon.jpg

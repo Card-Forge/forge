@@ -1,8 +1,8 @@
-Name:Alara|RegionSize:9|Desc:As the boundaries between the shards dissolve, cultures clash and wars ensue.\nConsists of 55 events. Contains cards from ALA, CON, ARB, C13, and more.
+Name:Alara|RegionSize:9|Desc:As the boundaries between the shards dissolve, cultures clash and wars ensue.\nConsists of 54 events. Contains cards from ALA, CON, ARB, C13, and more.
 Name:Amonkhet|RegionSize:9|Desc:On the surface, Amonkhet seems like a marvelous place to live, but something unsettling and nefarious lurks behind the grand facade.\nConsists of 45 events. Contains cards from AKH, HOU, some C17, and Amonkhet Invocations.
 Name:Dominaria|RegionSize:9|Unreachable:True|Desc:
 Name:Innistrad|RegionSize:9|Desc:On this plane, humanity is terrorized by vampires, werewolves, zombies, and ghouls.\nConsists of 45 events. Contains cards from ISD, DKA, AVR, SOI, EMN, and C14.
-Name:Ixalan|RegionSize:9|Unreachable:True|Desc:
+Name:Ixalan|RegionSize:9|Desc:On Ixalan, the untamed jungles have hidden a coveted secret: Orazca, the city of gold, and rivals embark on a journey to claim the plane’s greatest fortune for themselves.\nConsists of 45 events. Contains cards from XLN, RIX.
 Name:Kaladesh|RegionSize:9|Desc:Kaladesh is a living work of art. Aether is inextricably woven into the world's culture of inspired invention.\nConsists of 45 events. Contains cards from KLD, AER, some C17, and Kaladesh Inventions.
 Name:Kamigawa|RegionSize:6|Unreachable:True|Desc:For hundreds of years, Kamigawa's denizens peacefully worshipped the spirits of their world. Then suddenly their gods attacked, forcing the world into brutal war.\nContains cards from CHK, BOK, and SOK.
 Name:Lorwyn-Shadowmoor|RegionSize:9|Desc:A sunny utopia with a thriving storybook community, or a battle-wrought land cursed to perpetual gloom.\nConsists of 72 events. Contains cards from LRW, MOR, SHM, EVE, CNS/CN2, and C14.

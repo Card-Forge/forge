@@ -41,4 +41,13 @@ public final class SpellAbilityPredicates extends CardTraitPredicates {
             }
         };
     }
+
+    public static final Predicate<SpellAbility> isChapter() {
+        return new Predicate<SpellAbility>() {
+            @Override
+            public boolean apply(final SpellAbility sa) {
+                return sa.isChapter();
+            }
+        };
+    }
 }

@@ -1,5 +1,0 @@
-[format]
-Name:Standard, Invasion
-Type:Historic
-Subtype:Standard
-Effective:2000-11-01

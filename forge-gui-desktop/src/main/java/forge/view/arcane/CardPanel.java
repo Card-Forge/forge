@@ -25,6 +25,7 @@ import forge.card.mana.ManaCost;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.keyword.Keyword;
 import forge.game.card.CounterType;
 import forge.gui.CardContainer;
 import forge.item.PaperCard;
@@ -434,7 +435,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             } else {
                 if (!card.isFaceDown()) { // no need to draw mana symbols on face down split cards (e.g. manifested)
                     PaperCard pc = StaticData.instance().getCommonCards().getCard(card.getName());
-                    int ofs = pc != null && Card.getCardForUi(pc).hasKeyword("Aftermath") ? -12 : 12;
+                    int ofs = pc != null && Card.getCardForUi(pc).hasKeyword(Keyword.AFTERMATH) ? -12 : 12;
 
                     drawManaCost(g, card.getCurrentState().getManaCost(), ofs);
                     drawManaCost(g, card.getAlternateState().getManaCost(), -ofs);

@@ -13,6 +13,7 @@ import forge.assets.ISkinImage;
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
 import forge.deck.generation.DeckGenPool;
+import forge.game.card.Card;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.util.collect.FCollection;
@@ -46,8 +47,18 @@ public class ConquestRegion {
 
     public ISkinImage getArt() {
         if (art == null) {
-            art = GuiBase.getInterface().getCardArt(cardPool.getCard(artCardName));
+            PaperCard pc = cardPool.getCard(artCardName);
+
+            if (pc == null) {
+                pc = FModel.getMagicDb().getCommonCards().getCard(artCardName);
+                if (!pc.getName().equals(artCardName) && Card.fromPaperCard(pc, null).hasAlternateState()) {
+                    art = GuiBase.getInterface().getCardArt(pc, true);
+                }
+            } else {
+                art = GuiBase.getInterface().getCardArt(pc);
+            }
         }
+
         return art;
     }
 

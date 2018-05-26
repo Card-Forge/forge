@@ -1,21 +1,21 @@
 Name:Storm the Vault
 ManaCost:2 U R
 Types:Legendary Enchantment
-T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ DBToken | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player this turn, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool.
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ DBToken | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player this turn, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAbilities$ ABTreasureMana | TokenAltImages$ c_treasure2,c_treasure3,c_treasure4
-SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color to your mana pool. 
+SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Artifact.YouCtrl | PresentCompare$ GE5 | Execute$ TrigTransform | TriggerDescription$ At the beginning of your end step, if you control five or more artifacts, transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_the_vault.jpg
-Oracle:Whenever one or more creatures you control deal combat damage to a player, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."\nAt the beginning of your end step, if you control five or more artifacts, transform Storm the Vault.
+Oracle:Whenever one or more creatures you control deal combat damage to a player, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."\nAt the beginning of your end step, if you control five or more artifacts, transform Storm the Vault.
 
 ALTERNATE
 
 Name:Vault of Catlacan
 Types:Legendary Land
-A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color to your mana pool. 
-A:AB$ Mana | Cost$ T | Produced$ U | Amount$ X | References$ X | SpellDescription$ Add {U} to your mana pool for each artifact you control.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+A:AB$ Mana | Cost$ T | Produced$ U | Amount$ X | References$ X | SpellDescription$ Add {U} for each artifact you control.
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vault_of_catlacan.jpg
-Oracle:(Transforms from Storm the Vault.)\n{T}: Add one mana of any color to your mana pool.\n{T}: Add {U} to your mana pool for each artifact you control.
+Oracle:(Transforms from Storm the Vault.)\n{T}: Add one mana of any color.\n{T}: Add {U} for each artifact you control.

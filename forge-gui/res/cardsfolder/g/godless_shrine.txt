@@ -4,4 +4,4 @@ Types:Land Plains Swamp
 K:ETBReplacement:Other:DBTap
 SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ PayLife<2> | UnlessPayer$ You | UnlessAI$ Shockland | StackDescription$ enters the battlefield tapped. | SpellDescription$ As CARDNAME enters the battlefield, you may pay 2 life. If you don't, CARDNAME enters the battlefield tapped.
 SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card96935.jpg
-Oracle:({T}: Add {W} or {B} to your mana pool.)\nAs Godless Shrine enters the battlefield, you may pay 2 life. If you don't, Godless Shrine enters the battlefield tapped.
+Oracle:({T}: Add {W} or {B}.)\nAs Godless Shrine enters the battlefield, you may pay 2 life. If you don't, Godless Shrine enters the battlefield tapped.

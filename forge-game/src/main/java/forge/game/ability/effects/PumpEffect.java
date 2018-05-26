@@ -30,9 +30,11 @@ public class PumpEffect extends SpellAbilityEffect {
     private static void applyPump(final SpellAbility sa, final Card applyTo,
             final int a, final int d, final List<String> keywords,
             final long timestamp) {
+        final Card host = sa.getHostCard();
         //if host is not on the battlefield don't apply
+        // Suspend should does Affect the Stack
         if (sa.hasParam("UntilLoseControlOfHost")
-                && !sa.getHostCard().isInPlay()) {
+                && !(host.isInPlay() || host.isInZone(ZoneType.Stack))) {
             return;
         }
         final Game game = sa.getActivatingPlayer().getGame();
@@ -45,15 +47,12 @@ public class PumpEffect extends SpellAbilityEffect {
                 redrawPT |= kw.contains("CARDNAME's power and toughness are switched");
             } else {
                 kws.add(kw);
-                if (kw.equals("Suspend") && !applyTo.hasSuspend()) {
-                    applyTo.setSuspend(true);
-                }
             }
         }
 
         applyTo.addTempPowerBoost(a);
         applyTo.addTempToughnessBoost(d);
-        applyTo.addChangedCardKeywords(kws, Lists.<String>newArrayList(), false, timestamp);
+        applyTo.addChangedCardKeywords(kws, Lists.<String>newArrayList(), false, false, timestamp);
         if (redrawPT)           {     applyTo.updatePowerToughnessForView();     }
         
         if (sa.hasParam("LeaveBattlefield")) {
@@ -252,7 +251,7 @@ public class PumpEffect extends SpellAbilityEffect {
             final String landtype = sa.getParam("DefinedLandwalk");
             final Card c = AbilityUtils.getDefinedCards(host, landtype, sa).get(0);
             for (String type : c.getType()) {
-                if (CardType.isALandType(type) || CardType.isABasicLandType(type)) {
+                if (CardType.isALandType(type)) {
                     keywords.add(type + "walk");
                 }
             }

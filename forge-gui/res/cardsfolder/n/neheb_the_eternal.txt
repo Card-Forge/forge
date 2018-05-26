@@ -3,9 +3,9 @@ ManaCost:3 R R
 Types:Legendary Creature Zombie Minotaur Warrior
 PT:4/6
 K:Afflict 3
-T:Mode$ Phase | Phase$ Main2 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ At the beginning of your postcombat main phase, add {R} to your mana pool for each 1 life your opponents have lost this turn.
+T:Mode$ Phase | Phase$ Main2 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ At the beginning of your postcombat main phase, add {R} for each 1 life your opponents have lost this turn.
 SVar:TrigMana:DB$Mana | Produced$ R | Amount$ X | References$ X
 SVar:X:Count$LifeOppsLostThisTurn
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/neheb_the_eternal.jpg
-Oracle:Afflict 3 (Whenever this creature becomes blocked, defending player loses 3 life.)\nAt the beginning of your postcombat main phase, add {R} to your mana pool for each 1 life your opponents have lost this turn.
+Oracle:Afflict 3 (Whenever this creature becomes blocked, defending player loses 3 life.)\nAt the beginning of your postcombat main phase, add {R} for each 1 life your opponents have lost this turn.

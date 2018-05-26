@@ -64,7 +64,7 @@ public class BoosterGenerator {
     }
 
     private static PaperCard generateFoilCard(List<PaperCard> cardList) {
-        Collections.shuffle(cardList);
+        Collections.shuffle(cardList, MyRandom.getRandom());
         return StaticData.instance().getCommonCards().getFoiled(cardList.get(0));
     }
 
@@ -326,7 +326,82 @@ public class BoosterGenerator {
             result.addAll(foilCardGeneratedAndHeld);
         }
 
+        // Guaranteed cards, e.g. Dominaria guaranteed legendary creatures
+        if (edition != null) {
+            String boosterMustContain = edition.getBoosterMustContain();
+            if (!boosterMustContain.isEmpty()) {
+                ensureGuaranteedCardInBooster(result, template, boosterMustContain);
+            }
+        }
+
         return result;
+    }
+
+    private static void ensureGuaranteedCardInBooster(List<PaperCard> result, SealedProduct.Template template, String boosterMustContain) {
+        // First, see if there's already a card of the given type
+        String[] types = TextUtil.split(boosterMustContain, ' ');
+        boolean alreadyHaveCard = false;
+        for (PaperCard pc : result) {
+            boolean cardHasAllTypes = true;
+            for (String type : types) {
+                if (!pc.getRules().getType().hasStringType(type)) {
+                    cardHasAllTypes = false;
+                    break;
+                }
+            }
+            if (cardHasAllTypes) {
+                alreadyHaveCard = true;
+                break;
+            }
+        }
+
+        if (!alreadyHaveCard) {
+            // Create a list of all cards that match the criteria
+            List<PaperCard> possibleCards = Lists.newArrayList();
+            for (Pair<String, Integer> slot : template.getSlots()) {
+                String slotType = slot.getLeft();
+                String setCode = template.getEdition();
+                String sheetKey = StaticData.instance().getEditions().contains(setCode) ? slotType.trim() + " " + setCode
+                        : slotType.trim();
+
+                PrintSheet ps = getPrintSheet(sheetKey);
+                List<PaperCard> cardsInSlot = Lists.newArrayList(ps.toFlatList());
+
+                for (PaperCard pc : cardsInSlot) {
+                    boolean cardHasAllTypes = true;
+                    for (String type : types) {
+                        if (!pc.getRules().getType().hasStringType(type)) {
+                            cardHasAllTypes = false;
+                            break;
+                        }
+                    }
+                    if (cardHasAllTypes && !possibleCards.contains(pc)) {
+                        possibleCards.add(pc);
+                    }
+                }
+            }
+
+            if (!possibleCards.isEmpty()) {
+                PaperCard toAdd = Aggregates.random(possibleCards);
+                PaperCard toRepl = null;
+                CardRarity tgtRarity = toAdd.getRarity();
+
+                // remove the first card of the same rarity, replace it with toAdd. Keep the foil state.
+                for (PaperCard repl : result) {
+                    if (repl.getRarity() == tgtRarity) {
+                        toRepl = repl;
+                        break;
+                    }
+                }
+                if (toRepl != null) {
+                    if (toRepl.isFoil()) {
+                        toAdd = StaticData.instance().getCommonCards().getFoiled(toAdd);
+                    }
+                    result.remove(toRepl);
+                    result.add(toAdd);
+                }
+            }
+        }
     }
 
     public static void addCardsFromExtraSheet(List<PaperCard> dest, String printSheetKey) {

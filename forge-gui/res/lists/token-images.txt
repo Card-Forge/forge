@@ -1,5 +1,6 @@
 # Tokens
 b_0_0_germ.jpg                         https://downloads.cardforge.org/images/tokens/b_0_0_germ.jpg
+b_0_1_cleric_dom.jpg                   https://downloads.cardforge.org/images/tokens/b_0_1_cleric_dom.jpg
 b_0_1_insect.jpg                       https://downloads.cardforge.org/images/tokens/b_0_1_insect.jpg
 b_0_1_serf.jpg                         https://downloads.cardforge.org/images/tokens/b_0_1_serf.jpg
 b_0_1_thrull.jpg                       https://downloads.cardforge.org/images/tokens/b_0_1_thrull.jpg
@@ -36,6 +37,7 @@ b_2_2_zombie_m11.jpg                   https://downloads.cardforge.org/images/to
 b_2_2_zombie_m13.jpg                   https://downloads.cardforge.org/images/tokens/b_2_2_zombie_m13.jpg
 b_2_2_zombie_m14.jpg                   https://downloads.cardforge.org/images/tokens/b_2_2_zombie_m14.jpg
 b_2_2_zombie_mbs.jpg                   https://downloads.cardforge.org/images/tokens/b_2_2_zombie_mbs.jpg
+b_2_2_zombie_knight.jpg                https://downloads.cardforge.org/images/tokens/b_2_2_zombie_knight.jpg
 b_2_4_spider.jpg                       https://downloads.cardforge.org/images/tokens/b_2_4_spider.jpg
 b_3_3_angel.jpg                        https://downloads.cardforge.org/images/tokens/b_3_3_angel.jpg
 b_3_3_kavu.jpg                         https://downloads.cardforge.org/images/tokens/b_3_3_kavu.jpg
@@ -44,15 +46,18 @@ b_5_5_demon.jpg                        https://downloads.cardforge.org/images/to
 b_5_5_demon_avr.jpg                    https://downloads.cardforge.org/images/tokens/b_5_5_demon_avr.jpg
 b_5_5_urami.jpg                        https://downloads.cardforge.org/images/tokens/b_5_5_urami.jpg
 b_5_5_zombie_giant.jpg                 https://downloads.cardforge.org/images/tokens/b_5_5_zombie_giant.jpg
+b_6_6_demon.jpg                        https://downloads.cardforge.org/images/tokens/b_6_6_demon.jpg
 b_6_6_wurm.jpg                         https://downloads.cardforge.org/images/tokens/b_6_6_wurm.jpg
 b_dx_dy_spirit.jpg                     https://downloads.cardforge.org/images/tokens/b_dx_dy_spirit.jpg
 b_x_x_demon.jpg                        https://downloads.cardforge.org/images/tokens/b_x_x_demon.jpg
 b_x_x_minion.jpg                       https://downloads.cardforge.org/images/tokens/b_x_x_minion.jpg
+b_x_x_nightmare_horror.jpg             https://downloads.cardforge.org/images/tokens/b_x_x_nightmare_horror.jpg
 b_x_x_vampire.jpg                      https://downloads.cardforge.org/images/tokens/b_x_x_vampire.jpg
 bg_1_1_worm.jpg                        https://downloads.cardforge.org/images/tokens/bg_1_1_worm.jpg
 br_1_1_minor_demon.jpg                 https://downloads.cardforge.org/images/tokens/br_1_1_minor_demon.jpg
 br_3_1_graveborn.jpg                   https://downloads.cardforge.org/images/tokens/br_3_1_graveborn.jpg
 br_5_5_elemental.jpg                   https://downloads.cardforge.org/images/tokens/br_5_5_elemental.jpg
+c_0_0_construct.jpg                    https://downloads.cardforge.org/images/tokens/c_0_0_construct.jpg
 c_0_1_eldrazi_spawn.jpg                https://downloads.cardforge.org/images/tokens/c_0_1_eldrazi_spawn.jpg
 c_0_1_eldrazi_spawn2.jpg               https://downloads.cardforge.org/images/tokens/c_0_1_eldrazi_spawn2.jpg
 c_0_1_eldrazi_spawn3.jpg               https://downloads.cardforge.org/images/tokens/c_0_1_eldrazi_spawn3.jpg
@@ -123,6 +128,9 @@ g_1_1_plant.jpg                        https://downloads.cardforge.org/images/to
 g_1_1_saproling.jpg                    https://downloads.cardforge.org/images/tokens/g_1_1_saproling.jpg
 g_1_1_saproling_10e.jpg                https://downloads.cardforge.org/images/tokens/g_1_1_saproling_10e.jpg
 g_1_1_saproling_ala.jpg                https://downloads.cardforge.org/images/tokens/g_1_1_saproling_ala.jpg
+g_1_1_saproling_dom.jpg                https://downloads.cardforge.org/images/tokens/g_1_1_saproling_dom.jpg
+g_1_1_saproling2_dom.jpg               https://downloads.cardforge.org/images/tokens/g_1_1_saproling2_dom.jpg
+g_1_1_saproling3_dom.jpg               https://downloads.cardforge.org/images/tokens/g_1_1_saproling3_dom.jpg
 g_1_1_saproling_m12.jpg                https://downloads.cardforge.org/images/tokens/g_1_1_saproling_m12.jpg
 g_1_1_saproling_m13.jpg                https://downloads.cardforge.org/images/tokens/g_1_1_saproling_m13.jpg
 g_1_1_saproling_m14.jpg                https://downloads.cardforge.org/images/tokens/g_1_1_saproling_m14.jpg
@@ -209,6 +217,7 @@ r_1_1_elemental_m14.jpg                https://downloads.cardforge.org/images/to
 r_1_1_goblin.jpg                       https://downloads.cardforge.org/images/tokens/r_1_1_goblin.jpg
 r_1_1_goblin_10e.jpg                   https://downloads.cardforge.org/images/tokens/r_1_1_goblin_10e.jpg
 r_1_1_goblin_ala.jpg                   https://downloads.cardforge.org/images/tokens/r_1_1_goblin_ala.jpg
+r_1_1_goblin_dom.jpg                   https://downloads.cardforge.org/images/tokens/r_1_1_goblin_dom.jpg
 r_1_1_goblin_m13.jpg                   https://downloads.cardforge.org/images/tokens/r_1_1_goblin_m13.jpg
 r_1_1_goblin_nph.jpg                   https://downloads.cardforge.org/images/tokens/r_1_1_goblin_nph.jpg
 r_1_1_goblin_rav.jpg                   https://downloads.cardforge.org/images/tokens/r_1_1_goblin_rav.jpg
@@ -227,6 +236,7 @@ r_3_1_elemental.jpg                    https://downloads.cardforge.org/images/to
 r_3_1_elemental_bfz.jpg                https://downloads.cardforge.org/images/tokens/r_3_1_elemental_bfz.jpg
 r_3_1_elemental_bng.jpg                https://downloads.cardforge.org/images/tokens/r_3_1_elemental_bng.jpg
 r_3_1_elemental_dis.jpg                https://downloads.cardforge.org/images/tokens/r_3_1_elemental_dis.jpg
+r_3_1_elemental_dom.jpg                https://downloads.cardforge.org/images/tokens/r_3_1_elemental_dom.jpg
 r_3_1_elemental_haste.jpg              https://downloads.cardforge.org/images/tokens/r_3_1_elemental_haste.jpg
 r_3_1_elemental_mrd.jpg                https://downloads.cardforge.org/images/tokens/r_3_1_elemental_mrd.jpg
 r_3_1_elemental_shaman.jpg             https://downloads.cardforge.org/images/tokens/r_3_1_elemental_shaman.jpg
@@ -239,6 +249,7 @@ r_4_4_dragon.jpg                       https://downloads.cardforge.org/images/to
 r_4_4_giant.jpg                        https://downloads.cardforge.org/images/tokens/r_4_4_giant.jpg
 r_4_4_hellion.jpg                      https://downloads.cardforge.org/images/tokens/r_4_4_hellion.jpg
 r_4_4_hellion_m13.jpg                  https://downloads.cardforge.org/images/tokens/r_4_4_hellion_m13.jpg
+r_4_4_karox_bladewing.jpg              https://downloads.cardforge.org/images/tokens/r_4_4_karox_bladewing.jpg
 r_5_5_dragon.jpg                       https://downloads.cardforge.org/images/tokens/r_5_5_dragon.jpg
 r_5_5_dragon_10e.jpg                   https://downloads.cardforge.org/images/tokens/r_5_5_dragon_10e.jpg
 r_5_5_dragon_bfz.jpg                   https://downloads.cardforge.org/images/tokens/r_5_5_dragon_bfz.jpg
@@ -311,6 +322,7 @@ w_1_1_soldier_ala.jpg                  https://downloads.cardforge.org/images/to
 w_1_1_soldier_ally.jpg                 https://downloads.cardforge.org/images/tokens/w_1_1_soldier_ally.jpg
 w_1_1_soldier_bng.jpg                  https://downloads.cardforge.org/images/tokens/w_1_1_soldier_bng.jpg
 w_1_1_soldier_csp.jpg                  https://downloads.cardforge.org/images/tokens/w_1_1_soldier_csp.jpg
+w_1_1_soldier_dom.jpg                  https://downloads.cardforge.org/images/tokens/w_1_1_soldier_dom.jpg
 w_1_1_soldier_m10.jpg                  https://downloads.cardforge.org/images/tokens/w_1_1_soldier_m10.jpg
 w_1_1_soldier_m12.jpg                  https://downloads.cardforge.org/images/tokens/w_1_1_soldier_m12.jpg
 w_1_1_soldier_m13.jpg                  https://downloads.cardforge.org/images/tokens/w_1_1_soldier_m13.jpg
@@ -332,6 +344,8 @@ w_2_2_cat_m14.jpg                      https://downloads.cardforge.org/images/to
 w_2_2_griffin.jpg                      https://downloads.cardforge.org/images/tokens/w_2_2_griffin.jpg
 w_2_2_knight.jpg                       https://downloads.cardforge.org/images/tokens/w_2_2_knight.jpg
 w_2_2_knight_ally.jpg                  https://downloads.cardforge.org/images/tokens/w_2_2_knight_ally.jpg
+w_2_2_knight_dom.jpg                   https://downloads.cardforge.org/images/tokens/w_2_2_knight_dom.jpg
+w_2_2_knight2_dom.jpg                  https://downloads.cardforge.org/images/tokens/w_2_2_knight2_dom.jpg
 w_2_2_knight_first_strike.jpg          https://downloads.cardforge.org/images/tokens/w_2_2_knight_first_strike.jpg
 w_2_2_knight_rtr.jpg                   https://downloads.cardforge.org/images/tokens/w_2_2_knight_rtr.jpg
 w_2_2_reflection.jpg                   https://downloads.cardforge.org/images/tokens/w_2_2_reflection.jpg
@@ -355,6 +369,8 @@ wb_1_1_spirit_gtc.jpg                  https://downloads.cardforge.org/images/to
 wrg_8_8_beast.jpg                      https://downloads.cardforge.org/images/tokens/wrg_8_8_beast.jpg
 wu_1_1_bird.jpg                        https://downloads.cardforge.org/images/tokens/wu_1_1_bird.jpg
 
+
+
 # Emblems
 chandra_the_firebrand_effect.jpg       https://downloads.cardforge.org/images/tokens/chandra_the_firebrand_effect.jpg
 emblem_domri_rade.jpg                  https://downloads.cardforge.org/images/tokens/emblem_domri_rade.jpg
@@ -362,6 +378,7 @@ emblem_elspeth_knight_errant.jpg       https://downloads.cardforge.org/images/to
 emblem_elspeth_suns_champion.jpg       https://downloads.cardforge.org/images/tokens/emblem_elspeth_suns_champion.jpg
 emblem_garruk_caller_of_beasts.jpg     https://downloads.cardforge.org/images/tokens/emblem_garruk_caller_of_beasts.jpg
 emblem_gideon_ally_of_zendikar.jpg     https://downloads.cardforge.org/images/tokens/emblem_gideon_ally_of_zendikar.jpg
+emblem_jaya_ballard.jpg                https://downloads.cardforge.org/images/tokens/emblem_jaya_ballard.jpg
 emblem_kiora_master_of_the_depths.jpg  https://downloads.cardforge.org/images/tokens/emblem_kiora_master_of_the_depths.jpg
 emblem_kiora_the_crashing_wave.jpg     https://downloads.cardforge.org/images/tokens/emblem_kiora_the_crashing_wave.jpg
 emblem_koth_of_the_hammer.jpg          https://downloads.cardforge.org/images/tokens/emblem_koth_of_the_hammer.jpg
@@ -369,6 +386,7 @@ emblem_liliana_of_the_dark_realms.jpg  https://downloads.cardforge.org/images/to
 emblem_ob_nixilis_reignited.jpg        https://downloads.cardforge.org/images/tokens/emblem_ob_nixilis_reignited.jpg
 emblem_sorin_lord_of_innistrad.jpg     https://downloads.cardforge.org/images/tokens/emblem_sorin_lord_of_innistrad.jpg
 emblem_tamiyo_the_moon_sage.jpg        https://downloads.cardforge.org/images/tokens/emblem_tamiyo_the_moon_sage.jpg
+emblem_teferi_hero_of_dominaria.jpg    https://downloads.cardforge.org/images/tokens/emblem_teferi_hero_of_dominaria.jpg
 emblem_venser_the_sojourner.jpg        https://downloads.cardforge.org/images/tokens/emblem_venser_the_sojourner.jpg
 
 # Other

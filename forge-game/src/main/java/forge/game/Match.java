@@ -144,9 +144,10 @@ public class Match {
         final Multiset<RegisteredPlayer> won = HashMultiset.create(players.size());
         for (final GameOutcome go : gamesPlayedRo) {
             if (go.getWinningPlayer() == null) {
+                // Game hasn't finished yet. Exit early.
                 return won;
             }
-            won.add(go.getWinningPlayer().getRegisteredPlayer());
+            won.add(go.getWinningPlayer());
         }
         return won;
     }
@@ -157,7 +158,7 @@ public class Match {
 
     public RegisteredPlayer getWinner() {
         if (this.isMatchOver()) {
-            return gamesPlayedRo.get(gamesPlayedRo.size()-1).getWinningPlayer().getRegisteredPlayer();
+            return gamesPlayedRo.get(gamesPlayedRo.size()-1).getWinningPlayer();
         }
         return null;
     }
@@ -285,6 +286,8 @@ public class Match {
         int iWinner = -1;
         for (int i = 0; i < cntPlayers; i++) {
             Player fromGame = lastGame.getRegisteredPlayers().get(i);
+            RegisteredPlayer registered = fromGame.getRegisteredPlayer();
+
             // Add/Remove Cards lost via ChangeOwnership cards like Darkpact
             CardCollectionView lostOwnership = fromGame.getLostOwnership();
             CardCollectionView gainedOwnership = fromGame.getGainedOwnership();
@@ -294,10 +297,10 @@ public class Match {
                 for(Card c : lostOwnership) {
                     lostPaperOwnership.add((PaperCard)c.getPaperCard());
                 }
-                if (outcome.anteResult.containsKey(fromGame)) {
-                    outcome.anteResult.get(fromGame).addLost(lostPaperOwnership);
+                if (outcome.anteResult.containsKey(registered)) {
+                    outcome.anteResult.get(registered).addLost(lostPaperOwnership);
                 } else {
-                    outcome.anteResult.put(fromGame, GameOutcome.AnteResult.lost(lostPaperOwnership));
+                    outcome.anteResult.put(registered, GameOutcome.AnteResult.lost(lostPaperOwnership));
                 }
             }
 
@@ -306,11 +309,11 @@ public class Match {
                 for(Card c : gainedOwnership) {
                     gainedPaperOwnership.add((PaperCard)c.getPaperCard());
                 }
-                if (outcome.anteResult.containsKey(fromGame)) {
-                    outcome.anteResult.get(fromGame).addWon(gainedPaperOwnership);
+                if (outcome.anteResult.containsKey(registered)) {
+                    outcome.anteResult.get(registered).addWon(gainedPaperOwnership);
                 }
                 else {
-                    outcome.anteResult.put(fromGame, GameOutcome.AnteResult.won(gainedPaperOwnership));
+                    outcome.anteResult.put(registered, GameOutcome.AnteResult.won(gainedPaperOwnership));
                 }
             }
 
@@ -334,22 +337,23 @@ public class Match {
                 losses.add(toRemove);
             }
 
-            if (outcome.anteResult.containsKey(fromGame)) {
-                outcome.anteResult.get(fromGame).addLost(personalLosses);
+            if (outcome.anteResult.containsKey(registered)) {
+                outcome.anteResult.get(registered).addLost(personalLosses);
             }
             else {
-                outcome.anteResult.put(fromGame, GameOutcome.AnteResult.lost(personalLosses));
+                outcome.anteResult.put(registered, GameOutcome.AnteResult.lost(personalLosses));
             }
         }
 
         if (iWinner >= 0) {
             // Winner gains these cards always
             Player fromGame = lastGame.getRegisteredPlayers().get(iWinner);
-            if (outcome.anteResult.containsKey(fromGame)) {
-                outcome.anteResult.get(fromGame).addWon(losses);
+            RegisteredPlayer registered = fromGame.getRegisteredPlayer();
+            if (outcome.anteResult.containsKey(registered)) {
+                outcome.anteResult.get(registered).addWon(losses);
             }
             else {
-                outcome.anteResult.put(fromGame, GameOutcome.AnteResult.won(losses));
+                outcome.anteResult.put(registered, GameOutcome.AnteResult.won(losses));
             }
 
             if (rules.getGameType().canAddWonCardsMidGame()) {

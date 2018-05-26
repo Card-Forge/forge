@@ -7,6 +7,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.keyword.Keyword;
 
 public class AttackingBand {
     private CardCollection attackers = new CardCollection();
@@ -32,7 +33,7 @@ public class AttackingBand {
             return false;
         }
         
-        int bandingCreatures = CardLists.getKeyword(band, "Banding").size();
+        int bandingCreatures = CardLists.getKeyword(band, Keyword.BANDING).size();
         int neededBandingCreatures = shareDamage ? 1 : band.size() - 1;
         if (neededBandingCreatures <= bandingCreatures) {
             // For starting a band, only one can be non-Banding

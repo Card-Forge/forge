@@ -1,9 +1,9 @@
 Name:Heartless Pillage
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 2 B | ValidTgts$ Opponent | Mode$ TgtChoose | NumCards$ 2 | TgtPrompt$ Select target opponent | SubAbility$ DBTreasure | SpellDescription$ Target opponent discards two cards. Raid — If you attacked with a creature this turn, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+A:SP$ Discard | Cost$ 2 B | ValidTgts$ Opponent | Mode$ TgtChoose | NumCards$ 2 | TgtPrompt$ Select target opponent | SubAbility$ DBTreasure | SpellDescription$ Target opponent discards two cards. Raid — If you attacked with a creature this turn, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."
 SVar:DBTreasure:DB$ Token | ConditionCheckSVar$ RaidTest | ConditionSVarCompare$ GE1 | References$ RaidTest | TokenAmount$ 1 | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAbilities$ ABTreasureMana | TokenAltImages$ c_treasure2,c_treasure3,c_treasure4
-SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color to your mana pool.
+SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
 SVar:RaidTest:Count$AttackersDeclared
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heartless_pillage.jpg
-Oracle:Target opponent discards two cards.\nRaid — If you attacked with a creature this turn, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+Oracle:Target opponent discards two cards.\nRaid — If you attacked with a creature this turn, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."

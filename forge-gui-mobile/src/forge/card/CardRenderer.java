@@ -25,6 +25,7 @@ import forge.card.mana.ManaCost;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.keyword.Keyword;
 import forge.game.card.CounterType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
@@ -107,8 +108,12 @@ public class CardRenderer {
 
     //extract card art from the given card
     public static FImageComplex getCardArt(IPaperCard pc) {
+        return getCardArt(pc, false);
+    }
+
+    public static FImageComplex getCardArt(IPaperCard pc, boolean backFace) {
         CardType type = pc.getRules().getType();
-        return getCardArt(pc.getImageKey(false), pc.getRules().getSplitType() == CardSplitType.Split, type.isPlane() || type.isPhenomenon(),pc.getRules().getOracleText().contains("Aftermath"));
+        return getCardArt(pc.getImageKey(backFace), pc.getRules().getSplitType() == CardSplitType.Split, type.isPlane() || type.isPhenomenon(),pc.getRules().getOracleText().contains("Aftermath"));
     }
 
     public static FImageComplex getCardArt(CardView card) {
@@ -413,7 +418,7 @@ public class CardRenderer {
                         float dy = manaSymbolSize / 2 + Utils.scale(5);
 
                         PaperCard pc = StaticData.instance().getCommonCards().getCard(card.getName());
-                        if (Card.getCardForUi(pc).hasKeyword("Aftermath")){
+                        if (Card.getCardForUi(pc).hasKeyword(Keyword.AFTERMATH)){
                             dy *= -1; // flip card costs for Aftermath cards
                         }
 

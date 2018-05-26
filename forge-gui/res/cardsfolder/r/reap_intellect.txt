@@ -1,9 +1,9 @@
 Name:Reap Intellect
 ManaCost:X 2 U B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X 2 U B | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card.nonLand | ChangeNum$ X | References$ X | IsCurse$ True | Mandatory$ True | RememberChanged$ True | SubAbility$ DBExile | SpellDescription$ Target opponent reveals his or her hand. You choose X non-land cards from among them. Search that player's library, hand and graveyard for cards with the same name as those cards and exile them. Then, that player shuffles his or her library.
+A:SP$ ChangeZone | Cost$ X 2 U B | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card.nonLand | ChangeNum$ X | References$ X | IsCurse$ True | Mandatory$ True | RememberChanged$ True | SubAbility$ DBExile | SpellDescription$ Target opponent reveals their hand. You choose X non-land cards from among them. Search that player's library, hand and graveyard for cards with the same name as those cards and exile them. Then, that player shuffles their library.
 SVar:DBExile:DB$ ChangeZoneAll | Origin$ Hand,Library,Graveyard | Destination$ Exile | Defined$ Targeted | Search$ True | ChangeType$ Card.sharesNameWith Remembered | Shuffle$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reap_intellect.jpg
-Oracle:Target opponent reveals his or her hand. You choose up to X nonland cards from it and exile them. For each card exiled this way, search that player's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles his or her library.
+Oracle:Target opponent reveals their hand. You choose up to X nonland cards from it and exile them. For each card exiled this way, search that player's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles their library.

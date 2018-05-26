@@ -44,7 +44,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
     /** The temporarily suppressed. */
     protected boolean temporarilySuppressed = false;
 
-    private Map<String, String> sVars = Maps.newHashMap();
+    protected Map<String, String> sVars = Maps.newHashMap();
 
     /** Keys of descriptive (text) parameters. */
     private static final ImmutableList<String> descriptiveKeys = ImmutableList.<String>builder()
@@ -314,7 +314,11 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
                     list.addAll(p.getCardsIn(presentZone));
                 }
             }
-    
+            if (presentPlayer.equals("Any")) {
+                for (final Player p : this.getHostCard().getController().getAllies()) {
+                    list.addAll(p.getCardsIn(presentZone));
+                }
+            }
             list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard(), null);
     
             int right = 1;

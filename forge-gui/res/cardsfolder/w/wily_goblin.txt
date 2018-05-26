@@ -2,9 +2,9 @@ Name:Wily Goblin
 ManaCost:R R
 Types:Creature Goblin Pirate
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAltImages$ c_treasure2,c_treasure3,c_treasure4 | TokenAbilities$ ABMana | References$ ABMana
-SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
+SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color.
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wily_goblin.jpg
-Oracle:When Wily Goblin enters the battlefield, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+Oracle:When Wily Goblin enters the battlefield, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."

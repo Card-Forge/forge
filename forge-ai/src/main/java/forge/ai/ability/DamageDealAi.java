@@ -10,6 +10,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.cost.CostRemoveCounter;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -272,7 +273,7 @@ public class DamageDealAi extends DamageAiBase {
         final Player activator = sa.getActivatingPlayer();
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
-        List<Card> hPlay = CardLists.filter(getTargetableCards(ai, sa, pl, tgt, activator, source, game), CardPredicates.Presets.PLANESWALKERS);
+        List<Card> hPlay = getTargetableCards(ai, sa, pl, tgt, activator, source, game);
 
         List<Card> killables = CardLists.filter(hPlay, new Predicate<Card>() {
             @Override
@@ -742,7 +743,7 @@ public class DamageDealAi extends DamageAiBase {
             if (o instanceof Card) {
                 Card c = (Card) o;
                 final int restDamage = ComputerUtilCombat.predictDamageTo(c, dmg, saMe.getHostCard(), false);
-                if (!c.hasKeyword("Indestructible") && ComputerUtilCombat.getDamageToKill(c) <= restDamage) {
+                if (!c.hasKeyword(Keyword.INDESTRUCTIBLE) && ComputerUtilCombat.getDamageToKill(c) <= restDamage) {
                     if (c.getController().equals(ai)) {
                         return false;
                     } else {
@@ -942,7 +943,7 @@ public class DamageDealAi extends DamageAiBase {
         for (Card c : creatures) {
             int power = c.getNetPower();
             int toughness = c.getNetToughness();
-            boolean canDie = !(c.hasKeyword("Indestructible") || ComputerUtil.canRegenerate(c.getController(), c));
+            boolean canDie = !(c.hasKeyword(Keyword.INDESTRUCTIBLE) || ComputerUtil.canRegenerate(c.getController(), c));
 
             // Currently will target creatures with toughness 3+ (or power 5+) 
             // and only if the creature can actually die, do not "underdrain"

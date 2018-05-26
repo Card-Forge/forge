@@ -26,11 +26,13 @@ import forge.achievement.*;
 import forge.ai.AiProfileUtil;
 import forge.card.CardPreferences;
 import forge.card.CardType;
+import forge.deck.CardArchetypeLDAGenerator;
 import forge.deck.CardRelationMatrixGenerator;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.game.card.CardUtil;
+import forge.game.spellability.Spell;
 import forge.gauntlet.GauntletData;
 import forge.interfaces.IProgressBar;
 import forge.itemmanager.ItemManagerConfig;
@@ -168,6 +170,7 @@ public final class FModel {
                 new File(ForgeConstants.USER_FORMATS_DIR), preferences.getPrefBoolean(FPref.LOAD_HISTORIC_FORMATS)));
 
         magicDb.setStandardPredicate(formats.getStandard().getFilterRules());
+        magicDb.setBrawlPredicate(formats.get("Brawl").getFilterRules());
         magicDb.setModernPredicate(formats.getModern().getFilterRules());
 
         blocks = new StorageBase<>("Block definitions", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "blocks.txt", magicDb.getEditions()));
@@ -182,6 +185,8 @@ public final class FModel {
         }
         standardWorlds.putAll(customWorlds);
         worlds = new StorageBase<>("Quest worlds", null, standardWorlds);
+
+        Spell.setPerformanceMode(preferences.getPrefBoolean(FPref.PERFORMANCE_MODE));
 
         loadDynamicGamedata();
 
@@ -219,7 +224,11 @@ public final class FModel {
         //generate Deck Gen matrix
         if(!FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY)
                 &&FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_CARDBASED)) {
-            deckGenMatrixLoaded=CardRelationMatrixGenerator.initialize();
+            boolean commanderDeckGenMatrixLoaded=CardRelationMatrixGenerator.initialize();
+            deckGenMatrixLoaded=CardArchetypeLDAGenerator.initialize();
+            if(!commanderDeckGenMatrixLoaded){
+                deckGenMatrixLoaded=false;
+            }
         }
     }
 

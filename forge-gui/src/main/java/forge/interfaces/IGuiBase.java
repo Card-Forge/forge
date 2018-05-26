@@ -29,6 +29,7 @@ public interface IGuiBase {
     ISkinImage getSkinIcon(FSkinProp skinProp);
     ISkinImage getUnskinnedIcon(String path);
     ISkinImage getCardArt(PaperCard card);
+    ISkinImage getCardArt(PaperCard card, boolean backFace);
     ISkinImage createLayeredImage(FSkinProp background, String overlayFilename, float opacity);
     void showBugReportDialog(String title, String text, boolean showExitAppBtn);
     void showImageDialog(ISkinImage image, String message, String title);

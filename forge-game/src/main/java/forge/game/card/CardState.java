@@ -19,7 +19,6 @@ package forge.game.card;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.card.*;
 import forge.card.mana.ManaCost;
@@ -28,6 +27,7 @@ import forge.game.CardTraitBase;
 import forge.game.ForgeScript;
 import forge.game.GameObject;
 import forge.game.card.CardView.CardStateView;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
@@ -60,7 +60,7 @@ public class CardState extends GameObject {
     private String imageKey = "";
     private Map<String, String> sVars = Maps.newTreeMap();
 
-    private List<KeywordInterface> cachedKeywords = Lists.newArrayList();
+    private KeywordCollection cachedKeywords = new KeywordCollection();
     
     private CardRarity rarity = CardRarity.Unknown;
     private String setCode = CardEdition.UNKNOWN.getCode();
@@ -167,12 +167,19 @@ public class CardState extends GameObject {
     }
 
     public final Collection<KeywordInterface> getCachedKeywords() {
-        return cachedKeywords;
+        return cachedKeywords.getValues();
     }
 
-    public final void setCachedKeywords(final Collection<KeywordInterface> col) {
-        cachedKeywords.clear();
-        cachedKeywords.addAll(col);
+    public final Collection<KeywordInterface> getCachedKeyword(final Keyword keyword) {
+        return cachedKeywords.getValues(keyword);
+    }
+
+    public final void setCachedKeywords(final KeywordCollection col) {
+        cachedKeywords = col;
+    }
+
+    public final boolean hasKeyword(Keyword key) {
+        return cachedKeywords.contains(key);
     }
 
     public final Collection<KeywordInterface> getIntrinsicKeywords() {

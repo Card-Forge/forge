@@ -1,7 +1,7 @@
 Name:Hot Soup
 ManaCost:1
 Types:Artifact Equipment
-K:Equip 3
+K:Equip:3
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddSVar$ HotSoupDestroy | AddHiddenKeyword$ Unblockable | Description$ Equipped creature can't be blocked.
 SVar:HotSoupDestroy:SVar:DestroyWhenDamaged:True
 T:Mode$ DamageDoneOnce | ValidTarget$ Creature.EquippedBy | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ When equipped creature is dealt damage, destroy it.

@@ -48,7 +48,7 @@ public class ShuffleEffect extends SpellAbilityEffect {
         if (tgtPlayers.size() > 1) {
             sb.append(" their libraries");
         } else {
-            sb.append("s his or her library");
+            sb.append("s their library");
         }
         sb.append(".");
 

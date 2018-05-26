@@ -248,7 +248,7 @@ public abstract class PlayerController {
     }
 
     public AnteResult getAnteResult() {
-        return game.getOutcome().anteResult.get(player);
+        return game.getOutcome().anteResult.get(player.getRegisteredPlayer());
     }
 
     public abstract List<OptionalCostValue> chooseOptionalCosts(SpellAbility choosen, List<OptionalCostValue> optionalCostValues);

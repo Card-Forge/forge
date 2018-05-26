@@ -23,12 +23,12 @@ import forge.game.staticability.StaticAbilityLayer;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
-import forge.util.collect.FCollectionView;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import forge.game.ability.effects.AnimateEffectBase;
 
 /**
  * <p>
@@ -363,11 +363,11 @@ public class AnimateAi extends SpellAbilityAi {
         card.setSickness(hasOriginalCardSickness);
 
         // AF specific sa
-        int power = -1;
+        Integer power = null;
         if (sa.hasParam("Power")) {
             power = AbilityUtils.calculateAmount(source, sa.getParam("Power"), sa);
         }
-        int toughness = -1;
+        Integer toughness = null;
         if (sa.hasParam("Toughness")) {
             toughness = AbilityUtils.calculateAmount(source, sa.getParam("Toughness"), sa);
         }
@@ -453,59 +453,7 @@ public class AnimateAi extends SpellAbilityAi {
             sVars.addAll(Arrays.asList(sa.getParam("sVars").split(",")));
         }
 
-        // duplicating AnimateEffectBase.doAnimate
-        boolean removeSuperTypes = false;
-        boolean removeCardTypes = false;
-        boolean removeSubTypes = false;
-        boolean removeCreatureTypes = false;
-
-        if (sa.hasParam("OverwriteTypes")) {
-            removeSuperTypes = true;
-            removeCardTypes = true;
-            removeSubTypes = true;
-            removeCreatureTypes = true;
-        }
-
-        if (sa.hasParam("KeepSupertypes")) {
-            removeSuperTypes = false;
-        }
-
-        if (sa.hasParam("KeepCardTypes")) {
-            removeCardTypes = false;
-        }
-
-        if (sa.hasParam("RemoveSuperTypes")) {
-            removeSuperTypes = true;
-        }
-
-        if (sa.hasParam("RemoveCardTypes")) {
-            removeCardTypes = true;
-        }
-
-        if (sa.hasParam("RemoveSubTypes")) {
-            removeSubTypes = true;
-        }
-
-        if (sa.hasParam("RemoveCreatureTypes")) {
-            removeCreatureTypes = true;
-        }
-
-        if ((power != -1) || (toughness != -1)) {
-            card.addNewPT(power, toughness, timestamp);
-        }
-
-        if (!types.isEmpty() || !removeTypes.isEmpty() || removeCreatureTypes) {
-            card.addChangedCardTypes(types, removeTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
-                    removeCreatureTypes, timestamp);
-        }
-
-        card.addChangedCardKeywords(keywords, removeKeywords, sa.hasParam("RemoveAllAbilities"), timestamp);
-
-        for (final String k : hiddenKeywords) {
-            card.addHiddenExtrinsicKeyword(k);
-        }
-
-        card.addColor(finalDesc, !sa.hasParam("OverwriteColors"), timestamp);
+        AnimateEffectBase.doAnimate(card, sa, power, toughness, types, removeTypes, finalDesc, keywords, removeKeywords, hiddenKeywords, timestamp);
 
         // back to duplicating AnimateEffect.resolve
         // TODO will all these abilities/triggers/replacements/etc. lead to
@@ -515,10 +463,14 @@ public class AnimateAi extends SpellAbilityAi {
         boolean clearAbilities = sa.hasParam("OverwriteAbilities");
         boolean clearSpells = sa.hasParam("OverwriteSpells");
         boolean removeAll = sa.hasParam("RemoveAllAbilities");
+        boolean removeIntrinsic = sa.hasParam("RemoveIntrinsicAbilities");
 
         if (clearAbilities || clearSpells || removeAll) {
             for (final SpellAbility ab : card.getSpellAbilities()) {
-                if (removeAll || (ab.isAbility() && clearAbilities) || (ab.isSpell() && clearSpells)) {
+                if (removeAll
+                        || (ab.isIntrinsic() && removeIntrinsic && !ab.isBasicLandAbility())
+                        || (ab.isAbility() && clearAbilities)
+                        || (ab.isSpell() && clearSpells)) {
                     card.removeSpellAbility(ab);
                     removedAbilities.add(ab);
                 }
@@ -559,9 +511,11 @@ public class AnimateAi extends SpellAbilityAi {
 
         // suppress triggers from the animated card
         final List<Trigger> removedTriggers = Lists.newArrayList();
-        if (sa.hasParam("OverwriteTriggers") || removeAll) {
-            final FCollectionView<Trigger> triggersToRemove = card.getTriggers();
-            for (final Trigger trigger : triggersToRemove) {
+        if (sa.hasParam("OverwriteTriggers") || removeAll || removeIntrinsic) {
+            for (final Trigger trigger : card.getTriggers()) {
+                if (removeIntrinsic && !trigger.isIntrinsic()) {
+                    continue;
+                }
                 trigger.setSuppressed(true);
                 removedTriggers.add(trigger);
             }
@@ -597,9 +551,11 @@ public class AnimateAi extends SpellAbilityAi {
 
         // suppress static abilities from the animated card
         final List<StaticAbility> removedStatics = Lists.newArrayList();
-        if (sa.hasParam("OverwriteStatics") || removeAll) {
-            final FCollectionView<StaticAbility> staticsToRemove = card.getStaticAbilities();
-            for (final StaticAbility stAb : staticsToRemove) {
+        if (sa.hasParam("OverwriteStatics") || removeAll || removeIntrinsic) {
+            for (final StaticAbility stAb : card.getStaticAbilities()) {
+                if (removeIntrinsic && !stAb.isIntrinsic()) {
+                    continue;
+                }
                 stAb.setTemporarilySuppressed(true);
                 removedStatics.add(stAb);
             }
@@ -607,8 +563,11 @@ public class AnimateAi extends SpellAbilityAi {
 
         // suppress static abilities from the animated card
         final List<ReplacementEffect> removedReplacements = Lists.newArrayList();
-        if (sa.hasParam("OverwriteReplacements") || removeAll) {
+        if (sa.hasParam("OverwriteReplacements") || removeAll || removeIntrinsic) {
             for (final ReplacementEffect re : card.getReplacementEffects()) {
+                if (removeIntrinsic && !re.isIntrinsic()) {
+                    continue;
+                }
                 re.setTemporarilySuppressed(true);
                 removedReplacements.add(re);
             }

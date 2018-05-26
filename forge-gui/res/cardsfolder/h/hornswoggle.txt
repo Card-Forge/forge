@@ -3,6 +3,6 @@ ManaCost:2 U
 Types:Instant
 A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SubAbility$ DBTreasure | SpellDescription$ Counter target creature spell.
 SVar:DBTreasure:DB$ Token | TokenAmount$ 1 | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ You | TokenColors$ Colorless | TokenImage$ c treasure | TokenAbilities$ ABTreasureMana | TokenAltImages$ c_treasure2,c_treasure3,c_treasure4
-SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color to your mana pool.
+SVar:ABTreasureMana:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hornswoggle.jpg
-Oracle:Counter target creature spell. You create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+Oracle:Counter target creature spell. You create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."

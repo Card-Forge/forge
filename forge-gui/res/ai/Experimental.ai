@@ -196,6 +196,15 @@ EXPLORE_MAX_CMC_DIFF_TO_PUT_IN_GRAVEYARD=2
 # doesn't have a land in hand
 EXPLORE_NUM_LANDS_TO_STILL_NEED_MORE=3
 
+# MoJhoSto casual variant properties
+# How many lands the AI needs to have on the battlefield to begin considering activating Jhoira in MoJhoSto
+MOJHOSTO_NUM_LANDS_TO_ACTIVATE_JHOIRA=4
+# The chance that the AI will activate Jhoira instead of activating Momir
+MOJHOSTO_CHANCE_TO_PREFER_JHOIRA_OVER_MOMIR=50
+# The chance that the AI will activate Jhoira's copy random instant ability (per phase, the AI will generally
+# attempt this either in its upkeep or its draw phase or main 1).
+MOJHOSTO_CHANCE_TO_USE_JHOIRA_COPY_INSTANT=20
+
 # -- Experimental feature toggles which only exist until the testing procedure for the relevant --
 # -- features is over. These toggles will be removed later, or may be reintroduced under a --
 # -- different name if necessary --
@@ -205,6 +214,5 @@ AI_IN_DANGER_THRESHOLD=3
 # If set to the same value, AI will be predictable. If set to higher, AI will randomly pick a value between the two
 # for each evaluation, introducing some unpredictability.
 AI_IN_DANGER_MAX_THRESHOLD=12
-
 
 # <-- there are no options here at the moment -->

@@ -110,30 +110,40 @@ def initializeForgeCards():
 
 def initializeFormats():
 	formats = {}
-	formatLocation = os.path.join(resDir, 'blockdata', 'formats.txt')
+	formatLocation = os.path.join(resDir, 'formats')
 	print "Looking for formats in ", formatLocation
-	with open(formatLocation) as formatFile:
-		while formatFile:
-			try:
-				line = formatFile.readline().strip()
-				if not line:
-					# this should only happen when the file is done processing if we did things correctly?
-					break
+	for root, dirnames, filenames in os.walk(formatLocation):
+		for fileName in fnmatch.filter(filenames, '*.txt'):
+			if fileName not in ['standard.txt', 'Modern.txt']:
+				continue
 
-				format = line[1:-1]
-				formats[format] = {}
-			except:
-				break
+			with open(os.path.join(root, fileName)) as formatFile:
+				while formatFile:
+					try:
+						line = formatFile.readline().strip()
+						if not line:
+							# this should only happen when the file is done processing if we did things correctly?
+							break
+						if line == '[format]':
+							line = formatFile.readline().strip()
 
-			# Pull valid sets
-			while line != '':
-				line = formatFile.readline().strip()
-				if line.startswith('Sets:'):
-					sets = line.split(':')[1]
-					formats[format]['sets'] = sets.split(', ')
-				elif line.startswith('Banned'):
-					banned = line.split(':')[1]
-					formats[format]['banned'] = banned.split('; ')
+						if line.startswith('Name:'):
+							format = line.split(':')[1]
+							formats[format] = {}
+						else:
+							break
+					except:
+						break
+
+					# Pull valid sets
+					while line != '':
+						line = formatFile.readline().strip()
+						if line.startswith('Sets:'):
+							sets = line.split(':')[1]
+							formats[format]['sets'] = sets.split(', ')
+						elif line.startswith('Banned'):
+							banned = line.split(':')[1]
+							formats[format]['banned'] = banned.split('; ')
 
 	return formats
 

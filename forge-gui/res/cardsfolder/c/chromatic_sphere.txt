@@ -1,8 +1,8 @@
 Name:Chromatic Sphere
 ManaCost:1
 Types:Artifact
-A:AB$ Mana | Cost$ 1 T Sac<1/CARDNAME> | Produced$ Any | SubAbility$ DBDraw | SpellDescription$ Add one mana of any color to your mana pool. Draw a card.
+A:AB$ Mana | Cost$ 1 T Sac<1/CARDNAME> | Produced$ Any | SubAbility$ DBDraw | SpellDescription$ Add one mana of any color. Draw a card.
 SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chromatic_sphere.jpg
-Oracle:{1}, {T}, Sacrifice Chromatic Sphere: Add one mana of any color to your mana pool. Draw a card.
+Oracle:{1}, {T}, Sacrifice Chromatic Sphere: Add one mana of any color. Draw a card.

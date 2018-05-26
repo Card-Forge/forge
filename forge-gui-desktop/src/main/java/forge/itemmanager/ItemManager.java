@@ -40,6 +40,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
+import com.google.common.collect.Lists;
 import net.miginfocom.swing.MigLayout;
 
 import com.google.common.base.Predicate;
@@ -719,6 +720,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
      */
     @Override
     public void addItem(final T item, final int qty) {
+        if (this.isInfinite() && this.model.getOrderedList().contains(item)) {
+            return;
+        }
         this.pool.add(item, qty);
         if (this.isUnfiltered()) {
             this.model.addItem(item, qty);
@@ -736,6 +740,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
      */
     @Override
     public void addItems(final Iterable<Entry<T, Integer>> itemsToAdd) {
+        if (this.isInfinite() && this.model.getOrderedList().containsAll(Lists.newArrayList(itemsToAdd))) {
+            return;
+        }
         this.pool.addAll(itemsToAdd);
         if (this.isUnfiltered()) {
             this.model.addItems(itemsToAdd);
