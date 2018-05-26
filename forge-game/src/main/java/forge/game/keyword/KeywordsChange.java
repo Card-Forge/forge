@@ -37,6 +37,7 @@ public class KeywordsChange {
     private final List<KeywordInterface> removeKeywordInterfaces = Lists.newArrayList(); 
     private final List<String> removeKeywords = Lists.newArrayList();
     private boolean removeAllKeywords;
+    private boolean removeIntrinsicKeywords;
 
     /**
      * 
@@ -49,7 +50,8 @@ public class KeywordsChange {
     public KeywordsChange(
             final Iterable<String> keywordList,
             final Collection<String> removeKeywordList,
-            final boolean removeAll) {
+            final boolean removeAll,
+            final boolean removeIntrinsic) {
         if (keywordList != null) {
             this.keywords.addAll(keywordList);
         }
@@ -59,12 +61,14 @@ public class KeywordsChange {
         }
 
         this.removeAllKeywords = removeAll;
+        this.removeIntrinsicKeywords = removeIntrinsic;
     }
     
     public KeywordsChange(
             final Collection<KeywordInterface> keywordList,
             final Collection<KeywordInterface> removeKeywordInterfaces,
-            final boolean removeAll) {
+            final boolean removeAll,
+            final boolean removeIntrinsic) {
         if (keywordList != null) {
             this.keywords.insertAll(keywordList);
         }
@@ -74,6 +78,7 @@ public class KeywordsChange {
         }
 
         this.removeAllKeywords = removeAll;
+        this.removeIntrinsicKeywords = removeIntrinsic;
     }
 
     /**
@@ -109,6 +114,10 @@ public class KeywordsChange {
         return this.removeAllKeywords;
     }
 
+    public final boolean isRemoveIntrinsicKeywords() {
+        return this.removeIntrinsicKeywords;
+    }
+
     /**
      * @return whether this KeywordsChange doesn't have any effect.
      */
@@ -135,8 +144,9 @@ public class KeywordsChange {
     public final KeywordsChange merge(
             final Collection<KeywordInterface> keywordList,
             final Collection<KeywordInterface> removeKeywordList,
-            final boolean removeAll) {
-        KeywordsChange result = new KeywordsChange(keywordList, removeKeywordList, removeAll);
+            final boolean removeAll,
+            final boolean removeIntrinsic) {
+        KeywordsChange result = new KeywordsChange(keywordList, removeKeywordList, removeAll, removeIntrinsic);
         result.__merge(this);
         return result;
     }
@@ -144,8 +154,9 @@ public class KeywordsChange {
     public final KeywordsChange merge(
             final Iterable<String> keywordList,
             final Collection<String> removeKeywordList,
-            final boolean removeAll) {
-        KeywordsChange result = new KeywordsChange(keywordList, removeKeywordList, removeAll);
+            final boolean removeAll,
+            final boolean removeIntrinsic) {
+        KeywordsChange result = new KeywordsChange(keywordList, removeKeywordList, removeAll, removeIntrinsic);
         result.__merge(this);
         return result;
     }
@@ -156,6 +167,9 @@ public class KeywordsChange {
         removeKeywordInterfaces.addAll(other.removeKeywordInterfaces);
         if (other.removeAllKeywords) {
             removeAllKeywords = true;
+        }
+        if (other.removeIntrinsicKeywords) {
+            removeIntrinsicKeywords = true;
         }
     }
 }

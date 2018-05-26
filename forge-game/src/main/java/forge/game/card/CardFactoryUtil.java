@@ -79,6 +79,7 @@ public class CardFactoryUtil {
                 " | SpellDescription$ Add {" + strcolor + "}.";
         SpellAbility sa = AbilityFactory.getAbility(abString, state);
         sa.setIntrinsic(true); // always intristic
+        sa.setBasicLandAbility(true); // to exclude it from other suspress effects
         return sa;
     }
 

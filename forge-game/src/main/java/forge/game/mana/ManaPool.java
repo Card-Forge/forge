@@ -246,7 +246,7 @@ public class ManaPool implements Iterable<Mana> {
                     && host.getType().hasStringType(mana.getManaAbility().getAddsKeywordsType())) {
                 final long timestamp = sa.getHostCard().getGame().getNextTimestamp();
                 final List<String> kws = Arrays.asList(mana.getAddedKeywords().split(" & "));
-                host.addChangedCardKeywords(kws, new ArrayList<String>(), false, timestamp);
+                host.addChangedCardKeywords(kws, null, false, false, timestamp);
                 if (mana.addsKeywordsUntil()) {
                     final GameCommand untilEOT = new GameCommand() {
                         private static final long serialVersionUID = -8285169579025607693L;

@@ -106,6 +106,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean blessing = false;
     private Integer chapter = null;
 
+    private boolean basicLandAbility = false;
+
     private SplitSide splitSide = null;
     enum SplitSide { LEFT, RIGHT };
     private int totalManaSpent = 0;
@@ -752,6 +754,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public boolean isFlashBackAbility() {
         return flashBackAbility;
+    }
+
+    public void setBasicLandAbility(final boolean basicLandAbility0) {
+        basicLandAbility = basicLandAbility0;
+    }
+    public boolean isBasicLandAbility() {
+        return basicLandAbility && isIntrinsic();
     }
 
     /**
