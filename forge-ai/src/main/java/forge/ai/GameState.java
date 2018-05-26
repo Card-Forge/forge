@@ -60,6 +60,7 @@ public abstract class GameState {
 
     private final Map<Integer, Card> idToCard = new HashMap<>();
     private final Map<Card, Integer> cardToAttachId = new HashMap<>();
+    private final Map<Card, Integer> cardToEnchantPlayerId = new HashMap<>();
     private final Map<Card, Integer> markedDamage = new HashMap<>();
     private final Map<Card, List<String>> cardToChosenClrs = new HashMap<>();
     private final Map<Card, String> cardToChosenType = new HashMap<>();
@@ -265,6 +266,12 @@ public abstract class GameState {
                 newText.append("|Attaching:").append(c.getFortifying().getId());
             } else if (c.getEnchantingCard() != null) {
                 newText.append("|Attaching:").append(c.getEnchantingCard().getId());
+            }
+            if (c.getEnchantingPlayer() != null) {
+                // TODO: improve this for game states with more than two players
+                newText.append("|EnchantingPlayer:");
+                Player p = c.getEnchantingPlayer();
+                newText.append(p.getController().isAI() ? "AI" : "HUMAN");
             }
 
             if (c.getDamage() > 0) {
@@ -485,6 +492,7 @@ public abstract class GameState {
 
         idToCard.clear();
         cardToAttachId.clear();
+        cardToEnchantPlayerId.clear();
         cardToRememberedId.clear();
         cardToExiledWithId.clear();
         markedDamage.clear();
@@ -864,6 +872,16 @@ public abstract class GameState {
                 attacher.fortifyCard(attachedTo);
             }
         }
+
+        // Enchant players by ID
+        for(Entry<Card, Integer> entry : cardToEnchantPlayerId.entrySet()) {
+            // TODO: improve this for game states with more than two players
+            Card attacher = entry.getKey();
+            Game game = attacher.getGame();
+            Player attachedTo = entry.getValue() == TARGET_AI ? game.getPlayers().get(1) : game.getPlayers().get(0);
+
+            attacher.enchantEntity(attachedTo);
+        }
     }
 
     private void applyCountersToGameEntity(GameEntity entity, String counterString) {
@@ -1008,6 +1026,10 @@ public abstract class GameState {
                 } else if (info.startsWith("Attaching:")) {
                     int id = Integer.parseInt(info.substring(info.indexOf(':') + 1));
                     cardToAttachId.put(c, id);
+                } else if (info.startsWith("EnchantingPlayer:")) {
+                    // TODO: improve this for game states with more than two players
+                    String tgt = info.substring(info.indexOf(':') + 1);
+                    cardToEnchantPlayerId.put(c, tgt.equalsIgnoreCase("AI") ? TARGET_AI : TARGET_HUMAN);
                 } else if (info.startsWith("Ability:")) {
                     String abString = info.substring(info.indexOf(':') + 1).toLowerCase();
                     c.addSpellAbility(AbilityFactory.getAbility(abilityString.get(abString), c));
