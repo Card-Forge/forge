@@ -104,7 +104,7 @@ public class MillEffect extends SpellAbilityEffect {
             sb.append("s");
         }
         final String millPosition = sa.hasParam("FromBottom") ? "bottom" : "top";
-        sb.append(" from the " + millPosition + " of his or her library.");
+        sb.append(" from the " + millPosition + " of their library.");
 
 
         return sb.toString();

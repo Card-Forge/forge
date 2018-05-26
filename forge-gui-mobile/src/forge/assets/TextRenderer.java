@@ -45,6 +45,11 @@ public class TextRenderer {
         symbolLookup.put("P/B", FSkinImage.MANA_PHRYX_B);
         symbolLookup.put("P/R", FSkinImage.MANA_PHRYX_R);
         symbolLookup.put("P/G", FSkinImage.MANA_PHRYX_G);
+        symbolLookup.put("W/P", FSkinImage.MANA_PHRYX_W);
+        symbolLookup.put("U/P", FSkinImage.MANA_PHRYX_U);
+        symbolLookup.put("B/P", FSkinImage.MANA_PHRYX_B);
+        symbolLookup.put("R/P", FSkinImage.MANA_PHRYX_R);
+        symbolLookup.put("G/P", FSkinImage.MANA_PHRYX_G);
         for (int i = 0; i <= 20; i++) {
             symbolLookup.put(String.valueOf(i), FSkinImage.valueOf("MANA_" + i));
         }

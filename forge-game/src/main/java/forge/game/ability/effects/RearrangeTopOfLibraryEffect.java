@@ -51,7 +51,7 @@ public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
                 ret.append("that");
             }
 
-            ret.append(" player shuffle his or her library.");
+            ret.append(" player shuffle their library.");
         }
 
         return ret.toString();

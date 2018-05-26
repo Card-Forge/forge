@@ -35,7 +35,7 @@ public class DigEffect extends SpellAbilityEffect {
         sb.append(Lang.nounWithAmount(numToDig, "card")).append(" of ");
 
         if (tgtPlayers.contains(host.getController())) {
-            sb.append("his or her ");
+            sb.append("their ");
         }
         else {
             for (final Player p : tgtPlayers) {
