@@ -248,39 +248,31 @@ public enum DeckFormat {
                 return "too many commanders";
             }
 
-            // Bring values up to 100
-            min++;
-            max++;
-
             byte cmdCI = 0;
-            Boolean hasPartner = null;
             for (PaperCard pc : commanders) {
-                // For each commander decrement size by 1 (99 for 1, 98 for 2)
-                min--;
-                max--;
-
                 if (!isLegalCommander(pc.getRules())) {
                     return "has an illegal commander";
                 }
-
-                if (hasPartner != null && !hasPartner) {
-                    return "has an illegal commander partnership";
-                }
-
-                boolean isPartner = false;
-                for(String s : pc.getRules().getMainPart().getKeywords()) {
-                    if (s.equals("Partner")) {
-                        isPartner = true;
-                        break;
-                    }
-                }
-                if (hasPartner == null) {
-                    hasPartner = isPartner;
-                } else if (!isPartner) {
-                    return "has an illegal commander partnership";
-                }
-
                 cmdCI |= pc.getRules().getColorIdentity().getColor();
+            }
+
+            // special check for Partner
+            if (commanders.size() == 2) {
+                // two commander = 98 cards
+                min--;
+                max--;
+
+                PaperCard a = commanders.get(0);
+                PaperCard b = commanders.get(1);
+
+                if (a.getRules().hasKeyword("Partner") && b.getRules().hasKeyword("Partner")) {
+                    // normal partner commander
+                } else if (a.getName().equals(b.getRules().getParterWith())
+                        && b.getName().equals(a.getRules().getParterWith())) {
+                    // paired partner commander
+                } else {
+                    return "has an illegal commander partnership";
+                }
             }
 
             final List<PaperCard> erroneousCI = new ArrayList<PaperCard>();

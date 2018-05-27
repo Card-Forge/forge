@@ -10,7 +10,6 @@ import com.google.common.collect.Iterables;
 
 import forge.util.ComparableOp;
 import forge.util.PredicateString;
-import forge.util.PredicateString.StringOp;
 
 /**
  * Filtering conditions specific for CardRules class, defined here along with
@@ -558,6 +557,13 @@ public final class CardRulesPredicates {
             }
         };
 
+        public static final Predicate<CardRules> CAN_BE_COMMANDER = new Predicate<CardRules>() {
+            @Override
+            public boolean apply(final CardRules subject) {
+                return subject.canBeCommander();
+            }
+        };
+
         public static final Predicate<CardRules> IS_PLANESWALKER = CardRulesPredicates.coreType(true, CardType.CoreType.Planeswalker);
         public static final Predicate<CardRules> IS_INSTANT = CardRulesPredicates.coreType(true, CardType.CoreType.Instant);
         public static final Predicate<CardRules> IS_SORCERY = CardRulesPredicates.coreType(true, CardType.CoreType.Sorcery);
@@ -570,13 +576,10 @@ public final class CardRulesPredicates {
         public static final Predicate<CardRules> IS_CONSPIRACY = CardRulesPredicates.coreType(true, CardType.CoreType.Conspiracy);
         public static final Predicate<CardRules> IS_NON_LAND = CardRulesPredicates.coreType(false, CardType.CoreType.Land);
         public static final Predicate<CardRules> IS_NON_CREATURE_SPELL = Predicates.not(Predicates.or(Presets.IS_CREATURE, Presets.IS_LAND));
-        public static final Predicate<CardRules> CAN_BE_COMMANDER = Predicates.or(CardRulesPredicates.rules(StringOp.CONTAINS_IC, "can be your commander"),
-                Predicates.and(Presets.IS_CREATURE, Presets.IS_LEGENDARY));
         public static final Predicate<CardRules> CAN_BE_BRAWL_COMMANDER = Predicates.or(Presets.IS_PLANESWALKER,
                 Predicates.and(Presets.IS_CREATURE, Presets.IS_LEGENDARY));
 
         /** The Constant IS_NONCREATURE_SPELL_FOR_GENERATOR. **/
-        @SuppressWarnings("unchecked")
         public static final Predicate<CardRules> IS_NONCREATURE_SPELL_FOR_GENERATOR = com.google.common.base.Predicates
                 .or(Presets.IS_SORCERY, Presets.IS_INSTANT, Presets.IS_PLANESWALKER, Presets.IS_ENCHANTMENT,
                         Predicates.and(Presets.IS_ARTIFACT, Predicates.not(Presets.IS_CREATURE)));
