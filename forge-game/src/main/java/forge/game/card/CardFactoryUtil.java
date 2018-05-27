@@ -2722,7 +2722,7 @@ public class CardFactoryUtil {
 
             final String effect = "DB$ ChangeZone | ValidTgts$ Player | TgtPrompt$ Select target player" +
                     " | Origin$ Library | Destination$ Hand | ChangeType$ Card.named" + k[1] +
-                    " | ChangeNum$ 1 | Hidden$ True | Chooser$ Targeted | Optional$ Targeted";
+                    " | ChangeNum$ 1 | Hidden$ True | Chooser$ Targeted | Optional$ Targeted | AILogic$ Always";
 
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
