@@ -1561,6 +1561,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || keyword.equals("Totem armor") || keyword.equals("Battle cry")
                     || keyword.equals("Devoid")){
                 sbLong.append(keyword + " (" + inst.getReminderText() + ")");
+            } else if (keyword.startsWith("Partner:")) {
+                final String[] k = keyword.split(":");
+                sbLong.append("Partner with " + k[1] + " (" + inst.getReminderText() + ")");
             } else if (keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst")
                     || keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift")
                     || keyword.startsWith("Crew") || keyword.startsWith("Tribute") || keyword.startsWith("Absorb")

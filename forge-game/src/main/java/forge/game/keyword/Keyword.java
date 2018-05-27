@@ -100,7 +100,7 @@ public enum Keyword {
     NINJUTSU(KeywordWithCost.class, false, "%s, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking."),
     OUTLAST(KeywordWithCost.class, false, "%s, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery."),
     OFFERING(KeywordWithType.class, false, "You may cast this card any time you could cast an instant by sacrificing a %1$s and paying the difference in mana costs between this and the sacrificed %1$s. Mana cost includes color."),
-    PARTNER(SimpleKeyword.class, true, "You can have two commanders if both have partner."),
+    PARTNER(Partner.class, true, "You can have two commanders if both have partner."),
     PERSIST(SimpleKeyword.class, true, "When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it."),
     PHASING(SimpleKeyword.class, true, "This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist."),
     POISONOUS(KeywordWithAmount.class, false, "Whenever this creature deals combat damage to a player, that player gets {%d:poison counter}."),

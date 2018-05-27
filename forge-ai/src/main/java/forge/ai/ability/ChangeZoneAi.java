@@ -152,7 +152,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return doReturnCommanderLogic(sa, aiPlayer);
         }
 
-        if ("IfNotBuffed".equals(sa.getParam("AILogic"))) {
+        if ("Always".equals(sa.getParam("AILogic"))) {
+            return true;
+        } else if ("IfNotBuffed".equals(sa.getParam("AILogic"))) {
             if (ComputerUtilCard.isUselessCreature(aiPlayer, sa.getHostCard())) {
                 return true; // debuffed by opponent's auras to the level that it becomes useless
             }
