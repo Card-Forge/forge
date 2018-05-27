@@ -563,6 +563,12 @@ public final class CardRulesPredicates {
                 return subject.canBeCommander();
             }
         };
+        public static final Predicate<CardRules> CAN_BE_PARTNER_COMMANDER = new Predicate<CardRules>() {
+            @Override
+            public boolean apply(final CardRules subject) {
+                return subject.canBePartnerCommander();
+            }
+        };
 
         public static final Predicate<CardRules> IS_PLANESWALKER = CardRulesPredicates.coreType(true, CardType.CoreType.Planeswalker);
         public static final Predicate<CardRules> IS_INSTANT = CardRulesPredicates.coreType(true, CardType.CoreType.Instant);

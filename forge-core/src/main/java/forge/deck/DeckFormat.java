@@ -513,6 +513,8 @@ public enum DeckFormat {
         for (final PaperCard p : commanders) {
             cmdCI |= p.getRules().getColorIdentity().getColor();
         }
-        return Predicates.compose(Predicates.or(CardRulesPredicates.hasColorIdentity(cmdCI), CardRulesPredicates.hasKeyword("Partner")), PaperCard.FN_GET_RULES);
+        // TODO : check commander what kind of Partner it needs
+        return Predicates.compose(Predicates.or(CardRulesPredicates.hasColorIdentity(cmdCI),
+                CardRulesPredicates.Presets.CAN_BE_PARTNER_COMMANDER), PaperCard.FN_GET_RULES);
     }
 }
