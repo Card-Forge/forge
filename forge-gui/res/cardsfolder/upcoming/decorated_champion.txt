@@ -1,0 +1,8 @@
+Name:Decorated Champion
+ManaCost:1 G
+Types:Creature Elf Warrior
+PT:2/2
+T:Mode$ ChangesZone | ValidCard$ Warrior.Other+YourTeamCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigPutCounter | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever another Warrior enters the battlefield under your team's control, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Warrior
+Oracle:Whenever another Warrior enters the battlefield under your team's control, put a +1/+1 counter on Decorated Champion.
