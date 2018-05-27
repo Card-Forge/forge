@@ -1,10 +1,10 @@
 Name:Words of War
 ManaCost:2 R
 Types:Enchantment
-A:AB$ Effect | Cost$ 1 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | Name$ Words of War Effect | RememberObjects$ Targeted | ImprintCards$ Self | ReplacementEffects$ DrawReplace | SVars$ ExileEffect,WarDamage | SpellDescription$ The next time you would draw a card this turn, CARDNAME deals 2 damage to target creature or player instead.
-SVar:DrawReplace:Event$ Draw | ValidPlayer$ You | ReplaceWith$ WarDamage | Description$ The next time you would draw a card this turn, Words of War deals 2 damage to target creature or player instead.
+A:AB$ Effect | Cost$ 1 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | Name$ Words of War Effect | RememberObjects$ Targeted | ImprintCards$ Self | ReplacementEffects$ DrawReplace | SVars$ ExileEffect,WarDamage | SpellDescription$ The next time you would draw a card this turn, CARDNAME deals 2 damage to any target instead.
+SVar:DrawReplace:Event$ Draw | ValidPlayer$ You | ReplaceWith$ WarDamage | Description$ The next time you would draw a card this turn, Words of War deals 2 damage to any target instead.
 SVar:WarDamage:DB$ DealDamage | Defined$ Remembered | DamageSource$ Imprinted | NumDmg$ 2 | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/words_of_war.jpg
-Oracle:{1}: The next time you would draw a card this turn, Words of War deals 2 damage to target creature or player instead.
+Oracle:{1}: The next time you would draw a card this turn, Words of War deals 2 damage to any target instead.
