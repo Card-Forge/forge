@@ -2718,7 +2718,7 @@ public class CardFactoryUtil {
                     "| ValidCard$ Card.Self | Secondary$ True " +
                     "| TriggerDescription$ Partner with " + k[1] + " (" + inst.getReminderText() + ")";
             // replace , for ; in the ChangeZone
-            k[1].replace(",", ";");
+            k[1] = k[1].replace(",", ";");
 
             final String effect = "DB$ ChangeZone | ValidTgts$ Player | TgtPrompt$ Select target player" +
                     " | Origin$ Library | Destination$ Hand | ChangeType$ Card.named" + k[1] +
