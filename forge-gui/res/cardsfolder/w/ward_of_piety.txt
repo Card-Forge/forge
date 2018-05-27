@@ -3,9 +3,9 @@ ManaCost:1 W
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
-A:AB$ Effect | Cost$ 1 W | Name$ Redirection Ward | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to redirect the damage to | ReplacementEffects$ WardDamage | SVars$ WardDamage,WardDmg | References$ WardDamage,WardDmg | RememberObjects$ Targeted | ImprintCards$ Enchanted | ExileOnMoved$ Battlefield | SpellDescription$ The next 1 damage that would be dealt to enchanted creature this turn is dealt to target creature or player instead.
-SVar:WardDamage:Event$ DamageDone | ValidTarget$ Creature.IsImprinted | ReplaceWith$ WardDmg | DamageTarget$ Remembered | Description$ The next 1 damage that would be dealt to enchanted creature this turn is dealt to target creature or player instead.
+A:AB$ Effect | Cost$ 1 W | Name$ Redirection Ward | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to redirect the damage to | ReplacementEffects$ WardDamage | SVars$ WardDamage,WardDmg | References$ WardDamage,WardDmg | RememberObjects$ Targeted | ImprintCards$ Enchanted | ExileOnMoved$ Battlefield | SpellDescription$ The next 1 damage that would be dealt to enchanted creature this turn is dealt to any target instead.
+SVar:WardDamage:Event$ DamageDone | ValidTarget$ Creature.IsImprinted | ReplaceWith$ WardDmg | DamageTarget$ Remembered | Description$ The next 1 damage that would be dealt to enchanted creature this turn is dealt to any target instead.
 SVar:WardDmg:DB$ ReplaceSplitDamage | DamageTarget$ Remembered
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ward_of_piety.jpg
-Oracle:Enchant creature\n{1}{W}: The next 1 damage that would be dealt to enchanted creature this turn is dealt to target creature or player instead.
+Oracle:Enchant creature\n{1}{W}: The next 1 damage that would be dealt to enchanted creature this turn is dealt to any target instead.
