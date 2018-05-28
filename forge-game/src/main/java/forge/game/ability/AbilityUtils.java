@@ -439,6 +439,10 @@ public class AbilityUtils {
                 players.addAll(game.getPlayers());
                 val = CardFactoryUtil.playerXCount(players, calcX[1], card);
             }
+            else if (hType.equals("YourTeam")) {
+                players.addAll(player.getYourTeam());
+                val = CardFactoryUtil.playerXCount(players, calcX[1], card);
+            }
             else if (hType.equals("Opponents")) {
                 players.addAll(player.getOpponents());
                 val = CardFactoryUtil.playerXCount(players, calcX[1], card);
