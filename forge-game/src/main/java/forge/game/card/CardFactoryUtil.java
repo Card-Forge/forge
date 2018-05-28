@@ -581,7 +581,9 @@ public class CardFactoryUtil {
         if (value.contains("LifeGainedThisTurn")) {
             return doXMath(player.getLifeGainedThisTurn(), m, source);
         }
-
+        if (value.contains("LifeGainedByTeamThisTurn")) {
+            return doXMath(player.getLifeGainedByTeamThisTurn(), m, source);
+        }
         if (value.contains("PoisonCounters")) {
             return doXMath(player.getPoisonCounters(), m, source);
         }
@@ -950,6 +952,9 @@ public class CardFactoryUtil {
         }
         if (sq[0].contains("LifeYouGainedThisTurn")) {
             return doXMath(cc.getLifeGainedThisTurn(), m, c);
+        }
+        if (sq[0].contains("LifeYourTeamGainedThisTurn")) {
+            return doXMath(cc.getLifeGainedByTeamThisTurn(), m, c);
         }
         if (sq[0].contains("LifeOppsLostThisTurn")) {
             int lost = 0;

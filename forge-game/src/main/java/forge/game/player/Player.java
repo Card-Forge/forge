@@ -91,6 +91,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int lifeLostThisTurn = 0;
     private int lifeLostLastTurn = 0;
     private int lifeGainedThisTurn = 0;
+    private int lifeGainedByTeamThisTurn = 0;
     private int numPowerSurgeLands;
     private int numLibrarySearchedOwn = 0; //The number of times this player has searched his library
     private int maxHandSize = 7;
@@ -309,6 +310,15 @@ public class Player extends GameEntity implements Comparable<Player> {
         return getAllOtherPlayers().filter(Predicates.not(PlayerPredicates.isOpponentOf(this)));
     }
 
+    public final PlayerCollection getTeamMates(final boolean inclThis) {
+        PlayerCollection col = new PlayerCollection();
+        if (inclThis) {
+            col.add(this);
+        }
+        col.addAll(getAllOtherPlayers().filter(PlayerPredicates.sameTeam(this)));
+        return col;
+    }
+
     /**
      * returns allied players.
      * Should keep player relations somewhere in the match structure
@@ -413,6 +423,11 @@ public class Player extends GameEntity implements Comparable<Player> {
             view.updateLife(this);
             newLifeSet = true;
             lifeGainedThisTurn += lifeGain;
+
+            // team mates need to be notified about life gained
+            for (final Player p : getTeamMates(true)) {
+                p.addLifeGainedByTeamThisTurn(lifeGain);
+            }
 
             // Run triggers
             final Map<String, Object> runParams = Maps.newHashMap();
@@ -2149,6 +2164,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         spellsCastLastTurn = num;
     }
 
+    public final int getLifeGainedByTeamThisTurn() {
+        return lifeGainedByTeamThisTurn;
+    }
+    public final void addLifeGainedByTeamThisTurn(int val) {
+        lifeGainedByTeamThisTurn += val;
+    }
+
     public final int getLifeGainedThisTurn() {
         return lifeGainedThisTurn;
     }
@@ -2789,7 +2811,32 @@ public class Player extends GameEntity implements Comparable<Player> {
         this.updateZoneForView(com);
     }
 
+    public final boolean sameTeam(final Player other) {
+        if (this.equals(other)) {
+            return true;
+        }
+        if (this.teamNumber < 0 || other.getTeam() < 0) {
+            return false;
+        }
+        return this.teamNumber == other.getTeam();
+    }
+
     public final int countExaltedBonus() {
         return CardLists.getAmountOfKeyword(this.getCardsIn(ZoneType.Battlefield), Keyword.EXALTED);
+    }
+
+    public final void clearNextTurn() {
+        resetProwl();
+        setSpellsCastLastTurn(getSpellsCastThisTurn());
+        resetSpellsCastThisTurn();
+        setLifeLostLastTurn(getLifeLostThisTurn());
+        setLifeLostThisTurn(0);
+        lifeGainedThisTurn = 0;
+        lifeGainedByTeamThisTurn = 0;
+        setLibrarySearched(0);
+        setNumManaConversion(0);
+
+        removeKeyword("Skip the untap step of this turn.");
+        removeKeyword("Schemes can't be set in motion this turn.");
     }
 }
