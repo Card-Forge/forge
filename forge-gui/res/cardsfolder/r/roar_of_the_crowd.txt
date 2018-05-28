@@ -1,9 +1,9 @@
 Name:Roar of the Crowd
 ManaCost:3 R
 Types:Sorcery
-A:SP$ ChooseType | Cost$ 3 R | Defined$ You | Type$ Creature | SubAbility$ DBDamage | SpellDescription$ Choose a creature type. CARDNAME deals damage to target creature or player equal to the number of permanents you control of the chosen type.
-SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X
+A:SP$ ChooseType | Cost$ 3 R | Defined$ You | Type$ Creature | SubAbility$ DBDamage | SpellDescription$ Choose a creature type. CARDNAME deals damage to any target equal to the number of permanents you control of the chosen type.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | References$ X
 SVar:X:Count$Valid Permanent.ChosenType+YouCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roar_of_the_crowd.jpg
-Oracle:Choose a creature type. Roar of the Crowd deals damage to target creature or player equal to the number of permanents you control of the chosen type.
+Oracle:Choose a creature type. Roar of the Crowd deals damage to any target equal to the number of permanents you control of the chosen type.
