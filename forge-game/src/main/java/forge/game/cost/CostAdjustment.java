@@ -440,6 +440,10 @@ public class CostAdjustment {
                 || !activator.isValid(params.get("Activator"), controller, hostCard, sa))) {
             return false;
         }
+        if (params.containsKey("NonActivatorTurn") && ((activator == null)
+                || hostCard.getGame().getPhaseHandler().isPlayerTurn(activator))) {
+            return false;
+        }
 
         if (params.containsKey("Type")) {
             final String type = params.get("Type");

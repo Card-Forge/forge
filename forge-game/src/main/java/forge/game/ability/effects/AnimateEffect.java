@@ -466,6 +466,8 @@ public class AnimateEffect extends AnimateEffectBase {
                 sb.append(" until ").append(host).append(" leaves the battlefield.");
             } else if (sa.hasParam("UntilYourNextUpkeep")) {
                 sb.append(" until your next upkeep.");
+            } else if (sa.hasParam("UntilYourNextTurn")) {
+                sb.append(" until your next turn.");
             } else if (sa.hasParam("UntilControllerNextUntap")) {
                 sb.append(" until its controller's next untap step.");
             } else {
