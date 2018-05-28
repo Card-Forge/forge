@@ -38,6 +38,10 @@ public class PlayerProperty {
                     return false;
                 }
             }
+        } else if (property.equals("YourTeam")) {
+            if (player.isOpponentOf(sourceController)) {
+                return false;
+            }
         } else if (property.equals("Allies")) {
             if (player.equals(sourceController) || player.isOpponentOf(sourceController)) {
                 return false;

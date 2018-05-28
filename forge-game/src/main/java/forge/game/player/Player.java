@@ -310,6 +310,14 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     /**
+     * returns allied players.
+     * Should keep player relations somewhere in the match structure
+     */
+    public final PlayerCollection getYourTeam() {
+        return game.getPlayers().filter(Predicates.not(PlayerPredicates.isOpponentOf(this)));
+    }
+
+    /**
      * returns all other players.
      * Should keep player relations somewhere in the match structure
      */
