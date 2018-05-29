@@ -5,4 +5,4 @@ A:SP$ AnimateAll | Cost$ X GU GU | Power$ X | Toughness$ X | References$ X | Val
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/biomass_mutation.jpg
-Oracle:Creatures you control become X/X until end of turn.
+Oracle:Creatures you control have base power and toughness X/X until end of turn.

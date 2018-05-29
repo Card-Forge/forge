@@ -8,4 +8,4 @@ SVar:X:Count$Valid Permanent.namedBrothers Yamazaki
 S:Mode$ Continuous | Affected$ Creature.Other+namedBrothers Yamazaki | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Haste | Description$ Each other creature named CARDNAME gets +2/+2 and has haste.
 DeckHints:Name$Brothers Yamazaki
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brothers_yamazaki.jpg
-Oracle:Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)\nIf there are exactly two permanents named Brothers Yamazaki on the battlefield, the "legend rule" doesn't apply to them.\nEach other creature named Brothers Yamazaki gets +2/+2 and has haste.
+Oracle:Bushido 1 (Whenever this creature blocks or becomes blocked, it gets +1/+1 until end of turn.)\nIf there are exactly two permanents named Brothers Yamazaki on the battlefield, the "legend rule" doesn't apply to them.\nEach other creature named Brothers Yamazaki gets +2/+2 and has haste.

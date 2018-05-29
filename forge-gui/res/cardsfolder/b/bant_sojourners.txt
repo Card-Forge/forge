@@ -3,8 +3,8 @@ ManaCost:1 G W U
 Types:Creature Human Soldier
 PT:2/4
 K:Cycling:2 W
-T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ When you cycle CARDNAME or it's dies, you may create a 1/1 white Soldier creature token.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | OptionalDecider$ You | Secondary$ True | TriggerDescription$ When you cycle CARDNAME or it's dies, you may create a 1/1 white Soldier creature token.
+T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ When you cycle CARDNAME or it dies, you may create a 1/1 white Soldier creature token.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | OptionalDecider$ You | Secondary$ True | TriggerDescription$ When you cycle CARDNAME or it dies, you may create a 1/1 white Soldier creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ w 1 1 soldier ALA
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bant_sojourners.jpg
-Oracle:When you cycle Bant Sojourners or it's dies, you may create a 1/1 white Soldier creature token.\nCycling {2}{W} ({2}{W}, Discard this card: Draw a card.)
+Oracle:When you cycle Bant Sojourners or it dies, you may create a 1/1 white Soldier creature token.\nCycling {2}{W} ({2}{W}, Discard this card: Draw a card.)
