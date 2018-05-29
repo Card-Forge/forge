@@ -1,10 +1,10 @@
 Name:Acolyte's Reward
 ManaCost:1 W
 Types:Instant
-A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to damage with shield effect | IsCurse$ True | References$ X | SubAbility$ AcolytesPrevention | StackDescription$ SpellDescription | AILogic$ Never | SpellDescription$ Prevent the next X damage that would be dealt to target creature this turn, where X is your devotion to white. If damage is prevented this way, CARDNAME deals that much damage to target creature or player.
+A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to damage with shield effect | IsCurse$ True | References$ X | SubAbility$ AcolytesPrevention | StackDescription$ SpellDescription | AILogic$ Never | SpellDescription$ Prevent the next X damage that would be dealt to target creature this turn, where X is your devotion to white. If damage is prevented this way, CARDNAME deals that much damage to any target.
 SVar:AcolytesPrevention:DB$ PreventDamage | ValidTgts$ Creature | TgtPrompt$ Select a creature to prevent damage to | Amount$ X | References$ X | PreventionSubAbility$ AcolytesRetribution | ShieldEffectTarget$ ParentTarget | StackDescription$ none
 SVar:AcolytesRetribution:DB$ DealDamage | Defined$ ShieldEffectTarget | NumDmg$ PreventedDamage | SpellDescription$ CARDNAME deals damage to target creature or player for each damage prevented this way.
 SVar:X:Count$Devotion.White
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acolytes_reward.jpg
-Oracle:Prevent the next X damage that would be dealt to target creature this turn, where X is your devotion to white. If damage is prevented this way, Acolyte's Reward deals that much damage to target creature or player. (Each {W} in the mana costs of permanents you control counts toward your devotion to white.)
+Oracle:Prevent the next X damage that would be dealt to target creature this turn, where X is your devotion to white. If damage is prevented this way, Acolyte's Reward deals that much damage to any target. (Each {W} in the mana costs of permanents you control counts toward your devotion to white.)

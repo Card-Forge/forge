@@ -8,7 +8,7 @@ SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arlinn_kord.jpg
-Oracle:[+1]: Until end of turn, up to one target creature gets +2/+2 and gains vigilance and haste.\n[0]: Create a 2/2 green Wolf creature token. Transform Arlinn Kord.
+Oracle:+1: Until end of turn, up to one target creature gets +2/+2 and gains vigilance and haste.\n0: Create a 2/2 green Wolf creature token. Transform Arlinn Kord.
 
 ALTERNATE
 
@@ -18,11 +18,11 @@ Colors:red,green
 Types:Legendary Planeswalker Arlinn
 Loyalty:0
 A:AB$ PumpAll | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Trample | SpellDescription$ Creatures you control get +1/+1 and gain trample until end of turn.
-A:AB$ DealDamage | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 3 | SubAbility$ DBTransform | SpellDescription$ CARDNAME deals 3 damage to target creature or player. Transform CARDNAME.
+A:AB$ DealDamage | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SubAbility$ DBTransform | SpellDescription$ CARDNAME deals 3 damage to any target. Transform CARDNAME.
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform
-A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Name$ Emblem - Arlinn, Embraced by the Moon | Image$ emblem_arlinn_embraced_by_the_moon | StaticAbilities$ STArlinn | SVars$ ArlinnX,ArlinnDealDamage | Planeswalker$ True | Ultimate$ True | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Creatures you control have haste and '{T}: This creature deals damage equal to its power to target creature or player.'"
-SVar:STArlinn:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddKeyword$ Haste | AddAbility$ ArlinnDealDamage | AddSVar$ ArlinnX | Description$ Creatures you control have haste and "{T}: This creature deals damage equal to its power to target creature or player."
-SVar:ArlinnDealDamage:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ ArlinnX | References$ ArlinnX | SpellDescription$ This creature deals damage equal to its power to target creature or player.
+A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Name$ Emblem - Arlinn, Embraced by the Moon | Image$ emblem_arlinn_embraced_by_the_moon | StaticAbilities$ STArlinn | SVars$ ArlinnX,ArlinnDealDamage | Planeswalker$ True | Ultimate$ True | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Creatures you control have haste and '{T}: This creature deals damage equal to its power to any target.'"
+SVar:STArlinn:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddKeyword$ Haste | AddAbility$ ArlinnDealDamage | AddSVar$ ArlinnX | Description$ Creatures you control have haste and "{T}: This creature deals damage equal to its power to any target."
+SVar:ArlinnDealDamage:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ ArlinnX | References$ ArlinnX | SpellDescription$ This creature deals damage equal to its power to any target.
 SVar:ArlinnX:Count$CardPower 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arlinn_embraced_by_the_moon.jpg
-Oracle:[+1]: Creatures you control get +1/+1 and gain trample until end of turn.\n[-1]: Arlinn, Embraced by the Moon deals 3 damage to target creature or player. Transform Arlinn, Embraced by the Moon.\n[-6]: You get an emblem with "Creatures you control have haste and '{T}: This creature deals damage equal to its power to target creature or player.'"
+Oracle:[+1]: Creatures you control get +1/+1 and gain trample until end of turn.\n[-1]: Arlinn, Embraced by the Moon deals 3 damage to any target. Transform Arlinn, Embraced by the Moon.\n[-6]: You get an emblem with "Creatures you control have haste and '{T}: This creature deals damage equal to its power to any target.'"

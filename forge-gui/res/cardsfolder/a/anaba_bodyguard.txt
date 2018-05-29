@@ -4,4 +4,4 @@ Types:Creature Minotaur
 PT:2/3
 K:First Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anaba_bodyguard.jpg
-Oracle:First strike
+Oracle:First strike (This creature deals combat damage before creatures without first strike.)
