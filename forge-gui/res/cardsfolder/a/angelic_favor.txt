@@ -6,4 +6,4 @@ SVar:AngelicFavorEOT:SVar:EndOfTurnLeavePlay:True
 SVar:AltCost:Cost$ tapXType<1/Creature> | IsPresent$ Plains.YouCtrl | Description$ If you control a Plains, you may tap an untapped creature you control rather than pay CARDNAME's mana cost. 
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_favor.jpg
-Oracle:If you control a Plains, you may tap an untapped creature you control rather than pay Angelic Favor's mana cost.\nCast Angelic Favor only during combat.\nCreate a 4/4 white Angel creature token with flying. Exile it at the beginning of the next end step.
+Oracle:If you control a Plains, you may tap an untapped creature you control rather than pay this spell's mana cost.\nCast this spell only during combat.\nCreate a 4/4 white Angel creature token with flying. Exile it at the beginning of the next end step.
