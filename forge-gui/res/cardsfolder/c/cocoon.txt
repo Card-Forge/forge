@@ -6,13 +6,15 @@ A:SP$ Attach | Cost$ G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target 
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap enchanted creature and put three pupa counters on CARDNAME.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ PUPA | CounterNum$ 3
-S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | CheckSVar$ X | Description$ Enchanted creature doesn't untap during your untap step if CARDNAME has a pupa counter on it.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, remove a pupa counter from CARDNAME. If you can't, sacrifice it, put a +1/+1 counter on enchanted creature, and that creature gains flying. (This effect lasts indefinitely.)
+S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | IsPresent$ Card.Self+counters_GE1_PUPA | Description$ Enchanted creature doesn't untap during your untap step if CARDNAME has a pupa counter on it.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemoveCounter | TriggerDescription$ At the beginning of your upkeep, remove a pupa counter from CARDNAME. If you can't, sacrifice it, put a +1/+1 counter on enchanted creature, and that creature gains flying. (This effect lasts indefinitely.)
+SVar:TrigRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ PUPA | CounterNum$ 1 | RememberRemoved$ True | SubAbility$ TrigPutCounter
+# TODO need EnchantedLKI because it isn't enchanted anymore if this is sacrificed
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Enchanted | CounterType$ P1P1 | CounterNum$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ LE0 | References$ X | SubAbility$ TrigPump
 SVar:TrigPump:DB$ Pump | Defined$ Enchanted | KW$ Flying | Permanent$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ LE0 | References$ X | SubAbility$ TrigSac
-SVar:TrigSac:DB$ Sacrifice | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ LE0 | References$ X | SubAbility$ TrigRemoveCounter
-SVar:TrigRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ PUPA | CounterNum$ 1
-SVar:X:Count$Valid Card.Self+counters_GE1_PUPA
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ LE0 | References$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedSize
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cocoon.jpg
-Oracle:Enchant creature you control\nEnchanted creature doesn't untap during your untap step if Cocoon has a pupa counter on it.\nWhen Cocoon enters the battlefield, tap enchanted creature and put three pupa counters on Cocoon.\nAt the beginning of your upkeep, remove a pupa counter from Cocoon. If you can't, sacrifice it, put a +1/+1 counter on enchanted creature, and that creature gains flying. (This effect lasts indefinitely.)
+Oracle:Enchant creature you control\nWhen Cocoon enters the battlefield, tap enchanted creature and put three pupa counters on Cocoon.\nEnchanted creature doesn't untap during your untap step if Cocoon has a pupa counter on it.\nAt the beginning of your upkeep, remove a pupa counter from Cocoon. If you can't, sacrifice it, put a +1/+1 counter on enchanted creature, and that creature gains flying.

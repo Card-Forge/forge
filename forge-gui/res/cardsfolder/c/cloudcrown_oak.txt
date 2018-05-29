@@ -4,4 +4,4 @@ Types:Creature Treefolk Warrior
 PT:3/4
 K:Reach
 SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card139492.jpg
-Oracle:Reach
+Oracle:Reach (This creature can block creatures with flying.)

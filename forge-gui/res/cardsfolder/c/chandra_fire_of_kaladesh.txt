@@ -4,13 +4,13 @@ Types:Legendary Creature Human Shaman
 PT:2/2
 T:Mode$ SpellCast | ValidCard$ Card.Red | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a red spell, untap CARDNAME.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
-A:AB$ DealDamage | Cost$ T | ValidTgts$ Player | NumDmg$ 1 | References$ X | SubAbility$ DBTransform | SpellDescription$ CARDNAME deals 1 damage to target player. If CARDNAME has dealt 3 or more damage this turn, exile her, then return her to the battlefield transformed under her owner's control. 
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | References$ X | SubAbility$ DBTransform | SpellDescription$ CARDNAME deals 1 damage to target player. If CARDNAME has dealt 3 or more damage this turn, exile her, then return her to the battlefield transformed under her owner's control. 
 SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | ConditionCheckSVar$ X | ConditionSVarCompare$ GE3 | References$ X | StackDescription$ If CARDNAME has dealt 3 or more damage this turn, exile her, then return her to the battlefield transformed under her owner's control.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | WithCounters$ LOYALTY_4 | SubAbility$ DBCleanup | StackDescription$ 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$TotalDamageDoneByThisTurn
 AlternateMode:DoubleFaced
-Oracle:Whenever you cast a red spell, untap Chandra, Fire of Kaladesh.\n{T}: Chandra, Fire of Kaladesh deals 1 damage to target player. If Chandra has dealt 3 or more damage this turn, exile her, then return her to the battlefield transformed under her owner's control.
+Oracle:Whenever you cast a red spell, untap Chandra, Fire of Kaladesh.\n{T}: Chandra, Fire of Kaladesh deals 1 damage to target player or planeswalker. If Chandra has dealt 3 or more damage this turn, exile her, then return her to the battlefield transformed under her owner's control.
 
 ALTERNATE
 
@@ -19,11 +19,11 @@ ManaCost:no cost
 Colors:red
 Types:Legendary Planeswalker Chandra
 Loyalty:4
-A:AB$ DealDamage | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Player | Planeswalker$ True | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target player
+A:AB$ DealDamage | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | Planeswalker$ True | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target player or planeswalker
 A:AB$ DealDamage | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Creature | Planeswalker$ True | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature.
 A:AB$ DealDamage | Cost$ SubCounter<7/LOYALTY> | Defined$ Player.Opponent | Planeswalker$ True | Ultimate$ True | NumDmg$ 6 | RememberDamaged$ True | SubAbility$ DBRoaringFlame | SpellDescription$ CARDNAME deals 6 damage to each opponent. Each player dealt damage this way gets an emblem with "At the beginning of your upkeep, this emblem deals 3 damage to you."
 SVar:DBRoaringFlame:DB$ RepeatEach | RepeatPlayers$ Player.IsRemembered | RepeatSubAbility$ DBUltimateEmblem | ClearRememberedBeforeLoop$ True | StackDescription$ Each player dealt damage this way gets an emblem with "At the beginning of your upkeep, this emblem deals 3 damage to you."
 SVar:DBUltimateEmblem:DB$ Effect | Name$ Emblem - Chandra, Roaring Flame | Image$ emblem_chandra_roaring_flame | Stackable$ True | Triggers$ FlameTrigger | SVars$ TrigDealDamage | Duration$ Permanent | AILogic$ Always | EffectOwner$ Player.IsRemembered | SpellDescription$ You get an emblem with "At the beginning of your upkeep, this emblem deals 3 damage to you."
 SVar:FlameTrigger:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 3 damage to you.
 SVar:TrigDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 3
-Oracle:[+1]: Chandra, Roaring Flame deals 2 damage to target player.\n[-2]: Chandra, Roaring Flame deals 2 damage to target creature.\n[-7]: Chandra, Roaring Flame deals 6 damage to each opponent. Each player dealt damage this way gets an emblem with "At the beginning of your upkeep, this emblem deals 3 damage to you."
+Oracle:+1: Chandra, Roaring Flame deals 2 damage to target player or planeswalker.\n−2: Chandra, Roaring Flame deals 2 damage to target creature.\n−7: Chandra, Roaring Flame deals 6 damage to each opponent. Each player dealt damage this way gets an emblem with "At the beginning of your upkeep, this emblem deals 3 damage to you."
