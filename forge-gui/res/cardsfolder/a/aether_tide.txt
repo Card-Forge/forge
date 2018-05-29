@@ -7,4 +7,4 @@ SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Creature
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_tide.jpg
-Oracle:As an additional cost to cast Aether Tide, discard X creature cards.\nReturn X target creatures to their owners' hands.
+Oracle:As an additional cost to cast this spell, discard X creature cards.\nReturn X target creatures to their owners' hands.

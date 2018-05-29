@@ -5,4 +5,4 @@ S:Mode$ Continuous | Affected$ Creature.White | AddKeyword$ Plainswalk | Descrip
 SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aysen_highway.jpg
-Oracle:White creatures have plainswalk.
+Oracle:White creatures have plainswalk. (They can't be blocked as long as defending player controls a Plains.)

@@ -7,4 +7,4 @@ K:Flying
 K:CARDNAME can block any number of creatures.
 SVar:NeedHope:Count$YourLifeTotal
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avatar_of_hope.jpg
-Oracle:If you have 3 or less life, Avatar of Hope costs {6} less to cast.\nFlying\nAvatar of Hope can block any number of creatures.
+Oracle:If you have 3 or less life, this spell costs {6} less to cast.\nFlying\nAvatar of Hope can block any number of creatures.

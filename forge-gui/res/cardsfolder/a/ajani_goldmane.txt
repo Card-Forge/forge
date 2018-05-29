@@ -9,4 +9,4 @@ A:AB$ Token | Cost$ SubCounter<6/LOYALTY> | TokenAmount$ 1 | TokenName$ Avatar |
 SVar:Static:Mode$ Continuous | SetPower$ X | SetToughness$ X | CharacteristicDefining$ True | Description$ This creature's power and toughness are each equal to your life total.
 SVar:X:Count$YourLifeTotal
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ajani_goldmane.jpg
-Oracle:[+1]: You gain 2 life.\n[-1]: Put a +1/+1 counter on each creature you control. Those creatures gain vigilance until end of turn.\n[-6]: Create a white Avatar creature token. It has "This creature's power and toughness are each equal to your life total."
+Oracle:+1: You gain 2 life.\n−1: Put a +1/+1 counter on each creature you control. Those creatures gain vigilance until end of turn.\n−6: Create a white Avatar creature token. It has "This creature's power and toughness are each equal to your life total."

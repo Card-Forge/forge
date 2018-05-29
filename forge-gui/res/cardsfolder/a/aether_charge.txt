@@ -1,8 +1,8 @@
 Name:Aether Charge
 ManaCost:4 R
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Beast.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDealDamage | TriggerDescription$ Whenever a Beast enters the battlefield under your control, you may have it deal 4 damage to target opponent.
-SVar:TrigDealDamage:DB$DealDamage | DamageSource$ TriggeredCard | ValidTgts$ Opponent | NumDmg$ 4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Beast.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDealDamage | TriggerDescription$ Whenever a Beast enters the battlefield under your control, you may have it deal 4 damage to target opponent or planeswalker.
+SVar:TrigDealDamage:DB$DealDamage | DamageSource$ TriggeredCard | ValidTgts$ Opponent,Planeswalker | NumDmg$ 4
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_charge.jpg
-Oracle:Whenever a Beast enters the battlefield under your control, you may have it deal 4 damage to target opponent.
+Oracle:Whenever a Beast enters the battlefield under your control, you may have it deal 4 damage to target opponent or planeswalker.
