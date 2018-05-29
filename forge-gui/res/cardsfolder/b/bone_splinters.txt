@@ -4,4 +4,4 @@ Types:Sorcery
 A:SP$ Destroy | Cost$ B Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_splinters.jpg
-Oracle:As an additional cost to cast Bone Splinters, sacrifice a creature.\nDestroy target creature.
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nDestroy target creature.

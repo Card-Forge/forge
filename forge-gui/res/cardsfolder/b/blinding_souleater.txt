@@ -7,4 +7,4 @@ SVar:RemRandomDeck:True
 DeckNeeds:Color$white
 SVar:NonCombatPriority:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinding_souleater.jpg
-Oracle:{P/W}, {T}: Tap target creature. ({P/W} can be paid with either {W} or 2 life.)
+Oracle:{W/P}, {T}: Tap target creature. ({W/P} can be paid with either {W} or 2 life.)
