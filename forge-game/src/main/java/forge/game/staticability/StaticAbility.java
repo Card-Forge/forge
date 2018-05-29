@@ -126,7 +126,9 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
 
         if (hasParam("AddType") || hasParam("RemoveType")
                 || hasParam("RemoveCardTypes") || hasParam("RemoveSubTypes")
-                || hasParam("RemoveSuperTypes") || hasParam("RemoveCreatureTypes")) {
+                || hasParam("RemoveSuperTypes") || hasParam("RemoveLandTypes")
+                || hasParam("RemoveCreatureTypes") || hasParam("RemoveArtifactTypes")
+                || hasParam("RemoveEnchantmentTypes")) {
             layers.add(StaticAbilityLayer.TYPE);
         }
 

@@ -5,7 +5,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 import forge.ImageKeys;
 import forge.StaticData;
@@ -22,6 +21,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
+import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
@@ -37,10 +37,10 @@ import forge.util.collect.FCollectionView;
 import forge.util.PredicateString.StringOp;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class CopyPermanentEffect extends SpellAbilityEffect {
 
@@ -186,29 +186,17 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         for (final Card c : tgtCards) {
             if (!sa.usesTargeting() || c.canBeTargetedBy(sa)) {
 
-                int multiplier = numCopies;
-                
-                final Map<String, Object> repParams = Maps.newHashMap();
-                repParams.put("Event", "CreateToken");
-                repParams.put("Affected", controller);
-                repParams.put("TokenNum", multiplier);
-                repParams.put("EffectOnly", true);
+                Pair<Player, Integer> result = TokenInfo.calculateMultiplier(
+                        game, controller, true, numCopies);
 
-                switch (game.getReplacementHandler().run(repParams)) {
-                case NotReplaced:
-                    break;
-                case Updated: {
-                    multiplier = (int) repParams.get("TokenNum");
-                    break;
-                }
-                default:
-                    return ;
+                if (result.getRight() <= 0) {
+                    return;
                 }
                 
-                final List<Card> crds = Lists.newArrayListWithCapacity(multiplier);
+                final List<Card> crds = Lists.newArrayListWithCapacity(result.getRight());
 
-                for (int i = 0; i < multiplier; i++) {
-                    final Card copy = CardFactory.copyCopiableCharacteristics(c, activator);
+                for (int i = 0; i < result.getRight(); i++) {
+                    final Card copy = CardFactory.copyCopiableCharacteristics(c, result.getLeft());
                     copy.setToken(true);
                     copy.setCopiedPermanent(c);
                     // add keywords from sa
@@ -337,7 +325,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         }
                     }
                     // set the controller before move to play: Crafty Cutpurse
-                    copy.setController(controller, 0);
+                    copy.setController(result.getLeft(), 0);
                     copy.updateStateForView();
 
                     // Temporarily register triggers of an object created with CopyPermanent
@@ -350,7 +338,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     copyInPlay.setCloneOrigin(host);
                     sa.getHostCard().addClone(copyInPlay);
                     if (!pumpKeywords.isEmpty()) {
-                        copyInPlay.addChangedCardKeywords(pumpKeywords, Lists.<String>newArrayList(), false, timestamp);
+                        copyInPlay.addChangedCardKeywords(pumpKeywords, Lists.<String>newArrayList(), false, false, timestamp);
                     }
                     crds.add(copyInPlay);
                     if (sa.hasParam("RememberCopied")) {

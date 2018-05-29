@@ -126,12 +126,15 @@ public final class StaticAbilityContinuous {
         String[] addStatics = null;
         List<SpellAbility> addFullAbs = null;
         boolean removeAllAbilities = false;
+        boolean removeIntrinsicAbilities = false;
         boolean removeNonMana = false;
         boolean removeSuperTypes = false;
         boolean removeCardTypes = false;
         boolean removeSubTypes = false;
+        boolean removeLandTypes = false;
         boolean removeCreatureTypes = false;
         boolean removeArtifactTypes = false;
+        boolean removeEnchantmentTypes = false;
 
         List<Player> mayLookAt = null;
         List<Player> withFlash = null;
@@ -253,6 +256,11 @@ public final class StaticAbilityContinuous {
                 removeNonMana = true;
             }
         }
+        // do this in type layer too in case of blood moon
+        if ((layer == StaticAbilityLayer.ABILITIES1 || layer == StaticAbilityLayer.TYPE)
+                && params.containsKey("RemoveIntrinsicAbilities")) {
+            removeIntrinsicAbilities = true;
+        }
 
         if (layer == StaticAbilityLayer.ABILITIES2 && params.containsKey("AddAbility")) {
             final String[] sVars = params.get("AddAbility").split(" & ");
@@ -310,11 +318,17 @@ public final class StaticAbilityContinuous {
                 removeSubTypes = true;
             }
 
+            if (params.containsKey("RemoveLandTypes")) {
+                removeLandTypes = true;
+            }
             if (params.containsKey("RemoveCreatureTypes")) {
                 removeCreatureTypes = true;
             }
             if (params.containsKey("RemoveArtifactTypes")) {
                 removeArtifactTypes = true;
+            }
+            if (params.containsKey("RemoveEnchantmentTypes")) {
+                removeEnchantmentTypes = true;
             }
         }
 
@@ -604,7 +618,7 @@ public final class StaticAbilityContinuous {
             // add keywords
             // TODO regular keywords currently don't try to use keyword multiplier
             // (Although nothing uses it at this time)
-            if ((addKeywords != null) || (removeKeywords != null) || removeAllAbilities) {
+            if ((addKeywords != null) || (removeKeywords != null) || removeAllAbilities || removeIntrinsicAbilities) {
                 String[] newKeywords = null;
                 if (addKeywords != null) {
                     newKeywords = Arrays.copyOf(addKeywords, addKeywords.length);
@@ -622,7 +636,8 @@ public final class StaticAbilityContinuous {
                     }
                 }
 
-                affectedCard.addChangedCardKeywords(newKeywords, removeKeywords, removeAllAbilities,
+                affectedCard.addChangedCardKeywords(newKeywords, removeKeywords,
+                        removeAllAbilities, removeIntrinsicAbilities,
                         hostCard.getTimestamp());
             }
 
@@ -686,7 +701,8 @@ public final class StaticAbilityContinuous {
             // add Types
             if ((addTypes != null) || (removeTypes != null)) {
                 affectedCard.addChangedCardTypes(addTypes, removeTypes, removeSuperTypes, removeCardTypes,
-                        removeSubTypes, removeCreatureTypes, removeArtifactTypes, hostCard.getTimestamp());
+                        removeSubTypes, removeLandTypes, removeCreatureTypes, removeArtifactTypes,
+                        removeEnchantmentTypes, hostCard.getTimestamp());
             }
 
             // add colors
@@ -731,28 +747,41 @@ public final class StaticAbilityContinuous {
             }
 
             // remove triggers
-            if ((layer == StaticAbilityLayer.ABILITIES2 && (params.containsKey("RemoveTriggers")) || removeAllAbilities)) {
+            if ((layer == StaticAbilityLayer.ABILITIES2 && (params.containsKey("RemoveTriggers"))
+                    || removeAllAbilities || removeIntrinsicAbilities)) {
                 for (final Trigger trigger : affectedCard.getTriggers()) {
-                    trigger.setTemporarilySuppressed(true);
+                    if (removeAllAbilities || (removeIntrinsicAbilities && trigger.isIntrinsic())) {
+                        trigger.setTemporarilySuppressed(true);
+                    }
                 }
             }
 
             // remove activated and static abilities
-            if (removeAllAbilities) {
+            if (removeAllAbilities || removeIntrinsicAbilities) {
                 if (removeNonMana) { // Blood Sun
-            	    for (final SpellAbility mana : affectedCard.getNonManaAbilities()) {
-            		    mana.setTemporarilySuppressed(true);
+                    for (final SpellAbility mana : affectedCard.getNonManaAbilities()) {
+                        if (removeAllAbilities
+                                || (removeIntrinsicAbilities && mana.isIntrinsic() && !mana.isBasicLandAbility())) {
+                            mana.setTemporarilySuppressed(true);
+                        }
                     }
                 } else {
                     for (final SpellAbility ab : affectedCard.getSpellAbilities()) {
-                        ab.setTemporarilySuppressed(true);
+                        if (removeAllAbilities
+                                || (removeIntrinsicAbilities && ab.isIntrinsic() && !ab.isBasicLandAbility())) {
+                            ab.setTemporarilySuppressed(true);
+                        }
                     }
             	}
                 for (final StaticAbility stA : affectedCard.getStaticAbilities()) {
-                    stA.setTemporarilySuppressed(true);
+                    if (removeAllAbilities || (removeIntrinsicAbilities && stA.isIntrinsic())) {
+                        stA.setTemporarilySuppressed(true);
+                    }
                 }
                 for (final ReplacementEffect rE : affectedCard.getReplacementEffects()) {
-                    rE.setTemporarilySuppressed(true);
+                    if (removeAllAbilities || (removeIntrinsicAbilities && rE.isIntrinsic())) {
+                        rE.setTemporarilySuppressed(true);
+                    }
                 }
             }
 

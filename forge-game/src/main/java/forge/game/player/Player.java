@@ -310,6 +310,14 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     /**
+     * returns allied players.
+     * Should keep player relations somewhere in the match structure
+     */
+    public final PlayerCollection getYourTeam() {
+        return game.getPlayers().filter(Predicates.not(PlayerPredicates.isOpponentOf(this)));
+    }
+
+    /**
      * returns all other players.
      * Should keep player relations somewhere in the match structure
      */
@@ -986,12 +994,13 @@ public class Player extends GameEntity implements Comparable<Player> {
             final KeywordsChange cks = changedKeywords.get(timestamp);
             
             ;
-            changedKeywords.put(timestamp, cks.merge(addKeywords, removeKeywords, cks.isRemoveAllKeywords()));
+            changedKeywords.put(timestamp, cks.merge(addKeywords, removeKeywords,
+                    cks.isRemoveAllKeywords(), cks.isRemoveIntrinsicKeywords()));
             updateKeywords();
             return;
         }
 
-        changedKeywords.put(timestamp, new KeywordsChange(addKeywords, removeKeywords, false));
+        changedKeywords.put(timestamp, new KeywordsChange(addKeywords, removeKeywords, false, false));
         updateKeywords();
         game.fireEvent(new GameEventPlayerStatsChanged(this));
     }

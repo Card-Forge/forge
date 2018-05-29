@@ -79,6 +79,7 @@ public class CardFactoryUtil {
                 " | SpellDescription$ Add {" + strcolor + "}.";
         SpellAbility sa = AbilityFactory.getAbility(abString, state);
         sa.setIntrinsic(true); // always intristic
+        sa.setBasicLandAbility(true); // to exclude it from other suspress effects
         return sa;
     }
 
@@ -2710,6 +2711,23 @@ public class CardFactoryUtil {
             card.setSVar("MyriadCleanup", dbString4);
             
             inst.addTrigger(parsedTrigger);
+        } else if (keyword.startsWith("Partner:")) {
+            // Partner With
+            final String[] k = keyword.split(":");
+            final String trigStr = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield " +
+                    "| ValidCard$ Card.Self | Secondary$ True " +
+                    "| TriggerDescription$ Partner with " + k[1] + " (" + inst.getReminderText() + ")";
+            // replace , for ; in the ChangeZone
+            k[1] = k[1].replace(",", ";");
+
+            final String effect = "DB$ ChangeZone | ValidTgts$ Player | TgtPrompt$ Select target player" +
+                    " | Origin$ Library | Destination$ Hand | ChangeType$ Card.named" + k[1] +
+                    " | ChangeNum$ 1 | Hidden$ True | Chooser$ Targeted | Optional$ Targeted | AILogic$ Always";
+
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+            trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+
+            inst.addTrigger(trigger);
         } else if (keyword.equals("Persist")) {
             final String trigStr = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OncePerEffect$ True " +
                     " | ValidCard$ Card.Self+counters_EQ0_M1M1 | Secondary$ True" + 
@@ -4153,8 +4171,8 @@ public class CardFactoryUtil {
             // So adding redundant YouCtrl to simplify matters even though its unnecessary
             String effect = "AB$ Animate | Cost$ tapXType<Any/Creature.YouCtrl+withTotalPowerGE" + power +
                     "> | CostDesc$ Crew " + power + " (Tap any number of creatures you control with total power " + power +
-                    " or more: | Crew$ True | Secondary$ True | Defined$ Self | Types$ Creature,Artifact | OverwriteTypes$ True | " +
-                    "KeepSubtypes$ True | KeepSupertypes$ True | SpellDescription$ CARDNAME becomes an artifact creature until end of turn.)";
+                    " or more: | Crew$ True | Secondary$ True | Defined$ Self | Types$ Creature,Artifact | RemoveCardTypes$ True" +
+                    " | SpellDescription$ CARDNAME becomes an artifact creature until end of turn.)";
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);

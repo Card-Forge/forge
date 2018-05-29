@@ -5,4 +5,4 @@ PT:7/6
 K:Trample
 K:Hexproof
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plated_crusher.jpg
-Oracle:
+Oracle:Trample\nHexproof
