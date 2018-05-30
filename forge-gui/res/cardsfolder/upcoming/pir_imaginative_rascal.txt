@@ -1,5 +1,5 @@
 Name:Pir, Imaginative Rascal
-ManaCost:3 U
+ManaCost:2 G
 Types:Legendary Creature Human
 PT:1/1
 K:Partner:Toothy, Imaginary Friend:Toothy
