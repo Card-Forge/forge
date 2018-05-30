@@ -1,8 +1,8 @@
 Name:Kindle
 ManaCost:1 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature or player, where X is 2 plus the number of cards named Kindle in all graveyards.
+A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to any target, where X is 2 plus the number of cards named Kindle in all graveyards.
 SVar:X:Count$NamedInAllYards.Kindle/Plus.2
 DeckHints:Name$Kindle
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kindle.jpg
-Oracle:Kindle deals X damage to target creature or player, where X is 2 plus the number of cards named Kindle in all graveyards.
+Oracle:Kindle deals X damage to any target, where X is 2 plus the number of cards named Kindle in all graveyards.

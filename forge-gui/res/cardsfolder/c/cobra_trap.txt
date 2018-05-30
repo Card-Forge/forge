@@ -9,4 +9,4 @@ SVar:SetTrap:Number$0
 SVar:AltCost:Cost$ G | CheckSVar$ SetTrap | SVarCompare$ GE1 | Description$ If a noncreature permanent under your control was destroyed this turn by a spell or ability an opponent controlled, you may pay {G} rather than pay CARDNAME's mana cost.
 A:SP$ Token | Cost$ 4 G G | TokenAmount$ 4 | TokenName$ Snake | TokenTypes$ Creature,Snake | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Create four 1/1 green Snake creature tokens.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cobra_trap.jpg
-Oracle:If a noncreature permanent under your control was destroyed this turn by a spell or ability an opponent controlled, you may pay {G} rather than pay Cobra Trap's mana cost.\nCreate four 1/1 green Snake creature tokens.
+Oracle:If a noncreature permanent under your control was destroyed this turn by a spell or ability an opponent controlled, you may pay {G} rather than pay this spell's mana cost.\nCreate four 1/1 green Snake creature tokens.

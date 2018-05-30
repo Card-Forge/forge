@@ -1,8 +1,8 @@
 Name:Knollspine Invocation
 ManaCost:1 R R
 Types:Enchantment
-A:AB$ DealDamage | Announce$ X | Cost$ X Discard<1/Card.cmcEQX/card with converted mana cost X> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature or player.
+A:AB$ DealDamage | Announce$ X | Cost$ X Discard<1/Card.cmcEQX/card with converted mana cost X> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to any target.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knollspine_invocation.jpg
-Oracle:{X}, Discard a card with converted mana cost X: Knollspine Invocation deals X damage to target creature or player.
+Oracle:{X}, Discard a card with converted mana cost X: Knollspine Invocation deals X damage to any target.

@@ -4,8 +4,8 @@ Types:Enchantment Aura
 K:Enchant creature
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2.
 A:SP$ Attach | Cost$ 5 R | ValidTgts$ Creature | AILogic$ Pump
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 2 damage to target creature or player.
-SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 2 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_diadem.jpg
-Oracle:Enchant creature\nWhen Lightning Diadem enters the battlefield, it deals 2 damage to target creature or player.\nEnchanted creature gets +2/+2.
+Oracle:Enchant creature\nWhen Lightning Diadem enters the battlefield, it deals 2 damage to any target.\nEnchanted creature gets +2/+2.

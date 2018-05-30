@@ -3,12 +3,12 @@ ManaCost:5
 Types:Artifact Creature Hydra
 PT:0/0
 K:etbCounter:P1P1:4
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigClockworkRemoveCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks or blocks, remove a +1/+1 counter from it. If you do, CARDNAME deals 1 damage to target creature or player.
-T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigClockworkRemoveCounter | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, remove a +1/+1 counter from it. If you do, CARDNAME deals 1 damage to target creature or player.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigClockworkRemoveCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks or blocks, remove a +1/+1 counter from it. If you do, CARDNAME deals 1 damage to any target.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigClockworkRemoveCounter | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, remove a +1/+1 counter from it. If you do, CARDNAME deals 1 damage to any target.
 SVar:TrigClockworkRemoveCounter:DB$ RemoveCounter | CounterType$ P1P1 | CounterNum$ 1 | RememberRemoved$ True | SubAbility$ DBClockworkDamage
-SVar:DBClockworkDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | References$ ClockworkX | ConditionCheckSVar$ ClockworkX | ConditionSVarCompare$ GE1 | SubAbility$ DBClockworkCleanup
+SVar:DBClockworkDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | References$ ClockworkX | ConditionCheckSVar$ ClockworkX | ConditionSVarCompare$ GE1 | SubAbility$ DBClockworkCleanup
 A:AB$ PutCounter | Cost$ T | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
 SVar:DBClockworkCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:ClockworkX:Count$RememberedSize
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clockwork_hydra.jpg
-Oracle:Clockwork Hydra enters the battlefield with four +1/+1 counters on it.\nWhenever Clockwork Hydra attacks or blocks, remove a +1/+1 counter from it. If you do, Clockwork Hydra deals 1 damage to target creature or player.\n{T}: Put a +1/+1 counter on Clockwork Hydra.
+Oracle:Clockwork Hydra enters the battlefield with four +1/+1 counters on it.\nWhenever Clockwork Hydra attacks or blocks, remove a +1/+1 counter from it. If you do, Clockwork Hydra deals 1 damage to any target.\n{T}: Put a +1/+1 counter on Clockwork Hydra.

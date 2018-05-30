@@ -2,8 +2,8 @@ Name:Chandra Ablaze
 ManaCost:4 R R
 Types:Legendary Planeswalker Chandra
 Loyalty:5
-A:AB$ Discard | Cost$ AddCounter<1/LOYALTY> | Mode$ TgtChoose | NumCards$ 1 | Defined$ You | Planeswalker$ True | RememberDiscarded$ True | SubAbility$ DBChandraDealDamage | SpellDescription$ Discard a card. If a red card is discarded this way, CARDNAME deals 4 damage to target creature or player.
-SVar:DBChandraDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 4 | ConditionDefined$ Remembered | ConditionPresent$ Card.Red | ConditionCompare$ EQ1 | SubAbility$ DBChandraCleanup
+A:AB$ Discard | Cost$ AddCounter<1/LOYALTY> | Mode$ TgtChoose | NumCards$ 1 | Defined$ You | Planeswalker$ True | RememberDiscarded$ True | SubAbility$ DBChandraDealDamage | SpellDescription$ Discard a card. If a red card is discarded this way, CARDNAME deals 4 damage to any target.
+SVar:DBChandraDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 4 | ConditionDefined$ Remembered | ConditionPresent$ Card.Red | ConditionCompare$ EQ1 | SubAbility$ DBChandraCleanup
 SVar:DBChandraCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Discard | Cost$ SubCounter<2/LOYALTY> | Mode$ Hand | Defined$ Player | Planeswalker$ True | SubAbility$ DBChandraDraw | SpellDescription$ Each player discards their hand, then draws three cards.
 SVar:DBChandraDraw:DB$ Draw | Defined$ Player | NumCards$ 3
@@ -11,4 +11,4 @@ A:AB$ Play | Cost$ SubCounter<7/LOYALTY> | Valid$ Instant.Red+YouCtrl,Sorcery.Re
 SVar:ChandraX:Count$ValidGraveyard Instant.Red+YouOwn,Sorcery.Red+YouOwn
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chandra_ablaze.jpg
-Oracle:[+1]: Discard a card. If a red card is discarded this way, Chandra Ablaze deals 4 damage to target creature or player.\n[-2]: Each player discards their hand, then draws three cards.\n[-7]: Cast any number of red instant and/or sorcery cards from your graveyard without paying their mana costs.
+Oracle:[+1]: Discard a card. If a red card is discarded this way, Chandra Ablaze deals 4 damage to any target.\n[-2]: Each player discards their hand, then draws three cards.\n[-7]: Cast any number of red instant and/or sorcery cards from your graveyard without paying their mana costs.

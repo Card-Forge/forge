@@ -5,4 +5,4 @@ PT:2/4
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ GFGToken | TriggerDescription$ Inspired — Whenever CARDNAME becomes untapped, you may pay {2}{U}. If you do, create a 2/2 blue Bird enchantment creature token with flying.
 SVar:GFGToken:AB$ Token | Cost$ 2 U | TokenAmount$ 1 | TokenName$ Bird | TokenTypes$ Enchantment,Creature,Bird | TokenOwner$ You | TokenColors$ Blue | TokenKeywords$ Flying | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ u 2 2 bird bng
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aerie_worshippers.txt
-Oracle:Inspired — Whenever Aerie Worshippers becomes untapped, you may pay {2}{U}. If you do, create a 2/2 blue Bird enchantment creature token with flying. 
+Oracle:Inspired — Whenever Aerie Worshippers becomes untapped, you may pay {2}{U}. If you do, create a 2/2 blue Bird enchantment creature token with flying.

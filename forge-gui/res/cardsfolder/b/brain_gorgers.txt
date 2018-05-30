@@ -6,4 +6,4 @@ T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerDescrip
 SVar:TrigCounter:DB$ Counter | UnlessCost$ Sac<1/Creature> | Defined$ TriggeredSpellAbility | UnlessPayer$ Player | UnlessSwitched$ True
 K:Madness:1 B
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brain_gorgers.jpg
-Oracle:When you cast Brain Gorgers, any player may sacrifice a creature. If a player does, counter Brain Gorgers.\nMadness {1}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)
+Oracle:When you cast this spell, any player may sacrifice a creature. If a player does, counter Brain Gorgers.\nMadness {1}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

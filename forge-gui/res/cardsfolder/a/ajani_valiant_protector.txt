@@ -9,4 +9,4 @@ SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Trample
 SVar:X:Count$YourLifeTotal
 DeckHints:Name$Ajani's Aid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ajani_valiant_protector.jpg
-Oracle:[+2]: Put two +1/+1 counters on up to one target creature.\n[+1]: Reveal cards from the top of your library until you reveal a creature card. Put that card into your hand and the rest on the bottom of your library in a random order.\n[-11]: Put X +1/+1 counters on target creature, where X is your life total. That creature gains trample until end of turn.
+Oracle:+2: Put two +1/+1 counters on up to one target creature.\n+1: Reveal cards from the top of your library until you reveal a creature card. Put that card into your hand and the rest on the bottom of your library in a random order.\n−11: Put X +1/+1 counters on target creature, where X is your life total. That creature gains trample until end of turn.

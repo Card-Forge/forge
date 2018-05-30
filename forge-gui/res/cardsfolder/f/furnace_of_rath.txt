@@ -1,10 +1,10 @@
 Name:Furnace of Rath
 ManaCost:1 R R R
 Types:Enchantment
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card | ValidTarget$ Creature,Player | ReplaceWith$ DmgTwice | Description$ If a source would deal damage to a creature or player, it deals double that damage to that creature or player instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card | ValidTarget$ Permanent,Player | ReplaceWith$ DmgTwice | Description$ If a source would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.
 SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount/Twice
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/furnace_of_rath.jpg
-Oracle:If a source would deal damage to a creature or player, it deals double that damage to that creature or player instead.
+Oracle:If a source would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.
