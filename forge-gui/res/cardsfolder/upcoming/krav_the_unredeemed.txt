@@ -3,10 +3,11 @@ ManaCost:4 B
 Types:Legendary Creature Demon
 PT:3/3
 K:Partner:Regna, the Redeemer:Regna
-K:Flying
-A:AB$ Draw | Cost$ B Sac<X/Creature> | ValidTgts$ Player | TgtPrompt$ Choose a player | NumCards$ ChosenX | References$ X | SubAbility$ DBGainLife | SpellDescription$ Target player draws X cards and gains X life. Put X +1/+1 counters on CARDNAME.
-SVar:DBGainLife:DB$ GainLife | Defined$ Targeted | LifeAmount$ ChosenX | References$ X | SubAbility$ DBPutCounter
-SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ ChosenX | References$ X
+# TODO: implement the proper AI for the activated ability
+A:AB$Draw | Cost$ B Sac<X/Creature/creatures> | NumCards$ ChosenX | ValidTgts$ Player | TgtPrompt$ Choose a player | References$ X | SubAbility$ DBGainLife | AILogic$ Never | SpellDescription$ Target player draws X cards and gains X life. Put X +1/+1 counters on CARDNAME.
+SVar:DBGainLife:DB$GainLife | Defined$ Targeted | LifeAmount$ ChosenX | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ ChosenX
 SVar:X:XChoice
 DeckHints:Name$Regna, the Redeemer
+SVar:Picture:http://www.wizards.com/global/images/magic/general/krav_the_unredeemed.jpg
 Oracle:Partner with Regna, the Redeemer (When this creature enters the battlefield, target player may put Regna into their hand from their library, then shuffle.)\n{B}, Sacrifice X creatures: Target player draws X cards and gains X life. Put X +1/+1 counters on Krav, the Unredeemed.

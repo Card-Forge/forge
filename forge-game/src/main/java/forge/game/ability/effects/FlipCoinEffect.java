@@ -118,9 +118,9 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                     if (sa.getParam("RememberWinner") != null) {
                         host.addRemembered(host);
                     }
-                    AbilitySub sub = sa.getAdditionalAbility("WinSubAbility");
-                    if (sub != null) {
-                        AbilityUtils.resolve(sub);
+
+                    if (sa.hasAdditionalAbility("WinSubAbility")) {
+                        AbilityUtils.resolve(sa.getAdditionalAbility("WinSubAbility"));
                     }
                     // runParams.put("Won","True");
                 } else {
@@ -128,9 +128,8 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                         host.addRemembered(host);
                     }
 
-                    AbilitySub sub = sa.getAdditionalAbility("LoseSubAbility");
-                    if (sub != null) {
-                        AbilityUtils.resolve(sub);
+                    if (sa.hasAdditionalAbility("LoseSubAbility")) {
+                        AbilityUtils.resolve(sa.getAdditionalAbility("LoseSubAbility"));
                     }
                     // runParams.put("Won","False");
                 }
@@ -167,7 +166,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
             flipper.getGame().getAction().nofityOfValue(sa, flipper, result ? "heads" : "tails", null);
         } while (sa.hasParam("FlipUntilYouLose") && result != false);
         
-        if (sa.hasParam("FlipUntilYouLose")) {
+        if (sa.hasParam("FlipUntilYouLose") && sa.hasAdditionalAbility("LoseSubAbility")) {
             sa.getAdditionalAbility("LoseSubAbility").setSVar(varName, "Number$" + numSuccesses);
         }
 
@@ -216,7 +215,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
             caller.getGame().getTriggerHandler().runTrigger(TriggerType.FlippedCoin, runParams, false);
         } while (sa.hasParam("FlipUntilYouLose") && wonFlip);
         
-        if (sa.hasParam("FlipUntilYouLose")) {
+        if (sa.hasParam("FlipUntilYouLose") && sa.hasAdditionalAbility("LoseSubAbility")) {
             sa.getAdditionalAbility("LoseSubAbility").setSVar(varName, "Number$" + numSuccesses);
         }
 
