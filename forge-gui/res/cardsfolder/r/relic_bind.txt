@@ -5,9 +5,9 @@ K:Enchant artifact an opponent controls
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Artifact.OppCtrl | TgtPrompt$ Select target artifact an opponent controls | AILogic$ Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ Whenever enchanted artifact becomes tapped, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBDamage,DBGain
-SVar:DBDamage:DB$ DealDamage | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player or planeswalker.
 SVar:DBGain:DB$ GainLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 1 | SpellDescription$ Target player gains 1 life.
 SVar:RemAIDeck:True
 DeckHas:Ability$LifeGain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/relic_bind.jpg
-Oracle:Enchant artifact an opponent controls\nWhenever enchanted artifact becomes tapped, choose one —\n• Relic Bind deals 1 damage to target player.\n• Target player gains 1 life.
+Oracle:Enchant artifact an opponent controls\nWhenever enchanted artifact becomes tapped, choose one —\n• Relic Bind deals 1 damage to target player or planeswalker.\n• Target player gains 1 life.
