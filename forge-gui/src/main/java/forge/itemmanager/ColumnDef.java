@@ -35,6 +35,7 @@ import java.math.BigDecimal;
 import java.util.Map.Entry;
 
 public enum ColumnDef {
+   /**The column containing the inventory item name.*/
     STRING("", "", 0, false, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
@@ -48,6 +49,7 @@ public enum ColumnDef {
                     return from.getKey().toString();
                 }
             }),
+    /**The name column.*/
     NAME("Name", "Name", 180, false, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
@@ -62,8 +64,7 @@ public enum ColumnDef {
                 }
             }),
             
-    //Sorts cards in the order that is used for assigning collector numbers.
-    //Appends a numeric prefix followed by the sortable name.
+    /**The column for sorting cards in collector order.*/
     COLLECTOR_ORDER("CN", "Collector Number Order", 20, false, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
@@ -77,6 +78,7 @@ public enum ColumnDef {
                     return "";
                 }
             }),
+    /**The type column.*/
     TYPE("Type", "Type", 100, false, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
@@ -90,6 +92,7 @@ public enum ColumnDef {
                     return toType(from.getKey());
                 }
             }),
+    /**The mana cost column.*/
     COST("Cost", "Cost", 70, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
@@ -103,6 +106,7 @@ public enum ColumnDef {
                     return toCardRules(from.getKey());
                 }
             }),
+    /**The color column.*/
     COLOR("Color", "Color", 46, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
@@ -116,6 +120,7 @@ public enum ColumnDef {
                     return toColor(from.getKey());
                 }
             }),
+    /**The power column.*/
     POWER("Power", "Power", 20, true, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
@@ -129,6 +134,7 @@ public enum ColumnDef {
                     return toPower(from.getKey());
                 }
             }),
+    /**The toughness column.*/
     TOUGHNESS("Toughness", "Toughness", 20, true, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
@@ -142,6 +148,7 @@ public enum ColumnDef {
                     return toToughness(from.getKey());
                 }
             }),
+    /**The converted mana cost column.*/
     CMC("CMC", "CMC", 20, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
@@ -155,6 +162,7 @@ public enum ColumnDef {
                     return toCMC(from.getKey());
                 }
             }),
+    /**The rarity column.*/
     RARITY("Rarity", "Rarity", 20, true, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
@@ -168,6 +176,7 @@ public enum ColumnDef {
                     return toRarity(from.getKey());
                 }
             }),
+    /**The set code column.*/
     SET("Set", "Set", 38, true, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
@@ -184,6 +193,7 @@ public enum ColumnDef {
                     return i instanceof InventoryItemFromSet ? ((InventoryItemFromSet) i).getEdition() : "n/a";
                 }
             }),
+    /**The AI compatibility flag column*/
     AI("AI", "AI Status", 30, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
@@ -206,6 +216,7 @@ public enum ColumnDef {
                             : (ai.getRemRandomDecks() ? "?" : "");
                 }
             }),
+    /**The Draft ranking column.*/
     RANKING("Ranking", "Draft Ranking", 50, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
@@ -219,6 +230,7 @@ public enum ColumnDef {
                     return toRanking(from.getKey(), true);
                 }
             }),
+    /**The quantity column.*/
     QUANTITY("Qty", "Quantity", 25, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
@@ -232,6 +244,7 @@ public enum ColumnDef {
                     return from.getValue();
                 }
             }),
+    /**The quantity in deck column.*/
     DECK_QUANTITY("Quantity", "Quantity", 50, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
@@ -245,14 +258,19 @@ public enum ColumnDef {
                     return from.getValue();
                 }
             }),
+    /**The new inventory flag column.*/
     NEW("New", "New", 30, true, SortState.DESC,
             null, null), //functions will be set later
+    /**The price column.*/
     PRICE("Price", "Price", 35, true, SortState.DESC,
             null, null),
+    /**The quantity owned column.*/
     OWNED("Owned", "Owned", 20, true, SortState.ASC,
             null, null),
+    /**The deck name column.*/
     DECKS("Decks", "Decks", 20, true, SortState.ASC,
             null, null),
+    /**The favorite flag column.*/
     FAVORITE("", "Favorite", 18, true, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
@@ -270,6 +288,7 @@ public enum ColumnDef {
                     return toCard(from.getKey());
                 }
             }),
+    /**The favorite deck flag column.*/
     DECK_FAVORITE("", "Favorite", 18, true, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
@@ -287,6 +306,7 @@ public enum ColumnDef {
                     return toDeck(from.getKey());
                 }
             }),
+    /**The edit/delete deck column.*/
     DECK_ACTIONS("", "Delete/Edit", 40, true, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
@@ -300,6 +320,7 @@ public enum ColumnDef {
                     return toDeck(from.getKey());
                 }
             }),
+    /**The deck folder column.*/
     DECK_FOLDER("Folder", "Folder", 80, false, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
@@ -313,6 +334,7 @@ public enum ColumnDef {
                     return toDeckFolder(from.getKey());
                 }
             }),
+    /**The deck color column.*/
     DECK_COLOR("Color", "Color", 70, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
@@ -326,6 +348,7 @@ public enum ColumnDef {
                     return toDeckColor(from.getKey());
                 }
             }),
+    /**The deck format column.*/
     DECK_FORMAT("Format", "Formats deck is legal in", 60, false, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
@@ -354,7 +377,8 @@ public enum ColumnDef {
                     return deck.getFormatsString();
                 }
             }),
-    DECK_EDITION("Set", "Earliest set that can build this deck", 38, true, SortState.DESC,
+    /**The deck edition column, a mystery to us all.*/
+    DECK_EDITION("Set", "Mystery column. We don't know what it does or if that's what it should do.", 38, true, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -367,6 +391,7 @@ public enum ColumnDef {
                     return toDeck(from.getKey()).getEdition().getCode();
                 }
             }),
+    /**The main library size column.*/
     DECK_MAIN("Main", "Main Deck", 30, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
@@ -380,6 +405,7 @@ public enum ColumnDef {
                     return toDeck(from.getKey()).getMainSize();
                 }
             }),
+    /**The sideboard size column.*/
     DECK_SIDE("Side", "Sideboard", 30, true, SortState.ASC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
@@ -417,19 +443,24 @@ public enum ColumnDef {
     public String toString() {
         return this.longName;
     }
-
-    //Trim leading quotes, then move article last, then replace characters.
-    //Because An-Havva Constable.
-    //Capitals and lowercase sorted as one: "my deck" before "Myr Retribution"
-    //Apostrophes matter, though: "D'Avenant" before "Danitha"
-    //TO DO: Commas before apostrophes: "Rakdos, Lord of Riots" before "Rakdos's Return"
+/**
+   *Converts a card name to a sortable name.
+    * Trim leading quotes, then move article last, then replace characters.
+    * Because An-Havva Constable.
+    * Capitals and lowercase sorted as one: "my deck" before "Myr Retribution"
+    * Apostrophes matter, though: "D'Avenant" before "Danitha"
+    * TO DO: Commas before apostrophes: "Rakdos, Lord of Riots" before "Rakdos's Return"
+    * @param printedName The name of the card.
+    * @return A sortable name.
+   */
     private static String toSortableName(String printedName) {
       if (printedName.startsWith("\"")) printedName = printedName.substring(1);
       return moveArticleToEnd(printedName).toLowerCase().replaceAll("[^\\s'0-9a-z]","");
     }
 
     
-    /*For localization, simply overwrite this array with appropriate words.
+    /**Article words. These words get kicked to the end of a sortable name.
+    For localization, simply overwrite this array with appropriate words.
       Words in this list are used by the method String moveArticleToEnd(String), useful
       for alphabetizing phrases, in particular card or other inventory object names.*/
     private static final String[] ARTICLE_WORDS = {
@@ -438,7 +469,9 @@ public enum ColumnDef {
          "The"
     };
     
-    //Detects whether a string begins with an article word
+    /**Detects whether a string begins with an article word
+    @param str The name of the card.
+    @return The sort-friendly name of the card. Example: "The Hive" becomes "Hive The".*/
     private static String moveArticleToEnd(String str){
       String articleWord;
       for (int i = 0; i < ARTICLE_WORDS.length; i++){
@@ -518,14 +551,19 @@ public enum ColumnDef {
         return i instanceof DeckProxy ? ((DeckProxy) i).getPath() + "/" : null;
     }
     
-    //START COLLECTOR-NUMBER-STYLE SORTING CODE//
-    //this is a multi-layer sort. coding it in layers to make it easier to manipulate.
+    /**Generates a sortable numeric string based on a card's attributes.
+        This is a multi-layer sort. It is coded in layers to make it easier to manipulate.
+        This method can be fed any inventory item, but is only useful for paper cards.
+        @param i An inventory item.
+        @return A sortable numeric string based on the item's attributes.*/
     private static String toCollectorPrefix(final InventoryItem i) {
       //make sure it's a card. if not, pointless to proceed.
       return (i instanceof PaperCard ? toBasicLandsLast(i) + " " : "") + toSortableName(i.getName());
     }
     
-    //lands after other cards
+    /**Returns 1 for land, otherwise 0 and continues sorting.
+    @param i A paper card.
+    @return Part of a sortable numeric string.*/
     private static String toLandsLast(final InventoryItem i) {
          //nonland?
          return !(((IPaperCard) i).getRules().getType().isLand()) ?
@@ -534,39 +572,51 @@ public enum ColumnDef {
          : "1";
     }
     
-    //colorless artifacts last
+    /**Returns 1 for colorless artifacts, otherwise 0 and continues sorting.
+    @param i A paper card.
+    @return Part of a sortable numeric string.*/
     private static String toColorlessArtifactsLast(final InventoryItem i) {
      return !(((IPaperCard) i).getRules().getType().isArtifact() && toColor(i).isColorless())
             ? "0" + toSplitLast(i): "1";
     }
     
-    //split cards last
+    /**Returns 1 for split cards or 0 for other cards; continues sorting.
+    @param i A paper card.
+    @return Part of a sortable numeric string.*/
     private static String toSplitLast(final InventoryItem i) {
       return ((IPaperCard) i).getRules().getSplitType() != CardSplitType.Split ?
             "0" + toConspiracyFirst(i) : "1" + toSplitCardSort(i);
     }
     
-    //conspiracy first, then everything else
+    /**Returns 0 for Conspiracy cards, otherwise 1 and continues sorting.
+    @param i A paper card.
+    @return Part of a sortable numeric string.*/
     private static String toConspiracyFirst(final InventoryItem i) {
         return ((IPaperCard) i).getRules().getType().isConspiracy()
                 ? "0" //is a Conspiracy
                 : "1" + toColorlessFirst(i); //isn't a Conspiracy
     }
     
-    //colorless first, then colored.
+    /**Returns 0 for colorless cards, otherwise 1 and continues sorting.
+    @param i A paper card.
+    @return Part of a sortable numeric string.*/
     private static String toColorlessFirst(final InventoryItem i) {
       return toColor(i).isColorless() ?
             "0" : "1" + toMonocolorFirst(i);
     }
     
-    //monocolor nonartifact nonland spells are first, then multicolored.
+    /**Returns 0 for monocolor cards, 1 for multicolor cards; continues sorting.
+    @param i A paper card.
+    @return Part of a sortable numeric string.*/
     private static String toMonocolorFirst(final InventoryItem i) {
       return toColor(i).isMonoColor() ?
             "0" + toWubrgOrder(i): "1" + toGoldFirst(i);
     }
     
-    //gold cards first
-      private static String toGoldFirst(final InventoryItem i) {
+    /**Returns 0 for gold cards and continues sorting, 1 otherwise.
+    @param i A paper card.
+    @return Part of a sortable numeric string.*/
+    private static String toGoldFirst(final InventoryItem i) {
       forge.card.mana.ManaCost manaCost = ((IPaperCard) i).getRules().getManaCost();
       
       return !(manaCost.canBePaidWithAvaliable(MagicColor.WHITE) | manaCost.canBePaidWithAvaliable(MagicColor.BLUE) |
@@ -574,6 +624,11 @@ public enum ColumnDef {
             manaCost.canBePaidWithAvaliable(MagicColor.GREEN)) ? "0" : "1";
     }
     
+    /**Entry point for generating split card sortable strings.
+    Splits the card into two card faces, then sends it to the next
+    sorting method.
+    @param i A paper card.
+    @return Part of a sortable numeric string.*/
     //Split card sorting is probably as complex as sorting gets.
     //This method serves as an entry point only, separating the two card parts for convenience.
     private static String toSplitCardSort(final InventoryItem i) {
@@ -583,7 +638,18 @@ public enum ColumnDef {
       return toSplitSort(mainPart, otherPart);
     }
     
-    //Split cards are sorted by color on both halves.
+    /**Generates a sortable numeric string for split cards.
+    Split cards are sorted by color on both halves.
+    Sort order is C//C, W//W, U//U, B//B, R//R, G//G,
+    Gold/Gold,
+    W//U, U//B, B//R, R//G, G//W,
+    W//B, U//R, B//G, R//W, G//U,
+    W//R, U//G, B//W, R//U, G//B,
+    W//G, U//W, B//U, R//B, G//R.
+    Any that do not conform will sort at the end.
+    @param mainPart The first half of the card.
+    @param otherPart The other half of the card.
+    @return Part of a sortable numeric string.*/
       private static String toSplitSort(final ICardFace mainPart, final ICardFace otherPart) {
       ColorSet mainPartColor = mainPart.getColor();
       ColorSet otherPartColor = otherPart.getColor();
@@ -636,38 +702,46 @@ public enum ColumnDef {
             "99";
     }
     
-    //sort by casting cost color
+    /**Returns 0 for white, 1 for blue, 2 for black, 3 for red, or 4 for green.
+    @param i A paper card.
+    @return Part of a sortable numeric string.*/
     private static String toWubrgOrder(final InventoryItem i) {
       ColorSet color = toColor(i);
       return color.hasWhite() ? "0" : color.hasBlue() ? "1" : color.hasBlack() ? "2" :
             color.hasRed() ? "3" : "4";
     }
     
-    //Contraptions are after all other cards except basic lands
+    /**Returns 1 for Contraptions, otherwise 0 and continues sorting.
+    @param i A paper card.
+    @return Part of a sortable numeric string.*/
     private static String toContraptionsLast(final InventoryItem i) {
       return !(((IPaperCard) i).getRules().getType().hasSubtype("Contraption")) ?
             "0" + toLandsLast(i) : "1";
     }
     
-    //basic lands are after all other cards
+    /**Returns 1 for basic lands, 0 otherwise, and continues sorting.
+    @param i A paper card.
+    @return Part of a sortable numeric string.*/
     private static String toBasicLandsLast(final InventoryItem i) {
       return !(((IPaperCard) i).getRules().getType().isBasicLand())
             ? "0" + toContraptionsLast(i)
             : "1" + toFullArtFirst(i);
     }
     
-    //basic lands are sorted full-art, then normal art.
-    //Forge doesn't make this distinction. If it did, this prefix would be added just before
-    //the basic land type prefix.
+    /**Currently only continues sorting. If Forge is updated to
+    use a flag for full-art lands, this method should be updated
+    to assign those 0 and regular lands 1, then continue sorting.
+    @param i A paper card.
+    @return Part of a sortable numeric string.*/
     private static String toFullArtFirst(final InventoryItem i) {
       return toBasicLandSort(i);
     }
     
-    //Plains, Island, Swamp, Mountain, Forest.
-    //Not sure what to do with Wastes or Snow-Covered lands, so putting the typeless
-    //Wastes first and letting Snow-Covered lands fall in with their nonsnow friends.
-    //Full-art basic lands are supposed to come before all others, but Forge doesn't distinguish
-    //the two.
+    /**Returns 0 for wastes, 1 for plains, 2 for island,
+    3 for swamp, 4 for mountain, 5 for forest. Snow
+    lands are treated like nonsnow.
+    @param i A paper card.
+    @return Part of a sortable numeric string.*/
     private static String toBasicLandSort(final InventoryItem i) {
       CardType basicLandType = ((IPaperCard) i).getRules().getType();
       return basicLandType.hasStringType("Plains") ? "1" : (
