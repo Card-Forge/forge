@@ -2,9 +2,9 @@ Name:Mogg Maniac
 ManaCost:1 R
 Types:Creature Goblin
 PT:1/1
-T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to target opponent.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ X | References$ X
+T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to target opponent or planeswalker.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_maniac.jpg
-Oracle:Whenever Mogg Maniac is dealt damage, it deals that much damage to target opponent.
+Oracle:Whenever Mogg Maniac is dealt damage, it deals that much damage to target opponent or planeswalker.
