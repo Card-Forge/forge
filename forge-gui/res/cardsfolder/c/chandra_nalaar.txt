@@ -2,9 +2,9 @@ Name:Chandra Nalaar
 ManaCost:3 R R
 Types:Legendary Planeswalker Chandra
 Loyalty:6
-A:AB$ DealDamage | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1 | Planeswalker$ True | SpellDescription$ CARDNAME deals 1 damage to target player.
+A:AB$ DealDamage | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | Planeswalker$ True | SpellDescription$ CARDNAME deals 1 damage to target player or planeswalker.
 A:AB$ DealDamage | Cost$ SubCounter<X/LOYALTY> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ ChosenX | Planeswalker$ True | References$ X | SpellDescription$ CARDNAME deals X damage to target creature.
-A:AB$ DamageAll | Cost$ SubCounter<8/LOYALTY> | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 10 | ValidCards$ Creature | ValidPlayers$ Targeted | Planeswalker$ True | Ultimate$ True | ValidDescription$ target player and each creature they control. | SpellDescription$ CARDNAME deals 10 damage to target player and each creature they control.
+A:AB$ DamageAll | Cost$ SubCounter<8/LOYALTY> | ValidTgts$ Player | TgtPrompt$ Select target player or planeswalker | NumDmg$ 10 | ValidCards$ Creature | ValidPlayers$ TargetedOrController | Planeswalker$ True | Ultimate$ True | ValidDescription$ target player or planeswalker and each creature that player or that planeswalker's controller controls. | SpellDescription$ CARDNAME deals 10 damage to target player or planeswalker and each creature that player or that planeswalker's controller controls.
 SVar:X:XChoice
 SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card140176.jpg
-Oracle:[+1]: Chandra Nalaar deals 1 damage to target player.\n[-X]: Chandra Nalaar deals X damage to target creature.\n[-8]: Chandra Nalaar deals 10 damage to target player and each creature they control.
+Oracle:[+1]: Chandra Nalaar deals 1 damage to target player or planeswalker.\n[-X]: Chandra Nalaar deals X damage to target creature.\n[-8]: Chandra Nalaar deals 10 damage to target player or planeswalker and each creature that player or that planeswalker's controller controls.
