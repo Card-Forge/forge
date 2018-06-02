@@ -537,7 +537,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public SpellAbility chooseSingleSpellForEffect(final List<SpellAbility> spells, final SpellAbility sa,
-            final String title) {
+            final String title, Map<String, Object> params) {
         if (spells.size() < 2) {
             return Iterables.getFirst(spells, null);
         }

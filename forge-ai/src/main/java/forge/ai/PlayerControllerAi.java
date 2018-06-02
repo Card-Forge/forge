@@ -168,12 +168,13 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public SpellAbility chooseSingleSpellForEffect(java.util.List<SpellAbility> spells, SpellAbility sa, String title) {
+    public SpellAbility chooseSingleSpellForEffect(java.util.List<SpellAbility> spells, SpellAbility sa, String title,
+            Map<String, Object> params) {
         ApiType api = sa.getApi();
         if (null == api) {
             throw new InvalidParameterException("SA is not api-based, this is not supported yet");
         }
-        return SpellApiToAi.Converter.get(api).chooseSingleSpellAbility(player, sa, spells);
+        return SpellApiToAi.Converter.get(api).chooseSingleSpellAbility(player, sa, spells, params);
     }
 
     @Override
