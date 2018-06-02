@@ -263,6 +263,11 @@ public class DrawAi extends SpellAbilityAi {
                 }
                 sa.setSVar("ChosenX", Integer.toString(numCards));
                 source.setSVar("ChosenX", Integer.toString(numCards));
+
+                // If the logic is set to AsChosen, then skip the ability if nothing is to be chosen
+                if ("AsChosen".equals(sa.getParam("AILogic")) && numCards <= 0) {
+                    return false;
+                }
             }
         }
         // Logic for cards that require special handling

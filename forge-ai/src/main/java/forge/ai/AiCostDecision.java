@@ -520,13 +520,16 @@ public class AiCostDecision extends CostDecisionMakerBase {
                     // the AI decide on creatures to sac makes the AI sacrifice them, but the cost is not reduced and the
                     // AI pays the full mana cost anyway (despite sacrificing creatures).
                     return PaymentDecision.card(new CardCollection());
+                } else if ("AsChosen".equals(ability.getParam("AILogic"))) {
+                    // Honor the ChosenX value set earlier by the AI ability processing code.
+                    c = AbilityUtils.calculateAmount(source, source.getSVar("ChosenX"), null);
+                } else {
+                    // Other cards are assumed to be flagged RemAIDeck for now
+                    return null;
                 }
-
-                // Other cards are assumed to be flagged RemAIDeck for now
-                return null;
+            } else {
+                c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
             }
-
-            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
         final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
         CardCollectionView list = aic.chooseSacrificeType(cost.getType(), ability, c);
