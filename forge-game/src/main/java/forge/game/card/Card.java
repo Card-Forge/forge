@@ -746,6 +746,18 @@ public class Card extends GameEntity implements Comparable<Card> {
             view.updateRemembered(this);
         }
     }
+
+    public final <T> void removeRemembered(final Iterable<T> list) {
+        boolean changed = false;
+        for (T o : list) {
+            if (rememberedObjects.remove(o)) {
+                changed = true;
+            }
+        }
+        if (changed) {
+            view.updateRemembered(this);
+        }
+    }
     public final void clearRemembered() {
         if (rememberedObjects.isEmpty()) { return; }
         rememberedObjects.clear();
