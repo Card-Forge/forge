@@ -244,13 +244,13 @@ public final class ForgeConstants {
     /**Filename of blank blue card image.*/
     public static final String NO_CARD_FILE_U = _DEFAULTS_DIR + "u.jpg";
     /**Filename of blank black card image.*/
-    public static final String NO_CARD_FILE_A = _DEFAULTS_DIR + "b.jpg";
+    public static final String NO_CARD_FILE_B = _DEFAULTS_DIR + "b.jpg";
     /**Filename of blank red card image.*/
-    public static final String NO_CARD_FILE_A = _DEFAULTS_DIR + "r.jpg";
+    public static final String NO_CARD_FILE_R = _DEFAULTS_DIR + "r.jpg";
     /**Filename of blank green card image.*/
-    public static final String NO_CARD_FILE_A = _DEFAULTS_DIR + "g.jpg";
+    public static final String NO_CARD_FILE_G = _DEFAULTS_DIR + "g.jpg";
     /**Filename of blank multicolor card image.*/
-    public static final String NO_CARD_FILE_A = _DEFAULTS_DIR + "m.jpg";
+    public static final String NO_CARD_FILE_M = _DEFAULTS_DIR + "m.jpg";
     
     
     public static final FileLocation WINDOW_LAYOUT_FILE      = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "window.xml");
