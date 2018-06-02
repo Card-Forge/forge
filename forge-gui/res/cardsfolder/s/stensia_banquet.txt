@@ -1,10 +1,10 @@
 Name:Stensia Banquet
 ManaCost:2 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ X | References$ X | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals damage to target opponent equal to the number of Vampires you control. Draw a card.
+A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ X | References$ X | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals damage to target opponent or planeswalker equal to the number of Vampires you control. Draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:X:Count$TypeYouCtrl.Vampire
 SVar:RemRandomDeck:True
 DeckHints:Type$Vampire
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stensia_banquet.jpg
-Oracle:Stensia Banquet deals damage to target opponent equal to the number of Vampires you control.\nDraw a card.
+Oracle:Stensia Banquet deals damage to target opponent or planeswalker equal to the number of Vampires you control.\nDraw a card.
