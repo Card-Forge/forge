@@ -26,10 +26,7 @@ import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterType;
-import forge.game.cost.Cost;
-import forge.game.cost.CostDiscard;
-import forge.game.cost.CostPart;
-import forge.game.cost.PaymentDecision;
+import forge.game.cost.*;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -252,22 +249,32 @@ public class DrawAi extends SpellAbilityAi {
         }
 
         if (num != null && num.equals("ChosenX")) {
-            // Necrologia, Pay X Life : Draw X Cards
             if (sa.getSVar("X").equals("XChoice")) {
                 // Draw up to max hand size but leave at least 3 in library
                 numCards = Math.min(computerMaxHandSize - computerHandSize, computerLibrarySize - 3);
-                // But no more than what's "safe" and doesn't risk a near death experience
-                // Maybe would be better to check for "serious danger" and take more risk?
-                while ((ComputerUtil.aiLifeInDanger(ai, false, numCards) && (numCards > 0))) {
-                    numCards--;
+
+                if (sa.getPayCosts() != null) {
+                    if (sa.getPayCosts().hasSpecificCostType(CostPayLife.class)) {
+                        // [Necrologia, Pay X Life : Draw X Cards]
+                        // Don't draw more than what's "safe" and don't risk a near death experience
+                        // Maybe would be better to check for "serious danger" and take more risk?
+                        while ((ComputerUtil.aiLifeInDanger(ai, false, numCards) && (numCards > 0))) {
+                            numCards--;
+                        }
+                    } else if (sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
+                        // [e.g. Krav, the Unredeemed and other cases which say "Sacrifice X creatures: draw X cards]
+                        // TODO: Add special logic to limit/otherwise modify the ChosenX value here
+
+                        // Skip this ability if nothing is to be chosen for sacrifice
+                        if (numCards <= 0) {
+                            return false;
+                        }
+                    }
                 }
+
                 sa.setSVar("ChosenX", Integer.toString(numCards));
                 source.setSVar("ChosenX", Integer.toString(numCards));
 
-                // If the logic is set to AsChosen, then skip the ability if nothing is to be chosen
-                if ("AsChosen".equals(sa.getParam("AILogic")) && numCards <= 0) {
-                    return false;
-                }
             }
         }
         // Logic for cards that require special handling
