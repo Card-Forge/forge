@@ -16,10 +16,7 @@ public class AssignGroupAi extends SpellAbilityAi {
     }
 
     public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells, Map<String, Object> params) {
-        if (sa.hasParam("AILogic")) {
-            return Iterables.getFirst(spells, null);
-        }
-        final String logic = sa.getParam("AILogic");
+        final String logic = sa.getParamOrDefault("AILogic", "");
         
         if (logic.equals("FriendOrFoe")) {
             if (params.containsKey("Affected") && spells.size() >= 2) {
