@@ -6,6 +6,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CounterType;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
 public class CountersNoteEffect extends SpellAbilityEffect {
@@ -26,7 +27,7 @@ public class CountersNoteEffect extends SpellAbilityEffect {
             if (mode.equals(MODE_STORE)) {
                 noteCounters(c, source);
             } else if (mode.equals(MODE_LOAD)) {
-                loadCounters(c, source);
+                loadCounters(c, source, sa.getActivatingPlayer());
             }
         }
     }
@@ -39,11 +40,11 @@ public class CountersNoteEffect extends SpellAbilityEffect {
         }
     }
 
-    private void loadCounters(Card notee, Card source) {
+    private void loadCounters(Card notee, Card source, final Player p) {
         for(Entry<String, String> svar : source.getSVars().entrySet()) {
             String key = svar.getKey();
             if (key.startsWith(NOTE_COUNTERS)) {
-                notee.addCounter(CounterType.getType(key.substring(NOTE_COUNTERS.length())), Integer.parseInt(svar.getValue()), source, false);
+                notee.addCounter(CounterType.getType(key.substring(NOTE_COUNTERS.length())), Integer.parseInt(svar.getValue()), p, false);
             }
             // TODO Probably should "remove" the svars that were temporarily used
         }

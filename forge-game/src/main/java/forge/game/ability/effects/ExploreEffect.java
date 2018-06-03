@@ -44,7 +44,6 @@ public class ExploreEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         // check if only the activating player counts
-        final Card card = sa.getHostCard();
         final Player pl = sa.getActivatingPlayer();
         final PlayerController pc = pl.getController();
         final Game game = pl.getGame();
@@ -78,7 +77,7 @@ public class ExploreEffect extends SpellAbilityEffect {
                 // if the card is not more in the game anymore
                 // this might still return true but its no problem
                 if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.getTimestamp() == c.getTimestamp()) {
-                    c.addCounter(CounterType.P1P1, 1, card, true);
+                    c.addCounter(CounterType.P1P1, 1, pl, true);
                 }
             }
 

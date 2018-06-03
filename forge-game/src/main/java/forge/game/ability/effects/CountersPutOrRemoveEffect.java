@@ -5,6 +5,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
+import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
@@ -81,8 +82,8 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
 
     private void addOrRemoveCounter(final SpellAbility sa, final Card tgtCard, CounterType ctype,
             final int counterAmount) {
-        PlayerController pc = sa.getActivatingPlayer().getController();
-        final Card source = sa.getHostCard();
+        final Player pl = sa.getActivatingPlayer();
+        final PlayerController pc = pl.getController();
 
         Map<String, Object> params = Maps.newHashMap();
         params.put("Target", tgtCard);
@@ -105,7 +106,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
             
             boolean apply = zone == null || zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack);
 
-            tgtCard.addCounter(chosenType, counterAmount, source, apply);
+            tgtCard.addCounter(chosenType, counterAmount, pl, apply);
         } else {
             tgtCard.subtractCounter(chosenType, counterAmount);
         }
