@@ -274,9 +274,9 @@ public class DrawAi extends SpellAbilityAi {
 
                 sa.setSVar("ChosenX", Integer.toString(numCards));
                 source.setSVar("ChosenX", Integer.toString(numCards));
-
             }
         }
+
         // Logic for cards that require special handling
         if ("YawgmothsBargain".equals(logic)) {
             return SpecialCardAi.YawgmothsBargain.consider(ai, sa);
