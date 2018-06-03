@@ -110,10 +110,10 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
         }
 
-        Player putter = activator;
-        if (sa.hasParam("Putter")) {
-            final String pstr = sa.getParam("Putter");
-            putter = AbilityUtils.getDefinedPlayers(sa.getHostCard(), pstr, sa).get(0);
+        Player placer = activator;
+        if (sa.hasParam("Placer")) {
+            final String pstr = sa.getParam("Placer");
+            placer = AbilityUtils.getDefinedPlayers(sa.getHostCard(), pstr, sa).get(0);
         }
 
         final boolean etbcounter = sa.hasParam("ETB");
@@ -161,10 +161,10 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 if (eachExistingCounter) {
                     for(CounterType ct : choices) {
                         if (obj instanceof Player) {
-                            ((Player) obj).addCounter(ct, counterAmount, putter, true);
+                            ((Player) obj).addCounter(ct, counterAmount, placer, true);
                         }
                         if (obj instanceof Card) {
-                            ((Card) obj).addCounter(ct, counterAmount, putter, true);
+                            ((Card) obj).addCounter(ct, counterAmount, placer, true);
                         }
                     }
                     continue;
@@ -238,9 +238,9 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     final Zone zone = tgtCard.getGame().getZoneOf(tgtCard);
                     if (zone == null || zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack)) {
                         if (etbcounter) {
-                            tgtCard.addEtbCounter(counterType, counterAmount, putter);
+                            tgtCard.addEtbCounter(counterType, counterAmount, placer);
                         } else {
-                            tgtCard.addCounter(counterType, counterAmount, putter, true);
+                            tgtCard.addCounter(counterType, counterAmount, placer, true);
                         }
                         if (remember) {
                             final int value = tgtCard.getTotalCountersToAdd();
@@ -269,9 +269,9 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         // adding counters to something like re-suspend cards
                         // etbcounter should apply multiplier
                         if (etbcounter) {
-                            tgtCard.addEtbCounter(counterType, counterAmount, putter);
+                            tgtCard.addEtbCounter(counterType, counterAmount, placer);
                         } else {
-                            tgtCard.addCounter(counterType, counterAmount, putter, false);
+                            tgtCard.addCounter(counterType, counterAmount, placer, false);
                         }
                     }
                     game.updateLastStateForCard(tgtCard);
@@ -279,7 +279,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             } else if (obj instanceof Player) {
                 // Add Counters to players!
                 Player pl = (Player) obj;
-                pl.addCounter(counterType, counterAmount, putter, true);
+                pl.addCounter(counterType, counterAmount, placer, true);
             }
         }
     }
