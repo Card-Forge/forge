@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Dominaria #05
+URL:http://www.possibilitystorm.com/wp-content/uploads/2018/05/064.DOM5_.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. You have exiled Fatal Push and Mutiny with Karn. Assume any cards you could draw from your library are irrelevant. You already have the city's blessing at the start of the puzzle.
+[state]
+humanlife=20
+ailife=8
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Relic Runner;Garna, the Bloodflame;Forebear's Blade;Karn, Scion of Urza
+humanlibrary=Song of Freyalise;Song of Freyalise;Song of Freyalise;Song of Freyalise;Song of Freyalise;Song of Freyalise;Song of Freyalise;Song of Freyalise;Song of Freyalise;Song of Freyalise
+humanbattlefield=Karn, Scion of Urza|Counters:LOYALTY=2;Weldfast Wingsmith;Storm Fleet Swashbuckler;Reckless Fireweaver;Underhanded Designs;Sulfur Falls|Set:DOM;Sulfur Falls|Set:DOM;Sulfur Falls|Set:DOM;Canyon Slough;Canyon Slough;Canyon Slough
+humanexile=Mutiny|Counters:SILVER=1;Fatal Push|Counters:SILVER=1
+aibattlefield=Aerial Responder;Aerial Responder;Bonded Horncrest
