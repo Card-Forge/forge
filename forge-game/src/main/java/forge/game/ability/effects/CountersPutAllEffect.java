@@ -57,18 +57,18 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
             cards = CardLists.filterControlledBy(cards, pl);
         }
 
-        Player putter = activator;
-        if (sa.hasParam("Putter")) {
-            final String pstr = sa.getParam("Putter");
-            putter = AbilityUtils.getDefinedPlayers(host, pstr, sa).get(0);
+        Player placer = activator;
+        if (sa.hasParam("Placer")) {
+            final String pstr = sa.getParam("Placer");
+            placer = AbilityUtils.getDefinedPlayers(host, pstr, sa).get(0);
         }
 
         for (final Card tgtCard : cards) {
             if (game.getZoneOf(tgtCard).is(ZoneType.Battlefield)) {
-                tgtCard.addCounter(CounterType.valueOf(type), counterAmount, putter, true);
+                tgtCard.addCounter(CounterType.valueOf(type), counterAmount, placer, true);
             } else {
                 // adding counters to something like re-suspend cards
-                tgtCard.addCounter(CounterType.valueOf(type), counterAmount, putter, false);
+                tgtCard.addCounter(CounterType.valueOf(type), counterAmount, placer, false);
             }
             game.updateLastStateForCard(tgtCard);
         }
