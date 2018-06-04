@@ -33,7 +33,6 @@ import com.google.common.cache.LoadingCache;
 import com.mortennobel.imagescaling.ResampleOp;
 
 import forge.assets.FSkinProp;
-import forge.card.CardRules;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.item.InventoryItem;
@@ -63,28 +62,7 @@ public class ImageCache {
 
     private static final Set<String> _missingIconKeys = new HashSet<String>();
     private static final LoadingCache<String, BufferedImage> _CACHE = CacheBuilder.newBuilder().softValues().build(new ImageLoader());
-    /**Default image for cards.*/
     private static final BufferedImage _defaultImage;
-    /**Default image for artifact cards.*/
-    private static final BufferedImage _defaultImageA;
-    /**Default image for black cards.*/
-    private static final BufferedImage _defaultImageB;
-    /**Default image for colorless cards.*/
-    private static final BufferedImage _defaultImageC;
-    /**Default image for green cards.*/
-    private static final BufferedImage _defaultImageG;
-    /**Default image for land cards.*/
-    private static final BufferedImage _defaultImageL;
-    /**Default image for multicolored cards.*/
-    private static final BufferedImage _defaultImageM;
-    /**Default image for red cards.*/
-    private static final BufferedImage _defaultImageR;
-    /**Default image for blue cards.*/
-    private static final BufferedImage _defaultImageU;
-    /**Default image for white cards.*/
-    private static final BufferedImage _defaultImageW;
-    
-    /**Buffer for default card image.*/
     static {
         BufferedImage defImage = null;
         try {
@@ -93,114 +71,6 @@ public class ImageCache {
             System.err.println("could not load default card image");
         } finally {
             _defaultImage = (null == defImage) ? new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB) : defImage; 
-        }
-    }
-
-    /**Buffer for default artifact card image.*/
-    static {
-        BufferedImage defImage = null;
-        try {
-            defImage = ImageIO.read(new File(ForgeConstants.NO_CARD_FILE_A));
-        } catch (Exception ex) {
-            System.err.println("could not load default artifact card image");
-        } finally {
-            _defaultImageA = (null == defImage) ? new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB) : defImage; 
-        }
-    }
-
-    /**Buffer for default black card image.*/
-    static {
-        BufferedImage defImage = null;
-        try {
-            defImage = ImageIO.read(new File(ForgeConstants.NO_CARD_FILE_B));
-        } catch (Exception ex) {
-            System.err.println("could not load default black card image");
-        } finally {
-            _defaultImageB = (null == defImage) ? new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB) : defImage; 
-        }
-    }
-
-    /**Buffer for default colorless card image.*/
-    static {
-        BufferedImage defImage = null;
-        try {
-            defImage = ImageIO.read(new File(ForgeConstants.NO_CARD_FILE_C));
-        } catch (Exception ex) {
-            System.err.println("could not load default colorless card image");
-        } finally {
-            _defaultImageC = (null == defImage) ? new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB) : defImage; 
-        }
-    }
-
-    /**Buffer for default green card image.*/
-    static {
-        BufferedImage defImage = null;
-        try {
-            defImage = ImageIO.read(new File(ForgeConstants.NO_CARD_FILE_G));
-        } catch (Exception ex) {
-            System.err.println("could not load default green card image");
-        } finally {
-            _defaultImageG = (null == defImage) ? new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB) : defImage; 
-        }
-    }
-
-    /**Buffer for default land card image.*/
-    static {
-        BufferedImage defImage = null;
-        try {
-            defImage = ImageIO.read(new File(ForgeConstants.NO_CARD_FILE_L));
-        } catch (Exception ex) {
-            System.err.println("could not load default land card image");
-        } finally {
-            _defaultImageL = (null == defImage) ? new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB) : defImage; 
-        }
-    }
-
-    /**Buffer for default multicolored card image.*/
-    static {
-        BufferedImage defImage = null;
-        try {
-            defImage = ImageIO.read(new File(ForgeConstants.NO_CARD_FILE_M));
-        } catch (Exception ex) {
-            System.err.println("could not load default multicolor card image");
-        } finally {
-            _defaultImageM = (null == defImage) ? new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB) : defImage; 
-        }
-    }
-
-    /**Buffer for default red card image.*/
-    static {
-        BufferedImage defImage = null;
-        try {
-            defImage = ImageIO.read(new File(ForgeConstants.NO_CARD_FILE_R));
-        } catch (Exception ex) {
-            System.err.println("could not load default red card image");
-        } finally {
-            _defaultImageR = (null == defImage) ? new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB) : defImage; 
-        }
-    }
-
-    /**Buffer for default blue card image.*/
-    static {
-        BufferedImage defImage = null;
-        try {
-            defImage = ImageIO.read(new File(ForgeConstants.NO_CARD_FILE_U));
-        } catch (Exception ex) {
-            System.err.println("could not load default blue card image");
-        } finally {
-            _defaultImageU = (null == defImage) ? new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB) : defImage; 
-        }
-    }
-
-    /**Buffer for default white card image.*/
-    static {
-        BufferedImage defImage = null;
-        try {
-            defImage = ImageIO.read(new File(ForgeConstants.NO_CARD_FILE_W));
-        } catch (Exception ex) {
-            System.err.println("could not load default white card image");
-        } finally {
-            _defaultImageW = (null == defImage) ? new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB) : defImage; 
         }
     }
 
@@ -280,27 +150,11 @@ public class ImageCache {
         // a default "not available" image, however do not add it to the cache,
         // as otherwise it's problematic to update if the real image gets fetched.
         if (original == null && useDefaultIfNotFound) { 
-            System.out.println("No original for " + imageKey + ", using default.");
-            //Currently doesn't fetch a separate default image for each side.
-            original = getDefaultImage(StaticData.instance().getCommonCards().getCard(imageKey.substring(imageKey.indexOf("/")+1, imageKey.length()-5)).getRules());
+            original = _defaultImage;
         }
 
         return original;
     }
-    
-    /**Gets the default image for a card.*/
-    private static BufferedImage getDefaultImage(CardRules rules) {
-      if (rules.getType().isLand()) return _defaultImageL;
-      if (rules.getType().isArtifact()) return _defaultImageA;
-      if (rules.getColor().isMulticolor()) return _defaultImageM;
-      if (rules.getColor().hasWhite()) return _defaultImageW;
-      if (rules.getColor().hasBlue()) return _defaultImageU;
-      if (rules.getColor().hasBlack()) return _defaultImageB;
-      if (rules.getColor().hasRed()) return _defaultImageR;
-      if (rules.getColor().hasGreen()) return _defaultImageG;
-      if (rules.getColor().isColorless()) return _defaultImageC;
-      return _defaultImage;
-   }
 
     private static BufferedImage scaleImage(String key, final int width, final int height, boolean useDefaultImage) {
         if (StringUtils.isEmpty(key) || (3 > width && -1 != width) || (3 > height && -1 != height)) {
@@ -319,7 +173,7 @@ public class ImageCache {
         BufferedImage original = getOriginalImage(key, useDefaultImage);
         if (original == null) { return null; }
 
-        if (original == getDefaultImage(StaticData.instance().getCommonCards().getCard(key.substring(2)).getRules())) {
+        if (original == _defaultImage) {
             // Don't put the default image in the cache under the key for the card.
             // Instead, cache it under its own key, to avoid duplication of the
             // default image and to remove the need to invalidate the cache when

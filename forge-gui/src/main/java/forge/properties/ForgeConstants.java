@@ -231,28 +231,7 @@ public final class ForgeConstants {
 
     // data that has defaults in the program dir but overrides/additions in the user dir
     private static final String _DEFAULTS_DIR = RES_DIR + "defaults" + PATH_SEPARATOR;
-    /**Filename of blank card image.*/
     public static final String NO_CARD_FILE   = _DEFAULTS_DIR + "no_card.jpg";
-    /**Filename of blank artifact card image.*/
-    public static final String NO_CARD_FILE_A = _DEFAULTS_DIR + "a.jpg";
-    /**Filename of blank land card image.*/
-    public static final String NO_CARD_FILE_L = _DEFAULTS_DIR + "l.jpg";
-    /**Filename of blank colorless card image.*/
-    public static final String NO_CARD_FILE_C = _DEFAULTS_DIR + "c.jpg";
-    /**Filename of blank white card image.*/
-    public static final String NO_CARD_FILE_W = _DEFAULTS_DIR + "w.jpg";
-    /**Filename of blank blue card image.*/
-    public static final String NO_CARD_FILE_U = _DEFAULTS_DIR + "u.jpg";
-    /**Filename of blank black card image.*/
-    public static final String NO_CARD_FILE_B = _DEFAULTS_DIR + "b.jpg";
-    /**Filename of blank red card image.*/
-    public static final String NO_CARD_FILE_R = _DEFAULTS_DIR + "r.jpg";
-    /**Filename of blank green card image.*/
-    public static final String NO_CARD_FILE_G = _DEFAULTS_DIR + "g.jpg";
-    /**Filename of blank multicolor card image.*/
-    public static final String NO_CARD_FILE_M = _DEFAULTS_DIR + "m.jpg";
-    
-    
     public static final FileLocation WINDOW_LAYOUT_FILE      = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "window.xml");
     public static final FileLocation MATCH_LAYOUT_FILE       = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "match.xml");
     public static final FileLocation WORKSHOP_LAYOUT_FILE    = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "workshop.xml");
