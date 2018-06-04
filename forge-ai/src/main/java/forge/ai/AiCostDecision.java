@@ -514,19 +514,26 @@ public class AiCostDecision extends CostDecisionMakerBase {
         Integer c = cost.convertAmount();
         if (c == null) {
             if (ability.getSVar(cost.getAmount()).equals("XChoice")) {
-                if ("SacToReduceCost".equals(ability.getParam("AILogic"))) {
+                String logic = ability.getParamOrDefault("AILogic", "");
+                if ("SacToReduceCost".equals(logic)) {
                     // e.g. Torgaar, Famine Incarnate
                     // TODO: currently returns an empty list, so the AI doesn't sacrifice anything. Trying to make
                     // the AI decide on creatures to sac makes the AI sacrifice them, but the cost is not reduced and the
                     // AI pays the full mana cost anyway (despite sacrificing creatures).
                     return PaymentDecision.card(new CardCollection());
+                } else if (!logic.isEmpty() && !logic.equals("Never")) {
+                    // If at least some other AI logic is specified, assume that the AI for that API knows how
+                    // to define ChosenX and thus honor that value.
+                    // Cards which have no special logic for this yet but which do work in a simple/suboptimal way
+                    // are currently conventionally flagged with AILogic$ DoSacrifice.
+                    c = AbilityUtils.calculateAmount(source, source.getSVar("ChosenX"), null);
+                } else {
+                    // Other cards are assumed to be flagged RemAIDeck for now
+                    return null;
                 }
-
-                // Other cards are assumed to be flagged RemAIDeck for now
-                return null;
+            } else {
+                c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
             }
-
-            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
         final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
         CardCollectionView list = aic.chooseSacrificeType(cost.getType(), ability, c);
