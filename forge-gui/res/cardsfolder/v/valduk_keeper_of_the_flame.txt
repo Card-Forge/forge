@@ -6,6 +6,8 @@ T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigToken:DB$ Token | TokenAmount$ X | References$ X | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Red | TokenPower$ 3 | TokenToughness$ 1 | TokenImage$ r 3 1 elemental dom | TokenKeywords$ Trample<>Haste | TokenSVars$ AkoumEOT | AtEOT$ Exile
 SVar:AkoumEOT:SVar:EndOfTurnLeavePlay:True
 SVar:X:Count$Valid Equipment.Attached,Aura.Attached
+SVar:EnchantMe:Multiple
+SVar:EquipMe:Multiple
 DeckHints:Type$Equipment|Aura
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/valduk_keeper_of_the_flame.jpg
