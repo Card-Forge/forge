@@ -11,8 +11,11 @@ import forge.game.spellability.SpellAbility;
 
 public class AssignGroupAi extends SpellAbilityAi {
 
-    public AssignGroupAi() {
-        // TODO Auto-generated constructor stub
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+        // TODO: Currently this AI relies on the card-specific limiting hints (NeedsToPlay / NeedsToPlayVar),
+        // otherwise the AI considers the card playable.
+
+        return true;
     }
 
     public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells, Map<String, Object> params) {
