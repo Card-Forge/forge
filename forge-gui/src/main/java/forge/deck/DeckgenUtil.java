@@ -72,48 +72,6 @@ public class DeckgenUtil {
         }
     }
 
-    /**
-     * Take two lists of cards with counts of each and combine the second into the first by adding a mean normalized fraction
-     * of the count in the second list to the first list.
-     * @param cards1
-     * @param cards2
-     */
-    public static void combineDistances(List<Map.Entry<PaperCard,Integer>> cards1,List<Map.Entry<PaperCard,Integer>> cards2){
-        Float secondListWeighting=0.4f;
-        Integer maxDistance=0;
-        for (Map.Entry<PaperCard,Integer> pair1:cards1){
-            maxDistance=maxDistance+pair1.getValue();
-        }
-        maxDistance=maxDistance/cards1.size();
-        Integer maxDistance2=0;
-        for (Map.Entry<PaperCard,Integer> pair2:cards2){
-            maxDistance2=maxDistance2+pair2.getValue();
-        }
-        maxDistance2=maxDistance2/cards2.size();
-        for (Map.Entry<PaperCard,Integer> pair2:cards2){
-            boolean isCardPresent=false;
-            for (Map.Entry<PaperCard,Integer> pair1:cards1){
-                if (pair1.getKey().equals(pair2.getKey())){
-                    pair1.setValue(pair1.getValue()+new Float((pair2.getValue()*secondListWeighting*maxDistance/maxDistance2)).intValue());
-                    isCardPresent=true;
-                    break;
-                }
-            }
-            if(!isCardPresent){
-                Map.Entry<PaperCard,Integer> newEntry=new AbstractMap.SimpleEntry<PaperCard, Integer>(pair2.getKey(),new Float((pair2.getValue()*0.4*maxDistance/maxDistance2)).intValue());
-                cards1.add(newEntry);
-            }
-        }
-    }
-
-    public static class CardDistanceComparator implements Comparator<Map.Entry<PaperCard,Integer>>
-    {
-        @Override
-        public int compare(Map.Entry<PaperCard,Integer> index1, Map.Entry<PaperCard,Integer> index2)
-        {
-            return index1.getValue().compareTo(index2.getValue());
-        }
-    }
 
     public static Deck buildPlanarConquestDeck(PaperCard card, GameFormat format, DeckFormat deckFormat){
         return buildPlanarConquestDeck(card, null, format, deckFormat, false);
@@ -241,11 +199,11 @@ public class DeckgenUtil {
         if(deck.getMain().countAll()!=60){
             System.out.println(deck.getMain().countAll());
             System.out.println("Wrong card count "+deck.getMain().countAll());
-            deck=buildCardGenDeck(format,isForAI);
+            deck=buildLDACArchetypeDeck(format,isForAI);
         }
         if(deck.getMain().countAll(Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard.FN_GET_RULES))>27){
             System.out.println("Too many lands "+deck.getMain().countAll(Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard.FN_GET_RULES)));
-            deck=buildCardGenDeck(format,isForAI);
+            deck=buildLDACArchetypeDeck(format,isForAI);
         }
         while(deck.get(DeckSection.Sideboard).countAll()>15){
             deck.get(DeckSection.Sideboard).remove(deck.get(DeckSection.Sideboard).get(0));
@@ -253,6 +211,13 @@ public class DeckgenUtil {
         return deck;
     }
 
+
+
+    public static Deck buildLDACArchetypeDeck(GameFormat format, boolean isForAI){
+        List<Archetype> keys = new ArrayList<>(CardArchetypeLDAGenerator.ldaArchetypes.get(format.getName()));
+        Archetype randomKey = keys.get( MyRandom.getRandom().nextInt(keys.size()) );
+        return buildLDACArchetypeDeck(randomKey,format,isForAI);
+    }
 
 
     /**
@@ -319,11 +284,11 @@ public class DeckgenUtil {
         if(deck.getMain().countAll()!=60){
             System.out.println(deck.getMain().countAll());
             System.out.println("Wrong card count "+deck.getMain().countAll());
-            deck=buildCardGenDeck(format,isForAI);
+            deck=buildLDACArchetypeDeck(format,isForAI);
         }
         if(deck.getMain().countAll(Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard.FN_GET_RULES))>27){
             System.out.println("Too many lands "+deck.getMain().countAll(Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard.FN_GET_RULES)));
-            deck=buildCardGenDeck(format,isForAI);
+            deck=buildLDACArchetypeDeck(format,isForAI);
         }
         while(deck.get(DeckSection.Sideboard).countAll()>15){
             deck.get(DeckSection.Sideboard).remove(deck.get(DeckSection.Sideboard).get(0));
