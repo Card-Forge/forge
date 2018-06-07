@@ -1,6 +1,7 @@
 package forge.deck;
 
 import forge.StaticData;
+import forge.deck.io.Archetype;
 import forge.deck.io.CardThemedLDAIO;
 import forge.game.GameFormat;
 import forge.model.FModel;
@@ -15,6 +16,7 @@ import java.util.*;
 public final class CardArchetypeLDAGenerator {
 
     public static Map<String, Map<String,List<List<Pair<String, Double>>>>> ldaPools = new HashMap();
+    public static Map<String, List<Archetype>> ldaArchetypes = new HashMap<>();
 
 
     public static boolean initialize(){
@@ -33,10 +35,10 @@ public final class CardArchetypeLDAGenerator {
 
     /** Try to load matrix .dat files, otherwise check for deck folders and build .dat, otherwise return false **/
     public static boolean initializeFormat(String format){
+        List<Archetype> lda = CardThemedLDAIO.loadRawLDA(format);
         Map<String,List<List<Pair<String, Double>>>> formatMap = CardThemedLDAIO.loadLDA(format);
         if(formatMap==null) {
             try {
-                List<List<Pair<String, Double>>> lda = CardThemedLDAIO.loadRawLDA(format);
                 formatMap = loadFormat(lda);
                 CardThemedLDAIO.saveLDA(format, formatMap);
             }catch (Exception e){
@@ -45,17 +47,18 @@ public final class CardArchetypeLDAGenerator {
             }
         }
         ldaPools.put(format, formatMap);
+        ldaArchetypes.put(format, lda);
         return true;
     }
 
-    public static Map<String,List<List<Pair<String, Double>>>> loadFormat(List<List<Pair<String, Double>>> lda) throws Exception{
+    public static Map<String,List<List<Pair<String, Double>>>> loadFormat(List<Archetype> lda) throws Exception{
 
         List<List<Pair<String, Double>>> topics = new ArrayList<>();
         Set<String> cards = new HashSet<String>();
         for (int t = 0; t < lda.size(); ++t) {
             List<Pair<String, Double>> topic = new ArrayList<>();
             Set<String> topicCards = new HashSet<>();
-            List<Pair<String, Double>> highRankVocabs = lda.get(t);
+            List<Pair<String, Double>> highRankVocabs = lda.get(t).getCardProbabilities();
             if (highRankVocabs.get(0).getRight()<=0.01d){
                 continue;
             }

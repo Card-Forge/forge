@@ -13,10 +13,12 @@ import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.generation.*;
+import forge.deck.io.Archetype;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.item.PaperCard;
 import forge.itemmanager.IItemManager;
+import forge.limited.ArchetypeDeckBuilder;
 import forge.limited.CardThemedCommanderDeckBuilder;
 import forge.limited.CardThemedConquestDeckBuilder;
 import forge.limited.CardThemedDeckBuilder;
@@ -235,6 +237,84 @@ public class DeckgenUtil {
 
         //build deck from combined list
         CardThemedDeckBuilder dBuilder = new CardThemedDeckBuilder(card,null, playsetList,format,isForAI);
+        Deck deck = dBuilder.buildDeck();
+        if(deck.getMain().countAll()!=60){
+            System.out.println(deck.getMain().countAll());
+            System.out.println("Wrong card count "+deck.getMain().countAll());
+            deck=buildCardGenDeck(format,isForAI);
+        }
+        if(deck.getMain().countAll(Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard.FN_GET_RULES))>27){
+            System.out.println("Too many lands "+deck.getMain().countAll(Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard.FN_GET_RULES)));
+            deck=buildCardGenDeck(format,isForAI);
+        }
+        while(deck.get(DeckSection.Sideboard).countAll()>15){
+            deck.get(DeckSection.Sideboard).remove(deck.get(DeckSection.Sideboard).get(0));
+        }
+        return deck;
+    }
+
+
+
+    /**
+     * Build a deck based on the chosen card.
+     *
+     * @param archetype
+     * @param format
+     * @param isForAI
+     * @return
+     */
+    public static Deck buildLDACArchetypeDeck(Archetype archetype, GameFormat format, boolean isForAI){
+        List<Pair<String, Double>> preSelectedCardNames = archetype.getCardProbabilities();
+        PaperCard card = StaticData.instance().getCommonCards().getUniqueByName(preSelectedCardNames.get(0).getLeft());
+        List<PaperCard> selectedCards = new ArrayList<>();
+        for(Pair<String, Double> pair:preSelectedCardNames){
+            String name = pair.getLeft();
+            PaperCard cardToAdd = StaticData.instance().getCommonCards().getUniqueByName(name);
+            //for(int i=0; i<1;++i) {
+            if(!cardToAdd.getName().equals(card.getName())) {
+                selectedCards.add(cardToAdd);
+            }
+            //}
+        }
+
+        List<PaperCard> toRemove = new ArrayList<>();
+
+        //randomly remove cards
+        int removeCount=0;
+        int i=0;
+        for(PaperCard c:selectedCards){
+            if(MyRandom.getRandom().nextInt(100)>70+(15-(i/selectedCards.size())*selectedCards.size()) && removeCount<4 //randomly remove some cards - more likely as distance increases
+                    &&!c.getName().contains("Urza")){ //avoid breaking Tron decks
+                toRemove.add(c);
+                removeCount++;
+            }
+            if(c.getName().equals(card.getName())){//may have been added in secondary list
+                toRemove.add(c);
+            }
+            ++i;
+        }
+        selectedCards.removeAll(toRemove);
+        //Add keycard
+        List<PaperCard> playsetList = new ArrayList<>();
+        int keyCardCount=4;
+        if(card.getRules().getMainPart().getManaCost().getCMC()>7){
+            keyCardCount=1+MyRandom.getRandom().nextInt(4);
+        }else if(card.getRules().getMainPart().getManaCost().getCMC()>5){
+            keyCardCount=2+MyRandom.getRandom().nextInt(3);
+        }
+        for(int j=0;j<keyCardCount;++j) {
+            playsetList.add(card);
+        }
+        for (PaperCard c:selectedCards){
+            for(int j=0;j<4;++j) {
+                if(MyRandom.getRandom().nextInt(100)<90) {
+                    playsetList.add(c);
+                }
+            }
+        }
+
+        //build deck from combined list
+        ArchetypeDeckBuilder dBuilder = new ArchetypeDeckBuilder(archetype, card, playsetList,format,isForAI);
         Deck deck = dBuilder.buildDeck();
         if(deck.getMain().countAll()!=60){
             System.out.println(deck.getMain().countAll());
