@@ -249,7 +249,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private CardRules cardRules;
     private final CardView view;
 
-    private Table<Card, CounterType, Integer> etbCounters = HashBasedTable.create();
+    private Table<Player, CounterType, Integer> etbCounters = HashBasedTable.create();
 
     private SpellAbility[] basicLandAbilities = new SpellAbility[MagicColor.WUBRG.length];
 
@@ -746,6 +746,18 @@ public class Card extends GameEntity implements Comparable<Card> {
             view.updateRemembered(this);
         }
     }
+
+    public final <T> void removeRemembered(final Iterable<T> list) {
+        boolean changed = false;
+        for (T o : list) {
+            if (rememberedObjects.remove(o)) {
+                changed = true;
+            }
+        }
+        if (changed) {
+            view.updateRemembered(this);
+        }
+    }
     public final void clearRemembered() {
         if (rememberedObjects.isEmpty()) { return; }
         rememberedObjects.clear();
@@ -1048,15 +1060,15 @@ public class Card extends GameEntity implements Comparable<Card> {
         countersAdded = value;
     }
 
-    public final void addCounter(final CounterType counterType, final int n, final Card source, final boolean applyMultiplier) {
+    public final void addCounter(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier) {
         addCounter(counterType, n, source, applyMultiplier, true);
     }
-    public final void addCounterFireNoEvents(final CounterType counterType, final int n, final Card source, final boolean applyMultiplier) {
+    public final void addCounterFireNoEvents(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier) {
         addCounter(counterType, n, source, applyMultiplier, false);
     }
 
     @Override
-    public void addCounter(final CounterType counterType, final int n, final Card source, final boolean applyMultiplier, final boolean fireEvents) {
+    public void addCounter(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier, final boolean fireEvents) {
         int addAmount = n;
         if(addAmount < 0) {
             addAmount = 0; // As per rule 107.1b
@@ -4625,7 +4637,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             if (isInPlay()) {
                 if (wither) {
-                    addCounter(CounterType.M1M1, damageIn, source, true);
+                    addCounter(CounterType.M1M1, damageIn, source.getController(), true);
                     damageType = DamageType.M1M1Counters;
                 }
                 else {
@@ -5707,11 +5719,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * and when the Card really enters the Battlefield with the counters
      * @return map of counters
      */
-    public final void addEtbCounter(CounterType type, Integer val) {
-        addEtbCounter(type, val, this);
-    }
-
-    public final void addEtbCounter(CounterType type, Integer val, final Card source) {
+    public final void addEtbCounter(CounterType type, Integer val, final Player source) {
         int old = etbCounters.contains(source, type) ? etbCounters.get(source, type) : 0;
         etbCounters.put(source, type, old + val);
     }
@@ -5721,7 +5729,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final void putEtbCounters() {
-        for (Table.Cell<Card, CounterType, Integer> e : etbCounters.cellSet()) {
+        for (Table.Cell<Player, CounterType, Integer> e : etbCounters.cellSet()) {
             this.addCounter(e.getColumnKey(), e.getValue(), e.getRowKey(), true);
         }
     }

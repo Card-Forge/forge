@@ -876,12 +876,12 @@ public class Player extends GameEntity implements Comparable<Player> {
         return true;
     }
 
-    public final void addCounter(final CounterType counterType, final int n, final Card source, final boolean applyMultiplier) {
+    public final void addCounter(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier) {
         addCounter(counterType, n, source, applyMultiplier, true);
     }
 
     @Override
-    public void addCounter(CounterType counterType, int n, final Card source, boolean applyMultiplier, boolean fireEvents) {
+    public void addCounter(CounterType counterType, int n, final Player source, boolean applyMultiplier, boolean fireEvents) {
         if (!canReceiveCounters(counterType)) {
             return;
         }
@@ -983,7 +983,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void addPoisonCounters(final int num, final Card source) {
         int oldPoison = getCounters(CounterType.POISON);
-        addCounter(CounterType.POISON, num, source, false, true);
+        addCounter(CounterType.POISON, num, source.getController(), false, true);
 
         if (oldPoison != getCounters(CounterType.POISON)) {
             game.fireEvent(new GameEventPlayerPoisoned(this, source, oldPoison, num));

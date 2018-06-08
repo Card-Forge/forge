@@ -114,7 +114,7 @@ public class CostRemoveCounter extends CostPartWithList {
     public final void refund(final Card source) {
         int refund = this.getCardList().size() == 1 ? this.cntRemoved : 1; // is wrong for Ooze Flux and Novijen Sages
         for (final Card c : this.getCardList()) {
-            c.addCounter(this.counter, refund, source, false);
+            c.addCounter(this.counter, refund, source.getController(), false);
         }
     }
 

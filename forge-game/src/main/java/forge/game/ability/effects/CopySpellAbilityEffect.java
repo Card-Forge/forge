@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -83,7 +84,8 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
 
             for (int multi = 0; multi < spellCount && !tgtSpells.isEmpty(); multi++) {
                 String prompt = "Select " + Lang.getOrdinal(multi + 1) + " spell to copy to stack";
-                SpellAbility chosen = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa, prompt);
+                SpellAbility chosen = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa, prompt,
+                        ImmutableMap.of());
                 SpellAbility copiedSpell = CardFactory.copySpellAbilityAndSrcCard(card, chosen.getHostCard(), chosen, true);
                 copiedSpell.getHostCard().setController(card.getController(), card.getGame().getNextTimestamp());
                 copiedSpell.setActivatingPlayer(controller);
@@ -92,7 +94,8 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             }
         }
         else if (sa.hasParam("CopyForEachCanTarget")) {
-            SpellAbility chosenSA = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa, "Select a spell to copy");
+            SpellAbility chosenSA = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa,
+                    "Select a spell to copy", ImmutableMap.of());
             chosenSA.setActivatingPlayer(controller);
             // Find subability or rootability that has targets
             SpellAbility targetedSA = chosenSA;
@@ -152,7 +155,8 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             }
         }
         else {
-            SpellAbility chosenSA = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa, "Select a spell to copy");
+            SpellAbility chosenSA = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa,
+                    "Select a spell to copy", ImmutableMap.of());
             chosenSA.setActivatingPlayer(controller);
             for (int i = 0; i < amount; i++) {
                 copies.add(CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getHostCard(), chosenSA, true));

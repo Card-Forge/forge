@@ -145,7 +145,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             }
 
             if (csum > 0) {
-                dest.addCounter(cType, csum, host, true);
+                dest.addCounter(cType, csum, player, true);
                 game.updateLastStateForCard(dest);
             }
             return;
@@ -201,7 +201,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
 
                 if (cnum > 0) {
                     source.subtractCounter(cType, cnum);
-                    dest.addCounter(cType, cnum, host, true);
+                    dest.addCounter(cType, cnum, player, true);
                     game.updateLastStateForCard(dest);
                     updateSource = true;
                 }
@@ -262,7 +262,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
 
                     if (source.getCounters(cType) >= cntToMove) {
                         source.subtractCounter(cType, cntToMove);
-                        dest.addCounter(cType, cntToMove, host, true);
+                        dest.addCounter(cType, cntToMove, player, true);
                         game.updateLastStateForCard(dest);
                     }
                 } else {
@@ -296,7 +296,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                             sa, sb.toString(), 0, Math.min(tgtCounters.get(chosenType), cntToMove), params);
 
                     if (chosenAmount > 0) {
-                        dest.addCounter(chosenType, chosenAmount, host, true);
+                        dest.addCounter(chosenType, chosenAmount, player, true);
                         source.subtractCounter(chosenType, chosenAmount);
                         game.updateLastStateForCard(dest);
                         cntToMove -= chosenAmount;

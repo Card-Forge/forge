@@ -7,6 +7,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
 
@@ -37,6 +38,7 @@ public class CountersMultiplyEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
+        final Player player = sa.getActivatingPlayer();
 
         final CounterType counterType = getCounterType(sa);
         final int n = Integer.valueOf(sa.getParamOrDefault("Multiplier", "2")) - 1; 
@@ -50,10 +52,10 @@ public class CountersMultiplyEffect extends SpellAbilityEffect {
                 continue;
             }
             if (counterType != null) {
-                gameCard.addCounter(counterType, gameCard.getCounters(counterType) * n, host, true);
+                gameCard.addCounter(counterType, gameCard.getCounters(counterType) * n, player, true);
             } else {
                 for (Map.Entry<CounterType, Integer> e : gameCard.getCounters().entrySet()) {
-                    gameCard.addCounter(e.getKey(), e.getValue() * n, host, true);
+                    gameCard.addCounter(e.getKey(), e.getValue() * n, player, true);
                 }
             }
             game.updateLastStateForCard(gameCard);

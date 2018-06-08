@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -65,7 +66,8 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                 int idxChosen = MyRandom.getRandom().nextInt(abilities.size());
                 chosenSA = abilities.get(idxChosen);
             } else {
-                chosenSA = p.getController().chooseSingleSpellForEffect(abilities, sa, "Choose one");
+                chosenSA = p.getController().chooseSingleSpellForEffect(abilities, sa, "Choose one",
+                        ImmutableMap.of());
             }
             
             if (chosenSA != null) {

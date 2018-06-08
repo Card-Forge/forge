@@ -21,6 +21,7 @@ public enum ApiType {
     AnimateAll (AnimateAllEffect.class),
     Attach (AttachEffect.class),
     Ascend (AscendEffect.class),
+    AssignGroup (AssignGroupEffect.class),
     Balance (BalanceEffect.class),
     BecomeMonarch (BecomeMonarchEffect.class),
     BecomesBlocked (BecomesBlockedEffect.class),

@@ -167,12 +167,18 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                 }
             }
         } else if (sa.hasParam("Choices")) {
+            Player chooser = activator;
+            if (sa.hasParam("Chooser")) {
+                final String choose = sa.getParam("Chooser");
+                chooser = AbilityUtils.getDefinedPlayers(sa.getHostCard(), choose, sa).get(0);
+            }
+
             CardCollectionView choices = game.getCardsIn(ZoneType.Battlefield);
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host);
             if (!choices.isEmpty()) {
                 String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a card ";
     
-                Card choosen = activator.getController().chooseSingleEntityForEffect(choices, sa, title, false);
+                Card choosen = chooser.getController().chooseSingleEntityForEffect(choices, sa, title, false);
                 
                 if (choosen != null) {
                     tgtCards.add(choosen);

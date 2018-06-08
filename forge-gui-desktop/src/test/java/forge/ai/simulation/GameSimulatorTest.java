@@ -215,7 +215,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         Card sorin = addCard("Sorin, Solemn Visitor", p);
-        sorin.addCounter(CounterType.LOYALTY, 5, sorin, false);
+        sorin.addCounter(CounterType.LOYALTY, 5, p, false);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
@@ -259,7 +259,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         String bearCardName = "Runeclaw Bear";
         addCard(bearCardName, p);
         Card gideon = addCard("Gideon, Ally of Zendikar", p);
-        gideon.addCounter(CounterType.LOYALTY, 4, gideon, false);
+        gideon.addCounter(CounterType.LOYALTY, 4, p, false);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
@@ -378,7 +378,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         Card sarkhan = addCard(sarkhanCardName, p);
-        sarkhan.addCounter(CounterType.LOYALTY, 4, sarkhan, false);
+        sarkhan.addCounter(CounterType.LOYALTY, 4, p, false);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
@@ -412,7 +412,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         addCard(ornithoperCardName, p);
         addCard(bearCardName, p);
         Card ajani = addCard(ajaniCardName, p);
-        ajani.addCounter(CounterType.LOYALTY, 4, ajani, false);
+        ajani.addCounter(CounterType.LOYALTY, 4, p, false);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
@@ -443,7 +443,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         SpellAbility boltSA = boltCard.getFirstSpellAbility();
 
         Card ajani = addCard(ajaniCardName, p);
-        ajani.addCounter(CounterType.LOYALTY, 8, ajani, false);
+        ajani.addCounter(CounterType.LOYALTY, 8, p, false);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
         
@@ -493,7 +493,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         addCard("Swamp", p);
         addCard("Swamp", p);
         Card depths = addCard("Dark Depths", p);
-        depths.addCounter(CounterType.ICE, 10, depths, false);
+        depths.addCounter(CounterType.ICE, 10, p, false);
         Card thespian = addCard("Thespian's Stage", p);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);

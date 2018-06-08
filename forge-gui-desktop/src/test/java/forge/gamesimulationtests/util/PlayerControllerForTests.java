@@ -167,7 +167,8 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public SpellAbility chooseSingleSpellForEffect(List<SpellAbility> spells, SpellAbility sa, String title) {
+    public SpellAbility chooseSingleSpellForEffect(List<SpellAbility> spells, SpellAbility sa, String title,
+            Map<String, Object> params) {
         return chooseItem(spells);
     }
 

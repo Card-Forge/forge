@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -79,7 +80,8 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
     }
 
     @Override
-    public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells) {
+    public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells,
+            Map<String, Object> params) {
         Card host = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final Game game = host.getGame();

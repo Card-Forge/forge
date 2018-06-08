@@ -4027,12 +4027,8 @@ public class CardFactoryUtil {
 
                 @Override
                 public void run() {
-                    if (card.isCreature()) {
-                        card.addCounter(CounterType.P1P1, card.getSunburstValue(), card, true);
-                    } else {
-                        card.addCounter(CounterType.CHARGE, card.getSunburstValue(), card, true);
-                    }
-
+                    CounterType t = card.isCreature() ? CounterType.P1P1 : CounterType.CHARGE; 
+                    card.addCounter(t, card.getSunburstValue(), card.getController(), true);
                 }
             };
 
@@ -4091,9 +4087,9 @@ public class CardFactoryUtil {
                     final Card c = game.getAction().exile(this.getHostCard(), this);
 
                     int counters = AbilityUtils.calculateAmount(c, k[1], this);
-                    c.addCounter(CounterType.TIME, counters, c, true);
+                    c.addCounter(CounterType.TIME, counters, getActivatingPlayer(), true);
                     
-                    String sb = TextUtil.concatWithSpace(this.getActivatingPlayer().toString(),"has suspended", c.getName(), "with", String.valueOf(counters),"time counters on it.");
+                    String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(),"has suspended", c.getName(), "with", String.valueOf(counters),"time counters on it.");
                     game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
                 }
             };
