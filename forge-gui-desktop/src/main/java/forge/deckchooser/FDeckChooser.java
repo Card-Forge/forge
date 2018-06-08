@@ -164,7 +164,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private void updateMatrix(GameFormat format) {
         lstDecks.setAllowMultipleSelections(false);
 
-        lstDecks.setPool(CardThemedDeckGenerator.getMatrixDecks(format, isAi));
+        lstDecks.setPool(ArchetypeDeckGenerator.getMatrixDecks(format, isAi));
         lstDecks.setup(ItemManagerConfig.STRING_ONLY);
 
         btnRandom.setText("Random");

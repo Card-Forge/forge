@@ -654,7 +654,7 @@ public class FDeckChooser extends FScreen {
             maxSelections = 1;
             pool= new ArrayList<>();
             if(FModel.isdeckGenMatrixLoaded()) {
-                pool = CardThemedDeckGenerator.getMatrixDecks(FModel.getFormats().getStandard(), isAi);
+                pool = ArchetypeDeckGenerator.getMatrixDecks(FModel.getFormats().getStandard(), isAi);
             }
             config = ItemManagerConfig.STRING_ONLY;
             break;
@@ -662,7 +662,7 @@ public class FDeckChooser extends FScreen {
             maxSelections = 1;
             pool= new ArrayList<>();
             if(FModel.isdeckGenMatrixLoaded()) {
-                pool = CardThemedDeckGenerator.getMatrixDecks(FModel.getFormats().getModern(), isAi);
+                pool = ArchetypeDeckGenerator.getMatrixDecks(FModel.getFormats().getModern(), isAi);
             }
             config = ItemManagerConfig.STRING_ONLY;
             break;

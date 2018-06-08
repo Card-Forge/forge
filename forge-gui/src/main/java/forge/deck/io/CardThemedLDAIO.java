@@ -19,7 +19,7 @@ public class CardThemedLDAIO {
     public static final String SUFFIX_DATA = ".lda.dat";
     public static final String RAW_SUFFIX_DATA = ".raw.dat";
 
-    public static void saveRawLDA(String format, List<List<Pair<String, Double>>> lda){
+    public static void saveRawLDA(String format, List<Archetype> lda){
         File file = getRAWLDAFile(format);
         ObjectOutputStream s = null;
         try {
@@ -40,11 +40,11 @@ public class CardThemedLDAIO {
         }
     }
 
-    public static List<List<Pair<String, Double>>> loadRawLDA(String format){
+    public static List<Archetype> loadRawLDA(String format){
         try {
             FileInputStream fin = new FileInputStream(getRAWLDAFile(format));
             ObjectInputStream s = new ObjectInputStream(fin);
-            List<List<Pair<String, Double>>> matrix = (List<List<Pair<String, Double>>>) s.readObject();
+            List<Archetype> matrix = (List<Archetype>) s.readObject();
             s.close();
             return matrix;
         }catch (Exception e){
