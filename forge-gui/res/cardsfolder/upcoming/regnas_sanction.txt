@@ -7,7 +7,7 @@ SVar:DBPutCounter:DB$ PutCounterAll | ValidCards$ Creature.RememberedPlayerCtrl 
 SVar:FoeRepeat:DB$ RepeatEach | AILogic$ OpponentHasMultipleCreatures | RepeatPlayers$ Remembered | ClearRememberedBeforeLoop$ True | RepeatSubAbility$ DBChoose | SubAbility$ DBTapAll | StackDescription$ Each foe chooses one untapped creature they control, then taps the rest. | SpellDescription$ Foe chooses one untapped creature they control, then taps the rest.
 SVar:DBChoose:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creature.untapped+RememberedPlayerCtrl | Mandatory$ True | RememberChosen$ True | SubAbility$ DBImprint
 #Need to imprint all non remembered cards
-SVar:DBImprint:DB$ Pump | ImprintCards$ Valid Creature.IsNotRemembered+RememberedPlayerCtrl | SubAbility$ DBCleanupAll
+SVar:DBImprint:DB$ Pump | ImprintCards$ Valid Creature.IsNotRemembered+RememberedPlayerCtrl | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 SVar:DBTapAll:DB$ TapAll | ValidCards$ Creature.IsImprinted | SubAbility$ DBCleanupAll
 SVar:DBCleanupAll:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True | ClearChosenCard$ True
