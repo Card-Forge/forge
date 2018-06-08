@@ -1,5 +1,5 @@
 Name:Lightning Angel
-ManaCost:1 R W U
+ManaCost:1 U R W
 Types:Creature Angel
 PT:3/4
 K:Flying
