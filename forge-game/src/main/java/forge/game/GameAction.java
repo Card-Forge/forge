@@ -20,6 +20,7 @@ package forge.game;
 import com.google.common.base.Predicate;
 import com.google.common.collect.*;
 import forge.GameCommand;
+import forge.StaticData;
 import forge.card.CardStateName;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -1562,6 +1563,53 @@ public class GameAction {
         }
     }
 
+    private void drawStartingHand(Player p1){
+
+        //check initial hand
+        List<Card> lib1 = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards().threadSafeIterable());
+        List<Card> hand1 = lib1.subList(0,p1.getMaxHandSize());
+        System.out.println(hand1.toString());
+
+        //shuffle
+        List shuffledCards = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards().threadSafeIterable());
+        Collections.shuffle(shuffledCards);
+
+        //check a second hand
+        List<Card> hand2 = shuffledCards.subList(0,p1.getMaxHandSize());
+        System.out.println(hand2.toString());
+
+        //choose better hand according to land count
+        float averageLandRatio = getLandRatio(lib1);
+        if(getHandScore(hand1, averageLandRatio)>getHandScore(hand2, averageLandRatio)){
+            p1.getZone(ZoneType.Library).setCards(shuffledCards);
+        }
+        p1.drawCards(p1.getMaxHandSize());
+    }
+
+    private float getLandRatio(List<Card> deck){
+        int landCount = 0;
+        for(Card c:deck){
+            if(c.isLand()){
+                landCount++;
+            }
+        }
+        if (landCount == 0 ){
+            return 0;
+        }
+        return new Float(landCount)/new Float(deck.size());
+    }
+
+    private float getHandScore(List<Card> hand, float landRatio){
+        int landCount = 0;
+        for(Card c:hand){
+            if(c.isLand()){
+                landCount++;
+            }
+        }
+        float averageCount = landRatio * hand.size();
+        return Math.abs(averageCount-landCount);
+    }
+
     public void startGame(GameOutcome lastGameOutcome) {
         startGame(lastGameOutcome, null);
     }
@@ -1582,7 +1630,11 @@ public class GameAction {
 
             game.setAge(GameStage.Mulligan);
             for (final Player p1 : game.getPlayers()) {
-                p1.drawCards(p1.getMaxHandSize());
+                if (StaticData.instance().getFilteredHandsEnabled() ) {
+                    drawStartingHand(p1);
+                } else {
+                    p1.drawCards(p1.getStartingHandSize());
+                }
 
                 // If pl has Backup Plan as a Conspiracy draw that many extra hands
 

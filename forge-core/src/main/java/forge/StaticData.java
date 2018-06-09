@@ -37,6 +37,8 @@ public class StaticData {
     private Predicate<PaperCard> brawlPredicate;
     private Predicate<PaperCard> modernPredicate;
 
+    private boolean filteredHandsEnabled = false;
+
     // Loaded lazily:
     private IStorage<SealedProduct.Template> boosters;
     private IStorage<SealedProduct.Template> specialBoosters;
@@ -207,6 +209,14 @@ public class StaticData {
 
     public Predicate<PaperCard> getBrawlPredicate() {
         return brawlPredicate;
+    }
+
+    public void setFilteredHandsEnabled(boolean filteredHandsEnabled){
+        this.filteredHandsEnabled = filteredHandsEnabled;
+    }
+
+    public boolean getFilteredHandsEnabled(){
+        return filteredHandsEnabled;
     }
 
     public PaperCard getCardByEditionDate(PaperCard card, Date editionDate) {
