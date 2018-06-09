@@ -173,6 +173,8 @@ public final class FModel {
         magicDb.setBrawlPredicate(formats.get("Brawl").getFilterRules());
         magicDb.setModernPredicate(formats.getModern().getFilterRules());
 
+        magicDb.setFilteredHandsEnabled(preferences.getPrefBoolean(FPref.FILTERED_HANDS));
+
         blocks = new StorageBase<>("Block definitions", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "blocks.txt", magicDb.getEditions()));
         questPreferences = new QuestPreferences();
         conquestPreferences = new ConquestPreferences();

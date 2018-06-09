@@ -225,7 +225,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic:!fromSheet("BBD RareMythic"), 1 Basi
 215 R Vigor
 216 C Wandering Wolf
 217 R Apocalypse Hydra
-218 C Augur Spree
+218 C Auger Spree
 219 C Centaur Healer
 220 U Dinrova Horror
 221 U Enduring Scalelord
