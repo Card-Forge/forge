@@ -99,7 +99,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         targetSize=deckFormat.getMainRange().getMinimum();
         FullDeckColors deckColors = new FullDeckColors();
         int cardCount=0;
-        int colourCheckAmount = 20;
+        int colourCheckAmount = 30;
         if (targetSize < 60){
             colourCheckAmount = 10;//lower amount for planar decks
         }
@@ -623,12 +623,20 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
                 numColors++;
             }
         }
+        // add one of each land required first so that any rounding errors do not remove the only land of a colour
+        for (int i = 0; i < 5; i++) {
+            if (clrCnts[i] > 0) {
+                deckList.add(getBasicLand(i));
+                landsNeeded--;
+            }
+        }
+
 
         // do not update landsNeeded until after the loop, because the
         // calculation involves landsNeeded
         for (int i = 0; i < 5; i++) {
             if (clrCnts[i] > 0) {
-                // calculate number of lands for each color
+                // calculate remaining number of lands for each color
                 float p = (float) clrCnts[i] / (float) totalColor;
                 int nLand = Math.round(landsNeeded * p); // desired truncation to int
                 if (logToConsole) {
