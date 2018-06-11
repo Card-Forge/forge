@@ -105,6 +105,9 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         }
         //get colours for first few cards
         for(PaperCard c:getAiPlayables()){
+            if(c.getRules().getType().isLand()){
+                continue;
+            }
             if(deckColors.canChoseMoreColors()){
                 deckColors.addColorsOf(c);
                 cardCount++;
