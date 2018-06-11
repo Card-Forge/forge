@@ -898,6 +898,13 @@ public class CardFactoryUtil {
         if (sq[0].equals("StormCount")) {
             return doXMath(game.getStack().getSpellsCastThisTurn().size() - 1, m, c);
         }
+        if (sq[0].startsWith("DamageDoneByPlayerThisTurn")) {
+            int sum = 0;
+            for (Player p : AbilityUtils.getDefinedPlayers(c, sq[1], null)) {
+                sum += c.getReceivedDamageByPlayerThisTurn(p);
+            }
+            return doXMath(sum, m, c);
+        }
         if (sq[0].equals("DamageDoneThisTurn")) {
             return doXMath(c.getDamageDoneThisTurn(), m, c);
         }
@@ -963,7 +970,6 @@ public class CardFactoryUtil {
             }
             return doXMath(lost, m, c);
         }
-
         if (sq[0].equals("TotalDamageDoneByThisTurn")) {
             return doXMath(c.getTotalDamageDoneBy(), m, c);
         }
