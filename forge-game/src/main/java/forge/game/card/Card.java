@@ -132,7 +132,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final MapOfLists<GameEntity, Object> rememberMap = new HashMapOfLists<>(CollectionSuppliers.arrayLists());
     private Map<Player, String> flipResult;
 
-    private Map<Card, Integer> receivedDamageFromThisTurn = Maps.newTreeMap();
+    private Map<Card, Integer> receivedDamageFromThisTurn = Maps.newHashMap();
+    private Map<Player, Integer> receivedDamageFromPlayerThisTurn = Maps.newHashMap();
+
     private Map<Card, Integer> dealtDamageToThisTurn = Maps.newTreeMap();
     private Map<String, Integer> dealtDamageToPlayerThisTurn = Maps.newTreeMap();
     private final Map<Card, Integer> assignedDamageMap = Maps.newTreeMap();
@@ -4237,17 +4239,43 @@ public class Card extends GameEntity implements Comparable<Card> {
         return receivedDamageFromThisTurn;
     }
     public final void setReceivedDamageFromThisTurn(final Map<Card, Integer> receivedDamageList) {
-        receivedDamageFromThisTurn = receivedDamageList;
+        receivedDamageFromThisTurn = Maps.newHashMap(receivedDamageList);
     }
+
+    public final Map<Player, Integer> getReceivedDamageFromPlayerThisTurn() {
+        return receivedDamageFromPlayerThisTurn;
+    }
+
+    public final void setReceivedDamageFromPlayerThisTurn(final Map<Player, Integer> receivedDamageList) {
+        receivedDamageFromPlayerThisTurn = Maps.newHashMap(receivedDamageList);
+    }
+
+    public int getReceivedDamageByPlayerThisTurn(final Player p) {
+        if (receivedDamageFromPlayerThisTurn.containsKey(p)) {
+            return receivedDamageFromPlayerThisTurn.get(p);
+        }
+        return 0;
+    }
+
     public final void addReceivedDamageFromThisTurn(final Card c, final int damage) {
         int currentDamage = 0;
         if (receivedDamageFromThisTurn.containsKey(c)) {
             currentDamage = receivedDamageFromThisTurn.get(c);
         }
         receivedDamageFromThisTurn.put(c, damage+currentDamage);
+
+        Player p = c.getController();
+        if (p != null) {
+            currentDamage = 0;
+            if (receivedDamageFromPlayerThisTurn.containsKey(p)) {
+                currentDamage = receivedDamageFromPlayerThisTurn.get(p);
+            }
+            receivedDamageFromPlayerThisTurn.put(p, damage+currentDamage);
+        }
     }
     public final void resetReceivedDamageFromThisTurn() {
         receivedDamageFromThisTurn.clear();
+        receivedDamageFromPlayerThisTurn.clear();
     }
 
     public final int getTotalDamageRecievedThisTurn() {
