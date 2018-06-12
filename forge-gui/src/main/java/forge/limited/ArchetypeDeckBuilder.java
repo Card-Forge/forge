@@ -22,7 +22,9 @@ public class ArchetypeDeckBuilder extends CardThemedDeckBuilder{
      * @return name
      */
     protected String generateName() {
-            return archetype.getName() + " generated deck";
+        return archetype.getName() + " Generated Deck";
     }
+
+
 
 }

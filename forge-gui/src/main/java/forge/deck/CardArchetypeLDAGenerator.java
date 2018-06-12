@@ -47,8 +47,23 @@ public final class CardArchetypeLDAGenerator {
             }
         }
         ldaPools.put(format, formatMap);
-        ldaArchetypes.put(format, lda);
+        ldaArchetypes.put(format, pruneArchetypes(lda));
         return true;
+    }
+
+    public static List<Archetype> pruneArchetypes(List<Archetype> archetypes){
+        List<Archetype> pruned = new ArrayList<>();
+        float deckCount=0;
+        for(Archetype archetype : archetypes){
+            deckCount = deckCount + archetype.getDeckCount();
+        }
+        for(Archetype archetype : archetypes){
+            float metaPercent = archetype.getDeckCount().floatValue()/deckCount;
+            if( metaPercent > 0.001 ){
+                pruned.add(archetype);
+            }
+        }
+        return pruned;
     }
 
     public static Map<String,List<List<Pair<String, Double>>>> loadFormat(List<Archetype> lda) throws Exception{

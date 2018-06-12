@@ -230,7 +230,13 @@ public class DeckgenUtil {
      */
     public static Deck buildLDACArchetypeDeck(Archetype archetype, GameFormat format, boolean isForAI){
         List<Pair<String, Double>> preSelectedCardNames = archetype.getCardProbabilities();
-        PaperCard card = StaticData.instance().getCommonCards().getUniqueByName(preSelectedCardNames.get(0).getLeft());
+        PaperCard card = null;
+        for(Pair<String, Double> pair : preSelectedCardNames){
+            card = StaticData.instance().getCommonCards().getUniqueByName(pair.getLeft());
+            if(!card.getRules().getType().isLand()){
+                break;
+            }
+        }
         List<PaperCard> selectedCards = new ArrayList<>();
         for(Pair<String, Double> pair:preSelectedCardNames){
             String name = pair.getLeft();
@@ -248,7 +254,7 @@ public class DeckgenUtil {
         int removeCount=0;
         int i=0;
         for(PaperCard c:selectedCards){
-            if(MyRandom.getRandom().nextInt(100)>70+(15-(i/selectedCards.size())*selectedCards.size()) && removeCount<4 //randomly remove some cards - more likely as distance increases
+            if( i > 4 && MyRandom.getRandom().nextInt(100)>70+(15-(i/selectedCards.size())*selectedCards.size()) && removeCount<4 //randomly remove some cards - more likely as distance increases
                     &&!c.getName().contains("Urza")){ //avoid breaking Tron decks
                 toRemove.add(c);
                 removeCount++;
@@ -295,6 +301,7 @@ public class DeckgenUtil {
         }
         return deck;
     }
+
 
     /**
      * @param selection {@link java.lang.String} array

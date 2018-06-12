@@ -56,8 +56,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
     protected List<PaperCard> rankedColorList;
 
     // Views for aiPlayable
-    protected Iterable<PaperCard> onColorCreatures;
-    protected Iterable<PaperCard> onColorNonCreatures;
+    protected Iterable<PaperCard> onColorCreaturesAndSpells;
     protected Iterable<PaperCard> keyCards;
 
     protected static final boolean logToConsole = false;
@@ -99,12 +98,15 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         targetSize=deckFormat.getMainRange().getMinimum();
         FullDeckColors deckColors = new FullDeckColors();
         int cardCount=0;
-        int colourCheckAmount = 20;
+        int colourCheckAmount = 30;
         if (targetSize < 60){
             colourCheckAmount = 10;//lower amount for planar decks
         }
         //get colours for first few cards
         for(PaperCard c:getAiPlayables()){
+            if(c.getRules().getType().isLand()){
+                continue;
+            }
             if(deckColors.canChoseMoreColors()){
                 deckColors.addColorsOf(c);
                 cardCount++;
@@ -173,10 +175,10 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         Iterable<PaperCard> colorList = Iterables.filter(aiPlayables,
                 Predicates.compose(hasColor, PaperCard.FN_GET_RULES));
         rankedColorList = Lists.newArrayList(colorList);
-        onColorCreatures = Iterables.filter(rankedColorList,
-                Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES));
-        onColorNonCreatures = Iterables.filter(rankedColorList,
-                Predicates.compose(CardRulesPredicates.Presets.IS_NON_CREATURE_SPELL, PaperCard.FN_GET_RULES));
+        onColorCreaturesAndSpells = Iterables.filter(rankedColorList,
+                Predicates.compose(Predicates.or(CardRulesPredicates.Presets.IS_CREATURE,
+                        CardRulesPredicates.Presets.IS_NON_CREATURE_SPELL), PaperCard.FN_GET_RULES));
+
         // Guava iterables do not copy the collection contents, instead they act
         // as filters and iterate over _source_ collection each time. So even if
         // aiPlayable has changed, there is no need to create a new iterable.
@@ -189,37 +191,32 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
         // 3. Add creatures, trying to follow mana curve
 
-        addManaCurveCards(onColorCreatures, numCreaturesToStart, "Creatures");
+        numSpellsNeeded = numSpellsNeeded - deckList.size(); //subtract keycard count
+        addManaCurveCards(onColorCreaturesAndSpells, numSpellsNeeded , "Creatures and Spells");
         if (logToConsole) {
-            System.out.println("Post Creatures : " + deckList.size());
+            System.out.println("Post Creatures and Spells : " + deckList.size());
         }
 
-        // 4.Try to fill up to num needed with on-color non-creature cards
-        addManaCurveCards(onColorNonCreatures, numSpellsNeeded - deckList.size(), "Spells");
+        // 4.If we couldn't get enough, try to fill up with on-color cards
+        addCards(onColorCreaturesAndSpells, numSpellsNeeded - deckList.size());
         if (logToConsole) {
-            System.out.println("Post Spells : " + deckList.size());
+            System.out.println("Post more creatures and spells : " + deckList.size());
         }
 
-        // 5.If we couldn't get enough, try to fill up with on-color cards
-        addCards(rankedColorList, numSpellsNeeded - deckList.size());
-        if (logToConsole) {
-            System.out.println("Post more creatures : " + deckList.size());
-        }
-
-        // 6. If there are still on-color cards, and the average cmc is low, add
+        // 5. If there are still on-color cards, and the average cmc is low, add
         // extras.
         double avCMC=getAverageCMC(deckList);
         int maxCMC=getMaxCMC(deckList);
-        if (deckList.size() <= numSpellsNeeded && avCMC < 4) {
+        if (avCMC < 4) {
             addLowCMCCard();
             if(targetSize>60){
                 addLowCMCCard();
             }
         }
-        if (deckList.size() >= numSpellsNeeded && avCMC < 3 && maxCMC<6) {
+        if (avCMC < 3 && maxCMC<6) {
             addLowCMCCard();
         }
-        if (deckList.size() >= numSpellsNeeded && avCMC < 2.5 && maxCMC<5) {
+        if (avCMC < 2.5 && maxCMC<5) {
             addLowCMCCard();
             if(targetSize>60){
                 addLowCMCCard();
@@ -229,7 +226,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             System.out.println("Post lowcoc : " + deckList.size());
         }
 
-        // 7. If not enough cards yet, try to add a third color,
+        // 6. If not enough cards yet, try to add a third color,
         // to try and avoid adding purely random cards.
         addThirdColorCards(numSpellsNeeded - deckList.size());
         if (logColorsToConsole) {
@@ -237,10 +234,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             System.out.println("Colors: " + colors.toEnumSet().toString());
         }
 
-        // 8. Check for DeckNeeds cards.
-        //checkRemRandomDeckCards(); - no need
-
-        // 9. If there are still less than 22 non-land cards add off-color
+        // 7. If there are still less than 22 non-land cards add off-color
         // cards. This should be avoided.
         int stillNeeds = numSpellsNeeded - deckList.size();
         if(stillNeeds>0)
@@ -253,7 +247,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
         addLandKeyCards();
 
-        // 10. Add non-basic lands
+        // 8. Add non-basic lands
         List<String> duals = getDualLandList();
         addNonBasicLands();
         if (logToConsole) {
@@ -262,7 +256,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
         checkEvolvingWilds();
 
-        // 11. Fill up with basic lands.
+        // 9. Fill up with basic lands.
         final int[] clrCnts = calculateLandNeeds();
 
         // Add dual lands
@@ -315,12 +309,12 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
     protected void generateTargetCMCs(){
         targetCMCs = new HashMap<>();
-        targetCMCs.put(1,Math.round((MyRandom.getRandom().nextInt(8)+2)*targetSize/60));//2
-        targetCMCs.put(2,Math.round((MyRandom.getRandom().nextInt(12)+5)*targetSize/60));//6
-        targetCMCs.put(3,Math.round((MyRandom.getRandom().nextInt(8)+6)*targetSize/60));//7
-        targetCMCs.put(4,Math.round((MyRandom.getRandom().nextInt(5)+3)*targetSize/60));//4
-        targetCMCs.put(5,Math.round((MyRandom.getRandom().nextInt(4)+3)*targetSize/60));//3
-        targetCMCs.put(6,Math.round((MyRandom.getRandom().nextInt(4)+1)*targetSize/60));//2
+        targetCMCs.put(1,Math.round((MyRandom.getRandom().nextInt(12)+4)*targetSize/60));//10
+        targetCMCs.put(2,Math.round((MyRandom.getRandom().nextInt(16)+8)*targetSize/60));//16
+        targetCMCs.put(3,Math.round((MyRandom.getRandom().nextInt(10)+8)*targetSize/60));//13
+        targetCMCs.put(4,Math.round((MyRandom.getRandom().nextInt(8)+6)*targetSize/60));//8
+        targetCMCs.put(5,Math.round((MyRandom.getRandom().nextInt(8)+6)*targetSize/60));//7
+        targetCMCs.put(6,Math.round((MyRandom.getRandom().nextInt(8)+6)*targetSize/60));//4
 
         while(sumMapValues(targetCMCs) < numSpellsNeeded){
             int randomKey = MyRandom.getRandom().nextInt(6)+1;
@@ -620,12 +614,20 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
                 numColors++;
             }
         }
+        // add one of each land required first so that any rounding errors do not remove the only land of a colour
+        for (int i = 0; i < 5; i++) {
+            if (clrCnts[i] > 0) {
+                deckList.add(getBasicLand(i));
+                landsNeeded--;
+            }
+        }
+
 
         // do not update landsNeeded until after the loop, because the
         // calculation involves landsNeeded
         for (int i = 0; i < 5; i++) {
             if (clrCnts[i] > 0) {
-                // calculate number of lands for each color
+                // calculate remaining number of lands for each color
                 float p = (float) clrCnts[i] / (float) totalColor;
                 int nLand = Math.round(landsNeeded * p); // desired truncation to int
                 if (logToConsole) {
@@ -735,22 +737,38 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         return clrCnts;
     }
 
+    private boolean containsTronLands(Iterable<PaperCard> cards){
+        for(PaperCard card : cards){
+            if(card.getRules().getType().isLand() && (
+                    card.getName().equals("Urza's Mine")
+                    || card.getName().equals("Urza's Tower")
+                    || card.getName().equals("Urza's Power Plant"))){
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Add non-basic lands to the deck.
      */
     private void addNonBasicLands() {
-        final Iterable<PaperCard> lands = Iterables.filter(aiPlayables,
+        Iterable<PaperCard> lands = Iterables.filter(aiPlayables,
                 Predicates.compose(CardRulesPredicates.Presets.IS_NONBASIC_LAND, PaperCard.FN_GET_RULES));
         List<PaperCard> landsToAdd = new ArrayList<>();
         int minBasics;//Keep a minimum number of basics to ensure playable decks
-        if(colors.isColorless()){
-            minBasics=0;
+        if(colors.isColorless()) {
+            minBasics = 0;
+        }if(containsTronLands(lands)){
+            minBasics=Math.round((MyRandom.getRandom().nextInt(5)+3)*((float) targetSize) / 60);
         }else if(colors.isMonoColor()){
             minBasics=Math.round((MyRandom.getRandom().nextInt(15)+9)*((float) targetSize) / 60);
         }else{
             minBasics=Math.round((MyRandom.getRandom().nextInt(8)+6)*((float) targetSize) / 60);
         }
 
+        lands = Iterables.filter(aiPlayables,
+                Predicates.compose(CardRulesPredicates.Presets.IS_NONBASIC_LAND, PaperCard.FN_GET_RULES));
 
         for (final PaperCard card : lands) {
             if (landsNeeded > minBasics) {
