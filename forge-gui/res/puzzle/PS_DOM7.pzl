@@ -4,13 +4,14 @@ URL:http://www.possibilitystorm.com/wp-content/uploads/2018/06/066.-DOM7.jpg
 Goal:Win
 Turns:1
 Difficulty:Uncommon
-Description:Win this turn.\nIMPORTANT: According to the rules of this puzzle, you have to start at the beginning of your main phase, and you just put Lore counters on your Sagas and need to put their abilities on the stack and choose targets before doing anything else. Due to the current limitations of Forge, you will start in your draw step so that this can be properly simulated. Please pass priority as soon as the puzzle starts to put the abilities on stack and progress to your Main phase.
+Description:Win this turn. You just put Lore counters on your Sagas. Put their abilities on the stack and choose targets before doing anything else.
 [state]
 humanlife=20
 ailife=4
 turn=1
 activeplayer=human
 activephase=DRAW
+activephaseadvance=MAIN1
 humanhand=Shivan Fire;Kazarov, Sengir Pureblood;Dreamcaller Siren;Soul Salvage
 humangraveyard=Thran Temporal Gateway;Neheb, the Worthy;Rona, Disciple of Gix
 humanbattlefield=The Eldest Reborn|Counters:LORE=2;The First Eruption|Counters:LORE=1;Keldon Warcaller;Minotaur Sureshot;Frontline Devastator;Canyon Slough;Canyon Slough;Canyon Slough;Drowned Catacomb;Drowned Catacomb
