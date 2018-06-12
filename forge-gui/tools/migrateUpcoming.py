@@ -12,6 +12,6 @@ for dirName, subdirList, fileList in os.walk(upcoming):
 		newFile = os.path.join(cardsfolder, filename[0], filename)
 
 		if os.path.exists(newFile):
-		    subprocess.call('git rm %s' % (newFile), shell=True)
+			subprocess.call('git rm %s' % (newFile), shell=True)
 		else:
-	        subprocess.call('git mv %s %s' % (curLocation, newFile), shell=True)
+			subprocess.call('git mv %s %s' % (curLocation, newFile), shell=True)
