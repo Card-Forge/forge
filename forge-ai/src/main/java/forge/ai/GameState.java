@@ -85,6 +85,8 @@ public abstract class GameState {
     private String tChangePlayer = "NONE";
     private String tChangePhase = "NONE";
 
+    private String tAdvancePhase = "NONE";
+
     private String precastHuman = null;
     private String precastAI = null;
 
@@ -409,8 +411,10 @@ public abstract class GameState {
         if (categoryName.startsWith("active")) {
             if (categoryName.endsWith("player"))
                 tChangePlayer = categoryValue.trim().toLowerCase();
-            if (categoryName.endsWith("phase"))
+            else if (categoryName.endsWith("phase"))
                 tChangePhase = categoryValue.trim().toUpperCase();
+            else if (categoryName.endsWith("phaseadvance"))
+                tAdvancePhase = categoryValue.trim().toUpperCase();
             return;
         }
 
@@ -523,8 +527,9 @@ public abstract class GameState {
         cardToScript.clear();
         cardAttackMap.clear();
 
-        Player newPlayerTurn = tChangePlayer.equals("human") ? human : tChangePlayer.equals("ai") ? ai : null;
-        PhaseType newPhase = tChangePhase.equals("none") ? null : PhaseType.smartValueOf(tChangePhase);
+        Player newPlayerTurn = tChangePlayer.equalsIgnoreCase("human") ? human : tChangePlayer.equalsIgnoreCase("ai") ? ai : null;
+        PhaseType newPhase = tChangePhase.equalsIgnoreCase("none") ? null : PhaseType.smartValueOf(tChangePhase);
+        PhaseType advPhase = tAdvancePhase.equalsIgnoreCase("none") ? null : PhaseType.smartValueOf(tAdvancePhase);
 
         // Set stack to resolving so things won't trigger/effects be checked right away
         game.getStack().setResolving(true);
@@ -563,6 +568,11 @@ public abstract class GameState {
         }
 
         game.getStack().setResolving(false);
+
+        // Advance to a certain phase, activating all triggered abilities
+        if (advPhase != null) {
+            game.getPhaseHandler().devAdvanceToPhase(advPhase);
+        }
 
         game.getAction().checkStateEffects(true); //ensure state based effects and triggers are updated
     }
