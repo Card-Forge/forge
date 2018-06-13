@@ -1,0 +1,4 @@
+Name:Leopard-Spotted Jiao
+ManaCost:1 R
+Types:Creature Beast
+PT:3/1
