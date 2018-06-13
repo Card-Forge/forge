@@ -18,271 +18,271 @@ Type=Other
 11 M Ikra Shidiqi, the Usurper
 12 M Ishai, Ojutai Dragonspeaker
 13 R Reyhan, Last of the Abzan
-14 Artisan of Kozilek
-15 Abzan Falconer
-16 Angel of Serenity
-17 Arbiter of Knollridge
-18 Banishing Light
-19 Brave the Sands
-20 Cathars' Crusade
-21 Citadel Siege
-22 Crib Swap
-23 Custodi Soulbinders
-24 Dawnbreak Reclaimer
-25 Dawnglare Invoker
-26 Duelist's Heritage
-27 Elite Scaleguard
-28 Faith's Fetters
-29 Herald of the Host
+14 U Artisan of Kozilek
+15 U Abzan Falconer
+16 M Angel of Serenity
+17 R Arbiter of Knollridge
+18 U Banishing Light
+19 U Brave the Sands
+20 R Cathars' Crusade
+21 R Citadel Siege
+22 U Crib Swap
+23 R Custodi Soulbinders
+24 R Dawnbreak Reclaimer
+25 C Dawnglare Invoker
+26 R Duelist's Heritage
+27 U Elite Scaleguard
+28 C Faith's Fetters
+29 U Herald of the Host
 30 R Jareth, Leonine Titan
-31 Kalemne's Captain
-32 Oreskos Explorer
-33 Orim's Thunder
-34 Orzhov Advokist
-35 Reveillark
-36 Sublime Exhalation
-37 Sun Titan
-38 Victory's Herald
-39 Deepglow Skate
-40 Disdainful Stroke
-41 Dreamborn Muse
-42 Fact or Fiction
-43 Grip of Phyresis
-44 Manifold Insights
-45 Memory Erosion
-46 Minds Aglow
-47 Mulldrifter
-48 Riddlekeeper
-49 Slipstream Eel
-50 Spell Crumple
-51 Tezzeret's Gambit
-52 Thrummingbird
-53 Treasure Cruise
-54 Vow of Flight
-55 Windfall
-56 Wonder
-57 Avatar of Woe
-58 Bane of the Living
-59 Buried Alive
-60 Butcher of Malakir
-61 Dark Hatchling
-62 Extractor Demon
-63 Festercreep
-64 Fleshbag Marauder
-65 Grave Pact
-66 Gravedigger
-67 Languish
-68 Living Death
-69 Mortivore
-70 Necroplasm
-71 Nezumi Graverobber
-72 Patron of the Nezumi
-73 Rise from the Grave
-74 Scythe Specter
-75 Sewer Nemesis
-76 Shared Trauma
-77 Sign in Blood
-78 Stitch Together
-79 Syphon Flesh
-80 Syphon Mind
-81 Unnerve
-82 Vow of Malice
-83 Beetleback Chief
-84 Bitter Feud
-85 Blasphemous Act
-86 Bogardan Hellkite
-87 Borderland Behemoth
-88 Breath of Darigaaz
-89 Chaos Warp
-90 Curse of the Nightly Hunt
-91 Desolation Giant
-92 Disaster Radius
-93 Dream Pillager
-94 Dualcaster Mage
-95 Earthquake
-96 Faithless Looting
-97 Fall of the Hammer
-98 Fiery Confluence
-99 Flametongue Kavu
+31 R Kalemne's Captain
+32 U Oreskos Explorer
+33 C Orim's Thunder
+34 U Orzhov Advokist
+35 R Reveillark
+36 R Sublime Exhalation
+37 M Sun Titan
+38 R Victory's Herald
+39 R Deepglow Skate
+40 C Disdainful Stroke
+41 R Dreamborn Muse
+42 U Fact or Fiction
+43 U Grip of Phyresis
+44 R Manifold Insights
+45 R Memory Erosion
+46 R Minds Aglow
+47 C Mulldrifter
+48 C Riddlekeeper
+49 U Slipstream Eel
+50 U Spell Crumple
+51 U Tezzeret's Gambit
+52 U Thrummingbird
+53 C Treasure Cruise
+54 U Vow of Flight
+55 U Windfall
+56 U Wonder
+57 R Avatar of Woe
+58 R Bane of the Living
+59 U Buried Alive
+60 R Butcher of Malakir
+61 R Dark Hatchling
+62 R Extractor Demon
+63 C Festercreep
+64 U Fleshbag Marauder
+65 R Grave Pact
+66 C Gravedigger
+67 R Languish
+68 R Living Death
+69 R Mortivore
+70 R Necroplasm
+71 U Nezumi Graverobber
+72 R Patron of the Nezumi
+73 U Rise from the Grave
+74 R Scythe Specter
+75 R Sewer Nemesis
+76 R Shared Trauma
+77 C Sign in Blood
+78 U Stitch Together
+79 U Syphon Flesh
+80 C Syphon Mind
+81 C Unnerve
+82 U Vow of Malice
+83 U Beetleback Chief
+84 R Bitter Feud
+85 R Blasphemous Act
+86 M Bogardan Hellkite
+87 R Borderland Behemoth
+88 U Breath of Darigaaz
+89 R Chaos Warp
+90 U Curse of the Nightly Hunt
+91 R Desolation Giant
+92 R Disaster Radius
+93 R Dream Pillager
+94 R Dualcaster Mage
+95 R Earthquake
+96 C Faithless Looting
+97 C Fall of the Hammer
+98 R Fiery Confluence
+99 U Flametongue Kavu
 100 R Fumiko the Lowblood
-101 Goblin Welder
-102 Hamletback Goliath
-103 Hammerfist Giant
-104 Hoard-Smelter Dragon
-105 Hostility
-106 Hunted Dragon
-107 Impact Resonance
-108 Incite Rebellion
-109 Inferno Titan
-110 Ingot Chewer
-111 Magma Giant
-112 Magmaquake
-113 Magus of the Wheel
-114 Meteor Blast
-115 Rite of the Raging Storm
-116 Scrap Mastery
-117 Spitebellows
-118 Starstorm
-119 Stinkdrinker Daredevil
-120 Stoneshock Giant
-121 Sunrise Sovereign
-122 Taurean Mauler
-123 Thundercloud Shaman
-124 R Tuktuk the Explorer
-125 Tyrant's Familiar
-126 Volcanic Offering
-127 Warchief Giant
-128 Warmonger Hellkite
-129 Warstorm Surge
-130 Whipflare
-131 Word of Seizing
-132 Acidic Slime
-133 Brawn
-134 Champion of Lambholt
-135 Cultivate
-136 Eternal Witness
-137 Forgotten Ancient
-138 Hardened Scales
-139 Inspiring Call
-140 Kalonian Hydra
-141 Lhurgoyf
-142 Relic Crush
-143 Scavenging Ooze
-144 Solidarity of Heroes
-145 Tribute to the Wild
-146 Troll Ascetic
-147 Tuskguard Captain
-148 Vow of Wildness
-149 Yavimaya Elder
-150 Ancient Excavation
-151 Bred for the Hunt
-152 Corpsejack Menace
-153 Desecrator Hag
-154 Duneblast
-155 Enduring Scalelord
-156 Fathom Mage
-157 M Ghave, Guru of Spores
-158 Juniper Order Ranger
-159 Master Biomancer
-160 Merciless Eviction
-161 Migratory Route
-162 Mirrorweave
-163 Mortify
-164 Putrefy
+101 R Goblin Welder
+102 R Hamletback Goliath
+103 R Hammerfist Giant
+104 R Hoard-Smelter Dragon
+105 R Hostility
+106 R Hunted Dragon
+107 R Impact Resonance
+108 R Incite Rebellion
+109 M Inferno Titan
+110 C Ingot Chewer
+111 R Magma Giant
+112 R Magmaquake
+113 R Magus of the Wheel
+114 U Meteor Blast
+115 U Rite of the Raging Storm
+116 R Scrap Mastery
+117 U Spitebellows
+118 R Starstorm
+119 C Stinkdrinker Daredevil
+120 U Stoneshock Giant
+121 R Sunrise Sovereign
+122 R Taurean Mauler
+123 U Thundercloud Shaman
+124 R R Tuktuk the Explorer
+125 R Tyrant's Familiar
+126 R Volcanic Offering
+127 U Warchief Giant
+128 R Warmonger Hellkite
+129 R Warstorm Surge
+130 U Whipflare
+131 R Word of Seizing
+132 U Acidic Slime
+133 U Brawn
+134 R Champion of Lambholt
+135 C Cultivate
+136 U Eternal Witness
+137 R Forgotten Ancient
+138 R Hardened Scales
+139 U Inspiring Call
+140 M Kalonian Hydra
+141 R Lhurgoyf
+142 C Relic Crush
+143 R Scavenging Ooze
+144 U Solidarity of Heroes
+145 U Tribute to the Wild
+146 R Troll Ascetic
+147 U Tuskguard Captain
+148 U Vow of Wildness
+149 C Yavimaya Elder
+150 U Ancient Excavation
+151 U Bred for the Hunt
+152 R Corpsejack Menace
+153 C Desecrator Hag
+154 R Duneblast
+155 U Enduring Scalelord
+156 R Fathom Mage
+157 M M Ghave, Guru of Spores
+158 U Juniper Order Ranger
+159 M Master Biomancer
+160 R Merciless Eviction
+161 U Migratory Route
+162 R Mirrorweave
+163 U Mortify
+164 U Putrefy
 165 R Skullbriar, the Walking Grave
-166 Spitting Image
-167 Sylvan Reclamation
+166 R Spitting Image
+167 U Sylvan Reclamation
 168 R Szadek, Lord of Secrets
 169 R Vorel of the Hull Clade
-170 Vulturous Zombie
+170 R Vulturous Zombie
 171 M Wrexial, the Risen Deep
-172 Astral Cornucopia
-173 Basalt Monolith
-174 Blade of Selves
-175 Boros Cluestone
-176 Boros Signet
-177 Bottle Gnomes
-178 Caged Sun
-179 Cathodion
-180 Cauldron of Souls
-181 Coldsteel Heart
-182 Commander's Sphere
-183 Crystalline Crawler
-184 Darksteel Ingot
-185 Dimir Signet
-186 Dreamstone Hedron
-187 Epochrasite
-188 Everflowing Chalice
-189 Fellwar Stone
-190 Fire Diamond
-191 Golgari Signet
-192 Golgari Signet
-193 Ichor Wellspring
-194 Jalum Tome
-195 Junk Diver
-196 Lightning Greaves
-197 Liquimetal Coating
-198 Loreseeker's Stone
-199 Loxodon Warhammer
-200 Mind Stone
-201 Mycosynth Wellspring
-202 Myr Battlesphere
-203 Myr Retriever
-204 Myr Sire
-205 Oblivion Stone
-206 Orzhov Signet
-207 Palladium Myr
-208 Panic Spellbomb
-209 Pentavus
-210 Pilgrim's Eye
-211 Pristine Talisman
-212 Ruby Medallion
-213 Sandstone Oracle
-214 Seer's Sundial
-215 Simic Signet
-216 Simic Signet
-217 Sol Ring
-218 Solemn Simulacrum
-219 Solemn Simulacrum
-220 Spine of Ish Sah
-221 Staff of Nin
-222 Steel Hellkite
-223 Swiftfoot Boots
-224 Thought Vessel
-225 Trading Post
-226 Triskelavus
-227 Unstable Obelisk
-228 Urza's Incubator
-229 Wayfarer's Bauble
-230 Worn Powerstone
-231 Wurmcoil Engine
-232 Ancient Amphitheater
-233 Arcane Lighthouse
-234 Arcane Sanctum
-235 Ash Barrens
-236 Azorius Chancery
-237 Barren Moor
-238 Blasted Landscape
-239 Boros Garrison
-240 Boros Guildgate
-241 Buried Ruin
-242 Command Tower
-243 Darksteel Citadel
-244 Darkwater Catacombs
-245 Dimir Aqueduct
-246 Dormant Volcano
-247 Dreadship Reef
-248 Drifting Meadow
-249 Evolving Wilds
-250 Exotic Orchard
-251 Flamekin Village
-252 Forgotten Cave
-253 Ghost Quarter
-254 Golgari Rot Farm
-255 Great Furnace
-256 Jwar Isle Refuge
-257 Lonely Sandbar
-258 Murmuring Bosk
-259 Opal Palace
-260 Opulent Palace
-261 Phyrexia's Core
-262 Reliquary Tower
-263 Rupture Spire
-264 Sandsteppe Citadel
-265 Seaside Citadel
-266 Secluded Steppe
-267 Simic Growth Chamber
-268 Smoldering Crater
-269 Sungrass Prairie
-270 Svogthos, the Restless Tomb
-271 Temple of the False God
-272 Temple of the False God
-273 Terramorphic Expanse
-274 Tranquil Thicket
-275 Underground River
-276 Vivid Crag
-277 Vivid Meadow
-278 Wind-Scarred Crag
+172 R Astral Cornucopia
+173 U Basalt Monolith
+174 R Blade of Selves
+175 C Boros Cluestone
+176 C Boros Signet
+177 U Bottle Gnomes
+178 R Caged Sun
+179 U Cathodion
+180 R Cauldron of Souls
+181 U Coldsteel Heart
+182 C Commander's Sphere
+183 R Crystalline Crawler
+184 U Darksteel Ingot
+185 C Dimir Signet
+186 U Dreamstone Hedron
+187 R Epochrasite
+188 U Everflowing Chalice
+189 U Fellwar Stone
+190 U Fire Diamond
+191 C Golgari Signet
+192 C Golgari Signet
+193 C Ichor Wellspring
+194 R Jalum Tome
+195 R Junk Diver
+196 U Lightning Greaves
+197 U Liquimetal Coating
+198 U Loreseeker's Stone
+199 R Loxodon Warhammer
+200 U Mind Stone
+201 C Mycosynth Wellspring
+202 R Myr Battlesphere
+203 U Myr Retriever
+204 C Myr Sire
+205 R Oblivion Stone
+206 C Orzhov Signet
+207 U Palladium Myr
+208 C Panic Spellbomb
+209 R Pentavus
+210 C Pilgrim's Eye
+211 C Pristine Talisman
+212 R Ruby Medallion
+213 U Sandstone Oracle
+214 R Seer's Sundial
+215 C Simic Signet
+216 C Simic Signet
+217 U Sol Ring
+218 R Solemn Simulacrum
+219 R Solemn Simulacrum
+220 R Spine of Ish Sah
+221 R Staff of Nin
+222 R Steel Hellkite
+223 U Swiftfoot Boots
+224 C Thought Vessel
+225 R Trading Post
+226 R Triskelavus
+227 U Unstable Obelisk
+228 R Urza's Incubator
+229 C Wayfarer's Bauble
+230 U Worn Powerstone
+231 M Wurmcoil Engine
+232 R Ancient Amphitheater
+233 U Arcane Lighthouse
+234 U Arcane Sanctum
+235 C Ash Barrens
+236 U Azorius Chancery
+237 C Barren Moor
+238 U Blasted Landscape
+239 C Boros Garrison
+240 C Boros Guildgate
+241 U Buried Ruin
+242 C Command Tower
+243 U Darksteel Citadel
+244 R Darkwater Catacombs
+245 C Dimir Aqueduct
+246 U Dormant Volcano
+247 U Dreadship Reef
+248 C Drifting Meadow
+249 C Evolving Wilds
+250 R Exotic Orchard
+251 R Flamekin Village
+252 C Forgotten Cave
+253 U Ghost Quarter
+254 U Golgari Rot Farm
+255 C Great Furnace
+256 U Jwar Isle Refuge
+257 C Lonely Sandbar
+258 R Murmuring Bosk
+259 C Opal Palace
+260 U Opulent Palace
+261 U Phyrexia's Core
+262 U Reliquary Tower
+263 C Rupture Spire
+264 U Sandsteppe Citadel
+265 U Seaside Citadel
+266 C Secluded Steppe
+267 C Simic Growth Chamber
+268 C Smoldering Crater
+269 R Sungrass Prairie
+270 U Svogthos, the Restless Tomb
+271 U Temple of the False God
+272 U Temple of the False God
+273 C Terramorphic Expanse
+274 C Tranquil Thicket
+275 R Underground River
+276 U Vivid Crag
+277 U Vivid Meadow
+278 C Wind-Scarred Crag
 279 L Plains
 280 L Plains
 281 L Plains
