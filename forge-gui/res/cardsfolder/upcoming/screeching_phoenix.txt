@@ -1,0 +1,7 @@
+Name:Screeching Phoenix
+ManaCost:4 R R
+Types:Creature Phoenix
+K:Flying
+A:SP$ PumpAll | Cost$ 1 R G | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | SpellDescription$ Creatures you control get +1/+0 until end of turn.
+Oracle:Flying\n{2}{R}: Creatures you control get +1/+0 until end of turn.
+PT:4/4
