@@ -41,10 +41,10 @@ public class FightEffect extends DamageBaseEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         List<Card> fighters = getFighters(sa);
-        final Game game = sa.getActivatingPlayer().getGame();
+        final Game game = host.getGame();
 
-        if (fighters.size() < 2 || !fighters.get(0).isInPlay()
-                || !fighters.get(1).isInPlay()) {
+        // check is done in getFighters
+        if (fighters.size() < 2) {
             return;
         }
         
@@ -55,21 +55,7 @@ public class FightEffect extends DamageBaseEffect {
             }
         }
         
-        boolean fightToughness = sa.hasParam("FightWithToughness");
-        CardDamageMap damageMap = new CardDamageMap();
-        CardDamageMap preventMap = new CardDamageMap();
-
-        // Damage is dealt simultaneously, so we calculate the damage from source to target before it is applied
-        final int dmg1 = fightToughness ? fighters.get(0).getNetToughness() : fighters.get(0).getNetPower();
-        final int dmg2 = fightToughness ? fighters.get(1).getNetToughness() : fighters.get(1).getNetPower();
-
-        dealDamage(fighters.get(0), fighters.get(1), dmg1, damageMap, preventMap, sa);
-        dealDamage(fighters.get(1), fighters.get(0), dmg2, damageMap, preventMap, sa);
-
-        preventMap.triggerPreventDamage(false);
-        damageMap.triggerDamageDoneOnce(false, sa);
-        
-        replaceDying(sa);
+        dealDamage(sa, fighters.get(0), fighters.get(1));
 
         for (Card c : fighters) {
             final Map<String, Object> runParams = Maps.newHashMap();
@@ -83,6 +69,8 @@ public class FightEffect extends DamageBaseEffect {
 
         Card fighter1 = null;
         Card fighter2 = null;
+        final Card host = sa.getHostCard();
+        final Game game = host.getGame();
 
         List<Card> tgts = null;
         if (sa.usesTargeting()) {
@@ -92,11 +80,24 @@ public class FightEffect extends DamageBaseEffect {
             }
         }
         if (sa.hasParam("Defined")) {
-            List<Card> defined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+            List<Card> defined = AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa);
             // Allow both fighters to come from defined list if first fighter not already found
             if (sa.hasParam("ExtraDefined")) {
-                defined.addAll(AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("ExtraDefined"), sa));
+                defined.addAll(AbilityUtils.getDefinedCards(host, sa.getParam("ExtraDefined"), sa));
             }
+
+            List<Card> remove = Lists.newArrayList();
+            for (final Card d : defined) {
+                final Card g = game.getCardState(d, null);
+                // 701.12b If a creature instructed to fight is no longer on the battlefield or is no longer a creature,
+                // no damage is dealt. If a creature is an illegal target
+                // for a resolving spell or ability that instructs it to fight, no damage is dealt.
+                if (g == null || !g.equalsWithTimestamp(d) || !d.isInPlay() || !d.isCreature()) {
+                    // Test to see if the card we're trying to add is in the expected state
+                    remove.add(d);
+                }
+            }
+            defined.removeAll(remove);
 
             if (!defined.isEmpty()) {
                 if (defined.size() > 1 && fighter1 == null) {
@@ -120,9 +121,38 @@ public class FightEffect extends DamageBaseEffect {
 
         return fighterList;
     }
-    
-    private void dealDamage(Card source, Card target, int damage, CardDamageMap damageMap, CardDamageMap preventMap, final SpellAbility sa) {
-        target.addDamage(damage, source, damageMap, preventMap, sa);
-    }
 
+    private void dealDamage(final SpellAbility sa, Card fighterA, Card fighterB) {
+        boolean fightToughness = sa.hasParam("FightWithToughness");
+
+        boolean usedDamageMap = true;
+        CardDamageMap damageMap = sa.getDamageMap();
+        CardDamageMap preventMap = sa.getPreventMap();
+
+        if (damageMap == null) {
+            // make a new damage map
+            damageMap = new CardDamageMap();
+            preventMap = new CardDamageMap();
+            usedDamageMap = false;
+        }
+
+        // 701.12c If a creature fights itself, it deals damage to itself equal to twice its power.
+
+        final int dmg1 = fightToughness ? fighterA.getNetToughness() : fighterA.getNetPower();
+        if (fighterA.equals(fighterB)) {
+            fighterA.addDamage(dmg1 * 2, fighterA, damageMap, preventMap, sa);
+        } else {
+            final int dmg2 = fightToughness ? fighterB.getNetToughness() : fighterB.getNetPower();
+
+            fighterB.addDamage(dmg1, fighterA, damageMap, preventMap, sa);
+            fighterA.addDamage(dmg2, fighterB, damageMap, preventMap, sa);
+        }
+
+        if (!usedDamageMap) {
+            preventMap.triggerPreventDamage(false);
+            damageMap.triggerDamageDoneOnce(false, sa);
+        }
+
+        replaceDying(sa);
+    }
 }
