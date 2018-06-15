@@ -90,9 +90,13 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         if(FModel.isdeckGenMatrixLoaded()) {
             boxStandardCardgenDecks.setSelected(true);
             boxModernCardgenDecks.setSelected(true);
+            boxLegacyCardgenDecks.setSelected(true);
+            boxVintageCardgenDecks.setSelected(true);
         }else{
             boxStandardCardgenDecks.setSelected(false);
             boxModernCardgenDecks.setSelected(false);
+            boxLegacyCardgenDecks.setSelected(false);
+            boxVintageCardgenDecks.setSelected(false);
         }
         boxModernColorDecks.setSelected(true);
 
@@ -119,6 +123,8 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         if(FModel.isdeckGenMatrixLoaded()) {
             pnlOptions.add(boxStandardCardgenDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
             pnlOptions.add(boxModernCardgenDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
+            pnlOptions.add(boxLegacyCardgenDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
+            pnlOptions.add(boxVintageCardgenDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
         }
         pnlOptions.add(boxStandardColorDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
         pnlOptions.add(boxModernColorDecks, "w 96%!, h 30px!, gap 2% 0 0 0");
