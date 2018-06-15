@@ -1625,6 +1625,9 @@ public class ComputerUtilCard {
                 if (!params.containsKey("Affected")) {
                     continue;
                 }
+                if (!params.containsKey("AddPower") && !params.containsKey("AddToughness")) {
+                    continue;
+                }
                 final String valid = params.get("Affected");
                 if (!vCard.isValid(valid, c.getController(), c, null)) {
                     continue;
