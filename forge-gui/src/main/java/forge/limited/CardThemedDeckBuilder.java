@@ -57,11 +57,11 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
     // Views for aiPlayable
     protected Iterable<PaperCard> onColorCreaturesAndSpells;
-    protected Iterable<PaperCard> keyCards;
 
     protected static final boolean logToConsole = false;
     protected static final boolean logColorsToConsole = false;
 
+    protected Iterable<PaperCard> keyCards;
     protected Map<Integer,Integer> targetCMCs;
 
 
@@ -192,7 +192,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         // 3. Add creatures, trying to follow mana curve
 
         numSpellsNeeded = numSpellsNeeded - deckList.size(); //subtract keycard count
-        addManaCurveCards(onColorCreaturesAndSpells, numSpellsNeeded , "Creatures and Spells");
+        addManaCurveCards(onColorCreaturesAndSpells, numSpellsNeeded, "Creatures and Spells");
         if (logToConsole) {
             System.out.println("Post Creatures and Spells : " + deckList.size());
         }
@@ -205,20 +205,20 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
         // 5. If there are still on-color cards, and the average cmc is low, add
         // extras.
-        double avCMC=getAverageCMC(deckList);
-        int maxCMC=getMaxCMC(deckList);
+        double avCMC = getAverageCMC(deckList);
+        int maxCMC = getMaxCMC(deckList);
         if (avCMC < 4) {
             addLowCMCCard();
-            if(targetSize>60){
+            if (targetSize > 60) {
                 addLowCMCCard();
             }
         }
-        if (avCMC < 3 && maxCMC<6) {
+        if (avCMC < 3 && maxCMC < 6) {
             addLowCMCCard();
         }
-        if (avCMC < 2.5 && maxCMC<5) {
+        if (avCMC < 2.5 && maxCMC < 5) {
             addLowCMCCard();
-            if(targetSize>60){
+            if (targetSize > 60) {
                 addLowCMCCard();
             }
         }
@@ -237,8 +237,15 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         // 7. If there are still less than 22 non-land cards add off-color
         // cards. This should be avoided.
         int stillNeeds = numSpellsNeeded - deckList.size();
-        if(stillNeeds>0)
+        if (stillNeeds > 0)
+            addCards(onColorCreaturesAndSpells, stillNeeds);
+        stillNeeds = numSpellsNeeded - deckList.size();
+        if (stillNeeds > 0)
+            extendPlaysets(stillNeeds);
+        stillNeeds = numSpellsNeeded - deckList.size();
+        if (stillNeeds > 0)
             addRandomCards(stillNeeds);
+
         if (logToConsole) {
             System.out.println("Post Randoms : " + deckList.size());
         }
@@ -305,6 +312,31 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         }
         return result;
 
+    }
+
+    protected void extendPlaysets(int numSpellsNeeded){
+        Map<PaperCard,Integer> currentCounts = new HashMap<>();
+        List<PaperCard> cardsToAdd = new ArrayList<>();
+        int i=0;
+        for(PaperCard card: deckList){
+            if(currentCounts.containsKey(card)){
+                currentCounts.put(card, currentCounts.get(card) + 1);
+            }else{
+                currentCounts.put(card, 1);
+            }
+        }
+        for(PaperCard card: currentCounts.keySet()){
+            if(currentCounts.get(card)==2 || currentCounts.get(card)==3){
+                cardsToAdd.add(card);
+                ++i;
+                if(i >= numSpellsNeeded ){
+                    break;
+                }
+            }
+        }
+        deckList.addAll(cardsToAdd);
+        aiPlayables.removeAll(cardsToAdd);
+        rankedColorList.removeAll(cardsToAdd);
     }
 
     protected void generateTargetCMCs(){
@@ -543,6 +575,16 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             return;
         }
 
+        int stillNeeds = targetSize - deckList.size();
+        if (stillNeeds > 0)
+            addCards(onColorCreaturesAndSpells, stillNeeds);
+        stillNeeds = targetSize - deckList.size();
+        if (stillNeeds > 0)
+            extendPlaysets(stillNeeds);
+        stillNeeds = targetSize - deckList.size();
+        if (stillNeeds == 0)
+            return;
+
         Predicate<PaperCard> possibleFromFullPool = new Predicate<PaperCard>() {
             final Set<String> deckListNames = getDeckListNames();
             @Override
@@ -603,7 +645,6 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
     private void addLands(final int[] clrCnts) {
         // basic lands that are available in the deck
         final Iterable<PaperCard> basicLands = Iterables.filter(aiPlayables, Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard.FN_GET_RULES));
-        final Set<PaperCard> snowLands = new HashSet<PaperCard>();
 
         // total of all ClrCnts
         int totalColor = 0;
@@ -617,8 +658,12 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         // add one of each land required first so that any rounding errors do not remove the only land of a colour
         for (int i = 0; i < 5; i++) {
             if (clrCnts[i] > 0) {
-                deckList.add(getBasicLand(i));
-                landsNeeded--;
+                float p = (float) clrCnts[i] / (float) totalColor;
+                int nLand = Math.round(landsNeeded * p); // desired truncation to int
+                if(nLand >0) {
+                    deckList.add(getBasicLand(i));
+                    landsNeeded--;
+                }
             }
         }
 
@@ -634,16 +679,21 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
                     System.out.printf("Basics[%s]: %d/%d = %f%% = %d cards%n", MagicColor.Constant.BASIC_LANDS.get(i), clrCnts[i], totalColor, 100*p, nLand);
                 }
 
+                PaperCard snowLand = null;
                 // if appropriate snow-covered lands are available, add them
                 for (final PaperCard cp : basicLands) {
                     if (cp.getName().equals(MagicColor.Constant.SNOW_LANDS.get(i))) {
-                        snowLands.add(cp);
-                        nLand--;
+                        snowLand = cp;
+                        break;
                     }
                 }
 
                 for (int j = 0; j < nLand; j++) {
-                    deckList.add(getBasicLand(i));
+                    if(snowLand!=null){
+                        deckList.add(snowLand);
+                    }else {
+                        deckList.add(getBasicLand(i));
+                    }
                 }
             }
         }
@@ -656,9 +706,6 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             deckList.remove(deckList.size() - 1);
         }
 
-        deckList.addAll(snowLands);
-        aiPlayables.removeAll(snowLands);
-        rankedColorList.removeAll(snowLands);
     }
 
     /**
@@ -849,7 +896,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             if(card.getRules().getMainPart().getType().isLand()){
                 continue;
             }
-            if (num +1 > 0) {
+            if (num > 0) {
                 cardsToAdd.add(card);
                 if (logToConsole) {
                     System.out.println("Extra needed[" + num + "]:" + card.getName() + " (" + card.getRules().getManaCost() + ")");

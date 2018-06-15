@@ -233,17 +233,22 @@ public class DeckgenUtil {
         PaperCard card = null;
         for(Pair<String, Double> pair : preSelectedCardNames){
             card = StaticData.instance().getCommonCards().getUniqueByName(pair.getLeft());
-            if(!card.getRules().getType().isLand()){
+            if(card != null &&!card.getRules().getType().isLand()){
                 break;
             }
         }
         List<PaperCard> selectedCards = new ArrayList<>();
+        int cardCount=0;
         for(Pair<String, Double> pair:preSelectedCardNames){
             String name = pair.getLeft();
             PaperCard cardToAdd = StaticData.instance().getCommonCards().getUniqueByName(name);
             //for(int i=0; i<1;++i) {
-            if(!cardToAdd.getName().equals(card.getName())) {
+            if(cardToAdd != null && !cardToAdd.getName().equals(card.getName())) {
                 selectedCards.add(cardToAdd);
+                cardCount++;
+            }
+            if(cardCount>120){// no need to have more than this
+                break;
             }
             //}
         }
@@ -276,7 +281,13 @@ public class DeckgenUtil {
         for(int j=0;j<keyCardCount;++j) {
             playsetList.add(card);
         }
+        List<String> restrictedCardsAdded = new ArrayList<>();
         for (PaperCard c:selectedCards){
+            if (format.getRestrictedCards().contains(c.getName())&&!restrictedCardsAdded.contains(c)){
+                playsetList.add(c);
+                restrictedCardsAdded.add(c.getName());
+                continue;
+            }
             for(int j=0;j<4;++j) {
                 if(MyRandom.getRandom().nextInt(100)<90) {
                     playsetList.add(c);

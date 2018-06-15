@@ -34,11 +34,17 @@ public class GauntletUtil {
                 deck = DeckgenUtil.getRandomColorDeck(FModel.getFormats().getStandard().getFilterPrinted(),true);
                 break;
             case STANDARD_CARDGEN_DECK:
-                deck = DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getStandard(),true);
-                break;
+                    deck = DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getStandard(),true);
+                    break;
             case MODERN_CARDGEN_DECK:
-                deck = DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getModern(),true);
-                break;
+                    deck = DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getModern(),true);
+                    break;
+            case LEGACY_CARDGEN_DECK:
+                    deck = DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().get("Legacy"),true);
+                    break;
+            case VINTAGE_CARDGEN_DECK:
+                    deck = DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().get("Vintage"),true);
+                    break;
             case MODERN_COLOR_DECK:
                 deck = DeckgenUtil.getRandomColorDeck(FModel.getFormats().getModern().getFilterPrinted(),true);
                 break;
