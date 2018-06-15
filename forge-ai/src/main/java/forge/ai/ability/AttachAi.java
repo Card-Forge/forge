@@ -971,8 +971,8 @@ public class AttachAi extends SpellAbilityAi {
                 continue;
             }
             if ((affected.contains(stCheck) || affected.contains("AttachedBy"))) {
-                totToughness += AbilityUtils.calculateAmount(attachSource, stabMap.get("AddToughness"), sa);
-                totPower += AbilityUtils.calculateAmount(attachSource, stabMap.get("AddPower"), sa);
+                totToughness += AbilityUtils.calculateAmount(attachSource, stabMap.get("AddToughness"), stAbility);
+                totPower += AbilityUtils.calculateAmount(attachSource, stabMap.get("AddPower"), stAbility);
 
                 grantingAbilities |= stabMap.containsKey("AddAbility");
 
