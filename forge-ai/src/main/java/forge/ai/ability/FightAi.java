@@ -33,6 +33,12 @@ public class FightAi extends SpellAbilityAi {
         sa.resetTargets();
         final Card source = sa.getHostCard();
         
+        // everything is defined or targeted above, can't do anything there?
+        if (sa.hasParam("Defined") && !sa.usesTargeting()) {
+            // TODO extend Logic for cards like Arena or Grothama
+            return true;
+        }
+
         // Get creature lists
         CardCollectionView aiCreatures = ai.getCreaturesInPlay();
         aiCreatures = CardLists.getTargetableCards(aiCreatures, sa);
