@@ -582,14 +582,7 @@ public final class StaticAbilityContinuous {
 
             // set P/T
             if (layer == StaticAbilityLayer.SETPT) {
-                if (params.containsKey("CharacteristicDefining")) {
-                    if (setPower != Integer.MAX_VALUE) {
-                        affectedCard.setBasePower(setPower);
-                    }
-                    if (setToughness != Integer.MAX_VALUE) {
-                        affectedCard.setBaseToughness(setToughness);
-                    }
-                } else if ((setPower != Integer.MAX_VALUE) || (setToughness != Integer.MAX_VALUE)) {
+                if ((setPower != Integer.MAX_VALUE) || (setToughness != Integer.MAX_VALUE)) {
                     // non CharacteristicDefining
                     if (setP.startsWith("AffectedX")) {
                         setPower = CardFactoryUtil.xCount(affectedCard, AbilityUtils.getSVar(stAb, setP));
