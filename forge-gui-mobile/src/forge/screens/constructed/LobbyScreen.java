@@ -432,6 +432,8 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         switch (selectedDeckType){
             case STANDARD_CARDGEN_DECK:
             case MODERN_CARDGEN_DECK:
+            case LEGACY_CARDGEN_DECK:
+            case VINTAGE_CARDGEN_DECK:
             case COLOR_DECK:
             case STANDARD_COLOR_DECK:
             case MODERN_COLOR_DECK:
