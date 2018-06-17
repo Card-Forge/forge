@@ -58,7 +58,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
     // Views for aiPlayable
     protected Iterable<PaperCard> onColorCreaturesAndSpells;
 
-    protected static final boolean logToConsole = false;
+    protected static final boolean logToConsole = true;
     protected static final boolean logColorsToConsole = false;
 
     protected Iterable<PaperCard> keyCards;
@@ -314,11 +314,15 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
     }
 
+    //Extend to playsets for non land cards to fill out deck for when no other suitable cards are available
     protected void extendPlaysets(int numSpellsNeeded){
         Map<PaperCard,Integer> currentCounts = new HashMap<>();
         List<PaperCard> cardsToAdd = new ArrayList<>();
         int i=0;
         for(PaperCard card: deckList){
+            if(card.getRules().getType().isLand()){
+                continue;
+            }
             if(currentCounts.containsKey(card)){
                 currentCounts.put(card, currentCounts.get(card) + 1);
             }else{
@@ -606,6 +610,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(secondKeyCard.getName()));
         }
         //Iterator<PaperCard> iRandomPool = CardRanker.rankCardsInDeck(possibleList.subList(0, targetSize <= possibleList.size() ? targetSize : possibleList.size())).iterator();
+        Collections.shuffle(possibleList);
         Iterator<PaperCard> iRandomPool = possibleList.iterator();
         while (deckList.size() < targetSize) {
             if (logToConsole) {
