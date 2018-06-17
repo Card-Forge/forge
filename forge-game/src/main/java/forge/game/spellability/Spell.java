@@ -148,7 +148,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
 
         if (!(isInstant || activator.canCastSorcery() || flash || getRestrictions().isInstantSpeed()
                || hasSVar("IsCastFromPlayEffect")
-               || wasFaceDownInstant))) {
+               || wasFaceDownInstant)) {
             return false;
         }
 
