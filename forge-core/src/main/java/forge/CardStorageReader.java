@@ -413,6 +413,8 @@ public class CardStorageReader {
             return reader.readCard(lines, Files.getNameWithoutExtension(file.getName()));
         } catch (final FileNotFoundException ex) {
             throw new RuntimeException("CardReader : run error -- file not found: " + file.getPath(), ex);
+        } catch (final Exception ex) {
+            throw ex;
         } finally {
             try {
                 assert fileInputStream != null;
