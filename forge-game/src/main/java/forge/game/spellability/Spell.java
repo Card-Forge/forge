@@ -20,6 +20,7 @@ package forge.game.spellability;
 import com.google.common.collect.Sets;
 
 import forge.card.CardStateName;
+import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -74,6 +75,13 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     @Override
     public boolean canPlay() {
         Card card = this.getHostCard();
+
+        // Save the original cost and the face down info for a later check since the LKI copy will overwrite them
+        ManaCost origCost = card.getState(card.isFaceDown() ? CardStateName.Original : card.getCurrentStateName()).getManaCost();
+        boolean wasFaceDownInstant = card.isFaceDown()
+                && !card.getLastKnownZone().is(ZoneType.Battlefield)
+                && card.getState(CardStateName.Original).getType().isInstant();
+
         Player activator = this.getActivatingPlayer();
         if (activator == null) {
             activator = card.getController();
@@ -140,7 +148,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
 
         if (!(isInstant || activator.canCastSorcery() || flash || getRestrictions().isInstantSpeed()
                || hasSVar("IsCastFromPlayEffect")
-               || (card.isFaceDown() && !card.getLastKnownZone().is(ZoneType.Battlefield) && card.getState(CardStateName.Original).getType().isInstant()))) {
+               || wasFaceDownInstant))) {
             return false;
         }
 
@@ -153,7 +161,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         if (!isCastFaceDown()
                 && !hasSVar("IsCastFromPlayEffect")
                 && isBasicSpell()
-                && card.getState(card.isFaceDown() ? CardStateName.Original : card.getCurrentStateName()).getManaCost().isNoCost()) {
+                && origCost.isNoCost()) {
             return false;
         }
 
