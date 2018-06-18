@@ -2,8 +2,9 @@ Name:Fireslinger
 ManaCost:1 R
 Types:Creature Human Wizard
 PT:1/1
-A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SubAbility$ DBDealDamage | AILogic$ SelfDamage | SpellDescription$ Fireslinger deals 1 damage to any target and 1 damage to you.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SubAbility$ DBDealDamage | AILogic$ SelfDamage | DamageMap$ True | SpellDescription$ Fireslinger deals 1 damage to any target and 1 damage to you.
+SVar:DBDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 1 | SubAbility$ DBDamageResolve
+SVar:DBDamageResolve:DB$ DamageResolve
 SVar:SelfDamageAmount:1
-SVar:DBDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fireslinger.jpg
 Oracle:{T}: Fireslinger deals 1 damage to any target and 1 damage to you.
