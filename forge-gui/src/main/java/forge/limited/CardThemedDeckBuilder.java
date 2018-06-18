@@ -58,7 +58,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
     // Views for aiPlayable
     protected Iterable<PaperCard> onColorCreaturesAndSpells;
 
-    protected static final boolean logToConsole = true;
+    protected static final boolean logToConsole = false;
     protected static final boolean logColorsToConsole = false;
 
     protected Iterable<PaperCard> keyCards;
