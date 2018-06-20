@@ -1181,6 +1181,8 @@ public class Player extends GameEntity implements Comparable<Player> {
                     if (source.isValid(characteristics, this, null, null)) {
                         return true;
                     }
+                } else if (kw.equals("Protection from everything")) {
+                    return true;
                 }
                 else {
                     final boolean colorlessDamage = damageSource && source.hasKeyword("Colorless Damage Source");
