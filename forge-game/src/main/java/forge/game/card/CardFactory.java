@@ -346,24 +346,13 @@ public class CardFactory {
     private static void buildPlaneswalkerAbilities(Card card) {
         CardState state = card.getCurrentState();
     	// etbCounter only for Original Card
-        if (card.getBaseLoyalty() > 0 && card.getCurrentStateName() == CardStateName.Original) {
-            final String loyalty = Integer.toString(card.getBaseLoyalty());
+        if (state.getBaseLoyalty() > 0) {
+            final String loyalty = Integer.toString(state.getBaseLoyalty());
             // keyword need to be added to state directly, so init can be disabled
             if (state.addIntrinsicKeyword("etbCounter:LOYALTY:" + loyalty + ":no Condition:no desc", false) != null) {
                 card.updateKeywords();
             }
         }
-
-        //Planeswalker damage redirection
-        String replacement = "Event$ DamageDone | ActiveZones$ Battlefield | IsCombat$ False | ValidSource$ Card.OppCtrl,Emblem.OppCtrl"
-                + " | ValidTarget$ You | Optional$ True | OptionalDecider$ Opponent | ReplaceWith$ ChooseDmgPW | Secondary$ True"
-                + " | AICheckSVar$ DamagePWAI | AISVarCompare$ GT4 | Description$ Redirect damage to " + card.toString();
-        state.addReplacementEffect(ReplacementHandler.parseReplacement(replacement, card, true));
-        state.setSVar("ChooseDmgPW", "AB$ ChooseCard | Cost$ 0 | Defined$ ReplacedSourceController | References$ DamagePWAI | Choices$ Planeswalker.YouCtrl" +
-        		" | ChoiceZone$ Battlefield | Mandatory$ True | SubAbility$ DamagePW | ChoiceTitle$ Choose a planeswalker to redirect damage");
-        state.setSVar("DamagePW", "DB$ ReplaceEffect | VarName$ Affected | VarValue$ ChosenCard | VarType$ Card");
-        state.setSVar("DamagePWAI", "ReplaceCount$DamageAmount/NMinus.DamagePWY");
-        state.setSVar("DamagePWY", "Count$YourLifeTotal");
     }
 
     private static Card readCard(final CardRules rules, final IPaperCard paperCard, int cardId, Game game) {
@@ -425,7 +414,8 @@ public class CardFactory {
         c.setName(face.getName());
         c.setManaCost(face.getManaCost());
         c.setText(face.getNonAbilityText());
-        if (face.getInitialLoyalty() > 0) c.setBaseLoyalty(face.getInitialLoyalty());
+
+        c.getCurrentState().setBaseLoyalty(face.getInitialLoyalty());
 
         c.setOracleText(face.getOracleText());
 
@@ -563,7 +553,6 @@ public class CardFactory {
     public static void copyState(final Card from, final CardStateName fromState, final Card to,
             final CardStateName toState, boolean updateView) {
         // copy characteristics not associated with a state
-        to.setBaseLoyalty(from.getBaseLoyalty());
         to.setBasePowerString(from.getBasePowerString());
         to.setBaseToughnessString(from.getBaseToughnessString());
         to.setText(from.getSpellText());

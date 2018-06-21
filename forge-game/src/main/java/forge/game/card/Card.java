@@ -185,7 +185,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     // stack of set power/toughness
     private Map<Long, Pair<Integer,Integer>> newPT = Maps.newTreeMap();
     private Map<Long, Pair<Integer,Integer>> newPTCharacterDefining = Maps.newTreeMap();
-    private int baseLoyalty = 0;
     private String basePowerString = null;
     private String baseToughnessString = null;
     private String oracleText = "";
@@ -2910,24 +2909,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         return ColorSet.fromMask(colors);
     }
 
-    // values that are printed on card
-    public final int getBaseLoyalty() {
-        return baseLoyalty;
-    }
-
     public final int getCurrentLoyalty() {
-        int loyalty = getCounters(CounterType.LOYALTY);
-        if (loyalty == 0) {
-            loyalty = baseLoyalty;
-        }
-        return loyalty;
-    }
-
-    // values that are printed on card
-    public final void setBaseLoyalty(final int n) {
-        if (baseLoyalty == n) { return; }
-        baseLoyalty = n;
-        currentState.getView().updateLoyalty(this);
+        return getCounters(CounterType.LOYALTY);
     }
 
     // values that are printed on card
