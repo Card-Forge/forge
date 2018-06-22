@@ -491,10 +491,6 @@ public class DamageDealAi extends DamageAiBase {
                 sa.getTargets().add(enemy);
             }
             return true;
-        } else if ("PingAfterCombat".equals(sa.getParam("AILogic"))) {
-            if (this.shouldTgtP(ai, sa, dmg, noPrevention)) {
-
-            }
         }
 
         if (tgt.getMaxTargets(source, sa) <= 0) {
