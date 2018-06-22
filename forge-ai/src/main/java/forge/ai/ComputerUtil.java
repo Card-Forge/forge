@@ -95,7 +95,9 @@ public class ComputerUtil {
             sa.setHostCard(game.getAction().moveToStack(source, sa));
         }
 
-        sa.resetPaidHash();
+        if (sa.isCopied()) {
+            sa.resetPaidHash();
+        }
 
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
             CharmEffect.makeChoices(sa);

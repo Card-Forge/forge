@@ -471,11 +471,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     // Combined PaidLists
-    public HashMap<String, CardCollection> getPaidHash() {
+    public Map<String, CardCollection> getPaidHash() {
         return paidLists;
     }
-    public void setPaidHash(final HashMap<String, CardCollection> hash) {
-        paidLists = hash;
+    public void setPaidHash(final Map<String, CardCollection> hash) {
+        paidLists = Maps.newHashMap(hash);
     }
 
     public CardCollection getPaidList(final String str) {
@@ -667,8 +667,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             if (node != this) {
                 sb.append(" ");
             }
+            String desc = node.getDescription();
             if (node.getHostCard() != null) {
-                sb.append(TextUtil.fastReplace(node.getDescription(), "CARDNAME", node.getHostCard().getName()));
+                desc = TextUtil.fastReplace(desc, "CARDNAME", node.getHostCard().getName());
+                if (node.getOriginalHost() != null) {
+                    desc = TextUtil.fastReplace(desc, "ORIGINALHOST", node.getOriginalHost().getName());
+                }
+                sb.append(desc);
             }
             node = node.getSubAbility();
         }

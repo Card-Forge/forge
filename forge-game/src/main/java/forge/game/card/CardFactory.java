@@ -213,7 +213,7 @@ public class CardFactory {
                 c.setMadness(original.isMadness());
 
                 final SpellAbilityStackInstance si = controller.getGame().getStack().getInstanceFromSpellAbility(sa);
-                if (si != null) {            	
+                if (si != null) {
                     c.setXManaCostPaid(si.getXManaPaid());
                 }
             }
