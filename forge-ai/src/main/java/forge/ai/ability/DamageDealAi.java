@@ -657,7 +657,7 @@ public class DamageDealAi extends DamageAiBase {
                     }
                 }
                 
-            } else if (tgt.canTgtCreature()) {
+            } else if (tgt.canTgtCreature() || tgt.canTgtPlaneswalker()) {
                 final Card c = this.dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, mandatory);
                 if (c != null) {
                     //option to hold removal instead only applies for single targeted removal
@@ -690,7 +690,7 @@ public class DamageDealAi extends DamageAiBase {
             }
             // TODO: Improve Damage, we shouldn't just target the player just
             // because we can
-            else if (sa.canTarget(enemy)) {
+            if (sa.canTarget(enemy) && tcs.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
                 if (((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
                         || (SpellAbilityAi.isSorcerySpeed(sa) && phase.is(PhaseType.MAIN2))
                         || ("PingAfterAttack".equals(sa.getParam("AILogic")) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai))
