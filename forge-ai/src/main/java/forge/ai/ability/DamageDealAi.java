@@ -693,7 +693,7 @@ public class DamageDealAi extends DamageAiBase {
             else if (sa.canTarget(enemy)) {
                 if (((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
                         || (SpellAbilityAi.isSorcerySpeed(sa) && phase.is(PhaseType.MAIN2))
-                        || ("PingAfterAttack".equals(sa.getParam("AILogic")) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS))
+                        || ("PingAfterAttack".equals(sa.getParam("AILogic")) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai))
                         || sa.getPayCosts() == null || immediately
                         || this.shouldTgtP(ai, sa, dmg, noPrevention)) &&
                         (!avoidTargetP(ai, sa))) {
