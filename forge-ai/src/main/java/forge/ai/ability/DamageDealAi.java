@@ -491,6 +491,10 @@ public class DamageDealAi extends DamageAiBase {
                 sa.getTargets().add(enemy);
             }
             return true;
+        } else if ("PingAfterCombat".equals(sa.getParam("AILogic"))) {
+            if (this.shouldTgtP(ai, sa, dmg, noPrevention)) {
+
+            }
         }
 
         if (tgt.getMaxTargets(source, sa) <= 0) {
@@ -657,7 +661,7 @@ public class DamageDealAi extends DamageAiBase {
                     }
                 }
                 
-            } else if (tgt.canTgtCreature() || tgt.canTgtPlaneswalker()) {
+            } else if (tgt.canTgtCreature()) {
                 final Card c = this.dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, mandatory);
                 if (c != null) {
                     //option to hold removal instead only applies for single targeted removal
@@ -693,6 +697,7 @@ public class DamageDealAi extends DamageAiBase {
             else if (sa.canTarget(enemy)) {
                 if (((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
                         || (SpellAbilityAi.isSorcerySpeed(sa) && phase.is(PhaseType.MAIN2))
+                        || ("PingAfterAttack".equals(sa.getParam("AILogic")) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS))
                         || sa.getPayCosts() == null || immediately
                         || this.shouldTgtP(ai, sa, dmg, noPrevention)) &&
                         (!avoidTargetP(ai, sa))) {
