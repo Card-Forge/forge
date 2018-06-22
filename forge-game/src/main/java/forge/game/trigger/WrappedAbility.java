@@ -81,12 +81,12 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
-    public void setPaidHash(final HashMap<String, CardCollection> hash) {
+    public void setPaidHash(final Map<String, CardCollection> hash) {
         sa.setPaidHash(hash);
     }
 
     @Override
-    public HashMap<String, CardCollection> getPaidHash() {
+    public Map<String, CardCollection> getPaidHash() {
         return sa.getPaidHash();
     }
 
