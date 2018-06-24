@@ -414,6 +414,7 @@ public class CardStorageReader {
         } catch (final FileNotFoundException ex) {
             throw new RuntimeException("CardReader : run error -- file not found: " + file.getPath(), ex);
         } catch (final Exception ex) {
+            System.out.println("Error loading cardscript " + file.getName() + ". Please close Forge and resolve this.");
             throw ex;
         } finally {
             try {

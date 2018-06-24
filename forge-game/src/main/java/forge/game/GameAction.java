@@ -151,7 +151,7 @@ public class GameAction {
         // Cards returned from exile face-down must be reset to their original state, otherwise
         // all sort of funky shenanigans may happen later (e.g. their ETB replacement effects are set
         // up on the wrong card state etc.).
-        if (zoneTo.is(ZoneType.Hand) && zoneFrom.is(ZoneType.Exile) && c.isFaceDown()) {
+        if (c.isFaceDown() && (fromBattlefield || (toHand && zoneFrom.is(ZoneType.Exile)))) {
             c.setState(CardStateName.Original, true);
         }
 
@@ -1571,7 +1571,7 @@ public class GameAction {
         System.out.println(hand1.toString());
 
         //shuffle
-        List shuffledCards = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards().threadSafeIterable());
+        List<Card> shuffledCards = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards().threadSafeIterable());
         Collections.shuffle(shuffledCards);
 
         //check a second hand
