@@ -1321,3 +1321,39 @@ Firesong and Sunspeaker
 8 Gwafa Hazid, Profiteer
 8 Mind's Eye
 1 Mycosynth Lattice
+
+[M19 Secret Cards]
+Ajani, Wise Counselor
+Ajani's Influence
+Court Cleric
+Serra's Guardian
+Silverbeak Griffin
+Tezzeret, Cruel Machinist
+Riddlemaster Sphinx
+Pendulum of Patterns
+Tezzeret's Gatebreaker
+Tezzeret's Strider
+Liliana, the Necromancer
+Arisen Gorgon
+Gravewaker
+Liliana's Spoils
+Tattered Mummy
+Sarkhan, Dragonsoul
+Kargan Dragonrider
+Sarkhan's Dragonfire
+Sarkhan's Whelp
+Shivan Dragon
+Vivien of the Arkbow
+Aggressive Mammoth
+Skalla Wolf
+Ursine Champion
+Vivien's Jaguar
+Nexus of Fate
+Sun Sentinel
+Air Elemental
+Befuddle
+Mist-Cloaked Herald
+Waterknot
+Grasping Scoundrel
+Radiating Lightning
+Llanowar Elves
