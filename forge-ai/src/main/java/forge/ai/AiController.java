@@ -128,8 +128,8 @@ public class AiController {
     private List<SpellAbility> getPossibleETBCounters() {
         CardCollection all = new CardCollection(player.getCardsIn(ZoneType.Hand));
         CardCollectionView ccvPlayerLibrary = player.getCardsIn(ZoneType.Library);
-		
-		all.addAll(player.getCardsIn(ZoneType.Exile));
+        
+        all.addAll(player.getCardsIn(ZoneType.Exile));
         all.addAll(player.getCardsIn(ZoneType.Graveyard));
         if (!ccvPlayerLibrary.isEmpty()) {
             all.add(ccvPlayerLibrary.get(0));
@@ -155,36 +155,36 @@ public class AiController {
     
     // look for cards on the battlefield that should prevent the AI from using that spellability
     private boolean checkCurseEffects(final SpellAbility sa) {
-		CardCollectionView ccvGameBattlefield = game.getCardsIn(ZoneType.Battlefield);
+        CardCollectionView ccvGameBattlefield = game.getCardsIn(ZoneType.Battlefield);
         for (final Card c : ccvGameBattlefield) {
             if (c.hasSVar("AICurseEffect")) {
                 final String curse = c.getSVar("AICurseEffect");
                 if ("NonActive".equals(curse) && !player.equals(game.getPhaseHandler().getPlayerTurn())) {
                     return true;
                 } else {
-					final Card host = sa.getHostCard();
-					if ("DestroyCreature".equals(curse) && sa.isSpell() && host.isCreature()
-							&& !host.hasKeyword(Keyword.INDESTRUCTIBLE)) {
-						return true;
-					} else if ("CounterEnchantment".equals(curse) && sa.isSpell() && host.isEnchantment()
-							&& CardFactoryUtil.isCounterable(host)) {
-						return true;
-					} else if ("ChaliceOfTheVoid".equals(curse) && sa.isSpell() && CardFactoryUtil.isCounterable(host)
-							&& host.getCMC() == c.getCounters(CounterType.CHARGE)) {
-						return true;
-					}  else if ("BazaarOfWonders".equals(curse) && sa.isSpell() && CardFactoryUtil.isCounterable(host)) {
-						String hostName = host.getName();
-						for (Card card : ccvGameBattlefield) {
-							if (!card.isToken() && card.getName().equals(hostName)) {
-								return true;
-							}
-						}
-						for (Card card : game.getCardsIn(ZoneType.Graveyard)) {
-							if (card.getName().equals(hostName)) {
-								return true;
-							}
-						}
-					}
+                    final Card host = sa.getHostCard();
+                    if ("DestroyCreature".equals(curse) && sa.isSpell() && host.isCreature()
+                            && !host.hasKeyword(Keyword.INDESTRUCTIBLE)) {
+                        return true;
+                    } else if ("CounterEnchantment".equals(curse) && sa.isSpell() && host.isEnchantment()
+                            && CardFactoryUtil.isCounterable(host)) {
+                        return true;
+                    } else if ("ChaliceOfTheVoid".equals(curse) && sa.isSpell() && CardFactoryUtil.isCounterable(host)
+                            && host.getCMC() == c.getCounters(CounterType.CHARGE)) {
+                        return true;
+                    }  else if ("BazaarOfWonders".equals(curse) && sa.isSpell() && CardFactoryUtil.isCounterable(host)) {
+                        String hostName = host.getName();
+                        for (Card card : ccvGameBattlefield) {
+                            if (!card.isToken() && card.getName().equals(hostName)) {
+                                return true;
+                            }
+                        }
+                        for (Card card : game.getCardsIn(ZoneType.Graveyard)) {
+                            if (card.getName().equals(hostName)) {
+                                return true;
+                            }
+                        }
+                    }
                 } 
             }
         }
@@ -196,9 +196,9 @@ public class AiController {
                 && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureETBTriggers)) {
             return api == null;
         }
-		boolean rightapi = false;
-		String battlefield = ZoneType.Battlefield.toString();
-		Player activatingPlayer = sa.getActivatingPlayer();
+        boolean rightapi = false;
+        String battlefield = ZoneType.Battlefield.toString();
+        Player activatingPlayer = sa.getActivatingPlayer();
         
         // Trigger play improvements
         for (final Trigger tr : card.getTriggers()) {
@@ -214,7 +214,7 @@ public class AiController {
             }
 
             if (params.containsKey("ValidCard")) {
-				String validCard = params.get("ValidCard");
+                String validCard = params.get("ValidCard");
                 if (!validCard.contains("Self")) {
                     continue;
                 }
@@ -276,7 +276,7 @@ public class AiController {
 
             // for trigger test, need to ignore the conditions
             SpellAbilityCondition cons = exSA.getConditions();
-			if (cons != null) {
+            if (cons != null) {
                 String pres = cons.getIsPresent();
                 if (pres != null && pres.matches("Card\\.(Strictly)?Self")) {
                         cons.setIsPresent(null);
@@ -308,7 +308,7 @@ public class AiController {
             }
 
             if (params.containsKey("ValidCard")) {
-				String validCard = params.get("ValidCard");
+                String validCard = params.get("ValidCard");
                 if (!validCard.contains("Self")) {
                     continue;
                 }
@@ -382,7 +382,7 @@ public class AiController {
             if (landsInPlay.size() + landList.size() > max) {
                 for (Card c : allCards) {
                     for (SpellAbility sa : c.getSpellAbilities()) {
-						Cost payCosts = sa.getPayCosts();
+                        Cost payCosts = sa.getPayCosts();
                         if (payCosts != null) {
                             for (CostPart part : payCosts.getCostParts()) {
                                 if (part instanceof CostDiscard) {
@@ -398,9 +398,9 @@ public class AiController {
         landList = CardLists.filter(landList, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-				CardCollectionView battlefield = player.getCardsIn(ZoneType.Battlefield);
+                CardCollectionView battlefield = player.getCardsIn(ZoneType.Battlefield);
                 canPlaySpellBasic(c, null);
-				String name = c.getName();
+                String name = c.getName();
                 if (c.getType().isLegendary() && !name.equals("Flagstones of Trokair")) {
                     if (Iterables.any(battlefield, CardPredicates.nameEquals(name))) {
                         return false;
@@ -575,15 +575,15 @@ public class AiController {
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
             ApiType saApi = sa.getApi();
-			
-			if (saApi == ApiType.Counter || saApi == exceptSA) {
+            
+            if (saApi == ApiType.Counter || saApi == exceptSA) {
                 continue;
             }
             sa.setActivatingPlayer(player);
             // TODO: this currently only works as a limited prediction of permanent spells.
             // Ideally this should cast canPlaySa to determine that the AI is truly able/willing to cast a spell,
             // but that is currently difficult to implement due to various side effects leading to stack overflow.
-			Card host = sa.getHostCard();
+            Card host = sa.getHostCard();
             if (!ComputerUtil.castPermanentInMain1(player, sa) && host != null && !host.isLand() && ComputerUtilCost.canPayCost(sa, player)) {
                 if (sa instanceof SpellPermanent) {
                     return sa;
