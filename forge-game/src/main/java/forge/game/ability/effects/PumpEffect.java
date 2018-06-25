@@ -113,6 +113,13 @@ public class PumpEffect extends SpellAbilityEffect {
     private static void applyPump(final SpellAbility sa, final Player p,
             final List<String> keywords, final long timestamp) {
         final Game game = p.getGame();
+        final Card host = sa.getHostCard();
+        //if host is not on the battlefield don't apply
+        // Suspend should does Affect the Stack
+        if (sa.hasParam("UntilLoseControlOfHost")
+                && !(host.isInPlay() || host.isInZone(ZoneType.Stack))) {
+            return;
+        }
         p.addChangedKeywords(keywords, ImmutableList.<String>of(), timestamp);
 
         if (!sa.hasParam("Permanent")) {
@@ -134,6 +141,9 @@ public class PumpEffect extends SpellAbilityEffect {
                 game.getEndOfCombat().addUntil(untilEOT);
             } else if (sa.hasParam("UntilYourNextUpkeep")) {
                 game.getUpkeep().addUntil(sa.getActivatingPlayer(), untilEOT);
+            } else if (sa.hasParam("UntilLoseControlOfHost")) {
+                sa.getHostCard().addLeavesPlayCommand(untilEOT);
+                sa.getHostCard().addChangeControllerCommand(untilEOT);
             } else {
                 game.getEndOfTurn().addUntil(untilEOT);
             }
