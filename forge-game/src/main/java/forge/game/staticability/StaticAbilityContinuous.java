@@ -590,7 +590,8 @@ public final class StaticAbilityContinuous {
                     if (setT.startsWith("AffectedX")) {
                         setToughness = CardFactoryUtil.xCount(affectedCard, AbilityUtils.getSVar(stAb, setT));
                     }
-                    affectedCard.addNewPT(setPower, setToughness, hostCard.getTimestamp());
+                    affectedCard.addNewPT(setPower, setToughness,
+                        hostCard.getTimestamp(), stAb.hasParam("CharacteristicDefining"));
                 }
             }
 

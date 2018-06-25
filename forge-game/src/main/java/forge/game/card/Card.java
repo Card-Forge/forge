@@ -183,7 +183,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private long timestamp = -1; // permanents on the battlefield
 
     // stack of set power/toughness
-    private List<CardPowerToughness> newPT = Lists.newArrayList();
+    private Map<Long, Pair<Integer,Integer>> newPT = Maps.newTreeMap();
+    private Map<Long, Pair<Integer,Integer>> newPTCharacterDefining = Maps.newTreeMap();
     private int baseLoyalty = 0;
     private String basePowerString = null;
     private String baseToughnessString = null;
@@ -2949,14 +2950,14 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final int getSetPower() {
-        if (newPT.isEmpty()) {
+        if (newPTCharacterDefining.isEmpty() && newPT.isEmpty()) {
             return Integer.MAX_VALUE;
         }
         return getLatestPT().getLeft();
     }
 
     public final int getSetToughness() {
-        if (newPT.isEmpty()) {
+        if (newPTCharacterDefining.isEmpty() && newPT.isEmpty()) {
             return Integer.MAX_VALUE;
         }
         return getLatestPT().getRight();
@@ -2972,24 +2973,21 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     private synchronized Pair<Integer, Integer> getLatestPT() {
         // Find latest set power
-        // TODO Java 1.8 use comparingLong
-        Collections.sort(newPT, new Comparator<CardPowerToughness>() {
-            @Override
-            public int compare(CardPowerToughness o1, CardPowerToughness o2) {
-                return Long.compare(o1.getTimestamp(),o2.getTimestamp());
-            }
-        });
+        Integer power = null, toughness = null;
 
-        Integer power = null,
-                toughness = null;
-
-        int size = newPT.size();
-        for(int i = size - 1; i >= 0; i--) {
-            CardPowerToughness pt = newPT.get(i);
-            if (power == null && pt.getPower() != null)
-                power = pt.getPower();
-            if (toughness == null && pt.getToughness() != null)
-                toughness = pt.getToughness();
+        // apply CDA first
+        for (Pair<Integer,Integer> pt : newPTCharacterDefining.values()) {
+            if (pt.getLeft() != null)
+                power = pt.getLeft();
+            if (pt.getRight() != null)
+                toughness = pt.getRight();
+        }
+        // now real PT
+        for (Pair<Integer,Integer> pt : newPT.values()) {
+            if (pt.getLeft() != null)
+                power = pt.getLeft();
+            if (pt.getRight() != null)
+                toughness = pt.getRight();
         }
 
         if (power == null)
@@ -3002,20 +3000,28 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final void addNewPT(final Integer power, final Integer toughness, final long timestamp) {
-        newPT.add(new CardPowerToughness(power, toughness, timestamp));
+        addNewPT(power, toughness, timestamp, false);
+    }
+    
+    public final void addNewPT(final Integer power, final Integer toughness, final long timestamp, final boolean cda) {
+        if (cda) {
+            newPTCharacterDefining.put(timestamp, Pair.of(power, toughness));
+        } else {
+            newPT.put(timestamp, Pair.of(power, toughness));
+        }
         currentState.getView().updatePower(this);
         currentState.getView().updateToughness(this);
     }
 
     public final void removeNewPT(final long timestamp) {
-        for (int i = 0; i < newPT.size(); i++) {
-            final CardPowerToughness cardPT = newPT.get(i);
-            if (cardPT.getTimestamp() == timestamp) {
-                if (newPT.remove(cardPT)) {
-                    currentState.getView().updatePower(this);
-                    currentState.getView().updateToughness(this);
-                }
-            }
+        boolean removed = false;
+        
+        removed |= newPT.remove(timestamp) != null;
+        removed |= newPTCharacterDefining.remove(timestamp) != null;
+        
+        if (removed) {
+            currentState.getView().updatePower(this);
+            currentState.getView().updateToughness(this);
         }
     }
 
