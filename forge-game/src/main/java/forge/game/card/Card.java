@@ -3987,7 +3987,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     // Takes one argument like Permanent.Blue+withFlying
     @Override
     public final boolean isValid(final String restriction, final Player sourceController, final Card source, SpellAbility spellAbility) {
-        if (isImmutable() && !source.isRemembered(this) &&
+        if (isImmutable() && source != null && !source.isRemembered(this) &&
                 !(restriction.startsWith("Emblem") || restriction.startsWith("Effect"))) { // special case exclusion
             return false;
         }
