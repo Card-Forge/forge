@@ -1,0 +1,10 @@
+Name:Gearsmith Guardian
+ManaCost:5
+Types:Artifact Creature Construct
+PT:3/5
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | CheckSVar$ Y | SVarCompare$ GE1 | References$ Y | Description$ CARDNAME gets +2/+0 as long as you control a blue creature.
+SVar:Y:Count$Valid Creature.YouCtrl+Blue
+SVar:BuffedBy:Creature.Blue
+DeckHints:Color$Blue
+SVar:Picture:http://www.wizards.com/global/images/magic/general/minotaur_tactician.jpg
+Oracle:Gearsmith Guardian gets +2/+0 as long as you control a blue creature.
