@@ -106,3 +106,5 @@ Vraska, Scheming Gorgon|Vraska's Stone Gaze|I think we could use a new figurehea
 Vraska the Unseen|Vraska's Crew|Say hello to my little friends!
 Vraska, Relic Seeker|Vraska's Mark|Never play hide and seek with a Gorgon.
 Xenagos, the Reveler|Xenagos's Reveal|Mwahahaha! Now I'm a god!
+Jiang Yanggu|Yanggu's Giant Growth|Now, Mowu! Fetch that tree!
+Mu Yanling|Yanling's Time Manipulation|Sleep now, for three days and three nights.
