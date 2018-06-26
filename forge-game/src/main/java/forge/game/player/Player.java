@@ -1159,9 +1159,33 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     @Override
     public final boolean canBeTargetedBy(final SpellAbility sa) {
-        if (hasKeyword("Shroud") || (!equals(sa.getActivatingPlayer()) && hasKeyword("Hexproof"))
-                || hasProtectionFrom(sa.getHostCard())
-                || (hasKeyword("You can't be the targets of spells or activated abilities") && (sa.isSpell() || (sa instanceof AbilityActivated)))) {
+        if (hasKeyword("Shroud")) {
+            return false;
+        }
+        if (hasKeyword("Hexproof")) {
+            final Player a = sa.getActivatingPlayer();
+            if (isOpponentOf(a)) {
+                boolean cancelHexproof = false;
+                for (String k : a.getKeywords()) {
+                    if (k.startsWith("IgnoreHexproof")) {
+                        String m[] = k.split(":");
+                        if (isValid(m[1].split(","), a, sa.getHostCard(), sa)) {
+                            cancelHexproof = true;
+                            break;
+                        }
+                    }
+                }
+                if (!cancelHexproof) {
+                    return false;
+                }
+            }
+        }
+
+        if (hasProtectionFrom(sa.getHostCard())) {
+            return false;
+        }
+
+        if ((hasKeyword("You can't be the targets of spells or activated abilities") && (sa.isSpell() || (sa instanceof AbilityActivated)))) {
             return false;
         }
         return true;
