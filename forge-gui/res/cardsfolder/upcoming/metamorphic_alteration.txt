@@ -1,0 +1,8 @@
+Name:Metamorphic Alteration
+ManaCost:1 U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBClone | TriggerDescription$ As CARDNAME enters the battlefield, choose a creature.
+SVar:DBClone:DB$ Clone | Defined$ ChosenCard | CloneTarget$ Enchanted | Choices$ Creature | Duration$ UntilUnattached
+Oracle:Enchant creature\nAs Metamorphic Alteration enters the battlefield, choose a creature.\nEnchanted creature is a copy of the chosen creature.
