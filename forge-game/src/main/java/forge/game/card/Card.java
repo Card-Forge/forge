@@ -233,6 +233,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final List<GameCommand> etbCommandList = Lists.newArrayList();
     private final List<GameCommand> untapCommandList = Lists.newArrayList();
     private final List<GameCommand> changeControllerCommandList = Lists.newArrayList();
+    private final List<GameCommand> unattachCommandList = Lists.newArrayList();
     private final List<Object[]> staticCommandList = Lists.newArrayList();
 
     private final static ImmutableList<String> storableSVars = ImmutableList.of("ChosenX");
@@ -2369,6 +2370,16 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addUntapCommand(final GameCommand c) {
         untapCommandList.add(c);
     }
+    
+    public final void addUnattachCommand(final GameCommand c) {
+        unattachCommandList.add(c);
+    }
+    
+    public final void runUnattachCommands() {
+        for (final GameCommand c : unattachCommandList) {
+            c.run();
+        }
+    }
 
     public final void addChangeControllerCommand(final GameCommand c) {
         changeControllerCommandList.add(c);
@@ -2661,6 +2672,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         runParams.put("Equipment", this);
         runParams.put("Card", c);
         getGame().getTriggerHandler().runTrigger(TriggerType.Unequip, runParams, false);
+        runUnattachCommands();
     }
 
     public final void unFortifyCard(final Card c) { // fortification.unEquipCard(fortifiedCard);
@@ -2670,6 +2682,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         c.fortifiedBy = c.view.removeCard(c.fortifiedBy, this, TrackableProperty.FortifiedBy);
 
         getGame().fireEvent(new GameEventCardAttachment(this, c, null, AttachMethod.Fortify));
+        runUnattachCommands();
     }
 
     public final void unEquipAllCards() {
@@ -2747,6 +2760,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             unanimateBestow();
         }
         getGame().fireEvent(new GameEventCardAttachment(this, entity, null, AttachMethod.Enchant));
+        runUnattachCommands();
     }
 
     public final void setType(final CardType type0) {
