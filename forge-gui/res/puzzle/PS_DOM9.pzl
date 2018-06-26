@@ -13,5 +13,5 @@ turn=1
 activeplayer=human
 activephase=MAIN1
 humanhand=Demystify;Ixalan's Binding;Nissa, Vital Force;Dive Down
-humanbattlefield=Thrashing Brontodon|Id:999;Deep Freeze|Attaching:3;Slippery Scoundrel;Rhonas's Stalwart;Plains;Hinterland Harbor;Hinterland Harbor;Hinterland Harbor;Glacial Fortress;Glacial Fortress;Glacial Fortress
+humanbattlefield=Thrashing Brontodon|Id:999;Deep Freeze|Attaching:3;Slippery Scoundrel;Rhonas's Stalwart;Plains|Set:DOM;Hinterland Harbor;Hinterland Harbor;Hinterland Harbor;Glacial Fortress;Glacial Fortress;Glacial Fortress
 aibattlefield=Evra, Halcyon Witness;Ninth Bridge Patrol|Counters:P1P1=1;Lyra Dawnbringer|Id:3;Cast Out|ExecuteScript:TrigExile->999
