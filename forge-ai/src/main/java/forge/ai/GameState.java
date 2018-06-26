@@ -57,6 +57,8 @@ public abstract class GameState {
     private String computerCounters = "";
     private String humanManaPool = "";
     private String computerManaPool = "";
+    private String humanPersistentMana = "";
+    private String computerPersistentMana = "";
 
     private boolean puzzleCreatorState = false;
 
@@ -498,6 +500,13 @@ public abstract class GameState {
                 computerManaPool = categoryValue;
         }
 
+        else if (categoryName.endsWith("persistentmana")) {
+            if (isHuman)
+                humanPersistentMana = categoryValue;
+            else
+                computerPersistentMana = categoryValue;
+        }
+
         else {
             System.out.println("Unknown key: " + categoryName);
         }
@@ -534,8 +543,10 @@ public abstract class GameState {
         // Set stack to resolving so things won't trigger/effects be checked right away
         game.getStack().setResolving(true);
 
-        updateManaPool(human, humanManaPool);
-        updateManaPool(ai, computerManaPool);
+        updateManaPool(human, humanManaPool, true, false);
+        updateManaPool(ai, computerManaPool, true, false);
+        updateManaPool(human, humanPersistentMana, false, true);
+        updateManaPool(ai, computerPersistentMana, false, true);
 
         if (!humanCounters.isEmpty()) {
             applyCountersToGameEntity(human, humanCounters);
@@ -589,15 +600,20 @@ public abstract class GameState {
         return mana.trim();
     }
 
-    private void updateManaPool(Player p, String manaDef) {
+    private void updateManaPool(Player p, String manaDef, boolean clearPool, boolean persistent) {
         Game game = p.getGame();
-        p.getManaPool().clearPool(false);
+        if (clearPool) {
+            p.getManaPool().clearPool(false);
+        }
 
         if (!manaDef.isEmpty()) {
             final Card dummy = new Card(-777777, game);
             dummy.setOwner(p);
             final Map<String, String> produced = Maps.newHashMap();
             produced.put("Produced", manaDef);
+            if (persistent) {
+                produced.put("PersistentMana", "True");
+            }
             final AbilityManaPart abMana = new AbilityManaPart(dummy, produced);
             game.getAction().invoke(new Runnable() {
                 @Override

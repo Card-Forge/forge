@@ -1,7 +1,4 @@
 [metadata]
-# TODO: This puzzle does not indicate that the AI has 4 Islands on the battlefield, only that it has "open mana to cast Crafty Cutpurse",
-# which can be implemented alternatively with an "aimanapool" line, but then the AI sometimes misses the opportunity to cast the card, loses
-# the mana forever and never casts the Cutpurse. Maybe there's a better way?
 Name:Possibility Storm - Dominaria #04
 URL:http://www.possibilitystorm.com/wp-content/uploads/2018/05/063.DOM4_.jpg
 Goal:Win
@@ -12,10 +9,10 @@ Description:Win this turn. Your opponent has a Crafty Cutpurse in hand and has e
 humanlife=20
 ailife=5
 turn=2
-#aimanapool=U U U U
+aipersistentmana=U U U U
 activeplayer=human
 activephase=MAIN1
 humanhand=Voracious Vampire;Arcane Adaptation;Naban, Dean of Iteration;Deeproot Elite
 humanbattlefield=Grand Warlord Radha;Forerunner of the Coalition;Forerunner of the Empire;Slimefoot, the Stowaway;Trespasser's Curse|EnchantingPlayer:AI;Sulfur Falls|Set:DOM;Sulfur Falls|Set:DOM;Sulfur Falls|Set:DOM;Sulfur Falls|Set:DOM;Blooming Marsh;Blooming Marsh;Blooming Marsh
 aihand=Crafty Cutpurse
-aibattlefield=Naban, Dean of Iteration;Academy Journeymage;Cold-Water Snapper;Island|Set:DOM;Island|Set:DOM;Island|Set:DOM;Island|Set:DOM
+aibattlefield=Naban, Dean of Iteration;Academy Journeymage;Cold-Water Snapper
