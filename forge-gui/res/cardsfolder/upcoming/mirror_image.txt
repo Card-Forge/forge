@@ -1,0 +1,9 @@
+Name:Mirror Image
+ManaCost:2 U
+Types:Creature Shapeshifter
+R:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | Optional$ True | ReplaceWith$ ChooseCreature | Description$ You may have CARDNAME enter the battlefield as a copy of any creature you control.
+SVar:ChooseCreature:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature.YouCtrl | SubAbility$ DBCopy | AILogic$ Clone
+SVar:DBCopy:DB$ Clone | Defined$ ChosenCard | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
+Oracle:You may have Mirror Image enter the battlefield as a copy of any creature you control.
+PT:0/0
