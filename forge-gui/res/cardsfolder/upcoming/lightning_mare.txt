@@ -1,0 +1,8 @@
+Name:Lightning Mare
+ManaCost:R R
+Types:Creature Elemental Horse
+K:CARDNAME can't be countered.
+K:CantBeBlockedBy Creature.Blue
+A:AB$ Pump | Cost$ 1 R | ValidCard$ Card.Self | NumAtt$ +1 | NumDef$ +0 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+Oracle:This spell can't be countered.\nLightning Mare can't be blocked by blue creatures.\n{1}{R}: Lightning Mare gets +1/+0 until end of turn.
+PT:3/1
