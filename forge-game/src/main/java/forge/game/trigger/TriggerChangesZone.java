@@ -65,57 +65,68 @@ public class TriggerChangesZone extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        if (this.mapParams.containsKey("Origin")) {
-            if (!this.mapParams.get("Origin").equals("Any")) {
-                if (this.mapParams.get("Origin") == null) {
+    public final boolean performTest(final Map<String, Object> runParams2) {
+        if (hasParam("Origin")) {
+            if (!getParam("Origin").equals("Any")) {
+                if (getParam("Origin") == null) {
                     return false;
                 }
                 if (!ArrayUtils.contains(
-                    this.mapParams.get("Origin").split(","), runParams2.get("Origin")
+                    getParam("Origin").split(","), runParams2.get("Origin")
                 )) {
                     return false;
                 }
             }
         }
 
-        if (this.mapParams.containsKey("Destination")) {
-            if (!this.mapParams.get("Destination").equals("Any")) {
+        if (hasParam("Destination")) {
+            if (!getParam("Destination").equals("Any")) {
                 if (!ArrayUtils.contains(
-                    this.mapParams.get("Destination").split(","), runParams2.get("Destination")
+                    getParam("Destination").split(","), runParams2.get("Destination")
                 )) {
                     return false;
                 }
             }
         }
 
-        if (this.mapParams.containsKey("ExcludedDestinations")) {
+        if (hasParam("ExcludedDestinations")) {
             if (!ArrayUtils.contains(
-                this.mapParams.get("ExcludedDestinations").split(","), runParams2.get("Destination")
+                getParam("ExcludedDestinations").split(","), runParams2.get("Destination")
             )) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("ValidCard")) {
+        if (hasParam("ValidCard")) {
             Card moved = (Card) runParams2.get("Card");
-            final Game game = this.getHostCard().getGame();
-            boolean isDiesTrig = "Battlefield".equals(this.mapParams.get("Origin"))
-                    && "Graveyard".equals(this.mapParams.get("Destination"));
+            final Game game = getHostCard().getGame();
+            boolean isDiesTrig = "Battlefield".equals(getParam("Origin"))
+                    && "Graveyard".equals(getParam("Destination"));
 
             if (isDiesTrig) {
                 moved = game.getChangeZoneLKIInfo(moved);
             }
 
-            if (!moved.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
+            if (!moved.isValid(getParam("ValidCard").split(","), getHostCard().getController(),
+                    getHostCard(), null)) {
+                return false;
+            }
+        }
+
+        if (hasParam("ValidCause")) {
+            if (!runParams2.containsKey("Cause") ) {
+                return false;
+            }
+            SpellAbility cause = (SpellAbility) runParams2.get("Cause");
+            if (!cause.getHostCard().isValid(getParam("ValidCause").split(","), getHostCard().getController(),
+                    getHostCard(), null)) {
                 return false;
             }
         }
 
         // Check number of lands ETB this turn on triggered card's controller
-        if (mapParams.containsKey("CheckOnTriggeredCard")) {
-            final String[] condition = mapParams.get("CheckOnTriggeredCard").split(" ", 2);
+        if (hasParam("CheckOnTriggeredCard")) {
+            final String[] condition = getParam("CheckOnTriggeredCard").split(" ", 2);
 
             final Card host = hostCard.getGame().getCardState(hostCard);
             final String comparator = condition.length < 2 ? "GE1" : condition[1];
@@ -128,8 +139,8 @@ public class TriggerChangesZone extends Trigger {
         }
 
         // Check amount of damage dealt to the triggered card
-        if (this.mapParams.containsKey("DamageReceivedCondition")) {
-            final String cond = this.mapParams.get("DamageReceivedCondition");
+        if (hasParam("DamageReceivedCondition")) {
+            final String cond = getParam("DamageReceivedCondition");
             if (cond.length() < 3) {
                 return false;
             }
@@ -152,7 +163,7 @@ public class TriggerChangesZone extends Trigger {
             }
         }
 
-        if (this.mapParams.containsKey("OncePerEffect")) {
+        if (hasParam("OncePerEffect")) {
             // A "once per effect" trigger will only trigger once regardless of how many things the effect caused
             // to change zones.
 
@@ -184,8 +195,8 @@ public class TriggerChangesZone extends Trigger {
         }
 
         /* this trigger can only be activated once per turn, verify it hasn't already run */
-        if (this.mapParams.containsKey("ActivationLimit")) {
-            return this.getActivationsThisTurn() < Integer.parseInt(this.mapParams.get("ActivationLimit"));
+        if (hasParam("ActivationLimit")) {
+            return this.getActivationsThisTurn() < Integer.parseInt(getParam("ActivationLimit"));
         }
 
         return true;
