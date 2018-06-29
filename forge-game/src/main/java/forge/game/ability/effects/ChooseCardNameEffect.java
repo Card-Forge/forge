@@ -105,17 +105,8 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                     final String message = validDesc.equals("card") ? "Name a card" : "Name a " + validDesc + " card.";
 
                     Predicate<ICardFace> cpp = Predicates.alwaysTrue();
-                    if ( StringUtils.containsIgnoreCase(valid, "nonland") ) {
-                        cpp = CardFacePredicates.Presets.IS_NON_LAND;
-                    }
-                    if ( StringUtils.containsIgnoreCase(valid, "nonbasic") ) {
-                        cpp = Predicates.not(CardFacePredicates.Presets.IS_BASIC_LAND);
-                    }
-
-                    if ( StringUtils.containsIgnoreCase(valid, "noncreature") ) {
-                        cpp = Predicates.not(CardFacePredicates.Presets.IS_CREATURE);
-                    } else if ( StringUtils.containsIgnoreCase(valid, "creature") ) {
-                        cpp = CardFacePredicates.Presets.IS_CREATURE;
+                    if (sa.hasParam("ValidCards")) {
+                        cpp = CardFacePredicates.valid(valid);
                     }
 
                     chosen = p.getController().chooseCardName(sa, cpp, valid, message);
