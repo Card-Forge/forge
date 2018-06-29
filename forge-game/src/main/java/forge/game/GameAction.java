@@ -368,6 +368,7 @@ public class GameAction {
 
         final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("Card", lastKnownInfo);
+        runParams.put("Cause", cause);
         runParams.put("Origin", zoneFrom != null ? zoneFrom.getZoneType().name() : null);
         runParams.put("Destination", zoneTo.getZoneType().name());
         runParams.put("SpellAbilityStackInstance", game.stack.peek());
