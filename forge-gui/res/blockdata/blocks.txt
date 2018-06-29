@@ -75,3 +75,4 @@ Ixalan, 3/6/XLN, XLN RIX
 Iconic Masters, 3/6/XLN, IMA
 Masters 25, 3/6/XLN, A25
 Dominaria, 3/6/DOM, DOM
+Core Set 2019, 3/6/M19, M19
