@@ -175,6 +175,7 @@ public class GuiChoose {
                                             foundState = true;
                                             c.setState(cs, true);
                                             matchUI.setCard(c.getView());
+                                            break;
                                         }
                                     }
                                     if (!foundState) {
