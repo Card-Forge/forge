@@ -1500,6 +1500,18 @@ public class CardFactoryUtil {
         }
 
         //  Count$InTargetedHand (targeted player's cards in hand)
+        if (sq[0].contains("InTargetedLibrary")) {
+            for (final SpellAbility sa : c.getCurrentState().getNonManaAbilities()) {
+                final SpellAbility saTargeting = sa.getSATargetingPlayer();
+                if (saTargeting != null) {
+                    for (final Player tgtP : saTargeting.getTargets().getTargetPlayers()) {
+                        someCards.addAll(tgtP.getCardsIn(ZoneType.Library));
+                    }
+                }
+            }
+        }
+
+        //  Count$InTargetedHand (targeted player's cards in hand)
         if (sq[0].contains("InEnchantedHand")) {
             GameEntity o = c.getEnchanting();
             Player controller = null;
