@@ -1445,7 +1445,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 }
             }
-            if (keyword.startsWith("etbCounter")) {
+            if (keyword.startsWith("CantBeCounteredBy")) {
+                final String[] p = keyword.split(":");
+                sbLong.append(p[2]).append("\r\n");
+            } else if (keyword.startsWith("etbCounter")) {
                 final String[] p = keyword.split(":");
                 final StringBuilder s = new StringBuilder();
                 if (p.length > 4) {

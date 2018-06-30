@@ -300,10 +300,15 @@ public class CardFactoryUtil {
         if (!isCounterable(c)) {
             return false;
         }
-        // Autumn's Veil
-        if (c.hasKeyword("CARDNAME can't be countered by blue or black spells.") && sa.isSpell() 
-                && (sa.getHostCard().isBlack() || sa.getHostCard().isBlue())) {
-            return false;
+
+        for (KeywordInterface k : c.getKeywords()) {
+            final String o = k.getOriginal();
+            if (o.startsWith("CantBeCounteredBy")) {
+                final String m[] = o.split(":");
+                if (sa.isValid(m[1].split(","), c.getController(), c, null)) {
+                    return false;
+                }
+            }
         }
         return true;
     }

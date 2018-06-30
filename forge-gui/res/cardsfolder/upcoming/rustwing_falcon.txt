@@ -3,3 +3,4 @@ ManaCost:W
 Types:Creature Bird
 K:Flying
 PT:1/2
+Oracle:Flying
