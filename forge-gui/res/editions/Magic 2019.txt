@@ -234,7 +234,7 @@ Booster=10 Common:!fromSheet("M19 Secret Cards"), 3 Uncommon:!fromSheet("M19 Sec
 223 U Satyr Enchanter
 224 U Skyrider Patrol
 225 M Vaevictis Asmadi, the Dire
-226 R Amuletof Safekeeping
+226 R Amulet of Safekeeping
 227 U Arcane Encyclopedia
 228 R Chaos Wand
 229 M Crucible of Worlds
