@@ -226,7 +226,7 @@ Booster=10 Common:!fromSheet("M19 Secret Cards"), 3 Uncommon:!fromSheet("M19 Sec
 215 U Draconic Disciple
 216 U Enigma Drake
 217 U Heroic Reinforcements
-218 M Nicol Bolas, the Ravager // Nicol Bolas, the Arisen
+218 M Nicol Bolas, the Ravager
 219 M Palladia-Mors, the Ruiner
 220 U Poison-Tip Archer
 221 U Psychic Symbiont
