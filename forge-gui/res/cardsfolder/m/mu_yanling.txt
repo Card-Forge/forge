@@ -1,8 +1,9 @@
 Name:Mu Yanling
 ManaCost:4 U U
 Types:Legendary Planeswalker Yanling
-A:AB$ Pump | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable | SpellDescription$ Target creature can't be blocked this turn.
-A:AB$ Draw | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | NumCards$ 2
-A:AB$ AddTurn | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True | NumTurns$ 1
-Oracle:[+2]: Target creature can't be blocked this turn.\n[-3]: Draw two cards.\n[-10]: Tap all creatures your opponents control. You take an extra turn after this one.
 Loyalty:5
+A:AB$ Pump | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable | SpellDescription$ Target creature can't be blocked this turn.
+A:AB$ Draw | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | NumCards$ 2 | SpellDescription$ Draw two cards.
+A:AB$ TapAll | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Creature.OppCtrl | AILogic$ AtLeast3 | StackDescription$ SpellDescription | SpellDescription$ Tap all creatures your opponents control. You take an extra turn after this one.
+SVar:DBAddTurn:DB$ AddTurn | NumTurns$ 1
+Oracle:[+2]: Target creature can't be blocked this turn.\n[-3]: Draw two cards.\n[-10]: Tap all creatures your opponents control. You take an extra turn after this one.
