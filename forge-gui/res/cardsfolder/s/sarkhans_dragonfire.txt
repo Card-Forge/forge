@@ -1,0 +1,5 @@
+Name:Sarkhan's Dragonfire
+ManaCost:3 R R
+Types:Sorcery
+SVar:DBDig:DB$ Dig | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Card.Red | RestRandomOrder$ True
+Oracle:Sarkhan's Dragonfire deals 3 damage to any target.\nLook at the top five cards of your library. You may reveal a red card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.

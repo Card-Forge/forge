@@ -1,0 +1,8 @@
+Name:Tezzeret, Cruel Machinist
+ManaCost:4 U U
+Types:Legendary Planeswalker Tezzeret
+A:AB$ ChooseCard | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | AnyNumber$ True | Defined$ You | MinAmount$ 0 | Amount$ X | Choices$ Card.YouCtrl | ChoiceZone$ Hand | RememberChosen$ True | SubAbility$ DBEnterFaceDownAs | SpellDescription$ Put any number of cards from your hand onto the battlefield face down. They're 5/5 artifact creatures.
+SVar:DBEnterFaceDownAs:DB$ EnterFaceDownAs | Defined$ ChosenCard | DefinedPlayer$ You | Types$ Artifact,Creature | Power$ 5 | Toughness$ 5 | Manifested$ False
+SVar:X:Count$InYourHand
+Oracle:[+1]: Draw a card.\n[0]: Until your next turn, target artifact you control becomes a 5/5 creature in addition to its other types.\n[-7]: Put any number of cards from your hand onto the battlefield face down. They're 5/5 artifact creatures.
+Loyalty:4
