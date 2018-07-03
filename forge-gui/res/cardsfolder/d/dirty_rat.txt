@@ -1,0 +1,15 @@
+Name:Dirty // Rat
+ManaCost:1 B
+Types:Host Creature Rat
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, target opponent discards a card.
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumCards$ 1 | Mode$ TgtChoose
+Oracle:When this creature enters the battlefield, target opponent discards a card.
+PT:1/1
+ALTERNATE
+Name:Rat
+ManaCost:1 B
+Types:Rat
+T:Mode$ AugmentTriggerActivated | Execute$ TrigDiscard | TriggerDescription$ target opponent discards a card.
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumCards$ 1 | Mode$ TgtChoose
+Oracle:target opponent discards a card.
+PT:1/1

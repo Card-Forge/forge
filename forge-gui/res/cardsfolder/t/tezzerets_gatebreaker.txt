@@ -1,0 +1,5 @@
+Name:Tezzeret's Gatebreaker
+ManaCost:4
+Types:Artifact
+SVar:DBDig:DB$ Dig | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Card.Blue,Card.Artifact | RestRandomOrder$ True
+Oracle:When Tezzeret's Gatebreaker enters the battlefield, look at the top five cards of your library. You may reveal a blue or artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.\n{5}{U}, {T}, Sacrifice Tezzeret's Gatebreaker: Creatures you control can't be blocked this turn.
