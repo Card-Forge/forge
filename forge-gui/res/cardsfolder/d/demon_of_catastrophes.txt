@@ -1,6 +1,6 @@
 Name:Demon of Catastrophes
 ManaCost:2 B B
-Types:Creaure Demon
+Types:Creature Demon
 PT:6/6
 K:Flying
 K:Trample
