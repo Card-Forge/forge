@@ -1,0 +1,6 @@
+Name:Two-Headed Zombie
+ManaCost:3 B
+Types:Creature Zombie
+K:Menace
+PT:4/2
+Oracle:Menace

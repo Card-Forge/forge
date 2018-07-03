@@ -1,0 +1,6 @@
+Name:Hired Blade
+ManaCost:2 B
+Types:Creature Human Assassin
+K:Flash
+PT:3/2
+Oracle:Flash
