@@ -12,5 +12,5 @@ turn=1
 activeplayer=human
 activephase=MAIN1
 humanhand=Rite of Undoing;Silumgar Butcher;Sunbringer's Touch;Debilitating Injury
-humanbattlefield=Dictate of Karametra;Polukranos, World Eater;Satyr Wayfinder;Rakshasa Vizier;Forest;Forest;Forest;Island;Island;Swamp;Swamp;Satyr Wayfinder|Id:1
+humanbattlefield=Dictate of Karametra;Polukranos, World Eater;Satyr Wayfinder;Rakshasa Vizier;Forest|Set:KTK;Forest|Set:KTK;Forest|Set:KTK;Island|Set:KTK;Island|Set:KTK;Swamp|Set:KTK;Swamp|Set:KTK;Satyr Wayfinder|Id:1
 aibattlefield=Silumgar Sorcerer;Palace Familiar;Vulturous Aven;Dragonlord Silumgar|ExecuteScript:TrigChange->1
