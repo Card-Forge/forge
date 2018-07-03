@@ -8,4 +8,4 @@ SVar:TrigChange:AB$ ChangeZone | Cost$ X | Origin$ Graveyard | Destination$ Batt
 SVar:DBPump:DB$ Pump | Defined$ Remembered | LeaveBattlefield$ Exile
 SVar:X:Targeted$CardManaCost
 SVar:HasAttackEffect:TRUE
-Oracle:Deathtouch\nWhenever Isareth, the Awakener attacks, you may pay {X}. If you do, return target creature card with converted mana cost X from your graveyard to the battlefield with a corpse counter on it. If that creature would leave the battlefield, exile it instead of putting it anywhere else.
+Oracle:Deathtouch\nWhenever Isareth the Awakener attacks, you may pay {X}. If you do, return target creature card with converted mana cost X from your graveyard to the battlefield with a corpse counter on it. If that creature would leave the battlefield, exile it instead of putting it anywhere else.
