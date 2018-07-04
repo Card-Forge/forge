@@ -1,0 +1,7 @@
+Name:Skeleton Archer
+ManaCost:3 B
+Types:Creature Skeleton Archer
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to any target.
+SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
+Oracle:When CARDNAME enters the battlefield, it deals 1 damage to any target.
