@@ -1,4 +1,4 @@
-Name:Isareth, the Awakener
+Name:Isareth the Awakener
 ManaCost:1 B B
 Types:Legendary Creature Human Wizard
 K:Deathtouch
