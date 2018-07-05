@@ -87,7 +87,7 @@ public class SetStateAi extends SpellAbilityAi {
         if("Transform".equals(mode)) {
             if (!sa.usesTargeting()) {
                 // no Transform with Defined which is not Self
-                if (source.hasKeyword("CARDNAME can't transform")) {
+                if (!source.canTransform()) {
                     return false;
                 }
                 return shouldTransformCard(source, ai, ph) || "Always".equals(logic);
@@ -96,15 +96,13 @@ public class SetStateAi extends SpellAbilityAi {
                 sa.resetTargets();
 
                 CardCollection list = CardLists.getValidCards(CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES), tgt.getValidTgts(), ai, source, sa);
-                // select only cards with Transform as SplitType
+                // select only the ones that can transform
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(Card c) {
-                        return c.hasAlternateState() && c.getRules().getSplitType() == CardSplitType.Transform;
+                        return c.canTransform();
                     }
                 });
-                // select only the ones that can transform
-                list = CardLists.getNotKeyword(list, "CARDNAME can't transform");
                 list = CardLists.getTargetableCards(list, sa);
 
                 if (list.isEmpty()) {
