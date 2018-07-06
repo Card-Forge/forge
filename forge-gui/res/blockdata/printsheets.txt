@@ -1357,3 +1357,30 @@ Waterknot
 Grasping Scoundrel
 Radiating Lightning
 Llanowar Elves
+Cinder Barrens
+Forsaken Sanctuary
+Foul Orchard
+Highland Lake
+Meandering River
+Stone Quarry
+Submerged Boneyard
+Timber Gorge
+Tranquil Expanse
+Woodland Stream
+
+[M19 Lands]
+5 Cinder Barrens|M19
+5 Forsaken Sanctuary|M19
+5 Foul Orchard|M19
+5 Highland Lake|M19
+5 Meandering River|M19
+5 Stone Quarry|M19
+5 Submerged Boneyard|M19
+5 Timber Gorge|M19
+5 Tranquil Expanse|M19
+5 Woodland Stream|M19
+14 Forest|M19
+14 Island|M19
+14 Mountain|M19
+14 Plains|M19
+14 Swamp|M19
