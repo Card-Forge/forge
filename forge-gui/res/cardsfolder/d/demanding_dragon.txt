@@ -3,6 +3,6 @@ ManaCost:3 R R
 Types:Creature Dragon
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 5 damage to target opponent unless that player sacrifices a creature.
-SVar:TrigDealDamage:DB$ Sacrifice | ValidTgts$ Opponent | SacValid$ Creature | UnlessCost$ DamageYou<5> | UnlessPayer$ Targeted
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ 5 | UnlessCost$ Sac<1/Creature> | UnlessPayer$ Targeted | UnlessAI$ LifeLE5
 Oracle:Flying\nWhen Demanding Dragon enters the battlefield, it deals 5 damage to target opponent unless that player sacrifices a creature.
 PT:5/5
