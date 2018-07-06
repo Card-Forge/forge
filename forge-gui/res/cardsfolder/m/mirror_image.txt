@@ -5,5 +5,6 @@ R:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | Optional$ Tru
 SVar:ChooseCreature:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature.YouCtrl | SubAbility$ DBCopy | AILogic$ Clone
 SVar:DBCopy:DB$ Clone | Defined$ ChosenCard | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
+SVar:NeedsToPlay:Creature.YouCtrl
 Oracle:You may have Mirror Image enter the battlefield as a copy of any creature you control.
 PT:0/0
