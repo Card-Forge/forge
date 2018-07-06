@@ -3,7 +3,6 @@ package forge.ai.ability;
 import com.google.common.base.Predicate;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
-import forge.card.CardSplitType;
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
@@ -65,8 +64,6 @@ public class SetStateAi extends SpellAbilityAi {
 
     @Override
     protected boolean checkAiLogic(final Player aiPlayer, final SpellAbility sa, final String aiLogic) {
-        final Card source = sa.getHostCard();
-
         return super.checkAiLogic(aiPlayer, sa, aiLogic);
     }
 
