@@ -496,14 +496,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         // Illusionary Mask affects cards in hand.
         CardStateName oldState = getCurrentStateName();
         if (mode.equals("Transform") && isDoubleFaced()) {
-            if (hasKeyword("CARDNAME can't transform")) {
+            if (!canTransform()) {
                 return false;
             }
-            CardStateName destState = oldState == CardStateName.Transformed ? CardStateName.Original : CardStateName.Transformed;
 
-            if (this.isInPlay() && !this.getState(destState).getType().isPermanent()) {
-                return false;
-            }
+            CardStateName destState = oldState == CardStateName.Transformed ? CardStateName.Original : CardStateName.Transformed;
 
             return changeToState(destState);
 
@@ -608,6 +605,21 @@ public class Card extends GameEntity implements Comparable<Card> {
             return result;
         }
         return false;
+    }
+
+    public boolean canTransform() {
+        if (isFaceDown() || !isDoubleFaced()) {
+            return false;
+        }
+
+        CardStateName oldState = getCurrentStateName();
+        CardStateName destState = oldState == CardStateName.Transformed ? CardStateName.Original : CardStateName.Transformed;
+
+        if (isInPlay() && !getState(destState).getType().isPermanent()) {
+            return false;
+        }
+
+        return !hasKeyword("CARDNAME can't transform");
     }
 
     public int getHiddenId() {
