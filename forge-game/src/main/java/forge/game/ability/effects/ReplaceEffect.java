@@ -48,6 +48,10 @@ public class ReplaceEffect extends SpellAbilityEffect {
             params.put(varName, AbilityUtils.calculateAmount(card, varValue, sa));
         }
 
+        if (params.containsKey("EffectOnly")) {
+            params.put("EffectOnly", true);
+        }
+
         //try to call replacementHandler with new Params
         ReplacementResult result = game.getReplacementHandler().run(params); 
         switch (result) {
