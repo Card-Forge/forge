@@ -262,6 +262,10 @@ public class ComputerUtil {
             sa.setLastStateBattlefield(game.getLastStateBattlefield());
             sa.setLastStateGraveyard(game.getLastStateGraveyard());
             newSA.setHostCard(game.getAction().moveToStack(source, sa));
+
+            if (newSA.getApi() == ApiType.Charm && !newSA.isWrapper()) {
+                CharmEffect.makeChoices(newSA);
+            }
         }
 
         final CostPayment pay = new CostPayment(newSA.getPayCosts(), newSA);
