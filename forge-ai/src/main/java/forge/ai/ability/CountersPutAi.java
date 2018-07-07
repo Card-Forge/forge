@@ -220,13 +220,9 @@ public class CountersPutAi extends SpellAbilityAi {
 
         if ("Never".equals(logic)) {
             return false;
-        }
-        
-        if ("PayEnergy".equals(logic)) {
+        } else if ("PayEnergy".equals(logic)) {
             return true;
-        }
-
-        if ("PayEnergyConservatively".equals(logic)) {
+        } else if ("PayEnergyConservatively".equals(logic)) {
             boolean onlyInCombat = ai.getController().isAI()
                     && ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.CONSERVATIVE_ENERGY_PAYMENT_ONLY_IN_COMBAT);
             boolean onlyDefensive = ai.getController().isAI()
@@ -266,9 +262,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     return true;
                 }
             }
-        }
-
-        if (logic.equals("MarkOppCreature")) {
+        } else if (logic.equals("MarkOppCreature")) {
             if (!ph.is(PhaseType.END_OF_TURN)) {
                 return false;
             }
@@ -282,6 +276,11 @@ public class CountersPutAi extends SpellAbilityAi {
                 sa.resetTargets();
                 sa.getTargets().add(bestCreat);
                 return true;
+            }
+        } else if (logic.equals("CheckDFC")) {
+            // for cards like Ludevic's Test Subject
+            if (!source.canTransform()) {
+                return false;
             }
         }
 
