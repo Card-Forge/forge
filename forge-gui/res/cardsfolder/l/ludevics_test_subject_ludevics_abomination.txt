@@ -1,13 +1,13 @@
 Name:Ludevic's Test Subject
 ManaCost:1 U
-Types:Creature Lizard
+Types:Creature Lizard Egg
 PT:0/3
 K:Defender
-A:AB$PutCounter | Cost$ 1 U | Defined$ Self | CounterType$ HATCHLING | CounterNum$ 1 | SubAbility$ DBTransform | SpellDescription$ Put a hatchling counter on CARDNAME. Then if there are five or more hatchling counters on it, remove all of them and transform it.
-SVar:DBRemCounter:DB$ RemoveCounter | CounterType$ HATCHLING | CounterNum$ All | ConditionCheckSVar$ X | References$ X
-SVar:DBTransform:DB$SetState | Defined$ Self | ConditionCheckSVar$ X | SubAbility$ DBRemCounter | Mode$ Transform | References$ X
-SVar:X:Count$Valid Card.Self+counters_GE5_HATCHLING
-SVar:All:Count$CardCounters.HATCHLING
+A:AB$PutCounter | Cost$ 1 U | Defined$ Self | CounterType$ HATCHLING | CounterNum$ 1 | SubAbility$ DBBranch | SpellDescription$ Put a hatchling counter on CARDNAME. Then if there are five or more hatchling counters on it, remove all of them and transform it.
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ XMarksTheSpot | References$ XMarksTheSpot | TrueSubAbility$ DBRemoveCtrs
+SVar:DBRemoveCtrs:DB$ RemoveCounter | Defined$ Self | CounterType$ HATCHLING | CounterNum$ All | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+SVar:XMarksTheSpot:Count$Valid Card.Self+counters_GE5_HATCHLING
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ludevics_test_subject.jpg
 AlternateMode:DoubleFaced
 Oracle:Defender\n{1}{U}: Put a hatchling counter on Ludevic's Test Subject. Then if there are five or more hatchling counters on it, remove all of them and transform it.
@@ -20,8 +20,5 @@ Colors:blue
 Types:Creature Lizard Horror
 PT:13/13
 K:Trample
-#Special case: SVars must be here as well because by the time it's needed, the card will have transformed.
-SVar:X:Count$Valid Card.Self+counters_GE5_HATCHLING
-SVar:All:Count$CardCounters.HATCHLING
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ludevics_abomination.jpg
 Oracle:Trample
