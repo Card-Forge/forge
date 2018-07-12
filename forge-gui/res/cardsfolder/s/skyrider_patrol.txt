@@ -3,9 +3,9 @@ ManaCost:2 G U
 Types:Creature Elf Scout
 PT:2/3
 K:Flying
-T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of combat on your turn, you may pay {G}{U}.  When you do, put a +1/+1 counter on another target creature you control, and that creature gains flying until end of turn.
-SVar:TrigPutCounter:AB$ PutCounter | Cost$ G U | ValidTgts$ Creature.Other+YouCtrl | RememberTargets$ True  | TgtPrompt$ Select another target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ TrigPump
-SVar:TrigPump:DB$ Pump | Defined$ Remembered | KW$ Flying | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPayCost | TriggerDescription$ At the beginning of combat on your turn, you may pay {G}{U}.  When you do, put a +1/+1 counter on another target creature you control, and that creature gains flying until end of turn.
+SVar:TrigPayCost:AB$ ImmediateTrigger | Cost$ G U | Mode$ PayCost | Execute$ TrigPutCounter | TriggerDescription$ When you pay {G}{U}, put a +1/+1 counter on another target creature you control, and that creature gains flying until end of turn.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ TrigPump
+SVar:TrigPump:DB$ Pump | Defined$ Targeted | KW$ Flying
 DeckHas:Ability$Counters
 Oracle:Flying\nAt the beginning of combat on your turn, you may pay {G}{U}. When you do, put a +1/+1 counter on another target creature you control, and that creature gains flying until end of turn.

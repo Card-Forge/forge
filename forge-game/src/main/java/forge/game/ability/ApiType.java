@@ -82,6 +82,7 @@ public enum ApiType {
     GenericChoice (ChooseGenericEffect.class),
     Goad (GoadEffect.class),
     Haunt (HauntEffect.class),
+    ImmediateTrigger (ImmediateTriggerEffect.class),
     LookAt (LookAtEffect.class),
     LoseLife (LifeLoseEffect.class),
     LosesGame (GameLossEffect.class),
