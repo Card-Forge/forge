@@ -162,7 +162,7 @@ public class CardFactory {
     public final static SpellAbility copySpellAbilityAndSrcCard(final Card source, final Card original, final SpellAbility sa, final boolean bCopyDetails) {
         //Player originalController = original.getController();
         Player controller = sa.getActivatingPlayer();
-        final Card c = copyCard(original, true);
+        final Card c = (sa.isSpell() ? copyCard(original, true) : original); //copy spells, but not abilities
 
         // change the color of the copy (eg: Fork)
         final SpellAbility sourceSA = source.getFirstSpellAbility();
@@ -182,8 +182,6 @@ public class CardFactory {
         c.clearControllers();
         c.setOwner(controller);
         c.setCopiedSpell(true);
-        // set counters (e.g. Yisan, the Wanderer Bard)
-        c.setCounters(original.getCounters());
 
         final SpellAbility copySA;
         if (sa.isTrigger()) {
