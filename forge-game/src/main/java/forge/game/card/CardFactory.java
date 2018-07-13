@@ -147,22 +147,16 @@ public class CardFactory {
 
     /**
      * <p>
-     * copySpellontoStack.
+     * copySpellHost.
+     * Helper function for copySpellAbilityAndPossiblyHost.
+     * creates a copy of the card hosting the ability we want to copy.
+     * Updates various attributes of the card that the copy needs,
+     * which wouldn't ordinarily get set during a simple Card.copy() call.
      * </p>
-     * 
-     * @param source
-     *            a {@link forge.game.card.Card} object.
-     * @param original
-     *            a {@link forge.game.card.Card} object.
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param bCopyDetails
-     *            a boolean.
-     */
-    public final static SpellAbility copySpellAbilityAndSrcCard(final Card source, final Card original, final SpellAbility sa, final boolean bCopyDetails) {
-        //Player originalController = original.getController();
+     * */
+    private final static Card copySpellHost(final Card source, final Card original, final SpellAbility sa, final boolean bCopyDetails){
         Player controller = sa.getActivatingPlayer();
-        final Card c = (sa.isSpell() ? copyCard(original, true) : original); //copy spells, but not abilities
+        final Card c = copyCard(original, true);
 
         // change the color of the copy (eg: Fork)
         final SpellAbility sourceSA = source.getFirstSpellAbility();
@@ -178,28 +172,10 @@ public class CardFactory {
 
             c.addColor(finalColors, !sourceSA.hasParam("OverwriteColors"), c.getTimestamp());
         }
-        
+
         c.clearControllers();
         c.setOwner(controller);
         c.setCopiedSpell(true);
-
-        final SpellAbility copySA;
-        if (sa.isTrigger()) {
-            copySA = getCopiedTriggeredAbility(sa);
-        } else {
-            copySA = sa.copy(c, false);
-        }
-        c.getCurrentState().setNonManaAbilities(copySA);
-        copySA.setCopied(true);
-        //remove all costs
-        if (!copySA.isTrigger()) {
-            copySA.setPayCosts(new Cost("", sa.isAbility()));
-        }
-        if (sa.getTargetRestrictions() != null) {
-            TargetRestrictions target = new TargetRestrictions(sa.getTargetRestrictions());
-            copySA.setTargetRestrictions(target);
-        }
-        copySA.setActivatingPlayer(controller);
 
         if (bCopyDetails) {
             c.setXManaCostPaid(original.getXManaCostPaid());
@@ -219,6 +195,65 @@ public class CardFactory {
             for (OptionalCost cost : original.getOptionalCostsPaid()) {
                 c.addOptionalCostPaid(cost);
             }
+        }
+        return c;
+    }
+    /**
+     * <p>
+     * copySpellAbilityAndPossiblyHost.
+     * creates a copy of the Spell/ability `sa`, and puts it on the stack.
+     * if sa is a spell, that spell's host is also copied.
+     * </p>
+     * 
+     * @param source
+     *            a {@link forge.game.card.Card} object. The card doing the copying.
+     * @param original
+     *            a {@link forge.game.card.Card} object. The host of the spell or ability being copied.
+     * @param sa
+     *            a {@link forge.game.spellability.SpellAbility} object. The spell or ability being copied.
+     * @param bCopyDetails
+     *            a boolean.
+     */
+    public final static SpellAbility copySpellAbilityAndPossiblyHost(final Card source, final Card original, final SpellAbility sa, final boolean bCopyDetails) {
+        Player controller = sa.getActivatingPlayer();
+
+        //it is only necessary to copy the host card if the SpellAbility is a spell, not an ability
+        final Card c;
+        if (sa.isSpell()){
+            c = copySpellHost(source, original, sa, bCopyDetails);
+        }
+        else {
+            c = original;
+        }
+
+        final SpellAbility copySA;
+        if (sa.isTrigger()) {
+            copySA = getCopiedTriggeredAbility(sa);
+        } else {
+            copySA = sa.copy(c, false);
+        }
+
+        if (sa.isSpell()){
+            //only update c's abilities if c is a copy.
+            //(it would be nice to move this into `copySpellHost`,
+            // so all the c-mutating code is together in one place.
+            // but copySA doesn't exist until after `copySpellHost` finishes executing,
+            // so it's hard to resolve that dependency.)
+            c.getCurrentState().setNonManaAbilities(copySA);
+        }
+
+        copySA.setCopied(true);
+        //remove all costs
+        if (!copySA.isTrigger()) {
+            copySA.setPayCosts(new Cost("", sa.isAbility()));
+        }
+        if (sa.getTargetRestrictions() != null) {
+            TargetRestrictions target = new TargetRestrictions(sa.getTargetRestrictions());
+            copySA.setTargetRestrictions(target);
+        }
+        copySA.setActivatingPlayer(controller);
+
+        if (bCopyDetails) {
             copySA.setPaidHash(sa.getPaidHash());
         }
         return copySA;
