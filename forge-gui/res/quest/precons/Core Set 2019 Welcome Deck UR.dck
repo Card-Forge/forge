@@ -1,5 +1,14 @@
+[shop]
+WinsToUnlock=0
+Credits=999
+MinDifficulty=0
+MaxDifficulty=5
 [metadata]
-Name=Core Set 2019 Welcome Deck UR
+Name=Core Set 2019 Welcome Deck (UR)
+Description=As a blue mage, your mind is your most powerful weapon. You control the battlefield through illusion, always thinking three steps ahead of your foe. Superior knowledge determines your victory!
+Deck Type=constructed
+Set=M19
+Image=m19_blue.jpg
 [Main]
 1 Air Elemental|M19
 1 Aven Wind Mage|M19

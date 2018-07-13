@@ -1,5 +1,14 @@
+[shop]
+WinsToUnlock=0
+Credits=999
+MinDifficulty=0
+MaxDifficulty=5
 [metadata]
-Name=Core Set 2019 Welcome Deck GU
+Name=Core Set 2019 Welcome Deck (GU)
+Description=As a green mage, the natural world is at your command - and the power of life itself fuels your magic. Summon enormous beasts to trample your opponents on your way to victory!
+Deck Type=constructed
+Set=M19
+Image=m19_green.jpg
 [Main]
 1 Aggressive Mammoth|M19
 1 Air Elemental|M19

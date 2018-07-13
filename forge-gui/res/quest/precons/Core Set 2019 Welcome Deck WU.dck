@@ -1,5 +1,14 @@
+[shop]
+WinsToUnlock=0
+Credits=999
+MinDifficulty=0
+MaxDifficulty=5
 [metadata]
-Name=Core Set 2019 Welcome Deck WU
+Name=Core Set 2019 Welcome Deck (WU)
+Description=As a white mage, you know that true strength lies in cooperation. You command disciplined armies, working as one to overwhelm your enemies. Unity of purpose brings you victory!
+Deck Type=constructed
+Set=M19
+Image=m19_white.jpg
 [Main]
 1 Air Elemental|M19
 1 Aven Wind Mage|M19

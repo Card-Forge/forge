@@ -1,5 +1,14 @@
+[shop]
+WinsToUnlock=0
+Credits=1099
+MinDifficulty=0
+MaxDifficulty=5
 [metadata]
 Name=Vivien of the Arkbow
+Description=Vivien is a keen naturalist-- her magical Arkbow preserves the essence of each creature she encounters, allowing her to summon them at need. Master the wilds and crush your opponents with massive creatures.
+Deck Type=constructed
+Set=M19
+Image=vivien_of_the_arkbow.jpg
 [Main]
 1 Aggressive Mammoth|M19
 2 Bristling Boar|M19

@@ -1,5 +1,14 @@
+[shop]
+WinsToUnlock=0
+Credits=1099
+MinDifficulty=0
+MaxDifficulty=5
 [metadata]
 Name=Sarkhan, Dragonsoul
+Description=Sarkhan worships and communes with dragons, taking on their power as his own. Mobilize his mighty draconic forces to incinerate your opponent's defenses and expose them to an aerial attack.
+Deck Type=constructed
+Set=M19
+Image=sarkhan_dragonsoul.jpg
 [Main]
 1 Act of Treason|M19
 1 Demanding Dragon|M19

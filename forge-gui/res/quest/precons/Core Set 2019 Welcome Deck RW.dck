@@ -1,5 +1,14 @@
+[shop]
+WinsToUnlock=0
+Credits=999
+MinDifficulty=0
+MaxDifficulty=5
 [metadata]
-Name=Core Set 2019 Welcome Deck RW
+Name=Core Set 2019 Welcome Deck (RW)
+Description=As a red mage, you live for freedom. You revel in the chaos of battle, where fire is your weapon and your inspiration - beautiful, powerful, impossible to control. Elemental fury fuels your victory!
+Deck Type=constructed
+Set=M19
+Image=m19_red.jpg
 [Main]
 1 Dwarven Priest|M19
 1 Electrify|M19

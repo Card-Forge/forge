@@ -1,5 +1,14 @@
+[shop]
+WinsToUnlock=0
+Credits=1099
+MinDifficulty=0
+MaxDifficulty=5
 [metadata]
 Name=Ajani, Wise Counselor
+Description=A veteran warrior of unmatched skill, Ajani protects the weak and mentors aspiring heroes. Gather battalions of small fighters, bolster their strength, and overwhelm your opponent.
+Deck Type=constructed
+Set=M19
+Image=ajani_wise_counselor.jpg
 [Main]
 2 Ajani's Influence|M19
 2 Ajani's Pridemate|M19

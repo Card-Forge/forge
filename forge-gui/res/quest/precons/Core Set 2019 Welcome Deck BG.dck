@@ -1,5 +1,14 @@
+[shop]
+WinsToUnlock=0
+Credits=999
+MinDifficulty=0
+MaxDifficulty=5
 [metadata]
-Name=Core Set 2019 Welcome Deck BG
+Name=Core Set 2019 Welcome Deck (BG)
+Description=As a black mage, you seek power at any price. Every advantage comes at a cost, and you will sacrifice whatever is necessary to control the forces of death and darkness. Boundless ambition drives you to victory!
+Deck Type=constructed
+Set=M19
+Image=m19_black.jpg
 [Main]
 1 Aggressive Mammoth|M19
 1 Bogstomper|M19

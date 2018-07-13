@@ -1,5 +1,14 @@
+[shop]
+WinsToUnlock=0
+Credits=1099
+MinDifficulty=0
+MaxDifficulty=5
 [metadata]
 Name=Tezzeret, Cruel Machinist
+Description=Tezzeret uses his ability to manipulate metal to fulfill his dark ambitions. Assemble a host of artifacts and turn them into deadly tools to engineer a cunning victory.
+Deck Type=constructed
+Set=M19
+Image=tezzeret_cruel_machinist.jpg
 [Main]
 1 Divination|M19
 3 Dwindle|M19
