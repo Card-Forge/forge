@@ -1,0 +1,35 @@
+[shop]
+WinsToUnlock=0
+Credits=1099
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Tezzeret, Cruel Machinist
+Description=Tezzeret uses his ability to manipulate metal to fulfill his dark ambitions. Assemble a host of artifacts and turn them into deadly tools to engineer a cunning victory.
+Deck Type=constructed
+Set=M19
+Image=tezzeret_cruel_machinist.jpg
+[Main]
+1 Divination|M19
+3 Dwindle|M19
+1 Exclusion Mage|M19
+2 Field Creeper|M19
+2 Gearsmith Guardian|M19
+2 Gearsmith Prodigy|M19
+7 Island|M19|1
+7 Island|M19|2
+6 Island|M19|3
+6 Island|M19|4
+1 Manalith|M19
+2 Meteor Golem|M19
+1 One with the Machine|M19
+4 Pendulum of Patterns|M19
+1 Riddlemaster Sphinx|M19
+1 Scholar of Stars|M19
+2 Skilled Animator|M19
+2 Skyscanner|M19
+2 Snapping Drake|M19
+2 Tezzeret's Gatebreaker|M19
+3 Tezzeret's Strider|M19
+1 Tezzeret, Cruel Machinist+|M19
+1 Uncomfortable Chill|M19
