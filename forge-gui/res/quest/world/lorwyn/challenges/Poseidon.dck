@@ -6,8 +6,8 @@ Repeat=true
 Wins=25
 Card Reward=3 rares;33% 1 blue rare;33% 1 blue rare; 33% Mutavault|MOR
 Credit Reward=200
-HumanExtras=Cauldron of Souls|LRW
-AIExtras=Jace Beleren|LRW
+HumanExtras=Cauldron of Souls
+AIExtras=Jace Beleren
 
 [metadata]
 Name=quest5003
