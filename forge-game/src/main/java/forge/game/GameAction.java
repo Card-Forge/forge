@@ -153,6 +153,7 @@ public class GameAction {
         // up on the wrong card state etc.).
         if (c.isFaceDown() && (fromBattlefield || (toHand && zoneFrom.is(ZoneType.Exile)))) {
             c.setState(CardStateName.Original, true);
+            c.runFaceupCommands();
         }
 
         // Clean up the temporary Dash SVar when the Dashed card leaves the battlefield
