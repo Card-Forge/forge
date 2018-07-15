@@ -7,7 +7,7 @@ Wins=30
 Card Reward=3 rares;33% 1 black rare;33% 1 red rare;33% Ashenmoor Liege|SHM
 Credit Reward=250
 HumanExtras=
-AIExtras=Liliana Vess|LRW
+AIExtras=Liliana Vess
 
 [metadata]
 Name=quest5007
