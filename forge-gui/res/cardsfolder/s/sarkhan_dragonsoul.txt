@@ -1,5 +1,5 @@
 Name:Sarkhan, Dragonsoul
-ManaCost:1 R R
+ManaCost:4 R R
 Types:Legendary Planeswalker Sarkhan
 A:AB$ DamageAll | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidPlayers$ Player.Opponent | ValidCards$ Creature.OppCtrl | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each opponent and each creature your opponents control.
 A:AB$ DealDamage | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | AILogic$ ChoiceBurn | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target player or planeswalker.
