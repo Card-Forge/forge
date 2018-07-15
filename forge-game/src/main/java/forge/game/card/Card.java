@@ -234,6 +234,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final List<GameCommand> untapCommandList = Lists.newArrayList();
     private final List<GameCommand> changeControllerCommandList = Lists.newArrayList();
     private final List<GameCommand> unattachCommandList = Lists.newArrayList();
+    private final List<GameCommand> faceupCommandList = Lists.newArrayList();
     private final List<Object[]> staticCommandList = Lists.newArrayList();
 
     private final static ImmutableList<String> storableSVars = ImmutableList.of("ChosenX");
@@ -589,6 +590,12 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
 
             boolean result = setState(preFaceDownState, true);
+            // need to run faceup commands, currently
+            // it does cleanup the modified facedown state
+            if (result) {
+                runFaceupCommands();
+            }
+
             if (result && runTriggers) {
                 // Run replacement effects
                 Map<String, Object> repParams = Maps.newHashMap();
@@ -2389,9 +2396,19 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addUnattachCommand(final GameCommand c) {
         unattachCommandList.add(c);
     }
-    
+
+    public final void addFaceupCommand(final GameCommand c) {
+        faceupCommandList.add(c);
+    }
+
     public final void runUnattachCommands() {
         for (final GameCommand c : unattachCommandList) {
+            c.run();
+        }
+    }
+
+    public final void runFaceupCommands() {
+        for (final GameCommand c : faceupCommandList) {
             c.run();
         }
     }

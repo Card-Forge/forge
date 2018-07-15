@@ -6,7 +6,9 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import forge.GameCommand;
 import forge.card.CardStateName;
+import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -32,6 +34,7 @@ import forge.util.collect.*;
 import forge.util.Lang;
 import forge.util.MessageUtil;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -1101,11 +1104,49 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                     }
                 }
+                // need to be facedown before it hits the battlefield in case of Replacement Effects or Trigger
+                if (sa.hasParam("FaceDown") && ZoneType.Battlefield.equals(destination)) {
+                    c.setState(CardStateName.FaceDown, true);
+
+                    // set New Pt doesn't work because this values need to be copyable for clone effects
+                    if (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")) {
+                        if (sa.hasParam("FaceDownPower")) {
+                            c.setBasePower(AbilityUtils.calculateAmount(
+                                    source, sa.getParam("FaceDownPower"), sa));
+                        }
+                        if (sa.hasParam("FaceDownToughness")) {
+                            c.setBaseToughness(AbilityUtils.calculateAmount(
+                                    source, sa.getParam("FaceDownToughness"), sa));
+                        }
+                    }
+
+                    if (sa.hasParam("FaceDownAddType")) {
+                        CardType t = new CardType(c.getCurrentState().getType());
+                        t.addAll(Arrays.asList(sa.getParam("FaceDownAddType").split(",")));
+                        c.getCurrentState().setType(t);
+                    }
+
+                    if (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")
+                            || sa.hasParam("FaceDownAddType")) {
+                        final GameCommand unanimate = new GameCommand() {
+                            private static final long serialVersionUID = 8853789549297846163L;
+
+                            @Override
+                            public void run() {
+                                c.clearStates(CardStateName.FaceDown, true);
+                            }
+                        };
+
+                        c.addFaceupCommand(unanimate);
+                    }
+                }
                 movedCard = game.getAction().moveTo(c.getController().getZone(destination), c, sa, null);
                 if (sa.hasParam("Tapped")) {
                     movedCard.setTapped(true);
                 }
-                if (sa.hasParam("FaceDown")) {
+
+                // need to do that again?
+                if (sa.hasParam("FaceDown") && !ZoneType.Battlefield.equals(destination)) {
                     movedCard.setState(CardStateName.FaceDown, true);
                 }
                 movedCard.setTimestamp(ts);
