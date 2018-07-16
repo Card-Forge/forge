@@ -204,9 +204,7 @@ public class ForgeScript {
             if (!found) {
                 return false;
             }
-        }
-
-        if (sa.getHostCard() != null) {
+        } else if (sa.getHostCard() != null) {
             if (!sa.getHostCard().hasProperty(property, sourceController, source, spellAbility)) {
                 return false;
             }
