@@ -2112,6 +2112,10 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void resetLandsPlayedThisTurn() {
         landsPlayedThisTurn = 0;
     }
+    public final void setLandsPlayedThisTurn(int num) {
+        // This method should only be used directly when setting up the game state.
+        landsPlayedThisTurn = num;
+    }
     public final void setLandsPlayedLastTurn(int num) {
         landsPlayedLastTurn = num;
     }
