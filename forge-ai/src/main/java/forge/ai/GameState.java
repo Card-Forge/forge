@@ -61,6 +61,8 @@ public abstract class GameState {
     private String computerPersistentMana = "";
     private int humanLandsPlayed = 0;
     private int computerLandsPlayed = 0;
+    private int humanLandsPlayedLastTurn = 0;
+    private int computerLandsPlayedLastTurn = 0;
 
     private boolean puzzleCreatorState = false;
 
@@ -126,6 +128,8 @@ public abstract class GameState {
         sb.append(TextUtil.concatNoSpace("ailife=", String.valueOf(computerLife), "\n"));
         sb.append(TextUtil.concatNoSpace("humanlandsplayed=", String.valueOf(humanLandsPlayed), "\n"));
         sb.append(TextUtil.concatNoSpace("ailandsplayed=", String.valueOf(computerLandsPlayed), "\n"));
+        sb.append(TextUtil.concatNoSpace("humanlandsplayedlastturn=", String.valueOf(humanLandsPlayedLastTurn), "\n"));
+        sb.append(TextUtil.concatNoSpace("ailandsplayedlastturn=", String.valueOf(computerLandsPlayedLastTurn), "\n"));
         sb.append(TextUtil.concatNoSpace("turn=", String.valueOf(turn), "\n"));
 
         if (!humanCounters.isEmpty()) {
@@ -170,6 +174,8 @@ public abstract class GameState {
         computerLife = ai.getLife();
         humanLandsPlayed = human.getLandsPlayedThisTurn();
         computerLandsPlayed = ai.getLandsPlayedThisTurn();
+        humanLandsPlayedLastTurn = human.getLandsPlayedLastTurn();
+        computerLandsPlayedLastTurn = ai.getLandsPlayedLastTurn();
         humanCounters = countersToString(human.getCounters());
         computerCounters = countersToString(ai.getCounters());
         humanManaPool = processManaPool(human.getManaPool());
@@ -453,6 +459,13 @@ public abstract class GameState {
                 computerLandsPlayed = Integer.parseInt(categoryValue);
         }
 
+        else if (categoryName.endsWith("landsplayedlastturn")) {
+            if (isHuman)
+                humanLandsPlayedLastTurn = Integer.parseInt(categoryValue);
+            else
+                computerLandsPlayedLastTurn = Integer.parseInt(categoryValue);
+        }
+
         else if (categoryName.endsWith("play") || categoryName.endsWith("battlefield")) {
             if (isHuman)
                 humanCardTexts.put(ZoneType.Battlefield, categoryValue);
@@ -572,8 +585,8 @@ public abstract class GameState {
 
         game.getTriggerHandler().setSuppressAllTriggers(true);
 
-        setupPlayerState(humanLife, humanCardTexts, human, humanLandsPlayed);
-        setupPlayerState(computerLife, aiCardTexts, ai, computerLandsPlayed);
+        setupPlayerState(humanLife, humanCardTexts, human, humanLandsPlayed, humanLandsPlayedLastTurn);
+        setupPlayerState(computerLife, aiCardTexts, ai, computerLandsPlayed, computerLandsPlayedLastTurn);
 
         handleCardAttachments();
         handleChosenEntities();
@@ -988,7 +1001,7 @@ public abstract class GameState {
         }
     }
 
-    private void setupPlayerState(int life, Map<ZoneType, String> cardTexts, final Player p, final int landsPlayed) {
+    private void setupPlayerState(int life, Map<ZoneType, String> cardTexts, final Player p, final int landsPlayed, final int landsPlayedLastTurn) {
         // Lock check static as we setup player state
 
         Map<ZoneType, CardCollectionView> playerCards = new EnumMap<ZoneType, CardCollectionView>(ZoneType.class);
@@ -999,6 +1012,7 @@ public abstract class GameState {
 
         if (life >= 0) p.setLife(life, null);
         p.setLandsPlayedThisTurn(landsPlayed);
+        p.setLandsPlayedLastTurn(landsPlayedLastTurn);
 
         for (Entry<ZoneType, CardCollectionView> kv : playerCards.entrySet()) {
             PlayerZone zone = p.getZone(kv.getKey());
