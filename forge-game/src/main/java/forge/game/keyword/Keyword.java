@@ -17,6 +17,7 @@ public enum Keyword {
     AMPLIFY(KeywordWithAmountAndType.class, false, "As this creature enters the battlefield, put {%d:+1/+1 counter} on it for each %s card you reveal in your hand."),
     ANNIHILATOR(KeywordWithAmount.class, false, "Whenever this creature attacks, defending player sacrifices {%d:permanent}."),
     ASCEND(SimpleKeyword.class, true, "If you control ten or more permanents, you get the city's blessing for the rest of the game."),
+    ASSIST(SimpleKeyword.class, true, "Another player can pay up to %s of this spell's cost."),
     AURA_SWAP(KeywordWithCost.class, false, "%s: You may exchange this Aura with an Aura card in your hand."),
     AWAKEN(KeywordWithCostAndAmount.class, false, "If you cast this spell for %s, also put {%d:+1/+1 counter} on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land."),
     BANDING(SimpleKeyword.class, true, "Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking."),
@@ -165,9 +166,16 @@ public enum Keyword {
     public static KeywordInterface getInstance(String k) {
         Keyword keyword = Keyword.UNDEFINED;
         String details = k;
-        String enumName = k.replace(' ', '_').toUpperCase();
+        String enumName = k;
+        // try to get real part
+        if (k.contains(":")) {
+            enumName = k.split(":")[0];
+        } else if (k.contains(" ")) {
+            enumName = k.split(" ")[0];
+        }
+        enumName = enumName.toUpperCase();
         for (Keyword kw : Keyword.values()) {
-            if (enumName.startsWith(kw.name())) {
+            if (enumName.equals(kw.name())) {
                 keyword = kw;
                 int idx = kw.name().length() + 1;
                 if (idx < k.length()) {
@@ -182,6 +190,7 @@ public enum Keyword {
         if (keyword == Keyword.UNDEFINED) {
             //check for special keywords that have a prefix before the keyword enum name
             int idx = k.indexOf(' ');
+            enumName = k.replace(" ", "_").toUpperCase();
             String firstWord = idx == -1 ? enumName : enumName.substring(0, idx);
             if (firstWord.endsWith("WALK")) {
                 keyword = Keyword.LANDWALK;
@@ -202,7 +211,7 @@ public enum Keyword {
         }
         KeywordInstance<?> inst;
         try {
-            inst = keyword.type.newInstance();
+            inst = keyword.type.getConstructor().newInstance();
         }
         catch (Exception e) {
             inst = new UndefinedKeyword();
