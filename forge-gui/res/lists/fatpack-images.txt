@@ -43,6 +43,7 @@ https://downloads.cardforge.org/images/products/fatpacks/M12.png
 https://downloads.cardforge.org/images/products/fatpacks/M13.jpg
 https://downloads.cardforge.org/images/products/fatpacks/M14.jpg
 https://downloads.cardforge.org/images/products/fatpacks/M15.jpg
+https://downloads.cardforge.org/images/products/fatpacks/M19.jpg
 https://downloads.cardforge.org/images/products/fatpacks/MBS.jpg
 https://downloads.cardforge.org/images/products/fatpacks/MMQ.jpg
 https://downloads.cardforge.org/images/products/fatpacks/MOR.jpg
