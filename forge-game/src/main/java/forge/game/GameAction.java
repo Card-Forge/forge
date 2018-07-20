@@ -1756,6 +1756,11 @@ public class GameAction {
         boolean isMultiPlayer = game.getPlayers().size() > 2;
         int mulliganDelta = isMultiPlayer ? 0 : 1;
 
+        // https://magic.wizards.com/en/articles/archive/feature/checking-brawl-2018-07-09
+        if (game.getRules().hasAppliedVariant(GameType.Brawl) && !isMultiPlayer){
+            mulliganDelta = 0;
+        }
+
         boolean allKept;
         do {
             allKept = true;
