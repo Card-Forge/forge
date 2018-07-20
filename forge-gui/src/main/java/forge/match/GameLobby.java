@@ -501,7 +501,7 @@ public abstract class GameLobby implements IHasGameType {
             //override starting life for 1v1 Brawl
             if (hasVariant(GameType.Brawl) && activeSlots.size() == 2){
                 for (RegisteredPlayer player : players){
-                    player.setStartingLife(20);
+                    player.setStartingLife(25);
                 }
             }
             playerToSlot.put(rp, slot);
