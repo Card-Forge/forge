@@ -876,7 +876,9 @@ public class GameAction {
             }
         }
 
-        if (runEvents) {
+        // preList means that this is run by a pre Check with LKI objects
+        // in that case Always trigger should not Run
+        if (preList.isEmpty()) {
             final Map<String, Object> runParams = Maps.newHashMap();
             game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
         }
@@ -1598,7 +1600,7 @@ public class GameAction {
         if (landCount == 0 ){
             return 0;
         }
-        return new Float(landCount)/new Float(deck.size());
+        return Float.valueOf(landCount)/Float.valueOf(deck.size());
     }
 
     private float getHandScore(List<Card> hand, float landRatio){
