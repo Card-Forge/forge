@@ -6,6 +6,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
+import forge.game.trigger.TriggerType;
 
 import java.util.Map;
 
@@ -43,6 +44,8 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
         if (sa.hasParam("RememberObjects")) {
             triggerRemembered = sa.getParam("RememberObjects");
         }
+
+        mapParams.put("Mode", TriggerType.Immediate.name());
 
         final Trigger immediateTrig = TriggerHandler.parseTrigger(mapParams, sa.getHostCard(), true);
 
