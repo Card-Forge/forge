@@ -1,6 +1,8 @@
 package forge.game.keyword;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import forge.StaticData;
 import forge.game.card.Card;
@@ -171,7 +173,12 @@ public enum Keyword {
         if (k.contains(":")) {
             enumName = k.split(":")[0];
         } else if (k.contains(" ")) {
-            enumName = k.split(" ")[0];
+            // First strike
+            // Flashback 1 B
+            Pattern keywordPattern = Pattern.compile("([a-zA-Z ]*)");
+            Matcher m = keywordPattern.matcher(k);
+            m.find();
+            enumName = m.group().trim().replace(' ', '_');
         }
         enumName = enumName.toUpperCase();
         for (Keyword kw : Keyword.values()) {
