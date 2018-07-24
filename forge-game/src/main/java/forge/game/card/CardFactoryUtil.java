@@ -3310,8 +3310,9 @@ public class CardFactoryUtil {
             sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
             sb.append("| ValidStackSa$ Spell.Flashback | Description$ Flashback");
 
-            if (keyword.contains(" ")) {
-                final Cost cost = new Cost(keyword.substring(10), false);
+            if (keyword.contains(":")) {
+                final String k[] = keyword.split(":");
+                final Cost cost = new Cost(k[1], false);
                 sb.append( cost.isOnlyManaCost() ? " " : "—");
     
                 sb.append(cost.toSimpleString());
