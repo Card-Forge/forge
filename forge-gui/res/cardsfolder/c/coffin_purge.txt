@@ -1,7 +1,7 @@
 Name:Coffin Purge
 ManaCost:B
 Types:Instant
-K:Flashback B
+K:Flashback:B
 A:SP$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coffin_purge.jpg
