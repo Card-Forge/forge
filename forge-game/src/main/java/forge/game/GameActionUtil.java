@@ -201,7 +201,7 @@ public final class GameActionUtil {
                 flashback.getRestrictions().setZone(ZoneType.Graveyard);
 
                 // there is a flashback cost (and not the cards cost)
-                if (!keyword.contains(":")) {
+                if (keyword.contains(":")) {
                     final String k[] = keyword.split(":"); 
                     flashback.setPayCosts(new Cost(k[1], false));
                 }
