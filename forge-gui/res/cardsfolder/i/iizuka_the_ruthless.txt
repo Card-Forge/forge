@@ -2,7 +2,7 @@ Name:Iizuka the Ruthless
 ManaCost:3 R R
 Types:Legendary Creature Human Samurai
 PT:3/3
-K:Bushido 2
+K:Bushido:2
 A:AB$ PumpAll | Cost$ 2 R Sac<1/Samurai> | ValidCards$ Creature.Samurai+YouCtrl | KW$ Double Strike | SpellDescription$ Samurai creatures you control gain double strike until end of turn.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iizuka_the_ruthless.jpg

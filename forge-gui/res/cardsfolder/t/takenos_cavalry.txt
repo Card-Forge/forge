@@ -2,7 +2,7 @@ Name:Takeno's Cavalry
 ManaCost:3 W
 Types:Creature Human Samurai Archer
 PT:1/1
-K:Bushido 1
+K:Bushido:1
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Spirit.attacking,Spirit.blocking | TgtPrompt$ Select target attacking or blocking Spirit | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target attacking or blocking Spirit.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/takenos_cavalry.jpg
