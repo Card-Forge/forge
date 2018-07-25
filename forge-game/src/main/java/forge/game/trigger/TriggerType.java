@@ -53,6 +53,7 @@ public enum TriggerType {
     Explores(TriggerExplores.class),
     Fight(TriggerFight.class),
     FlippedCoin(TriggerFlippedCoin.class),
+    Immediate(TriggerImmediate.class),
     Investigated(TriggerInvestigated.class),
     LandPlayed(TriggerLandPlayed.class),
     LifeGained(TriggerLifeGained.class),

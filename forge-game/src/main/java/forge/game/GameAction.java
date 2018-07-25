@@ -881,6 +881,8 @@ public class GameAction {
         if (preList.isEmpty()) {
             final Map<String, Object> runParams = Maps.newHashMap();
             game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
+
+            game.getTriggerHandler().runTrigger(TriggerType.Immediate, runParams, false);
         }
 
         // Update P/T and type in the view only once after all the cards have been processed, to avoid flickering
