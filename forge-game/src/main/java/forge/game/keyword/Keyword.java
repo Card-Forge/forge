@@ -174,7 +174,7 @@ public enum Keyword {
         } else if (k.contains(" ")) {
             // First strike
             keyword = smartValueOf(k);
-            defails = "";
+            details = "";
 
             // other keywords that contains other stuff like Enchant
             if (keyword == Keyword.UNDEFINED) {
@@ -190,7 +190,7 @@ public enum Keyword {
         } else {
             // Simple Keyword
             keyword = smartValueOf(k);
-            defails = "";
+            details = "";
         }
 
         if (keyword == Keyword.UNDEFINED) {
