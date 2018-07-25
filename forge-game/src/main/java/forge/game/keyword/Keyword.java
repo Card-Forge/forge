@@ -1,8 +1,6 @@
 package forge.game.keyword;
 
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import forge.StaticData;
 import forge.game.card.Card;
@@ -168,36 +166,37 @@ public enum Keyword {
     public static KeywordInterface getInstance(String k) {
         Keyword keyword = Keyword.UNDEFINED;
         String details = k;
-        String enumName = k;
         // try to get real part
         if (k.contains(":")) {
-            enumName = k.split(":")[0];
+            final String x[] = k.split(":", 2);
+            keyword = smartValueOf(x[0]);
+            details = x[1];
         } else if (k.contains(" ")) {
             // First strike
-            // Flashback 1 B
-            Pattern keywordPattern = Pattern.compile("([a-zA-Z ]*)");
-            Matcher m = keywordPattern.matcher(k);
-            m.find();
-            enumName = m.group().trim().replace(' ', '_');
-        }
-        enumName = enumName.toUpperCase();
-        for (Keyword kw : Keyword.values()) {
-            if (enumName.equals(kw.name())) {
-                keyword = kw;
-                int idx = kw.name().length() + 1;
-                if (idx < k.length()) {
-                    details = k.substring(idx);
+            keyword = smartValueOf(k);
+            defails = "";
+
+            // other keywords that contains other stuff like Enchant
+            if (keyword == Keyword.UNDEFINED) {
+                final String x[] = k.split(" ", 2);
+
+                final Keyword k2 = smartValueOf(x[0]);
+                // Keywords that needs to be undefined
+                if (k2 != Keyword.UNDEFINED) {
+                    keyword = k2;
+                    details = x[1];
                 }
-                else {
-                    details = "";
-                }
-                break;
             }
+        } else {
+            // Simple Keyword
+            keyword = smartValueOf(k);
+            defails = "";
         }
+
         if (keyword == Keyword.UNDEFINED) {
             //check for special keywords that have a prefix before the keyword enum name
             int idx = k.indexOf(' ');
-            enumName = k.replace(" ", "_").toUpperCase();
+            String enumName = k.replace(" ", "_").toUpperCase();
             String firstWord = idx == -1 ? enumName : enumName.substring(0, idx);
             if (firstWord.endsWith("WALK")) {
                 keyword = Keyword.LANDWALK;
@@ -276,5 +275,17 @@ public enum Keyword {
             };
         }
         return null;
+    }
+
+    public static Keyword smartValueOf(String value) {
+
+        final String valToCompate = value.replace(" ", "_").toUpperCase();
+        for (final Keyword v : Keyword.values()) {
+            if (valToCompate.equals(v.name())) {
+                return v;
+            }
+        }
+
+        return UNDEFINED;
     }
 }
