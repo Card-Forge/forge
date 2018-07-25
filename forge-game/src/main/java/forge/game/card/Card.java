@@ -1603,7 +1603,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 final String[] k = keyword.split(":");
                 sbLong.append("Partner with " + k[1] + " (" + inst.getReminderText() + ")");
             } else if (keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst")
-                    || keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift")
+                    || keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift") || keyword.startsWith("Bushido")
                     || keyword.startsWith("Crew") || keyword.startsWith("Tribute") || keyword.startsWith("Absorb")
                     || keyword.startsWith("Graft") || keyword.startsWith("Fading") || keyword.startsWith("Vanishing")
                     || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Devour")) {
@@ -1625,7 +1625,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                      || keyword.equals("Horsemanship") || keyword.equals("Infect")|| keyword.equals("Persist")
                      || keyword.equals("Phasing") || keyword.equals("Shadow")|| keyword.equals("Skulk")
                      || keyword.equals("Undying") || keyword.equals("Wither")
-                     || keyword.startsWith ("Afflict") || keyword.startsWith("Bushido") || keyword.startsWith ("Poisonous")
+                     || keyword.startsWith ("Afflict") || keyword.startsWith ("Poisonous")
                     || keyword.startsWith ("Rampage") || keyword.startsWith("Cascade")) {
                 if (sb.length() != 0) {
                     sb.append("\r\n");

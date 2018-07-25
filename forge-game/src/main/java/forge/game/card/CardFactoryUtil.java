@@ -2169,27 +2169,28 @@ public class CardFactoryUtil {
 
             inst.addTrigger(trigger);
         } else if (keyword.startsWith("Bushido")) {
-            final String[] k = keyword.split(" ", 2);
+            final String[] k = keyword.split(":");
             final String n = k[1];
 
-            final String name = "Bushido" + n;
+            final String trigBlock = "Mode$ Blocks | ValidCard$ Card.Self | Secondary$ True"
+                    + " | TriggerDescription$ Bushido "+ n + " (" + inst.getReminderText() + ")";
 
-            final String trigBlock = "Mode$ Blocks | ValidCard$ Card.Self | Execute$ Trig" + name + "Pump | Secondary$ True"
-                    + " | TriggerDescription$ "+ keyword + " (" + inst.getReminderText() + ")";
-
-            final String trigBlocked = "Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ Trig" + name + "Pump | Secondary$ True "
-                    + " | TriggerDescription$ "+ keyword + " (" + inst.getReminderText() + ")";
+            final String trigBlocked = "Mode$ AttackerBlocked | ValidCard$ Card.Self | Secondary$ True "
+                    + " | TriggerDescription$ Bushido "+ n + " (" + inst.getReminderText() + ")";
 
             String pumpStr = "DB$ Pump | Defined$ Self | NumAtt$ " + n + " | NumDef$ " + n;
+
+            SpellAbility pump = AbilityFactory.getAbility(pumpStr, card);
             if ("X".equals(n)) {
-                pumpStr = "DB$ Pump | Defined$ Self | NumAtt$ " + name + " | NumDef$ " + name + " | References$ "+ name;
-                card.setSVar(name, "Count$Valid Creature.attacking");
+                pump.setSVar("X", "Count$Valid Creature.attacking");
             }
-            card.setSVar("Trig" + name + "Pump", pumpStr);
 
             final Trigger bushidoTrigger1 = TriggerHandler.parseTrigger(trigBlock, card, intrinsic);
             final Trigger bushidoTrigger2 = TriggerHandler.parseTrigger(trigBlocked, card, intrinsic);
             
+            bushidoTrigger1.setOverridingAbility(pump);
+            bushidoTrigger2.setOverridingAbility(pump);
+
             inst.addTrigger(bushidoTrigger1);
             inst.addTrigger(bushidoTrigger2);
         } else if (keyword.equals("Cascade")) {
