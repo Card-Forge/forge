@@ -10,6 +10,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
@@ -1082,15 +1083,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("withFlashback")) {
-            boolean fb = false;
-            if (card.hasStartOfUnHiddenKeyword("Flashback")) {
-                fb = true;
-            }
-            for (final SpellAbility sa : card.getSpellAbilities()) {
-                if (sa.isFlashBackAbility()) {
-                    fb = true;
-                }
-            }
+            boolean fb = card.hasKeyword(Keyword.FLASHBACK);
             if (!fb) {
                 return false;
             }
