@@ -3,5 +3,5 @@ Name:Brawl
 Order:101
 Type:Casual
 Subtype:Commander
-Sets:KLD, AER, AKH, W17, HOU, XLN, RIX, DOM
+Sets:KLD, AER, AKH, W17, HOU, XLN, RIX, DOM, M19
 Banned:Baral, Chief of Compliance;Smuggler's Copter;Sorcerous Spyglass
