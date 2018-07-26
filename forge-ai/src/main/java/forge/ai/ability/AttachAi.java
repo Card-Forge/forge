@@ -510,7 +510,7 @@ public class AttachAi extends SpellAbilityAi {
             // Prefer "tap to deal damage"
             // TODO : Skip this one if triggers on combat damage only?
             for (SpellAbility sa2 : card.getSpellAbilities()) {
-                if ((sa2.getApi().equals(ApiType.DealDamage))
+                if (ApiType.DealDamage.equals(sa2.getApi())
                         && (sa2.getTargetRestrictions().canTgtPlayer())) {
                     cardPriority += 300;
                 }
