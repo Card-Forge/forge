@@ -975,12 +975,20 @@ public class ComputerUtilCombat {
             final Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
-            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, null)
-                    || !trigParams.containsKey("Execute")) {
+            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, null)) {
                 continue;
             }
-            final String ability = source.getSVar(trigParams.get("Execute"));
-            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
+
+            Map<String, String> abilityParams = null;
+            if (trigger.getOverridingAbility() != null) {
+                abilityParams = trigger.getOverridingAbility().getMapParams();
+            } else if (trigParams.containsKey("Execute")) {
+                final String ability = source.getSVar(trigParams.get("Execute"));
+                abilityParams = AbilityFactory.getMapParams(ability);
+            } else {
+                continue;
+            }
+
             if (abilityParams.containsKey("AB") && !abilityParams.get("AB").equals("Pump")) {
                 continue;
             }
@@ -1098,12 +1106,20 @@ public class ComputerUtilCombat {
             final Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
-            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, null)
-                    || !trigParams.containsKey("Execute")) {
+            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, null)) {
                 continue;
             }
-            final String ability = source.getSVar(trigParams.get("Execute"));
-            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
+
+            Map<String, String> abilityParams = null;
+            if (trigger.getOverridingAbility() != null) {
+                abilityParams = trigger.getOverridingAbility().getMapParams();
+            } else if (trigParams.containsKey("Execute")) {
+                final String ability = source.getSVar(trigParams.get("Execute"));
+                abilityParams = AbilityFactory.getMapParams(ability);
+            } else {
+                continue;
+            }
+
             String abType = "";
             if (abilityParams.containsKey("AB")) {
             	abType = abilityParams.get("AB");
@@ -1311,12 +1327,20 @@ public class ComputerUtilCombat {
             final Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
-            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, combat)
-                    || !trigParams.containsKey("Execute")) {
+            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, combat)) {
                 continue;
             }
-            final String ability = source.getSVar(trigParams.get("Execute"));
-            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
+
+            Map<String, String> abilityParams = null;
+            if (trigger.getOverridingAbility() != null) {
+                abilityParams = trigger.getOverridingAbility().getMapParams();
+            } else if (trigParams.containsKey("Execute")) {
+                final String ability = source.getSVar(trigParams.get("Execute"));
+                abilityParams = AbilityFactory.getMapParams(ability);
+            } else {
+                continue;
+            }
+
             if (abilityParams.containsKey("ValidTgts") || abilityParams.containsKey("Tgt")) {
                 continue; // targeted pumping not supported
             }
@@ -1330,7 +1354,14 @@ public class ComputerUtilCombat {
             }
 
             if (abilityParams.containsKey("Cost")) {
-                final SpellAbility sa = AbilityFactory.getAbility(ability, source);
+                SpellAbility sa = null;
+                if (trigger.getOverridingAbility() != null) {
+                    sa = trigger.getOverridingAbility();
+                } else {
+                    final String ability = source.getSVar(trigParams.get("Execute"));
+                    sa = AbilityFactory.getAbility(ability, source);
+                }
+
                 sa.setActivatingPlayer(source.getController());
                 if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
                     continue;
@@ -1514,12 +1545,20 @@ public class ComputerUtilCombat {
             final Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
-            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, combat)
-                    || !trigParams.containsKey("Execute")) {
+            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, combat)) {
                 continue;
             }
-            final String ability = source.getSVar(trigParams.get("Execute"));
-            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
+
+            Map<String, String> abilityParams = null;
+            if (trigger.getOverridingAbility() != null) {
+                abilityParams = trigger.getOverridingAbility().getMapParams();
+            } else if (trigParams.containsKey("Execute")) {
+                final String ability = source.getSVar(trigParams.get("Execute"));
+                abilityParams = AbilityFactory.getMapParams(ability);
+            } else {
+                continue;
+            }
+
             if (abilityParams.containsKey("ValidTgts") || abilityParams.containsKey("Tgt")) {
                 continue; // targeted pumping not supported
             }
@@ -1552,7 +1591,14 @@ public class ComputerUtilCombat {
             }
 
             if (abilityParams.containsKey("Cost")) {
-                final SpellAbility sa = AbilityFactory.getAbility(ability, source);
+                SpellAbility sa = null;
+                if (trigger.getOverridingAbility() != null) {
+                    sa = trigger.getOverridingAbility();
+                } else {
+                    final String ability = source.getSVar(trigParams.get("Execute"));
+                    sa = AbilityFactory.getAbility(ability, source);
+                }
+
                 sa.setActivatingPlayer(source.getController());
                 if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
                     continue;
