@@ -140,7 +140,7 @@ Type=Other
 131 R Bear Umbra
 132 R Boon Satyr
 133 C Borderland Explorer
-134 R Budoka Gardener // Dokai, Weaver of Life
+134 R Budoka Gardener
 135 R Centaur Vinecrasher
 136 U Consign to Dust
 137 R Creeping Renaissance
