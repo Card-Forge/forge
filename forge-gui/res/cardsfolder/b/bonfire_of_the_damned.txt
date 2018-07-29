@@ -1,7 +1,9 @@
 Name:Bonfire of the Damned
 ManaCost:X X R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ X X R | NumDmg$ X | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select a player or planeswalker | ValidCards$ Creature | ValidPlayers$ TargetedOrController | ValidDescription$ target player or planeswalker and each creature that player or that planeswalker's controller controls. | References$ X | SpellDescription$ CARDNAME deals X damage to target player or planeswalker and each creature that player or that planeswalker's controller controls.
+A:SP$ DealDamage | Cost$ X X R | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select a player or planeswalker | NumDmg$ X | References$ X | SubAbility$ DmgAll | DamageMap$ True | SpellDescription$ CARDNAME deals X damage to target player or planeswalker and each creature that player or that planeswalker's controller controls.
+SVar:DmgAll:DB$ DamageAll | NumDmg$ X | References$ X | ValidCards$ Creature.ControlledBy TargetedOrController | SubAbility$ DBDamageResolve
+SVar:DBDamageResolve:DB$ DamageResolve
 K:Miracle:X R
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bonfire_of_the_damned.jpg
