@@ -1,0 +1,8 @@
+Name:Crash of Rhino Beetles
+ManaCost:4 G
+Types:Creature Insect
+PT:5/5
+K:Trample
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 10 | AddToughness$ 10 | CheckSVar$ X | SVarCompare$ GE10 | References$ X | Description$ CARDNAME gets +10/+10 as long as you control ten or more lands.
+SVar:X:Count$Valid Land.YouCtrl
+Oracle:Trample\nCrash of Rhino Beetles gets +10/+10 as long as you control ten or more lands.

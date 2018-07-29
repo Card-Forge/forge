@@ -1,0 +1,9 @@
+Name:Empyrial Storm
+ManaCost:4 W W
+Types:Sorcery
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ When you cast CARDNAME, copy it for each time you've cast your commander from the command zone this game.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility
+SVar:X:Count$ThisTurnCast_Card.IsCommander+YouCtrl
+A:SP$ Token | Cost$ 4 W W | TokenAmount$ 1 | TokenName$ Angel | TokenTypes$ Creature,Angel | TokenOwner$ You | TokenColors$ White | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying | TokenImage$ w 4 4 angel gtc | SpellDescription$ Create a 4/4 white Angel creature token with flying.
+DeckHas:Ability$Token
+Oracle:When you cast this spell, copy it for each time you've cast your commander from the command zone this game.\nCreate a 4/4 white Angel creature token with flying.
