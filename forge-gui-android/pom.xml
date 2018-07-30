@@ -37,12 +37,12 @@
                 </configuration>
             </plugin>
         </plugins>
-	    <resources>
-	        <resource>
-	            <directory>filters</directory>
-	            <filtering>true</filtering>
-	        </resource>
-	    </resources>
+        <resources>
+            <resource>
+                <directory>filters</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <finalName>forge-android-${alpha-version}</finalName>
     </build>
 
