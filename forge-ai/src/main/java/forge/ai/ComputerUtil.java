@@ -2635,8 +2635,8 @@ public class ComputerUtil {
                 // and also on Chronozoa
                 || (type == CounterType.TIME && (!c.isInPlay() || "Chronozoa".equals(c.getName())))
                 || type == CounterType.GOLD || type == CounterType.MUSIC || type == CounterType.PUPA
-                || type == CounterType.PARALYZATION || type == CounterType.SHELL || type == CounterType.SLEEP 
-                || type == CounterType.SLEIGHT || type == CounterType.WAGE;
+                || type == CounterType.PARALYZATION || type == CounterType.SHELL || type == CounterType.SLEEP
+                || type == CounterType.SLUMBER || type == CounterType.SLEIGHT || type == CounterType.WAGE;
     }
 
     // this countertypes has no effect
