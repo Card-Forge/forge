@@ -1082,18 +1082,19 @@ public class Card extends GameEntity implements Comparable<Card> {
         countersAdded = value;
     }
 
-    public final void addCounter(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier) {
-        addCounter(counterType, n, source, applyMultiplier, true);
+    public final int addCounter(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier) {
+        return addCounter(counterType, n, source, applyMultiplier, true);
     }
-    public final void addCounterFireNoEvents(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier) {
-        addCounter(counterType, n, source, applyMultiplier, false);
+    public final int addCounterFireNoEvents(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier) {
+        return addCounter(counterType, n, source, applyMultiplier, false);
     }
 
     @Override
-    public void addCounter(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier, final boolean fireEvents) {
+    public int addCounter(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier, final boolean fireEvents) {
         int addAmount = n;
         if(addAmount < 0) {
             addAmount = 0; // As per rule 107.1b
+            return 0;
         }
         final Map<String, Object> repParams = Maps.newHashMap();
         repParams.put("Event", "AddCounter");
@@ -1111,7 +1112,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             break;
         }
         default:
-            return;
+            return 0;
         }
 
         if (canReceiveCounters(counterType)) {
@@ -1124,7 +1125,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         if (addAmount <= 0) {
-            return;
+            return 0;
         }
         setTotalCountersToAdd(addAmount);
 
@@ -1170,6 +1171,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             getController().addCounterToPermThisTurn(counterType, addAmount);
             view.updateCounters(this);
         }
+        return addAmount;
     }
 
     /**
@@ -5091,7 +5093,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public boolean isInZone(final ZoneType zone) {
-        Zone z = getZone();
+        Zone z = this.getLastKnownZone();
         return z != null && z.is(zone);
     }
 
@@ -5791,10 +5793,24 @@ public class Card extends GameEntity implements Comparable<Card> {
         etbCounters.clear();
     }
 
-    public final void putEtbCounters() {
+    public final Set<Table.Cell<Player, CounterType, Integer>> getEtbCounters() {
+        return etbCounters.cellSet();
+    }
+
+    public final boolean putEtbCounters() {
+        boolean changed = false;
         for (Table.Cell<Player, CounterType, Integer> e : etbCounters.cellSet()) {
-            this.addCounter(e.getColumnKey(), e.getValue(), e.getRowKey(), true);
+            CounterType ct = e.getColumnKey();
+            if (this.isLKI()) {
+                if (canReceiveCounters(ct)) {
+                    setCounters(ct, getCounters(ct) + e.getValue());
+                    changed = true;
+                }
+            } else {
+                changed |= addCounter(ct, e.getValue(), e.getRowKey(), true) > 0;
+            }
         }
+        return changed;
     }
 
     public final void clearTemporaryVars() {

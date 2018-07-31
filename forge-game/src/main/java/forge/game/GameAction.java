@@ -252,11 +252,24 @@ public class GameAction {
             Card noLandLKI = CardUtil.getLKICopy(c);
             // this check needs to check if this card would be on the battlefield
             noLandLKI.setLastKnownZone(zoneTo);
-            
+
             CardCollection preList = new CardCollection(noLandLKI);
             checkStaticAbilities(false, Sets.newHashSet(noLandLKI), preList);
 
+            // fake etb counters thing, then if something changed,
+            // need to apply checkStaticAbilities again
+            if(!noLandLKI.isLand()) {
+                if (noLandLKI.putEtbCounters()) {
+                    // counters are added need to check again
+                    checkStaticAbilities(false, Sets.newHashSet(noLandLKI), preList);
+                }
+            }
+
             if(noLandLKI.isLand()) {
+                // if it isn't on the Stack, it stays in that Zone
+                if (!c.getZone().is(ZoneType.Stack)) {
+                    return c;
+                }
                 // if something would only be a land when entering the battlefield and not before
                 // put it into the graveyard instead
                 zoneTo = c.getOwner().getZone(ZoneType.Graveyard);
@@ -264,6 +277,9 @@ public class GameAction {
                 copied.setState(CardStateName.Original, false);
                 copied.setManifested(false);
                 copied.updateStateForView();
+
+                // not to battlefield anymore!
+                toBattlefield = false;
             }
         }
 
@@ -359,7 +375,10 @@ public class GameAction {
         // do ETB counters after StaticAbilities check
         if (!suppress) {
             if (toBattlefield) {
-                copied.putEtbCounters();
+                if (copied.putEtbCounters()) {
+                    // if counter where put of card, call checkStaticAbilities again
+                    checkStaticAbilities();
+                }
             }
             copied.clearEtbCounters();
         }

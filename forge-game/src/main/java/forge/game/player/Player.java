@@ -876,20 +876,20 @@ public class Player extends GameEntity implements Comparable<Player> {
         return true;
     }
 
-    public final void addCounter(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier) {
-        addCounter(counterType, n, source, applyMultiplier, true);
+    public final int addCounter(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier) {
+        return addCounter(counterType, n, source, applyMultiplier, true);
     }
 
     @Override
-    public void addCounter(CounterType counterType, int n, final Player source, boolean applyMultiplier, boolean fireEvents) {
+    public int addCounter(CounterType counterType, int n, final Player source, boolean applyMultiplier, boolean fireEvents) {
         if (!canReceiveCounters(counterType)) {
-            return;
+            return 0;
         }
 
         int addAmount = n;
         if(addAmount <= 0) {
             // Can't add negative or 0 counters, bail out now
-            return;
+            return 0;
         }
 
         final Map<String, Object> repParams = Maps.newHashMap();
@@ -908,7 +908,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             break;
         }
         default:
-            return;
+            return 0;
         }
 
         final int oldValue = getCounters(counterType);
@@ -925,6 +925,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (addAmount > 0) {
             getGame().getTriggerHandler().runTrigger(TriggerType.CounterAddedOnce, runParams, false);
         }
+        return addAmount;
     }
 
     @Override
