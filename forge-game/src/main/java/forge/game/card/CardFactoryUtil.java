@@ -3963,19 +3963,41 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
 
+            String desc = "Ninjutsu";
+            boolean commander = false;
+            if (k.length > 2 && k[2].equals("Commander")) {
+                desc = "Commander " + desc;
+                commander = true;
+            }
+
             String effect = "AB$ ChangeZone | Cost$ " + manacost +
                     " Return<1/Creature.attacking+unblocked/unblocked attacker> " + 
-                    "| PrecostDesc$ Ninjutsu | CostDesc$ " + ManaCostParser.parse(manacost) +
+                    "| PrecostDesc$ " + desc + " | CostDesc$ " + ManaCostParser.parse(manacost) +
                     "| ActivationZone$ Hand | Origin$ Hand | Ninjutsu$ True " +
-                    "| Destination$ Battlefield | Defined$ Self |" + 
-                    " SpellDescription$ (" + inst.getReminderText() + ")";
+                    "| Destination$ Battlefield | Defined$ Self " + 
+                    "| SpellDescription$ (" + inst.getReminderText() + ")";
 
-            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
 
             sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);
-            
+
+            // extra secondary effect for Commander Ninjutsu
+            if (commander) {
+                effect = "AB$ ChangeZone | Cost$ " + manacost +
+                        " Return<1/Creature.attacking+unblocked/unblocked attacker> " + 
+                        "| PrecostDesc$ " + desc + " | CostDesc$ " + ManaCostParser.parse(manacost) +
+                        "| ActivationZone$ Command | Origin$ Command | Ninjutsu$ True " +
+                        "| Destination$ Battlefield | Defined$ Self | Secondary$ True " + 
+                        "| SpellDescription$ (" + inst.getReminderText() + ")";
+
+                sa = AbilityFactory.getAbility(effect, card);
+                sa.setIntrinsic(intrinsic);
+
+                sa.setTemporary(!intrinsic);
+                inst.addSpellAbility(sa);
+            }
         } else if (keyword.startsWith("Outlast")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
