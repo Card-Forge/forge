@@ -52,7 +52,7 @@ Type=Other
 43 M Lord Windgrace
 44 M Saheeli, the Gifted
 45 M Tawnos, Urza's Apprentice
-46 M Thantis the Warweaver
+46 M Thantis, the Warweaver
 47 M Tuvasa the Sunlit
 48 M Varina, Lich Queen
 49 R Windgrace's Judgment

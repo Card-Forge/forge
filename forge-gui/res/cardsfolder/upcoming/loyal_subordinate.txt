@@ -1,0 +1,8 @@
+Name:Loyal Subordinate
+ManaCost:2 B
+Types:Creature Zombie
+PT:3/1
+K:Menace
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Command | IsPresent$ Card.YouOwn+YouOwn | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of combat on your turn, if you control your commander, each opponent loses 3 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 3
+Oracle:Menace\nLieutenant — At the beginning of combat on your turn, if you control your commander, each opponent loses 3 life.
