@@ -1,13 +1,2 @@
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.
-- M19 Core Set -
-- Deck generation -
-Deck generation now fully uses Latent Derichlet Allocation to learn deck archetypes.  The "card-based" random deck generation option is now replaced by this "archetype" based deck generation.  Random archetype decks can be generated for Standard, Modern, Legacy and Vintage.
-Deck generation uses data from more sources to increase the number of archetypes available.
-- Brawl -
-Brawl banlist updated
-- Starter Cube -
-Added Card Kingdom starter cube
-- Hand filtering option -
-There is now an option in the settings to enable MTG Arena style hand filtering - this generates two starting hands for each player and selects the one with the closest to average land count (for the deck).
-
