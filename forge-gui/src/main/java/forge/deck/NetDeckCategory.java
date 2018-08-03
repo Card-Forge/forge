@@ -89,10 +89,10 @@ public class NetDeckCategory extends StorageBase<Deck> {
                     String downloadLoc = c.getFullPath();
                     GuiBase.getInterface().download(new GuiDownloadZipService(c.getName(), "decks", c.getUrl(), downloadLoc, downloadLoc, null) {
                         @Override
-                        protected void copyInputStream(InputStream in, String outPath) throws IOException {
-                            super.copyInputStream(in, outPath);
+                        protected void copyInputStream(InputStream in, File outFile) throws IOException {
+                            super.copyInputStream(in, outFile);
     
-                            Deck deck = DeckSerializer.fromFile(new File(outPath));
+                            Deck deck = DeckSerializer.fromFile(outFile);
                             if (deck != null) {
                                 c.map.put(deck.getName(), deck);
                             }
