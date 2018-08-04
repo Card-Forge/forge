@@ -98,43 +98,41 @@ public class QuestDataIO {
      *            &emsp; {@link java.io.File}
      * @return {@link forge.quest.data.QuestData}
      */
-    public static QuestData loadData(final File xmlSaveFile) {
+    public static QuestData loadData(final File xmlSaveFile) throws IOException {
+        QuestData data;
+
+        final GZIPInputStream zin = new GZIPInputStream(new FileInputStream(xmlSaveFile));
+        final StringBuilder xml = new StringBuilder();
+        final char[] buf = new char[1024];
+        final InputStreamReader reader = new InputStreamReader(zin);
+        while (reader.ready()) {
+            final int len = reader.read(buf);
+            if (len == -1) {
+                break;
+            } // when end of stream was reached
+            xml.append(buf, 0, len);
+        }
+
+        zin.close();
+
+        String bigXML = xml.toString();
         try {
-            QuestData data;
-
-            final GZIPInputStream zin = new GZIPInputStream(new FileInputStream(xmlSaveFile));
-            final StringBuilder xml = new StringBuilder();
-            final char[] buf = new char[1024];
-            final InputStreamReader reader = new InputStreamReader(zin);
-            while (reader.ready()) {
-                final int len = reader.read(buf);
-                if (len == -1) {
-                    break;
-                } // when end of stream was reached
-                xml.append(buf, 0, len);
-            }
-
-            zin.close();
-
-            String bigXML = xml.toString();
             data = (QuestData) QuestDataIO.getSerializer(true).fromXML(bigXML);
+        } catch(Exception ex) {
+            // Attempt to auto restore?
+            throw new IOException(ex);
+        }
 
-            if (data.getVersionNumber() != QuestData.CURRENT_VERSION_NUMBER) {
-                try {
-                    QuestDataIO.updateSaveFile(data, bigXML, xmlSaveFile.getName().replace(".dat", ""));
-                }
-                catch (final Exception e) {
-                    //BugReporter.reportException(e);
-                    throw new RuntimeException(e);
-                }
+        if (data.getVersionNumber() != QuestData.CURRENT_VERSION_NUMBER) {
+            try {
+                QuestDataIO.updateSaveFile(data, bigXML, xmlSaveFile.getName().replace(".dat", ""));
             }
+            catch (final Exception e) {
+                throw new IOException(e);
+            }
+        }
 
-            return data;
-        }
-        catch (final Exception ex) {
-            //BugReporter.reportException(ex, "Error loading Quest Data");
-            throw new RuntimeException(ex);
-        }
+        return data;
     }
 
     private static <T> void setFinalField(final Class<T> clasz, final String fieldName, final T instance,
