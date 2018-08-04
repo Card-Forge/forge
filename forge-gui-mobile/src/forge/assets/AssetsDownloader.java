@@ -46,14 +46,11 @@ public class AssetsDownloader {
                     }
                     if (SOptionPane.showConfirmDialog(message, "New Version Available", "Update Now", "Update Later")) {
                         String filename = "forge-android-" + version + "-signed-aligned.apk";
-
-                        GuiDownloadZipService downloadService = new GuiDownloadZipService("", "update",
+                        String apkFile = new GuiDownloadZipService("", "update",
                                 "https://releases.cardforge.org/forge/forge-gui-android/" + version + "/" + filename,
-                                Forge.getDeviceAdapter().getDownloadsDir(), null, splashScreen.getProgressBar());
-
-                        File apkFile = downloadService.download(filename);
+                                Forge.getDeviceAdapter().getDownloadsDir(), null, splashScreen.getProgressBar()).download(filename);
                         if (apkFile != null) {
-                            Forge.getDeviceAdapter().openFile(apkFile.getPath());
+                            Forge.getDeviceAdapter().openFile(apkFile);
                             Forge.exit(true);
                             return;
                         }
