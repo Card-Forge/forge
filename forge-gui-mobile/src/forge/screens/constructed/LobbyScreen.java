@@ -193,6 +193,8 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         btnStart.setEnabled(hasControl);
         lblVariants.setEnabled(hasControl);
         cbVariants.setEnabled(hasControl);
+        lblPlayers.setEnabled(hasControl);
+        cbPlayerCount.setEnabled(hasControl);
         while (lobby.getNumberOfSlots() < getNumPlayers()){
             lobby.addSlot();
         }
