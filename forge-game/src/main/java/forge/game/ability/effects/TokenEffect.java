@@ -199,17 +199,15 @@ public class TokenEffect extends SpellAbilityEffect {
         return sb.toString();
     }
 
-    private Card loadTokenPrototype(SpellAbility sa) {
-        String script = sa.getParamOrDefault("TokenScript", null);
-
-        PaperToken token = null;
-        try {
-            String edition = sa.getHostCard().getPaperCard().getEdition();
-            token = StaticData.instance().getAllTokens().getToken(script, edition);
-        } catch(NullPointerException e) {
-            // A non-PaperCard creates a new token. We probably want to delegate to the original creator
-            System.out.println("Token created by: " + sa.getHostCard() + " has no PaperCard associated to it.");
+    public Card loadTokenPrototype(SpellAbility sa) {
+        if (!sa.hasParam("TokenScript")) {
+            return null;
         }
+
+        String script = sa.getParam("TokenScript");
+        String edition = sa.getHostCard().getSetCode();
+        PaperToken token = StaticData.instance().getAllTokens().getToken(script, edition);
+
         if (token != null) {
             tokenName = token.getName();
             return Card.fromPaperCard(token, null, sa.getHostCard().getGame());
@@ -275,7 +273,10 @@ public class TokenEffect extends SpellAbilityEffect {
             tokenInfo = new TokenInfo(substitutedName, imageName,
                     cost, substitutedTypes, this.tokenKeywords, finalPower, finalToughness);
         } else {
-            tokenInfo = new TokenInfo(prototype);
+            // TODO: Substitute type name for Chosen tokens
+            // TODO: If host has has it's color/type altered make sure that's appropriately applied
+            // TODO: Lock down final power and toughness if it's actually X values
+            tokenInfo = new TokenInfo(prototype, host);
         }
 
         for (final Player controller : AbilityUtils.getDefinedPlayers(host, this.tokenOwner, sa)) {
