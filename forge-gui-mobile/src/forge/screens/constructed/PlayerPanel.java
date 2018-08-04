@@ -96,6 +96,8 @@ public class PlayerPanel extends FContainer {
         setPlayerName(slot.getName());
         setAvatarIndex(slot.getAvatarIndex());
 
+        cbTeam.setEnabled(true);
+
         btnDeck.setEnabled(false); //disable deck button until done loading decks
 
         boolean isAi = isAi();
@@ -250,9 +252,6 @@ public class PlayerPanel extends FContainer {
             setMayEdit(false);
         }
         setMayControl(mayControl0);
-
-        //disable team combo boxes for now
-        cbTeam.setEnabled(true);
     }
 
     public void initialize(FPref savedStateSetting, FPref savedStateSettingCommander, FPref savedStateSettingTinyLeader, FPref savedStateSettingBrawl, DeckType defaultDeckType) {
@@ -507,7 +506,7 @@ public class PlayerPanel extends FContainer {
         for (int i = 1; i <= LobbyScreen.MAX_PLAYERS; i++) {
             cbTeam.addItem("Team " + i);
         }
-        cbTeam.setEnabled(true);
+        cbTeam.setEnabled(mayEdit);
     }
 
     private FEventHandler teamChangedHandler = new FEventHandler() {
@@ -696,6 +695,7 @@ public class PlayerPanel extends FContainer {
         txtPlayerName.setEnabled(mayEdit);
         nameRandomiser.setEnabled(mayEdit);
         humanAiSwitch.setEnabled(mayEdit);
+        cbTeam.setEnabled(mayEdit);
         updateVariantControlsVisibility();
 
         //if panel has height already, ensure height updated to account for button visibility changes
