@@ -27,6 +27,7 @@ import forge.game.event.GameEventCardAttachment.AttachMethod;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.TriggerType;
 import forge.util.collect.FCollection;
 
@@ -336,6 +337,17 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
                 c.unEnchantEntity(this);
             }
         }
+    }
+
+    public boolean canBeEnchantedBy(final Card aura) {
+        SpellAbility sa = aura.getFirstAttachSpell();
+        TargetRestrictions tgt = null;
+        if (sa != null) {
+            tgt = sa.getTargetRestrictions();
+        }
+
+        return !(hasProtectionFrom(aura)
+                || ((tgt != null) && !isValid(tgt.getValidTgts(), aura.getController(), aura, sa)));
     }
 
     public abstract boolean hasProtectionFrom(final Card source);

@@ -272,6 +272,7 @@ Treasure
 Vehicle
 [WalkerTypes]
 Ajani
+Aminatou
 Angrath
 Arlinn
 Ashiok
@@ -281,6 +282,7 @@ Dack
 Daretti
 Domri
 Dovin
+Estrid
 Elspeth
 Freyalise
 Garruk
@@ -311,6 +313,7 @@ Ugin
 Venser
 Vraska
 Will
+Windgrace
 Xenagos
 Yanggu
 Yanling
