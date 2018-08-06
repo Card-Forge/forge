@@ -7,6 +7,7 @@ Ajani, Caller of the Pride|Ajani's Menagerie|You're a crazy cat lady now!
 Ajani, Mentor of Heroes|Ajani's Vitality|Do sta let!
 Ajani, Valiant Protector|Ajani's Valiant Smash|Sometimes, life can be brutal.
 Ajani, Wise Counselor|Ajani's Mega-growth|Let's just pile these on...
+Aminatou, the Fateshifter|Aminatou's Twist of Fate|Let's shuffle this a bit.
 Angrath, Minotaur Pirate|Angrath's Massacre|All we have to do is kill everyone who tries to steal Orazca from our grasp.
 Angrath, the Flame-Chained|Angrath's Torture|If you will not tell me where the Immortal Sun is, knight, then you will die.
 Arlinn, Embraced by the Moon|Arlinn's Hunt|Fair fight? What fair fight?
@@ -28,6 +29,7 @@ Dovin Baan|Dovin's Static|Have you tried to turn it off and on again?
 Elspeth Tirel|Elspeth's Solitude|Tokens are my only friends...
 Elspeth, Knight-Errant|Elspeth's Endurance|Bant will prevail!
 Elspeth, Sun's Champion|Elspeth's Crusade|With Heliod on my side, I'm invincible!
+Estrid, the Masked|Estrid's Replenishing Blast|Let the masquerade begin.
 Freyalise, Llanowar's Fury|Freyalise's Big Party|Let's celebrate each and every one of you!
 Garruk, the Veil-Cursed|Garruk's Graveyard|The dead shall help the living!
 Garruk Wildspeaker|Garruk's Overrun|I speak seven languages, including Wild!
@@ -67,6 +69,7 @@ Liliana, Defiant Necromancer|Liliana's Necromastery|Come join the Dark Side...
 Liliana, the Last Hope|Liliana's Army|The dead will always outnumber the living...
 Liliana, the Necromancer|Liliana's Recycling|Old foes to new servants, and it's environmentally friendly!
 Liliana, Untouched by Death|Liliana's Graveyard Party|What? I'm not touching you!
+Lord Windgrace|Windgrace's Hunting Party|Let me show you a true cat-astrophe.
 Nahiri, the Harbinger|Nahiri's Mystery Guest|This should be your cue to run.
 Nahiri, the Lithomancer|Nahiri's Gift|I pulled it out! Now I'm a king!
 Narset Transcendent|Narset's One Rule|No spells for you!
@@ -86,6 +89,7 @@ Ob Nixilis of the Black Oath|Nixilis's Black Oath|We all have to bring sacrifice
 Ob Nixilis Reignited|Ob Nixilis's Torment|I'll give you dreams from beyond the underworld!
 Ral Zarek|Ral's Long Day|So much work, so much time!
 Saheeli Rai|Saheeli's Creativity|I love when all the pieces come together!
+Saheeli, the Gifted|Saheeli's Doubling Season|Polished to mirror sheen.
 Samut, the Tested|Samut's Rapid Deployment|My friends will be here in a flash.
 Sarkhan Vol|Sarkhan's Dragons|Go forth, my minions!
 Sarkhan the Mad|Sarkhan's Beatdown|Tag! You're it!
