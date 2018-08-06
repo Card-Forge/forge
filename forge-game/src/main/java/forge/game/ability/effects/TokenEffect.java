@@ -297,75 +297,8 @@ public class TokenEffect extends SpellAbilityEffect {
                     tok.setTapped(true);
                 }
 
-                if (sa.hasParam("AttachedTo")) {
-                    GameObject aTo = Iterables.getFirst(
-                            AbilityUtils.getDefinedObjects(host, sa.getParam("AttachedTo"), sa), null);
-
-                    if (aTo instanceof GameEntity) {
-                        GameEntity ge = (GameEntity)aTo;
-                        // check what the token would be on the battlefield
-                        Card lki = CardUtil.getLKICopy(tok);
-
-                        lki.setLastKnownZone(tok.getController().getZone(ZoneType.Battlefield));
-
-                        CardCollection preList = new CardCollection(lki);
-                        game.getAction().checkStaticAbilities(false, Sets.newHashSet(lki), preList);
-
-                        // TODO update when doing Attach Update
-                        boolean canAttach = lki.isAura() || lki.isEquipment() || lki.isFortification();
-
-                        if (lki.isAura()) {
-                            if (!ge.canBeEnchantedBy(lki)) {
-                                canAttach = false;
-                            }
-                        }
-                        if (lki.isEquipment()) {
-                            if (ge instanceof Card) {
-                                Card gc = (Card) ge;
-                                if (!gc.canBeEquippedBy(lki)) {
-                                    canAttach = false;
-                                }
-                            } else {
-                                canAttach = false;
-                            }
-                        }
-                        if (lki.isFortification()) {
-                            if (ge instanceof Card) {
-                                Card gc = (Card) ge;
-                                if (!gc.isLand()) {
-                                    canAttach = false;
-                                }
-                            } else {
-                                canAttach = false;
-                            }
-                        }
-
-                        // reset static abilities
-                        game.getAction().checkStaticAbilities(false);
-
-                        if (!canAttach) {
-                            // Token can't attach it
-                            continue;
-                        }
-
-                        // TODO update when doing Attach Update
-                        if (lki.isAura()) {
-                            tok.enchantEntity(ge);
-                        } else if (lki.isEquipment()) {
-                            if (ge instanceof Card) {
-                                Card gc = (Card) ge;
-                                tok.equipCard(gc);
-                            }
-                        } else if (lki.isFortification()) {
-                            if (ge instanceof Card) {
-                                Card gc = (Card) ge;
-                                tok.fortifyCard(gc);
-                            }
-                        }
-                    } else {
-                        // not a GameEntity, cant be attach
-                        continue;
-                    }
+                if (sa.hasParam("AttachedTo") && !attachTokenTo(tok, sa)) {
+                    continue;
                 }
 
                 // Should this be catching the Card that's returned?
@@ -545,5 +478,80 @@ public class TokenEffect extends SpellAbilityEffect {
             }
         }
         return combatChanged;
+    }
+
+    private boolean attachTokenTo(Card tok, SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        final Game game = host.getGame();
+
+        GameObject aTo = Iterables.getFirst(
+                AbilityUtils.getDefinedObjects(host, sa.getParam("AttachedTo"), sa), null);
+
+        if (aTo instanceof GameEntity) {
+            GameEntity ge = (GameEntity)aTo;
+            // check what the token would be on the battlefield
+            Card lki = CardUtil.getLKICopy(tok);
+
+            lki.setLastKnownZone(tok.getController().getZone(ZoneType.Battlefield));
+
+            CardCollection preList = new CardCollection(lki);
+            game.getAction().checkStaticAbilities(false, Sets.newHashSet(lki), preList);
+
+            // TODO update when doing Attach Update
+            boolean canAttach = lki.isAura() || lki.isEquipment() || lki.isFortification();
+
+            if (lki.isAura()) {
+                if (!ge.canBeEnchantedBy(lki)) {
+                    canAttach = false;
+                }
+            }
+            if (lki.isEquipment()) {
+                if (ge instanceof Card) {
+                    Card gc = (Card) ge;
+                    if (!gc.canBeEquippedBy(lki)) {
+                        canAttach = false;
+                    }
+                } else {
+                    canAttach = false;
+                }
+            }
+            if (lki.isFortification()) {
+                if (ge instanceof Card) {
+                    Card gc = (Card) ge;
+                    if (!gc.isLand()) {
+                        canAttach = false;
+                    }
+                } else {
+                    canAttach = false;
+                }
+            }
+
+            // reset static abilities
+            game.getAction().checkStaticAbilities(false);
+
+            if (!canAttach) {
+                // Token can't attach it
+                return false;
+            }
+
+            // TODO update when doing Attach Update
+            if (lki.isAura()) {
+                tok.enchantEntity(ge);
+            } else if (lki.isEquipment()) {
+                if (ge instanceof Card) {
+                    Card gc = (Card) ge;
+                    tok.equipCard(gc);
+                }
+            } else if (lki.isFortification()) {
+                if (ge instanceof Card) {
+                    Card gc = (Card) ge;
+                    tok.fortifyCard(gc);
+                }
+            }
+            return true;
+        } else {
+            // not a GameEntity, cant be attach
+            return false;
+        }
     }
 }
