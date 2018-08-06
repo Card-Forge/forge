@@ -2,9 +2,11 @@ Ajani Goldmane|Ajani's Avatar|Serra? Is that you?
 Ajani Steadfast|Ajani's Forcefield|Shields up!
 Ajani Unyielding|Ajani's Mentoring|Today's lesson: How to be strong.
 Ajani Vengeant|Ajani's Tantrum|Look Ma! No lands!
+Ajani, Adversary of Tyrants|Ajani's House of Cats|Here, kitty, kitty, kitty...
 Ajani, Caller of the Pride|Ajani's Menagerie|You're a crazy cat lady now!
 Ajani, Mentor of Heroes|Ajani's Vitality|Do sta let!
 Ajani, Valiant Protector|Ajani's Valiant Smash|Sometimes, life can be brutal.
+Ajani, Wise Counselor|Ajani's Mega-growth|Let's just pile these on...
 Angrath, Minotaur Pirate|Angrath's Massacre|All we have to do is kill everyone who tries to steal Orazca from our grasp.
 Angrath, the Flame-Chained|Angrath's Torture|If you will not tell me where the Immortal Sun is, knight, then you will die.
 Arlinn, Embraced by the Moon|Arlinn's Hunt|Fair fight? What fair fight?
@@ -63,11 +65,14 @@ Liliana, Death's Majesty|Liliana's Wrath|Everybody died... except for those who 
 Liliana, Death Wielder|Liliana's Mass Raise|Death is no excuse to stop working.
 Liliana, Defiant Necromancer|Liliana's Necromastery|Come join the Dark Side...
 Liliana, the Last Hope|Liliana's Army|The dead will always outnumber the living...
+Liliana, the Necromancer|Liliana's Recycling|Old foes to new servants, and it's environmentally friendly!
+Liliana, Untouched by Death|Liliana's Graveyard Party|What? I'm not touching you!
 Nahiri, the Harbinger|Nahiri's Mystery Guest|This should be your cue to run.
 Nahiri, the Lithomancer|Nahiri's Gift|I pulled it out! Now I'm a king!
 Narset Transcendent|Narset's One Rule|No spells for you!
 Nicol Bolas, God-Pharaoh|Bolas's Cleansing|Let's just tear this down and start again. Or... maybe tearing it down will suffice.
 Nicol Bolas, Planeswalker|Bolas's Ultimatum|Whatever you do, don't call him "Nicol"!
+Nicol Bolas, the Arisen|Bolas's Mind Wipe|Anything Jace can do, I can do better.
 Nicol Bolas, the Deceiver|Bolas's Cunning Hit|I know exactly how to hurt you.
 Nissa Revane|Nissa's Summoning|The whole village is here!
 Nissa, Genesis Mage|Nissa's Genesis Wave|Let's see who shows up.
@@ -84,6 +89,8 @@ Saheeli Rai|Saheeli's Creativity|I love when all the pieces come together!
 Samut, the Tested|Samut's Rapid Deployment|My friends will be here in a flash.
 Sarkhan Vol|Sarkhan's Dragons|Go forth, my minions!
 Sarkhan the Mad|Sarkhan's Beatdown|Tag! You're it!
+Sarkhan, Dragonsoul|Sarkhan's Dragon Search|They can hide anywhere.
+Sarkhan, Fireblood|Sarkhan's Call for Friends|My minions, meet the meat.
 Sarkhan, the Dragonspeaker|Sarkhan's Voices|Huh? What are you saying?
 Sarkhan Unbroken|Sarkhan's Dragonstorm|Skies full of dragons! Oh, what a glorious day!
 Sorin Markov|Sorin's Hypnosis|You're getting sleepy... very sleepy...
@@ -98,10 +105,14 @@ Teferi, Timebender|Teferi's Time Warp|Let's do that again!
 Tezzeret the Schemer|Tezzeret's Assembly Line|Smashing, isn't it?
 Tezzeret the Seeker|Tezzeret's Robots|You can't stop the progress!
 Tezzeret, Agent of Bolas|Tezzeret's Drain|Technological superiority for the win!
+Tezzeret, Artifice Master|Tezzeret's Planar Bridge|What's behind the door number one?
+Tezzeret, Cruel Machinist|Tezzeret's Artificial Morph|Ixidor, Ugin... THIS is how you do it!
 Tezzeret, Master of Metal|Tezzeret's Confiscation|Your stuff will serve a grander design - mine.
 Tibalt, the Fiend-Blooded|Tibalt's Treason|My side is the winning side!
 Ugin, the Spirit Dragon|Ugin's Anti-Ultimatum|A ragtag band of misfits, brought from the future...
 Venser, the Sojourner|Venser's Oblivion|Let's just clean this up a bit...
+Vivien of the Arkbow|Vivien's Overrun|No, never heard of a 'Garruk' -- why do you ask?
+Vivien Reid|Vivien's Utter Pandemonium|They're so cute when they're stampeding.
 Vraska, Scheming Gorgon|Vraska's Stone Gaze|I think we could use a new figurehead!
 Vraska the Unseen|Vraska's Crew|Say hello to my little friends!
 Vraska, Relic Seeker|Vraska's Mark|Never play hide and seek with a Gorgon.
