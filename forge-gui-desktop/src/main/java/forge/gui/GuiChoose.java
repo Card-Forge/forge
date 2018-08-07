@@ -167,7 +167,7 @@ public class GuiChoose {
                                     paper = FModel.getMagicDb().getVariantCards().getUniqueByName(face.getName());
                                 }
 
-                                if (paper != null && !paper.getName().equals(face.getName())) {
+                                if (paper != null) {
                                     Card c = Card.getCardForUi(paper);
                                     boolean foundState = false;
                                     for (CardStateName cs : c.getStates()) {
@@ -181,8 +181,6 @@ public class GuiChoose {
                                     if (!foundState) {
                                         matchUI.setCard(paper);
                                     }
-                                } else {
-                                    matchUI.setCard(paper);
                                 }
 
                                 return;
