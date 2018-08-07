@@ -2056,9 +2056,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sbAfter.append(")");
                 sbAfter.append("\r\n");
             } else if (keyword.startsWith("Replicate")) {
-                // currently Replicate ignores the cost there
-
-                final String[] n = keyword.split(" ");
+                final String[] n = keyword.split(":");
                 final Cost cost = new Cost(n[1], false);
                 sbBefore.append("Replicate ").append(cost.toSimpleString());
                 sbBefore.append(" (When you cast this spell, copy it for each time you paid its replicate cost.");
