@@ -555,9 +555,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     // location
                     if (tgtC.isAura()) {
                         final SpellAbility saAura = tgtC.getFirstAttachSpell();
-                        saAura.setActivatingPlayer(sa.getActivatingPlayer());
-                        if (!saAura.getTargetRestrictions().hasCandidates(saAura, false)) {
-                            continue;
+                        if (saAura != null) {
+                            saAura.setActivatingPlayer(sa.getActivatingPlayer());
+                            if (!saAura.getTargetRestrictions().hasCandidates(saAura, false)) {
+                                continue;
+                            }
                         }
                     }
 
