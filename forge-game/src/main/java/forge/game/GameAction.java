@@ -192,7 +192,7 @@ public class GameAction {
 
             if (!c.isToken()) {
                 if (c.isCloned()) {
-                    c.switchStates(CardStateName.Cloner, CardStateName.Original, false);
+                    c.switchStates(CardStateName.Original, CardStateName.Cloner, false);
                     c.setState(CardStateName.Original, false);
                     c.clearStates(CardStateName.Cloner, false);
                     if (c.isFlipCard()) {
