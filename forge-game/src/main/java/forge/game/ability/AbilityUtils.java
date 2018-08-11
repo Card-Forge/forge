@@ -1680,7 +1680,10 @@ public class AbilityUtils {
             res.setZone(null);
             newSA.setRestrictions(res);
             // timing restrictions still apply
-            if (res.checkTimingRestrictions(tgtCard, newSA) && newSA.checkOtherRestrictions()) {
+            if (res.checkTimingRestrictions(tgtCard, newSA)
+                    // still need to check the other restrictions like Aftermath
+                    && res.checkOtherRestrictions(tgtCard, newSA, controller)
+                    && newSA.checkOtherRestrictions()) {
                 sas.add(newSA);
             }
         }

@@ -382,38 +382,44 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         final Game game = activator.getGame();
 
         // legendary sorcery
-        if (c.isSorcery() && c.getType().isLegendary() &&
-                CardLists.getValidCards(activator.getCardsIn(ZoneType.Battlefield), "Creature.Legendary,Planeswalker.Legendary", c.getController(), c).isEmpty()) {
+        if (c.isSorcery() && c.getType().isLegendary() && CardLists.getValidCardCount(
+                activator.getCardsIn(ZoneType.Battlefield),
+                "Creature.Legendary,Planeswalker.Legendary", c.getController(), c) <= 0) {
             return false;
         }
 
-        if (this.getCardsInHand() != -1) {
-            if (activator.getCardsIn(ZoneType.Hand).size() != this.getCardsInHand()) {
+        // Explicit Aftermath check there
+        if (sa.isAftermath() && !c.isInZone(ZoneType.Graveyard)) {
+            return false;
+        }
+
+        if (getCardsInHand() != -1) {
+            if (activator.getCardsIn(ZoneType.Hand).size() != getCardsInHand()) {
                 return false;
             }
         }
 
-        if (this.getColorToCheck() != null) {
-            if (!sa.getHostCard().hasChosenColor(this.getColorToCheck())) {
+        if (getColorToCheck() != null) {
+            if (!sa.getHostCard().hasChosenColor(getColorToCheck())) {
                 return false;
             }
         }
-        if (this.isHellbent()) {
+        if (isHellbent()) {
             if (!activator.hasHellbent()) {
                 return false;
             }
         }
-        if (this.isThreshold()) {
+        if (isThreshold()) {
             if (!activator.hasThreshold()) {
                 return false;
             }
         }
-        if (this.isMetalcraft()) {
+        if (isMetalcraft()) {
             if (!activator.hasMetalcraft()) {
                 return false;
             }
         }
-        if (this.isDelirium()) {
+        if (isDelirium()) {
             if (!activator.hasDelirium()) {
                 return false;
             }
@@ -423,12 +429,12 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 return false;
             }
         }
-        if (this.isDesert()) {
+        if (isDesert()) {
             if (!activator.hasDesert()) {
                 return false;
             }
         }
-        if (this.isBlessing()) {
+        if (isBlessing()) {
             if (!activator.hasBlessing()) {
                 return false;
             }
