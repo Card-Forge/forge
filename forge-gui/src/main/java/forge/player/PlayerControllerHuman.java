@@ -7,6 +7,7 @@ import com.google.common.collect.*;
 import forge.FThreads;
 import forge.GuiBase;
 import forge.LobbyPlayer;
+import forge.StaticData;
 import forge.achievement.AchievementCollection;
 import forge.ai.GameState;
 import forge.assets.FSkinProp;
@@ -1470,8 +1471,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final String name) {
         final Iterable<ICardFace> cardsFromDb = FModel.getMagicDb().getCommonCards().getAllFaces();
         final List<ICardFace> cards = Lists.newArrayList(Iterables.filter(cardsFromDb, cpp));
-        Collections.sort(cards);
-        return getGui().one(message, cards);
+        CardFaceView cardFaceView;
+        List<CardFaceView> choices = new ArrayList<>();
+        for (ICardFace cardFace : cards) {
+            cardFaceView = new CardFaceView(cardFace.getName());
+            choices.add(cardFaceView);
+        }
+        Collections.sort(choices);
+        cardFaceView = getGui().one(message, choices);
+        return StaticData.instance().getCommonCards().getFaceByName(cardFaceView.getName());
     }
 
     @Override
