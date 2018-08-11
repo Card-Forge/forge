@@ -2767,8 +2767,25 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public List<Card> chooseCardsForSplice(SpellAbility sa, List<Card> cards) {
-        return getGui().many("Choose cards to Splice onto", "Chosen Cards", 0, cards.size(), cards,
-                sa.getHostCard().getView());
+        HashMap<CardView, Card> mapCVtoC = new HashMap<>();
+        for (Card card : cards) {
+            mapCVtoC.put(card.getView(), card);
+        }
+        List<CardView> choices = new ArrayList<CardView>(mapCVtoC.keySet());
+        List<CardView> chosen;
+        chosen = getGui().many(
+                "Choose cards to Splice onto",
+                "Chosen Cards",
+                0,
+                choices.size(),
+                choices,
+                sa.getHostCard().getView()
+        );
+        List<Card> chosenCards = new ArrayList<Card>();
+        for (CardView cardView : chosen) {
+            chosenCards.add(mapCVtoC.get(cardView));
+        }
+        return chosenCards;
     }
 
     /*
