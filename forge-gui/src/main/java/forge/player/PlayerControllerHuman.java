@@ -1387,12 +1387,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public List<AbilitySub> chooseModeForAbility(final SpellAbility sa, final int min, final int num,
             boolean allowRepeat) {
-        final List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
+        final List<AbilitySub> possible = CharmEffect.makePossibleOptions(sa);
+        HashMap<SpellAbilityView, AbilitySub> spellViewCache = new HashMap<>();
+        for (AbilitySub spellAbility : possible) {
+            spellViewCache.put(spellAbility.getView(), spellAbility);
+        }
+        final List<SpellAbilityView> choices = new ArrayList<>(spellViewCache.keySet());
         final String modeTitle = TextUtil.concatNoSpace(sa.getActivatingPlayer().toString(), " activated ",
                 sa.getHostCard().toString(), " - Choose a mode");
         final List<AbilitySub> chosen = Lists.newArrayListWithCapacity(num);
         for (int i = 0; i < num; i++) {
-            AbilitySub a;
+            SpellAbilityView a;
             if (i < min) {
                 a = getGui().one(modeTitle, choices);
             } else {
@@ -1405,7 +1410,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (!allowRepeat) {
                 choices.remove(a);
             }
-            chosen.add(a);
+            chosen.add(spellViewCache.get(a));
         }
         return chosen;
     }
