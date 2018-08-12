@@ -17,6 +17,8 @@
  */
 package forge;
 
+import java.awt.*;
+import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashSet;
@@ -25,6 +27,7 @@ import java.util.concurrent.ExecutionException;
 
 import javax.imageio.ImageIO;
 
+import forge.properties.ForgePreferences;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.cache.CacheBuilder;
@@ -146,6 +149,39 @@ public class ImageCache {
         // Load from file and add to cache if not found in cache initially. 
         BufferedImage original = getImage(imageKey);
 
+        // If the user has indicated that they prefer Forge NOT render a black border, round the image corners
+        // to account for JPEG images that don't have a transparency.
+        boolean noBorder = !isPreferenceEnabled(ForgePreferences.FPref.UI_RENDER_BLACK_BORDERS);
+        if (original != null && noBorder) {
+
+            // use a quadratic equation to calculate the needed radius from an image dimension
+            int radius;
+            float width = original.getWidth();
+            String setCode = imageKey.split("/")[0].trim().toUpperCase();
+            if (setCode.equals("A")) {  // Alpha
+                // radius = 100; // 745 x 1040
+                // radius = 68; // 488 x 680
+                // radius = 25; // 146 x 204
+                radius = (int)(-107.0 *(width * width) / 52648506.0 + 743043.0 * width / 5849834.0 + 171067480.0 / 26324253.0);
+            } else if (setCode.equals("ME2") ||     // Masters Edition II
+                    setCode.equals("ME3") ||        // Masters Edition III
+                    setCode.equals("ME4") ||        // Masters Edition IV
+                    setCode.equals("TD0")           // Commander
+                    ) {
+                // radius = 77; // 745 x 1040
+                // radius = 52; // 488 x 680
+                // radius = 19; // 146 x 204
+                radius = (int)(23.0 * (width * width) / 17549502.0 + 559597.0 * width /5849834.0 + 43923392.0 / 8774751.0);
+            } else {
+                // radius = 65; // 745 x 1040
+                // radius = 45; // 488 x 680
+                // radius = 15; // 146 x 204
+                radius = (int)(-145.0 * (width * width) / 8774751.0 + 287215.0 * width / 2924917.0 + 8911915.0 / 8774751.0);
+            }
+            //System.out.println(setCode + " - " + original.getWidth() + " - " + radius);
+            original = makeRoundedCorner(original, radius);
+        }
+
         // No image file exists for the given key so optionally associate with
         // a default "not available" image, however do not add it to the cache,
         // as otherwise it's problematic to update if the real image gets fetched.
@@ -228,5 +264,33 @@ public class ImageCache {
             // should be when a card legitimately has no image
             return null;
         }
+    }
+
+    private static boolean isPreferenceEnabled(final ForgePreferences.FPref preferenceName) {
+        return FModel.getPreferences().getPrefBoolean(preferenceName);
+    }
+
+    public static BufferedImage makeRoundedCorner(BufferedImage image, int cornerRadius) {
+        int w = image.getWidth();
+        int h = image.getHeight();
+        BufferedImage output = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+
+        Graphics2D g2 = output.createGraphics();
+
+        // so instead fake soft-clipping by first drawing the desired clip shape
+        // in fully opaque black with antialiasing enabled...
+        g2.setComposite(AlphaComposite.Src);
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setColor(Color.BLACK);
+        g2.fill(new RoundRectangle2D.Float(0, 0, w, h, cornerRadius, cornerRadius));
+
+        // ... then compositing the image on top,
+        // using the black shape from above as alpha source
+        g2.setComposite(AlphaComposite.SrcAtop);
+        g2.drawImage(image, 0, 0, null);
+
+        g2.dispose();
+
+        return output;
     }
 }
