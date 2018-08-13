@@ -14,6 +14,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import forge.card.CardStateName;
+import forge.game.card.CardFaceView;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
@@ -160,18 +161,23 @@ public class GuiChoose {
                             if (sel instanceof InventoryItem) {
                                 matchUI.setCard((InventoryItem) list.getSelectedValue());
                                 return;
-                            } else if (sel instanceof ICardFace) {
-                                final ICardFace face = (ICardFace)sel;
-                                PaperCard paper = FModel.getMagicDb().getCommonCards().getUniqueByName(face.getName());
+                            } else if (sel instanceof ICardFace || sel instanceof CardFaceView) {
+                                String faceName;
+                                if (sel instanceof ICardFace) {
+                                    faceName = ((ICardFace) sel).getName();
+                                } else {
+                                    faceName = ((CardFaceView) sel).getName();
+                                }
+                                PaperCard paper = FModel.getMagicDb().getCommonCards().getUniqueByName(faceName);
                                 if (paper == null) {
-                                    paper = FModel.getMagicDb().getVariantCards().getUniqueByName(face.getName());
+                                    paper = FModel.getMagicDb().getVariantCards().getUniqueByName(faceName);
                                 }
 
                                 if (paper != null) {
                                     Card c = Card.getCardForUi(paper);
                                     boolean foundState = false;
                                     for (CardStateName cs : c.getStates()) {
-                                        if (c.getState(cs).getName().equals(face.getName())) {
+                                        if (c.getState(cs).getName().equals(faceName)) {
                                             foundState = true;
                                             c.setState(cs, true);
                                             matchUI.setCard(c.getView());

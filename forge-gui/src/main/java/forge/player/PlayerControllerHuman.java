@@ -7,6 +7,7 @@ import com.google.common.collect.*;
 import forge.FThreads;
 import forge.GuiBase;
 import forge.LobbyPlayer;
+import forge.StaticData;
 import forge.achievement.AchievementCollection;
 import forge.ai.GameState;
 import forge.assets.FSkinProp;
@@ -1387,12 +1388,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public List<AbilitySub> chooseModeForAbility(final SpellAbility sa, final int min, final int num,
             boolean allowRepeat) {
-        final List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
+        final List<AbilitySub> possible = CharmEffect.makePossibleOptions(sa);
+        HashMap<SpellAbilityView, AbilitySub> spellViewCache = new HashMap<>();
+        for (AbilitySub spellAbility : possible) {
+            spellViewCache.put(spellAbility.getView(), spellAbility);
+        }
+        final List<SpellAbilityView> choices = new ArrayList<>(spellViewCache.keySet());
         final String modeTitle = TextUtil.concatNoSpace(sa.getActivatingPlayer().toString(), " activated ",
                 sa.getHostCard().toString(), " - Choose a mode");
         final List<AbilitySub> chosen = Lists.newArrayListWithCapacity(num);
         for (int i = 0; i < num; i++) {
-            AbilitySub a;
+            SpellAbilityView a;
             if (i < min) {
                 a = getGui().one(modeTitle, choices);
             } else {
@@ -1405,7 +1411,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (!allowRepeat) {
                 choices.remove(a);
             }
-            chosen.add(a);
+            chosen.add(spellViewCache.get(a));
         }
         return chosen;
     }
@@ -1465,8 +1471,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final String name) {
         final Iterable<ICardFace> cardsFromDb = FModel.getMagicDb().getCommonCards().getAllFaces();
         final List<ICardFace> cards = Lists.newArrayList(Iterables.filter(cardsFromDb, cpp));
-        Collections.sort(cards);
-        return getGui().one(message, cards);
+        CardFaceView cardFaceView;
+        List<CardFaceView> choices = new ArrayList<>();
+        for (ICardFace cardFace : cards) {
+            cardFaceView = new CardFaceView(cardFace.getName());
+            choices.add(cardFaceView);
+        }
+        Collections.sort(choices);
+        cardFaceView = getGui().one(message, choices);
+        return StaticData.instance().getCommonCards().getFaceByName(cardFaceView.getName());
     }
 
     @Override
@@ -2762,8 +2775,25 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public List<Card> chooseCardsForSplice(SpellAbility sa, List<Card> cards) {
-        return getGui().many("Choose cards to Splice onto", "Chosen Cards", 0, cards.size(), cards,
-                sa.getHostCard().getView());
+        HashMap<CardView, Card> mapCVtoC = new HashMap<>();
+        for (Card card : cards) {
+            mapCVtoC.put(card.getView(), card);
+        }
+        List<CardView> choices = new ArrayList<CardView>(mapCVtoC.keySet());
+        List<CardView> chosen;
+        chosen = getGui().many(
+                "Choose cards to Splice onto",
+                "Chosen Cards",
+                0,
+                choices.size(),
+                choices,
+                sa.getHostCard().getView()
+        );
+        List<Card> chosenCards = new ArrayList<Card>();
+        for (CardView cardView : chosen) {
+            chosenCards.add(mapCVtoC.get(cardView));
+        }
+        return chosenCards;
     }
 
     /*
