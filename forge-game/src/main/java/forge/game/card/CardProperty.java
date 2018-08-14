@@ -1069,6 +1069,12 @@ public class CardProperty {
                         return false;
                     }
                     checkCard = (Card) triggeringObject;
+                } else if (restriction.startsWith("Remembered")) {
+                    final Object rememberedObject = source.getFirstRemembered();
+                    if (!(rememberedObject instanceof Card)) {
+                        return false;
+                    }
+                    checkCard = (Card) rememberedObject;
                 } else {
                     return false;
                 }
