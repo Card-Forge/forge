@@ -1,0 +1,15 @@
+[metadata]
+Name:Possibility Storm - Magic Core Set 2019 #05
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2018/08/075.-M195.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Remember that your solution must work for all possible blocking scenarios.
+[state]
+humanlife=20
+ailife=8
+activeplayer=human
+activephase=MAIN1
+humanhand=Arcane Adaptation;Sun-Collared Raptor;Elvish Clancaller;Death Baron;Vizier of Many Faces
+humanbattlefield=Forerunner of the Empire;Festering Mummy;Lurching Rotbeast;Ghirapur Guide;Cultivator of Blades;Fetid Pools;Fetid Pools;Fetid Pools;Sheltered Thicket;Sheltered Thicket;Sheltered Thicket
+aibattlefield=Carrion Screecher;Glory-Bound Initiate;Benalish Marshal;Audacious Infiltrator;Marauding Boneslasher
