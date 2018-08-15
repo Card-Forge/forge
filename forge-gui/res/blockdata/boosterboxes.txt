@@ -102,3 +102,4 @@ RIX: 36 Boosters
 A25: 24 Boosters
 DOM: 36 Boosters
 BBD: 36 Boosters
+M19: 36 Boosters
