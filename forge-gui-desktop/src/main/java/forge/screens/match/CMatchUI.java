@@ -200,7 +200,7 @@ public final class CMatchUI
 
     @Override
     protected void updateCurrentPlayer(final PlayerView player) {
-        // Update toggle buttons in dev mdoe panel
+        // Update toggle buttons in dev mode panel
         getCDev().update();
     }
 
