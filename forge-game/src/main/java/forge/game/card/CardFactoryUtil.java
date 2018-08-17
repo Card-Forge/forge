@@ -3819,24 +3819,15 @@ public class CardFactoryUtil {
 
             
         } else if (keyword.startsWith("Fortify")) {
-            final String equipString = keyword.substring(7);
-            final String[] equipExtras = equipString.contains("|") ? equipString.split("\\|", 2) : null;
+            String[] k = keyword.split(":");
             // Get cost string
-            String equipCost = "";
-            if (equipExtras != null) {
-                equipCost = equipExtras[0].trim();
-            } else {
-                equipCost = equipString.trim();
-            }
+            String equipCost = k[1];
             // Create attach ability string
             final StringBuilder abilityStr = new StringBuilder();
             abilityStr.append("AB$ Attach | Cost$ ");
             abilityStr.append(equipCost);
             abilityStr.append(" | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control ");
             abilityStr.append("| SorcerySpeed$ True | AILogic$ Pump | IsPresent$ Fortification.Self+nonCreature ");
-            if (equipExtras != null) {
-                abilityStr.append("| ").append(equipExtras[1]).append(" ");
-            }
             abilityStr.append("| PrecostDesc$ Fortify");
             Cost cost = new Cost(equipCost, true);
             abilityStr.append(cost.isOnlyManaCost() ? " " : "—");
