@@ -2768,10 +2768,10 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
             inst.addTrigger(trigger);
         } else if (keyword.startsWith("Poisonous")) {
-            final String[] k = keyword.split(" ");
+            final String[] k = keyword.split(":");
             final String n = k[1];
             final String trigStr = "Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Secondary$ True"
-                    + " | TriggerZones$ Battlefield | TriggerDescription$ " + keyword + " (" + inst.getReminderText() + ")";
+                    + " | TriggerZones$ Battlefield | TriggerDescription$ Poisonous " + n + " (" + inst.getReminderText() + ")";
 
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
 
