@@ -128,7 +128,7 @@ Type=Other
 121 R Sunrise Sovereign
 122 R Taurean Mauler
 123 U Thundercloud Shaman
-124 R R Tuktuk the Explorer
+124 R Tuktuk the Explorer
 125 R Tyrant's Familiar
 126 R Volcanic Offering
 127 U Warchief Giant
@@ -161,7 +161,7 @@ Type=Other
 154 R Duneblast
 155 U Enduring Scalelord
 156 R Fathom Mage
-157 M M Ghave, Guru of Spores
+157 M Ghave, Guru of Spores
 158 U Juniper Order Ranger
 159 M Master Biomancer
 160 R Merciless Eviction
