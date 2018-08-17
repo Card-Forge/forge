@@ -432,7 +432,9 @@ public final class SLayoutIO {
                 for(EDocID edoc : kv.getValue()) {
                     try {
                         //System.out.println(String.format("adding doc %s -> %s",  edoc, edoc.getDoc()));
-                        cell.addDoc(edoc.getDoc());
+                        if (edoc.getDoc() != null ) {
+                            cell.addDoc(edoc.getDoc());
+                        }
                     }
                     catch (IllegalArgumentException e) {
                         System.err.println("Failed to get doc for " + edoc); 
