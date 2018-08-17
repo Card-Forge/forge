@@ -2109,7 +2109,7 @@ public class CardFactoryUtil {
         String keyword = inst.getOriginal();
 
         if (keyword.startsWith("Afflict")) {
-            final String[] k = keyword.split(" ");
+            final String[] k = keyword.split(":");
             final String n = k[1];
 
             final String trigStr = "Mode$ AttackerBlocked | ValidCard$ Card.Self | TriggerZones$ Battlefield " +
