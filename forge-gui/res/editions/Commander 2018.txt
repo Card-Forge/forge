@@ -57,7 +57,7 @@ Type=Other
 48 M Varina, Lich Queen
 49 R Windgrace's Judgment
 50 R Xantcha, Sleeper Agent
-51 M Yennet, Crypt Sovereign
+51 M Yennett, Cryptic Sovereign
 52 R Yuriko, the Tiger's Shadow
 53 R Ancient Stone Idol
 54 R Coveted Jewel
