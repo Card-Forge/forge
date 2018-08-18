@@ -504,7 +504,11 @@ public class WrappedAbility extends Ability {
                 || ApiType.MoveCounter.equals(sa.getApi())
                 || ApiType.RemoveCounter.equals(sa.getApi())
                 || ApiType.AddOrRemoveCounter.equals(sa.getApi())
-                || ApiType.MoveCounter.equals(sa.getApi())) {
+                || ApiType.MoveCounter.equals(sa.getApi())
+
+                // Token has no Defined it should not be timestamp problems
+                || ApiType.Token.equals(sa.getApi())
+                ) {
             return;
         }
 
