@@ -7,10 +7,22 @@ import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.List;
 import java.util.Map.Entry;
+import java.util.SortedSet;
+import java.util.TreeMap;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
+import com.thoughtworks.xstream.converters.ConversionException;
+import com.thoughtworks.xstream.security.NoTypePermission;
+import com.thoughtworks.xstream.security.NullPermission;
+import com.thoughtworks.xstream.security.PrimitiveTypePermission;
+import forge.deck.Deck;
+import forge.deck.DeckSection;
+import forge.error.BugReporter;
 import org.apache.commons.lang3.StringUtils;
 
 import com.thoughtworks.xstream.XStream;
@@ -40,6 +52,25 @@ public class GauntletIO {
 
     protected static XStream getSerializer(final boolean isIgnoring) {
         final XStream xStream = isIgnoring ? new IgnoringXStream() : new XStream();
+        // clear out existing permissions and set our own
+        xStream.addPermission(NoTypePermission.NONE);
+        // allow some basics
+        xStream.addPermission(NullPermission.NULL);
+        xStream.addPermission(PrimitiveTypePermission.PRIMITIVES);
+        xStream.allowTypeHierarchy(String.class);
+        xStream.allowTypeHierarchy(EnumMap.class);
+        xStream.allowTypeHierarchy(ArrayList.class);
+        xStream.allowTypeHierarchy(CardPool.class);
+        xStream.allowTypeHierarchy(SortedSet.class);
+        xStream.allowTypeHierarchy(Deck.class);
+        xStream.allowTypeHierarchy(TreeMap.class);
+        xStream.allowTypeHierarchy(List.class);
+        xStream.allowTypeHierarchy(DeckSection.class);
+        // allow any type from the same package
+        xStream.allowTypesByWildcard(new String[] {
+                GauntletIO.class.getPackage().getName()+".*",
+                String.class.getPackage().getName()+".*"
+        });
         xStream.registerConverter(new DeckSectionToXml());
         xStream.autodetectAnnotations(true);
         return xStream;
@@ -92,6 +123,9 @@ public class GauntletIO {
         }
         catch (final IOException e) {
             e.printStackTrace();
+        }
+        catch (final ConversionException e) {
+            BugReporter.reportException(e);
         }
         catch (final Exception e) { //if there's a non-IO exception, delete the corrupt file
             e.printStackTrace();
