@@ -174,7 +174,8 @@ public final class GameActionUtil {
         }
 
         if (sa.isCycling() && activator.hasKeyword("CyclingForZero")) {
-            final SpellAbility newSA = sa.copyWithNoManaCost();
+            // set the cost to this directly to buypass non mana cost
+            final SpellAbility newSA = sa.copyWithDefinedCost("Discard<1/CARDNAME>");
             newSA.setBasicSpell(false);
             newSA.getMapParams().put("CostDesc", ManaCostParser.parse("0"));
             // makes new SpellDescription
