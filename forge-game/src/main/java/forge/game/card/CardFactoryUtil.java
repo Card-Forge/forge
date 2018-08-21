@@ -2362,7 +2362,7 @@ public class CardFactoryUtil {
                     + "TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ "
                     + "Exalted (" + inst.getReminderText() + ")";
 
-            final String effect = "DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +1 | NumDef$ +1";
+            final String effect = "DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +1 | NumDef$ +1";
             final Trigger trigger = TriggerHandler.parseTrigger(trig, card, intrinsic);
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
 
@@ -2441,7 +2441,7 @@ public class CardFactoryUtil {
                     " | TriggerZones$ Battlefield | Secondary$ True " +
                     " | TriggerDescription$ Flanking (" + inst.getReminderText() + ")");
 
-            final String effect = "DB$ Pump | Defined$ TriggeredBlocker | NumAtt$ -1 | NumDef$ -1";
+            final String effect = "DB$ Pump | Defined$ TriggeredBlockerLKICopy | NumAtt$ -1 | NumDef$ -1";
 
             final Trigger trigger = TriggerHandler.parseTrigger(trigFlanking.toString(), card, intrinsic);
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
@@ -2645,7 +2645,7 @@ public class CardFactoryUtil {
             final String trigStr = "Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True " +
                     " | TriggerDescription$ Melee (" + inst.getReminderText() + ")";
 
-            final String effect = "DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ MeleeX | NumDef$ MeleeX";
+            final String effect = "DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ MeleeX | NumDef$ MeleeX";
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
             
             SpellAbility sa = AbilityFactory.getAbility(effect, card);
@@ -2818,7 +2818,7 @@ public class CardFactoryUtil {
                     " | ValidBlocker$ Creature | MinBlockers$ 1 | Secondary$ True " +
                     " | TriggerDescription$ Rampage " + n + " (" + inst.getReminderText() + ")";
 
-            final String effect = "DB$ Pump | Defined$ TriggeredAttacker" +
+            final String effect = "DB$ Pump | Defined$ TriggeredAttackerLKICopy" +
                     " | NumAtt$ Rampage" + n + " | NumDef$ Rampage" + n;
 
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
