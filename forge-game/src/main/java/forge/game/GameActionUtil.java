@@ -109,7 +109,7 @@ public final class GameActionUtil {
                 final SpellAbility newSA = sa.copy(activator);
                 final SpellAbilityRestriction sar = newSA.getRestrictions();
                 if (o.isWithFlash()) {
-                	sar.setInstantSpeed(true);
+                    sar.setInstantSpeed(true);
                 }
                 sar.setZone(null);
                 newSA.setMayPlay(o.getAbility());
@@ -186,6 +186,15 @@ public final class GameActionUtil {
             alternatives.add(newSA);
         }
 
+        if (sa.hasParam("Equip") && activator.hasKeyword("EquipInstantSpeed")) {
+            final SpellAbility newSA = sa.copy(activator);
+            SpellAbilityRestriction sar = newSA.getRestrictions();
+            sar.setSorcerySpeed(false);
+            sar.setInstantSpeed(true);
+            newSA.setDescription(sa.getDescription() + " (you may activate any time you could cast an instant )");
+            alternatives.add(newSA);
+        }
+
         for (final KeywordInterface inst : source.getKeywords()) {
             final String keyword = inst.getOriginal();
             if (sa.isSpell() && keyword.startsWith("Flashback")) {
@@ -206,15 +215,6 @@ public final class GameActionUtil {
                     flashback.setPayCosts(new Cost(k[1], false));
                 }
                 alternatives.add(flashback);
-            }
-
-            if (sa.hasParam("Equip") && sa instanceof AbilityActivated && keyword.equals("EquipInstantSpeed")) {
-                final SpellAbility newSA = sa.copy(activator);
-                SpellAbilityRestriction sar = newSA.getRestrictions();
-                sar.setSorcerySpeed(false);
-                sar.setInstantSpeed(true);
-                newSA.setDescription(sa.getDescription() + " (you may activate any time you could cast an instant )");
-                alternatives.add(newSA);
             }
         }
         return alternatives;
@@ -390,8 +390,8 @@ public final class GameActionUtil {
                     }
                 }
             } else if (keyword.startsWith("Kicker")) {
-            	String[] sCosts = TextUtil.split(keyword.substring(6), ':');
-            	boolean generic = "Generic".equals(sCosts[sCosts.length - 1]);
+                String[] sCosts = TextUtil.split(keyword.substring(6), ':');
+                boolean generic = "Generic".equals(sCosts[sCosts.length - 1]);
                 // If this is a "generic kicker" (Undergrowth), ignore value for kicker creations
                 int numKickers = sCosts.length - (generic ? 1 : 0);
                 for (int i = 0; i < abilities.size(); i++) {
