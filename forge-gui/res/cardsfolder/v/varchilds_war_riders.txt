@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Human Warrior
 PT:3/4
 K:Trample
-K:Rampage 1
+K:Rampage:1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCumUpkeep | TriggerDescription$ Cumulative upkeep—Have an opponent create a 1/1 red Survivor creature token.
 SVar:TrigCumUpkeep:DB$ Charm | Choices$ TrigAgeSurvivor,TrigAgeSacrifice | CharmNum$ 1
 SVar:TrigAgeSurvivor:DB$PutCounter | Defined$ Self | CounterType$ AGE | CounterNum$ 1 | SubAbility$ Survivor
