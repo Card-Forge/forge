@@ -1590,11 +1590,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || keyword.startsWith("CantBeBlockedBy ")
                     || keyword.equals("CARDNAME enters the battlefield tapped.")
                     || keyword.startsWith("UpkeepCost")) {
-            } else if (keyword.startsWith("Provoke") || keyword.startsWith("Ingest") || keyword.equals("Unleash")
-                    || keyword.startsWith("Soulbond") || keyword.equals("Partner") || keyword.equals("Retrace")
+            } else if (keyword.equals("Provoke") || keyword.equals("Ingest") || keyword.equals("Unleash")
+                    || keyword.equals("Soulbond") || keyword.equals("Partner") || keyword.equals("Retrace")
                     || keyword.equals("Living Weapon") || keyword.equals("Myriad") || keyword.equals("Exploit")
                     || keyword.equals("Changeling") || keyword.equals("Delve") || keyword.startsWith("Dredge")
-                    || (keyword.startsWith("Split second") && !sb.toString().contains("Split second"))
+                    || keyword.equals("Split second")
                     || keyword.equals("Suspend") // for the ones without amounnt
                     || keyword.equals("Hideaway") || keyword.equals("Ascend")
                     || keyword.equals("Totem armor") || keyword.equals("Battle cry")
@@ -1607,7 +1607,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift") || keyword.startsWith("Bushido")
                     || keyword.startsWith("Crew") || keyword.startsWith("Tribute") || keyword.startsWith("Absorb")
                     || keyword.startsWith("Graft") || keyword.startsWith("Fading") || keyword.startsWith("Vanishing")
-                    || keyword.startsWith ("Afflict") || keyword.startsWith ("Poisonous")
+                    || keyword.startsWith ("Afflict") || keyword.startsWith ("Poisonous") || keyword.startsWith("Rampage")
                     || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Devour")) {
                 final String[] k = keyword.split(":");
                 sbLong.append(k[0] + " " + k[1] + " (" + inst.getReminderText() + ")");
@@ -1626,8 +1626,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                      || keyword.equals("Exalted") || keyword.equals("Extort")|| keyword.equals("Flanking")
                      || keyword.equals("Horsemanship") || keyword.equals("Infect")|| keyword.equals("Persist")
                      || keyword.equals("Phasing") || keyword.equals("Shadow")|| keyword.equals("Skulk")
-                     || keyword.equals("Undying") || keyword.equals("Wither")
-                    || keyword.startsWith ("Rampage") || keyword.startsWith("Cascade")) {
+                     || keyword.equals("Undying") || keyword.equals("Wither") || keyword.equals("Cascade")) {
                 if (sb.length() != 0) {
                     sb.append("\r\n");
                 }

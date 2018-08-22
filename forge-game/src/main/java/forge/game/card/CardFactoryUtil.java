@@ -2811,7 +2811,7 @@ public class CardFactoryUtil {
                 card.setSVar("BuffedBy", "Card.nonCreature+nonLand"); // for the AI
             }
         } else if (keyword.startsWith("Rampage")) {
-            final String[] k = keyword.split(" ");
+            final String[] k = keyword.split(":");
             final String n = k[1];
 
             final String trigStr = "Mode$ AttackerBlocked | ValidCard$ Card.Self | TriggerZones$ Battlefield " +
