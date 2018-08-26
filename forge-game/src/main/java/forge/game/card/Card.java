@@ -1593,7 +1593,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.equals("Provoke") || keyword.equals("Ingest") || keyword.equals("Unleash")
                     || keyword.equals("Soulbond") || keyword.equals("Partner") || keyword.equals("Retrace")
                     || keyword.equals("Living Weapon") || keyword.equals("Myriad") || keyword.equals("Exploit")
-                    || keyword.equals("Changeling") || keyword.equals("Delve") || keyword.startsWith("Dredge")
+                    || keyword.equals("Changeling") || keyword.equals("Delve")
                     || keyword.equals("Split second")
                     || keyword.equals("Suspend") // for the ones without amounnt
                     || keyword.equals("Hideaway") || keyword.equals("Ascend")
@@ -1603,7 +1603,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.startsWith("Partner:")) {
                 final String[] k = keyword.split(":");
                 sbLong.append("Partner with " + k[1] + " (" + inst.getReminderText() + ")");
-            } else if (keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst")
+            } else if (keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst") || keyword.startsWith("Dredge")
                     || keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift") || keyword.startsWith("Bushido")
                     || keyword.startsWith("Crew") || keyword.startsWith("Tribute") || keyword.startsWith("Absorb")
                     || keyword.startsWith("Graft") || keyword.startsWith("Fading") || keyword.startsWith("Vanishing")
@@ -1965,6 +1965,9 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.startsWith("Ripple")) {
                 sbBefore.append(TextUtil.fastReplace(keyword, ":", " ") + " (" + inst.getReminderText() + ")");
                 sbBefore.append("\r\n");
+            } else if (keyword.startsWith("Dredge")) {
+                sbAfter.append(TextUtil.fastReplace(keyword, ":", " ") + " (" + inst.getReminderText() + ")");
+                sbAfter.append("\r\n");
             } else if (keyword.startsWith("Escalate") || keyword.startsWith("Buyback")) {
                 final String[] k = keyword.split(":");
                 final String manacost = k[1];
