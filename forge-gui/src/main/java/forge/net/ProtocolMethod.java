@@ -87,7 +87,7 @@ public enum ProtocolMethod {
     passPriorityUntilEndOfTurn(Mode.CLIENT),
     passPriority              (Mode.CLIENT),
     nextGameDecision          (Mode.CLIENT, Void.TYPE, NextGameDecision.class),
-    getActivateDescription    (Mode.CLIENT, Void.TYPE, String.class, CardView.class),
+    getActivateDescription    (Mode.CLIENT, String.class, CardView.class),
     concede                   (Mode.CLIENT),
     alphaStrike               (Mode.CLIENT),
     reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE);
