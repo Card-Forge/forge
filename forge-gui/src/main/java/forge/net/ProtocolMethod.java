@@ -159,8 +159,14 @@ public enum ProtocolMethod {
             }
             if (arg != null) {
                 // attempt to Serialize each argument, this will throw an exception if it can't.
-                byte[] serialized = SerializationUtils.serialize((Serializable)arg);
-                SerializationUtils.deserialize(serialized);
+                try {
+                    byte[] serialized = SerializationUtils.serialize((Serializable) arg);
+                    SerializationUtils.deserialize(serialized);
+                } catch (ArrayIndexOutOfBoundsException ex) {
+                    // not sure why this one would be thrown, but it is
+                    // it also doesn't prevent things from working, so, log for now, pending full network rewrite
+                    ex.printStackTrace();
+                }
             }
         }
     }
