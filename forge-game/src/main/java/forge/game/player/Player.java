@@ -1495,28 +1495,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return CardCollection.combine(getCardsIn(Player.ALL_ZONES), getCardsIn(ZoneType.Stack), inboundTokens);
     }
 
-    protected final CardCollectionView getDredge() {
-        final CardCollection dredge = new CardCollection();
-        int cntLibrary = getCardsIn(ZoneType.Library).size();
-        for (final Card c : getCardsIn(ZoneType.Graveyard)) {
-            int nDr = getDredgeNumber(c);
-            if (nDr > 0 && cntLibrary >= nDr) {
-                dredge.add(c);
-            }
-        }
-        return dredge;
-    }
-
-    private static int getDredgeNumber(final Card c) {
-        for (final KeywordInterface k : c.getKeywords()) {
-            final String s = k.getOriginal();
-            if (s.startsWith("Dredge")) {
-                return Integer.parseInt("" + s.charAt(s.length() - 1));
-            }
-        }
-        return 0;
-    }
-
     public final void resetNumDrawnThisTurn() {
         numDrawnThisTurn = 0;
         numDrawnThisDrawStep = 0;

@@ -3241,7 +3241,7 @@ public class CardFactoryUtil {
 
             inst.addReplacement(re);
         } else if (keyword.startsWith("Dredge")) {
-            final String dredgeAmount = keyword.split(" ")[1];
+            final String dredgeAmount = keyword.split(":")[1];
 
             final String actualRep = "Event$ Draw | ActiveZones$ Graveyard | ValidPlayer$ You | "
                     + "Secondary$ True | Optional$ True | CheckSVar$ "
