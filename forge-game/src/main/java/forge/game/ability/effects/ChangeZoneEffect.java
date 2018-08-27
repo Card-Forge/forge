@@ -870,7 +870,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final boolean champion = sa.hasParam("Champion");
         final boolean forget = sa.hasParam("ForgetChanged");
         final boolean imprint = sa.hasParam("Imprint");
-        final String selectPrompt = sa.hasParam("SelectPrompt") ? sa.getParam("SelectPrompt") : MessageUtil.formatMessage("Select a card from {player's} " + Lang.joinHomogenous(origin).toLowerCase(), decider, player);
+        String selectPrompt = sa.hasParam("SelectPrompt") ? sa.getParam("SelectPrompt") : MessageUtil.formatMessage("Select a card from {player's} " + Lang.joinHomogenous(origin).toLowerCase(), decider, player);
         final String totalcmc = sa.getParam("WithTotalCMC");
         int totcmc = AbilityUtils.calculateAmount(source, totalcmc, sa);
 
@@ -879,7 +879,20 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         CardCollection chosenCards = new CardCollection();
         // only multi-select if player can select more than one
         if (changeNum > 1 && allowMultiSelect(decider, sa)) {
-            for (Card card : decider.getController().chooseCardsForZoneChange(destination, origin, sa, fetchList, delayedReveal, selectPrompt, decider)) {
+            List<Card> selectedCards;
+            if (! sa.hasParam("SelectPrompt")) {
+                // new default messaging for multi select
+                if (fetchList.size() > changeNum) {
+                    selectPrompt = MessageUtil.formatMessage("Select up to " + changeNum + "cards from {player's} " + Lang.joinHomogenous(origin).toLowerCase(), decider, player);
+                } else {
+                    selectPrompt = MessageUtil.formatMessage("Select cards from {player's} " + Lang.joinHomogenous(origin).toLowerCase(), decider, player);
+                }
+            }
+            // ensure that selection is within maximum allowed changeNum
+            do {
+                selectedCards = decider.getController().chooseCardsForZoneChange(destination, origin, sa, fetchList, delayedReveal, selectPrompt, decider);
+            } while (selectedCards.size() > changeNum);
+            for (Card card : selectedCards) {
                 chosenCards.add(card);
             };
             // maybe prompt the user if they selected fewer than the maximum possible?
