@@ -40,11 +40,8 @@ import forge.screens.home.sanctioned.CSubmenuSealed;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.storage.IStorage;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
 /**
  * Child controller for limited deck editor UI.
@@ -54,7 +51,7 @@ import java.util.Set;
  * @author Forge
  * @version $Id: DeckEditorCommon.java 12850 2011-12-26 14:55:09Z slapshot5 $
  */
-public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
+public final class CEditorLimited extends CDeckEditor<DeckGroup> {
 
     private final DeckController<DeckGroup> controller;
     private DragCell allDecksParent = null;
@@ -109,10 +106,6 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
         });
     }
 
-    private Deck getSelectedDeck() {
-        return controller.getModel().getHumanDeck();
-    }
-
     //========== Overridden from ACEditorBase
 
     @Override
@@ -163,9 +156,13 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
      */
     @Override
     public void resetTables() {
-        final Deck toEdit = this.getSelectedDeck();
-        this.getCatalogManager().setPool(toEdit.getOrCreate(DeckSection.Sideboard));
-        this.getDeckManager().setPool(toEdit.getMain());
+        this.getCatalogManager().setPool(getHumanDeck().getOrCreate(DeckSection.Sideboard));
+        this.getDeckManager().setPool(getHumanDeck().getMain());
+    }
+
+    @Override
+    protected Boolean isSectionImportable(DeckSection section) {
+        return section != DeckSection.Sideboard && allSections.contains(section);
     }
 
     /*
@@ -179,7 +176,7 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
     }
 
     public static void addBasicLands(ACEditorBase<PaperCard, DeckGroup> editor) {
-        Deck deck = editor.getDeckController().getModel().getHumanDeck();
+        Deck deck = editor.getHumanDeck();
         if (deck == null) { return; }
 
         Set<CardEdition> availableEditionCodes = new HashSet<>();
@@ -204,11 +201,11 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
         switch(sectionMode) {
             case Conspiracy:
                 this.getCatalogManager().setup(ItemManagerConfig.DRAFT_CONSPIRACY);
-                this.getDeckManager().setPool(this.getSelectedDeck().getOrCreate(DeckSection.Conspiracy));
+                this.getDeckManager().setPool(getHumanDeck().getOrCreate(DeckSection.Conspiracy));
                 break;
             case Main:
                 this.getCatalogManager().setup(getScreen() == FScreen.DECK_EDITOR_DRAFT ? ItemManagerConfig.DRAFT_POOL : ItemManagerConfig.SEALED_POOL);
-                this.getDeckManager().setPool(this.getSelectedDeck().getOrCreate(DeckSection.Main));
+                this.getDeckManager().setPool(getHumanDeck().getOrCreate(DeckSection.Main));
                 break;
             default:
                 break;
@@ -228,9 +225,6 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
         resetUI();
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(false);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().setVisible(false);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().setVisible(false);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().setVisible(false);
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setEnabled(false);
         this.getBtnCycleSection().setVisible(true);
 

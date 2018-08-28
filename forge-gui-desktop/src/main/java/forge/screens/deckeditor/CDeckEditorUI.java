@@ -303,7 +303,7 @@ public enum CDeckEditorUI implements ICDoc {
                 final DeckProxy deck = vAllDecks.getLstDecks().stringToItem(currentDeckStr);
                 if (deck != null) {
                     vAllDecks.getLstDecks().setSelectedItem(deck);
-                    childController.getDeckController().load(deck.getPath(), deck.getName());
+                    getCurrentEditorController().getDeckController().load(deck.getPath(), deck.getName());
                 }
             }
         }

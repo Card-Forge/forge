@@ -27,7 +27,6 @@ import forge.screens.deckeditor.views.VCurrentDeck;
  * Controls the "current deck" panel in the deck editor UI.
  *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
- *
  */
 public enum CCurrentDeck implements ICDoc {
     SINGLETON_INSTANCE;
@@ -142,7 +141,7 @@ public enum CCurrentDeck implements ICDoc {
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    ((DeckController<DeckBase>) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController()).newModel();
+                    CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().loadDeck(new Deck());
                     VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().requestFocusInWindow();
                 }
             });
@@ -161,9 +160,9 @@ public enum CCurrentDeck implements ICDoc {
 
         if (file != null) {
             try {
-                ((DeckController<DeckBase>) CDeckEditorUI.SINGLETON_INSTANCE
-                        .getCurrentEditorController().getDeckController())
-                        .setModel(DeckSerializer.fromFile(file));
+                CDeckEditorUI.SINGLETON_INSTANCE
+                    .getCurrentEditorController().getDeckController()
+                    .loadDeck(DeckSerializer.fromFile(file));
 
             } catch (final Exception ex) {
                 //BugReporter.reportException(ex);
@@ -193,8 +192,8 @@ public enum CCurrentDeck implements ICDoc {
     /** */
     @SuppressWarnings("unchecked")
     private void exportDeck() {
-        final DeckController<Deck> controller = (DeckController<Deck>)
-                CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController();
+        final DeckController<? extends DeckBase> controller =
+            CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController();
 
         final File filename = this.getExportFilename();
         if (filename == null) {
@@ -204,11 +203,13 @@ public enum CCurrentDeck implements ICDoc {
         //create copy of deck to save under new name
         String name = filename.getName();
         name = name.substring(0, name.lastIndexOf(".")); //remove extension
-        final Deck deck = (Deck)controller.getModel().copyTo(name);
+        Deck deck = (Deck) controller.getModel().getHumanDeck().copyTo(name);
 
         try {
             DeckSerializer.writeDeck(deck, filename);
-            controller.setModel(DeckSerializer.fromFile(filename)); //reload deck from file so everything is in sync
+            final Deck deserialized = DeckSerializer.fromFile(filename);
+            //reload deck from file so everything is in sync
+            CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().loadDeck(deserialized);
         } catch (final Exception ex) {
             //BugReporter.reportException(ex);
             throw new RuntimeException("Error exporting deck." + ex);
