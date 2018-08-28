@@ -1655,7 +1655,8 @@ public class AbilityUtils {
                 String convertTo = params.get(key);
                 byte convertByte = 0;
                 if ("All".equals(convertTo)) {
-                    convertByte = ColorSet.ALL_COLORS.getColor();
+                    // IMPORTANT! We need to use Mana Color here not Card Color.
+                    convertByte = ManaAtom.ALL_MANA_TYPES;
                 } else {
                     for (final String convertColor : convertTo.split(",")) {
                         convertByte |= ManaAtom.fromName(convertColor);

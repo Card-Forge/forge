@@ -22,7 +22,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
 import forge.GameCommand;
-import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
@@ -364,7 +363,7 @@ public class ManaPool implements Iterable<Mana> {
 
     public void adjustColorReplacement(byte originalColor, byte replacementColor, boolean additive) {
         // Fix the index without hardcodes
-        int rowIdx = MagicColor.getIndexOfFirstColor(originalColor);
+        int rowIdx = ManaAtom.getIndexOfFirstManaType(originalColor);
         rowIdx = rowIdx < 0 ? identityMatrix.length - 1 : rowIdx;
         if (additive) {
             colorConversionMatrix[rowIdx] |= replacementColor;
@@ -375,17 +374,19 @@ public class ManaPool implements Iterable<Mana> {
     }
 
     public void restoreColorReplacements() {
+        // By default each color can only be paid by itself ( {G} -> {G}, {C} -> {C}
         for (int i = 0; i < colorConversionMatrix.length; i++) {
             colorConversionMatrix[i] = identityMatrix[i];
         }
+        // By default all mana types are unrestricted
         for (int i = 0; i < colorRestrictionMatrix.length; i++) {
-            colorRestrictionMatrix[i] = ColorSet.ALL_COLORS.getColor();
+            colorRestrictionMatrix[i] = ManaAtom.ALL_MANA_TYPES;
         }
     }
 
     public byte getPossibleColorUses(byte color) {
         // Take the current conversion value, AND with restrictions to get mana usage
-        int rowIdx = MagicColor.getIndexOfFirstColor(color);
+        int rowIdx = ManaAtom.getIndexOfFirstManaType(color);
         int matrixIdx = rowIdx < 0 ? identityMatrix.length - 1 : rowIdx;
 
         byte colorUse = colorConversionMatrix[matrixIdx];
@@ -394,14 +395,16 @@ public class ManaPool implements Iterable<Mana> {
     }
 
     public boolean canPayForShardWithColor(ManaCostShard shard, byte color) {
+        // TODO Debug this for Paying Gonti,
         byte line = getPossibleColorUses(color);
-        for (int i = 0; i < MagicColor.NUMBER_OR_COLORS; i++) {
-            byte outColor = MagicColor.WUBRG[i];
+
+        for(byte outColor : ManaAtom.MANATYPES) {
             if ((line & outColor) != 0 && shard.canBePaidWithManaOfColor(outColor)) {
                 return true;
             }
         }
 
+        // TODO The following may not be needed anymore?
         if (((color & (byte) ManaAtom.COLORLESS) != 0) && shard.canBePaidWithManaOfColor((byte) (byte)ManaAtom.COLORLESS)) {
             return true;
         }
