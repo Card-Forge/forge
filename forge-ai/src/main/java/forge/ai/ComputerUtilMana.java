@@ -913,6 +913,10 @@ public class ComputerUtilMana {
         // Make mana needed to avoid negative effect a mandatory cost for the AI
         for (String manaPart : card.getSVar("ManaNeededToAvoidNegativeEffect").split(",")) {
             // convert long color strings to short color strings
+            if (manaPart.isEmpty()) {
+                continue;
+            }
+
             byte mask = ManaAtom.fromName(manaPart);
 
             // make mana mandatory for AI
