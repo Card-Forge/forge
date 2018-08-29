@@ -3,7 +3,7 @@ ManaCost:1 B R
 Types:Legendary Creature Minion
 PT:5/5
 K:CARDNAME attacks each combat if able.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, an opponent gains control of it.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, an opponent gains control of it.
 SVar:TrigChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to give control to: | AILogic$ Curse | SubAbility$ DBDonate
 SVar:DBDonate:DB$ GainControl | Defined$ Self | NewController$ Player.Chosen | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenPlayer$ True
