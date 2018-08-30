@@ -11,7 +11,6 @@ public enum OptionalCost {
     Kicker1("Kicker"),
     Kicker2("Kicker"),
     Retrace("Retrace"),
-    Surge("Surge"), // no real OptionalCost but used there
     AltCost(""), // used by prowl
     Flash("Flash"),
     Generic("Generic"); // used by "Dragon Presence" and pseudo-kicker cards
