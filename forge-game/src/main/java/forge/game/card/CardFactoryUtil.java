@@ -4088,7 +4088,7 @@ public class CardFactoryUtil {
 
             newSA.setPayCosts(surgeCost);
             newSA.setBasicSpell(false);
-            newSA.addOptionalCost(OptionalCost.Surge);
+            newSA.setSurged(true);
 
             String desc = "Surge " + surgeCost.toSimpleString() + " (" + inst.getReminderText()
                     + ")";
