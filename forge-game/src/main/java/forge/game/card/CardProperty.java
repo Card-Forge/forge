@@ -1614,9 +1614,10 @@ public class CardProperty {
                 if (card.isOptionalCostPaid(OptionalCost.Generic)) return false;
             }
         } else if (property.startsWith("surged")) {
-            if (!card.isOptionalCostPaid(OptionalCost.Surge)) {
+            if (card.getCastSA() == null) {
                 return false;
             }
+            return card.getCastSA().isSurged();
         } else if (property.startsWith("evoked")) {
             if (card.getCastSA() == null) {
                 return false;
