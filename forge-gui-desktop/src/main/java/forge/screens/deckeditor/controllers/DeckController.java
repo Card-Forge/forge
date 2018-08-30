@@ -17,12 +17,14 @@
  */
 package forge.screens.deckeditor.controllers;
 
+import forge.StaticData;
+import forge.deck.*;
+import forge.item.PaperCard;
+import forge.util.ItemPool;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Supplier;
 
-import forge.deck.DeckBase;
-import forge.deck.DeckProxy;
 import forge.screens.deckeditor.menus.DeckFileMenu;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.home.gauntlet.VSubmenuGauntletBuild;
@@ -31,6 +33,11 @@ import forge.screens.home.gauntlet.VSubmenuGauntletQuick;
 import forge.screens.home.sanctioned.VSubmenuConstructed;
 import forge.util.storage.IStorage;
 
+import java.util.Date;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
+
 public class DeckController<T extends DeckBase> {
     private T model;
     private boolean saved;
@@ -38,7 +45,7 @@ public class DeckController<T extends DeckBase> {
     private final IStorage<T> rootFolder;
     private IStorage<T> currentFolder;
     private String modelPath;
-    private final ACEditorBase<?, T> view;
+    private final CDeckEditor<T> view;
     private final Supplier<T> newModelCreator;
 
     /**
@@ -48,7 +55,7 @@ public class DeckController<T extends DeckBase> {
      * @param view0 the view0
      * @param newModelCreator0 the new model creator0
      */
-    public DeckController(final IStorage<T> folder0, final ACEditorBase<?, T> view0, final Supplier<T> newModelCreator0) {
+    public DeckController(final IStorage<T> folder0, final CDeckEditor<T> view0, final Supplier<T> newModelCreator0) {
         rootFolder = folder0;
         currentFolder = rootFolder;
         view = view0;
@@ -77,15 +84,142 @@ public class DeckController<T extends DeckBase> {
     }
 
     /**
+     * Load deck from file or clipboard
+     */
+    public void loadDeck(Deck deck) {
+
+        if (!view.getCatalogManager().isInfinite()) {
+            CardPool catalogClone = new CardPool(view.getInitialCatalog());
+            deck = pickFromCatalog(deck, catalogClone);
+            ItemPool<PaperCard> catalogPool = view.getCatalogManager().getPool();
+            catalogPool.clear();
+            catalogPool.addAll(catalogClone);
+        }
+
+        for (DeckSection section: EnumSet.allOf(DeckSection.class)) {
+            if (view.isSectionImportable(section)) {
+                CardPool sectionCards = view.getHumanDeck().getOrCreate(section);
+                sectionCards.clear();
+                sectionCards.addAll(deck.getOrCreate(section));
+            }
+        }
+
+        onModelChanged(false);
+    }
+
+    private Deck pickFromCatalog(Deck deck, CardPool catalog) {
+        Date dateWithAllCards = StaticData.instance().getEditions().getEarliestDateWithAllCards(catalog);
+        Deck result = new Deck();
+        for (DeckSection section: EnumSet.allOf(DeckSection.class)) {
+            if (view.isSectionImportable(section)) {
+                CardPool cards = pickSectionFromCatalog(catalog, deck.getOrCreate(section), dateWithAllCards);
+                result.putSection(section, cards);
+            }
+        }
+
+        return result;
+    }
+
+    private CardPool pickSectionFromCatalog(CardPool catalog, CardPool sourceSection, Date dateWithAllCards) {
+        HashMap<String, Integer> countByName = groupByName(sourceSection);
+        HashMap<String, PaperCard> basicLandsByName = getBasicLandsByName(sourceSection);
+
+        CardPool targetSection = new CardPool();
+        pickFromCatalog(countByName, catalog, targetSection);
+        importBasicLands(countByName, basicLandsByName, dateWithAllCards, targetSection);
+
+        return targetSection;
+    }
+
+    private HashMap<String, Integer> groupByName(CardPool section) {
+        HashMap<String, Integer> result = new HashMap<String, Integer>();
+
+        for (Map.Entry<PaperCard, Integer> entry : section) {
+            PaperCard importedCard = entry.getKey();
+
+            Integer previousCount = result.getOrDefault(importedCard.getName(), 0);
+            int countToAdd = entry.getValue();
+
+            result.put(importedCard.getName(), countToAdd + previousCount);
+        }
+
+        return result;
+    }
+
+    private void pickFromCatalog(HashMap<String, Integer> countByName, CardPool catalog, CardPool targetSection) {
+
+        CardPool catalogClone = new CardPool(catalog); // clone to iterate modified collection
+        for (Map.Entry<PaperCard, Integer> entry : catalogClone) {
+
+            PaperCard availableCard = entry.getKey();
+            if (availableCard.getRules().getType().isBasicLand()) {
+                // basic lands are added regardless of catalog cards
+                continue;
+            }
+
+            Integer availableCount = entry.getValue();
+            int toAddByName = countByName.getOrDefault(availableCard.getName(), 0);
+            int toAdd = Math.min(availableCount, toAddByName);
+
+            if (toAdd > 0) {
+                targetSection.add(availableCard, toAdd);
+                countByName.put(availableCard.getName(), toAddByName - toAdd);
+                catalog.remove(availableCard, toAdd);
+            }
+        }
+    }
+
+    private void importBasicLands(HashMap<String, Integer> countByName, HashMap<String, PaperCard> basicLandsByName, Date dateWithAllCards, CardPool targetSection) {
+        for (String cardName : countByName.keySet()) {
+
+            PaperCard card = basicLandsByName.getOrDefault(cardName, null);
+
+            if (card == null) {
+                continue;
+            }
+
+            int countToAdd = countByName.get(cardName);
+
+            card = StaticData.instance().getCardByEditionDate(card, dateWithAllCards);
+            targetSection.add(card.getName(), card.getEdition(), countToAdd);
+        }
+    }
+
+    private HashMap<String, PaperCard> getBasicLandsByName(CardPool sourceSection) {
+        HashMap<String, PaperCard> result = new HashMap<String, PaperCard>();
+
+        for (Map.Entry<PaperCard, Integer> entry : sourceSection) {
+            PaperCard card = entry.getKey();
+
+            if (!card.getRules().getType().isBasicLand()) {
+                continue;
+            }
+
+            if (result.containsKey(card.getName())) {
+                continue;
+            }
+
+            result.put(card.getName(), card);
+        }
+
+        return result;
+    }
+
+    /**
      * Sets the model.
      *
      */
     public void setModel(final T document) {
         setModel(document, false);
     }
-    public void setModel(final T document, final boolean isStored) {
-        modelInStorage = isStored;
+
+    private void setModel(final T document, final boolean isStored) {
         model = document;
+        onModelChanged(isStored);
+    }
+
+    private void onModelChanged(boolean isStored) {
+        modelInStorage = isStored;
         view.resetTables();
 
         CStatistics.SINGLETON_INSTANCE.update();

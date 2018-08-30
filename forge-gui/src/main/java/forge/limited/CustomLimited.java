@@ -18,8 +18,10 @@
 package forge.limited;
 
 import forge.card.CardEdition;
+import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
+import forge.deck.DeckSection;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.model.FModel;
@@ -45,12 +47,12 @@ import java.util.List;
  */
 public class CustomLimited extends DeckBase {
     private final SealedProduct.Template tpl;
-    
+
     /**
      * TODO: Write javadoc for Constructor.
      *
      * @param name0 the name0
-     * @param slots 
+     * @param slots
      */
     public CustomLimited(final String name0, List<Pair<String, Integer>> slots) {
         super(name0);
@@ -67,7 +69,7 @@ public class CustomLimited extends DeckBase {
     /** The Land set code. */
     private String landSetCode = CardEdition.Predicates.getRandomSetWithAllBasicLands(FModel.getMagicDb().getEditions()).getCode();
 
-    private boolean singleton; 
+    private boolean singleton;
 
     /** Name of the file containing custom card rankings. */
     private String customRankingsFile = "";
@@ -82,27 +84,27 @@ public class CustomLimited extends DeckBase {
     public String toString() {
         return this.getName();
     }
-    
+
     @Override
     public String getItemType() {
         return "Limited deck";
-    }        
+    }
 
     /**
      * Parses the.
      *
      * @param dfData the df data
-     * @param cubes the cubes
+     * @param cubes  the cubes
      * @return the custom limited
      */
     public static CustomLimited parse(final List<String> dfData, final IStorage<Deck> cubes) {
         final FileSection data = FileSection.parse(dfData, ":");
 
-        List<Pair<String, Integer>> slots = new ArrayList<Pair<String,Integer>>();
+        List<Pair<String, Integer>> slots = new ArrayList<Pair<String, Integer>>();
         String boosterData = data.get("Booster");
-        if(StringUtils.isNotEmpty(boosterData)){
+        if (StringUtils.isNotEmpty(boosterData)) {
             final String[] booster = TextUtil.splitWithParenthesis(boosterData, ',');
-            for(String slotDesc : booster) {
+            for (String slotDesc : booster) {
                 String[] kv = TextUtil.splitWithParenthesis(slotDesc, ' ', 2);
                 slots.add(ImmutablePair.of(kv[1], Integer.parseInt(kv[0])));
             }
@@ -189,12 +191,12 @@ public class CustomLimited extends DeckBase {
     }
 
     @Override
-    public void importDeck(Deck deck) {
-        throw new UnsupportedOperationException("CustomDraft does not support deck import");
+    public String getImageKey(boolean altState) {
+        return null;
     }
 
     @Override
-    public String getImageKey(boolean altState) {
+    public Deck getHumanDeck() {
         return null;
     }
 }

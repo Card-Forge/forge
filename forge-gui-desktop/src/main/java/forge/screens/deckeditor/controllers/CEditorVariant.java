@@ -49,7 +49,7 @@ import java.util.Map.Entry;
  * @author Forge
  * @version $Id: CEditorConstructed.java 18430 2012-11-27 22:42:36Z Hellfish $
  */
-public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
+public final class CEditorVariant extends CDeckEditor<Deck> {
     private final DeckController<Deck> controller;
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;
@@ -151,6 +151,11 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
 
         this.getCatalogManager().setPool(ItemPool.createFrom(allNT, PaperCard.class), true);
         this.getDeckManager().setPool(this.controller.getModel().getOrCreate(this.sectionMode));
+    }
+
+    @Override
+    protected Boolean isSectionImportable(DeckSection section) {
+        return true;
     }
 
     /*

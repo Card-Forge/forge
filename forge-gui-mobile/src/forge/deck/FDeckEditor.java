@@ -1490,15 +1490,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             modelPath = "";
         }
 
-        public Deck getDeck() {
-            if (model == null) { return null; }
-
-            if (model instanceof Deck) {
-                return (Deck) model;
-            }
-            return ((DeckGroup) model).getHumanDeck();
-        }
-
         public T getModel() {
             return model;
         }
@@ -1537,7 +1528,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 modelPath = "";
                 setSaved(true);
             }
-            editor.setDeck(getDeck());
+            editor.setDeck(model.getHumanDeck());
         }
 
         private boolean isModelInSyncWithFolder() {
@@ -1661,7 +1652,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             default:
                 break;
             }
-            editor.setDeck(getDeck());
+            editor.setDeck(model.getHumanDeck());
             if (editor.saveHandler != null) {
                 editor.saveHandler.handleEvent(new FEvent(editor, FEventType.SAVE));
             }

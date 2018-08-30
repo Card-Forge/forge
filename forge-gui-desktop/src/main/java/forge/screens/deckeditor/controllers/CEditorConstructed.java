@@ -49,7 +49,7 @@ import java.util.Map.Entry;
  * @author Forge
  * @version $Id: CEditorConstructed.java 24868 2014-02-17 05:08:05Z drdev $
  */
-public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
+public final class CEditorConstructed extends CDeckEditor<Deck> {
     private final DeckController<Deck> controller;
     private final List<DeckSection> allSections = new ArrayList<DeckSection>();
     private final ItemPool<PaperCard> normalPool, avatarPool, planePool, schemePool, conspiracyPool;
@@ -276,6 +276,11 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         this.sectionMode = DeckSection.Main;
         this.getCatalogManager().setPool(normalPool, true);
         this.getDeckManager().setPool(this.controller.getModel().getMain());
+    }
+
+    @Override
+    protected Boolean isSectionImportable(DeckSection section) {
+        return allSections.contains(section);
     }
 
     /*
