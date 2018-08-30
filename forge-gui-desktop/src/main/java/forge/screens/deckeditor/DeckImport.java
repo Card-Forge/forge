@@ -20,20 +20,16 @@ package forge.screens.deckeditor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import java.util.List;
+import java.util.*;
 
 import javax.swing.BorderFactory;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import forge.deck.Deck;
-import forge.deck.DeckBase;
-import forge.deck.DeckImportController;
-import forge.deck.DeckRecognizer;
+import forge.deck.*;
 import forge.deck.DeckRecognizer.TokenType;
 import forge.item.InventoryItem;
 import forge.screens.deckeditor.controllers.ACEditorBase;
-import forge.screens.deckeditor.controllers.DeckController;
 import forge.toolbox.FButton;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
@@ -148,12 +144,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
                 final Deck deck = controller.accept();
                 if (deck == null) { return; }
 
-                DeckController<TModel> controller = DeckImport.this.host.getDeckController();
-                TModel model = controller.getModel();
-
-                model.importDeck(deck);
-                controller.setModel(model);
-
+                DeckImport.this.host.getDeckController().loadDeck(deck);
                 DeckImport.this.processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING));
             }
         });
@@ -173,6 +164,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
                 parseAndDisplay();
             }
         };
+
         this.newEditionCheck.addActionListener(reparse);
         this.onlyCoreExpCheck.addActionListener(reparse);
         this.yearDropdown.addActionListener(reparse);

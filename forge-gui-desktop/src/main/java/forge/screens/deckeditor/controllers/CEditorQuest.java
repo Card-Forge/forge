@@ -61,7 +61,7 @@ import java.util.Map.Entry;
  * @author Forge
  * @version $Id: CEditorQuest.java 24868 2014-02-17 05:08:05Z drdev $
  */
-public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
+public final class CEditorQuest extends CDeckEditor<Deck> {
     private final QuestController questData;
     private final DeckController<Deck> controller;
     private final List<DeckSection> allSections = new ArrayList<DeckSection>();
@@ -244,8 +244,7 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
 
         final Deck deck = this.controller.getModel();
 
-        final ItemPool<PaperCard> cardpool = new ItemPool<PaperCard>(PaperCard.class);
-        cardpool.addAll(this.questData.getCards().getCardpool());
+        final CardPool cardpool = getInitialCatalog();
         // remove bottom cards that are in the deck from the card pool
         cardpool.removeAll(deck.getMain());
         // remove sideboard cards from the catalog
@@ -253,6 +252,16 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
         // show cards, makes this user friendly
         this.getCatalogManager().setPool(cardpool);
         this.getDeckManager().setPool(deck.getMain());
+    }
+
+    @Override
+    protected CardPool getInitialCatalog() {
+        return new CardPool(this.questData.getCards().getCardpool());
+    }
+
+    @Override
+    protected Boolean isSectionImportable(DeckSection section) {
+        return allSections.contains(section);
     }
 
     //=========== Overridden from ACEditorBase
@@ -306,7 +315,6 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
         resetUI();
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(true);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnImport().setVisible(false);
 
         this.getBtnCycleSection().setVisible(true);
         this.getBtnCycleSection().setCommand(new UiCommand() {

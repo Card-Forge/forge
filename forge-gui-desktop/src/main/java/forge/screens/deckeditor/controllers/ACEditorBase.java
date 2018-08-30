@@ -49,7 +49,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -186,14 +185,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         final CardLimit limit = getCardLimit();
         final DeckController<TModel> controller = getDeckController();
 
-        Deck deck = null;
-        if (controller != null) {
-            if (controller.getModel() instanceof Deck) {
-                deck = (Deck)controller.getModel(); // constructed deck
-            } else if (controller.getModel() instanceof DeckGroup) {
-                deck = ((DeckGroup)controller.getModel()).getHumanDeck(); // limited deck
-            }
-        }
+        Deck deck = getHumanDeck();
 
         Iterable<Entry<String,Integer>> cardsByName = null;
         if (deck != null) {
@@ -248,6 +240,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     protected abstract void onRemoveItems(Iterable<Entry<TItem, Integer>> items, boolean toAlternate);
 
     protected abstract void buildAddContextMenu(EditorContextMenuBuilder cmb);
+
     protected abstract void buildRemoveContextMenu(EditorContextMenuBuilder cmb);
 
     /**
@@ -261,6 +254,10 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
      * @return {@link forge.screens.deckeditor.controllers.DeckController}
      */
     public abstract DeckController<TModel> getDeckController();
+
+    protected Deck getHumanDeck() {
+        return getDeckController().getModel().getHumanDeck();
+    }
 
     /**
      * Called when switching away from or closing the editor wants to exit. Should confirm save options.
@@ -598,5 +595,4 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                     InputEvent.ALT_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
         }
     }
-
 }
