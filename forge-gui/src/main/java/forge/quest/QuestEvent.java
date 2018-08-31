@@ -36,7 +36,7 @@ import java.util.List;
  */
 public abstract class QuestEvent implements IQuestEvent {
     // Default vals if none provided in the event file.
-    private Deck eventDeck = null;
+    protected Deck eventDeck = null;
     private String title = "Mystery Event";
     private String description = "";
     private QuestEventDifficulty difficulty = QuestEventDifficulty.MEDIUM;
@@ -83,7 +83,7 @@ public abstract class QuestEvent implements IQuestEvent {
         return description;
     }
 
-    public final Deck getEventDeck() {
+    public Deck getEventDeck() {
         return eventDeck;
     }
 
