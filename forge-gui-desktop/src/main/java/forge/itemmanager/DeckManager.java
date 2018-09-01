@@ -12,6 +12,8 @@ import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import forge.screens.deckeditor.controllers.CEditorCommander;
+import forge.screens.deckeditor.controllers.CEditorConstructed;
 import forge.screens.home.quest.DialogChooseFormats;
 import org.apache.commons.lang3.StringUtils;
 
@@ -282,6 +284,17 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 screen = FScreen.DECK_EDITOR_CONSTRUCTED;
                 DeckPreferences.setCurrentDeck(deck.toString());
                 //re-use constructed controller
+                editorCtrl = new CEditorConstructed(getCDetailPicture());
+                break;
+            case Commander:
+                screen = FScreen.DECK_EDITOR_CONSTRUCTED;  // re-use "Deck Editor", rather than creating a new top level tab
+                DeckPreferences.setCommanderDeck(deck.toString());
+                editorCtrl = new CEditorCommander(getCDetailPicture(),false, false);
+                break;
+            case Brawl:
+                screen = FScreen.DECK_EDITOR_CONSTRUCTED;  // re-use "Deck Editor", rather than creating a new top level tab
+                DeckPreferences.setCommanderDeck(deck.toString());
+                editorCtrl = new CEditorCommander(getCDetailPicture(),false, true);
                 break;
             case Sealed:
                 screen = FScreen.DECK_EDITOR_SEALED;
