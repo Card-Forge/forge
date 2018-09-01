@@ -39,6 +39,7 @@ import forge.screens.deckeditor.views.VCardCatalog;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.ContextMenuBuilder;
+import forge.toolbox.FComboBox;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.util.Aggregates;
@@ -389,7 +390,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("Card Catalog");
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(true);
-        getBtnCycleSection().setVisible(false);
+        getCbxSection().setVisible(false);
 
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getLblTitle().setText("Title:");
@@ -400,7 +401,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     public FLabel getBtnRemove()  { return btnRemove; }
     public FLabel getBtnRemove4() { return btnRemove4; }
     public FLabel getBtnAddBasicLands() { return btnAddBasicLands; }
-    public FLabel getBtnCycleSection() { return deckManager.getBtnCycleSection(); }
+    public FComboBox getCbxSection() { return deckManager.getCbxSection(); }
 
     public ContextMenuBuilder createContextMenuBuilder(final boolean isAddContextMenu0) {
         return new EditorContextMenuBuilder(isAddContextMenu0);

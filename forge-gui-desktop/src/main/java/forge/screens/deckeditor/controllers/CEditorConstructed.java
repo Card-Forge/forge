@@ -33,8 +33,12 @@ import forge.properties.ForgePreferences.FPref;
 import forge.screens.deckeditor.AddBasicLandsDialog;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.match.controllers.CDetailPicture;
+import forge.toolbox.FComboBox;
 import forge.util.ItemPool;
+import sun.font.FontConfigManager;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -296,11 +300,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
     /**
      * Switch between the main deck and the sideboard editor.
      */
-    public void cycleEditorMode() {
-        int curindex = allSections.indexOf(sectionMode);
-        curindex = (curindex + 1) % allSections.size();
-        sectionMode = allSections.get(curindex);
-
+    public void setEditorMode(DeckSection sectionMode) {
         switch(sectionMode) {
         case Main:
             this.getCatalogManager().setup(ItemManagerConfig.CARD_CATALOG);
@@ -335,6 +335,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Conspiracy));
         }
 
+        this.sectionMode = sectionMode;
         this.controller.updateCaptions();
     }
 
@@ -360,13 +361,19 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
 
         resetUI();
 
-        this.getBtnCycleSection().setVisible(true);
-        this.getBtnCycleSection().setCommand(new UiCommand() {
+        this.getCbxSection().removeAllItems();
+        for (DeckSection section : allSections) {
+            this.getCbxSection().addItem(section);
+        }
+        this.getCbxSection().addActionListener(new ActionListener() {
             @Override
-            public void run() {
-                cycleEditorMode();
+            public void actionPerformed(ActionEvent actionEvent) {
+                FComboBox cb = (FComboBox)actionEvent.getSource();
+                DeckSection ds = (DeckSection)cb.getSelectedItem();
+                setEditorMode(ds);
             }
         });
+        this.getCbxSection().setVisible(true);
 
         this.controller.refreshModel();
     }

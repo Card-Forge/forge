@@ -38,9 +38,12 @@ import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.home.sanctioned.CSubmenuDraft;
 import forge.screens.home.sanctioned.CSubmenuSealed;
 import forge.screens.match.controllers.CDetailPicture;
+import forge.toolbox.FComboBox;
 import forge.util.storage.IStorage;
 
 import java.util.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Map.Entry;
 
 /**
@@ -98,10 +101,16 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
         allSections.add(DeckSection.Main);
         allSections.add(DeckSection.Conspiracy);
 
-        this.getBtnCycleSection().setCommand(new UiCommand() {
+        this.getCbxSection().removeAllItems();
+        for (DeckSection section : allSections) {
+            this.getCbxSection().addItem(section);
+        }
+        this.getCbxSection().addActionListener(new ActionListener() {
             @Override
-            public void run() {
-                cycleEditorMode();
+            public void actionPerformed(ActionEvent actionEvent) {
+                FComboBox cb = (FComboBox)actionEvent.getSource();
+                DeckSection ds = (DeckSection)cb.getSelectedItem();
+                setEditorMode(ds);
             }
         });
     }
@@ -194,10 +203,7 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
     }
 
 
-    public void cycleEditorMode() {
-        int curindex = (allSections.indexOf(sectionMode) + 1) % allSections.size();
-        sectionMode = allSections.get(curindex);
-
+    public void setEditorMode(DeckSection sectionMode) {
         switch(sectionMode) {
             case Conspiracy:
                 this.getCatalogManager().setup(ItemManagerConfig.DRAFT_CONSPIRACY);
@@ -211,6 +217,7 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
                 break;
         }
 
+        this.sectionMode = sectionMode;
         this.controller.updateCaptions();
     }
 
@@ -226,7 +233,7 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(false);
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setEnabled(false);
-        this.getBtnCycleSection().setVisible(true);
+        this.getCbxSection().setVisible(true);
 
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);

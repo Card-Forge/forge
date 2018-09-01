@@ -42,9 +42,12 @@ import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.home.quest.CSubmenuQuestDecks;
 import forge.screens.match.controllers.CDetailPicture;
+import forge.toolbox.FComboBox;
 import forge.util.ItemPool;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -279,11 +282,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
     /**
      * Switch between the main deck and the sideboard editor.
      */
-    public void cycleEditorMode() {
-        int curindex = allSections.indexOf(sectionMode);
-        curindex = (curindex + 1) % allSections.size();
-        sectionMode = allSections.get(curindex);
-
+    public void setEditorMode(DeckSection sectionMode) {
         if (sectionMode == DeckSection.Sideboard) {
             this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
         }
@@ -291,6 +290,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
             this.getDeckManager().setPool(this.controller.getModel().getMain());
         }
 
+        this.sectionMode = sectionMode;
         this.controller.updateCaptions();
     }
 
@@ -316,12 +316,19 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(true);
 
-        this.getBtnCycleSection().setVisible(true);
-        this.getBtnCycleSection().setCommand(new UiCommand() {
-            @Override public void run() {
-                cycleEditorMode();
+        this.getCbxSection().removeAllItems();
+        for (DeckSection section : allSections) {
+            this.getCbxSection().addItem(section);
+        }
+        this.getCbxSection().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                FComboBox cb = (FComboBox)actionEvent.getSource();
+                DeckSection ds = (DeckSection)cb.getSelectedItem();
+                setEditorMode(ds);
             }
         });
+        this.getCbxSection().setVisible(true);
 
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);

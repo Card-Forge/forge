@@ -406,7 +406,7 @@ public class DeckController<T extends DeckBase> {
             tabCaption = "*" + tabCaption;
             itemManagerCaption = "*" + itemManagerCaption;
         }
-        itemManagerCaption += " - " + view.getSectionMode().name();
+        itemManagerCaption += " - ";
 
         VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText(tabCaption);
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setText(title);
