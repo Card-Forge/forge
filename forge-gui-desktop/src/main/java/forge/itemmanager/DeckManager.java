@@ -274,30 +274,30 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         FScreen screen = null;
 
         switch (this.gameType) {
-        case Quest:
-            screen = FScreen.DECK_EDITOR_QUEST;
-            editorCtrl = new CEditorQuest(FModel.getQuest(), getCDetailPicture());
-            break;
-        case Constructed:
-            screen = FScreen.DECK_EDITOR_CONSTRUCTED;
-            DeckPreferences.setCurrentDeck(deck.toString());
-            //re-use constructed controller
-            break;
-        case Sealed:
-            screen = FScreen.DECK_EDITOR_SEALED;
-            editorCtrl = new CEditorLimited(FModel.getDecks().getSealed(), screen, getCDetailPicture());
-            break;
-        case Draft:
-            screen = FScreen.DECK_EDITOR_DRAFT;
-            editorCtrl = new CEditorLimited(FModel.getDecks().getDraft(), screen, getCDetailPicture());
-            break;
-        case Winston:
-            screen = FScreen.DECK_EDITOR_DRAFT;
-            editorCtrl = new CEditorLimited(FModel.getDecks().getWinston(), screen, getCDetailPicture());
-            break;
+            case Quest:
+                screen = FScreen.DECK_EDITOR_QUEST;
+                editorCtrl = new CEditorQuest(FModel.getQuest(), getCDetailPicture());
+                break;
+            case Constructed:
+                screen = FScreen.DECK_EDITOR_CONSTRUCTED;
+                DeckPreferences.setCurrentDeck(deck.toString());
+                //re-use constructed controller
+                break;
+            case Sealed:
+                screen = FScreen.DECK_EDITOR_SEALED;
+                editorCtrl = new CEditorLimited(FModel.getDecks().getSealed(), screen, getCDetailPicture());
+                break;
+            case Draft:
+                screen = FScreen.DECK_EDITOR_DRAFT;
+                editorCtrl = new CEditorLimited(FModel.getDecks().getDraft(), screen, getCDetailPicture());
+                break;
+            case Winston:
+                screen = FScreen.DECK_EDITOR_DRAFT;
+                editorCtrl = new CEditorLimited(FModel.getDecks().getWinston(), screen, getCDetailPicture());
+                break;
 
-        default:
-            return;
+            default:
+                return;
         }
 
         if (!Singletons.getControl().ensureScreenActive(screen)) { return; }
