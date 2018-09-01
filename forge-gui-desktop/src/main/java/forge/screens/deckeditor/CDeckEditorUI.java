@@ -39,6 +39,7 @@ import forge.itemmanager.ItemManager;
 import forge.screens.deckeditor.controllers.*;
 import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VCardCatalog;
+import forge.screens.deckeditor.views.VCommanderDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.ItemPool;
@@ -59,12 +60,15 @@ public enum CDeckEditorUI implements ICDoc {
     private ACEditorBase<? extends InventoryItem, ? extends DeckBase> childController;
     private final CDetailPicture cDetailPicture;
     private final VAllDecks vAllDecks;
+    private final VCommanderDecks vCommanderDecks;
 
     private CDeckEditorUI() {
         screenChildControllers = new HashMap<FScreen, ACEditorBase<? extends InventoryItem, ? extends DeckBase>>();
         this.cDetailPicture = new CDetailPicture();
         this.vAllDecks = VAllDecks.SINGLETON_INSTANCE;
         this.vAllDecks.setCDetailPicture(cDetailPicture);
+        this.vCommanderDecks = VCommanderDecks.SINGLETON_INSTANCE;
+        this.vCommanderDecks.setCDetailPicture(cDetailPicture);
     }
 
     public CDetailPicture getCDetailPicture() {

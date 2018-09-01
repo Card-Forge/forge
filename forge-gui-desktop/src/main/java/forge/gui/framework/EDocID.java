@@ -7,6 +7,7 @@ import com.google.common.collect.ObjectArrays;
 
 import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VCardCatalog;
+import forge.screens.deckeditor.views.VCommanderDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.deckeditor.views.VProbabilities;
@@ -54,7 +55,8 @@ public enum EDocID {
     EDITOR_CATALOG (VCardCatalog.SINGLETON_INSTANCE),
     EDITOR_CURRENTDECK (VCurrentDeck.SINGLETON_INSTANCE),
     EDITOR_DECKGEN (VDeckgen.SINGLETON_INSTANCE),
-    
+    EDITOR_COMMANDER (VCommanderDecks.SINGLETON_INSTANCE),
+
     WORKSHOP_CATALOG (VWorkshopCatalog.SINGLETON_INSTANCE),
     WORKSHOP_CARDDESIGNER (VCardDesigner.SINGLETON_INSTANCE),
     WORKSHOP_CARDSCRIPT (VCardScript.SINGLETON_INSTANCE),

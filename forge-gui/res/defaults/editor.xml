@@ -14,6 +14,7 @@
 	<cell x="0.0" y="0.0" w="0.38722" h="1.0">
 		<doc>EDITOR_CATALOG</doc>
 		<doc>EDITOR_ALLDECKS</doc>
+		<doc>EDITOR_COMMANDER</doc>
 		<doc>EDITOR_DECKGEN</doc>
 	</cell>
 </layout>
