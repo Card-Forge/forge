@@ -365,6 +365,9 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
      * Switch between the main deck and the sideboard editor.
      */
     public void setEditorMode(DeckSection sectionMode) {
+        if (sectionMode == null) {
+            return;
+        }
         switch(this.gameType) {
             case Constructed:
                 switch(sectionMode) {
