@@ -812,8 +812,7 @@ public class AiController {
             }
 
             // use Surge and Prowl costs when able to
-            if (sa.isSurged() || 
-                    (sa.getRestrictions().getProwlTypes() != null && !sa.getRestrictions().getProwlTypes().isEmpty())) {
+            if (sa.isSurged() || sa.isProwl()) {
                 p += 9;
             }
             // sort planeswalker abilities with most costly first

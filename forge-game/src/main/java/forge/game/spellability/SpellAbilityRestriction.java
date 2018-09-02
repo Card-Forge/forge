@@ -93,14 +93,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             if (value.equals("Blessing")) {
                 this.setBlessing(true);
             }
-            if (value.startsWith("Prowl")) {
-                final List<String> prowlTypes = Lists.newArrayList();
-                prowlTypes.add("Rogue");
-                if (value.split("Prowl").length > 1) {
-                    prowlTypes.add(value.split("Prowl")[1]);
-                }
-                this.setProwlTypes(prowlTypes);
-            }
         }
 
         if (params.containsKey("ActivationZone")) {
@@ -439,11 +431,9 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 return false;
             }
         }
-        if (this.getProwlTypes() != null && !this.getProwlTypes().isEmpty()) {
-            // only true if the activating player has damaged the opponent with
-            // one of the specified types
+        if (sa.isProwl()) {
             boolean prowlFlag = false;
-            for (final String type : this.getProwlTypes()) {
+            for (final String type : c.getType().getCreatureTypes()) {
                 if (activator.hasProwl(type)) {
                     prowlFlag = true;
                 }

@@ -109,7 +109,7 @@ public enum Keyword {
     PROTECTION(Protection.class, false, "This creature can't be blocked, targeted, dealt damage, or equipped/enchanted by %s."),
     PROVOKE(SimpleKeyword.class, false, "Whenever this creature attacks, you may have target creature defending player controls untap and block it if able."),
     PROWESS(SimpleKeyword.class, false, "Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn."),
-    PROWL(KeywordWithCost.class, false, "You may cast this card by paying %s rather than paying its mana cost if you dealt combat damage to a player this turn with a creature that shares any of this spell's creature types."),
+    PROWL(KeywordWithCost.class, false, "You may pay %s rather than pay this spell’s mana cost if a player was dealt combat damage this turn by a source that, at the time it dealt that damage, was under your control and had any of this spell’s creature types."),
     RAMPAGE(KeywordWithAmount.class, false, "Whenever this creature becomes blocked, it gets +%1$d/+%1$d until end of turn for each creature blocking it beyond the first."),
     REACH(SimpleKeyword.class, true, "This creature can block creatures with flying."),
     REBOUND(SimpleKeyword.class, true, "If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost."),
