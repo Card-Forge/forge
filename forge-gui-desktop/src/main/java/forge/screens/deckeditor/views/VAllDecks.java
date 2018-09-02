@@ -90,6 +90,6 @@ public enum VAllDecks implements IVDoc<CAllDecks> {
 
     public void setCDetailPicture(final CDetailPicture cDetailPicture) {
         this.lstDecks = new DeckManager(GameType.Constructed, cDetailPicture);
-        this.lstDecks.setCaption("Decks");
+        this.lstDecks.setCaption("Constructed Decks");
     }
 }
