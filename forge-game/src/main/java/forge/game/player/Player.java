@@ -32,7 +32,6 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.event.*;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
-import forge.game.keyword.KeywordInterface;
 import forge.game.keyword.KeywordCollection.KeywordCollectionView;
 import forge.game.keyword.KeywordsChange;
 import forge.game.mana.ManaPool;
@@ -131,7 +130,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private final Map<ZoneType, PlayerZone> zones = Maps.newEnumMap(ZoneType.class);
 
     private CardCollection currentPlanes = new CardCollection();
-    private List<String> prowl = Lists.newArrayList();
+    private Set<String> prowl = Sets.newHashSet();
 
     private PlayerStatistics stats = new PlayerStatistics();
     private PlayerController controller;
@@ -588,7 +587,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (isCombat) {
             old = assignedCombatDamage.containsKey(source) ? assignedCombatDamage.get(source) : 0;
             assignedCombatDamage.put(source, old + amount);
-            for (final String type : source.getType()) {
+            for (final String type : source.getType().getCreatureTypes()) {
                 source.getController().addProwlType(type);
             }
         }
