@@ -90,6 +90,7 @@ public enum Keyword {
     LIVING_WEAPON(SimpleKeyword.class, true, "When this Equipment enters the battlefield, create a 0/0 black Germ creature token, then attach this to it."),
     MADNESS(KeywordWithCost.class, true, "If you discard this card, discard it into exile. When you do, cast it for %s  or put it into your graveyard."),
     MELEE(SimpleKeyword.class, false, "Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked with a creature this combat."),
+    MENTOR(SimpleKeyword.class, false, "Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power."),
     MENACE(SimpleKeyword.class, true, "This creature can't be blocked except by two or more creatures."),
     MEGAMORPH(KeywordWithCost.class, false, "You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it."),
     MIRACLE(KeywordWithCost.class, false, "You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn."),
