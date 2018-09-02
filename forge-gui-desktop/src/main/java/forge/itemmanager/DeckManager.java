@@ -334,6 +334,9 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
 
         // consider using deck proxy's method to delete deck
         switch(this.gameType) {
+            case Brawl:
+            case Commander:
+            case TinyLeaders:
             case Constructed:
             case Draft:
             case Sealed:
