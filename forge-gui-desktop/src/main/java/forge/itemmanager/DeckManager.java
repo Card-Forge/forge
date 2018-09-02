@@ -334,17 +334,17 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
 
         // consider using deck proxy's method to delete deck
         switch(this.gameType) {
-        case Constructed:
-        case Draft:
-        case Sealed:
-            deck.deleteFromStorage();
-            break;
-        case Quest:
-            deck.deleteFromStorage();
-            FModel.getQuest().save();
-            break;
-        default:
-            throw new UnsupportedOperationException("Delete not implemented for game type = " + gameType.toString());
+            case Constructed:
+            case Draft:
+            case Sealed:
+                deck.deleteFromStorage();
+                break;
+            case Quest:
+                deck.deleteFromStorage();
+                FModel.getQuest().save();
+                break;
+            default:
+                throw new UnsupportedOperationException("Delete not implemented for game type = " + gameType.toString());
         }
 
         this.removeItem(deck, 1);
