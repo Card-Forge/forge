@@ -38,9 +38,11 @@ import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
 import forge.screens.deckeditor.controllers.*;
 import forge.screens.deckeditor.views.VAllDecks;
+import forge.screens.deckeditor.views.VBrawlDecks;
 import forge.screens.deckeditor.views.VCardCatalog;
 import forge.screens.deckeditor.views.VCommanderDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
+import forge.screens.deckeditor.views.VTinyLeadersDecks;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.ItemPool;
 
@@ -61,6 +63,8 @@ public enum CDeckEditorUI implements ICDoc {
     private final CDetailPicture cDetailPicture;
     private final VAllDecks vAllDecks;
     private final VCommanderDecks vCommanderDecks;
+    private final VBrawlDecks vBrawlDecks;
+    private final VTinyLeadersDecks vTinyLeadersDecks;
 
     private CDeckEditorUI() {
         screenChildControllers = new HashMap<FScreen, ACEditorBase<? extends InventoryItem, ? extends DeckBase>>();
@@ -69,6 +73,10 @@ public enum CDeckEditorUI implements ICDoc {
         this.vAllDecks.setCDetailPicture(cDetailPicture);
         this.vCommanderDecks = VCommanderDecks.SINGLETON_INSTANCE;
         this.vCommanderDecks.setCDetailPicture(cDetailPicture);
+        this.vBrawlDecks = VBrawlDecks.SINGLETON_INSTANCE;
+        this.vBrawlDecks.setCDetailPicture(cDetailPicture);
+        this.vTinyLeadersDecks = VTinyLeadersDecks.SINGLETON_INSTANCE;
+        this.vTinyLeadersDecks.setCDetailPicture(cDetailPicture);
     }
 
     public CDetailPicture getCDetailPicture() {

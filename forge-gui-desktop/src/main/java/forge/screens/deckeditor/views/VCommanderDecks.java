@@ -24,7 +24,7 @@ public enum VCommanderDecks implements IVDoc<CCommanderDecks> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Commander Decks");
+    private final DragTab tab = new DragTab("Commander");
 
     private DeckManager lstDecks;
 
