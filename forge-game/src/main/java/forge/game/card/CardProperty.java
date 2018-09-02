@@ -1609,10 +1609,6 @@ public class CardProperty {
             if (property.equals("pseudokicked")) {
                 if (!card.isOptionalCostPaid(OptionalCost.Generic)) return false;
             }
-        } else if (property.startsWith("notpseudokicked")) {
-            if (property.equals("pseudokicked")) {
-                if (card.isOptionalCostPaid(OptionalCost.Generic)) return false;
-            }
         } else if (property.startsWith("surged")) {
             if (card.getCastSA() == null) {
                 return false;
@@ -1623,6 +1619,11 @@ public class CardProperty {
                 return false;
             }
             return card.getCastSA().isEvoke();
+        } else if (property.startsWith("prowled")) {
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            return card.getCastSA().isProwl();
         } else if (property.equals("HasDevoured")) {
             if (card.getDevouredCards().isEmpty()) {
                 return false;
