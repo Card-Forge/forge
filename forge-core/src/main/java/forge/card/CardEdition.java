@@ -123,12 +123,19 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     private boolean smallSetOverride = false;
     private String boosterMustContain = "";
     private final CardInSet[] cards;
+    private final String[] tokenNormalized;
 
     private int boosterArts = 1;
     private SealedProduct.Template boosterTpl = null;
 
     private CardEdition(CardInSet[] cards) {
         this.cards = cards;
+        tokenNormalized = null;
+    }
+
+    private CardEdition(CardInSet[] cards, String[] tokens) {
+        this.cards = cards;
+        this.tokenNormalized = tokens;
     }
 
     /**
@@ -254,6 +261,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         protected CardEdition read(File file) {
             final Map<String, List<String>> contents = FileSection.parseSections(FileUtil.readFile(file));
 
+            List<String> tokenNormalized = new ArrayList<>();
             List<CardEdition.CardInSet> processedCards = new ArrayList<>();
             if (contents.containsKey("cards")) {
                 for(String line : contents.get("cards")) {
@@ -277,7 +285,19 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 }
             }
 
-            CardEdition res = new CardEdition(processedCards.toArray(new CardInSet[processedCards.size()]));
+            if (contents.containsKey("tokens")) {
+                for(String line : contents.get("tokens")) {
+                    if (StringUtils.isBlank(line))
+                        continue;
+
+                    tokenNormalized.add(line);
+                }
+            }
+
+            CardEdition res = new CardEdition(
+                processedCards.toArray(new CardInSet[processedCards.size()]),
+                tokenNormalized.toArray(new String[tokenNormalized.size()])
+            );
 
             FileSection section = FileSection.parse(contents.get("metadata"), "=");
             res.name  = section.get("name");
