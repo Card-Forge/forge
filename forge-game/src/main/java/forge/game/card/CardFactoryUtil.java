@@ -2654,6 +2654,21 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(sa);
 
             inst.addTrigger(trigger);
+        } else if (keyword.equals("Mentor")) {
+            final String trigStr = "Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True " +
+                    " | TriggerDescription$ Mentor (" + inst.getReminderText() + ")";
+
+            final String effect = "DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1"
+                    + " | ValidTgts$ Creature.attacking+powerLTX"
+                    + " | TgtPrompt$ Select target attacking creature with less power";
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr.toString(), card, intrinsic);
+
+            SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setSVar("X", "Count$CardPower");
+            sa.setIntrinsic(intrinsic);
+            trigger.setOverridingAbility(sa);
+
+            inst.addTrigger(trigger);
         } else if (keyword.startsWith("Miracle")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
