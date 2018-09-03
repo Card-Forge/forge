@@ -1,0 +1,6 @@
+Name:Sinister Sabotage
+ManaCost:1 U U
+Types:Instant
+A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.1 (Look at the top card of your library. You may put that card into your graveyard.)
+K:Flying
+Oracle:Counter target spell.\nSurveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
