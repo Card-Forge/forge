@@ -1,0 +1,32 @@
+[metadata]
+Code=GRN
+Date=2018-10-05
+Name=Guilds of Ravnica
+Code2=GRN
+MciCode=grn
+Type=Other
+
+[cards]
+6 U Conclave Tribunal
+47 R Narcomoeba
+51 R Quasiduplicate
+54 U Sinister Sabotage
+79 U Necrotic Wound
+109 R Legion Warboss
+156 U Boros Challenger
+168 R Emmara, Soul of the Accord
+171 R Firemind's Research
+195 M Ral, Izzet Viceroy
+206 U Thought Erasure
+211 M Underrealm Lich
+253 R Overgrown Tomb
+254 R Sacred Foundry
+257 R Steam Vents
+258 R Temple Garden
+259 R Watery Grave
+260 L Plains
+261 L Island
+262 L Swamp
+263 L Mountain
+264 L Forest
+273 M Impervious Greatwurm
