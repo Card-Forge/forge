@@ -1,6 +1,6 @@
 Name:Thought Erasure
 ManaCost:U B
 Types:Sorcery
-K:Flying
+K:Surveil:1
 A:SP$ Discard | Cost$ U B | ValidTgts$ Opponent | DiscardValid$ Card.nonLand | NumCards$ 1 | Mode$ RevealYouChoose | SpellDescription$ Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.
 Oracle:Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.\nSurveil 1. (Look at the top card of your library. You may put it into your graveyard.)
