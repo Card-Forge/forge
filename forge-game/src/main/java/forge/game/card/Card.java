@@ -1626,7 +1626,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                      || keyword.equals("Exalted") || keyword.equals("Extort")|| keyword.equals("Flanking")
                      || keyword.equals("Horsemanship") || keyword.equals("Infect")|| keyword.equals("Persist")
                      || keyword.equals("Phasing") || keyword.equals("Shadow")|| keyword.equals("Skulk")
-                     || keyword.equals("Undying") || keyword.equals("Wither") || keyword.equals("Cascade")) {
+                     || keyword.equals("Undying") || keyword.equals("Wither") || keyword.equals("Cascade")
+                     || keyword.equals("Mentor")) {
                 if (sb.length() != 0) {
                     sb.append("\r\n");
                 }
@@ -1644,7 +1645,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || keyword.startsWith("Surge") || keyword.startsWith("Transmute") || keyword.startsWith("Suspend")
                     || keyword.equals("Undaunted") || keyword.startsWith("Monstrosity") || keyword.startsWith("Embalm")
                     || keyword.startsWith("Level up") || keyword.equals("Prowess") || keyword.startsWith("Eternalize")
-                    || keyword.startsWith("Reinforce") || keyword.startsWith("Champion")
+                    || keyword.startsWith("Reinforce") || keyword.startsWith("Champion") || keyword.startsWith("Prowl")
                     || keyword.startsWith("Amplify")  || keyword.startsWith("Ninjutsu")
                     || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")) {
                 // keyword parsing takes care of adding a proper description
@@ -1968,7 +1969,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.startsWith("Dredge")) {
                 sbAfter.append(TextUtil.fastReplace(keyword, ":", " ") + " (" + inst.getReminderText() + ")");
                 sbAfter.append("\r\n");
-            } else if (keyword.startsWith("Escalate") || keyword.startsWith("Buyback")) {
+            } else if (keyword.startsWith("Escalate") || keyword.startsWith("Buyback")
+                    || keyword.startsWith("Prowl")) {
                 final String[] k = keyword.split(":");
                 final String manacost = k[1];
                 final Cost cost = new Cost(manacost, false);
