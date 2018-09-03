@@ -1,0 +1,9 @@
+Name:Legion Warboss
+ManaCost:2 R
+Types:Creature Goblin Soldier
+PT:2/2
+K:Dethrone
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of combat on your turn, create a 1/1 red Goblin creature token. That token gains haste until end of turn and attacks this combat if able.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ r 1 1 goblin M19 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | KW$ Haste & HIDDEN CARDNAME attacks each combat if able. | Defined$ 
+Oracle:Mentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)\nAt the beginning of combat on your turn, create a 1/1 red Goblin creature token. That token gains haste until end of turn and attacks this combat if able.
