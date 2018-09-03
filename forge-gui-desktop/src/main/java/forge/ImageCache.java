@@ -166,7 +166,8 @@ public class ImageCache {
             } else if (setCode.equals("ME2") ||     // Masters Edition II
                     setCode.equals("ME3") ||        // Masters Edition III
                     setCode.equals("ME4") ||        // Masters Edition IV
-                    setCode.equals("TD0")           // Commander
+                    setCode.equals("TD0") ||        // Commander Theme Decks
+                    setCode.equals("TD1")           // Magic Online Deck Series
                     ) {
                 // radius = 77; // 745 x 1040
                 // radius = 52; // 488 x 680
