@@ -42,6 +42,7 @@ public class TokenInfo {
     }
 
     public TokenInfo(Card c) {
+        // TODO: Figure out how to handle legacy images?
         this.name = c.getName();
         this.imageName = ImageKeys.getTokenImageName(c.getImageKey());
         this.manaCost = c.getManaCost().toString();
@@ -56,6 +57,12 @@ public class TokenInfo {
         this.intrinsicKeywords   = list.toArray(new String[0]);
         this.basePower = c.getBasePower();
         this.baseToughness = c.getBaseToughness();
+    }
+
+    public TokenInfo(Card c, Card source) {
+        // TODO If Source has type/color changes on it, apply them now.
+        // Permanently apply them for casccading tokens? Reef Worm?
+        this(c);
     }
 
     public TokenInfo(String str) {
