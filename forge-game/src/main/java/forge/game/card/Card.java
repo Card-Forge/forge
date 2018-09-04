@@ -1960,7 +1960,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sbBefore.append(keyword + " (" + inst.getReminderText() + ")");
                 sbBefore.append("\r\n");
             } else if(keyword.equals("Conspire") || keyword.equals("Epic")
-                    || keyword.equals("Suspend")) {
+                    || keyword.equals("Suspend") || keyword.equals("Jump-start")) {
                 sbAfter.append(keyword + " (" + inst.getReminderText() + ")");
                 sbAfter.append("\r\n");
             } else if (keyword.startsWith("Ripple")) {

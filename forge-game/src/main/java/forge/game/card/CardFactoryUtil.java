@@ -3371,6 +3371,29 @@ public class CardFactoryUtil {
             final ReplacementEffect re = makeEtbCounter(sb.toString(), card, intrinsic);
 
             inst.addReplacement(re);
+        } else if (keyword.equals("Jump-start")) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
+            sb.append("| Secondary$ True | ValidStackSa$ Spell.Jumpstart | Description$ Jump-start (");
+            sb.append(inst.getReminderText());
+            sb.append(")");
+
+            String repeffstr = sb.toString();
+
+            String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile";
+
+            SpellAbility saExile = AbilityFactory.getAbility(abExile, card);
+
+            if (!intrinsic) {
+                saExile.setIntrinsic(false);
+            }
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, intrinsic);
+            re.setLayer(ReplacementLayer.Other);
+
+            re.setOverridingAbility(saExile);
+
+            inst.addReplacement(re);
         } else if (keyword.startsWith("Madness")) {
             // Set Madness Replacement effects
             String repeffstr = "Event$ Discard | ActiveZones$ Hand | ValidCard$ Card.Self | " +
@@ -3872,6 +3895,25 @@ public class CardFactoryUtil {
                 sa.setIntrinsic(intrinsic);
                 inst.addSpellAbility(sa);
             }
+        } else if (keyword.equals("Jump-start")) {
+            SpellAbility sa = card.getFirstSpellAbility();
+
+            final SpellAbility newSA = sa.copyWithDefinedCost(
+                    sa.getPayCosts().copy().add(new Cost("Discard<1/Card>", false)));;
+
+            newSA.getMapParams().put("Secondary", "True");
+            newSA.setBasicSpell(false);
+            newSA.setJumpstart(true);
+
+            newSA.getRestrictions().setZone(ZoneType.Graveyard);
+
+            String desc = "Jump-start (" + inst.getReminderText() + ")";
+            newSA.setDescription(desc);
+
+            newSA.setIntrinsic(intrinsic);
+
+            newSA.setTemporary(!intrinsic);
+            inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Level up")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
@@ -4114,9 +4156,8 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Surge")) {
             final String[] k = keyword.split(":");
             final Cost surgeCost = new Cost(k[1], false);
-            final SpellAbility newSA = card.getFirstSpellAbility().copy();
+            final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(surgeCost);
 
-            newSA.setPayCosts(surgeCost);
             newSA.setBasicSpell(false);
             newSA.setSurged(true);
 
