@@ -3895,25 +3895,6 @@ public class CardFactoryUtil {
                 sa.setIntrinsic(intrinsic);
                 inst.addSpellAbility(sa);
             }
-        } else if (keyword.equals("Jump-start")) {
-            SpellAbility sa = card.getFirstSpellAbility();
-
-            final SpellAbility newSA = sa.copyWithDefinedCost(
-                    sa.getPayCosts().copy().add(new Cost("Discard<1/Card>", false)));;
-
-            newSA.getMapParams().put("Secondary", "True");
-            newSA.setBasicSpell(false);
-            newSA.setJumpstart(true);
-
-            newSA.getRestrictions().setZone(ZoneType.Graveyard);
-
-            String desc = "Jump-start (" + inst.getReminderText() + ")";
-            newSA.setDescription(desc);
-
-            newSA.setIntrinsic(intrinsic);
-
-            newSA.setTemporary(!intrinsic);
-            inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Level up")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
