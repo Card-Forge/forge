@@ -1,5 +1,6 @@
 package forge.screens.deckeditor.views;
 
+import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -80,6 +81,8 @@ public enum VTinyLeadersDecks implements IVDoc<CTinyLeadersDecks> {
         JPanel parentBody = parentCell.getBody();
         parentBody.setLayout(new MigLayout("insets 5, gap 0, wrap, hidemode 3"));
         parentBody.add(new ItemManagerContainer(lstDecks), "push, grow");
+        String preferredDeck = DeckPreferences.getTinyLeadersDeck();
+        lstDecks.editDeck(lstDecks.stringToItem(preferredDeck));
     }
 
     //========== Retrieval methods
