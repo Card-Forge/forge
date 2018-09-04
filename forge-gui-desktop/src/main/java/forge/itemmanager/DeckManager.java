@@ -312,13 +312,17 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 return;
         }
 
-        if (!Singletons.getControl().ensureScreenActive(screen)) { return; }
+        if (!Singletons.getControl().ensureScreenActive(screen)) {
+            return;
+        }
 
         if (editorCtrl != null) {
             CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(editorCtrl);
         }
 
-        if (!SEditorIO.confirmSaveChanges(screen, true)) { return; } //ensure previous deck on screen is saved if needed
+        if (!SEditorIO.confirmSaveChanges(screen, true)) {
+            return;
+        } //ensure previous deck on screen is saved if needed
 
         CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(deck.getPath(), deck.getName());
     }
