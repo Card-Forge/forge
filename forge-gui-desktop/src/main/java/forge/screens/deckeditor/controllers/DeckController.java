@@ -104,6 +104,10 @@ public class DeckController<T extends DeckBase> {
             }
         }
 
+        if (deck.getName() == "") {
+            newModel();
+        }
+
         onModelChanged(false);
     }
 
