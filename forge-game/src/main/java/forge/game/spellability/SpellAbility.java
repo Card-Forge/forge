@@ -93,6 +93,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private List<Object> triggerRemembered = Lists.newArrayList();
 
     private boolean flashBackAbility = false;
+    private boolean jumpstart = false;
     private boolean aftermath = false;
     private boolean cycling = false;
     private boolean dash = false;
@@ -785,6 +786,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setOutlast(boolean outlast0) {
         outlast = outlast0;
+    }
+
+    public boolean isJumpstart() {
+        return jumpstart;
+    }
+    public void setJumpstart(boolean jumpstart0) {
+        jumpstart = jumpstart0;
     }
 
     public boolean isBlessing() {

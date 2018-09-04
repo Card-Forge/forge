@@ -2,6 +2,8 @@ package forge.game.keyword;
 
 import java.util.*;
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.StaticData;
 import forge.game.card.Card;
 import forge.item.PaperCard;
@@ -84,6 +86,7 @@ public enum Keyword {
     INGEST(SimpleKeyword.class, false, "Whenever this creature deals combat damage to a player, that player exiles the top card of their library."),
     INTIMIDATE(SimpleKeyword.class, true, "This creature can't be blocked except by artifact creatures and/or creatures that share a color with it."),
     KICKER(Kicker.class, false, "You may pay an additional %s as you cast this spell."),
+    JUMP_START(SimpleKeyword.class, false, "You may cast this card from your graveyard by discarding a card in addition to pay its other costs. Then exile this card."),
     LANDWALK(KeywordWithType.class, false, "This creature is unblockable as long as defending player controls a %s."),
     LEVEL_UP(KeywordWithCost.class, false, "%s: Put a level counter on this. Level up only as a sorcery."),
     LIFELINK(SimpleKeyword.class, true, "Damage dealt by this creature also causes its controller to gain that much life."),
@@ -279,8 +282,7 @@ public enum Keyword {
     }
 
     public static Keyword smartValueOf(String value) {
-
-        final String valToCompate = value.replace(" ", "_").toUpperCase();
+        final String valToCompate = StringUtils.replaceChars(value, " -", "__").toUpperCase();
         for (final Keyword v : Keyword.values()) {
             if (valToCompate.equals(v.name())) {
                 return v;
