@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import forge.deck.Deck;
 import forge.screens.deckeditor.controllers.CEditorConstructed;
 import forge.screens.home.quest.DialogChooseFormats;
 import org.apache.commons.lang3.StringUtils;
@@ -268,9 +269,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         });
     }
 
-    private void editDeck(final DeckProxy deck) {
-        if (deck == null) { return; }
-
+    public void editDeck(final DeckProxy deck) {
         ACEditorBase<? extends InventoryItem, ? extends DeckBase> editorCtrl = null;
         FScreen screen = null;
 
@@ -281,18 +280,22 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 break;
             case Constructed:
                 screen = FScreen.DECK_EDITOR_CONSTRUCTED;
-                DeckPreferences.setCurrentDeck(deck.toString());
-                //re-use constructed controller
+                DeckPreferences.setCurrentDeck((deck != null) ? deck.toString() : "");
                 editorCtrl = new CEditorConstructed(getCDetailPicture(), this.gameType);
                 break;
             case Commander:
                 screen = FScreen.DECK_EDITOR_CONSTRUCTED;  // re-use "Deck Editor", rather than creating a new top level tab
-                DeckPreferences.setCommanderDeck(deck.toString());
+                DeckPreferences.setCommanderDeck((deck != null) ? deck.toString() : "");
                 editorCtrl = new CEditorConstructed(getCDetailPicture(), this.gameType);
                 break;
             case Brawl:
                 screen = FScreen.DECK_EDITOR_CONSTRUCTED;  // re-use "Deck Editor", rather than creating a new top level tab
-                DeckPreferences.setCommanderDeck(deck.toString());
+                DeckPreferences.setBrawlDeck((deck != null) ? deck.toString() : "");
+                editorCtrl = new CEditorConstructed(getCDetailPicture(), this.gameType);
+                break;
+            case TinyLeaders:
+                screen = FScreen.DECK_EDITOR_CONSTRUCTED;  // re-use "Deck Editor", rather than creating a new top level tab
+                DeckPreferences.setTinyLeadersDeck((deck != null) ? deck.toString() : "");
                 editorCtrl = new CEditorConstructed(getCDetailPicture(), this.gameType);
                 break;
             case Sealed:
@@ -324,7 +327,11 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
             return;
         } //ensure previous deck on screen is saved if needed
 
-        CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(deck.getPath(), deck.getName());
+        if (deck != null) {
+            CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(deck.getPath(), deck.getName());
+        } else {
+            CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().loadDeck(new Deck());
+        }
     }
 
     public boolean deleteDeck(final DeckProxy deck) {
