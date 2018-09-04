@@ -86,7 +86,7 @@ public enum Keyword {
     INGEST(SimpleKeyword.class, false, "Whenever this creature deals combat damage to a player, that player exiles the top card of their library."),
     INTIMIDATE(SimpleKeyword.class, true, "This creature can't be blocked except by artifact creatures and/or creatures that share a color with it."),
     KICKER(Kicker.class, false, "You may pay an additional %s as you cast this spell."),
-    JUMP_START(SimpleKeyword.class, false, "You may cast this card from your graveyard by discarding a card in addition to pay its other costs. Then exile this card."),
+    JUMP_START(SimpleKeyword.class, false, "You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card."),
     LANDWALK(KeywordWithType.class, false, "This creature is unblockable as long as defending player controls a %s."),
     LEVEL_UP(KeywordWithCost.class, false, "%s: Put a level counter on this. Level up only as a sorcery."),
     LIFELINK(SimpleKeyword.class, true, "Damage dealt by this creature also causes its controller to gain that much life."),
