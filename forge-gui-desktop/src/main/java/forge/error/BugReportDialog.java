@@ -28,17 +28,19 @@ import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 
+import forge.model.FModel;
+import forge.properties.ForgePreferences;
 import net.miginfocom.swing.MigLayout;
 import forge.gui.WrapLayout;
-import forge.toolbox.FHyperlink;
-import forge.toolbox.FLabel;
 
 /**
  * The class BugReportDialog. Enables showing and saving error messages that
@@ -59,22 +61,19 @@ public class BugReportDialog {
         area.setWrapStyleWord(true);
 
         JPanel helpPanel = new JPanel(new WrapLayout(FlowLayout.LEFT, 4, 2));
-        for (String word : BugReporter.HELP_URL_LABEL.split(" ")) {
-            helpPanel.add(new FLabel.Builder().text("<html>" + word + "</html>").useSkinColors(false).build());
-        }
-        helpPanel.add(new FHyperlink.Builder().url(BugReporter.HELP_URL).text("<html>this post</html>").useSkinColors(false).build());
-        
         JPanel p = new JPanel(new MigLayout("wrap"));
-        p.add(new FLabel.Builder().text(BugReporter.HELP_TEXT).useSkinColors(false).build(), "gap 5");
         p.add(helpPanel, "w 600");
         p.add(new JScrollPane(area), "w 100%, h 100%, gaptop 5");
 
         // Button is not modified, String gets the automatic listener to hide
         // the dialog
         List<Object> options = new ArrayList<Object>();
-        options.add(new JButton(new _CopyAndGo(area)));
+        options.add(new JButton(new _Report()));
+        // option to enable automatic Sentry submission
+        options.add(new JCheckBox(new _ActivateSentry()));
+        options.add(new JLabel(BugReporter.SENTRY));
         options.add(new JButton(new _SaveAction(area)));
-        options.add(BugReporter.CONTINUE);
+        options.add(BugReporter.DISCARD);
         if (showExitAppBtn) {
             options.add(new JButton(new _ExitAction()));
         }
@@ -91,18 +90,29 @@ public class BugReportDialog {
     }
 
     @SuppressWarnings("serial")
-    private static class _CopyAndGo extends AbstractAction {
-        private final JTextArea text;
+    private static class _ActivateSentry extends AbstractAction {
 
-        public _CopyAndGo(JTextArea text) {
+        @Override
+        public void actionPerformed(final ActionEvent actionEvent) {
+            JCheckBox checkBox = (JCheckBox)actionEvent.getSource();
+            // enable Sentry use in the future through preference setting
+            FModel.getPreferences().setPref(ForgePreferences.FPref.USE_SENTRY, checkBox.isSelected());
+            FModel.getPreferences().save();
+        }
+    }
+
+    @SuppressWarnings("serial")
+    private static class _Report extends AbstractAction {
+
+        public _Report() {
             super(BugReporter.REPORT);
             this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_R, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-            this.text = text;
         }
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            BugReporter.copyAndGoToForums(text.getText());
+            BugReporter.sendSentry();
+            JOptionPane.getRootFrame().dispose();
         }
     }
 

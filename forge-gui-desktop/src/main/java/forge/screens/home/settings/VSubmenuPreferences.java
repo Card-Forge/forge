@@ -98,6 +98,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbFilterLandsByColorId = new OptionsCheckBox("Filter Lands by Color in Activated Abilities");
     private final JCheckBox cbShowStormCount = new OptionsCheckBox("Show Storm Count in Prompt Pane");
     private final JCheckBox cbRemindOnPriority = new OptionsCheckBox("Visually Alert on Receipt of Priority");
+    private final JCheckBox cbUseSentry = new OptionsCheckBox("Automatically submit bug reports.");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<>();
 
@@ -146,6 +147,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbCompactMainMenu, titleConstraints);
         pnlPrefs.add(new NoteLabel("Enable for a space efficient sidebar that displays only one menu group at a time (RESTART REQUIRED)."), descriptionConstraints);
+
+        pnlPrefs.add(cbUseSentry, titleConstraints);
+        pnlPrefs.add(new NoteLabel("When enabled, automatically submits bug reports to developers."), descriptionConstraints);
 
         pnlPrefs.add(btnResetJavaFutureCompatibilityWarnings, "w 300px!, h 30px!, gap 27px 0 0 20px, span 2 1");
 
@@ -501,6 +505,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public final JCheckBox getCbCompactMainMenu() {
         return cbCompactMainMenu;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public final JCheckBox getCbUseSentry() {
+        return cbUseSentry;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
