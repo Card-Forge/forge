@@ -78,6 +78,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 "Minimize on Screen Lock",
                 "Minimize Forge when screen is locked (enable if you experience graphic glitches after locking your screen)."),
                 0);
+        lstSettings.addItem(new BooleanSetting(FPref.USE_SENTRY,
+                "Automatic Bug Reports",
+                "Automatically send bug reports to the developers, without prompting."),
+                0);
 
         //Gameplay Options
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CURRENT_AI_PROFILE,
