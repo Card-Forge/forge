@@ -158,6 +158,8 @@ public class PumpAllEffect extends SpellAbilityEffect {
             keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, sa.getHostCard());
         }
         applyPumpAll(sa, list, a, d, keywords, affectedZones);
+
+        replaceDying(sa);
     } // pumpAllResolve()
 
 }

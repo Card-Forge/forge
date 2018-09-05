@@ -383,5 +383,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
             applyPump(sa, p, keywords, timestamp);
         }
+
+        replaceDying(sa);
     } // pumpResolve()
 }
