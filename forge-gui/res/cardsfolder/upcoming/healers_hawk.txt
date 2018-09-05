@@ -1,0 +1,4 @@
+Name:Healer's Hawk
+ManaCost:W
+Types:Creature Bird
+PT:1/1
