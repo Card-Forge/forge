@@ -11,8 +11,9 @@ public enum OptionalCost {
     Kicker1("Kicker"),
     Kicker2("Kicker"),
     Retrace("Retrace"),
-    AltCost(""), // used by prowl
-    Flash("Flash"),
+    Jumpstart("Jump-start"),
+    AltCost(""),
+    Flash("Flash"), // used for Pay Extra for Flash
     Generic("Generic"); // used by "Dragon Presence" and pseudo-kicker cards
 
     private String name;

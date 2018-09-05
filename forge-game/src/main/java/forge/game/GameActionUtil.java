@@ -261,6 +261,11 @@ public final class GameActionUtil {
                     final Cost cost = new Cost("Discard<1/Land>", false);
                     costs.add(new OptionalCostValue(OptionalCost.Retrace, cost));
                 }
+            } else if (keyword.equals("Jump-start")) {
+                if (source.getZone().is(ZoneType.Graveyard)) {
+                    final Cost cost = new Cost("Discard<1/Card>", false);
+                    costs.add(new OptionalCostValue(OptionalCost.Jumpstart, cost));
+                }
             } else if (keyword.startsWith("MayFlashCost")) {
                 String[] k = keyword.split(":");
                 final Cost cost = new Cost(k[1], false);
@@ -288,6 +293,7 @@ public final class GameActionUtil {
                 result.addConspireInstance();
                 break;
             case Retrace:
+            case Jumpstart:
                 result.getRestrictions().setZone(ZoneType.Graveyard);
                 break;
             case Flash:
