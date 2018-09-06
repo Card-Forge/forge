@@ -76,6 +76,8 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloadService {
         // Add missing tokens to the list of things to download.
         addMissingItems(downloads, ForgeConstants.IMAGE_LIST_TOKENS_FILE, ForgeConstants.CACHE_TOKEN_PICS_DIR);
 
+        // TODO Add TokenScript images via Editions files?
+
         return downloads;
     }
 

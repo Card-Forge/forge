@@ -39,13 +39,19 @@ public class TokenDb implements ITokenDatabase {
 
     @Override
     public PaperToken getToken(String tokenName, String edition) {
-        try {
-            PaperToken pt = new PaperToken(rulesByName.get(tokenName), editions.get(edition));
-            // TODO Cache the token after it's referenced
-            return pt;
-        } catch(Exception e) {
-            return null;
+        String fullName = String.format("%s_%s", tokenName, edition.toLowerCase());
+
+        if (!tokensByName.containsKey(fullName)) {
+            try {
+                PaperToken pt = new PaperToken(rulesByName.get(tokenName), editions.get(edition));
+                tokensByName.put(fullName, pt);
+                return pt;
+            } catch(Exception e) {
+                return null;
+            }
         }
+
+        return tokensByName.get(fullName);
     }
 
     @Override
