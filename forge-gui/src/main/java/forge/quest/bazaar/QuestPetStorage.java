@@ -1,6 +1,9 @@
 package forge.quest.bazaar;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.security.NoTypePermission;
+import com.thoughtworks.xstream.security.NullPermission;
+import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 import forge.quest.data.QuestAssets;
 import forge.util.IgnoringXStream;
 import forge.util.XmlUtil;
@@ -42,6 +45,17 @@ public class QuestPetStorage {
             final Document document = builder.parse(file);
 
             final XStream xs = new IgnoringXStream();
+            // clear out existing permissions and set our own
+            xs.addPermission(NoTypePermission.NONE);
+            // allow some basics
+            xs.addPermission(NullPermission.NULL);
+            xs.addPermission(PrimitiveTypePermission.PRIMITIVES);
+            xs.allowTypeHierarchy(String.class);
+            // allow any type from the same package
+            xs.allowTypesByWildcard(new String[] {
+                    QuestPetStorage.class.getPackage().getName()+".*"
+            });
+
             xs.autodetectAnnotations(true);
 
             final NodeList xmlPets = document.getElementsByTagName("pets").item(0).getChildNodes();
