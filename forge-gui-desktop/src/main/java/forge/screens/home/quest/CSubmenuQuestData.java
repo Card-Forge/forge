@@ -184,6 +184,7 @@ public enum CSubmenuQuestData implements ICDoc {
                 System.out.println(String.format("About to load quest (%s)... ", f.getName()));
                 arrQuests.put(f.getName(), QuestDataIO.loadData(f));
             } catch(IOException ex) {
+                ex.printStackTrace();
                 System.out.println(String.format("Error loading quest data (%s).. skipping for now..", f.getName()));
                 restorableQuests.add(f.getName());
             }

@@ -234,6 +234,7 @@ public enum FControl implements KeyEventDispatcher {
             try {
                 FModel.getQuest().load(QuestDataIO.loadData(data));
             } catch(IOException ex) {
+                ex.printStackTrace();
                 System.out.println(String.format("Error loading quest data (%s).. skipping for now..", questname));
             }
         }
