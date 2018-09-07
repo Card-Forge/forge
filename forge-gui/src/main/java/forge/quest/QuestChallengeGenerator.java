@@ -81,6 +81,7 @@ public class QuestChallengeGenerator {
     public static QuestEventChallenge getFormatChallenge(GameFormat format){
         QuestEventChallenge qc = new QuestEventChallenge();
 
+        qc.setAiLife(20);
         qc.setEventDeck(DeckgenUtil.buildLDACArchetypeDeck(format,true));
         qc.setTitle(format.getName() + " " + qc.getEventDeck().getName() + " challenge");
         qc.setName(format.getName() + " " + qc.getEventDeck().getName() + " challenge");
@@ -94,15 +95,21 @@ public class QuestChallengeGenerator {
     public static QuestEventChallenge getAIHeadstartChallenge(int extras){
         QuestEventChallenge qc = new QuestEventChallenge();
 
+        qc.setAiLife(20);
         qc.setEventDeck(DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getStandard(),true));
         qc.setTitle(qc.getEventDeck().getName() + " headstart challenge");
         qc.setName(qc.getEventDeck().getName() + " headstart  challenge");
         qc.setOpponentName(qc.getEventDeck().getName());
         qc.setDescription("The AI gets a bit of a headstart...");
         ArrayList<String> cards = new ArrayList<>();
-        for(int i=0; i < extras; ++i) {
-            cards.add(qc.getEventDeck().getMain().toFlatList().get(
-                    MyRandom.getRandom().nextInt(qc.getEventDeck().getMain().toFlatList().size())).getName());
+        int i = 0;
+        while(i < extras) {
+            PaperCard card = qc.getEventDeck().getMain().toFlatList().get(
+                    MyRandom.getRandom().nextInt(qc.getEventDeck().getMain().toFlatList().size()));
+            if(card.getRules().getType().isPermanent()){
+                cards.add(card.getName());
+                ++i;
+            }
         }
         qc.setAiExtraCards(cards);
         qc.setOpponentName(qc.getEventDeck().getName());

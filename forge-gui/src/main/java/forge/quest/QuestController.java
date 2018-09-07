@@ -418,9 +418,6 @@ public class QuestController {
      * @return QuestEventManager
      */
     public IStorage<QuestEventChallenge> getChallenges() {
-        if (getWorld().getName().equals(QuestWorld.STANDARDWORLDNAME)){
-            allChallenges = QuestChallengeGenerator.generateChallenges();
-        }
         if (this.allChallenges == null) {
             resetChallengesManager();
         }
