@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Magic Core Set 2019 #08
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2018/08/078.-M198.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Assume your opponent has no mana available. Remember that your solution must work for all possible blocking scenarios.
+[state]
+humanlife=20
+ailife=18
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Gift of Growth;Lifecraft Awakening;Phyrexian Scriptures;Stronghold Confessor;Soul-Scar Mage
+humanbattlefield=Imminent Doom|Counters:DOOM=4;Hadana's Climb;Hallar, the Firefletcher|Counters:P1P1=2;Skyrider Patrol;Winding Constrictor;Hinterland Harbor;Hinterland Harbor;Hinterland Harbor;Hinterland Harbor;Forest;Forest;Forest;Canyon Slough;Canyon Slough;Canyon Slough
+aibattlefield=Zetalpa, Primal Dawn;Narnam Renegade;Serra Disciple;Majestic Myriarch
