@@ -550,8 +550,6 @@ public class QuestController {
             maxChallenges = 5;
         }
 
-        maxChallenges = 5;
-
         // Generate IDs as needed.
         if (achievements.getCurrentChallenges().size() < maxChallenges) {
             for (final QuestEventChallenge qc : allChallenges) {
