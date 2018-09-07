@@ -418,6 +418,9 @@ public class QuestController {
      * @return QuestEventManager
      */
     public IStorage<QuestEventChallenge> getChallenges() {
+        if (getWorld().getName().equals(QuestWorld.STANDARDWORLDNAME)){
+            allChallenges = QuestChallengeGenerator.generateChallenges();
+        }
         if (this.allChallenges == null) {
             resetChallengesManager();
         }
@@ -455,6 +458,10 @@ public class QuestController {
     public void resetChallengesManager() {
         QuestWorld world = getWorld();
         String path;
+        if (world.getName().equals(QuestWorld.STANDARDWORLDNAME)){
+            allChallenges = QuestChallengeGenerator.generateChallenges();
+            return;
+        }
         if (world == null || !world.isCustom()){
             path = world == null || world.getChallengesDir() == null ? ForgeConstants.DEFAULT_CHALLENGES_DIR : ForgeConstants.QUEST_WORLD_DIR + world.getChallengesDir();
         }else{
@@ -542,6 +549,8 @@ public class QuestController {
         if (maxChallenges > 5) {
             maxChallenges = 5;
         }
+
+        maxChallenges = 5;
 
         // Generate IDs as needed.
         if (achievements.getCurrentChallenges().size() < maxChallenges) {
