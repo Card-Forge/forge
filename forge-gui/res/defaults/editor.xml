@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<layout>
+<layout serial="2018090601">
 	<cell x="0.77443" y="0.37698" w="0.22557" h="0.62302">
 		<doc>CARD_PICTURE</doc>
 	</cell>
