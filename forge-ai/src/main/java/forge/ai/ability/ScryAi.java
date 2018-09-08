@@ -11,7 +11,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
@@ -22,9 +21,8 @@ public class ScryAi extends SpellAbilityAi {
      */
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        if (tgt != null) { // It doesn't appear that Scry ever targets
+        if (sa.usesTargeting()) { // It doesn't appear that Scry ever targets
             // ability is targeted
             sa.resetTargets();
 

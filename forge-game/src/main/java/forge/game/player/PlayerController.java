@@ -140,6 +140,8 @@ public abstract class PlayerController {
     /** Shows message to player to reveal chosen cardName, creatureType, number etc. AI must analyze API to understand what that is */
     public abstract void notifyOfValue(SpellAbility saSource, GameObject realtedTarget, String value);
     public abstract ImmutablePair<CardCollection, CardCollection> arrangeForScry(CardCollection topN);
+    public abstract ImmutablePair<CardCollection, CardCollection> arrangeForSurveil(CardCollection topN);
+
     public abstract boolean willPutCardOnTop(Card c);
     public final CardCollectionView orderMoveToZoneList(CardCollectionView cards, ZoneType destinationZone) {
         return orderMoveToZoneList(cards, destinationZone, null);

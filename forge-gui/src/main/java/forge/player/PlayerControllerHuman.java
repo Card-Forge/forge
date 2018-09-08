@@ -770,6 +770,43 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public ImmutablePair<CardCollection, CardCollection> arrangeForSurveil(final CardCollection topN) {
+        CardCollection toGrave = null;
+        CardCollection toTop = null;
+
+        tempShowCards(topN);
+        if (topN.size() == 1) {
+            final Card c = topN.getFirst();
+            final CardView view = CardView.get(c);
+
+            tempShowCard(c);
+            getGui().setCard(view);
+            boolean result = false;
+            result = InputConfirm.confirm(this, view, TextUtil.concatNoSpace("Put ", view.toString(), " on the top of library or graveyard?"),
+                    true, ImmutableList.of("Library", "Graveyard"));
+            if (result) {
+                toTop = topN;
+            } else {
+                toGrave = topN;
+            }
+        } else {
+            toGrave = game.getCardList(getGui().many("Select cards to be put into the graveyard",
+                    "Cards to put in the graveyard", -1, CardView.getCollection(topN), null));
+            topN.removeAll((Collection<?>) toGrave);
+            if (topN.isEmpty()) {
+                toTop = null;
+            } else if (topN.size() == 1) {
+                toTop = topN;
+            } else {
+                toTop = game.getCardList(getGui().order("Arrange cards to be put on top of your library",
+                        "Top of Library", CardView.getCollection(topN), null));
+            }
+        }
+        endTempShowCards();
+        return ImmutablePair.of(toTop, toGrave);
+    }
+
+    @Override
     public boolean willPutCardOnTop(final Card c) {
         final CardView view = CardView.get(c);
 

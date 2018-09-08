@@ -292,8 +292,26 @@ public class PlayerControllerAi extends PlayerController {
         return ImmutablePair.of(toTop, toBottom);
     }
 
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#arrangeForSurveil(forge.game.card.CardCollection)
+     */
+    @Override
+    public ImmutablePair<CardCollection, CardCollection> arrangeForSurveil(CardCollection topN) {
+        CardCollection toGraveyard = new CardCollection();
+        CardCollection toTop = new CardCollection();
+
+        // TODO add AI logic there, similar to Scry
+
+        toTop.addAll(topN);
+
+        Collections.shuffle(toTop, MyRandom.getRandom());
+        return ImmutablePair.of(toTop, toGraveyard);
+    }
+
     @Override
     public boolean willPutCardOnTop(Card c) {
+        // TODO add Logic there similar to Scry. this is used for Clash
+
         return true; // AI does not know what will happen next (another clash or that would become his topdeck)
     }
 
