@@ -23,6 +23,7 @@ Type=Expansion
 96 C Direct Current
 109 R Legion Warboss
 122 U Arboretum Elemental
+149 C Wary Okapi
 156 U Boros Challenger
 168 R Emmara, Soul of the Accord
 171 R Firemind's Research
@@ -44,4 +45,10 @@ Type=Expansion
 262 L Swamp
 263 L Mountain
 264 L Forest
+265 M Ral, Caller of Storms
+266 R Ral's Dispersal
+268 U Ral's Staticaster
+269 M Vraska, Regal Gorgon
+271 U Attendant of Vraska
+272 R Vraska's Stoneglare
 273 M Impervious Greatwurm
