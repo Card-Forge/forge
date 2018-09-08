@@ -891,7 +891,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             // ensure that selection is within maximum allowed changeNum
             do {
                 selectedCards = decider.getController().chooseCardsForZoneChange(destination, origin, sa, fetchList, delayedReveal, selectPrompt, decider);
-            } while (selectedCards.size() > changeNum);
+            } while (selectedCards != null && selectedCards.size() > changeNum);
             for (Card card : selectedCards) {
                 chosenCards.add(card);
             };
