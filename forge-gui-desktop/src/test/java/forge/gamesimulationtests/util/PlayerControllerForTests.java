@@ -247,6 +247,11 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
+    public ImmutablePair<CardCollection, CardCollection> arrangeForSurveil(CardCollection topN) {
+        return ImmutablePair.of(topN, null);
+    }
+
+    @Override
     public boolean willPutCardOnTop(Card c) {
         return false;
     }

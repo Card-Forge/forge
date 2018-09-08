@@ -1848,7 +1848,7 @@ public class GameAction {
         //Vancouver Mulligan
         for(Player p : whoCanMulligan) {
             if (p.getStartingHandSize() > p.getZone(ZoneType.Hand).size()) {
-                p.scry(1);
+                p.scry(1, null);
             }
         }
     }

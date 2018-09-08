@@ -24,6 +24,7 @@ import forge.game.event.GameEventPlayerPoisoned;
 import forge.game.event.GameEventScry;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellResolved;
+import forge.game.event.GameEventSurveil;
 import forge.game.event.GameEventTurnBegan;
 import forge.game.event.GameEventTurnPhase;
 import forge.game.event.IGameEventVisitor;
@@ -65,7 +66,24 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
         return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, scryOutcome);
     }
-    
+
+    @Override
+    public GameLogEntry visit(GameEventSurveil ev) {
+        String scryOutcome = "";
+        String toLibrary = Lang.nounWithAmount(ev.toLibrary, "card") + " to the top of the library";
+        String toGraveyard = Lang.nounWithAmount(ev.toGraveyard, "card") + " to the graveyard";
+
+        if (ev.toLibrary > 0 && ev.toGraveyard > 0) {
+            scryOutcome = ev.player.toString() + " surveil " + toLibrary + " and " + toGraveyard;
+        } else if (ev.toGraveyard == 0) {
+            scryOutcome = ev.player.toString() + " surveil " + toLibrary;
+        } else {
+            scryOutcome = ev.player.toString() + " surveil " + toGraveyard;
+        }
+
+        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, scryOutcome);
+    }
+
     @Override
     public GameLogEntry visit(GameEventSpellResolved ev) {
         String messageForLog = ev.hasFizzled ? ev.spell.getHostCard().getName() + " ability fizzles." : ev.spell.getStackDescription();
