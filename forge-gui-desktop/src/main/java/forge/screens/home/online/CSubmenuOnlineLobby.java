@@ -1,5 +1,6 @@
 package forge.screens.home.online;
 
+import java.net.BindException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import javax.swing.JMenu;
 import javax.swing.SwingUtilities;
 
 import forge.FThreads;
+import forge.error.BugReporter;
 import forge.gui.FNetOverlay;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.EDocID;
@@ -19,6 +21,7 @@ import forge.screens.home.CHomeUI;
 import forge.screens.home.CLobby;
 import forge.screens.home.VLobby;
 import forge.screens.home.sanctioned.ConstructedGameMenu;
+import forge.util.gui.SOptionPane;
 
 public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
     SINGLETON_INSTANCE;
@@ -41,7 +44,18 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
                     join(url);
                 }
                 else {
-                    host();
+                    try {
+                        host();
+                    } catch (Exception ex) {
+                        // IntelliJ swears that BindException isn't thrown in this try block, but it is!
+                        if (ex.getClass() == BindException.class) {
+                            SOptionPane.showErrorDialog("Unable to start server, port already in use!");
+                            SOverlayUtils.hideOverlay();
+                        } else {
+                            BugReporter.reportException(ex);
+                        }
+                        ;
+                    }
                 }
             }
         });
