@@ -1,0 +1,47 @@
+[metadata]
+Code=GRN
+Date=2018-10-05
+Name=Guilds of Ravnica
+Code2=GRN
+MciCode=grn
+Type=Expansion
+
+[cards]
+1 C Blade Instructor
+6 U Conclave Tribunal
+14 C Healer's Hawk
+45 U Murmuring Mystic
+47 R Narcomoeba
+51 R Quasiduplicate
+52 C Radical Idea
+54 U Sinister Sabotage
+56 C Unexplained Disappearance
+68 C Deadly Visit
+78 C Moodmark Painter
+79 U Necrotic Wound
+92 C Barging Sergeant
+96 C Direct Current
+109 R Legion Warboss
+122 U Arboretum Elemental
+156 U Boros Challenger
+168 R Emmara, Soul of the Accord
+171 R Firemind's Research
+176 C Hammer Dropper
+195 M Ral, Izzet Viceroy
+197 C Rosemane Centaur
+199 C Sonic Assault
+206 U Thought Erasure
+211 M Underrealm Lich
+230 U Status // Statue
+248 C Golgari Guildgate
+253 R Overgrown Tomb
+254 R Sacred Foundry
+257 R Steam Vents
+258 R Temple Garden
+259 R Watery Grave
+260 L Plains
+261 L Island
+262 L Swamp
+263 L Mountain
+264 L Forest
+273 M Impervious Greatwurm
