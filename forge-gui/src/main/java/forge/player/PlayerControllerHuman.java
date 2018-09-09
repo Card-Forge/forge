@@ -18,6 +18,7 @@ import forge.control.FControlGamePlayback;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
+import forge.error.BugReporter;
 import forge.events.UiEventNextGameDecision;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
@@ -60,6 +61,7 @@ import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import forge.util.gui.SOptionPane;
+import io.sentry.Sentry;
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -458,6 +460,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public <T extends GameEntity> List<T> chooseEntitiesForEffect(final FCollectionView<T> optionList,
             final DelayedReveal delayedReveal, final SpellAbility sa, final String title, final Player targetedPlayer) {
+
+        // useful details for debugging problems with the mass select logic
+        Sentry.getContext().addExtra("Card", sa.getCardView().toString());
+        Sentry.getContext().addExtra("SpellAbility", sa.toString());
+
         // Human is supposed to read the message and understand from it what to
         // choose
         if (optionList.isEmpty()) {
@@ -493,7 +500,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             input.setCancelAllowed(true);
             input.setMessage(MessageUtil.formatMessage(title, player, targetedPlayer));
             input.showAndWait();
-            return (List<T>) Iterables.getFirst(input.getSelected(), null);
+            return (List<T>) input.getSelected();
         }
 
         tempShow(optionList);
