@@ -69,19 +69,19 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventSurveil ev) {
-        String scryOutcome = "";
+        String surveilOutcome = "";
         String toLibrary = Lang.nounWithAmount(ev.toLibrary, "card") + " to the top of the library";
         String toGraveyard = Lang.nounWithAmount(ev.toGraveyard, "card") + " to the graveyard";
 
         if (ev.toLibrary > 0 && ev.toGraveyard > 0) {
-            scryOutcome = ev.player.toString() + " surveil " + toLibrary + " and " + toGraveyard;
+            surveilOutcome = ev.player.toString() + " surveiled " + toLibrary + " and " + toGraveyard;
         } else if (ev.toGraveyard == 0) {
-            scryOutcome = ev.player.toString() + " surveil " + toLibrary;
+            surveilOutcome = ev.player.toString() + " surveiled " + toLibrary;
         } else {
-            scryOutcome = ev.player.toString() + " surveil " + toGraveyard;
+            surveilOutcome = ev.player.toString() + " surveiled " + toGraveyard;
         }
 
-        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, scryOutcome);
+        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, surveilOutcome);
     }
 
     @Override
