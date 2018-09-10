@@ -320,9 +320,10 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean willPutCardOnTop(Card c) {
-        // TODO add Logic there similar to Scry. this is used for Clash
+        // This is used for Clash. Currently uses Scry logic to determine whether the card should be put on top.
+        // Note that the AI does not know what will happen next (another clash or that would become his topdeck)
 
-        return true; // AI does not know what will happen next (another clash or that would become his topdeck)
+        return !ComputerUtil.scryWillMoveCardToBottomOfLibrary(player, c);
     }
 
     @Override
