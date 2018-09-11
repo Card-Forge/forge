@@ -28,7 +28,6 @@ import javax.xml.stream.events.XMLEvent;
 
 import forge.FThreads;
 import forge.Singletons;
-import forge.error.BugReporter;
 import forge.gui.SOverlayUtils;
 import forge.properties.FileLocation;
 import forge.properties.ForgeConstants;

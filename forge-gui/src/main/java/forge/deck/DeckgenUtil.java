@@ -35,7 +35,6 @@ import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.awt.print.Paper;
 import java.util.*;
 
 /** 

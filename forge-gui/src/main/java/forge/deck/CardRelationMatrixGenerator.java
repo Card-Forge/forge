@@ -6,7 +6,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
-import forge.deck.io.CardThemedLDAIO;
 import forge.deck.io.CardThemedMatrixIO;
 import forge.deck.io.DeckStorage;
 import forge.game.GameFormat;

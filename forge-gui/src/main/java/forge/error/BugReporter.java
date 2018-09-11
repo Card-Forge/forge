@@ -30,7 +30,6 @@ import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.util.gui.SOptionPane;
 import io.sentry.Sentry;
-import io.sentry.event.Breadcrumb;
 import io.sentry.event.BreadcrumbBuilder;
 
 /**

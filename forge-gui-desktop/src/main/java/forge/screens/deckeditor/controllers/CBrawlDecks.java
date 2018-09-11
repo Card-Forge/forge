@@ -4,8 +4,6 @@ import forge.deck.DeckProxy;
 import forge.gui.framework.ICDoc;
 import forge.itemmanager.ItemManagerConfig;
 import forge.screens.deckeditor.views.VBrawlDecks;
-import forge.screens.deckeditor.views.VCommanderDecks;
-import forge.screens.deckeditor.views.VTinyLeadersDecks;
 
 /**
  * Controls the "Commander Decks" panel in the deck editor UI.
