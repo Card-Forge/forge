@@ -88,6 +88,10 @@ public class DeckController<T extends DeckBase> {
      */
     public void loadDeck(Deck deck) {
 
+        if (deck.getName() == "") {
+            newModel();
+        }
+
         if (!view.getCatalogManager().isInfinite()) {
             CardPool catalogClone = new CardPool(view.getInitialCatalog());
             deck = pickFromCatalog(deck, catalogClone);
@@ -102,10 +106,6 @@ public class DeckController<T extends DeckBase> {
                 sectionCards.clear();
                 sectionCards.addAll(deck.getOrCreate(section));
             }
-        }
-
-        if (deck.getName() == "") {
-            newModel();
         }
 
         onModelChanged(false);
