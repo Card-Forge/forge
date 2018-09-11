@@ -14,6 +14,7 @@ Type=Expansion
 26 U Sunhome Stalwart
 36 C Dimir Informant
 38 M Dream Eater
+41 U Guild Summit
 45 U Murmuring Mystic
 47 R Narcomoeba
 51 R Quasiduplicate
@@ -25,8 +26,11 @@ Type=Expansion
 79 U Necrotic Wound
 92 C Barging Sergeant
 96 C Direct Current
+103 U Goblin Cratermaker
 109 R Legion Warboss
+115 R Runaway Steam-Kin
 122 U Arboretum Elemental
+128 C District Guide
 149 C Wary Okapi
 152 R Assassin's Trophy
 156 U Boros Challenger
@@ -36,6 +40,7 @@ Type=Expansion
 174 C Goblin Electromancer
 176 C Hammer Dropper
 178 C Hypothesizzle
+179 R Ionize
 180 R Izoni, Thousand-Eyed
 188 M March of the Multitudes
 192 R Niv-Mizzet, Parun
@@ -51,9 +56,18 @@ Type=Expansion
 229 R Response // Resurgence
 230 U Status // Statue
 233 R Chromatic Lantern
+243 C Boros Guildgate
+244 C Boros Guildgate
+245 C Dimir Guildgate
+246 C Dimir Guildgate
 248 C Golgari Guildgate
+249 C Golgari Guildgate
+251 C Izzet Guildgate
+252 C Izzet Guildgate
 253 R Overgrown Tomb
 254 R Sacred Foundry
+255 C Selesnya Guildgate
+256 C Selesnya Guildgate
 257 R Steam Vents
 258 R Temple Garden
 259 R Watery Grave
