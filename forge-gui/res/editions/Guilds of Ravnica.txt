@@ -30,11 +30,14 @@ Type=Expansion
 149 C Wary Okapi
 152 R Assassin's Trophy
 156 U Boros Challenger
+165 R Deafening Clarion
 168 R Emmara, Soul of the Accord
 171 R Firemind's Research
 174 C Goblin Electromancer
 176 C Hammer Dropper
 178 C Hypothesizzle
+180 R Izoni, Thousand-Eyed
+188 M March of the Multitudes
 192 R Niv-Mizzet, Parun
 195 M Ral, Izzet Viceroy
 197 C Rosemane Centaur
