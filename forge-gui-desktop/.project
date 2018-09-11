@@ -3,6 +3,9 @@
 	<name>forge-gui-desktop</name>
 	<comment></comment>
 	<projects>
+		<project>forge-core</project>
+		<project>forge-game</project>
+		<project>forge-gui</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
