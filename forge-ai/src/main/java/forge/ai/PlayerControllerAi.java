@@ -300,9 +300,19 @@ public class PlayerControllerAi extends PlayerController {
         CardCollection toGraveyard = new CardCollection();
         CardCollection toTop = new CardCollection();
 
-        // TODO add AI logic there, similar to Scry
-
-        toTop.addAll(topN);
+        // TODO: Currently this logic uses the same routine as Scry. Possibly differentiate this and implement
+        // a specific logic for Surveil (e.g. maybe to interact better with Reanimator strategies etc.).
+        if (getPlayer().getCardsIn(ZoneType.Hand).size() <= getAi().getIntProperty(AiProps.SURVEIL_NUM_CARDS_IN_LIBRARY_TO_BAIL)) {
+            toTop.addAll(topN);
+        } else {
+            for (Card c : topN) {
+                if (ComputerUtil.scryWillMoveCardToBottomOfLibrary(player, c)) {
+                    toGraveyard.add(c);
+                } else {
+                    toTop.add(c);
+                }
+            }
+        }
 
         Collections.shuffle(toTop, MyRandom.getRandom());
         return ImmutablePair.of(toTop, toGraveyard);
@@ -310,9 +320,10 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean willPutCardOnTop(Card c) {
-        // TODO add Logic there similar to Scry. this is used for Clash
+        // This is used for Clash. Currently uses Scry logic to determine whether the card should be put on top.
+        // Note that the AI does not know what will happen next (another clash or that would become his topdeck)
 
-        return true; // AI does not know what will happen next (another clash or that would become his topdeck)
+        return !ComputerUtil.scryWillMoveCardToBottomOfLibrary(player, c);
     }
 
     @Override

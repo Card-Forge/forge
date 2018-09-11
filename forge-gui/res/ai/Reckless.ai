@@ -159,6 +159,10 @@ SCRY_IMMEDIATELY_UNCASTABLE_TO_BOTTOM=true
 # How big of a CMC difference between the currently castable and the considered card's CMC is allowed before
 # the card is considered not immediately castable for the purpose of the previous option
 SCRY_IMMEDIATELY_UNCASTABLE_CMC_DIFF=1
+# Surveil AI toggles (currently the AI uses Scry logic for the majority of decisions)
+# If the AI has this many or fewer cards in the library, it will Surveil to the top of the library in order
+# not to deplete the library.
+SURVEIL_NUM_CARDS_IN_LIBRARY_TO_BAIL=5
 
 # Attempt to predict the number of potential blockers with various forms of evasion when
 # deciding to do an all-in assault attack
