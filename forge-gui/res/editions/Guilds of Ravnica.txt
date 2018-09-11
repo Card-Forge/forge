@@ -12,6 +12,7 @@ Type=Expansion
 6 U Conclave Tribunal
 14 C Healer's Hawk
 26 U Sunhome Stalwart
+32 U Chemister's Insight
 36 C Dimir Informant
 38 M Dream Eater
 41 U Guild Summit
@@ -30,8 +31,11 @@ Type=Expansion
 109 R Legion Warboss
 115 R Runaway Steam-Kin
 122 U Arboretum Elemental
-128 C District Guide
+123 R Beast Whisperer
+128 U District Guide
+138 M Nullhide Ferox
 149 C Wary Okapi
+151 C Artful Takedown
 152 R Assassin's Trophy
 156 U Boros Challenger
 165 R Deafening Clarion
@@ -60,6 +64,7 @@ Type=Expansion
 244 C Boros Guildgate
 245 C Dimir Guildgate
 246 C Dimir Guildgate
+247 C Gateway Plaza
 248 C Golgari Guildgate
 249 C Golgari Guildgate
 251 C Izzet Guildgate
