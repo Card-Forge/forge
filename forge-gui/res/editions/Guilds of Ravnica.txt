@@ -18,13 +18,16 @@ Type=Expansion
 41 U Guild Summit
 45 U Murmuring Mystic
 47 R Narcomoeba
+48 U Nightveil Faerie
 51 R Quasiduplicate
 52 C Radical Idea
 54 U Sinister Sabotage
 56 C Unexplained Disappearance
 68 C Deadly Visit
+75 R Secrets of the Mausoleum
 78 C Moodmark Painter
 79 U Necrotic Wound
+90 U Whispering Spy
 92 C Barging Sergeant
 96 C Direct Current
 103 U Goblin Cratermaker
@@ -48,6 +51,7 @@ Type=Expansion
 180 R Izoni, Thousand-Eyed
 188 M March of the Multitudes
 192 R Niv-Mizzet, Parun
+193 C Rain of Notions
 195 M Ral, Izzet Viceroy
 197 C Rosemane Centaur
 199 C Sonic Assault
