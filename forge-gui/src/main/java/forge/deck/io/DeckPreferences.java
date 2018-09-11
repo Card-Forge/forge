@@ -118,6 +118,7 @@ public class DeckPreferences {
             draftDeck = root.getAttribute("draftDeck");
             sealedDeck = root.getAttribute("sealedDeck");
             commanderDeck = root.getAttribute("commanderDeck");
+            brawlDeck = root.getAttribute("brawlDeck");
             tinyLeadersDeck = root.getAttribute("tinyLeadersDeck");
             planarDeck = root.getAttribute("planarDeck");
             schemeDeck = root.getAttribute("schemeDeck");
@@ -148,6 +149,7 @@ public class DeckPreferences {
             root.setAttribute("draftDeck", draftDeck);
             root.setAttribute("sealedDeck", sealedDeck);
             root.setAttribute("commanderDeck", commanderDeck);
+            root.setAttribute("brawlDeck", brawlDeck);
             root.setAttribute("tinyLeadersDeck", tinyLeadersDeck);
             root.setAttribute("planarDeck", planarDeck);
             root.setAttribute("schemeDeck", schemeDeck);

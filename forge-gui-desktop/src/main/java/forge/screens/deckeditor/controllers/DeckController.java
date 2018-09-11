@@ -88,6 +88,10 @@ public class DeckController<T extends DeckBase> {
      */
     public void loadDeck(Deck deck) {
 
+        if (deck.getName() == "") {
+            newModel();
+        }
+
         if (!view.getCatalogManager().isInfinite()) {
             CardPool catalogClone = new CardPool(view.getInitialCatalog());
             deck = pickFromCatalog(deck, catalogClone);
@@ -406,7 +410,7 @@ public class DeckController<T extends DeckBase> {
             tabCaption = "*" + tabCaption;
             itemManagerCaption = "*" + itemManagerCaption;
         }
-        itemManagerCaption += " - " + view.getSectionMode().name();
+        itemManagerCaption += " - ";
 
         VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText(tabCaption);
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setText(title);

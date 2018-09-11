@@ -270,7 +270,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
         getBtnRemove().setVisible(false);
         getBtnRemove4().setVisible(false);
 
-        getBtnCycleSection().setVisible(false);
+        getCbxSection().setVisible(false);
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
 

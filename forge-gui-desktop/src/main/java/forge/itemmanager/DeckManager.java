@@ -12,6 +12,8 @@ import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import forge.deck.Deck;
+import forge.screens.deckeditor.controllers.CEditorConstructed;
 import forge.screens.home.quest.DialogChooseFormats;
 import org.apache.commons.lang3.StringUtils;
 
@@ -267,48 +269,69 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         });
     }
 
-    private void editDeck(final DeckProxy deck) {
-        if (deck == null) { return; }
-
+    public void editDeck(final DeckProxy deck) {
         ACEditorBase<? extends InventoryItem, ? extends DeckBase> editorCtrl = null;
         FScreen screen = null;
 
         switch (this.gameType) {
-        case Quest:
-            screen = FScreen.DECK_EDITOR_QUEST;
-            editorCtrl = new CEditorQuest(FModel.getQuest(), getCDetailPicture());
-            break;
-        case Constructed:
-            screen = FScreen.DECK_EDITOR_CONSTRUCTED;
-            DeckPreferences.setCurrentDeck(deck.toString());
-            //re-use constructed controller
-            break;
-        case Sealed:
-            screen = FScreen.DECK_EDITOR_SEALED;
-            editorCtrl = new CEditorLimited(FModel.getDecks().getSealed(), screen, getCDetailPicture());
-            break;
-        case Draft:
-            screen = FScreen.DECK_EDITOR_DRAFT;
-            editorCtrl = new CEditorLimited(FModel.getDecks().getDraft(), screen, getCDetailPicture());
-            break;
-        case Winston:
-            screen = FScreen.DECK_EDITOR_DRAFT;
-            editorCtrl = new CEditorLimited(FModel.getDecks().getWinston(), screen, getCDetailPicture());
-            break;
+            case Quest:
+                screen = FScreen.DECK_EDITOR_QUEST;
+                editorCtrl = new CEditorQuest(FModel.getQuest(), getCDetailPicture());
+                break;
+            case Constructed:
+                screen = FScreen.DECK_EDITOR_CONSTRUCTED;
+                DeckPreferences.setCurrentDeck((deck != null) ? deck.toString() : "");
+                editorCtrl = new CEditorConstructed(getCDetailPicture(), this.gameType);
+                break;
+            case Commander:
+                screen = FScreen.DECK_EDITOR_CONSTRUCTED;  // re-use "Deck Editor", rather than creating a new top level tab
+                DeckPreferences.setCommanderDeck((deck != null) ? deck.toString() : "");
+                editorCtrl = new CEditorConstructed(getCDetailPicture(), this.gameType);
+                break;
+            case Brawl:
+                screen = FScreen.DECK_EDITOR_CONSTRUCTED;  // re-use "Deck Editor", rather than creating a new top level tab
+                DeckPreferences.setBrawlDeck((deck != null) ? deck.toString() : "");
+                editorCtrl = new CEditorConstructed(getCDetailPicture(), this.gameType);
+                break;
+            case TinyLeaders:
+                screen = FScreen.DECK_EDITOR_CONSTRUCTED;  // re-use "Deck Editor", rather than creating a new top level tab
+                DeckPreferences.setTinyLeadersDeck((deck != null) ? deck.toString() : "");
+                editorCtrl = new CEditorConstructed(getCDetailPicture(), this.gameType);
+                break;
+            case Sealed:
+                screen = FScreen.DECK_EDITOR_SEALED;
+                editorCtrl = new CEditorLimited(FModel.getDecks().getSealed(), screen, getCDetailPicture());
+                break;
+            case Draft:
+                screen = FScreen.DECK_EDITOR_DRAFT;
+                editorCtrl = new CEditorLimited(FModel.getDecks().getDraft(), screen, getCDetailPicture());
+                break;
+            case Winston:
+                screen = FScreen.DECK_EDITOR_DRAFT;
+                editorCtrl = new CEditorLimited(FModel.getDecks().getWinston(), screen, getCDetailPicture());
+                break;
 
-        default:
-            return;
+            default:
+                return;
         }
 
-        if (!Singletons.getControl().ensureScreenActive(screen)) { return; }
+        if (!Singletons.getControl().ensureScreenActive(screen)) {
+            return;
+        }
 
         if (editorCtrl != null) {
             CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(editorCtrl);
         }
 
-        if (!SEditorIO.confirmSaveChanges(screen, true)) { return; } //ensure previous deck on screen is saved if needed
+        if (!SEditorIO.confirmSaveChanges(screen, true)) {
+            return;
+        } //ensure previous deck on screen is saved if needed
 
-        CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(deck.getPath(), deck.getName());
+        if (deck != null) {
+            CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(deck.getPath(), deck.getName());
+        } else {
+            CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().loadDeck(new Deck());
+        }
     }
 
     public boolean deleteDeck(final DeckProxy deck) {
@@ -322,17 +345,20 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
 
         // consider using deck proxy's method to delete deck
         switch(this.gameType) {
-        case Constructed:
-        case Draft:
-        case Sealed:
-            deck.deleteFromStorage();
-            break;
-        case Quest:
-            deck.deleteFromStorage();
-            FModel.getQuest().save();
-            break;
-        default:
-            throw new UnsupportedOperationException("Delete not implemented for game type = " + gameType.toString());
+            case Brawl:
+            case Commander:
+            case TinyLeaders:
+            case Constructed:
+            case Draft:
+            case Sealed:
+                deck.deleteFromStorage();
+                break;
+            case Quest:
+                deck.deleteFromStorage();
+                FModel.getQuest().save();
+                break;
+            default:
+                throw new UnsupportedOperationException("Delete not implemented for game type = " + gameType.toString());
         }
 
         this.removeItem(deck, 1);

@@ -272,7 +272,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         this.getBtnRemove().setVisible(false);
         this.getBtnRemove4().setVisible(false);
 
-        this.getBtnCycleSection().setVisible(false);
+        this.getCbxSection().setVisible(false);
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
 

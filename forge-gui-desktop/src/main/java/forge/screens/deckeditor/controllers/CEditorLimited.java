@@ -33,14 +33,20 @@ import forge.model.FModel;
 import forge.screens.deckeditor.AddBasicLandsDialog;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VAllDecks;
+import forge.screens.deckeditor.views.VBrawlDecks;
+import forge.screens.deckeditor.views.VCommanderDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
+import forge.screens.deckeditor.views.VTinyLeadersDecks;
 import forge.screens.home.sanctioned.CSubmenuDraft;
 import forge.screens.home.sanctioned.CSubmenuSealed;
 import forge.screens.match.controllers.CDetailPicture;
+import forge.toolbox.FComboBox;
 import forge.util.storage.IStorage;
 
 import java.util.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Map.Entry;
 
 /**
@@ -54,7 +60,10 @@ import java.util.Map.Entry;
 public final class CEditorLimited extends CDeckEditor<DeckGroup> {
 
     private final DeckController<DeckGroup> controller;
-    private DragCell allDecksParent = null;
+    private DragCell constructedDecksParent = null;
+    private DragCell commanderDecksParent = null;
+    private DragCell brawlDecksParent = null;
+    private DragCell tinyLeadersDecksParent = null;
     private DragCell deckGenParent = null;
     private final List<DeckSection> allSections = new ArrayList<DeckSection>();
 
@@ -98,10 +107,16 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
         allSections.add(DeckSection.Main);
         allSections.add(DeckSection.Conspiracy);
 
-        this.getBtnCycleSection().setCommand(new UiCommand() {
+        this.getCbxSection().removeAllItems();
+        for (DeckSection section : allSections) {
+            this.getCbxSection().addItem(section);
+        }
+        this.getCbxSection().addActionListener(new ActionListener() {
             @Override
-            public void run() {
-                cycleEditorMode();
+            public void actionPerformed(ActionEvent actionEvent) {
+                FComboBox cb = (FComboBox)actionEvent.getSource();
+                DeckSection ds = (DeckSection)cb.getSelectedItem();
+                setEditorMode(ds);
             }
         });
     }
@@ -194,10 +209,7 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
     }
 
 
-    public void cycleEditorMode() {
-        int curindex = (allSections.indexOf(sectionMode) + 1) % allSections.size();
-        sectionMode = allSections.get(curindex);
-
+    public void setEditorMode(DeckSection sectionMode) {
         switch(sectionMode) {
             case Conspiracy:
                 this.getCatalogManager().setup(ItemManagerConfig.DRAFT_CONSPIRACY);
@@ -211,6 +223,7 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
                 break;
         }
 
+        this.sectionMode = sectionMode;
         this.controller.updateCaptions();
     }
 
@@ -226,10 +239,13 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(false);
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setEnabled(false);
-        this.getBtnCycleSection().setVisible(true);
+        this.getCbxSection().setVisible(true);
 
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
-        allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
+        constructedDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
+        commanderDecksParent = removeTab(VCommanderDecks.SINGLETON_INSTANCE);
+        brawlDecksParent = removeTab(VBrawlDecks.SINGLETON_INSTANCE);
+        tinyLeadersDecksParent = removeTab(VTinyLeadersDecks.SINGLETON_INSTANCE);
     }
 
     /* (non-Javadoc)
@@ -252,8 +268,17 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
         if (deckGenParent != null) {
             deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
         }
-        if (allDecksParent != null) {
-            allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
+        if (constructedDecksParent != null) {
+            constructedDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
+        }
+        if (commanderDecksParent != null) {
+            commanderDecksParent.addDoc(VCommanderDecks.SINGLETON_INSTANCE);
+        }
+        if (brawlDecksParent!= null) {
+            brawlDecksParent.addDoc(VBrawlDecks.SINGLETON_INSTANCE);
+        }
+        if (tinyLeadersDecksParent != null) {
+            tinyLeadersDecksParent.addDoc(VTinyLeadersDecks.SINGLETON_INSTANCE);
         }
     }
 }

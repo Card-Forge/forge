@@ -30,12 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.swing.JMenu;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.KeyStroke;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
@@ -58,6 +53,7 @@ import forge.itemmanager.views.ItemTableColumn;
 import forge.itemmanager.views.ItemView;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.ContextMenuBuilder;
+import forge.toolbox.FComboBox;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.Colors;
@@ -115,13 +111,11 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         .fontSize(12)
         .build();
 
-    private final FLabel btnCycleSection = new FLabel.Builder()
-        .text("Change Section")
-        .tooltip("Toggle between editing the deck and the sideboard/planar/scheme/vanguard parts of this deck")
-        .icon(FSkin.getIcon(FSkinProp.ICO_EDIT))
-        .iconScaleAuto(false).hoverable()
+    private final FLabel lblEmpty = new FLabel.Builder()
+        .text("")
         .fontSize(12)
         .build();
+    private FComboBox cbxSection = new FComboBox();
 
     private static final SkinIcon VIEW_OPTIONS_ICON = FSkin.getIcon(FSkinProp.ICO_SETTINGS).resize(20, 20);
     private final FLabel btnViewOptions = new FLabel.Builder()
@@ -193,8 +187,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         this.add(this.btnFilters);
         this.add(this.lblCaption);
         this.add(this.lblRatio);
-        btnCycleSection.setVisible(false); //hide by default
-        this.add(btnCycleSection);
+        this.add(this.lblEmpty);
+        this.cbxSection.setVisible(false);
+        this.add(this.cbxSection);
         for (final ItemView<T> view : this.views) {
             this.add(view.getButton());
             view.getButton().setSelected(view == this.currentView);
@@ -381,30 +376,42 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
             helper.newLine(-3);
             helper.fillLine(this.pnlButtons, showButtonPanel ? buttonPanelHeight : 1); //just show border if no buttons
         }
+        // get the width for all components
         final int viewButtonWidth = FTextField.HEIGHT;
-        helper.newLine();
-        helper.offset(1, 0); //align filters button with expand/collapse all button
-        helper.include(this.btnFilters, viewButtonWidth, FTextField.HEIGHT);
-        int captionWidth = this.lblCaption.getAutoSizeWidth();
-        int btnCycleSectionWidth = this.btnCycleSection.isVisible() ? this.btnCycleSection.getAutoSizeWidth() : 0;
         final int ratioWidth = this.lblRatio.getAutoSizeWidth();
-        final int viewButtonCount = this.views.size() + 1;
-        final int availableCaptionWidth = helper.getParentWidth() - viewButtonWidth * viewButtonCount - ratioWidth - btnCycleSectionWidth - 3 * helper.getX() - (viewButtonCount + 2) * helper.getGapX();
+        int captionWidth = this.lblCaption.getAutoSizeWidth();
+        final int cbxSectionWidth = this.cbxSection.isVisible() ? this.cbxSection.getAutoSizeWidth() : 0;
+        final int viewButtonCount = this.views.size() + 1; // +1 is for the options button
+        final int widthViewButtons = viewButtonCount * viewButtonWidth + helper.getGapX() * (viewButtonCount);
+
+        // remove the space needed by all components that will be displayed
+        int availableCaptionWidth = helper.getParentWidth()
+                - viewButtonWidth   // btnFilters
+                - cbxSectionWidth
+                - ratioWidth
+                - widthViewButtons;
+
         if (captionWidth > availableCaptionWidth) { //truncate caption if not enough room for it
             this.lblCaption.setToolTipText(this.lblCaption.getText());
             captionWidth = availableCaptionWidth;
         } else {
             this.lblCaption.setToolTipText(null);
         }
+
+        helper.newLine();
+        helper.offset(1, 0); //align filters button with expand/collapse all button
+        helper.include(this.btnFilters, viewButtonWidth, FTextField.HEIGHT);
         helper.include(this.lblCaption, captionWidth, FTextField.HEIGHT);
-        helper.fillLine(this.lblRatio, FTextField.HEIGHT, (viewButtonWidth + helper.getGapX()) * viewButtonCount - viewButtonCount + btnCycleSectionWidth + 2 * helper.getGapX() + 1); //leave room for view buttons and btnCycleSectionWidth
-        helper.include(this.btnCycleSection, btnCycleSectionWidth, FTextField.HEIGHT);
+        helper.include(this.cbxSection, cbxSectionWidth, FTextField.HEIGHT);
         helper.offset(helper.getGapX(), 0);
+        helper.include(this.lblRatio, ratioWidth, FTextField.HEIGHT);
+        helper.fillLine(this.lblEmpty, FTextField.HEIGHT, widthViewButtons);
         for (final ItemView<T> view : this.views) {
             helper.include(view.getButton(), viewButtonWidth, FTextField.HEIGHT);
             helper.offset(-1, 0);
         }
         helper.include(this.btnViewOptions, viewButtonWidth, FTextField.HEIGHT);
+
         helper.newLine(-1);
         if (this.currentView.getPnlOptions().isVisible()) {
             helper.fillLine(this.currentView.getPnlOptions(), FTextField.HEIGHT + 4);
@@ -1092,8 +1099,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         return this.pnlButtons;
     }
 
-    public FLabel getBtnCycleSection() {
-        return btnCycleSection;
+    public FComboBox getCbxSection() {
+        return this.cbxSection;
     }
 
     /**
