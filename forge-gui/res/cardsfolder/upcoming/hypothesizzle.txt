@@ -1,0 +1,6 @@
+Name:Hypothesizzle
+ManaCost:3 U R
+Types:Instant
+A:SP$ Draw | Cost$ 3 U R | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards. Then you may discard a nonland card. When you do, CARDNAME deals 4 damage to target creature.
+A:AB$ DealDamage | Cost$ Discard<1/Card.nonLand/nonland card> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
+Oracle:Draw two cards. Then you may discard a nonland card. When you do, Hypothesizzle deals 4 damage to target creature.

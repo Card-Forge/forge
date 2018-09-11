@@ -8,8 +8,12 @@ Type=Expansion
 
 [cards]
 1 C Blade Instructor
+2 R Bounty Agent
 6 U Conclave Tribunal
 14 C Healer's Hawk
+26 U Sunhome Stalwart
+36 C Dimir Informant
+38 M Dream Eater
 45 U Murmuring Mystic
 47 R Narcomoeba
 51 R Quasiduplicate
@@ -24,16 +28,26 @@ Type=Expansion
 109 R Legion Warboss
 122 U Arboretum Elemental
 149 C Wary Okapi
+152 R Assassin's Trophy
 156 U Boros Challenger
 168 R Emmara, Soul of the Accord
 171 R Firemind's Research
+174 C Goblin Electromancer
 176 C Hammer Dropper
+178 C Hypothesizzle
+192 R Niv-Mizzet, Parun
 195 M Ral, Izzet Viceroy
 197 C Rosemane Centaur
 199 C Sonic Assault
+200 C Sumala Woodshaper
 206 U Thought Erasure
 211 M Underrealm Lich
+216 C Fresh-Faced Recruit
+220 C Whisper Agent
+225 R Find // Finality
+229 R Response // Resurgence
 230 U Status // Statue
+233 R Chromatic Lantern
 248 C Golgari Guildgate
 253 R Overgrown Tomb
 254 R Sacred Foundry

@@ -1,0 +1,7 @@
+Name:Sunhome Stalwart
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/2
+K:First Strike
+K:Mentor
+Oracle:First strike\nMentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)
