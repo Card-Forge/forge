@@ -72,7 +72,7 @@ public class DeckImportController {
         }
 
         final Deck result = new Deck();
-        DeckSection deckSection = null;
+        DeckSection deckSection = DeckSection.Main;
         String section = "";
         for (final DeckRecognizer.Token t : tokens) {
             final DeckRecognizer.TokenType type = t.getType();
