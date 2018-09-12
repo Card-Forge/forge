@@ -55,6 +55,7 @@ Type=Expansion
 171 R Firemind's Research
 174 C Goblin Electromancer
 176 C Hammer Dropper
+177 U House Guildmage
 178 C Hypothesizzle
 179 R Ionize
 180 R Izoni, Thousand-Eyed
@@ -66,6 +67,7 @@ Type=Expansion
 197 C Rosemane Centaur
 199 C Sonic Assault
 200 C Sumala Woodshaper
+201 U Swarm Guildmage
 206 U Thought Erasure
 211 M Underrealm Lich
 213 M Vraska, Golgari Queen
