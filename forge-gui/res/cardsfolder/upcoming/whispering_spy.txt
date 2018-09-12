@@ -1,0 +1,8 @@
+Name:Whispering Spy
+ManaCost:1 B
+Types:Creature Vampire Rogue
+PT:1/3
+T:Mode$ SpellCast | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDamageAll | TriggerDescription$ When you, for the first time in a turn, CARDNAME deals 1 damage to each opponent and you gain 1 life.
+SVar:TrigDamageAll:DB$ DamageAll | ValidPlayers$ Player.Opponent | NumDmg$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:When you surveil for the first time in a turn, Whispering Spy deals 1 damage to each opponent and you gain 1 life.
