@@ -3763,8 +3763,12 @@ public class CardFactoryUtil {
             final SpellAbility origSA = card.getFirstSpellAbility();
 
             // append to original SA
-            origSA.appendSubAbility(newSA);            
+            origSA.appendSubAbility(newSA);
         } else if (keyword.startsWith("Equip")) {
+            if (!keyword.contains(":")) {
+                System.err.println("Malformed Equip entry! - Card: " + card.toString());
+                return;
+            }
             String[] k = keyword.split(":");
             // Get cost string
             String equipCost = k[1];
