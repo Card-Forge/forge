@@ -883,7 +883,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (! sa.hasParam("SelectPrompt")) {
                 // new default messaging for multi select
                 if (fetchList.size() > changeNum) {
-                    selectPrompt = MessageUtil.formatMessage("Select up to " + changeNum + "cards from {player's} " + Lang.joinHomogenous(origin).toLowerCase(), decider, player);
+                    selectPrompt = MessageUtil.formatMessage("Select up to " + changeNum + " cards from {player's} " + Lang.joinHomogenous(origin).toLowerCase(), decider, player);
                 } else {
                     selectPrompt = MessageUtil.formatMessage("Select cards from {player's} " + Lang.joinHomogenous(origin).toLowerCase(), decider, player);
                 }
