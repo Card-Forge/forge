@@ -14,6 +14,8 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.util.Lang;
+import io.sentry.Sentry;
+import io.sentry.event.BreadcrumbBuilder;
 
 public abstract class KeywordInstance<T extends KeywordInstance<?>> implements KeywordInterface {
     private Keyword keyword;
@@ -92,10 +94,24 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
             abilities.clear();
             staticAbilities.clear();
         }
+
+        String msg = "KeywordInstance:createTraits: make Traits for Keyword";
+        Sentry.getContext().recordBreadcrumb(
+                new BreadcrumbBuilder().setMessage(msg)
+                .withData("Card", host.getName()).withData("Keyword", this.original).build()
+        );
+        // add Extra for debugging
+        Sentry.getContext().addExtra("Card", host);
+        Sentry.getContext().addExtra("Keyword", this.original);
+
         CardFactoryUtil.addTriggerAbility(this, host, intrinsic);
         CardFactoryUtil.addReplacementEffect(this, host, intrinsic);
         CardFactoryUtil.addSpellAbility(this, host, intrinsic);
         CardFactoryUtil.addStaticAbility(this, host, intrinsic);
+
+        // remove added extra
+        Sentry.getContext().removeExtra("Card");
+        Sentry.getContext().removeExtra("Keyword");
     }
 
     /*

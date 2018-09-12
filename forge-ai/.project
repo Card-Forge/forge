@@ -3,6 +3,7 @@
 	<name>forge-ai</name>
 	<comment></comment>
 	<projects>
+		<project>forge-game</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
