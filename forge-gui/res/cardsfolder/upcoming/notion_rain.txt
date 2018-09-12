@@ -1,4 +1,4 @@
-Name:Rain of Notions
+Name:Notion Rain
 ManaCost:1 U B
 Types:Sorcery
 A:SP$ Surveil | Cost$ 1 U B | Amount$ 2 | SubAbility$ DBDraw | SpellDescription$ Surveil 2, then draw two cards. CARDNAME deals 2 damage to you.

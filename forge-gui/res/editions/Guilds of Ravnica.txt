@@ -14,29 +14,38 @@ Type=Expansion
 26 U Sunhome Stalwart
 32 U Chemister's Insight
 36 C Dimir Informant
+37 C Disdainful Stroke
 38 M Dream Eater
 41 U Guild Summit
+43 C Maximize Altitude
 45 U Murmuring Mystic
 47 R Narcomoeba
-48 U Nightveil Faerie
+48 U Nightveil Sprite
+50 C Passwall Adept
 51 R Quasiduplicate
 52 C Radical Idea
 54 U Sinister Sabotage
 56 C Unexplained Disappearance
 68 C Deadly Visit
-75 R Secrets of the Mausoleum
+75 R Mausoleum Secrets
+77 R Midnight Reaper
 78 C Moodmark Painter
 79 U Necrotic Wound
-90 U Whispering Spy
+90 U Whispering Snitch
+91 M Arclight Phoenix
 92 C Barging Sergeant
+94 C Govern the Storm
 96 C Direct Current
+102 U Goblin Banneret
 103 U Goblin Cratermaker
+107 U Inescapable Flame
 109 R Legion Warboss
 115 R Runaway Steam-Kin
 122 U Arboretum Elemental
 123 R Beast Whisperer
 128 U District Guide
 138 M Nullhide Ferox
+148 R Vivid Revival
 149 C Wary Okapi
 151 C Artful Takedown
 152 R Assassin's Trophy
@@ -50,20 +59,27 @@ Type=Expansion
 179 R Ionize
 180 R Izoni, Thousand-Eyed
 188 M March of the Multitudes
+190 U Molderhulk
 192 R Niv-Mizzet, Parun
-193 C Rain of Notions
+193 C Notion Rain
 195 M Ral, Izzet Viceroy
 197 C Rosemane Centaur
 199 C Sonic Assault
 200 C Sumala Woodshaper
 206 U Thought Erasure
 211 M Underrealm Lich
+213 M Vraska, Golgari Queen
 216 C Fresh-Faced Recruit
 220 C Whisper Agent
+224 R Expansion // Explosion
 225 R Find // Finality
 229 R Response // Resurgence
 230 U Status // Statue
+231 C Boros Locket
 233 R Chromatic Lantern
+237 C Golgari Locket
+238 C Izzet Locket
+240 C Selesnya Locket
 243 C Boros Guildgate
 244 C Boros Guildgate
 245 C Dimir Guildgate
@@ -71,6 +87,7 @@ Type=Expansion
 247 C Gateway Plaza
 248 C Golgari Guildgate
 249 C Golgari Guildgate
+250 R Guildmages' Forum
 251 C Izzet Guildgate
 252 C Izzet Guildgate
 253 R Overgrown Tomb
