@@ -54,6 +54,7 @@ Type=Expansion
 168 R Emmara, Soul of the Accord
 171 R Firemind's Research
 174 C Goblin Electromancer
+175 U Golgari Findbroker
 176 C Hammer Dropper
 177 U House Guildmage
 178 C Hypothesizzle
