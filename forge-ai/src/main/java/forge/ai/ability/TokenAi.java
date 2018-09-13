@@ -512,7 +512,7 @@ public class TokenAi extends SpellAbilityAi {
         // Apply static abilities and prune dead tokens
         final Game game = ai.getGame();
         ComputerUtilCard.applyStaticContPT(game, token, null);
-        if (!notNull && token.getNetToughness() < 1) {
+        if (!notNull && token.isCreature() && token.getNetToughness() < 1) {
             return null;
         } else {
             return token;
