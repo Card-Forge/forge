@@ -1,0 +1,8 @@
+Name:Nightveil Predator
+ManaCost:U U B B
+Types:Creature Vampire
+PT:3/3
+K:Flying
+K:Deathtouch
+K:Hexproof
+Oracle:Flying, deathtouch\nHexproof (This creature can't be the target of spells or abilities your opponents control.)
