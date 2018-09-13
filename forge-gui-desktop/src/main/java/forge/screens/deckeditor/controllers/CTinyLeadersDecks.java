@@ -3,7 +3,6 @@ package forge.screens.deckeditor.controllers;
 import forge.deck.DeckProxy;
 import forge.gui.framework.ICDoc;
 import forge.itemmanager.ItemManagerConfig;
-import forge.screens.deckeditor.views.VCommanderDecks;
 import forge.screens.deckeditor.views.VTinyLeadersDecks;
 
 /**

@@ -18,7 +18,6 @@ import forge.control.FControlGamePlayback;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.error.BugReporter;
 import forge.events.UiEventNextGameDecision;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;

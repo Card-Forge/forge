@@ -3,11 +3,9 @@ package forge.deck;
 import forge.StaticData;
 import forge.deck.io.Archetype;
 import forge.deck.io.CardThemedLDAIO;
-import forge.game.GameFormat;
 import forge.model.FModel;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.io.File;
 import java.util.*;
 
 /**

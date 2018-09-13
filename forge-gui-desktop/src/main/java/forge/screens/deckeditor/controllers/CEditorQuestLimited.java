@@ -20,7 +20,6 @@ package forge.screens.deckeditor.controllers;
 import com.google.common.base.Function;
 import com.google.common.base.Supplier;
 import forge.UiCommand;
-import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;

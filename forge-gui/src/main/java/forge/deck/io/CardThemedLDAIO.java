@@ -1,12 +1,10 @@
 package forge.deck.io;
 
 import forge.game.GameFormat;
-import forge.item.PaperCard;
 import forge.properties.ForgeConstants;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.*;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

@@ -1,12 +1,10 @@
 package forge.screens.home.quest;
 
 import forge.assets.FSkinProp;
-import forge.card.CardEdition;
 import forge.game.GameFormat;
 import forge.gui.SOverlayUtils;
 import forge.model.FModel;
 import forge.toolbox.*;
-import forge.util.TextUtil;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;

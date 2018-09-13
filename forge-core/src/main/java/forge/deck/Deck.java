@@ -24,7 +24,6 @@ import forge.StaticData;
 import forge.card.CardDb;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
-import forge.util.ItemPool;
 
 import java.util.*;
 import java.util.Map.Entry;
