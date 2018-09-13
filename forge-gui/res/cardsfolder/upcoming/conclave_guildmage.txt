@@ -1,4 +1,4 @@
-Name:Concalve Guildmage
+Name:Conclave Guildmage
 ManaCost:G W
 Types:Creature Elf Cleric
 PT:2/2
