@@ -87,6 +87,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int landsPlayedThisTurn = 0;
     private int landsPlayedLastTurn = 0;
     private int investigatedThisTurn = 0;
+    private int surveilThisTurn = 0;
     private int lifeLostThisTurn = 0;
     private int lifeLostLastTurn = 0;
     private int lifeGainedThisTurn = 0;
@@ -1315,9 +1316,19 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         getGame().fireEvent(new GameEventSurveil(this, numToTop, numToGrave));
 
-        //final Map<String, Object> runParams = Maps.newHashMap();
-        //runParams.put("Player", this);
-        //getGame().getTriggerHandler().runTrigger(TriggerType.Scry, runParams, false);
+        surveilThisTurn++;
+        final Map<String, Object> runParams = Maps.newHashMap();
+        runParams.put("Player", this);
+        runParams.put("NumThisTurn", surveilThisTurn);
+        getGame().getTriggerHandler().runTrigger(TriggerType.Surveil, runParams, false);
+    }
+
+    public int getSurveilThisTurn() {
+        return surveilThisTurn;
+    }
+
+    public void resetSurveilThisTurn() {
+        surveilThisTurn = 0;
     }
 
     public boolean canMulligan() {
@@ -2381,6 +2392,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         setLandsPlayedLastTurn(getLandsPlayedThisTurn());
         resetLandsPlayedThisTurn();
         resetInvestigatedThisTurn();
+        resetSurveilThisTurn();
         resetSacrificedThisTurn();
         resetCounterToPermThisTurn();
         clearAssignedDamage();
