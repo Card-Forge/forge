@@ -31,25 +31,31 @@ Type=Expansion
 77 R Midnight Reaper
 78 C Moodmark Painter
 79 U Necrotic Wound
+80 C Never Happened
+83 U Price of Fame
 90 U Whispering Snitch
 91 M Arclight Phoenix
 92 C Barging Sergeant
 94 C Govern the Storm
 96 C Direct Current
+98 R Erratic Cyclops
 102 U Goblin Banneret
 103 U Goblin Cratermaker
 107 U Inescapable Flame
+108 U Lava Coil
 109 R Legion Warboss
 115 R Runaway Steam-Kin
 122 U Arboretum Elemental
 123 R Beast Whisperer
 128 U District Guide
+130 U Golgari Raiders
 138 M Nullhide Ferox
 148 R Vivid Revival
 149 C Wary Okapi
 151 C Artful Takedown
 152 R Assassin's Trophy
 156 U Boros Challenger
+162 U Conclave Guildmage
 165 R Deafening Clarion
 168 R Emmara, Soul of the Accord
 171 R Firemind's Research
@@ -62,6 +68,7 @@ Type=Expansion
 180 R Izoni, Thousand-Eyed
 188 M March of the Multitudes
 190 U Molderhulk
+191 U Nightveil Predator
 192 R Niv-Mizzet, Parun
 193 C Notion Rain
 195 M Ral, Izzet Viceroy
@@ -76,6 +83,8 @@ Type=Expansion
 220 C Whisper Agent
 224 R Expansion // Explosion
 225 R Find // Finality
+227 U Integrity // Intervention
+228 U Invert // Invent
 229 R Response // Resurgence
 230 U Status // Statue
 231 C Boros Locket
