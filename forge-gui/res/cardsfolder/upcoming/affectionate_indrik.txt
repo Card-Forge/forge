@@ -1,0 +1,8 @@
+Name:Affectionate Indrik
+ManaCost:5 G
+Types:Creature Beast
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFight | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may have it fight target creature you don't control. (Each deals damage equal to its power to the other.)
+SVar:TrigFight:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control
+SVar:PlayMain1:TRUE
+Oracle:When Affectionate Indrik enters the battlefield, you may have it fight target creature you don't control. (Each deals damage equal to its power to the other.)
