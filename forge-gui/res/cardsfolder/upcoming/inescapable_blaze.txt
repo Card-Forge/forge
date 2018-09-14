@@ -1,4 +1,4 @@
-Name:Inescapable Flame
+Name:Inescapable Blaze
 ManaCost:4 R R
 Types:Instant
 K:CARDNAME can't be countered.
