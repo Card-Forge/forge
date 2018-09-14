@@ -311,6 +311,12 @@ public class TokenAi extends SpellAbilityAi {
             }
         }
 
+        if ("OnlyOnAlliedAttack".equals(sa.getParam("AILogic"))) {
+            Combat combat = ai.getGame().getCombat();
+            return combat != null && combat.getAttackingPlayer() != null
+                    && !combat.getAttackingPlayer().isOpponentOf(ai);
+        }
+
         return true;
     }
     /* (non-Javadoc)
