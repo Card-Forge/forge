@@ -11,40 +11,60 @@ Type=Expansion
 2 R Bounty Agent
 6 U Conclave Tribunal
 14 C Healer's Hawk
+15 C Hunted Witness
+18 C Ledev Guardian
+20 C Loxodon Restorer
+22 C Parhelion Patrol
 26 U Sunhome Stalwart
+30 R Venerated Loxodon
 32 U Chemister's Insight
+33 U Citywatch Sphinx
 36 C Dimir Informant
 37 C Disdainful Stroke
 38 M Dream Eater
+40 U Enhanced Surveillance
 41 U Guild Summit
 43 C Maximize Altitude
+44 R Mission Briefing
 45 U Murmuring Mystic
 47 R Narcomoeba
 48 U Nightveil Sprite
+49 R Omnispell Adept
 50 C Passwall Adept
 51 R Quasiduplicate
 52 C Radical Idea
 54 U Sinister Sabotage
+55 U Thoughtbound Phantasm
 56 C Unexplained Disappearance
+59 C Watcher in the Mist
+63 R Blood Operative
+66 U Creeping Chill
 68 C Deadly Visit
+69 M Doom Whisperer
+74 U Lotleth Giant
 75 R Mausoleum Secrets
 77 R Midnight Reaper
 78 C Moodmark Painter
 79 U Necrotic Wound
 80 C Never Happened
 83 U Price of Fame
+84 R Ritual of Soot
 90 U Whispering Snitch
 91 M Arclight Phoenix
 92 C Barging Sergeant
-94 C Govern the Storm
+93 U Book Devourer
+94 C Command the Storm
 96 C Direct Current
 98 R Erratic Cyclops
 102 U Goblin Banneret
 103 U Goblin Cratermaker
-107 U Inescapable Flame
+107 U Inescapable Blaze
 108 U Lava Coil
 109 R Legion Warboss
+111 C Maximize Velocity
 115 R Runaway Steam-Kin
+120 C Wojek Bodyguard
+121 U Affectionate Indrik
 122 U Arboretum Elemental
 123 R Beast Whisperer
 128 U District Guide
@@ -54,11 +74,19 @@ Type=Expansion
 149 C Wary Okapi
 151 C Artful Takedown
 152 R Assassin's Trophy
+153 M Aurelia, Exemplar of Justice
 156 U Boros Challenger
+158 C Centaur Peacemaker
 162 U Conclave Guildmage
+163 U Crackling Drake
+164 C Darkblade Agent
 165 R Deafening Clarion
+166 U Dimir Spybug
+167 U Disinformation Campaign
 168 R Emmara, Soul of the Accord
 171 R Firemind's Research
+172 C Garrison Sergeant
+173 U Glowspore Shaman
 174 C Goblin Electromancer
 175 U Golgari Findbroker
 176 C Hammer Dropper
@@ -66,21 +94,32 @@ Type=Expansion
 178 C Hypothesizzle
 179 R Ionize
 180 R Izoni, Thousand-Eyed
+183 R Knight of Autumn
+184 M Lazav, the Multifarious
+185 U League Guildmage
+187 U Legion Guildmage
 188 M March of the Multitudes
 190 U Molderhulk
 191 U Nightveil Predator
 192 R Niv-Mizzet, Parun
 193 C Notion Rain
+194 U Ochran Assassin
 195 M Ral, Izzet Viceroy
 197 C Rosemane Centaur
+198 C Skyknight Legionnaire
 199 C Sonic Assault
 200 C Sumala Woodshaper
 201 U Swarm Guildmage
+203 R Swiftblade Vindicator
 206 U Thought Erasure
+208 M Trostani Discordant
+209 U Truefire Captain
 211 M Underrealm Lich
 213 M Vraska, Golgari Queen
 216 C Fresh-Faced Recruit
+217 C Piston-Fist Cyclops
 220 C Whisper Agent
+222 R Connive // Concoct
 224 R Expansion // Explosion
 225 R Find // Finality
 227 U Integrity // Intervention
@@ -89,6 +128,8 @@ Type=Expansion
 230 U Status // Statue
 231 C Boros Locket
 233 R Chromatic Lantern
+234 C Dimir Locket
+236 U Glaive of the Guildpact
 237 C Golgari Locket
 238 C Izzet Locket
 240 C Selesnya Locket
