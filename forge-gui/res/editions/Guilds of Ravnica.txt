@@ -52,3 +52,7 @@ Type=Expansion
 271 U Attendant of Vraska
 272 R Vraska's Stoneglare
 273 M Impervious Greatwurm
+
+[tokens]
+w_1_1_soldier_lifelink
+u_1_1_bird_illusion_flying
