@@ -24,6 +24,7 @@ public enum ReplacementType {
     Moved(ReplaceMoved.class),
     ProduceMana(ReplaceProduceMana.class),
     SetInMotion(ReplaceSetInMotion.class),
+    Surveil(ReplaceSurveil.class),
     TurnFaceUp(ReplaceTurnFaceUp.class),
     Untap(ReplaceUntap.class);
 

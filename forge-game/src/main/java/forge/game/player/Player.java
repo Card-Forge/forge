@@ -1285,7 +1285,25 @@ public class Player extends GameEntity implements Comparable<Player> {
         getGame().getTriggerHandler().runTrigger(TriggerType.Scry, runParams, false);
     }
 
-    public void surveil(final int num, SpellAbility cause) {
+    public void surveil(int num, SpellAbility cause) {
+
+        final Map<String, Object> repParams = Maps.newHashMap();
+        repParams.put("Event", "Surveil");
+        repParams.put("Affected", this);
+        repParams.put("Source", cause);
+        repParams.put("SurveilNum", num);
+
+        switch (getGame().getReplacementHandler().run(repParams)) {
+        case NotReplaced:
+            break;
+        case Updated: {
+            num = (int) repParams.get("SurveilNum");
+            break;
+        }
+        default:
+            return;
+        }
+
         final CardCollection topN = new CardCollection(this.getCardsIn(ZoneType.Library, num));
 
         if (topN.isEmpty()) {
