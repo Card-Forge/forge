@@ -888,7 +888,11 @@ public class CardFactoryUtil {
 
 
         if (sq[0].equals("YouDrewThisTurn")) {
-            return doXMath(c.getController().getNumDrawnThisTurn(), m, c);
+            return doXMath(cc.getNumDrawnThisTurn(), m, c);
+        }
+
+        if (sq[0].equals("YouSurveilThisTurn")) {
+            return doXMath(cc.getSurveilThisTurn(), m, c);
         }
 
         if (sq[0].equals("FirstSpellTotalManaSpent")) {
@@ -914,7 +918,7 @@ public class CardFactoryUtil {
             return doXMath(c.getDamageDoneThisTurn(), m, c);
         }
         if (sq[0].equals("BloodthirstAmount")) {
-            return doXMath(c.getController().getBloodthirstAmount(), m, c);
+            return doXMath(cc.getBloodthirstAmount(), m, c);
         }
         if (sq[0].equals("RegeneratedThisTurn")) {
             return doXMath(c.getRegeneratedThisTurn(), m, c);
