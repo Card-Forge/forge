@@ -311,6 +311,18 @@ public class TokenAi extends SpellAbilityAi {
             }
         }
 
+        if (mandatory) {
+            // Necessary because the AI goes into this method twice, first to set up targets (with mandatory=true)
+            // and then the second time to confirm the trigger (where mandatory may be set to false).
+            return true;
+        }
+
+        if ("OnlyOnAlliedAttack".equals(sa.getParam("AILogic"))) {
+            Combat combat = ai.getGame().getCombat();
+            return combat != null && combat.getAttackingPlayer() != null
+                    && !combat.getAttackingPlayer().isOpponentOf(ai);
+        }
+
         return true;
     }
     /* (non-Javadoc)
