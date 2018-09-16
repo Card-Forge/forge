@@ -18,7 +18,6 @@
 package forge.quest;
 
 
-import forge.deck.Deck;
 import forge.deck.DeckgenUtil;
 import forge.deck.io.Archetype;
 import forge.model.FModel;
