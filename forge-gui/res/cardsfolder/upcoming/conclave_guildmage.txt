@@ -1,0 +1,8 @@
+Name:Conclave Guildmage
+ManaCost:G W
+Types:Creature Elf Cleric
+PT:2/2
+A:AB$ PumpAll | Cost$ G T | ValidCards$ Creature.YouCtrl | KW$ Trample | SpellDescription$ Creatures you control gain trample until end of turn.
+A:AB$ Token | Cost$ 5 W T | TokenAmount$ 1 | TokenName$ Elf Knight | TokenTypes$ Creature,Elf,Knight | TokenOwner$ You | TokenColors$ Green,White | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Vigilance | SpellDescription$ Create a 2/2 green and white Elf Knight creature token with vigilance.
+SVar:RemRandomDeck:True
+Oracle:{G}, {T}: Creatures you control gain trample until end of turn.\n{5}{W}, {T}: Create a 2/2 green and white Elf Knight creature token with vigilance.
