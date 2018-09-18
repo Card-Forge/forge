@@ -16,6 +16,7 @@ Type=Expansion
 13 U Haazda Marshal
 14 C Healer's Hawk
 15 C Hunted Witness
+16 C Inspiring Unicorn
 18 C Ledev Guardian
 19 R Light of the Legion
 20 C Loxodon Restorer
@@ -25,9 +26,11 @@ Type=Expansion
 30 R Venerated Loxodon
 32 U Chemister's Insight
 33 U Citywatch Sphinx
+35 C Devious Cover-up
 36 C Dimir Informant
 37 C Disdainful Stroke
 38 M Dream Eater
+39 R Drowned Secrets
 40 U Enhanced Surveillance
 41 U Guild Summit
 43 C Maximize Altitude
@@ -47,6 +50,7 @@ Type=Expansion
 66 U Creeping Chill
 68 C Deadly Visit
 69 M Doom Whisperer
+71 R Gruesome Menagerie
 74 U Lotleth Giant
 75 R Mausoleum Secrets
 77 R Midnight Reaper
@@ -61,7 +65,9 @@ Type=Expansion
 93 U Book Devourer
 94 C Command the Storm
 96 C Direct Current
+97 C Electrostatic Field
 98 R Erratic Cyclops
+99 R Experimental Frenzy
 102 U Goblin Banneret
 103 U Goblin Cratermaker
 107 U Inescapable Blaze
@@ -76,9 +82,14 @@ Type=Expansion
 123 R Beast Whisperer
 125 U Circuitous Route
 128 U District Guide
+129 C Generous Stray
 130 U Golgari Raiders
 132 R Hatchery Spider
+134 C Kraul Foragers
+136 U Kraul Harpooner
+137 U Might of the Masses
 138 M Nullhide Ferox
+141 R Pelt Collector
 144 C Siege Wurm
 145 U Sprouting Renewal
 148 R Vivid Revival
@@ -87,9 +98,12 @@ Type=Expansion
 152 R Assassin's Trophy
 153 M Aurelia, Exemplar of Justice
 154 U Beacon Bolt
+155 U Boltsplicer Mage
 156 U Boros Challenger
+157 R Camaraderie
 158 C Centaur Peacemaker
-160 R Morgue Troll
+159 M Chance for Glory
+160 R Charnel Troll
 161 U Conclave Cavalier
 162 U Conclave Guildmage
 163 U Crackling Drake
@@ -98,6 +112,7 @@ Type=Expansion
 166 U Dimir Spybug
 167 U Disinformation Campaign
 168 R Emmara, Soul of the Accord
+169 C \Ancient Trooper\
 170 R Etrata, the Silencer
 171 R Firemind's Research
 172 C Garrison Sergeant
@@ -117,6 +132,7 @@ Type=Expansion
 186 U Ledev Champion
 187 U Legion Guildmage
 188 M March of the Multitudes
+189 M Mnemonic Betrayal
 190 U Molderhulk
 191 U Nightveil Predator
 192 R Niv-Mizzet, Parun
@@ -131,6 +147,7 @@ Type=Expansion
 201 U Swarm Guildmage
 202 U Swathcutter Giant
 203 R Swiftblade Vindicator
+204 R Tajic, Legion's Edge
 205 R Thief of Sanity
 206 U Thought Erasure
 207 M Thousand-Year Storm
@@ -150,6 +167,7 @@ Type=Expansion
 223 U Discovery // Dispersal
 224 R Expansion // Explosion
 225 R Find // Finality
+226 U Flower // Flourish
 227 U Integrity // Intervention
 228 U Invert // Invent
 229 R Response // Resurgence
@@ -157,6 +175,7 @@ Type=Expansion
 231 C Boros Locket
 233 R Chromatic Lantern
 234 C Dimir Locket
+235 U Gargoyle Guardian
 236 U Glaive of the Guildpact
 237 C Golgari Locket
 238 C Izzet Locket
