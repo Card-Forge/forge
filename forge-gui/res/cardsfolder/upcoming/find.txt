@@ -1,7 +1,7 @@
 Name:Find
 ManaCost:B/G
 Types:Sorcery
-AlternateMode: Split
+AlternateMode:Split
 A:SP$ ChangeZone | Cost$ B/G | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return up to two target creature cards from your graveyard to your hand.
 Oracle:Return up to two target creature cards from your graveyard to your hand.
 
