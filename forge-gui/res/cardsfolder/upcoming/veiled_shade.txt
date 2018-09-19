@@ -1,0 +1,6 @@
+Name:Veiled Shade
+ManaCost:2 B
+Types:Creature Shade
+PT:2/2
+A:AB$ Pump | Cost$ 1 B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+Oracle:{1}{B}: Veiled Shade gets +1/+1 until end of turn.

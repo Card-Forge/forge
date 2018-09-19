@@ -1,0 +1,5 @@
+Name:Fearless Halberdier
+ManaCost:2 R
+Types:Creature Human Warrior
+PT:3/2
+Oracle:

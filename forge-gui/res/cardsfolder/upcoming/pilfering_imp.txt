@@ -1,0 +1,8 @@
+Name:Pilfering Imp
+ManaCost:B
+Types:Creature Imp
+PT:1/1
+K:Flying
+A:AB$ RevealHand | Cost$ 1 B T Sac<1/CARDNAME> | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SpellDescription$ Target opponent reveals their hand.
+SVar:RemRandomDeck:True
+Oracle:Flying\n{1}{B}, {T}, Sacrifice Pilfering Imp: Target opponent reveals their hand
