@@ -9,23 +9,38 @@ Type=Expansion
 [cards]
 1 C Blade Instructor
 2 R Bounty Agent
+3 C Candlelight Vigil
 4 R Citywide Bust
+5 C Collar the Culprit
 6 U Conclave Tribunal
+7 U Crush Contraband
+8 R Dawn of Hope
+9 U Demotion
 10 M Divine Visitation
+11 U Flight of Equenauts
 12 U Gird for Battle
 13 U Haazda Marshal
 14 C Healer's Hawk
 15 C Hunted Witness
-16 C Inspiring Unicorn
+16 U Inspiring Unicorn
+17 C Intrusive Packbeast
 18 C Ledev Guardian
 19 R Light of the Legion
 20 C Loxodon Restorer
+21 C Luminous Bonds
 22 C Parhelion Patrol
+23 C Righteous Blow
 24 U Roc Charger
+25 C Skyline Scout
 26 U Sunhome Stalwart
+27 C Sworn Companions
+28 C Take Heart
+29 C Tenth District Guard
 30 R Venerated Loxodon
+31 C Capture Sphere
 32 U Chemister's Insight
 33 U Citywatch Sphinx
+34 C Dazzling Lights
 35 C Devious Cover-up
 36 C Dimir Informant
 37 C Disdainful Stroke
@@ -33,72 +48,120 @@ Type=Expansion
 39 R Drowned Secrets
 40 U Enhanced Surveillance
 41 U Guild Summit
+42 C Leapfrog
 43 C Maximize Altitude
 44 R Mission Briefing
 45 U Murmuring Mystic
+46 C Muse Drake
 47 R Narcomoeba
 48 U Nightveil Sprite
 49 R Omnispell Adept
 50 C Passwall Adept
 51 R Quasiduplicate
 52 C Radical Idea
+53 U Selective Snare
 54 U Sinister Sabotage
 55 U Thoughtbound Phantasm
 56 C Unexplained Disappearance
+57 C Vedalken Mesmerist
+58 C Wall of Mist
 59 C Watcher in the Mist
+60 C Wishcoin Crab
+61 C Barrier of Bones
+62 C Bartizan Bats
 63 R Blood Operative
+64 C Burglar Rat
+65 C Child of Night
 66 U Creeping Chill
+67 C Dead Weight
 68 C Deadly Visit
 69 M Doom Whisperer
+70 C Douser of Lights
 71 R Gruesome Menagerie
+72 C Hired Poisoner
+73 U Kraul Swarm
 74 U Lotleth Giant
 75 R Mausoleum Secrets
+76 C Mephitic Vapors
 77 R Midnight Reaper
 78 C Moodmark Painter
 79 U Necrotic Wound
 80 C Never Happened
+81 U Pilfering Imp
+82 U Plaguecrafter
 83 U Price of Fame
 84 R Ritual of Soot
+85 C Severed Strands
+86 C Spinal Centipede
+87 U Undercity Necrolisk
+88 C Veiled Shade
+89 C Vicious Rumors
 90 U Whispering Snitch
 91 M Arclight Phoenix
 92 C Barging Sergeant
 93 U Book Devourer
 94 C Command the Storm
+95 C Cosmotronic Wave
 96 C Direct Current
-97 C Electrostatic Field
+97 U Electrostatic Field
 98 R Erratic Cyclops
 99 R Experimental Frenzy
+100 C Fearless Halberdier
+101 C Fire Urchin
 102 U Goblin Banneret
 103 U Goblin Cratermaker
+104 C Goblin Locksmith
+105 C Gravitic Punch
+106 U Hellkite Whelp
 107 U Inescapable Blaze
 108 U Lava Coil
 109 R Legion Warboss
+110 C Maniacal Rage
 111 C Maximize Velocity
+112 C Ornery Goblin
 113 R Risk Factor
+114 C Rubblebelt Boar
 115 R Runaway Steam-Kin
+116 U Smelt-War Minotaur
+117 U Street Riot
+118 C Sure Strike
+119 C Torch Courier
 120 C Wojek Bodyguard
 121 U Affectionate Indrik
 122 U Arboretum Elemental
 123 R Beast Whisperer
+124 R Bounty of Might
 125 U Circuitous Route
+126 C Crushing Canopy
+127 C Devkarin Dissident
 128 U District Guide
 129 C Generous Stray
 130 U Golgari Raiders
+131 U Grappling Sundew
 132 R Hatchery Spider
-134 C Kraul Foragers
+133 C Hitchclaw Recluse
+134 C Ironshell Beetle
+135 C Kraul Foragers
 136 U Kraul Harpooner
 137 U Might of the Masses
 138 M Nullhide Ferox
+139 C Pack's Favor
+140 C Pause for Reflection
 141 R Pelt Collector
+142 C Portcullis Vine
+143 C Prey Upon
 144 C Siege Wurm
 145 U Sprouting Renewal
+146 C Urban Utopia
+147 C Vigorspore Wurm
 148 R Vivid Revival
 149 C Wary Okapi
+150 C Wild Ceratok
 151 C Artful Takedown
 152 R Assassin's Trophy
 153 M Aurelia, Exemplar of Justice
 154 U Beacon Bolt
-155 U Boltsplicer Mage
+155 U Beamsplitter Mage
 156 U Boros Challenger
 157 R Camaraderie
 158 C Centaur Peacemaker
@@ -112,7 +175,7 @@ Type=Expansion
 166 U Dimir Spybug
 167 U Disinformation Campaign
 168 R Emmara, Soul of the Accord
-169 C \Ancient Trooper\
+169 C Erstwhile Trooper
 170 R Etrata, the Silencer
 171 R Firemind's Research
 172 C Garrison Sergeant
@@ -161,6 +224,8 @@ Type=Expansion
 215 U Worldsoul Colossus
 216 C Fresh-Faced Recruit
 217 C Piston-Fist Cyclops
+218 C Pitiless Gorgon
+219 C Vernadi Shieldmate
 220 C Whisper Agent
 221 R Assure // Assemble
 222 R Connive // Concoct
@@ -173,13 +238,16 @@ Type=Expansion
 229 R Response // Resurgence
 230 U Status // Statue
 231 C Boros Locket
+232 R Chamber Sentry
 233 R Chromatic Lantern
 234 C Dimir Locket
-235 U Gargoyle Guardian
+235 U Gatekeeper Gargoyle
 236 U Glaive of the Guildpact
 237 C Golgari Locket
 238 C Izzet Locket
+239 U Rampaging Monument
 240 C Selesnya Locket
+241 U Silent Dart
 242 U Wand of Vertebrae
 243 C Boros Guildgate
 244 C Boros Guildgate
