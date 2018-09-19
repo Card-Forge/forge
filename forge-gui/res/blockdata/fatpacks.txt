@@ -69,3 +69,4 @@ XLN: 10 Boosters, 80 BasicLands
 RIX: 10 Boosters, 80 BasicLands
 DOM: 10 Boosters, 80 BasicLands
 M19: 10 Boosters, 80 BasicLands
+GRN: 10 Boosters, 80 BasicLands

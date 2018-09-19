@@ -5,6 +5,8 @@ Name=Guilds of Ravnica
 Code2=GRN
 MciCode=grn
 Type=Expansion
+BoosterCovers=5
+Booster=10 Common:!fromSheet("GRN Secret Cards"), 3 Uncommon:!fromSheet("GRN Secret Cards"), 1 RareMythic:!fromSheet("GRN Secret Cards"), 1 fromSheet("GRN Lands")
 
 [cards]
 1 C Blade Instructor
