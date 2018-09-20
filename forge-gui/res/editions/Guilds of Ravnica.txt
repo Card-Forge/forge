@@ -43,7 +43,7 @@ Booster=10 Common:!fromSheet("GRN Secret Cards"), 3 Uncommon:!fromSheet("GRN Sec
 32 U Chemister's Insight
 33 U Citywatch Sphinx
 34 C Dazzling Lights
-35 C Devious Cover-up
+35 C Devious Cover-Up
 36 C Dimir Informant
 37 C Disdainful Stroke
 38 M Dream Eater

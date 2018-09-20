@@ -1,4 +1,4 @@
-Name:Devious Cover-up
+Name:Devious Cover-Up
 ManaCost:2 U U
 Types:Instant
 A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Destination$ Exile | SubAbility$ DBChangeZone | SpellDescription$ Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard. You may shuffle up to four target cards from your graveyard into your library.
