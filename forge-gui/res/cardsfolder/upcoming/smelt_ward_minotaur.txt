@@ -1,4 +1,4 @@
-Name:Smelt-War Minotaur
+Name:Smelt-Ward Minotaur
 ManaCost:2 R
 Types:Creature Minotaur Warrior
 PT:2/3

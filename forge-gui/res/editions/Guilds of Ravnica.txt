@@ -124,7 +124,7 @@ Booster=10 Common:!fromSheet("GRN Secret Cards"), 3 Uncommon:!fromSheet("GRN Sec
 113 R Risk Factor
 114 C Rubblebelt Boar
 115 R Runaway Steam-Kin
-116 U Smelt-War Minotaur
+116 U Smelt-Ward Minotaur
 117 U Street Riot
 118 C Sure Strike
 119 C Torch Courier
