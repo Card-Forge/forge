@@ -275,8 +275,10 @@ Booster=10 Common:!fromSheet("GRN Secret Cards"), 3 Uncommon:!fromSheet("GRN Sec
 264 L Forest
 265 M Ral, Caller of Storms
 266 R Ral's Dispersal
+267 C Precision Bolt
 268 U Ral's Staticaster
 269 M Vraska, Regal Gorgon
+270 C Kraul Raider
 271 U Attendant of Vraska
 272 R Vraska's Stoneglare
 273 M Impervious Greatwurm
