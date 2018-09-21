@@ -42,6 +42,10 @@ def initializeEditions():
 							settype = line.split("=")[1].rstrip()
 
 					else:
+						if line.startswith("[tokens]"):
+							metadata = True
+							continue
+
 						if line:
 							hasSetNumbers = line.split(" ", 1)[0].isdigit()
 
