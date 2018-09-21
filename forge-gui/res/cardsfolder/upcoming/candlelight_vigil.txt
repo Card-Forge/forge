@@ -1,0 +1,7 @@
+Name:Candlelight Vigil
+ManaCost:3 W
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 3 W | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 2 | AddKeyword$ Vigilance | Description$ Enchanted creature gets +3/+2 and has vigilance.
+Oracle:Enchant creature\nEnchanted creature gets +3/+2 and has vigilance.

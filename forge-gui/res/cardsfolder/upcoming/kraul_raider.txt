@@ -1,0 +1,6 @@
+Name:Kraul Raider
+ManaCost:2 B
+Types:Creature Insect Warrior
+PT:2/3
+K:Menace
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)
