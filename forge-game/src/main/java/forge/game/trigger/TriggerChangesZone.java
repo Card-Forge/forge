@@ -118,6 +118,9 @@ public class TriggerChangesZone extends Trigger {
                 return false;
             }
             SpellAbility cause = (SpellAbility) runParams2.get("Cause");
+            if (cause == null) {
+                return false;
+            }
             if (!cause.getHostCard().isValid(getParam("ValidCause").split(","), getHostCard().getController(),
                     getHostCard(), null)) {
                 return false;

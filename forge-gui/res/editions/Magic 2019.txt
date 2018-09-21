@@ -323,3 +323,6 @@ Booster=10 Common:!fromSheet("M19 Secret Cards"), 3 Uncommon:!fromSheet("M19 Sec
 312 C Grasping Scoundrel
 313 C Radiating Lightning
 314 C Llanowar Elves
+
+[tokens]
+b_1_1_bat_flying

@@ -18,9 +18,9 @@ public class TriggerChangesZoneAll extends Trigger {
         @SuppressWarnings("unchecked")
         final Map<ZoneType, CardCollection> moved = (Map<ZoneType, CardCollection>) runParams2.get("Cards");
 
-        if (this.mapParams.containsKey("Destination")) {
-            if (!this.mapParams.get("Destination").equals("Any")) {
-                if (!runParams2.get("Destination").equals(ZoneType.valueOf(this.mapParams.get("Destination")))) {
+        if (hasParam("Destination")) {
+            if (!getParam("Destination").equals("Any")) {
+                if (!runParams2.get("Destination").equals(ZoneType.valueOf(getParam("Destination")))) {
                     return false;
                 }
             }
@@ -28,12 +28,12 @@ public class TriggerChangesZoneAll extends Trigger {
 
         final CardCollection allCards = new CardCollection();
 
-        if (this.mapParams.containsKey("Origin")) {
-            if (!this.mapParams.get("Origin").equals("Any")) {
-                if (this.mapParams.get("Origin") == null) {
+        if (hasParam("Origin")) {
+            if (!getParam("Origin").equals("Any")) {
+                if (getParam("Origin") == null) {
                     return false;
                 }
-                final List<ZoneType> origin = ZoneType.listValueOf((String)this.mapParams.get("Origin"));
+                final List<ZoneType> origin = ZoneType.listValueOf((String)getParam("Origin"));
                 for (ZoneType z : origin) {
                     if (moved.containsKey(z)) {
                         allCards.addAll(moved.get(z));
@@ -46,9 +46,9 @@ public class TriggerChangesZoneAll extends Trigger {
             }
         }
 
-        if (this.mapParams.containsKey("ValidCards")) {
+        if (hasParam("ValidCards")) {
             
-            int count = CardLists.getValidCardCount(allCards, this.mapParams.get("ValidCards").split(","),this.getHostCard().getController(),
+            int count = CardLists.getValidCardCount(allCards, getParam("ValidCards").split(","),this.getHostCard().getController(),
                     this.getHostCard());
             if (count == 0) {
                 return false;
@@ -65,9 +65,9 @@ public class TriggerChangesZoneAll extends Trigger {
 
         CardCollection allCards = new CardCollection();
 
-        if (this.mapParams.containsKey("Origin")) {
-            if (!this.mapParams.get("Origin").equals("Any") && this.mapParams.get("Origin") != null) {
-                final List<ZoneType> origin = ZoneType.listValueOf((String)this.mapParams.get("Origin"));
+        if (hasParam("Origin")) {
+            if (!getParam("Origin").equals("Any") && getParam("Origin") != null) {
+                final List<ZoneType> origin = ZoneType.listValueOf((String)getParam("Origin"));
                 for (ZoneType z : origin) {
                     if (moved.containsKey(z)) {
                         allCards.addAll(moved.get(z));
@@ -80,8 +80,8 @@ public class TriggerChangesZoneAll extends Trigger {
             }
         }
 
-        if (this.mapParams.containsKey("ValidCards")) {
-            allCards = CardLists.getValidCards(allCards, this.mapParams.get("ValidCards").split(","),this.getHostCard().getController(),
+        if (hasParam("ValidCards")) {
+            allCards = CardLists.getValidCards(allCards, getParam("ValidCards").split(","),this.getHostCard().getController(),
                     this.getHostCard(), sa);
         }
 

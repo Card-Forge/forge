@@ -4,7 +4,7 @@ Types:Creature Goblin Soldier
 PT:2/2
 K:Mentor
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of combat on your turn, create a 1/1 red Goblin creature token. That token gains haste until end of turn and attacks this combat if able.
-SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | | TokenPower$ 1 | TokenToughness$ 1 | TokenColors$ Red | TokenName$ Goblin | TokenTypes$ Goblin,Creature | TokenImage$ r 1 1 goblin grn | RememberTokens$ True | SubAbility$ DBPump
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ r 1 1 goblin | LegacyImage$ r 1 1 goblin grn | RememberTokens$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Haste & HIDDEN CARDNAME attacks each combat if able. | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Counters & Ability$Token
