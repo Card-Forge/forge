@@ -50,6 +50,7 @@ public class CardState extends GameObject {
     private byte color = MagicColor.COLORLESS;
     private int basePower = 0;
     private int baseToughness = 0;
+    private int baseLoyalty = 0;
     private KeywordCollection intrinsicKeywords = new KeywordCollection();
 
     private final FCollection<SpellAbility> nonManaAbilities = new FCollection<SpellAbility>();
@@ -164,6 +165,14 @@ public class CardState extends GameObject {
         if (baseToughness == baseToughness0) { return; }
         baseToughness = baseToughness0;
         view.updateToughness(this);
+    }
+
+    public int getBaseLoyalty() {
+        return baseLoyalty;
+    }
+    public final void setBaseLoyalty(final int loyalty) {
+        baseLoyalty = loyalty;
+        view.updateLoyalty(this);
     }
 
     public final Collection<KeywordInterface> getCachedKeywords() {
@@ -451,6 +460,7 @@ public class CardState extends GameObject {
         setColor(source.getColor());
         setBasePower(source.getBasePower());
         setBaseToughness(source.getBaseToughness());
+        setBaseLoyalty(source.getBaseLoyalty());
         setSVars(source.getSVars());
 
         manaAbilities.clear();

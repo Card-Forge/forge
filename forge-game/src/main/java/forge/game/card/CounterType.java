@@ -245,6 +245,8 @@ public enum CounterType {
 
     SLEEP("SLEEP", 178, 192, 255),
 
+    SLUMBER("SLUMBER", 178, 205, 255),
+
     SLEIGHT("SLGHT", 185, 174, 255),
 
     SLIME("SLIME", 101, 220, 163 ),

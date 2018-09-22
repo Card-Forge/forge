@@ -10,6 +10,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
@@ -130,6 +131,10 @@ public class CardProperty {
             }
         } else if (property.startsWith("YouCtrl")) {
             if (!controller.equals(sourceController)) {
+                return false;
+            }
+        } else if (property.startsWith("YourTeamCtrl")) {
+            if (controller.getTeam() != sourceController.getTeam()) {
                 return false;
             }
         } else if (property.startsWith("YouDontCtrl")) {
@@ -318,12 +323,18 @@ public class CardProperty {
         } else if (property.startsWith("OwnedBy")) {
             final String valid = property.substring(8);
             if (!card.getOwner().isValid(valid, sourceController, source, spellAbility)) {
-                return false;
+                final List<Player> lp = AbilityUtils.getDefinedPlayers(source, valid, spellAbility);
+                if (!lp.contains(card.getOwner())) {
+                    return false;
+                }
             }
         } else if (property.startsWith("ControlledBy")) {
             final String valid = property.substring(13);
             if (!controller.isValid(valid, sourceController, source, spellAbility)) {
-                return false;
+                final List<Player> lp = AbilityUtils.getDefinedPlayers(source, valid, spellAbility);
+                if (!lp.contains(controller)) {
+                    return false;
+                }
             }
         } else if (property.startsWith("OwnerDoesntControl")) {
             if (card.getOwner().equals(controller)) {
@@ -1058,6 +1069,12 @@ public class CardProperty {
                         return false;
                     }
                     checkCard = (Card) triggeringObject;
+                } else if (restriction.startsWith("Remembered")) {
+                    final Object rememberedObject = source.getFirstRemembered();
+                    if (!(rememberedObject instanceof Card)) {
+                        return false;
+                    }
+                    checkCard = (Card) rememberedObject;
                 } else {
                     return false;
                 }
@@ -1072,15 +1089,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("withFlashback")) {
-            boolean fb = false;
-            if (card.hasStartOfUnHiddenKeyword("Flashback")) {
-                fb = true;
-            }
-            for (final SpellAbility sa : card.getSpellAbilities()) {
-                if (sa.isFlashBackAbility()) {
-                    fb = true;
-                }
-            }
+            boolean fb = card.hasKeyword(Keyword.FLASHBACK);
             if (!fb) {
                 return false;
             }
@@ -1600,19 +1609,21 @@ public class CardProperty {
             if (property.equals("pseudokicked")) {
                 if (!card.isOptionalCostPaid(OptionalCost.Generic)) return false;
             }
-        } else if (property.startsWith("notpseudokicked")) {
-            if (property.equals("pseudokicked")) {
-                if (card.isOptionalCostPaid(OptionalCost.Generic)) return false;
-            }
         } else if (property.startsWith("surged")) {
-            if (!card.isOptionalCostPaid(OptionalCost.Surge)) {
+            if (card.getCastSA() == null) {
                 return false;
             }
+            return card.getCastSA().isSurged();
         } else if (property.startsWith("evoked")) {
             if (card.getCastSA() == null) {
                 return false;
             }
             return card.getCastSA().isEvoke();
+        } else if (property.startsWith("prowled")) {
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            return card.getCastSA().isProwl();
         } else if (property.equals("HasDevoured")) {
             if (card.getDevouredCards().isEmpty()) {
                 return false;

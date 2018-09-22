@@ -2,6 +2,6 @@ Name:Samurai Enforcers
 ManaCost:4 W W
 Types:Creature Human Samurai
 PT:4/4
-K:Bushido 2
+K:Bushido:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/samurai_enforcers.jpg
 Oracle:Bushido 2 (When this blocks or becomes blocked, it gets +2/+2 until end of turn.)

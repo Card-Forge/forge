@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinImage;
+import forge.deck.ArchetypeDeckGenerator;
 import forge.deck.CardThemedDeckGenerator;
 import forge.deck.CommanderDeckGenerator;
 import forge.deck.DeckProxy;
@@ -131,6 +132,8 @@ public class CardZoom extends FOverlay {
                 return CardView.getCardForUi(((CardThemedDeckGenerator)item).getPaperCard());
             }else if (item instanceof CommanderDeckGenerator){
                 return CardView.getCardForUi(((CommanderDeckGenerator)item).getPaperCard());
+            }else if (item instanceof ArchetypeDeckGenerator){
+                return CardView.getCardForUi(((ArchetypeDeckGenerator)item).getPaperCard());
             }else{
                 DeckProxy deck = ((DeckProxy)item);
                 return new CardView(-1, null, deck.getName(), null, deck.getImageKey(false));

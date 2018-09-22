@@ -1,8 +1,8 @@
 Name:Fanning the Flames
 ManaCost:X R R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ X R R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature or player.
+A:SP$ DealDamage | Cost$ X R R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to any target.
 K:Buyback:3
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fanning_the_flames.jpg
-Oracle:Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nFanning the Flames deals X damage to target creature or player.
+Oracle:Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nFanning the Flames deals X damage to any target.

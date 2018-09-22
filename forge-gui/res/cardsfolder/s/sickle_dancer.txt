@@ -1,0 +1,8 @@
+Name:Sickle Dancer
+ManaCost:2 B
+Types:Creature Human Warrior
+PT:3/2
+T:Mode$ Attacks | ValidCard$ Card.Self | IsPresent$ Warrior.Other+YourTeamCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, if your team controls another Warrior, CARDNAME gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | NumAtt$ +1 | NumDef$ +1 | Defined$ Self
+SVar:BuffedBy:Warrior
+Oracle:Whenever Sickle Dancer attacks, if your team controls another Warrior, Sickle Dancer gets +1/+1 until end of turn.

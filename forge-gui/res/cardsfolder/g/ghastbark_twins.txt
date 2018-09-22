@@ -1,0 +1,7 @@
+Name:Ghastbark Twins
+ManaCost:5 G G
+Types:Creature Treefolk
+K:Trample
+K:CARDNAME can block an additional creature each combat.
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nGhastbark Twins can block an additional creature each combat.
+PT:7/7

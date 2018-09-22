@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -83,8 +84,9 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
 
             for (int multi = 0; multi < spellCount && !tgtSpells.isEmpty(); multi++) {
                 String prompt = "Select " + Lang.getOrdinal(multi + 1) + " spell to copy to stack";
-                SpellAbility chosen = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa, prompt);
-                SpellAbility copiedSpell = CardFactory.copySpellAbilityAndSrcCard(card, chosen.getHostCard(), chosen, true);
+                SpellAbility chosen = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa, prompt,
+                        ImmutableMap.of());
+                SpellAbility copiedSpell = CardFactory.copySpellAbilityAndPossiblyHost(card, chosen.getHostCard(), chosen, true);
                 copiedSpell.getHostCard().setController(card.getController(), card.getGame().getNextTimestamp());
                 copiedSpell.setActivatingPlayer(controller);
                 copies.add(copiedSpell);
@@ -92,7 +94,8 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             }
         }
         else if (sa.hasParam("CopyForEachCanTarget")) {
-            SpellAbility chosenSA = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa, "Select a spell to copy");
+            SpellAbility chosenSA = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa,
+                    "Select a spell to copy", ImmutableMap.of());
             chosenSA.setActivatingPlayer(controller);
             // Find subability or rootability that has targets
             SpellAbility targetedSA = chosenSA;
@@ -114,7 +117,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 
                 mayChooseNewTargets = false;
                 for (GameEntity o : candidates) {
-                    SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getHostCard(), chosenSA, true);
+                    SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(card, chosenSA.getHostCard(), chosenSA, true);
                     resetFirstTargetOnCopy(copy, o, targetedSA);
                     copies.add(copy);
                 }
@@ -140,22 +143,23 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 valid.remove(originalTarget);
                 mayChooseNewTargets = false;
                 for (final Card c : valid) {
-                    SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getHostCard(), chosenSA, true);
+                    SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(card, chosenSA.getHostCard(), chosenSA, true);
                     resetFirstTargetOnCopy(copy, c, targetedSA);
                     copies.add(copy);
                 }
                 for (final Player p : players) {
-                    SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getHostCard(), chosenSA, true);
+                    SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(card, chosenSA.getHostCard(), chosenSA, true);
                     resetFirstTargetOnCopy(copy, p, targetedSA);
                     copies.add(copy);
                 }
             }
         }
         else {
-            SpellAbility chosenSA = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa, "Select a spell to copy");
+            SpellAbility chosenSA = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa,
+                    "Select a spell to copy", ImmutableMap.of());
             chosenSA.setActivatingPlayer(controller);
             for (int i = 0; i < amount; i++) {
-                copies.add(CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getHostCard(), chosenSA, true));
+                copies.add(CardFactory.copySpellAbilityAndPossiblyHost(card, chosenSA.getHostCard(), chosenSA, true));
             }
         }
         

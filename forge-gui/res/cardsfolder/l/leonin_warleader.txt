@@ -1,0 +1,9 @@
+Name:Leonin Warleader
+ManaCost:2 W W
+Types:Creature Cat Soldier
+PT:4/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create two 1/1 white Cat creature tokens with lifelink that are tapped and attacking.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenName$ Cat | TokenTypes$ Creature,Cat | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Lifelink | TokenTapped$ True | TokenAttacking$ True | TokenImage$ w 1 1 cat M19
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token
+Oracle:Whenever Leonin Warleader attacks, create two 1/1 white Cat creature tokens with lifelink that are tapped and attacking.

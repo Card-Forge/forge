@@ -6,7 +6,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.GuiBase;
 import forge.GuiDesktop;
-import forge.LobbyPlayer;
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
 import forge.deck.*;
@@ -14,27 +13,15 @@ import forge.deck.io.DeckStorage;
 import forge.game.GameFormat;
 import forge.game.GameRules;
 import forge.game.GameType;
-import forge.game.Match;
-import forge.game.player.RegisteredPlayer;
 import forge.item.PaperCard;
 import forge.limited.CardRanker;
 import forge.model.FModel;
-import forge.player.GamePlayerUtil;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
-import forge.tournament.system.AbstractTournament;
-import forge.tournament.system.TournamentPairing;
-import forge.tournament.system.TournamentPlayer;
-import forge.tournament.system.TournamentSwiss;
-import forge.util.AbstractGeneticAlgorithm;
-import forge.util.MyRandom;
-import forge.util.TextUtil;
-import forge.view.SimulateMatch;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class PlanarConquestCommanderGeneraterGA extends PlanarConquestGeneraterGA {
 

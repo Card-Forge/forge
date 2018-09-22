@@ -25,7 +25,9 @@ import forge.game.card.CounterType;
 import forge.game.event.GameEventCardAttachment;
 import forge.game.event.GameEventCardAttachment.AttachMethod;
 import forge.game.keyword.Keyword;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.TriggerType;
 import forge.util.collect.FCollection;
 
@@ -337,6 +339,17 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         }
     }
 
+    public boolean canBeEnchantedBy(final Card aura) {
+        SpellAbility sa = aura.getFirstAttachSpell();
+        TargetRestrictions tgt = null;
+        if (sa != null) {
+            tgt = sa.getTargetRestrictions();
+        }
+
+        return !(hasProtectionFrom(aura)
+                || ((tgt != null) && !isValid(tgt.getValidTgts(), aura.getController(), aura, sa)));
+    }
+
     public abstract boolean hasProtectionFrom(final Card source);
 
     // Counters!
@@ -365,7 +378,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     abstract public void setCounters(final Map<CounterType, Integer> allCounters);
 
     abstract public boolean canReceiveCounters(final CounterType type);
-    abstract public void addCounter(final CounterType counterType, final int n, final Card source, final boolean applyMultiplier, final boolean fireEvents);
+    abstract public int addCounter(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier, final boolean fireEvents);
     abstract public void subtractCounter(final CounterType counterName, final int n);
     abstract public void clearCounters();
 

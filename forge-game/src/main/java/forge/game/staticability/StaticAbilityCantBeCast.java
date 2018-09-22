@@ -67,6 +67,11 @@ public class StaticAbilityCantBeCast {
             }
         }
 
+        if (params.containsKey("NonCasterTurn") && (activator != null)
+                && activator.getGame().getPhaseHandler().isPlayerTurn(activator)) {
+            return false;
+        }
+
         if (params.containsKey("NumLimitEachTurn") && activator != null) {
             int limit = Integer.parseInt(params.get("NumLimitEachTurn"));
             String valid = params.containsKey("ValidCard") ? params.get("ValidCard") : "Card";
@@ -124,6 +129,11 @@ public class StaticAbilityCantBeCast {
         }
 
         if (params.containsKey("TapAbility") && !(spellAbility.getPayCosts().hasTapCost())) {
+            return false;
+        }
+
+        if (params.containsKey("NonActivatorTurn") && (activator != null)
+                && activator.getGame().getPhaseHandler().isPlayerTurn(activator)) {
             return false;
         }
 

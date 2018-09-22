@@ -95,7 +95,9 @@ public class ComputerUtil {
             sa.setHostCard(game.getAction().moveToStack(source, sa));
         }
 
-        sa.resetPaidHash();
+        if (sa.isCopied()) {
+            sa.resetPaidHash();
+        }
 
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
             CharmEffect.makeChoices(sa);
@@ -260,6 +262,10 @@ public class ComputerUtil {
             sa.setLastStateBattlefield(game.getLastStateBattlefield());
             sa.setLastStateGraveyard(game.getLastStateGraveyard());
             newSA.setHostCard(game.getAction().moveToStack(source, sa));
+
+            if (newSA.getApi() == ApiType.Charm && !newSA.isWrapper()) {
+                CharmEffect.makeChoices(newSA);
+            }
         }
 
         final CostPayment pay = new CostPayment(newSA.getPayCosts(), newSA);
@@ -2629,8 +2635,8 @@ public class ComputerUtil {
                 // and also on Chronozoa
                 || (type == CounterType.TIME && (!c.isInPlay() || "Chronozoa".equals(c.getName())))
                 || type == CounterType.GOLD || type == CounterType.MUSIC || type == CounterType.PUPA
-                || type == CounterType.PARALYZATION || type == CounterType.SHELL || type == CounterType.SLEEP 
-                || type == CounterType.SLEIGHT || type == CounterType.WAGE;
+                || type == CounterType.PARALYZATION || type == CounterType.SHELL || type == CounterType.SLEEP
+                || type == CounterType.SLUMBER || type == CounterType.SLEIGHT || type == CounterType.WAGE;
     }
 
     // this countertypes has no effect

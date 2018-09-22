@@ -63,13 +63,15 @@ public class TriggerHandler {
             @Override
             public boolean visit(Card c) {
                 boolean changed = false;
-                for (int i = 0; i < c.getTriggers().size(); i++) {
-                    Trigger trigger = c.getTriggers().get(i);
-                    if (trigger.isTemporary()) {
-                        c.removeTrigger(trigger);
-                        changed = true;
-                        i--;
+                List<Trigger> toRemove = Lists.newArrayList();
+                for (Trigger t : c.getTriggers()) {
+                    if (t.isTemporary()) {
+                        toRemove.add(t);
                     }
+                }
+                for (Trigger t : toRemove) {
+                    changed = true;
+                    c.removeTrigger(t);
                 }
                 if (changed) {
                     c.updateStateForView();

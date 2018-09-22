@@ -58,9 +58,6 @@ public class StaticEffect {
     private String chosenType;
     private Map<String, String> mapParams = Maps.newTreeMap();
 
-    // for P/T
-    private final Map<Card, String> originalPT = Maps.newTreeMap();
-
     // for types
     private boolean overwriteTypes = false;
     private boolean keepSupertype = false;
@@ -101,7 +98,6 @@ public class StaticEffect {
         copy.xValueMap = this.xValueMap;
         copy.chosenType = this.chosenType;
         copy.mapParams = this.mapParams;
-        map.fillKeyedMap(copy.originalPT, this.originalPT);
         copy.overwriteTypes = this.overwriteTypes;
         copy.keepSupertype = this.keepSupertype;
         copy.removeSubTypes = this.removeSubTypes;
@@ -345,68 +341,6 @@ public class StaticEffect {
         this.originalKeywords.clear();
     }
 
-    // original power/toughness
-    /**
-     * <p>
-     * addOriginalPT.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param power
-     *            a int.
-     * @param toughness
-     *            a int.
-     */
-    public final void addOriginalPT(final Card c, final int power, final int toughness) {
-        final String pt = power + "/" + toughness;
-        if (!this.originalPT.containsKey(c)) {
-            this.originalPT.put(c, pt);
-        }
-    }
-
-    /**
-     * <p>
-     * getOriginalPower.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @return a int.
-     */
-    public final int getOriginalPower(final Card c) {
-        int power = -1;
-        if (this.originalPT.containsKey(c)) {
-            power = Integer.parseInt(this.originalPT.get(c).split("/")[0]);
-        }
-        return power;
-    }
-
-    /**
-     * <p>
-     * getOriginalToughness.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @return a int.
-     */
-    public final int getOriginalToughness(final Card c) {
-        int tough = -1;
-        if (this.originalPT.containsKey(c)) {
-            tough = Integer.parseInt(this.originalPT.get(c).split("/")[1]);
-        }
-        return tough;
-    }
-
-    /**
-     * <p>
-     * clearAllOriginalPTs.
-     * </p>
-     */
-    public final void clearAllOriginalPTs() {
-        this.originalPT.clear();
-    }
 
     // should we overwrite types?
     /**
@@ -995,7 +929,7 @@ public class StaticEffect {
             }
 
             // remove set P/T
-            if (!params.containsKey("CharacteristicDefining") && setPT) {
+            if (setPT) {
                 affectedCard.removeNewPT(getTimestamp());
             }
 
@@ -1036,7 +970,7 @@ public class StaticEffect {
             }
 
             // remove abilities
-            if (params.containsKey("RemoveAllAbilities")) {
+            if (params.containsKey("RemoveAllAbilities") || params.containsKey("RemoveIntrinsicAbilities")) {
                 affectedCard.unSuppressCardTraits();
             }
 

@@ -20,6 +20,7 @@ package forge.game;
 import com.google.common.base.Predicate;
 import com.google.common.collect.*;
 import forge.GameCommand;
+import forge.StaticData;
 import forge.card.CardStateName;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -150,8 +151,9 @@ public class GameAction {
         // Cards returned from exile face-down must be reset to their original state, otherwise
         // all sort of funky shenanigans may happen later (e.g. their ETB replacement effects are set
         // up on the wrong card state etc.).
-        if (zoneTo.is(ZoneType.Hand) && zoneFrom.is(ZoneType.Exile) && c.isFaceDown()) {
+        if (c.isFaceDown() && (fromBattlefield || (toHand && zoneFrom.is(ZoneType.Exile)))) {
             c.setState(CardStateName.Original, true);
+            c.runFaceupCommands();
         }
 
         // Clean up the temporary Dash SVar when the Dashed card leaves the battlefield
@@ -190,7 +192,7 @@ public class GameAction {
 
             if (!c.isToken()) {
                 if (c.isCloned()) {
-                    c.switchStates(CardStateName.Cloner, CardStateName.Original, false);
+                    c.switchStates(CardStateName.Original, CardStateName.Cloner, false);
                     c.setState(CardStateName.Original, false);
                     c.clearStates(CardStateName.Cloner, false);
                     if (c.isFlipCard()) {
@@ -250,11 +252,24 @@ public class GameAction {
             Card noLandLKI = CardUtil.getLKICopy(c);
             // this check needs to check if this card would be on the battlefield
             noLandLKI.setLastKnownZone(zoneTo);
-            
+
             CardCollection preList = new CardCollection(noLandLKI);
             checkStaticAbilities(false, Sets.newHashSet(noLandLKI), preList);
 
+            // fake etb counters thing, then if something changed,
+            // need to apply checkStaticAbilities again
+            if(!noLandLKI.isLand()) {
+                if (noLandLKI.putEtbCounters()) {
+                    // counters are added need to check again
+                    checkStaticAbilities(false, Sets.newHashSet(noLandLKI), preList);
+                }
+            }
+
             if(noLandLKI.isLand()) {
+                // if it isn't on the Stack, it stays in that Zone
+                if (!c.getZone().is(ZoneType.Stack)) {
+                    return c;
+                }
                 // if something would only be a land when entering the battlefield and not before
                 // put it into the graveyard instead
                 zoneTo = c.getOwner().getZone(ZoneType.Graveyard);
@@ -262,6 +277,9 @@ public class GameAction {
                 copied.setState(CardStateName.Original, false);
                 copied.setManifested(false);
                 copied.updateStateForView();
+
+                // not to battlefield anymore!
+                toBattlefield = false;
             }
         }
 
@@ -357,7 +375,10 @@ public class GameAction {
         // do ETB counters after StaticAbilities check
         if (!suppress) {
             if (toBattlefield) {
-                copied.putEtbCounters();
+                if (copied.putEtbCounters()) {
+                    // if counter where put of card, call checkStaticAbilities again
+                    checkStaticAbilities();
+                }
             }
             copied.clearEtbCounters();
         }
@@ -367,6 +388,7 @@ public class GameAction {
 
         final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("Card", lastKnownInfo);
+        runParams.put("Cause", cause);
         runParams.put("Origin", zoneFrom != null ? zoneFrom.getZoneType().name() : null);
         runParams.put("Destination", zoneTo.getZoneType().name());
         runParams.put("SpellAbilityStackInstance", game.stack.peek());
@@ -873,9 +895,13 @@ public class GameAction {
             }
         }
 
-        if (runEvents) {
+        // preList means that this is run by a pre Check with LKI objects
+        // in that case Always trigger should not Run
+        if (preList.isEmpty()) {
             final Map<String, Object> runParams = Maps.newHashMap();
             game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
+
+            game.getTriggerHandler().runTrigger(TriggerType.Immediate, runParams, false);
         }
 
         // Update P/T and type in the view only once after all the cards have been processed, to avoid flickering
@@ -1562,6 +1588,53 @@ public class GameAction {
         }
     }
 
+    private void drawStartingHand(Player p1){
+
+        //check initial hand
+        List<Card> lib1 = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards().threadSafeIterable());
+        List<Card> hand1 = lib1.subList(0,p1.getMaxHandSize());
+        System.out.println(hand1.toString());
+
+        //shuffle
+        List<Card> shuffledCards = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards().threadSafeIterable());
+        Collections.shuffle(shuffledCards);
+
+        //check a second hand
+        List<Card> hand2 = shuffledCards.subList(0,p1.getMaxHandSize());
+        System.out.println(hand2.toString());
+
+        //choose better hand according to land count
+        float averageLandRatio = getLandRatio(lib1);
+        if(getHandScore(hand1, averageLandRatio)>getHandScore(hand2, averageLandRatio)){
+            p1.getZone(ZoneType.Library).setCards(shuffledCards);
+        }
+        p1.drawCards(p1.getMaxHandSize());
+    }
+
+    private float getLandRatio(List<Card> deck){
+        int landCount = 0;
+        for(Card c:deck){
+            if(c.isLand()){
+                landCount++;
+            }
+        }
+        if (landCount == 0 ){
+            return 0;
+        }
+        return Float.valueOf(landCount)/Float.valueOf(deck.size());
+    }
+
+    private float getHandScore(List<Card> hand, float landRatio){
+        int landCount = 0;
+        for(Card c:hand){
+            if(c.isLand()){
+                landCount++;
+            }
+        }
+        float averageCount = landRatio * hand.size();
+        return Math.abs(averageCount-landCount);
+    }
+
     public void startGame(GameOutcome lastGameOutcome) {
         startGame(lastGameOutcome, null);
     }
@@ -1582,7 +1655,11 @@ public class GameAction {
 
             game.setAge(GameStage.Mulligan);
             for (final Player p1 : game.getPlayers()) {
-                p1.drawCards(p1.getMaxHandSize());
+                if (StaticData.instance().getFilteredHandsEnabled() ) {
+                    drawStartingHand(p1);
+                } else {
+                    p1.drawCards(p1.getStartingHandSize());
+                }
 
                 // If pl has Backup Plan as a Conspiracy draw that many extra hands
 
@@ -1702,6 +1779,11 @@ public class GameAction {
         boolean isMultiPlayer = game.getPlayers().size() > 2;
         int mulliganDelta = isMultiPlayer ? 0 : 1;
 
+        // https://magic.wizards.com/en/articles/archive/feature/checking-brawl-2018-07-09
+        if (game.getRules().hasAppliedVariant(GameType.Brawl) && !isMultiPlayer){
+            mulliganDelta = 0;
+        }
+
         boolean allKept;
         do {
             allKept = true;
@@ -1766,7 +1848,7 @@ public class GameAction {
         //Vancouver Mulligan
         for(Player p : whoCanMulligan) {
             if (p.getStartingHandSize() > p.getZone(ZoneType.Hand).size()) {
-                p.scry(1);
+                p.scry(1, null);
             }
         }
     }

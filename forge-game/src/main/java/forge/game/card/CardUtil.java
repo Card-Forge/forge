@@ -24,6 +24,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.google.common.collect.Table;
 
 import forge.ImageKeys;
 import forge.card.CardStateName;
@@ -249,6 +250,7 @@ public final class CardUtil {
 
         newCopy.setColor(in.determineColor().getColor());
         newCopy.setReceivedDamageFromThisTurn(in.getReceivedDamageFromThisTurn());
+        newCopy.setReceivedDamageFromPlayerThisTurn(in.getReceivedDamageFromPlayerThisTurn());
         newCopy.getDamageHistory().setCreatureGotBlockedThisTurn(in.getDamageHistory().getCreatureGotBlockedThisTurn());
         newCopy.setEnchanting(in.getEnchanting());
         newCopy.setEnchantedBy(in.getEnchantedBy(false));
@@ -269,6 +271,10 @@ public final class CardUtil {
             newCopy.addImprintedCard(o);
         }
 
+        for(Table.Cell<Player, CounterType, Integer> cl : in.getEtbCounters()) {
+            newCopy.addEtbCounter(cl.getColumnKey(), cl.getValue(), cl.getRowKey());
+        }
+
         newCopy.setUnearthed(in.isUnearthed());
 
         newCopy.setChangedCardColors(in.getChangedCardColors());
@@ -276,6 +282,8 @@ public final class CardUtil {
         newCopy.setChangedCardTypes(in.getChangedCardTypesMap());
 
         newCopy.setMeldedWith(in.getMeldedWith());
+
+        newCopy.setTimestamp(in.getTimestamp());
 
         // update keyword cache on all states
         for (CardStateName s : newCopy.getStates()) {

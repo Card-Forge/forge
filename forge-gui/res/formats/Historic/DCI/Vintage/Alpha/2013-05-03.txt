@@ -1,8 +1,0 @@
-[format]
-Name:Vintage Alpha, Dragon's Maze
-Type:Historic
-Subtype:Vintage
-Effective:2013-05-03
-Sets:LEA
-Restricted:Ancestral Recall, Balance, Black Lotus, Channel, Demonic Tutor, Fastbond, Mox Emerald, Mox Pearl, Mox Ruby, Mox Sapphire, Mox Jet, Sol Ring, Time Vault, Timetwister, Time Walk, Wheel of Fortune
-Banned:Chaos Orb, Contract from Below, Darkpact, Demonic Attorney

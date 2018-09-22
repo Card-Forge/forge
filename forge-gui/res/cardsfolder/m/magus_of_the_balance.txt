@@ -1,0 +1,8 @@
+Name:Magus of the Balance
+ManaCost:1 W
+Types:Creature Human Wizard
+PT:2/2
+A:AB$ Balance | Cost$ 4 W T Sac<1/CARDNAME> | Valid$ Land | AILogic$ BalanceCreaturesAndLands | SubAbility$ BalanceHands | SpellDescription$ Each player chooses a number of lands they control equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way.
+SVar:BalanceHands:DB$ Balance | Zone$ Hand | SubAbility$ BalanceCreatures
+SVar:BalanceCreatures:DB$ Balance | Valid$ Creature
+Oracle:{4}{W}, {T}, Sacrifice Magus of the Balance: Each player chooses a number of lands they control equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way.

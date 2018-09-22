@@ -17,13 +17,16 @@
  */
 package forge.screens.deckeditor.controllers;
 
+import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
 import forge.UiCommand;
+import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
+import forge.game.GameType;
 import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
@@ -33,8 +36,11 @@ import forge.properties.ForgePreferences.FPref;
 import forge.screens.deckeditor.AddBasicLandsDialog;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.match.controllers.CDetailPicture;
+import forge.toolbox.FComboBox;
 import forge.util.ItemPool;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -49,10 +55,17 @@ import java.util.Map.Entry;
  * @author Forge
  * @version $Id: CEditorConstructed.java 24868 2014-02-17 05:08:05Z drdev $
  */
-public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
-    private final DeckController<Deck> controller;
+public final class CEditorConstructed extends CDeckEditor<Deck> {
+    private DeckController<Deck> controller;
     private final List<DeckSection> allSections = new ArrayList<DeckSection>();
-    private final ItemPool<PaperCard> normalPool, avatarPool, planePool, schemePool, conspiracyPool;
+    private ItemPool<PaperCard> normalPool, avatarPool, planePool, schemePool, conspiracyPool, commanderPool;
+
+    private final GameType gameType;
+
+    Predicate<CardRules> commanderFilter;
+
+    CardManager catalogManager;
+    CardManager deckManager;
 
     //=========== Constructor
     /**
@@ -62,23 +75,56 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
      */
     @SuppressWarnings("serial")
     public CEditorConstructed(final CDetailPicture cDetailPicture) {
+        this(cDetailPicture, GameType.Constructed);
+    }
+
+    public CEditorConstructed(final CDetailPicture cDetailPicture, final GameType gameType) {
         super(FScreen.DECK_EDITOR_CONSTRUCTED, cDetailPicture);
+        this.gameType = gameType;
+
+        boolean wantUnique = false;
 
         allSections.add(DeckSection.Main);
         allSections.add(DeckSection.Sideboard);
-        allSections.add(DeckSection.Avatar);
-        allSections.add(DeckSection.Schemes);
-        allSections.add(DeckSection.Planes);
-        allSections.add(DeckSection.Conspiracy);
 
-        normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
-        avatarPool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_VANGUARD, PaperCard.FN_GET_RULES)), PaperCard.class);
-        planePool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard.FN_GET_RULES)), PaperCard.class);
-        schemePool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)), PaperCard.class);
-        conspiracyPool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_CONSPIRACY, PaperCard.FN_GET_RULES)), PaperCard.class);
+        switch (this.gameType) {
+            case Constructed:
+                allSections.add(DeckSection.Avatar);
+                allSections.add(DeckSection.Schemes);
+                allSections.add(DeckSection.Planes);
+                allSections.add(DeckSection.Conspiracy);
 
-        CardManager catalogManager = new CardManager(getCDetailPicture(), false, false); // TODO: restore the functionality of the "want uniques only" toggle
-        CardManager deckManager = new CardManager(getCDetailPicture(), false, false); // IMPORTANT: must *always* show all cards in the deck, otherwise cards with different art get ignored!
+                normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
+                avatarPool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_VANGUARD, PaperCard.FN_GET_RULES)), PaperCard.class);
+                planePool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard.FN_GET_RULES)), PaperCard.class);
+                schemePool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)), PaperCard.class);
+                conspiracyPool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_CONSPIRACY, PaperCard.FN_GET_RULES)), PaperCard.class);
+
+                break;
+            case Commander:
+            case TinyLeaders:
+                allSections.add(DeckSection.Commander);
+
+                commanderFilter = CardRulesPredicates.Presets.CAN_BE_COMMANDER;
+                commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)), PaperCard.class);
+                normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
+
+                wantUnique = true;
+                break;
+            case Brawl:
+                allSections.add(DeckSection.Commander);
+
+                commanderFilter = CardRulesPredicates.Presets.CAN_BE_BRAWL_COMMANDER;
+                commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(Predicates.and(
+                        FModel.getFormats().get("Brawl").getFilterPrinted(), Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES))), PaperCard.class);
+                normalPool = ItemPool.createFrom(FModel.getFormats().get("Brawl").getAllCards(), PaperCard.class);
+
+                wantUnique = true;
+                break;
+        }
+
+        catalogManager = new CardManager(getCDetailPicture(), wantUnique, false);
+        deckManager = new CardManager(getCDetailPicture(), wantUnique, false);
 
         catalogManager.setCaption("Catalog");
 
@@ -92,7 +138,20 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
             }
         };
 
-        this.controller = new DeckController<Deck>(FModel.getDecks().getConstructed(), this, newCreator);
+        switch (this.gameType) {
+            case Constructed:
+                this.controller = new DeckController<Deck>(FModel.getDecks().getConstructed(), this, newCreator);
+                break;
+            case Commander:
+                this.controller = new DeckController<Deck>(FModel.getDecks().getCommander(), this, newCreator);
+                break;
+            case Brawl:
+                this.controller = new DeckController<Deck>(FModel.getDecks().getBrawl(), this, newCreator);
+                break;
+            case TinyLeaders:
+                this.controller = new DeckController<Deck>(FModel.getDecks().getTinyLeaders(), this, newCreator);
+                break;
+        }
 
         getBtnAddBasicLands().setCommand(new UiCommand() {
             @Override
@@ -110,7 +169,14 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
             return CardLimit.Singleton;
         }
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            return CardLimit.Default;
+            switch (this.gameType) {
+                case Constructed:
+                    return CardLimit.Default;
+                case Commander:
+                case TinyLeaders:
+                case Brawl:
+                    return CardLimit.Singleton;
+            }
         }
         return CardLimit.None; //if not enforcing deck legality, don't enforce default limit
     }
@@ -278,6 +344,11 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         this.getDeckManager().setPool(this.controller.getModel().getMain());
     }
 
+    @Override
+    protected Boolean isSectionImportable(DeckSection section) {
+        return allSections.contains(section);
+    }
+
     /*
      * (non-Javadoc)
      * 
@@ -291,45 +362,70 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
     /**
      * Switch between the main deck and the sideboard editor.
      */
-    public void cycleEditorMode() {
-        int curindex = allSections.indexOf(sectionMode);
-        curindex = (curindex + 1) % allSections.size();
-        sectionMode = allSections.get(curindex);
-
-        switch(sectionMode) {
-        case Main:
-            this.getCatalogManager().setup(ItemManagerConfig.CARD_CATALOG);
-            this.getCatalogManager().setPool(normalPool, true);
-            this.getDeckManager().setPool(this.controller.getModel().getMain());
-            break;
-        case Sideboard:
-            this.getCatalogManager().setup(ItemManagerConfig.CARD_CATALOG);
-            this.getCatalogManager().setPool(normalPool, true);
-            this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
-            break;
-        case Avatar:
-            this.getCatalogManager().setup(ItemManagerConfig.AVATAR_POOL);
-            this.getCatalogManager().setPool(avatarPool, true);
-            this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Avatar));
-            break;
-        case Planes:
-            this.getCatalogManager().setup(ItemManagerConfig.PLANAR_POOL);
-            this.getCatalogManager().setPool(planePool,true);
-            this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Planes));
-            break;
-        case Schemes:
-            this.getCatalogManager().setup(ItemManagerConfig.SCHEME_POOL);
-            this.getCatalogManager().setPool(schemePool,true);
-            this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Schemes));
-            break;
-        case Commander:
-            break; //do nothing for Commander here
-        case Conspiracy:
-            this.getCatalogManager().setup(ItemManagerConfig.CONSPIRACY_DECKS);
-            this.getCatalogManager().setPool(conspiracyPool,true);
-            this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Conspiracy));
+    public void setEditorMode(DeckSection sectionMode) {
+        if (sectionMode == null) {
+            return;
+        }
+        switch(this.gameType) {
+            case Constructed:
+                switch(sectionMode) {
+                    case Main:
+                        this.getCatalogManager().setup(ItemManagerConfig.CARD_CATALOG);
+                        this.getCatalogManager().setPool(normalPool, true);
+                        this.getDeckManager().setPool(this.controller.getModel().getMain());
+                        break;
+                    case Sideboard:
+                        this.getCatalogManager().setup(ItemManagerConfig.CARD_CATALOG);
+                        this.getCatalogManager().setPool(normalPool, true);
+                        this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
+                        break;
+                    case Avatar:
+                        this.getCatalogManager().setup(ItemManagerConfig.AVATAR_POOL);
+                        this.getCatalogManager().setPool(avatarPool, true);
+                        this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Avatar));
+                        break;
+                    case Planes:
+                        this.getCatalogManager().setup(ItemManagerConfig.PLANAR_POOL);
+                        this.getCatalogManager().setPool(planePool, true);
+                        this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Planes));
+                        break;
+                    case Schemes:
+                        this.getCatalogManager().setup(ItemManagerConfig.SCHEME_POOL);
+                        this.getCatalogManager().setPool(schemePool, true);
+                        this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Schemes));
+                        break;
+                    case Commander:
+                        break; //do nothing for Commander here
+                    case Conspiracy:
+                        this.getCatalogManager().setup(ItemManagerConfig.CONSPIRACY_DECKS);
+                        this.getCatalogManager().setPool(conspiracyPool, true);
+                        this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Conspiracy));
+                }
+            case Commander:
+            case TinyLeaders:
+            case Brawl:
+                switch(sectionMode) {
+                    case Main:
+                        this.getCatalogManager().setup(ItemManagerConfig.CARD_CATALOG);
+                        this.getCatalogManager().setPool(normalPool, true);
+                        this.getDeckManager().setPool(this.controller.getModel().getMain());
+                        break;
+                    case Sideboard:
+                        this.getCatalogManager().setup(ItemManagerConfig.CARD_CATALOG);
+                        this.getCatalogManager().setPool(normalPool, true);
+                        this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
+                        break;
+                    case Commander:
+                        this.getCatalogManager().setup(ItemManagerConfig.COMMANDER_POOL);
+                        this.getCatalogManager().setPool(commanderPool, true);
+                        this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Commander));
+                        break;
+                    default:
+                        break;
+                }
         }
 
+        this.sectionMode = sectionMode;
         this.controller.updateCaptions();
     }
 
@@ -355,13 +451,19 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
 
         resetUI();
 
-        this.getBtnCycleSection().setVisible(true);
-        this.getBtnCycleSection().setCommand(new UiCommand() {
+        this.getCbxSection().removeAllItems();
+        for (DeckSection section : allSections) {
+            this.getCbxSection().addItem(section);
+        }
+        this.getCbxSection().addActionListener(new ActionListener() {
             @Override
-            public void run() {
-                cycleEditorMode();
+            public void actionPerformed(ActionEvent actionEvent) {
+                FComboBox cb = (FComboBox)actionEvent.getSource();
+                DeckSection ds = (DeckSection)cb.getSelectedItem();
+                setEditorMode(ds);
             }
         });
+        this.getCbxSection().setVisible(true);
 
         this.controller.refreshModel();
     }

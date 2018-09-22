@@ -82,7 +82,7 @@ public class NewGauntletScreen extends LaunchScreen {
                 if (numOpponents == null) { return; }
 
                 ListChooser<DeckType> chooser = new ListChooser<DeckType>(
-                        "Choose allowed deck types for opponents", 0, 9, Arrays.asList(new DeckType[] {
+                        "Choose allowed deck types for opponents", 0, 11, Arrays.asList(new DeckType[] {
                         DeckType.CUSTOM_DECK,
                         DeckType.PRECONSTRUCTED_DECK,
                         DeckType.QUEST_OPPONENT_DECK,
@@ -91,6 +91,8 @@ public class NewGauntletScreen extends LaunchScreen {
                         DeckType.STANDARD_CARDGEN_DECK,
                         DeckType.MODERN_COLOR_DECK,
                         DeckType.MODERN_CARDGEN_DECK,
+                        DeckType.LEGACY_CARDGEN_DECK,
+                        DeckType.VINTAGE_CARDGEN_DECK,
                         DeckType.THEME_DECK
                 }), null, new Callback<List<DeckType>>() {
                     @Override

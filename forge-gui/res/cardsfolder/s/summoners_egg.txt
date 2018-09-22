@@ -1,6 +1,6 @@
 Name:Summoner's Egg
 ManaCost:4
-Types:Artifact Creature Construct
+Types:Artifact Creature Egg
 PT:0/4
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Imprint — When CARDNAME enters the battlefield, you may exile a card from your hand face down.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | ExileFaceDown$ True | Imprint$ True

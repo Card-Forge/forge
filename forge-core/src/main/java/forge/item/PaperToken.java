@@ -137,6 +137,6 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
 
     @Override
     public String getImageKey(boolean altState) {
-        return ImageKeys.TOKEN_PREFIX + imageFileName;
+        return ImageKeys.TOKEN_PREFIX + imageFileName.replace(" ", "_");
     }
 }

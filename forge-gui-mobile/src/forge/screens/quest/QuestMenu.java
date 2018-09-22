@@ -1,6 +1,7 @@
 package forge.screens.quest;
 
 import java.io.File;
+import java.io.IOException;
 
 import forge.FThreads;
 import forge.Forge;
@@ -190,7 +191,14 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
                 @Override
                 @SuppressWarnings("unchecked")
                 public void run() {
-                    FModel.getQuest().load(QuestDataIO.loadData(data));
+                    try {
+                        FModel.getQuest().load(QuestDataIO.loadData(data));
+                    } catch (IOException e) {
+                        System.err.println(String.format("Failed to load quest '%s'", questname));
+                        // Failed to load last quest, don't continue with quest loading stuff
+                        return;
+                    }
+
                     ((DeckController<Deck>)EditorType.Quest.getController()).setRootFolder(FModel.getQuest().getMyDecks());
                     ((DeckController<DeckGroup>)EditorType.QuestDraft.getController()).setRootFolder(FModel.getQuest().getDraftDecks());
                     if (reason == LaunchReason.StartQuestMode) {

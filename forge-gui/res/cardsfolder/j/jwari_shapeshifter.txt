@@ -2,9 +2,8 @@ Name:Jwari Shapeshifter
 ManaCost:1 U
 Types:Creature Shapeshifter Ally
 PT:0/0
-K:ETBReplacement:Copy:ChooseCreature:Optional
-SVar:ChooseCreature:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature.Ally+Other | SubAbility$ DBCopy | RememberChosen$ True | AILogic$ Clone | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any Ally creature on the battlefield.
-SVar:DBCopy:DB$ Clone | Defined$ Remembered
+K:ETBReplacement:Copy:DBCopy:Optional
+SVar:DBCopy:DB$ Clone | Choices$ Creature.Ally+Other | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any Ally creature on the battlefield.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jwari_shapeshifter.jpg
 Oracle:You may have Jwari Shapeshifter enter the battlefield as a copy of any Ally creature on the battlefield.

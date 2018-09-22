@@ -32,6 +32,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import com.thoughtworks.xstream.security.NoTypePermission;
+import com.thoughtworks.xstream.security.NullPermission;
+import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -69,6 +72,16 @@ public class QuestBazaarManager {
             final Document document = builder.parse(xmlFile);
 
             final XStream xs = new IgnoringXStream();
+            // clear out existing permissions and set our own
+            xs.addPermission(NoTypePermission.NONE);
+            // allow some basics
+            xs.addPermission(NullPermission.NULL);
+            xs.addPermission(PrimitiveTypePermission.PRIMITIVES);
+            xs.allowTypeHierarchy(String.class);
+            // allow any type from the same package
+            xs.allowTypesByWildcard(new String[] {
+                    QuestBazaarManager.class.getPackage().getName()+".*"
+            });
             xs.autodetectAnnotations(true);
 
             final NodeList xmlStalls = document.getElementsByTagName("stalls").item(0).getChildNodes();

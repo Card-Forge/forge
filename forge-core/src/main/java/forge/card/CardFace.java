@@ -87,21 +87,27 @@ final class CardFace implements ICardFace {
     void setInitialLoyalty(int value)        { this.initialLoyalty = value; }
 
     void setPtText(String value) {
-        final int slashPos = value.indexOf('/');
-        if (slashPos == -1) {
+        final String k[] = value.split("/");
+
+        if (k.length != 2) {
             throw new RuntimeException("Creature '" + this.getName() + "' has bad p/t stats");
         }
-        boolean negPower = value.charAt(0) == '-';
-        boolean negToughness = value.charAt(slashPos + 1) == '-';
 
-        this.power = negPower ? value.substring(1, slashPos) : value.substring(0, slashPos);
-        this.toughness = negToughness ? value.substring(slashPos + 2) : value.substring(slashPos + 1);
+        this.power = k[0];
+        this.toughness = k[1];
 
-        this.iPower = StringUtils.isNumeric(this.power) ? Integer.parseInt(this.power) : 0;
-        this.iToughness = StringUtils.isNumeric(this.toughness) ? Integer.parseInt(this.toughness) : 0;
+        this.iPower = parsePT(k[0]);
+        this.iToughness = parsePT(k[1]);
+    }
 
-        if (negPower) { this.iPower *= -1; }
-        if (negToughness) { this.iToughness *= -1; }
+    static int parsePT(String val) {
+        // normalize PT value
+        if (val.contains("*")) {
+            val = val.replace("+*", "");
+            val = val.replace("-*", "");
+            val = val.replace("*", "0");
+        }
+        return Integer.parseInt(val);
     }
 
     // Raw fields used for Card creation

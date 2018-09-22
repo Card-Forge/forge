@@ -53,15 +53,21 @@ public class TriggerCounterAddedOnce extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final Map<String, Object> runParams2) {
-        final CounterType addedType = (CounterType) runParams2.get("CounterType");
+        if (hasParam("CounterType")) {
+            final CounterType addedType = (CounterType) runParams2.get("CounterType");
+            final String type = getParam("CounterType");
+            if (!type.equals(addedType.toString())) {
+                return false;
+            }
+        }
 
         if (hasParam("ValidCard")) {
             if (!runParams2.containsKey("Card"))
                 return false;
 
             final Card addedTo = (Card) runParams2.get("Card");
-            if (!addedTo.isValid(getParam("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
+            if (!addedTo.isValid(getParam("ValidCard").split(","), getHostCard().getController(),
+                    getHostCard(), null)) {
                 return false;
             }
         }
@@ -71,8 +77,8 @@ public class TriggerCounterAddedOnce extends Trigger {
                 return false;
 
             final Player addedTo = (Player) runParams2.get("Player");
-            if (!addedTo.isValid(getParam("ValidPlayer").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
+            if (!addedTo.isValid(getParam("ValidPlayer").split(","), getHostCard().getController(),
+                    getHostCard(), null)) {
                 return false;
             }
         }
@@ -81,21 +87,14 @@ public class TriggerCounterAddedOnce extends Trigger {
             if (!runParams2.containsKey("Source"))
                 return false;
 
-            final Card source = (Card) runParams2.get("Source");
+            final Player source = (Player) runParams2.get("Source");
 
             if (source == null) {
                 return false;
             }
 
-            if (!source.isValid(getParam("ValidSource").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
-                return false;
-            }
-        }
-
-        if (hasParam("CounterType")) {
-            final String type = getParam("CounterType");
-            if (!type.equals(addedType.toString())) {
+            if (!source.isValid(getParam("ValidSource").split(","), getHostCard().getController(),
+                    getHostCard(), null)) {
                 return false;
             }
         }

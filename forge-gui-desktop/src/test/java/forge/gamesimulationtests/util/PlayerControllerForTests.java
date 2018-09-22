@@ -167,7 +167,8 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public SpellAbility chooseSingleSpellForEffect(List<SpellAbility> spells, SpellAbility sa, String title) {
+    public SpellAbility chooseSingleSpellForEffect(List<SpellAbility> spells, SpellAbility sa, String title,
+            Map<String, Object> params) {
         return chooseItem(spells);
     }
 
@@ -242,6 +243,11 @@ public class PlayerControllerForTests extends PlayerController {
 
     @Override
     public ImmutablePair<CardCollection, CardCollection> arrangeForScry(CardCollection topN) {
+        return ImmutablePair.of(topN, null);
+    }
+
+    @Override
+    public ImmutablePair<CardCollection, CardCollection> arrangeForSurveil(CardCollection topN) {
         return ImmutablePair.of(topN, null);
     }
 

@@ -481,10 +481,11 @@ public class DamageDealAi extends DamageAiBase {
         final PhaseHandler phase = game.getPhaseHandler();
         final boolean divided = sa.hasParam("DividedAsYouChoose");
         final boolean oppTargetsChoice = sa.hasParam("TargetingPlayer");
+        final String logic = sa.getParamOrDefault("AILogic", "");
 
         Player enemy = ComputerUtil.getOpponentFor(ai);
 
-        if ("PowerDmg".equals(sa.getParam("AILogic"))) {
+        if ("PowerDmg".equals(logic)) {
             // check if it is better to target the player instead, the original target is already set in PumpAi.pumpTgtAI()
             if (tgt.canTgtCreatureAndPlayer() && this.shouldTgtP(ai, sa, dmg, noPrevention)){
                 sa.resetTargets();
@@ -504,11 +505,11 @@ public class DamageDealAi extends DamageAiBase {
         TargetChoices tcs = sa.getTargets();
 
         // Do not use if would kill self
-        if (("SelfDamage".equals(sa.getParam("AILogic"))) && (ai.getLife() <= Integer.parseInt(source.getSVar("SelfDamageAmount")))) {
+        if (("SelfDamage".equals(logic)) && (ai.getLife() <= Integer.parseInt(source.getSVar("SelfDamageAmount")))) {
             return false;
         }
 
-        if ("ChoiceBurn".equals(sa.getParam("AILogic"))) {
+        if ("ChoiceBurn".equals(logic)) {
             // do not waste burns on player if other choices are present
             if (this.shouldTgtP(ai, sa, dmg, noPrevention)) {
                 tcs.add(enemy);
@@ -517,7 +518,7 @@ public class DamageDealAi extends DamageAiBase {
                 return false;
             }
         }
-        if ("Polukranos".equals(sa.getParam("AILogic"))) {
+        if ("Polukranos".equals(logic)) {
             int dmgTaken = 0;
             CardCollection humCreatures = enemy.getCreaturesInPlay();
             Card lastTgt = null;
@@ -681,7 +682,7 @@ public class DamageDealAi extends DamageAiBase {
                     }
                     continue;
                 }
-            } else if ("OppAtTenLife".equals(sa.getParam("AILogic"))) {
+            } else if ("OppAtTenLife".equals(logic)) {
             	for (final Player p : ai.getOpponents()) {
             		if (sa.canTarget(p) && p.getLife() == 10 && tcs.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
             			tcs.add(p);
@@ -690,9 +691,10 @@ public class DamageDealAi extends DamageAiBase {
             }
             // TODO: Improve Damage, we shouldn't just target the player just
             // because we can
-            else if (sa.canTarget(enemy)) {
+            if (sa.canTarget(enemy) && tcs.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
                 if (((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
                         || (SpellAbilityAi.isSorcerySpeed(sa) && phase.is(PhaseType.MAIN2))
+                        || ("PingAfterAttack".equals(logic) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai))
                         || sa.getPayCosts() == null || immediately
                         || this.shouldTgtP(ai, sa, dmg, noPrevention)) &&
                         (!avoidTargetP(ai, sa))) {

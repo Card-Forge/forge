@@ -1,11 +1,11 @@
 Name:Firestorm
 ManaCost:R
 Types:Instant
-A:SP$ DealDamage | Cost$ R Discard<X/Card> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | TargetMin$ 0 | TargetMax$ MaxTargets | NumDmg$ X | References$ X,MaxTargets,MaxPlayers,MaxCreatures | SpellDescription$ CARDNAME deals X damage to each of X target creatures and/or players.
+A:SP$ DealDamage | Cost$ R Discard<X/Card> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | TargetMin$ 0 | TargetMax$ MaxTargets | NumDmg$ X | References$ X,MaxTargets,MaxPlayers,MaxCreatures | SpellDescription$ CARDNAME deals X damage to each of X targets.
 SVar:X:TargetedObjects$Amount
-SVar:MaxTargets:SVar$MaxPlayers/Plus.MaxCreatures
+SVar:MaxTargets:SVar$MaxPlayers/Plus.MaxCreaturesAndPlaneswalkers
 SVar:MaxPlayers:PlayerCountPlayers$Amount
-SVar:MaxCreatures:Count$Valid Creature
+SVar:MaxCreaturesAndPlaneswalkers:Count$Valid Creature,Planeswalker
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firestorm.jpg
-Oracle:As an additional cost to cast Firestorm, discard X cards.\nFirestorm deals X damage to each of X target creatures and/or players.
+Oracle:As an additional cost to cast Firestorm, discard X cards.\nFirestorm deals X damage to each of X targets.

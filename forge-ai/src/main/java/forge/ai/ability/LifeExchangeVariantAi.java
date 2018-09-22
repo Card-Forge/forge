@@ -9,6 +9,7 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.zone.MagicStack;
 
 public class LifeExchangeVariantAi extends SpellAbilityAi {
 
@@ -83,7 +84,25 @@ public class LifeExchangeVariantAi extends SpellAbilityAi {
             return shouldDo;
         }
         else if ("Evra, Halcyon Witness".equals(sourceName)) {
-            // TODO add logic
+            if (!ai.canGainLife())
+                return false;
+
+            int aiLife = ai.getLife();
+
+            if (source.getNetPower() > aiLife) {
+                if (ComputerUtilCombat.lifeInSeriousDanger(ai, ai.getGame().getCombat())) {
+                    return true;
+                }
+
+                // check the top of stack
+                MagicStack stack = ai.getGame().getStack();
+                if (!stack.isEmpty()) {
+                    SpellAbility saTop = stack.peekAbility();
+                    if (ComputerUtil.predictDamageFromSpell(saTop, ai) >= aiLife) {
+                        return true;
+                    }
+                }
+            }
         }
         return false;
 

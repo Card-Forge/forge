@@ -1,7 +1,7 @@
 Name:Increasing Confusion
 ManaCost:X U
 Types:Sorcery
-K:Flashback X U
+K:Flashback:X U
 A:SP$ Mill | Cost$ X U | NumCards$ Z | ValidTgts$ Player | TgtPrompt$ Choose a player | References$ X,Y,Z | SpellDescription$ Target player puts the top X cards of their library into their graveyard. If CARDNAME was cast from a graveyard, that player puts twice as many cards into their graveyard instead.
 SVar:Z:SVar$X/Times.Y
 SVar:X:Count$xPaid

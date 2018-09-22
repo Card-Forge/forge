@@ -21,9 +21,9 @@ public enum DeckSection {
             return null;
         }
         
-        final String valToCompate = value.trim();
+        final String valToCompare = value.trim();
         for (final DeckSection v : DeckSection.values()) {
-            if (v.name().compareToIgnoreCase(valToCompate) == 0) {
+            if (v.name().compareToIgnoreCase(valToCompare) == 0) {
                 return v;
             }
         }

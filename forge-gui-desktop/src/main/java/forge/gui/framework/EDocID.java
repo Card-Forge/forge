@@ -6,11 +6,14 @@ package forge.gui.framework;
 import com.google.common.collect.ObjectArrays;
 
 import forge.screens.deckeditor.views.VAllDecks;
+import forge.screens.deckeditor.views.VBrawlDecks;
 import forge.screens.deckeditor.views.VCardCatalog;
+import forge.screens.deckeditor.views.VCommanderDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.deckeditor.views.VProbabilities;
 import forge.screens.deckeditor.views.VStatistics;
+import forge.screens.deckeditor.views.VTinyLeadersDecks;
 import forge.screens.home.gauntlet.VSubmenuGauntletBuild;
 import forge.screens.home.gauntlet.VSubmenuGauntletContests;
 import forge.screens.home.gauntlet.VSubmenuGauntletLoad;
@@ -54,7 +57,10 @@ public enum EDocID {
     EDITOR_CATALOG (VCardCatalog.SINGLETON_INSTANCE),
     EDITOR_CURRENTDECK (VCurrentDeck.SINGLETON_INSTANCE),
     EDITOR_DECKGEN (VDeckgen.SINGLETON_INSTANCE),
-    
+    EDITOR_COMMANDER (VCommanderDecks.SINGLETON_INSTANCE),
+    EDITOR_BRAWL (VBrawlDecks.SINGLETON_INSTANCE),
+    EDITOR_TINY_LEADERS (VTinyLeadersDecks.SINGLETON_INSTANCE),
+
     WORKSHOP_CATALOG (VWorkshopCatalog.SINGLETON_INSTANCE),
     WORKSHOP_CARDDESIGNER (VCardDesigner.SINGLETON_INSTANCE),
     WORKSHOP_CARDSCRIPT (VCardScript.SINGLETON_INSTANCE),

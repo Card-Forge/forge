@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>forge</artifactId>
 		<groupId>forge</groupId>
-		<version>1.6.11-SNAPSHOT</version>
+		<version>1.6.16-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>forge-gui-desktop</artifactId>
@@ -153,6 +153,28 @@
 				</executions>
 			</plugin>
 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>checkstyle-validation</id>
+						<phase>validate</phase>
+						<configuration>
+							<configLocation>../checkstyle.xml</configLocation>
+							<includeTestSourceDirectory>true</includeTestSourceDirectory>
+							<encoding>UTF-8</encoding>
+							<consoleOutput>true</consoleOutput>
+							<failsOnError>true</failsOnError>
+							<failOnViolation>true</failOnViolation>
+						</configuration>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -190,7 +212,7 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>24.1-jre</version>
+			<version>24.1-android</version>
 		</dependency>
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
@@ -319,6 +341,7 @@
 											<fileset dir="${project.build.directory}" includes="forge.sh" />
 											<fileset dir="${project.build.directory}" includes="forge.command" />
 											<fileset dir="${basedir}/../forge-gui/" includes="forge.profile.properties.example" />
+											<fileset dir="${basedir}/" includes="sentry.properties" />
 											<fileset dir="${basedir}/../forge-gui/" includes="LICENSE.txt" />
 											<fileset dir="${basedir}/../forge-gui/" includes="README.txt" />
 											<fileset dir="${basedir}/../forge-gui/" includes="MANUAL.txt" />
@@ -464,6 +487,7 @@
 											<fileset dir="${project.build.directory}" includes="forge.sh" />
 											<fileset dir="${project.build.directory}" includes="forge.command" />
 											<fileset dir="${basedir}/../forge-gui/" includes="forge.profile.properties.example" />
+											<fileset dir="${basedir}/" includes="sentry.properties" />
 											<fileset dir="${basedir}/../forge-gui/" includes="LICENSE.txt" />
 											<fileset dir="${basedir}/../forge-gui/" includes="MANUAL.txt" />
 											<fileset dir="${basedir}/../forge-gui/release-files/" includes="CONTRIBUTORS.txt" />
@@ -578,6 +602,7 @@
 											<fileset dir="${basedir}/../forge-gui/release-files/" includes="ISSUES.txt" />
 											<fileset dir="${basedir}/../forge-gui/release-files/" includes="INSTALLATION.txt" />
 											<fileset dir="${basedir}/../forge-gui/" includes="MANUAL.txt" />
+											<fileset dir="${basedir}/" includes="sentry.properties" />
 										</copy>
 										<taskdef name="bundleapp" classpath="${basedir}/../forge-gui/${configSourceDirectory}/appbundler-1.0-custom.jar" classname="com.oracle.appbundler.AppBundlerTask" />
 										<bundleapp outputdirectory="${project.build.directory}/${project.build.finalName}-osx" name="${project.name}" displayname="${project.name}" shortversion="${project.version}" identifier="forge.view.Main" icon="${basedir}/${configSourceDirectory}/Forge.icns" applicationCategory="public.app-category.games" mainclassname="forge.view.Main">
@@ -688,6 +713,7 @@
 											<fileset dir="${basedir}/../forge-gui/" includes="LICENSE.txt" />
 											<fileset dir="${basedir}/../forge-gui/" includes="README.txt" />
 											<fileset dir="${basedir}/../forge-gui/" includes="MANUAL.txt" />
+											<fileset dir="${basedir}/" includes="sentry.properties" />
 										</copy>
 										<taskdef name="bundleapp" classpath="${basedir}/../forge-gui/${configSourceDirectory}/appbundler-1.0-custom.jar" classname="com.oracle.appbundler.AppBundlerTask" />
 										<bundleapp outputdirectory="${project.build.directory}/${project.build.finalName}-osx" name="${project.name}" displayname="${project.name}" shortversion="${project.version}" identifier="forge.view.Main" icon="${basedir}/${configSourceDirectory}/Forge.icns" applicationCategory="public.app-category.games" mainclassname="forge.view.Main">

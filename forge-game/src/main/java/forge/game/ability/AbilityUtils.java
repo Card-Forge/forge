@@ -381,7 +381,7 @@ public class AbilityUtils {
             svarval = ability.getSVar(amount);
         }
         if (StringUtils.isBlank(svarval)) {
-            if ((ability != null) && (ability instanceof SpellAbility) && !(ability instanceof SpellPermanent)) {
+            if ((ability != null) && (ability instanceof SpellAbility) && !(ability instanceof SpellPermanent) && !amount.equals("ChosenX")) {
                 System.err.printf("SVar '%s' not found in ability, fallback to Card (%s). Ability is (%s)%n", amount, card.getName(), ability);
             }
             svarval = card.getSVar(amount);
@@ -437,6 +437,10 @@ public class AbilityUtils {
             final FCollection<Player> players = new FCollection<Player>();
             if (hType.equals("Players") || hType.equals("")) {
                 players.addAll(game.getPlayers());
+                val = CardFactoryUtil.playerXCount(players, calcX[1], card);
+            }
+            else if (hType.equals("YourTeam")) {
+                players.addAll(player.getYourTeam());
                 val = CardFactoryUtil.playerXCount(players, calcX[1], card);
             }
             else if (hType.equals("Opponents")) {
@@ -891,7 +895,11 @@ public class AbilityUtils {
 
         final Player player = sa == null ? card.getController() : sa.getActivatingPlayer();
 
-        if (defined.equals("Targeted") || defined.equals("TargetedPlayer")) {
+        if (defined.equals("TargetedOrController")) {
+            players.addAll(getDefinedPlayers(card, "Targeted", sa));
+            players.addAll(getDefinedPlayers(card, "TargetedController", sa));
+        }
+        else if (defined.equals("Targeted") || defined.equals("TargetedPlayer")) {
             final SpellAbility saTargeting = sa.getSATargetingPlayer();
             if (saTargeting != null) {
                 players.addAll(saTargeting.getTargets().getTargetPlayers());
@@ -1672,7 +1680,10 @@ public class AbilityUtils {
             res.setZone(null);
             newSA.setRestrictions(res);
             // timing restrictions still apply
-            if (res.checkTimingRestrictions(tgtCard, newSA) && newSA.checkOtherRestrictions()) {
+            if (res.checkTimingRestrictions(tgtCard, newSA)
+                    // still need to check the other restrictions like Aftermath
+                    && res.checkOtherRestrictions(tgtCard, newSA, controller)
+                    && newSA.checkOtherRestrictions()) {
                 sas.add(newSA);
             }
         }

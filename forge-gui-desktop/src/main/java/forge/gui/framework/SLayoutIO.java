@@ -36,6 +36,7 @@ import forge.toolbox.SaveOpenDialog;
 import forge.toolbox.SaveOpenDialog.Filetypes;
 import forge.util.CollectionSuppliers;
 import forge.util.ThreadUtil;
+import forge.util.gui.SOptionPane;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
 import forge.view.FFrame;
@@ -307,6 +308,8 @@ public final class SLayoutIO {
         FileOutputStream fos = null;
         XMLEventWriter writer = null;
         try {
+            String layoutSerial = getLayoutSerial(file.defaultLoc);
+
             fos = new FileOutputStream(fWriteTo);
             writer = out.createXMLEventWriter(fos);
             final List<DragCell> cells = FView.SINGLETON_INSTANCE.getDragCells();
@@ -314,6 +317,7 @@ public final class SLayoutIO {
             writer.add(EF.createStartDocument());
             writer.add(NEWLINE);
             writer.add(EF.createStartElement("", "", "layout"));
+            writer.add(EF.createAttribute("serial", layoutSerial));
             writer.add(NEWLINE);
 
             for (final DragCell cell : cells) {
@@ -356,8 +360,63 @@ public final class SLayoutIO {
         }
     }
 
+    private static String getLayoutSerial(String layoutFileName) {
+        final XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+        FileInputStream fis = null;
+        XMLEventReader reader = null;
+        XMLEvent event;
+        StartElement element;
+        Iterator<?> attributes;
+        Attribute attribute;
+
+        try {
+            fis = new FileInputStream(layoutFileName);
+
+            reader = inputFactory.createXMLEventReader(fis);
+            while (null != reader && reader.hasNext()) {
+                event = reader.nextEvent();
+
+                if (event.isStartElement()) {
+                    element = event.asStartElement();
+
+                    if (element.getName().getLocalPart().equals("layout")) {
+                        attributes = element.getAttributes();
+                        while (attributes.hasNext()) {
+                            attribute = (Attribute) attributes.next();
+                            String atrName = attribute.getName().toString();
+                            if (atrName.equals("serial")) {
+                                return attribute.getValue();
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (final Exception e) { // I don't care what happened inside, the layout is wrong
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+                if (fis != null) {
+                    fis.close();
+                }
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return "";
+    }
+
     public static void loadLayout(final File f) {
         final FView view = FView.SINGLETON_INSTANCE;
+        String defaultLayoutSerial = "";
+        String userLayoutSerial = "";
+        Boolean resetLayout = false;
+        FScreen screen = Singletons.getControl().getCurrentScreen();
         FAbsolutePositioner.SINGLETON_INSTANCE.hideAll();
         view.getPnlInsets().removeAll();
         view.getPnlInsets().setLayout(new BorderLayout());
@@ -365,13 +424,13 @@ public final class SLayoutIO {
         view.getPnlInsets().setBorder(new EmptyBorder(SLayoutConstants.BORDER_T, SLayoutConstants.BORDER_T, 0, 0));
         view.removeAllDragCells();
 
-        FileLocation file = Singletons.getControl().getCurrentScreen().getLayoutFile();
+        FileLocation file = screen.getLayoutFile();
         if (file != null) {
             // Read a model for new layout
             MapOfLists<LayoutInfo, EDocID> model = null;
             boolean usedCustomPrefsFile = false;
             FileInputStream fis = null;
-    
+
             try {
                 if (f != null && f.exists()) {
                     fis = new FileInputStream(f);
@@ -379,8 +438,27 @@ public final class SLayoutIO {
                 else {
                     File userSetting = new File(file.userPrefLoc);
                     if (userSetting.exists()) {
-                        usedCustomPrefsFile = true;
-                        fis = new FileInputStream(userSetting);
+                        defaultLayoutSerial = getLayoutSerial(file.defaultLoc);
+                        userLayoutSerial = getLayoutSerial(file.userPrefLoc);
+                        if (defaultLayoutSerial.compareTo(userLayoutSerial) > 0) {
+                            // prompt the user that their saved layout is older
+                            resetLayout = SOptionPane.showConfirmDialog(
+                                    String.format("Your %s layout file is from an older template.",
+                                            screen.getTabCaption()
+                                    ),
+                                    "Reset Layout?",
+                                    "Reset",
+                                    "Keep");
+                        }
+                        if (resetLayout) {
+                            // delete the old layout file
+                            screen.deleteLayoutFile();
+                            fis = new FileInputStream(file.defaultLoc);
+                        } else {
+                            fis = new FileInputStream(userSetting);
+                            usedCustomPrefsFile = true;
+                        }
+
                     }
                     else {
                         fis = new FileInputStream(file.defaultLoc);
@@ -390,7 +468,7 @@ public final class SLayoutIO {
                 final XMLInputFactory inputFactory = XMLInputFactory.newInstance();
                 XMLEventReader xer = null;
                 try {
-                    xer = inputFactory.createXMLEventReader(fis); 
+                    xer = inputFactory.createXMLEventReader(fis);
                     model = readLayout(xer);
                 } catch (final Exception e) { // I don't care what happened inside, the layout is wrong
                     try {
@@ -407,19 +485,19 @@ public final class SLayoutIO {
                         throw new RuntimeException(e);
                     }
                 }
-    
+
             }
             catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
             finally {
-                if (fis != null) {
-                    try {
+                try {
+                    if (fis != null) {
                         fis.close();
                     }
-                    catch (IOException e) {
+                }
+                catch (IOException e) {
                         e.printStackTrace();
-                    }
                 }
             }
     
@@ -432,7 +510,9 @@ public final class SLayoutIO {
                 for(EDocID edoc : kv.getValue()) {
                     try {
                         //System.out.println(String.format("adding doc %s -> %s",  edoc, edoc.getDoc()));
-                        cell.addDoc(edoc.getDoc());
+                        if (edoc.getDoc() != null ) {
+                            cell.addDoc(edoc.getDoc());
+                        }
                     }
                     catch (IllegalArgumentException e) {
                         System.err.println("Failed to get doc for " + edoc); 

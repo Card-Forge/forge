@@ -261,6 +261,11 @@ https://downloads.cardforge.org/images/products/boosters/M15_2.jpg
 https://downloads.cardforge.org/images/products/boosters/M15_3.jpg
 https://downloads.cardforge.org/images/products/boosters/M15_4.jpg
 https://downloads.cardforge.org/images/products/boosters/M15_5.jpg
+https://downloads.cardforge.org/images/products/boosters/M19_1.jpg
+https://downloads.cardforge.org/images/products/boosters/M19_2.jpg
+https://downloads.cardforge.org/images/products/boosters/M19_3.jpg
+https://downloads.cardforge.org/images/products/boosters/M19_4.jpg
+https://downloads.cardforge.org/images/products/boosters/M19_5.jpg
 https://downloads.cardforge.org/images/products/boosters/MBS.png
 https://downloads.cardforge.org/images/products/boosters/MBS_1.jpg
 https://downloads.cardforge.org/images/products/boosters/MBS_2.jpg

@@ -12,7 +12,6 @@ import forge.game.event.GameEventCardStatsChanged;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Lang;
@@ -31,32 +30,40 @@ public class PumpEffect extends SpellAbilityEffect {
             final int a, final int d, final List<String> keywords,
             final long timestamp) {
         final Card host = sa.getHostCard();
+        final Game game = host.getGame();
         //if host is not on the battlefield don't apply
         // Suspend should does Affect the Stack
         if (sa.hasParam("UntilLoseControlOfHost")
                 && !(host.isInPlay() || host.isInZone(ZoneType.Stack))) {
             return;
         }
-        final Game game = sa.getActivatingPlayer().getGame();
+
+        // do Game Check there in case of LKI
+        final Card gameCard = game.getCardState(applyTo, null);
+        if (gameCard == null || !applyTo.equalsWithTimestamp(gameCard)) {
+            return;
+        }
         final List<String> kws = Lists.newArrayList();
 
         boolean redrawPT = false;
         for (String kw : keywords) {
             if (kw.startsWith("HIDDEN")) {
-                applyTo.addHiddenExtrinsicKeyword(kw);
+                gameCard.addHiddenExtrinsicKeyword(kw);
                 redrawPT |= kw.contains("CARDNAME's power and toughness are switched");
             } else {
                 kws.add(kw);
             }
         }
 
-        applyTo.addTempPowerBoost(a);
-        applyTo.addTempToughnessBoost(d);
-        applyTo.addChangedCardKeywords(kws, Lists.<String>newArrayList(), false, timestamp);
-        if (redrawPT)           {     applyTo.updatePowerToughnessForView();     }
+        gameCard.addTempPowerBoost(a);
+        gameCard.addTempToughnessBoost(d);
+        gameCard.addChangedCardKeywords(kws, Lists.<String>newArrayList(), false, false, timestamp);
+        if (redrawPT) {
+            gameCard.updatePowerToughnessForView();
+        }
         
         if (sa.hasParam("LeaveBattlefield")) {
-            addLeaveBattlefieldReplacement(applyTo, sa, sa.getParam("LeaveBattlefield"));
+            addLeaveBattlefieldReplacement(gameCard, sa, sa.getParam("LeaveBattlefield"));
         }
 
         if (!sa.hasParam("Permanent")) {
@@ -66,8 +73,8 @@ public class PumpEffect extends SpellAbilityEffect {
 
                 @Override
                 public void run() {
-                    applyTo.addTempPowerBoost(-1 * a);
-                    applyTo.addTempToughnessBoost(-1 * d);
+                    gameCard.addTempPowerBoost(-1 * a);
+                    gameCard.addTempToughnessBoost(-1 * d);
 
                     if (keywords.size() > 0) {
                         boolean redrawPT = false;
@@ -75,16 +82,16 @@ public class PumpEffect extends SpellAbilityEffect {
                         for (String kw : keywords) {
                             redrawPT |= kw.contains("CARDNAME's power and toughness are switched");
                             if (kw.startsWith("HIDDEN")) {
-                                applyTo.removeHiddenExtrinsicKeyword(kw);
+                                gameCard.removeHiddenExtrinsicKeyword(kw);
                                 if (redrawPT) {
-                                    applyTo.updatePowerToughnessForView();
+                                    gameCard.updatePowerToughnessForView();
                                 }
                             }
                         }
-                        applyTo.removeChangedCardKeywords(timestamp);
+                        gameCard.removeChangedCardKeywords(timestamp);
                     }
 
-                    game.fireEvent(new GameEventCardStatsChanged(applyTo));
+                    game.fireEvent(new GameEventCardStatsChanged(gameCard));
                 }
             };
             if (sa.hasParam("UntilEndOfCombat")) {
@@ -107,12 +114,19 @@ public class PumpEffect extends SpellAbilityEffect {
                 game.getEndOfTurn().addUntil(untilEOT);
             }
         }
-        game.fireEvent(new GameEventCardStatsChanged(applyTo));
+        game.fireEvent(new GameEventCardStatsChanged(gameCard));
     }
 
     private static void applyPump(final SpellAbility sa, final Player p,
             final List<String> keywords, final long timestamp) {
         final Game game = p.getGame();
+        final Card host = sa.getHostCard();
+        //if host is not on the battlefield don't apply
+        // Suspend should does Affect the Stack
+        if (sa.hasParam("UntilLoseControlOfHost")
+                && !(host.isInPlay() || host.isInZone(ZoneType.Stack))) {
+            return;
+        }
         p.addChangedKeywords(keywords, ImmutableList.<String>of(), timestamp);
 
         if (!sa.hasParam("Permanent")) {
@@ -134,6 +148,9 @@ public class PumpEffect extends SpellAbilityEffect {
                 game.getEndOfCombat().addUntil(untilEOT);
             } else if (sa.hasParam("UntilYourNextUpkeep")) {
                 game.getUpkeep().addUntil(sa.getActivatingPlayer(), untilEOT);
+            } else if (sa.hasParam("UntilLoseControlOfHost")) {
+                sa.getHostCard().addLeavesPlayCommand(untilEOT);
+                sa.getHostCard().addChangeControllerCommand(untilEOT);
             } else {
                 game.getEndOfTurn().addUntil(untilEOT);
             }
@@ -208,7 +225,6 @@ public class PumpEffect extends SpellAbilityEffect {
     public void resolve(final SpellAbility sa) {
 
         final List<Card> untargetedCards = Lists.newArrayList();
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Game game = sa.getActivatingPlayer().getGame();
         final Card host = sa.getHostCard();
         final long timestamp = game.getNextTimestamp();
@@ -251,7 +267,7 @@ public class PumpEffect extends SpellAbilityEffect {
             final String landtype = sa.getParam("DefinedLandwalk");
             final Card c = AbilityUtils.getDefinedCards(host, landtype, sa).get(0);
             for (String type : c.getType()) {
-                if (CardType.isALandType(type) || CardType.isABasicLandType(type)) {
+                if (CardType.isALandType(type)) {
                     keywords.add(type + "walk");
                 }
             }
@@ -340,7 +356,7 @@ public class PumpEffect extends SpellAbilityEffect {
             }
 
             // if pump is a target, make sure we can still target now
-            if ((tgt != null) && !tgtC.canBeTargetedBy(sa)) {
+            if (sa.usesTargeting() && !tgtC.canBeTargetedBy(sa)) {
                 continue;
             }
 
@@ -367,5 +383,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
             applyPump(sa, p, keywords, timestamp);
         }
+
+        replaceDying(sa);
     } // pumpResolve()
 }

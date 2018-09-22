@@ -137,7 +137,7 @@ public class DebuffEffect extends SpellAbilityEffect {
                 }
 
                 removedKW.addAll(kws);
-                tgtC.addChangedCardKeywords(addedKW, removedKW, false, timestamp);
+                tgtC.addChangedCardKeywords(addedKW, removedKW, false, false, timestamp);
             }
             if (!sa.hasParam("Permanent")) {
                 game.getEndOfTurn().addUntil(new GameCommand() {

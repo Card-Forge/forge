@@ -118,7 +118,9 @@ public class HumanPlaySpellAbility {
             ability.setHostCard(game.getAction().moveToStack(c, null));
         }
 
-        ability.resetPaidHash();
+        if (!ability.isCopied()) {
+            ability.resetPaidHash();
+        }
 
         if (manaTypeConversion) {
             AbilityUtils.applyManaColorConversion(human, MagicColor.Constant.ANY_TYPE_CONVERSION);

@@ -45,7 +45,7 @@ public class ScryEffect extends SpellAbilityEffect {
                     continue;
                 }
 
-                p.scry(num);
+                p.scry(num, sa);
             }
         }
     }

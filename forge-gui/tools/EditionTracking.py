@@ -42,6 +42,10 @@ def initializeEditions():
 							settype = line.split("=")[1].rstrip()
 
 					else:
+						if line.startswith("[tokens]"):
+							metadata = True
+							continue
+
 						if line:
 							hasSetNumbers = line.split(" ", 1)[0].isdigit()
 
@@ -102,7 +106,7 @@ def initializeForgeCards():
 
 						if not name or split:
 							name += line[5:].rstrip().lower()
-						
+
 					elif line.startswith("AlternateMode") and 'Split' in line:
 						split = True
 
@@ -110,11 +114,11 @@ def initializeForgeCards():
 
 def initializeFormats():
 	formats = {}
-	formatLocation = os.path.join(resDir, 'formats')
+	formatLocation = os.path.join(resDir, 'formats', 'Sanctioned')
 	print "Looking for formats in ", formatLocation
 	for root, dirnames, filenames in os.walk(formatLocation):
 		for fileName in fnmatch.filter(filenames, '*.txt'):
-			if fileName not in ['standard.txt', 'Modern.txt']:
+			if fileName not in ['Standard.txt', 'Modern.txt']:
 				continue
 
 			with open(os.path.join(root, fileName)) as formatFile:
@@ -298,7 +302,7 @@ if __name__ == '__main__':
 				elif key != "":
 					currentMissing.append(key)
 		total = len(currentMissing)+len(currentImplemented)
-		percentage = 0       
+		percentage = 0
 		if total > 0 :
 			percentage = (float(len(currentImplemented))/float(total))*100
 		currentMissing.sort()
@@ -338,7 +342,7 @@ if __name__ == '__main__':
 					text = normalizeOracle(orc.get('text'))
 				except:
 					text = ''
-				
+
 				output.write(text + '\n\n')
 			output.write("\n")
 			output.write("Total: " + str(total) + "\n")

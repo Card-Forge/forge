@@ -506,7 +506,7 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public List<GameEntityView> chooseEntitiesForEffect(String title, List<? extends GameEntityView> optionList, DelayedReveal delayedReveal) {
-        return SGuiChoose.order(title, "Selected", (List<GameEntityView>) optionList);
+        return SGuiChoose.order(title, "Selected", 0, -1, (List<GameEntityView>) optionList, null);
     }
 
     @Override

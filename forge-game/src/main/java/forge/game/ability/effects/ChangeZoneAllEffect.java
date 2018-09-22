@@ -156,7 +156,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 // Auras without Candidates stay in their current location
                 if (c.isAura()) {
                     final SpellAbility saAura = c.getFirstAttachSpell();
-                    if (!saAura.getTargetRestrictions().hasCandidates(saAura, false)) {
+                    if (saAura != null && !saAura.getTargetRestrictions().hasCandidates(saAura, false)) {
                         continue;
                     }
                 }

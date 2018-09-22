@@ -1,7 +1,6 @@
 package forge.card;
 
 import forge.CardStorageReader;
-import forge.card.CardRules;
 import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 

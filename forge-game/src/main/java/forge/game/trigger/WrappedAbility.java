@@ -81,12 +81,12 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
-    public void setPaidHash(final HashMap<String, CardCollection> hash) {
+    public void setPaidHash(final Map<String, CardCollection> hash) {
         sa.setPaidHash(hash);
     }
 
     @Override
-    public HashMap<String, CardCollection> getPaidHash() {
+    public Map<String, CardCollection> getPaidHash() {
         return sa.getPaidHash();
     }
 
@@ -209,10 +209,10 @@ public class WrappedAbility extends Ability {
     // a real solution would include only the triggering information that actually is used, but that's a major change
     @Override
     public String toUnsuppressedString() {
-    	String desc = this.getStackDescription(); /* use augmented stack description as string for wrapped things */
-       	String card = getTrigger().getHostCard().toString();
+        String desc = this.getStackDescription(); /* use augmented stack description as string for wrapped things */
+        String card = getTrigger().getHostCard().toString();
         if ( !desc.contains(card) && desc.contains(" this ")) { /* a hack for Evolve and similar that don't have CARDNAME */
-        	return card + ": " + desc;
+                return card + ": " + desc;
         } else return desc;
     }
 
@@ -476,34 +476,9 @@ public class WrappedAbility extends Ability {
             return;
         }
 
-        // Check timestamps of triggered objects
-        final List<Object> original = Lists.newArrayList(sa.getTriggerRemembered());
-        for (Object o : original) {
-            if (o instanceof Card) {
-                Card card = (Card) o;
-                Card current = game.getCardState(card);
-                if (current.getTimestamp() != card.getTimestamp()) {
-                    // TODO: figure out if NoTimestampCheck should be the default for ChangesZone triggers
-                    if (!triggerParams.containsKey("NoTimestampCheck")) {
-                        sa.getTriggerRemembered().remove(o);
-                    }
-                }
-            }
+        if (!triggerParams.containsKey("NoTimestampCheck")) {
+            timestampCheck();
         }
-        final Map<String, Object> triggerMap = new HashMap<String, Object>(sa.getTriggeringObjects());
-        for (Entry<String, Object> ev : triggerMap.entrySet()) {
-            if (ev.getValue() instanceof Card) {
-                Card card = (Card) ev.getValue();
-                Card current = game.getCardState(card);
-                if (card.isInPlay() && current.isInPlay() && current.getTimestamp() != card.getTimestamp()) {
-                    // TODO: figure out if NoTimestampCheck should be the default for ChangesZone triggers
-                    if (!triggerParams.containsKey("NoTimestampCheck")) {
-                        sa.getTriggeringObjects().remove(ev.getKey());
-                    }
-                }
-            }
-        }
-        // TODO: CardCollection
 
         getActivatingPlayer().getController().playSpellAbilityNoStack(sa, false);
 
@@ -515,5 +490,51 @@ public class WrappedAbility extends Ability {
             deltrig.setStoredTriggeredObjects(this.getTriggeringObjects());
             th.registerDelayedTrigger(deltrig);
         }
+    }
+
+    /**
+     * TODO remove this function after the Effects are updated
+     */
+    protected void timestampCheck() {
+        final Game game = sa.getActivatingPlayer().getGame();
+
+        if (ApiType.PutCounter.equals(sa.getApi())
+                || ApiType.MoveCounter.equals(sa.getApi())
+                || ApiType.MultiplyCounter.equals(sa.getApi())
+                || ApiType.MoveCounter.equals(sa.getApi())
+                || ApiType.RemoveCounter.equals(sa.getApi())
+                || ApiType.AddOrRemoveCounter.equals(sa.getApi())
+                || ApiType.MoveCounter.equals(sa.getApi())
+
+                // Token has no Defined it should not be timestamp problems
+                || ApiType.Token.equals(sa.getApi())
+                ) {
+            return;
+        }
+
+        // Check timestamps of triggered objects
+        final List<Object> original = Lists.newArrayList(sa.getTriggerRemembered());
+        for (Object o : original) {
+            if (o instanceof Card) {
+                Card card = (Card) o;
+                Card current = game.getCardState(card);
+                if (current.getTimestamp() != card.getTimestamp()) {
+                    // TODO: figure out if NoTimestampCheck should be the default for ChangesZone triggers
+                    sa.getTriggerRemembered().remove(o);
+                }
+            }
+        }
+        final Map<String, Object> triggerMap = new HashMap<String, Object>(sa.getTriggeringObjects());
+        for (Entry<String, Object> ev : triggerMap.entrySet()) {
+            if (ev.getValue() instanceof Card) {
+                Card card = (Card) ev.getValue();
+                Card current = game.getCardState(card);
+                if (card.isInPlay() && current.isInPlay() && current.getTimestamp() != card.getTimestamp()) {
+                    // TODO: figure out if NoTimestampCheck should be the default for ChangesZone triggers
+                    sa.getTriggeringObjects().remove(ev.getKey());
+                }
+            }
+        }
+        // TODO: CardCollection
     }
 }

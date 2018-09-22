@@ -771,17 +771,7 @@ public class PhaseHandler implements java.io.Serializable {
             }
         }
         for (Player p : game.getPlayers()) {
-            p.resetProwl();
-            p.setSpellsCastLastTurn(p.getSpellsCastThisTurn());
-            p.resetSpellsCastThisTurn();
-            p.setLifeLostLastTurn(p.getLifeLostThisTurn());
-            p.setLifeLostThisTurn(0);
-            p.setLifeGainedThisTurn(0);
-            p.setLibrarySearched(0);
-            p.setNumManaConversion(0);
-
-            p.removeKeyword("Skip the untap step of this turn.");
-            p.removeKeyword("Schemes can't be set in motion this turn.");
+            p.clearNextTurn();
         }
 
         game.getTriggerHandler().clearThisTurnDelayedTrigger();

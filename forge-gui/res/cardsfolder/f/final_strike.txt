@@ -1,8 +1,8 @@
 Name:Final Strike
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 2 B B Sac<1/Creature> | ValidTgts$ Opponent | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage to target opponent equal to the sacrificed creature's power.
+A:SP$ DealDamage | Cost$ 2 B B Sac<1/Creature> | ValidTgts$ Opponent,Planeswalker | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage to target opponent or planeswalker equal to the sacrificed creature's power.
 SVar:X:Sacrificed$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/final_strike.jpg
-Oracle:As an additional cost to cast Final Strike, sacrifice a creature.\nFinal Strike deals damage to target opponent equal to the sacrificed creature's power.
+Oracle:As an additional cost to cast Final Strike, sacrifice a creature.\nFinal Strike deals damage to target opponent or planeswalker equal to the sacrificed creature's power.

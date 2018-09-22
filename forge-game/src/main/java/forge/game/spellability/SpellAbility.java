@@ -97,6 +97,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean cycling = false;
     private boolean dash = false;
     private boolean evoke = false;
+    private boolean prowl = false;
+    private boolean surge = false;
     private boolean offering = false;
     private boolean emerge = false;
     private boolean morphup = false;
@@ -105,6 +107,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean outlast = false;
     private boolean blessing = false;
     private Integer chapter = null;
+
+    private boolean basicLandAbility = false;
 
     private SplitSide splitSide = null;
     enum SplitSide { LEFT, RIGHT };
@@ -469,11 +473,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     // Combined PaidLists
-    public HashMap<String, CardCollection> getPaidHash() {
+    public Map<String, CardCollection> getPaidHash() {
         return paidLists;
     }
-    public void setPaidHash(final HashMap<String, CardCollection> hash) {
-        paidLists = hash;
+    public void setPaidHash(final Map<String, CardCollection> hash) {
+        paidLists = Maps.newHashMap(hash);
     }
 
     public CardCollection getPaidList(final String str) {
@@ -508,12 +512,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             getMultiKickerManaCost() != null;
     }
 
-    public boolean isSurged() {
-        return isOptionalCostPaid(OptionalCost.Surge);
-    }
-
     public boolean isEntwine() {
         return isOptionalCostPaid(OptionalCost.Entwine);
+    }
+
+    public boolean isJumpstart() {
+        return isOptionalCostPaid(OptionalCost.Jumpstart);
     }
 
     public boolean isOptionalCostPaid(OptionalCost cost) {
@@ -665,8 +669,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             if (node != this) {
                 sb.append(" ");
             }
+            String desc = node.getDescription();
             if (node.getHostCard() != null) {
-                sb.append(TextUtil.fastReplace(node.getDescription(), "CARDNAME", node.getHostCard().getName()));
+                desc = TextUtil.fastReplace(desc, "CARDNAME", node.getHostCard().getName());
+                if (node.getOriginalHost() != null) {
+                    desc = TextUtil.fastReplace(desc, "ORIGINALHOST", node.getOriginalHost().getName());
+                }
+                sb.append(desc);
             }
             node = node.getSubAbility();
         }
@@ -752,6 +761,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public boolean isFlashBackAbility() {
         return flashBackAbility;
+    }
+
+    public void setBasicLandAbility(final boolean basicLandAbility0) {
+        basicLandAbility = basicLandAbility0;
+    }
+    public boolean isBasicLandAbility() {
+        return basicLandAbility && isIntrinsic();
     }
 
     /**
@@ -884,6 +900,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         final SpellAbility newSA = copy();
         newSA.setPayCosts(abCost);
         return newSA;
+    }
+
+    public SpellAbility copyWithDefinedCost(String abCost) {
+        return copyWithDefinedCost(new Cost(abCost, isAbility()));
     }
 
     public boolean isTrigger() {
@@ -1052,6 +1072,22 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public final void setEvoke(final boolean isEvoke) {
         evoke = isEvoke;
+    }
+
+    public final boolean isProwl() {
+        return prowl;
+    }
+
+    public final void setProwl(final boolean isProwl) {
+        prowl = isProwl;
+    }
+
+    public final boolean isSurged() {
+        return surge;
+    }
+
+    public final void setSurged(final boolean isSurge) {
+        surge = isSurge;
     }
 
     public CardCollection getTappedForConvoke() {

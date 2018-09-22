@@ -1,7 +1,7 @@
 Name:Folk Medicine
 ManaCost:2 G
 Types:Instant
-K:Flashback 1 W
+K:Flashback:1 W
 A:SP$ GainLife | Cost$ 2 G | LifeAmount$ X | References$ X | SpellDescription$ You gain 1 life for each creature you control.
 SVar:X:Count$TypeYouCtrl.Creature
 SVar:RemRandomDeck:True

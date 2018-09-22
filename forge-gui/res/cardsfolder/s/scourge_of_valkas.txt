@@ -3,12 +3,12 @@ ManaCost:2 R R R
 Types:Creature Dragon
 PT:4/4
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME or another Dragon enters the battlefield under your control, it deals X damage to target creature or player, where X is the number of Dragons you control.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Dragon.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Dragon enters the battlefield under your control, it deals X damage to target creature or player, where X is the number of Dragons you control.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player | NumDmg$ NumDragons | References$ NumDragons | TgtPrompt$ Select a target creature or player | DamageSource$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME or another Dragon enters the battlefield under your control, it deals X damage to any target, where X is the number of Dragons you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Dragon.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Dragon enters the battlefield under your control, it deals X damage to any target, where X is the number of Dragons you control.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | NumDmg$ NumDragons | References$ NumDragons | TgtPrompt$ Select any target | DamageSource$ TriggeredCard
 SVar:NumDragons:Count$Valid Dragon.YouCtrl
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Dragon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scourge_of_valkas.jpg
-Oracle:Flying\nWhenever Scourge of Valkas or another Dragon enters the battlefield under your control, it deals X damage to target creature or player, where X is the number of Dragons you control.\n{R}: Scourge of Valkas gets +1/+0 until end of turn.
+Oracle:Flying\nWhenever Scourge of Valkas or another Dragon enters the battlefield under your control, it deals X damage to any target, where X is the number of Dragons you control.\n{R}: Scourge of Valkas gets +1/+0 until end of turn.

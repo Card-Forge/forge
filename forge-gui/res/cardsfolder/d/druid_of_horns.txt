@@ -1,0 +1,8 @@
+Name:Druid of Horns
+ManaCost:3 G
+Types:Creature Human Druid
+T:Mode$ SpellCast | ValidCard$ Aura | ValidActivatingPlayer$ You | TargetValidTargeting$ Card.Self+YouCtrl | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an Aura spell that targets CARDNAME, create a 3/3 green Beast creature token.
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenPower$ 3 | TokenToughness$ 3 | TokenColors$ Green | TokenName$ Beast | TokenTypes$ Beast,Creature | TokenImage$ g 3 3 beast m19
+DeckHas:Ability$Token
+Oracle:Whenever you cast an Aura spell that targets Druid of Horns, create a 3/3 green Beast creature token.
+PT:2/3

@@ -1,0 +1,8 @@
+Name:Doublecast
+ManaCost:R R
+Types:Sorcery
+A:SP$ Effect | Cost$ R R | AILogic$ SpellCopy | Name$ Doublecast Effect | Triggers$ EffTModeSpellCast | SVars$ EffTrigCopy,EffDBCleanup | SpellDescription$ When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
+SVar:EffTModeSpellCast:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | OneOff$ True | Execute$ EffTrigCopy | TriggerZones$ Command | TriggerDescription$ When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
+SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | SubAbility$ EffDBCleanup
+SVar:EffDBCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+Oracle:When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for that copy.

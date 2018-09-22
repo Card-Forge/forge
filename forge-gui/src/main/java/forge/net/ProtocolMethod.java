@@ -1,5 +1,6 @@
 package forge.net;
 
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.List;
@@ -22,6 +23,7 @@ import forge.match.NextGameDecision;
 import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
 import forge.util.ReflectionUtil;
+import org.apache.commons.lang3.SerializationUtils;
 
 /**
  * The methods that can be sent through this protocol.
@@ -85,7 +87,7 @@ public enum ProtocolMethod {
     passPriorityUntilEndOfTurn(Mode.CLIENT),
     passPriority              (Mode.CLIENT),
     nextGameDecision          (Mode.CLIENT, Void.TYPE, NextGameDecision.class),
-    getActivateDescription    (Mode.CLIENT, Void.TYPE, String.class, CardView.class),
+    getActivateDescription    (Mode.CLIENT, String.class, CardView.class),
     concede                   (Mode.CLIENT),
     alphaStrike               (Mode.CLIENT),
     reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE);
@@ -154,6 +156,17 @@ public enum ProtocolMethod {
             final Class<?> type = this.args[iArg];
             if (!ReflectionUtil.isInstance(arg, type)) {
                 throw new InternalError(String.format("Protocol method %s: illegal argument (%d) of type %s, %s expected", name(), iArg, arg.getClass().getName(), type.getName()));
+            }
+            if (arg != null) {
+                // attempt to Serialize each argument, this will throw an exception if it can't.
+                try {
+                    byte[] serialized = SerializationUtils.serialize((Serializable) arg);
+                    SerializationUtils.deserialize(serialized);
+                } catch (ArrayIndexOutOfBoundsException ex) {
+                    // not sure why this one would be thrown, but it is
+                    // it also doesn't prevent things from working, so, log for now, pending full network rewrite
+                    ex.printStackTrace();
+                }
             }
         }
     }

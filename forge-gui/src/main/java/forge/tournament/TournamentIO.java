@@ -6,6 +6,9 @@ import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import com.thoughtworks.xstream.security.NoTypePermission;
+import com.thoughtworks.xstream.security.NullPermission;
+import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 import forge.deck.CardPool;
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -32,6 +35,16 @@ public class TournamentIO {
 
     protected static XStream getSerializer(final boolean isIgnoring) {
         final XStream xStream = isIgnoring ? new IgnoringXStream() : new XStream();
+        // clear out existing permissions and set our own
+        xStream.addPermission(NoTypePermission.NONE);
+        // allow some basics
+        xStream.addPermission(NullPermission.NULL);
+        xStream.addPermission(PrimitiveTypePermission.PRIMITIVES);
+        xStream.allowTypeHierarchy(String.class);
+        // allow any type from the same package
+        xStream.allowTypesByWildcard(new String[] {
+                TournamentIO.class.getPackage().getName()+".*"
+        });
         xStream.registerConverter(new DeckSectionToXml());
         xStream.autodetectAnnotations(true);
         return xStream;

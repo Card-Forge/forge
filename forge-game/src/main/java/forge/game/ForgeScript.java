@@ -168,6 +168,10 @@ public class ForgeScript {
             if (!sa.isFlashBackAbility()) {
                 return false;
             }
+        } else if (property.equals("Jumpstart")) {
+            if (!sa.isJumpstart()) {
+                return false;
+            }
         } else if (property.equals("Kicked")) {
             if (!sa.isKicked()) {
                 return false;
@@ -202,6 +206,12 @@ public class ForgeScript {
                 }
             }
             if (!found) {
+                return false;
+            }
+        } else if (property.equals("YouCtrl")) {
+            return sa.getActivatingPlayer().equals(sourceController);
+        } else if (sa.getHostCard() != null) {
+            if (!sa.getHostCard().hasProperty(property, sourceController, source, spellAbility)) {
                 return false;
             }
         }

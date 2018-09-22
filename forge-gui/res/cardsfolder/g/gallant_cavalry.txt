@@ -1,0 +1,9 @@
+Name:Gallant Cavalry
+ManaCost:3 W
+Types:Creature Human Knight
+K:Vigilance
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 white Knight creature token with vigilance.
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenPower$ 2 | TokenToughness$ 2 | TokenColors$ White | TokenTypes$ Knight,Creature | TokenKeywords$ Vigilance | TokenImage$ w 2 2 knight m19
+DeckHas:Ability$Token
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nWhen Gallant Cavalry enters the battlefield, create a 2/2 white Knight creature token with vigilance.
+PT:2/2

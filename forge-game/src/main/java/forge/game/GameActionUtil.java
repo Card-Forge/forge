@@ -109,7 +109,7 @@ public final class GameActionUtil {
                 final SpellAbility newSA = sa.copy(activator);
                 final SpellAbilityRestriction sar = newSA.getRestrictions();
                 if (o.isWithFlash()) {
-                	sar.setInstantSpeed(true);
+                    sar.setInstantSpeed(true);
                 }
                 sar.setZone(null);
                 newSA.setMayPlay(o.getAbility());
@@ -174,7 +174,8 @@ public final class GameActionUtil {
         }
 
         if (sa.isCycling() && activator.hasKeyword("CyclingForZero")) {
-            final SpellAbility newSA = sa.copyWithNoManaCost();
+            // set the cost to this directly to buypass non mana cost
+            final SpellAbility newSA = sa.copyWithDefinedCost("Discard<1/CARDNAME>");
             newSA.setBasicSpell(false);
             newSA.getMapParams().put("CostDesc", ManaCostParser.parse("0"));
             // makes new SpellDescription
@@ -183,6 +184,15 @@ public final class GameActionUtil {
             sb.append(newSA.getParam("SpellDescription"));
             newSA.setDescription(sb.toString());
             
+            alternatives.add(newSA);
+        }
+
+        if (sa.hasParam("Equip") && activator.hasKeyword("EquipInstantSpeed")) {
+            final SpellAbility newSA = sa.copy(activator);
+            SpellAbilityRestriction sar = newSA.getRestrictions();
+            sar.setSorcerySpeed(false);
+            sar.setInstantSpeed(true);
+            newSA.setDescription(sa.getDescription() + " (you may activate any time you could cast an instant )");
             alternatives.add(newSA);
         }
 
@@ -201,19 +211,11 @@ public final class GameActionUtil {
                 flashback.getRestrictions().setZone(ZoneType.Graveyard);
 
                 // there is a flashback cost (and not the cards cost)
-                if (!keyword.equals("Flashback")) {
-                    flashback.setPayCosts(new Cost(keyword.substring(10), false));
+                if (keyword.contains(":")) {
+                    final String k[] = keyword.split(":"); 
+                    flashback.setPayCosts(new Cost(k[1], false));
                 }
                 alternatives.add(flashback);
-            }
-
-            if (sa.hasParam("Equip") && sa instanceof AbilityActivated && keyword.equals("EquipInstantSpeed")) {
-                final SpellAbility newSA = sa.copy(activator);
-                SpellAbilityRestriction sar = newSA.getRestrictions();
-                sar.setSorcerySpeed(false);
-                sar.setInstantSpeed(true);
-                newSA.setDescription(sa.getDescription() + " (you may activate any time you could cast an instant )");
-                alternatives.add(newSA);
             }
         }
         return alternatives;
@@ -259,6 +261,11 @@ public final class GameActionUtil {
                     final Cost cost = new Cost("Discard<1/Land>", false);
                     costs.add(new OptionalCostValue(OptionalCost.Retrace, cost));
                 }
+            } else if (keyword.equals("Jump-start")) {
+                if (source.getZone().is(ZoneType.Graveyard)) {
+                    final Cost cost = new Cost("Discard<1/Card>", false);
+                    costs.add(new OptionalCostValue(OptionalCost.Jumpstart, cost));
+                }
             } else if (keyword.startsWith("MayFlashCost")) {
                 String[] k = keyword.split(":");
                 final Cost cost = new Cost(k[1], false);
@@ -286,6 +293,7 @@ public final class GameActionUtil {
                 result.addConspireInstance();
                 break;
             case Retrace:
+            case Jumpstart:
                 result.getRestrictions().setZone(ZoneType.Graveyard);
                 break;
             case Flash:
@@ -389,8 +397,8 @@ public final class GameActionUtil {
                     }
                 }
             } else if (keyword.startsWith("Kicker")) {
-            	String[] sCosts = TextUtil.split(keyword.substring(6), ':');
-            	boolean generic = "Generic".equals(sCosts[sCosts.length - 1]);
+                String[] sCosts = TextUtil.split(keyword.substring(6), ':');
+                boolean generic = "Generic".equals(sCosts[sCosts.length - 1]);
                 // If this is a "generic kicker" (Undergrowth), ignore value for kicker creations
                 int numKickers = sCosts.length - (generic ? 1 : 0);
                 for (int i = 0; i < abilities.size(); i++) {

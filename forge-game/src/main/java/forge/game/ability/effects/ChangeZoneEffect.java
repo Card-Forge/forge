@@ -6,7 +6,9 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import forge.GameCommand;
 import forge.card.CardStateName;
+import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -32,6 +34,7 @@ import forge.util.collect.*;
 import forge.util.Lang;
 import forge.util.MessageUtil;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -484,7 +487,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                     if (sa.hasParam("WithCounters")) {
                         String[] parse = sa.getParam("WithCounters").split("_");
-                        tgtC.addEtbCounter(CounterType.getType(parse[0]), Integer.parseInt(parse[1]), hostCard);
+                        tgtC.addEtbCounter(CounterType.getType(parse[0]), Integer.parseInt(parse[1]), player);
                     }
                     if (sa.hasParam("GainControl")) {
                         if (sa.hasParam("NewController")) {
@@ -552,9 +555,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     // location
                     if (tgtC.isAura()) {
                         final SpellAbility saAura = tgtC.getFirstAttachSpell();
-                        saAura.setActivatingPlayer(sa.getActivatingPlayer());
-                        if (!saAura.getTargetRestrictions().hasCandidates(saAura, false)) {
-                            continue;
+                        if (saAura != null) {
+                            saAura.setActivatingPlayer(sa.getActivatingPlayer());
+                            if (!saAura.getTargetRestrictions().hasCandidates(saAura, false)) {
+                                continue;
+                            }
                         }
                     }
 
@@ -865,7 +870,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final boolean champion = sa.hasParam("Champion");
         final boolean forget = sa.hasParam("ForgetChanged");
         final boolean imprint = sa.hasParam("Imprint");
-        final String selectPrompt = sa.hasParam("SelectPrompt") ? sa.getParam("SelectPrompt") : MessageUtil.formatMessage("Select a card from {player's} " + Lang.joinHomogenous(origin).toLowerCase(), decider, player);
+        String selectPrompt = sa.hasParam("SelectPrompt") ? sa.getParam("SelectPrompt") : MessageUtil.formatMessage("Select a card from {player's} " + Lang.joinHomogenous(origin).toLowerCase(), decider, player);
         final String totalcmc = sa.getParam("WithTotalCMC");
         int totcmc = AbilityUtils.calculateAmount(source, totalcmc, sa);
 
@@ -874,7 +879,20 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         CardCollection chosenCards = new CardCollection();
         // only multi-select if player can select more than one
         if (changeNum > 1 && allowMultiSelect(decider, sa)) {
-            for (Card card : decider.getController().chooseCardsForZoneChange(destination, origin, sa, fetchList, delayedReveal, selectPrompt, decider)) {
+            List<Card> selectedCards;
+            if (! sa.hasParam("SelectPrompt")) {
+                // new default messaging for multi select
+                if (fetchList.size() > changeNum) {
+                    selectPrompt = MessageUtil.formatMessage("Select up to " + changeNum + " cards from {player's} " + Lang.joinHomogenous(origin).toLowerCase(), decider, player);
+                } else {
+                    selectPrompt = MessageUtil.formatMessage("Select cards from {player's} " + Lang.joinHomogenous(origin).toLowerCase(), decider, player);
+                }
+            }
+            // ensure that selection is within maximum allowed changeNum
+            do {
+                selectedCards = decider.getController().chooseCardsForZoneChange(destination, origin, sa, fetchList, delayedReveal, selectPrompt, decider);
+            } while (selectedCards != null && selectedCards.size() > changeNum);
+            for (Card card : selectedCards) {
                 chosenCards.add(card);
             };
             // maybe prompt the user if they selected fewer than the maximum possible?
@@ -1101,11 +1119,49 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                     }
                 }
+                // need to be facedown before it hits the battlefield in case of Replacement Effects or Trigger
+                if (sa.hasParam("FaceDown") && ZoneType.Battlefield.equals(destination)) {
+                    c.setState(CardStateName.FaceDown, true);
+
+                    // set New Pt doesn't work because this values need to be copyable for clone effects
+                    if (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")) {
+                        if (sa.hasParam("FaceDownPower")) {
+                            c.setBasePower(AbilityUtils.calculateAmount(
+                                    source, sa.getParam("FaceDownPower"), sa));
+                        }
+                        if (sa.hasParam("FaceDownToughness")) {
+                            c.setBaseToughness(AbilityUtils.calculateAmount(
+                                    source, sa.getParam("FaceDownToughness"), sa));
+                        }
+                    }
+
+                    if (sa.hasParam("FaceDownAddType")) {
+                        CardType t = new CardType(c.getCurrentState().getType());
+                        t.addAll(Arrays.asList(sa.getParam("FaceDownAddType").split(",")));
+                        c.getCurrentState().setType(t);
+                    }
+
+                    if (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")
+                            || sa.hasParam("FaceDownAddType")) {
+                        final GameCommand unanimate = new GameCommand() {
+                            private static final long serialVersionUID = 8853789549297846163L;
+
+                            @Override
+                            public void run() {
+                                c.clearStates(CardStateName.FaceDown, true);
+                            }
+                        };
+
+                        c.addFaceupCommand(unanimate);
+                    }
+                }
                 movedCard = game.getAction().moveTo(c.getController().getZone(destination), c, sa, null);
                 if (sa.hasParam("Tapped")) {
                     movedCard.setTapped(true);
                 }
-                if (sa.hasParam("FaceDown")) {
+
+                // need to do that again?
+                if (sa.hasParam("FaceDown") && !ZoneType.Battlefield.equals(destination)) {
                     movedCard.setState(CardStateName.FaceDown, true);
                 }
                 movedCard.setTimestamp(ts);
@@ -1181,7 +1237,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 && !sa.hasParam("DifferentNames")
                 && !sa.hasParam("DifferentCMC")
                 && !sa.hasParam("AtRandom")
-                && !sa.hasParam("ChangeNum") // TODO: doesn't work with card number limits, e.g. Doomsday
                 && (!sa.hasParam("Defined") || sa.hasParam("ChooseFromDefined"))
                 && sa.getParam("WithTotalCMC") == null;
     }

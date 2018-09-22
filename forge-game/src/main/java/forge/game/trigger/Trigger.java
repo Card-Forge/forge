@@ -213,6 +213,9 @@ public abstract class Trigger extends TriggerReplacementBase {
                 // string might have leading whitespace
                 saDesc = saDesc.trim();
                 saDesc = saDesc.substring(0, 1).toLowerCase() + saDesc.substring(1);
+                if (saDesc.contains("ORIGINALHOST") && sa.getOriginalHost() != null) {
+                    saDesc = TextUtil.fastReplace(saDesc, "ORIGINALHOST", sa.getOriginalHost().getName());
+                }
                 result = TextUtil.fastReplace(result, "ABILITY", saDesc);
             }
         }

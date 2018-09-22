@@ -42,9 +42,12 @@ import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.home.quest.CSubmenuQuestDecks;
 import forge.screens.match.controllers.CDetailPicture;
+import forge.toolbox.FComboBox;
 import forge.util.ItemPool;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -61,7 +64,7 @@ import java.util.Map.Entry;
  * @author Forge
  * @version $Id: CEditorQuest.java 24868 2014-02-17 05:08:05Z drdev $
  */
-public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
+public final class CEditorQuest extends CDeckEditor<Deck> {
     private final QuestController questData;
     private final DeckController<Deck> controller;
     private final List<DeckSection> allSections = new ArrayList<DeckSection>();
@@ -244,8 +247,7 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
 
         final Deck deck = this.controller.getModel();
 
-        final ItemPool<PaperCard> cardpool = new ItemPool<PaperCard>(PaperCard.class);
-        cardpool.addAll(this.questData.getCards().getCardpool());
+        final CardPool cardpool = getInitialCatalog();
         // remove bottom cards that are in the deck from the card pool
         cardpool.removeAll(deck.getMain());
         // remove sideboard cards from the catalog
@@ -253,6 +255,16 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
         // show cards, makes this user friendly
         this.getCatalogManager().setPool(cardpool);
         this.getDeckManager().setPool(deck.getMain());
+    }
+
+    @Override
+    protected CardPool getInitialCatalog() {
+        return new CardPool(this.questData.getCards().getCardpool());
+    }
+
+    @Override
+    protected Boolean isSectionImportable(DeckSection section) {
+        return allSections.contains(section);
     }
 
     //=========== Overridden from ACEditorBase
@@ -270,11 +282,7 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
     /**
      * Switch between the main deck and the sideboard editor.
      */
-    public void cycleEditorMode() {
-        int curindex = allSections.indexOf(sectionMode);
-        curindex = (curindex + 1) % allSections.size();
-        sectionMode = allSections.get(curindex);
-
+    public void setEditorMode(DeckSection sectionMode) {
         if (sectionMode == DeckSection.Sideboard) {
             this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
         }
@@ -282,6 +290,7 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
             this.getDeckManager().setPool(this.controller.getModel().getMain());
         }
 
+        this.sectionMode = sectionMode;
         this.controller.updateCaptions();
     }
 
@@ -306,14 +315,20 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
         resetUI();
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(true);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnImport().setVisible(false);
 
-        this.getBtnCycleSection().setVisible(true);
-        this.getBtnCycleSection().setCommand(new UiCommand() {
-            @Override public void run() {
-                cycleEditorMode();
+        this.getCbxSection().removeAllItems();
+        for (DeckSection section : allSections) {
+            this.getCbxSection().addItem(section);
+        }
+        this.getCbxSection().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                FComboBox cb = (FComboBox)actionEvent.getSource();
+                DeckSection ds = (DeckSection)cb.getSelectedItem();
+                setEditorMode(ds);
             }
         });
+        this.getCbxSection().setVisible(true);
 
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);

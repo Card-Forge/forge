@@ -1573,10 +1573,10 @@ public class ComputerUtilCard {
         pumped.addNewPT(c.getCurrentPower(), c.getCurrentToughness(), timestamp);
         pumped.addTempPowerBoost(c.getTempPowerBoost() + power + berserkPower);
         pumped.addTempToughnessBoost(c.getTempToughnessBoost() + toughness);
-        pumped.addChangedCardKeywords(kws, new ArrayList<String>(), false, timestamp);
+        pumped.addChangedCardKeywords(kws, null, false, false, timestamp);
         Set<CounterType> types = c.getCounters().keySet();
         for(CounterType ct : types) {
-            pumped.addCounterFireNoEvents(ct, c.getCounters(ct), c, true);
+            pumped.addCounterFireNoEvents(ct, c.getCounters(ct), ai, true);
         }
         //Copies tap-state and extra keywords (auras, equipment, etc.) 
         if (c.isTapped()) {
@@ -1596,7 +1596,7 @@ public class ComputerUtilCard {
             }
         }
         final long timestamp2 = c.getGame().getNextTimestamp(); //is this necessary or can the timestamp be re-used?
-        pumped.addChangedCardKeywordsInternal(toCopy, Lists.<KeywordInterface>newArrayList(), false, timestamp2, true);
+        pumped.addChangedCardKeywordsInternal(toCopy, null, false, false, timestamp2, true);
         ComputerUtilCard.applyStaticContPT(ai.getGame(), pumped, new CardCollection(c));
         return pumped;
     }
@@ -1623,6 +1623,9 @@ public class ComputerUtilCard {
                     continue;
                 }
                 if (!params.containsKey("Affected")) {
+                    continue;
+                }
+                if (!params.containsKey("AddPower") && !params.containsKey("AddToughness")) {
                     continue;
                 }
                 final String valid = params.get("Affected");

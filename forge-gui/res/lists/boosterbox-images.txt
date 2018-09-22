@@ -60,6 +60,7 @@ https://downloads.cardforge.org/images/products/boosterboxes/M12.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/M13.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/M14.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/M15.jpg
+https://downloads.cardforge.org/images/products/boosterboxes/M19.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/MBS.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/MIR.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/MM2.jpg

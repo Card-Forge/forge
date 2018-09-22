@@ -125,7 +125,7 @@ public class CountersPutAi extends SpellAbilityAi {
         CardCollection list;
         Card choice = null;
         final String type = sa.getParam("CounterType");
-        final String amountStr = sa.getParam("CounterNum");
+        final String amountStr = sa.getParamOrDefault("CounterNum", "1");
         final boolean divided = sa.hasParam("DividedAsYouChoose");
         final String logic = sa.getParamOrDefault("AILogic", "");
         PhaseHandler ph = ai.getGame().getPhaseHandler();
@@ -220,13 +220,9 @@ public class CountersPutAi extends SpellAbilityAi {
 
         if ("Never".equals(logic)) {
             return false;
-        }
-        
-        if ("PayEnergy".equals(logic)) {
+        } else if ("PayEnergy".equals(logic)) {
             return true;
-        }
-
-        if ("PayEnergyConservatively".equals(logic)) {
+        } else if ("PayEnergyConservatively".equals(logic)) {
             boolean onlyInCombat = ai.getController().isAI()
                     && ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.CONSERVATIVE_ENERGY_PAYMENT_ONLY_IN_COMBAT);
             boolean onlyDefensive = ai.getController().isAI()
@@ -266,9 +262,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     return true;
                 }
             }
-        }
-
-        if (logic.equals("MarkOppCreature")) {
+        } else if (logic.equals("MarkOppCreature")) {
             if (!ph.is(PhaseType.END_OF_TURN)) {
                 return false;
             }
@@ -282,6 +276,11 @@ public class CountersPutAi extends SpellAbilityAi {
                 sa.resetTargets();
                 sa.getTargets().add(bestCreat);
                 return true;
+            }
+        } else if (logic.equals("CheckDFC")) {
+            // for cards like Ludevic's Test Subject
+            if (!source.canTransform()) {
+                return false;
             }
         }
 
@@ -581,7 +580,7 @@ public class CountersPutAi extends SpellAbilityAi {
         final String type = sa.getParam("CounterType");
         final String logic = sa.getParamOrDefault("AILogic", "");
 
-        final String amountStr = sa.getParam("CounterNum");
+        final String amountStr = sa.getParamOrDefault("CounterNum", "1");
         final boolean divided = sa.hasParam("DividedAsYouChoose");
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
 
@@ -661,7 +660,7 @@ public class CountersPutAi extends SpellAbilityAi {
         boolean preferred = true;
         CardCollection list;
         final String type = sa.getParam("CounterType");
-        final String amountStr = sa.getParam("CounterNum");
+        final String amountStr = sa.getParamOrDefault("CounterNum", "1");
         final boolean divided = sa.hasParam("DividedAsYouChoose");
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
         int left = amount;
@@ -804,7 +803,8 @@ public class CountersPutAi extends SpellAbilityAi {
         if (mode == PlayerActionConfirmMode.Tribute) {
             // add counter if that opponent has a giant creature
             final List<Card> creats = player.getCreaturesInPlay();
-            final int tributeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
+            final String amountStr = sa.getParamOrDefault("CounterNum", "1");
+            final int tributeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
 
             final boolean isHaste = source.hasKeyword(Keyword.HASTE);
             List<Card> threatening = CardLists.filter(creats, new Predicate<Card>() {
@@ -863,7 +863,7 @@ public class CountersPutAi extends SpellAbilityAi {
         }
 
         final CounterType type = CounterType.valueOf(sa.getParam("CounterType"));
-        final String amountStr = sa.getParam("CounterNum");
+        final String amountStr = sa.getParamOrDefault("CounterNum", "1");
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
 
         final boolean isCurse = sa.isCurse();

@@ -1,3 +1,520 @@
+//Rank|Name|Rarity|Set
+#1|Doom Whisperer|M|GRN
+#2|Aurelia, Exemplar of Justice|M|GRN
+#3|Light of the Legion|R|GRN
+#4|Dream Eater|M|GRN
+#5|March of the Multitudes|M|GRN
+#6|Vraska, Golgari Queen|M|GRN
+#7|Assassin's Trophy|R|GRN
+#8|Underrealm Lich|M|GRN
+#9|Niv-Mizzet, Parun|R|GRN
+#10|Trostani Discordant|M|GRN
+#11|Status Statue|U|GRN
+#12|Price of Fame|U|GRN
+#13|Conclave Tribunal|U|GRN
+#14|Izoni, Thousand-Eyed|R|GRN
+#15|Lava Coil|U|GRN
+#16|Dawn of Hope|R|GRN
+#17|Legion Warboss|R|GRN
+#18|Find|R|GRN
+#19|Integrity Intervention|U|GRN
+#20|Justice Strike|U|GRN
+#21|Tajic, Legion's Edge|R|GRN
+#22|Pelt Collector|R|GRN
+#23|Ral, Izzet Viceroy|M|GRN
+#24|Emmara, Soul of the Accord|R|GRN
+#25|Swiftblade Vindicator|R|GRN
+#26|Assure|R|GRN
+#27|Chamber Sentry|R|GRN
+#28|Bounty of Might|R|GRN
+#29|Nightveil Predator|U|GRN
+#30|Venerated Loxodon|R|GRN
+#31|Crackling Drake|U|GRN
+#32|Etrata, the Silencer|R|GRN
+#33|Nullhide Ferox|M|GRN
+#34|Golgari Findbroker|U|GRN
+#35|Knight of Autumn|R|GRN
+#36|Conclave Cavalier|U|GRN
+#37|Thief of Sanity|R|GRN
+#38|Response|R|GRN
+#39|Deafening Clarion|R|GRN
+#40|Truefire Captain|U|GRN
+#41|Deadly Visit|C|GRN
+#42|Midnight Reaper|R|GRN
+#43|Lazav, the Multifarious|M|GRN
+#44|Boros Challenger|U|GRN
+#45|Ritual of Soot|R|GRN
+#46|Rampaging Monument|U|GRN
+#47|Luminous Bonds|C|GRN
+#48|Chemister's Insight|U|GRN
+#49|Artful Takedown|C|GRN
+#50|Beast Whisperer|R|GRN
+#51|Expansion|R|GRN
+#52|Affectionate Indrik|U|GRN
+#53|Connive|R|GRN
+#54|Hatchery Spider|R|GRN
+#55|Charnel Troll|R|GRN
+#56|Rosemane Centaur|C|GRN
+#57|Hypothesizzle|C|GRN
+#58|Arclight Phoenix|M|GRN
+#59|Swarm Guildmage|U|GRN
+#60|House Guildmage|U|GRN
+#61|League Guildmage|U|GRN
+#62|Legion Guildmage|U|GRN
+#63|Glowspore Shaman|U|GRN
+#64|Wee Dragonauts|U|GRN
+#65|Kraul Harpooner|U|GRN
+#66|Gravitic Punch|C|GRN
+#67|Dead Weight|C|GRN
+#68|District Guide|U|GRN
+#69|Command the Storm|C|GRN
+#70|Inescapable Blaze|U|GRN
+#71|Conclave Guildmage|U|GRN
+#72|Ledev Champion|U|GRN
+#73|Discovery|U|GRN
+#74|Roc Charger|U|GRN
+#75|Citywide Bust|R|GRN
+#76|Plaguecrafter|U|GRN
+#77|Camaraderie|R|GRN
+#78|Hired Poisoner|C|GRN
+#79|Capture Sphere|C|GRN
+#80|Firemind's Research|R|GRN
+#81|Quasiduplicate|R|GRN
+#82|Arboretum Elemental|U|GRN
+#83|Unexplained Disappearance|C|GRN
+#84|Sunhome Stalwart|U|GRN
+#85|Chromatic Lantern|R|GRN
+#86|Goblin Cratermaker|U|GRN
+#87|Notion Rain|C|GRN
+#88|Invert|U|GRN
+#89|Erratic Cyclops|R|GRN
+#90|Citywatch Sphinx|U|GRN
+#91|Skyknight Legionnaire|C|GRN
+#92|Watcher in the Mist|C|GRN
+#93|Dimir Spybug|U|GRN
+#94|Siege Wurm|C|GRN
+#95|Risk Factor|R|GRN
+#96|Flower|U|GRN
+#97|Inspiring Unicorn|U|GRN
+#98|Prey Upon|C|GRN
+#99|Severed Strands|C|GRN
+#100|Kraul Swarm|U|GRN
+#101|Demotion|U|GRN
+#102|Murmuring Mystic|U|GRN
+#103|Healer's Hawk|C|GRN
+#104|Direct Current|C|GRN
+#105|Nightveil Sprite|U|GRN
+#106|Darkblade Agent|C|GRN
+#107|Blood Operative|R|GRN
+#108|Swathcutter Giant|U|GRN
+#109|Loxodon Restorer|C|GRN
+#110|Sprouting Renewal|U|GRN
+#111|Beacon Bolt|U|GRN
+#112|Undercity Uprising|C|GRN
+#113|Flight of Equenauts|U|GRN
+#114|Experimental Frenzy|R|GRN
+#115|Undercity Necrolisk|U|GRN
+#116|Selective Snare|U|GRN
+#117|Collar the Culprit|C|GRN
+#118|Sacred Foundry|R|GRN
+#119|Watery Grave|R|GRN
+#120|Temple Garden|R|GRN
+#121|Overgrown Tomb|R|GRN
+#122|Steam Vents|R|GRN
+#123|Dimir Informant|C|GRN
+#124|Runaway Steam-Kin|R|GRN
+#125|Ionize|R|GRN
+#126|Garrison Sergeant|C|GRN
+#127|Hunted Witness|C|GRN
+#128|Disinformation Campaign|U|GRN
+#129|Piston-Fist Cyclops|C|GRN
+#130|Parhelion Patrol|C|GRN
+#131|Join Shields|U|GRN
+#132|Gird for Battle|U|GRN
+#133|Gatekeeper Gargoyle|U|GRN
+#134|Drowned Secrets|R|GRN
+#135|Hellkite Whelp|U|GRN
+#136|Spinal Centipede|C|GRN
+#137|Burglar Rat|C|GRN
+#138|Righteous Blow|C|GRN
+#139|Golgari Guildgate|C|GRN
+#140|Izzet Guildgate|C|GRN
+#141|Selesnya Guildgate|C|GRN
+#142|Dimir Guildgate|C|GRN
+#143|Boros Guildgate|C|GRN
+#144|Thought Erasure|U|GRN
+#145|Necrotic Wound|U|GRN
+#146|Guild Summit|U|GRN
+#147|Whispering Snitch|U|GRN
+#148|Vivid Revival|R|GRN
+#149|Guildmages' Forum|R|GRN
+#150|Molderhulk|U|GRN
+#151|Gruesome Menagerie|R|GRN
+#152|Centaur Peacemaker|C|GRN
+#153|Thoughtbound Phantasm|U|GRN
+#154|Ochran Assassin|U|GRN
+#155|Circuitous Route|U|GRN
+#156|Lotleth Giant|U|GRN
+#157|Book Devourer|U|GRN
+#158|Worldsoul Colossus|U|GRN
+#159|Haazda Marshal|U|GRN
+#160|Erstwhile Trooper|C|GRN
+#161|Might of the Masses|U|GRN
+#162|Wild Ceratok|C|GRN
+#163|Ironshell Beetle|C|GRN
+#164|Smelt-Ward Minotaur|U|GRN
+#165|Cosmotronic Wave|C|GRN
+#166|Douser of Lights|C|GRN
+#167|Sworn Companions|C|GRN
+#168|Intrusive Packbeast|C|GRN
+#169|Sinister Sabotage|U|GRN
+#170|Barging Sergeant|C|GRN
+#171|Hammer Dropper|C|GRN
+#172|Goblin Electromancer|C|GRN
+#173|Sumala Woodshaper|C|GRN
+#174|Bounty Agent|R|GRN
+#175|Blade Instructor|C|GRN
+#176|Gateway Plaza|C|GRN
+#177|Disdainful Stroke|C|GRN
+#178|Goblin Banneret|U|GRN
+#179|Wojek Bodyguard|C|GRN
+#180|Enhanced Surveillance|U|GRN
+#181|Ledev Guardian|C|GRN
+#182|Beamsplitter Mage|U|GRN
+#183|Generous Stray|C|GRN
+#184|Vernadi Shieldmate|C|GRN
+#185|Pitiless Gorgon|C|GRN
+#186|Vigorspore Wurm|C|GRN
+#187|Pack's Favor|C|GRN
+#188|Hitchclaw Recluse|C|GRN
+#189|Sure Strike|C|GRN
+#190|Rubblebelt Boar|C|GRN
+#191|Ornery Goblin|C|GRN
+#192|Fire Urchin|C|GRN
+#193|Pilfering Imp|U|GRN
+#194|Bartizan Bats|C|GRN
+#195|Vedalken Mesmerist|C|GRN
+#196|Muse Drake|C|GRN
+#197|Leapfrog|C|GRN
+#198|Skyline Scout|C|GRN
+#199|Radical Idea|C|GRN
+#200|Moodmark Painter|C|GRN
+#201|Fresh-Faced Recruit|C|GRN
+#202|Whisper Agent|C|GRN
+#203|Golgari Raiders|U|GRN
+#204|Mission Briefing|R|GRN
+#205|Chance for Glory|M|GRN
+#206|Kraul Foragers|C|GRN
+#207|Rhizome Lurcher|C|GRN
+#208|Electrostatic Field|U|GRN
+#209|Street Riot|U|GRN
+#210|Fearless Halberdier|C|GRN
+#211|Veiled Shade|C|GRN
+#212|Child of Night|C|GRN
+#213|Wishcoin Crab|C|GRN
+#214|Tenth District Guard|C|GRN
+#215|Take Heart|C|GRN
+#216|Devkarin Dissident|C|GRN
+#217|Narcomoeba|R|GRN
+#218|Sonic Assault|C|GRN
+#219|Wary Okapi|C|GRN
+#220|Izzet Locket|C|GRN
+#221|Selesnya Locket|C|GRN
+#222|Golgari Locket|C|GRN
+#223|Dimir Locket|C|GRN
+#224|Boros Locket|C|GRN
+#225|Passwall Adept|C|GRN
+#226|Omnispell Adept|R|GRN
+#227|Wand of Vertebrae|U|GRN
+#228|Divine Visitation|M|GRN
+#229|Mnemonic Betrayal|M|GRN
+#230|Urban Utopia|C|GRN
+#231|Wall of Mist|C|GRN
+#232|Dazzling Lights|C|GRN
+#233|Candlelight Vigil|C|GRN
+#234|Mausoleum Secrets|R|GRN
+#235|Glaive of the Guildpact|U|GRN
+#236|Maximize Velocity|C|GRN
+#237|Goblin Locksmith|C|GRN
+#238|Grappling Sundew|U|GRN
+#239|Crushing Canopy|C|GRN
+#240|Torch Courier|C|GRN
+#241|Maximize Altitude|C|GRN
+#242|Never Happened|C|GRN
+#243|Thousand-Year Storm|M|GRN
+#244|Silent Dart|U|GRN
+#245|Portcullis Vine|C|GRN
+#246|Mephitic Vapors|C|GRN
+#247|Crush Contraband|U|GRN
+#248|Barrier of Bones|C|GRN
+#249|Devious Cover-Up|C|GRN
+#250|Maniacal Rage|C|GRN
+#251|Pause for Reflection|C|GRN
+#252|Vicious Rumors|C|GRN
+#253|Creeping Chill|U|GRN
+#254|Unmoored Ego|R|GRN
+//Rank|Name|Rarity|Set
+#1|Chromium, the Mutable|M|M19
+#2|Palladia-Mors, the Ruiner|M|M19
+#3|Tezzeret, Artifice Master|M|M19
+#4|Vivien Reid|M|M19
+#5|Vaevictis Asmadi, the Dire|M|M19
+#6|Lathliss, Dragon Queen|R|M19
+#7|Ajani, Adversary of Tyrants|M|M19
+#8|Valiant Knight|R|M19
+#9|Resplendent Angel|M|M19
+#10|Leonin Warleader|R|M19
+#11|Nicol Bolas, the Ravager|M|M19
+#12|Bone Dragon|M|M19
+#13|Demon of Catastrophes|R|M19
+#14|Lena, Selfless Champion|R|M19
+#15|Sigiled Sword of Valeron|R|M19
+#16|Arcades, the Strategist|M|M19
+#17|Demanding Dragon|R|M19
+#18|Djinn of Wishes|R|M19
+#19|Isareth the Awakener|R|M19
+#20|Hungering Hydra|R|M19
+#21|Banefire|R|M19
+#22|Murder|U|M19
+#23|Pelakka Wurm|R|M19
+#24|Goreclaw, Terror of Qal Sisma|R|M19
+#25|Spit Flame|R|M19
+#26|Prodigious Growth|R|M19
+#27|Death Baron|R|M19
+#28|Goblin Trashmaster|R|M19
+#29|Cleansing Nova|R|M19
+#30|Vivien's Invocation|R|M19
+#31|Windreader Sphinx|R|M19
+#32|Sarkhan, Fireblood|M|M19
+#33|Lightning Strike|U|M19
+#34|Sai, Master Thopterist|R|M19
+#35|Sarkhan's Unsealing|R|M19
+#36|Open the Graves|R|M19
+#37|Ajani's Last Stand|R|M19
+#38|Dismissive Pyromancer|R|M19
+#39|Hieromancer's Cage|U|M19
+#40|Graveyard Marshal|R|M19
+#41|Volley Veteran|U|M19
+#42|Mentor of the Meek|R|M19
+#43|Militia Bugler|U|M19
+#44|Exclusion Mage|U|M19
+#45|Aerial Engineer|U|M19
+#46|Draconic Disciple|U|M19
+#47|Regal Bloodlord|U|M19
+#48|Skyrider Patrol|U|M19
+#49|Lich's Caress|C|M19
+#50|Liliana, Untouched by Death|M|M19
+#51|Runic Armasaur|R|M19
+#52|Shield Mare|U|M19
+#53|Plague Mare|U|M19
+#54|Fell Specter|U|M19
+#55|Psychic Symbiont|U|M19
+#56|Shock|C|M19
+#57|Heroic Reinforcements|U|M19
+#58|Enigma Drake|U|M19
+#59|Remorseful Cleric|R|M19
+#60|Surge Mare|U|M19
+#61|Vine Mare|U|M19
+#62|Poison-Tip Archer|U|M19
+#63|Electrify|C|M19
+#64|Luminous Bonds|C|M19
+#65|Rabid Bite|C|M19
+#66|Lightning Mare|U|M19
+#67|Skilled Animator|U|M19
+#68|Brawl-Bash Ogre|U|M19
+#69|Gravedigger|U|M19
+#70|Vampire Sovereign|U|M19
+#71|Vigilant Baloth|U|M19
+#72|Knightly Valor|U|M19
+#73|Dark-Dweller Oracle|R|M19
+#74|Departed Deckhand|U|M19
+#75|Herald of Faith|U|M19
+#76|Liliana's Contract|R|M19
+#77|Thorn Lieutenant|R|M19
+#78|Mystic Archaeologist|R|M19
+#79|Sift|U|M19
+#80|Patient Rebuilding|R|M19
+#81|Phylactery Lich|R|M19
+#82|Mirror Image|U|M19
+#83|Satyr Enchanter|U|M19
+#84|Goblin Instigator|C|M19
+#85|Ajani's Pridemate|U|M19
+#86|Fiery Finish|U|M19
+#87|Volcanic Dragon|U|M19
+#88|Druid of the Cowl|C|M19
+#89|Sleep|U|M19
+#90|Star-Crowned Stag|C|M19
+#91|Strangling Spores|C|M19
+#92|Aviation Pioneer|C|M19
+#93|Rise from the Grave|U|M19
+#94|Switcheroo|U|M19
+#95|One with the Machine|R|M19
+#96|Meteor Golem|U|M19
+#97|Declare Dominance|U|M19
+#98|Ghastbark Twins|U|M19
+#99|Pegasus Courser|C|M19
+#100|Take Vengeance|C|M19
+#101|Siegebreaker Giant|U|M19
+#102|Gallant Cavalry|C|M19
+#103|Elvish Clancaller|R|M19
+#104|Dryad Greenseeker|U|M19
+#105|Diamond Mare|U|M19
+#106|Fountain of Renewal|U|M19
+#107|Nightmare's Thirst|U|M19
+#108|Guttersnipe|U|M19
+#109|Reassembling Skeleton|U|M19
+#110|Aven Wind Mage|C|M19
+#111|Centaur Courser|C|M19
+#112|Disperse|C|M19
+#113|Dwarven Priest|C|M19
+#114|Horizon Scholar|U|M19
+#115|Skyscanner|C|M19
+#116|Skymarch Bloodletter|C|M19
+#117|Angel of the Dawn|C|M19
+#118|Aethershield Artificer|U|M19
+#119|Blanchwood Armor|U|M19
+#120|Arcane Encyclopedia|U|M19
+#121|Essence Scatter|C|M19
+#122|Metamorphic Alteration|R|M19
+#123|Stitcher's Supplier|U|M19
+#124|Elvish Rejuvenator|C|M19
+#125|Blood Divination|U|M19
+#126|Bristling Boar|C|M19
+#127|Colossal Dreadmaw|C|M19
+#128|Epicure of Blood|C|M19
+#129|Cavalry Drillmaster|C|M19
+#130|Divination|C|M19
+#131|Sparktongue Dragon|C|M19
+#132|Gearsmith Guardian|C|M19
+#133|Omenspeaker|C|M19
+#134|Giant Spider|C|M19
+#135|Skeleton Archer|C|M19
+#136|Snapping Drake|C|M19
+#137|Totally Lost|C|M19
+#138|Transmogrifying Wand|R|M19
+#139|Doomed Dissenter|C|M19
+#140|Boggart Brute|C|M19
+#141|Dragon Egg|U|M19
+#142|Ghirapur Guide|U|M19
+#143|Gift of Paradise|U|M19
+#144|Cinder Barrens|C|M19
+#145|Forsaken Sanctuary|C|M19
+#146|Foul Orchard|C|M19
+#147|Highland Lake|C|M19
+#148|Meandering River|C|M19
+#149|Stone Quarry|C|M19
+#150|Submerged Boneyard|C|M19
+#151|Tranquil Expanse|C|M19
+#152|Woodland Stream|C|M19
+#153|Timber Gorge|C|M19
+#154|Ajani's Welcome|U|M19
+#155|Two-Headed Zombie|C|M19
+#156|Act of Treason|C|M19
+#157|Anticipate|C|M19
+#158|Child of Night|C|M19
+#159|Scholar of Stars|C|M19
+#160|Marauder's Axe|C|M19
+#161|Thornhide Wolves|C|M19
+#162|Titanic Growth|C|M19
+#163|Salvager of Secrets|C|M19
+#164|Havoc Devils|C|M19
+#165|Supreme Phantom|R|M19
+#166|Ravenous Harpy|U|M19
+#167|Druid of Horns|U|M19
+#168|Aether Tunnel|U|M19
+#169|Macabre Waltz|C|M19
+#170|Explosive Apparatus|C|M19
+#171|Magistrate's Scepter|R|M19
+#172|Thud|U|M19
+#173|Diregraf Ghoul|U|M19
+#174|Daybreak Chaplain|C|M19
+#175|Dwindle|C|M19
+#176|Rogue's Gloves|U|M19
+#177|Hostile Minotaur|C|M19
+#178|Sure Strike|C|M19
+#179|Doublecast|U|M19
+#180|Rhox Oracle|C|M19
+#181|Make a Stand|U|M19
+#182|Gargoyle Sentinel|U|M19
+#183|Gigantosaurus|R|M19
+#184|Desecrated Tomb|R|M19
+#185|Colossal Majesty|U|M19
+#186|Cancel|C|M19
+#187|Abnormal Endurance|C|M19
+#188|Fire Elemental|C|M19
+#189|Gearsmith Prodigy|C|M19
+#190|Viashino Pyromancer|C|M19
+#191|Inspired Charge|C|M19
+#192|Mighty Leap|C|M19
+#193|Onakke Ogre|C|M19
+#194|Tormenting Voice|C|M19
+#195|Frilled Sea Serpent|C|M19
+#196|Oakenform|C|M19
+#197|Oreskos Swiftclaw|C|M19
+#198|Recollect|U|M19
+#199|Revitalize|C|M19
+#200|Uncomfortable Chill|C|M19
+#201|Suspicious Bookcase|U|M19
+#202|Novice Knight|U|M19
+#203|Dragon's Hoard|R|M19
+#204|Suncleanser|R|M19
+#205|Mind Rot|C|M19
+#206|Chaos Wand|R|M19
+#207|Reclamation Sage|U|M19
+#208|Bogstomper|C|M19
+#209|Trusty Packbeast|C|M19
+#210|Goblin Motivator|C|M19
+#211|Manalith|C|M19
+#212|Loxodon Line Breaker|C|M19
+#213|Field Creeper|C|M19
+#214|Highland Game|C|M19
+#215|Infernal Scarring|C|M19
+#216|Plummet|C|M19
+#217|Rustwing Falcon|C|M19
+#218|Tolarian Scholar|C|M19
+#219|Trumpet Blast|C|M19
+#220|Lava Axe|C|M19
+#221|Catalyst Elemental|C|M19
+#222|Ghostform|C|M19
+#223|Invoke the Divine|C|M19
+#224|Leonin Vanguard|U|M19
+#225|Psychic Corrosion|U|M19
+#226|Aegis of the Heavens|U|M19
+#227|Bone to Ash|U|M19
+#228|Vampire Neonate|C|M19
+#229|Tectonic Rift|U|M19
+#230|Daggerback Basilisk|C|M19
+#231|Talons of Wildwood|C|M19
+#232|Infernal Reckoning|R|M19
+#233|Smelt|C|M19
+#234|Knight's Pledge|C|M19
+#235|Sovereign's Bite|C|M19
+#236|Walking Corpse|C|M19
+#237|Knight of the Tusk|C|M19
+#238|Isolate|R|M19
+#239|Fraying Omnipotence|R|M19
+#240|Rupture Spire|U|M19
+#241|Duress|C|M19
+#242|Hired Blade|C|M19
+#243|Crash Through|C|M19
+#244|Inferno Hellion|U|M19
+#245|Greenwood Sentinel|C|M19
+#246|Naturalize|C|M19
+#247|Wall of Mist|C|M19
+#248|Wall of Vines|C|M19
+#249|Infectious Horror|C|M19
+#250|Millstone|U|M19
+#251|Crucible of Worlds|M|M19
+#252|Scapeshift|M|M19
+#253|Amulet of Safekeeping|R|M19
+#254|Root Snare|C|M19
+#255|Mistcaller|R|M19
+#256|Apex of Power|M|M19
+#257|Detection Tower|R|M19
+#258|Alpine Moon|R|M19
+#259|Reliquary Tower|U|M19
+#260|Omniscience|M|M19
+//Rank|Name|Rarity|Set
 #1|Aryel, Knight of Windgrace|R|DOM
 #2|Lyra Dawnbringer|M|DOM
 #3|Demonlord Belzenlok|M|DOM

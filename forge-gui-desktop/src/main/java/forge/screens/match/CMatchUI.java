@@ -143,7 +143,12 @@ public final class CMatchUI
         this.myDocs = new EnumMap<EDocID, IVDoc<? extends ICDoc>>(EDocID.class);
         this.myDocs.put(EDocID.CARD_PICTURE, cDetailPicture.getCPicture().getView());
         this.myDocs.put(EDocID.CARD_DETAIL, cDetailPicture.getCDetail().getView());
-        this.myDocs.put(EDocID.CARD_ANTES, cAntes.getView());
+        // only create an ante doc if playing for ante
+        if (isPreferenceEnabled(FPref.UI_ANTE)) {
+            this.myDocs.put(EDocID.CARD_ANTES, cAntes.getView());
+        } else {
+            this.myDocs.put(EDocID.CARD_ANTES, null);
+        }
         this.myDocs.put(EDocID.REPORT_MESSAGE, getCPrompt().getView());
         this.myDocs.put(EDocID.REPORT_STACK, getCStack().getView());
         this.myDocs.put(EDocID.REPORT_COMBAT, cCombat.getView());
@@ -156,6 +161,10 @@ public final class CMatchUI
         for (final Entry<EDocID, IVDoc<? extends ICDoc>> doc : myDocs.entrySet()) {
             doc.getKey().setDoc(doc.getValue());
         }
+    }
+
+    private static boolean isPreferenceEnabled(final ForgePreferences.FPref preferenceName) {
+        return FModel.getPreferences().getPrefBoolean(preferenceName);
     }
 
     FScreen getScreen() {
@@ -200,7 +209,7 @@ public final class CMatchUI
 
     @Override
     protected void updateCurrentPlayer(final PlayerView player) {
-        // Update toggle buttons in dev mdoe panel
+        // Update toggle buttons in dev mode panel
         getCDev().update();
     }
 
@@ -486,6 +495,9 @@ public final class CMatchUI
         updatePlayerControl();
         KeyboardShortcuts.attachKeyboardShortcuts(this);
         for (final IVDoc<? extends ICDoc> view : myDocs.values()) {
+            if (view == null) {
+                continue;
+            }
             final ICDoc layoutControl = view.getLayoutControl();
             layoutControl.initialize();
             layoutControl.update();

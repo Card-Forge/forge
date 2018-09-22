@@ -39,6 +39,7 @@ import forge.screens.deckeditor.views.VCardCatalog;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.ContextMenuBuilder;
+import forge.toolbox.FComboBox;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.util.Aggregates;
@@ -49,7 +50,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -186,14 +186,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         final CardLimit limit = getCardLimit();
         final DeckController<TModel> controller = getDeckController();
 
-        Deck deck = null;
-        if (controller != null) {
-            if (controller.getModel() instanceof Deck) {
-                deck = (Deck)controller.getModel(); // constructed deck
-            } else if (controller.getModel() instanceof DeckGroup) {
-                deck = ((DeckGroup)controller.getModel()).getHumanDeck(); // limited deck
-            }
-        }
+        Deck deck = getHumanDeck();
 
         Iterable<Entry<String,Integer>> cardsByName = null;
         if (deck != null) {
@@ -248,6 +241,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     protected abstract void onRemoveItems(Iterable<Entry<TItem, Integer>> items, boolean toAlternate);
 
     protected abstract void buildAddContextMenu(EditorContextMenuBuilder cmb);
+
     protected abstract void buildRemoveContextMenu(EditorContextMenuBuilder cmb);
 
     /**
@@ -261,6 +255,10 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
      * @return {@link forge.screens.deckeditor.controllers.DeckController}
      */
     public abstract DeckController<TModel> getDeckController();
+
+    protected Deck getHumanDeck() {
+        return getDeckController().getModel().getHumanDeck();
+    }
 
     /**
      * Called when switching away from or closing the editor wants to exit. Should confirm save options.
@@ -392,7 +390,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("Card Catalog");
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(true);
-        getBtnCycleSection().setVisible(false);
+        getCbxSection().setVisible(false);
 
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getLblTitle().setText("Title:");
@@ -403,7 +401,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     public FLabel getBtnRemove()  { return btnRemove; }
     public FLabel getBtnRemove4() { return btnRemove4; }
     public FLabel getBtnAddBasicLands() { return btnAddBasicLands; }
-    public FLabel getBtnCycleSection() { return deckManager.getBtnCycleSection(); }
+    public FComboBox getCbxSection() { return deckManager.getCbxSection(); }
 
     public ContextMenuBuilder createContextMenuBuilder(final boolean isAddContextMenu0) {
         return new EditorContextMenuBuilder(isAddContextMenu0);
@@ -598,5 +596,4 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                     InputEvent.ALT_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
         }
     }
-
 }

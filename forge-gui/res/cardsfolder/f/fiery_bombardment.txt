@@ -1,9 +1,9 @@
 Name:Fiery Bombardment
 ManaCost:1 R
 Types:Enchantment
-A:AB$ DealDamage | Cost$ 2 Sac<1/Creature> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | PrecostDesc$ Chroma — | SpellDescription$ CARDNAME deals damage to target creature or player equal to the number of red mana symbols in the sacrificed creature's mana cost.
+A:AB$ DealDamage | Cost$ 2 Sac<1/Creature> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | References$ X | PrecostDesc$ Chroma — | SpellDescription$ CARDNAME deals damage to any target equal to the number of red mana symbols in the sacrificed creature's mana cost.
 SVar:X:Sacrificed$ChromaSource.Red
 SVar:NonStackingEffect:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_bombardment.jpg
-Oracle:Chroma — {2}, Sacrifice a creature: Fiery Bombardment deals damage to target creature or player equal to the number of red mana symbols in the sacrificed creature's mana cost.
+Oracle:Chroma — {2}, Sacrifice a creature: Fiery Bombardment deals damage to any target equal to the number of red mana symbols in the sacrificed creature's mana cost.

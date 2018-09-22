@@ -1,0 +1,11 @@
+Name:Suncleanser
+ManaCost:1 W
+Types:Creature Human Cleric
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, choose one —\n• Remove all counters from target creature. It can't have counters put on it for as long as CARDNAME remains on the battlefield.\n• Target opponent loses all counters. That player can't get counters for as long as CARDNAME remains on the battlefield.
+SVar:TrigCharm:DB$ Charm | Choices$ CreatureDBRemoveCounter,OpponentDBRemoveCounter | CharmNum$ 1
+SVar:CreatureDBRemoveCounter:DB$ RemoveCounter | ValidTgts$ Creature | RememberObjects$ Targeted | TgtPrompt$ Select target creature | CounterType$ All | CounterNum$ All | SubAbility$ DBPumpCreature | SpellDescription$ Remove all counters from target creature. It can't have counters put on it for as long as CARDNAME remains on the battlefield.
+SVar:OpponentDBRemoveCounter:DB$ RemoveCounter | ValidTgts$ Opponent | RememberObjects$ Targeted | TgtPrompt$ Select target opponent | CounterType$ All | CounterNum$ All | SubAbility$ DBPumpOpponent | SpellDescription$ Target opponent loses all counters. That player can't get counters for as long as CARDNAME remains on the battlefield.
+SVar:DBPumpCreature:DB$ Pump | Defined$ Targeted | KW$ CARDNAME can't have counters put on it. | UntilLoseControlOfHost$ True
+SVar:DBPumpOpponent:DB$ Pump | Defined$ Targeted | KW$ PLAYER can't have counters put on him or her. | UntilLoseControlOfHost$ True
+Oracle:When Suncleanser enters the battlefield, choose one —\n• Remove all counters from target creature. It can't have counters put on it for as long as Suncleanser remains on the battlefield.\n• Target opponent loses all counters. That player can't get counters for as long as Suncleanser remains on the battlefield.
+PT:1/4

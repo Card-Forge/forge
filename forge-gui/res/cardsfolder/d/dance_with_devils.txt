@@ -1,8 +1,8 @@
 Name:Dance with Devils
 ManaCost:3 R
 Types:Instant
-A:SP$ Token | Cost$ 3 R | TokenAmount$ 2 | TokenName$ Devil | TokenTypes$ Creature,Devil | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenTriggers$ DiesTrigger | TokenSVars$ DevilTrigDamage | SpellDescription$ Create two 1/1 red Devil creature tokens. They have "When this creature dies, it deals 1 damage to target creature or player."
-SVar:DiesTrigger:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ DevilTrigDamage | TriggerController$ TriggeredCardController | TriggerDescription$ When this creature dies, it deals 1 damage to target creature or player.
-SVar:DevilTrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1
+A:SP$ Token | Cost$ 3 R | TokenAmount$ 2 | TokenName$ Devil | TokenTypes$ Creature,Devil | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenTriggers$ DiesTrigger | TokenSVars$ DevilTrigDamage | SpellDescription$ Create two 1/1 red Devil creature tokens. They have "When this creature dies, it deals 1 damage to any target."
+SVar:DiesTrigger:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ DevilTrigDamage | TriggerController$ TriggeredCardController | TriggerDescription$ When this creature dies, it deals 1 damage to any target.
+SVar:DevilTrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dance_with_devils.jpg
-Oracle:Create two 1/1 red Devil creature tokens. They have "When this creature dies, it deals 1 damage to target creature or player."
+Oracle:Create two 1/1 red Devil creature tokens. They have "When this creature dies, it deals 1 damage to any target."

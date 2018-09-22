@@ -35,9 +35,9 @@ public class DiscardEffect extends SpellAbilityEffect {
             }
 
             if (mode.equals("RevealYouChoose")) {
-                sb.append("reveals his or her hand.").append("  You choose (");
+                sb.append("reveals their hand.").append("  You choose (");
             } else if (mode.equals("RevealDiscardAll")) {
-                sb.append("reveals his or her hand. Discard (");
+                sb.append("reveals their hand. Discard (");
             } else {
                 sb.append("discards (");
             }
@@ -48,7 +48,7 @@ public class DiscardEffect extends SpellAbilityEffect {
             }
 
             if (mode.equals("Hand")) {
-                sb.append("his or her hand");
+                sb.append("their hand");
             } else if (mode.equals("RevealDiscardAll")) {
                 sb.append("All");
             } else if (sa.hasParam("AnyNumber")) {
