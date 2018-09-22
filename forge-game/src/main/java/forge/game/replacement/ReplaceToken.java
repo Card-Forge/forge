@@ -30,15 +30,26 @@ public class ReplaceToken extends ReplacementEffect {
             return false;
         }
 
-        if (mapParams.containsKey("EffectOnly")) {
+        if (hasParam("EffectOnly")) {
             final Boolean effectOnly = (Boolean) runParams.get("EffectOnly");
             if (!effectOnly) {
                 return false;
             }
         }
 
-        if (this.getMapParams().containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams.get("Affected"), this.getMapParams().get("ValidPlayer").split(","), this.getHostCard())) {
+        if (hasParam("ValidPlayer")) {
+            if (!matchesValid(runParams.get("Affected"), getParam("ValidPlayer").split(","), getHostCard())) {
+                return false;
+            }
+        }
+
+        if (hasParam("ValidToken")) {
+            if (runParams.containsKey("Token")) {
+                if (!matchesValid(runParams.get("Token"), getParam("ValidToken").split(","), getHostCard())) {
+                    return false;
+                }
+            } else {
+                // in case RE is not updated yet
                 return false;
             }
         }
