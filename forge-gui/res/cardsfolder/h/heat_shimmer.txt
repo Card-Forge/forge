@@ -1,7 +1,7 @@
 Name:Heat Shimmer
 ManaCost:2 R
 Types:Sorcery
-A:SP$ CopyPermanent | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Haste | AtEOTTrig$ Exile | AddSVars$ SneakAttackEOT | SpellDescription$ Create a token that's a copy of target creature. That token has haste and "At the beginning of the end step, exile this permanent."
+A:SP$ CopyPermanent | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Haste | AtEOTTrig$ Exile | AddSVars$ SneakAttackEOT | SpellDescription$ Create a token that's a copy of target creature, except it has haste and "At the beginning of the end step, exile this permanent."
 SVar:SneakAttackEOT:SVar:EndOfTurnLeavePlay:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heat_shimmer.jpg
-Oracle:Create a token that's a copy of target creature. That token has haste and "At the beginning of the end step, exile this permanent."
+Oracle:Create a token that's a copy of target creature, except it has haste and "At the beginning of the end step, exile this permanent."
