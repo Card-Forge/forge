@@ -20,7 +20,6 @@ package forge.game.ability.effects;
 import java.util.Arrays;
 import java.util.List;
 
-import forge.StaticData;
 import forge.card.MagicColor;
 import forge.game.card.token.TokenInfo;
 import org.apache.commons.lang3.StringUtils;
@@ -204,16 +203,13 @@ public class TokenEffect extends SpellAbilityEffect {
             return null;
         }
 
-        String script = sa.getParam("TokenScript");
-        String edition = sa.getHostCard().getSetCode();
-        PaperToken token = StaticData.instance().getAllTokens().getToken(script, edition);
+        final Card result = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
 
-        if (token != null) {
-            tokenName = token.getName();
-            return Card.fromPaperCard(token, null, sa.getHostCard().getGame());
+        if (result != null) {
+            tokenName = result.getName();
         }
 
-        return null;
+        return result;
     }
 
     @Override

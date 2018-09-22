@@ -37,7 +37,6 @@ import forge.util.collect.FCollectionView;
 import forge.util.PredicateString.StringOp;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Arrays;
 import java.util.List;
@@ -68,13 +67,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final Game game = host.getGame();
-        final List<String> keywords = Lists.newArrayList();
-        final List<String> types = Lists.newArrayList();
-        final List<String> svars = Lists.newArrayList();
-        final List<String> triggers = Lists.newArrayList();
         final List<String> pumpKeywords = Lists.newArrayList();
-        boolean asNonLegendary = false;
-        boolean resetActivations = false;
 
         final long timestamp = game.getNextTimestamp();
 
@@ -83,27 +76,11 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                 return;
             }
         }
-        if (sa.hasParam("Keywords")) {
-            keywords.addAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
-        }
+
         if (sa.hasParam("PumpKeywords")) {
             pumpKeywords.addAll(Arrays.asList(sa.getParam("PumpKeywords").split(" & ")));
         }
-        if (sa.hasParam("AddTypes")) {
-            types.addAll(Arrays.asList(sa.getParam("AddTypes").split(" & ")));
-        }
-        if (sa.hasParam("NonLegendary")) {
-            asNonLegendary = true;
-        }
-        if (sa.hasParam("ResetAbilityActivations")) {
-            resetActivations = true;
-        }
-        if (sa.hasParam("AddSVars")) {
-            svars.addAll(Arrays.asList(sa.getParam("AddSVars").split(" & ")));
-        }
-        if (sa.hasParam("Triggers")) {
-            triggers.addAll(Arrays.asList(sa.getParam("Triggers").split(" & ")));
-        }
+
         final int numCopies = sa.hasParam("NumCopies") ? AbilityUtils.calculateAmount(host,
                 sa.getParam("NumCopies"), sa) : 1;
 
@@ -191,155 +168,18 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
 
         for (final Card c : tgtCards) {
             if (!sa.usesTargeting() || c.canBeTargetedBy(sa)) {
+                List <Card> token = TokenInfo.makeToken(getProtoType(sa, c), controller, true, numCopies);
 
-                Pair<Player, Integer> result = TokenInfo.calculateMultiplier(
-                        game, controller, true, numCopies);
+                final List<Card> crds = Lists.newArrayListWithCapacity(token.size());
 
-                if (result.getRight() <= 0) {
-                    return;
-                }
-                
-                final List<Card> crds = Lists.newArrayListWithCapacity(result.getRight());
-
-                for (int i = 0; i < result.getRight(); i++) {
-                    final Card copy = CardFactory.copyCopiableCharacteristics(c, result.getLeft());
-                    copy.setToken(true);
-                    copy.setCopiedPermanent(c);
-                    // add keywords from sa
-                    for (final String kw : keywords) {
-                        copy.addIntrinsicKeyword(kw);
-                    }
-                    if (asNonLegendary) {
-                        copy.removeType(CardType.Supertype.Legendary);
-                    }
-                    if (sa.hasParam("SetCreatureTypes")) {
-                        copy.setCreatureTypes(ImmutableList.copyOf(sa.getParam("SetCreatureTypes").split(" ")));
-                    }
-
-                    if (sa.hasParam("SetColor")) {
-                        copy.setColor(MagicColor.fromName(sa.getParam("SetColor")));
-                    }
-
-                    for (final String type : types) {
-                        copy.addType(type);
-                    }
-                    for (final String svar : svars) {
-                        String actualsVar = host.getSVar(svar);
-                        String name = svar;
-                        if (actualsVar.startsWith("SVar:")) {
-                            actualsVar = actualsVar.split("SVar:")[1];
-                            name = actualsVar.split(":")[0];
-                            actualsVar = actualsVar.split(":")[1];
-                        }
-                        copy.setSVar(name, actualsVar);
-                    }
-                    for (final String s : triggers) {
-                        final String actualTrigger = host.getSVar(s);
-                        final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, copy, true);
-                        copy.addTrigger(parsedTrigger);
-                    }
-
-                    // set power of clone
-                    if (sa.hasParam("SetPower")) {
-                        String rhs = sa.getParam("SetPower");
-                        int power = Integer.MAX_VALUE;
-                        try {
-                            power = Integer.parseInt(rhs);
-                        } catch (final NumberFormatException e) {
-                            power = CardFactoryUtil.xCount(copy, copy.getSVar(rhs));
-                        }
-                        copy.setBasePower(power);
-                    }
-
-                    // set toughness of clone
-                    if (sa.hasParam("SetToughness")) {
-                        String rhs = sa.getParam("SetToughness");
-                        int toughness = Integer.MAX_VALUE;
-                        try {
-                            toughness = Integer.parseInt(rhs);
-                        } catch (final NumberFormatException e) {
-                            toughness = CardFactoryUtil.xCount(copy, copy.getSVar(rhs));
-                        }
-                        copy.setBaseToughness(toughness);
-                    }
-
-                    if (sa.hasParam("AtEOTTrig")) {
-                        addSelfTrigger(sa, sa.getParam("AtEOTTrig"), copy);
-                    }
-                    
-                    if (sa.hasParam("Embalm")) {
-                        copy.addType("Zombie");
-                        copy.setColor(MagicColor.WHITE);
-                        copy.setManaCost(ManaCost.NO_COST);
-                        copy.setEmbalmed(true);
-
-                        String name = TextUtil.fastReplace(
-                                TextUtil.fastReplace(copy.getName(), ",", ""),
-                                " ", "_").toLowerCase();
-                        copy.setImageKey(ImageKeys.getTokenKey("embalm_" + name));
-                    }
-                    if (sa.hasParam("Eternalize")) {
-                    	copy.addType("Zombie");
-                    	copy.setColor(MagicColor.BLACK);
-                    	copy.setManaCost(ManaCost.NO_COST);
-                    	copy.setBasePower(4);
-                    	copy.setBaseToughness(4);
-                        copy.setEternalized(true);
-
-                        String name = TextUtil.fastReplace(
-                            TextUtil.fastReplace(copy.getName(), ",", ""),
-                                " ", "_").toLowerCase();
-                        copy.setImageKey(ImageKeys.getTokenKey("eternalize_" + name));
-                    }
-                    
-                    // remove some characteristic static abilties
-                    for (StaticAbility sta : copy.getStaticAbilities()) {
-                        if (!sta.hasParam("CharacteristicDefining")) {
-                            continue;
-                        }
-                        if (sa.hasParam("SetPower") || sa.hasParam("Eternalize")) {
-                            if (sta.hasParam("SetPower"))
-                                copy.removeStaticAbility(sta);
-                        }
-                        if (sa.hasParam("SetToughness") || sa.hasParam("Eternalize")) {
-                            if (sta.hasParam("SetToughness"))
-                                copy.removeStaticAbility(sta);
-                        }
-                        if (sa.hasParam("SetCreatureTypes")) {
-                            // currently only Changeling and similar should be affected by that
-                            // other cards using AddType$ ChosenType should not
-                            if (sta.hasParam("AddType") && "AllCreatureTypes".equals(sta.getParam("AddType"))) {
-                                copy.removeStaticAbility(sta);
-                            }
-                        }
-                        if (sa.hasParam("SetColor") || sa.hasParam("Embalm") || sa.hasParam("Eternalize")) {
-                            if (sta.hasParam("SetColor")) {
-                                copy.removeStaticAbility(sta);
-                            }
-                        }
-                    }
-                    if (sa.hasParam("SetCreatureTypes")) {
-                        copy.removeIntrinsicKeyword("Changeling");
-                    }
-                    if (sa.hasParam("SetColor") || sa.hasParam("Embalm") || sa.hasParam("Eternalize")) {
-                        copy.removeIntrinsicKeyword("Devoid");
-                    }
-
-                    if (resetActivations) {
-                        for (SpellAbility ab : copy.getSpellAbilities()) {
-                            ab.getRestrictions().resetTurnActivations();
-                        }
-                    }
-                    // set the controller before move to play: Crafty Cutpurse
-                    copy.setController(result.getLeft(), 0);
-                    copy.updateStateForView();
+                for (final Card t : token) {
 
                     // Temporarily register triggers of an object created with CopyPermanent
                     //game.getTriggerHandler().registerActiveTrigger(copy, false);
-                    final Card copyInPlay = game.getAction().moveToPlay(copy, sa, null);
+                    final Card copyInPlay = game.getAction().moveToPlay(t, sa, null);
 
                     // when copying something stolen:
-                    copyInPlay.setSetCode(c.getSetCode());
+                    //copyInPlay.setSetCode(c.getSetCode());
 
                     copyInPlay.setCloneOrigin(host);
                     sa.getHostCard().addClone(copyInPlay);
@@ -415,7 +255,6 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                             continue;
                         }
                     }
-
                 }
 
                 if (sa.hasParam("AtEOT")) {
@@ -427,4 +266,166 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
             } // end canBeTargetedBy
         } // end foreach Card
     } // end resolve
+
+
+    private Card getProtoType(final SpellAbility sa, final Card original) {
+        final Card host = sa.getHostCard();
+        final List<String> keywords = Lists.newArrayList();
+        final List<String> types = Lists.newArrayList();
+        final List<String> svars = Lists.newArrayList();
+        final List<String> triggers = Lists.newArrayList();
+        boolean asNonLegendary = false;
+        boolean resetActivations = false;
+
+        if (sa.hasParam("Keywords")) {
+            keywords.addAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
+        }
+        if (sa.hasParam("AddTypes")) {
+            types.addAll(Arrays.asList(sa.getParam("AddTypes").split(" & ")));
+        }
+        if (sa.hasParam("NonLegendary")) {
+            asNonLegendary = true;
+        }
+        if (sa.hasParam("ResetAbilityActivations")) {
+            resetActivations = true;
+        }
+        if (sa.hasParam("AddSVars")) {
+            svars.addAll(Arrays.asList(sa.getParam("AddSVars").split(" & ")));
+        }
+        if (sa.hasParam("Triggers")) {
+            triggers.addAll(Arrays.asList(sa.getParam("Triggers").split(" & ")));
+        }
+
+        final Card copy = CardFactory.copyCopiableCharacteristics(original, sa.getActivatingPlayer());
+        copy.setToken(true);
+        copy.setCopiedPermanent(original);
+        // add keywords from sa
+        for (final String kw : keywords) {
+            copy.addIntrinsicKeyword(kw);
+        }
+        if (asNonLegendary) {
+            copy.removeType(CardType.Supertype.Legendary);
+        }
+        if (sa.hasParam("SetCreatureTypes")) {
+            copy.setCreatureTypes(ImmutableList.copyOf(sa.getParam("SetCreatureTypes").split(" ")));
+        }
+
+        if (sa.hasParam("SetColor")) {
+            copy.setColor(MagicColor.fromName(sa.getParam("SetColor")));
+        }
+
+        for (final String type : types) {
+            copy.addType(type);
+        }
+        for (final String svar : svars) {
+            String actualsVar = host.getSVar(svar);
+            String name = svar;
+            if (actualsVar.startsWith("SVar:")) {
+                actualsVar = actualsVar.split("SVar:")[1];
+                name = actualsVar.split(":")[0];
+                actualsVar = actualsVar.split(":")[1];
+            }
+            copy.setSVar(name, actualsVar);
+        }
+        for (final String s : triggers) {
+            final String actualTrigger = host.getSVar(s);
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, copy, true);
+            copy.addTrigger(parsedTrigger);
+        }
+
+        // set power of clone
+        if (sa.hasParam("SetPower")) {
+            String rhs = sa.getParam("SetPower");
+            int power = Integer.MAX_VALUE;
+            try {
+                power = Integer.parseInt(rhs);
+            } catch (final NumberFormatException e) {
+                power = CardFactoryUtil.xCount(copy, copy.getSVar(rhs));
+            }
+            copy.setBasePower(power);
+        }
+
+        // set toughness of clone
+        if (sa.hasParam("SetToughness")) {
+            String rhs = sa.getParam("SetToughness");
+            int toughness = Integer.MAX_VALUE;
+            try {
+                toughness = Integer.parseInt(rhs);
+            } catch (final NumberFormatException e) {
+                toughness = CardFactoryUtil.xCount(copy, copy.getSVar(rhs));
+            }
+            copy.setBaseToughness(toughness);
+        }
+
+        if (sa.hasParam("AtEOTTrig")) {
+            addSelfTrigger(sa, sa.getParam("AtEOTTrig"), copy);
+        }
+
+        if (sa.hasParam("Embalm")) {
+            copy.addType("Zombie");
+            copy.setColor(MagicColor.WHITE);
+            copy.setManaCost(ManaCost.NO_COST);
+            copy.setEmbalmed(true);
+
+            String name = TextUtil.fastReplace(
+                    TextUtil.fastReplace(copy.getName(), ",", ""),
+                    " ", "_").toLowerCase();
+            copy.setImageKey(ImageKeys.getTokenKey("embalm_" + name));
+        }
+
+        if (sa.hasParam("Eternalize")) {
+            copy.addType("Zombie");
+            copy.setColor(MagicColor.BLACK);
+            copy.setManaCost(ManaCost.NO_COST);
+            copy.setBasePower(4);
+            copy.setBaseToughness(4);
+            copy.setEternalized(true);
+
+            String name = TextUtil.fastReplace(
+                TextUtil.fastReplace(copy.getName(), ",", ""),
+                    " ", "_").toLowerCase();
+            copy.setImageKey(ImageKeys.getTokenKey("eternalize_" + name));
+        }
+
+        // remove some characteristic static abilties
+        for (StaticAbility sta : copy.getStaticAbilities()) {
+            if (!sta.hasParam("CharacteristicDefining")) {
+                continue;
+            }
+            if (sa.hasParam("SetPower") || sa.hasParam("Eternalize")) {
+                if (sta.hasParam("SetPower"))
+                    copy.removeStaticAbility(sta);
+            }
+            if (sa.hasParam("SetToughness") || sa.hasParam("Eternalize")) {
+                if (sta.hasParam("SetToughness"))
+                    copy.removeStaticAbility(sta);
+            }
+            if (sa.hasParam("SetCreatureTypes")) {
+                // currently only Changeling and similar should be affected by that
+                // other cards using AddType$ ChosenType should not
+                if (sta.hasParam("AddType") && "AllCreatureTypes".equals(sta.getParam("AddType"))) {
+                    copy.removeStaticAbility(sta);
+                }
+            }
+            if (sa.hasParam("SetColor") || sa.hasParam("Embalm") || sa.hasParam("Eternalize")) {
+                if (sta.hasParam("SetColor")) {
+                    copy.removeStaticAbility(sta);
+                }
+            }
+        }
+        if (sa.hasParam("SetCreatureTypes")) {
+            copy.removeIntrinsicKeyword("Changeling");
+        }
+        if (sa.hasParam("SetColor") || sa.hasParam("Embalm") || sa.hasParam("Eternalize")) {
+            copy.removeIntrinsicKeyword("Devoid");
+        }
+
+        if (resetActivations) {
+            for (SpellAbility ab : copy.getSpellAbilities()) {
+                ab.getRestrictions().resetTurnActivations();
+            }
+        }
+        copy.updateStateForView();
+        return copy;
+    }
 }

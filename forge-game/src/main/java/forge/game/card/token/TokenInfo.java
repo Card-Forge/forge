@@ -5,6 +5,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.ImageKeys;
+import forge.StaticData;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -13,11 +14,11 @@ import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
+import forge.item.PaperToken;
 
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.lang3.tuple.Pair;
 
 public class TokenInfo {
     final String name;
@@ -152,14 +153,19 @@ public class TokenInfo {
         return sb.toString();
     }
 
-    public static Pair<Player, Integer> calculateMultiplier(final Game game, final Player controller,
+    public static List<Card> makeToken(final Card prototype, final Player controller,
             final boolean applyMultiplier, final int num) {
+        final List<Card> list = Lists.newArrayList();
+
+        final Game game = controller.getGame();
         int multiplier = num;
         Player player = controller;
+        Card proto = prototype;
 
         final Map<String, Object> repParams = Maps.newHashMap();
         repParams.put("Event", "CreateToken");
         repParams.put("Affected", player);
+        repParams.put("Token", prototype);
         repParams.put("TokenNum", multiplier);
         repParams.put("EffectOnly", applyMultiplier);
 
@@ -169,43 +175,37 @@ public class TokenInfo {
             case Updated: {
                 multiplier = (int) repParams.get("TokenNum");
                 player = (Player) repParams.get("Affected");
+                proto = (Card) repParams.get("Token");
                 break;
             }
             default:
                 multiplier = 0;
                 break;
         }
-        return Pair.of(player, multiplier);
-    }
-
-    public List<Card> makeTokenWithMultiplier(final Player controller, int amount, final boolean applyMultiplier) {
-        final List<Card> list = Lists.newArrayList();
-        final Game game = controller.getGame();
-
-        Pair<Player, Integer> result = calculateMultiplier(game, controller, applyMultiplier, amount);
-
-        for (int i = 0; i < result.getRight(); i++) {
-            list.add(makeOneToken(result.getLeft()));
+        if (multiplier <= 0) {
+            return list;
         }
-        return list;
-    }
 
-    static public List<Card> makeTokensFromPrototype(Card prototype, final Player controller, int amount, final boolean applyMultiplier) {
-        final List<Card> list = Lists.newArrayList();
-        final Game game = controller.getGame();
-
-        Pair<Player, Integer> result = calculateMultiplier(game, controller, applyMultiplier, amount);
         long timestamp = game.getNextTimestamp();
-        prototype.setController(result.getLeft(), timestamp);
-        for (int i = 0; i < result.getRight(); i++) {
-            Card copy = CardFactory.copyCard(prototype, true);
+
+        for (int i = 0; i < multiplier; i++) {
+            // need to set owner or copyCard will fail with assign new ID
+            proto.setOwner(player);
+            Card copy = CardFactory.copyCard(proto, true);
             copy.setTimestamp(timestamp);
-            copy.setOwner(result.getLeft());
             copy.setToken(true);
             list.add(copy);
         }
 
         return list;
+    }
+
+    public List<Card> makeTokenWithMultiplier(final Player controller, int amount, final boolean applyMultiplier) {
+        return makeToken(makeOneToken(controller), controller, applyMultiplier, amount);
+    }
+
+    static public List<Card> makeTokensFromPrototype(Card prototype, final Player controller, int amount, final boolean applyMultiplier) {
+        return makeToken(prototype, controller, applyMultiplier, amount);
     }
 
     public Card makeOneToken(final Player controller) {
@@ -220,5 +220,21 @@ public class TokenInfo {
             c.addIntrinsicKeyword(kw);
         }
         return c;
+    }
+
+    static public Card getProtoType(final String script, final SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        final Game game = host.getGame();
+
+        String edition = host.getSetCode();
+        PaperToken token = StaticData.instance().getAllTokens().getToken(script, edition);
+
+        // TODO add Card Text Change from SpellAbility
+
+        if (token != null) {
+            return Card.fromPaperCard(token, null, game);
+        }
+
+        return null;
     }
 }
