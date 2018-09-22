@@ -1,0 +1,7 @@
+Name:Elf Knight
+ManaCost:no cost
+Types:Creature Elf Knight
+Colors:white,green
+PT:2/2
+K:Vigilance
+Oracle:Vigilance

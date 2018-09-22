@@ -4,9 +4,9 @@ Types:Legendary Creature Angel
 PT:2/5
 K:Flying
 K:Mentor
-T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBChooseCreature | TriggerDescription$ At the beginning of combat on your turn, choose up to one target creature you control. Until end of turn, that creature gets +2/+0, gains trample if it's red, and gains vigilance if it's white.
-SVar:DBChooseCreature:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature | SubAbility$ DBPumpAll | SpellDescription$ At the beginning of combat on your turn, choose up to one target creature you control. Until end of turn, that creature gets +2/+0, gains trample if it's red, and gains vigilance if it's white.
-SVar:DBPumpAll:DB$ Pump | Defined$ ChosenCard | NumAtt$ 2 | NumDef$ 0 | SubAbility$ DBPump1
-SVar:DBPump1:DB$Pump | Defined$ ChosenCard | KW$ Trample | ConditionDefined$ Remembered | ConditionPresent$ Card.Red | SubAbility$ DBPump2
-SVar:DBPump2:DB$Pump | Defined$ ChosenCard | KW$ Vigilance | ConditionDefined$ Remembered | ConditionPresent$ Card.White
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBPump | TriggerDescription$ At the beginning of combat on your turn, choose up to one target creature you control. Until end of turn, that creature gets +2/+0, gains trample if it's red, and gains vigilance if it's white.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ 2 | RememberTargets$ True | SubAbility$ DBPump1
+SVar:DBPump1:DB$Pump | Defined$ Remembered | KW$ Trample | ConditionDefined$ Remembered | ConditionPresent$ Card.Red | SubAbility$ DBPump2
+SVar:DBPump2:DB$Pump | Defined$ Remembered | KW$ Vigilance | ConditionDefined$ Remembered | ConditionPresent$ Card.White | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Flying\nMentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)\nAt the beginning of combat on your turn, choose up to one target creature you control. Until end of turn, that creature gets +2/+0, gains trample if it's red, and gains vigilance if it's white.
