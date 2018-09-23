@@ -1391,11 +1391,6 @@ Woodland Stream
 10 Selesnya Guildgate|GRN
 10 Dimir Guildgate|GRN
 10 Boros Guildgate|GRN
-5 Forest|GRN
-5 Island|GRN
-5 Mountain|GRN
-5 Plains|GRN
-5 Swamp|GRN
 
 [GRN Secret Cards]
 Ral, Caller of Storms
@@ -1405,4 +1400,5 @@ Vraska, Regal Gorgon
 Attendant of Vraska
 Vraska's Stoneglare
 Impervious Greatwurm
-
+Precision Bolt
+Kraul Raider
