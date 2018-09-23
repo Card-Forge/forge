@@ -285,5 +285,8 @@ Booster=10 Common:!fromSheet("GRN Secret Cards"), 3 Uncommon:!fromSheet("GRN Sec
 
 [tokens]
 w_1_1_soldier_lifelink
+w_4_4_angel_flying_vigilance
 u_1_1_bird_illusion_flying
 r_1_1_goblin
+wg_2_2_elf_knight_vigilance
+bg_1_1_insect

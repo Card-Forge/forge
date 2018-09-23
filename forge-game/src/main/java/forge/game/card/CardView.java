@@ -905,13 +905,21 @@ public class CardView extends GameEntityView {
             return get(TrackableProperty.Loyalty);
         }
         void updateLoyalty(Card c) {
-            set(TrackableProperty.Loyalty, c.getCurrentLoyalty());
+            updateLoyalty(c.getCurrentLoyalty());
+        }
+        void updateLoyalty(int loyalty) {
+            set(TrackableProperty.Loyalty, loyalty);
         }
         void updateLoyalty(CardState c) {
             if (CardView.this.getCurrentState() == this) {
                 Card card = c.getCard();
                 if (card != null) {
-                    updateLoyalty(card); //TODO: find a better way to do this
+                    if (card.isInZone(ZoneType.Battlefield)) {
+                        updateLoyalty(card);
+                    } else {
+                        updateLoyalty(c.getBaseLoyalty());
+                    }
+
                     return;
                 }
             }
