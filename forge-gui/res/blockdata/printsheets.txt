@@ -1402,3 +1402,8 @@ Vraska's Stoneglare
 Impervious Greatwurm
 Precision Bolt
 Kraul Raider
+Golgari Guildgate|GRN
+Izzet Guildgate|GRN
+Selesnya Guildgate|GRN
+Dimir Guildgate|GRN
+Boros Guildgate|GRN
