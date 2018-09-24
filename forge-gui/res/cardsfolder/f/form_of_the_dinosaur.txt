@@ -8,5 +8,4 @@ SVar:TrigDamage:DB$DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select 
 SVar:DBDealDamage:DB$ DealDamage | Defined$ You | DamageSource$ Targeted | NumDmg$ X | References$ X
 SVar:X:Targeted$CardPower 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/form_of_the_dinosaur.jpg
-Oracle:When Form of the Dinosaur enters the battlefield, your life total becomes 15.
-At the beginning of your upkeep, Form of the Dinosaur deals 15 damage to target creature an opponent controls and that creature deals damage equal to its power to you.
+Oracle:When Form of the Dinosaur enters the battlefield, your life total becomes 15.\nAt the beginning of your upkeep, Form of the Dinosaur deals 15 damage to target creature an opponent controls and that creature deals damage equal to its power to you.
