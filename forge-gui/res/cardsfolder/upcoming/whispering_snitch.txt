@@ -2,8 +2,9 @@ Name:Whispering Snitch
 ManaCost:1 B
 Types:Creature Vampire Rogue
 PT:1/3
-T:Mode$ SpellCast | ValidCard$ You | TriggerZones$ Battlefield | Execute$ TrigDamageAll | TriggerDescription$ Whenever you surveil for the first time each turn, CARDNAME deals 1 damage to each opponent and you gain 1 life.
+T:Mode$ Surveil | ValidCard$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQ1 | Execute$ TrigDamageAll | TriggerDescription$ Whenever you surveil for the first time each turn, CARDNAME deals 1 damage to each opponent and you gain 1 life.
 SVar:TrigDamageAll:DB$ DamageAll | ValidPlayers$ Player.Opponent | NumDmg$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+SVar:X:Count$YouSurveilThisTurn
 DeckHas:Ability$LifeGain
 Oracle:Whenever you surveil for the first time each turn, Whispering Snitch deals 1 damage to each opponent and you gain 1 life.
