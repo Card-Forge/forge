@@ -391,7 +391,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final class OptionsCheckBox extends FCheckBox {
         private OptionsCheckBox(final String txt0) {
             super(txt0);
-            this.setFont(FSkin.getBoldFont(12));
+            this.setFont(FSkin.getBoldFont());
         }
     }
 
@@ -402,7 +402,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
             super(txt0);
             this.setBorder(new FSkin.MatteSkinBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
             setHorizontalAlignment(SwingConstants.CENTER);
-            this.setFont(FSkin.getBoldFont(16));
+            this.setFont(FSkin.getRelativeBoldFont(16));
             this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         }
     }
@@ -412,7 +412,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final class NoteLabel extends SkinnedLabel {
         private NoteLabel(final String txt0) {
             super(txt0);
-            this.setFont(FSkin.getItalicFont(12));
+            this.setFont(FSkin.getItalicFont());
             this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         }
     }
@@ -436,7 +436,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         public KeyboardShortcutField(final Shortcut shortcut0) {
             super();
             this.setEditable(false);
-            this.setFont(FSkin.getFont(14));
+            this.setFont(FSkin.getRelativeFont(14));
             final FPref prefKey = shortcut0.getPrefKey();
             reload(prefKey);
 

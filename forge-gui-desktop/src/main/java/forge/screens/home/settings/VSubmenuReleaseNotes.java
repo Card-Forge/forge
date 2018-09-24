@@ -60,7 +60,7 @@ public enum VSubmenuReleaseNotes implements IVSubmenu<CSubmenuReleaseNotes> {
         tar.setEditable(false);
         tar.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        tar.setFont(FSkin.getFixedFont(16));
+        tar.setFont(FSkin.getRelativeFixedFont(16));
         tar.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         tar.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 

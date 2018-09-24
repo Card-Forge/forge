@@ -107,7 +107,7 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         sliOpponents.setSnapToTicks(true);
         sliOpponents.setOpaque(false);
         sliOpponents.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        sliOpponents.setFont(FSkin.getFont(12));
+        sliOpponents.setFont(FSkin.getFont());
 
         pnlOptions.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlOptions.add(lblOptions, "h 30px!, w 96%!, gap 2% 0 0 5px");

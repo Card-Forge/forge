@@ -191,7 +191,7 @@ public class VStack implements IVDoc<CStack> {
             setFocusable(false);
             setEditable(false);
             setLineWrap(true);
-            setFont(FSkin.getFont(12));
+            setFont(FSkin.getFont());
             setWrapStyleWord(true);
             setMinimumSize(new Dimension(CARD_WIDTH + 2 * PADDING, CARD_HEIGHT + 2 * PADDING));
 

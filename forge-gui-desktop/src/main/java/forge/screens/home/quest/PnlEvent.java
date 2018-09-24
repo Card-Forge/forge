@@ -56,11 +56,11 @@ class PnlEvent extends JPanel {
 
         // Title and description
         this.rad = new FRadioButton(event.getFullTitle());
-        this.rad.setFont(FSkin.getBoldFont(16));
+        this.rad.setFont(FSkin.getRelativeBoldFont(16));
 
         final FTextArea tarDesc = new FTextArea();
         tarDesc.setText(event.getDescription());
-        tarDesc.setFont(FSkin.getItalicFont(12));
+        tarDesc.setFont(FSkin.getItalicFont());
 
         tarDesc.addMouseListener(new MouseAdapter() {
             @Override
