@@ -8,8 +8,7 @@ SVar:TrigLoseLife:DB$ StoreSVar | References$ LifeAllButOne | SVar$ LifePaidOnET
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ LifePaidOnETB | References$ LifePaidOnETB
 SVar:LifePaidOnETB:Number$0
 SVar:LifeAllButOne:Count$YourLifeTotal/Minus.1
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME leaves the battlefield, you gain life equal to the
-life you lost when it entered the battlefield.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME leaves the battlefield, you gain life equal to the life you lost when it entered the battlefield.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ LifePaidOnETB | References$ LifePaidOnETB
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soulgorger_orgg.jpg
