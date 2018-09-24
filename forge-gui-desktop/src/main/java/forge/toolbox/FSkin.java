@@ -1201,10 +1201,7 @@ public class FSkin {
 
         // Initialize fonts
         if (onInit) { //set default font size only once onInit
-            final Font f = UIManager.getDefaults().getFont("Label.font");
-            if (f != null) {
-                defaultFontSize = f.getSize();
-            }
+            defaultFontSize = FModel.getPreferences().getPrefInt(FPref.UI_DEFAULT_FONT_SIZE);
         }
         SkinFont.setBaseFont(GuiUtils.newFont(preferredDir + ForgeConstants.FONT_FILE));
 

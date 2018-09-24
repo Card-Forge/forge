@@ -105,6 +105,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     // ComboBox items are added in CSubmenuPreferences since this is just the View.
     private final FComboBoxPanel<GameLogEntryType> cbpGameLogEntryType = new FComboBoxPanel<>("Game Log Verbosity:");
     private final FComboBoxPanel<CloseAction> cbpCloseAction = new FComboBoxPanel<>("Close Action:");
+    private final FComboBoxPanel<String> cbpDefaultFontSize = new FComboBoxPanel<>("Default Font Size:");
     private final FComboBoxPanel<String> cbpAiProfiles = new FComboBoxPanel<>("AI Personality:");
     private final FComboBoxPanel<String> cbpDisplayCurrentCardColors = new FComboBoxPanel<>("Show Detailed Card Color:");
     private final FComboBoxPanel<String> cbpAutoYieldMode = new FComboBoxPanel<>("Auto-Yield:");
@@ -257,6 +258,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         // Graphic Options
         pnlPrefs.add(new SectionLabel("Graphic Options"), sectionConstraints + ", gaptop 2%");
+
+        pnlPrefs.add(cbpDefaultFontSize, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel("The default font size within the UI. All font elements are scaled relative to this. (Needs restart)"), descriptionConstraints);
 
         pnlPrefs.add(cbImageFetcher, titleConstraints);
         pnlPrefs.add(new NoteLabel("Enables live fetching of missing card images from an online resource."), descriptionConstraints);
@@ -630,6 +634,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public FComboBoxPanel<CloseAction> getCloseActionComboBoxPanel() {
         return cbpCloseAction;
+    }
+
+    public FComboBoxPanel<String> getCbpDefaultFontSizeComboBoxPanel() {
+        return cbpDefaultFontSize;
     }
 
     public FComboBoxPanel<String> getAutoYieldModeComboBoxPanel() {
