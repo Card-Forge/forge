@@ -125,6 +125,8 @@ public enum CounterType {
 
     HEALING("HEAL", 255, 166, 236),
 
+    HIT("HIT", 255, 245, 195),
+
     HOOFPRINT("HOOF", 233, 189, 170),
 
     HOUR("HOUR", 198, 197, 210),
