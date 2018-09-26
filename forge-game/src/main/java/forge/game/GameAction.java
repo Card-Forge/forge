@@ -798,15 +798,17 @@ public class GameAction {
             public boolean visit(final Card c) {
                 // need to get Card from preList if able
                 final Card co = preList.get(c);
-                for (int i = 0; i < co.getStaticAbilities().size(); i++) {
-                    final StaticAbility stAb = co.getStaticAbilities().get(i);
+                List<StaticAbility> toRemove = Lists.newArrayList();
+                for (StaticAbility stAb : co.getStaticAbilities()) {
                     if (stAb.getMapParams().get("Mode").equals("Continuous")) {
                         staticAbilities.add(stAb);
                     }
                     if (stAb.isTemporary()) {
-                        co.removeStaticAbility(stAb);
-                        i--;
+                        toRemove.add(stAb);
                     }
+                 }
+                 for (StaticAbility stAb : toRemove) {
+                     co.removeStaticAbility(stAb);
                  }
                  if (!co.getStaticCommandList().isEmpty()) {
                      staticList.add(co);
@@ -851,8 +853,8 @@ public class GameAction {
         }
 
         for (final Card c : staticList) {
-            for (int i = 0; i < c.getStaticCommandList().size(); i++) {
-                final Object[] staticCheck = c.getStaticCommandList().get(i);
+            List<Object[]> toRemove = Lists.newArrayList();
+            for (Object[] staticCheck : c.getStaticCommandList()) {
                 final String leftVar = (String) staticCheck[0];
                 final String rightVar = (String) staticCheck[1];
                 final Card affected = (Card) staticCheck[2];
@@ -863,10 +865,12 @@ public class GameAction {
                 final int operandValue = AbilityUtils.calculateAmount(c, svarOperand, null);
                 if (Expressions.compare(sVar, svarOperator, operandValue)) {
                     ((GameCommand) staticCheck[3]).run();
-                    c.getStaticCommandList().remove(i);
-                    i--;
+                    toRemove.add(staticCheck);
                     affectedCards.add(c);
                 }
+            }
+            for (Object[] staticCheck : c.getStaticCommandList()) {
+                c.getStaticCommandList().remove(staticCheck);
             }
         }
         // Exclude cards in hidden zones from update
