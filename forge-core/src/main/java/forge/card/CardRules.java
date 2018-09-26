@@ -453,8 +453,6 @@ public final class CardRules implements ICardCharacteristics {
                             this.removedFromRandomDecks = "True".equalsIgnoreCase(value);
                         } else if ( "Picture".equals(variable) ) {
                             this.pictureUrl[this.curFace] = value;
-                        } else if ( "Rarity".equals(variable) ) {
-                            // discard that, they should supply it in SetInfo
                         } else
                             this.faces[curFace].addSVar(variable, value);
                     } else if ("SetInfo".equals(key)) {
