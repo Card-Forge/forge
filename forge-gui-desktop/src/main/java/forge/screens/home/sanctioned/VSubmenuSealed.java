@@ -193,7 +193,7 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
         final SkinnedTextPane tpnDirections = new SkinnedTextPane();
         tpnDirections.setOpaque(false);
         tpnDirections.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        tpnDirections.setFont(FSkin.getFont(15));
+        tpnDirections.setFont(FSkin.getRelativeFont(15));
         tpnDirections.setAlignmentX(SwingConstants.CENTER);
         tpnDirections.setFocusable(false);
         tpnDirections.setEditable(false);

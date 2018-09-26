@@ -859,14 +859,28 @@ public class FSkin {
     private static Map<Integer, SkinImage> avatars;
     private static Map<Integer, Font> fixedFonts = new HashMap<>();
 
+    public static Font getFixedFont() {
+        return getFixedFont(defaultFontSize);
+    }
+
     /** @return {@link java.awt.font} */
-    public static Font getFixedFont(final int size) {
+    private static Font getFixedFont(final int size) {
         Font fixedFont = fixedFonts.get(size);
         if (fixedFont == null) {
             fixedFont = new Font("Monospaced", Font.PLAIN, size);
             fixedFonts.put(size, fixedFont);
         }
         return fixedFont;
+    }
+
+    public static Font getRelativeFixedFont(final int relative) {
+        double multiplier = getMultiplier(relative);
+        return getFixedFont((int)(defaultFontSize * multiplier));
+    }
+
+    private static double getMultiplier(final int relative) {
+        // don't know of a good way to get the preference default value
+        return relative / 12.0;
     }
 
     /**
@@ -884,6 +898,11 @@ public class FSkin {
         return SkinFont.get(Font.PLAIN, size);
     }
 
+    public static SkinFont getRelativeFont(final int relative) {
+        double multiplier = getMultiplier(relative);
+        return SkinFont.get(Font.PLAIN, (int)(defaultFontSize * multiplier));
+    }
+
     /**
      * @return {@link forge.toolbox.FSkin.SkinFont}
      */
@@ -899,6 +918,11 @@ public class FSkin {
         return SkinFont.get(Font.BOLD, size);
     }
 
+    public static SkinFont getRelativeBoldFont(final int relative) {
+        double multiplier = getMultiplier(relative);
+        return SkinFont.get(Font.BOLD, (int)(defaultFontSize * multiplier));
+    }
+
     /**
      * @return {@link forge.toolbox.FSkin.SkinFont}
      */
@@ -912,6 +936,11 @@ public class FSkin {
      */
     public static SkinFont getItalicFont(final int size) {
         return SkinFont.get(Font.ITALIC, size);
+    }
+
+    public static SkinFont getRelativeItalicFont(final int relative) {
+        double multiplier = getMultiplier(relative);
+        return SkinFont.get(Font.ITALIC, (int)(defaultFontSize * multiplier));
     }
 
     public static void setGraphicsFont(final Graphics g, final SkinFont skinFont) {
@@ -1172,10 +1201,7 @@ public class FSkin {
 
         // Initialize fonts
         if (onInit) { //set default font size only once onInit
-            final Font f = UIManager.getDefaults().getFont("Label.font");
-            if (f != null) {
-                defaultFontSize = f.getSize();
-            }
+            defaultFontSize = FModel.getPreferences().getPrefInt(FPref.UI_DEFAULT_FONT_SIZE);
         }
         SkinFont.setBaseFont(GuiUtils.newFont(preferredDir + ForgeConstants.FONT_FILE));
 

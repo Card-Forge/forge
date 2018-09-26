@@ -59,7 +59,7 @@ public class LimitedWinLose extends ControlWinLose {
                 TitleLabel lblTemp1 = new TitleLabel(title);
                 SkinnedLabel lblTemp2 = new SkinnedLabel(message);
                 lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
-                lblTemp2.setFont(FSkin.getFont(17));
+                lblTemp2.setFont(FSkin.getRelativeFont(17));
                 lblTemp2.setForeground(FORE_COLOR);
                 lblTemp2.setIconTextGap(50);
                 getView().getPnlCustom().add(lblTemp1, LimitedWinLose.CONSTRAINTS_TITLE);
@@ -136,7 +136,7 @@ public class LimitedWinLose extends ControlWinLose {
     private class TitleLabel extends SkinnedLabel {
         TitleLabel(final String msg) {
             super(msg);
-            setFont(FSkin.getFont(18));
+            setFont(FSkin.getRelativeFont(18));
             setPreferredSize(new Dimension(200, 40));
             setHorizontalAlignment(SwingConstants.CENTER);
             setForeground(FORE_COLOR);

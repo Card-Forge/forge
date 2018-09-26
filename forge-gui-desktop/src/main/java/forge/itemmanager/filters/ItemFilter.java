@@ -27,7 +27,7 @@ public abstract class ItemFilter<T extends InventoryItem> {
 
     public static void layoutCheckbox(SkinnedCheckBox cb) {
         cb.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        cb.setFont(FSkin.getFont(12));
+        cb.setFont(FSkin.getFont());
         cb.setOpaque(false);
         cb.setFocusable(false);
     }
