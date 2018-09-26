@@ -39,51 +39,8 @@ public class LandAbility extends Ability {
     public boolean canPlay() {
         final Card land = this.getHostCard();
         final Player p = this.getActivatingPlayer();
-        final Game game = p.getGame();
-        if (!p.canCastSorcery()) {
-            return false;
-        }
 
-        // CantBeCast static abilities
-        for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
-            final Iterable<StaticAbility> staticAbilities = ca.getStaticAbilities();
-            for (final StaticAbility stAb : staticAbilities) {
-                if (stAb.applyAbility("CantPlayLand", land, this)) {
-                    return false;
-                }
-            }
-        }
-
-        if (land != null) {
-            final boolean mayPlay = getMayPlay() != null;
-            if (land.getOwner() != p && !mayPlay) {
-                return false;
-            }
-
-            final Zone zone = game.getZoneOf(land);
-            if (zone != null && (zone.is(ZoneType.Battlefield) || (!zone.is(ZoneType.Hand) && !mayPlay))) {
-                return false;
-            }
-        }
-
-        // **** Check for land play limit per turn ****
-        // Dev Mode
-        if (p.getController().canPlayUnlimitedLands() || p.hasKeyword("You may play any number of additional lands on each of your turns.")) {
-            return true;
-        }
-
-        // check for adjusted max lands play per turn
-        int adjMax = 1;
-        for (String keyword : p.getKeywords()) {
-            if (keyword.startsWith("AdjustLandPlays")) {
-                final String[] k = keyword.split(":");
-                adjMax += Integer.valueOf(k[1]);
-            }
-        }
-        if (p.getLandsPlayedThisTurn() < adjMax) {
-            return true;
-        }
-        return false;
+        return p.canPlayLand(land);
     }
     @Override
     public void resolve() {
