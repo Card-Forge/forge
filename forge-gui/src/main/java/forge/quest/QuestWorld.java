@@ -39,6 +39,7 @@ public class QuestWorld implements Comparable<QuestWorld>{
     private final String name;
     private final String dir;
     private final GameFormatQuest format;
+    public static final String STANDARDWORLDNAME = "Random Standard";
 
     private boolean isCustom;
 
@@ -185,6 +186,12 @@ public class QuestWorld implements Comparable<QuestWorld>{
 
             if (!sets.isEmpty() || !bannedCards.isEmpty()) {
                 useFormat = new GameFormatQuest(useName, sets, bannedCards);
+            }
+
+            if (useName.equalsIgnoreCase(QuestWorld.STANDARDWORLDNAME)){
+                useFormat = new GameFormatQuest(QuestWorld.STANDARDWORLDNAME,
+                        FModel.getFormats().getStandard().getAllowedSetCodes(),
+                        FModel.getFormats().getStandard().getBannedCardNames(),false);
             }
 
             // System.out.println("Creating quest world " + useName + " (index " + useIdx + ", dir: " + useDir);

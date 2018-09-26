@@ -62,7 +62,7 @@ public class QuestController {
     /** The decks. */
     private transient IStorage<Deck> decks;
 
-    private QuestEventDuelManager duelManager = null;
+    private QuestEventDuelManagerInterface duelManager = null;
     private IStorage<QuestEventChallenge> allChallenges = null;
 
     private QuestBazaarManager bazaar = null;
@@ -405,7 +405,7 @@ public class QuestController {
      *
      * @return the event manager
      */
-    public QuestEventDuelManager getDuelsManager() {
+    public QuestEventDuelManagerInterface getDuelsManager() {
         if (this.duelManager == null) {
             resetDuelsManager();
         }
@@ -431,6 +431,10 @@ public class QuestController {
     public void resetDuelsManager() {
         QuestWorld world = getWorld();
         String path;
+        if(world.getName().equals(QuestWorld.STANDARDWORLDNAME)){
+            this.duelManager = new QuestEventLDADuelManager();
+            return;
+        }
         if (world == null || !world.isCustom()){
             path = world == null || world.getDuelsDir() == null ? ForgeConstants.DEFAULT_DUELS_DIR : ForgeConstants.QUEST_WORLD_DIR + world.getDuelsDir();
         }else{
@@ -451,6 +455,10 @@ public class QuestController {
     public void resetChallengesManager() {
         QuestWorld world = getWorld();
         String path;
+        if (world.getName().equals(QuestWorld.STANDARDWORLDNAME)){
+            allChallenges = QuestChallengeGenerator.generateChallenges();
+            return;
+        }
         if (world == null || !world.isCustom()){
             path = world == null || world.getChallengesDir() == null ? ForgeConstants.DEFAULT_CHALLENGES_DIR : ForgeConstants.QUEST_WORLD_DIR + world.getChallengesDir();
         }else{
