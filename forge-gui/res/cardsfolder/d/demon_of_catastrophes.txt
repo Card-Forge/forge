@@ -4,5 +4,5 @@ Types:Creature Demon
 PT:6/6
 K:Flying
 K:Trample
-SVar:FullCost:2 B B Sac<1/Creature> 
+A:SP$ PermanentCreature | Cost$ 2 B B Sac<1/Creature>
 Oracle:As an additional cost to cast this spell, sacrifice a creature\n Flying, trample
