@@ -1483,22 +1483,24 @@ public class AiController {
         
         boolean hasLeyline1 = false;
         SpellAbility saGemstones = null;
-        
-        for(int i = 0; i < result.size(); i++) {
-            SpellAbility sa = result.get(i);
-            
+
+        List<SpellAbility> toRemove = Lists.newArrayList();
+        for(SpellAbility sa : result) {
             String srcName = sa.getHostCard().getName();
             if ("Gemstone Caverns".equals(srcName)) {
                 if (saGemstones == null)
                     saGemstones = sa;
                 else
-                    result.remove(i--);
+                    toRemove.add(sa);
             } else if ("Leyline of Singularity".equals(srcName)) {
                 if (!hasLeyline1)
                     hasLeyline1 = true;
                 else
-                    result.remove(i--);
+                    toRemove.add(sa);
             }
+        }
+        for(SpellAbility sa : toRemove) {
+            result.remove(sa);
         }
         
         // Play them last

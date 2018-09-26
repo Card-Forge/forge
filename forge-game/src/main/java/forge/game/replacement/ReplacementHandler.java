@@ -309,12 +309,14 @@ public class ReplacementHandler {
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
             public boolean visit(Card c) {
-                for (int i = 0; i < c.getReplacementEffects().size(); i++) {
-                    ReplacementEffect rep = c.getReplacementEffects().get(i);
+                List<ReplacementEffect> toRemove = Lists.newArrayList();
+                for (ReplacementEffect rep : c.getReplacementEffects()) {
                     if (rep.isTemporary()) {
-                        c.removeReplacementEffect(rep);
-                        i--;
+                        toRemove.add(rep);
                     }
+                }
+                for (ReplacementEffect rep : toRemove) {
+                    c.removeReplacementEffect(rep);
                 }
                 return true;
             }
