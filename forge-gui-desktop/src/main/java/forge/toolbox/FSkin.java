@@ -874,13 +874,17 @@ public class FSkin {
     }
 
     public static Font getRelativeFixedFont(final int relative) {
-        double multiplier = getMultiplier(relative);
-        return getFixedFont((int)(defaultFontSize * multiplier));
+        return getFixedFont(getRelativeFontSize(relative));
     }
 
     private static double getMultiplier(final int relative) {
         // don't know of a good way to get the preference default value
         return relative / 12.0;
+    }
+
+    public static Integer getRelativeFontSize(final int relative) {
+        double multiplier = getMultiplier(relative);
+        return (int)(defaultFontSize * multiplier);
     }
 
     /**
@@ -899,8 +903,7 @@ public class FSkin {
     }
 
     public static SkinFont getRelativeFont(final int relative) {
-        double multiplier = getMultiplier(relative);
-        return SkinFont.get(Font.PLAIN, (int)(defaultFontSize * multiplier));
+        return SkinFont.get(Font.PLAIN, getRelativeFontSize(relative));
     }
 
     /**
@@ -919,8 +922,7 @@ public class FSkin {
     }
 
     public static SkinFont getRelativeBoldFont(final int relative) {
-        double multiplier = getMultiplier(relative);
-        return SkinFont.get(Font.BOLD, (int)(defaultFontSize * multiplier));
+        return SkinFont.get(Font.BOLD, getRelativeFontSize(relative));
     }
 
     /**
@@ -939,8 +941,7 @@ public class FSkin {
     }
 
     public static SkinFont getRelativeItalicFont(final int relative) {
-        double multiplier = getMultiplier(relative);
-        return SkinFont.get(Font.ITALIC, (int)(defaultFontSize * multiplier));
+        return SkinFont.get(Font.ITALIC, getRelativeFontSize(relative));
     }
 
     public static void setGraphicsFont(final Graphics g, final SkinFont skinFont) {

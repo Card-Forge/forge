@@ -85,13 +85,16 @@ public class CardDetailPanel extends SkinnedPanel {
         setInfoLabel = new JLabel();
         setInfoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        final Font font = new Font("Dialog", 0, 14);
+        final Integer fontSizeR12 = FSkin.getRelativeFontSize(12);
+        final Integer fontSizeR14 = FSkin.getRelativeFontSize(14);
+        final Font font = new Font("Dialog", 0, fontSizeR14);
         nameCostLabel.setFont(font);
         typeLabel.setFont(font);
         idLabel.setFont(font);
         powerToughnessLabel.setFont(font);
 
         cdArea = new FHtmlViewer();
+        cdArea.setFont(new Font("Dialog", 0, fontSizeR12));
         cdArea.setBorder(new EmptyBorder(2, 6, 2, 6));
         cdArea.setOpaque(false);
         scrArea = new FScrollPane(cdArea, false);
