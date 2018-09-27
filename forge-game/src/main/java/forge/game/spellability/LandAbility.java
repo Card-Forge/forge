@@ -17,13 +17,10 @@
  */
 package forge.game.spellability;
 
-import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
-import forge.game.zone.Zone;
-import forge.game.zone.ZoneType;
 
 public class LandAbility extends Ability {
 
@@ -33,7 +30,7 @@ public class LandAbility extends Ability {
         setMayPlay(mayPlay);
     }
     public LandAbility(Card sourceCard) {
-        this(sourceCard, sourceCard.getController(), (StaticAbility)null);
+        this(sourceCard, sourceCard.getController(), null);
     }
     @Override
     public boolean canPlay() {
