@@ -1,0 +1,7 @@
+Name:Mnemonic Betrayal
+ManaCost:1 U B
+Types:Sorcery
+A:SP$ ChangeZoneAll | Cost$ 1 U B | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile all card from all opponents' graveyards. You may cast those cards this turn, and you may spend it as though it were mana of any type to cast those spells. At the beginning of the next end step, if any of those cards remain exiled, return them to their owner's graveyards. Exile CARDNAME.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ EffSModeContinuous | RememberObjects$ Remembered | SubAbility$ DBShuffle
+SVar:EffSModeContinuous:Mode$ Continuous | EffectZone$ Command
+Oracle:Exile all card from all opponents' graveyards. You may cast those cards this turn, and you may spend mana as though it were mana of any type to cast those spells. At the beginning of the next end step, if any of those cards remain exiled, return them to their owner's graveyards.\nExile Mnemonic Betrayal.

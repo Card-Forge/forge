@@ -1,0 +1,17 @@
+Name:Discovery
+ManaCost:1 U/B
+Types:Sorcery // Instant
+AlternateMode:Split
+A:SP$ Surveil | Cost$ 1 U/B | Amount$ 2 | SubAbility$ DBDraw | SpellDescription$ Surveil 2, then draw two cards. CARDNAME deals 2 damage to you.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+
+Oracle:Surveil 2, then draw a card. (To surveil 2, look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+
+ALTERNATE
+
+Name:Dispersal
+ManaCost:3 U B
+Types:Instant
+A:SP$ RepeatEach | Cost$ 3 U B | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ TrigChangeZone | AILogic$ AllPlayerLoseLife | SpellDescription$ Each opponent returns a nonland permanent they control with the highest converted mana cost among permanents they control to its owner's hand, then discards a card.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ChangeType$ Permanent | DefinedPlayer$ TriggeredPlayer | ChangeNum$ 1 | Hidden$ True | Mandatory$ True
+Oracle:Each opponent returns a nonland permanent they control with the highest converted mana cost among permanents they control to its owner's hand, then discards a card.

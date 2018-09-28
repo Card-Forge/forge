@@ -1,0 +1,9 @@
+Name:Plaguecrafter
+ManaCost:2 B
+Types:Creature Human Shaman
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ RepeatEach | TriggerDescription$ When CARDNAME enters the battlefield, each player sacrifices a creature or planeswalker. Each player who can't discards a card.
+SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ TrigSac
+SVar:TrigSac:DB$ Sacrifice | Defined$ Player | SacValid$ Creature,Planeswalker | SacMessage$ Creature or Planeswalker | SubAbility$ Discard
+SVar:Discard:DB$ Discard | Mode$ TgtChoose | NumCards$ 1 | Defined$ Player.IsRemembered | SubAbility$ DBCleanup
+Oracle:When Plaguecrafter enters the battlefield, each player sacrifices a creature or planeswalker. Each player who can't discards a card.
