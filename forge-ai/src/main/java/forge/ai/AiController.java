@@ -422,7 +422,8 @@ public class AiController {
                         }
                     }
                 }
-                return true;
+
+                return player.canPlayLand(c);
             }
         });
         return landList;
@@ -1174,7 +1175,7 @@ public class AiController {
         if (landsWannaPlay != null) {
             landsWannaPlay = filterLandsToPlay(landsWannaPlay);
             Log.debug("Computer " + game.getPhaseHandler().getPhase().nameForUi);
-            if (landsWannaPlay != null && !landsWannaPlay.isEmpty() && player.canPlayLand(null)) {
+            if (landsWannaPlay != null && !landsWannaPlay.isEmpty()) {
                 // TODO search for other land it might want to play?
                 Card land = chooseBestLandToPlay(landsWannaPlay);
                 if (ComputerUtil.getDamageFromETB(player, land) < player.getLife() || !player.canLoseLife() 
