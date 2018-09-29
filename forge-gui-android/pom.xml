@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <properties>
@@ -35,28 +36,6 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.0.0</version>
-                <executions>
-                    <execution>
-                        <id>checkstyle-validation</id>
-                        <phase>validate</phase>
-                        <configuration>
-                            <configLocation>../checkstyle.xml</configLocation>
-                            <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                            <encoding>UTF-8</encoding>
-                            <consoleOutput>true</consoleOutput>
-                            <failsOnError>true</failsOnError>
-                            <failOnViolation>true</failOnViolation>
-                        </configuration>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
         <resources>
@@ -236,7 +215,7 @@
                                 <inherited>true</inherited>
                                 <configuration>
                                     <removeExistingSignatures>true</removeExistingSignatures>
-                                    <archiveDirectory />
+                                    <archiveDirectory/>
                                     <includes>
                                         <include>${project.build.directory}/${project.build.finalName}.apk</include>
                                     </includes>
@@ -299,22 +278,29 @@
                                 <configuration>
                                     <target>
                                         <copy todir="${project.build.directory}/res">
-                                            <fileset dir="${basedir}/../forge-gui/" includes="LICENSE.txt" />
-                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="CONTRIBUTORS.txt" />
-                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="INSTALLATION.txt" />
-                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="ISSUES.txt" />
-                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="CHANGES.txt" />
-                                            <fileset dir="${basedir}/../forge-gui/" includes="MANUAL.txt" />
-                                            <fileset dir="${basedir}/../forge-gui-mobile-dev/" includes="sentry.properties" />
+                                            <fileset dir="${basedir}/../forge-gui/" includes="LICENSE.txt"/>
+                                            <fileset dir="${basedir}/../forge-gui/release-files/"
+                                                     includes="CONTRIBUTORS.txt"/>
+                                            <fileset dir="${basedir}/../forge-gui/release-files/"
+                                                     includes="INSTALLATION.txt"/>
+                                            <fileset dir="${basedir}/../forge-gui/release-files/"
+                                                     includes="ISSUES.txt"/>
+                                            <fileset dir="${basedir}/../forge-gui/release-files/"
+                                                     includes="CHANGES.txt"/>
+                                            <fileset dir="${basedir}/../forge-gui/" includes="MANUAL.txt"/>
+                                            <fileset dir="${basedir}/../forge-gui-mobile-dev/"
+                                                     includes="sentry.properties"/>
                                             <fileset dir="${basedir}/../forge-gui/">
-                                                <include name="res/**" />
-                                                <exclude name="res/cardsfolder/**" />
+                                                <include name="res/**"/>
+                                                <exclude name="res/cardsfolder/**"/>
                                             </fileset>
                                         </copy>
-                                        <mkdir dir="${project.build.directory}/res/res/cardsfolder" />
-                                        <zip destfile="${project.build.directory}/res/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/../forge-gui/res/cardsfolder" level="1" />
-                                        <zip destfile="${project.build.directory}/assets.zip" basedir="${project.build.directory}/res" level="1" />
-                                        <delete dir="${project.build.directory}/res" />
+                                        <mkdir dir="${project.build.directory}/res/res/cardsfolder"/>
+                                        <zip destfile="${project.build.directory}/res/res/cardsfolder/cardsfolder.zip"
+                                             basedir="${basedir}/../forge-gui/res/cardsfolder" level="1"/>
+                                        <zip destfile="${project.build.directory}/assets.zip"
+                                             basedir="${project.build.directory}/res" level="1"/>
+                                        <delete dir="${project.build.directory}/res"/>
                                     </target>
                                 </configuration>
                                 <goals>
@@ -360,16 +346,22 @@
                                 <phase>package</phase>
                                 <configuration>
                                     <target>
-                                        <ftp action="mkdir" password="${cardforge.pass}" server="${cardforge.server}" userid="${cardforge.user}" passive="true" remotedir="maven/releases/forge/forge-gui-android/${alpha-version}/" />
-                                        <ftp password="${cardforge.pass}" server="${cardforge.server}" userid="${cardforge.user}" passive="true" remotedir="maven/releases/forge/forge-gui-android/${alpha-version}/">
+                                        <ftp action="mkdir" password="${cardforge.pass}" server="${cardforge.server}"
+                                             userid="${cardforge.user}" passive="true"
+                                             remotedir="maven/releases/forge/forge-gui-android/${alpha-version}/"/>
+                                        <ftp password="${cardforge.pass}" server="${cardforge.server}"
+                                             userid="${cardforge.user}" passive="true"
+                                             remotedir="maven/releases/forge/forge-gui-android/${alpha-version}/">
                                             <fileset dir="${project.build.directory}">
-                                                <include name="${project.build.finalName}-signed-aligned.apk" />
-                                                <include name="assets.zip" />
+                                                <include name="${project.build.finalName}-signed-aligned.apk"/>
+                                                <include name="assets.zip"/>
                                             </fileset>
                                         </ftp>
-                                        <ftp password="${cardforge.pass}" server="${cardforge.server}" userid="${cardforge.user}" passive="true" remotedir="maven/releases/forge/forge-gui-android/">
+                                        <ftp password="${cardforge.pass}" server="${cardforge.server}"
+                                             userid="${cardforge.user}" passive="true"
+                                             remotedir="maven/releases/forge/forge-gui-android/">
                                             <fileset dir="${project.build.directory}/classes">
-                                                <include name="version.txt" />
+                                                <include name="version.txt"/>
                                             </fileset>
                                         </ftp>
                                     </target>
