@@ -96,6 +96,10 @@ public class KeywordCollection implements Iterable<String>, Serializable {
         return result;
     }
 
+    public boolean remove(KeywordInterface keyword) {
+        return map.remove(keyword.getKeyword(), keyword);
+    }
+
     public boolean removeAll(Iterable<String> keywords) {
         boolean result = false;
         for (String k : keywords) {

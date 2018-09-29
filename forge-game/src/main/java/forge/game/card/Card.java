@@ -3640,6 +3640,12 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
     }
 
+    public final void removeIntrinsicKeyword(final KeywordInterface s) {
+        if (currentState.removeIntrinsicKeyword(s)) {
+            currentState.getView().updateKeywords(this, currentState);
+        }
+    }
+
     public Collection<KeywordInterface> getExtrinsicKeyword() {
         return extrinsicKeyword.getValues();
     }

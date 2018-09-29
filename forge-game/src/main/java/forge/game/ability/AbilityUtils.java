@@ -1724,12 +1724,18 @@ public class AbilityUtils {
     }
 
     private static final String applyTextChangeEffects(final String def, final Card card, final boolean isDescriptive) {
+        return applyTextChangeEffects(def, isDescriptive,
+                card.getChangedTextColorWords(), card.getChangedTextTypeWords());
+    }
+
+    public static final String applyTextChangeEffects(final String def, final boolean isDescriptive,
+            Map<String,String> colorMap, Map<String,String> typeMap) {
         if (StringUtils.isEmpty(def)) {
             return def;
         }
 
         String replaced = def;
-        for (final Entry<String, String> e : card.getChangedTextColorWords().entrySet()) {
+        for (final Entry<String, String> e : colorMap.entrySet()) {
             final String key = e.getKey();
             String value;
             if (key.equals("Any")) {
@@ -1750,7 +1756,7 @@ public class AbilityUtils {
                 replaced = replaced.replaceAll("(?<!>)" + key, value);
             }
         }
-        for (final Entry<String, String> e : card.getChangedTextTypeWords().entrySet()) {
+        for (final Entry<String, String> e : typeMap.entrySet()) {
             final String key = e.getKey();
             final String pkey = CardType.getPluralType(key);
             final String pvalue = getReplacedText(pkey, CardType.getPluralType(e.getValue()), isDescriptive);
