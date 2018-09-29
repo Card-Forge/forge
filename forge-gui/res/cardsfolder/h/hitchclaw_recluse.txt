@@ -1,0 +1,7 @@
+Name:Hitchclaw Recluse
+ManaCost:2 G
+Types:Creature Spider
+PT:1/4
+K:Reach
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hitchclaw_recluse.jpg
+Oracle:Reach (This creature can block creatures with flying.)
