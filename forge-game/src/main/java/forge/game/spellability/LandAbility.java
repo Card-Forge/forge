@@ -37,7 +37,7 @@ public class LandAbility extends Ability {
         final Card land = this.getHostCard();
         final Player p = this.getActivatingPlayer();
 
-        return p.canPlayLand(land);
+        return p.canPlayLand(land, false, this);
     }
     @Override
     public void resolve() {

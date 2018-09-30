@@ -1751,6 +1751,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         return canPlayLand(land, false);
     }
     public final boolean canPlayLand(final Card land, final boolean ignoreZoneAndTiming) {
+        return canPlayLand(land, ignoreZoneAndTiming, null);
+    }
+    public final boolean canPlayLand(final Card land, final boolean ignoreZoneAndTiming, SpellAbility landSa) {
         if (!ignoreZoneAndTiming && !canCastSorcery()) {
             return false;
         }
@@ -1766,7 +1769,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         if (land != null && !ignoreZoneAndTiming) {
-            final boolean mayPlay = !land.mayPlay(this).isEmpty();
+            final boolean mayPlay = landSa == null ? !land.mayPlay(this).isEmpty() : landSa.getMayPlay() != null;
             if (land.getOwner() != this && !mayPlay) {
                 return false;
             }
