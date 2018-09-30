@@ -1,9 +1,8 @@
 Name:Glaive of the Guildpact
 ManaCost:2
 Types:Artifact Equipment
+K:Equip:3
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ X | AddKeyword$ Vigilance & Menace | Description$ Equipped creature gets +1/+0 for each Gate you control and has vigilance and menace.
-SVar:X:Count$Valid Gate.YouCtrl
-S:Mode$ Continuous | Affected$ Gate.YouCtrl | AddPower$ X | AddKeyword$ Vigilance & Menace | Description$ Equipped creature gets +1/+0 for each Gate you control and has vigilance and menace.
 SVar:X:Count$Valid Gate.YouCtrl
 SVar:BuffedBy:Gate
 DeckHints:Type$Gate
