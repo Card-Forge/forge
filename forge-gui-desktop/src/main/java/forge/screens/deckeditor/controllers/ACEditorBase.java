@@ -257,7 +257,11 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     public abstract DeckController<TModel> getDeckController();
 
     protected Deck getHumanDeck() {
-        return getDeckController().getModel().getHumanDeck();
+        try {
+            return getDeckController().getModel().getHumanDeck();
+        } catch (NullPointerException ex) {
+            return null;
+        }
     }
 
     /**
