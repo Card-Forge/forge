@@ -169,11 +169,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         if (!desc.contains("ABILITY")) {
             return desc;
         }
-        SpellAbility sa = getOverridingAbility();
-        if (sa == null && this.mapParams.containsKey("Execute")) {
-            sa = AbilityFactory.getAbility(state, this.mapParams.get("Execute"));
-            setOverridingAbility(sa);
-        }
+        SpellAbility sa = ensureAbility();
 
         return replaceAbilityText(desc, sa);
         
@@ -582,5 +578,49 @@ public abstract class Trigger extends TriggerReplacementBase {
         } catch (final Exception ex) {
             throw new RuntimeException("Trigger : clone() error, " + ex);
         }
+    }
+
+
+    /* (non-Javadoc)
+     * @see forge.game.CardTraitBase#changeText()
+     */
+    @Override
+    public void changeText() {
+        if (!isIntrinsic()) {
+            return;
+        }
+        super.changeText();
+
+        ensureAbility();
+
+        if (getOverridingAbility() != null) {
+            getOverridingAbility().changeText();
+        }
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.CardTraitBase#changeTextIntrinsic(java.util.Map, java.util.Map)
+     */
+    @Override
+    public void changeTextIntrinsic(Map<String, String> colorMap, Map<String, String> typeMap) {
+        if (!isIntrinsic()) {
+            return;
+        }
+        super.changeTextIntrinsic(colorMap, typeMap);
+
+        ensureAbility();
+
+        if (getOverridingAbility() != null) {
+            getOverridingAbility().changeTextIntrinsic(colorMap, typeMap);
+        }
+    }
+
+    private SpellAbility ensureAbility() {
+        SpellAbility sa = getOverridingAbility();
+        if (sa == null && hasParam("Execute")) {
+            sa = AbilityFactory.getAbility(getHostCard(), getParam("Execute"));
+            setOverridingAbility(sa);
+        }
+        return sa;
     }
 }

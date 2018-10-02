@@ -1709,6 +1709,31 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
     }
 
+    /* (non-Javadoc)
+     * @see forge.game.CardTraitBase#changeTextIntrinsic(java.util.Map, java.util.Map)
+     */
+    @Override
+    public void changeTextIntrinsic(Map<String, String> colorMap, Map<String, String> typeMap) {
+        super.changeTextIntrinsic(colorMap, typeMap);
+
+        if (subAbility != null) {
+            // if the parent of the subability is not this,
+            // then there might be a loop
+            if (subAbility.getParent() == this) {
+                subAbility.changeTextIntrinsic(colorMap, typeMap);
+            }
+        }
+        for (AbilitySub sa : additionalAbilities.values()) {
+            sa.changeTextIntrinsic(colorMap, typeMap);
+        }
+
+        for (List<AbilitySub> list : additionalAbilityLists.values()) {
+            for (AbilitySub sa : list) {
+                sa.changeTextIntrinsic(colorMap, typeMap);
+            }
+        }
+    }
+
     @Override
     public void setIntrinsic(boolean i) {
         super.setIntrinsic(i);
