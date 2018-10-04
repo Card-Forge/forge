@@ -1280,7 +1280,12 @@ public class CardProperty {
                 FCollectionView<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], null);
                 cards = CardLists.filterControlledBy(cards, p);
             }
-            cards = CardLists.getType(cards, prop);
+
+            if ("NonLandPermanent".equals(prop)) {
+                cards = CardLists.filter(cards, CardPredicates.Presets.NONLAND_PERMANENTS);
+            } else {
+                cards = CardLists.getType(cards, prop);
+            }
             cards = CardLists.getCardsWithHighestCMC(cards);
             if (!cards.contains(card)) {
                 return false;
