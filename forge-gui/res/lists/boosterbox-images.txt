@@ -39,6 +39,7 @@ https://downloads.cardforge.org/images/products/boosterboxes/FEM.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/FRF.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/FUT.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/GPT.jpg
+https://downloads.cardforge.org/images/products/boosterboxes/GRN.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/GTC.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/HML.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/HOU.jpg
