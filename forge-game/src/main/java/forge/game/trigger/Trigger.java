@@ -37,6 +37,7 @@ import java.util.*;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
 import forge.util.TextUtil;
 
 /**
@@ -334,7 +335,22 @@ public abstract class Trigger extends TriggerReplacementBase {
                 return false;
             }
         }
-        
+
+        if (this.mapParams.containsKey("TriggerRememberedInZone")) {
+            // check delayed trigger remembered objects (Mnemonic Betrayal)
+            // make this check more general if possible
+            boolean bFlag = true;
+            for (Object o : getTriggerRemembered()) {
+                if (o instanceof Card && ((Card) o).isInZone(ZoneType.smartValueOf(this.mapParams.get("TriggerRememberedInZone")))) {
+                    bFlag = false;
+                    break;
+                }
+            }
+            if (bFlag) {
+                return false;
+            }
+        }
+
         if ( !meetsCommonRequirements(this.mapParams))
             return false;
 
