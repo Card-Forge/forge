@@ -666,7 +666,7 @@ public class PhaseHandler implements java.io.Serializable {
 
         combat.removeAbsentCombatants();
 
-        combat.fireTriggersForUnblockedAttackers();
+        combat.fireTriggersForUnblockedAttackers(game);
 
         final List<Card> declaredBlockers = combat.getAllBlockers();
         if (!declaredBlockers.isEmpty()) {

@@ -613,22 +613,35 @@ public class Combat {
     }
     
     // Call this method right after turn-based action of declare blockers has been performed
-    public final void fireTriggersForUnblockedAttackers() {
+    public final void fireTriggersForUnblockedAttackers(final Game game) {
+        boolean bFlag = false;
+        List<GameEntity> defenders = Lists.newArrayList();
         for (AttackingBand ab : attackedByBands.values()) {
             Collection<Card> blockers = blockedBands.get(ab);
             boolean isBlocked = blockers != null && !blockers.isEmpty();
             ab.setBlocked(isBlocked);
 
             if (!isBlocked) {
+                bFlag = true;
+                defenders.add(getDefenderByAttacker(ab));
                 for (Card attacker : ab.getAttackers()) {
                     // Run Unblocked Trigger
                     final Map<String, Object> runParams = Maps.newHashMap();
                     runParams.put("Attacker", attacker);
                     runParams.put("Defender",getDefenderByAttacker(attacker));
                     runParams.put("DefendingPlayer", getDefenderPlayerByAttacker(attacker));
-                    attacker.getGame().getTriggerHandler().runTrigger(TriggerType.AttackerUnblocked, runParams, false);
+                    game.getTriggerHandler().runTrigger(TriggerType.AttackerUnblocked, runParams, false);
                 }
             }
+        }
+        if (bFlag) {
+            // triggers for Coveted Jewel
+            // currently there is only one attacking player
+            // should be updated when two-headed-giant is done
+            final Map<String, Object> runParams = Maps.newHashMap();
+            runParams.put("AttackingPlayer", getAttackingPlayer());
+            runParams.put("Defenders", defenders);
+            game.getTriggerHandler().runTrigger(TriggerType.AttackerUnblockedOnce, runParams, false);
         }
     }
 
