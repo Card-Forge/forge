@@ -237,6 +237,7 @@ public class CostAdjustment {
                 }
             }
             if (sa.getHostCard().hasKeyword(Keyword.CONVOKE)) {
+                sa.getHostCard().clearConvoked();
                 adjustCostByConvokeOrImprovise(cost, sa, false, test);
             }
             if (sa.getHostCard().hasKeyword(Keyword.IMPROVISE)) {
@@ -270,6 +271,9 @@ public class CostAdjustment {
             cost.decreaseShard(conv.getValue(), 1);
             if (!test) {
                 conv.getKey().tap();
+                if (!improvise) {
+                    sa.getHostCard().addConvoked(conv.getKey());
+                }
             }
         }
     }

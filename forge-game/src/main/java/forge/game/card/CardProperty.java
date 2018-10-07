@@ -1378,6 +1378,10 @@ public class CardProperty {
             if (!source.getDelved().contains(card)) {
                 return false;
             }
+        } else if (property.startsWith("convoked")) {
+            if (!source.getConvoked().contains(card)) {
+                return false;
+            }
         } else if (property.startsWith("unequalPT")) {
             if (card.getNetPower() == card.getNetToughness()) {
                 return false;

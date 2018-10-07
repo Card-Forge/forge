@@ -428,6 +428,7 @@ public class GameAction {
         if (!c.isToken() && !toBattlefield) {
             copied.clearDevoured();
             copied.clearDelved();
+            copied.clearConvoked();
         }
 
         // rule 504.6: reveal a face-down card leaving the stack 
