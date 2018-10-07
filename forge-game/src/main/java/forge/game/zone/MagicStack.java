@@ -42,6 +42,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
@@ -362,6 +363,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams.put("CastSA", si.getSpellAbility(true));
             runParams.put("CastSACMC", si.getSpellAbility(true).getHostCard().getCMC());
             runParams.put("CurrentStormCount", thisTurnCast.size());
+            runParams.put("CurrentCastSpells", new CardCollection(thisTurnCast));
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
 
             // Run SpellCast triggers
