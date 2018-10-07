@@ -8,6 +8,7 @@ import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
@@ -123,7 +124,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 }
             } else {// Precursor Golem, Ink-Treader Nephilim
                 final String type = sa.getParam("CopyForEachCanTarget");
-                List<Card> valid = Lists.newArrayList();
+                CardCollection valid = new CardCollection();
                 List<Player> players = Lists.newArrayList();
                 Player originalTargetPlayer = Iterables.getFirst(getTargetPlayers(chosenSA), null);
                 for (final GameEntity o : candidates) {
@@ -142,10 +143,17 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 Card originalTarget = Iterables.getFirst(getTargetCards(chosenSA), null);
                 valid.remove(originalTarget);
                 mayChooseNewTargets = false;
-                for (final Card c : valid) {
+                if (sa.hasParam("ChooseOnlyOne")) {
+                    Card choice = controller.getController().chooseSingleEntityForEffect(valid, sa, "Choose one");
                     SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(card, chosenSA.getHostCard(), chosenSA, true);
-                    resetFirstTargetOnCopy(copy, c, targetedSA);
+                    resetFirstTargetOnCopy(copy, choice, targetedSA);
                     copies.add(copy);
+                } else {
+                   for (final Card c : valid) {
+                        SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(card, chosenSA.getHostCard(), chosenSA, true);
+                        resetFirstTargetOnCopy(copy, c, targetedSA);
+                        copies.add(copy);
+                   }
                 }
                 for (final Player p : players) {
                     SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(card, chosenSA.getHostCard(), chosenSA, true);
