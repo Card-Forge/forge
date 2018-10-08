@@ -17,14 +17,8 @@
  */
 package forge.player;
 
-import java.util.Collections;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
-
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.MagicColor;
@@ -38,16 +32,17 @@ import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.cost.CostPayment;
 import forge.game.keyword.KeywordInterface;
+import forge.game.mana.ManaConversionService;
 import forge.game.mana.ManaPool;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
-import forge.game.spellability.AbilityActivated;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.Spell;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
+import forge.game.spellability.*;
 import forge.game.zone.Zone;
 import forge.util.collect.FCollection;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Collections;
+import java.util.Map;
 
 /**
  * <p>
@@ -81,6 +76,7 @@ public class HumanPlaySpellAbility {
         final Card c = ability.getHostCard();
         final CardPlayOption option = c.mayPlay(ability.getMayPlay());
 
+        ManaConversionService service = new ManaConversionService(manapool);
         boolean manaTypeConversion = false;
         boolean manaColorConversion = false;
 
@@ -169,11 +165,12 @@ public class HumanPlaySpellAbility {
                     ability.getHostCard().unanimateBestow();
                 }
             }
+
             if (manaTypeConversion || manaColorConversion || keywordColor) {
-                manapool.restoreColorReplacements();
+                service.restoreColorReplacements();
             }
             if (playerManaConversion) {
-                manapool.restoreColorReplacements();
+                service.restoreColorReplacements();
                 human.decNumManaConversion();
             }
             return false;
@@ -196,7 +193,7 @@ public class HumanPlaySpellAbility {
                 clearTargets(ability);
             }
             if (manaTypeConversion || manaColorConversion || keywordColor) {
-                manapool.restoreColorReplacements();
+                service.restoreColorReplacements();
             }
         }
         return true;
