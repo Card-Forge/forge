@@ -18,6 +18,7 @@ import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.keyword.KeywordInterface;
+import forge.game.mana.ManaConversionService;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -1663,7 +1664,7 @@ public class AbilityUtils {
                     }
                 }
                 // AdjustColorReplacement has two different matrices handling final mana conversion under the covers
-                p.getManaPool().adjustColorReplacement(ManaAtom.fromName(c), convertByte, additive);
+                new ManaConversionService(p.getManaPool()).adjustColorReplacement(ManaAtom.fromName(c), convertByte, additive);
             }
         }
     }
