@@ -77,3 +77,6 @@ Type=Duel_Decks
 68 L Swamp
 69 L Swamp
 70 L Swamp
+
+[tokens]
+g_0_1_plant

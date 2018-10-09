@@ -197,3 +197,6 @@ AdditionalSetUnlockedInQuest=EXP
 183 C Wastes 
 184 C Wastes 
 184 C Wastes 
+
+[tokens]
+g_0_1_plant

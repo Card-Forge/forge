@@ -82,3 +82,6 @@ Type=Duel_Decks
 38 L Forest
 38 L Forest
 38 L Forest
+
+[tokens]
+g_0_1_plant

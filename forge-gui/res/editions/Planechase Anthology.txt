@@ -252,3 +252,4 @@ Type=Other
 
 [tokens]
 r_1_1_goblin
+g_0_1_plant

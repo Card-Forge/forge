@@ -154,3 +154,6 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand ZEN
 46 C Wind Zendikon
 118 R Wolfbriar Elemental
 120 M Wrexial, the Risen Deep
+
+[tokens]
+g_0_1_plant
