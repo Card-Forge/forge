@@ -21,6 +21,8 @@ public class ControlGainVariantEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         // Aminatou, the Fateshifter (multiple players gain control of multiple permanents in an effect)
+        // Consider migrating cards with similar effects
+        // GainControl embedded in RepeatEach effects don't work well with timestamps
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
 
