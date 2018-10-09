@@ -842,7 +842,11 @@ public class CardFactoryUtil {
             // only used by Opal Palace, and it does add the trigger to the card
             return doXMath(cc.getCommanderCast(c), m, c);
         }
-        
+
+        if (l[0].startsWith("TotalCommanderCastFromCommandZone")) {
+            return doXMath(cc.getTotalCommanderCast(), m, c);
+        }
+
         if (l[0].startsWith("MostProminentCreatureType")) {
             String restriction = l[0].split(" ")[1];
             CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, cc, c);
