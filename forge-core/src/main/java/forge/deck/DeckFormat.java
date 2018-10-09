@@ -473,6 +473,10 @@ public enum DeckFormat {
                 if (paperCardPoolFilter != null) {
                     for (final Entry<PaperCard, Integer> cp : deck.getAllCardsInASinglePool()) {
                         if (!paperCardPoolFilter.apply(cp.getKey())) {
+                            System.err.println(
+                                    "Excluding deck: '" + deck.toString() +
+                                    "' Reason: '" + cp.getKey() + "' is not legal."
+                            );
                             return false;
                         }
                     }
