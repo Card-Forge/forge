@@ -394,4 +394,5 @@ Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
 62 C Youthful Knight
 
 [tokens]
+wasp
 r_1_1_goblin
