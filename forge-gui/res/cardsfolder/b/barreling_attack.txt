@@ -1,10 +1,10 @@
 Name:Barreling Attack
 ManaCost:2 R R
 Types:Instant
-A:SP$ Pump | Cost$ 2 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Trample | SubAbility$ DBAnimate | SpellDescription$ Target creature gains trample until end of turn. When that creature becomes blocked this turn, it gets +1/+1 until end of turn for each creature blocking it.
-SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Triggers$ TrigBounce | sVars$ ABBarrelingPump,BarrelingX
-SVar:TrigBounce:Mode$ AttackerBlocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ ABBarrelingPump | TriggerDescription$ When CARDNAME becomes blocked this turn, it gets +1/+1 until end of turn for each creature blocking it.
-SVar:ABBarrelingPump:DB$ Pump | Defined$ Self | NumAtt$ +BarrelingX | NumDef$ +BarrelingX | References$ BarrelingX
+A:SP$ Pump | Cost$ 2 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Trample | SubAbility$ DBEffect | SpellDescription$ Target creature gains trample until end of turn. When that creature becomes blocked this turn, it gets +1/+1 until end of turn for each creature blocking it.
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | Triggers$ TrigBounce | SVars$ ABBarrelingPump,BarrelingX | ForgetOnMoved$ Battlefield
+SVar:TrigBounce:Mode$ AttackerBlocked | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Execute$ ABBarrelingPump | TriggerDescription$ When CARDNAME becomes blocked this turn, it gets +1/+1 until end of turn for each creature blocking it.
+SVar:ABBarrelingPump:DB$ Pump | Defined$ Remembered | NumAtt$ +BarrelingX | NumDef$ +BarrelingX | References$ BarrelingX
 SVar:BarrelingX:TriggerCount$NumBlockers
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barreling_attack.jpg
 Oracle:Target creature gains trample until end of turn. When that creature becomes blocked this turn, it gets +1/+1 until end of turn for each creature blocking it.

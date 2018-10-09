@@ -38,6 +38,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellApiBased;
 import forge.game.card.*;
+import forge.game.card.CardPredicates.Accessors;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -1803,6 +1804,12 @@ public class AiController {
                 all.addAll(right);
                 return left.contains(ComputerUtilCard.getBestCreatureAI(all));
             }
+        }
+        if ("Aminatou".equals(sa.getParam("AILogic")) && game.getPlayers().size() > 2) {
+            CardCollection all = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.NONLAND_PERMANENTS);
+            CardCollection left = CardLists.filterControlledBy(all, game.getNextPlayerAfter(player, Direction.Left));
+            CardCollection right = CardLists.filterControlledBy(all, game.getNextPlayerAfter(player, Direction.Right));
+            return Aggregates.sum(left, Accessors.fnGetCmc) > Aggregates.sum(right, Accessors.fnGetCmc);
         }
         return MyRandom.getRandom().nextBoolean();
     }
