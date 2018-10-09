@@ -365,3 +365,4 @@ Foil=NotSupported
 [tokens]
 wasp
 r_1_1_goblin
+c_5_5_a_djinn_flying

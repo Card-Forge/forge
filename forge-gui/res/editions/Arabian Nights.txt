@@ -105,3 +105,4 @@ R Ydwen Efreet
 
 [tokens]
 r_4_4_bird_flying
+c_5_5_a_djinn_flying

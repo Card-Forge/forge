@@ -392,3 +392,4 @@ R Zombie Master
 
 [tokens]
 wasp
+c_5_5_a_djinn_flying

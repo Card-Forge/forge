@@ -280,3 +280,4 @@ Booster=10 Common, 3 Uncommon, 1 Rare, 1 fromSheet("ME4 UrzaLands")
 
 [tokens]
 r_1_1_goblin
+c_5_5_a_djinn_flying
