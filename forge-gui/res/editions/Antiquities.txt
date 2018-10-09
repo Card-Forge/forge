@@ -110,3 +110,6 @@ U Weakstone
 U Xenic Poltergeist
 R Yawgmoth Demon
 C Yotian Soldier
+
+[tokens]
+c_1_1_a_tetravite_flying_noenchant
