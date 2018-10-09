@@ -316,3 +316,6 @@ FoilAlwaysInCommonSlot=False
 240 R Woodwraith Corrupter
 241 C Woodwraith Strangler
 76 C Zephyr Spirit
+
+[tokens]
+r_1_1_goblin

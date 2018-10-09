@@ -460,3 +460,7 @@ R Xenic Poltergeist
 C Zephyr Falcon
 R Zombie Master
 R Zur's Weirding
+
+[tokens]
+wasp
+r_1_1_goblin

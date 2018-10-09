@@ -361,3 +361,7 @@ Foil=NotSupported
 270 R Wyluli Wolf
 162 R Zombie Master
 108 R Zur's Weirding
+
+[tokens]
+wasp
+r_1_1_goblin

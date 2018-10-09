@@ -153,3 +153,6 @@ U Wall of Tears
 R Warrior Angel
 U Warrior en-Kor
 C Youthful Knight
+
+[tokens]
+r_1_1_goblin

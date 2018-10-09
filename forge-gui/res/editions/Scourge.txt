@@ -154,3 +154,6 @@ FoilAlwaysInCommonSlot=False
 135 R Xantid Swarm
 27 C Zealous Inquisitor
 81 C Zombie Cutthroat
+
+[tokens]
+r_1_1_goblin

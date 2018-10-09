@@ -360,3 +360,6 @@ Foil=NotSupported
 171 R Yawgmoth's Will
 113 R Zephid
 114 U Zephid's Embrace
+
+[tokens]
+r_1_1_goblin

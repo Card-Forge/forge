@@ -277,3 +277,6 @@ Booster=10 Common, 3 Uncommon, 1 Rare, 1 fromSheet("ME4 UrzaLands")
 104 U Xenic Poltergeist
 240 C Yotian Soldier
 105 U Zombie Master
+
+[tokens]
+r_1_1_goblin

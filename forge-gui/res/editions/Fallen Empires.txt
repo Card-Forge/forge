@@ -197,3 +197,6 @@ C Vodalian Soldiers
 C Vodalian Soldiers
 R Vodalian War Machine
 R Zelyon Sword
+
+[tokens]
+r_1_1_goblin

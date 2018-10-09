@@ -156,3 +156,6 @@ FoilAlwaysInCommonSlot=False
 145 U Wirewood Hivemaster
 86 U Withered Wretch
 87 U Zombie Brute
+
+[tokens]
+r_1_1_goblin

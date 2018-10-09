@@ -311,3 +311,6 @@ AdditionalSetUnlockedInQuest=TSB
 234 R Wurmcalling
 235 U Yavimaya Dryad
 47 C Zealot il-Vec
+
+[tokens]
+r_1_1_goblin

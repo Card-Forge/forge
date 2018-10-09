@@ -389,3 +389,6 @@ R Xenic Poltergeist
 C Yotian Soldier
 C Zephyr Falcon
 R Zombie Master
+
+[tokens]
+wasp

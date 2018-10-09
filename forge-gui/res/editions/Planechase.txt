@@ -222,3 +222,6 @@ S Tember City
 16 C Whiplash Trap
 45 U Withered Wretch
 129 C Wizard Replica
+
+[tokens]
+r_1_1_goblin

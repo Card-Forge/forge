@@ -278,3 +278,6 @@ FoilChanceInBooster=100
 258 L Swamp
 258 L Swamp
 258 L Swamp
+
+[tokens]
+r_1_1_goblin

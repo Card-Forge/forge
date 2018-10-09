@@ -207,3 +207,6 @@ S Your Inescapable Doom
 45 C Your Will Is Not Your Own
 28 U Zombie Infestation
 29 U Zombify
+
+[tokens]
+r_1_1_goblin

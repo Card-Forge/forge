@@ -204,3 +204,6 @@ R Stairs to Infinity
 29 R Whirlpool Warrior
 115 U Whispersilk Cloak
 39 C Windriddle Palaces
+
+[tokens]
+r_1_1_goblin
