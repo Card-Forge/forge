@@ -29,7 +29,6 @@ import forge.game.ability.effects.AttachEffect;
 import forge.game.card.*;
 import forge.game.event.*;
 import forge.game.keyword.KeywordInterface;
-import forge.game.mana.ManaConversionService;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -787,7 +786,9 @@ public class GameAction {
         game.getReplacementHandler().cleanUpTemporaryReplacements();
 
         for (final Player p : game.getPlayers()) {
-            new ManaConversionService(p.getManaPool()).restoreColorReplacements();
+            if (!game.getStack().isFrozen()) {
+                p.getManaPool().restoreColorReplacements();
+            }
             p.clearStaticAbilities();
         }
 

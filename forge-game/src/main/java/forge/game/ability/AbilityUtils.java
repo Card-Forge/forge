@@ -18,7 +18,7 @@ import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.keyword.KeywordInterface;
-import forge.game.mana.ManaConversionService;
+import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -1643,7 +1643,7 @@ public class AbilityUtils {
         return CardFactoryUtil.xCount(c, s2);
     }
 
-    public static final void applyManaColorConversion(final Player p, final Map<String, String> params) {
+    public static final void applyManaColorConversion(ManaConversionMatrix matrix, final Map<String, String> params) {
         String conversionType = params.get("ManaColorConversion");
 
         // Choices are Additives(OR) or Restrictive(AND)
@@ -1664,7 +1664,7 @@ public class AbilityUtils {
                     }
                 }
                 // AdjustColorReplacement has two different matrices handling final mana conversion under the covers
-                new ManaConversionService(p.getManaPool()).adjustColorReplacement(ManaAtom.fromName(c), convertByte, additive);
+                matrix.adjustColorReplacement(ManaAtom.fromName(c), convertByte, additive);
             }
         }
     }

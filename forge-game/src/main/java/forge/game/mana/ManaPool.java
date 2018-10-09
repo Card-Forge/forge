@@ -47,13 +47,13 @@ import java.util.*;
  * @author Forge
  * @version $Id$
  */
-public class ManaPool implements Iterable<Mana>, IManaConversionMatrix {
+public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     private final Player owner;
     private final Multimap<Byte, Mana> floatingMana = ArrayListMultimap.create();
 
     public ManaPool(final Player player) {
         owner = player;
-        new ManaConversionService(this).restoreColorReplacements();
+        restoreColorReplacements();
     }
 
     public final int getAmountOfColor(final byte color) {
@@ -352,7 +352,7 @@ public class ManaPool implements Iterable<Mana>, IManaConversionMatrix {
     public byte getPossibleColorUses(byte color) {
         // Take the current conversion value, AND with restrictions to get mana usage
         int rowIdx = ManaAtom.getIndexOfFirstManaType(color);
-        int matrixIdx = rowIdx < 0 ? ManaConversionService.identityMatrix.length - 1 : rowIdx;
+        int matrixIdx = rowIdx < 0 ? identityMatrix.length - 1 : rowIdx;
 
         byte colorUse = colorConversionMatrix[matrixIdx];
         colorUse &= colorRestrictionMatrix[matrixIdx];

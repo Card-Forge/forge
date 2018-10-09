@@ -41,7 +41,6 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
-
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -481,7 +480,7 @@ public final class StaticAbilityContinuous {
                 }
 
                 if (params.containsKey("ManaColorConversion")) {
-                    AbilityUtils.applyManaColorConversion(p, params);
+                    AbilityUtils.applyManaColorConversion(p.getManaPool(), params);
                 }
             }
         }
