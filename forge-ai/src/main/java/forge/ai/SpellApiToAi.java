@@ -79,6 +79,7 @@ public enum SpellApiToAi {
             .put(ApiType.FlipACoin, FlipACoinAi.class)
             .put(ApiType.Fog, FogAi.class)
             .put(ApiType.GainControl, ControlGainAi.class)
+            .put(ApiType.GainControlVariant, AlwaysPlayAi.class)
             .put(ApiType.GainLife, LifeGainAi.class)
             .put(ApiType.GainOwnership, CannotPlayAi.class)
             .put(ApiType.GameDrawn, CannotPlayAi.class)

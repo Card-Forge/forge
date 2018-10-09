@@ -76,6 +76,7 @@ public enum ApiType {
     FlipACoin (FlipCoinEffect.class),
     Fog (FogEffect.class),
     GainControl (ControlGainEffect.class),
+    GainControlVariant (ControlGainVariantEffect.class),
     GainLife (LifeGainEffect.class),
     GainOwnership (OwnershipGainEffect.class),
     GameDrawn (GameDrawEffect.class),
