@@ -370,3 +370,6 @@ R Vizzerdrix
 285 C Zodiac Monkey
 171 U Zombify
 114 R Zur's Weirding
+
+[tokens]
+r_4_4_bird_flying

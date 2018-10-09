@@ -102,3 +102,6 @@ C War Elephant
 C Wyluli Wolf
 C Wyluli Wolf
 R Ydwen Efreet
+
+[tokens]
+r_4_4_bird_flying
