@@ -6,7 +6,7 @@ SVar:GuestList:DB$ ChooseCard | Defined$ You | MinAmount$ 0 | Amount$ X | Refere
 SVar:TrigTap:DB$ Tap | Defined$ Remembered | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ Y | SubAbility$ DBCleanup | References$ Y
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$Valid Creature.YouCtrl
+SVar:X:Count$Valid Gate.untapped+YouCtrl
 SVar:Y:Remembered$Amount
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Gate.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a Gate enters the battlefield under your control, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
