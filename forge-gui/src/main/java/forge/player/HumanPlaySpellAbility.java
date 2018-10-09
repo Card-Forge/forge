@@ -32,7 +32,6 @@ import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.cost.CostPayment;
 import forge.game.keyword.KeywordInterface;
-import forge.game.mana.ManaConversionService;
 import forge.game.mana.ManaPool;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
@@ -76,7 +75,6 @@ public class HumanPlaySpellAbility {
         final Card c = ability.getHostCard();
         final CardPlayOption option = c.mayPlay(ability.getMayPlay());
 
-        ManaConversionService service = new ManaConversionService(manapool);
         boolean manaTypeConversion = false;
         boolean manaColorConversion = false;
 
@@ -118,13 +116,15 @@ public class HumanPlaySpellAbility {
             ability.resetPaidHash();
         }
 
+        // TODO Apply this to the SAStackInstance instead of the Player
         if (manaTypeConversion) {
-            AbilityUtils.applyManaColorConversion(human, MagicColor.Constant.ANY_TYPE_CONVERSION);
+            AbilityUtils.applyManaColorConversion(payment, MagicColor.Constant.ANY_TYPE_CONVERSION);
         } else if (manaColorConversion) {
-            AbilityUtils.applyManaColorConversion(human, MagicColor.Constant.ANY_COLOR_CONVERSION);
+            AbilityUtils.applyManaColorConversion(payment, MagicColor.Constant.ANY_COLOR_CONVERSION);
         }
+
         if (playerManaConversion) {
-            AbilityUtils.applyManaColorConversion(human, MagicColor.Constant.ANY_COLOR_CONVERSION);
+            AbilityUtils.applyManaColorConversion(manapool, MagicColor.Constant.ANY_COLOR_CONVERSION);
             human.incNumManaConversion();
         }
         
@@ -142,7 +142,7 @@ public class HumanPlaySpellAbility {
             }
 
             if (keywordColor) {
-                AbilityUtils.applyManaColorConversion(human, params);
+                AbilityUtils.applyManaColorConversion(payment, params);
             }
         }
 
@@ -167,10 +167,10 @@ public class HumanPlaySpellAbility {
             }
 
             if (manaTypeConversion || manaColorConversion || keywordColor) {
-                service.restoreColorReplacements();
+                manapool.restoreColorReplacements();
             }
             if (playerManaConversion) {
-                service.restoreColorReplacements();
+                manapool.restoreColorReplacements();
                 human.decNumManaConversion();
             }
             return false;
@@ -193,7 +193,7 @@ public class HumanPlaySpellAbility {
                 clearTargets(ability);
             }
             if (manaTypeConversion || manaColorConversion || keywordColor) {
-                service.restoreColorReplacements();
+                manapool.restoreColorReplacements();
             }
         }
         return true;
