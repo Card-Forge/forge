@@ -326,3 +326,4 @@ Booster=10 Common:!fromSheet("M19 Secret Cards"), 3 Uncommon:!fromSheet("M19 Sec
 
 [tokens]
 b_1_1_bat_flying
+r_1_1_goblin

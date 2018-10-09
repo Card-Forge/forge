@@ -72,3 +72,6 @@ Type=Duel_Decks
 63 L Forest
 64 L Forest
 65 L Forest
+
+[tokens]
+r_1_1_goblin

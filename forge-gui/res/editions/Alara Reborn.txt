@@ -154,3 +154,6 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand ALA
 80 C Wildfield Borderpost
 105 C Winged Coatl
 85 U Zealous Persecution
+
+[tokens]
+r_1_1_goblin

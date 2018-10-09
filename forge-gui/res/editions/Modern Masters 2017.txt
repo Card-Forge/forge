@@ -258,3 +258,6 @@ FoilChanceInBooster=100
 247 C Shimmering Grotto
 248 C Simic Guildgate
 249 R Verdant Catacombs
+
+[tokens]
+r_1_1_goblin

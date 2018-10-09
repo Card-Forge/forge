@@ -344,3 +344,6 @@ Type=Other
 337 L Forest
 337 L Forest
 337 L Forest
+
+[tokens]
+r_1_1_goblin

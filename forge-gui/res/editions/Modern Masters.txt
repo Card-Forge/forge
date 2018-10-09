@@ -238,3 +238,6 @@ FoilChanceInBooster=100
 227 U Vivid Grove
 228 U Vivid Marsh
 229 U Vivid Meadow
+
+[tokens]
+r_1_1_goblin

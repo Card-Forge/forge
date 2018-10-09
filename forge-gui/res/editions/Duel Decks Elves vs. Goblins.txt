@@ -72,3 +72,6 @@ C Goblin
 17 U Wirewood Symbiote
 18 C Wood Elves
 19 U Wren's Run Vanquisher
+
+[tokens]
+r_1_1_goblin

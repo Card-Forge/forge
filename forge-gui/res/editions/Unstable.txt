@@ -12,3 +12,6 @@ Type=Other
 214 L Swamp
 215 L Mountain
 216 L Forest
+
+[tokens]
+r_1_1_goblin

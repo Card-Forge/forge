@@ -87,3 +87,6 @@ Type=Duel_Decks
 9 U White Knight
 15 U Wilt-Leaf Cavaliers
 13 U Zhalfirin Commander
+
+[tokens]
+r_1_1_goblin

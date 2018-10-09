@@ -258,3 +258,6 @@ FoilChanceInBooster=100
 247 U Myriad Landscape
 248 U Quicksand
 249 U Zoetic Cavern
+
+[tokens]
+r_1_1_goblin

@@ -258,3 +258,6 @@ FoilChanceInBooster=100
 247 C Tranquil Cove
 248 R Wasteland
 249 C Wind-Scarred Crag
+
+[tokens]
+r_1_1_goblin

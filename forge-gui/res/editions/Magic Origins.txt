@@ -297,3 +297,6 @@ Booster=10 Common:!fromSheet("ORI Sample Cards"), 3 Uncommon:!fromSheet("ORI Sam
 286 C Plummet
 287 U Prized Unicorn
 288 R Terra Stomper
+
+[tokens]
+r_1_1_goblin

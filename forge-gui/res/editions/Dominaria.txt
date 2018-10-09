@@ -290,3 +290,6 @@ BoosterMustContain=Legendary Creature
 278 C Pyromantic Pilgrim
 279 C Timber Gorge
 280 R Firesong and Sunspeaker
+
+[tokens]
+r_1_1_goblin

@@ -258,3 +258,6 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 164 C Yawning Fissure
 82 C Zephyr Sprite
 123 C Zombie Goliath
+
+[tokens]
+r_1_1_goblin

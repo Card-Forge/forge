@@ -184,3 +184,6 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 77 U Whispering Specter
 50 U Wing Splicer
 51 R Xenograft
+
+[tokens]
+r_1_1_goblin

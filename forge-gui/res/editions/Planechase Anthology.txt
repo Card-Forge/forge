@@ -249,3 +249,6 @@ Type=Other
 154 L Forest
 155 L Forest
 156 L Forest
+
+[tokens]
+r_1_1_goblin

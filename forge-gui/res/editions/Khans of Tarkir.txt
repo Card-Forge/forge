@@ -278,3 +278,6 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand KTK
 258 L Swamp
 258 L Swamp
 258 L Swamp
+
+[tokens]
+r_1_1_goblin

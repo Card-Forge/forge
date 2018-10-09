@@ -317,3 +317,6 @@ Type=Other
 310 L Forest
 311 L Forest
 312 L Forest
+
+[tokens]
+r_1_1_goblin

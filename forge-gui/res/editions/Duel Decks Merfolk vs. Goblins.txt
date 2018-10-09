@@ -70,3 +70,6 @@ Type=Duel_Decks
 61 L Mountain
 62 L Mountain
 63 L Mountain
+
+[tokens]
+r_1_1_goblin
