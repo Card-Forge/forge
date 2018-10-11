@@ -105,6 +105,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
         final ZoneType digSite = sa.hasParam("DigZone") ? ZoneType.smartValueOf(sa.getParam("DigZone")) : ZoneType.Library;
         boolean shuffle = sa.hasParam("Shuffle");
         final boolean optional = sa.hasParam("Optional");
+        final boolean optionalFound = sa.hasParam("OptionalFoundMove");
 
         for (final Player p : getTargetPlayers(sa)) {
             if (p == null) {
@@ -156,15 +157,20 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     final Iterator<Card> itr = found.iterator();
                     while (itr.hasNext()) {
                         final Card c = itr.next();
-                        if (sa.hasParam("GainControl") && foundDest.equals(ZoneType.Battlefield)) {
-                            c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
-                            game.getAction().moveTo(c.getController().getZone(foundDest), c, sa);
-                        } else if (sa.hasParam("NoMoveFound") && foundDest.equals(ZoneType.Library)) {
-                            //Don't do anything
+                        if (optionalFound && !p.getController().confirmAction(sa, null,
+                                "Do you want to put that card to " + foundDest.name() + "?")) {
+                            continue;
                         } else {
-                            game.getAction().moveTo(foundDest, c, foundLibPos, sa);
+                            if (sa.hasParam("GainControl") && foundDest.equals(ZoneType.Battlefield)) {
+                                c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
+                                game.getAction().moveTo(c.getController().getZone(foundDest), c, sa);
+                            } else if (sa.hasParam("NoMoveFound") && foundDest.equals(ZoneType.Library)) {
+                                //Don't do anything
+                            } else {
+                                game.getAction().moveTo(foundDest, c, foundLibPos, sa);
+                            }
+                            revealed.remove(c);
                         }
-                        revealed.remove(c);
                     }
                 }
 
