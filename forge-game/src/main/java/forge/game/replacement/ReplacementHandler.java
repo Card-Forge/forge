@@ -181,7 +181,7 @@ public class ReplacementHandler {
             final String effectAbString = host.getSVar(effectSVar);
             // TODO: the source of replacement effect should be the source of the original effect 
             effectSA = AbilityFactory.getAbility(effectAbString, host);
-            effectSA.setTrigger(true);
+            //effectSA.setTrigger(true);
 
             SpellAbility tailend = effectSA;
             do {
@@ -209,8 +209,9 @@ public class ReplacementHandler {
             if (replacementEffect.isIntrinsic()) {
                 effectSA.setIntrinsic(true);
                 effectSA.changeText();
-                effectSA.setReplacementAbility(true);
             }
+            effectSA.setReplacementAbility(true);
+            effectSA.setReplacementEffect(replacementEffect);
         }
 
         // Decider gets to choose whether or not to apply the replacement.
