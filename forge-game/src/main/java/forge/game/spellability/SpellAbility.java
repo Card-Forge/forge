@@ -38,7 +38,9 @@ import forge.game.cost.CostRemoveCounter;
 import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
 import forge.game.staticability.StaticAbility;
+import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
 import forge.util.Expressions;
@@ -87,8 +89,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private boolean basicSpell = true;
     private boolean trigger = false;
+    private Trigger triggerObj = null;
     private boolean optionalTrigger = false;
     private boolean replacementAbility = false;
+    private ReplacementEffect replacementEffect = null;
     private int sourceTrigger = -1;
     private List<Object> triggerRemembered = Lists.newArrayList();
 
@@ -913,6 +917,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         trigger = trigger0;
     }
 
+    public Trigger getTrigger() {
+        return triggerObj;
+    }
+
+    public void setTrigger(final Trigger t) {
+        triggerObj = t;
+    }
+
     public boolean isOptionalTrigger() {
         return optionalTrigger;
     }
@@ -932,6 +944,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setReplacementAbility(boolean replacement) {
         replacementAbility = replacement;
+    }
+
+    public ReplacementEffect getReplacementEffect() {
+        return replacementEffect;
+    }
+
+    public void setReplacementEffect(final ReplacementEffect re) {
+        this.replacementEffect = re;
     }
 
     public boolean isMandatory() {
