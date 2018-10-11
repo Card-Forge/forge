@@ -2665,6 +2665,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         commanderCast.put(commander, getCommanderCast(commander) + 1);
     }
 
+    public int getTotalCommanderCast() {
+        int result = 0;
+        for (Integer i : commanderCast.values()) {
+            result += i;
+        }
+        return result;
+    }
+
     public boolean isPlayingExtraTurn() {
         return isPlayingExtraTrun;
     }

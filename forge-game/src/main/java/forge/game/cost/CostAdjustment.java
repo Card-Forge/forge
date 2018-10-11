@@ -503,15 +503,6 @@ public class CostAdjustment {
                 if (!sa.isSpell() || !((Spell) sa).isCastFaceDown()) {
                     return false;
                 }
-            } else if (type.equals("SelfMonstrosity")) {
-                if (!(sa instanceof AbilityActivated) || !sa.hasParam("Monstrosity") || sa.isTemporary()) {
-                    // Nemesis of Mortals
-                    return false;
-                }
-            } else if (type.equals("SelfIntrinsicAbility")) {
-                if (!(sa instanceof AbilityActivated) || sa.isReplacementAbility() || sa.isTemporary()) {
-                    return false;
-                }
             }
         }
         if (params.containsKey("AffectedZone")) {
