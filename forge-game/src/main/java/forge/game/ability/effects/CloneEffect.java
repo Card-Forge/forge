@@ -113,6 +113,7 @@ public class CloneEffect extends SpellAbilityEffect {
         }
 
         final boolean keepName = sa.hasParam("KeepName");
+        final String newName = sa.getParamOrDefault("NewName", null);
         final String originalName = tgtCard.getName();
         final boolean copyingSelf = (tgtCard == cardToCopy);
         final boolean isTransformed = cardToCopy.getCurrentStateName() == CardStateName.Transformed || cardToCopy.getCurrentStateName() == CardStateName.Meld;
@@ -157,8 +158,12 @@ public class CloneEffect extends SpellAbilityEffect {
         }
 
         // restore name if it should be unchanged
+        // this should only be used for Sakashima the Impostor Avatar
         if (keepName) {
         	tgtCard.setName(originalName);
+        }
+        if (newName != null) {
+            tgtCard.setName(newName);
         }
 
         // If target is a flip card, also set characteristics of the flipped
@@ -167,6 +172,9 @@ public class CloneEffect extends SpellAbilityEffect {
         	final CardState flippedState = tgtCard.getState(CardStateName.Flipped);
             if (keepName) {
                 flippedState.setName(originalName);
+            }
+            if (newName != null) {
+                tgtCard.setName(newName);
             }
             //keep the Clone card image for the cloned card
             flippedState.setImageKey(imageFileName);
@@ -349,6 +357,18 @@ public class CloneEffect extends SpellAbilityEffect {
             tgtCard.setManaCost(ManaCost.NO_COST);
             tgtCard.setBasePower(4);
             tgtCard.setBaseToughness(4);
+        }
+
+        if (sa.hasParam("GainThisAbility")) {
+            SpellAbility root = sa.getRootAbility();
+
+            if (root.isTrigger() && root.getTrigger() != null) {
+                tgtCard.addTrigger(root.getTrigger().copy(tgtCard, false));
+            } else if (root.isReplacementAbility()) {
+                tgtCard.addReplacementEffect(root.getReplacementEffect().copy(tgtCard, false));
+            } else {
+                tgtCard.addSpellAbility(root.copy(tgtCard, false));
+            }
         }
     }
 

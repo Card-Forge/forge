@@ -62,7 +62,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView {
      * Keys that should not changed
      */
     private static final ImmutableList<String> noChangeKeys = ImmutableList.<String>builder()
-            .add("TokenScript", "LegacyImage", "TokenImage").build();
+            .add("TokenScript", "LegacyImage", "TokenImage", "NewName").build();
     /**
      * Sets the temporary.
      *
