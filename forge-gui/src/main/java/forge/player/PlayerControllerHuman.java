@@ -31,6 +31,7 @@ import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
+import forge.game.mana.ManaConversionMatrix;
 import forge.game.player.*;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementLayer;
@@ -1745,8 +1746,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public boolean payManaCost(final ManaCost toPay, final CostPartMana costPartMana, final SpellAbility sa,
-            final String prompt, final boolean isActivatedSa) {
-        return HumanPlay.payManaCost(this, toPay, costPartMana, sa, player, prompt, isActivatedSa);
+                               final String prompt, ManaConversionMatrix matrix, final boolean isActivatedSa) {
+        return HumanPlay.payManaCost(this, toPay, costPartMana, sa, player, prompt, matrix, isActivatedSa);
     }
 
     @Override

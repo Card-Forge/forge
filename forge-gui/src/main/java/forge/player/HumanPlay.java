@@ -1,21 +1,8 @@
 package forge.player;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import forge.game.cost.*;
-import forge.game.spellability.LandAbility;
-import forge.game.spellability.OptionalCostValue;
-import forge.game.spellability.Spell;
-import forge.util.TextUtil;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
-
 import forge.FThreads;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
@@ -25,30 +12,31 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.ability.effects.FlipCoinEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardDamageMap;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CardView;
-import forge.game.card.CounterType;
+import forge.game.cost.*;
+import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.player.PlayerView;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
+import forge.game.spellability.*;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.match.input.InputPayMana;
 import forge.match.input.InputPayManaOfCostPayment;
 import forge.match.input.InputPayManaSimple;
 import forge.match.input.InputSelectCardsFromList;
-import forge.util.collect.FCollectionView;
 import forge.util.Lang;
+import forge.util.TextUtil;
+import forge.util.collect.FCollectionView;
 import forge.util.gui.SGuiChoose;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class HumanPlay {
@@ -814,7 +802,7 @@ public class HumanPlay {
         return !manaInputCancelled;
     }
     
-    public static boolean payManaCost(final PlayerControllerHuman controller, final ManaCost realCost, final CostPartMana mc, final SpellAbility ability, final Player activator, String prompt, boolean isActivatedSa) {
+    public static boolean payManaCost(final PlayerControllerHuman controller, final ManaCost realCost, final CostPartMana mc, final SpellAbility ability, final Player activator, String prompt, ManaConversionMatrix matrix, boolean isActivatedSa) {
         final Card source = ability.getHostCard();
         ManaCostBeingPaid toPay = new ManaCostBeingPaid(realCost, mc.getRestiction());
 
@@ -879,7 +867,7 @@ public class HumanPlay {
         }
         if (!toPay.isPaid()) {
             // Input is somehow clearing out the offering card?
-            inpPayment = new InputPayManaOfCostPayment(controller, toPay, ability, activator);
+            inpPayment = new InputPayManaOfCostPayment(controller, toPay, ability, activator, matrix);
             inpPayment.setMessagePrefix(prompt);
             inpPayment.showAndWait();
             if (!inpPayment.isPaid()) {

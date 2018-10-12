@@ -21,6 +21,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.mana.ManaConversionMatrix;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -35,7 +36,7 @@ import java.util.Map;
  * @author Forge
  * @version $Id$
  */
-public class CostPayment {
+public class CostPayment extends ManaConversionMatrix {
     private final Cost cost;
     private Cost adjustedCost;
     private final SpellAbility ability;
@@ -70,6 +71,7 @@ public class CostPayment {
         this.cost = cost;
         this.adjustedCost = cost;
         this.ability = abil;
+        restoreColorReplacements();
     }
 
     /**
@@ -136,6 +138,11 @@ public class CostPayment {
             game.costPaymentStack.push(part, this);
 
             PaymentDecision pd = part.accept(decisionMaker);
+
+            // RIght before we start paying as decided, we need to transfer the CostPayments matrix over?
+            if (part instanceof CostPartMana) {
+                ((CostPartMana)part).setCardMatrix(this);
+            }
 
             if (pd == null || !part.payAsDecided(decisionMaker.getPlayer(), pd, ability)) {
                 game.costPaymentStack.pop(); // cost is resolved
