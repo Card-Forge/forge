@@ -5,4 +5,5 @@ PT:2/2
 K:etbCounter:P1P1:X:no Condition:Undergrowth - CARDNAME enters the battlefield with a number of +1/+1 counters on it equal to the number of creature cards in your graveyard.
 SVar:X:Count$TypeInYourYard.Creature
 SVar:NeedsToPlayVar:X GE1
+DeckHas:Ability$Counters
 Oracle:Undergrowth — Rhizome Lurcher enters the battlefield with a number of +1/+1 counters on it equal to the number of creature cards in your graveyard.

@@ -7,4 +7,5 @@ T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Tr
 SVar:TrigPump:DB$ Pump | NumAtt$ +X | References$ X
 SVar:X:TriggerCount$CastSACMC
 SVar:BuffedBy:Instant,Sorcery
+DeckHints:Type$Instant|Sorcery
 Oracle:Trample\nWhenever you cast an instant or sorcery spell, Erratic Cyclops gets +X/+0 until end of turn, where X is that spell's converted mana cost.
