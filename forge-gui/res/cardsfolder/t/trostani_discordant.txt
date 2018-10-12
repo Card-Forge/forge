@@ -8,5 +8,5 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_soldier_lifelink
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainControl | TriggerDescription$ At the beginning of your end step, each player gains control of all creatures they own.
 SVar:TrigGainControl:DB$ RepeatEach | RepeatPlayers$ Player | AILogic$ GainControlOwns | RepeatSubAbility$ DBGainControl | SpellDescription$ Each player gains control of all creatures they own.
 SVar:DBGainControl:DB$ GainControl | AllValid$ Creature.RememberedPlayerOwn | NewController$ Player.IsRemembered
-DeckHas:Ability$Token
+DeckHas:Ability$Token & Ability$LifeGain
 Oracle:Other creatures you control get +1/+1.\nWhen Trostani Discordant enters the battlefield, create two 1/1 white Soldier creature tokens with lifelink.\nAt the beginning of your end step, each player gains control of all creatures they own.
