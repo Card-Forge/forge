@@ -6,4 +6,5 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Deathtouch | AddTrigger$ 
 SVar:Trig1:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever this creature deals combat damage to a player, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:X:Count$YouSurveilThisTurn
+DeckHints:Ability$Surveil
 Oracle:As long as you've surveilled this turn, Darkblade Agent has deathtouch and "Whenever this creature deals combat damage to a player, draw a card."

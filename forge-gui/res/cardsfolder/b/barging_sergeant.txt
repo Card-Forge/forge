@@ -4,4 +4,5 @@ Types:Creature Minotaur Soldier
 PT:4/2
 K:Haste
 K:Mentor
+DeckHas:Ability$Counters
 Oracle:Haste\nMentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)

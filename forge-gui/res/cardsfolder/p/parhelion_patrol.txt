@@ -5,4 +5,5 @@ PT:2/3
 K:Flying
 K:Vigilance
 K:Mentor
+DeckHas:Ability$Counters
 Oracle:Flying, vigilance\nMentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)
