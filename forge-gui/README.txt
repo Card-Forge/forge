@@ -1,6 +1,6 @@
-Forge: 09/29/2018 ver 1.6.16
+Forge: 10/13/2018 ver 1.6.17
 
-18176 cards in total.
+18204 cards in total.
 
 
 --------------
@@ -8,10 +8,10 @@ Release Notes:
 --------------
 
 - New Cards -
-Vigorspore Wurm; Vedalken Mesmerist; Vernadi Shieldmate; Vraska, Regal Gorgon; Vivid Revival; Vraska's Stoneglare; Vicious Rumors; Veiled Shade; Knight of Autumn; Kraul Foragers; Kraul Raider; Kraul Harpooner; Kraul Swarm; Tajic, Legion's Edge; Take Heart; Torch Courier; Truefire Captain; Thoughtbound Phantasm; Tenth District Guard; Thought Erasure; Trostani Discordant; Circuitous Route; Citywatch Sphinx; Citywide Bust; Conclave Tribunal; Collar the Culprit; Connive; Conclave Guildmage; Crackling Drake; Creeping Chill; Centaur Peacemaker; Camaraderie; Capture Sphere; Cosmotronic Wave; Chance for Glory; Command the Storm; Conclave Cavalier; Chamber Sentry; Crush Contraband; Chemister's Insight; Candlelight Vigil; Guildmages' Forum; Gateway Plaza; Golgari Raiders; Gatekeeper Gargoyle; Golgari Locket; Goblin Banneret; Grappling Sundew; Guild Summit; Garrison Sergeant; Gruesome Menagerie; Golgari Findbroker; Glowspore Shaman; Gird for Battle; Goblin Cratermaker; Glaive of the Guildpact; Generous Stray; Gravitic Punch; Goblin Locksmith; Worldsoul Colossus; Wary Okapi; Watcher in the Mist; Wand of Vertebrae; Wild Ceratok; Wojek Bodyguard; Wishcoin Crab; Whisper Agent; Whispering Snitch; Impervious Greatwurm; Izzet Locket; Ionize; Inescapable Blaze; Invert; Integrity; Inspiring Unicorn; Izoni, Thousand-Eyed; Intrusive Packbeast; Douser of Lights; Dawn of Hope; Demotion; Deafening Clarion; Dimir Spybug; Dimir Informant; Doom Whisperer; District Guide; Dream Eater; Divine Visitation; Deadly Visit; Dazzling Lights; Disinformation Campaign; Darkblade Agent; Drowned Secrets; Devkarin Dissident; Direct Current; Devious Cover-Up; Dimir Locket; Justice Strike; Join Shields; Attendant of Vraska; Assure; Affectionate Indrik; Artful Takedown; Assassin's Trophy; Arboretum Elemental; Aurelia, Exemplar of Justice; Arclight Phoenix; Pelt Collector; Precision Bolt; Passwall Adept; Pitiless Gorgon; Price of Fame; Pause for Reflection; Pack's Favor; Parhelion Patrol; Pilfering Imp; Portcullis Vine; Piston-Fist Cyclops; Ral, Caller of Storms; Rhizome Lurcher; Ral's Dispersal; Roc Charger; Ral's Staticaster; Rosemane Centaur; Ral, Izzet Viceroy; Radical Idea; Ritual of Soot; Risk Factor; Runaway Steam-Kin; Rampaging Monument; Response; Rubblebelt Boar; Light of the Legion; Ledev Champion; Lava Coil; Leapfrog; Lotleth Giant; Loxodon Restorer; Ledev Guardian; Legion Warboss; League Guildmage; Legion Guildmage; Heavenly Blademaster; Hired Poisoner; Haazda Marshal; Hatchery Spider; Hunted Witness; House Guildmage; Healer's Hawk; Hammer Dropper; Hypothesizzle; Hellkite Whelp; Niv-Mizzet, Parun; Never Happened; Notion Rain; Necrotic Wound; Nightveil Sprite; Najeela, the Blade-Blossom ; Nullhide Ferox; Nightveil Predator; Smelt-Ward Minotaur; Swarm Guildmage; Sumala Woodshaper; Sonic Assault; Spinal Centipede; Severed Strands; Sunhome Stalwart; Skyline Scout; Swathcutter Giant; Selesnya Locket; Swiftblade Vindicator; Sprouting Renewal; Status; Silent Dart; Sinister Sabotage; Sworn Companions; Street Riot; Blade Instructor; Book Devourer; Barrier of Bones; Blood Operative; Boros Challenger; Burglar Rat; Barging Sergeant; Bartizan Bats; Bounty Agent; Boros Locket; Beast Whisperer; Bounty of Might; Beacon Bolt; Expansion; Electrostatic Field; Etrata, the Silencer; Experimental Frenzy; Erstwhile Trooper; Emmara, Soul of the Accord; Enhanced Surveillance; Erratic Cyclops; Underrealm Lich; Unexplained Disappearance; Urban Utopia; Undercity Uprising; Undercity Necrolisk; Ornery Goblin; Omnispell Adept; Ochran Assassin; Find; Fire Urchin; Flight of Equenauts; Fearless Halberdier; Fresh-Faced Recruit; Firemind's Research; Flower; Molderhulk; Mausoleum Secrets; Moodmark Painter; Maximize Altitude; Murmuring Mystic; March of the Multitudes; Muse Drake; Mephitic Vapors; Maximize Velocity; Midnight Reaper; Quasiduplicate
+Venerated Loxodon; Vraska, Golgari Queen; Thief of Sanity; Thousand-Year Storm; Treasure Nabber; Charnel Troll; Coveted Jewel; Cheering Fanatic; Genesis Storm; Geode Golem; Isolated Watchtower; Discovery; Azra Bladeseeker; Aminatou, the Fateshifter; Primordial Mist; Plaguecrafter; Lazav, the Multifarious; Nimbus Champion; Selective Snare; Stadium Vendors; Sentinel Tower; Skull Storm; Beamsplitter Mage; Echo Storm; Unmoored Ego; Fury Storm; Mission Briefing; Mnemonic Betrayal
 
 - Guilds of Ravnica -
-Most of Guilds of Ravnica has been implemented and is available in this release. We're working hard on getting the last few cards added.
+All of Guilds of Ravnica has been implemented and is available in this release.
 
 - Token Changes -
 Some work that streamlines tokens is going on under the hood. This may be the cause of missing/incorrect token images if you notice any, though we don't expect there to be any issues.
@@ -21,17 +21,14 @@ Added Randomized Standard Quest World with LDA archetype generated decks as duel
 In this world as well as the random duel opponents, there are randomly generated challenges of varying difficulty and of 2 different types.  One type pits your standard decks against modern, legacy or vintage opponents, the other gives the AI a standard deck, but with a headstart of one or more cards on the battlefield.
 
 - Bug fixes -
+Gonti (and friends) should be fixed now. Let us know if you see anything wonky with mana pools.
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.
 
 -------------
 Known Issues:
 -------------
 
-Online multiplayer functionality has been restored, but is still a Work in Progress. We do have a dedicated developer actively working on the online multiplayer feature.
-
-"When you pay a cost" trigger for M19 cards don't work 100% correctly yet. We're still working on it.
-
-Other known issues are here: https://git.cardforge.org/core-developers/forge/issues
+Known issues are here: https://git.cardforge.org/core-developers/forge/issues
 
 Feel free to report your own there if you have any.
 
