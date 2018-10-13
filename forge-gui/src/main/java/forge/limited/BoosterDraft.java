@@ -17,12 +17,17 @@
  */
 package forge.limited;
 
+import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import forge.StaticData;
 import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
+import forge.item.generation.ChaosBoosterSupplier;
 import forge.item.generation.IUnOpenedProduct;
 import forge.item.generation.UnOpenedProduct;
 import forge.model.CardBlock;
@@ -35,6 +40,7 @@ import forge.util.TextUtil;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.File;
@@ -165,6 +171,40 @@ public class BoosterDraft implements IBoosterDraft {
                     }
 
                     this.setupCustomDraft(customDraft);
+                }
+                break;
+
+            case Chaos:
+                final CardEdition.Collection allEditions = StaticData.instance().getEditions();
+                final Iterable<CardEdition> chaosDraftEditions = Iterables.filter(allEditions.getOrderedEditions(), new Predicate<CardEdition>() {
+                    @Override
+                    public boolean apply(final CardEdition cardEdition) {
+                        boolean isExpansion = cardEdition.getType().equals(CardEdition.Type.EXPANSION);
+                        boolean isCoreSet = cardEdition.getType().equals(CardEdition.Type.CORE);
+                        boolean isReprintSet = cardEdition.getType().equals(CardEdition.Type.REPRINT);
+                        if (isExpansion || isCoreSet || isReprintSet) {
+                            // Only allow sets with 15 cards in booster packs
+                            if (cardEdition.hasBoosterTemplate()) {
+                                final List<Pair<String, Integer>> slots = cardEdition.getBoosterTemplate().getSlots();
+                                int boosterSize = 0;
+                                for (Pair<String, Integer> slot : slots) {
+                                    boosterSize += slot.getRight();
+                                }
+                                return boosterSize == 15;
+                            }
+                        }
+                        return false;
+                    }
+                });
+
+                // Randomize order of sets
+                List<CardEdition> shuffled = Lists.newArrayList(chaosDraftEditions);
+                Collections.shuffle(shuffled);
+
+                final Supplier<List<PaperCard>> ChaosDraftSupplier = new ChaosBoosterSupplier(shuffled);
+
+                for (int i = 0; i < 3; i++) {
+                    this.product.add(ChaosDraftSupplier);
                 }
                 break;
 
