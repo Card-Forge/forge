@@ -21,7 +21,6 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.player.Player;
-import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.SpellAbility;
 
 /**
@@ -152,9 +151,8 @@ public class CostPartMana extends CostPart {
         // TODO Auto-generated method stub
         sa.clearManaPaid();
 
-        boolean isActivated = sa instanceof AbilityActivated;
         // decision not used here, the whole payment is interactive!
-        return payer.getController().payManaCost(this, sa, null, cardMatrix, isActivated);
+        return payer.getController().payManaCost(this, sa, null, cardMatrix, true);
     }
 
 }
