@@ -1,5 +1,5 @@
 - Guilds of Ravnica -
-Most of Guilds of Ravnica has been implemented and is available in this release. We're working hard on getting the last few cards added.
+All of Guilds of Ravnica has been implemented and is available in this release.
 
 - Token Changes -
 Some work that streamlines tokens is going on under the hood. This may be the cause of missing/incorrect token images if you notice any, though we don't expect there to be any issues.
@@ -9,4 +9,5 @@ Added Randomized Standard Quest World with LDA archetype generated decks as duel
 In this world as well as the random duel opponents, there are randomly generated challenges of varying difficulty and of 2 different types.  One type pits your standard decks against modern, legacy or vintage opponents, the other gives the AI a standard deck, but with a headstart of one or more cards on the battlefield.
 
 - Bug fixes -
+Gonti (and friends) should be fixed now. Let us know if you see anything wonky with mana pools.
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.
