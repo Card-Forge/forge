@@ -18,7 +18,7 @@ public class SurveilEffect extends SpellAbilityEffect {
             num = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
         }
 
-        sb.append(" surveil (").append(num).append(").");
+        sb.append(" surveils (").append(num).append(").");
         return sb.toString();
     }
 
