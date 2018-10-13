@@ -5,8 +5,8 @@
     <properties>
         <maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
         <packaging.type>jar</packaging.type>
-        <build.min.memory>-Xms128m</build.min.memory>
-        <build.max.memory>-Xmx1024m</build.max.memory>
+        <build.min.memory>-Xms1024m</build.min.memory>
+        <build.max.memory>-Xmx1536m</build.max.memory>
         <alpha-version>1.6.16.001</alpha-version>
         <sign.keystore>keystore</sign.keystore>
         <sign.alias>alias</sign.alias>
