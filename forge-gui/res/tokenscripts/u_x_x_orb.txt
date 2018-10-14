@@ -1,0 +1,7 @@
+Name:Orb
+ManaCost:no cost
+Types:Creature Orb
+Colors:blue
+PT:*/*
+K:Flying
+Oracle:Flying
