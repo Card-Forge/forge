@@ -1,0 +1,6 @@
+Name:Saproling
+ManaCost:no cost
+Types:Creature Saproling
+Colors:green
+PT:1/1
+Oracle:
