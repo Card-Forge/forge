@@ -1,4 +1,4 @@
-Forge: 10/13/2018 ver 1.6.17
+Forge: 10/15/2018 ver 1.6.17
 
 18204 cards in total.
 
@@ -19,6 +19,9 @@ Some work that streamlines tokens is going on under the hood. This may be the ca
 - Random Quest World -
 Added Randomized Standard Quest World with LDA archetype generated decks as duels and standard card pool - this is designed so that there is always a quest world representing the current standard metagame - with a standard cardpool and decks generated using the LDA archetype based deck generation.  To access this mode, select the "Random Standard" world in the world selection dropdown.
 In this world as well as the random duel opponents, there are randomly generated challenges of varying difficulty and of 2 different types.  One type pits your standard decks against modern, legacy or vintage opponents, the other gives the AI a standard deck, but with a headstart of one or more cards on the battlefield.
+
+- Chaos Draft -
+Chaos Draft is now available in both desktop and mobile Forge, where each player starts with three boosters belonging to random sets from Magic: the Gathering history (only 15-card booster packs are used). To start a Chaos Draft, choose the appropriate menu item after starting a booster draft.
 
 - Bug fixes -
 Gonti (and friends) should be fixed now. Let us know if you see anything wonky with mana pools.
