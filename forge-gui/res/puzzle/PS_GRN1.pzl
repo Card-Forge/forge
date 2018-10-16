@@ -4,7 +4,7 @@ URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2018/10/083.-G
 Goal:Win
 Turns:1
 Difficulty:Rare
-Description:Win this turn. When this puzzle starts, you will be prompted to pay 2 life for Sacred Foundry, you should choose "No" (Sacred Foundry will be placed on the battlefield untapped regardless).
+Description:Win this turn.
 [state]
 humanlife=20
 ailife=5
@@ -12,5 +12,5 @@ turn=1
 activeplayer=human
 activephase=MAIN1
 humanhand=Heroic Reinforcements;Aurelia, Exemplar of Justice;Garna, the Bloodflame;Deafening Clarion;Vraska's Contempt
-humanbattlefield=Blade Instructor;Goblin Banneret;Barging Sergeant;Angrath, the Flame-Chained|Counters:LOYALTY=5;Sacred Foundry;Sacred Foundry;Sacred Foundry;Sacred Foundry;Dragonskull Summit;Dragonskull Summit
+humanbattlefield=Blade Instructor;Goblin Banneret;Barging Sergeant;Angrath, the Flame-Chained|Counters:LOYALTY=5;Sacred Foundry|Set:GRN|NoETBTrigs;Sacred Foundry|Set:GRN|NoETBTrigs;Sacred Foundry|Set:GRN|NoETBTrigs;Sacred Foundry|Set:GRN|NoETBTrigs;Dragonskull Summit;Dragonskull Summit
 aibattlefield=Josu Vess, Lich Knight;t:Zombie Knight,P:2,T:2,Cost:no cost,Color:B,Types:Creature-Zombie-Knight,Keywords:Menace,Image:b_2_2_zombie_knight_dom;t:Zombie Knight,P:2,T:2,Cost:no cost,Color:B,Types:Creature-Zombie-Knight,Keywords:Menace,Image:b_2_2_zombie_knight_dom;t:Zombie Knight,P:2,T:2,Cost:no cost,Color:B,Types:Creature-Zombie-Knight,Keywords:Menace,Image:b_2_2_zombie_knight_dom;t:Zombie Knight,P:2,T:2,Cost:no cost,Color:B,Types:Creature-Zombie-Knight,Keywords:Menace,Image:b_2_2_zombie_knight_dom;t:Zombie Knight,P:2,T:2,Cost:no cost,Color:B,Types:Creature-Zombie-Knight,Keywords:Menace,Image:b_2_2_zombie_knight_dom;t:Zombie Knight,P:2,T:2,Cost:no cost,Color:B,Types:Creature-Zombie-Knight,Keywords:Menace,Image:b_2_2_zombie_knight_dom;t:Zombie Knight,P:2,T:2,Cost:no cost,Color:B,Types:Creature-Zombie-Knight,Keywords:Menace,Image:b_2_2_zombie_knight_dom;t:Zombie Knight,P:2,T:2,Cost:no cost,Color:B,Types:Creature-Zombie-Knight,Keywords:Menace,Image:b_2_2_zombie_knight_dom
