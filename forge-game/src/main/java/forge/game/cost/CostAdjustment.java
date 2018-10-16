@@ -237,6 +237,7 @@ public class CostAdjustment {
                 }
             }
             if (sa.getHostCard().hasKeyword(Keyword.CONVOKE)) {
+                sa.getHostCard().clearConvoked();
                 adjustCostByConvokeOrImprovise(cost, sa, false, test);
             }
             if (sa.getHostCard().hasKeyword(Keyword.IMPROVISE)) {
@@ -270,6 +271,9 @@ public class CostAdjustment {
             cost.decreaseShard(conv.getValue(), 1);
             if (!test) {
                 conv.getKey().tap();
+                if (!improvise) {
+                    sa.getHostCard().addConvoked(conv.getKey());
+                }
             }
         }
     }
@@ -497,15 +501,6 @@ public class CostAdjustment {
                 }
             } else if (type.equals("MorphDown")) {
                 if (!sa.isSpell() || !((Spell) sa).isCastFaceDown()) {
-                    return false;
-                }
-            } else if (type.equals("SelfMonstrosity")) {
-                if (!(sa instanceof AbilityActivated) || !sa.hasParam("Monstrosity") || sa.isTemporary()) {
-                    // Nemesis of Mortals
-                    return false;
-                }
-            } else if (type.equals("SelfIntrinsicAbility")) {
-                if (!(sa instanceof AbilityActivated) || sa.isReplacementAbility() || sa.isTemporary()) {
                     return false;
                 }
             }

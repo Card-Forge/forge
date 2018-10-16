@@ -1,0 +1,14 @@
+Name:Flower
+ManaCost:G/W
+Types:Sorcery
+AlternateMode: Split
+A:SP$ ChangeZone | Cost$ G/W | Origin$ Library | Destination$ Hand | ChangeType$ Land.Forest+Basic,Land.Plains+Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic Forest or Plains card, reveal it, put it into your hand, then shuffle your library.
+Oracle:Search your library for a basic Forest or Plains card, reveal it, put it into your hand, then shuffle your library.
+
+ALTERNATE
+
+Name:Flourish
+ManaCost:4 G W
+Types:Sorcery
+A:SP$ PumpAll | Cost$ 4 G W | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Creatures you control get +2/+2 until end of turn.
+Oracle:Creatures you control get +2/+2 until end of turn.

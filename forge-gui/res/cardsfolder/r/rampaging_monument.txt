@@ -1,0 +1,11 @@
+Name:Rampaging Monument
+ManaCost:4
+Types:Artifact Creature Cleric
+PT:0/0
+K:Trample
+K:etbCounter:P1P1:3
+T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a multicolored spell, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Card.MultiColor
+DeckHas:Ability$Counters
+Oracle:Trample\nRampaging Monument enters the battlefield with three +1/+1 counters on it.\nWhenever you cast a multicolored spell, put a +1/+1 counter on Rampaging Monument.

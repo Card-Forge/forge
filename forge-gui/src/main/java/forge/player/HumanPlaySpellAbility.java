@@ -17,14 +17,8 @@
  */
 package forge.player;
 
-import java.util.Collections;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
-
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.MagicColor;
@@ -41,13 +35,13 @@ import forge.game.keyword.KeywordInterface;
 import forge.game.mana.ManaPool;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
-import forge.game.spellability.AbilityActivated;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.Spell;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
+import forge.game.spellability.*;
 import forge.game.zone.Zone;
 import forge.util.collect.FCollection;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Collections;
+import java.util.Map;
 
 /**
  * <p>
@@ -122,13 +116,15 @@ public class HumanPlaySpellAbility {
             ability.resetPaidHash();
         }
 
+        // TODO Apply this to the SAStackInstance instead of the Player
         if (manaTypeConversion) {
-            AbilityUtils.applyManaColorConversion(human, MagicColor.Constant.ANY_TYPE_CONVERSION);
+            AbilityUtils.applyManaColorConversion(payment, MagicColor.Constant.ANY_TYPE_CONVERSION);
         } else if (manaColorConversion) {
-            AbilityUtils.applyManaColorConversion(human, MagicColor.Constant.ANY_COLOR_CONVERSION);
+            AbilityUtils.applyManaColorConversion(payment, MagicColor.Constant.ANY_COLOR_CONVERSION);
         }
+
         if (playerManaConversion) {
-            AbilityUtils.applyManaColorConversion(human, MagicColor.Constant.ANY_COLOR_CONVERSION);
+            AbilityUtils.applyManaColorConversion(manapool, MagicColor.Constant.ANY_COLOR_CONVERSION);
             human.incNumManaConversion();
         }
         
@@ -146,7 +142,7 @@ public class HumanPlaySpellAbility {
             }
 
             if (keywordColor) {
-                AbilityUtils.applyManaColorConversion(human, params);
+                AbilityUtils.applyManaColorConversion(payment, params);
             }
         }
 
@@ -169,6 +165,7 @@ public class HumanPlaySpellAbility {
                     ability.getHostCard().unanimateBestow();
                 }
             }
+
             if (manaTypeConversion || manaColorConversion || keywordColor) {
                 manapool.restoreColorReplacements();
             }

@@ -231,6 +231,9 @@ public class CardState extends GameObject {
     public final boolean removeIntrinsicKeyword(final String s) {
         return intrinsicKeywords.remove(s);
     }
+    public final boolean removeIntrinsicKeyword(final KeywordInterface s) {
+        return intrinsicKeywords.remove(s);
+    }
 
     public final FCollectionView<SpellAbility> getSpellAbilities() {
         FCollection<SpellAbility> newCol = new FCollection<SpellAbility>(manaAbilities);
@@ -539,7 +542,7 @@ public class CardState extends GameObject {
             intrinsicKeywords.insert(inst);
         }
     }
-    
+
     public void updateChangedText() {
         final List<CardTraitBase> allAbs = ImmutableList.<CardTraitBase>builder()
             .addAll(manaAbilities)
@@ -551,6 +554,21 @@ public class CardState extends GameObject {
         for (final CardTraitBase ctb : allAbs) {
             if (ctb.isIntrinsic()) {
                 ctb.changeText();
+            }
+        }
+    }
+
+    public void changeTextIntrinsic(Map<String,String> colorMap, Map<String,String> typeMap) {
+        final List<CardTraitBase> allAbs = ImmutableList.<CardTraitBase>builder()
+            .addAll(manaAbilities)
+            .addAll(nonManaAbilities)
+            .addAll(triggers)
+            .addAll(replacementEffects)
+            .addAll(staticAbilities)
+            .build();
+        for (final CardTraitBase ctb : allAbs) {
+            if (ctb.isIntrinsic()) {
+                ctb.changeTextIntrinsic(colorMap, typeMap);
             }
         }
     }

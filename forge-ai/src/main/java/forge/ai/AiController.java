@@ -38,6 +38,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellApiBased;
 import forge.game.card.*;
+import forge.game.card.CardPredicates.Accessors;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -422,7 +423,8 @@ public class AiController {
                         }
                     }
                 }
-                return true;
+
+                return player.canPlayLand(c);
             }
         });
         return landList;
@@ -1174,7 +1176,7 @@ public class AiController {
         if (landsWannaPlay != null) {
             landsWannaPlay = filterLandsToPlay(landsWannaPlay);
             Log.debug("Computer " + game.getPhaseHandler().getPhase().nameForUi);
-            if (landsWannaPlay != null && !landsWannaPlay.isEmpty() && player.canPlayLand(null)) {
+            if (landsWannaPlay != null && !landsWannaPlay.isEmpty()) {
                 // TODO search for other land it might want to play?
                 Card land = chooseBestLandToPlay(landsWannaPlay);
                 if (ComputerUtil.getDamageFromETB(player, land) < player.getLife() || !player.canLoseLife() 
@@ -1483,22 +1485,24 @@ public class AiController {
         
         boolean hasLeyline1 = false;
         SpellAbility saGemstones = null;
-        
-        for(int i = 0; i < result.size(); i++) {
-            SpellAbility sa = result.get(i);
-            
+
+        List<SpellAbility> toRemove = Lists.newArrayList();
+        for(SpellAbility sa : result) {
             String srcName = sa.getHostCard().getName();
             if ("Gemstone Caverns".equals(srcName)) {
                 if (saGemstones == null)
                     saGemstones = sa;
                 else
-                    result.remove(i--);
+                    toRemove.add(sa);
             } else if ("Leyline of Singularity".equals(srcName)) {
                 if (!hasLeyline1)
                     hasLeyline1 = true;
                 else
-                    result.remove(i--);
+                    toRemove.add(sa);
             }
+        }
+        for(SpellAbility sa : toRemove) {
+            result.remove(sa);
         }
         
         // Play them last
@@ -1800,6 +1804,12 @@ public class AiController {
                 all.addAll(right);
                 return left.contains(ComputerUtilCard.getBestCreatureAI(all));
             }
+        }
+        if ("Aminatou".equals(sa.getParam("AILogic")) && game.getPlayers().size() > 2) {
+            CardCollection all = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.NONLAND_PERMANENTS);
+            CardCollection left = CardLists.filterControlledBy(all, game.getNextPlayerAfter(player, Direction.Left));
+            CardCollection right = CardLists.filterControlledBy(all, game.getNextPlayerAfter(player, Direction.Right));
+            return Aggregates.sum(left, Accessors.fnGetCmc) > Aggregates.sum(right, Accessors.fnGetCmc);
         }
         return MyRandom.getRandom().nextBoolean();
     }

@@ -20,9 +20,7 @@ package forge.game.mana;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-
 import forge.GameCommand;
-import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
@@ -37,14 +35,9 @@ import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * <p>
@@ -54,7 +47,7 @@ import java.util.List;
  * @author Forge
  * @version $Id$
  */
-public class ManaPool implements Iterable<Mana> {
+public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     private final Player owner;
     private final Multimap<Byte, Mana> floatingMana = ArrayListMultimap.create();
 
@@ -355,37 +348,10 @@ public class ManaPool implements Iterable<Mana> {
         Player p = sa.getActivatingPlayer();
         p.getGame().fireEvent(new GameEventZone(ZoneType.Battlefield, p, EventValueChangeType.ComplexUpdate, null));
     }
-    
-    // Conversion matrix ORs byte values to make mana more payable
-    // Restrictive matrix ANDs byte values to make mana less payable
-    private final byte[] colorConversionMatrix = new byte[ManaAtom.MANATYPES.length];
-    private final byte[] colorRestrictionMatrix = new byte[ManaAtom.MANATYPES.length];
-    private static final byte[] identityMatrix = { ManaAtom.WHITE, ManaAtom.BLUE, ManaAtom.BLACK, ManaAtom.RED, ManaAtom.GREEN, ManaAtom.COLORLESS };
-
-    public void adjustColorReplacement(byte originalColor, byte replacementColor, boolean additive) {
-        // Fix the index without hardcodes
-        int rowIdx = MagicColor.getIndexOfFirstColor(originalColor);
-        rowIdx = rowIdx < 0 ? identityMatrix.length - 1 : rowIdx;
-        if (additive) {
-            colorConversionMatrix[rowIdx] |= replacementColor;
-        }
-        else {
-            colorRestrictionMatrix[rowIdx] &= replacementColor;
-        }
-    }
-
-    public void restoreColorReplacements() {
-        for (int i = 0; i < colorConversionMatrix.length; i++) {
-            colorConversionMatrix[i] = identityMatrix[i];
-        }
-        for (int i = 0; i < colorRestrictionMatrix.length; i++) {
-            colorRestrictionMatrix[i] = ColorSet.ALL_COLORS.getColor();
-        }
-    }
 
     public byte getPossibleColorUses(byte color) {
         // Take the current conversion value, AND with restrictions to get mana usage
-        int rowIdx = MagicColor.getIndexOfFirstColor(color);
+        int rowIdx = ManaAtom.getIndexOfFirstManaType(color);
         int matrixIdx = rowIdx < 0 ? identityMatrix.length - 1 : rowIdx;
 
         byte colorUse = colorConversionMatrix[matrixIdx];
@@ -394,14 +360,16 @@ public class ManaPool implements Iterable<Mana> {
     }
 
     public boolean canPayForShardWithColor(ManaCostShard shard, byte color) {
+        // TODO Debug this for Paying Gonti,
         byte line = getPossibleColorUses(color);
-        for (int i = 0; i < MagicColor.NUMBER_OR_COLORS; i++) {
-            byte outColor = MagicColor.WUBRG[i];
+
+        for(byte outColor : ManaAtom.MANATYPES) {
             if ((line & outColor) != 0 && shard.canBePaidWithManaOfColor(outColor)) {
                 return true;
             }
         }
 
+        // TODO The following may not be needed anymore?
         if (((color & (byte) ManaAtom.COLORLESS) != 0) && shard.canBePaidWithManaOfColor((byte) (byte)ManaAtom.COLORLESS)) {
             return true;
         }

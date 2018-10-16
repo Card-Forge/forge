@@ -1,13 +1,7 @@
 package forge.toolbox;
 
-import java.io.File;
-import java.io.FilenameFilter;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -15,11 +9,14 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
-import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
 import forge.util.FileUtil;
 import forge.util.Utils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
+import java.io.FilenameFilter;
 
 public class FFileChooser extends FDialog {
     private static final float BACK_ICON_THICKNESS = Utils.scale(2);
@@ -321,7 +318,7 @@ public class FFileChooser extends FDialog {
             //draw back icon
             float w = getHeight();
             float h = w;
-            float x = w * 0.35f; 
+            float x = w * 0.35f;
             float y = h / 2;
             float offsetX = w / 8;
             float offsetY = h / 6;
@@ -395,7 +392,7 @@ public class FFileChooser extends FDialog {
                     if (value.isDirectory()) {
                         float iconSize = h;
                         g.drawImage(FSkinImage.FOLDER, x, y + (h - iconSize) / 2, iconSize, iconSize);
-                        x += iconSize + FList.PADDING; 
+                        x += iconSize + FList.PADDING;
                     }
                     g.drawText(value.getName(), font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
                 }

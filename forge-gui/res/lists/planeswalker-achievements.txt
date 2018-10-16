@@ -88,6 +88,8 @@ Nissa, Worldwaker|Nissa's Awakening|The whole country is here!
 Ob Nixilis of the Black Oath|Nixilis's Black Oath|We all have to bring sacrifices sometimes.
 Ob Nixilis Reignited|Ob Nixilis's Torment|I'll give you dreams from beyond the underworld!
 Ral Zarek|Ral's Long Day|So much work, so much time!
+Ral, Caller of Storms|Ral's Invocation|The storm called and left a message.
+Ral, Izzet Viceroy|Ral's Bonus|I was just researching lightning and then it hit me.
 Saheeli Rai|Saheeli's Creativity|I love when all the pieces come together!
 Saheeli, the Gifted|Saheeli's Doubling Season|Polished to mirror sheen.
 Samut, the Tested|Samut's Rapid Deployment|My friends will be here in a flash.
@@ -117,9 +119,11 @@ Ugin, the Spirit Dragon|Ugin's Anti-Ultimatum|A ragtag band of misfits, brought 
 Venser, the Sojourner|Venser's Oblivion|Let's just clean this up a bit...
 Vivien of the Arkbow|Vivien's Overrun|No, never heard of a 'Garruk' -- why do you ask?
 Vivien Reid|Vivien's Utter Pandemonium|They're so cute when they're stampeding.
-Vraska, Scheming Gorgon|Vraska's Stone Gaze|I think we could use a new figurehead!
 Vraska the Unseen|Vraska's Crew|Say hello to my little friends!
+Vraska, Golgari Queen|Vraska's Training Regime|Step one - give them a scratch. There's no step two.
+Vraska, Regal Gorgon|Vraska's Scavenger Hunt|Death is not the opposite of life - it's its complement.
 Vraska, Relic Seeker|Vraska's Mark|Never play hide and seek with a Gorgon.
+Vraska, Scheming Gorgon|Vraska's Stone Gaze|I think we could use a new figurehead!
 Xenagos, the Reveler|Xenagos's Reveal|Mwahahaha! Now I'm a god!
 Jiang Yanggu|Yanggu's Giant Growth|Now, Mowu! Fetch that tree!
 Mu Yanling|Yanling's Time Manipulation|Sleep now, for three days and three nights.

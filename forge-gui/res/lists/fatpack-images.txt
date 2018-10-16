@@ -24,6 +24,7 @@ https://downloads.cardforge.org/images/products/fatpacks/EVE.jpg
 https://downloads.cardforge.org/images/products/fatpacks/FRF.jpg
 https://downloads.cardforge.org/images/products/fatpacks/FUT.jpg
 https://downloads.cardforge.org/images/products/fatpacks/GPT.jpg
+https://downloads.cardforge.org/images/products/fatpacks/GRN.jpg
 https://downloads.cardforge.org/images/products/fatpacks/GTC.jpg
 https://downloads.cardforge.org/images/products/fatpacks/HOU.jpg
 https://downloads.cardforge.org/images/products/fatpacks/INV.jpg

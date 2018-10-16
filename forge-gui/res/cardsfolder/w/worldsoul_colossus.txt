@@ -1,0 +1,9 @@
+Name:Worldsoul Colossus
+ManaCost:X G W
+Types:Creature Elemental
+PT:0/0
+K:Convoke
+K:etbCounter:P1P1:X
+SVar:X:Count$xPaid
+DeckHas:Ability$Counters
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nWorldsoul Colossus enters the battlefield with X +1/+1 counters on it.

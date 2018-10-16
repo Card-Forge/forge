@@ -1,6 +1,7 @@
 package forge.match.input;
 
 import forge.game.card.Card;
+import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -10,13 +11,16 @@ import forge.properties.ForgePreferences;
 import forge.util.ITriggerEvent;
 
 public class InputPayManaOfCostPayment extends InputPayMana {
-    public InputPayManaOfCostPayment(final PlayerControllerHuman controller, ManaCostBeingPaid cost, SpellAbility spellAbility, Player payer) {
+    public InputPayManaOfCostPayment(final PlayerControllerHuman controller, ManaCostBeingPaid cost, SpellAbility spellAbility, Player payer, ManaConversionMatrix matrix) {
         super(controller, spellAbility, payer);
         manaCost = cost;
+        extraMatrix = matrix;
+        applyMatrix();
     }
 
     private static final long serialVersionUID = 3467312982164195091L;
     private int phyLifeToLose = 0;
+    private ManaConversionMatrix extraMatrix;
 
     @Override
     protected final void onPlayerSelected(Player selected, final ITriggerEvent triggerEvent) {
@@ -47,6 +51,8 @@ public class InputPayManaOfCostPayment extends InputPayMana {
         final String displayMana = manaCost.toString(false, player.getManaPool());
         final StringBuilder msg = new StringBuilder();
 
+        applyMatrix();
+
         if (messagePrefix != null) {
             msg.append(messagePrefix).append("\n");
         }
@@ -70,5 +76,13 @@ public class InputPayManaOfCostPayment extends InputPayMana {
         }
 
         return msg.toString();
+    }
+
+    private void applyMatrix() {
+        if (extraMatrix == null) {
+            return;
+        }
+
+        player.getManaPool().applyCardMatrix(extraMatrix);
     }
 }

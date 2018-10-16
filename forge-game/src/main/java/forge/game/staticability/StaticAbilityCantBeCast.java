@@ -160,6 +160,14 @@ public class StaticAbilityCantBeCast {
             return false;
         }
 
+        if (params.containsKey("Origin")) {
+            List<ZoneType> src = ZoneType.listValueOf(params.get("Origin"));
+
+            if (!src.contains(card.getZone().getZoneType())) {
+                return false;
+            }
+        }
+
         if (params.containsKey("Player") && (player != null)
                 && !player.isValid(params.get("Player"), hostCard.getController(), hostCard, null)) {
             return false;

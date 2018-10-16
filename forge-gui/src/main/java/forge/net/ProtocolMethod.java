@@ -3,6 +3,7 @@ package forge.net;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.Collection;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.Map;
 
@@ -165,6 +166,9 @@ public enum ProtocolMethod {
                 } catch (ArrayIndexOutOfBoundsException ex) {
                     // not sure why this one would be thrown, but it is
                     // it also doesn't prevent things from working, so, log for now, pending full network rewrite
+                    ex.printStackTrace();
+                } catch(ConcurrentModificationException ex) {
+                    // can't seem to avoid this from periodically happening
                     ex.printStackTrace();
                 }
             }

@@ -281,6 +281,8 @@ public final class CardUtil {
         newCopy.setChangedCardKeywords(in.getChangedCardKeywords());
         newCopy.setChangedCardTypes(in.getChangedCardTypesMap());
 
+        newCopy.copyChangedTextFrom(in);
+
         newCopy.setMeldedWith(in.getMeldedWith());
 
         newCopy.setTimestamp(in.getTimestamp());

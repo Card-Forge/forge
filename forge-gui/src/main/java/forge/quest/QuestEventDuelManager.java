@@ -38,7 +38,7 @@ import java.util.*;
  * @author Forge
  * @version $Id: QuestEventManager.java 20404 2013-03-17 05:34:13Z myk $
  */
-public class QuestEventDuelManager {
+public class QuestEventDuelManager implements QuestEventDuelManagerInterface {
 
     private final MapOfLists<QuestEventDifficulty, QuestEventDuel> sortedDuels = new EnumMapOfLists<>(QuestEventDifficulty.class, CollectionSuppliers.<QuestEventDuel>arrayLists());
     private final IStorage<QuestEventDuel> allDuels;

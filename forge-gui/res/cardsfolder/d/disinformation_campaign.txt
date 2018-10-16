@@ -1,0 +1,10 @@
+Name:Disinformation Campaign
+ManaCost:1 U B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, you draw a card and each opponent discards a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose
+T:Mode$ Surveil | ValidPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ Whenever you surveil, return CARDNAME to its owner's hand.
+SVar:TrigBounce:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Self
+DeckHints:Ability$Surveil
+Oracle:When Disinformation Campaign enters the battlefield, you draw a card and each opponent discards a card.\nWhenever you surveil, return Disinformation Campaign to its owner's hand.

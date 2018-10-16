@@ -48,8 +48,8 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
     private static final int TROPHIES_PER_SHELVE = 4;
     private static final int PADDING = 5;
     private static final int TROPHY_PADDING = 45;
-    private static final SkinFont NAME_FONT = FSkin.getBoldFont(14);
-    private static final SkinFont DESC_FONT = FSkin.getFont(12);
+    private static final SkinFont NAME_FONT = FSkin.getRelativeBoldFont(14);
+    private static final SkinFont DESC_FONT = FSkin.getFont();
     private static final SkinColor TEXT_COLOR = FSkin.getColor(Colors.CLR_TEXT);
     private static final SkinColor NOT_EARNED_COLOR = TEXT_COLOR.alphaColor(128);
     private static final SkinColor TEXTURE_OVERLAY_COLOR = FSkin.getColor(Colors.CLR_THEME);
@@ -121,7 +121,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
 
         AchievementCollection.buildComboBox(cbCollections);
 
-        cbCollections.setSkinFont(FSkin.getBoldFont(14));
+        cbCollections.setSkinFont(FSkin.getRelativeBoldFont(14));
         cbCollections.setTextAlignment(TextAlignment.CENTER);
         cbCollections.addActionListener(new ActionListener() {
             @Override
@@ -264,8 +264,8 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
         private static final SkinImage imgTop = FSkin.getImage(FSkinProp.IMG_TROPHY_CASE_TOP);
         private static final SkinImage imgShelf = FSkin.getImage(FSkinProp.IMG_TROPHY_SHELF);
         private static final SkinImage imgTrophyPlate = FSkin.getImage(FSkinProp.IMG_TROPHY_PLATE);
-        private static final Font font = FSkin.getFixedFont(14).deriveFont(Font.BOLD);
-        private static final Font subFont = FSkin.getFixedFont(12);
+        private static final Font font = FSkin.getRelativeFixedFont(14).deriveFont(Font.BOLD);
+        private static final Font subFont = FSkin.getFixedFont();
         private static final Color foreColor = new Color(239, 220, 144);
 
         private AchievementCollection achievements;

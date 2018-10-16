@@ -188,6 +188,21 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return supertypes.remove(st);
     }
 
+    public boolean remove(final String str) {
+        boolean changed = false;
+        if (CardType.isASupertype(str) && supertypes.remove(stringToSupertype.get(str))) {
+            changed = true;
+        } else if (CardType.isACardType(str) && coreTypes.remove(stringToCoreType.get(str))) {
+            changed = true;
+        } else if (subtypes.remove(str)) {
+            changed = true;
+        }
+        if (changed) {
+            calculatedType = null;
+        }
+        return changed;
+    }
+
     public boolean setCreatureTypes(Collection<String> ctypes) {
         // if it isn't a creature then this has no effect
         if (!isCreature() && !isTribal()) {

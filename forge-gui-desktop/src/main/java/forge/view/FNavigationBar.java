@@ -382,7 +382,7 @@ public class FNavigationBar extends FTitleBarBase {
             setOpaque(false);
             this.setIcon(screen0.getTabIcon());
             this.setForeground(foreColor.alphaColor(unhoveredAlpha));
-            this.setFont(FSkin.getFont(fontSize));
+            this.setFont(FSkin.getRelativeFont(fontSize));
 
             int closeButtonOffset;
             if (screen.allowTabClose()) {
@@ -434,7 +434,7 @@ public class FNavigationBar extends FTitleBarBase {
         private void setSelected(final boolean selected0) {
             if (this.selected == selected0) { return; }
             this.selected = selected0;
-            this.setFont(selected0 ? FSkin.getBoldFont(fontSize) : FSkin.getFont(fontSize));
+            this.setFont(selected0 ? FSkin.getRelativeBoldFont(fontSize) : FSkin.getRelativeFont(fontSize));
             repaintSelf();
         }
 

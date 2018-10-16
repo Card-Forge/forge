@@ -663,7 +663,7 @@ public class PlayerPanel extends FPanel {
 
         txtPlayerName.setText(name);
         txtPlayerName.setFocusable(true);
-        txtPlayerName.setFont(FSkin.getFont(14));
+        txtPlayerName.setFont(FSkin.getRelativeFont(14));
         txtPlayerName.addActionListener(lobby.nameListener);
         txtPlayerName.addFocusListener(nameFocusListener);
     }

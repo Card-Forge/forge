@@ -372,6 +372,8 @@ public class PhaseHandler implements java.io.Serializable {
 
                     game.getEndOfCombat().executeUntil(); //Repeat here in case Time Stop et. al. ends combat early
                     game.getEndOfTurn().executeUntil();
+                    game.getEndOfTurn().executeUntilEndOfPhase(playerTurn);
+                    game.getEndOfTurn().registerUntilEndCommand(playerTurn);
 
                     for (Player player : game.getPlayers()) {
                         player.onCleanupPhase();
@@ -664,7 +666,7 @@ public class PhaseHandler implements java.io.Serializable {
 
         combat.removeAbsentCombatants();
 
-        combat.fireTriggersForUnblockedAttackers();
+        combat.fireTriggersForUnblockedAttackers(game);
 
         final List<Card> declaredBlockers = combat.getAllBlockers();
         if (!declaredBlockers.isEmpty()) {

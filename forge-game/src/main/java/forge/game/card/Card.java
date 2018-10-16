@@ -98,7 +98,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final KeywordCollection hiddenExtrinsicKeyword = new KeywordCollection();
 
     // cards attached or otherwise linked to this card
-    private CardCollection equippedBy, fortifiedBy, hauntedBy, devouredCards, delvedCards, imprintedCards, encodedCards;
+    private CardCollection equippedBy, fortifiedBy, hauntedBy, devouredCards, delvedCards, convokedCards, imprintedCards, encodedCards;
     private CardCollection mustBlockCards, clones, gainControlTargets, chosenCards, blockedThisTurn, blockedByThisTurn;
 
     // if this card is attached or linked to something, what card is it currently attached to
@@ -723,6 +723,20 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public final void clearDelved() {
         delvedCards = null;
+    }
+
+
+    public final CardCollectionView getConvoked() {
+        return CardCollection.getView(convokedCards);
+    }
+    public final void addConvoked(final Card c) {
+        if (convokedCards == null) {
+            convokedCards = new CardCollection();
+        }
+        convokedCards.add(c);
+    }
+    public final void clearConvoked() {
+        convokedCards = null;
     }
 
     public MapOfLists<GameEntity, Object> getRememberMap() {
@@ -3635,6 +3649,12 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final void removeIntrinsicKeyword(final String s) {
+        if (currentState.removeIntrinsicKeyword(s)) {
+            currentState.getView().updateKeywords(this, currentState);
+        }
+    }
+
+    public final void removeIntrinsicKeyword(final KeywordInterface s) {
         if (currentState.removeIntrinsicKeyword(s)) {
             currentState.getView().updateKeywords(this, currentState);
         }

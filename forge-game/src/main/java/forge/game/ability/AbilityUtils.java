@@ -18,6 +18,7 @@ import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.keyword.KeywordInterface;
+import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -1642,7 +1643,7 @@ public class AbilityUtils {
         return CardFactoryUtil.xCount(c, s2);
     }
 
-    public static final void applyManaColorConversion(final Player p, final Map<String, String> params) {
+    public static final void applyManaColorConversion(ManaConversionMatrix matrix, final Map<String, String> params) {
         String conversionType = params.get("ManaColorConversion");
 
         // Choices are Additives(OR) or Restrictive(AND)
@@ -1655,14 +1656,15 @@ public class AbilityUtils {
                 String convertTo = params.get(key);
                 byte convertByte = 0;
                 if ("All".equals(convertTo)) {
-                    convertByte = ColorSet.ALL_COLORS.getColor();
+                    // IMPORTANT! We need to use Mana Color here not Card Color.
+                    convertByte = ManaAtom.ALL_MANA_TYPES;
                 } else {
                     for (final String convertColor : convertTo.split(",")) {
                         convertByte |= ManaAtom.fromName(convertColor);
                     }
                 }
                 // AdjustColorReplacement has two different matrices handling final mana conversion under the covers
-                p.getManaPool().adjustColorReplacement(ManaAtom.fromName(c), convertByte, additive);
+                matrix.adjustColorReplacement(ManaAtom.fromName(c), convertByte, additive);
             }
         }
     }
@@ -1724,12 +1726,18 @@ public class AbilityUtils {
     }
 
     private static final String applyTextChangeEffects(final String def, final Card card, final boolean isDescriptive) {
+        return applyTextChangeEffects(def, isDescriptive,
+                card.getChangedTextColorWords(), card.getChangedTextTypeWords());
+    }
+
+    public static final String applyTextChangeEffects(final String def, final boolean isDescriptive,
+            Map<String,String> colorMap, Map<String,String> typeMap) {
         if (StringUtils.isEmpty(def)) {
             return def;
         }
 
         String replaced = def;
-        for (final Entry<String, String> e : card.getChangedTextColorWords().entrySet()) {
+        for (final Entry<String, String> e : colorMap.entrySet()) {
             final String key = e.getKey();
             String value;
             if (key.equals("Any")) {
@@ -1750,7 +1758,7 @@ public class AbilityUtils {
                 replaced = replaced.replaceAll("(?<!>)" + key, value);
             }
         }
-        for (final Entry<String, String> e : card.getChangedTextTypeWords().entrySet()) {
+        for (final Entry<String, String> e : typeMap.entrySet()) {
             final String key = e.getKey();
             final String pkey = CardType.getPluralType(key);
             final String pvalue = getReplacedText(pkey, CardType.getPluralType(e.getValue()), isDescriptive);

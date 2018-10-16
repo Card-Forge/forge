@@ -12,6 +12,7 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardUtil;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -19,6 +20,8 @@ import forge.item.PaperToken;
 
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class TokenInfo {
     final String name;
@@ -229,10 +232,121 @@ public class TokenInfo {
         String edition = host.getSetCode();
         PaperToken token = StaticData.instance().getAllTokens().getToken(script, edition);
 
-        // TODO add Card Text Change from SpellAbility
-
         if (token != null) {
-            return Card.fromPaperCard(token, null, game);
+            final Card result = Card.fromPaperCard(token, null, game);
+
+            // update Token with CardTextChanges
+            Map<String, String> colorMap = sa.getChangedTextColors();
+            Map<String, String> typeMap = sa.getChangedTextTypes();
+            if (!colorMap.isEmpty()) {
+                if (!result.isColorless()) {
+                    // change Token Colors
+                    byte color = CardUtil.getColors(result).getColor();
+
+                    for (final Map.Entry<String, String> e : colorMap.entrySet()) {
+                        byte v = MagicColor.fromName(e.getValue());
+                        // Any used by Swirl the Mists
+                        if ("Any".equals(e.getKey())) {
+                            for (final byte c : MagicColor.WUBRG) {
+                                // try to replace color flips
+                                if ((color & c) != 0) {
+                                    color &= ~c;
+                                    color |= v;
+                                }
+                            }
+                        } else {
+                            byte c = MagicColor.fromName(e.getKey());
+                            // try to replace color flips
+                            if ((color & c) != 0) {
+                                color &= ~c;
+                                color |= v;
+                            }
+                        }
+                    }
+
+                    result.setColor(color);
+                }
+            }
+            if (!typeMap.isEmpty()) {
+                String oldName = result.getName();
+
+                CardType type = new CardType(result.getType());
+                String joinedName = StringUtils.join(type.getSubtypes(), " ");
+                final boolean nameGenerated = oldName.equals(joinedName);
+                boolean typeChanged = false;
+
+                if (!Iterables.isEmpty(type.getSubtypes())) {
+                    for (final Map.Entry<String, String> e : typeMap.entrySet()) {
+                        if (type.hasSubtype(e.getKey())) {
+                            type.remove(e.getKey());
+                            type.add(e.getValue());
+                            typeChanged = true;
+                        }
+                    }
+                }
+
+                if (typeChanged) {
+                    result.setType(type);
+
+                    // update generated Name
+                    if (nameGenerated) {
+                        result.setName(StringUtils.join(type.getSubtypes(), " "));
+                    }
+                }
+            }
+
+            // replace Intrinsic Keyword
+            List<KeywordInterface> toRemove = Lists.newArrayList();
+            List<String> toAdd = Lists.newArrayList();
+            for (final KeywordInterface k : result.getCurrentState().getIntrinsicKeywords()) {
+                final String o = k.getOriginal();
+                // only Modifiable should go there
+                if (!CardUtil.isKeywordModifiable(o)) {
+                    continue;
+                }
+                String r = new String(o);
+                // replace types
+                for (final Map.Entry<String, String> e : typeMap.entrySet()) {
+                    final String key = e.getKey();
+                    final String pkey = CardType.getPluralType(key);
+                    final String value = e.getValue();
+                    final String pvalue = CardType.getPluralType(e.getValue());
+                    r = r.replaceAll(pkey, pvalue);
+                    r = r.replaceAll(key, value);
+                }
+                // replace color words
+                for (final Map.Entry<String, String> e : colorMap.entrySet()) {
+                    final String vName = e.getValue();
+                    final String vCaps = StringUtils.capitalize(vName);
+                    final String vLow = vName.toLowerCase();
+                    if ("Any".equals(e.getKey())) {
+                        for (final byte c : MagicColor.WUBRG) {
+                            final String cName = MagicColor.toLongString(c);
+                            final String cNameCaps = StringUtils.capitalize(cName);
+                            final String cNameLow = cName.toLowerCase();
+                            r = r.replaceAll(cNameCaps, vCaps);
+                            r = r.replaceAll(cNameLow, vLow);
+                        }
+                    } else {
+                        final String cName = e.getKey();
+                        final String cNameCaps = StringUtils.capitalize(cName);
+                        final String cNameLow = cName.toLowerCase();
+                        r = r.replaceAll(cNameCaps, vCaps);
+                        r = r.replaceAll(cNameLow, vLow);
+                    }
+                }
+                if (!r.equals(o)) {
+                    toRemove.add(k);
+                    toAdd.add(r);
+                }
+            }
+            for (final KeywordInterface k : toRemove) {
+                result.getCurrentState().removeIntrinsicKeyword(k);
+            }
+            result.addIntrinsicKeywords(toAdd);
+
+            result.getCurrentState().changeTextIntrinsic(colorMap, typeMap);
+            return result;
         }
 
         return null;

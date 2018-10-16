@@ -24,8 +24,10 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
@@ -158,6 +160,31 @@ public class TriggerSpellAbilityCast extends Trigger {
             }
         }
 
+        if (hasParam("CanTargetOtherCondition")) {
+            final CardCollection candidates = new CardCollection();
+            SpellAbility targetedSA = spellAbility;
+            while (targetedSA != null) {
+                if (targetedSA.usesTargeting() && targetedSA.getTargets().getNumTargeted() != 0) {
+                    break;
+                }
+                targetedSA = targetedSA.getSubAbility();
+            }
+            if (targetedSA == null) {
+                return false;
+            }
+            final List<GameEntity> candidateTargets = targetedSA.getTargetRestrictions().getAllCandidates(targetedSA, true);
+            for (GameEntity card : candidateTargets) {
+                if (card instanceof Card) {
+                    candidates.add((Card) card);
+                }
+            }
+            candidates.removeAll(targetedSA.getTargets().getTargetCards());
+            String valid = this.mapParams.get("CanTargetOtherCondition");
+            if (CardLists.getValidCards(candidates, valid, spellAbility.getActivatingPlayer(), spellAbility.getHostCard()).isEmpty()) {
+                return false;
+            }
+        }
+
         if (hasParam("NonTapCost")) {
             final Cost cost = (Cost) (runParams2.get("Cost"));
             if (cost.hasTapCost()) {
@@ -241,6 +268,7 @@ public class TriggerSpellAbilityCast extends Trigger {
         sa.setTriggeringObject("Player", getRunParams().get("Player"));
         sa.setTriggeringObject("Activator", getRunParams().get("Activator"));
         sa.setTriggeringObject("CurrentStormCount", getRunParams().get("CurrentStormCount"));
+        sa.setTriggeringObject("CurrentCastSpells", getRunParams().get("CurrentCastSpells"));
         sa.setTriggeringObject("CastSACMC", getRunParams().get("CastSACMC"));
     }
 

@@ -1,6 +1,2 @@
-- Random Quest World -
-Added Randomized Standard Quest World with LDA archetype generated decks as duels and standard card pool - this is designed so that there is always a quest world representing the current standard metagame - with a standard cardpool and decks generated using the LDA archetype based deck generation.  To access this mode, select the "Random Standard" world in the world selection dropdown.
-In this world as well as the random duel opponents, there are randomly generated challenges of varying difficulty and of 2 different types.  One type pits your standard decks against modern, legacy or vintage opponents, the other gives the AI a standard deck, but with a headstart of one or more cards on the battlefield.
-
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.

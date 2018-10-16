@@ -1280,7 +1280,12 @@ public class CardProperty {
                 FCollectionView<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], null);
                 cards = CardLists.filterControlledBy(cards, p);
             }
-            cards = CardLists.getType(cards, prop);
+
+            if ("NonLandPermanent".equals(prop)) {
+                cards = CardLists.filter(cards, CardPredicates.Presets.NONLAND_PERMANENTS);
+            } else {
+                cards = CardLists.getType(cards, prop);
+            }
             cards = CardLists.getCardsWithHighestCMC(cards);
             if (!cards.contains(card)) {
                 return false;
@@ -1371,6 +1376,10 @@ public class CardProperty {
             }
         } else if (property.startsWith("delved")) {
             if (!source.getDelved().contains(card)) {
+                return false;
+            }
+        } else if (property.startsWith("convoked")) {
+            if (!source.getConvoked().contains(card)) {
                 return false;
             }
         } else if (property.startsWith("unequalPT")) {
