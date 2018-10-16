@@ -2010,18 +2010,6 @@ public class CardFactoryUtil {
             inst.createTraits(card, true);
         }
 
-        // AddCost
-        if (card.hasSVar("FullCost")) {
-            String k[] = card.getSVar("FullCost").split(":");
-            final SpellAbility sa1 = card.getFirstSpellAbility();
-            if (sa1 != null && sa1.isSpell()) {
-                sa1.setPayCosts(new Cost(k[0], sa1.isAbility()));
-                if (k.length > 1) {
-                    sa1.getMapParams().put("AILogic", k[1]);
-                }
-            }
-        }
-
         // AltCost
         String altCost = card.getSVar("AltCost");
         if (StringUtils.isNotBlank(altCost)) {
@@ -2030,7 +2018,6 @@ public class CardFactoryUtil {
                 card.addSpellAbility(makeAltCostAbility(card, altCost, sa1));
             }
         }
-
     }
 
     private static ReplacementEffect createETBReplacement(final Card card, ReplacementLayer layer,
