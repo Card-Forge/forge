@@ -167,7 +167,20 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                     "Select a spell to copy", ImmutableMap.of());
             chosenSA.setActivatingPlayer(controller);
             for (int i = 0; i < amount; i++) {
-                copies.add(CardFactory.copySpellAbilityAndPossiblyHost(card, chosenSA.getHostCard(), chosenSA, true));
+                SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(
+                        card, chosenSA.getHostCard(), chosenSA, true);
+
+                // extra case for Epic to remove the keyword and the last part of the SpellAbility
+                if (sa.hasParam("Epic")) {
+                    copy.getHostCard().removeIntrinsicKeyword("Epic");
+                    SpellAbility sub = copy;
+                    while (sub.getSubAbility() != null) {
+                        sub = sub.getSubAbility();
+                    }
+                    sub.getParent().setSubAbility(null);
+                }
+
+                copies.add(copy);
             }
         }
         
