@@ -6,4 +6,4 @@ SVar:DBPlay:DB$ Play | Defined$ Remembered | ValidZone$ Exile | Valid$ Instant.I
 SVar:DBRestRandomOrder:DB$ ChangeZone | Defined$ Remembered | AtRandom$ True | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chaos_wand.jpg
-Oracle:{4}, {T}: Target opponent exiles cards from the top of their library until they exile an instant or sorcery card. You may cast that card without paying its mana cost. Then put the exiled cards that weren’t cast this way on the bottom of that library in a random order.
+Oracle:{4}, {T}: Target opponent exiles cards from the top of their library until they exile an instant or sorcery card. You may cast that card without paying its mana cost. Then put the exiled cards that weren't cast this way on the bottom of that library in a random order.

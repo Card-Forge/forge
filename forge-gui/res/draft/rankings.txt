@@ -20318,7 +20318,7 @@
 #22|Shock|C|STH
 #23|Mana Leak|C|STH
 #24|Skeleton Scavengers|R|STH
-#25|Volrath’s Stronghold|R|STH
+#25|Volrath's Stronghold|R|STH
 #26|Mindwarper|R|STH
 #27|Volrath's Shapeshifter|R|STH
 #28|Shaman en-Kor|R|STH
