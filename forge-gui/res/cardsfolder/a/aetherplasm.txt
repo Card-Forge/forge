@@ -7,7 +7,7 @@ SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defin
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | Blocking$ TriggeredAttacker | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:HasBlockEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aetherplasm.jpg
 Oracle:Whenever Aetherplasm blocks a creature, you may return Aetherplasm to its owner's hand. If you do, you may put a creature card from your hand onto the battlefield blocking that creature.
