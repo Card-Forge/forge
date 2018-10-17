@@ -3,5 +3,5 @@ ManaCost:4 U U
 Types:Legendary Creature Djinn
 PT:5/6
 K:Flying
-SVar:AltCost:Cost$ 3 U tapXType<1/Artifact> | Description$ You may pay {3}{U} and tap an untapped artifact you control rather than pay this spell’s mana cost.
-Oracle:You may pay {3}{U} and tap an untapped artifact you control rather than pay this spell’s mana cost.\nFlying
+SVar:AltCost:Cost$ 3 U tapXType<1/Artifact> | Description$ You may pay {3}{U} and tap an untapped artifact you control rather than pay this spell's mana cost.
+Oracle:You may pay {3}{U} and tap an untapped artifact you control rather than pay this spell's mana cost.\nFlying

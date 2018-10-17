@@ -135,119 +135,124 @@
 #134|Collar the Culprit|C|GRN
 #135|Thought Erasure|U|GRN
 #136|Necrotic Wound|U|GRN
-#137|Hammer Dropper|C|GRN
-#138|Dimir Informant|C|GRN
-#139|Guild Summit|U|GRN
-#140|Vivid Revival|R|GRN
-#141|Guildmages' Forum|R|GRN
-#142|Molderhulk|U|GRN
-#143|Gruesome Menagerie|R|GRN
-#144|Centaur Peacemaker|C|GRN
-#145|Darkblade Agent|C|GRN
-#146|Wojek Bodyguard|C|GRN
-#147|Ochran Assassin|U|GRN
-#148|Circuitous Route|U|GRN
-#149|Loxodon Restorer|C|GRN
-#150|Haazda Marshal|U|GRN
-#151|Rhizome Lurcher|C|GRN
-#152|Might of the Masses|U|GRN
-#153|Generous Stray|C|GRN
-#154|Wild Ceratok|C|GRN
-#155|Ironshell Beetle|C|GRN
-#156|Smelt-Ward Minotaur|U|GRN
-#157|Rubblebelt Boar|C|GRN
-#158|Cosmotronic Wave|C|GRN
-#159|Muse Drake|C|GRN
-#160|Sworn Companions|C|GRN
-#161|Skyline Scout|C|GRN
-#162|Righteous Blow|C|GRN
-#163|Intrusive Packbeast|C|GRN
-#164|Sinister Sabotage|U|GRN
-#165|Barging Sergeant|C|GRN
-#166|Sonic Assault|C|GRN
-#167|Goblin Electromancer|C|GRN
-#168|Sumala Woodshaper|C|GRN
-#169|Fresh-Faced Recruit|C|GRN
-#170|Bounty Agent|R|GRN
-#171|Blade Instructor|C|GRN
-#172|Gateway Plaza|C|GRN
-#173|Disdainful Stroke|C|GRN
-#174|Mission Briefing|R|GRN
-#175|Lotleth Giant|U|GRN
-#176|Book Devourer|U|GRN
-#177|Sprouting Renewal|U|GRN
-#178|Worldsoul Colossus|U|GRN
-#179|Beamsplitter Mage|U|GRN
-#180|Vernadi Shieldmate|C|GRN
-#181|Pitiless Gorgon|C|GRN
-#182|Vigorspore Wurm|C|GRN
-#183|Pack's Favor|C|GRN
-#184|Hitchclaw Recluse|C|GRN
-#185|Sure Strike|C|GRN
-#186|Fire Urchin|C|GRN
-#187|Pilfering Imp|U|GRN
-#188|Douser of Lights|C|GRN
-#189|Bartizan Bats|C|GRN
-#190|Leapfrog|C|GRN
-#191|Take Heart|C|GRN
-#192|Devkarin Dissident|C|GRN
-#193|Radical Idea|C|GRN
-#194|Golgari Raiders|U|GRN
-#195|Ledev Guardian|C|GRN
-#196|Chance for Glory|M|GRN
-#197|Kraul Foragers|C|GRN
-#198|Erstwhile Trooper|C|GRN
-#199|Street Riot|U|GRN
-#200|Ornery Goblin|C|GRN
-#201|Gravitic Punch|C|GRN
-#202|Child of Night|C|GRN
-#203|Dazzling Lights|C|GRN
-#204|Tenth District Guard|C|GRN
-#205|Moodmark Painter|C|GRN
-#206|Izzet Locket|C|GRN
-#207|Selesnya Locket|C|GRN
-#208|Golgari Locket|C|GRN
-#209|Dimir Locket|C|GRN
-#210|Boros Locket|C|GRN
-#211|Maximize Altitude|C|GRN
-#212|Passwall Adept|C|GRN
-#213|Garrison Sergeant|C|GRN
-#214|Omnispell Adept|R|GRN
-#215|Join Shields|U|GRN
-#216|Mnemonic Betrayal|M|GRN
-#217|Electrostatic Field|U|GRN
-#218|Urban Utopia|C|GRN
-#219|Portcullis Vine|C|GRN
-#220|Fearless Halberdier|C|GRN
-#221|Veiled Shade|C|GRN
-#222|Vedalken Mesmerist|C|GRN
-#223|Wary Okapi|C|GRN
-#224|Mausoleum Secrets|R|GRN
-#225|Glaive of the Guildpact|U|GRN
-#226|Maximize Velocity|C|GRN
-#227|Divine Visitation|M|GRN
-#228|Devious Cover-Up|C|GRN
-#229|Goblin Locksmith|C|GRN
-#230|Drowned Secrets|R|GRN
-#231|Grappling Sundew|U|GRN
-#232|Crushing Canopy|C|GRN
-#233|Maniacal Rage|C|GRN
-#234|Mephitic Vapors|C|GRN
-#235|Wishcoin Crab|C|GRN
-#236|Wall of Mist|C|GRN
-#237|Candlelight Vigil|C|GRN
-#238|Narcomoeba|R|GRN
-#239|Never Happened|C|GRN
-#240|Thousand-Year Storm|M|GRN
-#241|Silent Dart|U|GRN
-#242|Torch Courier|C|GRN
-#243|Barrier of Bones|C|GRN
-#244|Crush Contraband|U|GRN
-#245|Wand of Vertebrae|U|GRN
-#246|Creeping Chill|U|GRN
-#247|Pause for Reflection|C|GRN
-#248|Vicious Rumors|C|GRN
-#249|Unmoored Ego|R|GRN
+#137|Boros Guildgate|C|GRN
+#138|Dimir Guildgate|C|GRN
+#139|Golgari Guildgate|C|GRN
+#140|Izzet Guildgate|C|GRN
+#141|Selesnya Guildgate|C|GRN
+#142|Hammer Dropper|C|GRN
+#143|Dimir Informant|C|GRN
+#144|Guild Summit|U|GRN
+#145|Vivid Revival|R|GRN
+#146|Guildmages' Forum|R|GRN
+#147|Molderhulk|U|GRN
+#148|Gruesome Menagerie|R|GRN
+#149|Centaur Peacemaker|C|GRN
+#150|Darkblade Agent|C|GRN
+#151|Wojek Bodyguard|C|GRN
+#152|Ochran Assassin|U|GRN
+#153|Circuitous Route|U|GRN
+#154|Loxodon Restorer|C|GRN
+#155|Haazda Marshal|U|GRN
+#156|Rhizome Lurcher|C|GRN
+#157|Might of the Masses|U|GRN
+#158|Generous Stray|C|GRN
+#159|Wild Ceratok|C|GRN
+#160|Ironshell Beetle|C|GRN
+#161|Smelt-Ward Minotaur|U|GRN
+#162|Rubblebelt Boar|C|GRN
+#163|Cosmotronic Wave|C|GRN
+#164|Muse Drake|C|GRN
+#165|Sworn Companions|C|GRN
+#166|Skyline Scout|C|GRN
+#167|Righteous Blow|C|GRN
+#168|Intrusive Packbeast|C|GRN
+#169|Sinister Sabotage|U|GRN
+#170|Barging Sergeant|C|GRN
+#171|Sonic Assault|C|GRN
+#172|Goblin Electromancer|C|GRN
+#173|Sumala Woodshaper|C|GRN
+#174|Fresh-Faced Recruit|C|GRN
+#175|Bounty Agent|R|GRN
+#176|Blade Instructor|C|GRN
+#177|Gateway Plaza|C|GRN
+#178|Disdainful Stroke|C|GRN
+#179|Mission Briefing|R|GRN
+#180|Lotleth Giant|U|GRN
+#181|Book Devourer|U|GRN
+#182|Sprouting Renewal|U|GRN
+#183|Worldsoul Colossus|U|GRN
+#184|Beamsplitter Mage|U|GRN
+#185|Vernadi Shieldmate|C|GRN
+#186|Pitiless Gorgon|C|GRN
+#187|Vigorspore Wurm|C|GRN
+#188|Pack's Favor|C|GRN
+#189|Hitchclaw Recluse|C|GRN
+#190|Sure Strike|C|GRN
+#191|Fire Urchin|C|GRN
+#192|Pilfering Imp|U|GRN
+#193|Douser of Lights|C|GRN
+#194|Bartizan Bats|C|GRN
+#195|Leapfrog|C|GRN
+#196|Take Heart|C|GRN
+#197|Devkarin Dissident|C|GRN
+#198|Radical Idea|C|GRN
+#199|Golgari Raiders|U|GRN
+#200|Ledev Guardian|C|GRN
+#201|Chance for Glory|M|GRN
+#202|Kraul Foragers|C|GRN
+#203|Erstwhile Trooper|C|GRN
+#204|Street Riot|U|GRN
+#205|Ornery Goblin|C|GRN
+#206|Gravitic Punch|C|GRN
+#207|Child of Night|C|GRN
+#208|Dazzling Lights|C|GRN
+#209|Tenth District Guard|C|GRN
+#210|Moodmark Painter|C|GRN
+#211|Izzet Locket|C|GRN
+#212|Selesnya Locket|C|GRN
+#213|Golgari Locket|C|GRN
+#214|Dimir Locket|C|GRN
+#215|Boros Locket|C|GRN
+#216|Maximize Altitude|C|GRN
+#217|Passwall Adept|C|GRN
+#218|Garrison Sergeant|C|GRN
+#219|Omnispell Adept|R|GRN
+#220|Join Shields|U|GRN
+#221|Mnemonic Betrayal|M|GRN
+#222|Electrostatic Field|U|GRN
+#223|Urban Utopia|C|GRN
+#224|Portcullis Vine|C|GRN
+#225|Fearless Halberdier|C|GRN
+#226|Veiled Shade|C|GRN
+#227|Vedalken Mesmerist|C|GRN
+#228|Wary Okapi|C|GRN
+#229|Mausoleum Secrets|R|GRN
+#230|Glaive of the Guildpact|U|GRN
+#231|Maximize Velocity|C|GRN
+#232|Divine Visitation|M|GRN
+#233|Devious Cover-Up|C|GRN
+#234|Goblin Locksmith|C|GRN
+#235|Drowned Secrets|R|GRN
+#236|Grappling Sundew|U|GRN
+#237|Crushing Canopy|C|GRN
+#238|Maniacal Rage|C|GRN
+#239|Mephitic Vapors|C|GRN
+#240|Wishcoin Crab|C|GRN
+#241|Wall of Mist|C|GRN
+#242|Candlelight Vigil|C|GRN
+#243|Narcomoeba|R|GRN
+#244|Never Happened|C|GRN
+#245|Thousand-Year Storm|M|GRN
+#246|Silent Dart|U|GRN
+#247|Torch Courier|C|GRN
+#248|Barrier of Bones|C|GRN
+#249|Crush Contraband|U|GRN
+#250|Wand of Vertebrae|U|GRN
+#251|Creeping Chill|U|GRN
+#252|Pause for Reflection|C|GRN
+#253|Vicious Rumors|C|GRN
+#254|Unmoored Ego|R|GRN
 //Rank|Name|Rarity|Set
 #1|Chromium, the Mutable|M|M19
 #2|Palladia-Mors, the Ruiner|M|M19
@@ -20313,7 +20318,7 @@
 #22|Shock|C|STH
 #23|Mana Leak|C|STH
 #24|Skeleton Scavengers|R|STH
-#25|Volrath’s Stronghold|R|STH
+#25|Volrath's Stronghold|R|STH
 #26|Mindwarper|R|STH
 #27|Volrath's Shapeshifter|R|STH
 #28|Shaman en-Kor|R|STH
