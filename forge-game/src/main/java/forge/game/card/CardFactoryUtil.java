@@ -2014,18 +2014,6 @@ public class CardFactoryUtil {
             inst.createTraits(card, true);
         }
 
-        // AddCost
-        if (card.hasSVar("FullCost")) {
-            String k[] = card.getSVar("FullCost").split(":");
-            final SpellAbility sa1 = card.getFirstSpellAbility();
-            if (sa1 != null && sa1.isSpell()) {
-                sa1.setPayCosts(new Cost(k[0], sa1.isAbility()));
-                if (k.length > 1) {
-                    sa1.getMapParams().put("AILogic", k[1]);
-                }
-            }
-        }
-
         // AltCost
         String altCost = card.getSVar("AltCost");
         if (StringUtils.isNotBlank(altCost)) {
@@ -2034,7 +2022,6 @@ public class CardFactoryUtil {
                 card.addSpellAbility(makeAltCostAbility(card, altCost, sa1));
             }
         }
-
     }
 
     private static ReplacementEffect createETBReplacement(final Card card, ReplacementLayer layer,
@@ -3759,14 +3746,14 @@ public class CardFactoryUtil {
             // Epic does modify existing SA, and does not add new one
 
             // Add the Epic effect as a subAbility
-            String dbStr = "DB$ Effect | Triggers$ EpicTrigger | SVars$ EpicCopy | StaticAbilities$ EpicCantBeCast | Duration$ Permanent | Unique$ True";
+            String dbStr = "DB$ Effect | Triggers$ EpicTrigger | SVars$ EpicCopy | StaticAbilities$ EpicCantBeCast | Duration$ Permanent";
 
             final AbilitySub newSA = (AbilitySub) AbilityFactory.getAbility(dbStr.toString(), card);
 
             card.setSVar("EpicCantBeCast", "Mode$ CantBeCast | ValidCard$ Card | Caster$ You | EffectZone$ Command | Description$ For the rest of the game, you can't cast spells.");
             card.setSVar("EpicTrigger", "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ EpicCopy | TriggerDescription$ "
                     + "At the beginning of each of your upkeeps, copy " + card.toString() + " except for its epic ability.");
-            card.setSVar("EpicCopy", "DB$ CopySpellAbility | Defined$ EffectSource");
+            card.setSVar("EpicCopy", "DB$ CopySpellAbility | Defined$ EffectSource | Epic$ True");
 
             final SpellAbility origSA = card.getFirstSpellAbility();
 
