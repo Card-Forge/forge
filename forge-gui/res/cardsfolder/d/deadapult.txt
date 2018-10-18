@@ -3,6 +3,6 @@ ManaCost:2 R
 Types:Enchantment
 A:AB$ DealDamage | Cost$ R Sac<1/Zombie> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 SVar:NonStackingEffect:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deadapult.jpg
 Oracle:{R}, Sacrifice a Zombie: Deadapult deals 2 damage to any target.

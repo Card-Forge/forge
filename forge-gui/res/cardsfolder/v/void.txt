@@ -5,6 +5,6 @@ A:SP$ ChooseNumber | Cost$ 3 B R | SubAbility$ DBVoidDestroyAll | SpellDescripti
 SVar:DBVoidDestroyAll:DB$ DestroyAll | ValidCards$ Artifact.cmcEQX,Creature.cmcEQX | SubAbility$ DBVoidRevealDiscard
 SVar:DBVoidRevealDiscard:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ RevealDiscardAll | DiscardValid$ Card.nonLand+cmcEQX
 SVar:X:Number$ChosenNumber
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/void.jpg
 Oracle:Choose a number. Destroy all artifacts and creatures with converted mana cost equal to that number. Then target player reveals their hand and discards all nonland cards with converted mana cost equal to the number.

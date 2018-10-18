@@ -5,6 +5,6 @@ A:SP$ ChangeZone | Cost$ 3 B B | Origin$ Library | Destination$ Hand | ChangeTyp
 SVar:DBMana:DB$ Mana | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | Produced$ B | Amount$ 3
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
 #TODO: Improve the tutoring logic for the AI. Currently will generally look for the most expensive castable thing in the library (which can, of course, be used to advantage in properly constructed AI decks).
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_petition.jpg
 Oracle:Search your library for a card and put that card into your hand. Then shuffle your library.\nSpell mastery — If there are two or more instant and/or sorcery cards in your graveyard, add {B}{B}{B}.

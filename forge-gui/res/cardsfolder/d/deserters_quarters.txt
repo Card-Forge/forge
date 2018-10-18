@@ -6,6 +6,6 @@ A:AB$ Tap | Cost$ 6 T | ValidTgts$ Creature | RememberTapped$ True | AlwaysRemem
 S:Mode$ Continuous | Affected$ Card.IsRemembered | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step.
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ ClearRemembered | Static$ True
 SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deserters_quarters.jpg
 Oracle:You may choose not to untap Deserter's Quarters during your untap step.\n{6}, {T}: Tap target creature. It doesn't untap during its controller's untap step for as long as Deserter's Quarters remains tapped.

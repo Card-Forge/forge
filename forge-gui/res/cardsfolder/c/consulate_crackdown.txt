@@ -11,6 +11,6 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:PlayMain1:TRUE
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$Valid Artifact.OppCtrl
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/consulate_crackdown.jpg
 Oracle:When Consulate Crackdown enters the battlefield, exile all artifacts your opponents control until Consulate Crackdown leaves the battlefield.

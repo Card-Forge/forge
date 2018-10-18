@@ -5,6 +5,6 @@ A:SP$ RepeatEach | Cost$ 4 R W | RepeatPlayers$ Player | RepeatSubAbility$ DBCho
 SVar:DBChooseSac:DB$ ChooseCard | Defined$ Remembered | Choices$ Permanent.RememberedPlayerCtrl | Amount$ 3 | ChoiceTitle$ Choose three cards not to be sacrificed | RememberChosen$ True | Mandatory$ True
 SVar:DBSac:DB$ SacrificeAll | ValidCards$ Permanent.IsNotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razias_purification.jpg
 Oracle:Each player chooses three permanents they control, then sacrifices the rest.

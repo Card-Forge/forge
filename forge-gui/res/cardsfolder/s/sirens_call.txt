@@ -6,7 +6,7 @@ SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield |
 SVar:DestroyPacifist:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigDestroy | TriggerDescription$ At the beginning of the next end step, destroy all non-Wall creatures that player controls that didn't attack this turn.
 SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Creature.ActivePlayerCtrl+notAttackedThisTurn+nonWall+notFirstTurnControlled | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sirens_call.jpg
 Oracle:Cast Siren's Call only during an opponent's turn, before attackers are declared.\nCreatures the active player controls attack this turn if able.\nAt the beginning of the next end step, destroy all non-Wall creatures that player controls that didn't attack this turn. Ignore this effect for each creature the player didn't control continuously since the beginning of the turn.

@@ -7,7 +7,7 @@ A:AB$ LoseLife | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ O
 SVar:X:Count$Valid Artifact.YouCtrl
 A:AB$ GainControl | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | AllValid$ Artifact,Creature | ControlledByTarget$ True | NewController$ You | SpellDescription$ Gain control of all artifacts and creatures target opponent controls.
 DeckNeeds:Type$Artifact
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 DeckHints:Name$Tezzeret's Betrayal
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tezzeret_master_of_metal.jpg
 Oracle:[+1]: Reveal cards from the top of your library until you reveal an artifact card. Put that card into your hand and the rest on the bottom of your library in a random order.\n[-3]: Target opponent loses life equal to the number of artifacts you control.\n[-8]: Gain control of all artifacts and creatures target opponent controls.

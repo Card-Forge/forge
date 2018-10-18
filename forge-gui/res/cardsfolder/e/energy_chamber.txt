@@ -5,7 +5,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCharm | TriggerZ
 SVar:TrigCharm:DB$ Charm | Choices$ CounterP1P1,CounterCharge | CharmNum$ 1
 SVar:CounterP1P1:DB$ PutCounter | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target artifact creature.
 SVar:CounterCharge:DB$ PutCounter | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on target noncreature artifact.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 DeckNeeds:Type$Artifact
 DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/energy_chamber.jpg

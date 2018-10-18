@@ -8,8 +8,8 @@ SVar:DBGainLifeYou:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X |
 SVar:DBGainLifeOpp:DB$ GainLife | Defined$ ChosenPlayer | LifeAmount$ Y | References$ Y
 SVar:X:Count$Valid Creature.YouCtrl/Twice
 SVar:Y:Count$Valid Creature.ChosenCtrl/Twice
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/benevolent_offering.jpg
 Oracle:Choose an opponent. You and that player each create three 1/1 white Spirit creature tokens with flying.\nChoose an opponent. You gain 2 life for each creature you control and that player gains 2 life for each creature they control.

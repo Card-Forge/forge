@@ -7,6 +7,6 @@ SVar:TokenBoar:DB$ Token | TokenAmount$ 1 | TokenName$ Boar | TokenTypes$ Creatu
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Creature
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_the_swine.jpg
 Oracle:Exile X target creatures. For each creature exiled this way, its controller creates a 2/2 green Boar creature token.

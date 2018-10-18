@@ -6,6 +6,6 @@ SVar:TrigPump:DB$ Pump | Defined$ TriggeredCard | RememberObjects$ TriggeredCard
 SVar:DBMana:DB$ Mana | Produced$ C | Defined$ You | Amount$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Creature.sharesCreatureTypeWith Remembered+YouCtrl
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_echoes.jpg
 Oracle:Whenever a creature enters the battlefield, you may add an amount of {C} equal to the number of creatures you control that share a creature type with it.

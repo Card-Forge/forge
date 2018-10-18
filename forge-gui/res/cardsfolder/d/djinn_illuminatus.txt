@@ -4,6 +4,6 @@ Types:Creature Djinn
 PT:3/5
 K:Flying
 K:Each instant and sorcery spell you cast has replicate. The replicate cost is equal to its mana cost.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/djinn_illuminatus.jpg
 Oracle:Flying\nEach instant and sorcery spell you cast has replicate. The replicate cost is equal to its mana cost. (When you cast it, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)

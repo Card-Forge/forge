@@ -11,6 +11,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:GainLife:DB$ GainLife | LifeAmount$ X | References$ X | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ X | References$ X
 SVar:X:Count$Valid Permanent.YouOwn+OwnerDoesntControl
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zedruu_the_greathearted.jpg
 Oracle:At the beginning of your upkeep, you gain X life and draw X cards, where X is the number of permanents you own that your opponents control.\n{U}{R}{W}: Target opponent gains control of target permanent you control.

@@ -6,6 +6,6 @@ SVar:TrigTokenRem:DB$ Pump | Defined$ TriggeredCard | PumpZone$ Stack | Remember
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenName$ Squirrel | TokenTypes$ Creature,Squirrel | TokenOwner$ TriggeredActivator | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | References$ X | SubAbility$ DBCleanup
 SVar:X:Count$ValidGraveyard Card.sharesNameWith Remembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_shrine.jpg
 Oracle:Whenever a player casts a spell, that player creates X 1/1 green Squirrel creature tokens, where X is the number of cards in all graveyards with the same name as that spell.

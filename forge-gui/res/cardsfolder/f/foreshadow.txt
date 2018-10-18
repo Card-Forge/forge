@@ -7,6 +7,6 @@ SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DelTrigSlowtrip 
 SVar:DelTrigSlowtrip:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | TriggerDescription$ Draw a card.
 SVar:DrawSlowtrip:DB$Draw | NumCards$ 1 | Defined$ You
 SVar:X:Remembered$Valid Card.NamedCard
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foreshadow.jpg
 Oracle:Choose a card name, then target opponent puts the top card of their library into their graveyard. If that card has the chosen name, you draw a card.\nDraw a card at the beginning of the next turn's upkeep.

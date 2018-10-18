@@ -2,6 +2,6 @@ Name:Chill
 ManaCost:1 U
 Types:Enchantment
 S:Mode$ RaiseCost | ValidCard$ Card.Red | Type$ Spell | Amount$ 2 | Description$ Red spells cost {2} more to cast.
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chill.jpg
 Oracle:Red spells cost {2} more to cast.

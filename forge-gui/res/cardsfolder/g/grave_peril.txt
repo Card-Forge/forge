@@ -5,6 +5,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigSac:DB$ SacrificeAll | ValidCards$ Card.Self | SubAbility$ DBDestroy | RememberSacrificed$ True
 SVar:DBDestroy:DB$ Destroy | Defined$ TriggeredCard | ConditionDefined$ Remembered | ConditionPresent$ Card
 SVar:NonStackingEffect:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_peril.jpg
 Oracle:When a nonblack creature enters the battlefield, sacrifice Grave Peril. If you do, destroy that creature.

@@ -5,7 +5,7 @@ K:Remove CARDNAME from your deck before playing if you're not playing for ante.
 A:SP$ Discard | Cost$ B | Mode$ Hand | Defined$ You | SubAbility$ DBAnte | SpellDescription$ Discard your hand, ante the top card of your library, then draw seven cards.
 SVar:DBAnte:DB$ ChangeZone | Defined$ TopOfLibrary | Origin$ Library | Destination$ Ante | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 7
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/contract_from_below.jpg
 Oracle:Remove Contract from Below from your deck before playing if you're not playing for ante.\nDiscard your hand, ante the top card of your library, then draw seven cards.

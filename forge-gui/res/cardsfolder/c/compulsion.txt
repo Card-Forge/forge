@@ -4,6 +4,6 @@ Types:Enchantment
 A:AB$ Draw | Cost$ 1 U Discard<1/Card> | NumCards$ 1 | SpellDescription$ Draw a card.
 A:AB$ Draw | Cost$ 1 U Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:NonStackingEffect:True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/compulsion.jpg
 Oracle:{1}{U}, Discard a card: Draw a card.\n{1}{U}, Sacrifice Compulsion: Draw a card.

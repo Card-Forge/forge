@@ -7,6 +7,6 @@ SVar:DrawSeven:DB$ Draw | NumCards$ 7 | SubAbility$ DBSetLife
 SVar:DBSetLife:DB$ SetLife | Defined$ You | LifeAmount$ 1 | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 Oracle:The next time you would lose the game this turn, instead draw seven cards and your life total becomes 1.\nExile Stunning Reversal.

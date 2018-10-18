@@ -9,7 +9,7 @@ T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCar
 SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | Execute$ TrigCleanup | Static$ True
 SVar:TrigCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindreaver.jpg
 Oracle:Heroic — Whenever you cast a spell that targets Mindreaver, exile the top three cards of target player's library.\n{U}{U}, Sacrifice Mindreaver: Counter target spell with the same name as a card exiled with Mindreaver.

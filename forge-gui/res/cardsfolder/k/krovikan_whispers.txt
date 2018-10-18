@@ -8,6 +8,6 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigLoseLife | ValidCard$ Card.Self | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you lose 2 life for each age counter on it.
 SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ X | References$ X
 SVar:X:TriggeredCard$CardCounters.AGE/Times.2
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krovikan_whispers.jpg
 Oracle:Enchant creature\nCumulative upkeep {U} or {B} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nYou control enchanted creature.\nWhen Krovikan Whispers is put into a graveyard from the battlefield, you lose 2 life for each age counter on it.

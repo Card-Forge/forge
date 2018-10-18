@@ -6,7 +6,7 @@ K:Flying
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | References$ X | Description$ CARDNAME gets +1/+0 for each artifact you control.
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:NeedsToPlayVar:X GE2
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:BuffedBy:Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nim_shrieker.jpg
 Oracle:Flying\nNim Shrieker gets +1/+0 for each artifact you control.

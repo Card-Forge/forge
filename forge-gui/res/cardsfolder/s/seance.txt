@@ -8,7 +8,7 @@ SVar:DBAnimate:DB$ Animate | Defined$ Clones | Types$ Spirit | sVars$ SneakAttac
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ DBExile | RememberObjects$ Clones | TriggerDescription$ CARDNAME - Exile the token at the beginning of the next end step. | SubAbility$ DBCleanup | AILogic$ Always
 SVar:DBExile:DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:SneakAttackEOT:SVar:EndOfTurnLeavePlay:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seance.jpg
 Oracle:At the beginning of each upkeep, you may exile target creature card from your graveyard. If you do, create a token that's a copy of that card, except it's a Spirit in addition to its other types. Exile it at the beginning of the next end step.

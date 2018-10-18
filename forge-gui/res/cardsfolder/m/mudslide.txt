@@ -7,7 +7,7 @@ SVar:TrigChoose:DB$ ChooseCard | Defined$ TriggeredPlayer | Amount$ X | Referenc
 SVar:DBUntap:DB$ RepeatEach | DefinedCards$ ChosenCard | RepeatSubAbility$ UntapEach
 SVar:UntapEach:DB$ Untap | Defined$ Remembered | UnlessCost$ 2 | UnlessPayer$ RememberedController | UnlessSwitched$ True | ShowCurrentCard$ Remembered
 SVar:X:Count$Valid Creature.tapped+withoutFlying+ActivePlayerCtrl
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mudslide.jpg
 Oracle:Creatures without flying don't untap during their controllers' untap steps.\nAt the beginning of each player's upkeep, that player may choose any number of tapped creatures without flying they control and pay {2} for each creature chosen this way. If the player does, untap those creatures.

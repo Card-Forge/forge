@@ -8,6 +8,6 @@ SVar:TrigMana:DB$ ManaReflected | Valid$ Defined.Triggered | ColorOrType$ Type |
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 SVar:NeedsToPlay:Land.Basic+YouCtrl
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/extraplanar_lens.jpg
 Oracle:Imprint — When Extraplanar Lens enters the battlefield, you may exile target land you control.\nWhenever a land with the same name as the exiled card is tapped for mana, its controller adds one mana of any type that land produced.

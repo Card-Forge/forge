@@ -5,8 +5,8 @@ T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Permanent.nontoken+setAR
 SVar:TrigSac:DB$ SacrificeAll | ValidCards$ Permanent.nontoken+setARN+Other
 S:Mode$ CantPlayLand | ValidCard$ Card.setARN | Description$ Players can't cast spells or play lands with a name originally printed in the Arabian Nights expansion.
 S:Mode$ CantBeCast | ValidCard$ Card.setARN
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/city_in_a_bottle.jpg
 Oracle:Whenever another nontoken permanent with a name originally printed in the Arabian Nights expansion is on the battlefield, its controller sacrifices it.\nPlayers can't cast spells or play lands with a name originally printed in the Arabian Nights expansion.

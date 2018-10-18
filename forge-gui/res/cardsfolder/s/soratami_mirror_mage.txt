@@ -4,6 +4,6 @@ Types:Creature Moonfolk Wizard
 PT:2/1
 K:Flying
 A:AB$ ChangeZone | Cost$ 3 Return<3/Land> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soratami_mirror_mage.jpg
 Oracle:Flying\n{3}, Return three lands you control to their owner's hand: Return target creature to its owner's hand.

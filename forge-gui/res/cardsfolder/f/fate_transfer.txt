@@ -6,7 +6,7 @@ SVar:DBRemember:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creatu
 SVar:DBMove:DB$ RepeatEach | Defined$ Imprinted | RepeatCounters$ True | RepeatSubAbility$ MoveCounters | SubAbility$ DBCleanup
 SVar:MoveCounters:DB$ MoveCounter | Source$ Imprinted | Defined$ Remembered | CounterType$ RepeatSVarCounter | CounterNum$ RepeatCounterAmount
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fate_transfer.jpg
 Oracle:Move all counters from target creature onto another target creature.

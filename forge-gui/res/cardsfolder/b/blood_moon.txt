@@ -3,6 +3,6 @@ ManaCost:2 R
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Land.nonBasic | AddType$ Mountain | RemoveLandTypes$ True | RemoveIntrinsicAbilities$ True | Description$ Nonbasic lands are Mountains.
 SVar:NonStackingEffect:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_moon.jpg
 Oracle:Nonbasic lands are Mountains.

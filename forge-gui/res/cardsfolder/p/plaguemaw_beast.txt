@@ -3,7 +3,7 @@ ManaCost:3 G G
 Types:Creature Beast
 PT:4/3
 A:AB$ Proliferate | Cost$ T Sac<1/Creature> | SpellDescription$ Proliferate.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:AIPreference:SacCost$Creature.token+powerLE3+toughnessLE3,Creature.cmcLE2
 DeckHas:Ability$Proliferate
 DeckNeeds:Ability$Counters

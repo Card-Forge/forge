@@ -7,7 +7,7 @@ SVar:EndlessDelayTrigReturn:DB$ Effect | ValidTgts$ Opponent | TgtPrompt$ Select
 SVar:TrigEndlessGain:Mode$ Phase | Phase$ End of Turn | Execute$ EndlessReturn | TriggerZones$ Command | TriggerDescription$ Return CARDNAME to the battlefield.
 SVar:EndlessReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ Imprinted | GainControl$ True | SubAbility$ EndlessRemoveEffect
 SVar:EndlessRemoveEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/endless_whispers.jpg
 Oracle:Each creature has "When this creature dies, choose target opponent. That player puts this card from its owner's graveyard onto the battlefield under their control at the beginning of the next end step."

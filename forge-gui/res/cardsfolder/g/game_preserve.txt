@@ -7,6 +7,6 @@ SVar:EachDig:DB$ Dig | Defined$ Remembered | DigNum$ 1 | Reveal$ True | NoMove$ 
 SVar:GoToBattlefield:DB$ ChangeZoneAll | ChangeType$ Card.TopLibrary | Origin$ Library | Destination$ Battlefield | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$ValidLibrary Card.nonCreature+IsRemembered
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/game_preserve.jpg
 Oracle:At the beginning of your upkeep, each player reveals the top card of their library. If all cards revealed this way are creature cards, put those cards onto the battlefield under their owners' control.

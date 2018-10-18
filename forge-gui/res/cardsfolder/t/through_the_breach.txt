@@ -6,7 +6,7 @@ A:SP$ ChangeZone | Cost$ 4 R | Origin$ Hand | Destination$ Battlefield | ChangeT
 SVar:DBPump:DB$ Animate | Keywords$ Haste | sVars$ ThroughtheBreachEOT | Defined$ Remembered | Permanent$ True | AtEOT$ Sacrifice | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:ThroughtheBreachEOT:SVar:EndOfTurnLeavePlay:True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:PlayMain1:TRUE
 DeckHints:Type$Arcane
 SVar:Picture:http://www.wizards.com/global/images/magic/general/through_the_breach.jpg

@@ -5,6 +5,6 @@ S:Mode$ Continuous | Affected$ Creature.withFlying | AddHiddenKeyword$ CARDNAME 
 S:Mode$ Continuous | Affected$ Creature.withoutFlying | AddKeyword$ Reach | Description$ Creatures without flying have reach. (They can block creatures with flying.)
 SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chaosphere.jpg
 Oracle:Creatures with flying can block only creatures with flying.\nCreatures without flying have reach. (They can block creatures with flying.)

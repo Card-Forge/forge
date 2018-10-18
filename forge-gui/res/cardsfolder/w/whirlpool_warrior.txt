@@ -12,7 +12,7 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 # Amount Minus 1 because the Player is also being remembered at this point
 SVar:Y:Remembered$Amount/Minus.1
-SVar:RemRandomDeck:True
-SVar:RemAIDeck:True
+AI:RemoveDeck:Random
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whirlpool_warrior.jpg
 Oracle:When Whirlpool Warrior enters the battlefield, shuffle the cards from your hand into your library, then draw that many cards.\n{R}, Sacrifice Whirlpool Warrior: Each player shuffles the cards from their hand into their library, then draws that many cards.

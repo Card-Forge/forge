@@ -6,6 +6,6 @@ A:AB$ DealDamage | Cost$ T Sac<1/CARDNAME> Sac<X/Creature> | NumDmg$ Y | ValidTg
 SVar:DBExile:DB$ ChangeZone | Defined$ SacrificedCards | Origin$ Graveyard | Destination$ Exile
 SVar:X:XChoice
 SVar:Y:Sacrificed$CardPower
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_the_ages.jpg
 Oracle:Sword of the Ages enters the battlefield tapped.\n{T}, Sacrifice Sword of the Ages and any number of creatures you control: Sword of the Ages deals X damage to any target, where X is the total power of the creatures sacrificed this way, then exile Sword of the Ages and those creature cards.

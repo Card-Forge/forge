@@ -6,6 +6,6 @@ A:AB$ Mana | Cost$ T SubCounter<X/CHARGE> | Produced$ W | Amount$ Y | CostDesc$ 
 SVar:Y:Number$1/Plus.ChosenX
 SVar:X:XChoice
 #ChosenX SVar created by Cost payment
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/white_mana_battery.jpg
 Oracle:{2}, {T}: Put a charge counter on White Mana Battery.\n{T}, Remove any number of charge counters from White Mana Battery: Add {W}, then add an additional {W} for each charge counter removed this way.

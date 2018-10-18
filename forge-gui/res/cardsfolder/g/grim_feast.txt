@@ -7,6 +7,6 @@ SVar:TrigDamage:DB$ DealDamage | Defined$ You | NumDmg$ 1
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggeredCard$CardToughness
 SVar:AICastPreference:MaxControlled$ 1 | NeverCastIfLifeBelow$ 5
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grim_feast.jpg
 Oracle:At the beginning of your upkeep, Grim Feast deals 1 damage to you.\nWhenever a creature is put into an opponent's graveyard from the battlefield, you gain life equal to its toughness.

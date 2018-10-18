@@ -8,6 +8,6 @@ SVar:TrigExile:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destinatio
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ Return CARDNAME to the battlefield
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Exile,Command | Destination$ Battlefield
 SVar:MustAttack:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/norin_the_wary.jpg
 Oracle:When a player casts a spell or a creature attacks, exile Norin the Wary. Return it to the battlefield under its owner's control at the beginning of the next end step.

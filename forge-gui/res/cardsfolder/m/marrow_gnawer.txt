@@ -5,7 +5,7 @@ PT:2/3
 S:Mode$ Continuous | Affected$ Creature.Rat | AddKeyword$ Fear | Description$ Rat creatures have fear. (They can't be blocked except by artifact creatures and/or black creatures.)
 A:AB$ Token | Cost$ T Sac<1/Rat> | TokenAmount$ X | References$ X | TokenName$ Rat | TokenTypes$ Creature,Rat | TokenOwner$ You | TokenColors$ Black | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ b 1 1 rat CHK | SpellDescription$ Create X 1/1 black Rat creature tokens, where X is the number of Rats you control.
 SVar:X:Count$TypeYouCtrl.Rat
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 DeckHints:Type$Rat
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marrow_gnawer.jpg
 Oracle:Rat creatures have fear. (They can't be blocked except by artifact creatures and/or black creatures.)\n{T}, Sacrifice a Rat: Create X 1/1 black Rat creature tokens, where X is the number of Rats you control.

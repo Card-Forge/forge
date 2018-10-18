@@ -8,7 +8,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:DBAttach:DB$ RepeatEach | RepeatSubAbility$ DBRepeatAttach | RepeatCards$ Aura.YouCtrl,Equipment.YouCtrl
 SVar:DBRepeatAttach:DB$ Attach | Object$ Remembered | Optional$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ X | AddToughness$ X | References$ X | Description$ Other creatures you control get +1/+1 for each Aura and Equipment attached to CARDNAME.
 SVar:X:Count$Valid Equipment.Attached,Aura.Attached
 SVar:EnchantMe:Multiple

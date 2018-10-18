@@ -9,6 +9,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigSac:DB$Sacrifice | Defined$ You | SacValid$ Creature
 SVar:NeedsToPlayVar:Z GE3
 SVar:Z:Count$Valid Creature.YouCtrl
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oni_possession.jpg
 Oracle:Enchant creature\nAt the beginning of your upkeep, sacrifice a creature.\nEnchanted creature gets +3/+3 and has trample.\nEnchanted creature is a Demon Spirit.
