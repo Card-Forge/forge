@@ -528,7 +528,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                     // are currently conventionally flagged with AILogic$ DoSacrifice.
                     c = AbilityUtils.calculateAmount(source, source.getSVar("ChosenX"), null);
                 } else {
-                    // Other cards are assumed to be flagged RemAIDeck for now
+                    // Other cards are assumed to be flagged AI:RemoveDeck:All for now
                     return null;
                 }
             } else {

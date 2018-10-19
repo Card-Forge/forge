@@ -413,6 +413,15 @@ public final class CardPredicates {
         };
     }
 
+    public static final Predicate<Card> isRemAIDeck() {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.getRules().getAiHints().getRemAIDecks();
+            }
+        };
+    }
+
     public static class Presets {
 
         /**
