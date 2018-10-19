@@ -4,6 +4,6 @@ Types:Instant
 A:SP$ PutCounter | Cost$ X G | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Select target artifact you control | CounterType$ P1P1 | CounterNum$ X | References$ X | SubAbility$ DBAnimate | SpellDescription$ Put X +1/+1 counters on target artifact you control. If it isn't a creature or Vehicle, it becomes a 0/0 Construct artifact creature.
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted.nonCreature+nonVehicle | Power$ 0 | Toughness$ 0 | Types$ Artifact,Creature,Construct | Permanent$ True 
 SVar:X:Count$xPaid 
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lifecraft_awakening.jpg
 Oracle:Put X +1/+1 counters on target artifact you control. If it isn't a creature or Vehicle, it becomes a 0/0 Construct artifact creature.

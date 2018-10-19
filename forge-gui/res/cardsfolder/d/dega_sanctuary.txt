@@ -7,7 +7,7 @@ SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4 | ConditionCheckSVar
 SVar:Y:Count$Valid Permanent.Black+YouCtrl/LimitMax.1
 SVar:Z:Count$Valid Permanent.Red+YouCtrl/LimitMax.1
 SVar:X:SVar$Y/Plus.Z
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 DeckHints:Color$Black|Red
 SVar:Picture:http://wizards.com/global/images/magic/general/dega_sanctuary.jpg
 Oracle:At the beginning of your upkeep, if you control a black or red permanent, you gain 2 life. If you control a black permanent and a red permanent, you gain 4 life instead.

@@ -6,6 +6,6 @@ SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredCard
 A:AB$ Destroy | Cost$ 0 | Defined$ Self | SubAbility$ DBSkipTurn | AnyPlayer$ True | AILogic$ WillSkipTurn | SpellDescription$ Destroy CARDNAME. You skip your next turn. Any player may activate this ability.
 SVar:DBSkipTurn:DB$ SkipTurn | Defined$ You | NumTurns$ 1 | AILogic$ Always
 SVar:AICurseEffect:DestroyCreature
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lethal_vapors.jpg
 Oracle:Whenever a creature enters the battlefield, destroy it.\n{0}: Destroy Lethal Vapors. You skip your next turn. Any player may activate this ability.

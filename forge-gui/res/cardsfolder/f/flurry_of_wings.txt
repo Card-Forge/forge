@@ -3,6 +3,6 @@ ManaCost:G W U
 Types:Instant
 A:SP$ Token | Cost$ G W U | TokenAmount$ X | TokenName$ Bird Soldier | TokenTypes$ Creature,Bird,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | References$ X | SpellDescription$ Create X 1/1 white Bird Soldier creature tokens with flying, where X is the number of attacking creatures.
 SVar:X:Count$Valid Creature.attacking
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flurry_of_wings.jpg
 Oracle:Create X 1/1 white Bird Soldier creature tokens with flying, where X is the number of attacking creatures.

@@ -5,6 +5,6 @@ R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Player | ReplaceWi
 SVar:ExileTop:DB$ Mill | Defined$ ReplacedTarget | NumCards$ X | Destination$ Exile | References$ X
 SVar:X:ReplaceCount$DamageAmount
 SVar:NonStackingEffect:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crumbling_sanctuary.jpg
 Oracle:If damage would be dealt to a player, that player exiles that many cards from the top of their library instead.

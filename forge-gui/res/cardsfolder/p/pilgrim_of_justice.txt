@@ -8,6 +8,6 @@ SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | SVars$ R
 SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.ChosenCard+RedSource | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen red source deals damage, prevent that damage.
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pilgrim_of_justice.jpg
 Oracle:Protection from red\n{W}, Sacrifice Pilgrim of Justice: The next time a red source of your choice would deal damage this turn, prevent that damage.

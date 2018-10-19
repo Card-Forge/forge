@@ -7,7 +7,7 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ QUEST | Counte
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredPlayer | LifeAmount$ 5
 SVar:CardsInHand:Count$ValidHand Card.ActivePlayerCtrl
 SVar:PlayMain1:TRUE
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 DeckHints:Ability$Discard
 SVar:MaxQuestEffect:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quest_for_the_nihil_stone.jpg

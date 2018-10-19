@@ -9,7 +9,7 @@ SVar:DBPutCounter:DB$ PutCounter | CounterType$ PHYLACTERY | CounterNum$ 1 | Def
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Permanent.counters_GE1_PHYLACTERY+YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no permanents with phylactery counters on them, sacrifice CARDNAME.
 SVar:TrigSac:DB$Sacrifice | Defined$ Self
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 DeckHints:Type$Artifact
 SVar:NeedsToPlay:Artifact.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phylactery_lich.jpg

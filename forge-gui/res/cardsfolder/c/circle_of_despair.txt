@@ -8,6 +8,6 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:NonStackingEffect:True
 SVar:AIPreference:SacCost$Creature.namedBrood of Cockroaches,Creature.token
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/circle_of_despair.jpg
 Oracle:{1}, Sacrifice a creature: The next time a source of your choice would deal damage to any target this turn, prevent that damage.

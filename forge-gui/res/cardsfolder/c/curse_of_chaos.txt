@@ -7,6 +7,6 @@ T:Mode$ AttackersDeclared | Execute$ TrigDiscard | TriggerZones$ Battlefield | A
 SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredAttackingPlayer | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBDraw | RememberDiscarded$ True
 SVar:DBDraw:DB$ Draw | Defined$ TriggeredAttackingPlayer | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_chaos.jpg
 Oracle:Enchant player\nWhenever a player attacks enchanted player with one or more creatures, that attacking player may discard a card. If the player does, they draw a card.

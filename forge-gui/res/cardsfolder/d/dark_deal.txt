@@ -7,8 +7,8 @@ SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ Player.IsRemembered | References$ 
 SVar:CleanDrawn:DB$ Cleanup | ClearRemembered$ True
 # This calculation isn't considering the remembered player, only the remembered cards?
 SVar:X:Remembered$Amount.Minus.1
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 DeckHas:Ability$Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_deal.jpg
 Oracle:Each player discards all the cards in their hand, then draws that many cards minus one.

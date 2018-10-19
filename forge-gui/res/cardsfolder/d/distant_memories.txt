@@ -5,6 +5,6 @@ A:SP$ ChangeZone | Cost$ 2 U U | Origin$ Library | Destination$ Exile | ChangeTy
 SVar:DBReturn:DB$ChangeZone | Origin$ Exile | Destination$ Hand | ChangeType$ Card.IsRemembered | Hidden$ True | Chooser$ Opponent | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 3 | ConditionCheckSVar$ X | ConditionSVarCompare$ LE0 | References$ X
 SVar:X:Remembered$Amount
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/distant_memories.jpg
 Oracle:Search your library for a card, exile it, then shuffle your library. Any opponent may have you put that card into your hand. If no player does, you draw three cards.

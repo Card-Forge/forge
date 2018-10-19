@@ -4,6 +4,6 @@ Types:Sorcery
 A:SP$ RevealHand | Cost$ 2 U | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBDraw | SpellDescription$ Target opponent reveals their hand. You draw a card for each Mountain and red card in it.
 SVar:DBDraw:DB$Draw | NumCards$ X | References$ X
 SVar:X:Count$ValidHand Mountain.TargetedPlayerCtrl,Card.TargetedPlayerCtrl+Red
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/baleful_stare.jpg
 Oracle:Target opponent reveals their hand. You draw a card for each Mountain and red card in it.

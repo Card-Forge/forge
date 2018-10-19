@@ -114,7 +114,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         // spBounceAll has some AI we can compare to.
         if (origin.equals(ZoneType.Hand) || origin.equals(ZoneType.Library)) {
             if (!sa.usesTargeting()) {
-                // TODO: improve logic for non-targeted SAs of this type (most are currently RemAIDeck, e.g. Memory Jar)
+                // TODO: improve logic for non-targeted SAs of this type (most are currently AI:RemoveDeck:All, e.g. Memory Jar)
                 return true;
             } else {
                 // search targetable Opponents
@@ -344,8 +344,8 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
 
         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Profaner of the Dead")) {
             // TODO: this is a stub to prevent the AI from crashing the game when, for instance, playing the opponent's
-            // Profaner from exile without paying its mana cost. Otherwise the card is marked RemAIDeck and there is no
-            // specific AI to support playing it in a smarter way. Feel free to expand.
+            // Profaner from exile without paying its mana cost. Otherwise the card is marked AI:RemoveDeck:All and
+            // there is no specific AI to support playing it in a smarter way. Feel free to expand.
             return !CardLists.filter(ai.getOpponents().getCardsIn(origin), CardPredicates.Presets.CREATURES).isEmpty();
         }
 

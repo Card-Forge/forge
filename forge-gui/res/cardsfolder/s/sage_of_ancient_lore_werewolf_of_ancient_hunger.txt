@@ -9,7 +9,7 @@ SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1
 T:Mode$ Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 #TODO: update logic for the AI to play around this
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:NeedsToPlayVar:X GE3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sage_of_ancient_lore.jpg
 AlternateMode:DoubleFaced

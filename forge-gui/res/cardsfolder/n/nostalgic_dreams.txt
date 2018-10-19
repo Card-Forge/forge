@@ -5,6 +5,6 @@ A:SP$ ChangeZone | Cost$ G G Discard<X/Card> | Origin$ Graveyard | Destination$ 
 SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Exile
 SVar:MaxTgts:Count$InYourYard
 SVar:X:Targeted$Amount
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nostalgic_dreams.jpg
 Oracle:As an additional cost to cast Nostalgic Dreams, discard X cards.\nReturn X target cards from your graveyard to your hand. Exile Nostalgic Dreams.

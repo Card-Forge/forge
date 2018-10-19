@@ -8,6 +8,6 @@ SVar:TriggeredParoxysm:DB$ Dig | Defined$ TriggeredPlayer | DigNum$ 1 | Reveal$ 
 SVar:DestructiveParoxysm:DB$ Destroy | Defined$ Enchanted | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ConditionCompare$ EQ1 | SubAbility$ BeserkParoxysm
 SVar:BeserkParoxysm:DB$ Pump | Defined$ Enchanted | NumAtt$ 3 | NumDef$ 3 | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ConditionCompare$ EQ0 | SubAbility$DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paroxysm.jpg
 Oracle:Enchant creature\nAt the beginning of the upkeep of enchanted creature's controller, that player reveals the top card of their library. If that card is a land card, destroy that creature. Otherwise, it gets +3/+3 until end of turn.

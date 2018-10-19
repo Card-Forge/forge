@@ -11,7 +11,7 @@ SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Regenerate | Cost$ Sac<1/Human> | SpellDescription$ Regenerate CARDNAME.
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE1
 SVar:DeckNeeds:Type$Human
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fiend_of_the_shadows.jpg

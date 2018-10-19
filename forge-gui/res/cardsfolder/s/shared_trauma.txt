@@ -8,7 +8,7 @@ SVar:DBMill:DB$ Mill | Defined$ Player | NumCards$ JoinForcesAmount | SubAbility
 SVar:DBReset:DB$ StoreSVar | SVar$ JoinForcesAmount | Type$ Number | Expression$ 0 | References$ JoinForcesAmount
 SVar:X:Count$ChosenNumber
 SVar:JoinForcesAmount:Number$0
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shared_trauma.jpg
 Oracle:Join forces — Starting with you, each player may pay any amount of mana. Each player puts the top X cards of their library into their graveyard, where X is the total amount of mana paid this way.

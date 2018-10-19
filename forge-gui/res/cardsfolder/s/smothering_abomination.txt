@@ -8,7 +8,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature | SacMessage$ Creature
 T:Mode$ Sacrificed | ValidCard$ Creature.YouCtrl | Execute$ TrigDrawCard | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a creature, draw a card.
 SVar:TrigDrawCard:DB$ Draw | Defined$ You | NumCards$ 1
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$Valid Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smothering_abomination.jpg

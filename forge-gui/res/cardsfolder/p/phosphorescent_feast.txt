@@ -5,6 +5,6 @@ A:SP$ Reveal | Cost$ 2 G G G | AnyNumber$ True | RememberRevealed$ True | SubAbi
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$ChromaSource.Green/Twice
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phosphorescent_feast.jpg
 Oracle:Chroma — Reveal any number of cards in your hand. You gain 2 life for each green mana symbol in those cards' mana costs.

@@ -6,6 +6,6 @@ A:AB$ Animate | Cost$ 2 B | Defined$ Self | Power$ 5 | Toughness$ 5 | Types$ Cre
 T:Mode$ DamageDoneOnce | ValidTarget$ Creature.Self | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME is dealt damage, if it's a creature, sacrifice that many permanents.
 SVar:TrigSac:DB$Sacrifice | SacValid$ Permanent | Amount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_totem.jpg
 Oracle:{T}: Add {B}.\n{2}{B}: Phyrexian Totem becomes a 5/5 black Horror artifact creature with trample until end of turn.\nWhenever Phyrexian Totem is dealt damage, if it's a creature, sacrifice that many permanents.

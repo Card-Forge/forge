@@ -6,7 +6,7 @@ K:Equip:PB PB
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each Swamp you control.
 SVar:X:Count$Valid Swamp.YouCtrl
 SVar:BuffedBy:Swamp
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 DeckNeeds:Color$Black & Type$Swamp
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lashwrithe.jpg

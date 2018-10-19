@@ -6,7 +6,7 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ DESPAIR | Coun
 SVar:DBExileSelf:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | DefinedPlayer$ Player.IsRemembered | Chooser$ Player.IsRemembered | ChangeType$ Permanent.RememberedPlayerCtrl,Card.RememberedPlayerCtrl | ChangeNum$ X | Hidden$ True | Origin$ Battlefield,Hand | Destination$ Exile | References$ X | Mandatory$ True
 SVar:X:Count$CardCounters.DESPAIR
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/descent_into_madness.jpg
 Oracle:At the beginning of your upkeep, put a despair counter on Descent into Madness, then each player exiles X permanents they control and/or cards from their hand, where X is the number of despair counters on Descent into Madness.

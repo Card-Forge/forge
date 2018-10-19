@@ -5,7 +5,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Pump
 A:AB$ Tap | Cost$ U | Defined$ Enchanted | SpellDescription$ Tap enchanted creature.
 A:AB$ Untap | Cost$ U | Defined$ Enchanted | SpellDescription$ Untap enchanted creature.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/freed_from_the_real.jpg
 Oracle:Enchant creature\n{U}: Tap enchanted creature.\n{U}: Untap enchanted creature.

@@ -12,7 +12,7 @@ SVar:DBDonate:DB$ GainControl | Defined$ Self | NewController$ Player.Chosen | C
 SVar:DBReset:DB$ StoreSVar | SVar$ CheckPaid | Type$ Number | Expression$ 0
 SVar:CheckPaid:Number$0
 SVar:X:Count$CardCounters.WAGE/Twice
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rogue_skycaptain.jpg
 Oracle:Flying\nAt the beginning of your upkeep, put a wage counter on Rogue Skycaptain. You may pay {2} for each wage counter on it. If you don't, remove all wage counters from Rogue Skycaptain and an opponent gains control of it.

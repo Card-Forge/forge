@@ -6,6 +6,6 @@ A:AB$ Effect | Cost$ 2 R W | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt
 SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ Creature.EffectSource | ReplaceWith$ SelflessDmg | DamageTarget$ Remembered | Description$ The next time damage would be dealt to EFFECTSOURCE this turn, that damage is dealt to any target instead.
 SVar:SelflessDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ Remembered | VarType$ GameEntity | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirrorwood_treefolk.jpg
 Oracle:{2}{R}{W}: The next time damage would be dealt to Mirrorwood Treefolk this turn, that damage is dealt to any target instead.

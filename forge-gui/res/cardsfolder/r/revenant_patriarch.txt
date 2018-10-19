@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:RevenantPump:DB$Pump | ValidTgts$ Player | KW$ Skip your next combat phase. | Permanent$ True | TgtPrompt$ Select target Player | IsCurse$ True
 K:CARDNAME can't block.
 SVar:ManaNeededToAvoidNegativeEffect:white
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 DeckNeeds:Color$White
 SVar:Picture:http://www.wizards.com/global/images/magic/general/revenant_patriarch.jpg
 Oracle:When Revenant Patriarch enters the battlefield, if {W} was spent to cast it, target player skips their next combat phase.\nRevenant Patriarch can't block.

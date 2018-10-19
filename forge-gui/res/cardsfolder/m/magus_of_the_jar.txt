@@ -8,6 +8,6 @@ SVar:DelayedReturn:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execu
 SVar:DBDiscard:DB$ Discard | Defined$ Player | Mode$ Hand | SubAbility$ ReturnAll
 SVar:ReturnAll:DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Exile | Destination$ Hand
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_jar.jpg
 Oracle:{T}, Sacrifice Magus of the Jar: Each player exiles all cards from their hand face down and draws seven cards. At the beginning of the next end step, each player discards their hand and returns to their hand each card they exiled this way.

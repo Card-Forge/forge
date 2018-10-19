@@ -4,6 +4,6 @@ Types:World Enchantment
 S:Mode$ Continuous | Affected$ Creature | RemoveKeyword$ Flying | Description$ All creatures lose flying.
 SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravity_sphere.jpg
 Oracle:All creatures lose flying.

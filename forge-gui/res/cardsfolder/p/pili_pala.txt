@@ -4,6 +4,6 @@ Types:Artifact Creature Scarecrow
 PT:1/1
 K:Flying
 A:AB$ Mana | Cost$ 2 Q | Produced$ Any | SpellDescription$ Add one mana of any color.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pili_pala.jpg
 Oracle:Flying\n{2}, {Q}: Add one mana of any color. ({Q} is the untap symbol.)

@@ -6,6 +6,6 @@ A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt
 SVar:DBDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 3 | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
 SVar:SelfDamageAmount:3
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_cannoneers.jpg
 Oracle:{T}: Orcish Cannoneers deals 2 damage to any target and 3 damage to you.

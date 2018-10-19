@@ -6,6 +6,6 @@ SVar:DBBlue:DB$PumpAll | ValidCards$ Creature.YouCtrl | KW$ Protection from blue
 SVar:DBBlack:DB$PumpAll | ValidCards$ Creature.YouCtrl | KW$ Protection from black | ConditionPresent$ Swamp.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control an Swamp, | SubAbility$ DBRed
 SVar:DBRed:DB$PumpAll | ValidCards$ Creature.YouCtrl | KW$ Protection from red | ConditionPresent$ Mountain.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control an Mountain, | SubAbility$ DBGreen
 SVar:DBGreen:DB$PumpAll | ValidCards$ Creature.YouCtrl | KW$ Protection from green | ConditionPresent$ Forest.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control an Forest,
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dominarias_judgment.jpg
 Oracle:Until end of turn, creatures you control gain protection from white if you control a Plains, from blue if you control an Island, from black if you control a Swamp, from red if you control a Mountain, and from green if you control a Forest.

@@ -8,7 +8,7 @@ A:AB$ PutCounter | Cost$ 1 S | ValidTgts$ Permanent | TgtPrompt$ Select target p
 S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Permanent.counters_GE1_ICE | AddType$ Snow | Description$ Permanents with ice counters on them are snow.
 SVar:X:Count$Valid Permanent.Snow
 SVar:BuffedBy:Permanent.Snow
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 DeckNeeds:Type$Snow
 SVar:NoZeroToughnessAI:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rimefeather_owl.jpg

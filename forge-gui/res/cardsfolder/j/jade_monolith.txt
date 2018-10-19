@@ -9,6 +9,6 @@ SVar:SelflessDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ You | VarType
 SVar:OutOfSight:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Defined$ ChosenCard | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jade_monolith.jpg
 Oracle:{1}: The next time a source of your choice would deal damage to target creature this turn, that source deals that damage to you instead.

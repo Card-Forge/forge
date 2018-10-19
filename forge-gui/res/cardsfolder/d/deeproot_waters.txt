@@ -4,7 +4,7 @@ Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Merfolk | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a Merfolk spell, create a 1/1 blue Merfolk creature token with hexproof. (A creature with hexproof can't be the target of spells or abilities your opponents control.)
 SVar:TrigToken:DB$ Token | TokenImage$ u 1 1 merfolk XLN | TokenAmount$ 1 | TokenName$ Merfolk | TokenTypes$ Creature,Merfolk | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Hexproof
 DeckHas:Ability$Token
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 DeckNeeds:Type$Merfolk
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deeproot_waters.jpg
 Oracle:Whenever you cast a Merfolk spell, create a 1/1 blue Merfolk creature token with hexproof. (A creature with hexproof can't be the target of spells or abilities your opponents control.)

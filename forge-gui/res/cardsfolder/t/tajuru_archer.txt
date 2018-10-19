@@ -8,6 +8,6 @@ SVar:TrigDamage:DB$DealDamage | ValidTgts$ Creature.withFlying | NumDmg$ NumAlli
 SVar:NumAllies:Count$Valid Ally.YouCtrl
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Ally
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tajuru_archer.jpg
 Oracle:Whenever Tajuru Archer or another Ally enters the battlefield under your control, you may have Tajuru Archer deal damage to target creature with flying equal to the number of Allies you control.

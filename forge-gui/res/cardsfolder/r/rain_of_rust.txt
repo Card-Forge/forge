@@ -5,6 +5,6 @@ K:Entwine:3 R
 A:SP$ Charm | Cost$ 3 R R | Choices$ DBDestroyArtifact,DBDestroyLand | CharmNum$ 1
 SVar:DBDestroyArtifact:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 SVar:DBDestroyLand:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_rust.jpg
 Oracle:Choose one —\n• Destroy target artifact.\n• Destroy target land.\nEntwine {3}{R} (Choose both if you pay the entwine cost.)

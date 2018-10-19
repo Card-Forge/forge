@@ -2,6 +2,6 @@ Name:Boil
 ManaCost:3 R
 Types:Instant
 A:SP$ DestroyAll | Cost$ 3 R | ValidCards$ Island | SpellDescription$ Destroy all Islands.
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card25675.jpg
 Oracle:Destroy all Islands.

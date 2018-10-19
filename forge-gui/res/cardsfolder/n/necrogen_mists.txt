@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of each player's upkeep, that player discards a card.
 SVar:TrigDiscard:DB$Discard | Defined$ TriggeredPlayer | NumCards$ 1 | Mode$ TgtChoose
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necrogen_mists.jpg
 Oracle:At the beginning of each player's upkeep, that player discards a card.

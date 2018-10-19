@@ -8,6 +8,6 @@ SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
 SVar:AIPreference:DiscardCost$Card
 DeckNeeds:Type$Zombie
 DeckHas:Ability$Token
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptbreaker.jpg
 Oracle:{1}{B}, {T}, Discard a card: Create a 2/2 black Zombie creature token.\nTap three untapped Zombies you control: You draw a card and you lose 1 life.

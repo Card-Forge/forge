@@ -6,6 +6,6 @@ A:AB$ Mana | Cost$ T SubCounter<X/CHARGE> | References$ X,Y | Produced$ B | Amou
 SVar:Y:Number$1/Plus.ChosenX
 SVar:X:XChoice
 #ChosenX SVar created by Cost payment
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/black_mana_battery.jpg
 Oracle:{2}, {T}: Put a charge counter on Black Mana Battery.\n{T}, Remove any number of charge counters from Black Mana Battery: Add {B}, then add an additional {B} for each charge counter removed this way.

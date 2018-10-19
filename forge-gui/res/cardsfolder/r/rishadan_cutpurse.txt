@@ -7,6 +7,6 @@ SVar:RepeatEachOpp:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAb
 SVar:TrigSac:DB$ Sacrifice | Defined$ Remembered | SacValid$ Permanent | SacMessage$ Permanent | UnlessCost$ 1 | UnlessPayer$ Remembered
 SVar:NeedsToPlayVar:Z EQ0
 SVar:Z:Count$Valid Card.canProduceMana+OppCtrl+untapped
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rishadan_cutpurse.jpg
 Oracle:When Rishadan Cutpurse enters the battlefield, each opponent sacrifices a permanent unless they pay {1}.

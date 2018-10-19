@@ -8,6 +8,6 @@ SVar:HalfHeartTrigSacrifice:DB$ Sacrifice | SacValid$ TriggeredAttacker | Rememb
 SVar:HalfHeartDBDamage:DB$ DealDamage | DamageSource$ TriggeredAttacker | NumDmg$ 4 | Defined$ TriggeredBlockers | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ib_halfheart_goblin_tactician.jpg
 Oracle:Whenever another Goblin you control becomes blocked, sacrifice it. If you do, it deals 4 damage to each creature blocking it.\nSacrifice two Mountains: Create two 1/1 red Goblin creature tokens.

@@ -5,6 +5,6 @@ PT:4/4
 K:Flying
 A:AB$ Token | Cost$ 1 B Exile<1/CARDNAME> | TokenAmount$ 1 | TokenName$ Bat | TokenTypes$ Creature,Bat | TokenOwner$ You | TokenColors$ Black | TokenPower$ 1 | TokenToughness$ 2 | TokenKeywords$ Flying | TokenAbilities$ ABReturn | SpellDescription$ Create a 1/2 black Bat creature token with flying. It has "{1}{B}, Sacrifice this creature: Return an exiled card named CARDNAME to the battlefield under its owner's control."
 SVar:ABReturn:AB$ChangeZone | Cost$ 1 B Sac<1/CARDNAME> | ChangeType$ Card.namedSengir Nosferatu | ChangeNum$ 1 | Origin$ Exile | Destination$ Battlefield | Hidden$ True | SpellDescription$ Return an exiled card named Sengir Nosferatu to the battlefield under its owner's control
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sengir_nosferatu.jpg
 Oracle:Flying\n{1}{B}, Exile Sengir Nosferatu: Create a 1/2 black Bat creature token with flying. It has "{1}{B}, Sacrifice this creature: Return an exiled card named Sengir Nosferatu to the battlefield under its owner's control."

@@ -5,6 +5,6 @@ A:AB$ Effect | Cost$ 1 | Name$ Words of Waste Effect | ReplacementEffects$ DrawR
 SVar:DrawReplace:Event$ Draw | ValidPlayer$ You | ReplaceWith$ WasteCard | Description$ The next time you would draw a card this turn, each opponent discards a card instead.
 SVar:WasteCard:DB$ Discard | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/words_of_waste.jpg
 Oracle:{1}: The next time you would draw a card this turn, each opponent discards a card instead.

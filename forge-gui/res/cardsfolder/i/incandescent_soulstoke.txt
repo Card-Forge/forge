@@ -6,7 +6,7 @@ S:Mode$ Continuous | Affected$ Creature.Elemental+Other+YouCtrl | AddPower$ 1 | 
 A:AB$ ChangeZone | Cost$ 1 R T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Elemental+YouCtrl | SubAbility$ DBPump | RememberChanged$ True | ForgetOtherRemembered$ True | SpellDescription$ You may put an Elemental creature card from your hand onto the battlefield. That creature gains haste until end of turn. Sacrifice it at the beginning of the next end step.
 SVar:DBPump:DB$ Animate | Keywords$ Haste | sVars$ SneakAttackEOT | Defined$ Remembered | AtEOT$ Sacrifice | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:PlayMain1:TRUE
 SVar:SneakAttackEOT:SVar:EndOfTurnLeavePlay:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/incandescent_soulstoke.jpg

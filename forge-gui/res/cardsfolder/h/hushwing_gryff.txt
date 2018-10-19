@@ -5,6 +5,6 @@ PT:2/1
 K:Flash
 K:Flying
 S:Mode$ Continuous | GlobalRule$ Creatures entering the battlefield don't cause abilities to trigger. | Description$ Creatures entering the battlefield don't cause abilities to trigger.
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hushwing_gryff.jpg
 Oracle:Flash\nFlying\nCreatures entering the battlefield don't cause abilities to trigger.

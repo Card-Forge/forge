@@ -4,6 +4,6 @@ Types:Creature Spirit
 PT:3/3
 K:Swampwalk
 A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sewerdreg.jpg
 Oracle:Swampwalk\nSacrifice Sewerdreg: Exile target card from a graveyard.

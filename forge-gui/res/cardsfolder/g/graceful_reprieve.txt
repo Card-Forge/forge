@@ -5,6 +5,6 @@ A:SP$ Effect | Cost$ 1 W | Name$ Graceful Reprieve Effect | ValidTgts$ Creature 
 SVar:TrigGracefulReprieve:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.IsRemembered | Execute$ GracefulReprieveReturn | TriggerDescription$ When target creature dies this turn, return that card to the battlefield under its owner's control.
 SVar:GracefulReprieveReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graceful_reprieve.jpg
 Oracle:When target creature dies this turn, return that card to the battlefield under its owner's control.

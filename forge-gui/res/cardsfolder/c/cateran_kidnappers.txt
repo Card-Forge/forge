@@ -3,6 +3,6 @@ ManaCost:2 B B
 Types:Creature Human Mercenary
 PT:4/2
 A:AB$ ChangeZone | Cost$ 3 T | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Mercenary+cmcLE3 | ChangeNum$ 1 | SpellDescription$ Search your library for a Mercenary permanent card with converted mana cost 3 or less, put it onto the battlefield, then shuffle your library.
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cateran_kidnappers.jpg
 Oracle:{3}, {T}: Search your library for a Mercenary permanent card with converted mana cost 3 or less, put it onto the battlefield, then shuffle your library.

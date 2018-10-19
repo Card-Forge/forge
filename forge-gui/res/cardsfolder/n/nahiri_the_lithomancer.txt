@@ -12,6 +12,6 @@ A:AB$ Token | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True
 SVar:StoneforgedST:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 5 | AddToughness$ 5 | AddKeyword$ Double Strike | Description$ Equipped creature gets +5/+5 and has double strike.
 DeckHas:Ability$Token
 DeckNeeds:Type$Equipment
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nahiri_the_lithomancer.jpg
 Oracle:[+2]: Create a 1/1 white Kor Soldier creature token. You may attach an Equipment you control to it.\n[-2]: You may put an Equipment card from your hand or graveyard onto the battlefield.\n[-10]: Create a colorless Equipment artifact token named Stoneforged Blade. It has indestructible, "Equipped creature gets +5/+5 and has double strike," and equip {0}.\nNahiri, the Lithomancer can be your commander.

@@ -133,7 +133,7 @@ public class SacrificeAi extends SpellAbilityAi {
             List<Card> humanList =
                     CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
 
-            // Since all of the cards have remAIDeck:True, I enabled 1 for 1
+            // Since all of the cards have AI:RemoveDeck:All, I enabled 1 for 1
             // (or X for X) trades for special decks
             if (humanList.size() < amount) {
                 return false;
