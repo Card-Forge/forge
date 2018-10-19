@@ -8,6 +8,6 @@ K:CARDNAME attacks each combat if able.
 T:Mode$ DamageDealtOnce | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME deals damage, you lose that much life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emberwilde_caliph.jpg
 Oracle:Flying, trample\nEmberwilde Caliph attacks each combat if able.\nWhenever Emberwilde Caliph deals damage, you lose that much life.

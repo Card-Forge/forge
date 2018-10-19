@@ -4,6 +4,6 @@ Types:Enchantment
 T:Mode$ BecomesTarget | ValidTarget$ Card.Creature+inZoneBattlefield | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Whenever a creature becomes the target of a spell or ability, return that creature to its owner's hand. (It won't be affected by the spell or ability.)
 SVar:TrigReturn:DB$ChangeZone | Defined$ TriggeredTarget | Origin$ Battlefield | Destination$ Hand
 SVar:NonStackingEffect:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cowardice.jpg
 Oracle:Whenever a creature becomes the target of a spell or ability, return that creature to its owner's hand. (It won't be affected by the spell or ability.)

@@ -4,6 +4,6 @@ Types:Sorcery
 A:SP$ RevealHand | Cost$ 2 B | ValidTgts$ Player | TgtPrompt$ Select target player | RememberRevealed$ True | SubAbility$ Damage | SpellDescription$ Target player reveals their hand. CARDNAME deals damage to that player equal to the number of white cards in their hand.
 SVar:Damage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | References$ X
 SVar:X:Remembered$Valid Card.White
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inquisition.jpg
 Oracle:Target player reveals their hand. Inquisition deals damage to that player equal to the number of white cards in their hand.

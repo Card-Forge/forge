@@ -3,6 +3,6 @@ ManaCost:2 W
 Types:Instant
 A:SP$ Token | Cost$ 2 W | TokenAmount$ 3 | TokenName$ Knight | TokenTypes$ Creature,Knight | TokenOwner$ You | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2 | TokenSVars$ WaylayEOT | AtEOT$ Exile | SpellDescription$ Create three 2/2 white Knight creature tokens. Exile them at the beginning of the next cleanup step.
 SVar:WaylayEOT:SVar:EndOfTurnLeavePlay:True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/waylay.jpg
 Oracle:Create three 2/2 white Knight creature tokens. Exile them at the beginning of the next cleanup step.

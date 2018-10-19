@@ -6,6 +6,6 @@ A:SP$ ChangeZone | Cost$ X B B | TargetMin$ 0 | TargetMax$ MaxTgts | OpponentTur
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$TypeInYourYard.Creature
 SVar:DBPump:DB$ Pump | Defined$ Targeted | AtEOT$ Sacrifice
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wake_the_dead.jpg
 Oracle:Cast Wake the Dead only during combat on an opponent's turn.\nReturn X target creature cards from your graveyard to the battlefield. Sacrifice those creatures at the beginning of the next end step.

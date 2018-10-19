@@ -8,7 +8,7 @@ SVar:X:Count$CardCounters.FADE
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ DestroyRemembered | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, destroy all tokens created with CARDNAME. They can't be regenerated.
 SVar:DestroyRemembered:DB$ DestroyAll | ValidCards$ Card.IsImprinted | NoRegen$ True | SubAbility$ DBCleanUp
 SVar:DBCleanUp:DB$ Cleanup | ClearImprinted$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/saproling_burst.jpg
 Oracle:Fading 7 (This enchantment enters the battlefield with seven fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)\nRemove a fade counter from Saproling Burst: Create a green Saproling creature token. It has "This creature's power and toughness are each equal to the number of fade counters on Saproling Burst."\nWhen Saproling Burst leaves the battlefield, destroy all tokens created with Saproling Burst. They can't be regenerated.

@@ -3,6 +3,6 @@ ManaCost:3 R
 Types:Creature Elemental
 PT:3/3
 A:AB$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't be regenerated. | IsCurse$ True | SpellDescription$ Target creature can't be regenerated this turn.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/furnace_brood.jpg
 Oracle:{R}: Target creature can't be regenerated this turn.

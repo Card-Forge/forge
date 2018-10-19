@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Graveyard | ValidCard$ Creature.OppOwn | Execute$ TrigChange | TriggerDescription$ When a creature is put into an opponent's graveyard from the battlefield, if CARDNAME is in your graveyard, exile CARDNAME.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:DiscardMe:5
 SVar:SacMe:5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bridge_from_below.jpg

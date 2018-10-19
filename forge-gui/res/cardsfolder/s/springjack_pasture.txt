@@ -6,6 +6,6 @@ A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenName$ Goat | TokenTypes$ Creatur
 A:AB$Mana | Cost$ T Sac<X/Goat> | CostDesc$ {T}, Sacrifice X Goats: | Produced$ Any | Amount$ ChosenX | References$ X | Defined$ You | SubAbility$ DBGainLife | SpellDescription$ Add X mana of any one color. You gain X life.
 SVar:X:XChoice
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ ChosenX
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/springjack_pasture.jpg
 Oracle:{T}: Add {C}.\n{4}, {T}: Create a 0/1 white Goat creature token.\n{T}, Sacrifice X Goats: Add X mana of any one color. You gain X life.

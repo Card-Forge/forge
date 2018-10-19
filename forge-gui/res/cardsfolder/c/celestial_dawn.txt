@@ -7,6 +7,6 @@ S:Mode$ Continuous | Affected$ Card.YouCtrl+nonLand | SetColor$ White | Affected
 S:Mode$ Continuous | Affected$ You | ManaColorConversion$ Additive | WhiteConversion$ All | Description$ You may spend white mana as though it were mana of any color.
 S:Mode$ Continuous | Affected$ You | ManaColorConversion$ Restrictive | BlueConversion$ Colorless | BlackConversion$ Colorless | RedConversion$ Colorless | GreenConversion$ Colorless | ColorlessConversion$ Colorless | Description$ You may spend other mana only as though it were colorless mana.
 SVar:NonStackingEffect:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_dawn.jpg
 Oracle:Lands you control are Plains.\nNonland permanents you control are white. The same is true for spells you control and nonland cards you own that aren't on the battlefield.\nYou may spend white mana as though it were mana of any color. You may spend other mana only as though it were colorless mana.

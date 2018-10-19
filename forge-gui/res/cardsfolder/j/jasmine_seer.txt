@@ -6,6 +6,6 @@ A:AB$ Reveal | Cost$ 2 W T | Defined$ You | RevealValid$ Card.White | AnyNumber$
 SVar:DBJasmineLife:DB$ GainLife | LifeAmount$ JasmineX | SubAbility$ DBJasmineCleanup | References$ JasmineX
 SVar:JasmineX:Remembered$Amount.Twice
 SVar:DBJasmineCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jasmine_seer.jpg
 Oracle:{2}{W}, {T}: Reveal any number of white cards in your hand. You gain 2 life for each card revealed this way.

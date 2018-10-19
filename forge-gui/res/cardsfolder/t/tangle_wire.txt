@@ -7,7 +7,7 @@ SVar:DBTap:DB$ Tap | Defined$ ChosenCard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:X:Count$CardCounters.FADE
 K:Fading:4
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$Valid Land.YouDontCtrl,Creature.YouDontCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tangle_wire.jpg

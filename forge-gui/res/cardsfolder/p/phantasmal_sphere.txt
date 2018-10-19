@@ -10,6 +10,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:OrbToken:DB$ Token | TokenImage$ u x x orb | ValidTgts$ Opponent | TokenOwner$ Targeted | TokenName$ Orb | TokenColors$ Blue | TokenTypes$ Creature,Orb | TokenPower$ XLKI | TokenToughness$ XLKI | References$ XLKI | TokenAmount$ 1
 SVar:X:Count$CardCounters.P1P1
 SVar:XLKI:TriggeredCard$CardCounters.P1P1
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantasmal_sphere.jpg
 Oracle:Flying\nAt the beginning of your upkeep, put a +1/+1 counter on Phantasmal Sphere, then sacrifice Phantasmal Sphere unless you pay {1} for each +1/+1 counter on it.\nWhen Phantasmal Sphere leaves the battlefield, target opponent creates an X/X blue Orb creature token with flying, where X is the number of +1/+1 counters on Phantasmal Sphere.

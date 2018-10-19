@@ -8,6 +8,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefiel
 SVar:TrigGainControl:DB$ GainControl | Defined$ Equipped | NewController$ TriggeredPlayer | LoseControl$ EOT | RememberControlled$ True | SubAbility$ DBUntap
 SVar:DBUntap:DB$ Untap | Defined$ Equipped | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/assault_suit.jpg
 Oracle:Equipped creature gets +2/+2, has haste, can't attack you or a planeswalker you control, and can't be sacrificed.\nAt the beginning of each opponent's upkeep, you may have that player gain control of equipped creature until end of turn. If you do, untap it.\nEquip {3}

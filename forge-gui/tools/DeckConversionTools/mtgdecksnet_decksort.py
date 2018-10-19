@@ -59,7 +59,7 @@ for root, dirs, files in os.walk(CARDSFOLDER):
 		    if line.lower().find("name:") != -1:
 			cardnames.extend([line.split('\n')[0].split(':')[1]])
 		cardname = " // ".join(cardnames)
-	    if cardtext.lower().find("remaideck") != -1:
+	    if cardtext.lower().find("removedeck:all") != -1:
 		cardlist[cardname] = 0
 	    else:
 		cardlist[cardname] = 1

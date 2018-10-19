@@ -6,6 +6,6 @@ A:AB$ PutCounter | Cost$ T | Defined$ Self | CounterType$ STORAGE | CounterNum$ 
 A:AB$ Mana | Cost$ T SubCounter<X/STORAGE> | Produced$ W | Amount$ ChosenX | CostDesc$ {T}, Remove any number of storage counters from CARDNAME: | References$ X | SpellDescription$ Add {W} for each storage counter removed this way.
 SVar:X:XChoice
 #ChosenX SVar created by Cost payment
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fountain_of_cho.jpg
 Oracle:Fountain of Cho enters the battlefield tapped.\n{T}: Put a storage counter on Fountain of Cho.\n{T}, Remove any number of storage counters from Fountain of Cho: Add {W} for each storage counter removed this way.

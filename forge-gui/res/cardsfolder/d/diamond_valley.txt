@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Land
 A:AB$ GainLife | Cost$ T Sac<1/Creature> | LifeAmount$ X | References$ X | SpellDescription$ You gain life equal to the sacrificed creature's toughness.
 SVar:X:Sacrificed$CardToughness
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diamond_valley.jpg
 Oracle:{T}, Sacrifice a creature: You gain life equal to the sacrificed creature's toughness.

@@ -5,6 +5,6 @@ K:MayFlashCost:2
 A:SP$ UntapAll | Cost$ 2 U U | ValidCards$ Creature.tapped | RememberUntapped$ True | SubAbility$ DBTap | SpellDescription$ Simultaneously untap all tapped creatures and tap all untapped creatures.
 SVar:DBTap:DB$ TapAll | ValidCards$ Creature.untapped+IsNotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/breaking_wave.jpg
 Oracle:You may cast Breaking Wave as though it had flash if you pay {2} more to cast it. (You may cast it any time you could cast an instant.)\nSimultaneously untap all tapped creatures and tap all untapped creatures.

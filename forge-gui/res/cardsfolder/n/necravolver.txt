@@ -12,7 +12,7 @@ SVar:VolverLife:DB$ Animate | Defined$ Self | Triggers$ PseudoLifelink | sVars$ 
 SVar:PseudoLifelink:Mode$ DamageDealtOnce | ValidSource$ Card.Self | Execute$ VolverTrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
 SVar:VolverTrigGain:DB$ GainLife | Defined$ You | LifeAmount$ VolverX | References$ VolverX
 SVar:VolverX:TriggerCount$DamageAmount
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 DeckNeeds:Color$Green|White
 DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necravolver.jpg

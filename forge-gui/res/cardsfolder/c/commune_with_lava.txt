@@ -6,6 +6,6 @@ SVar:DBMayBePlay:DB$ Effect | StaticAbilities$ STCommuned | Duration$ UntilTheEn
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:STCommuned:Mode$ Continuous | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Exile | MayPlay$ True | Description$ Until the end of your next turn, you may play those cards.
 SVar:X:Count$xPaid
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/commune_with_lava.jpg
 Oracle:Exile the top X cards of your library. Until the end of your next turn, you may play those cards.

@@ -4,6 +4,6 @@ Types:Creature Elemental
 PT:8/0
 K:Trample
 A:SP$ PermanentCreature | Cost$ 2 G | AILogic$ ZeroToughness
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/force_of_savagery.jpg
 Oracle:Trample

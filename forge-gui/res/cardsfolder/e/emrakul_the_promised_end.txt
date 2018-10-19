@@ -12,6 +12,6 @@ SVar:TrigControlPlayer:DB$ ControlPlayer | ValidTgts$ Opponent | TgtPrompt$ Sele
 SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | ValidPlayer$ Player.IsRemembered | Phase$ Untap | Execute$ DBAddTurn | Static$ True
 SVar:DBAddTurn:DB$ AddTurn | Defined$ Remembered | NumTurns$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emrakul_the_promised_end.jpg
 Oracle:Emrakul, the Promised End costs {1} less to cast for each card type among cards in your graveyard.\nWhen you cast Emrakul, you gain control of target opponent during that player's next turn. After that turn, that player takes an extra turn.\nFlying, trample, protection from instants

@@ -5,6 +5,6 @@ PT:4/3
 A:AB$ RepeatEach | Cost$ T | RepeatPlayers$ Player | RepeatSubAbility$ DBDealDamage | DamageMap$ True | SpellDescription$ CARDNAME deals damage to each player equal to half that player's life total, rounded down.
 SVar:DBDealDamage:DB$ DealDamage | Defined$ Remembered | NumDmg$ HeartlessX | References$ HeartlessX
 SVar:HeartlessX:PlayerCountRemembered$LifeTotal/HalfDown
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heartless_hidetsugu.jpg
 Oracle:{T}: Heartless Hidetsugu deals damage to each player equal to half that player's life total, rounded down.

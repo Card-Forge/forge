@@ -6,6 +6,6 @@ A:SP$ Counter | Cost$ ExileFromHand<1/Card.Blue> | CostDesc$ You may exile a blu
 SVar:X:Count$xPaid
 SVar:TargetCMC:Targeted$CardManaCost
 SVar:Y:Exiled$CardManaCost
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disrupting_shoal.jpg
 Oracle:You may exile a blue card with converted mana cost X from your hand rather than pay Disrupting Shoal's mana cost.\nCounter target spell if its converted mana cost is X.

@@ -3,7 +3,7 @@ ManaCost:4 B
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature enters the battlefield, destroy all other creatures that share a color with it. They can't be regenerated.
 SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Triggered.SharesColorWith+Creature+Other | NoRegen$ True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spreading_plague.jpg
 Oracle:Whenever a creature enters the battlefield, destroy all other creatures that share a color with it. They can't be regenerated.

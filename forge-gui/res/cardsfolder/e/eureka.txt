@@ -14,7 +14,7 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NumPlayerGiveup:Number$0
 SVar:TotalPlayer:PlayerCountPlayers$Amount
 SVar:CheckHand:Count$ValidHand Permanent.IsNotRemembered+RememberedPlayerCtrl
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$ValidHand Permanent.YouCtrl+cmcGE5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eureka.jpg

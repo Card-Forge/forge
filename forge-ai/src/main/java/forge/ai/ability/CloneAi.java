@@ -146,10 +146,9 @@ public class CloneAi extends SpellAbilityAi {
 
         // Default:
         // This is reasonable for now. Kamahl, Fist of Krosa and a sorcery or
-        // two are the only things
-        // that clone a target. Those can just use SVar:RemAIDeck:True until
-        // this can do a reasonably
-        // good job of picking a good target
+        // two are the only things that clone a target. Those can just use
+        // AI:RemoveDeck:All until this can do a reasonably good job of picking
+        // a good target
         return false;
     }
     

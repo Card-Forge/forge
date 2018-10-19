@@ -2,7 +2,7 @@ Name:Lens of Clarity
 ManaCost:1
 Types:Artifact
 S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl,Creature.faceDown+YouDontCtrl | AffectedZone$ Library,Battlefield | MayLookAt$ You | Description$ You may look at the top card of your library and at face-down creatures you don't control.
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lens_of_clarity.jpg
 Oracle:You may look at the top card of your library and at face-down creatures you don't control. (You may do this at any time.)

@@ -2,7 +2,7 @@ Name:Reckless Assault
 ManaCost:2 B R
 Types:Enchantment
 A:AB$ DealDamage | Cost$ 1 PayLife<2> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_assault.jpg
 Oracle:{1}, Pay 2 life: Reckless Assault deals 1 damage to any target.

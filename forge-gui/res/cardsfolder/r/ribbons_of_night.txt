@@ -5,7 +5,7 @@ A:SP$ DealDamage | Cost$ 4 B | NumDmg$ 4 | ValidTgts$ Creature | TgtPrompt$ Sele
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionManaSpent$ U
 SVar:ManaNeededToAvoidNegativeEffect:blue
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 DeckNeeds:Color$Blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ribbons_of_night.jpg
 Oracle:Ribbons of Night deals 4 damage to target creature and you gain 4 life. If {U} was spent to cast Ribbons of Night, draw a card.

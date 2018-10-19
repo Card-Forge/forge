@@ -3,6 +3,6 @@ ManaCost:2 U
 Types:Instant
 A:SP$ ChangeZone | Cost$ 2 U | Origin$ Sideboard | Destination$ Hand | ChangeType$ Instant.YouOwn | ChangeNum$ 1 | SubAbility$ DBChange | SpellDescription$ You may choose an instant card you own from outside the game, reveal that card, and put it into your hand. Exile CARDNAME.
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cunning_wish.jpg
 Oracle:You may choose an instant card you own from outside the game, reveal that card, and put it into your hand. Exile Cunning Wish.

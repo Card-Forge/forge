@@ -7,6 +7,6 @@ T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ KaronaEffect | TriggerZones
 SVar:KaronaEffect:DB$ Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature to redirect the damage to | ReplacementEffects$ ZealotDamage | SVars$ MirrorStrikeDmg | Duration$ HostLeavesOrEOT | RememberObjects$ Targeted | ExileOnMoved$ Battlefield
 SVar:ZealotDamage:Event$ DamageDone | ValidTarget$ Creature.EffectSource | ReplaceWith$ MirrorStrikeDmg | DamageTarget$ Remembered | Description$ All damage that would be dealt to Karona's Zealot this turn is dealt to target creature instead.
 SVar:MirrorStrikeDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ Remembered | VarType$ Card
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karonas_zealot.jpg
 Oracle:Morph {3}{W}{W} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Karona's Zealot is turned face up, all damage that would be dealt to it this turn is dealt to target creature instead.

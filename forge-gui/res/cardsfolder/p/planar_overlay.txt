@@ -9,7 +9,7 @@ SVar:ChoosePlains:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Plain
 SVar:ChooseForest:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Forest.RememberedPlayerCtrl | Mandatory$ True | RememberChosen$ True | AILogic$ WorstCard
 SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Battlefield | Destination$ Hand | StackDescription$ None | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_overlay.jpg
 Oracle:Each player chooses a land they control of each basic land type. Return those lands to their owners' hands.

@@ -3,7 +3,7 @@ ManaCost:R
 Types:Instant
 A:SP$ Animate | Cost$ R | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxTgts | TgtPrompt$ Select target creatures | Colors$ Red | OverwriteColors$ True | References$ MaxTgts | SpellDescription$ Any number of target creatures become red until end of turn.
 SVar:MaxTgts:Count$Valid Creature
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_song.jpg
 Oracle:Any number of target creatures become red until end of turn.

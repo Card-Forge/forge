@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+3/-4
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Opponent | AddKeyword$ Play with your hand revealed. | Description$ Your opponents play with their hands revealed.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Squee.full.jpg
 Oracle:Hand +3, life -4\nYour opponents play with their hands revealed.

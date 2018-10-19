@@ -7,6 +7,6 @@ T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | Execute$ Change
 SVar:ChangeControl:DB$GainControl | Defined$ Self | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SpellDescription$ Target opponent gains control of CARDNAME. | SubAbility$ RemCombat
 SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Self
 SVar:SacMe:1
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_cadets.jpg
 Oracle:Whenever Goblin Cadets blocks or becomes blocked, target opponent gains control of it. (This removes Goblin Cadets from combat.)

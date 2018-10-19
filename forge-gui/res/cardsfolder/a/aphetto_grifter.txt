@@ -3,6 +3,6 @@ ManaCost:2 U
 Types:Creature Human Wizard
 PT:1/1
 A:AB$ Tap | Cost$ tapXType<2/Wizard> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Tap target permanent.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aphetto_grifter.jpg
 Oracle:Tap two untapped Wizards you control: Tap target permanent.

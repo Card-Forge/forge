@@ -6,7 +6,7 @@ A:AB$ Reveal | Cost$ T | RevealValid$ Card.Artifact+YouCtrl | AnyNumber$ True | 
 SVar:DBMetalWorkerMana:DB$ Mana | Produced$ C | Amount$ MetalWorkerX | References$ MetalWorkerX,X | SubAbility$ DBMetalWorkerCleanup
 SVar:DBMetalWorkerCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:MetalWorkerX:Remembered$Amount.Twice
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/metalworker.jpg
 Oracle:{T}: Reveal any number of artifact cards in your hand. Add {C}{C} for each card revealed this way.

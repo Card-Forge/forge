@@ -6,6 +6,6 @@ A:AB$ ChangeZone | Cost$ 2 W T Discard<1/Card> | ValidTgts$ Creature.attacking |
 SVar:DBGainLife:DB$ GainLife | Defined$ TargetedController | LifeAmount$ X | References$ X
 SVar:X:TargetedLKI$CardToughness
 SVar:AIPreference:DiscardCost$Card
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avenger_en_dal.jpg
 Oracle:{2}{W}, {T}, Discard a card: Exile target attacking creature. Its controller gains life equal to its toughness.

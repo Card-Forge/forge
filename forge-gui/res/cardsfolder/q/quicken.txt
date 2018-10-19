@@ -6,6 +6,6 @@ SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:QuickenStA:Mode$ Continuous | EffectZone$ Command | Affected$ Sorcery | AffectedZone$ Hand,Graveyard,Exile,Library | WithFlash$ You
 SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Sorcery | ValidActivatingPlayer$ You | Execute$ Quickened | Static$ True | TriggerDescription$ The next sorcery card you cast this turn can be cast as though it had flash.
 SVar:Quickened:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quicken.jpg
 Oracle:The next sorcery card you cast this turn can be cast as though it had flash. (It can be cast any time you could cast an instant.)\nDraw a card.

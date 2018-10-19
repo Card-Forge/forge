@@ -5,6 +5,6 @@ PT:2/1
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigIncrementCounters | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, for each kind of counter on target permanent or player, give permanent or player another counter of that kind.
 SVar:TrigIncrementCounters:DB$ PutCounter | ValidTgts$ Permanent,Player | CounterType$ ExistingCounter | EachExistingCounter$ True | CounterNum$ 1
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyship_plunderer.jpg
 Oracle:Flying\nWhenever Skyship Plunderer deals combat damage to a player, for each kind of counter on target permanent or player, give permanent or player another counter of that kind.

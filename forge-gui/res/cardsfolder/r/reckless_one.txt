@@ -6,7 +6,7 @@ K:Haste
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of Goblins on the battlefield.
 SVar:X:Count$Valid Goblin
 SVar:BuffedBy:Goblin
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:NoZeroToughnessAI:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_one.jpg
 Oracle:Haste\nReckless One's power and toughness are each equal to the number of Goblins on the battlefield.

@@ -7,7 +7,7 @@ SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | Execute$ 
 SVar:TrigDmg:DB$ DealDamage | NumDmg$ 2 | Defined$ DelayTriggerRemembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NeedsToPlay:Island.OppCtrl
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_sea_clan.jpg
 Oracle:{T}: Choose target attacking or blocking creature whose controller controls an Island. Dwarven Sea Clan deals 2 damage to that creature at end of combat. Activate this ability only before the end of combat step.

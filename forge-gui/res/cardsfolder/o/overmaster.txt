@@ -6,6 +6,6 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ Mastery | TriggerDescription$ The next instant or sorcery spell you cast this turn can't be countered by spells or abilities.
 SVar:Mastery:DB$ Pump | Defined$ TriggeredCard | KW$ HIDDEN CARDNAME can't be countered. | PumpZone$ Stack | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overmaster.jpg
 Oracle:The next instant or sorcery spell you cast this turn can't be countered by spells or abilities.\nDraw a card.

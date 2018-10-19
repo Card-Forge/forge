@@ -6,7 +6,7 @@ SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 2
 A:AB$ Effect | Cost$ 4 T | StaticAbilities$ STPump | AILogic$ ChainVeil | SpellDescription$ For each planeswalker you control, you may activate one of its loyalty abilities once this turn as though none of its loyalty abilities had been activated this turn.
 SVar:STPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Planeswalker.YouCtrl | AddHiddenKeyword$ May activate CARDNAME's loyalty abilities once | Description$ For each planeswalker you control, you may activate one of its loyalty abilities once this turn as though none of its loyalty abilities had been activated this turn.
 SVar:NeedsToPlay:Planeswalker.YouCtrl
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_chain_veil.jpg
 Oracle:At the beginning of your end step, if you didn't activate a loyalty ability of a planeswalker this turn, you lose 2 life.\n{4}, {T}: For each planeswalker you control, you may activate one of its loyalty abilities once this turn as though none of its loyalty abilities have been activated this turn.

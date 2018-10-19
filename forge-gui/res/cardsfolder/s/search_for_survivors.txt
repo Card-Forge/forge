@@ -9,6 +9,6 @@ SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Condition
 SVar:DBCleanupChosen:DB$ Cleanup | ClearChosenPlayer$ True | ClearChosenCard$ True
 SVar:X:Count$ValidGraveyard Creature.YouCtrl
 SVar:NeedsToPlayVar:X GE2
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/search_for_survivors.jpg
 Oracle:Reorder your graveyard at random. An opponent chooses a card at random in your graveyard. If it's a creature card, put it onto the battlefield. Otherwise, exile it.

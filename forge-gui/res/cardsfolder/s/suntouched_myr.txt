@@ -4,7 +4,7 @@ Types:Artifact Creature Myr
 PT:0/0
 K:Sunburst
 SVar:NoZeroToughnessAI:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$UniqueManaColorsProduced.ByUntappedSources
 DeckHints:Ability$Proliferate

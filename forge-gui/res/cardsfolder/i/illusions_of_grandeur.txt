@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigGainLife:DB$ GainLife | Defined$ TriggeredCardController | LifeAmount$ 20
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ 20
 SVar:AICastPreference:MustHaveInHand$ Donate | MaxControlled$ 1 | NumManaSourcesNextTurn$ 5 | AlwaysCastIfLifeBelow$ 4
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:DeckNeeds:Name$Donate
 SVar:DonateMe:5
 SVar:PlayMain1:TRUE

@@ -5,6 +5,6 @@ A:SP$ Effect | Cost$ 1 W | ReplacementEffects$ ReplaceExile | SVars$ DBExile | S
 SVar:ReplaceExile:Event$ Moved | ActiveZones$ Command | Destination$ Battlefield | ValidCard$ Creature.wasNotCast | ReplaceWith$ DBExile | Description$ If a creature would enter the battlefield and it wasn't cast, exile it instead.
 SVar:DBExile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard 
 SVar:DBDraw:DB$ Draw | NumCards$ 1
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hallowed_moonlight.jpg
 Oracle:Until end of turn, if a creature would enter the battlefield and it wasn't cast, exile it instead.\nDraw a card.

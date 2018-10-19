@@ -5,6 +5,6 @@ A:SP$ Reveal | Cost$ 1 R | Defined$ You | RevealValid$ Card.Red | AnyNumber$ Tru
 SVar:DBScentOfCinderDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ ScentOfCinderX | SubAbility$ DBScentOfCinderCleanup | References$ ScentOfCinderX
 SVar:ScentOfCinderX:Remembered$Amount
 SVar:DBScentOfCinderCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scent_of_cinder.jpg
 Oracle:Reveal any number of red cards in your hand. Scent of Cinder deals X damage to any target, where X is the number of cards revealed this way.

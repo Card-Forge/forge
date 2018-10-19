@@ -2,6 +2,6 @@ Name:Urza's Mine
 ManaCost:no cost
 Types:Land Urza's Mine
 A:AB$ Mana | Cost$ T | Produced$ C | Bonus$ UrzaLands | BonusProduced$ 1 | SpellDescription$ Add {C}. If you control an Urza's Power-Plant and an Urza's Tower, add {C}{C} instead.
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_mine.jpg
 Oracle:{T}: Add {C}. If you control an Urza's Power-Plant and an Urza's Tower, add {C}{C} instead.
