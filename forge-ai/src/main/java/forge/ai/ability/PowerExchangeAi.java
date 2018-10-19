@@ -17,7 +17,6 @@ import forge.util.MyRandom;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 public class PowerExchangeAi extends SpellAbilityAi {
 
