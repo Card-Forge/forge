@@ -78,6 +78,9 @@ public class DeckImportController {
             final DeckRecognizer.TokenType type = t.getType();
             if (type == DeckRecognizer.TokenType.SectionName) {
                 section = t.getText().toLowerCase();
+                if (section.startsWith("//")) {
+                    continue;
+                }
                 // can't use wildcards in switch/case, so if/else it is
                 if (section.startsWith("main")) {
                     deckSection = DeckSection.Main;
@@ -101,7 +104,7 @@ public class DeckImportController {
                     deckSection = DeckSection.Conspiracy;
                 }
                 else {
-                    throw new NotImplementedException("Unexpected section: %s", t.getText());
+                    throw new NotImplementedException("Unexpected section: " + t.getText());
                 }
             }
             if (type != DeckRecognizer.TokenType.KnownCard) {

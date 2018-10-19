@@ -342,7 +342,7 @@ public class AnimateAi extends SpellAbilityAi {
         
         // This is reasonable for now. Kamahl, Fist of Krosa and a sorcery or
         // two are the only things
-        // that animate a target. Those can just use SVar:RemAIDeck:True until
+        // that animate a target. Those can just use AI:RemoveDeck:All until
         // this can do a reasonably
         // good job of picking a good target
         return false;

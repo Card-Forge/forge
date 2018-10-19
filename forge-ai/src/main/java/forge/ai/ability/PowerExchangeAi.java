@@ -38,8 +38,7 @@ public class PowerExchangeAi extends SpellAbilityAi {
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                final Map<String, String> vars = c.getSVars();
-                return !vars.containsKey("RemAIDeck") && c.canBeTargetedBy(sa);
+                return !c.getRules().getAiHints().getRemAIDecks() && c.canBeTargetedBy(sa);
             }
         });
         CardLists.sortByPowerAsc(list);
