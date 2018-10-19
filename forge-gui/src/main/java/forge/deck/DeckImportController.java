@@ -104,7 +104,7 @@ public class DeckImportController {
                     deckSection = DeckSection.Conspiracy;
                 }
                 else {
-                    throw new NotImplementedException("Unexpected section: %s", t.getText());
+                    throw new NotImplementedException("Unexpected section: " + t.getText());
                 }
             }
             if (type != DeckRecognizer.TokenType.KnownCard) {
