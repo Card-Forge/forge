@@ -74,12 +74,12 @@ public enum GroupDef {
                     return -1;
                 }
             }),
-    DEFAULT("Default",
-            new String[] { "Creatures", "Spells", "Lands" },
+    DEFAULT("Default", //Beginning in DDU, "Artifacts" category is added at top of list
+            new String[] { "Artifacts", "Creatures", "Other Spells", "Lands" },
             new Function<Integer, ColumnDef>() {
                 @Override
                 public ColumnDef apply(final Integer groupIndex) {
-                    if (groupIndex == 2) {
+                    if (groupIndex == 3) {
                         return ColumnDef.NAME; //pile lands by name regardless
                     }
                     return null;
@@ -90,21 +90,24 @@ public enum GroupDef {
                 public Integer apply(final InventoryItem item) {
                     if (item instanceof PaperCard) {
                         CardType type = ((PaperCard) item).getRules().getType();
-                        if (type.isCreature()) {
+                        if (type.isArtifact()) { //artifact lands/creatures, too
                             return 0;
                         }
-                        if (type.isLand()) { //make Artifact Lands appear in Lands group
-                            return 2;
-                        }
-                        if (type.isArtifact() || type.isEnchantment() || type.isPlaneswalker() || type.isInstant() || type.isSorcery()) {
+                        if (type.isCreature()) {
                             return 1;
+                        }
+                        if (type.isLand()) {
+                            return 3;
+                        }
+                        if (type.isEnchantment() || type.isPlaneswalker() || type.isInstant() || type.isSorcery()) {
+                            return 2;
                         }
                     }
                     return -1;
                 }
             }),
     CARD_TYPE("Type",
-            new String[] { "Creatures", "Artifacts", "Enchantments", "Planeswalkers", "Instants", "Sorceries", "Lands" },
+            new String[] { "Planeswalker", "Creature", "Sorcery", "Instant", "Artifact", "Enchantment", "Land" },
             new Function<Integer, ColumnDef>() {
                 @Override
                 public ColumnDef apply(final Integer groupIndex) {
@@ -119,27 +122,57 @@ public enum GroupDef {
                 public Integer apply(final InventoryItem item) {
                     if (item instanceof PaperCard) {
                         CardType type = ((PaperCard) item).getRules().getType();
-                        if (type.isCreature()) { //make Artifact and Land Creatures appear in Creatures group
+                        if (type.isPlaneswalker()) {
                             return 0;
                         }
-                        if (type.isLand()) { //make Artifact Lands appear in Lands group
-                            return 6;
-                        }
-                        if (type.isArtifact()) {
+                        if (type.isCreature()) {
                             return 1;
                         }
-                        if (type.isEnchantment()) {
+                        if (type.isSorcery()) {
                             return 2;
                         }
-                        if (type.isPlaneswalker()) {
+                        if (type.isInstant()) {
                             return 3;
                         }
-                        if (type.isInstant()) {
+                        if (type.isArtifact()) {
                             return 4;
                         }
-                        if (type.isSorcery()) {
+                        if (type.isEnchantment()) {
                             return 5;
                         }
+                        if (type.isLand()) {
+                            return 6;
+                        }
+                    }
+                    return -1;
+                }
+            }),
+    PW_DECK_SORT("Planeswalker Deck Sort",
+            new String[] { "Planeswalker", "Rares", "Creature", "Land", "Other Spells" },
+            new Function<Integer, ColumnDef>() {
+                @Override
+                public ColumnDef apply(final Integer groupIndex) {
+                    return null;
+                }
+            },
+            new Function<InventoryItem, Integer>() {
+                @Override
+                public Integer apply(final InventoryItem item) {
+                    if (item instanceof PaperCard) {
+                        CardType type = ((PaperCard) item).getRules().getType();
+                        if (type.isPlaneswalker()){
+                            return 0;
+                        }
+                        if (((PaperCard) item).getRarity().toString() == "R"){
+                            return 1;
+                        }
+                        if (type.isCreature()){
+                            return 2;
+                        }
+                        if (type.isLand()){
+                            return 3;
+                        }
+                        return 4;
                     }
                     return -1;
                 }
