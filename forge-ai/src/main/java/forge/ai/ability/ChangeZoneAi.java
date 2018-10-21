@@ -251,6 +251,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 if (ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE)) {
                     return false;
                 }
+
+                if (ai.getGame().getCombat() == null) {
+                    return false;
+                }
                 List<Card> attackers = ai.getGame().getCombat().getUnblockedAttackers();
                 boolean lowerCMC = false;
                 for (Card attacker : attackers) {

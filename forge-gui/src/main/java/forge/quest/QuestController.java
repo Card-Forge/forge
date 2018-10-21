@@ -288,6 +288,8 @@ public class QuestController {
 
         this.getAssets().setCredits(FModel.getQuestPreferences().getPrefInt(DifficultyPrefs.STARTING_CREDITS, difficulty));
 
+        // Reset starting cards here.
+        this.myCards.resetNewList();
     }
 
     /**
