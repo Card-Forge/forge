@@ -107,7 +107,7 @@ public enum GroupDef {
                 }
             }),
     CARD_TYPE("Type",
-            new String[] { "Planeswalker", "Creature", "Sorcery", "Instant", "Artifact", "Enchantment", "Land" },
+            new String[] { "Planeswalker", "Creature", "Sorcery", "Instant", "Artifact", "Enchantment", "Land", "Tribal instant" },
             new Function<Integer, ColumnDef>() {
                 @Override
                 public ColumnDef apply(final Integer groupIndex) {
@@ -130,6 +130,9 @@ public enum GroupDef {
                         }
                         if (type.isSorcery()) {
                             return 2;
+                        }
+                        if (type.isTribal() && type.isInstant()) {
+                            return 7;
                         }
                         if (type.isInstant()) {
                             return 3;
