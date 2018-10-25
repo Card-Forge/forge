@@ -74,12 +74,12 @@ public enum GroupDef {
                     return -1;
                 }
             }),
-    DEFAULT("Default", //Beginning in DDU, "Artifacts" category is added at top of list
-            new String[] { "Artifacts", "Creatures", "Other Spells", "Lands" },
+    DEFAULT("Default",
+            new String[] { "Creatures", "Spells", "Lands" },
             new Function<Integer, ColumnDef>() {
                 @Override
                 public ColumnDef apply(final Integer groupIndex) {
-                    if (groupIndex == 3) {
+                    if (groupIndex == 2) {
                         return ColumnDef.NAME; //pile lands by name regardless
                     }
                     return null;
@@ -90,22 +90,20 @@ public enum GroupDef {
                 public Integer apply(final InventoryItem item) {
                     if (item instanceof PaperCard) {
                         CardType type = ((PaperCard) item).getRules().getType();
-                        if (type.isArtifact()) { //artifact lands/creatures, too
+                        if (type.isCreature()) {
                             return 0;
                         }
-                        if (type.isCreature()) {
-                            return 1;
-                        }
-                        if (type.isLand()) {
-                            return 3;
-                        }
-                        if (type.isEnchantment() || type.isPlaneswalker() || type.isInstant() || type.isSorcery()) {
+                        if (type.isLand()) { //make Artifact Lands appear in Lands group
                             return 2;
+                        }
+                        if (type.isArtifact() || type.isEnchantment() || type.isPlaneswalker() || type.isInstant() || type.isSorcery()) {
+                            return 1;
                         }
                     }
                     return -1;
                 }
             }),
+
     CARD_TYPE("Type",
             new String[] { "Planeswalker", "Creature", "Sorcery", "Instant", "Artifact", "Enchantment", "Land", "Tribal instant" },
             new Function<Integer, ColumnDef>() {
