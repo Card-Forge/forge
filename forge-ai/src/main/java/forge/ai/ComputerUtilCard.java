@@ -1844,4 +1844,13 @@ public class ComputerUtilCard {
 
         return AiPlayDecision.WillPlay;
     }
+
+    // Determine if the AI has an AI:RemoveDeck:All or an AI:RemoveDeck:Random hint specified.
+    // Includes a NPE guard on getRules() which might otherwise be tripped on some cards (e.g. tokens).
+    public static boolean isCardRemAIDeck(final Card card) {
+        return card.getRules() != null && card.getRules().getAiHints().getRemAIDecks();
+    }
+    public static boolean isCardRemRandomDeck(final Card card) {
+        return card.getRules() != null && card.getRules().getAiHints().getRemRandomDecks();
+    }
 }

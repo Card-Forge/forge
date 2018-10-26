@@ -171,7 +171,7 @@ public class ControlGainAi extends SpellAbilityAi {
                 }
 
                 // do not take control on something it doesn't know how to use
-                return !c.getRules().getAiHints().getRemAIDecks();
+                return !ComputerUtilCard.isCardRemAIDeck(c);
             }
         });
 

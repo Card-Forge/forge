@@ -1705,7 +1705,7 @@ public class AiController {
         if (!useSimulation) {
             for (Entry<DeckSection, CardPool> ds : myDeck) {
                 for (Entry<PaperCard, Integer> cp : ds.getValue()) {
-                    if (cp.getKey().getRules().getAiHints().getRemAIDecks()) 
+                    if (cp.getKey().getRules().getAiHints().getRemAIDecks())
                         result.add(cp.getKey());
                 }
             }
