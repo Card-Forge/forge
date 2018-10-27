@@ -168,11 +168,13 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
 
         for (final Card c : tgtCards) {
             if (!sa.usesTargeting() || c.canBeTargetedBy(sa)) {
-                List <Card> token = TokenInfo.makeToken(getProtoType(sa, c), controller, true, numCopies);
+                Card proto = getProtoType(sa, c);
+                List <Card> token = TokenInfo.makeToken(proto, controller, true, numCopies);
 
                 final List<Card> crds = Lists.newArrayListWithCapacity(token.size());
 
                 for (final Card t : token) {
+                    t.setCopiedPermanent(proto);
 
                     // Temporarily register triggers of an object created with CopyPermanent
                     //game.getTriggerHandler().registerActiveTrigger(copy, false);
