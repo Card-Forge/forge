@@ -80,7 +80,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
                 ForgeProfileProperties.setDecksDir(newDir);
             }
         };
-        lstItems.addItem(new StorageOption("Data Location (e.g. Settings, Decks, Quests)", ForgeProfileProperties.getUserDir()) {
+        lstItems.addItem(new StorageOption("Data Location (e.g. Settings and Quests)", ForgeProfileProperties.getUserDir()) {
             @Override
             protected void onDirectoryChanged(String newDir) {
                 ForgeProfileProperties.setUserDir(newDir);
