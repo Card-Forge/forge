@@ -68,18 +68,27 @@ public class FilesPage extends TabPage<SettingsScreen> {
         }, 0);
 
         //storage locations
-        lstItems.addItem(new StorageOption("Data Location (e.g. Settings, Decks, Quests)", ForgeProfileProperties.getUserDir()) {
-            @Override
-            protected void onDirectoryChanged(String newDir) {
-                ForgeProfileProperties.setUserDir(newDir);
-            }
-        }, 1);
         final StorageOption cardPicsOption = new StorageOption("Card Pics Location", ForgeProfileProperties.getCardPicsDir()) {
             @Override
             protected void onDirectoryChanged(String newDir) {
                 ForgeProfileProperties.setCardPicsDir(newDir);
             }
         };
+        final StorageOption decksOption = new StorageOption("Decks Location", ForgeProfileProperties.getDecksDir()) {
+            @Override
+            protected void onDirectoryChanged(String newDir) {
+                ForgeProfileProperties.setDecksDir(newDir);
+            }
+        };
+        lstItems.addItem(new StorageOption("Data Location (e.g. Settings, Decks, Quests)", ForgeProfileProperties.getUserDir()) {
+            @Override
+            protected void onDirectoryChanged(String newDir) {
+                ForgeProfileProperties.setUserDir(newDir);
+
+                //ensure decks option is updated if needed
+                decksOption.updateDir(ForgeProfileProperties.getDecksDir());
+            }
+        }, 1);
         lstItems.addItem(new StorageOption("Image Cache Location", ForgeProfileProperties.getCacheDir()) {
             @Override
             protected void onDirectoryChanged(String newDir) {
@@ -90,6 +99,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
             }
         }, 1);
         lstItems.addItem(cardPicsOption, 1);
+        lstItems.addItem(decksOption, 1);
     }
 
     @Override
