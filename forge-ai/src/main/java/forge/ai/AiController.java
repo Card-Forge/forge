@@ -646,6 +646,11 @@ public class AiController {
         if (sa instanceof WrappedAbility) {
             return canPlaySa(((WrappedAbility) sa).getWrappedAbility());
         }
+
+        // When processing a new SA, clear the previously remembered cards that have been marked to avoid re-entry
+        // which might potentially cause a stack overflow.
+        AiCardMemory.clearMemorySet(this, AiCardMemory.MemorySet.MARKED_TO_AVOID_REENTRY);
+
         if (sa.getApi() != null) {
             boolean canPlay = SpellApiToAi.Converter.get(sa.getApi()).canPlayAIWithSubs(player, sa);
             if (!canPlay) {

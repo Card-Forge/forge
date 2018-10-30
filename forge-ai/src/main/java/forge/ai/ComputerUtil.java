@@ -1350,10 +1350,12 @@ public class ComputerUtil {
 
                 // Avoid re-entry for cards already being considered (e.g. in case the AI is considering
                 // Convoke or Improvise for a Fog-like effect)
-                if (AiCardMemory.isRememberedCard(ai, c, AiCardMemory.MemorySet.MARKED_TO_AVOID_REENTRY)) {
-                    continue;
+                if (c.hasKeyword("Convoke") || c.hasKeyword("Improvise")) {
+                    if (AiCardMemory.isRememberedCard(ai, c, AiCardMemory.MemorySet.MARKED_TO_AVOID_REENTRY)) {
+                        continue;
+                    }
+                    AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.MARKED_TO_AVOID_REENTRY);
                 }
-                AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.MARKED_TO_AVOID_REENTRY);
 
                 if (!ComputerUtilCost.canPayCost(sa, ai)) {
                     continue;
