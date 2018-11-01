@@ -390,10 +390,8 @@ public class CostAdjustment {
             value = CardFactoryUtil.xCount(card, hostCard.getSVar(amount));
         } else if ("Undaunted".equals(amount)) {
             value = card.getController().getOpponents().size();
-        } else if ("X".equals(amount)){
-            value = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(amount));
         } else {
-            value = AbilityUtils.calculateAmount(hostCard, amount, sa);
+            value = AbilityUtils.calculateAmount(hostCard, amount, staticAbility);
         }
 
         if (!params.containsKey("Cost") && ! params.containsKey("Color")) {

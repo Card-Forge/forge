@@ -1,14 +1,16 @@
 package forge.game.keyword;
 
+import forge.card.CardType;
+
 public class KeywordWithType extends KeywordInstance<KeywordWithType> {
     private String type;
 
     @Override
     protected void parse(String details) {
-        if ("Creature".equals(details)) {
-            type = "creature";
+        if (CardType.isACardType(details)) {
+            type = details.toLowerCase();
         } else if (details.contains(":")) {
-            type = details.split(":")[1];
+            type = details.split(":")[0];
         } else {
             type = details;
         }

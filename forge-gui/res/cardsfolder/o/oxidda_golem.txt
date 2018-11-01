@@ -2,9 +2,8 @@ Name:Oxidda Golem
 ManaCost:6
 Types:Artifact Creature Golem
 PT:3/2
+K:Affinity:Mountain
 K:Haste
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Affinity for Mountains (This spell costs {1} less to cast for each Mountain you control.)
-SVar:X:Count$Valid Mountain.YouCtrl
 AI:RemoveDeck:Random
 DeckNeeds:Color$Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oxidda_golem.jpg
