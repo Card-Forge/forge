@@ -4322,6 +4322,7 @@ public class CardFactoryUtil {
     public static void addStaticAbility(final KeywordInterface inst, final Card card, final boolean intrinsic) {
         String keyword = inst.getOriginal();
         String effect = null;
+        Map<String, String> svars = Maps.newHashMap();
 
         if (keyword.startsWith("Absorb")) {
             final String[] k = keyword.split(":");
@@ -4332,6 +4333,18 @@ public class CardFactoryUtil {
             sb.append(n).append("| Secondary$ True | Description$ Absorb ").append(n);
             sb.append(" (").append(inst.getReminderText()).append(")");
             effect = sb.toString();
+        } else if (keyword.startsWith("Affinity")) {
+            final String[] k = keyword.split(":");
+            final String t = k[1];
+
+            String desc = "Artifact".equals(t) ? "artifacts" : CardType.getPluralType(t);
+            StringBuilder sb = new StringBuilder();
+            sb.append("Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ AffinityX | EffectZone$ All");
+            sb.append("| Description$ Affinity for ").append(desc);
+            sb.append(" (").append(inst.getReminderText()).append(")");
+            effect = sb.toString();
+
+            svars.put("AffinityX", "Count$Valid " + t + ".YouCtrl");
         } else if (keyword.equals("Changeling")) {
             effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self" +
                     " | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Secondary$ True" +
@@ -4417,6 +4430,9 @@ public class CardFactoryUtil {
         if (effect != null) {
             StaticAbility st = new StaticAbility(effect, card);
             st.setIntrinsic(intrinsic);
+            for (Map.Entry<String, String> e : svars.entrySet()) {
+                st.setSVar(e.getKey(), e.getValue());
+            }
             inst.addStaticAbility(st);
         }
     }
