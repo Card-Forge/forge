@@ -226,6 +226,11 @@ public class QuestWinLoseController {
         sb.append(StringUtils.capitalize(qEvent.getDifficulty().getTitle()));
         sb.append(" opponent: ").append(credBase).append(" credits.\n");
 
+        if(qEvent.getIsRandomMatch()){
+            sb.append("Random Opponent Bonus: " + credBase + " credit" + (credBase > 1 ? "s." : ".") + "\n");
+            credBase += credBase;
+        }
+
         final int winMultiplier = Math.min(qData.getAchievements().getWin(), FModel.getQuestPreferences().getPrefInt(QPref.REWARDS_WINS_MULTIPLIER_MAX));
         final int creditsForPreviousWins = (int) ((Double.parseDouble(FModel.getQuestPreferences()
                 .getPref(QPref.REWARDS_WINS_MULTIPLIER)) * winMultiplier));
