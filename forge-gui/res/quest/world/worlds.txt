@@ -1,5 +1,6 @@
 Name:Main world
 Name:Random Standard
+Name:Random Commander
 Name:Amonkhet|Dir:Amonkhet|Sets:AKH, HOU
 Name:Jamuraa|Dir:jamuraa|Sets:5ED, ARN, MIR, VIS, WTH|Banned:Chaos Orb; Falling Star
 Name:Kamigawa|Dir:2004 Kamigawa|Sets:CHK, BOK, SOK

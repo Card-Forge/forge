@@ -223,9 +223,15 @@ public class QuestDataIO {
             // Current Deck moved from preferences to quest data - it should not be global for all quests!!!
             QuestDataIO.setFinalField(QuestData.class, "currentDeck", newData, FModel.getQuestPreferences().getPref(QPref.CURRENT_DECK));
         }
-        if (saveVersion < 13) {
+        if(saveVersion < 13){
+            //Update for quest DeckConstructionRules
+            //Add a DeckConstructionRules set to Default.
+            QuestDataIO.setFinalField(QuestData.class, "deckConstructionRules", newData, DeckConstructionRules.Default);
+        }
+        if (saveVersion < 14) {
             // Migrate DraftTournaments to use new Tournament class
         }
+
 
         final QuestAssets qS = newData.getAssets();
         final QuestAchievements qA = newData.getAchievements();
