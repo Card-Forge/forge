@@ -29,6 +29,9 @@ import forge.util.Expressions;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import io.sentry.Sentry;
+import io.sentry.event.BreadcrumbBuilder;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -1345,6 +1348,15 @@ public class AbilityUtils {
     }
 
     private static void resolveApiAbility(final SpellAbility sa, final Game game) {
+        final Card card = sa.getHostCard();
+
+        String msg = "AbilityUtils:resolveApiAbility: try to resolve API ability";
+        Sentry.getContext().recordBreadcrumb(
+                new BreadcrumbBuilder().setMessage(msg)
+                .withData("Api", sa.getApi().toString())
+                .withData("Card", card.getName()).withData("SA", sa.toString()).build()
+        );
+
         // check conditions
         if (sa.getConditions().areMet(sa)) {
             if (sa.isWrapper() || StringUtils.isBlank(sa.getParam("UnlessCost"))) {

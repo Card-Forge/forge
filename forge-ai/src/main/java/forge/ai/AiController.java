@@ -60,6 +60,8 @@ import forge.util.Aggregates;
 import forge.util.Expressions;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
+import io.sentry.Sentry;
+import io.sentry.event.BreadcrumbBuilder;
 
 import java.security.InvalidParameterException;
 import java.util.*;
@@ -652,7 +654,24 @@ public class AiController {
         AiCardMemory.clearMemorySet(this, AiCardMemory.MemorySet.MARKED_TO_AVOID_REENTRY);
 
         if (sa.getApi() != null) {
+
+            String msg = "AiController:canPlaySa: AI checks for if can PlaySa";
+            Sentry.getContext().recordBreadcrumb(
+                    new BreadcrumbBuilder().setMessage(msg)
+                    .withData("Api", sa.getApi().toString())
+                    .withData("Card", card.getName()).withData("SA", sa.toString()).build()
+            );
+
+            // add Extra for debugging
+            Sentry.getContext().addExtra("Card", card);
+            Sentry.getContext().addExtra("SA", sa.toString());
+
             boolean canPlay = SpellApiToAi.Converter.get(sa.getApi()).canPlayAIWithSubs(player, sa);
+
+            // remove added extra
+            Sentry.getContext().removeExtra("Card");
+            Sentry.getContext().removeExtra("SA");
+
             if (!canPlay) {
                 return AiPlayDecision.CantPlayAi;
             }
