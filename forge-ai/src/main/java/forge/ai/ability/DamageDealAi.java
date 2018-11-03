@@ -494,7 +494,9 @@ public class DamageDealAi extends DamageAiBase {
             return true;
         }
 
-        if (tgt.getMaxTargets(source, sa) <= 0) {
+        // AssumeAtLeastOneTarget is used for cards with funky targeting implementation like Fight with Fire which would
+        // otherwise confuse the AI by returning 0 unexpectedly during SA "AI can play" tests.
+        if (tgt.getMaxTargets(source, sa) <= 0 && !logic.equals("AssumeAtLeastOneTarget")) {
             return false;
         }
         
