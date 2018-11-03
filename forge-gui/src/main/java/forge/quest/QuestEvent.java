@@ -48,7 +48,6 @@ public abstract class QuestEvent implements IQuestEvent {
     private String profile = "Default";
     // Opponent name if different from the challenge name
     private String opponentName = null;
-    private boolean isRandomMatch = false;
 
 
     public static final Function<QuestEvent, String> FN_GET_NAME = new Function<QuestEvent, String>() {
@@ -175,7 +174,4 @@ public abstract class QuestEvent implements IQuestEvent {
         this.showDifficulty = showDifficulty;
     }
 
-    public boolean getIsRandomMatch(){return isRandomMatch;}
-
-    public void setIsRandomMatch(boolean b){isRandomMatch = b;}
 }
