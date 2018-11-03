@@ -12,10 +12,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.combat.CombatUtil;
-import forge.game.cost.Cost;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostRemoveCounter;
-import forge.game.cost.CostSacrifice;
+import forge.game.cost.*;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -431,6 +428,18 @@ public class CountersPutAi extends SpellAbilityAi {
 
             if (list.size() < sa.getTargetRestrictions().getMinTargets(source, sa)) {
                 return false;
+            }
+
+            // Activate +Loyalty planeswalker abilities even if they have no target (e.g. Vivien of the Arkbow),
+            // but try to do it in Main 2 then so that the AI has a chance to play creatures first.
+            if (list.isEmpty()
+                    && sa.hasParam("Planeswalker")
+                    && sa.getPayCosts() != null
+                    && sa.getPayCosts().hasOnlySpecificCostType(CostPutCounter.class)
+                    && sa.isTargetNumberValid()
+                    && sa.getTargets().getNumTargeted() == 0
+                    && ai.getGame().getPhaseHandler().is(PhaseType.MAIN2, ai)) {
+                return true;
             }
 
             if (sourceName.equals("Abzan Charm")) {
