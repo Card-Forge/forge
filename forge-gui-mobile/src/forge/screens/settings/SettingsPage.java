@@ -204,6 +204,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 "If turned on, Forge will load all historic format definitions, this may take slightly longer to load at startup."), 3);
 
         //Graphic Options
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER,
+                "Download missing card art",
+                "Automatically download missing card art"),
+                4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_FOIL_EFFECT,
                 "Display Foil Overlay",
                 "Displays foil cards with the visual foil overlay effect."),
