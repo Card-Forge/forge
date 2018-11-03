@@ -62,7 +62,6 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final FRadioButton radHard = new FRadioButton("Hard");
     private final FRadioButton radExpert = new FRadioButton("Expert");
     private final FCheckBox boxFantasy = new FCheckBox("Fantasy Mode");
-    private final FCheckBox boxCommander = new FCheckBox("Commander Subformat");
 
     private final FLabel lblStartingWorld = new FLabel.Builder().text("Starting world:").build();
     private final FComboBoxWrapper<QuestWorld> cbxStartingWorld = new FComboBoxWrapper<>();
@@ -275,25 +274,9 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
             }
         });
 
-        // Fantasy box selected by Default
+        // Fantasy box enabled by Default
         boxFantasy.setSelected(true);
         boxFantasy.setEnabled(true);
-
-        // Commander box unselected by Default
-        boxCommander.setSelected(false);
-        boxCommander.setEnabled(true);
-
-        boxCommander.addActionListener(
-                new ActionListener(){
-                    public void actionPerformed(ActionEvent e){
-                        if(!isCommander()) return; //do nothing if unselecting Commander Subformat
-                        //Otherwise, set the starting world to Random Commander
-                        cbxStartingWorld.setSelectedItem(FModel.getWorlds().get("Random Commander"));
-                    }
-        }
-
-        );
-
         boxCompleteSet.setEnabled(true);
         boxAllowDuplicates.setEnabled(true);
 
@@ -303,7 +286,6 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         final JPanel pnlDifficultyMode = new JPanel(new MigLayout("insets 0, gap 1%, flowy"));
         pnlDifficultyMode.add(difficultyPanel, "gapright 4%");
         pnlDifficultyMode.add(boxFantasy, "h 25px!, gapbottom 15, gapright 4%");
-        pnlDifficultyMode.add(boxCommander, "h 25px!, gapbottom 15, gapright 4%");
         pnlDifficultyMode.add(lblStartingWorld, "h 25px!, hidemode 3");
         cbxStartingWorld.addTo(pnlDifficultyMode, "h 27px!, w 40%, pushx, gapbottom 7");
         pnlDifficultyMode.setOpaque(false);
@@ -503,14 +485,6 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
 
     public boolean isFantasy() {
         return boxFantasy.isSelected();
-    }
-
-    /**
-     * Auth. Imakuni
-     * @return True if the "Commander Subformat" check box is selected.
-     */
-    public boolean isCommander() {
-        return boxCommander.isSelected();
     }
 
     public boolean startWithCompleteSet() {

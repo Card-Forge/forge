@@ -10,7 +10,6 @@ import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.quest.*;
 import forge.quest.StartingPoolPreferences.PoolType;
-import forge.quest.data.DeckConstructionRules;
 import forge.quest.data.GameFormatQuest;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestPreferences.QPref;
@@ -341,16 +340,9 @@ public enum CSubmenuQuestData implements ICDoc {
             break;
         }
 
-        //Apply the appropriate deck construction rules for this quest
-        DeckConstructionRules dcr = DeckConstructionRules.Default;
-
-        if(VSubmenuQuestData.SINGLETON_INSTANCE.isCommander()){
-            dcr = DeckConstructionRules.Commander;
-        }
-
         final QuestController qc = FModel.getQuest();
 
-        qc.newGame(questName, difficulty, mode, fmtPrizes, view.isUnlockSetsAllowed(), dckStartPool, fmtStartPool, view.getStartingWorldName(), userPrefs, dcr);
+        qc.newGame(questName, difficulty, mode, fmtPrizes, view.isUnlockSetsAllowed(), dckStartPool, fmtStartPool, view.getStartingWorldName(), userPrefs);
         FModel.getQuest().save();
 
         // Save in preferences.

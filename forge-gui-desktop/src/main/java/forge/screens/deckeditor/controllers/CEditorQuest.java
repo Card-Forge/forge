@@ -18,20 +18,11 @@
 package forge.screens.deckeditor.controllers;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import forge.UiCommand;
-import forge.card.CardRules;
-import forge.card.CardRulesPredicates;
-import forge.card.ColorSet;
-import forge.card.mana.ManaCost;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.deck.generation.DeckGeneratorBase;
 import forge.gui.GuiUtils;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
@@ -44,7 +35,6 @@ import forge.itemmanager.views.ItemTableColumn;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
-import forge.quest.data.DeckConstructionRules;
 import forge.screens.deckeditor.AddBasicLandsDialog;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VAllDecks;
@@ -58,7 +48,6 @@ import forge.util.ItemPool;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.print.Paper;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -113,14 +102,6 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
 
         allSections.add(DeckSection.Main);
         allSections.add(DeckSection.Sideboard);
-
-        //Add sub-format specific sections
-        switch(FModel.getQuest().getDeckConstructionRules()){
-            case Default: break;
-            case Commander:
-                allSections.add(DeckSection.Commander);
-                break;
-        }
 
         this.questData = questData0;
 
@@ -177,10 +158,6 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
     @Override
     protected CardLimit getCardLimit() {
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            //If this is a commander quest, only allow single copies of cards
-            if(FModel.getQuest().getDeckConstructionRules() == DeckConstructionRules.Commander){
-                return CardLimit.Singleton;
-            }
             return CardLimit.Default;
         }
         return CardLimit.None; //if not enforcing deck legality, don't enforce default limit
@@ -268,98 +245,16 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
     public void resetTables() {
         this.sectionMode = DeckSection.Main;
 
-        // show cards, makes this user friendly
-        this.getCatalogManager().setPool(getRemainingCardPool());
-        this.getDeckManager().setPool(getDeck().getMain());
-    }
+        final Deck deck = this.controller.getModel();
 
-    /***
-     * Provides the pool of cards the player has available to add to his or her deck. Also manages showing available cards
-     * to choose from for special deck construction rules, e.g.: Commander.
-     * @return CardPool of cards available to add to the player's deck.
-     */
-    private CardPool getRemainingCardPool(){
         final CardPool cardpool = getInitialCatalog();
-
         // remove bottom cards that are in the deck from the card pool
-        cardpool.removeAll(getDeck().getMain());
-
+        cardpool.removeAll(deck.getMain());
         // remove sideboard cards from the catalog
-        cardpool.removeAll(getDeck().getOrCreate(DeckSection.Sideboard));
-
-        switch(FModel.getQuest().getDeckConstructionRules()){
-            case Default: break;
-            case Commander:
-                //remove this deck's currently selected commander(s) from the catalog
-                cardpool.removeAll(getDeck().getOrCreate(DeckSection.Commander));
-
-                //TODO: Only thin if deck conformance is being applied
-                if(getDeck().getOrCreate(DeckSection.Commander).toFlatList().size() > 0) {
-                    Predicate<PaperCard> identityPredicate = new MatchCommanderColorIdentity(getDeckColorIdentity());
-                    CardPool filteredPool = cardpool.getFilteredPool(identityPredicate);
-
-                    return filteredPool;
-                }
-                break;
-        }
-
-        return cardpool;
-    }
-
-    /**
-     * Predicate that filters out based on a color identity provided upon instantiation. Used to filter the card
-     * list when a commander is chosen so the user can more easily see what cards are available for his or her deck
-     * and avoid making additions that are not legal.
-     */
-    public static class MatchCommanderColorIdentity implements Predicate<PaperCard> {
-        private final ColorSet allowedColor;
-
-        public MatchCommanderColorIdentity(ColorSet color) {
-            allowedColor = color;
-        }
-
-        @Override
-        public boolean apply(PaperCard subject) {
-            CardRules cr = subject.getRules();
-            ManaCost mc = cr.getManaCost();
-            return !mc.isPureGeneric() && allowedColor.containsAllColorsFrom(cr.getColorIdentity().getColor());
-        }
-    }
-
-    /**
-     * Compiles the color identity of the loaded deck based on the commanders.
-     * @return A ColorSet containing the color identity of the currently loaded deck.
-     */
-    public ColorSet getDeckColorIdentity(){
-
-        List<PaperCard> commanders = getDeck().getOrCreate(DeckSection.Commander).toFlatList();
-        List<String> colors = new ArrayList<>();
-
-        //Return early if there are no current commanders
-        if(commanders.size() == 0) return ColorSet.fromNames(colors);
-
-        //For each commander,add each color of its color identity if not already added
-        for(PaperCard pc : commanders){
-            if(!colors.contains("w") && pc.getRules().getColorIdentity().hasWhite()) colors.add("w");
-            if(!colors.contains("u") && pc.getRules().getColorIdentity().hasBlue()) colors.add("u");
-            if(!colors.contains("b") && pc.getRules().getColorIdentity().hasBlack()) colors.add("b");
-            if(!colors.contains("r") && pc.getRules().getColorIdentity().hasRed()) colors.add("r");
-            if(!colors.contains("g") && pc.getRules().getColorIdentity().hasGreen()) colors.add("g");
-        }
-
-        return ColorSet.fromNames(colors);
-    }
-
-    /*
-    Used to make the code more readable in game terms.
-     */
-    private Deck getDeck(){
-        return this.controller.getModel();
-    }
-
-    private ItemPool<PaperCard> getCommanderCardPool(){
-        Predicate<PaperCard> commanderPredicate = Predicates.compose(CardRulesPredicates.Presets.CAN_BE_COMMANDER, PaperCard.FN_GET_RULES);
-        return getRemainingCardPool().getFilteredPool(commanderPredicate);
+        cardpool.removeAll(deck.getOrCreate(DeckSection.Sideboard));
+        // show cards, makes this user friendly
+        this.getCatalogManager().setPool(cardpool);
+        this.getDeckManager().setPool(deck.getMain());
     }
 
     @Override
@@ -385,30 +280,14 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
     }
 
     /**
-     * Switch between the main deck and the sideboard/Command Zone editor.
+     * Switch between the main deck and the sideboard editor.
      */
     public void setEditorMode(DeckSection sectionMode) {
-        //Fixes null pointer error on switching tabs while quest deck editor is open. TODO: Find source of bug possibly?
-        if(sectionMode == null) sectionMode = DeckSection.Main;
-
-        //Based on which section the editor is in, display the remaining card pool (or applicable card pool if in
-        //Commander) and the current section's cards
-        switch(sectionMode){
-            case Main :
-                this.getCatalogManager().setup(ItemManagerConfig.CARD_CATALOG);
-                this.getCatalogManager().setPool(getRemainingCardPool());
-                this.getDeckManager().setPool(this.controller.getModel().getMain());
-                break;
-            case Sideboard :
-                this.getCatalogManager().setup(ItemManagerConfig.CARD_CATALOG);
-                this.getCatalogManager().setPool(getRemainingCardPool());
-                this.getDeckManager().setPool(getDeck().getOrCreate(DeckSection.Sideboard));
-                break;
-            case Commander :
-                this.getCatalogManager().setup(ItemManagerConfig.COMMANDER_POOL);
-                this.getCatalogManager().setPool(getCommanderCardPool());
-                this.getDeckManager().setPool(getDeck().getOrCreate(DeckSection.Commander));
-                break;
+        if (sectionMode == DeckSection.Sideboard) {
+            this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
+        }
+        else {
+            this.getDeckManager().setPool(this.controller.getModel().getMain());
         }
 
         this.sectionMode = sectionMode;
