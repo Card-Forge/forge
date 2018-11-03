@@ -308,16 +308,10 @@ public final class QuestUtilCards {
      *            user preferences
      */
     public void setupNewGameCardPool(final GameFormat formatStartingPool, final int idxDifficulty, final StartingPoolPreferences userPrefs) {
-        //Add additional cards to the starter card pool based on variant if applicable
-        double variantModifier = 0;
-        switch(FModel.getQuest().getDeckConstructionRules()){
-            case Default: break;
-            case Commander: variantModifier = 2; break;
-        }
 
-        final int nC = (int)(questPreferences.getPrefInt(DifficultyPrefs.STARTING_COMMONS, idxDifficulty) * variantModifier);
-        final int nU = (int)(questPreferences.getPrefInt(DifficultyPrefs.STARTING_UNCOMMONS, idxDifficulty) * variantModifier);
-        final int nR = (int)(questPreferences.getPrefInt(DifficultyPrefs.STARTING_RARES, idxDifficulty) * variantModifier);
+        final int nC = questPreferences.getPrefInt(DifficultyPrefs.STARTING_COMMONS, idxDifficulty);
+        final int nU = questPreferences.getPrefInt(DifficultyPrefs.STARTING_UNCOMMONS, idxDifficulty);
+        final int nR = questPreferences.getPrefInt(DifficultyPrefs.STARTING_RARES, idxDifficulty);
 
         addAllCards(BoosterUtils.getQuestStarterDeck(formatStartingPool, nC, nU, nR, userPrefs));
 

@@ -42,7 +42,7 @@ import java.util.Map;
  */
 public final class QuestData {
     /** Holds the latest version of the Quest Data. */
-    public static final int CURRENT_VERSION_NUMBER = 13;
+    public static final int CURRENT_VERSION_NUMBER = 12;
 
     // This field places the version number into QD instance,
     // but only when the object is created through the constructor
@@ -70,11 +70,6 @@ public final class QuestData {
 
     public String currentDeck = "DEFAULT";
 
-    /**
-     * Holds the subformat for this quest. Defaults to DeckConstructionRules.Default.
-     */
-    public DeckConstructionRules deckConstructionRules = DeckConstructionRules.Default;
-
     public QuestData() { //needed for XML serialization
     }
 
@@ -92,11 +87,9 @@ public final class QuestData {
      *      allow set unlocking during quest
      * @param startingWorld
      *      starting world
-     * @param dcr
-     *      deck construction rules e.g. Commander
      */
     public QuestData(String name0, int diff, QuestMode mode0, GameFormat userFormat,
-                     boolean allowSetUnlocks, final String startingWorld, DeckConstructionRules dcr) {
+            boolean allowSetUnlocks, final String startingWorld) {
         this.name = name0;
 
         if (userFormat != null) {
@@ -106,7 +99,6 @@ public final class QuestData {
         this.achievements = new QuestAchievements(diff);
         this.assets = new QuestAssets(format);
         this.worldId = startingWorld;
-        this.deckConstructionRules = dcr;
     }
 
     /**
