@@ -200,14 +200,7 @@ public class QuestAssets {
      * @return the life
      */
     public int getLife(final QuestMode mode) {
-        int base = mode.equals(QuestMode.Fantasy) ? 15 : 20;
-
-        //Modify life for the quest's sub-format, e.g.: Commander adds 20
-        switch(FModel.getQuest().getDeckConstructionRules()){
-            case Default: break;
-            case Commander: base += 20;
-        }
-
+        final int base = mode.equals(QuestMode.Fantasy) ? 15 : 20;
         return (base + this.getItemLevel(QuestItemType.ELIXIR_OF_LIFE)) - this.getItemLevel(QuestItemType.POUND_FLESH);
     }
 
