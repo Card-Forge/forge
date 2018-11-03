@@ -737,6 +737,13 @@ public class AiController {
             int a1 = a.getPayCosts() == null ? 0 : a.getPayCosts().getTotalMana().getCMC();
             int b1 = b.getPayCosts() == null ? 0 : b.getPayCosts().getTotalMana().getCMC();
 
+            // deprioritize SAs explicitly marked as preferred to be activated last compared to all other SAs
+            if (a.hasParam("AIActivateLast") && !b.hasParam("AIActivateLast")) {
+                return 1;
+            } else if (b.hasParam("AIActivateLast") && !a.hasParam("AIActivateLast")) {
+                return -1;
+            }
+
             // deprioritize planar die roll marked with AIRollPlanarDieParams:LowPriority$ True
             if (ApiType.RollPlanarDice == a.getApi() && a.getHostCard() != null && a.getHostCard().hasSVar("AIRollPlanarDieParams") && a.getHostCard().getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
                 return 1;
