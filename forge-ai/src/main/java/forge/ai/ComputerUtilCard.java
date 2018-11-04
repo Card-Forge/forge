@@ -1616,6 +1616,7 @@ public class ComputerUtilCard {
         if (exclude != null) {
             list.removeAll(exclude);
         }
+        list.add(vCard); // account for the static abilities that may be present on the card itself
         for (final Card c : list) {
             for (final StaticAbility stAb : c.getStaticAbilities()) {
                 final Map<String, String> params = stAb.getMapParams();
