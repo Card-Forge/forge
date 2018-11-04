@@ -724,6 +724,7 @@ public class CountersPutAi extends SpellAbilityAi {
 
             int totalTargets = list.size();
 
+            sa.resetTargets();
             while (sa.canAddMoreTarget()) {
                 if (mandatory) {
                     // When things are mandatory, gotta handle a little differently

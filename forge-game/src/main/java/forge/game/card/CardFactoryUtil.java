@@ -1375,7 +1375,7 @@ public class CardFactoryUtil {
             return doXMath(n, m, c);
         }
         if (sq[0].startsWith("UniqueManaColorsProduced")) {
-            boolean untappedOnly = sq[0].contains("ByUntappedSources");
+            boolean untappedOnly = sq[1].contains("ByUntappedSources");
             int uniqueColors = 0;
             CardCollectionView otb = cc.getCardsIn(ZoneType.Battlefield);
             outer: for (byte color : MagicColor.WUBRG) {
