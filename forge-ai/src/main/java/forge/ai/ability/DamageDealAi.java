@@ -562,7 +562,15 @@ public class DamageDealAi extends DamageAiBase {
                 return true;
             }
         }
+
+        int totalTargetedSoFar = -1;
         while (tcs.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+            if (totalTargetedSoFar == tcs.getNumTargeted()) {
+                // Avoid looping endlessly when choosing targets for cards with variable target number and type
+                // like Jaya's Immolating Inferno
+                break;
+            }
+            totalTargetedSoFar = tcs.getNumTargeted();
             if (oppTargetsChoice && sa.getActivatingPlayer().equals(ai) && !sa.isTrigger()) {
                 // canPlayAI (sa activated by ai)
                 Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
