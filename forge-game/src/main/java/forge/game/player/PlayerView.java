@@ -137,16 +137,22 @@ public class PlayerView extends GameEntityView {
 
         final List<String> info = Lists.newArrayListWithExpectedSize(opponents.size());
         info.add(TextUtil.concatWithSpace("Commanders:", Lang.joinHomogenous(commanders)));
-        for (final PlayerView p : Iterables.concat(Collections.singleton(this), opponents)) {
+
+        // own commanders
+        for (final CardView v : commanders) {
+            final int damage = getCommanderDamage(v);
+            if (damage > 0) {
+                final String text = TextUtil.concatWithSpace("Commander damage from own commander", TextUtil.addSuffix(v.toString(),":"));
+                info.add(TextUtil.concatWithSpace(text,TextUtil.addSuffix(String.valueOf(damage),"\r\n")));
+            }
+        }
+
+        // opponents commanders
+        for (final PlayerView p : opponents) {
             for (final CardView v : p.getCommanders()) {
-                final int damage = this.getCommanderDamage(v);
+                final int damage = getCommanderDamage(v);
                 if (damage > 0) {
-                    final String text;
-                    if (p.equals(this)) {
-                        text = TextUtil.concatWithSpace("Commander damage from own commander", TextUtil.addSuffix(v.toString(),":"));
-                    } else {
-                        text = TextUtil.concatWithSpace("Commander damage from", TextUtil.addSuffix(p.toString(),"'s"), TextUtil.addSuffix(v.toString(),":"));
-                    }
+                    final String text = TextUtil.concatWithSpace("Commander damage from", TextUtil.addSuffix(p.toString(),"'s"), TextUtil.addSuffix(v.toString(),":"));
                     info.add(TextUtil.concatWithSpace(text,TextUtil.addSuffix(String.valueOf(damage),"\r\n")));
                 }
             }
