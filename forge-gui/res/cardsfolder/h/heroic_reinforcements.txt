@@ -4,5 +4,6 @@ Types:Sorcery
 A:SP$ Token | Cost$ 2 R W | TokenAmount$ 2 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ w 1 1 soldier M19 | SubAbility$ TrigPump | SpellDescription$ Create two 1/1 white Soldier creature tokens. Until end of turn, creatures you control get +1/+1 and gain haste.
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Haste | NumAtt$ +1 | NumDef$ +1
 DeckHas:Ability$Token
+SVar:PlayMain1:TRUE
 SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/heroic_reinforcements.jpg
 Oracle:Create two 1/1 white Soldier creature tokens. Until end of turn, creatures you control get +1/+1 and gain haste. (They can attack and {T} this turn.)
