@@ -26,6 +26,9 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Table;
 
+import io.sentry.Sentry;
+import io.sentry.event.BreadcrumbBuilder;
+
 import forge.ImageKeys;
 import forge.card.CardStateName;
 import forge.card.CardType;
@@ -203,6 +206,15 @@ public final class CardUtil {
      * @return a copy of C with LastKnownInfo stuff retained.
      */
     public static Card getLKICopy(final Card in) {
+        String msg = "CardUtil:getLKICopy copy object";
+        Sentry.getContext().recordBreadcrumb(
+                new BreadcrumbBuilder().setMessage(msg)
+                .withData("Card", in.getName())
+                .withData("CardState", in.getCurrentStateName().toString())
+                .withData("Player", in.getController().getName())
+                .build()
+        );
+
         final Card newCopy = new Card(in.getId(), in.getPaperCard(), false, in.getGame());
         newCopy.setSetCode(in.getSetCode());
         newCopy.setOwner(in.getOwner());
