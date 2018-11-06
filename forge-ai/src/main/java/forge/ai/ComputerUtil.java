@@ -1770,7 +1770,68 @@ public class ComputerUtil {
         Iterables.addAll(threatened, ComputerUtil.predictThreatenedObjects(aiPlayer, saviour, topStack.getSubAbility()));
         return threatened;
     }
-    
+
+    /**
+     * Returns true if the specified creature will die this turn either from lethal damage in combat
+     * or from a killing spell on stack.
+     * TODO: This currently does not account for the fact that spells on stack can be countered, can be improved.
+     *
+     * @param creature
+     *            A creature to check
+     * @return true if the creature dies according to current board position.
+     */
+    public static boolean predictCreatureWillDieThisTurn(final Player ai, final Card creature) {
+        final Game game = creature.getGame();
+
+        // a creature will die as a result of combat
+        boolean willDieInCombat = game.getPhaseHandler().inCombat()
+                && ComputerUtilCombat.combatantWouldBeDestroyed(creature.getController(), creature, game.getCombat());
+
+        // a creature will [hopefully] die from a spell on stack
+        boolean willDieFromSpell = false;
+        boolean noStackCheck = false;
+        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+        if (aic.getBooleanProperty(AiProps.DONT_EVAL_KILLSPELLS_ON_STACK_WITH_PERMISSION)) {
+            // See if permission is on stack and ignore this check if there is and the relevant AI flag is set
+            // TODO: improve this so that this flag is not needed and the AI can properly evaluate spells in presence of counterspells.
+            for (SpellAbilityStackInstance si : game.getStack()) {
+                if (si.getSpellAbility(false).getApi() == ApiType.Counter) {
+                    noStackCheck = true;
+                    break;
+                }
+            }
+        }
+        willDieFromSpell = !noStackCheck && ComputerUtil.predictThreatenedObjects(creature.getController(), null).contains(creature);
+
+        return willDieInCombat || willDieFromSpell;
+    }
+
+    /**
+     * Returns a list of cards excluding any creatures that will die in active combat or from a spell on stack.
+     * Works only on AI profiles which have AVOID_TARGETING_CREATS_THAT_WILL_DIE enabled, otherwise returns
+     * the original list.
+     *
+     * @param ai
+     *            The AI player performing this evaluation
+     * @param list
+     *            The list of cards to work with
+     * @return a filtered list with no dying creatures in it
+     */
+    public static CardCollection filterCreaturesThatWillDieThisTurn(final Player ai, final CardCollection list) {
+        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+        if (aic.getBooleanProperty(AiProps.AVOID_TARGETING_CREATS_THAT_WILL_DIE)) {
+            // Try to avoid targeting creatures that are dead on board
+            List<Card> willBeKilled = CardLists.filter(list, new Predicate<Card>() {
+                @Override
+                public boolean apply(Card card) {
+                    return card.isCreature() && ComputerUtil.predictCreatureWillDieThisTurn(ai, card);
+                }
+            });
+            list.removeAll(willBeKilled);
+        }
+        return list;
+    }
+
     public static boolean playImmediately(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Zone zone = source.getZone();
@@ -2778,6 +2839,10 @@ public class ComputerUtil {
             for (SpellAbility ab : c.getSpellAbilities()) {
                 if (ab.getApi() == null) {
                     // only API-based SAs are supported, other things may lead to a NPE (e.g. Ancestral Vision Suspend SA)
+                    continue;
+                } else if (ab.getApi() == ApiType.Mana && "ManaRitual".equals(ab.getParam("AILogic"))) {
+                    // Mana Ritual cards are too complex for the AI to consider casting through a spell effect and will
+                    // lead to a stack overflow. Consider improving.
                     continue;
                 }
                 SpellAbility abTest = withoutPayingManaCost ? ab.copyWithNoManaCost() : ab.copy();

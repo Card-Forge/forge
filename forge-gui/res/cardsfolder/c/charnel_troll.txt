@@ -9,6 +9,8 @@ SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | Condition
 SVar:DBSac:DB$ Sacrifice | SacValid# Self | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ PutCounter | Cost$ B G Discard<1/Creature> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+SVar:NeedsToPlayVar:Z GE1
+SVar:Z:Count$ValidGraveyard Creature.YouCtrl
 AI:RemoveDeck:Random
 DeckNeeds:Ability$Graveyard
 DeckHas:Ability$Counters

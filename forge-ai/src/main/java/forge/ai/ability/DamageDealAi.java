@@ -275,7 +275,7 @@ public class DamageDealAi extends DamageAiBase {
         final Game game = source.getGame();
         List<Card> hPlay = getTargetableCards(ai, sa, pl, tgt, activator, source, game);
 
-        List<Card> killables = CardLists.filter(hPlay, new Predicate<Card>() {
+        CardCollection killables = CardLists.filter(hPlay, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return c.getSVar("Targeting").equals("Dies")
@@ -286,7 +286,10 @@ public class DamageDealAi extends DamageAiBase {
         });
 
         // Filter AI-specific targets if provided
-        killables = ComputerUtil.filterAITgts(sa, ai, new CardCollection(killables), true);
+        killables = ComputerUtil.filterAITgts(sa, ai, killables, true);
+
+        // Try not to target anything which will already be dead by the time the spell resolves
+        killables = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, killables);
 
         Card targetCard = null;
         if (pl.isOpponentOf(ai) && activator.equals(ai) && !killables.isEmpty()) {

@@ -66,6 +66,14 @@ THRESHOLD_TOKEN_CHUMP_TO_SAVE_PLANESWALKER=135
 # If enabled, the AI will not bother chump blocking to protect a planeswalker unless lethal damage is threatened to it
 CHUMP_TO_SAVE_PLANESWALKER_ONLY_ON_LETHAL=false
 
+# Options that allow the AI to attempt to optimize targeting for removal and damaging spells.
+# If enabled, the AI will try not to target a creature with a damaging spell or spot removal in case
+# this creature will die in current combat or to a spell which is currently on stack targeting it.
+AVOID_TARGETING_CREATS_THAT_WILL_DIE=true
+# If enabled, the AI will not evaluate the stack in case at least one counterspell is present on it,
+# since the current AI is not smart enough to predict whether a kill spell on stack is countered or not.
+DONT_EVAL_KILLSPELLS_ON_STACK_WITH_PERMISSION=false
+
 # Only works when AI cheating is enabled in preferences, otherwise does nothing
 CHEAT_WITH_MANA_ON_SHUFFLE=true
 
@@ -219,4 +227,4 @@ AI_IN_DANGER_THRESHOLD=3
 # for each evaluation, introducing some unpredictability.
 AI_IN_DANGER_MAX_THRESHOLD=12
 
-# <-- there are no options here at the moment -->
+# <-- there are no other experimental options here at the moment -->
