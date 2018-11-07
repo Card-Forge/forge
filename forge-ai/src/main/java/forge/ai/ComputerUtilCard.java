@@ -1786,15 +1786,20 @@ public class ComputerUtilCard {
 
         CardCollection priorityCards = new CardCollection();
         for (Card atk : oppCards) {
+            boolean canBeBlocked = false;
             if (isUselessCreature(atk.getController(), atk)) {
                 continue;
             }
             for (Card blk : aiCreats) {
-                if (!CombatUtil.canBlock(atk, blk, true)) {
-                    boolean threat = atk.getNetCombatDamage() >= ai.getLife() - lifeInDanger;
-                    if (!priorityRemovalOnlyInDanger || threat) {
-                        priorityCards.add(atk);
-                    }
+                if (CombatUtil.canBlock(atk, blk, true)) {
+                    canBeBlocked = true;
+                    break;
+                }
+            }
+            if (!canBeBlocked) {
+                boolean threat = atk.getNetCombatDamage() >= ai.getLife() - lifeInDanger;
+                if (!priorityRemovalOnlyInDanger || threat) {
+                    priorityCards.add(atk);
                 }
             }
         }
