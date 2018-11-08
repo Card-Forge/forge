@@ -873,10 +873,13 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public final ExtraTurn addExtraTurn(final Player player) {
+        Player previous = null;
         // use a stack to handle extra turns, make sure the bottom of the stack
         // restores original turn order
         if (extraTurns.isEmpty()) {
             extraTurns.push(new ExtraTurn(game.getNextPlayerAfter(playerTurn)));
+        } else {
+            previous = extraTurns.peek().getPlayer();
         }
 
         ExtraTurn result = extraTurns.push(new ExtraTurn(player));
@@ -884,6 +887,16 @@ public class PhaseHandler implements java.io.Serializable {
         for (final Player p : game.getPlayers()) {
             p.setExtraTurnCount(getExtraTurnForPlayer(p));
         }
+
+        // get all players where the view should be updated
+        List<Player> toUpdate = Lists.newArrayList(player);
+        if (previous != null) {
+            toUpdate.add(previous);
+        }
+
+        // fireEvent to update the Details
+        game.fireEvent(new GameEventPlayerStatsChanged(toUpdate));
+
         return result;
     }
 
