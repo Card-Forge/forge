@@ -322,7 +322,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
         public boolean apply(PaperCard subject) {
             CardRules cr = subject.getRules();
             ManaCost mc = cr.getManaCost();
-            return !mc.isPureGeneric() && allowedColor.containsAllColorsFrom(cr.getColorIdentity().getColor());
+            return allowedColor.containsAllColorsFrom(cr.getColorIdentity().getColor());
         }
     }
 
@@ -336,7 +336,10 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
         List<String> colors = new ArrayList<>();
 
         //Return early if there are no current commanders
-        if(commanders.size() == 0) return ColorSet.fromNames(colors);
+        if(commanders.size() == 0){
+            colors.add("c");
+            return ColorSet.fromNames(colors);
+        }
 
         //For each commander,add each color of its color identity if not already added
         for(PaperCard pc : commanders){
@@ -346,6 +349,8 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
             if(!colors.contains("r") && pc.getRules().getColorIdentity().hasRed()) colors.add("r");
             if(!colors.contains("g") && pc.getRules().getColorIdentity().hasGreen()) colors.add("g");
         }
+
+        colors.add("c");
 
         return ColorSet.fromNames(colors);
     }

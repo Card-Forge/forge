@@ -4,10 +4,7 @@ import forge.deck.*;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.quest.data.QuestPreferences;
-import forge.util.CollectionSuppliers;
 import forge.util.MyRandom;
-import forge.util.maps.EnumMapOfLists;
-import forge.util.maps.MapOfLists;
 
 import java.util.ArrayList;
 import java.util.Collections;
