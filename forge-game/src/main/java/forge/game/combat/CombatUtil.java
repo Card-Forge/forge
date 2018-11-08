@@ -219,7 +219,7 @@ public class CombatUtil {
                 }
                 break;
             case "CARDNAME can't attack during extra turns.":
-                if (game.getPhaseHandler().getPlayerTurn().isPlayingExtraTurn()) {
+                if (game.getPhaseHandler().getPlayerTurn().isExtraTurn()) {
                     return false;
                 }
                 break;

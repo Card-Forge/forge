@@ -113,6 +113,8 @@ public enum TrackableProperty {
     Hand(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     Library(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     Mana(TrackableTypes.ManaMapType, FreezeMode.IgnoresFreeze),
+    IsExtraTurn(TrackableTypes.BooleanType),
+    ExtraTurnCount(TrackableTypes.IntegerType),
 
     //SpellAbility
     HostCard(TrackableTypes.CardViewType),

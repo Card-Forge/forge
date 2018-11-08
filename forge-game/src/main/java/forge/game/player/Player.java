@@ -144,7 +144,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     private Map<Card, Integer> commanderCast = Maps.newHashMap();
     private final Game game;
     private boolean triedToDrawFromEmptyLibrary = false;
-    private boolean isPlayingExtraTrun = false;
     private CardCollection lostOwnership = new CardCollection();
     private CardCollection gainedOwnership = new CardCollection();
     private int numManaConversion = 0;
@@ -2673,11 +2672,18 @@ public class Player extends GameEntity implements Comparable<Player> {
         return result;
     }
 
-    public boolean isPlayingExtraTurn() {
-        return isPlayingExtraTrun;
+    public boolean isExtraTurn() {
+        return view.getIsExtraTurn();
     }
     public void setExtraTurn(boolean b) {
-        isPlayingExtraTrun  = b;
+        view.setIsExtraTurn(b);
+    }
+
+    public int getExtraTurnCount() {
+        return view.getExtraTurnCount();
+    }
+    public void setExtraTurnCount(final int val) {
+        view.setExtraTurnCount(val);
     }
 
     public void initVariantsZones(RegisteredPlayer registeredPlayer) {
