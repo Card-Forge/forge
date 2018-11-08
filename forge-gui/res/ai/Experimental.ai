@@ -171,6 +171,9 @@ SCRY_IMMEDIATELY_UNCASTABLE_CMC_DIFF=1
 # If the AI has this many or fewer cards in the library, it will Surveil to the top of the library in order
 # not to deplete the library.
 SURVEIL_NUM_CARDS_IN_LIBRARY_TO_BAIL=8
+# If the AI will have less life than the specified percentage as a result of activating a Surveil ability
+# that requires a life playment, it will not pay life to activate it (e.g. Doom Whisperer).
+SURVEIL_LIFEPERC_AFTER_PAYING_LIFE=50
 
 # Attempt to predict the number of potential blockers with various forms of evasion when
 # deciding to do an all-in assault attack (Experimental!)
