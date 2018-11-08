@@ -799,7 +799,12 @@ public class PhaseHandler implements java.io.Serializable {
     private Player getNextActivePlayer() {
         ExtraTurn extraTurn = !extraTurns.isEmpty() ? extraTurns.pop() : null;
         Player nextPlayer = extraTurn != null ? extraTurn.getPlayer() : game.getNextPlayerAfter(playerTurn);
-        
+
+        // update ExtraTurn Count for all players
+        for (final Player p : game.getPlayers()) {
+            p.setExtraTurnCount(getExtraTurnForPlayer(p));
+        }
+
         if (extraTurn != null) {
             // The bottom of the extra turn stack is the normal turn
             nextPlayer.setExtraTurn(!extraTurns.isEmpty());
@@ -868,12 +873,31 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public final ExtraTurn addExtraTurn(final Player player) {
+        Player previous = null;
         // use a stack to handle extra turns, make sure the bottom of the stack
         // restores original turn order
         if (extraTurns.isEmpty()) {
             extraTurns.push(new ExtraTurn(game.getNextPlayerAfter(playerTurn)));
+        } else {
+            previous = extraTurns.peek().getPlayer();
         }
-        return extraTurns.push(new ExtraTurn(player));
+
+        ExtraTurn result = extraTurns.push(new ExtraTurn(player));
+        // update Extra Turn for all players
+        for (final Player p : game.getPlayers()) {
+            p.setExtraTurnCount(getExtraTurnForPlayer(p));
+        }
+
+        // get all players where the view should be updated
+        List<Player> toUpdate = Lists.newArrayList(player);
+        if (previous != null) {
+            toUpdate.add(previous);
+        }
+
+        // fireEvent to update the Details
+        game.fireEvent(new GameEventPlayerStatsChanged(toUpdate));
+
+        return result;
     }
 
     public final void addExtraPhase(final PhaseType afterPhase, final PhaseType extraPhase) {
@@ -1127,5 +1151,26 @@ public class PhaseHandler implements java.io.Serializable {
 
     public void setCombat(Combat combat) {
         this.combat = combat;
+    }
+
+    /**
+     * returns the continuous extra turn count
+     * @param PLayer p
+     * @return int
+     */
+    public int getExtraTurnForPlayer(final Player p) {
+        if (this.extraTurns.isEmpty() || this.extraTurns.size() < 2) {
+            return 0;
+        }
+
+        int count = 0;
+        // skip the first element
+        for (final ExtraTurn et : extraTurns.subList(1, extraTurns.size())) {
+            if (!et.getPlayer().equals(p)) {
+                break;
+            }
+            count += 1;
+        }
+        return count;
     }
 }

@@ -189,6 +189,22 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.Counters, p.getCounters());
     }
 
+    public boolean getIsExtraTurn() {
+        return get(TrackableProperty.IsExtraTurn);
+    }
+
+    public void setIsExtraTurn(final boolean val) {
+        set(TrackableProperty.IsExtraTurn, val);
+    }
+
+    public int getExtraTurnCount() {
+        return get(TrackableProperty.ExtraTurnCount);
+    }
+
+    public void setExtraTurnCount(final int val) {
+        set(TrackableProperty.ExtraTurnCount, val);
+    }
+
     public int getMaxHandSize() {
         return get(TrackableProperty.MaxHandSize);
     }
@@ -422,6 +438,11 @@ public class PlayerView extends GameEntityView {
         details.add(TextUtil.concatNoSpace("Cards in hand: ", TextUtil.addSuffix(String.valueOf(getHandSize()),"/"), getMaxHandString()));
         details.add(TextUtil.concatWithSpace("Cards drawn this turn:", String.valueOf(getNumDrawnThisTurn())));
         details.add(TextUtil.concatWithSpace("Damage prevention:", String.valueOf(getPreventNextDamage())));
+
+        if (getIsExtraTurn()) {
+            details.add("Extra Turn: Yes");
+        }
+        details.add(TextUtil.concatWithSpace("Extra Turn Count:", String.valueOf(getExtraTurnCount())));
         final String keywords = Lang.joinHomogenous(getDisplayableKeywords());
         if (!keywords.isEmpty()) {
             details.add(keywords);

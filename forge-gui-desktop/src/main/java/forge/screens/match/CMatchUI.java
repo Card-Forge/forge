@@ -412,6 +412,8 @@ public final class CMatchUI
                 if (vHand != null) {
                     vHand.getLayoutControl().updateHand();
                 }
+                // update Cards in Hand
+                vField.updateDetails();
             }
             if (updateAnte) {
                 cAntes.update();
