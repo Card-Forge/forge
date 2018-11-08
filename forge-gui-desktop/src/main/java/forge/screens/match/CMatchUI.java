@@ -413,7 +413,7 @@ public final class CMatchUI
                     vHand.getLayoutControl().updateHand();
                 }
                 // update Cards in Hand
-                getFieldViewFor(owner).updateDetails();
+                vField.updateDetails();
             }
             if (updateAnte) {
                 cAntes.update();
