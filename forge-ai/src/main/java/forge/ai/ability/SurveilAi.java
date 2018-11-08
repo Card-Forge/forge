@@ -112,12 +112,15 @@ public class SurveilAi extends SpellAbilityAi {
             randomReturn = true;
         }
 
+        if (randomReturn) {
+            AiCardMemory.rememberCard(ai, sa.getHostCard(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
+        }
+
         return randomReturn;
     }
 
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
-        AiCardMemory.rememberCard(player, sa.getHostCard(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
         return true;
     }
 }
