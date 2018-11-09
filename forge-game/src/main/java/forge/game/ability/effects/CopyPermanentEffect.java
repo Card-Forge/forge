@@ -257,6 +257,8 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                             continue;
                         }
                     }
+                    // need to be done otherwise the token has no State in Details
+                    copyInPlay.updateStateForView();
                 }
 
                 if (sa.hasParam("AtEOT")) {
