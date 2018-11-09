@@ -3571,7 +3571,7 @@ public class CardFactoryUtil {
             StringBuilder sb = new StringBuilder("Event$ Moved | Destination$ Graveyard | ValidCard$ Card.Self ");
 
             // to show it on Nexus
-            if (!card.isPermanent()) {
+            if (card.isPermanent()) {
                 sb.append("| Secondary$ True");
             }
             sb.append("| Description$ ").append(keyword);
