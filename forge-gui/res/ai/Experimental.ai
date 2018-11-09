@@ -211,7 +211,14 @@ EXPLORE_MAX_CMC_DIFF_TO_PUT_IN_GRAVEYARD=2
 # doesn't have a land in hand
 EXPLORE_NUM_LANDS_TO_STILL_NEED_MORE=3
 
-# MoJhoSto casual variant properties
+# Momir/MoJhoSto casual variant properties
+# Which lands the AI would prefer to play in Momir Basic and MoJhoSto modes. When set to "default", generally plays
+# lands in WUBRG order. When set to "random", will play a completely random basic land from hand. When set to
+# "preforder:XXX", where "XXX" is a list of color specifications, will play basic lands in this preferred order,
+# and if no preferred land can be found, will play a random one (e.g. "preforder:RB" plays Mountains first, Swamps
+# second, and then everything else randomly if no Mountains or Swamps are present).
+MOMIR_BASIC_LAND_STRATEGY=preforder:RB
+# MoJhoSto only casual variant properties
 # How many lands the AI needs to have on the battlefield to begin considering activating Jhoira in MoJhoSto
 MOJHOSTO_NUM_LANDS_TO_ACTIVATE_JHOIRA=4
 # The chance that the AI will activate Jhoira instead of activating Momir

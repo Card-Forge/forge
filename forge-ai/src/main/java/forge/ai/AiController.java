@@ -436,6 +436,34 @@ public class AiController {
         if (landList.isEmpty()) {
             return null;
         }
+
+        // Some considerations for Momir/MoJhoSto
+        boolean hasMomir = !CardLists.filter(player.getCardsIn(ZoneType.Command),
+                CardPredicates.nameEquals("Momir Vig, Simic Visionary Avatar")).isEmpty();
+        if (hasMomir) {
+            String landStrategy = getProperty(AiProps.MOMIR_BASIC_LAND_STRATEGY);
+            if (landStrategy.equalsIgnoreCase("random")) {
+                // Pick a completely random basic land
+                return Aggregates.random(landList);
+            } else if (landStrategy.toLowerCase().startsWith("preforder:")) {
+                // Pick a basic land in order of preference, or play a random one if nothing is preferred
+                String order = landStrategy.substring(10);
+                for (char c : order.toCharArray()) {
+                    byte color = MagicColor.fromName(c);
+                    for (Card land : landList) {
+                        for (final SpellAbility m : ComputerUtilMana.getAIPlayableMana(land)) {
+                            AbilityManaPart mp = m.getManaPart();
+                            if (mp.canProduce(MagicColor.toShortString(color), m)) {
+                                return land;
+                            }
+                        }
+                    }
+                    return Aggregates.random(landList);
+                }
+            }
+            // If nothing is done here, proceeds to the default land picking strategy
+        }
+
         //Skip reflected lands.
         CardCollection unreflectedLands = new CardCollection(landList);
         for (Card l : landList) {
