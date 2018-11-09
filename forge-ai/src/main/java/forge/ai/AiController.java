@@ -437,10 +437,14 @@ public class AiController {
             return null;
         }
 
+        CardCollection nonLandsInHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), Predicates.not(CardPredicates.Presets.LANDS));
+
         // Some considerations for Momir/MoJhoSto
         boolean hasMomir = !CardLists.filter(player.getCardsIn(ZoneType.Command),
                 CardPredicates.nameEquals("Momir Vig, Simic Visionary Avatar")).isEmpty();
-        if (hasMomir) {
+        if (hasMomir && nonLandsInHand.isEmpty()) {
+            // Only do this if we have an all-basic land hand, which covers both stock Momir and MoJhoSto modes
+            // and also a custom Vanguard setup with a customized basic land deck and Momir as the avatar.
             String landStrategy = getProperty(AiProps.MOMIR_BASIC_LAND_STRATEGY);
             if (landStrategy.equalsIgnoreCase("random")) {
                 // Pick a completely random basic land
@@ -458,8 +462,8 @@ public class AiController {
                             }
                         }
                     }
-                    return Aggregates.random(landList);
                 }
+                return Aggregates.random(landList);
             }
             // If nothing is done here, proceeds to the default land picking strategy
         }
@@ -475,7 +479,6 @@ public class AiController {
             landList = unreflectedLands;
         }
 
-        CardCollection nonLandsInHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), Predicates.not(CardPredicates.Presets.LANDS));
 
         //try to skip lands that enter the battlefield tapped
         if (!nonLandsInHand.isEmpty()) {
