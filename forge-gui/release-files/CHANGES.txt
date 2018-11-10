@@ -1,2 +1,5 @@
+- Random Commander Quest -
+It is now possible to start a quest with Commander rules and randomly generated quest opponents playing Commander decks. This feature is currently exclusive to desktop Forge.
+
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.
