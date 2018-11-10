@@ -74,6 +74,12 @@ AVOID_TARGETING_CREATS_THAT_WILL_DIE=true
 # since the current AI is not smart enough to predict whether a kill spell on stack is countered or not.
 DONT_EVAL_KILLSPELLS_ON_STACK_WITH_PERMISSION=false
 
+# If AI would drop to this amount of life in combat, it'll try to defend itself more actively
+AI_IN_DANGER_THRESHOLD=3
+# If set to the same value, AI will be predictable. If set to higher, AI will randomly pick a value between the two
+# for each evaluation, introducing some unpredictability.
+AI_IN_DANGER_MAX_THRESHOLD=12
+
 # Only works when AI cheating is enabled in preferences, otherwise does nothing
 CHEAT_WITH_MANA_ON_SHUFFLE=true
 
@@ -231,10 +237,4 @@ MOJHOSTO_CHANCE_TO_USE_JHOIRA_COPY_INSTANT=20
 # -- features is over. These toggles will be removed later, or may be reintroduced under a --
 # -- different name if necessary --
 
-# If AI would drop to this amount of life in combat, it'll try to defend itself more actively
-AI_IN_DANGER_THRESHOLD=3
-# If set to the same value, AI will be predictable. If set to higher, AI will randomly pick a value between the two
-# for each evaluation, introducing some unpredictability.
-AI_IN_DANGER_MAX_THRESHOLD=12
-
-# <-- there are no other experimental options here at the moment -->
+# <-- there are no experimental options here at the moment -->
