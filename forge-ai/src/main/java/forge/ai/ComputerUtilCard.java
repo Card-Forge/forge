@@ -1508,14 +1508,18 @@ public class ComputerUtilCard {
                // Attempt to hold combat tricks until blockers are declared, and try to lure the opponent into blocking
                // (The AI will only do it for one attacker at the moment, otherwise it risks running his attackers into
                // an army of opposing blockers with only one combat trick in hand)
-               AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.MANDATORY_ATTACKERS);
-               AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.TRICK_ATTACKERS);
                // Reserve the mana until Declare Blockers such that the AI doesn't tap out before having a chance to use
                // the combat trick
+               boolean reserved = false;
                if (ai.getController().isAI()) {
-                   ((PlayerControllerAi) ai.getController()).getAi().reserveManaSources(sa, PhaseType.COMBAT_DECLARE_BLOCKERS, false);
+                   reserved = ((PlayerControllerAi) ai.getController()).getAi().reserveManaSources(sa, PhaseType.COMBAT_DECLARE_BLOCKERS, false);
+                   // Only proceed with this if we could actually reserve mana
+                   if (reserved) {
+                       AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.MANDATORY_ATTACKERS);
+                       AiCardMemory.rememberCard(ai, c, AiCardMemory.MemorySet.TRICK_ATTACKERS);
+                       return false;
+                   }
                }
-               return false;
            } else {
                // Don't try to mix "lure" and "precast" paradigms for combat tricks, since that creates issues with
                // the AI overextending the attack

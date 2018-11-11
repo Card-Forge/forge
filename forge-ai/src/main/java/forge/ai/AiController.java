@@ -628,16 +628,19 @@ public class AiController {
         return null;
     }
 
-    public void reserveManaSources(SpellAbility sa) {
-        reserveManaSources(sa, PhaseType.MAIN2, false);
+    public boolean reserveManaSources(SpellAbility sa) {
+        return reserveManaSources(sa, PhaseType.MAIN2, false);
     }
 
-    public void reserveManaSources(SpellAbility sa, PhaseType phaseType, boolean enemy) {
+    public boolean reserveManaSources(SpellAbility sa, PhaseType phaseType, boolean enemy) {
         ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, true, 0);
         CardCollection manaSources = ComputerUtilMana.getManaSourcesToPayCost(cost, sa, player);
 
-        AiCardMemory.MemorySet memSet;
+        if (manaSources.isEmpty()) {
+            return false;
+        }
 
+        AiCardMemory.MemorySet memSet;
         switch (phaseType) {
             case MAIN2:
                 memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2;
@@ -656,6 +659,10 @@ public class AiController {
         for (Card c : manaSources) {
             AiCardMemory.rememberCard(player, c, memSet);
         }
+
+        // This is a simplification, since one mana source can produce more than one mana,
+        // but should work in most circumstances to ensure safety in whatever the AI is using this for.
+        return manaSources.size() >= cost.getConvertedManaCost();
     }
 
     // This is for playing spells regularly (no Cascade/Ripple etc.)

@@ -45,8 +45,10 @@ public class FogAi extends SpellAbilityAi {
                 || (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)))
                 && (AiCardMemory.isMemorySetEmpty(ai, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT))
                 && (ComputerUtil.aiLifeInDanger(ai, false, 0))) {
-            ((PlayerControllerAi) ai.getController()).getAi().reserveManaSources(sa, PhaseType.COMBAT_DECLARE_BLOCKERS, true);
-            AiCardMemory.rememberCard(ai, hostCard, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT);
+            boolean reserved = ((PlayerControllerAi) ai.getController()).getAi().reserveManaSources(sa, PhaseType.COMBAT_DECLARE_BLOCKERS, true);
+            if (reserved) {
+                AiCardMemory.rememberCard(ai, hostCard, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT);
+            }
         }
 
         // AI should only activate this during Human's Declare Blockers phase
