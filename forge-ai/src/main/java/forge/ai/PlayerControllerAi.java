@@ -303,7 +303,7 @@ public class PlayerControllerAi extends PlayerController {
 
         // TODO: Currently this logic uses the same routine as Scry. Possibly differentiate this and implement
         // a specific logic for Surveil (e.g. maybe to interact better with Reanimator strategies etc.).
-        if (getPlayer().getCardsIn(ZoneType.Hand).size() <= getAi().getIntProperty(AiProps.SURVEIL_NUM_CARDS_IN_LIBRARY_TO_BAIL)) {
+        if (getPlayer().getCardsIn(ZoneType.Library).size() <= getAi().getIntProperty(AiProps.SURVEIL_NUM_CARDS_IN_LIBRARY_TO_BAIL)) {
             toTop.addAll(topN);
         } else {
             for (Card c : topN) {
