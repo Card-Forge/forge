@@ -656,13 +656,16 @@ public class AiController {
                 break;
         }
 
-        for (Card c : manaSources) {
-            AiCardMemory.rememberCard(player, c, memSet);
-        }
-
         // This is a simplification, since one mana source can produce more than one mana,
         // but should work in most circumstances to ensure safety in whatever the AI is using this for.
-        return manaSources.size() >= cost.getConvertedManaCost();
+        if (manaSources.size() >= cost.getConvertedManaCost()) {
+            for (Card c : manaSources) {
+                AiCardMemory.rememberCard(player, c, memSet);
+            }
+            return true;
+        }
+
+        return false;
     }
 
     // This is for playing spells regularly (no Cascade/Ripple etc.)
