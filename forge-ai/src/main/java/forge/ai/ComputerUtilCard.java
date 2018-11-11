@@ -1492,7 +1492,7 @@ public class ComputerUtilCard {
             }
         }
 
-        boolean wantToHoldTrick = holdCombatTricks;
+        boolean wantToHoldTrick = holdCombatTricks && !ai.getCardsIn(ZoneType.Hand).isEmpty();
         if (chanceToHoldCombatTricks >= 0) {
             // Obey the chance specified in the AI profile for holding combat tricks
             wantToHoldTrick &= MyRandom.percentTrue(chanceToHoldCombatTricks);
