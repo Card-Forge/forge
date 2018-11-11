@@ -6,3 +6,4 @@ Name:Dark Setessan Night|Deck:BGConstellation.dck|Variant:None|Avatar:Doomwake G
 Name:Pharika|Deck:Pharika.dck|Variant:Commander|Avatar:Pharika, God of Affliction|Desc:
 Name:Polukranos|Deck:Hydra.dck|Variant:None|Avatar:Polukranos, World Eater|Desc:
 Name:Ajani, Mentor of Heroes|Deck:AjaniPW.dck|Variant:Planeswalker|Avatar:Ajani, Mentor of Heroes|Desc:
+Name:Random Setessa|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

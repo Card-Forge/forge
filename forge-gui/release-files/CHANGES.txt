@@ -1,3 +1,6 @@
+- Planar Conquest: Dominaria -
+A new plane is now available in Planar Conquest, set in Dominaria. This plane features cards from Dominaria, Magic Core Set 2019, as well as most (but not all) cards from Commander 2018. There are 45 events available for your enjoyment. Traditional Commander and Planeswalker events represent the majority of the events on the plane, but as a special feature Dominaria also features Planechase variant matches instead of Vanguard ones, with the planar decks consisting of plane cards representing regions of Dominaria and various randomly inserted phenomena. Please note that Planar Conquest is currently only available on Android and in the macOS mobile backport.
+
 - AI Improvements -
 A new round of AI improvements went into the game, hopefully making the game a little more interesting and exciting to play. In particular, certain improvements regarding Flash were implemented, the AI is now able to use cards which reorder the top of the library, such as Ponder or Portent, as well as cards which copy spells and/or activated abilities, such as Twincast or Fork. On top of that, several logic-related bugs were fixed. Also, the AI has been optimized a little, hopefully making it a bit faster, especially on mobile platforms, in situations where there are a lot of cards on the battlefield but the AI has little or nothing to do.
 
