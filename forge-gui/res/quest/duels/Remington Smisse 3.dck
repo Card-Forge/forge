@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Remington Smisse 3
+Title=Remington Smisse
+Difficulty=hard
+Description=UB Surveil deck with Etrata, the Silencer.
+Icon=Remington Smisse.jpg
+Deck Type=constructed
+[main]
+1 Ancestral Recall|LEA
+1 Black Lotus|LEA
+3 Blink of an Eye|DOM
+1 Cruel Tutor|POR
+1 Demonic Tutor|LEA
+2 Diabolic Tutor|M14
+4 Dimir Spybug|GRN
+4 Drowned Catacomb|XLN
+4 Etrata, the Silencer|GRN
+6 Island|DOM
+2 Island|GRN
+1 Mox Jet|LEA
+1 Mox Sapphire|LEA
+2 Murder|M19
+2 Negate|RIX
+4 Nightveil Sprite|GRN
+4 Sinister Sabotage|GRN
+5 Swamp|DOM
+2 Swamp|GRN
+4 Thought Erasure|GRN
+4 Thoughtbound Phantasm|GRN
+1 Time Walk|LEA
+1 Vampiric Tutor|VIS
+[sideboard]
