@@ -1,3 +1,6 @@
+- Planar Conquest: Guilds of Ravnica -
+Cards from Guilds of Ravnica are now available on the Ravnica plane in Planar Conquest. Several events on this plane have been updated or changed to feature Guilds of Ravnica cards as well. Please note that Planar Conquest is currently only available on Android and the macOS mobile backport.
+
 - Random Commander Quest -
 It is now possible to start a quest with Commander rules and randomly generated quest opponents playing Commander decks. This feature is currently exclusive to desktop Forge.
 
