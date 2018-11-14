@@ -723,7 +723,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         // TODO: improve such that this can be predicted from the replacement effect itself
         // (+ move this function out into ComputerUtilCombat?)
         for (Card c : game.getCardsIn(ZoneType.Command)) {
-            if (c.getName().equals("Insult Effect")) {
+            if (c.getName().equals("Insult Effect") || c.getName().equals("Mishra")) {
                 if (c.getController().equals(source.getController())) {
                     restDamage *= 2;
                 }
