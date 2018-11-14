@@ -84,9 +84,6 @@ public class LifeExchangeVariantAi extends SpellAbilityAi {
             return shouldDo;
         }
         else if ("Evra, Halcyon Witness".equals(sourceName)) {
-            if (!ai.canGainLife())
-                return false;
-
             int aiLife = ai.getLife();
 
             // Offensive use of Evra, try to kill the opponent or deal a lot of damage, and hopefully gain a lot of life too
@@ -102,7 +99,7 @@ public class LifeExchangeVariantAi extends SpellAbilityAi {
                     int dangerMax = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_MAX_THRESHOLD));
                     int dangerDiff = dangerMax - dangerMin;
                     int lifeInDanger = dangerDiff <= 0 ? dangerMin : MyRandom.getRandom().nextInt(dangerDiff) + dangerMin;
-                    if (source.getNetPower() >= lifeInDanger && ComputerUtil.lifegainPositive(ai, source)) {
+                    if (source.getNetPower() >= lifeInDanger && ai.canGainLife() && ComputerUtil.lifegainPositive(ai, source)) {
                         // Blocked or unblocked Evra which will get bigger *and* we're getting our life back through Lifelink
                         return true;
                     }
@@ -111,6 +108,10 @@ public class LifeExchangeVariantAi extends SpellAbilityAi {
 
             // Defensive use of Evra, try to debuff Evra to try to gain some life
             if (source.getNetPower() > aiLife) {
+                // Only makes sense if the AI can actually gain life from this
+                if (!ai.canGainLife())
+                    return false;
+
                 if (ComputerUtilCombat.lifeInSeriousDanger(ai, game.getCombat())) {
                     return true;
                 }
