@@ -910,9 +910,15 @@ public class AttachAi extends SpellAbilityAi {
         for (Trigger t : attachSource.getTriggers()) {
             if (t.getMode() == TriggerType.ChangesZone) {
                 final Map<String, String> params = t.getMapParams();
-                if ("Card.Self".equals(params.get("ValidCard")) && "Battlefield".equals(params.get("Destination")) && t.hasParam("Execute")) {
-                    SpellAbility trigSa = AbilityFactory.getAbility(attachSource.getSVar(params.get("Execute")), attachSource);
-                    if (trigSa.getApi() == ApiType.DealDamage && "Enchanted".equals(trigSa.getParam("Defined"))) {
+                if ("Card.Self".equals(params.get("ValidCard"))
+                        && "Battlefield".equals(params.get("Destination"))) {
+                    SpellAbility trigSa = null;
+                    if (t.hasParam("Execute") && attachSource.hasSVar(t.getParam("Execute"))) {
+                        trigSa = AbilityFactory.getAbility(attachSource.getSVar(params.get("Execute")), attachSource);
+                    } else if (t.getOverridingAbility() != null) {
+                        trigSa = t.getOverridingAbility();
+                    }
+                    if (trigSa != null && trigSa.getApi() == ApiType.DealDamage && "Enchanted".equals(trigSa.getParam("Defined"))) {
                         for (Card target : list) {
                             if (!target.getController().isOpponentOf(ai)) {
                                 int numDmg = AbilityUtils.calculateAmount(target, trigSa.getParam("NumDmg"), trigSa);
