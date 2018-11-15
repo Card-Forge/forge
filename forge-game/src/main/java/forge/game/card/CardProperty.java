@@ -1395,8 +1395,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("power") || property.startsWith("toughness")
-                || property.startsWith("cmc") || property.startsWith("totalPT")
-                || property.startsWith("effectiveToughness")) {
+                || property.startsWith("cmc") || property.startsWith("totalPT")) {
             int x;
             int y = 0;
             String rhs = "";
@@ -1407,9 +1406,6 @@ public class CardProperty {
             } else if (property.startsWith("toughness")) {
                 rhs = property.substring(11);
                 y = card.getNetToughness();
-            } else if (property.startsWith("effectiveToughness")) {
-                rhs = property.substring(20);
-                y = card.getNetToughness() - card.getDamage();
             } else if (property.startsWith("cmc")) {
                 rhs = property.substring(5);
                 y = card.getCMC();
