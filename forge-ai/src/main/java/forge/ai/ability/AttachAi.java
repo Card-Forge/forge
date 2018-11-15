@@ -905,6 +905,34 @@ public class AttachAi extends SpellAbilityAi {
             });
         }
 
+        // Look for triggers that will damage the creature and remove AI-owned creatures that will die
+        CardCollection toRemove = new CardCollection();
+        for (Trigger t : attachSource.getTriggers()) {
+            if (t.getMode() == TriggerType.ChangesZone) {
+                final Map<String, String> params = t.getMapParams();
+                if ("Card.Self".equals(params.get("ValidCard"))
+                        && "Battlefield".equals(params.get("Destination"))) {
+                    SpellAbility trigSa = null;
+                    if (t.hasParam("Execute") && attachSource.hasSVar(t.getParam("Execute"))) {
+                        trigSa = AbilityFactory.getAbility(attachSource.getSVar(params.get("Execute")), attachSource);
+                    } else if (t.getOverridingAbility() != null) {
+                        trigSa = t.getOverridingAbility();
+                    }
+                    if (trigSa != null && trigSa.getApi() == ApiType.DealDamage && "Enchanted".equals(trigSa.getParam("Defined"))) {
+                        for (Card target : list) {
+                            if (!target.getController().isOpponentOf(ai)) {
+                                int numDmg = AbilityUtils.calculateAmount(target, trigSa.getParam("NumDmg"), trigSa);
+                                if (target.getNetToughness() - target.getDamage() <= numDmg && !target.hasKeyword(Keyword.INDESTRUCTIBLE)) {
+                                    toRemove.add(target);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        list.removeAll(toRemove);
+
         if (magnetList != null) {
             
             // Look for Heroic triggers
@@ -921,7 +949,7 @@ public class AttachAi extends SpellAbilityAi {
                     }
                 }
             }
-            
+
             if (!magnetList.isEmpty()) {
                 // Always choose something from the Magnet List.
                 // Probably want to "weight" the list by amount of Enchantments and
@@ -992,6 +1020,10 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         CardCollection prefList = new CardCollection(list);
+
+        // Filter AI-specific targets if provided
+        prefList = ComputerUtil.filterAITgts(sa, ai, (CardCollection)list, false);
+
         if (totToughness < 0) {
             // Don't kill my own stuff with Negative toughness Auras
             final int tgh = totToughness;
