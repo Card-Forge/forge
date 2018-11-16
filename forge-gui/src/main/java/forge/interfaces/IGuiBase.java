@@ -16,14 +16,12 @@ import forge.match.HostedMatch;
 import forge.sound.IAudioClip;
 import forge.sound.IAudioMusic;
 import forge.util.Callback;
-import forge.util.ImageFetcher;
 
 public interface IGuiBase {
     boolean isRunningOnDesktop();
     boolean isLibgdxPort();
     String getCurrentVersion();
     String getAssetsDir();
-    ImageFetcher getImageFetcher();
     void invokeInEdtNow(Runnable runnable);
     void invokeInEdtLater(Runnable runnable);
     void invokeInEdtAndWait(Runnable proc);

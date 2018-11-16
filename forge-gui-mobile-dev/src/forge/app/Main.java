@@ -13,10 +13,9 @@ import forge.util.RestartUtil;
 import forge.util.Utils;
 import org.apache.commons.cli.*;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
@@ -162,12 +161,6 @@ public class Main {
         @Override
         public void preventSystemSleep(boolean preventSleep) {
             OperatingSystem.preventSystemSleep(preventSleep);
-        }
-
-        @Override
-        public void convertToJPEG(InputStream input, OutputStream output) throws IOException {
-            BufferedImage image = ImageIO.read(input);
-            ImageIO.write(image, "jpg", output);
         }
     }
 }
