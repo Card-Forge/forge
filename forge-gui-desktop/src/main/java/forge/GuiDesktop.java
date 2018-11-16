@@ -23,7 +23,10 @@ import forge.sound.*;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
-import forge.util.*;
+import forge.util.BuildInfo;
+import forge.util.Callback;
+import forge.util.FileUtil;
+import forge.util.OperatingSystem;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
@@ -39,8 +42,6 @@ import java.util.Collection;
 import java.util.List;
 
 public class GuiDesktop implements IGuiBase {
-    private ImageFetcher imageFetcher = new SwingImageFetcher();
-
     @Override
     public boolean isRunningOnDesktop() {
         return true;
@@ -60,11 +61,6 @@ public class GuiDesktop implements IGuiBase {
     public String getAssetsDir() {
         return StringUtils.containsIgnoreCase(BuildInfo.getVersionString(), "git") ?
                 "../forge-gui/" : "";
-    }
-
-    @Override
-    public ImageFetcher getImageFetcher() {
-        return imageFetcher;
     }
 
     @Override

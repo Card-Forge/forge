@@ -9,8 +9,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -30,8 +28,6 @@ import forge.util.FileUtil;
 import forge.util.ThreadUtil;
 
 import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.concurrent.Callable;
 
 public class Main extends AndroidApplication {
@@ -246,12 +242,6 @@ public class Main extends AndroidApplication {
                     }
                 }
             });
-        }
-
-        @Override
-        public void convertToJPEG(InputStream input, OutputStream output) {
-            Bitmap bmp = BitmapFactory.decodeStream(input);
-            bmp.compress(Bitmap.CompressFormat.JPEG, 100, output);
         }
     }
 }

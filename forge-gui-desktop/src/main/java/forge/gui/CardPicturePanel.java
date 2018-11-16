@@ -24,9 +24,8 @@ import java.awt.image.WritableRaster;
 
 import javax.swing.JPanel;
 
-import forge.GuiBase;
 import forge.ImageCache;
-import forge.util.ImageFetcher;
+import forge.ImageFetcher;
 import forge.ImageKeys;
 import forge.game.card.CardView.CardStateView;
 import forge.item.InventoryItem;
@@ -116,7 +115,7 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
             CardStateView card = (CardStateView) displayed;
             BufferedImage image = ImageCache.getOriginalImage(card.getImageKey(), false);
             if (image == null) {
-                GuiBase.getInterface().getImageFetcher().fetchImage(card.getImageKey(), this);
+                ImageFetcher.fetchImage(card.getCard(), card.getImageKey(), this);
             }
             return FImageUtil.getImage((CardStateView) displayed);
         }
