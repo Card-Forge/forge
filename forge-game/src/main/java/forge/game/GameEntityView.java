@@ -42,18 +42,19 @@ public abstract class GameEntityView extends TrackableObject {
         set(TrackableProperty.PreventNextDamage, e.getPreventNextDamageTotalShields());
     }
 
-    public Iterable<CardView> getEnchantedBy() {
-        return get(TrackableProperty.EnchantedBy);
+    public Iterable<CardView> getAttachedBy() {
+        return get(TrackableProperty.AttachedBy);
     }
-    protected void updateEnchantedBy(GameEntity e) {
-        if (e.isEnchanted()) {
-            set(TrackableProperty.EnchantedBy, CardView.getCollection(e.getEnchantedBy(false)));
+    public boolean isAttached() {
+        return getAttachedBy() != null;
+    }
+
+    protected void updateAttachedBy(GameEntity e) {
+        if (e.isAttachedBy()) {
+            set(TrackableProperty.AttachedBy, CardView.getCollection(e.getAttachedBy()));
         }
         else {
-            set(TrackableProperty.EnchantedBy, null);
+            set(TrackableProperty.AttachedBy, null);
         }
-    }
-    public boolean isEnchanted() {
-        return getEnchantedBy() != null;
     }
 }

@@ -272,18 +272,13 @@ public class Untap extends Phase {
             } else if (c.hasKeyword(Keyword.PHASING)) {
                 // 702.23g If an object would simultaneously phase out directly
                 // and indirectly, it just phases out indirectly.
-                if (c.isAura()) {
-                    final GameEntity ent = c.getEnchanting();
-
-                    if ((ent instanceof Card) && list.contains(ent)) {
+                if (c.isAura() || c.isFortification()) {
+                    final Card ent = c.getAttachingCard();
+                    if (ent != null && list.contains(ent)) {
                         continue;
                     }
                 } else if (c.isEquipment() && c.isEquipping()) {
                     if (list.contains(c.getEquipping())) {
-                        continue;
-                    }
-                } else if (c.isFortification() && c.isFortifying()) {
-                    if (list.contains(c.getFortifying())) {
                         continue;
                     }
                 }

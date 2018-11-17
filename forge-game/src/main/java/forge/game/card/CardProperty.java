@@ -405,7 +405,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("Attached")) {
-            if (card.getEquipping() != source && !source.equals(card.getEnchanting()) && card.getFortifying() != source) {
+            if (card.getEquipping() != source && !source.equals(card.getAttaching())) {
                 return false;
             }
         } else if (property.startsWith("AttachedTo")) {
@@ -433,9 +433,8 @@ public class CardProperty {
                     return false;
                 }
             } else {
-                if ((card.getEnchanting() == null || !card.getEnchanting().isValid(restriction, sourceController, source, spellAbility))
-                        && (card.getEquipping() == null || !card.getEquipping().isValid(restriction, sourceController, source, spellAbility))
-                        && (card.getFortifying() == null || !card.getFortifying().isValid(restriction, sourceController, source, spellAbility))) {
+                if ((card.getAttaching() == null || !card.getAttaching().isValid(restriction, sourceController, source, spellAbility))
+                        && (card.getEquipping() == null || !card.getEquipping().isValid(restriction, sourceController, source, spellAbility))) {
                     return false;
                 }
             }
@@ -445,7 +444,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("NotAttachedTo")) {
-            if (card.getEquipping() == source || source.equals(card.getEnchanting()) || card.getFortifying() == source) {
+            if (card.getEquipping() == source || source.equals(card.getAttaching())) {
                 return false;
             }
         } else if (property.startsWith("EnchantedBy")) {
@@ -476,7 +475,7 @@ public class CardProperty {
                         }
                         break;
                     default:  // EnchantedBy Aura.Other
-                        for (final Card aura : card.getEnchantedBy(false)) {
+                        for (final Card aura : card.getEnchantedBy()) {
                             if (aura.isValid(restriction, sourceController, source, spellAbility)) {
                                 return true;
                             }
@@ -572,11 +571,12 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("Equipped")) {
-            if (card.getEquipping() != source) {
+            if (!source.isAttachedBy(card)) {
                 return false;
             }
         } else if (property.startsWith("Fortified")) {
-            if (card.getFortifying() != source) {
+            // FIXME TODO what property has this?
+            if (!source.isAttachedBy(card)) {
                 return false;
             }
         } else if (property.startsWith("HauntedBy")) {

@@ -438,54 +438,30 @@ public class CardView extends GameEntityView {
         return false;
     }
 
-    public CardView getEquipping() {
-        return get(TrackableProperty.Equipping);
-    }
-
-    public FCollectionView<CardView> getEquippedBy() {
-        return get(TrackableProperty.EquippedBy);
-    }
-
-    public boolean isEquipped() {
-        return getEquippedBy() != null; //isEmpty check not needed since we won't keep an empty collection around
-    }
-
     public FCollectionView<CardView> getEncodedCards() {
         return get(TrackableProperty.EncodedCards);
     }
 
-    public GameEntityView getEnchanting() {
-        return get(TrackableProperty.Enchanting);
+    public GameEntityView getAttaching() {
+        return get(TrackableProperty.Attaching);
     }
-    void updateEnchanting(Card c) {
-        set(TrackableProperty.Enchanting, GameEntityView.get(c.getEnchanting()));
+    void updateAttaching(Card c) {
+        set(TrackableProperty.Attaching, GameEntityView.get(c.getAttaching()));
     }
 
-    public CardView getEnchantingCard() {
-        GameEntityView enchanting = getEnchanting();
+    public CardView getAttachingCard() {
+        GameEntityView enchanting = getAttaching();
         if (enchanting instanceof CardView) {
             return (CardView) enchanting;
         }
         return null;
     }
-    public PlayerView getEnchantingPlayer() {
-        GameEntityView enchanting = getEnchanting();
+    public PlayerView getAttachingPlayer() {
+        GameEntityView enchanting = getAttaching();
         if (enchanting instanceof PlayerView) {
             return (PlayerView) enchanting;
         }
         return null;
-    }
-
-    public CardView getFortifying() {
-        return get(TrackableProperty.Fortifying);
-    }
-
-    public FCollectionView<CardView> getFortifiedBy() {
-        return get(TrackableProperty.FortifiedBy);
-    }
-
-    public boolean isFortified() {
-        return getFortifiedBy() != null;
     }
 
     public FCollectionView<CardView> getGainControlTargets() {

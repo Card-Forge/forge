@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -21,9 +21,10 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardDamageMap;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CounterType;
 import forge.game.event.GameEventCardAttachment;
-import forge.game.event.GameEventCardAttachment.AttachMethod;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -33,6 +34,7 @@ import forge.util.collect.FCollection;
 
 import java.util.Map;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 
@@ -40,7 +42,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     protected final int id;
     private String name = "";
     private int preventNextDamage = 0;
-    private CardCollection enchantedBy;
+    protected CardCollection attachedBy;
     private Map<Card, Map<String, String>> preventionShieldsWithEffects = Maps.newTreeMap();
     protected Map<CounterType, Integer> counters = Maps.newEnumMap(CounterType.class);
 
@@ -93,7 +95,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             source.getDamageHistory().registerCombatDamage(this);
         }
         // damage prevention is already checked
-        return addCombatDamageBase(damageToDo, source, damageMap); 
+        return addCombatDamageBase(damageToDo, source, damageMap);
     }
 
     protected int addCombatDamageBase(final int damage, final Card source, CardDamageMap damageMap) {
@@ -204,17 +206,17 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             restDamage = 0;
         }
 
-        // if damage is greater than restDamage, damage was prevented 
+        // if damage is greater than restDamage, damage was prevented
         if (damage > restDamage) {
             int prevent = damage - restDamage;
             preventMap.put(source, this, damage - restDamage);
-            
+
             final Map<String, Object> runParams = Maps.newHashMap();
             runParams.put("DamageTarget", this);
             runParams.put("DamageAmount", prevent);
             runParams.put("DamageSource", source);
             runParams.put("IsCombatDamage", isCombat);
-            
+
             getGame().getTriggerHandler().runTrigger(TriggerType.DamagePrevented, runParams, false);
         }
 
@@ -280,77 +282,140 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     public abstract boolean hasKeyword(final String keyword);
     public abstract boolean hasKeyword(final Keyword keyword);
 
-    // GameEntities can now be Enchanted
-    public final CardCollectionView getEnchantedBy(boolean allowModify) {
-        return CardCollection.getView(enchantedBy, allowModify);
+    public final CardCollectionView getEnchantedBy() {
+        if (attachedBy == null) {
+            return CardCollection.EMPTY;
+        }
+        // enchanted means attached by Aura
+        return CardLists.filter(attachedBy, CardPredicates.Presets.AURA);
     }
-    public final void setEnchantedBy(final CardCollection cards) {
-        enchantedBy = cards;
-        getView().updateEnchantedBy(this);
+
+    public final CardCollectionView getAttachedBy() {
+        return CardCollection.getView(attachedBy);
     }
-    public final void setEnchantedBy(final Iterable<Card> cards) {
+
+    public final void setAttachedBy(final Iterable<Card> cards) {
         if (cards == null) {
-            enchantedBy = null;
+            attachedBy = null;
         }
         else {
-            enchantedBy = new CardCollection(cards);
+            attachedBy = new CardCollection(cards);
         }
-        getView().updateEnchantedBy(this);
+
+        getView().updateAttachedBy(this);
     }
+
+    public final boolean isAttachedBy() {
+        return FCollection.hasElements(attachedBy);
+    }
+
     public final boolean isEnchanted() {
-        return FCollection.hasElements(enchantedBy);
+        if (attachedBy == null) {
+            return false;
+        }
+
+        // enchanted means attached by Aura
+        return CardLists.count(attachedBy, CardPredicates.Presets.AURA) > 0;
+    }
+
+    public final boolean isAttachedBy(Card c) {
+        return FCollection.hasElement(attachedBy, c);
     }
     public final boolean isEnchantedBy(Card c) {
-        return FCollection.hasElement(enchantedBy, c);
+        // Rule 303.4k  Even if c is no Aura it still counts
+        return isAttachedBy(c);
+    }
+
+    public final boolean isAttachedBy(final String cardName) {
+        if (attachedBy == null) {
+            return false;
+        }
+        return CardLists.count(getAttachedBy(), CardPredicates.nameEquals(cardName)) > 0;
     }
     public final boolean isEnchantedBy(final String cardName) {
-        for (final Card aura : getEnchantedBy(false)) {
-            if (aura.getName().equals(cardName)) {
-                return true;
-            }
+        // Rule 303.4k  Even if c is no Aura it still counts
+        return isAttachedBy(cardName);
+    }
+
+    public final void addAttachedBy(final Card c) {
+        if (attachedBy == null) {
+            attachedBy = new CardCollection();
         }
+
+        if (attachedBy.add(c)) {
+            getView().updateAttachedBy(this);
+            getGame().fireEvent(new GameEventCardAttachment(c, null, this));
+        }
+    }
+
+    public final void removeAttachedBy(final Card c) {
+        if (attachedBy == null) { return; }
+
+        if (attachedBy.remove(c)) {
+            if (attachedBy.isEmpty()) {
+                attachedBy = null;
+            }
+            getView().updateAttachedBy(this);
+            getGame().fireEvent(new GameEventCardAttachment(c, this, null));
+        }
+    }
+
+    public final void unAttachAllCards() {
+        for (Card c : Lists.newArrayList(getAttachedBy())) {
+            c.unAttachEntity(this);
+        }
+    }
+
+    public boolean canBeAttachedBy(final Card attach) {
+        return canBeAttachedBy(attach, false);
+    }
+
+    public boolean canBeAttachedBy(final Card attach, boolean checkSBA) {
+        // master mode
+        if (!attach.isAttachment()) {
+            return false;
+        }
+
+        if (attach.isAura() && !canBeEnchantedBy(attach, checkSBA)) {
+            return false;
+        }
+        if (attach.isEquipment() && !canBeEquippedBy(attach)) {
+            return false;
+        }
+        if (attach.isFortification() && !canBeFortifiedBy(attach)) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean canBeEquippedBy(final Card aura) {
         return false;
     }
-    public final void addEnchantedBy(final Card c) {
-        if (enchantedBy == null) {
-            enchantedBy = new CardCollection();
-        }
-        if (enchantedBy.add(c)) {
-            getView().updateEnchantedBy(this);
-            getGame().fireEvent(new GameEventCardAttachment(c, null, this, AttachMethod.Enchant));
-        }
-    }
-    public final void removeEnchantedBy(final Card c) {
-        if (enchantedBy == null) { return; }
 
-        if (enchantedBy.remove(c)) {
-            if (enchantedBy.isEmpty()) {
-                enchantedBy = null;
-            }
-            getView().updateEnchantedBy(this);
-            getGame().fireEvent(new GameEventCardAttachment(c, this, null, AttachMethod.Enchant));
-        }
-    }
-    public final void unEnchantAllCards() {
-        if (isEnchanted()) {
-            for (Card c : getEnchantedBy(true)) {
-                c.unEnchantEntity(this);
-            }
-        }
+    public boolean canBeFortifiedBy(final Card aura) {
+        return false;
     }
 
-    public boolean canBeEnchantedBy(final Card aura) {
+    public boolean canBeEnchantedBy(final Card aura, final boolean checkSBA) {
+        if (!aura.isAura()) {
+            return false;
+        }
+
         SpellAbility sa = aura.getFirstAttachSpell();
         TargetRestrictions tgt = null;
         if (sa != null) {
             tgt = sa.getTargetRestrictions();
         }
 
-        return !(hasProtectionFrom(aura)
+        return !(hasProtectionFrom(aura, checkSBA)
                 || ((tgt != null) && !isValid(tgt.getValidTgts(), aura.getController(), aura, sa)));
     }
 
-    public abstract boolean hasProtectionFrom(final Card source);
+    public boolean hasProtectionFrom(final Card source) {
+        return hasProtectionFrom(source, false);
+    }
+
+    public abstract boolean hasProtectionFrom(final Card source, final boolean checkSBA);
 
     // Counters!
     public boolean hasCounters() {

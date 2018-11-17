@@ -408,7 +408,7 @@ public class AttachAi extends SpellAbilityAi {
                     return true;
                 }
 
-                final Iterable<Card> auras = c.getEnchantedBy(false);
+                final Iterable<Card> auras = c.getEnchantedBy();
                 final Iterator<Card> itr = auras.iterator();
                 while (itr.hasNext()) {
                     final Card aura = itr.next();
@@ -1276,7 +1276,7 @@ public class AttachAi extends SpellAbilityAi {
             return null;
         }
         // Don't fortify if already fortifying
-        if (attachSource.getFortifying() != null && attachSource.getFortifying().getController() == aiPlayer) {
+        if (attachSource.getAttachingCard() != null && attachSource.getAttachingCard().getController() == aiPlayer) {
             return null;
         }
 
@@ -1491,7 +1491,7 @@ public class AttachAi extends SpellAbilityAi {
                 return false;
             }
             // Also don't play if it would destroy own Aura
-            for (Card c : card.getEnchantedBy(false)) {
+            for (Card c : card.getEnchantedBy()) {
                 if ((c.getController().equals(ai)) && (c.isOfColor(cc))) {
                     return false;
                 }

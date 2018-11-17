@@ -106,7 +106,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 final CardStack stack = allLands.get(i);
                 final CardPanel firstPanel = stack.get(0);
                 if (firstPanel.getCard().getCurrentState().getName().equals(state.getName())) {
-                    if (!firstPanel.getAttachedPanels().isEmpty() || firstPanel.getCard().isEnchanted()) {
+                    if (!firstPanel.getAttachedPanels().isEmpty() || firstPanel.getCard().isAttached()) {
                         // Put this land to the left of lands with the same name
                         // and attachments.
                         insertIndex = i;
@@ -114,7 +114,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     }
                     if (!panel.getAttachedPanels().isEmpty()
                             || !panel.getCard().hasSameCounters(firstPanel.getCard())
-                            || firstPanel.getCard().isEnchanted() || (stack.size() == this.landStackMax)) {
+                            || firstPanel.getCard().isAttached() || (stack.size() == this.landStackMax)) {
                         // If this land has attachments or the stack is full,
                         // put it to the right.
                         insertIndex = i + 1;
@@ -683,8 +683,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
         toPanel.getAttachedPanels().clear();
 
-        if (card.isEnchanted()) {
-            final Iterable<CardView> enchants = card.getEnchantedBy();
+        if (card.isAttached()) {
+            final Iterable<CardView> enchants = card.getAttachedBy();
             for (final CardView e : enchants) {
                 final CardPanel cardE = getCardPanel(e.getId());
                 if (cardE != null) {
@@ -697,43 +697,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             }
         }
 
-        if (card.isEquipped()) {
-            final Iterable<CardView> equips = card.getEquippedBy();
-            for (final CardView e : equips) {
-                final CardPanel cardE = getCardPanel(e.getId());
-                if (cardE != null) {
-                    if (cardE.getAttachedToPanel() != toPanel) {
-                        cardE.setAttachedToPanel(toPanel);
-                        needLayoutRefresh = true; //ensure layout refreshed if any attachments change
-                    }
-                    toPanel.getAttachedPanels().add(cardE);
-                }
-            }
-        }
-
-        if (card.isFortified()) {
-            final Iterable<CardView> fortifications = card.getFortifiedBy();
-            for (final CardView f : fortifications) {
-                final CardPanel cardE = getCardPanel(f.getId());
-                if (cardE != null) {
-                    if (cardE.getAttachedToPanel() != toPanel) {
-                        cardE.setAttachedToPanel(toPanel);
-                        needLayoutRefresh = true; //ensure layout refreshed if any attachments change
-                    }
-                    toPanel.getAttachedPanels().add(cardE);
-                }
-            }
-        }
-
         CardPanel attachedToPanel;
-        if (card.getEnchantingCard() != null) {
-            attachedToPanel = getCardPanel(card.getEnchantingCard().getId());
-        }
-        else if (card.getEquipping() != null) {
-            attachedToPanel = getCardPanel(card.getEquipping().getId());
-        }
-        else if (card.getFortifying() != null) {
-            attachedToPanel = getCardPanel(card.getFortifying().getId());
+        if (card.getAttachingCard() != null) {
+            attachedToPanel = getCardPanel(card.getAttachingCard().getId());
         }
         else {
             attachedToPanel = null;

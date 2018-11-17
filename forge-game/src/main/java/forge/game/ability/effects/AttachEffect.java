@@ -27,7 +27,7 @@ public class AttachEffect extends SpellAbilityEffect {
             final Player ap = sa.getActivatingPlayer();
             // The Spell_Permanent (Auras) version of this AF needs to
             // move the card into play before Attaching
-            
+
             sa.getHostCard().setController(ap, 0);
             final Card c = ap.getGame().getAction().moveTo(ap.getZone(ZoneType.Battlefield), sa.getHostCard(), sa);
             sa.setHostCard(c);
@@ -82,7 +82,7 @@ public class AttachEffect extends SpellAbilityEffect {
 
     /**
      * Handle attachment.
-     * 
+     *
      * @param card
      *            the card
      * @param o
@@ -104,12 +104,8 @@ public class AttachEffect extends SpellAbilityEffect {
                 if (c.canBeEnchantedBy(card)) {
                     handleAura(card, c);
                 }
-            } else if (card.isEquipment()) {
-                if(c.canBeEquippedBy(card)) {
-                    card.equipCard(c);
-                }
-            } else if (card.isFortification()) {
-                card.fortifyCard(c);
+            } else  {
+                card.attachEntity(c);
             }
         } else if (o instanceof Player) {
             // Currently, a few cards can enchant players
@@ -124,42 +120,34 @@ public class AttachEffect extends SpellAbilityEffect {
 
     /**
      * Handle aura.
-     * 
+     *
      * @param card
      *            the card
      * @param tgt
      *            the tgt
      */
     public static void handleAura(final Card card, final GameEntity tgt) {
-        if (card.isEnchanting()) {
-            // If this Card is already Enchanting something
-            // Need to unenchant it, then clear out the commands
-            final GameEntity oldEnchanted = card.getEnchanting();
-            oldEnchanted.removeEnchantedBy(card);
-            card.removeEnchanting(oldEnchanted);
-        }
-
         final GameCommand onLeavesPlay = new GameCommand() {
             private static final long serialVersionUID = -639204333673364477L;
 
             @Override
             public void run() {
-                final GameEntity entity = card.getEnchanting();
+                final GameEntity entity = card.getAttaching();
                 if (entity == null) {
                     return;
                 }
 
-                card.unEnchantEntity(entity);
+                card.unAttachEntity(entity);
             }
         }; // Command
 
         card.addLeavesPlayCommand(onLeavesPlay);
-        card.enchantEntity(tgt);
+        card.attachEntity(tgt);
     }
 
     /**
      * Attach aura on indirect enter battlefield.
-     * 
+     *
      * @param source
      *            the source
      * @return true, if successful

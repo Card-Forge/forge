@@ -495,32 +495,10 @@ public class TokenEffect extends SpellAbilityEffect {
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(lki), preList);
 
             // TODO update when doing Attach Update
-            boolean canAttach = lki.isAura() || lki.isEquipment() || lki.isFortification();
+            boolean canAttach = lki.isAttachment();
 
-            if (lki.isAura()) {
-                if (!ge.canBeEnchantedBy(lki)) {
-                    canAttach = false;
-                }
-            }
-            if (lki.isEquipment()) {
-                if (ge instanceof Card) {
-                    Card gc = (Card) ge;
-                    if (!gc.canBeEquippedBy(lki)) {
-                        canAttach = false;
-                    }
-                } else {
-                    canAttach = false;
-                }
-            }
-            if (lki.isFortification()) {
-                if (ge instanceof Card) {
-                    Card gc = (Card) ge;
-                    if (!gc.isLand()) {
-                        canAttach = false;
-                    }
-                } else {
-                    canAttach = false;
-                }
+            if (canAttach && ge.canBeAttachedBy(lki)) {
+                canAttach = false;
             }
 
             // reset static abilities
@@ -531,20 +509,7 @@ public class TokenEffect extends SpellAbilityEffect {
                 return false;
             }
 
-            // TODO update when doing Attach Update
-            if (lki.isAura()) {
-                tok.enchantEntity(ge);
-            } else if (lki.isEquipment()) {
-                if (ge instanceof Card) {
-                    Card gc = (Card) ge;
-                    tok.equipCard(gc);
-                }
-            } else if (lki.isFortification()) {
-                if (ge instanceof Card) {
-                    Card gc = (Card) ge;
-                    tok.fortifyCard(gc);
-                }
-            }
+            tok.attachEntity(ge);
             return true;
         } else {
             // not a GameEntity, cant be attach

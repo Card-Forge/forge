@@ -27,7 +27,7 @@ public abstract class DamageAiBase extends SpellAbilityAi {
         Card hostcard = sa.getHostCard();
         boolean lifelink = hostcard.hasKeyword(Keyword.LIFELINK);
         if (!lifelink) {
-            for (Card ench : hostcard.getEnchantedBy(false)) {
+            for (Card ench : hostcard.getEnchantedBy()) {
                 // Treat cards enchanted by older cards with "when enchanted creature deals damage, gain life" as if they had lifelink.
                 if (ench.hasSVar("LikeLifeLink")) {
                     if ("True".equals(ench.getSVar("LikeLifeLink"))) {

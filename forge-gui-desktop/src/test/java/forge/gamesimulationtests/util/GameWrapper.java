@@ -102,22 +102,16 @@ public class GameWrapper {
         		actualController.getZone( zoneType ).add( actualCard );
         		
         		if( card.getTarget() != null ) {
-        			Card target = CardSpecificationHandler.INSTANCE.find( game, card.getTarget() );
-        			if( actualCard.isEnchantment() ) {
-        				if( target.canBeEnchantedBy( actualCard ) ) {
-        					actualCard.enchantEntity( target );
-        				} else {
-        					throw new IllegalStateException( actualCard + " can't enchant " + target );
-        				}
-        			} else if( actualCard.isEquipment() ) {
-        				if( target.canBeEquippedBy( actualCard ) ) {
-        					actualCard.equipCard( target );
-        				} else {
-        					throw new IllegalStateException( actualCard + " can't equip " + target );
-        				}
-        			} else {
-        				throw new IllegalStateException( "Don't know how to make " + actualCard + " target anything" );
-        			}
+        		    Card target = CardSpecificationHandler.INSTANCE.find( game, card.getTarget() );
+        		    if (actualCard.isAttachment()) {
+        		        if (target.canBeAttachedBy(actualCard)) {
+        		            actualCard.attachEntity(target);
+        		        } else {
+                                    throw new IllegalStateException( actualCard + " can't attach " + target );
+                                }
+        		    } else {
+    				throw new IllegalStateException( "Don't know how to make " + actualCard + " target anything" );
+        		    }
         		}
         		
         		

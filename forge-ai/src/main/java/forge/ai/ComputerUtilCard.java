@@ -585,7 +585,7 @@ public class ComputerUtilCard {
     
             // Add all cost of all auras with the same controller
             if (card.isEnchanted()) {
-                final List<Card> auras = CardLists.filterControlledBy(card.getEnchantedBy(false), card.getController());
+                final List<Card> auras = CardLists.filterControlledBy(card.getEnchantedBy(), card.getController());
                 curCMC += Aggregates.sum(auras, CardPredicates.Accessors.fnGetCmc) + auras.size();
             }
     
@@ -833,7 +833,7 @@ public class ComputerUtilCard {
             int score = tmp.isTapped() ? 2 : 0;
             score += tmp.isBasicLand() ? 1 : 0;
             score -= tmp.isCreature() ? 4 : 0;
-            for (Card aura : tmp.getEnchantedBy(false)) {
+            for (Card aura : tmp.getEnchantedBy()) {
             	if (aura.getController().isOpponentOf(tmp.getController())) {
             		score += 5;
             	} else {
@@ -857,7 +857,7 @@ public class ComputerUtilCard {
             int score = tmp.isTapped() ? 0 : 2;
             score += tmp.isBasicLand() ? 2 : 0;
             score -= tmp.isCreature() ? 4 : 0;
-            score -= 5 * tmp.getEnchantedBy(false).size();
+            score -= 5 * tmp.getEnchantedBy().size();
 
             if (score >= maxScore) {
                 land = tmp;
@@ -1033,7 +1033,7 @@ public class ComputerUtilCard {
         // interrupt 3:  two for one = good
         if (c.isEnchanted()) {
             boolean myEnchants = false;
-            for (Card enc : c.getEnchantedBy(false)) {
+            for (Card enc : c.getEnchantedBy()) {
                 if (enc.getOwner().equals(ai)) {
                     myEnchants = true;
                     break;

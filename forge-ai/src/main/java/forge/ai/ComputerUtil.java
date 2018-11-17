@@ -823,7 +823,7 @@ public class ComputerUtil {
 
         if (c != null && c.isEnchanted()) {
             // TODO: choose "worst" controlled enchanting Aura
-            for (Card aura : c.getEnchantedBy(false)) {
+            for (Card aura : c.getEnchantedBy()) {
                 if (aura.getController().equals(c.getController()) && remaining.contains(aura)) {
                     return aura;
                 }
@@ -2924,7 +2924,7 @@ public class ComputerUtil {
             if (sa.getParam("AITgts").equals("BetterThanSource")) {
                 int value = ComputerUtilCard.evaluateCreature(source);
                 if (source.isEnchanted()) {
-                    for (Card enc : source.getEnchantedBy(false)) {
+                    for (Card enc : source.getEnchantedBy()) {
                         if (enc.getController().equals(ai)) {
                             value += 100; // is 100 per AI's own aura enough?
                         }

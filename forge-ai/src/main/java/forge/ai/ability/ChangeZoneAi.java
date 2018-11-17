@@ -159,7 +159,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return true; // debuffed by opponent's auras to the level that it becomes useless
             }
             int delta = 0;
-            for (Card enc : sa.getHostCard().getEnchantedBy(false)) {
+            for (Card enc : sa.getHostCard().getEnchantedBy()) {
                 if (enc.getController().isOpponentOf(aiPlayer)) {
                     delta--;
                 } else {
@@ -961,7 +961,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 	                list = CardLists.filter(list, new Predicate<Card>() {
 	                    @Override
 	                    public boolean apply(final Card c) {
-	                        for (Card aura : c.getEnchantedBy(false)) {
+	                        for (Card aura : c.getEnchantedBy()) {
 	                            if (aura.getController().isOpponentOf(ai)) {
 	                                return true;
 	                            } else {
@@ -1054,7 +1054,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        for (Card aura : c.getEnchantedBy(false)) {
+                        for (Card aura : c.getEnchantedBy()) {
                             if (c.getOwner().isOpponentOf(ai) && aura.getController().equals(ai)) {
                                 return false;
                             }

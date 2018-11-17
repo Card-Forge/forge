@@ -83,8 +83,8 @@ public class ZoneExchangeEffect extends SpellAbilityEffect {
         }
         // Enchant first
         if (c != null) {
-            object1.unEnchantEntity(c);
-            object2.enchantEntity(c);
+            object1.unAttachEntity(c);
+            object2.attachEntity(c);
         }
         // Exchange Zone
         game.getAction().moveTo(zone2, object1, sa);

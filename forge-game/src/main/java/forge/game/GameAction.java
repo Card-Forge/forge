@@ -36,7 +36,6 @@ import forge.game.replacement.ReplacementResult;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityLayer;
 import forge.game.trigger.Trigger;
@@ -504,45 +503,12 @@ public class GameAction {
     }
 
     private static void unattachCardLeavingBattlefield(final Card copied) {
-        // Handle unequipping creatures
-        if (copied.isEquipped()) {
-            for (final Card equipment : copied.getEquippedBy(true)) {
-                if (equipment.isInPlay()) {
-                    equipment.unEquipCard(copied);
-                }
-            }
-        }
-        // Handle unfortifying lands
-        if (copied.isFortified()) {
-            for (final Card f : copied.getFortifiedBy(true)) {
-                if (f.isInPlay()) {
-                    f.unFortifyCard(copied);
-                }
-            }
-        }
-        // equipment moving off battlefield
-        if (copied.isEquipping()) {
-            final Card equippedCreature = copied.getEquipping();
-            if (equippedCreature.isInPlay()) {
-                copied.unEquipCard(equippedCreature);
-            }
-        }
-        // fortifications moving off battlefield
-        if (copied.isFortifying()) {
-            final Card fortifiedLand = copied.getFortifying();
-            if (fortifiedLand.isInPlay()) {
-                copied.unFortifyCard(fortifiedLand);
-            }
-        }
-        // remove enchantments from creatures
-        if (copied.isEnchanted()) {
-            for (final Card aura : copied.getEnchantedBy(true)) {
-                aura.unEnchantEntity(copied);
-            }
-        }
+        // remove attachments from creatures
+        copied.unAttachAllCards();
+
         // unenchant creature if moving aura
-        if (copied.isEnchanting()) {
-            copied.unEnchantEntity(copied.getEnchanting());
+        if (copied.isAttaching()) {
+            copied.unAttachEntity(copied.getAttaching());
         }
     }
 
@@ -1006,11 +972,10 @@ public class GameAction {
                 }
 
                 checkAgain |= stateBasedAction_Saga(c);
-                checkAgain |= stateBasedAction704_5n(c); // Auras attached to illegal or not attached go to graveyard
-                checkAgain |= stateBasedAction704_5p(c); // Equipment and Fortifications
+                checkAgain |= stateBasedAction704_attach(c); // Attachment
 
-                if (c.isCreature() && c.isEnchanting()) { // Rule 704.5q - Creature attached to an object or player, becomes unattached
-                    c.unEnchantEntity(c.getEnchanting());
+                if (c.isCreature() && c.isAttaching()) { // Rule 704.5q - Creature attached to an object or player, becomes unattached
+                    c.unAttachEntity(c.getAttaching());
                     checkAgain = true;
                 }
 
@@ -1124,106 +1089,30 @@ public class GameAction {
         return checkAgain;
     }
 
-    private boolean stateBasedAction704_5n(Card c) {
+    private boolean stateBasedAction704_attach(Card c) {
         boolean checkAgain = false;
-        if (!c.isAura()) {
-            return false;
-        }
 
-        // Check if Card Aura is attached to is a legal target
-        final GameEntity entity = c.getEnchanting();
-        SpellAbility sa = c.getFirstAttachSpell();
-
-        TargetRestrictions tgt = null;
-        if (sa != null) {
-            tgt = sa.getTargetRestrictions();
-        }
-
-        if (entity instanceof Card) {
-            final Card perm = (Card) entity;
-            final ZoneType tgtZone = tgt.getZone().get(0);
-
-            if (!perm.isInZone(tgtZone) || !perm.canBeEnchantedBy(c, true) || (perm.isPhasedOut() && !c.isPhasedOut())) {
-                c.unEnchantEntity(perm);
-                moveToGraveyard(c, null, null);
-                checkAgain = true;
-            }
-        } else if (entity instanceof Player) {
-            final Player pl = (Player) entity;
-            boolean invalid = false;
-
-            if (!game.getPlayers().contains(pl)) {
-                // lost player can't have Aura on it
-                invalid = true;
-            } else if (tgt.canOnlyTgtOpponent() && !c.getController().isOpponentOf(pl)) {
-                invalid = true;
-            }
-            else if (pl.hasProtectionFrom(c)) {
-                invalid = true;
-            }
-            if (invalid) {
-                c.unEnchantEntity(pl);
-                moveToGraveyard(c, null, null);
+        if (c.isAttaching()) {
+            final GameEntity ge = c.getAttaching();
+            if (!ge.canBeAttachedBy(c)) {
+                c.unAttachEntity(ge);
                 checkAgain = true;
             }
         }
 
-        if (c.isInPlay() && !c.isEnchanting()) {
+        if (c.isAttachedBy()) {
+            for (final Card attach : Lists.newArrayList(c.getAttachedBy())) {
+                if (!attach.isInPlay()) {
+                    attach.unAttachEntity(c);
+                    checkAgain = true;
+                }
+            }
+        }
+
+        // cleanup aura
+        if (c.isAura() && c.isInPlay() && !c.isEnchanting()) {
             moveToGraveyard(c, null, null);
             checkAgain = true;
-        }
-        return checkAgain;
-    }
-
-    private boolean stateBasedAction704_5p(Card c) {
-        boolean checkAgain = false;
-        if (c.isEquipped()) {
-            for (final Card equipment : c.getEquippedBy(true)) {
-                if (!equipment.isInPlay()) {
-                    equipment.unEquipCard(c);
-                    checkAgain = true;
-                }
-            }
-        }
-
-        if (c.isFortified()) {
-            for (final Card f : c.getFortifiedBy(true)) {
-                if (!f.isInPlay()) {
-                    f.unFortifyCard(c);
-                    checkAgain = true;
-                }
-            }
-        }
-
-        if (c.isEquipping()) {
-            final Card equippedCreature = c.getEquipping();
-            if (!equippedCreature.isCreature() || !equippedCreature.isInPlay()
-                    || !equippedCreature.canBeEquippedBy(c)
-                    || (equippedCreature.isPhasedOut() && !c.isPhasedOut())
-                    || !c.isEquipment()) {
-                c.unEquipCard(equippedCreature);
-                checkAgain = true;
-            }
-            // make sure any equipment that has become a creature stops equipping
-            if (c.isCreature()) {
-                c.unEquipCard(equippedCreature);
-                checkAgain = true;
-            }
-        }
-
-        if (c.isFortifying()) {
-            final Card fortifiedLand = c.getFortifying();
-            if (!fortifiedLand.isLand() || !fortifiedLand.isInPlay()
-                    || (fortifiedLand.isPhasedOut() && !c.isPhasedOut())
-                    || !c.isFortification()) {
-                c.unFortifyCard(fortifiedLand);
-                checkAgain = true;
-            }
-            // make sure any fortification that has become a creature stops fortifying
-            if (c.isCreature()) {
-                c.unFortifyCard(fortifiedLand);
-                checkAgain = true;
-            }
         }
         return checkAgain;
     }

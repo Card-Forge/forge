@@ -115,7 +115,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card bear = addCard(bearCardName, p);
         bear.setSickness(false);
         Card cloak = addCard("Whispersilk Cloak", p);
-        cloak.equipCard(bear);
+        cloak.attachEntity(bear);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
         assertEquals(1, bear.getAmountOfKeyword("Unblockable"));
@@ -133,7 +133,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card bear = addCard(bearCardName, p);
         bear.setSickness(false);
         Card lifelink = addCard("Lifelink", p);
-        lifelink.enchantEntity(bear);
+        lifelink.attachEntity(bear);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
         assertEquals(1, bear.getAmountOfKeyword("Lifelink"));
@@ -661,7 +661,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card pridemate = addCard(pridemateName, p1);
         Card indestructibility = addCard(indestructibilityName, p1);
 
-        indestructibility.enchantEntity(pridemate);
+        indestructibility.attachEntity(pridemate);
 
         Card ignition = addCardToZone(ignitionName, p1, ZoneType.Hand);
         SpellAbility ignitionSA = ignition.getFirstSpellAbility();
@@ -681,6 +681,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         // because it was destroyed
         assertNull(simBrood);
+        assertNotNull(simPridemate);
 
         assertEquals(0, simKalitas.getDamage());
         assertEquals(3, simPridemate.getDamage());
@@ -774,7 +775,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card pridemate = addCard(pridemateName, p1);
         Card indestructibility = addCard(indestructibilityName, p1);
 
-        indestructibility.enchantEntity(pridemate);
+        indestructibility.attachEntity(pridemate);
 
         Card ignition = addCardToZone(ignitionName, p1, ZoneType.Hand);
         SpellAbility ignitionSA = ignition.getFirstSpellAbility();
@@ -800,6 +801,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         //destoryed because of to much redirected damage
         assertNull(simPalisade);
+        assertNotNull(simPridemate);
 
         assertEquals(0, simKalitas.getDamage());
         assertEquals(3, simPridemate.getDamage());

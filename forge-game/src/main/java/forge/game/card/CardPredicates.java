@@ -471,6 +471,15 @@ public final class CardPredicates {
             }
         };
         /**
+         * a Predicate<Card> to get all aura.
+         */
+        public static final Predicate<Card> AURA = new Predicate<Card>() {
+            @Override
+            public boolean apply(Card c) {
+                return c.isAura();
+            }
+        };
+        /**
          * a Predicate<Card> to get all equipment.
          */
         public static final Predicate<Card> EQUIPMENT = new Predicate<Card>() {
@@ -482,7 +491,7 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all fortification.
          */
-        public static final Predicate<Card> Fortification = new Predicate<Card>() {
+        public static final Predicate<Card> FORTIFICATION = new Predicate<Card>() {
             @Override
             public boolean apply(Card c) {
                 return c.isFortification();

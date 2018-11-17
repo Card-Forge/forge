@@ -441,48 +441,28 @@ public class CardDetailUtil {
             area.append(")");
         }
 
-        // equipping
-        if (card.getEquipping() != null) {
+        // attached by
+        if (card.isAttached()) {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("=Equipping ");
-            area.append(card.getEquipping());
+            area.append("=Attached by ");
+            area.append(StringUtils.join(card.getAttachedBy(), ", "));
             area.append("=");
         }
 
-        // equipped by
-        if (card.isEquipped()) {
+        // attaching
+        if (card.getAttachingCard() != null) {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("=Equipped by ");
-            area.append(StringUtils.join(card.getEquippedBy(), ", "));
-            area.append("=");
+            area.append("*Attaching ").append(card.getAttachingCard()).append("*");
         }
-
-        // enchanting
-        if (card.getEnchantingCard() != null) {
+        if (card.getAttachingPlayer() != null) {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("*Enchanting ").append(card.getEnchantingCard()).append("*");
-        }
-        if (card.getEnchantingPlayer() != null) {
-            if (area.length() != 0) {
-                area.append("\n");
-            }
-            area.append("*Enchanting ").append(card.getEnchantingPlayer()).append("*");
-        }
-
-        // enchanted by
-        if (card.isEnchanted()) {
-            if (area.length() != 0) {
-                area.append("\n");
-            }
-            area.append("*Enchanted by ");
-            area.append(StringUtils.join(card.getEnchantedBy(), ", "));
-            area.append("*");
+            area.append("*Enchanting ").append(card.getAttachingPlayer()).append("*");
         }
 
         // controlling
