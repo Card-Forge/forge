@@ -1937,6 +1937,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         private SpellAbility lastAddedSA;
         private boolean lastTrigs;
         private boolean lastSummoningSickness;
+        private boolean lastTopOfTheLibrary;
 
         private DevModeCheats() {
         }
@@ -2347,9 +2348,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             game.getAction().invoke(new Runnable() {
                 @Override
                 public void run() {
-                    if (targetZone != ZoneType.Battlefield) {
-                        game.getAction().moveTo(targetZone, forgeCard, null);
-                    } else {
+                    if (targetZone == ZoneType.Battlefield) {
                         if (noTriggers) {
                             if (forgeCard.isPermanent() && !forgeCard.isAura()) {
                                 if (forgeCard.isCreature()) {
@@ -2405,6 +2404,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                             // playSa could fire some triggers
                             game.getStack().addAllTriggeredAbilitiesToStack();
                         }
+                    } else if (targetZone == ZoneType.Library) {
+                        if (!repeatLast) {
+                            lastTopOfTheLibrary = getGui().confirm(forgeCard.getView(),
+                                    TextUtil.concatWithSpace("Should", forgeCard.toString(), "be added to the top or to the bottom of the library?"), true, Arrays.asList("Top", "Bottom"));
+                        }
+                        if (lastTopOfTheLibrary) {
+                            game.getAction().moveToLibrary(forgeCard, null, null);
+                        } else {
+                            game.getAction().moveToBottomOfLibrary(forgeCard, null, null);
+                        }
+                    } else {
+                        game.getAction().moveTo(targetZone, forgeCard, null);
                     }
 
                     lastAdded = f;

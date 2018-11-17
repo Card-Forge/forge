@@ -77,7 +77,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     }
 
     public final void add(final Card c, final Integer index) {
-        add(c, null, null);
+        add(c, index, null);
     }
 
     public void add(final Card c, final Integer index, final Card latestState) {
