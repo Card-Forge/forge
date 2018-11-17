@@ -107,7 +107,7 @@ public class GameWrapper {
         		        if (target.canBeAttachedBy(actualCard)) {
         		            actualCard.attachEntity(target);
         		        } else {
-                                    throw new IllegalStateException( actualCard + " can't attach " + target );
+                                    throw new IllegalStateException( actualCard + " can't attach to " + target );
                                 }
         		    } else {
     				throw new IllegalStateException( "Don't know how to make " + actualCard + " target anything" );

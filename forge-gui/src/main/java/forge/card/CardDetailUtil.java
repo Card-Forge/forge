@@ -446,7 +446,7 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("=Attached by ");
+            area.append("=Attached: ");
             area.append(StringUtils.join(card.getAttachedBy(), ", "));
             area.append("=");
         }
@@ -456,7 +456,7 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("*Attaching ").append(card.getAttachingCard()).append("*");
+            area.append("*Attached to ").append(card.getAttachingCard()).append("*");
         }
         if (card.getAttachingPlayer() != null) {
             if (area.length() != 0) {
