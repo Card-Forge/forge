@@ -220,6 +220,9 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 } else {
                     return false;
                 }
+            } else if (destination.equals(ZoneType.Library) && "Card.YouOwn".equals(sa.getParam("ChangeType"))) {
+                return (ai.getCardsIn(ZoneType.Graveyard).size() > ai.getCardsIn(ZoneType.Library).size())
+                        && !ComputerUtil.isPlayingReanimator(ai);
             }
         } else if (origin.equals(ZoneType.Exile)) {
             String logic = sa.getParam("AILogic");
