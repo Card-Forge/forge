@@ -99,7 +99,7 @@ public class VField extends FContainer {
     };
 
     private boolean tryStackCard(CardView card, List<CardView> cardsOfType) {
-        if (card.isEnchanted() || card.isEquipped()) {
+        if (card.isAttached()) {
             return false; //can stack with enchanted or equipped card
         }
         if (card.getCurrentState().isCreature() && !card.isToken()) {
@@ -107,7 +107,7 @@ public class VField extends FContainer {
         }
         final String cardName = card.getCurrentState().getName();
         for (CardView c : cardsOfType) {
-            if (!c.isEnchanted() && !c.isEquipped() &&
+            if (!c.isAttached() &&
                     cardName.equals(c.getCurrentState().getName()) &&
                     card.hasSameCounters(c) &&
                     card.isToken() == c.isToken()) { //don't stack tokens on top of non-tokens

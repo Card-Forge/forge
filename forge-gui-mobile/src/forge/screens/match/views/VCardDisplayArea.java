@@ -279,8 +279,8 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
             attachedPanels.clear();
 
-            if (card.isEnchanted()) {
-                final Iterable<CardView> enchants = card.getEnchantedBy();
+            if (card.isAttached()) {
+                final Iterable<CardView> enchants = card.getAttachedBy();
                 for (final CardView e : enchants) {
                     final CardAreaPanel cardE = CardAreaPanel.get(e);
                     if (cardE != null) {
@@ -289,34 +289,8 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
                 }
             }
        
-            if (card.isEquipped()) {
-                final Iterable<CardView> enchants = card.getEquippedBy();
-                for (final CardView e : enchants) {
-                    final CardAreaPanel cardE = CardAreaPanel.get(e);
-                    if (cardE != null) {
-                        attachedPanels.add(cardE);
-                    }
-                }
-            }
-
-            if (card.isFortified()) {
-                final Iterable<CardView> fortifications = card.getFortifiedBy();
-                for (final CardView e : fortifications) {
-                    final CardAreaPanel cardE = CardAreaPanel.get(e);
-                    if (cardE != null) {
-                        attachedPanels.add(cardE);
-                    }
-                }
-            }
-
-            if (card.getEnchantingCard() != null) {
-                setAttachedToPanel(CardAreaPanel.get(card.getEnchantingCard()));
-            }
-            else if (card.getEquipping() != null) {
-                setAttachedToPanel(CardAreaPanel.get(card.getEquipping()));
-            }
-            else if (card.getFortifying() != null) {
-                setAttachedToPanel(CardAreaPanel.get(card.getFortifying()));
+            if (card.getAttachingCard() != null) {
+                setAttachedToPanel(CardAreaPanel.get(card.getAttachingCard()));
             }
             else {
                 setAttachedToPanel(null);
