@@ -289,7 +289,7 @@ public class DamageDealAi extends DamageAiBase {
         killables = ComputerUtil.filterAITgts(sa, ai, killables, true);
 
         // Try not to target anything which will already be dead by the time the spell resolves
-        killables = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, killables);
+        killables = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, killables, sa);
 
         Card targetCard = null;
         if (pl.isOpponentOf(ai) && activator.equals(ai) && !killables.isEmpty()) {

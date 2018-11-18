@@ -1780,7 +1780,7 @@ public class ComputerUtil {
      *            A creature to check
      * @return true if the creature dies according to current board position.
      */
-    public static boolean predictCreatureWillDieThisTurn(final Player ai, final Card creature) {
+    public static boolean predictCreatureWillDieThisTurn(final Player ai, final Card creature, final SpellAbility excludeSa) {
         final Game game = creature.getGame();
 
         // a creature will die as a result of combat
@@ -1795,13 +1795,14 @@ public class ComputerUtil {
             // See if permission is on stack and ignore this check if there is and the relevant AI flag is set
             // TODO: improve this so that this flag is not needed and the AI can properly evaluate spells in presence of counterspells.
             for (SpellAbilityStackInstance si : game.getStack()) {
-                if (si.getSpellAbility(false).getApi() == ApiType.Counter) {
+                SpellAbility sa = si.getSpellAbility(false);
+                if (sa.getApi() == ApiType.Counter) {
                     noStackCheck = true;
                     break;
                 }
             }
         }
-        willDieFromSpell = !noStackCheck && ComputerUtil.predictThreatenedObjects(creature.getController(), null).contains(creature);
+        willDieFromSpell = !noStackCheck && ComputerUtil.predictThreatenedObjects(creature.getController(), excludeSa).contains(creature);
 
         return willDieInCombat || willDieFromSpell;
     }
@@ -1817,14 +1818,14 @@ public class ComputerUtil {
      *            The list of cards to work with
      * @return a filtered list with no dying creatures in it
      */
-    public static CardCollection filterCreaturesThatWillDieThisTurn(final Player ai, final CardCollection list) {
+    public static CardCollection filterCreaturesThatWillDieThisTurn(final Player ai, final CardCollection list, final SpellAbility excludeSa) {
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
         if (aic.getBooleanProperty(AiProps.AVOID_TARGETING_CREATS_THAT_WILL_DIE)) {
             // Try to avoid targeting creatures that are dead on board
             List<Card> willBeKilled = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(Card card) {
-                    return card.isCreature() && ComputerUtil.predictCreatureWillDieThisTurn(ai, card);
+                    return card.isCreature() && ComputerUtil.predictCreatureWillDieThisTurn(ai, card, excludeSa);
                 }
             });
             list.removeAll(willBeKilled);

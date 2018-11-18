@@ -670,15 +670,15 @@ public class AiController {
 
     // This is for playing spells regularly (no Cascade/Ripple etc.)
     private AiPlayDecision canPlayAndPayFor(final SpellAbility sa) {
+        if (!ComputerUtilCost.canPayCost(sa, player)) {
+            return AiPlayDecision.CantAfford;
+        }
+
         if (!sa.canPlay()) {
             return AiPlayDecision.CantPlaySa;
         }
 
-        AiPlayDecision op = canPlaySa(sa);
-        if (op != AiPlayDecision.WillPlay) {
-            return op;
-        }
-        return ComputerUtilCost.canPayCost(sa, player) ? AiPlayDecision.WillPlay : AiPlayDecision.CantAfford;
+        return canPlaySa(sa);
     }
 
     public AiPlayDecision canPlaySa(SpellAbility sa) {

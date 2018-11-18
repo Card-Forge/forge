@@ -179,7 +179,7 @@ public class DestroyAi extends SpellAbilityAi {
             }
 
             // Try to avoid targeting creatures that are dead on board
-            list = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, list);
+            list = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, list, sa);
             if (list.isEmpty()) {
                 return false;
             }
@@ -316,7 +316,7 @@ public class DestroyAi extends SpellAbilityAi {
             list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source, sa);
 
             // Try to avoid targeting creatures that are dead on board
-            list = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, list);
+            list = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, list, sa);
 
             if (list.isEmpty() || list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
                 return false;
