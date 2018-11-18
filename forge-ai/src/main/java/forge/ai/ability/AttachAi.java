@@ -56,6 +56,11 @@ public class AttachAi extends SpellAbilityAi {
             }
         }
 
+        if (source.getType().isLegendary() && ai.isCardInPlay(source.getName())) {
+            // Don't play the second copy of a legendary enchantment already in play
+            return false;
+        }
+
         if (ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
                 && !"Curse".equals(sa.getParam("AILogic"))) {
             return false;
