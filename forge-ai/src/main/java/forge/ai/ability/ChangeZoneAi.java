@@ -1733,7 +1733,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
         Map<String, Object> originalParams = (Map<String, Object>)sa.getReplacingObject("OriginalParams");
         SpellAbility causeSa = (SpellAbility)originalParams.get("Cause");
         SpellAbility causeSub = null;
-        
+
+        // Squee, the Immortal: easier to recast it (the call below has to be "contains" since SA is an intrinsic effect)
+        if (sa.getHostCard().getName().contains("Squee, the Immortal")) {
+            return false;
+        }
+
         if (causeSa != null && (causeSub = causeSa.getSubAbility()) != null) {
             ApiType subApi = causeSub.getApi();
             
