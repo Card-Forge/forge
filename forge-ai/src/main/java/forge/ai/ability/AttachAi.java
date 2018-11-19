@@ -4,6 +4,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import forge.ai.*;
 import forge.game.GameObject;
+import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -54,6 +55,16 @@ public class AttachAi extends SpellAbilityAi {
             if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
                 return false;
             }
+        }
+
+        if (!ai.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)
+                && source.getType().isLegendary()
+                && ai.isCardInPlay(source.getName())) {
+            // Don't play the second copy of a legendary enchantment already in play
+
+            // TODO: Add some extra checks for where the AI may want to cast a replacement aura
+            // on another creature and keep it when the original enchanted creature is useless
+            return false;
         }
 
         if (ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
