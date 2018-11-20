@@ -3,6 +3,6 @@ ManaCost:2 R
 Types:Creature Goblin Warrior
 PT:2/2
 K:First Strike
-K:CARDNAME can't be equipped.
+S:Mode$ CantAttach | ValidCard$ Card.Equipment | Target$ Card.Self | Description$ CARDNAME can't be equipped.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_brawler.jpg
 Oracle:First strike\nGoblin Brawler can't be equipped.

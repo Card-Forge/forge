@@ -5162,24 +5162,12 @@ public class Card extends GameEntity implements Comparable<Card> {
         return !(hasKeyword("Other players can't gain control of CARDNAME.") && !getController().equals(newController));
     }
 
-    public final boolean canBeEnchantedBy(final Card aura) {
-        return canBeEnchantedBy(aura, false);
-    }
-
-    public final boolean canBeEnchantedBy(final Card aura, final boolean checkSBA) {
+    @Override
+    protected final boolean canBeEnchantedBy(final Card aura) {
         SpellAbility sa = aura.getFirstAttachSpell();
         TargetRestrictions tgt = null;
         if (sa != null) {
             tgt = sa.getTargetRestrictions();
-        }
-
-        if (aura.isCreature()) {
-            return false;
-        }
-
-        // phase check there
-        if (isPhasedOut() && !aura.isPhasedOut()) {
-            return false;
         }
 
         if (tgt != null) {
@@ -5201,19 +5189,14 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
 
-        return !(hasProtectionFrom(aura, checkSBA)
-                || (hasKeyword("CARDNAME can't be enchanted in the future.") && !isEnchantedBy(aura))
+        return !((hasKeyword("CARDNAME can't be enchanted in the future.") && !isEnchantedBy(aura))
                 || (hasKeyword("CARDNAME can't be enchanted.") && !aura.getName().equals("Anti-Magic Aura")
                 && !(aura.getName().equals("Consecrate Land") && aura.isInZone(ZoneType.Battlefield))));
     }
 
-    public final boolean canBeEquippedBy(final Card equip) {
-        if (!isCreature() || !isInPlay() || equip.isCreature()) {
-            return false;
-        }
-
-        // phase check there
-        if (isPhasedOut() && !equip.isPhasedOut()) {
+    @Override
+    protected final boolean canBeEquippedBy(final Card equip) {
+        if (!isCreature() || !isInPlay()) {
             return false;
         }
 
@@ -5228,20 +5211,29 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         }
-        return !(hasProtectionFrom(equip)
-                || hasKeyword("CARDNAME can't be equipped."));
+        return true;
     }
 
-    public boolean canBeFortifiedBy(final Card fort) {
-        if (!isLand() || !isInPlay() || fort.isCreature() || fort.isLand()) {
+    @Override
+    protected boolean canBeFortifiedBy(final Card fort) {
+        if (!isLand() || !isInPlay() || fort.isLand()) {
             return false;
         }
 
+        return true;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.GameEntity#canBeAttachedBy(forge.game.card.Card, boolean)
+     */
+    @Override
+    public boolean canBeAttachedBy(Card attach, boolean checkSBA) {
         // phase check there
-        if (isPhasedOut() && !fort.isPhasedOut()) {
+        if (isPhasedOut() && !attach.isPhasedOut()) {
             return false;
         }
-        return !hasProtectionFrom(fort);
+
+        return super.canBeAttachedBy(attach, checkSBA);
     }
 
     public FCollectionView<ReplacementEffect> getReplacementEffects() {

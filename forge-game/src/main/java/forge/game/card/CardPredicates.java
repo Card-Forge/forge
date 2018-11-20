@@ -216,20 +216,11 @@ public final class CardPredicates {
         };
     };
 
-    public static final Predicate<Card> canBeEnchantedBy(final Card aura) {
+    public static final Predicate<Card> canBeAttachedBy(final Card aura) {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return c.canBeEnchantedBy(aura);
-            }
-        };
-    };
-
-    public static final Predicate<Card> canBeEquippedBy(final Card eq) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.canBeEquippedBy(eq);
+                return c.canBeAttachedBy(aura);
             }
         };
     };

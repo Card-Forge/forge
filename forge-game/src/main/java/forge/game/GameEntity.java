@@ -29,7 +29,9 @@ import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.ZoneType;
 import forge.util.collect.FCollection;
 
 import java.util.Map;
@@ -372,11 +374,20 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
 
     public boolean canBeAttachedBy(final Card attach, boolean checkSBA) {
         // master mode
-        if (!attach.isAttachment()) {
+        if (!attach.isAttachment() || attach.isCreature()) {
             return false;
         }
 
-        if (attach.isAura() && !canBeEnchantedBy(attach, checkSBA)) {
+        // CantTarget static abilities
+        for (final Card ca : getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (stAb.applyAbility("CantAttach", attach, this)) {
+                    return false;
+                }
+            }
+        }
+
+        if (attach.isAura() && !canBeEnchantedBy(attach)) {
             return false;
         }
         if (attach.isEquipment() && !canBeEquippedBy(attach)) {
@@ -385,21 +396,24 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         if (attach.isFortification() && !canBeFortifiedBy(attach)) {
             return false;
         }
+
+        // true for all
+        if (hasProtectionFrom(attach, checkSBA)) {
+            return false;
+        }
+
         return true;
     }
 
-    public boolean canBeEquippedBy(final Card aura) {
+    protected boolean canBeEquippedBy(final Card aura) {
         return false;
     }
 
-    public boolean canBeFortifiedBy(final Card aura) {
+    protected boolean canBeFortifiedBy(final Card aura) {
         return false;
     }
 
-    public boolean canBeEnchantedBy(final Card aura, final boolean checkSBA) {
-        if (!aura.isAura()) {
-            return false;
-        }
+    protected boolean canBeEnchantedBy(final Card aura) {
 
         SpellAbility sa = aura.getFirstAttachSpell();
         TargetRestrictions tgt = null;
@@ -407,8 +421,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             tgt = sa.getTargetRestrictions();
         }
 
-        return !(hasProtectionFrom(aura, checkSBA)
-                || ((tgt != null) && !isValid(tgt.getValidTgts(), aura.getController(), aura, sa)));
+        return !((tgt != null) && !isValid(tgt.getValidTgts(), aura.getController(), aura, sa));
     }
 
     public boolean hasProtectionFrom(final Card source) {
