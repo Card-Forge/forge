@@ -1,8 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
+import forge.ai.*;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.card.Card;
@@ -79,16 +77,26 @@ public class PermanentCreatureAi extends PermanentAi {
             return false;
         }
 
-        // save cards with flash for surprise blocking
-        if (card.withFlash(ai)
-                && (ai.isUnlimitedHandSize() || ai.getCardsIn(ZoneType.Hand).size() <= ai.getMaxHandSize()
-                        || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
-                && ai.getManaPool().totalMana() <= 0
-                && (ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS))
-                && (!card.hasETBTrigger(true) || card.hasSVar("AmbushAI")) && game.getStack().isEmpty()
-                && !ComputerUtil.castPermanentInMain1(ai, sa)) {
-            // AiPlayDecision.AnotherTime;
-            return false;
+        // Flash logic
+        boolean advancedFlash = false;
+        if (ai.getController().isAI()) {
+            advancedFlash = ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.FLASH_ENABLE_ADVANCED_LOGIC);
+        }
+        if (advancedFlash) {
+
+        } else {
+            // save cards with flash for surprise blocking
+            if (card.withFlash(ai)
+                    && (ai.isUnlimitedHandSize() || ai.getCardsIn(ZoneType.Hand).size() <= ai.getMaxHandSize()
+                    || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
+                    && ai.getManaPool().totalMana() <= 0
+                    && (ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS))
+                    && (!card.hasETBTrigger(true) && !card.hasSVar("AmbushAI"))
+                    && game.getStack().isEmpty()
+                    && !ComputerUtil.castPermanentInMain1(ai, sa)) {
+                // AiPlayDecision.AnotherTime;
+                return false;
+            }
         }
 
         return super.checkPhaseRestrictions(ai, sa, ph);

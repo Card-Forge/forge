@@ -113,7 +113,8 @@ public enum AiProps { /** */
     MOJHOSTO_CHANCE_TO_PREFER_JHOIRA_OVER_MOMIR ("50"), /** */
     MOJHOSTO_CHANCE_TO_USE_JHOIRA_COPY_INSTANT ("20"), /** */
     AI_IN_DANGER_THRESHOLD("4"), /** */
-    AI_IN_DANGER_MAX_THRESHOLD("4"); /** */
+    AI_IN_DANGER_MAX_THRESHOLD("4"), /** */
+    FLASH_ENABLE_ADVANCED_LOGIC("true"); /** */
     // Experimental features, must be promoted or removed after extensive testing and, ideally, defaulting
     // <-- There are no experimental options here -->
 
