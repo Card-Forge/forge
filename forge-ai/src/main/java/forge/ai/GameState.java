@@ -1004,6 +1004,12 @@ public abstract class GameState {
     private void setupPlayerState(int life, Map<ZoneType, String> cardTexts, final Player p, final int landsPlayed, final int landsPlayedLastTurn) {
         // Lock check static as we setup player state
 
+        // Clear all zones first, this ensures that any lingering cards and effects (e.g. in command zone) get cleared up
+        // before setting up a new state
+        for (ZoneType zt : ZONES.keySet()) {
+            p.getZone(zt).removeAllCards(true);
+        }
+
         Map<ZoneType, CardCollectionView> playerCards = new EnumMap<ZoneType, CardCollectionView>(ZoneType.class);
         for (Entry<ZoneType, String> kv : cardTexts.entrySet()) {
             String value = kv.getValue();

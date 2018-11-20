@@ -141,6 +141,19 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.ComplexUpdate, null));
     }
 
+    public final void removeAllCards(boolean forcedWithoutEvents) {
+        if (forcedWithoutEvents) {
+            cardList.clear();
+        } else {
+            for (Card c : cardList) {
+                if (cardList.remove(c)) {
+                    onChanged();
+                    game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Removed, c));
+                }
+            }
+        }
+    }
+
     public final boolean is(final ZoneType zone) {
         return zone == zoneType;
     }
