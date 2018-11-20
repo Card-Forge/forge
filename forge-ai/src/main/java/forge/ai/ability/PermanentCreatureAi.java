@@ -83,7 +83,7 @@ public class PermanentCreatureAi extends PermanentAi {
             advancedFlash = ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.FLASH_ENABLE_ADVANCED_LOGIC);
         }
         if (advancedFlash) {
-
+            return doAdvancedFlashLogic(card, ai, sa);
         } else {
             // save cards with flash for surprise blocking
             if (card.withFlash(ai)
@@ -100,6 +100,22 @@ public class PermanentCreatureAi extends PermanentAi {
         }
 
         return super.checkPhaseRestrictions(ai, sa, ph);
+    }
+
+    private boolean doAdvancedFlashLogic(Card card, Player ai, SpellAbility sa) {
+        PhaseHandler ph = ai.getGame().getPhaseHandler();
+
+        boolean hasETBTrigger = card.hasETBTrigger(true);
+        boolean hasAmbushAI = card.hasSVar("AmbushAI");
+        boolean hasFloatMana = ai.getManaPool().totalMana() > 0;
+        boolean willDiscardNow = ph.is(PhaseType.END_OF_TURN, ai) && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize();
+        boolean wantToCastInMain1 = ph.is(PhaseType.MAIN1, ai) && ComputerUtil.castPermanentInMain1(ai, sa);
+        boolean valuableBlocker = false; // TODO: implement this
+
+        boolean isOwnEOT = ph.is(PhaseType.END_OF_TURN, ai);
+        boolean isEOTBeforeMyTurn = ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai);
+
+        return true;
     }
 
     @Override
