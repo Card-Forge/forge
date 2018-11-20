@@ -31,6 +31,8 @@ public class ManaEffectAi extends SpellAbilityAi {
     protected boolean checkAiLogic(Player ai, SpellAbility sa, String aiLogic) {
         if ("ManaRitual".equals(aiLogic)) {
             return doManaRitualLogic(ai, sa);
+        } else if ("Always".equals(aiLogic)) {
+            return true;
         }
         return super.checkAiLogic(ai, sa, aiLogic);
     }
