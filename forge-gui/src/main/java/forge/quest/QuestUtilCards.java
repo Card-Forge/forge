@@ -309,7 +309,7 @@ public final class QuestUtilCards {
      */
     public void setupNewGameCardPool(final GameFormat formatStartingPool, final int idxDifficulty, final StartingPoolPreferences userPrefs) {
         //Add additional cards to the starter card pool based on variant if applicable
-        double variantModifier = 0;
+        double variantModifier = 1;
         switch(FModel.getQuest().getDeckConstructionRules()){
             case Default: break;
             case Commander: variantModifier = 2; break;
