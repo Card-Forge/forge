@@ -112,10 +112,35 @@ public class PermanentCreatureAi extends PermanentAi {
         boolean wantToCastInMain1 = ph.is(PhaseType.MAIN1, ai) && ComputerUtil.castPermanentInMain1(ai, sa);
         boolean valuableBlocker = false; // TODO: implement this
 
+        boolean isOppTurn = ph.getPlayerTurn().isOpponentOf(ai);
         boolean isOwnEOT = ph.is(PhaseType.END_OF_TURN, ai);
         boolean isEOTBeforeMyTurn = ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai);
+        boolean isOppDeclareAttackers = ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS) && isOppTurn && ai.getGame().getCombat() != null;
+        boolean isMyDeclareAttackers = ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai) && ai.getGame().getCombat() != null;
+        boolean isMyMain1OrLater = ph.is(PhaseType.MAIN1, ai) || (ph.getPhase().isAfter(PhaseType.MAIN1) && ph.getPlayerTurn().equals(ai));
 
-        return true;
+        if (hasFloatMana || willDiscardNow) {
+            // Will lose mana in pool or about to discard a card in cleanup, so use this opportunity
+            return true;
+        } else if (wantToCastInMain1 && isMyMain1OrLater) {
+            // Would rather cast it in Main 1 or as soon as possible anyway, so go for it
+            return true;
+        } else if (!hasETBTrigger && !hasAmbushAI) {
+            // Doesn't have a ETB trigger and doesn't seem to be good as an ambusher, try to surprise the opp before my turn
+            // TODO: maybe implement a way to reserve mana for this
+            return isEOTBeforeMyTurn;
+        } else if (hasAmbushAI) {
+            // Is an ambusher, so try to hold for combat if possible
+            // TODO: implement a chance here
+            return isOppDeclareAttackers;
+        } else if (hasETBTrigger) {
+            // Instant speed is good when a card has an ETB trigger, but prolly don't cast in own turn before Main 1 not
+            // to mana lock ourselves or lose other options
+            // TODO: implement a chance here
+            return isMyMain1OrLater || isOppTurn;
+        }
+
+        return false;
     }
 
     @Override
