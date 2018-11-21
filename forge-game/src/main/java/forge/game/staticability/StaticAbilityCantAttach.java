@@ -17,6 +17,18 @@ public class StaticAbilityCantAttach {
                && !target.isValid(stAb.getParam("Target").split(","), hostCard.getController(), hostCard, null)) {
            return false;
        }
+
+       if (stAb.hasParam("ValidCardToTarget")) {
+           if (!(target instanceof Card)) {
+               return false;
+           }
+           Card tcard = (Card) target;
+
+           if (!card.isValid(stAb.getParam("ValidCardToTarget").split(","), tcard.getController(), tcard, null)) {
+               return false;
+           }
+       }
+
        return true;
     }
 }

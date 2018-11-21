@@ -5188,9 +5188,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
 
-        return !((hasKeyword("CARDNAME can't be enchanted in the future.") && !isEnchantedBy(aura))
-                || (hasKeyword("CARDNAME can't be enchanted.") && !aura.getName().equals("Anti-Magic Aura")
-                && !(aura.getName().equals("Consecrate Land") && aura.isInZone(ZoneType.Battlefield))));
+        return true;
     }
 
     @Override
