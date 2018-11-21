@@ -1460,8 +1460,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         int i = 0;
         for (KeywordInterface inst : keywords) {
             String keyword = inst.getOriginal();
-            if (keyword.startsWith("CantEquip")
-                    || keyword.startsWith("SpellCantTarget")) {
+            if (keyword.startsWith("SpellCantTarget")) {
                 continue;
             }
             // format text changes
@@ -5199,18 +5198,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (!isCreature() || !isInPlay()) {
             return false;
         }
-
-        for(KeywordInterface inst : equip.getKeywords()) {
-            String kw = inst.getOriginal();
-            if(!kw.startsWith("CantEquip")) {
-                continue;
-            }
-            final String[] k = kw.split(":");
-            final String[] restrictions = k[1].split(",");
-            if (isValid(restrictions, equip.getController(), equip, null)) {
-                return false;
-            }
-        }
         return true;
     }
 
@@ -5219,7 +5206,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (!isLand() || !isInPlay() || fort.isLand()) {
             return false;
         }
-
         return true;
     }
 
