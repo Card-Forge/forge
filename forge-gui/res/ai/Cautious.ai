@@ -150,6 +150,27 @@ TOKEN_GENERATION_ABILITY_CHANCE=80
 # Situations where the AI should always use the token-generation abilities if possible
 TOKEN_GENERATION_ALWAYS_IF_FROM_PLANESWALKER=true
 TOKEN_GENERATION_ALWAYS_IF_OPP_ATTACKS=true
+# Flash AI toggles
+# Master toggle: if enabled, a more advanced Flash consideration logic will be enabled (probably slower),
+# which will also enable all the following toggles.
+FLASH_ENABLE_ADVANCED_LOGIC=true
+# The chance the AI will obey SVar AmbushAI to try to surprise the opponent after the attack is declared
+# (e.g. Hixus, Prison Warden)
+FLASH_CHANCE_TO_OBEY_AMBUSHAI=100
+# The chance the AI will cast the Flash creature at instant speed purely for the fact that it has a ETB effect.
+FLASH_CHANCE_TO_CAST_DUE_TO_ETB_EFFECTS=100
+# The chance the AI may cast the Flash creature with ETB effects even earlier than its own Main 1 to try to benefit
+# from the ETB effect (most likely suboptimal and many mana lock the AI, so keep this at a lower chance normally).
+FLASH_CHANCE_TO_CAST_FOR_ETB_BEFORE_MAIN1=0
+# The chance the AI may cast the Flash creature with ETB effects in response to an opposing spell on stack.
+# Quite basic right now, and may do stupid things more often than not, so better left disabled until improved
+# (or at a low chance).
+FLASH_CHANCE_TO_RESPOND_TO_STACK_WITH_ETB=0
+# The chance the AI will attempt to add a new blocker in combat where it's low on creature count compared to the
+# number of attacking creatures.
+FLASH_CHANCE_TO_CAST_AS_VALUABLE_BLOCKER=100
+# The chance that the AI will try to hold off playing auras with Flash until the declare blockers step in combat.
+FLASH_CHANCE_TO_USE_AURAS_AS_COMBAT_TRICKS=90
 
 # Scry AI toggles
 # The total number of mana-producing lands at which the AI will still consider scrying away non-lands

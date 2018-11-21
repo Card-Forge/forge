@@ -1,17 +1,22 @@
 package forge.ai.ability;
 
+import com.google.common.base.Predicate;
 import forge.ai.*;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
+import forge.game.combat.Combat;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.MyRandom;
 
-/** 
+/**
  * AbilityFactory for Creature Spells.
  *
  */
@@ -82,20 +87,21 @@ public class PermanentCreatureAi extends PermanentAi {
         if (ai.getController().isAI()) {
             advancedFlash = ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.FLASH_ENABLE_ADVANCED_LOGIC);
         }
-        if (advancedFlash) {
-            return doAdvancedFlashLogic(card, ai, sa);
-        } else {
-            // save cards with flash for surprise blocking
-            if (card.withFlash(ai)
-                    && (ai.isUnlimitedHandSize() || ai.getCardsIn(ZoneType.Hand).size() <= ai.getMaxHandSize()
-                    || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
-                    && ai.getManaPool().totalMana() <= 0
-                    && (ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS))
-                    && (!card.hasETBTrigger(true) && !card.hasSVar("AmbushAI"))
-                    && game.getStack().isEmpty()
-                    && !ComputerUtil.castPermanentInMain1(ai, sa)) {
-                // AiPlayDecision.AnotherTime;
-                return false;
+        if (card.withFlash(ai)) {
+            if (advancedFlash) {
+                return doAdvancedFlashLogic(card, ai, sa);
+            } else {
+                // save cards with flash for surprise blocking
+                if ((ai.isUnlimitedHandSize() || ai.getCardsIn(ZoneType.Hand).size() <= ai.getMaxHandSize()
+                        || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
+                        && ai.getManaPool().totalMana() <= 0
+                        && (ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS))
+                        && (!card.hasETBTrigger(true) && !card.hasSVar("AmbushAI"))
+                        && game.getStack().isEmpty()
+                        && !ComputerUtil.castPermanentInMain1(ai, sa)) {
+                    // AiPlayDecision.AnotherTime;
+                    return false;
+                }
             }
         }
 
@@ -103,14 +109,10 @@ public class PermanentCreatureAi extends PermanentAi {
     }
 
     private boolean doAdvancedFlashLogic(Card card, Player ai, SpellAbility sa) {
-        PhaseHandler ph = ai.getGame().getPhaseHandler();
-
-        boolean hasETBTrigger = card.hasETBTrigger(true);
-        boolean hasAmbushAI = card.hasSVar("AmbushAI");
-        boolean hasFloatMana = ai.getManaPool().totalMana() > 0;
-        boolean willDiscardNow = ph.is(PhaseType.END_OF_TURN, ai) && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize();
-        boolean wantToCastInMain1 = ph.is(PhaseType.MAIN1, ai) && ComputerUtil.castPermanentInMain1(ai, sa);
-        boolean valuableBlocker = false; // TODO: implement this
+        Game game = ai.getGame();
+        PhaseHandler ph = game.getPhaseHandler();
+        Combat combat = game.getCombat();
+        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
 
         boolean isOppTurn = ph.getPlayerTurn().isOpponentOf(ai);
         boolean isOwnEOT = ph.is(PhaseType.END_OF_TURN, ai);
@@ -118,29 +120,71 @@ public class PermanentCreatureAi extends PermanentAi {
         boolean isOppDeclareAttackers = ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS) && isOppTurn && ai.getGame().getCombat() != null;
         boolean isMyDeclareAttackers = ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai) && ai.getGame().getCombat() != null;
         boolean isMyMain1OrLater = ph.is(PhaseType.MAIN1, ai) || (ph.getPhase().isAfter(PhaseType.MAIN1) && ph.getPlayerTurn().equals(ai));
+        boolean canRespondToStack = false;
+        if (!game.getStack().isEmpty()) {
+            SpellAbility peekSa = game.getStack().peekAbility();
+            Player activator = peekSa.getActivatingPlayer();
+            if (activator != null && activator.isOpponentOf(ai)
+                    && (peekSa.getApi() != ApiType.DestroyAll || peekSa.getApi() == ApiType.Counter)) {
+                canRespondToStack = true;
+            }
+        }
+
+        boolean hasETBTrigger = card.hasETBTrigger(true);
+        boolean hasAmbushAI = card.hasSVar("AmbushAI");
+        boolean hasFloatMana = ai.getManaPool().totalMana() > 0;
+        boolean willDiscardNow = isOwnEOT && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize();
+        boolean wantToCastInMain1 = ph.is(PhaseType.MAIN1, ai) && ComputerUtil.castPermanentInMain1(ai, sa);
+
+        // figure out if the card might be a valuable blocker
+        boolean valuableBlocker = false;
+        if (combat != null && combat.getDefendingPlayers().contains(ai)) {
+            // Currently we use a rather simplistic assumption that if we're behind on creature count on board,
+            // a flashed in creature might prove to be good as an additional defender
+            int numUntappedPotentialBlockers = CardLists.filter(ai.getCreaturesInPlay(), new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card card) {
+                    return card.isUntapped() && !ComputerUtilCard.isUselessCreature(ai, card);
+                }
+            }).size();
+
+            if (combat.getAttackersOf(ai).size() > numUntappedPotentialBlockers) {
+                valuableBlocker = true;
+            }
+        }
+
+        int chanceToObeyAmbushAI = aic.getIntProperty(AiProps.FLASH_CHANCE_TO_OBEY_AMBUSHAI);
+        int chanceToAddBlocker = aic.getIntProperty(AiProps.FLASH_CHANCE_TO_CAST_AS_VALUABLE_BLOCKER);
+        int chanceToCastForETB = aic.getIntProperty(AiProps.FLASH_CHANCE_TO_CAST_DUE_TO_ETB_EFFECTS);
+        int chanceToRespondToStack = aic.getIntProperty(AiProps.FLASH_CHANCE_TO_RESPOND_TO_STACK_WITH_ETB);
+        int chanceToProcETBBeforeMain1 = aic.getIntProperty(AiProps.FLASH_CHANCE_TO_CAST_FOR_ETB_BEFORE_MAIN1);
 
         if (hasFloatMana || willDiscardNow) {
             // Will lose mana in pool or about to discard a card in cleanup, so use this opportunity
             return true;
-        } else if (wantToCastInMain1 && isMyMain1OrLater) {
+        } else if (wantToCastInMain1) {
             // Would rather cast it in Main 1 or as soon as possible anyway, so go for it
+            return isMyMain1OrLater;
+        } else if (hasAmbushAI && MyRandom.percentTrue(chanceToObeyAmbushAI)) {
+            // Is an ambusher, so try to hold for declare blockers in combat where the AI defends, if possible
+            return isOppDeclareAttackers;
+        } else if (valuableBlocker && isOppDeclareAttackers && MyRandom.percentTrue(chanceToAddBlocker)) {
+            // Might serve as a valuable blocker in a combat where we are behind on untapped blockers
             return true;
-        } else if (!hasETBTrigger && !hasAmbushAI) {
+        } else if (hasETBTrigger && MyRandom.percentTrue(chanceToCastForETB)) {
+            // Instant speed is good when a card has an ETB trigger, but prolly don't cast in own turn before Main 1 not
+            // to mana lock the AI or lose the chance to consider other options. Try to utilize it as a response to stack
+            // if possible.
+            return isMyMain1OrLater || isOppTurn || MyRandom.percentTrue(chanceToProcETBBeforeMain1);
+        } else if (hasETBTrigger && canRespondToStack && MyRandom.percentTrue(chanceToRespondToStack)) {
+            // Try to do something meaningful in response to an opposing effect on stack. Note that this is currently
+            // too random to likely be meaningful, serious improvement might be needed.
+            return true;
+        } else {
             // Doesn't have a ETB trigger and doesn't seem to be good as an ambusher, try to surprise the opp before my turn
             // TODO: maybe implement a way to reserve mana for this
             return isEOTBeforeMyTurn;
-        } else if (hasAmbushAI) {
-            // Is an ambusher, so try to hold for combat if possible
-            // TODO: implement a chance here
-            return isOppDeclareAttackers;
-        } else if (hasETBTrigger) {
-            // Instant speed is good when a card has an ETB trigger, but prolly don't cast in own turn before Main 1 not
-            // to mana lock ourselves or lose other options
-            // TODO: implement a chance here
-            return isMyMain1OrLater || isOppTurn;
         }
-
-        return false;
     }
 
     @Override

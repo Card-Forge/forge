@@ -3,6 +3,7 @@ package forge.ai.ability;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import forge.ai.*;
+import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityFactory;
@@ -45,6 +46,22 @@ public class AttachAi extends SpellAbilityAi {
         // and gaining card advantage
         if (source.hasKeyword("MayFlashSac") && !ai.couldCastSorcery(sa)) {
             return false;
+        }
+
+        // Flash logic
+        boolean advancedFlash = false;
+        if (ai.getController().isAI()) {
+            advancedFlash = ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.FLASH_ENABLE_ADVANCED_LOGIC);
+        }
+        if (source.withFlash(ai) && source.isAura()) {
+            if (advancedFlash) {
+                Game game = ai.getGame();
+                Combat combat = game.getCombat();
+
+                if (combat == null || game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                    return false;
+                }
+            }
         }
 
         if (abCost != null) {
