@@ -26,6 +26,7 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.MyRandom;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -53,15 +54,8 @@ public class AttachAi extends SpellAbilityAi {
         if (ai.getController().isAI()) {
             advancedFlash = ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.FLASH_ENABLE_ADVANCED_LOGIC);
         }
-        if (source.withFlash(ai) && source.isAura()) {
-            if (advancedFlash) {
-                Game game = ai.getGame();
-                Combat combat = game.getCombat();
-
-                if (combat == null || game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-                    return false;
-                }
-            }
+        if (source.withFlash(ai) && source.isAura() && advancedFlash && !doAdvancedFlashAuraLogic(ai)) {
+            return false;
         }
 
         if (abCost != null) {
@@ -131,6 +125,44 @@ public class AttachAi extends SpellAbilityAi {
             }
         }
         
+        return true;
+    }
+
+    private boolean doAdvancedFlashAuraLogic(Player ai) {
+        Game game = ai.getGame();
+        Combat combat = game.getCombat();
+        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+        boolean canRespondToStack = false;
+        if (!game.getStack().isEmpty()) {
+            SpellAbility peekSa = game.getStack().peekAbility();
+            Player activator = peekSa.getActivatingPlayer();
+            if (activator != null && activator.isOpponentOf(ai) && peekSa.getApi() != ApiType.DestroyAll &&
+                    peekSa.getApi() != ApiType.Destroy) {
+                // TODO: improve this so that the AI predicts how much damage will be dealt to the creature
+                // so that it can try to save it (and won't bother targeting it if it can't be saved)
+                canRespondToStack = true;
+            }
+        }
+
+        boolean useAurasAsTricks = aic.getBooleanProperty(AiProps.FLASH_USE_AURAS_AS_COMBAT_TRICKS);
+        int chanceToCastAtEOT = aic.getIntProperty(AiProps.FLASH_AURA_CHANCE_CAST_AT_EOT);
+        int chanceToCastEarly = aic.getIntProperty(AiProps.FLASH_AURA_CHANCE_TO_CAST_EARLY);
+        int chanceToRespondToStack = aic.getIntProperty(AiProps.FLASH_AURA_CHANCE_TO_RESPOND_TO_STACK);
+
+        boolean hasFloatMana = ai.getManaPool().totalMana() > 0;
+        boolean willDiscardNow = game.getPhaseHandler().is(PhaseType.END_OF_TURN, ai)
+                && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize();
+        boolean willRespondToStack = canRespondToStack && MyRandom.percentTrue(chanceToRespondToStack);
+        boolean willCastEarly = MyRandom.percentTrue(chanceToCastEarly);
+        boolean willCastAtEOT = game.getPhaseHandler().is(PhaseType.END_OF_TURN)
+                && game.getPhaseHandler().getNextTurn().equals(ai) && MyRandom.percentTrue(chanceToCastAtEOT) || !useAurasAsTricks;
+
+        boolean alternativeConsiderations = hasFloatMana || willDiscardNow || willRespondToStack || willCastAtEOT || willCastEarly;
+
+        if (!alternativeConsiderations && (combat == null || game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
+            return false;
+        }
+
         return true;
     }
 

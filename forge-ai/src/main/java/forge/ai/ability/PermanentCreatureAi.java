@@ -118,14 +118,12 @@ public class PermanentCreatureAi extends PermanentAi {
         boolean isOwnEOT = ph.is(PhaseType.END_OF_TURN, ai);
         boolean isEOTBeforeMyTurn = ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai);
         boolean isOppDeclareAttackers = ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS) && isOppTurn && ai.getGame().getCombat() != null;
-        boolean isMyDeclareAttackers = ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai) && ai.getGame().getCombat() != null;
         boolean isMyMain1OrLater = ph.is(PhaseType.MAIN1, ai) || (ph.getPhase().isAfter(PhaseType.MAIN1) && ph.getPlayerTurn().equals(ai));
         boolean canRespondToStack = false;
         if (!game.getStack().isEmpty()) {
             SpellAbility peekSa = game.getStack().peekAbility();
             Player activator = peekSa.getActivatingPlayer();
-            if (activator != null && activator.isOpponentOf(ai)
-                    && (peekSa.getApi() != ApiType.DestroyAll || peekSa.getApi() == ApiType.Counter)) {
+            if (activator != null && activator.isOpponentOf(ai) && peekSa.getApi() != ApiType.DestroyAll) {
                 canRespondToStack = true;
             }
         }
