@@ -117,6 +117,7 @@ public class PermanentCreatureAi extends PermanentAi {
         boolean isOppTurn = ph.getPlayerTurn().isOpponentOf(ai);
         boolean isOwnEOT = ph.is(PhaseType.END_OF_TURN, ai);
         boolean isEOTBeforeMyTurn = ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai);
+        boolean isMyDeclareBlockers = ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS, ai) && ai.getGame().getCombat() != null;
         boolean isOppDeclareAttackers = ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS) && isOppTurn && ai.getGame().getCombat() != null;
         boolean isMyMain1OrLater = ph.is(PhaseType.MAIN1, ai) || (ph.getPhase().isAfter(PhaseType.MAIN1) && ph.getPlayerTurn().equals(ai));
         boolean canRespondToStack = false;
@@ -131,6 +132,7 @@ public class PermanentCreatureAi extends PermanentAi {
 
         boolean hasETBTrigger = card.hasETBTrigger(true);
         boolean hasAmbushAI = card.hasSVar("AmbushAI");
+        boolean defOnlyAmbushAI = hasAmbushAI && "BlockOnly".equals(card.getSVar("AmbushAI"));
         boolean hasFloatMana = ai.getManaPool().totalMana() > 0;
         boolean willDiscardNow = isOwnEOT && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize();
         boolean wantToCastInMain1 = ph.is(PhaseType.MAIN1, ai) && ComputerUtil.castPermanentInMain1(ai, sa);
@@ -166,7 +168,7 @@ public class PermanentCreatureAi extends PermanentAi {
             return isMyMain1OrLater;
         } else if (hasAmbushAI && MyRandom.percentTrue(chanceToObeyAmbushAI)) {
             // Is an ambusher, so try to hold for declare blockers in combat where the AI defends, if possible
-            return isOppDeclareAttackers;
+            return defOnlyAmbushAI ? isOppDeclareAttackers : (isOppDeclareAttackers || isMyDeclareBlockers);
         } else if (valuableBlocker && isOppDeclareAttackers && MyRandom.percentTrue(chanceToAddBlocker)) {
             // Might serve as a valuable blocker in a combat where we are behind on untapped blockers
             return true;
