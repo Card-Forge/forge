@@ -27,6 +27,7 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 import forge.util.MyRandom;
 
 import java.util.ArrayList;
@@ -190,6 +191,29 @@ public class AttachAi extends SpellAbilityAi {
                     }
                 }
             }
+        }
+
+        boolean canSurviveCombat = true;
+        if (combat != null && combat.isBlocked(attachTarget)) {
+            if (!attachTarget.hasKeyword(Keyword.INDESTRUCTIBLE) && !ComputerUtil.canRegenerate(ai, attachTarget)) {
+                boolean dangerous = false;
+                int totalAtkPower = 0;
+                for (Card attacker : combat.getBlockers(attachTarget)) {
+                    if (attacker.hasKeyword(Keyword.DEATHTOUCH) || attacker.hasKeyword(Keyword.INFECT)
+                            || attacker.hasKeyword(Keyword.WITHER)) {
+                        dangerous = true;
+                    }
+                    totalAtkPower += attacker.getNetPower();
+                }
+                if (totalAtkPower > attachTarget.getNetToughness() + toughness || dangerous) {
+                    canSurviveCombat = false;
+                }
+            }
+        }
+
+        if (!canSurviveCombat) {
+            // don't buff anything that will die or get seriously crippled in combat
+            return false;
         }
 
         int chanceToCastAtEOT = aic.getIntProperty(AiProps.FLASH_BUFF_AURA_CHANCE_CAST_AT_EOT);
