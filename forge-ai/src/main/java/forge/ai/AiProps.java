@@ -113,7 +113,17 @@ public enum AiProps { /** */
     MOJHOSTO_CHANCE_TO_PREFER_JHOIRA_OVER_MOMIR ("50"), /** */
     MOJHOSTO_CHANCE_TO_USE_JHOIRA_COPY_INSTANT ("20"), /** */
     AI_IN_DANGER_THRESHOLD("4"), /** */
-    AI_IN_DANGER_MAX_THRESHOLD("4"); /** */
+    AI_IN_DANGER_MAX_THRESHOLD("4"), /** */
+    FLASH_ENABLE_ADVANCED_LOGIC("true"), /** */
+    FLASH_CHANCE_TO_OBEY_AMBUSHAI("100"), /** */
+    FLASH_CHANCE_TO_CAST_DUE_TO_ETB_EFFECTS("100"), /** */
+    FLASH_CHANCE_TO_CAST_FOR_ETB_BEFORE_MAIN1("10"), /** */
+    FLASH_CHANCE_TO_RESPOND_TO_STACK_WITH_ETB("0"), /** */
+    FLASH_CHANCE_TO_CAST_AS_VALUABLE_BLOCKER("100"),
+    FLASH_USE_BUFF_AURAS_AS_COMBAT_TRICKS("true"),
+    FLASH_BUFF_AURA_CHANCE_TO_CAST_EARLY("1"),
+    FLASH_BUFF_AURA_CHANCE_CAST_AT_EOT("5"),
+    FLASH_BUFF_AURA_CHANCE_TO_RESPOND_TO_STACK("100"); /** */
     // Experimental features, must be promoted or removed after extensive testing and, ideally, defaulting
     // <-- There are no experimental options here -->
 

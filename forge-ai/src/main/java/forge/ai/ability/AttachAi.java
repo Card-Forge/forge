@@ -2,7 +2,9 @@ package forge.ai.ability;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Lists;
 import forge.ai.*;
+import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityFactory;
@@ -25,6 +27,7 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.MyRandom;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -86,6 +89,15 @@ public class AttachAi extends SpellAbilityAi {
             }
         }
 
+        // Flash logic
+        boolean advancedFlash = false;
+        if (ai.getController().isAI()) {
+            advancedFlash = ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.FLASH_ENABLE_ADVANCED_LOGIC);
+        }
+        if (source.withFlash(ai) && source.isAura() && advancedFlash && !doAdvancedFlashAuraLogic(ai, sa, sa.getTargetCard())) {
+            return false;
+        }
+
         if (abCost.getTotalMana().countX() > 0 && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value. (Endless Scream and Venarian
             // Gold)
@@ -114,6 +126,114 @@ public class AttachAi extends SpellAbilityAi {
             }
         }
         
+        return true;
+    }
+
+    private boolean doAdvancedFlashAuraLogic(Player ai, SpellAbility sa, Card attachTarget) {
+        Card source = sa.getHostCard();
+        Game game = ai.getGame();
+        Combat combat = game.getCombat();
+        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+
+        if (!aic.getBooleanProperty(AiProps.FLASH_USE_BUFF_AURAS_AS_COMBAT_TRICKS)) {
+            // Currently this only works with buff auras, so if the relevant toggle is disabled, just return true
+            // for instant speed use. To be improved later.
+            return true;
+        }
+
+        int power = 0, toughness = 0;
+        List<String> keywords = Lists.newArrayList();
+        for (StaticAbility stAb : source.getStaticAbilities()) {
+            if ("Continuous".equals(stAb.getParam("Mode"))) {
+                if (stAb.hasParam("AddPower")) {
+                    power += AbilityUtils.calculateAmount(source, stAb.getParam("AddPower"), stAb);
+                }
+                if (stAb.hasParam("AddToughness")) {
+                    toughness += AbilityUtils.calculateAmount(source, stAb.getParam("AddToughness"), stAb);
+                }
+                if (stAb.hasParam("AddKeyword")) {
+                    keywords.addAll(Lists.newArrayList(stAb.getParam("AddKeyword").split(" & ")));
+                }
+            }
+        }
+
+        boolean isBuffAura = !sa.isCurse() && (power > 0 || toughness > 0 || !keywords.isEmpty());
+        if (!isBuffAura) {
+            // Currently only works with buff auras, otherwise returns for instant speed use. To be improved later.
+            return true;
+        }
+
+        boolean canRespondToStack = false;
+        if (!game.getStack().isEmpty()) {
+            SpellAbility peekSa = game.getStack().peekAbility();
+            Player activator = peekSa.getActivatingPlayer();
+            if (activator != null && activator.isOpponentOf(ai)
+                    && (!peekSa.usesTargeting() || peekSa.getTargets().getTargetCards().contains(attachTarget))) {
+                if (peekSa.getApi() == ApiType.DealDamage || peekSa.getApi() == ApiType.DamageAll) {
+                    int dmg = AbilityUtils.calculateAmount(peekSa.getHostCard(), peekSa.getParam("NumDmg"), peekSa);
+                    if (dmg < toughness + attachTarget.getNetToughness()) {
+                        canRespondToStack = true;
+                    }
+                } else if (peekSa.getApi() == ApiType.Destroy || peekSa.getApi() == ApiType.DestroyAll) {
+                    if (!attachTarget.hasKeyword(Keyword.INDESTRUCTIBLE) && !ComputerUtil.canRegenerate(ai, attachTarget)
+                            && keywords.contains("Indestructible")) {
+                        canRespondToStack = true;
+                    }
+                } else if (peekSa.getApi() == ApiType.Pump || peekSa.getApi() == ApiType.PumpAll) {
+                    int p = AbilityUtils.calculateAmount(peekSa.getHostCard(), peekSa.getParam("NumAtt"), peekSa);
+                    int t = AbilityUtils.calculateAmount(peekSa.getHostCard(), peekSa.getParam("NumDef"), peekSa);
+                    if (t < 0 && toughness > 0 && attachTarget.getNetToughness() + t + toughness > 0) {
+                        canRespondToStack = true;
+                    } else if (p < 0 && power > 0 && attachTarget.getNetToughness() + t + toughness > 0) {
+                        // Yep, still need to ensure that the net toughness will be positive here even if buffing for power
+                        canRespondToStack = true;
+                    }
+                }
+            }
+        }
+
+        boolean canSurviveCombat = true;
+        if (combat != null && combat.isBlocked(attachTarget)) {
+            if (!attachTarget.hasKeyword(Keyword.INDESTRUCTIBLE) && !ComputerUtil.canRegenerate(ai, attachTarget)) {
+                boolean dangerous = false;
+                int totalAtkPower = 0;
+                for (Card attacker : combat.getBlockers(attachTarget)) {
+                    if (attacker.hasKeyword(Keyword.DEATHTOUCH) || attacker.hasKeyword(Keyword.INFECT)
+                            || attacker.hasKeyword(Keyword.WITHER)) {
+                        dangerous = true;
+                    }
+                    totalAtkPower += attacker.getNetPower();
+                }
+                if (totalAtkPower > attachTarget.getNetToughness() + toughness || dangerous) {
+                    canSurviveCombat = false;
+                }
+            }
+        }
+
+        if (!canSurviveCombat) {
+            // don't buff anything that will die or get seriously crippled in combat, it's pointless anyway
+            return false;
+        }
+
+        int chanceToCastAtEOT = aic.getIntProperty(AiProps.FLASH_BUFF_AURA_CHANCE_CAST_AT_EOT);
+        int chanceToCastEarly = aic.getIntProperty(AiProps.FLASH_BUFF_AURA_CHANCE_TO_CAST_EARLY);
+        int chanceToRespondToStack = aic.getIntProperty(AiProps.FLASH_BUFF_AURA_CHANCE_TO_RESPOND_TO_STACK);
+
+        boolean hasFloatMana = ai.getManaPool().totalMana() > 0;
+        boolean willDiscardNow = game.getPhaseHandler().is(PhaseType.END_OF_TURN, ai)
+                && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize();
+        boolean willDieNow = combat != null && ComputerUtilCombat.lifeInSeriousDanger(ai, combat);
+        boolean willRespondToStack = canRespondToStack && MyRandom.percentTrue(chanceToRespondToStack);
+        boolean willCastEarly = MyRandom.percentTrue(chanceToCastEarly);
+        boolean willCastAtEOT = game.getPhaseHandler().is(PhaseType.END_OF_TURN)
+                && game.getPhaseHandler().getNextTurn().equals(ai) && MyRandom.percentTrue(chanceToCastAtEOT);
+
+        boolean alternativeConsiderations = hasFloatMana || willDiscardNow || willDieNow || willRespondToStack || willCastAtEOT || willCastEarly;
+
+        if (!alternativeConsiderations && (combat == null || game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) || (!combat.isAttacking(attachTarget) && !combat.isBlocking(attachTarget))) {
+            return false;
+        }
+
         return true;
     }
 
