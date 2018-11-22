@@ -135,6 +135,7 @@ public class PermanentCreatureAi extends PermanentAi {
         boolean defOnlyAmbushAI = hasAmbushAI && "BlockOnly".equals(card.getSVar("AmbushAI"));
         boolean hasFloatMana = ai.getManaPool().totalMana() > 0;
         boolean willDiscardNow = isOwnEOT && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize();
+        boolean willDieNow = combat != null && ComputerUtilCombat.lifeInSeriousDanger(ai, combat);
         boolean wantToCastInMain1 = ph.is(PhaseType.MAIN1, ai) && ComputerUtil.castPermanentInMain1(ai, sa);
 
         // figure out if the card might be a valuable blocker
@@ -160,8 +161,8 @@ public class PermanentCreatureAi extends PermanentAi {
         int chanceToRespondToStack = aic.getIntProperty(AiProps.FLASH_CHANCE_TO_RESPOND_TO_STACK_WITH_ETB);
         int chanceToProcETBBeforeMain1 = aic.getIntProperty(AiProps.FLASH_CHANCE_TO_CAST_FOR_ETB_BEFORE_MAIN1);
 
-        if (hasFloatMana || willDiscardNow) {
-            // Will lose mana in pool or about to discard a card in cleanup, so use this opportunity
+        if (hasFloatMana || willDiscardNow || willDieNow) {
+            // Will lose mana in pool or about to discard a card in cleanup or about to die in combat, so use this opportunity
             return true;
         } else if (wantToCastInMain1) {
             // Would rather cast it in Main 1 or as soon as possible anyway, so go for it

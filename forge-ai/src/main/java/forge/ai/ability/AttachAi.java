@@ -212,7 +212,7 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         if (!canSurviveCombat) {
-            // don't buff anything that will die or get seriously crippled in combat
+            // don't buff anything that will die or get seriously crippled in combat, it's pointless anyway
             return false;
         }
 
@@ -223,12 +223,13 @@ public class AttachAi extends SpellAbilityAi {
         boolean hasFloatMana = ai.getManaPool().totalMana() > 0;
         boolean willDiscardNow = game.getPhaseHandler().is(PhaseType.END_OF_TURN, ai)
                 && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize();
+        boolean willDieNow = combat != null && ComputerUtilCombat.lifeInSeriousDanger(ai, combat);
         boolean willRespondToStack = canRespondToStack && MyRandom.percentTrue(chanceToRespondToStack);
         boolean willCastEarly = MyRandom.percentTrue(chanceToCastEarly);
         boolean willCastAtEOT = game.getPhaseHandler().is(PhaseType.END_OF_TURN)
                 && game.getPhaseHandler().getNextTurn().equals(ai) && MyRandom.percentTrue(chanceToCastAtEOT);
 
-        boolean alternativeConsiderations = hasFloatMana || willDiscardNow || willRespondToStack || willCastAtEOT || willCastEarly;
+        boolean alternativeConsiderations = hasFloatMana || willDiscardNow || willDieNow || willRespondToStack || willCastAtEOT || willCastEarly;
 
         if (!alternativeConsiderations && (combat == null || game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) || (!combat.isAttacking(attachTarget) && !combat.isBlocking(attachTarget))) {
             return false;
