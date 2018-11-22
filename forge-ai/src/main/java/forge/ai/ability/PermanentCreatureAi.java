@@ -123,7 +123,8 @@ public class PermanentCreatureAi extends PermanentAi {
         if (!game.getStack().isEmpty()) {
             SpellAbility peekSa = game.getStack().peekAbility();
             Player activator = peekSa.getActivatingPlayer();
-            if (activator != null && activator.isOpponentOf(ai) && peekSa.getApi() != ApiType.DestroyAll) {
+            if (activator != null && activator.isOpponentOf(ai) && peekSa.getApi() != ApiType.DestroyAll
+                    && peekSa.getApi() != ApiType.DamageAll) {
                 canRespondToStack = true;
             }
         }

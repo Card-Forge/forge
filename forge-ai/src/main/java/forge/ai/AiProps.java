@@ -120,10 +120,10 @@ public enum AiProps { /** */
     FLASH_CHANCE_TO_CAST_FOR_ETB_BEFORE_MAIN1("10"), /** */
     FLASH_CHANCE_TO_RESPOND_TO_STACK_WITH_ETB("0"), /** */
     FLASH_CHANCE_TO_CAST_AS_VALUABLE_BLOCKER("100"),
-    FLASH_USE_AURAS_AS_COMBAT_TRICKS("true"),
-    FLASH_AURA_CHANCE_TO_CAST_EARLY("0"),
-    FLASH_AURA_CHANCE_CAST_AT_EOT("10"),
-    FLASH_AURA_CHANCE_TO_RESPOND_TO_STACK("0"); /** */
+    FLASH_USE_BUFF_AURAS_AS_COMBAT_TRICKS("true"),
+    FLASH_BUFF_AURA_CHANCE_TO_CAST_EARLY("0"),
+    FLASH_BUFF_AURA_CHANCE_CAST_AT_EOT("10"),
+    FLASH_BUFF_AURA_CHANCE_TO_RESPOND_TO_STACK("0"); /** */
     // Experimental features, must be promoted or removed after extensive testing and, ideally, defaulting
     // <-- There are no experimental options here -->
 
