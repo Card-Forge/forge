@@ -2,7 +2,7 @@ Name:Urgoros, the Empty One|Deck:Urgoros, the Empty One.dck|Variant:Commander|Av
 Name:Josu Vess, Lich Knight|Deck:Josu Vess, Lich Knight.dck|Variant:Commander|Avatar:Josu Vess, Lich Knight|Desc:
 Name:Kazarov, Sengir Pureblood|Deck:Kazarov, Sengir Pureblood.dck|Variant:Commander|Avatar:Kazarov, Sengir Pureblood|Desc:
 Name:Arvad the Cursed|Deck:Arvad the Cursed.dck|Variant:Commander|Avatar:Arvad the Cursed|Desc:
-Name:EVENT5|Deck:Random|Variant:None|Avatar:None|Desc:
+Name:Liliana, the Necromancer|Deck:Liliana, the Necromancer.dck|Variant:Planeswalker|Avatar:Liliana, the Necromancer|Desc:
 Name:EVENT6|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT7|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT8|Deck:Random|Variant:None|Avatar:None|Desc:
