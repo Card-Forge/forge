@@ -27,7 +27,6 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.util.Aggregates;
 import forge.util.MyRandom;
 
 import java.util.ArrayList;
