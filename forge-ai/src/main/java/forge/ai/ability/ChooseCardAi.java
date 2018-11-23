@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -274,6 +275,22 @@ public class ChooseCardAi extends SpellAbilityAi {
             if (ai.equals(sa.getActivatingPlayer())) {
                 choice = ComputerUtilCard.getBestAI(options);
             } // TODO: improve ai
+        } else if (logic.equals("Phylactery")) {
+            CardCollection aiArtifacts = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.ARTIFACTS);
+            CardCollection indestructibles = CardLists.filter(aiArtifacts, CardPredicates.hasKeyword(Keyword.INDESTRUCTIBLE));
+            CardCollection nonCreatures = CardLists.filter(aiArtifacts, Predicates.not(Presets.CREATURES));
+            CardCollection creatures = CardLists.filter(aiArtifacts, Presets.CREATURES);
+            if (!indestructibles.isEmpty()) {
+                // Choose the worst (smallest) indestructible artifact so that the opponent would have to waste
+                // removal on something unpreferred
+                choice = ComputerUtilCard.getWorstAI(indestructibles);
+            } else if (!nonCreatures.isEmpty()) {
+                // The same as above, but for non-indestructible non-creature artifacts (they can't die in combat)
+                choice = ComputerUtilCard.getWorstAI(nonCreatures);
+            } else if (!creatures.isEmpty()) {
+                // Choose the best (hopefully the fattest, whatever) creature so that hopefully it won't die too easily
+                choice = ComputerUtilCard.getBestAI(creatures);
+            }
         } else {
             choice = ComputerUtilCard.getBestAI(options);
         }
