@@ -71,20 +71,21 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     @Override
     protected boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
-        if (otherCardsToSelect != null) {
-            for (Card c : otherCardsToSelect) {
-                for (SpellAbility sa : c.getManaAbilities()) {
-                    if (sa.canPlay()) {
-                        delaySelectCards.add(c);
-                        break;
-                    }
-                }
+        if (card.getManaAbilities().size() == 1) {
+            activateManaAbility(card, card.getManaAbilities().get(0));
+        } else {
+            SpellAbilityView spellAbilityView;
+            HashMap<SpellAbilityView, SpellAbility> spellAbilityViewMap = new HashMap<>();
+            for (SpellAbility sa : card.getManaAbilities()) {
+                spellAbilityViewMap.put(sa.getView(), sa);
+            }
+            List<SpellAbilityView> choices = new ArrayList<>(spellAbilityViewMap.keySet());
+            spellAbilityView = getController().getGui().getAbilityToPlay(card.getView(), choices, triggerEvent);
+            if (spellAbilityView != null) {
+                activateManaAbility(card, spellAbilityViewMap.get(spellAbilityView));
             }
         }
-        if (!card.getManaAbilities().isEmpty() && activateManaAbility(card, manaCost)) {
-            return true;
-        }
-        return activateDelayedCard();
+        return true;
     }
 
     @Override
@@ -231,7 +232,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             }
         }
 
-        if (abilitiesMap.isEmpty() || (chosenAbility != null && !abilitiesMap.containsKey(chosenAbility))) {
+        if (abilitiesMap.isEmpty() || (chosenAbility != null && !abilitiesMap.containsKey(chosenAbility.getView()))) {
             return false;
         }
 
