@@ -105,7 +105,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             delaySelectCards.clear(); //clear delayed cards if mana cost already paid
             return false;
         }
-        if (activateManaAbility(delaySelectCards.poll(), manaCost)) {
+        if (activateManaAbility(delaySelectCards.poll())) {
             return true;
         }
         return activateDelayedCard();
@@ -114,7 +114,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     @Override
     public boolean selectAbility(final SpellAbility ab) {
         if (ab != null && ab.isManaAbility()) {
-            return activateManaAbility(ab.getHostCard(), manaCost, ab);
+            return activateManaAbility(ab.getHostCard(), ab);
         }
         return false;
     }
@@ -165,10 +165,10 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         }
     }
 
-    protected boolean activateManaAbility(final Card card, ManaCostBeingPaid manaCost) {
-        return activateManaAbility(card, manaCost, null);
+    protected boolean activateManaAbility(final Card card) {
+        return activateManaAbility(card, null);
     }
-    protected boolean activateManaAbility(final Card card, ManaCostBeingPaid manaCost, SpellAbility chosenAbility) {
+    protected boolean activateManaAbility(final Card card, SpellAbility chosenAbility) {
         if (locked) {
             System.err.print("Should wait till previous call to playAbility finishes.");
             return false;
