@@ -1479,7 +1479,15 @@ public class ComputerUtilCard {
                 }
             }
         }
-        
+
+        if ("UntapCombatTrick".equals(sa.getParam("AILogic")) && c.isTapped()) {
+            if (phase.is(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.getPlayerTurn().isOpponentOf(ai)) {
+                chance += 0.5f; // this creature will untap to become a potential blocker
+            } else if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS, ai)) {
+                chance += 1.0f; // untap after tapping for attack
+            }
+        }
+
         if (isBerserk) {
             // if we got here, Berserk will result in the pumped creature dying at EOT and the opponent will not lose
             // (other similar cards with AILogic$ Berserk that do not die only when attacking are excluded from consideration)
