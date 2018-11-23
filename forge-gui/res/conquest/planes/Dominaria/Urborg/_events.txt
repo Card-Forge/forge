@@ -5,5 +5,5 @@ Name:Arvad the Cursed|Deck:Arvad the Cursed.dck|Variant:Commander|Avatar:Arvad t
 Name:Liliana, the Necromancer|Deck:Liliana, the Necromancer.dck|Variant:Planeswalker|Avatar:Liliana, the Necromancer|Desc:
 Name:Isareth the Awakener|Deck:Isareth the Awakener.dck|Variant:Commander|Avatar:Isareth the Awakener|Desc:
 Name:EVENT7|Deck:Random|Variant:None|Avatar:None|Desc:
-Name:EVENT8|Deck:Random|Variant:None|Avatar:None|Desc:
+Name:Necropotence|Deck:Necropotence.dck|Variant:Vanguard|Avatar:Necropotence|Desc:
 Name:Random Urborg|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:
