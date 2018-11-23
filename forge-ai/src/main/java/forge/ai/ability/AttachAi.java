@@ -159,7 +159,7 @@ public class AttachAi extends SpellAbilityAi {
 
         boolean isBuffAura = !sa.isCurse() && (power > 0 || toughness > 0 || !keywords.isEmpty());
         if (!isBuffAura) {
-            // Currently only works with buff auras, otherwise returns for instant speed use. To be improved later.
+            // Currently only works with buff auras, otherwise returns true for instant speed use. To be improved later.
             return true;
         }
 
@@ -184,7 +184,8 @@ public class AttachAi extends SpellAbilityAi {
                     int t = AbilityUtils.calculateAmount(peekSa.getHostCard(), peekSa.getParam("NumDef"), peekSa);
                     if (t < 0 && toughness > 0 && attachTarget.getNetToughness() + t + toughness > 0) {
                         canRespondToStack = true;
-                    } else if (p < 0 && power > 0 && attachTarget.getNetToughness() + t + toughness > 0) {
+                    } else if (p < 0 && power > 0 && attachTarget.getNetPower() + p + power > 0
+                            && attachTarget.getNetToughness() + t + toughness > 0) {
                         // Yep, still need to ensure that the net toughness will be positive here even if buffing for power
                         canRespondToStack = true;
                     }
@@ -210,7 +211,7 @@ public class AttachAi extends SpellAbilityAi {
             }
         }
 
-        if (!canSurviveCombat) {
+        if (!canSurviveCombat || (attachTarget.isCreature() && ComputerUtilCard.isUselessCreature(ai, attachTarget))) {
             // don't buff anything that will die or get seriously crippled in combat, it's pointless anyway
             return false;
         }
