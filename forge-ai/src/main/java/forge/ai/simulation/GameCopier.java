@@ -211,10 +211,10 @@ public class GameCopier {
             otherCard.setTimestamp(card.getTimestamp());
             otherCard.setSickness(card.hasSickness());
             otherCard.setState(card.getCurrentStateName(), false);
-            if (card.isAttaching()) {
-                GameEntity ge = gameObjectMap.map(card.getAttaching());
-                otherCard.setAttaching(ge);
-                ge.addAttachedBy(otherCard);
+            if (card.isAttachedToEntity()) {
+                GameEntity ge = gameObjectMap.map(card.getAttachingEntity());
+                otherCard.setAttachingEntity(ge);
+                ge.addAttachedCard(otherCard);
             }
             if (card.getCloneOrigin() != null) {
                 otherCard.setCloneOrigin(cardMap.get(card.getCloneOrigin()));

@@ -105,7 +105,7 @@ public class AttachEffect extends SpellAbilityEffect {
                     handleAura(card, c);
                 }
             } else  {
-                card.attachEntity(c);
+                card.attachToEntity(c);
             }
         } else if (o instanceof Player) {
             // Currently, a few cards can enchant players
@@ -132,17 +132,17 @@ public class AttachEffect extends SpellAbilityEffect {
 
             @Override
             public void run() {
-                final GameEntity entity = card.getAttaching();
+                final GameEntity entity = card.getAttachingEntity();
                 if (entity == null) {
                     return;
                 }
 
-                card.unAttachEntity(entity);
+                card.unattachFromEntity(entity);
             }
         }; // Command
 
         card.addLeavesPlayCommand(onLeavesPlay);
-        card.attachEntity(tgt);
+        card.attachToEntity(tgt);
     }
 
     /**

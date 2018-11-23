@@ -116,7 +116,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card bear = addCard(bearCardName, p);
         bear.setSickness(false);
         Card cloak = addCard("Whispersilk Cloak", p);
-        cloak.attachEntity(bear);
+        cloak.attachToEntity(bear);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
         assertEquals(1, bear.getAmountOfKeyword("Unblockable"));
@@ -134,7 +134,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card bear = addCard(bearCardName, p);
         bear.setSickness(false);
         Card lifelink = addCard("Lifelink", p);
-        lifelink.attachEntity(bear);
+        lifelink.attachToEntity(bear);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
         assertEquals(1, bear.getAmountOfKeyword("Lifelink"));
@@ -665,7 +665,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card pridemate = addCard(pridemateName, p1);
         Card indestructibility = addCard(indestructibilityName, p1);
 
-        indestructibility.attachEntity(pridemate);
+        indestructibility.attachToEntity(pridemate);
 
         Card ignition = addCardToZone(ignitionName, p1, ZoneType.Hand);
         SpellAbility ignitionSA = ignition.getFirstSpellAbility();
@@ -779,7 +779,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card pridemate = addCard(pridemateName, p1);
         Card indestructibility = addCard(indestructibilityName, p1);
 
-        indestructibility.attachEntity(pridemate);
+        indestructibility.attachToEntity(pridemate);
 
         Card ignition = addCardToZone(ignitionName, p1, ZoneType.Hand);
         SpellAbility ignitionSA = ignition.getFirstSpellAbility();
@@ -1375,10 +1375,10 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card bear = addCard(bearCardName, p);
         bear.setSickness(false);
         Card lifelink = addCard("Lifelink", p);
-        lifelink.attachEntity(bear);
+        lifelink.attachToEntity(bear);
 
         assertTrue(bear.isEnchanted());
-        assertTrue(bear.isAttachedBy(lifelink));
+        assertTrue(bear.isAttachedByCard(lifelink));
 
         // this adds Artifact Type
         addCardToZone("Mycosynth Lattice", p, ZoneType.Battlefield);
@@ -1413,10 +1413,10 @@ public class GameSimulatorTest extends SimulationTestCase {
         final String curseName = "Cruel Reality";
 
         Card curse = addCard(curseName, p);
-        curse.attachEntity(p);
+        curse.attachToEntity(p);
         game.getAction().checkStateEffects(true);
         assertTrue(p.isEnchanted());
-        assertTrue(p.isAttachedBy(curse));
+        assertTrue(p.isAttachedByCard(curse));
 
         // this adds Artifact Type
         addCardToZone("Mycosynth Lattice", p, ZoneType.Battlefield);
@@ -1446,14 +1446,14 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card mountain = addCardToZone("Mountain", p, ZoneType.Battlefield);
         Card fortification = addCardToZone("Darksteel Garrison", p, ZoneType.Battlefield);
 
-        fortification.attachEntity(mountain);
+        fortification.attachToEntity(mountain);
         game.getAction().checkStateEffects(true);
 
         assertTrue(fortification.isFortification());
         assertFalse(fortification.isEquipment());
 
         assertTrue(mountain.isFortified());
-        assertTrue(mountain.isAttachedBy(fortification));
+        assertTrue(mountain.isAttachedByCard(fortification));
         assertTrue(mountain.hasKeyword(Keyword.INDESTRUCTIBLE));
 
         // adding Brawl will cause the Fortification into Equipment and it to
@@ -1464,7 +1464,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertFalse(fortification.isFortification());
         assertTrue(fortification.isEquipment());
 
-        assertFalse(mountain.isAttachedBy(fortification));
+        assertFalse(mountain.isAttachedByCard(fortification));
         assertFalse(mountain.hasKeyword(Keyword.INDESTRUCTIBLE));
     }
 
@@ -1480,13 +1480,13 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card dryad = addCardToZone("Dryad Arbor", p, ZoneType.Battlefield);
         Card fortification = addCardToZone("Darksteel Garrison", p, ZoneType.Battlefield);
 
-        fortification.attachEntity(dryad);
+        fortification.attachToEntity(dryad);
         game.getAction().checkStateEffects(true);
 
         assertTrue(dryad.isFortified());
         assertFalse(dryad.isEquipped());
 
-        assertTrue(dryad.isAttachedBy(fortification));
+        assertTrue(dryad.isAttachedByCard(fortification));
         assertTrue(dryad.hasKeyword(Keyword.INDESTRUCTIBLE));
 
         // adding Brawl will cause the Fortification into Equipment
@@ -1498,7 +1498,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertFalse(dryad.isFortified());
         assertTrue(dryad.isEquipped());
 
-        assertTrue(dryad.isAttachedBy(fortification));
+        assertTrue(dryad.isAttachedByCard(fortification));
         assertTrue(dryad.hasKeyword(Keyword.INDESTRUCTIBLE));
     }
 

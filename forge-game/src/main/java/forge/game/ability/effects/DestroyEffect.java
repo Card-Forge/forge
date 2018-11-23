@@ -95,7 +95,7 @@ public class DestroyEffect extends SpellAbilityEffect {
                 boolean destroyed = false;
                 final Card lki = CardUtil.getLKICopy(tgtC);
                 if (remAttached) {
-                    card.addRemembered(tgtC.getAttachedBy());
+                    card.addRemembered(tgtC.getAttachedCards());
                 }
                 if (sac) {
                     destroyed = game.getAction().sacrifice(tgtC, sa) != null;

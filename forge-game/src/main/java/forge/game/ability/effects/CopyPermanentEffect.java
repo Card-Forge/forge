@@ -239,7 +239,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         if (!list.isEmpty()) {
                             Card attachedTo = activator.getController().chooseSingleEntityForEffect(list, sa, copyInPlay + " - Select a card to attach to.");
 
-                            copyInPlay.attachEntity(attachedTo);
+                            copyInPlay.attachToEntity(attachedTo);
                         } else {
                             continue;
                         }

@@ -446,7 +446,7 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.Attaching);
     }
     void updateAttaching(Card c) {
-        set(TrackableProperty.Attaching, GameEntityView.get(c.getAttaching()));
+        set(TrackableProperty.Attaching, GameEntityView.get(c.getAttachingEntity()));
     }
 
     public CardView getAttachingCard() {

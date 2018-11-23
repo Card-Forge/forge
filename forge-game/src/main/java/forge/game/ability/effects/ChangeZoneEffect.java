@@ -504,7 +504,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                         if (!list.isEmpty()) {
                             Card attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, tgtC + " - Select a card to attach to.");
-                            tgtC.attachEntity(attachedTo);
+                            tgtC.attachToEntity(attachedTo);
                         } else { // When it should enter the battlefield attached to an illegal permanent it fails
                             continue;
                         }
@@ -514,7 +514,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         FCollectionView<Player> list = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("AttachedToPlayer"), sa);
                         if (!list.isEmpty()) {
                             Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, tgtC + " - Select a player to attach to.");
-                            tgtC.attachEntity(attachedTo);
+                            tgtC.attachToEntity(attachedTo);
                         }
                         else { // When it should enter the battlefield attached to an illegal player it fails
                             continue;
@@ -994,7 +994,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
 
                         if (c.isAttachment()) {
-                            c.attachEntity(attachedTo);
+                            c.attachToEntity(attachedTo);
                         }
                     }
                     else { // When it should enter the battlefield attached to an illegal permanent it fails
@@ -1006,7 +1006,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     FCollectionView<Player> list = AbilityUtils.getDefinedPlayers(source, sa.getParam("AttachedToPlayer"), sa);
                     if (!list.isEmpty()) {
                         Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, c + " - Select a player to attach to.");
-                        c.attachEntity(attachedTo);
+                        c.attachToEntity(attachedTo);
                     }
                     else { // When it should enter the battlefield attached to an illegal permanent it fails
                         continue;

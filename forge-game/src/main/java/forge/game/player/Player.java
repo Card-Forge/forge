@@ -684,7 +684,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                     restDamage *= 2;
                 }
             } else if (c.getName().equals("Curse of Bloodletting")) {
-                if (c.getEnchanting().equals(this)) {
+                if (c.getAttachingEntity().equals(this)) {
                     restDamage *= 2;
                 }
             } else if (c.getName().equals("Gisela, Blade of Goldnight")) {
@@ -2098,7 +2098,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 return false;
             }
         } else if (incR[0].equals("EnchantedController")) {
-            final GameEntity enchanted = source.getEnchanting();
+            final GameEntity enchanted = source.getAttachingEntity();
             if ((enchanted == null) || !(enchanted instanceof Card)) {
                 return false;
             }
@@ -2934,4 +2934,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         removeKeyword("Skip the untap step of this turn.");
         removeKeyword("Schemes can't be set in motion this turn.");
     }
+
+    public final boolean isCursed() {
+        if (this.attachedCards == null) {
+            return false;
+        }
+
+        return CardLists.count(attachedCards, CardPredicates.Presets.CURSE) > 0;
+    }
+
 }

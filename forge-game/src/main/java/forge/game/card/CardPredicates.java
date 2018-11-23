@@ -488,6 +488,17 @@ public final class CardPredicates {
                 return c.isFortification();
             }
         };
+
+        /**
+         * a Predicate<Card> to get all curse.
+         */
+        public static final Predicate<Card> CURSE = new Predicate<Card>() {
+            @Override
+            public boolean apply(Card c) {
+                return c.isCurse();
+            }
+        };
+
         /**
          * a Predicate<Card> to get all unenchanted cards in a list.
          */

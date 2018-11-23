@@ -507,8 +507,8 @@ public class GameAction {
         copied.unAttachAllCards();
 
         // unenchant creature if moving aura
-        if (copied.isAttaching()) {
-            copied.unAttachEntity(copied.getAttaching());
+        if (copied.isAttachedToEntity()) {
+            copied.unattachFromEntity(copied.getAttachingEntity());
         }
     }
 
@@ -974,8 +974,8 @@ public class GameAction {
                 checkAgain |= stateBasedAction_Saga(c);
                 checkAgain |= stateBasedAction704_attach(c); // Attachment
 
-                if (c.isCreature() && c.isAttaching()) { // Rule 704.5q - Creature attached to an object or player, becomes unattached
-                    c.unAttachEntity(c.getAttaching());
+                if (c.isCreature() && c.isAttachedToEntity()) { // Rule 704.5q - Creature attached to an object or player, becomes unattached
+                    c.unattachFromEntity(c.getAttachingEntity());
                     checkAgain = true;
                 }
 
@@ -1092,18 +1092,18 @@ public class GameAction {
     private boolean stateBasedAction704_attach(Card c) {
         boolean checkAgain = false;
 
-        if (c.isAttaching()) {
-            final GameEntity ge = c.getAttaching();
+        if (c.isAttachedToEntity()) {
+            final GameEntity ge = c.getAttachingEntity();
             if (!ge.canBeAttachedBy(c)) {
-                c.unAttachEntity(ge);
+                c.unattachFromEntity(ge);
                 checkAgain = true;
             }
         }
 
-        if (c.isAttachedBy()) {
-            for (final Card attach : Lists.newArrayList(c.getAttachedBy())) {
+        if (c.isAttachedByCards()) {
+            for (final Card attach : Lists.newArrayList(c.getAttachedCards())) {
                 if (!attach.isInPlay()) {
-                    attach.unAttachEntity(c);
+                    attach.unattachFromEntity(c);
                     checkAgain = true;
                 }
             }

@@ -442,12 +442,12 @@ public class CardDetailUtil {
         }
 
         // attached by
-        if (card.isAttached()) {
+        if (card.isAttachedByCards()) {
             if (area.length() != 0) {
                 area.append("\n");
             }
             area.append("=Attached: ");
-            area.append(StringUtils.join(card.getAttachedBy(), ", "));
+            area.append(StringUtils.join(card.getAttachedCards(), ", "));
             area.append("=");
         }
 

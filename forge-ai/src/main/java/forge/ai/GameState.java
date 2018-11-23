@@ -196,7 +196,7 @@ public abstract class GameState {
                     cardsReferencedByID.add(card.getExiledWith());
                 }
                 if (zone == ZoneType.Battlefield) {
-                    if (!card.getAttachedBy().isEmpty()) {
+                    if (!card.getAttachedCards().isEmpty()) {
                         // Remember the ID of cards that have attachments
                         cardsReferencedByID.add(card);
                     }
@@ -288,13 +288,13 @@ public abstract class GameState {
             } else if (c.getCurrentStateName().equals(CardStateName.Meld)) {
                 newText.append("|Meld");
             }
-            if (c.isAttaching()) {
-                newText.append("|Attaching:").append(c.getAttaching().getId());
+            if (c.isAttachedToEntity()) {
+                newText.append("|Attaching:").append(c.getAttachingEntity().getId());
             }
-            if (c.getEnchantingPlayer() != null) {
+            if (c.getAttachingPlayer() != null) {
                 // TODO: improve this for game states with more than two players
                 newText.append("|EnchantingPlayer:");
-                Player p = c.getEnchantingPlayer();
+                Player p = c.getAttachingPlayer();
                 newText.append(p.getController().isAI() ? "AI" : "HUMAN");
             }
 
@@ -961,7 +961,7 @@ public abstract class GameState {
             Card attachedTo = idToCard.get(entry.getValue());
             Card attacher = entry.getKey();
             if (attacher.isAttachment()) {
-                attacher.attachEntity(attachedTo);
+                attacher.attachToEntity(attachedTo);
             }
         }
 
@@ -972,7 +972,7 @@ public abstract class GameState {
             Game game = attacher.getGame();
             Player attachedTo = entry.getValue() == TARGET_AI ? game.getPlayers().get(1) : game.getPlayers().get(0);
 
-            attacher.attachEntity(attachedTo);
+            attacher.attachToEntity(attachedTo);
         }
     }
 
@@ -1029,7 +1029,7 @@ public abstract class GameState {
                         // (will be overridden later, so the actual value shouldn't matter)
 
                         //FIXME it shouldn't be able to attach itself
-                        c.setAttaching(c);
+                        c.setAttachingEntity(c);
                     }
 
                     if (cardsWithoutETBTrigs.contains(c)) {

@@ -405,7 +405,7 @@ public class TargetingOverlay {
         }
 
         final CardView attaching = c.getAttachingCard();
-        final Iterable<CardView> attachedBy = c.getAttachedBy();
+        final Iterable<CardView> attachedBy = c.getAttachedCards();
         final CardView paired = c.getPairedWith();
 
         if (null != attaching) {

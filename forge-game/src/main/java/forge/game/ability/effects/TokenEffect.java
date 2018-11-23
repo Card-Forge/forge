@@ -509,7 +509,7 @@ public class TokenEffect extends SpellAbilityEffect {
                 return false;
             }
 
-            tok.attachEntity(ge);
+            tok.attachToEntity(ge);
             return true;
         } else {
             // not a GameEntity, cant be attach

@@ -106,7 +106,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 final CardStack stack = allLands.get(i);
                 final CardPanel firstPanel = stack.get(0);
                 if (firstPanel.getCard().getCurrentState().getName().equals(state.getName())) {
-                    if (!firstPanel.getAttachedPanels().isEmpty() || firstPanel.getCard().isAttached()) {
+                    if (!firstPanel.getAttachedPanels().isEmpty() || firstPanel.getCard().isAttachedByCards()) {
                         // Put this land to the left of lands with the same name
                         // and attachments.
                         insertIndex = i;
@@ -114,7 +114,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     }
                     if (!panel.getAttachedPanels().isEmpty()
                             || !panel.getCard().hasSameCounters(firstPanel.getCard())
-                            || firstPanel.getCard().isAttached() || (stack.size() == this.landStackMax)) {
+                            || firstPanel.getCard().isAttachedByCards() || (stack.size() == this.landStackMax)) {
                         // If this land has attachments or the stack is full,
                         // put it to the right.
                         insertIndex = i + 1;
@@ -683,8 +683,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
         toPanel.getAttachedPanels().clear();
 
-        if (card.isAttached()) {
-            final Iterable<CardView> enchants = card.getAttachedBy();
+        if (card.isAttachedByCards()) {
+            final Iterable<CardView> enchants = card.getAttachedCards();
             for (final CardView e : enchants) {
                 final CardPanel cardE = getCardPanel(e.getId());
                 if (cardE != null) {

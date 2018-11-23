@@ -44,7 +44,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     protected final int id;
     private String name = "";
     private int preventNextDamage = 0;
-    protected CardCollection attachedBy;
+    protected CardCollection attachedCards;
     private Map<Card, Map<String, String>> preventionShieldsWithEffects = Maps.newTreeMap();
     protected Map<CounterType, Integer> counters = Maps.newEnumMap(CounterType.class);
 
@@ -285,86 +285,94 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     public abstract boolean hasKeyword(final Keyword keyword);
 
     public final CardCollectionView getEnchantedBy() {
-        if (attachedBy == null) {
+        if (attachedCards == null) {
             return CardCollection.EMPTY;
         }
         // enchanted means attached by Aura
-        return CardLists.filter(attachedBy, CardPredicates.Presets.AURA);
+        return CardLists.filter(attachedCards, CardPredicates.Presets.AURA);
     }
 
-    public final CardCollectionView getAttachedBy() {
-        return CardCollection.getView(attachedBy);
+    public final CardCollectionView getAttachedCards() {
+        return CardCollection.getView(attachedCards);
     }
 
-    public final void setAttachedBy(final Iterable<Card> cards) {
+    public final void setAttachedCards(final Iterable<Card> cards) {
         if (cards == null) {
-            attachedBy = null;
+            attachedCards = null;
         }
         else {
-            attachedBy = new CardCollection(cards);
+            attachedCards = new CardCollection(cards);
         }
 
-        getView().updateAttachedBy(this);
+        getView().updateAttachedCards(this);
     }
 
-    public final boolean isAttachedBy() {
-        return FCollection.hasElements(attachedBy);
+    public final boolean isAttachedByCards() {
+        return FCollection.hasElements(attachedCards);
     }
 
     public final boolean isEnchanted() {
-        if (attachedBy == null) {
+        if (attachedCards == null) {
             return false;
         }
 
         // enchanted means attached by Aura
-        return CardLists.count(attachedBy, CardPredicates.Presets.AURA) > 0;
+        return CardLists.count(attachedCards, CardPredicates.Presets.AURA) > 0;
     }
 
-    public final boolean isAttachedBy(Card c) {
-        return FCollection.hasElement(attachedBy, c);
+    public final boolean isAttachedByCard(Card c) {
+        return FCollection.hasElement(attachedCards, c);
     }
     public final boolean isEnchantedBy(Card c) {
         // Rule 303.4k  Even if c is no Aura it still counts
-        return isAttachedBy(c);
+        return isAttachedByCard(c);
     }
 
-    public final boolean isAttachedBy(final String cardName) {
-        if (attachedBy == null) {
+    public final boolean isAttachedByCard(final String cardName) {
+        if (attachedCards == null) {
             return false;
         }
-        return CardLists.count(getAttachedBy(), CardPredicates.nameEquals(cardName)) > 0;
+        return CardLists.count(getAttachedCards(), CardPredicates.nameEquals(cardName)) > 0;
     }
     public final boolean isEnchantedBy(final String cardName) {
         // Rule 303.4k  Even if c is no Aura it still counts
-        return isAttachedBy(cardName);
+        return isAttachedByCard(cardName);
     }
 
-    public final void addAttachedBy(final Card c) {
-        if (attachedBy == null) {
-            attachedBy = new CardCollection();
+    /**
+     * internal method
+     * @param Card c
+     */
+    public final void addAttachedCard(final Card c) {
+        if (attachedCards == null) {
+            attachedCards = new CardCollection();
         }
 
-        if (attachedBy.add(c)) {
-            getView().updateAttachedBy(this);
+        if (attachedCards.add(c)) {
+            getView().updateAttachedCards(this);
             getGame().fireEvent(new GameEventCardAttachment(c, null, this));
         }
     }
 
-    public final void removeAttachedBy(final Card c) {
-        if (attachedBy == null) { return; }
+    /**
+     * internal method
+     * @param Card c
+     */
+    public final void removeAttachedCard(final Card c) {
+        if (attachedCards == null) { return; }
 
-        if (attachedBy.remove(c)) {
-            if (attachedBy.isEmpty()) {
-                attachedBy = null;
+        if (attachedCards.remove(c)) {
+            if (attachedCards.isEmpty()) {
+                attachedCards = null;
             }
-            getView().updateAttachedBy(this);
+            getView().updateAttachedCards(this);
             getGame().fireEvent(new GameEventCardAttachment(c, this, null));
         }
     }
 
     public final void unAttachAllCards() {
-        for (Card c : Lists.newArrayList(getAttachedBy())) {
-            c.unAttachEntity(this);
+        for (Card c : Lists.newArrayList(getAttachedCards())) {
+            c.unattachFromEntity(this);
         }
     }
 
@@ -406,10 +414,16 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
 
     protected boolean canBeEquippedBy(final Card aura) {
+        /**
+         * Equip only to Creatures which are cards
+         */
         return false;
     }
 
     protected boolean canBeFortifiedBy(final Card aura) {
+        /**
+         * Equip only to Lands which are cards
+         */
         return false;
     }
 

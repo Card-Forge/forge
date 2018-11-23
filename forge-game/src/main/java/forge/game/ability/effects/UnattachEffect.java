@@ -32,8 +32,8 @@ public class UnattachEffect extends SpellAbilityEffect {
                 //final boolean gainControl = "GainControl".equals(af.parseParams().get("AILogic"));
                 //AbilityFactoryAttach.handleUnattachAura(cardToUnattach, c, gainControl);
             } else if (cardToUnattach.isAttachment()) {
-                if (cardToUnattach.isAttaching()) {
-                    cardToUnattach.unAttachEntity(cardToUnattach.getAttaching());
+                if (cardToUnattach.isAttachedToEntity()) {
+                    cardToUnattach.unattachFromEntity(cardToUnattach.getAttachingEntity());
                 }
             }
         }
