@@ -442,22 +442,22 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.EncodedCards);
     }
 
-    public GameEntityView getAttaching() {
-        return get(TrackableProperty.Attaching);
+    public GameEntityView getAttachingEntity() {
+        return get(TrackableProperty.AttachingEntity);
     }
     void updateAttaching(Card c) {
-        set(TrackableProperty.Attaching, GameEntityView.get(c.getAttachingEntity()));
+        set(TrackableProperty.AttachingEntity, GameEntityView.get(c.getAttachingEntity()));
     }
 
     public CardView getAttachingCard() {
-        GameEntityView enchanting = getAttaching();
+        GameEntityView enchanting = getAttachingEntity();
         if (enchanting instanceof CardView) {
             return (CardView) enchanting;
         }
         return null;
     }
     public PlayerView getAttachingPlayer() {
-        GameEntityView enchanting = getAttaching();
+        GameEntityView enchanting = getAttachingEntity();
         if (enchanting instanceof PlayerView) {
             return (PlayerView) enchanting;
         }
