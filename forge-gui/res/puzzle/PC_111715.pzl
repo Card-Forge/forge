@@ -14,7 +14,7 @@ humanhand=Mutant's Prey; Remember the Fallen; Feral Contest
 humangraveyard=Conch Horn; Veteran Armorer; Zealous Inquisitor; Rustspore Ram
 humanlibrary=
 humanbattlefield=Mountain|Set:MRD; Forest|Set:MRD; Forest|Set:MRD; Forest|Set:MRD; Forest|Set:MRD; Plains|Set:MRD; Plains|Set:MRD; Plains|Set:MRD; Plains|Set:MRD; Gruul Turf; Frostling; Arcbound Hybrid|Counters:P1P1=2; Raven's Run Dragoon; Fangren Firstborn; Rakeclaw Gargantuan|Id:420; Ashnod's Transmogrant
-aibattlefield=Island|Set:MRD; Island|Set:MRD; Island|Set:MRD; Island|Set:MRD; Island|Set:MRD; Island|Set:MRD; Island|Set:MRD|Tapped; Swamp|Set:MRD|Tapped; Swamp|Set:MRD|Tapped; Swamp|Set:MRD|Tapped; Swamp|Set:MRD|Tapped; Pin to the Earth|Attaching:420; Grafted Wargear|Attaching:422; Brood of Cockroaches|Id:422; Dream Fighter; Escaped Null; Midnight Covenant|Attaching:424; Ghost Ship|Id:424|Tapped; Scion of Glaciers
+aibattlefield=Island|Set:MRD; Island|Set:MRD; Island|Set:MRD; Island|Set:MRD; Island|Set:MRD; Island|Set:MRD; Island|Set:MRD|Tapped; Swamp|Set:MRD|Tapped; Swamp|Set:MRD|Tapped; Swamp|Set:MRD|Tapped; Swamp|Set:MRD|Tapped; Pin to the Earth|AttachedTo:420; Grafted Wargear|AttachedTo:422; Brood of Cockroaches|Id:422; Dream Fighter; Escaped Null; Midnight Covenant|AttachedTo:424; Ghost Ship|Id:424|Tapped; Scion of Glaciers
 aihand=
 aigraveyard=
 ailibrary=

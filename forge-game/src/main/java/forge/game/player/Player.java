@@ -684,7 +684,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                     restDamage *= 2;
                 }
             } else if (c.getName().equals("Curse of Bloodletting")) {
-                if (c.getAttachingEntity().equals(this)) {
+                if (c.getEntityAttachedTo().equals(this)) {
                     restDamage *= 2;
                 }
             } else if (c.getName().equals("Gisela, Blade of Goldnight")) {
@@ -2098,7 +2098,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 return false;
             }
         } else if (incR[0].equals("EnchantedController")) {
-            final GameEntity enchanted = source.getAttachingEntity();
+            final GameEntity enchanted = source.getEntityAttachedTo();
             if ((enchanted == null) || !(enchanted instanceof Card)) {
                 return false;
             }

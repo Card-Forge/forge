@@ -104,7 +104,7 @@ public class GameWrapper {
         		if( card.getTarget() != null ) {
         		    Card target = CardSpecificationHandler.INSTANCE.find( game, card.getTarget() );
         		    if (actualCard.isAttachment()) {
-        		        if (target.canBeAttachedBy(actualCard)) {
+        		        if (target.canBeAttached(actualCard)) {
         		            actualCard.attachToEntity(target);
         		        } else {
                                     throw new IllegalStateException( actualCard + " can't attach to " + target );

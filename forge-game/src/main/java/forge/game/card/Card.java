@@ -103,7 +103,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     // if this card is attached or linked to something, what card is it currently attached to
     private Card encoding, cloneOrigin, haunting, effectSource, pairedWith, meldedWith;
 
-    private GameEntity attachingEntity = null;
+    private GameEntity entityAttachedTo = null;
 
     private GameEntity mustAttackEntity = null;
     private GameEntity mustAttackEntityThisTurn = null;
@@ -2598,10 +2598,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         return CardLists.count(attachedCards, CardPredicates.Presets.EQUIPMENT) > 0;
     }
     public final boolean isEquippedBy(Card c) {
-        return this.isAttachedByCard(c);
+        return this.hasCardAttachment(c);
     }
     public final boolean isEquippedBy(final String cardName) {
-        return this.isAttachedByCard(cardName);
+        return this.hasCardAttachment(cardName);
     }
 
     public final CardCollectionView getFortifiedBy() {
@@ -2621,11 +2621,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public final boolean isFortifiedBy(Card c) {
         // 301.5e + 301.6
-        return isAttachedByCard(c);
+        return hasCardAttachment(c);
     }
 
     public final Card getEquipping() {
-        return this.getAttachingCard();
+        return this.getAttachedTo();
     }
     public final boolean isEquipping() {
         return this.isAttachedToEntity();
@@ -2663,36 +2663,36 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
     }
 
-    public final GameEntity getAttachingEntity() {
-        return attachingEntity;
+    public final GameEntity getEntityAttachedTo() {
+        return entityAttachedTo;
     }
-    public final void setAttachingEntity(final GameEntity e) {
-        if (attachingEntity == e) { return; }
-        attachingEntity = e;
-        view.updateAttaching(this);
+    public final void setEntityAttachedTo(final GameEntity e) {
+        if (entityAttachedTo == e) { return; }
+        entityAttachedTo = e;
+        view.updateAttachedTo(this);
     }
-    public final void removeAttaching(final GameEntity e) {
-        if (attachingEntity == e) {
-            setAttachingEntity(null);
+    public final void removeAttachedTo(final GameEntity e) {
+        if (entityAttachedTo == e) {
+            setEntityAttachedTo(null);
         }
     }
     public final boolean isAttachedToEntity() {
-        return attachingEntity != null;
+        return entityAttachedTo != null;
     }
 
-    public final Card getAttachingCard() {
-        if (attachingEntity instanceof Card) {
-            return (Card) attachingEntity;
+    public final Card getAttachedTo() {
+        if (entityAttachedTo instanceof Card) {
+            return (Card) entityAttachedTo;
         }
         return null;
     }
 
     public final Card getEnchantingCard() {
-        return getAttachingCard();
+        return getAttachedTo();
     }
-    public final Player getAttachingPlayer() {
-        if (attachingEntity instanceof Player) {
-            return (Player) attachingEntity;
+    public final Player getPlayerAttachedTo() {
+        if (entityAttachedTo instanceof Player) {
+            return (Player) entityAttachedTo;
         }
         return null;
     }
@@ -2704,13 +2704,13 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final void attachToEntity(final GameEntity entity) {
-        if (!entity.canBeAttachedBy(this)) {
+        if (!entity.canBeAttached(this)) {
             return;
         }
 
         GameEntity oldTarget = null;
         if (isAttachedToEntity()) {
-            oldTarget = getAttachingEntity();
+            oldTarget = getEntityAttachedTo();
             // If attempting to reattach to the same object, don't do anything.
             if (oldTarget.equals(entity)) {
                 return;
@@ -2719,7 +2719,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // They use double links... it's doubtful
-        setAttachingEntity(entity);
+        setEntityAttachedTo(entity);
         setTimestamp(getGame().getNextTimestamp());
         entity.addAttachedCard(this);
 
@@ -2735,11 +2735,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final void unattachFromEntity(final GameEntity entity) {
-        if (attachingEntity == null || !attachingEntity.equals(entity)) {
+        if (entityAttachedTo == null || !entityAttachedTo.equals(entity)) {
             return;
         }
 
-        setAttachingEntity(null);
+        setEntityAttachedTo(null);
         entity.removeAttachedCard(this);
 
         // Handle Bestowed Aura part
@@ -3833,7 +3833,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             setDirectlyPhasedOut(direct);
         }
 
-        if (isAttachedByCards()) {
+        if (hasCardAttachments()) {
             for (final Card eq : getAttachedCards()) {
                 if (eq.isPhasedOut() == phasingIn) {
                     eq.phase(false);
@@ -5196,16 +5196,16 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /* (non-Javadoc)
-     * @see forge.game.GameEntity#canBeAttachedBy(forge.game.card.Card, boolean)
+     * @see forge.game.GameEntity#canBeAttached(forge.game.card.Card, boolean)
      */
     @Override
-    public boolean canBeAttachedBy(Card attach, boolean checkSBA) {
+    public boolean canBeAttached(Card attach, boolean checkSBA) {
         // phase check there
         if (isPhasedOut() && !attach.isPhasedOut()) {
             return false;
         }
 
-        return super.canBeAttachedBy(attach, checkSBA);
+        return super.canBeAttached(attach, checkSBA);
     }
 
     public FCollectionView<ReplacementEffect> getReplacementEffects() {

@@ -106,7 +106,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 final CardStack stack = allLands.get(i);
                 final CardPanel firstPanel = stack.get(0);
                 if (firstPanel.getCard().getCurrentState().getName().equals(state.getName())) {
-                    if (!firstPanel.getAttachedPanels().isEmpty() || firstPanel.getCard().isAttachedByCards()) {
+                    if (!firstPanel.getAttachedPanels().isEmpty() || firstPanel.getCard().hasCardAttachments()) {
                         // Put this land to the left of lands with the same name
                         // and attachments.
                         insertIndex = i;
@@ -114,7 +114,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     }
                     if (!panel.getAttachedPanels().isEmpty()
                             || !panel.getCard().hasSameCounters(firstPanel.getCard())
-                            || firstPanel.getCard().isAttachedByCards() || (stack.size() == this.landStackMax)) {
+                            || firstPanel.getCard().hasCardAttachments() || (stack.size() == this.landStackMax)) {
                         // If this land has attachments or the stack is full,
                         // put it to the right.
                         insertIndex = i + 1;
@@ -683,7 +683,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
         toPanel.getAttachedPanels().clear();
 
-        if (card.isAttachedByCards()) {
+        if (card.hasCardAttachments()) {
             final Iterable<CardView> enchants = card.getAttachedCards();
             for (final CardView e : enchants) {
                 final CardPanel cardE = getCardPanel(e.getId());
@@ -698,8 +698,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
 
         CardPanel attachedToPanel;
-        if (card.getAttachingCard() != null) {
-            attachedToPanel = getCardPanel(card.getAttachingCard().getId());
+        if (card.getAttachedTo() != null) {
+            attachedToPanel = getCardPanel(card.getAttachedTo().getId());
         }
         else {
             attachedToPanel = null;

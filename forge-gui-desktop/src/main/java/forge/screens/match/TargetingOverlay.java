@@ -404,18 +404,18 @@ public class TargetingOverlay {
             return; //don't add arcs for cards if card already visualized
         }
 
-        final CardView attaching = c.getAttachingCard();
-        final Iterable<CardView> attachedBy = c.getAttachedCards();
+        final CardView attachedTo = c.getAttachedTo();
+        final Iterable<CardView> attachedCards = c.getAttachedCards();
         final CardView paired = c.getPairedWith();
 
-        if (null != attaching) {
-            if (attaching.getController() != null && !attaching.getController().equals(c.getController())) {
-                addArc(endpoints.get(attaching.getId()), endpoints.get(c.getId()), ArcConnection.Friends);
-                cardsVisualized.add(attaching);
+        if (null != attachedTo) {
+            if (attachedTo.getController() != null && !attachedTo.getController().equals(c.getController())) {
+                addArc(endpoints.get(attachedTo.getId()), endpoints.get(c.getId()), ArcConnection.Friends);
+                cardsVisualized.add(attachedTo);
             }
         }
-        if (null != attachedBy) {
-            for (final CardView enc : attachedBy) {
+        if (null != attachedCards) {
+            for (final CardView enc : attachedCards) {
                 if (enc.getController() != null && !enc.getController().equals(c.getController())) {
                     addArc(endpoints.get(c.getId()), endpoints.get(enc.getId()), ArcConnection.Friends);
                     cardsVisualized.add(enc);

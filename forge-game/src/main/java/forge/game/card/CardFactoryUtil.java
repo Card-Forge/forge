@@ -1526,7 +1526,7 @@ public class CardFactoryUtil {
 
         //  Count$InTargetedHand (targeted player's cards in hand)
         if (sq[0].contains("InEnchantedHand")) {
-            GameEntity o = c.getAttachingEntity();
+            GameEntity o = c.getEntityAttachedTo();
             Player controller = null;
             if (o instanceof Card) {
                 controller = ((Card) o).getController();
@@ -1539,7 +1539,7 @@ public class CardFactoryUtil {
             }
         }
         if (sq[0].contains("InEnchantedYard")) {
-            GameEntity o = c.getAttachingEntity();
+            GameEntity o = c.getEntityAttachedTo();
             Player controller = null;
             if (o instanceof Card) {
                 controller = ((Card) o).getController();

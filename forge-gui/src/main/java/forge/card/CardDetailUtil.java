@@ -441,8 +441,8 @@ public class CardDetailUtil {
             area.append(")");
         }
 
-        // attached by
-        if (card.isAttachedByCards()) {
+        // a card has something attached to it
+        if (card.hasCardAttachments()) {
             if (area.length() != 0) {
                 area.append("\n");
             }
@@ -451,18 +451,18 @@ public class CardDetailUtil {
             area.append("=");
         }
 
-        // attaching
-        if (card.getAttachingCard() != null) {
+        // a card is attached to something
+        if (card.getAttachedTo() != null) {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("*Attached to ").append(card.getAttachingCard()).append("*");
+            area.append("*Attached to ").append(card.getAttachedTo()).append("*");
         }
-        if (card.getAttachingPlayer() != null) {
+        if (card.getEnchantedPlayer() != null) {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("*Enchanting ").append(card.getAttachingPlayer()).append("*");
+            area.append("*Enchanting ").append(card.getEnchantedPlayer()).append("*");
         }
 
         // controlling

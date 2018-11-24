@@ -33,7 +33,7 @@ public class UnattachEffect extends SpellAbilityEffect {
                 //AbilityFactoryAttach.handleUnattachAura(cardToUnattach, c, gainControl);
             } else if (cardToUnattach.isAttachment()) {
                 if (cardToUnattach.isAttachedToEntity()) {
-                    cardToUnattach.unattachFromEntity(cardToUnattach.getAttachingEntity());
+                    cardToUnattach.unattachFromEntity(cardToUnattach.getEntityAttachedTo());
                 }
             }
         }

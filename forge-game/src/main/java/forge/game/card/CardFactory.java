@@ -93,7 +93,7 @@ public class CardFactory {
 
         // this's necessary for forge.game.GameAction.unattachCardLeavingBattlefield(Card)
         out.setAttachedCards(in.getAttachedCards());
-        out.setAttachingEntity(in.getAttachingEntity());
+        out.setEntityAttachedTo(in.getEntityAttachedTo());
 
         out.setClones(in.getClones());
         out.setCastSA(in.getCastSA());
