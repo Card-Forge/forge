@@ -451,7 +451,7 @@ public class CardDetailUtil {
             area.append("=");
         }
 
-        // a card is attached to smth.
+        // a card is attached to something
         if (card.getAttachedTo() != null) {
             if (area.length() != 0) {
                 area.append("\n");

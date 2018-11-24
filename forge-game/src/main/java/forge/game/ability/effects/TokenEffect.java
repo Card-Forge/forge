@@ -497,7 +497,7 @@ public class TokenEffect extends SpellAbilityEffect {
             // TODO update when doing Attach Update
             boolean canAttach = lki.isAttachment();
 
-            if (canAttach && ge.canBeTargetedByAttachment(lki)) {
+            if (canAttach && ge.canBeAttached(lki)) {
                 canAttach = false;
             }
 

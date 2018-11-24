@@ -101,7 +101,7 @@ public class AttachEffect extends SpellAbilityEffect {
                 // Although honestly, I'm not sure if the three of those could
                 // handle being scripted
                 // 303.4h: If the card can't be enchanted, the aura doesn't move
-                if (c.canBeTargetedByAttachment(card)) {
+                if (c.canBeAttached(card)) {
                     handleAura(card, c);
                 }
             } else  {

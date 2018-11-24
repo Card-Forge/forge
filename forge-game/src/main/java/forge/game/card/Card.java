@@ -2704,7 +2704,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final void attachToEntity(final GameEntity entity) {
-        if (!entity.canBeTargetedByAttachment(this)) {
+        if (!entity.canBeAttached(this)) {
             return;
         }
 
@@ -5196,16 +5196,16 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /* (non-Javadoc)
-     * @see forge.game.GameEntity#canBeTargetedByAttachment(forge.game.card.Card, boolean)
+     * @see forge.game.GameEntity#canBeAttached(forge.game.card.Card, boolean)
      */
     @Override
-    public boolean canBeTargetedByAttachment(Card attach, boolean checkSBA) {
+    public boolean canBeAttached(Card attach, boolean checkSBA) {
         // phase check there
         if (isPhasedOut() && !attach.isPhasedOut()) {
             return false;
         }
 
-        return super.canBeTargetedByAttachment(attach, checkSBA);
+        return super.canBeAttached(attach, checkSBA);
     }
 
     public FCollectionView<ReplacementEffect> getReplacementEffects() {

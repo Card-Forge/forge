@@ -1292,7 +1292,7 @@ public class AttachAi extends SpellAbilityAi {
         } else {
             list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource, sa);
 
-            list = CardLists.filter(list, CardPredicates.canBeTargetedByAttachment(attachSource));
+            list = CardLists.filter(list, CardPredicates.canBeAttached(attachSource));
 
             // TODO If Attaching without casting, don't need to actually target.
             // I believe this is the only case where mandatory will be true, so just

@@ -507,11 +507,11 @@ public class CardProperty {
             final String restriction = property.substring(10);
             if (restriction.equals("Remembered")) {
                 for (final Object rem : source.getRemembered()) {
-                    if (!(rem instanceof Card) || !((Card) rem).canBeTargetedByAttachment(card))
+                    if (!(rem instanceof Card) || !((Card) rem).canBeAttached(card))
                         return false;
                 }
             } else if (restriction.equals("Source")) {
-                if (!source.canBeTargetedByAttachment(card)) return false;
+                if (!source.canBeAttached(card)) return false;
             }
         } else if (property.startsWith("CanBeEnchantedBy")) {
             if (property.substring(16).equals("Targeted")) {
@@ -519,7 +519,7 @@ public class CardProperty {
                     final SpellAbility saTargeting = sa.getSATargetingCard();
                     if (saTargeting != null) {
                         for (final Card c : saTargeting.getTargets().getTargetCards()) {
-                            if (!card.canBeTargetedByAttachment(c)) {
+                            if (!card.canBeAttached(c)) {
                                 return false;
                             }
                         }
@@ -529,13 +529,13 @@ public class CardProperty {
                 for (final Object rem : source.getRemembered()) {
                     if (rem instanceof Card) {
                         final Card c = (Card) rem;
-                        if (!card.canBeTargetedByAttachment(c)) {
+                        if (!card.canBeAttached(c)) {
                             return false;
                         }
                     }
                 }
             } else {
-                if (!card.canBeTargetedByAttachment(source)) {
+                if (!card.canBeAttached(source)) {
                     return false;
                 }
             }
@@ -566,7 +566,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("CanBeAttachedBy")) {
-            if (!card.canBeTargetedByAttachment(source)) {
+            if (!card.canBeAttached(source)) {
                 return false;
             }
         } else if (property.startsWith("Equipped")) {

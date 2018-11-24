@@ -975,7 +975,7 @@ public class ComputerUtil {
                     playNow = false;
                     break;
                 }
-                if (!playNow && c.isCreature() && ComputerUtilCombat.canAttackNextTurn(c) && c.canBeTargetedByAttachment(card)) {
+                if (!playNow && c.isCreature() && ComputerUtilCombat.canAttackNextTurn(c) && c.canBeAttached(card)) {
                     playNow = true;
                 }
             }

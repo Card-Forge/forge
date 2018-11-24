@@ -376,11 +376,11 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         }
     }
 
-    public boolean canBeTargetedByAttachment(final Card attach) {
-        return canBeTargetedByAttachment(attach, false);
+    public boolean canBeAttached(final Card attach) {
+        return canBeAttached(attach, false);
     }
 
-    public boolean canBeTargetedByAttachment(final Card attach, boolean checkSBA) {
+    public boolean canBeAttached(final Card attach, boolean checkSBA) {
         // master mode
         if (!attach.isAttachment() || attach.isCreature() || equals(attach)) {
             return false;
