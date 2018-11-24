@@ -212,8 +212,8 @@ public class GameCopier {
             otherCard.setSickness(card.hasSickness());
             otherCard.setState(card.getCurrentStateName(), false);
             if (card.isAttachedToEntity()) {
-                GameEntity ge = gameObjectMap.map(card.getAttachingEntity());
-                otherCard.setAttachingEntity(ge);
+                GameEntity ge = gameObjectMap.map(card.getEntityAttachedTo());
+                otherCard.setEntityAttachedTo(ge);
                 ge.addAttachedCard(otherCard);
             }
             if (card.getCloneOrigin() != null) {

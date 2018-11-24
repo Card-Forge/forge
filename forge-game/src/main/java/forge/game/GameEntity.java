@@ -307,7 +307,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         getView().updateAttachedCards(this);
     }
 
-    public final boolean isAttachedByCards() {
+    public final boolean hasCardAttachments() {
         return FCollection.hasElements(attachedCards);
     }
 
@@ -320,15 +320,15 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         return CardLists.count(attachedCards, CardPredicates.Presets.AURA) > 0;
     }
 
-    public final boolean isAttachedByCard(Card c) {
+    public final boolean hasCardAttachment(Card c) {
         return FCollection.hasElement(attachedCards, c);
     }
     public final boolean isEnchantedBy(Card c) {
         // Rule 303.4k  Even if c is no Aura it still counts
-        return isAttachedByCard(c);
+        return hasCardAttachment(c);
     }
 
-    public final boolean isAttachedByCard(final String cardName) {
+    public final boolean hasCardAttachment(final String cardName) {
         if (attachedCards == null) {
             return false;
         }
@@ -336,7 +336,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
     public final boolean isEnchantedBy(final String cardName) {
         // Rule 303.4k  Even if c is no Aura it still counts
-        return isAttachedByCard(cardName);
+        return hasCardAttachment(cardName);
     }
 
     /**
@@ -376,11 +376,11 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         }
     }
 
-    public boolean canBeAttachedBy(final Card attach) {
-        return canBeAttachedBy(attach, false);
+    public boolean canBeTargetedByAttachment(final Card attach) {
+        return canBeTargetedByAttachment(attach, false);
     }
 
-    public boolean canBeAttachedBy(final Card attach, boolean checkSBA) {
+    public boolean canBeTargetedByAttachment(final Card attach, boolean checkSBA) {
         // master mode
         if (!attach.isAttachment() || attach.isCreature() || equals(attach)) {
             return false;

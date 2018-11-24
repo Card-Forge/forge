@@ -271,7 +271,7 @@ public class Untap extends Phase {
                 // 702.23g If an object would simultaneously phase out directly
                 // and indirectly, it just phases out indirectly.
                 if (c.isAura() || c.isFortification()) {
-                    final Card ent = c.getAttachingCard();
+                    final Card ent = c.getAttachedTo();
                     if (ent != null && list.contains(ent)) {
                         continue;
                     }

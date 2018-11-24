@@ -13,4 +13,4 @@ activeplayer=human
 activephase=MAIN1
 humanhand=Switcheroo;Atzocan Archer;Strider Harness;Recollect
 humanbattlefield=Overwhelming Splendor|EnchantingPlayer:AI;Daybreak Chaplain;Aggressive Mammoth;Thrashing Brontodon;Sunpetal Grove;Sunpetal Grove;Sunpetal Grove;Sunpetal Grove;Hinterland Harbor;Hinterland Harbor;Hinterland Harbor;Hinterland Harbor
-aibattlefield=Hungering Hydra|Id:1|Counters:P1P1=3;Oakenform|Attaching:1;Darigaaz Reincarnated|SummonSick;Glorybringer|SummonSick;Guttersnipe
+aibattlefield=Hungering Hydra|Id:1|Counters:P1P1=3;Oakenform|AttachedTo:1;Darigaaz Reincarnated|SummonSick;Glorybringer|SummonSick;Guttersnipe

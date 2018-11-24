@@ -1378,7 +1378,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         lifelink.attachToEntity(bear);
 
         assertTrue(bear.isEnchanted());
-        assertTrue(bear.isAttachedByCard(lifelink));
+        assertTrue(bear.hasCardAttachment(lifelink));
 
         // this adds Artifact Type
         addCardToZone("Mycosynth Lattice", p, ZoneType.Battlefield);
@@ -1416,7 +1416,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         curse.attachToEntity(p);
         game.getAction().checkStateEffects(true);
         assertTrue(p.isEnchanted());
-        assertTrue(p.isAttachedByCard(curse));
+        assertTrue(p.hasCardAttachment(curse));
 
         // this adds Artifact Type
         addCardToZone("Mycosynth Lattice", p, ZoneType.Battlefield);
@@ -1453,7 +1453,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertFalse(fortification.isEquipment());
 
         assertTrue(mountain.isFortified());
-        assertTrue(mountain.isAttachedByCard(fortification));
+        assertTrue(mountain.hasCardAttachment(fortification));
         assertTrue(mountain.hasKeyword(Keyword.INDESTRUCTIBLE));
 
         // adding Brawl will cause the Fortification into Equipment and it to
@@ -1464,7 +1464,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertFalse(fortification.isFortification());
         assertTrue(fortification.isEquipment());
 
-        assertFalse(mountain.isAttachedByCard(fortification));
+        assertFalse(mountain.hasCardAttachment(fortification));
         assertFalse(mountain.hasKeyword(Keyword.INDESTRUCTIBLE));
     }
 
@@ -1486,7 +1486,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertTrue(dryad.isFortified());
         assertFalse(dryad.isEquipped());
 
-        assertTrue(dryad.isAttachedByCard(fortification));
+        assertTrue(dryad.hasCardAttachment(fortification));
         assertTrue(dryad.hasKeyword(Keyword.INDESTRUCTIBLE));
 
         // adding Brawl will cause the Fortification into Equipment
@@ -1498,7 +1498,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertFalse(dryad.isFortified());
         assertTrue(dryad.isEquipped());
 
-        assertTrue(dryad.isAttachedByCard(fortification));
+        assertTrue(dryad.hasCardAttachment(fortification));
         assertTrue(dryad.hasKeyword(Keyword.INDESTRUCTIBLE));
     }
 

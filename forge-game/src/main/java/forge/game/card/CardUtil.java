@@ -266,7 +266,7 @@ public final class CardUtil {
         newCopy.getDamageHistory().setCreatureGotBlockedThisTurn(in.getDamageHistory().getCreatureGotBlockedThisTurn());
 
         newCopy.setAttachedCards(in.getAttachedCards());
-        newCopy.setAttachingEntity(in.getAttachingEntity());
+        newCopy.setEntityAttachedTo(in.getEntityAttachedTo());
 
         newCopy.setClones(in.getClones());
         newCopy.setHaunting(in.getHaunting());

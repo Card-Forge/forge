@@ -289,12 +289,12 @@ public abstract class GameState {
                 newText.append("|Meld");
             }
             if (c.isAttachedToEntity()) {
-                newText.append("|Attaching:").append(c.getAttachingEntity().getId());
+                newText.append("|AttachedTo:").append(c.getEntityAttachedTo().getId());
             }
-            if (c.getAttachingPlayer() != null) {
+            if (c.getPlayerAttachedTo() != null) {
                 // TODO: improve this for game states with more than two players
                 newText.append("|EnchantingPlayer:");
-                Player p = c.getAttachingPlayer();
+                Player p = c.getPlayerAttachedTo();
                 newText.append(p.getController().isAI() ? "AI" : "HUMAN");
             }
 
@@ -1029,7 +1029,7 @@ public abstract class GameState {
                         // (will be overridden later, so the actual value shouldn't matter)
 
                         //FIXME it shouldn't be able to attach itself
-                        c.setAttachingEntity(c);
+                        c.setEntityAttachedTo(c);
                     }
 
                     if (cardsWithoutETBTrigs.contains(c)) {
@@ -1126,7 +1126,7 @@ public abstract class GameState {
                 } else if (info.startsWith("Id:")) {
                     int id = Integer.parseInt(info.substring(3));
                     idToCard.put(id, c);
-                } else if (info.startsWith("Attaching:")) {
+                } else if (info.startsWith("Attaching:") /*deprecated*/ || info.startsWith("AttachedTo:")) {
                     int id = Integer.parseInt(info.substring(info.indexOf(':') + 1));
                     cardToAttachId.put(c, id);
                 } else if (info.startsWith("EnchantingPlayer:")) {

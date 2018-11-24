@@ -14,6 +14,6 @@ humanhand=Flayer Husk; Darksteel Axe; Nameless Inversion
 humanbattlefield=Plains|Set:CHK; Plains|Set:CHK; Plains|Set:CHK; Plains|Set:CHK; Swamp|Set:CHK; Swamp|Set:CHK; Swamp|Set:CHK; Kor Duelist; Scavenger Drake; Moonlit Strider; Copper Carapace
 humangraveyard=Thief of Hope
 humanlibrary=
-aibattlefield=Mountain|Set:ZEN|Tapped; Mountain|Set:ZEN|Tapped; Mountain|Set:ZEN|Tapped; Mountain|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Bloodshot Trainee; Kozilek's Predator|Id:420; Kitesail|Attaching:420; Gorehorn Minotaurs|Counters:P1P1=2; Kavu Primarch|Counters:P1P1=4|Tapped
+aibattlefield=Mountain|Set:ZEN|Tapped; Mountain|Set:ZEN|Tapped; Mountain|Set:ZEN|Tapped; Mountain|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Forest|Set:ZEN|Tapped; Bloodshot Trainee; Kozilek's Predator|Id:420; Kitesail|AttachedTo:420; Gorehorn Minotaurs|Counters:P1P1=2; Kavu Primarch|Counters:P1P1=4|Tapped
 aigraveyard=
 ailibrary=

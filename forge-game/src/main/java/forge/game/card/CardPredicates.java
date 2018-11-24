@@ -216,11 +216,11 @@ public final class CardPredicates {
         };
     };
 
-    public static final Predicate<Card> canBeAttachedBy(final Card aura) {
+    public static final Predicate<Card> canBeTargetedByAttachment(final Card aura) {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return c.canBeAttachedBy(aura);
+                return c.canBeTargetedByAttachment(aura);
             }
         };
     };

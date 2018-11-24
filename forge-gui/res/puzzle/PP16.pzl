@@ -12,4 +12,4 @@ AILife=6
 humanhand=Carrion Feeder;Faerie Macabre;Doom Blade;Rite of Consumption;Dark Dabbling
 humanlibrary=Gurmag Angler
 humanbattlefield=Swamp;Swamp;Swamp;Forest;Forest;Forest;Forest;Arrogant Wurm;Gorgon Recluse
-aibattlefield=Stinkweed Imp|Id:16;Demonic Appetite|Attaching:16
+aibattlefield=Stinkweed Imp|Id:16;Demonic Appetite|AttachedTo:16

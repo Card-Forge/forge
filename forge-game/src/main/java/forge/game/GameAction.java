@@ -508,7 +508,7 @@ public class GameAction {
 
         // unenchant creature if moving aura
         if (copied.isAttachedToEntity()) {
-            copied.unattachFromEntity(copied.getAttachingEntity());
+            copied.unattachFromEntity(copied.getEntityAttachedTo());
         }
     }
 
@@ -975,7 +975,7 @@ public class GameAction {
                 checkAgain |= stateBasedAction704_attach(c); // Attachment
 
                 if (c.isCreature() && c.isAttachedToEntity()) { // Rule 704.5q - Creature attached to an object or player, becomes unattached
-                    c.unattachFromEntity(c.getAttachingEntity());
+                    c.unattachFromEntity(c.getEntityAttachedTo());
                     checkAgain = true;
                 }
 
@@ -1093,14 +1093,14 @@ public class GameAction {
         boolean checkAgain = false;
 
         if (c.isAttachedToEntity()) {
-            final GameEntity ge = c.getAttachingEntity();
-            if (!ge.canBeAttachedBy(c)) {
+            final GameEntity ge = c.getEntityAttachedTo();
+            if (!ge.canBeTargetedByAttachment(c)) {
                 c.unattachFromEntity(ge);
                 checkAgain = true;
             }
         }
 
-        if (c.isAttachedByCards()) {
+        if (c.hasCardAttachments()) {
             for (final Card attach : Lists.newArrayList(c.getAttachedCards())) {
                 if (!attach.isInPlay()) {
                     attach.unattachFromEntity(c);

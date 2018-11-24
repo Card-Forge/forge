@@ -16,8 +16,8 @@ import java.util.List;
 
 public class UnattachAllEffect extends SpellAbilityEffect {
     private static void handleUnattachment(final GameEntity o, final Card cardToUnattach) {
-        if (cardToUnattach.isAttachment() && o.isAttachedByCard(cardToUnattach)) {
-            cardToUnattach.unattachFromEntity(cardToUnattach.getAttachingEntity());
+        if (cardToUnattach.isAttachment() && o.hasCardAttachment(cardToUnattach)) {
+            cardToUnattach.unattachFromEntity(cardToUnattach.getEntityAttachedTo());
         }
     }
 
