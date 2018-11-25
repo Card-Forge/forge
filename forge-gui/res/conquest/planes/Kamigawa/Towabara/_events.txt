@@ -1,4 +1,4 @@
-Name:EVENT1|Deck:Random|Variant:None|Avatar:None|Desc:
+Name:Nagao, Bound by Honor|Deck:Nagao, Bound by Honor.dck|Variant:Commander|Avatar:Nagao, Bound by Honor|Desc:
 Name:EVENT2|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT3|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT4|Deck:Random|Variant:None|Avatar:None|Desc:
