@@ -23,9 +23,10 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         // Specific details of ordering cards are handled by PlayerControllerAi#orderMoveToZoneList
-
         final PhaseHandler ph = aiPlayer.getGame().getPhaseHandler();
-        if (sa.getHostCard().isPermanent() && sa.getPayCosts() != null
+        final Card source = sa.getHostCard();
+
+        if (source.isPermanent() && sa.getPayCosts() != null
                 && (sa.getPayCosts().hasTapCost() || sa.getPayCosts().hasManaCost())) {
             // If it has an associated cost, try to only do this before own turn unless there are special logic considerations
             if ("Main2BeforeOwnTurn".equals(sa.getParam("AILogic")) && !(ph.is(PhaseType.MAIN2) && ph.getNextTurn() == aiPlayer)) {
@@ -36,10 +37,9 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
         }
 
         // Do it once per turn, generally (may be improved later)
-        if (AiCardMemory.isRememberedCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
+        if (AiCardMemory.isRememberedCardByName(aiPlayer, source.getName(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
             return false;
         }
-        AiCardMemory.rememberCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
@@ -62,8 +62,14 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
             } else {
                 return false; // could not find a valid target
             }
+
+            if (!canTgtHuman || !canTgtAI) {
+                // can't target another player anyway, remember for no second activation this turn
+                AiCardMemory.rememberCard(aiPlayer, source, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
+            }
         } else {
             // if it's just defined, no big deal
+            AiCardMemory.rememberCard(aiPlayer, source, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
         }
 
         return true;
