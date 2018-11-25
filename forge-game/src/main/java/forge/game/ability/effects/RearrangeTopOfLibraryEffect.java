@@ -75,7 +75,6 @@ public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-
         numCards = AbilityUtils.calculateAmount(host, sa.getParam("NumCards"), sa);
         shuffle = sa.hasParam("MayShuffle");
 

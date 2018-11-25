@@ -331,8 +331,12 @@ public class PlayerControllerAi extends PlayerController {
     public CardCollectionView orderMoveToZoneList(CardCollectionView cards, ZoneType destinationZone, SpellAbility source) {
         //TODO Add more logic for AI ordering here
 
-        // In presence of Volrath's Shapeshifter in deck, try to place the best creature on top of the graveyard
+        if (cards.isEmpty()) {
+            return cards;
+        }
+
         if (destinationZone == ZoneType.Graveyard) {
+            // In presence of Volrath's Shapeshifter in deck, try to place the best creature on top of the graveyard
             if (!CardLists.filter(game.getCardsInGame(), new Predicate<Card>() {
                 @Override
                 public boolean apply(Card card) {
@@ -362,6 +366,61 @@ public class PlayerControllerAi extends PlayerController {
                     return reordered;
                 }
             }
+        } else if (destinationZone == ZoneType.Library) {
+            // Ponder and similar cards
+            Player p = cards.getFirst().getController(); // whose library are we reordering?
+            CardCollection reordered = new CardCollection();
+
+            // Try to use the Scry logic to figure out what should be closer to the top and what should be closer to the bottom
+            CardCollection topLands = new CardCollection(), topNonLands = new CardCollection(), bottom = new CardCollection();
+            for (Card c : cards) {
+                if (ComputerUtil.scryWillMoveCardToBottomOfLibrary(p, c)) {
+                    bottom.add(c);
+                } else {
+                    if (c.isLand()) {
+                        topLands.add(c);
+                    } else {
+                        topNonLands.add(c);
+                    }
+                }
+            }
+
+            int landsOTB = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA).size();
+
+            if (!p.isOpponentOf(player)) {
+                if (landsOTB <= 2) {
+                    // too few lands, add all the lands from the "top" category first
+                    reordered.addAll(topLands);
+                    topLands.clear();
+                } else {
+                    // we would have scried a land to top, so add one land from the "top" category if it's available there, but not more
+                    if (!topLands.isEmpty()) {
+                        Card first = topLands.getFirst();
+                        reordered.add(first);
+                        topLands.remove(first);
+                    }
+                }
+                // add everything that was deemed playable
+                reordered.addAll(topNonLands);
+                // then all the land extras that may be there
+                reordered.addAll(topLands);
+                // and then everything else that was deemed unplayable and thus scriable to the bottom
+                reordered.addAll(bottom);
+            } else {
+                // try to screw the opponent up as much as possible by placing the uncastables first
+                reordered.addAll(bottom);
+                if (landsOTB <= 5) {
+                    reordered.addAll(topNonLands);
+                    reordered.addAll(topLands);
+                } else {
+                    reordered.addAll(topLands);
+                    reordered.addAll(topNonLands);
+                }
+            }
+
+            assert(reordered.size() == cards.size());
+
+            return reordered;
         }
 
         // Default: return with the same order as was passed into this method
