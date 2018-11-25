@@ -1,6 +1,6 @@
 Name:Nagao, Bound by Honor|Deck:Nagao, Bound by Honor.dck|Variant:Commander|Avatar:Nagao, Bound by Honor|Desc:
-Name:EVENT2|Deck:Random|Variant:None|Avatar:None|Desc:
-Name:EVENT3|Deck:Random|Variant:None|Avatar:None|Desc:
+Name:Oyobi, Who Split the Heavens|Deck:Oyobi, Who Split the Heavens.dck|Variant:Commander|Avatar:Oyobi, Who Split the Heavens|Desc:
+Name:Rune-Tail, Kitsune Ascendant|Deck:Rune-Tail, Kitsune Ascendant.dck|Variant:Commander|Avatar:Rune-Tail, Kitsune Ascendant|Desc:
 Name:EVENT4|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT5|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT6|Deck:Random|Variant:None|Avatar:None|Desc:
