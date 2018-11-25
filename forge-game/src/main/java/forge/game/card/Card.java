@@ -4954,7 +4954,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // Protection only works on the Battlefield
-        if (isInZone(ZoneType.Battlefield)) {
+        if (!isInZone(ZoneType.Battlefield)) {
             return false;
         }
 
