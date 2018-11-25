@@ -7,5 +7,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Creature.White | P
 SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Mandatory$ True | Hidden$ True | ChangeType$ Creature.White+YouCtrl
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$Valid Creature.White+YouCtrl+cmcLE4
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eiganjo_free_riders.jpg
 Oracle:Flying\nAt the beginning of your upkeep, return a white creature you control to its owner's hand.
