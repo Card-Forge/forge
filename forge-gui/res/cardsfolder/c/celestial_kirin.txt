@@ -6,7 +6,8 @@ K:Flying
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDestroyAll | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, destroy all permanents with that spell's converted mana cost.
 SVar:TrigDestroyAll:DB$DestroyAll | ValidCards$ Permanent.cmcEQX | References$ X
 SVar:X:TriggerCount$CastSACMC
-AI:RemoveDeck:Random
 AI:RemoveDeck:All
+DeckHints:Type$Spirit|Arcane
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_kirin.jpg
 Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, destroy all permanents with that spell's converted mana cost.
