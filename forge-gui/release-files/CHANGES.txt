@@ -1,3 +1,6 @@
+- AI Improvements -
+A new round of AI improvements went into the game, hopefully making the game a little more interesting and exciting to play. In particular, certain improvements regarding Flash were implemented, the AI is now able to use cards which reorder the top of the library, such as Ponder or Portent, and several logic-related bugs were fixed. Also, the AI has been optimized a little, hopefully making it a bit faster, especially on mobile platforms, in situations where there are a lot of cards on the battlefield but the AI has little or nothing to do.
+
 - Planar Conquest: Guilds of Ravnica -
 Cards from Guilds of Ravnica are now available on the Ravnica plane in Planar Conquest. Several events on this plane have been updated or changed to feature Guilds of Ravnica cards as well. Please note that Planar Conquest is currently only available on Android and the macOS mobile backport.
 
