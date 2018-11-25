@@ -300,7 +300,7 @@ public class ComputerUtilCost {
                     if (!important) {
                         return false;
                     }
-                    if (!CardLists.filterControlledBy(source.getEnchantedBy(false), source.getController()).isEmpty()) {
+                    if (!CardLists.filterControlledBy(source.getEnchantedBy(), source.getController()).isEmpty()) {
                         return false;
                     }
                     continue;

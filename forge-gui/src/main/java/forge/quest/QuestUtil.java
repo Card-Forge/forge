@@ -595,7 +595,7 @@ public class QuestUtil {
         rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
         rules.setCanCloneUseTargetsImage(FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE));
 
-        TreeSet<GameType> variant = new TreeSet();
+        final TreeSet<GameType> variant = new TreeSet<>();
         if(FModel.getQuest().getDeckConstructionRules() == DeckConstructionRules.Commander){
             variant.add(GameType.Commander);
         }

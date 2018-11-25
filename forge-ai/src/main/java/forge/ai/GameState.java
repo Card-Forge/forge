@@ -196,9 +196,7 @@ public abstract class GameState {
                     cardsReferencedByID.add(card.getExiledWith());
                 }
                 if (zone == ZoneType.Battlefield) {
-                    if (!card.getEnchantedBy(false).isEmpty()
-                            || !card.getEquippedBy(false).isEmpty()
-                            || !card.getFortifiedBy(false).isEmpty()) {
+                    if (!card.getAttachedCards().isEmpty()) {
                         // Remember the ID of cards that have attachments
                         cardsReferencedByID.add(card);
                     }
@@ -290,17 +288,13 @@ public abstract class GameState {
             } else if (c.getCurrentStateName().equals(CardStateName.Meld)) {
                 newText.append("|Meld");
             }
-            if (c.getEquipping() != null) {
-                newText.append("|Attaching:").append(c.getEquipping().getId());
-            } else if (c.getFortifying() != null) {
-                newText.append("|Attaching:").append(c.getFortifying().getId());
-            } else if (c.getEnchantingCard() != null) {
-                newText.append("|Attaching:").append(c.getEnchantingCard().getId());
+            if (c.isAttachedToEntity()) {
+                newText.append("|AttachedTo:").append(c.getEntityAttachedTo().getId());
             }
-            if (c.getEnchantingPlayer() != null) {
+            if (c.getPlayerAttachedTo() != null) {
                 // TODO: improve this for game states with more than two players
                 newText.append("|EnchantingPlayer:");
-                Player p = c.getEnchantingPlayer();
+                Player p = c.getPlayerAttachedTo();
                 newText.append(p.getController().isAI() ? "AI" : "HUMAN");
             }
 
@@ -959,25 +953,15 @@ public abstract class GameState {
         // Unattach all permanents first
         for(Entry<Card, Integer> entry : cardToAttachId.entrySet()) {
             Card attachedTo = idToCard.get(entry.getValue());
-
-            attachedTo.unEnchantAllCards();
-            attachedTo.unEquipAllCards();
-            for (Card c : attachedTo.getFortifiedBy(true)) {
-                attachedTo.unFortifyCard(c);
-            }
+            attachedTo.unAttachAllCards();
         }
 
         // Attach permanents by ID
         for(Entry<Card, Integer> entry : cardToAttachId.entrySet()) {
             Card attachedTo = idToCard.get(entry.getValue());
             Card attacher = entry.getKey();
-
-            if (attacher.isEquipment()) {
-                attacher.equipCard(attachedTo);
-            } else if (attacher.isAura()) {
-                attacher.enchantEntity(attachedTo);
-            } else if (attacher.isFortified()) {
-                attacher.fortifyCard(attachedTo);
+            if (attacher.isAttachment()) {
+                attacher.attachToEntity(attachedTo);
             }
         }
 
@@ -988,7 +972,7 @@ public abstract class GameState {
             Game game = attacher.getGame();
             Player attachedTo = entry.getValue() == TARGET_AI ? game.getPlayers().get(1) : game.getPlayers().get(0);
 
-            attacher.enchantEntity(attachedTo);
+            attacher.attachToEntity(attachedTo);
         }
     }
 
@@ -1043,7 +1027,9 @@ public abstract class GameState {
                     if (c.isAura()) {
                         // dummy "enchanting" to indicate that the card will be force-attached elsewhere
                         // (will be overridden later, so the actual value shouldn't matter)
-                        c.setEnchanting(c);
+
+                        //FIXME it shouldn't be able to attach itself
+                        c.setEntityAttachedTo(c);
                     }
 
                     if (cardsWithoutETBTrigs.contains(c)) {
@@ -1140,7 +1126,7 @@ public abstract class GameState {
                 } else if (info.startsWith("Id:")) {
                     int id = Integer.parseInt(info.substring(3));
                     idToCard.put(id, c);
-                } else if (info.startsWith("Attaching:")) {
+                } else if (info.startsWith("Attaching:") /*deprecated*/ || info.startsWith("AttachedTo:")) {
                     int id = Integer.parseInt(info.substring(info.indexOf(':') + 1));
                     cardToAttachId.put(c, id);
                 } else if (info.startsWith("EnchantingPlayer:")) {

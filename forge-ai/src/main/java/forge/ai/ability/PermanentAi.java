@@ -192,10 +192,10 @@ public class PermanentAi extends SpellAbilityAi {
                         // be better to have a pristine copy of the card - might not always be a correct assumption, but sounds
                         // like a reasonable default for some cards).
                         for (Card c : ctrld) {
-                            if (c.getEnchantedBy(false).isEmpty()) {
+                            if (c.getEnchantedBy().isEmpty()) {
                                 numControlled++;
                             } else {
-                                for (Card att : c.getEnchantedBy(false)) {
+                                for (Card att : c.getEnchantedBy()) {
                                     if (!att.getController().isOpponentOf(ai)) {
                                         numControlled++;
                                     }

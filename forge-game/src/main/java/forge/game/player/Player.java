@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -67,7 +67,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
  * <p>
  * Abstract Player class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -109,7 +109,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private CardCollection sacrificedThisTurn = new CardCollection();
 
     private Map<CounterType, Integer> countersAddedtoPermThisTurn = Maps.newEnumMap(CounterType.class);
-    
+
     /** A list of tokens not in play, but on their way.
      * This list is kept in order to not break ETB-replacement
      * on tokens. */
@@ -293,7 +293,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final int getOpponentsGreatestLifeTotal() {
         return Aggregates.max(getOpponents(), Accessors.FN_GET_LIFE_TOTAL);
     }
-    
+
     /**
      * Get the total number of poison counters amongst this player's opponents.
      */
@@ -382,7 +382,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean gainLife(int lifeGain, final Card source, final SpellAbility sa) {
-        
+
         // Run any applicable replacement effects.
         final Map<String, Object> repParams = Maps.newHashMap();
         repParams.put("Event", "GainLife");
@@ -410,7 +410,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 return false;
             }
             break;
-        default:       
+        default:
             return false;
         }
 
@@ -509,10 +509,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (!canPayLife(lifePayment)) {
             return false;
         }
-        
-        if (lifePayment <= 0) 
+
+        if (lifePayment <= 0)
             return true;
-        
+
         // rule 118.8
         if (life >= lifePayment) {
             return (loseLife(lifePayment) > 0);
@@ -624,7 +624,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return 0;
         }
 
-        if (hasProtectionFrom(source, true)) {
+        if (hasProtectionFromDamage(source)) {
             return 0;
         }
 
@@ -684,7 +684,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                     restDamage *= 2;
                 }
             } else if (c.getName().equals("Curse of Bloodletting")) {
-                if (c.getEnchanting().equals(this)) {
+                if (c.getEntityAttachedTo().equals(this)) {
                     restDamage *= 2;
                 }
             } else if (c.getName().equals("Gisela, Blade of Goldnight")) {
@@ -826,7 +826,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         return num;
     }
-    
+
     public final int getAssignedCombatDamage() {
         int num = 0;
         for (final Integer value : assignedCombatDamage.values()) {
@@ -852,14 +852,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         return num;
     }
-    
+
     /**
      * Get the total damage assigned to this player's opponents this turn.
      */
     public final int getOpponentsAssignedDamage() {
         return Aggregates.sum(getOpponents(), Accessors.FN_GET_ASSIGNED_DAMAGE);
     }
-    
+
     /**
      * Get the greatest amount of damage assigned to a single opponent this turn.
      */
@@ -1011,8 +1011,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         // if the key already exists - merge entries
         if (changedKeywords.containsKey(timestamp)) {
             final KeywordsChange cks = changedKeywords.get(timestamp);
-            
-            ;
+
             changedKeywords.put(timestamp, cks.merge(addKeywords, removeKeywords,
                     cks.isRemoveAllKeywords(), cks.isRemoveIntrinsicKeywords()));
             updateKeywords();
@@ -1061,14 +1060,14 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     /**
      * Remove all keyword changes which grant this {@link Player} the specified
-     * keyword. 
+     * keyword.
      * @param keyword the keyword to remove.
      */
     public final void removeKeyword(final String keyword) {
     	removeKeyword(keyword, true);
     }
-    
-    
+
+
     public final void removeKeyword(final String keyword, final boolean allInstances) {
         boolean keywordRemoved = false;
 
@@ -1134,7 +1133,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         return result;
     }
-    
+
     public final StaticAbility addStaticAbility(final Card host, final String s) {
         PlayerZone com = getZone(ZoneType.Command);
 
@@ -1195,12 +1194,17 @@ public class Player extends GameEntity implements Comparable<Player> {
         return true;
     }
 
-    @Override
-    public boolean hasProtectionFrom(final Card source) {
-        return hasProtectionFrom(source, false);
+
+    public boolean hasProtectionFromDamage(final Card source) {
+        return hasProtectionFrom(source, false, false);
     }
 
-    public boolean hasProtectionFrom(final Card source, final boolean damageSource) {
+    @Override
+    public boolean hasProtectionFrom(final Card source, final boolean checkSBA) {
+        return hasProtectionFrom(source, checkSBA, false);
+    }
+
+    public boolean hasProtectionFrom(final Card source, final boolean checkSBA, final boolean damageSource) {
         for (String kw : keywords) {
             if (kw.startsWith("Protection")) {
                 if (kw.startsWith("Protection:")) { // uses isValid
@@ -1418,7 +1422,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
             if (topCardRevealed) {
                 revealed.add(c);
-            } 
+            }
 
             if (numDrawnThisTurn == 0) {
                 boolean reveal = false;
@@ -1436,7 +1440,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                         revealed.remove(c);
                     }
                 }
-            } 
+            }
 
             setLastDrawnCard(c);
             c.setDrawnThisTurn(true);
@@ -1654,7 +1658,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final CardCollectionView mill(final int n) {
         return mill(n, ZoneType.Graveyard, false);
     }
-    public final CardCollectionView mill(final int n, final ZoneType zone, 
+    public final CardCollectionView mill(final int n, final ZoneType zone,
             final boolean bottom) {
         final CardCollectionView lib = getCardsIn(ZoneType.Library);
         final CardCollection milled = new CardCollection();
@@ -2094,7 +2098,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 return false;
             }
         } else if (incR[0].equals("EnchantedController")) {
-            final GameEntity enchanted = source.getEnchanting();
+            final GameEntity enchanted = source.getEntityAttachedTo();
             if ((enchanted == null) || !(enchanted instanceof Card)) {
                 return false;
             }
@@ -2204,7 +2208,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void resetSacrificedThisTurn() {
         sacrificedThisTurn.clear();
     }
-    
+
     public final void addCounterToPermThisTurn(final CounterType type, final int x) {
         countersAddedtoPermThisTurn.put(type, getCounterToPermThisTurn(type) + x);
     }
@@ -2270,7 +2274,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     /**
      * get the Player object or Card (Planeswalker) object that this Player must
      * attack this combat.
-     * 
+     *
      * @return the Player or Card (Planeswalker)
      * @since 1.1.01
      */
@@ -2625,7 +2629,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public CardCollectionView getInboundTokens() {
         return inboundTokens;
     }
-    
+
     public void addInboundToken(Card c) {
         inboundTokens.add(c);
     }
@@ -2710,7 +2714,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 com.add(Card.fromPaperCard(avatar, this));
             }
         }
-    
+
         // Schemes
         CardCollection sd = new CardCollection();
         for (IPaperCard cp : registeredPlayer.getSchemes()) {
@@ -2773,7 +2777,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         eff.setSVar("CommanderMoveReplacement", "DB$ ChangeZone | Origin$ Battlefield,Graveyard,Exile,Library,Hand | Destination$ Command | Defined$ ReplacedCard");
 
-        String moved = "Event$ Moved | ValidCard$ Card.EffectSource+YouOwn | Secondary$ True | Optional$ True | OptionalDecider$ You | ReplaceWith$ CommanderMoveReplacement "; 
+        String moved = "Event$ Moved | ValidCard$ Card.EffectSource+YouOwn | Secondary$ True | Optional$ True | OptionalDecider$ You | ReplaceWith$ CommanderMoveReplacement ";
         if (game.getRules().hasAppliedVariant(GameType.TinyLeaders)) {
             moved += " | Destination$ Graveyard,Exile | Description$ If a commander would be put into its owner's graveyard or exile from anywhere, that player may put it into the command zone instead.";
         } else {
@@ -2837,7 +2841,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             monarchEffect.addType("Effect");
 
             {
-                final String drawTrig = "Mode$ Phase | Phase$ End of Turn | TriggerZones$ Command | " + 
+                final String drawTrig = "Mode$ Phase | Phase$ End of Turn | TriggerZones$ Command | " +
                 "ValidPlayer$ You |  TriggerDescription$ At the beginning of your end step, draw a card.";
                 final String drawEff = "AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1";
 
@@ -2870,11 +2874,11 @@ public class Player extends GameEntity implements Comparable<Player> {
             this.updateZoneForView(com);
         }
     }
-    
+
     public boolean hasBlessing() {
         return blessingEffect != null;
     }
-    
+
     public void setBlessing(boolean bless) {
         // no need to to change
         if ((blessingEffect != null) == bless) {
@@ -2882,14 +2886,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         final PlayerZone com = getZone(ZoneType.Command);
-        
+
         if(bless) {
             blessingEffect = new Card(-1, game);
             blessingEffect.setOwner(this);
             blessingEffect.setImageKey("t:blessing");
             blessingEffect.setName("City's Blessing");
             blessingEffect.addType("Effect");
-            
+
 
             blessingEffect.updateStateForView();
 
@@ -2898,7 +2902,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             com.remove(blessingEffect);
             blessingEffect = null;
         }
-        
+
         this.updateZoneForView(com);
     }
 
@@ -2930,4 +2934,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         removeKeyword("Skip the untap step of this turn.");
         removeKeyword("Schemes can't be set in motion this turn.");
     }
+
+    public final boolean isCursed() {
+        if (this.attachedCards == null) {
+            return false;
+        }
+
+        return CardLists.count(attachedCards, CardPredicates.Presets.CURSE) > 0;
+    }
+
 }

@@ -14,7 +14,7 @@ humanhand=Disallow; Sand Strangler; Siren's Ruse; Exemplar of Strength; Harnesse
 humanprecast=
 humangraveyard=
 humanlibrary=
-humanbattlefield=Consuming Fervor|Attaching:420; Spontaneous Artist|Counters:M1M1=4|Id:420; Chaos Maw; Nef-Crop Entangler; Ramunap Ruins; Sheltered Thicket|Set:AKH; Sheltered Thicket|Set:AKH; Sheltered Thicket|Set:AKH; Spirebluff Canal|Set:KLD; Spirebluff Canal|Set:KLD; Spirebluff Canal|Set:KLD; 
+humanbattlefield=Consuming Fervor|AttachedTo:420; Spontaneous Artist|Counters:M1M1=4|Id:420; Chaos Maw; Nef-Crop Entangler; Ramunap Ruins; Sheltered Thicket|Set:AKH; Sheltered Thicket|Set:AKH; Sheltered Thicket|Set:AKH; Spirebluff Canal|Set:KLD; Spirebluff Canal|Set:KLD; Spirebluff Canal|Set:KLD;
 aibattlefield=Island|Set:XLN; Adanto Vanguard; Raptor Hatchling; Siren Stormtamer|Tapped; Aethergeode Miner;
 aiprecast=Aether Chaser:TrigEnergy;
 aigraveyard=

@@ -504,29 +504,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                         if (!list.isEmpty()) {
                             Card attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, tgtC + " - Select a card to attach to.");
-                            if (tgtC.isAura()) {
-                                if (tgtC.isEnchanting()) {
-                                    // If this Card is already Enchanting something, need
-                                    // to unenchant it, then clear out the commands
-                                    final GameEntity oldEnchanted = tgtC.getEnchanting();
-                                    tgtC.removeEnchanting(oldEnchanted);
-                                }
-                                tgtC.enchantEntity(attachedTo);
-                            } else if (tgtC.isEquipment()) { //Equipment
-                                if (tgtC.isEquipping()) {
-                                    final Card oldEquiped = tgtC.getEquipping();
-                                    if ( null != oldEquiped )
-                                        tgtC.unEquipCard(oldEquiped);
-                                }
-                                tgtC.equipCard(attachedTo);
-                            } else { // fortification
-                                if (tgtC.isFortifying()) {
-                                    final Card oldFortified = tgtC.getFortifying();
-                                    if( oldFortified != null )
-                                        tgtC.unFortifyCard(oldFortified);
-                                }
-                                tgtC.fortifyCard(attachedTo);
-                            }
+                            tgtC.attachToEntity(attachedTo);
                         } else { // When it should enter the battlefield attached to an illegal permanent it fails
                             continue;
                         }
@@ -536,15 +514,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         FCollectionView<Player> list = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("AttachedToPlayer"), sa);
                         if (!list.isEmpty()) {
                             Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, tgtC + " - Select a player to attach to.");
-                            if (tgtC.isAura()) {
-                                if (tgtC.isEnchanting()) {
-                                    // If this Card is already Enchanting something, need
-                                    // to unenchant it, then clear out the commands
-                                    final GameEntity oldEnchanted = tgtC.getEnchanting();
-                                    tgtC.removeEnchanting(oldEnchanted);
-                                }
-                                tgtC.enchantEntity(attachedTo);
-                            }
+                            tgtC.attachToEntity(attachedTo);
                         }
                         else { // When it should enter the battlefield attached to an illegal player it fails
                             continue;
@@ -1022,42 +992,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         else {
                             attachedTo = list.get(0);
                         }
-                        if (c.isAura()) {
-                            if (c.isEnchanting()) {
-                                // If this Card is already Enchanting something, need
-                                // to unenchant it, then clear out the commands
-                                final GameEntity oldEnchanted = c.getEnchanting();
-                                c.removeEnchanting(oldEnchanted);
-                            }
-                            // TODO: this should ideally be handled with !attachedTo.canBeEnchantedBy(c), but the relevant function is not adapted
-                            // for corner cases tested here and modifying it to accomodate these situations (e.g. Boonweaver Giant + Animate Dead)
-                            // tends to break other things.
-                            if (!checkCanIndirectlyAttachTo(c, attachedTo)) {
-                                // if an aura can't enchant the source, it shouldn't move (303.4i, 303.4j)
-                                continue;
-                            }
-                            if ( ((c.hasKeyword("Enchant creature card in a graveyard") || c.hasKeyword("Enchant instant card in a graveyard")) && !attachedTo.getZone().is(ZoneType.Graveyard))
-                                    || !attachedTo.getZone().is(ZoneType.Battlefield)) {
-                                // if the source of the effect is no longer in the zone where it can be enchanted, aura does not move
-                                continue;
-                            }
-                            c.enchantEntity(attachedTo);
-                        }
-                        else if (c.isEquipment()) { //Equipment
-                            if (c.isEquipping()) {
-                                final Card oldEquiped = c.getEquipping();
-                                if ( null != oldEquiped )
-                                    c.unEquipCard(oldEquiped);
-                            }
-                            c.equipCard(attachedTo);
-                        }
-                        else {
-                            if (c.isFortifying()) {
-                                final Card oldFortified = c.getFortifying();
-                                if ( null != oldFortified )
-                                    c.unFortifyCard(oldFortified);
-                            }
-                            c.fortifyCard(attachedTo);
+
+                        if (c.isAttachment()) {
+                            c.attachToEntity(attachedTo);
                         }
                     }
                     else { // When it should enter the battlefield attached to an illegal permanent it fails
@@ -1069,15 +1006,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     FCollectionView<Player> list = AbilityUtils.getDefinedPlayers(source, sa.getParam("AttachedToPlayer"), sa);
                     if (!list.isEmpty()) {
                         Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, c + " - Select a player to attach to.");
-                        if (c.isAura()) {
-                            if (c.isEnchanting()) {
-                                // If this Card is already Enchanting something, need
-                                // to unenchant it, then clear out the commands
-                                final GameEntity oldEnchanted = c.getEnchanting();
-                                c.removeEnchanting(oldEnchanted);
-                            }
-                            c.enchantEntity(attachedTo);
-                        }
+                        c.attachToEntity(attachedTo);
                     }
                     else { // When it should enter the battlefield attached to an illegal permanent it fails
                         continue;

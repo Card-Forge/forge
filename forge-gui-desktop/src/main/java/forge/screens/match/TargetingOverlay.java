@@ -404,53 +404,21 @@ public class TargetingOverlay {
             return; //don't add arcs for cards if card already visualized
         }
 
-        final CardView enchanting = c.getEnchantingCard();
-        final CardView equipping = c.getEquipping();
-        final CardView fortifying = c.getFortifying();
-        final Iterable<CardView> enchantedBy = c.getEnchantedBy();
-        final Iterable<CardView> equippedBy = c.getEquippedBy();
-        final Iterable<CardView> fortifiedBy = c.getFortifiedBy();
+        final CardView attachedTo = c.getAttachedTo();
+        final Iterable<CardView> attachedCards = c.getAttachedCards();
         final CardView paired = c.getPairedWith();
 
-        if (null != enchanting) {
-            if (enchanting.getController() != null && !enchanting.getController().equals(c.getController())) {
-                addArc(endpoints.get(enchanting.getId()), endpoints.get(c.getId()), ArcConnection.Friends);
-                cardsVisualized.add(enchanting);
+        if (null != attachedTo) {
+            if (attachedTo.getController() != null && !attachedTo.getController().equals(c.getController())) {
+                addArc(endpoints.get(attachedTo.getId()), endpoints.get(c.getId()), ArcConnection.Friends);
+                cardsVisualized.add(attachedTo);
             }
         }
-        if (null != equipping) {
-            if (equipping.getController() != null && !equipping.getController().equals(c.getController())) {
-                addArc(endpoints.get(equipping.getId()), endpoints.get(c.getId()), ArcConnection.Friends);
-                cardsVisualized.add(equipping);
-            }
-        }
-        if (null != fortifying) {
-            if (fortifying.getController() != null && !fortifying.getController().equals(c.getController())) {
-                addArc(endpoints.get(fortifying.getId()), endpoints.get(c.getId()), ArcConnection.Friends);
-                cardsVisualized.add(fortifying);
-            }
-        }
-        if (null != enchantedBy) {
-            for (final CardView enc : enchantedBy) {
+        if (null != attachedCards) {
+            for (final CardView enc : attachedCards) {
                 if (enc.getController() != null && !enc.getController().equals(c.getController())) {
                     addArc(endpoints.get(c.getId()), endpoints.get(enc.getId()), ArcConnection.Friends);
                     cardsVisualized.add(enc);
-                }
-            }
-        }
-        if (null != equippedBy) {
-            for (final CardView eq : equippedBy) {
-                if (eq.getController() != null && !eq.getController().equals(c.getController())) {
-                    addArc(endpoints.get(c.getId()), endpoints.get(eq.getId()), ArcConnection.Friends);
-                    cardsVisualized.add(eq);
-                }
-            }
-        }
-        if (null != fortifiedBy) {
-            for (final CardView eq : fortifiedBy) {
-                if (eq.getController() != null && !eq.getController().equals(c.getController())) {
-                    addArc(endpoints.get(c.getId()), endpoints.get(eq.getId()), ArcConnection.Friends);
-                    cardsVisualized.add(eq);
                 }
             }
         }

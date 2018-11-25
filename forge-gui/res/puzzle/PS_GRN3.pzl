@@ -12,5 +12,5 @@ turn=1
 activeplayer=human
 activephase=MAIN1
 humanhand=Justice Strike;Dual Shot;Ashes of the Abhorrent;Silverclad Ferocidons;Hunted Witness
-humanbattlefield=Roc Charger|Id:1;Glaive of the Guildpact|Attaching:1;Desecrated Tomb;Pitiless Plunderer;Undercity Necrolisk;Oathsworn Vampire;Boros Guildgate|Set:GRN;Boros Guildgate|Set:GRN;Boros Guildgate|Set:GRN;Boros Guildgate|Set:GRN;Gateway Plaza|NoETBTrigs;Gateway Plaza|NoETBTrigs;Gateway Plaza|NoETBTrigs;Gateway Plaza|NoETBTrigs
+humanbattlefield=Roc Charger|Id:1;Glaive of the Guildpact|AttachedTo:1;Desecrated Tomb;Pitiless Plunderer;Undercity Necrolisk;Oathsworn Vampire;Boros Guildgate|Set:GRN;Boros Guildgate|Set:GRN;Boros Guildgate|Set:GRN;Boros Guildgate|Set:GRN;Gateway Plaza|NoETBTrigs;Gateway Plaza|NoETBTrigs;Gateway Plaza|NoETBTrigs;Gateway Plaza|NoETBTrigs
 aibattlefield=Rekindling Phoenix;Rekindling Phoenix;Aurelia, Exemplar of Justice

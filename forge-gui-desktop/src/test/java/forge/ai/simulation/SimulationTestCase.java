@@ -126,6 +126,8 @@ public class SimulationTestCase extends TestCase {
 
     protected Card addCardToZone(String name, Player p, ZoneType zone) {
         Card c = createCard(name, p);
+        // card need a new Timestamp otherwise Static Abilities might collide
+        c.setTimestamp(p.getGame().getNextTimestamp());
         p.getZone(zone).add(c);
         return c;
     }

@@ -92,12 +92,8 @@ public class CardFactory {
         out.setState(in.getCurrentStateName(), true);
 
         // this's necessary for forge.game.GameAction.unattachCardLeavingBattlefield(Card)
-        out.setEquipping(in.getEquipping());
-        out.setEquippedBy(in.getEquippedBy(false));
-        out.setFortifying(in.getFortifying());
-        out.setFortifiedBy(in.getFortifiedBy(false));
-        out.setEnchantedBy(in.getEnchantedBy(false));
-        out.setEnchanting(in.getEnchanting());
+        out.setAttachedCards(in.getAttachedCards());
+        out.setEntityAttachedTo(in.getEntityAttachedTo());
 
         out.setClones(in.getClones());
         out.setCastSA(in.getCastSA());

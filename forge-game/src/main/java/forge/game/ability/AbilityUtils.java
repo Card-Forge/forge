@@ -545,7 +545,7 @@ public class AbilityUtils {
             // Add whole Enchanted list to handlePaid
             final CardCollection list = new CardCollection();
             if (card.isEnchanting()) {
-                Object o = card.getEnchanting();
+                Object o = card.getEntityAttachedTo();
                 if (o instanceof Card) {
                     list.add(game.getCardState((Card) o));
                 }
@@ -1114,7 +1114,7 @@ public class AbilityUtils {
             }
         }
         else if (defined.equals("EnchantedPlayer")) {
-            final Object o = sa.getHostCard().getEnchanting();
+            final Object o = sa.getHostCard().getEntityAttachedTo();
             if (o instanceof Player) {
                 if (!players.contains(o)) {
                     players.add((Player) o);

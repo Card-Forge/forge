@@ -8,6 +8,7 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CounterType;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -35,7 +36,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         GameSimulator sim = createSimulator(game, p);
         int score = sim.simulateSpellAbility(outlastSA).value;
-        assertTrue(score >  0);
+        assertTrue(score > 0);
         Game simGame = sim.getSimulatedGameState();
 
         Card heraldCopy = findCardWithName(simGame, heraldCardName);
@@ -65,7 +66,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         addCard("Plains", p);
         addCard("Plains", p);
         addCard("Spear of Heliod", p);
-        
+
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
         game.getAction().checkStateEffects(true);
@@ -79,7 +80,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         GameSimulator sim = createSimulator(game, p);
         int score = sim.simulateSpellAbility(outlastSA).value;
-        assertTrue(score >  0);
+        assertTrue(score > 0);
         Game simGame = sim.getSimulatedGameState();
         Card sliverCopy = findCardWithName(simGame, sliverCardName);
         assertEquals(1, sliverCopy.getAmountOfKeyword("Flanking"));
@@ -115,7 +116,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card bear = addCard(bearCardName, p);
         bear.setSickness(false);
         Card cloak = addCard("Whispersilk Cloak", p);
-        cloak.equipCard(bear);
+        cloak.attachToEntity(bear);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
         assertEquals(1, bear.getAmountOfKeyword("Unblockable"));
@@ -133,7 +134,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card bear = addCard(bearCardName, p);
         bear.setSickness(false);
         Card lifelink = addCard("Lifelink", p);
-        lifelink.enchantEntity(bear);
+        lifelink.attachToEntity(bear);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
         assertEquals(1, bear.getAmountOfKeyword("Lifelink"));
@@ -143,7 +144,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card bearCopy = findCardWithName(simGame, bearCardName);
         assertEquals(1, bearCopy.getAmountOfKeyword("Lifelink"));
     }
-    
+
     public void testEtbTriggers() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
@@ -162,12 +163,12 @@ public class GameSimulatorTest extends SimulationTestCase {
         GameSimulator sim = createSimulator(game, p);
         int origScore = sim.getScoreForOrigGame().value;
         int score = sim.simulateSpellAbility(playMerchantSa).value;
-        assertTrue(String.format("score=%d vs. origScore=%d",  score, origScore), score > origScore);
+        assertTrue(String.format("score=%d vs. origScore=%d", score, origScore), score > origScore);
         Game simGame = sim.getSimulatedGameState();
         assertEquals(24, simGame.getPlayers().get(1).getLife());
         assertEquals(16, simGame.getPlayers().get(0).getLife());
     }
-    
+
     public void testSimulateUnmorph() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
@@ -179,7 +180,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         game.getAction().checkStateEffects(true);
 
         assertEquals(20, game.getPlayers().get(0).getLife());
-        
+
         GameSimulator sim = createSimulator(game, p);
         Game simGame = sim.getSimulatedGameState();
 
@@ -188,7 +189,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         sim.simulateSpellAbility(unmorphSA);
         assertEquals(18, simGame.getPlayers().get(0).getLife());
     }
-    
+
     public void testFindingOwnCard() {
         Game game = initAndCreateGame();
         Player p0 = game.getPlayers().get(0);
@@ -199,7 +200,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         addCard("Swamp", p1);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p1);
         game.getAction().checkStateEffects(true);
-        
+
         GameSimulator sim = createSimulator(game, p1);
         Game simGame = sim.getSimulatedGameState();
 
@@ -210,7 +211,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertEquals(1, simGame.getPlayers().get(0).getCardsIn(ZoneType.Hand).size());
         assertEquals(0, simGame.getPlayers().get(1).getCardsIn(ZoneType.Hand).size());
     }
-    
+
     public void testPlaneswalkerAbilities() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
@@ -241,7 +242,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         minusTwoSim.setActivatingPlayer(simP);
         assertFalse(minusTwoSim.canPlay());
         assertEquals(1, minusTwoSim.getActivationsThisTurn());
-        
+
         GameCopier copier = new GameCopier(simGame);
         Game copy = copier.makeCopy();
         Player copyP = copy.getPlayers().get(1);
@@ -290,12 +291,12 @@ public class GameSimulatorTest extends SimulationTestCase {
         addCard("Plains", p);
         Card soulSummons = addCardToZone("Soul Summons", p, ZoneType.Hand);
         addCardToZone("Ornithopter", p, ZoneType.Library);
-        
+
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
         SpellAbility manifestSA = soulSummons.getSpellAbilities().get(0);
-        
+
         GameSimulator sim = createSimulator(game, p);
         sim.simulateSpellAbility(manifestSA);
         Game simGame = sim.getSimulatedGameState();
@@ -328,12 +329,12 @@ public class GameSimulatorTest extends SimulationTestCase {
         addCard("Plains", p);
         Card soulSummons = addCardToZone("Soul Summons", p, ZoneType.Hand);
         addCardToZone("Plains", p, ZoneType.Library);
-        
+
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
         SpellAbility manifestSA = soulSummons.getSpellAbilities().get(0);
-        
+
         GameSimulator sim = createSimulator(game, p);
         sim.simulateSpellAbility(manifestSA);
         Game simGame = sim.getSimulatedGameState();
@@ -354,12 +355,12 @@ public class GameSimulatorTest extends SimulationTestCase {
         addCard("Plains", p);
         Card soulSummons = addCardToZone("Soul Summons", p, ZoneType.Hand);
         addCardToZone("Dryad Arbor", p, ZoneType.Library);
-        
+
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
         SpellAbility manifestSA = soulSummons.getSpellAbilities().get(0);
-        
+
         GameSimulator sim = createSimulator(game, p);
         sim.simulateSpellAbility(manifestSA);
         Game simGame = sim.getSimulatedGameState();
@@ -401,7 +402,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertTrue(sarkhanCopy.isCreature());
         assertFalse(sarkhanCopy.isPlaneswalker());
     }
-    
+
     public void testDistributeCountersAbility() {
         String ajaniCardName = "Ajani, Mentor of Heroes";
         String ornithoperCardName = "Ornithopter";
@@ -430,7 +431,7 @@ public class GameSimulatorTest extends SimulationTestCase {
             assertEquals(3, thopterSim.getCounters(CounterType.P1P1) + bearSim.getCounters(CounterType.P1P1));
         }
     }
-    
+
     public void testDamagePreventedTrigger() {
         String ajaniCardName = "Ajani Steadfast";
         String selflessCardName = "Selfless Squire";
@@ -446,7 +447,6 @@ public class GameSimulatorTest extends SimulationTestCase {
         ajani.addCounter(CounterType.LOYALTY, 8, p, false);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
-        
 
         SpellAbility sa = findSAWithPrefix(ajani, "-7:");
         assertNotNull(sa);
@@ -480,7 +480,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
         assertEquals(3, bear.getNetToughness());
-        
+
         GameCopier copier = new GameCopier(game);
         Game copy = copier.makeCopy();
         Card bearCopy = findCardWithName(copy, bearCardName);
@@ -498,8 +498,9 @@ public class GameSimulatorTest extends SimulationTestCase {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
         assertTrue(depths.hasCounters());
-        
-        SpellAbility sa = findSAWithPrefix(thespian, "{2}, {T}: CARDNAME becomes a copy of target land and gains this ability.");
+
+        SpellAbility sa = findSAWithPrefix(thespian,
+                "{2}, {T}: CARDNAME becomes a copy of target land and gains this ability.");
         assertNotNull(sa);
         sa.getTargets().add(depths);
 
@@ -512,7 +513,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertNull(strSimGame, findCardWithName(simGame, "Thespian's Stage"));
         assertNotNull(strSimGame, findCardWithName(simGame, "Marit Lage"));
     }
-    
+
     public void testThespianStageSelfCopy() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
@@ -522,8 +523,9 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertTrue(thespian.isLand());
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
-        
-        SpellAbility sa = findSAWithPrefix(thespian, "{2}, {T}: CARDNAME becomes a copy of target land and gains this ability.");
+
+        SpellAbility sa = findSAWithPrefix(thespian,
+                "{2}, {T}: CARDNAME becomes a copy of target land and gains this ability.");
         assertNotNull(sa);
         sa.getTargets().add(thespian);
 
@@ -551,7 +553,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         GameSimulator sim = createSimulator(game, p);
         int score = sim.simulateSpellAbility(dashSA).value;
-        assertTrue(score >  0);
+        assertTrue(score > 0);
         Game simGame = sim.getSimulatedGameState();
 
         Card berserker = findCardWithName(simGame, berserkerCardName);
@@ -559,7 +561,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertEquals(1, berserker.getNetPower());
         assertEquals(1, berserker.getNetToughness());
         assertFalse(berserker.isSick());
-        
+
         SpellAbility pumpSA = findSAWithPrefix(berserker, "{R}: CARDNAME gets +1/+0 until end of turn.");
         assertNotNull(pumpSA);
         GameSimulator sim2 = createSimulator(simGame, (Player) sim.getGameCopier().find(p));
@@ -588,7 +590,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         GameSimulator sim = createSimulator(game, p);
         int score = sim.simulateSpellAbility(callTheScionsSA).value;
-        assertTrue(score >  0);
+        assertTrue(score > 0);
         Game simGame = sim.getSimulatedGameState();
 
         Card scion = findCardWithName(simGame, "Eldrazi Scion");
@@ -609,8 +611,10 @@ public class GameSimulatorTest extends SimulationTestCase {
     }
 
     public void testMarkedDamage() {
-        // Marked damage is important, as it's used during the AI declare attackers logic
-        // which affects game state score - since P/T boosts are evaluated differently for
+        // Marked damage is important, as it's used during the AI declare
+        // attackers logic
+        // which affects game state score - since P/T boosts are evaluated
+        // differently for
         // creatures participating in combat.
 
         Game game = initAndCreateGame();
@@ -623,24 +627,24 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
-        
+
         assertEquals(3, giant.getNetPower());
         assertEquals(3, giant.getNetToughness());
         assertEquals(0, giant.getDamage());
-        
+
         GameSimulator sim = createSimulator(game, p);
         shockSA.setTargetCard(giant);
         sim.simulateSpellAbility(shockSA);
         Game simGame = sim.getSimulatedGameState();
         Card simGiant = findCardWithName(simGame, giantCardName);
         assertEquals(2, simGiant.getDamage());
-        
+
         GameCopier copier = new GameCopier(simGame);
         Game copy = copier.makeCopy();
         Card giantCopy = findCardWithName(copy, giantCardName);
         assertEquals(2, giantCopy.getDamage());
     }
-    
+
     public void testLifelinkDamageSpell() {
         Game game = initAndCreateGame();
         Player p1 = game.getPlayers().get(0);
@@ -661,7 +665,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card pridemate = addCard(pridemateName, p1);
         Card indestructibility = addCard(indestructibilityName, p1);
 
-        indestructibility.enchantEntity(pridemate);
+        indestructibility.attachToEntity(pridemate);
 
         Card ignition = addCardToZone(ignitionName, p1, ZoneType.Hand);
         SpellAbility ignitionSA = ignition.getFirstSpellAbility();
@@ -681,6 +685,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         // because it was destroyed
         assertNull(simBrood);
+        assertNotNull(simPridemate);
 
         assertEquals(0, simKalitas.getDamage());
         assertEquals(3, simPridemate.getDamage());
@@ -774,7 +779,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card pridemate = addCard(pridemateName, p1);
         Card indestructibility = addCard(indestructibilityName, p1);
 
-        indestructibility.enchantEntity(pridemate);
+        indestructibility.attachToEntity(pridemate);
 
         Card ignition = addCardToZone(ignitionName, p1, ZoneType.Hand);
         SpellAbility ignitionSA = ignition.getFirstSpellAbility();
@@ -798,8 +803,9 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertNotNull(simBrood);
         assertEquals(0, simBrood.getDamage());
 
-        //destoryed because of to much redirected damage
+        // destoryed because of to much redirected damage
         assertNull(simPalisade);
+        assertNotNull(simPridemate);
 
         assertEquals(0, simKalitas.getDamage());
         assertEquals(3, simPridemate.getDamage());
@@ -846,7 +852,10 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         coneSA.setTargetCard(bearCard); // one damage to bear
         coneSA.getSubAbility().setTargetCard(giantCard); // two damage to giant
-        coneSA.getSubAbility().getSubAbility().getTargets().add(p2); // three damage to player
+        coneSA.getSubAbility().getSubAbility().getTargets().add(p2); // three
+                                                                     // damage
+                                                                     // to
+                                                                     // player
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p1);
         game.getAction().checkStateEffects(true);
@@ -859,7 +868,8 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card simGiant = findCardWithName(simGame, giantCardName);
         Card simPridemate = findCardWithName(simGame, pridemateName);
 
-        // spell deals multiple damages to multiple targets, only one cause of lifegain
+        // spell deals multiple damages to multiple targets, only one cause of
+        // lifegain
         assertNotNull(simPridemate);
         assertTrue(simPridemate.hasCounters());
         assertEquals(1, simPridemate.getCounters(CounterType.P1P1));
@@ -875,7 +885,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         // 1 + 2 + 3 lifegain
         assertEquals(26, simGame.getPlayers().get(0).getLife());
         assertEquals(17, simGame.getPlayers().get(1).getLife());
-        
+
         // second pard with Everlasting Torment
         addCard(tormentName, p2);
 
@@ -912,7 +922,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertEquals(20, simGame2.getPlayers().get(0).getLife());
         assertEquals(17, simGame2.getPlayers().get(1).getLife());
 
-        // third pard with Melira prevents wither 
+        // third pard with Melira prevents wither
         addCard(meliraName, p2);
 
         GameSimulator sim3 = createSimulator(game, p1);
@@ -962,11 +972,11 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
-        
+
         assertTrue(lilianaInPlay.isCreature());
         assertEquals(2, lilianaInPlay.getNetPower());
         assertEquals(3, lilianaInPlay.getNetToughness());
-        
+
         SpellAbility playLiliana = lilianaInHand.getSpellAbilities().get(0);
         GameSimulator sim = createSimulator(game, p);
         sim.simulateSpellAbility(playLiliana);
@@ -1002,7 +1012,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Game simGame = sim.getSimulatedGameState();
         Player simP = simGame.getPlayers().get(1);
         assertEquals(2, simP.getCounters(CounterType.ENERGY));
-        
+
         GameCopier copier = new GameCopier(simGame);
         Game copy = copier.makeCopy();
         Player copyP = copy.getPlayers().get(1);
@@ -1032,7 +1042,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card darkConfidantCard2 = (Card) sim.getGameCopier().find(darkConfidantCard);
         SpellAbility playDarkConfidant2 = darkConfidantCard2.getSpellAbilities().get(0);
         Card deathriteCard2 = (Card) sim.getGameCopier().find(deathriteCard);
-        
+
         GameSimulator sim2 = createSimulator(simGame, simP);
         sim2.simulateSpellAbility(playDarkConfidant2);
         Game sim2Game = sim2.getSimulatedGameState();
@@ -1054,40 +1064,40 @@ public class GameSimulatorTest extends SimulationTestCase {
     public void testEnKor() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(0);
-        
+
         String soulfireName = "Soulfire Grand Master";
         String pridemateName = "Ajani's Pridemate";
-        
+
         String enKorName = "Spirit en-Kor";
         String bearName = "Runeclaw Bear";
         String shockName = "Shock";
-        
+
         addCard("Mountain", p);
 
         addCard(soulfireName, p);
         addCard(pridemateName, p);
 
         Card shockCard = addCardToZone(shockName, p, ZoneType.Hand);
-        
+
         Card enKor = addCard(enKorName, p);
-        
+
         SpellAbility enKorSA = findSAWithPrefix(enKor, "{0}:");
-        
+
         Card bear = addCard(bearName, p);
-        
+
         SpellAbility shockSA = shockCard.getFirstSpellAbility();
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
-        
+
         assertEquals(2, enKor.getNetPower());
         assertEquals(2, enKor.getNetToughness());
         assertEquals(0, enKor.getDamage());
-        
+
         assertEquals(2, bear.getNetPower());
         assertEquals(2, bear.getNetToughness());
         assertEquals(0, bear.getDamage());
-        
+
         GameSimulator sim = createSimulator(game, p);
         enKorSA.setTargetCard(bear);
         shockSA.setTargetCard(enKor);
@@ -1096,13 +1106,13 @@ public class GameSimulatorTest extends SimulationTestCase {
         Game simGame = sim.getSimulatedGameState();
         Card simEnKor = findCardWithName(simGame, enKorName);
         Card simBear = findCardWithName(simGame, bearName);
-        
+
         assertNotNull(simEnKor);
         assertEquals(1, simEnKor.getDamage());
 
         assertNotNull(simBear);
         assertEquals(1, simBear.getDamage());
-        
+
         Card simPridemate = findCardWithName(simGame, pridemateName);
 
         // only triggered once
@@ -1113,7 +1123,7 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         assertEquals(22, simGame.getPlayers().get(0).getLife());
     }
-    
+
     public void testRazia() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(0);
@@ -1181,14 +1191,14 @@ public class GameSimulatorTest extends SimulationTestCase {
     public void testRazia2() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(0);
-        
+
         String soulfireName = "Soulfire Grand Master";
         String pridemateName = "Ajani's Pridemate";
-        
+
         String raziaName = "Razia, Boros Archangel";
         String elementalName = "Air Elemental";
         String shockName = "Shock";
-        
+
         for (int i = 0; i < 2; ++i) {
             addCard("Mountain", p);
         }
@@ -1198,13 +1208,13 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         Card shockCard1 = addCardToZone(shockName, p, ZoneType.Hand);
         Card shockCard2 = addCardToZone(shockName, p, ZoneType.Hand);
-        
+
         Card razia = addCard(raziaName, p);
-        
+
         SpellAbility preventSA = findSAWithPrefix(razia, "{T}:");
-        
+
         Card elemental = addCard(elementalName, p);
-        
+
         SpellAbility shockSA1 = shockCard1.getFirstSpellAbility();
         SpellAbility shockSA2 = shockCard2.getFirstSpellAbility();
 
@@ -1212,11 +1222,11 @@ public class GameSimulatorTest extends SimulationTestCase {
         game.getAction().checkStateEffects(true);
 
         assertEquals(0, razia.getDamage());
-        
+
         assertEquals(4, elemental.getNetPower());
         assertEquals(4, elemental.getNetToughness());
         assertEquals(0, elemental.getDamage());
-        
+
         GameSimulator sim = createSimulator(game, p);
         preventSA.setTargetCard(razia);
         preventSA.getSubAbility().setTargetCard(elemental);
@@ -1228,14 +1238,14 @@ public class GameSimulatorTest extends SimulationTestCase {
         Game simGame = sim.getSimulatedGameState();
         Card simRazia = findCardWithName(simGame, raziaName);
         Card simElemental = findCardWithName(simGame, elementalName);
-        
+
         assertNotNull(simRazia);
         assertEquals(1, simRazia.getDamage());
 
         // elemental not destroyed
         assertNotNull(simElemental);
         assertEquals(3, simElemental.getDamage());
-        
+
         Card simPridemate = findCardWithName(simGame, pridemateName);
 
         // only triggered twice
@@ -1315,8 +1325,10 @@ public class GameSimulatorTest extends SimulationTestCase {
     }
 
     public void testPlayerXCount() {
-        // If playerXCount is operational, then conditions that count something about the player (e.g.
-        // cards in hand, life total) should work, similar to the Bloodghast "Haste" condition.
+        // If playerXCount is operational, then conditions that count something
+        // about the player (e.g.
+        // cards in hand, life total) should work, similar to the Bloodghast
+        // "Haste" condition.
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(0);
         Player opp = game.getPlayers().get(1);
@@ -1325,12 +1337,12 @@ public class GameSimulatorTest extends SimulationTestCase {
         Card bloodghast = addCardToZone("Bloodghast", p, ZoneType.Battlefield);
         game.getAction().checkStateEffects(true);
 
-        assert(!bloodghast.hasKeyword("Haste"));
+        assert (!bloodghast.hasKeyword("Haste"));
 
         opp.setLife(5, null);
         game.getAction().checkStateEffects(true);
 
-        assert(bloodghast.hasKeyword("Haste"));
+        assert (bloodghast.hasKeyword("Haste"));
     }
 
     public void testDeathsShadow() {
@@ -1343,10 +1355,152 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         p.setLife(1, null);
         game.getAction().checkStateEffects(true);
-        assert(deathsShadow.getNetPower() == 12);
+        assert (deathsShadow.getNetPower() == 12);
 
         p.setLife(-1, null);
         game.getAction().checkStateEffects(true);
-        assert(deathsShadow.getNetPower() == 13); // on negative life, should always be 13/13
+        assert (deathsShadow.getNetPower() == 13); // on negative life, should
+                                                   // always be 13/13
     }
+
+    public void testBludgeonBrawlLatticeAura() {
+        // Enchantment Aura are with Mycosynth Lattice turned into Artifact Enchantment - Aura Equipment
+        // Creature Auras should stay on
+        String bearCardName = "Runeclaw Bear";
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        Card bear = addCard(bearCardName, p);
+        bear.setSickness(false);
+        Card lifelink = addCard("Lifelink", p);
+        lifelink.attachToEntity(bear);
+
+        assertTrue(bear.isEnchanted());
+        assertTrue(bear.hasCardAttachment(lifelink));
+
+        // this adds Artifact Type
+        addCardToZone("Mycosynth Lattice", p, ZoneType.Battlefield);
+
+        game.getAction().checkStateEffects(true);
+        assertTrue(bear.isEnchanted());
+        assertFalse(bear.isEquipped());
+
+        assertTrue(lifelink.isArtifact());
+        assertFalse(lifelink.isEquipment());
+
+        // this add Equipment and causes it to fall off
+        addCardToZone("Bludgeon Brawl", p, ZoneType.Battlefield);
+        game.getAction().checkStateEffects(true);
+        assertTrue(bear.isEnchanted());
+        assertTrue(bear.isEquipped());
+
+        assertTrue(lifelink.isArtifact());
+        assertTrue(lifelink.isEquipment());
+
+        // still in battlefield
+        assertTrue(lifelink.isInPlay());
+    }
+
+    public void testBludgeonBrawlLatticeCurse() {
+        // Enchantment Aura are with Mycosynth Lattice turned into Artifact Enchantment - Aura Equipment
+        // Curses can only attach Player, but Equipment can only attach to Creature so it does fall off
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        final String curseName = "Cruel Reality";
+
+        Card curse = addCard(curseName, p);
+        curse.attachToEntity(p);
+        game.getAction().checkStateEffects(true);
+        assertTrue(p.isEnchanted());
+        assertTrue(p.hasCardAttachment(curse));
+
+        // this adds Artifact Type
+        addCardToZone("Mycosynth Lattice", p, ZoneType.Battlefield);
+
+        game.getAction().checkStateEffects(true);
+        assertTrue(p.isEnchanted());
+        assertTrue(curse.isArtifact());
+
+        // this add Equipment and causes it to fall off
+        addCardToZone("Bludgeon Brawl", p, ZoneType.Battlefield);
+        game.getAction().checkStateEffects(true);
+        assertFalse(p.isEnchanted());
+
+        // not in Battlefield anymore
+        assertFalse(curse.isInPlay());
+        assertTrue(curse.isInZone(ZoneType.Graveyard));
+    }
+
+    public void testBludgeonBrawlFortification() {
+        // Bludgeon Brawl makes Fortification into Equipment
+        // that means it can't attach a Land anymore if the Land is no Creature
+
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        Card mountain = addCardToZone("Mountain", p, ZoneType.Battlefield);
+        Card fortification = addCardToZone("Darksteel Garrison", p, ZoneType.Battlefield);
+
+        fortification.attachToEntity(mountain);
+        game.getAction().checkStateEffects(true);
+
+        assertTrue(fortification.isFortification());
+        assertFalse(fortification.isEquipment());
+
+        assertTrue(mountain.isFortified());
+        assertTrue(mountain.hasCardAttachment(fortification));
+        assertTrue(mountain.hasKeyword(Keyword.INDESTRUCTIBLE));
+
+        // adding Brawl will cause the Fortification into Equipment and it to
+        // fall off
+        addCardToZone("Bludgeon Brawl", p, ZoneType.Battlefield);
+        game.getAction().checkStateEffects(true);
+
+        assertFalse(fortification.isFortification());
+        assertTrue(fortification.isEquipment());
+
+        assertFalse(mountain.hasCardAttachment(fortification));
+        assertFalse(mountain.hasKeyword(Keyword.INDESTRUCTIBLE));
+    }
+
+    public void testBludgeonBrawlFortificationDryad() {
+        // Bludgeon Brawl makes Fortification into Equipment
+        // that means it can't attach a Land anymore if the Land is no Creature too
+        // Dryad Arbor is both a Land and a Creature so it stays attached
+
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        Card dryad = addCardToZone("Dryad Arbor", p, ZoneType.Battlefield);
+        Card fortification = addCardToZone("Darksteel Garrison", p, ZoneType.Battlefield);
+
+        fortification.attachToEntity(dryad);
+        game.getAction().checkStateEffects(true);
+
+        assertTrue(dryad.isFortified());
+        assertFalse(dryad.isEquipped());
+
+        assertTrue(dryad.hasCardAttachment(fortification));
+        assertTrue(dryad.hasKeyword(Keyword.INDESTRUCTIBLE));
+
+        // adding Brawl will cause the Fortification into Equipment
+        // because Dryad Arbor is a Creature it stays attached
+        addCardToZone("Bludgeon Brawl", p, ZoneType.Battlefield);
+        game.getAction().checkStateEffects(true);
+
+        // switched from Fortification to Equipment
+        assertFalse(dryad.isFortified());
+        assertTrue(dryad.isEquipped());
+
+        assertTrue(dryad.hasCardAttachment(fortification));
+        assertTrue(dryad.hasKeyword(Keyword.INDESTRUCTIBLE));
+    }
+
+
 }

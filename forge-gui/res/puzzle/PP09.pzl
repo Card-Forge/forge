@@ -12,4 +12,4 @@ AILife=20
 humanhand=Mountain;Keldon Marauders;Rites of Initiation;Giantbaiting
 humanbattlefield=Forest;Forest;Forest;Swamp;Swamp;Swamp;Swamp;Rugged Highlands;Rugged Highlands;Crypt Rats;Quirion Ranger;Battlefield Scrounger
 humangraveyard=Flame Jab;Viscera Dragger;Lava Dart
-aibattlefield=Young Wolf|Id:20;Favor of the Overbeing|Attaching:20;Aura Gnarlid|Id:22;Rancor|Attaching:22;Slippery Bogle|Id:24;Lifelink|Attaching:24;Ancestral Mask|Attaching:24
+aibattlefield=Young Wolf|Id:20;Favor of the Overbeing|AttachedTo:20;Aura Gnarlid|Id:22;Rancor|AttachedTo:22;Slippery Bogle|Id:24;Lifelink|AttachedTo:24;Ancestral Mask|AttachedTo:24

@@ -125,7 +125,7 @@ public class AttachAi extends SpellAbilityAi {
                 return false;
             }
         }
-        
+
         return true;
     }
 
@@ -240,7 +240,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Acceptable choice.
-     * 
+     *
      * @param c
      *            the c
      * @param mandatory
@@ -265,7 +265,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Choose unpreferred.
-     * 
+     *
      * @param mandatory
      *            the mandatory
      * @param list
@@ -282,7 +282,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Choose less preferred.
-     * 
+     *
      * @param mandatory
      *            the mandatory
      * @param list
@@ -299,7 +299,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Attach ai change type preference.
-     * 
+     *
      * @param sa
      *            the sa
      * @param list
@@ -330,7 +330,7 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         list = CardLists.getNotType(list, type); // Filter out Basic Lands that have the same type as the changing type
-        
+
         // Don't target fetchlands
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
@@ -371,7 +371,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Attach ai keep tapped preference.
-     * 
+     *
      * @param sa
      *            the sa
      * @param list
@@ -408,7 +408,7 @@ public class AttachAi extends SpellAbilityAi {
                     return true;
                 }
 
-                final Iterable<Card> auras = c.getEnchantedBy(false);
+                final Iterable<Card> auras = c.getEnchantedBy();
                 final Iterator<Card> itr = auras.iterator();
                 while (itr.hasNext()) {
                     final Card aura = itr.next();
@@ -499,7 +499,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Attach ai control preference.
-     * 
+     *
      * @param sa
      *            the sa
      * @param list
@@ -570,7 +570,7 @@ public class AttachAi extends SpellAbilityAi {
         	}
         	c = ComputerUtilCard.getWorstAI(betterList);
         }
-        
+
 
         // If Mandatory (brought directly into play without casting) gotta
         // choose something
@@ -583,7 +583,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Attach ai reanimate preference.
-     * 
+     *
      * @param sa
      *            the sa
      * @param list
@@ -670,7 +670,7 @@ public class AttachAi extends SpellAbilityAi {
     }
     /**
      * Attach ai specific card preference.
-     * 
+     *
      * @param sa
      *            the sa
      * @param list
@@ -687,7 +687,7 @@ public class AttachAi extends SpellAbilityAi {
         final Player ai = sa.getActivatingPlayer();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         Card chosen = null;
-        
+
         if ("Guilty Conscience".equals(sourceName)) {
             chosen = SpecialCardAi.GuiltyConscience.getBestAttachTarget(ai, sa, list);
         } else if ("Bonds of Faith".equals(sourceName)) {
@@ -746,7 +746,7 @@ public class AttachAi extends SpellAbilityAi {
     // Should generalize this code a bit since they all have similar structures
     /**
      * Attach ai control preference.
-     * 
+     *
      * @param sa
      *            the sa
      * @param list
@@ -782,7 +782,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Attach ai highest evaluated preference.
-     * 
+     *
      * @param list          the initial valid list
      * @return the card
      */
@@ -792,7 +792,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Attach ai curse preference.
-     * 
+     *
      * @param sa
      *            the sa
      * @param list
@@ -916,7 +916,7 @@ public class AttachAi extends SpellAbilityAi {
      *            the sa
      * @param mandatory
      *            the mandatory
-     * 
+     *
      * @return true, if successful
      */
     @Override
@@ -986,7 +986,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Attach ai pump preference.
-     * 
+     *
      * @param sa
      *            the sa
      * @param list
@@ -1066,7 +1066,7 @@ public class AttachAi extends SpellAbilityAi {
         list.removeAll(toRemove);
 
         if (magnetList != null) {
-            
+
             // Look for Heroic triggers
             if (magnetList.isEmpty() && sa.isSpell()) {
                 for (Card target : list) {
@@ -1256,7 +1256,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Attach to card ai preferences.
-     * 
+     *
      * @param sa
      *            the sa
      * @param sa
@@ -1275,8 +1275,14 @@ public class AttachAi extends SpellAbilityAi {
         if (attachSource.hasSVar("DontEquip")) {
             return null;
         }
+
+        // is no attachment so no using attach
+        if (!attachSource.isAttachment()) {
+            return null;
+        }
+
         // Don't fortify if already fortifying
-        if (attachSource.getFortifying() != null && attachSource.getFortifying().getController() == aiPlayer) {
+        if (attachSource.getAttachedTo() != null && attachSource.getAttachedTo().getController() == aiPlayer) {
             return null;
         }
 
@@ -1286,11 +1292,7 @@ public class AttachAi extends SpellAbilityAi {
         } else {
             list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource, sa);
 
-            if (attachSource.isAura()) {
-                list = CardLists.filter(list, CardPredicates.canBeEnchantedBy(attachSource));
-            } else if (attachSource.isEquipment()) {
-                list = CardLists.filter(list, CardPredicates.canBeEquippedBy(attachSource));
-            }
+            list = CardLists.filter(list, CardPredicates.canBeAttached(attachSource));
 
             // TODO If Attaching without casting, don't need to actually target.
             // I believe this is the only case where mandatory will be true, so just
@@ -1314,7 +1316,7 @@ public class AttachAi extends SpellAbilityAi {
         Card c = attachGeneralAI(aiPlayer, sa, prefList, mandatory, attachSource, sa.getParam("AILogic"));
 
         AiController aic = ((PlayerControllerAi)aiPlayer.getController()).getAi();
-        if (c != null && attachSource.isEquipment() 
+        if (c != null && attachSource.isEquipment()
                 && attachSource.isEquipping()
                 && attachSource.getEquipping().getController() == aiPlayer) {
             if (c.equals(attachSource.getEquipping())) {
@@ -1338,7 +1340,7 @@ public class AttachAi extends SpellAbilityAi {
                     return null;
                 }
             }
-            
+
             // make sure to prioritize casting spells in main 2 (creatures, other equipment, etc.) rather than moving equipment around
             boolean decideMoveFromUseless = uselessCreature && aic.getBooleanProperty(AiProps.PRIORITIZE_MOVE_EQUIPMENT_IF_USELESS);
 
@@ -1352,7 +1354,7 @@ public class AttachAi extends SpellAbilityAi {
             // avoid randomly moving the equipment back and forth between several creatures in one turn
             if (AiCardMemory.isRememberedCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ATTACHED_THIS_TURN)) {
                 return null;
-            } 
+            }
 
             // do not equip if the new creature is not significantly better than the previous one (evaluates at least better by evalT)
             int evalT = aic.getIntProperty(AiProps.MOVE_EQUIPMENT_CREATURE_EVAL_THRESHOLD);
@@ -1360,7 +1362,7 @@ public class AttachAi extends SpellAbilityAi {
                 return null;
             }
         }
-        
+
         AiCardMemory.rememberCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ATTACHED_THIS_TURN);
 
         if (c == null && mandatory) {
@@ -1372,7 +1374,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Attach general ai.
-     * 
+     *
      * @param sa
      *            the sa
      * @param list
@@ -1448,7 +1450,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Contains useful curse keyword.
-     * 
+     *
      * @param keywords
      *            the keywords
      * @param card
@@ -1467,7 +1469,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Checks if is useful keyword.
-     * 
+     *
      * @param keyword
      *            the keyword
      * @param card
@@ -1478,7 +1480,7 @@ public class AttachAi extends SpellAbilityAi {
     private static boolean isUsefulAttachKeyword(final String keyword, final Card card, final SpellAbility sa, final int powerBonus) {
         final Player ai = sa.getActivatingPlayer();
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
-        
+
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
             return false;
         }
@@ -1491,7 +1493,7 @@ public class AttachAi extends SpellAbilityAi {
                 return false;
             }
             // Also don't play if it would destroy own Aura
-            for (Card c : card.getEnchantedBy(false)) {
+            for (Card c : card.getEnchantedBy()) {
                 if ((c.getController().equals(ai)) && (c.isOfColor(cc))) {
                     return false;
                 }
@@ -1597,7 +1599,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Checks if is useful curse keyword.
-     * 
+     *
      * @param keyword
      *            the keyword
      * @param card
@@ -1650,15 +1652,15 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Checks if it is useful to execute the attach action given the current context.
-     * 
+     *
      * @param c
      *            the card
      * @param sa SpellAbility
-     * @return true, if the action is useful (beneficial) in the current minimal context (Card vs. Attach SpellAbility) 
+     * @return true, if the action is useful (beneficial) in the current minimal context (Card vs. Attach SpellAbility)
      */
     private static boolean isUsefulAttachAction(Player ai, Card c, SpellAbility sa) {
         if (c == null) {
-            return false; 
+            return false;
         }
         if (sa.getHostCard() == null) {
             // FIXME: Not sure what should the resolution be if a SpellAbility has no host card. This should
@@ -1716,12 +1718,12 @@ public class AttachAi extends SpellAbilityAi {
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         return true;
     }
-    
+
     @Override
     protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
         return attachToCardAIPreferences(ai, sa, true);
     }
-    
+
     @Override
     protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
         return attachToPlayerAIPreferences(ai, sa, true);

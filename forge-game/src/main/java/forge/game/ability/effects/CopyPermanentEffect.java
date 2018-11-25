@@ -154,9 +154,9 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host);
             if (!choices.isEmpty()) {
                 String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a card ";
-    
+
                 Card choosen = chooser.getController().chooseSingleEntityForEffect(choices, sa, title, false);
-                
+
                 if (choosen != null) {
                     tgtCards.add(choosen);
                 }
@@ -238,21 +238,8 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         }
                         if (!list.isEmpty()) {
                             Card attachedTo = activator.getController().chooseSingleEntityForEffect(list, sa, copyInPlay + " - Select a card to attach to.");
-                            if (copyInPlay.isAura()) {
-                                if (attachedTo.canBeEnchantedBy(copyInPlay)) {
-                                    copyInPlay.enchantEntity(attachedTo);
-                                } else {//can't enchant
-                                    continue;
-                                }
-                            } else if (copyInPlay.isEquipment()) { //Equipment
-                                if (attachedTo.canBeEquippedBy(copyInPlay)) {
-                                    copyInPlay.equipCard(attachedTo);
-                                } else {
-                                    continue;
-                                }
-                            } else { // Fortification
-                                copyInPlay.fortifyCard(attachedTo);
-                            }
+
+                            copyInPlay.attachToEntity(attachedTo);
                         } else {
                             continue;
                         }
