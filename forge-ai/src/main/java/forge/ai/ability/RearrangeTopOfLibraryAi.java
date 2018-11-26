@@ -28,10 +28,8 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
 
         if (source.isPermanent() && sa.getPayCosts() != null
                 && (sa.getPayCosts().hasTapCost() || sa.getPayCosts().hasManaCost())) {
-            // If it has an associated cost, try to only do this before own turn unless there are special logic considerations
-            if ("Main2BeforeOwnTurn".equals(sa.getParam("AILogic")) && !(ph.is(PhaseType.MAIN2) && ph.getNextTurn() == aiPlayer)) {
-                return false;
-            } else if (!sa.hasParam("AILogic") && !(ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == aiPlayer)) {
+            // If it has an associated cost, try to only do this before own turn
+            if (!(ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == aiPlayer)) {
                 return false;
             }
         }

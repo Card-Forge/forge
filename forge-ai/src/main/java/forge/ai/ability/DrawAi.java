@@ -131,9 +131,8 @@ public class DrawAi extends SpellAbilityAi {
             return true;
         } else if (logic.equals("AlwaysAtOppEOT")) {
             return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai);
-        } else if (logic.equals("AtEOTIfActivatedBefore")) {
-            return AiCardMemory.isRememberedCard(ai, sa.getHostCard(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)
-                    && ph.is(PhaseType.END_OF_TURN);
+        } else if (logic.equals("RespondToOwnActivation")) {
+            return !ai.getGame().getStack().isEmpty() && ai.getGame().getStack().peekAbility().getHostCard().equals(sa.getHostCard());
         }
 
         // Don't use draw abilities before main 2 if possible
