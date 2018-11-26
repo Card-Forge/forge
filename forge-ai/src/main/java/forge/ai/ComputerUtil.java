@@ -28,6 +28,7 @@ import forge.card.mana.ManaCostShard;
 import forge.game.CardTraitPredicates;
 import forge.game.Game;
 import forge.game.GameObject;
+import forge.game.GameType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -1042,13 +1043,15 @@ public class ComputerUtil {
         } // AntiBuffedBy
 
         // Plane cards that give Haste (e.g. Sokenzan)
-        for (Card c : ai.getGame().getActivePlanes()) {
-            for (StaticAbility s : c.getStaticAbilities()) {
-                if (s.hasParam("AddKeyword")
-                        && s.getParam("AddKeyword").contains("Haste")
-                        && "Creature".equals(s.getParam("Affected"))
-                        && card.isCreature()) {
-                    return true;
+        if (ai.getGame().getRules().hasAppliedVariant(GameType.Planechase)) {
+            for (Card c : ai.getGame().getActivePlanes()) {
+                for (StaticAbility s : c.getStaticAbilities()) {
+                    if (s.hasParam("AddKeyword")
+                            && s.getParam("AddKeyword").contains("Haste")
+                            && "Creature".equals(s.getParam("Affected"))
+                            && card.isCreature()) {
+                        return true;
+                    }
                 }
             }
         }
