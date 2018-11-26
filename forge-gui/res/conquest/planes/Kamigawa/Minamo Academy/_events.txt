@@ -1,6 +1,6 @@
 Name:Higure, the Still Wind|Deck:Higure, the Still Wind.dck|Variant:Commander|Avatar:Higure, the Still Wind|Desc:
 Name:Azami, Lady of Scrolls|Deck:Azami, Lady of Scrolls.dck|Variant:Commander|Avatar:Azami, Lady of Scrolls|Desc:
-Name:Ninjas of Kamigawa|Deck:Ninjas of Kamigawa.dck|Variant:Planechase|Avatar:Ninjas of Kamigawa|Desc:
+Name:Ninjas of Kamigawa|Deck:Ninjas of Kamigawa.dck|Variant:Planechase|Avatar:Silent-Blade Oni|Desc:
 Name:EVENT4|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT5|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT6|Deck:Random|Variant:None|Avatar:None|Desc:

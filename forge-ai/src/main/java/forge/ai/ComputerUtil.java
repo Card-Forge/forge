@@ -1041,6 +1041,18 @@ public class ComputerUtil {
             }
         } // AntiBuffedBy
 
+        // Plane cards that give Haste (e.g. Sokenzan)
+        for (Card c : ai.getGame().getActivePlanes()) {
+            for (StaticAbility s : c.getStaticAbilities()) {
+                if (s.hasParam("AddKeyword")
+                        && s.getParam("AddKeyword").contains("Haste")
+                        && "Creature".equals(s.getParam("Affected"))
+                        && card.isCreature()) {
+                    return true;
+                }
+            }
+        }
+
         final CardCollectionView vengevines = ai.getCardsIn(ZoneType.Graveyard, "Vengevine");
         if (!vengevines.isEmpty()) {
             final CardCollectionView creatures = ai.getCardsIn(ZoneType.Hand);
