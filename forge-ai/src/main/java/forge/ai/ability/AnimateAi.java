@@ -149,15 +149,15 @@ public class AnimateAi extends SpellAbilityAi {
                 if (!bFlag && c.isCreature() && (sa.hasParam("Permanent") || (!c.isTapped() && !c.isSick()))) {
                     int power = -5;
                     if (sa.hasParam("Power")) {
-                        power = AbilityUtils.calculateAmount(source, sa.getParam("Power"), sa);
+                        power = AbilityUtils.calculateAmount(c, sa.getParam("Power"), sa);
                     }
                     int toughness = -5;
                     if (sa.hasParam("Toughness")) {
-                        toughness = AbilityUtils.calculateAmount(source, sa.getParam("Toughness"), sa);
+                        toughness = AbilityUtils.calculateAmount(c, sa.getParam("Toughness"), sa);
                     }
                     if (sa.hasParam("Keywords")) {
                         for (String keyword : sa.getParam("Keywords").split(" & ")) {
-                            if (!source.hasKeyword(keyword)) {
+                            if (!c.hasKeyword(keyword)) {
                                 bFlag = true;
                             }
                         }
