@@ -492,7 +492,8 @@ public class MatchController extends AbstractGuiGame {
 
         final Collection<CardView> revealList = delayedReveal.getCards();
         final String revealListCaption = StringUtils.capitalize(MessageUtil.formatMessage("{player's} " + delayedReveal.getZone().name(), delayedReveal.getOwner(), delayedReveal.getOwner()));
-        final FImage revealListImage = MatchController.getView().getPlayerPanels().values().iterator().next().getZoneTab(delayedReveal.getZone()).getIcon();
+        final InfoTab revealListTab = MatchController.getView().getPlayerPanels().values().iterator().next().getZoneTab(delayedReveal.getZone());
+        final FImage revealListImage = revealListTab != null ? revealListTab.getIcon() : null;
 
         //use special dialog for choosing card and offering ability to see all revealed cards at the same time
         return new WaitCallback<GameEntityView>() {
