@@ -1392,8 +1392,11 @@ public class AiController {
     private final SpellAbility getSpellAbilityToPlay() {
         // if top of stack is owned by me
         if (!game.getStack().isEmpty() && game.getStack().peekAbility().getActivatingPlayer().equals(player)) {
-            // probably should let my stuff resolve
-            return null;
+            boolean canRespondToSelf = game.getStack().peekAbility().hasParam("AIRespondsToOwnAbility");
+            if (!canRespondToSelf) {
+                // probably should let my stuff resolve
+                return null;
+            }
         }
         final CardCollection cards = ComputerUtilAbility.getAvailableCards(game, player);
 
