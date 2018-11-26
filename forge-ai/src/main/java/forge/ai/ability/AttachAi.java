@@ -22,6 +22,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellPermanent;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
@@ -61,7 +62,7 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         if (!ai.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)
-                && source.getType().isLegendary()
+                && source.getType().isLegendary() && sa instanceof SpellPermanent
                 && ai.isCardInPlay(source.getName())) {
             // Don't play the second copy of a legendary enchantment already in play
 
