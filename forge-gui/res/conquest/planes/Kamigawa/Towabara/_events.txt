@@ -6,4 +6,4 @@ Name:Eight-and-a-Half-Tails|Deck:Eight-and-a-Half-Tails.dck|Variant:Vanguard|Ava
 Name:Celestial Kirin|Deck:Celestial Kirin.dck|Variant:Commander|Avatar:Celestial Kirin|Desc:
 Name:Takeno, Samurai General|Deck:Takeno, Samurai General.dck|Variant:Commander|Avatar:Takeno, Samurai General|Desc:
 Name:Spirits of the Plane|Deck:Spirits of the Plane.dck|Variant:Planechase|Avatar:Kami of the Honored Dead|Desc:
-Name:Random Planechase|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:
+Name:Random Towabara|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

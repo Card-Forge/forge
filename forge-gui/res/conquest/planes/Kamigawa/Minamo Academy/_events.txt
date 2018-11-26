@@ -6,4 +6,4 @@ Name:EVENT5|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT6|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT7|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT8|Deck:Random|Variant:None|Avatar:None|Desc:
-Name:Random Planechase|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:
+Name:Random Minamo Academy|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:
