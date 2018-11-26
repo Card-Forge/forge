@@ -1,4 +1,4 @@
-Name:EVENT1|Deck:Random|Variant:None|Avatar:None|Desc:
+Name:Higure, the Still Wind|Deck:Higure, the Still Wind.dck|Variant:Commander|Avatar:Higure, the Still Wind|Desc:
 Name:EVENT2|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT3|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT4|Deck:Random|Variant:None|Avatar:None|Desc:
