@@ -1390,15 +1390,40 @@ public class AiController {
     }
 
     private final SpellAbility getSpellAbilityToPlay() {
-        // if top of stack is owned by me
-        if (!game.getStack().isEmpty() && game.getStack().peekAbility().getActivatingPlayer().equals(player)) {
-            boolean canRespondToSelf = game.getStack().peekAbility().hasParam("AIRespondsToOwnAbility");
-            if (!canRespondToSelf) {
-                // probably should let my stuff resolve
+        final CardCollection cards = ComputerUtilAbility.getAvailableCards(game, player);
+        List<SpellAbility> saList = Lists.newArrayList();
+
+        SpellAbility top = null;
+        if (!game.getStack().isEmpty()) {
+            top = game.getStack().peekAbility();
+        }
+        final boolean topOwnedByAI = top != null && top.getActivatingPlayer().equals(player);
+
+        if (topOwnedByAI) {
+            final boolean mustRespond = top.hasParam("AIRespondsToOwnAbility");
+            final int chanceToCopy = getIntProperty(AiProps.CHANCE_TO_COPY_OWN_SPELL_WHILE_ON_STACK);
+
+            if (!mustRespond) {
+                if (chanceToCopy == 0) {
+                    // The AI profile asks not to respond to own spells on stack (MustRespond is a script-defined exception).
+                    return null;
+                } else {
+                    saList = ComputerUtilAbility.getSpellAbilities(cards, player); // get the SA list early to check for copy SAs
+                    if (ComputerUtilAbility.getFirstCopySASpell(saList) == null) {
+                        // The AI currently responds to its own spell on stack only with copy spells (e.g. Twincast).
+                        // If there are none, don't respond.
+                        return null;
+                    }
+                }
+            }
+
+            // if top of the stack is owned by me, probably should let my stuff resolve unless I want to copy my spell on stack
+            // or if there are special considerations (e.g. scripted response for Sensei's Divining Top)
+            boolean wantToRespondToStack = mustRespond || MyRandom.percentTrue(chanceToCopy);
+            if (!wantToRespondToStack) {
                 return null;
             }
         }
-        final CardCollection cards = ComputerUtilAbility.getAvailableCards(game, player);
 
         if (!game.getStack().isEmpty()) {
             SpellAbility counter = chooseCounterSpell(getPlayableCounters(cards));
@@ -1409,7 +1434,13 @@ public class AiController {
                 return counterETB;
         }
 
-        return chooseSpellAbilityToPlayFromList(ComputerUtilAbility.getSpellAbilities(cards, player), true);
+        if (saList.isEmpty()) {
+            saList = ComputerUtilAbility.getSpellAbilities(cards, player);
+        }
+
+        SpellAbility chosenSa = chooseSpellAbilityToPlayFromList(saList, true);
+
+        return chosenSa;
     }
 
     private SpellAbility chooseSpellAbilityToPlayFromList(final List<SpellAbility> all, boolean skipCounter) {
