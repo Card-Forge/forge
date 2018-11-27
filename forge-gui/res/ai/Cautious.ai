@@ -136,6 +136,8 @@ ALWAYS_COUNTER_SPELLS_FROM_NAMED_CARDS=None
 # Copy spell on stack logic
 # The chance that the AI will copy its own stack right after placing it there while it has priority
 CHANCE_TO_COPY_OWN_SPELL_WHILE_ON_STACK=0
+# If the copied spell costs this much more than the copy spell, the chance to copy the spell will become 100
+ALWAYS_COPY_SPELL_IF_CMC_DIFF=4
 
 # Storm spell logic
 PRIORITY_REDUCTION_FOR_STORM_SPELLS=9

@@ -19,10 +19,24 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         Game game = aiPlayer.getGame();
-        final int chance = ((PlayerControllerAi)aiPlayer.getController()).getAi().getIntProperty(AiProps.CHANCE_TO_COPY_OWN_SPELL_WHILE_ON_STACK);
+        int chance = ((PlayerControllerAi)aiPlayer.getController()).getAi().getIntProperty(AiProps.CHANCE_TO_COPY_OWN_SPELL_WHILE_ON_STACK);
+        int diff = ((PlayerControllerAi)aiPlayer.getController()).getAi().getIntProperty(AiProps.ALWAYS_COPY_SPELL_IF_CMC_DIFF);
 
-        if (game.getStack().isEmpty()
-                || (!MyRandom.percentTrue(chance) && !"AlwaysIfViable".equals(sa.getParam("AILogic")))
+        if (game.getStack().isEmpty()) {
+            return sa.isMandatory();
+        }
+
+        final SpellAbility top = game.getStack().peekAbility();
+        if (top != null
+                && top.getPayCosts() != null && top.getPayCosts().getCostMana() != null
+                && sa.getPayCosts() != null && sa.getPayCosts().getCostMana() != null
+                && top.getPayCosts().getCostMana().getMana().getCMC() >= sa.getPayCosts().getCostMana().getMana().getCMC() + diff) {
+            // The copied spell has a significantly higher CMC than the copy spell, consider copying
+            chance = 100;
+        }
+
+        if (!MyRandom.percentTrue(chance)
+                && !"AlwaysIfViable".equals(sa.getParam("AILogic"))
                 && !"OnceIfViable".equals(sa.getParam("AILogic"))) {
             return false;
         }
@@ -35,7 +49,6 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
-            final SpellAbility top = game.getStack().peekAbility();
 
             // Filter AI-specific targets if provided
             if ("OnlyOwned".equals(sa.getParam("AITgts"))) {
