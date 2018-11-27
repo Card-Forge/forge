@@ -3,7 +3,7 @@ Name:Azami, Lady of Scrolls|Deck:Azami, Lady of Scrolls.dck|Variant:Commander|Av
 Name:Ninjas of Kamigawa|Deck:Ninjas of Kamigawa.dck|Variant:Planechase|Avatar:Silent-Blade Oni|Desc:
 Name:Keiga, the Tide Star|Deck:Keiga, the Tide Star.dck|Variant:Commander|Avatar:Keiga, the Tide Star|Desc:
 Name:Cloudhoof Kirin|Deck:Cloudhoof Kirin.dck|Variant:Commander|Avatar:Cloudhoof Kirin|Desc:
-Name:EVENT6|Deck:Random|Variant:None|Avatar:None|Desc:
+Name:Meloku the Clouded Mirror|Deck:Meloku the Clouded Mirror.dck|Variant:Commander|Avatar:Meloku the Clouded Mirror|Desc:
 Name:EVENT7|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT8|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:Random Minamo Academy|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:
