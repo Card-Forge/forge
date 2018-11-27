@@ -4,17 +4,18 @@ Name=Cloudhoof Kirin
 1 Cloudhoof Kirin|SOK
 [Main]
 1 Baku Altar|BOK
+1 Callow Jushi|BOK
 1 Consuming Vortex|CHK
 1 Cut the Earthly Bond|SOK
 1 Dampen Thought|CHK
 1 Erayo, Soratami Ascendant|SOK
 1 Eye of Nowhere|CHK
 1 Genju of the Falls|BOK
-2 Guardian of Solitude|CHK
+1 Guardian of Solitude|CHK
 1 Hair-Strung Koto|CHK
 1 Hinder|CHK
 1 Hisoka's Defiance|CHK
-14 Island|CHK|1
+14 Island|CHK
 1 Jetting Glasskite|BOK
 1 Kami of the Crescent Moon|SOK
 1 Kira, Great Glass-Spinner|BOK
@@ -29,5 +30,3 @@ Name=Cloudhoof Kirin
 1 Soratami Savant|CHK
 1 Thoughtbind|CHK
 1 Threads of Disloyalty|BOK
-[Sideboard]
-
