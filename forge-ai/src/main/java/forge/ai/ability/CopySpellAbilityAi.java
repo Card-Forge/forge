@@ -21,6 +21,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
         Game game = aiPlayer.getGame();
         int chance = ((PlayerControllerAi)aiPlayer.getController()).getAi().getIntProperty(AiProps.CHANCE_TO_COPY_OWN_SPELL_WHILE_ON_STACK);
         int diff = ((PlayerControllerAi)aiPlayer.getController()).getAi().getIntProperty(AiProps.ALWAYS_COPY_SPELL_IF_CMC_DIFF);
+        String logic = sa.getParamOrDefault("AILogic", "");
 
         if (game.getStack().isEmpty()) {
             return sa.isMandatory();
@@ -36,12 +37,13 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
         }
 
         if (!MyRandom.percentTrue(chance)
-                && !"AlwaysIfViable".equals(sa.getParam("AILogic"))
-                && !"OnceIfViable".equals(sa.getParam("AILogic"))) {
+                && !"AlwaysIfViable".equals(logic)
+                && !"OnceIfViable".equals(logic)
+                && !"AlwaysCopyActivatedAbilities".equals(logic)) {
             return false;
         }
 
-        if ("OnceIfViable".equals(sa.getParam("AILogic"))) {
+        if ("OnceIfViable".equals(logic)) {
             if (AiCardMemory.isRememberedCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
                 return false;
             }
@@ -74,7 +76,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
                 if (top instanceof Spell) {
                     decision = ((PlayerControllerAi) aiPlayer.getController()).getAi().canPlayFromEffectAI((Spell) topCopy, true, true);
                 } else if (top instanceof AbilityActivated && top.getActivatingPlayer().equals(aiPlayer)
-                        && "CopyActivatedAbilities".equals(sa.getParam("AILogic"))) {
+                        && logic.contains("CopyActivatedAbilities")) {
                     decision = AiPlayDecision.WillPlay; // FIXME: we activated it once, why not again? Or bad idea?
                 }
                 if (decision == AiPlayDecision.WillPlay) {
@@ -86,7 +88,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
         }
 
         // the AI should not miss mandatory activations
-        return sa.isMandatory() || "Always".equals(sa.getParam("AILogic"));
+        return sa.isMandatory() || "Always".equals(logic);
     }
 
     @Override
