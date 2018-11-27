@@ -1400,28 +1400,16 @@ public class AiController {
         final boolean topOwnedByAI = top != null && top.getActivatingPlayer().equals(player);
 
         if (topOwnedByAI) {
+            // AI's own spell: should probably let my stuff resolve first, but may want to copy the SA or respond to it
+            // in a scripted timed fashion.
             final boolean mustRespond = top.hasParam("AIRespondsToOwnAbility");
-            final int chanceToCopy = getIntProperty(AiProps.CHANCE_TO_COPY_OWN_SPELL_WHILE_ON_STACK);
 
             if (!mustRespond) {
-                if (chanceToCopy == 0) {
-                    // The AI profile asks not to respond to own spells on stack (MustRespond is a script-defined exception).
+                saList = ComputerUtilAbility.getSpellAbilities(cards, player); // get the SA list early to check for copy SAs
+                if (ComputerUtilAbility.getFirstCopySASpell(saList) == null) {
+                    // Nothing to copy the spell with, so do nothing.
                     return null;
-                } else {
-                    saList = ComputerUtilAbility.getSpellAbilities(cards, player); // get the SA list early to check for copy SAs
-                    if (ComputerUtilAbility.getFirstCopySASpell(saList) == null) {
-                        // The AI currently responds to its own spell on stack only with copy spells (e.g. Twincast).
-                        // If there are none, don't respond.
-                        return null;
-                    }
                 }
-            }
-
-            // if top of the stack is owned by me, probably should let my stuff resolve unless I want to copy my spell on stack
-            // or if there are special considerations (e.g. scripted response for Sensei's Divining Top)
-            boolean wantToRespondToStack = mustRespond || MyRandom.percentTrue(chanceToCopy);
-            if (!wantToRespondToStack) {
-                return null;
             }
         }
 

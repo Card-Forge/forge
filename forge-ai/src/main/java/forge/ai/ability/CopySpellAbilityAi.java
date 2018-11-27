@@ -1,9 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.AiPlayDecision;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.ApiType;
 import forge.game.player.Player;
@@ -12,6 +9,7 @@ import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.util.MyRandom;
 
 import java.util.List;
 import java.util.Map;
@@ -21,14 +19,27 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         Game game = aiPlayer.getGame();
-        if (game.getStack().isEmpty()) {
-            return sa.isMandatory(); // FIXME: Are mandatory activations possible in the canPlayAI code path?
+        final int chance = ((PlayerControllerAi)aiPlayer.getController()).getAi().getIntProperty(AiProps.CHANCE_TO_COPY_OWN_SPELL_WHILE_ON_STACK);
+
+        if (game.getStack().isEmpty()
+                || (!MyRandom.percentTrue(chance) && !"AlwaysIfViable".equals(sa.getParam("AILogic")))
+                && !"OnceIfViable".equals(sa.getParam("AILogic"))) {
+            return false;
+        }
+
+        if ("OnceIfViable".equals(sa.getParam("AILogic"))) {
+            if (AiCardMemory.isRememberedCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
+                return false;
+            }
         }
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             final SpellAbility top = game.getStack().peekAbility();
-            if (top.getApi() == ApiType.CopySpellAbility) {
+            if (top.isWrapper() || !(top instanceof SpellAbility || top instanceof AbilityActivated)) {
+                // Should even try with triggered or wrapped abilities first, will crash
+                return false;
+            } else if (top.getApi() == ApiType.CopySpellAbility) {
                 // Don't try to copy a copy ability, too complex for the AI to handle
                 return false;
             }
@@ -47,6 +58,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
                 }
                 if (decision == AiPlayDecision.WillPlay) {
                     sa.getTargets().add(top);
+                    AiCardMemory.rememberCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
                     return true;
                 }
             }
