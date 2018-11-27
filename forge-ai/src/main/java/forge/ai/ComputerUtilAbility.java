@@ -128,6 +128,17 @@ public class ComputerUtilAbility {
         return tgtSA;
     }
 
+    public static SpellAbility getFirstCopySASpell(List<SpellAbility> spells) {
+        SpellAbility sa = null;
+        for (SpellAbility spell : spells) {
+            if (spell.getApi() == ApiType.CopySpellAbility) {
+                sa = spell;
+                break;
+            }
+        }
+        return sa;
+    }
+
     public static Card getAbilitySource(SpellAbility sa) {
         return sa.getOriginalHost() != null ? sa.getOriginalHost() : sa.getHostCard();
     }

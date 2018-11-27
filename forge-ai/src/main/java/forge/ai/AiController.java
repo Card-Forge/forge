@@ -1390,15 +1390,28 @@ public class AiController {
     }
 
     private final SpellAbility getSpellAbilityToPlay() {
-        // if top of stack is owned by me
-        if (!game.getStack().isEmpty() && game.getStack().peekAbility().getActivatingPlayer().equals(player)) {
-            boolean canRespondToSelf = game.getStack().peekAbility().hasParam("AIRespondsToOwnAbility");
-            if (!canRespondToSelf) {
-                // probably should let my stuff resolve
-                return null;
+        final CardCollection cards = ComputerUtilAbility.getAvailableCards(game, player);
+        List<SpellAbility> saList = Lists.newArrayList();
+
+        SpellAbility top = null;
+        if (!game.getStack().isEmpty()) {
+            top = game.getStack().peekAbility();
+        }
+        final boolean topOwnedByAI = top != null && top.getActivatingPlayer().equals(player);
+
+        if (topOwnedByAI) {
+            // AI's own spell: should probably let my stuff resolve first, but may want to copy the SA or respond to it
+            // in a scripted timed fashion.
+            final boolean mustRespond = top.hasParam("AIRespondsToOwnAbility");
+
+            if (!mustRespond) {
+                saList = ComputerUtilAbility.getSpellAbilities(cards, player); // get the SA list early to check for copy SAs
+                if (ComputerUtilAbility.getFirstCopySASpell(saList) == null) {
+                    // Nothing to copy the spell with, so do nothing.
+                    return null;
+                }
             }
         }
-        final CardCollection cards = ComputerUtilAbility.getAvailableCards(game, player);
 
         if (!game.getStack().isEmpty()) {
             SpellAbility counter = chooseCounterSpell(getPlayableCounters(cards));
@@ -1409,7 +1422,13 @@ public class AiController {
                 return counterETB;
         }
 
-        return chooseSpellAbilityToPlayFromList(ComputerUtilAbility.getSpellAbilities(cards, player), true);
+        if (saList.isEmpty()) {
+            saList = ComputerUtilAbility.getSpellAbilities(cards, player);
+        }
+
+        SpellAbility chosenSa = chooseSpellAbilityToPlayFromList(saList, true);
+
+        return chosenSa;
     }
 
     private SpellAbility chooseSpellAbilityToPlayFromList(final List<SpellAbility> all, boolean skipCounter) {
