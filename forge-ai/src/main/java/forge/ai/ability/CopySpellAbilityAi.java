@@ -36,6 +36,14 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             final SpellAbility top = game.getStack().peekAbility();
+
+            // Filter AI-specific targets if provided
+            if ("OnlyOwned".equals(sa.getParam("AITgts"))) {
+                if (!top.getActivatingPlayer().equals(aiPlayer)) {
+                    return false;
+                }
+            }
+
             if (top.isWrapper() || !(top instanceof SpellAbility || top instanceof AbilityActivated)) {
                 // Should even try with triggered or wrapped abilities first, will crash
                 return false;
