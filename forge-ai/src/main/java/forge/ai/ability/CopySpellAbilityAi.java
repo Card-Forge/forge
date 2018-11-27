@@ -103,7 +103,9 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
             return SpecialCardAi.ChainOfAcid.consider(aiPlayer, sa);
         }
 
-        return canPlayAI(aiPlayer, sa);
+        boolean wantToPlay = canPlayAI(aiPlayer, sa);
+
+        return wantToPlay || (sa.isMandatory() && super.chkAIDrawback(sa, aiPlayer));
     }
 
     @Override
