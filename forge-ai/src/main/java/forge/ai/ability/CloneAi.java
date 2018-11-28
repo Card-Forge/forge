@@ -142,6 +142,10 @@ public class CloneAi extends SpellAbilityAi {
             CardCollection valid = CardLists.getValidCards(sa.getHostCard().getController().getCardsIn(ZoneType.Battlefield), sa.getParam("ValidTgts"), sa.getHostCard().getController(), sa.getHostCard());
             sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(valid));
             return true;
+        } else if ("CloneBestCreature".equals(sa.getParam("AILogic"))) {
+            CardCollection valid = CardLists.getValidCards(sa.getHostCard().getController().getGame().getCardsIn(ZoneType.Battlefield), sa.getParam("ValidTgts"), sa.getHostCard().getController(), sa.getHostCard());
+            sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(valid));
+            return true;
         }
 
         // Default:
@@ -157,7 +161,14 @@ public class CloneAi extends SpellAbilityAi {
      */
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
-        // Didn't confirm in the original code
+        if (sa.hasParam("AILogic") && sa.usesTargeting() && sa.isTargetNumberValid()) {
+            // Had a special logic for it and managed to target, so confirm if viable
+            if ("CloneBestCreature".equals(sa.getParam("AILogic"))) {
+                return ComputerUtilCard.evaluateCreature(sa.getTargets().getFirstTargetedCard()) > ComputerUtilCard.evaluateCreature(sa.getHostCard());
+            }
+        }
+
+        // Currently doesn't confirm anything that's not defined by AI logic
         return false;
     }
 
