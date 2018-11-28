@@ -161,10 +161,14 @@ public class CloneAi extends SpellAbilityAi {
      */
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
-        if (sa.hasParam("AILogic") && sa.usesTargeting() && sa.isTargetNumberValid()) {
+        if (sa.hasParam("AILogic") && (!sa.usesTargeting() || sa.isTargetNumberValid())) {
             // Had a special logic for it and managed to target, so confirm if viable
             if ("CloneBestCreature".equals(sa.getParam("AILogic"))) {
                 return ComputerUtilCard.evaluateCreature(sa.getTargets().getFirstTargetedCard()) > ComputerUtilCard.evaluateCreature(sa.getHostCard());
+            } else if ("BetterThanTriggered".equals(sa.getParam("AILogic"))) {
+                List<Card> defined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+                Card bestDefined = ComputerUtilCard.getBestCreatureAI(defined);
+                return ComputerUtilCard.evaluateCreature(bestDefined) > ComputerUtilCard.evaluateCreature(sa.getHostCard());
             }
         }
 
