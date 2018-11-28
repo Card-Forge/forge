@@ -36,6 +36,10 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
             chance = 100;
         }
 
+        if (top.getActivatingPlayer().isOpponentOf(aiPlayer)) {
+            chance = 100; // currently the AI will always copy the opponent's spell if viable
+        }
+
         if (!MyRandom.percentTrue(chance)
                 && !"AlwaysIfViable".equals(logic)
                 && !"OnceIfViable".equals(logic)
@@ -73,7 +77,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
 
             if (top.canBeTargetedBy(sa)) {
                 AiPlayDecision decision = AiPlayDecision.CantPlaySa;
-                if (top instanceof Spell) {
+                if (top instanceof Spell && !top.hasParam("ConditionManaSpent") /* mana spent is not copied */ ) {
                     decision = ((PlayerControllerAi) aiPlayer.getController()).getAi().canPlayFromEffectAI((Spell) topCopy, true, true);
                 } else if (top instanceof AbilityActivated && top.getActivatingPlayer().equals(aiPlayer)
                         && logic.contains("CopyActivatedAbilities")) {
