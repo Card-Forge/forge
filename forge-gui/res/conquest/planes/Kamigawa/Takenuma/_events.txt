@@ -1,7 +1,7 @@
 Name:Infernal Kirin|Deck:Infernal Kirin.dck|Variant:Commander|Avatar:Infernal Kirin|Desc:
 Name:Marrow-Gnawer|Deck:Marrow-Gnawer.dck|Variant:Commander|Avatar:Marrow-Gnawer|Desc:
 Name:Kuro, Pitlord|Deck:Kuro, Pitlord.dck|Variant:Commander|Avatar:Kuro, Pitlord|Desc:
-Name:EVENT4|Deck:Random|Variant:None|Avatar:None|Desc:
+Name:Maga, Traitor to Mortals|Deck:Maga, Traitor to Mortals.dck|Variant:Commander|Avatar:Maga, Traitor to Mortals|Desc:
 Name:EVENT5|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT6|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT7|Deck:Random|Variant:None|Avatar:None|Desc:
