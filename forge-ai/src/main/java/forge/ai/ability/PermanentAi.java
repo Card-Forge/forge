@@ -61,8 +61,23 @@ public class PermanentAi extends SpellAbilityAi {
         if (card.getType().isLegendary()
                 && !game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
             if (ai.isCardInPlay(card.getName())) {
-                // AiPlayDecision.WouldDestroyLegend
-                return false;
+                if (!card.hasSVar("AILegendaryException")) {
+                    // AiPlayDecision.WouldDestroyLegend
+                    return false;
+                } else {
+                    String specialRule = card.getSVar("AILegendaryException");
+                    if ("TwoCopiesAllowed".equals(specialRule)) {
+                        // One extra copy allowed on the battlefield, e.g. Brothers Yamazaki
+                        if (CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(card.getName())).size() > 1) {
+                            return false;
+                        }
+                    } else if ("AlwaysAllowed".equals(specialRule)) {
+                        // Nothing to do here, check for Legendary is disabled
+                    } else {
+                        // Unknown hint, assume two copies not allowed
+                        return false;
+                    }
+                }
             }
         }
 
