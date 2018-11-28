@@ -1,6 +1,6 @@
-Name:EVENT1|Deck:Random|Variant:None|Avatar:None|Desc:
-Name:EVENT2|Deck:Random|Variant:None|Avatar:None|Desc:
-Name:EVENT3|Deck:Random|Variant:None|Avatar:None|Desc:
+Name:Infernal Kirin|Deck:Infernal Kirin.dck|Variant:Commander|Avatar:Infernal Kirin|Desc:
+Name:Marrow-Gnawer|Deck:Marrow-Gnawer.dck|Variant:Commander|Avatar:Marrow-Gnawer|Desc:
+Name:Kuro, Pitlord|Deck:Kuro, Pitlord.dck|Variant:Commander|Avatar:Kuro, Pitlord|Desc:
 Name:EVENT4|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT5|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT6|Deck:Random|Variant:None|Avatar:None|Desc:
