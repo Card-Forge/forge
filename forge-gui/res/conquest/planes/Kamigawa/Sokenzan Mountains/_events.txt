@@ -1,6 +1,6 @@
 Name:Fumiko the Lowblood|Deck:Fumiko the Lowblood.dck|Variant:Commander|Avatar:Fumiko the Lowblood|Desc:
 Name:Godo, Bandit Warlord|Deck:Godo, Bandit Warlord.dck|Variant:Commander|Avatar:Godo, Bandit Warlord|Desc:
-Name:EVENT3|Deck:Random|Variant:None|Avatar:None|Desc:
+Name:Patron of the Akki|Deck:Patron of the Akki.dck|Variant:Commander|Avatar:Patron of the Akki|Desc:
 Name:EVENT4|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT5|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT6|Deck:Random|Variant:None|Avatar:None|Desc:
