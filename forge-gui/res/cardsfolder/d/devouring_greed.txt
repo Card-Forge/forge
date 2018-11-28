@@ -7,6 +7,7 @@ SVar:X:XChoice
 SVar:A:Sacrificed$Amount
 SVar:B:SVar$A/Times.2
 SVar:C:SVar$B/Plus.2
+SVar:AIPreference:SacCost$Creature.Spirit+token,Creature.Spirit+cmcLE2
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 DeckHints:Type$Spirit
