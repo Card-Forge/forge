@@ -2,8 +2,8 @@ Name:Fumiko the Lowblood|Deck:Fumiko the Lowblood.dck|Variant:Commander|Avatar:F
 Name:Godo, Bandit Warlord|Deck:Godo, Bandit Warlord.dck|Variant:Commander|Avatar:Godo, Bandit Warlord|Desc:
 Name:Patron of the Akki|Deck:Patron of the Akki.dck|Variant:Commander|Avatar:Patron of the Akki|Desc:
 Name:Jiwari, the Earth Aflame|Deck:Jiwari, the Earth Aflame.dck|Variant:Commander|Avatar:Jiwari, the Earth Aflame|Desc:
-Name:EVENT5|Deck:Random|Variant:None|Avatar:None|Desc:
+Name:Pinecrest Ridge|Deck:Pinecrest Ridge.dck|Variant:Planechase|Avatar:Pinecrest Ridge|Desc:
 Name:EVENT6|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT7|Deck:Random|Variant:None|Avatar:None|Desc:
-Name:EVENT8|Deck:Random|Variant:None|Avatar:None|Desc:
+Name:Seshiro the Anointed|Deck:Seshiro the Anointed.dck|Variant:Vanguard|Avatar:Seshiro the Anointed Avatar|Desc:
 Name:Random Sokenzan Mountains|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:
