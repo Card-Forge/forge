@@ -11,6 +11,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -102,6 +103,18 @@ public class MustBlockAi extends SpellAbilityAi {
             if (blocker == null) {
                 return false;
             }
+
+            if (source.hasKeyword(Keyword.PROVOKE) && blocker.isTapped()) {
+                // Don't provoke if the attack is potentially lethal
+                Combat combat = ai.getGame().getCombat();
+                Player defender = combat.getDefenderPlayerByAttacker(source);
+                if (combat != null && combat.getAttackingPlayer().equals(ai)
+                        && defender.canLoseLife() && !defender.cantLoseForZeroOrLessLife()
+                        && ComputerUtilCombat.lifeThatWouldRemain(defender, combat) <= 0) {
+                    return false;
+                }
+            }
+
             sa.getTargets().add(blocker);
             chance = true;
         } else {
