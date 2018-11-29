@@ -4,6 +4,6 @@ Name:Patron of the Akki|Deck:Patron of the Akki.dck|Variant:Commander|Avatar:Pat
 Name:Jiwari, the Earth Aflame|Deck:Jiwari, the Earth Aflame.dck|Variant:Commander|Avatar:Jiwari, the Earth Aflame|Desc:
 Name:Pinecrest Ridge|Deck:Pinecrest Ridge.dck|Variant:Planechase|Avatar:Pinecrest Ridge|Desc:
 Name:Ryusei, the Falling Star|Deck:Ryusei, the Falling Star.dck|Variant:Commander|Avatar:Ryusei, the Falling Star|Desc:
-Name:Kiki-Jiki, Mirror Breaker|Deck:Kiki-Jiki, Mirror Breaker.dck|Variant:Commander|Avatar:Kiki-Jiki, Mirror Breaker|Desc:
+Name:Ben-Ben, Akki Hermit|Deck:Ben-Ben, Akki Hermit.dck|Variant:Commander|Avatar:Ben-Ben, Akki Hermit|Desc:
 Name:Seshiro the Anointed|Deck:Seshiro the Anointed.dck|Variant:Vanguard|Avatar:Seshiro the Anointed Avatar|Desc:
 Name:Random Sokenzan Mountains|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:
