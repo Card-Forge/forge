@@ -64,10 +64,16 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
             }
 
             if (top.isWrapper() || !(top instanceof SpellAbility || top instanceof AbilityActivated)) {
-                // Should even try with triggered or wrapped abilities first, will crash
+                // Shouldn't even try with triggered or wrapped abilities at this time, will crash
                 return false;
             } else if (top.getApi() == ApiType.CopySpellAbility) {
                 // Don't try to copy a copy ability, too complex for the AI to handle
+                return false;
+            } else if (top.hasParam("ConditionManaSpent")) {
+                // Mana spent is not copied, so these spells generally do nothing when copied.
+                return false;
+            } else if (ComputerUtilCard.isCardRemAIDeck(top.getHostCard())) {
+                // Don't try to copy anything you can't understand how to handle
                 return false;
             }
 
@@ -77,7 +83,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
 
             if (top.canBeTargetedBy(sa)) {
                 AiPlayDecision decision = AiPlayDecision.CantPlaySa;
-                if (top instanceof Spell && !top.hasParam("ConditionManaSpent") /* mana spent is not copied */ ) {
+                if (top instanceof Spell) {
                     decision = ((PlayerControllerAi) aiPlayer.getController()).getAi().canPlayFromEffectAI((Spell) topCopy, true, true);
                 } else if (top instanceof AbilityActivated && top.getActivatingPlayer().equals(aiPlayer)
                         && logic.contains("CopyActivatedAbilities")) {
