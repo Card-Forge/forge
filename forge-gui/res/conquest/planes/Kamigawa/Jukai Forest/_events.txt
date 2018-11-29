@@ -1,4 +1,4 @@
-Name:EVENT1|Deck:Random|Variant:None|Avatar:None|Desc:
+Name:Seshiro the Anointed|Deck:Seshiro the Anointed.dck|Variant:Commander|Avatar:Seshiro the Anointed|Desc:
 Name:EVENT2|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT3|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT4|Deck:Random|Variant:None|Avatar:None|Desc:
@@ -6,4 +6,4 @@ Name:EVENT5|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT6|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT7|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT8|Deck:Random|Variant:None|Avatar:None|Desc:
-Name:Random Planechase|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:
+Name:Random Jukai Forest|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:
