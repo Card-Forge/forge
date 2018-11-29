@@ -93,8 +93,8 @@ public class DamageDealAi extends DamageAiBase {
                 // Set PayX here to maximum value.
                 dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
                 source.setSVar("PayX", Integer.toString(dmg));
-            } else if (sa.getSVar(damage).equals("Count$CardsInYourHand") && source.getZone().is(ZoneType.Hand)) {
-                dmg--; // the card will be spent casting the spell, so actual damage is 1 less
+            } else if (sa.getSVar(damage).contains("InYourHand") && source.getZone().is(ZoneType.Hand)) {
+                dmg = CardFactoryUtil.xCount(source, sa.getSVar(damage)) - 1; // the card will be spent casting the spell, so actual damage is 1 less
             } else if (sa.getSVar(damage).equals("TargetedPlayer$CardsInHand")) {
                 // cards that deal damage by the number of cards in target player's hand, e.g. Sudden Impact
                 if (sa.getTargetRestrictions().canTgtPlayer()) {
