@@ -107,11 +107,13 @@ public class MustBlockAi extends SpellAbilityAi {
             if (source.hasKeyword(Keyword.PROVOKE) && blocker.isTapped()) {
                 // Don't provoke if the attack is potentially lethal
                 Combat combat = ai.getGame().getCombat();
-                Player defender = combat.getDefenderPlayerByAttacker(source);
-                if (combat != null && combat.getAttackingPlayer().equals(ai)
-                        && defender.canLoseLife() && !defender.cantLoseForZeroOrLessLife()
-                        && ComputerUtilCombat.lifeThatWouldRemain(defender, combat) <= 0) {
-                    return false;
+                if (combat != null) {
+                    Player defender = combat.getDefenderPlayerByAttacker(source);
+                    if (defender != null && combat.getAttackingPlayer().equals(ai)
+                            && defender.canLoseLife() && !defender.cantLoseForZeroOrLessLife()
+                            && ComputerUtilCombat.lifeThatWouldRemain(defender, combat) <= 0) {
+                        return false;
+                    }
                 }
             }
 
