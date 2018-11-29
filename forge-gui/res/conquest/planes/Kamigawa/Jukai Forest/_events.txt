@@ -1,5 +1,5 @@
 Name:Seshiro the Anointed|Deck:Seshiro the Anointed.dck|Variant:Commander|Avatar:Seshiro the Anointed|Desc:
-Name:EVENT2|Deck:Random|Variant:None|Avatar:None|Desc:
+Name:Shizuko, Caller of Autumn|Deck:Shizuko, Caller of Autumn.dck|Variant:Commander|Avatar:Shizuko, Caller of Autumn|Desc:
 Name:EVENT3|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT4|Deck:Random|Variant:None|Avatar:None|Desc:
 Name:EVENT5|Deck:Random|Variant:None|Avatar:None|Desc:
