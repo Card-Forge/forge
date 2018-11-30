@@ -317,8 +317,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // TODO: figure out how to make the AI properly establish which zones to look in for cards like Sisters of Stone Death
             // without needing a separate AI logic for it (the issue is that there's no Defined/DefinedPlayer in cards like that, and
             // the AI normally defaults to its own zone in these cases)
-            CardCollectionView list = "CheckAllPlayerZones".equals(sa.getParam("AILogic")) ? p.getGame().getCardsIn(origin)
-                    : p.getCardsIn(origin);
+            CardCollectionView list = p.getCardsIn(origin);
 
             if (type != null && p == ai) {
                 // AI only "knows" about his information
