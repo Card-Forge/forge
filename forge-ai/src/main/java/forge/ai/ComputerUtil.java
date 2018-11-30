@@ -958,6 +958,22 @@ public class ComputerUtil {
         	return true;
         }
 
+        // if we have non-persistent mana in our pool, would be good to try to use it and not waste it
+        if (ai.getManaPool().willManaBeLostAtEndOfPhase()) {
+            boolean canUseToPayCost = false;
+            for (byte color : MagicColor.WUBRGC) {
+                if (ai.getManaPool().getAmountOfColor(color) > 0
+                        && ((card.getManaCost().getColorProfile() & color) == color)) {
+                    canUseToPayCost = true;
+                    break;
+                }
+            }
+
+            if (canUseToPayCost) {
+                return true;
+            }
+        }
+
         if (card.isCreature() && !card.hasKeyword(Keyword.DEFENDER)
                 && (card.hasKeyword(Keyword.HASTE) || ComputerUtil.hasACardGivingHaste(ai, true) || sa.isDash())) {
             return true;

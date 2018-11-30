@@ -161,6 +161,15 @@ public class PermanentCreatureAi extends PermanentAi {
         int chanceToCastForETB = aic.getIntProperty(AiProps.FLASH_CHANCE_TO_CAST_DUE_TO_ETB_EFFECTS);
         int chanceToRespondToStack = aic.getIntProperty(AiProps.FLASH_CHANCE_TO_RESPOND_TO_STACK_WITH_ETB);
         int chanceToProcETBBeforeMain1 = aic.getIntProperty(AiProps.FLASH_CHANCE_TO_CAST_FOR_ETB_BEFORE_MAIN1);
+        boolean canCastAtOppTurn = true;
+        for (Card c : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
+            for (StaticAbility s : c.getStaticAbilities()) {
+                if ("CantBeCast".equals(s.getParam("Mode")) && "True".equals(s.getParam("NonCasterTurn"))) {
+                    canCastAtOppTurn = false;
+                }
+            }
+        }
+
 
         if (hasFloatMana || willDiscardNow || willDieNow) {
             // Will lose mana in pool or about to discard a card in cleanup or about to die in combat, so use this opportunity
@@ -170,7 +179,7 @@ public class PermanentCreatureAi extends PermanentAi {
             return isMyMain1OrLater;
         } else if (hasAmbushAI && MyRandom.percentTrue(chanceToObeyAmbushAI)) {
             // Is an ambusher, so try to hold for declare blockers in combat where the AI defends, if possible
-            return defOnlyAmbushAI ? isOppDeclareAttackers : (isOppDeclareAttackers || isMyDeclareBlockers);
+            return defOnlyAmbushAI && canCastAtOppTurn ? isOppDeclareAttackers : (isOppDeclareAttackers || isMyDeclareBlockers);
         } else if (valuableBlocker && isOppDeclareAttackers && MyRandom.percentTrue(chanceToAddBlocker)) {
             // Might serve as a valuable blocker in a combat where we are behind on untapped blockers
             return true;
@@ -182,21 +191,11 @@ public class PermanentCreatureAi extends PermanentAi {
         } else if (hasETBTrigger && canRespondToStack && MyRandom.percentTrue(chanceToRespondToStack)) {
             // Try to do something meaningful in response to an opposing effect on stack. Note that this is currently
             // too random to likely be meaningful, serious improvement might be needed.
-            return true;
+            return canCastAtOppTurn || ph.getPlayerTurn().equals(ai);
         } else {
-            boolean canCastAtOppEOT = true;
-            for (Card c : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
-                for (StaticAbility s : c.getStaticAbilities()) {
-                    if ("CantBeCast".equals(s.getParam("Mode")) && "True".equals(s.getParam("NonCasterTurn"))) {
-                        canCastAtOppEOT = false;
-                    }
-                }
-
-            }
-
             // Doesn't have a ETB trigger and doesn't seem to be good as an ambusher, try to surprise the opp before my turn
             // TODO: maybe implement a way to reserve mana for this
-            return canCastAtOppEOT ? isEOTBeforeMyTurn : isOwnEOT;
+            return canCastAtOppTurn ? isEOTBeforeMyTurn : isOwnEOT;
         }
     }
 
