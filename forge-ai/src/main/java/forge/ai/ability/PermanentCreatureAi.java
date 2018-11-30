@@ -13,6 +13,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
@@ -183,9 +184,19 @@ public class PermanentCreatureAi extends PermanentAi {
             // too random to likely be meaningful, serious improvement might be needed.
             return true;
         } else {
+            boolean canCastAtOppEOT = true;
+            for (Card c : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
+                for (StaticAbility s : c.getStaticAbilities()) {
+                    if ("CantBeCast".equals(s.getParam("Mode")) && "True".equals(s.getParam("NonCasterTurn"))) {
+                        canCastAtOppEOT = false;
+                    }
+                }
+
+            }
+
             // Doesn't have a ETB trigger and doesn't seem to be good as an ambusher, try to surprise the opp before my turn
             // TODO: maybe implement a way to reserve mana for this
-            return isEOTBeforeMyTurn;
+            return canCastAtOppEOT ? isEOTBeforeMyTurn : isOwnEOT;
         }
     }
 
