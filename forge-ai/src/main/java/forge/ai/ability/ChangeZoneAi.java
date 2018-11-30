@@ -298,8 +298,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
         } else {
             if (sa.hasParam("DefinedPlayer")) {
                 pDefined = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("DefinedPlayer"), sa);
-            } else {
+            } else if (sa.hasParam("Defined")) {
                 pDefined = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
+            } else {
+                pDefined = ai.getGame().getPlayers(); // no Defined players, assume all player zones
             }
         }
 
@@ -314,11 +316,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         for (final Player p : pDefined) {
-            // TODO: figure out how to make the AI properly establish which zones to look in for cards like Sisters of Stone Death
-            // without needing a separate AI logic for it (the issue is that there's no Defined/DefinedPlayer in cards like that, and
-            // the AI normally defaults to its own zone in these cases)
-            CardCollectionView list = "CheckAllPlayerZones".equals(sa.getParam("AILogic")) ? p.getGame().getCardsIn(origin)
-                    : p.getCardsIn(origin);
+            CardCollectionView list = p.getCardsIn(origin);
 
             if (type != null && p == ai) {
                 // AI only "knows" about his information
