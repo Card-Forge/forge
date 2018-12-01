@@ -24,11 +24,9 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.LoadingCache;
 
 import forge.ImageKeys;
-import forge.game.card.CardView;
 import forge.game.player.IHasIcon;
 import forge.item.InventoryItem;
 import forge.properties.ForgeConstants;
-import forge.screens.match.MatchController;
 import forge.util.ImageUtil;
 
 import org.apache.commons.lang3.StringUtils;
@@ -78,11 +76,6 @@ public class ImageCache {
     public static void clear() {
         cache.invalidateAll();
         missingIconKeys.clear();
-    }
-
-    public static Texture getImage(final CardView card) {
-        final String key = card.getCurrentState().getImageKey(MatchController.instance.getLocalPlayers());
-        return getImage(key, true);
     }
 
     public static Texture getImage(InventoryItem ii) {

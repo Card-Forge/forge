@@ -13,6 +13,10 @@ import org.robovm.apple.foundation.NSAutoreleasePool;
 import org.robovm.apple.uikit.UIApplication;
 import org.robovm.apple.uikit.UIPasteboard;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 public class Main extends IOSApplication.Delegate {
 
     @Override
@@ -93,6 +97,11 @@ public class Main extends IOSApplication.Delegate {
         @Override
         public void exit() {
             // Not possible on iOS
+        }
+
+        @Override
+        public void convertToJPEG(InputStream input, OutputStream output) throws IOException {
+
         }
     }
 }
