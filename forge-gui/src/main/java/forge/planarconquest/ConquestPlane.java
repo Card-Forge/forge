@@ -43,7 +43,7 @@ public class ConquestPlane {
     private final String name;
     private final String directory;
     private final String description;
-    private final boolean unreachable;
+    private boolean unreachable;
     private final int rowsPerRegion;
     private final int cols;
 
@@ -91,6 +91,10 @@ public class ConquestPlane {
 
     public boolean isUnreachable() {
         return unreachable;
+    }
+
+    public void setTemporarilyReachable(boolean reachable) {
+        unreachable = !reachable;
     }
 
     public FCollectionView<ConquestRegion> getRegions() {
@@ -173,7 +177,7 @@ public class ConquestPlane {
             }
             //if not enough events defined, create random events for remaining
             while (eventIndex < regionEndIndex) {
-                events[eventIndex++] = new ConquestEvent(region, region.getName() + " - Random " + ((eventIndex % eventsPerRegion) + 1), null, null, EnumSet.noneOf(GameType.class), null);
+                events[eventIndex++] = new ConquestEvent(region, region.getName() + " - Random " + ((eventIndex % eventsPerRegion) + 1), null, null, EnumSet.noneOf(GameType.class), null, null);
             }
             regionEndIndex += eventsPerRegion;
         }

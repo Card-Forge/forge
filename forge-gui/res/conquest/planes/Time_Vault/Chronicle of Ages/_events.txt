@@ -1,0 +1,9 @@
+Name:EVENT1|Deck:Random.dck|Variant:None|Avatar:None|Desc:
+Name:EVENT2|Deck:Random.dck|Variant:None|Avatar:None|Desc:
+Name:EVENT3|Deck:Random.dck|Variant:None|Avatar:None|Desc:
+Name:EVENT4|Deck:Random.dck|Variant:None|Avatar:None|Desc:
+Name:EVENT5|Deck:Random.dck|Variant:None|Avatar:None|Desc:
+Name:EVENT6|Deck:Random.dck|Variant:None|Avatar:None|Desc:
+Name:EVENT7|Deck:Random.dck|Variant:None|Avatar:None|Desc:
+Name:EVENT8|Deck:Random.dck|Variant:None|Avatar:None|Desc:
+Name:EVENT9|Deck:Random.dck|Variant:None|Avatar:None|Desc:

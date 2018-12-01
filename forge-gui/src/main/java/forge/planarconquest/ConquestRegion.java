@@ -86,7 +86,7 @@ public class ConquestRegion {
     }
 
     public String toString() {
-        return plane.getName() + " - " + name;
+        return plane.getName().replace("_", " ") + " - " + name;
     }
 
     public static class Reader extends FCollectionReader<ConquestRegion> {

@@ -154,6 +154,24 @@ public class ConquestUtil {
         return pool;
     }
 
+    public static ConquestPlane getPlaneByName(String planeName) {
+        for (ConquestPlane plane : FModel.getPlanes()) {
+            if (plane.getName().equals(planeName)) {
+                return plane;
+            }
+        }
+        return null;
+    }
+
+    public static void makePlaneTemporarilyAccessible(String planeName) {
+        ConquestPlane plane = getPlaneByName(planeName);
+        if (plane != null && plane.isUnreachable()) {
+            plane.setTemporarilyReachable(true);
+        } else {
+            System.err.println("Could not find plane to mark as temporarily accessible: " + planeName);
+        }
+    }
+
     public static Iterable<PaperCard> getStartingPlaneswalkerOptions(final PaperCard startingCommander) {
         final byte colorIdentity = startingCommander.getRules().getColorIdentity().getColor();
         return Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards(), new Predicate<PaperCard>() {

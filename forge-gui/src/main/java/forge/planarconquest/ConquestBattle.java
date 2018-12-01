@@ -50,6 +50,9 @@ public abstract class ConquestBattle {
             view.getBtnRestart().setVisible(false);
             view.getBtnQuit().setText("Great!");
             model.addWin(this);
+            if (location.getEvent().getTemporaryUnlock() != null) {
+                ConquestUtil.makePlaneTemporarilyAccessible(location.getEvent().getTemporaryUnlock());
+            }
         }
         else {
             view.getBtnRestart().setVisible(true);
