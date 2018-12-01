@@ -1,5 +1,5 @@
-Name:EVENT1|Deck:Random.dck|Variant:None|Avatar:None|Desc:
-Name:EVENT2|Deck:Random.dck|Variant:None|Avatar:None|Desc:
+Name:Mirri the Cursed|Deck:Mirri the Cursed.dck|Variant:Commander|Avatar:Mirri the Cursed|Desc:
+Name:Teneb, the Harvester|Deck:Teneb, the Harvester.dck|Variant:Commander|Avatar:Teneb, the Harvester|Desc:
 Name:EVENT3|Deck:Random.dck|Variant:None|Avatar:None|Desc:
 Name:EVENT4|Deck:Random.dck|Variant:None|Avatar:None|Desc:
 Name:EVENT5|Deck:Random.dck|Variant:None|Avatar:None|Desc:
