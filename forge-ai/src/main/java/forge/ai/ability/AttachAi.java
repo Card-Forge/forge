@@ -4,6 +4,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import forge.ai.*;
+import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.GlobalRuleChange;
@@ -87,6 +88,19 @@ public class AttachAi extends SpellAbilityAi {
             sa.resetTargets();
             if (!attachPreference(sa, tgt, false)) {
                 return false;
+            }
+
+            // Don't try to attach an aura to a card which will have protection from the relevant color
+            Card targeted = sa.getTargets().getFirstTargetedCard();
+            if (targeted != null && !targeted.getZone().is(ZoneType.Battlefield)) {
+                byte color = sa.getTargets().getFirstTargetedCard().getCurrentState().getColor();
+                for (byte c : MagicColor.WUBRG) {
+                    if ((color & c) == c) {
+                        if (targeted.hasKeyword("Protection from " + MagicColor.toLongString(c))) {
+                            return false;
+                        }
+                    }
+                }
             }
         }
 
