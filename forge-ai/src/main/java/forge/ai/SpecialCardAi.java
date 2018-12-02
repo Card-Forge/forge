@@ -821,6 +821,10 @@ public class SpecialCardAi {
             int computerHandSize = ai.getZone(ZoneType.Hand).size();
             int maxHandSize = ai.getMaxHandSize();
 
+            if (ai.getCardsIn(ZoneType.Library).isEmpty()) {
+                return false; // nothing to draw from the library
+            }
+
             if (!CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Yawgmoth's Bargain")).isEmpty()) {
                 // Prefer Yawgmoth's Bargain because AI is generally better with it
 
@@ -1336,6 +1340,10 @@ public class SpecialCardAi {
         public static boolean consider(final Player ai, final SpellAbility sa) {
             Game game = ai.getGame();
             PhaseHandler ph = game.getPhaseHandler();
+
+            if (ai.getCardsIn(ZoneType.Library).isEmpty()) {
+                return false; // nothing to draw from the library
+            }
 
             int computerHandSize = ai.getZone(ZoneType.Hand).size();
             int maxHandSize = ai.getMaxHandSize();

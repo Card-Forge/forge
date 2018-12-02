@@ -8,6 +8,12 @@ import forge.game.spellability.SpellAbility;
 public class ShuffleAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+        String logic = sa.getParamOrDefault("AILogic", "");
+        if (logic.equals("Always")) {
+            // We may want to play this for the subability, e.g. Mind's Desire
+            return true;
+        }
+
         // not really sure when the compy would use this; maybe only after a
         // human
         // deliberately put a card on top of their library
@@ -47,7 +53,7 @@ public class ShuffleAi extends SpellAbilityAi {
 
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
-     // ai could analyze parameter denoting the player to shuffle
+        // ai could analyze parameter denoting the player to shuffle
         return true;
     }
 }

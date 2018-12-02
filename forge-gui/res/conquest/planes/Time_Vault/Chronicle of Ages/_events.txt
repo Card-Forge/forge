@@ -4,6 +4,3 @@ Name:Lovisa Coldeyes|Deck:Lovisa Coldeyes.dck|Variant:Commander|Avatar:Lovisa Co
 Name:Zur the Enchanter|Deck:Zur the Enchanter.dck|Variant:Commander|Avatar:Zur the Enchanter|Desc:
 Name:Birds of Paradise|Deck:Birds of Paradise.dck|Variant:Vanguard|Avatar:Birds of Paradise|Desc:
 Name:Rofellos, Llanowar Emissary|Deck:Rofellos, Llanowar Emissary.dck|Variant:Commander|Avatar:Rofellos, Llanowar Emissary|Desc:
-Name:Akroma, Angel of Wrath|Deck:Akroma, Angel of Wrath.dck|Variant:Commander|Avatar:Akroma, Angel of Wrath|Desc:
-Name:EVENT8|Deck:Random.dck|Variant:None|Avatar:None|Desc:
-Name:EVENT9|Deck:Random.dck|Variant:None|Avatar:None|Desc:

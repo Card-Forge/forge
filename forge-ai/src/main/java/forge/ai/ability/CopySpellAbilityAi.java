@@ -110,7 +110,8 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         // the AI should not miss mandatory activations (e.g. Precursor Golem trigger)
-        return mandatory || "Always".equals(sa.getParam("AILogic"));
+        String logic = sa.getParamOrDefault("AILogic", "");
+        return mandatory || logic.contains("Always"); // this includes logic like AlwaysIfViable
     }
 
     @Override

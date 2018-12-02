@@ -315,7 +315,7 @@ public class LoadConquestScreen extends LaunchScreen {
                     font = FSkinFont.get(12);
                     float cardsWidth = font.getBounds(cards).width + iconSize + SettingsScreen.SETTING_PADDING;
                     float shardsWidth = font.getBounds(shards).width + iconSize + SettingsScreen.SETTING_PADDING;
-                    g.drawText(value.getPlaneswalker().getName() + " - " + value.getCurrentPlane().getName(), font, SettingsScreen.DESC_COLOR, x, y, w - shardsWidth - cardsWidth, h, false, HAlignment.LEFT, false);
+                    g.drawText(value.getPlaneswalker().getName() + " - " + value.getCurrentPlane().getName().replace("_", " "), font, SettingsScreen.DESC_COLOR, x, y, w - shardsWidth - cardsWidth, h, false, HAlignment.LEFT, false);
                     g.drawImage(FSkinImage.SPELLBOOK, x + w - shardsWidth - cardsWidth + iconOffset, y - SettingsScreen.SETTING_PADDING, iconSize, iconSize);
                     g.drawText(cards, font, SettingsScreen.DESC_COLOR, x + w - shardsWidth - cardsWidth + iconSize + SettingsScreen.SETTING_PADDING, y, w, h, false, HAlignment.LEFT, false);
                     g.drawImage(FSkinImage.AETHER_SHARD, x + w - shardsWidth + iconOffset, y - SettingsScreen.SETTING_PADDING, iconSize, iconSize);
