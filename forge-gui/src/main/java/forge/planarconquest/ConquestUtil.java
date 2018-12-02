@@ -163,12 +163,12 @@ public class ConquestUtil {
         return null;
     }
 
-    public static void makePlaneTemporarilyAccessible(String planeName) {
+    public static void setPlaneTemporarilyAccessible(String planeName, boolean accessible) {
         ConquestPlane plane = getPlaneByName(planeName);
-        if (plane != null && plane.isUnreachable()) {
-            plane.setTemporarilyReachable(true);
+        if (plane != null && accessible != !plane.isUnreachable()) {
+            plane.setTemporarilyReachable(accessible);
         } else {
-            System.err.println("Could not find plane to mark as temporarily accessible: " + planeName);
+            System.err.println("Could not find plane to set the accessibility flag: " + planeName);
         }
     }
 
