@@ -677,6 +677,14 @@ public class SpecialCardAi {
     // Living Death (and other similar cards using AILogic LivingDeath or AILogic ReanimateAll)
     public static class LivingDeath {
         public static boolean consider(final Player ai, final SpellAbility sa) {
+            // if there's another reanimator card currently suspended, don't cast a new one until the previous
+            // one resolves, otherwise the reanimation attempt will be ruined (e.g. Living End)
+            for (Card ex : ai.getCardsIn(ZoneType.Exile)) {
+                if (ex.hasSVar("IsReanimatorCard") && ex.getCounters(CounterType.TIME) > 0) {
+                    return false;
+                }
+            }
+
             int aiBattlefieldPower = 0, aiGraveyardPower = 0;
             int threshold = 320; // approximately a 4/4 Flying creature worth of extra value
 
