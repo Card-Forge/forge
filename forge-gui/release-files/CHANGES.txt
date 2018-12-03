@@ -1,8 +1,19 @@
-- AI Improvements -
-A new round of AI improvements went into the game, hopefully making the game a little more interesting and exciting to play. In particular, certain improvements regarding Flash were implemented, the AI is now able to use cards which reorder the top of the library, such as Ponder or Portent, as well as cards which copy spells and/or activated abilities, such as Twincast or Fork. On top of that, several logic-related bugs were fixed. Also, the AI has been optimized a little, hopefully making it a bit faster, especially on mobile platforms, in situations where there are a lot of cards on the battlefield but the AI has little or nothing to do.
+- Planar Conquest 25th MTG Anniversary / Christmas 2018 Update -
+A rather serious and massive content update has happened in Planar Conquest. There are two new planes available, Dominaria and Kamigawa.
+(Please note that Planar Conquest is currently only available on Android and in the mobile backport.)
 
-- Planar Conquest: Guilds of Ravnica -
-Cards from Guilds of Ravnica are now available on the Ravnica plane in Planar Conquest. Several events on this plane have been updated or changed to feature Guilds of Ravnica cards as well. Please note that Planar Conquest is currently only available on Android and the macOS mobile backport.
+** Dominaria **
+It's the 25th anniversary year for Magic: the Gathering, and one of the key events this year was going back to Dominaria with a brand new set. So, at the end of the year, why not visit Dominaria once more? Dominaria is a plane which features cards from the eponymous set, Dominaria, as well as most (but not all) cards from Magic Core Set 2019 and Commander 2018. There are 45 events available for your enjoyment. Traditional Commander, Planeswalker, and Vanguard events represent the majority of the events on the plane, but Dominaria also features Planechase variant matches, with the planar decks consisting of plane cards representing regions of Dominaria (and sometimes, by the whim of fate, various other locations of the Multiverse) and various randomly inserted phenomena.
+ There is a rumor circulating in the taverns claiming that somewhere on Dominaria there is a hidden secret portal leading to the legendary Time Vault which allows a planeswalker to travel to the past, yet it is unknown if this rumor is true.
+
+** Kamigawa **
+Kamigawa is a plane consisting of 45 events and containing the cards from Champions of Kamigawa, Betrayers of Kamigawa, and Saviors of Kamigawa. Even though this block is notorious for being underpowered and probably contains the biggest number of weenies and bears, it also presents you with a chance to get some of the most broken cards in the game. For example, you can grab Umezawa's Jitte without having to rely on randomly finding one in Chaos Battles. Commander, Vanguard, and the new Planechase events are available on the Kamigawa plane, but no Planeswalker events since no planeswalker cards existed in this period of Magic: the Gathering.
+
+** Other changes **
+In addition to that, several other planes were tweaked. In particular, Theros, Alara and Ravnica feature random Planechase matches replacing random non-variant matches. Ravnica has been updated to feature several new events featuring Guilds of Ravnica cards, and some old events on this plane were also updated with the new cards as well. Guilds of Ravnica has been fully enabled on this plane, so you can grab the relevant cards in The Aether or from randomly won booster packs. Also, Theros has been tweaked not to start with a hard non-singleton non-variant duel, as well as to allow to ignore non-singleton duels (walk around them) if need be.
+
+- AI Improvements -
+A new round of AI improvements went into the game, hopefully making the game a little more interesting and exciting to play. In particular, certain improvements regarding Flash were implemented, the AI is now able to use cards which reorder the top of the library, such as Ponder or Portent, as well as cards which copy spells and/or activated abilities, such as Twincast or Fork. Some other cards were improved for the AI and some were marked as AI playable. On top of that, several logic-related bugs were fixed. Also, the AI has been optimized a little, hopefully making it a bit faster, especially on mobile platforms, in situations where there are a lot of cards on the battlefield but the AI has little or nothing to do.
 
 - Random Commander Quest -
 It is now possible to start a quest with Commander rules and randomly generated quest opponents playing Commander decks. This feature is currently exclusive to desktop Forge.

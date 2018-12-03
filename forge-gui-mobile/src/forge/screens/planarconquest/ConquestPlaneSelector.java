@@ -34,7 +34,7 @@ public class ConquestPlaneSelector extends FDisplayObject {
     private static final float MONITOR_LEFT_MULTIPLIER = 19f / 443f;
     private static final float ARROW_THICKNESS = Utils.scale(3);
 
-    private static final List<ConquestPlane> planes = ImmutableList.copyOf(Iterables.filter(FModel.getPlanes(), new Predicate<ConquestPlane>() {
+    private static List<ConquestPlane> planes = ImmutableList.copyOf(Iterables.filter(FModel.getPlanes(), new Predicate<ConquestPlane>() {
         @Override
         public boolean apply(ConquestPlane plane) {
             return !plane.isUnreachable(); //filter out unreachable planes
@@ -131,7 +131,7 @@ public class ConquestPlaneSelector extends FDisplayObject {
             ConquestPlane plane = getSelectedPlane();
             String desc = plane.getDescription();
             if (!desc.isEmpty()) {
-                GuiDialog.message(plane.getDescription().replace("\\n", "\n"), plane.getName());
+                GuiDialog.message(plane.getDescription().replace("\\n", "\n"), plane.getName().replace("_", " "));
             } else {
                 GuiDialog.message("This plane has no description.", plane.getName());
             }
@@ -206,7 +206,7 @@ public class ConquestPlaneSelector extends FDisplayObject {
         float monitorBottom = monitorTop + monitorHeight;
         float remainingHeight = h - monitorBottom;
         ConquestPlane plane = getSelectedPlane();
-        g.drawText(plane.getName(), PLANE_NAME_FONT, Color.WHITE, textLeft, monitorBottom, w - 2 * textLeft, remainingHeight, false, HAlignment.CENTER, true);
+        g.drawText(plane.getName().replace("_", " " ), PLANE_NAME_FONT, Color.WHITE, textLeft, monitorBottom, w - 2 * textLeft, remainingHeight, false, HAlignment.CENTER, true);
 
         //draw left/right arrows
         float yMid = monitorBottom + remainingHeight / 2;
@@ -223,5 +223,14 @@ public class ConquestPlaneSelector extends FDisplayObject {
         g.drawLine(ARROW_THICKNESS, Color.WHITE, xMid - offsetX, yMid - offsetY, xMid + offsetX, yMid + 1);
         g.drawLine(ARROW_THICKNESS, Color.WHITE, xMid + offsetX, yMid - 1, xMid - offsetX, yMid + offsetY);
         rightArrowBounds = new Rectangle(w - leftArrowBounds.width, monitorBottom, leftArrowBounds.width, remainingHeight);
+    }
+
+    public void updateReachablePlanes() {
+        planes = ImmutableList.copyOf(Iterables.filter(FModel.getPlanes(), new Predicate<ConquestPlane>() {
+            @Override
+            public boolean apply(ConquestPlane plane) {
+                return !plane.isUnreachable();
+            }
+        }));
     }
 }

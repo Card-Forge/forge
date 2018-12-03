@@ -1,0 +1,9 @@
+Name:Niambi, Faithful Healer|Deck:Niambi, Faithful Healer.dck|Variant:Commander|Avatar:Niambi, Faithful Healer|Desc:
+Name:Raff Capashen, Ship's Mage|Deck:Raff Capashen, Ships Mage.dck|Variant:Commander|Avatar:Raff Capashen, Ship's Mage|Desc:
+Name:Adeliz, the Cinder Wind|Deck:Adeliz, the Cinder Wind.dck|Variant:Commander|Avatar:Adeliz, the Cinder Wind|Desc:
+Name:Tetsuko Umezawa, Fugitive|Deck:Tetsuko Umezawa, Fugitive.dck|Variant:Commander|Avatar:Tetsuko Umezawa, Fugitive|Desc:
+Name:Slinn Voda, the Rising Deep|Deck:Slinn Voda, the Rising Deep.dck|Variant:Commander|Avatar:Slinn Voda, the Rising Deep|Desc:
+Name:Zahid, Djinn of the Lamp|Deck:Zahid, Djinn of the Lamp.dck|Variant:Commander|Avatar:Zahid, Djinn of the Lamp|Desc:
+Name:Teferi, Hero of Dominaria|Deck:Teferi, Hero of Dominaria.dck|Variant:Planeswalker|Avatar:Teferi, Hero of Dominaria|Desc:
+Name:Urza|Deck:Urza.dck|Variant:Vanguard|Avatar:Urza|Desc:
+Name:Random Tolaria West|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:
