@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.FThreads;
@@ -349,15 +350,18 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
         public boolean selectCard(boolean selectEntireStack) {
             if (MatchController.instance.getGameController().selectCard(getCard(), getOtherCardsToSelect(selectEntireStack), null)) {
+                Gdx.graphics.requestRendering();
                 return true;
             }
             //if panel can't do anything with card selection, try selecting previous panel in stack
             if (prevPanelInStack != null && prevPanelInStack.selectCard(selectEntireStack)) {
+                Gdx.graphics.requestRendering();
                 return true;
             }
             //as a last resort try to select attached panels
             for (CardAreaPanel panel : attachedPanels) {
                 if (panel.selectCard(selectEntireStack)) {
+                    Gdx.graphics.requestRendering();
                     return true;
                 }
             }
