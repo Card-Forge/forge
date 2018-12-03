@@ -2104,6 +2104,16 @@ public class ComputerUtilCombat {
         defenderDamage = predictDamageTo(attacker, defenderDamage, possibleAttackerPrevention, blocker, true);
         attackerDamage = predictDamageTo(blocker, attackerDamage, possibleDefenderPrevention, attacker, true);
 
+        // Damage prevention might come from a static effect
+        if (!ai.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
+            if (isCombatDamagePrevented(attacker, blocker, attackerDamage)) {
+                attackerDamage = 0;
+            }
+            if (isCombatDamagePrevented(blocker, attacker, defenderDamage)) {
+                defenderDamage = 0;
+            }
+        }
+
         if (combat != null) {
             for (Card atkr : combat.getAttackersBlockedBy(blocker)) {
                 if (!atkr.equals(attacker)) {
