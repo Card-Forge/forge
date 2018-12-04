@@ -1,7 +1,5 @@
 [metadata]
 Name=Chandra, Bold Pyromancer
-[Avatar]
-
 [Main]
 1 Banefire|M19
 1 Boggart Brute|M19
@@ -21,7 +19,7 @@ Name=Chandra, Bold Pyromancer
 1 Lava Axe|M19
 1 Lightning Mare|M19
 1 Lightning Strike|M19
-15 Mountain|M19|4
+15 Mountain|M19
 1 Radiating Lightning|DOM
 1 Scuttling Doom Engine|C18
 1 Shivan Fire|DOM
@@ -30,10 +28,3 @@ Name=Chandra, Bold Pyromancer
 1 Viashino Pyromancer|M19
 1 Wizard's Lightning|DOM
 [Sideboard]
-
-[Planes]
-
-[Schemes]
-
-[Conspiracy]
-
