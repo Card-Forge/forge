@@ -92,7 +92,7 @@ public class ComputerUtilCost {
                 // value later as the AI decides what to do (in checkApiLogic / checkAiLogic)
                 if (sa != null && sa.hasSVar(remCounter.getAmount())) {
                     final String sVar = sa.getSVar(remCounter.getAmount());
-                    if (sVar.equals("XChoice")) {
+                    if (sVar.equals("XChoice") && !sa.hasSVar("ChosenX")) {
                         sa.setSVar("ChosenX", String.valueOf(source.getCounters(type)));
                     }
                 }
