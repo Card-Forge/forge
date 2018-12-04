@@ -203,8 +203,9 @@ public class ManaEffectAi extends SpellAbilityAi {
                         Predicates.or(CardPredicates.isColorless(), CardPredicates.isColor(producedColor))));
 
         if ("ManaRitualBattery".equals(sa.getParam("AILogic"))) {
-            // Don't remove more counters than would be needed to cast everything we want to cast
-            int maxCtrs = Aggregates.sum(castableSpells, CardPredicates.Accessors.fnGetCmc);
+            // Don't remove more counters than would be needed to cast the more expensive thing we want to cast,
+            // otherwise the AI grabs too many counters at once.
+            int maxCtrs = Aggregates.max(castableSpells, CardPredicates.Accessors.fnGetCmc) - 1;
             sa.setSVar("ChosenX", "Number$" + Math.min(numCounters, maxCtrs));
         }
 
