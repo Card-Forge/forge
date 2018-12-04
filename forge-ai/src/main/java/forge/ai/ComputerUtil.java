@@ -23,6 +23,7 @@ import com.google.common.collect.*;
 import forge.ai.ability.ProtectAi;
 import forge.ai.ability.TokenAi;
 import forge.card.CardType;
+import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.game.CardTraitPredicates;
@@ -405,6 +406,35 @@ public class ComputerUtil {
                     }
                     if (c.hasSVar("DiscardMe") && Integer.parseInt(c.getSVar("DiscardMe")) == priority) {
                         return c;
+                    }
+                }
+            }
+
+            if (ComputerUtilCost.isFreeCastAllowedByPermanent(ai, "Discard")) {
+                // Dream Halls allows to discard 1 worthless card to cast 1 expensive for free
+                // Do it even if nothing marked for discard in hand, if it's worth doing!
+                int mana = ComputerUtilMana.getAvailableManaEstimate(ai, false);
+
+                boolean cantAffordSoon = activate.getCMC() > mana + 1;
+                boolean wrongColor = !activate.determineColor().hasNoColorsExcept(ColorSet.fromNames(ComputerUtilCost.getAvailableManaColors(ai, Lists.newArrayList())).getColor());
+
+                // Only do this for spells, not activated abilities
+                // We can't pay for this spell even if we play another land, or have wrong colors
+                if (!activate.isInPlay() && (cantAffordSoon || wrongColor)) {
+                    CardCollection options = new CardCollection();
+                    for (Card c : typeList) {
+                        // Try to avoid stupidity by playing cheap spells and paying for them with expensive spells
+                        // while the intention was to do things the other way around
+                        if (c.isCreature() && activate.isCreature()) {
+                            if (ComputerUtilCard.evaluateCreature(c) < ComputerUtilCard.evaluateCreature(activate)) {
+                                options.add(c);
+                            }
+                        } else if (c.getCMC() <= activate.getCMC()) {
+                            options.add(c);
+                        }
+                    }
+                    if (!options.isEmpty()) {
+                        return ComputerUtilCard.getWorstAI(options);
                     }
                 }
             }
