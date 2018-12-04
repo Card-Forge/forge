@@ -51,6 +51,7 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.*;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
@@ -707,6 +708,11 @@ public class AiController {
             return canPlaySa(((WrappedAbility) sa).getWrappedAbility());
         }
 
+        // Trying to play a card that has Buyback without a Buyback cost
+        if (card.hasKeyword(Keyword.BUYBACK) && !sa.isBuyBackAbility() && !canPlaySpellWithoutBuyback(card, sa)) {
+            return AiPlayDecision.NeedsToPlayCriteriaNotMet;
+        }
+
         // When processing a new SA, clear the previously remembered cards that have been marked to avoid re-entry
         // which might potentially cause a stack overflow.
         AiCardMemory.clearMemorySet(this, AiCardMemory.MemorySet.MARKED_TO_AVOID_REENTRY);
@@ -802,11 +808,6 @@ public class AiController {
             return AiPlayDecision.NeedsToPlayCriteriaNotMet;
         }
 
-        // Trying to play a card that has Buyback without a Buyback cost
-        if (card.hasKeyword(Keyword.BUYBACK) && !sa.isBuyBackAbility() && !canPlaySpellWithoutBuyback(card, sa)) {
-            return AiPlayDecision.NeedsToPlayCriteriaNotMet;
-        }
-
         // add any other necessary logic to play a basic spell here
         return ComputerUtilCard.checkNeedsToPlayReqs(card, sa);
     }
@@ -823,7 +824,6 @@ public class AiController {
         // Have two copies : allow
         if (copies >= 2) {
             wasteBuybackAllowed = true;
-
         }
 
         int neededMana = 0;
@@ -831,7 +831,7 @@ public class AiController {
         for (SpellAbility sa2 : GameActionUtil.getOptionalCosts(sa)) {
             if (sa2.isOptionalCostPaid(OptionalCost.Buyback)) {
                 Cost sac = sa2.getPayCosts();
-                CostAdjustment.adjust(sac, sa2); // TODO: Does not recognize Memory Crystal
+                CostAdjustment.adjust(sac, sa2);
                 if (sac.getCostMana() != null) {
                     neededMana = sac.getCostMana().getMana().getCMC();
                 }
@@ -847,6 +847,19 @@ public class AiController {
         // if Buyback cost includes sacrifice, life, discard
         if (dangerousRecurringCost) {
             wasteBuybackAllowed = true;
+        }
+
+        // Memory Crystal-like effects need special handling
+        for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
+            for (StaticAbility s : c.getStaticAbilities()) {
+                if ("ReduceCost".equals(s.getParam("Mode"))
+                        && "Spell.Buyback".equals(s.getParam("ValidSpell"))) {
+                    neededMana -= AbilityUtils.calculateAmount(c, s.getParam("Amount"), s);
+                }
+            }
+        }
+        if (neededMana < 0) {
+            neededMana = 0;
         }
 
         int hasMana = ComputerUtilMana.getAvailableManaEstimate(player, false);
