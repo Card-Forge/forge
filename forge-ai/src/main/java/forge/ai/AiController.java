@@ -881,6 +881,9 @@ public class AiController {
                 if (source.isCreature()) {
                     p += 1;
                 }
+                if (source.hasSVar("AIPriorityModifier")) {
+                    p += Integer.parseInt(source.getSVar("AIPriorityModifier"));
+                }
                 // don't play equipments before having any creatures
                 if (source.isEquipment() && noCreatures) {
                     p -= 9;
