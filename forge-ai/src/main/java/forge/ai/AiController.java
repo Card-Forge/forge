@@ -801,6 +801,44 @@ public class AiController {
         if ("True".equals(card.getSVar("NonStackingEffect")) && isNonDisabledCardInPlay(card.getName())) {
             return AiPlayDecision.NeedsToPlayCriteriaNotMet;
         }
+        // Trying to play a card that has Buyback without a Buyback cost
+
+        if (card.hasStartOfKeyword("Buyback")) {
+            //if (card.getBuybackAbility()!=null) {
+            if (!sa.isBuyBackAbility()) {
+                boolean wasteBuybackAllowed = false;
+                // About to lose game : allow
+                if (ComputerUtil.aiLifeInDanger(player, true, 0)) {
+                    wasteBuybackAllowed = true;
+                }
+                int copies = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(card.getName())).size();
+                // Have two copies : allow
+                if (copies >= 2) {
+                    wasteBuybackAllowed = true;
+                }
+                // Won't be able to afford buyback any time soon
+                // If Buyback cost includes sacrifice, life, discard
+                int neededMana = 0;
+                for (SpellAbility sa2 : GameActionUtil.getOptionalCosts(sa)) {
+                    if (sa2.isOptionalCostPaid(OptionalCost.Buyback)) {
+                        Cost sac = sa2.getPayCosts();
+                        CostAdjustment.adjust(sac, sa2); // Does not recognize Memory Crystal anyway???
+                        neededMana = sac.getCostMana().getMana().getCMC();
+                        if (sac.hasSpecificCostType(CostPayLife.class)
+                                || (sac.hasSpecificCostType(CostDiscard.class)) ||
+                                (sac.hasSpecificCostType(CostSacrifice.class))) {
+                            neededMana = 999;
+                        }
+                    }
+                }
+                int hasMana = ComputerUtilMana.getAvailableManaEstimate(player, false);
+                if (hasMana < neededMana - 1) {
+                    wasteBuybackAllowed = true;
+                }
+
+                if (!wasteBuybackAllowed) return AiPlayDecision.NeedsToPlayCriteriaNotMet;
+            }
+        }
         // add any other necessary logic to play a basic spell here
         return ComputerUtilCard.checkNeedsToPlayReqs(card, sa);
     }
