@@ -245,6 +245,10 @@ BOUNCE_ALL_ELSEWHERE_NONCREAT_EVAL_DIFF=5
 # library to put some into the graveyard.
 INTUITION_ALTERNATIVE_LOGIC=true
 
+# If enabled, the AI will run some additional checks in order to try to preserve spells that have Buyback and not
+# use them unless absolutely necessary (or unless multiple copies are in hand).
+TRY_TO_PRESERVE_BUYBACK_SPELLS=true
+
 # How big of a difference is allowed between the revealed card CMC and the currently castable CMC to still put the
 # card on top of the library
 EXPLORE_MAX_CMC_DIFF_TO_PUT_IN_GRAVEYARD=2
