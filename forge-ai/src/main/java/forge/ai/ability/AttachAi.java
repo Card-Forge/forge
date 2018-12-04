@@ -3,8 +3,8 @@ package forge.ai.ability;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import forge.ai.*;
-import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.GlobalRuleChange;
@@ -88,21 +88,6 @@ public class AttachAi extends SpellAbilityAi {
             sa.resetTargets();
             if (!attachPreference(sa, tgt, false)) {
                 return false;
-            }
-
-            // Don't try to attach an aura to a card which will have protection from the relevant color
-            // TODO: Fix this not to be dependent on "Protection from Color" wording and to be flexible to account for
-            // other possibilities like "protection from all colors" etc.
-            Card targeted = sa.getTargets().getFirstTargetedCard();
-            if (targeted != null && !targeted.getZone().is(ZoneType.Battlefield)) {
-                byte color = sa.getTargets().getFirstTargetedCard().getCurrentState().getColor();
-                for (byte c : MagicColor.WUBRG) {
-                    if ((color & c) == c) {
-                        if (targeted.hasKeyword("Protection from " + MagicColor.toLongString(c))) {
-                            return false;
-                        }
-                    }
-                }
             }
         }
 
@@ -614,8 +599,40 @@ public class AttachAi extends SpellAbilityAi {
     private static Card attachAIReanimatePreference(final SpellAbility sa, final List<Card> list, final boolean mandatory,
             final Card attachSource) {
         // AI For choosing a Card to Animate.
-        // TODO Add some more restrictions for Reanimation Auras
-        final Card c = ComputerUtilCard.getBestCreatureAI(list);
+        final Player ai = sa.getActivatingPlayer();
+        final Card attachSourceLki = CardUtil.getLKICopy(attachSource);
+        attachSourceLki.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
+        // Suppress original attach Spell to replace it with another
+        attachSourceLki.getFirstAttachSpell().setSuppressed(true);
+
+        //TODO for Reanimate Auras i need the new Attach Spell, in later versions it might be part of the Enchant Keyword
+        attachSourceLki.addSpellAbility(AbilityFactory.getAbility(attachSourceLki, "NewAttach"));
+        List<Card> betterList = CardLists.filter(list, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                final Card lki = CardUtil.getLKICopy(c);
+                // need to fake it as if lki would be on the battlefield
+                lki.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
+
+                // Reanimate Auras use "Enchant creature put onto the battlefield with CARDNAME" with Remembered
+                attachSourceLki.clearRemembered();
+                attachSourceLki.addRemembered(lki);
+
+                // need to check what the cards would be on the battlefield
+                // do not attach yet, that would cause Events
+                CardCollection preList = new CardCollection(lki);
+                preList.add(attachSourceLki);
+                c.getGame().getAction().checkStaticAbilities(false, Sets.newHashSet(preList), preList);
+                boolean result = lki.canBeAttached(attachSourceLki);
+
+                //reset static abilities
+                c.getGame().getAction().checkStaticAbilities(false);
+
+                return result;
+            }
+        });
+
+        final Card c = ComputerUtilCard.getBestCreatureAI(betterList);
 
         // If Mandatory (brought directly into play without casting) gotta
         // choose something
