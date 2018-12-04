@@ -51,6 +51,7 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.*;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
@@ -670,7 +671,7 @@ public class AiController {
 
     // This is for playing spells regularly (no Cascade/Ripple etc.)
     private AiPlayDecision canPlayAndPayFor(final SpellAbility sa) {
-        boolean xCost = sa.getPayCosts().hasXInAnyCostPart(sa);
+        boolean xCost = sa.getPayCosts().hasXInAnyCostPart();
 
         if (!xCost && !ComputerUtilCost.canPayCost(sa, player)) {
             // for most costs, it's OK to check if they can be paid early in order to avoid running a heavy API check
@@ -705,6 +706,13 @@ public class AiController {
         }
         if (sa instanceof WrappedAbility) {
             return canPlaySa(((WrappedAbility) sa).getWrappedAbility());
+        }
+
+        // Trying to play a card that has Buyback without a Buyback cost, look for possible additional considerations
+        if (getBooleanProperty(AiProps.TRY_TO_PRESERVE_BUYBACK_SPELLS)) {
+            if (card.hasKeyword(Keyword.BUYBACK) && !sa.isBuyBackAbility() && !canPlaySpellWithoutBuyback(card, sa)) {
+                return AiPlayDecision.NeedsToPlayCriteriaNotMet;
+            }
         }
 
         // When processing a new SA, clear the previously remembered cards that have been marked to avoid re-entry
@@ -801,8 +809,67 @@ public class AiController {
         if ("True".equals(card.getSVar("NonStackingEffect")) && isNonDisabledCardInPlay(card.getName())) {
             return AiPlayDecision.NeedsToPlayCriteriaNotMet;
         }
+
         // add any other necessary logic to play a basic spell here
         return ComputerUtilCard.checkNeedsToPlayReqs(card, sa);
+    }
+
+    private boolean canPlaySpellWithoutBuyback(Card card, SpellAbility sa) {
+        boolean wasteBuybackAllowed = false;
+
+        // About to lose game : allow
+        if (ComputerUtil.aiLifeInDanger(player, true, 0)) {
+            wasteBuybackAllowed = true;
+        }
+
+        int copies = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(card.getName())).size();
+        // Have two copies : allow
+        if (copies >= 2) {
+            wasteBuybackAllowed = true;
+        }
+
+        int neededMana = 0;
+        boolean dangerousRecurringCost = false;
+        for (SpellAbility sa2 : GameActionUtil.getOptionalCosts(sa)) {
+            if (sa2.isOptionalCostPaid(OptionalCost.Buyback)) {
+                Cost sac = sa2.getPayCosts();
+                CostAdjustment.adjust(sac, sa2);
+                if (sac.getCostMana() != null) {
+                    neededMana = sac.getCostMana().getMana().getCMC();
+                }
+                if (sac.hasSpecificCostType(CostPayLife.class)
+                        || sac.hasSpecificCostType(CostDiscard.class)
+                        || sac.hasSpecificCostType(CostSacrifice.class)) {
+                    dangerousRecurringCost = true;
+                }
+            }
+        }
+
+        // won't be able to afford buyback any time soon
+        // if Buyback cost includes sacrifice, life, discard
+        if (dangerousRecurringCost) {
+            wasteBuybackAllowed = true;
+        }
+
+        // Memory Crystal-like effects need special handling
+        for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
+            for (StaticAbility s : c.getStaticAbilities()) {
+                if ("ReduceCost".equals(s.getParam("Mode"))
+                        && "Spell.Buyback".equals(s.getParam("ValidSpell"))) {
+                    neededMana -= AbilityUtils.calculateAmount(c, s.getParam("Amount"), s);
+                }
+            }
+        }
+        if (neededMana < 0) {
+            neededMana = 0;
+        }
+
+        int hasMana = ComputerUtilMana.getAvailableManaEstimate(player, false);
+        if (hasMana < neededMana - 1) {
+            wasteBuybackAllowed = true;
+        }
+
+        return wasteBuybackAllowed;
     }
 
     // not sure "playing biggest spell" matters?

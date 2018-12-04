@@ -84,7 +84,7 @@ public class InputAttack extends InputSyncronizedBase {
     }
 
     private void updatePrompt() {
-        String alphaLabel = canCallBackAttackers() ? "Call Back" : "AlphaStrike";
+        String alphaLabel = canCallBackAttackers() ? "Call Back" : "Alpha Strike";
         getController().getGui().updateButtons(getOwner(), "OK", alphaLabel, true, true, true);
     }
 
