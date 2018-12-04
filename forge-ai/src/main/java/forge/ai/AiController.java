@@ -690,7 +690,7 @@ public class AiController {
 
         if (XCost && !ComputerUtilCost.canPayCost(sa, player)) {
             // for dependent costs with X, e.g. Repeal, which require a valid target to be specified before a decision can be made
-            // on whether the cost can be paid
+            // on whether the cost can be paid, this can only be checked late after canPlaySa has been run (or the AI will misplay)
             return AiPlayDecision.CantAfford;
         }
 
