@@ -15,6 +15,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +30,7 @@ public class ManaEffectAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkAiLogic(Player ai, SpellAbility sa, String aiLogic) {
-        if ("ManaRitual".equals(aiLogic)) {
+        if (aiLogic.startsWith("ManaRitual")) {
             return doManaRitualLogic(ai, sa);
         } else if ("Always".equals(aiLogic)) {
             return true;
@@ -117,7 +118,8 @@ public class ManaEffectAi extends SpellAbilityAi {
         String produced = sa.getParam("Produced");
         byte producedColor = produced.equals("Any") ? MagicColor.ALL_COLORS : MagicColor.fromName(produced);
 
-        if ("ChosenX".equals(sa.getParam("Amount"))
+        int numCounters = 0;
+        if ("XChoice".equals(host.getSVar("X"))
                 && sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostRemoveCounter.class)) {
             CounterType ctrType = CounterType.KI; // Petalmane Baku
             for (CostPart part : sa.getPayCosts().getCostParts()) {
@@ -126,7 +128,11 @@ public class ManaEffectAi extends SpellAbilityAi {
                     break;
                 }
             }
-            manaReceived = host.getCounters(ctrType);
+            numCounters = host.getCounters(ctrType);
+            manaReceived = numCounters;
+            if ("ManaRitualBattery".equals(sa.getParam("AILogic"))) {
+                manaReceived++; // adds an extra mana even if no counters removed
+            }
         }
 
         int searchCMC = numManaSrcs - selfCost + manaReceived;
@@ -195,6 +201,12 @@ public class ManaEffectAi extends SpellAbilityAi {
                         CardPredicates.restriction(restrictValid.split(","), ai, host, sa),
                         CardPredicates.lessCMC(searchCMC),
                         Predicates.or(CardPredicates.isColorless(), CardPredicates.isColor(producedColor))));
+
+        if ("ManaRitualBattery".equals(sa.getParam("AILogic"))) {
+            // Don't remove more counters than would be needed to cast everything we want to cast
+            int maxCtrs = Aggregates.sum(castableSpells, CardPredicates.Accessors.fnGetCmc);
+            sa.setSVar("ChosenX", "Number$" + Math.min(numCounters, maxCtrs));
+        }
 
         // TODO: this will probably still waste the card from time to time. Somehow improve detection of castable material.
         return castableSpells.size() > 0;

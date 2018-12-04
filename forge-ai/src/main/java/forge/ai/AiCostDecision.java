@@ -787,6 +787,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
                 c = AbilityUtils.calculateAmount(source, "ChosenX", ability);
+                source.setSVar("ChosenX", "Number$" + String.valueOf(c));
             } else if (amount.equals("All")) {
                 c = source.getCounters(cost.counter);
             } else if (sVar.equals("Targeted$CardManaCost")) {

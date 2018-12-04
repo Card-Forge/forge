@@ -91,6 +91,8 @@ public class AttachAi extends SpellAbilityAi {
             }
 
             // Don't try to attach an aura to a card which will have protection from the relevant color
+            // TODO: Fix this not to be dependent on "Protection from Color" wording and to be flexible to account for
+            // other possibilities like "protection from all colors" etc.
             Card targeted = sa.getTargets().getFirstTargetedCard();
             if (targeted != null && !targeted.getZone().is(ZoneType.Battlefield)) {
                 byte color = sa.getTargets().getFirstTargetedCard().getCurrentState().getColor();
