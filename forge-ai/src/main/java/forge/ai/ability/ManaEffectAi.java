@@ -107,6 +107,7 @@ public class ManaEffectAi extends SpellAbilityAi {
     // Dark Ritual and other similar instants/sorceries that add mana to mana pool
     private boolean doManaRitualLogic(Player ai, SpellAbility sa) {
         final Card host = sa.getHostCard();
+        final String logic = sa.getParamOrDefault("AILogic", "");
           
         CardCollection manaSources = ComputerUtilMana.getAvailableManaSources(ai, true);
         int numManaSrcs = manaSources.size();
@@ -119,6 +120,7 @@ public class ManaEffectAi extends SpellAbilityAi {
         byte producedColor = produced.equals("Any") ? MagicColor.ALL_COLORS : MagicColor.fromName(produced);
 
         int numCounters = 0;
+        int manaSurplus = 0;
         if ("XChoice".equals(host.getSVar("X"))
                 && sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostRemoveCounter.class)) {
             CounterType ctrType = CounterType.KI; // Petalmane Baku
@@ -130,8 +132,9 @@ public class ManaEffectAi extends SpellAbilityAi {
             }
             numCounters = host.getCounters(ctrType);
             manaReceived = numCounters;
-            if ("ManaRitualBattery".equals(sa.getParam("AILogic"))) {
-                manaReceived++; // adds an extra mana even if no counters removed
+            if (logic.startsWith("ManaRitualBattery.")) {
+                manaSurplus = Integer.valueOf(logic.substring(18)); // adds an extra mana even if no counters removed
+                manaReceived += manaSurplus;
             }
         }
 
@@ -202,9 +205,10 @@ public class ManaEffectAi extends SpellAbilityAi {
                         CardPredicates.lessCMC(searchCMC),
                         Predicates.or(CardPredicates.isColorless(), CardPredicates.isColor(producedColor))));
 
-        if ("ManaRitualBattery".equals(sa.getParam("AILogic"))) {
-            // Don't remove more counters than would be needed to cast everything we want to cast
-            int maxCtrs = Aggregates.sum(castableSpells, CardPredicates.Accessors.fnGetCmc);
+        if (logic.startsWith("ManaRitualBattery")) {
+            // Don't remove more counters than would be needed to cast the more expensive thing we want to cast,
+            // otherwise the AI grabs too many counters at once.
+            int maxCtrs = Aggregates.max(castableSpells, CardPredicates.Accessors.fnGetCmc) - manaSurplus;
             sa.setSVar("ChosenX", "Number$" + Math.min(numCounters, maxCtrs));
         }
 

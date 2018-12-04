@@ -1556,24 +1556,6 @@ public class ComputerUtilMana {
         return convoke;
     }
 
-    public static boolean hasXInAnyCostPart(SpellAbility sa) {
-        boolean xCost = false;
-        if (sa.getPayCosts() != null) {
-            for (CostPart p : sa.getPayCosts().getCostParts()) {
-                if (p instanceof CostPartMana) {
-                    if (((CostPartMana) p).getAmountOfX() > 0) {
-                        xCost = true;
-                        break;
-                    }
-                } else if (p.getAmount().equals("X")) {
-                    xCost = true;
-                    break;
-                }
-            }
-        }
-        return xCost;
-    }
-
     public static int determineMaxAffordableX(Player ai, SpellAbility sa) {
         if (sa.getPayCosts() == null || sa.getPayCosts().getCostMana() == null) {
             return -1;

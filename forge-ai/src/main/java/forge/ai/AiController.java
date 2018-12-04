@@ -670,7 +670,7 @@ public class AiController {
 
     // This is for playing spells regularly (no Cascade/Ripple etc.)
     private AiPlayDecision canPlayAndPayFor(final SpellAbility sa) {
-        boolean xCost = ComputerUtilMana.hasXInAnyCostPart(sa);
+        boolean xCost = sa.getPayCosts().hasXInAnyCostPart(sa);
 
         if (!xCost && !ComputerUtilCost.canPayCost(sa, player)) {
             // for most costs, it's OK to check if they can be paid early in order to avoid running a heavy API check
@@ -881,6 +881,9 @@ public class AiController {
                 if (source.isCreature()) {
                     p += 1;
                 }
+                if (source.hasSVar("AIPriorityModifier")) {
+                    p += Integer.parseInt(source.getSVar("AIPriorityModifier"));
+                }
                 // don't play equipments before having any creatures
                 if (source.isEquipment() && noCreatures) {
                     p -= 9;
@@ -1046,10 +1049,14 @@ public class AiController {
                     numLandsAvailable++;
                 }
 
-                //Discard unplayable card
+                // Discard unplayable card (checks by CMC)
+                // But check if there is a card in play that allows casting spells for free!
+                // if yes, nothing is unplayable based on CMC alone
                 boolean discardedUnplayable = false;
+                boolean freeCastAllowed = ComputerUtilCost.isFreeCastAllowedByPermanent(player, null);
+
                 for (int j = 0; j < validCards.size(); j++) {
-                    if (validCards.get(j).getCMC() > numLandsAvailable && !validCards.get(j).hasSVar("DoNotDiscardIfAble")) {
+                    if ((validCards.get(j).getCMC() > numLandsAvailable || freeCastAllowed) && !validCards.get(j).hasSVar("DoNotDiscardIfAble")) {
                         discardList.add(validCards.get(j));
                         validCards.remove(validCards.get(j));
                         discardedUnplayable = true;
