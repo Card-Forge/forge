@@ -16,11 +16,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.combat.CombatUtil;
-import forge.game.cost.Cost;
-import forge.game.cost.CostAdjustment;
-import forge.game.cost.CostPartMana;
-import forge.game.cost.CostPayEnergy;
-import forge.game.cost.CostPayment;
+import forge.game.cost.*;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.mana.ManaPool;
@@ -1558,6 +1554,24 @@ public class ComputerUtilMana {
             convoke.put(list.get(i), ManaCostShard.GENERIC);
         }
         return convoke;
+    }
+
+    public static boolean hasXInAnyCostPart(SpellAbility sa) {
+        boolean xCost = false;
+        if (sa.getPayCosts() != null) {
+            for (CostPart p : sa.getPayCosts().getCostParts()) {
+                if (p instanceof CostPartMana) {
+                    if (((CostPartMana) p).getAmountOfX() > 0) {
+                        xCost = true;
+                        break;
+                    }
+                } else if (p.getAmount().equals("X")) {
+                    xCost = true;
+                    break;
+                }
+            }
+        }
+        return xCost;
     }
 
     public static int determineMaxAffordableX(Player ai, SpellAbility sa) {
