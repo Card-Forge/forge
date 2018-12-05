@@ -282,7 +282,7 @@ public class CountersPutAi extends SpellAbilityAi {
             if (!source.canTransform()) {
                 return false;
             }
-        } else if (logic.equals("MoveCounterSpike")) {
+        } else if (logic.startsWith("MoveCounterSpike")) {
             return doMoveCounterSpikeLogic(ai, sa, ph);
         }
 
@@ -1009,8 +1009,9 @@ public class CountersPutAi extends SpellAbilityAi {
         // Spikes (Tempest)
 
         // Try not to do it unless at the end of opponent's turn or the creature is threatened
-        Combat combat = ai.getGame().getCombat();
-        boolean threatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(sa.getHostCard())
+        final int creatDiff = sa.getParam("AILogic").contains("ExtraEff") ? 450 : 1;
+        final Combat combat = ai.getGame().getCombat();
+        final boolean threatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(sa.getHostCard())
                 || (combat != null && combat.isBlocked(sa.getHostCard()) && ComputerUtilCombat.attackerWouldBeDestroyed(ai, sa.getHostCard(), combat));
 
         if (!(threatened || (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai))) {
@@ -1025,7 +1026,7 @@ public class CountersPutAi extends SpellAbilityAi {
             public boolean apply(Card card) {
                 boolean tgtThreatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(card) || (combat != null && combat.isBlocked(card) && ComputerUtilCombat.attackerWouldBeDestroyed(ai, card, combat));
                 // when threatened, any non-threatened target is good to preserve the counter
-                return !tgtThreatened && (threatened || ComputerUtilCard.evaluateCreature(card, false, false) > ComputerUtilCard.evaluateCreature(sa.getHostCard(), false, false) + 1);
+                return !tgtThreatened && (threatened || ComputerUtilCard.evaluateCreature(card, false, false) > ComputerUtilCard.evaluateCreature(sa.getHostCard(), false, false) + creatDiff);
             }
         });
 
