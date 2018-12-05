@@ -22,6 +22,7 @@ import com.google.common.base.Predicates;
 import forge.card.CardStateName;
 import forge.game.CardTraitBase;
 import forge.game.GameEntity;
+import forge.game.GlobalRuleChange;
 import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -770,6 +771,16 @@ public class AiBlockController {
         for (final Card attacker : targetAttackers) {
             blockers = getPossibleBlockers(combat, attacker, blockersLeft, false);
             blockers.removeAll(combat.getBlockers(attacker));
+
+            // Don't add any blockers that won't kill the attacker because the damage would be prevented by a static effect
+            if (!ai.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
+                blockers = CardLists.filter(blockers, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(Card blocker) {
+                        return !ComputerUtilCombat.isCombatDamagePrevented(blocker, attacker, blocker.getNetCombatDamage());
+                    }
+                });
+            }
 
             // Try to use safe blockers first
             if (blockers.size() > 0) {
