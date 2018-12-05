@@ -51,7 +51,7 @@ public class CountersPutAi extends SpellAbilityAi {
             return false;
         }
 
-        // disable moving counters
+        // disable moving counters (unless a specialized AI logic supports it)
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostRemoveCounter) {
                 final CostRemoveCounter remCounter = (CostRemoveCounter) part;
