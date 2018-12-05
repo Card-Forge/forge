@@ -1023,8 +1023,9 @@ public class CountersPutAi extends SpellAbilityAi {
         targets = CardLists.filter(targets, new Predicate<Card>() {
             @Override
             public boolean apply(Card card) {
-                // when threatened, any target is good to preserve the counter
-                return threatened || ComputerUtilCard.evaluateCreature(card, false, false) > ComputerUtilCard.evaluateCreature(sa.getHostCard(), false, false) + 1;
+                boolean tgtThreatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(card) || (combat != null && combat.isBlocked(card) && ComputerUtilCombat.attackerWouldBeDestroyed(ai, card, combat));
+                // when threatened, any non-threatened target is good to preserve the counter
+                return !tgtThreatened && (threatened || ComputerUtilCard.evaluateCreature(card, false, false) > ComputerUtilCard.evaluateCreature(sa.getHostCard(), false, false) + 1);
             }
         });
 
