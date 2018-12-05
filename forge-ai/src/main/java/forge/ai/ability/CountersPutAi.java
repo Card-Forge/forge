@@ -301,7 +301,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 @Override
                 public boolean apply(Card card) {
                     // when threatened, any target is good to preserve the counter
-                    return threatened || ComputerUtilCard.evaluateCreature(card, false, false) > ComputerUtilCard.evaluateCreature(sa.getHostCard(), false, false);
+                    return threatened || ComputerUtilCard.evaluateCreature(card, false, false) > ComputerUtilCard.evaluateCreature(sa.getHostCard(), false, false) + 1;
                 }
             });
 
