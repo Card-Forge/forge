@@ -287,7 +287,8 @@ public class CountersPutAi extends SpellAbilityAi {
 
             // Try not to do it unless at the end of opponent's turn or the creature is threatened
             Combat combat = ai.getGame().getCombat();
-            boolean threatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(sa.getHostCard());
+            boolean threatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(sa.getHostCard())
+                    || (combat != null && combat.isBlocked(sa.getHostCard()) && ComputerUtilCombat.attackerWouldBeDestroyed(ai, sa.getHostCard(), combat));
 
             if (!(threatened || (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai))) {
                 return false;
