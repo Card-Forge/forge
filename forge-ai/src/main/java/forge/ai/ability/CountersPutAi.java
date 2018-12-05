@@ -283,36 +283,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 return false;
             }
         } else if (logic.equals("MoveCounterSpike")) {
-            // Spikes (Tempest)
-
-            // Try not to do it unless at the end of opponent's turn or the creature is threatened
-            Combat combat = ai.getGame().getCombat();
-            boolean threatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(sa.getHostCard())
-                    || (combat != null && combat.isBlocked(sa.getHostCard()) && ComputerUtilCombat.attackerWouldBeDestroyed(ai, sa.getHostCard(), combat));
-
-            if (!(threatened || (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai))) {
-                return false;
-            }
-
-            CardCollection targets = CardLists.getTargetableCards(ai.getCreaturesInPlay(), sa);
-            targets.remove(sa.getHostCard());
-
-            targets = CardLists.filter(targets, new Predicate<Card>() {
-                @Override
-                public boolean apply(Card card) {
-                    // when threatened, any target is good to preserve the counter
-                    return threatened || ComputerUtilCard.evaluateCreature(card, false, false) > ComputerUtilCard.evaluateCreature(sa.getHostCard(), false, false) + 1;
-                }
-            });
-
-            Card bestTgt = ComputerUtilCard.getBestCreatureAI(targets);
-
-            if (bestTgt != null) {
-                sa.getTargets().add(bestTgt);
-                return true;
-            }
-
-            return false;
+            return doMoveCounterSpikeLogic(ai, sa, ph);
         }
 
         if (sa.getConditions() != null && !sa.getConditions().areMet(sa) && sa.getSubAbility() == null) {
@@ -1033,4 +1004,38 @@ public class CountersPutAi extends SpellAbilityAi {
         }
         return Iterables.getFirst(options, null);
     }
+
+    private boolean doMoveCounterSpikeLogic(Player ai, SpellAbility sa, PhaseHandler ph) {
+        // Spikes (Tempest)
+
+        // Try not to do it unless at the end of opponent's turn or the creature is threatened
+        Combat combat = ai.getGame().getCombat();
+        boolean threatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(sa.getHostCard())
+                || (combat != null && combat.isBlocked(sa.getHostCard()) && ComputerUtilCombat.attackerWouldBeDestroyed(ai, sa.getHostCard(), combat));
+
+        if (!(threatened || (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai))) {
+            return false;
+        }
+
+        CardCollection targets = CardLists.getTargetableCards(ai.getCreaturesInPlay(), sa);
+        targets.remove(sa.getHostCard());
+
+        targets = CardLists.filter(targets, new Predicate<Card>() {
+            @Override
+            public boolean apply(Card card) {
+                // when threatened, any target is good to preserve the counter
+                return threatened || ComputerUtilCard.evaluateCreature(card, false, false) > ComputerUtilCard.evaluateCreature(sa.getHostCard(), false, false) + 1;
+            }
+        });
+
+        Card bestTgt = ComputerUtilCard.getBestCreatureAI(targets);
+
+        if (bestTgt != null) {
+            sa.getTargets().add(bestTgt);
+            return true;
+        }
+
+        return false;
+    }
+
 }
