@@ -2190,8 +2190,8 @@ public class CardFactoryUtil {
             inst.addTrigger(bushidoTrigger2);
         } else if (keyword.equals("Cascade")) {
             final StringBuilder trigScript = new StringBuilder(
-                    "Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCascade | Secondary$ " +
-                    "True | TriggerDescription$ Cascade - CARDNAME");
+                    "Mode$ SpellCast | ValidCard$ Card.Self | Secondary$ True | " +
+                    "TriggerDescription$ Cascade - CARDNAME");
 
             final String abString = "DB$ DigUntil | Defined$ You | Amount$ 1 | Valid$ "
                     + "Card.nonLand+cmcLTCascadeX | FoundDestination$ Exile | RevealedDestination$"
