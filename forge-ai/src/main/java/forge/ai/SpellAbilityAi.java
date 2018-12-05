@@ -176,7 +176,7 @@ public abstract class SpellAbilityAi {
 
     public final boolean doTriggerNoCostWithSubs(final Player aiPlayer, final SpellAbility sa, final boolean mandatory)
     {
-        if (!doTriggerAINoCost(aiPlayer, sa, mandatory)) {
+        if (!doTriggerAINoCost(aiPlayer, sa, mandatory) && !"Always".equals(sa.getParam("AILogic"))) {
             return false;
         }
         final AbilitySub subAb = sa.getSubAbility();
