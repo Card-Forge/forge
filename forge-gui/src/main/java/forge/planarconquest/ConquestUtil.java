@@ -207,6 +207,7 @@ public class ConquestUtil {
     }
 
     public static enum AEtherFilter implements IHasSkinProp {
+        C (null, new ColorFilter(MagicColor.COLORLESS), "Playable in {C}"),
         W (null, new ColorFilter(MagicColor.WHITE), "Playable in {W}"),
         U (null, new ColorFilter(MagicColor.BLUE), "Playable in {U}"),
         B (null, new ColorFilter(MagicColor.BLACK), "Playable in {B}"),
@@ -351,6 +352,7 @@ public class ConquestUtil {
     }
 
     public static final AEtherFilter[] COLOR_FILTERS = new AEtherFilter[] {
+        AEtherFilter.C,
         AEtherFilter.W,
         AEtherFilter.U,
         AEtherFilter.B,
