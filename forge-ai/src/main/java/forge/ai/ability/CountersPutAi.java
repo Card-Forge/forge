@@ -1022,7 +1022,7 @@ public class CountersPutAi extends SpellAbilityAi {
         }
 
         CardCollection targets = CardLists.getTargetableCards(ai.getCreaturesInPlay(), sa);
-        targets.remove(sa.getHostCard());
+        targets.remove(source);
 
         targets = CardLists.filter(targets, new Predicate<Card>() {
             @Override
@@ -1031,7 +1031,7 @@ public class CountersPutAi extends SpellAbilityAi {
                         || (combat != null && ((combat.isBlocked(card) && ComputerUtilCombat.attackerWouldBeDestroyed(ai, card, combat))
                         || (combat.isBlocking(card) && ComputerUtilCombat.blockerWouldBeDestroyed(ai, card, combat))));
                 // when threatened, any non-threatened target is good to preserve the counter
-                return !tgtThreatened && (threatened || ComputerUtilCard.evaluateCreature(card, false, false) > ComputerUtilCard.evaluateCreature(sa.getHostCard(), false, false) + creatDiff);
+                return !tgtThreatened && (threatened || ComputerUtilCard.evaluateCreature(card, false, false) > ComputerUtilCard.evaluateCreature(source, false, false) + creatDiff);
             }
         });
 
