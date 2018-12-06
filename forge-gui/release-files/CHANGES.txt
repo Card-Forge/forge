@@ -12,6 +12,9 @@ Kamigawa is a plane consisting of 45 events and containing the cards from Champi
 ** Other changes **
 In addition to that, several other planes were tweaked. In particular, Theros, Alara and Ravnica feature random Planechase matches replacing random non-variant matches. Ravnica has been updated to feature several new events featuring Guilds of Ravnica cards, and some old events on this plane were also updated with the new cards as well. Guilds of Ravnica has been fully enabled on this plane, so you can grab the relevant cards in The Aether or from randomly won booster packs. Also, Theros has been tweaked not to start with a hard non-singleton non-variant duel, as well as to allow to ignore non-singleton duels (walk around them) if need be.
 
+- Possibility Storm Puzzles -
+For all of you puzzle mode fans, the complete Guilds of Ravnica season of Possibility Storm puzzles is now implemented in Forge.
+
 - AI Improvements -
 A new round of AI improvements went into the game, hopefully making the game a little more interesting and exciting to play. In particular, certain improvements regarding Flash were implemented, the AI is now able to use cards which reorder the top of the library, such as Ponder or Portent, as well as cards which copy spells and/or activated abilities, such as Twincast or Fork. Some other cards were improved for the AI and some were marked as AI playable. On top of that, several logic-related bugs were fixed. Also, the AI has been optimized a little, hopefully making it a bit faster, especially on mobile platforms, in situations where there are a lot of cards on the battlefield but the AI has little or nothing to do.
 
