@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Profile=Cautious
+Title=Selenia, Dark Angel
+Icon=Dungeon Crawling Black.jpg
+Difficulty=hard
+Description=Black-white balanced deck with all sorts of cards.
+Deck Type=constructed
+Name=Selenia3
+[Main]
+2 Coffin Queen|TMP
+3 Diabolic Edict|TMP
+3 Grave Pact|STH
+4 Helm of Possession|TMP
+1 Mox Diamond|STH
+4 Paladin en-Vec|EXO
+5 Plains|TMP|1
+1 Plains|TMP|3
+2 Plains|TMP|4
+4 Reflecting Pool|TMP
+2 Recurring Nightmare|EXO
+2 Selenia, Dark Angel|TMP
+2 Soltari Monk|TMP
+2 Soltari Priest|TMP
+3 Soltari Visionary|EXO
+4 Spirit Mirror|TMP
+2 Swamp|TMP|1
+3 Swamp|TMP|3
+3 Swamp|TMP|4
+4 Youthful Knight|STH
+4 Salt Flats|TMP
