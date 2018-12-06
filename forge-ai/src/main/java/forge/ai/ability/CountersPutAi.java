@@ -282,8 +282,8 @@ public class CountersPutAi extends SpellAbilityAi {
             if (!source.canTransform()) {
                 return false;
             }
-        } else if (logic.startsWith("MoveCounterSpike")) {
-            return doMoveCounterSpikeLogic(ai, sa, ph);
+        } else if (logic.startsWith("MoveCounter")) {
+            return doMoveCounterLogic(ai, sa, ph);
         }
 
         if (sa.getConditions() != null && !sa.getConditions().areMet(sa) && sa.getSubAbility() == null) {
@@ -1005,7 +1005,7 @@ public class CountersPutAi extends SpellAbilityAi {
         return Iterables.getFirst(options, null);
     }
 
-    private boolean doMoveCounterSpikeLogic(Player ai, SpellAbility sa, PhaseHandler ph) {
+    private boolean doMoveCounterLogic(Player ai, SpellAbility sa, PhaseHandler ph) {
         // Spikes (Tempest)
 
         // Try not to do it unless at the end of opponent's turn or the creature is threatened
