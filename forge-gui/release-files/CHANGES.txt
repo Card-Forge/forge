@@ -1,3 +1,6 @@
+- Ultimate Masters -
+This release fully supports Ultimate Masters, you can draft this brand new set in Booster Draft mode. Booster box toppers are not yet supported as a separate sealed product (the options for supporting them are currently being discussed), but otherwise the set is fully playable.
+
 - Planar Conquest 25th MTG Anniversary / Christmas 2018 Update -
 A rather serious and massive content update has happened in Planar Conquest. There are two new planes available, Dominaria and Kamigawa.
 (Please note that Planar Conquest is currently only available on Android and in the mobile backport.)
