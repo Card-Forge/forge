@@ -261,7 +261,7 @@ public class CostAdjustment {
 
         Map<Card, ManaCostShard> convokedCards = sa.getActivatingPlayer().getController().chooseCardsForConvokeOrImprovise(sa, cost.toManaCost(), untappedCards, improvise);
         
-        // Convoked creats are tapped here with triggers suppressed,
+        // Convoked creats are tapped here, setting up their taps triggers,
         // Then again when payment is done(In InputPayManaCost.done()) with suppression of Taps triggers.
         // This is to make sure that triggers go off at the right time
         // AND that you can't use mana tapabilities of convoked creatures to pay the convoked cost.
