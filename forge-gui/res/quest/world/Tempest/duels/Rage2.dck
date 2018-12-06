@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Profile=Reckless
+Title=Rage of the Mountains
+Icon=Dungeon Crawling Red.jpg
+Difficulty=medium
+Description=Red creature based aggro deck
+Deck Type=constructed
+Name=Rage2
+[Main]
+2 Blood Frenzy|TMP
+2 Canyon Wildcat|TMP
+2 Fireslinger|TMP
+2 Giant Strength|TMP
+4 Jackal Pup|TMP
+4 Maniacal Rage|EXO
+4 Mogg Fanatic|TMP
+4 Mogg Maniac|STH
+5 Mountain|TMP|1
+5 Mountain|TMP|2
+6 Mountain|TMP|4
+4 Raging Goblin|EXO
+4 Rathi Dragon|TMP
+4 Wasteland|TMP
+4 Cursed Scroll|TMP
+4 Kindle|TMP

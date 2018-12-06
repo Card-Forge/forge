@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Title=Pandemonium
+Icon=Dungeon Crawling Red.jpg
+Difficulty=easy
+Description=Green-Red deck with Pandemonium
+Deck Type=constructed
+Name=Pandemonium
+[Main]
+4 Apes of Rath|TMP
+4 Craven Giant|STH
+3 Forest|TMP|1
+3 Forest|TMP|2
+1 Forest|TMP|3
+3 Forest|TMP|4
+3 Jackalope Herd|EXO
+2 Mountain|TMP|1
+2 Mountain|TMP|2
+3 Mountain|TMP|3
+1 Mountain|TMP|4
+4 Pandemonium|EXO
+4 Rampant Growth|TMP
+3 Rathi Dragon|TMP
+4 Segmented Wurm|TMP
+4 Skyshroud Elf|TMP
+4 Spined Wurm|STH
+4 Wall of Razors|STH
+4 Wild Wurm|TMP

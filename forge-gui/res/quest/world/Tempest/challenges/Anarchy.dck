@@ -1,0 +1,25 @@
+[quest]
+id=TempestQuest1
+OpponentName=Anarchist
+AILife=50
+Repeat=true
+Wins=10
+Card Reward=booster pack EXO
+Credit Reward=200
+Ticket Reward=true
+AIExtras=Mountain|Mountain|Mountain|Erratic Portal
+HumanExtras=
+[metadata]
+Title=Anarchy!
+Icon=Dungeon Crawling Red.jpg
+Difficulty=hard
+Description=Some people never want peace!
+Deck Type=constructed
+Name=Anarchy
+[Main]
+5 Aftershock|TMP
+18 Anarchist|EXO
+6 Erratic Portal|EXO
+4 Flame Wave|STH
+5 Rolling Thunder|TMP
+22 Mountain|TMP

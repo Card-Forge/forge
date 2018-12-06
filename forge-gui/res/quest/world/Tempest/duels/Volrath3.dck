@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Title=Volrath
+Icon=Dungeon Crawling Black.jpg
+Difficulty=hard
+Description=Mono Black control
+Deck Type=constructed
+Name=Volrath3
+[Main]
+2 Bottle Gnomes|TMP
+1 Brush with Death|STH
+4 Coffin Queen|TMP
+2 Dark Banishing|TMP
+4 Dark Ritual|TMP
+2 Dauthi Mindripper|TMP
+3 Dauthi Slayer|TMP
+3 Death Stroke|STH
+4 Diabolic Edict|TMP
+2 Dregs of Sorrow|TMP
+2 Mox Diamond|STH
+4 Necrologia|EXO
+5 Swamp|TMP|2
+13 Swamp|TMP|3
+4 Swamp|TMP|4
+1 Volrath's Stronghold|STH
+4 Wall of Souls|STH

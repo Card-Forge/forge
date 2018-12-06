@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Title=Price of Progress
+Icon=Dungeon Crawling Red.jpg
+Difficulty=medium
+Description=Red burn deck
+Deck Type=constructed
+Name=Burn2
+[Main]
+2 Cursed Scroll|TMP
+4 Ensnaring Bridge|STH
+4 Fanning the Flames|STH
+4 Fireslinger|TMP
+4 Kindle|TMP
+4 Lightning Blast|TMP
+4 Mogg Fanatic|TMP
+2 Mountain|TMP|1
+7 Mountain|TMP|2
+4 Mountain|TMP|3
+4 Mountain|TMP|4
+4 Price of Progress|EXO
+4 Rolling Thunder|TMP
+1 Seismic Assault|EXO
+4 Sudden Impact|TMP
+4 Wasteland|TMP

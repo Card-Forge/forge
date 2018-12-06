@@ -1,0 +1,23 @@
+[quest]
+id=TempestQuest12
+OpponentName=Gatekeeper
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card rarity:U sets:TMP,STH,EXO;
+Credit Reward=700
+Ticket Reward=true
+AIExtras=Portcullis|Stronghold Taskmaster|Wall of Souls
+HumanExtras=
+[metadata]
+Title=The Gatekeeper
+Icon=Dungeon Crawling Black.jpg
+Difficulty=medium
+Description=Getting into this stronghold won't be easy!
+Deck Type=constructed
+Name=Portal
+[Main]
+26 Mountain|TMP
+14 Rolling Thunder|TMP
+5 Fanning The Flames|STH
+5 Sudden Impact|TMP

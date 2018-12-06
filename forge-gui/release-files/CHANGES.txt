@@ -1,3 +1,6 @@
+- Ultimate Masters -
+This release fully supports Ultimate Masters, you can draft this brand new set in Booster Draft mode. Booster box toppers are not yet supported as a separate sealed product (the options for supporting them are currently being discussed), but otherwise the set is fully playable.
+
 - Planar Conquest 25th MTG Anniversary / Christmas 2018 Update -
 A rather serious and massive content update has happened in Planar Conquest. There are two new planes available, Dominaria and Kamigawa.
 (Please note that Planar Conquest is currently only available on Android and in the mobile backport.)
@@ -11,6 +14,9 @@ Kamigawa is a plane consisting of 45 events and containing the cards from Champi
 
 ** Other changes **
 In addition to that, several other planes were tweaked. In particular, Theros, Alara and Ravnica feature random Planechase matches replacing random non-variant matches. Ravnica has been updated to feature several new events featuring Guilds of Ravnica cards, and some old events on this plane were also updated with the new cards as well. Guilds of Ravnica has been fully enabled on this plane, so you can grab the relevant cards in The Aether or from randomly won booster packs. Also, Theros has been tweaked not to start with a hard non-singleton non-variant duel, as well as to allow to ignore non-singleton duels (walk around them) if need be.
+
+- New Quest World: Tempest -
+This release features a new quest world based on the Tempest block. This quest world was submitted by Seravy, it has now been fully tested and the AI support for the cards has reached the level where the duels in this world can be enjoyed as interesting, unusual, and challenging. This world contains 41 duels and 12 challenges. If you would like to revisit the older Magic experience, this may be just the quest world for you to try out.
 
 - Possibility Storm Puzzles -
 For all of you puzzle mode fans, the complete Guilds of Ravnica season of Possibility Storm puzzles is now implemented in Forge.
