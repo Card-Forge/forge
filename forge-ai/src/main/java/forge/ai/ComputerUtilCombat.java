@@ -2665,6 +2665,30 @@ public class ComputerUtilCombat {
 
         return attackerAfterTrigs;
     }
+
+    public static boolean willKillAtLeastOne(final Player ai, final Card c, final Combat combat) {
+        // This method detects if the attacking or blocking group the card "c" belongs to will kill
+        // at least one creature it's in combat with (either profitably or as a trade),
+        if (combat == null) {
+            return false;
+        }
+
+        if (combat.isBlocked(c)) {
+            for (Card blk : combat.getBlockers(c)) {
+                if (ComputerUtilCombat.blockerWouldBeDestroyed(ai, blk, combat)) {
+                    return true;
+                }
+            }
+        } else if (combat.isBlocking(c)) {
+            for (Card atk : combat.getAttackersBlockedBy(c)) {
+                if (ComputerUtilCombat.attackerWouldBeDestroyed(ai, atk, combat)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
 }
 
 
