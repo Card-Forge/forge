@@ -4,7 +4,10 @@ Date=2018-12-07
 Name=Ultimate Masters
 Code2=UMA
 MciCode=uma
-Type=Other
+Type=Reprint
+BoosterCovers=3
+Booster=11 Common, 3 Uncommon, 1 RareMythic
+FoilChanceInBooster=100
 
 [cards]
 1 R All Is Dust
