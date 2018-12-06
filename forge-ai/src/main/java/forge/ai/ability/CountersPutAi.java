@@ -1009,7 +1009,7 @@ public class CountersPutAi extends SpellAbilityAi {
         // Spikes (Tempest)
 
         // Try not to do it unless at the end of opponent's turn or the creature is threatened
-        final int creatDiff = sa.getParam("AILogic").contains("ExtraEff") ? 450 : 1;
+        final int creatDiff = sa.getParam("AILogic").contains("IsCounterUser") ? 450 : 1;
         final Combat combat = ai.getGame().getCombat();
         final boolean threatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(sa.getHostCard())
                 || (combat != null && combat.isBlocked(sa.getHostCard()) && ComputerUtilCombat.attackerWouldBeDestroyed(ai, sa.getHostCard(), combat));
