@@ -1011,8 +1011,11 @@ public class CountersPutAi extends SpellAbilityAi {
         // Try not to do it unless at the end of opponent's turn or the creature is threatened
         final int creatDiff = sa.getParam("AILogic").contains("IsCounterUser") ? 450 : 1;
         final Combat combat = ai.getGame().getCombat();
-        final boolean threatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(sa.getHostCard())
-                || (combat != null && ((combat.isBlocked(sa.getHostCard()) && ComputerUtilCombat.attackerWouldBeDestroyed(ai, sa.getHostCard(), combat)) || (combat.isBlocking(sa.getHostCard()) && ComputerUtilCombat.blockerWouldBeDestroyed(ai, sa.getHostCard(), combat))));
+        final Card source = sa.getHostCard();
+
+        final boolean threatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(source)
+                || (combat != null && (((combat.isBlocked(source) && ComputerUtilCombat.attackerWouldBeDestroyed(ai, source, combat)) && !ComputerUtilCombat.willKillAtLeastOne(ai, source, combat))
+                || (combat.isBlocking(source) && ComputerUtilCombat.blockerWouldBeDestroyed(ai, source, combat) && !ComputerUtilCombat.willKillAtLeastOne(ai, source, combat))));
 
         if (!(threatened || (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai))) {
             return false;
@@ -1024,7 +1027,9 @@ public class CountersPutAi extends SpellAbilityAi {
         targets = CardLists.filter(targets, new Predicate<Card>() {
             @Override
             public boolean apply(Card card) {
-                boolean tgtThreatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(card) || (combat != null && ((combat.isBlocked(card) && ComputerUtilCombat.attackerWouldBeDestroyed(ai, card, combat)) || (combat.isBlocking(card) && ComputerUtilCombat.blockerWouldBeDestroyed(ai, card, combat))));
+                boolean tgtThreatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(card)
+                        || (combat != null && ((combat.isBlocked(card) && ComputerUtilCombat.attackerWouldBeDestroyed(ai, card, combat))
+                        || (combat.isBlocking(card) && ComputerUtilCombat.blockerWouldBeDestroyed(ai, card, combat))));
                 // when threatened, any non-threatened target is good to preserve the counter
                 return !tgtThreatened && (threatened || ComputerUtilCard.evaluateCreature(card, false, false) > ComputerUtilCard.evaluateCreature(sa.getHostCard(), false, false) + creatDiff);
             }
