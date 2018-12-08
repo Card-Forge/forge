@@ -493,11 +493,42 @@ public class ComputerUtilCost {
                 }
             }
         }
+
         // KLD vehicle
         if (sa.hasParam("Crew")) {  // put under checkTapTypeCost?
             for (final CostPart part : sa.getPayCosts().getCostParts()) {
                 if (part instanceof CostTapType && part.getType().contains("+withTotalPowerGE")) {
                     return new AiCostDecision(player, sa).visit((CostTapType)part) != null;
+                }
+            }
+        }
+
+        // TODO: Alternate costs which involve both paying mana and tapping a card, e.g. Zahid, Djinn of the Lamp
+        // Current AI decides on each part separately, thus making it possible for the AI to cheat by
+        // tapping a mana source for mana and for the tap cost at the same time. Until this is improved, AI
+        // will not consider mana sources valid for paying the tap cost to avoid this exact situation.
+        if ("DontPayTapCostWithManaSources".equals(sa.getHostCard().getSVar("AIPaymentPreference"))) {
+            for (final CostPart part : sa.getPayCosts().getCostParts()) {
+                if (part instanceof CostTapType) {
+                    CardCollectionView nonManaSources =
+                            CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), part.getType().split(";"),
+                                    sa.getActivatingPlayer(), sa.getHostCard(), sa);
+                    nonManaSources = CardLists.filter(nonManaSources, new Predicate<Card>() {
+                        @Override
+                        public boolean apply(Card card) {
+                            boolean hasManaSa = false;
+                            for (final SpellAbility sa : card.getSpellAbilities()) {
+                                if (sa.isManaAbility() && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
+                                    hasManaSa = true;
+                                    break;
+                                }
+                            }
+                            return !hasManaSa;
+                        }
+                    });
+                    if (nonManaSources.size() < part.convertAmount()) {
+                        return false;
+                    }
                 }
             }
         }
