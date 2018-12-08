@@ -400,6 +400,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setOriginalHost(final Card c) {
         grantorCard = c;
+        for (List<AbilitySub> addSaList : this.getAdditionalAbilityLists().values()) {
+            for (SpellAbility addSa : addSaList) {
+                addSa.setOriginalHost(c);
+            }
+        }
+        if (this.getSubAbility() != null) {
+            this.getSubAbility().setOriginalHost(c);
+        }
     }
 
 
