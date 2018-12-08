@@ -237,7 +237,6 @@ public class CostAdjustment {
                 }
             }
             if (sa.getHostCard().hasKeyword(Keyword.CONVOKE)) {
-                sa.getHostCard().clearConvoked();
                 adjustCostByConvokeOrImprovise(cost, sa, false, test);
             }
             if (sa.getHostCard().hasKeyword(Keyword.IMPROVISE)) {
@@ -262,11 +261,10 @@ public class CostAdjustment {
 
         Map<Card, ManaCostShard> convokedCards = sa.getActivatingPlayer().getController().chooseCardsForConvokeOrImprovise(sa, cost.toManaCost(), untappedCards, improvise);
         
-        // Convoked creats are tapped here with triggers suppressed,
-        // Then again when payment is done(In InputPayManaCost.done()) with suppression cleared.
+        // Convoked creats are tapped here, setting up their taps triggers,
+        // Then again when payment is done(In InputPayManaCost.done()) with suppression of Taps triggers.
         // This is to make sure that triggers go off at the right time
         // AND that you can't use mana tapabilities of convoked creatures to pay the convoked cost.
-        sa.getActivatingPlayer().getGame().getTriggerHandler().suppressMode(TriggerType.Taps);
         for (final Entry<Card, ManaCostShard> conv : convokedCards.entrySet()) {
             sa.addTappedForConvoke(conv.getKey());
             cost.decreaseShard(conv.getValue(), 1);
@@ -277,7 +275,6 @@ public class CostAdjustment {
                 }
             }
         }
-        sa.getActivatingPlayer().getGame().getTriggerHandler().clearSuppression(TriggerType.Taps);
     }
 
     private static void adjustCostByOffering(final ManaCostBeingPaid cost, final SpellAbility sa) {

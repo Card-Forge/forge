@@ -903,10 +903,12 @@ public class HumanPlay {
             }
         }
         if (ability.getTappedForConvoke() != null) {
+            activator.getGame().getTriggerHandler().suppressMode(TriggerType.Taps);
             for (final Card c : ability.getTappedForConvoke()) {
                 c.setTapped(false);
                 c.tap();
             }
+            activator.getGame().getTriggerHandler().clearSuppression(TriggerType.Taps);
             ability.clearTappedForConvoke();
         }
         return handleOfferingConvokeAndDelve(ability, cardsToDelve, false);
