@@ -486,7 +486,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
-        if ("AvoidTappingManaSources".equals(source.getSVar("AIPaymentPreference"))) {
+        if ("DontPayTapCostWithManaSources".equals(source.getSVar("AIPaymentPreference"))) {
             CardCollectionView toExclude =
                     CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"),
                             ability.getActivatingPlayer(), ability.getHostCard(), ability);

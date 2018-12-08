@@ -507,7 +507,7 @@ public class ComputerUtilCost {
         // Current AI decides on each part separately, thus making it possible for the AI to cheat by
         // tapping a mana source for mana and for the tap cost at the same time. Until this is improved, AI
         // will not consider mana sources valid for paying the tap cost to avoid this exact situation.
-        if ("AvoidTappingManaSources".equals(sa.getHostCard().getSVar("AIPaymentPreference"))) {
+        if ("DontPayTapCostWithManaSources".equals(sa.getHostCard().getSVar("AIPaymentPreference"))) {
             for (final CostPart part : sa.getPayCosts().getCostParts()) {
                 if (part instanceof CostTapType) {
                     CardCollectionView nonManaSources =
