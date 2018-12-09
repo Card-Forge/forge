@@ -37,14 +37,11 @@ import forge.sound.IAudioClip;
 import forge.sound.IAudioMusic;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.GuiChoose;
-import forge.util.Callback;
-import forge.util.FileUtil;
-import forge.util.ThreadUtil;
-import forge.util.WaitCallback;
-import forge.util.WaitRunnable;
+import forge.util.*;
 
 public class GuiMobile implements IGuiBase {
     private final String assetsDir;
+    private ImageFetcher imageFetcher = new LibGDXImageFetcher();
 
     public GuiMobile(final String assetsDir0) {
         assetsDir = assetsDir0;
@@ -68,6 +65,11 @@ public class GuiMobile implements IGuiBase {
     @Override
     public String getAssetsDir() {
         return assetsDir;
+    }
+
+    @Override
+    public ImageFetcher getImageFetcher() {
+        return imageFetcher;
     }
 
     @Override
