@@ -1311,7 +1311,6 @@ public class ComputerUtilCard {
             
             //2. grant haste
             if (keywords.contains("Haste") && c.hasSickness() && !c.isTapped()) {
-                //chance += 0.5f;
                 if (ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
                     chance += 0.5f + (0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife());
                 }
