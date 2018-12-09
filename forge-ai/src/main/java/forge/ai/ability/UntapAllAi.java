@@ -24,7 +24,7 @@ public class UntapAllAi extends SpellAbilityAi {
         		return false;
         	}
             String valid = "";
-            CardCollectionView list = aiPlayer.getGame().getCardsIn(ZoneType.Battlefield);
+            CardCollectionView list = CardLists.filter(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.TAPPED);
             if (sa.hasParam("ValidCards")) {
                 valid = sa.getParam("ValidCards");
             }
