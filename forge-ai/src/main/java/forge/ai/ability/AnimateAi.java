@@ -187,7 +187,7 @@ public class AnimateAi extends SpellAbilityAi {
                     // (e.g. Myth Realized)
                     if (animatedCopy.getCurrentPower() + animatedCopy.getCurrentToughness() >
                             c.getCurrentPower() + c.getCurrentToughness()) {
-                        if (!isAnimatedThisTurn(aiPlayer, c)) {
+                        if (!isAnimatedThisTurn(aiPlayer, sa.getHostCard())) {
                             if (!c.isTapped() || (game.getCombat() != null && game.getCombat().isAttacking(c))) {
                                 bFlag = true;
                             }
