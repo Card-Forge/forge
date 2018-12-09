@@ -53,7 +53,7 @@ public class ConquestStatsScreen extends FScreen implements IVConquestStats {
 
         cbPlanes.addItem("All Planes");
         for (ConquestPlane plane : FModel.getPlanes()) {
-            if (!plane.isUnreachable()) {
+            if (!plane.isUnreachable() || FModel.getConquest().getModel().getCurrentPlane().equals(plane)) {
                 cbPlanes.addItem(plane);
             }
         }
