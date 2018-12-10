@@ -491,7 +491,17 @@ public class PumpAi extends PumpAiBase {
                         if (p.isOpponentOf(ai)) {
                             sa.getTargets().add(ComputerUtilCard.getBestAI(targetable));
                         } else {
-                            sa.getTargets().add(ComputerUtilCard.getWorstAI(targetable));
+                            CardCollection priorityTgts = new CardCollection();
+                            for (Card c : targetable) {
+                                if (c.hasSVar("SacMe") || (c.isCreature() && ComputerUtilCard.evaluateCreature(c) <= 135)) {
+                                    priorityTgts.add(c);
+                                }
+                            }
+                            if (!priorityTgts.isEmpty()) {
+                                sa.getTargets().add(priorityTgts.getFirst());
+                            } else {
+                                sa.getTargets().add(ComputerUtilCard.getWorstPermanentAI(targetable, true, true, true, false));
+                            }
                         }
                     }
                 }
