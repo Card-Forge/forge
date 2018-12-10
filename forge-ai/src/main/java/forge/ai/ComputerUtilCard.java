@@ -21,6 +21,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.cost.Cost;
 import forge.game.cost.CostPayEnergy;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
@@ -1311,9 +1312,21 @@ public class ComputerUtilCard {
             
             //2. grant haste
             if (keywords.contains("Haste") && c.hasSickness() && !c.isTapped()) {
-                if (ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
-                    chance += 0.5f + (0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife());
+                double baseChance = 0.0f;
+                // non-combat Haste: has an activated ability with tap cost
+                for (SpellAbility ab : c.getSpellAbilities()) {
+                    Cost abCost = ab.getPayCosts();
+                    if (abCost != null && abCost.hasTapCost()
+                            && (!abCost.hasManaCost() || ComputerUtilMana.canPayManaCost(ab, ai, 0))) {
+                        baseChance += 0.5f;
+                    }
                 }
+                // combat Haste: only grant it if the creature will attack
+                if (ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
+                    if (baseChance < 0.5f) { baseChance = 0.5f; }
+                    chance += 0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife();
+                }
+                chance += baseChance;
             }
             
             //3. grant evasive
