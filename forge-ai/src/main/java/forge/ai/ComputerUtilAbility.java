@@ -23,6 +23,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -190,6 +191,11 @@ public class ComputerUtilAbility {
     }
 
     public static Pair<SpellAbility, Integer> getDamageAfterChainingSpells(Player ai, SpellAbility sa, String damage) {
+        int chance = ((PlayerControllerAi)ai.getController()).getAi().getIntProperty(AiProps.CHANCE_TO_CHAIN_TWO_DAMAGE_SPELLS);
+        if (!MyRandom.percentTrue(chance)) {
+            return null;
+        }
+
         if (sa.getSubAbility() != null || sa.getParent() != null) {
             // Doesn't work yet for complex decisions where damage is only a part of the decision process
             return null;
