@@ -673,14 +673,14 @@ public class AiController {
     private AiPlayDecision canPlayAndPayFor(final SpellAbility sa) {
         boolean xCost = sa.getPayCosts().hasXInAnyCostPart();
 
+        if (!sa.canPlay()) {
+            return AiPlayDecision.CantPlaySa;
+        }
+
         if (!xCost && !ComputerUtilCost.canPayCost(sa, player)) {
             // for most costs, it's OK to check if they can be paid early in order to avoid running a heavy API check
             // when the AI won't even be able to play the spell in the first place (even if it could afford it)
             return AiPlayDecision.CantAfford;
-        }
-
-        if (!sa.canPlay()) {
-            return AiPlayDecision.CantPlaySa;
         }
 
         AiPlayDecision canPlay = canPlaySa(sa); // this is the "heaviest" check, which also sets up targets, defines X, etc.
