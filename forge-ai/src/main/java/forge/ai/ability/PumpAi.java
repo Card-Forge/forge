@@ -493,14 +493,19 @@ public class PumpAi extends PumpAiBase {
                         } else {
                             CardCollection priorityTgts = new CardCollection();
                             for (Card c : targetable) {
-                                if (c.hasSVar("SacMe") || (c.isCreature() && ComputerUtilCard.evaluateCreature(c) <= 135)) {
+                                if (c.canBeSacrificed() && (c.hasSVar("SacMe") || (c.isCreature() && ComputerUtilCard.evaluateCreature(c) <= 135)) && !c.equals(sa.getHostCard())) {
                                     priorityTgts.add(c);
                                 }
                             }
                             if (!priorityTgts.isEmpty()) {
                                 sa.getTargets().add(priorityTgts.getFirst());
                             } else {
-                                sa.getTargets().add(ComputerUtilCard.getWorstPermanentAI(targetable, true, true, true, false));
+                                targetable.remove(sa.getHostCard());
+                                if (!targetable.isEmpty()) {
+                                    sa.getTargets().add(ComputerUtilCard.getWorstPermanentAI(targetable, true, true, true, false));
+                                } else {
+                                    sa.getTargets().add(sa.getHostCard()); // sac self only as a last resort
+                                }
                             }
                         }
                     }
