@@ -21,6 +21,7 @@ import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
 import java.util.Map;
@@ -195,6 +196,9 @@ public class DamageDealAi extends DamageAiBase {
             return false;
         }
 
+        // Try to chain damage/debuff effects
+        Pair<SpellAbility, Integer> chainDmg = ComputerUtilAbility.getDamageAfterChainingSpells(ai, sa, damage);
+
         // temporarily disabled until better AI
         if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
             return false;
@@ -216,8 +220,24 @@ public class DamageDealAi extends DamageAiBase {
         	return false;
         }
 
-        if (!this.damageTargetAI(ai, sa, dmg, false)) {
-            return false;
+        // test what happens if we chain this to another damaging spell
+        if (chainDmg != null && ai.getController().isAI()) {
+            int extraDmg = chainDmg.getValue();
+            if (!this.damageTargetAI(ai, sa, dmg + extraDmg, false)) {
+                return false; // won't play it even in chain
+            } else {
+                // we are about to decide to play this damage spell; if there's something chained to it, reserve mana for
+                // the second spell so we don't misplay
+                if (chainDmg != null && ai.getController().isAI()) {
+                    AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+                    aic.reserveManaSourcesTillNextPriority(chainDmg.getKey(), sa);
+                }
+            }
+        } else {
+            // simple targeting when there is no spell chaining plan
+            if (!this.damageTargetAI(ai, sa, dmg, false)) {
+                return false;
+            }
         }
 
         if ((damage.equals("X") && source.getSVar(damage).equals("Count$xPaid")) ||
@@ -238,6 +258,7 @@ public class DamageDealAi extends DamageAiBase {
                 source.setSVar("PayX", Integer.toString(actualPay));
             }
         }
+
         return true;
     }
 
