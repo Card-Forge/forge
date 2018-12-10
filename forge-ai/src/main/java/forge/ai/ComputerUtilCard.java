@@ -1320,6 +1320,7 @@ public class ComputerUtilCard {
                     if (abCost != null && abCost.hasTapCost()
                             && (!abCost.hasManaCost() || ComputerUtilMana.canPayManaCost(ab, ai, 0))) {
                         nonCombatChance += 0.5f;
+                        break;
                     }
                 }
                 // combat Haste: only grant it if the creature will attack
