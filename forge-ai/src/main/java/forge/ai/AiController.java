@@ -671,12 +671,11 @@ public class AiController {
 
     // This is for playing spells regularly (no Cascade/Ripple etc.)
     private AiPlayDecision canPlayAndPayFor(final SpellAbility sa) {
-        boolean xCost = sa.getPayCosts().hasXInAnyCostPart();
-
         if (!sa.canPlay()) {
             return AiPlayDecision.CantPlaySa;
         }
 
+        boolean xCost = sa.getPayCosts().hasXInAnyCostPart();
         if (!xCost && !ComputerUtilCost.canPayCost(sa, player)) {
             // for most costs, it's OK to check if they can be paid early in order to avoid running a heavy API check
             // when the AI won't even be able to play the spell in the first place (even if it could afford it)
