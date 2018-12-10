@@ -481,6 +481,21 @@ public class PumpAi extends PumpAiBase {
             } else if (sa.getParam("AILogic").equals("DonateTargetPerm")) {
                 // Donate step 2 - target a donatable permanent.
                 return SpecialCardAi.Donate.considerDonatingPermanent(ai, sa);
+            } else if (sa.getParam("AILogic").equals("SacOneEach")) {
+                // each player sacrifices one permanent, e.g. Vaevictis, Asmadi the Dire - grab the worst for allied and
+                // the best for opponents
+                sa.resetTargets();
+                for (Player p : game.getPlayers()) {
+                    CardCollection targetable = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), CardPredicates.isTargetableBy(sa));
+                    if (!targetable.isEmpty()) {
+                        if (p.isOpponentOf(ai)) {
+                            sa.getTargets().add(ComputerUtilCard.getBestAI(targetable));
+                        } else {
+                            sa.getTargets().add(ComputerUtilCard.getWorstAI(targetable));
+                        }
+                    }
+                }
+                return true;
             }
             if (isFight) {
                 return FightAi.canFightAi(ai, sa, attack, defense);
