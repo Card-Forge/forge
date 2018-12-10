@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import forge.GuiBase;
 import forge.game.GameActionUtil;
 import forge.game.spellability.SpellAbilityView;
 import forge.util.TextUtil;
@@ -71,21 +72,40 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     @Override
     protected boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
-        if (card.getManaAbilities().size() == 1) {
-            activateManaAbility(card, card.getManaAbilities().get(0));
+        if (GuiBase.getInterface().isLibgdxPort()) {
+            // Mobile Forge allows to tap cards underneath the current card even if the current one is tapped
+            if (otherCardsToSelect != null) {
+                for (Card c : otherCardsToSelect) {
+                    for (SpellAbility sa : c.getManaAbilities()) {
+                        if (sa.canPlay()) {
+                            delaySelectCards.add(c);
+                            break;
+                        }
+                    }
+                }
+            }
+            if (!card.getManaAbilities().isEmpty() && activateManaAbility(card)) {
+                return true;
+            }
+            return activateDelayedCard();
         } else {
-            SpellAbilityView spellAbilityView;
-            HashMap<SpellAbilityView, SpellAbility> spellAbilityViewMap = new HashMap<>();
-            for (SpellAbility sa : card.getManaAbilities()) {
-                spellAbilityViewMap.put(sa.getView(), sa);
+            // Desktop Forge floating menu functionality
+            if (card.getManaAbilities().size() == 1) {
+                activateManaAbility(card, card.getManaAbilities().get(0));
+            } else {
+                SpellAbilityView spellAbilityView;
+                HashMap<SpellAbilityView, SpellAbility> spellAbilityViewMap = new HashMap<>();
+                for (SpellAbility sa : card.getManaAbilities()) {
+                    spellAbilityViewMap.put(sa.getView(), sa);
+                }
+                List<SpellAbilityView> choices = new ArrayList<>(spellAbilityViewMap.keySet());
+                spellAbilityView = getController().getGui().getAbilityToPlay(card.getView(), choices, triggerEvent);
+                if (spellAbilityView != null) {
+                    activateManaAbility(card, spellAbilityViewMap.get(spellAbilityView));
+                }
             }
-            List<SpellAbilityView> choices = new ArrayList<>(spellAbilityViewMap.keySet());
-            spellAbilityView = getController().getGui().getAbilityToPlay(card.getView(), choices, triggerEvent);
-            if (spellAbilityView != null) {
-                activateManaAbility(card, spellAbilityViewMap.get(spellAbilityView));
-            }
+            return true;
         }
-        return true;
     }
 
     @Override
