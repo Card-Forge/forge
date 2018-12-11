@@ -484,33 +484,7 @@ public class PumpAi extends PumpAiBase {
             } else if (sa.getParam("AILogic").equals("SacOneEach")) {
                 // each player sacrifices one permanent, e.g. Vaevictis, Asmadi the Dire - grab the worst for allied and
                 // the best for opponents
-                sa.resetTargets();
-                for (Player p : game.getPlayers()) {
-                    CardCollection targetable = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), CardPredicates.isTargetableBy(sa));
-                    if (!targetable.isEmpty()) {
-                        if (p.isOpponentOf(ai)) {
-                            sa.getTargets().add(ComputerUtilCard.getBestAI(targetable));
-                        } else {
-                            CardCollection priorityTgts = new CardCollection();
-                            for (Card c : targetable) {
-                                if (c.canBeSacrificed() && (c.hasSVar("SacMe") || (c.isCreature() && ComputerUtilCard.evaluateCreature(c) <= 135)) && !c.equals(sa.getHostCard())) {
-                                    priorityTgts.add(c);
-                                }
-                            }
-                            if (!priorityTgts.isEmpty()) {
-                                sa.getTargets().add(priorityTgts.getFirst());
-                            } else {
-                                targetable.remove(sa.getHostCard());
-                                if (!targetable.isEmpty()) {
-                                    sa.getTargets().add(ComputerUtilCard.getWorstPermanentAI(targetable, true, true, true, false));
-                                } else {
-                                    sa.getTargets().add(sa.getHostCard()); // sac self only as a last resort
-                                }
-                            }
-                        }
-                    }
-                }
-                return true;
+                return SacrificeAi.doSacOneEachLogic(ai, sa);
             }
             if (isFight) {
                 return FightAi.canFightAi(ai, sa, attack, defense);
