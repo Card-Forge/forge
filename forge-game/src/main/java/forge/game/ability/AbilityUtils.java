@@ -472,10 +472,16 @@ public class AbilityUtils {
                 players.remove(game.getPhaseHandler().getPlayerTurn());
                 val = CardFactoryUtil.playerXCount(players, calcX[1], card);
             }
+            else if (hType.startsWith("PropertyYou")) {
+                // Related to the controller of the card with ability, works for all kinds of abilities, e.g. static (Hollow One),
+                // as opposed to the generic one below which only works for SpellAbilities
+                players.add(card.getController());
+                val = CardFactoryUtil.playerXCount(players, calcX[1], card);
+            }
             else if (hType.startsWith("Property") && ability instanceof SpellAbility) {
                 String defined = hType.split("Property")[1];
                 for (Player p : game.getPlayersInTurnOrder()) {
-                    if (p.hasProperty(defined, ((SpellAbility)ability).getActivatingPlayer(), ability.getHostCard(), (SpellAbility)ability)) {
+                    if (p.hasProperty(defined, ((SpellAbility) ability).getActivatingPlayer(), ability.getHostCard(), (SpellAbility) ability)) {
                         players.add(p);
                     }
                 }
