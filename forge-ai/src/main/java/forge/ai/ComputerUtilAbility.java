@@ -246,7 +246,6 @@ public class ComputerUtilAbility {
                                 SpellAbility combinedAb = ab.copyWithDefinedCost(new Cost(total, false));
                                 // can we pay both costs?
                                 if (ComputerUtilMana.canPayManaCost(combinedAb, ai, 0)) {
-                                    //aic.reserveManaSourcesTillNextPriority(ab); // reserve mana for the second spell
                                     return Pair.of(ab, Integer.parseInt(dmgDef));
                                 }
                             }
