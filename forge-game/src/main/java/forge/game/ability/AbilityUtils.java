@@ -472,10 +472,18 @@ public class AbilityUtils {
                 players.remove(game.getPhaseHandler().getPlayerTurn());
                 val = CardFactoryUtil.playerXCount(players, calcX[1], card);
             }
+            else if (hType.startsWith("PropertyYou") && !(ability instanceof SpellAbility)) {
+                // Related to the controller of the card with ability when the ability is static (or otherwise not a SpellAbility)
+                // TODO: This doesn't work in situations when the controller of the card is different from the spell caster
+                // (e.g. opponent's Hollow One exiled by Hostage Taker - cost reduction will not work in this scenario, requires
+                // a more significant rework).
+                players.add(card.getController());
+                val = CardFactoryUtil.playerXCount(players, calcX[1], card);
+            }
             else if (hType.startsWith("Property") && ability instanceof SpellAbility) {
                 String defined = hType.split("Property")[1];
                 for (Player p : game.getPlayersInTurnOrder()) {
-                    if (p.hasProperty(defined, ((SpellAbility)ability).getActivatingPlayer(), ability.getHostCard(), (SpellAbility)ability)) {
+                    if (p.hasProperty(defined, ((SpellAbility) ability).getActivatingPlayer(), ability.getHostCard(), (SpellAbility) ability)) {
                         players.add(p);
                     }
                 }
