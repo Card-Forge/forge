@@ -197,7 +197,7 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         // Try to chain damage/debuff effects
-        Pair<SpellAbility, Integer> chainDmg = ComputerUtilAbility.getDamageAfterChainingSpells(ai, sa, damage);
+        Pair<SpellAbility, Integer> chainDmg = ComputerUtilAbility.getDamagingSAToChain(ai, sa, damage);
 
         // temporarily disabled until better AI
         if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {

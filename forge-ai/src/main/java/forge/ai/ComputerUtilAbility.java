@@ -190,7 +190,10 @@ public class ComputerUtilAbility {
         return targeted;
     }
 
-    public static Pair<SpellAbility, Integer> getDamageAfterChainingSpells(Player ai, SpellAbility sa, String damage) {
+    // Returns a pair of a SpellAbility (APIType DealDamage or Pump) and damage/debuff amount
+    // The returned spell ability can be chained to "sa" to deal more damage (enough mana is available to cast both
+    // and can be properly reserved).
+    public static Pair<SpellAbility, Integer> getDamagingSAToChain(Player ai, SpellAbility sa, String damage) {
         int chance = ((PlayerControllerAi)ai.getController()).getAi().getIntProperty(AiProps.CHANCE_TO_CHAIN_TWO_DAMAGE_SPELLS);
         if (!MyRandom.percentTrue(chance)) {
             return null;
