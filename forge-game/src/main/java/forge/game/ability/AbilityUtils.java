@@ -472,9 +472,8 @@ public class AbilityUtils {
                 players.remove(game.getPhaseHandler().getPlayerTurn());
                 val = CardFactoryUtil.playerXCount(players, calcX[1], card);
             }
-            else if (hType.startsWith("PropertyYou")) {
-                // Related to the controller of the card with ability, works for all kinds of abilities, e.g. static (Hollow One),
-                // as opposed to the generic one below which only works for SpellAbilities
+            else if (hType.startsWith("PropertyYou") && !(ability instanceof SpellAbility)) {
+                // Related to the controller of the card with ability when the ability is static (or otherwise not a SpellAbility)
                 players.add(card.getController());
                 val = CardFactoryUtil.playerXCount(players, calcX[1], card);
             }
