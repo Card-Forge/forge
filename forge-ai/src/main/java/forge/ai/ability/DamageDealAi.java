@@ -201,9 +201,6 @@ public class DamageDealAi extends DamageAiBase {
             return false;
         }
 
-        // Try to chain damage/debuff effects
-        Pair<SpellAbility, Integer> chainDmg = getDamagingSAToChain(ai, sa, damage);
-
         // temporarily disabled until better AI
         if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
             return false;
@@ -224,6 +221,9 @@ public class DamageDealAi extends DamageAiBase {
         if (ComputerUtil.preventRunAwayActivations(sa)) {
         	return false;
         }
+
+        // Try to chain damage/debuff effects
+        Pair<SpellAbility, Integer> chainDmg = getDamagingSAToChain(ai, sa, damage);
 
         // test what happens if we chain this to another damaging spell
         if (chainDmg != null && ai.getController().isAI()) {
