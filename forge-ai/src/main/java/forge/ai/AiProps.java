@@ -79,6 +79,7 @@ public enum AiProps { /** */
     DESTROY_IMMEDIATELY_UNBLOCKABLE_LIFE_IN_DNGR ("5"), /** */
     AVOID_TARGETING_CREATS_THAT_WILL_DIE ("true"), /** */
     DONT_EVAL_KILLSPELLS_ON_STACK_WITH_PERMISSION ("true"), /** */
+    CHANCE_TO_CHAIN_TWO_DAMAGE_SPELLS("50"), /** */
     PRIORITY_REDUCTION_FOR_STORM_SPELLS ("0"), /** */
     USE_BERSERK_AGGRESSIVELY ("false"), /** */
     MIN_COUNT_FOR_STORM_SPELLS ("0"), /** */
@@ -126,10 +127,9 @@ public enum AiProps { /** */
     FLASH_USE_BUFF_AURAS_AS_COMBAT_TRICKS("true"),
     FLASH_BUFF_AURA_CHANCE_TO_CAST_EARLY("1"),
     FLASH_BUFF_AURA_CHANCE_CAST_AT_EOT("5"),
-    FLASH_BUFF_AURA_CHANCE_TO_RESPOND_TO_STACK("100"), /** */
+    FLASH_BUFF_AURA_CHANCE_TO_RESPOND_TO_STACK("100"); /** */
     // Experimental features, must be promoted or removed after extensive testing and, ideally, defaulting
     // <-- There are no experimental options here -->
-    CHANCE_TO_CHAIN_TWO_DAMAGE_SPELLS("0"); /** */
 
 
     private final String strDefaultVal;

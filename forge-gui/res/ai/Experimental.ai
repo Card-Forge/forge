@@ -120,6 +120,11 @@ DESTROY_IMMEDIATELY_UNBLOCKABLE_ONLY_IN_DNGR=false
 # for the purpose of previous option
 DESTROY_IMMEDIATELY_UNBLOCKABLE_LIFE_IN_DNGR=5
 
+# The chance that the AI will try to chain two damage spells or a damage spell and a debuffing pump spell to try to
+# kill a bigger creature or a planeswalker. If set to 0, will be disabled. When enabled, will automatically become 100
+# if the AI is in danger of dying.
+CHANCE_TO_CHAIN_TWO_DAMAGE_SPELLS=100
+
 # Permission timings
 MIN_SPELL_CMC_TO_COUNTER=2
 CHANCE_TO_COUNTER_CMC_1=30
@@ -277,8 +282,3 @@ MOJHOSTO_CHANCE_TO_USE_JHOIRA_COPY_INSTANT=20
 # -- different name if necessary --
 
 # <-- there are no experimental options here at the moment -->
-
-# The chance that the AI will try to chain two damage spells or a damage spell and a debuffing pump spell to try to
-# kill a bigger creature or a planeswalker.
-CHANCE_TO_CHAIN_TWO_DAMAGE_SPELLS=100
-
