@@ -1014,13 +1014,15 @@ public class DamageDealAi extends DamageAiBase {
     // The returned spell ability can be chained to "sa" to deal more damage (enough mana is available to cast both
     // and can be properly reserved).
     public static Pair<SpellAbility, Integer> getDamagingSAToChain(Player ai, SpellAbility sa, String damage) {
-        Game game = ai.getGame();
-        int chance = ((PlayerControllerAi)ai.getController()).getAi().getIntProperty(AiProps.CHANCE_TO_CHAIN_TWO_DAMAGE_SPELLS);
-
-        if (((PlayerControllerAi)ai.getController()).getAi().usesSimulation()) {
+        if (!ai.getController().isAI()) {
+            return null; // should only work for the actual AI player
+        } else if (((PlayerControllerAi)ai.getController()).getAi().usesSimulation()) {
             // simulated AI shouldn't use paired decisions, it tries to find complex decisions on its own
             return null;
         }
+
+        Game game = ai.getGame();
+        int chance = ((PlayerControllerAi)ai.getController()).getAi().getIntProperty(AiProps.CHANCE_TO_CHAIN_TWO_DAMAGE_SPELLS);
 
         if (chance > 0 && (ComputerUtilCombat.lifeInDanger(ai, game.getCombat()) || ComputerUtil.aiLifeInDanger(ai, true, 0))) {
             chance = 100; // in danger, do it even if normally the chance is low (unless chaining is completely disabled)
