@@ -241,7 +241,7 @@ public class DamageDealAi extends DamageAiBase {
             } else {
                 // we are about to decide to play this damage spell; if there's something chained to it, reserve mana for
                 // the second spell so we don't misplay
-                if (chainDmg != null && ai.getController().isAI()) {
+                if (chainDmg != null) {
                     AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
                     aic.reserveManaSourcesForNextSpell(chainDmg.getKey(), sa);
                 }
