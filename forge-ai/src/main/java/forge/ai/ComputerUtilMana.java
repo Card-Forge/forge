@@ -856,6 +856,11 @@ public class ComputerUtilMana {
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
         int chanceToReserve = aic.getIntProperty(AiProps.RESERVE_MANA_FOR_MAIN2_CHANCE);
 
+        // Mana reserved for spell synchronization
+        if (AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL)) {
+            return true;
+        }
+
         PhaseType curPhase = ai.getGame().getPhaseHandler().getPhase();
 
         // For combat tricks, always obey mana reservation

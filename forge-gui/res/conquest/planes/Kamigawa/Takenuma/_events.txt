@@ -6,4 +6,4 @@ Name:Lantern-Lit Graveyard|Deck:Lantern-Lit Graveyard.dck|Variant:Planechase|Ava
 Name:Toshiro Umezawa|Deck:Toshiro Umezawa.dck|Variant:Commander|Avatar:Toshiro Umezawa|Desc:
 Name:Yukora, the Prisoner|Deck:Yukora, the Prisoner.dck|Variant:Commander|Avatar:Yukora, the Prisoner|Desc:
 Name:Gix|Deck:Gix.dck|Variant:Vanguard|Avatar:Gix|Desc:
-Name:Random Planechase|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:
+Name:Random Takenuma|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

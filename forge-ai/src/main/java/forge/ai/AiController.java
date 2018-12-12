@@ -93,6 +93,9 @@ public class AiController {
         this.cheatShuffle = canCheatShuffle;
     }
 
+    public boolean usesSimulation() {
+        return this.useSimulation;
+    }
     public void setUseSimulation(boolean value) {
         this.useSimulation = value;
     }
@@ -630,31 +633,48 @@ public class AiController {
     }
 
     public boolean reserveManaSources(SpellAbility sa) {
-        return reserveManaSources(sa, PhaseType.MAIN2, false);
+        return reserveManaSources(sa, PhaseType.MAIN2, false, false, null);
+    }
+
+    public boolean reserveManaSourcesForNextSpell(SpellAbility sa, SpellAbility exceptForSa) {
+        return reserveManaSources(sa, null, false, true, exceptForSa);
     }
 
     public boolean reserveManaSources(SpellAbility sa, PhaseType phaseType, boolean enemy) {
+        return reserveManaSources(sa, phaseType, enemy, true, null);
+    }
+
+    public boolean reserveManaSources(SpellAbility sa, PhaseType phaseType, boolean enemy, boolean forNextSpell, SpellAbility exceptForThisSa) {
         ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, true, 0);
         CardCollection manaSources = ComputerUtilMana.getManaSourcesToPayCost(cost, sa, player);
+
+        // used for chained spells where two spells need to be cast in succession
+        if (exceptForThisSa != null) {
+            manaSources.removeAll(ComputerUtilMana.getManaSourcesToPayCost(ComputerUtilMana.calculateManaCost(exceptForThisSa, true, 0), exceptForThisSa, player));
+        }
 
         if (manaSources.isEmpty()) {
             return false;
         }
 
         AiCardMemory.MemorySet memSet;
-        switch (phaseType) {
-            case MAIN2:
-                memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2;
-                break;
-            case COMBAT_DECLARE_BLOCKERS:
-                memSet = enemy ? AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK
-                    : AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_DECLBLK;
-                break;
-            default:
-                System.out.println("Warning: unsupported mana reservation phase specified for reserveManaSources: "
-                        + phaseType.name() + ", reserving until Main 2 instead. Consider adding support for the phase if needed.");
-                memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2;
-                break;
+        if (phaseType == null && forNextSpell) {
+            memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL;
+        } else {
+            switch (phaseType) {
+                case MAIN2:
+                    memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2;
+                    break;
+                case COMBAT_DECLARE_BLOCKERS:
+                    memSet = enemy ? AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK
+                            : AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_DECLBLK;
+                    break;
+                default:
+                    System.out.println("Warning: unsupported mana reservation phase specified for reserveManaSources: "
+                            + phaseType.name() + ", reserving until Main 2 instead. Consider adding support for the phase if needed.");
+                    memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2;
+                    break;
+            }
         }
 
         // This is a simplification, since one mana source can produce more than one mana,
@@ -1316,6 +1336,9 @@ public class AiController {
         // Reset cached predicted combat, as it may be stale. It will be
         // re-created if needed and used for any AI logic that needs it.
         predictedCombat = null;
+
+        // Reset priority mana reservation that's meant to work for one spell only
+        AiCardMemory.clearMemorySet(player, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL);
 
         if (useSimulation) {
             return singleSpellAbilityList(simPicker.chooseSpellAbilityToPlay(null));
