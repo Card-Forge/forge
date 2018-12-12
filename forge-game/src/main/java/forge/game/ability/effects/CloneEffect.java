@@ -116,7 +116,7 @@ public class CloneEffect extends SpellAbilityEffect {
         final String newName = sa.getParamOrDefault("NewName", null);
         final String originalName = tgtCard.getName();
         final boolean copyingSelf = (tgtCard == cardToCopy);
-        final boolean isTransformed = cardToCopy.getCurrentStateName() == CardStateName.Transformed || cardToCopy.getCurrentStateName() == CardStateName.Meld;
+        final boolean isTransformed = cardToCopy.getCurrentStateName() == CardStateName.Transformed || cardToCopy.getCurrentStateName() == CardStateName.Meld || cardToCopy.getCurrentStateName() == CardStateName.Flipped;
         final CardStateName origState = isTransformed || cardToCopy.isFaceDown() ? CardStateName.Original : cardToCopy.getCurrentStateName();
 
         if (!copyingSelf) {
@@ -188,7 +188,12 @@ public class CloneEffect extends SpellAbilityEffect {
         //game.getTriggerHandler().registerActiveTrigger(tgtCard, false);
 
         //keep the Clone card image for the cloned card
-        tgtCard.setImageKey(imageFileName);
+        if (cardToCopy.isFlipCard() && tgtCard.getCurrentStateName() != CardStateName.Flipped) {
+            //for a flip card that isn't flipped, load the original image
+            tgtCard.setImageKey(cardToCopy.getImageKey(CardStateName.Original));
+        } else {
+            tgtCard.setImageKey(imageFileName);
+        }
 
         tgtCard.updateStateForView();
 
