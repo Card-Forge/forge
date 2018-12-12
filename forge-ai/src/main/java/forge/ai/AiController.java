@@ -641,7 +641,7 @@ public class AiController {
         return reserveManaSources(sa, phaseType, enemy, true, null);
     }
 
-    public boolean reserveManaSources(SpellAbility sa, PhaseType phaseType, boolean enemy, boolean nextPriority, SpellAbility exceptForThisSa) {
+    public boolean reserveManaSources(SpellAbility sa, PhaseType phaseType, boolean enemy, boolean forNextSpell, SpellAbility exceptForThisSa) {
         ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, true, 0);
         CardCollection manaSources = ComputerUtilMana.getManaSourcesToPayCost(cost, sa, player);
 
@@ -655,8 +655,8 @@ public class AiController {
         }
 
         AiCardMemory.MemorySet memSet;
-        if (phaseType == null && nextPriority) {
-            memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_PRIORITY;
+        if (phaseType == null && forNextSpell) {
+            memSet = AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL;
         } else {
             switch (phaseType) {
                 case MAIN2:
@@ -1334,8 +1334,8 @@ public class AiController {
         // re-created if needed and used for any AI logic that needs it.
         predictedCombat = null;
 
-        // Reset priority mana reservation
-        AiCardMemory.clearMemorySet(player, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_PRIORITY);
+        // Reset priority mana reservation that's meant to work for one spell only
+        AiCardMemory.clearMemorySet(player, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL);
 
         if (useSimulation) {
             return singleSpellAbilityList(simPicker.chooseSpellAbilityToPlay(null));

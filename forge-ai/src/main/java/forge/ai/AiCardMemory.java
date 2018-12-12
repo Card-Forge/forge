@@ -51,7 +51,7 @@ public class AiCardMemory {
         HELD_MANA_SOURCES_FOR_MAIN2, // These mana sources will not be used before Main 2
         HELD_MANA_SOURCES_FOR_DECLBLK, // These mana sources will not be used before Combat - Declare Blockers
         HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK, // These mana sources will not be used before the opponent's Combat - Declare Blockers
-        HELD_MANA_SOURCES_FOR_NEXT_PRIORITY, // These mana sources will not be used until the next time the AI receives priority
+        HELD_MANA_SOURCES_FOR_NEXT_SPELL, // These mana sources will not be used until the next time the AI chooses a spell to cast
         ATTACHED_THIS_TURN, // These equipments were attached to something already this turn
         ANIMATED_THIS_TURN, // These cards had their AF Animate effect activated this turn
         BOUNCED_THIS_TURN, // These cards were bounced this turn
@@ -66,7 +66,7 @@ public class AiCardMemory {
     private final Set<Card> memHeldManaSources;
     private final Set<Card> memHeldManaSourcesForCombat;
     private final Set<Card> memHeldManaSourcesForEnemyCombat;
-    private final Set<Card> memHeldManaSourcesForNextPriority;
+    private final Set<Card> memHeldManaSourcesForNextSpell;
     private final Set<Card> memAttachedThisTurn;
     private final Set<Card> memAnimatedThisTurn;
     private final Set<Card> memBouncedThisTurn;
@@ -86,7 +86,7 @@ public class AiCardMemory {
         this.memTrickAttackers = new HashSet<>();
         this.memChosenFogEffect = new HashSet<>();
         this.memMarkedToAvoidReentry = new HashSet<>();
-        this.memHeldManaSourcesForNextPriority = new HashSet<>();
+        this.memHeldManaSourcesForNextSpell = new HashSet<>();
     }
 
     private Set<Card> getMemorySet(MemorySet set) {
@@ -101,8 +101,8 @@ public class AiCardMemory {
                 return memHeldManaSourcesForCombat;
             case HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK:
                 return memHeldManaSourcesForEnemyCombat;
-            case HELD_MANA_SOURCES_FOR_NEXT_PRIORITY:
-                return memHeldManaSourcesForNextPriority;
+            case HELD_MANA_SOURCES_FOR_NEXT_SPELL:
+                return memHeldManaSourcesForNextSpell;
             case ATTACHED_THIS_TURN:
                 return memAttachedThisTurn;
             case ANIMATED_THIS_TURN:
