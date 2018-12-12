@@ -1017,6 +1017,11 @@ public class DamageDealAi extends DamageAiBase {
         Game game = ai.getGame();
         int chance = ((PlayerControllerAi)ai.getController()).getAi().getIntProperty(AiProps.CHANCE_TO_CHAIN_TWO_DAMAGE_SPELLS);
 
+        if (((PlayerControllerAi)ai.getController()).getAi().usesSimulation()) {
+            // simulated AI shouldn't use paired decisions, it tries to find complex decisions on its own
+            return null;
+        }
+
         if (chance > 0 && (ComputerUtilCombat.lifeInDanger(ai, game.getCombat()) || ComputerUtil.aiLifeInDanger(ai, true, 0))) {
             chance = 100; // in danger, do it even if normally the chance is low (unless chaining is completely disabled)
         }

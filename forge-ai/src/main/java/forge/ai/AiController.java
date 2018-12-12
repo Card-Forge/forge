@@ -93,6 +93,9 @@ public class AiController {
         this.cheatShuffle = canCheatShuffle;
     }
 
+    public boolean usesSimulation() {
+        return this.useSimulation;
+    }
     public void setUseSimulation(boolean value) {
         this.useSimulation = value;
     }
