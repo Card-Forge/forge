@@ -1316,7 +1316,8 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         // Don't fortify if already fortifying
-        if (attachSource.getAttachedTo() != null && attachSource.getAttachedTo().getController() == aiPlayer) {
+        if (attachSource.isFortification() && attachSource.getAttachedTo() != null
+                && attachSource.getAttachedTo().getController() == aiPlayer) {
             return null;
         }
 
