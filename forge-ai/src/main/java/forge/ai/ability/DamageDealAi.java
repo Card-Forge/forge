@@ -235,7 +235,7 @@ public class DamageDealAi extends DamageAiBase {
                 // the second spell so we don't misplay
                 if (chainDmg != null && ai.getController().isAI()) {
                     AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-                    aic.reserveManaSourcesTillNextPriority(chainDmg.getKey(), sa);
+                    aic.reserveManaSourcesForNextSpell(chainDmg.getKey(), sa);
                 }
             }
         } else {

@@ -633,7 +633,7 @@ public class AiController {
         return reserveManaSources(sa, PhaseType.MAIN2, false, false, null);
     }
 
-    public boolean reserveManaSourcesTillNextPriority(SpellAbility sa, SpellAbility exceptForSa) {
+    public boolean reserveManaSourcesForNextSpell(SpellAbility sa, SpellAbility exceptForSa) {
         return reserveManaSources(sa, null, false, true, exceptForSa);
     }
 
