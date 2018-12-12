@@ -226,7 +226,7 @@ public class DamageDealAi extends DamageAiBase {
         Pair<SpellAbility, Integer> chainDmg = getDamagingSAToChain(ai, sa, damage);
 
         // test what happens if we chain this to another damaging spell
-        if (chainDmg != null && ai.getController().isAI()) {
+        if (chainDmg != null) {
             int extraDmg = chainDmg.getValue();
             boolean willTargetIfChained = this.damageTargetAI(ai, sa, dmg + extraDmg, false);
             if (!willTargetIfChained) {
