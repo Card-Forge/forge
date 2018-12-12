@@ -4,11 +4,14 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.ai.*;
+import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPartMana;
 import forge.game.cost.CostRemoveCounter;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
@@ -21,6 +24,8 @@ import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.MyRandom;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
@@ -197,7 +202,7 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         // Try to chain damage/debuff effects
-        Pair<SpellAbility, Integer> chainDmg = ComputerUtilAbility.getDamagingSAToChain(ai, sa, damage);
+        Pair<SpellAbility, Integer> chainDmg = getDamagingSAToChain(ai, sa, damage);
 
         // temporarily disabled until better AI
         if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
@@ -995,5 +1000,80 @@ public class DamageDealAi extends DamageAiBase {
 
         source.setSVar("PayX", Integer.toString(dmg));
         return true;
+    }
+
+    // Returns a pair of a SpellAbility (APIType DealDamage or Pump) and damage/debuff amount
+    // The returned spell ability can be chained to "sa" to deal more damage (enough mana is available to cast both
+    // and can be properly reserved).
+    public static Pair<SpellAbility, Integer> getDamagingSAToChain(Player ai, SpellAbility sa, String damage) {
+        Game game = ai.getGame();
+        int chance = ((PlayerControllerAi)ai.getController()).getAi().getIntProperty(AiProps.CHANCE_TO_CHAIN_TWO_DAMAGE_SPELLS);
+
+        if (chance > 0 && (ComputerUtilCombat.lifeInDanger(ai, game.getCombat()) || ComputerUtil.aiLifeInDanger(ai, true, 0))) {
+            chance = 100; // in danger, do it even if normally the chance is low (unless chaining is completely disabled)
+        }
+
+        if (!MyRandom.percentTrue(chance)) {
+            return null;
+        }
+
+        if (sa.getSubAbility() != null || sa.getParent() != null) {
+            // Doesn't work yet for complex decisions where damage is only a part of the decision process
+            return null;
+        }
+
+        // Try to chain damage/debuff effects
+        if (StringUtils.isNumeric(damage) || (damage.startsWith("-") && StringUtils.isNumeric(damage.substring(1)))) {
+            // currently only works for predictable numeric damage
+            CardCollection cards = new CardCollection();
+            cards.addAll(ai.getCardsIn(ZoneType.Hand));
+            cards.addAll(ai.getCardsIn(ZoneType.Battlefield));
+            cards.addAll(ai.getCardsActivableInExternalZones(true));
+            for (Card c : cards) {
+                for (SpellAbility ab : c.getSpellAbilities()) {
+                    if (ab.equals(sa) || ab.getSubAbility() != null) { // decisions for complex SAs with subs are not supported yet
+                        continue;
+                    }
+                    // currently works only with cards that don't have additional costs (only mana is supported)
+                    if (ab.getPayCosts() != null
+                            && (ab.getPayCosts().hasNoManaCost() || ab.getPayCosts().hasOnlySpecificCostType(CostPartMana.class))) {
+                        String dmgDef = "0";
+                        if (ab.getApi() == ApiType.DealDamage) {
+                            dmgDef = ab.getParamOrDefault("NumDmg", "0");
+                        } else if (ab.getApi() == ApiType.Pump) {
+                            dmgDef = ab.getParamOrDefault("NumDef", "0");
+                            if (dmgDef.startsWith("-")) {
+                                dmgDef = dmgDef.substring(1);
+                            } else {
+                                continue; // not a toughness debuff
+                            }
+                        }
+                        if (StringUtils.isNumeric(dmgDef) && ab.canPlay()) { // currently doesn't work for X and other dependent costs
+                            if (sa.usesTargeting() && ab.usesTargeting()) {
+                                // Ensure that the chained spell can target at least the same things (or more) as the current one
+                                TargetRestrictions tgtSa = sa.getTargetRestrictions();
+                                TargetRestrictions tgtAb = sa.getTargetRestrictions();
+                                if (tgtSa.canTgtCreature() && !tgtAb.canTgtCreature()) {
+                                    continue;
+                                } else if (tgtSa.canTgtPlaneswalker() && !tgtAb.canTgtPlaneswalker()) {
+                                    continue;
+                                }
+                                // FIXME: should it also check restrictions for targeting players?
+                                ManaCost costSa = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : ManaCost.NO_COST;
+                                ManaCost costAb = ab.getPayCosts().getTotalMana(); // checked for null above
+                                ManaCost total = ManaCost.combine(costSa, costAb);
+                                SpellAbility combinedAb = ab.copyWithDefinedCost(new Cost(total, false));
+                                // can we pay both costs?
+                                if (ComputerUtilMana.canPayManaCost(combinedAb, ai, 0)) {
+                                    return Pair.of(ab, Integer.parseInt(dmgDef));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return null;
     }
 }
