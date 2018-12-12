@@ -63,12 +63,14 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
             list = GameActionUtil.orderCardsByTheirOwners(game, list, ZoneType.Graveyard);
         }
 
+        CardZoneTable table = new CardZoneTable();
         for (Card sac : list) {
             final Card lKICopy = CardUtil.getLKICopy(sac);
-            if (game.getAction().sacrifice(sac, sa) != null && remSacrificed) {
+            if (game.getAction().sacrifice(sac, sa, table) != null && remSacrificed) {
                 card.addRemembered(lKICopy);
             }
         }
+        table.triggerChangesZoneAll(game);
     }
 
 }

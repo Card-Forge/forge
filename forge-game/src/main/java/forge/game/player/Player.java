@@ -1581,12 +1581,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         return numDrawnThisDrawStep;
     }
 
-    public final Card discard(final Card c, final SpellAbility sa) {
+    public final Card discard(final Card c, final SpellAbility sa, CardZoneTable table) {
         // TODO: This line should be moved inside CostPayment somehow
         /*if (sa != null) {
             sa.addCostToHashList(c, "Discarded");
         }*/
         final Card source = sa != null ? sa.getHostCard() : null;
+        final ZoneType origin = c.getZone().getZoneType();
 
         boolean discardToTopOfLibrary = null != sa && sa.hasParam("DiscardToTopOfLibrary");
         boolean discardMadness = sa != null && sa.hasParam("Madness");
@@ -1621,6 +1622,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         else {
             newCard = game.getAction().moveToGraveyard(c, sa, null);
             // Play the Discard sound
+        }
+        if (table != null) {
+            table.put(origin, newCard.getZone().getZoneType(), newCard);
         }
         sb.append(".");
         numDiscardedThisTurn++;
@@ -1660,17 +1664,12 @@ public class Player extends GameEntity implements Comparable<Player> {
         numCardsInHandStartedThisTurnWith = num;
     }
 
-    public final CardCollectionView mill(final int n) {
-        return mill(n, ZoneType.Graveyard, false);
-    }
-    public final CardCollectionView mill(final int n, final ZoneType zone,
-            final boolean bottom) {
+    public final CardCollectionView mill(final int n, final ZoneType destination,
+            final boolean bottom, SpellAbility sa, CardZoneTable table) {
         final CardCollectionView lib = getCardsIn(ZoneType.Library);
         final CardCollection milled = new CardCollection();
 
         final int max = Math.min(n, lib.size());
-
-        final ZoneType destination = getZone(zone).getZoneType();
 
         for (int i = 0; i < max; i++) {
             if (bottom) {
@@ -1682,12 +1681,15 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         CardCollectionView milledView = milled;
+
         if (destination == ZoneType.Graveyard && milled.size() > 1) {
             milledView = GameActionUtil.orderCardsByTheirOwners(game, milled, ZoneType.Graveyard);
         }
 
         for (Card m : milledView) {
-            game.getAction().moveTo(destination, m, null, null);
+            final ZoneType origin = m.getZone().getZoneType();
+            final Card d = game.getAction().moveTo(destination, m, sa, null);
+            table.put(origin, d.getZone().getZoneType(), d);
         }
 
         return milled;

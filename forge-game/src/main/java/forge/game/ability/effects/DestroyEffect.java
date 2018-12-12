@@ -6,8 +6,8 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
+import forge.game.card.CardZoneTable;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
 import java.util.Iterator;
@@ -77,8 +77,6 @@ public class DestroyEffect extends SpellAbilityEffect {
         CardCollection tgtCards = getTargetCards(sa);
         CardCollection untargetedCards = new CardCollection();
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-
         if (sa.hasParam("Radiance")) {
             for (final Card c : CardUtil.getRadiance(card, tgtCards.get(0),
                     sa.getParam("ValidTgts").split(","))) {
@@ -90,19 +88,18 @@ public class DestroyEffect extends SpellAbilityEffect {
             tgtCards = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, tgtCards, ZoneType.Graveyard);
         }
 
+        CardZoneTable table = new CardZoneTable();
         for (final Card tgtC : tgtCards) {
-            if (tgtC.isInPlay() && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
+            if (tgtC.isInPlay() && (!sa.usesTargeting() || tgtC.canBeTargetedBy(sa))) {
                 boolean destroyed = false;
                 final Card lki = CardUtil.getLKICopy(tgtC);
                 if (remAttached) {
                     card.addRemembered(tgtC.getAttachedCards());
                 }
                 if (sac) {
-                    destroyed = game.getAction().sacrifice(tgtC, sa) != null;
-                } else if (noRegen) {
-                    destroyed = game.getAction().destroyNoRegeneration(tgtC, sa);
+                    destroyed = game.getAction().sacrifice(tgtC, sa, table) != null;
                 } else {
-                    destroyed = game.getAction().destroy(tgtC, sa);
+                    destroyed = game.getAction().destroy(tgtC, sa, !noRegen, table);
                 }
                 if (destroyed && remDestroyed) {
                     card.addRemembered(tgtC);
@@ -121,16 +118,16 @@ public class DestroyEffect extends SpellAbilityEffect {
             if (unTgtC.isInPlay()) {
                 boolean destroyed = false;
                 if (sac) {
-                    destroyed = game.getAction().sacrifice(unTgtC, sa) != null;
-                } else if (noRegen) {
-                    destroyed = game.getAction().destroyNoRegeneration(unTgtC, sa);
+                    destroyed = game.getAction().sacrifice(unTgtC, sa, table) != null;
                 } else {
-                    destroyed = game.getAction().destroy(unTgtC, sa);
+                    destroyed = game.getAction().destroy(unTgtC, sa, !noRegen, table);
                 } if (destroyed  && remDestroyed) {
                     card.addRemembered(unTgtC);
                 }
             }
         }
+
+        table.triggerChangesZoneAll(game);
     }
 
 }
