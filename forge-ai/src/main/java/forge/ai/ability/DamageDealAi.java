@@ -28,6 +28,7 @@ import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -1070,15 +1071,16 @@ public class DamageDealAi extends DamageAiBase {
                                     continue;
                                 } else if (tgtSa.canTgtPlaneswalker() && !tgtAb.canTgtPlaneswalker()) {
                                     continue;
-                                } else if ((tgtSa.getSAValidTargeting() != null && tgtSa.getSAValidTargeting().contains("."))
-                                        || (tgtAb.getSAValidTargeting() != null && tgtAb.getSAValidTargeting().contains("."))) {
-                                    if (!tgtAb.getSAValidTargeting().contains(tgtSa.getSAValidTargeting())) {
-                                        // if the targeting has additional conditions, make sure that the chained spell
-                                        // contains the same condition specifications (or at least these specs are a part
-                                        // of what SA can target, hopefully)
-                                        continue;
-                                    }
                                 }
+
+                                // Check that "ab" has a ValidTgts specification that includes everything "sa" includes, or
+                                // the AI can misplay
+                                String[] validTgtsSa = sa.getTargetRestrictions().getValidTgts();
+                                String[] validTgtsAb = ab.getTargetRestrictions().getValidTgts();
+                                if (!Arrays.asList(validTgtsSa).containsAll(Arrays.asList(validTgtsAb))) {
+                                    continue;
+                                }
+
                                 // FIXME: should it also check restrictions for targeting players?
                                 ManaCost costSa = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : ManaCost.NO_COST;
                                 ManaCost costAb = ab.getPayCosts().getTotalMana(); // checked for null above
