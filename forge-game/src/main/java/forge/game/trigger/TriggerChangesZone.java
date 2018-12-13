@@ -160,7 +160,10 @@ public class TriggerChangesZone extends Trigger {
                 return false;
             }
 
-            final boolean expr = Expressions.compare(card.getTotalDamageRecievedThisTurn(), cond, rightSide);
+            // need to check the ChangeZone LKI copy for damage, otherwise it'll return 0 for a new object in the new zone
+            Card lkiCard = card.getGame().getChangeZoneLKIInfo(card);
+
+            final boolean expr = Expressions.compare(lkiCard.getTotalDamageRecievedThisTurn(), cond, rightSide);
             if (!expr) {
                 return false;
             }
