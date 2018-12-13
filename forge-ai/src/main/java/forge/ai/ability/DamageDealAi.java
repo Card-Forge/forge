@@ -1075,8 +1075,8 @@ public class DamageDealAi extends DamageAiBase {
 
                                 // Check that "ab" has a ValidTgts specification that includes everything "sa" includes, or
                                 // the AI can misplay
-                                String[] validTgtsSa = sa.getTargetRestrictions().getValidTgts();
-                                String[] validTgtsAb = ab.getTargetRestrictions().getValidTgts();
+                                String[] validTgtsSa = tgtSa.getValidTgts();
+                                String[] validTgtsAb = tgtAb.getValidTgts();
                                 if (!Arrays.asList(validTgtsSa).containsAll(Arrays.asList(validTgtsAb))) {
                                     continue;
                                 }
