@@ -1067,14 +1067,6 @@ public class DamageDealAi extends DamageAiBase {
                                 // Ensure that the chained spell can target at least the same things (or more) as the current one
                                 TargetRestrictions tgtSa = sa.getTargetRestrictions();
                                 TargetRestrictions tgtAb = sa.getTargetRestrictions();
-                                if (tgtSa.canTgtCreature() && !tgtAb.canTgtCreature()) {
-                                    continue;
-                                } else if (tgtSa.canTgtPlaneswalker() && !tgtAb.canTgtPlaneswalker()) {
-                                    continue;
-                                }
-
-                                // Check that "ab" has a ValidTgts specification that includes everything "sa" includes, or
-                                // the AI can misplay
                                 String[] validTgtsSa = tgtSa.getValidTgts();
                                 String[] validTgtsAb = tgtAb.getValidTgts();
                                 if (!Arrays.asList(validTgtsSa).containsAll(Arrays.asList(validTgtsAb))) {
