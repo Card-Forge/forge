@@ -477,9 +477,9 @@ public class QuestController {
                 allChallenges = QuestChallengeGenerator.generateChallenges();
                 return;
             } else if (world.isCustom()) {
-                path = world.getChallengesDir() == null ? ForgeConstants.DEFAULT_CHALLENGES_DIR : ForgeConstants.QUEST_WORLD_DIR + world.getChallengesDir();
-            } else {
                 path = world.getChallengesDir() == null ? ForgeConstants.DEFAULT_CHALLENGES_DIR : ForgeConstants.USER_QUEST_WORLD_DIR + world.getChallengesDir();
+            } else {
+                path = world.getChallengesDir() == null ? ForgeConstants.DEFAULT_CHALLENGES_DIR : ForgeConstants.QUEST_WORLD_DIR + world.getChallengesDir();
             }
 
         }
