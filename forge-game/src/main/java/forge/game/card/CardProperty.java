@@ -54,17 +54,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("NamedByRememberedPlayer")) {
-            if (!source.hasRemembered()) {
-                final Card newCard = game.getCardState(source);
-                for (final Object o : newCard.getRemembered()) {
-                    if (o instanceof Player) {
-                        if (!card.sharesNameWith(((Player) o).getNamedCard())) {
-                            return false;
-                        }
-                    }
-                }
-            }
-            for (final Object o : source.getRemembered()) {
+            for (final Object o : AbilityUtils.getRemembered(spellAbility, source)) {
                 if (o instanceof Player) {
                     if (!card.sharesNameWith(((Player) o).getNamedCard())) {
                         return false;
@@ -195,25 +185,12 @@ public class CardProperty {
             }
         } else if (property.startsWith("RememberedPlayer")) {
             Player p = property.endsWith("Ctrl") ? controller : card.getOwner();
-            if (!source.hasRemembered()) {
-                final Card newCard = game.getCardState(source);
-                if (!newCard.isRemembered(p)) {
-                    return false;
-                }
-            }
 
-            if (!source.isRemembered(p)) {
+            if (!AbilityUtils.isRemembered(spellAbility, source, p)) {
                 return false;
             }
         } else if (property.startsWith("nonRememberedPlayerCtrl")) {
-            if (!source.hasRemembered()) {
-                final Card newCard = game.getCardState(source);
-                if (newCard.isRemembered(controller)) {
-                    return false;
-                }
-            }
-
-            if (source.isRemembered(controller)) {
+            if (AbilityUtils.isRemembered(spellAbility, source, controller)) {
                 return false;
             }
         } else if (property.equals("TargetedPlayerCtrl")) {
@@ -506,7 +483,7 @@ public class CardProperty {
         } else if (property.startsWith("CanEnchant")) {
             final String restriction = property.substring(10);
             if (restriction.equals("Remembered")) {
-                for (final Object rem : source.getRemembered()) {
+                for (final Object rem : AbilityUtils.getRemembered(spellAbility, source)) {
                     if (!(rem instanceof Card) || !((Card) rem).canBeAttached(card))
                         return false;
                 }
@@ -526,7 +503,7 @@ public class CardProperty {
                     }
                 }
             } else if (property.substring(16).equals("AllRemembered")) {
-                for (final Object rem : source.getRemembered()) {
+                for (final Object rem : AbilityUtils.getRemembered(spellAbility, source)) {
                     if (rem instanceof Card) {
                         final Card c = (Card) rem;
                         if (!card.canBeAttached(c)) {
@@ -658,7 +635,7 @@ public class CardProperty {
                 return false;
             } else if (property.endsWith("Remembered")) {
                 boolean matched = false;
-                for (final Object obj : source.getRemembered()) {
+                for (final Object obj : AbilityUtils.getRemembered(spellAbility, source)) {
                     if (!(obj instanceof Card)) {
                         continue;
                     }
@@ -819,7 +796,7 @@ public class CardProperty {
                         }
                         return false;
                     case "Remembered":
-                        for (final Object rem : source.getRemembered()) {
+                        for (final Object rem : AbilityUtils.getRemembered(spellAbility, source)) {
                             if (rem instanceof Card) {
                                 final Card c = (Card) rem;
                                 if (card.sharesCreatureTypeWith(c)) {
@@ -829,7 +806,7 @@ public class CardProperty {
                         }
                         return false;
                     case "AllRemembered":
-                        for (final Object rem : source.getRemembered()) {
+                        for (final Object rem : AbilityUtils.getRemembered(spellAbility, source)) {
                             if (rem instanceof Card) {
                                 final Card c = (Card) rem;
                                 if (!card.sharesCreatureTypeWith(c)) {
@@ -1679,11 +1656,11 @@ public class CardProperty {
             }
             return false;
         } else if (property.equals("IsRemembered")) {
-            if (!source.isRemembered(card)) {
+            if (!AbilityUtils.isRemembered(spellAbility, source, card)) {
                 return false;
             }
         } else if (property.equals("IsNotRemembered")) {
-            if (source.isRemembered(card)) {
+            if (AbilityUtils.isRemembered(spellAbility, source, card)) {
                 return false;
             }
         } else if (property.equals("IsImprinted")) {

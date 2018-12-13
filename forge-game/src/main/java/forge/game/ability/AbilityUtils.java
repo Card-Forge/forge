@@ -169,37 +169,19 @@ public class AbilityUtils {
             }
         }
         else if (defined.equals("Remembered") || defined.equals("RememberedCard")) {
-            if (!hostCard.hasRemembered()) {
-                final Card newCard = game.getCardState(hostCard);
-                for (final Object o : newCard.getRemembered()) {
-                    if (o instanceof Card) {
-                        cards.add(game.getCardState((Card) o));
-                    }
-                }
-            }
-            // game.getCardState(Card c) is not working for LKI
-            for (final Object o : hostCard.getRemembered()) {
+            for (final Object o : AbilityUtils.getRemembered(sa, hostCard)) {
                 if (o instanceof Card) {
                     cards.addAll(addRememberedFromCardState(game, (Card)o));
                 }
             }
         } else if (defined.equals("RememberedLKI")) {
-            for (final Object o : hostCard.getRemembered()) {
+            for (final Object o : AbilityUtils.getRemembered(sa, hostCard)) {
                 if (o instanceof Card) {
                     cards.add((Card) o);
                 }
             }
         } else if (defined.equals("DirectRemembered")) {
-            if (!hostCard.hasRemembered()) {
-                final Card newCard = game.getCardState(hostCard);
-                for (final Object o : newCard.getRemembered()) {
-                    if (o instanceof Card) {
-                        cards.add((Card) o);
-                    }
-                }
-            }
-
-            for (final Object o : hostCard.getRemembered()) {
+            for (final Object o : AbilityUtils.getRemembered(sa, hostCard)) {
                 if (o instanceof Card) {
                     cards.add((Card) o);
                 }
@@ -216,12 +198,12 @@ public class AbilityUtils {
                 System.err.println("Warning: couldn't find trigger SA in the chain of SpellAbility " + sa);
             }
         } else if (defined.equals("FirstRemembered")) {
-            Object o = Iterables.getFirst(hostCard.getRemembered(), null);
+            Object o = Iterables.getFirst(AbilityUtils.getRemembered(sa, hostCard), null);
             if (o != null && o instanceof Card) {
                 cards.add(game.getCardState((Card) o));
             }
         } else if (defined.equals("LastRemembered")) {
-            Object o = Iterables.getLast(hostCard.getRemembered(), null);
+            Object o = Iterables.getLast(AbilityUtils.getRemembered(sa, hostCard), null);
             if (o != null && o instanceof Card) {
                 cards.add(game.getCardState((Card) o));
             }
@@ -460,7 +442,7 @@ public class AbilityUtils {
                 val = CardFactoryUtil.playerXCount(players, calcX[1], card);
             }
             else if (hType.equals("Remembered")) {
-                for (final Object o : card.getRemembered()) {
+                for (final Object o : AbilityUtils.getRemembered(ability, card)) {
                     if (o instanceof Player) {
                         players.add((Player) o);
                     }
@@ -980,7 +962,7 @@ public class AbilityUtils {
             }
         }
         else if (defined.startsWith("Remembered")) {
-            addPlayer(card.getRemembered(), defined, players);
+            addPlayer(AbilityUtils.getRemembered(sa, card), defined, players);
         }
         else if (defined.startsWith("DelayTriggerRemembered")) {
             SpellAbility trigSa = sa.getTriggeringAbility();
@@ -1280,7 +1262,7 @@ public class AbilityUtils {
             }
         }
         else if (defined.equals("Remembered")) {
-            for (final Object o : card.getRemembered()) {
+            for (final Object o : AbilityUtils.getRemembered(sa, card)) {
                 if (o instanceof Card) {
                     final Card rem = (Card) o;
                     sas.addAll(game.getCardState(rem).getSpellAbilities());
@@ -1836,11 +1818,12 @@ public class AbilityUtils {
             }
         }
     }
-    
+
     public static SpellAbility addSpliceEffects(final SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Player player = sa.getActivatingPlayer();
-        
+
+
         final CardCollection splices = CardLists.filter(player.getCardsIn(ZoneType.Hand), new Predicate<Card>() {
             @Override
             public boolean apply(Card input) {
@@ -1879,7 +1862,7 @@ public class AbilityUtils {
 
         if (spliceCost == null)
             return;
-        
+
         SpellAbility firstSpell = c.getFirstSpellAbility();
         Map<String, String> params = Maps.newHashMap(firstSpell.getMapParams());
         AbilityRecordType rc = AbilityRecordType.getRecordType(params);
@@ -1898,5 +1881,73 @@ public class AbilityUtils {
         sa.setPayCosts(spliceCost.add(sa.getPayCosts()));
         sa.setDescription(sa.getDescription() + " (Splicing " + c + " onto it)");
         sa.addSplicedCards(c);
+    }
+
+    public static final <T> boolean isRemembered(final CardTraitBase sa, final Card host, T o) {
+        // prefer sa if able
+        if (sa instanceof SpellAbility) {
+            return ((SpellAbility)sa).isRemembered(o);
+        }
+        // in rare case of host being null
+        if (host == null) {
+            return false;
+        }
+
+        // if host doesn't remember, check the game state
+        if (!host.hasRemembered()) {
+            final Card newCard = host.getGame().getCardState(host);
+            return newCard.isRemembered(o);
+        }
+        return host.isRemembered(o);
+    }
+
+    public static final boolean hasRemembered(final CardTraitBase sa, final Card host) {
+        if (sa instanceof SpellAbility) {
+            return ((SpellAbility)sa).hasRemembered();
+        }
+
+        if (host == null) {
+            return false;
+        }
+
+        if (!host.hasRemembered()) {
+            final Card newCard = host.getGame().getCardState(host);
+            return newCard.hasRemembered();
+        }
+        return host.hasRemembered();
+    }
+
+    public static final Iterable<Object> getRemembered(final CardTraitBase sa, final Card host) {
+        if (sa instanceof SpellAbility) {
+            return ((SpellAbility)sa).getRemembered();
+        }
+
+        // return empty list if no host exist
+        if (host == null) {
+            return List.<Object>of();
+        }
+
+        if (!host.hasRemembered()) {
+            final Card newCard = host.getGame().getCardState(host);
+            return newCard.getRemembered();
+        }
+
+        return host.getRemembered();
+    }
+
+    public static final int getRememberedCount(final CardTraitBase sa, final Card host) {
+        if (sa instanceof SpellAbility) {
+            return ((SpellAbility)sa).getRememberedCount();
+        }
+        if (host == null) {
+            return 0;
+        }
+
+        if (!host.hasRemembered()) {
+            final Card newCard = host.getGame().getCardState(host);
+            return newCard.getRememberedCount();
+        }
+
+        return host.getRememberedCount();
     }
 }

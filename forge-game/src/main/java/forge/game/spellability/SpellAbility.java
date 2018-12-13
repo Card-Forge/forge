@@ -21,6 +21,8 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
+
 import forge.card.mana.ManaCost;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
@@ -125,7 +127,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private SpellAbilityRestriction restrictions = new SpellAbilityRestriction();
     private SpellAbilityCondition conditions = new SpellAbilityCondition();
     private AbilitySub subAbility = null;
-    
+
     private Map<String, AbilitySub> additionalAbilities = Maps.newHashMap();
     private Map<String, List<AbilitySub>> additionalAbilityLists = Maps.newHashMap();
 
@@ -139,6 +141,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private Map<String, Object> triggeringObjects = Maps.newHashMap();
 
     private HashMap<String, Object> replacingObjects = Maps.newHashMap();
+
+    private final Set<Object> rememberedObjects = Sets.newLinkedHashSet();
 
     private List<AbilitySub> chosenList = null;
     private CardCollection tappedForConvoke = new CardCollection();
@@ -162,7 +166,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private CardCollection lastStateBattlefield = null;
     private CardCollection lastStateGraveyard = null;
-    
+
     private CardDamageMap damageMap = null;
     private CardDamageMap preventMap = null;
 
@@ -284,7 +288,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     // Spell, and Ability, and other Ability objects override this method
     public abstract boolean canPlay();
-    
+
     public boolean canPlay(boolean checkOptionalCosts) {
         if (canPlay()) {
             return true;
@@ -299,7 +303,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
         return false;
     }
-    
+
     public boolean canPlayWithOptionalCost(OptionalCostValue opt) {
         SpellAbility saCopy = this.copy();
         saCopy = GameActionUtil.addOptionalCosts(saCopy, Lists.newArrayList(opt));
@@ -608,7 +612,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
         }
     }
-    
+
     // key for autoyield - the card description (including number) (if there is a card) plus the effect description
     public String yieldKey() {
         if (getHostCard() != null) {
@@ -632,7 +636,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             setDescription(s);
         }
     }
-    
+
     public String getOriginalStackDescription() {
         return originalStackDescription;
     }
@@ -646,7 +650,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         originalDescription = s;
         description = originalDescription;
     }
-    
+
     public String getOriginalDescription() {
         return originalDescription;
     }
@@ -710,7 +714,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
         view.updateDescription(this); //description changes when sub-abilities change
     }
-    
+
     public Map<String, AbilitySub> getAdditionalAbilities() {
         return additionalAbilities;
     }
@@ -720,7 +724,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
         return null;
     }
-    
+
     public boolean hasAdditionalAbility(final String name) {
         return additionalAbilities.containsKey(name);
     }
@@ -745,7 +749,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return ImmutableList.of();
         }
     }
-    
+
     public void setAdditionalAbilityList(final String name, final List<AbilitySub> list) {
         if (list == null || list.isEmpty()) {
             additionalAbilityLists.remove(name);
@@ -1086,7 +1090,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         // Restrictions coming from target
         return entity.canBeTargetedBy(this);
     }
-    
+
     // is this a wrapping ability (used by trigger abilities)
     public boolean isWrapper() {
         return false;
@@ -1340,20 +1344,20 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     /**
      * returns true if another target can be added
-     * @return 
+     * @return
      */
     public boolean canAddMoreTarget() {
         if (!this.usesTargeting()) {
             return false;
         }
-        
+
         return getTargets().getNumTargeted() < getTargetRestrictions().getMaxTargets(hostCard, this);
     }
-    
+
     public boolean isZeroTargets() {
         return getTargetRestrictions().getMinTargets(hostCard, this) == 0 && getTargets().getNumTargeted() == 0;
     }
-    
+
     public boolean isTargetNumberValid() {
         if (!this.usesTargeting()) {
             return getTargets().isEmpty();
@@ -1742,7 +1746,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         for (AbilitySub sa : additionalAbilities.values()) {
             sa.changeText();
         }
-        
+
         for (List<AbilitySub> list : additionalAbilityLists.values()) {
             for (AbilitySub sa : list) {
                 sa.changeText();
@@ -1852,12 +1856,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
         return score;
     }
-    
+
     public CardDamageMap getDamageMap() {
         if (damageMap != null) {
             return damageMap;
         } else if (getParent() != null) {
-            return getParent().getDamageMap();            
+            return getParent().getDamageMap();
         }
         return null;
     }
@@ -1866,7 +1870,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (preventMap != null) {
             return preventMap;
         } else if (getParent() != null) {
-            return getParent().getPreventMap();            
+            return getParent().getPreventMap();
         }
         return null;
     }
@@ -1876,5 +1880,69 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setPreventMap(final CardDamageMap map) {
         preventMap = map;
+    }
+
+    public final <T> boolean isRemembered(T o) {
+        if (rememberedObjects.contains(o)) {
+            return true;
+        }
+        return AbilityUtils.isRemembered(getParent(), getHostCard(), o);
+    }
+
+    public final boolean hasRemembered() {
+        if (!rememberedObjects.isEmpty()) {
+            return true;
+        }
+        return AbilityUtils.hasRemembered(getParent(), getHostCard());
+    }
+
+    public final Iterable<Object> getRemembered() {
+        return Iterables.concat(rememberedObjects, AbilityUtils.getRemembered(getParent(), getHostCard()));
+    }
+
+    public final int getRememberedCount() {
+        return rememberedObjects.size() + AbilityUtils.getRememberedCount(getParent(), getHostCard());
+    }
+
+    public final <T> void addRemembered(final T o) {
+        if (rememberedObjects.add(o)) {
+            //view.updateRemembered(this);
+        }
+    }
+
+    public final <T> void addRemembered(final Iterable<T> objects) {
+        boolean changed = false;
+        for (T o : objects) {
+            if (rememberedObjects.add(o)) {
+                changed = true;
+            }
+        }
+        if (changed) {
+            //view.updateRemembered(this);
+        }
+    }
+
+    public final <T> void removeRemembered(final T o) {
+        if (rememberedObjects.remove(o)) {
+            //view.updateRemembered(this);
+        }
+    }
+
+    public final <T> void removeRemembered(final Iterable<T> list) {
+        boolean changed = false;
+        for (T o : list) {
+            if (rememberedObjects.remove(o)) {
+                changed = true;
+            }
+        }
+        if (changed) {
+            //view.updateRemembered(this);
+        }
+    }
+
+    public final void clearRemembered() {
+        if (rememberedObjects.isEmpty()) { return; }
+        rememberedObjects.clear();
+        //view.updateRemembered(this);
     }
 }

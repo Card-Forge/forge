@@ -788,12 +788,12 @@ public class CardFactoryUtil {
         }
 
         if (l[0].startsWith("RememberedSize")) {
-            return doXMath(c.getRememberedCount(), m, c);
+            return doXMath(AbilityUtils.getRememberedCount(null, c), m, c);
         }
 
         if (l[0].startsWith("RememberedNumber")) {
             int num = 0;
-            for (final Object o : c.getRemembered()) {
+            for (final Object o : AbilityUtils.getRemembered(null, c)) {
                 if (o instanceof Integer) {
                     num += (Integer) o;
                 }
@@ -1165,9 +1165,6 @@ public class CardFactoryUtil {
             Card ce;
             if (sq[0].contains("Equipped") && c.isEquipping()) {
                 ce = c.getEquipping();
-            }
-            else if (sq[0].contains("Remembered")) {
-                ce = (Card) c.getFirstRemembered();
             }
             else {
                 ce = c;

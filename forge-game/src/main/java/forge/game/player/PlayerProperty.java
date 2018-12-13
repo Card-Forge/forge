@@ -192,11 +192,11 @@ public class PlayerProperty {
                 }
             }
         } else if (property.equals("IsRemembered")) {
-            if (!source.isRemembered(player)) {
+            if (!AbilityUtils.isRemembered(spellAbility, source, player)) {
                 return false;
             }
         } else if (property.equals("IsNotRemembered")) {
-            if (source.isRemembered(player)) {
+            if (AbilityUtils.isRemembered(spellAbility, source, player)) {
                 return false;
             }
         } else if (property.equals("EnchantedBy")) {
