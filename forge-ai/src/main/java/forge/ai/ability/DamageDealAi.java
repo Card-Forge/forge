@@ -1070,6 +1070,14 @@ public class DamageDealAi extends DamageAiBase {
                                     continue;
                                 } else if (tgtSa.canTgtPlaneswalker() && !tgtAb.canTgtPlaneswalker()) {
                                     continue;
+                                } else if ((tgtSa.getSAValidTargeting() != null && tgtSa.getSAValidTargeting().contains("."))
+                                        || (tgtAb.getSAValidTargeting() != null && tgtAb.getSAValidTargeting().contains("."))) {
+                                    if (!tgtAb.getSAValidTargeting().contains(tgtSa.getSAValidTargeting())) {
+                                        // if the targeting has additional conditions, make sure that the chained spell
+                                        // contains the same condition specifications (or at least these specs are a part
+                                        // of what SA can target, hopefully)
+                                        continue;
+                                    }
                                 }
                                 // FIXME: should it also check restrictions for targeting players?
                                 ManaCost costSa = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : ManaCost.NO_COST;
