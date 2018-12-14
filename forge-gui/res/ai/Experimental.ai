@@ -222,10 +222,10 @@ SURVEIL_NUM_CARDS_IN_LIBRARY_TO_BAIL=8
 SURVEIL_LIFEPERC_AFTER_PAYING_LIFE=50
 
 # Attempt to predict the number of potential blockers with various forms of evasion when
-# deciding to do an all-in assault attack (Experimental!)
+# deciding to do an all-in assault attack
 COMBAT_ASSAULT_ATTACK_EVASION_PREDICTION=true
 # Attempt to predict the number of potential blockers with various forms of evasion when
-# deciding to do an attrition race attack (Experimental!)
+# deciding to do an attrition race attack
 COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION=true
 
 # AILogic$ PayEnergyConservatively (used for Britsling Hydra and Longtusk Cub) will only
@@ -281,4 +281,13 @@ MOJHOSTO_CHANCE_TO_USE_JHOIRA_COPY_INSTANT=20
 # -- features is over. These toggles will be removed later, or may be reintroduced under a --
 # -- different name if necessary --
 
-# <-- there are no experimental options here at the moment -->
+# The chance that the AI will try to hold on to a direct damage spell with X in its cost (e.g. Blaze, Fireball, etc.)
+# so that it doesn't cast it too early in the game against an early game target. Note that when in danger or when the
+# AI has a chance to finish the opponent off with such a spell, it will not hold back the spells.
+HOLD_X_DAMAGE_SPELLS_FOR_MORE_DAMAGE_CHANCE=100
+# This threshold defines the minimum amount of damage *or* the minimum number of the AI's turn in order to play a
+# direct damage spell with X without holding it back. For example, if set to 5, the AI will prefer to hold the spell
+# back (unless lethal/in danger) unless it can deal 5 or more damage with it or unless it's the AI's 5th turn or later.
+HOLD_X_DAMAGE_SPELLS_THRESHOLD=5
+
+# <-- there are no other experimental options here at the moment -->

@@ -97,8 +97,23 @@ public class DamageDealAi extends DamageAiBase {
 
         if (damage.equals("X")) {
             if (sa.getSVar(damage).equals("Count$xPaid") || sourceName.equals("Crater's Claws")) {
-                // Set PayX here to maximum value.
                 dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
+
+                // Try not to waste spells like Blaze or Fireball on early targets, try to do more damage with them if possible
+                if (ai.getController().isAI()) {
+                    AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+                    int holdChance = aic.getIntProperty(AiProps.HOLD_X_DAMAGE_SPELLS_FOR_MORE_DAMAGE_CHANCE);
+                    if (MyRandom.percentTrue(holdChance)) {
+                        int threshold = aic.getIntProperty(AiProps.HOLD_X_DAMAGE_SPELLS_THRESHOLD);
+                        boolean inDanger = ComputerUtil.aiLifeInDanger(ai, false, 0);
+                        boolean isLethal = sa.getTargetRestrictions().canTgtPlayer() && dmg >= ai.getWeakestOpponent().getLife() && !ai.getWeakestOpponent().cantLoseForZeroOrLessLife();
+                        if (dmg < threshold && ai.getGame().getPhaseHandler().getTurn() / 2 < threshold && !inDanger && !isLethal) {
+                            return false;
+                        }
+                    }
+                }
+
+                // Set PayX here to maximum value. It will be adjusted later depending on the target.
                 source.setSVar("PayX", Integer.toString(dmg));
             } else if (sa.getSVar(damage).contains("InYourHand") && source.getZone().is(ZoneType.Hand)) {
                 dmg = CardFactoryUtil.xCount(source, sa.getSVar(damage)) - 1; // the card will be spent casting the spell, so actual damage is 1 less

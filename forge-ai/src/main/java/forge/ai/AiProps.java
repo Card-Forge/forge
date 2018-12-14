@@ -127,9 +127,11 @@ public enum AiProps { /** */
     FLASH_USE_BUFF_AURAS_AS_COMBAT_TRICKS("true"),
     FLASH_BUFF_AURA_CHANCE_TO_CAST_EARLY("1"),
     FLASH_BUFF_AURA_CHANCE_CAST_AT_EOT("5"),
-    FLASH_BUFF_AURA_CHANCE_TO_RESPOND_TO_STACK("100"); /** */
+    FLASH_BUFF_AURA_CHANCE_TO_RESPOND_TO_STACK("100"), /** */
     // Experimental features, must be promoted or removed after extensive testing and, ideally, defaulting
-    // <-- There are no experimental options here -->
+    HOLD_X_DAMAGE_SPELLS_FOR_MORE_DAMAGE_CHANCE("0"),
+    HOLD_X_DAMAGE_SPELLS_THRESHOLD("0"); /** */
+    // <-- There are no other experimental options here -->
 
 
     private final String strDefaultVal;
