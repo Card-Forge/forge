@@ -152,9 +152,10 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                             game.updateLastStateForCard(gameCard);
                             if (rememberRemoved) {
                                 for (int i = 0; i < chosenAmount; i++) {
-                                    card.addRemembered(Pair.of(chosenType, i));
+                                    sa.addRemembered(Pair.of(chosenType, i));
                                 }
                             }
+                            //TODO add RememberNumber too?
                             cntToRemove -= chosenAmount;
                         }
                     }
@@ -175,9 +176,10 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                         gameCard.subtractCounter(counterType, cntToRemove);
                         if (rememberRemoved) {
                             for (int i = 0; i < cntToRemove; i++) {
-                                card.addRemembered(Pair.of(counterType, i));
+                                sa.addRemembered(Pair.of(counterType, i));
                             }
                         }
+                        //TODO add RememberNumber too?
                         game.updateLastStateForCard(gameCard);
                     }
                 }
