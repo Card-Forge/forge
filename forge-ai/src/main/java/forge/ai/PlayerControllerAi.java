@@ -1149,7 +1149,18 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public List<OptionalCostValue> chooseOptionalCosts(SpellAbility choosen,
             List<OptionalCostValue> optionalCostValues) {
-        // TODO Auto-generated method stub
-        return null;
+        List<OptionalCostValue> chosen = Lists.newArrayList();
+
+        for (OptionalCostValue opt : optionalCostValues) {
+            if (opt.getType() == OptionalCost.Entwine) {
+                // Test implementation: just always choose Entwine
+                chosen.add(opt);
+            }
+            else {
+                System.out.println("Skipping unported optional cost: " + opt.getType());
+            }
+        }
+
+        return chosen;
     }
 }

@@ -12,6 +12,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
+import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
@@ -104,8 +105,17 @@ public class ComputerUtilAbility {
         final List<SpellAbility> result = Lists.newArrayList();
         for (SpellAbility sa : newAbilities) {
             sa.setActivatingPlayer(player);
+            // TODO: remove this once all optional costs are ported over to chooseOptionalCosts
             result.addAll(GameActionUtil.getOptionalCosts(sa));
+
+            // Optional cost selection through the AI controller
+            List<OptionalCostValue> list = GameActionUtil.getOptionalCostValues(sa);
+            if (!list.isEmpty()) {
+                list = player.getController().chooseOptionalCosts(sa, list);
+            }
+            result.add(GameActionUtil.addOptionalCosts(sa, list));
         }
+
         return result;
     }
 
