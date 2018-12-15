@@ -26,10 +26,7 @@ import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
-import forge.game.CardTraitPredicates;
-import forge.game.Game;
-import forge.game.GameObject;
-import forge.game.GameType;
+import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -1453,6 +1450,9 @@ public class ComputerUtil {
                 }
                 if (!ComputerUtilCost.canPayCost(sa, ai)) {
                     continue;
+                }
+                if (!GameActionUtil.getOptionalCostValues(sa).isEmpty()) {
+                    continue; // we can't rely on the AI being always willing and able to pay the optional cost to deal extra damage
                 }
                 damage = dmg;
             }
