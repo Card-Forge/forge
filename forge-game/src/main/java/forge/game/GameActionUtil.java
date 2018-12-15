@@ -381,7 +381,7 @@ public final class GameActionUtil {
                 }
             } else if (keyword.startsWith("MayFlashCost")) {
                 // this is there for the AI
-                if ( source.getGame().getPhaseHandler().isPlayerTurn(source.getController())) {
+                if (source.getGame().getPhaseHandler().isPlayerTurn(source.getController())) {
                     continue; // don't cast it with additional flash cost during AI's own turn, commonly a waste of mana
                 }
                 final String[] k = keyword.split(":");
@@ -426,7 +426,7 @@ public final class GameActionUtil {
                         newSA.setBasicSpell(false);
                         final Cost cost1 = new Cost(sCosts[0], false);
                         final Cost cost2 = new Cost(sCosts[1], false);
-                        newSA.setDescription(TextUtil.addSuffix(newSA.getDescription(), TextUtil.concatWithSpace(" (Both kickers:", cost1.toSimpleString(),"and",TextUtil.addSuffix(cost2.toSimpleString(),")"))));
+                        newSA.setDescription(TextUtil.addSuffix(newSA.getDescription(), TextUtil.concatWithSpace(" (Both kickers:", cost1.toSimpleString(), "and", TextUtil.addSuffix(cost2.toSimpleString(), ")"))));
                         newSA.setPayCosts(cost2.add(cost1.add(newSA.getPayCosts())));
                         newSA.addOptionalCost(OptionalCost.Kicker1);
                         newSA.addOptionalCost(OptionalCost.Kicker2);
@@ -457,6 +457,22 @@ public final class GameActionUtil {
                 }
             }
         }
+
+        if (source.hasKeyword(Keyword.JUMP_START)) {
+            for (int i = 0; i < abilities.size(); i++) {
+                final SpellAbility newSA = abilities.get(i).copy();
+                newSA.setBasicSpell(false);
+                final String jumpstartCost = "Discard<1/Card>";
+                newSA.setPayCosts(new Cost(jumpstartCost, false).add(newSA.getPayCosts()));
+                newSA.getRestrictions().setZone(ZoneType.Graveyard);
+                newSA.setDescription(newSA.getDescription() + " (Jump-start)");
+                if (newSA.canPlay()) {
+                    abilities.add(i, newSA);
+                    i++;
+                }
+            }
+        }
+
         return abilities;
     }
 
