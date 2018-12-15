@@ -1059,8 +1059,11 @@ public class DamageDealAi extends DamageAiBase {
             cards.addAll(ai.getCardsIn(ZoneType.Battlefield));
             cards.addAll(ai.getCardsActivableInExternalZones(true));
             for (Card c : cards) {
-                for (SpellAbility ab : c.getAllPossibleAbilities(ai, true)) {
+                for (SpellAbility ab : c.getSpellAbilities()) {
                     if (ab.equals(sa) || ab.getSubAbility() != null) { // decisions for complex SAs with subs are not supported yet
+                        continue;
+                    }
+                    if (!ab.canPlay()) {
                         continue;
                     }
                     // currently works only with cards that don't have additional costs (only mana is supported)

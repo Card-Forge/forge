@@ -120,13 +120,16 @@ public class EffectAi extends SpellAbilityAi {
                         if (!(c.isInstant() || c.isSorcery()) || c.equals(sa.getHostCard())) {
                             return false;
                         }
-                        for (SpellAbility ab : c.getAllPossibleAbilities(ai, true)) {
+                        for (SpellAbility ab : c.getSpellAbilities()) {
                             if (ComputerUtilAbility.getAbilitySourceName(sa).equals(ComputerUtilAbility.getAbilitySourceName(ab))
                                     || ab.hasParam("AINoRecursiveCheck")) {
                                 // prevent infinitely recursing mana ritual and other abilities with reentry
                                 continue;
                             } else if ("SpellCopy".equals(ab.getParam("AILogic")) && ab.getApi() == ApiType.Effect) {
                                 // don't copy another copy spell, too complex for the AI
+                                continue;
+                            }
+                            if (!ab.canPlay()) {
                                 continue;
                             }
                             AiPlayDecision decision = ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(ab);
@@ -162,8 +165,26 @@ public class EffectAi extends SpellAbilityAi {
             	final int count = CardLists.count(ai.getCardsIn(ZoneType.Hand), new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        return (c.isInstant() || c.isSorcery()) && !c.hasKeyword(Keyword.REBOUND)
-                                && ComputerUtil.hasReasonToPlayCardThisTurn(ai, c);
+                        if (!(c.isInstant() || c.isSorcery()) || c.hasKeyword(Keyword.REBOUND)) {
+                            return false;
+                        }
+                        for (SpellAbility ab : c.getSpellAbilities()) {
+                            if (ComputerUtilAbility.getAbilitySourceName(sa).equals(ComputerUtilAbility.getAbilitySourceName(ab))
+                                    || ab.hasParam("AINoRecursiveCheck")) {
+                                // prevent infinitely recursing mana ritual and other abilities with reentry
+                                continue;
+                            }
+                            if (!ab.canPlay()) {
+                                continue;
+                            }
+                            AiPlayDecision decision = ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(ab);
+                            if (decision == AiPlayDecision.WillPlay || decision == AiPlayDecision.WaitForMain2) {
+                                if (ComputerUtilMana.canPayManaCost(ab, ai, 0)) {
+                                    return true;
+                                }
+                            }
+                        }
+                        return false;
                     }
                 });
 
