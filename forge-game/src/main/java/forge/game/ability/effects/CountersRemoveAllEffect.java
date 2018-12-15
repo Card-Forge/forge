@@ -78,7 +78,7 @@ public class CountersRemoveAllEffect extends SpellAbilityEffect {
             }
         }
         if (sa.hasParam("RememberAmount")) {
-            sa.getHostCard().setChosenNumber(numberRemoved);
+            sa.addRemembered(Integer.valueOf(numberRemoved));
         }
     }
 }
