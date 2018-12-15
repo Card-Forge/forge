@@ -466,6 +466,7 @@ public final class GameActionUtil {
                 newSA.setPayCosts(new Cost(jumpstartCost, false).add(newSA.getPayCosts()));
                 newSA.getRestrictions().setZone(ZoneType.Graveyard);
                 newSA.setDescription(newSA.getDescription() + " (Jump-start)");
+                newSA.addOptionalCost(OptionalCost.Jumpstart);
                 if (newSA.canPlay()) {
                     abilities.add(i, newSA);
                     i++;
