@@ -1544,6 +1544,22 @@ public class AbilityUtils {
                     return CardFactoryUtil.doXMath(calculateAmount(c, sq[2], ctb), expr, c);
                 }
             }
+
+            // Count Remember in case it is Remembered in the Card
+            if (l[0].startsWith("RememberedSize")) {
+                return CardFactoryUtil.doXMath(AbilityUtils.getRememberedCount(ctb, c), expr, c);
+            }
+
+            if (l[0].startsWith("RememberedNumber")) {
+                int num = 0;
+                for (final Object o : AbilityUtils.getRemembered(ctb, c)) {
+                    if (o instanceof Integer) {
+                        num += (Integer) o;
+                    }
+                }
+                return CardFactoryUtil.doXMath(num, expr, c);
+            }
+
             if (ctb instanceof SpellAbility) {
                 final SpellAbility sa = (SpellAbility) ctb;
 

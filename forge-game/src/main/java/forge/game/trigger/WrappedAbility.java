@@ -440,6 +440,51 @@ public class WrappedAbility extends Ability {
         sa.resetTargets();
     }
 
+    @Override
+    public <T> boolean isRemembered(T o) {
+        return sa.isRemembered(o);
+    }
+
+    @Override
+    public boolean hasRemembered() {
+        return sa.hasRemembered();
+    }
+
+    @Override
+    public Iterable<Object> getRemembered() {
+        return sa.getRemembered();
+    }
+
+    @Override
+    public int getRememberedCount() {
+        return sa.getRememberedCount();
+    }
+
+    @Override
+    public <T> void addRemembered(final T o) {
+        sa.addRemembered(o);
+    }
+
+    @Override
+    public <T> void addRemembered(final Iterable<T> objects) {
+        sa.addRemembered(objects);
+    }
+
+    @Override
+    public <T> void removeRemembered(final T o) {
+        sa.removeRemembered(o);
+    }
+
+    @Override
+    public <T> void removeRemembered(final Iterable<T> list) {
+        sa.removeRemembered(list);
+    }
+
+    @Override
+    public void clearRemembered() {
+        sa.clearRemembered();
+    }
+
     // //////////////////////////////////////
     // THIS ONE IS ALL THAT MATTERS
     // //////////////////////////////////////

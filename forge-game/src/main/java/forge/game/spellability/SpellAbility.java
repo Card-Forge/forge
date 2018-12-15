@@ -142,7 +142,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private HashMap<String, Object> replacingObjects = Maps.newHashMap();
 
-    private final Set<Object> rememberedObjects = Sets.newLinkedHashSet();
+    private Set<Object> rememberedObjects = Sets.newLinkedHashSet();
 
     private List<AbilitySub> chosenList = null;
     private CardCollection tappedForConvoke = new CardCollection();
@@ -880,6 +880,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             clone.mapParams = Maps.newHashMap(this.mapParams);
 
             clone.triggeringObjects = Maps.newHashMap(this.triggeringObjects);
+            clone.rememberedObjects = Sets.newLinkedHashSet(this.rememberedObjects);
 
             if (getPayCosts() != null) {
                 clone.setPayCosts(getPayCosts().copy());
@@ -1882,35 +1883,35 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         preventMap = map;
     }
 
-    public final <T> boolean isRemembered(T o) {
+    public <T> boolean isRemembered(T o) {
         if (rememberedObjects.contains(o)) {
             return true;
         }
         return AbilityUtils.isRemembered(getParent(), getHostCard(), o);
     }
 
-    public final boolean hasRemembered() {
+    public boolean hasRemembered() {
         if (!rememberedObjects.isEmpty()) {
             return true;
         }
         return AbilityUtils.hasRemembered(getParent(), getHostCard());
     }
 
-    public final Iterable<Object> getRemembered() {
+    public Iterable<Object> getRemembered() {
         return Iterables.concat(rememberedObjects, AbilityUtils.getRemembered(getParent(), getHostCard()));
     }
 
-    public final int getRememberedCount() {
+    public int getRememberedCount() {
         return rememberedObjects.size() + AbilityUtils.getRememberedCount(getParent(), getHostCard());
     }
 
-    public final <T> void addRemembered(final T o) {
+    public <T> void addRemembered(final T o) {
         if (rememberedObjects.add(o)) {
             //view.updateRemembered(this);
         }
     }
 
-    public final <T> void addRemembered(final Iterable<T> objects) {
+    public <T> void addRemembered(final Iterable<T> objects) {
         boolean changed = false;
         for (T o : objects) {
             if (rememberedObjects.add(o)) {
@@ -1922,13 +1923,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
     }
 
-    public final <T> void removeRemembered(final T o) {
+    public <T> void removeRemembered(final T o) {
         if (rememberedObjects.remove(o)) {
             //view.updateRemembered(this);
         }
     }
 
-    public final <T> void removeRemembered(final Iterable<T> list) {
+    public <T> void removeRemembered(final Iterable<T> list) {
         boolean changed = false;
         for (T o : list) {
             if (rememberedObjects.remove(o)) {
@@ -1940,7 +1941,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
     }
 
-    public final void clearRemembered() {
+    public void clearRemembered() {
         if (rememberedObjects.isEmpty()) { return; }
         rememberedObjects.clear();
         //view.updateRemembered(this);
