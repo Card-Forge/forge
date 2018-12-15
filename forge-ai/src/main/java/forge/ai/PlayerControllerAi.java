@@ -15,10 +15,7 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameObject;
-import forge.game.GameType;
+import forge.game.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
@@ -1147,20 +1144,25 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public List<OptionalCostValue> chooseOptionalCosts(SpellAbility choosen,
+    public List<OptionalCostValue> chooseOptionalCosts(SpellAbility chosen,
             List<OptionalCostValue> optionalCostValues) {
-        List<OptionalCostValue> chosen = Lists.newArrayList();
+        List<OptionalCostValue> chosenOptCosts = Lists.newArrayList();
+        Cost cost = chosen.getPayCosts();
 
         for (OptionalCostValue opt : optionalCostValues) {
             if (opt.getType() == OptionalCost.Entwine) {
                 // Test implementation: just always choose Entwine
-                chosen.add(opt);
+                Cost fullCost = opt.getCost().copy().add(cost);
+                SpellAbility fullCostSa = chosen.copyWithDefinedCost(fullCost);
+                if (ComputerUtilCost.canPayCost(fullCostSa, player)) {
+                    chosenOptCosts.add(opt);
+                }
             }
             else {
                 System.out.println("Skipping unported optional cost: " + opt.getType());
             }
         }
 
-        return chosen;
+        return chosenOptCosts;
     }
 }

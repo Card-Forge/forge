@@ -245,8 +245,8 @@ public abstract class SpellAbilityAi {
      * @return a boolean.
      */
     protected static boolean isSorcerySpeed(final SpellAbility sa) {
-        return (sa.isSpell() && sa.getHostCard().isSorcery())
-            || (sa.isAbility() && sa.getRestrictions().isSorcerySpeed())
+        return (sa.getRootAbility().isSpell() && sa.getHostCard().isSorcery())
+            || (sa.getRootAbility().isAbility() && sa.getRestrictions().isSorcerySpeed())
             || (sa.getRestrictions().isPwAbility() && !sa.getHostCard().hasKeyword("CARDNAME's loyalty abilities can be activated at instant speed."));
     }
 

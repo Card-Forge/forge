@@ -112,8 +112,10 @@ public class ComputerUtilAbility {
             List<OptionalCostValue> list = GameActionUtil.getOptionalCostValues(sa);
             if (!list.isEmpty()) {
                 list = player.getController().chooseOptionalCosts(sa, list);
+                if (!list.isEmpty()) {
+                    result.add(GameActionUtil.addOptionalCosts(sa, list));
+                }
             }
-            result.add(GameActionUtil.addOptionalCosts(sa, list));
         }
 
         return result;
