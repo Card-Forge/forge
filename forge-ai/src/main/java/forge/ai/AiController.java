@@ -850,7 +850,7 @@ public class AiController {
         int neededMana = 0;
         boolean dangerousRecurringCost = false;
 
-        Cost costWithBuyback = sa.getPayCosts().copy();
+        Cost costWithBuyback = sa.getPayCosts() != null ? sa.getPayCosts().copy() : Cost.Zero;
         for (OptionalCostValue opt : GameActionUtil.getOptionalCostValues(sa)) {
             if (opt.getType() == OptionalCost.Buyback) {
                 costWithBuyback.add(opt.getCost());
