@@ -486,20 +486,16 @@ public class AbilityUtils {
         if (calcX[0].startsWith("Remembered")) {
             // Add whole Remembered list to handlePaid
             final CardCollection list = new CardCollection();
-            Card newCard = card;
-            if (!card.hasRemembered()) {
-                newCard = game.getCardState(card);
-            }
 
             if (calcX[0].endsWith("LKI")) { // last known information
-                for (final Object o : newCard.getRemembered()) {
+                for (final Object o : getRemembered(ability, card)) {
                     if (o instanceof Card) {
                         list.add((Card) o);
                     }
                 }
             }
             else {
-                for (final Object o : newCard.getRemembered()) {
+                for (final Object o : getRemembered(ability, card)) {
                     if (o instanceof Card) {
                         list.add(game.getCardState((Card) o));
                     }
