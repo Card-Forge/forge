@@ -1147,19 +1147,20 @@ public class PlayerControllerAi extends PlayerController {
     public List<OptionalCostValue> chooseOptionalCosts(SpellAbility chosen,
             List<OptionalCostValue> optionalCostValues) {
         List<OptionalCostValue> chosenOptCosts = Lists.newArrayList();
-        Cost cost = chosen.getPayCosts();
+        Cost costSoFar = chosen.getPayCosts() != null ? chosen.getPayCosts().copy() : Cost.Zero;
 
         for (OptionalCostValue opt : optionalCostValues) {
             if (opt.getType() == OptionalCost.Entwine) {
-                // Test implementation: just always choose Entwine
-                Cost fullCost = opt.getCost().copy().add(cost);
-                SpellAbility fullCostSa = chosen.copyWithDefinedCost(fullCost);
-                if (ComputerUtilCost.canPayCost(fullCostSa, player)) {
-                    chosenOptCosts.add(opt);
-                }
+                // Specific code for optional costs should be made conditional here
             }
-            else {
-                System.out.println("Skipping unported optional cost: " + opt.getType());
+
+            // Generic code: for now, chooses the optional cost if it can be paid (and later - played)
+            Cost fullCost = opt.getCost().copy().add(costSoFar);
+            SpellAbility fullCostSa = chosen.copyWithDefinedCost(fullCost);
+            if (ComputerUtilCost.canPayCost(fullCostSa, player)) {
+                chosenOptCosts.add(opt);
+                costSoFar.add(opt.getCost());
+                System.out.println("Chosen: " + opt + " for total cost of " + costSoFar.toSimpleString());
             }
         }
 

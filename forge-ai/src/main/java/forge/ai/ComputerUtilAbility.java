@@ -105,16 +105,21 @@ public class ComputerUtilAbility {
         final List<SpellAbility> result = Lists.newArrayList();
         for (SpellAbility sa : newAbilities) {
             sa.setActivatingPlayer(player);
-            // TODO: remove this once all optional costs are ported over to chooseOptionalCosts
-            result.addAll(GameActionUtil.getOptionalCosts(sa));
 
             // Optional cost selection through the AI controller
+            boolean choseOptCost = false;
             List<OptionalCostValue> list = GameActionUtil.getOptionalCostValues(sa);
             if (!list.isEmpty()) {
                 list = player.getController().chooseOptionalCosts(sa, list);
                 if (!list.isEmpty()) {
+                    choseOptCost = true;
                     result.add(GameActionUtil.addOptionalCosts(sa, list));
                 }
+            }
+
+            // Add only one ability: either the one with preferred optional costs, or the original one if there are none
+            if (!choseOptCost) {
+                result.add(sa);
             }
         }
 
