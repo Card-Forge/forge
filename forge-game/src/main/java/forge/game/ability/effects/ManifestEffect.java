@@ -54,7 +54,7 @@ public class ManifestEffect extends SpellAbilityEffect {
                     }
                     Card rem = c.manifest(p, sa);
                     if (sa.hasParam("RememberManifested") && rem != null) {
-                        source.addRemembered(rem);
+                        sa.addRemembered(rem);
                     }
                 }
             }
