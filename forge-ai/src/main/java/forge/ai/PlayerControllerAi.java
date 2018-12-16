@@ -15,7 +15,10 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
-import forge.game.*;
+import forge.game.Game;
+import forge.game.GameEntity;
+import forge.game.GameObject;
+import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
@@ -1150,17 +1153,12 @@ public class PlayerControllerAi extends PlayerController {
         Cost costSoFar = chosen.getPayCosts() != null ? chosen.getPayCosts().copy() : Cost.Zero;
 
         for (OptionalCostValue opt : optionalCostValues) {
-            if (opt.getType() == OptionalCost.Entwine) {
-                // Specific code for optional costs should be made conditional here
-            }
-
-            // Generic code: for now, chooses the optional cost if it can be paid (and later - played)
+            // Choose the optional cost if it can be paid (to be improved later, check for playability and other conditions perhaps)
             Cost fullCost = opt.getCost().copy().add(costSoFar);
             SpellAbility fullCostSa = chosen.copyWithDefinedCost(fullCost);
             if (ComputerUtilCost.canPayCost(fullCostSa, player)) {
                 chosenOptCosts.add(opt);
                 costSoFar.add(opt.getCost());
-                System.out.println("Chosen: " + opt + " for total cost of " + costSoFar.toSimpleString());
             }
         }
 
