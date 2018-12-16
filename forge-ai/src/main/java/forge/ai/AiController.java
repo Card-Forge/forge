@@ -849,19 +849,21 @@ public class AiController {
 
         int neededMana = 0;
         boolean dangerousRecurringCost = false;
-        for (SpellAbility sa2 : GameActionUtil.getOptionalCosts(sa)) {
-            if (sa2.isOptionalCostPaid(OptionalCost.Buyback)) {
-                Cost sac = sa2.getPayCosts();
-                CostAdjustment.adjust(sac, sa2);
-                if (sac.getCostMana() != null) {
-                    neededMana = sac.getCostMana().getMana().getCMC();
-                }
-                if (sac.hasSpecificCostType(CostPayLife.class)
-                        || sac.hasSpecificCostType(CostDiscard.class)
-                        || sac.hasSpecificCostType(CostSacrifice.class)) {
-                    dangerousRecurringCost = true;
-                }
+
+        Cost costWithBuyback = sa.getPayCosts() != null ? sa.getPayCosts().copy() : Cost.Zero;
+        for (OptionalCostValue opt : GameActionUtil.getOptionalCostValues(sa)) {
+            if (opt.getType() == OptionalCost.Buyback) {
+                costWithBuyback.add(opt.getCost());
             }
+        }
+        CostAdjustment.adjust(costWithBuyback, sa);
+        if (costWithBuyback.getCostMana() != null) {
+            neededMana = costWithBuyback.getCostMana().getMana().getCMC();
+        }
+        if (costWithBuyback.hasSpecificCostType(CostPayLife.class)
+                || costWithBuyback.hasSpecificCostType(CostDiscard.class)
+                || costWithBuyback.hasSpecificCostType(CostSacrifice.class)) {
+            dangerousRecurringCost = true;
         }
 
         // won't be able to afford buyback any time soon
@@ -1568,7 +1570,7 @@ public class AiController {
             sa.setActivatingPlayer(player);
             sa.setLastStateBattlefield(game.getLastStateBattlefield());
             sa.setLastStateGraveyard(game.getLastStateGraveyard());
-            
+
             AiPlayDecision opinion = canPlayAndPayFor(sa);
             // PhaseHandler ph = game.getPhaseHandler();
             // System.out.printf("Ai thinks '%s' of %s -> %s @ %s %s >>> \n", opinion, sa.getHostCard(), sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());

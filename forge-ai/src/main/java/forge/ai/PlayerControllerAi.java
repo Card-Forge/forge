@@ -1147,9 +1147,21 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public List<OptionalCostValue> chooseOptionalCosts(SpellAbility choosen,
+    public List<OptionalCostValue> chooseOptionalCosts(SpellAbility chosen,
             List<OptionalCostValue> optionalCostValues) {
-        // TODO Auto-generated method stub
-        return null;
+        List<OptionalCostValue> chosenOptCosts = Lists.newArrayList();
+        Cost costSoFar = chosen.getPayCosts() != null ? chosen.getPayCosts().copy() : Cost.Zero;
+
+        for (OptionalCostValue opt : optionalCostValues) {
+            // Choose the optional cost if it can be paid (to be improved later, check for playability and other conditions perhaps)
+            Cost fullCost = opt.getCost().copy().add(costSoFar);
+            SpellAbility fullCostSa = chosen.copyWithDefinedCost(fullCost);
+            if (ComputerUtilCost.canPayCost(fullCostSa, player)) {
+                chosenOptCosts.add(opt);
+                costSoFar.add(opt.getCost());
+            }
+        }
+
+        return chosenOptCosts;
     }
 }
