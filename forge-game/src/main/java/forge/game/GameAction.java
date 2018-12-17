@@ -842,9 +842,7 @@ public class GameAction {
                     affectedCards.add(c);
                 }
             }
-            for (Object[] staticCheck : c.getStaticCommandList()) {
-                c.getStaticCommandList().remove(staticCheck);
-            }
+            c.getStaticCommandList().removeAll(toRemove);
         }
         // Exclude cards in hidden zones from update
         Iterator<Card> it = affectedCards.iterator();
