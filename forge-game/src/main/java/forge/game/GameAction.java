@@ -213,14 +213,18 @@ public class GameAction {
                     c.updateStateForView();
                 }
 
+                if (fromBattlefield && c.getCurrentStateName() != CardStateName.Original) {
+                    // when a card leaves the battlefield, ensure it's in its original state
+                    // (we need to do this on the object before copying it, or it won't work correctly e.g.
+                    // on Transformed objects)
+                    c.setState(CardStateName.Original, false);
+                }
+
                 copied = CardFactory.copyCard(c, false);
 
                 copied.setUnearthed(c.isUnearthed());
                 copied.setTapped(false);
-                if (fromBattlefield) {
-                    // when a card leaves the battlefield, ensure it's in its original state
-                    copied.setState(CardStateName.Original, false);
-                }
+
                 for (final Trigger trigger : copied.getTriggers()) {
                     trigger.setHostCard(copied);
                 }
@@ -838,9 +842,7 @@ public class GameAction {
                     affectedCards.add(c);
                 }
             }
-            for (Object[] staticCheck : c.getStaticCommandList()) {
-                c.getStaticCommandList().remove(staticCheck);
-            }
+            c.getStaticCommandList().removeAll(toRemove);
         }
         // Exclude cards in hidden zones from update
         Iterator<Card> it = affectedCards.iterator();
