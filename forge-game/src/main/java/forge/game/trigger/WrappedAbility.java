@@ -176,6 +176,11 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
+    public SpellAbility getSATargetingCard() {
+        return sa.getSATargetingCard();
+    }
+
+    @Override
     public Card getHostCard() {
         return sa.getHostCard();
     }
