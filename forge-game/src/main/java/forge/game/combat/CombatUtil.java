@@ -320,6 +320,10 @@ public class CombatUtil {
         c.getDamageHistory().clearNotAttackedSinceLastUpkeepOf();
         c.getController().setAttackedWithCreatureThisTurn(true);
         c.getController().incrementAttackersDeclaredThisTurn();
+
+        if (combat.getDefenderPlayerByAttacker(c) != null) {
+            c.getController().addAttackedOpponentThisTurn(combat.getDefenderPlayerByAttacker(c));
+        }
     } // checkDeclareAttackers
 
     /**
