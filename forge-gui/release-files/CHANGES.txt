@@ -1,2 +1,8 @@
+- Game Night -
+Support was added for the Game Night box set, including all 10 exclusive cards.
+
+- AI improvements -
+More AI improvements were implemented, hopefully making the game a little more interesting and challenging to play.
+
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.
