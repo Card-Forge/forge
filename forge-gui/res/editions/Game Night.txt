@@ -75,3 +75,7 @@ Type=Other
 66 L Mountain 
 67 L Forest 
 68 L Forest 
+
+[tokens]
+c_1_1_thopter_flying
+w_2_2_knight_vigilance
