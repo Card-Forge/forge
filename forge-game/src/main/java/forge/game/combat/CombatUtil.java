@@ -321,7 +321,7 @@ public class CombatUtil {
         c.getController().setAttackedWithCreatureThisTurn(true);
         c.getController().incrementAttackersDeclaredThisTurn();
 
-        if (combat.getDefenderPlayerByAttacker(c) != null) {
+        if (combat.getDefenderByAttacker(c) != null && combat.getDefenderByAttacker(c) instanceof Player) {
             c.getController().addAttackedOpponentThisTurn(combat.getDefenderPlayerByAttacker(c));
         }
     } // checkDeclareAttackers
