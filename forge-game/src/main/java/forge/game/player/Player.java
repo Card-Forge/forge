@@ -127,6 +127,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private boolean activateLoyaltyAbilityThisTurn = false;
     private boolean tappedLandForManaThisTurn = false;
     private int attackersDeclaredThisTurn = 0;
+    private PlayerCollection attackedOpponentsThisTurn = new PlayerCollection();
 
     private final Map<ZoneType, PlayerZone> zones = Maps.newEnumMap(ZoneType.class);
 
@@ -1877,6 +1878,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         attackersDeclaredThisTurn = 0;
     }
 
+    public final PlayerCollection getAttackedOpponentsThisTurn() { return attackedOpponentsThisTurn; }
+    public final void addAttackedOpponentThisTurn(Player p) { attackedOpponentsThisTurn.add(p); }
+    public final void resetAttackedOpponentsThisTurn() { attackedOpponentsThisTurn.clear(); }
+
     public final void altWinBySpellEffect(final String sourceName) {
         if (cantWin()) {
             System.out.println("Tried to win, but currently can't.");
@@ -2425,6 +2430,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetCounterToPermThisTurn();
         clearAssignedDamage();
         resetAttackersDeclaredThisTurn();
+        resetAttackedOpponentsThisTurn();
         setRevolt(false);
     }
 

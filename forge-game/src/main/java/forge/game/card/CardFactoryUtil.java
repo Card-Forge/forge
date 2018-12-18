@@ -624,6 +624,10 @@ public class CardFactoryUtil {
             }
             return doXMath(oppDmg, m, source);
         }
+
+        if (value.equals("OpponentsAttackedThisTurn")) {
+            return doXMath(player.getAttackedOpponentsThisTurn().size(), m, source);
+        }
         
         return doXMath(0, m, source);
     }
