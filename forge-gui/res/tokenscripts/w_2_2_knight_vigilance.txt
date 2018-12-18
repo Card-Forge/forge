@@ -1,0 +1,7 @@
+Name:Knight
+ManaCost:no cost
+Types:Creature Knight
+Colors:white
+PT:2/2
+K:Vigilance
+Oracle:Vigilance
