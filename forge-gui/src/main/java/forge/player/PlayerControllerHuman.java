@@ -1432,10 +1432,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public List<AbilitySub> chooseModeForAbility(final SpellAbility sa, final int min, final int num,
             boolean allowRepeat) {
+        boolean trackerFrozen = game.getTracker().isFrozen();
+        if (trackerFrozen) {
+            // The view tracker needs to be unfrozen to update the SpellAbilityViews at this point, or it may crash
+            game.getTracker().unfreeze();
+        }
         final List<AbilitySub> possible = CharmEffect.makePossibleOptions(sa);
         HashMap<SpellAbilityView, AbilitySub> spellViewCache = new HashMap<>();
         for (AbilitySub spellAbility : possible) {
             spellViewCache.put(spellAbility.getView(), spellAbility);
+        }
+        if (trackerFrozen) {
+            game.getTracker().freeze(); // refreeze if the tracker was frozen prior to this update
         }
         final List<SpellAbilityView> choices = new ArrayList<>(spellViewCache.keySet());
         final String modeTitle = TextUtil.concatNoSpace(sa.getActivatingPlayer().toString(), " activated ",
