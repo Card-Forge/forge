@@ -392,16 +392,19 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
         //Fixes null pointer error on switching tabs while quest deck editor is open. TODO: Find source of bug possibly?
         if(sectionMode == null) sectionMode = DeckSection.Main;
 
+        final Map<ColumnDef, ItemTableColumn> colOverridesCatalog = new HashMap<ColumnDef, ItemTableColumn>();
+        ItemTableColumn.addColOverride(ItemManagerConfig.QUEST_EDITOR_POOL, colOverridesCatalog, ColumnDef.NEW, this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet());
+
         //Based on which section the editor is in, display the remaining card pool (or applicable card pool if in
         //Commander) and the current section's cards
         switch(sectionMode){
             case Main :
-                this.getCatalogManager().setup(ItemManagerConfig.CARD_CATALOG);
+                this.getCatalogManager().setup(ItemManagerConfig.QUEST_EDITOR_POOL, colOverridesCatalog);
                 this.getCatalogManager().setPool(getRemainingCardPool());
                 this.getDeckManager().setPool(this.controller.getModel().getMain());
                 break;
             case Sideboard :
-                this.getCatalogManager().setup(ItemManagerConfig.CARD_CATALOG);
+                this.getCatalogManager().setup(ItemManagerConfig.QUEST_EDITOR_POOL, colOverridesCatalog);
                 this.getCatalogManager().setPool(getRemainingCardPool());
                 this.getDeckManager().setPool(getDeck().getOrCreate(DeckSection.Sideboard));
                 break;
