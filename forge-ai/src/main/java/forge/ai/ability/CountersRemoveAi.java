@@ -308,6 +308,15 @@ public class CountersRemoveAi extends SpellAbilityAi {
             }
         }
         if (mandatory) {
+            if (type.equals("P1P1")) {
+                // Try to target creatures with Adapt
+                CardCollection adaptCreats = CardLists.filter(list, CardPredicates.hasKeyword(Keyword.ADAPT));
+                if (!adaptCreats.isEmpty()) {
+                    sa.getTargets().add(ComputerUtilCard.getWorstAI(adaptCreats));
+                    return true;
+                }
+            }
+
             sa.getTargets().add(ComputerUtilCard.getWorstAI(list));
             return true;
         }
