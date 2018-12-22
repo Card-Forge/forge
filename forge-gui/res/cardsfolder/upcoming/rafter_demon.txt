@@ -1,0 +1,8 @@
+Name:Rafter Demon
+ManaCost:2 B R
+Types:Creature Demon
+PT:4/2
+K:Spectacle:3 B R
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+spectacle | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, if its spectacle cost was paid, each opponent discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose
+Oracle:Spectacle {3}{B}{R} (You may cast this spell for its spectacle cost rather than its mana cost if an opponent lost life this turn.)\nWhen Rafter Demon enters the battlefield, if its spectacle cost was paid, each opponent discards a card.

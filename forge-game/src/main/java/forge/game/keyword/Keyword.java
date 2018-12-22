@@ -131,6 +131,7 @@ public enum Keyword {
     SCAVENGE(KeywordWithCost.class, false, "%s, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery."),
     SOULBOND(SimpleKeyword.class, true, "You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them"),
     SOULSHIFT(KeywordWithAmount.class, false, "When this creature dies, you may return target Spirit card with converted mana cost %d or less from your graveyard to your hand."),
+    SPECTACLE(KeywordWithCost.class, true, "You may cast this spell for its spectacle cost rather than its mana cost if an opponent lost life this turn."),
     SPLICE(KeywordWithCostAndType.class, false, "As you cast an %2$s spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell."),
     SPLIT_SECOND(SimpleKeyword.class, true, "As long as this spell is on the stack, players can't cast other spells or activate abilities that aren't mana abilities."),
     STORM(SimpleKeyword.class, false, "When you cast this spell, copy it for each other spell that was cast before it this turn. You may choose new targets for the copies."),

@@ -260,6 +260,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         return game.getPlayers().filter(PlayerPredicates.isOpponentOf(this));
     }
 
+    public final PlayerCollection getRegisteredOpponents() {
+        return game.getRegisteredPlayers().filter(PlayerPredicates.isOpponentOf(this));
+    }
+
     public void updateOpponentsForView() {
         view.updateOpponents(this);
     }
@@ -2037,14 +2041,21 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final int getBloodthirstAmount() {
-        return Aggregates.sum(Iterables.filter(
-                game.getRegisteredPlayers(), PlayerPredicates.isOpponentOf(this)), Accessors.FN_GET_ASSIGNED_DAMAGE);
+        return Aggregates.sum(getRegisteredOpponents(), Accessors.FN_GET_ASSIGNED_DAMAGE);
     }
 
     public final boolean hasSurge() {
         PlayerCollection list = getAllies();
         list.add(this);
         return !CardLists.filterControlledBy(game.getStack().getSpellsCastThisTurn(), list).isEmpty();
+    }
+
+    public final int getOpponentLostLifeThisTurn() {
+        int lost = 0;
+        for (Player opp : getRegisteredOpponents()) {
+            lost += opp.getLifeLostThisTurn();
+        }
+        return lost;
     }
 
     public final boolean hasProwl(final String type) {

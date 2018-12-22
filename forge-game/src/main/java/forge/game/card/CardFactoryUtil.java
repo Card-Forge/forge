@@ -985,11 +985,7 @@ public class CardFactoryUtil {
             return doXMath(cc.getLifeGainedByTeamThisTurn(), m, c);
         }
         if (sq[0].contains("LifeOppsLostThisTurn")) {
-            int lost = 0;
-            for (Player opp : cc.getOpponents()) {
-                lost += opp.getLifeLostThisTurn();
-            }
-            return doXMath(lost, m, c);
+            return doXMath(cc.getOpponentLostLifeThisTurn(), m, c);
         }
         if (sq[0].equals("TotalDamageDoneByThisTurn")) {
             return doXMath(c.getTotalDamageDoneBy(), m, c);
@@ -2047,6 +2043,12 @@ public class CardFactoryUtil {
             final String effect, final boolean optional, final boolean secondary,
             final boolean intrinsic, final String valid, final String zone) {
         SpellAbility repAb = AbilityFactory.getAbility(effect, card);
+        return createETBReplacement(card, layer, repAb, optional, secondary, intrinsic, valid, zone);
+    }
+
+    private static ReplacementEffect createETBReplacement(final Card card, ReplacementLayer layer,
+            final SpellAbility repAb, final boolean optional, final boolean secondary,
+            final boolean intrinsic, final String valid, final String zone) {
         String desc = repAb.getDescription();
         setupETBReplacementAbility(repAb);
         if (!intrinsic) {
@@ -3526,7 +3528,7 @@ public class CardFactoryUtil {
 
             inst.addReplacement(cardre);
         } else if (keyword.equals("Unleash")) {
-            String effect = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Unleash (" + inst.getReminderText() + ")";
+            String effect = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | ETB$ True | CounterNum$ 1 | SpellDescription$ Unleash (" + inst.getReminderText() + ")";
 
             ReplacementEffect cardre = createETBReplacement(card, ReplacementLayer.Other, effect, true, true, intrinsic, "Card.Self", "");
 
@@ -4170,6 +4172,23 @@ public class CardFactoryUtil {
             sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);
             
+        } else if (keyword.startsWith("Spectacle")) {
+            final String[] k = keyword.split(":");
+            final Cost cost = new Cost(k[1], false);
+            final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(cost);
+
+            newSA.setBasicSpell(false);
+            newSA.setSpectacle(true);
+
+            String desc = "Spectacle " + cost.toSimpleString() + " (" + inst.getReminderText()
+                    + ")";
+            newSA.setDescription(desc);
+
+            newSA.setIntrinsic(intrinsic);
+
+            newSA.setTemporary(!intrinsic);
+            inst.addSpellAbility(newSA);
+
         } else if (keyword.equals("Sunburst") && intrinsic) {
             final GameCommand sunburstCIP = new GameCommand() {
                 private static final long serialVersionUID = 1489845860231758299L;

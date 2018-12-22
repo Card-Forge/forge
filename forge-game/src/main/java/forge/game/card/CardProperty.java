@@ -1632,6 +1632,11 @@ public class CardProperty {
                 return false;
             }
             return card.getCastSA().isProwl();
+        } else if (property.startsWith("spectacle")) {
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            return card.getCastSA().isSpectacle();
         } else if (property.equals("HasDevoured")) {
             if (card.getDevouredCards().isEmpty()) {
                 return false;
