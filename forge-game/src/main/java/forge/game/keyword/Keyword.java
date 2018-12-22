@@ -13,6 +13,7 @@ import forge.util.TextUtil;
 public enum Keyword {
     UNDEFINED(SimpleKeyword.class, false, ""),
     ABSORB(KeywordWithAmount.class, false, "If a source would deal damage to this creature, prevent %d of that damage."),
+    ADAPT(KeywordWithCostAndAmount.class, false, "If this creature has no +1/+1 counters on it, put {%2$d:+1/+1 counter} on it."),
     AFFINITY(KeywordWithType.class, false, "This spell costs you {1} less to cast for each %s you control."),
     AFFLICT(KeywordWithAmount.class, false, "Whenever this creature becomes blocked, defending player loses %d life."),
     AFTERLIFE(KeywordWithAmount.class, false, "When this creature dies, create {%1$d:1/1 white and black Spirit creature token} with flying."),

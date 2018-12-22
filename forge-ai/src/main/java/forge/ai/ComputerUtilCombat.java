@@ -1052,11 +1052,15 @@ public class ComputerUtilCombat {
                 if (!ability.hasParam("CounterType") || !ability.getParam("CounterType").equals("P1P1")) {
                     continue;
                 }
-                
+
                 if (ability.hasParam("Monstrosity") && blocker.isMonstrous()) {
-                	continue;
+                    continue;
                 }
-                
+
+                if (ability.hasParam("Adapt") && blocker.getCounters(CounterType.P1P1) > 0) {
+                    continue;
+                }
+
                 if (ComputerUtilCost.canPayCost(ability, blocker.getController())) {
                     int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
                     if (pBonus > 0) {
@@ -1224,11 +1228,15 @@ public class ComputerUtilCombat {
                 if (!ability.hasParam("CounterType") || !ability.getParam("CounterType").equals("P1P1")) {
                     continue;
                 }
-                
+
                 if (ability.hasParam("Monstrosity") && blocker.isMonstrous()) {
-                	continue;
+                    continue;
                 }
-                
+
+                if (ability.hasParam("Adapt") && blocker.getCounters(CounterType.P1P1) > 0) {
+                    continue;
+                }
+
                 if (ComputerUtilCost.canPayCost(ability, blocker.getController())) {
                     int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
                     if (tBonus > 0) {
@@ -1442,11 +1450,15 @@ public class ComputerUtilCombat {
                 if (!ability.hasParam("CounterType") || !ability.getParam("CounterType").equals("P1P1")) {
                     continue;
                 }
-                
+
                 if (ability.hasParam("Monstrosity") && attacker.isMonstrous()) {
-                	continue;
+                    continue;
                 }
-                
+
+                if (ability.hasParam("Adapt") && blocker.getCounters(CounterType.P1P1) > 0) {
+                    continue;
+                }
+
                 if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
                     int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
                     if (pBonus > 0) {
@@ -1675,11 +1687,15 @@ public class ComputerUtilCombat {
                 if (!ability.hasParam("CounterType") || !ability.getParam("CounterType").equals("P1P1")) {
                     continue;
                 }
-                
+
                 if (ability.hasParam("Monstrosity") && attacker.isMonstrous()) {
-                	continue;
+                    continue;
                 }
-                
+
+                if (ability.hasParam("Adapt") && blocker.getCounters(CounterType.P1P1) > 0) {
+                    continue;
+                }
+
                 if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
                     int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
                     if (tBonus > 0) {

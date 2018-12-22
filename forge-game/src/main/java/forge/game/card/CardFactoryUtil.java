@@ -3676,6 +3676,24 @@ public class CardFactoryUtil {
                 inst.addSpellAbility(newSA);
                 
             }
+        } else if (keyword.startsWith("Adapt")) {
+            final String[] k = keyword.split(":");
+            final String magnitude = k[1];
+            final String manacost = k[2];
+
+            String desc = "Adapt " + magnitude;
+
+            String effect = "AB$ PutCounter | Cost$ " + manacost + " | ConditionPresent$ "
+                    + "Card.Self+counters_EQ0_P1P1 | Adapt$ True | CounterNum$ " + magnitude
+                    + " | CounterType$ P1P1 | StackDescription$ SpellDescription";
+
+            effect += "| SpellDescription$ " + desc + " (" + inst.getReminderText() + ")";
+
+            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setIntrinsic(intrinsic);
+
+            sa.setTemporary(!intrinsic);
+            inst.addSpellAbility(sa);
         } else if (keyword.equals("Aftermath") && card.getCurrentStateName().equals(CardStateName.RightSplit)) {
             // Aftermath does modify existing SA, and does not add new one
 
