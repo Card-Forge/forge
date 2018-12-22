@@ -3487,6 +3487,23 @@ public class CardFactoryUtil {
             re.setOverridingAbility(saExile);
 
             inst.addReplacement(re);
+        } else if (keyword.startsWith("Riot")) {
+            final String choose = "DB$ GenericChoice | AILogic$ Riot | SpellDescription$ Riot";
+
+            final String counter = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | ETB$ True | CounterNum$ 1" +
+                                " | SpellDescription$ Put a +1/+1 counter on it.";
+            final String haste = "DB$ Animate | Defined$ Self | Keywords$ Haste | Permanent$ True | SpellDescription$ Haste";
+
+            SpellAbility saChoose = AbilityFactory.getAbility(choose, card);
+
+            List<AbilitySub> list = Lists.newArrayList();
+            list.add((AbilitySub)AbilityFactory.getAbility(counter, card));
+            list.add((AbilitySub)AbilityFactory.getAbility(haste, card));
+            saChoose.setAdditionalAbilityList("Choices", list);
+
+            ReplacementEffect cardre = createETBReplacement(card, ReplacementLayer.Other, saChoose, false, true, intrinsic, "Card.Self", "");
+
+            inst.addReplacement(cardre);
         } else if (keyword.startsWith("Saga")) {
             String sb = "etbCounter:LORE:1:no Condition:no desc";
             final ReplacementEffect re = makeEtbCounter(sb, card, intrinsic);

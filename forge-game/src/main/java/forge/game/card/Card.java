@@ -1613,7 +1613,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || keyword.equals("Suspend") // for the ones without amounnt
                     || keyword.equals("Hideaway") || keyword.equals("Ascend")
                     || keyword.equals("Totem armor") || keyword.equals("Battle cry")
-                    || keyword.equals("Devoid")){
+                    || keyword.equals("Devoid") || keyword.equals("Riot")){
                 sbLong.append(keyword + " (" + inst.getReminderText() + ")");
             } else if (keyword.startsWith("Partner:")) {
                 final String[] k = keyword.split(":");

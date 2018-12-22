@@ -124,6 +124,7 @@ public enum Keyword {
     RENOWN(KeywordWithAmount.class, true, "When this creature deals combat damage to a player, if it isn't renowned, put {%d:+1/+1 counter} on it and it becomes renowned."),
     REPLICATE(KeywordWithCost.class, false, "As an additional cost to cast this spell, you may pay %s any number of times. If you do, copy it that many times. You may choose new targets for the copies."),
     RETRACE(SimpleKeyword.class, true, "You may cast this card from your graveyard by discarding a land card in addition to paying its other costs."),
+    RIOT(SimpleKeyword.class, false, "This creature enters the battlefield with your choice of a +1/+1 counter or haste."),
     RIPPLE(KeywordWithAmount.class, false, "When you cast this spell, you may reveal the top {%d:card} of your library. You may cast any of those cards with the same name as this spell without paying their mana costs. Put the rest on the bottom of your library in any order."),
     SHADOW(SimpleKeyword.class, true, "This creature can block or be blocked by only creatures with shadow."),
     SHROUD(SimpleKeyword.class, true, "This can't be the target of spells or abilities."),
