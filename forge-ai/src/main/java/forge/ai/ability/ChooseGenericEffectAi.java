@@ -350,48 +350,54 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             }
         } else if ("Riot".equals(logic)) {
             SpellAbility counterSA = spells.get(0), hasteSA = spells.get(1);
-
-            final Card copy = CardUtil.getLKICopy(host);
-            copy.setLastKnownZone(player.getZone(ZoneType.Battlefield));
-
-            // check state it would have on the battlefield
-            CardCollection preList = new CardCollection(copy);
-            game.getAction().checkStaticAbilities(false, Sets.newHashSet(copy), preList);
-            // reset again?
-            game.getAction().checkStaticAbilities(false);
-
-            // can't gain counters, use Haste
-            if (!copy.canReceiveCounters(CounterType.P1P1)) {
-                return hasteSA;
-            }
-
-            // already has Haste, use counter
-            if (copy.hasKeyword(Keyword.HASTE)) {
-                return counterSA;
-            }
-
-            // not AI turn
-            if (!game.getPhaseHandler().isPlayerTurn(player)) {
-                return counterSA;
-            }
-
-            // not before Combat
-            if (!game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-                return counterSA;
-            }
-
-            // TODO check other opponents too if able
-            final Player opp = player.getWeakestOpponent();
-            if (opp != null) {
-                // TODO add predict Combat Damage?
-                if (opp.getLife() < copy.getNetPower()) {
-                    return hasteSA;
-                }
-            }
-
-            // haste might not be good enough?
-            return counterSA;
+            return preferHasteForRiot(sa, player) ? hasteSA : counterSA;
         }
         return spells.get(0);   // return first choice if no logic found
+    }
+
+    public static boolean preferHasteForRiot(SpellAbility sa, Player player) {
+        // returning true means preferring Haste, returning false means preferring a +1/+1 counter
+        final Card host = sa.getHostCard();
+        final Game game = host.getGame();
+        final Card copy = CardUtil.getLKICopy(host);
+        copy.setLastKnownZone(player.getZone(ZoneType.Battlefield));
+
+        // check state it would have on the battlefield
+        CardCollection preList = new CardCollection(copy);
+        game.getAction().checkStaticAbilities(false, Sets.newHashSet(copy), preList);
+        // reset again?
+        game.getAction().checkStaticAbilities(false);
+
+        // can't gain counters, use Haste
+        if (!copy.canReceiveCounters(CounterType.P1P1)) {
+            return true;
+        }
+
+        // already has Haste, use counter
+        if (copy.hasKeyword(Keyword.HASTE)) {
+            return false;
+        }
+
+        // not AI turn
+        if (!game.getPhaseHandler().isPlayerTurn(player)) {
+            return false;
+        }
+
+        // not before Combat
+        if (!game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+            return false;
+        }
+
+        // TODO check other opponents too if able
+        final Player opp = player.getWeakestOpponent();
+        if (opp != null) {
+            // TODO add predict Combat Damage?
+            if (opp.getLife() < copy.getNetPower()) {
+                return true;
+            }
+        }
+
+        // haste might not be good enough?
+        return false;
     }
 }

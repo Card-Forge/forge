@@ -20,6 +20,7 @@ package forge.ai;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.*;
+import forge.ai.ability.ChooseGenericEffectAi;
 import forge.ai.ability.ProtectAi;
 import forge.ai.ability.TokenAi;
 import forge.card.CardType;
@@ -984,6 +985,11 @@ public class ComputerUtil {
 
         if (card.getManaCost().isZero()) {
         	return true;
+        }
+
+        if (card.hasKeyword(Keyword.RIOT) && ChooseGenericEffectAi.preferHasteForRiot(sa, ai)) {
+            // Planning to choose Haste for Riot, so do this in Main 1
+            return true;
         }
 
         // if we have non-persistent mana in our pool, would be good to try to use it and not waste it
