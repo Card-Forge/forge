@@ -309,10 +309,25 @@ public class CountersRemoveAi extends SpellAbilityAi {
         }
         if (mandatory) {
             if (type.equals("P1P1")) {
-                // Try to target creatures with Adapt
+                // Try to target creatures with Adapt or similar
                 CardCollection adaptCreats = CardLists.filter(list, CardPredicates.hasKeyword(Keyword.ADAPT));
                 if (!adaptCreats.isEmpty()) {
                     sa.getTargets().add(ComputerUtilCard.getWorstAI(adaptCreats));
+                    return true;
+                }
+
+                // Outlast nice target
+                CardCollection outlastCreats = CardLists.filter(list, CardPredicates.hasKeyword(Keyword.OUTLAST));
+                if (!outlastCreats.isEmpty()) {
+                    // outlast cards often benefit from having +1/+1 counters, try not to remove last one
+                    CardCollection betterTargets = CardLists.filter(outlastCreats, CardPredicates.hasCounter(CounterType.P1P1, 2));
+
+                    if (!betterTargets.isEmpty()) {
+                        sa.getTargets().add(ComputerUtilCard.getWorstAI(betterTargets));
+                        return true;
+                    }
+
+                    sa.getTargets().add(ComputerUtilCard.getWorstAI(outlastCreats));
                     return true;
                 }
             }

@@ -333,11 +333,12 @@ public class CountersMoveAi extends SpellAbilityAi {
 
                         // try to remove P1P1 from undying or evolve
                         if (CounterType.P1P1.equals(cType)) {
-                            if (card.hasKeyword("Undying") || card.hasKeyword("Evolve")) {
+                            if (card.hasKeyword(Keyword.UNDYING) || card.hasKeyword(Keyword.EVOLVE)
+                                    || card.hasKeyword(Keyword.ADAPT)) {
                                 return true;
                             }
                         }
-                        if (CounterType.M1M1.equals(cType) && card.hasKeyword("Persist")) {
+                        if (CounterType.M1M1.equals(cType) && card.hasKeyword(Keyword.PERSIST)) {
                             return true;
                         }
 
@@ -392,10 +393,10 @@ public class CountersMoveAi extends SpellAbilityAi {
                         }
 
                         if (cType != null) {
-                            if (CounterType.P1P1.equals(cType) && card.hasKeyword("Undying")) {
+                            if (CounterType.P1P1.equals(cType) && card.hasKeyword(Keyword.UNDYING)) {
                                 return false;
                             }
-                            if (CounterType.M1M1.equals(cType) && card.hasKeyword("Persist")) {
+                            if (CounterType.M1M1.equals(cType) && card.hasKeyword(Keyword.PERSIST)) {
                                 return false;
                             }
 
