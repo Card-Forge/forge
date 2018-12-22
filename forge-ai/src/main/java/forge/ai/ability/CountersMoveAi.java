@@ -192,7 +192,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                 }
 
                 // check for some specific AI preferences
-                if (src.hasStartOfKeyword("Graft") && "DontMoveCounterIfLethal".equals(src.getSVar("AIGraftPreference"))) {
+                if ("DontMoveCounterIfLethal".equals(sa.getParam("AILogic"))) {
                     if (cType == CounterType.P1P1 && src.getNetToughness() - src.getTempToughnessBoost() - 1 <= 0) {
                         return false;
                     }

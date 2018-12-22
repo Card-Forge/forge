@@ -2478,8 +2478,13 @@ public class CardFactoryUtil {
 
             inst.addTrigger(trigger);
         } else if (keyword.startsWith("Graft")) {
-            final String abStr = "DB$ MoveCounter | Source$ Self | "
-                    + "Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 1";
+            final StringBuilder sb = new StringBuilder();
+            sb.append("DB$ MoveCounter | Source$ Self | Defined$ TriggeredCardLKICopy");
+            sb.append(" | CounterType$ P1P1 | CounterNum$ 1");
+
+            if (card.hasSVar("AIGraftPreference")) {
+                sb.append(" | AILogic$ ").append(card.getSVar("AIGraftPreference"));
+            }
 
             String trigStr = "Mode$ ChangesZone | ValidCard$ Creature.Other"
                 + "| Origin$ Any | Destination$ Battlefield "
@@ -2490,7 +2495,7 @@ public class CardFactoryUtil {
                 + "may move a +1/+1 counter from this creature onto it.";
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
 
-            trigger.setOverridingAbility(AbilityFactory.getAbility(abStr, card));
+            trigger.setOverridingAbility(AbilityFactory.getAbility(sb.toString(), card));
 
             inst.addTrigger(trigger);
         } else if (keyword.startsWith("Haunt")) {
