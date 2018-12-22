@@ -2137,6 +2137,20 @@ public class CardFactoryUtil {
             afflictTrigger.setOverridingAbility(AbilityFactory.getAbility(abStringAfflict, card));
 
             inst.addTrigger(afflictTrigger);
+        } else if (keyword.startsWith("Afterlife")) {
+            final String k[] = keyword.split(":");
+            final String name = StringUtils.join(k, " ");
+
+            final StringBuilder sb = new StringBuilder();
+            sb.append("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self ");
+            sb.append("| Secondary$ True | TriggerDescription$ ").append(name);
+            sb.append(" (").append(inst.getReminderText()).append(")");
+            final String effect = "DB$ Token | TokenAmount$ " + k[1] +  " | TokenScript$ wb_1_1_spirit_flying";
+
+            final Trigger trigger = TriggerHandler.parseTrigger(sb.toString(), card, intrinsic);
+
+            trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+            inst.addTrigger(trigger);
         } else if (keyword.startsWith("Annihilator")) {
             final String[] k = keyword.split(":");
             final String n = k[1];

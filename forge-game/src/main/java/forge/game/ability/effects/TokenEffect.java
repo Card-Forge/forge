@@ -207,6 +207,8 @@ public class TokenEffect extends SpellAbilityEffect {
 
         if (result != null) {
             tokenName = result.getName();
+        } else {
+            throw new RuntimeException("don't find Token for TokenScript: " + sa.getParam("TokenScript"));
         }
 
         return result;

@@ -15,6 +15,7 @@ public enum Keyword {
     ABSORB(KeywordWithAmount.class, false, "If a source would deal damage to this creature, prevent %d of that damage."),
     AFFINITY(KeywordWithType.class, false, "This spell costs you {1} less to cast for each %s you control."),
     AFFLICT(KeywordWithAmount.class, false, "Whenever this creature becomes blocked, defending player loses %d life."),
+    AFTERLIFE(KeywordWithAmount.class, false, "When this creature dies, create {%1$d:1/1 white and black Spirit creature token} with flying."),
     AFTERMATH(SimpleKeyword.class, false, "Cast this spell only from your graveyard. Then exile it."),
     AMPLIFY(KeywordWithAmountAndType.class, false, "As this creature enters the battlefield, put {%d:+1/+1 counter} on it for each %s card you reveal in your hand."),
     ANNIHILATOR(KeywordWithAmount.class, false, "Whenever this creature attacks, defending player sacrifices {%d:permanent}."),
