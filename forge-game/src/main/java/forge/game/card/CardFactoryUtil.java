@@ -63,6 +63,10 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.*;
 import java.util.Map.Entry;
 
+import io.sentry.Sentry;
+import io.sentry.event.BreadcrumbBuilder;
+
+
 /**
  * <p>
  * CardFactoryUtil class.
@@ -1994,9 +1998,20 @@ public class CardFactoryUtil {
         // **************************************************
         // AbilityFactory cards
         for (String rawAbility : abilities) {
-            final SpellAbility intrinsicAbility = AbilityFactory.getAbility(rawAbility, card);
-            card.addSpellAbility(intrinsicAbility);
-            intrinsicAbility.setIntrinsic(true);
+            try {
+                final SpellAbility intrinsicAbility = AbilityFactory.getAbility(rawAbility, card);
+                card.addSpellAbility(intrinsicAbility);
+                intrinsicAbility.setIntrinsic(true);
+            } catch (Exception e) {
+                String msg = "CardFactoryUtil:addAbilityFactoryAbilities: crash in raw Ability";
+                Sentry.getContext().recordBreadcrumb(
+                    new BreadcrumbBuilder().setMessage(msg)
+                    .withData("Card", card.getName()).withData("Ability", rawAbility).build()
+                );
+
+                // rethrow the exception with card Name for the user
+                throw new RuntimeException("crash in raw Ability, check card script of " + card.getName(), e);
+            }
         }
     }
 

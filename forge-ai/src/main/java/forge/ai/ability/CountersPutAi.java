@@ -1005,7 +1005,7 @@ public class CountersPutAi extends SpellAbilityAi {
         return Iterables.getFirst(options, null);
     }
 
-    private boolean doMoveCounterLogic(Player ai, SpellAbility sa, PhaseHandler ph) {
+    private boolean doMoveCounterLogic(final Player ai, SpellAbility sa, PhaseHandler ph) {
         // Spikes (Tempest)
 
         // Try not to do it unless at the end of opponent's turn or the creature is threatened

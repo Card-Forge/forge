@@ -113,7 +113,7 @@ public class EffectAi extends SpellAbilityAi {
             } else if (logic.equals("SpellCopy")) {
             	// fetch Instant or Sorcery and AI has reason to play this turn
             	// does not try to get itself
-                ManaCost costSa = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : ManaCost.NO_COST;
+                final ManaCost costSa = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : ManaCost.NO_COST;
             	final int count = CardLists.count(ai.getCardsIn(ZoneType.Hand), new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
