@@ -67,6 +67,9 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.*;
 import java.util.Map.Entry;
 
+import io.sentry.Sentry;
+import io.sentry.event.BreadcrumbBuilder;
+
 /**
  * <p>
  * Card class.
@@ -1962,124 +1965,134 @@ public class Card extends GameEntity implements Comparable<Card> {
         for (final KeywordInterface inst : getKeywords(state)) {
             final String keyword = inst.getOriginal();
 
-            if (keyword.equals("Ascend")  || keyword.equals("Changeling")
-                    || keyword.equals("Aftermath") || keyword.equals("Wither")
-                    || keyword.equals("Convoke") || keyword.equals("Delve")
-                    || keyword.equals("Improvise") || keyword.equals("Retrace")
-                    || keyword.equals("Undaunted") || keyword.equals("Cascade")
-                    || keyword.equals("Devoid") ||  keyword.equals("Lifelink")
-                    || keyword.equals("Split second")) {
-                sbBefore.append(keyword + " (" + inst.getReminderText() + ")");
-                sbBefore.append("\r\n");
-            } else if(keyword.equals("Conspire") || keyword.equals("Epic")
-                    || keyword.equals("Suspend") || keyword.equals("Jump-start")) {
-                sbAfter.append(keyword + " (" + inst.getReminderText() + ")");
-                sbAfter.append("\r\n");
-            } else if (keyword.startsWith("Ripple")) {
-                sbBefore.append(TextUtil.fastReplace(keyword, ":", " ") + " (" + inst.getReminderText() + ")");
-                sbBefore.append("\r\n");
-            } else if (keyword.startsWith("Dredge")) {
-                sbAfter.append(TextUtil.fastReplace(keyword, ":", " ") + " (" + inst.getReminderText() + ")");
-                sbAfter.append("\r\n");
-            } else if (keyword.startsWith("Escalate") || keyword.startsWith("Buyback")
-                    || keyword.startsWith("Prowl")) {
-                final String[] k = keyword.split(":");
-                final String manacost = k[1];
-                final Cost cost = new Cost(manacost, false);
-
-                StringBuilder sbCost = new StringBuilder(k[0]);
-                if (!cost.isOnlyManaCost()) {
-                    sbCost.append("—");
-                } else {
-                    sbCost.append(" ");
-                }
-                sbCost.append(cost.toSimpleString());
-                sbBefore.append(sbCost + " (" + inst.getReminderText() + ")");
-                sbBefore.append("\r\n");
-            } else if (keyword.startsWith("Multikicker")) {
-                if (!keyword.endsWith("Generic")) {
-                    final String[] n = keyword.split(":");
-                    final Cost cost = new Cost(n[1], false);
-                    sbBefore.append("Multikicker ").append(cost.toSimpleString())
-                    .append(" (" + inst.getReminderText() + ")").append("\r\n");
-                }
-            } else if (keyword.startsWith("Kicker")) {
-                if (!keyword.endsWith("Generic")) {
-                    final StringBuilder sbx = new StringBuilder();
-                    final String[] n = keyword.split(":");
-                    sbx.append("Kicker ");
-                    final Cost cost = new Cost(n[1], false);
-                    sbx.append(cost.toSimpleString());
-                    if (Lists.newArrayList(n).size() > 2) {
-                            sbx.append(" and/or ");
-                            final Cost cost2 = new Cost(n[2], false);
-                        sbx.append(cost2.toSimpleString());
+            try {
+                if (keyword.equals("Ascend")  || keyword.equals("Changeling")
+                        || keyword.equals("Aftermath") || keyword.equals("Wither")
+                        || keyword.equals("Convoke") || keyword.equals("Delve")
+                        || keyword.equals("Improvise") || keyword.equals("Retrace")
+                        || keyword.equals("Undaunted") || keyword.equals("Cascade")
+                        || keyword.equals("Devoid") ||  keyword.equals("Lifelink")
+                        || keyword.equals("Split second")) {
+                    sbBefore.append(keyword + " (" + inst.getReminderText() + ")");
+                    sbBefore.append("\r\n");
+                } else if(keyword.equals("Conspire") || keyword.equals("Epic")
+                        || keyword.equals("Suspend") || keyword.equals("Jump-start")) {
+                    sbAfter.append(keyword + " (" + inst.getReminderText() + ")");
+                    sbAfter.append("\r\n");
+                } else if (keyword.startsWith("Ripple")) {
+                    sbBefore.append(TextUtil.fastReplace(keyword, ":", " ") + " (" + inst.getReminderText() + ")");
+                    sbBefore.append("\r\n");
+                } else if (keyword.startsWith("Dredge")) {
+                    sbAfter.append(TextUtil.fastReplace(keyword, ":", " ") + " (" + inst.getReminderText() + ")");
+                    sbAfter.append("\r\n");
+                } else if (keyword.startsWith("Escalate") || keyword.startsWith("Buyback")
+                        || keyword.startsWith("Prowl")) {
+                    final String[] k = keyword.split(":");
+                    final String manacost = k[1];
+                    final Cost cost = new Cost(manacost, false);
+    
+                    StringBuilder sbCost = new StringBuilder(k[0]);
+                    if (!cost.isOnlyManaCost()) {
+                        sbCost.append("—");
+                    } else {
+                        sbCost.append(" ");
                     }
-                    sbx.append(" (" + inst.getReminderText() + ")");
-                    sbBefore.append(sbx).append("\r\n");
+                    sbCost.append(cost.toSimpleString());
+                    sbBefore.append(sbCost + " (" + inst.getReminderText() + ")");
+                    sbBefore.append("\r\n");
+                } else if (keyword.startsWith("Multikicker")) {
+                    if (!keyword.endsWith("Generic")) {
+                        final String[] n = keyword.split(":");
+                        final Cost cost = new Cost(n[1], false);
+                        sbBefore.append("Multikicker ").append(cost.toSimpleString())
+                        .append(" (" + inst.getReminderText() + ")").append("\r\n");
+                    }
+                } else if (keyword.startsWith("Kicker")) {
+                    if (!keyword.endsWith("Generic")) {
+                        final StringBuilder sbx = new StringBuilder();
+                        final String[] n = keyword.split(":");
+                        sbx.append("Kicker ");
+                        final Cost cost = new Cost(n[1], false);
+                        sbx.append(cost.toSimpleString());
+                        if (Lists.newArrayList(n).size() > 2) {
+                                sbx.append(" and/or ");
+                                final Cost cost2 = new Cost(n[2], false);
+                            sbx.append(cost2.toSimpleString());
+                        }
+                        sbx.append(" (" + inst.getReminderText() + ")");
+                        sbBefore.append(sbx).append("\r\n");
+                    }
+                }else if (keyword.startsWith("AlternateAdditionalCost")) {
+                    final String[] k = keyword.split(":");
+                    final Cost cost1 = new Cost(k[1], false);
+                    final Cost cost2 = new Cost(k[2], false);
+                    sbBefore.append("As an additional cost to cast ")
+                            .append(state.getName()).append(", ")
+                            .append(cost1.toSimpleString())
+                            .append(" or pay ")
+                            .append(cost2.toSimpleString())
+                            .append(".\r\n");
+                } else if (keyword.startsWith("Presence") || keyword.startsWith("MayFlash")) {
+                    // Pseudo keywords, only print Reminder
+                    sbBefore.append(inst.getReminderText());
+                    sbBefore.append("\r\n");
+                } else if (keyword.startsWith("Entwine") || keyword.startsWith("Madness")
+                        || keyword.startsWith("Miracle") || keyword.startsWith("Recover")) {
+                    final String[] k = keyword.split(":");
+                    final Cost cost = new Cost(k[1], false);
+    
+                    StringBuilder sbCost = new StringBuilder(k[0]);
+                    if (!cost.isOnlyManaCost()) {
+                        sbCost.append("—");
+                    } else {
+                        sbCost.append(" ");
+                    }
+                    sbCost.append(cost.toSimpleString());
+                    sbAfter.append(sbCost + " (" + inst.getReminderText() + ")");
+                    sbAfter.append("\r\n");
+                } else if (keyword.equals("CARDNAME can't be countered.") ||
+                        keyword.equals("Remove CARDNAME from your deck before playing if you're not playing for ante.")) {
+                    sbBefore.append(keyword);
+                } else if (keyword.startsWith("Haunt")) {
+                    sbAfter.append("Haunt (");
+                    sbAfter.append("When this spell card is put into a graveyard after resolving, ");
+                    sbAfter.append("exile it haunting target creature.");
+                    sbAfter.append(")");
+                    sbAfter.append("\r\n");
+                } else if (keyword.startsWith("Splice")) {
+                    final String[] n = keyword.split(":");
+                    final Cost cost = new Cost(n[2], false);
+                    sbAfter.append("Splice onto ").append(n[1]).append(" ").append(cost.toSimpleString());
+                    sbAfter.append(" (" + inst.getReminderText() + ")").append("\r\n");
+                } else if (keyword.equals("Storm")) {
+                    sbAfter.append("Storm (");
+    
+                    sbAfter.append("When you cast this spell, copy it for each spell cast before it this turn.");
+    
+                    if (strSpell.contains("Target") || strSpell.contains("target")) {
+                        sbAfter.append(" You may choose new targets for the copies.");
+                    }
+    
+                    sbAfter.append(")");
+                    sbAfter.append("\r\n");
+                } else if (keyword.startsWith("Replicate")) {
+                    final String[] n = keyword.split(":");
+                    final Cost cost = new Cost(n[1], false);
+                    sbBefore.append("Replicate ").append(cost.toSimpleString());
+                    sbBefore.append(" (When you cast this spell, copy it for each time you paid its replicate cost.");
+                    if (strSpell.contains("Target") || strSpell.contains("target")) {
+                        sbBefore.append(" You may choose new targets for the copies.");
+                    }
+                    sbBefore.append(")\r\n");
                 }
-            }else if (keyword.startsWith("AlternateAdditionalCost")) {
-                final String[] k = keyword.split(":");
-                final Cost cost1 = new Cost(k[1], false);
-                final Cost cost2 = new Cost(k[2], false);
-                sbBefore.append("As an additional cost to cast ")
-                        .append(state.getName()).append(", ")
-                        .append(cost1.toSimpleString())
-                        .append(" or pay ")
-                        .append(cost2.toSimpleString())
-                        .append(".\r\n");
-            } else if (keyword.startsWith("Presence") || keyword.startsWith("MayFlash")) {
-                // Pseudo keywords, only print Reminder
-                sbBefore.append(inst.getReminderText());
-                sbBefore.append("\r\n");
-            } else if (keyword.startsWith("Entwine") || keyword.startsWith("Madness")
-                    || keyword.startsWith("Miracle") || keyword.startsWith("Recover")) {
-                final String[] k = keyword.split(":");
-                final Cost cost = new Cost(k[1], false);
+            } catch (Exception e) {
+                String msg = "Card:abilityTextInstantSorcery: crash in Keyword parsing";
+                Sentry.getContext().recordBreadcrumb(
+                    new BreadcrumbBuilder().setMessage(msg)
+                    .withData("Card", this.getName()).withData("Keyword", keyword).build()
+                );
 
-                StringBuilder sbCost = new StringBuilder(k[0]);
-                if (!cost.isOnlyManaCost()) {
-                    sbCost.append("—");
-                } else {
-                    sbCost.append(" ");
-                }
-                sbCost.append(cost.toSimpleString());
-                sbAfter.append(sbCost + " (" + inst.getReminderText() + ")");
-                sbAfter.append("\r\n");
-            } else if (keyword.equals("CARDNAME can't be countered.") ||
-                    keyword.equals("Remove CARDNAME from your deck before playing if you're not playing for ante.")) {
-                sbBefore.append(keyword);
-            } else if (keyword.startsWith("Haunt")) {
-                sbAfter.append("Haunt (");
-                sbAfter.append("When this spell card is put into a graveyard after resolving, ");
-                sbAfter.append("exile it haunting target creature.");
-                sbAfter.append(")");
-                sbAfter.append("\r\n");
-            } else if (keyword.startsWith("Splice")) {
-                final String[] n = keyword.split(":");
-                final Cost cost = new Cost(n[2], false);
-                sbAfter.append("Splice onto ").append(n[1]).append(" ").append(cost.toSimpleString());
-                sbAfter.append(" (" + inst.getReminderText() + ")").append("\r\n");
-            } else if (keyword.equals("Storm")) {
-                sbAfter.append("Storm (");
-
-                sbAfter.append("When you cast this spell, copy it for each spell cast before it this turn.");
-
-                if (strSpell.contains("Target") || strSpell.contains("target")) {
-                    sbAfter.append(" You may choose new targets for the copies.");
-                }
-
-                sbAfter.append(")");
-                sbAfter.append("\r\n");
-            } else if (keyword.startsWith("Replicate")) {
-                final String[] n = keyword.split(":");
-                final Cost cost = new Cost(n[1], false);
-                sbBefore.append("Replicate ").append(cost.toSimpleString());
-                sbBefore.append(" (When you cast this spell, copy it for each time you paid its replicate cost.");
-                if (strSpell.contains("Target") || strSpell.contains("target")) {
-                    sbBefore.append(" You may choose new targets for the copies.");
-                }
-                sbBefore.append(")\r\n");
+                throw new RuntimeException("Error in Card " + this.getName() + " with Keyword " + keyword, e);
             }
         }
 

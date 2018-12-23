@@ -95,23 +95,34 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
             staticAbilities.clear();
         }
 
-        String msg = "KeywordInstance:createTraits: make Traits for Keyword";
-        Sentry.getContext().recordBreadcrumb(
-                new BreadcrumbBuilder().setMessage(msg)
-                .withData("Card", host.getName()).withData("Keyword", this.original).build()
-        );
-        // add Extra for debugging
-        Sentry.getContext().addExtra("Card", host);
-        Sentry.getContext().addExtra("Keyword", this.original);
+        try {
+            String msg = "KeywordInstance:createTraits: make Traits for Keyword";
+            Sentry.getContext().recordBreadcrumb(
+                    new BreadcrumbBuilder().setMessage(msg)
+                    .withData("Card", host.getName()).withData("Keyword", this.original).build()
+            );
 
-        CardFactoryUtil.addTriggerAbility(this, host, intrinsic);
-        CardFactoryUtil.addReplacementEffect(this, host, intrinsic);
-        CardFactoryUtil.addSpellAbility(this, host, intrinsic);
-        CardFactoryUtil.addStaticAbility(this, host, intrinsic);
+            // add Extra for debugging
+            Sentry.getContext().addExtra("Card", host);
+            Sentry.getContext().addExtra("Keyword", this.original);
 
-        // remove added extra
-        Sentry.getContext().removeExtra("Card");
-        Sentry.getContext().removeExtra("Keyword");
+            CardFactoryUtil.addTriggerAbility(this, host, intrinsic);
+            CardFactoryUtil.addReplacementEffect(this, host, intrinsic);
+            CardFactoryUtil.addSpellAbility(this, host, intrinsic);
+            CardFactoryUtil.addStaticAbility(this, host, intrinsic);
+        } catch (Exception e) {
+            String msg = "KeywordInstance:createTraits: failed Traits for Keyword";
+            Sentry.getContext().recordBreadcrumb(
+                    new BreadcrumbBuilder().setMessage(msg)
+                    .withData("Card", host.getName()).withData("Keyword", this.original).build()
+            );
+            //rethrow
+            throw new RuntimeException("Error in Keyword " + this.original + " for card " + host.getName(), e);
+        } finally {
+            // remove added extra
+            Sentry.getContext().removeExtra("Card");
+            Sentry.getContext().removeExtra("Keyword");
+        }
     }
 
     /*
