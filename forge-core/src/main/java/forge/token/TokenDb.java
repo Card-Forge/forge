@@ -47,7 +47,7 @@ public class TokenDb implements ITokenDatabase {
                 tokensByName.put(fullName, pt);
                 return pt;
             } catch(Exception e) {
-                return null;
+                throw e;
             }
         }
 

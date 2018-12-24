@@ -1613,7 +1613,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || keyword.equals("Suspend") // for the ones without amounnt
                     || keyword.equals("Hideaway") || keyword.equals("Ascend")
                     || keyword.equals("Totem armor") || keyword.equals("Battle cry")
-                    || keyword.equals("Devoid")){
+                    || keyword.equals("Devoid") || keyword.equals("Riot")){
                 sbLong.append(keyword + " (" + inst.getReminderText() + ")");
             } else if (keyword.startsWith("Partner:")) {
                 final String[] k = keyword.split(":");
@@ -1622,7 +1622,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift") || keyword.startsWith("Bushido")
                     || keyword.startsWith("Crew") || keyword.startsWith("Tribute") || keyword.startsWith("Absorb")
                     || keyword.startsWith("Graft") || keyword.startsWith("Fading") || keyword.startsWith("Vanishing")
-                    || keyword.startsWith ("Afflict") || keyword.startsWith ("Poisonous") || keyword.startsWith("Rampage")
+                    || keyword.startsWith("Afterlife")
+                    || keyword.startsWith("Afflict") || keyword.startsWith ("Poisonous") || keyword.startsWith("Rampage")
                     || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Devour")) {
                 final String[] k = keyword.split(":");
                 sbLong.append(k[0] + " " + k[1] + " (" + inst.getReminderText() + ")");
@@ -1655,13 +1656,13 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sbLong.append(keyword);
                 sbLong.append(" (" + Keyword.getInstance("Offering:"+ offeringType).getReminderText() + ")");
             } else if (keyword.startsWith("Equip") || keyword.startsWith("Fortify") || keyword.startsWith("Outlast")
-                    || keyword.startsWith("Unearth") || keyword.startsWith("Scavenge")
+                    || keyword.startsWith("Unearth") || keyword.startsWith("Scavenge") || keyword.startsWith("Spectacle")
                     || keyword.startsWith("Evoke") || keyword.startsWith("Bestow") || keyword.startsWith("Dash")
                     || keyword.startsWith("Surge") || keyword.startsWith("Transmute") || keyword.startsWith("Suspend")
                     || keyword.equals("Undaunted") || keyword.startsWith("Monstrosity") || keyword.startsWith("Embalm")
                     || keyword.startsWith("Level up") || keyword.equals("Prowess") || keyword.startsWith("Eternalize")
                     || keyword.startsWith("Reinforce") || keyword.startsWith("Champion") || keyword.startsWith("Prowl")
-                    || keyword.startsWith("Amplify")  || keyword.startsWith("Ninjutsu")
+                    || keyword.startsWith("Amplify")  || keyword.startsWith("Ninjutsu") || keyword.startsWith("Adapt")
                     || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")) {
                 // keyword parsing takes care of adding a proper description
             } else if (keyword.startsWith("CantBeBlockedByAmount")) {

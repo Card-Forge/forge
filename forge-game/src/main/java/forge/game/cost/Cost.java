@@ -98,6 +98,8 @@ public class Cost implements Serializable {
         return true;
     }
 
+
+    @SuppressWarnings("unchecked")
     public <T extends CostPart> T getCostPartByType(Class<T> costType) {
         for (CostPart p : getCostParts()) {
             if (costType.isInstance(p)) {

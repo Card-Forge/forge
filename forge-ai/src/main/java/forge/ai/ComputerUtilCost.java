@@ -11,6 +11,7 @@ import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.cost.*;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
@@ -74,7 +75,7 @@ public class ComputerUtilCost {
 
                 final CounterType type = remCounter.counter;
                 if (!part.payCostFromSource()) {
-                    if (type.name().equals("P1P1")) {
+                    if (CounterType.P1P1.equals(type)) {
                         return false;
                     }
                     continue;
@@ -105,7 +106,8 @@ public class ComputerUtilCost {
                 }
 
                 //don't kill the creature
-                if (type.name().equals("P1P1") && source.getLethalDamage() <= 1) {
+                if (CounterType.P1P1.equals(type) && source.getLethalDamage() <= 1
+                        && !source.hasKeyword(Keyword.UNDYING)) {
                     return false;
                 }
             }

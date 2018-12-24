@@ -311,6 +311,10 @@ public class CountersPutAi extends SpellAbilityAi {
             return false;
         }
 
+        if (sa.hasParam("Adapt") && source.getCounters(CounterType.P1P1) > 0) {
+            return false;
+        }
+
         // TODO handle proper calculation of X values based on Cost
         int amount = AbilityUtils.calculateAmount(source, amountStr, sa);
 
