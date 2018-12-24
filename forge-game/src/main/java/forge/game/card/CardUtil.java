@@ -219,6 +219,7 @@ public final class CardUtil {
         newCopy.setSetCode(in.getSetCode());
         newCopy.setOwner(in.getOwner());
         newCopy.setController(in.getController(), 0);
+        newCopy.setCommander(in.isCommander());
 
         // needed to ensure that the LKI object has correct CMC info no matter what state the original card was in
         // (e.g. Scrap Trawler + transformed Harvest Hand)
