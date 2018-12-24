@@ -47,6 +47,7 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.screens.match.controllers.CStack;
+import forge.screens.match.controllers.CDock.ArcState;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPanel;
 import forge.toolbox.FSkin;
@@ -194,19 +195,45 @@ public class VStack implements IVDoc<CStack> {
             setFont(FSkin.getFont());
             setWrapStyleWord(true);
             setMinimumSize(new Dimension(CARD_WIDTH + 2 * PADDING, CARD_HEIGHT + 2 * PADDING));
+            
+            // if the top of the stack is not assigned yet...
+            if (hoveredItem == null)
+            {
+            	// set things up to draw an arc from it...
+            	hoveredItem = StackInstanceTextArea.this;
+            	controller.getMatchUI().setCard(item.getSourceCard());
+            }
 
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
-                    hoveredItem = StackInstanceTextArea.this;
-                    controller.getMatchUI().setCard(item.getSourceCard());
+                	if (controller.getMatchUI().getCDock().getArcState() == ArcState.MOUSEOVER)	{
+                		hoveredItem = StackInstanceTextArea.this;
+                		controller.getMatchUI().setCard(item.getSourceCard());
+                	}
                 }
 
                 @Override
                 public void mouseExited(final MouseEvent e) {
-                    if (hoveredItem == StackInstanceTextArea.this) {
-                        hoveredItem = null;
-                    }
+                	if (controller.getMatchUI().getCDock().getArcState() == ArcState.MOUSEOVER)	{
+                		if (hoveredItem == StackInstanceTextArea.this) {
+                			hoveredItem = null;
+                		}
+                	}
+                }
+                
+                @Override
+                public void mouseClicked(final MouseEvent e) {
+                	if (controller.getMatchUI().getCDock().getArcState() == ArcState.ON) {
+                		if (hoveredItem == StackInstanceTextArea.this) {
+                			hoveredItem = null;
+                		}
+                		else
+                		{
+                			hoveredItem = StackInstanceTextArea.this;
+                			controller.getMatchUI().setCard(item.getSourceCard());
+                		}
+                	}
                 }
             });
 
