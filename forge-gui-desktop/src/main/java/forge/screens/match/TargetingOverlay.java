@@ -470,8 +470,8 @@ public class TargetingOverlay {
                     if (!attackingCard.equals(c) && !blockingCard.equals(c)) { continue; }
                     addArc(endpoints.get(attackingCard.getId()), endpoints.get(blockingCard.getId()), ArcConnection.FoesBlocking);
                     cardsVisualized.add(blockingCard);
+                    cardsVisualized.add(attackingCard);
                 }
-                cardsVisualized.add(attackingCard);
             }
         }
     }
