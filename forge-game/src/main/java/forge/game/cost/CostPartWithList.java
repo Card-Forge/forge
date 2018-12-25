@@ -21,8 +21,10 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardUtil;
+import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.Zone;
 
 /**
  * The Class CostPartWithList.
@@ -35,6 +37,8 @@ public abstract class CostPartWithList extends CostPart {
     /** The lists: one for LKI, one for the actual cards. */
     private final CardCollection lkiList = new CardCollection();
     protected final CardCollection cardList = new CardCollection();
+
+    protected final CardZoneTable table = new CardZoneTable();
     // set is here because executePayment() adds card to list, while ai's decide payment does the same thing.
     // set allows to avoid duplication
 
@@ -52,6 +56,7 @@ public abstract class CostPartWithList extends CostPart {
     public final void resetLists() {
         lkiList.clear();
         cardList.clear();
+        table.clear();
     }
 
     /**
@@ -97,13 +102,21 @@ public abstract class CostPartWithList extends CostPart {
 
     public final boolean executePayment(SpellAbility ability, Card targetCard) {
         lkiList.add(CardUtil.getLKICopy(targetCard));
+        final Zone origin = targetCard.getZone();
         final Card newCard = doPayment(ability, targetCard);
-        cardList.add(newCard);
 
         // need to update the LKI info to ensure correct interaction with cards which may trigger on this
         // (e.g. Necroskitter + a creature dying from a -1/-1 counter on a cost payment).
         targetCard.getGame().updateLastStateForCard(targetCard);
 
+        if (newCard != null) {
+            final Zone newZone = newCard.getZone();
+            cardList.add(newCard);
+
+            if (!origin.equals(newZone)) {
+                table.put(origin.getZoneType(), newZone.getZoneType(), newCard);
+            }
+        }
         return true;
     }
 
@@ -112,11 +125,13 @@ public abstract class CostPartWithList extends CostPart {
         if (canPayListAtOnce()) { // This is used by reveal. Without it when opponent would reveal hand, you'll get N message boxes. 
             lkiList.addAll(targetCards);
             cardList.addAll(doListPayment(ability, targetCards));
+            handleChangeZoneTrigger(ability);
             return true;
         }
         for (Card c: targetCards) {
             executePayment(ability, c);
         }
+        handleChangeZoneTrigger(ability);
         return true;
     }
 
@@ -143,6 +158,17 @@ public abstract class CostPartWithList extends CostPart {
         executePayment(ability, decision.cards);
         reportPaidCardsTo(ability);
         return true;
+    }
+
+    protected void handleChangeZoneTrigger(SpellAbility ability) {
+        if (table.isEmpty()) {
+            return;
+        }
+
+        // copy table because the original get cleaned after the cost is done
+        final CardZoneTable copyTable = new CardZoneTable();
+        copyTable.putAll(table);
+        copyTable.triggerChangesZoneAll(ability.getHostCard().getGame());
     }
 
 }

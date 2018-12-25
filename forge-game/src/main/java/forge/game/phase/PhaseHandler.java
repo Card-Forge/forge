@@ -29,6 +29,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.card.CardZoneTable;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
@@ -38,9 +39,11 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.LandAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.CollectionSuppliers;
 import forge.util.TextUtil;
@@ -359,9 +362,11 @@ public class PhaseHandler implements java.io.Serializable {
                     int numDiscard = playerTurn.isUnlimitedHandSize() || handSize <= max || handSize == 0 ? 0 : handSize - max;
 
                     if (numDiscard > 0) {
+                        final CardZoneTable table = new CardZoneTable();
                         for (Card c : playerTurn.getController().chooseCardsToDiscardToMaximumHandSize(numDiscard)){
-                            playerTurn.discard(c, null);
+                            playerTurn.discard(c, null, table);
                         }
+                        table.triggerChangesZoneAll(game);
                     }
 
                     // Rule 514.2
@@ -983,7 +988,23 @@ public class PhaseHandler implements java.io.Serializable {
                     }
                     pFirstPriority = pPlayerPriority; // all opponents have to pass before stack is allowed to resolve
                     for (SpellAbility sa : chosenSa) {
+                        Card saHost = sa.getHostCard();
+                        final Zone originZone = saHost.getZone();
+
+                        // TODO it has no return value if successful
                         pPlayerPriority.getController().playChosenSpellAbility(sa);
+
+                        saHost = game.getCardState(saHost);
+                        final Zone currentZone = saHost.getZone();
+
+                        // Need to check if Zone did change
+                        if (currentZone != null && originZone != null && !currentZone.equals(originZone) && (sa.isSpell() || sa instanceof LandAbility)) {
+                            // currently there can be only one Spell put on the Stack at once, or Land Abilities be played
+                            final CardZoneTable triggerList = new CardZoneTable();
+                            triggerList.put(originZone.getZoneType(), currentZone.getZoneType(), saHost);
+                            triggerList.triggerChangesZoneAll(game);
+                        }
+                        
                     }
                     loopCount++;
                 } while (loopCount < 999 || !pPlayerPriority.getController().isAI());

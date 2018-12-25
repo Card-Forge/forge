@@ -206,12 +206,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
                 final Ability ability = new Ability(hostCard, ManaCost.ZERO) {
                     @Override
                     public void resolve() {
-
-                        if (bNoRegen) {
-                            game.getAction().destroyNoRegeneration(c, null);
-                        } else {
-                            game.getAction().destroy(c, null);
-                        }
+                        game.getAction().destroy(c, null, !bNoRegen, null);
                     }
                 };
                 final StringBuilder sb = new StringBuilder();
