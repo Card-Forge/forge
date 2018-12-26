@@ -97,9 +97,27 @@ public class ComputerUtilAbility {
         final List<SpellAbility> newAbilities = Lists.newArrayList();
         for (SpellAbility sa : originList) {
             sa.setActivatingPlayer(player);
-            //add alternative costs as additional spell abilities
+
+            // determine which alternative costs are cheaper than the original and prioritize them
+            List<SpellAbility> saAltCosts = GameActionUtil.getAlternativeCosts(sa, player);
+            List<SpellAbility> priorityAltSa = Lists.newArrayList();
+            List<SpellAbility> otherAltSa = Lists.newArrayList();
+            for (SpellAbility altSa : saAltCosts) {
+                if (altSa.getPayCosts() == null || sa.getPayCosts() == null) {
+                    otherAltSa.add(altSa);
+                } else if (sa.getPayCosts().isOnlyManaCost()
+                        && altSa.getPayCosts().isOnlyManaCost() && sa.getPayCosts().getTotalMana().compareTo(altSa.getPayCosts().getTotalMana()) == 1) {
+                    // the alternative cost is strictly cheaper, so why not? (e.g. Omniscience etc.)
+                    priorityAltSa.add(altSa);
+                } else {
+                    otherAltSa.add(altSa);
+                }
+            }
+
+            // add alternative costs as additional spell abilities
+            newAbilities.addAll(priorityAltSa);
             newAbilities.add(sa);
-            newAbilities.addAll(GameActionUtil.getAlternativeCosts(sa, player));
+            newAbilities.addAll(otherAltSa);
         }
     
         final List<SpellAbility> result = Lists.newArrayList();

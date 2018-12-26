@@ -96,6 +96,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private int sourceTrigger = -1;
     private List<Object> triggerRemembered = Lists.newArrayList();
 
+    // TODO use enum for the flags
     private boolean flashBackAbility = false;
     private boolean aftermath = false;
     private boolean cycling = false;
@@ -103,6 +104,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean evoke = false;
     private boolean prowl = false;
     private boolean surge = false;
+    private boolean spectacle = false;
     private boolean offering = false;
     private boolean emerge = false;
     private boolean morphup = false;
@@ -1119,6 +1121,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public final void setSurged(final boolean isSurge) {
         surge = isSurge;
+    }
+
+    public final boolean isSpectacle() {
+        return spectacle;
+    }
+
+    public final void setSpectacle(final boolean isSpectacle) {
+        spectacle = isSpectacle;
     }
 
     public CardCollection getTappedForConvoke() {

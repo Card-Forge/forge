@@ -1,7 +1,5 @@
 package forge.game.cost;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import forge.card.CardStateName;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
@@ -19,13 +17,14 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
 import forge.game.staticability.StaticAbility;
-import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
 
 public class CostAdjustment {
 
@@ -214,7 +213,7 @@ public class CostAdjustment {
             if (sa.getHostCard().hasKeyword(Keyword.DELVE)) {
                 sa.getHostCard().clearDelved();
 
-                final CardCollection delved = new CardCollection();
+                final CardZoneTable table = new CardZoneTable();
                 final Player pc = sa.getActivatingPlayer();
                 final CardCollection mutableGrave = new CardCollection(pc.getCardsIn(ZoneType.Graveyard));
                 final CardCollectionView toExile = pc.getController().chooseCardsToDelve(cost.getUnpaidShards(ManaCostShard.GENERIC), mutableGrave);
@@ -224,17 +223,11 @@ public class CostAdjustment {
                         cardsToDelveOut.add(c);
                     } else if (!test) {
                         sa.getHostCard().addDelved(c);
-                        delved.add(game.getAction().exile(c, null, null));
+                        final Card d = game.getAction().exile(c, null, null);
+                        table.put(ZoneType.Graveyard, d.getZone().getZoneType(), d);
                     }
                 }
-                if (!delved.isEmpty()) {
-                    final Map<ZoneType, CardCollection> triggerList = Maps.newEnumMap(ZoneType.class);
-                    triggerList.put(ZoneType.Graveyard, delved);
-                    final Map<String, Object> runParams = Maps.newHashMap();
-                    runParams.put("Cards", triggerList);
-                    runParams.put("Destination", ZoneType.Exile);
-                    game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
-                }
+                table.triggerChangesZoneAll(game);
             }
             if (sa.getHostCard().hasKeyword(Keyword.CONVOKE)) {
                 adjustCostByConvokeOrImprovise(cost, sa, false, test);

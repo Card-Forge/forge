@@ -948,6 +948,20 @@ public class AiController {
                 return 1;
             }
 
+            if (a.getHostCard().equals(b.getHostCard()) && a.getApi() == b.getApi()
+                    && a.getPayCosts() != null && b.getPayCosts() != null) {
+                // Cheaper Spectacle costs should be preferred
+                // FIXME: Any better way to identify that these are the same ability, one with Spectacle and one not?
+                // (looks like it's not a full-fledged alternative cost as such, and is not processed with other alt costs)
+                if (a.isSpectacle() && !b.isSpectacle()
+                        && a.getPayCosts().getTotalMana().getCMC() < b.getPayCosts().getTotalMana().getCMC()) {
+                    return 1;
+                } else if (b.isSpectacle() && !a.isSpectacle()
+                        && b.getPayCosts().getTotalMana().getCMC() < a.getPayCosts().getTotalMana().getCMC()) {
+                    return 1;
+                }
+            }
+
             a1 += getSpellAbilityPriority(a);
             b1 += getSpellAbilityPriority(b);
 

@@ -96,7 +96,9 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
             build.add(keyword);
         }
 
-        build.add(edition.getCode());
+        if (edition != null) {
+            build.add(edition.getCode());
+        }
 
         // Should future image file names be all lower case? Instead of Up case sets?
         return StringUtils.join(build, "_").toLowerCase();
@@ -121,7 +123,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     @Override public String getName() { return name; }
 
     @Override public String toString() { return name; }
-    @Override public String getEdition() { return edition.getCode(); }
+    @Override public String getEdition() { return edition != null ? edition.getCode() : "???"; }
     @Override public int getArtIndex() { return 0; } // This might change however
     @Override public boolean isFoil() { return false; }
     @Override public CardRules getRules() { return card; }

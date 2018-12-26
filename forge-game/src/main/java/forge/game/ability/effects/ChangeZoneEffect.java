@@ -429,7 +429,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         final boolean optional = sa.hasParam("Optional");
         final long ts = game.getNextTimestamp();
-        final Map<ZoneType, CardCollection> triggerList = Maps.newEnumMap(ZoneType.class);
+        final CardZoneTable triggerList = new CardZoneTable();
         
         for (final Card tgtC : tgtCards) {
             if (tgt != null && tgtC.isInPlay() && !tgtC.canBeTargetedBy(sa)) {
@@ -602,10 +602,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
             }
             if (!movedCard.getZone().equals(originZone)) {
-                if (!triggerList.containsKey(originZone.getZoneType())) {
-                    triggerList.put(originZone.getZoneType(), new CardCollection());
-                }
-                triggerList.get(originZone.getZoneType()).add(movedCard);
+                triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
 
                 if (remember != null) {
                     hostCard.addRemembered(movedCard);
@@ -619,12 +616,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
         }
 
-        if (!triggerList.isEmpty()) {
-            final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("Cards", triggerList);
-            runParams.put("Destination", destination);
-            game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
-        }
+        triggerList.triggerChangesZoneAll(game);
 
         // for things like Gaea's Blessing
         if (destination.equals(ZoneType.Library) && sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle"))) {
@@ -951,8 +943,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         CardCollection movedCards = new CardCollection();
         long ts = game.getNextTimestamp();
-        final Map<ZoneType, CardCollection> triggerList = Maps.newEnumMap(ZoneType.class);
-        for (Card c : chosenCards) {
+        final CardZoneTable triggerList = new CardZoneTable();
+        for (final Card c : chosenCards) {
             Card movedCard = null;
             final Zone originZone = game.getZoneOf(c);
             if (destination.equals(ZoneType.Library)) {
@@ -1117,10 +1109,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             movedCards.add(movedCard);
 
             if (originZone != null) {
-                if (!triggerList.containsKey(originZone.getZoneType())) {
-                    triggerList.put(originZone.getZoneType(), new CardCollection());
-                }
-                triggerList.get(originZone.getZoneType()).add(movedCard);
+                triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
             }
 
             if (champion) {
@@ -1152,13 +1141,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             player.shuffle(sa);
         }
 
-        if (!triggerList.isEmpty()) {
-            final Map<String, Object> runParams = Maps.newHashMap();
-            runParams.put("Cards", triggerList);
-            runParams.put("Destination", destination);
-            game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
-        }
-        
+        triggerList.triggerChangesZoneAll(game);
     }
 
     private static boolean allowMultiSelect(Player decider, SpellAbility sa) {
@@ -1230,25 +1213,5 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 System.out.println("Moving spell to " + srcSA.getParam("Destination"));
             }
         }
-    }
-
-    private static boolean checkCanIndirectlyAttachTo(final Card source, final Card target) {
-        final SpellAbility attachEff = source.getFirstAttachSpell();
-
-        if (attachEff == null) {
-            return false;
-        }
-
-        final Game game = source.getGame();
-        final TargetRestrictions tgt = attachEff.getTargetRestrictions();
-
-        Player attachEffCtrl = attachEff.getActivatingPlayer();
-        if (attachEffCtrl == null && attachEff.getHostCard() != null) {
-            attachEffCtrl = attachEff.getHostCard().getController();
-        }
-
-        CardCollectionView list = game.getCardsIn(tgt.getZone());
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), attachEffCtrl, source, attachEff);
-        return list.contains(target);
     }
 }

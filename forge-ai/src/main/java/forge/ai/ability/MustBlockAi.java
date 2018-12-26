@@ -126,7 +126,8 @@ public class MustBlockAi extends SpellAbilityAi {
         return chance;
     }
 
-    private List<Card> determineGoodBlockers(Card attacker, Player ai, Player defender, SpellAbility sa, boolean onlyLethal, boolean testTapped) {
+    private List<Card> determineGoodBlockers(final Card attacker, final Player ai, Player defender, SpellAbility sa,
+            final boolean onlyLethal, final boolean testTapped) {
         final Card source = sa.getHostCard();
         final TargetRestrictions abTgt = sa.getTargetRestrictions();
 

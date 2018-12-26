@@ -311,6 +311,10 @@ public class CountersPutAi extends SpellAbilityAi {
             return false;
         }
 
+        if (sa.hasParam("Adapt") && source.getCounters(CounterType.P1P1) > 0) {
+            return false;
+        }
+
         // TODO handle proper calculation of X values based on Cost
         int amount = AbilityUtils.calculateAmount(source, amountStr, sa);
 
@@ -1005,7 +1009,7 @@ public class CountersPutAi extends SpellAbilityAi {
         return Iterables.getFirst(options, null);
     }
 
-    private boolean doMoveCounterLogic(Player ai, SpellAbility sa, PhaseHandler ph) {
+    private boolean doMoveCounterLogic(final Player ai, SpellAbility sa, PhaseHandler ph) {
         // Spikes (Tempest)
 
         // Try not to do it unless at the end of opponent's turn or the creature is threatened

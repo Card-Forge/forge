@@ -164,7 +164,7 @@ public class CostDiscard extends CostPartWithList {
      */
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard) {
-        return targetCard.getController().discard(targetCard, ability);
+        return targetCard.getController().discard(targetCard, ability, null);
     }
 
     /* (non-Javadoc)

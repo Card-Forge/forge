@@ -15,44 +15,10 @@ public class TriggerChangesZoneAll extends Trigger {
 
     @Override
     public boolean performTest(Map<String, Object> runParams2) {
-        @SuppressWarnings("unchecked")
-        final Map<ZoneType, CardCollection> moved = (Map<ZoneType, CardCollection>) runParams2.get("Cards");
+        final CardZoneTable table = (CardZoneTable) runParams2.get("Cards");
 
-        if (hasParam("Destination")) {
-            if (!getParam("Destination").equals("Any")) {
-                if (!runParams2.get("Destination").equals(ZoneType.valueOf(getParam("Destination")))) {
-                    return false;
-                }
-            }
-        }
-
-        final CardCollection allCards = new CardCollection();
-
-        if (hasParam("Origin")) {
-            if (!getParam("Origin").equals("Any")) {
-                if (getParam("Origin") == null) {
-                    return false;
-                }
-                final List<ZoneType> origin = ZoneType.listValueOf((String)getParam("Origin"));
-                for (ZoneType z : origin) {
-                    if (moved.containsKey(z)) {
-                        allCards.addAll(moved.get(z));
-                    }
-                }
-            }
-        } else {
-            for (CardCollection c : moved.values()) {
-                allCards.addAll(c);
-            }
-        }
-
-        if (hasParam("ValidCards")) {
-            
-            int count = CardLists.getValidCardCount(allCards, getParam("ValidCards").split(","),this.getHostCard().getController(),
-                    this.getHostCard());
-            if (count == 0) {
-                return false;
-            }
+        if (filterCards(table).isEmpty()) {
+            return false;
         }
 
         return true;
@@ -60,30 +26,9 @@ public class TriggerChangesZoneAll extends Trigger {
 
     @Override
     public void setTriggeringObjects(SpellAbility sa) {
-        @SuppressWarnings("unchecked")
-        final Map<ZoneType, CardCollection> moved = (Map<ZoneType, CardCollection>) getRunParams().get("Cards");
+        final CardZoneTable table = (CardZoneTable) getRunParams().get("Cards");
 
-        CardCollection allCards = new CardCollection();
-
-        if (hasParam("Origin")) {
-            if (!getParam("Origin").equals("Any") && getParam("Origin") != null) {
-                final List<ZoneType> origin = ZoneType.listValueOf((String)getParam("Origin"));
-                for (ZoneType z : origin) {
-                    if (moved.containsKey(z)) {
-                        allCards.addAll(moved.get(z));
-                    }
-                }
-            }
-        } else {
-            for (CardCollection c : moved.values()) {
-                allCards.addAll(c);
-            }
-        }
-
-        if (hasParam("ValidCards")) {
-            allCards = CardLists.getValidCards(allCards, getParam("ValidCards").split(","),this.getHostCard().getController(),
-                    this.getHostCard(), sa);
-        }
+        CardCollection allCards = this.filterCards(table);
 
         sa.setTriggeringObject("Cards", allCards);
         sa.setTriggeringObject("Amount", allCards.size());
@@ -94,5 +39,51 @@ public class TriggerChangesZoneAll extends Trigger {
         StringBuilder sb = new StringBuilder();
         sb.append("Amount: ").append(sa.getTriggeringObject("Amount"));
         return sb.toString();
+    }
+
+    private CardCollection filterCards(CardZoneTable table) {
+        CardCollection allCards = new CardCollection();
+        ZoneType destination = null;
+
+        if (hasParam("Destination")) {
+            if (!getParam("Destination").equals("Any")) {
+                destination = ZoneType.valueOf(getParam("Destination"));
+                if (!table.containsColumn(destination)) {
+                    return allCards;
+                }
+            }
+        }
+
+        if (hasParam("Origin") && !getParam("Origin").equals("Any")) {
+            if (getParam("Origin") == null) {
+                return allCards;
+            }
+            final List<ZoneType> origin = ZoneType.listValueOf(getParam("Origin"));
+            for (ZoneType z : origin) {
+                if (table.containsRow(z)) {
+                    if (destination != null) {
+                        allCards.addAll(table.row(z).get(destination));
+                    } else {
+                        for (CardCollection c : table.row(z).values()) {
+                            allCards.addAll(c);
+                        }
+                    }
+                }
+            }
+        } else if (destination != null) {
+            for (CardCollection c : table.column(destination).values()) {
+                allCards.addAll(c);
+            }
+        } else {
+            for (CardCollection c : table.values()) {
+                allCards.addAll(c);
+            }
+        }
+
+        if (hasParam("ValidCards")) {
+            allCards = CardLists.getValidCards(allCards, getParam("ValidCards").split(","),
+                    getHostCard().getController(), getHostCard(), null);
+        }
+        return allCards;
     }
 }

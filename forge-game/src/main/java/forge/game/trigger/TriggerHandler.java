@@ -36,12 +36,15 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Visitor;
+import io.sentry.Sentry;
+import io.sentry.event.BreadcrumbBuilder;
 
 import java.util.*;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimaps;
 
 public class TriggerHandler {
@@ -156,31 +159,51 @@ public class TriggerHandler {
     }
 
     public static Trigger parseTrigger(final String trigParse, final Card host, final boolean intrinsic) {
-        final HashMap<String, String> mapParams = TriggerHandler.parseParams(trigParse);
-        return TriggerHandler.parseTrigger(mapParams, host, intrinsic);
+        try {
+            final Map<String, String> mapParams = TriggerHandler.parseParams(trigParse);
+            return TriggerHandler.parseTrigger(mapParams, host, intrinsic);
+        } catch (Exception e) {
+            String msg = "TriggerHandler:parseTrigger failed to parse";
+            Sentry.getContext().recordBreadcrumb(
+                    new BreadcrumbBuilder().setMessage(msg)
+                    .withData("Card", host.getName()).withData("Trigger", trigParse).build()
+            );
+            //rethrow
+            throw new RuntimeException("Error in Trigger for Card: " + host.getName(), e);
+        }
     }
 
     public static Trigger parseTrigger(final Map<String, String> mapParams, final Card host, final boolean intrinsic) {
         Trigger ret = null;
 
-        final TriggerType type = TriggerType.smartValueOf(mapParams.get("Mode"));
-        ret = type.createTrigger(mapParams, host, intrinsic);
+        try {
+            final TriggerType type = TriggerType.smartValueOf(mapParams.get("Mode"));
+            ret = type.createTrigger(mapParams, host, intrinsic);
 
-        String triggerZones = mapParams.get("TriggerZones");
-        if (null != triggerZones) {
-            ret.setActiveZone(EnumSet.copyOf(ZoneType.listValueOf(triggerZones)));
-        }
+            String triggerZones = mapParams.get("TriggerZones");
+            if (null != triggerZones) {
+                ret.setActiveZone(EnumSet.copyOf(ZoneType.listValueOf(triggerZones)));
+            }
 
-        String triggerPhases = mapParams.get("Phase");
-        if (null != triggerPhases) {
-            ret.setTriggerPhases(PhaseType.parseRange(triggerPhases));
+            String triggerPhases = mapParams.get("Phase");
+            if (null != triggerPhases) {
+                ret.setTriggerPhases(PhaseType.parseRange(triggerPhases));
+            }
+        } catch (Exception e) {
+            String msg = "TriggerHandler:parseTrigger failed to parse";
+            Sentry.getContext().recordBreadcrumb(
+                    new BreadcrumbBuilder().setMessage(msg)
+                    .withData("Card", host.getName()).withData("Params", mapParams.toString()).build()
+            );
+            //rethrow
+            throw new RuntimeException("Error in Trigger for Card: " + host.getName(), e);
         }
 
         return ret;
     }
 
-    private static HashMap<String, String> parseParams(final String trigParse) {
-        final HashMap<String, String> mapParams = new HashMap<String, String>();
+    private static Map<String, String> parseParams(final String trigParse) {
+        final Map<String, String> mapParams = Maps.newHashMap();
 
         if (trigParse.length() == 0) {
             throw new RuntimeException("TriggerFactory : registerTrigger -- trigParse too short");

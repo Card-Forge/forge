@@ -1,6 +1,6 @@
 Name:Etrata, the Silencer
 ManaCost:2 U B
-Types:Legendary Creature Vampire Assasin
+Types:Legendary Creature Vampire Assassin
 PT:3/5
 K:Unblockable
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, exile target creature that player controls and put a hit counter on that card. That player loses the game if they own three or more exiled card with counters on them. CARDNAME's owner shuffles CARDNAME into their library.

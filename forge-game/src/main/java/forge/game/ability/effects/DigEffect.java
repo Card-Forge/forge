@@ -9,6 +9,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardZoneTable;
 import forge.game.card.CounterType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.Player;
@@ -109,6 +110,7 @@ public class DigEffect extends SpellAbilityEffect {
             }
         }
 
+        CardZoneTable table = new CardZoneTable();
         for (final Player p : tgtPlayers) {
             if (tgt != null && !p.canBeTargetedBy(sa)) {
                 continue;
@@ -301,6 +303,7 @@ public class DigEffect extends SpellAbilityEffect {
                         effectHost = sa.getHostCard();
                     }
                     for (Card c : movedCards) {
+                        final ZoneType origin = c.getZone().getZoneType();
                         final PlayerZone zone = c.getOwner().getZone(destZone1);
 
                         if (zone.is(ZoneType.Library) || zone.is(ZoneType.PlanarDeck) || zone.is(ZoneType.SchemeDeck)) {
@@ -321,6 +324,9 @@ public class DigEffect extends SpellAbilityEffect {
                             } else if (destZone1.equals(ZoneType.Exile)) {
                                 c.setExiledWith(effectHost);
                             }
+                        }
+                        if (!origin.equals(c.getZone().getZoneType())) {
+                            table.put(origin, c.getZone().getZoneType(), c);
                         }
 
                         if (sa.hasParam("ExileFaceDown")) {
@@ -357,11 +363,16 @@ public class DigEffect extends SpellAbilityEffect {
                             Collections.reverse(afterOrder);
                         }
                         for (final Card c : afterOrder) {
+                            final ZoneType origin = c.getZone().getZoneType();
+                            Card m;
                             if (destZone2 == ZoneType.Library) {
-                                game.getAction().moveToLibrary(c, libraryPosition2, sa);
+                                m = game.getAction().moveToLibrary(c, libraryPosition2, sa);
                             }
                             else {
-                                game.getAction().moveToVariantDeck(c, destZone2, libraryPosition2, sa);
+                                m = game.getAction().moveToVariantDeck(c, destZone2, libraryPosition2, sa);
+                            }
+                            if (m != null && !origin.equals(m.getZone().getZoneType())) {
+                                table.put(origin, m.getZone().getZoneType(), m);
                             }
                         }
                     }
@@ -369,8 +380,12 @@ public class DigEffect extends SpellAbilityEffect {
                         // just move them randomly
                         for (int i = 0; i < rest.size(); i++) {
                             Card c = rest.get(i);
+                            final ZoneType origin = c.getZone().getZoneType();
                             final PlayerZone toZone = c.getOwner().getZone(destZone2);
                             c = game.getAction().moveTo(toZone, c, sa);
+                            if (!origin.equals(c.getZone().getZoneType())) {
+                                table.put(origin, c.getZone().getZoneType(), c);
+                            }
                             if (destZone2 == ZoneType.Battlefield && !keywords.isEmpty()) {
                                 for (final String kw : keywords) {
                                     c.addExtrinsicKeyword(kw);
@@ -386,6 +401,8 @@ public class DigEffect extends SpellAbilityEffect {
                 }
             }
         }
+        //table trigger there
+        table.triggerChangesZoneAll(game);
     }
 
     // TODO This should be somewhere else, maybe like CardUtil or something like that
