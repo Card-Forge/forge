@@ -1,5 +1,7 @@
 # Forge
 
+Gitlab repo is found [here](https://git.cardforge.org/core-developers/forge).
+
 Dev instructions here: [Getting Started](https://www.slightlymagic.net/wiki/Forge:How_to_Get_Started_Developing_Forge) (Somewhat outdated)
 
 Discord channel [here](https://discordapp.com/channels/267367946135928833/267742313390931968)
@@ -9,9 +11,10 @@ Discord channel [here](https://discordapp.com/channels/267367946135928833/267742
 - Java IDE such as IntelliJ or Eclipse
 - Git
 - Maven
-- Android dev kit (optional: for Android releases)
-- Xamarin (optional: for iOS development)
 - Gitlab account
+- Libgdx (optional: familiarity with this library is helpful for mobile platform development)
+- Android SDK (optional: for Android releases)
+- RoboVM (optional: for iOS releases) (TBD: Current status of support by libgdx)
 
 # Project Quick Setup
 
@@ -21,14 +24,12 @@ Discord channel [here](https://discordapp.com/channels/267367946135928833/267742
 
 - Go to the project location on your machine.  Run Maven to download all dependencies and build a snapshot.  Example for Windows & Linux: `mvn -U -B clean -P windows-linux install`
 
-- 
-
 # Eclipse
 
 ## Project Setup
 
-- Follow the instructions for cloning from Gitlab.  You'll need a Gitlab account setup and an SSH key defined.  I'm on a
-  windows machine and use Putty with TortoiseGit.  Run puttygen.exe to generate the key -- save the private key and export
+- Follow the instructions for cloning from Gitlab.  You'll need a Gitlab account setup and an SSH key defined.  If you are on a
+  Windows machine you can use Putty with TortoiseGit.  Run puttygen.exe to generate the key -- save the private key and export
   the OpenSSH public key.  If you just leave the dialog open, you can copy and paste the key from it to your Gitlab profile under
   "SSH keys".
    
@@ -38,11 +39,15 @@ Discord channel [here](https://discordapp.com/channels/267367946135928833/267742
 
 - Clone your forked repo to your local machine.
 
-- You need maven to load in dependencies and build.  Install that. `mvn -U -B clean -P windows-linux install` from the root repo dir will create everything needed.
+- Make sure the Java SDK is installed -- not just the JRE.  Java 8 or newer required.  At the time of this writing, JDK 11 works as expected.
 
-- Make sure the Java SDK is installed -- not just the JRE.  Java 8 or newer required.  I'm personally running 11.
+- You need maven to load in dependencies and build.  Obtain that [from here](https://maven.apache.org/download.cgi). Execute the following from the root repo dir to download dependencies, etc:
 
-- Install Eclipse for Java.  Launch it.  I'm using Eclipse 2018-12.
+    `mvn -U -B clean -P windows-linux install`
+    
+  For the desktop, this will create a populated directory at `forge-gui-desktop/target/forge-gui-desktop-<release-name>` containing typical release files such as the jar, Windows executable, resource files, etc.
+
+- Install Eclipse for Java.  Launch it.  At the time of this writing, Eclipse 2018-12 works as expected.  YMMV for other versions.
 
 - Create a workspace.  Go to the workbench.  Right-click inside of Package Explorer > Import... > General > Existing Projects into Workspace > Navigate to local forge repo >
   Check "Search for nested projects" > Uncheck 'forge', check the rest > Finish.
@@ -59,17 +64,56 @@ Discord channel [here](https://discordapp.com/channels/267367946135928833/267742
 
 - Right-click on forge-gui-mobile-dev > Run As... > Java Application > "Main - forge.app" > Proceed
   
+# IntelliJ
+
+TBD  
+
 # General Notes
 
-## Desktop
+## Project Hierarchy
 
-- The desktop GUI is based off of Java Swing.
+Forge is divided into 4 primary projects with additional projects that target specific platform releases.  The primary projects are:
 
-- Use the following build command to create and populate `forge-gui-desktop/target/forge-gui-desktop-<release-name>` for Linux and Windows:
+- forge-ai
+- forge-core
+- forge-game
+- forge-gui
 
-    `mvn -U -B clean -P windows-linux install`
+The platform-specific projects are:
 
-## Mobile
+- forge-gui-android
+- forge-gui-desktop
+- forge-gui-ios
+- forge-gui-mobile
+- forge-gui-mobile-dev
 
-The mobile GUI is based off of [libgdx](https://libgdx.badlogicgames.com/).  As with many other libgdx projects, there is a mobile-dev version "forge-gui-mobile-dev" that runs on the desktop but is separate and distinct from the 'desktop GUI' mentioned above.
+### forge-ai
+
+### forge-core
+
+### forge-game
+
+### forge-gui
+
+### forge-gui-android
+
+Libgdx-based backend targeting Android.  Requires Android SDK and relies on forge-gui-mobile for GUI logic.
+
+### forge-gui-desktop
+
+Java Swing based GUI targeting desktop machines.  
+
+Screen layout and game logic revolving around the GUI is found here.  For example, the overlay arrows (when enabled) that indicate attackers and blockers, or the targets of the stack are defined and drawn by this.
+
+### forge-gui-ios
+
+Libgdx-based backend targeting iOS.  Relies on forge-gui-mobile for GUI logic.
+
+### forge-gui-mobile
+
+Mobile GUI game logic utilizing [libgdx](https://libgdx.badlogicgames.com/) library.  Screen layout and game logic revolving around the GUI for the mobile platforms is found here.
+
+### forge-gui-mobile-dev
+
+Libgdx backend for desktop development for mobile backends.  Utilizes LWJGL.  Relies on forge-gui-mobile for GUI logic.
  
