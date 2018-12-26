@@ -55,6 +55,7 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
         list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(sa));
 
         final boolean remSacrificed = sa.hasParam("RememberSacrificed");
+        // TODO?
         if (remSacrificed) {
             card.clearRemembered();
         }
@@ -67,7 +68,7 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
         for (Card sac : list) {
             final Card lKICopy = CardUtil.getLKICopy(sac);
             if (game.getAction().sacrifice(sac, sa, table) != null && remSacrificed) {
-                card.addRemembered(lKICopy);
+                sa.addRemembered(lKICopy);
             }
         }
         table.triggerChangesZoneAll(game);

@@ -6,9 +6,7 @@ K:Flying
 K:Trample
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player sacrifices a creature. If the player can't, you create a 3/3 black, red, and green Cat Dragon creature token with flying.
 SVar:TrigSac:DB$ Sacrifice | Defined$ TriggeredTarget | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Cat Dragon | TokenTypes$ Creature,Cat,Dragon | TokenOwner$ You | TokenColors$ Black,Red,Green | TokenPower$ 3 | TokenToughness$ 3 | TokenImage$ brg 3 3 cat dragon | TokenKeywords$ Flying | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered $ True
-SVar:X:Remembered$Amount
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ brg_3_3_cat_dragon_flying | TokenOwner$ You | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0
 SVar:MustBeBlocked:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wasitora_nekoru_queen.jpg
 Oracle:Flying, trample\nWhenever Wasitora, Nekoru Queen deals combat damage to a player, that player sacrifices a creature. If the player can't, you create a 3/3 black, red, and green Cat Dragon creature token with flying.

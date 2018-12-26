@@ -129,15 +129,15 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                     game.getUntap().addUntil(p, new GameCommand() {
                         @Override
                         public void run() {
-                            source.addRemembered(p);
+                            repeat.addRemembered(p);
                             AbilityUtils.resolve(repeat);
-                            source.removeRemembered(p);
+                            repeat.removeRemembered(p);
                         }
                     });
                 } else {
-                    source.addRemembered(p);
+                    repeat.addRemembered(p);
                     AbilityUtils.resolve(repeat);
-                    source.removeRemembered(p);
+                    repeat.removeRemembered(p);
                 }
             }
         }

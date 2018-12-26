@@ -7,8 +7,7 @@ K:First Strike
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigElderSpawnSacrifice | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may sacrifice an artifact. If you don't, tap CARDNAME and it deals 2 damage to you.
 SVar:TrigElderSpawnSacrifice:DB$ Sacrifice | SacValid$ Artifact | Optional$ True | RememberSacrificed$ True | SubAbility$ DBElderSpawnSacrificeMe
 SVar:DBElderSpawnSacrificeMe:DB$ Tap | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Artifact | ConditionCompare$ EQ0 | SubAbility$ DBElderSpawnDamage
-SVar:DBElderSpawnDamage:DB$ DealDamage | Defined$ You | NumDmg$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Artifact | ConditionCompare$ EQ0 | SubAbility$ DBElderSpawnCleanup
-SVar:DBElderSpawnCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBElderSpawnDamage:DB$ DealDamage | Defined$ You | NumDmg$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Artifact | ConditionCompare$ EQ0
 SVar:NeedsToPlayVar:Z GE3
 SVar:Z:Count$Valid Artifact.YouCtrl+inZoneBattlefield
 AI:RemoveDeck:Random

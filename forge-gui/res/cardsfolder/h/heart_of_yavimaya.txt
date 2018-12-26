@@ -4,10 +4,10 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target creature gets +1/+1 until end of turn.
 R:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ PayBeforeETB | Description$ If CARDNAME would enter the battlefield, sacrifice a Forest instead. If you do, put CARDNAME onto the battlefield. If you don't, put it into its owner's graveyard.
-SVar:PayBeforeETB:DB$ Sacrifice | SacValid$ Forest | Defined$ You | RememberSacrificed$ True | SubAbility$ MoveToGraveyard
-SVar:MoveToGraveyard:DB$ ChangeZone | Origin$ All | Destination$ Graveyard | Defined$ ReplacedCard | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ MoveToBattlefield
-SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:PayBeforeETB:DB$ Sacrifice | SacValid$ Forest | Defined$ You | RememberSacrificed$ True | SubAbility$ DBBranch
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | References$ X | TrueSubAbility$ MoveToBattlefield | FalseSubAbility$ MoveToGraveyard
+SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
+SVar:MoveToGraveyard:DB$ ChangeZone | Origin$ All | Destination$ Graveyard | Defined$ ReplacedCard
 SVar:X:Remembered$Amount
 SVar:NeedsToPlay:Forest.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_of_yavimaya.jpg

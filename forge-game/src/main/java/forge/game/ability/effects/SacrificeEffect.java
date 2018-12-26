@@ -89,16 +89,13 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
         final boolean destroy = sa.hasParam("Destroy");
         final boolean remSacrificed = sa.hasParam("RememberSacrificed");
-        final String remSVar = sa.getParam("RememberSacrificedSVar");
-        int countSacrificed = 0;
         CardZoneTable table = new CardZoneTable();
 
         if (valid.equals("Self") && game.getZoneOf(card) != null) {
             if (game.getZoneOf(card).is(ZoneType.Battlefield)) {
                 if (game.getAction().sacrifice(card, sa, table) != null) {
-                    countSacrificed++;
                     if (remSacrificed) {
-                        card.addRemembered(card);
+                        sa.addRemembered(card);
                     }
                 }
             }
@@ -152,21 +149,11 @@ public class SacrificeEffect extends SpellAbilityEffect {
                         game.getTriggerHandler().runTrigger(TriggerType.Exploited, runParams, false);
                     }
                     if (wasDestroyed || wasSacrificed) {
-                    	countSacrificed++;
                     	if (remSacrificed) {
-                    		card.addRemembered(lKICopy);
+                    	   sa.addRemembered(lKICopy);
                     	}
                     }
                 }
-            }
-
-            if (remSVar != null) {
-            	card.setSVar(remSVar, String.valueOf(countSacrificed));
-            	SpellAbility root = sa;
-            	do {
-            		root.setSVar(remSVar, String.valueOf(countSacrificed));
-            		root = root.getSubAbility();
-            	} while (root != null);
             }
         }
 

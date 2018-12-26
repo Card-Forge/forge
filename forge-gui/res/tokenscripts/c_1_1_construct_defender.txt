@@ -1,0 +1,7 @@
+Name:Construct
+ManaCost:no cost
+Types:Artifact Creature Construct
+Colors:colorless
+PT:1/1
+K:Defender
+Oracle:Defender
