@@ -21,6 +21,8 @@ Discord channel [here](https://discordapp.com/channels/267367946135928833/267742
 
 - Go to the project location on your machine.  Run Maven to download all dependencies and build a snapshot.  Example for Windows & Linux: `mvn -U -B clean -P windows-linux install`
 
+- 
+
 # Eclipse
 
 ## Project Setup
@@ -61,9 +63,13 @@ Discord channel [here](https://discordapp.com/channels/267367946135928833/267742
 
 ## Desktop
 
-The desktop GUI is based off of Java Swing.
+- The desktop GUI is based off of Java Swing.
+
+- Use the following build command to create and populate `forge-gui-desktop/target/forge-gui-desktop-<release-name>` for Linux and Windows:
+
+    `mvn -U -B clean -P windows-linux install`
 
 ## Mobile
 
-The mobile GUI is based off of [libgdx](https://libgdx.badlogicgames.com/).  As with many other libgdx projects, there is a mobile-dev version that runs on the desktop but is separate and distinct from the 'desktop GUI' mentioned above.
+The mobile GUI is based off of [libgdx](https://libgdx.badlogicgames.com/).  As with many other libgdx projects, there is a mobile-dev version "forge-gui-mobile-dev" that runs on the desktop but is separate and distinct from the 'desktop GUI' mentioned above.
  
