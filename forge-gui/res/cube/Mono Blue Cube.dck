@@ -8,16 +8,16 @@ Name=Mono Blue Cube
 1 Aether Spellbomb|MMA
 1 Aether Vial|IMA
 1 Aetherling|DGM
-1 All Is Dust|MM2
+1 All Is Dust|UMA
 1 Ambassador Laquatus|10E
 1 Amnesia|DRK
 1 Ancestral Recall|VMA
 1 Ancestral Vision|IMA
-1 Ancient Tomb|VMA
+1 Ancient Tomb|UMA
 1 Ankh of Mishra|VMA
 1 Annul|THS
 1 Arcanis the Omnipotent|EMA
-1 Archaeomancer|M14
+1 Archaeomancer|UMA
 1 Archive Trap|ZEN
 1 Augur of Bolas|MM3
 1 Basalt Monolith|3ED
@@ -42,7 +42,7 @@ Name=Mono Blue Cube
 1 Candelabra of Tawnos|ATQ
 1 Capsize|TPR
 1 Careful Consideration|MMA
-1 Cavern of Souls|MM3
+1 Cavern of Souls|UMA
 1 Chalice of the Void|A25
 1 Chancellor of the Spires|NPH
 1 Chronomaton|M13
@@ -90,7 +90,7 @@ Name=Mono Blue Cube
 1 Duplicant|EMA
 1 Elite Arcanist|M14
 1 Elixir of Immortality|M14
-1 Emrakul, the Aeons Torn|MM2
+1 Emrakul, the Aeons Torn|UMA
 1 Enclave Cryptologist|ROE
 1 Enter the Infinite|GTC
 1 Errant Ephemeron|MMA
@@ -105,17 +105,17 @@ Name=Mono Blue Cube
 1 Faerie Harbinger|LRW
 1 Flash of Insight|JUD
 1 Flusterstorm|IMA
-1 Foil|PCY
+1 Foil|UMA
 1 Forbid|TPR
 1 Force of Will|EMA
 1 Force Spike|7ED
-1 Frantic Search|VMA
+1 Frantic Search|UMA
 1 Frost Titan|M12
 1 Gainsay|THS
 1 Geralf's Mindcrusher|DKA
-1 Gilded Lotus|M13
+1 Gilded Lotus|DOM
 1 Gitaxian Probe|NPH
-1 Glen Elendra Archmage|MMA
+1 Glen Elendra Archmage|UMA
 1 Gomazoa|ZEN
 1 Grafted Wargear|5DN
 1 Grand Architect|SOM
@@ -145,12 +145,12 @@ Name=Mono Blue Cube
 1 Jace, the Mind Sculptor|VMA
 1 Jace's Archivist|M12
 1 Jushi Apprentice|CHK
-1 Karn Liberated|MM2
+1 Karn Liberated|UMA
 1 Kederekt Leviathan|ALA
 1 Keening Stone|ROE
 1 Knowledge Pool|MBS
 1 Kuldotha Forgemaster|SOM
-1 Laboratory Maniac|ISD
+1 Laboratory Maniac|UMA
 1 Legerdemain|TPR
 1 Leyline of Anticipation|M11
 1 Library of Alexandria|VMA
@@ -166,7 +166,7 @@ Name=Mono Blue Cube
 1 Mana Crypt|EMA
 1 Mana Drain|IMA
 1 Mana Leak|IMA
-1 Mana Vault|VMA
+1 Mana Vault|UMA
 1 Master of the Pearl Trident|M13
 1 Master of Waves|THS
 1 Master Thief|M12
@@ -211,7 +211,7 @@ Name=Mono Blue Cube
 1 Nimbus Naiad|THS
 1 Ninja of the Deep Hours|BOK
 1 Oblivion Stone|IMA
-1 Omniscience|M13
+1 Omniscience|M19
 1 Oona, Queen of the Fae|MMA
 1 Opportunity|MM3
 1 Overtaker|MMQ
@@ -230,7 +230,7 @@ Name=Mono Blue Cube
 1 Phyrexian Metamorph|NPH
 1 Piracy Charm|PLC
 1 Platinum Angel|M11
-1 Plumeveil|MMA
+1 Plumeveil|UMA
 1 Ponder|M12
 1 Pongify|PLC
 1 Portent|5ED
@@ -250,7 +250,7 @@ Name=Mono Blue Cube
 1 Raven Guild Master|SCG
 1 Ray of Command|5ED
 1 Reconstruction|3ED
-1 Reliquary Tower|M13
+1 Reliquary Tower|M19
 1 Remand|MM2
 1 Remote Isle|USG
 1 Repeal|IMA
@@ -280,9 +280,9 @@ Name=Mono Blue Cube
 1 Silvergill Adept|RIX
 1 Skullclamp|VMA
 1 Skywatcher Adept|ROE
-1 Sleight of Hand|9ED
+1 Sleight of Hand|UMA
 1 Smokestack|VMA
-1 Snapcaster Mage|MM3
+1 Snapcaster Mage|UMA
 1 Sol Ring|VMA
 1 Sower of Temptation|LRW
 1 Spell Pierce|XLN
@@ -314,7 +314,7 @@ Name=Mono Blue Cube
 1 Thalakos Deceiver|STH
 1 Thassa, God of the Sea|THS
 1 The Tabernacle at Pendrell Vale
-1 Think Twice|ISD
+1 Think Twice|UMA
 1 Thistledown Liege|SHM
 1 Thought Scour|IMA
 1 Thran Dynamo|IMA
@@ -332,7 +332,7 @@ Name=Mono Blue Cube
 1 Treachery|UDS
 1 True-Name Nemesis
 1 Turnabout|VMA
-1 Ulamog, the Infinite Gyre|MM2
+1 Ulamog, the Infinite Gyre|UMA
 1 Umezawa's Jitte|BOK
 1 Undo|VIS
 1 Upheaval|VMA
@@ -346,7 +346,7 @@ Name=Mono Blue Cube
 1 Vesuvan Shapeshifter|A25
 1 Vexing Sphinx|CSP
 1 Vision Charm|VIS
-1 Visions of Beyond|M12
+1 Visions of Beyond|UMA
 1 Vodalian Knights|FEM
 1 Void Stalker|M13
 1 Voidmage Prodigy|TSB
