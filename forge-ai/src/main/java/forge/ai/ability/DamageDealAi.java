@@ -11,6 +11,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.cost.CostRemoveCounter;
 import forge.game.keyword.Keyword;
@@ -283,6 +284,18 @@ public class DamageDealAi extends DamageAiBase {
                     actualPay = actualPay > 2 ? actualPay - 2 : 0;
                 }
                 source.setSVar("PayX", Integer.toString(actualPay));
+            }
+        }
+
+        if ("XCountersDamage".equals(logic) && sa.getPayCosts() != null) {
+            // Check to ensure that we have enough counters to remove per the defined PayX
+            for (CostPart part : sa.getPayCosts().getCostParts()) {
+                if (part instanceof CostRemoveCounter) {
+                    if (source.getCounters(((CostRemoveCounter) part).counter) < Integer.valueOf(source.getSVar("PayX"))) {
+                        return false;
+                    }
+                    break;
+                }
             }
         }
 
@@ -1080,7 +1093,7 @@ public class DamageDealAi extends DamageAiBase {
                                 continue; // not a toughness debuff
                             }
                         }
-                        if (StringUtils.isNumeric(dmgDef) && ab.canPlay()) { // currently doesn't work for X and other dependent costs
+                        if (StringUtils.isNumeric(dmgDef)) { // currently doesn't work for X and other dependent costs
                             if (sa.usesTargeting() && ab.usesTargeting()) {
                                 // Ensure that the chained spell can target at least the same things (or more) as the current one
                                 TargetRestrictions tgtSa = sa.getTargetRestrictions();
