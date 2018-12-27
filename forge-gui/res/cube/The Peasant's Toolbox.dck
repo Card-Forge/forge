@@ -9,7 +9,7 @@ Name=The Peasant's Toolbox
 1 Aether Figment|ZEN
 1 Aether Vial|IMA
 1 Aetherize|IMA
-1 Aethersnipe|MM2
+1 Aethersnipe|UMA
 1 Affa Guard Hound|ROE
 1 Agent of Horizons|THS
 1 Agony Warp|MM3
@@ -60,7 +60,7 @@ Name=The Peasant's Toolbox
 1 Beetleform Mage|DGM
 1 Beseech the Queen|SHM
 1 Bituminous Blast|ARB
-1 Blast of Genius|DGM
+1 Blast of Genius|UMA
 1 Blessings of Nature|AVR
 1 Blightning|A25
 1 Blind Creeper|5DN
@@ -72,7 +72,7 @@ Name=The Peasant's Toolbox
 1 Blood Artist|EMA
 1 Blood Ogre|MM2
 1 Bloodbraid Elf|EMA
-1 Bloodflow Connoisseur|AVR
+1 Bloodflow Connoisseur|UMA
 1 Bloodhusk Ritualist|WWK
 1 Boggart Ram-Gang|SHM
 1 Boldwyr Intimidator|CNS
@@ -83,7 +83,7 @@ Name=The Peasant's Toolbox
 1 Boros Charm|A25
 1 Boros Elite|GTC
 1 Boros Garrison|IMA
-1 Boros Guildgate|MM3
+1 Boros Guildgate|GRN
 1 Boros Guildmage|RAV
 1 Boros Keyrune|GTC
 1 Brackwater Elemental|CFX
@@ -101,7 +101,7 @@ Name=The Peasant's Toolbox
 1 Burst Lightning|MM2
 1 Cage of Hands|CHK
 1 Call of the Nightwing|GTC
-1 Canker Abomination|EVE
+1 Canker Abomination|UMA
 1 Cankerous Thirst|EVE
 1 Caravan Escort|ROE
 1 Careful Consideration|MMA
@@ -153,12 +153,12 @@ Name=The Peasant's Toolbox
 1 Darkthicket Wolf|ISD
 1 Dauntless Onslaught|THS
 1 Dauntless River Marshal|M15
-1 Dawn Charm|PLC
+1 Dawn Charm|UMA
 1 Dawnglare Invoker|ROE
 1 Dawntreader Elk|DKA
 1 Dead Reckoning|WWK
 1 Deadly Allure|DKA
-1 Death Denied|MM2
+1 Death Denied|UMA
 1 Deathbellow Raider|THS
 1 Death-Hood Cobra|MM3
 1 Deceiver Exarch|NPH
@@ -171,8 +171,8 @@ Name=The Peasant's Toolbox
 1 Diabolic Tutor|KLD
 1 Dimir Aqueduct|IMA
 1 Dimir Charm|GTC
-1 Dimir Guildgate|MM3
-1 Dimir Guildmage|MM2
+1 Dimir Guildgate|GRN
+1 Dimir Guildmage|UMA
 1 Dimir House Guard|RAV
 1 Dimir Infiltrator|RAV
 1 Dimir Keyrune|GTC
@@ -185,10 +185,10 @@ Name=The Peasant's Toolbox
 1 Domestication|M14
 1 Double Stroke|CNS
 1 Down // Dirty|DGM
-1 Dragon Egg|IMA
+1 Dragon Egg|M19
 1 Dragon Mantle|THS
 1 Dread Statuary|WWK
-1 Dreamscape Artist|PLC
+1 Dreamscape Artist|UMA
 1 Dreg Mangler|RTR
 1 Drift of Phantasms|RAV
 1 Drifter il-Dal|TSP
@@ -201,7 +201,7 @@ Name=The Peasant's Toolbox
 1 Duty-Bound Dead|M13
 1 Earthbrawn|MOR
 1 Edge of Autumn|FUT
-1 Eel Umbra|ROE
+1 Eel Umbra|UMA
 1 Electrolyze|IMA
 1 Emblem of the Warmind|FUT
 1 Emrakul's Hatcher|ROE
@@ -213,12 +213,12 @@ Name=The Peasant's Toolbox
 1 Erebos's Emissary|THS
 1 Erratic Mutation|MMA
 1 Esper Panorama|ALA
-1 Essence Scatter|AKH
+1 Essence Scatter|M19
 1 Everflame Eidolon|BNG
 1 Evolution Charm|PLC
 1 Executioner's Swing|GTC
 1 Faerie Conclave|10E
-1 Faith's Fetters|EMA
+1 Faith's Fetters|UMA
 1 Falkenrath Exterminator|AVR
 1 Falkenrath Noble|MM3
 1 Fallen Ideal|TSP
@@ -231,7 +231,7 @@ Name=The Peasant's Toolbox
 1 Feral Invocation|THS
 1 Festerhide Boar|ISD
 1 Fettergeist|AVR
-1 Fiend Hunter|A25
+1 Fiend Hunter|UMA
 1 Fiery Fall|MM2
 1 Final-Sting Faerie|MOR
 1 Fire at Will|EVE
@@ -247,7 +247,7 @@ Name=The Peasant's Toolbox
 1 Fleshbag Marauder|ORI
 1 Fleshwrither|FUT
 1 Flickerwisp|MM3
-1 Flight of Fancy|RAV
+1 Flight of Fancy|UMA
 1 Flinthoof Boar|EMA
 1 Floodchaser|MOR
 1 Fluxcharger|DGM
@@ -262,11 +262,11 @@ Name=The Peasant's Toolbox
 1 Frostburn Weird|RTR
 1 Fungal Sprouting|M13
 1 Galvanic Arc|RAV
-1 Gargoyle Sentinel|M15
+1 Gargoyle Sentinel|M19
 1 Gatekeeper of Malakir|ZEN
 1 Gatstaf Shepherd|ISD
 1 Gelectrode|GPT
-1 Generator Servant|M15
+1 Generator Servant|UMA
 1 Genju of the Cedars|BOK
 1 Genju of the Falls|A25
 1 Genju of the Fens|BOK
@@ -292,14 +292,14 @@ Name=The Peasant's Toolbox
 1 Gnarled Scarhide|JOU
 1 Gnarlid Pack|MM2
 1 Goblin Bushwhacker|ZEN
-1 Goblin Electromancer|MM3
+1 Goblin Electromancer|GRN
 1 Goblin Wardriver|MBS
 1 God-Favored General|BNG
 1 Goldmeadow Lookout|FUT
 1 Goldnight Commander|AVR
-1 Golgari Charm|RTR
+1 Golgari Charm|UMA
 1 Golgari Decoy|RTR
-1 Golgari Guildgate|MM3
+1 Golgari Guildgate|GRN
 1 Golgari Keyrune|RTR
 1 Golgari Rot Farm|IMA
 1 Gorehorn Minotaurs|MM2
@@ -347,9 +347,9 @@ Name=The Peasant's Toolbox
 1 Hunger of the Howlpack|CNS
 1 Hunt the Weak|RIX
 1 Hunting Triad|MOR
-1 Hyena Umbra|ROE
+1 Hyena Umbra|UMA
 1 Hypervolt Grasp|GPT
-1 Icatian Crier|TSP
+1 Icatian Crier|UMA
 1 Ichor Slick|FUT
 1 Ill-Tempered Cyclops|THS
 1 Immediate Action|CNS
@@ -365,7 +365,7 @@ Name=The Peasant's Toolbox
 1 Into the Roil|ZEN
 1 Izzet Boilerworks|IMA
 1 Izzet Charm|MM3
-1 Izzet Guildgate|MM3
+1 Izzet Guildgate|GRN
 1 Izzet Keyrune|RTR
 1 Izzet Staticaster|RTR
 1 Jackal Familiar|M10
@@ -385,12 +385,12 @@ Name=The Peasant's Toolbox
 1 Kingpin's Pet|GTC
 1 Kiora's Follower|BNG
 1 Kird Chieftain|M15
-1 Kitchen Finks|MMA
+1 Kitchen Finks|UMA
 1 Knight of Cliffhaven|ROE
 1 Knight of Obligation|GTC
 1 Knight of the Holy Nimbus|TSP
 1 Knight of the Skyward Eye|A25
-1 Knightly Valor|ORI
+1 Knightly Valor|M19
 1 Kor Aeronaut|ZEN
 1 Kor Skyfisher|MM3
 1 Korozda Guildmage|RTR
@@ -416,7 +416,7 @@ Name=The Peasant's Toolbox
 1 Loyal Pegasus|BNG
 1 Lust for War|ROE
 1 Lyev Skyknight|RTR
-1 Mad Prophet|SOI
+1 Mad Prophet|UMA
 1 Madcap Skills|MM3
 1 Magma Jet|MM3
 1 Makeshift Mannequin|LRW
@@ -434,7 +434,7 @@ Name=The Peasant's Toolbox
 1 Mirrodin's Core|CNS
 1 Mist Raven|MM3
 1 Mistblade Shinobi|BOK
-1 Moan of the Unhallowed|ISD
+1 Moan of the Unhallowed|UMA
 1 Mogg War Marshal|EMA
 1 Mogis's Warhound|JOU
 1 Moldervine Cloak|MMA
@@ -444,9 +444,9 @@ Name=The Peasant's Toolbox
 1 Mortis Dogs|NPH
 1 Muddle the Mixture|RAV
 1 Mulldrifter|MM2
-1 Murderous Redcap|MMA
+1 Murderous Redcap|UMA
 1 Muzzio's Preparations|CNS
-1 Mystic Retrieval|DKA
+1 Mystic Retrieval|UMA
 1 Mystical Teachings|MM3
 1 Naya Panorama|ALA
 1 Nearheath Pilgrim|AVR
@@ -459,7 +459,7 @@ Name=The Peasant's Toolbox
 1 New Prahv Guildmage|RTR
 1 Nezumi Graverobber|CHK
 1 Niblis of the Breath|DKA
-1 Nightbird's Clutches|ISD
+1 Nightbird's Clutches|UMA
 1 Nightfire Giant|M15
 1 Nightshade Assassin|TSP
 1 Nightshade Peddler|AVR
@@ -512,12 +512,12 @@ Name=The Peasant's Toolbox
 1 Plaxcaster Frogling|MM2
 1 Plaxmanta|DIS
 1 Plumes of Peace|DIS
-1 Plumeveil|MMA
+1 Plumeveil|UMA
 1 Porcelain Legionnaire|NPH
 1 Pouncing Wurm|PLC
 1 Power Play|CNS
 1 Premature Burial|TSP
-1 Prismatic Lens|EMA
+1 Prismatic Lens|UMA
 1 Prized Elephant|M13
 1 Profit // Loss|DGM
 1 Prophetic Prism|A25
@@ -537,7 +537,7 @@ Name=The Peasant's Toolbox
 1 Rakdos Charm|RTR
 1 Rakdos Guildgate|MM3
 1 Rakdos Keyrune|RTR
-1 Rally the Peasants|EMA
+1 Rally the Peasants|UMA
 1 Reach of Branches|MMA
 1 Read the Bones|ORI
 1 Reciprocate|CHK
@@ -564,7 +564,7 @@ Name=The Peasant's Toolbox
 1 River's Grasp|SHM
 1 Rix Maadi Guildmage|RTR
 1 Roc Egg|M12
-1 Rolling Temblor|ISD
+1 Rolling Temblor|UMA
 1 Rootwalla|TPR
 1 Rubblebelt Maaka|MM3
 1 Satyr Nyx-Smith|BNG
@@ -583,7 +583,7 @@ Name=The Peasant's Toolbox
 1 Seedcradle Witch|SHM
 1 Selesnya Charm|RTR
 1 Selesnya Evangel|RAV
-1 Selesnya Guildgate|MM3
+1 Selesnya Guildgate|GRN
 1 Selesnya Keyrune|RTR
 1 Selesnya Sanctuary|IMA
 1 Selkie Hedge-Mage|EVE
@@ -602,7 +602,7 @@ Name=The Peasant's Toolbox
 1 Shinen of Life's Roar|SOK
 1 Shipwreck Singer|THS
 1 Shrewd Hatchling|MM2
-1 Shriekmaw|LRW
+1 Shriekmaw|UMA
 1 Shrike Harpy|BNG
 1 Shuriken|BOK
 1 Sickleslicer|MM2
@@ -624,15 +624,15 @@ Name=The Peasant's Toolbox
 1 Skirsdag Cultist|MM3
 1 Skitter of Lizards|CNS
 1 Sky Hussar|DIS
-1 Skyknight Legionnaire|MM3
+1 Skyknight Legionnaire|GRN
 1 Skymark Roc|RTR
 1 Slaughterhorn|MM3
 1 Sluiceway Scorpion|RTR
-1 Slum Reaper|RTR
+1 Slum Reaper|UMA
 1 Smallpox|CNS
 1 Smite|TPR
 1 Snake of the Golden Grove|BNG
-1 Snake Umbra|ROE
+1 Snake Umbra|UMA
 1 Snakeform|EVE
 1 Somberwald Spider|ISD
 1 Soratami Savant|CHK
@@ -640,12 +640,12 @@ Name=The Peasant's Toolbox
 1 Soul Snuffers|EVE
 1 Soul Stair Expedition|ZEN
 1 Soulsworn Jury|DIS
-1 Sparkspitter|FUT
+1 Sparkspitter|UMA
 1 Spawning Pool|10E
 1 Spearpoint Oread|THS
 1 Spell Contortion|WWK
 1 Spell Rupture|GTC
-1 Spider Spawning|ISD
+1 Spider Spawning|UMA
 1 Spike Jester|MM3
 1 Spirespine|JOU
 1 Spirit en-Dal|FUT
@@ -660,8 +660,8 @@ Name=The Peasant's Toolbox
 1 Stand Together|DST
 1 Stingscourger|EMA
 1 Stinkweed Imp|MMA
-1 Stitched Drake|ISD
-1 Stitcher's Apprentice|ISD
+1 Stitched Drake|UMA
+1 Stitcher's Apprentice|UMA
 1 Stonefare Crocodile|RTR
 1 Stoneshock Giant|THS
 1 Stonewright|AVR
@@ -684,13 +684,13 @@ Name=The Peasant's Toolbox
 1 Syndic of Tithes|GTC
 1 Syphon Life|MMA
 1 Tandem Lookout|MM3
-1 Terramorphic Expanse|MMA
+1 Terramorphic Expanse|UMA
 1 Terrus Wurm|RTR
 1 Test of Faith|MMA
 1 Tezzeret's Gambit|MM2
 1 Thassa's Emissary|THS
 1 Thatcher Revolt|AVR
-1 Think Twice|ISD
+1 Think Twice|UMA
 1 Thornscape Battlemage|MM3
 1 Thorn-Thrash Viashino|ALA
 1 Thraben Sentry|ISD
@@ -718,7 +718,7 @@ Name=The Peasant's Toolbox
 1 Trained Condor|M14
 1 Transguild Promenade|RTR
 1 Traumatic Visions|MMA
-1 Travel Preparations|ISD
+1 Travel Preparations|UMA
 1 Traveler's Amulet|RIX
 1 Treetop Village|10E
 1 Trestle Troll|RTR
@@ -736,7 +736,7 @@ Name=The Peasant's Toolbox
 1 Twinstrike|DIS
 1 Twisted Abomination|A25
 1 Ulvenwald Bear|DKA
-1 Unburial Rites|MM3
+1 Unburial Rites|UMA
 1 Undercity Informer|GTC
 1 Undying Evil|DKA
 1 Unexpected Potential|CNS
@@ -767,7 +767,7 @@ Name=The Peasant's Toolbox
 1 Wakedancer|EMA
 1 Wakestone Gargoyle|CNS
 1 Wall of Tanglecord|SOM
-1 Warleader's Helix|DGM
+1 Warleader's Helix|UMA
 1 War-Wing Siren|JOU
 1 Wasp Lancer|SHM
 1 Wasteland Viper|GTC
@@ -777,11 +777,11 @@ Name=The Peasant's Toolbox
 1 Wear // Tear|DGM
 1 Weatherseed Totem|TSP
 1 Whiplash Trap|ZEN
-1 Wild Hunger|DKA
+1 Wild Hunger|UMA
 1 Wilt-Leaf Cavaliers|SHM
 1 Windrider Eel|ZEN
 1 Wing Splicer|MM3
-1 Wingsteed Rider|THS
+1 Wingsteed Rider|UMA
 1 Wistful Selkie|EVE
 1 Witch's Mist|FUT
 1 Wojek Halberdiers|GTC

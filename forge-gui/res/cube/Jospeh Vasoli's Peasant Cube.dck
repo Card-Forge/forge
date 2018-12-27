@@ -12,7 +12,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Ambush Viper|ISD
 1 Ana Battlemage|PLC
 1 Ancient Ziggurat|CFX
-1 Anticipate|BFZ
+1 Anticipate|M19
 1 Arachnogenesis
 1 Arbor Elf|A25
 1 Arc Lightning|KTK
@@ -20,7 +20,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Arcane Sanctum|MM3
 1 Archetype of Courage|BNG
 1 Arrest|MM2
-1 Artisan of Kozilek|MM2
+1 Artisan of Kozilek|UMA
 1 Augur of Bolas|MM3
 1 Avacyn's Pilgrim|MM3
 1 Avalanche Riders|TSB
@@ -54,7 +54,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Borderland Marauder|IMA
 1 Borderland Ranger|AVR
 1 Boros Charm|A25
-1 Boros Guildgate|MM3
+1 Boros Guildgate|GRN
 1 Branching Bolt|ALA
 1 Briarhorn|LRW
 1 Briarpack Alpha|M14
@@ -72,7 +72,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Celestial Crusader|TSP
 1 Cenn's Tactician|MOR
 1 Chain Lightning|EMA
-1 Chainer's Edict|TOR
+1 Chainer's Edict|UMA
 1 Chittering Rats|DST
 1 Chronomaton|M13
 1 City of Brass|MMA
@@ -110,7 +110,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Diabolic Servitude|USG
 1 Dimir Aqueduct|IMA
 1 Dimir Signet|MM3
-1 Diregraf Ghoul|ISD
+1 Diregraf Ghoul|M19
 1 Disfigure|A25
 1 Dismember|MM2
 1 Dismiss|TPR
@@ -123,7 +123,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Dromoka Warrior|DTK
 1 Drown in Sorrow|BNG
 1 Dryad Militant|RTR
-1 Duress|IMA
+1 Duress|M19
 1 Duskwatch Recruiter|SOI
 1 Eldrazi Skyspawner|BFZ
 1 Electrolyze|IMA
@@ -143,15 +143,15 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Epochrasite|MMA
 1 Errant Ephemeron|MMA
 1 Esper Charm|ALA
-1 Essence Scatter|AKH
-1 Eternal Witness|MMA
+1 Essence Scatter|M19
+1 Eternal Witness|UMA
 1 Everflowing Chalice|MM2
 1 Evolving Wilds|RIX
 1 Exclude|A25
 1 Expedition Envoy|BFZ
 1 Explore|MM3
 1 Fact or Fiction|EMA
-1 Faith's Fetters|EMA
+1 Faith's Fetters|UMA
 1 Falkenrath Noble|MM3
 1 False Summoning|PO2
 1 Fanatic of Xenagos|BNG
@@ -159,7 +159,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Fencer Clique|MOR
 1 Fervent Cathar|EMA
 1 Feudkiller's Verdict|MMA
-1 Fiend Hunter|A25
+1 Fiend Hunter|UMA
 1 Fire Covenant|ICE
 1 Fire Imp|POR
 1 Fireblast|VMA
@@ -195,7 +195,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Gore-House Chainwalker|RTR
 1 Grafted Wargear|5DN
 1 Grasp of Fate
-1 Gravedigger|AKH
+1 Gravedigger|M19
 1 Gray Merchant of Asphodel|THS
 1 Graypelt Refuge|ZEN
 1 Great Oak Guardian
@@ -203,8 +203,8 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Grizzly Fate|VMA
 1 Gryff Vanguard|AVR
 1 Guardian of the Guildpact|DIS
-1 Gurmag Angler|FRF
-1 Guttersnipe|IMA
+1 Gurmag Angler|UMA
+1 Guttersnipe|M19
 1 Halimar Wavewatch|ROE
 1 Harmonize|MM3
 1 Harrow|TPR
@@ -216,7 +216,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Hordeling Outburst|A25
 1 Hymn to Tourach|EMA
 1 Hypnotic Specter|M10
-1 Icy Manipulator|10E
+1 Icy Manipulator|DOM
 1 Incendiary Flow|EMN
 1 Incinerate|M12
 1 Incremental Blight|SHM
@@ -235,16 +235,16 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Jhessian Thief|IMA
 1 Joraga Treespeaker|ROE
 1 Journey to Nowhere|ZEN
-1 Juggernaut|EMA
+1 Juggernaut|DOM
 1 Jungle Hollow|EMA
 1 Jungle Shrine|MM3
 1 Jwar Isle Refuge|ZEN
 1 Kazandu Refuge|ZEN
 1 Keldon Champion|EMA
 1 Kiln Fiend|IMA
-1 Kitchen Finks|MMA
+1 Kitchen Finks|UMA
 1 Knight of Glory|M13
-1 Kodama's Reach|MMA
+1 Kodama's Reach|UMA
 1 Kor Castigator|BFZ
 1 Kor Hookmaster|MM3
 1 Kozilek's Predator|MM2
@@ -255,10 +255,10 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Lightning Bolt|A25
 1 Lightning Greaves|MRD
 1 Lightning Helix|IMA
-1 Lightning Strike|XLN
+1 Lightning Strike|M19
 1 Liliana's Specter|CNS
 1 Lingering Souls|MM3
-1 Llanowar Elves|EMA
+1 Llanowar Elves|DOM
 1 Looter il-Kor|TSP
 1 Loxodon Warhammer|10E
 1 Lu Xun, Scholar General|PTK
@@ -289,7 +289,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Mishra's Factory|A25
 1 Mist Raven|MM3
 1 Mistral Charger|EMA
-1 Moan of the Unhallowed|ISD
+1 Moan of the Unhallowed|UMA
 1 Mogis's Marauder|THS
 1 Monastery Swiftspear|IMA
 1 Mortarpod|MM2
@@ -297,7 +297,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Mulldrifter|MM2
 1 Murder of Crows|A25
 1 Murderous Cut|KTK
-1 Murderous Redcap|MMA
+1 Murderous Redcap|UMA
 1 Mwonvuli Beast Tracker|M13
 1 Mystic Monastery|KTK
 1 Nantuko Husk|ORI
@@ -314,16 +314,16 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Nylea's Disciple|THS
 1 Nyx Weaver|JOU
 1 Oblivion Ring|MM2
-1 Omenspeaker|THS
+1 Omenspeaker|M19
 1 Opulent Palace|KTK
 1 Oreskos Explorer
 1 Ornitharch|BNG
 1 Overrun|TPR
 1 Pacifism|A25
 1 Path to Exile|MM3
-1 Pelakka Wurm|MM2
+1 Pelakka Wurm|M19
 1 Penumbra Spider|MM3
-1 Penumbra Wurm|VMA
+1 Penumbra Wurm|UMA
 1 Perilous Myr|A25
 1 Persuasion|10E
 1 Pestermite|MMA
@@ -344,8 +344,8 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Porcelain Legionnaire|NPH
 1 Possessed Skaab|ORI
 1 Preordain|M11
-1 Prey Upon|AER
-1 Prismatic Lens|EMA
+1 Prey Upon|UMA
+1 Prismatic Lens|UMA
 1 Pristine Talisman|IMA
 1 Psionic Blast|TSB
 1 Psychatog|VMA
@@ -355,7 +355,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Qarsi High Priest|FRF
 1 Qasali Pridemage|ARB
 1 Quarry Colossus|JOU
-1 Rabid Bite|SOI
+1 Rabid Bite|M19
 1 Radiant, Archangel|VMA
 1 Rakdos Cackler|RTR
 1 Rakshasa Gravecaller|DTK
@@ -365,9 +365,9 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Ravenous Rats|M13
 1 Ray of Command|5ED
 1 Read the Bones|ORI
-1 Reassembling Skeleton|MM2
+1 Reassembling Skeleton|M19
 1 Reckless Waif|ISD
-1 Reclamation Sage|M15
+1 Reclamation Sage|M19
 1 Reflector Mage|OGW
 1 Regrowth|A25
 1 Relief Captain|OGW
@@ -378,7 +378,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Ribbons of Night|RAV
 1 Riftwing Cloudskate|MMA
 1 Rise // Fall|DIS
-1 Rise from the Tides|SOI
+1 Rise from the Tides|UMA
 1 Rite of the Raging Storm
 1 Roar of the Wurm|EMA
 1 Roast|DTK
@@ -386,7 +386,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Rolling Thunder|BFZ
 1 Rubblebelt Maaka|MM3
 1 Rugged Highlands|EMA
-1 Rupture Spire|CFX
+1 Rupture Spire|M19
 1 Sadistic Hypnotist|ODY
 1 Sakura-Tribe Elder|CNS
 1 Sandsteppe Citadel|KTK
@@ -412,13 +412,13 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Sentinel of the Eternal Watch|ORI
 1 Seraph of Dawn|AVR
 1 Serendib Efreet|EMA
-1 Serra Angel|IMA
+1 Serra Angel|DOM
 1 Serrated Arrows|TSB
 1 Serum Visions|MM3
 1 Shardless Agent|EMA
 1 Shimmering Glasskite|BOK
 1 Shower of Coals|ODY
-1 Shriekmaw|LRW
+1 Shriekmaw|UMA
 1 Shrine of Burning Rage|NPH
 1 Shrine of Loyal Legions|NPH
 1 Sigiled Starfish|ORI
@@ -466,9 +466,9 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Temporal Isolation|TSP
 1 Temur Charm|KTK
 1 Temur Sabertooth|FRF
-1 Terramorphic Expanse|MMA
+1 Terramorphic Expanse|UMA
 1 Thassa's Emissary|THS
-1 Thermo-Alchemist|EMN
+1 Thermo-Alchemist|UMA
 1 Thieving Magpie|10E
 1 Thirst for Knowledge|MMA
 1 Thornscape Battlemage|MM3
@@ -483,16 +483,16 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Tormented Hero|THS
 1 Tower Geist|ORI
 1 Transguild Promenade|RTR
-1 Treasure Cruise|KTK
+1 Treasure Cruise|UMA
 1 Treetop Village|10E
 1 Triplicate Spirits|M15
 1 Triumph of Ferocity|AVR
 1 Trostani's Summoner|DGM
 1 Trusty Machete|ZEN
 1 Trygon Predator|EMA
-1 Ulamog's Crusher|MM2
+1 Ulamog's Crusher|UMA
 1 Ultimate Price|DTK
-1 Unburial Rites|MM3
+1 Unburial Rites|UMA
 1 Undercity Informer|GTC
 1 Undercity Troll|IMA
 1 Undo|VIS
@@ -521,13 +521,13 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Wall of Blossoms|TPR
 1 Wall of Omens|EMA
 1 Wall of Roots|IMA
-1 Wandering Champion|FRF
+1 Wandering Champion|UMA
 1 War-Name Aspirant|KTK
 1 Wash Out|INV
 1 Weaver of Lightning|EMN
-1 Wee Dragonauts|EMA
+1 Wee Dragonauts|GRN
 1 Whirler Rogue|ORI
-1 Wickerbough Elder|EVE
+1 Wickerbough Elder|UMA
 1 Wight of Precinct Six|IMA
 1 Wind-Scarred Crag|EMA
 1 Wing Shards|IMA
@@ -536,6 +536,6 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Wrench Mind|IMA
 1 Xiahou Dun, the One-Eyed
 1 Yavimaya Elder|VMA
-1 Young Pyromancer|EMA
+1 Young Pyromancer|UMA
 1 Zealous Persecution|EMA
 1 Zulaport Cutthroat|A25
