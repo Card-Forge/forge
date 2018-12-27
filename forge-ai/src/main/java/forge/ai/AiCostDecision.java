@@ -821,6 +821,8 @@ public class AiCostDecision extends CostDecisionMakerBase {
                         }
                     }
                 }
+            } else if (sVar.equals("Count$xPaid")) {
+                c = AbilityUtils.calculateAmount(source, "PayX", null);
             } else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
