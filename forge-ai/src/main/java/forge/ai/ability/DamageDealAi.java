@@ -1093,7 +1093,7 @@ public class DamageDealAi extends DamageAiBase {
                                 continue; // not a toughness debuff
                             }
                         }
-                        if (StringUtils.isNumeric(dmgDef) && ab.canPlay()) { // currently doesn't work for X and other dependent costs
+                        if (StringUtils.isNumeric(dmgDef)) { // currently doesn't work for X and other dependent costs
                             if (sa.usesTargeting() && ab.usesTargeting()) {
                                 // Ensure that the chained spell can target at least the same things (or more) as the current one
                                 TargetRestrictions tgtSa = sa.getTargetRestrictions();
