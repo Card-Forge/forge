@@ -101,7 +101,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     // cards attached or otherwise linked to this card
     private CardCollection hauntedBy, devouredCards, delvedCards, convokedCards, imprintedCards, encodedCards;
-    private CardCollection mustBlockCards, clones, gainControlTargets, chosenCards, blockedThisTurn, blockedByThisTurn;
+    private CardCollection mustBlockCards, gainControlTargets, chosenCards, blockedThisTurn, blockedByThisTurn;
 
     // if this card is attached or linked to something, what card is it currently attached to
     private Card encoding, cloneOrigin, haunting, effectSource, pairedWith, meldedWith;
@@ -1030,22 +1030,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
     public final GameEntity getMustAttackEntityThisTurn() { return mustAttackEntityThisTurn; }
     public final void setMustAttackEntityThisTurn(GameEntity entThisTurn) { mustAttackEntityThisTurn = entThisTurn; }
-
-    public final CardCollectionView getClones() {
-        return CardCollection.getView(clones);
-    }
-    public final void setClones(final Iterable<Card> clones0) {
-        clones = clones0 == null ? null : new CardCollection(clones0);
-    }
-    public final void addClone(final Card c) {
-        if (clones == null) {
-            clones = new CardCollection();
-        }
-        clones.add(c);
-    }
-    public final void clearClones() {
-        clones = null;
-    }
 
     public final Card getCloneOrigin() {
         return cloneOrigin;

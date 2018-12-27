@@ -269,7 +269,6 @@ public final class CardUtil {
         newCopy.setAttachedCards(in.getAttachedCards());
         newCopy.setEntityAttachedTo(in.getEntityAttachedTo());
 
-        newCopy.setClones(in.getClones());
         newCopy.setHaunting(in.getHaunting());
         newCopy.setCopiedPermanent(in.getCopiedPermanent());
         for (final Card haunter : in.getHauntedBy()) {

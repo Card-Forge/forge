@@ -225,10 +225,6 @@ public class AbilityUtils {
             if (o != null && o instanceof Card) {
                 cards.add(game.getCardState((Card) o));
             }
-        } else if (defined.equals("Clones")) {
-            for (final Card clone : hostCard.getClones()) {
-                cards.add(game.getCardState(clone));
-            }
         } else if (defined.equals("Imprinted")) {
             for (final Card imprint : hostCard.getImprintedCards()) {
                 cards.add(game.getCardState(imprint));
