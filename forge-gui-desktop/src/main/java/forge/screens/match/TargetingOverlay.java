@@ -79,6 +79,13 @@ public class TargetingOverlay {
             x2 = end.x;
             y2 = end.y;
         }
+        
+        @Override
+        public boolean equals(Object obj)
+        {
+        	Arc arc = (Arc)obj;
+        	return ((arc.x1 == x1) && (arc.x2 == x2) && (arc.y1 == y1) && (arc.y2 == y2));
+        }
     }
 
     private final Set<CardView> cardsVisualized = new HashSet<CardView>();
@@ -331,13 +338,24 @@ public class TargetingOverlay {
                 activeStackItem.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseEntered(final MouseEvent e) {
-                        assembleStackArrows();
-                        FView.SINGLETON_INSTANCE.getFrame().repaint();
+                    	if (matchUI.getCDock().getArcState() == ArcState.MOUSEOVER)	{
+                    		assembleStackArrows();
+                    		FView.SINGLETON_INSTANCE.getFrame().repaint();
+                    	}
                     }
                     @Override
                     public void mouseExited(final MouseEvent e) {
-                        assembleStackArrows();
-                        FView.SINGLETON_INSTANCE.getFrame().repaint();
+                    	if (matchUI.getCDock().getArcState() == ArcState.MOUSEOVER)	{
+                    		assembleStackArrows();
+                    		FView.SINGLETON_INSTANCE.getFrame().repaint();
+                    	}
+                    }
+                    @Override
+                    public void mouseClicked(final MouseEvent e) {
+                    	if (matchUI.getCDock().getArcState() == ArcState.ON) {
+                    		assembleStackArrows();
+                    		FView.SINGLETON_INSTANCE.getFrame().repaint();
+                    	}
                     }
                 });
             }
@@ -384,18 +402,27 @@ public class TargetingOverlay {
         if (start == null || end == null) {
             return;
         }
-
+        
+        Arc newArc = new Arc(end,start);
+        
         switch (connects) {
             case Friends:
             case FriendsStackTargeting:
-                arcsFriend.add(new Arc(end, start));
+            	if (!arcsFriend.contains(newArc)) {
+            		arcsFriend.add(newArc);
+            	}
                 break;
             case FoesAttacking:
-                arcsFoeAtk.add(new Arc(end, start));
+                if (!arcsFoeAtk.contains(newArc)) {
+                	arcsFoeAtk.add(newArc);
+                }
                 break;
             case FoesBlocking:
             case FoesStackTargeting:
-                arcsFoeDef.add(new Arc(end, start));
+            	if (!arcsFoeDef.contains(newArc)) {
+            		arcsFoeDef.add(newArc);
+            	}
+            	break;
         }
     }
 
@@ -443,8 +470,8 @@ public class TargetingOverlay {
                     if (!attackingCard.equals(c) && !blockingCard.equals(c)) { continue; }
                     addArc(endpoints.get(attackingCard.getId()), endpoints.get(blockingCard.getId()), ArcConnection.FoesBlocking);
                     cardsVisualized.add(blockingCard);
+                    cardsVisualized.add(attackingCard);
                 }
-                cardsVisualized.add(attackingCard);
             }
         }
     }
