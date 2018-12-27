@@ -164,7 +164,6 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         } else {
             tgtCards = getTargetCards(sa);
         }
-        host.clearClones();
 
         for (final Card c : tgtCards) {
             if (!sa.usesTargeting() || c.canBeTargetedBy(sa)) {
@@ -184,7 +183,6 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     //copyInPlay.setSetCode(c.getSetCode());
 
                     copyInPlay.setCloneOrigin(host);
-                    sa.getHostCard().addClone(copyInPlay);
                     if (!pumpKeywords.isEmpty()) {
                         copyInPlay.addChangedCardKeywords(pumpKeywords, Lists.<String>newArrayList(), false, false, timestamp);
                     }
