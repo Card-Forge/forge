@@ -107,8 +107,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean spectacle = false;
     private boolean offering = false;
     private boolean emerge = false;
-    private boolean morphup = false;
-    private boolean manifestUp = false;
     private boolean cumulativeupkeep = false;
     private boolean outlast = false;
     private boolean blessing = false;
@@ -372,22 +370,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean isAbility() { return true; }
 
     public boolean isMorphUp() {
-        return morphup;
+        return this.hasParam("MorphUp");
     }
 
     public boolean isCastFaceDown() {
         return false;
     }
 
-    public final void setIsMorphUp(final boolean b) {
-        morphup = b;
-    }
-
     public boolean isManifestUp() {
-        return manifestUp;
-    }
-    public final void setIsManifestUp(final boolean b) {
-        manifestUp = b;
+        return hasParam("ManifestUp");
     }
 
     public boolean isCycling() {
