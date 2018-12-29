@@ -136,27 +136,27 @@ public class CardFactoryUtil {
     public static SpellAbility abilityMorphUp(final Card sourceCard, final String costStr, final boolean mega) {
         Cost cost = new Cost(costStr, true);
         String costDesc = cost.toString();
-        // get rid of the ": " at the end
-        costDesc = costDesc.substring(0, costDesc.length() - 2);
-
+        StringBuilder sbCost = new StringBuilder(mega ? "Megamorph" : "Morph");
+        sbCost.append(" ");
         if (!cost.isOnlyManaCost()) {
-            costDesc = "—" + costDesc;
+            sbCost.append("— ");
         }
+        // get rid of the ": " at the end
+        sbCost.append(costDesc.substring(0, costDesc.length() - 2));
 
-        String ab = "ST$ SetState | Cost$ " + costStr + " | CostDesc$ Morph" + costDesc
-                + " | MorphUp$ True"
-                + " | ConditionDefined$ Self | ConditionPresent$ Card.faceDown"
-                + " | Mode$ TurnFace | SpellDescription$ (Turn this face up any time for its morph cost.)";
+        StringBuilder sb = new StringBuilder();
+        sb.append("ST$ SetState | Cost$ ").append(costStr).append(" | CostDesc$ ").append(sbCost);
+        sb.append(" | MorphUp$ True | Secondary$ True | IsPresent$ Card.Self+faceDown");
         if (mega) {
-            ab += " | Mega$ True";
+            sb.append(" | Mega$ True");
         }
+        sb.append(" | Mode$ TurnFace | SpellDescription$ (Turn this face up any time for its morph cost.)");
 
-        final SpellAbility morphUp = AbilityFactory.getAbility(ab, sourceCard);
+        final SpellAbility morphUp = AbilityFactory.getAbility(sb.toString(), sourceCard);
 
         final StringBuilder sbStack = new StringBuilder();
         sbStack.append(sourceCard.getName()).append(" - turn this card face up.");
         morphUp.setStackDescription(sbStack.toString());
-        morphUp.setIsMorphUp(true);
 
         return morphUp;
     }
@@ -166,18 +166,17 @@ public class CardFactoryUtil {
         String costDesc = manaCost.toString();
 
         // Cost need to be set later
-        String ab = "ST$ SetState | Cost$ 0 | CostDesc$ Unmanifest " + costDesc
-                + " | ManifestUp$ True"
-                + " | ConditionDefined$ Self | ConditionPresent$ Card.faceDown+manifested"
-                + " | Mode$ TurnFace | SpellDescription$ (Turn this face up any time for its mana cost.)";
+        StringBuilder sb = new StringBuilder();
+        sb.append("ST$ SetState | Cost$ 0 | CostDesc$ Unmanifest ").append(costDesc);
+        sb.append(" | ManifestUp$ True | Secondary$ True | IsPresent$ Card.Self+faceDown+manifested");
+        sb.append(" | Mode$ TurnFace | SpellDescription$ (Turn this face up any time for its mana cost.)");
 
-        final SpellAbility manifestUp = AbilityFactory.getAbility(ab, sourceCard);
+        final SpellAbility manifestUp = AbilityFactory.getAbility(sb.toString(), sourceCard);
         manifestUp.setPayCosts(new Cost(manaCost, true));
 
         final StringBuilder sbStack = new StringBuilder();
         sbStack.append(sourceCard.getName()).append(" - turn this card face up.");
         manifestUp.setStackDescription(sbStack.toString());
-        manifestUp.setIsManifestUp(true);
 
         return manifestUp;
     }
@@ -4037,22 +4036,12 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
 
             inst.addSpellAbility(abilityMorphDown(card));
-
-            CardState state = card.getState(CardStateName.FaceDown);
-            state.setSVars(card.getSVars());
-            KeywordInterface facedownKeyword = Keyword.getInstance("");
-            facedownKeyword.addSpellAbility(abilityMorphUp(card, k[1], false));
-            state.addIntrinsicKeywords(Lists.newArrayList(facedownKeyword));
+            inst.addSpellAbility(abilityMorphUp(card, k[1], false));
         } else if (keyword.startsWith("Megamorph")){
             final String[] k = keyword.split(":");
 
             inst.addSpellAbility(abilityMorphDown(card));
-
-            CardState state = card.getState(CardStateName.FaceDown);
-            state.setSVars(card.getSVars());
-            KeywordInterface facedownKeyword = Keyword.getInstance("");
-            facedownKeyword.addSpellAbility(abilityMorphUp(card, k[1], true));
-            state.addIntrinsicKeywords(Lists.newArrayList(facedownKeyword));
+            inst.addSpellAbility(abilityMorphUp(card, k[1], true));
         } else if (keyword.startsWith("Multikicker")) {
             final String[] n = keyword.split(":");
             final SpellAbility sa = card.getFirstSpellAbility();

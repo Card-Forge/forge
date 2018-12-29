@@ -69,6 +69,10 @@ public class CardState extends GameObject {
     private final CardStateView view;
     private final Card card;
 
+    public CardState(Card card, CardStateName name) {
+        this(card.getView().createAlternateState(name), card);
+    }
+
     public CardState(CardStateView view0, Card card0) {
         view = view0;
         card = card0;

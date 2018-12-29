@@ -528,30 +528,30 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public Card manifest(Player p, SpellAbility sa) {
         // Turn Face Down (even if it's DFC).
-        CardState originalCard = this.getState(CardStateName.Original);
-        ManaCost cost = originalCard.getManaCost();
+        ManaCost cost = getState(CardStateName.Original).getManaCost();
 
-        boolean isCreature = this.isCreature();
+        boolean isCreature = isCreature();
 
-         // Sometimes cards are manifested while already being face down
-         if (!turnFaceDown(true) && currentStateName != CardStateName.FaceDown) {
-             return null;
-         }
+        // Sometimes cards are manifested while already being face down
+        if (!turnFaceDown(true) && !isFaceDown()) {
+            return null;
+        }
         // Move to p's battlefield
         Game game = p.getGame();
-		// Just in case you aren't the controller, now you are!
-        this.setController(p, game.getNextTimestamp());
+
+        // Just in case you aren't the controller, now you are!
+        setController(p, game.getNextTimestamp());
 
         // Mark this card as "manifested"
-        this.setPreFaceDownState(CardStateName.Original);
-        this.setManifested(true);
+        setPreFaceDownState(CardStateName.Original);
+        setManifested(true);
 
         Card c = game.getAction().moveToPlay(this, p, sa);
 
         // Add manifest demorph static ability for creatures
         if (isCreature && !cost.isNoCost()) {
-            c.addSpellAbility(CardFactoryUtil.abilityManifestFaceUp(c, cost));
-
+            // Add Manifest to original State
+            c.getState(CardStateName.Original).addSpellAbility(CardFactoryUtil.abilityManifestFaceUp(c, cost));
             c.updateStateForView();
         }
 
@@ -2231,6 +2231,16 @@ public class Card extends GameEntity implements Comparable<Card> {
         // do Basic Land Abilities there
         if (mana == null || mana == true) {
             updateBasicLandAbilities(list, state);
+        }
+
+        // add Facedown abilities from Original state but only if this state is face down
+        // need CardStateView#getState or might crash in StackOverflow
+        if ((mana == null || mana == false) && isFaceDown() && state.getView().getState() == CardStateName.FaceDown) {
+            for (SpellAbility sa : getState(CardStateName.Original).getNonManaAbilities()) {
+                if (sa.isManifestUp() || sa.isMorphUp()) {
+                    list.add(sa);
+                }
+            }
         }
 
         for (KeywordInterface kw : getUnhiddenKeywords(state)) {
