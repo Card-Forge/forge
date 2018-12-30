@@ -437,12 +437,13 @@ public class GameAction {
 
         // rule 504.6: reveal a face-down card leaving the stack 
         if (zoneFrom != null && zoneTo != null && zoneFrom.is(ZoneType.Stack) && !zoneTo.is(ZoneType.Battlefield) && wasFacedown) {
+            // FIXME: tracker freeze-unfreeze is needed here to avoid a bug with the card staying face down in the View for the reveal
             boolean trackerFrozen = game.getTracker().isFrozen();
             game.getTracker().unfreeze();
             c.setState(CardStateName.Original, true);
             reveal(new CardCollection(c), c.getOwner(), true, "Face-down card moves from the stack: ");
             c.setState(CardStateName.FaceDown, true);
-            if (trackerFrozen) {game.getTracker().freeze();}
+            if (trackerFrozen) { game.getTracker().freeze(); }
         }
 
         if (fromBattlefield) {
@@ -471,12 +472,13 @@ public class GameAction {
             }
             // Reveal if face-down
             if (wasFacedown) {
+                // FIXME: tracker freeze-unfreeze is needed here to avoid a bug with the card staying face down in the View for the reveal
                 boolean trackerFrozen = game.getTracker().isFrozen();
                 game.getTracker().unfreeze();
             	c.setState(CardStateName.Original, true);
             	reveal(new CardCollection(c), c.getOwner(), true, "Face-down card leaves the battlefield: ");
             	c.setState(CardStateName.FaceDown, true);
-            	if (trackerFrozen) {game.getTracker().freeze();}
+            	if (trackerFrozen) { game.getTracker().freeze(); }
             	copied.setState(CardStateName.Original, true);
             }
             unattachCardLeavingBattlefield(copied);
