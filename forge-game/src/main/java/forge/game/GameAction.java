@@ -104,6 +104,7 @@ public class GameAction {
         boolean toBattlefield = zoneTo.is(ZoneType.Battlefield);
         boolean fromBattlefield = zoneFrom != null && zoneFrom.is(ZoneType.Battlefield);
         boolean toHand = zoneTo.is(ZoneType.Hand);
+        boolean wasFacedown = c.isFaceDown();
 
         //Rule 110.5g: A token that has left the battlefield can't move to another zone
         if (c.isToken() && zoneFrom != null && !fromBattlefield && !zoneFrom.is(ZoneType.Command)) {
@@ -150,7 +151,7 @@ public class GameAction {
         // Cards returned from exile face-down must be reset to their original state, otherwise
         // all sort of funky shenanigans may happen later (e.g. their ETB replacement effects are set
         // up on the wrong card state etc.).
-        if (c.isFaceDown() && (fromBattlefield || (toHand && zoneFrom.is(ZoneType.Exile)))) {
+        if (wasFacedown && (fromBattlefield || (toHand && zoneFrom.is(ZoneType.Exile)))) {
             c.setState(CardStateName.Original, true);
             c.runFaceupCommands();
         }
@@ -435,10 +436,13 @@ public class GameAction {
         }
 
         // rule 504.6: reveal a face-down card leaving the stack 
-        if (zoneFrom != null && zoneTo != null && zoneFrom.is(ZoneType.Stack) && !zoneTo.is(ZoneType.Battlefield) && c.isFaceDown()) {
+        if (zoneFrom != null && zoneTo != null && zoneFrom.is(ZoneType.Stack) && !zoneTo.is(ZoneType.Battlefield) && wasFacedown) {
+            boolean trackerFrozen = game.getTracker().isFrozen();
+            game.getTracker().unfreeze();
             c.setState(CardStateName.Original, true);
             reveal(new CardCollection(c), c.getOwner(), true, "Face-down card moves from the stack: ");
             c.setState(CardStateName.FaceDown, true);
+            if (trackerFrozen) {game.getTracker().freeze();}
         }
 
         if (fromBattlefield) {
@@ -466,10 +470,13 @@ public class GameAction {
                 changeZone(null, zoneTo, unmeld, position, cause, params);
             }
             // Reveal if face-down
-            if (c.isFaceDown()) {
+            if (wasFacedown) {
+                boolean trackerFrozen = game.getTracker().isFrozen();
+                game.getTracker().unfreeze();
             	c.setState(CardStateName.Original, true);
             	reveal(new CardCollection(c), c.getOwner(), true, "Face-down card leaves the battlefield: ");
             	c.setState(CardStateName.FaceDown, true);
+            	if (trackerFrozen) {game.getTracker().freeze();}
             	copied.setState(CardStateName.Original, true);
             }
             unattachCardLeavingBattlefield(copied);
