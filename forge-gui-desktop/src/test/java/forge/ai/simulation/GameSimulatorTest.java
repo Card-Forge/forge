@@ -184,7 +184,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         GameSimulator sim = createSimulator(game, p);
         Game simGame = sim.getSimulatedGameState();
 
-        SpellAbility unmorphSA = findSAWithPrefix(ripper, "Morph—Reveal a black card");
+        SpellAbility unmorphSA = findSAWithPrefix(ripper, "Morph — Reveal a black card");
         assertNotNull(unmorphSA);
         sim.simulateSpellAbility(unmorphSA);
         assertEquals(18, simGame.getPlayers().get(0).getLife());
