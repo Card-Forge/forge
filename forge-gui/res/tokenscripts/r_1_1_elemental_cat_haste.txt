@@ -1,0 +1,7 @@
+Name:Elemental Cat
+ManaCost:no cost
+Types:Creature Elemental Cat
+Colors:red
+PT:1/1
+K:Haste
+Oracle:Haste
