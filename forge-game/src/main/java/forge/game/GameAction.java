@@ -70,10 +70,8 @@ public class GameAction {
     }
 
     public final void resetActivationsPerTurn() {
-        final CardCollectionView all = game.getCardsInGame();
-
         // Reset Activations per Turn
-        for (final Card card : all) {
+        for (final Card card : game.getCardsInGame()) {
             for (final SpellAbility sa : card.getAllSpellAbilities()) {
                 sa.getRestrictions().resetTurnActivations();
             }
@@ -157,7 +155,9 @@ public class GameAction {
         }
 
         // Clean up the temporary Dash SVar when the Dashed card leaves the battlefield
-        if (fromBattlefield && c.getSVar("EndOfTurnLeavePlay").equals("Dash")) {
+        // Clean up the temporary AtEOT SVar
+        String endofTurn = c.getSVar("EndOfTurnLeavePlay");
+        if (fromBattlefield && (endofTurn.equals("Dash") || endofTurn.equals("AtEOT"))) {
             c.removeSVar("EndOfTurnLeavePlay");
         }
 
@@ -484,10 +484,6 @@ public class GameAction {
             unattachCardLeavingBattlefield(copied);
             // Remove all changed keywords
             copied.removeAllChangedText(game.getNextTimestamp());
-            // reset activations
-            for (SpellAbility ab : copied.getSpellAbilities()) {
-                ab.getRestrictions().resetTurnActivations();
-            }
         } else if (toBattlefield) {
             // reset timestamp in changezone effects so they have same timestamp if ETB simutaneously 
             copied.setTimestamp(game.getNextTimestamp());

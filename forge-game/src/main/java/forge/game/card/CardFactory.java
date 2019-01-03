@@ -617,6 +617,9 @@ public class CardFactory {
         }
         if (from.getRestrictions() != null) {
             to.setRestrictions((SpellAbilityRestriction) from.getRestrictions().copy());
+            if (!lki) {
+                to.getRestrictions().resetTurnActivations();
+            }
         }
         if (from.getConditions() != null) {
             to.setConditions((SpellAbilityCondition) from.getConditions().copy());

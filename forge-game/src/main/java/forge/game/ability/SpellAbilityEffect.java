@@ -230,8 +230,17 @@ public abstract class SpellAbilityEffect {
         
         if (desc.isEmpty()) {
             StringBuilder sb = new StringBuilder();
-            sb.append(location).append(" ");
+            if (location.equals("Hand")) {
+                sb.append("Return ");
+            } else if (location.equals("SacrificeCtrl")) {
+                sb.append("Its controller sacrifices ");
+            } else {
+                sb.append(location).append(" ");
+            }
             sb.append(Lang.joinHomogenous(crds));
+            if (location.equals("Hand")) {
+                sb.append("to your hand").append(" ");
+            }
             sb.append(" at the ");
             if (combat) {
                 sb.append("end of combat.");
@@ -255,9 +264,18 @@ public abstract class SpellAbilityEffect {
         final Trigger trig = TriggerHandler.parseTrigger(delTrig.toString(), sa.getHostCard(), intrinsic);
         for (final Card c : crds) {
             trig.addRemembered(c);
+
+            // Svar for AI
+            if (!c.hasSVar("EndOfTurnLeavePlay")) {
+                c.setSVar("EndOfTurnLeavePlay", "AtEOT");
+            }
         }
         String trigSA = "";
-        if (location.equals("Sacrifice")) {
+        if (location.equals("Hand")) {
+            trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Hand";
+        } else if (location.equals("SacrificeCtrl")) {
+            trigSA = "DB$ SacrificeAll | Defined$ DelayTriggerRemembered";
+        } else if (location.equals("Sacrifice")) {
             trigSA = "DB$ SacrificeAll | Defined$ DelayTriggerRemembered | Controller$ You";
         } else if (location.equals("Exile")) {
             trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile";
@@ -289,6 +307,11 @@ public abstract class SpellAbilityEffect {
         }
         trig.setOverridingAbility(AbilityFactory.getAbility(trigSA, card));
         card.addTrigger(trig);
+
+        // Svar for AI
+        if (!card.hasSVar("EndOfTurnLeavePlay")) {
+            card.setSVar("EndOfTurnLeavePlay", "AtEOT");
+        }
     }
     
     protected static void addForgetOnMovedTrigger(final Card card, final String zone) {
