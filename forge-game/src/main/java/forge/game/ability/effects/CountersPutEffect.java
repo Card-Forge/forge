@@ -199,6 +199,14 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         counterAmount = pc.chooseNumber(sa, "How many counters?", 0, counterAmount, params);
                     }
 
+                    // Adapt need extra logic
+                    if (sa.hasParam("Adapt")) {
+                        if (!(tgtCard.getCounters(CounterType.P1P1) == 0
+                                || tgtCard.hasKeyword("CARDNAME adapts as though it had no +1/+1 counters"))) {
+                            continue;
+                        }
+                    }
+
                     if (sa.hasParam("Tribute")) {
                         // make a copy to check if it would be on the battlefield 
                         Card noTributeLKI = CardUtil.getLKICopy(tgtCard);
@@ -265,6 +273,13 @@ public class CountersPutEffect extends SpellAbilityEffect {
                             final Map<String, Object> runParams = Maps.newHashMap();
                             runParams.put("Card", tgtCard);
                             game.getTriggerHandler().runTrigger(TriggerType.BecomeRenowned, runParams, false);
+                        }
+                        if (sa.hasParam("Adapt")) {
+                            // need to remove special keyword
+                            tgtCard.removeHiddenExtrinsicKeyword("CARDNAME adapts as though it had no +1/+1 counters");
+                            final Map<String, Object> runParams = Maps.newHashMap();
+                            runParams.put("Card", tgtCard);
+                            game.getTriggerHandler().runTrigger(TriggerType.Adapt, runParams, false);
                         }
                     } else {
                         // adding counters to something like re-suspend cards

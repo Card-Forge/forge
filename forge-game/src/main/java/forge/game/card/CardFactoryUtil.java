@@ -3706,8 +3706,7 @@ public class CardFactoryUtil {
 
             String desc = "Adapt " + magnitude;
 
-            String effect = "AB$ PutCounter | Cost$ " + manacost + " | ConditionPresent$ "
-                    + "Card.Self+counters_EQ0_P1P1 | Adapt$ True | CounterNum$ " + magnitude
+            String effect = "AB$ PutCounter | Cost$ " + manacost + " | Adapt$ True | CounterNum$ " + magnitude
                     + " | CounterType$ P1P1 | StackDescription$ SpellDescription";
 
             effect += "| SpellDescription$ " + desc + " (" + inst.getReminderText() + ")";

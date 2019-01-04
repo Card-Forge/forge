@@ -3637,10 +3637,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (s.startsWith("HIDDEN")) {
             removeHiddenExtrinsicKeyword(s);
         }
-        else {
-            if (extrinsicKeyword.remove(s)) {
-                currentState.getView().updateKeywords(this, currentState);
-            }
+        else if (extrinsicKeyword.remove(s)) {
+            currentState.getView().updateKeywords(this, currentState);
         }
     }
 
