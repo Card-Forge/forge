@@ -4806,6 +4806,15 @@ public class Card extends GameEntity implements Comparable<Card> {
         // Note: This should only be called after state has been set to CardStateName.FaceDown,
         // so the below call should be valid since the state should have been created already.
         getState(CardStateName.FaceDown).setImageKey(ImageKeys.getTokenKey(image));
+        if (!manifested) {
+            // remove Manifest Up abilities from Original State
+            CardState original = getState(CardStateName.Original);
+            for (SpellAbility sa : original.getNonManaAbilities()) {
+                if (sa.isManifestUp()) {
+                    original.removeSpellAbility(sa);
+                }
+            }
+        }
     }
 
     public final void animateBestow() {
