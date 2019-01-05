@@ -67,6 +67,8 @@ public class CharmEffect extends SpellAbilityEffect {
 
         if (num == min) {
             sb.append(Lang.getNumeral(num));
+        } else if (min == 0) {
+            sb.append("up to ").append(Lang.getNumeral(num));
         } else {
             sb.append(Lang.getNumeral(min)).append(" or ").append(list.size() == 2 ? "both" : "more");
         }
@@ -101,6 +103,8 @@ public class CharmEffect extends SpellAbilityEffect {
 
         if (num == min) {
             sb.append(Lang.getNumeral(num));
+        } else if (min == 0) {
+            sb.append("up to ").append(Lang.getNumeral(num));
         } else {
             sb.append(Lang.getNumeral(min)).append(" or ").append(list.size() == 2 ? "both" : "more");
         }
@@ -158,7 +162,7 @@ public class CharmEffect extends SpellAbilityEffect {
 
         final int num = sa.hasParam("CharmNumOnResolve") ?
                 AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CharmNumOnResolve"), sa)
-                : Integer.parseInt(sa.hasParam("CharmNum") ? sa.getParam("CharmNum") : "1");
+                : Integer.parseInt(sa.getParamOrDefault("CharmNum", "1"));
         final int min = sa.hasParam("MinCharmNum") ? Integer.parseInt(sa.getParam("MinCharmNum")) : num;
 
         Card source = sa.getHostCard();
