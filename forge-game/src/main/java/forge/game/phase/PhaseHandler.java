@@ -526,7 +526,7 @@ public class PhaseHandler implements java.io.Serializable {
 
                     if (canAttack) {
                         if (shouldTapForAttack) {
-                            attacker.tap();
+                            attacker.tap(true);
                         }
                     } else {
                         combat.removeFromCombat(attacker);
