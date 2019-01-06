@@ -693,7 +693,8 @@ public class TriggerHandler {
     }
 
     private int handlePanharmonicon(final Trigger t, final Map<String, Object> runParams) {
-        final Card host = t.getHostCard();
+        // Need to get the last info from the trigger host
+        final Card host = game.getChangeZoneLKIInfo(t.getHostCard());
         final Player p = host.getController();
 
         // not a changesZone trigger
@@ -709,13 +710,28 @@ public class TriggerHandler {
         int n = 0;
         for (final String kw : p.getKeywords()) {
             if (kw.startsWith("Panharmonicon")) {
+                // Enter the Battlefield Trigger
                 if (runParams.get("Destination") instanceof String) {
                     final String dest = (String) runParams.get("Destination");
-                    if (dest.equals("Battlefield") && runParams.get("Card") instanceof Card) {
+                    if ("Battlefield".equals(dest) && runParams.get("Card") instanceof Card) {
                         final Card card = (Card) runParams.get("Card");
                         final String valid = kw.split(":")[1];
                         if (card.isValid(valid.split(","), p, host, null)) {
                             n++;
+                        }
+                    }
+                }
+            } else if (kw.startsWith("Dieharmonicon")) {
+                // 700.4. The term dies means “is put into a graveyard from the battlefield.”
+                if (runParams.get("Origin") instanceof String) {
+                    final String origin = (String) runParams.get("Origin");
+                    if ("Battlefield".equals(origin) && runParams.get("Destination") instanceof String) {
+                        final String dest = (String) runParams.get("Destination");
+                        if ("Graveyard".equals(dest) && runParams.get("Card") instanceof Card) {
+                            final Card card = (Card) runParams.get("Card");
+                            if (card.isCreature()) {
+                                n++;
+                            }
                         }
                     }
                 }
