@@ -146,7 +146,7 @@ public interface IGuiGame {
 
     List<PaperCard> sideboard(CardPool sideboard, CardPool main);
     GameEntityView chooseSingleEntityForEffect(String title, List<? extends GameEntityView> optionList, DelayedReveal delayedReveal, boolean isOptional);
-    List<GameEntityView> chooseEntitiesForEffect(String title, List<? extends GameEntityView> optionList, DelayedReveal delayedReveal);
+    List<GameEntityView> chooseEntitiesForEffect(String title, List<? extends GameEntityView> optionList, int min, int max, DelayedReveal delayedReveal);
     void setCard(CardView card);
     void setPlayerAvatar(LobbyPlayer player, IHasIcon ihi);
     boolean openZones(Collection<ZoneType> zones, Map<PlayerView, Object> players);

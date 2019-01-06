@@ -996,11 +996,11 @@ public final class CMatchUI
     }
 
     @Override
-    public List<GameEntityView> chooseEntitiesForEffect(final String title, final List<? extends GameEntityView> optionList, final DelayedReveal delayedReveal) {
+    public List<GameEntityView> chooseEntitiesForEffect(final String title, final List<? extends GameEntityView> optionList, final int min, final int max, final DelayedReveal delayedReveal) {
         if (delayedReveal != null) {
             reveal(delayedReveal.getMessagePrefix(), delayedReveal.getCards()); //TODO: Merge this into search dialog
         }
-        return (List<GameEntityView>) order(title,"Selected", 0, optionList.size(), optionList, null, null, false);
+        return (List<GameEntityView>) order(title,"Selected", min, max, optionList, null, null, false);
     }
 
     @Override

@@ -244,8 +244,8 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
-    public List<GameEntityView> chooseEntitiesForEffect(final String title, final List<? extends GameEntityView> optionList, final DelayedReveal delayedReveal) {
-        return sendAndWait(ProtocolMethod.chooseEntitiesForEffect, title, optionList, delayedReveal);
+    public List<GameEntityView> chooseEntitiesForEffect(final String title, final List<? extends GameEntityView> optionList, final int min, final int max, final DelayedReveal delayedReveal) {
+        return sendAndWait(ProtocolMethod.chooseEntitiesForEffect, title, optionList, min, max, delayedReveal);
     }
 
     @Override

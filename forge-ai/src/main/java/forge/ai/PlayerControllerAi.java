@@ -162,7 +162,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public <T extends GameEntity> List<T> chooseEntitiesForEffect(
-            FCollectionView<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title,
+            FCollectionView<T> optionList, int min, int max, DelayedReveal delayedReveal, SpellAbility sa, String title,
             Player targetedPlayer) {
         // this isn't used
         return null;
@@ -1090,7 +1090,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<Card> chooseCardsForZoneChange(
-            ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList,
+	    ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, int min, int max,
             DelayedReveal delayedReveal, String selectPrompt, Player decider) {
         // this isn't used
         return null;

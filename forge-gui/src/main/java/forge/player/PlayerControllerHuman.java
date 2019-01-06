@@ -460,7 +460,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T extends GameEntity> List<T> chooseEntitiesForEffect(final FCollectionView<T> optionList,
+    public <T extends GameEntity> List<T> chooseEntitiesForEffect(final FCollectionView<T> optionList, final int  min, final int max,
             final DelayedReveal delayedReveal, final SpellAbility sa, final String title, final Player targetedPlayer) {
 
         // useful details for debugging problems with the mass select logic
@@ -483,7 +483,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                         delayedReveal.getMessagePrefix());
             }
 	    tempShow(optionList);
-            final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<T>(this, 0, optionList.size(),
+            final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<T>(this, min, max,
                     optionList, sa);
             input.setCancelAllowed(true);
             input.setMessage(MessageUtil.formatMessage(title, player, targetedPlayer));
@@ -497,7 +497,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             tempShow(delayedReveal.getCards());
         }
         final List<GameEntityView> chosen = getGui().chooseEntitiesForEffect(title,
-                GameEntityView.getEntityCollection(optionList), delayedReveal);
+		GameEntityView.getEntityCollection(optionList), min, max, delayedReveal);
         endTempShowCards();
 
         List<T> results = new ArrayList<>();
@@ -1780,9 +1780,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public List<Card> chooseCardsForZoneChange(final ZoneType destination, final List<ZoneType> origin,
-            final SpellAbility sa, final CardCollection fetchList, final DelayedReveal delayedReveal,
+            final SpellAbility sa, final CardCollection fetchList, final int min, final int max, final DelayedReveal delayedReveal,
             final String selectPrompt, final Player decider) {
-        return chooseEntitiesForEffect(fetchList, delayedReveal, sa, selectPrompt, decider);
+        return chooseEntitiesForEffect(fetchList, min, max, delayedReveal, sa, selectPrompt, decider);
     }
 
     @Override
