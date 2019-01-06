@@ -148,6 +148,18 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
+    public Iterable<PlayerZoneUpdate> tempShowZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        updateGameView();
+        return sendAndWait(ProtocolMethod.tempShowZones, controller, zonesToUpdate);
+    }
+
+    @Override
+    public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        updateGameView();
+        send(ProtocolMethod.hideZones, controller, zonesToUpdate);
+    }
+
+    @Override
     public void updateCards(final Iterable<CardView> cards) {
         updateGameView();
         send(ProtocolMethod.updateCards, cards);

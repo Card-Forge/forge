@@ -69,6 +69,10 @@ public class FloatingCardArea extends CardArea {
         final FloatingCardArea cardArea = _init(matchUI, player, zone);
         cardArea.showWindow(); 
     }
+    public static void hide(final CMatchUI matchUI, final PlayerView player, final ZoneType zone) {
+        final FloatingCardArea cardArea = _init(matchUI, player, zone);
+        cardArea.hideWindow(); 
+    }
     private static FloatingCardArea _init(final CMatchUI matchUI, final PlayerView player, final ZoneType zone) {
         final int key = getKey(player, zone);
         FloatingCardArea cardArea = floatingAreas.get(key);
@@ -204,6 +208,11 @@ public class FloatingCardArea extends CardArea {
         onShow();
         window.setFocusableWindowState(false); // should probably do this earlier
         window.setVisible(true);
+    }
+    private void hideWindow() {
+        onShow();
+        window.setFocusableWindowState(false); // should probably do this earlier
+        window.setVisible(false);
     }
     private void showOrHideWindow() {
         onShow();

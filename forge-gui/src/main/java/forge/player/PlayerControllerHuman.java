@@ -348,6 +348,30 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return new CardCollection(inp.getSelected());
     }
 
+    private boolean useSelectCardsInput(final FCollectionView<? extends GameEntity> sourceList) {
+	// if UI_SELECT_FROM_ZONES not set use InputSelect only for battlefield and player hand
+	// if UI_SELECT_FROM_ZONES set use InputSelect for any zone that can be shown
+        for (final GameEntity c : sourceList) {
+            if (c instanceof Player) {
+                continue;
+            }
+	    if (!(c instanceof Card)) {
+		return false;
+	    }
+            final Zone cz = ((Card) c).getZone();
+            final boolean useUiPointAtCard = 
+		cz != null &&
+		FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_ZONES) ?
+		(cz.is(ZoneType.Battlefield) || cz.is(ZoneType.Hand) || cz.is(ZoneType.Library) || 
+		 cz.is(ZoneType.Graveyard) || cz.is(ZoneType.Exile) || cz.is(ZoneType.Flashback) || cz.is(ZoneType.Command)) :
+		(cz.is(ZoneType.Hand) && cz.getPlayer() == player || cz.is(ZoneType.Battlefield));
+            if (!useUiPointAtCard) {
+                return false;
+            }
+        }
+	return true;
+    }
+
     @Override
     public CardCollectionView chooseCardsForEffect(final CardCollectionView sourceList, final SpellAbility sa,
             final String title, final int min, final int max, final boolean isOptional) {
@@ -362,22 +386,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         getGui().setPanelSelection(CardView.get(sa.getHostCard()));
 
-        // try to use InputSelectCardsFromList when possible
-        boolean cardsAreInMyHandOrBattlefield = true;
-        for (final Card c : sourceList) {
-            final Zone z = c.getZone();
-            if (z != null && (z.is(ZoneType.Battlefield) || z.is(ZoneType.Hand, player))) {
-                continue;
-            }
-            cardsAreInMyHandOrBattlefield = false;
-            break;
-        }
-
-        if (cardsAreInMyHandOrBattlefield) {
+        if (useSelectCardsInput(sourceList)) {
+	    tempShowCards(sourceList);
             final InputSelectCardsFromList sc = new InputSelectCardsFromList(this, min, max, sourceList, sa);
             sc.setMessage(title);
             sc.setCancelAllowed(isOptional);
             sc.showAndWait();
+	    endTempShowCards();
             return new CardCollection(sc.getSelected());
         }
 
@@ -411,31 +426,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return Iterables.getFirst(optionList, null);
         }
 
-        boolean canUseSelectCardsInput = true;
-        for (final GameEntity c : optionList) {
-            if (c instanceof Player) {
-                continue;
-            }
-            final Zone cz = ((Card) c).getZone();
-            // can point at cards in own hand and anyone's battlefield
-            final boolean canUiPointAtCards = cz != null
-                    && (cz.is(ZoneType.Hand) && cz.getPlayer() == player || cz.is(ZoneType.Battlefield));
-            if (!canUiPointAtCards) {
-                canUseSelectCardsInput = false;
-                break;
-            }
-        }
-
-        if (canUseSelectCardsInput) {
+        if (useSelectCardsInput(optionList)) {
             if (delayedReveal != null) {
                 reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(),
                         delayedReveal.getMessagePrefix());
             }
+	    tempShow(optionList);
             final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<T>(this, isOptional ? 0 : 1, 1,
                     optionList, sa);
             input.setCancelAllowed(isOptional);
             input.setMessage(MessageUtil.formatMessage(title, player, targetedPlayer));
             input.showAndWait();
+	    endTempShowCards();
             return Iterables.getFirst(input.getSelected(), null);
         }
 
@@ -475,31 +477,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return null;
         }
 
-        boolean canUseSelectCardsInput = true;
-        for (final GameEntity c : optionList) {
-            if (c instanceof Player) {
-                continue;
-            }
-            final Zone cz = ((Card) c).getZone();
-            // can point at cards in own hand and anyone's battlefield
-            final boolean canUiPointAtCards = cz != null
-                    && (cz.is(ZoneType.Hand) && cz.getPlayer() == player || cz.is(ZoneType.Battlefield));
-            if (!canUiPointAtCards) {
-                canUseSelectCardsInput = false;
-                break;
-            }
-        }
-
-        if (canUseSelectCardsInput) {
+        if (useSelectCardsInput(optionList)) {
             if (delayedReveal != null) {
                 reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(),
                         delayedReveal.getMessagePrefix());
             }
+	    tempShow(optionList);
             final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<T>(this, 0, optionList.size(),
                     optionList, sa);
             input.setCancelAllowed(true);
             input.setMessage(MessageUtil.formatMessage(title, player, targetedPlayer));
             input.showAndWait();
+	    endTempShowCards();
             return (List<T>) input.getSelected();
         }
 

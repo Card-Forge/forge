@@ -47,6 +47,8 @@ public interface IGuiGame {
     void showManaPool(PlayerView player);
     void hideManaPool(PlayerView player);
     void updateStack();
+    Iterable<PlayerZoneUpdate> tempShowZones(PlayerView controller, Iterable<PlayerZoneUpdate> zonesToUpdate);
+    void hideZones(PlayerView controller, Iterable<PlayerZoneUpdate> zonesToUpdate);
     void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate);
     void updateSingleCard(CardView card);
     void updateCards(Iterable<CardView> cards);

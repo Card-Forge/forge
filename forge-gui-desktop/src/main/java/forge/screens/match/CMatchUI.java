@@ -101,6 +101,7 @@ import forge.util.gui.SOptionPane;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.FloatingCardArea;
+import forge.match.input.*;
 
 /**
  * Constructs instance of match UI controller, used as a single point of
@@ -395,7 +396,8 @@ public final class CMatchUI
                     break;
                 case Hand:
                     updateHand = true;
-                    //$FALL-THROUGH$
+                    updateZones = true;
+                    break;
                 default:
                     updateZones = true;
                     FloatingCardArea.refresh(owner, zone);
@@ -422,6 +424,57 @@ public final class CMatchUI
                 vField.updateZones();
             }
         }
+    }
+
+    @Override
+    public Iterable<PlayerZoneUpdate> tempShowZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        for (final PlayerZoneUpdate update : zonesToUpdate) {
+            final PlayerView player = update.getPlayer();
+            for (final ZoneType zone : update.getZones()) {
+		switch (zone) {
+		case Battlefield: // always shown
+		    break;
+		case Hand:  // controller hand always shown
+		    if (controller != player) {
+			FloatingCardArea.show(this,player,zone);
+		    }
+		    break;
+		case Library:
+		case Graveyard:
+		case Exile:
+		case Flashback:
+		case Command:
+		    FloatingCardArea.show(this,player,zone);
+		    break;
+		default:
+		    break;
+		}
+	    }
+	}
+	return zonesToUpdate; //pfps should return only the newly shown zones
+    }
+
+    @Override
+    public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        for (final PlayerZoneUpdate update : zonesToUpdate) {
+            final PlayerView player = update.getPlayer();
+            for (final ZoneType zone : update.getZones()) {
+		switch (zone) {
+		case Battlefield: // always shown
+		    break;
+		case Hand: // the controller's hand should never be temporarily shown, but ...
+		case Library:
+		case Graveyard:
+		case Exile:
+		case Flashback:
+		case Command:
+		    FloatingCardArea.hide(this,player,zone);
+		    break;
+		default:
+		    break;
+		}
+	    }
+	}
     }
 
     // Player's mana pool changes
@@ -465,6 +518,7 @@ public final class CMatchUI
                 }
                 break;
             default:
+		FloatingCardArea.refresh(c.getController(),zone); // in case the card is visible in the zone
                 break;
             }
         }

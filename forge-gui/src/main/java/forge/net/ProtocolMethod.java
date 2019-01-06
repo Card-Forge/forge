@@ -49,6 +49,8 @@ public enum ProtocolMethod {
     hideManaPool        (Mode.SERVER, Void.TYPE, PlayerView.class),
     updateStack         (Mode.SERVER),
     updateZones         (Mode.SERVER, Void.TYPE, Iterable/*PlayerZoneUpdate*/.class),
+    tempShowZones       (Mode.SERVER, Iterable/*PlayerZoneUpdate*/.class, PlayerView.class, Iterable/*PlayerZoneUpdate*/.class),
+    hideZones           (Mode.SERVER, Void.TYPE, PlayerView.class, Iterable/*PlayerZoneUpdate*/.class),
     updateCards         (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
     updateManaPool      (Mode.SERVER, Void.TYPE, Iterable/*PlayerView*/.class),
     updateLives         (Mode.SERVER, Void.TYPE, Iterable/*PlayerView*/.class),

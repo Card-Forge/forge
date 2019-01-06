@@ -11,12 +11,17 @@ import forge.player.PlayerControllerHuman;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import forge.util.ITriggerEvent;
+import forge.player.PlayerZoneUpdate;
+import forge.player.PlayerZoneUpdates;
+import forge.game.zone.Zone;
+import forge.FThreads;
 
 public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSelectManyBase<T> {
     private static final long serialVersionUID = -6609493252672573139L;
 
     private final FCollectionView<T> validChoices;
     protected final FCollection<T> selected = new FCollection<T>();
+    protected Iterable<PlayerZoneUpdate> zonesShown; // want to hide these zones when input done
 
     public InputSelectEntitiesFromList(final PlayerControllerHuman controller, final int min, final int max, final FCollectionView<T> validChoices0) {
         this(controller, min, max, validChoices0, null);
@@ -28,6 +33,17 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         if (min > validChoices.size()) {
             System.out.println(String.format("Trying to choose at least %d things from a list with only %d things!", min, validChoices.size()));
         }
+	PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates(); 
+	for (final GameEntity c : validChoices) {
+            final Zone cz = (c instanceof Card) ? ((Card) c).getZone() : null ;
+	    zonesToUpdate.add(new PlayerZoneUpdate(cz.getPlayer().getView(),cz.getZoneType()));
+	}
+	FThreads.invokeInEdtNowOrLater(new Runnable() {
+            @Override public void run() {
+		controller.getGui().updateZones(zonesToUpdate);  
+		zonesShown = controller.getGui().tempShowZones(controller.getPlayer().getView(),zonesToUpdate);  
+            }
+	    });
     }
     
     @Override
@@ -92,5 +108,11 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         return max == Integer.MAX_VALUE
                 ? String.format(message, selected.size())
                 : String.format(message, max - selected.size());
+    }
+
+    @Override
+    protected void onStop() {
+	getController().getGui().hideZones(getController().getPlayer().getView(),zonesShown);  
+	super.onStop();
     }
 }
