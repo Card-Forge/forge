@@ -28,7 +28,6 @@ import java.util.Map;
  * </p>
  * 
  * @author Forge
- * @version $Id$
  */
 public class TriggerTaps extends Trigger {
 
@@ -50,13 +49,24 @@ public class TriggerTaps extends Trigger {
 
     /** {@inheritDoc} */
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
+    public final boolean performTest(final Map<String, Object> runParams2) {
         final Card tapper = (Card) runParams2.get("Card");
 
-        if (this.mapParams.containsKey("ValidCard")) {
-            if (!tapper.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
-                    this.getHostCard(), null)) {
+        if (hasParam("ValidCard")) {
+            if (!tapper.isValid(getParam("ValidCard").split(","), getHostCard().getController(),
+                    getHostCard(), null)) {
                 return false;
+            }
+        }
+        if (hasParam("Attacker")) {
+            if ("True".equalsIgnoreCase(getParam("Attacker"))) {
+                if (!(Boolean)runParams2.get("Attacker")) {
+                    return false;
+                }
+            } else if ("False".equalsIgnoreCase(getParam("Attacker"))) {
+                if ((Boolean)runParams2.get("Attacker")) {
+                    return false;
+                }
             }
         }
 
@@ -67,7 +77,7 @@ public class TriggerTaps extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
+        sa.setTriggeringObject("Card", getRunParams().get("Card"));
     }
 
     @Override

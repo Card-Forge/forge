@@ -3226,11 +3226,15 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final void tap() {
+        tap(false);
+    }
+    public final void tap(boolean attacker) {
         if (tapped) { return; }
 
         // Run triggers
         final Map<String, Object> runParams = Maps.newTreeMap();
         runParams.put("Card", this);
+        runParams.put("Attacker", attacker);
         getGame().getTriggerHandler().runTrigger(TriggerType.Taps, runParams, false);
 
         setTapped(true);
