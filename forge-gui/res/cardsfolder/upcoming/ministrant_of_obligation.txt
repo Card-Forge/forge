@@ -1,0 +1,6 @@
+Name:Ministrant of Obligation
+ManaCost:2 W
+Types:Creature Human Cleric
+PT:2/1
+K:Afterlife:2
+Oracle:Afterlife 2 (When this creature dies, create two 1/1 white and black Spirit creature token with flying.)

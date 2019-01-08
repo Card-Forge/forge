@@ -1,0 +1,123 @@
+[metadata]
+Code=RNA
+Date=2019-01-25
+Name=Ravnica Allegiance
+Code2=RNA
+MciCode=rna
+Type=Expansion
+
+[cards]
+2 U Angelic Exaltation
+3 U Archway Angel
+16 U Ministrant of Obligation
+22 R Smothering Tithe
+27 R Tithe Taker
+41 C Humongulus
+42 R Mass Manipulation
+43 M Mesmerizing Benthid
+45 R Precognitive Perception
+48 C Quench
+52 U Skatewing Spy
+55 R Sphinx of Foresight
+58 R Verity Circle
+62 U Bankrupt in Blood
+63 C Blade Juggler
+70 U Cry of the Carnarium
+73 U Drill Bit
+76 R Gutterbones
+80 U Orzhov Racketeers
+81 R Pestilent Spirit
+85 M Spawn of Mayhem
+92 R Amplifire
+93 C Burn Bright
+94 C Burning-Tree Vandal
+99 R Electrodominance
+105 R Immolation Shaman
+107 U Light Up the Stage
+109 R Rix Maadi Reveler
+114 M Skarrgan Hellkite
+116 U Smelt-Ward Ignus
+123 U Biogenic Upgrade
+124 R End-Raze Forerunners
+128 R Growth-Chamber Guardian
+129 U Gruul Beastmaster
+130 R Guardian Project
+134 R Rampage of the Clans
+140 C Sauroform Hybrid
+141 U Silhana Wayfinder
+146 C Titanic Brawl
+148 U Trollbred Guardian
+149 U Wilderness Reclamation
+151 R Absorb
+152 C Aeromunculus
+156 U Basilica Bell-Haunt
+157 R Bedevil
+158 R Biomancer's Familiar
+159 U Bolrac-Clan Crusher
+163 U Combine Guildmage
+164 U Cult Guildmage
+165 R Deputy of Detention
+166 M Domri, Chaos Bringer
+167 M Dovin, Grand Arbiter
+169 M Emergency Powers
+173 C Frenzied Arynx
+174 U Frilled Mystic
+175 U Galloping Lizrog
+177 C Grasping Thrull
+178 C Growth Spiral
+179 R Gruul Spellbreaker
+181 U Hackrobat
+182 U High Alert
+183 M Hydroid Krasis
+184 C Imperious Oligarch
+185 R Judith, the Scourge Diva
+186 M Kaya, Orzhov Usurper
+187 R Kaya's Wrath
+189 R Lavinia, Azorius Renegade
+192 U Mortify
+193 R Nikya of the Old Ways
+194 U Pitiless Pontiff
+195 M Prime Speaker Vannifar
+196 C Rafter Demon
+197 U Rakdos Firewheeler
+198 C Rakdos Roustabout
+199 M Rakdos, the Showstopper
+200 M Ravager Wurm
+201 U Rhythm of the Wild
+203 C Savage Smash
+205 M Seraph of the Scales
+207 R Simic Ascendancy
+208 U Sphinx of New Prahv
+209 C Sphinx's Insight
+211 U Syndicate Guildmage
+212 R Teysa Karlov
+213 R Theater of Horrors
+214 R Zegana, Utopian Speaker
+215 U Zhur-Taa Goblin
+222 U Carnival // Carnage
+224 U Consecrate // Consume
+225 U Depose // Deploy
+226 U Incubation // Incongruity
+230 R Warrant // Warden
+231 C Azorius Locket
+232 U Gate Colossus
+234 C Gruul Locket
+236 C Orzhov Locket
+237 C Rakdos Locket
+240 C Simic Locket
+243 C Azorius Guildgate
+244 C Azorius Guildgate
+245 R Blood Crypt
+246 R Breeding Pool
+248 R Godless Shrine
+249 C Gruul Guildgate
+250 C Gruul Guildgate
+251 R Hallowed Fountain
+252 C Orzhov Guildgate
+253 C Orzhov Guildgate
+255 C Rakdos Guildgate
+256 C Rakdos Guildgate
+257 C Simic Guildgate
+258 C Simic Guildgate
+259 R Stomping Ground
+273 M The Haunt of Hightower

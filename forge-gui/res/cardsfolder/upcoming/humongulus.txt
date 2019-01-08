@@ -1,0 +1,6 @@
+Name:Humongulus
+ManaCost:4 U
+Types:Creature Homunculus
+PT:2/5
+K:Hexproof
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)

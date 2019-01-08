@@ -1,0 +1,8 @@
+Name:Frilled Mystic
+ManaCost:G G U U
+Types:Creature Elf Lizard Wizard
+PT:3/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCounter | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may counter target spell.
+SVar:TrigCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell
+Oracle:Flash\nWhen Frilled Mystic enters the battlefield, you may counter target spell.
