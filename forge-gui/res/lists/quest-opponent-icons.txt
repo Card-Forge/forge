@@ -399,7 +399,7 @@ https://downloads.cardforge.org/images/icons/Joker.jpg
 https://downloads.cardforge.org/images/icons/Jubilee.jpg
 https://downloads.cardforge.org/images/icons/JuzamGenie.jpg
 https://downloads.cardforge.org/images/icons/Kane.jpg
-https://downloads.cardforge.org/images/icons/Kane%20Garo%C3%BA%0D%0A.jpg
+https://downloads.cardforge.org/images/icons/Kane%20Garo%C3%BA.jpg
 https://downloads.cardforge.org/images/icons/Kang.jpg
 https://downloads.cardforge.org/images/icons/Kangee.jpg
 https://downloads.cardforge.org/images/icons/Karakas.jpg
