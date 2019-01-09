@@ -293,7 +293,6 @@ https://downloads.cardforge.org/images/icons/Genghis%20Khan.jpg
 https://downloads.cardforge.org/images/icons/George%20of%20the%20Jungle.jpg
 https://downloads.cardforge.org/images/icons/Ghost%20Council.jpg
 https://downloads.cardforge.org/images/icons/Ghost%20Rider.jpg
-https://downloads.cardforge.org/images/icons/Gideon.jpg
 https://downloads.cardforge.org/images/icons/Gideon%20Jura.jpg
 https://downloads.cardforge.org/images/icons/Gideon%2C%20Martial%20Paragon.jpg
 https://downloads.cardforge.org/images/icons/Gill%20Mann.jpg
