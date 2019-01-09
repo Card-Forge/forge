@@ -38,7 +38,6 @@ import net.miginfocom.swing.MigLayout;
 import forge.CachedCardImage;
 import forge.card.CardDetailUtil;
 import forge.card.CardDetailUtil.DetailColors;
-import forge.card.CardStateName;
 import forge.game.GameView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.spellability.StackItemView;
@@ -257,7 +256,7 @@ public class VStack implements IVDoc<CStack> {
 
             // TODO: A hacky workaround is currently used to make the game not leak the color information for Morph cards.
             final CardStateView curState = item.getSourceCard().getCurrentState();
-            final boolean isFaceDown = curState.getState() == CardStateName.FaceDown;
+            final boolean isFaceDown = item.getSourceCard().isFaceDown();
             final DetailColors color = isFaceDown ? CardDetailUtil.DetailColors.FACE_DOWN : CardDetailUtil.getBorderColor(curState, true); // otherwise doesn't work correctly for face down Morphs
             setBackground(new Color(color.r, color.g, color.b));
             setForeground(FSkin.getHighContrastColor(getBackground()));

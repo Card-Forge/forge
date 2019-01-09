@@ -229,10 +229,12 @@ public final class CardUtil {
 
         newCopy.getCurrentState().copyFrom(in.getState(in.getCurrentStateName()), true);
 
+        /*
         if (in.isCloned()) {
             newCopy.addAlternateState(CardStateName.Cloner, false);
             newCopy.getState(CardStateName.Cloner).copyFrom(in.getState(CardStateName.Cloner), true);
         }
+        //*/
 
         newCopy.setType(new CardType(in.getType()));
         newCopy.setToken(in.isToken());
@@ -327,7 +329,7 @@ public final class CardUtil {
         final CardType type = new CardType();
         type.add("Creature");
 
-        final CardState ret = new CardState(c.getView().createAlternateState(CardStateName.FaceDown), c);
+        final CardState ret = new CardState(c, CardStateName.FaceDown);
         ret.setBasePower(2);
         ret.setBaseToughness(2);
 

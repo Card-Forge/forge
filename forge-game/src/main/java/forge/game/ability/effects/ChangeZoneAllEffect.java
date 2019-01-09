@@ -178,7 +178,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                     movedCard.setExiledWith(host);
                 }
                 if (sa.hasParam("ExileFaceDown")) {
-                    movedCard.setState(CardStateName.FaceDown, true);
+                    movedCard.turnFaceDown(true);
                 }
                 if (sa.hasParam("Tapped")) {
                     movedCard.setTapped(true);

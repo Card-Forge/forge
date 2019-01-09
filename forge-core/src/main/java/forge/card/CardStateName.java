@@ -5,13 +5,13 @@ public enum CardStateName {
     Original,
     FaceDown,
     Flipped,
-    Cloner,
     Transformed,
     Meld,
-    Cloned, 
     LeftSplit,
     RightSplit,
-    OriginalText; // backup state for cards like Volrath's Shapeshifter
+    OriginalText, // backup state for cards like Volrath's Shapeshifter
+
+    ;
 
     /**
      * TODO: Write javadoc for this method.

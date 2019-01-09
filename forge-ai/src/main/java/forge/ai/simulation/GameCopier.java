@@ -305,7 +305,7 @@ public class GameCopier {
             if (c.isFaceDown()) {
                 boolean isCreature = newCard.isCreature();
                 boolean hasManaCost = !newCard.getManaCost().isNoCost();
-                newCard.setState(CardStateName.FaceDown, true);
+                newCard.turnFaceDown(true);
                 if (c.isManifested()) {
                     newCard.setManifested(true);
                     // TODO: Should be able to copy other abilities...

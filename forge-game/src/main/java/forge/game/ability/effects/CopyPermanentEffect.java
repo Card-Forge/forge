@@ -27,8 +27,6 @@ import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
-import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
@@ -262,7 +260,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         final List<String> keywords = Lists.newArrayList();
         final List<String> types = Lists.newArrayList();
         final List<String> svars = Lists.newArrayList();
-        final List<String> triggers = Lists.newArrayList();
+        //final List<String> triggers = Lists.newArrayList();
         boolean asNonLegendary = false;
 
         if (sa.hasParam("Keywords")) {
@@ -277,9 +275,11 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         if (sa.hasParam("AddSVars")) {
             svars.addAll(Arrays.asList(sa.getParam("AddSVars").split(" & ")));
         }
+        /*
         if (sa.hasParam("Triggers")) {
             triggers.addAll(Arrays.asList(sa.getParam("Triggers").split(" & ")));
         }
+        //*/
 
         final Card copy = CardFactory.copyCopiableCharacteristics(original, sa.getActivatingPlayer());
         copy.setToken(true);
@@ -312,11 +312,13 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
             }
             copy.setSVar(name, actualsVar);
         }
+        /*
         for (final String s : triggers) {
             final String actualTrigger = host.getSVar(s);
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, copy, true);
             copy.addTrigger(parsedTrigger);
         }
+        //*/
 
         // set power of clone
         if (sa.hasParam("SetPower")) {

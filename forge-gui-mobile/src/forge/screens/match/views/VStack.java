@@ -242,8 +242,7 @@ public class VStack extends FDropDown {
             }
 
             // TODO: A hacky workaround is currently used to make the game not leak the color information for Morph cards.
-            final CardStateView curState = card.getCurrentState();
-            final boolean isFaceDown = curState.getState() == CardStateName.FaceDown;
+            final boolean isFaceDown = card.isFaceDown();
             final DetailColors color = isFaceDown ? CardDetailUtil.DetailColors.FACE_DOWN : CardDetailUtil.getBorderColor(card.getCurrentState(), true); // otherwise doesn't work correctly for face down Morphs
             backColor = FSkinColor.fromRGB(color.r, color.g, color.b);
             foreColor = FSkinColor.getHighContrastColor(backColor);

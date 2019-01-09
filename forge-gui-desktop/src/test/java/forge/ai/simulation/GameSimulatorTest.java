@@ -1696,4 +1696,99 @@ public class GameSimulatorTest extends SimulationTestCase {
         // One cards drawn
         assertTrue(simGame.getPlayers().get(0).getZone(ZoneType.Hand).size() == 1);
     }
+
+
+    public void testCloneTransform() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        Player p2 = game.getPlayers().get(1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        final String outLawName = "Kruin Outlaw";
+        final String hillGiantName = "Elite Vanguard";
+        final String terrorName = "Terror of Kruin Pass";
+
+        Card outlaw = addCard(outLawName, p2);
+        Card giant = addCard(hillGiantName, p);
+
+        assertFalse(outlaw.isCloned());
+        assertTrue(outlaw.isDoubleFaced());
+        assertTrue(outlaw.hasState(CardStateName.Transformed));
+        assertTrue(outlaw.canTransform());
+        assertFalse(outlaw.isBackSide());
+
+        assertFalse(giant.isDoubleFaced());
+        assertFalse(giant.canTransform());
+
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCard("Island", p);
+
+        Card cytoCard = addCardToZone("Cytoshape", p, ZoneType.Hand);
+        SpellAbility cytoSA = cytoCard.getFirstSpellAbility();
+
+        Card moonmist = addCardToZone("Moonmist", p, ZoneType.Hand);
+        SpellAbility moonmistSA = moonmist.getFirstSpellAbility();
+
+        cytoSA.getTargets().add(outlaw);
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(cytoSA).value;
+
+        assertTrue(score > 0);
+
+        Game simGame = sim.getSimulatedGameState();
+
+        assertTrue(countCardsWithName(simGame, outLawName) == 0);
+        assertTrue(countCardsWithName(simGame, hillGiantName) == 2);
+        assertTrue(countCardsWithName(simGame, terrorName) == 0);
+
+        Card clonedOutLaw = (Card)sim.getGameCopier().find(outlaw);
+
+        assertTrue(clonedOutLaw.isCloned());
+        assertTrue(clonedOutLaw.isDoubleFaced());
+        assertFalse(clonedOutLaw.hasState(CardStateName.Transformed));
+        assertTrue(clonedOutLaw.canTransform());
+        assertFalse(clonedOutLaw.isBackSide());
+
+        assertTrue(clonedOutLaw.getName().equals(hillGiantName));
+
+        assertTrue(clonedOutLaw.isDoubleFaced());
+
+        score = sim.simulateSpellAbility(moonmistSA).value;
+        assertTrue(score > 0);
+
+        simGame = sim.getSimulatedGameState();
+
+        assertTrue(countCardsWithName(simGame, outLawName) == 0);
+        assertTrue(countCardsWithName(simGame, hillGiantName) == 2);
+        assertTrue(countCardsWithName(simGame, terrorName) == 0);
+
+        Card transformOutLaw = (Card)sim.getGameCopier().find(outlaw);
+
+        assertTrue(transformOutLaw.isCloned());
+        assertTrue(transformOutLaw.isDoubleFaced());
+        assertFalse(transformOutLaw.hasState(CardStateName.Transformed));
+        assertTrue(transformOutLaw.canTransform());
+        assertTrue(transformOutLaw.isBackSide());
+
+        assertTrue(transformOutLaw.getName().equals(hillGiantName));
+
+        // need to clean up the clone state
+        simGame.getPhaseHandler().devAdvanceToPhase(PhaseType.CLEANUP);
+
+        assertTrue(countCardsWithName(simGame, outLawName) == 0);
+        assertTrue(countCardsWithName(simGame, hillGiantName) == 1);
+        assertTrue(countCardsWithName(simGame, terrorName) == 1);
+
+        assertFalse(transformOutLaw.isCloned());
+        assertTrue(transformOutLaw.isDoubleFaced());
+        assertTrue(transformOutLaw.hasState(CardStateName.Transformed));
+        assertTrue(transformOutLaw.canTransform());
+        assertTrue(transformOutLaw.isBackSide());
+
+        assertTrue(transformOutLaw.getName().equals(terrorName));
+    }
 }

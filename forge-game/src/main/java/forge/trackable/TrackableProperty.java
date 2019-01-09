@@ -16,13 +16,20 @@ public enum TrackableProperty {
     CurrentPlane(TrackableTypes.StringType),
     PlanarPlayer(TrackableTypes.PlayerViewType),
 
-    //Card 
+    //Card
     Owner(TrackableTypes.PlayerViewType),
     Controller(TrackableTypes.PlayerViewType),
     Zone(TrackableTypes.EnumType(ZoneType.class)),
+
+    Flipped(TrackableTypes.BooleanType),
+    Facedown(TrackableTypes.BooleanType),
+
+    //TODO?
+    Cloner(TrackableTypes.StringType),
     Cloned(TrackableTypes.BooleanType),
     FlipCard(TrackableTypes.BooleanType),
     SplitCard(TrackableTypes.BooleanType),
+
     Attacking(TrackableTypes.BooleanType),
     Blocking(TrackableTypes.BooleanType),
     PhasedOut(TrackableTypes.BooleanType),
@@ -47,7 +54,7 @@ public enum TrackableProperty {
     EncodedCards(TrackableTypes.CardViewCollectionType),
     GainControlTargets(TrackableTypes.CardViewCollectionType),
     CloneOrigin(TrackableTypes.CardViewType),
-    Cloner(TrackableTypes.StringType),
+
     ImprintedCards(TrackableTypes.CardViewCollectionType),
     HauntedBy(TrackableTypes.CardViewCollectionType),
     Haunting(TrackableTypes.CardViewType),

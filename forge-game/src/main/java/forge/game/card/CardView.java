@@ -113,7 +113,7 @@ public class CardView extends GameEntityView {
     }
 
     public boolean isFaceDown() {
-        return getCurrentState().getState() == CardStateName.FaceDown;
+        return get(TrackableProperty.Facedown);//  getCurrentState().getState() == CardStateName.FaceDown;
     }
 
     public boolean isFlipCard() {
@@ -121,16 +121,18 @@ public class CardView extends GameEntityView {
     }
 
     public boolean isFlipped() {
-        return getCurrentState().getState() == CardStateName.Flipped;
+        return get(TrackableProperty.Flipped); // getCurrentState().getState() == CardStateName.Flipped;
     }
 
     public boolean isSplitCard() {
         return get(TrackableProperty.SplitCard);
     }
 
+    /*
     public boolean isTransformed() {
         return getCurrentState().getState() == CardStateName.Transformed;
     }
+    //*/
 
     public boolean isAttacking() {
         return get(TrackableProperty.Attacking);
@@ -627,7 +629,9 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.SplitCard, isSplitCard);
         set(TrackableProperty.FlipCard, c.isFlipCard());
 
-        CardStateView cloner = CardView.getState(c, CardStateName.Cloner);
+        final Card cloner = c.getCloner();
+
+        //CardStateView cloner = CardView.getState(c, CardStateName.Cloner);
         set(TrackableProperty.Cloner, cloner == null ? null : cloner.getName() + " (" + cloner.getId() + ")");
 
         CardState currentState = c.getCurrentState();
@@ -699,7 +703,7 @@ public class CardView extends GameEntityView {
         if (name.isEmpty()) {
             CardStateView alternate = getAlternateState();
             if (alternate != null) {
-                if (this.getCurrentState().getState() == CardStateName.FaceDown) {
+                if (isFaceDown()) {
                     return "Face-down card (H" + getHiddenId() + ")";
                 } else {
                     return getAlternateState().getName() + " (" + getId() + ")";

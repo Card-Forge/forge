@@ -104,7 +104,7 @@ public class ManifestAi extends SpellAbilityAi {
         // check to ensure that there are no replacement effects that prevent creatures ETBing from library
         // (e.g. Grafdigger's Cage)
         Card topCopy = CardUtil.getLKICopy(library.getFirst());
-        topCopy.setState(CardStateName.FaceDown, false);
+        topCopy.turnFaceDownNoUpdate();
         topCopy.setManifested(true);
 
         final Map<String, Object> repParams = Maps.newHashMap();
