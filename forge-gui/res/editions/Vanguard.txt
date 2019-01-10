@@ -126,4 +126,13 @@ S Volrath
 S Xantcha
 
 [tokens]
+arrest
 c_1_1_sliver
+w_1_1_spirit_flying
+r_5_5_dragon_flying
+g_2_3_antelope_forestwalk
+g_3_2_cat_shroud
+g_x_x_ooze
+g_4_4_rhino_trample
+g_1_1_saproling
+g_2_2_wolf
