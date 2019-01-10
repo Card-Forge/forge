@@ -199,4 +199,8 @@ R Vodalian War Machine
 R Zelyon Sword
 
 [tokens]
+w_1_1_citizen
+u_1_1_camarid
+b_0_1_thrull
 r_1_1_goblin
+g_1_1_saproling

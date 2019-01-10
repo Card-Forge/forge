@@ -136,3 +136,7 @@ C War Elephant
 U Witch Hunter
 R Xira Arien
 R Yawgmoth Demon
+
+[tokens]
+stangg_twin
+c_1_1_a_snake_poison

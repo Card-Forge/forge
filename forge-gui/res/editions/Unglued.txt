@@ -13,4 +13,9 @@ Type=Other
 88 L Forest
 
 [tokens]
+g_0_1_sheep
+g_1_1_squirrel
 r_1_1_goblin
+rabid_sheep
+w_1_1_pegasus_flying
+w_1_1_soldier

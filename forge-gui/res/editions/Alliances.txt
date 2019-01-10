@@ -209,3 +209,15 @@ R Winter's Night
 C Yavimaya Ancients
 C Yavimaya Ancients
 U Yavimaya Ants
+
+[tokens]
+w_0_1_deserter
+w_1_1_knight_banding
+w_1_1_soldier
+u_0_1_starfish
+u_x_x_orb_flying
+b_2_2_zombie
+r_1_1_survivor
+g_1_1_hippo
+g_1_1_splinter_flying_cum
+br_3_1_graveborn_haste
