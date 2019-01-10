@@ -95,4 +95,5 @@ Foil=NotSupported
 87 L Plains
 
 [tokens]
+w_1_1_pegasus_flying
 r_1_1_goblin
