@@ -154,3 +154,11 @@ FoilAlwaysInCommonSlot=False
 143 R Yavimaya Coast
 127 R Yavimaya's Embrace
 54 C Zombie Boa
+
+[tokens]
+b_3_3_angel_flying
+b_2_1_cat
+b_3_3_kavu
+b_6_6_wurm_trample
+g_1_1_saproling
+rw_1_1_goblin_soldier
