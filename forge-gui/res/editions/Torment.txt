@@ -154,3 +154,6 @@ FoilAlwaysInCommonSlot=False
 117 U Violent Eruption
 88 C Waste Away
 89 U Zombie Trailblazer
+
+[tokens]
+g_1_1_squirrel
