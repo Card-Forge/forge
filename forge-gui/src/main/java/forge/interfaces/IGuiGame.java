@@ -11,6 +11,7 @@ import forge.assets.FSkinProp;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.GameView;
+import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
@@ -147,6 +148,10 @@ public interface IGuiGame {
     List<PaperCard> sideboard(CardPool sideboard, CardPool main);
     GameEntityView chooseSingleEntityForEffect(String title, List<? extends GameEntityView> optionList, DelayedReveal delayedReveal, boolean isOptional);
     List<GameEntityView> chooseEntitiesForEffect(String title, List<? extends GameEntityView> optionList, int min, int max, DelayedReveal delayedReveal);
+
+    // show a list of cards and allow some of them to be moved around and return new list
+    List<Card> manipulateCardList(String title, final List<Card> cards, final List<Card> manipulable, boolean toTop, boolean toBottom, boolean toAnywhere);
+
     void setCard(CardView card);
     void setPlayerAvatar(LobbyPlayer player, IHasIcon ihi);
     boolean openZones(Collection<ZoneType> zones, Map<PlayerView, Object> players);
