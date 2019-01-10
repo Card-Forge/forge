@@ -463,5 +463,11 @@ R Zur's Weirding
 
 [tokens]
 wasp
-r_1_1_goblin
+c_1_1_a_snake_poison
 c_5_5_a_djinn_flying
+w_0_1_caribou
+w_1_1_citizen
+b_0_1_serf
+b_0_1_thrull
+b_x_x_spirit
+r_1_1_goblin

@@ -177,3 +177,9 @@ U Waterspout Djinn
 C Wicked Reward
 U Wind Shear
 R Zhalfirin Crusader
+
+[tokens]
+butterfly
+c_0_1_a_prism
+g_0_1_sheep
+g_1_1_snake

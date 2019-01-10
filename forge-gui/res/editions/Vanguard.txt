@@ -124,3 +124,6 @@ S Urza
 41 S Viridian Zealot Avatar
 S Volrath
 S Xantcha
+
+[tokens]
+c_1_1_sliver
