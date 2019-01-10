@@ -14,3 +14,6 @@ Type=Other
 
 [tokens]
 r_1_1_goblin
+g_1_1_ape
+g_3_3_ape
+g_1_1_squirrel
