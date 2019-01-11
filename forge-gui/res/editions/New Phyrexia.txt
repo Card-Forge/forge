@@ -186,4 +186,8 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 51 R Xenograft
 
 [tokens]
-r_1_1_goblin
+r_1_1_goblin_haste
+g_3_3_beast
+g_1_1_insect_infect
+c_3_3_a_golem
+c_1_1_a_myr

@@ -89,4 +89,5 @@ Type=Duel_Decks
 13 U Zhalfirin Commander
 
 [tokens]
+w_2_2_griffin_flying
 r_1_1_goblin
