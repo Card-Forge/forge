@@ -257,3 +257,14 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 248 L Forest
 248 L Forest
 248 L Forest
+
+[tokens]
+w_2_1_e_cleric
+w_1_1_soldier
+u_2_2_bird_flying
+u_1_0_elemental
+b_1_1_harpy_flying
+r_1_1_soldier_haste
+g_2_2_boar
+rg_2_2_satyr_haste
+c_3_3_e_a_golem

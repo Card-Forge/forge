@@ -219,3 +219,13 @@ Booster=10 Common:!fromSheet("CNS Draft Matters"), 3 Uncommon:!fromSheet("CNS Dr
 208 U Mirrodin's Core
 209 U Quicksand
 210 R Reflecting Pool
+
+[tokens]
+w_1_1_spirit_flying
+b_x_x_demon_flying
+b_2_2_zombie
+r_4_4_ogre
+g_3_3_elephant
+g_1_1_squirrel
+g_2_2_wolf
+c_1_1_a_construct_defender
