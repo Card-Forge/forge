@@ -23,7 +23,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
 /**
- * The Class CostPayLife.
+ * The Class CostDamage.
  */
 public class CostDamage extends CostPart {
 
