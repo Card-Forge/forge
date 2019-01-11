@@ -18,7 +18,6 @@
 package forge.game.cost;
 
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
