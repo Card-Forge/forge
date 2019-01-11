@@ -285,4 +285,16 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 84 U Zanikev Locust
 
 [tokens]
+pack_rat
+w_1_1_bird_flying
+w_2_2_knight_vigilance
+w_1_1_soldier
+b_1_1_assassin_lose_con
+r_6_6_dragon_flying
 r_1_1_goblin
+g_3_3_centaur
+g_x_x_ooze
+g_4_4_rhino_trample
+g_1_1_saproling
+g_5_5_wurm_trample
+gw_8_8_elemental_vigilance
