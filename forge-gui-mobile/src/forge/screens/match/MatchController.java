@@ -29,6 +29,7 @@ import forge.deck.CardPool;
 import forge.deck.FSideboardDialog;
 import forge.game.GameEntityView;
 import forge.game.GameView;
+import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
@@ -344,6 +345,16 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
+    public Iterable<PlayerZoneUpdate> tempShowZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        return view.tempShowZones(controller, zonesToUpdate);
+    }
+
+    @Override
+    public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+	view.hideZones(controller, zonesToUpdate);
+    }
+
+    @Override
     public void updateCards(final Iterable<CardView> cards) {
         for (final CardView card : cards) {
             view.updateSingleCard(card);
@@ -506,8 +517,14 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public List<GameEntityView> chooseEntitiesForEffect(String title, List<? extends GameEntityView> optionList, DelayedReveal delayedReveal) {
-        return SGuiChoose.order(title, "Selected", 0, -1, (List<GameEntityView>) optionList, null);
+    public List<GameEntityView> chooseEntitiesForEffect(String title, List<? extends GameEntityView> optionList, int min, int max, DelayedReveal delayedReveal) {
+        return SGuiChoose.order(title, "Selected", min, max, (List<GameEntityView>) optionList, null);
+    }
+
+    @Override
+    public List<Card> manipulateCardList(final String title, final List<Card> cards, final List<Card> manipulable, final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
+	System.err.println("Not implemented yet - should never be called");
+	return null;
     }
 
     @Override

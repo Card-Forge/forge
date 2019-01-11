@@ -348,6 +348,31 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return new CardCollection(inp.getSelected());
     }
 
+    private boolean useSelectCardsInput(final FCollectionView<? extends GameEntity> sourceList) {
+	if ( FThreads.isGuiThread() ) { return false; } // can't use InputSelect from GUI thread (e.g., DevMode Tutor)
+	// if UI_SELECT_FROM_CARD_DISPLAYS not set use InputSelect only for battlefield and player hand
+	// if UI_SELECT_FROM_CARD_DISPLAYS set and using desktop GUI use InputSelect for any zone that can be shown
+        for (final GameEntity c : sourceList) {
+            if (c instanceof Player) {
+                continue;
+            }
+	    if (!(c instanceof Card)) {
+		return false;
+	    }
+            final Zone cz = ((Card) c).getZone();
+            final boolean useUiPointAtCard = 
+		cz != null &&
+		(FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) && (!GuiBase.getInterface().isLibgdxPort()) ) ?
+		(cz.is(ZoneType.Battlefield) || cz.is(ZoneType.Hand) || cz.is(ZoneType.Library) || 
+		 cz.is(ZoneType.Graveyard) || cz.is(ZoneType.Exile) || cz.is(ZoneType.Flashback) || cz.is(ZoneType.Command)) :
+		(cz.is(ZoneType.Hand) && cz.getPlayer() == player || cz.is(ZoneType.Battlefield));
+            if (!useUiPointAtCard) {
+                return false;
+            }
+        }
+	return true;
+    }
+
     @Override
     public CardCollectionView chooseCardsForEffect(final CardCollectionView sourceList, final SpellAbility sa,
             final String title, final int min, final int max, final boolean isOptional) {
@@ -362,22 +387,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         getGui().setPanelSelection(CardView.get(sa.getHostCard()));
 
-        // try to use InputSelectCardsFromList when possible
-        boolean cardsAreInMyHandOrBattlefield = true;
-        for (final Card c : sourceList) {
-            final Zone z = c.getZone();
-            if (z != null && (z.is(ZoneType.Battlefield) || z.is(ZoneType.Hand, player))) {
-                continue;
-            }
-            cardsAreInMyHandOrBattlefield = false;
-            break;
-        }
-
-        if (cardsAreInMyHandOrBattlefield) {
+        if (useSelectCardsInput(sourceList)) {
+	    tempShowCards(sourceList);
             final InputSelectCardsFromList sc = new InputSelectCardsFromList(this, min, max, sourceList, sa);
             sc.setMessage(title);
             sc.setCancelAllowed(isOptional);
             sc.showAndWait();
+	    endTempShowCards();
             return new CardCollection(sc.getSelected());
         }
 
@@ -411,31 +427,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return Iterables.getFirst(optionList, null);
         }
 
-        boolean canUseSelectCardsInput = true;
-        for (final GameEntity c : optionList) {
-            if (c instanceof Player) {
-                continue;
-            }
-            final Zone cz = ((Card) c).getZone();
-            // can point at cards in own hand and anyone's battlefield
-            final boolean canUiPointAtCards = cz != null
-                    && (cz.is(ZoneType.Hand) && cz.getPlayer() == player || cz.is(ZoneType.Battlefield));
-            if (!canUiPointAtCards) {
-                canUseSelectCardsInput = false;
-                break;
-            }
-        }
-
-        if (canUseSelectCardsInput) {
+        if (useSelectCardsInput(optionList)) {
             if (delayedReveal != null) {
                 reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(),
                         delayedReveal.getMessagePrefix());
             }
+	    tempShow(optionList);
             final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<T>(this, isOptional ? 0 : 1, 1,
                     optionList, sa);
             input.setCancelAllowed(isOptional);
             input.setMessage(MessageUtil.formatMessage(title, player, targetedPlayer));
             input.showAndWait();
+	    endTempShowCards();
             return Iterables.getFirst(input.getSelected(), null);
         }
 
@@ -458,7 +461,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T extends GameEntity> List<T> chooseEntitiesForEffect(final FCollectionView<T> optionList,
+    public <T extends GameEntity> List<T> chooseEntitiesForEffect(final FCollectionView<T> optionList, final int  min, final int max,
             final DelayedReveal delayedReveal, final SpellAbility sa, final String title, final Player targetedPlayer) {
 
         // useful details for debugging problems with the mass select logic
@@ -475,31 +478,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return null;
         }
 
-        boolean canUseSelectCardsInput = true;
-        for (final GameEntity c : optionList) {
-            if (c instanceof Player) {
-                continue;
-            }
-            final Zone cz = ((Card) c).getZone();
-            // can point at cards in own hand and anyone's battlefield
-            final boolean canUiPointAtCards = cz != null
-                    && (cz.is(ZoneType.Hand) && cz.getPlayer() == player || cz.is(ZoneType.Battlefield));
-            if (!canUiPointAtCards) {
-                canUseSelectCardsInput = false;
-                break;
-            }
-        }
-
-        if (canUseSelectCardsInput) {
+        if (useSelectCardsInput(optionList)) {
             if (delayedReveal != null) {
                 reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(),
                         delayedReveal.getMessagePrefix());
             }
-            final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<T>(this, 0, optionList.size(),
+	    tempShow(optionList);
+            final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<T>(this, min, max,
                     optionList, sa);
             input.setCancelAllowed(true);
             input.setMessage(MessageUtil.formatMessage(title, player, targetedPlayer));
             input.showAndWait();
+	    endTempShowCards();
             return (List<T>) input.getSelected();
         }
 
@@ -508,7 +498,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             tempShow(delayedReveal.getCards());
         }
         final List<GameEntityView> chosen = getGui().chooseEntitiesForEffect(title,
-                GameEntityView.getEntityCollection(optionList), delayedReveal);
+		GameEntityView.getEntityCollection(optionList), min, max, delayedReveal);
         endTempShowCards();
 
         List<T> results = new ArrayList<>();
@@ -747,31 +737,58 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
     }
 
+    public ImmutablePair<CardCollection, CardCollection> arrangeForMove(final String title, final List<Card> cards, final List<Card> manipulable, final boolean topOK, final boolean bottomOK) {
+	List<Card> result = getGui().manipulateCardList("Move cards to top or bottom of library", cards, manipulable, topOK, bottomOK, false);
+        CardCollection toBottom = new CardCollection();
+        CardCollection toTop = new CardCollection();
+	for (int i = 0; manipulable.contains(result.get(i)) && i<cards.size(); i++ ) {
+	    toTop.add(result.get(i));
+	}
+	if (toTop.size() < cards.size()) { // the top isn't everything
+	    for (int i = result.size()-1; manipulable.contains(result.get(i)); i-- ) {	
+		toBottom.add(result.get(i));
+	    }
+	}
+	return ImmutablePair.of(toTop,toBottom);
+    }
+
     @Override
     public ImmutablePair<CardCollection, CardCollection> arrangeForScry(final CardCollection topN) {
         CardCollection toBottom = null;
         CardCollection toTop = null;
 
         tempShowCards(topN);
-        if (topN.size() == 1) {
-            if (willPutCardOnTop(topN.get(0))) {
-                toTop = topN;
-            } else {
-                toBottom = topN;
-            }
-        } else {
-            toBottom = game.getCardList(getGui().many("Select cards to be put on the bottom of your library",
-                    "Cards to put on the bottom", -1, CardView.getCollection(topN), null));
-            topN.removeAll((Collection<?>) toBottom);
-            if (topN.isEmpty()) {
-                toTop = null;
-            } else if (topN.size() == 1) {
-                toTop = topN;
-            } else {
-                toTop = game.getCardList(getGui().order("Arrange cards to be put on top of your library",
-                        "Top of Library", CardView.getCollection(topN), null));
-            }
-        }
+	if ( FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) &&
+	     (!GuiBase.getInterface().isLibgdxPort()) ) {
+	    ArrayList<Card> cardList = new ArrayList<Card>();  // pfps there must be a better way
+            for (final Card card : player.getCardsIn(ZoneType.Library)) {
+		cardList.add(card);
+	    }
+	    ImmutablePair<CardCollection, CardCollection> result =
+		arrangeForMove("Move cards to top or bottom of library", cardList, topN, true, true);
+	    toTop = result.getLeft();
+	    toBottom = result.getRight();
+	} else {
+	    if (topN.size() == 1) {
+		if (willPutCardOnTop(topN.get(0))) {
+		    toTop = topN;
+		} else {
+		    toBottom = topN;
+		}
+	    } else {
+		toBottom = game.getCardList(getGui().many("Select cards to be put on the bottom of your library",
+							  "Cards to put on the bottom", -1, CardView.getCollection(topN), null));
+		topN.removeAll((Collection<?>) toBottom);
+		if (topN.isEmpty()) {
+		    toTop = null;
+		} else if (topN.size() == 1) {
+		    toTop = topN;
+		} else {
+		    toTop = game.getCardList(getGui().order("Arrange cards to be put on top of your library",
+							    "Top of Library", CardView.getCollection(topN), null));
+		}
+	    }
+	}
         endTempShowCards();
         return ImmutablePair.of(toTop, toBottom);
     }
@@ -1791,9 +1808,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public List<Card> chooseCardsForZoneChange(final ZoneType destination, final List<ZoneType> origin,
-            final SpellAbility sa, final CardCollection fetchList, final DelayedReveal delayedReveal,
+            final SpellAbility sa, final CardCollection fetchList, final int min, final int max, final DelayedReveal delayedReveal,
             final String selectPrompt, final Player decider) {
-        return chooseEntitiesForEffect(fetchList, delayedReveal, sa, selectPrompt, decider);
+        return chooseEntitiesForEffect(fetchList, min, max, delayedReveal, sa, selectPrompt, decider);
     }
 
     @Override

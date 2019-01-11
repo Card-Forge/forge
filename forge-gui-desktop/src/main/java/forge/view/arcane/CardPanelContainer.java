@@ -182,6 +182,10 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         });
     }
 
+    protected boolean cardPanelDraggable(final CardPanel panel) {
+	return true;
+    }
+
     private MouseMotionListener setupMotionMouseListener() {
         final MouseMotionListener mml = new MouseMotionListener() {
             @Override
@@ -207,20 +211,23 @@ public abstract class CardPanelContainer extends SkinnedPanel {
                 if (panel != mouseDownPanel) {
                     return;
                 }
-                if (intialMouseDragX == -1) {
-                    intialMouseDragX = x;
-                    intialMouseDragY = y;
-                    return;
-                }
-                if ((Math.abs(x - intialMouseDragX) < CardPanelContainer.DRAG_SMUDGE)
+
+		if (cardPanelDraggable(panel)) { // allow for non-draggable cards
+		    if (intialMouseDragX == -1) {
+			intialMouseDragX = x;
+			intialMouseDragY = y;
+			return;
+		    }
+		    if ((Math.abs(x - intialMouseDragX) < CardPanelContainer.DRAG_SMUDGE)
                         && (Math.abs(y - intialMouseDragY) < CardPanelContainer.DRAG_SMUDGE)) {
-                    return;
-                }
-                mouseDownPanel = null;
-                setMouseDragPanel(panel);
-                mouseDragOffsetX = panel.getX() - intialMouseDragX;
-                mouseDragOffsetY = panel.getY() - intialMouseDragY;
-                mouseDragStart(getMouseDragPanel(), evt);
+			return;
+		    }
+		    mouseDownPanel = null;
+		    setMouseDragPanel(panel);
+		    mouseDragOffsetX = panel.getX() - intialMouseDragX;
+		    mouseDragOffsetY = panel.getY() - intialMouseDragY;
+		    mouseDragStart(getMouseDragPanel(), evt);
+		}
             }
 
             @Override

@@ -51,6 +51,7 @@ import forge.deck.Deck;
 import forge.deckchooser.FDeckViewer;
 import forge.game.GameEntityView;
 import forge.game.GameView;
+import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.combat.CombatView;
 import forge.game.phase.PhaseType;
@@ -101,6 +102,7 @@ import forge.util.gui.SOptionPane;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.FloatingCardArea;
+import forge.match.input.*;
 
 /**
  * Constructs instance of match UI controller, used as a single point of
@@ -395,7 +397,8 @@ public final class CMatchUI
                     break;
                 case Hand:
                     updateHand = true;
-                    //$FALL-THROUGH$
+                    updateZones = true;
+                    break;
                 default:
                     updateZones = true;
                     FloatingCardArea.refresh(owner, zone);
@@ -422,6 +425,57 @@ public final class CMatchUI
                 vField.updateZones();
             }
         }
+    }
+
+    @Override
+    public Iterable<PlayerZoneUpdate> tempShowZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        for (final PlayerZoneUpdate update : zonesToUpdate) {
+            final PlayerView player = update.getPlayer();
+            for (final ZoneType zone : update.getZones()) {
+		switch (zone) {
+		case Battlefield: // always shown
+		    break;
+		case Hand:  // controller hand always shown
+		    if (controller != player) {
+			FloatingCardArea.show(this,player,zone);
+		    }
+		    break;
+		case Library:
+		case Graveyard:
+		case Exile:
+		case Flashback:
+		case Command:
+		    FloatingCardArea.show(this,player,zone);
+		    break;
+		default:
+		    break;
+		}
+	    }
+	}
+	return zonesToUpdate; //pfps should return only the newly shown zones
+    }
+
+    @Override
+    public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        for (final PlayerZoneUpdate update : zonesToUpdate) {
+            final PlayerView player = update.getPlayer();
+            for (final ZoneType zone : update.getZones()) {
+		switch (zone) {
+		case Battlefield: // always shown
+		    break;
+		case Hand: // the controller's hand should never be temporarily shown, but ...
+		case Library:
+		case Graveyard:
+		case Exile:
+		case Flashback:
+		case Command:
+		    FloatingCardArea.hide(this,player,zone);
+		    break;
+		default:
+		    break;
+		}
+	    }
+	}
     }
 
     // Player's mana pool changes
@@ -465,6 +519,7 @@ public final class CMatchUI
                 }
                 break;
             default:
+		FloatingCardArea.refresh(c.getController(),zone); // in case the card is visible in the zone
                 break;
             }
         }
@@ -942,11 +997,16 @@ public final class CMatchUI
     }
 
     @Override
-    public List<GameEntityView> chooseEntitiesForEffect(final String title, final List<? extends GameEntityView> optionList, final DelayedReveal delayedReveal) {
+    public List<GameEntityView> chooseEntitiesForEffect(final String title, final List<? extends GameEntityView> optionList, final int min, final int max, final DelayedReveal delayedReveal) {
         if (delayedReveal != null) {
             reveal(delayedReveal.getMessagePrefix(), delayedReveal.getCards()); //TODO: Merge this into search dialog
         }
-        return (List<GameEntityView>) order(title,"Selected", 0, optionList.size(), optionList, null, null, false);
+        return (List<GameEntityView>) order(title,"Selected", min, max, optionList, null, null, false);
+    }
+
+    @Override
+    public List<Card> manipulateCardList(final String title, final List<Card> cards, final List<Card> manipulable, final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
+	return GuiChoose.manipulateCardList(this, title, cards, manipulable, toTop, toBottom, toAnywhere);
     }
 
     @Override

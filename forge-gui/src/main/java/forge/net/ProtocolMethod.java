@@ -49,6 +49,8 @@ public enum ProtocolMethod {
     hideManaPool        (Mode.SERVER, Void.TYPE, PlayerView.class),
     updateStack         (Mode.SERVER),
     updateZones         (Mode.SERVER, Void.TYPE, Iterable/*PlayerZoneUpdate*/.class),
+    tempShowZones       (Mode.SERVER, Iterable/*PlayerZoneUpdate*/.class, PlayerView.class, Iterable/*PlayerZoneUpdate*/.class),
+    hideZones           (Mode.SERVER, Void.TYPE, PlayerView.class, Iterable/*PlayerZoneUpdate*/.class),
     updateCards         (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
     updateManaPool      (Mode.SERVER, Void.TYPE, Iterable/*PlayerView*/.class),
     updateLives         (Mode.SERVER, Void.TYPE, Iterable/*PlayerView*/.class),
@@ -65,7 +67,8 @@ public enum ProtocolMethod {
     order               (Mode.SERVER, List.class, String.class, String.class, Integer.TYPE, Integer.TYPE, List.class, List.class, CardView.class, Boolean.TYPE),
     sideboard           (Mode.SERVER, List.class, CardPool.class, CardPool.class),
     chooseSingleEntityForEffect(Mode.SERVER, GameEntityView.class, String.class, List.class, DelayedReveal.class, Boolean.TYPE),
-    chooseEntitiesForEffect(Mode.SERVER, GameEntityView.class, String.class, List.class, DelayedReveal.class),
+    chooseEntitiesForEffect(Mode.SERVER, GameEntityView.class, String.class, List.class, Integer.TYPE, Integer.TYPE, DelayedReveal.class),
+    manipulateCardList   (Mode.SERVER, List.class, String.class, List.class, List.class, Boolean.TYPE, Boolean.TYPE, Boolean.TYPE),
     setCard             (Mode.SERVER, Void.TYPE, CardView.class),
     // TODO case "setPlayerAvatar":
     openZones           (Mode.SERVER, Boolean.TYPE, Collection/*ZoneType*/.class, Map/*PlayerView,Object*/.class),

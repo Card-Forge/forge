@@ -11,6 +11,7 @@ import forge.assets.FSkinProp;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.GameView;
+import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
@@ -148,6 +149,18 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
+    public Iterable<PlayerZoneUpdate> tempShowZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        updateGameView();
+        return sendAndWait(ProtocolMethod.tempShowZones, controller, zonesToUpdate);
+    }
+
+    @Override
+    public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
+        updateGameView();
+        send(ProtocolMethod.hideZones, controller, zonesToUpdate);
+    }
+
+    @Override
     public void updateCards(final Iterable<CardView> cards) {
         updateGameView();
         send(ProtocolMethod.updateCards, cards);
@@ -232,8 +245,13 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
-    public List<GameEntityView> chooseEntitiesForEffect(final String title, final List<? extends GameEntityView> optionList, final DelayedReveal delayedReveal) {
-        return sendAndWait(ProtocolMethod.chooseEntitiesForEffect, title, optionList, delayedReveal);
+    public List<GameEntityView> chooseEntitiesForEffect(final String title, final List<? extends GameEntityView> optionList, final int min, final int max, final DelayedReveal delayedReveal) {
+        return sendAndWait(ProtocolMethod.chooseEntitiesForEffect, title, optionList, min, max, delayedReveal);
+    }
+
+    @Override
+    public List<Card> manipulateCardList(final String title, final List<Card> cards, final List<Card> manipulable, final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
+	return sendAndWait(ProtocolMethod.manipulateCardList, title, cards, manipulable, toTop, toBottom, toAnywhere);
     }
 
     @Override

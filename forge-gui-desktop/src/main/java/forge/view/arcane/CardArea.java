@@ -246,8 +246,8 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
         dragPanel.setDisplayEnabled(false);
 
         CardPanel.setDragAnimationPanel(new CardPanel(dragPanel.getMatchUI(), dragPanel.getCard()));
-        final JFrame frame = (JFrame) SwingUtilities.windowForComponent(this);
-        final JLayeredPane layeredPane = frame.getLayeredPane();
+        final RootPaneContainer frame = (RootPaneContainer) SwingUtilities.windowForComponent(this);
+	final JLayeredPane layeredPane = frame.getLayeredPane();
         layeredPane.add(CardPanel.getDragAnimationPanel());
         layeredPane.moveToFront(CardPanel.getDragAnimationPanel());
         final Point p = SwingUtilities.convertPoint(this, this.mouseDragStartX, this.mouseDragStartY, layeredPane);

@@ -86,7 +86,7 @@ public class Localizer {
 				resourceBundle = ResourceBundle.getBundle(languageRegionID, new Locale(splitLocale[0], splitLocale[1]), loader);
 			} catch (NullPointerException | MissingResourceException e) {
 				//If the language can't be loaded, default to US English
-				resourceBundle = ResourceBundle.getBundle("en-GB", new Locale("en", "GB"), loader);
+				resourceBundle = ResourceBundle.getBundle("en-US", new Locale("en", "US"), loader);
 				e.printStackTrace();
 			}
 
