@@ -3703,11 +3703,23 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
             final String magnitude = k[1];
             final String manacost = k[2];
+            final String reduceCost = k.length > 3 ? k[3] : null;
+
+            Set<String> references = Sets.newHashSet();
 
             String desc = "Adapt " + magnitude;
 
             String effect = "AB$ PutCounter | Cost$ " + manacost + " | Adapt$ True | CounterNum$ " + magnitude
                     + " | CounterType$ P1P1 | StackDescription$ SpellDescription";
+
+            if (reduceCost != null) {
+                effect += "| ReduceCost$ " + reduceCost;
+                references.add(reduceCost);
+                desc += ". This ability costs {1} less to activate for each instant and sorcery card in your graveyard.";
+            }
+            if (!references.isEmpty()) {
+                effect += "| References$ " + TextUtil.join(references, ",");
+            }
 
             effect += "| SpellDescription$ " + desc + " (" + inst.getReminderText() + ")";
 
