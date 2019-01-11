@@ -156,4 +156,12 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand ALA
 85 U Zealous Persecution
 
 [tokens]
+w_1_1_bird_soldier_flying
+w_1_1_soldier
+u_1_1_a_thopter_flying
+b_2_2_zombie
 r_1_1_goblin
+g_2_2_lizard
+g_1_1_saproling
+rg_1_1_dragon_flying_devour
+ub_1_1_zombie_wizard
