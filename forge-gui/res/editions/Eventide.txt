@@ -190,3 +190,14 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 165 U Wistful Selkie
 130 C Woodlurker Mimic
 131 R Worm Harvest
+
+[tokens]
+w_0_1_goat
+w_1_1_kithkin_soldier
+u_1_1_bird_flying
+g_3_3_beast
+g_2_2_wolf
+ur_5_5_elemental_flying
+rw_1_1_goblin_soldier
+wb_1_1_spirit_flying
+bg_1_1_worm

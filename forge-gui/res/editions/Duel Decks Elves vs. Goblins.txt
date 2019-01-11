@@ -75,3 +75,5 @@ C Goblin
 
 [tokens]
 r_1_1_goblin
+g_7_7_elemental_trample
+g_1_1_elf_warrior
