@@ -60,17 +60,6 @@ public class CostPayLife extends CostPart {
     /*
      * (non-Javadoc)
      * 
-     * @see forge.card.cost.CostPart#refund(forge.Card)
-     */
-    @Override
-    public final void refund(final Card source) {
-        // Really should be activating player
-        source.getController().payLife(this.paidAmount * -1, null);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see
      * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
      * forge.Card, forge.Player, forge.card.cost.Cost)
