@@ -206,4 +206,17 @@ R Stairs to Infinity
 39 C Windriddle Palaces
 
 [tokens]
+c_0_1_eldrazi_spawn_sac
+c_7_7_eldrazi_annihilator
+w_4_4_angel_flying
+b_2_4_spider_reach
+b_2_2_zombie
 r_1_1_goblin
+r_4_4_hellion
+g_3_3_beast
+g_3_3_boar
+g_1_1_insect
+g_1_1_ooze
+g_2_2_ooze_mitotic
+g_0_1_plant
+g_1_1_saproling
