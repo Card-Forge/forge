@@ -175,3 +175,12 @@ FoilAlwaysInCommonSlot=False
 139 U Wreak Havoc
 99 R Wurmweaver Coil
 140 R Yore-Tiller Nephilim
+
+[tokens]
+c_1_1_sand
+w_1_1_pegasus_flying
+w_1_1_spirit_flying
+u_3_3_weird_defender_flying
+b_1_1_bat_flying
+g_1_1_saproling
+g_6_6_wurm
