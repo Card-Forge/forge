@@ -209,4 +209,11 @@ S Your Inescapable Doom
 29 U Zombify
 
 [tokens]
+b_2_2_zombie
+r_5_5_dragon_flying
 r_1_1_goblin
+r_2_1_goblin_haste
+g_3_3_elemental
+g_0_1_plant
+g_1_1_saproling
+c_4_6_a_golem

@@ -257,3 +257,13 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 173 C Wrap in Flames
 132 C Zof Shade
 133 C Zulaport Enforcer
+
+[tokens]
+tuktuk_the_returned
+c_0_1_eldrazi_spawn_sac
+w_1_1_kor_soldier
+r_5_5_dragon_flying
+r_x_x_elemental
+r_4_4_hellion
+g_3_3_elephant
+g_x_x_ooze

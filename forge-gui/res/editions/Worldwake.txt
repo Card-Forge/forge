@@ -156,4 +156,11 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand ZEN
 120 M Wrexial, the Risen Deep
 
 [tokens]
+w_1_1_soldier_ally
+r_5_5_dragon_flying
+r_3_3_ogre
+g_3_3_elephant
 g_0_1_plant
+g_1_1_snake
+g_2_2_wolf
+c_6_12_a_construct_trample
