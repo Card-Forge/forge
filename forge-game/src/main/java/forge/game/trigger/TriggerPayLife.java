@@ -29,11 +29,11 @@ import java.util.Map;
  * 
  * @author Forge
  */
-public class TriggerLifeGained extends Trigger {
+public class TriggerPayLife extends Trigger {
 
     /**
      * <p>
-     * Constructor for Trigger_LifeGained.
+     * Constructor for TriggerPayLife.
      * </p>
      * 
      * @param params
@@ -43,7 +43,7 @@ public class TriggerLifeGained extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerLifeGained(final Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerPayLife(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -52,17 +52,6 @@ public class TriggerLifeGained extends Trigger {
     public final boolean performTest(final Map<String, Object> runParams2) {
         if (hasParam("ValidPlayer")) {
             if (!matchesValid(runParams2.get("Player"), getParam("ValidPlayer").split(","), getHostCard())) {
-                return false;
-            }
-        }
-        if (hasParam("ValidSource")) {
-            if (!matchesValid(runParams2.get("Source"), getParam("ValidSource").split(","), getHostCard())) {
-                return false;
-            }
-        }
-        if (hasParam("Spell")) {
-            final SpellAbility spellAbility = (SpellAbility) runParams2.get("SourceSA");
-            if (spellAbility == null || !spellAbility.getRootAbility().isSpell()) {
                 return false;
             }
         }
@@ -81,7 +70,7 @@ public class TriggerLifeGained extends Trigger {
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
         sb.append("Player: ").append(sa.getTriggeringObject("Player")).append(", ");
-        sb.append("Gained Amount: ").append(sa.getTriggeringObject("LifeAmount"));
+        sb.append("paid Amount: ").append(sa.getTriggeringObject("LifeAmount"));
         return sb.toString();
     }
 }

@@ -64,6 +64,7 @@ public enum TriggerType {
     NewGame(TriggerNewGame.class),
     PayCumulativeUpkeep(TriggerPayCumulativeUpkeep.class),
     PayEcho(TriggerPayEcho.class),
+    PayLife(TriggerPayLife.class),
     Phase(TriggerPhase.class),
     PhaseIn(TriggerPhaseIn.class),
     PhaseOut(TriggerPhaseOut.class),
