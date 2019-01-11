@@ -84,6 +84,10 @@ public class CardFactory {
             out = CardFactory.copyStats(in, in.getController(), assignNewId);
             out.setToken(true);
 
+            // need to copy this values for the tokens
+            out.setEmbalmed(in.isEmbalmed());
+            out.setEternalized(in.isEternalized());
+
             // add abilities
             //for (SpellAbility sa : in.getIntrinsicSpellAbilities()) {
             //    out.addSpellAbility(sa);
@@ -758,7 +762,9 @@ public class CardFactory {
                 state.setName(newName);
             }
 
-            state.setColor(shortColors);
+            if (sa.hasParam("SetColor")) {
+                state.setColor(shortColors);
+            }
 
             if (sa.hasParam("NonLegendary")) {
                 state.removeType(CardType.Supertype.Legendary);
@@ -823,7 +829,7 @@ public class CardFactory {
                 state.setManaCost(ManaCost.NO_COST);
 
                 String name = TextUtil.fastReplace(
-                        TextUtil.fastReplace(state.getName(), ",", ""),
+                        TextUtil.fastReplace(host.getName(), ",", ""),
                         " ", "_").toLowerCase();
                 state.setImageKey(ImageKeys.getTokenKey("embalm_" + name));
             }
@@ -836,7 +842,7 @@ public class CardFactory {
                 state.setBaseToughness(4);
 
                 String name = TextUtil.fastReplace(
-                    TextUtil.fastReplace(state.getName(), ",", ""),
+                    TextUtil.fastReplace(host.getName(), ",", ""),
                         " ", "_").toLowerCase();
                 state.setImageKey(ImageKeys.getTokenKey("eternalize_" + name));
             }
@@ -845,14 +851,16 @@ public class CardFactory {
             // needed for copied xPaid ETB effects (for the copy, xPaid = 0)
             for (final ReplacementEffect rep : state.getReplacementEffects()) {
                 final SpellAbility newSa = rep.getOverridingAbility();
-                if (newSa != null) {
+                if (newSa != null && newSa.getOriginalHost() == null) {
                     newSa.setOriginalHost(in);
                 }
             }
 
-            // set the host card for copied spellabilities
+            // set the host card for copied spellabilities, if they are not set yet
             for (final SpellAbility newSa : state.getSpellAbilities()) {
-                newSa.setOriginalHost(in);
+                if (newSa.getOriginalHost() == null) {
+                    newSa.setOriginalHost(in);
+                }
             }
 
             // remove some characteristic static abilties
