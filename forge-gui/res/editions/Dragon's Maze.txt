@@ -165,3 +165,13 @@ Booster=10 Common:!land, 3 Uncommon, 1 RareMythic:!land, 1 fromSheet("DGM Lands"
 154 C Rakdos Guildgate
 155 C Selesnya Guildgate
 156 C Simic Guildgate
+
+[tokens]
+w_1_1_bird_flying
+w_2_2_knight_vigilance
+g_3_3_centaur
+g_4_4_rhino_trample
+g_5_5_wurm_trample
+gw_x_x_elemental_total_creatures
+rw_1_1_soldier_haste
+wb_1_1_spirit_flying

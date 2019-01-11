@@ -240,4 +240,18 @@ FoilChanceInBooster=100
 229 U Vivid Meadow
 
 [tokens]
+w_5_5_giant_warrior
+w_1_1_kithkin_soldier
+w_1_1_soldier
+u_1_1_illusion_flying
+b_1_1_bat_flying
+b_1_1_goblin_rogue
+b_2_4_spider_reach
+b_2_2_zombie
+r_4_4_dragon_flying
 r_1_1_goblin
+g_4_4_elemental
+g_1_1_saproling
+g_2_5_treefolk_shaman
+ub_1_1_faerie_rogue_flying
+bg_1_1_worm
