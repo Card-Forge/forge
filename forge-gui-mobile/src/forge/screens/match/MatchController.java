@@ -523,7 +523,8 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public List<Card> manipulateCardList(final String title, final List<Card> cards, final List<Card> manipulable, final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
-	return null; // pfps not implemented yet
+	System.err.println("Not implemented yet - should never be called");
+	return null;
     }
 
     @Override

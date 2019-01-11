@@ -349,9 +349,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     private boolean useSelectCardsInput(final FCollectionView<? extends GameEntity> sourceList) {
+	if ( FThreads.isGuiThread() ) { return false; } // can't use InputSelect from GUI thread (e.g., DevMode Tutor)
 	// if UI_SELECT_FROM_CARD_DISPLAYS not set use InputSelect only for battlefield and player hand
-	// if UI_SELECT_FROM_CARD_DISPLAYS set use InputSelect for any zone that can be shown
-	if ( FThreads.isGuiThread() ) { return false; } // also can't use InputSelect from GUI thread (e.g., DevMode Tutor)
+	// if UI_SELECT_FROM_CARD_DISPLAYS set and using desktop GUI use InputSelect for any zone that can be shown
         for (final GameEntity c : sourceList) {
             if (c instanceof Player) {
                 continue;
@@ -362,7 +362,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final Zone cz = ((Card) c).getZone();
             final boolean useUiPointAtCard = 
 		cz != null &&
-		FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) ?
+		(FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) && (!GuiBase.getInterface().isLibgdxPort()) ) ?
 		(cz.is(ZoneType.Battlefield) || cz.is(ZoneType.Hand) || cz.is(ZoneType.Library) || 
 		 cz.is(ZoneType.Graveyard) || cz.is(ZoneType.Exile) || cz.is(ZoneType.Flashback) || cz.is(ZoneType.Command)) :
 		(cz.is(ZoneType.Hand) && cz.getPlayer() == player || cz.is(ZoneType.Battlefield));
@@ -758,14 +758,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         CardCollection toTop = null;
 
         tempShowCards(topN);
-	if ( FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) ) {
+	if ( FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) &&
+	     (!GuiBase.getInterface().isLibgdxPort()) ) {
 	    ArrayList<Card> cardList = new ArrayList<Card>();  // pfps there must be a better way
             for (final Card card : player.getCardsIn(ZoneType.Library)) {
 		cardList.add(card);
 	    }
 	    ImmutablePair<CardCollection, CardCollection> result =
 		arrangeForMove("Move cards to top or bottom of library", cardList, topN, true, true);
-	    System.out.print("Arrange "); System.out.println(result);
 	    toTop = result.getLeft();
 	    toBottom = result.getRight();
 	} else {

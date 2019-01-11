@@ -184,7 +184,6 @@ public class ListCardArea extends CardArea {
 	    //update index of dragged card in hand zone to match new index within hand area
 	    final int index = getCardPanels().indexOf(dragPanel);
 	    if (validIndex(dragCard,index)) { 
-		System.out.print("Really move card to index "); System.out.println(index);
 		synchronized (cardList) {
 		    cardList.remove(dragCard);
 		    cardList.add(index, dragCard);
@@ -195,10 +194,8 @@ public class ListCardArea extends CardArea {
     }
 
     private void loadLocation() {
-	System.out.println("loadlocation");
         if (locPref != null) {
             String value = prefs.getPref(locPref);
-	    System.out.print(locPref); System.out.println(value);
             if (value.length() > 0) {
                 String[] coords = value.split(COORD_DELIM);
                 if (coords.length == 4) {
