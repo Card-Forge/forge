@@ -515,14 +515,15 @@ public class Player extends GameEntity implements Comparable<Player> {
             return false;
         }
 
-        if (lifePayment <= 0)
-            return true;
+        loseLife(lifePayment);
 
-        // rule 118.8
-        if (life >= lifePayment) {
-            return (loseLife(lifePayment) > 0);
-        }
-        return false;
+        // Run triggers
+        final Map<String, Object> runParams = Maps.newHashMap();
+        runParams.put("Player", this);
+        runParams.put("LifeAmount", lifePayment);
+        game.getTriggerHandler().runTrigger(TriggerType.PayLife, runParams, false);
+
+        return true;
     }
 
     public final boolean canPayEnergy(final int energyPayment) {
