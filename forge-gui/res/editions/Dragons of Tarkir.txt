@@ -275,4 +275,9 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand DTK
 264 L Forest
 
 [tokens]
+w_1_1_warrior
+u_2_2_djinn_monk_flying
+b_2_2_zombie
+b_x_x_zombie_horror
+r_4_4_dragon_flying
 r_1_1_goblin

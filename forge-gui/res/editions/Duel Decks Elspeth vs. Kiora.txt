@@ -71,3 +71,8 @@ Type=Duel_Decks
 63 L Forest
 63 L Forest
 63 L Forest
+
+[tokens]
+w_4_4_angel_flying
+w_1_1_soldier
+u_9_9_kraken

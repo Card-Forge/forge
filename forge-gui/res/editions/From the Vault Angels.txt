@@ -21,3 +21,6 @@ Type=From_the_Vault
 13 M Platinum Angel
 14 M Serra Angel
 15 M Tariel, Reckoner of Souls
+
+[tokens]
+w_4_4_angel_flying

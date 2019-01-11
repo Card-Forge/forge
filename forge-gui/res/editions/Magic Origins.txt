@@ -299,4 +299,13 @@ Booster=10 Common:!fromSheet("ORI Sample Cards"), 3 Uncommon:!fromSheet("ORI Sam
 288 R Terra Stomper
 
 [tokens]
+ashaya_the_awoken_world
+w_4_4_angel_flying
+w_2_2_knight_vigilance
+w_1_1_soldier
+b_5_5_demon_flying
+b_2_2_zombie
 r_1_1_goblin
+g_2_2_elemental
+g_1_1_elf_warrior
+c_1_1_a_thopter_flying
