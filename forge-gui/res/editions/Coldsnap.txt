@@ -168,6 +168,7 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 [tokens]
 marit_lage
 w_1_1_bird_flying
+w_0_1_deserter
 w_1_1_soldier
 g_1_1_wolf_sound_the_call
 br_3_1_graveborn_haste

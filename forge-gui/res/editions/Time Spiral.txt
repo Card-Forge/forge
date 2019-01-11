@@ -313,4 +313,15 @@ AdditionalSetUnlockedInQuest=TSB
 47 C Zealot il-Vec
 
 [tokens]
+kobolds_of_kher_keep
+w_1_1_citizen
+w_2_2_griffin_flying
+u_1_1_camarid
+b_1_2_bat_flying_sengir_nosferatu
+b_2_4_spider_reach
+b_1_1_thrull
 r_1_1_goblin
+g_1_1_saproling
+g_x_x_wurm
+c_2_2_a_assembly-worker
+c_1_1_triskelavite_flying_ammo

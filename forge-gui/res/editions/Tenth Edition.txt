@@ -395,4 +395,8 @@ Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
 
 [tokens]
 wasp
+w_1_1_soldier
+b_2_2_zombie
+r_5_5_dragon_flying
 r_1_1_goblin
+g_1_1_saproling
