@@ -156,3 +156,21 @@ Type=Other
 147 U Savage Lands
 148 U Seaside Citadel
 149 R Temple of the False God
+
+[tokens]
+lightning_rager
+stoneforged_blade
+c_0_1_eldrazi_spawn_sac
+w_2_2_knight_vigilance
+w_1_1_kor_soldier
+b_5_5_demon_flying
+b_2_2_zombie
+r_5_5_dragon_flying
+g_4_4_beast
+g_5_3_elemental
+g_1_1_elf_druid_g
+g_1_1_insect
+g_0_1_plant
+g_1_1_saproling
+g_1_2_spider_reach
+wb_x_x_e_spirit_experience
