@@ -5,7 +5,7 @@ PT:1/1
 K:etbCounter:P1P1:3
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, you may remove any number of +1/+1 counters from CARDNAME. If you do, create that many 1/1 colorless Tetravite artifact creature tokens. They each have flying and "This creature can't be enchanted."
-SVar:TrigToken:AB$Token | Cost$ SubCounter<X/P1P1> | References$ X | TokenAmount$ ChosenX | TokenScript$ c_1_1_a_tetravite_flying_noenchant | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBClearXChoice
+SVar:TrigToken:AB$Token | Cost$ SubCounter<X/P1P1> | References$ X | TokenAmount$ ChosenX | LegacyImage$ c 1 1 tetravite flying noenchant atq | TokenScript$ c_1_1_a_tetravite_flying_noenchant | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBClearXChoice
 SVar:DBClearXChoice:DB$ Cleanup | ClearChosenX$ True
 SVar:X:XChoice
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounters | TriggerDescription$ At the beginning of your upkeep, you may exile any number of tokens created with CARDNAME. If you do, put that many +1/+1 counters on CARDNAME.

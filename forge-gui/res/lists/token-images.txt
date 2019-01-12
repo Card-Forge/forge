@@ -66,7 +66,11 @@ c_0_1_pest.jpg                         https://downloads.cardforge.org/images/to
 c_0_1_prism.jpg                        https://downloads.cardforge.org/images/tokens/c_0_1_prism.jpg
 c_0_2_wall.jpg                         https://downloads.cardforge.org/images/tokens/c_0_2_wall.jpg
 c_10_10_eldrazi.jpg                    https://downloads.cardforge.org/images/tokens/c_10_10_eldrazi.jpg
-c_1_1_a_thopter_flying_rna.jpg https://downloads.cardforge.org/images/tokens/c_1_1_a_thopter_flying_rna.jpg
+c_1_1_a_gnome.jpg                      https://downloads.cardforge.org/images/tokens/c_1_1_a_gnome.jpg
+c_1_1_a_tetravite_flying_noenchant_atq.jpg                    https://downloads.cardforge.org/images/tokens/c_1_1_a_tetravite_flying_noenchant_atq.jpg
+c_1_1_a_thopter_flying.jpg             https://downloads.cardforge.org/images/tokens/c_1_1_a_thopter_flying.jpg
+c_1_1_a_thopter_flying_kld.jpg         https://downloads.cardforge.org/images/tokens/c_1_1_a_thopter_flying_kld.jpg
+c_1_1_a_thopter_flying_rna.jpg         https://downloads.cardforge.org/images/tokens/c_1_1_a_thopter_flying_rna.jpg
 c_1_1_eldrazi_scion.jpg                https://downloads.cardforge.org/images/tokens/c_1_1_eldrazi_scion.jpg
 c_1_1_eldrazi_scion2.jpg               https://downloads.cardforge.org/images/tokens/c_1_1_eldrazi_scion2.jpg
 c_1_1_eldrazi_scion3.jpg               https://downloads.cardforge.org/images/tokens/c_1_1_eldrazi_scion3.jpg
