@@ -260,4 +260,17 @@ FoilChanceInBooster=100
 249 U Zoetic Cavern
 
 [tokens]
+kobolds_of_kher_keep
+stangg_twin
+c_1_1_spirit
+w_4_4_angel_flying
+w_1_1_soldier
+w_1_1_spirit_flying
+u_3_3_fish_hatches_whale
+u_9_9_kraken
+u_6_6_whale_hatches_kraken
+b_1_1_skeleton_regenerate
 r_1_1_goblin
+g_1_1_elf_warrior
+g_1_1_insect
+g_2_2_wolf
