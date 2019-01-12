@@ -321,3 +321,8 @@ g_3_3_ooze
 g_2_2_wolf
 wb_1_1_human_cleric
 c_a_clue_draw
+c_a_clue_draw
+c_a_clue_draw
+c_a_clue_draw
+c_a_clue_draw
+c_a_clue_draw

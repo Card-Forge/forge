@@ -267,6 +267,7 @@ w_0_1_goat
 b_2_2_zombie
 r_2_2_dragon_flying_firebreathing
 r_1_1_elemental
+r_1_1_elemental
 g_3_3_beast
 g_1_1_saproling
 g_2_2_wolf

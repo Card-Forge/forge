@@ -376,6 +376,7 @@ r_3_3_ogre
 g_3_3_beast
 g_1_1_elf_warrior
 g_1_1_saproling
+g_1_1_saproling
 bg_1_1_worm
 c_x_x_a_horror
 c_1_1_a_myr

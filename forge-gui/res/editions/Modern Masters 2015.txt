@@ -261,6 +261,8 @@ FoilChanceInBooster=100
 
 [tokens]
 c_0_1_eldrazi_spawn_sac
+c_0_1_eldrazi_spawn_sac
+c_0_1_eldrazi_spawn_sac
 w_1_1_soldier
 w_1_1_spirit_flying
 b_1_1_faerie_rogue_flying

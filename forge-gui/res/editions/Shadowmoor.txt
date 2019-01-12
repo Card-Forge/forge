@@ -323,5 +323,5 @@ g_2_2_wolf
 br_5_5_elemental
 gw_1_1_elf_warrior
 ub_1_1_faerie_rogue_flying
-rg_4_4_giant_warrior
+rg_4_4_giant_warrior_haste
 rg_1_1_goblin_warrior

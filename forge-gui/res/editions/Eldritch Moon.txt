@@ -223,6 +223,8 @@ w_1_1_human_soldier
 w_1_1_spirit_flying
 u_1_1_human_wizard
 b_2_2_zombie
+b_2_2_zombie
+b_2_2_zombie
 b_x_x_zombie
 r_1_1_devil_burn
 r_1_1_human

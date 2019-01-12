@@ -253,6 +253,8 @@ Type=Other
 [tokens]
 c_7_7_eldrazi_annihilator
 c_0_1_eldrazi_spawn_sac
+c_0_1_eldrazi_spawn_sac
+c_0_1_eldrazi_spawn_sac
 w_4_4_angel_flying
 w_0_1_goat
 b_0_0_germ

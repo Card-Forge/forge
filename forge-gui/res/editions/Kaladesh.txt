@@ -289,5 +289,10 @@ AdditionalSetUnlockedInQuest=MPS_KLD
 [tokens]
 c_6_6_a_beast
 c_x_x_a_construct
+c_x_x_a_construct
 c_1_1_a_servo
+c_1_1_a_servo
+c_1_1_a_servo
+c_1_1_a_thopter_flying
+c_1_1_a_thopter_flying
 c_1_1_a_thopter_flying

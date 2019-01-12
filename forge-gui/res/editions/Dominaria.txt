@@ -295,6 +295,7 @@ BoosterMustContain=Legendary Creature
 karox_bladewing
 mishra's_self-replicator
 w_2_2_knight_vigilance
+w_2_2_knight_vigilance
 w_1_1_soldier
 b_0_1_cleric
 b_6_6_demon_flying_trample_aristocrat
@@ -302,5 +303,7 @@ b_x_x_nightmare_horror
 b_2_2_zombie_knight_menace
 r_3_1_elemental_trample_haste
 r_1_1_goblin
+g_1_1_saproling
+g_1_1_saproling
 g_1_1_saproling
 c_0_0_a_construct_total_artifacts

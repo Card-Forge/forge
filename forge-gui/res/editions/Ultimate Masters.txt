@@ -276,6 +276,7 @@ b_1_1_faerie_rogue_flying
 b_6_6_wurm_trample
 b_2_2_zombie
 r_1_1_elemental
+r_1_1_elemental
 r_1_1_soldier_haste
 g_4_4_elemental
 g_x_x_ooze

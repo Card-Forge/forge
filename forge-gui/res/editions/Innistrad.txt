@@ -280,6 +280,9 @@ w_1_1_spirit_flying
 u_2_2_homunculus
 b_5_5_demon_flying
 b_2_2_vampire_flying
+b_1_1_wolf_deathtouch
+b_2_2_zombie
+b_2_2_zombie
 b_2_2_zombie
 g_x_x_ooze_gutter_grime
 g_1_2_spider_reach

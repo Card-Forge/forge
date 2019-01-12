@@ -283,6 +283,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand KTK
 w_3_4_bird_flying
 w_1_1_spirit_flying
 w_1_1_warrior
+w_1_1_warrior
 b_2_2_vampire_flying
 b_2_2_zombie
 r_1_1_goblin

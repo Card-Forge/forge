@@ -87,3 +87,4 @@ Type=Duel_Decks
 g_1_1_elf_warrior
 c_1_1_a_myr
 c_1_1_a_thopter_flying
+c_1_1_a_thopter_flying

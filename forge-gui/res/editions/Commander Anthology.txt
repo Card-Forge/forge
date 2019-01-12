@@ -346,5 +346,6 @@ g_1_1_saproling
 g_1_2_spider_reach
 g_x_x_treefolk
 g_2_2_wolf
+g_2_2_wolf
 gu_2_2_drake_flying
 c_3_4_a_gargoyle_flying

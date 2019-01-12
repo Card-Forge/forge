@@ -263,6 +263,7 @@ FoilChanceInBooster=100
 carnivore
 c_1_1_spirit
 w_1_1_soldier
+w_1_1_spirit_flying
 u_5_5_wall_defender
 b_0_1_serf
 b_2_2_zombie

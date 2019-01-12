@@ -200,6 +200,11 @@ AdditionalSetUnlockedInQuest=EXP
 
 [tokens]
 c_1_1_eldrazi_scion_sac
+c_1_1_eldrazi_scion_sac
+c_1_1_eldrazi_scion_sac
+c_1_1_eldrazi_scion_sac
+c_1_1_eldrazi_scion_sac
+c_1_1_eldrazi_scion_sac
 w_4_4_angel_flying
 w_2_2_knight_ally
 w_1_1_kor_ally
