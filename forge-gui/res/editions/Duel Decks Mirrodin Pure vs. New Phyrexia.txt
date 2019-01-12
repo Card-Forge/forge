@@ -97,6 +97,7 @@ Type=Duel_Decks
 
 [tokens]
 w_2_2_cat
+b_0_0_germ
 g_5_5_beast
 g_1_1_insect
 g_1_1_ooze

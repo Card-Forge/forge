@@ -221,3 +221,21 @@ TreatAsSmallSet=true
 207 C Zealot of the God-Pharaoh
 208 R Visage of Bolas
 209 C Cinder Barrens
+
+[tokens]
+eternalize_adorned_pouncer
+eternalize_champion_of_wits
+eternalize_dreamstealer
+eternalize_earthshaker_khenra
+eternalize_proven_combatant
+eternalize_resilient_khenra
+eternalize_sinuous_striker
+eternalize_steadfast_sentinel
+eternalize_steward_of_solidarity
+eternalize_sunscourge_champion
+w_1_1_cat_lifelink
+w_5_5_horse
+w_1_1_warrior_vigilance
+b_2_2_zombie
+g_5_4_snake
+ur_1_1_insect_flying_haste

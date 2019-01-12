@@ -253,6 +253,7 @@ Type=Other
 [tokens]
 c_0_1_eldrazi_spawn_sac
 w_4_4_angel_flying
+b_0_0_germ
 b_2_4_spider_reach
 r_1_1_goblin
 r_4_4_hellion

@@ -168,6 +168,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 [tokens]
 w_2_2_cat
 w_1_1_soldier
+b_0_0_germ
 b_2_2_zombie
 c_9_9_a_golem
 c_x_x_a_horror

@@ -60,3 +60,7 @@ Type=Other
 52 M Lord of Extinction
 53 M The Scarab God
 54 M The Scorpion God
+
+[tokens]
+w_1_1_warrior_vigilance
+ur_1_1_insect_flying_haste

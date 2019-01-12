@@ -346,6 +346,7 @@ Type=Other
 337 L Forest
 
 [tokens]
+herald_of_the_host
 stoneforged_blade
 tuktuk_the_returned
 w_4_4_angel_flying
@@ -361,6 +362,7 @@ u_6_6_whale_hatches_kraken
 u_x_x_zombie
 b_5_5_demon_flying
 b_x_x_demon_flying
+b_0_0_germ
 b_x_x_horror
 b_2_2_zombie
 r_1_1_goblin
@@ -371,6 +373,7 @@ g_5_3_elemental
 g_3_3_elephant
 g_1_1_elf_druid_g
 g_1_1_elf_warrior
+g_x_x_treefolk
 g_2_2_wolf
 c_3_4_a_gargoyle_flying
 c_1_1_a_myr
