@@ -6,7 +6,7 @@ b_0_0_germ_c16.jpg                         https://downloads.cardforge.org/image
 b_0_0_germ_mm2.jpg                         https://downloads.cardforge.org/images/tokens/b_0_0_germ_mm2.jpg
 b_0_0_germ_pca.jpg                         https://downloads.cardforge.org/images/tokens/b_0_0_germ_pca.jpg
 b_0_1_cleric_dom.jpg                   https://downloads.cardforge.org/images/tokens/b_0_1_cleric_dom.jpg
-b_0_1_insect.jpg                       https://downloads.cardforge.org/images/tokens/b_0_1_insect.jpg
+b_0_1_insect_mir.jpg                       https://downloads.cardforge.org/images/tokens/b_0_1_insect_mir.jpg
 b_0_1_serf_ema.jpg                         https://downloads.cardforge.org/images/tokens/b_0_1_serf_ema.jpg
 b_0_1_thrull_ddc.jpg                       https://downloads.cardforge.org/images/tokens/b_0_1_thrull_ddc.jpg
 b_0_1_thrull_fem.jpg                       https://downloads.cardforge.org/images/tokens/b_0_1_thrull_fem.jpg
@@ -92,7 +92,7 @@ c_0_1_eldrazi_spawn2.jpg               https://downloads.cardforge.org/images/to
 c_0_1_eldrazi_spawn3.jpg               https://downloads.cardforge.org/images/tokens/c_0_1_eldrazi_spawn3.jpg
 c_0_1_pest.jpg                         https://downloads.cardforge.org/images/tokens/c_0_1_pest.jpg
 c_0_1_a_prism.jpg                        https://downloads.cardforge.org/images/tokens/c_0_1_a_prism.jpg
-c_0_2_a_wall_defender.jpg                         https://downloads.cardforge.org/images/tokens/c_0_2_a_wall_defender.jpg
+c_0_2_a_wall_defender_mir.jpg                         https://downloads.cardforge.org/images/tokens/c_0_2_a_wall_defender_mir.jpg
 c_10_10_eldrazi.jpg                    https://downloads.cardforge.org/images/tokens/c_10_10_eldrazi.jpg
 c_1_1_a_gnome.jpg                        https://downloads.cardforge.org/images/tokens/c_1_1_a_gnome.jpg
 c_1_1_a_tetravite_flying_noenchant_atq.jpg                    https://downloads.cardforge.org/images/tokens/c_1_1_a_tetravite_flying_noenchant_atq.jpg
@@ -150,7 +150,7 @@ g_0_1_plant_pca.jpg                        https://downloads.cardforge.org/image
 g_0_1_sheep.jpg                        https://downloads.cardforge.org/images/tokens/g_0_1_sheep.jpg
 g_0_1_sheep_tsp.jpg                        https://downloads.cardforge.org/images/tokens/g_0_1_sheep_tsp.jpg
 g_1_1_butterfly.jpg                    https://downloads.cardforge.org/images/tokens/g_1_1_butterfly.jpg
-g_1_1_cat.jpg                          https://downloads.cardforge.org/images/tokens/g_1_1_cat.jpg
+g_1_1_cat_mir.jpg                          https://downloads.cardforge.org/images/tokens/g_1_1_cat_mir.jpg
 g_1_1_elf.jpg                          https://downloads.cardforge.org/images/tokens/g_1_1_elf.jpg
 g_1_1_elf_warrior.jpg                  https://downloads.cardforge.org/images/tokens/g_1_1_elf_warrior.jpg
 g_1_1_elf_warrior_shm.jpg              https://downloads.cardforge.org/images/tokens/g_1_1_elf_warrior_shm.jpg
@@ -316,7 +316,7 @@ r_1_1_goblin_som.jpg                   https://downloads.cardforge.org/images/to
 r_1_1_goblin_tsp.jpg                   https://downloads.cardforge.org/images/tokens/r_1_1_goblin_tsp.jpg
 r_1_1_goblin_scout.jpg                 https://downloads.cardforge.org/images/tokens/r_1_1_goblin_scout.jpg
 r_1_1_goblin_haste.jpg                 https://downloads.cardforge.org/images/tokens/r_1_1_goblin_haste.jpg
-r_1_1_goblin_scout_mountainwalk.jpg                 https://downloads.cardforge.org/images/tokens/r_1_1_goblin_scout_mountainwalk.jpg
+r_1_1_goblin_scout_mountainwalk_mir.jpg                 https://downloads.cardforge.org/images/tokens/r_1_1_goblin_scout_mountainwalk_mir.jpg
 r_1_1_human.jpg                        https://downloads.cardforge.org/images/tokens/r_1_1_human.jpg
 r_1_1_soldier.jpg                      https://downloads.cardforge.org/images/tokens/r_1_1_soldier.jpg
 r_1_1_survivor_all.jpg                     https://downloads.cardforge.org/images/tokens/r_1_1_survivor_all.jpg
@@ -366,7 +366,7 @@ rw_1_1_goblin_soldier_eve.jpg          https://downloads.cardforge.org/images/to
 rw_1_1_soldier.jpg                     https://downloads.cardforge.org/images/tokens/rw_1_1_soldier.jpg
 spark_elemental.jpg               https://downloads.cardforge.org/images/tokens/spark_elemental.jpg
 stangg_twin_a25.jpg               https://downloads.cardforge.org/images/tokens/stangg_twin_a25.jpg
-tombspawn.jpg               https://downloads.cardforge.org/images/tokens/tombspawn.jpg
+tombspawn_mir.jpg               https://downloads.cardforge.org/images/tokens/tombspawn_mir.jpg
 u_0_1_homunculus.jpg                   https://downloads.cardforge.org/images/tokens/u_0_1_homunculus.jpg
 u_0_1_plant_wall.jpg                   https://downloads.cardforge.org/images/tokens/u_0_1_plant_wall.jpg
 u_0_1_starfish_all.jpg                     https://downloads.cardforge.org/images/tokens/u_0_1_starfish_all.jpg
@@ -392,7 +392,8 @@ u_3_3_fish_hatches_whale.jpg                      https://downloads.cardforge.or
 u_3_3_fish_hatches_whale_a25.jpg                      https://downloads.cardforge.org/images/tokens/u_3_3_fish_hatches_whale_a25.jpg
 u_3_3_weird_defender_flying.jpg                        https://downloads.cardforge.org/images/tokens/u_3_3_weird_defender_flying.jpg
 u_5_5_dragon_spirit.jpg                https://downloads.cardforge.org/images/tokens/u_5_5_dragon_spirit.jpg
-u_5_5_wall_defender.jpg                         https://downloads.cardforge.org/images/tokens/u_5_5_wall_defender.jpg
+u_5_5_wall_defender_ema.jpg                         https://downloads.cardforge.org/images/tokens/u_5_5_wall_defender_ema.jpg
+u_5_5_wall_defender_ddt.jpg                         https://downloads.cardforge.org/images/tokens/u_5_5_wall_defender_ddt.jpg
 u_5_5_whale_hatches_kraken.jpg                      https://downloads.cardforge.org/images/tokens/u_5_5_whale_hatches_kraken.pg
 u_5_5_whale_hatches_kraken_a25.jpg                      https://downloads.cardforge.org/images/tokens/u_5_5_whale_hatches_kraken_a25.pg
 u_8_8_octopus.jpg                      https://downloads.cardforge.org/images/tokens/u_8_8_octopus.jpg
@@ -423,7 +424,7 @@ w_1_1_kithkin_soldier_shm.jpg          https://downloads.cardforge.org/images/to
 w_1_1_knight_banding_all.jpg                     https://downloads.cardforge.org/images/tokens/w_1_1_knight_banding_all.jpg
 w_1_1_kor_ally.jpg                     https://downloads.cardforge.org/images/tokens/w_1_1_kor_ally.jpg
 w_1_1_kor_soldier.jpg                  https://downloads.cardforge.org/images/tokens/w_1_1_kor_soldier.jpg
-w_1_1_pegasus_flying.jpg                      https://downloads.cardforge.org/images/tokens/w_1_1_pegasus_flying.jpg
+w_1_1_pegasus_flying_ugl.jpg                      https://downloads.cardforge.org/images/tokens/w_1_1_pegasus_flying_ugl.jpg
 w_1_1_pegasus_flying_c14.jpg                      https://downloads.cardforge.org/images/tokens/w_1_1_pegasus_flying_c14.jpg
 w_1_1_soldier_ugl.jpg                      https://downloads.cardforge.org/images/tokens/w_1_1_soldier_ugl.jpg
 w_1_1_soldier2_ths.jpg                 https://downloads.cardforge.org/images/tokens/w_1_1_soldier2_ths.jpg
@@ -441,8 +442,6 @@ w_1_1_soldier_plc.jpg                  https://downloads.cardforge.org/images/to
 w_1_1_soldier_rtr.jpg                  https://downloads.cardforge.org/images/tokens/w_1_1_soldier_rtr.jpg
 w_1_1_soldier_som.jpg                  https://downloads.cardforge.org/images/tokens/w_1_1_soldier_som.jpg
 w_1_1_soldier_ths.jpg                  https://downloads.cardforge.org/images/tokens/w_1_1_soldier_ths.jpg
-w_1_1_spirit.jpg                       https://downloads.cardforge.org/images/tokens/w_1_1_spirit.jpg
-w_1_1_spirit_flying.jpg                       https://downloads.cardforge.org/images/tokens/w_1_1_spirit_flying.jpg
 w_1_1_spirit_flying_a25.jpg                       https://downloads.cardforge.org/images/tokens/w_1_1_spirit_flying_a25.jpg
 w_1_1_spirit_avr.jpg                   https://downloads.cardforge.org/images/tokens/w_1_1_spirit_avr.jpg
 w_1_1_spirit_flying_avr.jpg                   https://downloads.cardforge.org/images/tokens/w_1_1_spirit_flying_avr.jpg
@@ -534,7 +533,7 @@ wb_1_1_spirit_flying_c15.jpg                      https://downloads.cardforge.or
 wb_1_1_spirit_gtc.jpg                  https://downloads.cardforge.org/images/tokens/wb_1_1_spirit_gtc.jpg
 wb_1_1_spirit_flying_gtc.jpg                      https://downloads.cardforge.org/images/tokens/wb_1_1_spirit_flying_gtc.jpg
 wolves_of_the_hunt_leg.jpg           https://downloads.cardforge.org/images/tokens/wolves_of_the_hunt_leg.jpg
-wood.jpg                         https://downloads.cardforge.org/images/tokens/wood.jpg
+wood_mir.jpg                         https://downloads.cardforge.org/images/tokens/wood_mir.jpg
 wrg_8_8_beast.jpg                      https://downloads.cardforge.org/images/tokens/wrg_8_8_beast.jpg
 wu_1_1_bird.jpg                        https://downloads.cardforge.org/images/tokens/wu_1_1_bird.jpg
 
