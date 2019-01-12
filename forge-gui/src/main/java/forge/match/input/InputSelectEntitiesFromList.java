@@ -33,7 +33,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         if (min > validChoices.size()) {
             System.out.println(String.format("Trying to choose at least %d things from a list with only %d things!", min, validChoices.size()));
         }
-	PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates(); 
+	final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
 	for (final GameEntity c : validChoices) {
             final Zone cz = (c instanceof Card) ? ((Card) c).getZone() : null ;
 	    zonesToUpdate.add(new PlayerZoneUpdate(cz.getPlayer().getView(),cz.getZoneType()));
