@@ -264,3 +264,11 @@ Booster=10 Common, 3 Uncommon, 1 fromSheet("BBD RareMythic"), 1 BasicLand
 254 L Forest
 255 M Will Kenrith
 256 M Rowan Kenrith
+
+[tokens]
+w_1_1_spirit_flying
+w_1_1_warrior
+b_2_2_zombie
+b_5_5_zombie_giant
+g_3_3_beast
+c_1_1_a_myr
