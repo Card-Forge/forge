@@ -358,7 +358,7 @@ public class QuestSpellShop {
             }
 
             //If this card has an exception to the card limit, e.g.: Relentless Rats, get the quest preference
-            if (DeckFormat.getLimitExceptions().contains(card.getName())) {
+            if (DeckFormat.canHaveAnyNumberOf(card)) {
                 numToKeep = FModel.getQuestPreferences().getPrefInt(QPref.PLAYSET_ANY_NUMBER_SIZE);
             }
 
