@@ -201,8 +201,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             int qty = itemEntry.getValue();
 
             int max;
-            if (deck == null || card == null || card.getRules().getType().isBasic() ||
-                    limit == CardLimit.None || DeckFormat.getLimitExceptions().contains(card.getName())) {
+            if (deck == null || card == null || limit == CardLimit.None || DeckFormat.canHaveAnyNumberOf(card)) {
                 max = Integer.MAX_VALUE;
             }
             else {

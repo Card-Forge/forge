@@ -20,6 +20,8 @@ package forge.deck;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
+
 import forge.StaticData;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
@@ -47,7 +49,7 @@ public enum DeckFormat {
     QuestDeck      ( Range.between(40, Integer.MAX_VALUE), Range.between(0, 15), 4),
     Limited        ( Range.between(40, Integer.MAX_VALUE), null, Integer.MAX_VALUE),
     Commander      ( Range.is(99),                         Range.between(0, 10), 1, new Predicate<CardRules>() {
-        private final Set<String> bannedCards = new HashSet<String>(Arrays.asList(
+        private final Set<String> bannedCards = ImmutableSet.of(
                "Adriana's Valor", "Advantageous Proclamation", "Amulet of Quoz", "Ancestral Recall", "Assemble the Rank and Vile",
                "Backup Plan", "Balance", "Biorhythm", "Black Lotus", "Brago's Favor", "Braids, Cabal Minion", "Bronze Tablet",
                "Channel", "Chaos Orb", "Coalition Victory", "Contract from Below", "Darkpact", "Demonic Attorney", "Double Stroke",
@@ -59,7 +61,7 @@ public enum DeckFormat {
                "Rebirth", "Recurring Nightmare", "Rofellos, Llanowar Emissary", "Secret Summoning", "Secrets of Paradise",
                "Sentinel Dispatch", "Shahrazad", "Sovereign's Realm", "Summoner's Bond", "Sundering Titan", "Sway of the Stars",
                "Sylvan Primordial", "Tempest Efreet", "Time Vault", "Time Walk", "Timmerian Fiends", "Tinker", "Tolarian Academy",
-               "Trade Secrets", "Unexpected Potential", "Upheaval", "Weight Advantage", "Worldfire", "Worldknit", "Yawgmoth's Bargain"));
+               "Trade Secrets", "Unexpected Potential", "Upheaval", "Weight Advantage", "Worldfire", "Worldknit", "Yawgmoth's Bargain");
         @Override
         public boolean apply(CardRules rules) {
             if (bannedCards.contains(rules.getName())) {
@@ -70,8 +72,8 @@ public enum DeckFormat {
     }),
     Pauper      ( Range.is(60),                         Range.between(0, 10), 1),
     Brawl      ( Range.is(59), Range.between(0, 15), 1, null, new Predicate<PaperCard>() {
-        private final Set<String> bannedCards = new HashSet<String>(Arrays.asList(
-                "Baral, Chief of Compliance","Smuggler's Copter","Sorcerous Spyglass"));
+        private final Set<String> bannedCards = ImmutableSet.of(
+                "Baral, Chief of Compliance","Smuggler's Copter","Sorcerous Spyglass");
         @Override
         public boolean apply(PaperCard card) {
             //why do we need to hard code the bannings here - they are defined in the GameFormat predicate used below
@@ -81,7 +83,7 @@ public enum DeckFormat {
             return StaticData.instance() == null ? false : StaticData.instance().getBrawlPredicate().apply(card);
         }
     }) {
-        private final ImmutableSet<String> bannedCommanders = ImmutableSet.of("Baral, Chief of Compliance");
+        private final Set<String> bannedCommanders = ImmutableSet.of("Baral, Chief of Compliance");
 
         @Override
         public boolean isLegalCommander(CardRules rules) {
@@ -89,11 +91,11 @@ public enum DeckFormat {
         }
         },
     TinyLeaders    ( Range.is(49),                         Range.between(0, 10), 1, new Predicate<CardRules>() {
-        private final Set<String> bannedCards = new HashSet<String>(Arrays.asList(
+        private final Set<String> bannedCards = ImmutableSet.of(
                 "Ancestral Recall", "Balance", "Black Lotus", "Black Vise", "Channel", "Chaos Orb", "Contract From Below", "Counterbalance", "Darkpact", "Demonic Attorney", "Demonic Tutor", "Earthcraft", "Edric, Spymaster of Trest", "Falling Star",
                 "Fastbond", "Flash", "Goblin Recruiter", "Grindstone", "Hermit Druid", "Imperial Seal", "Jeweled Bird", "Karakas", "Library of Alexandria", "Mana Crypt", "Mana Drain", "Mana Vault", "Metalworker", "Mind Twist", "Mishra's Workshop",
                 "Mox Emerald", "Mox Jet", "Mox Pearl", "Mox Ruby", "Mox Sapphire", "Necropotence", "Shahrazad", "Skullclamp", "Sol Ring", "Strip Mine", "Survival of the Fittest", "Sword of Body and Mind", "Time Vault", "Time Walk", "Timetwister",
-                "Timmerian Fiends", "Tolarian Academy", "Umezawa's Jitte", "Vampiric Tutor", "Wheel of Fortune", "Yawgmoth's Will"));
+                "Timmerian Fiends", "Tolarian Academy", "Umezawa's Jitte", "Vampiric Tutor", "Wheel of Fortune", "Yawgmoth's Will");
 
         @Override
         public boolean apply(CardRules rules) {
@@ -112,7 +114,7 @@ public enum DeckFormat {
             return true;
         }
     }) {
-        private final ImmutableSet<String> bannedCommanders = ImmutableSet.of("Derevi, Empyrial Tactician", "Erayo, Soratami Ascendant", "Rofellos, Llanowar Emissary");
+        private final Set<String> bannedCommanders = ImmutableSet.of("Derevi, Empyrial Tactician", "Erayo, Soratami Ascendant", "Rofellos, Llanowar Emissary");
 
         @Override
         public boolean isLegalCommander(CardRules rules) {
@@ -140,13 +142,6 @@ public enum DeckFormat {
     private final Predicate<PaperCard> paperCardPoolFilter;
     private final static String ADVPROCLAMATION = "Advantageous Proclamation";
     private final static String SOVREALM = "Sovereign's Realm";
-
-    private static final List<String> limitExceptions = Arrays.asList(
-            new String[]{"Relentless Rats", "Shadowborn Apostle", "Rat Colony"});
-
-    public static List<String> getLimitExceptions(){
-        return limitExceptions;
-    }
 
     private DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0, Predicate<CardRules> cardPoolFilter0, Predicate<PaperCard> paperCardPoolFilter0) {
         mainRange = mainRange0;
@@ -342,7 +337,6 @@ public enum DeckFormat {
             //basic lands, Shadowborn Apostle, Relentless Rats and Rat Colony
 
             final CardPool allCards = deck.getAllCardsInASinglePool(hasCommander());
-            final ImmutableSet<String> limitExceptions = ImmutableSet.of("Relentless Rats", "Shadowborn Apostle", "Rat Colony");
 
             // should group all cards by name, so that different editions of same card are really counted as the same card
             for (final Entry<String, Integer> cp : Aggregates.groupSumBy(allCards, PaperCard.FN_GET_NAME)) {
@@ -351,8 +345,7 @@ public enum DeckFormat {
                     return TextUtil.concatWithSpace("contains the nonexisting card", cp.getKey());
                 }
 
-                final boolean canHaveMultiple = simpleCard.getRules().getType().isBasicLand() || limitExceptions.contains(cp.getKey());
-                if (!canHaveMultiple && cp.getValue() > maxCopies) {
+                if (!canHaveAnyNumberOf(simpleCard) && cp.getValue() > maxCopies) {
                     return TextUtil.concatWithSpace("must not contain more than", String.valueOf(maxCopies), "copies of the card", cp.getKey());
                 }
             }
@@ -368,6 +361,12 @@ public enum DeckFormat {
         }
 
         return null;
+    }
+
+    public static boolean canHaveAnyNumberOf(final IPaperCard icard) {
+        return icard.getRules().getType().isBasicLand()
+            || Iterables.contains(icard.getRules().getMainPart().getKeywords(),
+                "A deck can have any number of cards named CARDNAME.");
     }
 
     public static String getPlaneSectionConformanceProblem(final CardPool planes) {
