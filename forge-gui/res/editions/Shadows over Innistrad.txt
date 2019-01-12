@@ -308,3 +308,16 @@ ChanceReplaceCommonWith=.125F dfc:RareMythic
 295 L Forest
 296 L Forest
 297 L Forest
+
+[tokens]
+w_4_4_angel_flying
+w_1_1_human_soldier
+w_1_1_spirit_flying
+b_1_1_vampire_knight_lifelink
+b_2_2_zombie
+r_1_1_devil_burn
+g_1_1_insect
+g_3_3_ooze
+g_2_2_wolf
+wb_1_1_human_cleric
+c_a_clue

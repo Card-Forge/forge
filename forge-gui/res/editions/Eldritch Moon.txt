@@ -216,3 +216,16 @@ TreatAsSmallSet=true
 203 R Geier Reach Sanitarium
 204 R Hanweir Battlements
 205 U Nephalia Academy
+
+[tokens]
+c_3_2_eldrazi_horror
+w_1_1_human_soldier
+w_1_1_spirit_flying
+u_1_1_human_wizard
+b_2_2_zombie
+b_x_x_zombie
+r_1_1_devil_burn
+r_1_1_human
+g_1_1_insect
+g_1_2_spider_reach
+g_2_2_wolf

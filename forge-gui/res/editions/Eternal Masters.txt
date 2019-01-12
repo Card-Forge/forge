@@ -260,4 +260,17 @@ FoilChanceInBooster=100
 249 C Wind-Scarred Crag
 
 [tokens]
+carnivore
+c_1_1_spirit
+w_1_1_soldier
+u_5_5_wall_defender
+b_0_1_serf
+b_2_2_zombie
+r_2_2_dragon_flying_firebreathing
+r_1_1_elemental
 r_1_1_goblin
+g_3_3_elephant
+g_1_1_elf_warrior
+g_6_6_wurm
+ur_5_5_elemental_flying
+rw_1_1_goblin_soldier
