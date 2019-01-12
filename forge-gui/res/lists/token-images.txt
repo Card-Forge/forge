@@ -7,7 +7,7 @@ b_0_0_germ_mm2.jpg                         https://downloads.cardforge.org/image
 b_0_0_germ_pca.jpg                         https://downloads.cardforge.org/images/tokens/b_0_0_germ_pca.jpg
 b_0_1_cleric_dom.jpg                   https://downloads.cardforge.org/images/tokens/b_0_1_cleric_dom.jpg
 b_0_1_insect.jpg                       https://downloads.cardforge.org/images/tokens/b_0_1_insect.jpg
-b_0_1_serf.jpg                         https://downloads.cardforge.org/images/tokens/b_0_1_serf.jpg
+b_0_1_serf_ema.jpg                         https://downloads.cardforge.org/images/tokens/b_0_1_serf_ema.jpg
 b_0_1_thrull_ddc.jpg                       https://downloads.cardforge.org/images/tokens/b_0_1_thrull_ddc.jpg
 b_0_1_thrull_fem.jpg                       https://downloads.cardforge.org/images/tokens/b_0_1_thrull_fem.jpg
 b_1_1_assassin_rtr.jpg                 https://downloads.cardforge.org/images/tokens/b_1_1_assassin_rtr.jpg
@@ -21,7 +21,7 @@ b_1_1_rat.jpg                          https://downloads.cardforge.org/images/to
 b_1_1_rat_c17.jpg                      https://downloads.cardforge.org/images/tokens/b_1_1_rat_c17.jpg
 b_1_1_rat_gtc.jpg                      https://downloads.cardforge.org/images/tokens/b_1_1_rat_gtc.jpg
 b_1_1_rat_shm.jpg                      https://downloads.cardforge.org/images/tokens/b_1_1_rat_shm.jpg
-b_1_1_skeleton_regenerate.jpg                     https://downloads.cardforge.org/images/tokens/b_1_1_skeleton_regenerate.jpg
+b_1_1_skeleton_regenerate_ala.jpg                     https://downloads.cardforge.org/images/tokens/b_1_1_skeleton_regenerate_ala.jpg
 b_1_1_skeleton_regenerate_a25.jpg                     https://downloads.cardforge.org/images/tokens/b_1_1_skeleton_regenerate_a25.jpg
 b_1_1_thrull.jpg                       https://downloads.cardforge.org/images/tokens/b_1_1_thrull.jpg
 b_1_1_vampire.jpg                      https://downloads.cardforge.org/images/tokens/b_1_1_vampire.jpg
@@ -78,7 +78,7 @@ b_5_5_urami.jpg                        https://downloads.cardforge.org/images/to
 b_5_5_zombie_giant.jpg                 https://downloads.cardforge.org/images/tokens/b_5_5_zombie_giant.jpg
 b_6_6_demon.jpg                        https://downloads.cardforge.org/images/tokens/b_6_6_demon.jpg
 b_6_6_wurm.jpg                         https://downloads.cardforge.org/images/tokens/b_6_6_wurm.jpg
-b_dx_dy_spirit.jpg                     https://downloads.cardforge.org/images/tokens/b_dx_dy_spirit.jpg
+b_x_x_spirit_hml.jpg                     https://downloads.cardforge.org/images/tokens/b_x_x_spirit_hml.jpg
 b_x_x_demon.jpg                        https://downloads.cardforge.org/images/tokens/b_x_x_demon.jpg
 b_x_x_minion.jpg                       https://downloads.cardforge.org/images/tokens/b_x_x_minion.jpg
 b_x_x_nightmare_horror.jpg             https://downloads.cardforge.org/images/tokens/b_x_x_nightmare_horror.jpg
@@ -291,7 +291,7 @@ gw_2_2_voja.jpg                        https://downloads.cardforge.org/images/to
 gw_8_8_elemental_rtr.jpg               https://downloads.cardforge.org/images/tokens/gw_8_8_elemental_rtr.jpg
 gw_x_x_elemental.jpg                   https://downloads.cardforge.org/images/tokens/gw_x_x_elemental.jpg
 hornet.jpg                    https://downloads.cardforge.org/images/tokens/hornet.jpg
-kelp.jpg                    https://downloads.cardforge.org/images/tokens/kelp.jpg
+kelp_hml.jpg                    https://downloads.cardforge.org/images/tokens/kelp_hml.jpg
 lightning_rager.jpg                    https://downloads.cardforge.org/images/tokens/lightning_rager.jpg
 minor_demon_leg.jpg                    https://downloads.cardforge.org/images/tokens/minor_demon_leg.jpg
 r_0_1_kobolds_of_kher_keep.jpg         https://downloads.cardforge.org/images/tokens/r_0_1_kobolds_of_kher_keep.jpg
