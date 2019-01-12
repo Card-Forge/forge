@@ -298,3 +298,13 @@ Booster=10 Common:!fromSheet("XLN Planeswalker Decks and Toolkit"), 3 Uncommon:!
 287 U Huatli's Spurring
 288 R Sun-Blessed Mount
 289 C Stone Quarry
+
+[tokens]
+jace_cunning_castaway
+w_1_1_vampire_lifelink
+u_1_1_merfolk_hexproof
+u_2_2_illusion_illusory
+b_2_2_pirate_menace
+g_3_3_dinosaur_trample
+0_2_plant_defender
+c_a_treasure_sac

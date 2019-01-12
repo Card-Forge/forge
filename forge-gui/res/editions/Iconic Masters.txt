@@ -258,3 +258,12 @@ FoilChanceInBooster=100
 247 U Selesnya Sanctuary
 248 C Shimmering Grotto
 249 U Simic Growth Chamber
+
+[tokens]
+w_4_4_angel_flying
+w_1_1_bird_flying
+w_1_1_spirit_flying
+u_2_2_djinn_monk_flying
+r_2_2_dragon_flying_firebreathing
+r_5_5_dragon_flying
+g_4_4_beast

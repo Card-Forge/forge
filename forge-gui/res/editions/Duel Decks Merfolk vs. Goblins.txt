@@ -72,4 +72,7 @@ Type=Duel_Decks
 63 L Mountain
 
 [tokens]
+u_1_0_elemental
+u_5_5_wall_defender
 r_1_1_goblin
+r_1_1_goblin_haste

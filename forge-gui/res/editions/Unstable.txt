@@ -14,4 +14,13 @@ Type=Other
 216 L Forest
 
 [tokens]
+storm_crow
+c_2_2_homunculus
+w_0_1_goat
+u_1_1_faerie_spy_flying_haste_draw
+b_2_2_rogue_menace
+r_1_1_brainiac
 r_1_1_goblin
+g_1_1_squirrel
+c_x_x_a_construct
+c_1_1_a_gnome
