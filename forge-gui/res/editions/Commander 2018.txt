@@ -316,4 +316,27 @@ Type=Other
 307 L Forest
 
 [tokens]
+mask
+c_1_1_shapeshifter_changeling
+w_4_4_angel_flying
+w_2_2_cat
+w_1_1_soldier
+u_2_1_a_myr
+u_1_1_a_thopter_flying
+b_2_2_zombie
+r_0_2_dragon_egg_defender_hatches_dragon
+r_2_2_dragon_flying_firebreathing
+r_1_1_survivor
+g_4_4_beast
+g_5_5_beast_trample
+g_2_2_cat_warrior_forestwalk
+g_x_x_elemental
 g_0_1_plant
+bg_1_1_worm
+c_a_clue_draw
+c_4_4_a_construct
+c_6_12_a_construct_trample
+c_x_x_a_horror
+c_1_1_a_myr
+c_1_1_a_servo
+c_1_1_a_thopter_flying

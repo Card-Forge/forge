@@ -325,5 +325,17 @@ Booster=10 Common:!fromSheet("M19 Secret Cards"), 3 Uncommon:!fromSheet("M19 Sec
 314 C Llanowar Elves
 
 [tokens]
+w_4_4_angel_flying_vigilance
+w_4_4_avatar_flying
+w_1_1_cat_lifelink
+w_2_2_knight_vigilance
+w_2_4_ox
+w_1_1_soldier
 b_1_1_bat_flying
+b_2_2_zombie
+r_2_2_dragon_flying_firebreathing
+r_5_5_dragon_flying
 r_1_1_goblin
+g_3_3_beast
+g_1_1_elf_warrior
+c_1_1_a_thopter_flying
