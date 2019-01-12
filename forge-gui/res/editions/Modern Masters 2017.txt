@@ -260,4 +260,24 @@ FoilChanceInBooster=100
 249 R Verdant Catacombs
 
 [tokens]
+w_4_4_angel_flying
+w_1_1_bird_flying
+w_1_1_soldier
+w_1_1_spirit_flying
+b_2_4_spider_reach
+b_2_2_zombie
+r_4_4_dragon_flying
 r_1_1_goblin
+r_1_1_goblin_haste
+g_3_3_beast
+g_4_4_beast
+g_3_3_centaur
+g_3_3_elephant
+g_x_x_ooze
+g_1_1_saproling
+g_5_5_wurm_trample
+gw_x_x_elemental_total_creatures
+rg_4_4_giant_warrior_haste
+rg_1_1_goblin_warrior
+rw_1_1_soldier_haste
+c_3_3_a_golem

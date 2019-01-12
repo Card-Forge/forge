@@ -251,5 +251,15 @@ Type=Other
 156 L Forest
 
 [tokens]
+c_0_1_eldrazi_spawn_sac
+w_4_4_angel_flying
+b_2_4_spider_reach
 r_1_1_goblin
+r_4_4_hellion
+g_3_3_beast
+g_3_3_boar
+g_1_1_insect
+g_1_1_ooze
+g_2_2_ooze_mitotic
 g_0_1_plant
+g_1_1_saproling

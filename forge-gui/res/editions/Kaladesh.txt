@@ -285,3 +285,9 @@ AdditionalSetUnlockedInQuest=MPS_KLD
 272 C Terrain Elemental
 272 R Verdant Crescendo
 273 C Woodland Stream
+
+[tokens]
+c_6_6_a_beast
+c_x_x_a_construct
+c_1_1_a_servo
+c_1_1_a_thopter_flying
