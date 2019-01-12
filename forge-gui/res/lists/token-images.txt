@@ -403,7 +403,7 @@ ub_1_1_faerie_rogue.jpg                https://downloads.cardforge.org/images/to
 ub_1_1_horror.jpg                      https://downloads.cardforge.org/images/tokens/ub_1_1_horror.jpg
 ub_1_1_zombie_wizard.jpg               https://downloads.cardforge.org/images/tokens/ub_1_1_zombie_wizard.jpg
 ur_5_5_elemental.jpg                   https://downloads.cardforge.org/images/tokens/ur_5_5_elemental.jpg
-w_0_1_caribou.jpg                      https://downloads.cardforge.org/images/tokens/w_0_1_caribou.jpg
+w_0_1_caribou_ice.jpg                      https://downloads.cardforge.org/images/tokens/w_0_1_caribou_ice.jpg
 w_0_1_deserter.jpg                     https://downloads.cardforge.org/images/tokens/w_0_1_deserter.jpg
 w_0_1_goat.jpg                         https://downloads.cardforge.org/images/tokens/w_0_1_goat.jpg
 w_0_1_goat_m13.jpg                     https://downloads.cardforge.org/images/tokens/w_0_1_goat_m13.jpg
