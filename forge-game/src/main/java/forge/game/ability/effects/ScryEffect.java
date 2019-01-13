@@ -6,6 +6,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import java.util.List;
+import java.util.ArrayList;
 
 public class ScryEffect extends SpellAbilityEffect {
     @Override
@@ -38,17 +39,16 @@ public class ScryEffect extends SpellAbilityEffect {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
+	final ArrayList<Player> players = new ArrayList<Player>(); // players really affected
 
+	// Optional here for spells that have optional multi-player scrying
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                if (isOptional && !p.getController().confirmAction(sa, null, "Do you want to scry?")) {
-                    continue;
-                }
-
-                p.scry(num, sa);
-            }
-        }
+	    if ( ((tgt == null) || p.canBeTargetedBy(sa)) &&
+		 (!isOptional || p.getController().confirmAction(sa, null, "Do you want to scry?")) ) {
+		players.add(p);
+	    }
+	}
+	sa.getActivatingPlayer().getGame().getAction().scry(players,num,false,sa);
     }
-
 
 }
