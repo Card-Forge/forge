@@ -1,0 +1,6 @@
+Name:Noxious Groodion
+ManaCost:2 B
+Types:Creature Beast
+PT:2/2
+K:Deathtouch
+Oracle:Deathtouch

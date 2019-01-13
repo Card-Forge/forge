@@ -1,0 +1,8 @@
+Name:Windstorm Drake
+ManaCost:4 U
+Types:Creature Drake
+PT:3/3
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.withFlying+Other+YouCtrl | AddPower$ 1 | Description$ Other creatures you control with flying get +1/+0.
+SVar:PlayMain1:TRUE
+Oracle:Flying\nOther creatures you control with flying get +1/+0.
