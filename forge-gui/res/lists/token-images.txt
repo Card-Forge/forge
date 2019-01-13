@@ -202,7 +202,7 @@ g_1_1_snake_mm2.jpg                        https://downloads.cardforge.org/image
 g_1_1_snake_zen.jpg                        https://downloads.cardforge.org/images/tokens/g_1_1_snake_zen.jpg
 g_1_1_spike.jpg                        https://downloads.cardforge.org/images/tokens/g_1_1_spike.jpg
 g_1_1_splinter_flying_cum_all.jpg                     https://downloads.cardforge.org/images/tokens/g_1_1_splinter_flying_cum_all.jpg
-g_1_1_squirrel.jpg                     https://downloads.cardforge.org/images/tokens/g_1_1_squirrel.jpg
+g_1_1_squirrel_ugl.jpg                     https://downloads.cardforge.org/images/tokens/g_1_1_squirrel_ugl.jpg
 g_1_1_squirrel_cns.jpg                     https://downloads.cardforge.org/images/tokens/g_1_1_squirrel_cns.jpg
 g_1_1_squirrel_ody.jpg                     https://downloads.cardforge.org/images/tokens/g_1_1_squirrel_ody.jpg
 g_1_1_squirrel_ust.jpg                     https://downloads.cardforge.org/images/tokens/g_1_1_squirrel_ust.jpg
