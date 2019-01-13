@@ -2,8 +2,7 @@ Name:Muzzio's Preparations
 ManaCost:no cost
 Types:Conspiracy
 K:Hidden agenda
-R:Event$ Moved | ActiveZones$ Command | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+NamedCard | ReplaceWith$ AddExtraCounter | Description$ Each creature with the named card you control enters the battlefield with an additional +1/+1 counter on it.
-SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ MoveToBattlefield
-SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
+K:ETBReplacement:Other:AddExtraCounter:Mandatory:Command:Creature.YouCtrl+NamedCard
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Each creature with the named card you control enters the battlefield with an additional +1/+1 counter on it.
 SVar:AgendaLogic:MostProminentCreatureInComputerDeck
 Oracle:Hidden agenda (Start the game with this conspiracy face down in the command zone and secretly name a card. You may turn this conspiracy face up any time and reveal the chosen name.)\nEach creature you control with the chosen name enters the battlefield with an additional +1/+1 counter on it.

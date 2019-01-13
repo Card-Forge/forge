@@ -3,8 +3,9 @@ ManaCost:4 W W
 Types:Creature Spirit
 PT:5/5
 K:Flying
-R:Event$ Moved | ActiveZones$ Graveyard | Destination$ Battlefield | ValidCard$ Creature.Human+YouCtrl | ReplaceWith$ AddExtraCounter | Description$ As long as CARDNAME is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it.
-SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ MoveToBattlefield
-SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
+K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.Human+YouCtrl
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ As long as CARDNAME is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it.
+DeckNeeds:Type$Human
+DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dearly_departed.jpg
 Oracle:Flying\nAs long as Dearly Departed is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it.

@@ -2590,7 +2590,7 @@ public class ComputerUtilCombat {
         // repParams.put("PreventMap", preventMap);
 
         List<ReplacementEffect> list = game.getReplacementHandler().getReplacementList(repParams,
-                ReplacementLayer.None);
+                ReplacementLayer.Other);
         
         return !list.isEmpty();
     }

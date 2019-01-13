@@ -1051,7 +1051,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final boolean hasConverge() {
-    	return "Count$Converge".equals(getSVar("X")) || "Count$Converge".equals(getSVar("Y")) || hasKeyword("Sunburst");
+        return "Count$Converge".equals(getSVar("X")) || "Count$Converge".equals(getSVar("Y")) ||
+            hasKeyword(Keyword.SUNBURST) || hasKeyword("Modular:Sunburst");
     }
 
     @Override
@@ -1594,7 +1595,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                         || keyword.equals("Soulbond") || keyword.equals("Partner") || keyword.equals("Retrace")
                         || keyword.equals("Living Weapon") || keyword.equals("Myriad") || keyword.equals("Exploit")
                         || keyword.equals("Changeling") || keyword.equals("Delve")
-                        || keyword.equals("Split second")
+                        || keyword.equals("Split second") || keyword.equals("Sunburst")
                         || keyword.equals("Suspend") // for the ones without amounnt
                         || keyword.equals("Hideaway") || keyword.equals("Ascend")
                         || keyword.equals("Totem armor") || keyword.equals("Battle cry")
