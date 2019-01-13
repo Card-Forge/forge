@@ -28,6 +28,8 @@ import forge.game.cost.Cost;
 import forge.game.spellability.*;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
+import io.sentry.Sentry;
+import io.sentry.event.BreadcrumbBuilder;
 
 import java.util.List;
 import java.util.Map;
@@ -130,7 +132,16 @@ public final class AbilityFactory {
             String source = state.getName().isEmpty() ? abString : state.getName();
             throw new RuntimeException("AbilityFactory : getAbility -- no API in " + source + ": " + abString);
         }
-        return getAbility(mapParams, type, state, parent);
+        try {
+            return getAbility(mapParams, type, state, parent);
+        } catch (Error | Exception ex) {
+            String msg = "AbilityFactory:getAbility: crash when trying to create ability ";
+            Sentry.getContext().recordBreadcrumb(
+                new BreadcrumbBuilder().setMessage(msg)
+                .withData("Card", state.getName()).withData("Ability", abString).build()
+            );
+            throw new RuntimeException(msg + " of card: " + state.getName(), ex);
+        }
     }
     
     public static final SpellAbility getAbility(final Card hostCard, final String svar) {
