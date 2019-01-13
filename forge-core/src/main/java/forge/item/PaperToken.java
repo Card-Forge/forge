@@ -100,8 +100,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
             build.add(edition.getCode());
         }
 
-        // Should future image file names be all lower case? Instead of Up case sets?
-        return StringUtils.join(build, "_").toLowerCase();
+        return StringUtils.join(build, "_").replace('*', 'x').toLowerCase();
     }
 
     public PaperToken(final CardRules c) { this(c, null, null); }
