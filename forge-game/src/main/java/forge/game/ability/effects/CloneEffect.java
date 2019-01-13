@@ -140,6 +140,9 @@ public class CloneEffect extends SpellAbilityEffect {
             else if (duration.equals("UntilUnattached")) {
                 sa.getHostCard().addUnattachCommand(unclone);
             }
+            else if (duration.equals("UntilFacedown")) {
+                sa.getHostCard().addFacedownCommand(unclone);
+            }
         }
         game.fireEvent(new GameEventCardStatsChanged(tgtCard));
     } // cloneResolve

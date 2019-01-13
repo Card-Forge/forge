@@ -809,7 +809,6 @@ public class CardFactory {
                 }
             }
 
-
             if (sa.hasParam("GainThisAbility")) {
                 SpellAbility root = sa.getRootAbility();
 

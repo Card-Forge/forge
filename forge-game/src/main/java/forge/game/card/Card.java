@@ -240,6 +240,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final List<GameCommand> changeControllerCommandList = Lists.newArrayList();
     private final List<GameCommand> unattachCommandList = Lists.newArrayList();
     private final List<GameCommand> faceupCommandList = Lists.newArrayList();
+    private final List<GameCommand> facedownCommandList = Lists.newArrayList();
     private final List<Object[]> staticCommandList = Lists.newArrayList();
 
     private final static ImmutableList<String> storableSVars = ImmutableList.of("ChosenX");
@@ -559,14 +560,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             return changeToState(CardStateName.Flipped);
         } else if (mode.equals("TurnFace")) {
             if (oldState == CardStateName.Original || oldState == CardStateName.Flipped) {
-                // Reset cloned state if Vesuvan Shapeshifter
-                /*
-                if (isCloned() && getState(CardStateName.Cloner).getName().equals("Vesuvan Shapeshifter")) {
-                    switchStates(CardStateName.Cloner, CardStateName.Original, false);
-                    setState(CardStateName.Original, false);
-                    clearStates(CardStateName.Cloner, false);
-                }
-                //*/
                 return turnFaceDown();
             } else if (isFaceDown()) {
                 return turnFaceUp();
@@ -615,7 +608,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     public boolean turnFaceDown(boolean override) {
         if (override || (!isDoubleFaced() && !isMeldable())) {
             facedown = true;
-            return setState(CardStateName.FaceDown, true);
+            if (setState(CardStateName.FaceDown, true)) {
+                runFacedownCommands();
+                return true;
+            }
         }
         return false;
     }
@@ -2492,6 +2488,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         for (final GameCommand c : etbCommandList) {
             c.run();
         }
+        etbCommandList.clear();
     }
 
     public final void addLeavesPlayCommand(final GameCommand c) {
@@ -2502,6 +2499,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         for (final GameCommand c : leavePlayCommandList) {
             c.run();
         }
+        leavePlayCommandList.clear();
     }
 
     public final void addUntapCommand(final GameCommand c) {
@@ -2516,6 +2514,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         faceupCommandList.add(c);
     }
 
+    public final void addFacedownCommand(final GameCommand c) {
+        facedownCommandList.add(c);
+    }
+
     public final void runUnattachCommands() {
         for (final GameCommand c : unattachCommandList) {
             c.run();
@@ -2526,6 +2528,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         for (final GameCommand c : faceupCommandList) {
             c.run();
         }
+        faceupCommandList.clear();
+    }
+
+    public final void runFacedownCommands() {
+        for (final GameCommand c : facedownCommandList) {
+            c.run();
+        }
+        facedownCommandList.clear();
     }
 
     public final void addChangeControllerCommand(final GameCommand c) {
@@ -2536,6 +2546,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         for (final GameCommand c : changeControllerCommandList) {
             c.run();
         }
+        changeControllerCommandList.clear();
     }
 
     public final void setSickness(boolean sickness0) {
