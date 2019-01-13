@@ -17,7 +17,6 @@ b_1_1_festering_goblin.jpg             https://downloads.cardforge.org/images/to
 b_1_1_goblin_rogue.jpg                 https://downloads.cardforge.org/images/tokens/b_1_1_goblin_rogue.jpg
 b_1_1_harpy.jpg                        https://downloads.cardforge.org/images/tokens/b_1_1_harpy.jpg
 b_1_1_minion.jpg                       https://downloads.cardforge.org/images/tokens/b_1_1_minion.jpg
-b_1_1_rat.jpg                          https://downloads.cardforge.org/images/tokens/b_1_1_rat.jpg
 b_1_1_rat_c17.jpg                      https://downloads.cardforge.org/images/tokens/b_1_1_rat_c17.jpg
 b_1_1_rat_gtc.jpg                      https://downloads.cardforge.org/images/tokens/b_1_1_rat_gtc.jpg
 b_1_1_rat_shm.jpg                      https://downloads.cardforge.org/images/tokens/b_1_1_rat_shm.jpg
@@ -121,7 +120,7 @@ c_1_1_triskelavite.jpg                 https://downloads.cardforge.org/images/to
 c_2_2_assembly_worker.jpg              https://downloads.cardforge.org/images/tokens/c_2_2_assembly_worker.jpg
 c_2_2_pincher.jpg                      https://downloads.cardforge.org/images/tokens/c_2_2_pincher.jpg
 c_2_2_spawn.jpg                        https://downloads.cardforge.org/images/tokens/c_2_2_spawn.jpg
-c_2_2_volraths_laboratory.jpg          https://downloads.cardforge.org/images/tokens/c_2_2_volraths_laboratory.jpg
+volrath's_laboratory_sth.jpg          https://downloads.cardforge.org/images/tokens/volrath%27s_laboratory_sth.jpg
 c_2_2_wirefly.jpg                      https://downloads.cardforge.org/images/tokens/c_2_2_wirefly.jpg
 c_3_3_a_wurm_deathtouch.jpg              https://downloads.cardforge.org/images/tokens/c_3_3_a_wurm_deathtouch.jpg
 c_3_3_a_wurm_deathtouch_c14.jpg              https://downloads.cardforge.org/images/tokens/c_3_3_a_wurm_deathtouch_c14.jpg
@@ -200,7 +199,7 @@ g_1_1_snake_chk.jpg                    https://downloads.cardforge.org/images/to
 g_1_1_snake_ktk.jpg                        https://downloads.cardforge.org/images/tokens/g_1_1_snake_ktk.jpg
 g_1_1_snake_mm2.jpg                        https://downloads.cardforge.org/images/tokens/g_1_1_snake_mm2.jpg
 g_1_1_snake_zen.jpg                        https://downloads.cardforge.org/images/tokens/g_1_1_snake_zen.jpg
-g_1_1_spike.jpg                        https://downloads.cardforge.org/images/tokens/g_1_1_spike.jpg
+g_1_1_spike_sth.jpg                        https://downloads.cardforge.org/images/tokens/g_1_1_spike_sth.jpg
 g_1_1_splinter_flying_cum_all.jpg                     https://downloads.cardforge.org/images/tokens/g_1_1_splinter_flying_cum_all.jpg
 g_1_1_squirrel_ugl.jpg                     https://downloads.cardforge.org/images/tokens/g_1_1_squirrel_ugl.jpg
 g_1_1_squirrel_cns.jpg                     https://downloads.cardforge.org/images/tokens/g_1_1_squirrel_cns.jpg
@@ -289,7 +288,7 @@ gw_1_1_elf_warrior.jpg                 https://downloads.cardforge.org/images/to
 gw_2_2_voja.jpg                        https://downloads.cardforge.org/images/tokens/gw_2_2_voja.jpg
 gw_8_8_elemental_rtr.jpg               https://downloads.cardforge.org/images/tokens/gw_8_8_elemental_rtr.jpg
 gw_x_x_elemental.jpg                   https://downloads.cardforge.org/images/tokens/gw_x_x_elemental.jpg
-hornet.jpg                    https://downloads.cardforge.org/images/tokens/hornet.jpg
+hornet_dde.jpg                    https://downloads.cardforge.org/images/tokens/hornet_dde.jpg
 kelp_hml.jpg                    https://downloads.cardforge.org/images/tokens/kelp_hml.jpg
 lightning_rager.jpg                    https://downloads.cardforge.org/images/tokens/lightning_rager.jpg
 minor_demon_leg.jpg                    https://downloads.cardforge.org/images/tokens/minor_demon_leg.jpg
@@ -313,6 +312,7 @@ r_1_1_goblin_rav.jpg                   https://downloads.cardforge.org/images/to
 r_1_1_goblin_rtr.jpg                   https://downloads.cardforge.org/images/tokens/r_1_1_goblin_rtr.jpg
 r_1_1_goblin_som.jpg                   https://downloads.cardforge.org/images/tokens/r_1_1_goblin_som.jpg
 r_1_1_goblin_tsp.jpg                   https://downloads.cardforge.org/images/tokens/r_1_1_goblin_tsp.jpg
+r_1_1_goblin_ugl.jpg                   https://downloads.cardforge.org/images/tokens/r_1_1_goblin_ugl.jpg
 r_1_1_goblin_scout.jpg                 https://downloads.cardforge.org/images/tokens/r_1_1_goblin_scout.jpg
 r_1_1_goblin_haste.jpg                 https://downloads.cardforge.org/images/tokens/r_1_1_goblin_haste.jpg
 r_1_1_goblin_scout_mountainwalk_mir.jpg                 https://downloads.cardforge.org/images/tokens/r_1_1_goblin_scout_mountainwalk_mir.jpg
