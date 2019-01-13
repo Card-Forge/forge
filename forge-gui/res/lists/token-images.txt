@@ -110,7 +110,7 @@ c_1_1_myr_som.jpg                      https://downloads.cardforge.org/images/to
 c_1_1_pentavite.jpg                    https://downloads.cardforge.org/images/tokens/c_1_1_pentavite.jpg
 c_1_1_sand.jpg                         https://downloads.cardforge.org/images/tokens/c_1_1_sand.jpg
 c_1_1_shapeshifter.jpg                 https://downloads.cardforge.org/images/tokens/c_1_1_shapeshifter.jpg
-c_1_1_sliver.jpg                       https://downloads.cardforge.org/images/tokens/c_1_1_sliver.jpg
+c_1_1_sliver_lgn.jpg                       https://downloads.cardforge.org/images/tokens/c_1_1_sliver_lgn.jpg
 c_1_1_sliver_m14.jpg                   https://downloads.cardforge.org/images/tokens/c_1_1_sliver_m14.jpg
 c_1_1_sliver2_m14.jpg                   https://downloads.cardforge.org/images/tokens/c_1_1_sliver2_m14.jpg
 c_1_1_sliver_m15.jpg                   https://downloads.cardforge.org/images/tokens/c_1_1_sliver_m15.jpg
