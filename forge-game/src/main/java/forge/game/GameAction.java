@@ -31,6 +31,7 @@ import forge.game.event.*;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementResult;
 import forge.game.spellability.AbilitySub;
@@ -1818,7 +1819,6 @@ public class GameAction {
         game.getTriggerHandler().runTrigger(TriggerType.BecomeMonarch, runParams, false);
     }
 
-
     // Make scry an action function so that it can be used for mulligans (with a null cause)
     // Assumes that the list of players is in APNAP order, which should be the case
     // Optional here as well to handle the way that mulligans do the choice
@@ -1843,7 +1843,7 @@ public class GameAction {
 	ArrayList<ImmutablePair<CardCollection, CardCollection>> decisions = 
 	    new ArrayList<ImmutablePair<CardCollection, CardCollection>>();
 	for ( final Player p : players ) {
-	    if (isOptional && !p.getController().confirmAction(cause, null, "Do you want to scry?")) {
+	    if (isOptional && !p.getController().confirmAction(cause, PlayerActionConfirmMode.Scry, "Do you want to scry?")) {
 		decisions.add(new ImmutablePair<CardCollection, CardCollection>(new CardCollection(),new CardCollection()));
 	    } else {
 		final CardCollection topN = new CardCollection(p.getCardsIn(ZoneType.Library, numScry));

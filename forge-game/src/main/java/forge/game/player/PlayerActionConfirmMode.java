@@ -13,8 +13,8 @@ public enum PlayerActionConfirmMode {
     ChangeZoneGeneral,
     BidLife,
     OptionalChoose,
-    Tribute;
+    Tribute,
     // Ripple;
-    
+    Scry;
     
 }
