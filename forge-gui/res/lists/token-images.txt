@@ -86,12 +86,13 @@ b_x_x_vampire.jpg                      https://downloads.cardforge.org/images/to
 bg_1_1_worm.jpg                        https://downloads.cardforge.org/images/tokens/bg_1_1_worm.jpg
 br_3_1_graveborn_haste_csp.jpg                   https://downloads.cardforge.org/images/tokens/br_3_1_graveborn_haste_csp.jpg
 br_5_5_elemental.jpg                   https://downloads.cardforge.org/images/tokens/br_5_5_elemental.jpg
+butterfly_vis.jpg                    https://downloads.cardforge.org/images/tokens/butterfly_vis.jpg
 c_0_0_construct.jpg                    https://downloads.cardforge.org/images/tokens/c_0_0_construct.jpg
 c_0_1_eldrazi_spawn.jpg                https://downloads.cardforge.org/images/tokens/c_0_1_eldrazi_spawn.jpg
 c_0_1_eldrazi_spawn2.jpg               https://downloads.cardforge.org/images/tokens/c_0_1_eldrazi_spawn2.jpg
 c_0_1_eldrazi_spawn3.jpg               https://downloads.cardforge.org/images/tokens/c_0_1_eldrazi_spawn3.jpg
 c_0_1_pest.jpg                         https://downloads.cardforge.org/images/tokens/c_0_1_pest.jpg
-c_0_1_a_prism.jpg                        https://downloads.cardforge.org/images/tokens/c_0_1_a_prism.jpg
+c_0_1_a_prism_vis.jpg                        https://downloads.cardforge.org/images/tokens/c_0_1_a_prism_vis.jpg
 c_0_2_a_wall_defender_mir.jpg                         https://downloads.cardforge.org/images/tokens/c_0_2_a_wall_defender_mir.jpg
 c_10_10_eldrazi.jpg                    https://downloads.cardforge.org/images/tokens/c_10_10_eldrazi.jpg
 c_1_1_a_gnome.jpg                        https://downloads.cardforge.org/images/tokens/c_1_1_a_gnome.jpg
@@ -149,7 +150,6 @@ g_0_1_plant_ogw.jpg                        https://downloads.cardforge.org/image
 g_0_1_plant_pca.jpg                        https://downloads.cardforge.org/images/tokens/g_0_1_plant_pca.jpg
 g_0_1_sheep.jpg                        https://downloads.cardforge.org/images/tokens/g_0_1_sheep.jpg
 g_0_1_sheep_tsp.jpg                        https://downloads.cardforge.org/images/tokens/g_0_1_sheep_tsp.jpg
-g_1_1_butterfly.jpg                    https://downloads.cardforge.org/images/tokens/g_1_1_butterfly.jpg
 g_1_1_cat_mir.jpg                          https://downloads.cardforge.org/images/tokens/g_1_1_cat_mir.jpg
 g_1_1_elf.jpg                          https://downloads.cardforge.org/images/tokens/g_1_1_elf.jpg
 g_1_1_elf_warrior.jpg                  https://downloads.cardforge.org/images/tokens/g_1_1_elf_warrior.jpg
@@ -194,7 +194,6 @@ g_1_1_saproling_tsb.jpg                https://downloads.cardforge.org/images/to
 g_1_1_saproling_ust.jpg                https://downloads.cardforge.org/images/tokens/g_1_1_saproling_ust.jpg
 g_1_1_saproling2_ust.jpg                https://downloads.cardforge.org/images/tokens/g_1_1_saproling2_ust.jpg
 g_1_1_saproling_vma.jpg                https://downloads.cardforge.org/images/tokens/g_1_1_saproling_vma.jpg
-g_1_1_snake.jpg                        https://downloads.cardforge.org/images/tokens/g_1_1_snake.jpg
 g_1_1_snake_akh.jpg                        https://downloads.cardforge.org/images/tokens/g_1_1_snake_akh.jpg
 g_1_1_snake_c15.jpg                        https://downloads.cardforge.org/images/tokens/g_1_1_snake_c15.jpg
 g_1_1_snake_chk.jpg                    https://downloads.cardforge.org/images/tokens/g_1_1_snake_chk.jpg
