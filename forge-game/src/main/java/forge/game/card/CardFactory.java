@@ -430,6 +430,9 @@ public class CardFactory {
 
     private static void readCardFace(Card c, ICardFace face) {
 
+        // Name first so Senty has the Card name
+        c.setName(face.getName());
+
         for (String r : face.getReplacements())              c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true));
         for (String s : face.getStaticAbilities())           c.addStaticAbility(s);
         for (String t : face.getTriggers())                  c.addTrigger(TriggerHandler.parseTrigger(t, c, true));
@@ -439,7 +442,6 @@ public class CardFactory {
         // keywords not before variables
         c.addIntrinsicKeywords(face.getKeywords(), false);
 
-        c.setName(face.getName());
         c.setManaCost(face.getManaCost());
         c.setText(face.getNonAbilityText());
 

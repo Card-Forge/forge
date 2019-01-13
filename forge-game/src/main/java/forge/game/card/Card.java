@@ -1447,250 +1447,260 @@ public class Card extends GameEntity implements Comparable<Card> {
         int i = 0;
         for (KeywordInterface inst : keywords) {
             String keyword = inst.getOriginal();
-            if (keyword.startsWith("SpellCantTarget")) {
-                continue;
-            }
-            // format text changes
-            if (CardUtil.isKeywordModifiable(keyword)
-                    && keywordsGrantedByTextChanges.contains(inst)) {
-                for (final Entry<String, String> e : textChanges) {
-                    final String value = e.getValue();
-                    if (keyword.contains(value)) {
-                        keyword = TextUtil.fastReplace(keyword, value,
-                                TextUtil.concatNoSpace("<strike>", e.getKey(), "</strike> ", value));
-                        // assume (for now) max one change per keyword
-                        break;
+            try {
+                if (keyword.startsWith("SpellCantTarget")) {
+                    continue;
+                }
+                // format text changes
+                if (CardUtil.isKeywordModifiable(keyword)
+                        && keywordsGrantedByTextChanges.contains(inst)) {
+                    for (final Entry<String, String> e : textChanges) {
+                        final String value = e.getValue();
+                        if (keyword.contains(value)) {
+                            keyword = TextUtil.fastReplace(keyword, value,
+                                    TextUtil.concatNoSpace("<strike>", e.getKey(), "</strike> ", value));
+                            // assume (for now) max one change per keyword
+                            break;
+                        }
                     }
                 }
-            }
-            if (keyword.startsWith("CantBeCounteredBy")) {
-                final String[] p = keyword.split(":");
-                sbLong.append(p[2]).append("\r\n");
-            } else if (keyword.startsWith("etbCounter")) {
-                final String[] p = keyword.split(":");
-                final StringBuilder s = new StringBuilder();
-                if (p.length > 4) {
-                    if (!"no desc".equals(p[4])) {
-                        s.append(p[4]);
+                if (keyword.startsWith("CantBeCounteredBy")) {
+                    final String[] p = keyword.split(":");
+                    sbLong.append(p[2]).append("\r\n");
+                } else if (keyword.startsWith("etbCounter")) {
+                    final String[] p = keyword.split(":");
+                    final StringBuilder s = new StringBuilder();
+                    if (p.length > 4) {
+                        if (!"no desc".equals(p[4])) {
+                            s.append(p[4]);
+                        }
+                    } else {
+                        s.append(getName());
+                        s.append(" enters the battlefield with ");
+                        s.append(Lang.nounWithNumeral(p[2], CounterType.valueOf(p[1]).getName() + " counter"));
+                        s.append(" on it.");
                     }
-                } else {
-                    s.append(getName());
-                    s.append(" enters the battlefield with ");
-                    s.append(Lang.nounWithNumeral(p[2], CounterType.valueOf(p[1]).getName() + " counter"));
-                    s.append(" on it.");
-                }
-                sbLong.append(s).append("\r\n");
-            } else if (keyword.startsWith("Protection:")) {
-                final String[] k = keyword.split(":");
-                sbLong.append(k[2]).append("\r\n");
-            } else if (keyword.startsWith("Creatures can't attack unless their controller pays")) {
-                final String[] k = keyword.split(":");
-                if (!k[3].equals("no text")) {
-                    sbLong.append(k[3]).append("\r\n");
-                }
-            } else if (keyword.startsWith("Enchant")) {
-                String k = keyword;
-                k = TextUtil.fastReplace(k, "Curse", "");
-                sbLong.append(k).append("\r\n");
-            } else if (keyword.startsWith("Ripple")) {
-                sbLong.append(TextUtil.fastReplace(keyword, ":", " ")).append("\r\n");
-            } else if (keyword.startsWith("Madness")) {
-                String[] parts = keyword.split(":");
-                // If no colon exists in Madness keyword, it must have been granted and assumed the cost from host
-                if (parts.length < 2) {
-                    sbLong.append(parts[0]).append(" ").append(this.getManaCost()).append("\r\n");
-                } else {
-                    sbLong.append(parts[0]).append(" ").append(ManaCostParser.parse(parts[1])).append("\r\n");
-                }
-            } else if (keyword.startsWith("Morph") || keyword.startsWith("Megamorph")) {
-                String[] k = keyword.split(":");
-                sbLong.append(k[0]);
-                if (k.length > 1) {
-                    final Cost mCost = new Cost(k[1], true);
-                    if (!mCost.isOnlyManaCost()) {
-                        sbLong.append("—");
+                    sbLong.append(s).append("\r\n");
+                } else if (keyword.startsWith("Protection:")) {
+                    final String[] k = keyword.split(":");
+                    sbLong.append(k[2]).append("\r\n");
+                } else if (keyword.startsWith("Creatures can't attack unless their controller pays")) {
+                    final String[] k = keyword.split(":");
+                    if (!k[3].equals("no text")) {
+                        sbLong.append(k[3]).append("\r\n");
                     }
-                    if (mCost.isOnlyManaCost()) {
-                        sbLong.append(" ");
+                } else if (keyword.startsWith("Enchant")) {
+                    String k = keyword;
+                    k = TextUtil.fastReplace(k, "Curse", "");
+                    sbLong.append(k).append("\r\n");
+                } else if (keyword.startsWith("Ripple")) {
+                    sbLong.append(TextUtil.fastReplace(keyword, ":", " ")).append("\r\n");
+                } else if (keyword.startsWith("Madness")) {
+                    String[] parts = keyword.split(":");
+                    // If no colon exists in Madness keyword, it must have been granted and assumed the cost from host
+                    if (parts.length < 2) {
+                        sbLong.append(parts[0]).append(" ").append(this.getManaCost()).append("\r\n");
+                    } else {
+                        sbLong.append(parts[0]).append(" ").append(ManaCostParser.parse(parts[1])).append("\r\n");
                     }
-                    sbLong.append(mCost.toString()).delete(sbLong.length() - 2, sbLong.length());
-                    if (!mCost.isOnlyManaCost()) {
-                        sbLong.append(".");
+                } else if (keyword.startsWith("Morph") || keyword.startsWith("Megamorph")) {
+                    String[] k = keyword.split(":");
+                    sbLong.append(k[0]);
+                    if (k.length > 1) {
+                        final Cost mCost = new Cost(k[1], true);
+                        if (!mCost.isOnlyManaCost()) {
+                            sbLong.append("—");
+                        }
+                        if (mCost.isOnlyManaCost()) {
+                            sbLong.append(" ");
+                        }
+                        sbLong.append(mCost.toString()).delete(sbLong.length() - 2, sbLong.length());
+                        if (!mCost.isOnlyManaCost()) {
+                            sbLong.append(".");
+                        }
+                        sbLong.append(" (" + inst.getReminderText() + ")");
+                        sbLong.append("\r\n");
                     }
+                } else if (keyword.startsWith("Emerge")) {
+                    final String[] k = keyword.split(":");
+                    sbLong.append(k[0]).append(" ").append(ManaCostParser.parse(k[1]));
                     sbLong.append(" (" + inst.getReminderText() + ")");
                     sbLong.append("\r\n");
-                }
-            } else if (keyword.startsWith("Emerge")) {
-                final String[] k = keyword.split(":");
-                sbLong.append(k[0]).append(" ").append(ManaCostParser.parse(k[1]));
-                sbLong.append(" (" + inst.getReminderText() + ")");
-                sbLong.append("\r\n");
-            } else if (keyword.startsWith("Echo")) {
-                sbLong.append("Echo ");
-                final String[] upkeepCostParams = keyword.split(":");
-                sbLong.append(upkeepCostParams.length > 2 ? "- " + upkeepCostParams[2] : ManaCostParser.parse(upkeepCostParams[1]));
-                sbLong.append(" (At the beginning of your upkeep, if CARDNAME came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)");
-                sbLong.append("\r\n");
-            } else if (keyword.startsWith("Cumulative upkeep")) {
-                sbLong.append("Cumulative upkeep ");
-                final String[] upkeepCostParams = keyword.split(":");
-                sbLong.append(upkeepCostParams.length > 2 ? "- " + upkeepCostParams[2] : ManaCostParser.parse(upkeepCostParams[1]));
-                sbLong.append("\r\n");
-            } else if (keyword.startsWith("Alternative Cost")) {
-                sbLong.append("Has alternative cost.");
-            } else if (keyword.startsWith("AlternateAdditionalCost")) {
-                final String costString1 = keyword.split(":")[1];
-                final String costString2 = keyword.split(":")[2];
-                final Cost cost1 = new Cost(costString1, false);
-                final Cost cost2 = new Cost(costString2, false);
-                sbLong.append("As an additional cost to cast ")
-                        .append(getName()).append(", ")
-                        .append(cost1.toSimpleString())
-                        .append(" or pay ")
-                        .append(cost2.toSimpleString())
-                        .append(".\r\n");
-            } else if (keyword.startsWith("Multikicker")) {
-                if (!keyword.endsWith("Generic")) {
-                    final String[] n = keyword.split(":");
-                    final Cost cost = new Cost(n[1], false);
-                    sbLong.append("Multikicker ").append(cost.toSimpleString());
-                    sbLong.append(" (" + inst.getReminderText() + ")").append("\r\n");
-                }
-            } else if (keyword.startsWith("Kicker")) {
-                if (!keyword.endsWith("Generic")) {
-                    final StringBuilder sbx = new StringBuilder();
-                    final String[] n = keyword.split(":");
-                    sbx.append("Kicker ");
-                    final Cost cost = new Cost(n[1], false);
-                    sbx.append(cost.toSimpleString());
-                    if (Lists.newArrayList(n).size() > 2) {
-                        sbx.append(" and/or ");
-                        final Cost cost2 = new Cost(n[2], false);
-                        sbx.append(cost2.toSimpleString());
+                } else if (keyword.startsWith("Echo")) {
+                    sbLong.append("Echo ");
+                    final String[] upkeepCostParams = keyword.split(":");
+                    sbLong.append(upkeepCostParams.length > 2 ? "- " + upkeepCostParams[2] : ManaCostParser.parse(upkeepCostParams[1]));
+                    sbLong.append(" (At the beginning of your upkeep, if CARDNAME came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)");
+                    sbLong.append("\r\n");
+                } else if (keyword.startsWith("Cumulative upkeep")) {
+                    sbLong.append("Cumulative upkeep ");
+                    final String[] upkeepCostParams = keyword.split(":");
+                    sbLong.append(upkeepCostParams.length > 2 ? "- " + upkeepCostParams[2] : ManaCostParser.parse(upkeepCostParams[1]));
+                    sbLong.append("\r\n");
+                } else if (keyword.startsWith("Alternative Cost")) {
+                    sbLong.append("Has alternative cost.");
+                } else if (keyword.startsWith("AlternateAdditionalCost")) {
+                    final String costString1 = keyword.split(":")[1];
+                    final String costString2 = keyword.split(":")[2];
+                    final Cost cost1 = new Cost(costString1, false);
+                    final Cost cost2 = new Cost(costString2, false);
+                    sbLong.append("As an additional cost to cast ")
+                            .append(getName()).append(", ")
+                            .append(cost1.toSimpleString())
+                            .append(" or pay ")
+                            .append(cost2.toSimpleString())
+                            .append(".\r\n");
+                } else if (keyword.startsWith("Multikicker")) {
+                    if (!keyword.endsWith("Generic")) {
+                        final String[] n = keyword.split(":");
+                        final Cost cost = new Cost(n[1], false);
+                        sbLong.append("Multikicker ").append(cost.toSimpleString());
+                        sbLong.append(" (" + inst.getReminderText() + ")").append("\r\n");
                     }
-                    sbx.append(" (" + inst.getReminderText() + ")");
-                    sbLong.append(sbx).append("\r\n");
-                }
-            } else if (keyword.startsWith("Hexproof:")) {
-                final String k[] = keyword.split(":");
-                sbLong.append("Hexproof from ").append(k[2])
-                    .append(" (").append(inst.getReminderText()).append(")").append("\r\n");
-            } else if (keyword.endsWith(".") && !keyword.startsWith("Haunt")) {
-                sbLong.append(keyword).append("\r\n");
-            } else if (keyword.startsWith("Presence") || keyword.startsWith("MayFlash")) {
-                // Pseudo keywords, only print Reminder
-                sbLong.append(inst.getReminderText());
-            } else if (keyword.contains("At the beginning of your upkeep, ")
-                    && keyword.contains(" unless you pay")) {
-                sbLong.append(keyword).append("\r\n");
-            } else if (keyword.startsWith("Strive") || keyword.startsWith("Escalate")
-                    || keyword.startsWith("ETBReplacement")
-                    || keyword.startsWith("CantBeBlockedBy ")
-                    || keyword.startsWith("Affinity")
-                    || keyword.equals("CARDNAME enters the battlefield tapped.")
-                    || keyword.startsWith("UpkeepCost")) {
-            } else if (keyword.equals("Provoke") || keyword.equals("Ingest") || keyword.equals("Unleash")
-                    || keyword.equals("Soulbond") || keyword.equals("Partner") || keyword.equals("Retrace")
-                    || keyword.equals("Living Weapon") || keyword.equals("Myriad") || keyword.equals("Exploit")
-                    || keyword.equals("Changeling") || keyword.equals("Delve")
-                    || keyword.equals("Split second")
-                    || keyword.equals("Suspend") // for the ones without amounnt
-                    || keyword.equals("Hideaway") || keyword.equals("Ascend")
-                    || keyword.equals("Totem armor") || keyword.equals("Battle cry")
-                    || keyword.equals("Devoid") || keyword.equals("Riot")){
-                sbLong.append(keyword + " (" + inst.getReminderText() + ")");
-            } else if (keyword.startsWith("Partner:")) {
-                final String[] k = keyword.split(":");
-                sbLong.append("Partner with " + k[1] + " (" + inst.getReminderText() + ")");
-            } else if (keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst") || keyword.startsWith("Dredge")
-                    || keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift") || keyword.startsWith("Bushido")
-                    || keyword.startsWith("Crew") || keyword.startsWith("Tribute") || keyword.startsWith("Absorb")
-                    || keyword.startsWith("Graft") || keyword.startsWith("Fading") || keyword.startsWith("Vanishing")
-                    || keyword.startsWith("Afterlife")
-                    || keyword.startsWith("Afflict") || keyword.startsWith ("Poisonous") || keyword.startsWith("Rampage")
-                    || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Devour")) {
-                final String[] k = keyword.split(":");
-                sbLong.append(k[0] + " " + k[1] + " (" + inst.getReminderText() + ")");
-            } else if (keyword.contains("Haunt")) {
-                sb.append("\r\nHaunt (");
-                if (isCreature()) {
-                    sb.append("When this creature dies, exile it haunting target creature.");
-                } else {
-                    sb.append("When this spell card is put into a graveyard after resolving, ");
-                    sb.append("exile it haunting target creature.");
-                }
-                sb.append(")");
-            } else if (keyword.equals("Convoke") || keyword.equals("Dethrone")|| keyword.equals("Fear")
-                     || keyword.equals("Melee") || keyword.equals("Improvise")|| keyword.equals("Shroud")
-                     || keyword.equals("Banding") || keyword.equals("Intimidate")|| keyword.equals("Evolve")
-                     || keyword.equals("Exalted") || keyword.equals("Extort")|| keyword.equals("Flanking")
-                     || keyword.equals("Horsemanship") || keyword.equals("Infect")|| keyword.equals("Persist")
-                     || keyword.equals("Phasing") || keyword.equals("Shadow")|| keyword.equals("Skulk")
-                     || keyword.equals("Undying") || keyword.equals("Wither") || keyword.equals("Cascade")
-                     || keyword.equals("Mentor")) {
-                if (sb.length() != 0) {
-                    sb.append("\r\n");
-                }
-                sb.append(keyword + " (" + inst.getReminderText() + ")");
-            } else if (keyword.endsWith(" offering")) {
-                String offeringType = keyword.split(" ")[0];
-                if (sb.length() != 0) {
-                    sb.append("\r\n");
-                }
-                sbLong.append(keyword);
-                sbLong.append(" (" + Keyword.getInstance("Offering:"+ offeringType).getReminderText() + ")");
-            } else if (keyword.startsWith("Equip") || keyword.startsWith("Fortify") || keyword.startsWith("Outlast")
-                    || keyword.startsWith("Unearth") || keyword.startsWith("Scavenge") || keyword.startsWith("Spectacle")
-                    || keyword.startsWith("Evoke") || keyword.startsWith("Bestow") || keyword.startsWith("Dash")
-                    || keyword.startsWith("Surge") || keyword.startsWith("Transmute") || keyword.startsWith("Suspend")
-                    || keyword.equals("Undaunted") || keyword.startsWith("Monstrosity") || keyword.startsWith("Embalm")
-                    || keyword.startsWith("Level up") || keyword.equals("Prowess") || keyword.startsWith("Eternalize")
-                    || keyword.startsWith("Reinforce") || keyword.startsWith("Champion") || keyword.startsWith("Prowl")
-                    || keyword.startsWith("Amplify")  || keyword.startsWith("Ninjutsu") || keyword.startsWith("Adapt")
-                    || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")) {
-                // keyword parsing takes care of adding a proper description
-            } else if (keyword.startsWith("CantBeBlockedByAmount")) {
-                sbLong.append(getName()).append(" can't be blocked ");
-                sbLong.append(getTextForKwCantBeBlockedByAmount(keyword));
-            } else if (keyword.startsWith("CantBlock")) {
-                sbLong.append(getName()).append(" can't block ");
-                if (keyword.contains("CardUID")) {
-                    sbLong.append("CardID (").append(Integer.valueOf(keyword.split("CantBlockCardUID_")[1])).append(")");
-                } else {
+                } else if (keyword.startsWith("Kicker")) {
+                    if (!keyword.endsWith("Generic")) {
+                        final StringBuilder sbx = new StringBuilder();
+                        final String[] n = keyword.split(":");
+                        sbx.append("Kicker ");
+                        final Cost cost = new Cost(n[1], false);
+                        sbx.append(cost.toSimpleString());
+                        if (Lists.newArrayList(n).size() > 2) {
+                            sbx.append(" and/or ");
+                            final Cost cost2 = new Cost(n[2], false);
+                            sbx.append(cost2.toSimpleString());
+                        }
+                        sbx.append(" (" + inst.getReminderText() + ")");
+                        sbLong.append(sbx).append("\r\n");
+                    }
+                } else if (keyword.startsWith("Hexproof:")) {
+                    final String k[] = keyword.split(":");
+                    sbLong.append("Hexproof from ").append(k[2])
+                        .append(" (").append(inst.getReminderText()).append(")").append("\r\n");
+                } else if (keyword.endsWith(".") && !keyword.startsWith("Haunt")) {
+                    sbLong.append(keyword).append("\r\n");
+                } else if (keyword.startsWith("Presence") || keyword.startsWith("MayFlash")) {
+                    // Pseudo keywords, only print Reminder
+                    sbLong.append(inst.getReminderText());
+                } else if (keyword.contains("At the beginning of your upkeep, ")
+                        && keyword.contains(" unless you pay")) {
+                    sbLong.append(keyword).append("\r\n");
+                } else if (keyword.startsWith("Strive") || keyword.startsWith("Escalate")
+                        || keyword.startsWith("ETBReplacement")
+                        || keyword.startsWith("CantBeBlockedBy ")
+                        || keyword.startsWith("Affinity")
+                        || keyword.equals("CARDNAME enters the battlefield tapped.")
+                        || keyword.startsWith("UpkeepCost")) {
+                } else if (keyword.equals("Provoke") || keyword.equals("Ingest") || keyword.equals("Unleash")
+                        || keyword.equals("Soulbond") || keyword.equals("Partner") || keyword.equals("Retrace")
+                        || keyword.equals("Living Weapon") || keyword.equals("Myriad") || keyword.equals("Exploit")
+                        || keyword.equals("Changeling") || keyword.equals("Delve")
+                        || keyword.equals("Split second")
+                        || keyword.equals("Suspend") // for the ones without amounnt
+                        || keyword.equals("Hideaway") || keyword.equals("Ascend")
+                        || keyword.equals("Totem armor") || keyword.equals("Battle cry")
+                        || keyword.equals("Devoid") || keyword.equals("Riot")){
+                    sbLong.append(keyword + " (" + inst.getReminderText() + ")");
+                } else if (keyword.startsWith("Partner:")) {
                     final String[] k = keyword.split(":");
-                    sbLong.append(k.length > 1 ? k[1] + ".\r\n" : "");
+                    sbLong.append("Partner with " + k[1] + " (" + inst.getReminderText() + ")");
+                } else if (keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst") || keyword.startsWith("Dredge")
+                        || keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift") || keyword.startsWith("Bushido")
+                        || keyword.startsWith("Crew") || keyword.startsWith("Tribute") || keyword.startsWith("Absorb")
+                        || keyword.startsWith("Graft") || keyword.startsWith("Fading") || keyword.startsWith("Vanishing")
+                        || keyword.startsWith("Afterlife")
+                        || keyword.startsWith("Afflict") || keyword.startsWith ("Poisonous") || keyword.startsWith("Rampage")
+                        || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Devour")) {
+                    final String[] k = keyword.split(":");
+                    sbLong.append(k[0] + " " + k[1] + " (" + inst.getReminderText() + ")");
+                } else if (keyword.contains("Haunt")) {
+                    sb.append("\r\nHaunt (");
+                    if (isCreature()) {
+                        sb.append("When this creature dies, exile it haunting target creature.");
+                    } else {
+                        sb.append("When this spell card is put into a graveyard after resolving, ");
+                        sb.append("exile it haunting target creature.");
+                    }
+                    sb.append(")");
+                } else if (keyword.equals("Convoke") || keyword.equals("Dethrone")|| keyword.equals("Fear")
+                         || keyword.equals("Melee") || keyword.equals("Improvise")|| keyword.equals("Shroud")
+                         || keyword.equals("Banding") || keyword.equals("Intimidate")|| keyword.equals("Evolve")
+                         || keyword.equals("Exalted") || keyword.equals("Extort")|| keyword.equals("Flanking")
+                         || keyword.equals("Horsemanship") || keyword.equals("Infect")|| keyword.equals("Persist")
+                         || keyword.equals("Phasing") || keyword.equals("Shadow")|| keyword.equals("Skulk")
+                         || keyword.equals("Undying") || keyword.equals("Wither") || keyword.equals("Cascade")
+                         || keyword.equals("Mentor")) {
+                    if (sb.length() != 0) {
+                        sb.append("\r\n");
+                    }
+                    sb.append(keyword + " (" + inst.getReminderText() + ")");
+                } else if (keyword.endsWith(" offering")) {
+                    String offeringType = keyword.split(" ")[0];
+                    if (sb.length() != 0) {
+                        sb.append("\r\n");
+                    }
+                    sbLong.append(keyword);
+                    sbLong.append(" (" + Keyword.getInstance("Offering:"+ offeringType).getReminderText() + ")");
+                } else if (keyword.startsWith("Equip") || keyword.startsWith("Fortify") || keyword.startsWith("Outlast")
+                        || keyword.startsWith("Unearth") || keyword.startsWith("Scavenge") || keyword.startsWith("Spectacle")
+                        || keyword.startsWith("Evoke") || keyword.startsWith("Bestow") || keyword.startsWith("Dash")
+                        || keyword.startsWith("Surge") || keyword.startsWith("Transmute") || keyword.startsWith("Suspend")
+                        || keyword.equals("Undaunted") || keyword.startsWith("Monstrosity") || keyword.startsWith("Embalm")
+                        || keyword.startsWith("Level up") || keyword.equals("Prowess") || keyword.startsWith("Eternalize")
+                        || keyword.startsWith("Reinforce") || keyword.startsWith("Champion") || keyword.startsWith("Prowl")
+                        || keyword.startsWith("Amplify")  || keyword.startsWith("Ninjutsu") || keyword.startsWith("Adapt")
+                        || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")) {
+                    // keyword parsing takes care of adding a proper description
+                } else if (keyword.startsWith("CantBeBlockedByAmount")) {
+                    sbLong.append(getName()).append(" can't be blocked ");
+                    sbLong.append(getTextForKwCantBeBlockedByAmount(keyword));
+                } else if (keyword.startsWith("CantBlock")) {
+                    sbLong.append(getName()).append(" can't block ");
+                    if (keyword.contains("CardUID")) {
+                        sbLong.append("CardID (").append(Integer.valueOf(keyword.split("CantBlockCardUID_")[1])).append(")");
+                    } else {
+                        final String[] k = keyword.split(":");
+                        sbLong.append(k.length > 1 ? k[1] + ".\r\n" : "");
+                    }
+                } else if (keyword.equals("Unblockable")) {
+                    sbLong.append(getName()).append(" can't be blocked.\r\n");
+                } else if (keyword.equals("AllNonLegendaryCreatureNames")) {
+                    sbLong.append(getName()).append(" has all names of nonlegendary creature cards.\r\n");
+                } else if (keyword.startsWith("IfReach")) {
+                    String k[] = keyword.split(":");
+                    sbLong.append(getName()).append(" can block ")
+                    .append(CardType.getPluralType(k[1]))
+                    .append(" as though it had reach.\r\n");
+                } else if (keyword.startsWith("MayEffectFromOpeningHand")) {
+                    final String[] k = keyword.split(":");
+                    // need to get SpellDescription from Svar
+                    String desc = AbilityFactory.getMapParams(getSVar(k[1])).get("SpellDescription");
+                    sbLong.append(desc);
+                } else if (keyword.startsWith("Saga")) {
+                    String k[] = keyword.split(":");
+                    String desc = "(As this Saga enters and after your draw step, "
+                        + " add a lore counter. Sacrifice after " + Strings.repeat("I", Integer.valueOf(k[1])) + ".)";
+                    sbLong.append(desc);
                 }
-            } else if (keyword.equals("Unblockable")) {
-                sbLong.append(getName()).append(" can't be blocked.\r\n");
-            } else if (keyword.equals("AllNonLegendaryCreatureNames")) {
-                sbLong.append(getName()).append(" has all names of nonlegendary creature cards.\r\n");
-            } else if (keyword.startsWith("IfReach")) {
-                String k[] = keyword.split(":");
-                sbLong.append(getName()).append(" can block ")
-                .append(CardType.getPluralType(k[1]))
-                .append(" as though it had reach.\r\n");
-            } else if (keyword.startsWith("MayEffectFromOpeningHand")) {
-                final String[] k = keyword.split(":");
-                // need to get SpellDescription from Svar
-                String desc = AbilityFactory.getMapParams(getSVar(k[1])).get("SpellDescription");
-                sbLong.append(desc);
-            } else if (keyword.startsWith("Saga")) {
-                String k[] = keyword.split(":");
-                String desc = "(As this Saga enters and after your draw step, "
-                    + " add a lore counter. Sacrifice after " + Strings.repeat("I", Integer.valueOf(k[1])) + ".)";
-                sbLong.append(desc);
-            }
-            else {
-                if ((i != 0) && (sb.length() != 0)) {
-                    sb.append(", ");
+                else {
+                    if ((i != 0) && (sb.length() != 0)) {
+                        sb.append(", ");
+                    }
+                    sb.append(keyword);
                 }
-                sb.append(keyword);
-            }
-            if (sbLong.length() > 0) {
-                sbLong.append("\r\n");
-            }
+                if (sbLong.length() > 0) {
+                    sbLong.append("\r\n");
+                }
 
-            i++;
+                i++;
+            } catch (Exception e) {
+                String msg = "Card:keywordToText: crash in Keyword parsing";
+                Sentry.getContext().recordBreadcrumb(
+                    new BreadcrumbBuilder().setMessage(msg)
+                    .withData("Card", this.getName()).withData("Keyword", keyword).build()
+                );
+
+                throw new RuntimeException("Error in Card " + this.getName() + " with Keyword " + keyword, e);
+            }
         }
         if (sb.length() > 0) {
             sb.append("\r\n");
