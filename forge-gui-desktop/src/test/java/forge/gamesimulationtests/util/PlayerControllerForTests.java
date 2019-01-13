@@ -678,4 +678,10 @@ public class PlayerControllerForTests extends PlayerController {
         return null;
     }
 
+    @Override
+    public boolean confirmMulliganScry(Player p) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
 }

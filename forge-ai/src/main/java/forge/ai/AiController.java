@@ -1209,8 +1209,7 @@ public class AiController {
     }
 
     public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message) {
-        ApiType api = (sa == null ) ? null : sa.getApi();
-	if ( api == null  &&  mode == PlayerActionConfirmMode.Scry ) return true;  // special hack for mulligan
+        ApiType api = sa.getApi();
 
         // Abilities without api may also use this routine, However they should provide a unique mode value ?? How could this work?
         if (api == null) {

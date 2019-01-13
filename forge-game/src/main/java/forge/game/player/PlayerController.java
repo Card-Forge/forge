@@ -260,4 +260,6 @@ public abstract class PlayerController {
     }
 
     public abstract List<OptionalCostValue> chooseOptionalCosts(SpellAbility choosen, List<OptionalCostValue> optionalCostValues);
+
+    public abstract boolean confirmMulliganScry(final Player p);
 }

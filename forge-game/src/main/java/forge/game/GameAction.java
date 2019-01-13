@@ -1714,15 +1714,18 @@ public class GameAction {
         } while (!allKept);
 
         //Vancouver Mulligan as a scry with the decisions inside
-	ArrayList<Player> scryers = new ArrayList<Player>();
+	List<Player> scryers = Lists.newArrayList();
         for(Player p : whoCanMulligan) {
             if (p.getStartingHandSize() > p.getZone(ZoneType.Hand).size()) {
                 scryers.add(p);
             }
         }
-	if ( scryers.size() > 0 ) { 
-	    scry(scryers,1,true,null);
-	}
+
+        for(Player p : scryers) {
+            if (p.getController().confirmMulliganScry(p)) {
+                scry(ImmutableList.of(p), 1, null);
+            }
+        }
     }
 
     private void runPreOpeningHandActions(final Player first) {
@@ -1830,51 +1833,56 @@ public class GameAction {
     // 701.17c If multiple players scry at once, each of those players looks at the top cards of their library
     // at the same time. Those players decide in APNAP order (see rule 101.4) where to put those
     // cards, then those cards move at the same time.
-    public void scry(List<Player>players,int numScry, boolean isOptional, SpellAbility cause) {
-	if ( numScry == 0 ) { return; }
-	// reveal the top N library cards to the player (only)
-	if ( players.size() > 1 ) { // no real need to separate out the look if there is only one player scrying
-	    for ( final Player p : players ) {
-		final CardCollection topN = new CardCollection(p.getCardsIn(ZoneType.Library, numScry));
-		p.getGame().getAction().revealTo(topN,p);
-	    }
-	}
-	// make the decisions
-	ArrayList<ImmutablePair<CardCollection, CardCollection>> decisions = 
-	    new ArrayList<ImmutablePair<CardCollection, CardCollection>>();
-	for ( final Player p : players ) {
-	    if (isOptional && !p.getController().confirmAction(cause, PlayerActionConfirmMode.Scry, "Do you want to scry?")) {
-		decisions.add(new ImmutablePair<CardCollection, CardCollection>(new CardCollection(),new CardCollection()));
-	    } else {
-		final CardCollection topN = new CardCollection(p.getCardsIn(ZoneType.Library, numScry));
-		ImmutablePair<CardCollection, CardCollection> decision = p.getController().arrangeForScry(topN);
-		decisions.add(decision);
-		int numToTop = decision.getLeft()==null ? 0 : decision.getLeft().size();
-		int numToBottom = decision.getRight()==null ? 0 : decision.getRight().size();
-		p.getGame().fireEvent(new GameEventScry(p, numToTop, numToBottom)); // publicize the decision
-	    }
-	}
-	// do the moves after all the decisions (maybe not necesssary, but let's do it the official way)
-	for ( int i = 0; i<players.size(); i++ ) { // no good iterate simultaneously in Java
-	    final Player p = players.get(i);
-	    final CardCollection toTop = decisions.get(i).getLeft();
-	    final CardCollection toBottom = decisions.get(i).getRight();
-	    if (toTop != null) {
-		Collections.reverse(toTop); // reverse to get the correct order
-		for(Card c : toTop) {
-		    p.getGame().getAction().moveToLibrary(c, cause, null);
-		}
-	    }
-	    if (toBottom != null) {
-		for(Card c : toBottom) {
-		    p.getGame().getAction().moveToBottomOfLibrary(c, cause, null);
-		}
-	    }
-	    // set up triggers (but not actually do them until later)
-	    final Map<String, Object> runParams = Maps.newHashMap();
-	    runParams.put("Player", p);
-	    p.getGame().getTriggerHandler().runTrigger(TriggerType.Scry, runParams, false);
-	}
-    }
+    public void scry(List<Player> players, int numScry, SpellAbility cause) {
+        if (numScry == 0) {
+            return;
+        }
+        // reveal the top N library cards to the player (only)
+        // no real need to separate out the look if
+        // there is only one player scrying
+        if (players.size() > 1) {
+            for (final Player p : players) {
+                final CardCollection topN = new CardCollection(p.getCardsIn(ZoneType.Library, numScry));
+                revealTo(topN, p);
+            }
+        }
+        // make the decisions
+        List<ImmutablePair<CardCollection, CardCollection>> decisions = Lists.newArrayList();
+        for (final Player p : players) {
+            final CardCollection topN = new CardCollection(p.getCardsIn(ZoneType.Library, numScry));
+            ImmutablePair<CardCollection, CardCollection> decision = p.getController().arrangeForScry(topN);
+            decisions.add(decision);
+            int numToTop = decision.getLeft() == null ? 0 : decision.getLeft().size();
+            int numToBottom = decision.getRight() == null ? 0 : decision.getRight().size();
 
+            // publicize the decision
+            game.fireEvent(new GameEventScry(p, numToTop, numToBottom));
+        }
+        // do the moves after all the decisions (maybe not necesssary, but let's
+        // do it the official way)
+        for (int i = 0; i < players.size(); i++) {
+            // no good iterate simultaneously in Java
+            final Player p = players.get(i);
+            final CardCollection toTop = decisions.get(i).getLeft();
+            final CardCollection toBottom = decisions.get(i).getRight();
+            if (toTop != null) {
+                Collections.reverse(toTop); // reverse to get the correct order
+                for (Card c : toTop) {
+                    moveToLibrary(c, cause, null);
+                }
+            }
+            if (toBottom != null) {
+                for (Card c : toBottom) {
+                    moveToBottomOfLibrary(c, cause, null);
+                }
+            }
+
+            if (cause != null) {
+                // set up triggers (but not actually do them until later)
+                final Map<String, Object> runParams = Maps.newHashMap();
+                runParams.put("Player", p);
+                game.getTriggerHandler().runTrigger(TriggerType.Scry, runParams, false);
+            }
+        }
+    }
 }

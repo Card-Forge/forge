@@ -2889,4 +2889,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 optionalCost, choosen.getHostCard().getView());
     }
 
+    @Override
+    public boolean confirmMulliganScry(Player p) {
+        return InputConfirm.confirm(this, (SpellAbility)null, "Do you want to scry?");
+    }
+
 }
