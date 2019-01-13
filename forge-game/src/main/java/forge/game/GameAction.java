@@ -52,7 +52,6 @@ import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
 
 import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * Methods for common actions performed during a game.
@@ -1674,12 +1673,8 @@ public class GameAction {
 
         // rule 103.4b
         boolean isMultiPlayer = game.getPlayers().size() > 2;
-        int mulliganDelta = isMultiPlayer ? 0 : 1;
-
         // https://magic.wizards.com/en/articles/archive/feature/checking-brawl-2018-07-09
-        if (game.getRules().hasAppliedVariant(GameType.Brawl) && !isMultiPlayer){
-            mulliganDelta = 0;
-        }
+        int mulliganDelta = isMultiPlayer || game.getRules().hasAppliedVariant(GameType.Brawl) ? 0 : 1;
 
         boolean allKept;
         do {
@@ -1695,32 +1690,17 @@ public class GameAction {
                 }
 
                 if (toMulligan != null && !toMulligan.isEmpty()) {
-                    if (!isCommander) {
-                        toMulligan = new CardCollection(p.getCardsIn(ZoneType.Hand));
-                        for (final Card c : toMulligan) {
-                            moveToLibrary(c, null, null);
-                        }
-                        try {
-                            Thread.sleep(100); //delay for a tiny bit to give UI a chance catch up
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        p.shuffle(null);
-                        p.drawCards(handSize[i] - mulliganDelta);
-                    } else {
-                        List<Card> toExile = Lists.newArrayList(toMulligan);
-                        for (Card c : toExile) {
-                            exile(c, null, null);
-                        }
-                        exiledDuringMulligans.addAll(p, toExile);
-                        try {
-                            Thread.sleep(100); //delay for a tiny bit to give UI a chance catch up
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        p.drawCards(toExile.size() - 1);
+                    toMulligan = new CardCollection(p.getCardsIn(ZoneType.Hand));
+                    for (final Card c : toMulligan) {
+                        moveToLibrary(c, null, null);
                     }
-
+                    try {
+                        Thread.sleep(100); //delay for a tiny bit to give UI a chance catch up
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    p.shuffle(null);
+                    p.drawCards(handSize[i] - mulliganDelta);
                     p.onMulliganned();
                     allKept = false;
                 } else {
@@ -1730,17 +1710,6 @@ public class GameAction {
             }
             mulliganDelta++;
         } while (!allKept);
-
-        if (isCommander) {
-            for (Entry<Player, Collection<Card>> kv : exiledDuringMulligans.entrySet()) {
-                Player p = kv.getKey();
-                Collection<Card> cc = kv.getValue();
-                for (Card c : cc) {
-                    moveToLibrary(c, null, null);
-                }
-                p.shuffle(null);
-            }
-        }
 
         //Vancouver Mulligan
         for(Player p : whoCanMulligan) {
