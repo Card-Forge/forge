@@ -142,7 +142,7 @@ c_gold.jpg                             https://downloads.cardforge.org/images/to
 c_x_x_horror.jpg                       https://downloads.cardforge.org/images/tokens/c_x_x_horror.jpg
 c_x_x_riptide_replicator.jpg           https://downloads.cardforge.org/images/tokens/c_x_x_riptide_replicator.jpg
 c_x_y_twin.jpg                         https://downloads.cardforge.org/images/tokens/c_x_y_twin.jpg
-carnivore.jpg                    https://downloads.cardforge.org/images/tokens/carnivore.jpg
+carnivore_ema.jpg                    https://downloads.cardforge.org/images/tokens/carnivore_ema.jpg
 g_0_1_plant.jpg                        https://downloads.cardforge.org/images/tokens/g_0_1_plant.jpg
 g_0_1_plant_ddp.jpg                        https://downloads.cardforge.org/images/tokens/g_0_1_plant_ddp.jpg
 g_0_1_plant_ddr.jpg                        https://downloads.cardforge.org/images/tokens/g_0_1_plant_ddr.jpg
@@ -155,7 +155,7 @@ g_1_1_elf.jpg                          https://downloads.cardforge.org/images/to
 g_1_1_elf_warrior.jpg                  https://downloads.cardforge.org/images/tokens/g_1_1_elf_warrior.jpg
 g_1_1_elf_warrior_shm.jpg              https://downloads.cardforge.org/images/tokens/g_1_1_elf_warrior_shm.jpg
 g_1_1_hippo_all.jpg                        https://downloads.cardforge.org/images/tokens/g_1_1_hippo_all.jpg
-g_1_1_hound.jpg                        https://downloads.cardforge.org/images/tokens/g_1_1_hound.jpg
+g_1_1_hound_tmp.jpg                        https://downloads.cardforge.org/images/tokens/g_1_1_hound_tmp.jpg
 g_1_1_insect.jpg                       https://downloads.cardforge.org/images/tokens/g_1_1_insect.jpg
 g_1_1_insect_deathtouch.jpg            https://downloads.cardforge.org/images/tokens/g_1_1_insect_deathtouch.jpg
 g_1_1_insect_infect.jpg                https://downloads.cardforge.org/images/tokens/g_1_1_insect_infect.jpg
@@ -488,7 +488,7 @@ w_2_2_knight_vigilance2_dom.jpg                       https://downloads.cardforg
 w_2_2_knight_vigilance_ori.jpg                       https://downloads.cardforge.org/images/tokens/w_2_2_knight_vigilance_ori.jpg
 w_2_2_knight_rtr.jpg                   https://downloads.cardforge.org/images/tokens/w_2_2_knight_rtr.jpg
 w_2_2_knight_vigilance_rtr.jpg                       https://downloads.cardforge.org/images/tokens/w_2_2_knight_vigilance_rtr.jpg
-w_2_2_reflection.jpg                   https://downloads.cardforge.org/images/tokens/w_2_2_reflection.jpg
+w_2_2_reflection_vma.jpg                   https://downloads.cardforge.org/images/tokens/w_2_2_reflection_vma.jpg
 w_3_3_bird.jpg                         https://downloads.cardforge.org/images/tokens/w_3_3_bird.jpg
 w_3_3_spirit.jpg                       https://downloads.cardforge.org/images/tokens/w_3_3_spirit.jpg
 w_4_4_angel.jpg                        https://downloads.cardforge.org/images/tokens/w_4_4_angel.jpg
