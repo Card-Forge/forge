@@ -25,7 +25,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import forge.GameCommand;
 import forge.card.*;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
@@ -2099,7 +2098,7 @@ public class CardFactoryUtil {
         String abStr = "DB$ PutCounter | Defined$ Self | CounterType$ " + splitkw[1]
                 + " | ETB$ True | CounterNum$ " + amount;
 
-        if (!StringUtils.isNumeric(amount)) {
+        if (!StringUtils.isNumeric(amount) && card.hasSVar(amount)) {
             abStr += " | References$ " + amount;
         }
 
@@ -3452,12 +3451,10 @@ public class CardFactoryUtil {
             sb.append(m);
             sb.append(" (").append(inst.getReminderText()).append(")");
 
-            if ("Sunburst".equals(m)) {
-                card.setSVar(m, "Count$Converge");
-            }
-
             final ReplacementEffect re = makeEtbCounter(sb.toString(), card, intrinsic);
-
+            if ("Sunburst".equals(m)) {
+                re.getOverridingAbility().setSVar("Sunburst", "Count$Converge");
+            }
             inst.addReplacement(re);
         } else if (keyword.equals("Rebound")) {
             String repeffstr = "Event$ Moved | ValidCard$ Card.Self+wasCastFromHand+YouOwn+YouCtrl "
@@ -3511,6 +3508,19 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Saga")) {
             String sb = "etbCounter:LORE:1:no Condition:no desc";
             final ReplacementEffect re = makeEtbCounter(sb, card, intrinsic);
+
+            inst.addReplacement(re);
+        }  else if (keyword.equals("Sunburst")) {
+            // Rule 702.43a If this object is entering the battlefield as a creature,
+            // ignoring any type-changing effects that would affect it
+            CounterType t = card.isCreature() ? CounterType.P1P1 : CounterType.CHARGE;
+
+            StringBuilder sb = new StringBuilder("etbCounter:");
+            sb.append(t).append(":Sunburst:no Condition:");
+            sb.append("Sunburst (").append(inst.getReminderText()).append(")");
+
+            final ReplacementEffect re = makeEtbCounter(sb.toString(), card, intrinsic);
+            re.getOverridingAbility().setSVar("Sunburst", "Count$Converge");
 
             inst.addReplacement(re);
         } else if (keyword.equals("Totem armor")) {
@@ -4182,18 +4192,17 @@ public class CardFactoryUtil {
 
             String effect = "AB$ PutCounter | Cost$ " + manacost + " ExileFromGrave<1/CARDNAME> " +
                     "| ActivationZone$ Graveyard | ValidTgts$ Creature | CounterType$ P1P1 " +
-                    "| CounterNum$ ScavengeX | SorcerySpeed$ True | References$ ScavengeX " + 
+                    "| CounterNum$ ScavengeX | SorcerySpeed$ True " +
                     "| PrecostDesc$ Scavenge | CostDesc$ " + ManaCostParser.parse(manacost) + 
                     "| SpellDescription$ (" + inst.getReminderText() + ")";
 
-            card.setSVar("ScavengeX", "Count$CardPower");
-
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setSVar("ScavengeX", "Count$CardPower");
             sa.setIntrinsic(intrinsic);
 
             sa.setTemporary(!intrinsic);
             inst.addSpellAbility(sa);
-            
+
         } else if (keyword.startsWith("Spectacle")) {
             final String[] k = keyword.split(":");
             final Cost cost = new Cost(k[1], false);
@@ -4211,28 +4220,6 @@ public class CardFactoryUtil {
             newSA.setTemporary(!intrinsic);
             inst.addSpellAbility(newSA);
 
-        } else if (keyword.equals("Sunburst") && intrinsic) {
-            final GameCommand sunburstCIP = new GameCommand() {
-                private static final long serialVersionUID = 1489845860231758299L;
-
-                @Override
-                public void run() {
-                    CounterType t = card.isCreature() ? CounterType.P1P1 : CounterType.CHARGE; 
-                    card.addCounter(t, card.getSunburstValue(), card.getController(), true);
-                }
-            };
-
-            final GameCommand sunburstLP = new GameCommand() {
-                private static final long serialVersionUID = -7564420917490677427L;
-
-                @Override
-                public void run() {
-                    card.setSunburstValue(0);
-                }
-            };
-
-            card.addComesIntoPlayCommand(sunburstCIP);
-            card.addLeavesPlayCommand(sunburstLP);
         } else if (keyword.startsWith("Surge")) {
             final String[] k = keyword.split(":");
             final Cost surgeCost = new Cost(k[1], false);

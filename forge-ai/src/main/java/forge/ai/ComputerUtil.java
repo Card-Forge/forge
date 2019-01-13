@@ -2847,7 +2847,7 @@ public class ComputerUtil {
         repParams.put("Source", source);
 
         List<ReplacementEffect> list = player.getGame().getReplacementHandler().getReplacementList(repParams,
-                ReplacementLayer.None);
+                ReplacementLayer.Other);
 
         if (Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "NoLife"))) {
             return false;
@@ -2878,7 +2878,7 @@ public class ComputerUtil {
         repParams.put("Source", source);
 
         List<ReplacementEffect> list = player.getGame().getReplacementHandler().getReplacementList(repParams,
-                ReplacementLayer.None);
+                ReplacementLayer.Other);
 
         if (Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "NoLife"))) {
             // no life gain is not negative
