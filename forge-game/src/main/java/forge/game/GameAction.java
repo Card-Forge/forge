@@ -31,7 +31,6 @@ import forge.game.event.*;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
-import forge.game.player.PlayerActionConfirmMode;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementResult;
 import forge.game.spellability.AbilitySub;
