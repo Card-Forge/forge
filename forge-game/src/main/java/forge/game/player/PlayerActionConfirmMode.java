@@ -15,6 +15,6 @@ public enum PlayerActionConfirmMode {
     OptionalChoose,
     Tribute,
     // Ripple;
-    Scry;
+    ;
     
 }
