@@ -17,25 +17,19 @@
  */
 package forge.view.arcane;
 
-import java.awt.Component;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.ScrollPaneConstants;
 import javax.swing.Timer;
 
 import forge.Singletons;
-import forge.assets.FSkinProp;
 import forge.game.card.CardView;
-import forge.game.player.PlayerView;
-import forge.game.zone.ZoneType;
 import forge.gui.framework.SDisplayUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
@@ -43,194 +37,58 @@ import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPane;
-import forge.toolbox.FSkin;
 import forge.toolbox.MouseTriggerEvent;
-import forge.util.collect.FCollectionView;
-import forge.util.Lang;
+//import forge.util.collect.FCollectionView;
 import forge.view.FDialog;
 import forge.view.FFrame;
 
-public class FloatingCardArea extends CardArea {
-    private static final long serialVersionUID = 1927906492186378596L;
+// show some cards in a new window
+public abstract class FloatingCardArea extends CardArea {
 
-    private static final String COORD_DELIM = ","; 
+    protected static final String COORD_DELIM = ","; 
+    protected static final ForgePreferences prefs = FModel.getPreferences();
 
-    private static final ForgePreferences prefs = FModel.getPreferences();
-    private static final Map<Integer, FloatingCardArea> floatingAreas = new HashMap<Integer, FloatingCardArea>();
+    protected String title;
+    protected FPref locPref;
+    protected boolean hasBeenShown, locLoaded;
 
-    private static int getKey(final PlayerView player, final ZoneType zone) {
-        return 40 * player.getId() + zone.hashCode();
-    }
-    public static void showOrHide(final CMatchUI matchUI, final PlayerView player, final ZoneType zone) {
-        final FloatingCardArea cardArea = _init(matchUI, player, zone);
-        cardArea.showOrHideWindow();
-    }
-    public static void show(final CMatchUI matchUI, final PlayerView player, final ZoneType zone) {
-        final FloatingCardArea cardArea = _init(matchUI, player, zone);
-        cardArea.showWindow(); 
-    }
-    public static void hide(final CMatchUI matchUI, final PlayerView player, final ZoneType zone) {
-        final FloatingCardArea cardArea = _init(matchUI, player, zone);
-        cardArea.hideWindow(); 
-    }
-    private static FloatingCardArea _init(final CMatchUI matchUI, final PlayerView player, final ZoneType zone) {
-        final int key = getKey(player, zone);
-        FloatingCardArea cardArea = floatingAreas.get(key);
-        if (cardArea == null || cardArea.getMatchUI() != matchUI) {
-            cardArea = new FloatingCardArea(matchUI, player, zone);
-            floatingAreas.put(key, cardArea);
-        } else {
-            cardArea.setPlayer(player); //ensure player is updated if needed
-        }
-        return cardArea;
-    }
-    public static CardPanel getCardPanel(final CMatchUI matchUI, final CardView card) {
-        final FloatingCardArea window = _init(matchUI, card.getController(), card.getZone());
-        return window.getCardPanel(card.getId());
-    }
-    public static void refresh(final PlayerView player, final ZoneType zone) {
-        FloatingCardArea cardArea = floatingAreas.get(getKey(player, zone));
-        if (cardArea != null) {
-            cardArea.setPlayer(player); //ensure player is updated if needed
-            cardArea.refresh();
-        }
+    protected abstract FDialog getWindow();
+    protected abstract Iterable<CardView> getCards();
 
-        //refresh flashback zone when graveyard, library, or exile zones updated
-        switch (zone) {
-        case Graveyard:
-        case Library:
-        case Exile:
-            refresh(player, ZoneType.Flashback);
-            break;
-        default:
-            break;
-        }
+    protected FloatingCardArea(final CMatchUI matchUI) {
+	this(matchUI, new FScrollPane(false, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER));
     }
-    public static void closeAll() {
-        for (final FloatingCardArea cardArea : floatingAreas.values()) {
-            cardArea.window.setVisible(false);
-        }
-        floatingAreas.clear();
+    protected FloatingCardArea(final CMatchUI matchUI, final FScrollPane scrollPane) {
+	super(matchUI, scrollPane);
     }
 
-    private final ZoneType zone;
-    private PlayerView player;
-    private String title;
-    private FPref locPref;
-    private boolean hasBeenShown, locLoaded;
-
-    @SuppressWarnings("serial")
-    private final FDialog window = new FDialog(false, true, "0") {
-        @Override
-        public void setLocationRelativeTo(Component c) {
-            //don't change location this way if dialog has already been shown or location was loaded from preferences
-            if (hasBeenShown || locLoaded) { return; }
-            super.setLocationRelativeTo(c);
-        }
-
-        @Override
-        public void setVisible(boolean b0) {
-            if (isVisible() == b0) { return; }
-            if (!b0 && hasBeenShown && locPref != null) {
-                //update preference before hiding window, as otherwise its location will be 0,0
-                prefs.setPref(locPref,
-                        getX() + COORD_DELIM + getY() + COORD_DELIM +
-                        getWidth() + COORD_DELIM + getHeight());
-                //don't call prefs.save(), instead allowing them to be saved when match ends
-            }
-            super.setVisible(b0);
-            if (b0) {
-                refresh();
-                hasBeenShown = true;
-            }
-        }
-    };
-
-    private FloatingCardArea(final CMatchUI matchUI, final PlayerView player0, final ZoneType zone0) {
-        super(matchUI, new FScrollPane(false, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER));
-        window.add(getScrollPane(), "grow, push");
-        getScrollPane().setViewportView(this);
-        setOpaque(false);
-        switch (zone0) {
-        case Exile:
-            window.setIconImage(FSkin.getImage(FSkinProp.IMG_ZONE_EXILE));
-            break;
-        case Graveyard:
-            window.setIconImage(FSkin.getImage(FSkinProp.IMG_ZONE_GRAVEYARD));
-            break;
-        case Hand:
-            window.setIconImage(FSkin.getImage(FSkinProp.IMG_ZONE_HAND));
-            break;
-        case Library:
-            window.setIconImage(FSkin.getImage(FSkinProp.IMG_ZONE_LIBRARY));
-            break;
-        case Flashback:
-            window.setIconImage(FSkin.getImage(FSkinProp.IMG_ZONE_FLASHBACK));
-            break;
-        default:
-            locPref = null;
-            break;
-        }
-        zone = zone0;
-        setPlayer(player0);
-        setVertical(true);
-    }
-
-    private void setPlayer(PlayerView player0) {
-        if (player == player0) { return; }
-        player = player0;
-        title = Lang.getPossessedObject(player0.getName(), zone.name()) + " (%d)";
-
-        boolean isAi = player0.isAI();
-        switch (zone) {
-        case Exile:
-            locPref = isAi ? FPref.ZONE_LOC_AI_EXILE : FPref.ZONE_LOC_HUMAN_EXILE;
-            break;
-        case Graveyard:
-            locPref = isAi ? FPref.ZONE_LOC_AI_GRAVEYARD : FPref.ZONE_LOC_HUMAN_GRAVEYARD;
-            break;
-        case Hand:
-            locPref = isAi ? FPref.ZONE_LOC_AI_HAND : FPref.ZONE_LOC_HUMAN_HAND;
-            break;
-        case Library:
-            locPref = isAi ? FPref.ZONE_LOC_AI_LIBRARY : FPref.ZONE_LOC_HUMAN_LIBRARY;
-            break;
-        case Flashback:
-            locPref = isAi ? FPref.ZONE_LOC_AI_FLASHBACK : FPref.ZONE_LOC_HUMAN_FLASHBACK;
-            break;
-        default:
-            locPref = null;
-            break;
-        }
-    }
-
-    private void showWindow() {
+    protected void showWindow() {
         onShow();
-        window.setFocusableWindowState(false); // should probably do this earlier
-        window.setVisible(true);
+        getWindow().setFocusableWindowState(false); // should probably do this earlier
+        getWindow().setVisible(true);
     }
-    private void hideWindow() {
+    protected void hideWindow() {
         onShow();
-        window.setFocusableWindowState(false); // should probably do this earlier
-        window.setVisible(false);
+        getWindow().setFocusableWindowState(false); // should probably do this earlier
+        getWindow().setVisible(false);
     }
-    private void showOrHideWindow() {
+    protected void showOrHideWindow() {
         onShow();
-        window.setFocusableWindowState(false); // should probably do this earlier
-        window.setVisible(!window.isVisible());
+        getWindow().setFocusableWindowState(false); // should probably do this earlier
+        getWindow().setVisible(!getWindow().isVisible());
     }
-    private void onShow() {
+    protected void onShow() {
         if (!hasBeenShown) {
             loadLocation();
-            window.getTitleBar().addMouseListener(new FMouseAdapter() {
+            getWindow().getTitleBar().addMouseListener(new FMouseAdapter() {
                 @Override public final void onLeftDoubleClick(final MouseEvent e) {
-                    window.setVisible(false); //hide window if titlebar double-clicked
+                    getWindow().setVisible(false); //hide window if titlebar double-clicked
                 }
             });
         }
     }
 
-    private void loadLocation() {
+    protected void loadLocation() {
         if (locPref != null) {
             String value = prefs.getPref(locPref);
             if (value.length() > 0) {
@@ -264,7 +122,7 @@ public class FloatingCardArea extends CardArea {
                                 y = screenBounds.y;
                             }
                         }
-                        window.setBounds(x, y, w, h);
+                        getWindow().setBounds(x, y, w, h);
                         locLoaded = true;
                         return;
                     }
@@ -278,14 +136,17 @@ public class FloatingCardArea extends CardArea {
         }
         //fallback default size
         FFrame mainFrame = Singletons.getView().getFrame();
-        window.setSize(mainFrame.getWidth() / 5, mainFrame.getHeight() / 2);
+        getWindow().setSize(mainFrame.getWidth() / 5, mainFrame.getHeight() / 2);
     }
 
-    private void refresh() {
-        if (!window.isVisible()) { return; } //don't refresh while window hidden
+    protected void refresh() {
+        if (!getWindow().isVisible()) { return; } //don't refresh while window hidden
+	doRefresh();
+    }
 
+    protected void doRefresh() {
         List<CardPanel> cardPanels = new ArrayList<CardPanel>();
-        FCollectionView<CardView> cards = player.getCards(zone);
+        Iterable<CardView> cards = getCards();
         if (cards != null) {
             for (final CardView card : cards) {
                 CardPanel cardPanel = getCardPanel(card.getId());
@@ -302,27 +163,26 @@ public class FloatingCardArea extends CardArea {
 
         boolean hadCardPanels = getCardPanels().size() > 0;
         setCardPanels(cardPanels);
-        window.setTitle(String.format(title, cardPanels.size()));
+        getWindow().setTitle(String.format(title, cardPanels.size()));
 
         //if window had cards and now doesn't, hide window
         //(e.g. cast final card from Flashback zone)
         if (hadCardPanels && cardPanels.size() == 0) {
-            window.setVisible(false);
+            getWindow().setVisible(false);
         }
     }
 
     @Override
     public void doLayout() {
-        if (window.isResizing()) {
+        if (getWindow().isResizing()) {
             //delay layout slightly to reduce flicker during window resize
             layoutTimer.restart();
-        }
-        else {
+        } else {
             finishDoLayout();
         }
     }
 
-    private final Timer layoutTimer = new Timer(250, new ActionListener() {
+    protected final Timer layoutTimer = new Timer(250, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent arg0) {
             layoutTimer.stop();
@@ -330,7 +190,7 @@ public class FloatingCardArea extends CardArea {
         }
     });
 
-    private void finishDoLayout() {
+    protected void finishDoLayout() {
         super.doLayout();
     }
 

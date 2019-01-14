@@ -290,12 +290,9 @@ public class GuiChoose {
 	final Callable<List<Card>> callable = new Callable<List<Card>>() {
 		@Override 
 		public List<Card> call() throws Exception {
-		    ListCardArea tempArea = new ListCardArea(gui,title,cards,manipulable,toTop,toBottom,toAnywhere);
+		    ListCardArea tempArea = ListCardArea.show(gui,title,cards,manipulable,toTop,toBottom,toAnywhere);
 		    //		tempArea.pack();
-		    // window?		tempArea.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		    tempArea.show();
-		    //		tempArea.dispose();
-		    //try { Thread.sleep(1000); } catch(InterruptedException ex) { }
 		    final List<Card> cardList = tempArea.getCardList();
 		    return cardList;
 		}
