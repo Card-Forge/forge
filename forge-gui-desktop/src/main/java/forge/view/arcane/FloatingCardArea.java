@@ -200,12 +200,12 @@ public abstract class FloatingCardArea extends CardArea {
         super.mouseOver(panel, evt);
     }
     @Override
-    public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
+    public void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
         getMatchUI().getGameController().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
         super.mouseLeftClicked(panel, evt);
     }
     @Override
-    public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
+    public void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
         getMatchUI().getGameController().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
         super.mouseRightClicked(panel, evt);
     }

@@ -232,4 +232,29 @@ public class ListCardArea extends FloatingCardArea {
         //}
     }
 
+    @Override
+    public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
+	final Card clickCard = panelToCard(panel);
+	if (moveableCards.contains(clickCard) && toTop) {
+	    synchronized (cardList) {
+		cardList.remove(clickCard);
+		cardList.add(0,clickCard);
+	    }
+	    refresh();
+	}
+        super.mouseLeftClicked(panel, evt);
+    }
+    @Override
+    public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
+	final Card clickCard = panelToCard(panel);
+	if (moveableCards.contains(clickCard) && toBottom ) {
+	    synchronized (cardList) {
+		cardList.remove(clickCard);
+		cardList.add(clickCard);
+	    }
+	    refresh();
+	}
+        super.mouseRightClicked(panel, evt);
+    }
+
 }
