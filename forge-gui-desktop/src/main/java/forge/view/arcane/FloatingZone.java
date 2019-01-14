@@ -18,44 +18,26 @@
 package forge.view.arcane;
 
 import java.awt.Component;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.swing.ScrollPaneConstants;
-import javax.swing.Timer;
 
-import forge.Singletons;
 import forge.assets.FSkinProp;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
-import forge.gui.framework.SDisplayUtil;
-import forge.model.FModel;
-import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
-import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
-import forge.toolbox.MouseTriggerEvent;
 //import forge.util.collect.FCollectionView;
 import forge.util.Lang;
 import forge.view.FDialog;
-import forge.view.FFrame;
 
-public class FloatingZone extends CardArea {
+public class FloatingZone extends FloatingCardArea {
     private static final long serialVersionUID = 1927906492186378596L;
 
-    private static final String COORD_DELIM = ","; 
-
-    private static final ForgePreferences prefs = FModel.getPreferences();
     private static final Map<Integer, FloatingZone> floatingAreas = new HashMap<Integer, FloatingZone>();
 
     private static int getKey(final PlayerView player, final ZoneType zone) {
@@ -115,9 +97,6 @@ public class FloatingZone extends CardArea {
 
     private final ZoneType zone;
     private PlayerView player;
-    private String title;
-    private FPref locPref;
-    private boolean hasBeenShown, locLoaded;
 
     @SuppressWarnings("serial")
     private final FDialog window = new FDialog(false, true, "0") {
@@ -145,6 +124,13 @@ public class FloatingZone extends CardArea {
             }
         }
     };
+
+    protected FDialog getWindow() {
+	return window;
+    }
+    protected Iterable<CardView> getCards() {
+	return player.getCards(zone);
+    }
 
     private FloatingZone(final CMatchUI matchUI, final PlayerView player0, final ZoneType zone0) {
         super(matchUI, new FScrollPane(false, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER));
@@ -204,149 +190,4 @@ public class FloatingZone extends CardArea {
         }
     }
 
-    private void showWindow() {
-        onShow();
-        window.setFocusableWindowState(false); // should probably do this earlier
-        window.setVisible(true);
-    }
-    private void hideWindow() {
-        onShow();
-        window.setFocusableWindowState(false); // should probably do this earlier
-        window.setVisible(false);
-    }
-    private void showOrHideWindow() {
-        onShow();
-        window.setFocusableWindowState(false); // should probably do this earlier
-        window.setVisible(!window.isVisible());
-    }
-    private void onShow() {
-        if (!hasBeenShown) {
-            loadLocation();
-            window.getTitleBar().addMouseListener(new FMouseAdapter() {
-                @Override public final void onLeftDoubleClick(final MouseEvent e) {
-                    window.setVisible(false); //hide window if titlebar double-clicked
-                }
-            });
-        }
-    }
-
-    private void loadLocation() {
-        if (locPref != null) {
-            String value = prefs.getPref(locPref);
-            if (value.length() > 0) {
-                String[] coords = value.split(COORD_DELIM);
-                if (coords.length == 4) {
-                    try {
-                        int x = Integer.parseInt(coords[0]);
-                        int y = Integer.parseInt(coords[1]);
-                        int w = Integer.parseInt(coords[2]);
-                        int h = Integer.parseInt(coords[3]);
-    
-                        //ensure the window is accessible
-                        int centerX = x + w / 2;
-                        int centerY = y + h / 2;
-                        Rectangle screenBounds = SDisplayUtil.getScreenBoundsForPoint(new Point(centerX, centerY)); 
-                        if (centerX < screenBounds.x) {
-                            x = screenBounds.x;
-                        }
-                        else if (centerX > screenBounds.x + screenBounds.width) {
-                            x = screenBounds.x + screenBounds.width - w;
-                            if (x < screenBounds.x) {
-                                x = screenBounds.x;
-                            }
-                        }
-                        if (centerY < screenBounds.y) {
-                            y = screenBounds.y;
-                        }
-                        else if (centerY > screenBounds.y + screenBounds.height) {
-                            y = screenBounds.y + screenBounds.height - h;
-                            if (y < screenBounds.y) {
-                                y = screenBounds.y;
-                            }
-                        }
-                        window.setBounds(x, y, w, h);
-                        locLoaded = true;
-                        return;
-                    }
-                    catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                }
-                prefs.setPref(locPref, ""); //clear value if invalid
-                prefs.save();
-            }
-        }
-        //fallback default size
-        FFrame mainFrame = Singletons.getView().getFrame();
-        window.setSize(mainFrame.getWidth() / 5, mainFrame.getHeight() / 2);
-    }
-
-    private void refresh() {
-        if (!window.isVisible()) { return; } //don't refresh while window hidden
-
-        List<CardPanel> cardPanels = new ArrayList<CardPanel>();
-        Iterable<CardView> cards = player.getCards(zone);
-        if (cards != null) {
-            for (final CardView card : cards) {
-                CardPanel cardPanel = getCardPanel(card.getId());
-                if (cardPanel == null) {
-                    cardPanel = new CardPanel(getMatchUI(), card);
-                    cardPanel.setDisplayEnabled(true);
-                }
-                else {
-                    cardPanel.setCard(card); //ensure card view updated
-                }
-                cardPanels.add(cardPanel);
-            }
-        }
-
-        boolean hadCardPanels = getCardPanels().size() > 0;
-        setCardPanels(cardPanels);
-        window.setTitle(String.format(title, cardPanels.size()));
-
-        //if window had cards and now doesn't, hide window
-        //(e.g. cast final card from Flashback zone)
-        if (hadCardPanels && cardPanels.size() == 0) {
-            window.setVisible(false);
-        }
-    }
-
-    @Override
-    public void doLayout() {
-        if (window.isResizing()) {
-            //delay layout slightly to reduce flicker during window resize
-            layoutTimer.restart();
-        }
-        else {
-            finishDoLayout();
-        }
-    }
-
-    private final Timer layoutTimer = new Timer(250, new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent arg0) {
-            layoutTimer.stop();
-            finishDoLayout();
-        }
-    });
-
-    private void finishDoLayout() {
-        super.doLayout();
-    }
-
-    @Override
-    public final void mouseOver(final CardPanel panel, final MouseEvent evt) {
-        getMatchUI().setCard(panel.getCard(), evt.isShiftDown());
-        super.mouseOver(panel, evt);
-    }
-    @Override
-    public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
-        getMatchUI().getGameController().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
-        super.mouseLeftClicked(panel, evt);
-    }
-    @Override
-    public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
-        getMatchUI().getGameController().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt));
-        super.mouseRightClicked(panel, evt);
-    }
 }
