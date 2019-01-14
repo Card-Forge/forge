@@ -41,8 +41,8 @@ import forge.view.FDialog;
 
 import forge.toolbox.FButton;
 
-// Show a list of cards in a new window
-// Allow moves of the visible cards to top, to bottom, or anywhere
+// Show a list of cards in a new window, containing the moveable cards
+// Allow moves of the moveable cards to top, to bottom, or anywhere
 // Return a list of cards with the results of the moves
 // Really should have a difference between visible cards and moveable cards,
 // but that would require consirable changes to card panels and elsewhere
@@ -59,26 +59,32 @@ public class ListCardArea extends FloatingCardArea {
 	super(matchUI);
 	window.add(getScrollPane(),"grow, push");
 	getScrollPane().setViewportView(this);
+	doneButton = new FButton("Done");
+	doneButton.addActionListener(new ActionListener() {
+		@Override public void actionPerformed(ActionEvent e) { window.setVisible(false); } 
+	    });
+	window.add(doneButton,BorderLayout.SOUTH);
 	setOpaque(false);
     }
 
     public static ListCardArea show(final CMatchUI matchUI, final String title0, final List<Card> cardList0, final List<Card> moveableCards0, final boolean toTop0, final boolean toBottom0, final boolean toAnywhere0) {
 	if (storedArea==null) {
 	    storedArea = new ListCardArea(matchUI);
-	    doneButton = new FButton("Done");
-	    doneButton.addActionListener(new ActionListener() {
-		    @Override public void actionPerformed(ActionEvent e) { window.setVisible(false); } 
-		});
-	    window.add(doneButton,BorderLayout.SOUTH);
 	}
-	cardList = new ArrayList<Card>(cardList0);  // this is modified - pfps - is there a better way?
-	moveableCards = new ArrayList<Card>(moveableCards0);
+	cardList = new ArrayList<Card>(cardList0);
+	moveableCards = new ArrayList<Card>();  // make sure moveable cards are in cardlist
+	for ( Card card : moveableCards0 ) {
+	    if ( cardList.contains(card) ) {
+		moveableCards.add(card);
+	    }
+	}
 	storedArea.title = title0;
 	storedArea.toTop = toTop0;
 	storedArea.toBottom = toBottom0;
 	storedArea.toAnywhere = toAnywhere0;
         storedArea.setDragEnabled(true);
 	storedArea.setVertical(true);
+	storedArea.doRefresh();
         storedArea.showWindow(); 
 	return storedArea;
     }
@@ -118,7 +124,7 @@ public class ListCardArea extends FloatingCardArea {
     }
 
     @SuppressWarnings("serial")
-    protected static final FDialog window = new FDialog(true, true, "0") {
+    protected final FDialog window = new FDialog(true, true, "0") {
         @Override
         public void setLocationRelativeTo(Component c) {
             super.setLocationRelativeTo(c);
@@ -126,6 +132,13 @@ public class ListCardArea extends FloatingCardArea {
         @Override
         public void setVisible(boolean b0) {
             if (isVisible() == b0) { return; }
+            if (!b0 && hasBeenShown && locPref != null) {
+                //update preference before hiding window, as otherwise its location will be 0,0
+                prefs.setPref(locPref,
+                        getX() + COORD_DELIM + getY() + COORD_DELIM +
+                        getWidth() + COORD_DELIM + getHeight());
+                //don't call prefs.save(), instead allowing them to be saved when match ends
+            }
             if (b0) {
 		storedArea.refresh();
             }
@@ -216,10 +229,10 @@ public class ListCardArea extends FloatingCardArea {
 	refresh();
     }
 
-    @Override
-    protected void refresh() {
-	doRefresh();
-    }
+    //    @Override
+    //    protected void refresh() {
+    //	doRefresh();
+    //    }
 
     @Override
     public void doLayout() {
@@ -232,15 +245,26 @@ public class ListCardArea extends FloatingCardArea {
         //}
     }
 
+    // move to beginning of list if allowable else to beginning of bottom if allowable
     @Override
     public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
 	final Card clickCard = panelToCard(panel);
-	if (moveableCards.contains(clickCard) && toTop) {
-	    synchronized (cardList) {
-		cardList.remove(clickCard);
-		cardList.add(0,clickCard);
+	if ( moveableCards.contains(clickCard) ) {
+	    if ( toTop || toBottom ) {
+		synchronized (cardList) {
+		    cardList.remove(clickCard);
+		    int position;
+		    if ( toTop ) {
+			position = 0 ;
+		    } else { // to beginning of bottom
+			for ( position = cardList.size() ; 
+			      position>0 && moveableCards.contains(cardList.get(position-1)) ; 
+			      position-- );
+		    }
+		    cardList.add(position,clickCard);
+		}
+		refresh();
 	    }
-	    refresh();
 	}
         super.mouseLeftClicked(panel, evt);
     }
@@ -248,11 +272,21 @@ public class ListCardArea extends FloatingCardArea {
     public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
 	final Card clickCard = panelToCard(panel);
 	if (moveableCards.contains(clickCard) && toBottom ) {
-	    synchronized (cardList) {
-		cardList.remove(clickCard);
-		cardList.add(clickCard);
+	    if ( toTop || toBottom ) {
+		synchronized (cardList) {
+		    cardList.remove(clickCard);
+		    int position;
+		    if ( toBottom ) {
+			position = cardList.size() ;
+		    } else { // to end of top
+			for ( position = 0 ;
+			      position<cardList.size() && moveableCards.contains(cardList.get(position)) ;
+			      position++ );
+		    }
+		    cardList.add(position,clickCard);
+		}
+		refresh();
 	    }
-	    refresh();
 	}
         super.mouseRightClicked(panel, evt);
     }
