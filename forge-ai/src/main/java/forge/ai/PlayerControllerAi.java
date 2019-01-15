@@ -1164,4 +1164,10 @@ public class PlayerControllerAi extends PlayerController {
 
         return chosenOptCosts;
     }
+
+    @Override
+    public boolean confirmMulliganScry(Player p) {
+        // Always true?
+        return true;
+    }
 }

@@ -1211,7 +1211,7 @@ public class AiController {
     public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         ApiType api = sa.getApi();
 
-        // Abilities without api may also use this routine, However they should provide a unique mode value
+        // Abilities without api may also use this routine, However they should provide a unique mode value ?? How could this work?
         if (api == null) {
             String exMsg = String.format("AI confirmAction does not know what to decide about %s mode (api is null).",
                     mode);

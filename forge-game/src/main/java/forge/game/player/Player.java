@@ -1262,42 +1262,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return drawCards(1);
     }
 
-    public void scry(final int numScry, SpellAbility cause) {
-        final CardCollection topN = new CardCollection(this.getCardsIn(ZoneType.Library, numScry));
-
-        if (topN.isEmpty()) {
-            return;
-        }
-
-        final ImmutablePair<CardCollection, CardCollection> lists = getController().arrangeForScry(topN);
-        final CardCollection toTop = lists.getLeft();
-        final CardCollection toBottom = lists.getRight();
-
-        int numToBottom = 0;
-        int numToTop = 0;
-
-        if (toBottom != null) {
-            for(Card c : toBottom) {
-                getGame().getAction().moveToBottomOfLibrary(c, cause, null);
-                numToBottom++;
-            }
-        }
-
-        if (toTop != null) {
-            Collections.reverse(toTop); // the last card in list will become topmost in library, have to revert thus.
-            for(Card c : toTop) {
-                getGame().getAction().moveToLibrary(c, cause, null);
-                numToTop++;
-            }
-        }
-
-        getGame().fireEvent(new GameEventScry(this, numToTop, numToBottom));
-
-        final Map<String, Object> runParams = Maps.newHashMap();
-        runParams.put("Player", this);
-        getGame().getTriggerHandler().runTrigger(TriggerType.Scry, runParams, false);
-    }
-
     public void surveil(int num, SpellAbility cause) {
 
         final Map<String, Object> repParams = Maps.newHashMap();

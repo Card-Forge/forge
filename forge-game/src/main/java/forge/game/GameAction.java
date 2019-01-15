@@ -50,6 +50,7 @@ import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.*;
 
@@ -1711,10 +1712,17 @@ public class GameAction {
             mulliganDelta++;
         } while (!allKept);
 
-        //Vancouver Mulligan
+        //Vancouver Mulligan as a scry with the decisions inside
+	List<Player> scryers = Lists.newArrayList();
         for(Player p : whoCanMulligan) {
             if (p.getStartingHandSize() > p.getZone(ZoneType.Hand).size()) {
-                p.scry(1, null);
+                scryers.add(p);
+            }
+        }
+
+        for(Player p : scryers) {
+            if (p.getController().confirmMulliganScry(p)) {
+                scry(ImmutableList.of(p), 1, null);
             }
         }
     }
@@ -1811,5 +1819,69 @@ public class GameAction {
         final Map<String, Object> runParams = Maps.newHashMap();
         runParams.put("Player", p);
         game.getTriggerHandler().runTrigger(TriggerType.BecomeMonarch, runParams, false);
+    }
+
+    // Make scry an action function so that it can be used for mulligans (with a null cause)
+    // Assumes that the list of players is in APNAP order, which should be the case
+    // Optional here as well to handle the way that mulligans do the choice
+    // 701.17. Scry
+    // 701.17a To “scry N” means to look at the top N cards of your library, then put any number of them
+    // on the bottom of your library in any order and the rest on top of your library in any order.
+    // 701.17b If a player is instructed to scry 0, no scry event occurs. Abilities that trigger whenever a
+    // player scries won’t trigger.
+    // 701.17c If multiple players scry at once, each of those players looks at the top cards of their library
+    // at the same time. Those players decide in APNAP order (see rule 101.4) where to put those
+    // cards, then those cards move at the same time.
+    public void scry(List<Player> players, int numScry, SpellAbility cause) {
+        if (numScry == 0) {
+            return;
+        }
+        // reveal the top N library cards to the player (only)
+        // no real need to separate out the look if
+        // there is only one player scrying
+        if (players.size() > 1) {
+            for (final Player p : players) {
+                final CardCollection topN = new CardCollection(p.getCardsIn(ZoneType.Library, numScry));
+                revealTo(topN, p);
+            }
+        }
+        // make the decisions
+        List<ImmutablePair<CardCollection, CardCollection>> decisions = Lists.newArrayList();
+        for (final Player p : players) {
+            final CardCollection topN = new CardCollection(p.getCardsIn(ZoneType.Library, numScry));
+            ImmutablePair<CardCollection, CardCollection> decision = p.getController().arrangeForScry(topN);
+            decisions.add(decision);
+            int numToTop = decision.getLeft() == null ? 0 : decision.getLeft().size();
+            int numToBottom = decision.getRight() == null ? 0 : decision.getRight().size();
+
+            // publicize the decision
+            game.fireEvent(new GameEventScry(p, numToTop, numToBottom));
+        }
+        // do the moves after all the decisions (maybe not necesssary, but let's
+        // do it the official way)
+        for (int i = 0; i < players.size(); i++) {
+            // no good iterate simultaneously in Java
+            final Player p = players.get(i);
+            final CardCollection toTop = decisions.get(i).getLeft();
+            final CardCollection toBottom = decisions.get(i).getRight();
+            if (toTop != null) {
+                Collections.reverse(toTop); // reverse to get the correct order
+                for (Card c : toTop) {
+                    moveToLibrary(c, cause, null);
+                }
+            }
+            if (toBottom != null) {
+                for (Card c : toBottom) {
+                    moveToBottomOfLibrary(c, cause, null);
+                }
+            }
+
+            if (cause != null) {
+                // set up triggers (but not actually do them until later)
+                final Map<String, Object> runParams = Maps.newHashMap();
+                runParams.put("Player", p);
+                game.getTriggerHandler().runTrigger(TriggerType.Scry, runParams, false);
+            }
+        }
     }
 }
