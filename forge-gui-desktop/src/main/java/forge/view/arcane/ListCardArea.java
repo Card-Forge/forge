@@ -26,17 +26,9 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-//import javax.swing.ScrollPaneConstants;
-
-import forge.game.card.Card;
 import forge.game.card.CardView;
-//import forge.game.card.CardCollection;
 import forge.screens.match.CMatchUI;
 import forge.view.arcane.util.CardPanelMouseAdapter;
-//import forge.toolbox.FScrollPane;
-//import forge.util.collect.FCollectionView;
-//import forge.toolbox.MouseTriggerEvent;
-//import forge.view.FFrame;
 import forge.view.FDialog;
 
 import forge.toolbox.FButton;
@@ -48,8 +40,8 @@ import forge.toolbox.FButton;
 // but that would require consirable changes to card panels and elsewhere
 public class ListCardArea extends FloatingCardArea {
 
-    private static ArrayList<Card> cardList;
-    private static ArrayList<Card> moveableCards;
+    private static ArrayList<CardView> cardList;
+    private static ArrayList<CardView> moveableCards;
 
     private static ListCardArea storedArea;
     private static FButton doneButton;
@@ -67,13 +59,13 @@ public class ListCardArea extends FloatingCardArea {
 	setOpaque(false);
     }
 
-    public static ListCardArea show(final CMatchUI matchUI, final String title0, final List<Card> cardList0, final List<Card> moveableCards0, final boolean toTop0, final boolean toBottom0, final boolean toAnywhere0) {
+    public static ListCardArea show(final CMatchUI matchUI, final String title0, final List<CardView> cardList0, final List<CardView> moveableCards0, final boolean toTop0, final boolean toBottom0, final boolean toAnywhere0) {
 	if (storedArea==null) {
 	    storedArea = new ListCardArea(matchUI);
 	}
-	cardList = new ArrayList<Card>(cardList0);
-	moveableCards = new ArrayList<Card>();  // make sure moveable cards are in cardlist
-	for ( Card card : moveableCards0 ) {
+	cardList = new ArrayList<CardView>(cardList0);
+	moveableCards = new ArrayList<CardView>();  // make sure moveable cards are in cardlist
+	for ( CardView card : moveableCards0 ) {
 	    if ( cardList.contains(card) ) {
 		moveableCards.add(card);
 	    }
@@ -89,7 +81,7 @@ public class ListCardArea extends FloatingCardArea {
 	return storedArea;
     }
 
-    public ListCardArea(final CMatchUI matchUI, final String title0, final List<Card> cardList0, final List<Card> moveableCards0, final boolean toTop0, final boolean toBottom0, final boolean toAnywhere0) {
+    public ListCardArea(final CMatchUI matchUI, final String title0, final List<CardView> cardList0, final List<CardView> moveableCards0, final boolean toTop0, final boolean toBottom0, final boolean toAnywhere0) {
         super(matchUI);
 	window.add(getScrollPane(),"grow, push");
 	//	try { Thread.sleep(1000); } catch(InterruptedException ex) { }
@@ -100,8 +92,8 @@ public class ListCardArea extends FloatingCardArea {
 		@Override public void actionPerformed(ActionEvent e) { window.setVisible(false); } 
 	    });
 	window.add(doneButton,BorderLayout.SOUTH);
-	cardList = new ArrayList<Card>(cardList0);  // this is modified - pfps - is there a better way?
-	moveableCards = new ArrayList<Card>(moveableCards0);
+	cardList = new ArrayList<CardView>(cardList0);  // this is modified - pfps - is there a better way?
+	moveableCards = new ArrayList<CardView>(moveableCards0);
 	title = title0;
 	toTop = toTop0;
 	toBottom = toBottom0;
@@ -111,15 +103,7 @@ public class ListCardArea extends FloatingCardArea {
 	storedArea = this;
     }
 
-    protected Iterable<CardView> getCards() {
-	ArrayList<CardView> result = new ArrayList<CardView>();
-	for ( Card c : cardList ) {
-	    result.add(c.getView());
-	}
-	return result;
-    }
-
-    public List<Card> getCardList() {
+    public List<CardView> getCards() {
 	return cardList;
     }
 
@@ -185,7 +169,7 @@ public class ListCardArea extends FloatingCardArea {
     }
 
     // is this a valid place to move the card?
-    private boolean validIndex(final Card card, final int index) {
+    private boolean validIndex(final CardView card, final int index) {
 	if (toAnywhere) { return true; }
 	int oldIndex = cardList.indexOf(card);
 	boolean topMove = true;
@@ -201,21 +185,14 @@ public class ListCardArea extends FloatingCardArea {
 	return false;
     }
 
-    protected Card panelToCard(final CardPanel panel) { //pfps there must be a better way
-	final CardView panelView = panel.getCard();
-	Card panelCard = null;  
-	for ( Card card : cardList ) { if ( panelView == card.getView() ) { panelCard = card; } }
-	return panelCard;
-    }
-
     @Override
     protected boolean cardPanelDraggable(final CardPanel panel) {
-	return moveableCards.contains(panelToCard(panel));
+	return moveableCards.contains(panel.getCard());
     }
 
     private void dragEnd(final CardPanel dragPanel) {
 	// if drag is not allowed, don't move anything
-	final Card dragCard = panelToCard(dragPanel);
+	final CardView dragCard = dragPanel.getCard();
 	if (moveableCards.contains(dragCard)) {
 	    //update index of dragged card in hand zone to match new index within hand area
 	    final int index = getCardPanels().indexOf(dragPanel);
@@ -248,7 +225,7 @@ public class ListCardArea extends FloatingCardArea {
     // move to beginning of list if allowable else to beginning of bottom if allowable
     @Override
     public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
-	final Card clickCard = panelToCard(panel);
+	final CardView clickCard = panel.getCard();
 	if ( moveableCards.contains(clickCard) ) {
 	    if ( toTop || toBottom ) {
 		synchronized (cardList) {
@@ -256,7 +233,7 @@ public class ListCardArea extends FloatingCardArea {
 		    int position;
 		    if ( toTop ) {
 			position = 0 ;
-		    } else { // to beginning of bottom
+		    } else { // to beginning of bottom: warning, untested
 			for ( position = cardList.size() ; 
 			      position>0 && moveableCards.contains(cardList.get(position-1)) ; 
 			      position-- );
@@ -270,8 +247,8 @@ public class ListCardArea extends FloatingCardArea {
     }
     @Override
     public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
-	final Card clickCard = panelToCard(panel);
-	if (moveableCards.contains(clickCard) && toBottom ) {
+	final CardView clickCard = panel.getCard();
+	if (moveableCards.contains(clickCard)) {
 	    if ( toTop || toBottom ) {
 		synchronized (cardList) {
 		    cardList.remove(clickCard);

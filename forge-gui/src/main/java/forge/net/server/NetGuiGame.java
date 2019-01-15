@@ -11,7 +11,6 @@ import forge.assets.FSkinProp;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.GameView;
-import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
@@ -250,7 +249,7 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
-    public List<Card> manipulateCardList(final String title, final List<Card> cards, final List<Card> manipulable, final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
+    public List<CardView> manipulateCardList(final String title, final List<CardView> cards, final List<CardView> manipulable, final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
 	return sendAndWait(ProtocolMethod.manipulateCardList, title, cards, manipulable, toTop, toBottom, toAnywhere);
     }
 

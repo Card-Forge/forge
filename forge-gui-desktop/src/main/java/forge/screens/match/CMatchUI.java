@@ -51,7 +51,6 @@ import forge.deck.Deck;
 import forge.deckchooser.FDeckViewer;
 import forge.game.GameEntityView;
 import forge.game.GameView;
-import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.combat.CombatView;
 import forge.game.phase.PhaseType;
@@ -1005,7 +1004,7 @@ public final class CMatchUI
     }
 
     @Override
-    public List<Card> manipulateCardList(final String title, final List<Card> cards, final List<Card> manipulable, final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
+    public List<CardView> manipulateCardList(final String title, final List<CardView> cards, final List<CardView> manipulable, final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
 	return GuiChoose.manipulateCardList(this, title, cards, manipulable, toTop, toBottom, toAnywhere);
     }
 

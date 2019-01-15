@@ -285,22 +285,22 @@ public class GuiChoose {
         return null;
     }
 
-    public static List<Card> manipulateCardList(final CMatchUI gui, final String title, final List<Card> cards, final List<Card> manipulable, 
+    public static List<CardView> manipulateCardList(final CMatchUI gui, final String title, final List<CardView> cards, final List<CardView> manipulable, 
 						    final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
-	final Callable<List<Card>> callable = new Callable<List<Card>>() {
+	final Callable<List<CardView>> callable = new Callable<List<CardView>>() {
 		@Override 
-		public List<Card> call() throws Exception {
+		public List<CardView> call() throws Exception {
 		    ListCardArea tempArea = ListCardArea.show(gui,title,cards,manipulable,toTop,toBottom,toAnywhere);
 		    //		tempArea.pack();
 		    tempArea.show();
-		    final List<Card> cardList = tempArea.getCardList();
+		    final List<CardView> cardList = tempArea.getCards();
 		    return cardList;
 		}
 	    };
-	final FutureTask<List<Card>> ft = new FutureTask<List<Card>>(callable);
+	final FutureTask<List<CardView>> ft = new FutureTask<List<CardView>>(callable);
         FThreads.invokeInEdtAndWait(ft);
         try {
-	    List<Card> result = ft.get();
+	    List<CardView> result = ft.get();
 	    return result;
         } catch (final Exception e) { // we have waited enough
             e.printStackTrace();
