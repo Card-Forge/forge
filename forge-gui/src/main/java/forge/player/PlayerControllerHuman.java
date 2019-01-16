@@ -741,7 +741,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 	ArrayList<CardView> cardViews = new ArrayList<CardView>();
 	for ( Card c : cards ) { cardViews.add(c.getView()); }
 	ArrayList<CardView> manipulableViews = new ArrayList<CardView>();
-	for ( Card c : cards ) { manipulableViews.add(c.getView()); }
+	for ( Card c : manipulable ) { manipulableViews.add(c.getView()); }
 	Iterable<CardView> result = getGui().manipulateCardList(title, cardViews, manipulableViews, toTop, toBottom, toAnywhere);
 	List<Card> resultCards = new ArrayList<Card>();
 	for ( CardView cv : result ) {
