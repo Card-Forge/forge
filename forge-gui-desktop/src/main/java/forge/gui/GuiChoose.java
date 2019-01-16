@@ -285,7 +285,7 @@ public class GuiChoose {
         return null;
     }
 
-    public static List<CardView> manipulateCardList(final CMatchUI gui, final String title, final List<CardView> cards, final List<CardView> manipulable, 
+    public static List<CardView> manipulateCardList(final CMatchUI gui, final String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, 
 						    final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
 	final Callable<List<CardView>> callable = new Callable<List<CardView>>() {
 		@Override 

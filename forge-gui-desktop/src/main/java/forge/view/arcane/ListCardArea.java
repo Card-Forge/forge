@@ -59,11 +59,12 @@ public class ListCardArea extends FloatingCardArea {
 	setOpaque(false);
     }
 
-    public static ListCardArea show(final CMatchUI matchUI, final String title0, final List<CardView> cardList0, final List<CardView> moveableCards0, final boolean toTop0, final boolean toBottom0, final boolean toAnywhere0) {
+    public static ListCardArea show(final CMatchUI matchUI, final String title0, final Iterable<CardView> cardList0, final Iterable<CardView> moveableCards0, final boolean toTop0, final boolean toBottom0, final boolean toAnywhere0) {
 	if (storedArea==null) {
 	    storedArea = new ListCardArea(matchUI);
 	}
-	cardList = new ArrayList<CardView>(cardList0);
+	cardList = new ArrayList<CardView>();
+	for ( CardView cv : cardList0 ) { cardList.add(cv) ; } 
 	moveableCards = new ArrayList<CardView>();  // make sure moveable cards are in cardlist
 	for ( CardView card : moveableCards0 ) {
 	    if ( cardList.contains(card) ) {

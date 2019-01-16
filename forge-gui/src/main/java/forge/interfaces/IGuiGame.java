@@ -149,7 +149,7 @@ public interface IGuiGame {
     List<GameEntityView> chooseEntitiesForEffect(String title, List<? extends GameEntityView> optionList, int min, int max, DelayedReveal delayedReveal);
 
     // show a list of cards and allow some of them to be moved around and return new list
-    List<CardView> manipulateCardList(String title, final List<CardView> cards, final List<CardView> manipulable, boolean toTop, boolean toBottom, boolean toAnywhere);
+    List<CardView> manipulateCardList(String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, boolean toTop, boolean toBottom, boolean toAnywhere);
 
     void setCard(CardView card);
     void setPlayerAvatar(LobbyPlayer player, IHasIcon ihi);
