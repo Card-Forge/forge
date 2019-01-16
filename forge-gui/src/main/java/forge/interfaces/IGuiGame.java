@@ -157,7 +157,7 @@ public interface IGuiGame {
     void restoreOldZones(Map<PlayerView, Object> playersToRestoreZonesFor);
     void setHighlighted(PlayerView pv, boolean b);
     void setUsedToPay(CardView card, boolean value);
-    void setSelectables(final List<CardView> cards);
+    void setSelectables(final Iterable<CardView> cards);
     void clearSelectables();
 
     void awaitNextInput();

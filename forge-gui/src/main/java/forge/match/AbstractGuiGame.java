@@ -221,8 +221,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     private final Set<CardView> selectableCards = Sets.newHashSet();
-    public void setSelectables(final List<CardView> cards) {
-	selectableCards.addAll(cards);
+    public void setSelectables(final Iterable<CardView> cards) {
+	for ( CardView cv : cards ) { selectableCards.add(cv); }
     }
     public void clearSelectables() {
 	selectableCards.clear();
