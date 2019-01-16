@@ -2,9 +2,12 @@ package forge.match.input;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.ArrayList;
 
 import forge.game.GameEntity;
 import forge.game.card.Card;
+import forge.game.card.CardView;
+
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.player.PlayerControllerHuman;
@@ -31,7 +34,6 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         super(controller, Math.min(min, validChoices0.size()), Math.min(max, validChoices0.size()),sa0);
         validChoices = validChoices0;
         if (min > validChoices.size()) {
-            System.out.println(String.format("Trying to choose at least %d things from a list with only %d things!", min, validChoices.size()));
         }
 	final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
 	for (final GameEntity c : validChoices) {
@@ -44,6 +46,14 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
 		zonesShown = controller.getGui().tempShowZones(controller.getPlayer().getView(),zonesToUpdate);  
             }
 	    });
+	ArrayList<CardView> vCards = new ArrayList<CardView>();
+	for ( T c : validChoices0 ) {
+	    if ( c instanceof Card ) {
+		vCards.add(((Card)c).getView()) ;
+	    }
+	}
+	controller.getGui().setSelectables(vCards);
+	System.out.print("InputSelectEntitiesFromList "); System.out.println(vCards);
     }
     
     @Override
@@ -113,6 +123,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
     @Override
     protected void onStop() {
 	getController().getGui().hideZones(getController().getPlayer().getView(),zonesShown);  
+	getController().getGui().clearSelectables();
 	super.onStop();
     }
 }

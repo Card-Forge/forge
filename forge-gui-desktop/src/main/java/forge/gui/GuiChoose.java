@@ -287,6 +287,8 @@ public class GuiChoose {
 
     public static List<CardView> manipulateCardList(final CMatchUI gui, final String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, 
 						    final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
+	System.out.print("MCL "); System.out.println(manipulable); 
+	gui.setSelectables(manipulable);
 	final Callable<List<CardView>> callable = new Callable<List<CardView>>() {
 		@Override 
 		public List<CardView> call() throws Exception {
@@ -299,6 +301,7 @@ public class GuiChoose {
 	    };
 	final FutureTask<List<CardView>> ft = new FutureTask<List<CardView>>(callable);
         FThreads.invokeInEdtAndWait(ft);
+	gui.clearSelectables();
         try {
 	    List<CardView> result = ft.get();
 	    return result;
