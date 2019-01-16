@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - How Much Fireball Can You Channel?
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/01/095.-CFB001-1.jpg
+Goal:Win
+Turns:1
+Difficulty:Special
+Description:Start at the beginning of your first main phase, and use the classic Channel + Fireball combo to inflict as much damage as possible! Your opponent has named Aetherflux Reservoir for his Sorcerous Spyglass.
+[state]
+humanlife=1
+ailife=1
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Rewind;Snapcaster Mage;High Tide;Channel;Fireball;Baral's Expertise;Walking Ballista;Snap
+humanbattlefield=Man-o'-War;Beamsplitter Mage;Aetherflux Reservoir;Breeding Pool;Breeding Pool;Breeding Pool;Breeding Pool;Steam Vents;Steam Vents;Steam Vents;Steam Vents
+aibattlefield=Sorcerous Spyglass|NamedCard:Aetherflux Reservoir;Emrakul, the Aeons Torn;Kozilek, Butcher of Truth;Ulamog, the Infinite Gyre
