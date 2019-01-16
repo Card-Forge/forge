@@ -74,7 +74,6 @@ public abstract class GameState {
     private final Map<Card, Integer> cardToEnchantPlayerId = new HashMap<>();
     private final Map<Card, Integer> markedDamage = new HashMap<>();
     private final Map<Card, List<String>> cardToChosenClrs = new HashMap<>();
-    private final Map<Card, CardCollection> cardToChosenCards = new HashMap<>();
     private final Map<Card, String> cardToChosenType = new HashMap<>();
     private final Map<Card, List<String>> cardToRememberedId = new HashMap<>();
     private final Map<Card, List<String>> cardToImprintedId = new HashMap<>();
@@ -97,9 +96,11 @@ public abstract class GameState {
     private String precastHuman = null;
     private String precastAI = null;
 
+    private String putOnStackHuman = null;
+    private String putOnStackAI = null;
+
     private int turn = 1;
 
-    private boolean removeSummoningSickness = false;
 
     // Targeting for precast spells in a game state (mostly used by Puzzle Mode game states)
     private final int TARGET_NONE = -1; // untargeted spell (e.g. Joraga Invocation)
@@ -214,10 +215,6 @@ public abstract class GameState {
                     // Remember the IDs of imprinted cards
                     cardsReferencedByID.add(i);
                 }
-                for (Card i : card.getChosenCards()) {
-                    // Remember the IDs of chosen cards
-                    cardsReferencedByID.add(i);
-                }
                 if (game.getCombat() != null && game.getCombat().isAttacking(card)) {
                     // Remember the IDs of attacked planeswalkers
                     GameEntity def = game.getCombat().getDefenderByAttacker(card);
@@ -317,17 +314,6 @@ public abstract class GameState {
             }
             if (!c.getNamedCard().isEmpty()) {
                 newText.append("|NamedCard:").append(c.getNamedCard());
-            }
-
-            List<String> chosenCardIds = Lists.newArrayList();
-            for (Object obj : c.getChosenCards()) {
-                if (obj instanceof Card) {
-                    int id = ((Card)obj).getId();
-                    chosenCardIds.add(String.valueOf(id));
-                }
-            }
-            if (!chosenCardIds.isEmpty()) {
-                newText.append("|ChosenCards:").append(TextUtil.join(chosenCardIds, ","));
             }
 
             List<String> rememberedCardIds = Lists.newArrayList();
@@ -450,10 +436,6 @@ public abstract class GameState {
             turn = Integer.parseInt(categoryValue);
         }
 
-        else if (categoryName.equals("removesummoningsickness")) {
-            removeSummoningSickness = categoryValue.equalsIgnoreCase("true");
-        }
-
         else if (categoryName.endsWith("life")) {
             if (isHuman)
                 humanLife = Integer.parseInt(categoryValue);
@@ -535,6 +517,13 @@ public abstract class GameState {
                 precastAI = categoryValue;
         }
 
+        else if (categoryName.endsWith("putonstack")) {
+            if (isHuman)
+                putOnStackHuman = categoryValue;
+            else
+                putOnStackAI = categoryValue;
+        }
+
         else if (categoryName.endsWith("manapool")) {
             if (isHuman)
                 humanManaPool = categoryValue;
@@ -574,7 +563,6 @@ public abstract class GameState {
         cardToExiledWithId.clear();
         markedDamage.clear();
         cardToChosenClrs.clear();
-        cardToChosenCards.clear();
         cardToChosenType.clear();
         cardToScript.clear();
         cardAttackMap.clear();
@@ -614,6 +602,9 @@ public abstract class GameState {
 
         game.getTriggerHandler().setSuppressAllTriggers(false);
 
+        // SAs added to stack cause triggers to fire, as if the relevant SAs were cast
+        handleAddSAsToStack(game);
+
         // Combat only works for 1v1 matches for now (which are the only matches dev mode supports anyway)
         // Note: triggers may fire during combat declarations ("whenever X attacks, ...", etc.)
         if (newPhase == PhaseType.COMBAT_DECLARE_ATTACKERS || newPhase == PhaseType.COMBAT_DECLARE_BLOCKERS) {
@@ -626,12 +617,6 @@ public abstract class GameState {
         // Advance to a certain phase, activating all triggered abilities
         if (advPhase != null) {
             game.getPhaseHandler().devAdvanceToPhase(advPhase);
-        }
-
-        if (removeSummoningSickness) {
-            for (Card card : game.getCardsInGame()) {
-                card.setSickness(false);
-            }
         }
 
         game.getAction().checkStateEffects(true); //ensure state based effects and triggers are updated
@@ -803,6 +788,9 @@ public abstract class GameState {
     }
 
     private void executeScript(Game game, Card c, String sPtr) {
+        executeScript(game, c, sPtr, false);
+    }
+    private void executeScript(Game game, Card c, String sPtr, boolean putOnStack) {
         int tgtID = TARGET_NONE;
         if (sPtr.contains("->")) {
             String tgtDef = sPtr.substring(sPtr.lastIndexOf("->") + 2);
@@ -878,13 +866,17 @@ public abstract class GameState {
         sa.setActivatingPlayer(c.getController());
         handleScriptedTargetingForSA(game, sa, tgtID);
 
-        sa.resolve();
+        if (putOnStack) {
+            game.getStack().addAndUnfreeze(sa);
+        } else {
+            sa.resolve();
 
-        // resolve subabilities
-        SpellAbility subSa = sa.getSubAbility();
-        while (subSa != null) {
-            subSa.resolve();
-            subSa = subSa.getSubAbility();
+            // resolve subabilities
+            SpellAbility subSa = sa.getSubAbility();
+            while (subSa != null) {
+                subSa.resolve();
+                subSa = subSa.getSubAbility();
+            }
         }
     }
 
@@ -906,7 +898,28 @@ public abstract class GameState {
         }
     }
 
+    private void handleAddSAsToStack(final Game game) {
+        Player human = game.getPlayers().get(0);
+        Player ai = game.getPlayers().get(1);
+
+        if (putOnStackHuman != null) {
+            String[] spellList = TextUtil.split(putOnStackHuman, ';');
+            for (String spell : spellList) {
+                precastSpellFromCard(spell, human, game, true);
+            }
+        }
+        if (putOnStackAI != null) {
+            String[] spellList = TextUtil.split(putOnStackAI, ';');
+            for (String spell : spellList) {
+                precastSpellFromCard(spell, ai, game, true);
+            }
+        }
+    }
+
     private void precastSpellFromCard(String spellDef, final Player activator, final Game game) {
+        precastSpellFromCard(spellDef, activator, game, false);
+    }
+    private void precastSpellFromCard(String spellDef, final Player activator, final Game game, final boolean putOnStack) {
         int tgtID = TARGET_NONE;
         String scriptID = "";
 
@@ -931,7 +944,7 @@ public abstract class GameState {
         SpellAbility sa = null;
 
         if (!scriptID.isEmpty()) {
-            executeScript(game, c, scriptID);
+            executeScript(game, c, scriptID, putOnStack);
             return;
         }
 
@@ -940,7 +953,11 @@ public abstract class GameState {
 
         handleScriptedTargetingForSA(game, sa, tgtID);
 
-        sa.resolve();
+        if (putOnStack) {
+            game.getStack().addAndUnfreeze(sa);
+        } else {
+            sa.resolve();
+        }
     }
 
     private void handleMarkedDamage() {
@@ -976,12 +993,6 @@ public abstract class GameState {
             Card c = entry.getKey();
             c.setNamedCard(entry.getValue());
         }
-
-        // Chosen cards
-        for (Entry<Card, CardCollection> entry : cardToChosenCards.entrySet()) {
-            Card c = entry.getKey();
-            c.setChosenCards(entry.getValue());
-        }
     }
 
     private void handleCardAttachments() {
@@ -1016,7 +1027,7 @@ public abstract class GameState {
         String[] allCounterStrings = counterString.split(",");
         for (final String counterPair : allCounterStrings) {
             String[] pair = counterPair.split("=", 2);
-            entity.addCounter(CounterType.valueOf(pair[0]), Integer.parseInt(pair[1]), null, false, false, null);
+            entity.addCounter(CounterType.valueOf(pair[0]), Integer.parseInt(pair[1]), null, false, false);
         }
     }
 
@@ -1082,6 +1093,7 @@ public abstract class GameState {
                 zone.setCards(kv.getValue());
             }
         }
+
     }
 
     /**
@@ -1142,7 +1154,7 @@ public abstract class GameState {
                 } else if (info.startsWith("SummonSick")) {
                     c.setSickness(true);
                 } else if (info.startsWith("FaceDown")) {
-                    c.turnFaceDown(true);
+                    c.setState(CardStateName.FaceDown, true);
                     if (info.endsWith("Manifested")) {
                         c.setManifested(true);
                     }
@@ -1167,6 +1179,14 @@ public abstract class GameState {
                     // TODO: improve this for game states with more than two players
                     String tgt = info.substring(info.indexOf(':') + 1);
                     cardToEnchantPlayerId.put(c, tgt.equalsIgnoreCase("AI") ? TARGET_AI : TARGET_HUMAN);
+                } else if (info.startsWith("Owner:")) {
+                    // TODO: improve this for game states with more than two players
+                    Player human = player.getGame().getPlayers().get(0);
+                    Player ai = player.getGame().getPlayers().get(1);
+                    String owner = info.substring(info.indexOf(':') + 1);
+                    Player controller = c.getController();
+                    c.setOwner(owner.equalsIgnoreCase("AI") ? ai : human);
+                    c.setController(controller, c.getGame().getNextTimestamp());
                 } else if (info.startsWith("Ability:")) {
                     String abString = info.substring(info.indexOf(':') + 1).toLowerCase();
                     c.addSpellAbility(AbilityFactory.getAbility(abilityString.get(abString), c));
@@ -1177,13 +1197,6 @@ public abstract class GameState {
                     cardToChosenClrs.put(c, Arrays.asList(info.substring(info.indexOf(':') + 1).split(",")));
                 } else if (info.startsWith("ChosenType:")) {
                     cardToChosenType.put(c, info.substring(info.indexOf(':') + 1));
-                } else if (info.startsWith("ChosenCards:")) {
-                    CardCollection chosen = new CardCollection();
-                    String[] idlist = info.substring(info.indexOf(':') + 1).split(",");
-                    for (String id : idlist) {
-                        chosen.add(idToCard.get(Integer.parseInt(id)));
-                    }
-                    cardToChosenCards.put(c, chosen);
                 } else if (info.startsWith("NamedCard:")) {
                     cardToNamedCard.put(c, info.substring(info.indexOf(':') + 1));
                 } else if (info.startsWith("ExecuteScript:")) {
