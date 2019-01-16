@@ -51,7 +51,6 @@ import forge.deck.Deck;
 import forge.deckchooser.FDeckViewer;
 import forge.game.GameEntityView;
 import forge.game.GameView;
-import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.combat.CombatView;
 import forge.game.phase.PhaseType;
@@ -101,7 +100,7 @@ import forge.util.ITriggerEvent;
 import forge.util.gui.SOptionPane;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
-import forge.view.arcane.FloatingCardArea;
+import forge.view.arcane.FloatingZone;
 import forge.match.input.*;
 
 /**
@@ -401,7 +400,7 @@ public final class CMatchUI
                     break;
                 default:
                     updateZones = true;
-                    FloatingCardArea.refresh(owner, zone);
+                    FloatingZone.refresh(owner, zone);
                     break;
                 }
             }
@@ -437,7 +436,7 @@ public final class CMatchUI
 		    break;
 		case Hand:  // controller hand always shown
 		    if (controller != player) {
-			FloatingCardArea.show(this,player,zone);
+			FloatingZone.show(this,player,zone);
 		    }
 		    break;
 		case Library:
@@ -445,7 +444,7 @@ public final class CMatchUI
 		case Exile:
 		case Flashback:
 		case Command:
-		    FloatingCardArea.show(this,player,zone);
+		    FloatingZone.show(this,player,zone);
 		    break;
 		default:
 		    break;
@@ -469,7 +468,7 @@ public final class CMatchUI
 		case Exile:
 		case Flashback:
 		case Command:
-		    FloatingCardArea.hide(this,player,zone);
+		    FloatingZone.hide(this,player,zone);
 		    break;
 		default:
 		    break;
@@ -519,7 +518,7 @@ public final class CMatchUI
                 }
                 break;
             default:
-		FloatingCardArea.refresh(c.getController(),zone); // in case the card is visible in the zone
+		FloatingZone.refresh(c.getController(),zone); // in case the card is visible in the zone
                 break;
             }
         }
@@ -559,7 +558,7 @@ public final class CMatchUI
             layoutControl.initialize();
             layoutControl.update();
         }
-        FloatingCardArea.closeAll();
+        FloatingZone.closeAll();
     }
 
     @Override
@@ -617,7 +616,7 @@ public final class CMatchUI
         case Exile:
         case Graveyard:
         case Library:
-            return FloatingCardArea.getCardPanel(this, card);
+            return FloatingZone.getCardPanel(this, card);
         default:
             break;
         }
@@ -728,7 +727,7 @@ public final class CMatchUI
 
     @Override
     public void finishGame() {
-        FloatingCardArea.closeAll(); //ensure floating card areas cleared and closed after the game
+        FloatingZone.closeAll(); //ensure floating card areas cleared and closed after the game
         final GameView gameView = getGameView();
         if (hasLocalPlayers() || gameView.isMatchOver()) {
             new ViewWinLose(gameView, this).show();
@@ -842,7 +841,7 @@ public final class CMatchUI
             } else {
                 final ZoneType zone = hostCard.getZone();
                 if (ImmutableList.of(ZoneType.Command, ZoneType.Exile, ZoneType.Graveyard, ZoneType.Library).contains(zone)) {
-                    FloatingCardArea.show(this, hostCard.getController(), zone);
+                    FloatingZone.show(this, hostCard.getController(), zone);
                 }
                 menuParent = panel.getParent();
                 x = triggerEvent.getX();
@@ -1005,7 +1004,7 @@ public final class CMatchUI
     }
 
     @Override
-    public List<Card> manipulateCardList(final String title, final List<Card> cards, final List<Card> manipulable, final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
+    public List<CardView> manipulateCardList(final String title, final List<CardView> cards, final List<CardView> manipulable, final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
 	return GuiChoose.manipulateCardList(this, title, cards, manipulable, toTop, toBottom, toAnywhere);
     }
 

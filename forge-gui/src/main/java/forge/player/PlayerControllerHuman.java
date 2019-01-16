@@ -737,8 +737,26 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
     }
 
+    public List<Card> manipulateCardList(final String title, final List<Card> cards, final List<Card> manipulable, final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
+	ArrayList<CardView> cardViews = new ArrayList<CardView>();
+	for ( Card c : cards ) { cardViews.add(c.getView()); }
+	ArrayList<CardView> manipulableViews = new ArrayList<CardView>();
+	for ( Card c : manipulable ) { manipulableViews.add(c.getView()); }
+	Iterable<CardView> result = getGui().manipulateCardList(title, cardViews, manipulableViews, toTop, toBottom, toAnywhere);
+	List<Card> resultCards = new ArrayList<Card>();
+	for ( CardView cv : result ) {
+	    for ( Card card : cards ) { 
+		if ( cv == card.getView() ) {
+		    resultCards.add(card);
+		    break;
+		}
+	    }
+	}
+	return resultCards;
+    }
+
     public ImmutablePair<CardCollection, CardCollection> arrangeForMove(final String title, final List<Card> cards, final List<Card> manipulable, final boolean topOK, final boolean bottomOK) {
-	List<Card> result = getGui().manipulateCardList("Move cards to top or bottom of library", cards, manipulable, topOK, bottomOK, false);
+	List<Card> result = manipulateCardList("Move cards to top or bottom of library", cards, manipulable, topOK, bottomOK, false);
         CardCollection toBottom = new CardCollection();
         CardCollection toTop = new CardCollection();
 	for (int i = 0; i<cards.size() && manipulable.contains(result.get(i)) ; i++ ) {
@@ -2895,3 +2913,4 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
 }
+
