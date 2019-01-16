@@ -53,7 +53,6 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
 	    }
 	}
 	controller.getGui().setSelectables(vCards);
-	System.out.print("InputSelectEntitiesFromList "); System.out.println(vCards);
     }
     
     @Override
