@@ -33,8 +33,16 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
     public InputSelectEntitiesFromList(final PlayerControllerHuman controller, final int min, final int max, final FCollectionView<T> validChoices0, final SpellAbility sa0) {
         super(controller, Math.min(min, validChoices0.size()), Math.min(max, validChoices0.size()),sa0);
         validChoices = validChoices0;
-        if (min > validChoices.size()) {
+        if (min > validChoices.size()) {  // pfps does this really do anything useful??
+            System.out.println(String.format("Trying to choose at least %d things from a list with only %d things!", min, validChoices.size()));
         }
+	ArrayList<CardView> vCards = new ArrayList<CardView>();
+	for ( T c : validChoices0 ) {
+	    if ( c instanceof Card ) {
+		vCards.add(((Card)c).getView()) ;
+	    }
+	}
+	controller.getGui().setSelectables(vCards);
 	final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
 	for (final GameEntity c : validChoices) {
             final Zone cz = (c instanceof Card) ? ((Card) c).getZone() : null ;
@@ -46,13 +54,6 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
 		zonesShown = controller.getGui().tempShowZones(controller.getPlayer().getView(),zonesToUpdate);  
             }
 	    });
-	ArrayList<CardView> vCards = new ArrayList<CardView>();
-	for ( T c : validChoices0 ) {
-	    if ( c instanceof Card ) {
-		vCards.add(((Card)c).getView()) ;
-	    }
-	}
-	controller.getGui().setSelectables(vCards);
     }
     
     @Override
