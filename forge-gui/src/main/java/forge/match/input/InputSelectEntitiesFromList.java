@@ -46,7 +46,9 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
 	final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
 	for (final GameEntity c : validChoices) {
             final Zone cz = (c instanceof Card) ? ((Card) c).getZone() : null ;
-	    zonesToUpdate.add(new PlayerZoneUpdate(cz.getPlayer().getView(),cz.getZoneType()));
+	    if ( cz != null ) {
+		zonesToUpdate.add(new PlayerZoneUpdate(cz.getPlayer().getView(),cz.getZoneType()));
+	    }
 	}
 	FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override public void run() {
