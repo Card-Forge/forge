@@ -875,6 +875,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 clone.manaPart = new AbilityManaPart(host, mapParams);
             }
 
+            // need to copy the damage tables
+            if (damageMap != null) {
+                clone.damageMap = new CardDamageMap(damageMap);
+            }
+            if (preventMap != null) {
+                clone.preventMap = new CardDamageMap(preventMap);
+            }
+
             // clear maps for copy, the values will be added later
             clone.additionalAbilities = Maps.newHashMap();
             clone.additionalAbilityLists = Maps.newHashMap();
