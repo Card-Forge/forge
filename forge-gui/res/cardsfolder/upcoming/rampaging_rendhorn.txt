@@ -3,4 +3,5 @@ ManaCost:4 G
 Types:Creature Beast
 PT:4/4
 K:Riot
+DeckHas:Ability$Counters
 Oracle:Riot (This creature enters the battlefield with your choice of a +1/+1 counter or haste.)

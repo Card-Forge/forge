@@ -7,4 +7,5 @@ SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 A:AB$ ChangeZone | Cost$ 4 W B | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card.OppOwn | SubAbility$ DBToken | SpellDescription$ Exile target card from an opponent's graveyard. If it was a creature card, you create a 1/1 white and black Spirit creature token with flying.
 SVar:DBToken:DB$ Token | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ1 | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White,Black | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SubAbility$ DBCleanup
+DeckHas:Ability$Token
 Oracle:Creatures you control get +1/+1.\nCreatures your opponents control get -1/-1.\n{2}{W}{B}: Exile target card from an opponent's graveyard. If it was a creature card, you create a 1/1 white and black Spirit creature token with flying.

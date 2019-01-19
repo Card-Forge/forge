@@ -4,4 +4,5 @@ Types:Legendary Creature Human Advisor
 PT:2/4
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Dieharmonicon | Description$ If a creature dying causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
 S:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddKeyword$ Vigilance & Lifelink | Description$ Creature tokens you control have vigilance and lifelink.
+DeckHints:Ability$Token
 Oracle:If a creature dying causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.\nCreature tokens you control have vigilance and lifelink.
