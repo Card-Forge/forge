@@ -4,4 +4,5 @@ Types:Creature Human Rogue
 PT:1/2
 K:Deathtouch
 K:Afterlife:1
+DeckHas:Ability$Token
 Oracle:Deathtouch\nAfterlife 1 (When this creature dies, create a 1/1 white and black Spirit creature token with flying.)

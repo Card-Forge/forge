@@ -10,4 +10,5 @@ K:Trample
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
 SVar:HalfXDown:Count$xPaid/HalfDown
+DeckHas:Ability$Counters
 Oracle:When you cast this spell, you gain half X life and draw half X cards. Round down each time.\nFlying, trample\nHydroid Krasis enters the battlefield with X +1/+1 counters on it.

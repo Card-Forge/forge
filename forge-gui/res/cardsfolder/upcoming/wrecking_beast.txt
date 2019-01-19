@@ -4,4 +4,5 @@ Types:Creature Beast
 PT:6/6
 K:Riot
 K:Trample
-Oracle:Riot (This creature enters the battlefield with your choice of a +1/1+ counter or haste.)\nTrample
+DeckHas:Ability$Counters
+Oracle:Riot (This creature enters the battlefield with your choice of a +1/+1 counter or haste.)\nTrample

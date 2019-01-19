@@ -8,4 +8,5 @@ SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTg
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
+DeckHas:Ability$LifeGain
 Oracle:Flying\nWhen Carrion Imp enters the battlefield, you may exile target creature card from a graveyard. If you do, you gain 2 life.
