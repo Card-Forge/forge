@@ -1,0 +1,277 @@
+[metadata]
+Code=RNA
+Date=2019-01-25
+Name=Ravnica Allegiance
+Code2=RNA
+MciCode=rna
+Type=Expansion
+
+[cards]
+1 M Angel of Grace
+2 U Angelic Exaltation
+3 U Archway Angel
+4 C Arrester's Zeal
+5 C Bring to Trial
+6 C Civic Stalwart
+7 C Concordia Pegasus
+8 C Expose to Daylight
+9 U Forbidding Spirit
+10 C Haazda Officer
+11 R Hero of Precinct One
+12 C Impassioned Orator
+13 C Justiciar's Portal
+14 C Knight of Sorrows
+15 R Lumbering Battlement
+16 U Ministrant of Obligation
+17 C Prowling Caracal
+18 U Rally to Battle
+19 U Resolute Watchdog
+20 U Sentinel's Mark
+21 U Sky Tether
+22 R Smothering Tithe
+23 U Spirit of the Spires
+24 C Summary Judgment
+25 C Syndicate Messenger
+26 C Tenth District Veteran
+27 R Tithe Taker
+28 C Twilight Panther
+29 R Unbreakable Formation
+30 C Watchful Giant
+31 C Arrester's Admonition
+32 R Benthic Biomancer
+33 C Chillbringer
+34 C Clear the Mind
+35 U Code of Constraint
+36 C Coral Commando
+37 U Essence Capture
+38 U Eyes Everywhere
+39 C Faerie Duelist
+40 U Gateway Sneak
+41 C Humongulus
+42 R Mass Manipulation
+43 M Mesmerizing Benthid
+44 C Persistent Petitioners
+45 R Precognitive Perception
+46 C Prying Eyes
+47 U Pteramander
+48 C Quench
+49 C Sage's Row Savant
+50 C Senate Courier
+51 C Shimmer of Possibility
+52 U Skatewing Spy
+53 C Skitter Eel
+54 C Slimebind
+55 R Sphinx of Foresight
+56 U Swirling Torrent
+57 C Thought Collapse
+58 R Verity Circle
+59 U Wall of Lost Thoughts
+60 U Windstorm Drake
+61 R Awaken the Erstwhile
+62 U Bankrupt in Blood
+63 C Blade Juggler
+64 C Bladebrand
+65 U Bloodmist Infiltrator
+66 C Carrion Imp
+67 C Catacomb Crocodile
+68 U Clear the Stage
+69 C Consign to the Pit
+70 U Cry of the Carnarium
+71 C Dead Revels
+72 C Debtors' Transport
+73 U Drill Bit
+74 R Font of Agonies
+75 C Grotesque Demise
+76 R Gutterbones
+77 C Ill-Gotten Inheritance
+78 C Noxious Groodion
+79 U Orzhov Enforcer
+80 U Orzhov Racketeers
+81 R Pestilent Spirit
+82 C Plague Wight
+83 R Priest of Forgotten Gods
+84 C Rakdos Trumpeter
+85 M Spawn of Mayhem
+86 U Spire Mangler
+87 C Thirsting Shade
+88 C Undercity Scavenger
+89 C Undercity's Embrace
+90 U Vindictive Vampire
+91 C Act of Treason
+92 R Amplifire
+93 C Burn Bright
+94 C Burning-Tree Vandal
+95 U Cavalcade of Calamity
+96 U Clamor Shaman
+97 U Dagger Caster
+98 C Deface
+99 R Electrodominance
+100 C Feral Maaka
+101 U Flames of the Raze-Boar
+102 U Gates Ablaze
+103 C Ghor-Clan Wrecker
+104 C Goblin Gathering
+105 C Gravel-Hide Goblin
+106 R Immolation Shaman
+107 U Light Up the Stage
+108 R Mirror March
+109 R Rix Maadi Reveler
+110 C Rubble Reading
+111 C Rubblebelt Recluse
+112 U Rumbling Ruin
+113 C Scorchmark
+114 M Skarrgan Hellkite
+115 C Skewer the Critics
+116 U Smelt-Ward Ignus
+117 C Spear Spewer
+118 C Spikewheel Acrobat
+119 C Storm Strike
+120 U Tin Street Dodger
+121 C Axebane Beast
+122 M Biogenic Ooze
+123 U Biogenic Upgrade
+124 R End-Raze Forerunners
+125 U Enraged Ceratok
+126 U Gatebreaker Ram
+127 C Gift of Strength
+128 R Growth-Chamber Guardian
+129 U Gruul Beastmaster
+130 R Guardian Project
+131 R Incubation Druid
+132 C Mammoth Spider
+133 C Open the Gates
+134 R Rampage of the Clans
+135 C Rampaging Rendhorn
+136 U Regenesis
+137 C Root Snare
+138 C Sagittars' Volley
+139 C Saruli Caretaker
+140 C Sauroform Hybrid
+141 U Silhana Wayfinder
+142 C Steeple Creeper
+143 C Stony Strength
+144 C Sylvan Brushstrider
+145 C Territorial Boar
+146 C Titanic Brawl
+147 U Tower Defense
+148 U Trollbred Guardian
+149 U Wilderness Reclamation
+150 C Wrecking Beast
+151 R Absorb
+152 C Aeromunculus
+153 C Applied Biomancy
+154 C Azorius Knight-Arbiter
+155 U Azorius Skyguard
+156 U Basilica Bell-Haunt
+157 R Bedevil
+158 R Biomancer's Familiar
+159 U Bolrac-Clan Crusher
+160 M Captive Audience
+161 R Cindervines
+162 U Clan Guildmage
+163 U Combine Guildmage
+164 U Cult Guildmage
+165 R Deputy of Detention
+166 M Domri, Chaos Bringer
+167 M Dovin, Grand Arbiter
+168 U Dovin's Acuity
+169 M Emergency Powers
+170 R Ethereal Absolution
+171 C Final Payment
+172 U Fireblade Artist
+173 C Frenzied Arynx
+174 U Frilled Mystic
+175 U Galloping Lizrog
+176 C Get the Point
+177 C Grasping Thrull
+178 C Growth Spiral
+179 R Gruul Spellbreaker
+180 U Gyre Engineer
+181 U Hackrobat
+182 U High Alert
+183 M Hydroid Krasis
+184 C Imperious Oligarch
+185 R Judith, the Scourge Diva
+186 M Kaya, Orzhov Usurper
+187 R Kaya's Wrath
+188 U Knight of the Last Breath
+189 R Lavinia, Azorius Renegade
+190 C Lawmage's Binding
+191 U Macabre Mockery
+192 U Mortify
+193 R Nikya of the Old Ways
+194 U Pitiless Pontiff
+195 M Prime Speaker Vannifar
+196 C Rafter Demon
+197 U Rakdos Firewheeler
+198 C Rakdos Roustabout
+199 M Rakdos, the Showstopper
+200 M Ravager Wurm
+201 U Rhythm of the Wild
+202 C Rubblebelt Runner
+203 C Savage Smash
+204 U Senate Guildmage
+205 M Seraph of the Scales
+206 U Sharktocrab
+207 R Simic Ascendancy
+208 U Sphinx of New Prahv
+209 C Sphinx's Insight
+210 U Sunder Shaman
+211 U Syndicate Guildmage
+212 R Teysa Karlov
+213 R Theater of Horrors
+214 R Zegana, Utopian Speaker
+215 U Zhur-Taa Goblin
+216 C Footlight Fiend
+217 C Rubble Slinger
+218 C Scuttlegator
+219 C Senate Griffin
+220 C Vizkopa Vampire
+221 R Bedeck // Bedazzle
+222 U Carnival // Carnage
+223 U Collision // Colossus
+224 U Consecrate // Consume
+225 U Depose // Deploy
+226 U Incubation // Incongruity
+227 R Repudiate // Replicate
+228 R Revival // Revenge
+229 R Thrash // Threat
+230 R Warrant // Warden
+231 C Azorius Locket
+232 U Gate Colossus
+233 R Glass of the Guildpact
+234 C Gruul Locket
+235 U Junktroller
+236 C Orzhov Locket
+237 C Rakdos Locket
+238 U Scrabbling Claws
+239 U Screaming Shield
+240 C Simic Locket
+241 U Sphinx of the Guildpact
+242 R Tome of the Guildpact
+243 C Azorius Guildgate
+244 C Azorius Guildgate
+245 R Blood Crypt
+246 R Breeding Pool
+247 C Gateway Plaza
+248 R Godless Shrine
+249 C Gruul Guildgate
+250 C Gruul Guildgate
+251 R Hallowed Fountain
+252 C Orzhov Guildgate
+253 C Orzhov Guildgate
+254 R Plaza of Harmony
+255 C Rakdos Guildgate
+256 C Rakdos Guildgate
+257 C Simic Guildgate
+258 C Simic Guildgate
+259 R Stomping Ground
+265 M Dovin, Architect of Law
+266 C Elite Arrester
+267 R Dovin's Dismissal
+268 U Dovin's Automaton
+269 M Domri, City Smasher
+270 C Ragefire
+271 U Charging War Boar
+272 R Domri's Nodorog
+273 M The Haunt of Hightower

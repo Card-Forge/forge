@@ -1,0 +1,7 @@
+Name:Sage's Row Savant
+ManaCost:1 U
+Types:Creature Vedalken Wizard
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 2.
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+Oracle:When Sage's Row Savant enters the battlefield, scry 2.

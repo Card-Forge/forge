@@ -1,0 +1,5 @@
+Name:Feral Maaka
+ManaCost:1 R
+Types:Creature Cat
+PT:2/2
+Oracle:

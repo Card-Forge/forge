@@ -1,0 +1,9 @@
+Name:Skatewing Spy
+ManaCost:3 U
+Types:Creature Vedalken Rogue Mutant
+PT:2/3
+K:Adapt:2:5 U
+DeckHas:Ability$Counters
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddKeyword$ Flying | Description$ Each creature you control with a +1/+1 counter on it has flying.
+DeckHints:Ability$Counters
+Oracle:{5}{U}: Adapt 2. (If this creature has no +1/+1 counters on it, put two +1/+1 counters on it.)\nEach creature you control with a +1/+1 counter on it has flying.

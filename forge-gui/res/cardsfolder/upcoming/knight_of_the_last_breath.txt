@@ -1,0 +1,8 @@
+Name:Knight of the Last Breath
+ManaCost:5 W B
+Types:Creature Giant Knight
+PT:4/4
+A:AB$ Token | Cost$ 3 Sac<1/Creature.nonToken+Other/another creature> | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White,Black | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Create a 1/1 white and black Spirit creature token with flying.
+SVar:RemRandomDeck:True
+K:Afterlife:3
+Oracle:{3}, Sacrifice another nontoken creature: Create a 1/1 white and black Spirit creature token with flying.\nAfterlife 3 (When this creature dies, create three 1/1 white and black Spirit creature tokens with flying.)
