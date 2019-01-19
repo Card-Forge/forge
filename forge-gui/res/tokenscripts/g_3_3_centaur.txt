@@ -1,0 +1,6 @@
+Name:Centaur
+ManaCost:no cost
+Types:Creature Centaur
+Colors:green
+PT:3/3
+Oracle:
