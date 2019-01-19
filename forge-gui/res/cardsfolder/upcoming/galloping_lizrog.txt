@@ -8,4 +8,6 @@ SVar:TrigRemoveCounters:DB$ RemoveCounter | ValidSource$ Creature.YouCtrl+counte
 SVar:DBPutCounters:DB$PutCounter | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedNumber/Twice
+DeckHints:Ability$Counters
+DeckHas:Ability$Counters
 Oracle:Trample\nWhen Galloping Lizrog enters the battlefield, you may remove any number of +1/+1 counters from among creatures you control. If you do, put twice that many +1/+1 counters on Galloping Lizrog.
