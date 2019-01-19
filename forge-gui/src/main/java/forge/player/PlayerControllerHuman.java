@@ -156,7 +156,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         c.setMayLookAt(player, true, true);
     }
 
-    private void tempShowCards(final Iterable<Card> cards) {
+    @Override
+    public void tempShowCards(final Iterable<Card> cards) {
         if (mayLookAtAllCards) {
             return;
         } // no needed if this is set
@@ -166,7 +167,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
     }
 
-    private void endTempShowCards() {
+    @Override
+    public void endTempShowCards() {
         if (tempShownCards.isEmpty()) {
             return;
         }
@@ -479,11 +481,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         if (useSelectCardsInput(optionList)) {
-            if (delayedReveal != null) {
-                reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(),
-                        delayedReveal.getMessagePrefix());
-            }
+	    //            if (delayedReveal != null) {
+            //    reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(),
+            //            delayedReveal.getMessagePrefix());
+            //}
 	    tempShow(optionList);
+	    if (delayedReveal != null) {
+		tempShow(delayedReveal.getCards());
+	    }
             final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<T>(this, min, max,
                     optionList, sa);
             input.setCancelAllowed(true);

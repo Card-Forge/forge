@@ -194,7 +194,7 @@ public class DigEffect extends SpellAbilityEffect {
                         }
                     }
                     else {
-                        // If all the cards are valid choices, no need for a separate reveal dialog to the chooser.
+                        // If all the cards are valid choices, no need for a separate reveal dialog to the chooser. pfps??
                         if (p == chooser && destZone1ChangeNum > 1) {
                             delayedReveal = null;
                         }
@@ -238,55 +238,83 @@ public class DigEffect extends SpellAbilityEffect {
                         if (sa.hasParam("RandomOrder")) {
                             CardLists.shuffle(movedCards);
                         }
-                    }
-                    else {
+                    } else {
                         String prompt;
 
-                        if (sa.hasParam("PrimaryPrompt")) {
-                            prompt = sa.getParam("PrimaryPrompt");
-                        } else {
-                            prompt = "Choose a card to put into " + destZone1.name();
-                            if (destZone1.equals(ZoneType.Library)) {
-                                if (libraryPosition == -1) {
-                                    prompt = "Choose a card to put on the bottom of {player's} library";
-                                }
-                                else if (libraryPosition == 0) {
-                                    prompt = "Choose a card to put on top of {player's} library";
-                                }
-                            }
-                        }
+			if (!andOrValid.equals("")) { // pfps: old way - to be fixed soon 
 
-                        movedCards = new CardCollection();
-                        for (int i = 0; i < destZone1ChangeNum || (anyNumber && i < numToDig); i++) {
-                            // let user get choice
-                            Card chosen = null;
-                            if (!valid.isEmpty()) {
-                                // If we're choosing multiple cards, only need to show the reveal dialog the first time through.
-                                boolean shouldReveal = (i == 0);
-                                chosen = chooser.getController().chooseSingleEntityForEffect(valid, shouldReveal ? delayedReveal : null, sa, prompt, anyNumber || optional, p);
-                            }
-                            else {
-                                if (i == 0) {
-                                    chooser.getController().notifyOfValue(sa, null, "No valid cards");
-                                }
-                            }
+			    if (sa.hasParam("PrimaryPrompt")) {
+				prompt = sa.getParam("PrimaryPrompt");
+			    } else {
+				prompt = "Choose a card to put into " + destZone1.name();
+				if (destZone1.equals(ZoneType.Library)) {
+				    if (libraryPosition == -1) {
+					prompt = "Choose a card to put on the bottom of {player's} library";
+				    }
+				    else if (libraryPosition == 0) {
+					prompt = "Choose a card to put on top of {player's} library";
+				    }
+				}
+			    }
 
-                            if (chosen == null) {
-                                break;
-                            }
+			    movedCards = new CardCollection();
+			    for (int i = 0; i < destZone1ChangeNum || (anyNumber && i < numToDig); i++) {
+				// let user get choice
+				Card chosen = null;
+				if (!valid.isEmpty()) {
+				    // If we're choosing multiple cards, only need to show the reveal dialog the first time through.
+				    boolean shouldReveal = (i == 0);
+				    chosen = chooser.getController().chooseSingleEntityForEffect(valid, shouldReveal ? delayedReveal : null, sa, prompt, anyNumber || optional, p);
+				}
+				else {
+				    if (i == 0) {
+					chooser.getController().notifyOfValue(sa, null, "No valid cards");
+				    }
+				}
+				if (chosen == null) { break; }
+				movedCards.add(chosen);
+				valid.remove(chosen);
+				if (!andOrValid.equals("")) {
+				    andOrCards.remove(chosen);
+				    if (!chosen.isValid(andOrValid.split(","), host.getController(), host, sa)) {
+					valid = new CardCollection(andOrCards);
+				    }
+				    else if (!chosen.isValid(changeValid.split(","), host.getController(), host, sa)) {
+					valid.removeAll((Collection<?>)andOrCards);
+				    }
+				}
+			    }
 
-                            movedCards.add(chosen);
-                            valid.remove(chosen);
-                            if (!andOrValid.equals("")) {
-                                andOrCards.remove(chosen);
-                                if (!chosen.isValid(andOrValid.split(","), host.getController(), host, sa)) {
-                                    valid = new CardCollection(andOrCards);
-                                }
-                                else if (!chosen.isValid(changeValid.split(","), host.getController(), host, sa)) {
-                                    valid.removeAll((Collection<?>)andOrCards);
-                                }
-                            }
-                        }
+			} else { // pfps: new way
+
+			    if (sa.hasParam("PrimaryPrompt")) {
+				prompt = sa.getParam("PrimaryPrompt");
+			    } else {
+				prompt = "Choose card(s) to put into " + destZone1.name();
+				if (destZone1.equals(ZoneType.Library)) {
+				    if (libraryPosition == -1) {
+					prompt = "Choose card(s) to put on the bottom of {player's} library";
+				    }
+				    else if (libraryPosition == 0) {
+					prompt = "Choose card(s) to put on top of {player's} library";
+				    }
+				}
+			    }
+
+			    movedCards = new CardCollection();
+			    int min = (anyNumber || optional) ? 0 : numToDig;
+			    int max = Math.max(destZone1ChangeNum, anyNumber ?  valid.size() : 0);
+1			    if (!valid.isEmpty()) {
+				if ( p == chooser ) { // the digger can still see all the dug cards when choosing
+				    chooser.getController().tempShowCards(top);
+				}
+				List<Card> chosen = chooser.getController().chooseEntitiesForEffect(valid, min, max, delayedReveal, sa, prompt, p);
+				chooser.getController().endTempShowCards();
+				movedCards.addAll(chosen);
+			    } else {
+				chooser.getController().notifyOfValue(sa, null, "No valid cards");
+			    }
+			}
 
                         if (!changeValid.isEmpty() && !sa.hasParam("ExileFaceDown") && !sa.hasParam("NoReveal")) {
                             game.getAction().reveal(movedCards, chooser, true,
