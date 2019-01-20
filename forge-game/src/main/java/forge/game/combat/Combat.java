@@ -816,6 +816,7 @@ public class Combat {
         }
 
         preventMap.triggerPreventDamage(true);
+        preventMap.clear();
         // This was deeper before, but that resulted in the stack entry acting like before.
 
         // Run the trigger to deal combat damage once

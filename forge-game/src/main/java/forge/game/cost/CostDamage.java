@@ -74,6 +74,8 @@ public class CostDamage extends CostPart {
         preventMap.triggerPreventDamage(false);
         damageMap.triggerDamageDoneOnce(false, sa);
 
+        preventMap.clear();
+        damageMap.clear();
         return decision.c > 0;
     }
 

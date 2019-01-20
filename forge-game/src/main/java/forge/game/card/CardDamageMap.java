@@ -19,6 +19,13 @@ import forge.game.trigger.TriggerType;
 public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
     private Table<Card, GameEntity, Integer> dataMap = HashBasedTable.create();
     
+    public CardDamageMap(Table<Card, GameEntity, Integer> damageMap) {
+        this.putAll(damageMap);
+    }
+
+    public CardDamageMap() {
+    }
+
     public void triggerPreventDamage(boolean isCombat) {
         for (Map.Entry<GameEntity, Map<Card, Integer>> e : this.columnMap().entrySet()) {
             int sum = 0;

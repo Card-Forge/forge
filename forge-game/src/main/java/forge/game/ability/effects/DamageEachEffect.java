@@ -132,6 +132,9 @@ public class DamageEachEffect extends DamageBaseEffect {
         if (!usedDamageMap) {
             preventMap.triggerPreventDamage(false);
             damageMap.triggerDamageDoneOnce(false, sa);
+
+            preventMap.clear();
+            damageMap.clear();
         }
 
         replaceDying(sa);
