@@ -1,0 +1,4 @@
+Name:Incubation // Incongruity
+ManaCost:G/U // 1 G U
+Types:Sorcery // Instant
+Oracle:null

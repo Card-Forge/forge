@@ -1,0 +1,4 @@
+Name:Carnival // Carnage
+ManaCost:B/R // 2 B R
+Types:Instant // Sorcery
+Oracle:null

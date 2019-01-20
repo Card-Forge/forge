@@ -1,0 +1,4 @@
+Name:Consecrate // Consume
+ManaCost:1 W/B // 2 W B
+Types:Instant // Sorcery
+Oracle:null

@@ -1,0 +1,4 @@
+Name:Repudiate // Replicate
+ManaCost:G/U G/U // 1 G U
+Types:Instant // Sorcery
+Oracle:null

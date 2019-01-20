@@ -1,0 +1,15 @@
+Name:Kaya, Orzhov Usurper
+ManaCost:1 W B
+Types:Legendary Planeswalker Kaya
+Loyalty:3
+A:AB$ ChangeZone | Cost$ AddCounter<1/LOYALTY> | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | TargetMax$ 2 | TargetsFromSingleZone$ True | ValidTgts$ Card | TgtPrompt$ Select target card from a graveyard | Planeswalker$ True | SubAbility$ DBGainLife | SpellDescription$ Exile up to two target cards from a single graveyard. You gain 2 life if at least one creature card was exiled this way.
+SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$ValidExile
+A:AB$ ChangeZone | Cost$ -1/-1/Card.nonLand/nonland permanent with converted mana cost 1 or less> | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Choose target nonland permanent with converted mana cost 1 or less | ValidTgts$ Permanent.nonLand+cmcLE1 | SpellDescription$ Exile target nonland permanent with converted mana cost 1 or less.
+A:AB$ DealDamage | Cost$ PayLife<5/-5/Card> | ValidTgts$ Player | NumDmg$ X | References$ X | SubAbility$ DBYouGainLife | SpellDescription$ CARDNAME deals damage to target player equal to the number of cards that player owns in exile and you gain that much life.
+SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ Y | References$ Y
+SVar:X:TargetedPlayer$CardsInLibrary
+SVar:Y:PlayerCountRemembered$CardsInHand
+SVar:NonStackingEffect:True
+Oracle:[+1]: Exile up to two target cards from a single graveyard. You gain 2 life if at least one creature card was exiled this way.\n[-1]: Exile target nonland permanent with converted mana cost 1 or less.\n[-5]: Kaya, Orzhov Usurper deals damage to target player equal to the number of cards that player owns in exile and you gain that much life.

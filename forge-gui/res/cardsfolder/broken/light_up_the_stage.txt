@@ -1,0 +1,11 @@
+Name:Light Up the Stage
+ManaCost:2 R
+Types:Sorcery
+K:Defender
+K:First Strike
+A:SP$ Mill | Cost$ 2 R | Defined$ You | NumCards$ 2 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBStoreTurn | SpellDescription$ Exile the top two cards of your library. Until the end of your next turn, you may play those cards.
+SVar:DBStoreTurn:DB$ StoreSVar | SVar$ CurrentTurn | Type$ Count | Expression$ YourTurns | SubAbility$ DBMayBePlay
+SVar:DBMayBePlay:DB$ Effect | StaticAbilities$ STCommuned | Duration$ Permanent | RememberObjects$ Remembered | Triggers$ TrigDuration | SVars$ DBDuration,EndDuration,CurrentTurn | SubAbility$ DBCleanup | ExileOnMoved$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:STCommuned
+Oracle:Spectacle {R} (You may cast this spell for its spectacle cost rather than its mana cost if an opponent lost life this turn.)\nExile the top two cards of your library. Until the end of your next turn, you may play those cards.

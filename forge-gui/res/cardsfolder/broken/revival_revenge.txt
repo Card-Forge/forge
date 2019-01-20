@@ -1,0 +1,4 @@
+Name:Revival // Revenge
+ManaCost:W/B W/B // 4 W B
+Types:Sorcery // Sorcery
+Oracle:null

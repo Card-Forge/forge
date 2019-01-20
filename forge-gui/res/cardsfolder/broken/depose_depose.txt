@@ -1,0 +1,4 @@
+Name:Depose // Deploy
+ManaCost:1 W/U // 2 W U
+Types:Instant // Instant
+Oracle:null

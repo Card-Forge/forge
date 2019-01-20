@@ -1,0 +1,4 @@
+Name:Thrash // Threat
+ManaCost:R/G R/G // 2 R G
+Types:Instant // Sorcery
+Oracle:null

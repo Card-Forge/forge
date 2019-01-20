@@ -1,0 +1,4 @@
+Name:Warrant // Warden
+ManaCost:W/U W/U // 3 W U
+Types:Instant // Sorcery
+Oracle:null

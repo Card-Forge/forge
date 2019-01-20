@@ -1,0 +1,4 @@
+Name:Bedeck // Bedazzle
+ManaCost:B/R B/R // 4 B R
+Types:Instant // Instant
+Oracle:null

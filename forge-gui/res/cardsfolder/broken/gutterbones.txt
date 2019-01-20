@@ -1,0 +1,9 @@
+Name:Gutterbones
+ManaCost:B
+Types:Creature Skeleton Warrior
+PT:2/1
+K:CARDNAME enters the battlefield tapped.
+A:AB$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | OpponentTurn$ True | SubAbility$ DBEffect | SpellDescription$ Return CARDNAME from your graveyard to your hand. Activate this ability only during your turn and only if an opponent lost life this turn.
+SVar:DBEffect:DB$ Effect | CheckSVar$ X | SVarCompare$ GE1 | References$ X | StaticAbilities$ MustAttack | SubAbility$ DBCleanup
+SVar:RPrevent:Mode$ Continuous | EffectZone$ Command | Affected$ You | AddKeyword$ You only during your turn and only if an opponent lost life this turn. | Description$ Activate this ability only during your turn and only if an opponent
+Oracle:Gutterbones enters the battlefield tapped.\n{1}{B}: Return Gutterbones from your graveyard to your hand. Activate this ability only during your turn and only if an opponent lost life this turn.
