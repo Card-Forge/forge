@@ -22,6 +22,9 @@ import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.util.ITriggerEvent;
 import forge.util.TextUtil;
+import forge.player.PlayerZoneUpdate;
+import forge.player.PlayerZoneUpdates;
+import forge.FThreads;
 
 public final class InputSelectTargets extends InputSyncronizedBase {
     private final List<Card> choices;
@@ -44,6 +47,16 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         this.tgt = sa.getTargetRestrictions();
         this.sa = sa;
         this.mandatory = mandatory;
+	controller.getGui().setSelectables(CardView.getCollection(choices));
+	final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
+	for (final Card c : choices) {
+	    zonesToUpdate.add(new PlayerZoneUpdate(c.getZone().getPlayer().getView(),c.getZone().getZoneType()));
+	}
+	FThreads.invokeInEdtNowOrLater(new Runnable() {
+            @Override public void run() {
+		controller.getGui().updateZones(zonesToUpdate);  
+            }
+	    });
     }
 
     @Override
@@ -297,4 +310,12 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     private boolean hasAllTargets() {
         return tgt.isMaxTargetsChosen(sa.getHostCard(), sa) || ( tgt.getStillToDivide() == 0 && tgt.isDividedAsYouChoose());
     }
+
+    
+    @Override
+    protected void onStop() {
+	getController().getGui().clearSelectables();
+	super.onStop();
+    }
+
 }
