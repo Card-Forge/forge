@@ -367,8 +367,7 @@ public class PlayerControllerAi extends PlayerController {
                 @Override
                 public boolean apply(Card card) {
                     // need a custom predicate here since Volrath's Shapeshifter may have a different name OTB
-                    return card.getName().equals("Volrath's Shapeshifter")
-                            || card.getStates().contains(CardStateName.OriginalText) && card.getState(CardStateName.OriginalText).getName().equals("Volrath's Shapeshifter");
+                    return card.getOriginalState(CardStateName.Original).getName().equals("Volrath's Shapeshifter");
                 }
             }).isEmpty()) {
                 int bestValue = 0;

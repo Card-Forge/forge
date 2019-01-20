@@ -193,16 +193,9 @@ public class GameAction {
             }
 
             if (!c.isToken()) {
-                if (c.isCloned()) {
+                if (c.isCloned() || c.hasTextChangeState()) {
                     c.removeCloneStates();
-                    c.updateStateForView();
-                } else if (c.getStates().contains(CardStateName.OriginalText)) {
-                    // Volrath's Shapeshifter
-                    CardFactory.copyState(c, CardStateName.OriginalText, c, CardStateName.Original, false);
-                    c.setState(CardStateName.Original, false);
-                    c.clearStates(CardStateName.OriginalText, false);
-                    c.removeSVar("GainingTextFrom");
-                    c.removeSVar("GainingTextFromTimestamp");
+                    c.removeTextChangeStates();
                     c.updateStateForView();
                 }
 

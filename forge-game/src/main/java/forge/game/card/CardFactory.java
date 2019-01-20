@@ -25,6 +25,7 @@ import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.*;
 import forge.card.mana.ManaCost;
+import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -699,7 +700,7 @@ public class CardFactory {
         return wrapperAbility;
     }
 
-    public static CardCloneStates getCloneStates(final Card in, final Card out, final SpellAbility sa) {
+    public static CardCloneStates getCloneStates(final Card in, final Card out, final CardTraitBase sa) {
         final Card host = sa.getHostCard();
         final Map<String,String> origSVars = host.getSVars();
         final List<String> types = Lists.newArrayList();
@@ -732,22 +733,22 @@ public class CardFactory {
             // if something is cloning a facedown card, it only clones the
             // facedown state into original
             final CardState ret = new CardState(out, CardStateName.Original);
-            ret.copyFrom(in.getState(CardStateName.FaceDown), false);
+            ret.copyFrom(in.getState(CardStateName.FaceDown, true), false);
             result.put(CardStateName.Original, ret);
         } else if (in.isFlipCard()) {
             // if something is cloning a flip card, copy both original and
             // flipped state
             final CardState ret1 = new CardState(out, CardStateName.Original);
-            ret1.copyFrom(in.getState(CardStateName.Original), false);
+            ret1.copyFrom(in.getState(CardStateName.Original, true), false);
             result.put(CardStateName.Original, ret1);
 
             final CardState ret2 = new CardState(out, CardStateName.Flipped);
-            ret2.copyFrom(in.getState(CardStateName.Flipped), false);
+            ret2.copyFrom(in.getState(CardStateName.Flipped, true), false);
             result.put(CardStateName.Flipped, ret2);
         } else {
             // in all other cases just copy the current state to original
             final CardState ret = new CardState(out, CardStateName.Original);
-            ret.copyFrom(in.getCurrentState(), false);
+            ret.copyFrom(in.getState(in.getCurrentStateName(), true), false);
             result.put(CardStateName.Original, ret);
         }
 
@@ -800,8 +801,9 @@ public class CardFactory {
             }
 
             // SVars to add to clone
-            if (sa.hasParam("AddSVars")) {
-                for (final String s : Arrays.asList(sa.getParam("AddSVars").split(","))) {
+            if (sa.hasParam("AddSVars") || sa.hasParam("GainTextSVars")) {
+                final String str = sa.getParamOrDefault("GainTextSVars", sa.getParam("AddSVars"));
+                for (final String s : Arrays.asList(str.split(","))) {
                     if (origSVars.containsKey(s)) {
                         final String actualsVar = origSVars.get(s);
                         state.setSVar(s, actualsVar);
@@ -809,8 +811,21 @@ public class CardFactory {
                 }
             }
 
-            if (sa.hasParam("GainThisAbility")) {
-                SpellAbility root = sa.getRootAbility();
+            // abilities to add to clone
+            if (sa.hasParam("AddAbilities") || sa.hasParam("GainTextAbilities")) {
+                final String str = sa.getParamOrDefault("GainTextAbilities", sa.getParam("AddAbilities"));
+                for (final String s : Arrays.asList(str.split(","))) {
+                    if (origSVars.containsKey(s)) {
+                        final String actualAbility = origSVars.get(s);
+                        final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, out);
+                        state.addSpellAbility(grantedAbility);
+                    }
+                }
+            }
+
+
+            if (sa.hasParam("GainThisAbility") && (sa instanceof SpellAbility)) {
+                SpellAbility root = ((SpellAbility) sa).getRootAbility();
 
                 if (root.isTrigger() && root.getTrigger() != null) {
                     state.addTrigger(root.getTrigger().copy(out, false));
@@ -859,6 +874,17 @@ public class CardFactory {
             for (final SpellAbility newSa : state.getSpellAbilities()) {
                 if (newSa.getOriginalHost() == null) {
                     newSa.setOriginalHost(in);
+                }
+            }
+
+            if (sa.hasParam("GainTextOf")) {
+                state.setSetCode(originalState.getSetCode());
+                state.setRarity(originalState.getRarity());
+                state.setImageKey(originalState.getImageKey());
+
+                // need to copy the static ability
+                if ((sa instanceof StaticAbility)) {
+                    state.addStaticAbility(new StaticAbility((StaticAbility)sa, out));
                 }
             }
 

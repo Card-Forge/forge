@@ -901,10 +901,8 @@ public class Game {
         for (Card c : p.getAllCards()) {
             if (c.hasSVar("NeedsOrderedGraveyard")) {
                 return true;
-            } else if (c.getStates().contains(CardStateName.OriginalText)) {
-                if (c.getState(CardStateName.OriginalText).hasSVar("NeedsOrderedGraveyard")) {
-                    return true;
-                }
+            } else if (c.getOriginalState(CardStateName.Original).hasSVar("NeedsOrderedGraveyard")) {
+                return true;
             }
         }
         for (Card c : p.getOpponents().getCardsIn(ZoneType.Battlefield)) {

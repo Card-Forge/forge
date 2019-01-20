@@ -119,6 +119,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final Map<Long, KeywordsChange> changedCardKeywords = Maps.newTreeMap();
     private final Map<Long, CardColor> changedCardColors = Maps.newTreeMap();
     private final NavigableMap<Long, CardCloneStates> clonedStates = Maps.newTreeMap();
+    private final NavigableMap<Long, CardCloneStates> textChangeStates = Maps.newTreeMap();
 
     // changes that say "replace each instance of one [color,type] by another - timestamp is the key of maps
     private final CardChangedWords changedTextColors = new CardChangedWords();
@@ -356,7 +357,17 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         return null;
     }
+
     public CardState getState(final CardStateName state) {
+        return getState(state, false);
+    }
+    public CardState getState(final CardStateName state, boolean skipTextChange) {
+        if (!skipTextChange) {
+            CardCloneStates txtStates = getLastTextChangeState();
+            if (txtStates != null) {
+                return txtStates.get(state);
+            }
+        }
         CardCloneStates clStates = getLastClonedState();
         if (clStates == null) {
             return getOriginalState(state);
@@ -388,21 +399,31 @@ public class Card extends GameEntity implements Comparable<Card> {
         return setState(state, updateView, false);
     }
     public boolean setState(final CardStateName state, boolean updateView, boolean forceUpdate) {
-        CardCloneStates cloneStates = getLastClonedState();
+        CardCloneStates textChangeStates = getLastTextChangeState();
 
-        if (cloneStates == null) {
-            if (!states.containsKey(state)) {
-                if (state == CardStateName.FaceDown) {
-                    // The face-down state is created lazily only when needed.
-                    states.put(CardStateName.FaceDown, CardUtil.getFaceDownCharacteristic(this));
-                } else {
-                    System.out.println(getName() + " tried to switch to non-existant state \"" + state + "\"!");
-                    return false; // Nonexistant state.
+        if (textChangeStates != null) {
+            if (!textChangeStates.containsKey(state)) {
+                throw new RuntimeException(getName() + " tried to switch to non-existant text change state \"" + state + "\"!");
+                //return false; // Nonexistant state.
+            }
+        } else {
+            CardCloneStates cloneStates = getLastClonedState();
+            if (cloneStates != null) {
+                if (!cloneStates.containsKey(state)) {
+                    throw new RuntimeException(getName() + " tried to switch to non-existant cloned state \"" + state + "\"!");
+                    //return false; // Nonexistant state.
+                }
+            } else {
+                if (!states.containsKey(state)) {
+                    if (state == CardStateName.FaceDown) {
+                        // The face-down state is created lazily only when needed.
+                        states.put(CardStateName.FaceDown, CardUtil.getFaceDownCharacteristic(this));
+                    } else {
+                        System.out.println(getName() + " tried to switch to non-existant state \"" + state + "\"!");
+                        return false; // Nonexistant state.
+                    }
                 }
             }
-        } else if (!cloneStates.containsKey(state)) {
-            throw new RuntimeException(getName() + " tried to switch to non-existant cloned state \"" + state + "\"!");
-            //return false; // Nonexistant state.
         }
 
         if (state.equals(currentStateName) && !forceUpdate) {
@@ -415,7 +436,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         currentStateName = state;
-        currentState = cloneStates == null ? states.get(state) : cloneStates.get(state);
+        currentState = getState(state);
 
         // update the host for static abilities
         for (StaticAbility sa : currentState.getStaticAbilities()) {
@@ -719,13 +740,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         int threshold = (states.containsKey(CardStateName.FaceDown) ? 2 : 1);
 
         int numStates = states.keySet().size();
-
-        // OriginalText is a technical state used for backup purposes by cards
-        // like Volrath's Shapeshifter. It's not a directly playable card state,
-        // so ignore it
-        if (states.containsKey(CardStateName.OriginalText)) {
-            numStates--;
-        }
 
         return numStates > threshold;
     }
@@ -3076,6 +3090,25 @@ public class Card extends GameEntity implements Comparable<Card> {
         return false;
     }
 
+    public final boolean removeCloneState(final CardTraitBase ctb) {
+        boolean changed = false;
+        List<Long> toRemove = Lists.newArrayList();
+        for (final Entry<Long, CardCloneStates> e : clonedStates.entrySet()) {
+            if (ctb.equals(e.getValue().getSource())) {
+                toRemove.add(e.getKey());
+                changed = true;
+            }
+        }
+        for (final Long l : toRemove) {
+            clonedStates.remove(l);
+        }
+        if (changed) {
+            updateCloneState(true);
+        }
+
+        return changed;
+    }
+
     public final Card getCloner() {
         CardCloneStates clStates = getLastClonedState();
         if (clStates == null) {
@@ -3107,6 +3140,33 @@ public class Card extends GameEntity implements Comparable<Card> {
             return null;
         }
         return clonedStates.lastEntry().getValue();
+    }
+
+    public final void addTextChangeState(CardCloneStates states, final long timestamp) {
+        textChangeStates.put(timestamp, states);
+        updateCloneState(true);
+    }
+
+    public final boolean removeTextChangeState(final long timestamp) {
+        if (textChangeStates.remove(timestamp) != null) {
+            updateCloneState(true);
+            return true;
+        }
+        return false;
+    }
+    public final void removeTextChangeStates() {
+        textChangeStates.clear();
+    }
+
+    private final CardCloneStates getLastTextChangeState() {
+        if (textChangeStates.isEmpty()) {
+            return null;
+        }
+        return textChangeStates.lastEntry().getValue();
+    }
+
+    public final boolean hasTextChangeState() {
+        return !textChangeStates.isEmpty();
     }
     /**
      *

@@ -6,6 +6,7 @@ import com.google.common.collect.ForwardingMap;
 import com.google.common.collect.Maps;
 
 import forge.card.CardStateName;
+import forge.game.CardTraitBase;
 import forge.game.spellability.SpellAbility;
 
 public class CardCloneStates extends ForwardingMap<CardStateName, CardState> {
@@ -13,24 +14,24 @@ public class CardCloneStates extends ForwardingMap<CardStateName, CardState> {
     private Map<CardStateName, CardState> dataMap = Maps.newEnumMap(CardStateName.class);
 
     private Card origin = null;
-    private SpellAbility sa = null;
+    private CardTraitBase ctb = null;
 
-    public CardCloneStates(Card origin, SpellAbility sa) {
+    public CardCloneStates(Card origin, CardTraitBase sa) {
         super();
         this.origin = origin;
-        this.sa = sa;
+        this.ctb = sa;
     }
 
     public Card getOrigin() {
         return origin;
     }
 
-    public SpellAbility getSource() {
-        return sa;
+    public CardTraitBase getSource() {
+        return ctb;
     }
     
     public Card getHost() {
-        return sa.getHostCard();
+        return ctb.getHostCard();
     }
 
     @Override

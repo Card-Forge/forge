@@ -9,7 +9,6 @@ public enum CardStateName {
     Meld,
     LeftSplit,
     RightSplit,
-    OriginalText, // backup state for cards like Volrath's Shapeshifter
 
     ;
 

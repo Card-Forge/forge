@@ -19,7 +19,6 @@ package forge.game.staticability;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.game.CardTraitBase;
 import forge.game.Game;
@@ -199,23 +198,6 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
         if (hasParam("Description") && !this.isSuppressed()) {
             String desc = getParam("Description");
             desc = TextUtil.fastReplace(desc, "CARDNAME", this.hostCard.getName());
-
-            if (desc.contains("ORIGINALTEXTONLY:")) {
-                // Only display the description if the text of the card is not changed via GainTextOf.
-                desc = TextUtil.fastReplace(desc, "ORIGINALTEXTONLY:", "");
-
-                boolean hasOrigText = this.hostCard.getStates().contains(CardStateName.OriginalText);
-                if (hasOrigText) {
-                    String origName = this.hostCard.getState(CardStateName.OriginalText).getName();
-                    String curName = this.hostCard.getName();
-
-                    if (origName.equals(curName)) {
-                        return desc;
-                    } else {
-                        return TextUtil.concatNoSpace("^ Text changed (", origName, ") ^");
-                    }
-                }
-            }
 
             return desc;
         } else {
