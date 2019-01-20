@@ -1,3 +1,10 @@
+- Desktop GUI -
+The Desktop GUI can pop up zones (Library, Graveyard, etc.) allow players to select cards from them when the option UI_SELECT_FROM_CARD_DISPLAYS is set.
+The Desktop GUI outlines the selectable cards in many situations.  This is not done when playing mana costs.
+
+- Digging -
+Multi-card digging (e.g., for Genesis Wave) is done as a single multiple-card selection instead of a sequence of single-card selections.
+
 - Game Night -
 Support was added for the Game Night box set, including all 10 exclusive cards.
 
