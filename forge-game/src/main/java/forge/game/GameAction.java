@@ -841,6 +841,7 @@ public class GameAction {
 
         final Map<StaticAbility, CardCollectionView> affectedPerAbility = Maps.newHashMap();
         for (final StaticAbilityLayer layer : StaticAbilityLayer.CONTINUOUS_LAYERS) {
+            List<StaticAbility> toAdd = Lists.newArrayList();
             for (final StaticAbility stAb : staticAbilities) {
                 final CardCollectionView previouslyAffected = affectedPerAbility.get(stAb);
                 final CardCollectionView affectedHere;
@@ -852,8 +853,18 @@ public class GameAction {
                 } else {
                     affectedHere = previouslyAffected;
                     stAb.applyContinuousAbility(layer, previouslyAffected);
-                } 
+                }
+                if (affectedHere != null) {
+                    for (final Card c : affectedHere) {
+                        for (final StaticAbility st2 : c.getStaticAbilities()) {
+                            if (!staticAbilities.contains(st2)) {
+                                toAdd.add(st2);
+                            }
+                        }
+                    }
+                }
             }
+            staticAbilities.addAll(toAdd);
         }
 
         for (final CardCollectionView affected : affectedPerAbility.values()) {
