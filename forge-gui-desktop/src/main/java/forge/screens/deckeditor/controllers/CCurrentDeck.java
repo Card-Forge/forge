@@ -4,6 +4,7 @@ import java.awt.Dialog.ModalityType;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.util.regex.Pattern;
 
 import javax.swing.JFileChooser;
 import javax.swing.SwingUtilities;
@@ -22,6 +23,7 @@ import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.DeckImport;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VCurrentDeck;
+import forge.toolbox.FOptionPane;
 
 /**
  * Controls the "current deck" panel in the deck editor UI.
@@ -244,8 +246,17 @@ public enum CCurrentDeck implements ICDoc {
         if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
             final File file = fileChooser.getSelectedFile();
             final String check = file.getAbsolutePath();
-
             previousDirectory = file.getParentFile();
+            
+            if (!previousDirectory.exists()) {
+                FOptionPane.showErrorDialog("Cannot save deck to " + check);
+                return null;
+            }
+            
+            if(isFileNameInvalid(file)) {
+                FOptionPane.showErrorDialog("Cannot save deck to " + check + "\nDeck name may not include any of the characters / \\ : * ? \" < > |");
+                return null;
+            }
 
             return check.endsWith(".dck") ? file : new File(check + ".dck");
         }
@@ -261,14 +272,29 @@ public enum CCurrentDeck implements ICDoc {
         if (save.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
             final File file = save.getSelectedFile();
             final String check = file.getAbsolutePath();
-
             previousDirectory = file.getParentFile();
+            
+            if (!previousDirectory.exists()) {
+                FOptionPane.showErrorDialog("Cannot save proxies to " + check);
+                return null;
+            }
+            
+            if(isFileNameInvalid(file)) {
+                FOptionPane.showErrorDialog("Cannot save proxies to " + check + "\nFile name may not include any of the characters / \\ : * ? \" < > |");
+                return null;
+            }
 
             return check.endsWith(".html") ? file : new File(check + ".html");
         }
         return null;
     }
 
+    /** Checks if the file name includes any of the invalid characters / \ : * ? " < > :  */
+    private static boolean isFileNameInvalid(File file) {
+    	final Pattern pattern = Pattern.compile("[/\\\\:*?\\\"<>|]");
+    	return pattern.matcher(file.getName()).find();
+    }
+    
     /** The Constant HTML_FILTER. */
     public static final FileFilter HTML_FILTER = new FileFilter() {
         @Override
@@ -281,4 +307,5 @@ public enum CCurrentDeck implements ICDoc {
             return "Proxy File .html";
         }
     };
+    
 }
