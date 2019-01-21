@@ -19,31 +19,25 @@ import forge.player.PlayerZoneUpdates;
 import forge.game.zone.Zone;
 import forge.FThreads;
 
-public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSelectManyBase<T> {
-    private static final long serialVersionUID = -6609493252672573139L;
+public class InputSelectFromTwoLists<T extends GameEntity> extends InputSelectManyBase<T> {
+    private final FCollectionView<T> valid1, valid2;
+    private final FCollection<T> validBoth;
+    private FCollectionView<T> validChoices;
 
-    private final FCollectionView<T> validChoices;
     protected final FCollection<T> selected = new FCollection<T>();
+    protected final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
     protected Iterable<PlayerZoneUpdate> zonesShown; // want to hide these zones when input done
 
-    public InputSelectEntitiesFromList(final PlayerControllerHuman controller, final int min, final int max, final FCollectionView<T> validChoices0) {
-        this(controller, min, max, validChoices0, null);
-    }
+    public InputSelectFromTwoLists(final PlayerControllerHuman controller, final boolean optional,
+				   final FCollectionView<T> list1, final FCollectionView<T> list2, final SpellAbility sa0) {
+        super(controller, optional?0:1, 2, sa0);
+	valid1 = list1;
+	valid2 = list2;
+	validBoth = new FCollection<T>(valid1);
+	for ( T v : valid2 ) { validBoth.add(v); }
+	validChoices = validBoth;
+	setSelectables();
 
-    public InputSelectEntitiesFromList(final PlayerControllerHuman controller, final int min, final int max, final FCollectionView<T> validChoices0, final SpellAbility sa0) {
-        super(controller, Math.min(min, validChoices0.size()), Math.min(max, validChoices0.size()),sa0);
-        validChoices = validChoices0;
-        if (min > validChoices.size()) {  // pfps does this really do anything useful??
-            System.out.println(String.format("Trying to choose at least %d things from a list with only %d things!", min, validChoices.size()));
-        }
-	ArrayList<CardView> vCards = new ArrayList<CardView>();
-	for ( T c : validChoices0 ) {
-	    if ( c instanceof Card ) {
-		vCards.add(((Card)c).getView()) ;
-	    }
-	}
-	getController().getGui().setSelectables(vCards);
-	final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
 	for (final GameEntity c : validChoices) {
             final Zone cz = (c instanceof Card) ? ((Card) c).getZone() : null ;
 	    if ( cz != null ) {
@@ -52,12 +46,38 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
 	}
 	FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override public void run() {
-		getController().getGui().updateZones(zonesToUpdate);  
-		zonesShown = getController().getGui().tempShowZones(controller.getPlayer().getView(),zonesToUpdate);  
+		controller.getGui().updateZones(zonesToUpdate);  
+		zonesShown = controller.getGui().tempShowZones(controller.getPlayer().getView(),zonesToUpdate);  
             }
 	    });
     }
     
+    private void setSelectables() {
+	ArrayList<CardView> vCards = new ArrayList<CardView>();
+	getController().getGui().clearSelectables();
+	for ( T c : validChoices ) {
+	    if ( c instanceof Card ) {
+		vCards.add(((Card)c).getView()) ;
+	    }
+	}
+	getController().getGui().setSelectables(vCards);
+    }
+
+    private void setValid() {
+	boolean selected1 = false, selected2 = false;
+	for ( T s : selected ) {
+	    if ( valid1.contains(s) ) { selected1 = true; }
+	    if ( valid2.contains(s) ) { selected2 = true; }
+	}
+	validChoices = selected1 ? ( selected2 ? FCollection.getEmpty() : valid2 ) : ( selected2 ? valid1 : validBoth );
+	setSelectables();
+	FThreads.invokeInEdtNowOrLater(new Runnable() {
+            @Override public void run() {
+		getController().getGui().updateZones(zonesToUpdate);  
+            }
+	    });
+    }
+
     @Override
     protected boolean onCardSelected(final Card c, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
         if (!selectEntity(c)) {
@@ -93,7 +113,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
 
     @SuppressWarnings("unchecked")
     protected boolean selectEntity(final GameEntity c) {
-        if (!validChoices.contains(c)) {
+        if (!validChoices.contains(c) && !selected.contains(c)) {
             return false;
         }
 
@@ -104,6 +124,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         else {
             selected.add((T)c);
         }
+	setValid();
         onSelectStateChanged(c, !entityWasSelected);
 
         return true;

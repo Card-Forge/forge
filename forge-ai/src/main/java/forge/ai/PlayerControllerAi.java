@@ -164,8 +164,34 @@ public class PlayerControllerAi extends PlayerController {
     public <T extends GameEntity> List<T> chooseEntitiesForEffect(
             FCollectionView<T> optionList, int min, int max, DelayedReveal delayedReveal, SpellAbility sa, String title,
             Player targetedPlayer) {
-        // this isn't used
-        return null;
+        if (delayedReveal != null) {
+            reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
+        }
+	FCollection<T> remaining = new FCollection<T>(optionList);
+	List<T> selecteds = new ArrayList<T>();
+	T selected;
+	do {
+	    selected = chooseSingleEntityForEffect(remaining, null, sa, title, selecteds.size()>=min, targetedPlayer);
+	    if ( selected != null ) {
+		remaining.remove(selected);
+		selecteds.add(selected);
+	    }
+	} while ( (selected != null ) && (selecteds.size() < max) );
+        return selecteds;
+    }
+
+    @Override
+    public <T extends GameEntity> List<T> chooseFromTwoListsForEffect(FCollectionView<T> optionList1, FCollectionView<T> optionList2,
+	       boolean optional, DelayedReveal delayedReveal, SpellAbility sa, String title, Player targetedPlayer) {
+	if (delayedReveal != null) {
+            reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
+        }
+	T selected1 = chooseSingleEntityForEffect(optionList1, null, sa, title, optional, targetedPlayer);
+	T selected2 = chooseSingleEntityForEffect(optionList2, null, sa, title, optional || selected1!=null, targetedPlayer);
+	List<T> selecteds = new ArrayList<T>();
+	if ( selected1 != null ) { selecteds.add(selected1); }
+	if ( selected2 != null ) { selecteds.add(selected2); }
+	return selecteds;
     }
 
     @Override

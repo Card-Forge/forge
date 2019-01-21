@@ -156,7 +156,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         c.setMayLookAt(player, true, true);
     }
 
-    private void tempShowCards(final Iterable<Card> cards) {
+    @Override
+    public void tempShowCards(final Iterable<Card> cards) {
         if (mayLookAtAllCards) {
             return;
         } // no needed if this is set
@@ -166,7 +167,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
     }
 
-    private void endTempShowCards() {
+    @Override
+    public void endTempShowCards() {
         if (tempShownCards.isEmpty()) {
             return;
         }
@@ -405,6 +407,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return choices;
     }
 
+    // pfps there should be a better way
+    private GameEntity convertToEntity(final GameEntityView view) {
+        if (view instanceof CardView) {
+            return game.getCard((CardView) view);
+        } else if (view instanceof PlayerView) {
+            return game.getPlayer((PlayerView) view);
+        } else return null;
+    }
+
     @SuppressWarnings("unchecked")
     @Override
     public <T extends GameEntity> T chooseSingleEntityForEffect(final FCollectionView<T> optionList,
@@ -427,12 +438,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return Iterables.getFirst(optionList, null);
         }
 
+        tempShow(optionList);
+        if (delayedReveal != null) {
+            tempShow(delayedReveal.getCards());
+        }
         if (useSelectCardsInput(optionList)) {
-            if (delayedReveal != null) {
-                reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(),
-                        delayedReveal.getMessagePrefix());
-            }
-	    tempShow(optionList);
             final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<T>(this, isOptional ? 0 : 1, 1,
                     optionList, sa);
             input.setCancelAllowed(isOptional);
@@ -442,21 +452,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return Iterables.getFirst(input.getSelected(), null);
         }
 
-        tempShow(optionList);
-        if (delayedReveal != null) {
-            tempShow(delayedReveal.getCards());
-        }
         final GameEntityView result = getGui().chooseSingleEntityForEffect(title,
                 GameEntityView.getEntityCollection(optionList), delayedReveal, isOptional);
         endTempShowCards();
-
-        if (result instanceof CardView) {
-            return (T) game.getCard((CardView) result);
-        }
-        if (result instanceof PlayerView) {
-            return (T) game.getPlayer((PlayerView) result);
-        }
-        return null;
+	return (T) convertToEntity(result);
     }
 
     @SuppressWarnings("unchecked")
@@ -468,8 +467,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         Sentry.getContext().addExtra("Card", sa.getCardView().toString());
         Sentry.getContext().addExtra("SpellAbility", sa.toString());
 
-        // Human is supposed to read the message and understand from it what to
-        // choose
+        // Human is supposed to read the message and understand from it what to // choose
         if (optionList.isEmpty()) {
             if (delayedReveal != null) {
                 reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(),
@@ -478,12 +476,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return null;
         }
 
+        if (delayedReveal != null) {
+            tempShow(delayedReveal.getCards());
+        }
+
+        tempShow(optionList);
         if (useSelectCardsInput(optionList)) {
-            if (delayedReveal != null) {
-                reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(),
-                        delayedReveal.getMessagePrefix());
-            }
-	    tempShow(optionList);
             final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<T>(this, min, max,
                     optionList, sa);
             input.setCancelAllowed(true);
@@ -491,17 +489,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             input.showAndWait();
 	    endTempShowCards();
             return (List<T>) input.getSelected();
-        }
+	}
+	final List<GameEntityView> chosen = getGui().chooseEntitiesForEffect(title,
+ 		GameEntityView.getEntityCollection(optionList), min, max, delayedReveal);
+	endTempShowCards();
 
-        tempShow(optionList);
-        if (delayedReveal != null) {
-            tempShow(delayedReveal.getCards());
-        }
-        final List<GameEntityView> chosen = getGui().chooseEntitiesForEffect(title,
-		GameEntityView.getEntityCollection(optionList), min, max, delayedReveal);
-        endTempShowCards();
-
-        List<T> results = new ArrayList<>();
+        List<T> results = new ArrayList<>();  //pfps I'm not sure that the chosens should be modified this way
         if (chosen instanceof List && chosen.size() > 0) {
             for (GameEntityView entry: chosen) {
                 if (entry instanceof CardView) {
@@ -512,6 +505,41 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 }
             }
         }
+        return results;
+    }
+
+    @Override
+    public <T extends GameEntity> List<T> chooseFromTwoListsForEffect(final FCollectionView<T> optionList1, final FCollectionView<T> optionList2,
+			      boolean optional, final DelayedReveal delayedReveal, final SpellAbility sa, final String title, final Player targetedPlayer) {
+        // Human is supposed to read the message and understand from it what to choose
+        // useful details for debugging problems with the mass select logic
+        Sentry.getContext().addExtra("Card", sa.getCardView().toString());
+        Sentry.getContext().addExtra("SpellAbility", sa.toString());
+
+        if (delayedReveal != null) {
+            tempShow(delayedReveal.getCards());
+        }
+
+	tempShow(optionList1);
+	tempShow(optionList2);
+
+        if (useSelectCardsInput(optionList1) && useSelectCardsInput(optionList2)) {
+            final InputSelectFromTwoLists<T> input = new InputSelectFromTwoLists<T>(this, optional, optionList1, optionList2, sa);
+            input.setCancelAllowed(optional);
+            input.setMessage(MessageUtil.formatMessage(title, player, targetedPlayer));
+            input.showAndWait();
+	    endTempShowCards();
+            return (List<T>) input.getSelected();
+	}
+
+        final GameEntityView result1 = getGui().chooseSingleEntityForEffect(title, GameEntityView.getEntityCollection(optionList1), null, optional);
+        final GameEntityView result2 = getGui().chooseSingleEntityForEffect(title, GameEntityView.getEntityCollection(optionList2), null, (result1==null)?optional:true);
+        endTempShowCards();
+	List<T> results = new ArrayList<>();
+	GameEntity entity1 = convertToEntity(result1);
+	if (entity1!=null) { results.add((T) entity1); }
+	GameEntity entity2 = convertToEntity(result2);
+	if (entity2!=null) { results.add((T) entity2); }
         return results;
     }
 

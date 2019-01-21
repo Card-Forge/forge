@@ -180,6 +180,12 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
+    public <T extends GameEntity> List<T> chooseFromTwoListsForEffect(FCollectionView<T> optionList1, FCollectionView<T> optionList2, boolean optional, DelayedReveal delayedReveal, SpellAbility sa, String title, Player targetedPlayer) {
+        // this isn't used
+        return null;
+    }
+
+    @Override
     public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         return true;
     }
