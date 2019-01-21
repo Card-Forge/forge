@@ -502,8 +502,6 @@ public final class StaticAbilityContinuous {
             // Gain text from another card
             if (layer == StaticAbilityLayer.TEXT) {
                 if (gainTextSource != null) {
-                    // remove old State
-                    affectedCard.removeTextChangeStates();
                     affectedCard.addTextChangeState(
                         CardFactory.getCloneStates(gainTextSource, affectedCard, stAb), se.getTimestamp()
                     );

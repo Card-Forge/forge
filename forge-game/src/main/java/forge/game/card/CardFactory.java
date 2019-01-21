@@ -881,11 +881,6 @@ public class CardFactory {
                 state.setSetCode(originalState.getSetCode());
                 state.setRarity(originalState.getRarity());
                 state.setImageKey(originalState.getImageKey());
-
-                // need to copy the static ability
-                if ((sa instanceof StaticAbility)) {
-                    state.addStaticAbility(new StaticAbility((StaticAbility)sa, out));
-                }
             }
 
             // remove some characteristic static abilties
