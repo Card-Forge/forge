@@ -1,0 +1,12 @@
+[metadata]
+Code=ANA
+Date=2018-07-12
+Name=Arena New Player Experience
+Type=Other
+
+[cards]
+U Angelic Reward
+U Confront the Assault
+R Inspiring Commander
+C Spiritual Guardian
+C Tactical Advantage
