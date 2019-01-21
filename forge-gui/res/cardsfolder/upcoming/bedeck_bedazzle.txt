@@ -11,5 +11,5 @@ Name:Bedazzle
 ManaCost:4 B R
 Types:Instant
 A:SP$ Destroy | Cost$ 4 B R | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land. | SubAbility$ DBDamage | SpellDescription$ Destroy target nonbasic land. CARDNAME deals 2 damage to target opponent or planeswalker.
-SVar:DBDamage:DB$ Damage | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ 2
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Player.Opponent,Card.Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ 2
 Oracle:Destroy target nonbasic land. Bedazzle deals 2 damage to target opponent or planeswalker.
