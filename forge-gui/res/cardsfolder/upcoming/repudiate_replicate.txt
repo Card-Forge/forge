@@ -8,7 +8,7 @@ Oracle:Counter target activated or triggered ability. (Mana abilities can’t be
 
 ALTERNATE
 
-Name:Revenge
+Name:Replicate
 ManaCost:1 G U
 Types:Sorcery
 A:SP$ CopyPermanent | Cost$ 1 G U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Create a token that's a copy of target creature you control.

@@ -11,7 +11,7 @@ ALTERNATE
 Name:Consume
 ManaCost:2 W B
 Types:Sorcery
-A:SP$ ChooseCard | ValidTgts$ Player | Choices$ Creature.greatestPowerControlledByRemembered | Mandatory$ True | SubAbility$ DBSac
+A:SP$ ChooseCard | Cost$ 2 W B | ValidTgts$ Player | Choices$ Creature.greatestPowerControlledByRemembered | Mandatory$ True | SubAbility$ DBSac
 SVar:DBSac:DB$ Sacrifice | Defined$ Targeted | SacValid$ Card.ChosenCard | RememberSacrificed$ True | SacMessage$ the creature with the highest power | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TargetedLKI$CardPower
