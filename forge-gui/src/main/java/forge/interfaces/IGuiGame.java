@@ -159,6 +159,7 @@ public interface IGuiGame {
     void setUsedToPay(CardView card, boolean value);
     void setSelectables(final Iterable<CardView> cards);
     void clearSelectables();
+    boolean isSelecting();
 
     void awaitNextInput();
     void cancelAwaitNextInput();
