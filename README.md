@@ -70,7 +70,7 @@ TBD
 
 # Card Scripting
 
-Visit [this page]()https://www.slightlymagic.net/wiki/Forge_API) for information on scripting.
+Visit [this page](https://www.slightlymagic.net/wiki/Forge_API) for information on scripting.
 
 Card scripting resources are found in the forge-gui/res/ path.
 
