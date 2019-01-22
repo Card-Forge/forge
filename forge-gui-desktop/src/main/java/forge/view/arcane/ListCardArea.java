@@ -85,7 +85,6 @@ public class ListCardArea extends FloatingCardArea {
     public ListCardArea(final CMatchUI matchUI, final String title0, final List<CardView> cardList0, final List<CardView> moveableCards0, final boolean toTop0, final boolean toBottom0, final boolean toAnywhere0) {
         super(matchUI);
 	window.add(getScrollPane(),"grow, push");
-	//	try { Thread.sleep(1000); } catch(InterruptedException ex) { }
         getScrollPane().setViewportView(this);
         setOpaque(false);
 	doneButton = new FButton("Done");
@@ -112,6 +111,7 @@ public class ListCardArea extends FloatingCardArea {
     protected final FDialog window = new FDialog(true, true, "0") {
         @Override
         public void setLocationRelativeTo(Component c) {
+            if (hasBeenShown || locLoaded) { return; }
             super.setLocationRelativeTo(c);
         }
         @Override
@@ -124,10 +124,11 @@ public class ListCardArea extends FloatingCardArea {
                         getWidth() + COORD_DELIM + getHeight());
                 //don't call prefs.save(), instead allowing them to be saved when match ends
             }
-            if (b0) {
-		storedArea.refresh();
-            }
             super.setVisible(b0);
+            if (b0) {
+                refresh();
+                hasBeenShown = true;
+            }
         }
     };
 
