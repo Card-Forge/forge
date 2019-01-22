@@ -1,0 +1,6 @@
+Name:Cry of the Carnarium
+ManaCost:1 B B
+Types:Sorcery
+A:SP$ PumpAll | Cost$ 1 B B | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SubAbility$ DBCopy | SpellDescription$ All creatures get -2/-2 until end of turn. Exile all creature cards in all graveyards that were put there from the battlefield this turn. If a creature would die this turn, exile it instead.
+SVar:Exile:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ChangeType$ Creature | Mandatory$ True
+Oracle:All creatures get -2/-2 until end of turn. Exile all creature cards in all graveyards that were put there from the battlefield this turn. If a creature would die this turn, exile it instead.

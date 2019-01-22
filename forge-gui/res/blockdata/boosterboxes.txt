@@ -105,3 +105,4 @@ BBD: 36 Boosters
 M19: 36 Boosters
 GRN: 36 Boosters
 UMA: 24 Boosters
+RNA: 36 Boosters
