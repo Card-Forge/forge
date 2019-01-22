@@ -2,9 +2,9 @@ Name:Incubation Druid
 ManaCost:1 G
 Types:Creature Elf Druid
 PT:0/2
-A:AB$ ManaReflected | Cost$ T | ColorOrType$ Type | Valid$ Land.YouCtrl | ReflectProperty$ Produce | SubAbility$ DBManaU | SpellDescription$ Add one mana of any type that a land you control could produce. If CARDNAME has a +1/+1 counter on it, add three mana of that type instead.
-SVar:DBManaU:DB$ Mana | Produced$ Combo Card.Self | ConditionDefined$ Remembered | ConditionPresent$ Card.Self | SubAbility$ DBManaB
-SVar:DBManaB:DB$ Mana | Produced$ G | Amount$ X | Permanent$ True | References$ X | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
-A:AB$ PutCounter | Cost$ 3 G G | Defined$ Self | CounterType$ P1P1 | CounterNum$3 | SpellDescription$ As CARDNAME, support 3. (If this creature has no +1/+1 counters on it, put three +1/+1 counters on it.)
+K:Adapt:3:3 G G
+A:AB$ ManaReflected | Cost$ T | ColorOrType$ Type | Valid$ Land.YouCtrl | Amount$ IncubationAmount | ReflectProperty$ Produce | SpellDescription$ Add one mana of any type that a land you control could produce. If CARDNAME has a +1/+1 counter on it, add three mana of that type instead.
+SVar:Y:Count$Valid Card.Self+counters_GE1_P1P1
+SVar:IncubationAmount:Count$Compare Y GE1.3.1
 DeckHas:Ability$Counters
 Oracle:{T}: Add one mana of any type that a land you control could produce. If Incubation Druid has a +1/+1 counter on it, add three mana of that type instead.\n{3}{G}{G}: Adapt 3. (If this creature has no +1/+1 counters on it, put three +1/+1 counters on it.)

@@ -1,10 +1,7 @@
 Name:Deface
 ManaCost:R
 Types:Sorcery
-A:SP$ ChooseCard | Cost$ R | Defined$ You | Choices$ Player | ChoiceZone$ Exile | Amount$ 1 | RememberChosen$ True | SVar$ Choose one -2/-4 if you choose one -1/+4 Choose one -1/+4. Choose one -1/+4 Choose one -1/+4. | ChoiceZone$ Exile | RememberChosen$ True | SubAbility$ DBChoose
-SVar:DBChoose:DB$ ChooseCard | Defined$ You | Choices$ Player.IsRemembered | ChoiceZone$ Exile | Amount$ 1 | RememberChosen$ True | Choices$ Card.IsRemembered | ChoiceZone$ Choose one to one -1/+1 | RememberChosen$ True
-A:SP$ ChooseCard | Cost$ R | Defined$ You | Choices$ Player | ChoiceZone$ Exile | Amount$ 1 | RememberChosen$ True | SVar$ Choose one -2/-4 if you choose one -1/+4 Choose one -1/+4. Choose one -1/+4 Choose one -1/+4. | ChoiceZone$ Exile | RememberChosen$ True | SubAbility$ DBChoose
-SVar:DBChoose:DB$ ChooseCard | Defined$ You | Choices$ Player.IsRemembered | ChoiceZone$ Exile | Amount$ 1 | RememberChosen$ True | Choices$ Card.IsRemembered | ChoiceZone$ Choose one to one -1/+1 | RememberChosen$ True
-A:SP$ ChooseCard | Cost$ R | Defined$ You | Choices$ Player | ChoiceZone$ Exile | Amount$ 1 | RememberChosen$ True | SVar$ Choose one -2/-4 if you choose one -1/+4 Choose one -1/+4. Choose one -1/+4 Choose one -1/+4. | ChoiceZone$ Exile | RememberChosen$ True | SubAbility$ DBChoose
-SVar:DBChoose:DB$ ChooseCard | Defined$ You | Choices$ Player.IsRemembered | ChoiceZone$ Exile | Amount$ 1 | RememberChosen$ True | Choices$ Card.IsRemembered | ChoiceZone$ Choose one to one -1/+1 | RememberChosen$ True
+A:SP$ Charm | Cost$ R | Choices$ DBDestroy,DBDestroy2
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target Artifact | SpellDescription$ Destroy target artifact.
+SVar:DBDestroy2:DB$ Destroy | ValidTgts$ Creature.withDefender | TgtPrompt$ Select target creature with defender | SpellDescription$ Destroy target creature with defender.
 Oracle:Choose one —\n• Destroy target artifact.\n• Destroy target creature with defender.
