@@ -1,5 +1,6 @@
 Name:Depose
 ManaCost:1 W/U
+AlternateMode: Split
 Types:Instant
 A:SP$ Tap | Cost$ 1 WU | ValidTgts$ Creature | SubAbility$ DBDraw | SpellDescription$ Tap target creature. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
