@@ -1532,4 +1532,33 @@ public class GameSimulatorTest extends SimulationTestCase {
         int effects = simGoblin.getCounters(CounterType.P1P1) + simGoblin.getKeywordMagnitude(Keyword.HASTE);
         assertTrue(effects == 2);
     }
+
+    public void testTeysaKarlovXathridNecromancer() {
+        // Teysa Karlov and Xathrid Necromancer dying at the same time makes 4 token
+
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        addCard("Teysa Karlov", p);
+        addCard("Xathrid Necromancer", p);
+
+        for (int i = 0; i < 4; i++) {
+            addCardToZone("Plains", p, ZoneType.Battlefield);
+        }
+
+        Card wrathOfGod = addCardToZone("Wrath of God", p, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+
+        SpellAbility wrathSA = wrathOfGod.getFirstSpellAbility();
+        assertNotNull(wrathSA);
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(wrathSA).value;
+        assertTrue(score > 0);
+        Game simGame = sim.getSimulatedGameState();
+
+        int numZombies = countCardsWithName(simGame, "Zombie");
+        assertTrue(numZombies == 4);
+    }
 }
