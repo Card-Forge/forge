@@ -1561,4 +1561,32 @@ public class GameSimulatorTest extends SimulationTestCase {
         int numZombies = countCardsWithName(simGame, "Zombie");
         assertTrue(numZombies == 4);
     }
+
+    public void testDoubleTeysaKarlovXathridNecromancer() {
+        // Teysa Karlov dieing because of Legendary rule will make Xathrid Necromancer trigger 3 times
+
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        addCard("Teysa Karlov", p);
+        addCard("Xathrid Necromancer", p);
+
+        for (int i = 0; i < 3; i++) {
+            addCard("Plains", p);
+        }
+        addCard("Swamp", p);
+
+        Card second = addCardToZone("Teysa Karlov", p, ZoneType.Hand);
+
+        SpellAbility secondSA = second.getFirstSpellAbility();
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(secondSA).value;
+        assertTrue(score > 0);
+        Game simGame = sim.getSimulatedGameState();
+
+        int numZombies = countCardsWithName(simGame, "Zombie");
+        assertTrue(numZombies == 3);
+    }
 }
