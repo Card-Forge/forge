@@ -69,7 +69,7 @@ public class InputSelectFromTwoLists<T extends GameEntity> extends InputSelectMa
 	    if ( valid1.contains(s) ) { selected1 = true; }
 	    if ( valid2.contains(s) ) { selected2 = true; }
 	}
-	validChoices = selected1 ? ( selected2 ? FCollection.getEmpty() : valid2 ) : ( selected2 ? valid1 : validBoth );
+	validChoices = selected1 ? ( selected2 ? FCollection.<T>getEmpty() : valid2 ) : ( selected2 ? valid1 : validBoth );
 	setSelectables();
 	FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override public void run() {

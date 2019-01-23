@@ -1503,4 +1503,23 @@ public class GameSimulatorTest extends SimulationTestCase {
     }
 
 
+    public void testRiotEnchantment() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        addCard("Rhythm of the Wild", p);
+
+        Card goblin = addCardToZone("Zhur-Taa Goblin", p, ZoneType.Hand);
+
+        addCard("Mountain", p);
+        addCard("Forest", p);
+
+        SpellAbility goblinSA = goblin.getFirstSpellAbility();
+        assertNotNull(goblinSA);
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(goblinSA).value;
+        assertTrue(score > 0);
+    }
 }
