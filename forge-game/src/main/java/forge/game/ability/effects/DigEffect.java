@@ -266,8 +266,8 @@ public class DigEffect extends SpellAbilityEffect {
 				valid.removeAll(andOrCards); //pfps remove andOr cards to get two two choices set up correctly
 				chosen = chooser.getController().chooseFromTwoListsForEffect(valid, andOrCards, optional, delayedReveal, sa, prompt, p);
 			    } else {
-				int min = (anyNumber || optional) ? 0 : numToDig;
-				int max = Math.max(destZone1ChangeNum, anyNumber ?  valid.size() : 0);
+				int max = anyNumber ? valid.size() : Math.min(valid.size(),destZone1ChangeNum);
+				int min = (anyNumber || optional) ? 0 : max;
 				chosen = chooser.getController().chooseEntitiesForEffect(valid, min, max, delayedReveal, sa, prompt, p);
 			    }
 			    chooser.getController().endTempShowCards();
