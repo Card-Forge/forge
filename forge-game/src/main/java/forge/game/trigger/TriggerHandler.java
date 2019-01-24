@@ -27,6 +27,7 @@ import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
+import forge.game.card.CardZoneTable;
 import forge.game.keyword.KeywordInterface;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -44,6 +45,7 @@ import io.sentry.event.BreadcrumbBuilder;
 import java.util.*;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -693,13 +695,14 @@ public class TriggerHandler {
     private int handlePanharmonicon(final Trigger t, final Map<String, Object> runParams, final Player p) {
         Card host = t.getHostCard();
 
-        // not a changesZone trigger
-        if (t.getMode() != TriggerType.ChangesZone) {
+        // not a changesZone trigger or changesZoneAll
+        if (t.getMode() != TriggerType.ChangesZone && t.getMode() != TriggerType.ChangesZoneAll) {
             return 0;
         }
 
         // leave battlefield trigger, might be dying
-        if ("Battlefield".equals(t.getParam("Origin"))) {
+        // only real changeszone look back for this
+        if (t.getMode() == TriggerType.ChangesZone && "Battlefield".equals(t.getParam("Origin"))) {
             // Need to get the last info from the trigger host
             host = game.getChangeZoneLKIInfo(host);
         }
@@ -710,36 +713,60 @@ public class TriggerHandler {
         }
 
         int n = 0;
-        // iterate over all cards 
-        final List<Card> lastCards = CardLists.filterControlledBy(p.getGame().getLastStateBattlefield(), p);
-        for (final Card ck : lastCards) {
-            for (final KeywordInterface ki : ck.getKeywords()) {
-                final String kw = ki.getOriginal();
-                if (kw.startsWith("Panharmonicon")) {
-                    // Enter the Battlefield Trigger
-                    if (runParams.get("Destination") instanceof String) {
-                        final String dest = (String) runParams.get("Destination");
-                        if ("Battlefield".equals(dest) && runParams.get("Card") instanceof Card) {
-                            final Card card = (Card) runParams.get("Card");
-                            final String valid = kw.split(":")[1];
-                            if (card.isValid(valid.split(","), p, ck, null)) {
-                                n++;
-                            }
-                        }
-                    }
-                } else if (kw.startsWith("Dieharmonicon")) {
-                    // 700.4. The term dies means “is put into a graveyard from the battlefield.”
-                    if (runParams.get("Origin") instanceof String) {
-                        final String origin = (String) runParams.get("Origin");
-                        if ("Battlefield".equals(origin) && runParams.get("Destination") instanceof String) {
+        if (t.getMode() == TriggerType.ChangesZone) {
+            // iterate over all cards
+            final List<Card> lastCards = CardLists.filterControlledBy(p.getGame().getLastStateBattlefield(), p);
+            for (final Card ck : lastCards) {
+                for (final KeywordInterface ki : ck.getKeywords()) {
+                    final String kw = ki.getOriginal();
+                    if (kw.startsWith("Panharmonicon")) {
+                        // Enter the Battlefield Trigger
+                        if (runParams.get("Destination") instanceof String) {
                             final String dest = (String) runParams.get("Destination");
-                            if ("Graveyard".equals(dest) && runParams.get("Card") instanceof Card) {
+                            if ("Battlefield".equals(dest) && runParams.get("Card") instanceof Card) {
                                 final Card card = (Card) runParams.get("Card");
                                 final String valid = kw.split(":")[1];
                                 if (card.isValid(valid.split(","), p, ck, null)) {
                                     n++;
                                 }
                             }
+                        }
+                    } else if (kw.startsWith("Dieharmonicon")) {
+                        // 700.4. The term dies means “is put into a graveyard from the battlefield.”
+                        if (runParams.get("Origin") instanceof String) {
+                            final String origin = (String) runParams.get("Origin");
+                            if ("Battlefield".equals(origin) && runParams.get("Destination") instanceof String) {
+                                final String dest = (String) runParams.get("Destination");
+                                if ("Graveyard".equals(dest) && runParams.get("Card") instanceof Card) {
+                                    final Card card = (Card) runParams.get("Card");
+                                    final String valid = kw.split(":")[1];
+                                    if (card.isValid(valid.split(","), p, ck, null)) {
+                                        n++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } else if (t.getMode() == TriggerType.ChangesZoneAll) {
+            final CardZoneTable table = (CardZoneTable) runParams.get("Cards");
+            // iterate over all cards
+            for (final Card ck : p.getCardsIn(ZoneType.Battlefield)) {
+                for (final KeywordInterface ki : ck.getKeywords()) {
+                    final String kw = ki.getOriginal();
+                    if (kw.startsWith("Panharmonicon")) {
+                        // currently there is no ChangesZoneAll that would trigger on etb
+                        final String valid = kw.split(":")[1];
+                        if (!table.filterCards(null, ZoneType.Battlefield, valid, ck, null).isEmpty()) {
+                            n++;
+                        }
+                    } else if (kw.startsWith("Dieharmonicon")) {
+                        // 700.4. The term dies means “is put into a graveyard from the battlefield.”
+                        final String valid = kw.split(":")[1];
+                        if (!table.filterCards(ImmutableList.of(ZoneType.Battlefield), ZoneType.Graveyard,
+                                valid, ck, null).isEmpty()) {
+                            n++;
                         }
                     }
                 }
