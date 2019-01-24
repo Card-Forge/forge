@@ -5,6 +5,9 @@ Name=Ravnica Allegiance
 Code2=RNA
 MciCode=rna
 Type=Expansion
+BoosterCovers=5
+Booster=10 Common:!fromSheet("RNA Planeswalker Decks and Additional Promo"), 3 Uncommon:!fromSheet("RNA Planeswalker Decks and Additional Promo"), 1 RareMythic:!fromSheet("RNA Planeswalker Decks and Additional Promo"), 1 BasicLand RNA
+
 
 [cards]
 1 M Angel of Grace
