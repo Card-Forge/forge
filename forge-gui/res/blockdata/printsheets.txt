@@ -1407,3 +1407,26 @@ Izzet Guildgate|GRN
 Selesnya Guildgate|GRN
 Dimir Guildgate|GRN
 Boros Guildgate|GRN
+
+[RNA Lands]
+10 Azorious Guildgate|GRN
+10 Gruul Guildgate|GRN
+10 Orzhov Guildgate|GRN
+10 Rakdos Guildgate|GRN
+10 Simic Guildgate|GRN
+
+[RNA Secret Cards]
+Dovin, Architecht of Law
+Elite Arrester
+Dovin's Dismissal
+Dovin's Automaton
+Domri City Smasher
+Ragefire
+Charging War Boar
+Domri's Nodorog
+The Haunt of Hightower
+Azorious Guildgate|GRN
+Gruul Guildgate|GRN
+Orzhov Guildgate|GRN
+Rakdos Guildgate|GRN
+Simic Guildgate|GRN
