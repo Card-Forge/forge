@@ -3404,6 +3404,15 @@ public class Card extends GameEntity implements Comparable<Card> {
         return change;
     }
 
+    public final boolean hasChangedCardKeywords(final long timestamp) {
+        return changedCardKeywords.containsKey(timestamp);
+    }
+
+    public final void addChangedCardKeywordsInternal(final KeywordsChange change, final long timestamp) {
+        changedCardKeywords.put(timestamp, change);
+        updateKeywordsCache(currentState);
+    }
+
     // Hidden keywords will be left out
     public final Collection<KeywordInterface> getUnhiddenKeywords() {
         return getUnhiddenKeywords(currentState);
@@ -5731,7 +5740,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public void setChangedCardKeywords(Map<Long, KeywordsChange> changedCardKeywords) {
         this.changedCardKeywords.clear();
         for (Entry<Long, KeywordsChange> entry : changedCardKeywords.entrySet()) {
-            this.changedCardKeywords.put(entry.getKey(), entry.getValue());
+            this.changedCardKeywords.put(entry.getKey(), entry.getValue().copy(this, true));
         }
     }
 
