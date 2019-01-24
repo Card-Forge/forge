@@ -1,0 +1,6 @@
+Name:Spikewheel Acrobat
+ManaCost:3 R
+Types:Creature Human Rogue
+PT:5/2
+K:Spectacle:2 R
+Oracle:Spectacle {2}{R} (You may cast this spell for its spectacle cost rather than its mana cost if an opponent lost life this turn.)

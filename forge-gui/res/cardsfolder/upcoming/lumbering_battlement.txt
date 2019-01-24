@@ -1,0 +1,13 @@
+Name:Lumbering Battlement
+ManaCost:4 W
+Types:Creature Beast
+PT:4/5
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile any number of other nontoken creatures you control until it leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ChangeType$ Creature.nonToken+Other+YouCtrl | TargetMin$ 0 | TargetMax$ X | References$ X | Mandatory$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | Triggers$ ComeBack | RememberObjects$ Remembered | ImprintCards$ Remembered | SVars$ TrigReturn,ExileSelf | ConditionPresent$ Card.IsRemembered | ConditionCompare$ GE1
+SVar:
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | References$ X | Description$ CARDNAME gets +2/+2 for each card exiled with it.
+SVar:X:Count$Valid Card.IsRemembered+namedCARDNAME/Times.2
+SVar:RemRandomDeck:True
+Oracle:Vigilance\nWhen Lumbering Battlement enters the battlefield, exile any number of other nontoken creatures you control until it leaves the battlefield.\nLumbering Battlement gets +2/+2 for each card exiled with it.
