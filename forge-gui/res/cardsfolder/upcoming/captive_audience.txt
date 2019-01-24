@@ -1,4 +1,4 @@
-# -- THIS SCRIPT NEEDS REWRITING (non-functional) --
+# TODO: -- THIS SCRIPT NEEDS REWRITING (non-functional) --
 Name:Captive Audience
 ManaCost:5 B R
 Types:Enchantment
