@@ -2,8 +2,5 @@ Name:Smothering Tithe
 ManaCost:3 W
 Types:Enchantment
 T:Mode$ Drawn | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an opponent draws a card, that player may pay {2}. If the player doesn't, you create a colorless Treasure artifact token with flying{T}, Sacrifice this artifact: Add one mana of any color.
-# TODO: -- THIS SCRIPT NEEDS FIXING (the Unless cost part isn't defined, token definition is odd below)
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Treasure | TokenTypes$ Artifact,Treasure | TokenOwner$ TriggeredPlayer | TokenColors$ Colorless | TokenImage$ c treasure | TokenAbilities$ ABTreasureMana | TokenAltImages$ c_treasure2,c_treasure3,c_treasure4
-SVar:ABTreasureMana:DB$ Token | TokenAmount$ 1 | TokenName$
-DeckHas:Ability$Token
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ TriggeredPlayer | LegacyImage$ c a treasure sac
 Oracle:Whenever an opponent draws a card, that player may pay {2}. If the player doesn't, you create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."
