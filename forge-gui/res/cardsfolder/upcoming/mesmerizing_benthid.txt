@@ -9,4 +9,6 @@ SVar:RemRandomDeck:True
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Hexproof | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has hexproof as long as you control an Illusion.
 SVar:X:Count$Valid Illusion.YouCtrl
 SVar:BuffedBy:Illusion
+DeckHas:Ability$Token
+DeckHints:Type$Illusion
 Oracle:When Mesmerizing Benthid enters the battlefield, create two 0/2 blue Illusion creature tokens with "Whenever this creature blocks a creature, that creature doesn't untap during its controller's next untap step."\nMesmerizing Benthid has hexproof as long as you control an Illusion.

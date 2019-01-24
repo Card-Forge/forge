@@ -6,4 +6,5 @@ T:Mode$ SpellCast | ValidCard$ Instant | ValidActivatingPlayer$ You | TriggerZon
 SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2 | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 1
 SVar:X:Count$IfMainPhase
+DeckHas:Ability$LifeGain
 Oracle:When Dovin's Acuity enters the battlefield, you gain 2 life and draw a card.\nWhenever you cast an instant spell during your main phase, you may return Dovin's Acuity to its owner's hand.
