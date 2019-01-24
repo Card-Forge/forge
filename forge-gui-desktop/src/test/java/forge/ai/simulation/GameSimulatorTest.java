@@ -1508,9 +1508,11 @@ public class GameSimulatorTest extends SimulationTestCase {
         Player p = game.getPlayers().get(0);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
 
+        final String goblinName = "Zhur-Taa Goblin";
+
         addCard("Rhythm of the Wild", p);
 
-        Card goblin = addCardToZone("Zhur-Taa Goblin", p, ZoneType.Hand);
+        Card goblin = addCardToZone(goblinName, p, ZoneType.Hand);
 
         addCard("Mountain", p);
         addCard("Forest", p);
@@ -1521,5 +1523,13 @@ public class GameSimulatorTest extends SimulationTestCase {
         GameSimulator sim = createSimulator(game, p);
         int score = sim.simulateSpellAbility(goblinSA).value;
         assertTrue(score > 0);
+
+        Game simGame = sim.getSimulatedGameState();
+
+        Card simGoblin = findCardWithName(simGame, goblinName);
+
+        assertNotNull(simGoblin);
+        int effects = simGoblin.getCounters(CounterType.P1P1) + simGoblin.getKeywordMagnitude(Keyword.HASTE);
+        assertTrue(effects == 2);
     }
 }
