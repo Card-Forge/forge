@@ -6,8 +6,7 @@ Code2=RNA
 MciCode=rna
 Type=Expansion
 BoosterCovers=5
-Booster=10 Common:!fromSheet("RNA Planeswalker Decks and Additional Promo"), 3 Uncommon:!fromSheet("RNA Planeswalker Decks and Additional Promo"), 1 RareMythic:!fromSheet("RNA Planeswalker Decks and Additional Promo"), 1 BasicLand RNA
-
+Booster=10 Common:!fromSheet("RNA Secret Cards"), 3 Uncommon:!fromSheet("RNA Secret Cards"), 1 RareMythic:!fromSheet("RNA Secret Cards"), 1 fromSheet("RNA Lands")
 
 [cards]
 1 M Angel of Grace
