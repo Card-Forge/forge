@@ -76,6 +76,6 @@ Iconic Masters, 3/6/XLN, IMA
 Masters 25, 3/6/XLN, A25
 Dominaria, 3/6/DOM, DOM
 Core Set 2019, 3/6/M19, M19
-Guilds of Ravnica, 3/6/M19, GRN
+Guilds of Ravnica, 3/6/GRN, GRN
 Ultimate Masters, 3/6/M19, UMA
-Ravnica Allegiance, 3/6/M19, RNA
+Ravnica Allegiance, 3/6/RNA, RNA
