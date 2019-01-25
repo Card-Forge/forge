@@ -1465,7 +1465,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                         }
                     }
                 }
-                if (keyword.startsWith("CantBeCounteredBy")) {
+                if (keyword.startsWith("CantBeCounteredBy") || keyword.startsWith("Panharmonicon")
+                        || keyword.startsWith("Dieharmonicon")) {
                     final String[] p = keyword.split(":");
                     sbLong.append(p[2]).append("\r\n");
                 } else if (keyword.startsWith("etbCounter")) {
