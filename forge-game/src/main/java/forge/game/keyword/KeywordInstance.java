@@ -202,7 +202,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     public Collection<StaticAbility> getStaticAbilities() {
         return staticAbilities;
     }
-    
+
     /*
      * (non-Javadoc)
      * @see forge.game.keyword.KeywordInterface#copy()
@@ -233,7 +233,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
             
             return result;
         } catch (final Exception ex) {
-            throw new RuntimeException("KeywordInstance : clone() error, " + ex);
+            throw new RuntimeException("KeywordInstance : clone() error", ex);
         }
     }
 
@@ -251,5 +251,27 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     @Override
     public boolean redundant(Collection<KeywordInterface> list) {
         return !list.isEmpty() && keyword.isMultipleRedundant;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.keyword.KeywordInterface#setHostCard(forge.game.card.Card)
+     */
+    @Override
+    public void setHostCard(Card host) {
+        for (SpellAbility sa : this.abilities) {
+            sa.setHostCard(host);
+        }
+
+        for (Trigger tr : this.triggers) {
+            tr.setHostCard(host);
+        }
+
+        for (ReplacementEffect re : this.replacements) {
+            re.setHostCard(host);
+        }
+
+        for (StaticAbility sa : this.staticAbilities) {
+            sa.setHostCard(host);
+        }
     }
 }
