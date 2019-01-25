@@ -1409,24 +1409,24 @@ Dimir Guildgate|GRN
 Boros Guildgate|GRN
 
 [RNA Lands]
-10 Azorious Guildgate|GRN
-10 Gruul Guildgate|GRN
-10 Orzhov Guildgate|GRN
-10 Rakdos Guildgate|GRN
-10 Simic Guildgate|GRN
+10 Azorius Guildgate|RNA
+10 Gruul Guildgate|RNA
+10 Orzhov Guildgate|RNA
+10 Rakdos Guildgate|RNA
+10 Simic Guildgate|RNA
 
 [RNA Secret Cards]
-Dovin, Architecht of Law
+Dovin, Architect of Law
 Elite Arrester
 Dovin's Dismissal
 Dovin's Automaton
-Domri City Smasher
+Domri, City Smasher
 Ragefire
 Charging War Boar
 Domri's Nodorog
 The Haunt of Hightower
-Azorious Guildgate|GRN
-Gruul Guildgate|GRN
-Orzhov Guildgate|GRN
-Rakdos Guildgate|GRN
-Simic Guildgate|GRN
+Azorius Guildgate|RNA
+Gruul Guildgate|RNA
+Orzhov Guildgate|RNA
+Rakdos Guildgate|RNA
+Simic Guildgate|RNA
