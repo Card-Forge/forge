@@ -150,14 +150,14 @@ public class CharmEffect extends SpellAbilityEffect {
         return "";
     }
 
-    public static void makeChoices(SpellAbility sa) {
+    public static boolean makeChoices(SpellAbility sa) {
         //this resets all previous choices
         sa.setSubAbility(null);
 
         // Entwine does use all Choices
         if (sa.isEntwine()) {
             chainAbilities(sa, makePossibleOptions(sa));
-            return;
+            return true;
         }
 
         final int num = sa.hasParam("CharmNumOnResolve") ?
@@ -181,6 +181,7 @@ public class CharmEffect extends SpellAbilityEffect {
         
         List<AbilitySub> chosen = chooser.getController().chooseModeForAbility(sa, min, num, sa.hasParam("CanRepeatModes"));
         chainAbilities(sa, chosen);
+        return chosen != null && !chosen.isEmpty();
     }
 
     private static void chainAbilities(SpellAbility sa, List<AbilitySub> chosen) {
