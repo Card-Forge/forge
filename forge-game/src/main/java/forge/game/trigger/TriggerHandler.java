@@ -636,7 +636,10 @@ public class TriggerHandler {
 
         sa.setStackDescription(sa.toString());
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
-            CharmEffect.makeChoices(sa);
+            if (!CharmEffect.makeChoices(sa)) {
+                // 603.3c If no mode is chosen, the ability is removed from the stack.
+                return;
+            }
         }
 
         Player decider = null;
