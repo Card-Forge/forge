@@ -20,7 +20,6 @@ package forge.view.arcane;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.RescaleOp;
 
 /**
  * <p>
@@ -38,10 +37,6 @@ public class ScaledImagePanel extends JPanel {
      * 
      */
     private volatile BufferedImage srcImage;
-    private float brightness = 1.0f;
-    public void setBrightness(final float bright) {
-	brightness = bright;
-    }
 
     /**
      * <p>
@@ -132,9 +127,7 @@ public class ScaledImagePanel extends JPanel {
         } else { 
             int x = (sz.width / 2) - (img.getWidth() / 2);
             int y = (sz.height / 2) - (img.getHeight() / 2);
-	    Graphics2D g2d = (Graphics2D) g;
-	    RescaleOp brighten = new RescaleOp(brightness,0,null);
-	    g2d.drawImage(img, brighten, x, y);
+            g.drawImage(img, x, y, null);
         }
     }
 
