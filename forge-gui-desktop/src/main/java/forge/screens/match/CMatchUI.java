@@ -397,6 +397,7 @@ public final class CMatchUI
                 case Hand:
                     updateHand = true;
                     updateZones = true;
+                    FloatingZone.refresh(owner, zone);
                     break;
                 default:
                     updateZones = true;
