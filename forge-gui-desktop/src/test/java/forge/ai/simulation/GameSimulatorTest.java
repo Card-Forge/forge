@@ -5,6 +5,7 @@ import forge.ai.ComputerUtilAbility;
 import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.game.Game;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CounterType;
@@ -1790,5 +1791,41 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertTrue(transformOutLaw.isBackSide());
 
         assertTrue(transformOutLaw.getName().equals(terrorName));
+    }
+
+    public void testVolrathsShapeshifter() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        Card volrath = addCard("Volrath's Shapeshifter", p);
+
+        // 1. Assert that Volrath has the Discard ability
+        SpellAbility discard = findSAWithPrefix(volrath, "{2}");
+        assert(discard != null && discard.getApi() == ApiType.Discard);
+
+        // 2. Copy the text from a creature
+        addCardToZone("Abattoir Ghoul", p, ZoneType.Graveyard);
+        game.getAction().checkStateEffects(true);
+
+        assert(volrath.getName().equals("Abattoir Ghoul"));
+        assert(volrath.getNetPower() == 3);
+        assert(volrath.getNetToughness() == 2);
+        assert(volrath.hasKeyword(Keyword.FIRST_STRIKE));
+
+        SpellAbility discardAfterCopy = findSAWithPrefix(volrath, "{2}");
+        assert(discardAfterCopy != null && discardAfterCopy.getApi() == ApiType.Discard);
+
+        // 3. Revert back to not copying any text
+        addCardToZone("Plains", p, ZoneType.Graveyard);
+        game.getAction().checkStateEffects(true);
+
+        assert(volrath.getName().equals("Volrath's Shapeshifter"));
+        assert(volrath.getNetPower() == 0);
+        assert(volrath.getNetToughness() == 1);
+        assert(volrath.getKeywords().isEmpty());
+
+        SpellAbility discardAfterRevert = findSAWithPrefix(volrath, "{2}");
+        assert(discardAfterRevert != null && discardAfterRevert.getApi() == ApiType.Discard);
     }
 }
