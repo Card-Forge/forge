@@ -5,10 +5,8 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.GameCommand;
 import forge.card.CardStateName;
-import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -29,12 +27,12 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import forge.util.TextUtil;
-import forge.util.collect.*;
 import forge.util.Lang;
 import forge.util.MessageUtil;
+import forge.util.TextUtil;
+import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 

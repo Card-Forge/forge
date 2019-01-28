@@ -2,7 +2,6 @@ package forge.game.ability.effects;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
-import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
