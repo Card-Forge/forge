@@ -174,7 +174,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         Card ripper = createCard("Ruthless Ripper", p);
-        ripper.setState(CardStateName.FaceDown, true);
+        ripper.turnFaceDownNoUpdate();
         p.getZone(ZoneType.Battlefield).add(ripper);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
@@ -1802,30 +1802,30 @@ public class GameSimulatorTest extends SimulationTestCase {
 
         // 1. Assert that Volrath has the Discard ability
         SpellAbility discard = findSAWithPrefix(volrath, "{2}");
-        assert(discard != null && discard.getApi() == ApiType.Discard);
+        assertTrue(discard != null && discard.getApi() == ApiType.Discard);
 
         // 2. Copy the text from a creature
         addCardToZone("Abattoir Ghoul", p, ZoneType.Graveyard);
         game.getAction().checkStateEffects(true);
 
-        assert(volrath.getName().equals("Abattoir Ghoul"));
-        assert(volrath.getNetPower() == 3);
-        assert(volrath.getNetToughness() == 2);
-        assert(volrath.hasKeyword(Keyword.FIRST_STRIKE));
+        assertTrue(volrath.getName().equals("Abattoir Ghoul"));
+        assertTrue(volrath.getNetPower() == 3);
+        assertTrue(volrath.getNetToughness() == 2);
+        assertTrue(volrath.hasKeyword(Keyword.FIRST_STRIKE));
 
         SpellAbility discardAfterCopy = findSAWithPrefix(volrath, "{2}");
-        assert(discardAfterCopy != null && discardAfterCopy.getApi() == ApiType.Discard);
+        assertTrue(discardAfterCopy != null && discardAfterCopy.getApi() == ApiType.Discard);
 
         // 3. Revert back to not copying any text
         addCardToZone("Plains", p, ZoneType.Graveyard);
         game.getAction().checkStateEffects(true);
 
-        assert(volrath.getName().equals("Volrath's Shapeshifter"));
-        assert(volrath.getNetPower() == 0);
-        assert(volrath.getNetToughness() == 1);
-        assert(volrath.getKeywords().isEmpty());
+        assertTrue(volrath.getName().equals("Volrath's Shapeshifter"));
+        assertTrue(volrath.getNetPower() == 0);
+        assertTrue(volrath.getNetToughness() == 1);
+        assertTrue(volrath.getKeywords().isEmpty());
 
         SpellAbility discardAfterRevert = findSAWithPrefix(volrath, "{2}");
-        assert(discardAfterRevert != null && discardAfterRevert.getApi() == ApiType.Discard);
+        assertTrue(discardAfterRevert != null && discardAfterRevert.getApi() == ApiType.Discard);
     }
 }
