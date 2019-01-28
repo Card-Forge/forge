@@ -1,0 +1,6 @@
+Name:Vizkopa Vampire
+ManaCost:2 WB
+Types:Creature Vampire
+PT:3/1
+K:Lifelink
+Oracle:Lifelink
