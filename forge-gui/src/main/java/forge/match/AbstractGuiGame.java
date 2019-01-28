@@ -230,6 +230,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public boolean isSelectable(final CardView card) {
 	return selectableCards.contains(card);
     }
+    public boolean isSelecting() {
+	return !selectableCards.isEmpty();
+    }
 
     /** Concede game, bring up WinLose UI. */
     public boolean concede() {

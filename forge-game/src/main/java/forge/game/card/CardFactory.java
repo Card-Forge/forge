@@ -25,8 +25,6 @@ import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.ApiType;
-import forge.game.ability.effects.CharmEffect;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementHandler;
@@ -680,9 +678,6 @@ public class CardFactory {
         }
 
         trig.setStackDescription(trig.toString());
-        if (trig.getApi() == ApiType.Charm && !trig.isWrapper()) {
-            CharmEffect.makeChoices(trig);
-        }
 
         WrappedAbility wrapperAbility = new WrappedAbility(t, trig, ((WrappedAbility) sa).getDecider());
         wrapperAbility.setTrigger(true);

@@ -11,6 +11,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 
 import forge.game.Game;
+import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
@@ -44,5 +45,40 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
             runParams.put("Cards", this);
             game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
         }
+    }
+
+    public CardCollection filterCards(Iterable<ZoneType> origin, ZoneType destination, String valid, Card host, SpellAbility sa) {
+        CardCollection allCards = new CardCollection();
+        if (destination != null) {
+            if (!containsColumn(destination)) {
+                return allCards;
+            }
+        }
+        if (origin != null) {
+            for (ZoneType z : origin) {
+                if (containsRow(z)) {
+                    if (destination != null) {
+                        allCards.addAll(row(z).get(destination));
+                    } else {
+                        for (CardCollection c : row(z).values()) {
+                            allCards.addAll(c);
+                        }
+                    }
+                }
+            }
+        } else if (destination != null) {
+            for (CardCollection c : column(destination).values()) {
+                allCards.addAll(c);
+            }
+        } else {
+            for (CardCollection c : values()) {
+                allCards.addAll(c);
+            }
+        }
+
+        if (valid != null) {
+            allCards = CardLists.getValidCards(allCards, valid.split(","), host.getController(), host, sa);
+        }
+        return allCards;
     }
 }

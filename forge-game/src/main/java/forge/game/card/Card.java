@@ -1465,7 +1465,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                         }
                     }
                 }
-                if (keyword.startsWith("CantBeCounteredBy")) {
+                if (keyword.startsWith("CantBeCounteredBy") || keyword.startsWith("Panharmonicon")
+                        || keyword.startsWith("Dieharmonicon")) {
                     final String[] p = keyword.split(":");
                     sbLong.append(p[2]).append("\r\n");
                 } else if (keyword.startsWith("etbCounter")) {
@@ -3402,6 +3403,15 @@ public class Card extends GameEntity implements Comparable<Card> {
             updateKeywords();
         }
         return change;
+    }
+
+    public final boolean hasChangedCardKeywords(final long timestamp) {
+        return changedCardKeywords.containsKey(timestamp);
+    }
+
+    public final void addChangedCardKeywordsInternal(final KeywordsChange change, final long timestamp) {
+        changedCardKeywords.put(timestamp, change);
+        updateKeywordsCache(currentState);
     }
 
     // Hidden keywords will be left out
@@ -5731,7 +5741,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public void setChangedCardKeywords(Map<Long, KeywordsChange> changedCardKeywords) {
         this.changedCardKeywords.clear();
         for (Entry<Long, KeywordsChange> entry : changedCardKeywords.entrySet()) {
-            this.changedCardKeywords.put(entry.getKey(), entry.getValue());
+            this.changedCardKeywords.put(entry.getKey(), entry.getValue().copy(this, true));
         }
     }
 

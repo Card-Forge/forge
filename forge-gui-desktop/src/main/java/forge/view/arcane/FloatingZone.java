@@ -94,6 +94,11 @@ public class FloatingZone extends FloatingCardArea {
         }
         floatingAreas.clear();
     }
+    public static void refreshAll() {
+        for (final FloatingZone cardArea : floatingAreas.values()) {
+            cardArea.refresh();
+        }
+    }
 
     private final ZoneType zone;
     private PlayerView player;

@@ -30,12 +30,11 @@ import forge.game.card.Card;
  * </p>
  * 
  * @author Forge
- * @version $Id: KeywordsChange.java 27095 2014-08-17 07:32:24Z elcnesh $
  */
-public class KeywordsChange {
-    private final KeywordCollection keywords = new KeywordCollection();
-    private final List<KeywordInterface> removeKeywordInterfaces = Lists.newArrayList(); 
-    private final List<String> removeKeywords = Lists.newArrayList();
+public class KeywordsChange  implements Cloneable {
+    private KeywordCollection keywords = new KeywordCollection();
+    private List<KeywordInterface> removeKeywordInterfaces = Lists.newArrayList();
+    private List<String> removeKeywords = Lists.newArrayList();
     private boolean removeAllKeywords;
     private boolean removeIntrinsicKeywords;
 
@@ -63,7 +62,7 @@ public class KeywordsChange {
         this.removeAllKeywords = removeAll;
         this.removeIntrinsicKeywords = removeIntrinsic;
     }
-    
+
     public KeywordsChange(
             final Collection<KeywordInterface> keywordList,
             final Collection<KeywordInterface> removeKeywordInterfaces,
@@ -171,5 +170,50 @@ public class KeywordsChange {
         if (other.removeIntrinsicKeywords) {
             removeIntrinsicKeywords = true;
         }
+    }
+
+    public void setHostCard(final Card host) {
+        keywords.setHostCard(host);
+        for (KeywordInterface k : removeKeywordInterfaces) {
+            k.setHostCard(host);
+        }
+    }
+
+    public KeywordsChange copy(final Card host, final boolean lki) {
+        try {
+            KeywordsChange result = (KeywordsChange)super.clone();
+
+            result.keywords = new KeywordCollection();
+            for (KeywordInterface ki : this.keywords.getValues()) {
+                result.keywords.insert(ki.copy(host, lki));
+            }
+
+            result.removeKeywords = Lists.newArrayList(removeKeywords);
+
+            result.removeKeywordInterfaces = Lists.newArrayList();
+            for (KeywordInterface ki : this.removeKeywordInterfaces) {
+                removeKeywordInterfaces.add(ki.copy(host, lki));
+            }
+
+            return result;
+        }  catch (final Exception ex) {
+            throw new RuntimeException("KeywordsChange : clone() error", ex);
+        }
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<+");
+        sb.append(this.keywords);
+        sb.append("|-");
+        sb.append(this.removeKeywordInterfaces);
+        sb.append("|-");
+        sb.append(this.removeKeywords);
+        sb.append(">");
+        return sb.toString();
     }
 }

@@ -42,48 +42,19 @@ public class TriggerChangesZoneAll extends Trigger {
     }
 
     private CardCollection filterCards(CardZoneTable table) {
-        CardCollection allCards = new CardCollection();
         ZoneType destination = null;
+        List<ZoneType> origin = null;
 
-        if (hasParam("Destination")) {
-            if (!getParam("Destination").equals("Any")) {
-                destination = ZoneType.valueOf(getParam("Destination"));
-                if (!table.containsColumn(destination)) {
-                    return allCards;
-                }
-            }
+        if (hasParam("Destination") && !getParam("Destination").equals("Any")) {
+            destination = ZoneType.valueOf(getParam("Destination"));
         }
 
         if (hasParam("Origin") && !getParam("Origin").equals("Any")) {
-            if (getParam("Origin") == null) {
-                return allCards;
-            }
-            final List<ZoneType> origin = ZoneType.listValueOf(getParam("Origin"));
-            for (ZoneType z : origin) {
-                if (table.containsRow(z)) {
-                    if (destination != null) {
-                        allCards.addAll(table.row(z).get(destination));
-                    } else {
-                        for (CardCollection c : table.row(z).values()) {
-                            allCards.addAll(c);
-                        }
-                    }
-                }
-            }
-        } else if (destination != null) {
-            for (CardCollection c : table.column(destination).values()) {
-                allCards.addAll(c);
-            }
-        } else {
-            for (CardCollection c : table.values()) {
-                allCards.addAll(c);
-            }
+            origin = ZoneType.listValueOf(getParam("Origin"));
         }
 
-        if (hasParam("ValidCards")) {
-            allCards = CardLists.getValidCards(allCards, getParam("ValidCards").split(","),
-                    getHostCard().getController(), getHostCard(), null);
-        }
-        return allCards;
+        final String valid = this.getParamOrDefault("ValidCards", null);
+
+        return table.filterCards(origin, destination, valid, getHostCard(), null);
     }
 }
