@@ -279,7 +279,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         if (isSelected) {
             g2d.setColor(Color.green);
             final int n = Math.max(1, Math.round(cardWidth * CardPanel.SELECTED_BORDER_SIZE));
-	    g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n , cornerSize + n);
+            g2d.fillRoundRect(cardXOffset - n, (cardYOffset - n) + offset, cardWidth + (n * 2), cardHeight + (n * 2), cornerSize + n , cornerSize + n);
         }
 
         // Black fill - (will become an outline for white bordered cards)
@@ -335,11 +335,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                     cardWidth, cardHeight, Math.round(cardWidth * BLACK_BORDER_SIZE));
         }
 
-	System.out.println("Painting " + getCard() + " selecting " + matchUI.isSelecting());
 	boolean nonselectable = matchUI.isSelecting() && !matchUI.isSelectable(getCard());
-	// if selecting, darken non-selectable cards - pfps - needs fixes to refreshing to do right
+	// if selecting, darken non-selectable cards
 	if ( nonselectable ) {
-	    System.out.println("Paint nonselectable " + card);
 	    boolean noBorderPref = !isPreferenceEnabled(FPref.UI_RENDER_BLACK_BORDERS);
 	    boolean cardImgHasAlpha = imagePanel != null && imagePanel.getSrcImage() != null && imagePanel.getSrcImage().getColorModel().hasAlpha();
 	    final int cornerSize = noBorderPref && !cardImgHasAlpha ? 0 : Math.max(4, Math.round(cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
@@ -373,7 +371,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final boolean canShow = matchUI.mayView(card);
         final boolean showText = !imagePanel.hasImage() || !isAnimationPanel;
 
-	System.out.println("doLayout " + card);
         displayCardNameOverlay(showText && canShow && showCardNameOverlay(), imgSize, imgPos);
         displayPTOverlay(showText && (canShow || card.isFaceDown()) && showCardPowerOverlay(), imgSize, imgPos);
         displayCardIdOverlay(showText && canShow && showCardIdOverlay(), imgSize, imgPos);

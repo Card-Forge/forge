@@ -525,6 +525,45 @@ public final class CMatchUI
     }
 
     @Override
+    public void setSelectables(final Iterable<CardView> cards) {
+	super.setSelectables(cards);
+	// update zones on tabletop and floating zones - non-selectable cards may be rendered differently
+	FThreads.invokeInEdtNowOrLater(new Runnable() {
+                @Override public final void run() {
+		    for (final PlayerView p : getGameView().getPlayers()) {
+			if ( p.getCards(ZoneType.Battlefield) != null ) {
+			    updateCards(p.getCards(ZoneType.Battlefield));
+			}
+			if ( p.getCards(ZoneType.Hand) != null ) {
+			    updateCards(p.getCards(ZoneType.Hand));
+			}
+		    }
+		    FloatingZone.refreshAll();
+		}
+	    });
+    }
+
+    @Override
+    public void clearSelectables() {
+	super.clearSelectables();
+	// update zones on tabletop and floating zones - non-selectable cards may be rendered differently
+	FThreads.invokeInEdtNowOrLater(new Runnable() {
+                @Override public final void run() {
+		    for (final PlayerView p : getGameView().getPlayers()) {
+			if ( p.getCards(ZoneType.Battlefield) != null ) {
+			    updateCards(p.getCards(ZoneType.Battlefield));
+			}
+			if ( p.getCards(ZoneType.Hand) != null ) {
+			    updateCards(p.getCards(ZoneType.Hand));
+			}
+		    }
+		    FloatingZone.refreshAll();
+		}
+	    });
+    }
+
+
+    @Override
     public List<JMenu> getMenus() {
         return menus.getMenus();
     }
