@@ -336,7 +336,7 @@ public class GameCopier {
 
             newCard.setFlipped(c.isFlipped());
             for (Map.Entry<Long, CardCloneStates> e : c.getCloneStates().entrySet()) {
-                newCard.addCloneState(e.getValue().copy(newCard, true), e.getKey);
+                newCard.addCloneState(e.getValue().copy(newCard, true), e.getKey());
             }
 
             Map<CounterType, Integer> counters = c.getCounters();
