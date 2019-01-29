@@ -3121,6 +3121,16 @@ public class Card extends GameEntity implements Comparable<Card> {
         clonedStates.clear();
     }
 
+    public final Map<Long, CardCloneStates> getCloneStates() {
+        return clonedStates;
+    }
+
+    public final void setCloneStates(Map<Long, CardCloneStates> val) {
+        clonedStates.clear();
+        clonedStates.putAll(val);
+        updateCloneState(true);
+    }
+
     private final void updateCloneState(final boolean updateView) {
         if (isFaceDown()) {
             setState(CardStateName.FaceDown, updateView, true);

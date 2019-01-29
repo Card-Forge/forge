@@ -1828,4 +1828,91 @@ public class GameSimulatorTest extends SimulationTestCase {
         SpellAbility discardAfterRevert = findSAWithPrefix(volrath, "{2}");
         assertTrue(discardAfterRevert != null && discardAfterRevert.getApi() == ApiType.Discard);
     }
+
+
+    public void testCloneDimir() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        // add enough cards to hand to flip Jushi
+        for (int i = 0; i < 9; i++) {
+            addCardToZone("Plains", p, ZoneType.Hand);
+            addCardToZone("Plains", p, ZoneType.Library);
+            addCard("Swamp", p);
+            addCard("Island", p);
+        }
+
+        Card dimirdg = addCard("Dimir Doppelganger", p);
+        // so T can be paid
+        dimirdg.setSickness(false);
+        SpellAbility saDimirClone = findSAWithPrefix(dimirdg, "{1}{U}{B}");
+
+        assertTrue(saDimirClone != null && saDimirClone.getApi() == ApiType.ChangeZone);
+
+        Card jushi = addCardToZone("Jushi Apprentice", p, ZoneType.Graveyard);
+        Card bear = addCardToZone("Runeclaw Bear", p, ZoneType.Graveyard);
+        Card nezumi = addCardToZone("Nezumi Shortfang", p, ZoneType.Graveyard);
+
+        // Clone Jushi first
+        saDimirClone.getTargets().add(jushi);
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(saDimirClone).value;
+        assertTrue(score > 0);
+
+        Card dimirdgAfterCopy1 = (Card)sim.getGameCopier().find(dimirdg);
+        assertTrue(dimirdgAfterCopy1.getName().equals("Jushi Apprentice"));
+        assertTrue(dimirdgAfterCopy1.getNetPower() == 1);
+        assertTrue(dimirdgAfterCopy1.getNetToughness() == 2);
+        assertTrue(dimirdgAfterCopy1.isFlipCard());
+        assertFalse(dimirdgAfterCopy1.isFlipped());
+        assertFalse(dimirdgAfterCopy1.getType().isLegendary());
+
+        System.out.println(dimirdgAfterCopy1.getPaperCard().getName());
+        System.out.println(dimirdgAfterCopy1.getCloneStates());
+
+        // make new simulator so new SpellAbility is found
+        Game simGame = sim.getSimulatedGameState();
+        sim = createSimulator(simGame, p);
+
+        Player copiedPlayer = (Player)sim.getGameCopier().find(p);
+        int handSize = copiedPlayer.getCardsIn(ZoneType.Hand).size();
+        assertTrue(handSize == 9);
+
+        SpellAbility draw = findSAWithPrefix(dimirdgAfterCopy1, "{2}{U}");
+        score = sim.simulateSpellAbility(draw).value;
+        assertTrue(score > 0);
+
+        copiedPlayer = (Player)sim.getGameCopier().find(p);
+        handSize = copiedPlayer.getCardsIn(ZoneType.Hand).size();
+        assertTrue(handSize == 10);
+
+        simGame = sim.getSimulatedGameState();
+        System.out.println(simGame.getCardsIn(ZoneType.Battlefield));
+
+        Card dimirdgAfterFlip1 = (Card)sim.getGameCopier().find(dimirdgAfterCopy1);
+        //System.out.println(dimirdgAfterFlip1.getCloneStates());
+        System.out.println(dimirdgAfterFlip1.getName());
+        System.out.println(dimirdgAfterFlip1.getOriginalState(CardStateName.Original).getName());
+        System.out.println(dimirdgAfterFlip1.isFlipCard());
+        System.out.println(dimirdgAfterFlip1.isFlipped());
+        assertTrue(dimirdgAfterFlip1.getName().equals("Tomoya the Revealer"));
+        assertTrue(dimirdgAfterFlip1.getNetPower() == 2);
+        assertTrue(dimirdgAfterFlip1.getNetToughness() == 3);
+        assertTrue(dimirdgAfterFlip1.isFlipped());
+        assertTrue(dimirdgAfterFlip1.getType().isLegendary());
+
+        saDimirClone = findSAWithPrefix(dimirdgAfterFlip1, "{1}{U}{B}");
+        // Clone Bear first
+        saDimirClone.getTargets().add(bear);
+
+        score = sim.simulateSpellAbility(saDimirClone).value;
+        assertTrue(score > 0);
+        Card dimirdgAfterCopy2 = (Card)sim.getGameCopier().find(dimirdg);
+        assertTrue(dimirdgAfterCopy2.getName().equals("Runeclaw Bear"));
+        assertTrue(dimirdgAfterCopy2.getNetPower() == 2);
+        assertTrue(dimirdgAfterCopy2.getNetToughness() == 2);
+        assertTrue(dimirdgAfterCopy2.isFlipped());
+        assertFalse(dimirdgAfterCopy2.getType().isLegendary());
+    }
 }

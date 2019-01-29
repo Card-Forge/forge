@@ -267,6 +267,7 @@ public class GameCopier {
                 System.err.println(sa.toString());
             }
         }
+
         return newCard;
     }
 
@@ -295,6 +296,7 @@ public class GameCopier {
             
             newCard.setChangedCardTypes(c.getChangedCardTypesMap());
             newCard.setChangedCardKeywords(c.getChangedCardKeywords());
+
             // TODO: Is this correct? Does it not duplicate keywords from enchantments and such?
             for (KeywordInterface kw : c.getHiddenExtrinsicKeywords())
                 newCard.addHiddenExtrinsicKeyword(kw);
@@ -334,6 +336,9 @@ public class GameCopier {
                     }
                 }
             }
+
+            newCard.setFlipped(c.isFlipped());
+            newCard.setCloneStates(c.getCloneStates());
 
             Map<CounterType, Integer> counters = c.getCounters();
             if (!counters.isEmpty()) {
