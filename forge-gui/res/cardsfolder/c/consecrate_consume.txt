@@ -11,8 +11,10 @@ ALTERNATE
 Name:Consume
 ManaCost:2 W B
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ 2 W B | ValidTgts$ Player | SacValid$ Creature.greatestPower+TargetedPlayerCtrl | RememberSacrificed$ True | SacMessage$ Creature with greatest power among creatures you control | SubAbility$ DBGainLife | SpellDescription$ Target player sacrifices a creature with the greatest power among creatures they control. You gain life equal to its power.
-SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
+A:SP$ Pump | Cost$ 2 W B | ValidTgts$ Player | SubAbility$ DBRepeat | SpellDescription$ Target player sacrifices a creature with the greatest power among creatures they control. You gain life equal to its power.
+SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ TargetedPlayer | RepeatSubAbility$ DBChooseCard
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature.greatestPowerControlledByRemembered | Mandatory$ True | SubAbility$ DBSac | SpellDescription$ Target player sacrifices a creature with the greatest power among creatures they control. You gain life equal to its power.
+SVar:DBSac:DB$ Sacrifice | Defined$ Player.IsRemembered | SacValid$ Card.ChosenCard | RememberSacrificed$ True | SubAbility$ DBGainLife | SacMessage$ the creature with the highest power 
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:RememberedLKI$CardPower
 Oracle:Target player sacrifices a creature with the greatest power among creatures they control. You gain life equal to its power.
