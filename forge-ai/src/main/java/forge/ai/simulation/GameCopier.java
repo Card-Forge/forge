@@ -19,10 +19,7 @@ import forge.game.GameObjectMap;
 import forge.game.GameRules;
 import forge.game.Match;
 import forge.game.StaticEffect;
-import forge.game.card.Card;
-import forge.game.card.CardFactory;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.keyword.KeywordInterface;
@@ -338,7 +335,9 @@ public class GameCopier {
             }
 
             newCard.setFlipped(c.isFlipped());
-            newCard.setCloneStates(c.getCloneStates());
+            for (Map.Entry<Long, CardCloneStates> e : c.getCloneStates().entrySet()) {
+                newCard.addCloneState(e.getValue().copy(newCard, true), e.getKey);
+            }
 
             Map<CounterType, Integer> counters = c.getCounters();
             if (!counters.isEmpty()) {
