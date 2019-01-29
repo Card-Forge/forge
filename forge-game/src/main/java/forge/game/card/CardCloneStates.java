@@ -49,5 +49,11 @@ public class CardCloneStates extends ForwardingMap<CardStateName, CardState> {
         return result;
     }
 
-    
+    public CardCloneStates copy(final Card host, final boolean lki) {
+        CardCloneStates result = new CardCloneStates(origin, ctb);
+        for (Map.Entry<CardStateName, CardState> e : dataMap) {
+            result.put(e.getKey(), e.getValue().copy(host, e.getKey(), lki));
+        }
+        return result;
+    }
 }
