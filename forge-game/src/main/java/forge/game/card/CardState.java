@@ -43,6 +43,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import io.sentry.Sentry;
+import io.sentry.event.BreadcrumbBuilder;
+
 public class CardState extends GameObject {
     private String name = "";
     private CardType type = new CardType();
@@ -213,7 +216,19 @@ public class CardState extends GameObject {
         if (s.trim().length() == 0) {
             return null;
         }
-        KeywordInterface inst = intrinsicKeywords.add(s); 
+        KeywordInterface inst = null;
+        try {
+            inst = intrinsicKeywords.add(s);
+        } catch (Exception e) {
+            String msg = "CardState:addIntrinsicKeyword: failed to parse Keyword";
+            Sentry.getContext().recordBreadcrumb(
+                    new BreadcrumbBuilder().setMessage(msg)
+                    .withData("Card", card.getName()).withData("Keyword", s).build()
+            );
+
+            //rethrow
+            throw new RuntimeException("Error in Keyword " + s + " for card " + card.getName(), e);
+        }
         if (inst != null && initTraits) {
             inst.createTraits(card, true);
         }
