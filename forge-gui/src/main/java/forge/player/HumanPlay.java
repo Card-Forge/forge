@@ -605,7 +605,8 @@ public class HumanPlay {
                         }
                     }
                 }
-                else if (from == ZoneType.Hand) { // Tainted Specter
+                else if (from == ZoneType.Hand || from == ZoneType.Graveyard) { // Tainted Specter (hand), Gurzigost (graveyard)
+                    // FIXME: why is this limited only to particular zones? Shouldn't it be generic?
                     boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "put into library." + orString);
                     if (!hasPaid) {
                         return false;
