@@ -1868,8 +1868,7 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertFalse(dimirdgAfterCopy1.isFlipped());
         assertFalse(dimirdgAfterCopy1.getType().isLegendary());
 
-        System.out.println(dimirdgAfterCopy1.getPaperCard().getName());
-        System.out.println(dimirdgAfterCopy1.getCloneStates());
+        bear = (Card)sim.getGameCopier().find(bear);
 
         // make new simulator so new SpellAbility is found
         Game simGame = sim.getSimulatedGameState();
@@ -1888,27 +1887,43 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertTrue(handSize == 10);
 
         simGame = sim.getSimulatedGameState();
-        System.out.println(simGame.getCardsIn(ZoneType.Battlefield));
+
+        bear = (Card)sim.getGameCopier().find(bear);
+
+        // make new simulator so new SpellAbility is found
+        simGame = sim.getSimulatedGameState();
+        sim = createSimulator(simGame, p);
+
+        //bear = (Card)sim.getGameCopier().find(bear);
+
+        simGame = sim.getSimulatedGameState();
 
         Card dimirdgAfterFlip1 = (Card)sim.getGameCopier().find(dimirdgAfterCopy1);
-        //System.out.println(dimirdgAfterFlip1.getCloneStates());
-        System.out.println(dimirdgAfterFlip1.getName());
-        System.out.println(dimirdgAfterFlip1.getOriginalState(CardStateName.Original).getName());
-        System.out.println(dimirdgAfterFlip1.isFlipCard());
-        System.out.println(dimirdgAfterFlip1.isFlipped());
+
         assertTrue(dimirdgAfterFlip1.getName().equals("Tomoya the Revealer"));
         assertTrue(dimirdgAfterFlip1.getNetPower() == 2);
         assertTrue(dimirdgAfterFlip1.getNetToughness() == 3);
         assertTrue(dimirdgAfterFlip1.isFlipped());
         assertTrue(dimirdgAfterFlip1.getType().isLegendary());
 
-        saDimirClone = findSAWithPrefix(dimirdgAfterFlip1, "{1}{U}{B}");
+        saDimirClone = findSAWithPrefix(dimirdgAfterCopy1, "{1}{U}{B}");
         // Clone Bear first
+        saDimirClone.resetTargets();
         saDimirClone.getTargets().add(bear);
 
         score = sim.simulateSpellAbility(saDimirClone).value;
         assertTrue(score > 0);
-        Card dimirdgAfterCopy2 = (Card)sim.getGameCopier().find(dimirdg);
+
+        Card dimirdgAfterCopy2 = (Card)sim.getGameCopier().find(dimirdgAfterCopy1);
+
+        //System.out.println(sim.getSimulatedGameState().getCardsIn(ZoneType.Battlefield));
+
+        System.out.println(dimirdgAfterCopy2.getName());
+        System.out.println(dimirdgAfterCopy2.getCloneStates());
+        System.out.println(dimirdgAfterCopy2.getOriginalState(CardStateName.Original).getName());
+        System.out.println(dimirdgAfterCopy2.isFlipCard());
+        System.out.println(dimirdgAfterCopy2.isFlipped());
+
         assertTrue(dimirdgAfterCopy2.getName().equals("Runeclaw Bear"));
         assertTrue(dimirdgAfterCopy2.getNetPower() == 2);
         assertTrue(dimirdgAfterCopy2.getNetToughness() == 2);
