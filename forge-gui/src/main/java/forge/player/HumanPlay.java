@@ -605,7 +605,7 @@ public class HumanPlay {
                         }
                     }
                 }
-                else if (from == ZoneType.Hand) { // Tainted Specter
+                else { // Tainted Specter, Gurzigost, etc.
                     boolean hasPaid = payCostPart(controller, sourceAbility, (CostPartWithList)part, amount, list, "put into library." + orString);
                     if (!hasPaid) {
                         return false;
