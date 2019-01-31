@@ -1,0 +1,11 @@
+Name:Rix Maadi Reveler
+ManaCost:1 R
+Types:Creature Human Shaman
+PT:2/2
+K:Spectacle:2 B R
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, discard a card, then draw a card. If CARDNAME's spectacle cost was paid, instead discard your hand, then draw three cards.
+SVar:TrigDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBDrawOne | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.spectacle | ConditionCompare$ EQ0
+SVar:DBDrawOne:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.spectacle | ConditionCompare$ EQ0 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Mode$ Hand | Defined$ You | SubAbility$ DBDrawThree | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.spectacle
+SVar:DBDrawThree:DB$ Draw | Defined$ You | NumCards$ 3 | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.spectacle
+Oracle:Spectacle {2}{B}{R} (You may cast this spell for its spectacle cost rather than its mana cost if an opponent lost life this turn.)\nWhen Rix Maadi Reveler enters the battlefield, discard a card, then draw a card. If Rix Maadi Reveler's spectacle cost was paid, instead discard your hand, then draw three cards.
