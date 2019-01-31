@@ -95,7 +95,14 @@ public class ComputerUtilAbility {
 
     public static List<SpellAbility> getOriginalAndAltCostAbilities(final List<SpellAbility> originList, final Player player) {
         final List<SpellAbility> newAbilities = Lists.newArrayList();
+
+        List<SpellAbility> originListWithAddCosts = Lists.newArrayList();
         for (SpellAbility sa : originList) {
+            // If this spell has alternative additional costs, add them instead of the unmodified SA itself
+            originListWithAddCosts.addAll(GameActionUtil.getAdditionalCostSpell(sa));
+        }
+
+        for (SpellAbility sa : originListWithAddCosts) {
             sa.setActivatingPlayer(player);
 
             // determine which alternative costs are cheaper than the original and prioritize them
