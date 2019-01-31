@@ -1127,7 +1127,7 @@ public class GameAction {
 
         if (c.isAttachedToEntity()) {
             final GameEntity ge = c.getEntityAttachedTo();
-            if (!ge.canBeAttached(c)) {
+            if (!ge.canBeAttached(c, true)) {
                 c.unattachFromEntity(ge);
                 checkAgain = true;
             }
