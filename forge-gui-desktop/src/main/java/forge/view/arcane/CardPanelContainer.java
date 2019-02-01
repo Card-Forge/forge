@@ -325,7 +325,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         for (final CardPanel cardPanel : cardPanels) {
             this.add(cardPanel);
         }
-        this.doLayout();
+	//pfps the validate just below will do the layout, so don't do it here        this.doLayout();
         this.invalidate();
         this.getParent().validate();
         this.repaint();
