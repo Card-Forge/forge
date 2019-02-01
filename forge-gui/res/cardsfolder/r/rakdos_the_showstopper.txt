@@ -4,9 +4,8 @@ Types:Legendary Creature Demon
 PT:6/6
 K:Flying
 K:Trample
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFlip | TriggerDescription$ When CARDNAME enters the battlefield, flip a coin for each creature that isn't a Demon, Dragons, or coins. Destroy each creature whose coin comes up tails.
-SVar:TrigFlip:DB$ FlipACoin | FlipUntilYouLose$ True | SaveNumFlipsToSVar$ X | LoseSubAbility$ DBDestroy
-SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Creature.IsNotChosenType | References$ X
-# TODO: -- THIS LINE NEEDS FIXING (doesn't reference the types correctly) --
-SVar:X:Count$Valid Creature.isn
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ EachCr | TriggerDescription$ When CARDNAME enters the battlefield, flip a coin for each creature that isn't a Demon, Devil, or Imp. Destroy each creature whose coin comes up tails.
+SVar:EachCr:DB$ RepeatEach | RepeatCards$ Creature.nonDemon+nonDevil+nonImp | Zone$ Battlefield | RepeatSubAbility$ TrigFlip
+SVar:TrigFlip:DB$ FlipACoin | NoCall$ True | TailsSubAbility$ DBDestroy
+SVar:DBDestroy:DB$ Destroy | Defined$ Remembered
 Oracle:Flying, trample\nWhen Rakdos, the Showstopper enters the battlefield, flip a coin for each creature that isn't a Demon, Devil, or Imp. Destroy each creature whose coin comes up tails.
