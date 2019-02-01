@@ -25,7 +25,10 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
+import forge.game.card.CardZoneTable;
+import forge.game.keyword.KeywordInterface;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.Ability;
@@ -42,6 +45,7 @@ import io.sentry.event.BreadcrumbBuilder;
 import java.util.*;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -376,11 +380,7 @@ public class TriggerHandler {
         // Static triggers
         for (final Trigger t : Lists.newArrayList(activeTriggers)) {
             if (t.isStatic() && canRunTrigger(t, mode, runParams)) {
-                int x = 1 + handlePanharmonicon(t, runParams);
-
-                for (int i = 0; i < x; ++i) {
-                    runSingleTrigger(t, runParams);
-                }
+                runSingleTrigger(t, runParams);
 
                 checkStatics = true;
             }
@@ -448,7 +448,7 @@ public class TriggerHandler {
                     }
                 }
 
-                int x = 1 + handlePanharmonicon(t, runParams);;
+                int x = 1 + handlePanharmonicon(t, runParams, player);
 
                 for (int i = 0; i < x; ++i) {
                     runSingleTrigger(t, runParams);
@@ -636,7 +636,10 @@ public class TriggerHandler {
 
         sa.setStackDescription(sa.toString());
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
-            CharmEffect.makeChoices(sa);
+            if (!CharmEffect.makeChoices(sa)) {
+                // 603.3c If no mode is chosen, the ability is removed from the stack.
+                return;
+            }
         }
 
         Player decider = null;
@@ -692,14 +695,19 @@ public class TriggerHandler {
         }
     }
 
-    private int handlePanharmonicon(final Trigger t, final Map<String, Object> runParams) {
-        // Need to get the last info from the trigger host
-        final Card host = game.getChangeZoneLKIInfo(t.getHostCard());
-        final Player p = host.getController();
+    private int handlePanharmonicon(final Trigger t, final Map<String, Object> runParams, final Player p) {
+        Card host = t.getHostCard();
 
-        // not a changesZone trigger
-        if (t.getMode() != TriggerType.ChangesZone) {
+        // not a changesZone trigger or changesZoneAll
+        if (t.getMode() != TriggerType.ChangesZone && t.getMode() != TriggerType.ChangesZoneAll) {
             return 0;
+        }
+
+        // leave battlefield trigger, might be dying
+        // only real changeszone look back for this
+        if (t.getMode() == TriggerType.ChangesZone && "Battlefield".equals(t.getParam("Origin"))) {
+            // Need to get the last info from the trigger host
+            host = game.getChangeZoneLKIInfo(host);
         }
 
         // not a Permanent you control
@@ -708,30 +716,60 @@ public class TriggerHandler {
         }
 
         int n = 0;
-        for (final String kw : p.getKeywords()) {
-            if (kw.startsWith("Panharmonicon")) {
-                // Enter the Battlefield Trigger
-                if (runParams.get("Destination") instanceof String) {
-                    final String dest = (String) runParams.get("Destination");
-                    if ("Battlefield".equals(dest) && runParams.get("Card") instanceof Card) {
-                        final Card card = (Card) runParams.get("Card");
-                        final String valid = kw.split(":")[1];
-                        if (card.isValid(valid.split(","), p, host, null)) {
-                            n++;
+        if (t.getMode() == TriggerType.ChangesZone) {
+            // iterate over all cards
+            final List<Card> lastCards = CardLists.filterControlledBy(p.getGame().getLastStateBattlefield(), p);
+            for (final Card ck : lastCards) {
+                for (final KeywordInterface ki : ck.getKeywords()) {
+                    final String kw = ki.getOriginal();
+                    if (kw.startsWith("Panharmonicon")) {
+                        // Enter the Battlefield Trigger
+                        if (runParams.get("Destination") instanceof String) {
+                            final String dest = (String) runParams.get("Destination");
+                            if ("Battlefield".equals(dest) && runParams.get("Card") instanceof Card) {
+                                final Card card = (Card) runParams.get("Card");
+                                final String valid = kw.split(":")[1];
+                                if (card.isValid(valid.split(","), p, ck, null)) {
+                                    n++;
+                                }
+                            }
+                        }
+                    } else if (kw.startsWith("Dieharmonicon")) {
+                        // 700.4. The term dies means “is put into a graveyard from the battlefield.”
+                        if (runParams.get("Origin") instanceof String) {
+                            final String origin = (String) runParams.get("Origin");
+                            if ("Battlefield".equals(origin) && runParams.get("Destination") instanceof String) {
+                                final String dest = (String) runParams.get("Destination");
+                                if ("Graveyard".equals(dest) && runParams.get("Card") instanceof Card) {
+                                    final Card card = (Card) runParams.get("Card");
+                                    final String valid = kw.split(":")[1];
+                                    if (card.isValid(valid.split(","), p, ck, null)) {
+                                        n++;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
-            } else if (kw.startsWith("Dieharmonicon")) {
-                // 700.4. The term dies means “is put into a graveyard from the battlefield.”
-                if (runParams.get("Origin") instanceof String) {
-                    final String origin = (String) runParams.get("Origin");
-                    if ("Battlefield".equals(origin) && runParams.get("Destination") instanceof String) {
-                        final String dest = (String) runParams.get("Destination");
-                        if ("Graveyard".equals(dest) && runParams.get("Card") instanceof Card) {
-                            final Card card = (Card) runParams.get("Card");
-                            if (card.isCreature()) {
-                                n++;
-                            }
+            }
+        } else if (t.getMode() == TriggerType.ChangesZoneAll) {
+            final CardZoneTable table = (CardZoneTable) runParams.get("Cards");
+            // iterate over all cards
+            for (final Card ck : p.getCardsIn(ZoneType.Battlefield)) {
+                for (final KeywordInterface ki : ck.getKeywords()) {
+                    final String kw = ki.getOriginal();
+                    if (kw.startsWith("Panharmonicon")) {
+                        // currently there is no ChangesZoneAll that would trigger on etb
+                        final String valid = kw.split(":")[1];
+                        if (!table.filterCards(null, ZoneType.Battlefield, valid, ck, null).isEmpty()) {
+                            n++;
+                        }
+                    } else if (kw.startsWith("Dieharmonicon")) {
+                        // 700.4. The term dies means “is put into a graveyard from the battlefield.”
+                        final String valid = kw.split(":")[1];
+                        if (!table.filterCards(ImmutableList.of(ZoneType.Battlefield), ZoneType.Graveyard,
+                                valid, ck, null).isEmpty()) {
+                            n++;
                         }
                     }
                 }

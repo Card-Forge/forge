@@ -29,6 +29,7 @@ import forge.game.ability.effects.AttachEffect;
 import forge.game.card.*;
 import forge.game.event.*;
 import forge.game.keyword.KeywordInterface;
+import forge.game.keyword.KeywordsChange;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -290,6 +291,33 @@ public class GameAction {
         if (!suppress) {
             if (zoneFrom == null) {
                 copied.getOwner().addInboundToken(copied);
+            }
+
+            if (toBattlefield) {
+                // HACK for making the RIOT enchantment look into the Future
+                // need to check the Keywords what it would have on the Battlefield
+                Card riotLKI = CardUtil.getLKICopy(copied);
+                riotLKI.setLastKnownZone(zoneTo);
+                CardCollection preList = new CardCollection(riotLKI);
+                checkStaticAbilities(false, Sets.newHashSet(riotLKI), preList);
+
+                List<Long> changedTimeStamps = Lists.newArrayList();
+                for(Map.Entry<Long, KeywordsChange> e : riotLKI.getChangedCardKeywords().entrySet()) {
+                    if (!copied.hasChangedCardKeywords(e.getKey())) {
+                        KeywordsChange o = e.getValue();
+                        o.setHostCard(copied);
+                        for (KeywordInterface k : o.getKeywords()) {
+                            for (ReplacementEffect re : k.getReplacements()) {
+                                // this param need to be set, otherwise in ReplaceMoved it fails
+                                re.getMapParams().put("BypassEtbCheck", "True");
+                            }
+                        }
+                        copied.addChangedCardKeywordsInternal(o, e.getKey());
+                        changedTimeStamps.add(e.getKey());
+                    }
+                }
+
+                checkStaticAbilities(false);
             }
 
             Map<String, Object> repParams = Maps.newHashMap();
@@ -1099,7 +1127,7 @@ public class GameAction {
 
         if (c.isAttachedToEntity()) {
             final GameEntity ge = c.getEntityAttachedTo();
-            if (!ge.canBeAttached(c)) {
+            if (!ge.canBeAttached(c, true)) {
                 c.unattachFromEntity(ge);
                 checkAgain = true;
             }

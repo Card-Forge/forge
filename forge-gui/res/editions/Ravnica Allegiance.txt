@@ -5,6 +5,8 @@ Name=Ravnica Allegiance
 Code2=RNA
 MciCode=rna
 Type=Expansion
+BoosterCovers=5
+Booster=10 Common:!fromSheet("RNA Secret Cards"), 3 Uncommon:!fromSheet("RNA Secret Cards"), 1 RareMythic:!fromSheet("RNA Secret Cards"), 1 fromSheet("RNA Lands")
 
 [cards]
 1 M Angel of Grace
@@ -266,6 +268,11 @@ Type=Expansion
 257 C Simic Guildgate
 258 C Simic Guildgate
 259 R Stomping Ground
+260 L Plains
+261 L Island
+262 L Swamp
+263 L Mountain
+264 L Forest
 265 M Dovin, Architect of Law
 266 C Elite Arrester
 267 R Dovin's Dismissal

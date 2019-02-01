@@ -1503,4 +1503,197 @@ public class GameSimulatorTest extends SimulationTestCase {
     }
 
 
+    public void testRiotEnchantment() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        final String goblinName = "Zhur-Taa Goblin";
+
+        addCard("Rhythm of the Wild", p);
+
+        Card goblin = addCardToZone(goblinName, p, ZoneType.Hand);
+
+        addCard("Mountain", p);
+        addCard("Forest", p);
+
+        SpellAbility goblinSA = goblin.getFirstSpellAbility();
+        assertNotNull(goblinSA);
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(goblinSA).value;
+        assertTrue(score > 0);
+
+        Game simGame = sim.getSimulatedGameState();
+
+        Card simGoblin = findCardWithName(simGame, goblinName);
+
+        assertNotNull(simGoblin);
+        int effects = simGoblin.getCounters(CounterType.P1P1) + simGoblin.getKeywordMagnitude(Keyword.HASTE);
+        assertTrue(effects == 2);
+    }
+
+    public void testTeysaKarlovXathridNecromancer() {
+        // Teysa Karlov and Xathrid Necromancer dying at the same time makes 4 token
+
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        addCard("Teysa Karlov", p);
+        addCard("Xathrid Necromancer", p);
+
+        for (int i = 0; i < 4; i++) {
+            addCardToZone("Plains", p, ZoneType.Battlefield);
+        }
+
+        Card wrathOfGod = addCardToZone("Wrath of God", p, ZoneType.Hand);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+
+        SpellAbility wrathSA = wrathOfGod.getFirstSpellAbility();
+        assertNotNull(wrathSA);
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(wrathSA).value;
+        assertTrue(score > 0);
+        Game simGame = sim.getSimulatedGameState();
+
+        int numZombies = countCardsWithName(simGame, "Zombie");
+        assertTrue(numZombies == 4);
+    }
+
+    public void testDoubleTeysaKarlovXathridNecromancer() {
+        // Teysa Karlov dieing because of Legendary rule will make Xathrid Necromancer trigger 3 times
+
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        addCard("Teysa Karlov", p);
+        addCard("Xathrid Necromancer", p);
+
+        for (int i = 0; i < 3; i++) {
+            addCard("Plains", p);
+        }
+        addCard("Swamp", p);
+
+        Card second = addCardToZone("Teysa Karlov", p, ZoneType.Hand);
+
+        SpellAbility secondSA = second.getFirstSpellAbility();
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(secondSA).value;
+        assertTrue(score > 0);
+        Game simGame = sim.getSimulatedGameState();
+
+        int numZombies = countCardsWithName(simGame, "Zombie");
+        assertTrue(numZombies == 3);
+    }
+
+
+    public void testTeysaKarlovGitrogMonster() {
+
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        addCard("Teysa Karlov", p);
+        addCard("The Gitrog Monster", p);
+        addCard("Dryad Arbor", p);
+
+        for (int i = 0; i < 4; i++) {
+            addCard("Plains", p);
+            addCardToZone("Plains", p, ZoneType.Library);
+        }
+
+        Card armageddon = addCardToZone("Armageddon", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+
+        SpellAbility armageddonSA = armageddon.getFirstSpellAbility();
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(armageddonSA).value;
+        assertTrue(score > 0);
+        Game simGame = sim.getSimulatedGameState();
+
+        // Two cards drawn
+        assertTrue(simGame.getPlayers().get(0).getZone(ZoneType.Hand).size() == 2);
+    }
+
+    public void testTeysaKarlovGitrogMonsterGitrogDies() {
+
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        Card teysa = addCard("Teysa Karlov", p);
+        addCard("The Gitrog Monster", p);
+        addCard("Dryad Arbor", p);
+
+        String indestructibilityName = "Indestructibility";
+        Card indestructibility = addCard(indestructibilityName, p);
+
+        indestructibility.attachToEntity(teysa);
+
+        // update Indestructible state
+        game.getAction().checkStateEffects(true);
+
+        for (int i = 0; i < 4; i++) {
+            addCard("Plains", p);
+            addCardToZone("Plains", p, ZoneType.Library);
+        }
+
+        Card armageddon = addCardToZone("Wrath of God", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+
+        SpellAbility armageddonSA = armageddon.getFirstSpellAbility();
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(armageddonSA).value;
+        assertTrue(score > 0);
+        Game simGame = sim.getSimulatedGameState();
+
+        // One cards drawn
+        assertTrue(simGame.getPlayers().get(0).getZone(ZoneType.Hand).size() == 1);
+    }
+
+    public void testTeysaKarlovGitrogMonsterTeysaDies() {
+
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+
+        addCard("Teysa Karlov", p);
+        Card gitrog = addCard("The Gitrog Monster", p);
+        addCard("Dryad Arbor", p);
+
+        String indestructibilityName = "Indestructibility";
+        Card indestructibility = addCard(indestructibilityName, p);
+
+        indestructibility.attachToEntity(gitrog);
+
+        // update Indestructible state
+        game.getAction().checkStateEffects(true);
+
+        for (int i = 0; i < 4; i++) {
+            addCard("Plains", p);
+            addCardToZone("Plains", p, ZoneType.Library);
+        }
+
+        Card armageddon = addCardToZone("Wrath of God", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+
+        SpellAbility armageddonSA = armageddon.getFirstSpellAbility();
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(armageddonSA).value;
+        assertTrue(score > 0);
+        Game simGame = sim.getSimulatedGameState();
+
+        // One cards drawn
+        assertTrue(simGame.getPlayers().get(0).getZone(ZoneType.Hand).size() == 1);
+    }
 }
