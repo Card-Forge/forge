@@ -64,7 +64,6 @@ public class DialogChooseSets {
 
 		}
 
-		//FPanel panel = new FPanel(new MigLayout("insets 15, gap 0, center, wrap 3"));
 		FPanel panel = new FPanel(new MigLayout("insets 10, gap 5, center, wrap 3"));
 		panel.setOpaque(false);
 		panel.setBackgroundTexture(FSkin.getIcon(FSkinProp.BG_TEXTURE));
@@ -117,6 +116,7 @@ public class DialogChooseSets {
 		rightOptionsPanel.add(button);
 
 		FRadioButton noFormatSelectionButton = new FRadioButton("No Format Restriction");
+		noFormatSelectionButton.setActionCommand("No Format Restriction");
 		formatButtonGroup.add(noFormatSelectionButton);
 		rightOptionsPanel.add(noFormatSelectionButton);
 		noFormatSelectionButton.setSelected(true);
@@ -142,13 +142,13 @@ public class DialogChooseSets {
 			}
 
 			Predicate<CardEdition> formatPredicate = null;
-			if (!noFormatSelectionButton.isSelected()) {
-				for (GameFormat gameFormat : gameFormats) {
-					if (gameFormat.getName().equals(formatButtonGroup.getSelection().getActionCommand())) {
-						formatPredicate = edition -> gameFormat.editionLegalPredicate.apply(edition);
-					} else if (formatButtonGroup.getSelection().getActionCommand().equals("Modern Card Frame")) {
-						formatPredicate = edition -> edition.getDate().after(new Date(1059350399L * 1000L));
-					}
+			for (GameFormat gameFormat : gameFormats) {
+				if (gameFormat.getName().equals(formatButtonGroup.getSelection().getActionCommand())) {
+					formatPredicate = edition -> gameFormat.editionLegalPredicate.apply(edition) && (unselectableSets == null || !unselectableSets.contains(edition.getCode()));
+				} else if (formatButtonGroup.getSelection().getActionCommand().equals("Modern Card Frame")) {
+					formatPredicate = edition -> edition.getDate().after(new Date(1059350399L * 1000L)) && (unselectableSets == null || !unselectableSets.contains(edition.getCode()));
+				} else if (formatButtonGroup.getSelection().getActionCommand().equals("No Format Restriction")) {
+					formatPredicate = edition -> unselectableSets == null || !unselectableSets.contains(edition.getCode());
 				}
 			}
 
@@ -247,6 +247,11 @@ public class DialogChooseSets {
 		buttonPanel.add(hideOptionsButton, " w 175!, h 28!");
 
 		optionsPanel.add(buttonPanel, "span 2, growx");
+
+		if (showWantReprintsCheckbox) {
+			optionsPanel.add(cbWantReprints, "center, span, wrap");
+		}
+
 		optionsPanel.add(new JSeparator(SwingConstants.HORIZONTAL), "w 100%, span 2, growx");
 
 		panel.add(new FLabel.Builder().text("Choose sets").fontSize(20).build(), "center, span, wrap, gaptop 10");
@@ -287,9 +292,6 @@ public class DialogChooseSets {
 
 		JPanel southPanel = new JPanel(new MigLayout("insets 10, gap 30, ax center"));
 		southPanel.setOpaque(false);
-		if (showWantReprintsCheckbox) {
-			southPanel.add(cbWantReprints, "center, span, wrap");
-		}
 		southPanel.add(btnOk, "center, w 200!, h 30!");
 		southPanel.add(btnCancel, "center, w 200!, h 30!");
 
