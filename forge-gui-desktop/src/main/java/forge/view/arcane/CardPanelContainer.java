@@ -291,6 +291,9 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     }
 
     public final void removeCardPanel(final CardPanel fromPanel) {
+	removeCardPanel(fromPanel,true);
+    }
+    public final void removeCardPanel(final CardPanel fromPanel, final boolean repaint) {
         FThreads.assertExecutedByEdt(true);
         if (getMouseDragPanel() != null) {
             CardPanel.getDragAnimationPanel().setVisible(false);
@@ -303,9 +306,11 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         fromPanel.dispose();
         getCardPanels().remove(fromPanel);
         remove(fromPanel);
-        invalidate();
-        repaint();
-        doingLayout();
+	if ( repaint ) {
+	    invalidate();
+	    repaint();
+	    doingLayout();
+	}
     }
 
     public final void setCardPanels(final List<CardPanel> cardPanels) {
@@ -332,16 +337,21 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     }
 
     public final void clear() {
+	clear(true);
+    }
+    public final void clear(final boolean repaint) {
         FThreads.assertExecutedByEdt(true);
         for (final CardPanel p : getCardPanels()) {
             p.dispose();
         }
         getCardPanels().clear();
         removeAll();
-        setPreferredSize(new Dimension(0, 0));
-        invalidate();
-        getParent().validate();
-        repaint();
+	if ( repaint ) {
+	    setPreferredSize(new Dimension(0, 0));
+	    invalidate();
+	    getParent().validate();
+	    repaint();
+	}
     }
 
     public final FScrollPane getScrollPane() {
