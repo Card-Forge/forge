@@ -293,6 +293,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     public final void removeCardPanel(final CardPanel fromPanel) {
 	removeCardPanel(fromPanel,true);
     }
+
     public final void removeCardPanel(final CardPanel fromPanel, final boolean repaint) {
         FThreads.assertExecutedByEdt(true);
         if (getMouseDragPanel() != null) {
