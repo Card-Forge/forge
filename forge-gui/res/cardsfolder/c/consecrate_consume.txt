@@ -17,4 +17,5 @@ SVar:DBSac:DB$ Sacrifice | Defined$ Player.IsRemembered | SacValid$ Card.ChosenC
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardPower
+SVar:NeedsToPlay:Creature.OppCtrl
 Oracle:Target player sacrifices a creature with the greatest power among creatures they control. You gain life equal to its power.
