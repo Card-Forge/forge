@@ -606,6 +606,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                 if (remember != null) {
                     hostCard.addRemembered(movedCard);
+                    // addRememberedFromCardState ?
+                    if (tgtC.getMeldedWith() != null) {
+                        Card meld = game.getCardState(tgtC.getMeldedWith(), null);
+                        if (meld != null) {
+                            hostCard.addRemembered(meld);
+                        }
+                    }
                 }
                 if (forget != null) {
                     hostCard.removeRemembered(movedCard);
@@ -1121,6 +1128,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             
             if (remember) {
                 source.addRemembered(movedCard);
+                // addRememberedFromCardState ?
+                if (c.getMeldedWith() != null) {
+                    Card meld = game.getCardState(c.getMeldedWith(), null);
+                    if (meld != null) {
+                        source.addRemembered(meld);
+                    }
+                }
             }
             if (forget) {
                 source.removeRemembered(movedCard);
