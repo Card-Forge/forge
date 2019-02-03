@@ -352,10 +352,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     private boolean useSelectCardsInput(final FCollectionView<? extends GameEntity> sourceList) {
         // can't use InputSelect from GUI thread (e.g., DevMode Tutor)
-	    if ( FThreads.isGuiThread() ) { return false; }
+        if ( FThreads.isGuiThread() ) { return false; }
 
-	// if UI_SELECT_FROM_CARD_DISPLAYS not set use InputSelect only for battlefield and player hand
-	// if UI_SELECT_FROM_CARD_DISPLAYS set and using desktop GUI use InputSelect for any zone that can be shown
+        // if UI_SELECT_FROM_CARD_DISPLAYS not set use InputSelect only for battlefield and player hand
+        // if UI_SELECT_FROM_CARD_DISPLAYS set and using desktop GUI use InputSelect for any zone that can be shown
         for (final GameEntity c : sourceList) {
             if (c instanceof Player) {
                 continue;
@@ -372,14 +372,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
             final boolean useUiPointAtCard =
         (FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) && (!GuiBase.getInterface().isLibgdxPort())) ?
-		(cz.is(ZoneType.Battlefield) || cz.is(ZoneType.Hand) || cz.is(ZoneType.Library) || 
+		(cz.is(ZoneType.Battlefield) || cz.is(ZoneType.Hand) || cz.is(ZoneType.Library) ||
 		 cz.is(ZoneType.Graveyard) || cz.is(ZoneType.Exile) || cz.is(ZoneType.Flashback) || cz.is(ZoneType.Command)) :
 		(cz.is(ZoneType.Hand) && cz.getPlayer() == player || cz.is(ZoneType.Battlefield));
             if (!useUiPointAtCard) {
                 return false;
             }
         }
-	    return true;
+        return true;
     }
 
     @Override
