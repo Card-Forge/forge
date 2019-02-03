@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Ravnica Allegiance #01
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/01/098.-RNA1.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Your solution must satisfy all possible blocking scenarios.
+[state]
+humanlife=20
+ailife=9
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Ghalta, Primal Hunger;Electrodominance;Metamorphic Alteration;Slaughter the Strong;Lawmage's Binding
+humanbattlefield=Atzocan Seer;Draconic Disciple;Arboretum Elemental;Incubation Druid;Sacred Foundry|NoETBTrigs;Sacred Foundry|NoETBTrigs;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs
+aibattlefield=Garna, the Bloodflame;Belligerent Brontodon;Lyra Dawnbringer;Demanding Dragon

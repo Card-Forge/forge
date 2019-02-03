@@ -9,7 +9,7 @@ Name:Lorwyn-Shadowmoor|RegionSize:9|Desc:A sunny utopia with a thriving storyboo
 Name:Mercadia|RegionSize:6|Unreachable:True|Desc:
 Name:Mirrodin|RegionSize:9|Desc:A dark contagion is taking over this metal planet, breeding wave after wave of Phyrexian horrors.\nConsists of 63 events. Contains cards from MRD, DST, 5DN, SOM, MBS, NPH, and more.
 Name:Rath|RegionSize:6|Unreachable:True|Desc:
-Name:Ravnica|RegionSize:9|Desc:A worldwide cityscape of grand halls, decrepit slums, and ancient ruins.\nConsists of 88 events. Contains cards from RAV, GPT, DIS, RTR, GTC, DGM, GRN, GK1, and C15. 
+Name:Ravnica|RegionSize:9|Desc:A worldwide cityscape of grand halls, decrepit slums, and ancient ruins.\nConsists of 88 events. Contains cards from RAV, GPT, DIS, RTR, GTC, DGM, GRN, GK1, RNA, and C15. 
 Name:Regatha|RegionSize:6|Unreachable:True|Desc:
 Name:Shandalar|RegionSize:9|Unreachable:True|Desc:
 Name:Tarkir|RegionSize:9|Desc:A plane dominated by five powerful clans... or five powerful dragon lords.\nConsists of 45 events. Contains cards from KTK, FRF, DTK, CMD, CNS/CN2, some C17.
