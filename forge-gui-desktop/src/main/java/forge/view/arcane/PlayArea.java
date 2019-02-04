@@ -620,11 +620,11 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         toDelete.removeAll(notToDelete);
 
         if (toDelete.size() == getCardPanels().size()) {
-            clear();
+            clear(false);
         }
         else {
             for (final CardView card : toDelete) {
-                removeCardPanel(getCardPanel(card.getId()));
+                removeCardPanel(getCardPanel(card.getId()),false);
             }
         }
 
@@ -646,19 +646,21 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 needLayoutRefresh = true;
             }
         }
-        if (needLayoutRefresh) {
-            doLayout();
-        }
+	if (needLayoutRefresh) {
+	    doLayout();
+	}
 
+	invalidate(); //pfps do the extra invalidate before any scrolling 
         if (!newPanels.isEmpty()) {
+	    int i = newPanels.size();
             for (final CardPanel toPanel : newPanels) {
-                scrollRectToVisible(new Rectangle(toPanel.getCardX(), toPanel.getCardY(), toPanel.getCardWidth(), toPanel.getCardHeight()));
+		if ( --i == 0 ) { // only scroll to last panel to be added
+		    scrollRectToVisible(new Rectangle(toPanel.getCardX(), toPanel.getCardY(), toPanel.getCardWidth(), toPanel.getCardHeight()));
+		}
                 Animation.moveCard(toPanel);
             }
-        }
-
-        invalidate();
-        repaint();
+	}
+	repaint();
     }
 
     public boolean updateCard(final CardView card, boolean fromRefresh) {
