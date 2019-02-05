@@ -351,28 +351,35 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     private boolean useSelectCardsInput(final FCollectionView<? extends GameEntity> sourceList) {
-	if ( FThreads.isGuiThread() ) { return false; } // can't use InputSelect from GUI thread (e.g., DevMode Tutor)
-	// if UI_SELECT_FROM_CARD_DISPLAYS not set use InputSelect only for battlefield and player hand
-	// if UI_SELECT_FROM_CARD_DISPLAYS set and using desktop GUI use InputSelect for any zone that can be shown
+        // can't use InputSelect from GUI thread (e.g., DevMode Tutor)
+        if ( FThreads.isGuiThread() ) { return false; }
+
+        // if UI_SELECT_FROM_CARD_DISPLAYS not set use InputSelect only for battlefield and player hand
+        // if UI_SELECT_FROM_CARD_DISPLAYS set and using desktop GUI use InputSelect for any zone that can be shown
         for (final GameEntity c : sourceList) {
             if (c instanceof Player) {
                 continue;
             }
-	    if (!(c instanceof Card)) {
-		return false;
-	    }
+
+            if (!(c instanceof Card)) {
+                return false;
+            }
             final Zone cz = ((Card) c).getZone();
-            final boolean useUiPointAtCard = 
-		cz != null &&
-		(FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) && (!GuiBase.getInterface().isLibgdxPort()) ) ?
-		(cz.is(ZoneType.Battlefield) || cz.is(ZoneType.Hand) || cz.is(ZoneType.Library) || 
+            // Don't try to draw the UI point of a card if it doesn't exist in any zone.
+            if (cz == null) {
+                return false;
+            }
+
+            final boolean useUiPointAtCard =
+        (FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) && (!GuiBase.getInterface().isLibgdxPort())) ?
+		(cz.is(ZoneType.Battlefield) || cz.is(ZoneType.Hand) || cz.is(ZoneType.Library) ||
 		 cz.is(ZoneType.Graveyard) || cz.is(ZoneType.Exile) || cz.is(ZoneType.Flashback) || cz.is(ZoneType.Command)) :
 		(cz.is(ZoneType.Hand) && cz.getPlayer() == player || cz.is(ZoneType.Battlefield));
             if (!useUiPointAtCard) {
                 return false;
             }
         }
-	return true;
+        return true;
     }
 
     @Override

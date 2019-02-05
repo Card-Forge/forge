@@ -1115,7 +1115,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public final boolean isSurged() {
-        return surge;
+        if (surge)
+            return true;
+        SpellAbility parent = getParent();
+        if (parent != null) {
+            return parent.isSurged();
+        }
+        return false;
     }
 
     public final void setSurged(final boolean isSurge) {

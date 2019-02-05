@@ -17,11 +17,11 @@
  */
 package forge.view.arcane;
 
-import java.awt.Component;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.ScrollPaneConstants;
+import javax.swing.WindowConstants;
 
 import forge.assets.FSkinProp;
 import forge.game.card.CardView;
@@ -31,9 +31,7 @@ import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
-//import forge.util.collect.FCollectionView;
 import forge.util.Lang;
-import forge.view.FDialog;
 
 public class FloatingZone extends FloatingCardArea {
     private static final long serialVersionUID = 1927906492186378596L;
@@ -103,36 +101,6 @@ public class FloatingZone extends FloatingCardArea {
     private final ZoneType zone;
     private PlayerView player;
 
-    @SuppressWarnings("serial")
-    private final FDialog window = new FDialog(false, true, "0") {
-        @Override
-        public void setLocationRelativeTo(Component c) {
-            //don't change location this way if dialog has already been shown or location was loaded from preferences
-            if (hasBeenShown || locLoaded) { return; }
-            super.setLocationRelativeTo(c);
-        }
-
-        @Override
-        public void setVisible(boolean b0) {
-            if (isVisible() == b0) { return; }
-            if (!b0 && hasBeenShown && locPref != null) {
-                //update preference before hiding window, as otherwise its location will be 0,0
-                prefs.setPref(locPref,
-                        getX() + COORD_DELIM + getY() + COORD_DELIM +
-                        getWidth() + COORD_DELIM + getHeight());
-                //don't call prefs.save(), instead allowing them to be saved when match ends
-            }
-            super.setVisible(b0);
-            if (b0) {
-                refresh();
-                hasBeenShown = true;
-            }
-        }
-    };
-
-    protected FDialog getWindow() {
-	return window;
-    }
     protected Iterable<CardView> getCards() {
 	return player.getCards(zone);
     }
@@ -140,6 +108,7 @@ public class FloatingZone extends FloatingCardArea {
     private FloatingZone(final CMatchUI matchUI, final PlayerView player0, final ZoneType zone0) {
         super(matchUI, new FScrollPane(false, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER));
         window.add(getScrollPane(), "grow, push");
+	window.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE); //pfps so that old content does not reappear?
         getScrollPane().setViewportView(this);
         setOpaque(false);
         switch (zone0) {

@@ -1,0 +1,35 @@
+[shop]
+WinsToUnlock=0
+Credits=999
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=MTGA Graveyard Bash
+Description=As a black mage, every advantage comes at a cost. Sacrifice whatever is necessary to control the forces of death and darkness.
+Deck Type=constructed
+Set=ANA
+[Main]
+2 Death Baron|ALA
+3 Deathbloom Thallid|DOM
+2 Diregraf Ghoul|ISD
+3 Doomed Dissenter|M19
+2 Gravedigger|M15
+1 Gravewaker|M19
+2 Hired Blade|M19
+2 Infectious Horror|M19
+1 Meteor Golem|M19
+3 Murder|M19
+1 Open the Graves|M19
+1 Rise from the Grave|M10
+2 Skulduggery|XLN
+2 Skymarch Bloodletter|XLN
+2 Strangling Spores|M19
+9 Swamp|8ED|1
+7 Swamp|8ED|2
+4 Swamp|8ED|3
+5 Swamp|8ED|4
+2 Vampire Sovereign|M19
+3 Walking Corpse|ISD
+1 Yargle, Glutton of Urborg|DOM
+
+
