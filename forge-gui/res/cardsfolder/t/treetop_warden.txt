@@ -1,0 +1,4 @@
+Name:Treetop Warden
+ManaCost:1 G
+Types:Creature Elf Warrior
+PT:2/2

@@ -1,0 +1,35 @@
+[shop]
+WinsToUnlock=0
+Credits=999
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=MTGA Walk the Plank
+Description=Manipulate the battlefield to your advantage with these crafty spells.
+Deck Type=constructed
+Set=ANA
+[Main]
+2 Chart a Course|XLN
+2 Deadeye Rig-Hauler|RIX
+1 Demonlord Belzenlok|DOM
+3 Departed Deckhand|M19
+1 Dire Fleet Poisoner|RIX
+1 Dreamcaller Siren|XLN
+1 Drowned Catacomb|XLN
+2 Exclusion Mage|M19
+2 Fathom Fleet Boarder|RIX
+3 Grasping Scoundrel|M19
+1 Hostage Taker|XLN
+10 Island|GRN
+3 Kitesail Corsair|RIX
+2 Kitesail Freebooter|XLN
+3 Murder|M19
+2 Ravenous Chupacabra|RIX
+1 Riddlemaster Sphinx|M19
+1 Ruin Raider|XLN
+2 Siren Reaver|RIX
+3 Siren Stormtamer|XLN
+4 Submerged Boneyard|M19
+10 Swamp|GRN
+
+

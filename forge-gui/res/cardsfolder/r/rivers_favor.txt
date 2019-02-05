@@ -1,0 +1,7 @@
+Name:River's Favor
+ManaCost:U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
+Oracle:Enchant creature\nEnchanted creature gets +1/+1.
