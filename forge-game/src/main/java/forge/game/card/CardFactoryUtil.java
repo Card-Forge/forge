@@ -1236,10 +1236,10 @@ public class CardFactoryUtil {
             return doXMath(c.getPseudoKickerMagnitude(), m, c);
         }
 
-        // Count$IfMainPhase.<numMain>.<numNotMain> // 7/10
-        if (sq[0].contains("IfMainPhase")) {
+        // Count$IfCastInOwnMainPhase.<numMain>.<numNotMain> // 7/10
+        if (sq[0].contains("IfCastInOwnMainPhase")) {
             final PhaseHandler cPhase = cc.getGame().getPhaseHandler();
-            final boolean isMyMain = cPhase.getPhase().isMain() && cPhase.getPlayerTurn().equals(cc);
+            final boolean isMyMain = cPhase.getPhase().isMain() && cPhase.getPlayerTurn().equals(cc) && c.getCastFrom() != null;
             return doXMath(Integer.parseInt(sq[isMyMain ? 1 : 2]), m, c);
         }
 
