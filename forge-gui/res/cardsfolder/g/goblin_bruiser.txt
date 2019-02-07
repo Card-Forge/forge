@@ -1,0 +1,5 @@
+Name:Goblin Bruiser
+ManaCost:1 R R
+Types:Creature Goblin Warrior
+PT:3/3
+Oracle:

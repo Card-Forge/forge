@@ -1,0 +1,74 @@
+[metadata]
+Code=CST
+Date=2006-07-21
+Name=Coldsnap Theme Decks
+MciCode=cst
+Type=Other
+
+[cards]
+8 U Kjeldoran Home Guard
+9 C Kjeldoran Pride
+12 C Reinforcements
+16 U Scars of the Veteran
+20 C Disenchant
+25 U Browse
+30 C Lat-Nam's Legacy
+34 C Kjeldoran Elite Guard
+37 U Storm Elemental
+42 U Viscerid Drone
+43 U Balduvian Dead
+44 C Casting of Bones
+51 C Insidious Bookworms
+54 C Swords to Plowshares
+57 C Phantasmal Fiend
+60 U Binding Grasp
+61 C Brainstorm
+69 C Essence Flare
+70 U Death Spark
+72 C Gorilla Shaman
+73 U Iceberg
+84 C Mistfolk
+85 U Bounty of the Hunt
+86 C Deadly Insect
+90 C Portent
+100 C Snow Devil
+112 C Zuran Spellcaster
+114 U Ashen Ghoul
+119 C Dark Banishing
+120 C Dark Ritual
+123 U Drift of the Dead
+127 C Gangrenous Zombies
+137 C Kjeldoran Dead
+142 C Legions of Lim-Dul
+161 C Soul Burn
+194 C Incinerate
+208 U Orcish Healer
+210 C Orcish Lumberjack
+225 C Aurochs
+270 C Tinder Wall
+278 C Woolly Mammoths
+293 U Giant Trap Door Spider
+305 U Wings of Aesthir
+310 U Arcum's Weathervane
+312 C Barbed Sextant
+336 U Skull Catapult
+349 U Whalebone Glider
+369 L Plains
+370 L Plains
+371 L Plains
+372 L Island
+373 L Island
+374 L Island
+375 L Swamp
+376 L Swamp
+377 L Swamp
+378 L Mountain
+379 L Mountain
+380 L Mountain
+381 L Forest
+382 L Forest
+383 L Forest
+
+[tokens]
+w_0_1_deserter
+br_3_1_graveborn_haste

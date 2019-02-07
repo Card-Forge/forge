@@ -967,6 +967,19 @@ public class CardProperty {
                 if (restriction.startsWith("Remembered") || restriction.startsWith("Imprinted")) {
                     CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
                     return CardLists.filter(list, CardPredicates.sharesNameWith(card)).isEmpty();
+                } else if (restriction.equals("YourGraveyard")) {
+                    return CardLists.filter(sourceController.getCardsIn(ZoneType.Graveyard), CardPredicates.sharesNameWith(card)).isEmpty();
+                } else if (restriction.equals("OtherYourBattlefield")) {
+                    // Obviously it's going to share a name with itself, so consider that in the
+                    CardCollection list = CardLists.filter(sourceController.getCardsIn(ZoneType.Battlefield), CardPredicates.sharesNameWith(card));
+
+                    if (list.size() == 1) {
+                        Card c = list.getFirst();
+                        if (c.getTimestamp() == card.getTimestamp() && c.getId() == card.getId()) {
+                            list.remove(card);
+                        }
+                    }
+                    return list.isEmpty();
                 }
             }
         } else if (property.startsWith("sharesControllerWith")) {

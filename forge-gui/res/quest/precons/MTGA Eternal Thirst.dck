@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=999
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=MTGA Eternal Thirst
+Description=Outlive your opponent by using their lifeforce to heal your wounds. Your life means their death.
+Deck Type=constructed
+Set=ANA
+[Main]
+3 Ajani's Pridemate|M19
+2 Ajani's Welcome|M19
+3 Bishop's Soldier|XLN
+3 Call to the Feast|XLN
+1 Champion of Dusk|RIX
+2 Epicure of Blood|M19
+4 Forsaken Sanctuary|M19
+1 Herald of Faith|M19
+2 Inspiring Cleric|XLN
+1 Isolated Chapel|DOM
+2 Legion Lieutenant|RIX
+1 Leonin Warleader|M19
+2 Moment of Triumph|RIX
+3 Murder|M19
+2 Nightmare's Thirst|M19
+1 Paladin of Atonement|RIX
+10 Plains|GRN
+1 Resplendent Angel|M19
+1 Sanctum Seeker|XLN
+3 Skymarch Bloodletter|M19
+10 Swamp|GRN
+1 Vampire Sovereign|M19
+1 Vraska's Contempt|XLN
+
+

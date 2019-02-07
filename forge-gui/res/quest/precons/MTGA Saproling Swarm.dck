@@ -1,0 +1,35 @@
+[shop]
+WinsToUnlock=0
+Credits=999
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=MTGA Saproling Swarm
+Description=Overrun anyone in your way with a Swarm of Saprolings.
+Deck Type=constructed
+Set=ANA
+[Main]
+2 Costly Plunder|XLN
+3 Deathbloom Thallid|DOM
+3 Doomed Dissenter|M19
+10 Forest|GRN
+4 Foul Orchard|M19
+3 Fungal Infection|DOM
+1 Path of Discovery|RIX
+3 Poison-Tip Archer|M19
+1 Rite of Belzenlok|DOM
+3 Saproling Migration|DOM
+1 Slimefoot, the Stowaway|DOM
+2 Spore Swarm|DOM
+10 Swamp|GRN
+1 Tendershoot Dryad|RIX
+2 Thallid Omnivore|DOM
+1 Torgaar, Famine Incarnate|DOM
+1 Twilight Prophet|RIX
+1 Verdant Force|DOM
+3 Vicious Offering|DOM
+1 Whisper, Blood Liturgist|DOM
+1 Woodland Cemetery|DOM
+3 Yavimaya Sapherd|DOM
+
+

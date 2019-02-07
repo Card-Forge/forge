@@ -1,0 +1,5 @@
+Name:Titanic Pelagosaur
+ManaCost:3 U U
+Types:Creature Dinosaur
+PT:4/6
+Oracle:

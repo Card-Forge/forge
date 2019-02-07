@@ -31,6 +31,7 @@ import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.special.CardZoomer;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -54,12 +55,13 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
     private static final SkinColor NOT_EARNED_COLOR = TEXT_COLOR.alphaColor(128);
     private static final SkinColor TEXTURE_OVERLAY_COLOR = FSkin.getColor(Colors.CLR_THEME);
     private static final SkinColor BORDER_COLOR = FSkin.getColor(Colors.CLR_BORDERS);
+    final Localizer localizer = Localizer.getInstance();
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Achievements");
+    private final DragTab tab = new DragTab(localizer.getMessage("Achievements"));
     private final FLabel lblTitle = new FLabel.Builder()
-        .text("Achievements").fontAlign(SwingConstants.CENTER)
+        .text(localizer.getMessage("Achievements")).fontAlign(SwingConstants.CENTER)
         .opaque(true).fontSize(16).build();
     private final FComboBox<AchievementCollection> cbCollections = new FComboBox<AchievementCollection>();
     private final TrophyCase trophyCase = new TrophyCase();
@@ -167,7 +169,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
      */
     @Override
     public String getMenuTitle() {
-        return "Achievements";
+        return localizer.getMessage("Achievements");
     }
 
     /* (non-Javadoc)
