@@ -1728,10 +1728,10 @@ public class CardProperty {
             if (!castSA.isValid(v, sourceController, source, spellAbility)) {
                 return false;
             }
+        } else if (property.equals("wasCast")) {
             if (null == card.getCastFrom()) {
                 return false;
             }
-        } else if (property.equals("wasCast")) {
         } else if (property.equals("wasNotCast")) {
             if (null != card.getCastFrom()) {
                 return false;
