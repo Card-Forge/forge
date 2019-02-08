@@ -311,12 +311,19 @@ public class CountersPutAi extends SpellAbilityAi {
             return false;
         }
 
-        if (sa.hasParam("Adapt") && source.getCounters(CounterType.P1P1) > 0) {
-            return false;
-        }
-
         // TODO handle proper calculation of X values based on Cost
         int amount = AbilityUtils.calculateAmount(source, amountStr, sa);
+
+        if (sa.hasParam("Adapt")) {
+            Game game = ai.getGame();
+            Combat combat = game.getCombat();
+
+            if (source.getCounters(CounterType.P1P1) > 0) {
+                return false;
+            } else if (combat != null && ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                return doCombatAdaptLogic(source, amount, combat);
+            }
+        }
 
         if ("Fight".equals(logic)) {
             int nPump = 0;
@@ -1046,6 +1053,42 @@ public class CountersPutAi extends SpellAbilityAi {
             return true;
         }
 
+        return false;
+    }
+
+    private boolean doCombatAdaptLogic(Card source, int amount, Combat combat) {
+        // TODO: predict "can't have counters placed on it" type of effects here?
+        if (combat.isAttacking(source)) {
+            if (!combat.isBlocked(source)) {
+                return true;
+            } else {
+                for (Card blockedBy : combat.getBlockers(source)) {
+                    if (blockedBy.getNetToughness() > source.getNetPower()
+                            && blockedBy.getNetToughness() <= source.getNetPower() + amount) {
+                        return true;
+                    }
+                }
+
+                int totBlkPower = Aggregates.sum(combat.getBlockers(source), CardPredicates.Accessors.fnGetNetPower);
+                if (source.getNetToughness() <= totBlkPower
+                        && source.getNetToughness() + amount > totBlkPower) {
+                    return true;
+                }
+            }
+        } else if (combat.isBlocking(source)) {
+            for (Card blocked : combat.getAttackersBlockedBy(source)) {
+                if (blocked.getNetToughness() > source.getNetPower()
+                        && blocked.getNetToughness() <= source.getNetPower() + amount) {
+                    return true;
+                }
+            }
+
+            int totAtkPower = Aggregates.sum(combat.getAttackersBlockedBy(source), CardPredicates.Accessors.fnGetNetPower);
+            if (source.getNetToughness() <= totAtkPower
+                    && source.getNetToughness() + amount > totAtkPower) {
+                return true;
+            }
+        }
         return false;
     }
 
