@@ -318,7 +318,7 @@ public class CountersPutAi extends SpellAbilityAi {
             Game game = ai.getGame();
             Combat combat = game.getCombat();
 
-            if (source.getCounters(CounterType.P1P1) > 0) {
+            if (!source.canReceiveCounters(CounterType.P1P1) || source.getCounters(CounterType.P1P1) > 0) {
                 return false;
             } else if (combat != null && ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 return doCombatAdaptLogic(source, amount, combat);
@@ -1057,7 +1057,6 @@ public class CountersPutAi extends SpellAbilityAi {
     }
 
     private boolean doCombatAdaptLogic(Card source, int amount, Combat combat) {
-        // TODO: predict "can't have counters placed on it" type of effects here?
         if (combat.isAttacking(source)) {
             if (!combat.isBlocked(source)) {
                 return true;
