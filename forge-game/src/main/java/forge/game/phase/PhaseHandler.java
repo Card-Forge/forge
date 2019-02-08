@@ -389,7 +389,6 @@ public class PhaseHandler implements java.io.Serializable {
                     }
 
                     playerTurn.removeKeyword("Skip all combat phases of this turn.");
-                    game.getCleanup().executeUntil(getNextTurn());
                     nUpkeepsThisTurn = 0;
 
                     // Rule 514.3
@@ -397,6 +396,9 @@ public class PhaseHandler implements java.io.Serializable {
 
                     // Rule 514.3a - state-based actions
                     game.getAction().checkStateEffects(true);
+
+                    // done this after check state effects, so it only has effect next check
+                    game.getCleanup().executeUntil(getNextTurn());
                     break;
 
                 default:
