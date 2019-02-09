@@ -3746,6 +3746,19 @@ public class CardFactoryUtil {
             origSA.setAftermath(true);
             origSA.getRestrictions().setZone(ZoneType.Graveyard);
             // The Exile part is done by the System itself
+        } else if (keyword.startsWith("Aura swap")) {
+            final String[] k = keyword.split(":");
+            final String manacost = k[1];
+
+            final String effect = "AB$ ExchangeZone | Cost$ " + manacost + " | Zone2$ Hand | Type$ Aura "
+                    + " | PrecostDesc$ Aura swap | CostDesc$ " + ManaCostParser.parse(manacost)
+                    + " | StackDescription$ SpellDescription | SpellDescription$ (" + inst.getReminderText() + ")";
+
+            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setIntrinsic(intrinsic);
+
+            sa.setTemporary(!intrinsic);
+            inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Awaken")) {
             final String[] k = keyword.split(":");
             final String counters = k[1];
