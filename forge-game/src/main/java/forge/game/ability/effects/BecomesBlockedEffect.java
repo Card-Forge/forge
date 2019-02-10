@@ -10,9 +10,11 @@ import forge.game.trigger.TriggerType;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
 import java.util.List;
+import java.util.Map;
 
 public class BecomesBlockedEffect extends SpellAbilityEffect {
 
@@ -38,10 +40,11 @@ public class BecomesBlockedEffect extends SpellAbilityEffect {
                 game.getCombat().setBlocked(c, true);
                 if (!c.getDamageHistory().getCreatureGotBlockedThisCombat()) {
                     isCombatChanged = true;
-                    final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                    final Map<String, Object> runParams = Maps.newHashMap();
                     runParams.put("Attacker", c);
-                    runParams.put("Blockers", new ArrayList<Card>());
+                    runParams.put("Blockers", Lists.<Card>newArrayList());
                     runParams.put("NumBlockers", 0);
+                    runParams.put("Defender", game.getCombat().getDefenderByAttacker(c));
                     runParams.put("DefendingPlayer", game.getCombat().getDefenderPlayerByAttacker(c));
                     game.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams, false);
                 }
