@@ -87,7 +87,6 @@ public class TriggerAttackerBlocked extends Trigger {
         sa.setTriggeringObject("Attacker", this.getRunParams().get("Attacker"));
         sa.setTriggeringObject("Blockers", this.getRunParams().get("Blockers"));
         sa.setTriggeringObject("DefendingPlayer", this.getRunParams().get("DefendingPlayer"));
-        sa.setTriggeringObject("Defender", this.getRunParams().get("Defender"));
         sa.setTriggeringObject("NumBlockers", this.getRunParams().get("NumBlockers"));
     }
 
