@@ -165,7 +165,7 @@ public class FloatingZone extends FloatingCardArea {
 	sortedByName = !sortedByName;
 	setTitle();
 	refresh();
-	//        getWindow().revalidate();
+	// revalidation does not appear to be necessary here
 	getWindow().repaint();
     }
 
