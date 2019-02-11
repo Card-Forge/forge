@@ -52,25 +52,25 @@ public class TriggerAttackerBlocked extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final Map<String, Object> runParams2) {
-        if (this.mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(runParams2.get("Attacker"), this.mapParams.get("ValidCard").split(","),
-                    this.getHostCard())) {
+        if (hasParam("ValidCard")) {
+            if (!matchesValid(runParams2.get("Attacker"), getParam("ValidCard").split(","),
+                    getHostCard())) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("MinBlockers")) {
-            if ((int)runParams2.get("NumBlockers") < Integer.valueOf(this.mapParams.get("MinBlockers"))) {
+        if (hasParam("MinBlockers")) {
+            if ((int)runParams2.get("NumBlockers") < Integer.valueOf(getParam("MinBlockers"))) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("ValidBlocker")) {
+        if (hasParam("ValidBlocker")) {
             @SuppressWarnings("unchecked")
             int count = CardLists.getValidCardCount(
                     (Iterable<Card>) runParams2.get("Blockers"),
-                    this.mapParams.get("ValidBlocker"),
-                    this.getHostCard().getController(), this.getHostCard()
+                    getParam("ValidBlocker"),
+                    getHostCard().getController(), getHostCard()
             );
 
             if ( count == 0 ) {
@@ -84,10 +84,11 @@ public class TriggerAttackerBlocked extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Attacker", this.getRunParams().get("Attacker"));
-        sa.setTriggeringObject("Blockers", this.getRunParams().get("Blockers"));
-        sa.setTriggeringObject("DefendingPlayer", this.getRunParams().get("DefendingPlayer"));
-        sa.setTriggeringObject("NumBlockers", this.getRunParams().get("NumBlockers"));
+        sa.setTriggeringObject("Attacker", getRunParams().get("Attacker"));
+        sa.setTriggeringObject("Blockers", getRunParams().get("Blockers"));
+        sa.setTriggeringObject("Defender", getRunParams().get("Defender"));
+        sa.setTriggeringObject("DefendingPlayer", getRunParams().get("DefendingPlayer"));
+        sa.setTriggeringObject("NumBlockers", getRunParams().get("NumBlockers"));
     }
 
     @Override
