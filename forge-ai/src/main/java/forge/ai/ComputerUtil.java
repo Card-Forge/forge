@@ -73,6 +73,7 @@ public class ComputerUtil {
     public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, final Game game, Runnable chooseTargets) {
         game.getStack().freezeStack();
         final Card source = sa.getHostCard();
+        source.setSplitStateToPlayAbility(sa);
 
         if (sa.isSpell() && !source.isCopiedSpell()) {
             if (source.getType().hasStringType("Arcane")) {
