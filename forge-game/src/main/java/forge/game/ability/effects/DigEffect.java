@@ -240,39 +240,41 @@ public class DigEffect extends SpellAbilityEffect {
                         }
                     } else {
                         String prompt;
-			
-			if (sa.hasParam("PrimaryPrompt")) {
-			    prompt = sa.getParam("PrimaryPrompt");
-			} else {
-			    prompt = "Choose card(s) to put into " + destZone1.name();
-			    if (destZone1.equals(ZoneType.Library)) {
-				if (libraryPosition == -1) {
-				    prompt = "Choose card(s) to put on the bottom of {player's} library";
-				} else if (libraryPosition == 0) {
-				    prompt = "Choose card(s) to put on top of {player's} library";
-				}
-			    }
-			}
+                        
+                        if (sa.hasParam("PrimaryPrompt")) {
+                            prompt = sa.getParam("PrimaryPrompt");
+                        } else {
+                            prompt = "Choose card(s) to put into " + destZone1.name();
+                            if (destZone1.equals(ZoneType.Library)) {
+                                if (libraryPosition == -1) {
+                                    prompt = "Choose card(s) to put on the bottom of {player's} library";
+                                } else if (libraryPosition == 0) {
+                                    prompt = "Choose card(s) to put on top of {player's} library";
+                                }
+                            }
+                        }
 
-			movedCards = new CardCollection();
-			if (valid.isEmpty()) {
-			    chooser.getController().notifyOfValue(sa, null, "No valid cards");
-			} else {
-			    if ( p == chooser ) { // the digger can still see all the dug cards when choosing
-				chooser.getController().tempShowCards(top);
-			    }
-			    List<Card> chosen;
-			    if (!andOrValid.equals("")) {
-				valid.removeAll(andOrCards); //pfps remove andOr cards to get two two choices set up correctly
-				chosen = chooser.getController().chooseFromTwoListsForEffect(valid, andOrCards, optional, delayedReveal, sa, prompt, p);
-			    } else {
-				int max = anyNumber ? valid.size() : Math.min(valid.size(),destZone1ChangeNum);
-				int min = (anyNumber || optional) ? 0 : max;
-				chosen = chooser.getController().chooseEntitiesForEffect(valid, min, max, delayedReveal, sa, prompt, p);
-			    }
-			    chooser.getController().endTempShowCards();
-			    movedCards.addAll(chosen);
-			}
+                        movedCards = new CardCollection();
+                        if (valid.isEmpty()) {
+                            chooser.getController().notifyOfValue(sa, null, "No valid cards");
+                        } else {
+                            if ( p == chooser ) { // the digger can still see all the dug cards when choosing
+                                chooser.getController().tempShowCards(top);
+                            }
+                            List<Card> chosen = new ArrayList<Card>();
+                            if (!andOrValid.equals("")) {
+                                valid.removeAll(andOrCards); //pfps remove andOr cards to get two two choices set up correctly
+                                chosen = chooser.getController().chooseFromTwoListsForEffect(valid, andOrCards, optional, delayedReveal, sa, prompt, p);
+                            } else {
+                                int max = anyNumber ? valid.size() : Math.min(valid.size(),destZone1ChangeNum);
+                                int min = (anyNumber || optional) ? 0 : max;
+                                if ( max > 0 ) { // if max is 0 don't make a choice
+                                    chosen = chooser.getController().chooseEntitiesForEffect(valid, min, max, delayedReveal, sa, prompt, p);
+                                }
+                            }
+                            chooser.getController().endTempShowCards();
+                            movedCards.addAll(chosen);
+                        }
 
                         if (!changeValid.isEmpty() && !sa.hasParam("ExileFaceDown") && !sa.hasParam("NoReveal")) {
                             game.getAction().reveal(movedCards, chooser, true,
@@ -336,8 +338,7 @@ public class DigEffect extends SpellAbilityEffect {
                         CardCollection afterOrder = rest;
                         if (sa.hasParam("RestRandomOrder")) {
                             CardLists.shuffle(afterOrder);
-                        }
-                        else if (!skipReorder && rest.size() > 1) {
+                        } else if (!skipReorder && rest.size() > 1) {
                             if (destZone2 == ZoneType.Graveyard) {
                                 afterOrder = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, rest, destZone2);
                             } else {
