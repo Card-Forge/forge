@@ -72,6 +72,7 @@ public class PlayEffect extends SpellAbilityEffect {
 
         final Player controller = activator;
         CardCollection tgtCards;
+        CardCollection showCards = new CardCollection();
 
         if (sa.hasParam("Valid")) {
             ZoneType zone = ZoneType.Hand;
@@ -81,6 +82,9 @@ public class PlayEffect extends SpellAbilityEffect {
             tgtCards = new CardCollection(
                 AbilityUtils.filterListByType(game.getCardsIn(zone), sa.getParam("Valid"), sa)
             );
+            if ( sa.hasParam("ShowRemembered") ) {
+                showCards = new CardCollection(AbilityUtils.filterListByType(game.getCardsIn(zone), "Card.IsRemembered", sa));
+            }
         }
         else if (sa.hasParam("AnySupportedCard")) {
             List<PaperCard> cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
@@ -140,7 +144,9 @@ public class PlayEffect extends SpellAbilityEffect {
 
         final CardCollection saidNoTo = new CardCollection();
         while (tgtCards.size() > saidNoTo.size() && saidNoTo.size() < amount && amount > 0) {
+            activator.getController().tempShowCards(showCards);
             Card tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, "Select a card to play");
+            activator.getController().endTempShowCards();
             if (tgtCard == null) {
                 return;
             }
