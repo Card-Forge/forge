@@ -82,8 +82,8 @@ public class PlayEffect extends SpellAbilityEffect {
             tgtCards = new CardCollection(
                 AbilityUtils.filterListByType(game.getCardsIn(zone), sa.getParam("Valid"), sa)
             );
-            if ( sa.hasParam("ShowRemembered") ) {
-                showCards = new CardCollection(AbilityUtils.filterListByType(game.getCardsIn(zone), "Card.IsRemembered", sa));
+            if ( sa.hasParam("ShowCards") ) {
+                showCards = new CardCollection(AbilityUtils.filterListByType(game.getCardsIn(zone), sa.getParam("ShowCards"), sa));
             }
         }
         else if (sa.hasParam("AnySupportedCard")) {
