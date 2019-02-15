@@ -231,3 +231,6 @@ forge-gui/tools/oracleScript.log
 /release.properties
 /target
 /test-output
+.settings
+.classpath
+.project
