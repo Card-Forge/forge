@@ -614,5 +614,10 @@ public class QuestController {
         model.currentDeck = s;
     }
 
-    public DeckConstructionRules getDeckConstructionRules(){return model.deckConstructionRules;}
+    public DeckConstructionRules getDeckConstructionRules(){
+        if (model == null) {
+            return null;
+        }
+        return model.deckConstructionRules;
+    }
 }
