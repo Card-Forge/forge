@@ -1,5 +1,2 @@
-- Ordering Pop-up Zones -
-In the desktop interface the pop-up windows showing players' zones can be ordered as the cards in the zone are or by card name.  Right click in the window title to toggle between the two orderings.
-
 - Bug fixes -
 As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.
