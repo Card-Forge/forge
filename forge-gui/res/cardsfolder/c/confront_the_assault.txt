@@ -1,0 +1,5 @@
+Name:Confront the Assault
+ManaCost:4 W
+Types:Instant
+A:SP$ Token | Cost$ 4 W | IsPresent$ Creature.attackingYou | TokenImage$ w 1 1 spirit ISD | TokenAmount$ 3 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Cast this spell only if a creature is attacking you. Create three 1/1 white Spirit creature tokens with flying.
+Oracle:Cast this spell only if a creature is attacking you.\n\nCreate three 1/1 white Spirit creature tokens with flying.

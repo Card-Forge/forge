@@ -1,0 +1,8 @@
+Name:Inspiring Commander
+ManaCost:4 W W
+Types:Creature Human Soldier
+PT:1/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerLE2+YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature with power 2 or less enters the battlefield under your control, you gain 1 life and draw a card.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Whenever another creature with power 2 or less enters the battlefield under your control, you gain 1 life and draw a card.

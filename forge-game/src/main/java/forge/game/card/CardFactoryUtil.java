@@ -1236,10 +1236,10 @@ public class CardFactoryUtil {
             return doXMath(c.getPseudoKickerMagnitude(), m, c);
         }
 
-        // Count$IfMainPhase.<numMain>.<numNotMain> // 7/10
-        if (sq[0].contains("IfMainPhase")) {
+        // Count$IfCastInOwnMainPhase.<numMain>.<numNotMain> // 7/10
+        if (sq[0].contains("IfCastInOwnMainPhase")) {
             final PhaseHandler cPhase = cc.getGame().getPhaseHandler();
-            final boolean isMyMain = cPhase.getPhase().isMain() && cPhase.getPlayerTurn().equals(cc);
+            final boolean isMyMain = cPhase.getPhase().isMain() && cPhase.getPlayerTurn().equals(cc) && c.getCastFrom() != null;
             return doXMath(Integer.parseInt(sq[isMyMain ? 1 : 2]), m, c);
         }
 
@@ -3746,6 +3746,19 @@ public class CardFactoryUtil {
             origSA.setAftermath(true);
             origSA.getRestrictions().setZone(ZoneType.Graveyard);
             // The Exile part is done by the System itself
+        } else if (keyword.startsWith("Aura swap")) {
+            final String[] k = keyword.split(":");
+            final String manacost = k[1];
+
+            final String effect = "AB$ ExchangeZone | Cost$ " + manacost + " | Zone2$ Hand | Type$ Aura "
+                    + " | PrecostDesc$ Aura swap | CostDesc$ " + ManaCostParser.parse(manacost)
+                    + " | StackDescription$ SpellDescription | SpellDescription$ (" + inst.getReminderText() + ")";
+
+            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setIntrinsic(intrinsic);
+
+            sa.setTemporary(!intrinsic);
+            inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Awaken")) {
             final String[] k = keyword.split(":");
             final String counters = k[1];
@@ -4286,17 +4299,33 @@ public class CardFactoryUtil {
 
             suspend.setTemporary(!intrinsic);
             inst.addSpellAbility(suspend);
+        } else if (keyword.startsWith("Transfigure")) {
+            final String[] k = keyword.split(":");
+            final String manacost = k[1];
+            final String effect = "AB$ ChangeZone | Cost$ " + manacost + " Sac<1/CARDNAME>"
+                    + " | PrecostDesc$ Transfigure | CostDesc$ " + ManaCostParser.parse(manacost)
+                    + " | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.cmcEQTransfigureX"
+                    + " | ChangeNum$ 1 | SorcerySpeed$ True | StackDescription$ SpellDescription | SpellDescription$ ("
+                    + inst.getReminderText() + ")";
+
+            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setSVar("TransfigureX", "Count$CardManaCost");
+            sa.setIntrinsic(intrinsic);
+
+            sa.setTemporary(!intrinsic);
+            inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Transmute")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
 
             final String effect = "AB$ ChangeZone | Cost$ " + manacost + " Discard<1/CARDNAME>"
                     + " | PrecostDesc$ Transmute | CostDesc$ " + ManaCostParser.parse(manacost) + " | ActivationZone$ Hand"
-                    + " | Origin$ Library | Destination$ Hand | ChangeType$ Card.cmcEQ" + card.getManaCost().getCMC()
+                    + " | Origin$ Library | Destination$ Hand | ChangeType$ Card.cmcEQTransmuteX"
                     + " | ChangeNum$ 1 | SorcerySpeed$ True | StackDescription$ SpellDescription | SpellDescription$ ("
                     + inst.getReminderText() + ")";
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setSVar("TransmuteX", "Count$CardManaCost");
             sa.setIntrinsic(intrinsic);
 
             sa.setTemporary(!intrinsic);

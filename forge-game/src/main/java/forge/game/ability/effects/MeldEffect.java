@@ -54,9 +54,9 @@ public class MeldEffect extends SpellAbilityEffect {
         }
 
         primary.changeToState(CardStateName.Meld);
+        primary.setMeldedWith(secondary);
         PlayerZoneBattlefield bf = (PlayerZoneBattlefield)controller.getZone(ZoneType.Battlefield);
-        Card melded = game.getAction().changeZone(primary.getZone(), bf, primary, 0, sa);
+        game.getAction().changeZone(primary.getZone(), bf, primary, 0, sa);
         bf.addToMelded(secondary);
-        melded.setMeldedWith(secondary);
     }
 }

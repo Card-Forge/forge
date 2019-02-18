@@ -19,6 +19,7 @@ package forge.view.arcane;
 
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -52,7 +53,6 @@ public abstract class FloatingCardArea extends CardArea {
     protected FPref locPref;
     protected boolean hasBeenShown, locLoaded;
 
-    protected abstract FDialog getWindow();
     protected abstract Iterable<CardView> getCards();
 
     protected FloatingCardArea(final CMatchUI matchUI) {
@@ -71,11 +71,14 @@ public abstract class FloatingCardArea extends CardArea {
         onShow();
         getWindow().setFocusableWindowState(false); // should probably do this earlier
         getWindow().setVisible(false);
+	getWindow().dispose(); //pfps so that old content does not show up
     }
     protected void showOrHideWindow() {
-        onShow();
-        getWindow().setFocusableWindowState(false); // should probably do this earlier
-        getWindow().setVisible(!getWindow().isVisible());
+	if (getWindow().isVisible()) {
+	    hideWindow();
+	} else {
+	    showWindow();
+	}
     }
     protected void onShow() {
         if (!hasBeenShown) {
@@ -86,6 +89,35 @@ public abstract class FloatingCardArea extends CardArea {
                 }
             });
         }
+    }
+
+    @SuppressWarnings("serial")
+    protected final FDialog window = new FDialog(false, true, "0") {
+        @Override
+        public void setLocationRelativeTo(Component c) {
+            if (hasBeenShown || locLoaded) { return; }
+            super.setLocationRelativeTo(c);
+        }
+        @Override
+        public void setVisible(boolean b0) {
+            if (isVisible() == b0) { return; }
+            if (!b0 && hasBeenShown && locPref != null) {
+                //update preference before hiding window, as otherwise its location will be 0,0
+                prefs.setPref(locPref,
+                        getX() + COORD_DELIM + getY() + COORD_DELIM +
+                        getWidth() + COORD_DELIM + getHeight());
+                //don't call prefs.save(), instead allowing them to be saved when match ends
+            }
+            if (b0) {
+		doRefresh();  // force a refresh before showing to pick up any changes when hidden
+                hasBeenShown = true;
+	    }
+            super.setVisible(b0);
+        }
+    };
+
+    protected FDialog getWindow() {
+	return window;
     }
 
     protected void loadLocation() {
@@ -165,11 +197,12 @@ public abstract class FloatingCardArea extends CardArea {
         setCardPanels(cardPanels);
         getWindow().setTitle(String.format(title, cardPanels.size()));
 
-        //if window had cards and now doesn't, hide window
-        //(e.g. cast final card from Flashback zone)
-        if (hadCardPanels && cardPanels.size() == 0) {
-            getWindow().setVisible(false);
-        }
+	//pfps - rather suspect, so commented out for now
+	//        //if window had cards and now doesn't, hide window
+	//        //(e.g. cast final card from Flashback zone)
+	//        if (hadCardPanels && cardPanels.size() == 0) {
+	//            getWindow().setVisible(false);
+	//        }
     }
 
     @Override

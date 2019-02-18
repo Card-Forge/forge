@@ -457,22 +457,24 @@ public final class CMatchUI
 
     @Override
     public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
-        for (final PlayerZoneUpdate update : zonesToUpdate) {
-            final PlayerView player = update.getPlayer();
-            for (final ZoneType zone : update.getZones()) {
-		switch (zone) {
-		case Battlefield: // always shown
-		    break;
-		case Hand: // the controller's hand should never be temporarily shown, but ...
-		case Library:
-		case Graveyard:
-		case Exile:
-		case Flashback:
-		case Command:
-		    FloatingZone.hide(this,player,zone);
-		    break;
-		default:
-		    break;
+	if ( zonesToUpdate != null ) {
+	    for (final PlayerZoneUpdate update : zonesToUpdate) {
+		final PlayerView player = update.getPlayer();
+		for (final ZoneType zone : update.getZones()) {
+		    switch (zone) {
+		    case Battlefield: // always shown
+			break;
+		    case Hand: // the controller's hand should never be temporarily shown, but ...
+		    case Library:
+		    case Graveyard:
+		    case Exile:
+		    case Flashback:
+		    case Command:
+			FloatingZone.hide(this,player,zone);
+			break;
+		    default:
+			break;
+		    }
 		}
 	    }
 	}

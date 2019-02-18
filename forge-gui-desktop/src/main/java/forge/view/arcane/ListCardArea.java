@@ -17,7 +17,6 @@
 package forge.view.arcane;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -29,7 +28,6 @@ import java.util.List;
 import forge.game.card.CardView;
 import forge.screens.match.CMatchUI;
 import forge.view.arcane.util.CardPanelMouseAdapter;
-import forge.view.FDialog;
 
 import forge.toolbox.FButton;
 
@@ -50,6 +48,7 @@ public class ListCardArea extends FloatingCardArea {
     private ListCardArea(final CMatchUI matchUI) {
 	super(matchUI);
 	window.add(getScrollPane(),"grow, push");
+	window.setModal(true);
 	getScrollPane().setViewportView(this);
 	doneButton = new FButton("Done");
 	doneButton.addActionListener(new ActionListener() {
@@ -77,7 +76,6 @@ public class ListCardArea extends FloatingCardArea {
 	storedArea.toAnywhere = toAnywhere0;
         storedArea.setDragEnabled(true);
 	storedArea.setVertical(true);
-	storedArea.doRefresh();
         storedArea.showWindow(); 
 	return storedArea;
     }
@@ -107,36 +105,6 @@ public class ListCardArea extends FloatingCardArea {
 	return cardList;
     }
 
-    @SuppressWarnings("serial")
-    protected final FDialog window = new FDialog(true, true, "0") {
-        @Override
-        public void setLocationRelativeTo(Component c) {
-            if (hasBeenShown || locLoaded) { return; }
-            super.setLocationRelativeTo(c);
-        }
-        @Override
-        public void setVisible(boolean b0) {
-            if (isVisible() == b0) { return; }
-            if (!b0 && hasBeenShown && locPref != null) {
-                //update preference before hiding window, as otherwise its location will be 0,0
-                prefs.setPref(locPref,
-                        getX() + COORD_DELIM + getY() + COORD_DELIM +
-                        getWidth() + COORD_DELIM + getHeight());
-                //don't call prefs.save(), instead allowing them to be saved when match ends
-            }
-            super.setVisible(b0);
-            if (b0) {
-                refresh();
-                hasBeenShown = true;
-            }
-        }
-    };
-
-    @Override
-    protected FDialog getWindow() {
-	return window;
-    }
-
     @Override
     protected void showWindow() {
         onShow();
@@ -146,8 +114,8 @@ public class ListCardArea extends FloatingCardArea {
 
     @Override
     protected void onShow() {
+	super.onShow();
         if (!hasBeenShown) {
-            loadLocation();
 	    this.addCardPanelMouseListener(new CardPanelMouseAdapter() {
 		    @Override
 		    public void mouseDragEnd(final CardPanel dragPanel, final MouseEvent evt) {
@@ -206,22 +174,6 @@ public class ListCardArea extends FloatingCardArea {
 	    }
 	}		
 	refresh();
-    }
-
-    //    @Override
-    //    protected void refresh() {
-    //	doRefresh();
-    //    }
-
-    @Override
-    public void doLayout() {
-	//        if (window.isResizing()) {
-	//  //delay layout slightly to reduce flicker during window resize
-	//     layoutTimer.restart();
-	// }
-        //else {
-            finishDoLayout();
-        //}
     }
 
     // move to beginning of list if allowable else to beginning of bottom if allowable

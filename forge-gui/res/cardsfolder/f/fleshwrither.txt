@@ -2,6 +2,6 @@ Name:Fleshwrither
 ManaCost:2 B B
 Types:Creature Horror
 PT:3/3
-A:AB$ ChangeZone | Cost$ 1 B B Sac<1/CARDNAME> | CostDesc$ Transfigure {1}{B}{B} | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.cmcEQ4 | ChangeNum$ 1 | SorcerySpeed$ True | SpellDescription$ ({1}{B}{B} , Sacrifice this creature: Search your library for a creature card with the same converted mana cost as this creature and put that card onto the battlefield. Then shuffle your library. Transfigure only as a sorcery.)
+K:Transfigure:1 B B
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fleshwrither.jpg
 Oracle:Transfigure {1}{B}{B} ({1}{B}{B}, Sacrifice this creature: Search your library for a creature card with the same converted mana cost as this creature and put that card onto the battlefield. Then shuffle your library. Transfigure only as a sorcery.)

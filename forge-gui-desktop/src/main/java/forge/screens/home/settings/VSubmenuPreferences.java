@@ -15,6 +15,7 @@ import forge.screens.home.VHomeUI;
 import forge.toolbox.*;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.toolbox.FSkin.SkinnedTextField;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 import org.apache.commons.lang3.StringUtils;
 
@@ -27,91 +28,94 @@ import java.awt.event.KeyEvent;
 import java.util.*;
 import java.util.List;
 
+
 /**
  * Assembles Swing components of preferences submenu singleton.
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
 public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
+
     /** */
     SINGLETON_INSTANCE;
+    final Localizer localizer = Localizer.getInstance();
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Preferences");
+    private final DragTab tab = new DragTab(localizer.getMessage("Preferences"));
 
     /** */
     private final JPanel pnlPrefs = new JPanel();
     private final FScrollPane scrContent = new FScrollPane(pnlPrefs, false,
-            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-    private final FLabel btnReset = new FLabel.Builder().opaque(true).hoverable(true).text("Reset to Default Settings").build();
-    private final FLabel btnDeleteMatchUI = new FLabel.Builder().opaque(true).hoverable(true).text("Reset Match Layout").build();
-    private final FLabel btnDeleteEditorUI = new FLabel.Builder().opaque(true).hoverable(true).text("Reset Editor Layout").build();
-    private final FLabel btnDeleteWorkshopUI = new FLabel.Builder().opaque(true).hoverable(true).text("Reset Workshop Layout").build();
-    private final FLabel btnUserProfileUI = new FLabel.Builder().opaque(true).hoverable(true).text("Open User Directory").build();
-    private final FLabel btnContentDirectoryUI = new FLabel.Builder().opaque(true).hoverable(true).text("Open Content Directory").build();
-    private final FLabel btnResetJavaFutureCompatibilityWarnings = new FLabel.Builder().opaque(true).hoverable(true).text("Reset Java Compatibility Warnings").build();
+    private final FLabel btnReset = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnReset")).build();
+    private final FLabel btnDeleteMatchUI = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnDeleteMatchUI")).build();
+    private final FLabel btnDeleteEditorUI = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnDeleteEditorUI")).build();
+    private final FLabel btnDeleteWorkshopUI = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnDeleteWorkshopUI")).build();
+    private final FLabel btnUserProfileUI = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnUserProfileUI")).build();
+    private final FLabel btnContentDirectoryUI = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnContentDirectoryUI")).build();
+    private final FLabel btnResetJavaFutureCompatibilityWarnings = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnResetJavaFutureCompatibilityWarnings")).build();
     private final FLabel btnPlayerName = new FLabel.Builder().opaque(true).hoverable(true).text("").build();
 
-    private final JCheckBox cbRemoveSmall = new OptionsCheckBox("Remove Small Creatures");
-    private final JCheckBox cbCardBased = new OptionsCheckBox("Include Card-based Deck Generation");
-    private final JCheckBox cbSingletons = new OptionsCheckBox("Singleton Mode");
-    private final JCheckBox cbRemoveArtifacts = new OptionsCheckBox("Remove Artifacts");
-    private final JCheckBox cbAnte = new OptionsCheckBox("Play for Ante");
-    private final JCheckBox cbAnteMatchRarity = new OptionsCheckBox("Match Ante Rarity");
-    private final JCheckBox cbEnableAICheats = new OptionsCheckBox("Allow AI Cheating");
-    private final JCheckBox cbManaBurn = new OptionsCheckBox("Mana Burn");
-    private final JCheckBox cbManaLostPrompt = new OptionsCheckBox("Prompt Mana Pool Emptying");
-    private final JCheckBox cbDevMode = new OptionsCheckBox("Developer Mode");
-    private final JCheckBox cbLoadCardsLazily = new OptionsCheckBox("Load Card Scripts Lazily");
-    private final JCheckBox cbLoadHistoricFormats = new OptionsCheckBox("Load Historic Formats");
-    private final JCheckBox cbWorkshopSyntax = new OptionsCheckBox("Workshop Syntax Checker");
-    private final JCheckBox cbEnforceDeckLegality = new OptionsCheckBox("Deck Conformance");
-    private final JCheckBox cbPerformanceMode = new OptionsCheckBox("Performance Mode");
-    private final JCheckBox cbFilteredHands = new OptionsCheckBox("Filtered Hands");
-    private final JCheckBox cbImageFetcher = new OptionsCheckBox("Automatically Download Missing Card Art");
-    private final JCheckBox cbCloneImgSource = new OptionsCheckBox("Clones Use Original Card Art");
-    private final JCheckBox cbScaleLarger = new OptionsCheckBox("Scale Image Larger");
-    private final JCheckBox cbRenderBlackCardBorders = new OptionsCheckBox("Render Black Card Borders");
-    private final JCheckBox cbLargeCardViewers = new OptionsCheckBox("Use Large Card Viewers");
-    private final JCheckBox cbSmallDeckViewer = new OptionsCheckBox("Use Small Deck Viewer");
-    private final JCheckBox cbDisplayFoil = new OptionsCheckBox("Display Foil Overlay");
-    private final JCheckBox cbRandomFoil = new OptionsCheckBox("Random Foil");
-    private final JCheckBox cbRandomArtInPools = new OptionsCheckBox("Randomize Card Art in Generated Card Pools");
-    private final JCheckBox cbEnableSounds = new OptionsCheckBox("Enable Sounds");
-    private final JCheckBox cbEnableMusic = new OptionsCheckBox("Enable Music");
-    private final JCheckBox cbAltSoundSystem = new OptionsCheckBox("Use Alternate Sound System");
-    private final JCheckBox cbUiForTouchScreen = new OptionsCheckBox("Enhance UI for Touchscreens");
-    private final JCheckBox cbTimedTargOverlay = new OptionsCheckBox("Enable Targeting Overlay Optimization");
-    private final JCheckBox cbCompactMainMenu = new OptionsCheckBox("Use Compact Main Sidebar Menu");
-    private final JCheckBox cbDetailedPaymentDesc = new OptionsCheckBox("Spell Description in Payment Prompt");
-    private final JCheckBox cbPromptFreeBlocks = new OptionsCheckBox("Free Block Handling");
-    private final JCheckBox cbPauseWhileMinimized = new OptionsCheckBox("Pause While Minimized");
-    private final JCheckBox cbCompactPrompt = new OptionsCheckBox("Compact Prompt");
-    private final JCheckBox cbEscapeEndsTurn = new OptionsCheckBox("Use Escape Key to End Turn");
-    private final JCheckBox cbPreselectPrevAbOrder = new OptionsCheckBox("Preselect Last Order of Abilities");
-    private final JCheckBox cbHideReminderText = new OptionsCheckBox("Hide Reminder Text");
-    private final JCheckBox cbOpenPacksIndiv = new OptionsCheckBox("Open Packs Individually");
-    private final JCheckBox cbTokensInSeparateRow = new OptionsCheckBox("Display Tokens in a Separate Row");
-    private final JCheckBox cbStackCreatures = new OptionsCheckBox("Stack Creatures");
-    private final JCheckBox cbFilterLandsByColorId = new OptionsCheckBox("Filter Lands by Color in Activated Abilities");
-    private final JCheckBox cbShowStormCount = new OptionsCheckBox("Show Storm Count in Prompt Pane");
-    private final JCheckBox cbRemindOnPriority = new OptionsCheckBox("Visually Alert on Receipt of Priority");
-    private final JCheckBox cbUseSentry = new OptionsCheckBox("Automatically submit bug reports.");
+    private final JCheckBox cbRemoveSmall = new OptionsCheckBox(localizer.getMessage("cbRemoveSmall"));
+    private final JCheckBox cbCardBased = new OptionsCheckBox(localizer.getMessage("cbCardBased"));
+    private final JCheckBox cbSingletons = new OptionsCheckBox(localizer.getMessage("cbSingletons"));
+    private final JCheckBox cbRemoveArtifacts = new OptionsCheckBox(localizer.getMessage("cbRemoveArtifacts"));
+    private final JCheckBox cbAnte = new OptionsCheckBox(localizer.getMessage("cbAnte"));
+    private final JCheckBox cbAnteMatchRarity = new OptionsCheckBox(localizer.getMessage("cbAnteMatchRarity"));
+    private final JCheckBox cbEnableAICheats = new OptionsCheckBox(localizer.getMessage("cbEnableAICheats"));
+    private final JCheckBox cbManaBurn = new OptionsCheckBox(localizer.getMessage("cbManaBurn"));
+    private final JCheckBox cbManaLostPrompt = new OptionsCheckBox(localizer.getMessage("cbManaLostPrompt"));
+    private final JCheckBox cbDevMode = new OptionsCheckBox(localizer.getMessage("cbDevMode"));
+    private final JCheckBox cbLoadCardsLazily = new OptionsCheckBox(localizer.getMessage("cbLoadCardsLazily"));
+    private final JCheckBox cbLoadHistoricFormats = new OptionsCheckBox(localizer.getMessage("cbLoadHistoricFormats"));
+    private final JCheckBox cbWorkshopSyntax = new OptionsCheckBox(localizer.getMessage("cbWorkshopSyntax"));
+    private final JCheckBox cbEnforceDeckLegality = new OptionsCheckBox(localizer.getMessage("cbEnforceDeckLegality"));
+    private final JCheckBox cbPerformanceMode = new OptionsCheckBox(localizer.getMessage("cbPerformanceMode"));
+    private final JCheckBox cbFilteredHands = new OptionsCheckBox(localizer.getMessage("cbFilteredHands"));
+    private final JCheckBox cbImageFetcher = new OptionsCheckBox(localizer.getMessage("cbImageFetcher"));
+    private final JCheckBox cbCloneImgSource = new OptionsCheckBox(localizer.getMessage("cbCloneImgSource"));
+    private final JCheckBox cbScaleLarger = new OptionsCheckBox(localizer.getMessage("cbScaleLarger"));
+    private final JCheckBox cbRenderBlackCardBorders = new OptionsCheckBox(localizer.getMessage("cbRenderBlackCardBorders"));
+    private final JCheckBox cbLargeCardViewers = new OptionsCheckBox(localizer.getMessage("cbLargeCardViewers"));
+    private final JCheckBox cbSmallDeckViewer = new OptionsCheckBox(localizer.getMessage("cbSmallDeckViewer"));
+    private final JCheckBox cbDisplayFoil = new OptionsCheckBox(localizer.getMessage("cbDisplayFoil"));
+    private final JCheckBox cbRandomFoil= new OptionsCheckBox(localizer.getMessage("cbRandomFoil"));
+    private final JCheckBox cbRandomArtInPools = new OptionsCheckBox(localizer.getMessage("cbRandomArtInPools"));
+    private final JCheckBox cbEnableSounds = new OptionsCheckBox(localizer.getMessage("cbEnableSounds"));
+    private final JCheckBox cbEnableMusic = new OptionsCheckBox(localizer.getMessage("cbEnableMusic"));
+    private final JCheckBox cbAltSoundSystem = new OptionsCheckBox(localizer.getMessage("cbAltSoundSystem"));
+    private final JCheckBox cbUiForTouchScreen = new OptionsCheckBox(localizer.getMessage("cbUiForTouchScreen"));
+    private final JCheckBox cbTimedTargOverlay = new OptionsCheckBox(localizer.getMessage("cbTimedTargOverlay"));
+    private final JCheckBox cbCompactMainMenu = new OptionsCheckBox(localizer.getMessage("cbCompactMainMenu"));
+    private final JCheckBox cbDetailedPaymentDesc = new OptionsCheckBox(localizer.getMessage("cbDetailedPaymentDesc"));
+    private final JCheckBox cbPromptFreeBlocks = new OptionsCheckBox(localizer.getMessage("cbPromptFreeBlocks"));
+    private final JCheckBox cbPauseWhileMinimized = new OptionsCheckBox(localizer.getMessage("cbPauseWhileMinimized"));
+    private final JCheckBox cbCompactPrompt = new OptionsCheckBox(localizer.getMessage("cbCompactPrompt"));
+    private final JCheckBox cbEscapeEndsTurn = new OptionsCheckBox(localizer.getMessage("cbEscapeEndsTurn"));
+    private final JCheckBox cbPreselectPrevAbOrder = new OptionsCheckBox(localizer.getMessage("cbPreselectPrevAbOrder"));
+    private final JCheckBox cbHideReminderText = new OptionsCheckBox(localizer.getMessage("cbHideReminderText"));
+    private final JCheckBox cbOpenPacksIndiv = new OptionsCheckBox(localizer.getMessage("cbOpenPacksIndiv"));
+    private final JCheckBox cbTokensInSeparateRow = new OptionsCheckBox(localizer.getMessage("cbTokensInSeparateRow"));
+    private final JCheckBox cbStackCreatures = new OptionsCheckBox(localizer.getMessage("cbStackCreatures"));
+    private final JCheckBox cbFilterLandsByColorId = new OptionsCheckBox(localizer.getMessage("cbFilterLandsByColorId"));
+    private final JCheckBox cbShowStormCount = new OptionsCheckBox(localizer.getMessage("cbShowStormCount"));
+    private final JCheckBox cbRemindOnPriority = new OptionsCheckBox(localizer.getMessage("cbRemindOnPriority"));
+    private final JCheckBox cbUseSentry = new OptionsCheckBox(localizer.getMessage("cbUseSentry"));
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<>();
 
     // ComboBox items are added in CSubmenuPreferences since this is just the View.
-    private final FComboBoxPanel<GameLogEntryType> cbpGameLogEntryType = new FComboBoxPanel<>("Game Log Verbosity:");
-    private final FComboBoxPanel<CloseAction> cbpCloseAction = new FComboBoxPanel<>("Close Action:");
-    private final FComboBoxPanel<String> cbpDefaultFontSize = new FComboBoxPanel<>("Default Font Size:");
-    private final FComboBoxPanel<String> cbpAiProfiles = new FComboBoxPanel<>("AI Personality:");
-    private final FComboBoxPanel<String> cbpDisplayCurrentCardColors = new FComboBoxPanel<>("Show Detailed Card Color:");
-    private final FComboBoxPanel<String> cbpAutoYieldMode = new FComboBoxPanel<>("Auto-Yield:");
-    private final FComboBoxPanel<String> cbpCounterDisplayType = new FComboBoxPanel<>("Counter Display Type:");
-    private final FComboBoxPanel<String> cbpCounterDisplayLocation = new FComboBoxPanel<>("Counter Display Location:");
-    private final FComboBoxPanel<String> cbpGraveyardOrdering = new FComboBoxPanel<>("Allow Ordering Cards Put in Graveyard:");
+    private final FComboBoxPanel<GameLogEntryType> cbpGameLogEntryType = new FComboBoxPanel<>(localizer.getMessage("cbpGameLogEntryType")+":");
+    private final FComboBoxPanel<CloseAction> cbpCloseAction = new FComboBoxPanel<>(localizer.getMessage("cbpCloseAction")+":");
+    private final FComboBoxPanel<String> cbpDefaultFontSize = new FComboBoxPanel<>(localizer.getMessage("cbpDefaultFontSize")+":");
+    private final FComboBoxPanel<String> cbpAiProfiles = new FComboBoxPanel<>(localizer.getMessage("cbpAiProfiles")+":");
+    private final FComboBoxPanel<String> cbpDisplayCurrentCardColors = new FComboBoxPanel<>(localizer.getMessage("cbpDisplayCurrentCardColors")+":");
+    private final FComboBoxPanel<String> cbpAutoYieldMode = new FComboBoxPanel<>(localizer.getMessage("cbpAutoYieldMode")+":");
+    private final FComboBoxPanel<String> cbpCounterDisplayType = new FComboBoxPanel<>(localizer.getMessage("cbpCounterDisplayType")+":");
+    private final FComboBoxPanel<String> cbpCounterDisplayLocation =new FComboBoxPanel<>(localizer.getMessage("cbpCounterDisplayLocation")+":");
+    private final FComboBoxPanel<String> cbpGraveyardOrdering = new FComboBoxPanel<>(localizer.getMessage("cbpGraveyardOrdering")+":");
 
     /**
      * Constructor.
@@ -128,7 +132,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         final String descriptionConstraints = "w 80%!, h 22px!, gap 28px 0 0 20px, span 2 1";
 
         // Troubleshooting
-        pnlPrefs.add(new SectionLabel("Troubleshooting"), sectionConstraints);
+        pnlPrefs.add(new SectionLabel(localizer.getMessage("Troubleshooting")), sectionConstraints);
 
         // Reset buttons
         final String twoButtonConstraints1 = "w 38%!, h 30px!, gap 25px 0 0 10px";
@@ -141,199 +145,199 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(btnContentDirectoryUI, twoButtonConstraints2);
 
         // General Configuration
-        pnlPrefs.add(new SectionLabel("General Configuration"), sectionConstraints);
+        pnlPrefs.add(new SectionLabel(localizer.getMessage("GeneralConfiguration")), sectionConstraints);
 
         pnlPrefs.add(getPlayerNamePanel(), titleConstraints + ", h 26px!");
-        pnlPrefs.add(new NoteLabel("Sets the name that you will be referred to by Forge during gameplay."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPlayerName")), descriptionConstraints);
 
         pnlPrefs.add(cbCompactMainMenu, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Enable for a space efficient sidebar that displays only one menu group at a time (RESTART REQUIRED)."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCompactMainMenu")), descriptionConstraints);
 
         pnlPrefs.add(cbUseSentry, titleConstraints);
-        pnlPrefs.add(new NoteLabel("When enabled, automatically submits bug reports to developers."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlUseSentry")), descriptionConstraints);
 
         pnlPrefs.add(btnResetJavaFutureCompatibilityWarnings, "w 300px!, h 30px!, gap 27px 0 0 20px, span 2 1");
 
         // Gameplay Options
-        pnlPrefs.add(new SectionLabel("Gameplay"), sectionConstraints);
+        pnlPrefs.add(new SectionLabel(localizer.getMessage("GamePlay")), sectionConstraints);
 
         pnlPrefs.add(cbpAiProfiles, comboBoxConstraints);
-        pnlPrefs.add(new NoteLabel("Choose your AI opponent."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlpAiProfiles")), descriptionConstraints);
 
         pnlPrefs.add(cbAnte, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Determines whether or not the game is played for ante."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAnte")), descriptionConstraints);
 
         pnlPrefs.add(cbAnteMatchRarity, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Attempts to make antes the same rarity for all players."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAnteMatchRarity")), descriptionConstraints);
 
         pnlPrefs.add(cbEnableAICheats, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Allow the AI to cheat to gain advantage (for personalities that have cheat shuffling options set)."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnableAICheats")), descriptionConstraints);
 
         pnlPrefs.add(cbManaBurn, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Play with mana burn (from pre-Magic 2010 rules)."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlManaBurn")), descriptionConstraints);
 
         pnlPrefs.add(cbManaLostPrompt, titleConstraints);
-        pnlPrefs.add(new NoteLabel("When enabled, you get a warning if passing priority would cause you to lose mana in your mana pool."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlManaLostPrompt")), descriptionConstraints);
 
         pnlPrefs.add(cbEnforceDeckLegality, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Enforces deck legality relevant to each environment (minimum deck sizes, max card count etc)."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnforceDeckLegality")), descriptionConstraints);
 
         pnlPrefs.add(cbPerformanceMode, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Disables additional static abilities checks to speed up the game engine. (Warning: breaks some 'as if had flash' scenarios when casting cards owned by opponents)."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPerformanceMode")), descriptionConstraints);
 
         pnlPrefs.add(cbFilteredHands, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Generates two starting hands and keeps the one with the closest to average land count for the deck. (Requires restart)"), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlFilteredHands")), descriptionConstraints);
 
         pnlPrefs.add(cbCloneImgSource, titleConstraints);
-        pnlPrefs.add(new NoteLabel("When enabled clones will use their original art instead of the cloned card's art."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCloneImgSource")), descriptionConstraints);
 
         pnlPrefs.add(cbPromptFreeBlocks, titleConstraints);
-        pnlPrefs.add(new NoteLabel("When enabled, if you would have to pay 0 to block, pay automatically without prompt."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPromptFreeBlocks")), descriptionConstraints);
 
         pnlPrefs.add(cbPauseWhileMinimized, titleConstraints);
-        pnlPrefs.add(new NoteLabel("When enabled, Forge pauses when minimized (primarily for AI vs AI)."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPauseWhileMinimized")), descriptionConstraints);
 
         pnlPrefs.add(cbEscapeEndsTurn, titleConstraints);
-        pnlPrefs.add(new NoteLabel("When enabled, Escape key functions as an alternative shortcut to end the current turn."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEscapeEndsTurn")), descriptionConstraints);
 
         pnlPrefs.add(cbDetailedPaymentDesc, titleConstraints);
-        pnlPrefs.add(new NoteLabel("When enabled, detailed spell/ability descriptions are shown when choosing targets and paying costs."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlDetailedPaymentDesc")), descriptionConstraints);
 
         pnlPrefs.add(cbShowStormCount, titleConstraints);
-        pnlPrefs.add(new NoteLabel("When enabled, displays the current storm count in the prompt pane."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlShowStormCount")), descriptionConstraints);
 
         pnlPrefs.add(cbRemindOnPriority, titleConstraints);
-        pnlPrefs.add(new NoteLabel("When enabled, flashes the player choice area upon receiving priority."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlRemindOnPriority")), descriptionConstraints);
 
         pnlPrefs.add(cbPreselectPrevAbOrder, titleConstraints);
-        pnlPrefs.add(new NoteLabel("When enabled, preselects the last defined simultaneous ability order in the ordering dialog."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPreselectPrevAbOrder")), descriptionConstraints);
 
         pnlPrefs.add(cbpGraveyardOrdering, comboBoxConstraints);
-        pnlPrefs.add(new NoteLabel("Determines when to let the player choose the order of cards simultaneously put in graveyard (never, always, or only when playing with cards for which it matters, for example, Volrath's Shapeshifter)."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlpGraveyardOrdering")), descriptionConstraints);
 
         pnlPrefs.add(cbpAutoYieldMode, comboBoxConstraints);
-        pnlPrefs.add(new NoteLabel("Defines the granularity level of auto-yields (per unique ability or per unique card)."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlpAutoYieldMode")), descriptionConstraints);
 
         // Deck building options
-        pnlPrefs.add(new SectionLabel("Random Deck Generation"), sectionConstraints);
+        pnlPrefs.add(new SectionLabel(localizer.getMessage("RandomDeckGeneration")), sectionConstraints);
 
         pnlPrefs.add(cbRemoveSmall, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Disables 1/1 and 0/X creatures in generated decks."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlRemoveSmall")), descriptionConstraints);
 
         pnlPrefs.add(cbSingletons, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Disables non-land duplicates in generated decks."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSingletons")), descriptionConstraints);
 
         pnlPrefs.add(cbRemoveArtifacts, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Disables artifact cards in generated decks."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlRemoveArtifacts")), descriptionConstraints);
 
         pnlPrefs.add(cbCardBased, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Builds more synergistic random decks (requires restart)."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCardBased")), descriptionConstraints);
 
         // Deck building options
-        pnlPrefs.add(new SectionLabel("Deck Editor Options"), sectionConstraints);
+        pnlPrefs.add(new SectionLabel(localizer.getMessage("DeckEditorOptions")), sectionConstraints);
 
         pnlPrefs.add(cbFilterLandsByColorId, titleConstraints);
-        pnlPrefs.add(new NoteLabel("When using card color filters, filter lands in a way to make it easier to find relevant mana producing lands."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlFilterLandsByColorId")), descriptionConstraints);
 
         // Advanced
-        pnlPrefs.add(new SectionLabel("Advanced Settings"), sectionConstraints);
+        pnlPrefs.add(new SectionLabel(localizer.getMessage("AdvancedSettings")), sectionConstraints);
 
         pnlPrefs.add(cbDevMode, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Enables menu with functions for testing during development."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlDevMode")), descriptionConstraints);
 
         pnlPrefs.add(cbWorkshopSyntax, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Enables syntax checking of card scripts in the Workshop. Note: functionality still in testing phase!"), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlWorkshopSyntax")), descriptionConstraints);
 
         pnlPrefs.add(cbpGameLogEntryType, comboBoxConstraints);
-        pnlPrefs.add(new NoteLabel("Changes how much information is displayed in the game log. Sorted by least to most verbose."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlGameLogEntryType")), descriptionConstraints);
 
         pnlPrefs.add(cbpCloseAction, comboBoxConstraints);
-        pnlPrefs.add(new NoteLabel("Changes what happens when clicking the X button in the upper right."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCloseAction")), descriptionConstraints);
 
         pnlPrefs.add(cbLoadCardsLazily, titleConstraints);
-        pnlPrefs.add(new NoteLabel("If turned on, Forge will load card scripts as they're needed instead of at start up. (Warning: Experimental)"), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlLoadCardsLazily")), descriptionConstraints);
 
         pnlPrefs.add(cbLoadHistoricFormats, titleConstraints);
-        pnlPrefs.add(new NoteLabel("If turned on, Forge will load all historic format definitions, this may take slightly longer to load at startup."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlLoadHistoricFormats")), descriptionConstraints);
 
         // Graphic Options
-        pnlPrefs.add(new SectionLabel("Graphic Options"), sectionConstraints + ", gaptop 2%");
+        pnlPrefs.add(new SectionLabel(localizer.getMessage("GraphicOptions")), sectionConstraints + ", gaptop 2%");
 
         pnlPrefs.add(cbpDefaultFontSize, comboBoxConstraints);
-        pnlPrefs.add(new NoteLabel("The default font size within the UI. All font elements are scaled relative to this. (Needs restart)"), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlDefaultFontSize")), descriptionConstraints);
 
         pnlPrefs.add(cbImageFetcher, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Enables live fetching of missing card images from an online resource."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlImageFetcher")), descriptionConstraints);
 
         pnlPrefs.add(cbDisplayFoil, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Displays foil cards with the visual foil overlay effect."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlDisplayFoil")), descriptionConstraints);
 
         pnlPrefs.add(cbRandomFoil, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Adds foil effect to random cards."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlRandomFoil")), descriptionConstraints);
 
         pnlPrefs.add(cbScaleLarger, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Allows card pictures to be expanded larger than their original size."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlScaleLarger")), descriptionConstraints);
 
         pnlPrefs.add(cbRenderBlackCardBorders, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Render black borders around card images."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlRenderBlackCardBorders")), descriptionConstraints);
 
         pnlPrefs.add(cbLargeCardViewers, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Makes all card viewers much larger for use with high resolution images. Will not fit on smaller screens."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlLargeCardViewers")), descriptionConstraints);
 
         pnlPrefs.add(cbSmallDeckViewer, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Sets the deck viewer window to be 800x600 rather than a proportion of the screen size."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSmallDeckViewer")), descriptionConstraints);
 
         pnlPrefs.add(cbRandomArtInPools, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Generates cards with random art in generated limited mode card pools."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlRandomArtInPools")), descriptionConstraints);
 
         pnlPrefs.add(cbUiForTouchScreen, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Increases some UI elements to provide a better experience on touchscreen devices. (Needs restart)"), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlUiForTouchScreen")), descriptionConstraints);
 
         pnlPrefs.add(cbCompactPrompt, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Hide header and use smaller font in Prompt pane to make it more compact."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCompactPrompt")), descriptionConstraints);
 
         /*pnlPrefs.add(cbStackCardView, titleConstraints); TODO: Show this checkbox when setting can support being enabled
         pnlPrefs.add(new NoteLabel("Show cards and abilities on Stack in card view rather than list view."), descriptionConstraints);*/
 
         pnlPrefs.add(cbHideReminderText, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Hide reminder text in Card Detail pane."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlHideReminderText")), descriptionConstraints);
 
         pnlPrefs.add(cbOpenPacksIndiv, titleConstraints);
-        pnlPrefs.add(new NoteLabel("When opening Fat Packs and Booster Boxes, booster packs will be opened and displayed one at a time."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlOpenPacksIndiv")), descriptionConstraints);
 
         pnlPrefs.add(cbTokensInSeparateRow, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Displays tokens in a separate row on the battlefield below the non-token creatures."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlTokensInSeparateRow")), descriptionConstraints);
 
         pnlPrefs.add(cbStackCreatures, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Stacks identical creatures on the battlefield like lands, artifacts, and enchantments."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlStackCreatures")), descriptionConstraints);
 
         pnlPrefs.add(cbTimedTargOverlay, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Enables throttling-based optimization of targeting overlay to reduce CPU use (only disable if you experience choppiness on older hardware, requires starting a new match)."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlTimedTargOverlay")), descriptionConstraints);
 
         pnlPrefs.add(cbpCounterDisplayType, comboBoxConstraints);
-        pnlPrefs.add(new NoteLabel("Selects the style of the in-game counter display for cards. Text-based is a new tab-like display on the cards. Image-based is the old counter image. Hybrid displays both at once."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCounterDisplayType")), descriptionConstraints);
 
         pnlPrefs.add(cbpCounterDisplayLocation, comboBoxConstraints);
-        pnlPrefs.add(new NoteLabel("Determines where to position the text-based counters on the card: close to the top or close to the bottom."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCounterDisplayLocation")), descriptionConstraints);
 
         pnlPrefs.add(cbpDisplayCurrentCardColors, comboBoxConstraints);
-        pnlPrefs.add(new NoteLabel("Displays the breakdown of the current color of cards in the card detail information panel."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlDisplayCurrentCardColors")), descriptionConstraints);
 
         // Sound options
-        pnlPrefs.add(new SectionLabel("Sound Options"), sectionConstraints + ", gaptop 2%");
+        pnlPrefs.add(new SectionLabel(localizer.getMessage("SoundOptions")), sectionConstraints + ", gaptop 2%");
 
         pnlPrefs.add(cbEnableSounds, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Enable sound effects during the game."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnableSounds")), descriptionConstraints);
 
         pnlPrefs.add(cbEnableMusic, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Enable background music during the game."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnableMusic")), descriptionConstraints);
 
         pnlPrefs.add(cbAltSoundSystem, titleConstraints);
-        pnlPrefs.add(new NoteLabel("Use the alternate sound system (only use if you have issues with sound not playing or disappearing)."), descriptionConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAltSoundSystem")), descriptionConstraints);
 
 
         // Keyboard shortcuts
-        pnlPrefs.add(new SectionLabel("Keyboard Shortcuts"), sectionConstraints);
+        pnlPrefs.add(new SectionLabel(localizer.getMessage("KeyboardShortcuts")), sectionConstraints);
 
         final List<Shortcut> shortcuts = KeyboardShortcuts.getKeyboardShortcuts();
 

@@ -68,6 +68,12 @@ Discord channel [here](https://discordapp.com/channels/267367946135928833/267742
 
 TBD  
 
+# Card Scripting
+
+Visit [this page](https://www.slightlymagic.net/wiki/Forge_API) for information on scripting.
+
+Card scripting resources are found in the forge-gui/res/ path.
+
 # General Notes
 
 ## Project Hierarchy
@@ -94,6 +100,8 @@ The platform-specific projects are:
 ### forge-game
 
 ### forge-gui
+
+The forge-gui project includes the scripting resource definitions in the res/ path.
 
 ### forge-gui-android
 

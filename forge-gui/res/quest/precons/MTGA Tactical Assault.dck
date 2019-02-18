@@ -1,0 +1,34 @@
+[shop]
+WinsToUnlock=0
+Credits=999
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=MTGA Tactical Assault
+Description=As a white mage, you command disciplined armies. Enforce order to overwhelm your enemies.
+Deck Type=constructed
+Set=ANA
+[Main]
+2 Daybreak Chaplain|M19
+1 Herald of Faith|M19
+2 Knight's Pledge|M19
+1 Leonin Warleader|M19
+2 Loxodon Line Breaker|M19
+3 Luminous Bonds|GRN
+1 Meteor Golem|M19
+3 Oreskos Swiftclaw|M19
+2 Pegasus Courser|M19
+25 Plains|GRN
+3 Tactical Advantage|ANA
+1 Confront the Assault|ANA
+1 Angelic Reward|ANA
+1 Inspiring Commander|ANA
+1 Spiritual Guardian|ANA
+2 Serra Angel|DOM
+1 Serra's Guardian|M19
+2 Silverbeak Griffin|M19
+3 Star-Crowned Stag|M19
+2 Take Vengeance|M19
+1 Zetalpa, Primal Dawn|RIX
+
+

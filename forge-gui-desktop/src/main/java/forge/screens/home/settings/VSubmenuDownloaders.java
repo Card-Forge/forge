@@ -12,6 +12,7 @@ import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
 import forge.toolbox.*;
 import forge.util.FileUtil;
+import forge.util.Localizer;
 import forge.util.RuntimeVersion;
 import net.miginfocom.swing.MigLayout;
 
@@ -29,6 +30,8 @@ import java.awt.event.ActionListener;
 public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     /** */
     SINGLETON_INSTANCE;
+    final Localizer localizer = Localizer.getInstance();
+
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
@@ -38,15 +41,15 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     private final JPanel pnlContent = new JPanel(new MigLayout("insets 0, gap 0, wrap, ay center"));
     private final FScrollPane scrContent = new FScrollPane(pnlContent, false);
 
-    private final FLabel btnDownloadSetPics           = _makeButton("Download LQ Set Pictures");
-    private final FLabel btnDownloadPics              = _makeButton("Download LQ Card Pictures");
-    private final FLabel btnDownloadQuestImages       = _makeButton("Download Quest Images");
-    private final FLabel btnDownloadAchievementImages = _makeButton("Download Achievement Images");
-    private final FLabel btnReportBug                 = _makeButton("Report a Bug");
-    private final FLabel btnImportPictures            = _makeButton("Import Data");
-    private final FLabel btnHowToPlay                 = _makeButton("How To Play");
-    private final FLabel btnDownloadPrices            = _makeButton("Download Card Prices");
-    private final FLabel btnLicensing                 = _makeButton("License Details");
+    private final FLabel btnDownloadSetPics           = _makeButton(localizer.getMessage("btnDownloadSetPics"));
+    private final FLabel btnDownloadPics              = _makeButton(localizer.getMessage("btnDownloadPics"));
+    private final FLabel btnDownloadQuestImages       = _makeButton(localizer.getMessage("btnDownloadQuestImages"));
+    private final FLabel btnDownloadAchievementImages = _makeButton(localizer.getMessage("btnDownloadAchievementImages"));
+    private final FLabel btnReportBug                 = _makeButton(localizer.getMessage("btnReportBug"));
+    private final FLabel btnImportPictures            = _makeButton(localizer.getMessage("btnImportPictures"));
+    private final FLabel btnHowToPlay                 = _makeButton(localizer.getMessage("btnHowToPlay"));
+    private final FLabel btnDownloadPrices            = _makeButton(localizer.getMessage("btnDownloadPrices"));
+    private final FLabel btnLicensing                 = _makeButton(localizer.getMessage("btnLicensing"));
 
     /**
      * Constructor.
@@ -61,47 +64,48 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         if (javaRecentEnough()) {
 
             pnlContent.add(btnDownloadPics, constraintsBTN);
-            pnlContent.add(_makeLabel("Download default card picture for each card."), constraintsLBL);
+            pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadPics")), constraintsLBL);
 
             pnlContent.add(btnDownloadSetPics, constraintsBTN);
-            pnlContent.add(_makeLabel("Download all pictures of each card (one for each set the card appeared in)"), constraintsLBL);
+            pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadSetPics")), constraintsLBL);
 
             pnlContent.add(btnDownloadQuestImages, constraintsBTN);
-            pnlContent.add(_makeLabel("Download tokens and icons used in Quest mode."), constraintsLBL);
+            pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadQuestImages")), constraintsLBL);
 
             pnlContent.add(btnDownloadAchievementImages, constraintsBTN);
-            pnlContent.add(_makeLabel("Download achievement images to really make your trophies stand out."), constraintsLBL);
+            pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadAchievementImages")), constraintsLBL);
 
             pnlContent.add(btnDownloadPrices, constraintsBTN);
-            pnlContent.add(_makeLabel("Download up-to-date price list for in-game card shops."), constraintsLBL);
+            pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadPrices")), constraintsLBL);
 
         } else {
 
-            String text = "Your version of Java is too old to use the content downloaders.";
+            String text = localizer.getMessage("lblYourVersionOfJavaIsTooOld");
             FLabel label = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text(text).fontStyle(Font.BOLD).fontSize(18).build();
             pnlContent.add(label, "w 90%!, h 25px!, center, gap 0 0 30px 3px");
 
-            text = "Please update to the latest version of Java 8 to use this feature.";
+            text  = localizer.getMessage("lblPleaseUpdateToTheLatestVersionOfJava");
             label = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text(text).fontStyle(Font.BOLD).fontSize(18).build();
             pnlContent.add(label, "w 90%!, h 25px!, center, gap 0 0 0 36px");
 
-            text = "You're running " + System.getProperty("java.version") + ". You need at least version 1.8.0_101.";
+            text = localizer.getMessage("lblYoureRunning") + " " + System.getProperty("java.version");
+            text = text + " . " + localizer.getMessage("lblYouNeedAtLeastJavaVersion") ;
             label = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text(text).fontStyle(Font.BOLD).fontSize(18).build();
             pnlContent.add(label, "w 90%!, h 25px!, center, gap 0 0 0 36px");
 
         }
 
         pnlContent.add(btnImportPictures, constraintsBTN);
-        pnlContent.add(_makeLabel("Import data from a local directory."), constraintsLBL);
+        pnlContent.add(_makeLabel(localizer.getMessage("lblImportPictures")), constraintsLBL);
 
         pnlContent.add(btnReportBug, constraintsBTN);
-        pnlContent.add(_makeLabel("Something broken?"), constraintsLBL);
+        pnlContent.add(_makeLabel(localizer.getMessage("lblReportBug")), constraintsLBL);
 
         pnlContent.add(btnHowToPlay, constraintsBTN);
-        pnlContent.add(_makeLabel("Rules of the Game."), constraintsLBL);
+        pnlContent.add(_makeLabel(localizer.getMessage("lblHowToPlay")), constraintsLBL);
 
         pnlContent.add(btnLicensing, constraintsBTN);
-        pnlContent.add(_makeLabel("Forge legal."), constraintsLBL);
+        pnlContent.add(_makeLabel(localizer.getMessage("lblLicensing")), constraintsLBL);
 
     }
 
@@ -210,7 +214,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
      */
     @Override
     public String getMenuTitle() {
-        return "Content Downloaders";
+        return localizer.getMessage("ContentDownloaders");
     }
 
     /* (non-Javadoc)

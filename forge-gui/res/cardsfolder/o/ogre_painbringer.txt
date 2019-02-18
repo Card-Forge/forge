@@ -1,0 +1,7 @@
+Name:Ogre Painbringer
+ManaCost:3 R R
+Types:Creature Ogre
+PT:7/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDmg | TriggerDescription$ When CARDNAME enters the battlefield, it deals 3 damage to each player.
+SVar:TrigDmg:DB$ DamageAll | Cost$ 3 R R | NumDmg$ 3 | ValidPlayers$ Player | ValidDescription$ each player. | SpellDescription$ CARDNAME deals 3 damage to each player.
+Oracle:When Ogre Painbringer enters the battlefield, it deals 3 damage to each player.
