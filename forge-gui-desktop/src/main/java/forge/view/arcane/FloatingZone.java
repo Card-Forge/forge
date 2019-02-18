@@ -19,7 +19,10 @@ package forge.view.arcane;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Collections;
+import java.util.Comparator;
 
+import java.awt.event.MouseEvent;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.WindowConstants;
 
@@ -30,8 +33,10 @@ import forge.game.zone.ZoneType;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FScrollPane;
+import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FSkin;
 import forge.util.Lang;
+import forge.util.collect.FCollection;
 
 public class FloatingZone extends FloatingCardArea {
     private static final long serialVersionUID = 1927906492186378596L;
@@ -101,8 +106,28 @@ public class FloatingZone extends FloatingCardArea {
     private final ZoneType zone;
     private PlayerView player;
 
+    protected boolean sortedByName = false;
+    protected FCollection<CardView> cardList;
+
+    private final Comparator<CardView> comp = new Comparator<CardView>() {
+	    @Override
+	    public int compare(CardView lhs, CardView rhs) {
+		if ( !getMatchUI().mayView(lhs) ) {
+		    return ( getMatchUI().mayView(rhs) ) ? 1 : 0 ;
+		} else if ( !getMatchUI().mayView(rhs) ) {
+		    return -1;
+		} else {
+		    return lhs.getName().compareTo(rhs.getName());
+		}
+	    }
+	};
+
     protected Iterable<CardView> getCards() {
-	return player.getCards(zone);
+	cardList = new FCollection<CardView>(player.getCards(zone));
+	if ( sortedByName ) {
+	    Collections.sort(cardList, comp);
+	}
+	return cardList;
     }
 
     private FloatingZone(final CMatchUI matchUI, final PlayerView player0, final ZoneType zone0) {
@@ -136,10 +161,35 @@ public class FloatingZone extends FloatingCardArea {
         setVertical(true);
     }
 
+    private void toggleSorted() {
+	sortedByName = !sortedByName;
+	setTitle();
+	refresh();
+	// revalidation does not appear to be necessary here
+	getWindow().repaint();
+    }
+
+    @Override
+    protected void onShow() {
+	super.onShow();
+        if (!hasBeenShown) {
+            getWindow().getTitleBar().addMouseListener(new FMouseAdapter() {
+                @Override public final void onRightClick(final MouseEvent e) {
+                    toggleSorted();
+                }
+            });
+        }
+    }
+
+    private void setTitle() {
+        title = Lang.getPossessedObject(player.getName(), zone.name()) + " (%d)" +
+	    ( sortedByName ? " - sorted by name (right click in title to not sort)" : " (right click in title to sort)" ) ;
+    }	    
+
     private void setPlayer(PlayerView player0) {
         if (player == player0) { return; }
         player = player0;
-        title = Lang.getPossessedObject(player0.getName(), zone.name()) + " (%d)";
+	setTitle();
 
         boolean isAi = player0.isAI();
         switch (zone) {

@@ -37,7 +37,8 @@ public class Localizer {
 		MessageFormat formatter = null;
 		
 		try {
-			formatter = new MessageFormat(resourceBundle.getString(key.toLowerCase()), locale);
+			//formatter = new MessageFormat(resourceBundle.getString(key.toLowerCase()), locale);
+			formatter = new MessageFormat(resourceBundle.getString(key.toString()), locale);
 		} catch (final IllegalArgumentException | MissingResourceException e) {
 			e.printStackTrace();
 		}

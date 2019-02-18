@@ -1528,7 +1528,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 modelPath = "";
                 setSaved(true);
             }
-            editor.setDeck(model.getHumanDeck());
+            if (model != null) {
+            	editor.setDeck(model.getHumanDeck());
+            }
+            else {
+            	editor.setDeck(null);
+            }
+            	
         }
 
         private boolean isModelInSyncWithFolder() {

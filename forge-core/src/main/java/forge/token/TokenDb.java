@@ -2,7 +2,9 @@ package forge.token;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
-import forge.card.*;
+import forge.card.CardDb;
+import forge.card.CardEdition;
+import forge.card.CardRules;
 import forge.item.PaperToken;
 
 import java.util.*;
@@ -43,7 +45,7 @@ public class TokenDb implements ITokenDatabase {
 
         if (!tokensByName.containsKey(fullName)) {
             try {
-                PaperToken pt = new PaperToken(rulesByName.get(tokenName), editions.get(edition));
+                PaperToken pt = new PaperToken(rulesByName.get(tokenName), editions.get(edition), tokenName);
                 tokensByName.put(fullName, pt);
                 return pt;
             } catch(Exception e) {

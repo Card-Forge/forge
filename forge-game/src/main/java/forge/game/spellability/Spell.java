@@ -144,8 +144,6 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         if (lkicheck) {
             game.getAction().checkStaticAbilities(false);
             game.getTracker().unfreeze();
-            // reset owner for lki
-            card.setController(null, 0);
         }
 
         if (!(isInstant || activator.canCastSorcery() || flash || getRestrictions().isInstantSpeed()
@@ -154,7 +152,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             return false;
         }
 
-        if (!this.getRestrictions().canPlay(card, this)) {
+        if (!this.getRestrictions().canPlay(getHostCard(), this)) {
             return false;
         }
 
