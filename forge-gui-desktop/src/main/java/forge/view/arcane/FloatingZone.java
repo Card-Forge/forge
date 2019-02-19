@@ -123,9 +123,9 @@ public class FloatingZone extends FloatingCardArea {
 	};
 
     protected Iterable<CardView> getCards() {
-          Iterable<CardView> zoneCards = player.getCards(zone);
+        Iterable<CardView> zoneCards = player.getCards(zone);
         if ( zoneCards != null ) {
-            cardList = new FCollection<CardView>(player.getCards(zone));
+            cardList = new FCollection<CardView>(zoneCards);
             if ( sortedByName ) {
                 Collections.sort(cardList, comp);
             }
