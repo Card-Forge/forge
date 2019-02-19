@@ -123,11 +123,16 @@ public class FloatingZone extends FloatingCardArea {
 	};
 
     protected Iterable<CardView> getCards() {
-	cardList = new FCollection<CardView>(player.getCards(zone));
-	if ( sortedByName ) {
-	    Collections.sort(cardList, comp);
-	}
-	return cardList;
+        Iterable<CardView> zoneCards = player.getCards(zone);
+        if ( zoneCards != null ) {
+            cardList = new FCollection<CardView>(zoneCards);
+            if ( sortedByName ) {
+                Collections.sort(cardList, comp);
+            }
+            return cardList;
+        } else {
+            return null;
+        }
     }
 
     private FloatingZone(final CMatchUI matchUI, final PlayerView player0, final ZoneType zone0) {
