@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Ravnica Allegiance #04
+URL:http://www.possibilitystorm.com/wp-content/uploads/2019/02/101.-RNA4.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Your solution must satisfy all possible blocking scenarios.
+[state]
+humanlife=20
+ailife=13
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Zhur-Taa Goblin;Galloping Lizrog;Incubation Druid;Aeromunculus
+humanbattlefield=Rhythm of the Wild;Combine Guildmage|NoETBTrigs;Herald of Secret Streams|NoETBTrigs;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs;Stomping Ground|NoETBTrigs;Stomping Ground|NoETBTrigs;Stomping Ground|NoETBTrigs;Stomping Ground|NoETBTrigs
+aibattlefield=Hydroid Krasis|Counters:P1P1=4;The Haunt of Hightower|Counters:P1P1=1;Hydroid Krasis|Counters:P1P1=4
