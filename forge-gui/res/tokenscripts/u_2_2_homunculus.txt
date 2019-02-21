@@ -1,0 +1,6 @@
+Name:Homunculus
+ManaCost:no cost
+Types:Creature Homunculus
+Colors:blue
+PT:2/2
+Oracle:

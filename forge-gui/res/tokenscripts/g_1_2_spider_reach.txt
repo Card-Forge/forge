@@ -1,0 +1,7 @@
+Name:Spider
+ManaCost:no cost
+Types:Creature Spider
+PT:1/2
+Colors:green
+K:Reach
+Oracle:Reach

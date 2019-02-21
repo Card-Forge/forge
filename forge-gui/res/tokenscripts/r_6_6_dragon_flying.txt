@@ -1,0 +1,7 @@
+Name:Dragon
+ManaCost:no cost
+Types:Creature Dragon
+Colors:red
+K:Flying
+PT:6/6
+Oracle:Flying

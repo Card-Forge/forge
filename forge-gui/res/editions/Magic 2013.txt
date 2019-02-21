@@ -266,6 +266,7 @@ w_1_1_soldier
 u_2_2_drake_flying
 b_2_2_zombie
 r_1_1_goblin
+r_1_1_goblin
 r_4_4_hellion_haste
 g_3_3_beast
 g_1_1_saproling

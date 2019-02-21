@@ -300,6 +300,7 @@ c_1_1_sliver
 w_1_1_soldier
 w_1_1_spirit_flying
 u_1_1_squid_islandwalk
+u_1_1_squid_islandwalk
 b_3_3_beast_deathtouch
 b_2_2_zombie
 r_2_2_dragon_flying_firebreathing

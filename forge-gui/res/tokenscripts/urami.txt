@@ -1,0 +1,7 @@
+Name:Urami
+ManaCost:no cost
+Types:Legendary Creature Demon Spirit
+Colors:black
+PT:5/5
+K:Flying
+Oracle:Flying

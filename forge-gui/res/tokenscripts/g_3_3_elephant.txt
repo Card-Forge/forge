@@ -1,0 +1,6 @@
+Name:Elephant
+Colors:green
+ManaCost:no cost
+PT:3/3
+Types:Creature Elephant
+Oracle:

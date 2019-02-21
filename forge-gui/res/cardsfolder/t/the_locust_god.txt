@@ -4,7 +4,7 @@ Types:Legendary Creature God
 PT:4/4
 K:Flying
 T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you draw a card, create a 1/1 blue and red Insect creature token with flying and haste.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenName$ Insect | TokenTypes$ Creature,Insect | TokenOwner$ You | TokenColors$ Blue,Red | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying<>Haste
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ ur_1_1_insect_flying_haste | TokenOwner$ You | LegacyImage$ ur 1 1 insect flying haste hou
 A:AB$ Draw | Cost$ 2 U R | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | TriggerController$ TriggeredCardController | Execute$ TrigDelay | TriggerDescription$ When CARDNAME dies, return it to its owner's hand at the beginning of the next end step.

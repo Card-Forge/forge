@@ -1,7 +1,7 @@
-Name:Orb
+Name:Illusion
 ManaCost:no cost
-Types:Creature Orb
+Types:Creature Illusion
 Colors:blue
-PT:*/*
+PT:1/1
 K:Flying
 Oracle:Flying

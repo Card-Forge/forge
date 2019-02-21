@@ -1,0 +1,6 @@
+Name:Warrior
+ManaCost:no cost
+Types:Creature Warrior
+Colors:red
+PT:1/1
+Oracle:

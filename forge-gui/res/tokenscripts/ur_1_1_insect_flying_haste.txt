@@ -1,0 +1,8 @@
+Name:Insect
+ManaCost:no cost
+Types:Creature Insect
+Colors:blue,red
+PT:1/1
+K:Flying
+K:Haste
+Oracle:Flying, haste

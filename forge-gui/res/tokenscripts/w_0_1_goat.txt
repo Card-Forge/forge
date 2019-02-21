@@ -1,0 +1,6 @@
+Name:Goat
+ManaCost:no cost
+Types:Creature Goat
+Colors:white
+PT:0/1
+Oracle:

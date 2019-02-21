@@ -1,0 +1,8 @@
+Name:Dragon
+ManaCost:no cost
+Types:Creature Dragon
+Colors:red,green
+PT:1/1
+K:Flying
+K:Devour:2
+Oracle:Flying, devour 2 (As this token enters the battlefield, you may sacrifice any number of creatures. It enters the battlefield with twice that many +1/+1 counters on it.)

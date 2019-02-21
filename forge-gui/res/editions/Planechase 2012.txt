@@ -213,6 +213,7 @@ b_0_0_germ
 b_2_4_spider_reach
 b_2_2_zombie
 r_1_1_goblin
+r_1_1_goblin
 r_4_4_hellion
 g_3_3_beast
 g_3_3_boar
@@ -220,4 +221,7 @@ g_1_1_insect
 g_1_1_ooze
 g_2_2_ooze_mitotic
 g_0_1_plant
+g_1_1_saproling
+g_1_1_saproling
+g_1_1_saproling
 g_1_1_saproling

@@ -1,0 +1,6 @@
+Name:Kor Soldier
+ManaCost:no cost
+Types:Creature Kor Soldier
+Colors:white
+PT:1/1
+Oracle:

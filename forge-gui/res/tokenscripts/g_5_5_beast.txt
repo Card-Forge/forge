@@ -1,0 +1,6 @@
+Name:Beast
+Colors:green
+ManaCost:no cost
+PT:5/5
+Types:Creature Beast
+Oracle:

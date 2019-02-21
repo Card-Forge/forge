@@ -1,0 +1,6 @@
+Name:Kithkin Soldier
+ManaCost:no cost
+Types:Creature Kithkin Soldier
+Colors:white
+PT:1/1
+Oracle:

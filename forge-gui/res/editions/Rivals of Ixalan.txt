@@ -217,7 +217,6 @@ TreatAsSmallSet=true
 205 C Cinder Barrens
 
 [tokens]
-polyraptor
 w_1_1_vampire_lifelink
 u_1_1_merfolk_hexproof
 r_1_1_elemental
@@ -225,6 +224,7 @@ r_0_1_elemental_rekindling_phoenix
 g_3_3_dinosaur_trample
 g_1_1_saproling
 g_4_4_a_golem
+c_a_treasure_sac
 c_a_treasure_sac
 c_a_treasure_sac
 c_a_treasure_sac

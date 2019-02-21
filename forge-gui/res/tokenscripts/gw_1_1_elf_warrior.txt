@@ -1,0 +1,6 @@
+Name:Elf Warrior
+ManaCost:no cost
+Types:Creature Elf Warrior
+Colors:green,white
+PT:1/1
+Oracle:

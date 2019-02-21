@@ -7,7 +7,7 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 T:Mode$ Discarded | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you discard a creature card, you may pay {2}. If you do, create a 3/2 colorless Eldrazi Horror creature token.
-SVar:TrigToken:AB$ Token | Cost$ 2 | TokenAmount$ 1 | TokenName$ Eldrazi Horror | TokenTypes$ Creature,Eldrazi,Horror | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 3 | TokenToughness$ 2
+SVar:TrigToken:AB$ Token | Cost$ 2 | TokenAmount$ 1 | TokenScript$ c_3_2_eldrazi_horror | TokenOwner$ You | LegacyImage$ c 3 2 eldrazi horror emn
 DeckHas:Ability$Token & Ability$Discard
 DeckHints:Ability$Discard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wharf_infiltrator.jpg

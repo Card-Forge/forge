@@ -256,9 +256,11 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 
 [tokens]
 w_4_4_angel_flying
+w_4_4_angel_flying
 w_1_1_human
 w_1_1_spirit_flying
 u_1_1_spirit_flying
+b_5_5_demon_flying
 b_5_5_demon_flying
 b_2_2_zombie
 r_1_1_human_haste

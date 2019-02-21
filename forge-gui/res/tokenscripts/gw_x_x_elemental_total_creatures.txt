@@ -1,0 +1,8 @@
+Name:Elemental
+ManaCost:no cost
+Types:Creature Elemental
+Colors:green,white
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ TokenX | SetToughness$ TokenX | Description$ CARDNAME's power and toughness are each equal to the number of creatures you control.
+SVar:TokenX:Count$Valid Creature.YouCtrl
+Oracle:This creature's power and toughness are each equal to the number of creatures you control.

@@ -1,9 +1,9 @@
 [metadata]
-Code=EVG
+Code=DD1
 Date=2007-11-16
 Name=Duel Decks: Elves vs. Goblins
 Code2=EVG
-MciCode=evg
+MciCode=dd1
 Type=Duel_Decks
 
 [cards]

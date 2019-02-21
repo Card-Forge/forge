@@ -1,7 +1,7 @@
 Name:Call of the Conclave
 ManaCost:G W
 Types:Sorcery
-A:SP$ Token | Cost$ G W | TokenAmount$ 1 | TokenName$ Centaur | TokenTypes$ Creature,Centaur | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | TokenImage$ g 3 3 centaur rtr | SpellDescription$ Create a 3/3 green Centaur creature token.
+A:SP$ Token | Cost$ G W | TokenAmount$ 1 | TokenScript$ g_3_3_centaur | TokenOwner$ You | LegacyImage$ g 3 3 centaur rtr | SpellDescription$ Create a 3/3 green Centaur creature token.
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/call_of_the_conclave.jpg
 Oracle:Create a 3/3 green Centaur creature token.

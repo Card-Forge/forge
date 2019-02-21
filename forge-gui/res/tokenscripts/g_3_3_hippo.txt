@@ -1,0 +1,6 @@
+Name:Hippo
+ManaCost:no cost
+Types:Creature Hippo
+Colors:green
+PT:3/3
+Oracle:
