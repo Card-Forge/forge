@@ -17,6 +17,7 @@ import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
 import forge.screens.home.VLobby;
+import forge.util.Localizer;
 
 /**
  * Assembles Swing components of constructed submenu singleton.
@@ -25,12 +26,12 @@ import forge.screens.home.VLobby;
  *
  */
 public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
-    SINGLETON_INSTANCE;
 
+    SINGLETON_INSTANCE;
+    final Localizer localizer = Localizer.getInstance();
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Constructed Mode");
-
+    private final DragTab tab = new DragTab(localizer.getMessage("lblConstructedMode"));
     private final GameLobby lobby = new LocalLobby();
     private final VLobby vLobby = new VLobby(lobby);
     private VSubmenuConstructed() {
@@ -105,7 +106,8 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
      */
     @Override
     public String getMenuTitle() {
-        return "Constructed";
+
+        return localizer.getMessage("lblConstructed");
     }
 
     /* (non-Javadoc)

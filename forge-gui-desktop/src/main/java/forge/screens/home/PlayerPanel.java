@@ -51,9 +51,11 @@ import forge.toolbox.FTextField;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
 import forge.util.gui.SOptionPane;
+import forge.util.Localizer;
 
 @SuppressWarnings("serial")
 public class PlayerPanel extends FPanel {
+    final Localizer localizer = Localizer.getInstance();
     private final static ForgePreferences prefs = FModel.getPreferences();
     private static final SkinColor unfocusedPlayerOverlay = FSkin.getColor(FSkin.Colors.CLR_OVERLAY).alphaColor(120);
 
@@ -77,23 +79,23 @@ public class PlayerPanel extends FPanel {
     private final FComboBoxWrapper<Object> aeTeamComboBox = new FComboBoxWrapper<Object>();
 
     private final FLabel closeBtn;
-    private final FLabel deckBtn = new FLabel.ButtonBuilder().text("Select a deck").build();
+    private final FLabel deckBtn = new FLabel.ButtonBuilder().text(localizer.getMessage("lblSelectaDeck")).build();
     private final FLabel deckLabel;
 
     private final String variantBtnConstraints = "height 30px, hidemode 3";
 
-    private final FLabel scmDeckSelectorBtn = new FLabel.ButtonBuilder().text("Select a scheme deck").build();
-    private final FLabel scmDeckEditor = new FLabel.ButtonBuilder().text("Scheme Deck Editor").build();
+    private final FLabel scmDeckSelectorBtn = new FLabel.ButtonBuilder().text(localizer.getMessage("lblSelectaSchemeDeck")).build();
+    private final FLabel scmDeckEditor = new FLabel.ButtonBuilder().text(localizer.getMessage("lblSchemeDeckEditor")).build();
     private final FLabel scmLabel;
 
-    private final FLabel cmdDeckSelectorBtn = new FLabel.ButtonBuilder().text("Select a Commander deck").build();
+    private final FLabel cmdDeckSelectorBtn = new FLabel.ButtonBuilder().text(localizer.getMessage("lblSelectaCommanderDeck")).build();
     private final FLabel cmdLabel;
 
-    private final FLabel pchDeckSelectorBtn = new FLabel.ButtonBuilder().text("Select a planar deck").build();
-    private final FLabel pchDeckEditor = new FLabel.ButtonBuilder().text("Planar Deck Editor").build();
+    private final FLabel pchDeckSelectorBtn = new FLabel.ButtonBuilder().text(localizer.getMessage("lblSelectaPlanarDeck")).build();
+    private final FLabel pchDeckEditor = new FLabel.ButtonBuilder().text(localizer.getMessage("lblPlanarDeckEditor")).build();
     private final FLabel pchLabel;
 
-    private final FLabel vgdSelectorBtn = new FLabel.ButtonBuilder().text("Select a Vanguard avatar").build();
+    private final FLabel vgdSelectorBtn = new FLabel.ButtonBuilder().text(localizer.getMessage("lblSelectaVanguardAvatar")).build();
     private final FLabel vgdLabel;
 
     private FCheckBox chkDevMode;
@@ -110,11 +112,11 @@ public class PlayerPanel extends FPanel {
         this.mayControl = mayControl;
         this.allowNetworking = allowNetworking;
 
-        this.deckLabel = lobby.newLabel("Deck:");
-        this.scmLabel = lobby.newLabel("Scheme deck:");
-        this.cmdLabel = lobby.newLabel("Commander deck:");
-        this.pchLabel = lobby.newLabel("Planar deck:");
-        this.vgdLabel = lobby.newLabel("Vanguard:");
+        this.deckLabel = lobby.newLabel(localizer.getMessage("lblDeck") + ":");
+        this.scmLabel = lobby.newLabel(localizer.getMessage("lblSchemeDeck") + ":");
+        this.cmdLabel = lobby.newLabel(localizer.getMessage("lblCommanderDeck") + ":");
+        this.pchLabel =  lobby.newLabel(localizer.getMessage("lblPlanarDeck") + ":");
+        this.vgdLabel =  lobby.newLabel(localizer.getMessage("lblVanguard") + ":");
 
         setLayout(new MigLayout("insets 10px, gap 5px"));
 
@@ -449,8 +451,8 @@ public class PlayerPanel extends FPanel {
     }
 
     private void populateTeamsComboBoxes() {
-        aeTeamComboBox.addItem("Archenemy");
-        aeTeamComboBox.addItem("Heroes");
+        aeTeamComboBox.addItem(localizer.getMessage("lblArchenemy"));
+        aeTeamComboBox.addItem(localizer.getMessage("lblHeroes"));
 
         for (int i = 1; i <= VLobby.MAX_PLAYERS; i++) {
             teamComboBox.addItem(i);
@@ -553,12 +555,12 @@ public class PlayerPanel extends FPanel {
      * @param index
      */
     private void createPlayerTypeOptions() {
-        radioHuman = new FRadioButton("Human");
-        radioAi = new FRadioButton("AI");
-        radioOpen = new FRadioButton("Open");
+        radioHuman = new FRadioButton(localizer.getMessage("lblHuman"));
+        radioAi = new FRadioButton(localizer.getMessage("lblAI"));
+        radioOpen = new FRadioButton(localizer.getMessage("lblOpen"));
 
         final JPopupMenu menu = new  JPopupMenu();
-        radioAiUseSimulation = new JCheckBoxMenuItem("Use Simulation");
+        radioAiUseSimulation = new JCheckBoxMenuItem(localizer.getMessage("lblUseSimulation"));
         menu.add(radioAiUseSimulation);
         radioAiUseSimulation.addActionListener(new ActionListener() {
             @Override public final void actionPerformed(final ActionEvent e) {
@@ -577,7 +579,7 @@ public class PlayerPanel extends FPanel {
     }
 
     private void createReadyButton() {
-        chkReady = new FCheckBox("Ready");
+        chkReady = new FCheckBox(localizer.getMessage("lblReady"));
         chkReady.addActionListener(new ActionListener() {
             @Override public final void actionPerformed(final ActionEvent e) {
                 lobby.setReady(index, chkReady.isSelected());
@@ -586,7 +588,7 @@ public class PlayerPanel extends FPanel {
     }
 
     private void createDevModeButton() {
-        chkDevMode = new FCheckBox("Dev Mode");
+        chkDevMode = new FCheckBox(localizer.getMessage("cbDevMode"));
 
         chkDevMode.addActionListener(new ActionListener() {
             @Override public final void actionPerformed(final ActionEvent e) {
@@ -621,7 +623,7 @@ public class PlayerPanel extends FPanel {
      * @return
      */
     private FLabel createNameRandomizer() {
-        final FLabel newNameBtn = new FLabel.Builder().tooltip("Get a new random name").iconInBackground(false)
+        final FLabel newNameBtn = new FLabel.Builder().tooltip(localizer.getMessage("lblGetaNewRandomName")).iconInBackground(false)
                 .icon(FSkin.getIcon(FSkinProp.ICO_EDIT)).hoverable(true).opaque(false)
                 .unhoveredAlpha(0.9f).build();
         newNameBtn.setCommand(new UiCommand() {
@@ -654,7 +656,7 @@ public class PlayerPanel extends FPanel {
         if (index == 0) {
             name = FModel.getPreferences().getPref(FPref.PLAYER_NAME);
             if (name.isEmpty()) {
-                name = "Human";
+                name = localizer.getMessage("lblHuman");
             }
         }
         else {
@@ -669,11 +671,11 @@ public class PlayerPanel extends FPanel {
     }
 
     private FLabel createCloseButton() {
-        final FLabel closeBtn = new FLabel.Builder().tooltip("Remove").iconInBackground(false)
+        final FLabel closeBtn = new FLabel.Builder().tooltip(localizer.getMessage("lblRemove")).iconInBackground(false)
                 .icon(FSkin.getIcon(FSkinProp.ICO_CLOSE)).hoverable(true).build();
         closeBtn.setCommand(new Runnable() {
             @Override public final void run() {
-                if (type == LobbySlotType.REMOTE && !SOptionPane.showConfirmDialog(String.format("Really kick %s?", playerName), "Kick", false)) {
+                if (type == LobbySlotType.REMOTE && !SOptionPane.showConfirmDialog(String.format(localizer.getMessage("lblReallyKick"), playerName), localizer.getMessage("lblKick"), false)) {
                     return;
                 }
                 lobby.removePlayer(index);
@@ -691,7 +693,7 @@ public class PlayerPanel extends FPanel {
             setRandomAvatar(false);
         }
 
-        avatarLabel.setToolTipText("L-click: Select avatar. R-click: Randomize avatar.");
+        avatarLabel.setToolTipText(localizer.getMessage("ttlblAvatar"));
         avatarLabel.addFocusListener(avatarFocusListener);
         avatarLabel.addMouseListener(avatarMouseListener);
     }
