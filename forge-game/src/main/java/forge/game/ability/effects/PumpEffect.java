@@ -94,32 +94,13 @@ public class PumpEffect extends SpellAbilityEffect {
                     game.fireEvent(new GameEventCardStatsChanged(gameCard));
                 }
             };
-            if (sa.hasParam("UntilEndOfCombat")) {
-                game.getEndOfCombat().addUntil(untilEOT);
-            } else if (sa.hasParam("UntilYourNextUpkeep")) {
-                game.getUpkeep().addUntil(sa.getActivatingPlayer(), untilEOT);
-            } else if (sa.hasParam("UntilHostLeavesPlay")) {
-                sa.getHostCard().addLeavesPlayCommand(untilEOT);
-            } else if (sa.hasParam("UntilHostLeavesPlayOrEOT")) {
-                sa.getHostCard().addLeavesPlayCommand(untilEOT);
-                game.getEndOfTurn().addUntil(untilEOT);
-            } else if (sa.hasParam("UntilLoseControlOfHost")) {
-                sa.getHostCard().addLeavesPlayCommand(untilEOT);
-                sa.getHostCard().addChangeControllerCommand(untilEOT);
-            } else if (sa.hasParam("UntilYourNextTurn")) {
-                game.getCleanup().addUntil(sa.getActivatingPlayer(), untilEOT);
-            } else if (sa.hasParam("UntilUntaps")) {
-                sa.getHostCard().addUntapCommand(untilEOT);
-            } else {
-                game.getEndOfTurn().addUntil(untilEOT);
-            }
+            addUntilCommand(sa, untilEOT);
         }
         game.fireEvent(new GameEventCardStatsChanged(gameCard));
     }
 
     private static void applyPump(final SpellAbility sa, final Player p,
             final List<String> keywords, final long timestamp) {
-        final Game game = p.getGame();
         final Card host = sa.getHostCard();
         //if host is not on the battlefield don't apply
         // Suspend should does Affect the Stack
@@ -144,16 +125,32 @@ public class PumpEffect extends SpellAbilityEffect {
                     }
                 }
             };
-            if (sa.hasParam("UntilEndOfCombat")) {
-                game.getEndOfCombat().addUntil(untilEOT);
-            } else if (sa.hasParam("UntilYourNextUpkeep")) {
-                game.getUpkeep().addUntil(sa.getActivatingPlayer(), untilEOT);
-            } else if (sa.hasParam("UntilLoseControlOfHost")) {
-                sa.getHostCard().addLeavesPlayCommand(untilEOT);
-                sa.getHostCard().addChangeControllerCommand(untilEOT);
-            } else {
-                game.getEndOfTurn().addUntil(untilEOT);
-            }
+            addUntilCommand(sa, untilEOT);
+        }
+    }
+
+    private static void addUntilCommand(final SpellAbility sa, GameCommand untilEOT) {
+        final Card host = sa.getHostCard();
+        final Game game = host.getGame();
+
+        if (sa.hasParam("UntilEndOfCombat")) {
+            game.getEndOfCombat().addUntil(untilEOT);
+        } else if (sa.hasParam("UntilYourNextUpkeep")) {
+            game.getUpkeep().addUntil(sa.getActivatingPlayer(), untilEOT);
+        } else if (sa.hasParam("UntilHostLeavesPlay")) {
+            host.addLeavesPlayCommand(untilEOT);
+        } else if (sa.hasParam("UntilHostLeavesPlayOrEOT")) {
+            host.addLeavesPlayCommand(untilEOT);
+            game.getEndOfTurn().addUntil(untilEOT);
+        } else if (sa.hasParam("UntilLoseControlOfHost")) {
+            host.addLeavesPlayCommand(untilEOT);
+            host.addChangeControllerCommand(untilEOT);
+        } else if (sa.hasParam("UntilYourNextTurn")) {
+            game.getCleanup().addUntil(sa.getActivatingPlayer(), untilEOT);
+        } else if (sa.hasParam("UntilUntaps")) {
+            host.addUntapCommand(untilEOT);
+        } else {
+            game.getEndOfTurn().addUntil(untilEOT);
         }
     }
 
