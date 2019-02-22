@@ -58,12 +58,10 @@ import forge.toolbox.FSkin.SkinnedPanel;
 import forge.view.arcane.CardPanel;
 import java.awt.event.MouseEvent;
 import java.util.Map;
-import forge.util.Localizer;
 
 
 @SuppressWarnings("serial")
 public class AddBasicLandsDialog {
-    final Localizer localizer = Localizer.getInstance();
     private static final int WIDTH = 800;
     private static final int HEIGHT = 370;
     private static final int ADD_BTN_SIZE = 30;
@@ -72,11 +70,11 @@ public class AddBasicLandsDialog {
     private final FComboBoxPanel<CardEdition> cbLandSet = new FComboBoxPanel<CardEdition>("Land Set:", FlowLayout.CENTER, Iterables.filter(StaticData.instance().getEditions(), CardEdition.Predicates.hasBasicLands));
 
     private final MainPanel panel = new MainPanel();
-    private final LandPanel pnlPlains = new LandPanel(localizer.getMessage("Plains"));
-    private final LandPanel pnlIsland = new LandPanel(localizer.getMessage("Island"));
-    private final LandPanel pnlSwamp = new LandPanel(localizer.getMessage("Swamp"));
-    private final LandPanel pnlMountain = new LandPanel(localizer.getMessage("Mountain"));
-    private final LandPanel pnlForest = new LandPanel(localizer.getMessage("Forest"));
+    private final LandPanel pnlPlains = new LandPanel("Plains");
+    private final LandPanel pnlIsland = new LandPanel("Island");
+    private final LandPanel pnlSwamp = new LandPanel("Swamp");
+    private final LandPanel pnlMountain = new LandPanel("Mountain");
+    private final LandPanel pnlForest = new LandPanel("Forest");
 
     private final FHtmlViewer lblDeckInfo = new FHtmlViewer();
 
@@ -125,7 +123,7 @@ public class AddBasicLandsDialog {
                 updateDeckInfoLabel();
             }
         });
-        lblDeckInfo.setToolTipText(localizer.getMessage("lblLandsDeckStatistics"));
+        lblDeckInfo.setToolTipText("Deck statistics. Double click to auto-suggest basic lands.");
 
         cbLandSet.addActionListener(new ActionListener() {
             @Override
@@ -217,7 +215,7 @@ public class AddBasicLandsDialog {
     }
 
     public CardPool show() {
-        optionPane = new FOptionPane(null, localizer.getMessage("lblAddBasicLands"), null, panel, ImmutableList.of(localizer.getMessage("lblOk"), localizer.getMessage("lblCancel")), 0);
+        optionPane = new FOptionPane(null, "Add Basic Lands", null, panel, ImmutableList.of("OK", "Cancel"), 0);
         panel.revalidate();
         panel.repaint();
         optionPane.setVisible(true);
@@ -248,10 +246,10 @@ public class AddBasicLandsDialog {
         }
         int newTotalCount = nonLandCount + oldLandCount + newLandCount;
         lblDeckInfo.setText(FSkin.encodeSymbols("<div 'text-align: center;'>" +
-                nonLandCount + localizer.getMessage("lblNonLands") +" + " +
-                oldLandCount + localizer.getMessage("lblLands") +" + " +
-                newLandCount + localizer.getMessage("lblAddedLands") + " = " +
-                newTotalCount + localizer.getMessage("lblCards") + " </div><div style='text-align: center;'>" +
+                nonLandCount + " non-lands + " +
+                oldLandCount + " lands + " +
+                newLandCount + " added lands = " +
+                newTotalCount + " cards</div><div style='text-align: center;'>" +
                 "{W} " + integer.format(pnlPlains.symbolCount) + " (" + percent.format(pnlPlains.symbolCount / totalSymbolCount) + ") | " +
                 "{U} " + integer.format(pnlIsland.symbolCount) + " (" + percent.format(pnlIsland.symbolCount / totalSymbolCount) + ") | " +
                 "{B} " + integer.format(pnlSwamp.symbolCount) + " (" + percent.format(pnlSwamp.symbolCount / totalSymbolCount) + ") | " +
@@ -384,9 +382,9 @@ public class AddBasicLandsDialog {
             if (landSet == null) { return; }
 
             int artChoiceCount = FModel.getMagicDb().getCommonCards().getArtCount(cardName, landSet.getCode());
-            cbLandArt.addItem(localizer.getMessage("lblAssortedArt"));
+            cbLandArt.addItem("Assorted Art");
             for (int i = 1; i <= artChoiceCount; i++) {
-                cbLandArt.addItem(localizer.getMessage("lblCardArt") + "" + i);
+                cbLandArt.addItem("Card Art " + i);
             }
         }
 
