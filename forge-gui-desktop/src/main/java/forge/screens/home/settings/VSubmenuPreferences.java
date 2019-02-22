@@ -383,7 +383,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
      */
     @Override
     public String getMenuTitle() {
-        return "Preferences";
+        return localizer.getMessage("Preferences");
     }
 
     /* (non-Javadoc)
