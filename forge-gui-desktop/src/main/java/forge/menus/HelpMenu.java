@@ -4,6 +4,7 @@ import forge.properties.ForgeConstants;
 import forge.toolbox.FOptionPane;
 import forge.util.BuildInfo;
 import forge.util.FileUtil;
+import forge.util.Localizer;
 
 import javax.swing.*;
 
@@ -18,7 +19,8 @@ public final class HelpMenu {
     private HelpMenu() { }
 
     public static JMenu getMenu() {
-        JMenu menu = new JMenu("Help");
+        final Localizer localizer = Localizer.getInstance();
+        JMenu menu = new JMenu(localizer.getMessage("lblHelp"));
         menu.setMnemonic(KeyEvent.VK_H);
         menu.add(getMenu_GettingStarted());
         menu.add(getMenu_Articles());
@@ -32,7 +34,8 @@ public final class HelpMenu {
     }
 
     private static JMenuItem getMenuItem_About() {
-        JMenuItem menuItem = new JMenuItem("About Forge...");
+        final Localizer localizer = Localizer.getInstance();
+        JMenuItem menuItem = new JMenuItem(localizer.getMessage("lblAboutForge")+ "...");
         menuItem.addActionListener(getAboutForgeAction());
         return menuItem;
     }
@@ -41,15 +44,17 @@ public final class HelpMenu {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                final Localizer localizer = Localizer.getInstance();
                 FOptionPane.showMessageDialog(
                         "Version : " + BuildInfo.getVersionString(),
-                        "About Forge");
+                        localizer.getMessage("lblAboutForge"));
             }
         };
     }
 
     private static JMenu getMenu_Troubleshooting() {
-        JMenu mnu = new JMenu("Troubleshooting");
+        final Localizer localizer = Localizer.getInstance();
+        JMenu mnu = new JMenu(localizer.getMessage("lblTroubleshooting"));
         mnu.add(getMenuItem_UrlLink("How to Provide a Useful Bug Report", "http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=9621"));
         mnu.addSeparator();
         mnu.add(getMenuItem_ReadMeFile());
@@ -57,14 +62,16 @@ public final class HelpMenu {
     }
 
     private static JMenu getMenu_Articles() {
-        JMenu mnu = new JMenu("Articles");
+        final Localizer localizer = Localizer.getInstance();
+        JMenu mnu = new JMenu(localizer.getMessage("lblArticles"));
         mnu.add(getMenuItem_UrlLink("HOW-TO: Customize your Sealed Deck games with fantasy blocks", "http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=8164"));
         mnu.add(getMenuItem_UrlLink("Quest Mode: Guide to Formats, Worlds, and everything", "http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=9258"));
         return mnu;
     }
 
     private static JMenu getMenu_GettingStarted() {
-        JMenu mnu = new JMenu("Getting Started");
+        final Localizer localizer = Localizer.getInstance();
+        JMenu mnu = new JMenu(localizer.getMessage("lblGettingStarted"));
         mnu.add(getMenuItem_HowToPlayFile());
         mnu.addSeparator();
         mnu.add(getMenuItem_UrlLink("Forge Wiki", "http://www.slightlymagic.net/wiki/Forge", KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0)));
@@ -73,7 +80,8 @@ public final class HelpMenu {
     }
 
     private static JMenuItem getMenuItem_HowToPlayFile() {
-        JMenuItem menuItem = new JMenuItem("How to Play");
+        final Localizer localizer = Localizer.getInstance();
+        JMenuItem menuItem = new JMenuItem(localizer.getMessage("lblHowtoPlay"));
         menuItem.addActionListener(getOpenFileAction(getFile(ForgeConstants.HOWTO_FILE)));
         return menuItem;
     }
@@ -85,13 +93,15 @@ public final class HelpMenu {
     }
 
     private static JMenuItem getMenuItem_License() {
-        JMenuItem menuItem = new JMenuItem("Forge License");
+        final Localizer localizer = Localizer.getInstance();
+        JMenuItem menuItem = new JMenuItem(localizer.getMessage("lblForgeLicense"));
         menuItem.addActionListener(getOpenFileAction(getFile(ForgeConstants.LICENSE_FILE)));
         return menuItem;
     }
 
     private static JMenuItem getMenuItem_ReleaseNotes() {
-        JMenuItem menuItem = new JMenuItem("Release Notes");
+        final Localizer localizer = Localizer.getInstance();
+        JMenuItem menuItem = new JMenuItem(localizer.getMessage("lblReleaseNotes"));
         menuItem.addActionListener(getOpenFileAction(getFile(ForgeConstants.CHANGES_FILE)));
         return menuItem;
     }
