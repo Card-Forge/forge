@@ -383,8 +383,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
      */
     @Override
     public String getMenuTitle() {
-        return localizer.getMessage("Preferences");
-    }
+        return localizer.getMessage("Preferences");    }
 
     /* (non-Javadoc)
      * @see forge.gui.home.IVSubmenu#getItemEnum()
