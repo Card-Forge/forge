@@ -9,7 +9,10 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.TokenEffect;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.cost.CostPart;
@@ -340,6 +343,7 @@ public class TokenAi extends SpellAbilityAi {
     @Override
     protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
         // TODO: AILogic
+        readParameters(sa); // remember to call this somewhere!
         Combat combat = ai.getGame().getCombat();
         // TokenAttacking
         if (combat != null && sa.hasParam("TokenAttacking")) {
@@ -359,6 +363,7 @@ public class TokenAi extends SpellAbilityAi {
     @Override
     protected GameEntity chooseSinglePlayerOrPlaneswalker(Player ai, SpellAbility sa, Iterable<GameEntity> options) {
         // TODO: AILogic
+        readParameters(sa); // remember to call this somewhere!
         Combat combat = ai.getGame().getCombat();
         // TokenAttacking
         if (combat != null && sa.hasParam("TokenAttacking")) {
