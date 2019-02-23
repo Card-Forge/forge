@@ -8,7 +8,6 @@ import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.ability.effects.TokenEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
@@ -61,9 +60,7 @@ public class TokenAi extends SpellAbilityAi {
     private void readParameters(final SpellAbility mapParams) {
         this.tokenAmount = mapParams.getParamOrDefault("TokenAmount", "1");
 
-        TokenEffect effect = new TokenEffect();
-
-        this.actualToken = effect.loadTokenPrototype(mapParams);
+        this.actualToken = TokenInfo.getProtoType(mapParams.getParam("TokenScript"), mapParams);
 
         if (actualToken == null) {
             String[] keywords;
@@ -394,6 +391,7 @@ public class TokenAi extends SpellAbilityAi {
      * @param sa Token SpellAbility
      * @return token creature created by ability
      */
+    @Deprecated
     public static Card spawnToken(Player ai, SpellAbility sa) {
         return spawnToken(ai, sa, false);
     }
@@ -406,8 +404,16 @@ public class TokenAi extends SpellAbilityAi {
      * @return token creature created by ability
      */
     // TODO Is this just completely copied from TokenEffect? Let's just call that thing
+    @Deprecated
     public static Card spawnToken(Player ai, SpellAbility sa, boolean notNull) {
         final Card host = sa.getHostCard();
+
+        Card result = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
+
+        if (result != null) {
+            result.setController(ai, 0);
+            return result;
+        }
 
         String[] tokenKeywords = sa.hasParam("TokenKeywords") ? sa.getParam("TokenKeywords").split("<>") : new String[0];
         String tokenPower = sa.getParam("TokenPower");
