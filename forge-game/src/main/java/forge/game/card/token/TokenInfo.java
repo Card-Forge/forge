@@ -226,6 +226,10 @@ public class TokenInfo {
     }
 
     static public Card getProtoType(final String script, final SpellAbility sa) {
+        // script might be null, or sa might be null
+        if (script == null || sa == null) {
+            return null;
+        }
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
 
