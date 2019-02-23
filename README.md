@@ -121,13 +121,17 @@ The Proguard included with the Android SDK Build-tools is outdated and does not 
 The Eclipse plug-ins do NOT support building things for Android.  They do however allow you to use the debugger so you can still set breakpoints and trace
 things out.  The steps below show how to generate a debug Android build.
 
-Right-click on the forge-gui-android project.  Run as.. > Maven build...
+1) Create a Maven build for the forge top-leve project.  Right-click on the forge project.  Run as.. > Maven build...
+   - On the Main tab, set Goals: clean install
 
-On the Main tab, set Goals: install, Profiles: android-debug
-On the Environment tab, you may need to define the variable ANDROID_HOME with the value containing the path to your Android SDK installation.  
-For example, Variable: ANDROID_HOME, Value: Your Android SDK install path here.
+2) Run forge Maven build.  If everything built, you should see "BUILD SUCCESS" in the Console View.
 
-You should now be able to "run" the forge-gui-android Maven build.  This may take a few minutes.  If everything worked, you should see "BUILD SUCCESS" in the Console View.
+3) Right-click on the forge-gui-android project.  Run as.. > Maven build...
+
+   - On the Main tab, set Goals: install, Profiles: android-debug
+   - On the Environment tab, you may need to define the variable ANDROID_HOME with the value containing the path to your Android SDK installation.  For example, Variable: ANDROID_HOME, Value: Your Android SDK install path here.
+
+4) Run the forge-gui-android Maven build.  This may take a few minutes.  If everything worked, you should see "BUILD SUCCESS" in the Console View.
 
 Assuming you got this far, you should have an Android forge-android-[version].apk in the forge-gui-android/target path.
 
