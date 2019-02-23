@@ -735,7 +735,7 @@ public class TriggerHandler {
                             }
                         }
                     } else if (kw.startsWith("Dieharmonicon")) {
-                        // 700.4. The term dies means “is put into a graveyard from the battlefield.”
+                        // 700.4. The term dies means "is put into a graveyard from the battlefield."
                         if (runParams.get("Origin") instanceof String) {
                             final String origin = (String) runParams.get("Origin");
                             if ("Battlefield".equals(origin) && runParams.get("Destination") instanceof String) {
@@ -765,7 +765,7 @@ public class TriggerHandler {
                             n++;
                         }
                     } else if (kw.startsWith("Dieharmonicon")) {
-                        // 700.4. The term dies means “is put into a graveyard from the battlefield.”
+                        // 700.4. The term dies means "is put into a graveyard from the battlefield."
                         final String valid = kw.split(":")[1];
                         if (!table.filterCards(ImmutableList.of(ZoneType.Battlefield), ZoneType.Graveyard,
                                 valid, ck, null).isEmpty()) {
