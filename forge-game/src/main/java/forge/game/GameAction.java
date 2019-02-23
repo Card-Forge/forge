@@ -147,13 +147,6 @@ public class GameAction {
             }
         }
 
-        // Cards returned from exile face-down must be reset to their original state, otherwise
-        // all sort of funky shenanigans may happen later (e.g. their ETB replacement effects are set
-        // up on the wrong card state etc.).
-        if (wasFacedown && (fromBattlefield || (toHand && zoneFrom.is(ZoneType.Exile)))) {
-            c.setState(CardStateName.Original, true);
-            c.runFaceupCommands();
-        }
 
         // Clean up the temporary Dash SVar when the Dashed card leaves the battlefield
         // Clean up the temporary AtEOT SVar
@@ -191,6 +184,14 @@ public class GameAction {
                 lastKnownInfo = CardUtil.getLKICopy(c);
             }
 
+            // Cards returned from exile face-down must be reset to their original state, otherwise
+            // all sort of funky shenanigans may happen later (e.g. their ETB replacement effects are set
+            // up on the wrong card state etc.).
+            if (wasFacedown && (fromBattlefield || (toHand && zoneFrom.is(ZoneType.Exile)))) {
+                c.setState(CardStateName.Original, true);
+                c.runFaceupCommands();
+            }
+
             if (!c.isToken()) {
                 if (c.isCloned()) {
                     c.switchStates(CardStateName.Original, CardStateName.Cloner, false);
@@ -215,14 +216,14 @@ public class GameAction {
                     c.updateStateForView();
                 }
 
-                if (fromBattlefield && c.getCurrentStateName() != CardStateName.Original) {
+                copied = CardFactory.copyCard(c, false);
+
+                if (fromBattlefield && copied.getCurrentStateName() != CardStateName.Original) {
                     // when a card leaves the battlefield, ensure it's in its original state
                     // (we need to do this on the object before copying it, or it won't work correctly e.g.
                     // on Transformed objects)
-                    c.setState(CardStateName.Original, false);
+                    copied.setState(CardStateName.Original, false);
                 }
-
-                copied = CardFactory.copyCard(c, false);
 
                 copied.setUnearthed(c.isUnearthed());
                 copied.setTapped(false);
@@ -250,26 +251,25 @@ public class GameAction {
         // special rule for Worms of the Earth
         if (toBattlefield && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLandBattlefield)) {
             // something that is already a Land cant enter the battlefield
-            if (c.isLand()) {
-                return c;
-            }
-            // check if something would be a land
-            Card noLandLKI = CardUtil.getLKICopy(c);
-            // this check needs to check if this card would be on the battlefield
-            noLandLKI.setLastKnownZone(zoneTo);
+            Card noLandLKI = c;
+            if (!c.isLand()) {
+                // check if something would be a land
+                noLandLKI = CardUtil.getLKICopy(c);
+                // this check needs to check if this card would be on the battlefield
+                noLandLKI.setLastKnownZone(zoneTo);
 
-            CardCollection preList = new CardCollection(noLandLKI);
-            checkStaticAbilities(false, Sets.newHashSet(noLandLKI), preList);
+                CardCollection preList = new CardCollection(noLandLKI);
+                checkStaticAbilities(false, Sets.newHashSet(noLandLKI), preList);
 
-            // fake etb counters thing, then if something changed,
-            // need to apply checkStaticAbilities again
-            if(!noLandLKI.isLand()) {
-                if (noLandLKI.putEtbCounters()) {
-                    // counters are added need to check again
-                    checkStaticAbilities(false, Sets.newHashSet(noLandLKI), preList);
+                // fake etb counters thing, then if something changed,
+                // need to apply checkStaticAbilities again
+                if(!noLandLKI.isLand()) {
+                    if (noLandLKI.putEtbCounters()) {
+                        // counters are added need to check again
+                        checkStaticAbilities(false, Sets.newHashSet(noLandLKI), preList);
+                    }
                 }
             }
-
             if(noLandLKI.isLand()) {
                 // if it isn't on the Stack, it stays in that Zone
                 if (!c.getZone().is(ZoneType.Stack)) {
@@ -278,6 +278,7 @@ public class GameAction {
                 // if something would only be a land when entering the battlefield and not before
                 // put it into the graveyard instead
                 zoneTo = c.getOwner().getZone(ZoneType.Graveyard);
+
                 // reset facedown
                 copied.setState(CardStateName.Original, false);
                 copied.setManifested(false);
@@ -285,6 +286,26 @@ public class GameAction {
 
                 // not to battlefield anymore!
                 toBattlefield = false;
+
+                if (copied.isCloned()) {
+                    copied.switchStates(CardStateName.Original, CardStateName.Cloner, false);
+                    copied.setState(CardStateName.Original, false);
+                    copied.clearStates(CardStateName.Cloner, false);
+                    if (copied.isFlipCard()) {
+                        copied.clearStates(CardStateName.Flipped, false);
+                    }
+                    if (copied.getStates().contains(CardStateName.OriginalText)) {
+                        copied.clearStates(CardStateName.OriginalText, false);
+                        copied.removeSVar("GainingTextFrom");
+                        copied.removeSVar("GainingTextFromTimestamp");
+                    }
+                }
+
+                if (copied.getCurrentStateName() != CardStateName.Original) {
+                    copied.setState(CardStateName.Original, false);
+                }
+
+                copied.updateStateForView();
             }
         }
 
