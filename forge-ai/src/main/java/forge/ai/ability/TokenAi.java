@@ -63,15 +63,6 @@ public class TokenAi extends SpellAbilityAi {
         this.actualToken = TokenInfo.getProtoType(mapParams.getParam("TokenScript"), mapParams);
 
         if (actualToken == null) {
-            String[] keywords;
-
-            if (mapParams.hasParam("TokenKeywords")) {
-                // TODO: Change this Split to a semicolon or something else
-                keywords = mapParams.getParam("TokenKeywords").split("<>");
-            } else {
-                keywords = new String[0];
-            }
-
             this.tokenPower = mapParams.getParam("TokenPower");
             this.tokenToughness = mapParams.getParam("TokenToughness");
         } else {
