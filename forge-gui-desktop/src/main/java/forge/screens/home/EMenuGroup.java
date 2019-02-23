@@ -1,5 +1,5 @@
 package forge.screens.home;
-
+import forge.util.Localizer;
 /**
  * Submenus each belong to a menu group, which
  * is used for several functions, such as expanding
@@ -8,12 +8,12 @@ package forge.screens.home;
  * <br><br><i>(E at beginning of class name denotes an enum.)</i>
  */
 public enum EMenuGroup {
-    SANCTIONED ("Sanctioned Formats"),
-    ONLINE ("Online Multiplayer"),
-    QUEST ("Quest Mode"),
-    PUZZLE ("Puzzle Mode"),
-    GAUNTLET ("Gauntlets"),
-    SETTINGS ("Game Settings");
+    SANCTIONED ("lblSanctionedFormats"),
+    ONLINE ("lblOnlineMultiplayer"),
+    QUEST ("lblQuestMode"),
+    PUZZLE ("lblPuzzleMode"),
+    GAUNTLET ("lblGauntlets"),
+    SETTINGS ("lblGameSettings");
 
     private final String strTitle;
 
@@ -21,5 +21,9 @@ public enum EMenuGroup {
     private EMenuGroup(final String s0) { strTitle = s0; }
 
     /** @return {@link java.lang.String} */
-    public String getTitle() { return this.strTitle; }
+    public String getTitle() {
+        final Localizer localizer = Localizer.getInstance();
+        String t = localizer.getMessage(this.strTitle);
+        return t;
+    }
 }
