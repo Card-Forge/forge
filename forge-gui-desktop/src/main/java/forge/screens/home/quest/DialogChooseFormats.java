@@ -116,6 +116,10 @@ public class DialogChooseFormats {
 		return wantReprints;
 	}
 
+	public void setWantReprintsCB(boolean isSet) {
+	    cbWantReprints.setSelected(isSet);
+	}
+
 	private JPanel makeCheckBoxList(List<FCheckBox> formats, String title, boolean focused) {
 
 		choices.addAll(formats);
