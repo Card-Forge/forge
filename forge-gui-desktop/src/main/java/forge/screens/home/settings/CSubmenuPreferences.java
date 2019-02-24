@@ -431,7 +431,7 @@ public enum CSubmenuPreferences implements ICDoc {
     private void setPlayerNameButtonText() {
         final FLabel btn = view.getBtnPlayerName();
         final String name = prefs.getPref(FPref.PLAYER_NAME);
-        btn.setText(StringUtils.isBlank(name) ? "Human" : name);
+        btn.setText(StringUtils.isBlank(name) ? localizer.getMessage("lblHuman") : name);
     }
 
     @SuppressWarnings("serial")

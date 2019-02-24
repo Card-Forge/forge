@@ -1874,7 +1874,7 @@ public class GameAction {
     // Assumes that the list of players is in APNAP order, which should be the case
     // Optional here as well to handle the way that mulligans do the choice
     // 701.17. Scry
-    // 701.17a To “scry N” means to look at the top N cards of your library, then put any number of them
+    // 701.17a To "scry N" means to look at the top N cards of your library, then put any number of them
     // on the bottom of your library in any order and the rest on top of your library in any order.
     // 701.17b If a player is instructed to scry 0, no scry event occurs. Abilities that trigger whenever a
     // player scries won’t trigger.
