@@ -270,18 +270,10 @@ public class GameAction {
                 // not to battlefield anymore!
                 toBattlefield = false;
 
-                if (copied.isCloned()) {
-                    copied.switchStates(CardStateName.Original, CardStateName.Cloner, false);
-                    copied.setState(CardStateName.Original, false);
-                    copied.clearStates(CardStateName.Cloner, false);
-                    if (copied.isFlipCard()) {
-                        copied.clearStates(CardStateName.Flipped, false);
-                    }
-                    if (copied.getStates().contains(CardStateName.OriginalText)) {
-                        copied.clearStates(CardStateName.OriginalText, false);
-                        copied.removeSVar("GainingTextFrom");
-                        copied.removeSVar("GainingTextFromTimestamp");
-                    }
+                if (c.isCloned() || c.hasTextChangeState()) {
+                    c.removeCloneStates();
+                    c.removeTextChangeStates();
+                    c.updateStateForView();
                 }
 
                 if (copied.getCurrentStateName() != CardStateName.Original) {

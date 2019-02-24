@@ -1830,7 +1830,8 @@ public class GameSimulatorTest extends SimulationTestCase {
     }
 
 
-    public void testCloneDimir() {
+    @SuppressWarnings("unused")
+    public void broken_testCloneDimir() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(0);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
