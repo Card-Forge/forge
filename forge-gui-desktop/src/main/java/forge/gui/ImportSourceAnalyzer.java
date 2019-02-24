@@ -295,30 +295,10 @@ public class ImportSourceAnalyzer {
         // character mangling on some system locales, but we want to replicate the old code here exactly
         return out.toString().toLowerCase();
     }
-
+    
+    @Deprecated
     private void addDefaultPicNames(final PaperCard c, final boolean backFace) {
-        final CardRules card = c.getRules();
-        final String urls = card.getPictureUrl(backFace);
-        if (StringUtils.isEmpty(urls)) { return; }
-
-        final int numPics = 1 + StringUtils.countMatches(urls, "\\");
-        if (c.getArtIndex() > numPics) {
-            return;
-        }
-
-        final String filenameBase = ImageUtil.getImageKey(c, backFace, false);
-        final String filename = filenameBase + ".jpg";
-        final boolean alreadyHadIt = null != defaultPicNames.put(filename, filename);
-        if ( alreadyHadIt ) {
-            return;
-        }
-
-        // Do you shift artIndex by one here?
-        final String newLastSymbol = 0 == c.getArtIndex() ? "" : String.valueOf(c.getArtIndex() /* + 1 */);
-        final String oldFilename = oldCleanString(filenameBase.replaceAll("[0-9]?(\\.full)?$", "")) + newLastSymbol + ".jpg";
-        //if ( numPics > 1 )
-        //System.out.printf("Will move %s -> %s%n", oldFilename, filename);
-        defaultPicOldNameToCurrentName.put(oldFilename, filename);
+        return;
     }
 
 

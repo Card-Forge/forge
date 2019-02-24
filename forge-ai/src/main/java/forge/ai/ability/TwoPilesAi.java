@@ -29,7 +29,7 @@ public class TwoPilesAi extends SpellAbilityAi {
             valid = sa.getParam("ValidCards");
         }
 
-        final Player opp = ComputerUtil.getOpponentFor(ai);
+        final Player opp = ai.getWeakestOpponent();
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {

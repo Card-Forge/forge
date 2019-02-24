@@ -9,7 +9,7 @@ import forge.game.spellability.TargetRestrictions;
 public class GameLossAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Player opp = ComputerUtil.getOpponentFor(ai);
+        final Player opp = ai.getWeakestOpponent();
         if (opp.cantLose()) {
             return false;
         }
@@ -34,15 +34,16 @@ public class GameLossAi extends SpellAbilityAi {
         // Phage the Untouchable
         // (Final Fortune would need to attach it's delayed trigger to a
         // specific turn, which can't be done yet)
+        Player opp = ai.getWeakestOpponent();
 
-        if (!mandatory && ComputerUtil.getOpponentFor(ai).cantLose()) {
+        if (!mandatory && opp.cantLose()) {
             return false;
         }
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             sa.resetTargets();
-            sa.getTargets().add(ComputerUtil.getOpponentFor(ai));
+            sa.getTargets().add(opp);
         }
 
         return true;

@@ -626,7 +626,7 @@ public class ComputerUtilCost {
             && (!source.getName().equals("Tyrannize") || payer.getCardsIn(ZoneType.Hand).size() > 2)
             && (!source.getName().equals("Perplex") || payer.getCardsIn(ZoneType.Hand).size() < 2)
             && (!source.getName().equals("Breaking Point") || payer.getCreaturesInPlay().size() > 1)
-            && (!source.getName().equals("Chain of Vapor") || (ComputerUtil.getOpponentFor(payer).getCreaturesInPlay().size() > 0 && payer.getLandsInPlay().size() > 3));
+            && (!source.getName().equals("Chain of Vapor") || (payer.getWeakestOpponent().getCreaturesInPlay().size() > 0 && payer.getLandsInPlay().size() > 3));
     }
 
     public static Set<String> getAvailableManaColors(Player ai, Card additionalLand) {

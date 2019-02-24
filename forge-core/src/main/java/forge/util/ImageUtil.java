@@ -46,9 +46,7 @@ public class ImageUtil {
             cntPictures = db.getPrintCount(card.getName(), edition);
             hasManyPictures = cntPictures > 1;
         } else {
-            // without set number of pictures equals number of urls provided in Svar:Picture
-            String urls = card.getPictureUrl(backFace);
-            cntPictures = StringUtils.countMatches(urls, "\\") + 1;
+            cntPictures = 1;
 
             // raise the art index limit to the maximum of the sets this card was printed in
             int maxCntPictures = db.getMaxPrintCount(card.getName());

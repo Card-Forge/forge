@@ -167,7 +167,7 @@ public class TokenAi extends SpellAbilityAi {
          */
         final Card source = sa.getHostCard();
         final Game game = ai.getGame();
-        final Player opp = ComputerUtil.getOpponentFor(ai);
+        final Player opp = ai.getWeakestOpponent();
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;   // prevent infinite tokens?
@@ -261,13 +261,13 @@ public class TokenAi extends SpellAbilityAi {
         num = (num == null) ? "1" : num;
         final int nToSac = AbilityUtils.calculateAmount(topStack.getHostCard(), num, topStack);
         CardCollection list = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","),
-        		ComputerUtil.getOpponentFor(ai), topStack.getHostCard(), sa);
+        		ai.getWeakestOpponent(), topStack.getHostCard(), sa);
         list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
         // only care about saving single creature for now
         if (!list.isEmpty() && nTokens > 0 && list.size() == nToSac) {
             ComputerUtilCard.sortByEvaluateCreature(list);
             list.add(token);
-            list = CardLists.getValidCards(list, valid.split(","), ComputerUtil.getOpponentFor(ai), topStack.getHostCard(), sa);
+            list = CardLists.getValidCards(list, valid.split(","), ai.getWeakestOpponent(), topStack.getHostCard(), sa);
             list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
             if (ComputerUtilCard.evaluateCreature(token) < ComputerUtilCard.evaluateCreature(list.get(0))
                     && list.contains(token)) {
@@ -285,7 +285,7 @@ public class TokenAi extends SpellAbilityAi {
         if (tgt != null) {
             sa.resetTargets();
             if (tgt.canOnlyTgtOpponent()) {
-                sa.getTargets().add(ComputerUtil.getOpponentFor(ai));
+                sa.getTargets().add(ai.getWeakestOpponent());
             } else {
                 sa.getTargets().add(ai);
             }

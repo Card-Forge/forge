@@ -30,7 +30,7 @@ public class TapAllAi extends SpellAbilityAi {
         // or during upkeep/begin combat?
 
         final Card source = sa.getHostCard();
-        final Player opp = ComputerUtil.getOpponentFor(ai);
+        final Player opp = ai.getWeakestOpponent();
         final Game game = ai.getGame();
 
         if (game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN)) {
@@ -125,8 +125,9 @@ public class TapAllAi extends SpellAbilityAi {
 
         if (tgt != null) {
             sa.resetTargets();
-            sa.getTargets().add(ComputerUtil.getOpponentFor(ai));
-            validTappables = ComputerUtil.getOpponentFor(ai).getCardsIn(ZoneType.Battlefield);
+            Player opp = ai.getWeakestOpponent();
+            sa.getTargets().add(opp);
+            validTappables = opp.getCardsIn(ZoneType.Battlefield);
         }
 
         if (mandatory) {

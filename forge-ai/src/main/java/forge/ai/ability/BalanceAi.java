@@ -17,7 +17,7 @@ public class BalanceAi extends SpellAbilityAi {
 
         int diff = 0;
         // TODO Add support for multiplayer logic
-        final Player opp = ComputerUtil.getOpponentFor(aiPlayer);
+        final Player opp = aiPlayer.getWeakestOpponent();
         final CardCollectionView humPerms = opp.getCardsIn(ZoneType.Battlefield);
         final CardCollectionView compPerms = aiPlayer.getCardsIn(ZoneType.Battlefield);
         

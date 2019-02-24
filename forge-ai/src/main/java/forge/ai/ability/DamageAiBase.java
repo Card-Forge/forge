@@ -20,7 +20,7 @@ import forge.util.MyRandom;
 
 public abstract class DamageAiBase extends SpellAbilityAi {
     protected boolean avoidTargetP(final Player comp, final SpellAbility sa) {
-        Player enemy = ComputerUtil.getOpponentFor(comp);
+        Player enemy = comp.getWeakestOpponent();
         // Logic for cards that damage owner, like Fireslinger
         // Do not target a player if they aren't below 75% of our health.
         // Unless Lifelink will cancel the damage to us
@@ -54,7 +54,7 @@ public abstract class DamageAiBase extends SpellAbilityAi {
     protected boolean shouldTgtP(final Player comp, final SpellAbility sa, final int d, final boolean noPrevention, final boolean noPlaneswalkerRedirection) {
         int restDamage = d;
         final Game game = comp.getGame();
-        Player enemy = ComputerUtil.getOpponentFor(comp);
+        Player enemy = comp.getWeakestOpponent();
         boolean dmgByCardsInHand = false;
 
         if ("X".equals(sa.getParam("NumDmg")) && sa.getHostCard() != null && sa.hasSVar(sa.getParam("NumDmg")) &&

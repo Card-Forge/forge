@@ -17,7 +17,7 @@ public class ChooseNumberAi extends SpellAbilityAi {
         TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             sa.resetTargets();
-            Player opp = ComputerUtil.getOpponentFor(aiPlayer);
+            Player opp = aiPlayer.getWeakestOpponent();
             if (sa.canTarget(opp)) {
                 sa.getTargets().add(opp);
             } else {

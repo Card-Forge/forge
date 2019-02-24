@@ -31,7 +31,7 @@ public class PowerExchangeAi extends SpellAbilityAi {
         sa.resetTargets();
 
         List<Card> list =
-                CardLists.getValidCards(ComputerUtil.getOpponentFor(ai).getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, sa.getHostCard(), sa);
+                CardLists.getValidCards(ai.getWeakestOpponent().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, sa.getHostCard(), sa);
         // AI won't try to grab cards that are filtered out of AI decks on
         // purpose
         list = CardLists.filter(list, new Predicate<Card>() {

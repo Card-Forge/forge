@@ -127,7 +127,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             }
         } else if (aiLogic.equals("Duneblast")) {
             CardCollection aiCreatures = ai.getCreaturesInPlay();
-            CardCollection oppCreatures = ComputerUtil.getOpponentFor(ai).getCreaturesInPlay();
+            CardCollection oppCreatures = ai.getWeakestOpponent().getCreaturesInPlay();
             aiCreatures = CardLists.getNotKeyword(aiCreatures, Keyword.INDESTRUCTIBLE);
             oppCreatures = CardLists.getNotKeyword(oppCreatures, Keyword.INDESTRUCTIBLE);
 

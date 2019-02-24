@@ -63,7 +63,7 @@ public class SacrificeAi extends SpellAbilityAi {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final boolean destroy = sa.hasParam("Destroy");
 
-        Player opp = ComputerUtil.getOpponentFor(ai);
+        Player opp = ai.getWeakestOpponent();
         if (tgt != null) {
             sa.resetTargets();
             if (!opp.canBeTargetedBy(sa)) {

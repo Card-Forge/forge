@@ -45,7 +45,7 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
             // ability is targeted
             sa.resetTargets();
 
-            Player opp = ComputerUtil.getOpponentFor(aiPlayer);
+            Player opp = aiPlayer.getWeakestOpponent();
             final boolean canTgtAI = aiPlayer.canBeTargetedBy(sa);
             final boolean canTgtHuman = opp.canBeTargetedBy(sa);
 
