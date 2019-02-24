@@ -182,7 +182,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 if (parentPath != null) {
                     fullPath = parentPath + key.toString();
                 }
-                String finalFullPath = fullPath;
+                final String finalFullPath = fullPath;
                 GuiUtils.addMenuItem(menu, key.toString(), null, new Runnable() {
                     @Override
                     public void run() {
