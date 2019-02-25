@@ -57,9 +57,19 @@ public class CloneEffect extends SpellAbilityEffect {
             if (sa.hasParam("ChoiceZone")) {
                 choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
             }
-            CardCollectionView choices = game.getCardsIn(choiceZone);
+            CardCollection choices = new CardCollection(game.getCardsIn(choiceZone));
+
+            // choices need to be filtered by LastState Battlefield or Graveyard
+            // if a Clone enters the field as other cards it could clone,
+            // the clone should not be able to clone them
+            if (choiceZone.equals(ZoneType.Battlefield)) {
+                choices.retainAll(sa.getLastStateBattlefield());
+            } else if (choiceZone.equals(ZoneType.Graveyard)) {
+                choices.retainAll(sa.getLastStateGraveyard());
+            }
+
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host);
-            
+
             String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a card ";
             cardToCopy = activator.getController().chooseSingleEntityForEffect(choices, sa, title, false);
         } else if (sa.hasParam("Defined")) {
