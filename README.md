@@ -121,7 +121,7 @@ The Proguard included with the Android SDK Build-tools is outdated and does not 
 The Eclipse plug-ins do NOT support building things for Android.  They do however allow you to use the debugger so you can still set breakpoints and trace
 things out.  The steps below show how to generate a debug Android build.
 
-1) Create a Maven build for the forge top-leve project.  Right-click on the forge project.  Run as.. > Maven build...
+1) Create a Maven build for the forge top-level project.  Right-click on the forge project.  Run as.. > Maven build...
    - On the Main tab, set Goals: clean install
 
 2) Run forge Maven build.  If everything built, you should see "BUILD SUCCESS" in the Console View.
@@ -155,6 +155,17 @@ Assuming the apk is installed, launch it from the device.
 
 In Eclipse, launch the DDMS.  Window > Perspective > Open Perspective > Other... > DDMS.  You should see the forge app in the list.  Highlight the app, click on the green debug button and a 
 green debug button should appear next to the app's name.  You can now set breakpoints and step through the source code.
+
+## Windows / Linux SNAPSHOT build
+
+SNAPSHOT builds can be built via the Maven integration in Eclipse.
+
+1) Create a Maven build for the forge top-level project.  Right-click on the forge project.  Run as.. > Maven build...
+   - On the Main tab, set Goals: clean install, set Profiles: windows-linux
+   
+2) Run forge Maven build.  If everything built, you should see "BUILD SUCCESS" in the Console View.
+
+The resulting snapshot will be found at: forge-gui-desktop/target/forge-gui-desktop-1.6.22-SNAPSHOT
 
 # IntelliJ
 
