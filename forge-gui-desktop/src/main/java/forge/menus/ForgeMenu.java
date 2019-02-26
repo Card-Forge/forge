@@ -17,8 +17,11 @@ import forge.Singletons;
 import forge.gui.GuiUtils;
 import forge.screens.home.online.OnlineMenu;
 import forge.util.ReflectionUtil;
+import forge.util.Localizer;
+
 
 public final class ForgeMenu {
+
     private JPopupMenu popupMenu;
     private IMenuProvider provider;
     private static HashMap<KeyStroke, JMenuItem> activeShortcuts = new HashMap<KeyStroke, JMenuItem>();
@@ -123,7 +126,8 @@ public final class ForgeMenu {
     }
 
     private static JMenuItem getMenuItem_Restart() {
-        JMenuItem menuItem = new JMenuItem("Restart");
+        final Localizer localizer = Localizer.getInstance();
+        JMenuItem menuItem = new JMenuItem(localizer.getMessage("lblRestart"));
         menuItem.setMnemonic(KeyEvent.VK_R);
         menuItem.addActionListener(getRestartAction());
         return menuItem;
@@ -139,7 +143,8 @@ public final class ForgeMenu {
     }
 
     private static JMenuItem getMenuItem_Exit() {
-        JMenuItem menuItem = new JMenuItem("Exit");
+        final Localizer localizer = Localizer.getInstance();
+        JMenuItem menuItem = new JMenuItem(localizer.getMessage("lblExit"));
         menuItem.setMnemonic(KeyEvent.VK_X);
         menuItem.addActionListener(getExitAction());
         return menuItem;

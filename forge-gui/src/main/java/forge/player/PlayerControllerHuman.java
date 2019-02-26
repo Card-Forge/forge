@@ -135,7 +135,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return mayLookAtAllCards;
     }
 
-    private final Set<Card> tempShownCards = Sets.newHashSet();
+    private final ArrayList<Card> tempShownCards = new ArrayList<Card>();
 
     public <T> void tempShow(final Iterable<T> objects) {
         for (final T t : objects) {
@@ -158,10 +158,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void tempShowCards(final Iterable<Card> cards) {
-        if (mayLookAtAllCards) {
-            return;
-        } // no needed if this is set
-
         for (final Card c : cards) {
             tempShowCard(c);
         }

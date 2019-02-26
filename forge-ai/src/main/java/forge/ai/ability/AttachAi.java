@@ -233,8 +233,15 @@ public class AttachAi extends SpellAbilityAi {
 
         boolean alternativeConsiderations = hasFloatMana || willDiscardNow || willDieNow || willRespondToStack || willCastAtEOT || willCastEarly;
 
-        if (!alternativeConsiderations && (combat == null || game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) || (!combat.isAttacking(attachTarget) && !combat.isBlocking(attachTarget))) {
-            return false;
+        if (!alternativeConsiderations) {
+            if (combat == null ||
+                    game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                return false;
+            }
+
+            if (!(combat.isAttacking(attachTarget) || combat.isBlocking(attachTarget))) {
+                return false;
+            }
         }
 
         return true;
