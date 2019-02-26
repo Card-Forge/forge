@@ -1,6 +1,6 @@
 [metadata]
 Code=GK2
-Date=2018-11-02
+Date=2018-02-15
 Name=Ravnica Allegiance Guild Kit
 MciCode=gk2
 Type=Other
