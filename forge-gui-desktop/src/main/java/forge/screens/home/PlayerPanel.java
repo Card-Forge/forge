@@ -248,7 +248,7 @@ public class PlayerPanel extends FPanel {
                 lobby.updateVanguardList(index);
             }
         };
-    };
+    }
 
     /**
      * Listens to name text fields and gives the appropriate player focus. Also
@@ -388,7 +388,7 @@ public class PlayerPanel extends FPanel {
     public Set<AIOption> getAiOptions() {
         return isSimulatedAi()
                 ? ImmutableSet.of(AIOption.USE_SIMULATION)
-                : Collections.<AIOption>emptySet();
+                : Collections.emptySet();
     }
     private boolean isSimulatedAi() {
         return radioAi.isSelected() && radioAiUseSimulation.isSelected();

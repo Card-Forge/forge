@@ -33,7 +33,7 @@ public class FComboBox<E> extends SkinnedComboBox<E> implements IComboBox<E> {
         RIGHT (SwingConstants.RIGHT),
         CENTER (SwingConstants.CENTER);
         private int value;
-        private TextAlignment(final int value) { this.value = value; }
+        TextAlignment(final int value) { this.value = value; }
         public int getInt() { return value; }
     }
     private TextAlignment textAlignment = TextAlignment.LEFT;

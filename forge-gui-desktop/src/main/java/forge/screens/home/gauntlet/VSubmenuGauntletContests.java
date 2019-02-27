@@ -54,7 +54,7 @@ public enum VSubmenuGauntletContests implements IVSubmenu<CSubmenuGauntletContes
     private final FLabel lblDesc1 = new FLabel.Builder()
         .text("A gauntlet that has been started will keep the same deck until it is finished.").build();
 
-    private VSubmenuGauntletContests() {
+    VSubmenuGauntletContests() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         pnlLoad.setLayout(new MigLayout("insets 0, gap 0, wrap"));

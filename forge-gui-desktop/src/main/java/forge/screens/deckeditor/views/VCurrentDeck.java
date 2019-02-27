@@ -88,7 +88,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
 
     //========== Constructor
 
-    private VCurrentDeck() {
+    VCurrentDeck() {
         // Header area
         pnlHeader.setOpaque(false);
         pnlHeader.setLayout(new MigLayout("insets 3, gapx 3, hidemode 3"));

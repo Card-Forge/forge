@@ -119,6 +119,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FComboBoxPanel<String> cbpCounterDisplayType = new FComboBoxPanel<>(localizer.getMessage("cbpCounterDisplayType")+":");
     private final FComboBoxPanel<String> cbpCounterDisplayLocation =new FComboBoxPanel<>(localizer.getMessage("cbpCounterDisplayLocation")+":");
     private final FComboBoxPanel<String> cbpGraveyardOrdering = new FComboBoxPanel<>(localizer.getMessage("cbpGraveyardOrdering")+":");
+    private final FComboBoxPanel<String> cbpDefaultLanguage = new FComboBoxPanel<>(localizer.getMessage("cbpSelectLanguage")+":");
 
     /**
      * Constructor.
@@ -151,6 +152,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         // General Configuration
         pnlPrefs.add(new SectionLabel(localizer.getMessage("GeneralConfiguration")), sectionConstraints);
+
+        // language
+        pnlPrefs.add(cbpDefaultLanguage, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSelectLanguage")), descriptionConstraints);
 
         pnlPrefs.add(getPlayerNamePanel(), titleConstraints + ", h 26px!");
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPlayerName")), descriptionConstraints);
@@ -647,6 +652,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public FComboBoxPanel<String> getCbpDefaultFontSizeComboBoxPanel() {
         return cbpDefaultFontSize;
     }
+
+    public FComboBoxPanel<String> getCbpDefaultLanguageComboBoxPanel() {
+        return cbpDefaultLanguage;
+    }
+
 
     public FComboBoxPanel<String> getAutoYieldModeComboBoxPanel() {
         return cbpAutoYieldMode;

@@ -30,7 +30,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
 
     //========== Constructor
     /** */
-    private VCardCatalog() {
+    VCardCatalog() {
     }
 
     //========== Overridden from IVDoc

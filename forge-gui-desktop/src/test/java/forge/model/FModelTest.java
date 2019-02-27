@@ -19,12 +19,10 @@ import java.io.IOException;
 public class FModelTest {
     /**
      * Set up before each test, creating a default model.
-     * 
-     * @throws FileNotFoundException
-     *             indirectly
+     *
      */
     @BeforeTest
-    public final void setUp() throws FileNotFoundException {
+    public final void setUp() {
        // this.model = new FModel();
     }
 
@@ -61,12 +59,10 @@ public class FModelTest {
 
     /**
      * Test getVersion.
-     * 
-     * @throws FileNotFoundException
-     *             if something is really wrong
+     *
      */
     @Test(enabled = false)
-    public final void test_getVersion() throws FileNotFoundException {
+    public final void test_getVersion() {
         final String version = BuildInfo.getVersionString();
 
         Assert.assertEquals(version, "GIT", "version is default");
@@ -74,12 +70,10 @@ public class FModelTest {
 
     /**
      * Test getPreferences.
-     * 
-     * @throws FileNotFoundException
-     *             indirectly
+     *
      */
     @Test(enabled = false)
-    public final void test_getPreferences() throws FileNotFoundException {
+    public final void test_getPreferences() {
         final ForgePreferences prefs = FModel.getPreferences();
         Assert.assertNotNull(prefs, "prefs instance is not null");
     }

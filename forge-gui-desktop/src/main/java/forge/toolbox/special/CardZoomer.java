@@ -71,7 +71,7 @@ public enum CardZoomer {
     private boolean isMouseWheelEnabled = false;
 
     // ctr
-    private CardZoomer() {
+    CardZoomer() {
         lblFlipcard.setIcon(FSkin.getIcon(FSkinProp.ICO_FLIPCARD));
         setMouseButtonListener();
         setMouseWheelListener();
@@ -81,7 +81,7 @@ public enum CardZoomer {
     public void setCard(final CardStateView card, final boolean mayFlip) {
         this.thisCard = card;
         this.mayFlip = mayFlip;
-        this.isInAltState = card == null ? false : card == card.getCard().getAlternateState();
+        this.isInAltState = card != null && card == card.getCard().getAlternateState();
     }
 
     /**

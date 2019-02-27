@@ -12,6 +12,7 @@ import com.google.common.base.Predicate;
 import forge.deck.*;
 import forge.game.GameFormat;
 import forge.item.PaperCard;
+import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
@@ -46,7 +47,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private boolean isForCommander;
 
     private final DeckManager lstDecks;
-    private final FLabel btnViewDeck = new FLabel.ButtonBuilder().text("View Deck").fontSize(14).build();
+    final Localizer localizer = Localizer.getInstance();
+
+    private final FLabel btnViewDeck = new FLabel.ButtonBuilder().text(localizer.getMessage("lblViewDeck")).fontSize(14).build();
     private final FLabel btnRandom = new FLabel.ButtonBuilder().fontSize(14).build();
 
     private boolean isAi;
@@ -119,7 +122,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setPool(decks);
         lstDecks.setup(config);
 
-        btnRandom.setText("Random Deck");
+        btnRandom.setText(localizer.getMessage("lblRandomDeck"));
         btnRandom.setCommand(new UiCommand() {
             @Override
             public void run() {

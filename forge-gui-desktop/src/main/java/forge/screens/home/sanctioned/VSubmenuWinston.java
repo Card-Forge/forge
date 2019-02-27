@@ -70,7 +70,7 @@ public enum VSubmenuWinston implements IVSubmenu<CSubmenuWinston> {
     /**
      * Constructor.
      */
-    private VSubmenuWinston() {
+    VSubmenuWinston() {
         lstAI.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         btnStart.setEnabled(false);
 

@@ -65,7 +65,7 @@ public enum FView {
 	// Tab overflow is for the +X display for extra tabs.
 	private final JPanel pnlTabOverflow = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
 
-	private FView() {
+	FView() {
 		frmSplash = new SplashFrame();
 		frmDocument.setTitle("Forge: " + BuildInfo.getVersionString());
 		JOptionPane.setRootFrame(frmDocument);

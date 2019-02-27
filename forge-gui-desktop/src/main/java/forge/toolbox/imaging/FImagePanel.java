@@ -42,7 +42,8 @@ import java.awt.image.BufferedImage;
 public class FImagePanel extends JPanel {
 
     // See {@code setAutosizeMode} for descriptions.
-    public enum AutoSizeImageMode {OFF, PANEL, SOURCE};
+    public enum AutoSizeImageMode {OFF, PANEL, SOURCE}
+
     AutoSizeImageMode autoSizeMode = AutoSizeImageMode.PANEL;
 
     // The original unscaled, unrotated image.
@@ -66,7 +67,7 @@ public class FImagePanel extends JPanel {
     public FImagePanel() {
         setOpaque(false);
         setResizeListener();
-    };
+    }
 
     /**
      * This timer is used to identify when resizing has finished.
@@ -326,7 +327,7 @@ public class FImagePanel extends JPanel {
                 if (newScale != this.imageScale) {
                     isResampleEnabled = true;
                     this.imageScale = newScale;
-                    if (newScale == 0) { this.imageScale = 1; };
+                    if (newScale == 0) { this.imageScale = 1; }
                     if (this.autoSizeMode == AutoSizeImageMode.SOURCE && newScale > 1) {
                         this.imageScale = 1;
                     }

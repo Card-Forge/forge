@@ -18,7 +18,7 @@ public enum CBazaarUI implements ICDoc {
      * @param v0 &emsp; {@link forge.screens.bazaar.VBazaarUI}
      * @param bazaar
      */
-    private CBazaarUI() {
+    CBazaarUI() {
     }
 
     /** Populate all stalls, and select first one. */

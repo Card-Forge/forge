@@ -143,7 +143,7 @@ public final class FImageUtil {
      */
     public static int getRotationToNearest(int requestedRotation, int nearestRotation) {
         // Ensure requested rotation falls within -360..0..360 degree range first.
-        requestedRotation = requestedRotation - (360 * (requestedRotation / (int)360));
+        requestedRotation = requestedRotation - (360 * (requestedRotation / 360));
         return (int)(Math.rint((double) requestedRotation / nearestRotation) * nearestRotation);
     }        
 

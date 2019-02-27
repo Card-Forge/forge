@@ -104,7 +104,7 @@ public class FOptionPane extends FDialog {
         FTextField txtInput = null;
         FComboBox<T> cbInput = null;
         if (inputOptions == null) {
-            txtInput = new FTextField.Builder().text(initialInput.toString()).build();
+            txtInput = new FTextField.Builder().text(initialInput).build();
             inputField = txtInput;
         } else {
             cbInput = new FComboBox<T>(inputOptions);

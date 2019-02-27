@@ -69,7 +69,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         DIFFICULTY, /** */
         BOOSTER, /** */
         SHOP, /***/
-        DRAFT_TOURNAMENTS;
+        DRAFT_TOURNAMENTS
     }
 
     /**

@@ -98,7 +98,7 @@ public enum VHomeUI implements IVTopLevelUI {
         .iconAlignX(SwingConstants.CENTER)
         .iconInBackground(true).iconScaleFactor(1.0).build();
 
-    private VHomeUI() {
+    VHomeUI() {
         // Add main menu containing logo and menu buttons
         final JPanel pnlMainMenu = new JPanel(new MigLayout("w 200px!, ax center, insets 0, gap 0, wrap"));
         pnlMainMenu.setOpaque(false);

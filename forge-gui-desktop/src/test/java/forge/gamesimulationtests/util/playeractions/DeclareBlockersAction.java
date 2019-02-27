@@ -10,7 +10,7 @@ public class DeclareBlockersAction extends BasePlayerAction {
 	
 	public DeclareBlockersAction( PlayerSpecification player ) {
 		super( player );
-		blockingAssignments = ArrayListMultimap.<CardSpecification, CardSpecification>create();
+		blockingAssignments = ArrayListMultimap.create();
 	}
 	
 	public DeclareBlockersAction block( CardSpecification attacker, CardSpecification blocker ) {
