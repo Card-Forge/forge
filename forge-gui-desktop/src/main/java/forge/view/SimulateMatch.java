@@ -282,13 +282,13 @@ public class SimulateMatch {
                     System.out.println(TextUtil.concatNoSpace("End Round - ", String.valueOf(curRound)));
                 }
                 curRound = tourney.getActiveRound();
-                System.out.println("");
+                System.out.println();
                 System.out.println(TextUtil.concatNoSpace("Round ", String.valueOf(curRound) ," Pairings:"));
 
                 for(TournamentPairing pairing : tourney.getActivePairings()) {
                     System.out.println(pairing.outputHeader());
                 }
-                System.out.println("");
+                System.out.println();
             }
 
             TournamentPairing pairing = tourney.getNextPairing();
@@ -327,7 +327,7 @@ public class SimulateMatch {
                         pairing.setWinner(tp);
                         lastWinner = winner.getName();
                         System.out.println(TextUtil.concatNoSpace("Match Winner - ", lastWinner, "!"));
-                        System.out.println("");
+                        System.out.println();
                         break;
                     }
                 }

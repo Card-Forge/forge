@@ -233,6 +233,8 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeCounterDisplayLocationComboBox();
         initializeGraveyardOrderingComboBox();
         initializePlayerNameButton();
+        initializeDefaultLanguageComboBox();
+
     }
 
     /* (non-Javadoc)
@@ -352,6 +354,15 @@ public enum CSubmenuPreferences implements ICDoc {
         panel.setComboBox(comboBox, Singletons.getControl().getCloseAction());
     }
 
+        private void initializeDefaultLanguageComboBox() {
+
+        final String [] choices = {"en-US", "es-ES", "de-DE"};
+        final FPref userSetting = FPref.UI_LANGUAGE;
+        final FComboBoxPanel<String> panel = this.view.getCbpDefaultLanguageComboBoxPanel();
+        final FComboBox<String> comboBox = createComboBox(choices, userSetting);
+        final String selectedItem = this.prefs.getPref(userSetting);
+        panel.setComboBox(comboBox, selectedItem);
+    }
     private void initializeDefaultFontSizeComboBox() {
         final String [] choices = {"10", "11", "12", "13", "14", "15", "16", "17", "18"};
         final FPref userSetting = FPref.UI_DEFAULT_FONT_SIZE;

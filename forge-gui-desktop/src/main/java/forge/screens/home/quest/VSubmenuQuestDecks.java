@@ -60,7 +60,7 @@ public enum VSubmenuQuestDecks implements IVSubmenu<CSubmenuQuestDecks> {
     /**
      * Constructor.
      */
-    private VSubmenuQuestDecks() {
+    VSubmenuQuestDecks() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         lstDecks.setCaption("Quest Decks");
     }

@@ -38,7 +38,7 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
     private final FLabel lblAvatarAI = new FLabel.Builder().hoverable(true).selectable(true)
             .iconScaleFactor(0.99f).iconInBackground(true).build();
 
-    private VSubmenuAvatars() {
+    VSubmenuAvatars() {
         populateAvatars();
     }
 

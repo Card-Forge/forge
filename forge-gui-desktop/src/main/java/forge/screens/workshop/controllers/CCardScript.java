@@ -46,7 +46,7 @@ public enum CCardScript implements ICDoc {
     private boolean switchInProgress;
     private boolean refreshing;
 
-    private CCardScript() {
+    CCardScript() {
         VCardScript.SINGLETON_INSTANCE.getTxtScript().getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void removeUpdate(final DocumentEvent arg0) {
@@ -103,7 +103,7 @@ public enum CCardScript implements ICDoc {
         refreshing = true;
         final JTextPane txtScript = VCardScript.SINGLETON_INSTANCE.getTxtScript();
         txtScript.setText(currentScriptInfo != null ? currentScriptInfo.getText() : "");
-        txtScript.setEditable(currentScriptInfo != null ? currentScriptInfo.canEdit() : false);
+        txtScript.setEditable(currentScriptInfo != null && currentScriptInfo.canEdit());
         txtScript.setCaretPosition(0); //keep scrolled to top
 
         final StyledDocument doc = VCardScript.SINGLETON_INSTANCE.getDoc();

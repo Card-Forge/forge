@@ -36,7 +36,7 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
     private final JPanel pnlTitle = new JPanel(new MigLayout());
     private final StopButton btnStop  = new StopButton();
 
-    private VSubmenuOnlineLobby() {
+    VSubmenuOnlineLobby() {
     }
 
     public ILobbyView setLobby(final GameLobby lobby) {

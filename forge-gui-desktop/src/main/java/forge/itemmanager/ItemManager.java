@@ -1130,7 +1130,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
      * @param unique - if true, the editor will be set to the "unique item names only" mode.
      */
     public void setWantUnique(final boolean unique) {
-        this.wantUnique = this.alwaysNonUnique ? false : unique;
+        this.wantUnique = !this.alwaysNonUnique && unique;
     }
 
     /**

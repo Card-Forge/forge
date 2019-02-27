@@ -36,7 +36,7 @@ public enum FAbsolutePositioner {
 
     private final JPanel panel = new JPanel();
 
-    private FAbsolutePositioner() {
+    FAbsolutePositioner() {
         panel.setOpaque(false);
         panel.setLayout(null);
     }

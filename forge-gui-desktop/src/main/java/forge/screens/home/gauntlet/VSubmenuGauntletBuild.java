@@ -106,7 +106,7 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
         .icon(FSkin.getIcon(FSkinProp.ICO_OPEN))
         .text(" ").hoverable(true).build();
 
-    private VSubmenuGauntletBuild() {
+    VSubmenuGauntletBuild() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         // File handling panel

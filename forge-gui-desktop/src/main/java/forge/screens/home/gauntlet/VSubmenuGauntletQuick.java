@@ -78,7 +78,7 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
 
     private final StartButton btnStart  = new StartButton();
 
-    private VSubmenuGauntletQuick() {
+    VSubmenuGauntletQuick() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         boxUserDecks.setSelected(true);

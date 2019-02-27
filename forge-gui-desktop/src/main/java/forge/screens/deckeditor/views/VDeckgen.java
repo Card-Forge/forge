@@ -43,7 +43,7 @@ public enum VDeckgen implements IVDoc<CDeckgen> {
         .opaque(true).hoverable(true).build();
 
     //========== Constructor
-    private VDeckgen() {
+    VDeckgen() {
     }
 
     //========== Overridden methods

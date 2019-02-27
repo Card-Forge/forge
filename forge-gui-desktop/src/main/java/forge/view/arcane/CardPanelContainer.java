@@ -463,7 +463,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         }
     }
 
-    public static interface LayoutEventListener {
+    public interface LayoutEventListener {
         void doingLayout();
     }
 

@@ -51,7 +51,7 @@ public class CDock implements ICDoc {
         this.view = new VDock(this);
     }
 
-    public enum ArcState { OFF, MOUSEOVER, ON; }
+    public enum ArcState { OFF, MOUSEOVER, ON}
 
     public VDock getView() {
         return view;
@@ -108,7 +108,7 @@ public class CDock implements ICDoc {
 
     public void setArcState(final ArcState state) {
         arcState = state;
-        while (arcStateIterator.next() != arcState) { /* Put the iterator to the correct value */ };
+        while (arcStateIterator.next() != arcState) { /* Put the iterator to the correct value */ }
     }
 
     @Override

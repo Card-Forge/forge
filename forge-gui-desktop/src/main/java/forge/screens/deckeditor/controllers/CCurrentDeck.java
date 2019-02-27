@@ -39,7 +39,7 @@ public enum CCurrentDeck implements ICDoc {
 
     //========== Overridden methods
 
-    private CCurrentDeck() {
+    CCurrentDeck() {
         final FileFilter[] defaultFilters = fileChooser.getChoosableFileFilters();
         for (final FileFilter defFilter : defaultFilters) {
             fileChooser.removeChoosableFileFilter(defFilter);

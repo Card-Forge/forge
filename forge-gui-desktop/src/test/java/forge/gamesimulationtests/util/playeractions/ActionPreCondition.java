@@ -18,13 +18,9 @@ public class ActionPreCondition {
 				throw new IllegalStateException( "Mock action " + this + " can only trigger during turn " + requiredTurn + " but it is already turn " + game.getPhaseHandler().getTurn() );
 			}
 		}
-		
-		if( requiredPhaseType != null && requiredPhaseType != game.getPhaseHandler().getPhase() ) {
-			return false;
-		}
-		
-		return true;
-	}
+
+        return requiredPhaseType == null || requiredPhaseType == game.getPhaseHandler().getPhase();
+    }
 	
 	public ActionPreCondition turn( int turn ) {
 		requiredTurn = turn;
