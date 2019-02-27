@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -119,7 +119,7 @@ public class AddBasicLandsDialog {
                 pnlSwamp.lblCount.setText(String.valueOf(pnlSwamp.count));
                 pnlMountain.lblCount.setText(String.valueOf(pnlMountain.count));
                 pnlForest.lblCount.setText(String.valueOf(pnlForest.count));
-
+                
                 updateDeckInfoLabel();
             }
         });
@@ -254,7 +254,7 @@ public class AddBasicLandsDialog {
                 "{U} " + integer.format(pnlIsland.symbolCount) + " (" + percent.format(pnlIsland.symbolCount / totalSymbolCount) + ") | " +
                 "{B} " + integer.format(pnlSwamp.symbolCount) + " (" + percent.format(pnlSwamp.symbolCount / totalSymbolCount) + ") | " +
                 "{R} " + integer.format(pnlMountain.symbolCount) + " (" + percent.format(pnlMountain.symbolCount / totalSymbolCount) + ") | " +
-                "{G} " + integer.format(pnlForest.symbolCount) + " (" + percent.format(pnlForest.symbolCount / totalSymbolCount) + ")" +
+                "{G} " + integer.format(pnlForest.symbolCount) + " (" + percent.format(pnlForest.symbolCount / totalSymbolCount) + ")" + 
                 "</div>", false));
     }
 
