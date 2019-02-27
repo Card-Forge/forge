@@ -12,6 +12,6 @@ A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True
 SVar:ObGainLife:AB$ GainLife | Cost$ 1 B Sac<1/Creature> | ActivationZone$ Command | LifeAmount$ X | References$ X | SubAbility$ DBDraw | SpellDescription$ You gain X life and draw X cards, where X is the sacrificed creature's power.
 SVar:DBDraw:DB$ Draw | NumCards$ X | References$ X
 SVar:X:Sacrificed$CardPower
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ob_nixilis_of_the_black_oath.jpg
 Oracle:[+2]: Each opponent loses 1 life. You gain life equal to the life lost this way.\n[-2]: Create a 5/5 black Demon creature token with flying. You lose 2 life.\n[-8]: You get an emblem with "{1}{B}, Sacrifice a creature: You gain X life and draw X cards, where X is the sacrificed creature's power."\nOb Nixilis of the Black Oath can be your commander.

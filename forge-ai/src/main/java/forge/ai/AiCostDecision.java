@@ -459,6 +459,10 @@ public class AiCostDecision extends CostDecisionMakerBase {
         Integer c = cost.convertAmount();
         String type = cost.getType();
         boolean isVehicle = type.contains("+withTotalPowerGE");
+
+        CardCollection exclude = new CardCollection();
+        exclude.addAll(tapped);
+
         if (c == null) {
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
@@ -482,18 +486,36 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
+        if ("DontPayTapCostWithManaSources".equals(source.getSVar("AIPaymentPreference"))) {
+            CardCollectionView toExclude =
+                    CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"),
+                            ability.getActivatingPlayer(), ability.getHostCard(), ability);
+            toExclude = CardLists.filter(toExclude, new Predicate<Card>() {
+                @Override
+                public boolean apply(Card card) {
+                    for (final SpellAbility sa : card.getSpellAbilities()) {
+                        if (sa.isManaAbility() && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            });
+            exclude.addAll(toExclude);
+        }
+
         String totalP = "";
         CardCollectionView totap;
         if (isVehicle) {
             totalP = type.split("withTotalPowerGE")[1];
             type = TextUtil.fastReplace(type, "+withTotalPowerGE", "");
-            totap = ComputerUtil.chooseTapTypeAccumulatePower(player, type, ability, !cost.canTapSource, Integer.parseInt(totalP), tapped);
+            totap = ComputerUtil.chooseTapTypeAccumulatePower(player, type, ability, !cost.canTapSource, Integer.parseInt(totalP), exclude);
         } else {
-            totap = ComputerUtil.chooseTapType(player, type, source, !cost.canTapSource, c, tapped);
+            totap = ComputerUtil.chooseTapType(player, type, source, !cost.canTapSource, c, exclude);
         }
 
         if (totap == null) {
-//            System.out.println("Couldn't find a valid card(s) to tap for: " + source.getName());
+            //System.out.println("Couldn't find a valid card(s) to tap for: " + source.getName());
             return null;
         }
         tapped.addAll(totap);
@@ -528,7 +550,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                     // are currently conventionally flagged with AILogic$ DoSacrifice.
                     c = AbilityUtils.calculateAmount(source, source.getSVar("ChosenX"), null);
                 } else {
-                    // Other cards are assumed to be flagged RemAIDeck for now
+                    // Other cards are assumed to be flagged AI:RemoveDeck:All for now
                     return null;
                 }
             } else {
@@ -787,8 +809,20 @@ public class AiCostDecision extends CostDecisionMakerBase {
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
                 c = AbilityUtils.calculateAmount(source, "ChosenX", ability);
+                source.setSVar("ChosenX", "Number$" + String.valueOf(c));
             } else if (amount.equals("All")) {
                 c = source.getCounters(cost.counter);
+            } else if (sVar.equals("Targeted$CardManaCost")) {
+                c = 0;
+                if (ability.getTargets().getNumTargeted() > 0) {
+                    for (Card tgt : ability.getTargets().getTargetCards()) {
+                        if (tgt.getManaCost() != null) {
+                            c += tgt.getManaCost().getCMC();
+                        }
+                    }
+                }
+            } else if (sVar.equals("Count$xPaid")) {
+                c = AbilityUtils.calculateAmount(source, "PayX", null);
             } else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }

@@ -5,7 +5,7 @@ A:SP$ Pump | Cost$ GU | ValidTgts$ Creature | TgtPrompt$ Select target creature 
 SVar:DBChooseNum:DB$ ChooseNumber | Min$ 0 | Max$ X | References$ X | ListTitle$ Choose how many counters to move | SubAbility$ DBMove | StackDescription$ None
 SVar:DBMove:DB$ MoveCounter | Source$ Remembered | ValidTgts$ Creature | TgtPrompt$ Select another target creature with the same controller to get +1/+1 counter | TargetUnique$ True | TargetsWithSameController$ True | CounterType$ P1P1 | CounterNum$ Y | References$ Y | ConditionDefined$ Targeted | ConditionPresent$ Creature.sharesControllerWith Remembered | ConditionCompare$ EQ1 | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Y:Count$ChosenNumber
 SVar:X:Count$TotalCounters_P1P1_Card.IsRemembered
 DeckHas:Ability$Counters

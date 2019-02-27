@@ -8,6 +8,6 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 # Player is remembered here
 SVar:Y:Count$RememberedSize/NMinus.3
 SVar:X:SVar$Y/Twice
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/truce.jpg
 Oracle:Each player may draw up to two cards. For each card less than two a player draws this way, that player gains 2 life.

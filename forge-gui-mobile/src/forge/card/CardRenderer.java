@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Array;
+import forge.CachedCardImage;
 import forge.FThreads;
 import forge.Graphics;
 import forge.StaticData;
@@ -28,6 +29,7 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.keyword.Keyword;
 import forge.game.card.CounterType;
 import forge.item.IPaperCard;
+import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
@@ -49,6 +51,34 @@ public class CardRenderer {
         Top,
         BehindHorz,
         BehindVert
+    }
+
+    // class that simplifies the callback logic of CachedCardImage
+    static class RendererCachedCardImage extends CachedCardImage {
+        boolean clearCardArtCache = false;
+
+        public RendererCachedCardImage(CardView card, boolean clearArtCache) {
+            super(card);
+            this.clearCardArtCache = clearArtCache;
+        }
+
+        public RendererCachedCardImage(InventoryItem ii, boolean clearArtCache) {
+            super(ii);
+            this.clearCardArtCache = clearArtCache;
+        }
+
+        public RendererCachedCardImage(String key, boolean clearArtCache) {
+            super(key);
+            this.clearCardArtCache = clearArtCache;
+        }
+
+        @Override
+        public void onImageFetched() {
+            ImageCache.clear();
+            if (clearCardArtCache) {
+                cardArtCache.remove(key);
+            }
+        }
     }
 
     private static final FSkinFont NAME_FONT = FSkinFont.get(16);
@@ -124,7 +154,7 @@ public class CardRenderer {
     public static FImageComplex getCardArt(String imageKey, boolean isSplitCard, boolean isHorizontalCard, boolean isAftermathCard) {
         FImageComplex cardArt = cardArtCache.get(imageKey);
         if (cardArt == null) {
-            Texture image = ImageCache.getImage(imageKey, true);
+            Texture image = new RendererCachedCardImage(imageKey, true).getImage();
             if (image != null) {
                 if (image == ImageCache.defaultImage) {
                     cardArt = CardImageRenderer.forgeArt;
@@ -186,7 +216,13 @@ public class CardRenderer {
     public static FImageComplex getAftermathSecondCardArt(String imageKey) {
         FImageComplex cardArt = cardArtCache.get("Aftermath_second_"+imageKey);
         if (cardArt == null) {
-            Texture image = ImageCache.getImage(imageKey, true);
+            Texture image = new CachedCardImage(imageKey) {
+                @Override
+                public void onImageFetched() {
+                    ImageCache.clear();
+                    cardArtCache.remove("Aftermath_second_" + imageKey);
+                }
+            }.getImage();
             if (image != null) {
                 if (image == ImageCache.defaultImage) {
                     cardArt = CardImageRenderer.forgeArt;
@@ -347,7 +383,8 @@ public class CardRenderer {
     }
 
     public static void drawCard(Graphics g, IPaperCard pc, float x, float y, float w, float h, CardStackPosition pos) {
-        Texture image = ImageCache.getImage(pc);
+        Texture image = new RendererCachedCardImage(pc, false).getImage();
+
         if (image != null) {
             if (image == ImageCache.defaultImage) {
                 CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos);
@@ -369,7 +406,8 @@ public class CardRenderer {
     }
 
     public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate) {
-        Texture image = ImageCache.getImage(card);
+        Texture image = new RendererCachedCardImage(card, false).getImage();
+
         if (image != null) {
             if (image == ImageCache.defaultImage) {
                 CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos);

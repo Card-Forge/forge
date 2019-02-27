@@ -6,7 +6,7 @@ SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBGainL
 SVar:DBGainLife:DB$ GainLife | Defined$ Player.IsRemembered | LifeAmount$ X | References$ X
 SVar:X:RememberedLKI$FilterControlledByRemembered_CardManaCost
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seeds_of_innocence.jpg
 Oracle:Destroy all artifacts. They can't be regenerated. The controller of each of those artifacts gains life equal to its converted mana cost.

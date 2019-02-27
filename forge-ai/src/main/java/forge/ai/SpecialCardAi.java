@@ -677,6 +677,14 @@ public class SpecialCardAi {
     // Living Death (and other similar cards using AILogic LivingDeath or AILogic ReanimateAll)
     public static class LivingDeath {
         public static boolean consider(final Player ai, final SpellAbility sa) {
+            // if there's another reanimator card currently suspended, don't cast a new one until the previous
+            // one resolves, otherwise the reanimation attempt will be ruined (e.g. Living End)
+            for (Card ex : ai.getCardsIn(ZoneType.Exile)) {
+                if (ex.hasSVar("IsReanimatorCard") && ex.getCounters(CounterType.TIME) > 0) {
+                    return false;
+                }
+            }
+
             int aiBattlefieldPower = 0, aiGraveyardPower = 0;
             int threshold = 320; // approximately a 4/4 Flying creature worth of extra value
 
@@ -820,6 +828,10 @@ public class SpecialCardAi {
             Game game = ai.getGame();
             int computerHandSize = ai.getZone(ZoneType.Hand).size();
             int maxHandSize = ai.getMaxHandSize();
+
+            if (ai.getCardsIn(ZoneType.Library).isEmpty()) {
+                return false; // nothing to draw from the library
+            }
 
             if (!CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Yawgmoth's Bargain")).isEmpty()) {
                 // Prefer Yawgmoth's Bargain because AI is generally better with it
@@ -1336,6 +1348,10 @@ public class SpecialCardAi {
         public static boolean consider(final Player ai, final SpellAbility sa) {
             Game game = ai.getGame();
             PhaseHandler ph = game.getPhaseHandler();
+
+            if (ai.getCardsIn(ZoneType.Library).isEmpty()) {
+                return false; // nothing to draw from the library
+            }
 
             int computerHandSize = ai.getZone(ZoneType.Hand).size();
             int maxHandSize = ai.getMaxHandSize();

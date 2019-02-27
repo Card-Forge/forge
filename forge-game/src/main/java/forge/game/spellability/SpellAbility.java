@@ -96,6 +96,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private int sourceTrigger = -1;
     private List<Object> triggerRemembered = Lists.newArrayList();
 
+    // TODO use enum for the flags
     private boolean flashBackAbility = false;
     private boolean aftermath = false;
     private boolean cycling = false;
@@ -103,10 +104,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean evoke = false;
     private boolean prowl = false;
     private boolean surge = false;
+    private boolean spectacle = false;
     private boolean offering = false;
     private boolean emerge = false;
-    private boolean morphup = false;
-    private boolean manifestUp = false;
     private boolean cumulativeupkeep = false;
     private boolean outlast = false;
     private boolean blessing = false;
@@ -370,22 +370,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean isAbility() { return true; }
 
     public boolean isMorphUp() {
-        return morphup;
+        return this.hasParam("MorphUp");
     }
 
     public boolean isCastFaceDown() {
         return false;
     }
 
-    public final void setIsMorphUp(final boolean b) {
-        morphup = b;
-    }
-
     public boolean isManifestUp() {
-        return manifestUp;
-    }
-    public final void setIsManifestUp(final boolean b) {
-        manifestUp = b;
+        return hasParam("ManifestUp");
     }
 
     public boolean isCycling() {
@@ -400,6 +393,17 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setOriginalHost(final Card c) {
         grantorCard = c;
+        if (subAbility != null) {
+            subAbility.setOriginalHost(c);
+        }
+        for (AbilitySub sa : additionalAbilities.values()) {
+            sa.setOriginalHost(c);
+        }
+        for (List<AbilitySub> list : additionalAbilityLists.values()) {
+            for (AbilitySub sa : list) {
+                sa.setOriginalHost(c);
+            }
+        }
     }
 
 
@@ -871,6 +875,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 clone.manaPart = new AbilityManaPart(host, mapParams);
             }
 
+            // need to copy the damage tables
+            if (damageMap != null) {
+                clone.damageMap = new CardDamageMap(damageMap);
+            }
+            if (preventMap != null) {
+                clone.preventMap = new CardDamageMap(preventMap);
+            }
+
             // clear maps for copy, the values will be added later
             clone.additionalAbilities = Maps.newHashMap();
             clone.additionalAbilityLists = Maps.newHashMap();
@@ -1103,11 +1115,25 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public final boolean isSurged() {
-        return surge;
+        if (surge)
+            return true;
+        SpellAbility parent = getParent();
+        if (parent != null) {
+            return parent.isSurged();
+        }
+        return false;
     }
 
     public final void setSurged(final boolean isSurge) {
         surge = isSurge;
+    }
+
+    public final boolean isSpectacle() {
+        return spectacle;
+    }
+
+    public final void setSpectacle(final boolean isSpectacle) {
+        spectacle = isSpectacle;
     }
 
     public CardCollection getTappedForConvoke() {

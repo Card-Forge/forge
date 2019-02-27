@@ -6,7 +6,7 @@ A:AB$ Effect | Cost$ PutCardToLibFromHand<1/0/Card> | ValidTgts$ Instant,Sorcery
 SVar:PreventDmg:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Stack | Affected$ Card.IsRemembered | AddKeyword$ Prevent all damage that would be dealt by CARDNAME. | Description$ Prevent all damage target instant or sorcery spell would deal this turn.
 SVar:TargetMoved:Mode$ ChangesZone | Origin$ Stack | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ ExileEffect | TriggerZones$ Command | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hidden_retreat.jpg
 Oracle:Put a card from your hand on top of your library: Prevent all damage that would be dealt by target instant or sorcery spell this turn.

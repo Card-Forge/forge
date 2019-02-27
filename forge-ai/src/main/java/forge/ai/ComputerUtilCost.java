@@ -5,15 +5,13 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import forge.ai.ability.AnimateAi;
 import forge.card.ColorSet;
+import forge.game.Game;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.cost.*;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
@@ -31,7 +29,7 @@ public class ComputerUtilCost {
 
     /**
      * Check add m1 m1 counter cost.
-     * 
+     *
      * @param cost
      *            the cost
      * @param source
@@ -46,7 +44,7 @@ public class ComputerUtilCost {
             if (part instanceof CostPutCounter) {
                 final CostPutCounter addCounter = (CostPutCounter) part;
                 final CounterType type = addCounter.getCounter();
-    
+
                 if (type.equals(CounterType.M1M1)) {
                     return false;
                 }
@@ -60,7 +58,7 @@ public class ComputerUtilCost {
     }
     /**
      * Check remove counter cost.
-     * 
+     *
      * @param cost
      *            the cost
      * @param source
@@ -74,10 +72,10 @@ public class ComputerUtilCost {
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostRemoveCounter) {
                 final CostRemoveCounter remCounter = (CostRemoveCounter) part;
-    
+
                 final CounterType type = remCounter.counter;
                 if (!part.payCostFromSource()) {
-                    if (type.name().equals("P1P1")) {
+                    if (CounterType.P1P1.equals(type)) {
                         return false;
                     }
                     continue;
@@ -92,7 +90,7 @@ public class ComputerUtilCost {
                 // value later as the AI decides what to do (in checkApiLogic / checkAiLogic)
                 if (sa != null && sa.hasSVar(remCounter.getAmount())) {
                     final String sVar = sa.getSVar(remCounter.getAmount());
-                    if (sVar.equals("XChoice")) {
+                    if (sVar.equals("XChoice") && !sa.hasSVar("ChosenX")) {
                         sa.setSVar("ChosenX", String.valueOf(source.getCounters(type)));
                     }
                 }
@@ -108,7 +106,8 @@ public class ComputerUtilCost {
                 }
 
                 //don't kill the creature
-                if (type.name().equals("P1P1") && source.getLethalDamage() <= 1) {
+                if (CounterType.P1P1.equals(type) && source.getLethalDamage() <= 1
+                        && !source.hasKeyword(Keyword.UNDYING)) {
                     return false;
                 }
             }
@@ -118,7 +117,7 @@ public class ComputerUtilCost {
 
     /**
      * Check discard cost.
-     * 
+     *
      * @param cost
      *            the cost
      * @param source
@@ -135,7 +134,7 @@ public class ComputerUtilCost {
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostDiscard) {
                 final CostDiscard disc = (CostDiscard) part;
-    
+
                 final String type = disc.getType();
                 if (type.equals("CARDNAME") && source.getAbilityText().contains("Bloodrush")) {
                     continue;
@@ -145,6 +144,7 @@ public class ComputerUtilCost {
                     continue;
                 }
                 int num = AbilityUtils.calculateAmount(source, disc.getAmount(), null);
+
                 for (int i = 0; i < num; i++) {
                     Card pref = ComputerUtil.getCardPreference(ai, source, "DiscardCost", typeList);
                     if (pref == null) {
@@ -161,7 +161,7 @@ public class ComputerUtilCost {
 
     /**
      * Check life cost.
-     * 
+     *
      * @param cost
      *            the cost
      * @param source
@@ -193,7 +193,7 @@ public class ComputerUtilCost {
 
     /**
      * Check life cost.
-     * 
+     *
      * @param cost
      *            the cost
      * @param source
@@ -210,12 +210,12 @@ public class ComputerUtilCost {
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostPayLife) {
                 final CostPayLife payLife = (CostPayLife) part;
-    
+
                 Integer amount = payLife.convertAmount();
                 if (amount == null) {
                     amount = AbilityUtils.calculateAmount(source, payLife.getAmount(), sourceAbility);
                 }
-    
+
                 // check if there's override for the remainingLife threshold
                 if (sourceAbility != null && sourceAbility.hasParam("AILifeThreshold")) {
                     remainingLife = Integer.parseInt(sourceAbility.getParam("AILifeThreshold"));
@@ -231,7 +231,7 @@ public class ComputerUtilCost {
 
     /**
      * Check creature sacrifice cost.
-     * 
+     *
      * @param cost
      *            the cost
      * @param source
@@ -251,7 +251,7 @@ public class ComputerUtilCost {
                     return false;
                 }
                 final String type = sac.getType();
-    
+
                 if (type.equals("CARDNAME")) {
                     continue;
                 }
@@ -276,7 +276,7 @@ public class ComputerUtilCost {
 
     /**
      * Check sacrifice cost.
-     * 
+     *
      * @param cost
      *            the cost
      * @param source
@@ -300,7 +300,7 @@ public class ComputerUtilCost {
                     if (!important) {
                         return false;
                     }
-                    if (!CardLists.filterControlledBy(source.getEnchantedBy(false), source.getController()).isEmpty()) {
+                    if (!CardLists.filterControlledBy(source.getEnchantedBy(), source.getController()).isEmpty()) {
                         return false;
                     }
                     continue;
@@ -323,7 +323,7 @@ public class ComputerUtilCost {
         }
         return true;
     }
-    
+
     public static boolean isSacrificeSelfCost(final Cost cost) {
     	 if (cost == null) {
              return false;
@@ -340,7 +340,7 @@ public class ComputerUtilCost {
 
     /**
      * Check creature sacrifice cost.
-     * 
+     *
      * @param cost
      *            the cost
      * @param source
@@ -386,7 +386,7 @@ public class ComputerUtilCost {
 
     /**
      * Check sacrifice cost.
-     * 
+     *
      * @param cost
      *            the cost
      * @param source
@@ -401,14 +401,14 @@ public class ComputerUtilCost {
      * <p>
      * shouldPayCost.
      * </p>
-     * 
+     *
      * @param hostCard
      *            a {@link forge.game.card.Card} object.
      * @param cost
      * @return a boolean.
      */
     public static boolean shouldPayCost(final Player ai, final Card hostCard, final Cost cost) {
-    
+
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostPayLife) {
                 if (!ai.cantLoseForZeroOrLessLife()) {
@@ -423,7 +423,7 @@ public class ComputerUtilCost {
                 }
             }
         }
-    
+
         return true;
     } // shouldPayCost()
 
@@ -431,7 +431,7 @@ public class ComputerUtilCost {
      * <p>
      * canPayCost.
      * </p>
-     * 
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param player
@@ -479,7 +479,7 @@ public class ComputerUtilCost {
                 }
             }
         }
-        
+
         // Try not to lose Planeswalker if not threatened
         if (sa.getRestrictions().isPwAbility()) {
             for (final CostPart part : sa.getPayCosts().getCostParts()) {
@@ -495,6 +495,7 @@ public class ComputerUtilCost {
                 }
             }
         }
+
         // KLD vehicle
         if (sa.hasParam("Crew")) {  // put under checkTapTypeCost?
             for (final CostPart part : sa.getPayCosts().getCostParts()) {
@@ -504,7 +505,37 @@ public class ComputerUtilCost {
             }
         }
 
-        return ComputerUtilMana.canPayManaCost(sa, player, extraManaNeeded) 
+        // TODO: Alternate costs which involve both paying mana and tapping a card, e.g. Zahid, Djinn of the Lamp
+        // Current AI decides on each part separately, thus making it possible for the AI to cheat by
+        // tapping a mana source for mana and for the tap cost at the same time. Until this is improved, AI
+        // will not consider mana sources valid for paying the tap cost to avoid this exact situation.
+        if ("DontPayTapCostWithManaSources".equals(sa.getHostCard().getSVar("AIPaymentPreference"))) {
+            for (final CostPart part : sa.getPayCosts().getCostParts()) {
+                if (part instanceof CostTapType) {
+                    CardCollectionView nonManaSources =
+                            CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), part.getType().split(";"),
+                                    sa.getActivatingPlayer(), sa.getHostCard(), sa);
+                    nonManaSources = CardLists.filter(nonManaSources, new Predicate<Card>() {
+                        @Override
+                        public boolean apply(Card card) {
+                            boolean hasManaSa = false;
+                            for (final SpellAbility sa : card.getSpellAbilities()) {
+                                if (sa.isManaAbility() && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
+                                    hasManaSa = true;
+                                    break;
+                                }
+                            }
+                            return !hasManaSa;
+                        }
+                    });
+                    if (nonManaSources.size() < part.convertAmount()) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return ComputerUtilMana.canPayManaCost(sa, player, extraManaNeeded)
             && CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa);
     } // canPayCost()
 
@@ -516,7 +547,7 @@ public class ComputerUtilCost {
         boolean payNever = "Never".equals(aiLogic);
         boolean shockland = "Shockland".equals(aiLogic);
         boolean isMine = sa.getActivatingPlayer().equals(payer);
-    
+
         if (payNever) { return false; }
         if (payForOwnOnly && !isMine) { return false; }
         if (payOwner) {
@@ -536,7 +567,7 @@ public class ComputerUtilCost {
                     // if the new land size would equal the CMC of a card in AIs hand, consider playing it untapped,
                     // otherwise don't bother running other checks
                     if (landsize != c.getCMC()) {
-                        continue; 
+                        continue;
                     }
                     // try to determine in the AI is actually planning to play a spell ability from the card
                     boolean willPlay = ComputerUtil.hasReasonToPlayCardThisTurn(payer, c);
@@ -619,5 +650,16 @@ public class ComputerUtilCost {
         }
 
         return colorsAvailable;
+    }
+
+    public static boolean isFreeCastAllowedByPermanent(Player player, String altCost) {
+        Game game = player.getGame();
+        for (Card cardInPlay : game.getCardsIn(ZoneType.Battlefield)) {
+            if (cardInPlay.hasSVar("AllowFreeCast")) {
+                return altCost == null ? "Always".equals(cardInPlay.getSVar("AllowFreeCast"))
+                        : altCost.equals(cardInPlay.getSVar("AllowFreeCast"));
+            }
+        }
+        return false;
     }
 }

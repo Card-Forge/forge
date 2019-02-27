@@ -16,7 +16,7 @@ if result.setcode is None:
 	print parser.parse_args(['-h'])
 	sys.exit(1)
 
-r = requests.get('http://mtgjson.com/json/%s.json' % result.setcode)
+r = requests.get('http://mtgjson.com/v4/json/%s.json' % result.setcode)
 d = r.json()
 cards = d['cards']
 
@@ -35,10 +35,10 @@ for c in cards:
 	l = []
 	l.append(c['number']) 
 
-	rarity = c['rarity'][0]
-	if rarity == 'B':
+	rarity = c['rarity'][0].upper()
+	if rarity == 'C' and c['supertypes'].count('Basic') > 0:
 		rarity = 'L'
 	l.append(rarity)
-	l.append(c['name'].replace(u'\xc6', 'AE'))
+	l.append(c['name'].replace(u'\xc6', 'Ae'))
 	l.append('\n')
 	f.write(' '.join(l))

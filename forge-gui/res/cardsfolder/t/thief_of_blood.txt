@@ -8,6 +8,6 @@ SVar:DBRemoveCounterAll:DB$ RemoveCounterAll | ValidCards$ Permanent | AllCounte
 SVar:DBPutCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$ChosenNumber
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thief_of_blood.jpg
 Oracle:Flying\nAs Thief of Blood enters the battlefield, remove all counters from all permanents. Thief of Blood enters the battlefield with a +1/+1 counter on it for each counter removed this way.

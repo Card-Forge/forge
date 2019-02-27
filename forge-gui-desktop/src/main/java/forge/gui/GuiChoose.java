@@ -29,7 +29,7 @@ import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FOptionPane;
-
+import forge.view.arcane.ListCardArea;
 
 public class GuiChoose {
 
@@ -279,6 +279,31 @@ public class GuiChoose {
         FThreads.invokeInEdtAndWait(ft);
         try {
             return ft.get();
+        } catch (final Exception e) { // we have waited enough
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static List<CardView> manipulateCardList(final CMatchUI gui, final String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, 
+						    final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
+	gui.setSelectables(manipulable);
+	final Callable<List<CardView>> callable = new Callable<List<CardView>>() {
+		@Override 
+		public List<CardView> call() throws Exception {
+		    ListCardArea tempArea = ListCardArea.show(gui,title,cards,manipulable,toTop,toBottom,toAnywhere);
+		    //		tempArea.pack();
+		    tempArea.show();
+		    final List<CardView> cardList = tempArea.getCards();
+		    return cardList;
+		}
+	    };
+	final FutureTask<List<CardView>> ft = new FutureTask<List<CardView>>(callable);
+        FThreads.invokeInEdtAndWait(ft);
+	gui.clearSelectables();
+        try {
+	    List<CardView> result = ft.get();
+	    return result;
         } catch (final Exception e) { // we have waited enough
             e.printStackTrace();
         }

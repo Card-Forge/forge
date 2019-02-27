@@ -8,6 +8,6 @@ SVar:SelectOpponent:DB$ Pump | ValidTgts$ Opponent | TgtPrompt$ Select target op
 SVar:TrigRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ Y | References$ Y
 SVar:X:Count$InYourHand
 SVar:Y:TargetedPlayer$CardsInHand
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/descendant_of_masumaro.jpg
 Oracle:At the beginning of your upkeep, put a +1/+1 counter on Descendant of Masumaro for each card in your hand, then remove a +1/+1 counter from Descendant of Masumaro for each card in target opponent's hand.

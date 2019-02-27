@@ -1,15 +1,15 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.keyword.Keyword;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.MagicStack;
+import forge.util.MyRandom;
 
 public class LifeExchangeVariantAi extends SpellAbilityAi {
 
@@ -84,18 +84,40 @@ public class LifeExchangeVariantAi extends SpellAbilityAi {
             return shouldDo;
         }
         else if ("Evra, Halcyon Witness".equals(sourceName)) {
-            if (!ai.canGainLife())
-                return false;
-
             int aiLife = ai.getLife();
 
+            // Offensive use of Evra, try to kill the opponent or deal a lot of damage, and hopefully gain a lot of life too
+            if (game.getCombat() != null && game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                    && game.getCombat().isAttacking(source) && source.getNetPower() > 0
+                    && source.getNetPower() < aiLife) {
+                Player def = game.getCombat().getDefenderPlayerByAttacker(source);
+                if (game.getCombat().isUnblocked(source) && def.canLoseLife() && aiLife >= def.getLife() && source.getNetPower() < def.getLife()) {
+                    // Unblocked Evra which can deal lethal damage
+                    return true;
+                } else if (ai.getController().isAI() && aiLife > source.getNetPower() && source.hasKeyword(Keyword.LIFELINK)) {
+                    int dangerMin = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD));
+                    int dangerMax = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_MAX_THRESHOLD));
+                    int dangerDiff = dangerMax - dangerMin;
+                    int lifeInDanger = dangerDiff <= 0 ? dangerMin : MyRandom.getRandom().nextInt(dangerDiff) + dangerMin;
+                    if (source.getNetPower() >= lifeInDanger && ai.canGainLife() && ComputerUtil.lifegainPositive(ai, source)) {
+                        // Blocked or unblocked Evra which will get bigger *and* we're getting our life back through Lifelink
+                        return true;
+                    }
+                }
+            }
+
+            // Defensive use of Evra, try to debuff Evra to try to gain some life
             if (source.getNetPower() > aiLife) {
-                if (ComputerUtilCombat.lifeInSeriousDanger(ai, ai.getGame().getCombat())) {
+                // Only makes sense if the AI can actually gain life from this
+                if (!ai.canGainLife())
+                    return false;
+
+                if (ComputerUtilCombat.lifeInSeriousDanger(ai, game.getCombat())) {
                     return true;
                 }
 
                 // check the top of stack
-                MagicStack stack = ai.getGame().getStack();
+                MagicStack stack = game.getStack();
                 if (!stack.isEmpty()) {
                     SpellAbility saTop = stack.peekAbility();
                     if (ComputerUtil.predictDamageFromSpell(saTop, ai) >= aiLife) {
@@ -103,6 +125,7 @@ public class LifeExchangeVariantAi extends SpellAbilityAi {
                     }
                 }
             }
+
         }
         return false;
 

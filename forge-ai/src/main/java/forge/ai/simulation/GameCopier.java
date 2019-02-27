@@ -13,6 +13,7 @@ import forge.LobbyPlayer;
 import forge.ai.LobbyPlayerAi;
 import forge.card.CardStateName;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.GameObjectMap;
 import forge.game.GameRules;
@@ -204,19 +205,16 @@ public class GameCopier {
             }
         }
         gameObjectMap = new CopiedGameObjectMap(newGame);
+
         for (Card card : origGame.getCardsIn(ZoneType.Battlefield)) {
             Card otherCard = cardMap.get(card);
             otherCard.setTimestamp(card.getTimestamp());
             otherCard.setSickness(card.hasSickness());
             otherCard.setState(card.getCurrentStateName(), false);
-            if (card.isEnchanting()) {
-                otherCard.setEnchanting(gameObjectMap.map(card.getEnchanting()));
-            }
-            if (card.isEquipping()) {
-                otherCard.equipCard(cardMap.get(card.getEquipping()));
-            }
-            if (card.isFortifying()) {
-                otherCard.setFortifying(cardMap.get(card.getFortifying()));
+            if (card.isAttachedToEntity()) {
+                GameEntity ge = gameObjectMap.map(card.getEntityAttachedTo());
+                otherCard.setEntityAttachedTo(ge);
+                ge.addAttachedCard(otherCard);
             }
             if (card.getCloneOrigin() != null) {
                 otherCard.setCloneOrigin(cardMap.get(card.getCloneOrigin()));
@@ -312,7 +310,8 @@ public class GameCopier {
                     newCard.setManifested(true);
                     // TODO: Should be able to copy other abilities...
                     if (isCreature &&  hasManaCost) {
-                        newCard.addSpellAbility(CardFactoryUtil.abilityManifestFaceUp(newCard, newCard.getManaCost()));
+                        newCard.getState(CardStateName.Original).addSpellAbility(
+                                CardFactoryUtil.abilityManifestFaceUp(newCard, newCard.getManaCost()));
                     }
                 }
             }

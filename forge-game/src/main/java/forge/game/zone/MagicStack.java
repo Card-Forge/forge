@@ -569,13 +569,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // verified by System.identityHashCode(card);
         final Card tmp = sa.getHostCard();
         if (!(sa instanceof WrappedAbility && sa.isTrigger())) { tmp.setCanCounter(true); } // reset mana pumped counter magic flag
-        if (tmp.getClones().size() > 0) {
-            for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
-                if (c.equals(tmp)) {
-                    c.setClones(tmp.getClones());
-                }
-            }
-        }
         // xManaCostPaid will reset when cast the spell, comment out to fix Venarian Gold
         // sa.getHostCard().setXManaCostPaid(0);
     }

@@ -4,7 +4,7 @@ Types:Creature Human Shaman
 PT:2/2
 K:Haste
 A:AB$ Draw | Cost$ T Discard<1/Card> | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 DeckHas:Ability$Discard
 DeckHints:Keyword$Madness & Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mad_prophet.jpg

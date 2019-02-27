@@ -14,6 +14,7 @@ import java.util.Map;
 public enum TriggerType {
     Abandoned(TriggerAbandoned.class),
     AbilityCast(TriggerSpellAbilityCast.class),
+    Adapt(TriggerAdapt.class),
     Always(TriggerAlways.class),
     Attached(TriggerAttached.class),
     AttackerBlocked(TriggerAttackerBlocked.class),
@@ -63,6 +64,7 @@ public enum TriggerType {
     NewGame(TriggerNewGame.class),
     PayCumulativeUpkeep(TriggerPayCumulativeUpkeep.class),
     PayEcho(TriggerPayEcho.class),
+    PayLife(TriggerPayLife.class),
     Phase(TriggerPhase.class),
     PhaseIn(TriggerPhaseIn.class),
     PhaseOut(TriggerPhaseOut.class),
@@ -79,13 +81,12 @@ public enum TriggerType {
     SpellAbilityCast(TriggerSpellAbilityCast.class),
     SpellCast(TriggerSpellAbilityCast.class),
     Surveil(TriggerSurveil.class),
-    Tapped(TriggerTaps.class),
     Taps(TriggerTaps.class),
     TapsForMana(TriggerTapsForMana.class),
     Transformed(TriggerTransformed.class),
     TurnBegin(TriggerTurnBegin.class),
     TurnFaceUp(TriggerTurnFaceUp.class),
-    Unequip(TriggerUnequip.class),
+    Unattach(TriggerUnattach.class),
     Untaps(TriggerUntaps.class),
     Vote(TriggerVote.class);
 

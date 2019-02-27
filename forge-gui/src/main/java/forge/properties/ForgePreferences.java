@@ -125,7 +125,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_DISABLE_IMAGES_EFFECT_CARDS("false"),
         UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED ("Never"),
         UI_DEFAULT_FONT_SIZE("12"),
-
+	UI_SELECT_FROM_CARD_DISPLAYS("true"),
         UI_FOR_TOUCHSCREN("false"),
 
         UI_VIBRATE_ON_LIFE_LOSS("true"),

@@ -6,6 +6,6 @@ S:Mode$ Continuous | Affected$ You | Condition$ Hellbent | AddKeyword$ Skip your
 T:Mode$ Phase | Phase$ Upkeep | Execute$ TrigLoseLifeDiscard | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player loses 1 life and discards a card.
 SVar:TrigLoseLifeDiscard:DB$LoseLife | Defined$ TriggeredPlayer | LifeAmount$ 1 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ TriggeredPlayer | NumCards$ 1 | Mode$ TgtChoose
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gibbering_descent.jpg
 Oracle:At the beginning of each player's upkeep, that player loses 1 life and discards a card.\nHellbent — Skip your upkeep step if you have no cards in hand.\nMadness {2}{B}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

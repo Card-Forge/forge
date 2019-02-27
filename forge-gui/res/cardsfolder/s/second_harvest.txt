@@ -3,6 +3,6 @@ ManaCost:2 G G
 Types:Instant
 A:SP$ RepeatEach | Cost$ 2 G G | RepeatSubAbility$ DBClone | RepeatCards$ Permanent.token+YouCtrl | AILogic$ CloneAllTokens | SpellDescription$ For each token you control, create a token that's a copy of that permanent.
 SVar:DBClone:DB$ CopyPermanent | Defined$ Remembered
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/second_harvest.jpg
 Oracle:For each token you control, create a token that's a copy of that permanent.

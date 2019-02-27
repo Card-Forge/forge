@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Title=Wall of Tears
+Icon=Dungeon Crawling Blue.jpg
+Difficulty=medium
+Description=Mono blue control
+Deck Type=constructed
+Name=WallofTears2
+[Main]
+4 Counterspell|TMP
+4 Dismiss|TMP
+2 Island|TMP|1
+5 Island|TMP|2
+8 Island|TMP|3
+8 Island|TMP|4
+2 Killer Whale|EXO
+4 Mana Leak|STH
+1 Mawcor|TMP
+4 Power Sink|TMP
+4 Propaganda|TMP
+2 Treasure Trove|EXO
+4 Wall of Tears|STH
+4 Wayward Soul|EXO
+4 Whispers of the Muse|TMP

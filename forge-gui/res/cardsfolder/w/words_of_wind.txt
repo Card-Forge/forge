@@ -7,6 +7,6 @@ SVar:Repeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ PlayChoos
 SVar:PlayChoose:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Permanent.RememberedPlayerCtrl | Amount$ 1 | Mandatory$ True | AILogic$ WorstCard | ChoiceTitle$ Choose a permanent you control | RememberChosen$ True
 SVar:BounceAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Hand | ChangeType$ Permanent.IsRemembered | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/words_of_wind.jpg
 Oracle:{1}: The next time you would draw a card this turn, each player returns a permanent they control to its owner's hand instead.

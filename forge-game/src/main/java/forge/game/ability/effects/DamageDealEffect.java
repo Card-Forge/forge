@@ -30,7 +30,7 @@ public class DamageDealEffect extends DamageBaseEffect {
         final int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
 
         List<GameObject> tgts = getTargets(sa);
-        if (tgts.isEmpty()) 
+        if (tgts.isEmpty())
             return "";
 
         final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DamageSource"), sa);
@@ -131,15 +131,15 @@ public class DamageDealEffect extends DamageBaseEffect {
             sa.setPreventMap(preventMap);
             usedDamageMap = true;
         }
-        
+
         final List<Card> definedSources = AbilityUtils.getDefinedCards(hostCard, sa.getParam("DamageSource"), sa);
         if (definedSources == null || definedSources.isEmpty()) {
             return;
         }
-        
+
         for (Card source : definedSources) {
             final Card sourceLKI = hostCard.getGame().getChangeZoneLKIInfo(source);
-        
+
             if (divideOnResolution) {
                 // Dividing Damage up to multiple targets using combat damage box
                 // Currently only used for Master of the Wild Hunt
@@ -147,7 +147,7 @@ public class DamageDealEffect extends DamageBaseEffect {
                 if (players.isEmpty()) {
                     return;
                 }
-    
+
                 CardCollection assigneeCards = new CardCollection();
                 // Do we have a way of doing this in a better fashion?
                 for (GameObject obj : tgts) {
@@ -155,7 +155,7 @@ public class DamageDealEffect extends DamageBaseEffect {
                         assigneeCards.add((Card)obj);
                     }
                 }
-    
+
                 Player assigningPlayer = players.get(0);
                 Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(sourceLKI, assigneeCards, dmg, null, true);
                 for (Entry<Card, Integer> dt : map.entrySet()) {
@@ -166,6 +166,9 @@ public class DamageDealEffect extends DamageBaseEffect {
                     preventMap.triggerPreventDamage(false);
                     // non combat damage cause lifegain there
                     damageMap.triggerDamageDoneOnce(false, sa);
+
+                    preventMap.clear();
+                    damageMap.clear();
                 }
                 replaceDying(sa);
                 return;
@@ -201,7 +204,7 @@ public class DamageDealEffect extends DamageBaseEffect {
                     }
                 }
             }
-    
+
             if (remember) {
                 source.addRemembered(damageMap.row(sourceLKI).keySet());
             }
@@ -210,6 +213,9 @@ public class DamageDealEffect extends DamageBaseEffect {
             preventMap.triggerPreventDamage(false);
             // non combat damage cause lifegain there
             damageMap.triggerDamageDoneOnce(false, sa);
+
+            preventMap.clear();
+            damageMap.clear();
         }
         replaceDying(sa);
     }

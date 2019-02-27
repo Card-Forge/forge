@@ -11,11 +11,9 @@ import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
+import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
-import forge.game.cost.Cost;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostRemoveCounter;
-import forge.game.cost.CostSacrifice;
+import forge.game.cost.*;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -46,17 +44,19 @@ public class CountersPutAi extends SpellAbilityAi {
     protected boolean willPayCosts(Player ai, SpellAbility sa, Cost cost, Card source) {
 
         final String type = sa.getParam("CounterType");
+        final String aiLogic = sa.getParamOrDefault("AILogic", "");
+
         // TODO Auto-generated method stub
         if (!super.willPayCosts(ai, sa, cost, source)) {
             return false;
         }
 
-        // disable moving counters
+        // disable moving counters (unless a specialized AI logic supports it)
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostRemoveCounter) {
                 final CostRemoveCounter remCounter = (CostRemoveCounter) part;
                 final CounterType counterType = remCounter.counter;
-                if (counterType.name().equals(type)) {
+                if (counterType.name().equals(type) && !aiLogic.startsWith("MoveCounter")) {
                     return false;
                 }
                 if (!part.payCostFromSource()) {
@@ -102,7 +102,7 @@ public class CountersPutAi extends SpellAbilityAi {
         if (sa.hasParam("LevelUp")) {
             // creatures enchanted by curse auras have low priority
             if (ph.getPhase().isBefore(PhaseType.MAIN2)) {
-                for (Card aura : source.getEnchantedBy(false)) {
+                for (Card aura : source.getEnchantedBy()) {
                     if (aura.getController().isOpponentOf(ai)) {
                         return false;
                     }
@@ -282,6 +282,8 @@ public class CountersPutAi extends SpellAbilityAi {
             if (!source.canTransform()) {
                 return false;
             }
+        } else if (logic.startsWith("MoveCounter")) {
+            return doMoveCounterLogic(ai, sa, ph);
         }
 
         if (sa.getConditions() != null && !sa.getConditions().areMet(sa) && sa.getSubAbility() == null) {
@@ -311,6 +313,17 @@ public class CountersPutAi extends SpellAbilityAi {
 
         // TODO handle proper calculation of X values based on Cost
         int amount = AbilityUtils.calculateAmount(source, amountStr, sa);
+
+        if (sa.hasParam("Adapt")) {
+            Game game = ai.getGame();
+            Combat combat = game.getCombat();
+
+            if (!source.canReceiveCounters(CounterType.P1P1) || source.getCounters(CounterType.P1P1) > 0) {
+                return false;
+            } else if (combat != null && ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                return doCombatAdaptLogic(source, amount, combat);
+            }
+        }
 
         if ("Fight".equals(logic)) {
             int nPump = 0;
@@ -431,6 +444,18 @@ public class CountersPutAi extends SpellAbilityAi {
 
             if (list.size() < sa.getTargetRestrictions().getMinTargets(source, sa)) {
                 return false;
+            }
+
+            // Activate +Loyalty planeswalker abilities even if they have no target (e.g. Vivien of the Arkbow),
+            // but try to do it in Main 2 then so that the AI has a chance to play creatures first.
+            if (list.isEmpty()
+                    && sa.hasParam("Planeswalker")
+                    && sa.getPayCosts() != null
+                    && sa.getPayCosts().hasOnlySpecificCostType(CostPutCounter.class)
+                    && sa.isTargetNumberValid()
+                    && sa.getTargets().getNumTargeted() == 0
+                    && ai.getGame().getPhaseHandler().is(PhaseType.MAIN2, ai)) {
+                return true;
             }
 
             if (sourceName.equals("Abzan Charm")) {
@@ -715,6 +740,7 @@ public class CountersPutAi extends SpellAbilityAi {
 
             int totalTargets = list.size();
 
+            sa.resetTargets();
             while (sa.canAddMoreTarget()) {
                 if (mandatory) {
                     // When things are mandatory, gotta handle a little differently
@@ -989,4 +1015,80 @@ public class CountersPutAi extends SpellAbilityAi {
         }
         return Iterables.getFirst(options, null);
     }
+
+    private boolean doMoveCounterLogic(final Player ai, SpellAbility sa, PhaseHandler ph) {
+        // Spikes (Tempest)
+
+        // Try not to do it unless at the end of opponent's turn or the creature is threatened
+        final int creatDiff = sa.getParam("AILogic").contains("IsCounterUser") ? 450 : 1;
+        final Combat combat = ai.getGame().getCombat();
+        final Card source = sa.getHostCard();
+
+        final boolean threatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(source)
+                || (combat != null && (((combat.isBlocked(source) && ComputerUtilCombat.attackerWouldBeDestroyed(ai, source, combat)) && !ComputerUtilCombat.willKillAtLeastOne(ai, source, combat))
+                || (combat.isBlocking(source) && ComputerUtilCombat.blockerWouldBeDestroyed(ai, source, combat) && !ComputerUtilCombat.willKillAtLeastOne(ai, source, combat))));
+
+        if (!(threatened || (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai))) {
+            return false;
+        }
+
+        CardCollection targets = CardLists.getTargetableCards(ai.getCreaturesInPlay(), sa);
+        targets.remove(source);
+
+        targets = CardLists.filter(targets, new Predicate<Card>() {
+            @Override
+            public boolean apply(Card card) {
+                boolean tgtThreatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(card)
+                        || (combat != null && ((combat.isBlocked(card) && ComputerUtilCombat.attackerWouldBeDestroyed(ai, card, combat))
+                        || (combat.isBlocking(card) && ComputerUtilCombat.blockerWouldBeDestroyed(ai, card, combat))));
+                // when threatened, any non-threatened target is good to preserve the counter
+                return !tgtThreatened && (threatened || ComputerUtilCard.evaluateCreature(card, false, false) > ComputerUtilCard.evaluateCreature(source, false, false) + creatDiff);
+            }
+        });
+
+        Card bestTgt = ComputerUtilCard.getBestCreatureAI(targets);
+
+        if (bestTgt != null) {
+            sa.getTargets().add(bestTgt);
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean doCombatAdaptLogic(Card source, int amount, Combat combat) {
+        if (combat.isAttacking(source)) {
+            if (!combat.isBlocked(source)) {
+                return true;
+            } else {
+                for (Card blockedBy : combat.getBlockers(source)) {
+                    if (blockedBy.getNetToughness() > source.getNetPower()
+                            && blockedBy.getNetToughness() <= source.getNetPower() + amount) {
+                        return true;
+                    }
+                }
+
+                int totBlkPower = Aggregates.sum(combat.getBlockers(source), CardPredicates.Accessors.fnGetNetPower);
+                if (source.getNetToughness() <= totBlkPower
+                        && source.getNetToughness() + amount > totBlkPower) {
+                    return true;
+                }
+            }
+        } else if (combat.isBlocking(source)) {
+            for (Card blocked : combat.getAttackersBlockedBy(source)) {
+                if (blocked.getNetToughness() > source.getNetPower()
+                        && blocked.getNetToughness() <= source.getNetPower() + amount) {
+                    return true;
+                }
+            }
+
+            int totAtkPower = Aggregates.sum(combat.getAttackersBlockedBy(source), CardPredicates.Accessors.fnGetNetPower);
+            if (source.getNetToughness() <= totAtkPower
+                    && source.getNetToughness() + amount > totAtkPower) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

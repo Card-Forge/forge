@@ -39,7 +39,7 @@ Name=MTGO Vintage Cube 2013
 1 Wrath of God|EMA
 1 Cloudgoat Ranger|MMA
 1 Mirror Entity|MM2
-1 Reveillark|MMA
+1 Reveillark|UMA
 1 Flickerwisp|MM3
 1 Ranger of Eos|MM3
 1 Elspeth, Knight-Errant|MMA
@@ -58,7 +58,7 @@ Name=MTGO Vintage Cube 2013
 1 Spear of Heliod|THS
 1 Unexpectedly Absent|EMA
 1 Armageddon|A25
-1 Faith's Fetters|EMA
+1 Faith's Fetters|UMA
 1 Stoneforge Mystic|WWK
 1 Linvala, Keeper of Silence|MM3
 1 Baneslayer Angel|M11
@@ -71,7 +71,7 @@ Name=MTGO Vintage Cube 2013
 1 Loam Lion|WWK
 1 Gideon Jura|M12
 1 Mana Drain|IMA
-1 Frantic Search|VMA
+1 Frantic Search|UMA
 1 Treachery|UDS
 1 Brainstorm|A25
 1 Brain Freeze|VMA
@@ -80,7 +80,7 @@ Name=MTGO Vintage Cube 2013
 1 Sower of Temptation|LRW
 1 Wake Thrasher|EVE
 1 Consecrated Sphinx|IMA
-1 Snapcaster Mage|MM3
+1 Snapcaster Mage|UMA
 1 True-Name Nemesis
 1 Intuition|TPR
 1 Forbid|TPR
@@ -91,7 +91,7 @@ Name=MTGO Vintage Cube 2013
 1 Gifts Ungiven|MM3
 1 Compulsive Research|MM3
 1 Riftwing Cloudskate|MMA
-1 Glen Elendra Archmage|MMA
+1 Glen Elendra Archmage|UMA
 1 Inkwell Leviathan|EMA
 1 Tinker|ULG
 1 Jace, the Mind Sculptor|VMA
@@ -140,9 +140,9 @@ Name=MTGO Vintage Cube 2013
 1 Miscalculation|ULG
 1 Trinket Mage|SOM
 1 Recurring Nightmare|TPR
-1 Buried Alive|ODY
+1 Buried Alive|UMA
 1 Tendrils of Agony|VMA
-1 Unburial Rites|MM3
+1 Unburial Rites|UMA
 1 Mesmeric Fiend|A25
 1 Slaughter Pact|MMA
 1 Gatekeeper of Malakir|ZEN
@@ -167,10 +167,10 @@ Name=MTGO Vintage Cube 2013
 1 Toxic Deluge|EMA
 1 Vampiric Tutor|EMA
 1 Living Death|A25
-1 Reanimate|TPR
+1 Reanimate|UMA
 1 Bone Shredder|ULG
 1 Braids, Cabal Minion|EMA
-1 Entomb|EMA
+1 Entomb|UMA
 1 Putrid Imp|VMA
 1 Nezumi Graverobber|CHK
 1 Ink-Eyes, Servant of Oni|BOK
@@ -178,19 +178,19 @@ Name=MTGO Vintage Cube 2013
 1 Plague Sliver|TSP
 1 Damnation|MM3
 1 Nekrataal|EMA
-1 Shriekmaw|LRW
-1 Bitterblossom|MM2
-1 Demonic Tutor|VMA
+1 Shriekmaw|UMA
+1 Bitterblossom|UMA
+1 Demonic Tutor|UMA
 1 Necropotence|IMA
 1 Disfigure|A25
 1 Vampire Nighthawk|MM3
 1 Guul Draz Assassin|ROE
 1 Consuming Vapors|ROE
-1 Duress|IMA
+1 Duress|M19
 1 Skinrender|SOM
 1 Dismember|MM2
-1 Diregraf Ghoul|ISD
-1 Liliana of the Veil|MM3
+1 Diregraf Ghoul|M19
+1 Liliana of the Veil|UMA
 1 Hymn to Tourach|EMA
 1 Ultimate Price|DTK
 1 Nether Void|LEG
@@ -238,7 +238,7 @@ Name=MTGO Vintage Cube 2013
 1 Ravenous Baboons|EXO
 1 Wildfire|MM2
 1 Sneak Attack|EMA
-1 Reckless Charge|EMA
+1 Reckless Charge|UMA
 1 Molten Rain|MM3
 1 Char|RAV
 1 Tin Street Hooligan|GPT
@@ -250,7 +250,7 @@ Name=MTGO Vintage Cube 2013
 1 Smash to Smithereens|ORI
 1 Hellspark Elemental|CFX
 1 Ball Lightning|A25
-1 Siege-Gang Commander|EMA
+1 Siege-Gang Commander|DOM
 1 Burning of Xinye|VMA
 1 Goblin Guide|MM3
 1 Searing Blaze|WWK
@@ -265,7 +265,7 @@ Name=MTGO Vintage Cube 2013
 1 Kird Ape|EMA
 1 Brimstone Volley|CNS
 1 Devil's Play|ISD
-1 Faithless Looting|EMA
+1 Faithless Looting|UMA
 1 Orcish Lumberjack|VMA
 1 Zealous Conscripts|MM3
 1 Mizzium Mortars|MM3
@@ -289,10 +289,10 @@ Name=MTGO Vintage Cube 2013
 1 Wall of Blossoms|TPR
 1 Restock|M15
 1 Tooth and Nail|MMA
-1 Eternal Witness|MMA
+1 Eternal Witness|UMA
 1 Primal Command|MM3
 1 Stunted Growth|ICE
-1 Wickerbough Elder|EVE
+1 Wickerbough Elder|UMA
 1 Master of the Wild Hunt|A25
 1 Harmonize|MM3
 1 Terastodon|CNS
@@ -310,26 +310,26 @@ Name=MTGO Vintage Cube 2013
 1 Genesis|VMA
 1 Plow Under|8ED
 1 Heartbeat of Spring|CHK
-1 Woodfall Primus|MMA
-1 Noble Hierarch|MM2
+1 Woodfall Primus|UMA
+1 Noble Hierarch|UMA
 1 Channel|IMA
 1 Oracle of Mul Daya|ZEN
 1 Arbor Elf|A25
 1 Joraga Treespeaker|ROE
 1 Awakening Zone|ROE
-1 Vengevine|ROE
-1 Fauna Shaman|M11
+1 Vengevine|UMA
+1 Fauna Shaman|UMA
 1 Genesis Wave|IMA
 1 Thrun, the Last Troll|MBS
 1 Beast Within|NPH
-1 Naturalize|RIX
+1 Naturalize|M19
 1 Garruk Relentless|ISD
 1 Ulvenwald Tracker|MM3
 1 Polukranos, World Eater|THS
 1 Rofellos, Llanowar Emissary|VMA
 1 Elves of Deep Shadow|RAV
 1 Thelonite Hermit|TSP
-1 Tarmogoyf|MM3
+1 Tarmogoyf|UMA
 1 Wild Nacatl|ALA
 1 Avenger of Zendikar|WWK
 1 Call of the Herd|MM3
@@ -337,7 +337,7 @@ Name=MTGO Vintage Cube 2013
 1 Green Sun's Zenith|EMA
 1 Acidic Slime|M13
 1 Garruk, Primal Hunter|M13
-1 Llanowar Elves|EMA
+1 Llanowar Elves|DOM
 1 Regrowth|A25
 1 Fyndhorn Elves|VMA
 1 Thragtusk|MM3
@@ -371,7 +371,7 @@ Name=MTGO Vintage Cube 2013
 1 Rishadan Port|A25
 1 Scalding Tarn|MM3
 1 Shivan Reef|ORI
-1 Steam Vents|RTR
+1 Steam Vents|GRN
 1 Strip Mine|VMA
 1 Taiga|VMA
 1 Thawing Glaciers|VMA
@@ -381,7 +381,7 @@ Name=MTGO Vintage Cube 2013
 1 Volcanic Island|VMA
 1 Windbrisk Heights|LRW
 1 Wooded Foothills|KTK
-1 Ancient Tomb|VMA
+1 Ancient Tomb|UMA
 1 Azorius Chancery|IMA
 1 Badlands|VMA
 1 Arid Mesa|MM3
@@ -391,8 +391,8 @@ Name=MTGO Vintage Cube 2013
 1 Teetering Peaks|ZEN
 1 Underground Sea|VMA
 1 Bloodstained Mire|KTK
-1 Watery Grave|GTC
-1 Sacred Foundry|GTC
+1 Watery Grave|GRN
+1 Sacred Foundry|GRN
 1 Stomping Ground|GTC
 1 Godless Shrine|GTC
 1 Breeding Pool|GTC
@@ -405,9 +405,9 @@ Name=MTGO Vintage Cube 2013
 1 Selesnya Sanctuary|IMA
 1 Rakdos Carnarium|IMA
 1 Simic Growth Chamber|IMA
-1 Karakas|EMA
-1 Temple Garden|RTR
-1 Overgrown Tomb|RTR
+1 Karakas|UMA
+1 Temple Garden|GRN
+1 Overgrown Tomb|GRN
 1 Volrath's Stronghold|TPR
 1 Gaea's Cradle|USG
 1 Tolarian Academy|VMA
@@ -422,7 +422,7 @@ Name=MTGO Vintage Cube 2013
 1 Lightning Helix|IMA
 1 Electrolyze|IMA
 1 Grand Arbiter Augustin IV|MMA
-1 Kitchen Finks|MMA
+1 Kitchen Finks|UMA
 1 Stillmoon Cavalier|EVE
 1 Tidehollow Sculler|MMA
 1 Nicol Bolas, Planeswalker|M13
@@ -436,7 +436,7 @@ Name=MTGO Vintage Cube 2013
 1 Domri Rade|MM3
 1 Mystic Snake|A25
 1 Firemane Angel|IMA
-1 Angel of Despair|GPT
+1 Angel of Despair|UMA
 1 Trygon Predator|EMA
 1 Simic Sky Swallower|IMA
 1 Boggart Ram-Gang|SHM
@@ -459,7 +459,7 @@ Name=MTGO Vintage Cube 2013
 1 Shadowmage Infiltrator|A25
 1 Ajani Vengeant|ALA
 1 Vindicate|A25
-1 Maelstrom Pulse|MMA
+1 Maelstrom Pulse|UMA
 1 Tezzeret, Agent of Bolas|MBS
 1 Sorin, Lord of Innistrad|DKA
 1 Baleful Strix|EMA
@@ -468,10 +468,10 @@ Name=MTGO Vintage Cube 2013
 1 Voice of Resurgence|MM3
 1 Null Rod|VMA
 1 Cursed Scroll|TPR
-1 All Is Dust|MM2
-1 Emrakul, the Aeons Torn|MM2
-1 Kozilek, Butcher of Truth|MM2
-1 Ulamog, the Infinite Gyre|MM2
+1 All Is Dust|UMA
+1 Emrakul, the Aeons Torn|UMA
+1 Kozilek, Butcher of Truth|UMA
+1 Ulamog, the Infinite Gyre|UMA
 1 Shrine of Burning Rage|NPH
 1 Batterskull|NPH
 1 Lion's Eye Diamond|MIR
@@ -496,7 +496,7 @@ Name=MTGO Vintage Cube 2013
 1 Sword of Feast and Famine|MBS
 1 Sword of War and Peace|NPH
 1 Chrome Mox|EMA
-1 Gilded Lotus|M13
+1 Gilded Lotus|DOM
 1 Sword of Light and Shadow|MMA
 1 Razormane Masticore|10E
 1 Pentad Prism|5DN
@@ -525,7 +525,7 @@ Name=MTGO Vintage Cube 2013
 1 Lodestone Golem|MM2
 1 Lotus Bloom|MMA
 1 Mana Crypt|EMA
-1 Mana Vault|VMA
+1 Mana Vault|UMA
 1 Selesnya Signet|MM3
 1 Metalworker|UDS
 1 Scroll Rack|TMP
@@ -536,8 +536,8 @@ Name=MTGO Vintage Cube 2013
 1 Sword of Fire and Ice|MMA
 1 Skullclamp|VMA
 1 Vedalken Shackles|MMA
-1 Crucible of Worlds|10E
+1 Crucible of Worlds|M19
 1 Sensei's Divining Top|EMA
 1 Umezawa's Jitte|BOK
 1 Manriki-Gusari|SOK
-1 Karn Liberated|MM2
+1 Karn Liberated|UMA

@@ -4,7 +4,7 @@ Types:Creature Elf Druid
 PT:2/2
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | References$ X | SpellDescription$ Add X mana of any one color, where X is the number of Elves on the battlefield.
 SVar:X:Count$Valid Elf
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_channeler.jpg
 Oracle:{T}: Add X mana of any one color, where X is the number of Elves on the battlefield.

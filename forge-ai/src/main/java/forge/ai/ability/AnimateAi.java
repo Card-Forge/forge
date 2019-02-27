@@ -149,15 +149,15 @@ public class AnimateAi extends SpellAbilityAi {
                 if (!bFlag && c.isCreature() && (sa.hasParam("Permanent") || (!c.isTapped() && !c.isSick()))) {
                     int power = -5;
                     if (sa.hasParam("Power")) {
-                        power = AbilityUtils.calculateAmount(source, sa.getParam("Power"), sa);
+                        power = AbilityUtils.calculateAmount(c, sa.getParam("Power"), sa);
                     }
                     int toughness = -5;
                     if (sa.hasParam("Toughness")) {
-                        toughness = AbilityUtils.calculateAmount(source, sa.getParam("Toughness"), sa);
+                        toughness = AbilityUtils.calculateAmount(c, sa.getParam("Toughness"), sa);
                     }
                     if (sa.hasParam("Keywords")) {
                         for (String keyword : sa.getParam("Keywords").split(" & ")) {
-                            if (!source.hasKeyword(keyword)) {
+                            if (!c.hasKeyword(keyword)) {
                                 bFlag = true;
                             }
                         }
@@ -188,7 +188,7 @@ public class AnimateAi extends SpellAbilityAi {
                     if (animatedCopy.getCurrentPower() + animatedCopy.getCurrentToughness() >
                             c.getCurrentPower() + c.getCurrentToughness()) {
                         if (!isAnimatedThisTurn(aiPlayer, sa.getHostCard())) {
-                            if (!sa.getHostCard().isTapped() || (game.getCombat() != null && game.getCombat().isAttacking(sa.getHostCard()))) {
+                            if (!c.isTapped() || (game.getCombat() != null && game.getCombat().isAttacking(c))) {
                                 bFlag = true;
                             }
                         }
@@ -342,7 +342,7 @@ public class AnimateAi extends SpellAbilityAi {
         
         // This is reasonable for now. Kamahl, Fist of Krosa and a sorcery or
         // two are the only things
-        // that animate a target. Those can just use SVar:RemAIDeck:True until
+        // that animate a target. Those can just use AI:RemoveDeck:All until
         // this can do a reasonably
         // good job of picking a good target
         return false;

@@ -10,6 +10,6 @@ SVar:AttachAura:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Chang
 SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Aura | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evershrike.jpg
 Oracle:Flying\nEvershrike gets +2/+2 for each Aura attached to it.\n{X}{W/B}{W/B}: Return Evershrike from your graveyard to the battlefield. You may put an Aura card with converted mana cost X or less from your hand onto the battlefield attached to it. If you don't, exile Evershrike.

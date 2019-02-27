@@ -4,6 +4,6 @@ Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of each player's upkeep, CARDNAME deals damage to that player equal to the number of nonbasic lands they control.
 SVar:TrigDamage:DB$DealDamage | Defined$ TriggeredPlayer | NumDmg$ X | References$ X
 SVar:X:Count$Valid Land.nonBasic+ActivePlayerCtrl
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_order.jpg
 Oracle:At the beginning of each player's upkeep, Primal Order deals damage to that player equal to the number of nonbasic lands they control.

@@ -51,7 +51,7 @@ public class ActivateAbilityEffect extends SpellAbilityEffect {
                         continue;
                     }
                     SpellAbility manaAb = p.getController().chooseSingleSpellForEffect(
-                            possibleAb, sa, "Choose a mana ability:", ImmutableMap.of());
+                            possibleAb, sa, "Choose a mana ability:", ImmutableMap.<String, Object>of());
                     p.getController().playChosenSpellAbility(manaAb);
                 }
             }

@@ -7,6 +7,6 @@ SVar:GainLifeYou:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount
 SVar:TargetMoved:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | ExcludedDestinations$ Battlefield | Execute$ ExileEffect | TriggerZones$ Command | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hallow.jpg
 Oracle:Prevent all damage target spell would deal this turn. You gain life equal to the damage prevented this way.

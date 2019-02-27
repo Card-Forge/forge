@@ -5,6 +5,6 @@ A:SP$ Fog | Cost$ 1 WB | ConditionManaSpent$ W | SubAbility$ BatwingRepeat | Spe
 SVar:BatwingRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ BatwingLoseLife
 SVar:BatwingLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ Remembered | ConditionManaSpent$ B | References$ X
 SVar:X:PlayerCountRemembered$Valid Creature.YouCtrl+attacking
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/batwing_brume.jpg
 Oracle:Prevent all combat damage that would be dealt this turn if {W} was spent to cast Batwing Brume. Each player loses 1 life for each attacking creature they control if {B} was spent to cast Batwing Brume. (Do both if {W}{B} was spent.)

@@ -4,7 +4,7 @@ Types:Enchantment
 K:Cumulative upkeep:B PayLife<1>:Pay {B} and 1 life.
 R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Land | ManaReplacement$ ProduceB | Description$ If a land is tapped for mana, it produces {B} instead of any other type.
 SVar:ProduceB:C->B & U->B & R->B & G->B & W->B
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infernal_darkness.jpg
 Oracle:Cumulative upkeep—Pay {B} and 1 life. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nIf a land is tapped for mana, it produces {B} instead of any other type.

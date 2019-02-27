@@ -1,0 +1,14 @@
+[metadata]
+Code=G18
+Date=2018-11-16
+Name=M19 Gift Pack
+Code2=G18
+MciCode=g18
+Type=Other
+
+[cards]
+1 S Angelic Guardian
+2 S Angler Turtle
+3 S Vengeant Vampire
+4 S Immortal Phoenix
+5 S Rampaging Brontodon

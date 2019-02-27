@@ -5,7 +5,7 @@ A:SP$ GenericChoice | Cost$ 2 U | ValidTgts$ Card | TgtZone$ Stack,Battlefield |
 SVar:ChangeColor:DB$ ChangeText | Defined$ ParentTarget | ChangeColorWord$ Choose Choose | SubAbility$ DBDraw | SpellDescription$ Change color
 SVar:ChangeType:DB$ ChangeText | Defined$ ParentTarget | ChangeTypeWord$ ChooseBasicLandType ChooseBasicLandType | SubAbility$ DBDraw | SpellDescription$ Change type
 SVar:DBDraw:DB$ Draw | NumCards$ 1
-SVar:RemRandomDeck:True
-SVar:RemAIDeck:True
+AI:RemoveDeck:Random
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_spray.jpg
 Oracle:Change the text of target spell or permanent by replacing all instances of one color word with another or one basic land type with another until end of turn.\nDraw a card.

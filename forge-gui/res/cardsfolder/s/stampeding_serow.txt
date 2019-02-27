@@ -7,6 +7,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigBounce | Trigger
 SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ChangeType$ Creature.Green+YouCtrl | ChangeNum$ 1 | Mandatory$ True | Hidden$ True
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$Valid Creature.Green+YouCtrl+inZoneBattlefield
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stampeding_serow.jpg
 Oracle:Trample\nAt the beginning of your upkeep, return a green creature you control to its owner's hand.

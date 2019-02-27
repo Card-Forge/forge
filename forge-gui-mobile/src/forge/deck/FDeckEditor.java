@@ -730,7 +730,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 if (deck == null || card == null) {
                     max = Integer.MAX_VALUE;
                 }
-                else if (limit == CardLimit.None || card.getRules().getType().isBasic() || DeckFormat.getLimitExceptions().contains(card.getName())) {
+                else if (limit == CardLimit.None || DeckFormat.canHaveAnyNumberOf(card)) {
                     max = Integer.MAX_VALUE;
                     if (parentScreen.isLimitedEditor() && !isAddSource) {
                         //prevent adding more than is in other pool when editing limited decks
@@ -1528,7 +1528,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 modelPath = "";
                 setSaved(true);
             }
-            editor.setDeck(model.getHumanDeck());
+            if (model != null) {
+            	editor.setDeck(model.getHumanDeck());
+            }
+            else {
+            	editor.setDeck(null);
+            }
+            	
         }
 
         private boolean isModelInSyncWithFolder() {

@@ -7,7 +7,7 @@ SVar:DBClone:DB$ CopyPermanent | Defined$ Imprinted | SetPower$ 4 | SetToughness
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$TypeInYourYard.Creature
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hour_of_eternity.jpg
 Oracle:Exile X target creature cards from your graveyard. For each card exiled this way, create a token that's a copy of that card, except it's a 4/4 black Zombie.

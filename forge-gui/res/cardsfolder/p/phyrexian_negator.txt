@@ -6,6 +6,6 @@ K:Trample
 T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, sacrifice that many permanents.
 SVar:TrigSac:DB$ Sacrifice | Amount$ X | SacValid$ Permanent | References$ X
 SVar:X:TriggerCount$DamageAmount
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_negator.jpg
 Oracle:Trample\nWhenever Phyrexian Negator is dealt damage, sacrifice that many permanents.

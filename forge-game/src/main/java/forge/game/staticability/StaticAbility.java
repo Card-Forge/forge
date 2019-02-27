@@ -258,6 +258,10 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
         this.layers = this.generateLayer();
         this.hostCard = host;
         this.intrinsic = stAb.intrinsic;
+
+        // Copy old sVars
+        this.sVars.putAll(stAb.sVars);
+        // but if they are References use this ones
         buildCommonAttributes(host);
     }
 
@@ -458,6 +462,8 @@ public class StaticAbility extends CardTraitBase implements Comparable<StaticAbi
             return StaticAbilityCantAttackBlock.applyCantAttackAbility(this, card, target);
         } else if (mode.equals("CantBlockBy") && target instanceof Card) {
             return StaticAbilityCantAttackBlock.applyCantBlockByAbility(this, card, (Card)target);
+        } else if (mode.equals("CantAttach")) {
+            return StaticAbilityCantAttach.applyCantAttachAbility(this, card, target);
         }
 
         return false;

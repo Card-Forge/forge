@@ -4,7 +4,7 @@ Types:Enchantment
 A:AB$ Token | Cost$ 2 R Sac<2/Goblin> | TokenAmount$ 3 | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Create three 1/1 red Goblin creature tokens.
 SVar:AIPreference:SacCost$Creature.Goblin+cmcLE1
 SVar:NonStackingEffect:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 DeckNeeds:Type$Goblin
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_warrens.jpg
 Oracle:{2}{R}, Sacrifice two Goblins: Create three 1/1 red Goblin creature tokens.

@@ -316,6 +316,9 @@ public class PumpAi extends PumpAiBase {
             }
         } else {
             defense = AbilityUtils.calculateAmount(sa.getHostCard(), numDefense, sa);
+            if (numDefense.contains("X") && sa.getSVar("X").equals("Count$CardsInYourHand") && source.getZone().is(ZoneType.Hand)) {
+                defense--; // the card will be spent casting the spell, so actual toughness is 1 less
+            }
         }
 
         int attack;
@@ -332,6 +335,9 @@ public class PumpAi extends PumpAiBase {
             }
         } else {
             attack = AbilityUtils.calculateAmount(sa.getHostCard(), numAttack, sa);
+            if (numAttack.contains("X") && sa.getSVar("X").equals("Count$CardsInYourHand") && source.getZone().is(ZoneType.Hand)) {
+                attack--; // the card will be spent casting the spell, so actual power is 1 less
+            }
         }
 
         if ("ContinuousBonus".equals(aiLogic)) {
@@ -481,6 +487,10 @@ public class PumpAi extends PumpAiBase {
             } else if (sa.getParam("AILogic").equals("DonateTargetPerm")) {
                 // Donate step 2 - target a donatable permanent.
                 return SpecialCardAi.Donate.considerDonatingPermanent(ai, sa);
+            } else if (sa.getParam("AILogic").equals("SacOneEach")) {
+                // each player sacrifices one permanent, e.g. Vaevictis, Asmadi the Dire - grab the worst for allied and
+                // the best for opponents
+                return SacrificeAi.doSacOneEachLogic(ai, sa);
             }
             if (isFight) {
                 return FightAi.canFightAi(ai, sa, attack, defense);

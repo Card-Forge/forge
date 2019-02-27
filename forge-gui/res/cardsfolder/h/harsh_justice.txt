@@ -5,6 +5,6 @@ A:SP$ Effect | Cost$ 2 W | Name$ Harsh Justice Effect | Triggers$ TrigDamage | S
 SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Creature.attacking | ValidTarget$ You | Execute$ TrigDealDamage | CombatDamage$ True | TriggerDescription$ This turn, whenever an attacking creature deals combat damage to you, it deals that much damage to its controller.
 SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredSourceController | NumDmg$ X | DamageSource$ TriggeredSource | References$ X
 SVar:X:TriggerCount$DamageAmount
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harsh_justice.jpg
 Oracle:Cast Harsh Justice only during the declare attackers step and only if you've been attacked this step.\nThis turn, whenever an attacking creature deals combat damage to you, it deals that much damage to its controller.

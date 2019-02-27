@@ -23,7 +23,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
 /**
- * The Class CostPayLife.
+ * The Class CostDamage.
  */
 public class CostDamage extends CostPart {
 
@@ -74,6 +74,8 @@ public class CostDamage extends CostPart {
         preventMap.triggerPreventDamage(false);
         damageMap.triggerDamageDoneOnce(false, sa);
 
+        preventMap.clear();
+        damageMap.clear();
         return decision.c > 0;
     }
 

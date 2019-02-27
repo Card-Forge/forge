@@ -5,7 +5,7 @@ PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ Domain — CARDNAME's power and toughness are each equal to the number of basic land types among lands you control.
 SVar:X:Count$Domain
 SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:X GE2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/matca_rioters.jpg
 Oracle:Domain — Matca Rioters's power and toughness are each equal to the number of basic land types among lands you control.

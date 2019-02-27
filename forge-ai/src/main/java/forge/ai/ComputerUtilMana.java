@@ -16,11 +16,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.combat.CombatUtil;
-import forge.game.cost.Cost;
-import forge.game.cost.CostAdjustment;
-import forge.game.cost.CostPartMana;
-import forge.game.cost.CostPayEnergy;
-import forge.game.cost.CostPayment;
+import forge.game.cost.*;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.mana.ManaPool;
@@ -860,6 +856,11 @@ public class ComputerUtilMana {
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
         int chanceToReserve = aic.getIntProperty(AiProps.RESERVE_MANA_FOR_MAIN2_CHANCE);
 
+        // Mana reserved for spell synchronization
+        if (AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL)) {
+            return true;
+        }
+
         PhaseType curPhase = ai.getGame().getPhaseHandler().getPhase();
 
         // For combat tricks, always obey mana reservation
@@ -1513,7 +1514,7 @@ public class ComputerUtilMana {
             final Card offering = sa.getSacrificedAsOffering();
             offering.setUsedToPay(false);
             if (costIsPaid && !test) {
-                sa.getHostCard().getController().getGame().getAction().sacrifice(offering, sa);
+                sa.getHostCard().getGame().getAction().sacrifice(offering, sa, null);
             }
             sa.resetSacrificedAsOffering();
         }
@@ -1521,7 +1522,7 @@ public class ComputerUtilMana {
             final Card emerge = sa.getSacrificedAsEmerge();
             emerge.setUsedToPay(false);
             if (costIsPaid && !test) {
-                sa.getHostCard().getController().getGame().getAction().sacrifice(emerge, sa);
+                sa.getHostCard().getGame().getAction().sacrifice(emerge, sa, null);
             }
             sa.resetSacrificedAsEmerge();
         }

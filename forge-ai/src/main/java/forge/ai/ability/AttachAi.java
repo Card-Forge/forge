@@ -2,8 +2,12 @@ package forge.ai.ability;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import forge.ai.*;
+import forge.game.Game;
 import forge.game.GameObject;
+import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -19,11 +23,13 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellPermanent;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.MyRandom;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -56,6 +62,16 @@ public class AttachAi extends SpellAbilityAi {
             }
         }
 
+        if (!ai.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)
+                && source.getType().isLegendary() && sa instanceof SpellPermanent
+                && ai.isCardInPlay(source.getName())) {
+            // Don't play the second copy of a legendary enchantment already in play
+
+            // TODO: Add some extra checks for where the AI may want to cast a replacement aura
+            // on another creature and keep it when the original enchanted creature is useless
+            return false;
+        }
+
         if (ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
                 && !"Curse".equals(sa.getParam("AILogic"))) {
             return false;
@@ -73,6 +89,15 @@ public class AttachAi extends SpellAbilityAi {
             if (!attachPreference(sa, tgt, false)) {
                 return false;
             }
+        }
+
+        // Flash logic
+        boolean advancedFlash = false;
+        if (ai.getController().isAI()) {
+            advancedFlash = ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.FLASH_ENABLE_ADVANCED_LOGIC);
+        }
+        if (source.withFlash(ai) && source.isAura() && advancedFlash && !doAdvancedFlashAuraLogic(ai, sa, sa.getTargetCard())) {
+            return false;
         }
 
         if (abCost.getTotalMana().countX() > 0 && source.getSVar("X").equals("Count$xPaid")) {
@@ -102,13 +127,129 @@ public class AttachAi extends SpellAbilityAi {
                 return false;
             }
         }
-        
+
+        return true;
+    }
+
+    private boolean doAdvancedFlashAuraLogic(Player ai, SpellAbility sa, Card attachTarget) {
+        Card source = sa.getHostCard();
+        Game game = ai.getGame();
+        Combat combat = game.getCombat();
+        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+
+        if (!aic.getBooleanProperty(AiProps.FLASH_USE_BUFF_AURAS_AS_COMBAT_TRICKS)) {
+            // Currently this only works with buff auras, so if the relevant toggle is disabled, just return true
+            // for instant speed use. To be improved later.
+            return true;
+        }
+
+        int power = 0, toughness = 0;
+        List<String> keywords = Lists.newArrayList();
+        for (StaticAbility stAb : source.getStaticAbilities()) {
+            if ("Continuous".equals(stAb.getParam("Mode"))) {
+                if (stAb.hasParam("AddPower")) {
+                    power += AbilityUtils.calculateAmount(source, stAb.getParam("AddPower"), stAb);
+                }
+                if (stAb.hasParam("AddToughness")) {
+                    toughness += AbilityUtils.calculateAmount(source, stAb.getParam("AddToughness"), stAb);
+                }
+                if (stAb.hasParam("AddKeyword")) {
+                    keywords.addAll(Lists.newArrayList(stAb.getParam("AddKeyword").split(" & ")));
+                }
+            }
+        }
+
+        boolean isBuffAura = !sa.isCurse() && (power > 0 || toughness > 0 || !keywords.isEmpty());
+        if (!isBuffAura) {
+            // Currently only works with buff auras, otherwise returns true for instant speed use. To be improved later.
+            return true;
+        }
+
+        boolean canRespondToStack = false;
+        if (!game.getStack().isEmpty()) {
+            SpellAbility peekSa = game.getStack().peekAbility();
+            Player activator = peekSa.getActivatingPlayer();
+            if (activator != null && activator.isOpponentOf(ai)
+                    && (!peekSa.usesTargeting() || peekSa.getTargets().getTargetCards().contains(attachTarget))) {
+                if (peekSa.getApi() == ApiType.DealDamage || peekSa.getApi() == ApiType.DamageAll) {
+                    int dmg = AbilityUtils.calculateAmount(peekSa.getHostCard(), peekSa.getParam("NumDmg"), peekSa);
+                    if (dmg < toughness + attachTarget.getNetToughness()) {
+                        canRespondToStack = true;
+                    }
+                } else if (peekSa.getApi() == ApiType.Destroy || peekSa.getApi() == ApiType.DestroyAll) {
+                    if (!attachTarget.hasKeyword(Keyword.INDESTRUCTIBLE) && !ComputerUtil.canRegenerate(ai, attachTarget)
+                            && keywords.contains("Indestructible")) {
+                        canRespondToStack = true;
+                    }
+                } else if (peekSa.getApi() == ApiType.Pump || peekSa.getApi() == ApiType.PumpAll) {
+                    int p = AbilityUtils.calculateAmount(peekSa.getHostCard(), peekSa.getParam("NumAtt"), peekSa);
+                    int t = AbilityUtils.calculateAmount(peekSa.getHostCard(), peekSa.getParam("NumDef"), peekSa);
+                    if (t < 0 && toughness > 0 && attachTarget.getNetToughness() + t + toughness > 0) {
+                        canRespondToStack = true;
+                    } else if (p < 0 && power > 0 && attachTarget.getNetPower() + p + power > 0
+                            && attachTarget.getNetToughness() + t + toughness > 0) {
+                        // Yep, still need to ensure that the net toughness will be positive here even if buffing for power
+                        canRespondToStack = true;
+                    }
+                }
+            }
+        }
+
+        boolean canSurviveCombat = true;
+        if (combat != null && combat.isBlocked(attachTarget)) {
+            if (!attachTarget.hasKeyword(Keyword.INDESTRUCTIBLE) && !ComputerUtil.canRegenerate(ai, attachTarget)) {
+                boolean dangerous = false;
+                int totalAtkPower = 0;
+                for (Card attacker : combat.getBlockers(attachTarget)) {
+                    if (attacker.hasKeyword(Keyword.DEATHTOUCH) || attacker.hasKeyword(Keyword.INFECT)
+                            || attacker.hasKeyword(Keyword.WITHER)) {
+                        dangerous = true;
+                    }
+                    totalAtkPower += attacker.getNetPower();
+                }
+                if (totalAtkPower > attachTarget.getNetToughness() + toughness || dangerous) {
+                    canSurviveCombat = false;
+                }
+            }
+        }
+
+        if (!canSurviveCombat || (attachTarget.isCreature() && ComputerUtilCard.isUselessCreature(ai, attachTarget))) {
+            // don't buff anything that will die or get seriously crippled in combat, it's pointless anyway
+            return false;
+        }
+
+        int chanceToCastAtEOT = aic.getIntProperty(AiProps.FLASH_BUFF_AURA_CHANCE_CAST_AT_EOT);
+        int chanceToCastEarly = aic.getIntProperty(AiProps.FLASH_BUFF_AURA_CHANCE_TO_CAST_EARLY);
+        int chanceToRespondToStack = aic.getIntProperty(AiProps.FLASH_BUFF_AURA_CHANCE_TO_RESPOND_TO_STACK);
+
+        boolean hasFloatMana = ai.getManaPool().totalMana() > 0;
+        boolean willDiscardNow = game.getPhaseHandler().is(PhaseType.END_OF_TURN, ai)
+                && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize();
+        boolean willDieNow = combat != null && ComputerUtilCombat.lifeInSeriousDanger(ai, combat);
+        boolean willRespondToStack = canRespondToStack && MyRandom.percentTrue(chanceToRespondToStack);
+        boolean willCastEarly = MyRandom.percentTrue(chanceToCastEarly);
+        boolean willCastAtEOT = game.getPhaseHandler().is(PhaseType.END_OF_TURN)
+                && game.getPhaseHandler().getNextTurn().equals(ai) && MyRandom.percentTrue(chanceToCastAtEOT);
+
+        boolean alternativeConsiderations = hasFloatMana || willDiscardNow || willDieNow || willRespondToStack || willCastAtEOT || willCastEarly;
+
+        if (!alternativeConsiderations) {
+            if (combat == null ||
+                    game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                return false;
+            }
+
+            if (!(combat.isAttacking(attachTarget) || combat.isBlocking(attachTarget))) {
+                return false;
+            }
+        }
+
         return true;
     }
 
     /**
      * Acceptable choice.
-     * 
+     *
      * @param c
      *            the c
      * @param mandatory
@@ -133,7 +274,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Choose unpreferred.
-     * 
+     *
      * @param mandatory
      *            the mandatory
      * @param list
@@ -150,7 +291,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Choose less preferred.
-     * 
+     *
      * @param mandatory
      *            the mandatory
      * @param list
@@ -167,7 +308,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Attach ai change type preference.
-     * 
+     *
      * @param sa
      *            the sa
      * @param list
@@ -198,7 +339,7 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         list = CardLists.getNotType(list, type); // Filter out Basic Lands that have the same type as the changing type
-        
+
         // Don't target fetchlands
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
@@ -239,7 +380,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Attach ai keep tapped preference.
-     * 
+     *
      * @param sa
      *            the sa
      * @param list
@@ -276,7 +417,7 @@ public class AttachAi extends SpellAbilityAi {
                     return true;
                 }
 
-                final Iterable<Card> auras = c.getEnchantedBy(false);
+                final Iterable<Card> auras = c.getEnchantedBy();
                 final Iterator<Card> itr = auras.iterator();
                 while (itr.hasNext()) {
                     final Card aura = itr.next();
@@ -367,7 +508,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Attach ai control preference.
-     * 
+     *
      * @param sa
      *            the sa
      * @param list
@@ -438,7 +579,7 @@ public class AttachAi extends SpellAbilityAi {
         	}
         	c = ComputerUtilCard.getWorstAI(betterList);
         }
-        
+
 
         // If Mandatory (brought directly into play without casting) gotta
         // choose something
@@ -451,7 +592,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Attach ai reanimate preference.
-     * 
+     *
      * @param sa
      *            the sa
      * @param list
@@ -465,8 +606,40 @@ public class AttachAi extends SpellAbilityAi {
     private static Card attachAIReanimatePreference(final SpellAbility sa, final List<Card> list, final boolean mandatory,
             final Card attachSource) {
         // AI For choosing a Card to Animate.
-        // TODO Add some more restrictions for Reanimation Auras
-        final Card c = ComputerUtilCard.getBestCreatureAI(list);
+        final Player ai = sa.getActivatingPlayer();
+        final Card attachSourceLki = CardUtil.getLKICopy(attachSource);
+        attachSourceLki.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
+        // Suppress original attach Spell to replace it with another
+        attachSourceLki.getFirstAttachSpell().setSuppressed(true);
+
+        //TODO for Reanimate Auras i need the new Attach Spell, in later versions it might be part of the Enchant Keyword
+        attachSourceLki.addSpellAbility(AbilityFactory.getAbility(attachSourceLki, "NewAttach"));
+        List<Card> betterList = CardLists.filter(list, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                final Card lki = CardUtil.getLKICopy(c);
+                // need to fake it as if lki would be on the battlefield
+                lki.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
+
+                // Reanimate Auras use "Enchant creature put onto the battlefield with CARDNAME" with Remembered
+                attachSourceLki.clearRemembered();
+                attachSourceLki.addRemembered(lki);
+
+                // need to check what the cards would be on the battlefield
+                // do not attach yet, that would cause Events
+                CardCollection preList = new CardCollection(lki);
+                preList.add(attachSourceLki);
+                c.getGame().getAction().checkStaticAbilities(false, Sets.newHashSet(preList), preList);
+                boolean result = lki.canBeAttached(attachSourceLki);
+
+                //reset static abilities
+                c.getGame().getAction().checkStaticAbilities(false);
+
+                return result;
+            }
+        });
+
+        final Card c = ComputerUtilCard.getBestCreatureAI(betterList);
 
         // If Mandatory (brought directly into play without casting) gotta
         // choose something
@@ -538,7 +711,7 @@ public class AttachAi extends SpellAbilityAi {
     }
     /**
      * Attach ai specific card preference.
-     * 
+     *
      * @param sa
      *            the sa
      * @param list
@@ -555,7 +728,7 @@ public class AttachAi extends SpellAbilityAi {
         final Player ai = sa.getActivatingPlayer();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         Card chosen = null;
-        
+
         if ("Guilty Conscience".equals(sourceName)) {
             chosen = SpecialCardAi.GuiltyConscience.getBestAttachTarget(ai, sa, list);
         } else if ("Bonds of Faith".equals(sourceName)) {
@@ -614,7 +787,7 @@ public class AttachAi extends SpellAbilityAi {
     // Should generalize this code a bit since they all have similar structures
     /**
      * Attach ai control preference.
-     * 
+     *
      * @param sa
      *            the sa
      * @param list
@@ -650,7 +823,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Attach ai highest evaluated preference.
-     * 
+     *
      * @param list          the initial valid list
      * @return the card
      */
@@ -660,7 +833,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Attach ai curse preference.
-     * 
+     *
      * @param sa
      *            the sa
      * @param list
@@ -784,7 +957,7 @@ public class AttachAi extends SpellAbilityAi {
      *            the sa
      * @param mandatory
      *            the mandatory
-     * 
+     *
      * @return true, if successful
      */
     @Override
@@ -854,7 +1027,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Attach ai pump preference.
-     * 
+     *
      * @param sa
      *            the sa
      * @param list
@@ -905,8 +1078,36 @@ public class AttachAi extends SpellAbilityAi {
             });
         }
 
+        // Look for triggers that will damage the creature and remove AI-owned creatures that will die
+        CardCollection toRemove = new CardCollection();
+        for (Trigger t : attachSource.getTriggers()) {
+            if (t.getMode() == TriggerType.ChangesZone) {
+                final Map<String, String> params = t.getMapParams();
+                if ("Card.Self".equals(params.get("ValidCard"))
+                        && "Battlefield".equals(params.get("Destination"))) {
+                    SpellAbility trigSa = null;
+                    if (t.hasParam("Execute") && attachSource.hasSVar(t.getParam("Execute"))) {
+                        trigSa = AbilityFactory.getAbility(attachSource.getSVar(params.get("Execute")), attachSource);
+                    } else if (t.getOverridingAbility() != null) {
+                        trigSa = t.getOverridingAbility();
+                    }
+                    if (trigSa != null && trigSa.getApi() == ApiType.DealDamage && "Enchanted".equals(trigSa.getParam("Defined"))) {
+                        for (Card target : list) {
+                            if (!target.getController().isOpponentOf(ai)) {
+                                int numDmg = AbilityUtils.calculateAmount(target, trigSa.getParam("NumDmg"), trigSa);
+                                if (target.getNetToughness() - target.getDamage() <= numDmg && !target.hasKeyword(Keyword.INDESTRUCTIBLE)) {
+                                    toRemove.add(target);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        list.removeAll(toRemove);
+
         if (magnetList != null) {
-            
+
             // Look for Heroic triggers
             if (magnetList.isEmpty() && sa.isSpell()) {
                 for (Card target : list) {
@@ -921,7 +1122,7 @@ public class AttachAi extends SpellAbilityAi {
                     }
                 }
             }
-            
+
             if (!magnetList.isEmpty()) {
                 // Always choose something from the Magnet List.
                 // Probably want to "weight" the list by amount of Enchantments and
@@ -992,6 +1193,10 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         CardCollection prefList = new CardCollection(list);
+
+        // Filter AI-specific targets if provided
+        prefList = ComputerUtil.filterAITgts(sa, ai, (CardCollection)list, false);
+
         if (totToughness < 0) {
             // Don't kill my own stuff with Negative toughness Auras
             final int tgh = totToughness;
@@ -1092,7 +1297,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Attach to card ai preferences.
-     * 
+     *
      * @param sa
      *            the sa
      * @param sa
@@ -1111,8 +1316,15 @@ public class AttachAi extends SpellAbilityAi {
         if (attachSource.hasSVar("DontEquip")) {
             return null;
         }
+
+        // is no attachment so no using attach
+        if (!attachSource.isAttachment()) {
+            return null;
+        }
+
         // Don't fortify if already fortifying
-        if (attachSource.getFortifying() != null && attachSource.getFortifying().getController() == aiPlayer) {
+        if (attachSource.isFortification() && attachSource.getAttachedTo() != null
+                && attachSource.getAttachedTo().getController() == aiPlayer) {
             return null;
         }
 
@@ -1122,11 +1334,7 @@ public class AttachAi extends SpellAbilityAi {
         } else {
             list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource, sa);
 
-            if (attachSource.isAura()) {
-                list = CardLists.filter(list, CardPredicates.canBeEnchantedBy(attachSource));
-            } else if (attachSource.isEquipment()) {
-                list = CardLists.filter(list, CardPredicates.canBeEquippedBy(attachSource));
-            }
+            list = CardLists.filter(list, CardPredicates.canBeAttached(attachSource));
 
             // TODO If Attaching without casting, don't need to actually target.
             // I believe this is the only case where mandatory will be true, so just
@@ -1150,7 +1358,7 @@ public class AttachAi extends SpellAbilityAi {
         Card c = attachGeneralAI(aiPlayer, sa, prefList, mandatory, attachSource, sa.getParam("AILogic"));
 
         AiController aic = ((PlayerControllerAi)aiPlayer.getController()).getAi();
-        if (c != null && attachSource.isEquipment() 
+        if (c != null && attachSource.isEquipment()
                 && attachSource.isEquipping()
                 && attachSource.getEquipping().getController() == aiPlayer) {
             if (c.equals(attachSource.getEquipping())) {
@@ -1174,7 +1382,7 @@ public class AttachAi extends SpellAbilityAi {
                     return null;
                 }
             }
-            
+
             // make sure to prioritize casting spells in main 2 (creatures, other equipment, etc.) rather than moving equipment around
             boolean decideMoveFromUseless = uselessCreature && aic.getBooleanProperty(AiProps.PRIORITIZE_MOVE_EQUIPMENT_IF_USELESS);
 
@@ -1188,7 +1396,7 @@ public class AttachAi extends SpellAbilityAi {
             // avoid randomly moving the equipment back and forth between several creatures in one turn
             if (AiCardMemory.isRememberedCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ATTACHED_THIS_TURN)) {
                 return null;
-            } 
+            }
 
             // do not equip if the new creature is not significantly better than the previous one (evaluates at least better by evalT)
             int evalT = aic.getIntProperty(AiProps.MOVE_EQUIPMENT_CREATURE_EVAL_THRESHOLD);
@@ -1196,7 +1404,7 @@ public class AttachAi extends SpellAbilityAi {
                 return null;
             }
         }
-        
+
         AiCardMemory.rememberCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ATTACHED_THIS_TURN);
 
         if (c == null && mandatory) {
@@ -1208,7 +1416,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Attach general ai.
-     * 
+     *
      * @param sa
      *            the sa
      * @param list
@@ -1284,7 +1492,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Contains useful curse keyword.
-     * 
+     *
      * @param keywords
      *            the keywords
      * @param card
@@ -1303,7 +1511,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Checks if is useful keyword.
-     * 
+     *
      * @param keyword
      *            the keyword
      * @param card
@@ -1314,7 +1522,7 @@ public class AttachAi extends SpellAbilityAi {
     private static boolean isUsefulAttachKeyword(final String keyword, final Card card, final SpellAbility sa, final int powerBonus) {
         final Player ai = sa.getActivatingPlayer();
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
-        
+
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
             return false;
         }
@@ -1327,7 +1535,7 @@ public class AttachAi extends SpellAbilityAi {
                 return false;
             }
             // Also don't play if it would destroy own Aura
-            for (Card c : card.getEnchantedBy(false)) {
+            for (Card c : card.getEnchantedBy()) {
                 if ((c.getController().equals(ai)) && (c.isOfColor(cc))) {
                     return false;
                 }
@@ -1433,7 +1641,7 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Checks if is useful curse keyword.
-     * 
+     *
      * @param keyword
      *            the keyword
      * @param card
@@ -1486,15 +1694,15 @@ public class AttachAi extends SpellAbilityAi {
 
     /**
      * Checks if it is useful to execute the attach action given the current context.
-     * 
+     *
      * @param c
      *            the card
      * @param sa SpellAbility
-     * @return true, if the action is useful (beneficial) in the current minimal context (Card vs. Attach SpellAbility) 
+     * @return true, if the action is useful (beneficial) in the current minimal context (Card vs. Attach SpellAbility)
      */
     private static boolean isUsefulAttachAction(Player ai, Card c, SpellAbility sa) {
         if (c == null) {
-            return false; 
+            return false;
         }
         if (sa.getHostCard() == null) {
             // FIXME: Not sure what should the resolution be if a SpellAbility has no host card. This should
@@ -1552,12 +1760,12 @@ public class AttachAi extends SpellAbilityAi {
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         return true;
     }
-    
+
     @Override
     protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
         return attachToCardAIPreferences(ai, sa, true);
     }
-    
+
     @Override
     protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options) {
         return attachToPlayerAIPreferences(ai, sa, true);

@@ -40,6 +40,7 @@ public class QuestWorld implements Comparable<QuestWorld>{
     private final String dir;
     private final GameFormatQuest format;
     public static final String STANDARDWORLDNAME = "Random Standard";
+    public static final String RANDOMCOMMANDERWORLDNAME = "Random Commander";
 
     private boolean isCustom;
 
@@ -129,7 +130,6 @@ public class QuestWorld implements Comparable<QuestWorld>{
         /**
          * TODO: Write javadoc for Constructor.
          * @param file0
-         * @param keySelector0
          */
         public Reader(String file0) {
             super(file0, QuestWorld.FN_GET_NAME);
@@ -192,6 +192,12 @@ public class QuestWorld implements Comparable<QuestWorld>{
                 useFormat = new GameFormatQuest(QuestWorld.STANDARDWORLDNAME,
                         FModel.getFormats().getStandard().getAllowedSetCodes(),
                         FModel.getFormats().getStandard().getBannedCardNames(),false);
+            }
+
+            if (useName.equalsIgnoreCase(QuestWorld.RANDOMCOMMANDERWORLDNAME)){
+                useFormat = new GameFormatQuest(QuestWorld.RANDOMCOMMANDERWORLDNAME,
+                        FModel.getFormats().getFormat("Commander").getAllowedSetCodes(),
+                        FModel.getFormats().getFormat("Commander").getBannedCardNames(),false);
             }
 
             // System.out.println("Creating quest world " + useName + " (index " + useIdx + ", dir: " + useDir);

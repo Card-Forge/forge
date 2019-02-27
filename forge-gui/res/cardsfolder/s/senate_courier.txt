@@ -1,0 +1,7 @@
+Name:Senate Courier
+ManaCost:2 U
+Types:Creature Bird
+PT:1/4
+K:Flying
+A:AB$ Pump | Cost$ 1 W | Defined$ Self | KW$ Vigilance | SpellDescription$ CARDNAME gains vigilance until end of turn.
+Oracle:Flying\n{1}{W}: Senate Courier gains vigilance until end of turn.

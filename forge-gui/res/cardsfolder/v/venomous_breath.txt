@@ -5,6 +5,6 @@ A:SP$ DelayedTrigger | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select targe
 SVar:VenomousBreathTrigDestroy:DB$ Pump | RememberObjects$ DelayTriggerRemembered | SubAbility$ DBDestroy
 SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Creature.blockedRemembered,Creature.blockedByRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/venomous_breath.jpg
 Oracle:Choose target creature. At this turn's next end of combat, destroy all creatures that blocked or were blocked by it this turn.

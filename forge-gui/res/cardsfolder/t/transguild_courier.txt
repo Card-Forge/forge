@@ -1,8 +1,7 @@
 Name:Transguild Courier
 ManaCost:4
 Types:Artifact Creature Golem
-Text:CARDNAME is all colors (even if this card isn't on the battlefield).
+S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | SetColor$ All | Description$ CARDNAME is all colors.
 PT:3/3
-Colors:white,blue,black,red,green
 SVar:Picture:http://www.wizards.com/global/images/magic/general/transguild_courier.jpg
-Oracle:
+Oracle:Transguild Courier is all colors

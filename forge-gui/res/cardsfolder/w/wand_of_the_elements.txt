@@ -3,6 +3,6 @@ ManaCost:4
 Types:Artifact
 A:AB$ Token | Cost$ T Sac<1/Island> | TokenImage$ u 2 2 elemental flying | TokenAmount$ 1 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Flying| SpellDescription$ Create a 2/2 blue Elemental creature token with flying.
 A:AB$ Token | Cost$ T Sac<1/Mountain> | TokenImage$ r 3 3 elemental | TokenAmount$ 1 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Red | TokenPower$ 3 | TokenToughness$ 3 | SpellDescription$ Create a 3/3 red Elemental creature token.
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wand_of_the_elements.jpg
 Oracle:{T}, Sacrifice an Island: Create a 2/2 blue Elemental creature token with flying.\n{T}, Sacrifice a Mountain: Create a 3/3 red Elemental creature token.

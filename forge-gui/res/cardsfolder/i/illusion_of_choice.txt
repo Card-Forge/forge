@@ -4,5 +4,5 @@ Types:Instant
 A:SP$ Effect | Cost$ U | Name$ Illusion of Choice Effect | StaticAbilities$ STVoter | SubAbility$ DBDraw | SpellDescription$ You choose how each player votes this turn. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:STVoter:Mode$ Continuous | EffectZone$ Command | Affected$ You | AddKeyword$ You choose how each player votes this turn. | Description$ You choose how each player votes this turn.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 Oracle:You choose how each player votes this turn. Draw a card.

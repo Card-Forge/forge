@@ -113,7 +113,7 @@ public class ConquestCommander implements InventoryItem, IXmlWritable {
         if (originPlane == null) {
             return "";
         }
-        return originPlane.getName() + " - " + originRegionName;
+        return originPlane.getName().replace("_", " ") + " - " + originRegionName;
     }
 
     public ConquestPlane getOriginPlane() {

@@ -5,6 +5,6 @@ A:SP$ Sacrifice | Cost$ 1 B | ValidTgts$ Player | SacValid$ Creature | SacMessag
 SVar:DBToken:DB$ Token | ConditionDefined$ Remembered | ConditionPresent$ Card.Goblin | ConditionCompare$ GE1 | TokenAmount$ 2 | TokenName$ Goblin Rogue | TokenTypes$ Creature,Goblin,Rogue | TokenOwner$ Targeted | TokenColors$ Black | TokenPower$ 1 | TokenToughness$ 1 | RememberTokens$ True | ForgetOtherRemembered$ True | SubAbility$ AdditionalPump
 SVar:AdditionalPump:DB$ PumpAll | ValidCards$ Creature.IsRemembered | KW$ Haste | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warren_weirding.jpg
 Oracle:Target player sacrifices a creature. If a Goblin is sacrificed this way, that player creates two 1/1 black Goblin Rogue creature tokens, and those tokens gain haste until end of turn.

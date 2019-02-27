@@ -76,7 +76,7 @@ public class ReplaceMoved extends ReplacementEffect {
                 return false;
             }
 
-            if (zt.equals(ZoneType.Battlefield) && getHostCard().equals(affected)) {
+            if (zt.equals(ZoneType.Battlefield) && getHostCard().equals(affected) && !hasParam("BypassEtbCheck")) {
                 // would be an etb replacement effect that enters the battlefield
                 Card lki = CardUtil.getLKICopy(affected);
                 lki.setLastKnownZone(lki.getController().getZone(zt));

@@ -3,7 +3,6 @@ ManaCost:2 R R R
 Types:Legendary Creature Goblin Shaman
 PT:2/2
 K:Haste
-A:AB$ CopyPermanent | Cost$ T | ValidTgts$ Creature.nonLegendary+YouCtrl | TgtPrompt$ Select target nonlegendary creature you control | Keywords$ Haste | AtEOT$ Sacrifice | AddSVars$ SneakAttackEOT | SpellDescription$ Create a token that's a copy of target nonlegendary creature you control. That token has haste. Sacrifice it at the beginning of the next end step.
-SVar:SneakAttackEOT:SVar:EndOfTurnLeavePlay:True
+A:AB$ CopyPermanent | Cost$ T | ValidTgts$ Creature.nonLegendary+YouCtrl | TgtPrompt$ Select target nonlegendary creature you control | Keywords$ Haste | AtEOT$ Sacrifice | AILogic$ BeforeCombat | SpellDescription$ Create a token that's a copy of target nonlegendary creature you control. That token has haste. Sacrifice it at the beginning of the next end step.
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card50321.jpg
 Oracle:Haste\n{T}: Create a token that's a copy of target nonlegendary creature you control. That token has haste. Sacrifice it at the beginning of the next end step.

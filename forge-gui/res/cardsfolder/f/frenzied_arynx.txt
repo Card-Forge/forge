@@ -1,0 +1,9 @@
+Name:Frenzied Arynx
+ManaCost:2 R G
+Types:Creature Cat Beast
+PT:3/3
+K:Riot
+K:Trample
+A:AB$ Pump | Cost$ 4 R G | NumAtt$ +3 | SpellDescription$ CARDNAME gets +3/+0 until end of turn.
+DeckHas:Ability$Counters
+Oracle:Riot (This creature enters the battlefield with your choice of a +1/+1 counter or haste.)\nTrample\n{4}{R}{G}: Frenzied Arynx gets +3/+0 until end of turn.

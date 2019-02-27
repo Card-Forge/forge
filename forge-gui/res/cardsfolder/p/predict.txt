@@ -6,6 +6,6 @@ SVar:DBMill:DB$ Mill | ValidTgts$ Player | TgtPrompt$ Select target player | Num
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | References$ X | SubAbility$ DBDraw2
 SVar:DBDraw2:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:X:Remembered$Valid Card.NamedCard
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/predict.jpg
 Oracle:Choose a card name, then target player puts the top card of their library into their graveyard. If that card has the chosen name, you draw two cards. Otherwise, you draw a card.

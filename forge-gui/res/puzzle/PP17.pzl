@@ -14,4 +14,4 @@ humanlibrary=Jund Hackblade;Otherworldly Journey;Kor Skyfisher;Firebolt
 humanbattlefield=Secluded Steppe;Forgotten Cave;Boros Garrison;Mountain;Mountain;Mountain;Foundry Street Denizen;Cerodon Yearling|Id:17
 aihand=Goblin Bushwhacker;Burning-Tree Emissary;Burning-Tree Emissary;Burning-Tree Emissary;Burning-Tree Emissary;Manamorphose
 ailibrary=Thunderous Wrath;Mountain
-aibattlefield=Greel's Caress|Attaching:17;Mountain|Tapped;Mountain|Tapped;Swamp|Tapped;Swamp|Tapped;Chittering Rats
+aibattlefield=Greel's Caress|AttachedTo:17;Mountain|Tapped;Mountain|Tapped;Swamp|Tapped;Swamp|Tapped;Chittering Rats

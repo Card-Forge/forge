@@ -7,6 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.O
 SVar:TrigPump:DB$PumpAll | ValidCards$ Ally.YouCtrl | KW$ Vigilance
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Ally
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/joraga_bard.jpg
 Oracle:Whenever Joraga Bard or another Ally enters the battlefield under your control, you may have Ally creatures you control gain vigilance until end of turn.

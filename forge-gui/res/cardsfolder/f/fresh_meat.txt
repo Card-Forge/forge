@@ -3,6 +3,6 @@ ManaCost:3 G
 Types:Instant
 A:SP$ Token | Cost$ 3 G | TokenAmount$ X | TokenOwner$ You | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | TokenImage$ g 3 3 beast NPH | References$ X | SpellDescription$ Create a 3/3 green Beast creature token for each creature put into your graveyard from the battlefield this turn.
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.YouCtrl
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fresh_meat.jpg
 Oracle:Create a 3/3 green Beast creature token for each creature put into your graveyard from the battlefield this turn.

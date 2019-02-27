@@ -25,8 +25,6 @@ import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.ApiType;
-import forge.game.ability.effects.CharmEffect;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementHandler;
@@ -92,14 +90,9 @@ public class CardFactory {
         out.setState(in.getCurrentStateName(), true);
 
         // this's necessary for forge.game.GameAction.unattachCardLeavingBattlefield(Card)
-        out.setEquipping(in.getEquipping());
-        out.setEquippedBy(in.getEquippedBy(false));
-        out.setFortifying(in.getFortifying());
-        out.setFortifiedBy(in.getFortifiedBy(false));
-        out.setEnchantedBy(in.getEnchantedBy(false));
-        out.setEnchanting(in.getEnchanting());
+        out.setAttachedCards(in.getAttachedCards());
+        out.setEntityAttachedTo(in.getEntityAttachedTo());
 
-        out.setClones(in.getClones());
         out.setCastSA(in.getCastSA());
         for (final Object o : in.getRemembered()) {
             out.addRemembered(o);
@@ -435,6 +428,9 @@ public class CardFactory {
 
     private static void readCardFace(Card c, ICardFace face) {
 
+        // Name first so Senty has the Card name
+        c.setName(face.getName());
+
         for (String r : face.getReplacements())              c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true));
         for (String s : face.getStaticAbilities())           c.addStaticAbility(s);
         for (String t : face.getTriggers())                  c.addTrigger(TriggerHandler.parseTrigger(t, c, true));
@@ -444,7 +440,6 @@ public class CardFactory {
         // keywords not before variables
         c.addIntrinsicKeywords(face.getKeywords(), false);
 
-        c.setName(face.getName());
         c.setManaCost(face.getManaCost());
         c.setText(face.getNonAbilityText());
 
@@ -622,6 +617,9 @@ public class CardFactory {
         }
         if (from.getRestrictions() != null) {
             to.setRestrictions((SpellAbilityRestriction) from.getRestrictions().copy());
+            if (!lki) {
+                to.getRestrictions().resetTurnActivations();
+            }
         }
         if (from.getConditions() != null) {
             to.setConditions((SpellAbilityCondition) from.getConditions().copy());
@@ -680,9 +678,6 @@ public class CardFactory {
         }
 
         trig.setStackDescription(trig.toString());
-        if (trig.getApi() == ApiType.Charm && !trig.isWrapper()) {
-            CharmEffect.makeChoices(trig);
-        }
 
         WrappedAbility wrapperAbility = new WrappedAbility(t, trig, ((WrappedAbility) sa).getDecider());
         wrapperAbility.setTrigger(true);

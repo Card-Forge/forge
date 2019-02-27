@@ -6,3 +6,4 @@ Name:Iroas|Deck:Iroas.dck|Variant:Commander|Avatar:Iroas, God of Victory|Desc:
 Name:Kalemne|Deck:Kalemne.dck|Variant:Commander|Avatar:Kalemne, Disciple of Iroas|Desc:
 Name:Mogis|Deck:Mogis.dck|Variant:Commander|Avatar:Mogis, God of Slaughter|Desc:
 Name:Elspeth|Deck:ElspethPW.dck|Variant:Planeswalker|Avatar:Elspeth, Sun's Champion|Desc:
+Name:Random Akros|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:

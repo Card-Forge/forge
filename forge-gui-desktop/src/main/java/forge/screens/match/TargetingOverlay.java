@@ -79,6 +79,13 @@ public class TargetingOverlay {
             x2 = end.x;
             y2 = end.y;
         }
+        
+        @Override
+        public boolean equals(Object obj)
+        {
+        	Arc arc = (Arc)obj;
+        	return ((arc.x1 == x1) && (arc.x2 == x2) && (arc.y1 == y1) && (arc.y2 == y2));
+        }
     }
 
     private final Set<CardView> cardsVisualized = new HashSet<CardView>();
@@ -331,13 +338,24 @@ public class TargetingOverlay {
                 activeStackItem.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseEntered(final MouseEvent e) {
-                        assembleStackArrows();
-                        FView.SINGLETON_INSTANCE.getFrame().repaint();
+                    	if (matchUI.getCDock().getArcState() == ArcState.MOUSEOVER)	{
+                    		assembleStackArrows();
+                    		FView.SINGLETON_INSTANCE.getFrame().repaint();
+                    	}
                     }
                     @Override
                     public void mouseExited(final MouseEvent e) {
-                        assembleStackArrows();
-                        FView.SINGLETON_INSTANCE.getFrame().repaint();
+                    	if (matchUI.getCDock().getArcState() == ArcState.MOUSEOVER)	{
+                    		assembleStackArrows();
+                    		FView.SINGLETON_INSTANCE.getFrame().repaint();
+                    	}
+                    }
+                    @Override
+                    public void mouseClicked(final MouseEvent e) {
+                    	if (matchUI.getCDock().getArcState() == ArcState.ON) {
+                    		assembleStackArrows();
+                    		FView.SINGLETON_INSTANCE.getFrame().repaint();
+                    	}
                     }
                 });
             }
@@ -384,18 +402,27 @@ public class TargetingOverlay {
         if (start == null || end == null) {
             return;
         }
-
+        
+        Arc newArc = new Arc(end,start);
+        
         switch (connects) {
             case Friends:
             case FriendsStackTargeting:
-                arcsFriend.add(new Arc(end, start));
+            	if (!arcsFriend.contains(newArc)) {
+            		arcsFriend.add(newArc);
+            	}
                 break;
             case FoesAttacking:
-                arcsFoeAtk.add(new Arc(end, start));
+                if (!arcsFoeAtk.contains(newArc)) {
+                	arcsFoeAtk.add(newArc);
+                }
                 break;
             case FoesBlocking:
             case FoesStackTargeting:
-                arcsFoeDef.add(new Arc(end, start));
+            	if (!arcsFoeDef.contains(newArc)) {
+            		arcsFoeDef.add(newArc);
+            	}
+            	break;
         }
     }
 
@@ -404,53 +431,21 @@ public class TargetingOverlay {
             return; //don't add arcs for cards if card already visualized
         }
 
-        final CardView enchanting = c.getEnchantingCard();
-        final CardView equipping = c.getEquipping();
-        final CardView fortifying = c.getFortifying();
-        final Iterable<CardView> enchantedBy = c.getEnchantedBy();
-        final Iterable<CardView> equippedBy = c.getEquippedBy();
-        final Iterable<CardView> fortifiedBy = c.getFortifiedBy();
+        final CardView attachedTo = c.getAttachedTo();
+        final Iterable<CardView> attachedCards = c.getAttachedCards();
         final CardView paired = c.getPairedWith();
 
-        if (null != enchanting) {
-            if (enchanting.getController() != null && !enchanting.getController().equals(c.getController())) {
-                addArc(endpoints.get(enchanting.getId()), endpoints.get(c.getId()), ArcConnection.Friends);
-                cardsVisualized.add(enchanting);
+        if (null != attachedTo) {
+            if (attachedTo.getController() != null && !attachedTo.getController().equals(c.getController())) {
+                addArc(endpoints.get(attachedTo.getId()), endpoints.get(c.getId()), ArcConnection.Friends);
+                cardsVisualized.add(attachedTo);
             }
         }
-        if (null != equipping) {
-            if (equipping.getController() != null && !equipping.getController().equals(c.getController())) {
-                addArc(endpoints.get(equipping.getId()), endpoints.get(c.getId()), ArcConnection.Friends);
-                cardsVisualized.add(equipping);
-            }
-        }
-        if (null != fortifying) {
-            if (fortifying.getController() != null && !fortifying.getController().equals(c.getController())) {
-                addArc(endpoints.get(fortifying.getId()), endpoints.get(c.getId()), ArcConnection.Friends);
-                cardsVisualized.add(fortifying);
-            }
-        }
-        if (null != enchantedBy) {
-            for (final CardView enc : enchantedBy) {
+        if (null != attachedCards) {
+            for (final CardView enc : attachedCards) {
                 if (enc.getController() != null && !enc.getController().equals(c.getController())) {
                     addArc(endpoints.get(c.getId()), endpoints.get(enc.getId()), ArcConnection.Friends);
                     cardsVisualized.add(enc);
-                }
-            }
-        }
-        if (null != equippedBy) {
-            for (final CardView eq : equippedBy) {
-                if (eq.getController() != null && !eq.getController().equals(c.getController())) {
-                    addArc(endpoints.get(c.getId()), endpoints.get(eq.getId()), ArcConnection.Friends);
-                    cardsVisualized.add(eq);
-                }
-            }
-        }
-        if (null != fortifiedBy) {
-            for (final CardView eq : fortifiedBy) {
-                if (eq.getController() != null && !eq.getController().equals(c.getController())) {
-                    addArc(endpoints.get(c.getId()), endpoints.get(eq.getId()), ArcConnection.Friends);
-                    cardsVisualized.add(eq);
                 }
             }
         }
@@ -475,8 +470,8 @@ public class TargetingOverlay {
                     if (!attackingCard.equals(c) && !blockingCard.equals(c)) { continue; }
                     addArc(endpoints.get(attackingCard.getId()), endpoints.get(blockingCard.getId()), ArcConnection.FoesBlocking);
                     cardsVisualized.add(blockingCard);
+                    cardsVisualized.add(attackingCard);
                 }
-                cardsVisualized.add(attackingCard);
             }
         }
     }

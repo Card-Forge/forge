@@ -5,6 +5,6 @@ PT:1/1
 K:Flying
 A:AB$ Pump | Cost$ S | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 # AI can now use snow mana to pay for activated abilities.
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chilling_shade.jpg
 Oracle:Flying\n{S}: Chilling Shade gets +1/+1 until end of turn. ({S} can be paid with one mana from a snow permanent.)

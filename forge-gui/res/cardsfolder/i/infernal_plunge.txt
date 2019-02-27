@@ -2,6 +2,6 @@ Name:Infernal Plunge
 ManaCost:R
 Types:Sorcery
 A:SP$ Mana | Cost$ R Sac<1/Creature> | Produced$ R | Amount$ 3 | SpellDescription$ Add {R}{R}{R}.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infernal_plunge.jpg
 Oracle:As an additional cost to cast Infernal Plunge, sacrifice a creature.\nAdd {R}{R}{R}.

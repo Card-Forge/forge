@@ -4,7 +4,7 @@ Types:Sorcery
 A:SP$ DealDamage | Cost$ 1 W W | ValidTgts$ Player | NumDmg$ X | References$ X | SubAbility$ Unpoison | SpellDescription$ Target player loses all poison counters. Leeches deals that much damage to that player.
 SVar:Unpoison:DB$ Poison | Defined$ ParentTarget | Num$ -X
 SVar:X:TargetedPlayer$PoisonCounters
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leeches.jpg
 Oracle:Target player loses all poison counters. Leeches deals that much damage to that player.

@@ -7,6 +7,6 @@ T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ DelTrig | Secondary$ True | Tri
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigSacrifice | TriggerDescription$ Sacrifice CARDNAME at end of combat.
 SVar:TrigSacrifice:DB$ Sacrifice | Defined$ Self
 SVar:SacrificeEndCombat:True
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mardu_blazebringer.jpg
 Oracle:When Mardu Blazebringer attacks or blocks, sacrifice it at end of combat.

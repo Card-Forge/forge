@@ -6,7 +6,7 @@ SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | SVars$ R
 SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.ChosenCard+BlackSource,Card.ChosenCard+RedSource | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen black or red source deals damage, prevent that damage.
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/penance.jpg
 Oracle:Put a card from your hand on top of your library: The next time a black or red source of your choice would deal damage this turn, prevent that damage.

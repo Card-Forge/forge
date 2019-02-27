@@ -131,6 +131,8 @@ public class DrawAi extends SpellAbilityAi {
             return true;
         } else if (logic.equals("AlwaysAtOppEOT")) {
             return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai);
+        } else if (logic.equals("RespondToOwnActivation")) {
+            return !ai.getGame().getStack().isEmpty() && ai.getGame().getStack().peekAbility().getHostCard().equals(sa.getHostCard());
         }
 
         // Don't use draw abilities before main 2 if possible
@@ -363,6 +365,10 @@ public class DrawAi extends SpellAbilityAi {
                 if (numCards >= computerLibrarySize) {
                     if (xPaid) {
                         numCards = computerLibrarySize - 1;
+                        if (numCards <= 0 && !mandatory) {
+                            // not drawing anything, so don't do it
+                            return false;
+                        }
                     } else if (!ai.isCardInPlay("Laboratory Maniac")) {
                         aiTarget = false;
                     }
@@ -396,6 +402,9 @@ public class DrawAi extends SpellAbilityAi {
                 if (computerHandSize + numCards > computerMaxHandSize && game.getPhaseHandler().isPlayerTurn(ai)) {
                     if (xPaid) {
                         numCards = computerMaxHandSize - computerHandSize;
+                        if (sa.getHostCard().getZone().is(ZoneType.Hand)) {
+                            numCards++; // the card will be spent
+                        }
                         source.setSVar("PayX", Integer.toString(numCards));
                     } else {
                         // Don't draw too many cards and then risk discarding

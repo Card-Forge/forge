@@ -9,6 +9,6 @@ SVar:SoulbrightNum:Number$0
 T:Mode$ Phase | Phase$ Cleanup | Execute$ TrigReset | Static$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReset | Static$ True
 SVar:TrigReset:DB$ StoreSVar | SVar$ SoulbrightNum | Type$ Number | Expression$ 0
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soulbright_flamekin.jpg
 Oracle:{2}: Target creature gains trample until end of turn. If this is the third time this ability has resolved this turn, you may add {R}{R}{R}{R}{R}{R}{R}{R}.

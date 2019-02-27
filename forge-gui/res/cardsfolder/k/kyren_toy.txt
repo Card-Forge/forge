@@ -5,6 +5,6 @@ A:AB$ PutCounter | Cost$ 1 T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescri
 A:AB$ Mana | Cost$ T SubCounter<X/CHARGE> | Produced$ C | Amount$ Y | References$ X,Y | SpellDescription$ Add {C} equal to one plus the amount of counters removed.
 SVar:Y:Number$1/Plus.ChosenX
 SVar:X:XChoice
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kyren_toy.jpg
 Oracle:{1}, {T}: Put a charge counter on Kyren Toy.\n{T}, Remove X charge counters from Kyren Toy: Add {C} equal to one plus the amount of counters removed.

@@ -102,6 +102,7 @@ public class DeckRecognizer {
     // Pattern.compile("(.*)[^A-Za-wyz]*\\s+([\\d]{1,2})");
     private static final Pattern SEARCH_NUMBERS_IN_FRONT = Pattern.compile("([\\d]{1,2})[^A-Za-wyz]*\\s+(.*)");
     //private static final Pattern READ_SEPARATED_EDITION = Pattern.compile("[[\\(\\{]([a-zA-Z0-9]){1,3})[]*\\s+(.*)");
+    private static final Pattern SEARCH_SINGLE_SLASH = Pattern.compile("(?<=[^/])\\s*/\\s*(?=[^/])");
 
     private final SetPreference useLastSet;
     private final ICardDatabase db;
@@ -125,7 +126,10 @@ public class DeckRecognizer {
             return new Token(TokenType.Comment, 0, rawLine);
         }
         final char smartQuote = (char) 8217;
-        final String line = rawLine.trim().replace(smartQuote, '\'');
+        String line = rawLine.trim().replace(smartQuote, '\'');
+
+        // Some websites export split card names with a single slash. Replace with double slash.
+        line = SEARCH_SINGLE_SLASH.matcher(line).replaceFirst(" // ");
 
         Token result = null;
         final Matcher foundNumbersInFront = DeckRecognizer.SEARCH_NUMBERS_IN_FRONT.matcher(line);

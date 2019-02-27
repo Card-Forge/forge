@@ -66,6 +66,20 @@ THRESHOLD_TOKEN_CHUMP_TO_SAVE_PLANESWALKER=135
 # If enabled, the AI will not bother chump blocking to protect a planeswalker unless lethal damage is threatened to it
 CHUMP_TO_SAVE_PLANESWALKER_ONLY_ON_LETHAL=false
 
+# Options that allow the AI to attempt to optimize targeting for removal and damaging spells.
+# If enabled, the AI will try not to target a creature with a damaging spell or spot removal in case
+# this creature will die in current combat or to a spell which is currently on stack targeting it.
+AVOID_TARGETING_CREATS_THAT_WILL_DIE=true
+# If enabled, the AI will not evaluate the stack in case at least one counterspell is present on it,
+# since the current AI is not smart enough to predict whether a kill spell on stack is countered or not.
+DONT_EVAL_KILLSPELLS_ON_STACK_WITH_PERMISSION=false
+
+# If AI would drop to this amount of life in combat, it'll try to defend itself more actively
+AI_IN_DANGER_THRESHOLD=3
+# If set to the same value, AI will be predictable. If set to higher, AI will randomly pick a value between the two
+# for each evaluation, introducing some unpredictability.
+AI_IN_DANGER_MAX_THRESHOLD=12
+
 # Only works when AI cheating is enabled in preferences, otherwise does nothing
 CHEAT_WITH_MANA_ON_SHUFFLE=true
 
@@ -106,6 +120,20 @@ DESTROY_IMMEDIATELY_UNBLOCKABLE_ONLY_IN_DNGR=false
 # for the purpose of previous option
 DESTROY_IMMEDIATELY_UNBLOCKABLE_LIFE_IN_DNGR=5
 
+# The chance that the AI will try to chain two damage spells or a damage spell and a debuffing pump spell to try to
+# kill a bigger creature or a planeswalker. If set to 0, will be disabled. When enabled, will automatically become 100
+# if the AI is in danger of dying.
+CHANCE_TO_CHAIN_TWO_DAMAGE_SPELLS=100
+
+# The chance that the AI will try to hold on to a direct damage spell with X in its cost (e.g. Blaze, Fireball, etc.)
+# so that it doesn't cast it too early in the game against an early game target. Note that when in danger or when the
+# AI has a chance to finish the opponent off with such a spell, it will not hold back the spells.
+HOLD_X_DAMAGE_SPELLS_FOR_MORE_DAMAGE_CHANCE=100
+# This threshold defines the minimum amount of damage *or* the minimum number of the AI's turn in order to play a
+# direct damage spell with X without holding it back. For example, if set to 5, the AI will prefer to hold the spell
+# back (unless lethal/in danger) unless it can deal 5 or more damage with it or unless it's the AI's 5th turn or later.
+HOLD_X_DAMAGE_SPELLS_THRESHOLD=5
+
 # Permission timings
 MIN_SPELL_CMC_TO_COUNTER=2
 CHANCE_TO_COUNTER_CMC_1=30
@@ -118,6 +146,12 @@ ALWAYS_COUNTER_REMOVAL_SPELLS=true
 ALWAYS_COUNTER_PUMP_SPELLS=true
 ALWAYS_COUNTER_AURAS=true
 ALWAYS_COUNTER_SPELLS_FROM_NAMED_CARDS=None
+
+# Copy spell on stack logic
+# The chance that the AI will copy its own stack right after placing it there while it has priority
+CHANCE_TO_COPY_OWN_SPELL_WHILE_ON_STACK=30
+# If the copied spell costs this much more than the copy spell, the chance to copy the spell will become 100
+ALWAYS_COPY_SPELL_IF_CMC_DIFF=2
 
 # Storm spell logic
 PRIORITY_REDUCTION_FOR_STORM_SPELLS=9
@@ -136,6 +170,35 @@ TOKEN_GENERATION_ABILITY_CHANCE=100
 # Situations where the AI should always use the token-generation abilities if possible
 TOKEN_GENERATION_ALWAYS_IF_FROM_PLANESWALKER=true
 TOKEN_GENERATION_ALWAYS_IF_OPP_ATTACKS=true
+
+# Flash AI toggles
+# Master toggle: if enabled, a more advanced Flash consideration logic will be enabled (probably slower),
+# which will also enable all the following toggles.
+FLASH_ENABLE_ADVANCED_LOGIC=true
+# The chance the AI will obey SVar AmbushAI to try to surprise the opponent after the attack is declared
+# (e.g. Hixus, Prison Warden)
+FLASH_CHANCE_TO_OBEY_AMBUSHAI=100
+# The chance the AI will cast the Flash creature at instant speed purely for the fact that it has a ETB effect.
+FLASH_CHANCE_TO_CAST_DUE_TO_ETB_EFFECTS=100
+# The chance the AI may cast the Flash creature with ETB effects even earlier than its own Main 1 to try to benefit
+# from the ETB effect (most likely suboptimal and many mana lock the AI, so keep this at a lower chance normally).
+FLASH_CHANCE_TO_CAST_FOR_ETB_BEFORE_MAIN1=20
+# The chance the AI may cast the Flash creature with ETB effects in response to an opposing spell on stack.
+# Quite basic right now, and may do stupid things more often than not, so better left disabled until improved
+# (or at a low chance).
+FLASH_CHANCE_TO_RESPOND_TO_STACK_WITH_ETB=15
+# The chance the AI will attempt to add a new blocker in combat where it's low on creature count compared to the
+# number of attacking creatures.
+FLASH_CHANCE_TO_CAST_AS_VALUABLE_BLOCKER=100
+# If enabled, the AI will try to hold off playing auras with Flash until the declare blockers step in combat.
+# If disabled, but advanced logic is enabled, will generally try to play these auras before its own turn.
+FLASH_USE_BUFF_AURAS_AS_COMBAT_TRICKS=true
+# The chance that the AI will cast a flash aura enchantment at the earliest opportunity
+FLASH_BUFF_AURA_CHANCE_TO_CAST_EARLY=0
+# The chance that the AI will cast a flash aura at the end of turn before its own turn
+FLASH_BUFF_AURA_CHANCE_CAST_AT_EOT=10
+# The chance that the AI will respond to stack with a flash aura which makes sense in context
+FLASH_BUFF_AURA_CHANCE_TO_RESPOND_TO_STACK=100
 
 # Scry AI toggles
 # The total number of mana-producing lands at which the AI will still consider scrying away non-lands
@@ -163,12 +226,15 @@ SCRY_IMMEDIATELY_UNCASTABLE_CMC_DIFF=1
 # If the AI has this many or fewer cards in the library, it will Surveil to the top of the library in order
 # not to deplete the library.
 SURVEIL_NUM_CARDS_IN_LIBRARY_TO_BAIL=8
+# If the AI will have less life than the specified percentage as a result of activating a Surveil ability
+# that requires a life playment, it will not pay life to activate it (e.g. Doom Whisperer).
+SURVEIL_LIFEPERC_AFTER_PAYING_LIFE=50
 
 # Attempt to predict the number of potential blockers with various forms of evasion when
-# deciding to do an all-in assault attack (Experimental!)
+# deciding to do an all-in assault attack
 COMBAT_ASSAULT_ATTACK_EVASION_PREDICTION=true
 # Attempt to predict the number of potential blockers with various forms of evasion when
-# deciding to do an attrition race attack (Experimental!)
+# deciding to do an attrition race attack
 COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION=true
 
 # AILogic$ PayEnergyConservatively (used for Britsling Hydra and Longtusk Cub) will only
@@ -193,6 +259,10 @@ BOUNCE_ALL_ELSEWHERE_NONCREAT_EVAL_DIFF=5
 # library to put some into the graveyard.
 INTUITION_ALTERNATIVE_LOGIC=true
 
+# If enabled, the AI will run some additional checks in order to try to preserve spells that have Buyback and not
+# use them unless absolutely necessary (or unless multiple copies are in hand).
+TRY_TO_PRESERVE_BUYBACK_SPELLS=true
+
 # How big of a difference is allowed between the revealed card CMC and the currently castable CMC to still put the
 # card on top of the library
 EXPLORE_MAX_CMC_DIFF_TO_PUT_IN_GRAVEYARD=2
@@ -200,7 +270,14 @@ EXPLORE_MAX_CMC_DIFF_TO_PUT_IN_GRAVEYARD=2
 # doesn't have a land in hand
 EXPLORE_NUM_LANDS_TO_STILL_NEED_MORE=3
 
-# MoJhoSto casual variant properties
+# Momir/MoJhoSto casual variant properties
+# Which lands the AI would prefer to play in Momir Basic and MoJhoSto modes. When set to "default", generally plays
+# lands in WUBRG order. When set to "random", will play a completely random basic land from hand. When set to
+# "preforder:XXX", where "XXX" is a list of color specifications, will play basic lands in this preferred order,
+# and if no preferred land can be found, will play a random one (e.g. "preforder:RB" plays Mountains first, Swamps
+# second, and then everything else randomly if no Mountains or Swamps are present).
+MOMIR_BASIC_LAND_STRATEGY=preforder:RB
+# MoJhoSto only casual variant properties
 # How many lands the AI needs to have on the battlefield to begin considering activating Jhoira in MoJhoSto
 MOJHOSTO_NUM_LANDS_TO_ACTIVATE_JHOIRA=4
 # The chance that the AI will activate Jhoira instead of activating Momir
@@ -213,10 +290,4 @@ MOJHOSTO_CHANCE_TO_USE_JHOIRA_COPY_INSTANT=20
 # -- features is over. These toggles will be removed later, or may be reintroduced under a --
 # -- different name if necessary --
 
-# If AI would drop to this amount of life in combat, it'll try to defend itself more actively
-AI_IN_DANGER_THRESHOLD=3
-# If set to the same value, AI will be predictable. If set to higher, AI will randomly pick a value between the two
-# for each evaluation, introducing some unpredictability.
-AI_IN_DANGER_MAX_THRESHOLD=12
-
-# <-- there are no options here at the moment -->
+# <-- there are no experimental options here at the moment -->

@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Creature Human Wizard
 PT:1/1
 A:AB$ Draw | Cost$ Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alchemists_apprentice.jpg
 Oracle:Sacrifice Alchemist's Apprentice: Draw a card.

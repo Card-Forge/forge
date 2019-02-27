@@ -1,11 +1,7 @@
 package forge.ai;
 
-import java.util.Iterator;
-import java.util.List;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
-
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameActionUtil;
@@ -16,9 +12,13 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
+import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class ComputerUtilAbility {
     public static CardCollection getAvailableLandsToPlay(final Game game, final Player player) {
@@ -95,18 +95,58 @@ public class ComputerUtilAbility {
 
     public static List<SpellAbility> getOriginalAndAltCostAbilities(final List<SpellAbility> originList, final Player player) {
         final List<SpellAbility> newAbilities = Lists.newArrayList();
+
+        List<SpellAbility> originListWithAddCosts = Lists.newArrayList();
         for (SpellAbility sa : originList) {
+            // If this spell has alternative additional costs, add them instead of the unmodified SA itself
             sa.setActivatingPlayer(player);
-            //add alternative costs as additional spell abilities
+            originListWithAddCosts.addAll(GameActionUtil.getAdditionalCostSpell(sa));
+        }
+
+        for (SpellAbility sa : originListWithAddCosts) {
+            // determine which alternative costs are cheaper than the original and prioritize them
+            List<SpellAbility> saAltCosts = GameActionUtil.getAlternativeCosts(sa, player);
+            List<SpellAbility> priorityAltSa = Lists.newArrayList();
+            List<SpellAbility> otherAltSa = Lists.newArrayList();
+            for (SpellAbility altSa : saAltCosts) {
+                if (altSa.getPayCosts() == null || sa.getPayCosts() == null) {
+                    otherAltSa.add(altSa);
+                } else if (sa.getPayCosts().isOnlyManaCost()
+                        && altSa.getPayCosts().isOnlyManaCost() && sa.getPayCosts().getTotalMana().compareTo(altSa.getPayCosts().getTotalMana()) == 1) {
+                    // the alternative cost is strictly cheaper, so why not? (e.g. Omniscience etc.)
+                    priorityAltSa.add(altSa);
+                } else {
+                    otherAltSa.add(altSa);
+                }
+            }
+
+            // add alternative costs as additional spell abilities
+            newAbilities.addAll(priorityAltSa);
             newAbilities.add(sa);
-            newAbilities.addAll(GameActionUtil.getAlternativeCosts(sa, player));
+            newAbilities.addAll(otherAltSa);
         }
     
         final List<SpellAbility> result = Lists.newArrayList();
         for (SpellAbility sa : newAbilities) {
             sa.setActivatingPlayer(player);
-            result.addAll(GameActionUtil.getOptionalCosts(sa));
+
+            // Optional cost selection through the AI controller
+            boolean choseOptCost = false;
+            List<OptionalCostValue> list = GameActionUtil.getOptionalCostValues(sa);
+            if (!list.isEmpty()) {
+                list = player.getController().chooseOptionalCosts(sa, list);
+                if (!list.isEmpty()) {
+                    choseOptCost = true;
+                    result.add(GameActionUtil.addOptionalCosts(sa, list));
+                }
+            }
+
+            // Add only one ability: either the one with preferred optional costs, or the original one if there are none
+            if (!choseOptCost) {
+                result.add(sa);
+            }
         }
+
         return result;
     }
 
@@ -126,6 +166,17 @@ public class ComputerUtilAbility {
             tgtSA = it.next().getSpellAbility(true);
         }
         return tgtSA;
+    }
+
+    public static SpellAbility getFirstCopySASpell(List<SpellAbility> spells) {
+        SpellAbility sa = null;
+        for (SpellAbility spell : spells) {
+            if (spell.getApi() == ApiType.CopySpellAbility) {
+                sa = spell;
+                break;
+            }
+        }
+        return sa;
     }
 
     public static Card getAbilitySource(SpellAbility sa) {

@@ -17,6 +17,7 @@
  */
 package forge.deck;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.CardDb;
@@ -215,5 +216,18 @@ public class CardPool extends ItemPool<PaperCard> {
 
         }
         return sb.toString();
+    }
+
+    /**
+     * Applies a predicate to this CardPool's cards.
+     * @param predicate the Predicate to apply to this CardPool
+     * @return a new CardPool made from this CardPool with only the cards that agree with the provided Predicate
+     */
+    public CardPool getFilteredPool(Predicate<PaperCard> predicate){
+        CardPool filteredPool = new CardPool();
+        for(PaperCard pc : this.items.keySet()){
+            if(predicate.apply(pc)) filteredPool.add(pc);
+        }
+        return filteredPool;
     }
 }

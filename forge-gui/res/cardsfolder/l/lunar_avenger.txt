@@ -7,7 +7,7 @@ A:AB$ GenericChoice | Cost$ SubCounter<1/P1P1> | Choices$ DBFlying,DBFirstStrike
 SVar:DBFlying:DB$ Pump | Defined$ Self | KW$ Flying | SpellDescription$ gains flying until end of turn.
 SVar:DBFirstStrike:DB$ Pump | Defined$ Self | KW$ First Strike | SpellDescription$ gains first strike until end of turn.
 SVar:DBHaste:DB$ Pump | Defined$ Self | KW$ Haste | SpellDescription$ gains haste until end of turn.
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$UniqueManaColorsProduced.ByUntappedSources
 DeckHints:Ability$Proliferate

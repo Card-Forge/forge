@@ -3,6 +3,6 @@ ManaCost:2 B B
 Types:Creature Zombie Knight
 PT:3/3
 A:AB$ Destroy | Cost$ B B T | ValidTgts$ Creature.Green | TgtPrompt$ Select target green creature | SpellDescription$ Destroy target green creature.
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eastern_paladin.jpg
 Oracle:{B}{B}, {T}: Destroy target green creature.

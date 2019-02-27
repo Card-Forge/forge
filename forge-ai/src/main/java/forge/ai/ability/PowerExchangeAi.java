@@ -17,7 +17,6 @@ import forge.util.MyRandom;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 public class PowerExchangeAi extends SpellAbilityAi {
 
@@ -38,8 +37,7 @@ public class PowerExchangeAi extends SpellAbilityAi {
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                final Map<String, String> vars = c.getSVars();
-                return !vars.containsKey("RemAIDeck") && c.canBeTargetedBy(sa);
+                return !ComputerUtilCard.isCardRemAIDeck(c) && c.canBeTargetedBy(sa);
             }
         });
         CardLists.sortByPowerAsc(list);

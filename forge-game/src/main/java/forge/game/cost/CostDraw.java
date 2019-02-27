@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The Class CostPayLife.
+ * The Class CostDraw.
  */
 public class CostDraw extends CostPart {
     /**

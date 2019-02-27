@@ -3,6 +3,6 @@ ManaCost:G
 Types:Creature Snake Shaman
 PT:1/1
 A:AB$ Mana | Cost$ G | Produced$ Any | SpellDescription$ Add one mana of any color.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orochi_leafcaller.jpg
 Oracle:{G}: Add one mana of any color.

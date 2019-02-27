@@ -8,6 +8,6 @@ SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Remembered | Origin$ Exile 
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Hidden$ True | Execute$ TrigGraveyard | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, put all cards exiled with CARDNAME into their owner's graveyard.
 SVar:TrigGraveyard:DB$ ChangeZoneAll | ChangeType$ Remembered | Origin$ Exile | Destination$ Graveyard
 SVar:VaultX:Remembered$Valid Card.Self
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knowledge_vault.jpg
 Oracle:{2}, {T}: Exile the top card of your library face down.\n{0}: Sacrifice Knowledge Vault. If you do, discard your hand, then put all cards exiled with Knowledge Vault into their owner's hand.\nWhen Knowledge Vault leaves the battlefield, put all cards exiled with Knowledge Vault into their owner's graveyard.

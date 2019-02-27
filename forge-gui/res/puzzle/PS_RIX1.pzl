@@ -19,6 +19,6 @@ humancommand=
 aihand=
 ailibrary=
 aigraveyard=
-aibattlefield=Compulsory Rest|Attaching:1;Protection of the Hekma;Rampaging Ferocidon;Gifted Aetherborn;Regal Caracal;t:Cat,P:1,T:1,Cost:no cost,Color:W,Types:Creature-Cat,Keywords:Lifelink,Image:w_1_1_cat;t:Cat,P:1,T:1,Cost:no cost,Color:W,Types:Creature-Cat,Keywords:Lifelink,Image:w_1_1_cat;
+aibattlefield=Compulsory Rest|AttachedTo:1;Protection of the Hekma;Rampaging Ferocidon;Gifted Aetherborn;Regal Caracal;t:Cat,P:1,T:1,Cost:no cost,Color:W,Types:Creature-Cat,Keywords:Lifelink,Image:w_1_1_cat;t:Cat,P:1,T:1,Cost:no cost,Color:W,Types:Creature-Cat,Keywords:Lifelink,Image:w_1_1_cat;
 aiexile=
 aicommand=

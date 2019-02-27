@@ -24,6 +24,7 @@ Mortal Combat|The Boneyard|So peaceful...
 Near-Death Experience|The Edge|Phew... I thought I was going to die!
 Phage the Untouchable|The Untouchable|None are immune to her deadly touch!
 Revel in Riches|The Dead Man's Chest|Yo-ho-ho, and a bottle of rum!
+Simic Ascendancy|The Ascension|As you can see, we are going through a period of unprecedented growth.
 Test of Endurance|The Test|So... did I pass?
 Triskaidekaphobia|The Fear of 13|It's just a silly ancient superstition... right?
 Vraska, Golgari Queen|The Flurry of Assassins|How good is your dodging?

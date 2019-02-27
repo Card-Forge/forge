@@ -1052,11 +1052,15 @@ public class ComputerUtilCombat {
                 if (!ability.hasParam("CounterType") || !ability.getParam("CounterType").equals("P1P1")) {
                     continue;
                 }
-                
+
                 if (ability.hasParam("Monstrosity") && blocker.isMonstrous()) {
-                	continue;
+                    continue;
                 }
-                
+
+                if (ability.hasParam("Adapt") && blocker.getCounters(CounterType.P1P1) > 0) {
+                    continue;
+                }
+
                 if (ComputerUtilCost.canPayCost(ability, blocker.getController())) {
                     int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
                     if (pBonus > 0) {
@@ -1224,11 +1228,15 @@ public class ComputerUtilCombat {
                 if (!ability.hasParam("CounterType") || !ability.getParam("CounterType").equals("P1P1")) {
                     continue;
                 }
-                
+
                 if (ability.hasParam("Monstrosity") && blocker.isMonstrous()) {
-                	continue;
+                    continue;
                 }
-                
+
+                if (ability.hasParam("Adapt") && blocker.getCounters(CounterType.P1P1) > 0) {
+                    continue;
+                }
+
                 if (ComputerUtilCost.canPayCost(ability, blocker.getController())) {
                     int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
                     if (tBonus > 0) {
@@ -1442,11 +1450,15 @@ public class ComputerUtilCombat {
                 if (!ability.hasParam("CounterType") || !ability.getParam("CounterType").equals("P1P1")) {
                     continue;
                 }
-                
+
                 if (ability.hasParam("Monstrosity") && attacker.isMonstrous()) {
-                	continue;
+                    continue;
                 }
-                
+
+                if (ability.hasParam("Adapt") && blocker != null && blocker.getCounters(CounterType.P1P1) > 0) {
+                    continue;
+                }
+
                 if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
                     int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
                     if (pBonus > 0) {
@@ -1675,11 +1687,15 @@ public class ComputerUtilCombat {
                 if (!ability.hasParam("CounterType") || !ability.getParam("CounterType").equals("P1P1")) {
                     continue;
                 }
-                
+
                 if (ability.hasParam("Monstrosity") && attacker.isMonstrous()) {
-                	continue;
+                    continue;
                 }
-                
+
+                if (ability.hasParam("Adapt") && blocker.getCounters(CounterType.P1P1) > 0) {
+                    continue;
+                }
+
                 if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
                     int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
                     if (tBonus > 0) {
@@ -2103,6 +2119,16 @@ public class ComputerUtilCombat {
         // consider Damage Prevention/Replacement
         defenderDamage = predictDamageTo(attacker, defenderDamage, possibleAttackerPrevention, blocker, true);
         attackerDamage = predictDamageTo(blocker, attackerDamage, possibleDefenderPrevention, attacker, true);
+
+        // Damage prevention might come from a static effect
+        if (!ai.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
+            if (isCombatDamagePrevented(attacker, blocker, attackerDamage)) {
+                attackerDamage = 0;
+            }
+            if (isCombatDamagePrevented(blocker, attacker, defenderDamage)) {
+                defenderDamage = 0;
+            }
+        }
 
         if (combat != null) {
             for (Card atkr : combat.getAttackersBlockedBy(blocker)) {
@@ -2550,7 +2576,7 @@ public class ComputerUtilCombat {
         return original;
     }
 
-    private static boolean isCombatDamagePrevented(final Card attacker, final GameEntity target, final int damage) {
+    public static boolean isCombatDamagePrevented(final Card attacker, final GameEntity target, final int damage) {
         final Game game = attacker.getGame();
 
         // first try to replace the damage
@@ -2564,7 +2590,7 @@ public class ComputerUtilCombat {
         // repParams.put("PreventMap", preventMap);
 
         List<ReplacementEffect> list = game.getReplacementHandler().getReplacementList(repParams,
-                ReplacementLayer.None);
+                ReplacementLayer.Other);
         
         return !list.isEmpty();
     }
@@ -2654,6 +2680,30 @@ public class ComputerUtilCombat {
         }
 
         return attackerAfterTrigs;
+    }
+
+    public static boolean willKillAtLeastOne(final Player ai, final Card c, final Combat combat) {
+        // This method detects if the attacking or blocking group the card "c" belongs to will kill
+        // at least one creature it's in combat with (either profitably or as a trade),
+        if (combat == null) {
+            return false;
+        }
+
+        if (combat.isBlocked(c)) {
+            for (Card blk : combat.getBlockers(c)) {
+                if (ComputerUtilCombat.blockerWouldBeDestroyed(ai, blk, combat)) {
+                    return true;
+                }
+            }
+        } else if (combat.isBlocking(c)) {
+            for (Card atk : combat.getAttackersBlockedBy(c)) {
+                if (ComputerUtilCombat.attackerWouldBeDestroyed(ai, atk, combat)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }
 

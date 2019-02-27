@@ -4,7 +4,7 @@ Types:Legendary Creature Treefolk
 PT:4/5
 A:AB$ Token | Cost$ 2 G | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Create a 1/1 green Saproling creature token.
 A:AB$ PumpAll | Cost$ Sac<1/Saproling> | ValidCards$ Creature.Saproling | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Saproling creatures get +1/+1 until end of turn.
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 DeckHints:Type$Fungus
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nemata_grove_guardian.jpg

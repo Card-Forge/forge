@@ -8,7 +8,7 @@ SVar:DBPump:DB$ Animate | Defined$ Self | Keywords$ Flying | Permanent$ True | S
 SVar:DBPutCounter:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ KickedPet | References$ KickedPet | SubAbility$ DBMoveToPlay
 SVar:DBMoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
 SVar:KickedPet:Discarded$CardManaCost
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 DeckHints:Color$Black
 DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dralnus_pet.jpg

@@ -20,13 +20,14 @@ package forge.game.trigger;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 
+import java.util.Map;
+
 /**
  * <p>
  * Trigger_LifeGained class.
  * </p>
  * 
  * @author Forge
- * @version $Id$
  */
 public class TriggerLifeGained extends Trigger {
 
@@ -36,32 +37,30 @@ public class TriggerLifeGained extends Trigger {
      * </p>
      * 
      * @param params
-     *            a {@link java.util.HashMap} object.
+     *            a {@link java.util.Map} object.
      * @param host
      *            a {@link forge.game.card.Card} object.
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerLifeGained(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerLifeGained(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final boolean performTest(final java.util.Map<String, Object> runParams2) {
-        if (this.mapParams.containsKey("ValidPlayer")) {
-            if (!matchesValid(runParams2.get("Player"), this.mapParams.get("ValidPlayer").split(","),
-                    this.getHostCard())) {
+    public final boolean performTest(final Map<String, Object> runParams2) {
+        if (hasParam("ValidPlayer")) {
+            if (!matchesValid(runParams2.get("Player"), getParam("ValidPlayer").split(","), getHostCard())) {
                 return false;
             }
         }
-        if (this.mapParams.containsKey("ValidSource")) {
-            if (!matchesValid(runParams2.get("Source"), this.mapParams.get("ValidSource").split(","),
-                    this.getHostCard())) {
+        if (hasParam("ValidSource")) {
+            if (!matchesValid(runParams2.get("Source"), getParam("ValidSource").split(","), getHostCard())) {
                 return false;
             }
         }
-        if (this.mapParams.containsKey("Spell")) {
+        if (hasParam("Spell")) {
             final SpellAbility spellAbility = (SpellAbility) runParams2.get("SourceSA");
             if (spellAbility == null || !spellAbility.getRootAbility().isSpell()) {
                 return false;
@@ -71,12 +70,11 @@ public class TriggerLifeGained extends Trigger {
         return true;
     }
 
-
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("LifeAmount", this.getRunParams().get("LifeAmount"));
-        sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
+        sa.setTriggeringObject("LifeAmount", getRunParams().get("LifeAmount"));
+        sa.setTriggeringObject("Player", getRunParams().get("Player"));
     }
 
     @Override

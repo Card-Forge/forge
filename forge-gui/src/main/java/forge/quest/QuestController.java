@@ -276,9 +276,10 @@ public class QuestController {
     public void newGame(final String name, final int difficulty, final QuestMode mode,
             final GameFormat formatPrizes, final boolean allowSetUnlocks,
             final Deck startingCards, final GameFormat formatStartingPool,
-            final String startingWorld, final StartingPoolPreferences userPrefs) {
+            final String startingWorld, final StartingPoolPreferences userPrefs,
+            DeckConstructionRules dcr) {
 
-        this.load(new QuestData(name, difficulty, mode, formatPrizes, allowSetUnlocks, startingWorld)); // pass awards and unlocks here
+        this.load(new QuestData(name, difficulty, mode, formatPrizes, allowSetUnlocks, startingWorld, dcr)); // pass awards and unlocks here
 
         if (startingCards != null) {
             this.myCards.addDeck(startingCards);
@@ -288,6 +289,8 @@ public class QuestController {
 
         this.getAssets().setCredits(FModel.getQuestPreferences().getPrefInt(DifficultyPrefs.STARTING_CREDITS, difficulty));
 
+        // Reset starting cards here.
+        this.myCards.resetNewList();
     }
 
     /**
@@ -433,8 +436,15 @@ public class QuestController {
         QuestWorld world = getWorld();
         String path = ForgeConstants.DEFAULT_CHALLENGES_DIR;
 
-        if (world != null) {
+        //Use a variant specialized duel manager if this is a variant quest
+        if (FModel.getQuest() != null) {
+            switch(FModel.getQuest().getDeckConstructionRules()){
+                case Default: break;
+                case Commander: this.duelManager = new QuestEventCommanderDuelManager(); return;
+            }
+        }
 
+        if (world != null) {
             if (world.getName().equals(QuestWorld.STANDARDWORLDNAME)) {
                 this.duelManager = new QuestEventLDADuelManager();
                 return;
@@ -447,7 +457,6 @@ public class QuestController {
         }
 
         this.duelManager = new QuestEventDuelManager(new File(path));
-
     }
 
     public HashSet<StarRating> GetRating() {
@@ -469,9 +478,9 @@ public class QuestController {
                 allChallenges = QuestChallengeGenerator.generateChallenges();
                 return;
             } else if (world.isCustom()) {
-                path = world.getChallengesDir() == null ? ForgeConstants.DEFAULT_CHALLENGES_DIR : ForgeConstants.QUEST_WORLD_DIR + world.getChallengesDir();
-            } else {
                 path = world.getChallengesDir() == null ? ForgeConstants.DEFAULT_CHALLENGES_DIR : ForgeConstants.USER_QUEST_WORLD_DIR + world.getChallengesDir();
+            } else {
+                path = world.getChallengesDir() == null ? ForgeConstants.DEFAULT_CHALLENGES_DIR : ForgeConstants.QUEST_WORLD_DIR + world.getChallengesDir();
             }
 
         }
@@ -604,5 +613,12 @@ public class QuestController {
 
     public void setCurrentDeck(String s) {
         model.currentDeck = s;
+    }
+
+    public DeckConstructionRules getDeckConstructionRules(){
+        if (model == null) {
+            return null;
+        }
+        return model.deckConstructionRules;
     }
 }

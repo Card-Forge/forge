@@ -29,6 +29,9 @@ import forge.util.Expressions;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import io.sentry.Sentry;
+import io.sentry.event.BreadcrumbBuilder;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -221,10 +224,6 @@ public class AbilityUtils {
             Object o = Iterables.getLast(hostCard.getRemembered(), null);
             if (o != null && o instanceof Card) {
                 cards.add(game.getCardState((Card) o));
-            }
-        } else if (defined.equals("Clones")) {
-            for (final Card clone : hostCard.getClones()) {
-                cards.add(game.getCardState(clone));
             }
         } else if (defined.equals("Imprinted")) {
             for (final Card imprint : hostCard.getImprintedCards()) {
@@ -469,10 +468,18 @@ public class AbilityUtils {
                 players.remove(game.getPhaseHandler().getPlayerTurn());
                 val = CardFactoryUtil.playerXCount(players, calcX[1], card);
             }
+            else if (hType.startsWith("PropertyYou") && !(ability instanceof SpellAbility)) {
+                // Related to the controller of the card with ability when the ability is static (or otherwise not a SpellAbility)
+                // TODO: This doesn't work in situations when the controller of the card is different from the spell caster
+                // (e.g. opponent's Hollow One exiled by Hostage Taker - cost reduction will not work in this scenario, requires
+                // a more significant rework).
+                players.add(card.getController());
+                val = CardFactoryUtil.playerXCount(players, calcX[1], card);
+            }
             else if (hType.startsWith("Property") && ability instanceof SpellAbility) {
                 String defined = hType.split("Property")[1];
                 for (Player p : game.getPlayersInTurnOrder()) {
-                    if (p.hasProperty(defined, ((SpellAbility)ability).getActivatingPlayer(), ability.getHostCard(), (SpellAbility)ability)) {
+                    if (p.hasProperty(defined, ((SpellAbility) ability).getActivatingPlayer(), ability.getHostCard(), (SpellAbility) ability)) {
                         players.add(p);
                     }
                 }
@@ -542,7 +549,7 @@ public class AbilityUtils {
             // Add whole Enchanted list to handlePaid
             final CardCollection list = new CardCollection();
             if (card.isEnchanting()) {
-                Object o = card.getEnchanting();
+                Object o = card.getEntityAttachedTo();
                 if (o instanceof Card) {
                     list.add(game.getCardState((Card) o));
                 }
@@ -1111,7 +1118,7 @@ public class AbilityUtils {
             }
         }
         else if (defined.equals("EnchantedPlayer")) {
-            final Object o = sa.getHostCard().getEnchanting();
+            final Object o = sa.getHostCard().getEntityAttachedTo();
             if (o instanceof Player) {
                 if (!players.contains(o)) {
                     players.add((Player) o);
@@ -1345,6 +1352,15 @@ public class AbilityUtils {
     }
 
     private static void resolveApiAbility(final SpellAbility sa, final Game game) {
+        final Card card = sa.getHostCard();
+
+        String msg = "AbilityUtils:resolveApiAbility: try to resolve API ability";
+        Sentry.getContext().recordBreadcrumb(
+                new BreadcrumbBuilder().setMessage(msg)
+                .withData("Api", sa.getApi().toString())
+                .withData("Card", card.getName()).withData("SA", sa.toString()).build()
+        );
+
         // check conditions
         if (sa.getConditions().areMet(sa)) {
             if (sa.isWrapper() || StringUtils.isBlank(sa.getParam("UnlessCost"))) {

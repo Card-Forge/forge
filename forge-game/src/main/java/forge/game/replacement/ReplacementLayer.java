@@ -8,8 +8,7 @@ package forge.game.replacement;
 public enum ReplacementLayer {
     Control,
     Copy,
-    Other,
-    None;
+    Other;
 
     /**
      * TODO: Write javadoc for this method.

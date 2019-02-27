@@ -6,7 +6,7 @@ SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Treefolk | TokenOwner$ Chos
 SVar:DBChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | SubAbility$ DBToken2
 SVar:DBToken2:DB$ Token | TokenAmount$ X | References$ X | TokenName$ Elf Warrior | TokenTypes$ Creature,Elf,Warrior | TokenOwner$ ChosenAndYou | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 elf warrior C14
 SVar:X:Count$xPaid
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
+AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_offering.jpg
 Oracle:Choose an opponent. You and that player each create an X/X green Treefolk creature token.\nChoose an opponent. You and that player each create X 1/1 green Elf Warrior creature tokens.

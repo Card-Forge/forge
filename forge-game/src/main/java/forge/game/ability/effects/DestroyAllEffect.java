@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import com.google.common.base.Predicate;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
@@ -8,7 +7,9 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
+import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -78,30 +79,20 @@ public class DestroyAllEffect extends SpellAbilityEffect {
         }
 
         // exclude cards that can't be destroyed at this moment
-        list = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(Card card) {
-                return card.canBeDestroyed();
-            }
-        });
+        list = CardLists.filter(list, CardPredicates.Presets.CAN_BE_DESTROYED);
 
         if (list.size() > 1) {
             list = GameActionUtil.orderCardsByTheirOwners(game, list, ZoneType.Graveyard);
         }
 
-        if (noRegen) {
-            for (Card c : list) {
-                if (game.getAction().destroyNoRegeneration(c, sa) && remDestroyed) {
-                    card.addRemembered(CardUtil.getLKICopy(c));
-                }
-            }
-        } else {
-            for (Card c : list) {
-                if (game.getAction().destroy(c, sa) && remDestroyed) {
-                    card.addRemembered(CardUtil.getLKICopy(c));
-                }
+        CardZoneTable table = new CardZoneTable();
+
+        for (Card c : list) {
+            if (game.getAction().destroy(c, sa, !noRegen, table) && remDestroyed) {
+                card.addRemembered(CardUtil.getLKICopy(c));
             }
         }
+        table.triggerChangesZoneAll(game);
     }
 
 }

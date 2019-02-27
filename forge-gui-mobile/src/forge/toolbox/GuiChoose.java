@@ -244,8 +244,8 @@ public class GuiChoose {
     }
 
     public static <T> void many(final String title, final String topCaption, int min, int max, final List<T> sourceChoices, CardView referenceCard, final Callback<List<T>> callback) {
-        int m2 = min >= 0 ? sourceChoices.size() - min : -1;
         int m1 = max >= 0 ? sourceChoices.size() - max : -1;
+        int m2 = min >= 0 ? sourceChoices.size() - min : -1;
         order(title, topCaption, m1, m2, sourceChoices, null, referenceCard, callback);
     }
 

@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Evangelyne 2
+Title=Evangelyne
+Difficulty=medium
+Description=Selesnya Stompy ramp deck with Elves and Ghalta, Primal Hunger.
+Deck Type=constructed
+Icon=Evangelyne.jpg
+[main]
+3 Conclave Tribunal|GRN
+4 Emmara, Soul of the Accord|GRN
+13 Forest
+3 Ghalta, Primal Hunger|RIX
+4 Llanowar Elves|M19
+4 Nullhide Ferox|GRN
+4 Pelt Collector|GRN
+1 Plains
+1 Shalai, Voice of Plenty|DOM
+4 Steel Leaf Champion|DOM
+4 Sunpetal Grove|XLN
+4 Temple Garden|GRN
+4 Thorn Lieutenant|M19
+3 Thrashing Brontodon|RIX
+4 Venerated Loxodon|GRN
+[sideboard]

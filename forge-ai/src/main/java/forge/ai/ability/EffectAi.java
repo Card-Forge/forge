@@ -6,17 +6,14 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
-import forge.ai.SpellApiToAi;
+import forge.ai.*;
+import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.combat.CombatUtil;
+import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -116,10 +113,39 @@ public class EffectAi extends SpellAbilityAi {
             } else if (logic.equals("SpellCopy")) {
             	// fetch Instant or Sorcery and AI has reason to play this turn
             	// does not try to get itself
+                final ManaCost costSa = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : ManaCost.NO_COST;
             	final int count = CardLists.count(ai.getCardsIn(ZoneType.Hand), new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        return (c.isInstant() || c.isSorcery()) && c != sa.getHostCard() && ComputerUtil.hasReasonToPlayCardThisTurn(ai, c);
+                        if (!(c.isInstant() || c.isSorcery()) || c.equals(sa.getHostCard())) {
+                            return false;
+                        }
+                        for (SpellAbility ab : c.getSpellAbilities()) {
+                            if (ComputerUtilAbility.getAbilitySourceName(sa).equals(ComputerUtilAbility.getAbilitySourceName(ab))
+                                    || ab.hasParam("AINoRecursiveCheck")) {
+                                // prevent infinitely recursing mana ritual and other abilities with reentry
+                                continue;
+                            } else if ("SpellCopy".equals(ab.getParam("AILogic")) && ab.getApi() == ApiType.Effect) {
+                                // don't copy another copy spell, too complex for the AI
+                                continue;
+                            }
+                            if (!ab.canPlay()) {
+                                continue;
+                            }
+                            AiPlayDecision decision = ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(ab);
+                            // see if we can pay both for this spell and for the Effect spell we're considering
+                            if (decision == AiPlayDecision.WillPlay || decision == AiPlayDecision.WaitForMain2) {
+                                ManaCost costAb = ab.getPayCosts() != null ? ab.getPayCosts().getTotalMana() : ManaCost.NO_COST;
+                                ManaCost total = ManaCost.combine(costSa, costAb);
+                                SpellAbility combinedAb = ab.copyWithDefinedCost(new Cost(total, false));
+                                // can we pay both costs?
+                                if (ComputerUtilMana.canPayManaCost(combinedAb, ai, 0)) {
+                                    return true;
+                                }
+                            }
+                        }
+
+                        return false;
                     }
                 });
 
@@ -139,8 +165,26 @@ public class EffectAi extends SpellAbilityAi {
             	final int count = CardLists.count(ai.getCardsIn(ZoneType.Hand), new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        return (c.isInstant() || c.isSorcery()) && !c.hasKeyword(Keyword.REBOUND)
-                                && ComputerUtil.hasReasonToPlayCardThisTurn(ai, c);
+                        if (!(c.isInstant() || c.isSorcery()) || c.hasKeyword(Keyword.REBOUND)) {
+                            return false;
+                        }
+                        for (SpellAbility ab : c.getSpellAbilities()) {
+                            if (ComputerUtilAbility.getAbilitySourceName(sa).equals(ComputerUtilAbility.getAbilitySourceName(ab))
+                                    || ab.hasParam("AINoRecursiveCheck")) {
+                                // prevent infinitely recursing mana ritual and other abilities with reentry
+                                continue;
+                            }
+                            if (!ab.canPlay()) {
+                                continue;
+                            }
+                            AiPlayDecision decision = ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(ab);
+                            if (decision == AiPlayDecision.WillPlay || decision == AiPlayDecision.WaitForMain2) {
+                                if (ComputerUtilMana.canPayManaCost(ab, ai, 0)) {
+                                    return true;
+                                }
+                            }
+                        }
+                        return false;
                     }
                 });
 

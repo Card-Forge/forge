@@ -424,14 +424,11 @@ public class Combat {
 
     public Player getDefendingPlayerRelatedTo(final Card source) {
         Card attacker = source;
-        if (source.isAura()) {
+        if (source.isAura() || source.isFortification()) {
             attacker = source.getEnchantingCard();
         }
         else if (source.isEquipment()) {
             attacker = source.getEquipping();
-        }
-        else if (source.isFortification()) {
-            attacker = source.getFortifying();
         }
 
         // return the corresponding defender
@@ -819,6 +816,7 @@ public class Combat {
         }
 
         preventMap.triggerPreventDamage(true);
+        preventMap.clear();
         // This was deeper before, but that resulted in the stack entry acting like before.
 
         // Run the trigger to deal combat damage once

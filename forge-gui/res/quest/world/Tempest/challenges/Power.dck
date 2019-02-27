@@ -1,0 +1,31 @@
+[quest]
+id=TempestQuest4
+OpponentName=God of Dreams
+AILife=250
+Repeat=true
+Wins=40
+Card Reward=duplicate card
+Credit Reward=500
+Ticket Reward=true
+AIExtras=Dream Halls
+HumanExtras=
+[metadata]
+Title=Dreams of Infinite Power
+Icon=Dungeon Crawling Blue.jpg
+Difficulty=very hard
+Description=When dreams come true too easily, it can become a problem!
+Deck Type=constructed
+Name=Power
+[Main]
+4 Benthic Behemoth|TMP
+2 Flame Wave|STH
+2 Living Death|TMP
+3 Overrun|TMP
+6 Rootbreaker Wurm|TMP
+2 Selenia, Dark Angel|TMP
+14 Sliver Queen|STH
+6 Spike Hatcher|EXO
+6 Time Warp|TMP
+6 Verdant Force|TMP
+6 Warrior Angel|STH
+3 Lobotomy|TMP

@@ -154,9 +154,9 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host);
             if (!choices.isEmpty()) {
                 String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a card ";
-    
+
                 Card choosen = chooser.getController().chooseSingleEntityForEffect(choices, sa, title, false);
-                
+
                 if (choosen != null) {
                     tgtCards.add(choosen);
                 }
@@ -164,15 +164,16 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         } else {
             tgtCards = getTargetCards(sa);
         }
-        host.clearClones();
 
         for (final Card c : tgtCards) {
             if (!sa.usesTargeting() || c.canBeTargetedBy(sa)) {
-                List <Card> token = TokenInfo.makeToken(getProtoType(sa, c), controller, true, numCopies);
+                Card proto = getProtoType(sa, c);
+                List <Card> token = TokenInfo.makeToken(proto, controller, true, numCopies);
 
                 final List<Card> crds = Lists.newArrayListWithCapacity(token.size());
 
                 for (final Card t : token) {
+                    t.setCopiedPermanent(proto);
 
                     // Temporarily register triggers of an object created with CopyPermanent
                     //game.getTriggerHandler().registerActiveTrigger(copy, false);
@@ -182,7 +183,6 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     //copyInPlay.setSetCode(c.getSetCode());
 
                     copyInPlay.setCloneOrigin(host);
-                    sa.getHostCard().addClone(copyInPlay);
                     if (!pumpKeywords.isEmpty()) {
                         copyInPlay.addChangedCardKeywords(pumpKeywords, Lists.<String>newArrayList(), false, false, timestamp);
                     }
@@ -236,25 +236,14 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         }
                         if (!list.isEmpty()) {
                             Card attachedTo = activator.getController().chooseSingleEntityForEffect(list, sa, copyInPlay + " - Select a card to attach to.");
-                            if (copyInPlay.isAura()) {
-                                if (attachedTo.canBeEnchantedBy(copyInPlay)) {
-                                    copyInPlay.enchantEntity(attachedTo);
-                                } else {//can't enchant
-                                    continue;
-                                }
-                            } else if (copyInPlay.isEquipment()) { //Equipment
-                                if (attachedTo.canBeEquippedBy(copyInPlay)) {
-                                    copyInPlay.equipCard(attachedTo);
-                                } else {
-                                    continue;
-                                }
-                            } else { // Fortification
-                                copyInPlay.fortifyCard(attachedTo);
-                            }
+
+                            copyInPlay.attachToEntity(attachedTo);
                         } else {
                             continue;
                         }
                     }
+                    // need to be done otherwise the token has no State in Details
+                    copyInPlay.updateStateForView();
                 }
 
                 if (sa.hasParam("AtEOT")) {
@@ -275,7 +264,6 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         final List<String> svars = Lists.newArrayList();
         final List<String> triggers = Lists.newArrayList();
         boolean asNonLegendary = false;
-        boolean resetActivations = false;
 
         if (sa.hasParam("Keywords")) {
             keywords.addAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
@@ -285,9 +273,6 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         }
         if (sa.hasParam("NonLegendary")) {
             asNonLegendary = true;
-        }
-        if (sa.hasParam("ResetAbilityActivations")) {
-            resetActivations = true;
         }
         if (sa.hasParam("AddSVars")) {
             svars.addAll(Arrays.asList(sa.getParam("AddSVars").split(" & ")));
@@ -420,11 +405,6 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
             copy.removeIntrinsicKeyword("Devoid");
         }
 
-        if (resetActivations) {
-            for (SpellAbility ab : copy.getSpellAbilities()) {
-                ab.getRestrictions().resetTurnActivations();
-            }
-        }
         copy.updateStateForView();
         return copy;
     }

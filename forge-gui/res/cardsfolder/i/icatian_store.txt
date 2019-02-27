@@ -8,6 +8,6 @@ SVar:TrigStore:DB$PutCounter | Defined$ Self | CounterType$ STORAGE | CounterNum
 A:AB$ Mana | Cost$ T SubCounter<X/STORAGE> | Produced$ W | Amount$ ChosenX | CostDesc$ {T}, Remove any number of storage counters from CARDNAME: | References$ X | SpellDescription$ Add {W} for each storage counter removed this way.
 SVar:X:XChoice
 #ChosenX SVar created by Cost payment
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/icatian_store.jpg
 Oracle:Icatian Store enters the battlefield tapped.\nYou may choose not to untap Icatian Store during your untap step.\nAt the beginning of your upkeep, if Icatian Store is tapped, put a storage counter on it.\n{T}, Remove any number of storage counters from Icatian Store: Add {W} for each storage counter removed this way.

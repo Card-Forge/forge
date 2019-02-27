@@ -11,6 +11,6 @@ S:Mode$ Continuous | Affected$ Creature.Blue | AddPower$ +2 | CheckSVar$ TidalCo
 SVar:TidalCounters:Count$CardCounters.TIDE
 T:Mode$ Always | IsPresent$ Card.Self+counters_GE4_TIDE | TriggerZones$ Battlefield | Execute$ TrigRemove | TriggerDescription$ Whenever there are four tide counters on CARDNAME, remove all tide counters from it.
 SVar:TrigRemove:DB$ RemoveCounter | CounterType$ TIDE | CounterNum$ All
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidal_influence.jpg
 Oracle:Cast Tidal Influence only if no permanents named Tidal Influence are on the battlefield.\nTidal Influence enters the battlefield with a tide counter on it.\nAt the beginning of your upkeep, put a tide counter on Tidal Influence.\nAs long as there is exactly one tide counter on Tidal Influence, all blue creatures get -2/-0.\nAs long as there are exactly three tide counters on Tidal Influence, all blue creatures get +2/+0.\nWhenever there are four tide counters on Tidal Influence, remove all tide counters from it.

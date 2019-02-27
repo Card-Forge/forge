@@ -178,6 +178,8 @@ public class DestroyAi extends SpellAbilityAi {
                 });
             }
 
+            // Try to avoid targeting creatures that are dead on board
+            list = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, list, sa);
             if (list.isEmpty()) {
                 return false;
             }
@@ -271,7 +273,7 @@ public class DestroyAi extends SpellAbilityAi {
                 } else {
                     // Don't destroy stolen permanents when the stealing aura can be destroyed
                     if (choice.getOwner() == ai) {
-                        for (Card aura : choice.getEnchantedBy(false)) {
+                        for (Card aura : choice.getEnchantedBy()) {
                             SpellAbility sp = aura.getFirstSpellAbility();
                             if (sp != null && "GainControl".equals(sp.getParam("AILogic"))
                                 && aura.getController() != ai && sa.canTarget(aura)) {
@@ -312,6 +314,9 @@ public class DestroyAi extends SpellAbilityAi {
 
             CardCollection list = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
             list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source, sa);
+
+            // Try to avoid targeting creatures that are dead on board
+            list = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, list, sa);
 
             if (list.isEmpty() || list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
                 return false;

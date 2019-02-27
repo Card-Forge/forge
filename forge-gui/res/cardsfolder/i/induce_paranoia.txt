@@ -6,7 +6,7 @@ SVar:DBMill:DB$ Mill | NumCards$ X | Defined$ TargetedController | ConditionMana
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedNumber
 SVar:ManaNeededToAvoidNegativeEffect:black
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 DeckNeeds:Color$Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/induce_paranoia.jpg
 Oracle:Counter target spell. If {B} was spent to cast Induce Paranoia, that spell's controller puts the top X cards of their library into their graveyard, where X is the spell's converted mana cost.

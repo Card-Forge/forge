@@ -4,6 +4,6 @@ Types:Sorcery
 A:SP$ Token | Cost$ R Sac<X/Land> | TokenAmount$ 2 | TokenName$ Elemental | TokenImage$ r x x elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Red | TokenPower$ ChosenX | TokenToughness$ ChosenX | References$ X | SpellDescription$ Create two X/X red Elemental creature tokens.
 SVar:X:XChoice
 #ChosenX SVar created by Cost payment
-SVar:RemAIDeck:True
+AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devastating_summons.jpg
 Oracle:As an additional cost to cast Devastating Summons, sacrifice X lands.\nCreate two X/X red Elemental creature tokens.

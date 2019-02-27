@@ -96,32 +96,31 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
             build.add(keyword);
         }
 
-        build.add(edition.getCode());
+        if (edition != null) {
+            build.add(edition.getCode());
+        }
 
-        // Should future image file names be all lower case? Instead of Up case sets?
-        return StringUtils.join(build, "_").toLowerCase();
+        return StringUtils.join(build, "_").replace('*', 'x').toLowerCase();
     }
 
-    public PaperToken(final CardRules c) { this(c, null, null); }
-    public PaperToken(final CardRules c, final String fileName) { this(c, null, fileName); }
-    public PaperToken(final CardRules c, CardEdition edition) { this(c, edition, null); }
     public PaperToken(final CardRules c, CardEdition edition0, String imageFileName) {
         this.card = c;
         this.name = c.getName();
         this.edition = edition0;
 
         if (imageFileName == null) {
+            // This shouldn't really happen. We can just use the normalized name again for the base image name
             this.imageFileName = makeTokenFileName(c, edition0);
         } else {
-            String formatEdition = null == edition || CardEdition.UNKNOWN == edition ? "" : edition.getCode();
-            this.imageFileName = String.format("%s%s", formatEdition, imageFileName);
+            String formatEdition = null == edition || CardEdition.UNKNOWN == edition ? "" : "_" + edition.getCode().toLowerCase();
+            this.imageFileName = String.format("%s%s", imageFileName, formatEdition);
         }
     }
     
     @Override public String getName() { return name; }
 
     @Override public String toString() { return name; }
-    @Override public String getEdition() { return edition.getCode(); }
+    @Override public String getEdition() { return edition != null ? edition.getCode() : "???"; }
     @Override public int getArtIndex() { return 0; } // This might change however
     @Override public boolean isFoil() { return false; }
     @Override public CardRules getRules() { return card; }

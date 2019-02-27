@@ -159,7 +159,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return true; // debuffed by opponent's auras to the level that it becomes useless
             }
             int delta = 0;
-            for (Card enc : sa.getHostCard().getEnchantedBy(false)) {
+            for (Card enc : sa.getHostCard().getEnchantedBy()) {
                 if (enc.getController().isOpponentOf(aiPlayer)) {
                     delta--;
                 } else {
@@ -249,6 +249,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
                 }
                 if (ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE)) {
+                    return false;
+                }
+
+                if (ai.getGame().getCombat() == null) {
                     return false;
                 }
                 List<Card> attackers = ai.getGame().getCombat().getUnblockedAttackers();
@@ -957,7 +961,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 	                list = CardLists.filter(list, new Predicate<Card>() {
 	                    @Override
 	                    public boolean apply(final Card c) {
-	                        for (Card aura : c.getEnchantedBy(false)) {
+	                        for (Card aura : c.getEnchantedBy()) {
 	                            if (aura.getController().isOpponentOf(ai)) {
 	                                return true;
 	                            } else {
@@ -1050,7 +1054,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        for (Card aura : c.getEnchantedBy(false)) {
+                        for (Card aura : c.getEnchantedBy()) {
                             if (c.getOwner().isOpponentOf(ai) && aura.getController().equals(ai)) {
                                 return false;
                             }
@@ -1459,7 +1463,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        if (c.hasSVar("RemAIDeck") || c.hasSVar("RemRandomDeck")) {
+                        if (ComputerUtilCard.isCardRemAIDeck(c) || ComputerUtilCard.isCardRemRandomDeck(c)) {
                             return false;
                         }
                         return true;
@@ -1729,7 +1733,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
         Map<String, Object> originalParams = (Map<String, Object>)sa.getReplacingObject("OriginalParams");
         SpellAbility causeSa = (SpellAbility)originalParams.get("Cause");
         SpellAbility causeSub = null;
-        
+
+        // Squee, the Immortal: easier to recast it (the call below has to be "contains" since SA is an intrinsic effect)
+        if (sa.getHostCard().getName().contains("Squee, the Immortal")) {
+            return false;
+        }
+
         if (causeSa != null && (causeSub = causeSa.getSubAbility()) != null) {
             ApiType subApi = causeSub.getApi();
             

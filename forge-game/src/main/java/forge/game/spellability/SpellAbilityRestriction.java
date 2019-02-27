@@ -419,6 +419,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 return false;
             }
         }
+        if (sa.isSpectacle()) {
+            if (activator.getOpponentLostLifeThisTurn() <= 0) {
+                return false;
+            }
+        }
         if (isDesert()) {
             if (!activator.hasDesert()) {
                 return false;

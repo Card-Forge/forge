@@ -1,0 +1,5 @@
+Name:Coral Commando
+ManaCost:2 U
+Types:Creature Merfolk Warrior
+PT:3/2
+Oracle:

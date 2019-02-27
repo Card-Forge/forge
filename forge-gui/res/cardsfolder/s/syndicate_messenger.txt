@@ -1,0 +1,8 @@
+Name:Syndicate Messenger
+ManaCost:3 W
+Types:Creature Bird
+PT:2/3
+K:Flying
+K:Afterlife:1
+DeckHas:Ability$Token
+Oracle:Flying\nAfterlife 1 (When this creature dies, create a 1/1 white and black Spirit creature token with flying.)

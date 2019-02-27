@@ -3,6 +3,6 @@ ManaCost:2 W W
 Types:Creature Human Knight
 PT:3/3
 A:AB$ Destroy | Cost$ W W T | ValidTgts$ Permanent.Red | TgtPrompt$ Select target red permanent | SpellDescription$ Destroy target red permanent.
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/southern_paladin.jpg
 Oracle:{W}{W}, {T}: Destroy target red permanent.

@@ -7,7 +7,7 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Demon.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, if you control no Demons, sacrifice CARDNAME.
 SVar:TrigSac:DB$Sacrifice | Defined$ Self
 SVar:PlayMain1:TRUE
-SVar:RemRandomDeck:True
+AI:RemoveDeck:Random
 SVar:NeedsToPlay:Demon.YouCtrl
 DeckHints:Type$Demon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mark_of_the_oni.jpg

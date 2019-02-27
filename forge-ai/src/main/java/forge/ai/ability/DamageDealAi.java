@@ -4,11 +4,15 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.ai.*;
+import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostPartMana;
 import forge.game.cost.CostRemoveCounter;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
@@ -21,7 +25,11 @@ import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.MyRandom;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -90,11 +98,26 @@ public class DamageDealAi extends DamageAiBase {
 
         if (damage.equals("X")) {
             if (sa.getSVar(damage).equals("Count$xPaid") || sourceName.equals("Crater's Claws")) {
-                // Set PayX here to maximum value.
                 dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
+
+                // Try not to waste spells like Blaze or Fireball on early targets, try to do more damage with them if possible
+                if (ai.getController().isAI()) {
+                    AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+                    int holdChance = aic.getIntProperty(AiProps.HOLD_X_DAMAGE_SPELLS_FOR_MORE_DAMAGE_CHANCE);
+                    if (MyRandom.percentTrue(holdChance)) {
+                        int threshold = aic.getIntProperty(AiProps.HOLD_X_DAMAGE_SPELLS_THRESHOLD);
+                        boolean inDanger = ComputerUtil.aiLifeInDanger(ai, false, 0);
+                        boolean isLethal = sa.getTargetRestrictions().canTgtPlayer() && dmg >= ai.getWeakestOpponent().getLife() && !ai.getWeakestOpponent().cantLoseForZeroOrLessLife();
+                        if (dmg < threshold && ai.getGame().getPhaseHandler().getTurn() / 2 < threshold && !inDanger && !isLethal) {
+                            return false;
+                        }
+                    }
+                }
+
+                // Set PayX here to maximum value. It will be adjusted later depending on the target.
                 source.setSVar("PayX", Integer.toString(dmg));
-            } else if (sa.getSVar(damage).equals("Count$CardsInYourHand") && source.getZone().is(ZoneType.Hand)) {
-                dmg--; // the card will be spent casting the spell, so actual damage is 1 less
+            } else if (sa.getSVar(damage).contains("InYourHand") && source.getZone().is(ZoneType.Hand)) {
+                dmg = CardFactoryUtil.xCount(source, sa.getSVar(damage)) - 1; // the card will be spent casting the spell, so actual damage is 1 less
             } else if (sa.getSVar(damage).equals("TargetedPlayer$CardsInHand")) {
                 // cards that deal damage by the number of cards in target player's hand, e.g. Sudden Impact
                 if (sa.getTargetRestrictions().canTgtPlayer()) {
@@ -216,8 +239,33 @@ public class DamageDealAi extends DamageAiBase {
         	return false;
         }
 
-        if (!this.damageTargetAI(ai, sa, dmg, false)) {
-            return false;
+        // Try to chain damage/debuff effects
+        Pair<SpellAbility, Integer> chainDmg = getDamagingSAToChain(ai, sa, damage);
+
+        // test what happens if we chain this to another damaging spell
+        if (chainDmg != null) {
+            int extraDmg = chainDmg.getValue();
+            boolean willTargetIfChained = this.damageTargetAI(ai, sa, dmg + extraDmg, false);
+            if (!willTargetIfChained) {
+                return false; // won't play it even in chain
+            } else if (willTargetIfChained && chainDmg.getKey().getApi() == ApiType.Pump && sa.getTargets().isTargetingAnyPlayer()) {
+                // we're trying to chain a pump spell to a damage spell targeting a player, that won't work
+                // so run an additional check to ensure that we want to cast the current spell separately
+                sa.resetTargets();
+                if (!this.damageTargetAI(ai, sa, dmg, false)) {
+                    return false;
+                }
+            } else {
+                // we are about to decide to play this damage spell; if there's something chained to it, reserve mana for
+                // the second spell so we don't misplay
+                AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+                aic.reserveManaSourcesForNextSpell(chainDmg.getKey(), sa);
+            }
+        } else {
+            // simple targeting when there is no spell chaining plan
+            if (!this.damageTargetAI(ai, sa, dmg, false)) {
+                return false;
+            }
         }
 
         if ((damage.equals("X") && source.getSVar(damage).equals("Count$xPaid")) ||
@@ -238,6 +286,19 @@ public class DamageDealAi extends DamageAiBase {
                 source.setSVar("PayX", Integer.toString(actualPay));
             }
         }
+
+        if ("XCountersDamage".equals(logic) && sa.getPayCosts() != null) {
+            // Check to ensure that we have enough counters to remove per the defined PayX
+            for (CostPart part : sa.getPayCosts().getCostParts()) {
+                if (part instanceof CostRemoveCounter) {
+                    if (source.getCounters(((CostRemoveCounter) part).counter) < Integer.valueOf(source.getSVar("PayX"))) {
+                        return false;
+                    }
+                    break;
+                }
+            }
+        }
+
         return true;
     }
 
@@ -275,7 +336,7 @@ public class DamageDealAi extends DamageAiBase {
         final Game game = source.getGame();
         List<Card> hPlay = getTargetableCards(ai, sa, pl, tgt, activator, source, game);
 
-        List<Card> killables = CardLists.filter(hPlay, new Predicate<Card>() {
+        CardCollection killables = CardLists.filter(hPlay, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return c.getSVar("Targeting").equals("Dies")
@@ -286,7 +347,10 @@ public class DamageDealAi extends DamageAiBase {
         });
 
         // Filter AI-specific targets if provided
-        killables = ComputerUtil.filterAITgts(sa, ai, new CardCollection(killables), true);
+        killables = ComputerUtil.filterAITgts(sa, ai, killables, true);
+
+        // Try not to target anything which will already be dead by the time the spell resolves
+        killables = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, killables, sa);
 
         Card targetCard = null;
         if (pl.isOpponentOf(ai) && activator.equals(ai) && !killables.isEmpty()) {
@@ -494,7 +558,9 @@ public class DamageDealAi extends DamageAiBase {
             return true;
         }
 
-        if (tgt.getMaxTargets(source, sa) <= 0) {
+        // AssumeAtLeastOneTarget is used for cards with funky targeting implementation like Fight with Fire which would
+        // otherwise confuse the AI by returning 0 unexpectedly during SA "AI can play" tests.
+        if (tgt.getMaxTargets(source, sa) <= 0 && !logic.equals("AssumeAtLeastOneTarget")) {
             return false;
         }
         
@@ -560,7 +626,15 @@ public class DamageDealAi extends DamageAiBase {
                 return true;
             }
         }
+
+        int totalTargetedSoFar = -1;
         while (tcs.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+            if (totalTargetedSoFar == tcs.getNumTargeted()) {
+                // Avoid looping endlessly when choosing targets for cards with variable target number and type
+                // like Jaya's Immolating Inferno
+                break;
+            }
+            totalTargetedSoFar = tcs.getNumTargeted();
             if (oppTargetsChoice && sa.getActivatingPlayer().equals(ai) && !sa.isTrigger()) {
                 // canPlayAI (sa activated by ai)
                 Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
@@ -961,5 +1035,91 @@ public class DamageDealAi extends DamageAiBase {
 
         source.setSVar("PayX", Integer.toString(dmg));
         return true;
+    }
+
+    // Returns a pair of a SpellAbility (APIType DealDamage or Pump) and damage/debuff amount
+    // The returned spell ability can be chained to "sa" to deal more damage (enough mana is available to cast both
+    // and can be properly reserved).
+    public static Pair<SpellAbility, Integer> getDamagingSAToChain(Player ai, SpellAbility sa, String damage) {
+        if (!ai.getController().isAI()) {
+            return null; // should only work for the actual AI player
+        } else if (((PlayerControllerAi)ai.getController()).getAi().usesSimulation()) {
+            // simulated AI shouldn't use paired decisions, it tries to find complex decisions on its own
+            return null;
+        }
+
+        Game game = ai.getGame();
+        int chance = ((PlayerControllerAi)ai.getController()).getAi().getIntProperty(AiProps.CHANCE_TO_CHAIN_TWO_DAMAGE_SPELLS);
+
+        if (chance > 0 && (ComputerUtilCombat.lifeInDanger(ai, game.getCombat()) || ComputerUtil.aiLifeInDanger(ai, true, 0))) {
+            chance = 100; // in danger, do it even if normally the chance is low (unless chaining is completely disabled)
+        }
+
+        if (!MyRandom.percentTrue(chance)) {
+            return null;
+        }
+
+        if (sa.getSubAbility() != null || sa.getParent() != null) {
+            // Doesn't work yet for complex decisions where damage is only a part of the decision process
+            return null;
+        }
+
+        // Try to chain damage/debuff effects
+        if (StringUtils.isNumeric(damage) || (damage.startsWith("-") && StringUtils.isNumeric(damage.substring(1)))) {
+            // currently only works for predictable numeric damage
+            CardCollection cards = new CardCollection();
+            cards.addAll(ai.getCardsIn(ZoneType.Hand));
+            cards.addAll(ai.getCardsIn(ZoneType.Battlefield));
+            cards.addAll(ai.getCardsActivableInExternalZones(true));
+            for (Card c : cards) {
+                for (SpellAbility ab : c.getSpellAbilities()) {
+                    if (ab.equals(sa) || ab.getSubAbility() != null) { // decisions for complex SAs with subs are not supported yet
+                        continue;
+                    }
+                    if (!ab.canPlay()) {
+                        continue;
+                    }
+                    // currently works only with cards that don't have additional costs (only mana is supported)
+                    if (ab.getPayCosts() != null
+                            && (ab.getPayCosts().hasNoManaCost() || ab.getPayCosts().hasOnlySpecificCostType(CostPartMana.class))) {
+                        String dmgDef = "0";
+                        if (ab.getApi() == ApiType.DealDamage) {
+                            dmgDef = ab.getParamOrDefault("NumDmg", "0");
+                        } else if (ab.getApi() == ApiType.Pump) {
+                            dmgDef = ab.getParamOrDefault("NumDef", "0");
+                            if (dmgDef.startsWith("-")) {
+                                dmgDef = dmgDef.substring(1);
+                            } else {
+                                continue; // not a toughness debuff
+                            }
+                        }
+                        if (StringUtils.isNumeric(dmgDef)) { // currently doesn't work for X and other dependent costs
+                            if (sa.usesTargeting() && ab.usesTargeting()) {
+                                // Ensure that the chained spell can target at least the same things (or more) as the current one
+                                TargetRestrictions tgtSa = sa.getTargetRestrictions();
+                                TargetRestrictions tgtAb = sa.getTargetRestrictions();
+                                String[] validTgtsSa = tgtSa.getValidTgts();
+                                String[] validTgtsAb = tgtAb.getValidTgts();
+                                if (!Arrays.asList(validTgtsSa).containsAll(Arrays.asList(validTgtsAb))) {
+                                    continue;
+                                }
+
+                                // FIXME: should it also check restrictions for targeting players?
+                                ManaCost costSa = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : ManaCost.NO_COST;
+                                ManaCost costAb = ab.getPayCosts().getTotalMana(); // checked for null above
+                                ManaCost total = ManaCost.combine(costSa, costAb);
+                                SpellAbility combinedAb = ab.copyWithDefinedCost(new Cost(total, false));
+                                // can we pay both costs?
+                                if (ComputerUtilMana.canPayManaCost(combinedAb, ai, 0)) {
+                                    return Pair.of(ab, Integer.parseInt(dmgDef));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return null;
     }
 }
