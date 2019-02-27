@@ -126,14 +126,14 @@ public enum GroupDef {
                         if (type.isCreature()) {
                             return 1;
                         }
-                        if (type.isSorcery()) {
-                            return 2;
-                        }
                         if (type.isTribal() && type.isInstant()) {
                             return 7;
                         }
                         if (type.isInstant()) {
                             return 3;
+                        }
+                        if (type.isSorcery()) {
+                            return 2;
                         }
                         if (type.isArtifact()) {
                             return 4;
