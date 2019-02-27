@@ -31,7 +31,6 @@ import forge.util.ITriggerEvent;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.ThreadUtil;
-import forge.util.Localizer;
 
 /**
  * <p>
