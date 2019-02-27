@@ -242,7 +242,7 @@ https://downloads.cardforge.org/images/icons/Einstein.jpg
 https://downloads.cardforge.org/images/icons/Ekolo.jpg
 https://downloads.cardforge.org/images/icons/Elashub.jpg
 https://downloads.cardforge.org/images/icons/Eldrazi.jpg
-https://downloads.cardforge.org/images/icons/Eldritch Onslaught.jpg
+https://downloads.cardforge.org/images/icons/Eldritch%20Onslaught.jpg
 https://downloads.cardforge.org/images/icons/Electro.jpg
 https://downloads.cardforge.org/images/icons/Elegua.jpg
 https://downloads.cardforge.org/images/icons/Elementalist.jpg
