@@ -437,7 +437,7 @@ public class QuestController {
         String path = ForgeConstants.DEFAULT_CHALLENGES_DIR;
 
         //Use a variant specialized duel manager if this is a variant quest
-        if (FModel.getQuest() != null) {
+        if (FModel.getQuest() != null && FModel.getQuest().getDeckConstructionRules() != null) {
             switch(FModel.getQuest().getDeckConstructionRules()){
                 case Default: break;
                 case Commander: this.duelManager = new QuestEventCommanderDuelManager(); return;
