@@ -7,8 +7,6 @@ import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.item.PaperCard;
 
-import org.apache.commons.lang3.StringUtils;
-
 public class ImageUtil {
     public static float getNearestHQSize(float baseSize, float actualSize) {
         //get nearest power of actualSize to baseSize so that the image renders good
